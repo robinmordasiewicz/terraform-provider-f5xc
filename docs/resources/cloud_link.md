@@ -174,7 +174,7 @@ An [`ipv4`](#aws-byoc-connections-ipv4) block (within [`aws.byoc.connections`](#
 
 A [`metadata`](#aws-byoc-connections-metadata) block (within [`aws.byoc.connections`](#aws-byoc-connections)) supports the following:
 
-&#x2022; [`description`](#aws-byoc-connections-metadata-description) - Optional String<br>Description. Human readable description
+&#x2022; [`description_spec`](#aws-byoc-connections-metadata-description-spec) - Optional String<br>Description. Human readable description
 
 &#x2022; [`name`](#aws-byoc-connections-metadata-name) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
 
@@ -216,7 +216,7 @@ A [`connections`](#gcp-byoc-connections) block (within [`gcp.byoc`](#gcp-byoc)) 
 
 A [`metadata`](#gcp-byoc-connections-metadata) block (within [`gcp.byoc.connections`](#gcp-byoc-connections)) supports the following:
 
-&#x2022; [`description`](#gcp-byoc-connections-metadata-description) - Optional String<br>Description. Human readable description
+&#x2022; [`description_spec`](#gcp-byoc-connections-metadata-description-spec) - Optional String<br>Description. Human readable description
 
 &#x2022; [`name`](#gcp-byoc-connections-metadata-name) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
 

@@ -320,7 +320,7 @@ An [`usb`](#infra-hw-info-usb) block (within [`infra.hw_info`](#infra-hw-info)) 
 
 &#x2022; [`bus`](#infra-hw-info-usb-bus) - Optional Number<br>Bus. The bus on which the device was detected in decimal
 
-&#x2022; [`description`](#infra-hw-info-usb-description) - Optional String<br>Description. Device description
+&#x2022; [`description_spec`](#infra-hw-info-usb-description-spec) - Optional String<br>Description. Device description
 
 &#x2022; [`i_manufacturer`](#infra-hw-info-usb-i-manufacturer) - Optional String<br>Manufacturer. Manufacturer name
 

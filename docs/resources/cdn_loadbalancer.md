@@ -1092,7 +1092,7 @@ An [`api_endpoint`](#api-specification-validation-all-spec-endpoints-fall-throug
 
 A [`metadata`](#api-specification-validation-all-spec-endpoints-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-metadata) block (within [`api_specification.validation_all_spec_endpoints.fall_through_mode.fall_through_mode_custom.open_api_validation_rules`](#api-specification-validation-all-spec-endpoints-fall-through-mode-fall-through-mode-custom-open-api-validation-rules)) supports the following:
 
-&#x2022; [`description`](#api-specification-validation-all-spec-endpoints-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-metadata-description) - Optional String<br>Description. Human readable description
+&#x2022; [`description_spec`](#api-specification-validation-all-spec-endpoints-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-metadata-description-spec) - Optional String<br>Description. Human readable description
 
 &#x2022; [`name`](#api-specification-validation-all-spec-endpoints-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-metadata-name) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
 
@@ -1208,7 +1208,7 @@ An [`api_endpoint`](#api-specification-validation-custom-list-fall-through-mode-
 
 A [`metadata`](#api-specification-validation-custom-list-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-metadata) block (within [`api_specification.validation_custom_list.fall_through_mode.fall_through_mode_custom.open_api_validation_rules`](#api-specification-validation-custom-list-fall-through-mode-fall-through-mode-custom-open-api-validation-rules)) supports the following:
 
-&#x2022; [`description`](#api-specification-validation-custom-list-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-metadata-description) - Optional String<br>Description. Human readable description
+&#x2022; [`description_spec`](#api-specification-validation-custom-list-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-metadata-description-spec) - Optional String<br>Description. Human readable description
 
 &#x2022; [`name`](#api-specification-validation-custom-list-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-metadata-name) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
 
@@ -1242,7 +1242,7 @@ An [`api_endpoint`](#api-specification-validation-custom-list-open-api-validatio
 
 A [`metadata`](#api-specification-validation-custom-list-open-api-validation-rules-metadata) block (within [`api_specification.validation_custom_list.open_api_validation_rules`](#api-specification-validation-custom-list-open-api-validation-rules)) supports the following:
 
-&#x2022; [`description`](#api-specification-validation-custom-list-open-api-validation-rules-metadata-description) - Optional String<br>Description. Human readable description
+&#x2022; [`description_spec`](#api-specification-validation-custom-list-open-api-validation-rules-metadata-description-spec) - Optional String<br>Description. Human readable description
 
 &#x2022; [`name`](#api-specification-validation-custom-list-open-api-validation-rules-metadata-name) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
 
@@ -1364,7 +1364,7 @@ A [`headers`](#blocked-clients-http-header-headers) block (within [`blocked_clie
 
 A [`metadata`](#blocked-clients-metadata) block (within [`blocked_clients`](#blocked-clients)) supports the following:
 
-&#x2022; [`description`](#blocked-clients-metadata-description) - Optional String<br>Description. Human readable description
+&#x2022; [`description_spec`](#blocked-clients-metadata-description-spec) - Optional String<br>Description. Human readable description
 
 &#x2022; [`name`](#blocked-clients-metadata-name) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
 
@@ -1444,7 +1444,7 @@ A [`domain`](#bot-defense-policy-js-insert-all-pages-except-exclude-list-domain)
 
 A [`metadata`](#bot-defense-policy-js-insert-all-pages-except-exclude-list-metadata) block (within [`bot_defense.policy.js_insert_all_pages_except.exclude_list`](#bot-defense-policy-js-insert-all-pages-except-exclude-list)) supports the following:
 
-&#x2022; [`description`](#bot-defense-policy-js-insert-all-pages-except-exclude-list-metadata-description) - Optional String<br>Description. Human readable description
+&#x2022; [`description_spec`](#bot-defense-policy-js-insert-all-pages-except-exclude-list-metadata-description-spec) - Optional String<br>Description. Human readable description
 
 &#x2022; [`name`](#bot-defense-policy-js-insert-all-pages-except-exclude-list-metadata-name) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
 
@@ -1492,7 +1492,7 @@ A [`domain`](#bot-defense-policy-js-insertion-rules-exclude-list-domain) block (
 
 A [`metadata`](#bot-defense-policy-js-insertion-rules-exclude-list-metadata) block (within [`bot_defense.policy.js_insertion_rules.exclude_list`](#bot-defense-policy-js-insertion-rules-exclude-list)) supports the following:
 
-&#x2022; [`description`](#bot-defense-policy-js-insertion-rules-exclude-list-metadata-description) - Optional String<br>Description. Human readable description
+&#x2022; [`description_spec`](#bot-defense-policy-js-insertion-rules-exclude-list-metadata-description-spec) - Optional String<br>Description. Human readable description
 
 &#x2022; [`name`](#bot-defense-policy-js-insertion-rules-exclude-list-metadata-name) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
 
@@ -1534,7 +1534,7 @@ A [`domain`](#bot-defense-policy-js-insertion-rules-rules-domain) block (within 
 
 A [`metadata`](#bot-defense-policy-js-insertion-rules-rules-metadata) block (within [`bot_defense.policy.js_insertion_rules.rules`](#bot-defense-policy-js-insertion-rules-rules)) supports the following:
 
-&#x2022; [`description`](#bot-defense-policy-js-insertion-rules-rules-metadata-description) - Optional String<br>Description. Human readable description
+&#x2022; [`description_spec`](#bot-defense-policy-js-insertion-rules-rules-metadata-description-spec) - Optional String<br>Description. Human readable description
 
 &#x2022; [`name`](#bot-defense-policy-js-insertion-rules-rules-metadata-name) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
 
@@ -1796,7 +1796,7 @@ An [`item`](#bot-defense-policy-protected-app-endpoints-headers-item) block (wit
 
 A [`metadata`](#bot-defense-policy-protected-app-endpoints-metadata) block (within [`bot_defense.policy.protected_app_endpoints`](#bot-defense-policy-protected-app-endpoints)) supports the following:
 
-&#x2022; [`description`](#bot-defense-policy-protected-app-endpoints-metadata-description) - Optional String<br>Description. Human readable description
+&#x2022; [`description_spec`](#bot-defense-policy-protected-app-endpoints-metadata-description-spec) - Optional String<br>Description. Human readable description
 
 &#x2022; [`name`](#bot-defense-policy-protected-app-endpoints-metadata-name) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
 
@@ -1938,7 +1938,7 @@ A [`domain`](#client-side-defense-policy-js-insert-all-pages-except-exclude-list
 
 A [`metadata`](#client-side-defense-policy-js-insert-all-pages-except-exclude-list-metadata) block (within [`client_side_defense.policy.js_insert_all_pages_except.exclude_list`](#client-side-defense-policy-js-insert-all-pages-except-exclude-list)) supports the following:
 
-&#x2022; [`description`](#client-side-defense-policy-js-insert-all-pages-except-exclude-list-metadata-description) - Optional String<br>Description. Human readable description
+&#x2022; [`description_spec`](#client-side-defense-policy-js-insert-all-pages-except-exclude-list-metadata-description-spec) - Optional String<br>Description. Human readable description
 
 &#x2022; [`name`](#client-side-defense-policy-js-insert-all-pages-except-exclude-list-metadata-name) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
 
@@ -1986,7 +1986,7 @@ A [`domain`](#client-side-defense-policy-js-insertion-rules-exclude-list-domain)
 
 A [`metadata`](#client-side-defense-policy-js-insertion-rules-exclude-list-metadata) block (within [`client_side_defense.policy.js_insertion_rules.exclude_list`](#client-side-defense-policy-js-insertion-rules-exclude-list)) supports the following:
 
-&#x2022; [`description`](#client-side-defense-policy-js-insertion-rules-exclude-list-metadata-description) - Optional String<br>Description. Human readable description
+&#x2022; [`description_spec`](#client-side-defense-policy-js-insertion-rules-exclude-list-metadata-description-spec) - Optional String<br>Description. Human readable description
 
 &#x2022; [`name`](#client-side-defense-policy-js-insertion-rules-exclude-list-metadata-name) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
 
@@ -2026,7 +2026,7 @@ A [`domain`](#client-side-defense-policy-js-insertion-rules-rules-domain) block 
 
 A [`metadata`](#client-side-defense-policy-js-insertion-rules-rules-metadata) block (within [`client_side_defense.policy.js_insertion_rules.rules`](#client-side-defense-policy-js-insertion-rules-rules)) supports the following:
 
-&#x2022; [`description`](#client-side-defense-policy-js-insertion-rules-rules-metadata-description) - Optional String<br>Description. Human readable description
+&#x2022; [`description_spec`](#client-side-defense-policy-js-insertion-rules-rules-metadata-description-spec) - Optional String<br>Description. Human readable description
 
 &#x2022; [`name`](#client-side-defense-policy-js-insertion-rules-rules-metadata-name) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
 
@@ -2114,7 +2114,7 @@ A [`data_guard_rules`](#data-guard-rules) block supports the following:
 
 A [`metadata`](#data-guard-rules-metadata) block (within [`data_guard_rules`](#data-guard-rules)) supports the following:
 
-&#x2022; [`description`](#data-guard-rules-metadata-description) - Optional String<br>Description. Human readable description
+&#x2022; [`description_spec`](#data-guard-rules-metadata-description-spec) - Optional String<br>Description. Human readable description
 
 &#x2022; [`name`](#data-guard-rules-metadata-name) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
 
@@ -2188,7 +2188,7 @@ An [`ip_prefix_list`](#ddos-mitigation-rules-ip-prefix-list) block (within [`ddo
 
 A [`metadata`](#ddos-mitigation-rules-metadata) block (within [`ddos_mitigation_rules`](#ddos-mitigation-rules)) supports the following:
 
-&#x2022; [`description`](#ddos-mitigation-rules-metadata-description) - Optional String<br>Description. Human readable description
+&#x2022; [`description_spec`](#ddos-mitigation-rules-metadata-description-spec) - Optional String<br>Description. Human readable description
 
 &#x2022; [`name`](#ddos-mitigation-rules-metadata-name) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
 
@@ -2418,7 +2418,7 @@ A [`graphql_settings`](#graphql-rules-graphql-settings) block (within [`graphql_
 
 A [`metadata`](#graphql-rules-metadata) block (within [`graphql_rules`](#graphql-rules)) supports the following:
 
-&#x2022; [`description`](#graphql-rules-metadata-description) - Optional String<br>Description. Human readable description
+&#x2022; [`description_spec`](#graphql-rules-metadata-description-spec) - Optional String<br>Description. Human readable description
 
 &#x2022; [`name`](#graphql-rules-metadata-name) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
 
@@ -2558,7 +2558,7 @@ A [`tls_certificates`](#https-tls-cert-options-tls-inline-params-tls-certificate
 
 &#x2022; [`custom_hash_algorithms`](#https-tls-cert-options-tls-inline-params-tls-certificates-custom-hash-algorithms) - Optional Block<br>Hash Algorithms. Specifies the hash algorithms to be used<br>See [Custom Hash Algorithms](#https-tls-cert-options-tls-inline-params-tls-certificates-custom-hash-algorithms) below.
 
-&#x2022; [`description`](#https-tls-cert-options-tls-inline-params-tls-certificates-description) - Optional String<br>Description. Description for the certificate
+&#x2022; [`description_spec`](#https-tls-cert-options-tls-inline-params-tls-certificates-description-spec) - Optional String<br>Description. Description for the certificate
 
 &#x2022; [`disable_ocsp_stapling`](#https-tls-cert-options-tls-inline-params-tls-certificates-disable-ocsp-stapling) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2910,7 +2910,7 @@ A [`tls_certificates`](#origin-pool-use-tls-use-mtls-tls-certificates) block (wi
 
 &#x2022; [`custom_hash_algorithms`](#origin-pool-use-tls-use-mtls-tls-certificates-custom-hash-algorithms) - Optional Block<br>Hash Algorithms. Specifies the hash algorithms to be used<br>See [Custom Hash Algorithms](#origin-pool-use-tls-use-mtls-tls-certificates-custom-hash-algorithms) below.
 
-&#x2022; [`description`](#origin-pool-use-tls-use-mtls-tls-certificates-description) - Optional String<br>Description. Description for the certificate
+&#x2022; [`description_spec`](#origin-pool-use-tls-use-mtls-tls-certificates-description-spec) - Optional String<br>Description. Description for the certificate
 
 &#x2022; [`disable_ocsp_stapling`](#origin-pool-use-tls-use-mtls-tls-certificates-disable-ocsp-stapling) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -3170,7 +3170,7 @@ A [`rules`](#policy-based-challenge-rule-list-rules) block (within [`policy_base
 
 A [`metadata`](#policy-based-challenge-rule-list-rules-metadata) block (within [`policy_based_challenge.rule_list.rules`](#policy-based-challenge-rule-list-rules)) supports the following:
 
-&#x2022; [`description`](#policy-based-challenge-rule-list-rules-metadata-description) - Optional String<br>Description. Human readable description
+&#x2022; [`description_spec`](#policy-based-challenge-rule-list-rules-metadata-description-spec) - Optional String<br>Description. Human readable description
 
 &#x2022; [`name`](#policy-based-challenge-rule-list-rules-metadata-name) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
 
@@ -3656,7 +3656,7 @@ A [`headers`](#trusted-clients-http-header-headers) block (within [`trusted_clie
 
 A [`metadata`](#trusted-clients-metadata) block (within [`trusted_clients`](#trusted-clients)) supports the following:
 
-&#x2022; [`description`](#trusted-clients-metadata-description) - Optional String<br>Description. Human readable description
+&#x2022; [`description_spec`](#trusted-clients-metadata-description-spec) - Optional String<br>Description. Human readable description
 
 &#x2022; [`name`](#trusted-clients-metadata-name) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
 
@@ -3762,7 +3762,7 @@ An [`exclude_violation_contexts`](#waf-exclusion-waf-exclusion-inline-rules-rule
 
 A [`metadata`](#waf-exclusion-waf-exclusion-inline-rules-rules-metadata) block (within [`waf_exclusion.waf_exclusion_inline_rules.rules`](#waf-exclusion-waf-exclusion-inline-rules-rules)) supports the following:
 
-&#x2022; [`description`](#waf-exclusion-waf-exclusion-inline-rules-rules-metadata-description) - Optional String<br>Description. Human readable description
+&#x2022; [`description_spec`](#waf-exclusion-waf-exclusion-inline-rules-rules-metadata-description-spec) - Optional String<br>Description. Human readable description
 
 &#x2022; [`name`](#waf-exclusion-waf-exclusion-inline-rules-rules-metadata-name) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
 

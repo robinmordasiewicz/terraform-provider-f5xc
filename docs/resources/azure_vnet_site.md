@@ -518,7 +518,7 @@ A [`connections`](#ingress-egress-gw-hub-express-route-enabled-connections) bloc
 
 A [`metadata`](#ingress-egress-gw-hub-express-route-enabled-connections-metadata) block (within [`ingress_egress_gw.hub.express_route_enabled.connections`](#ingress-egress-gw-hub-express-route-enabled-connections)) supports the following:
 
-&#x2022; [`description`](#ingress-egress-gw-hub-express-route-enabled-connections-metadata-description) - Optional String<br>Description. Human readable description
+&#x2022; [`description_spec`](#ingress-egress-gw-hub-express-route-enabled-connections-metadata-description-spec) - Optional String<br>Description. Human readable description
 
 &#x2022; [`name`](#ingress-egress-gw-hub-express-route-enabled-connections-metadata-name) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
 
@@ -1066,7 +1066,7 @@ A [`connections`](#ingress-egress-gw-ar-hub-express-route-enabled-connections) b
 
 A [`metadata`](#ingress-egress-gw-ar-hub-express-route-enabled-connections-metadata) block (within [`ingress_egress_gw_ar.hub.express_route_enabled.connections`](#ingress-egress-gw-ar-hub-express-route-enabled-connections)) supports the following:
 
-&#x2022; [`description`](#ingress-egress-gw-ar-hub-express-route-enabled-connections-metadata-description) - Optional String<br>Description. Human readable description
+&#x2022; [`description_spec`](#ingress-egress-gw-ar-hub-express-route-enabled-connections-metadata-description-spec) - Optional String<br>Description. Human readable description
 
 &#x2022; [`name`](#ingress-egress-gw-ar-hub-express-route-enabled-connections-metadata-name) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
 

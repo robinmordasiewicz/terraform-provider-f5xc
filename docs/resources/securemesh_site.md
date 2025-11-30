@@ -325,7 +325,7 @@ An [`interfaces`](#custom-network-config-interface-list-interfaces) block (withi
 
 &#x2022; [`dedicated_management_interface`](#custom-network-config-interface-list-interfaces-dedicated-management-interface) - Optional Block<br>Dedicated Management Interface. Dedicated Interface Configuration<br>See [Dedicated Management Interface](#custom-network-config-interface-list-interfaces-dedicated-management-interface) below.
 
-&#x2022; [`description`](#custom-network-config-interface-list-interfaces-description) - Optional String<br>Interface Description. Description for this Interface
+&#x2022; [`description_spec`](#custom-network-config-interface-list-interfaces-description-spec) - Optional String<br>Interface Description. Description for this Interface
 
 &#x2022; [`ethernet_interface`](#custom-network-config-interface-list-interfaces-ethernet-interface) - Optional Block<br>Ethernet Interface. Ethernet Interface Configuration<br>See [Ethernet Interface](#custom-network-config-interface-list-interfaces-ethernet-interface) below.
 

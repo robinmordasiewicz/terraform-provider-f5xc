@@ -215,7 +215,7 @@ An [`interfaces`](#peers-external-interface-list-interfaces) block (within [`pee
 
 A [`metadata`](#peers-metadata) block (within [`peers`](#peers)) supports the following:
 
-&#x2022; [`description`](#peers-metadata-description) - Optional String<br>Description. Human readable description
+&#x2022; [`description_spec`](#peers-metadata-description-spec) - Optional String<br>Description. Human readable description
 
 &#x2022; [`name`](#peers-metadata-name) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
 

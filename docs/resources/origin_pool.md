@@ -722,7 +722,7 @@ A [`tls_certificates`](#use-tls-use-mtls-tls-certificates) block (within [`use_t
 
 &#x2022; [`custom_hash_algorithms`](#use-tls-use-mtls-tls-certificates-custom-hash-algorithms) - Optional Block<br>Hash Algorithms. Specifies the hash algorithms to be used<br>See [Custom Hash Algorithms](#use-tls-use-mtls-tls-certificates-custom-hash-algorithms) below.
 
-&#x2022; [`description`](#use-tls-use-mtls-tls-certificates-description) - Optional String<br>Description. Description for the certificate
+&#x2022; [`description_spec`](#use-tls-use-mtls-tls-certificates-description-spec) - Optional String<br>Description. Description for the certificate
 
 &#x2022; [`disable_ocsp_stapling`](#use-tls-use-mtls-tls-certificates-disable-ocsp-stapling) - Optional Block<br>Empty. This can be used for messages where no values are needed
 

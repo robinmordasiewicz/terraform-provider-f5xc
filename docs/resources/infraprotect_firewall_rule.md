@@ -159,7 +159,7 @@ A [`protocol_icmp6`](#protocol-icmp6) block supports the following:
 
 A [`protocol_tcp`](#protocol-tcp) block supports the following:
 
-&#x2022; [`description`](#protocol-tcp-description) - Optional String<br>Description. Description
+&#x2022; [`description_spec`](#protocol-tcp-description-spec) - Optional String<br>Description. Description
 
 &#x2022; [`destination_port_all`](#protocol-tcp-destination-port-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -173,7 +173,7 @@ A [`protocol_tcp`](#protocol-tcp) block supports the following:
 
 A [`protocol_udp`](#protocol-udp) block supports the following:
 
-&#x2022; [`description`](#protocol-udp-description) - Optional String<br>Description. Description
+&#x2022; [`description_spec`](#protocol-udp-description-spec) - Optional String<br>Description. Description
 
 &#x2022; [`destination_port_all`](#protocol-udp-destination-port-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
 

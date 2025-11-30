@@ -58,7 +58,7 @@ resource "f5xc_customer_support" "example" {
 
 &#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-&#x2022; [`description`](#description) - Optional String<br>Description. customer's description of the issue (free text)
+&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
 
 &#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
 
@@ -69,6 +69,8 @@ resource "f5xc_customer_support" "example" {
 &#x2022; [`category`](#category) - Optional String<br>Category. ticket area further narrows down the ticket - infrastructure, application, dashboards can be examples
 
 &#x2022; [`comments`](#comments) - Optional Block<br>Comments. Comments are all public comments on an issue. They'RE usually conversation between the support personnel and the customer<br>See [Comments](#comments) below for details.
+
+&#x2022; [`description_spec`](#description-spec) - Optional String<br>Description. customer's description of the issue (free text)
 
 &#x2022; [`ongoing`](#ongoing) - Optional Bool<br>Ongoing. Ongoing is a flag that indicates whether the issue is ongoing or not
 

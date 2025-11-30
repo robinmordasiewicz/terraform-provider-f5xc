@@ -645,7 +645,7 @@ A [`tls_certificates`](#dynamic-proxy-https-proxy-tls-params-tls-certificates) b
 
 &#x2022; [`custom_hash_algorithms`](#dynamic-proxy-https-proxy-tls-params-tls-certificates-custom-hash-algorithms) - Optional Block<br>Hash Algorithms. Specifies the hash algorithms to be used<br>See [Custom Hash Algorithms](#dynamic-proxy-https-proxy-tls-params-tls-certificates-custom-hash-algorithms) below.
 
-&#x2022; [`description`](#dynamic-proxy-https-proxy-tls-params-tls-certificates-description) - Optional String<br>Description. Description for the certificate
+&#x2022; [`description_spec`](#dynamic-proxy-https-proxy-tls-params-tls-certificates-description-spec) - Optional String<br>Description. Description for the certificate
 
 &#x2022; [`disable_ocsp_stapling`](#dynamic-proxy-https-proxy-tls-params-tls-certificates-disable-ocsp-stapling) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1103,7 +1103,7 @@ A [`custom_certificate`](#tls-intercept-custom-certificate) block (within [`tls_
 
 &#x2022; [`custom_hash_algorithms`](#tls-intercept-custom-certificate-custom-hash-algorithms) - Optional Block<br>Hash Algorithms. Specifies the hash algorithms to be used<br>See [Custom Hash Algorithms](#tls-intercept-custom-certificate-custom-hash-algorithms) below.
 
-&#x2022; [`description`](#tls-intercept-custom-certificate-description) - Optional String<br>Description. Description for the certificate
+&#x2022; [`description_spec`](#tls-intercept-custom-certificate-description-spec) - Optional String<br>Description. Description for the certificate
 
 &#x2022; [`disable_ocsp_stapling`](#tls-intercept-custom-certificate-disable-ocsp-stapling) - Optional Block<br>Empty. This can be used for messages where no values are needed
 

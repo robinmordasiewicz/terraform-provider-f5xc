@@ -413,7 +413,7 @@ A [`storage_classes`](#storage-class-list-storage-classes) block (within [`stora
 
 &#x2022; [`default_storage_class`](#storage-class-list-storage-classes-default-storage-class) - Optional Bool<br>Default Storage Class. Make this storage class default storage class for the K8s cluster
 
-&#x2022; [`description`](#storage-class-list-storage-classes-description) - Optional String<br>Storage Class Description. Description for this storage class
+&#x2022; [`description_spec`](#storage-class-list-storage-classes-description-spec) - Optional String<br>Storage Class Description. Description for this storage class
 
 &#x2022; [`hpe_storage`](#storage-class-list-storage-classes-hpe-storage) - Optional Block<br>HPE Storage. Storage class Device configuration for HPE Storage<br>See [Hpe Storage](#storage-class-list-storage-classes-hpe-storage) below.
 
@@ -443,7 +443,7 @@ A [`hpe_storage`](#storage-class-list-storage-classes-hpe-storage) block (within
 
 &#x2022; [`dedupe_enabled`](#storage-class-list-storage-classes-hpe-storage-dedupe-enabled) - Optional Bool<br>dedupeEnabled. Indicates that the volume should enable deduplication
 
-&#x2022; [`description`](#storage-class-list-storage-classes-hpe-storage-description) - Optional String<br>Description. The SecretName parameter is used to identify name of secret to identify backend storage's auth information
+&#x2022; [`description_spec`](#storage-class-list-storage-classes-hpe-storage-description-spec) - Optional String<br>Description. The SecretName parameter is used to identify name of secret to identify backend storage's auth information
 
 &#x2022; [`destroy_on_delete`](#storage-class-list-storage-classes-hpe-storage-destroy-on-delete) - Optional Bool<br>destroyOnDelete. Indicates the backing Nimble volume (including snapshots) should be destroyed when the PVC is deleted
 

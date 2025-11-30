@@ -164,7 +164,7 @@ A [`label_selector`](#forward-proxy-pbr-forward-proxy-pbr-rules-label-selector) 
 
 A [`metadata`](#forward-proxy-pbr-forward-proxy-pbr-rules-metadata) block (within [`forward_proxy_pbr.forward_proxy_pbr_rules`](#forward-proxy-pbr-forward-proxy-pbr-rules)) supports the following:
 
-&#x2022; [`description`](#forward-proxy-pbr-forward-proxy-pbr-rules-metadata-description) - Optional String<br>Description. Human readable description
+&#x2022; [`description_spec`](#forward-proxy-pbr-forward-proxy-pbr-rules-metadata-description-spec) - Optional String<br>Description. Human readable description
 
 &#x2022; [`name`](#forward-proxy-pbr-forward-proxy-pbr-rules-metadata-name) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
 
@@ -284,7 +284,7 @@ A [`ref`](#network-pbr-network-pbr-rules-ip-prefix-set-ref) block (within [`netw
 
 A [`metadata`](#network-pbr-network-pbr-rules-metadata) block (within [`network_pbr.network_pbr_rules`](#network-pbr-network-pbr-rules)) supports the following:
 
-&#x2022; [`description`](#network-pbr-network-pbr-rules-metadata-description) - Optional String<br>Description. Human readable description
+&#x2022; [`description_spec`](#network-pbr-network-pbr-rules-metadata-description-spec) - Optional String<br>Description. Human readable description
 
 &#x2022; [`name`](#network-pbr-network-pbr-rules-metadata-name) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
 

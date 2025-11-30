@@ -821,7 +821,7 @@ A [`tls_certificates`](#service-advertise-options-advertise-custom-ports-http-lo
 
 &#x2022; [`custom_hash_algorithms`](#service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-tls-certificates-custom-hash-algorithms) - Optional Block<br>Hash Algorithms. Specifies the hash algorithms to be used<br>See [Custom Hash Algorithms](#service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-tls-certificates-custom-hash-algorithms) below.
 
-&#x2022; [`description`](#service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-tls-certificates-description) - Optional String<br>Description. Description for the certificate
+&#x2022; [`description_spec`](#service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-tls-certificates-description-spec) - Optional String<br>Description. Description for the certificate
 
 &#x2022; [`disable_ocsp_stapling`](#service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-tls-certificates-disable-ocsp-stapling) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1573,7 +1573,7 @@ A [`tls_certificates`](#service-advertise-options-advertise-on-public-multi-port
 
 &#x2022; [`custom_hash_algorithms`](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-tls-certificates-custom-hash-algorithms) - Optional Block<br>Hash Algorithms. Specifies the hash algorithms to be used<br>See [Custom Hash Algorithms](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-tls-certificates-custom-hash-algorithms) below.
 
-&#x2022; [`description`](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-tls-certificates-description) - Optional String<br>Description. Description for the certificate
+&#x2022; [`description_spec`](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-tls-certificates-description-spec) - Optional String<br>Description. Description for the certificate
 
 &#x2022; [`disable_ocsp_stapling`](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-tls-certificates-disable-ocsp-stapling) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2259,7 +2259,7 @@ A [`tls_certificates`](#service-advertise-options-advertise-on-public-port-http-
 
 &#x2022; [`custom_hash_algorithms`](#service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-tls-certificates-custom-hash-algorithms) - Optional Block<br>Hash Algorithms. Specifies the hash algorithms to be used<br>See [Custom Hash Algorithms](#service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-tls-certificates-custom-hash-algorithms) below.
 
-&#x2022; [`description`](#service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-tls-certificates-description) - Optional String<br>Description. Description for the certificate
+&#x2022; [`description_spec`](#service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-tls-certificates-description-spec) - Optional String<br>Description. Description for the certificate
 
 &#x2022; [`disable_ocsp_stapling`](#service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-tls-certificates-disable-ocsp-stapling) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -3721,7 +3721,7 @@ A [`tls_certificates`](#stateful-service-advertise-options-advertise-custom-port
 
 &#x2022; [`custom_hash_algorithms`](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-tls-certificates-custom-hash-algorithms) - Optional Block<br>Hash Algorithms. Specifies the hash algorithms to be used<br>See [Custom Hash Algorithms](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-tls-certificates-custom-hash-algorithms) below.
 
-&#x2022; [`description`](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-tls-certificates-description) - Optional String<br>Description. Description for the certificate
+&#x2022; [`description_spec`](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-tls-certificates-description-spec) - Optional String<br>Description. Description for the certificate
 
 &#x2022; [`disable_ocsp_stapling`](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-tls-certificates-disable-ocsp-stapling) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -4473,7 +4473,7 @@ A [`tls_certificates`](#stateful-service-advertise-options-advertise-on-public-m
 
 &#x2022; [`custom_hash_algorithms`](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-tls-certificates-custom-hash-algorithms) - Optional Block<br>Hash Algorithms. Specifies the hash algorithms to be used<br>See [Custom Hash Algorithms](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-tls-certificates-custom-hash-algorithms) below.
 
-&#x2022; [`description`](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-tls-certificates-description) - Optional String<br>Description. Description for the certificate
+&#x2022; [`description_spec`](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-tls-certificates-description-spec) - Optional String<br>Description. Description for the certificate
 
 &#x2022; [`disable_ocsp_stapling`](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-tls-certificates-disable-ocsp-stapling) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -5159,7 +5159,7 @@ A [`tls_certificates`](#stateful-service-advertise-options-advertise-on-public-p
 
 &#x2022; [`custom_hash_algorithms`](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-tls-certificates-custom-hash-algorithms) - Optional Block<br>Hash Algorithms. Specifies the hash algorithms to be used<br>See [Custom Hash Algorithms](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-tls-certificates-custom-hash-algorithms) below.
 
-&#x2022; [`description`](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-tls-certificates-description) - Optional String<br>Description. Description for the certificate
+&#x2022; [`description_spec`](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-tls-certificates-description-spec) - Optional String<br>Description. Description for the certificate
 
 &#x2022; [`disable_ocsp_stapling`](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-tls-certificates-disable-ocsp-stapling) - Optional Block<br>Empty. This can be used for messages where no values are needed
 

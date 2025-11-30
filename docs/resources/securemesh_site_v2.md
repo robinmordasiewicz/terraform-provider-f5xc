@@ -247,7 +247,7 @@ An [`interface_list`](#aws-not-managed-node-list-interface-list) block (within [
 
 &#x2022; [`bond_interface`](#aws-not-managed-node-list-interface-list-bond-interface) - Optional Block<br>Bond Device. Bond devices configuration for fleet<br>See [Bond Interface](#aws-not-managed-node-list-interface-list-bond-interface) below.
 
-&#x2022; [`description`](#aws-not-managed-node-list-interface-list-description) - Optional String<br>Interface Description. Description for this Interface
+&#x2022; [`description_spec`](#aws-not-managed-node-list-interface-list-description-spec) - Optional String<br>Interface Description. Description for this Interface
 
 &#x2022; [`dhcp_client`](#aws-not-managed-node-list-interface-list-dhcp-client) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -469,7 +469,7 @@ An [`interface_list`](#azure-not-managed-node-list-interface-list) block (within
 
 &#x2022; [`bond_interface`](#azure-not-managed-node-list-interface-list-bond-interface) - Optional Block<br>Bond Device. Bond devices configuration for fleet<br>See [Bond Interface](#azure-not-managed-node-list-interface-list-bond-interface) below.
 
-&#x2022; [`description`](#azure-not-managed-node-list-interface-list-description) - Optional String<br>Interface Description. Description for this Interface
+&#x2022; [`description_spec`](#azure-not-managed-node-list-interface-list-description-spec) - Optional String<br>Interface Description. Description for this Interface
 
 &#x2022; [`dhcp_client`](#azure-not-managed-node-list-interface-list-dhcp-client) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -691,7 +691,7 @@ An [`interface_list`](#baremetal-not-managed-node-list-interface-list) block (wi
 
 &#x2022; [`bond_interface`](#baremetal-not-managed-node-list-interface-list-bond-interface) - Optional Block<br>Bond Device. Bond devices configuration for fleet<br>See [Bond Interface](#baremetal-not-managed-node-list-interface-list-bond-interface) below.
 
-&#x2022; [`description`](#baremetal-not-managed-node-list-interface-list-description) - Optional String<br>Interface Description. Description for this Interface
+&#x2022; [`description_spec`](#baremetal-not-managed-node-list-interface-list-description-spec) - Optional String<br>Interface Description. Description for this Interface
 
 &#x2022; [`dhcp_client`](#baremetal-not-managed-node-list-interface-list-dhcp-client) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1023,7 +1023,7 @@ An [`interface_list`](#equinix-not-managed-node-list-interface-list) block (with
 
 &#x2022; [`bond_interface`](#equinix-not-managed-node-list-interface-list-bond-interface) - Optional Block<br>Bond Device. Bond devices configuration for fleet<br>See [Bond Interface](#equinix-not-managed-node-list-interface-list-bond-interface) below.
 
-&#x2022; [`description`](#equinix-not-managed-node-list-interface-list-description) - Optional String<br>Interface Description. Description for this Interface
+&#x2022; [`description_spec`](#equinix-not-managed-node-list-interface-list-description-spec) - Optional String<br>Interface Description. Description for this Interface
 
 &#x2022; [`dhcp_client`](#equinix-not-managed-node-list-interface-list-dhcp-client) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1245,7 +1245,7 @@ An [`interface_list`](#gcp-not-managed-node-list-interface-list) block (within [
 
 &#x2022; [`bond_interface`](#gcp-not-managed-node-list-interface-list-bond-interface) - Optional Block<br>Bond Device. Bond devices configuration for fleet<br>See [Bond Interface](#gcp-not-managed-node-list-interface-list-bond-interface) below.
 
-&#x2022; [`description`](#gcp-not-managed-node-list-interface-list-description) - Optional String<br>Interface Description. Description for this Interface
+&#x2022; [`description_spec`](#gcp-not-managed-node-list-interface-list-description-spec) - Optional String<br>Interface Description. Description for this Interface
 
 &#x2022; [`dhcp_client`](#gcp-not-managed-node-list-interface-list-dhcp-client) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1467,7 +1467,7 @@ An [`interface_list`](#kvm-not-managed-node-list-interface-list) block (within [
 
 &#x2022; [`bond_interface`](#kvm-not-managed-node-list-interface-list-bond-interface) - Optional Block<br>Bond Device. Bond devices configuration for fleet<br>See [Bond Interface](#kvm-not-managed-node-list-interface-list-bond-interface) below.
 
-&#x2022; [`description`](#kvm-not-managed-node-list-interface-list-description) - Optional String<br>Interface Description. Description for this Interface
+&#x2022; [`description_spec`](#kvm-not-managed-node-list-interface-list-description-spec) - Optional String<br>Interface Description. Description for this Interface
 
 &#x2022; [`dhcp_client`](#kvm-not-managed-node-list-interface-list-dhcp-client) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1945,7 +1945,7 @@ An [`interface_list`](#nutanix-not-managed-node-list-interface-list) block (with
 
 &#x2022; [`bond_interface`](#nutanix-not-managed-node-list-interface-list-bond-interface) - Optional Block<br>Bond Device. Bond devices configuration for fleet<br>See [Bond Interface](#nutanix-not-managed-node-list-interface-list-bond-interface) below.
 
-&#x2022; [`description`](#nutanix-not-managed-node-list-interface-list-description) - Optional String<br>Interface Description. Description for this Interface
+&#x2022; [`description_spec`](#nutanix-not-managed-node-list-interface-list-description-spec) - Optional String<br>Interface Description. Description for this Interface
 
 &#x2022; [`dhcp_client`](#nutanix-not-managed-node-list-interface-list-dhcp-client) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2167,7 +2167,7 @@ An [`interface_list`](#oci-not-managed-node-list-interface-list) block (within [
 
 &#x2022; [`bond_interface`](#oci-not-managed-node-list-interface-list-bond-interface) - Optional Block<br>Bond Device. Bond devices configuration for fleet<br>See [Bond Interface](#oci-not-managed-node-list-interface-list-bond-interface) below.
 
-&#x2022; [`description`](#oci-not-managed-node-list-interface-list-description) - Optional String<br>Interface Description. Description for this Interface
+&#x2022; [`description_spec`](#oci-not-managed-node-list-interface-list-description-spec) - Optional String<br>Interface Description. Description for this Interface
 
 &#x2022; [`dhcp_client`](#oci-not-managed-node-list-interface-list-dhcp-client) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2397,7 +2397,7 @@ An [`interface_list`](#openstack-not-managed-node-list-interface-list) block (wi
 
 &#x2022; [`bond_interface`](#openstack-not-managed-node-list-interface-list-bond-interface) - Optional Block<br>Bond Device. Bond devices configuration for fleet<br>See [Bond Interface](#openstack-not-managed-node-list-interface-list-bond-interface) below.
 
-&#x2022; [`description`](#openstack-not-managed-node-list-interface-list-description) - Optional String<br>Interface Description. Description for this Interface
+&#x2022; [`description_spec`](#openstack-not-managed-node-list-interface-list-description-spec) - Optional String<br>Interface Description. Description for this Interface
 
 &#x2022; [`dhcp_client`](#openstack-not-managed-node-list-interface-list-dhcp-client) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2733,7 +2733,7 @@ An [`interface_list`](#vmware-not-managed-node-list-interface-list) block (withi
 
 &#x2022; [`bond_interface`](#vmware-not-managed-node-list-interface-list-bond-interface) - Optional Block<br>Bond Device. Bond devices configuration for fleet<br>See [Bond Interface](#vmware-not-managed-node-list-interface-list-bond-interface) below.
 
-&#x2022; [`description`](#vmware-not-managed-node-list-interface-list-description) - Optional String<br>Interface Description. Description for this Interface
+&#x2022; [`description_spec`](#vmware-not-managed-node-list-interface-list-description-spec) - Optional String<br>Interface Description. Description for this Interface
 
 &#x2022; [`dhcp_client`](#vmware-not-managed-node-list-interface-list-dhcp-client) - Optional Block<br>Empty. This can be used for messages where no values are needed
 

@@ -207,7 +207,7 @@ A [`label_selector`](#rules-egress-rules-label-selector) block (within [`rules.e
 
 A [`metadata`](#rules-egress-rules-metadata) block (within [`rules.egress_rules`](#rules-egress-rules)) supports the following:
 
-&#x2022; [`description`](#rules-egress-rules-metadata-description) - Optional String<br>Description. Human readable description
+&#x2022; [`description_spec`](#rules-egress-rules-metadata-description-spec) - Optional String<br>Description. Human readable description
 
 &#x2022; [`name`](#rules-egress-rules-metadata-name) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
 
@@ -307,7 +307,7 @@ A [`label_selector`](#rules-ingress-rules-label-selector) block (within [`rules.
 
 A [`metadata`](#rules-ingress-rules-metadata) block (within [`rules.ingress_rules`](#rules-ingress-rules)) supports the following:
 
-&#x2022; [`description`](#rules-ingress-rules-metadata-description) - Optional String<br>Description. Human readable description
+&#x2022; [`description_spec`](#rules-ingress-rules-metadata-description-spec) - Optional String<br>Description. Human readable description
 
 &#x2022; [`name`](#rules-ingress-rules-metadata-name) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
 

@@ -71,7 +71,7 @@ In addition to all arguments above, the following attributes are exported:
 
 An [`ipv4_prefixes`](#ipv4-prefixes) block supports the following:
 
-&#x2022; [`description`](#ipv4-prefixes-description) - Optional String<br>Description
+&#x2022; [`description_spec`](#ipv4-prefixes-description-spec) - Optional String<br>Description
 
 &#x2022; [`ipv4_prefix`](#ipv4-prefixes-ipv4-prefix) - Optional String<br>IPv4 Prefix
 

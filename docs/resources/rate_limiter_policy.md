@@ -92,7 +92,7 @@ A [`rules`](#rules) block supports the following:
 
 A [`metadata`](#rules-metadata) block (within [`rules`](#rules)) supports the following:
 
-&#x2022; [`description`](#rules-metadata-description) - Optional String<br>Description. Human readable description
+&#x2022; [`description_spec`](#rules-metadata-description-spec) - Optional String<br>Description. Human readable description
 
 &#x2022; [`name`](#rules-metadata-name) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
 

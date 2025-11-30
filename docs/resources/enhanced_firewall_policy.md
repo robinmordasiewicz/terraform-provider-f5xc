@@ -255,7 +255,7 @@ A [`label_matcher`](#rule-list-rules-label-matcher) block (within [`rule_list.ru
 
 A [`metadata`](#rule-list-rules-metadata) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
-&#x2022; [`description`](#rule-list-rules-metadata-description) - Optional String<br>Description. Human readable description
+&#x2022; [`description_spec`](#rule-list-rules-metadata-description-spec) - Optional String<br>Description. Human readable description
 
 &#x2022; [`name`](#rule-list-rules-metadata-name) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
 

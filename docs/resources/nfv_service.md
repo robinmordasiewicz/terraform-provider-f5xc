@@ -308,7 +308,7 @@ A [`tls_certificates`](#https-management-advertise-on-sli-vip-tls-certificates) 
 
 &#x2022; [`custom_hash_algorithms`](#https-management-advertise-on-sli-vip-tls-certificates-custom-hash-algorithms) - Optional Block<br>Hash Algorithms. Specifies the hash algorithms to be used<br>See [Custom Hash Algorithms](#https-management-advertise-on-sli-vip-tls-certificates-custom-hash-algorithms) below.
 
-&#x2022; [`description`](#https-management-advertise-on-sli-vip-tls-certificates-description) - Optional String<br>Description. Description for the certificate
+&#x2022; [`description_spec`](#https-management-advertise-on-sli-vip-tls-certificates-description-spec) - Optional String<br>Description. Description for the certificate
 
 &#x2022; [`disable_ocsp_stapling`](#https-management-advertise-on-sli-vip-tls-certificates-disable-ocsp-stapling) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -434,7 +434,7 @@ A [`tls_certificates`](#https-management-advertise-on-slo-internet-vip-tls-certi
 
 &#x2022; [`custom_hash_algorithms`](#https-management-advertise-on-slo-internet-vip-tls-certificates-custom-hash-algorithms) - Optional Block<br>Hash Algorithms. Specifies the hash algorithms to be used<br>See [Custom Hash Algorithms](#https-management-advertise-on-slo-internet-vip-tls-certificates-custom-hash-algorithms) below.
 
-&#x2022; [`description`](#https-management-advertise-on-slo-internet-vip-tls-certificates-description) - Optional String<br>Description. Description for the certificate
+&#x2022; [`description_spec`](#https-management-advertise-on-slo-internet-vip-tls-certificates-description-spec) - Optional String<br>Description. Description for the certificate
 
 &#x2022; [`disable_ocsp_stapling`](#https-management-advertise-on-slo-internet-vip-tls-certificates-disable-ocsp-stapling) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -560,7 +560,7 @@ A [`tls_certificates`](#https-management-advertise-on-slo-sli-tls-certificates) 
 
 &#x2022; [`custom_hash_algorithms`](#https-management-advertise-on-slo-sli-tls-certificates-custom-hash-algorithms) - Optional Block<br>Hash Algorithms. Specifies the hash algorithms to be used<br>See [Custom Hash Algorithms](#https-management-advertise-on-slo-sli-tls-certificates-custom-hash-algorithms) below.
 
-&#x2022; [`description`](#https-management-advertise-on-slo-sli-tls-certificates-description) - Optional String<br>Description. Description for the certificate
+&#x2022; [`description_spec`](#https-management-advertise-on-slo-sli-tls-certificates-description-spec) - Optional String<br>Description. Description for the certificate
 
 &#x2022; [`disable_ocsp_stapling`](#https-management-advertise-on-slo-sli-tls-certificates-disable-ocsp-stapling) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -686,7 +686,7 @@ A [`tls_certificates`](#https-management-advertise-on-slo-vip-tls-certificates) 
 
 &#x2022; [`custom_hash_algorithms`](#https-management-advertise-on-slo-vip-tls-certificates-custom-hash-algorithms) - Optional Block<br>Hash Algorithms. Specifies the hash algorithms to be used<br>See [Custom Hash Algorithms](#https-management-advertise-on-slo-vip-tls-certificates-custom-hash-algorithms) below.
 
-&#x2022; [`description`](#https-management-advertise-on-slo-vip-tls-certificates-description) - Optional String<br>Description. Description for the certificate
+&#x2022; [`description_spec`](#https-management-advertise-on-slo-vip-tls-certificates-description-spec) - Optional String<br>Description. Description for the certificate
 
 &#x2022; [`disable_ocsp_stapling`](#https-management-advertise-on-slo-vip-tls-certificates-disable-ocsp-stapling) - Optional Block<br>Empty. This can be used for messages where no values are needed
 

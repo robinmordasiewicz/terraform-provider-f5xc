@@ -123,7 +123,7 @@ A [`custom_certificate`](#enable-forward-proxy-tls-intercept-custom-certificate)
 
 &#x2022; [`custom_hash_algorithms`](#enable-forward-proxy-tls-intercept-custom-certificate-custom-hash-algorithms) - Optional Block<br>Hash Algorithms. Specifies the hash algorithms to be used<br>See [Custom Hash Algorithms](#enable-forward-proxy-tls-intercept-custom-certificate-custom-hash-algorithms) below.
 
-&#x2022; [`description`](#enable-forward-proxy-tls-intercept-custom-certificate-description) - Optional String<br>Description. Description for the certificate
+&#x2022; [`description_spec`](#enable-forward-proxy-tls-intercept-custom-certificate-description-spec) - Optional String<br>Description. Description for the certificate
 
 &#x2022; [`disable_ocsp_stapling`](#enable-forward-proxy-tls-intercept-custom-certificate-disable-ocsp-stapling) - Optional Block<br>Empty. This can be used for messages where no values are needed
 

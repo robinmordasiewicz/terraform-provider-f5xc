@@ -376,7 +376,7 @@ An [`interfaces`](#custom-network-config-interface-list-interfaces) block (withi
 
 &#x2022; [`dedicated_management_interface`](#custom-network-config-interface-list-interfaces-dedicated-management-interface) - Optional Block<br>Dedicated Management Interface. Dedicated Interface Configuration<br>See [Dedicated Management Interface](#custom-network-config-interface-list-interfaces-dedicated-management-interface) below.
 
-&#x2022; [`description`](#custom-network-config-interface-list-interfaces-description) - Optional String<br>Interface Description. Description for this Interface
+&#x2022; [`description_spec`](#custom-network-config-interface-list-interfaces-description-spec) - Optional String<br>Interface Description. Description for this Interface
 
 &#x2022; [`ethernet_interface`](#custom-network-config-interface-list-interfaces-ethernet-interface) - Optional Block<br>Ethernet Interface. Ethernet Interface Configuration<br>See [Ethernet Interface](#custom-network-config-interface-list-interfaces-ethernet-interface) below.
 
@@ -1002,7 +1002,7 @@ A [`storage_classes`](#custom-storage-config-storage-class-list-storage-classes)
 
 &#x2022; [`default_storage_class`](#custom-storage-config-storage-class-list-storage-classes-default-storage-class) - Optional Bool<br>Default Storage Class. Make this storage class default storage class for the K8s cluster
 
-&#x2022; [`description`](#custom-storage-config-storage-class-list-storage-classes-description) - Optional String<br>Storage Class Description. Description for this storage class
+&#x2022; [`description_spec`](#custom-storage-config-storage-class-list-storage-classes-description-spec) - Optional String<br>Storage Class Description. Description for this storage class
 
 &#x2022; [`hpe_storage`](#custom-storage-config-storage-class-list-storage-classes-hpe-storage) - Optional Block<br>HPE Storage. Storage class Device configuration for HPE Storage<br>See [Hpe Storage](#custom-storage-config-storage-class-list-storage-classes-hpe-storage) below.
 
@@ -1032,7 +1032,7 @@ A [`hpe_storage`](#custom-storage-config-storage-class-list-storage-classes-hpe-
 
 &#x2022; [`dedupe_enabled`](#custom-storage-config-storage-class-list-storage-classes-hpe-storage-dedupe-enabled) - Optional Bool<br>dedupeEnabled. Indicates that the volume should enable deduplication
 
-&#x2022; [`description`](#custom-storage-config-storage-class-list-storage-classes-hpe-storage-description) - Optional String<br>Description. The SecretName parameter is used to identify name of secret to identify backend storage's auth information
+&#x2022; [`description_spec`](#custom-storage-config-storage-class-list-storage-classes-hpe-storage-description-spec) - Optional String<br>Description. The SecretName parameter is used to identify name of secret to identify backend storage's auth information
 
 &#x2022; [`destroy_on_delete`](#custom-storage-config-storage-class-list-storage-classes-hpe-storage-destroy-on-delete) - Optional Bool<br>destroyOnDelete. Indicates the backing Nimble volume (including snapshots) should be destroyed when the PVC is deleted
 
@@ -1722,7 +1722,7 @@ A [`storage_interface_list`](#custom-storage-config-storage-interface-list) bloc
 
 A [`storage_interfaces`](#custom-storage-config-storage-interface-list-storage-interfaces) block (within [`custom_storage_config.storage_interface_list`](#custom-storage-config-storage-interface-list)) supports the following:
 
-&#x2022; [`description`](#custom-storage-config-storage-interface-list-storage-interfaces-description) - Optional String<br>Interface Description. Description for this Interface
+&#x2022; [`description_spec`](#custom-storage-config-storage-interface-list-storage-interfaces-description-spec) - Optional String<br>Interface Description. Description for this Interface
 
 &#x2022; [`labels`](#custom-storage-config-storage-interface-list-storage-interfaces-labels) - Optional Block<br>Interface Labels. Add Labels for this Interface, these labels can be used in firewall policy
 
@@ -2116,7 +2116,7 @@ An [`interfaces`](#local-control-plane-bgp-config-peers-external-interface-list-
 
 A [`metadata`](#local-control-plane-bgp-config-peers-metadata) block (within [`local_control_plane.bgp_config.peers`](#local-control-plane-bgp-config-peers)) supports the following:
 
-&#x2022; [`description`](#local-control-plane-bgp-config-peers-metadata-description) - Optional String<br>Description. Human readable description
+&#x2022; [`description_spec`](#local-control-plane-bgp-config-peers-metadata-description-spec) - Optional String<br>Description. Human readable description
 
 &#x2022; [`name`](#local-control-plane-bgp-config-peers-metadata-name) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
 

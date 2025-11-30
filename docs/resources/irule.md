@@ -44,13 +44,15 @@ resource "f5xc_irule" "example" {
 
 &#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-&#x2022; [`description`](#description) - Optional String<br>Description for iRule. Specify Description for iRule
+&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
 
 &#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
 
 &#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
+
+&#x2022; [`description_spec`](#description-spec) - Optional String<br>Description for iRule. Specify Description for iRule
 
 &#x2022; [`irule`](#irule) - Optional String<br>irule. x-example: 'when DNS_REQUEST { if {([string tolower [DNS::question name]] equals '`www.internal.example.f5.com'`)} DNS::drop} irule content
 

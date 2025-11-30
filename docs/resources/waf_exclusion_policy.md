@@ -168,7 +168,7 @@ An [`exclude_violation_contexts`](#waf-exclusion-rules-app-firewall-detection-co
 
 A [`metadata`](#waf-exclusion-rules-metadata) block (within [`waf_exclusion_rules`](#waf-exclusion-rules)) supports the following:
 
-&#x2022; [`description`](#waf-exclusion-rules-metadata-description) - Optional String<br>Description. Human readable description
+&#x2022; [`description_spec`](#waf-exclusion-rules-metadata-description-spec) - Optional String<br>Description. Human readable description
 
 &#x2022; [`name`](#waf-exclusion-rules-metadata-name) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
 

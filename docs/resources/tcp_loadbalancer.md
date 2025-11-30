@@ -476,7 +476,7 @@ A [`tls_certificates`](#tls-tcp-tls-parameters-tls-certificates) block (within [
 
 &#x2022; [`custom_hash_algorithms`](#tls-tcp-tls-parameters-tls-certificates-custom-hash-algorithms) - Optional Block<br>Hash Algorithms. Specifies the hash algorithms to be used<br>See [Custom Hash Algorithms](#tls-tcp-tls-parameters-tls-certificates-custom-hash-algorithms) below.
 
-&#x2022; [`description`](#tls-tcp-tls-parameters-tls-certificates-description) - Optional String<br>Description. Description for the certificate
+&#x2022; [`description_spec`](#tls-tcp-tls-parameters-tls-certificates-description-spec) - Optional String<br>Description. Description for the certificate
 
 &#x2022; [`disable_ocsp_stapling`](#tls-tcp-tls-parameters-tls-certificates-disable-ocsp-stapling) - Optional Block<br>Empty. This can be used for messages where no values are needed
 

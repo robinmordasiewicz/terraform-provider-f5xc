@@ -192,7 +192,7 @@ A [`ref`](#re-acl-fast-acl-rules-ip-prefix-set-ref) block (within [`re_acl.fast_
 
 A [`metadata`](#re-acl-fast-acl-rules-metadata) block (within [`re_acl.fast_acl_rules`](#re-acl-fast-acl-rules)) supports the following:
 
-&#x2022; [`description`](#re-acl-fast-acl-rules-metadata-description) - Optional String<br>Description. Human readable description
+&#x2022; [`description_spec`](#re-acl-fast-acl-rules-metadata-description-spec) - Optional String<br>Description. Human readable description
 
 &#x2022; [`name`](#re-acl-fast-acl-rules-metadata-name) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
 
@@ -334,7 +334,7 @@ A [`ref`](#site-acl-fast-acl-rules-ip-prefix-set-ref) block (within [`site_acl.f
 
 A [`metadata`](#site-acl-fast-acl-rules-metadata) block (within [`site_acl.fast_acl_rules`](#site-acl-fast-acl-rules)) supports the following:
 
-&#x2022; [`description`](#site-acl-fast-acl-rules-metadata-description) - Optional String<br>Description. Human readable description
+&#x2022; [`description_spec`](#site-acl-fast-acl-rules-metadata-description-spec) - Optional String<br>Description. Human readable description
 
 &#x2022; [`name`](#site-acl-fast-acl-rules-metadata-name) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
 

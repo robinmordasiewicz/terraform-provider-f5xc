@@ -1806,11 +1806,11 @@ func renderSpecUnmarshalCode(attrs []TerraformAttribute, indent string, resource
 				tfsdkName := attr.TfsdkTag
 
 				// Check if there are any attributes that need the itemMap variable
-				// (primitives or nested blocks)
+				// (primitives, lists, or nested blocks)
 				needsItemMap := false
 				for _, nestedAttr := range attr.NestedAttributes {
 					switch nestedAttr.Type {
-					case "string", "int64", "bool":
+					case "string", "int64", "bool", "list":
 						needsItemMap = true
 					}
 					// Nested blocks also need access to itemMap
@@ -1932,6 +1932,37 @@ func renderSpecUnmarshalCode(attrs []TerraformAttribute, indent string, resource
 						sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t}\n", indent))
 						sb.WriteString(fmt.Sprintf("%s\t\t\t\t\treturn types.BoolNull()\n", indent))
 						sb.WriteString(fmt.Sprintf("%s\t\t\t\t}(),\n", indent))
+					case "list":
+						// Handle list types inside list nested blocks
+						if nestedAttr.ElementType == "string" {
+							sb.WriteString(fmt.Sprintf("%s\t\t\t\t%s: func() types.List {\n", indent, nestedFieldName))
+							sb.WriteString(fmt.Sprintf("%s\t\t\t\t\tif v, ok := itemMap[\"%s\"].([]interface{}); ok && len(v) > 0 {\n", indent, nestedJsonName))
+							sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\tvar items []string\n", indent))
+							sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\tfor _, item := range v {\n", indent))
+							sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\tif s, ok := item.(string); ok {\n", indent))
+							sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\titems = append(items, s)\n", indent))
+							sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t}\n", indent))
+							sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t}\n", indent))
+							sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\tlistVal, _ := types.ListValueFrom(ctx, types.StringType, items)\n", indent))
+							sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\treturn listVal\n", indent))
+							sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t}\n", indent))
+							sb.WriteString(fmt.Sprintf("%s\t\t\t\t\treturn types.ListNull(types.StringType)\n", indent))
+							sb.WriteString(fmt.Sprintf("%s\t\t\t\t}(),\n", indent))
+						} else if nestedAttr.ElementType == "int64" {
+							sb.WriteString(fmt.Sprintf("%s\t\t\t\t%s: func() types.List {\n", indent, nestedFieldName))
+							sb.WriteString(fmt.Sprintf("%s\t\t\t\t\tif v, ok := itemMap[\"%s\"].([]interface{}); ok && len(v) > 0 {\n", indent, nestedJsonName))
+							sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\tvar items []int64\n", indent))
+							sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\tfor _, item := range v {\n", indent))
+							sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\tif n, ok := item.(float64); ok {\n", indent))
+							sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\titems = append(items, int64(n))\n", indent))
+							sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t}\n", indent))
+							sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t}\n", indent))
+							sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\tlistVal, _ := types.ListValueFrom(ctx, types.Int64Type, items)\n", indent))
+							sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\treturn listVal\n", indent))
+							sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t}\n", indent))
+							sb.WriteString(fmt.Sprintf("%s\t\t\t\t\treturn types.ListNull(types.Int64Type)\n", indent))
+							sb.WriteString(fmt.Sprintf("%s\t\t\t\t}(),\n", indent))
+						}
 					}
 				}
 				sb.WriteString(fmt.Sprintf("%s\t\t\t})\n", indent))
@@ -2026,6 +2057,37 @@ func renderSpecUnmarshalCode(attrs []TerraformAttribute, indent string, resource
 					sb.WriteString(fmt.Sprintf("%s\t\t\t}\n", indent))
 					sb.WriteString(fmt.Sprintf("%s\t\t\treturn types.BoolNull()\n", indent))
 					sb.WriteString(fmt.Sprintf("%s\t\t}(),\n", indent))
+				case "list":
+					// Handle list types inside single nested blocks
+					if nestedAttr.ElementType == "string" {
+						sb.WriteString(fmt.Sprintf("%s\t\t%s: func() types.List {\n", indent, nestedFieldName))
+						sb.WriteString(fmt.Sprintf("%s\t\t\tif v, ok := blockData[\"%s\"].([]interface{}); ok && len(v) > 0 {\n", indent, nestedJsonName))
+						sb.WriteString(fmt.Sprintf("%s\t\t\t\tvar items []string\n", indent))
+						sb.WriteString(fmt.Sprintf("%s\t\t\t\tfor _, item := range v {\n", indent))
+						sb.WriteString(fmt.Sprintf("%s\t\t\t\t\tif s, ok := item.(string); ok {\n", indent))
+						sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\titems = append(items, s)\n", indent))
+						sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t}\n", indent))
+						sb.WriteString(fmt.Sprintf("%s\t\t\t\t}\n", indent))
+						sb.WriteString(fmt.Sprintf("%s\t\t\t\tlistVal, _ := types.ListValueFrom(ctx, types.StringType, items)\n", indent))
+						sb.WriteString(fmt.Sprintf("%s\t\t\t\treturn listVal\n", indent))
+						sb.WriteString(fmt.Sprintf("%s\t\t\t}\n", indent))
+						sb.WriteString(fmt.Sprintf("%s\t\t\treturn types.ListNull(types.StringType)\n", indent))
+						sb.WriteString(fmt.Sprintf("%s\t\t}(),\n", indent))
+					} else if nestedAttr.ElementType == "int64" {
+						sb.WriteString(fmt.Sprintf("%s\t\t%s: func() types.List {\n", indent, nestedFieldName))
+						sb.WriteString(fmt.Sprintf("%s\t\t\tif v, ok := blockData[\"%s\"].([]interface{}); ok && len(v) > 0 {\n", indent, nestedJsonName))
+						sb.WriteString(fmt.Sprintf("%s\t\t\t\tvar items []int64\n", indent))
+						sb.WriteString(fmt.Sprintf("%s\t\t\t\tfor _, item := range v {\n", indent))
+						sb.WriteString(fmt.Sprintf("%s\t\t\t\t\tif n, ok := item.(float64); ok {\n", indent))
+						sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\titems = append(items, int64(n))\n", indent))
+						sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t}\n", indent))
+						sb.WriteString(fmt.Sprintf("%s\t\t\t\t}\n", indent))
+						sb.WriteString(fmt.Sprintf("%s\t\t\t\tlistVal, _ := types.ListValueFrom(ctx, types.Int64Type, items)\n", indent))
+						sb.WriteString(fmt.Sprintf("%s\t\t\t\treturn listVal\n", indent))
+						sb.WriteString(fmt.Sprintf("%s\t\t\t}\n", indent))
+						sb.WriteString(fmt.Sprintf("%s\t\t\treturn types.ListNull(types.Int64Type)\n", indent))
+						sb.WriteString(fmt.Sprintf("%s\t\t}(),\n", indent))
+					}
 				}
 			}
 			sb.WriteString(fmt.Sprintf("%s\t}\n", indent))

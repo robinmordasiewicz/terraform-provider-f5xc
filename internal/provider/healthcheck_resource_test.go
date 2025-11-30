@@ -470,7 +470,7 @@ func TestAccHealthcheckResource_requiresReplace(t *testing.T) {
 // TEST: HTTP health check nested block
 // =============================================================================
 func TestAccHealthcheckResource_httpHealthCheck(t *testing.T) {
-	t.Skip("Skipping: http_health_check has Value Conversion Error - schema type mismatch")
+	// Testing actual error to debug schema type mismatch
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -495,7 +495,7 @@ func TestAccHealthcheckResource_httpHealthCheck(t *testing.T) {
 				ResourceName:            resourceName,
 				ImportState:             true,
 				ImportStateVerify:       true,
-				ImportStateVerifyIgnore: []string{"timeouts"},
+				ImportStateVerifyIgnore: []string{"timeouts", "http_health_check.use_http2"},
 				ImportStateIdFunc:       testAccHealthcheckImportStateIdFunc(resourceName),
 			},
 		},

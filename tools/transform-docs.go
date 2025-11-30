@@ -830,6 +830,9 @@ func transformAnchorsOnly(filePath string, content string) error {
 	// Escape HTML tags in descriptions to prevent Registry markdown parser truncation
 	result = escapeHTMLTagsInContent(result)
 
+	// Escape asterisks and underscores that could be misinterpreted as emphasis markers (MD037/MD049)
+	result = escapeEmphasisMarkersInContent(result)
+
 	// Enhance Timeouts section with default values (Azure RM gold standard)
 	result = enhanceTimeoutsSection(result, resourceName)
 
@@ -1336,7 +1339,8 @@ func transformDoc(filePath string) error {
 		reqText := strings.Trim(attr.reqStr, "()")
 		var firstLine strings.Builder
 		anchorID := toAnchorName(attr.name)
-		firstLine.WriteString(fmt.Sprintf("%s[`%s`](#%s) - %s %s", bulletPrefix, attr.name, anchorID, reqText, typeStr))
+		// Add anchor before bullet so link fragment has a valid target (fixes MD051)
+		firstLine.WriteString(fmt.Sprintf("<a id=\"%s\"></a>%s[`%s`](#%s) - %s %s", anchorID, bulletPrefix, attr.name, anchorID, reqText, typeStr))
 		if defaultVal != "" {
 			firstLine.WriteString("  " + defaultVal)
 		}
@@ -1643,7 +1647,8 @@ func transformDoc(filePath string) error {
 					// Result: "routes-simple-route-advanced-options-cors-policy"
 					fullAttrPath := currentBlockName + "." + name
 					nestedAttrAnchor := toAnchorName(strings.ReplaceAll(fullAttrPath, ".", "-"))
-					firstLine.WriteString(fmt.Sprintf("&#x2022; [`%s`](#%s) - Optional %s", name, nestedAttrAnchor, typeStr))
+					// Add anchor before bullet so link fragment has a valid target (fixes MD051)
+					firstLine.WriteString(fmt.Sprintf("<a id=\"%s\"></a>&#x2022; [`%s`](#%s) - Optional %s", nestedAttrAnchor, name, nestedAttrAnchor, typeStr))
 					if defaultVal != "" {
 						firstLine.WriteString("  " + defaultVal)
 					}
@@ -1807,6 +1812,51 @@ func escapeHTMLTagsInContent(content string) string {
 		closingRegex := regexp.MustCompile(`([^` + "`" + `])(</` + tag + `>)`)
 		content = closingRegex.ReplaceAllString(content, "$1`$2`")
 	}
+
+	return content
+}
+
+// escapeEmphasisMarkersInContent escapes asterisks and underscores that could be
+// misinterpreted as markdown emphasis markers, causing MD037/MD049 lint errors.
+//
+// MD037 (no-space-in-emphasis): Triggered by patterns like " * " or ": * "
+// MD049 (emphasis-style): Triggered by underscores in patterns like "[_]"
+//
+// This function escapes:
+//   - Space-asterisk-space patterns: " * " → " \* " (bullet points in descriptions)
+//   - Punctuation-space-asterisk: ": * ", ". * " → ": \* ", ". \* "
+//   - Bracket-underscore patterns: "[_]" → "[\\_]"
+//
+// Does NOT escape:
+//   - Already escaped markers: \* or \_
+//   - Markers inside code spans: `*` or `_`
+//   - Intentional emphasis: *text* or _text_
+func escapeEmphasisMarkersInContent(content string) string {
+	// MD037 triggers when there are spaces inside emphasis markers like " * text" or "text * "
+	// We need to escape asterisks that appear with adjacent spaces in description text
+
+	// Pattern 1: Space-asterisk-letter " *X" → " \*X" (opening emphasis with internal space)
+	// This catches bullet points like "following rules * Direct reference"
+	spaceAsteriskLetter := regexp.MustCompile(`([^\\]) \*([A-Za-z])`)
+	content = spaceAsteriskLetter.ReplaceAllString(content, "$1 \\*$2")
+
+	// Pattern 2: Letter-space-asterisk "x *" → "x \*" (closing emphasis with internal space)
+	// This catches patterns like "object *" before another bullet or end of text
+	letterSpaceAsterisk := regexp.MustCompile(`([a-zA-Z]) \*([^a-zA-Z\\])`)
+	content = letterSpaceAsterisk.ReplaceAllString(content, "$1 \\*$2")
+
+	// Pattern 3: Space-asterisk-space " * " → " \* " (standalone asterisk)
+	spaceAsteriskSpace := regexp.MustCompile(`([^\\]) \* `)
+	content = spaceAsteriskSpace.ReplaceAllString(content, "$1 \\* ")
+
+	// Pattern 4: Punctuation-space-asterisk ": *" or ". *" (wildcard patterns in descriptions)
+	punctAsterisk := regexp.MustCompile(`([:.,;]) \*([^*\\])`)
+	content = punctAsterisk.ReplaceAllString(content, "$1 \\*$2")
+
+	// Pattern 5: Bracket-underscore patterns like "[_]" common in API examples
+	// MD049 triggers when underscores look like emphasis markers
+	bracketUnderscore := regexp.MustCompile(`\[_\]`)
+	content = bracketUnderscore.ReplaceAllString(content, "[\\_]")
 
 	return content
 }
@@ -2208,8 +2258,9 @@ func enhanceTimeoutsSection(content, resourceName string) string {
 				if strings.Contains(line, pattern) || (strings.Contains(line, altPattern) && strings.Contains(line, "Optional")) {
 					// Build enhanced timeout line following Azure RM format
 					anchorID := fmt.Sprintf("timeouts-%s", timeoutType)
-					enhancedLine := fmt.Sprintf("&#x2022; [`%s`](#%s) - Optional String (Defaults to `%s`)<br>%s",
-						timeoutType, anchorID, info.defaultVal, info.description)
+					// Add anchor before bullet so link fragment has a valid target (fixes MD051)
+					enhancedLine := fmt.Sprintf("<a id=\"%s\"></a>&#x2022; [`%s`](#%s) - Optional String (Defaults to `%s`)<br>%s",
+						anchorID, timeoutType, anchorID, info.defaultVal, info.description)
 					result = append(result, enhancedLine)
 					transformed = true
 					break

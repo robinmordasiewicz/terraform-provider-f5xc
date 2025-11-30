@@ -2420,3 +2420,347 @@ func CheckNetworkConnectorDisappears(resourceName string) resource.TestCheckFunc
 		return nil
 	}
 }
+
+// ============================================================================
+// App Firewall Test Helpers
+// ============================================================================
+
+// CheckAppFirewallDestroyed verifies that app_firewall has been properly destroyed
+func CheckAppFirewallDestroyed(s *terraform.State) error {
+	c, err := GetTestClient()
+	if err != nil {
+		return err
+	}
+
+	for _, rs := range s.RootModule().Resources {
+		if rs.Type != "f5xc_app_firewall" {
+			continue
+		}
+
+		name := rs.Primary.Attributes["name"]
+		namespace := rs.Primary.Attributes["namespace"]
+		if namespace == "" {
+			namespace = "system"
+		}
+
+		maxRetries := 6
+		for i := 0; i < maxRetries; i++ {
+			ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+			_, err := c.GetAppFirewall(ctx, namespace, name)
+			cancel()
+
+			if err != nil {
+				if strings.Contains(err.Error(), "404") || strings.Contains(err.Error(), "not found") || strings.Contains(err.Error(), "NOT_FOUND") {
+					break
+				}
+				return fmt.Errorf("unexpected error checking app_firewall %s: %w", name, err)
+			}
+
+			if i == maxRetries-1 {
+				return fmt.Errorf("app_firewall %s still exists in F5 XC API after waiting", name)
+			}
+			time.Sleep(5 * time.Second)
+		}
+	}
+	return nil
+}
+
+// CheckAppFirewallExists verifies that app_firewall exists in the F5 XC API
+func CheckAppFirewallExists(resourceName string) resource.TestCheckFunc {
+	return func(s *terraform.State) error {
+		rs, ok := s.RootModule().Resources[resourceName]
+		if !ok {
+			return fmt.Errorf("resource not found: %s", resourceName)
+		}
+
+		if rs.Primary.ID == "" {
+			return fmt.Errorf("no ID is set for resource: %s", resourceName)
+		}
+
+		c, err := GetTestClient()
+		if err != nil {
+			return err
+		}
+
+		ctx, cancel := context.WithTimeout(context.Background(), 60*time.Second)
+		defer cancel()
+
+		name := rs.Primary.Attributes["name"]
+		namespace := rs.Primary.Attributes["namespace"]
+		if namespace == "" {
+			namespace = "system"
+		}
+
+		appFirewall, err := c.GetAppFirewall(ctx, namespace, name)
+		if err != nil {
+			return fmt.Errorf("error fetching app_firewall %s: %w", name, err)
+		}
+
+		if appFirewall.Metadata.Name != name {
+			return fmt.Errorf("app_firewall name mismatch: expected %s, got %s", name, appFirewall.Metadata.Name)
+		}
+
+		return nil
+	}
+}
+
+// CheckAppFirewallDisappears deletes app_firewall outside of Terraform to test disappearance handling
+func CheckAppFirewallDisappears(resourceName string) resource.TestCheckFunc {
+	return func(s *terraform.State) error {
+		rs, ok := s.RootModule().Resources[resourceName]
+		if !ok {
+			return fmt.Errorf("resource not found: %s", resourceName)
+		}
+
+		c, err := GetTestClient()
+		if err != nil {
+			return err
+		}
+
+		ctx, cancel := context.WithTimeout(context.Background(), 60*time.Second)
+		defer cancel()
+
+		name := rs.Primary.Attributes["name"]
+		namespace := rs.Primary.Attributes["namespace"]
+		if namespace == "" {
+			namespace = "system"
+		}
+
+		// Delete the app_firewall through the API (simulating external deletion)
+		err = c.DeleteAppFirewall(ctx, namespace, name)
+		if err != nil {
+			return fmt.Errorf("failed to delete app_firewall %s: %w", name, err)
+		}
+
+		return nil
+	}
+}
+
+// ============================================================================
+// Origin Pool Test Helpers
+// ============================================================================
+
+// CheckOriginPoolDestroyed verifies that origin_pool has been properly destroyed
+func CheckOriginPoolDestroyed(s *terraform.State) error {
+	c, err := GetTestClient()
+	if err != nil {
+		return err
+	}
+
+	for _, rs := range s.RootModule().Resources {
+		if rs.Type != "f5xc_origin_pool" {
+			continue
+		}
+
+		name := rs.Primary.Attributes["name"]
+		namespace := rs.Primary.Attributes["namespace"]
+		if namespace == "" {
+			namespace = "system"
+		}
+
+		maxRetries := 6
+		for i := 0; i < maxRetries; i++ {
+			ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+			_, err := c.GetOriginPool(ctx, namespace, name)
+			cancel()
+
+			if err != nil {
+				if strings.Contains(err.Error(), "404") || strings.Contains(err.Error(), "not found") || strings.Contains(err.Error(), "NOT_FOUND") {
+					break
+				}
+				return fmt.Errorf("unexpected error checking origin_pool %s: %w", name, err)
+			}
+
+			if i == maxRetries-1 {
+				return fmt.Errorf("origin_pool %s still exists in F5 XC API after waiting", name)
+			}
+			time.Sleep(5 * time.Second)
+		}
+	}
+	return nil
+}
+
+// CheckOriginPoolExists verifies that origin_pool exists in the F5 XC API
+func CheckOriginPoolExists(resourceName string) resource.TestCheckFunc {
+	return func(s *terraform.State) error {
+		rs, ok := s.RootModule().Resources[resourceName]
+		if !ok {
+			return fmt.Errorf("resource not found: %s", resourceName)
+		}
+
+		if rs.Primary.ID == "" {
+			return fmt.Errorf("no ID is set for resource: %s", resourceName)
+		}
+
+		c, err := GetTestClient()
+		if err != nil {
+			return err
+		}
+
+		ctx, cancel := context.WithTimeout(context.Background(), 60*time.Second)
+		defer cancel()
+
+		name := rs.Primary.Attributes["name"]
+		namespace := rs.Primary.Attributes["namespace"]
+		if namespace == "" {
+			namespace = "system"
+		}
+
+		originPool, err := c.GetOriginPool(ctx, namespace, name)
+		if err != nil {
+			return fmt.Errorf("error fetching origin_pool %s: %w", name, err)
+		}
+
+		if originPool.Metadata.Name != name {
+			return fmt.Errorf("origin_pool name mismatch: expected %s, got %s", name, originPool.Metadata.Name)
+		}
+
+		return nil
+	}
+}
+
+// CheckOriginPoolDisappears deletes origin_pool outside of Terraform to test disappearance handling
+func CheckOriginPoolDisappears(resourceName string) resource.TestCheckFunc {
+	return func(s *terraform.State) error {
+		rs, ok := s.RootModule().Resources[resourceName]
+		if !ok {
+			return fmt.Errorf("resource not found: %s", resourceName)
+		}
+
+		c, err := GetTestClient()
+		if err != nil {
+			return err
+		}
+
+		ctx, cancel := context.WithTimeout(context.Background(), 60*time.Second)
+		defer cancel()
+
+		name := rs.Primary.Attributes["name"]
+		namespace := rs.Primary.Attributes["namespace"]
+		if namespace == "" {
+			namespace = "system"
+		}
+
+		// Delete the origin_pool through the API (simulating external deletion)
+		err = c.DeleteOriginPool(ctx, namespace, name)
+		if err != nil {
+			return fmt.Errorf("failed to delete origin_pool %s: %w", name, err)
+		}
+
+		return nil
+	}
+}
+
+// ============================================================================
+// Service Policy Test Helpers
+// ============================================================================
+
+// CheckServicePolicyDestroyed verifies that service_policy has been properly destroyed
+func CheckServicePolicyDestroyed(s *terraform.State) error {
+	c, err := GetTestClient()
+	if err != nil {
+		return err
+	}
+
+	for _, rs := range s.RootModule().Resources {
+		if rs.Type != "f5xc_service_policy" {
+			continue
+		}
+
+		name := rs.Primary.Attributes["name"]
+		namespace := rs.Primary.Attributes["namespace"]
+		if namespace == "" {
+			namespace = "system"
+		}
+
+		maxRetries := 6
+		for i := 0; i < maxRetries; i++ {
+			ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+			_, err := c.GetServicePolicy(ctx, namespace, name)
+			cancel()
+
+			if err != nil {
+				if strings.Contains(err.Error(), "404") || strings.Contains(err.Error(), "not found") || strings.Contains(err.Error(), "NOT_FOUND") {
+					break
+				}
+				return fmt.Errorf("unexpected error checking service_policy %s: %w", name, err)
+			}
+
+			if i == maxRetries-1 {
+				return fmt.Errorf("service_policy %s still exists in F5 XC API after waiting", name)
+			}
+			time.Sleep(5 * time.Second)
+		}
+	}
+	return nil
+}
+
+// CheckServicePolicyExists verifies that service_policy exists in the F5 XC API
+func CheckServicePolicyExists(resourceName string) resource.TestCheckFunc {
+	return func(s *terraform.State) error {
+		rs, ok := s.RootModule().Resources[resourceName]
+		if !ok {
+			return fmt.Errorf("resource not found: %s", resourceName)
+		}
+
+		if rs.Primary.ID == "" {
+			return fmt.Errorf("no ID is set for resource: %s", resourceName)
+		}
+
+		c, err := GetTestClient()
+		if err != nil {
+			return err
+		}
+
+		ctx, cancel := context.WithTimeout(context.Background(), 60*time.Second)
+		defer cancel()
+
+		name := rs.Primary.Attributes["name"]
+		namespace := rs.Primary.Attributes["namespace"]
+		if namespace == "" {
+			namespace = "system"
+		}
+
+		servicePolicy, err := c.GetServicePolicy(ctx, namespace, name)
+		if err != nil {
+			return fmt.Errorf("error fetching service_policy %s: %w", name, err)
+		}
+
+		if servicePolicy.Metadata.Name != name {
+			return fmt.Errorf("service_policy name mismatch: expected %s, got %s", name, servicePolicy.Metadata.Name)
+		}
+
+		return nil
+	}
+}
+
+// CheckServicePolicyDisappears deletes service_policy outside of Terraform to test disappearance handling
+func CheckServicePolicyDisappears(resourceName string) resource.TestCheckFunc {
+	return func(s *terraform.State) error {
+		rs, ok := s.RootModule().Resources[resourceName]
+		if !ok {
+			return fmt.Errorf("resource not found: %s", resourceName)
+		}
+
+		c, err := GetTestClient()
+		if err != nil {
+			return err
+		}
+
+		ctx, cancel := context.WithTimeout(context.Background(), 60*time.Second)
+		defer cancel()
+
+		name := rs.Primary.Attributes["name"]
+		namespace := rs.Primary.Attributes["namespace"]
+		if namespace == "" {
+			namespace = "system"
+		}
+
+		err = c.DeleteServicePolicy(ctx, namespace, name)
+		if err != nil {
+			return fmt.Errorf("failed to delete service_policy %s: %w", name, err)
+		}
+
+		return nil
+	}
+}

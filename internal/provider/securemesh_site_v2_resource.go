@@ -12,6 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -118,7 +119,7 @@ type SecuremeshSiteV2AWSNotManagedNodeListModel struct {
 
 // SecuremeshSiteV2AWSNotManagedNodeListInterfaceListModel represents interface_list block
 type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListModel struct {
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Mtu types.Int64 `tfsdk:"mtu"`
 	Name types.String `tfsdk:"name"`
 	Priority types.Int64 `tfsdk:"priority"`
@@ -273,7 +274,7 @@ type SecuremeshSiteV2AzureNotManagedNodeListModel struct {
 
 // SecuremeshSiteV2AzureNotManagedNodeListInterfaceListModel represents interface_list block
 type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListModel struct {
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Mtu types.Int64 `tfsdk:"mtu"`
 	Name types.String `tfsdk:"name"`
 	Priority types.Int64 `tfsdk:"priority"`
@@ -428,7 +429,7 @@ type SecuremeshSiteV2BaremetalNotManagedNodeListModel struct {
 
 // SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListModel represents interface_list block
 type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListModel struct {
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Mtu types.Int64 `tfsdk:"mtu"`
 	Name types.String `tfsdk:"name"`
 	Priority types.Int64 `tfsdk:"priority"`
@@ -662,7 +663,7 @@ type SecuremeshSiteV2EquinixNotManagedNodeListModel struct {
 
 // SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListModel represents interface_list block
 type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListModel struct {
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Mtu types.Int64 `tfsdk:"mtu"`
 	Name types.String `tfsdk:"name"`
 	Priority types.Int64 `tfsdk:"priority"`
@@ -817,7 +818,7 @@ type SecuremeshSiteV2GCPNotManagedNodeListModel struct {
 
 // SecuremeshSiteV2GCPNotManagedNodeListInterfaceListModel represents interface_list block
 type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListModel struct {
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Mtu types.Int64 `tfsdk:"mtu"`
 	Name types.String `tfsdk:"name"`
 	Priority types.Int64 `tfsdk:"priority"`
@@ -972,7 +973,7 @@ type SecuremeshSiteV2KVMNotManagedNodeListModel struct {
 
 // SecuremeshSiteV2KVMNotManagedNodeListInterfaceListModel represents interface_list block
 type SecuremeshSiteV2KVMNotManagedNodeListInterfaceListModel struct {
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Mtu types.Int64 `tfsdk:"mtu"`
 	Name types.String `tfsdk:"name"`
 	Priority types.Int64 `tfsdk:"priority"`
@@ -1305,7 +1306,7 @@ type SecuremeshSiteV2NutanixNotManagedNodeListModel struct {
 
 // SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListModel represents interface_list block
 type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListModel struct {
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Mtu types.Int64 `tfsdk:"mtu"`
 	Name types.String `tfsdk:"name"`
 	Priority types.Int64 `tfsdk:"priority"`
@@ -1460,7 +1461,7 @@ type SecuremeshSiteV2OCINotManagedNodeListModel struct {
 
 // SecuremeshSiteV2OCINotManagedNodeListInterfaceListModel represents interface_list block
 type SecuremeshSiteV2OCINotManagedNodeListInterfaceListModel struct {
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Mtu types.Int64 `tfsdk:"mtu"`
 	Name types.String `tfsdk:"name"`
 	Priority types.Int64 `tfsdk:"priority"`
@@ -1621,7 +1622,7 @@ type SecuremeshSiteV2OpenstackNotManagedNodeListModel struct {
 
 // SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListModel represents interface_list block
 type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListModel struct {
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Mtu types.Int64 `tfsdk:"mtu"`
 	Name types.String `tfsdk:"name"`
 	Priority types.Int64 `tfsdk:"priority"`
@@ -1851,7 +1852,7 @@ type SecuremeshSiteV2VmwareNotManagedNodeListModel struct {
 
 // SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListModel represents interface_list block
 type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListModel struct {
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Mtu types.Int64 `tfsdk:"mtu"`
 	Name types.String `tfsdk:"name"`
 	Priority types.Int64 `tfsdk:"priority"`
@@ -1993,9 +1994,9 @@ type SecuremeshSiteV2ResourceModel struct {
 	Description types.String `tfsdk:"description"`
 	Disable types.Bool `tfsdk:"disable"`
 	Labels types.Map `tfsdk:"labels"`
+	ID types.String `tfsdk:"id"`
 	TunnelDeadTimeout types.Int64 `tfsdk:"tunnel_dead_timeout"`
 	TunnelType types.String `tfsdk:"tunnel_type"`
-	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
 	ActiveEnhancedFirewallPolicies *SecuremeshSiteV2ActiveEnhancedFirewallPoliciesModel `tfsdk:"active_enhanced_firewall_policies"`
 	ActiveForwardProxyPolicies *SecuremeshSiteV2ActiveForwardProxyPoliciesModel `tfsdk:"active_forward_proxy_policies"`
@@ -2086,16 +2087,24 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 				Optional: true,
 				ElementType: types.StringType,
 			},
+			"id": schema.StringAttribute{
+				MarkdownDescription: "Unique identifier for the resource.",
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
 			"tunnel_dead_timeout": schema.Int64Attribute{
 				MarkdownDescription: "Tunnel Dead Timeout (msec). Time interval, in millisec, within which any ipsec / ssl connection from the site going down is detected. When not set (== 0), a default value of 10000 msec will be used.",
 				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.Int64{
+					int64planmodifier.UseStateForUnknown(),
+				},
 			},
 			"tunnel_type": schema.StringAttribute{
 				MarkdownDescription: "Tunnel type. Tunnel encapsulation to be used between sites Tunnel can operate in both IPsec and SSL, with IPsec being prefered over SSL. Tunnel is of type IPsec Tunnel is of type SSL. Possible values are `SITE_TO_SITE_TUNNEL_IPSEC_OR_SSL`, `SITE_TO_SITE_TUNNEL_IPSEC`, `SITE_TO_SITE_TUNNEL_SSL`. Defaults to `SITE_TO_SITE_TUNNEL_IPSEC_OR_SSL`.",
 				Optional: true,
-			},
-			"id": schema.StringAttribute{
-				MarkdownDescription: "Unique identifier for the resource.",
 				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
@@ -2244,7 +2253,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 											MarkdownDescription: "Interfaces. Manage interfaces belonging to this node",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{
-													"description": schema.StringAttribute{
+													"description_spec": schema.StringAttribute{
 														MarkdownDescription: "Interface Description. Description for this Interface",
 														Optional: true,
 													},
@@ -2560,7 +2569,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 											MarkdownDescription: "Interfaces. Manage interfaces belonging to this node",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{
-													"description": schema.StringAttribute{
+													"description_spec": schema.StringAttribute{
 														MarkdownDescription: "Interface Description. Description for this Interface",
 														Optional: true,
 													},
@@ -2876,7 +2885,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 											MarkdownDescription: "Interfaces. Manage interfaces belonging to this node",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{
-													"description": schema.StringAttribute{
+													"description_spec": schema.StringAttribute{
 														MarkdownDescription: "Interface Description. Description for this Interface",
 														Optional: true,
 													},
@@ -3381,7 +3390,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 											MarkdownDescription: "Interfaces. Manage interfaces belonging to this node",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{
-													"description": schema.StringAttribute{
+													"description_spec": schema.StringAttribute{
 														MarkdownDescription: "Interface Description. Description for this Interface",
 														Optional: true,
 													},
@@ -3700,7 +3709,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 											MarkdownDescription: "Interfaces. Manage interfaces belonging to this node",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{
-													"description": schema.StringAttribute{
+													"description_spec": schema.StringAttribute{
 														MarkdownDescription: "Interface Description. Description for this Interface",
 														Optional: true,
 													},
@@ -4016,7 +4025,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 											MarkdownDescription: "Interfaces. Manage interfaces belonging to this node",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{
-													"description": schema.StringAttribute{
+													"description_spec": schema.StringAttribute{
 														MarkdownDescription: "Interface Description. Description for this Interface",
 														Optional: true,
 													},
@@ -4760,7 +4769,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 											MarkdownDescription: "Interfaces. Manage interfaces belonging to this node",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{
-													"description": schema.StringAttribute{
+													"description_spec": schema.StringAttribute{
 														MarkdownDescription: "Interface Description. Description for this Interface",
 														Optional: true,
 													},
@@ -5076,7 +5085,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 											MarkdownDescription: "Interfaces. Manage interfaces belonging to this node",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{
-													"description": schema.StringAttribute{
+													"description_spec": schema.StringAttribute{
 														MarkdownDescription: "Interface Description. Description for this Interface",
 														Optional: true,
 													},
@@ -5406,7 +5415,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 											MarkdownDescription: "Interfaces. Manage interfaces belonging to this node",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{
-													"description": schema.StringAttribute{
+													"description_spec": schema.StringAttribute{
 														MarkdownDescription: "Interface Description. Description for this Interface",
 														Optional: true,
 													},
@@ -5875,7 +5884,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 											MarkdownDescription: "Interfaces. Manage interfaces belonging to this node",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{
-													"description": schema.StringAttribute{
+													"description_spec": schema.StringAttribute{
 														MarkdownDescription: "Interface Description. Description for this Interface",
 														Optional: true,
 													},
@@ -6281,7 +6290,7 @@ func (r *SecuremeshSiteV2Resource) Create(ctx context.Context, req resource.Crea
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.SecuremeshSiteV2Spec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -6306,6 +6315,374 @@ func (r *SecuremeshSiteV2Resource) Create(ctx context.Context, req resource.Crea
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.ActiveEnhancedFirewallPolicies != nil {
+		active_enhanced_firewall_policiesMap := make(map[string]interface{})
+		apiResource.Spec["active_enhanced_firewall_policies"] = active_enhanced_firewall_policiesMap
+	}
+	if data.ActiveForwardProxyPolicies != nil {
+		active_forward_proxy_policiesMap := make(map[string]interface{})
+		apiResource.Spec["active_forward_proxy_policies"] = active_forward_proxy_policiesMap
+	}
+	if data.AdminUserCredentials != nil {
+		admin_user_credentialsMap := make(map[string]interface{})
+		if data.AdminUserCredentials.AdminPassword != nil {
+			admin_passwordNestedMap := make(map[string]interface{})
+			admin_user_credentialsMap["admin_password"] = admin_passwordNestedMap
+		}
+		if !data.AdminUserCredentials.SSHKey.IsNull() && !data.AdminUserCredentials.SSHKey.IsUnknown() {
+			admin_user_credentialsMap["ssh_key"] = data.AdminUserCredentials.SSHKey.ValueString()
+		}
+		apiResource.Spec["admin_user_credentials"] = admin_user_credentialsMap
+	}
+	if data.AWS != nil {
+		awsMap := make(map[string]interface{})
+		if data.AWS.NotManaged != nil {
+			not_managedNestedMap := make(map[string]interface{})
+			awsMap["not_managed"] = not_managedNestedMap
+		}
+		apiResource.Spec["aws"] = awsMap
+	}
+	if data.Azure != nil {
+		azureMap := make(map[string]interface{})
+		if data.Azure.NotManaged != nil {
+			not_managedNestedMap := make(map[string]interface{})
+			azureMap["not_managed"] = not_managedNestedMap
+		}
+		apiResource.Spec["azure"] = azureMap
+	}
+	if data.Baremetal != nil {
+		baremetalMap := make(map[string]interface{})
+		if data.Baremetal.NotManaged != nil {
+			not_managedNestedMap := make(map[string]interface{})
+			baremetalMap["not_managed"] = not_managedNestedMap
+		}
+		apiResource.Spec["baremetal"] = baremetalMap
+	}
+	if data.BlockAllServices != nil {
+		block_all_servicesMap := make(map[string]interface{})
+		apiResource.Spec["block_all_services"] = block_all_servicesMap
+	}
+	if data.BlockedServices != nil {
+		blocked_servicesMap := make(map[string]interface{})
+		apiResource.Spec["blocked_services"] = blocked_servicesMap
+	}
+	if data.CustomProxy != nil {
+		custom_proxyMap := make(map[string]interface{})
+		if data.CustomProxy.DisableReTunnel != nil {
+			custom_proxyMap["disable_re_tunnel"] = map[string]interface{}{}
+		}
+		if data.CustomProxy.EnableReTunnel != nil {
+			custom_proxyMap["enable_re_tunnel"] = map[string]interface{}{}
+		}
+		if data.CustomProxy.Password != nil {
+			passwordNestedMap := make(map[string]interface{})
+			custom_proxyMap["password"] = passwordNestedMap
+		}
+		if !data.CustomProxy.ProxyIPAddress.IsNull() && !data.CustomProxy.ProxyIPAddress.IsUnknown() {
+			custom_proxyMap["proxy_ip_address"] = data.CustomProxy.ProxyIPAddress.ValueString()
+		}
+		if !data.CustomProxy.ProxyPort.IsNull() && !data.CustomProxy.ProxyPort.IsUnknown() {
+			custom_proxyMap["proxy_port"] = data.CustomProxy.ProxyPort.ValueInt64()
+		}
+		if !data.CustomProxy.Username.IsNull() && !data.CustomProxy.Username.IsUnknown() {
+			custom_proxyMap["username"] = data.CustomProxy.Username.ValueString()
+		}
+		apiResource.Spec["custom_proxy"] = custom_proxyMap
+	}
+	if data.CustomProxyBypass != nil {
+		custom_proxy_bypassMap := make(map[string]interface{})
+		apiResource.Spec["custom_proxy_bypass"] = custom_proxy_bypassMap
+	}
+	if data.DcClusterGroupSLI != nil {
+		dc_cluster_group_sliMap := make(map[string]interface{})
+		if !data.DcClusterGroupSLI.Name.IsNull() && !data.DcClusterGroupSLI.Name.IsUnknown() {
+			dc_cluster_group_sliMap["name"] = data.DcClusterGroupSLI.Name.ValueString()
+		}
+		if !data.DcClusterGroupSLI.Namespace.IsNull() && !data.DcClusterGroupSLI.Namespace.IsUnknown() {
+			dc_cluster_group_sliMap["namespace"] = data.DcClusterGroupSLI.Namespace.ValueString()
+		}
+		if !data.DcClusterGroupSLI.Tenant.IsNull() && !data.DcClusterGroupSLI.Tenant.IsUnknown() {
+			dc_cluster_group_sliMap["tenant"] = data.DcClusterGroupSLI.Tenant.ValueString()
+		}
+		apiResource.Spec["dc_cluster_group_sli"] = dc_cluster_group_sliMap
+	}
+	if data.DcClusterGroupSLO != nil {
+		dc_cluster_group_sloMap := make(map[string]interface{})
+		if !data.DcClusterGroupSLO.Name.IsNull() && !data.DcClusterGroupSLO.Name.IsUnknown() {
+			dc_cluster_group_sloMap["name"] = data.DcClusterGroupSLO.Name.ValueString()
+		}
+		if !data.DcClusterGroupSLO.Namespace.IsNull() && !data.DcClusterGroupSLO.Namespace.IsUnknown() {
+			dc_cluster_group_sloMap["namespace"] = data.DcClusterGroupSLO.Namespace.ValueString()
+		}
+		if !data.DcClusterGroupSLO.Tenant.IsNull() && !data.DcClusterGroupSLO.Tenant.IsUnknown() {
+			dc_cluster_group_sloMap["tenant"] = data.DcClusterGroupSLO.Tenant.ValueString()
+		}
+		apiResource.Spec["dc_cluster_group_slo"] = dc_cluster_group_sloMap
+	}
+	if data.DisableHA != nil {
+		disable_haMap := make(map[string]interface{})
+		apiResource.Spec["disable_ha"] = disable_haMap
+	}
+	if data.DisableURLCategorization != nil {
+		disable_url_categorizationMap := make(map[string]interface{})
+		apiResource.Spec["disable_url_categorization"] = disable_url_categorizationMap
+	}
+	if data.DNSNTPConfig != nil {
+		dns_ntp_configMap := make(map[string]interface{})
+		if data.DNSNTPConfig.CustomDNS != nil {
+			custom_dnsNestedMap := make(map[string]interface{})
+			dns_ntp_configMap["custom_dns"] = custom_dnsNestedMap
+		}
+		if data.DNSNTPConfig.CustomNTP != nil {
+			custom_ntpNestedMap := make(map[string]interface{})
+			dns_ntp_configMap["custom_ntp"] = custom_ntpNestedMap
+		}
+		if data.DNSNTPConfig.F5DNSDefault != nil {
+			dns_ntp_configMap["f5_dns_default"] = map[string]interface{}{}
+		}
+		if data.DNSNTPConfig.F5NTPDefault != nil {
+			dns_ntp_configMap["f5_ntp_default"] = map[string]interface{}{}
+		}
+		apiResource.Spec["dns_ntp_config"] = dns_ntp_configMap
+	}
+	if data.EnableHA != nil {
+		enable_haMap := make(map[string]interface{})
+		apiResource.Spec["enable_ha"] = enable_haMap
+	}
+	if data.EnableURLCategorization != nil {
+		enable_url_categorizationMap := make(map[string]interface{})
+		apiResource.Spec["enable_url_categorization"] = enable_url_categorizationMap
+	}
+	if data.Equinix != nil {
+		equinixMap := make(map[string]interface{})
+		if data.Equinix.NotManaged != nil {
+			not_managedNestedMap := make(map[string]interface{})
+			equinixMap["not_managed"] = not_managedNestedMap
+		}
+		apiResource.Spec["equinix"] = equinixMap
+	}
+	if data.F5Proxy != nil {
+		f5_proxyMap := make(map[string]interface{})
+		apiResource.Spec["f5_proxy"] = f5_proxyMap
+	}
+	if data.GCP != nil {
+		gcpMap := make(map[string]interface{})
+		if data.GCP.NotManaged != nil {
+			not_managedNestedMap := make(map[string]interface{})
+			gcpMap["not_managed"] = not_managedNestedMap
+		}
+		apiResource.Spec["gcp"] = gcpMap
+	}
+	if data.KVM != nil {
+		kvmMap := make(map[string]interface{})
+		if data.KVM.NotManaged != nil {
+			not_managedNestedMap := make(map[string]interface{})
+			kvmMap["not_managed"] = not_managedNestedMap
+		}
+		apiResource.Spec["kvm"] = kvmMap
+	}
+	if data.LoadBalancing != nil {
+		load_balancingMap := make(map[string]interface{})
+		if !data.LoadBalancing.VipVrrpMode.IsNull() && !data.LoadBalancing.VipVrrpMode.IsUnknown() {
+			load_balancingMap["vip_vrrp_mode"] = data.LoadBalancing.VipVrrpMode.ValueString()
+		}
+		apiResource.Spec["load_balancing"] = load_balancingMap
+	}
+	if data.LocalVrf != nil {
+		local_vrfMap := make(map[string]interface{})
+		if data.LocalVrf.DefaultConfig != nil {
+			local_vrfMap["default_config"] = map[string]interface{}{}
+		}
+		if data.LocalVrf.DefaultSLIConfig != nil {
+			local_vrfMap["default_sli_config"] = map[string]interface{}{}
+		}
+		if data.LocalVrf.SLIConfig != nil {
+			sli_configNestedMap := make(map[string]interface{})
+			if !data.LocalVrf.SLIConfig.Nameserver.IsNull() && !data.LocalVrf.SLIConfig.Nameserver.IsUnknown() {
+				sli_configNestedMap["nameserver"] = data.LocalVrf.SLIConfig.Nameserver.ValueString()
+			}
+			if !data.LocalVrf.SLIConfig.Vip.IsNull() && !data.LocalVrf.SLIConfig.Vip.IsUnknown() {
+				sli_configNestedMap["vip"] = data.LocalVrf.SLIConfig.Vip.ValueString()
+			}
+			local_vrfMap["sli_config"] = sli_configNestedMap
+		}
+		if data.LocalVrf.SLOConfig != nil {
+			slo_configNestedMap := make(map[string]interface{})
+			if !data.LocalVrf.SLOConfig.Nameserver.IsNull() && !data.LocalVrf.SLOConfig.Nameserver.IsUnknown() {
+				slo_configNestedMap["nameserver"] = data.LocalVrf.SLOConfig.Nameserver.ValueString()
+			}
+			if !data.LocalVrf.SLOConfig.Vip.IsNull() && !data.LocalVrf.SLOConfig.Vip.IsUnknown() {
+				slo_configNestedMap["vip"] = data.LocalVrf.SLOConfig.Vip.ValueString()
+			}
+			local_vrfMap["slo_config"] = slo_configNestedMap
+		}
+		apiResource.Spec["local_vrf"] = local_vrfMap
+	}
+	if data.LogReceiver != nil {
+		log_receiverMap := make(map[string]interface{})
+		if !data.LogReceiver.Name.IsNull() && !data.LogReceiver.Name.IsUnknown() {
+			log_receiverMap["name"] = data.LogReceiver.Name.ValueString()
+		}
+		if !data.LogReceiver.Namespace.IsNull() && !data.LogReceiver.Namespace.IsUnknown() {
+			log_receiverMap["namespace"] = data.LogReceiver.Namespace.ValueString()
+		}
+		if !data.LogReceiver.Tenant.IsNull() && !data.LogReceiver.Tenant.IsUnknown() {
+			log_receiverMap["tenant"] = data.LogReceiver.Tenant.ValueString()
+		}
+		apiResource.Spec["log_receiver"] = log_receiverMap
+	}
+	if data.LogsStreamingDisabled != nil {
+		logs_streaming_disabledMap := make(map[string]interface{})
+		apiResource.Spec["logs_streaming_disabled"] = logs_streaming_disabledMap
+	}
+	if data.NoForwardProxy != nil {
+		no_forward_proxyMap := make(map[string]interface{})
+		apiResource.Spec["no_forward_proxy"] = no_forward_proxyMap
+	}
+	if data.NoNetworkPolicy != nil {
+		no_network_policyMap := make(map[string]interface{})
+		apiResource.Spec["no_network_policy"] = no_network_policyMap
+	}
+	if data.NoProxyBypass != nil {
+		no_proxy_bypassMap := make(map[string]interface{})
+		apiResource.Spec["no_proxy_bypass"] = no_proxy_bypassMap
+	}
+	if data.NoS2SConnectivitySLI != nil {
+		no_s2s_connectivity_sliMap := make(map[string]interface{})
+		apiResource.Spec["no_s2s_connectivity_sli"] = no_s2s_connectivity_sliMap
+	}
+	if data.NoS2SConnectivitySLO != nil {
+		no_s2s_connectivity_sloMap := make(map[string]interface{})
+		apiResource.Spec["no_s2s_connectivity_slo"] = no_s2s_connectivity_sloMap
+	}
+	if data.Nutanix != nil {
+		nutanixMap := make(map[string]interface{})
+		if data.Nutanix.NotManaged != nil {
+			not_managedNestedMap := make(map[string]interface{})
+			nutanixMap["not_managed"] = not_managedNestedMap
+		}
+		apiResource.Spec["nutanix"] = nutanixMap
+	}
+	if data.OCI != nil {
+		ociMap := make(map[string]interface{})
+		if data.OCI.NotManaged != nil {
+			not_managedNestedMap := make(map[string]interface{})
+			ociMap["not_managed"] = not_managedNestedMap
+		}
+		apiResource.Spec["oci"] = ociMap
+	}
+	if data.OfflineSurvivabilityMode != nil {
+		offline_survivability_modeMap := make(map[string]interface{})
+		if data.OfflineSurvivabilityMode.EnableOfflineSurvivabilityMode != nil {
+			offline_survivability_modeMap["enable_offline_survivability_mode"] = map[string]interface{}{}
+		}
+		if data.OfflineSurvivabilityMode.NoOfflineSurvivabilityMode != nil {
+			offline_survivability_modeMap["no_offline_survivability_mode"] = map[string]interface{}{}
+		}
+		apiResource.Spec["offline_survivability_mode"] = offline_survivability_modeMap
+	}
+	if data.Openstack != nil {
+		openstackMap := make(map[string]interface{})
+		if data.Openstack.NotManaged != nil {
+			not_managedNestedMap := make(map[string]interface{})
+			openstackMap["not_managed"] = not_managedNestedMap
+		}
+		apiResource.Spec["openstack"] = openstackMap
+	}
+	if data.PerformanceEnhancementMode != nil {
+		performance_enhancement_modeMap := make(map[string]interface{})
+		if data.PerformanceEnhancementMode.PerfModeL3Enhanced != nil {
+			perf_mode_l3_enhancedNestedMap := make(map[string]interface{})
+			performance_enhancement_modeMap["perf_mode_l3_enhanced"] = perf_mode_l3_enhancedNestedMap
+		}
+		if data.PerformanceEnhancementMode.PerfModeL7Enhanced != nil {
+			performance_enhancement_modeMap["perf_mode_l7_enhanced"] = map[string]interface{}{}
+		}
+		apiResource.Spec["performance_enhancement_mode"] = performance_enhancement_modeMap
+	}
+	if data.ReSelect != nil {
+		re_selectMap := make(map[string]interface{})
+		if data.ReSelect.GeoProximity != nil {
+			re_selectMap["geo_proximity"] = map[string]interface{}{}
+		}
+		if data.ReSelect.SpecificRe != nil {
+			specific_reNestedMap := make(map[string]interface{})
+			if !data.ReSelect.SpecificRe.PrimaryRe.IsNull() && !data.ReSelect.SpecificRe.PrimaryRe.IsUnknown() {
+				specific_reNestedMap["primary_re"] = data.ReSelect.SpecificRe.PrimaryRe.ValueString()
+			}
+			re_selectMap["specific_re"] = specific_reNestedMap
+		}
+		apiResource.Spec["re_select"] = re_selectMap
+	}
+	if data.SiteMeshGroupOnSLO != nil {
+		site_mesh_group_on_sloMap := make(map[string]interface{})
+		if data.SiteMeshGroupOnSLO.NoSiteMeshGroup != nil {
+			site_mesh_group_on_sloMap["no_site_mesh_group"] = map[string]interface{}{}
+		}
+		if data.SiteMeshGroupOnSLO.SiteMeshGroup != nil {
+			site_mesh_groupNestedMap := make(map[string]interface{})
+			if !data.SiteMeshGroupOnSLO.SiteMeshGroup.Name.IsNull() && !data.SiteMeshGroupOnSLO.SiteMeshGroup.Name.IsUnknown() {
+				site_mesh_groupNestedMap["name"] = data.SiteMeshGroupOnSLO.SiteMeshGroup.Name.ValueString()
+			}
+			if !data.SiteMeshGroupOnSLO.SiteMeshGroup.Namespace.IsNull() && !data.SiteMeshGroupOnSLO.SiteMeshGroup.Namespace.IsUnknown() {
+				site_mesh_groupNestedMap["namespace"] = data.SiteMeshGroupOnSLO.SiteMeshGroup.Namespace.ValueString()
+			}
+			if !data.SiteMeshGroupOnSLO.SiteMeshGroup.Tenant.IsNull() && !data.SiteMeshGroupOnSLO.SiteMeshGroup.Tenant.IsUnknown() {
+				site_mesh_groupNestedMap["tenant"] = data.SiteMeshGroupOnSLO.SiteMeshGroup.Tenant.ValueString()
+			}
+			site_mesh_group_on_sloMap["site_mesh_group"] = site_mesh_groupNestedMap
+		}
+		if data.SiteMeshGroupOnSLO.SmConnectionPublicIP != nil {
+			site_mesh_group_on_sloMap["sm_connection_public_ip"] = map[string]interface{}{}
+		}
+		if data.SiteMeshGroupOnSLO.SmConnectionPvtIP != nil {
+			site_mesh_group_on_sloMap["sm_connection_pvt_ip"] = map[string]interface{}{}
+		}
+		apiResource.Spec["site_mesh_group_on_slo"] = site_mesh_group_on_sloMap
+	}
+	if data.SoftwareSettings != nil {
+		software_settingsMap := make(map[string]interface{})
+		if data.SoftwareSettings.Os != nil {
+			osNestedMap := make(map[string]interface{})
+			if !data.SoftwareSettings.Os.OperatingSystemVersion.IsNull() && !data.SoftwareSettings.Os.OperatingSystemVersion.IsUnknown() {
+				osNestedMap["operating_system_version"] = data.SoftwareSettings.Os.OperatingSystemVersion.ValueString()
+			}
+			software_settingsMap["os"] = osNestedMap
+		}
+		if data.SoftwareSettings.Sw != nil {
+			swNestedMap := make(map[string]interface{})
+			if !data.SoftwareSettings.Sw.VolterraSoftwareVersion.IsNull() && !data.SoftwareSettings.Sw.VolterraSoftwareVersion.IsUnknown() {
+				swNestedMap["volterra_software_version"] = data.SoftwareSettings.Sw.VolterraSoftwareVersion.ValueString()
+			}
+			software_settingsMap["sw"] = swNestedMap
+		}
+		apiResource.Spec["software_settings"] = software_settingsMap
+	}
+	if data.UpgradeSettings != nil {
+		upgrade_settingsMap := make(map[string]interface{})
+		if data.UpgradeSettings.KubernetesUpgradeDrain != nil {
+			kubernetes_upgrade_drainNestedMap := make(map[string]interface{})
+			upgrade_settingsMap["kubernetes_upgrade_drain"] = kubernetes_upgrade_drainNestedMap
+		}
+		apiResource.Spec["upgrade_settings"] = upgrade_settingsMap
+	}
+	if data.Vmware != nil {
+		vmwareMap := make(map[string]interface{})
+		if data.Vmware.NotManaged != nil {
+			not_managedNestedMap := make(map[string]interface{})
+			vmwareMap["not_managed"] = not_managedNestedMap
+		}
+		apiResource.Spec["vmware"] = vmwareMap
+	}
+	if !data.TunnelDeadTimeout.IsNull() && !data.TunnelDeadTimeout.IsUnknown() {
+		apiResource.Spec["tunnel_dead_timeout"] = data.TunnelDeadTimeout.ValueInt64()
+	}
+	if !data.TunnelType.IsNull() && !data.TunnelType.IsUnknown() {
+		apiResource.Spec["tunnel_type"] = data.TunnelType.ValueString()
+	}
+
+
 	created, err := r.client.CreateSecuremeshSiteV2(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create SecuremeshSiteV2: %s", err))
@@ -6314,8 +6691,21 @@ func (r *SecuremeshSiteV2Resource) Create(ctx context.Context, req resource.Crea
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+	if v, ok := created.Spec["tunnel_dead_timeout"].(float64); ok {
+		data.TunnelDeadTimeout = types.Int64Value(int64(v))
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["tunnel_type"].(string); ok && v != "" {
+		data.TunnelType = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created SecuremeshSiteV2 resource")
@@ -6394,9 +6784,313 @@ func (r *SecuremeshSiteV2Resource) Read(ctx context.Context, req resource.ReadRe
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if _, ok := apiResource.Spec["active_enhanced_firewall_policies"].(map[string]interface{}); ok && isImport && data.ActiveEnhancedFirewallPolicies == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ActiveEnhancedFirewallPolicies = &SecuremeshSiteV2ActiveEnhancedFirewallPoliciesModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["active_forward_proxy_policies"].(map[string]interface{}); ok && isImport && data.ActiveForwardProxyPolicies == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ActiveForwardProxyPolicies = &SecuremeshSiteV2ActiveForwardProxyPoliciesModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["admin_user_credentials"].(map[string]interface{}); ok && (isImport || data.AdminUserCredentials != nil) {
+		data.AdminUserCredentials = &SecuremeshSiteV2AdminUserCredentialsModel{
+			SSHKey: func() types.String {
+				if v, ok := blockData["ssh_key"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["aws"].(map[string]interface{}); ok && isImport && data.AWS == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AWS = &SecuremeshSiteV2AWSModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["azure"].(map[string]interface{}); ok && isImport && data.Azure == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Azure = &SecuremeshSiteV2AzureModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["baremetal"].(map[string]interface{}); ok && isImport && data.Baremetal == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Baremetal = &SecuremeshSiteV2BaremetalModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["block_all_services"].(map[string]interface{}); ok && isImport && data.BlockAllServices == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.BlockAllServices = &SecuremeshSiteV2EmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["blocked_services"].(map[string]interface{}); ok && isImport && data.BlockedServices == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.BlockedServices = &SecuremeshSiteV2BlockedServicesModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["custom_proxy"].(map[string]interface{}); ok && (isImport || data.CustomProxy != nil) {
+		data.CustomProxy = &SecuremeshSiteV2CustomProxyModel{
+			ProxyIPAddress: func() types.String {
+				if v, ok := blockData["proxy_ip_address"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			ProxyPort: func() types.Int64 {
+				if v, ok := blockData["proxy_port"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			Username: func() types.String {
+				if v, ok := blockData["username"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["custom_proxy_bypass"].(map[string]interface{}); ok && isImport && data.CustomProxyBypass == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.CustomProxyBypass = &SecuremeshSiteV2CustomProxyBypassModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["dc_cluster_group_sli"].(map[string]interface{}); ok && (isImport || data.DcClusterGroupSLI != nil) {
+		data.DcClusterGroupSLI = &SecuremeshSiteV2DcClusterGroupSLIModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["dc_cluster_group_slo"].(map[string]interface{}); ok && (isImport || data.DcClusterGroupSLO != nil) {
+		data.DcClusterGroupSLO = &SecuremeshSiteV2DcClusterGroupSLOModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["disable_ha"].(map[string]interface{}); ok && isImport && data.DisableHA == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableHA = &SecuremeshSiteV2EmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["disable_url_categorization"].(map[string]interface{}); ok && isImport && data.DisableURLCategorization == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableURLCategorization = &SecuremeshSiteV2EmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["dns_ntp_config"].(map[string]interface{}); ok && isImport && data.DNSNTPConfig == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DNSNTPConfig = &SecuremeshSiteV2DNSNTPConfigModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["enable_ha"].(map[string]interface{}); ok && isImport && data.EnableHA == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.EnableHA = &SecuremeshSiteV2EmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["enable_url_categorization"].(map[string]interface{}); ok && isImport && data.EnableURLCategorization == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.EnableURLCategorization = &SecuremeshSiteV2EmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["equinix"].(map[string]interface{}); ok && isImport && data.Equinix == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Equinix = &SecuremeshSiteV2EquinixModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["f5_proxy"].(map[string]interface{}); ok && isImport && data.F5Proxy == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.F5Proxy = &SecuremeshSiteV2EmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["gcp"].(map[string]interface{}); ok && isImport && data.GCP == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.GCP = &SecuremeshSiteV2GCPModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["kvm"].(map[string]interface{}); ok && isImport && data.KVM == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.KVM = &SecuremeshSiteV2KVMModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["load_balancing"].(map[string]interface{}); ok && (isImport || data.LoadBalancing != nil) {
+		data.LoadBalancing = &SecuremeshSiteV2LoadBalancingModel{
+			VipVrrpMode: func() types.String {
+				if v, ok := blockData["vip_vrrp_mode"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["local_vrf"].(map[string]interface{}); ok && isImport && data.LocalVrf == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.LocalVrf = &SecuremeshSiteV2LocalVrfModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["log_receiver"].(map[string]interface{}); ok && (isImport || data.LogReceiver != nil) {
+		data.LogReceiver = &SecuremeshSiteV2LogReceiverModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["logs_streaming_disabled"].(map[string]interface{}); ok && isImport && data.LogsStreamingDisabled == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.LogsStreamingDisabled = &SecuremeshSiteV2EmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_forward_proxy"].(map[string]interface{}); ok && isImport && data.NoForwardProxy == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoForwardProxy = &SecuremeshSiteV2EmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_network_policy"].(map[string]interface{}); ok && isImport && data.NoNetworkPolicy == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoNetworkPolicy = &SecuremeshSiteV2EmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_proxy_bypass"].(map[string]interface{}); ok && isImport && data.NoProxyBypass == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoProxyBypass = &SecuremeshSiteV2EmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_s2s_connectivity_sli"].(map[string]interface{}); ok && isImport && data.NoS2SConnectivitySLI == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoS2SConnectivitySLI = &SecuremeshSiteV2EmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_s2s_connectivity_slo"].(map[string]interface{}); ok && isImport && data.NoS2SConnectivitySLO == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoS2SConnectivitySLO = &SecuremeshSiteV2EmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["nutanix"].(map[string]interface{}); ok && isImport && data.Nutanix == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Nutanix = &SecuremeshSiteV2NutanixModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["oci"].(map[string]interface{}); ok && isImport && data.OCI == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.OCI = &SecuremeshSiteV2OCIModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["offline_survivability_mode"].(map[string]interface{}); ok && isImport && data.OfflineSurvivabilityMode == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.OfflineSurvivabilityMode = &SecuremeshSiteV2OfflineSurvivabilityModeModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["openstack"].(map[string]interface{}); ok && isImport && data.Openstack == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Openstack = &SecuremeshSiteV2OpenstackModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["performance_enhancement_mode"].(map[string]interface{}); ok && isImport && data.PerformanceEnhancementMode == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.PerformanceEnhancementMode = &SecuremeshSiteV2PerformanceEnhancementModeModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["re_select"].(map[string]interface{}); ok && isImport && data.ReSelect == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ReSelect = &SecuremeshSiteV2ReSelectModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["site_mesh_group_on_slo"].(map[string]interface{}); ok && isImport && data.SiteMeshGroupOnSLO == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.SiteMeshGroupOnSLO = &SecuremeshSiteV2SiteMeshGroupOnSLOModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["software_settings"].(map[string]interface{}); ok && isImport && data.SoftwareSettings == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.SoftwareSettings = &SecuremeshSiteV2SoftwareSettingsModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["upgrade_settings"].(map[string]interface{}); ok && isImport && data.UpgradeSettings == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.UpgradeSettings = &SecuremeshSiteV2UpgradeSettingsModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["vmware"].(map[string]interface{}); ok && isImport && data.Vmware == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Vmware = &SecuremeshSiteV2VmwareModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["tunnel_dead_timeout"].(float64); ok {
+		data.TunnelDeadTimeout = types.Int64Value(int64(v))
+	} else {
+		data.TunnelDeadTimeout = types.Int64Null()
+	}
+	if v, ok := apiResource.Spec["tunnel_type"].(string); ok && v != "" {
+		data.TunnelType = types.StringValue(v)
+	} else {
+		data.TunnelType = types.StringNull()
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -6422,7 +7116,7 @@ func (r *SecuremeshSiteV2Resource) Update(ctx context.Context, req resource.Upda
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.SecuremeshSiteV2Spec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -6447,6 +7141,374 @@ func (r *SecuremeshSiteV2Resource) Update(ctx context.Context, req resource.Upda
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.ActiveEnhancedFirewallPolicies != nil {
+		active_enhanced_firewall_policiesMap := make(map[string]interface{})
+		apiResource.Spec["active_enhanced_firewall_policies"] = active_enhanced_firewall_policiesMap
+	}
+	if data.ActiveForwardProxyPolicies != nil {
+		active_forward_proxy_policiesMap := make(map[string]interface{})
+		apiResource.Spec["active_forward_proxy_policies"] = active_forward_proxy_policiesMap
+	}
+	if data.AdminUserCredentials != nil {
+		admin_user_credentialsMap := make(map[string]interface{})
+		if data.AdminUserCredentials.AdminPassword != nil {
+			admin_passwordNestedMap := make(map[string]interface{})
+			admin_user_credentialsMap["admin_password"] = admin_passwordNestedMap
+		}
+		if !data.AdminUserCredentials.SSHKey.IsNull() && !data.AdminUserCredentials.SSHKey.IsUnknown() {
+			admin_user_credentialsMap["ssh_key"] = data.AdminUserCredentials.SSHKey.ValueString()
+		}
+		apiResource.Spec["admin_user_credentials"] = admin_user_credentialsMap
+	}
+	if data.AWS != nil {
+		awsMap := make(map[string]interface{})
+		if data.AWS.NotManaged != nil {
+			not_managedNestedMap := make(map[string]interface{})
+			awsMap["not_managed"] = not_managedNestedMap
+		}
+		apiResource.Spec["aws"] = awsMap
+	}
+	if data.Azure != nil {
+		azureMap := make(map[string]interface{})
+		if data.Azure.NotManaged != nil {
+			not_managedNestedMap := make(map[string]interface{})
+			azureMap["not_managed"] = not_managedNestedMap
+		}
+		apiResource.Spec["azure"] = azureMap
+	}
+	if data.Baremetal != nil {
+		baremetalMap := make(map[string]interface{})
+		if data.Baremetal.NotManaged != nil {
+			not_managedNestedMap := make(map[string]interface{})
+			baremetalMap["not_managed"] = not_managedNestedMap
+		}
+		apiResource.Spec["baremetal"] = baremetalMap
+	}
+	if data.BlockAllServices != nil {
+		block_all_servicesMap := make(map[string]interface{})
+		apiResource.Spec["block_all_services"] = block_all_servicesMap
+	}
+	if data.BlockedServices != nil {
+		blocked_servicesMap := make(map[string]interface{})
+		apiResource.Spec["blocked_services"] = blocked_servicesMap
+	}
+	if data.CustomProxy != nil {
+		custom_proxyMap := make(map[string]interface{})
+		if data.CustomProxy.DisableReTunnel != nil {
+			custom_proxyMap["disable_re_tunnel"] = map[string]interface{}{}
+		}
+		if data.CustomProxy.EnableReTunnel != nil {
+			custom_proxyMap["enable_re_tunnel"] = map[string]interface{}{}
+		}
+		if data.CustomProxy.Password != nil {
+			passwordNestedMap := make(map[string]interface{})
+			custom_proxyMap["password"] = passwordNestedMap
+		}
+		if !data.CustomProxy.ProxyIPAddress.IsNull() && !data.CustomProxy.ProxyIPAddress.IsUnknown() {
+			custom_proxyMap["proxy_ip_address"] = data.CustomProxy.ProxyIPAddress.ValueString()
+		}
+		if !data.CustomProxy.ProxyPort.IsNull() && !data.CustomProxy.ProxyPort.IsUnknown() {
+			custom_proxyMap["proxy_port"] = data.CustomProxy.ProxyPort.ValueInt64()
+		}
+		if !data.CustomProxy.Username.IsNull() && !data.CustomProxy.Username.IsUnknown() {
+			custom_proxyMap["username"] = data.CustomProxy.Username.ValueString()
+		}
+		apiResource.Spec["custom_proxy"] = custom_proxyMap
+	}
+	if data.CustomProxyBypass != nil {
+		custom_proxy_bypassMap := make(map[string]interface{})
+		apiResource.Spec["custom_proxy_bypass"] = custom_proxy_bypassMap
+	}
+	if data.DcClusterGroupSLI != nil {
+		dc_cluster_group_sliMap := make(map[string]interface{})
+		if !data.DcClusterGroupSLI.Name.IsNull() && !data.DcClusterGroupSLI.Name.IsUnknown() {
+			dc_cluster_group_sliMap["name"] = data.DcClusterGroupSLI.Name.ValueString()
+		}
+		if !data.DcClusterGroupSLI.Namespace.IsNull() && !data.DcClusterGroupSLI.Namespace.IsUnknown() {
+			dc_cluster_group_sliMap["namespace"] = data.DcClusterGroupSLI.Namespace.ValueString()
+		}
+		if !data.DcClusterGroupSLI.Tenant.IsNull() && !data.DcClusterGroupSLI.Tenant.IsUnknown() {
+			dc_cluster_group_sliMap["tenant"] = data.DcClusterGroupSLI.Tenant.ValueString()
+		}
+		apiResource.Spec["dc_cluster_group_sli"] = dc_cluster_group_sliMap
+	}
+	if data.DcClusterGroupSLO != nil {
+		dc_cluster_group_sloMap := make(map[string]interface{})
+		if !data.DcClusterGroupSLO.Name.IsNull() && !data.DcClusterGroupSLO.Name.IsUnknown() {
+			dc_cluster_group_sloMap["name"] = data.DcClusterGroupSLO.Name.ValueString()
+		}
+		if !data.DcClusterGroupSLO.Namespace.IsNull() && !data.DcClusterGroupSLO.Namespace.IsUnknown() {
+			dc_cluster_group_sloMap["namespace"] = data.DcClusterGroupSLO.Namespace.ValueString()
+		}
+		if !data.DcClusterGroupSLO.Tenant.IsNull() && !data.DcClusterGroupSLO.Tenant.IsUnknown() {
+			dc_cluster_group_sloMap["tenant"] = data.DcClusterGroupSLO.Tenant.ValueString()
+		}
+		apiResource.Spec["dc_cluster_group_slo"] = dc_cluster_group_sloMap
+	}
+	if data.DisableHA != nil {
+		disable_haMap := make(map[string]interface{})
+		apiResource.Spec["disable_ha"] = disable_haMap
+	}
+	if data.DisableURLCategorization != nil {
+		disable_url_categorizationMap := make(map[string]interface{})
+		apiResource.Spec["disable_url_categorization"] = disable_url_categorizationMap
+	}
+	if data.DNSNTPConfig != nil {
+		dns_ntp_configMap := make(map[string]interface{})
+		if data.DNSNTPConfig.CustomDNS != nil {
+			custom_dnsNestedMap := make(map[string]interface{})
+			dns_ntp_configMap["custom_dns"] = custom_dnsNestedMap
+		}
+		if data.DNSNTPConfig.CustomNTP != nil {
+			custom_ntpNestedMap := make(map[string]interface{})
+			dns_ntp_configMap["custom_ntp"] = custom_ntpNestedMap
+		}
+		if data.DNSNTPConfig.F5DNSDefault != nil {
+			dns_ntp_configMap["f5_dns_default"] = map[string]interface{}{}
+		}
+		if data.DNSNTPConfig.F5NTPDefault != nil {
+			dns_ntp_configMap["f5_ntp_default"] = map[string]interface{}{}
+		}
+		apiResource.Spec["dns_ntp_config"] = dns_ntp_configMap
+	}
+	if data.EnableHA != nil {
+		enable_haMap := make(map[string]interface{})
+		apiResource.Spec["enable_ha"] = enable_haMap
+	}
+	if data.EnableURLCategorization != nil {
+		enable_url_categorizationMap := make(map[string]interface{})
+		apiResource.Spec["enable_url_categorization"] = enable_url_categorizationMap
+	}
+	if data.Equinix != nil {
+		equinixMap := make(map[string]interface{})
+		if data.Equinix.NotManaged != nil {
+			not_managedNestedMap := make(map[string]interface{})
+			equinixMap["not_managed"] = not_managedNestedMap
+		}
+		apiResource.Spec["equinix"] = equinixMap
+	}
+	if data.F5Proxy != nil {
+		f5_proxyMap := make(map[string]interface{})
+		apiResource.Spec["f5_proxy"] = f5_proxyMap
+	}
+	if data.GCP != nil {
+		gcpMap := make(map[string]interface{})
+		if data.GCP.NotManaged != nil {
+			not_managedNestedMap := make(map[string]interface{})
+			gcpMap["not_managed"] = not_managedNestedMap
+		}
+		apiResource.Spec["gcp"] = gcpMap
+	}
+	if data.KVM != nil {
+		kvmMap := make(map[string]interface{})
+		if data.KVM.NotManaged != nil {
+			not_managedNestedMap := make(map[string]interface{})
+			kvmMap["not_managed"] = not_managedNestedMap
+		}
+		apiResource.Spec["kvm"] = kvmMap
+	}
+	if data.LoadBalancing != nil {
+		load_balancingMap := make(map[string]interface{})
+		if !data.LoadBalancing.VipVrrpMode.IsNull() && !data.LoadBalancing.VipVrrpMode.IsUnknown() {
+			load_balancingMap["vip_vrrp_mode"] = data.LoadBalancing.VipVrrpMode.ValueString()
+		}
+		apiResource.Spec["load_balancing"] = load_balancingMap
+	}
+	if data.LocalVrf != nil {
+		local_vrfMap := make(map[string]interface{})
+		if data.LocalVrf.DefaultConfig != nil {
+			local_vrfMap["default_config"] = map[string]interface{}{}
+		}
+		if data.LocalVrf.DefaultSLIConfig != nil {
+			local_vrfMap["default_sli_config"] = map[string]interface{}{}
+		}
+		if data.LocalVrf.SLIConfig != nil {
+			sli_configNestedMap := make(map[string]interface{})
+			if !data.LocalVrf.SLIConfig.Nameserver.IsNull() && !data.LocalVrf.SLIConfig.Nameserver.IsUnknown() {
+				sli_configNestedMap["nameserver"] = data.LocalVrf.SLIConfig.Nameserver.ValueString()
+			}
+			if !data.LocalVrf.SLIConfig.Vip.IsNull() && !data.LocalVrf.SLIConfig.Vip.IsUnknown() {
+				sli_configNestedMap["vip"] = data.LocalVrf.SLIConfig.Vip.ValueString()
+			}
+			local_vrfMap["sli_config"] = sli_configNestedMap
+		}
+		if data.LocalVrf.SLOConfig != nil {
+			slo_configNestedMap := make(map[string]interface{})
+			if !data.LocalVrf.SLOConfig.Nameserver.IsNull() && !data.LocalVrf.SLOConfig.Nameserver.IsUnknown() {
+				slo_configNestedMap["nameserver"] = data.LocalVrf.SLOConfig.Nameserver.ValueString()
+			}
+			if !data.LocalVrf.SLOConfig.Vip.IsNull() && !data.LocalVrf.SLOConfig.Vip.IsUnknown() {
+				slo_configNestedMap["vip"] = data.LocalVrf.SLOConfig.Vip.ValueString()
+			}
+			local_vrfMap["slo_config"] = slo_configNestedMap
+		}
+		apiResource.Spec["local_vrf"] = local_vrfMap
+	}
+	if data.LogReceiver != nil {
+		log_receiverMap := make(map[string]interface{})
+		if !data.LogReceiver.Name.IsNull() && !data.LogReceiver.Name.IsUnknown() {
+			log_receiverMap["name"] = data.LogReceiver.Name.ValueString()
+		}
+		if !data.LogReceiver.Namespace.IsNull() && !data.LogReceiver.Namespace.IsUnknown() {
+			log_receiverMap["namespace"] = data.LogReceiver.Namespace.ValueString()
+		}
+		if !data.LogReceiver.Tenant.IsNull() && !data.LogReceiver.Tenant.IsUnknown() {
+			log_receiverMap["tenant"] = data.LogReceiver.Tenant.ValueString()
+		}
+		apiResource.Spec["log_receiver"] = log_receiverMap
+	}
+	if data.LogsStreamingDisabled != nil {
+		logs_streaming_disabledMap := make(map[string]interface{})
+		apiResource.Spec["logs_streaming_disabled"] = logs_streaming_disabledMap
+	}
+	if data.NoForwardProxy != nil {
+		no_forward_proxyMap := make(map[string]interface{})
+		apiResource.Spec["no_forward_proxy"] = no_forward_proxyMap
+	}
+	if data.NoNetworkPolicy != nil {
+		no_network_policyMap := make(map[string]interface{})
+		apiResource.Spec["no_network_policy"] = no_network_policyMap
+	}
+	if data.NoProxyBypass != nil {
+		no_proxy_bypassMap := make(map[string]interface{})
+		apiResource.Spec["no_proxy_bypass"] = no_proxy_bypassMap
+	}
+	if data.NoS2SConnectivitySLI != nil {
+		no_s2s_connectivity_sliMap := make(map[string]interface{})
+		apiResource.Spec["no_s2s_connectivity_sli"] = no_s2s_connectivity_sliMap
+	}
+	if data.NoS2SConnectivitySLO != nil {
+		no_s2s_connectivity_sloMap := make(map[string]interface{})
+		apiResource.Spec["no_s2s_connectivity_slo"] = no_s2s_connectivity_sloMap
+	}
+	if data.Nutanix != nil {
+		nutanixMap := make(map[string]interface{})
+		if data.Nutanix.NotManaged != nil {
+			not_managedNestedMap := make(map[string]interface{})
+			nutanixMap["not_managed"] = not_managedNestedMap
+		}
+		apiResource.Spec["nutanix"] = nutanixMap
+	}
+	if data.OCI != nil {
+		ociMap := make(map[string]interface{})
+		if data.OCI.NotManaged != nil {
+			not_managedNestedMap := make(map[string]interface{})
+			ociMap["not_managed"] = not_managedNestedMap
+		}
+		apiResource.Spec["oci"] = ociMap
+	}
+	if data.OfflineSurvivabilityMode != nil {
+		offline_survivability_modeMap := make(map[string]interface{})
+		if data.OfflineSurvivabilityMode.EnableOfflineSurvivabilityMode != nil {
+			offline_survivability_modeMap["enable_offline_survivability_mode"] = map[string]interface{}{}
+		}
+		if data.OfflineSurvivabilityMode.NoOfflineSurvivabilityMode != nil {
+			offline_survivability_modeMap["no_offline_survivability_mode"] = map[string]interface{}{}
+		}
+		apiResource.Spec["offline_survivability_mode"] = offline_survivability_modeMap
+	}
+	if data.Openstack != nil {
+		openstackMap := make(map[string]interface{})
+		if data.Openstack.NotManaged != nil {
+			not_managedNestedMap := make(map[string]interface{})
+			openstackMap["not_managed"] = not_managedNestedMap
+		}
+		apiResource.Spec["openstack"] = openstackMap
+	}
+	if data.PerformanceEnhancementMode != nil {
+		performance_enhancement_modeMap := make(map[string]interface{})
+		if data.PerformanceEnhancementMode.PerfModeL3Enhanced != nil {
+			perf_mode_l3_enhancedNestedMap := make(map[string]interface{})
+			performance_enhancement_modeMap["perf_mode_l3_enhanced"] = perf_mode_l3_enhancedNestedMap
+		}
+		if data.PerformanceEnhancementMode.PerfModeL7Enhanced != nil {
+			performance_enhancement_modeMap["perf_mode_l7_enhanced"] = map[string]interface{}{}
+		}
+		apiResource.Spec["performance_enhancement_mode"] = performance_enhancement_modeMap
+	}
+	if data.ReSelect != nil {
+		re_selectMap := make(map[string]interface{})
+		if data.ReSelect.GeoProximity != nil {
+			re_selectMap["geo_proximity"] = map[string]interface{}{}
+		}
+		if data.ReSelect.SpecificRe != nil {
+			specific_reNestedMap := make(map[string]interface{})
+			if !data.ReSelect.SpecificRe.PrimaryRe.IsNull() && !data.ReSelect.SpecificRe.PrimaryRe.IsUnknown() {
+				specific_reNestedMap["primary_re"] = data.ReSelect.SpecificRe.PrimaryRe.ValueString()
+			}
+			re_selectMap["specific_re"] = specific_reNestedMap
+		}
+		apiResource.Spec["re_select"] = re_selectMap
+	}
+	if data.SiteMeshGroupOnSLO != nil {
+		site_mesh_group_on_sloMap := make(map[string]interface{})
+		if data.SiteMeshGroupOnSLO.NoSiteMeshGroup != nil {
+			site_mesh_group_on_sloMap["no_site_mesh_group"] = map[string]interface{}{}
+		}
+		if data.SiteMeshGroupOnSLO.SiteMeshGroup != nil {
+			site_mesh_groupNestedMap := make(map[string]interface{})
+			if !data.SiteMeshGroupOnSLO.SiteMeshGroup.Name.IsNull() && !data.SiteMeshGroupOnSLO.SiteMeshGroup.Name.IsUnknown() {
+				site_mesh_groupNestedMap["name"] = data.SiteMeshGroupOnSLO.SiteMeshGroup.Name.ValueString()
+			}
+			if !data.SiteMeshGroupOnSLO.SiteMeshGroup.Namespace.IsNull() && !data.SiteMeshGroupOnSLO.SiteMeshGroup.Namespace.IsUnknown() {
+				site_mesh_groupNestedMap["namespace"] = data.SiteMeshGroupOnSLO.SiteMeshGroup.Namespace.ValueString()
+			}
+			if !data.SiteMeshGroupOnSLO.SiteMeshGroup.Tenant.IsNull() && !data.SiteMeshGroupOnSLO.SiteMeshGroup.Tenant.IsUnknown() {
+				site_mesh_groupNestedMap["tenant"] = data.SiteMeshGroupOnSLO.SiteMeshGroup.Tenant.ValueString()
+			}
+			site_mesh_group_on_sloMap["site_mesh_group"] = site_mesh_groupNestedMap
+		}
+		if data.SiteMeshGroupOnSLO.SmConnectionPublicIP != nil {
+			site_mesh_group_on_sloMap["sm_connection_public_ip"] = map[string]interface{}{}
+		}
+		if data.SiteMeshGroupOnSLO.SmConnectionPvtIP != nil {
+			site_mesh_group_on_sloMap["sm_connection_pvt_ip"] = map[string]interface{}{}
+		}
+		apiResource.Spec["site_mesh_group_on_slo"] = site_mesh_group_on_sloMap
+	}
+	if data.SoftwareSettings != nil {
+		software_settingsMap := make(map[string]interface{})
+		if data.SoftwareSettings.Os != nil {
+			osNestedMap := make(map[string]interface{})
+			if !data.SoftwareSettings.Os.OperatingSystemVersion.IsNull() && !data.SoftwareSettings.Os.OperatingSystemVersion.IsUnknown() {
+				osNestedMap["operating_system_version"] = data.SoftwareSettings.Os.OperatingSystemVersion.ValueString()
+			}
+			software_settingsMap["os"] = osNestedMap
+		}
+		if data.SoftwareSettings.Sw != nil {
+			swNestedMap := make(map[string]interface{})
+			if !data.SoftwareSettings.Sw.VolterraSoftwareVersion.IsNull() && !data.SoftwareSettings.Sw.VolterraSoftwareVersion.IsUnknown() {
+				swNestedMap["volterra_software_version"] = data.SoftwareSettings.Sw.VolterraSoftwareVersion.ValueString()
+			}
+			software_settingsMap["sw"] = swNestedMap
+		}
+		apiResource.Spec["software_settings"] = software_settingsMap
+	}
+	if data.UpgradeSettings != nil {
+		upgrade_settingsMap := make(map[string]interface{})
+		if data.UpgradeSettings.KubernetesUpgradeDrain != nil {
+			kubernetes_upgrade_drainNestedMap := make(map[string]interface{})
+			upgrade_settingsMap["kubernetes_upgrade_drain"] = kubernetes_upgrade_drainNestedMap
+		}
+		apiResource.Spec["upgrade_settings"] = upgrade_settingsMap
+	}
+	if data.Vmware != nil {
+		vmwareMap := make(map[string]interface{})
+		if data.Vmware.NotManaged != nil {
+			not_managedNestedMap := make(map[string]interface{})
+			vmwareMap["not_managed"] = not_managedNestedMap
+		}
+		apiResource.Spec["vmware"] = vmwareMap
+	}
+	if !data.TunnelDeadTimeout.IsNull() && !data.TunnelDeadTimeout.IsUnknown() {
+		apiResource.Spec["tunnel_dead_timeout"] = data.TunnelDeadTimeout.ValueInt64()
+	}
+	if !data.TunnelType.IsNull() && !data.TunnelType.IsUnknown() {
+		apiResource.Spec["tunnel_type"] = data.TunnelType.ValueString()
+	}
+
+
 	updated, err := r.client.UpdateSecuremeshSiteV2(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update SecuremeshSiteV2: %s", err))
@@ -6455,6 +7517,16 @@ func (r *SecuremeshSiteV2Resource) Update(ctx context.Context, req resource.Upda
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
+	if v, ok := updated.Spec["tunnel_dead_timeout"].(float64); ok {
+		data.TunnelDeadTimeout = types.Int64Value(int64(v))
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["tunnel_type"].(string); ok && v != "" {
+		data.TunnelType = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -6467,6 +7539,7 @@ func (r *SecuremeshSiteV2Resource) Update(ctx context.Context, req resource.Upda
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -6493,6 +7566,15 @@ func (r *SecuremeshSiteV2Resource) Delete(ctx context.Context, req resource.Dele
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "SecuremeshSiteV2 already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "SecuremeshSiteV2 delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

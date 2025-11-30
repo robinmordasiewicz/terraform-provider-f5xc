@@ -10,13 +10,8 @@ import (
 
 // FastACLRule represents a F5XC FastACLRule
 type FastACLRule struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     FastACLRuleSpec `json:"spec"`
-}
-
-// FastACLRuleSpec defines the specification for FastACLRule
-type FastACLRuleSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateFastACLRule creates a new FastACLRule

@@ -240,7 +240,7 @@ func (r *TokenResource) Create(ctx context.Context, req resource.CreateRequest, 
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.TokenSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -265,6 +265,9 @@ func (r *TokenResource) Create(ctx context.Context, req resource.CreateRequest, 
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+
+
 	created, err := r.client.CreateToken(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create Token: %s", err))
@@ -273,8 +276,12 @@ func (r *TokenResource) Create(ctx context.Context, req resource.CreateRequest, 
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created Token resource")
@@ -353,9 +360,25 @@ func (r *TokenResource) Read(ctx context.Context, req resource.ReadRequest, resp
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -381,7 +404,7 @@ func (r *TokenResource) Update(ctx context.Context, req resource.UpdateRequest, 
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.TokenSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -406,6 +429,9 @@ func (r *TokenResource) Update(ctx context.Context, req resource.UpdateRequest, 
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+
+
 	updated, err := r.client.UpdateToken(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update Token: %s", err))
@@ -414,6 +440,7 @@ func (r *TokenResource) Update(ctx context.Context, req resource.UpdateRequest, 
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -426,6 +453,7 @@ func (r *TokenResource) Update(ctx context.Context, req resource.UpdateRequest, 
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -452,6 +480,15 @@ func (r *TokenResource) Delete(ctx context.Context, req resource.DeleteRequest, 
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "Token already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "Token delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

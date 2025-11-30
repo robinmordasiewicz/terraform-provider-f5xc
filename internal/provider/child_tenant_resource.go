@@ -89,12 +89,12 @@ type ChildTenantResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Annotations types.Map `tfsdk:"annotations"`
-	CompanyName types.String `tfsdk:"company_name"`
 	Description types.String `tfsdk:"description"`
 	Disable types.Bool `tfsdk:"disable"`
-	Domain types.String `tfsdk:"domain"`
 	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
+	CompanyName types.String `tfsdk:"company_name"`
+	Domain types.String `tfsdk:"domain"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
 	ChildTenantManager *ChildTenantChildTenantManagerModel `tfsdk:"child_tenant_manager"`
 	ContactDetail *ChildTenantContactDetailModel `tfsdk:"contact_detail"`
@@ -136,20 +136,12 @@ func (r *ChildTenantResource) Schema(ctx context.Context, req resource.SchemaReq
 				Optional: true,
 				ElementType: types.StringType,
 			},
-			"company_name": schema.StringAttribute{
-				MarkdownDescription: "Company Name. Company name (enterprise only)",
-				Optional: true,
-			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
 				Optional: true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
-			},
-			"domain": schema.StringAttribute{
-				MarkdownDescription: "Domain. Text string that will be used for the subdomain of the new Child Tenant. This will be where users will directly log into the new Child Tenant. example domain.console.ves.volterra.io.",
 				Optional: true,
 			},
 			"labels": schema.MapAttribute{
@@ -159,6 +151,22 @@ func (r *ChildTenantResource) Schema(ctx context.Context, req resource.SchemaReq
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"company_name": schema.StringAttribute{
+				MarkdownDescription: "Company Name. Company name (enterprise only)",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"domain": schema.StringAttribute{
+				MarkdownDescription: "Domain. Text string that will be used for the subdomain of the new Child Tenant. This will be where users will directly log into the new Child Tenant. example domain.console.ves.volterra.io.",
+				Optional: true,
 				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
@@ -398,7 +406,7 @@ func (r *ChildTenantResource) Create(ctx context.Context, req resource.CreateReq
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.ChildTenantSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -423,6 +431,91 @@ func (r *ChildTenantResource) Create(ctx context.Context, req resource.CreateReq
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.ChildTenantManager != nil {
+		child_tenant_managerMap := make(map[string]interface{})
+		if !data.ChildTenantManager.Name.IsNull() && !data.ChildTenantManager.Name.IsUnknown() {
+			child_tenant_managerMap["name"] = data.ChildTenantManager.Name.ValueString()
+		}
+		if !data.ChildTenantManager.Namespace.IsNull() && !data.ChildTenantManager.Namespace.IsUnknown() {
+			child_tenant_managerMap["namespace"] = data.ChildTenantManager.Namespace.ValueString()
+		}
+		if !data.ChildTenantManager.Tenant.IsNull() && !data.ChildTenantManager.Tenant.IsUnknown() {
+			child_tenant_managerMap["tenant"] = data.ChildTenantManager.Tenant.ValueString()
+		}
+		apiResource.Spec["child_tenant_manager"] = child_tenant_managerMap
+	}
+	if data.ContactDetail != nil {
+		contact_detailMap := make(map[string]interface{})
+		if !data.ContactDetail.Address1.IsNull() && !data.ContactDetail.Address1.IsUnknown() {
+			contact_detailMap["address1"] = data.ContactDetail.Address1.ValueString()
+		}
+		if !data.ContactDetail.Address2.IsNull() && !data.ContactDetail.Address2.IsUnknown() {
+			contact_detailMap["address2"] = data.ContactDetail.Address2.ValueString()
+		}
+		if !data.ContactDetail.City.IsNull() && !data.ContactDetail.City.IsUnknown() {
+			contact_detailMap["city"] = data.ContactDetail.City.ValueString()
+		}
+		if !data.ContactDetail.ContactType.IsNull() && !data.ContactDetail.ContactType.IsUnknown() {
+			contact_detailMap["contact_type"] = data.ContactDetail.ContactType.ValueString()
+		}
+		if !data.ContactDetail.Country.IsNull() && !data.ContactDetail.Country.IsUnknown() {
+			contact_detailMap["country"] = data.ContactDetail.Country.ValueString()
+		}
+		if !data.ContactDetail.County.IsNull() && !data.ContactDetail.County.IsUnknown() {
+			contact_detailMap["county"] = data.ContactDetail.County.ValueString()
+		}
+		if !data.ContactDetail.PhoneNumber.IsNull() && !data.ContactDetail.PhoneNumber.IsUnknown() {
+			contact_detailMap["phone_number"] = data.ContactDetail.PhoneNumber.ValueString()
+		}
+		if !data.ContactDetail.State.IsNull() && !data.ContactDetail.State.IsUnknown() {
+			contact_detailMap["state"] = data.ContactDetail.State.ValueString()
+		}
+		if !data.ContactDetail.StateCode.IsNull() && !data.ContactDetail.StateCode.IsUnknown() {
+			contact_detailMap["state_code"] = data.ContactDetail.StateCode.ValueString()
+		}
+		if !data.ContactDetail.ZipCode.IsNull() && !data.ContactDetail.ZipCode.IsUnknown() {
+			contact_detailMap["zip_code"] = data.ContactDetail.ZipCode.ValueString()
+		}
+		apiResource.Spec["contact_detail"] = contact_detailMap
+	}
+	if data.CustomerInfo != nil {
+		customer_infoMap := make(map[string]interface{})
+		if !data.CustomerInfo.AdditionalInfo.IsNull() && !data.CustomerInfo.AdditionalInfo.IsUnknown() {
+			customer_infoMap["additional_info"] = data.CustomerInfo.AdditionalInfo.ValueString()
+		}
+		if !data.CustomerInfo.Email.IsNull() && !data.CustomerInfo.Email.IsUnknown() {
+			customer_infoMap["email"] = data.CustomerInfo.Email.ValueString()
+		}
+		if !data.CustomerInfo.FirstName.IsNull() && !data.CustomerInfo.FirstName.IsUnknown() {
+			customer_infoMap["first_name"] = data.CustomerInfo.FirstName.ValueString()
+		}
+		if !data.CustomerInfo.LastName.IsNull() && !data.CustomerInfo.LastName.IsUnknown() {
+			customer_infoMap["last_name"] = data.CustomerInfo.LastName.ValueString()
+		}
+		apiResource.Spec["customer_info"] = customer_infoMap
+	}
+	if data.TenantProfile != nil {
+		tenant_profileMap := make(map[string]interface{})
+		if !data.TenantProfile.Name.IsNull() && !data.TenantProfile.Name.IsUnknown() {
+			tenant_profileMap["name"] = data.TenantProfile.Name.ValueString()
+		}
+		if !data.TenantProfile.Namespace.IsNull() && !data.TenantProfile.Namespace.IsUnknown() {
+			tenant_profileMap["namespace"] = data.TenantProfile.Namespace.ValueString()
+		}
+		if !data.TenantProfile.Tenant.IsNull() && !data.TenantProfile.Tenant.IsUnknown() {
+			tenant_profileMap["tenant"] = data.TenantProfile.Tenant.ValueString()
+		}
+		apiResource.Spec["tenant_profile"] = tenant_profileMap
+	}
+	if !data.CompanyName.IsNull() && !data.CompanyName.IsUnknown() {
+		apiResource.Spec["company_name"] = data.CompanyName.ValueString()
+	}
+	if !data.Domain.IsNull() && !data.Domain.IsUnknown() {
+		apiResource.Spec["domain"] = data.Domain.ValueString()
+	}
+
+
 	created, err := r.client.CreateChildTenant(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create ChildTenant: %s", err))
@@ -430,9 +523,24 @@ func (r *ChildTenantResource) Create(ctx context.Context, req resource.CreateReq
 	}
 
 	data.ID = types.StringValue(created.Metadata.Name)
+	// For resources without namespace in API path, namespace is computed from API response
+	data.Namespace = types.StringValue(created.Metadata.Namespace)
+
+	// Set computed fields from API response
+	if v, ok := created.Spec["company_name"].(string); ok && v != "" {
+		data.CompanyName = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["domain"].(string); ok && v != "" {
+		data.Domain = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created ChildTenant resource")
@@ -511,9 +619,171 @@ func (r *ChildTenantResource) Read(ctx context.Context, req resource.ReadRequest
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if blockData, ok := apiResource.Spec["child_tenant_manager"].(map[string]interface{}); ok && (isImport || data.ChildTenantManager != nil) {
+		data.ChildTenantManager = &ChildTenantChildTenantManagerModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["contact_detail"].(map[string]interface{}); ok && (isImport || data.ContactDetail != nil) {
+		data.ContactDetail = &ChildTenantContactDetailModel{
+			Address1: func() types.String {
+				if v, ok := blockData["address1"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Address2: func() types.String {
+				if v, ok := blockData["address2"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			City: func() types.String {
+				if v, ok := blockData["city"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			ContactType: func() types.String {
+				if v, ok := blockData["contact_type"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Country: func() types.String {
+				if v, ok := blockData["country"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			County: func() types.String {
+				if v, ok := blockData["county"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			PhoneNumber: func() types.String {
+				if v, ok := blockData["phone_number"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			State: func() types.String {
+				if v, ok := blockData["state"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			StateCode: func() types.String {
+				if v, ok := blockData["state_code"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			ZipCode: func() types.String {
+				if v, ok := blockData["zip_code"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["customer_info"].(map[string]interface{}); ok && (isImport || data.CustomerInfo != nil) {
+		data.CustomerInfo = &ChildTenantCustomerInfoModel{
+			AdditionalInfo: func() types.String {
+				if v, ok := blockData["additional_info"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Email: func() types.String {
+				if v, ok := blockData["email"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			FirstName: func() types.String {
+				if v, ok := blockData["first_name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			LastName: func() types.String {
+				if v, ok := blockData["last_name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["tenant_profile"].(map[string]interface{}); ok && (isImport || data.TenantProfile != nil) {
+		data.TenantProfile = &ChildTenantTenantProfileModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if v, ok := apiResource.Spec["company_name"].(string); ok && v != "" {
+		data.CompanyName = types.StringValue(v)
+	} else {
+		data.CompanyName = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["domain"].(string); ok && v != "" {
+		data.Domain = types.StringValue(v)
+	} else {
+		data.Domain = types.StringNull()
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -539,7 +809,7 @@ func (r *ChildTenantResource) Update(ctx context.Context, req resource.UpdateReq
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.ChildTenantSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -564,6 +834,91 @@ func (r *ChildTenantResource) Update(ctx context.Context, req resource.UpdateReq
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.ChildTenantManager != nil {
+		child_tenant_managerMap := make(map[string]interface{})
+		if !data.ChildTenantManager.Name.IsNull() && !data.ChildTenantManager.Name.IsUnknown() {
+			child_tenant_managerMap["name"] = data.ChildTenantManager.Name.ValueString()
+		}
+		if !data.ChildTenantManager.Namespace.IsNull() && !data.ChildTenantManager.Namespace.IsUnknown() {
+			child_tenant_managerMap["namespace"] = data.ChildTenantManager.Namespace.ValueString()
+		}
+		if !data.ChildTenantManager.Tenant.IsNull() && !data.ChildTenantManager.Tenant.IsUnknown() {
+			child_tenant_managerMap["tenant"] = data.ChildTenantManager.Tenant.ValueString()
+		}
+		apiResource.Spec["child_tenant_manager"] = child_tenant_managerMap
+	}
+	if data.ContactDetail != nil {
+		contact_detailMap := make(map[string]interface{})
+		if !data.ContactDetail.Address1.IsNull() && !data.ContactDetail.Address1.IsUnknown() {
+			contact_detailMap["address1"] = data.ContactDetail.Address1.ValueString()
+		}
+		if !data.ContactDetail.Address2.IsNull() && !data.ContactDetail.Address2.IsUnknown() {
+			contact_detailMap["address2"] = data.ContactDetail.Address2.ValueString()
+		}
+		if !data.ContactDetail.City.IsNull() && !data.ContactDetail.City.IsUnknown() {
+			contact_detailMap["city"] = data.ContactDetail.City.ValueString()
+		}
+		if !data.ContactDetail.ContactType.IsNull() && !data.ContactDetail.ContactType.IsUnknown() {
+			contact_detailMap["contact_type"] = data.ContactDetail.ContactType.ValueString()
+		}
+		if !data.ContactDetail.Country.IsNull() && !data.ContactDetail.Country.IsUnknown() {
+			contact_detailMap["country"] = data.ContactDetail.Country.ValueString()
+		}
+		if !data.ContactDetail.County.IsNull() && !data.ContactDetail.County.IsUnknown() {
+			contact_detailMap["county"] = data.ContactDetail.County.ValueString()
+		}
+		if !data.ContactDetail.PhoneNumber.IsNull() && !data.ContactDetail.PhoneNumber.IsUnknown() {
+			contact_detailMap["phone_number"] = data.ContactDetail.PhoneNumber.ValueString()
+		}
+		if !data.ContactDetail.State.IsNull() && !data.ContactDetail.State.IsUnknown() {
+			contact_detailMap["state"] = data.ContactDetail.State.ValueString()
+		}
+		if !data.ContactDetail.StateCode.IsNull() && !data.ContactDetail.StateCode.IsUnknown() {
+			contact_detailMap["state_code"] = data.ContactDetail.StateCode.ValueString()
+		}
+		if !data.ContactDetail.ZipCode.IsNull() && !data.ContactDetail.ZipCode.IsUnknown() {
+			contact_detailMap["zip_code"] = data.ContactDetail.ZipCode.ValueString()
+		}
+		apiResource.Spec["contact_detail"] = contact_detailMap
+	}
+	if data.CustomerInfo != nil {
+		customer_infoMap := make(map[string]interface{})
+		if !data.CustomerInfo.AdditionalInfo.IsNull() && !data.CustomerInfo.AdditionalInfo.IsUnknown() {
+			customer_infoMap["additional_info"] = data.CustomerInfo.AdditionalInfo.ValueString()
+		}
+		if !data.CustomerInfo.Email.IsNull() && !data.CustomerInfo.Email.IsUnknown() {
+			customer_infoMap["email"] = data.CustomerInfo.Email.ValueString()
+		}
+		if !data.CustomerInfo.FirstName.IsNull() && !data.CustomerInfo.FirstName.IsUnknown() {
+			customer_infoMap["first_name"] = data.CustomerInfo.FirstName.ValueString()
+		}
+		if !data.CustomerInfo.LastName.IsNull() && !data.CustomerInfo.LastName.IsUnknown() {
+			customer_infoMap["last_name"] = data.CustomerInfo.LastName.ValueString()
+		}
+		apiResource.Spec["customer_info"] = customer_infoMap
+	}
+	if data.TenantProfile != nil {
+		tenant_profileMap := make(map[string]interface{})
+		if !data.TenantProfile.Name.IsNull() && !data.TenantProfile.Name.IsUnknown() {
+			tenant_profileMap["name"] = data.TenantProfile.Name.ValueString()
+		}
+		if !data.TenantProfile.Namespace.IsNull() && !data.TenantProfile.Namespace.IsUnknown() {
+			tenant_profileMap["namespace"] = data.TenantProfile.Namespace.ValueString()
+		}
+		if !data.TenantProfile.Tenant.IsNull() && !data.TenantProfile.Tenant.IsUnknown() {
+			tenant_profileMap["tenant"] = data.TenantProfile.Tenant.ValueString()
+		}
+		apiResource.Spec["tenant_profile"] = tenant_profileMap
+	}
+	if !data.CompanyName.IsNull() && !data.CompanyName.IsUnknown() {
+		apiResource.Spec["company_name"] = data.CompanyName.ValueString()
+	}
+	if !data.Domain.IsNull() && !data.Domain.IsUnknown() {
+		apiResource.Spec["domain"] = data.Domain.ValueString()
+	}
+
+
 	updated, err := r.client.UpdateChildTenant(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update ChildTenant: %s", err))
@@ -572,6 +927,16 @@ func (r *ChildTenantResource) Update(ctx context.Context, req resource.UpdateReq
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
+	if v, ok := updated.Spec["company_name"].(string); ok && v != "" {
+		data.CompanyName = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["domain"].(string); ok && v != "" {
+		data.Domain = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -584,6 +949,7 @@ func (r *ChildTenantResource) Update(ctx context.Context, req resource.UpdateReq
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -615,25 +981,32 @@ func (r *ChildTenantResource) Delete(ctx context.Context, req resource.DeleteReq
 			})
 			return
 		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "ChildTenant delete not supported by API (501), removing from state only", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete ChildTenant: %s", err))
 		return
 	}
 }
 
 func (r *ChildTenantResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	// Import ID format: namespace/name
-	parts := strings.Split(req.ID, "/")
-	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+	// Import ID format: name (no namespace for this resource type)
+	name := req.ID
+	if name == "" {
 		resp.Diagnostics.AddError(
 			"Invalid Import ID",
-			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+			"Expected import ID to be the resource name, got empty string",
 		)
 		return
 	}
-	namespace := parts[0]
-	name := parts[1]
 
-	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), "")...)
 	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
 	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

@@ -52,8 +52,8 @@ type TrustedCaListResourceModel struct {
 	Description types.String `tfsdk:"description"`
 	Disable types.Bool `tfsdk:"disable"`
 	Labels types.Map `tfsdk:"labels"`
-	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
 	ID types.String `tfsdk:"id"`
+	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
 }
 
@@ -104,12 +104,16 @@ func (r *TrustedCaListResource) Schema(ctx context.Context, req resource.SchemaR
 				Optional: true,
 				ElementType: types.StringType,
 			},
+			"id": schema.StringAttribute{
+				MarkdownDescription: "Unique identifier for the resource.",
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
 			"trusted_ca_url": schema.StringAttribute{
 				MarkdownDescription: "Root CA Certificate. Trusted CA certificates for validating certificates",
 				Optional: true,
-			},
-			"id": schema.StringAttribute{
-				MarkdownDescription: "Unique identifier for the resource.",
 				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
@@ -245,7 +249,7 @@ func (r *TrustedCaListResource) Create(ctx context.Context, req resource.CreateR
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.TrustedCaListSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -270,6 +274,12 @@ func (r *TrustedCaListResource) Create(ctx context.Context, req resource.CreateR
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if !data.TrustedCaURL.IsNull() && !data.TrustedCaURL.IsUnknown() {
+		apiResource.Spec["trusted_ca_url"] = data.TrustedCaURL.ValueString()
+	}
+
+
 	created, err := r.client.CreateTrustedCaList(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create TrustedCaList: %s", err))
@@ -278,8 +288,17 @@ func (r *TrustedCaListResource) Create(ctx context.Context, req resource.CreateR
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+	if v, ok := created.Spec["trusted_ca_url"].(string); ok && v != "" {
+		data.TrustedCaURL = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created TrustedCaList resource")
@@ -358,9 +377,30 @@ func (r *TrustedCaListResource) Read(ctx context.Context, req resource.ReadReque
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if v, ok := apiResource.Spec["trusted_ca_url"].(string); ok && v != "" {
+		data.TrustedCaURL = types.StringValue(v)
+	} else {
+		data.TrustedCaURL = types.StringNull()
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -386,7 +426,7 @@ func (r *TrustedCaListResource) Update(ctx context.Context, req resource.UpdateR
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.TrustedCaListSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -411,6 +451,12 @@ func (r *TrustedCaListResource) Update(ctx context.Context, req resource.UpdateR
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if !data.TrustedCaURL.IsNull() && !data.TrustedCaURL.IsUnknown() {
+		apiResource.Spec["trusted_ca_url"] = data.TrustedCaURL.ValueString()
+	}
+
+
 	updated, err := r.client.UpdateTrustedCaList(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update TrustedCaList: %s", err))
@@ -419,6 +465,12 @@ func (r *TrustedCaListResource) Update(ctx context.Context, req resource.UpdateR
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
+	if v, ok := updated.Spec["trusted_ca_url"].(string); ok && v != "" {
+		data.TrustedCaURL = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -431,6 +483,7 @@ func (r *TrustedCaListResource) Update(ctx context.Context, req resource.UpdateR
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -457,6 +510,15 @@ func (r *TrustedCaListResource) Delete(ctx context.Context, req resource.DeleteR
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "TrustedCaList already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "TrustedCaList delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

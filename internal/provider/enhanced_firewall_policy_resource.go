@@ -163,7 +163,7 @@ type EnhancedFirewallPolicyRuleListRulesLabelMatcherModel struct {
 
 // EnhancedFirewallPolicyRuleListRulesMetadataModel represents metadata block
 type EnhancedFirewallPolicyRuleListRulesMetadataModel struct {
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name types.String `tfsdk:"name"`
 }
 
@@ -496,7 +496,7 @@ func (r *EnhancedFirewallPolicyResource) Schema(ctx context.Context, req resourc
 								"metadata": schema.SingleNestedBlock{
 									MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 									Attributes: map[string]schema.Attribute{
-										"description": schema.StringAttribute{
+										"description_spec": schema.StringAttribute{
 											MarkdownDescription: "Description. Human readable description.",
 											Optional: true,
 										},
@@ -718,7 +718,7 @@ func (r *EnhancedFirewallPolicyResource) Create(ctx context.Context, req resourc
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.EnhancedFirewallPolicySpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -743,6 +743,37 @@ func (r *EnhancedFirewallPolicyResource) Create(ctx context.Context, req resourc
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.AllowAll != nil {
+		allow_allMap := make(map[string]interface{})
+		apiResource.Spec["allow_all"] = allow_allMap
+	}
+	if data.AllowedDestinations != nil {
+		allowed_destinationsMap := make(map[string]interface{})
+		apiResource.Spec["allowed_destinations"] = allowed_destinationsMap
+	}
+	if data.AllowedSources != nil {
+		allowed_sourcesMap := make(map[string]interface{})
+		apiResource.Spec["allowed_sources"] = allowed_sourcesMap
+	}
+	if data.DeniedDestinations != nil {
+		denied_destinationsMap := make(map[string]interface{})
+		apiResource.Spec["denied_destinations"] = denied_destinationsMap
+	}
+	if data.DeniedSources != nil {
+		denied_sourcesMap := make(map[string]interface{})
+		apiResource.Spec["denied_sources"] = denied_sourcesMap
+	}
+	if data.DenyAll != nil {
+		deny_allMap := make(map[string]interface{})
+		apiResource.Spec["deny_all"] = deny_allMap
+	}
+	if data.RuleList != nil {
+		rule_listMap := make(map[string]interface{})
+		apiResource.Spec["rule_list"] = rule_listMap
+	}
+
+
 	created, err := r.client.CreateEnhancedFirewallPolicy(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create EnhancedFirewallPolicy: %s", err))
@@ -751,8 +782,13 @@ func (r *EnhancedFirewallPolicyResource) Create(ctx context.Context, req resourc
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created EnhancedFirewallPolicy resource")
@@ -831,9 +867,60 @@ func (r *EnhancedFirewallPolicyResource) Read(ctx context.Context, req resource.
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if _, ok := apiResource.Spec["allow_all"].(map[string]interface{}); ok && isImport && data.AllowAll == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AllowAll = &EnhancedFirewallPolicyEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["allowed_destinations"].(map[string]interface{}); ok && isImport && data.AllowedDestinations == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AllowedDestinations = &EnhancedFirewallPolicyAllowedDestinationsModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["allowed_sources"].(map[string]interface{}); ok && isImport && data.AllowedSources == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AllowedSources = &EnhancedFirewallPolicyAllowedSourcesModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["denied_destinations"].(map[string]interface{}); ok && isImport && data.DeniedDestinations == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DeniedDestinations = &EnhancedFirewallPolicyDeniedDestinationsModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["denied_sources"].(map[string]interface{}); ok && isImport && data.DeniedSources == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DeniedSources = &EnhancedFirewallPolicyDeniedSourcesModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["deny_all"].(map[string]interface{}); ok && isImport && data.DenyAll == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DenyAll = &EnhancedFirewallPolicyEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["rule_list"].(map[string]interface{}); ok && isImport && data.RuleList == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.RuleList = &EnhancedFirewallPolicyRuleListModel{}
+	}
+	// Normal Read: preserve existing state value
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -859,7 +946,7 @@ func (r *EnhancedFirewallPolicyResource) Update(ctx context.Context, req resourc
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.EnhancedFirewallPolicySpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -884,6 +971,37 @@ func (r *EnhancedFirewallPolicyResource) Update(ctx context.Context, req resourc
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.AllowAll != nil {
+		allow_allMap := make(map[string]interface{})
+		apiResource.Spec["allow_all"] = allow_allMap
+	}
+	if data.AllowedDestinations != nil {
+		allowed_destinationsMap := make(map[string]interface{})
+		apiResource.Spec["allowed_destinations"] = allowed_destinationsMap
+	}
+	if data.AllowedSources != nil {
+		allowed_sourcesMap := make(map[string]interface{})
+		apiResource.Spec["allowed_sources"] = allowed_sourcesMap
+	}
+	if data.DeniedDestinations != nil {
+		denied_destinationsMap := make(map[string]interface{})
+		apiResource.Spec["denied_destinations"] = denied_destinationsMap
+	}
+	if data.DeniedSources != nil {
+		denied_sourcesMap := make(map[string]interface{})
+		apiResource.Spec["denied_sources"] = denied_sourcesMap
+	}
+	if data.DenyAll != nil {
+		deny_allMap := make(map[string]interface{})
+		apiResource.Spec["deny_all"] = deny_allMap
+	}
+	if data.RuleList != nil {
+		rule_listMap := make(map[string]interface{})
+		apiResource.Spec["rule_list"] = rule_listMap
+	}
+
+
 	updated, err := r.client.UpdateEnhancedFirewallPolicy(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update EnhancedFirewallPolicy: %s", err))
@@ -892,6 +1010,8 @@ func (r *EnhancedFirewallPolicyResource) Update(ctx context.Context, req resourc
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -904,6 +1024,7 @@ func (r *EnhancedFirewallPolicyResource) Update(ctx context.Context, req resourc
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -930,6 +1051,15 @@ func (r *EnhancedFirewallPolicyResource) Delete(ctx context.Context, req resourc
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "EnhancedFirewallPolicy already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "EnhancedFirewallPolicy delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

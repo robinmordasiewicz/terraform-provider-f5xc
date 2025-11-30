@@ -10,19 +10,14 @@ import (
 
 // TpmManager represents a F5XC TpmManager
 type TpmManager struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     TpmManagerSpec `json:"spec"`
-}
-
-// TpmManagerSpec defines the specification for TpmManager
-type TpmManagerSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateTpmManager creates a new TpmManager
 func (c *Client) CreateTpmManager(ctx context.Context, resource *TpmManager) (*TpmManager, error) {
 	var result TpmManager
-	path := fmt.Sprintf("/api/config/namespaces/%s/tpm_managers", resource.Metadata.Namespace)
+	path := fmt.Sprintf("/api/tpm/namespaces/%s/tpm_managers", resource.Metadata.Namespace)
 	err := c.Post(ctx, path, resource, &result)
 	return &result, err
 }
@@ -30,7 +25,7 @@ func (c *Client) CreateTpmManager(ctx context.Context, resource *TpmManager) (*T
 // GetTpmManager retrieves a TpmManager
 func (c *Client) GetTpmManager(ctx context.Context, namespace, name string) (*TpmManager, error) {
 	var result TpmManager
-	path := fmt.Sprintf("/api/config/namespaces/%s/tpm_managers/%s", namespace, name)
+	path := fmt.Sprintf("/api/tpm/namespaces/%s/tpm_managers/%s", namespace, name)
 	err := c.Get(ctx, path, &result)
 	return &result, err
 }
@@ -38,13 +33,13 @@ func (c *Client) GetTpmManager(ctx context.Context, namespace, name string) (*Tp
 // UpdateTpmManager updates a TpmManager
 func (c *Client) UpdateTpmManager(ctx context.Context, resource *TpmManager) (*TpmManager, error) {
 	var result TpmManager
-	path := fmt.Sprintf("/api/config/namespaces/%s/tpm_managers/%s", resource.Metadata.Namespace, resource.Metadata.Name)
+	path := fmt.Sprintf("/api/tpm/namespaces/%s/tpm_managers/%s", resource.Metadata.Namespace, resource.Metadata.Name)
 	err := c.Put(ctx, path, resource, &result)
 	return &result, err
 }
 
 // DeleteTpmManager deletes a TpmManager
 func (c *Client) DeleteTpmManager(ctx context.Context, namespace, name string) error {
-	path := fmt.Sprintf("/api/config/namespaces/%s/tpm_managers/%s", namespace, name)
+	path := fmt.Sprintf("/api/tpm/namespaces/%s/tpm_managers/%s", namespace, name)
 	return c.Delete(ctx, path)
 }

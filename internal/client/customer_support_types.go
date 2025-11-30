@@ -10,19 +10,14 @@ import (
 
 // CustomerSupport represents a F5XC CustomerSupport
 type CustomerSupport struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     CustomerSupportSpec `json:"spec"`
-}
-
-// CustomerSupportSpec defines the specification for CustomerSupport
-type CustomerSupportSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateCustomerSupport creates a new CustomerSupport
 func (c *Client) CreateCustomerSupport(ctx context.Context, resource *CustomerSupport) (*CustomerSupport, error) {
 	var result CustomerSupport
-	path := fmt.Sprintf("/api/config/namespaces/%s/customer_supports", resource.Metadata.Namespace)
+	path := fmt.Sprintf("/api/web/namespaces/%s/customer_supports", resource.Metadata.Namespace)
 	err := c.Post(ctx, path, resource, &result)
 	return &result, err
 }
@@ -30,7 +25,7 @@ func (c *Client) CreateCustomerSupport(ctx context.Context, resource *CustomerSu
 // GetCustomerSupport retrieves a CustomerSupport
 func (c *Client) GetCustomerSupport(ctx context.Context, namespace, name string) (*CustomerSupport, error) {
 	var result CustomerSupport
-	path := fmt.Sprintf("/api/config/namespaces/%s/customer_supports/%s", namespace, name)
+	path := fmt.Sprintf("/api/web/namespaces/%s/customer_supports/%s", namespace, name)
 	err := c.Get(ctx, path, &result)
 	return &result, err
 }
@@ -38,13 +33,13 @@ func (c *Client) GetCustomerSupport(ctx context.Context, namespace, name string)
 // UpdateCustomerSupport updates a CustomerSupport
 func (c *Client) UpdateCustomerSupport(ctx context.Context, resource *CustomerSupport) (*CustomerSupport, error) {
 	var result CustomerSupport
-	path := fmt.Sprintf("/api/config/namespaces/%s/customer_supports/%s", resource.Metadata.Namespace, resource.Metadata.Name)
+	path := fmt.Sprintf("/api/web/namespaces/%s/customer_supports/%s", resource.Metadata.Namespace, resource.Metadata.Name)
 	err := c.Put(ctx, path, resource, &result)
 	return &result, err
 }
 
 // DeleteCustomerSupport deletes a CustomerSupport
 func (c *Client) DeleteCustomerSupport(ctx context.Context, namespace, name string) error {
-	path := fmt.Sprintf("/api/config/namespaces/%s/customer_supports/%s", namespace, name)
+	path := fmt.Sprintf("/api/web/namespaces/%s/customer_supports/%s", namespace, name)
 	return c.Delete(ctx, path)
 }

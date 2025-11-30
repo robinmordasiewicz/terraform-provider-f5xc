@@ -10,19 +10,14 @@ import (
 
 // InfraprotectInternetPrefixAdvertisement represents a F5XC InfraprotectInternetPrefixAdvertisement
 type InfraprotectInternetPrefixAdvertisement struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     InfraprotectInternetPrefixAdvertisementSpec `json:"spec"`
-}
-
-// InfraprotectInternetPrefixAdvertisementSpec defines the specification for InfraprotectInternetPrefixAdvertisement
-type InfraprotectInternetPrefixAdvertisementSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateInfraprotectInternetPrefixAdvertisement creates a new InfraprotectInternetPrefixAdvertisement
 func (c *Client) CreateInfraprotectInternetPrefixAdvertisement(ctx context.Context, resource *InfraprotectInternetPrefixAdvertisement) (*InfraprotectInternetPrefixAdvertisement, error) {
 	var result InfraprotectInternetPrefixAdvertisement
-	path := fmt.Sprintf("/api/config/namespaces/%s/infraprotect_internet_prefix_advertisements", resource.Metadata.Namespace)
+	path := fmt.Sprintf("/api/infraprotect/namespaces/%s/infraprotect_internet_prefix_advertisements", resource.Metadata.Namespace)
 	err := c.Post(ctx, path, resource, &result)
 	return &result, err
 }
@@ -30,7 +25,7 @@ func (c *Client) CreateInfraprotectInternetPrefixAdvertisement(ctx context.Conte
 // GetInfraprotectInternetPrefixAdvertisement retrieves a InfraprotectInternetPrefixAdvertisement
 func (c *Client) GetInfraprotectInternetPrefixAdvertisement(ctx context.Context, namespace, name string) (*InfraprotectInternetPrefixAdvertisement, error) {
 	var result InfraprotectInternetPrefixAdvertisement
-	path := fmt.Sprintf("/api/config/namespaces/%s/infraprotect_internet_prefix_advertisements/%s", namespace, name)
+	path := fmt.Sprintf("/api/infraprotect/namespaces/%s/infraprotect_internet_prefix_advertisements/%s", namespace, name)
 	err := c.Get(ctx, path, &result)
 	return &result, err
 }
@@ -38,13 +33,13 @@ func (c *Client) GetInfraprotectInternetPrefixAdvertisement(ctx context.Context,
 // UpdateInfraprotectInternetPrefixAdvertisement updates a InfraprotectInternetPrefixAdvertisement
 func (c *Client) UpdateInfraprotectInternetPrefixAdvertisement(ctx context.Context, resource *InfraprotectInternetPrefixAdvertisement) (*InfraprotectInternetPrefixAdvertisement, error) {
 	var result InfraprotectInternetPrefixAdvertisement
-	path := fmt.Sprintf("/api/config/namespaces/%s/infraprotect_internet_prefix_advertisements/%s", resource.Metadata.Namespace, resource.Metadata.Name)
+	path := fmt.Sprintf("/api/infraprotect/namespaces/%s/infraprotect_internet_prefix_advertisements/%s", resource.Metadata.Namespace, resource.Metadata.Name)
 	err := c.Put(ctx, path, resource, &result)
 	return &result, err
 }
 
 // DeleteInfraprotectInternetPrefixAdvertisement deletes a InfraprotectInternetPrefixAdvertisement
 func (c *Client) DeleteInfraprotectInternetPrefixAdvertisement(ctx context.Context, namespace, name string) error {
-	path := fmt.Sprintf("/api/config/namespaces/%s/infraprotect_internet_prefix_advertisements/%s", namespace, name)
+	path := fmt.Sprintf("/api/infraprotect/namespaces/%s/infraprotect_internet_prefix_advertisements/%s", namespace, name)
 	return c.Delete(ctx, path)
 }

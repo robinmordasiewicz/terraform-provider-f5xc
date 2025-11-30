@@ -10,13 +10,8 @@ import (
 
 // SecuremeshSite represents a F5XC SecuremeshSite
 type SecuremeshSite struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     SecuremeshSiteSpec `json:"spec"`
-}
-
-// SecuremeshSiteSpec defines the specification for SecuremeshSite
-type SecuremeshSiteSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateSecuremeshSite creates a new SecuremeshSite

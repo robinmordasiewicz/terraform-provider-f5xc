@@ -153,8 +153,8 @@ type DNSLoadBalancerResourceModel struct {
 	Description types.String `tfsdk:"description"`
 	Disable types.Bool `tfsdk:"disable"`
 	Labels types.Map `tfsdk:"labels"`
-	RecordType types.String `tfsdk:"record_type"`
 	ID types.String `tfsdk:"id"`
+	RecordType types.String `tfsdk:"record_type"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
 	FallbackPool *DNSLoadBalancerFallbackPoolModel `tfsdk:"fallback_pool"`
 	ResponseCache *DNSLoadBalancerResponseCacheModel `tfsdk:"response_cache"`
@@ -208,12 +208,16 @@ func (r *DNSLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 				Optional: true,
 				ElementType: types.StringType,
 			},
+			"id": schema.StringAttribute{
+				MarkdownDescription: "Unique identifier for the resource.",
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
 			"record_type": schema.StringAttribute{
 				MarkdownDescription: "Resource Record Type. Resource Record Type - A: A - AAAA: AAAA - MX: MX - CNAME: CNAME - SRV: SRV. Possible values are `A`, `AAAA`, `MX`, `CNAME`, `SRV`. Defaults to `A`.",
 				Optional: true,
-			},
-			"id": schema.StringAttribute{
-				MarkdownDescription: "Unique identifier for the resource.",
 				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
@@ -297,7 +301,7 @@ func (r *DNSLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 										"as_numbers": schema.ListAttribute{
 											MarkdownDescription: "AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
 											Optional: true,
-											ElementType: types.StringType,
+											ElementType: types.Int64Type,
 										},
 									},
 								},
@@ -559,7 +563,7 @@ func (r *DNSLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.DNSLoadBalancerSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -584,6 +588,52 @@ func (r *DNSLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.FallbackPool != nil {
+		fallback_poolMap := make(map[string]interface{})
+		if !data.FallbackPool.Name.IsNull() && !data.FallbackPool.Name.IsUnknown() {
+			fallback_poolMap["name"] = data.FallbackPool.Name.ValueString()
+		}
+		if !data.FallbackPool.Namespace.IsNull() && !data.FallbackPool.Namespace.IsUnknown() {
+			fallback_poolMap["namespace"] = data.FallbackPool.Namespace.ValueString()
+		}
+		if !data.FallbackPool.Tenant.IsNull() && !data.FallbackPool.Tenant.IsUnknown() {
+			fallback_poolMap["tenant"] = data.FallbackPool.Tenant.ValueString()
+		}
+		apiResource.Spec["fallback_pool"] = fallback_poolMap
+	}
+	if data.ResponseCache != nil {
+		response_cacheMap := make(map[string]interface{})
+		if data.ResponseCache.DefaultResponseCacheParameters != nil {
+			response_cacheMap["default_response_cache_parameters"] = map[string]interface{}{}
+		}
+		if data.ResponseCache.Disable != nil {
+			response_cacheMap["disable"] = map[string]interface{}{}
+		}
+		if data.ResponseCache.ResponseCacheParameters != nil {
+			response_cache_parametersNestedMap := make(map[string]interface{})
+			if !data.ResponseCache.ResponseCacheParameters.CacheCidrIPV4.IsNull() && !data.ResponseCache.ResponseCacheParameters.CacheCidrIPV4.IsUnknown() {
+				response_cache_parametersNestedMap["cache_cidr_ipv4"] = data.ResponseCache.ResponseCacheParameters.CacheCidrIPV4.ValueInt64()
+			}
+			if !data.ResponseCache.ResponseCacheParameters.CacheCidrIPV6.IsNull() && !data.ResponseCache.ResponseCacheParameters.CacheCidrIPV6.IsUnknown() {
+				response_cache_parametersNestedMap["cache_cidr_ipv6"] = data.ResponseCache.ResponseCacheParameters.CacheCidrIPV6.ValueInt64()
+			}
+			if !data.ResponseCache.ResponseCacheParameters.CacheTtl.IsNull() && !data.ResponseCache.ResponseCacheParameters.CacheTtl.IsUnknown() {
+				response_cache_parametersNestedMap["cache_ttl"] = data.ResponseCache.ResponseCacheParameters.CacheTtl.ValueInt64()
+			}
+			response_cacheMap["response_cache_parameters"] = response_cache_parametersNestedMap
+		}
+		apiResource.Spec["response_cache"] = response_cacheMap
+	}
+	if data.RuleList != nil {
+		rule_listMap := make(map[string]interface{})
+		apiResource.Spec["rule_list"] = rule_listMap
+	}
+	if !data.RecordType.IsNull() && !data.RecordType.IsUnknown() {
+		apiResource.Spec["record_type"] = data.RecordType.ValueString()
+	}
+
+
 	created, err := r.client.CreateDNSLoadBalancer(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create DNSLoadBalancer: %s", err))
@@ -592,8 +642,17 @@ func (r *DNSLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+	if v, ok := created.Spec["record_type"].(string); ok && v != "" {
+		data.RecordType = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created DNSLoadBalancer resource")
@@ -672,9 +731,62 @@ func (r *DNSLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if blockData, ok := apiResource.Spec["fallback_pool"].(map[string]interface{}); ok && (isImport || data.FallbackPool != nil) {
+		data.FallbackPool = &DNSLoadBalancerFallbackPoolModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["response_cache"].(map[string]interface{}); ok && isImport && data.ResponseCache == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ResponseCache = &DNSLoadBalancerResponseCacheModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["rule_list"].(map[string]interface{}); ok && isImport && data.RuleList == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.RuleList = &DNSLoadBalancerRuleListModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["record_type"].(string); ok && v != "" {
+		data.RecordType = types.StringValue(v)
+	} else {
+		data.RecordType = types.StringNull()
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -700,7 +812,7 @@ func (r *DNSLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.DNSLoadBalancerSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -725,6 +837,52 @@ func (r *DNSLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.FallbackPool != nil {
+		fallback_poolMap := make(map[string]interface{})
+		if !data.FallbackPool.Name.IsNull() && !data.FallbackPool.Name.IsUnknown() {
+			fallback_poolMap["name"] = data.FallbackPool.Name.ValueString()
+		}
+		if !data.FallbackPool.Namespace.IsNull() && !data.FallbackPool.Namespace.IsUnknown() {
+			fallback_poolMap["namespace"] = data.FallbackPool.Namespace.ValueString()
+		}
+		if !data.FallbackPool.Tenant.IsNull() && !data.FallbackPool.Tenant.IsUnknown() {
+			fallback_poolMap["tenant"] = data.FallbackPool.Tenant.ValueString()
+		}
+		apiResource.Spec["fallback_pool"] = fallback_poolMap
+	}
+	if data.ResponseCache != nil {
+		response_cacheMap := make(map[string]interface{})
+		if data.ResponseCache.DefaultResponseCacheParameters != nil {
+			response_cacheMap["default_response_cache_parameters"] = map[string]interface{}{}
+		}
+		if data.ResponseCache.Disable != nil {
+			response_cacheMap["disable"] = map[string]interface{}{}
+		}
+		if data.ResponseCache.ResponseCacheParameters != nil {
+			response_cache_parametersNestedMap := make(map[string]interface{})
+			if !data.ResponseCache.ResponseCacheParameters.CacheCidrIPV4.IsNull() && !data.ResponseCache.ResponseCacheParameters.CacheCidrIPV4.IsUnknown() {
+				response_cache_parametersNestedMap["cache_cidr_ipv4"] = data.ResponseCache.ResponseCacheParameters.CacheCidrIPV4.ValueInt64()
+			}
+			if !data.ResponseCache.ResponseCacheParameters.CacheCidrIPV6.IsNull() && !data.ResponseCache.ResponseCacheParameters.CacheCidrIPV6.IsUnknown() {
+				response_cache_parametersNestedMap["cache_cidr_ipv6"] = data.ResponseCache.ResponseCacheParameters.CacheCidrIPV6.ValueInt64()
+			}
+			if !data.ResponseCache.ResponseCacheParameters.CacheTtl.IsNull() && !data.ResponseCache.ResponseCacheParameters.CacheTtl.IsUnknown() {
+				response_cache_parametersNestedMap["cache_ttl"] = data.ResponseCache.ResponseCacheParameters.CacheTtl.ValueInt64()
+			}
+			response_cacheMap["response_cache_parameters"] = response_cache_parametersNestedMap
+		}
+		apiResource.Spec["response_cache"] = response_cacheMap
+	}
+	if data.RuleList != nil {
+		rule_listMap := make(map[string]interface{})
+		apiResource.Spec["rule_list"] = rule_listMap
+	}
+	if !data.RecordType.IsNull() && !data.RecordType.IsUnknown() {
+		apiResource.Spec["record_type"] = data.RecordType.ValueString()
+	}
+
+
 	updated, err := r.client.UpdateDNSLoadBalancer(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update DNSLoadBalancer: %s", err))
@@ -733,6 +891,12 @@ func (r *DNSLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
+	if v, ok := updated.Spec["record_type"].(string); ok && v != "" {
+		data.RecordType = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -745,6 +909,7 @@ func (r *DNSLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -771,6 +936,15 @@ func (r *DNSLoadBalancerResource) Delete(ctx context.Context, req resource.Delet
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "DNSLoadBalancer already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "DNSLoadBalancer delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

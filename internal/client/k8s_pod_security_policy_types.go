@@ -10,13 +10,8 @@ import (
 
 // K8SPodSecurityPolicy represents a F5XC K8SPodSecurityPolicy
 type K8SPodSecurityPolicy struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     K8SPodSecurityPolicySpec `json:"spec"`
-}
-
-// K8SPodSecurityPolicySpec defines the specification for K8SPodSecurityPolicy
-type K8SPodSecurityPolicySpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateK8SPodSecurityPolicy creates a new K8SPodSecurityPolicy

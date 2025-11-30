@@ -10,13 +10,8 @@ import (
 
 // AdvertisePolicy represents a F5XC AdvertisePolicy
 type AdvertisePolicy struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     AdvertisePolicySpec `json:"spec"`
-}
-
-// AdvertisePolicySpec defines the specification for AdvertisePolicy
-type AdvertisePolicySpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateAdvertisePolicy creates a new AdvertisePolicy

@@ -10,19 +10,14 @@ import (
 
 // Quota represents a F5XC Quota
 type Quota struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     QuotaSpec `json:"spec"`
-}
-
-// QuotaSpec defines the specification for Quota
-type QuotaSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateQuota creates a new Quota
 func (c *Client) CreateQuota(ctx context.Context, resource *Quota) (*Quota, error) {
 	var result Quota
-	path := fmt.Sprintf("/api/config/namespaces/%s/quotas", resource.Metadata.Namespace)
+	path := fmt.Sprintf("/api/web/namespaces/%s/quotas", resource.Metadata.Namespace)
 	err := c.Post(ctx, path, resource, &result)
 	return &result, err
 }
@@ -30,7 +25,7 @@ func (c *Client) CreateQuota(ctx context.Context, resource *Quota) (*Quota, erro
 // GetQuota retrieves a Quota
 func (c *Client) GetQuota(ctx context.Context, namespace, name string) (*Quota, error) {
 	var result Quota
-	path := fmt.Sprintf("/api/config/namespaces/%s/quotas/%s", namespace, name)
+	path := fmt.Sprintf("/api/web/namespaces/%s/quotas/%s", namespace, name)
 	err := c.Get(ctx, path, &result)
 	return &result, err
 }
@@ -38,13 +33,13 @@ func (c *Client) GetQuota(ctx context.Context, namespace, name string) (*Quota, 
 // UpdateQuota updates a Quota
 func (c *Client) UpdateQuota(ctx context.Context, resource *Quota) (*Quota, error) {
 	var result Quota
-	path := fmt.Sprintf("/api/config/namespaces/%s/quotas/%s", resource.Metadata.Namespace, resource.Metadata.Name)
+	path := fmt.Sprintf("/api/web/namespaces/%s/quotas/%s", resource.Metadata.Namespace, resource.Metadata.Name)
 	err := c.Put(ctx, path, resource, &result)
 	return &result, err
 }
 
 // DeleteQuota deletes a Quota
 func (c *Client) DeleteQuota(ctx context.Context, namespace, name string) error {
-	path := fmt.Sprintf("/api/config/namespaces/%s/quotas/%s", namespace, name)
+	path := fmt.Sprintf("/api/web/namespaces/%s/quotas/%s", namespace, name)
 	return c.Delete(ctx, path)
 }

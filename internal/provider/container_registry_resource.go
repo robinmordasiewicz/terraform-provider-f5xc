@@ -74,11 +74,11 @@ type ContainerRegistryResourceModel struct {
 	Annotations types.Map `tfsdk:"annotations"`
 	Description types.String `tfsdk:"description"`
 	Disable types.Bool `tfsdk:"disable"`
-	Email types.String `tfsdk:"email"`
 	Labels types.Map `tfsdk:"labels"`
+	ID types.String `tfsdk:"id"`
+	Email types.String `tfsdk:"email"`
 	Registry types.String `tfsdk:"registry"`
 	UserName types.String `tfsdk:"user_name"`
-	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
 	Password *ContainerRegistryPasswordModel `tfsdk:"password"`
 }
@@ -125,25 +125,37 @@ func (r *ContainerRegistryResource) Schema(ctx context.Context, req resource.Sch
 				MarkdownDescription: "A value of true will administratively disable the object.",
 				Optional: true,
 			},
-			"email": schema.StringAttribute{
-				MarkdownDescription: "Email. Email used for the registry",
-				Optional: true,
-			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
+			"id": schema.StringAttribute{
+				MarkdownDescription: "Unique identifier for the resource.",
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"email": schema.StringAttribute{
+				MarkdownDescription: "Email. Email used for the registry",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
 			"registry": schema.StringAttribute{
 				MarkdownDescription: "Server FQDN. Fully qualified name of the registry login server",
 				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
 			},
 			"user_name": schema.StringAttribute{
 				MarkdownDescription: "User Name. Username used to access the registry",
 				Optional: true,
-			},
-			"id": schema.StringAttribute{
-				MarkdownDescription: "Unique identifier for the resource.",
 				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
@@ -317,7 +329,7 @@ func (r *ContainerRegistryResource) Create(ctx context.Context, req resource.Cre
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.ContainerRegistrySpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -342,6 +354,45 @@ func (r *ContainerRegistryResource) Create(ctx context.Context, req resource.Cre
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.Password != nil {
+		passwordMap := make(map[string]interface{})
+		if data.Password.BlindfoldSecretInfo != nil {
+			blindfold_secret_infoNestedMap := make(map[string]interface{})
+			if !data.Password.BlindfoldSecretInfo.DecryptionProvider.IsNull() && !data.Password.BlindfoldSecretInfo.DecryptionProvider.IsUnknown() {
+				blindfold_secret_infoNestedMap["decryption_provider"] = data.Password.BlindfoldSecretInfo.DecryptionProvider.ValueString()
+			}
+			if !data.Password.BlindfoldSecretInfo.Location.IsNull() && !data.Password.BlindfoldSecretInfo.Location.IsUnknown() {
+				blindfold_secret_infoNestedMap["location"] = data.Password.BlindfoldSecretInfo.Location.ValueString()
+			}
+			if !data.Password.BlindfoldSecretInfo.StoreProvider.IsNull() && !data.Password.BlindfoldSecretInfo.StoreProvider.IsUnknown() {
+				blindfold_secret_infoNestedMap["store_provider"] = data.Password.BlindfoldSecretInfo.StoreProvider.ValueString()
+			}
+			passwordMap["blindfold_secret_info"] = blindfold_secret_infoNestedMap
+		}
+		if data.Password.ClearSecretInfo != nil {
+			clear_secret_infoNestedMap := make(map[string]interface{})
+			if !data.Password.ClearSecretInfo.Provider.IsNull() && !data.Password.ClearSecretInfo.Provider.IsUnknown() {
+				clear_secret_infoNestedMap["provider"] = data.Password.ClearSecretInfo.Provider.ValueString()
+			}
+			if !data.Password.ClearSecretInfo.URL.IsNull() && !data.Password.ClearSecretInfo.URL.IsUnknown() {
+				clear_secret_infoNestedMap["url"] = data.Password.ClearSecretInfo.URL.ValueString()
+			}
+			passwordMap["clear_secret_info"] = clear_secret_infoNestedMap
+		}
+		apiResource.Spec["password"] = passwordMap
+	}
+	if !data.Email.IsNull() && !data.Email.IsUnknown() {
+		apiResource.Spec["email"] = data.Email.ValueString()
+	}
+	if !data.Registry.IsNull() && !data.Registry.IsUnknown() {
+		apiResource.Spec["registry"] = data.Registry.ValueString()
+	}
+	if !data.UserName.IsNull() && !data.UserName.IsUnknown() {
+		apiResource.Spec["user_name"] = data.UserName.ValueString()
+	}
+
+
 	created, err := r.client.CreateContainerRegistry(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create ContainerRegistry: %s", err))
@@ -350,8 +401,25 @@ func (r *ContainerRegistryResource) Create(ctx context.Context, req resource.Cre
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+	if v, ok := created.Spec["email"].(string); ok && v != "" {
+		data.Email = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["registry"].(string); ok && v != "" {
+		data.Registry = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["user_name"].(string); ok && v != "" {
+		data.UserName = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created ContainerRegistry resource")
@@ -430,9 +498,45 @@ func (r *ContainerRegistryResource) Read(ctx context.Context, req resource.ReadR
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if _, ok := apiResource.Spec["password"].(map[string]interface{}); ok && isImport && data.Password == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Password = &ContainerRegistryPasswordModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["email"].(string); ok && v != "" {
+		data.Email = types.StringValue(v)
+	} else {
+		data.Email = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["registry"].(string); ok && v != "" {
+		data.Registry = types.StringValue(v)
+	} else {
+		data.Registry = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["user_name"].(string); ok && v != "" {
+		data.UserName = types.StringValue(v)
+	} else {
+		data.UserName = types.StringNull()
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -458,7 +562,7 @@ func (r *ContainerRegistryResource) Update(ctx context.Context, req resource.Upd
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.ContainerRegistrySpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -483,6 +587,45 @@ func (r *ContainerRegistryResource) Update(ctx context.Context, req resource.Upd
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.Password != nil {
+		passwordMap := make(map[string]interface{})
+		if data.Password.BlindfoldSecretInfo != nil {
+			blindfold_secret_infoNestedMap := make(map[string]interface{})
+			if !data.Password.BlindfoldSecretInfo.DecryptionProvider.IsNull() && !data.Password.BlindfoldSecretInfo.DecryptionProvider.IsUnknown() {
+				blindfold_secret_infoNestedMap["decryption_provider"] = data.Password.BlindfoldSecretInfo.DecryptionProvider.ValueString()
+			}
+			if !data.Password.BlindfoldSecretInfo.Location.IsNull() && !data.Password.BlindfoldSecretInfo.Location.IsUnknown() {
+				blindfold_secret_infoNestedMap["location"] = data.Password.BlindfoldSecretInfo.Location.ValueString()
+			}
+			if !data.Password.BlindfoldSecretInfo.StoreProvider.IsNull() && !data.Password.BlindfoldSecretInfo.StoreProvider.IsUnknown() {
+				blindfold_secret_infoNestedMap["store_provider"] = data.Password.BlindfoldSecretInfo.StoreProvider.ValueString()
+			}
+			passwordMap["blindfold_secret_info"] = blindfold_secret_infoNestedMap
+		}
+		if data.Password.ClearSecretInfo != nil {
+			clear_secret_infoNestedMap := make(map[string]interface{})
+			if !data.Password.ClearSecretInfo.Provider.IsNull() && !data.Password.ClearSecretInfo.Provider.IsUnknown() {
+				clear_secret_infoNestedMap["provider"] = data.Password.ClearSecretInfo.Provider.ValueString()
+			}
+			if !data.Password.ClearSecretInfo.URL.IsNull() && !data.Password.ClearSecretInfo.URL.IsUnknown() {
+				clear_secret_infoNestedMap["url"] = data.Password.ClearSecretInfo.URL.ValueString()
+			}
+			passwordMap["clear_secret_info"] = clear_secret_infoNestedMap
+		}
+		apiResource.Spec["password"] = passwordMap
+	}
+	if !data.Email.IsNull() && !data.Email.IsUnknown() {
+		apiResource.Spec["email"] = data.Email.ValueString()
+	}
+	if !data.Registry.IsNull() && !data.Registry.IsUnknown() {
+		apiResource.Spec["registry"] = data.Registry.ValueString()
+	}
+	if !data.UserName.IsNull() && !data.UserName.IsUnknown() {
+		apiResource.Spec["user_name"] = data.UserName.ValueString()
+	}
+
+
 	updated, err := r.client.UpdateContainerRegistry(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update ContainerRegistry: %s", err))
@@ -491,6 +634,20 @@ func (r *ContainerRegistryResource) Update(ctx context.Context, req resource.Upd
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
+	if v, ok := updated.Spec["email"].(string); ok && v != "" {
+		data.Email = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["registry"].(string); ok && v != "" {
+		data.Registry = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["user_name"].(string); ok && v != "" {
+		data.UserName = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -503,6 +660,7 @@ func (r *ContainerRegistryResource) Update(ctx context.Context, req resource.Upd
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -529,6 +687,15 @@ func (r *ContainerRegistryResource) Delete(ctx context.Context, req resource.Del
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "ContainerRegistry already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "ContainerRegistry delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

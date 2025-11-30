@@ -10,13 +10,8 @@ import (
 
 // APIDefinition represents a F5XC APIDefinition
 type APIDefinition struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     APIDefinitionSpec `json:"spec"`
-}
-
-// APIDefinitionSpec defines the specification for APIDefinition
-type APIDefinitionSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateAPIDefinition creates a new APIDefinition

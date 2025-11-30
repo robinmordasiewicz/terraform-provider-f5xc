@@ -10,13 +10,8 @@ import (
 
 // DataGroup represents a F5XC DataGroup
 type DataGroup struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     DataGroupSpec `json:"spec"`
-}
-
-// DataGroupSpec defines the specification for DataGroup
-type DataGroupSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateDataGroup creates a new DataGroup

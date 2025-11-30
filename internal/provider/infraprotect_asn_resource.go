@@ -12,6 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -53,11 +54,11 @@ type InfraprotectAsnResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Annotations types.Map `tfsdk:"annotations"`
-	Asn types.Int64 `tfsdk:"asn"`
 	Description types.String `tfsdk:"description"`
 	Disable types.Bool `tfsdk:"disable"`
 	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
+	Asn types.Int64 `tfsdk:"asn"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
 	BGPSessionDisabled *InfraprotectAsnEmptyModel `tfsdk:"bgp_session_disabled"`
 	BGPSessionEnabled *InfraprotectAsnEmptyModel `tfsdk:"bgp_session_enabled"`
@@ -97,10 +98,6 @@ func (r *InfraprotectAsnResource) Schema(ctx context.Context, req resource.Schem
 				Optional: true,
 				ElementType: types.StringType,
 			},
-			"asn": schema.Int64Attribute{
-				MarkdownDescription: "ASN. 2-byte or 4-byte Autonomous System Number (ASN)",
-				Optional: true,
-			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
 				Optional: true,
@@ -119,6 +116,14 @@ func (r *InfraprotectAsnResource) Schema(ctx context.Context, req resource.Schem
 				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"asn": schema.Int64Attribute{
+				MarkdownDescription: "ASN. 2-byte or 4-byte Autonomous System Number (ASN)",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.Int64{
+					int64planmodifier.UseStateForUnknown(),
 				},
 			},
 		},
@@ -257,7 +262,7 @@ func (r *InfraprotectAsnResource) Create(ctx context.Context, req resource.Creat
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.InfraprotectAsnSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -282,6 +287,20 @@ func (r *InfraprotectAsnResource) Create(ctx context.Context, req resource.Creat
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.BGPSessionDisabled != nil {
+		bgp_session_disabledMap := make(map[string]interface{})
+		apiResource.Spec["bgp_session_disabled"] = bgp_session_disabledMap
+	}
+	if data.BGPSessionEnabled != nil {
+		bgp_session_enabledMap := make(map[string]interface{})
+		apiResource.Spec["bgp_session_enabled"] = bgp_session_enabledMap
+	}
+	if !data.Asn.IsNull() && !data.Asn.IsUnknown() {
+		apiResource.Spec["asn"] = data.Asn.ValueInt64()
+	}
+
+
 	created, err := r.client.CreateInfraprotectAsn(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create InfraprotectAsn: %s", err))
@@ -290,8 +309,17 @@ func (r *InfraprotectAsnResource) Create(ctx context.Context, req resource.Creat
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+	if v, ok := created.Spec["asn"].(float64); ok {
+		data.Asn = types.Int64Value(int64(v))
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created InfraprotectAsn resource")
@@ -370,9 +398,40 @@ func (r *InfraprotectAsnResource) Read(ctx context.Context, req resource.ReadReq
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if _, ok := apiResource.Spec["bgp_session_disabled"].(map[string]interface{}); ok && isImport && data.BGPSessionDisabled == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.BGPSessionDisabled = &InfraprotectAsnEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["bgp_session_enabled"].(map[string]interface{}); ok && isImport && data.BGPSessionEnabled == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.BGPSessionEnabled = &InfraprotectAsnEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["asn"].(float64); ok {
+		data.Asn = types.Int64Value(int64(v))
+	} else {
+		data.Asn = types.Int64Null()
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -398,7 +457,7 @@ func (r *InfraprotectAsnResource) Update(ctx context.Context, req resource.Updat
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.InfraprotectAsnSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -423,6 +482,20 @@ func (r *InfraprotectAsnResource) Update(ctx context.Context, req resource.Updat
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.BGPSessionDisabled != nil {
+		bgp_session_disabledMap := make(map[string]interface{})
+		apiResource.Spec["bgp_session_disabled"] = bgp_session_disabledMap
+	}
+	if data.BGPSessionEnabled != nil {
+		bgp_session_enabledMap := make(map[string]interface{})
+		apiResource.Spec["bgp_session_enabled"] = bgp_session_enabledMap
+	}
+	if !data.Asn.IsNull() && !data.Asn.IsUnknown() {
+		apiResource.Spec["asn"] = data.Asn.ValueInt64()
+	}
+
+
 	updated, err := r.client.UpdateInfraprotectAsn(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update InfraprotectAsn: %s", err))
@@ -431,6 +504,12 @@ func (r *InfraprotectAsnResource) Update(ctx context.Context, req resource.Updat
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
+	if v, ok := updated.Spec["asn"].(float64); ok {
+		data.Asn = types.Int64Value(int64(v))
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -443,6 +522,7 @@ func (r *InfraprotectAsnResource) Update(ctx context.Context, req resource.Updat
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -469,6 +549,15 @@ func (r *InfraprotectAsnResource) Delete(ctx context.Context, req resource.Delet
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "InfraprotectAsn already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "InfraprotectAsn delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

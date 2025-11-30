@@ -10,19 +10,14 @@ import (
 
 // TenantProfile represents a F5XC TenantProfile
 type TenantProfile struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     TenantProfileSpec `json:"spec"`
-}
-
-// TenantProfileSpec defines the specification for TenantProfile
-type TenantProfileSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateTenantProfile creates a new TenantProfile
 func (c *Client) CreateTenantProfile(ctx context.Context, resource *TenantProfile) (*TenantProfile, error) {
 	var result TenantProfile
-	path := fmt.Sprintf("/api/config/namespaces/%s/tenant_profiles", resource.Metadata.Namespace)
+	path := fmt.Sprintf("/api/web/namespaces/%s/tenant_profiles", resource.Metadata.Namespace)
 	err := c.Post(ctx, path, resource, &result)
 	return &result, err
 }
@@ -30,7 +25,7 @@ func (c *Client) CreateTenantProfile(ctx context.Context, resource *TenantProfil
 // GetTenantProfile retrieves a TenantProfile
 func (c *Client) GetTenantProfile(ctx context.Context, namespace, name string) (*TenantProfile, error) {
 	var result TenantProfile
-	path := fmt.Sprintf("/api/config/namespaces/%s/tenant_profiles/%s", namespace, name)
+	path := fmt.Sprintf("/api/web/namespaces/%s/tenant_profiles/%s", namespace, name)
 	err := c.Get(ctx, path, &result)
 	return &result, err
 }
@@ -38,13 +33,13 @@ func (c *Client) GetTenantProfile(ctx context.Context, namespace, name string) (
 // UpdateTenantProfile updates a TenantProfile
 func (c *Client) UpdateTenantProfile(ctx context.Context, resource *TenantProfile) (*TenantProfile, error) {
 	var result TenantProfile
-	path := fmt.Sprintf("/api/config/namespaces/%s/tenant_profiles/%s", resource.Metadata.Namespace, resource.Metadata.Name)
+	path := fmt.Sprintf("/api/web/namespaces/%s/tenant_profiles/%s", resource.Metadata.Namespace, resource.Metadata.Name)
 	err := c.Put(ctx, path, resource, &result)
 	return &result, err
 }
 
 // DeleteTenantProfile deletes a TenantProfile
 func (c *Client) DeleteTenantProfile(ctx context.Context, namespace, name string) error {
-	path := fmt.Sprintf("/api/config/namespaces/%s/tenant_profiles/%s", namespace, name)
+	path := fmt.Sprintf("/api/web/namespaces/%s/tenant_profiles/%s", namespace, name)
 	return c.Delete(ctx, path)
 }

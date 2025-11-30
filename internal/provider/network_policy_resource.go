@@ -129,7 +129,7 @@ type NetworkPolicyRulesEgressRulesLabelSelectorModel struct {
 
 // NetworkPolicyRulesEgressRulesMetadataModel represents metadata block
 type NetworkPolicyRulesEgressRulesMetadataModel struct {
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name types.String `tfsdk:"name"`
 }
 
@@ -199,7 +199,7 @@ type NetworkPolicyRulesIngressRulesLabelSelectorModel struct {
 
 // NetworkPolicyRulesIngressRulesMetadataModel represents metadata block
 type NetworkPolicyRulesIngressRulesMetadataModel struct {
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name types.String `tfsdk:"name"`
 }
 
@@ -432,7 +432,7 @@ func (r *NetworkPolicyResource) Schema(ctx context.Context, req resource.SchemaR
 								"metadata": schema.SingleNestedBlock{
 									MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 									Attributes: map[string]schema.Attribute{
-										"description": schema.StringAttribute{
+										"description_spec": schema.StringAttribute{
 											MarkdownDescription: "Description. Human readable description.",
 											Optional: true,
 										},
@@ -573,7 +573,7 @@ func (r *NetworkPolicyResource) Schema(ctx context.Context, req resource.SchemaR
 								"metadata": schema.SingleNestedBlock{
 									MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 									Attributes: map[string]schema.Attribute{
-										"description": schema.StringAttribute{
+										"description_spec": schema.StringAttribute{
 											MarkdownDescription: "Description. Human readable description.",
 											Optional: true,
 										},
@@ -738,7 +738,7 @@ func (r *NetworkPolicyResource) Create(ctx context.Context, req resource.CreateR
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.NetworkPolicySpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -763,6 +763,34 @@ func (r *NetworkPolicyResource) Create(ctx context.Context, req resource.CreateR
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.Endpoint != nil {
+		endpointMap := make(map[string]interface{})
+		if data.Endpoint.Any != nil {
+			endpointMap["any"] = map[string]interface{}{}
+		}
+		if data.Endpoint.InsideEndpoints != nil {
+			endpointMap["inside_endpoints"] = map[string]interface{}{}
+		}
+		if data.Endpoint.LabelSelector != nil {
+			label_selectorNestedMap := make(map[string]interface{})
+			endpointMap["label_selector"] = label_selectorNestedMap
+		}
+		if data.Endpoint.OutsideEndpoints != nil {
+			endpointMap["outside_endpoints"] = map[string]interface{}{}
+		}
+		if data.Endpoint.PrefixList != nil {
+			prefix_listNestedMap := make(map[string]interface{})
+			endpointMap["prefix_list"] = prefix_listNestedMap
+		}
+		apiResource.Spec["endpoint"] = endpointMap
+	}
+	if data.Rules != nil {
+		rulesMap := make(map[string]interface{})
+		apiResource.Spec["rules"] = rulesMap
+	}
+
+
 	created, err := r.client.CreateNetworkPolicy(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create NetworkPolicy: %s", err))
@@ -771,8 +799,13 @@ func (r *NetworkPolicyResource) Create(ctx context.Context, req resource.CreateR
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created NetworkPolicy resource")
@@ -851,9 +884,35 @@ func (r *NetworkPolicyResource) Read(ctx context.Context, req resource.ReadReque
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if _, ok := apiResource.Spec["endpoint"].(map[string]interface{}); ok && isImport && data.Endpoint == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Endpoint = &NetworkPolicyEndpointModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["rules"].(map[string]interface{}); ok && isImport && data.Rules == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Rules = &NetworkPolicyRulesModel{}
+	}
+	// Normal Read: preserve existing state value
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -879,7 +938,7 @@ func (r *NetworkPolicyResource) Update(ctx context.Context, req resource.UpdateR
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.NetworkPolicySpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -904,6 +963,34 @@ func (r *NetworkPolicyResource) Update(ctx context.Context, req resource.UpdateR
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.Endpoint != nil {
+		endpointMap := make(map[string]interface{})
+		if data.Endpoint.Any != nil {
+			endpointMap["any"] = map[string]interface{}{}
+		}
+		if data.Endpoint.InsideEndpoints != nil {
+			endpointMap["inside_endpoints"] = map[string]interface{}{}
+		}
+		if data.Endpoint.LabelSelector != nil {
+			label_selectorNestedMap := make(map[string]interface{})
+			endpointMap["label_selector"] = label_selectorNestedMap
+		}
+		if data.Endpoint.OutsideEndpoints != nil {
+			endpointMap["outside_endpoints"] = map[string]interface{}{}
+		}
+		if data.Endpoint.PrefixList != nil {
+			prefix_listNestedMap := make(map[string]interface{})
+			endpointMap["prefix_list"] = prefix_listNestedMap
+		}
+		apiResource.Spec["endpoint"] = endpointMap
+	}
+	if data.Rules != nil {
+		rulesMap := make(map[string]interface{})
+		apiResource.Spec["rules"] = rulesMap
+	}
+
+
 	updated, err := r.client.UpdateNetworkPolicy(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update NetworkPolicy: %s", err))
@@ -912,6 +999,8 @@ func (r *NetworkPolicyResource) Update(ctx context.Context, req resource.UpdateR
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -924,6 +1013,7 @@ func (r *NetworkPolicyResource) Update(ctx context.Context, req resource.UpdateR
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -950,6 +1040,15 @@ func (r *NetworkPolicyResource) Delete(ctx context.Context, req resource.DeleteR
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "NetworkPolicy already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "NetworkPolicy delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

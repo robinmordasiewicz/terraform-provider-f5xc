@@ -10,13 +10,8 @@ import (
 
 // Ike2 represents a F5XC Ike2
 type Ike2 struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     Ike2Spec `json:"spec"`
-}
-
-// Ike2Spec defines the specification for Ike2
-type Ike2Spec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateIke2 creates a new Ike2

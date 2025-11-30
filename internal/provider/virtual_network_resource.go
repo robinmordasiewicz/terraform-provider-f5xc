@@ -85,8 +85,8 @@ type VirtualNetworkResourceModel struct {
 	Description types.String `tfsdk:"description"`
 	Disable types.Bool `tfsdk:"disable"`
 	Labels types.Map `tfsdk:"labels"`
-	LegacyType types.String `tfsdk:"legacy_type"`
 	ID types.String `tfsdk:"id"`
+	LegacyType types.String `tfsdk:"legacy_type"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
 	GlobalNetwork *VirtualNetworkEmptyModel `tfsdk:"global_network"`
 	SiteLocalInsideNetwork *VirtualNetworkEmptyModel `tfsdk:"site_local_inside_network"`
@@ -141,12 +141,16 @@ func (r *VirtualNetworkResource) Schema(ctx context.Context, req resource.Schema
 				Optional: true,
 				ElementType: types.StringType,
 			},
+			"id": schema.StringAttribute{
+				MarkdownDescription: "Unique identifier for the resource.",
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
 			"legacy_type": schema.StringAttribute{
 				MarkdownDescription: "Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user. Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`. Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`.",
 				Optional: true,
-			},
-			"id": schema.StringAttribute{
-				MarkdownDescription: "Unique identifier for the resource.",
 				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
@@ -365,7 +369,7 @@ func (r *VirtualNetworkResource) Create(ctx context.Context, req resource.Create
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.VirtualNetworkSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -390,6 +394,42 @@ func (r *VirtualNetworkResource) Create(ctx context.Context, req resource.Create
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.GlobalNetwork != nil {
+		global_networkMap := make(map[string]interface{})
+		apiResource.Spec["global_network"] = global_networkMap
+	}
+	if data.SiteLocalInsideNetwork != nil {
+		site_local_inside_networkMap := make(map[string]interface{})
+		apiResource.Spec["site_local_inside_network"] = site_local_inside_networkMap
+	}
+	if data.SiteLocalNetwork != nil {
+		site_local_networkMap := make(map[string]interface{})
+		apiResource.Spec["site_local_network"] = site_local_networkMap
+	}
+	if len(data.StaticRoutes) > 0 {
+		var static_routesList []map[string]interface{}
+		for _, item := range data.StaticRoutes {
+			itemMap := make(map[string]interface{})
+			if item.DefaultGateway != nil {
+				itemMap["default_gateway"] = map[string]interface{}{}
+			}
+			if !item.IPAddress.IsNull() && !item.IPAddress.IsUnknown() {
+				itemMap["ip_address"] = item.IPAddress.ValueString()
+			}
+			if item.NodeInterface != nil {
+				node_interfaceNestedMap := make(map[string]interface{})
+				itemMap["node_interface"] = node_interfaceNestedMap
+			}
+			static_routesList = append(static_routesList, itemMap)
+		}
+		apiResource.Spec["static_routes"] = static_routesList
+	}
+	if !data.LegacyType.IsNull() && !data.LegacyType.IsUnknown() {
+		apiResource.Spec["legacy_type"] = data.LegacyType.ValueString()
+	}
+
+
 	created, err := r.client.CreateVirtualNetwork(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create VirtualNetwork: %s", err))
@@ -398,8 +438,17 @@ func (r *VirtualNetworkResource) Create(ctx context.Context, req resource.Create
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+	if v, ok := created.Spec["legacy_type"].(string); ok && v != "" {
+		data.LegacyType = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created VirtualNetwork resource")
@@ -478,9 +527,74 @@ func (r *VirtualNetworkResource) Read(ctx context.Context, req resource.ReadRequ
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if _, ok := apiResource.Spec["global_network"].(map[string]interface{}); ok && isImport && data.GlobalNetwork == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.GlobalNetwork = &VirtualNetworkEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["site_local_inside_network"].(map[string]interface{}); ok && isImport && data.SiteLocalInsideNetwork == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.SiteLocalInsideNetwork = &VirtualNetworkEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["site_local_network"].(map[string]interface{}); ok && isImport && data.SiteLocalNetwork == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.SiteLocalNetwork = &VirtualNetworkEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["static_routes"].([]interface{}); ok && len(listData) > 0 {
+		var static_routesList []VirtualNetworkStaticRoutesModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				static_routesList = append(static_routesList, VirtualNetworkStaticRoutesModel{
+					DefaultGateway: func() *VirtualNetworkEmptyModel {
+						if _, ok := itemMap["default_gateway"].(map[string]interface{}); ok {
+							return &VirtualNetworkEmptyModel{}
+						}
+						return nil
+					}(),
+					IPAddress: func() types.String {
+						if v, ok := itemMap["ip_address"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					NodeInterface: func() *VirtualNetworkStaticRoutesNodeInterfaceModel {
+						if _, ok := itemMap["node_interface"].(map[string]interface{}); ok {
+							return &VirtualNetworkStaticRoutesNodeInterfaceModel{
+							}
+						}
+						return nil
+					}(),
+				})
+			}
+		}
+		data.StaticRoutes = static_routesList
+	}
+	if v, ok := apiResource.Spec["legacy_type"].(string); ok && v != "" {
+		data.LegacyType = types.StringValue(v)
+	} else {
+		data.LegacyType = types.StringNull()
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -506,7 +620,7 @@ func (r *VirtualNetworkResource) Update(ctx context.Context, req resource.Update
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.VirtualNetworkSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -531,6 +645,42 @@ func (r *VirtualNetworkResource) Update(ctx context.Context, req resource.Update
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.GlobalNetwork != nil {
+		global_networkMap := make(map[string]interface{})
+		apiResource.Spec["global_network"] = global_networkMap
+	}
+	if data.SiteLocalInsideNetwork != nil {
+		site_local_inside_networkMap := make(map[string]interface{})
+		apiResource.Spec["site_local_inside_network"] = site_local_inside_networkMap
+	}
+	if data.SiteLocalNetwork != nil {
+		site_local_networkMap := make(map[string]interface{})
+		apiResource.Spec["site_local_network"] = site_local_networkMap
+	}
+	if len(data.StaticRoutes) > 0 {
+		var static_routesList []map[string]interface{}
+		for _, item := range data.StaticRoutes {
+			itemMap := make(map[string]interface{})
+			if item.DefaultGateway != nil {
+				itemMap["default_gateway"] = map[string]interface{}{}
+			}
+			if !item.IPAddress.IsNull() && !item.IPAddress.IsUnknown() {
+				itemMap["ip_address"] = item.IPAddress.ValueString()
+			}
+			if item.NodeInterface != nil {
+				node_interfaceNestedMap := make(map[string]interface{})
+				itemMap["node_interface"] = node_interfaceNestedMap
+			}
+			static_routesList = append(static_routesList, itemMap)
+		}
+		apiResource.Spec["static_routes"] = static_routesList
+	}
+	if !data.LegacyType.IsNull() && !data.LegacyType.IsUnknown() {
+		apiResource.Spec["legacy_type"] = data.LegacyType.ValueString()
+	}
+
+
 	updated, err := r.client.UpdateVirtualNetwork(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update VirtualNetwork: %s", err))
@@ -539,6 +689,12 @@ func (r *VirtualNetworkResource) Update(ctx context.Context, req resource.Update
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
+	if v, ok := updated.Spec["legacy_type"].(string); ok && v != "" {
+		data.LegacyType = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -551,6 +707,7 @@ func (r *VirtualNetworkResource) Update(ctx context.Context, req resource.Update
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -577,6 +734,15 @@ func (r *VirtualNetworkResource) Delete(ctx context.Context, req resource.Delete
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "VirtualNetwork already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "VirtualNetwork delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

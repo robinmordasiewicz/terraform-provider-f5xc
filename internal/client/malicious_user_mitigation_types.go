@@ -10,13 +10,8 @@ import (
 
 // MaliciousUserMitigation represents a F5XC MaliciousUserMitigation
 type MaliciousUserMitigation struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     MaliciousUserMitigationSpec `json:"spec"`
-}
-
-// MaliciousUserMitigationSpec defines the specification for MaliciousUserMitigation
-type MaliciousUserMitigationSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateMaliciousUserMitigation creates a new MaliciousUserMitigation

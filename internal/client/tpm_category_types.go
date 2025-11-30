@@ -10,19 +10,14 @@ import (
 
 // TpmCategory represents a F5XC TpmCategory
 type TpmCategory struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     TpmCategorySpec `json:"spec"`
-}
-
-// TpmCategorySpec defines the specification for TpmCategory
-type TpmCategorySpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateTpmCategory creates a new TpmCategory
 func (c *Client) CreateTpmCategory(ctx context.Context, resource *TpmCategory) (*TpmCategory, error) {
 	var result TpmCategory
-	path := fmt.Sprintf("/api/config/namespaces/%s/tpm_categorys", resource.Metadata.Namespace)
+	path := fmt.Sprintf("/api/tpm/namespaces/%s/tpm_categorys", resource.Metadata.Namespace)
 	err := c.Post(ctx, path, resource, &result)
 	return &result, err
 }
@@ -30,7 +25,7 @@ func (c *Client) CreateTpmCategory(ctx context.Context, resource *TpmCategory) (
 // GetTpmCategory retrieves a TpmCategory
 func (c *Client) GetTpmCategory(ctx context.Context, namespace, name string) (*TpmCategory, error) {
 	var result TpmCategory
-	path := fmt.Sprintf("/api/config/namespaces/%s/tpm_categorys/%s", namespace, name)
+	path := fmt.Sprintf("/api/tpm/namespaces/%s/tpm_categorys/%s", namespace, name)
 	err := c.Get(ctx, path, &result)
 	return &result, err
 }
@@ -38,13 +33,13 @@ func (c *Client) GetTpmCategory(ctx context.Context, namespace, name string) (*T
 // UpdateTpmCategory updates a TpmCategory
 func (c *Client) UpdateTpmCategory(ctx context.Context, resource *TpmCategory) (*TpmCategory, error) {
 	var result TpmCategory
-	path := fmt.Sprintf("/api/config/namespaces/%s/tpm_categorys/%s", resource.Metadata.Namespace, resource.Metadata.Name)
+	path := fmt.Sprintf("/api/tpm/namespaces/%s/tpm_categorys/%s", resource.Metadata.Namespace, resource.Metadata.Name)
 	err := c.Put(ctx, path, resource, &result)
 	return &result, err
 }
 
 // DeleteTpmCategory deletes a TpmCategory
 func (c *Client) DeleteTpmCategory(ctx context.Context, namespace, name string) error {
-	path := fmt.Sprintf("/api/config/namespaces/%s/tpm_categorys/%s", namespace, name)
+	path := fmt.Sprintf("/api/tpm/namespaces/%s/tpm_categorys/%s", namespace, name)
 	return c.Delete(ctx, path)
 }

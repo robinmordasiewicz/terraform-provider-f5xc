@@ -293,7 +293,7 @@ type APMHTTPSManagementAdvertiseOnSLIVipModel struct {
 // APMHTTPSManagementAdvertiseOnSLIVipTLSCertificatesModel represents tls_certificates block
 type APMHTTPSManagementAdvertiseOnSLIVipTLSCertificatesModel struct {
 	CertificateURL types.String `tfsdk:"certificate_url"`
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	CustomHashAlgorithms *APMHTTPSManagementAdvertiseOnSLIVipTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
 	DisableOcspStapling *APMEmptyModel `tfsdk:"disable_ocsp_stapling"`
 	PrivateKey *APMHTTPSManagementAdvertiseOnSLIVipTLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
@@ -380,7 +380,7 @@ type APMHTTPSManagementAdvertiseOnSLOInternetVipModel struct {
 // APMHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesModel represents tls_certificates block
 type APMHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesModel struct {
 	CertificateURL types.String `tfsdk:"certificate_url"`
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	CustomHashAlgorithms *APMHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
 	DisableOcspStapling *APMEmptyModel `tfsdk:"disable_ocsp_stapling"`
 	PrivateKey *APMHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
@@ -467,7 +467,7 @@ type APMHTTPSManagementAdvertiseOnSLOSLIModel struct {
 // APMHTTPSManagementAdvertiseOnSLOSLITLSCertificatesModel represents tls_certificates block
 type APMHTTPSManagementAdvertiseOnSLOSLITLSCertificatesModel struct {
 	CertificateURL types.String `tfsdk:"certificate_url"`
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	CustomHashAlgorithms *APMHTTPSManagementAdvertiseOnSLOSLITLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
 	DisableOcspStapling *APMEmptyModel `tfsdk:"disable_ocsp_stapling"`
 	PrivateKey *APMHTTPSManagementAdvertiseOnSLOSLITLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
@@ -554,7 +554,7 @@ type APMHTTPSManagementAdvertiseOnSLOVipModel struct {
 // APMHTTPSManagementAdvertiseOnSLOVipTLSCertificatesModel represents tls_certificates block
 type APMHTTPSManagementAdvertiseOnSLOVipTLSCertificatesModel struct {
 	CertificateURL types.String `tfsdk:"certificate_url"`
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	CustomHashAlgorithms *APMHTTPSManagementAdvertiseOnSLOVipTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
 	DisableOcspStapling *APMEmptyModel `tfsdk:"disable_ocsp_stapling"`
 	PrivateKey *APMHTTPSManagementAdvertiseOnSLOVipTLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
@@ -1193,7 +1193,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 											MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
 											Optional: true,
 										},
-										"description": schema.StringAttribute{
+										"description_spec": schema.StringAttribute{
 											MarkdownDescription: "Description. Description for the certificate",
 											Optional: true,
 										},
@@ -1372,7 +1372,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 											MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
 											Optional: true,
 										},
-										"description": schema.StringAttribute{
+										"description_spec": schema.StringAttribute{
 											MarkdownDescription: "Description. Description for the certificate",
 											Optional: true,
 										},
@@ -1551,7 +1551,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 											MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
 											Optional: true,
 										},
-										"description": schema.StringAttribute{
+										"description_spec": schema.StringAttribute{
 											MarkdownDescription: "Description. Description for the certificate",
 											Optional: true,
 										},
@@ -1730,7 +1730,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 											MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
 											Optional: true,
 										},
-										"description": schema.StringAttribute{
+										"description_spec": schema.StringAttribute{
 											MarkdownDescription: "Description. Description for the certificate",
 											Optional: true,
 										},
@@ -2021,7 +2021,7 @@ func (r *APMResource) Create(ctx context.Context, req resource.CreateRequest, re
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.APMSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -2046,6 +2046,80 @@ func (r *APMResource) Create(ctx context.Context, req resource.CreateRequest, re
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.AWSSiteTypeChoice != nil {
+		aws_site_type_choiceMap := make(map[string]interface{})
+		if data.AWSSiteTypeChoice.APMAWSSite != nil {
+			apm_aws_siteNestedMap := make(map[string]interface{})
+			if !data.AWSSiteTypeChoice.APMAWSSite.AdminUsername.IsNull() && !data.AWSSiteTypeChoice.APMAWSSite.AdminUsername.IsUnknown() {
+				apm_aws_siteNestedMap["admin_username"] = data.AWSSiteTypeChoice.APMAWSSite.AdminUsername.ValueString()
+			}
+			if !data.AWSSiteTypeChoice.APMAWSSite.SSHKey.IsNull() && !data.AWSSiteTypeChoice.APMAWSSite.SSHKey.IsUnknown() {
+				apm_aws_siteNestedMap["ssh_key"] = data.AWSSiteTypeChoice.APMAWSSite.SSHKey.ValueString()
+			}
+			aws_site_type_choiceMap["apm_aws_site"] = apm_aws_siteNestedMap
+		}
+		if data.AWSSiteTypeChoice.MarketPlaceImage != nil {
+			market_place_imageNestedMap := make(map[string]interface{})
+			aws_site_type_choiceMap["market_place_image"] = market_place_imageNestedMap
+		}
+		apiResource.Spec["aws_site_type_choice"] = aws_site_type_choiceMap
+	}
+	if data.BaremetalSiteTypeChoice != nil {
+		baremetal_site_type_choiceMap := make(map[string]interface{})
+		if data.BaremetalSiteTypeChoice.F5BareMetalSite != nil {
+			f5_bare_metal_siteNestedMap := make(map[string]interface{})
+			if !data.BaremetalSiteTypeChoice.F5BareMetalSite.AdminUsername.IsNull() && !data.BaremetalSiteTypeChoice.F5BareMetalSite.AdminUsername.IsUnknown() {
+				f5_bare_metal_siteNestedMap["admin_username"] = data.BaremetalSiteTypeChoice.F5BareMetalSite.AdminUsername.ValueString()
+			}
+			if !data.BaremetalSiteTypeChoice.F5BareMetalSite.PublicDownloadURL.IsNull() && !data.BaremetalSiteTypeChoice.F5BareMetalSite.PublicDownloadURL.IsUnknown() {
+				f5_bare_metal_siteNestedMap["public_download_url"] = data.BaremetalSiteTypeChoice.F5BareMetalSite.PublicDownloadURL.ValueString()
+			}
+			if !data.BaremetalSiteTypeChoice.F5BareMetalSite.SSHKey.IsNull() && !data.BaremetalSiteTypeChoice.F5BareMetalSite.SSHKey.IsUnknown() {
+				f5_bare_metal_siteNestedMap["ssh_key"] = data.BaremetalSiteTypeChoice.F5BareMetalSite.SSHKey.ValueString()
+			}
+			baremetal_site_type_choiceMap["f5_bare_metal_site"] = f5_bare_metal_siteNestedMap
+		}
+		apiResource.Spec["baremetal_site_type_choice"] = baremetal_site_type_choiceMap
+	}
+	if data.HTTPSManagement != nil {
+		https_managementMap := make(map[string]interface{})
+		if data.HTTPSManagement.AdvertiseOnInternet != nil {
+			advertise_on_internetNestedMap := make(map[string]interface{})
+			https_managementMap["advertise_on_internet"] = advertise_on_internetNestedMap
+		}
+		if data.HTTPSManagement.AdvertiseOnInternetDefaultVip != nil {
+			https_managementMap["advertise_on_internet_default_vip"] = map[string]interface{}{}
+		}
+		if data.HTTPSManagement.AdvertiseOnSLIVip != nil {
+			advertise_on_sli_vipNestedMap := make(map[string]interface{})
+			https_managementMap["advertise_on_sli_vip"] = advertise_on_sli_vipNestedMap
+		}
+		if data.HTTPSManagement.AdvertiseOnSLOInternetVip != nil {
+			advertise_on_slo_internet_vipNestedMap := make(map[string]interface{})
+			https_managementMap["advertise_on_slo_internet_vip"] = advertise_on_slo_internet_vipNestedMap
+		}
+		if data.HTTPSManagement.AdvertiseOnSLOSLI != nil {
+			advertise_on_slo_sliNestedMap := make(map[string]interface{})
+			https_managementMap["advertise_on_slo_sli"] = advertise_on_slo_sliNestedMap
+		}
+		if data.HTTPSManagement.AdvertiseOnSLOVip != nil {
+			advertise_on_slo_vipNestedMap := make(map[string]interface{})
+			https_managementMap["advertise_on_slo_vip"] = advertise_on_slo_vipNestedMap
+		}
+		if data.HTTPSManagement.DefaultHTTPSPort != nil {
+			https_managementMap["default_https_port"] = map[string]interface{}{}
+		}
+		if !data.HTTPSManagement.DomainSuffix.IsNull() && !data.HTTPSManagement.DomainSuffix.IsUnknown() {
+			https_managementMap["domain_suffix"] = data.HTTPSManagement.DomainSuffix.ValueString()
+		}
+		if !data.HTTPSManagement.HTTPSPort.IsNull() && !data.HTTPSManagement.HTTPSPort.IsUnknown() {
+			https_managementMap["https_port"] = data.HTTPSManagement.HTTPSPort.ValueInt64()
+		}
+		apiResource.Spec["https_management"] = https_managementMap
+	}
+
+
 	created, err := r.client.CreateAPM(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create APM: %s", err))
@@ -2054,8 +2128,13 @@ func (r *APMResource) Create(ctx context.Context, req resource.CreateRequest, re
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created APM resource")
@@ -2134,9 +2213,51 @@ func (r *APMResource) Read(ctx context.Context, req resource.ReadRequest, resp *
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if _, ok := apiResource.Spec["aws_site_type_choice"].(map[string]interface{}); ok && isImport && data.AWSSiteTypeChoice == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AWSSiteTypeChoice = &APMAWSSiteTypeChoiceModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["baremetal_site_type_choice"].(map[string]interface{}); ok && isImport && data.BaremetalSiteTypeChoice == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.BaremetalSiteTypeChoice = &APMBaremetalSiteTypeChoiceModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["https_management"].(map[string]interface{}); ok && (isImport || data.HTTPSManagement != nil) {
+		data.HTTPSManagement = &APMHTTPSManagementModel{
+			DomainSuffix: func() types.String {
+				if v, ok := blockData["domain_suffix"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			HTTPSPort: func() types.Int64 {
+				if v, ok := blockData["https_port"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -2162,7 +2283,7 @@ func (r *APMResource) Update(ctx context.Context, req resource.UpdateRequest, re
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.APMSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -2187,6 +2308,80 @@ func (r *APMResource) Update(ctx context.Context, req resource.UpdateRequest, re
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.AWSSiteTypeChoice != nil {
+		aws_site_type_choiceMap := make(map[string]interface{})
+		if data.AWSSiteTypeChoice.APMAWSSite != nil {
+			apm_aws_siteNestedMap := make(map[string]interface{})
+			if !data.AWSSiteTypeChoice.APMAWSSite.AdminUsername.IsNull() && !data.AWSSiteTypeChoice.APMAWSSite.AdminUsername.IsUnknown() {
+				apm_aws_siteNestedMap["admin_username"] = data.AWSSiteTypeChoice.APMAWSSite.AdminUsername.ValueString()
+			}
+			if !data.AWSSiteTypeChoice.APMAWSSite.SSHKey.IsNull() && !data.AWSSiteTypeChoice.APMAWSSite.SSHKey.IsUnknown() {
+				apm_aws_siteNestedMap["ssh_key"] = data.AWSSiteTypeChoice.APMAWSSite.SSHKey.ValueString()
+			}
+			aws_site_type_choiceMap["apm_aws_site"] = apm_aws_siteNestedMap
+		}
+		if data.AWSSiteTypeChoice.MarketPlaceImage != nil {
+			market_place_imageNestedMap := make(map[string]interface{})
+			aws_site_type_choiceMap["market_place_image"] = market_place_imageNestedMap
+		}
+		apiResource.Spec["aws_site_type_choice"] = aws_site_type_choiceMap
+	}
+	if data.BaremetalSiteTypeChoice != nil {
+		baremetal_site_type_choiceMap := make(map[string]interface{})
+		if data.BaremetalSiteTypeChoice.F5BareMetalSite != nil {
+			f5_bare_metal_siteNestedMap := make(map[string]interface{})
+			if !data.BaremetalSiteTypeChoice.F5BareMetalSite.AdminUsername.IsNull() && !data.BaremetalSiteTypeChoice.F5BareMetalSite.AdminUsername.IsUnknown() {
+				f5_bare_metal_siteNestedMap["admin_username"] = data.BaremetalSiteTypeChoice.F5BareMetalSite.AdminUsername.ValueString()
+			}
+			if !data.BaremetalSiteTypeChoice.F5BareMetalSite.PublicDownloadURL.IsNull() && !data.BaremetalSiteTypeChoice.F5BareMetalSite.PublicDownloadURL.IsUnknown() {
+				f5_bare_metal_siteNestedMap["public_download_url"] = data.BaremetalSiteTypeChoice.F5BareMetalSite.PublicDownloadURL.ValueString()
+			}
+			if !data.BaremetalSiteTypeChoice.F5BareMetalSite.SSHKey.IsNull() && !data.BaremetalSiteTypeChoice.F5BareMetalSite.SSHKey.IsUnknown() {
+				f5_bare_metal_siteNestedMap["ssh_key"] = data.BaremetalSiteTypeChoice.F5BareMetalSite.SSHKey.ValueString()
+			}
+			baremetal_site_type_choiceMap["f5_bare_metal_site"] = f5_bare_metal_siteNestedMap
+		}
+		apiResource.Spec["baremetal_site_type_choice"] = baremetal_site_type_choiceMap
+	}
+	if data.HTTPSManagement != nil {
+		https_managementMap := make(map[string]interface{})
+		if data.HTTPSManagement.AdvertiseOnInternet != nil {
+			advertise_on_internetNestedMap := make(map[string]interface{})
+			https_managementMap["advertise_on_internet"] = advertise_on_internetNestedMap
+		}
+		if data.HTTPSManagement.AdvertiseOnInternetDefaultVip != nil {
+			https_managementMap["advertise_on_internet_default_vip"] = map[string]interface{}{}
+		}
+		if data.HTTPSManagement.AdvertiseOnSLIVip != nil {
+			advertise_on_sli_vipNestedMap := make(map[string]interface{})
+			https_managementMap["advertise_on_sli_vip"] = advertise_on_sli_vipNestedMap
+		}
+		if data.HTTPSManagement.AdvertiseOnSLOInternetVip != nil {
+			advertise_on_slo_internet_vipNestedMap := make(map[string]interface{})
+			https_managementMap["advertise_on_slo_internet_vip"] = advertise_on_slo_internet_vipNestedMap
+		}
+		if data.HTTPSManagement.AdvertiseOnSLOSLI != nil {
+			advertise_on_slo_sliNestedMap := make(map[string]interface{})
+			https_managementMap["advertise_on_slo_sli"] = advertise_on_slo_sliNestedMap
+		}
+		if data.HTTPSManagement.AdvertiseOnSLOVip != nil {
+			advertise_on_slo_vipNestedMap := make(map[string]interface{})
+			https_managementMap["advertise_on_slo_vip"] = advertise_on_slo_vipNestedMap
+		}
+		if data.HTTPSManagement.DefaultHTTPSPort != nil {
+			https_managementMap["default_https_port"] = map[string]interface{}{}
+		}
+		if !data.HTTPSManagement.DomainSuffix.IsNull() && !data.HTTPSManagement.DomainSuffix.IsUnknown() {
+			https_managementMap["domain_suffix"] = data.HTTPSManagement.DomainSuffix.ValueString()
+		}
+		if !data.HTTPSManagement.HTTPSPort.IsNull() && !data.HTTPSManagement.HTTPSPort.IsUnknown() {
+			https_managementMap["https_port"] = data.HTTPSManagement.HTTPSPort.ValueInt64()
+		}
+		apiResource.Spec["https_management"] = https_managementMap
+	}
+
+
 	updated, err := r.client.UpdateAPM(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update APM: %s", err))
@@ -2195,6 +2390,8 @@ func (r *APMResource) Update(ctx context.Context, req resource.UpdateRequest, re
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -2207,6 +2404,7 @@ func (r *APMResource) Update(ctx context.Context, req resource.UpdateRequest, re
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -2233,6 +2431,15 @@ func (r *APMResource) Delete(ctx context.Context, req resource.DeleteRequest, re
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "APM already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "APM delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

@@ -517,7 +517,7 @@ func (r *AuthenticationResource) Create(ctx context.Context, req resource.Create
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.AuthenticationSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -542,6 +542,62 @@ func (r *AuthenticationResource) Create(ctx context.Context, req resource.Create
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.CookieParams != nil {
+		cookie_paramsMap := make(map[string]interface{})
+		if data.CookieParams.AuthHmac != nil {
+			auth_hmacNestedMap := make(map[string]interface{})
+			if !data.CookieParams.AuthHmac.PrimKeyExpiry.IsNull() && !data.CookieParams.AuthHmac.PrimKeyExpiry.IsUnknown() {
+				auth_hmacNestedMap["prim_key_expiry"] = data.CookieParams.AuthHmac.PrimKeyExpiry.ValueString()
+			}
+			if !data.CookieParams.AuthHmac.SecKeyExpiry.IsNull() && !data.CookieParams.AuthHmac.SecKeyExpiry.IsUnknown() {
+				auth_hmacNestedMap["sec_key_expiry"] = data.CookieParams.AuthHmac.SecKeyExpiry.ValueString()
+			}
+			cookie_paramsMap["auth_hmac"] = auth_hmacNestedMap
+		}
+		if !data.CookieParams.CookieExpiry.IsNull() && !data.CookieParams.CookieExpiry.IsUnknown() {
+			cookie_paramsMap["cookie_expiry"] = data.CookieParams.CookieExpiry.ValueInt64()
+		}
+		if !data.CookieParams.CookieRefreshInterval.IsNull() && !data.CookieParams.CookieRefreshInterval.IsUnknown() {
+			cookie_paramsMap["cookie_refresh_interval"] = data.CookieParams.CookieRefreshInterval.ValueInt64()
+		}
+		if data.CookieParams.KmsKeyHmac != nil {
+			cookie_paramsMap["kms_key_hmac"] = map[string]interface{}{}
+		}
+		if !data.CookieParams.SessionExpiry.IsNull() && !data.CookieParams.SessionExpiry.IsUnknown() {
+			cookie_paramsMap["session_expiry"] = data.CookieParams.SessionExpiry.ValueInt64()
+		}
+		apiResource.Spec["cookie_params"] = cookie_paramsMap
+	}
+	if data.OidcAuth != nil {
+		oidc_authMap := make(map[string]interface{})
+		if data.OidcAuth.ClientSecret != nil {
+			client_secretNestedMap := make(map[string]interface{})
+			oidc_authMap["client_secret"] = client_secretNestedMap
+		}
+		if data.OidcAuth.OidcAuthParams != nil {
+			oidc_auth_paramsNestedMap := make(map[string]interface{})
+			if !data.OidcAuth.OidcAuthParams.AuthEndpointURL.IsNull() && !data.OidcAuth.OidcAuthParams.AuthEndpointURL.IsUnknown() {
+				oidc_auth_paramsNestedMap["auth_endpoint_url"] = data.OidcAuth.OidcAuthParams.AuthEndpointURL.ValueString()
+			}
+			if !data.OidcAuth.OidcAuthParams.EndSessionEndpointURL.IsNull() && !data.OidcAuth.OidcAuthParams.EndSessionEndpointURL.IsUnknown() {
+				oidc_auth_paramsNestedMap["end_session_endpoint_url"] = data.OidcAuth.OidcAuthParams.EndSessionEndpointURL.ValueString()
+			}
+			if !data.OidcAuth.OidcAuthParams.TokenEndpointURL.IsNull() && !data.OidcAuth.OidcAuthParams.TokenEndpointURL.IsUnknown() {
+				oidc_auth_paramsNestedMap["token_endpoint_url"] = data.OidcAuth.OidcAuthParams.TokenEndpointURL.ValueString()
+			}
+			oidc_authMap["oidc_auth_params"] = oidc_auth_paramsNestedMap
+		}
+		if !data.OidcAuth.OidcClientID.IsNull() && !data.OidcAuth.OidcClientID.IsUnknown() {
+			oidc_authMap["oidc_client_id"] = data.OidcAuth.OidcClientID.ValueString()
+		}
+		if !data.OidcAuth.OidcWellKnownConfigURL.IsNull() && !data.OidcAuth.OidcWellKnownConfigURL.IsUnknown() {
+			oidc_authMap["oidc_well_known_config_url"] = data.OidcAuth.OidcWellKnownConfigURL.ValueString()
+		}
+		apiResource.Spec["oidc_auth"] = oidc_authMap
+	}
+
+
 	created, err := r.client.CreateAuthentication(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create Authentication: %s", err))
@@ -550,8 +606,13 @@ func (r *AuthenticationResource) Create(ctx context.Context, req resource.Create
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created Authentication resource")
@@ -630,9 +691,63 @@ func (r *AuthenticationResource) Read(ctx context.Context, req resource.ReadRequ
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if blockData, ok := apiResource.Spec["cookie_params"].(map[string]interface{}); ok && (isImport || data.CookieParams != nil) {
+		data.CookieParams = &AuthenticationCookieParamsModel{
+			CookieExpiry: func() types.Int64 {
+				if v, ok := blockData["cookie_expiry"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			CookieRefreshInterval: func() types.Int64 {
+				if v, ok := blockData["cookie_refresh_interval"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			SessionExpiry: func() types.Int64 {
+				if v, ok := blockData["session_expiry"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["oidc_auth"].(map[string]interface{}); ok && (isImport || data.OidcAuth != nil) {
+		data.OidcAuth = &AuthenticationOidcAuthModel{
+			OidcClientID: func() types.String {
+				if v, ok := blockData["oidc_client_id"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			OidcWellKnownConfigURL: func() types.String {
+				if v, ok := blockData["oidc_well_known_config_url"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -658,7 +773,7 @@ func (r *AuthenticationResource) Update(ctx context.Context, req resource.Update
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.AuthenticationSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -683,6 +798,62 @@ func (r *AuthenticationResource) Update(ctx context.Context, req resource.Update
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.CookieParams != nil {
+		cookie_paramsMap := make(map[string]interface{})
+		if data.CookieParams.AuthHmac != nil {
+			auth_hmacNestedMap := make(map[string]interface{})
+			if !data.CookieParams.AuthHmac.PrimKeyExpiry.IsNull() && !data.CookieParams.AuthHmac.PrimKeyExpiry.IsUnknown() {
+				auth_hmacNestedMap["prim_key_expiry"] = data.CookieParams.AuthHmac.PrimKeyExpiry.ValueString()
+			}
+			if !data.CookieParams.AuthHmac.SecKeyExpiry.IsNull() && !data.CookieParams.AuthHmac.SecKeyExpiry.IsUnknown() {
+				auth_hmacNestedMap["sec_key_expiry"] = data.CookieParams.AuthHmac.SecKeyExpiry.ValueString()
+			}
+			cookie_paramsMap["auth_hmac"] = auth_hmacNestedMap
+		}
+		if !data.CookieParams.CookieExpiry.IsNull() && !data.CookieParams.CookieExpiry.IsUnknown() {
+			cookie_paramsMap["cookie_expiry"] = data.CookieParams.CookieExpiry.ValueInt64()
+		}
+		if !data.CookieParams.CookieRefreshInterval.IsNull() && !data.CookieParams.CookieRefreshInterval.IsUnknown() {
+			cookie_paramsMap["cookie_refresh_interval"] = data.CookieParams.CookieRefreshInterval.ValueInt64()
+		}
+		if data.CookieParams.KmsKeyHmac != nil {
+			cookie_paramsMap["kms_key_hmac"] = map[string]interface{}{}
+		}
+		if !data.CookieParams.SessionExpiry.IsNull() && !data.CookieParams.SessionExpiry.IsUnknown() {
+			cookie_paramsMap["session_expiry"] = data.CookieParams.SessionExpiry.ValueInt64()
+		}
+		apiResource.Spec["cookie_params"] = cookie_paramsMap
+	}
+	if data.OidcAuth != nil {
+		oidc_authMap := make(map[string]interface{})
+		if data.OidcAuth.ClientSecret != nil {
+			client_secretNestedMap := make(map[string]interface{})
+			oidc_authMap["client_secret"] = client_secretNestedMap
+		}
+		if data.OidcAuth.OidcAuthParams != nil {
+			oidc_auth_paramsNestedMap := make(map[string]interface{})
+			if !data.OidcAuth.OidcAuthParams.AuthEndpointURL.IsNull() && !data.OidcAuth.OidcAuthParams.AuthEndpointURL.IsUnknown() {
+				oidc_auth_paramsNestedMap["auth_endpoint_url"] = data.OidcAuth.OidcAuthParams.AuthEndpointURL.ValueString()
+			}
+			if !data.OidcAuth.OidcAuthParams.EndSessionEndpointURL.IsNull() && !data.OidcAuth.OidcAuthParams.EndSessionEndpointURL.IsUnknown() {
+				oidc_auth_paramsNestedMap["end_session_endpoint_url"] = data.OidcAuth.OidcAuthParams.EndSessionEndpointURL.ValueString()
+			}
+			if !data.OidcAuth.OidcAuthParams.TokenEndpointURL.IsNull() && !data.OidcAuth.OidcAuthParams.TokenEndpointURL.IsUnknown() {
+				oidc_auth_paramsNestedMap["token_endpoint_url"] = data.OidcAuth.OidcAuthParams.TokenEndpointURL.ValueString()
+			}
+			oidc_authMap["oidc_auth_params"] = oidc_auth_paramsNestedMap
+		}
+		if !data.OidcAuth.OidcClientID.IsNull() && !data.OidcAuth.OidcClientID.IsUnknown() {
+			oidc_authMap["oidc_client_id"] = data.OidcAuth.OidcClientID.ValueString()
+		}
+		if !data.OidcAuth.OidcWellKnownConfigURL.IsNull() && !data.OidcAuth.OidcWellKnownConfigURL.IsUnknown() {
+			oidc_authMap["oidc_well_known_config_url"] = data.OidcAuth.OidcWellKnownConfigURL.ValueString()
+		}
+		apiResource.Spec["oidc_auth"] = oidc_authMap
+	}
+
+
 	updated, err := r.client.UpdateAuthentication(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update Authentication: %s", err))
@@ -691,6 +862,8 @@ func (r *AuthenticationResource) Update(ctx context.Context, req resource.Update
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -703,6 +876,7 @@ func (r *AuthenticationResource) Update(ctx context.Context, req resource.Update
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -729,6 +903,15 @@ func (r *AuthenticationResource) Delete(ctx context.Context, req resource.Delete
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "Authentication already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "Authentication delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

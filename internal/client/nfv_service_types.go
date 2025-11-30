@@ -10,13 +10,8 @@ import (
 
 // NFVService represents a F5XC NFVService
 type NFVService struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     NFVServiceSpec `json:"spec"`
-}
-
-// NFVServiceSpec defines the specification for NFVService
-type NFVServiceSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateNFVService creates a new NFVService

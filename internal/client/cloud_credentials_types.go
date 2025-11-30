@@ -10,13 +10,8 @@ import (
 
 // CloudCredentials represents a F5XC CloudCredentials
 type CloudCredentials struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     CloudCredentialsSpec `json:"spec"`
-}
-
-// CloudCredentialsSpec defines the specification for CloudCredentials
-type CloudCredentialsSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateCloudCredentials creates a new CloudCredentials

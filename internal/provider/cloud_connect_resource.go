@@ -588,7 +588,7 @@ func (r *CloudConnectResource) Create(ctx context.Context, req resource.CreateRe
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.CloudConnectSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -613,6 +613,77 @@ func (r *CloudConnectResource) Create(ctx context.Context, req resource.CreateRe
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.AWSTGWSite != nil {
+		aws_tgw_siteMap := make(map[string]interface{})
+		if data.AWSTGWSite.Cred != nil {
+			credNestedMap := make(map[string]interface{})
+			if !data.AWSTGWSite.Cred.Name.IsNull() && !data.AWSTGWSite.Cred.Name.IsUnknown() {
+				credNestedMap["name"] = data.AWSTGWSite.Cred.Name.ValueString()
+			}
+			if !data.AWSTGWSite.Cred.Namespace.IsNull() && !data.AWSTGWSite.Cred.Namespace.IsUnknown() {
+				credNestedMap["namespace"] = data.AWSTGWSite.Cred.Namespace.ValueString()
+			}
+			if !data.AWSTGWSite.Cred.Tenant.IsNull() && !data.AWSTGWSite.Cred.Tenant.IsUnknown() {
+				credNestedMap["tenant"] = data.AWSTGWSite.Cred.Tenant.ValueString()
+			}
+			aws_tgw_siteMap["cred"] = credNestedMap
+		}
+		if data.AWSTGWSite.Site != nil {
+			siteNestedMap := make(map[string]interface{})
+			if !data.AWSTGWSite.Site.Name.IsNull() && !data.AWSTGWSite.Site.Name.IsUnknown() {
+				siteNestedMap["name"] = data.AWSTGWSite.Site.Name.ValueString()
+			}
+			if !data.AWSTGWSite.Site.Namespace.IsNull() && !data.AWSTGWSite.Site.Namespace.IsUnknown() {
+				siteNestedMap["namespace"] = data.AWSTGWSite.Site.Namespace.ValueString()
+			}
+			if !data.AWSTGWSite.Site.Tenant.IsNull() && !data.AWSTGWSite.Site.Tenant.IsUnknown() {
+				siteNestedMap["tenant"] = data.AWSTGWSite.Site.Tenant.ValueString()
+			}
+			aws_tgw_siteMap["site"] = siteNestedMap
+		}
+		if data.AWSTGWSite.VPCAttachments != nil {
+			vpc_attachmentsNestedMap := make(map[string]interface{})
+			aws_tgw_siteMap["vpc_attachments"] = vpc_attachmentsNestedMap
+		}
+		apiResource.Spec["aws_tgw_site"] = aws_tgw_siteMap
+	}
+	if data.AzureVNETSite != nil {
+		azure_vnet_siteMap := make(map[string]interface{})
+		if data.AzureVNETSite.Site != nil {
+			siteNestedMap := make(map[string]interface{})
+			if !data.AzureVNETSite.Site.Name.IsNull() && !data.AzureVNETSite.Site.Name.IsUnknown() {
+				siteNestedMap["name"] = data.AzureVNETSite.Site.Name.ValueString()
+			}
+			if !data.AzureVNETSite.Site.Namespace.IsNull() && !data.AzureVNETSite.Site.Namespace.IsUnknown() {
+				siteNestedMap["namespace"] = data.AzureVNETSite.Site.Namespace.ValueString()
+			}
+			if !data.AzureVNETSite.Site.Tenant.IsNull() && !data.AzureVNETSite.Site.Tenant.IsUnknown() {
+				siteNestedMap["tenant"] = data.AzureVNETSite.Site.Tenant.ValueString()
+			}
+			azure_vnet_siteMap["site"] = siteNestedMap
+		}
+		if data.AzureVNETSite.VNETAttachments != nil {
+			vnet_attachmentsNestedMap := make(map[string]interface{})
+			azure_vnet_siteMap["vnet_attachments"] = vnet_attachmentsNestedMap
+		}
+		apiResource.Spec["azure_vnet_site"] = azure_vnet_siteMap
+	}
+	if data.Segment != nil {
+		segmentMap := make(map[string]interface{})
+		if !data.Segment.Name.IsNull() && !data.Segment.Name.IsUnknown() {
+			segmentMap["name"] = data.Segment.Name.ValueString()
+		}
+		if !data.Segment.Namespace.IsNull() && !data.Segment.Namespace.IsUnknown() {
+			segmentMap["namespace"] = data.Segment.Namespace.ValueString()
+		}
+		if !data.Segment.Tenant.IsNull() && !data.Segment.Tenant.IsUnknown() {
+			segmentMap["tenant"] = data.Segment.Tenant.ValueString()
+		}
+		apiResource.Spec["segment"] = segmentMap
+	}
+
+
 	created, err := r.client.CreateCloudConnect(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create CloudConnect: %s", err))
@@ -621,8 +692,13 @@ func (r *CloudConnectResource) Create(ctx context.Context, req resource.CreateRe
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created CloudConnect resource")
@@ -701,9 +777,57 @@ func (r *CloudConnectResource) Read(ctx context.Context, req resource.ReadReques
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if _, ok := apiResource.Spec["aws_tgw_site"].(map[string]interface{}); ok && isImport && data.AWSTGWSite == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AWSTGWSite = &CloudConnectAWSTGWSiteModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["azure_vnet_site"].(map[string]interface{}); ok && isImport && data.AzureVNETSite == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AzureVNETSite = &CloudConnectAzureVNETSiteModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["segment"].(map[string]interface{}); ok && (isImport || data.Segment != nil) {
+		data.Segment = &CloudConnectSegmentModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -729,7 +853,7 @@ func (r *CloudConnectResource) Update(ctx context.Context, req resource.UpdateRe
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.CloudConnectSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -754,6 +878,77 @@ func (r *CloudConnectResource) Update(ctx context.Context, req resource.UpdateRe
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.AWSTGWSite != nil {
+		aws_tgw_siteMap := make(map[string]interface{})
+		if data.AWSTGWSite.Cred != nil {
+			credNestedMap := make(map[string]interface{})
+			if !data.AWSTGWSite.Cred.Name.IsNull() && !data.AWSTGWSite.Cred.Name.IsUnknown() {
+				credNestedMap["name"] = data.AWSTGWSite.Cred.Name.ValueString()
+			}
+			if !data.AWSTGWSite.Cred.Namespace.IsNull() && !data.AWSTGWSite.Cred.Namespace.IsUnknown() {
+				credNestedMap["namespace"] = data.AWSTGWSite.Cred.Namespace.ValueString()
+			}
+			if !data.AWSTGWSite.Cred.Tenant.IsNull() && !data.AWSTGWSite.Cred.Tenant.IsUnknown() {
+				credNestedMap["tenant"] = data.AWSTGWSite.Cred.Tenant.ValueString()
+			}
+			aws_tgw_siteMap["cred"] = credNestedMap
+		}
+		if data.AWSTGWSite.Site != nil {
+			siteNestedMap := make(map[string]interface{})
+			if !data.AWSTGWSite.Site.Name.IsNull() && !data.AWSTGWSite.Site.Name.IsUnknown() {
+				siteNestedMap["name"] = data.AWSTGWSite.Site.Name.ValueString()
+			}
+			if !data.AWSTGWSite.Site.Namespace.IsNull() && !data.AWSTGWSite.Site.Namespace.IsUnknown() {
+				siteNestedMap["namespace"] = data.AWSTGWSite.Site.Namespace.ValueString()
+			}
+			if !data.AWSTGWSite.Site.Tenant.IsNull() && !data.AWSTGWSite.Site.Tenant.IsUnknown() {
+				siteNestedMap["tenant"] = data.AWSTGWSite.Site.Tenant.ValueString()
+			}
+			aws_tgw_siteMap["site"] = siteNestedMap
+		}
+		if data.AWSTGWSite.VPCAttachments != nil {
+			vpc_attachmentsNestedMap := make(map[string]interface{})
+			aws_tgw_siteMap["vpc_attachments"] = vpc_attachmentsNestedMap
+		}
+		apiResource.Spec["aws_tgw_site"] = aws_tgw_siteMap
+	}
+	if data.AzureVNETSite != nil {
+		azure_vnet_siteMap := make(map[string]interface{})
+		if data.AzureVNETSite.Site != nil {
+			siteNestedMap := make(map[string]interface{})
+			if !data.AzureVNETSite.Site.Name.IsNull() && !data.AzureVNETSite.Site.Name.IsUnknown() {
+				siteNestedMap["name"] = data.AzureVNETSite.Site.Name.ValueString()
+			}
+			if !data.AzureVNETSite.Site.Namespace.IsNull() && !data.AzureVNETSite.Site.Namespace.IsUnknown() {
+				siteNestedMap["namespace"] = data.AzureVNETSite.Site.Namespace.ValueString()
+			}
+			if !data.AzureVNETSite.Site.Tenant.IsNull() && !data.AzureVNETSite.Site.Tenant.IsUnknown() {
+				siteNestedMap["tenant"] = data.AzureVNETSite.Site.Tenant.ValueString()
+			}
+			azure_vnet_siteMap["site"] = siteNestedMap
+		}
+		if data.AzureVNETSite.VNETAttachments != nil {
+			vnet_attachmentsNestedMap := make(map[string]interface{})
+			azure_vnet_siteMap["vnet_attachments"] = vnet_attachmentsNestedMap
+		}
+		apiResource.Spec["azure_vnet_site"] = azure_vnet_siteMap
+	}
+	if data.Segment != nil {
+		segmentMap := make(map[string]interface{})
+		if !data.Segment.Name.IsNull() && !data.Segment.Name.IsUnknown() {
+			segmentMap["name"] = data.Segment.Name.ValueString()
+		}
+		if !data.Segment.Namespace.IsNull() && !data.Segment.Namespace.IsUnknown() {
+			segmentMap["namespace"] = data.Segment.Namespace.ValueString()
+		}
+		if !data.Segment.Tenant.IsNull() && !data.Segment.Tenant.IsUnknown() {
+			segmentMap["tenant"] = data.Segment.Tenant.ValueString()
+		}
+		apiResource.Spec["segment"] = segmentMap
+	}
+
+
 	updated, err := r.client.UpdateCloudConnect(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update CloudConnect: %s", err))
@@ -762,6 +957,8 @@ func (r *CloudConnectResource) Update(ctx context.Context, req resource.UpdateRe
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -774,6 +971,7 @@ func (r *CloudConnectResource) Update(ctx context.Context, req resource.UpdateRe
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -800,6 +998,15 @@ func (r *CloudConnectResource) Delete(ctx context.Context, req resource.DeleteRe
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "CloudConnect already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "CloudConnect delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

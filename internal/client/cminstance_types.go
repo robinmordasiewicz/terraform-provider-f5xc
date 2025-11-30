@@ -10,13 +10,8 @@ import (
 
 // Cminstance represents a F5XC Cminstance
 type Cminstance struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     CminstanceSpec `json:"spec"`
-}
-
-// CminstanceSpec defines the specification for Cminstance
-type CminstanceSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateCminstance creates a new Cminstance

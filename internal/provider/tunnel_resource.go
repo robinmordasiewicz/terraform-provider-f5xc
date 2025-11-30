@@ -162,8 +162,8 @@ type TunnelResourceModel struct {
 	Description types.String `tfsdk:"description"`
 	Disable types.Bool `tfsdk:"disable"`
 	Labels types.Map `tfsdk:"labels"`
-	TunnelType types.String `tfsdk:"tunnel_type"`
 	ID types.String `tfsdk:"id"`
+	TunnelType types.String `tfsdk:"tunnel_type"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
 	LocalIP *TunnelLocalIPModel `tfsdk:"local_ip"`
 	Params *TunnelParamsModel `tfsdk:"params"`
@@ -217,12 +217,16 @@ func (r *TunnelResource) Schema(ctx context.Context, req resource.SchemaRequest,
 				Optional: true,
 				ElementType: types.StringType,
 			},
+			"id": schema.StringAttribute{
+				MarkdownDescription: "Unique identifier for the resource.",
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
 			"tunnel_type": schema.StringAttribute{
 				MarkdownDescription: "Tunnel Type. Supported tunnel types are IPSec IPSEC tunnel type with PSK GRE tunnel type. Possible values are `IPSEC_PSK`, `GRE`. Defaults to `IPSEC_PSK`.",
 				Optional: true,
-			},
-			"id": schema.StringAttribute{
-				MarkdownDescription: "Unique identifier for the resource.",
 				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
@@ -546,7 +550,7 @@ func (r *TunnelResource) Create(ctx context.Context, req resource.CreateRequest,
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.TunnelSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -571,6 +575,44 @@ func (r *TunnelResource) Create(ctx context.Context, req resource.CreateRequest,
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.LocalIP != nil {
+		local_ipMap := make(map[string]interface{})
+		if data.LocalIP.Intf != nil {
+			intfNestedMap := make(map[string]interface{})
+			local_ipMap["intf"] = intfNestedMap
+		}
+		if data.LocalIP.IPAddress != nil {
+			ip_addressNestedMap := make(map[string]interface{})
+			local_ipMap["ip_address"] = ip_addressNestedMap
+		}
+		apiResource.Spec["local_ip"] = local_ipMap
+	}
+	if data.Params != nil {
+		paramsMap := make(map[string]interface{})
+		if data.Params.Ipsec != nil {
+			ipsecNestedMap := make(map[string]interface{})
+			paramsMap["ipsec"] = ipsecNestedMap
+		}
+		apiResource.Spec["params"] = paramsMap
+	}
+	if data.RemoteIP != nil {
+		remote_ipMap := make(map[string]interface{})
+		if data.RemoteIP.Endpoints != nil {
+			endpointsNestedMap := make(map[string]interface{})
+			remote_ipMap["endpoints"] = endpointsNestedMap
+		}
+		if data.RemoteIP.IP != nil {
+			ipNestedMap := make(map[string]interface{})
+			remote_ipMap["ip"] = ipNestedMap
+		}
+		apiResource.Spec["remote_ip"] = remote_ipMap
+	}
+	if !data.TunnelType.IsNull() && !data.TunnelType.IsUnknown() {
+		apiResource.Spec["tunnel_type"] = data.TunnelType.ValueString()
+	}
+
+
 	created, err := r.client.CreateTunnel(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create Tunnel: %s", err))
@@ -579,8 +621,17 @@ func (r *TunnelResource) Create(ctx context.Context, req resource.CreateRequest,
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+	if v, ok := created.Spec["tunnel_type"].(string); ok && v != "" {
+		data.TunnelType = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created Tunnel resource")
@@ -659,9 +710,45 @@ func (r *TunnelResource) Read(ctx context.Context, req resource.ReadRequest, res
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if _, ok := apiResource.Spec["local_ip"].(map[string]interface{}); ok && isImport && data.LocalIP == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.LocalIP = &TunnelLocalIPModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["params"].(map[string]interface{}); ok && isImport && data.Params == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Params = &TunnelParamsModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["remote_ip"].(map[string]interface{}); ok && isImport && data.RemoteIP == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.RemoteIP = &TunnelRemoteIPModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["tunnel_type"].(string); ok && v != "" {
+		data.TunnelType = types.StringValue(v)
+	} else {
+		data.TunnelType = types.StringNull()
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -687,7 +774,7 @@ func (r *TunnelResource) Update(ctx context.Context, req resource.UpdateRequest,
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.TunnelSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -712,6 +799,44 @@ func (r *TunnelResource) Update(ctx context.Context, req resource.UpdateRequest,
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.LocalIP != nil {
+		local_ipMap := make(map[string]interface{})
+		if data.LocalIP.Intf != nil {
+			intfNestedMap := make(map[string]interface{})
+			local_ipMap["intf"] = intfNestedMap
+		}
+		if data.LocalIP.IPAddress != nil {
+			ip_addressNestedMap := make(map[string]interface{})
+			local_ipMap["ip_address"] = ip_addressNestedMap
+		}
+		apiResource.Spec["local_ip"] = local_ipMap
+	}
+	if data.Params != nil {
+		paramsMap := make(map[string]interface{})
+		if data.Params.Ipsec != nil {
+			ipsecNestedMap := make(map[string]interface{})
+			paramsMap["ipsec"] = ipsecNestedMap
+		}
+		apiResource.Spec["params"] = paramsMap
+	}
+	if data.RemoteIP != nil {
+		remote_ipMap := make(map[string]interface{})
+		if data.RemoteIP.Endpoints != nil {
+			endpointsNestedMap := make(map[string]interface{})
+			remote_ipMap["endpoints"] = endpointsNestedMap
+		}
+		if data.RemoteIP.IP != nil {
+			ipNestedMap := make(map[string]interface{})
+			remote_ipMap["ip"] = ipNestedMap
+		}
+		apiResource.Spec["remote_ip"] = remote_ipMap
+	}
+	if !data.TunnelType.IsNull() && !data.TunnelType.IsUnknown() {
+		apiResource.Spec["tunnel_type"] = data.TunnelType.ValueString()
+	}
+
+
 	updated, err := r.client.UpdateTunnel(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update Tunnel: %s", err))
@@ -720,6 +845,12 @@ func (r *TunnelResource) Update(ctx context.Context, req resource.UpdateRequest,
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
+	if v, ok := updated.Spec["tunnel_type"].(string); ok && v != "" {
+		data.TunnelType = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -732,6 +863,7 @@ func (r *TunnelResource) Update(ctx context.Context, req resource.UpdateRequest,
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -758,6 +890,15 @@ func (r *TunnelResource) Delete(ctx context.Context, req resource.DeleteRequest,
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "Tunnel already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "Tunnel delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

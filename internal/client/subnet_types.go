@@ -10,13 +10,8 @@ import (
 
 // Subnet represents a F5XC Subnet
 type Subnet struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     SubnetSpec `json:"spec"`
-}
-
-// SubnetSpec defines the specification for Subnet
-type SubnetSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateSubnet creates a new Subnet

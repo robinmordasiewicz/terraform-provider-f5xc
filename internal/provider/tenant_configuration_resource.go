@@ -327,7 +327,7 @@ func (r *TenantConfigurationResource) Create(ctx context.Context, req resource.C
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.TenantConfigurationSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -352,6 +352,51 @@ func (r *TenantConfigurationResource) Create(ctx context.Context, req resource.C
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.BasicConfiguration != nil {
+		basic_configurationMap := make(map[string]interface{})
+		if !data.BasicConfiguration.DisplayName.IsNull() && !data.BasicConfiguration.DisplayName.IsUnknown() {
+			basic_configurationMap["display_name"] = data.BasicConfiguration.DisplayName.ValueString()
+		}
+		apiResource.Spec["basic_configuration"] = basic_configurationMap
+	}
+	if data.BruteForceDetectionSettings != nil {
+		brute_force_detection_settingsMap := make(map[string]interface{})
+		if !data.BruteForceDetectionSettings.MaxLoginFailures.IsNull() && !data.BruteForceDetectionSettings.MaxLoginFailures.IsUnknown() {
+			brute_force_detection_settingsMap["max_login_failures"] = data.BruteForceDetectionSettings.MaxLoginFailures.ValueInt64()
+		}
+		apiResource.Spec["brute_force_detection_settings"] = brute_force_detection_settingsMap
+	}
+	if data.PasswordPolicy != nil {
+		password_policyMap := make(map[string]interface{})
+		if !data.PasswordPolicy.Digits.IsNull() && !data.PasswordPolicy.Digits.IsUnknown() {
+			password_policyMap["digits"] = data.PasswordPolicy.Digits.ValueInt64()
+		}
+		if !data.PasswordPolicy.ExpirePassword.IsNull() && !data.PasswordPolicy.ExpirePassword.IsUnknown() {
+			password_policyMap["expire_password"] = data.PasswordPolicy.ExpirePassword.ValueInt64()
+		}
+		if !data.PasswordPolicy.LowercaseCharacters.IsNull() && !data.PasswordPolicy.LowercaseCharacters.IsUnknown() {
+			password_policyMap["lowercase_characters"] = data.PasswordPolicy.LowercaseCharacters.ValueInt64()
+		}
+		if !data.PasswordPolicy.MinimumLength.IsNull() && !data.PasswordPolicy.MinimumLength.IsUnknown() {
+			password_policyMap["minimum_length"] = data.PasswordPolicy.MinimumLength.ValueInt64()
+		}
+		if !data.PasswordPolicy.NotRecentlyUsed.IsNull() && !data.PasswordPolicy.NotRecentlyUsed.IsUnknown() {
+			password_policyMap["not_recently_used"] = data.PasswordPolicy.NotRecentlyUsed.ValueInt64()
+		}
+		if !data.PasswordPolicy.NotUsername.IsNull() && !data.PasswordPolicy.NotUsername.IsUnknown() {
+			password_policyMap["not_username"] = data.PasswordPolicy.NotUsername.ValueBool()
+		}
+		if !data.PasswordPolicy.SpecialCharacters.IsNull() && !data.PasswordPolicy.SpecialCharacters.IsUnknown() {
+			password_policyMap["special_characters"] = data.PasswordPolicy.SpecialCharacters.ValueInt64()
+		}
+		if !data.PasswordPolicy.UppercaseCharacters.IsNull() && !data.PasswordPolicy.UppercaseCharacters.IsUnknown() {
+			password_policyMap["uppercase_characters"] = data.PasswordPolicy.UppercaseCharacters.ValueInt64()
+		}
+		apiResource.Spec["password_policy"] = password_policyMap
+	}
+
+
 	created, err := r.client.CreateTenantConfiguration(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create TenantConfiguration: %s", err))
@@ -360,8 +405,13 @@ func (r *TenantConfigurationResource) Create(ctx context.Context, req resource.C
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created TenantConfiguration resource")
@@ -440,9 +490,102 @@ func (r *TenantConfigurationResource) Read(ctx context.Context, req resource.Rea
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if blockData, ok := apiResource.Spec["basic_configuration"].(map[string]interface{}); ok && (isImport || data.BasicConfiguration != nil) {
+		data.BasicConfiguration = &TenantConfigurationBasicConfigurationModel{
+			DisplayName: func() types.String {
+				if v, ok := blockData["display_name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["brute_force_detection_settings"].(map[string]interface{}); ok && (isImport || data.BruteForceDetectionSettings != nil) {
+		data.BruteForceDetectionSettings = &TenantConfigurationBruteForceDetectionSettingsModel{
+			MaxLoginFailures: func() types.Int64 {
+				if v, ok := blockData["max_login_failures"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["password_policy"].(map[string]interface{}); ok && (isImport || data.PasswordPolicy != nil) {
+		data.PasswordPolicy = &TenantConfigurationPasswordPolicyModel{
+			Digits: func() types.Int64 {
+				if v, ok := blockData["digits"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			ExpirePassword: func() types.Int64 {
+				if v, ok := blockData["expire_password"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			LowercaseCharacters: func() types.Int64 {
+				if v, ok := blockData["lowercase_characters"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			MinimumLength: func() types.Int64 {
+				if v, ok := blockData["minimum_length"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			NotRecentlyUsed: func() types.Int64 {
+				if v, ok := blockData["not_recently_used"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			NotUsername: func() types.Bool {
+				if !isImport && data.PasswordPolicy != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.PasswordPolicy.NotUsername
+				}
+				// Import case: read from API
+				if v, ok := blockData["not_username"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			SpecialCharacters: func() types.Int64 {
+				if v, ok := blockData["special_characters"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			UppercaseCharacters: func() types.Int64 {
+				if v, ok := blockData["uppercase_characters"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -468,7 +611,7 @@ func (r *TenantConfigurationResource) Update(ctx context.Context, req resource.U
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.TenantConfigurationSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -493,6 +636,51 @@ func (r *TenantConfigurationResource) Update(ctx context.Context, req resource.U
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.BasicConfiguration != nil {
+		basic_configurationMap := make(map[string]interface{})
+		if !data.BasicConfiguration.DisplayName.IsNull() && !data.BasicConfiguration.DisplayName.IsUnknown() {
+			basic_configurationMap["display_name"] = data.BasicConfiguration.DisplayName.ValueString()
+		}
+		apiResource.Spec["basic_configuration"] = basic_configurationMap
+	}
+	if data.BruteForceDetectionSettings != nil {
+		brute_force_detection_settingsMap := make(map[string]interface{})
+		if !data.BruteForceDetectionSettings.MaxLoginFailures.IsNull() && !data.BruteForceDetectionSettings.MaxLoginFailures.IsUnknown() {
+			brute_force_detection_settingsMap["max_login_failures"] = data.BruteForceDetectionSettings.MaxLoginFailures.ValueInt64()
+		}
+		apiResource.Spec["brute_force_detection_settings"] = brute_force_detection_settingsMap
+	}
+	if data.PasswordPolicy != nil {
+		password_policyMap := make(map[string]interface{})
+		if !data.PasswordPolicy.Digits.IsNull() && !data.PasswordPolicy.Digits.IsUnknown() {
+			password_policyMap["digits"] = data.PasswordPolicy.Digits.ValueInt64()
+		}
+		if !data.PasswordPolicy.ExpirePassword.IsNull() && !data.PasswordPolicy.ExpirePassword.IsUnknown() {
+			password_policyMap["expire_password"] = data.PasswordPolicy.ExpirePassword.ValueInt64()
+		}
+		if !data.PasswordPolicy.LowercaseCharacters.IsNull() && !data.PasswordPolicy.LowercaseCharacters.IsUnknown() {
+			password_policyMap["lowercase_characters"] = data.PasswordPolicy.LowercaseCharacters.ValueInt64()
+		}
+		if !data.PasswordPolicy.MinimumLength.IsNull() && !data.PasswordPolicy.MinimumLength.IsUnknown() {
+			password_policyMap["minimum_length"] = data.PasswordPolicy.MinimumLength.ValueInt64()
+		}
+		if !data.PasswordPolicy.NotRecentlyUsed.IsNull() && !data.PasswordPolicy.NotRecentlyUsed.IsUnknown() {
+			password_policyMap["not_recently_used"] = data.PasswordPolicy.NotRecentlyUsed.ValueInt64()
+		}
+		if !data.PasswordPolicy.NotUsername.IsNull() && !data.PasswordPolicy.NotUsername.IsUnknown() {
+			password_policyMap["not_username"] = data.PasswordPolicy.NotUsername.ValueBool()
+		}
+		if !data.PasswordPolicy.SpecialCharacters.IsNull() && !data.PasswordPolicy.SpecialCharacters.IsUnknown() {
+			password_policyMap["special_characters"] = data.PasswordPolicy.SpecialCharacters.ValueInt64()
+		}
+		if !data.PasswordPolicy.UppercaseCharacters.IsNull() && !data.PasswordPolicy.UppercaseCharacters.IsUnknown() {
+			password_policyMap["uppercase_characters"] = data.PasswordPolicy.UppercaseCharacters.ValueInt64()
+		}
+		apiResource.Spec["password_policy"] = password_policyMap
+	}
+
+
 	updated, err := r.client.UpdateTenantConfiguration(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update TenantConfiguration: %s", err))
@@ -501,6 +689,8 @@ func (r *TenantConfigurationResource) Update(ctx context.Context, req resource.U
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -513,6 +703,7 @@ func (r *TenantConfigurationResource) Update(ctx context.Context, req resource.U
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -539,6 +730,15 @@ func (r *TenantConfigurationResource) Delete(ctx context.Context, req resource.D
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "TenantConfiguration already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "TenantConfiguration delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

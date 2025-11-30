@@ -10,13 +10,8 @@ import (
 
 // UDPLoadBalancer represents a F5XC UDPLoadBalancer
 type UDPLoadBalancer struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     UDPLoadBalancerSpec `json:"spec"`
-}
-
-// UDPLoadBalancerSpec defines the specification for UDPLoadBalancer
-type UDPLoadBalancerSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateUDPLoadBalancer creates a new UDPLoadBalancer

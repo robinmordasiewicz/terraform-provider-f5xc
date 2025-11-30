@@ -48,21 +48,21 @@ type ContactResource struct {
 type ContactResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
+	Annotations types.Map `tfsdk:"annotations"`
+	Description types.String `tfsdk:"description"`
+	Disable types.Bool `tfsdk:"disable"`
+	Labels types.Map `tfsdk:"labels"`
+	ID types.String `tfsdk:"id"`
 	Address1 types.String `tfsdk:"address1"`
 	Address2 types.String `tfsdk:"address2"`
-	Annotations types.Map `tfsdk:"annotations"`
 	City types.String `tfsdk:"city"`
 	ContactType types.String `tfsdk:"contact_type"`
 	Country types.String `tfsdk:"country"`
 	County types.String `tfsdk:"county"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
 	PhoneNumber types.String `tfsdk:"phone_number"`
 	State types.String `tfsdk:"state"`
 	StateCode types.String `tfsdk:"state_code"`
 	ZipCode types.String `tfsdk:"zip_code"`
-	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
 }
 
@@ -95,34 +95,10 @@ func (r *ContactResource) Schema(ctx context.Context, req resource.SchemaRequest
 					validators.NamespaceValidator(),
 				},
 			},
-			"address1": schema.StringAttribute{
-				MarkdownDescription: "Address Line 1.",
-				Optional: true,
-			},
-			"address2": schema.StringAttribute{
-				MarkdownDescription: "Address Line 2.",
-				Optional: true,
-			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
 				Optional: true,
 				ElementType: types.StringType,
-			},
-			"city": schema.StringAttribute{
-				MarkdownDescription: "City.",
-				Optional: true,
-			},
-			"contact_type": schema.StringAttribute{
-				MarkdownDescription: "Contact Type. Determines the contact type Indicates snail mail address (used for correspondence) Indicates billing address (this address will appear on invoices) Indicates contact used for a payment method (this address is used when charging a payment method). Possible values are `MAILING`, `BILLING`, `PAYMENT`. Defaults to `MAILING`.",
-				Optional: true,
-			},
-			"country": schema.StringAttribute{
-				MarkdownDescription: "Country.",
-				Optional: true,
-			},
-			"county": schema.StringAttribute{
-				MarkdownDescription: "County.",
-				Optional: true,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
@@ -137,24 +113,88 @@ func (r *ContactResource) Schema(ctx context.Context, req resource.SchemaRequest
 				Optional: true,
 				ElementType: types.StringType,
 			},
+			"id": schema.StringAttribute{
+				MarkdownDescription: "Unique identifier for the resource.",
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"address1": schema.StringAttribute{
+				MarkdownDescription: "Address Line 1.",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"address2": schema.StringAttribute{
+				MarkdownDescription: "Address Line 2.",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"city": schema.StringAttribute{
+				MarkdownDescription: "City.",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"contact_type": schema.StringAttribute{
+				MarkdownDescription: "Contact Type. Determines the contact type Indicates snail mail address (used for correspondence) Indicates billing address (this address will appear on invoices) Indicates contact used for a payment method (this address is used when charging a payment method). Possible values are `MAILING`, `BILLING`, `PAYMENT`. Defaults to `MAILING`.",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"country": schema.StringAttribute{
+				MarkdownDescription: "Country.",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"county": schema.StringAttribute{
+				MarkdownDescription: "County.",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
 			"phone_number": schema.StringAttribute{
 				MarkdownDescription: "Phone Number.",
 				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
 			},
 			"state": schema.StringAttribute{
 				MarkdownDescription: "State.",
 				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
 			},
 			"state_code": schema.StringAttribute{
 				MarkdownDescription: "State Code.",
 				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
 			},
 			"zip_code": schema.StringAttribute{
 				MarkdownDescription: "ZIP code.",
 				Optional: true,
-			},
-			"id": schema.StringAttribute{
-				MarkdownDescription: "Unique identifier for the resource.",
 				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
@@ -290,7 +330,7 @@ func (r *ContactResource) Create(ctx context.Context, req resource.CreateRequest
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.ContactSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -315,6 +355,39 @@ func (r *ContactResource) Create(ctx context.Context, req resource.CreateRequest
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if !data.Address1.IsNull() && !data.Address1.IsUnknown() {
+		apiResource.Spec["address1"] = data.Address1.ValueString()
+	}
+	if !data.Address2.IsNull() && !data.Address2.IsUnknown() {
+		apiResource.Spec["address2"] = data.Address2.ValueString()
+	}
+	if !data.City.IsNull() && !data.City.IsUnknown() {
+		apiResource.Spec["city"] = data.City.ValueString()
+	}
+	if !data.ContactType.IsNull() && !data.ContactType.IsUnknown() {
+		apiResource.Spec["contact_type"] = data.ContactType.ValueString()
+	}
+	if !data.Country.IsNull() && !data.Country.IsUnknown() {
+		apiResource.Spec["country"] = data.Country.ValueString()
+	}
+	if !data.County.IsNull() && !data.County.IsUnknown() {
+		apiResource.Spec["county"] = data.County.ValueString()
+	}
+	if !data.PhoneNumber.IsNull() && !data.PhoneNumber.IsUnknown() {
+		apiResource.Spec["phone_number"] = data.PhoneNumber.ValueString()
+	}
+	if !data.State.IsNull() && !data.State.IsUnknown() {
+		apiResource.Spec["state"] = data.State.ValueString()
+	}
+	if !data.StateCode.IsNull() && !data.StateCode.IsUnknown() {
+		apiResource.Spec["state_code"] = data.StateCode.ValueString()
+	}
+	if !data.ZipCode.IsNull() && !data.ZipCode.IsUnknown() {
+		apiResource.Spec["zip_code"] = data.ZipCode.ValueString()
+	}
+
+
 	created, err := r.client.CreateContact(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create Contact: %s", err))
@@ -323,8 +396,53 @@ func (r *ContactResource) Create(ctx context.Context, req resource.CreateRequest
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+	if v, ok := created.Spec["address1"].(string); ok && v != "" {
+		data.Address1 = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["address2"].(string); ok && v != "" {
+		data.Address2 = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["city"].(string); ok && v != "" {
+		data.City = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["contact_type"].(string); ok && v != "" {
+		data.ContactType = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["country"].(string); ok && v != "" {
+		data.Country = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["county"].(string); ok && v != "" {
+		data.County = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["phone_number"].(string); ok && v != "" {
+		data.PhoneNumber = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["state"].(string); ok && v != "" {
+		data.State = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["state_code"].(string); ok && v != "" {
+		data.StateCode = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["zip_code"].(string); ok && v != "" {
+		data.ZipCode = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created Contact resource")
@@ -403,9 +521,75 @@ func (r *ContactResource) Read(ctx context.Context, req resource.ReadRequest, re
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if v, ok := apiResource.Spec["address1"].(string); ok && v != "" {
+		data.Address1 = types.StringValue(v)
+	} else {
+		data.Address1 = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["address2"].(string); ok && v != "" {
+		data.Address2 = types.StringValue(v)
+	} else {
+		data.Address2 = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["city"].(string); ok && v != "" {
+		data.City = types.StringValue(v)
+	} else {
+		data.City = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["contact_type"].(string); ok && v != "" {
+		data.ContactType = types.StringValue(v)
+	} else {
+		data.ContactType = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["country"].(string); ok && v != "" {
+		data.Country = types.StringValue(v)
+	} else {
+		data.Country = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["county"].(string); ok && v != "" {
+		data.County = types.StringValue(v)
+	} else {
+		data.County = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["phone_number"].(string); ok && v != "" {
+		data.PhoneNumber = types.StringValue(v)
+	} else {
+		data.PhoneNumber = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["state"].(string); ok && v != "" {
+		data.State = types.StringValue(v)
+	} else {
+		data.State = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["state_code"].(string); ok && v != "" {
+		data.StateCode = types.StringValue(v)
+	} else {
+		data.StateCode = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["zip_code"].(string); ok && v != "" {
+		data.ZipCode = types.StringValue(v)
+	} else {
+		data.ZipCode = types.StringNull()
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -431,7 +615,7 @@ func (r *ContactResource) Update(ctx context.Context, req resource.UpdateRequest
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.ContactSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -456,6 +640,39 @@ func (r *ContactResource) Update(ctx context.Context, req resource.UpdateRequest
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if !data.Address1.IsNull() && !data.Address1.IsUnknown() {
+		apiResource.Spec["address1"] = data.Address1.ValueString()
+	}
+	if !data.Address2.IsNull() && !data.Address2.IsUnknown() {
+		apiResource.Spec["address2"] = data.Address2.ValueString()
+	}
+	if !data.City.IsNull() && !data.City.IsUnknown() {
+		apiResource.Spec["city"] = data.City.ValueString()
+	}
+	if !data.ContactType.IsNull() && !data.ContactType.IsUnknown() {
+		apiResource.Spec["contact_type"] = data.ContactType.ValueString()
+	}
+	if !data.Country.IsNull() && !data.Country.IsUnknown() {
+		apiResource.Spec["country"] = data.Country.ValueString()
+	}
+	if !data.County.IsNull() && !data.County.IsUnknown() {
+		apiResource.Spec["county"] = data.County.ValueString()
+	}
+	if !data.PhoneNumber.IsNull() && !data.PhoneNumber.IsUnknown() {
+		apiResource.Spec["phone_number"] = data.PhoneNumber.ValueString()
+	}
+	if !data.State.IsNull() && !data.State.IsUnknown() {
+		apiResource.Spec["state"] = data.State.ValueString()
+	}
+	if !data.StateCode.IsNull() && !data.StateCode.IsUnknown() {
+		apiResource.Spec["state_code"] = data.StateCode.ValueString()
+	}
+	if !data.ZipCode.IsNull() && !data.ZipCode.IsUnknown() {
+		apiResource.Spec["zip_code"] = data.ZipCode.ValueString()
+	}
+
+
 	updated, err := r.client.UpdateContact(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update Contact: %s", err))
@@ -464,6 +681,48 @@ func (r *ContactResource) Update(ctx context.Context, req resource.UpdateRequest
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
+	if v, ok := updated.Spec["address1"].(string); ok && v != "" {
+		data.Address1 = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["address2"].(string); ok && v != "" {
+		data.Address2 = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["city"].(string); ok && v != "" {
+		data.City = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["contact_type"].(string); ok && v != "" {
+		data.ContactType = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["country"].(string); ok && v != "" {
+		data.Country = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["county"].(string); ok && v != "" {
+		data.County = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["phone_number"].(string); ok && v != "" {
+		data.PhoneNumber = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["state"].(string); ok && v != "" {
+		data.State = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["state_code"].(string); ok && v != "" {
+		data.StateCode = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["zip_code"].(string); ok && v != "" {
+		data.ZipCode = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -476,6 +735,7 @@ func (r *ContactResource) Update(ctx context.Context, req resource.UpdateRequest
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -502,6 +762,15 @@ func (r *ContactResource) Delete(ctx context.Context, req resource.DeleteRequest
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "Contact already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "Contact delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

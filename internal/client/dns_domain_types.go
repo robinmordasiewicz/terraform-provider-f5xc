@@ -10,13 +10,8 @@ import (
 
 // DNSDomain represents a F5XC DNSDomain
 type DNSDomain struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     DNSDomainSpec `json:"spec"`
-}
-
-// DNSDomainSpec defines the specification for DNSDomain
-type DNSDomainSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateDNSDomain creates a new DNSDomain

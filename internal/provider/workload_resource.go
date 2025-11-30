@@ -551,7 +551,7 @@ type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLS
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModel represents tls_certificates block
 type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModel struct {
 	CertificateURL types.String `tfsdk:"certificate_url"`
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	CustomHashAlgorithms *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
 	DisableOcspStapling *WorkloadEmptyModel `tfsdk:"disable_ocsp_stapling"`
 	PrivateKey *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
@@ -1061,7 +1061,7 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBala
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModel represents tls_certificates block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModel struct {
 	CertificateURL types.String `tfsdk:"certificate_url"`
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	CustomHashAlgorithms *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
 	DisableOcspStapling *WorkloadEmptyModel `tfsdk:"disable_ocsp_stapling"`
 	PrivateKey *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
@@ -1522,7 +1522,7 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTL
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModel represents tls_certificates block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModel struct {
 	CertificateURL types.String `tfsdk:"certificate_url"`
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	CustomHashAlgorithms *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
 	DisableOcspStapling *WorkloadEmptyModel `tfsdk:"disable_ocsp_stapling"`
 	PrivateKey *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
@@ -2523,7 +2523,7 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancer
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModel represents tls_certificates block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModel struct {
 	CertificateURL types.String `tfsdk:"certificate_url"`
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	CustomHashAlgorithms *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
 	DisableOcspStapling *WorkloadEmptyModel `tfsdk:"disable_ocsp_stapling"`
 	PrivateKey *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
@@ -3033,7 +3033,7 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTP
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModel represents tls_certificates block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModel struct {
 	CertificateURL types.String `tfsdk:"certificate_url"`
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	CustomHashAlgorithms *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
 	DisableOcspStapling *WorkloadEmptyModel `tfsdk:"disable_ocsp_stapling"`
 	PrivateKey *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
@@ -3494,7 +3494,7 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalance
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModel represents tls_certificates block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModel struct {
 	CertificateURL types.String `tfsdk:"certificate_url"`
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	CustomHashAlgorithms *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
 	DisableOcspStapling *WorkloadEmptyModel `tfsdk:"disable_ocsp_stapling"`
 	PrivateKey *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
@@ -5149,7 +5149,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																						MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
 																						Optional: true,
 																					},
-																					"description": schema.StringAttribute{
+																					"description_spec": schema.StringAttribute{
 																						MarkdownDescription: "Description. Description for the certificate",
 																						Optional: true,
 																					},
@@ -6234,7 +6234,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																								MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
 																								Optional: true,
 																							},
-																							"description": schema.StringAttribute{
+																							"description_spec": schema.StringAttribute{
 																								MarkdownDescription: "Description. Description for the certificate",
 																								Optional: true,
 																							},
@@ -7230,7 +7230,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																					MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
 																					Optional: true,
 																				},
-																				"description": schema.StringAttribute{
+																				"description_spec": schema.StringAttribute{
 																					MarkdownDescription: "Description. Description for the certificate",
 																					Optional: true,
 																				},
@@ -9335,7 +9335,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																						MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
 																						Optional: true,
 																					},
-																					"description": schema.StringAttribute{
+																					"description_spec": schema.StringAttribute{
 																						MarkdownDescription: "Description. Description for the certificate",
 																						Optional: true,
 																					},
@@ -10420,7 +10420,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																								MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
 																								Optional: true,
 																							},
-																							"description": schema.StringAttribute{
+																							"description_spec": schema.StringAttribute{
 																								MarkdownDescription: "Description. Description for the certificate",
 																								Optional: true,
 																							},
@@ -11416,7 +11416,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																					MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
 																					Optional: true,
 																				},
-																				"description": schema.StringAttribute{
+																				"description_spec": schema.StringAttribute{
 																					MarkdownDescription: "Description. Description for the certificate",
 																					Optional: true,
 																				},
@@ -12816,7 +12816,7 @@ func (r *WorkloadResource) Create(ctx context.Context, req resource.CreateReques
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.WorkloadSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -12841,6 +12841,112 @@ func (r *WorkloadResource) Create(ctx context.Context, req resource.CreateReques
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.Job != nil {
+		jobMap := make(map[string]interface{})
+		if data.Job.Configuration != nil {
+			configurationNestedMap := make(map[string]interface{})
+			jobMap["configuration"] = configurationNestedMap
+		}
+		if data.Job.DeployOptions != nil {
+			deploy_optionsNestedMap := make(map[string]interface{})
+			jobMap["deploy_options"] = deploy_optionsNestedMap
+		}
+		if !data.Job.NumReplicas.IsNull() && !data.Job.NumReplicas.IsUnknown() {
+			jobMap["num_replicas"] = data.Job.NumReplicas.ValueInt64()
+		}
+		apiResource.Spec["job"] = jobMap
+	}
+	if data.Service != nil {
+		serviceMap := make(map[string]interface{})
+		if data.Service.AdvertiseOptions != nil {
+			advertise_optionsNestedMap := make(map[string]interface{})
+			serviceMap["advertise_options"] = advertise_optionsNestedMap
+		}
+		if data.Service.Configuration != nil {
+			configurationNestedMap := make(map[string]interface{})
+			serviceMap["configuration"] = configurationNestedMap
+		}
+		if data.Service.DeployOptions != nil {
+			deploy_optionsNestedMap := make(map[string]interface{})
+			serviceMap["deploy_options"] = deploy_optionsNestedMap
+		}
+		if !data.Service.NumReplicas.IsNull() && !data.Service.NumReplicas.IsUnknown() {
+			serviceMap["num_replicas"] = data.Service.NumReplicas.ValueInt64()
+		}
+		if data.Service.ScaleToZero != nil {
+			serviceMap["scale_to_zero"] = map[string]interface{}{}
+		}
+		apiResource.Spec["service"] = serviceMap
+	}
+	if data.SimpleService != nil {
+		simple_serviceMap := make(map[string]interface{})
+		if data.SimpleService.Configuration != nil {
+			configurationNestedMap := make(map[string]interface{})
+			simple_serviceMap["configuration"] = configurationNestedMap
+		}
+		if data.SimpleService.Container != nil {
+			containerNestedMap := make(map[string]interface{})
+			if !data.SimpleService.Container.Flavor.IsNull() && !data.SimpleService.Container.Flavor.IsUnknown() {
+				containerNestedMap["flavor"] = data.SimpleService.Container.Flavor.ValueString()
+			}
+			if !data.SimpleService.Container.InitContainer.IsNull() && !data.SimpleService.Container.InitContainer.IsUnknown() {
+				containerNestedMap["init_container"] = data.SimpleService.Container.InitContainer.ValueBool()
+			}
+			if !data.SimpleService.Container.Name.IsNull() && !data.SimpleService.Container.Name.IsUnknown() {
+				containerNestedMap["name"] = data.SimpleService.Container.Name.ValueString()
+			}
+			simple_serviceMap["container"] = containerNestedMap
+		}
+		if data.SimpleService.Disabled != nil {
+			simple_serviceMap["disabled"] = map[string]interface{}{}
+		}
+		if data.SimpleService.DoNotAdvertise != nil {
+			simple_serviceMap["do_not_advertise"] = map[string]interface{}{}
+		}
+		if data.SimpleService.Enabled != nil {
+			enabledNestedMap := make(map[string]interface{})
+			if !data.SimpleService.Enabled.Name.IsNull() && !data.SimpleService.Enabled.Name.IsUnknown() {
+				enabledNestedMap["name"] = data.SimpleService.Enabled.Name.ValueString()
+			}
+			simple_serviceMap["enabled"] = enabledNestedMap
+		}
+		if !data.SimpleService.ScaleToZero.IsNull() && !data.SimpleService.ScaleToZero.IsUnknown() {
+			simple_serviceMap["scale_to_zero"] = data.SimpleService.ScaleToZero.ValueBool()
+		}
+		if data.SimpleService.SimpleAdvertise != nil {
+			simple_advertiseNestedMap := make(map[string]interface{})
+			if !data.SimpleService.SimpleAdvertise.ServicePort.IsNull() && !data.SimpleService.SimpleAdvertise.ServicePort.IsUnknown() {
+				simple_advertiseNestedMap["service_port"] = data.SimpleService.SimpleAdvertise.ServicePort.ValueInt64()
+			}
+			simple_serviceMap["simple_advertise"] = simple_advertiseNestedMap
+		}
+		apiResource.Spec["simple_service"] = simple_serviceMap
+	}
+	if data.StatefulService != nil {
+		stateful_serviceMap := make(map[string]interface{})
+		if data.StatefulService.AdvertiseOptions != nil {
+			advertise_optionsNestedMap := make(map[string]interface{})
+			stateful_serviceMap["advertise_options"] = advertise_optionsNestedMap
+		}
+		if data.StatefulService.Configuration != nil {
+			configurationNestedMap := make(map[string]interface{})
+			stateful_serviceMap["configuration"] = configurationNestedMap
+		}
+		if data.StatefulService.DeployOptions != nil {
+			deploy_optionsNestedMap := make(map[string]interface{})
+			stateful_serviceMap["deploy_options"] = deploy_optionsNestedMap
+		}
+		if !data.StatefulService.NumReplicas.IsNull() && !data.StatefulService.NumReplicas.IsUnknown() {
+			stateful_serviceMap["num_replicas"] = data.StatefulService.NumReplicas.ValueInt64()
+		}
+		if data.StatefulService.ScaleToZero != nil {
+			stateful_serviceMap["scale_to_zero"] = map[string]interface{}{}
+		}
+		apiResource.Spec["stateful_service"] = stateful_serviceMap
+	}
+
+
 	created, err := r.client.CreateWorkload(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create Workload: %s", err))
@@ -12849,8 +12955,13 @@ func (r *WorkloadResource) Create(ctx context.Context, req resource.CreateReques
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created Workload resource")
@@ -12929,9 +13040,70 @@ func (r *WorkloadResource) Read(ctx context.Context, req resource.ReadRequest, r
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if blockData, ok := apiResource.Spec["job"].(map[string]interface{}); ok && (isImport || data.Job != nil) {
+		data.Job = &WorkloadJobModel{
+			NumReplicas: func() types.Int64 {
+				if v, ok := blockData["num_replicas"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["service"].(map[string]interface{}); ok && (isImport || data.Service != nil) {
+		data.Service = &WorkloadServiceModel{
+			NumReplicas: func() types.Int64 {
+				if v, ok := blockData["num_replicas"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["simple_service"].(map[string]interface{}); ok && (isImport || data.SimpleService != nil) {
+		data.SimpleService = &WorkloadSimpleServiceModel{
+			ScaleToZero: func() types.Bool {
+				if !isImport && data.SimpleService != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.SimpleService.ScaleToZero
+				}
+				// Import case: read from API
+				if v, ok := blockData["scale_to_zero"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["stateful_service"].(map[string]interface{}); ok && (isImport || data.StatefulService != nil) {
+		data.StatefulService = &WorkloadStatefulServiceModel{
+			NumReplicas: func() types.Int64 {
+				if v, ok := blockData["num_replicas"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -12957,7 +13129,7 @@ func (r *WorkloadResource) Update(ctx context.Context, req resource.UpdateReques
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.WorkloadSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -12982,6 +13154,112 @@ func (r *WorkloadResource) Update(ctx context.Context, req resource.UpdateReques
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.Job != nil {
+		jobMap := make(map[string]interface{})
+		if data.Job.Configuration != nil {
+			configurationNestedMap := make(map[string]interface{})
+			jobMap["configuration"] = configurationNestedMap
+		}
+		if data.Job.DeployOptions != nil {
+			deploy_optionsNestedMap := make(map[string]interface{})
+			jobMap["deploy_options"] = deploy_optionsNestedMap
+		}
+		if !data.Job.NumReplicas.IsNull() && !data.Job.NumReplicas.IsUnknown() {
+			jobMap["num_replicas"] = data.Job.NumReplicas.ValueInt64()
+		}
+		apiResource.Spec["job"] = jobMap
+	}
+	if data.Service != nil {
+		serviceMap := make(map[string]interface{})
+		if data.Service.AdvertiseOptions != nil {
+			advertise_optionsNestedMap := make(map[string]interface{})
+			serviceMap["advertise_options"] = advertise_optionsNestedMap
+		}
+		if data.Service.Configuration != nil {
+			configurationNestedMap := make(map[string]interface{})
+			serviceMap["configuration"] = configurationNestedMap
+		}
+		if data.Service.DeployOptions != nil {
+			deploy_optionsNestedMap := make(map[string]interface{})
+			serviceMap["deploy_options"] = deploy_optionsNestedMap
+		}
+		if !data.Service.NumReplicas.IsNull() && !data.Service.NumReplicas.IsUnknown() {
+			serviceMap["num_replicas"] = data.Service.NumReplicas.ValueInt64()
+		}
+		if data.Service.ScaleToZero != nil {
+			serviceMap["scale_to_zero"] = map[string]interface{}{}
+		}
+		apiResource.Spec["service"] = serviceMap
+	}
+	if data.SimpleService != nil {
+		simple_serviceMap := make(map[string]interface{})
+		if data.SimpleService.Configuration != nil {
+			configurationNestedMap := make(map[string]interface{})
+			simple_serviceMap["configuration"] = configurationNestedMap
+		}
+		if data.SimpleService.Container != nil {
+			containerNestedMap := make(map[string]interface{})
+			if !data.SimpleService.Container.Flavor.IsNull() && !data.SimpleService.Container.Flavor.IsUnknown() {
+				containerNestedMap["flavor"] = data.SimpleService.Container.Flavor.ValueString()
+			}
+			if !data.SimpleService.Container.InitContainer.IsNull() && !data.SimpleService.Container.InitContainer.IsUnknown() {
+				containerNestedMap["init_container"] = data.SimpleService.Container.InitContainer.ValueBool()
+			}
+			if !data.SimpleService.Container.Name.IsNull() && !data.SimpleService.Container.Name.IsUnknown() {
+				containerNestedMap["name"] = data.SimpleService.Container.Name.ValueString()
+			}
+			simple_serviceMap["container"] = containerNestedMap
+		}
+		if data.SimpleService.Disabled != nil {
+			simple_serviceMap["disabled"] = map[string]interface{}{}
+		}
+		if data.SimpleService.DoNotAdvertise != nil {
+			simple_serviceMap["do_not_advertise"] = map[string]interface{}{}
+		}
+		if data.SimpleService.Enabled != nil {
+			enabledNestedMap := make(map[string]interface{})
+			if !data.SimpleService.Enabled.Name.IsNull() && !data.SimpleService.Enabled.Name.IsUnknown() {
+				enabledNestedMap["name"] = data.SimpleService.Enabled.Name.ValueString()
+			}
+			simple_serviceMap["enabled"] = enabledNestedMap
+		}
+		if !data.SimpleService.ScaleToZero.IsNull() && !data.SimpleService.ScaleToZero.IsUnknown() {
+			simple_serviceMap["scale_to_zero"] = data.SimpleService.ScaleToZero.ValueBool()
+		}
+		if data.SimpleService.SimpleAdvertise != nil {
+			simple_advertiseNestedMap := make(map[string]interface{})
+			if !data.SimpleService.SimpleAdvertise.ServicePort.IsNull() && !data.SimpleService.SimpleAdvertise.ServicePort.IsUnknown() {
+				simple_advertiseNestedMap["service_port"] = data.SimpleService.SimpleAdvertise.ServicePort.ValueInt64()
+			}
+			simple_serviceMap["simple_advertise"] = simple_advertiseNestedMap
+		}
+		apiResource.Spec["simple_service"] = simple_serviceMap
+	}
+	if data.StatefulService != nil {
+		stateful_serviceMap := make(map[string]interface{})
+		if data.StatefulService.AdvertiseOptions != nil {
+			advertise_optionsNestedMap := make(map[string]interface{})
+			stateful_serviceMap["advertise_options"] = advertise_optionsNestedMap
+		}
+		if data.StatefulService.Configuration != nil {
+			configurationNestedMap := make(map[string]interface{})
+			stateful_serviceMap["configuration"] = configurationNestedMap
+		}
+		if data.StatefulService.DeployOptions != nil {
+			deploy_optionsNestedMap := make(map[string]interface{})
+			stateful_serviceMap["deploy_options"] = deploy_optionsNestedMap
+		}
+		if !data.StatefulService.NumReplicas.IsNull() && !data.StatefulService.NumReplicas.IsUnknown() {
+			stateful_serviceMap["num_replicas"] = data.StatefulService.NumReplicas.ValueInt64()
+		}
+		if data.StatefulService.ScaleToZero != nil {
+			stateful_serviceMap["scale_to_zero"] = map[string]interface{}{}
+		}
+		apiResource.Spec["stateful_service"] = stateful_serviceMap
+	}
+
+
 	updated, err := r.client.UpdateWorkload(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update Workload: %s", err))
@@ -12990,6 +13268,8 @@ func (r *WorkloadResource) Update(ctx context.Context, req resource.UpdateReques
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -13002,6 +13282,7 @@ func (r *WorkloadResource) Update(ctx context.Context, req resource.UpdateReques
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -13028,6 +13309,15 @@ func (r *WorkloadResource) Delete(ctx context.Context, req resource.DeleteReques
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "Workload already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "Workload delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

@@ -10,13 +10,8 @@ import (
 
 // NetworkInterface represents a F5XC NetworkInterface
 type NetworkInterface struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     NetworkInterfaceSpec `json:"spec"`
-}
-
-// NetworkInterfaceSpec defines the specification for NetworkInterface
-type NetworkInterfaceSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateNetworkInterface creates a new NetworkInterface

@@ -324,7 +324,7 @@ func (r *UserIdentificationResource) Create(ctx context.Context, req resource.Cr
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.UserIdentificationSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -349,6 +349,62 @@ func (r *UserIdentificationResource) Create(ctx context.Context, req resource.Cr
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if len(data.Rules) > 0 {
+		var rulesList []map[string]interface{}
+		for _, item := range data.Rules {
+			itemMap := make(map[string]interface{})
+			if item.ClientAsn != nil {
+				itemMap["client_asn"] = map[string]interface{}{}
+			}
+			if item.ClientCity != nil {
+				itemMap["client_city"] = map[string]interface{}{}
+			}
+			if item.ClientCountry != nil {
+				itemMap["client_country"] = map[string]interface{}{}
+			}
+			if item.ClientIP != nil {
+				itemMap["client_ip"] = map[string]interface{}{}
+			}
+			if item.ClientRegion != nil {
+				itemMap["client_region"] = map[string]interface{}{}
+			}
+			if !item.CookieName.IsNull() && !item.CookieName.IsUnknown() {
+				itemMap["cookie_name"] = item.CookieName.ValueString()
+			}
+			if !item.HTTPHeaderName.IsNull() && !item.HTTPHeaderName.IsUnknown() {
+				itemMap["http_header_name"] = item.HTTPHeaderName.ValueString()
+			}
+			if !item.IPAndHTTPHeaderName.IsNull() && !item.IPAndHTTPHeaderName.IsUnknown() {
+				itemMap["ip_and_http_header_name"] = item.IPAndHTTPHeaderName.ValueString()
+			}
+			if item.IPAndJa4TLSFingerprint != nil {
+				itemMap["ip_and_ja4_tls_fingerprint"] = map[string]interface{}{}
+			}
+			if item.IPAndTLSFingerprint != nil {
+				itemMap["ip_and_tls_fingerprint"] = map[string]interface{}{}
+			}
+			if item.Ja4TLSFingerprint != nil {
+				itemMap["ja4_tls_fingerprint"] = map[string]interface{}{}
+			}
+			if !item.JwtClaimName.IsNull() && !item.JwtClaimName.IsUnknown() {
+				itemMap["jwt_claim_name"] = item.JwtClaimName.ValueString()
+			}
+			if item.None != nil {
+				itemMap["none"] = map[string]interface{}{}
+			}
+			if !item.QueryParamKey.IsNull() && !item.QueryParamKey.IsUnknown() {
+				itemMap["query_param_key"] = item.QueryParamKey.ValueString()
+			}
+			if item.TLSFingerprint != nil {
+				itemMap["tls_fingerprint"] = map[string]interface{}{}
+			}
+			rulesList = append(rulesList, itemMap)
+		}
+		apiResource.Spec["rules"] = rulesList
+	}
+
+
 	created, err := r.client.CreateUserIdentification(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create UserIdentification: %s", err))
@@ -357,8 +413,13 @@ func (r *UserIdentificationResource) Create(ctx context.Context, req resource.Cr
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created UserIdentification resource")
@@ -437,9 +498,125 @@ func (r *UserIdentificationResource) Read(ctx context.Context, req resource.Read
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if listData, ok := apiResource.Spec["rules"].([]interface{}); ok && len(listData) > 0 {
+		var rulesList []UserIdentificationRulesModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				rulesList = append(rulesList, UserIdentificationRulesModel{
+					ClientAsn: func() *UserIdentificationEmptyModel {
+						if _, ok := itemMap["client_asn"].(map[string]interface{}); ok {
+							return &UserIdentificationEmptyModel{}
+						}
+						return nil
+					}(),
+					ClientCity: func() *UserIdentificationEmptyModel {
+						if _, ok := itemMap["client_city"].(map[string]interface{}); ok {
+							return &UserIdentificationEmptyModel{}
+						}
+						return nil
+					}(),
+					ClientCountry: func() *UserIdentificationEmptyModel {
+						if _, ok := itemMap["client_country"].(map[string]interface{}); ok {
+							return &UserIdentificationEmptyModel{}
+						}
+						return nil
+					}(),
+					ClientIP: func() *UserIdentificationEmptyModel {
+						if _, ok := itemMap["client_ip"].(map[string]interface{}); ok {
+							return &UserIdentificationEmptyModel{}
+						}
+						return nil
+					}(),
+					ClientRegion: func() *UserIdentificationEmptyModel {
+						if _, ok := itemMap["client_region"].(map[string]interface{}); ok {
+							return &UserIdentificationEmptyModel{}
+						}
+						return nil
+					}(),
+					CookieName: func() types.String {
+						if v, ok := itemMap["cookie_name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					HTTPHeaderName: func() types.String {
+						if v, ok := itemMap["http_header_name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					IPAndHTTPHeaderName: func() types.String {
+						if v, ok := itemMap["ip_and_http_header_name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					IPAndJa4TLSFingerprint: func() *UserIdentificationEmptyModel {
+						if _, ok := itemMap["ip_and_ja4_tls_fingerprint"].(map[string]interface{}); ok {
+							return &UserIdentificationEmptyModel{}
+						}
+						return nil
+					}(),
+					IPAndTLSFingerprint: func() *UserIdentificationEmptyModel {
+						if _, ok := itemMap["ip_and_tls_fingerprint"].(map[string]interface{}); ok {
+							return &UserIdentificationEmptyModel{}
+						}
+						return nil
+					}(),
+					Ja4TLSFingerprint: func() *UserIdentificationEmptyModel {
+						if _, ok := itemMap["ja4_tls_fingerprint"].(map[string]interface{}); ok {
+							return &UserIdentificationEmptyModel{}
+						}
+						return nil
+					}(),
+					JwtClaimName: func() types.String {
+						if v, ok := itemMap["jwt_claim_name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					None: func() *UserIdentificationEmptyModel {
+						if _, ok := itemMap["none"].(map[string]interface{}); ok {
+							return &UserIdentificationEmptyModel{}
+						}
+						return nil
+					}(),
+					QueryParamKey: func() types.String {
+						if v, ok := itemMap["query_param_key"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					TLSFingerprint: func() *UserIdentificationEmptyModel {
+						if _, ok := itemMap["tls_fingerprint"].(map[string]interface{}); ok {
+							return &UserIdentificationEmptyModel{}
+						}
+						return nil
+					}(),
+				})
+			}
+		}
+		data.Rules = rulesList
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -465,7 +642,7 @@ func (r *UserIdentificationResource) Update(ctx context.Context, req resource.Up
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.UserIdentificationSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -490,6 +667,62 @@ func (r *UserIdentificationResource) Update(ctx context.Context, req resource.Up
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if len(data.Rules) > 0 {
+		var rulesList []map[string]interface{}
+		for _, item := range data.Rules {
+			itemMap := make(map[string]interface{})
+			if item.ClientAsn != nil {
+				itemMap["client_asn"] = map[string]interface{}{}
+			}
+			if item.ClientCity != nil {
+				itemMap["client_city"] = map[string]interface{}{}
+			}
+			if item.ClientCountry != nil {
+				itemMap["client_country"] = map[string]interface{}{}
+			}
+			if item.ClientIP != nil {
+				itemMap["client_ip"] = map[string]interface{}{}
+			}
+			if item.ClientRegion != nil {
+				itemMap["client_region"] = map[string]interface{}{}
+			}
+			if !item.CookieName.IsNull() && !item.CookieName.IsUnknown() {
+				itemMap["cookie_name"] = item.CookieName.ValueString()
+			}
+			if !item.HTTPHeaderName.IsNull() && !item.HTTPHeaderName.IsUnknown() {
+				itemMap["http_header_name"] = item.HTTPHeaderName.ValueString()
+			}
+			if !item.IPAndHTTPHeaderName.IsNull() && !item.IPAndHTTPHeaderName.IsUnknown() {
+				itemMap["ip_and_http_header_name"] = item.IPAndHTTPHeaderName.ValueString()
+			}
+			if item.IPAndJa4TLSFingerprint != nil {
+				itemMap["ip_and_ja4_tls_fingerprint"] = map[string]interface{}{}
+			}
+			if item.IPAndTLSFingerprint != nil {
+				itemMap["ip_and_tls_fingerprint"] = map[string]interface{}{}
+			}
+			if item.Ja4TLSFingerprint != nil {
+				itemMap["ja4_tls_fingerprint"] = map[string]interface{}{}
+			}
+			if !item.JwtClaimName.IsNull() && !item.JwtClaimName.IsUnknown() {
+				itemMap["jwt_claim_name"] = item.JwtClaimName.ValueString()
+			}
+			if item.None != nil {
+				itemMap["none"] = map[string]interface{}{}
+			}
+			if !item.QueryParamKey.IsNull() && !item.QueryParamKey.IsUnknown() {
+				itemMap["query_param_key"] = item.QueryParamKey.ValueString()
+			}
+			if item.TLSFingerprint != nil {
+				itemMap["tls_fingerprint"] = map[string]interface{}{}
+			}
+			rulesList = append(rulesList, itemMap)
+		}
+		apiResource.Spec["rules"] = rulesList
+	}
+
+
 	updated, err := r.client.UpdateUserIdentification(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update UserIdentification: %s", err))
@@ -498,6 +731,8 @@ func (r *UserIdentificationResource) Update(ctx context.Context, req resource.Up
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -510,6 +745,7 @@ func (r *UserIdentificationResource) Update(ctx context.Context, req resource.Up
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -536,6 +772,15 @@ func (r *UserIdentificationResource) Delete(ctx context.Context, req resource.De
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "UserIdentification already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "UserIdentification delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

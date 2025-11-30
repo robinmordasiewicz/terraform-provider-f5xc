@@ -538,7 +538,7 @@ func (r *AlertPolicyResource) Create(ctx context.Context, req resource.CreateReq
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.AlertPolicySpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -563,6 +563,106 @@ func (r *AlertPolicyResource) Create(ctx context.Context, req resource.CreateReq
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.NotificationParameters != nil {
+		notification_parametersMap := make(map[string]interface{})
+		if data.NotificationParameters.Custom != nil {
+			customNestedMap := make(map[string]interface{})
+			notification_parametersMap["custom"] = customNestedMap
+		}
+		if data.NotificationParameters.Default != nil {
+			notification_parametersMap["default"] = map[string]interface{}{}
+		}
+		if !data.NotificationParameters.GroupInterval.IsNull() && !data.NotificationParameters.GroupInterval.IsUnknown() {
+			notification_parametersMap["group_interval"] = data.NotificationParameters.GroupInterval.ValueString()
+		}
+		if !data.NotificationParameters.GroupWait.IsNull() && !data.NotificationParameters.GroupWait.IsUnknown() {
+			notification_parametersMap["group_wait"] = data.NotificationParameters.GroupWait.ValueString()
+		}
+		if data.NotificationParameters.Individual != nil {
+			notification_parametersMap["individual"] = map[string]interface{}{}
+		}
+		if !data.NotificationParameters.RepeatInterval.IsNull() && !data.NotificationParameters.RepeatInterval.IsUnknown() {
+			notification_parametersMap["repeat_interval"] = data.NotificationParameters.RepeatInterval.ValueString()
+		}
+		if data.NotificationParameters.VesIoGroup != nil {
+			notification_parametersMap["ves_io_group"] = map[string]interface{}{}
+		}
+		apiResource.Spec["notification_parameters"] = notification_parametersMap
+	}
+	if len(data.Receivers) > 0 {
+		var receiversList []map[string]interface{}
+		for _, item := range data.Receivers {
+			itemMap := make(map[string]interface{})
+			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+				itemMap["kind"] = item.Kind.ValueString()
+			}
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+				itemMap["namespace"] = item.Namespace.ValueString()
+			}
+			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+				itemMap["tenant"] = item.Tenant.ValueString()
+			}
+			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+				itemMap["uid"] = item.Uid.ValueString()
+			}
+			receiversList = append(receiversList, itemMap)
+		}
+		apiResource.Spec["receivers"] = receiversList
+	}
+	if len(data.Routes) > 0 {
+		var routesList []map[string]interface{}
+		for _, item := range data.Routes {
+			itemMap := make(map[string]interface{})
+			if !item.Alertname.IsNull() && !item.Alertname.IsUnknown() {
+				itemMap["alertname"] = item.Alertname.ValueString()
+			}
+			if !item.AlertnameRegex.IsNull() && !item.AlertnameRegex.IsUnknown() {
+				itemMap["alertname_regex"] = item.AlertnameRegex.ValueString()
+			}
+			if item.Any != nil {
+				itemMap["any"] = map[string]interface{}{}
+			}
+			if item.Custom != nil {
+				customNestedMap := make(map[string]interface{})
+				itemMap["custom"] = customNestedMap
+			}
+			if item.DontSend != nil {
+				itemMap["dont_send"] = map[string]interface{}{}
+			}
+			if item.Group != nil {
+				groupNestedMap := make(map[string]interface{})
+				itemMap["group"] = groupNestedMap
+			}
+			if item.NotificationParameters != nil {
+				notification_parametersNestedMap := make(map[string]interface{})
+				if !item.NotificationParameters.GroupInterval.IsNull() && !item.NotificationParameters.GroupInterval.IsUnknown() {
+					notification_parametersNestedMap["group_interval"] = item.NotificationParameters.GroupInterval.ValueString()
+				}
+				if !item.NotificationParameters.GroupWait.IsNull() && !item.NotificationParameters.GroupWait.IsUnknown() {
+					notification_parametersNestedMap["group_wait"] = item.NotificationParameters.GroupWait.ValueString()
+				}
+				if !item.NotificationParameters.RepeatInterval.IsNull() && !item.NotificationParameters.RepeatInterval.IsUnknown() {
+					notification_parametersNestedMap["repeat_interval"] = item.NotificationParameters.RepeatInterval.ValueString()
+				}
+				itemMap["notification_parameters"] = notification_parametersNestedMap
+			}
+			if item.Send != nil {
+				itemMap["send"] = map[string]interface{}{}
+			}
+			if item.Severity != nil {
+				severityNestedMap := make(map[string]interface{})
+				itemMap["severity"] = severityNestedMap
+			}
+			routesList = append(routesList, itemMap)
+		}
+		apiResource.Spec["routes"] = routesList
+	}
+
+
 	created, err := r.client.CreateAlertPolicy(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create AlertPolicy: %s", err))
@@ -571,8 +671,13 @@ func (r *AlertPolicyResource) Create(ctx context.Context, req resource.CreateReq
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created AlertPolicy resource")
@@ -651,9 +756,173 @@ func (r *AlertPolicyResource) Read(ctx context.Context, req resource.ReadRequest
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if blockData, ok := apiResource.Spec["notification_parameters"].(map[string]interface{}); ok && (isImport || data.NotificationParameters != nil) {
+		data.NotificationParameters = &AlertPolicyNotificationParametersModel{
+			GroupInterval: func() types.String {
+				if v, ok := blockData["group_interval"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			GroupWait: func() types.String {
+				if v, ok := blockData["group_wait"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			RepeatInterval: func() types.String {
+				if v, ok := blockData["repeat_interval"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if listData, ok := apiResource.Spec["receivers"].([]interface{}); ok && len(listData) > 0 {
+		var receiversList []AlertPolicyReceiversModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				receiversList = append(receiversList, AlertPolicyReceiversModel{
+					Kind: func() types.String {
+						if v, ok := itemMap["kind"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Namespace: func() types.String {
+						if v, ok := itemMap["namespace"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Tenant: func() types.String {
+						if v, ok := itemMap["tenant"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Uid: func() types.String {
+						if v, ok := itemMap["uid"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.Receivers = receiversList
+	}
+	if listData, ok := apiResource.Spec["routes"].([]interface{}); ok && len(listData) > 0 {
+		var routesList []AlertPolicyRoutesModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				routesList = append(routesList, AlertPolicyRoutesModel{
+					Alertname: func() types.String {
+						if v, ok := itemMap["alertname"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					AlertnameRegex: func() types.String {
+						if v, ok := itemMap["alertname_regex"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Any: func() *AlertPolicyEmptyModel {
+						if _, ok := itemMap["any"].(map[string]interface{}); ok {
+							return &AlertPolicyEmptyModel{}
+						}
+						return nil
+					}(),
+					Custom: func() *AlertPolicyRoutesCustomModel {
+						if _, ok := itemMap["custom"].(map[string]interface{}); ok {
+							return &AlertPolicyRoutesCustomModel{
+							}
+						}
+						return nil
+					}(),
+					DontSend: func() *AlertPolicyEmptyModel {
+						if _, ok := itemMap["dont_send"].(map[string]interface{}); ok {
+							return &AlertPolicyEmptyModel{}
+						}
+						return nil
+					}(),
+					Group: func() *AlertPolicyRoutesGroupModel {
+						if _, ok := itemMap["group"].(map[string]interface{}); ok {
+							return &AlertPolicyRoutesGroupModel{
+							}
+						}
+						return nil
+					}(),
+					NotificationParameters: func() *AlertPolicyRoutesNotificationParametersModel {
+						if nestedMap, ok := itemMap["notification_parameters"].(map[string]interface{}); ok {
+							return &AlertPolicyRoutesNotificationParametersModel{
+								GroupInterval: func() types.String {
+									if v, ok := nestedMap["group_interval"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								GroupWait: func() types.String {
+									if v, ok := nestedMap["group_wait"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								RepeatInterval: func() types.String {
+									if v, ok := nestedMap["repeat_interval"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					Send: func() *AlertPolicyEmptyModel {
+						if _, ok := itemMap["send"].(map[string]interface{}); ok {
+							return &AlertPolicyEmptyModel{}
+						}
+						return nil
+					}(),
+					Severity: func() *AlertPolicyRoutesSeverityModel {
+						if _, ok := itemMap["severity"].(map[string]interface{}); ok {
+							return &AlertPolicyRoutesSeverityModel{
+							}
+						}
+						return nil
+					}(),
+				})
+			}
+		}
+		data.Routes = routesList
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -679,7 +948,7 @@ func (r *AlertPolicyResource) Update(ctx context.Context, req resource.UpdateReq
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.AlertPolicySpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -704,6 +973,106 @@ func (r *AlertPolicyResource) Update(ctx context.Context, req resource.UpdateReq
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.NotificationParameters != nil {
+		notification_parametersMap := make(map[string]interface{})
+		if data.NotificationParameters.Custom != nil {
+			customNestedMap := make(map[string]interface{})
+			notification_parametersMap["custom"] = customNestedMap
+		}
+		if data.NotificationParameters.Default != nil {
+			notification_parametersMap["default"] = map[string]interface{}{}
+		}
+		if !data.NotificationParameters.GroupInterval.IsNull() && !data.NotificationParameters.GroupInterval.IsUnknown() {
+			notification_parametersMap["group_interval"] = data.NotificationParameters.GroupInterval.ValueString()
+		}
+		if !data.NotificationParameters.GroupWait.IsNull() && !data.NotificationParameters.GroupWait.IsUnknown() {
+			notification_parametersMap["group_wait"] = data.NotificationParameters.GroupWait.ValueString()
+		}
+		if data.NotificationParameters.Individual != nil {
+			notification_parametersMap["individual"] = map[string]interface{}{}
+		}
+		if !data.NotificationParameters.RepeatInterval.IsNull() && !data.NotificationParameters.RepeatInterval.IsUnknown() {
+			notification_parametersMap["repeat_interval"] = data.NotificationParameters.RepeatInterval.ValueString()
+		}
+		if data.NotificationParameters.VesIoGroup != nil {
+			notification_parametersMap["ves_io_group"] = map[string]interface{}{}
+		}
+		apiResource.Spec["notification_parameters"] = notification_parametersMap
+	}
+	if len(data.Receivers) > 0 {
+		var receiversList []map[string]interface{}
+		for _, item := range data.Receivers {
+			itemMap := make(map[string]interface{})
+			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+				itemMap["kind"] = item.Kind.ValueString()
+			}
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+				itemMap["namespace"] = item.Namespace.ValueString()
+			}
+			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+				itemMap["tenant"] = item.Tenant.ValueString()
+			}
+			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+				itemMap["uid"] = item.Uid.ValueString()
+			}
+			receiversList = append(receiversList, itemMap)
+		}
+		apiResource.Spec["receivers"] = receiversList
+	}
+	if len(data.Routes) > 0 {
+		var routesList []map[string]interface{}
+		for _, item := range data.Routes {
+			itemMap := make(map[string]interface{})
+			if !item.Alertname.IsNull() && !item.Alertname.IsUnknown() {
+				itemMap["alertname"] = item.Alertname.ValueString()
+			}
+			if !item.AlertnameRegex.IsNull() && !item.AlertnameRegex.IsUnknown() {
+				itemMap["alertname_regex"] = item.AlertnameRegex.ValueString()
+			}
+			if item.Any != nil {
+				itemMap["any"] = map[string]interface{}{}
+			}
+			if item.Custom != nil {
+				customNestedMap := make(map[string]interface{})
+				itemMap["custom"] = customNestedMap
+			}
+			if item.DontSend != nil {
+				itemMap["dont_send"] = map[string]interface{}{}
+			}
+			if item.Group != nil {
+				groupNestedMap := make(map[string]interface{})
+				itemMap["group"] = groupNestedMap
+			}
+			if item.NotificationParameters != nil {
+				notification_parametersNestedMap := make(map[string]interface{})
+				if !item.NotificationParameters.GroupInterval.IsNull() && !item.NotificationParameters.GroupInterval.IsUnknown() {
+					notification_parametersNestedMap["group_interval"] = item.NotificationParameters.GroupInterval.ValueString()
+				}
+				if !item.NotificationParameters.GroupWait.IsNull() && !item.NotificationParameters.GroupWait.IsUnknown() {
+					notification_parametersNestedMap["group_wait"] = item.NotificationParameters.GroupWait.ValueString()
+				}
+				if !item.NotificationParameters.RepeatInterval.IsNull() && !item.NotificationParameters.RepeatInterval.IsUnknown() {
+					notification_parametersNestedMap["repeat_interval"] = item.NotificationParameters.RepeatInterval.ValueString()
+				}
+				itemMap["notification_parameters"] = notification_parametersNestedMap
+			}
+			if item.Send != nil {
+				itemMap["send"] = map[string]interface{}{}
+			}
+			if item.Severity != nil {
+				severityNestedMap := make(map[string]interface{})
+				itemMap["severity"] = severityNestedMap
+			}
+			routesList = append(routesList, itemMap)
+		}
+		apiResource.Spec["routes"] = routesList
+	}
+
+
 	updated, err := r.client.UpdateAlertPolicy(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update AlertPolicy: %s", err))
@@ -712,6 +1081,8 @@ func (r *AlertPolicyResource) Update(ctx context.Context, req resource.UpdateReq
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -724,6 +1095,7 @@ func (r *AlertPolicyResource) Update(ctx context.Context, req resource.UpdateReq
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -750,6 +1122,15 @@ func (r *AlertPolicyResource) Delete(ctx context.Context, req resource.DeleteReq
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "AlertPolicy already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "AlertPolicy delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

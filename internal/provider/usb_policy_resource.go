@@ -287,7 +287,7 @@ func (r *UsbPolicyResource) Create(ctx context.Context, req resource.CreateReque
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.UsbPolicySpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -312,6 +312,35 @@ func (r *UsbPolicyResource) Create(ctx context.Context, req resource.CreateReque
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if len(data.AllowedDevices) > 0 {
+		var allowed_devicesList []map[string]interface{}
+		for _, item := range data.AllowedDevices {
+			itemMap := make(map[string]interface{})
+			if !item.BDeviceClass.IsNull() && !item.BDeviceClass.IsUnknown() {
+				itemMap["b_device_class"] = item.BDeviceClass.ValueString()
+			}
+			if !item.BDeviceProtocol.IsNull() && !item.BDeviceProtocol.IsUnknown() {
+				itemMap["b_device_protocol"] = item.BDeviceProtocol.ValueString()
+			}
+			if !item.BDeviceSubClass.IsNull() && !item.BDeviceSubClass.IsUnknown() {
+				itemMap["b_device_sub_class"] = item.BDeviceSubClass.ValueString()
+			}
+			if !item.ISerial.IsNull() && !item.ISerial.IsUnknown() {
+				itemMap["i_serial"] = item.ISerial.ValueString()
+			}
+			if !item.IDProduct.IsNull() && !item.IDProduct.IsUnknown() {
+				itemMap["id_product"] = item.IDProduct.ValueString()
+			}
+			if !item.IDVendor.IsNull() && !item.IDVendor.IsUnknown() {
+				itemMap["id_vendor"] = item.IDVendor.ValueString()
+			}
+			allowed_devicesList = append(allowed_devicesList, itemMap)
+		}
+		apiResource.Spec["allowed_devices"] = allowed_devicesList
+	}
+
+
 	created, err := r.client.CreateUsbPolicy(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create UsbPolicy: %s", err))
@@ -320,8 +349,13 @@ func (r *UsbPolicyResource) Create(ctx context.Context, req resource.CreateReque
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created UsbPolicy resource")
@@ -400,9 +434,71 @@ func (r *UsbPolicyResource) Read(ctx context.Context, req resource.ReadRequest, 
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if listData, ok := apiResource.Spec["allowed_devices"].([]interface{}); ok && len(listData) > 0 {
+		var allowed_devicesList []UsbPolicyAllowedDevicesModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				allowed_devicesList = append(allowed_devicesList, UsbPolicyAllowedDevicesModel{
+					BDeviceClass: func() types.String {
+						if v, ok := itemMap["b_device_class"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					BDeviceProtocol: func() types.String {
+						if v, ok := itemMap["b_device_protocol"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					BDeviceSubClass: func() types.String {
+						if v, ok := itemMap["b_device_sub_class"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					ISerial: func() types.String {
+						if v, ok := itemMap["i_serial"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					IDProduct: func() types.String {
+						if v, ok := itemMap["id_product"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					IDVendor: func() types.String {
+						if v, ok := itemMap["id_vendor"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.AllowedDevices = allowed_devicesList
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -428,7 +524,7 @@ func (r *UsbPolicyResource) Update(ctx context.Context, req resource.UpdateReque
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.UsbPolicySpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -453,6 +549,35 @@ func (r *UsbPolicyResource) Update(ctx context.Context, req resource.UpdateReque
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if len(data.AllowedDevices) > 0 {
+		var allowed_devicesList []map[string]interface{}
+		for _, item := range data.AllowedDevices {
+			itemMap := make(map[string]interface{})
+			if !item.BDeviceClass.IsNull() && !item.BDeviceClass.IsUnknown() {
+				itemMap["b_device_class"] = item.BDeviceClass.ValueString()
+			}
+			if !item.BDeviceProtocol.IsNull() && !item.BDeviceProtocol.IsUnknown() {
+				itemMap["b_device_protocol"] = item.BDeviceProtocol.ValueString()
+			}
+			if !item.BDeviceSubClass.IsNull() && !item.BDeviceSubClass.IsUnknown() {
+				itemMap["b_device_sub_class"] = item.BDeviceSubClass.ValueString()
+			}
+			if !item.ISerial.IsNull() && !item.ISerial.IsUnknown() {
+				itemMap["i_serial"] = item.ISerial.ValueString()
+			}
+			if !item.IDProduct.IsNull() && !item.IDProduct.IsUnknown() {
+				itemMap["id_product"] = item.IDProduct.ValueString()
+			}
+			if !item.IDVendor.IsNull() && !item.IDVendor.IsUnknown() {
+				itemMap["id_vendor"] = item.IDVendor.ValueString()
+			}
+			allowed_devicesList = append(allowed_devicesList, itemMap)
+		}
+		apiResource.Spec["allowed_devices"] = allowed_devicesList
+	}
+
+
 	updated, err := r.client.UpdateUsbPolicy(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update UsbPolicy: %s", err))
@@ -461,6 +586,8 @@ func (r *UsbPolicyResource) Update(ctx context.Context, req resource.UpdateReque
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -473,6 +600,7 @@ func (r *UsbPolicyResource) Update(ctx context.Context, req resource.UpdateReque
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -499,6 +627,15 @@ func (r *UsbPolicyResource) Delete(ctx context.Context, req resource.DeleteReque
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "UsbPolicy already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "UsbPolicy delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

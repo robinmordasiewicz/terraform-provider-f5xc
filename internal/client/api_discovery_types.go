@@ -10,13 +10,8 @@ import (
 
 // APIDiscovery represents a F5XC APIDiscovery
 type APIDiscovery struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     APIDiscoverySpec `json:"spec"`
-}
-
-// APIDiscoverySpec defines the specification for APIDiscovery
-type APIDiscoverySpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateAPIDiscovery creates a new APIDiscovery

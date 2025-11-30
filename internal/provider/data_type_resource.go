@@ -12,6 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -117,10 +118,10 @@ type DataTypeResourceModel struct {
 	Compliances types.List `tfsdk:"compliances"`
 	Description types.String `tfsdk:"description"`
 	Disable types.Bool `tfsdk:"disable"`
-	IsPii types.Bool `tfsdk:"is_pii"`
-	IsSensitiveData types.Bool `tfsdk:"is_sensitive_data"`
 	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
+	IsPii types.Bool `tfsdk:"is_pii"`
+	IsSensitiveData types.Bool `tfsdk:"is_sensitive_data"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
 	Rules []DataTypeRulesModel `tfsdk:"rules"`
 }
@@ -172,14 +173,6 @@ func (r *DataTypeResource) Schema(ctx context.Context, req resource.SchemaReques
 				MarkdownDescription: "A value of true will administratively disable the object.",
 				Optional: true,
 			},
-			"is_pii": schema.BoolAttribute{
-				MarkdownDescription: "Mark as PII. Select this option to classify the custom data type as personally identifiable information (PII)",
-				Optional: true,
-			},
-			"is_sensitive_data": schema.BoolAttribute{
-				MarkdownDescription: "Mark as Sensitive Data. Select this option to classify the custom data type as sensitive, enabling detection of API vulnerabilities related to this data type.",
-				Optional: true,
-			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
 				Optional: true,
@@ -190,6 +183,22 @@ func (r *DataTypeResource) Schema(ctx context.Context, req resource.SchemaReques
 				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"is_pii": schema.BoolAttribute{
+				MarkdownDescription: "Mark as PII. Select this option to classify the custom data type as personally identifiable information (PII)",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.Bool{
+					boolplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"is_sensitive_data": schema.BoolAttribute{
+				MarkdownDescription: "Mark as Sensitive Data. Select this option to classify the custom data type as sensitive, enabling detection of API vulnerabilities related to this data type.",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.Bool{
+					boolplanmodifier.UseStateForUnknown(),
 				},
 			},
 		},
@@ -439,7 +448,7 @@ func (r *DataTypeResource) Create(ctx context.Context, req resource.CreateReques
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.DataTypeSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -464,6 +473,54 @@ func (r *DataTypeResource) Create(ctx context.Context, req resource.CreateReques
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if !data.Compliances.IsNull() && !data.Compliances.IsUnknown() {
+		var compliancesList []string
+		resp.Diagnostics.Append(data.Compliances.ElementsAs(ctx, &compliancesList, false)...)
+		if !resp.Diagnostics.HasError() {
+			apiResource.Spec["compliances"] = compliancesList
+		}
+	}
+	if len(data.Rules) > 0 {
+		var rulesList []map[string]interface{}
+		for _, item := range data.Rules {
+			itemMap := make(map[string]interface{})
+			if item.KeyPattern != nil {
+				key_patternNestedMap := make(map[string]interface{})
+				if !item.KeyPattern.RegexValue.IsNull() && !item.KeyPattern.RegexValue.IsUnknown() {
+					key_patternNestedMap["regex_value"] = item.KeyPattern.RegexValue.ValueString()
+				}
+				if !item.KeyPattern.SubstringValue.IsNull() && !item.KeyPattern.SubstringValue.IsUnknown() {
+					key_patternNestedMap["substring_value"] = item.KeyPattern.SubstringValue.ValueString()
+				}
+				itemMap["key_pattern"] = key_patternNestedMap
+			}
+			if item.KeyValuePattern != nil {
+				key_value_patternNestedMap := make(map[string]interface{})
+				itemMap["key_value_pattern"] = key_value_patternNestedMap
+			}
+			if item.ValuePattern != nil {
+				value_patternNestedMap := make(map[string]interface{})
+				if !item.ValuePattern.RegexValue.IsNull() && !item.ValuePattern.RegexValue.IsUnknown() {
+					value_patternNestedMap["regex_value"] = item.ValuePattern.RegexValue.ValueString()
+				}
+				if !item.ValuePattern.SubstringValue.IsNull() && !item.ValuePattern.SubstringValue.IsUnknown() {
+					value_patternNestedMap["substring_value"] = item.ValuePattern.SubstringValue.ValueString()
+				}
+				itemMap["value_pattern"] = value_patternNestedMap
+			}
+			rulesList = append(rulesList, itemMap)
+		}
+		apiResource.Spec["rules"] = rulesList
+	}
+	if !data.IsPii.IsNull() && !data.IsPii.IsUnknown() {
+		apiResource.Spec["is_pii"] = data.IsPii.ValueBool()
+	}
+	if !data.IsSensitiveData.IsNull() && !data.IsSensitiveData.IsUnknown() {
+		apiResource.Spec["is_sensitive_data"] = data.IsSensitiveData.ValueBool()
+	}
+
+
 	created, err := r.client.CreateDataType(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create DataType: %s", err))
@@ -472,8 +529,21 @@ func (r *DataTypeResource) Create(ctx context.Context, req resource.CreateReques
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+	if v, ok := created.Spec["is_pii"].(bool); ok {
+		data.IsPii = types.BoolValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["is_sensitive_data"].(bool); ok {
+		data.IsSensitiveData = types.BoolValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created DataType resource")
@@ -552,9 +622,117 @@ func (r *DataTypeResource) Read(ctx context.Context, req resource.ReadRequest, r
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if v, ok := apiResource.Spec["compliances"].([]interface{}); ok && len(v) > 0 {
+		var compliancesList []string
+		for _, item := range v {
+			if s, ok := item.(string); ok {
+				compliancesList = append(compliancesList, s)
+			}
+		}
+		listVal, diags := types.ListValueFrom(ctx, types.StringType, compliancesList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Compliances = listVal
+		}
+	} else {
+		data.Compliances = types.ListNull(types.StringType)
+	}
+	if listData, ok := apiResource.Spec["rules"].([]interface{}); ok && len(listData) > 0 {
+		var rulesList []DataTypeRulesModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				rulesList = append(rulesList, DataTypeRulesModel{
+					KeyPattern: func() *DataTypeRulesKeyPatternModel {
+						if nestedMap, ok := itemMap["key_pattern"].(map[string]interface{}); ok {
+							return &DataTypeRulesKeyPatternModel{
+								RegexValue: func() types.String {
+									if v, ok := nestedMap["regex_value"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								SubstringValue: func() types.String {
+									if v, ok := nestedMap["substring_value"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					KeyValuePattern: func() *DataTypeRulesKeyValuePatternModel {
+						if _, ok := itemMap["key_value_pattern"].(map[string]interface{}); ok {
+							return &DataTypeRulesKeyValuePatternModel{
+							}
+						}
+						return nil
+					}(),
+					ValuePattern: func() *DataTypeRulesValuePatternModel {
+						if nestedMap, ok := itemMap["value_pattern"].(map[string]interface{}); ok {
+							return &DataTypeRulesValuePatternModel{
+								RegexValue: func() types.String {
+									if v, ok := nestedMap["regex_value"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								SubstringValue: func() types.String {
+									if v, ok := nestedMap["substring_value"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+				})
+			}
+		}
+		data.Rules = rulesList
+	}
+	// Top-level Optional bool: preserve prior state to avoid API default drift
+	if !isImport && !data.IsPii.IsNull() {
+		// Normal Read: preserve existing state value (do nothing)
+	} else {
+		// Import case or null state: read from API
+		if v, ok := apiResource.Spec["is_pii"].(bool); ok {
+			data.IsPii = types.BoolValue(v)
+		} else {
+			data.IsPii = types.BoolNull()
+		}
+	}
+	// Top-level Optional bool: preserve prior state to avoid API default drift
+	if !isImport && !data.IsSensitiveData.IsNull() {
+		// Normal Read: preserve existing state value (do nothing)
+	} else {
+		// Import case or null state: read from API
+		if v, ok := apiResource.Spec["is_sensitive_data"].(bool); ok {
+			data.IsSensitiveData = types.BoolValue(v)
+		} else {
+			data.IsSensitiveData = types.BoolNull()
+		}
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -580,7 +758,7 @@ func (r *DataTypeResource) Update(ctx context.Context, req resource.UpdateReques
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.DataTypeSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -605,6 +783,54 @@ func (r *DataTypeResource) Update(ctx context.Context, req resource.UpdateReques
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if !data.Compliances.IsNull() && !data.Compliances.IsUnknown() {
+		var compliancesList []string
+		resp.Diagnostics.Append(data.Compliances.ElementsAs(ctx, &compliancesList, false)...)
+		if !resp.Diagnostics.HasError() {
+			apiResource.Spec["compliances"] = compliancesList
+		}
+	}
+	if len(data.Rules) > 0 {
+		var rulesList []map[string]interface{}
+		for _, item := range data.Rules {
+			itemMap := make(map[string]interface{})
+			if item.KeyPattern != nil {
+				key_patternNestedMap := make(map[string]interface{})
+				if !item.KeyPattern.RegexValue.IsNull() && !item.KeyPattern.RegexValue.IsUnknown() {
+					key_patternNestedMap["regex_value"] = item.KeyPattern.RegexValue.ValueString()
+				}
+				if !item.KeyPattern.SubstringValue.IsNull() && !item.KeyPattern.SubstringValue.IsUnknown() {
+					key_patternNestedMap["substring_value"] = item.KeyPattern.SubstringValue.ValueString()
+				}
+				itemMap["key_pattern"] = key_patternNestedMap
+			}
+			if item.KeyValuePattern != nil {
+				key_value_patternNestedMap := make(map[string]interface{})
+				itemMap["key_value_pattern"] = key_value_patternNestedMap
+			}
+			if item.ValuePattern != nil {
+				value_patternNestedMap := make(map[string]interface{})
+				if !item.ValuePattern.RegexValue.IsNull() && !item.ValuePattern.RegexValue.IsUnknown() {
+					value_patternNestedMap["regex_value"] = item.ValuePattern.RegexValue.ValueString()
+				}
+				if !item.ValuePattern.SubstringValue.IsNull() && !item.ValuePattern.SubstringValue.IsUnknown() {
+					value_patternNestedMap["substring_value"] = item.ValuePattern.SubstringValue.ValueString()
+				}
+				itemMap["value_pattern"] = value_patternNestedMap
+			}
+			rulesList = append(rulesList, itemMap)
+		}
+		apiResource.Spec["rules"] = rulesList
+	}
+	if !data.IsPii.IsNull() && !data.IsPii.IsUnknown() {
+		apiResource.Spec["is_pii"] = data.IsPii.ValueBool()
+	}
+	if !data.IsSensitiveData.IsNull() && !data.IsSensitiveData.IsUnknown() {
+		apiResource.Spec["is_sensitive_data"] = data.IsSensitiveData.ValueBool()
+	}
+
+
 	updated, err := r.client.UpdateDataType(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update DataType: %s", err))
@@ -613,6 +839,16 @@ func (r *DataTypeResource) Update(ctx context.Context, req resource.UpdateReques
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
+	if v, ok := updated.Spec["is_pii"].(bool); ok {
+		data.IsPii = types.BoolValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["is_sensitive_data"].(bool); ok {
+		data.IsSensitiveData = types.BoolValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -625,6 +861,7 @@ func (r *DataTypeResource) Update(ctx context.Context, req resource.UpdateReques
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -651,6 +888,15 @@ func (r *DataTypeResource) Delete(ctx context.Context, req resource.DeleteReques
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "DataType already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "DataType delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

@@ -10,19 +10,14 @@ import (
 
 // Token represents a F5XC Token
 type Token struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     TokenSpec `json:"spec"`
-}
-
-// TokenSpec defines the specification for Token
-type TokenSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateToken creates a new Token
 func (c *Client) CreateToken(ctx context.Context, resource *Token) (*Token, error) {
 	var result Token
-	path := fmt.Sprintf("/api/config/namespaces/%s/tokens", resource.Metadata.Namespace)
+	path := fmt.Sprintf("/api/register/namespaces/%s/tokens", resource.Metadata.Namespace)
 	err := c.Post(ctx, path, resource, &result)
 	return &result, err
 }
@@ -30,7 +25,7 @@ func (c *Client) CreateToken(ctx context.Context, resource *Token) (*Token, erro
 // GetToken retrieves a Token
 func (c *Client) GetToken(ctx context.Context, namespace, name string) (*Token, error) {
 	var result Token
-	path := fmt.Sprintf("/api/config/namespaces/%s/tokens/%s", namespace, name)
+	path := fmt.Sprintf("/api/register/namespaces/%s/tokens/%s", namespace, name)
 	err := c.Get(ctx, path, &result)
 	return &result, err
 }
@@ -38,13 +33,13 @@ func (c *Client) GetToken(ctx context.Context, namespace, name string) (*Token, 
 // UpdateToken updates a Token
 func (c *Client) UpdateToken(ctx context.Context, resource *Token) (*Token, error) {
 	var result Token
-	path := fmt.Sprintf("/api/config/namespaces/%s/tokens/%s", resource.Metadata.Namespace, resource.Metadata.Name)
+	path := fmt.Sprintf("/api/register/namespaces/%s/tokens/%s", resource.Metadata.Namespace, resource.Metadata.Name)
 	err := c.Put(ctx, path, resource, &result)
 	return &result, err
 }
 
 // DeleteToken deletes a Token
 func (c *Client) DeleteToken(ctx context.Context, namespace, name string) error {
-	path := fmt.Sprintf("/api/config/namespaces/%s/tokens/%s", namespace, name)
+	path := fmt.Sprintf("/api/register/namespaces/%s/tokens/%s", namespace, name)
 	return c.Delete(ctx, path)
 }

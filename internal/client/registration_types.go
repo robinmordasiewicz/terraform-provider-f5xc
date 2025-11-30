@@ -10,19 +10,14 @@ import (
 
 // Registration represents a F5XC Registration
 type Registration struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     RegistrationSpec `json:"spec"`
-}
-
-// RegistrationSpec defines the specification for Registration
-type RegistrationSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateRegistration creates a new Registration
 func (c *Client) CreateRegistration(ctx context.Context, resource *Registration) (*Registration, error) {
 	var result Registration
-	path := fmt.Sprintf("/api/config/namespaces/%s/registrations", resource.Metadata.Namespace)
+	path := fmt.Sprintf("/api/register/namespaces/%s/registrations", resource.Metadata.Namespace)
 	err := c.Post(ctx, path, resource, &result)
 	return &result, err
 }
@@ -30,7 +25,7 @@ func (c *Client) CreateRegistration(ctx context.Context, resource *Registration)
 // GetRegistration retrieves a Registration
 func (c *Client) GetRegistration(ctx context.Context, namespace, name string) (*Registration, error) {
 	var result Registration
-	path := fmt.Sprintf("/api/config/namespaces/%s/registrations/%s", namespace, name)
+	path := fmt.Sprintf("/api/register/namespaces/%s/registrations/%s", namespace, name)
 	err := c.Get(ctx, path, &result)
 	return &result, err
 }
@@ -38,13 +33,13 @@ func (c *Client) GetRegistration(ctx context.Context, namespace, name string) (*
 // UpdateRegistration updates a Registration
 func (c *Client) UpdateRegistration(ctx context.Context, resource *Registration) (*Registration, error) {
 	var result Registration
-	path := fmt.Sprintf("/api/config/namespaces/%s/registrations/%s", resource.Metadata.Namespace, resource.Metadata.Name)
+	path := fmt.Sprintf("/api/register/namespaces/%s/registrations/%s", resource.Metadata.Namespace, resource.Metadata.Name)
 	err := c.Put(ctx, path, resource, &result)
 	return &result, err
 }
 
 // DeleteRegistration deletes a Registration
 func (c *Client) DeleteRegistration(ctx context.Context, namespace, name string) error {
-	path := fmt.Sprintf("/api/config/namespaces/%s/registrations/%s", namespace, name)
+	path := fmt.Sprintf("/api/register/namespaces/%s/registrations/%s", namespace, name)
 	return c.Delete(ctx, path)
 }

@@ -423,7 +423,7 @@ func (r *LogReceiverResource) Create(ctx context.Context, req resource.CreateReq
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.LogReceiverSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -448,6 +448,53 @@ func (r *LogReceiverResource) Create(ctx context.Context, req resource.CreateReq
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.SiteLocal != nil {
+		site_localMap := make(map[string]interface{})
+		apiResource.Spec["site_local"] = site_localMap
+	}
+	if data.Syslog != nil {
+		syslogMap := make(map[string]interface{})
+		if !data.Syslog.SyslogRfc5424.IsNull() && !data.Syslog.SyslogRfc5424.IsUnknown() {
+			syslogMap["syslog_rfc5424"] = data.Syslog.SyslogRfc5424.ValueInt64()
+		}
+		if data.Syslog.TCPServer != nil {
+			tcp_serverNestedMap := make(map[string]interface{})
+			if !data.Syslog.TCPServer.Port.IsNull() && !data.Syslog.TCPServer.Port.IsUnknown() {
+				tcp_serverNestedMap["port"] = data.Syslog.TCPServer.Port.ValueInt64()
+			}
+			if !data.Syslog.TCPServer.ServerName.IsNull() && !data.Syslog.TCPServer.ServerName.IsUnknown() {
+				tcp_serverNestedMap["server_name"] = data.Syslog.TCPServer.ServerName.ValueString()
+			}
+			syslogMap["tcp_server"] = tcp_serverNestedMap
+		}
+		if data.Syslog.TLSServer != nil {
+			tls_serverNestedMap := make(map[string]interface{})
+			if !data.Syslog.TLSServer.Port.IsNull() && !data.Syslog.TLSServer.Port.IsUnknown() {
+				tls_serverNestedMap["port"] = data.Syslog.TLSServer.Port.ValueInt64()
+			}
+			if !data.Syslog.TLSServer.ServerName.IsNull() && !data.Syslog.TLSServer.ServerName.IsUnknown() {
+				tls_serverNestedMap["server_name"] = data.Syslog.TLSServer.ServerName.ValueString()
+			}
+			if !data.Syslog.TLSServer.TrustedCaURL.IsNull() && !data.Syslog.TLSServer.TrustedCaURL.IsUnknown() {
+				tls_serverNestedMap["trusted_ca_url"] = data.Syslog.TLSServer.TrustedCaURL.ValueString()
+			}
+			syslogMap["tls_server"] = tls_serverNestedMap
+		}
+		if data.Syslog.UDPServer != nil {
+			udp_serverNestedMap := make(map[string]interface{})
+			if !data.Syslog.UDPServer.Port.IsNull() && !data.Syslog.UDPServer.Port.IsUnknown() {
+				udp_serverNestedMap["port"] = data.Syslog.UDPServer.Port.ValueInt64()
+			}
+			if !data.Syslog.UDPServer.ServerName.IsNull() && !data.Syslog.UDPServer.ServerName.IsUnknown() {
+				udp_serverNestedMap["server_name"] = data.Syslog.UDPServer.ServerName.ValueString()
+			}
+			syslogMap["udp_server"] = udp_serverNestedMap
+		}
+		apiResource.Spec["syslog"] = syslogMap
+	}
+
+
 	created, err := r.client.CreateLogReceiver(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create LogReceiver: %s", err))
@@ -456,8 +503,13 @@ func (r *LogReceiverResource) Create(ctx context.Context, req resource.CreateReq
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created LogReceiver resource")
@@ -536,9 +588,40 @@ func (r *LogReceiverResource) Read(ctx context.Context, req resource.ReadRequest
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if _, ok := apiResource.Spec["site_local"].(map[string]interface{}); ok && isImport && data.SiteLocal == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.SiteLocal = &LogReceiverEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["syslog"].(map[string]interface{}); ok && (isImport || data.Syslog != nil) {
+		data.Syslog = &LogReceiverSyslogModel{
+			SyslogRfc5424: func() types.Int64 {
+				if v, ok := blockData["syslog_rfc5424"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -564,7 +647,7 @@ func (r *LogReceiverResource) Update(ctx context.Context, req resource.UpdateReq
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.LogReceiverSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -589,6 +672,53 @@ func (r *LogReceiverResource) Update(ctx context.Context, req resource.UpdateReq
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.SiteLocal != nil {
+		site_localMap := make(map[string]interface{})
+		apiResource.Spec["site_local"] = site_localMap
+	}
+	if data.Syslog != nil {
+		syslogMap := make(map[string]interface{})
+		if !data.Syslog.SyslogRfc5424.IsNull() && !data.Syslog.SyslogRfc5424.IsUnknown() {
+			syslogMap["syslog_rfc5424"] = data.Syslog.SyslogRfc5424.ValueInt64()
+		}
+		if data.Syslog.TCPServer != nil {
+			tcp_serverNestedMap := make(map[string]interface{})
+			if !data.Syslog.TCPServer.Port.IsNull() && !data.Syslog.TCPServer.Port.IsUnknown() {
+				tcp_serverNestedMap["port"] = data.Syslog.TCPServer.Port.ValueInt64()
+			}
+			if !data.Syslog.TCPServer.ServerName.IsNull() && !data.Syslog.TCPServer.ServerName.IsUnknown() {
+				tcp_serverNestedMap["server_name"] = data.Syslog.TCPServer.ServerName.ValueString()
+			}
+			syslogMap["tcp_server"] = tcp_serverNestedMap
+		}
+		if data.Syslog.TLSServer != nil {
+			tls_serverNestedMap := make(map[string]interface{})
+			if !data.Syslog.TLSServer.Port.IsNull() && !data.Syslog.TLSServer.Port.IsUnknown() {
+				tls_serverNestedMap["port"] = data.Syslog.TLSServer.Port.ValueInt64()
+			}
+			if !data.Syslog.TLSServer.ServerName.IsNull() && !data.Syslog.TLSServer.ServerName.IsUnknown() {
+				tls_serverNestedMap["server_name"] = data.Syslog.TLSServer.ServerName.ValueString()
+			}
+			if !data.Syslog.TLSServer.TrustedCaURL.IsNull() && !data.Syslog.TLSServer.TrustedCaURL.IsUnknown() {
+				tls_serverNestedMap["trusted_ca_url"] = data.Syslog.TLSServer.TrustedCaURL.ValueString()
+			}
+			syslogMap["tls_server"] = tls_serverNestedMap
+		}
+		if data.Syslog.UDPServer != nil {
+			udp_serverNestedMap := make(map[string]interface{})
+			if !data.Syslog.UDPServer.Port.IsNull() && !data.Syslog.UDPServer.Port.IsUnknown() {
+				udp_serverNestedMap["port"] = data.Syslog.UDPServer.Port.ValueInt64()
+			}
+			if !data.Syslog.UDPServer.ServerName.IsNull() && !data.Syslog.UDPServer.ServerName.IsUnknown() {
+				udp_serverNestedMap["server_name"] = data.Syslog.UDPServer.ServerName.ValueString()
+			}
+			syslogMap["udp_server"] = udp_serverNestedMap
+		}
+		apiResource.Spec["syslog"] = syslogMap
+	}
+
+
 	updated, err := r.client.UpdateLogReceiver(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update LogReceiver: %s", err))
@@ -597,6 +727,8 @@ func (r *LogReceiverResource) Update(ctx context.Context, req resource.UpdateReq
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -609,6 +741,7 @@ func (r *LogReceiverResource) Update(ctx context.Context, req resource.UpdateReq
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -635,6 +768,15 @@ func (r *LogReceiverResource) Delete(ctx context.Context, req resource.DeleteReq
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "LogReceiver already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "LogReceiver delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

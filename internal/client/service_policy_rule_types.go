@@ -10,13 +10,8 @@ import (
 
 // ServicePolicyRule represents a F5XC ServicePolicyRule
 type ServicePolicyRule struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     ServicePolicyRuleSpec `json:"spec"`
-}
-
-// ServicePolicyRuleSpec defines the specification for ServicePolicyRule
-type ServicePolicyRuleSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateServicePolicyRule creates a new ServicePolicyRule

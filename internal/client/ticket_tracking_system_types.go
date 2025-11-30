@@ -10,19 +10,14 @@ import (
 
 // TicketTrackingSystem represents a F5XC TicketTrackingSystem
 type TicketTrackingSystem struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     TicketTrackingSystemSpec `json:"spec"`
-}
-
-// TicketTrackingSystemSpec defines the specification for TicketTrackingSystem
-type TicketTrackingSystemSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateTicketTrackingSystem creates a new TicketTrackingSystem
 func (c *Client) CreateTicketTrackingSystem(ctx context.Context, resource *TicketTrackingSystem) (*TicketTrackingSystem, error) {
 	var result TicketTrackingSystem
-	path := fmt.Sprintf("/api/config/namespaces/%s/ticket_tracking_systems", resource.Metadata.Namespace)
+	path := fmt.Sprintf("/api/web/namespaces/%s/ticket_tracking_systems", resource.Metadata.Namespace)
 	err := c.Post(ctx, path, resource, &result)
 	return &result, err
 }
@@ -30,7 +25,7 @@ func (c *Client) CreateTicketTrackingSystem(ctx context.Context, resource *Ticke
 // GetTicketTrackingSystem retrieves a TicketTrackingSystem
 func (c *Client) GetTicketTrackingSystem(ctx context.Context, namespace, name string) (*TicketTrackingSystem, error) {
 	var result TicketTrackingSystem
-	path := fmt.Sprintf("/api/config/namespaces/%s/ticket_tracking_systems/%s", namespace, name)
+	path := fmt.Sprintf("/api/web/namespaces/%s/ticket_tracking_systems/%s", namespace, name)
 	err := c.Get(ctx, path, &result)
 	return &result, err
 }
@@ -38,13 +33,13 @@ func (c *Client) GetTicketTrackingSystem(ctx context.Context, namespace, name st
 // UpdateTicketTrackingSystem updates a TicketTrackingSystem
 func (c *Client) UpdateTicketTrackingSystem(ctx context.Context, resource *TicketTrackingSystem) (*TicketTrackingSystem, error) {
 	var result TicketTrackingSystem
-	path := fmt.Sprintf("/api/config/namespaces/%s/ticket_tracking_systems/%s", resource.Metadata.Namespace, resource.Metadata.Name)
+	path := fmt.Sprintf("/api/web/namespaces/%s/ticket_tracking_systems/%s", resource.Metadata.Namespace, resource.Metadata.Name)
 	err := c.Put(ctx, path, resource, &result)
 	return &result, err
 }
 
 // DeleteTicketTrackingSystem deletes a TicketTrackingSystem
 func (c *Client) DeleteTicketTrackingSystem(ctx context.Context, namespace, name string) error {
-	path := fmt.Sprintf("/api/config/namespaces/%s/ticket_tracking_systems/%s", namespace, name)
+	path := fmt.Sprintf("/api/web/namespaces/%s/ticket_tracking_systems/%s", namespace, name)
 	return c.Delete(ctx, path)
 }

@@ -86,14 +86,14 @@ type NetworkPolicyRulePrefixSelectorModel struct {
 type NetworkPolicyRuleResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Action types.String `tfsdk:"action"`
 	Annotations types.Map `tfsdk:"annotations"`
 	Description types.String `tfsdk:"description"`
 	Disable types.Bool `tfsdk:"disable"`
 	Labels types.Map `tfsdk:"labels"`
 	Ports types.List `tfsdk:"ports"`
-	Protocol types.String `tfsdk:"protocol"`
 	ID types.String `tfsdk:"id"`
+	Action types.String `tfsdk:"action"`
+	Protocol types.String `tfsdk:"protocol"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
 	AdvancedAction *NetworkPolicyRuleAdvancedActionModel `tfsdk:"advanced_action"`
 	IPPrefixSet *NetworkPolicyRuleIPPrefixSetModel `tfsdk:"ip_prefix_set"`
@@ -131,10 +131,6 @@ func (r *NetworkPolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 					validators.NamespaceValidator(),
 				},
 			},
-			"action": schema.StringAttribute{
-				MarkdownDescription: "Network Policy Rule Action. Network policy rule action configures the action to be taken on rule match Apply deny action on rule match Apply allow action on rule match. Possible values are `DENY`, `ALLOW`. Defaults to `DENY`.",
-				Optional: true,
-			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
 				Optional: true,
@@ -158,12 +154,24 @@ func (r *NetworkPolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 				Optional: true,
 				ElementType: types.StringType,
 			},
+			"id": schema.StringAttribute{
+				MarkdownDescription: "Unique identifier for the resource.",
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"action": schema.StringAttribute{
+				MarkdownDescription: "Network Policy Rule Action. Network policy rule action configures the action to be taken on rule match Apply deny action on rule match Apply allow action on rule match. Possible values are `DENY`, `ALLOW`. Defaults to `DENY`.",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
 			"protocol": schema.StringAttribute{
 				MarkdownDescription: "Protocol. Protocol in IP packet to be used as match criteria Values are tcp, udp, and icmp",
 				Optional: true,
-			},
-			"id": schema.StringAttribute{
-				MarkdownDescription: "Unique identifier for the resource.",
 				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
@@ -377,7 +385,7 @@ func (r *NetworkPolicyRuleResource) Create(ctx context.Context, req resource.Cre
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.NetworkPolicyRuleSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -402,6 +410,45 @@ func (r *NetworkPolicyRuleResource) Create(ctx context.Context, req resource.Cre
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.AdvancedAction != nil {
+		advanced_actionMap := make(map[string]interface{})
+		if !data.AdvancedAction.Action.IsNull() && !data.AdvancedAction.Action.IsUnknown() {
+			advanced_actionMap["action"] = data.AdvancedAction.Action.ValueString()
+		}
+		apiResource.Spec["advanced_action"] = advanced_actionMap
+	}
+	if data.IPPrefixSet != nil {
+		ip_prefix_setMap := make(map[string]interface{})
+		apiResource.Spec["ip_prefix_set"] = ip_prefix_setMap
+	}
+	if data.LabelMatcher != nil {
+		label_matcherMap := make(map[string]interface{})
+		apiResource.Spec["label_matcher"] = label_matcherMap
+	}
+	if !data.Ports.IsNull() && !data.Ports.IsUnknown() {
+		var portsList []string
+		resp.Diagnostics.Append(data.Ports.ElementsAs(ctx, &portsList, false)...)
+		if !resp.Diagnostics.HasError() {
+			apiResource.Spec["ports"] = portsList
+		}
+	}
+	if data.Prefix != nil {
+		prefixMap := make(map[string]interface{})
+		apiResource.Spec["prefix"] = prefixMap
+	}
+	if data.PrefixSelector != nil {
+		prefix_selectorMap := make(map[string]interface{})
+		apiResource.Spec["prefix_selector"] = prefix_selectorMap
+	}
+	if !data.Action.IsNull() && !data.Action.IsUnknown() {
+		apiResource.Spec["action"] = data.Action.ValueString()
+	}
+	if !data.Protocol.IsNull() && !data.Protocol.IsUnknown() {
+		apiResource.Spec["protocol"] = data.Protocol.ValueString()
+	}
+
+
 	created, err := r.client.CreateNetworkPolicyRule(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create NetworkPolicyRule: %s", err))
@@ -410,8 +457,21 @@ func (r *NetworkPolicyRuleResource) Create(ctx context.Context, req resource.Cre
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+	if v, ok := created.Spec["action"].(string); ok && v != "" {
+		data.Action = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["protocol"].(string); ok && v != "" {
+		data.Protocol = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created NetworkPolicyRule resource")
@@ -490,9 +550,80 @@ func (r *NetworkPolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if blockData, ok := apiResource.Spec["advanced_action"].(map[string]interface{}); ok && (isImport || data.AdvancedAction != nil) {
+		data.AdvancedAction = &NetworkPolicyRuleAdvancedActionModel{
+			Action: func() types.String {
+				if v, ok := blockData["action"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["ip_prefix_set"].(map[string]interface{}); ok && isImport && data.IPPrefixSet == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.IPPrefixSet = &NetworkPolicyRuleIPPrefixSetModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["label_matcher"].(map[string]interface{}); ok && isImport && data.LabelMatcher == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.LabelMatcher = &NetworkPolicyRuleLabelMatcherModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["ports"].([]interface{}); ok && len(v) > 0 {
+		var portsList []string
+		for _, item := range v {
+			if s, ok := item.(string); ok {
+				portsList = append(portsList, s)
+			}
+		}
+		listVal, diags := types.ListValueFrom(ctx, types.StringType, portsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Ports = listVal
+		}
+	} else {
+		data.Ports = types.ListNull(types.StringType)
+	}
+	if _, ok := apiResource.Spec["prefix"].(map[string]interface{}); ok && isImport && data.Prefix == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Prefix = &NetworkPolicyRulePrefixModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["prefix_selector"].(map[string]interface{}); ok && isImport && data.PrefixSelector == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.PrefixSelector = &NetworkPolicyRulePrefixSelectorModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["action"].(string); ok && v != "" {
+		data.Action = types.StringValue(v)
+	} else {
+		data.Action = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["protocol"].(string); ok && v != "" {
+		data.Protocol = types.StringValue(v)
+	} else {
+		data.Protocol = types.StringNull()
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -518,7 +649,7 @@ func (r *NetworkPolicyRuleResource) Update(ctx context.Context, req resource.Upd
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.NetworkPolicyRuleSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -543,6 +674,45 @@ func (r *NetworkPolicyRuleResource) Update(ctx context.Context, req resource.Upd
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.AdvancedAction != nil {
+		advanced_actionMap := make(map[string]interface{})
+		if !data.AdvancedAction.Action.IsNull() && !data.AdvancedAction.Action.IsUnknown() {
+			advanced_actionMap["action"] = data.AdvancedAction.Action.ValueString()
+		}
+		apiResource.Spec["advanced_action"] = advanced_actionMap
+	}
+	if data.IPPrefixSet != nil {
+		ip_prefix_setMap := make(map[string]interface{})
+		apiResource.Spec["ip_prefix_set"] = ip_prefix_setMap
+	}
+	if data.LabelMatcher != nil {
+		label_matcherMap := make(map[string]interface{})
+		apiResource.Spec["label_matcher"] = label_matcherMap
+	}
+	if !data.Ports.IsNull() && !data.Ports.IsUnknown() {
+		var portsList []string
+		resp.Diagnostics.Append(data.Ports.ElementsAs(ctx, &portsList, false)...)
+		if !resp.Diagnostics.HasError() {
+			apiResource.Spec["ports"] = portsList
+		}
+	}
+	if data.Prefix != nil {
+		prefixMap := make(map[string]interface{})
+		apiResource.Spec["prefix"] = prefixMap
+	}
+	if data.PrefixSelector != nil {
+		prefix_selectorMap := make(map[string]interface{})
+		apiResource.Spec["prefix_selector"] = prefix_selectorMap
+	}
+	if !data.Action.IsNull() && !data.Action.IsUnknown() {
+		apiResource.Spec["action"] = data.Action.ValueString()
+	}
+	if !data.Protocol.IsNull() && !data.Protocol.IsUnknown() {
+		apiResource.Spec["protocol"] = data.Protocol.ValueString()
+	}
+
+
 	updated, err := r.client.UpdateNetworkPolicyRule(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update NetworkPolicyRule: %s", err))
@@ -551,6 +721,16 @@ func (r *NetworkPolicyRuleResource) Update(ctx context.Context, req resource.Upd
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
+	if v, ok := updated.Spec["action"].(string); ok && v != "" {
+		data.Action = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["protocol"].(string); ok && v != "" {
+		data.Protocol = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -563,6 +743,7 @@ func (r *NetworkPolicyRuleResource) Update(ctx context.Context, req resource.Upd
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -589,6 +770,15 @@ func (r *NetworkPolicyRuleResource) Delete(ctx context.Context, req resource.Del
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "NetworkPolicyRule already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "NetworkPolicyRule delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

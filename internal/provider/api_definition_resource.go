@@ -327,7 +327,7 @@ func (r *APIDefinitionResource) Create(ctx context.Context, req resource.CreateR
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.APIDefinitionSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -352,6 +352,66 @@ func (r *APIDefinitionResource) Create(ctx context.Context, req resource.CreateR
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if len(data.APIInventoryExclusionList) > 0 {
+		var api_inventory_exclusion_listList []map[string]interface{}
+		for _, item := range data.APIInventoryExclusionList {
+			itemMap := make(map[string]interface{})
+			if !item.Method.IsNull() && !item.Method.IsUnknown() {
+				itemMap["method"] = item.Method.ValueString()
+			}
+			if !item.Path.IsNull() && !item.Path.IsUnknown() {
+				itemMap["path"] = item.Path.ValueString()
+			}
+			api_inventory_exclusion_listList = append(api_inventory_exclusion_listList, itemMap)
+		}
+		apiResource.Spec["api_inventory_exclusion_list"] = api_inventory_exclusion_listList
+	}
+	if len(data.APIInventoryInclusionList) > 0 {
+		var api_inventory_inclusion_listList []map[string]interface{}
+		for _, item := range data.APIInventoryInclusionList {
+			itemMap := make(map[string]interface{})
+			if !item.Method.IsNull() && !item.Method.IsUnknown() {
+				itemMap["method"] = item.Method.ValueString()
+			}
+			if !item.Path.IsNull() && !item.Path.IsUnknown() {
+				itemMap["path"] = item.Path.ValueString()
+			}
+			api_inventory_inclusion_listList = append(api_inventory_inclusion_listList, itemMap)
+		}
+		apiResource.Spec["api_inventory_inclusion_list"] = api_inventory_inclusion_listList
+	}
+	if data.MixedSchemaOrigin != nil {
+		mixed_schema_originMap := make(map[string]interface{})
+		apiResource.Spec["mixed_schema_origin"] = mixed_schema_originMap
+	}
+	if len(data.NonAPIEndpoints) > 0 {
+		var non_api_endpointsList []map[string]interface{}
+		for _, item := range data.NonAPIEndpoints {
+			itemMap := make(map[string]interface{})
+			if !item.Method.IsNull() && !item.Method.IsUnknown() {
+				itemMap["method"] = item.Method.ValueString()
+			}
+			if !item.Path.IsNull() && !item.Path.IsUnknown() {
+				itemMap["path"] = item.Path.ValueString()
+			}
+			non_api_endpointsList = append(non_api_endpointsList, itemMap)
+		}
+		apiResource.Spec["non_api_endpoints"] = non_api_endpointsList
+	}
+	if data.StrictSchemaOrigin != nil {
+		strict_schema_originMap := make(map[string]interface{})
+		apiResource.Spec["strict_schema_origin"] = strict_schema_originMap
+	}
+	if !data.SwaggerSpecs.IsNull() && !data.SwaggerSpecs.IsUnknown() {
+		var swagger_specsList []string
+		resp.Diagnostics.Append(data.SwaggerSpecs.ElementsAs(ctx, &swagger_specsList, false)...)
+		if !resp.Diagnostics.HasError() {
+			apiResource.Spec["swagger_specs"] = swagger_specsList
+		}
+	}
+
+
 	created, err := r.client.CreateAPIDefinition(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create APIDefinition: %s", err))
@@ -360,8 +420,13 @@ func (r *APIDefinitionResource) Create(ctx context.Context, req resource.CreateR
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created APIDefinition resource")
@@ -440,9 +505,116 @@ func (r *APIDefinitionResource) Read(ctx context.Context, req resource.ReadReque
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if listData, ok := apiResource.Spec["api_inventory_exclusion_list"].([]interface{}); ok && len(listData) > 0 {
+		var api_inventory_exclusion_listList []APIDefinitionAPIInventoryExclusionListModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				api_inventory_exclusion_listList = append(api_inventory_exclusion_listList, APIDefinitionAPIInventoryExclusionListModel{
+					Method: func() types.String {
+						if v, ok := itemMap["method"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Path: func() types.String {
+						if v, ok := itemMap["path"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.APIInventoryExclusionList = api_inventory_exclusion_listList
+	}
+	if listData, ok := apiResource.Spec["api_inventory_inclusion_list"].([]interface{}); ok && len(listData) > 0 {
+		var api_inventory_inclusion_listList []APIDefinitionAPIInventoryInclusionListModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				api_inventory_inclusion_listList = append(api_inventory_inclusion_listList, APIDefinitionAPIInventoryInclusionListModel{
+					Method: func() types.String {
+						if v, ok := itemMap["method"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Path: func() types.String {
+						if v, ok := itemMap["path"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.APIInventoryInclusionList = api_inventory_inclusion_listList
+	}
+	if _, ok := apiResource.Spec["mixed_schema_origin"].(map[string]interface{}); ok && isImport && data.MixedSchemaOrigin == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.MixedSchemaOrigin = &APIDefinitionEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["non_api_endpoints"].([]interface{}); ok && len(listData) > 0 {
+		var non_api_endpointsList []APIDefinitionNonAPIEndpointsModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				non_api_endpointsList = append(non_api_endpointsList, APIDefinitionNonAPIEndpointsModel{
+					Method: func() types.String {
+						if v, ok := itemMap["method"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Path: func() types.String {
+						if v, ok := itemMap["path"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.NonAPIEndpoints = non_api_endpointsList
+	}
+	if _, ok := apiResource.Spec["strict_schema_origin"].(map[string]interface{}); ok && isImport && data.StrictSchemaOrigin == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.StrictSchemaOrigin = &APIDefinitionEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["swagger_specs"].([]interface{}); ok && len(v) > 0 {
+		var swagger_specsList []string
+		for _, item := range v {
+			if s, ok := item.(string); ok {
+				swagger_specsList = append(swagger_specsList, s)
+			}
+		}
+		listVal, diags := types.ListValueFrom(ctx, types.StringType, swagger_specsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.SwaggerSpecs = listVal
+		}
+	} else {
+		data.SwaggerSpecs = types.ListNull(types.StringType)
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -468,7 +640,7 @@ func (r *APIDefinitionResource) Update(ctx context.Context, req resource.UpdateR
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.APIDefinitionSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -493,6 +665,66 @@ func (r *APIDefinitionResource) Update(ctx context.Context, req resource.UpdateR
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if len(data.APIInventoryExclusionList) > 0 {
+		var api_inventory_exclusion_listList []map[string]interface{}
+		for _, item := range data.APIInventoryExclusionList {
+			itemMap := make(map[string]interface{})
+			if !item.Method.IsNull() && !item.Method.IsUnknown() {
+				itemMap["method"] = item.Method.ValueString()
+			}
+			if !item.Path.IsNull() && !item.Path.IsUnknown() {
+				itemMap["path"] = item.Path.ValueString()
+			}
+			api_inventory_exclusion_listList = append(api_inventory_exclusion_listList, itemMap)
+		}
+		apiResource.Spec["api_inventory_exclusion_list"] = api_inventory_exclusion_listList
+	}
+	if len(data.APIInventoryInclusionList) > 0 {
+		var api_inventory_inclusion_listList []map[string]interface{}
+		for _, item := range data.APIInventoryInclusionList {
+			itemMap := make(map[string]interface{})
+			if !item.Method.IsNull() && !item.Method.IsUnknown() {
+				itemMap["method"] = item.Method.ValueString()
+			}
+			if !item.Path.IsNull() && !item.Path.IsUnknown() {
+				itemMap["path"] = item.Path.ValueString()
+			}
+			api_inventory_inclusion_listList = append(api_inventory_inclusion_listList, itemMap)
+		}
+		apiResource.Spec["api_inventory_inclusion_list"] = api_inventory_inclusion_listList
+	}
+	if data.MixedSchemaOrigin != nil {
+		mixed_schema_originMap := make(map[string]interface{})
+		apiResource.Spec["mixed_schema_origin"] = mixed_schema_originMap
+	}
+	if len(data.NonAPIEndpoints) > 0 {
+		var non_api_endpointsList []map[string]interface{}
+		for _, item := range data.NonAPIEndpoints {
+			itemMap := make(map[string]interface{})
+			if !item.Method.IsNull() && !item.Method.IsUnknown() {
+				itemMap["method"] = item.Method.ValueString()
+			}
+			if !item.Path.IsNull() && !item.Path.IsUnknown() {
+				itemMap["path"] = item.Path.ValueString()
+			}
+			non_api_endpointsList = append(non_api_endpointsList, itemMap)
+		}
+		apiResource.Spec["non_api_endpoints"] = non_api_endpointsList
+	}
+	if data.StrictSchemaOrigin != nil {
+		strict_schema_originMap := make(map[string]interface{})
+		apiResource.Spec["strict_schema_origin"] = strict_schema_originMap
+	}
+	if !data.SwaggerSpecs.IsNull() && !data.SwaggerSpecs.IsUnknown() {
+		var swagger_specsList []string
+		resp.Diagnostics.Append(data.SwaggerSpecs.ElementsAs(ctx, &swagger_specsList, false)...)
+		if !resp.Diagnostics.HasError() {
+			apiResource.Spec["swagger_specs"] = swagger_specsList
+		}
+	}
+
+
 	updated, err := r.client.UpdateAPIDefinition(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update APIDefinition: %s", err))
@@ -501,6 +733,8 @@ func (r *APIDefinitionResource) Update(ctx context.Context, req resource.UpdateR
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -513,6 +747,7 @@ func (r *APIDefinitionResource) Update(ctx context.Context, req resource.UpdateR
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -539,6 +774,15 @@ func (r *APIDefinitionResource) Delete(ctx context.Context, req resource.DeleteR
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "APIDefinition already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "APIDefinition delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

@@ -12,6 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -49,14 +50,14 @@ type Srv6NetworkSliceResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Annotations types.Map `tfsdk:"annotations"`
-	ConnectToAccessNetworks types.Bool `tfsdk:"connect_to_access_networks"`
-	ConnectToEnterpriseNetworks types.Bool `tfsdk:"connect_to_enterprise_networks"`
-	ConnectToInternet types.Bool `tfsdk:"connect_to_internet"`
 	Description types.String `tfsdk:"description"`
 	Disable types.Bool `tfsdk:"disable"`
 	Labels types.Map `tfsdk:"labels"`
 	SidPrefixes types.List `tfsdk:"sid_prefixes"`
 	ID types.String `tfsdk:"id"`
+	ConnectToAccessNetworks types.Bool `tfsdk:"connect_to_access_networks"`
+	ConnectToEnterpriseNetworks types.Bool `tfsdk:"connect_to_enterprise_networks"`
+	ConnectToInternet types.Bool `tfsdk:"connect_to_internet"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
 }
 
@@ -94,18 +95,6 @@ func (r *Srv6NetworkSliceResource) Schema(ctx context.Context, req resource.Sche
 				Optional: true,
 				ElementType: types.StringType,
 			},
-			"connect_to_access_networks": schema.BoolAttribute{
-				MarkdownDescription: "Connect To Access Networks. Connect all SRv6 Virtual Networks in this slice to their corresponding access networks by importing route targets specified in the virtual network.",
-				Optional: true,
-			},
-			"connect_to_enterprise_networks": schema.BoolAttribute{
-				MarkdownDescription: "Connect To Enterprise Networks. Connect all SRv6 Virtual Networks in this slice to their corresponding enterprise networks by importing route targets specified in the virtual network.",
-				Optional: true,
-			},
-			"connect_to_internet": schema.BoolAttribute{
-				MarkdownDescription: "Connect To Internet. Connect all SRv6 Virtual Networks in this slice to the Internet by importing route targets specified in the virtual network.",
-				Optional: true,
-			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
 				Optional: true,
@@ -129,6 +118,30 @@ func (r *Srv6NetworkSliceResource) Schema(ctx context.Context, req resource.Sche
 				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"connect_to_access_networks": schema.BoolAttribute{
+				MarkdownDescription: "Connect To Access Networks. Connect all SRv6 Virtual Networks in this slice to their corresponding access networks by importing route targets specified in the virtual network.",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.Bool{
+					boolplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"connect_to_enterprise_networks": schema.BoolAttribute{
+				MarkdownDescription: "Connect To Enterprise Networks. Connect all SRv6 Virtual Networks in this slice to their corresponding enterprise networks by importing route targets specified in the virtual network.",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.Bool{
+					boolplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"connect_to_internet": schema.BoolAttribute{
+				MarkdownDescription: "Connect To Internet. Connect all SRv6 Virtual Networks in this slice to the Internet by importing route targets specified in the virtual network.",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.Bool{
+					boolplanmodifier.UseStateForUnknown(),
 				},
 			},
 		},
@@ -261,7 +274,7 @@ func (r *Srv6NetworkSliceResource) Create(ctx context.Context, req resource.Crea
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.Srv6NetworkSliceSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -286,6 +299,25 @@ func (r *Srv6NetworkSliceResource) Create(ctx context.Context, req resource.Crea
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if !data.SidPrefixes.IsNull() && !data.SidPrefixes.IsUnknown() {
+		var sid_prefixesList []string
+		resp.Diagnostics.Append(data.SidPrefixes.ElementsAs(ctx, &sid_prefixesList, false)...)
+		if !resp.Diagnostics.HasError() {
+			apiResource.Spec["sid_prefixes"] = sid_prefixesList
+		}
+	}
+	if !data.ConnectToAccessNetworks.IsNull() && !data.ConnectToAccessNetworks.IsUnknown() {
+		apiResource.Spec["connect_to_access_networks"] = data.ConnectToAccessNetworks.ValueBool()
+	}
+	if !data.ConnectToEnterpriseNetworks.IsNull() && !data.ConnectToEnterpriseNetworks.IsUnknown() {
+		apiResource.Spec["connect_to_enterprise_networks"] = data.ConnectToEnterpriseNetworks.ValueBool()
+	}
+	if !data.ConnectToInternet.IsNull() && !data.ConnectToInternet.IsUnknown() {
+		apiResource.Spec["connect_to_internet"] = data.ConnectToInternet.ValueBool()
+	}
+
+
 	created, err := r.client.CreateSrv6NetworkSlice(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create Srv6NetworkSlice: %s", err))
@@ -294,8 +326,25 @@ func (r *Srv6NetworkSliceResource) Create(ctx context.Context, req resource.Crea
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+	if v, ok := created.Spec["connect_to_access_networks"].(bool); ok {
+		data.ConnectToAccessNetworks = types.BoolValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["connect_to_enterprise_networks"].(bool); ok {
+		data.ConnectToEnterpriseNetworks = types.BoolValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["connect_to_internet"].(bool); ok {
+		data.ConnectToInternet = types.BoolValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created Srv6NetworkSlice resource")
@@ -374,9 +423,73 @@ func (r *Srv6NetworkSliceResource) Read(ctx context.Context, req resource.ReadRe
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if v, ok := apiResource.Spec["sid_prefixes"].([]interface{}); ok && len(v) > 0 {
+		var sid_prefixesList []string
+		for _, item := range v {
+			if s, ok := item.(string); ok {
+				sid_prefixesList = append(sid_prefixesList, s)
+			}
+		}
+		listVal, diags := types.ListValueFrom(ctx, types.StringType, sid_prefixesList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.SidPrefixes = listVal
+		}
+	} else {
+		data.SidPrefixes = types.ListNull(types.StringType)
+	}
+	// Top-level Optional bool: preserve prior state to avoid API default drift
+	if !isImport && !data.ConnectToAccessNetworks.IsNull() {
+		// Normal Read: preserve existing state value (do nothing)
+	} else {
+		// Import case or null state: read from API
+		if v, ok := apiResource.Spec["connect_to_access_networks"].(bool); ok {
+			data.ConnectToAccessNetworks = types.BoolValue(v)
+		} else {
+			data.ConnectToAccessNetworks = types.BoolNull()
+		}
+	}
+	// Top-level Optional bool: preserve prior state to avoid API default drift
+	if !isImport && !data.ConnectToEnterpriseNetworks.IsNull() {
+		// Normal Read: preserve existing state value (do nothing)
+	} else {
+		// Import case or null state: read from API
+		if v, ok := apiResource.Spec["connect_to_enterprise_networks"].(bool); ok {
+			data.ConnectToEnterpriseNetworks = types.BoolValue(v)
+		} else {
+			data.ConnectToEnterpriseNetworks = types.BoolNull()
+		}
+	}
+	// Top-level Optional bool: preserve prior state to avoid API default drift
+	if !isImport && !data.ConnectToInternet.IsNull() {
+		// Normal Read: preserve existing state value (do nothing)
+	} else {
+		// Import case or null state: read from API
+		if v, ok := apiResource.Spec["connect_to_internet"].(bool); ok {
+			data.ConnectToInternet = types.BoolValue(v)
+		} else {
+			data.ConnectToInternet = types.BoolNull()
+		}
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -402,7 +515,7 @@ func (r *Srv6NetworkSliceResource) Update(ctx context.Context, req resource.Upda
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.Srv6NetworkSliceSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -427,6 +540,25 @@ func (r *Srv6NetworkSliceResource) Update(ctx context.Context, req resource.Upda
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if !data.SidPrefixes.IsNull() && !data.SidPrefixes.IsUnknown() {
+		var sid_prefixesList []string
+		resp.Diagnostics.Append(data.SidPrefixes.ElementsAs(ctx, &sid_prefixesList, false)...)
+		if !resp.Diagnostics.HasError() {
+			apiResource.Spec["sid_prefixes"] = sid_prefixesList
+		}
+	}
+	if !data.ConnectToAccessNetworks.IsNull() && !data.ConnectToAccessNetworks.IsUnknown() {
+		apiResource.Spec["connect_to_access_networks"] = data.ConnectToAccessNetworks.ValueBool()
+	}
+	if !data.ConnectToEnterpriseNetworks.IsNull() && !data.ConnectToEnterpriseNetworks.IsUnknown() {
+		apiResource.Spec["connect_to_enterprise_networks"] = data.ConnectToEnterpriseNetworks.ValueBool()
+	}
+	if !data.ConnectToInternet.IsNull() && !data.ConnectToInternet.IsUnknown() {
+		apiResource.Spec["connect_to_internet"] = data.ConnectToInternet.ValueBool()
+	}
+
+
 	updated, err := r.client.UpdateSrv6NetworkSlice(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update Srv6NetworkSlice: %s", err))
@@ -435,6 +567,20 @@ func (r *Srv6NetworkSliceResource) Update(ctx context.Context, req resource.Upda
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
+	if v, ok := updated.Spec["connect_to_access_networks"].(bool); ok {
+		data.ConnectToAccessNetworks = types.BoolValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["connect_to_enterprise_networks"].(bool); ok {
+		data.ConnectToEnterpriseNetworks = types.BoolValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["connect_to_internet"].(bool); ok {
+		data.ConnectToInternet = types.BoolValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -447,6 +593,7 @@ func (r *Srv6NetworkSliceResource) Update(ctx context.Context, req resource.Upda
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -473,6 +620,15 @@ func (r *Srv6NetworkSliceResource) Delete(ctx context.Context, req resource.Dele
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "Srv6NetworkSlice already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "Srv6NetworkSlice delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

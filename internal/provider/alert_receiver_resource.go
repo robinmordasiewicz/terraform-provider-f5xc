@@ -889,7 +889,7 @@ func (r *AlertReceiverResource) Create(ctx context.Context, req resource.CreateR
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.AlertReceiverSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -914,6 +914,74 @@ func (r *AlertReceiverResource) Create(ctx context.Context, req resource.CreateR
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.Email != nil {
+		emailMap := make(map[string]interface{})
+		if !data.Email.Email.IsNull() && !data.Email.Email.IsUnknown() {
+			emailMap["email"] = data.Email.Email.ValueString()
+		}
+		apiResource.Spec["email"] = emailMap
+	}
+	if data.Opsgenie != nil {
+		opsgenieMap := make(map[string]interface{})
+		if data.Opsgenie.APIKey != nil {
+			api_keyNestedMap := make(map[string]interface{})
+			opsgenieMap["api_key"] = api_keyNestedMap
+		}
+		if !data.Opsgenie.URL.IsNull() && !data.Opsgenie.URL.IsUnknown() {
+			opsgenieMap["url"] = data.Opsgenie.URL.ValueString()
+		}
+		apiResource.Spec["opsgenie"] = opsgenieMap
+	}
+	if data.Pagerduty != nil {
+		pagerdutyMap := make(map[string]interface{})
+		if data.Pagerduty.RoutingKey != nil {
+			routing_keyNestedMap := make(map[string]interface{})
+			pagerdutyMap["routing_key"] = routing_keyNestedMap
+		}
+		if !data.Pagerduty.URL.IsNull() && !data.Pagerduty.URL.IsUnknown() {
+			pagerdutyMap["url"] = data.Pagerduty.URL.ValueString()
+		}
+		apiResource.Spec["pagerduty"] = pagerdutyMap
+	}
+	if data.Slack != nil {
+		slackMap := make(map[string]interface{})
+		if !data.Slack.Channel.IsNull() && !data.Slack.Channel.IsUnknown() {
+			slackMap["channel"] = data.Slack.Channel.ValueString()
+		}
+		if data.Slack.URL != nil {
+			urlNestedMap := make(map[string]interface{})
+			slackMap["url"] = urlNestedMap
+		}
+		apiResource.Spec["slack"] = slackMap
+	}
+	if data.Sms != nil {
+		smsMap := make(map[string]interface{})
+		if !data.Sms.ContactNumber.IsNull() && !data.Sms.ContactNumber.IsUnknown() {
+			smsMap["contact_number"] = data.Sms.ContactNumber.ValueString()
+		}
+		apiResource.Spec["sms"] = smsMap
+	}
+	if data.Webhook != nil {
+		webhookMap := make(map[string]interface{})
+		if data.Webhook.HTTPConfig != nil {
+			http_configNestedMap := make(map[string]interface{})
+			if !data.Webhook.HTTPConfig.EnableHttp2.IsNull() && !data.Webhook.HTTPConfig.EnableHttp2.IsUnknown() {
+				http_configNestedMap["enable_http2"] = data.Webhook.HTTPConfig.EnableHttp2.ValueBool()
+			}
+			if !data.Webhook.HTTPConfig.FollowRedirects.IsNull() && !data.Webhook.HTTPConfig.FollowRedirects.IsUnknown() {
+				http_configNestedMap["follow_redirects"] = data.Webhook.HTTPConfig.FollowRedirects.ValueBool()
+			}
+			webhookMap["http_config"] = http_configNestedMap
+		}
+		if data.Webhook.URL != nil {
+			urlNestedMap := make(map[string]interface{})
+			webhookMap["url"] = urlNestedMap
+		}
+		apiResource.Spec["webhook"] = webhookMap
+	}
+
+
 	created, err := r.client.CreateAlertReceiver(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create AlertReceiver: %s", err))
@@ -922,8 +990,13 @@ func (r *AlertReceiverResource) Create(ctx context.Context, req resource.CreateR
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created AlertReceiver resource")
@@ -1002,9 +1075,80 @@ func (r *AlertReceiverResource) Read(ctx context.Context, req resource.ReadReque
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if blockData, ok := apiResource.Spec["email"].(map[string]interface{}); ok && (isImport || data.Email != nil) {
+		data.Email = &AlertReceiverEmailModel{
+			Email: func() types.String {
+				if v, ok := blockData["email"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["opsgenie"].(map[string]interface{}); ok && (isImport || data.Opsgenie != nil) {
+		data.Opsgenie = &AlertReceiverOpsgenieModel{
+			URL: func() types.String {
+				if v, ok := blockData["url"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["pagerduty"].(map[string]interface{}); ok && (isImport || data.Pagerduty != nil) {
+		data.Pagerduty = &AlertReceiverPagerdutyModel{
+			URL: func() types.String {
+				if v, ok := blockData["url"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["slack"].(map[string]interface{}); ok && (isImport || data.Slack != nil) {
+		data.Slack = &AlertReceiverSlackModel{
+			Channel: func() types.String {
+				if v, ok := blockData["channel"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["sms"].(map[string]interface{}); ok && (isImport || data.Sms != nil) {
+		data.Sms = &AlertReceiverSmsModel{
+			ContactNumber: func() types.String {
+				if v, ok := blockData["contact_number"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["webhook"].(map[string]interface{}); ok && isImport && data.Webhook == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Webhook = &AlertReceiverWebhookModel{}
+	}
+	// Normal Read: preserve existing state value
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -1030,7 +1174,7 @@ func (r *AlertReceiverResource) Update(ctx context.Context, req resource.UpdateR
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.AlertReceiverSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -1055,6 +1199,74 @@ func (r *AlertReceiverResource) Update(ctx context.Context, req resource.UpdateR
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.Email != nil {
+		emailMap := make(map[string]interface{})
+		if !data.Email.Email.IsNull() && !data.Email.Email.IsUnknown() {
+			emailMap["email"] = data.Email.Email.ValueString()
+		}
+		apiResource.Spec["email"] = emailMap
+	}
+	if data.Opsgenie != nil {
+		opsgenieMap := make(map[string]interface{})
+		if data.Opsgenie.APIKey != nil {
+			api_keyNestedMap := make(map[string]interface{})
+			opsgenieMap["api_key"] = api_keyNestedMap
+		}
+		if !data.Opsgenie.URL.IsNull() && !data.Opsgenie.URL.IsUnknown() {
+			opsgenieMap["url"] = data.Opsgenie.URL.ValueString()
+		}
+		apiResource.Spec["opsgenie"] = opsgenieMap
+	}
+	if data.Pagerduty != nil {
+		pagerdutyMap := make(map[string]interface{})
+		if data.Pagerduty.RoutingKey != nil {
+			routing_keyNestedMap := make(map[string]interface{})
+			pagerdutyMap["routing_key"] = routing_keyNestedMap
+		}
+		if !data.Pagerduty.URL.IsNull() && !data.Pagerduty.URL.IsUnknown() {
+			pagerdutyMap["url"] = data.Pagerduty.URL.ValueString()
+		}
+		apiResource.Spec["pagerduty"] = pagerdutyMap
+	}
+	if data.Slack != nil {
+		slackMap := make(map[string]interface{})
+		if !data.Slack.Channel.IsNull() && !data.Slack.Channel.IsUnknown() {
+			slackMap["channel"] = data.Slack.Channel.ValueString()
+		}
+		if data.Slack.URL != nil {
+			urlNestedMap := make(map[string]interface{})
+			slackMap["url"] = urlNestedMap
+		}
+		apiResource.Spec["slack"] = slackMap
+	}
+	if data.Sms != nil {
+		smsMap := make(map[string]interface{})
+		if !data.Sms.ContactNumber.IsNull() && !data.Sms.ContactNumber.IsUnknown() {
+			smsMap["contact_number"] = data.Sms.ContactNumber.ValueString()
+		}
+		apiResource.Spec["sms"] = smsMap
+	}
+	if data.Webhook != nil {
+		webhookMap := make(map[string]interface{})
+		if data.Webhook.HTTPConfig != nil {
+			http_configNestedMap := make(map[string]interface{})
+			if !data.Webhook.HTTPConfig.EnableHttp2.IsNull() && !data.Webhook.HTTPConfig.EnableHttp2.IsUnknown() {
+				http_configNestedMap["enable_http2"] = data.Webhook.HTTPConfig.EnableHttp2.ValueBool()
+			}
+			if !data.Webhook.HTTPConfig.FollowRedirects.IsNull() && !data.Webhook.HTTPConfig.FollowRedirects.IsUnknown() {
+				http_configNestedMap["follow_redirects"] = data.Webhook.HTTPConfig.FollowRedirects.ValueBool()
+			}
+			webhookMap["http_config"] = http_configNestedMap
+		}
+		if data.Webhook.URL != nil {
+			urlNestedMap := make(map[string]interface{})
+			webhookMap["url"] = urlNestedMap
+		}
+		apiResource.Spec["webhook"] = webhookMap
+	}
+
+
 	updated, err := r.client.UpdateAlertReceiver(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update AlertReceiver: %s", err))
@@ -1063,6 +1275,8 @@ func (r *AlertReceiverResource) Update(ctx context.Context, req resource.UpdateR
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -1075,6 +1289,7 @@ func (r *AlertReceiverResource) Update(ctx context.Context, req resource.UpdateR
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -1101,6 +1316,15 @@ func (r *AlertReceiverResource) Delete(ctx context.Context, req resource.DeleteR
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "AlertReceiver already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "AlertReceiver delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

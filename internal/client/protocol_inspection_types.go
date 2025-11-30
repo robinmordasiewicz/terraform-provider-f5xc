@@ -10,13 +10,8 @@ import (
 
 // ProtocolInspection represents a F5XC ProtocolInspection
 type ProtocolInspection struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     ProtocolInspectionSpec `json:"spec"`
-}
-
-// ProtocolInspectionSpec defines the specification for ProtocolInspection
-type ProtocolInspectionSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateProtocolInspection creates a new ProtocolInspection

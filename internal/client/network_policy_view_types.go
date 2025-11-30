@@ -10,13 +10,8 @@ import (
 
 // NetworkPolicyView represents a F5XC NetworkPolicyView
 type NetworkPolicyView struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     NetworkPolicyViewSpec `json:"spec"`
-}
-
-// NetworkPolicyViewSpec defines the specification for NetworkPolicyView
-type NetworkPolicyViewSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateNetworkPolicyView creates a new NetworkPolicyView

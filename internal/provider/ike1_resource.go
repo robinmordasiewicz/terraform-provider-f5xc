@@ -316,7 +316,7 @@ func (r *Ike1Resource) Create(ctx context.Context, req resource.CreateRequest, r
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.Ike1Spec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -341,6 +341,45 @@ func (r *Ike1Resource) Create(ctx context.Context, req resource.CreateRequest, r
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.IKEKeylifetimeHours != nil {
+		ike_keylifetime_hoursMap := make(map[string]interface{})
+		if !data.IKEKeylifetimeHours.Duration.IsNull() && !data.IKEKeylifetimeHours.Duration.IsUnknown() {
+			ike_keylifetime_hoursMap["duration"] = data.IKEKeylifetimeHours.Duration.ValueInt64()
+		}
+		apiResource.Spec["ike_keylifetime_hours"] = ike_keylifetime_hoursMap
+	}
+	if data.IKEKeylifetimeMinutes != nil {
+		ike_keylifetime_minutesMap := make(map[string]interface{})
+		if !data.IKEKeylifetimeMinutes.Duration.IsNull() && !data.IKEKeylifetimeMinutes.Duration.IsUnknown() {
+			ike_keylifetime_minutesMap["duration"] = data.IKEKeylifetimeMinutes.Duration.ValueInt64()
+		}
+		apiResource.Spec["ike_keylifetime_minutes"] = ike_keylifetime_minutesMap
+	}
+	if data.ReauthDisabled != nil {
+		reauth_disabledMap := make(map[string]interface{})
+		apiResource.Spec["reauth_disabled"] = reauth_disabledMap
+	}
+	if data.ReauthTimeoutDays != nil {
+		reauth_timeout_daysMap := make(map[string]interface{})
+		if !data.ReauthTimeoutDays.Duration.IsNull() && !data.ReauthTimeoutDays.Duration.IsUnknown() {
+			reauth_timeout_daysMap["duration"] = data.ReauthTimeoutDays.Duration.ValueInt64()
+		}
+		apiResource.Spec["reauth_timeout_days"] = reauth_timeout_daysMap
+	}
+	if data.ReauthTimeoutHours != nil {
+		reauth_timeout_hoursMap := make(map[string]interface{})
+		if !data.ReauthTimeoutHours.Duration.IsNull() && !data.ReauthTimeoutHours.Duration.IsUnknown() {
+			reauth_timeout_hoursMap["duration"] = data.ReauthTimeoutHours.Duration.ValueInt64()
+		}
+		apiResource.Spec["reauth_timeout_hours"] = reauth_timeout_hoursMap
+	}
+	if data.UseDefaultKeylifetime != nil {
+		use_default_keylifetimeMap := make(map[string]interface{})
+		apiResource.Spec["use_default_keylifetime"] = use_default_keylifetimeMap
+	}
+
+
 	created, err := r.client.CreateIke1(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create Ike1: %s", err))
@@ -349,8 +388,13 @@ func (r *Ike1Resource) Create(ctx context.Context, req resource.CreateRequest, r
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created Ike1 resource")
@@ -429,9 +473,75 @@ func (r *Ike1Resource) Read(ctx context.Context, req resource.ReadRequest, resp 
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if blockData, ok := apiResource.Spec["ike_keylifetime_hours"].(map[string]interface{}); ok && (isImport || data.IKEKeylifetimeHours != nil) {
+		data.IKEKeylifetimeHours = &Ike1IKEKeylifetimeHoursModel{
+			Duration: func() types.Int64 {
+				if v, ok := blockData["duration"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["ike_keylifetime_minutes"].(map[string]interface{}); ok && (isImport || data.IKEKeylifetimeMinutes != nil) {
+		data.IKEKeylifetimeMinutes = &Ike1IKEKeylifetimeMinutesModel{
+			Duration: func() types.Int64 {
+				if v, ok := blockData["duration"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["reauth_disabled"].(map[string]interface{}); ok && isImport && data.ReauthDisabled == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ReauthDisabled = &Ike1EmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["reauth_timeout_days"].(map[string]interface{}); ok && (isImport || data.ReauthTimeoutDays != nil) {
+		data.ReauthTimeoutDays = &Ike1ReauthTimeoutDaysModel{
+			Duration: func() types.Int64 {
+				if v, ok := blockData["duration"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["reauth_timeout_hours"].(map[string]interface{}); ok && (isImport || data.ReauthTimeoutHours != nil) {
+		data.ReauthTimeoutHours = &Ike1ReauthTimeoutHoursModel{
+			Duration: func() types.Int64 {
+				if v, ok := blockData["duration"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["use_default_keylifetime"].(map[string]interface{}); ok && isImport && data.UseDefaultKeylifetime == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.UseDefaultKeylifetime = &Ike1EmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -457,7 +567,7 @@ func (r *Ike1Resource) Update(ctx context.Context, req resource.UpdateRequest, r
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.Ike1Spec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -482,6 +592,45 @@ func (r *Ike1Resource) Update(ctx context.Context, req resource.UpdateRequest, r
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.IKEKeylifetimeHours != nil {
+		ike_keylifetime_hoursMap := make(map[string]interface{})
+		if !data.IKEKeylifetimeHours.Duration.IsNull() && !data.IKEKeylifetimeHours.Duration.IsUnknown() {
+			ike_keylifetime_hoursMap["duration"] = data.IKEKeylifetimeHours.Duration.ValueInt64()
+		}
+		apiResource.Spec["ike_keylifetime_hours"] = ike_keylifetime_hoursMap
+	}
+	if data.IKEKeylifetimeMinutes != nil {
+		ike_keylifetime_minutesMap := make(map[string]interface{})
+		if !data.IKEKeylifetimeMinutes.Duration.IsNull() && !data.IKEKeylifetimeMinutes.Duration.IsUnknown() {
+			ike_keylifetime_minutesMap["duration"] = data.IKEKeylifetimeMinutes.Duration.ValueInt64()
+		}
+		apiResource.Spec["ike_keylifetime_minutes"] = ike_keylifetime_minutesMap
+	}
+	if data.ReauthDisabled != nil {
+		reauth_disabledMap := make(map[string]interface{})
+		apiResource.Spec["reauth_disabled"] = reauth_disabledMap
+	}
+	if data.ReauthTimeoutDays != nil {
+		reauth_timeout_daysMap := make(map[string]interface{})
+		if !data.ReauthTimeoutDays.Duration.IsNull() && !data.ReauthTimeoutDays.Duration.IsUnknown() {
+			reauth_timeout_daysMap["duration"] = data.ReauthTimeoutDays.Duration.ValueInt64()
+		}
+		apiResource.Spec["reauth_timeout_days"] = reauth_timeout_daysMap
+	}
+	if data.ReauthTimeoutHours != nil {
+		reauth_timeout_hoursMap := make(map[string]interface{})
+		if !data.ReauthTimeoutHours.Duration.IsNull() && !data.ReauthTimeoutHours.Duration.IsUnknown() {
+			reauth_timeout_hoursMap["duration"] = data.ReauthTimeoutHours.Duration.ValueInt64()
+		}
+		apiResource.Spec["reauth_timeout_hours"] = reauth_timeout_hoursMap
+	}
+	if data.UseDefaultKeylifetime != nil {
+		use_default_keylifetimeMap := make(map[string]interface{})
+		apiResource.Spec["use_default_keylifetime"] = use_default_keylifetimeMap
+	}
+
+
 	updated, err := r.client.UpdateIke1(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update Ike1: %s", err))
@@ -490,6 +639,8 @@ func (r *Ike1Resource) Update(ctx context.Context, req resource.UpdateRequest, r
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -502,6 +653,7 @@ func (r *Ike1Resource) Update(ctx context.Context, req resource.UpdateRequest, r
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -528,6 +680,15 @@ func (r *Ike1Resource) Delete(ctx context.Context, req resource.DeleteRequest, r
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "Ike1 already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "Ike1 delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

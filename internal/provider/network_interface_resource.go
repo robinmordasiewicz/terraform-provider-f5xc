@@ -970,7 +970,7 @@ func (r *NetworkInterfaceResource) Create(ctx context.Context, req resource.Crea
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.NetworkInterfaceSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -995,6 +995,191 @@ func (r *NetworkInterfaceResource) Create(ctx context.Context, req resource.Crea
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.DedicatedInterface != nil {
+		dedicated_interfaceMap := make(map[string]interface{})
+		if data.DedicatedInterface.Cluster != nil {
+			dedicated_interfaceMap["cluster"] = map[string]interface{}{}
+		}
+		if !data.DedicatedInterface.Device.IsNull() && !data.DedicatedInterface.Device.IsUnknown() {
+			dedicated_interfaceMap["device"] = data.DedicatedInterface.Device.ValueString()
+		}
+		if data.DedicatedInterface.IsPrimary != nil {
+			dedicated_interfaceMap["is_primary"] = map[string]interface{}{}
+		}
+		if data.DedicatedInterface.Monitor != nil {
+			dedicated_interfaceMap["monitor"] = map[string]interface{}{}
+		}
+		if data.DedicatedInterface.MonitorDisabled != nil {
+			dedicated_interfaceMap["monitor_disabled"] = map[string]interface{}{}
+		}
+		if !data.DedicatedInterface.Mtu.IsNull() && !data.DedicatedInterface.Mtu.IsUnknown() {
+			dedicated_interfaceMap["mtu"] = data.DedicatedInterface.Mtu.ValueInt64()
+		}
+		if !data.DedicatedInterface.Node.IsNull() && !data.DedicatedInterface.Node.IsUnknown() {
+			dedicated_interfaceMap["node"] = data.DedicatedInterface.Node.ValueString()
+		}
+		if data.DedicatedInterface.NotPrimary != nil {
+			dedicated_interfaceMap["not_primary"] = map[string]interface{}{}
+		}
+		if !data.DedicatedInterface.Priority.IsNull() && !data.DedicatedInterface.Priority.IsUnknown() {
+			dedicated_interfaceMap["priority"] = data.DedicatedInterface.Priority.ValueInt64()
+		}
+		apiResource.Spec["dedicated_interface"] = dedicated_interfaceMap
+	}
+	if data.DedicatedManagementInterface != nil {
+		dedicated_management_interfaceMap := make(map[string]interface{})
+		if data.DedicatedManagementInterface.Cluster != nil {
+			dedicated_management_interfaceMap["cluster"] = map[string]interface{}{}
+		}
+		if !data.DedicatedManagementInterface.Device.IsNull() && !data.DedicatedManagementInterface.Device.IsUnknown() {
+			dedicated_management_interfaceMap["device"] = data.DedicatedManagementInterface.Device.ValueString()
+		}
+		if !data.DedicatedManagementInterface.Mtu.IsNull() && !data.DedicatedManagementInterface.Mtu.IsUnknown() {
+			dedicated_management_interfaceMap["mtu"] = data.DedicatedManagementInterface.Mtu.ValueInt64()
+		}
+		if !data.DedicatedManagementInterface.Node.IsNull() && !data.DedicatedManagementInterface.Node.IsUnknown() {
+			dedicated_management_interfaceMap["node"] = data.DedicatedManagementInterface.Node.ValueString()
+		}
+		apiResource.Spec["dedicated_management_interface"] = dedicated_management_interfaceMap
+	}
+	if data.EthernetInterface != nil {
+		ethernet_interfaceMap := make(map[string]interface{})
+		if data.EthernetInterface.Cluster != nil {
+			ethernet_interfaceMap["cluster"] = map[string]interface{}{}
+		}
+		if !data.EthernetInterface.Device.IsNull() && !data.EthernetInterface.Device.IsUnknown() {
+			ethernet_interfaceMap["device"] = data.EthernetInterface.Device.ValueString()
+		}
+		if data.EthernetInterface.DhcpClient != nil {
+			ethernet_interfaceMap["dhcp_client"] = map[string]interface{}{}
+		}
+		if data.EthernetInterface.DhcpServer != nil {
+			dhcp_serverNestedMap := make(map[string]interface{})
+			ethernet_interfaceMap["dhcp_server"] = dhcp_serverNestedMap
+		}
+		if data.EthernetInterface.IPV6AutoConfig != nil {
+			ipv6_auto_configNestedMap := make(map[string]interface{})
+			ethernet_interfaceMap["ipv6_auto_config"] = ipv6_auto_configNestedMap
+		}
+		if data.EthernetInterface.IsPrimary != nil {
+			ethernet_interfaceMap["is_primary"] = map[string]interface{}{}
+		}
+		if data.EthernetInterface.Monitor != nil {
+			ethernet_interfaceMap["monitor"] = map[string]interface{}{}
+		}
+		if data.EthernetInterface.MonitorDisabled != nil {
+			ethernet_interfaceMap["monitor_disabled"] = map[string]interface{}{}
+		}
+		if !data.EthernetInterface.Mtu.IsNull() && !data.EthernetInterface.Mtu.IsUnknown() {
+			ethernet_interfaceMap["mtu"] = data.EthernetInterface.Mtu.ValueInt64()
+		}
+		if data.EthernetInterface.NoIPV6Address != nil {
+			ethernet_interfaceMap["no_ipv6_address"] = map[string]interface{}{}
+		}
+		if !data.EthernetInterface.Node.IsNull() && !data.EthernetInterface.Node.IsUnknown() {
+			ethernet_interfaceMap["node"] = data.EthernetInterface.Node.ValueString()
+		}
+		if data.EthernetInterface.NotPrimary != nil {
+			ethernet_interfaceMap["not_primary"] = map[string]interface{}{}
+		}
+		if !data.EthernetInterface.Priority.IsNull() && !data.EthernetInterface.Priority.IsUnknown() {
+			ethernet_interfaceMap["priority"] = data.EthernetInterface.Priority.ValueInt64()
+		}
+		if data.EthernetInterface.SiteLocalInsideNetwork != nil {
+			ethernet_interfaceMap["site_local_inside_network"] = map[string]interface{}{}
+		}
+		if data.EthernetInterface.SiteLocalNetwork != nil {
+			ethernet_interfaceMap["site_local_network"] = map[string]interface{}{}
+		}
+		if data.EthernetInterface.StaticIP != nil {
+			static_ipNestedMap := make(map[string]interface{})
+			ethernet_interfaceMap["static_ip"] = static_ipNestedMap
+		}
+		if data.EthernetInterface.StaticIPV6Address != nil {
+			static_ipv6_addressNestedMap := make(map[string]interface{})
+			ethernet_interfaceMap["static_ipv6_address"] = static_ipv6_addressNestedMap
+		}
+		if data.EthernetInterface.StorageNetwork != nil {
+			ethernet_interfaceMap["storage_network"] = map[string]interface{}{}
+		}
+		if data.EthernetInterface.Untagged != nil {
+			ethernet_interfaceMap["untagged"] = map[string]interface{}{}
+		}
+		if !data.EthernetInterface.VlanID.IsNull() && !data.EthernetInterface.VlanID.IsUnknown() {
+			ethernet_interfaceMap["vlan_id"] = data.EthernetInterface.VlanID.ValueInt64()
+		}
+		apiResource.Spec["ethernet_interface"] = ethernet_interfaceMap
+	}
+	if data.Layer2Interface != nil {
+		layer2_interfaceMap := make(map[string]interface{})
+		if data.Layer2Interface.L2sriovInterface != nil {
+			l2sriov_interfaceNestedMap := make(map[string]interface{})
+			if !data.Layer2Interface.L2sriovInterface.Device.IsNull() && !data.Layer2Interface.L2sriovInterface.Device.IsUnknown() {
+				l2sriov_interfaceNestedMap["device"] = data.Layer2Interface.L2sriovInterface.Device.ValueString()
+			}
+			if !data.Layer2Interface.L2sriovInterface.VlanID.IsNull() && !data.Layer2Interface.L2sriovInterface.VlanID.IsUnknown() {
+				l2sriov_interfaceNestedMap["vlan_id"] = data.Layer2Interface.L2sriovInterface.VlanID.ValueInt64()
+			}
+			layer2_interfaceMap["l2sriov_interface"] = l2sriov_interfaceNestedMap
+		}
+		if data.Layer2Interface.L2vlanInterface != nil {
+			l2vlan_interfaceNestedMap := make(map[string]interface{})
+			if !data.Layer2Interface.L2vlanInterface.Device.IsNull() && !data.Layer2Interface.L2vlanInterface.Device.IsUnknown() {
+				l2vlan_interfaceNestedMap["device"] = data.Layer2Interface.L2vlanInterface.Device.ValueString()
+			}
+			if !data.Layer2Interface.L2vlanInterface.VlanID.IsNull() && !data.Layer2Interface.L2vlanInterface.VlanID.IsUnknown() {
+				l2vlan_interfaceNestedMap["vlan_id"] = data.Layer2Interface.L2vlanInterface.VlanID.ValueInt64()
+			}
+			layer2_interfaceMap["l2vlan_interface"] = l2vlan_interfaceNestedMap
+		}
+		if data.Layer2Interface.L2vlanSLOInterface != nil {
+			l2vlan_slo_interfaceNestedMap := make(map[string]interface{})
+			if !data.Layer2Interface.L2vlanSLOInterface.VlanID.IsNull() && !data.Layer2Interface.L2vlanSLOInterface.VlanID.IsUnknown() {
+				l2vlan_slo_interfaceNestedMap["vlan_id"] = data.Layer2Interface.L2vlanSLOInterface.VlanID.ValueInt64()
+			}
+			layer2_interfaceMap["l2vlan_slo_interface"] = l2vlan_slo_interfaceNestedMap
+		}
+		apiResource.Spec["layer2_interface"] = layer2_interfaceMap
+	}
+	if data.TunnelInterface != nil {
+		tunnel_interfaceMap := make(map[string]interface{})
+		if !data.TunnelInterface.Mtu.IsNull() && !data.TunnelInterface.Mtu.IsUnknown() {
+			tunnel_interfaceMap["mtu"] = data.TunnelInterface.Mtu.ValueInt64()
+		}
+		if !data.TunnelInterface.Node.IsNull() && !data.TunnelInterface.Node.IsUnknown() {
+			tunnel_interfaceMap["node"] = data.TunnelInterface.Node.ValueString()
+		}
+		if !data.TunnelInterface.Priority.IsNull() && !data.TunnelInterface.Priority.IsUnknown() {
+			tunnel_interfaceMap["priority"] = data.TunnelInterface.Priority.ValueInt64()
+		}
+		if data.TunnelInterface.SiteLocalInsideNetwork != nil {
+			tunnel_interfaceMap["site_local_inside_network"] = map[string]interface{}{}
+		}
+		if data.TunnelInterface.SiteLocalNetwork != nil {
+			tunnel_interfaceMap["site_local_network"] = map[string]interface{}{}
+		}
+		if data.TunnelInterface.StaticIP != nil {
+			static_ipNestedMap := make(map[string]interface{})
+			tunnel_interfaceMap["static_ip"] = static_ipNestedMap
+		}
+		if data.TunnelInterface.Tunnel != nil {
+			tunnelNestedMap := make(map[string]interface{})
+			if !data.TunnelInterface.Tunnel.Name.IsNull() && !data.TunnelInterface.Tunnel.Name.IsUnknown() {
+				tunnelNestedMap["name"] = data.TunnelInterface.Tunnel.Name.ValueString()
+			}
+			if !data.TunnelInterface.Tunnel.Namespace.IsNull() && !data.TunnelInterface.Tunnel.Namespace.IsUnknown() {
+				tunnelNestedMap["namespace"] = data.TunnelInterface.Tunnel.Namespace.ValueString()
+			}
+			if !data.TunnelInterface.Tunnel.Tenant.IsNull() && !data.TunnelInterface.Tunnel.Tenant.IsUnknown() {
+				tunnelNestedMap["tenant"] = data.TunnelInterface.Tunnel.Tenant.ValueString()
+			}
+			tunnel_interfaceMap["tunnel"] = tunnelNestedMap
+		}
+		apiResource.Spec["tunnel_interface"] = tunnel_interfaceMap
+	}
+
+
 	created, err := r.client.CreateNetworkInterface(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create NetworkInterface: %s", err))
@@ -1003,8 +1188,13 @@ func (r *NetworkInterfaceResource) Create(ctx context.Context, req resource.Crea
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created NetworkInterface resource")
@@ -1083,9 +1273,136 @@ func (r *NetworkInterfaceResource) Read(ctx context.Context, req resource.ReadRe
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if blockData, ok := apiResource.Spec["dedicated_interface"].(map[string]interface{}); ok && (isImport || data.DedicatedInterface != nil) {
+		data.DedicatedInterface = &NetworkInterfaceDedicatedInterfaceModel{
+			Device: func() types.String {
+				if v, ok := blockData["device"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Mtu: func() types.Int64 {
+				if v, ok := blockData["mtu"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			Node: func() types.String {
+				if v, ok := blockData["node"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Priority: func() types.Int64 {
+				if v, ok := blockData["priority"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["dedicated_management_interface"].(map[string]interface{}); ok && (isImport || data.DedicatedManagementInterface != nil) {
+		data.DedicatedManagementInterface = &NetworkInterfaceDedicatedManagementInterfaceModel{
+			Device: func() types.String {
+				if v, ok := blockData["device"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Mtu: func() types.Int64 {
+				if v, ok := blockData["mtu"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			Node: func() types.String {
+				if v, ok := blockData["node"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["ethernet_interface"].(map[string]interface{}); ok && (isImport || data.EthernetInterface != nil) {
+		data.EthernetInterface = &NetworkInterfaceEthernetInterfaceModel{
+			Device: func() types.String {
+				if v, ok := blockData["device"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Mtu: func() types.Int64 {
+				if v, ok := blockData["mtu"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			Node: func() types.String {
+				if v, ok := blockData["node"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Priority: func() types.Int64 {
+				if v, ok := blockData["priority"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			VlanID: func() types.Int64 {
+				if v, ok := blockData["vlan_id"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["layer2_interface"].(map[string]interface{}); ok && isImport && data.Layer2Interface == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Layer2Interface = &NetworkInterfaceLayer2InterfaceModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["tunnel_interface"].(map[string]interface{}); ok && (isImport || data.TunnelInterface != nil) {
+		data.TunnelInterface = &NetworkInterfaceTunnelInterfaceModel{
+			Mtu: func() types.Int64 {
+				if v, ok := blockData["mtu"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			Node: func() types.String {
+				if v, ok := blockData["node"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Priority: func() types.Int64 {
+				if v, ok := blockData["priority"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -1111,7 +1428,7 @@ func (r *NetworkInterfaceResource) Update(ctx context.Context, req resource.Upda
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.NetworkInterfaceSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -1136,6 +1453,191 @@ func (r *NetworkInterfaceResource) Update(ctx context.Context, req resource.Upda
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.DedicatedInterface != nil {
+		dedicated_interfaceMap := make(map[string]interface{})
+		if data.DedicatedInterface.Cluster != nil {
+			dedicated_interfaceMap["cluster"] = map[string]interface{}{}
+		}
+		if !data.DedicatedInterface.Device.IsNull() && !data.DedicatedInterface.Device.IsUnknown() {
+			dedicated_interfaceMap["device"] = data.DedicatedInterface.Device.ValueString()
+		}
+		if data.DedicatedInterface.IsPrimary != nil {
+			dedicated_interfaceMap["is_primary"] = map[string]interface{}{}
+		}
+		if data.DedicatedInterface.Monitor != nil {
+			dedicated_interfaceMap["monitor"] = map[string]interface{}{}
+		}
+		if data.DedicatedInterface.MonitorDisabled != nil {
+			dedicated_interfaceMap["monitor_disabled"] = map[string]interface{}{}
+		}
+		if !data.DedicatedInterface.Mtu.IsNull() && !data.DedicatedInterface.Mtu.IsUnknown() {
+			dedicated_interfaceMap["mtu"] = data.DedicatedInterface.Mtu.ValueInt64()
+		}
+		if !data.DedicatedInterface.Node.IsNull() && !data.DedicatedInterface.Node.IsUnknown() {
+			dedicated_interfaceMap["node"] = data.DedicatedInterface.Node.ValueString()
+		}
+		if data.DedicatedInterface.NotPrimary != nil {
+			dedicated_interfaceMap["not_primary"] = map[string]interface{}{}
+		}
+		if !data.DedicatedInterface.Priority.IsNull() && !data.DedicatedInterface.Priority.IsUnknown() {
+			dedicated_interfaceMap["priority"] = data.DedicatedInterface.Priority.ValueInt64()
+		}
+		apiResource.Spec["dedicated_interface"] = dedicated_interfaceMap
+	}
+	if data.DedicatedManagementInterface != nil {
+		dedicated_management_interfaceMap := make(map[string]interface{})
+		if data.DedicatedManagementInterface.Cluster != nil {
+			dedicated_management_interfaceMap["cluster"] = map[string]interface{}{}
+		}
+		if !data.DedicatedManagementInterface.Device.IsNull() && !data.DedicatedManagementInterface.Device.IsUnknown() {
+			dedicated_management_interfaceMap["device"] = data.DedicatedManagementInterface.Device.ValueString()
+		}
+		if !data.DedicatedManagementInterface.Mtu.IsNull() && !data.DedicatedManagementInterface.Mtu.IsUnknown() {
+			dedicated_management_interfaceMap["mtu"] = data.DedicatedManagementInterface.Mtu.ValueInt64()
+		}
+		if !data.DedicatedManagementInterface.Node.IsNull() && !data.DedicatedManagementInterface.Node.IsUnknown() {
+			dedicated_management_interfaceMap["node"] = data.DedicatedManagementInterface.Node.ValueString()
+		}
+		apiResource.Spec["dedicated_management_interface"] = dedicated_management_interfaceMap
+	}
+	if data.EthernetInterface != nil {
+		ethernet_interfaceMap := make(map[string]interface{})
+		if data.EthernetInterface.Cluster != nil {
+			ethernet_interfaceMap["cluster"] = map[string]interface{}{}
+		}
+		if !data.EthernetInterface.Device.IsNull() && !data.EthernetInterface.Device.IsUnknown() {
+			ethernet_interfaceMap["device"] = data.EthernetInterface.Device.ValueString()
+		}
+		if data.EthernetInterface.DhcpClient != nil {
+			ethernet_interfaceMap["dhcp_client"] = map[string]interface{}{}
+		}
+		if data.EthernetInterface.DhcpServer != nil {
+			dhcp_serverNestedMap := make(map[string]interface{})
+			ethernet_interfaceMap["dhcp_server"] = dhcp_serverNestedMap
+		}
+		if data.EthernetInterface.IPV6AutoConfig != nil {
+			ipv6_auto_configNestedMap := make(map[string]interface{})
+			ethernet_interfaceMap["ipv6_auto_config"] = ipv6_auto_configNestedMap
+		}
+		if data.EthernetInterface.IsPrimary != nil {
+			ethernet_interfaceMap["is_primary"] = map[string]interface{}{}
+		}
+		if data.EthernetInterface.Monitor != nil {
+			ethernet_interfaceMap["monitor"] = map[string]interface{}{}
+		}
+		if data.EthernetInterface.MonitorDisabled != nil {
+			ethernet_interfaceMap["monitor_disabled"] = map[string]interface{}{}
+		}
+		if !data.EthernetInterface.Mtu.IsNull() && !data.EthernetInterface.Mtu.IsUnknown() {
+			ethernet_interfaceMap["mtu"] = data.EthernetInterface.Mtu.ValueInt64()
+		}
+		if data.EthernetInterface.NoIPV6Address != nil {
+			ethernet_interfaceMap["no_ipv6_address"] = map[string]interface{}{}
+		}
+		if !data.EthernetInterface.Node.IsNull() && !data.EthernetInterface.Node.IsUnknown() {
+			ethernet_interfaceMap["node"] = data.EthernetInterface.Node.ValueString()
+		}
+		if data.EthernetInterface.NotPrimary != nil {
+			ethernet_interfaceMap["not_primary"] = map[string]interface{}{}
+		}
+		if !data.EthernetInterface.Priority.IsNull() && !data.EthernetInterface.Priority.IsUnknown() {
+			ethernet_interfaceMap["priority"] = data.EthernetInterface.Priority.ValueInt64()
+		}
+		if data.EthernetInterface.SiteLocalInsideNetwork != nil {
+			ethernet_interfaceMap["site_local_inside_network"] = map[string]interface{}{}
+		}
+		if data.EthernetInterface.SiteLocalNetwork != nil {
+			ethernet_interfaceMap["site_local_network"] = map[string]interface{}{}
+		}
+		if data.EthernetInterface.StaticIP != nil {
+			static_ipNestedMap := make(map[string]interface{})
+			ethernet_interfaceMap["static_ip"] = static_ipNestedMap
+		}
+		if data.EthernetInterface.StaticIPV6Address != nil {
+			static_ipv6_addressNestedMap := make(map[string]interface{})
+			ethernet_interfaceMap["static_ipv6_address"] = static_ipv6_addressNestedMap
+		}
+		if data.EthernetInterface.StorageNetwork != nil {
+			ethernet_interfaceMap["storage_network"] = map[string]interface{}{}
+		}
+		if data.EthernetInterface.Untagged != nil {
+			ethernet_interfaceMap["untagged"] = map[string]interface{}{}
+		}
+		if !data.EthernetInterface.VlanID.IsNull() && !data.EthernetInterface.VlanID.IsUnknown() {
+			ethernet_interfaceMap["vlan_id"] = data.EthernetInterface.VlanID.ValueInt64()
+		}
+		apiResource.Spec["ethernet_interface"] = ethernet_interfaceMap
+	}
+	if data.Layer2Interface != nil {
+		layer2_interfaceMap := make(map[string]interface{})
+		if data.Layer2Interface.L2sriovInterface != nil {
+			l2sriov_interfaceNestedMap := make(map[string]interface{})
+			if !data.Layer2Interface.L2sriovInterface.Device.IsNull() && !data.Layer2Interface.L2sriovInterface.Device.IsUnknown() {
+				l2sriov_interfaceNestedMap["device"] = data.Layer2Interface.L2sriovInterface.Device.ValueString()
+			}
+			if !data.Layer2Interface.L2sriovInterface.VlanID.IsNull() && !data.Layer2Interface.L2sriovInterface.VlanID.IsUnknown() {
+				l2sriov_interfaceNestedMap["vlan_id"] = data.Layer2Interface.L2sriovInterface.VlanID.ValueInt64()
+			}
+			layer2_interfaceMap["l2sriov_interface"] = l2sriov_interfaceNestedMap
+		}
+		if data.Layer2Interface.L2vlanInterface != nil {
+			l2vlan_interfaceNestedMap := make(map[string]interface{})
+			if !data.Layer2Interface.L2vlanInterface.Device.IsNull() && !data.Layer2Interface.L2vlanInterface.Device.IsUnknown() {
+				l2vlan_interfaceNestedMap["device"] = data.Layer2Interface.L2vlanInterface.Device.ValueString()
+			}
+			if !data.Layer2Interface.L2vlanInterface.VlanID.IsNull() && !data.Layer2Interface.L2vlanInterface.VlanID.IsUnknown() {
+				l2vlan_interfaceNestedMap["vlan_id"] = data.Layer2Interface.L2vlanInterface.VlanID.ValueInt64()
+			}
+			layer2_interfaceMap["l2vlan_interface"] = l2vlan_interfaceNestedMap
+		}
+		if data.Layer2Interface.L2vlanSLOInterface != nil {
+			l2vlan_slo_interfaceNestedMap := make(map[string]interface{})
+			if !data.Layer2Interface.L2vlanSLOInterface.VlanID.IsNull() && !data.Layer2Interface.L2vlanSLOInterface.VlanID.IsUnknown() {
+				l2vlan_slo_interfaceNestedMap["vlan_id"] = data.Layer2Interface.L2vlanSLOInterface.VlanID.ValueInt64()
+			}
+			layer2_interfaceMap["l2vlan_slo_interface"] = l2vlan_slo_interfaceNestedMap
+		}
+		apiResource.Spec["layer2_interface"] = layer2_interfaceMap
+	}
+	if data.TunnelInterface != nil {
+		tunnel_interfaceMap := make(map[string]interface{})
+		if !data.TunnelInterface.Mtu.IsNull() && !data.TunnelInterface.Mtu.IsUnknown() {
+			tunnel_interfaceMap["mtu"] = data.TunnelInterface.Mtu.ValueInt64()
+		}
+		if !data.TunnelInterface.Node.IsNull() && !data.TunnelInterface.Node.IsUnknown() {
+			tunnel_interfaceMap["node"] = data.TunnelInterface.Node.ValueString()
+		}
+		if !data.TunnelInterface.Priority.IsNull() && !data.TunnelInterface.Priority.IsUnknown() {
+			tunnel_interfaceMap["priority"] = data.TunnelInterface.Priority.ValueInt64()
+		}
+		if data.TunnelInterface.SiteLocalInsideNetwork != nil {
+			tunnel_interfaceMap["site_local_inside_network"] = map[string]interface{}{}
+		}
+		if data.TunnelInterface.SiteLocalNetwork != nil {
+			tunnel_interfaceMap["site_local_network"] = map[string]interface{}{}
+		}
+		if data.TunnelInterface.StaticIP != nil {
+			static_ipNestedMap := make(map[string]interface{})
+			tunnel_interfaceMap["static_ip"] = static_ipNestedMap
+		}
+		if data.TunnelInterface.Tunnel != nil {
+			tunnelNestedMap := make(map[string]interface{})
+			if !data.TunnelInterface.Tunnel.Name.IsNull() && !data.TunnelInterface.Tunnel.Name.IsUnknown() {
+				tunnelNestedMap["name"] = data.TunnelInterface.Tunnel.Name.ValueString()
+			}
+			if !data.TunnelInterface.Tunnel.Namespace.IsNull() && !data.TunnelInterface.Tunnel.Namespace.IsUnknown() {
+				tunnelNestedMap["namespace"] = data.TunnelInterface.Tunnel.Namespace.ValueString()
+			}
+			if !data.TunnelInterface.Tunnel.Tenant.IsNull() && !data.TunnelInterface.Tunnel.Tenant.IsUnknown() {
+				tunnelNestedMap["tenant"] = data.TunnelInterface.Tunnel.Tenant.ValueString()
+			}
+			tunnel_interfaceMap["tunnel"] = tunnelNestedMap
+		}
+		apiResource.Spec["tunnel_interface"] = tunnel_interfaceMap
+	}
+
+
 	updated, err := r.client.UpdateNetworkInterface(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update NetworkInterface: %s", err))
@@ -1144,6 +1646,8 @@ func (r *NetworkInterfaceResource) Update(ctx context.Context, req resource.Upda
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -1156,6 +1660,7 @@ func (r *NetworkInterfaceResource) Update(ctx context.Context, req resource.Upda
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -1182,6 +1687,15 @@ func (r *NetworkInterfaceResource) Delete(ctx context.Context, req resource.Dele
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "NetworkInterface already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "NetworkInterface delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

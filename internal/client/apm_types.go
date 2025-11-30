@@ -10,13 +10,8 @@ import (
 
 // APM represents a F5XC APM
 type APM struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     APMSpec `json:"spec"`
-}
-
-// APMSpec defines the specification for APM
-type APMSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateAPM creates a new APM

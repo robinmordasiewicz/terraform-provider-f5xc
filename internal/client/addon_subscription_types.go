@@ -10,19 +10,14 @@ import (
 
 // AddonSubscription represents a F5XC AddonSubscription
 type AddonSubscription struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     AddonSubscriptionSpec `json:"spec"`
-}
-
-// AddonSubscriptionSpec defines the specification for AddonSubscription
-type AddonSubscriptionSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateAddonSubscription creates a new AddonSubscription
 func (c *Client) CreateAddonSubscription(ctx context.Context, resource *AddonSubscription) (*AddonSubscription, error) {
 	var result AddonSubscription
-	path := fmt.Sprintf("/api/config/namespaces/%s/addon_subscriptions", resource.Metadata.Namespace)
+	path := fmt.Sprintf("/api/web/namespaces/%s/addon_subscriptions", resource.Metadata.Namespace)
 	err := c.Post(ctx, path, resource, &result)
 	return &result, err
 }
@@ -30,7 +25,7 @@ func (c *Client) CreateAddonSubscription(ctx context.Context, resource *AddonSub
 // GetAddonSubscription retrieves a AddonSubscription
 func (c *Client) GetAddonSubscription(ctx context.Context, namespace, name string) (*AddonSubscription, error) {
 	var result AddonSubscription
-	path := fmt.Sprintf("/api/config/namespaces/%s/addon_subscriptions/%s", namespace, name)
+	path := fmt.Sprintf("/api/web/namespaces/%s/addon_subscriptions/%s", namespace, name)
 	err := c.Get(ctx, path, &result)
 	return &result, err
 }
@@ -38,13 +33,13 @@ func (c *Client) GetAddonSubscription(ctx context.Context, namespace, name strin
 // UpdateAddonSubscription updates a AddonSubscription
 func (c *Client) UpdateAddonSubscription(ctx context.Context, resource *AddonSubscription) (*AddonSubscription, error) {
 	var result AddonSubscription
-	path := fmt.Sprintf("/api/config/namespaces/%s/addon_subscriptions/%s", resource.Metadata.Namespace, resource.Metadata.Name)
+	path := fmt.Sprintf("/api/web/namespaces/%s/addon_subscriptions/%s", resource.Metadata.Namespace, resource.Metadata.Name)
 	err := c.Put(ctx, path, resource, &result)
 	return &result, err
 }
 
 // DeleteAddonSubscription deletes a AddonSubscription
 func (c *Client) DeleteAddonSubscription(ctx context.Context, namespace, name string) error {
-	path := fmt.Sprintf("/api/config/namespaces/%s/addon_subscriptions/%s", namespace, name)
+	path := fmt.Sprintf("/api/web/namespaces/%s/addon_subscriptions/%s", namespace, name)
 	return c.Delete(ctx, path)
 }

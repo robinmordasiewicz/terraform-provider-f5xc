@@ -10,19 +10,14 @@ import (
 
 // VoltshareAdminPolicy represents a F5XC VoltshareAdminPolicy
 type VoltshareAdminPolicy struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     VoltshareAdminPolicySpec `json:"spec"`
-}
-
-// VoltshareAdminPolicySpec defines the specification for VoltshareAdminPolicy
-type VoltshareAdminPolicySpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateVoltshareAdminPolicy creates a new VoltshareAdminPolicy
 func (c *Client) CreateVoltshareAdminPolicy(ctx context.Context, resource *VoltshareAdminPolicy) (*VoltshareAdminPolicy, error) {
 	var result VoltshareAdminPolicy
-	path := fmt.Sprintf("/api/config/namespaces/%s/voltshare_admin_policys", resource.Metadata.Namespace)
+	path := fmt.Sprintf("/api/secret_management/namespaces/%s/voltshare_admin_policys", resource.Metadata.Namespace)
 	err := c.Post(ctx, path, resource, &result)
 	return &result, err
 }
@@ -30,7 +25,7 @@ func (c *Client) CreateVoltshareAdminPolicy(ctx context.Context, resource *Volts
 // GetVoltshareAdminPolicy retrieves a VoltshareAdminPolicy
 func (c *Client) GetVoltshareAdminPolicy(ctx context.Context, namespace, name string) (*VoltshareAdminPolicy, error) {
 	var result VoltshareAdminPolicy
-	path := fmt.Sprintf("/api/config/namespaces/%s/voltshare_admin_policys/%s", namespace, name)
+	path := fmt.Sprintf("/api/secret_management/namespaces/%s/voltshare_admin_policys/%s", namespace, name)
 	err := c.Get(ctx, path, &result)
 	return &result, err
 }
@@ -38,13 +33,13 @@ func (c *Client) GetVoltshareAdminPolicy(ctx context.Context, namespace, name st
 // UpdateVoltshareAdminPolicy updates a VoltshareAdminPolicy
 func (c *Client) UpdateVoltshareAdminPolicy(ctx context.Context, resource *VoltshareAdminPolicy) (*VoltshareAdminPolicy, error) {
 	var result VoltshareAdminPolicy
-	path := fmt.Sprintf("/api/config/namespaces/%s/voltshare_admin_policys/%s", resource.Metadata.Namespace, resource.Metadata.Name)
+	path := fmt.Sprintf("/api/secret_management/namespaces/%s/voltshare_admin_policys/%s", resource.Metadata.Namespace, resource.Metadata.Name)
 	err := c.Put(ctx, path, resource, &result)
 	return &result, err
 }
 
 // DeleteVoltshareAdminPolicy deletes a VoltshareAdminPolicy
 func (c *Client) DeleteVoltshareAdminPolicy(ctx context.Context, namespace, name string) error {
-	path := fmt.Sprintf("/api/config/namespaces/%s/voltshare_admin_policys/%s", namespace, name)
+	path := fmt.Sprintf("/api/secret_management/namespaces/%s/voltshare_admin_policys/%s", namespace, name)
 	return c.Delete(ctx, path)
 }

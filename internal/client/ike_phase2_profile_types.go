@@ -10,13 +10,8 @@ import (
 
 // IKEPhase2Profile represents a F5XC IKEPhase2Profile
 type IKEPhase2Profile struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     IKEPhase2ProfileSpec `json:"spec"`
-}
-
-// IKEPhase2ProfileSpec defines the specification for IKEPhase2Profile
-type IKEPhase2ProfileSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateIKEPhase2Profile creates a new IKEPhase2Profile

@@ -172,11 +172,11 @@ type APITestingResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Annotations types.Map `tfsdk:"annotations"`
-	CustomHeaderValue types.String `tfsdk:"custom_header_value"`
 	Description types.String `tfsdk:"description"`
 	Disable types.Bool `tfsdk:"disable"`
 	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
+	CustomHeaderValue types.String `tfsdk:"custom_header_value"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
 	Domains []APITestingDomainsModel `tfsdk:"domains"`
 	EveryDay *APITestingEmptyModel `tfsdk:"every_day"`
@@ -218,10 +218,6 @@ func (r *APITestingResource) Schema(ctx context.Context, req resource.SchemaRequ
 				Optional: true,
 				ElementType: types.StringType,
 			},
-			"custom_header_value": schema.StringAttribute{
-				MarkdownDescription: "Custom Header. Add x-f5-api-testing-identifier header value to prevent security flags on API testing traffic",
-				Optional: true,
-			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
 				Optional: true,
@@ -237,6 +233,14 @@ func (r *APITestingResource) Schema(ctx context.Context, req resource.SchemaRequ
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"custom_header_value": schema.StringAttribute{
+				MarkdownDescription: "Custom Header. Add x-f5-api-testing-identifier header value to prevent security flags on API testing traffic",
+				Optional: true,
 				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
@@ -614,7 +618,7 @@ func (r *APITestingResource) Create(ctx context.Context, req resource.CreateRequ
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.APITestingSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -639,6 +643,38 @@ func (r *APITestingResource) Create(ctx context.Context, req resource.CreateRequ
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if len(data.Domains) > 0 {
+		var domainsList []map[string]interface{}
+		for _, item := range data.Domains {
+			itemMap := make(map[string]interface{})
+			if !item.AllowDestructiveMethods.IsNull() && !item.AllowDestructiveMethods.IsUnknown() {
+				itemMap["allow_destructive_methods"] = item.AllowDestructiveMethods.ValueBool()
+			}
+			if !item.Domain.IsNull() && !item.Domain.IsUnknown() {
+				itemMap["domain"] = item.Domain.ValueString()
+			}
+			domainsList = append(domainsList, itemMap)
+		}
+		apiResource.Spec["domains"] = domainsList
+	}
+	if data.EveryDay != nil {
+		every_dayMap := make(map[string]interface{})
+		apiResource.Spec["every_day"] = every_dayMap
+	}
+	if data.EveryMonth != nil {
+		every_monthMap := make(map[string]interface{})
+		apiResource.Spec["every_month"] = every_monthMap
+	}
+	if data.EveryWeek != nil {
+		every_weekMap := make(map[string]interface{})
+		apiResource.Spec["every_week"] = every_weekMap
+	}
+	if !data.CustomHeaderValue.IsNull() && !data.CustomHeaderValue.IsUnknown() {
+		apiResource.Spec["custom_header_value"] = data.CustomHeaderValue.ValueString()
+	}
+
+
 	created, err := r.client.CreateAPITesting(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create APITesting: %s", err))
@@ -647,8 +683,17 @@ func (r *APITestingResource) Create(ctx context.Context, req resource.CreateRequ
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+	if v, ok := created.Spec["custom_header_value"].(string); ok && v != "" {
+		data.CustomHeaderValue = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created APITesting resource")
@@ -727,9 +772,67 @@ func (r *APITestingResource) Read(ctx context.Context, req resource.ReadRequest,
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if listData, ok := apiResource.Spec["domains"].([]interface{}); ok && len(listData) > 0 {
+		var domainsList []APITestingDomainsModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				domainsList = append(domainsList, APITestingDomainsModel{
+					AllowDestructiveMethods: func() types.Bool {
+						if v, ok := itemMap["allow_destructive_methods"].(bool); ok {
+							return types.BoolValue(v)
+						}
+						return types.BoolNull()
+					}(),
+					Domain: func() types.String {
+						if v, ok := itemMap["domain"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.Domains = domainsList
+	}
+	if _, ok := apiResource.Spec["every_day"].(map[string]interface{}); ok && isImport && data.EveryDay == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.EveryDay = &APITestingEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["every_month"].(map[string]interface{}); ok && isImport && data.EveryMonth == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.EveryMonth = &APITestingEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["every_week"].(map[string]interface{}); ok && isImport && data.EveryWeek == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.EveryWeek = &APITestingEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["custom_header_value"].(string); ok && v != "" {
+		data.CustomHeaderValue = types.StringValue(v)
+	} else {
+		data.CustomHeaderValue = types.StringNull()
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -755,7 +858,7 @@ func (r *APITestingResource) Update(ctx context.Context, req resource.UpdateRequ
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.APITestingSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -780,6 +883,38 @@ func (r *APITestingResource) Update(ctx context.Context, req resource.UpdateRequ
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if len(data.Domains) > 0 {
+		var domainsList []map[string]interface{}
+		for _, item := range data.Domains {
+			itemMap := make(map[string]interface{})
+			if !item.AllowDestructiveMethods.IsNull() && !item.AllowDestructiveMethods.IsUnknown() {
+				itemMap["allow_destructive_methods"] = item.AllowDestructiveMethods.ValueBool()
+			}
+			if !item.Domain.IsNull() && !item.Domain.IsUnknown() {
+				itemMap["domain"] = item.Domain.ValueString()
+			}
+			domainsList = append(domainsList, itemMap)
+		}
+		apiResource.Spec["domains"] = domainsList
+	}
+	if data.EveryDay != nil {
+		every_dayMap := make(map[string]interface{})
+		apiResource.Spec["every_day"] = every_dayMap
+	}
+	if data.EveryMonth != nil {
+		every_monthMap := make(map[string]interface{})
+		apiResource.Spec["every_month"] = every_monthMap
+	}
+	if data.EveryWeek != nil {
+		every_weekMap := make(map[string]interface{})
+		apiResource.Spec["every_week"] = every_weekMap
+	}
+	if !data.CustomHeaderValue.IsNull() && !data.CustomHeaderValue.IsUnknown() {
+		apiResource.Spec["custom_header_value"] = data.CustomHeaderValue.ValueString()
+	}
+
+
 	updated, err := r.client.UpdateAPITesting(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update APITesting: %s", err))
@@ -788,6 +923,12 @@ func (r *APITestingResource) Update(ctx context.Context, req resource.UpdateRequ
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
+	if v, ok := updated.Spec["custom_header_value"].(string); ok && v != "" {
+		data.CustomHeaderValue = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -800,6 +941,7 @@ func (r *APITestingResource) Update(ctx context.Context, req resource.UpdateRequ
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -826,6 +968,15 @@ func (r *APITestingResource) Delete(ctx context.Context, req resource.DeleteRequ
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "APITesting already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "APITesting delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

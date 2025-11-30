@@ -1951,7 +1951,7 @@ func (r *AWSTGWSiteResource) Create(ctx context.Context, req resource.CreateRequ
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.AWSTGWSiteSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -1976,6 +1976,372 @@ func (r *AWSTGWSiteResource) Create(ctx context.Context, req resource.CreateRequ
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.AWSParameters != nil {
+		aws_parametersMap := make(map[string]interface{})
+		if data.AWSParameters.AdminPassword != nil {
+			admin_passwordNestedMap := make(map[string]interface{})
+			aws_parametersMap["admin_password"] = admin_passwordNestedMap
+		}
+		if data.AWSParameters.AWSCred != nil {
+			aws_credNestedMap := make(map[string]interface{})
+			if !data.AWSParameters.AWSCred.Name.IsNull() && !data.AWSParameters.AWSCred.Name.IsUnknown() {
+				aws_credNestedMap["name"] = data.AWSParameters.AWSCred.Name.ValueString()
+			}
+			if !data.AWSParameters.AWSCred.Namespace.IsNull() && !data.AWSParameters.AWSCred.Namespace.IsUnknown() {
+				aws_credNestedMap["namespace"] = data.AWSParameters.AWSCred.Namespace.ValueString()
+			}
+			if !data.AWSParameters.AWSCred.Tenant.IsNull() && !data.AWSParameters.AWSCred.Tenant.IsUnknown() {
+				aws_credNestedMap["tenant"] = data.AWSParameters.AWSCred.Tenant.ValueString()
+			}
+			aws_parametersMap["aws_cred"] = aws_credNestedMap
+		}
+		if !data.AWSParameters.AWSRegion.IsNull() && !data.AWSParameters.AWSRegion.IsUnknown() {
+			aws_parametersMap["aws_region"] = data.AWSParameters.AWSRegion.ValueString()
+		}
+		if data.AWSParameters.CustomSecurityGroup != nil {
+			custom_security_groupNestedMap := make(map[string]interface{})
+			if !data.AWSParameters.CustomSecurityGroup.InsideSecurityGroupID.IsNull() && !data.AWSParameters.CustomSecurityGroup.InsideSecurityGroupID.IsUnknown() {
+				custom_security_groupNestedMap["inside_security_group_id"] = data.AWSParameters.CustomSecurityGroup.InsideSecurityGroupID.ValueString()
+			}
+			if !data.AWSParameters.CustomSecurityGroup.OutsideSecurityGroupID.IsNull() && !data.AWSParameters.CustomSecurityGroup.OutsideSecurityGroupID.IsUnknown() {
+				custom_security_groupNestedMap["outside_security_group_id"] = data.AWSParameters.CustomSecurityGroup.OutsideSecurityGroupID.ValueString()
+			}
+			aws_parametersMap["custom_security_group"] = custom_security_groupNestedMap
+		}
+		if data.AWSParameters.DisableInternetVip != nil {
+			aws_parametersMap["disable_internet_vip"] = map[string]interface{}{}
+		}
+		if !data.AWSParameters.DiskSize.IsNull() && !data.AWSParameters.DiskSize.IsUnknown() {
+			aws_parametersMap["disk_size"] = data.AWSParameters.DiskSize.ValueInt64()
+		}
+		if data.AWSParameters.EnableInternetVip != nil {
+			aws_parametersMap["enable_internet_vip"] = map[string]interface{}{}
+		}
+		if data.AWSParameters.ExistingTGW != nil {
+			existing_tgwNestedMap := make(map[string]interface{})
+			if !data.AWSParameters.ExistingTGW.TGWAsn.IsNull() && !data.AWSParameters.ExistingTGW.TGWAsn.IsUnknown() {
+				existing_tgwNestedMap["tgw_asn"] = data.AWSParameters.ExistingTGW.TGWAsn.ValueInt64()
+			}
+			if !data.AWSParameters.ExistingTGW.TGWID.IsNull() && !data.AWSParameters.ExistingTGW.TGWID.IsUnknown() {
+				existing_tgwNestedMap["tgw_id"] = data.AWSParameters.ExistingTGW.TGWID.ValueString()
+			}
+			if !data.AWSParameters.ExistingTGW.VolterraSiteAsn.IsNull() && !data.AWSParameters.ExistingTGW.VolterraSiteAsn.IsUnknown() {
+				existing_tgwNestedMap["volterra_site_asn"] = data.AWSParameters.ExistingTGW.VolterraSiteAsn.ValueInt64()
+			}
+			aws_parametersMap["existing_tgw"] = existing_tgwNestedMap
+		}
+		if data.AWSParameters.F5xcSecurityGroup != nil {
+			aws_parametersMap["f5xc_security_group"] = map[string]interface{}{}
+		}
+		if !data.AWSParameters.InstanceType.IsNull() && !data.AWSParameters.InstanceType.IsUnknown() {
+			aws_parametersMap["instance_type"] = data.AWSParameters.InstanceType.ValueString()
+		}
+		if data.AWSParameters.NewTGW != nil {
+			new_tgwNestedMap := make(map[string]interface{})
+			aws_parametersMap["new_tgw"] = new_tgwNestedMap
+		}
+		if data.AWSParameters.NewVPC != nil {
+			new_vpcNestedMap := make(map[string]interface{})
+			if !data.AWSParameters.NewVPC.NameTag.IsNull() && !data.AWSParameters.NewVPC.NameTag.IsUnknown() {
+				new_vpcNestedMap["name_tag"] = data.AWSParameters.NewVPC.NameTag.ValueString()
+			}
+			if !data.AWSParameters.NewVPC.PrimaryIPV4.IsNull() && !data.AWSParameters.NewVPC.PrimaryIPV4.IsUnknown() {
+				new_vpcNestedMap["primary_ipv4"] = data.AWSParameters.NewVPC.PrimaryIPV4.ValueString()
+			}
+			aws_parametersMap["new_vpc"] = new_vpcNestedMap
+		}
+		if data.AWSParameters.NoWorkerNodes != nil {
+			aws_parametersMap["no_worker_nodes"] = map[string]interface{}{}
+		}
+		if !data.AWSParameters.NodesPerAz.IsNull() && !data.AWSParameters.NodesPerAz.IsUnknown() {
+			aws_parametersMap["nodes_per_az"] = data.AWSParameters.NodesPerAz.ValueInt64()
+		}
+		if data.AWSParameters.ReservedTGWCidr != nil {
+			aws_parametersMap["reserved_tgw_cidr"] = map[string]interface{}{}
+		}
+		if !data.AWSParameters.SSHKey.IsNull() && !data.AWSParameters.SSHKey.IsUnknown() {
+			aws_parametersMap["ssh_key"] = data.AWSParameters.SSHKey.ValueString()
+		}
+		if data.AWSParameters.TGWCidr != nil {
+			tgw_cidrNestedMap := make(map[string]interface{})
+			if !data.AWSParameters.TGWCidr.IPV4.IsNull() && !data.AWSParameters.TGWCidr.IPV4.IsUnknown() {
+				tgw_cidrNestedMap["ipv4"] = data.AWSParameters.TGWCidr.IPV4.ValueString()
+			}
+			aws_parametersMap["tgw_cidr"] = tgw_cidrNestedMap
+		}
+		if !data.AWSParameters.TotalNodes.IsNull() && !data.AWSParameters.TotalNodes.IsUnknown() {
+			aws_parametersMap["total_nodes"] = data.AWSParameters.TotalNodes.ValueInt64()
+		}
+		if !data.AWSParameters.VPCID.IsNull() && !data.AWSParameters.VPCID.IsUnknown() {
+			aws_parametersMap["vpc_id"] = data.AWSParameters.VPCID.ValueString()
+		}
+		apiResource.Spec["aws_parameters"] = aws_parametersMap
+	}
+	if data.BlockAllServices != nil {
+		block_all_servicesMap := make(map[string]interface{})
+		apiResource.Spec["block_all_services"] = block_all_servicesMap
+	}
+	if data.BlockedServices != nil {
+		blocked_servicesMap := make(map[string]interface{})
+		apiResource.Spec["blocked_services"] = blocked_servicesMap
+	}
+	if data.Coordinates != nil {
+		coordinatesMap := make(map[string]interface{})
+		if !data.Coordinates.Latitude.IsNull() && !data.Coordinates.Latitude.IsUnknown() {
+			coordinatesMap["latitude"] = data.Coordinates.Latitude.ValueInt64()
+		}
+		if !data.Coordinates.Longitude.IsNull() && !data.Coordinates.Longitude.IsUnknown() {
+			coordinatesMap["longitude"] = data.Coordinates.Longitude.ValueInt64()
+		}
+		apiResource.Spec["coordinates"] = coordinatesMap
+	}
+	if data.CustomDNS != nil {
+		custom_dnsMap := make(map[string]interface{})
+		if !data.CustomDNS.InsideNameserver.IsNull() && !data.CustomDNS.InsideNameserver.IsUnknown() {
+			custom_dnsMap["inside_nameserver"] = data.CustomDNS.InsideNameserver.ValueString()
+		}
+		if !data.CustomDNS.OutsideNameserver.IsNull() && !data.CustomDNS.OutsideNameserver.IsUnknown() {
+			custom_dnsMap["outside_nameserver"] = data.CustomDNS.OutsideNameserver.ValueString()
+		}
+		apiResource.Spec["custom_dns"] = custom_dnsMap
+	}
+	if data.DefaultBlockedServices != nil {
+		default_blocked_servicesMap := make(map[string]interface{})
+		apiResource.Spec["default_blocked_services"] = default_blocked_servicesMap
+	}
+	if data.DirectConnectDisabled != nil {
+		direct_connect_disabledMap := make(map[string]interface{})
+		apiResource.Spec["direct_connect_disabled"] = direct_connect_disabledMap
+	}
+	if data.DirectConnectEnabled != nil {
+		direct_connect_enabledMap := make(map[string]interface{})
+		if data.DirectConnectEnabled.AutoAsn != nil {
+			direct_connect_enabledMap["auto_asn"] = map[string]interface{}{}
+		}
+		if !data.DirectConnectEnabled.CustomAsn.IsNull() && !data.DirectConnectEnabled.CustomAsn.IsUnknown() {
+			direct_connect_enabledMap["custom_asn"] = data.DirectConnectEnabled.CustomAsn.ValueInt64()
+		}
+		if data.DirectConnectEnabled.HostedVifs != nil {
+			hosted_vifsNestedMap := make(map[string]interface{})
+			direct_connect_enabledMap["hosted_vifs"] = hosted_vifsNestedMap
+		}
+		if data.DirectConnectEnabled.StandardVifs != nil {
+			direct_connect_enabledMap["standard_vifs"] = map[string]interface{}{}
+		}
+		apiResource.Spec["direct_connect_enabled"] = direct_connect_enabledMap
+	}
+	if data.KubernetesUpgradeDrain != nil {
+		kubernetes_upgrade_drainMap := make(map[string]interface{})
+		if data.KubernetesUpgradeDrain.DisableUpgradeDrain != nil {
+			kubernetes_upgrade_drainMap["disable_upgrade_drain"] = map[string]interface{}{}
+		}
+		if data.KubernetesUpgradeDrain.EnableUpgradeDrain != nil {
+			enable_upgrade_drainNestedMap := make(map[string]interface{})
+			if !data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainMaxUnavailableNodeCount.IsNull() && !data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainMaxUnavailableNodeCount.IsUnknown() {
+				enable_upgrade_drainNestedMap["drain_max_unavailable_node_count"] = data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainMaxUnavailableNodeCount.ValueInt64()
+			}
+			if !data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainNodeTimeout.IsNull() && !data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainNodeTimeout.IsUnknown() {
+				enable_upgrade_drainNestedMap["drain_node_timeout"] = data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainNodeTimeout.ValueInt64()
+			}
+			kubernetes_upgrade_drainMap["enable_upgrade_drain"] = enable_upgrade_drainNestedMap
+		}
+		apiResource.Spec["kubernetes_upgrade_drain"] = kubernetes_upgrade_drainMap
+	}
+	if data.LogReceiver != nil {
+		log_receiverMap := make(map[string]interface{})
+		if !data.LogReceiver.Name.IsNull() && !data.LogReceiver.Name.IsUnknown() {
+			log_receiverMap["name"] = data.LogReceiver.Name.ValueString()
+		}
+		if !data.LogReceiver.Namespace.IsNull() && !data.LogReceiver.Namespace.IsUnknown() {
+			log_receiverMap["namespace"] = data.LogReceiver.Namespace.ValueString()
+		}
+		if !data.LogReceiver.Tenant.IsNull() && !data.LogReceiver.Tenant.IsUnknown() {
+			log_receiverMap["tenant"] = data.LogReceiver.Tenant.ValueString()
+		}
+		apiResource.Spec["log_receiver"] = log_receiverMap
+	}
+	if data.LogsStreamingDisabled != nil {
+		logs_streaming_disabledMap := make(map[string]interface{})
+		apiResource.Spec["logs_streaming_disabled"] = logs_streaming_disabledMap
+	}
+	if data.OfflineSurvivabilityMode != nil {
+		offline_survivability_modeMap := make(map[string]interface{})
+		if data.OfflineSurvivabilityMode.EnableOfflineSurvivabilityMode != nil {
+			offline_survivability_modeMap["enable_offline_survivability_mode"] = map[string]interface{}{}
+		}
+		if data.OfflineSurvivabilityMode.NoOfflineSurvivabilityMode != nil {
+			offline_survivability_modeMap["no_offline_survivability_mode"] = map[string]interface{}{}
+		}
+		apiResource.Spec["offline_survivability_mode"] = offline_survivability_modeMap
+	}
+	if data.Os != nil {
+		osMap := make(map[string]interface{})
+		if data.Os.DefaultOsVersion != nil {
+			osMap["default_os_version"] = map[string]interface{}{}
+		}
+		if !data.Os.OperatingSystemVersion.IsNull() && !data.Os.OperatingSystemVersion.IsUnknown() {
+			osMap["operating_system_version"] = data.Os.OperatingSystemVersion.ValueString()
+		}
+		apiResource.Spec["os"] = osMap
+	}
+	if data.PerformanceEnhancementMode != nil {
+		performance_enhancement_modeMap := make(map[string]interface{})
+		if data.PerformanceEnhancementMode.PerfModeL3Enhanced != nil {
+			perf_mode_l3_enhancedNestedMap := make(map[string]interface{})
+			performance_enhancement_modeMap["perf_mode_l3_enhanced"] = perf_mode_l3_enhancedNestedMap
+		}
+		if data.PerformanceEnhancementMode.PerfModeL7Enhanced != nil {
+			performance_enhancement_modeMap["perf_mode_l7_enhanced"] = map[string]interface{}{}
+		}
+		apiResource.Spec["performance_enhancement_mode"] = performance_enhancement_modeMap
+	}
+	if data.PrivateConnectivity != nil {
+		private_connectivityMap := make(map[string]interface{})
+		if data.PrivateConnectivity.CloudLink != nil {
+			cloud_linkNestedMap := make(map[string]interface{})
+			if !data.PrivateConnectivity.CloudLink.Name.IsNull() && !data.PrivateConnectivity.CloudLink.Name.IsUnknown() {
+				cloud_linkNestedMap["name"] = data.PrivateConnectivity.CloudLink.Name.ValueString()
+			}
+			if !data.PrivateConnectivity.CloudLink.Namespace.IsNull() && !data.PrivateConnectivity.CloudLink.Namespace.IsUnknown() {
+				cloud_linkNestedMap["namespace"] = data.PrivateConnectivity.CloudLink.Namespace.ValueString()
+			}
+			if !data.PrivateConnectivity.CloudLink.Tenant.IsNull() && !data.PrivateConnectivity.CloudLink.Tenant.IsUnknown() {
+				cloud_linkNestedMap["tenant"] = data.PrivateConnectivity.CloudLink.Tenant.ValueString()
+			}
+			private_connectivityMap["cloud_link"] = cloud_linkNestedMap
+		}
+		if data.PrivateConnectivity.Inside != nil {
+			private_connectivityMap["inside"] = map[string]interface{}{}
+		}
+		if data.PrivateConnectivity.Outside != nil {
+			private_connectivityMap["outside"] = map[string]interface{}{}
+		}
+		apiResource.Spec["private_connectivity"] = private_connectivityMap
+	}
+	if data.Sw != nil {
+		swMap := make(map[string]interface{})
+		if data.Sw.DefaultSwVersion != nil {
+			swMap["default_sw_version"] = map[string]interface{}{}
+		}
+		if !data.Sw.VolterraSoftwareVersion.IsNull() && !data.Sw.VolterraSoftwareVersion.IsUnknown() {
+			swMap["volterra_software_version"] = data.Sw.VolterraSoftwareVersion.ValueString()
+		}
+		apiResource.Spec["sw"] = swMap
+	}
+	if data.Tags != nil {
+		tagsMap := make(map[string]interface{})
+		apiResource.Spec["tags"] = tagsMap
+	}
+	if data.TGWSecurity != nil {
+		tgw_securityMap := make(map[string]interface{})
+		if data.TGWSecurity.ActiveEastWestServicePolicies != nil {
+			active_east_west_service_policiesNestedMap := make(map[string]interface{})
+			tgw_securityMap["active_east_west_service_policies"] = active_east_west_service_policiesNestedMap
+		}
+		if data.TGWSecurity.ActiveEnhancedFirewallPolicies != nil {
+			active_enhanced_firewall_policiesNestedMap := make(map[string]interface{})
+			tgw_securityMap["active_enhanced_firewall_policies"] = active_enhanced_firewall_policiesNestedMap
+		}
+		if data.TGWSecurity.ActiveForwardProxyPolicies != nil {
+			active_forward_proxy_policiesNestedMap := make(map[string]interface{})
+			tgw_securityMap["active_forward_proxy_policies"] = active_forward_proxy_policiesNestedMap
+		}
+		if data.TGWSecurity.ActiveNetworkPolicies != nil {
+			active_network_policiesNestedMap := make(map[string]interface{})
+			tgw_securityMap["active_network_policies"] = active_network_policiesNestedMap
+		}
+		if data.TGWSecurity.EastWestServicePolicyAllowAll != nil {
+			tgw_securityMap["east_west_service_policy_allow_all"] = map[string]interface{}{}
+		}
+		if data.TGWSecurity.ForwardProxyAllowAll != nil {
+			tgw_securityMap["forward_proxy_allow_all"] = map[string]interface{}{}
+		}
+		if data.TGWSecurity.NoEastWestPolicy != nil {
+			tgw_securityMap["no_east_west_policy"] = map[string]interface{}{}
+		}
+		if data.TGWSecurity.NoForwardProxy != nil {
+			tgw_securityMap["no_forward_proxy"] = map[string]interface{}{}
+		}
+		if data.TGWSecurity.NoNetworkPolicy != nil {
+			tgw_securityMap["no_network_policy"] = map[string]interface{}{}
+		}
+		apiResource.Spec["tgw_security"] = tgw_securityMap
+	}
+	if data.VnConfig != nil {
+		vn_configMap := make(map[string]interface{})
+		if data.VnConfig.AllowedVipPort != nil {
+			allowed_vip_portNestedMap := make(map[string]interface{})
+			vn_configMap["allowed_vip_port"] = allowed_vip_portNestedMap
+		}
+		if data.VnConfig.AllowedVipPortSLI != nil {
+			allowed_vip_port_sliNestedMap := make(map[string]interface{})
+			vn_configMap["allowed_vip_port_sli"] = allowed_vip_port_sliNestedMap
+		}
+		if data.VnConfig.DcClusterGroupInsideVn != nil {
+			dc_cluster_group_inside_vnNestedMap := make(map[string]interface{})
+			if !data.VnConfig.DcClusterGroupInsideVn.Name.IsNull() && !data.VnConfig.DcClusterGroupInsideVn.Name.IsUnknown() {
+				dc_cluster_group_inside_vnNestedMap["name"] = data.VnConfig.DcClusterGroupInsideVn.Name.ValueString()
+			}
+			if !data.VnConfig.DcClusterGroupInsideVn.Namespace.IsNull() && !data.VnConfig.DcClusterGroupInsideVn.Namespace.IsUnknown() {
+				dc_cluster_group_inside_vnNestedMap["namespace"] = data.VnConfig.DcClusterGroupInsideVn.Namespace.ValueString()
+			}
+			if !data.VnConfig.DcClusterGroupInsideVn.Tenant.IsNull() && !data.VnConfig.DcClusterGroupInsideVn.Tenant.IsUnknown() {
+				dc_cluster_group_inside_vnNestedMap["tenant"] = data.VnConfig.DcClusterGroupInsideVn.Tenant.ValueString()
+			}
+			vn_configMap["dc_cluster_group_inside_vn"] = dc_cluster_group_inside_vnNestedMap
+		}
+		if data.VnConfig.DcClusterGroupOutsideVn != nil {
+			dc_cluster_group_outside_vnNestedMap := make(map[string]interface{})
+			if !data.VnConfig.DcClusterGroupOutsideVn.Name.IsNull() && !data.VnConfig.DcClusterGroupOutsideVn.Name.IsUnknown() {
+				dc_cluster_group_outside_vnNestedMap["name"] = data.VnConfig.DcClusterGroupOutsideVn.Name.ValueString()
+			}
+			if !data.VnConfig.DcClusterGroupOutsideVn.Namespace.IsNull() && !data.VnConfig.DcClusterGroupOutsideVn.Namespace.IsUnknown() {
+				dc_cluster_group_outside_vnNestedMap["namespace"] = data.VnConfig.DcClusterGroupOutsideVn.Namespace.ValueString()
+			}
+			if !data.VnConfig.DcClusterGroupOutsideVn.Tenant.IsNull() && !data.VnConfig.DcClusterGroupOutsideVn.Tenant.IsUnknown() {
+				dc_cluster_group_outside_vnNestedMap["tenant"] = data.VnConfig.DcClusterGroupOutsideVn.Tenant.ValueString()
+			}
+			vn_configMap["dc_cluster_group_outside_vn"] = dc_cluster_group_outside_vnNestedMap
+		}
+		if data.VnConfig.GlobalNetworkList != nil {
+			global_network_listNestedMap := make(map[string]interface{})
+			vn_configMap["global_network_list"] = global_network_listNestedMap
+		}
+		if data.VnConfig.InsideStaticRoutes != nil {
+			inside_static_routesNestedMap := make(map[string]interface{})
+			vn_configMap["inside_static_routes"] = inside_static_routesNestedMap
+		}
+		if data.VnConfig.NoDcClusterGroup != nil {
+			vn_configMap["no_dc_cluster_group"] = map[string]interface{}{}
+		}
+		if data.VnConfig.NoGlobalNetwork != nil {
+			vn_configMap["no_global_network"] = map[string]interface{}{}
+		}
+		if data.VnConfig.NoInsideStaticRoutes != nil {
+			vn_configMap["no_inside_static_routes"] = map[string]interface{}{}
+		}
+		if data.VnConfig.NoOutsideStaticRoutes != nil {
+			vn_configMap["no_outside_static_routes"] = map[string]interface{}{}
+		}
+		if data.VnConfig.OutsideStaticRoutes != nil {
+			outside_static_routesNestedMap := make(map[string]interface{})
+			vn_configMap["outside_static_routes"] = outside_static_routesNestedMap
+		}
+		if data.VnConfig.SmConnectionPublicIP != nil {
+			vn_configMap["sm_connection_public_ip"] = map[string]interface{}{}
+		}
+		if data.VnConfig.SmConnectionPvtIP != nil {
+			vn_configMap["sm_connection_pvt_ip"] = map[string]interface{}{}
+		}
+		apiResource.Spec["vn_config"] = vn_configMap
+	}
+	if data.VPCAttachments != nil {
+		vpc_attachmentsMap := make(map[string]interface{})
+		apiResource.Spec["vpc_attachments"] = vpc_attachmentsMap
+	}
+
+
 	created, err := r.client.CreateAWSTGWSite(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create AWSTGWSite: %s", err))
@@ -1984,8 +2350,13 @@ func (r *AWSTGWSiteResource) Create(ctx context.Context, req resource.CreateRequ
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created AWSTGWSite resource")
@@ -2064,9 +2435,220 @@ func (r *AWSTGWSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if blockData, ok := apiResource.Spec["aws_parameters"].(map[string]interface{}); ok && (isImport || data.AWSParameters != nil) {
+		data.AWSParameters = &AWSTGWSiteAWSParametersModel{
+			AWSRegion: func() types.String {
+				if v, ok := blockData["aws_region"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			DiskSize: func() types.Int64 {
+				if v, ok := blockData["disk_size"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			InstanceType: func() types.String {
+				if v, ok := blockData["instance_type"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			NodesPerAz: func() types.Int64 {
+				if v, ok := blockData["nodes_per_az"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			SSHKey: func() types.String {
+				if v, ok := blockData["ssh_key"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			TotalNodes: func() types.Int64 {
+				if v, ok := blockData["total_nodes"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			VPCID: func() types.String {
+				if v, ok := blockData["vpc_id"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["block_all_services"].(map[string]interface{}); ok && isImport && data.BlockAllServices == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.BlockAllServices = &AWSTGWSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["blocked_services"].(map[string]interface{}); ok && isImport && data.BlockedServices == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.BlockedServices = &AWSTGWSiteBlockedServicesModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["coordinates"].(map[string]interface{}); ok && (isImport || data.Coordinates != nil) {
+		data.Coordinates = &AWSTGWSiteCoordinatesModel{
+			Latitude: func() types.Int64 {
+				if v, ok := blockData["latitude"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			Longitude: func() types.Int64 {
+				if v, ok := blockData["longitude"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["custom_dns"].(map[string]interface{}); ok && (isImport || data.CustomDNS != nil) {
+		data.CustomDNS = &AWSTGWSiteCustomDNSModel{
+			InsideNameserver: func() types.String {
+				if v, ok := blockData["inside_nameserver"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			OutsideNameserver: func() types.String {
+				if v, ok := blockData["outside_nameserver"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["default_blocked_services"].(map[string]interface{}); ok && isImport && data.DefaultBlockedServices == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DefaultBlockedServices = &AWSTGWSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["direct_connect_disabled"].(map[string]interface{}); ok && isImport && data.DirectConnectDisabled == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DirectConnectDisabled = &AWSTGWSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["direct_connect_enabled"].(map[string]interface{}); ok && (isImport || data.DirectConnectEnabled != nil) {
+		data.DirectConnectEnabled = &AWSTGWSiteDirectConnectEnabledModel{
+			CustomAsn: func() types.Int64 {
+				if v, ok := blockData["custom_asn"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["kubernetes_upgrade_drain"].(map[string]interface{}); ok && isImport && data.KubernetesUpgradeDrain == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.KubernetesUpgradeDrain = &AWSTGWSiteKubernetesUpgradeDrainModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["log_receiver"].(map[string]interface{}); ok && (isImport || data.LogReceiver != nil) {
+		data.LogReceiver = &AWSTGWSiteLogReceiverModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["logs_streaming_disabled"].(map[string]interface{}); ok && isImport && data.LogsStreamingDisabled == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.LogsStreamingDisabled = &AWSTGWSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["offline_survivability_mode"].(map[string]interface{}); ok && isImport && data.OfflineSurvivabilityMode == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.OfflineSurvivabilityMode = &AWSTGWSiteOfflineSurvivabilityModeModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["os"].(map[string]interface{}); ok && (isImport || data.Os != nil) {
+		data.Os = &AWSTGWSiteOsModel{
+			OperatingSystemVersion: func() types.String {
+				if v, ok := blockData["operating_system_version"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["performance_enhancement_mode"].(map[string]interface{}); ok && isImport && data.PerformanceEnhancementMode == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.PerformanceEnhancementMode = &AWSTGWSitePerformanceEnhancementModeModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["private_connectivity"].(map[string]interface{}); ok && isImport && data.PrivateConnectivity == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.PrivateConnectivity = &AWSTGWSitePrivateConnectivityModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["sw"].(map[string]interface{}); ok && (isImport || data.Sw != nil) {
+		data.Sw = &AWSTGWSiteSwModel{
+			VolterraSoftwareVersion: func() types.String {
+				if v, ok := blockData["volterra_software_version"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["tags"].(map[string]interface{}); ok && isImport && data.Tags == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Tags = &AWSTGWSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["tgw_security"].(map[string]interface{}); ok && isImport && data.TGWSecurity == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.TGWSecurity = &AWSTGWSiteTGWSecurityModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["vn_config"].(map[string]interface{}); ok && isImport && data.VnConfig == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.VnConfig = &AWSTGWSiteVnConfigModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["vpc_attachments"].(map[string]interface{}); ok && isImport && data.VPCAttachments == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.VPCAttachments = &AWSTGWSiteVPCAttachmentsModel{}
+	}
+	// Normal Read: preserve existing state value
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -2092,7 +2674,7 @@ func (r *AWSTGWSiteResource) Update(ctx context.Context, req resource.UpdateRequ
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.AWSTGWSiteSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -2117,6 +2699,372 @@ func (r *AWSTGWSiteResource) Update(ctx context.Context, req resource.UpdateRequ
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.AWSParameters != nil {
+		aws_parametersMap := make(map[string]interface{})
+		if data.AWSParameters.AdminPassword != nil {
+			admin_passwordNestedMap := make(map[string]interface{})
+			aws_parametersMap["admin_password"] = admin_passwordNestedMap
+		}
+		if data.AWSParameters.AWSCred != nil {
+			aws_credNestedMap := make(map[string]interface{})
+			if !data.AWSParameters.AWSCred.Name.IsNull() && !data.AWSParameters.AWSCred.Name.IsUnknown() {
+				aws_credNestedMap["name"] = data.AWSParameters.AWSCred.Name.ValueString()
+			}
+			if !data.AWSParameters.AWSCred.Namespace.IsNull() && !data.AWSParameters.AWSCred.Namespace.IsUnknown() {
+				aws_credNestedMap["namespace"] = data.AWSParameters.AWSCred.Namespace.ValueString()
+			}
+			if !data.AWSParameters.AWSCred.Tenant.IsNull() && !data.AWSParameters.AWSCred.Tenant.IsUnknown() {
+				aws_credNestedMap["tenant"] = data.AWSParameters.AWSCred.Tenant.ValueString()
+			}
+			aws_parametersMap["aws_cred"] = aws_credNestedMap
+		}
+		if !data.AWSParameters.AWSRegion.IsNull() && !data.AWSParameters.AWSRegion.IsUnknown() {
+			aws_parametersMap["aws_region"] = data.AWSParameters.AWSRegion.ValueString()
+		}
+		if data.AWSParameters.CustomSecurityGroup != nil {
+			custom_security_groupNestedMap := make(map[string]interface{})
+			if !data.AWSParameters.CustomSecurityGroup.InsideSecurityGroupID.IsNull() && !data.AWSParameters.CustomSecurityGroup.InsideSecurityGroupID.IsUnknown() {
+				custom_security_groupNestedMap["inside_security_group_id"] = data.AWSParameters.CustomSecurityGroup.InsideSecurityGroupID.ValueString()
+			}
+			if !data.AWSParameters.CustomSecurityGroup.OutsideSecurityGroupID.IsNull() && !data.AWSParameters.CustomSecurityGroup.OutsideSecurityGroupID.IsUnknown() {
+				custom_security_groupNestedMap["outside_security_group_id"] = data.AWSParameters.CustomSecurityGroup.OutsideSecurityGroupID.ValueString()
+			}
+			aws_parametersMap["custom_security_group"] = custom_security_groupNestedMap
+		}
+		if data.AWSParameters.DisableInternetVip != nil {
+			aws_parametersMap["disable_internet_vip"] = map[string]interface{}{}
+		}
+		if !data.AWSParameters.DiskSize.IsNull() && !data.AWSParameters.DiskSize.IsUnknown() {
+			aws_parametersMap["disk_size"] = data.AWSParameters.DiskSize.ValueInt64()
+		}
+		if data.AWSParameters.EnableInternetVip != nil {
+			aws_parametersMap["enable_internet_vip"] = map[string]interface{}{}
+		}
+		if data.AWSParameters.ExistingTGW != nil {
+			existing_tgwNestedMap := make(map[string]interface{})
+			if !data.AWSParameters.ExistingTGW.TGWAsn.IsNull() && !data.AWSParameters.ExistingTGW.TGWAsn.IsUnknown() {
+				existing_tgwNestedMap["tgw_asn"] = data.AWSParameters.ExistingTGW.TGWAsn.ValueInt64()
+			}
+			if !data.AWSParameters.ExistingTGW.TGWID.IsNull() && !data.AWSParameters.ExistingTGW.TGWID.IsUnknown() {
+				existing_tgwNestedMap["tgw_id"] = data.AWSParameters.ExistingTGW.TGWID.ValueString()
+			}
+			if !data.AWSParameters.ExistingTGW.VolterraSiteAsn.IsNull() && !data.AWSParameters.ExistingTGW.VolterraSiteAsn.IsUnknown() {
+				existing_tgwNestedMap["volterra_site_asn"] = data.AWSParameters.ExistingTGW.VolterraSiteAsn.ValueInt64()
+			}
+			aws_parametersMap["existing_tgw"] = existing_tgwNestedMap
+		}
+		if data.AWSParameters.F5xcSecurityGroup != nil {
+			aws_parametersMap["f5xc_security_group"] = map[string]interface{}{}
+		}
+		if !data.AWSParameters.InstanceType.IsNull() && !data.AWSParameters.InstanceType.IsUnknown() {
+			aws_parametersMap["instance_type"] = data.AWSParameters.InstanceType.ValueString()
+		}
+		if data.AWSParameters.NewTGW != nil {
+			new_tgwNestedMap := make(map[string]interface{})
+			aws_parametersMap["new_tgw"] = new_tgwNestedMap
+		}
+		if data.AWSParameters.NewVPC != nil {
+			new_vpcNestedMap := make(map[string]interface{})
+			if !data.AWSParameters.NewVPC.NameTag.IsNull() && !data.AWSParameters.NewVPC.NameTag.IsUnknown() {
+				new_vpcNestedMap["name_tag"] = data.AWSParameters.NewVPC.NameTag.ValueString()
+			}
+			if !data.AWSParameters.NewVPC.PrimaryIPV4.IsNull() && !data.AWSParameters.NewVPC.PrimaryIPV4.IsUnknown() {
+				new_vpcNestedMap["primary_ipv4"] = data.AWSParameters.NewVPC.PrimaryIPV4.ValueString()
+			}
+			aws_parametersMap["new_vpc"] = new_vpcNestedMap
+		}
+		if data.AWSParameters.NoWorkerNodes != nil {
+			aws_parametersMap["no_worker_nodes"] = map[string]interface{}{}
+		}
+		if !data.AWSParameters.NodesPerAz.IsNull() && !data.AWSParameters.NodesPerAz.IsUnknown() {
+			aws_parametersMap["nodes_per_az"] = data.AWSParameters.NodesPerAz.ValueInt64()
+		}
+		if data.AWSParameters.ReservedTGWCidr != nil {
+			aws_parametersMap["reserved_tgw_cidr"] = map[string]interface{}{}
+		}
+		if !data.AWSParameters.SSHKey.IsNull() && !data.AWSParameters.SSHKey.IsUnknown() {
+			aws_parametersMap["ssh_key"] = data.AWSParameters.SSHKey.ValueString()
+		}
+		if data.AWSParameters.TGWCidr != nil {
+			tgw_cidrNestedMap := make(map[string]interface{})
+			if !data.AWSParameters.TGWCidr.IPV4.IsNull() && !data.AWSParameters.TGWCidr.IPV4.IsUnknown() {
+				tgw_cidrNestedMap["ipv4"] = data.AWSParameters.TGWCidr.IPV4.ValueString()
+			}
+			aws_parametersMap["tgw_cidr"] = tgw_cidrNestedMap
+		}
+		if !data.AWSParameters.TotalNodes.IsNull() && !data.AWSParameters.TotalNodes.IsUnknown() {
+			aws_parametersMap["total_nodes"] = data.AWSParameters.TotalNodes.ValueInt64()
+		}
+		if !data.AWSParameters.VPCID.IsNull() && !data.AWSParameters.VPCID.IsUnknown() {
+			aws_parametersMap["vpc_id"] = data.AWSParameters.VPCID.ValueString()
+		}
+		apiResource.Spec["aws_parameters"] = aws_parametersMap
+	}
+	if data.BlockAllServices != nil {
+		block_all_servicesMap := make(map[string]interface{})
+		apiResource.Spec["block_all_services"] = block_all_servicesMap
+	}
+	if data.BlockedServices != nil {
+		blocked_servicesMap := make(map[string]interface{})
+		apiResource.Spec["blocked_services"] = blocked_servicesMap
+	}
+	if data.Coordinates != nil {
+		coordinatesMap := make(map[string]interface{})
+		if !data.Coordinates.Latitude.IsNull() && !data.Coordinates.Latitude.IsUnknown() {
+			coordinatesMap["latitude"] = data.Coordinates.Latitude.ValueInt64()
+		}
+		if !data.Coordinates.Longitude.IsNull() && !data.Coordinates.Longitude.IsUnknown() {
+			coordinatesMap["longitude"] = data.Coordinates.Longitude.ValueInt64()
+		}
+		apiResource.Spec["coordinates"] = coordinatesMap
+	}
+	if data.CustomDNS != nil {
+		custom_dnsMap := make(map[string]interface{})
+		if !data.CustomDNS.InsideNameserver.IsNull() && !data.CustomDNS.InsideNameserver.IsUnknown() {
+			custom_dnsMap["inside_nameserver"] = data.CustomDNS.InsideNameserver.ValueString()
+		}
+		if !data.CustomDNS.OutsideNameserver.IsNull() && !data.CustomDNS.OutsideNameserver.IsUnknown() {
+			custom_dnsMap["outside_nameserver"] = data.CustomDNS.OutsideNameserver.ValueString()
+		}
+		apiResource.Spec["custom_dns"] = custom_dnsMap
+	}
+	if data.DefaultBlockedServices != nil {
+		default_blocked_servicesMap := make(map[string]interface{})
+		apiResource.Spec["default_blocked_services"] = default_blocked_servicesMap
+	}
+	if data.DirectConnectDisabled != nil {
+		direct_connect_disabledMap := make(map[string]interface{})
+		apiResource.Spec["direct_connect_disabled"] = direct_connect_disabledMap
+	}
+	if data.DirectConnectEnabled != nil {
+		direct_connect_enabledMap := make(map[string]interface{})
+		if data.DirectConnectEnabled.AutoAsn != nil {
+			direct_connect_enabledMap["auto_asn"] = map[string]interface{}{}
+		}
+		if !data.DirectConnectEnabled.CustomAsn.IsNull() && !data.DirectConnectEnabled.CustomAsn.IsUnknown() {
+			direct_connect_enabledMap["custom_asn"] = data.DirectConnectEnabled.CustomAsn.ValueInt64()
+		}
+		if data.DirectConnectEnabled.HostedVifs != nil {
+			hosted_vifsNestedMap := make(map[string]interface{})
+			direct_connect_enabledMap["hosted_vifs"] = hosted_vifsNestedMap
+		}
+		if data.DirectConnectEnabled.StandardVifs != nil {
+			direct_connect_enabledMap["standard_vifs"] = map[string]interface{}{}
+		}
+		apiResource.Spec["direct_connect_enabled"] = direct_connect_enabledMap
+	}
+	if data.KubernetesUpgradeDrain != nil {
+		kubernetes_upgrade_drainMap := make(map[string]interface{})
+		if data.KubernetesUpgradeDrain.DisableUpgradeDrain != nil {
+			kubernetes_upgrade_drainMap["disable_upgrade_drain"] = map[string]interface{}{}
+		}
+		if data.KubernetesUpgradeDrain.EnableUpgradeDrain != nil {
+			enable_upgrade_drainNestedMap := make(map[string]interface{})
+			if !data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainMaxUnavailableNodeCount.IsNull() && !data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainMaxUnavailableNodeCount.IsUnknown() {
+				enable_upgrade_drainNestedMap["drain_max_unavailable_node_count"] = data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainMaxUnavailableNodeCount.ValueInt64()
+			}
+			if !data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainNodeTimeout.IsNull() && !data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainNodeTimeout.IsUnknown() {
+				enable_upgrade_drainNestedMap["drain_node_timeout"] = data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainNodeTimeout.ValueInt64()
+			}
+			kubernetes_upgrade_drainMap["enable_upgrade_drain"] = enable_upgrade_drainNestedMap
+		}
+		apiResource.Spec["kubernetes_upgrade_drain"] = kubernetes_upgrade_drainMap
+	}
+	if data.LogReceiver != nil {
+		log_receiverMap := make(map[string]interface{})
+		if !data.LogReceiver.Name.IsNull() && !data.LogReceiver.Name.IsUnknown() {
+			log_receiverMap["name"] = data.LogReceiver.Name.ValueString()
+		}
+		if !data.LogReceiver.Namespace.IsNull() && !data.LogReceiver.Namespace.IsUnknown() {
+			log_receiverMap["namespace"] = data.LogReceiver.Namespace.ValueString()
+		}
+		if !data.LogReceiver.Tenant.IsNull() && !data.LogReceiver.Tenant.IsUnknown() {
+			log_receiverMap["tenant"] = data.LogReceiver.Tenant.ValueString()
+		}
+		apiResource.Spec["log_receiver"] = log_receiverMap
+	}
+	if data.LogsStreamingDisabled != nil {
+		logs_streaming_disabledMap := make(map[string]interface{})
+		apiResource.Spec["logs_streaming_disabled"] = logs_streaming_disabledMap
+	}
+	if data.OfflineSurvivabilityMode != nil {
+		offline_survivability_modeMap := make(map[string]interface{})
+		if data.OfflineSurvivabilityMode.EnableOfflineSurvivabilityMode != nil {
+			offline_survivability_modeMap["enable_offline_survivability_mode"] = map[string]interface{}{}
+		}
+		if data.OfflineSurvivabilityMode.NoOfflineSurvivabilityMode != nil {
+			offline_survivability_modeMap["no_offline_survivability_mode"] = map[string]interface{}{}
+		}
+		apiResource.Spec["offline_survivability_mode"] = offline_survivability_modeMap
+	}
+	if data.Os != nil {
+		osMap := make(map[string]interface{})
+		if data.Os.DefaultOsVersion != nil {
+			osMap["default_os_version"] = map[string]interface{}{}
+		}
+		if !data.Os.OperatingSystemVersion.IsNull() && !data.Os.OperatingSystemVersion.IsUnknown() {
+			osMap["operating_system_version"] = data.Os.OperatingSystemVersion.ValueString()
+		}
+		apiResource.Spec["os"] = osMap
+	}
+	if data.PerformanceEnhancementMode != nil {
+		performance_enhancement_modeMap := make(map[string]interface{})
+		if data.PerformanceEnhancementMode.PerfModeL3Enhanced != nil {
+			perf_mode_l3_enhancedNestedMap := make(map[string]interface{})
+			performance_enhancement_modeMap["perf_mode_l3_enhanced"] = perf_mode_l3_enhancedNestedMap
+		}
+		if data.PerformanceEnhancementMode.PerfModeL7Enhanced != nil {
+			performance_enhancement_modeMap["perf_mode_l7_enhanced"] = map[string]interface{}{}
+		}
+		apiResource.Spec["performance_enhancement_mode"] = performance_enhancement_modeMap
+	}
+	if data.PrivateConnectivity != nil {
+		private_connectivityMap := make(map[string]interface{})
+		if data.PrivateConnectivity.CloudLink != nil {
+			cloud_linkNestedMap := make(map[string]interface{})
+			if !data.PrivateConnectivity.CloudLink.Name.IsNull() && !data.PrivateConnectivity.CloudLink.Name.IsUnknown() {
+				cloud_linkNestedMap["name"] = data.PrivateConnectivity.CloudLink.Name.ValueString()
+			}
+			if !data.PrivateConnectivity.CloudLink.Namespace.IsNull() && !data.PrivateConnectivity.CloudLink.Namespace.IsUnknown() {
+				cloud_linkNestedMap["namespace"] = data.PrivateConnectivity.CloudLink.Namespace.ValueString()
+			}
+			if !data.PrivateConnectivity.CloudLink.Tenant.IsNull() && !data.PrivateConnectivity.CloudLink.Tenant.IsUnknown() {
+				cloud_linkNestedMap["tenant"] = data.PrivateConnectivity.CloudLink.Tenant.ValueString()
+			}
+			private_connectivityMap["cloud_link"] = cloud_linkNestedMap
+		}
+		if data.PrivateConnectivity.Inside != nil {
+			private_connectivityMap["inside"] = map[string]interface{}{}
+		}
+		if data.PrivateConnectivity.Outside != nil {
+			private_connectivityMap["outside"] = map[string]interface{}{}
+		}
+		apiResource.Spec["private_connectivity"] = private_connectivityMap
+	}
+	if data.Sw != nil {
+		swMap := make(map[string]interface{})
+		if data.Sw.DefaultSwVersion != nil {
+			swMap["default_sw_version"] = map[string]interface{}{}
+		}
+		if !data.Sw.VolterraSoftwareVersion.IsNull() && !data.Sw.VolterraSoftwareVersion.IsUnknown() {
+			swMap["volterra_software_version"] = data.Sw.VolterraSoftwareVersion.ValueString()
+		}
+		apiResource.Spec["sw"] = swMap
+	}
+	if data.Tags != nil {
+		tagsMap := make(map[string]interface{})
+		apiResource.Spec["tags"] = tagsMap
+	}
+	if data.TGWSecurity != nil {
+		tgw_securityMap := make(map[string]interface{})
+		if data.TGWSecurity.ActiveEastWestServicePolicies != nil {
+			active_east_west_service_policiesNestedMap := make(map[string]interface{})
+			tgw_securityMap["active_east_west_service_policies"] = active_east_west_service_policiesNestedMap
+		}
+		if data.TGWSecurity.ActiveEnhancedFirewallPolicies != nil {
+			active_enhanced_firewall_policiesNestedMap := make(map[string]interface{})
+			tgw_securityMap["active_enhanced_firewall_policies"] = active_enhanced_firewall_policiesNestedMap
+		}
+		if data.TGWSecurity.ActiveForwardProxyPolicies != nil {
+			active_forward_proxy_policiesNestedMap := make(map[string]interface{})
+			tgw_securityMap["active_forward_proxy_policies"] = active_forward_proxy_policiesNestedMap
+		}
+		if data.TGWSecurity.ActiveNetworkPolicies != nil {
+			active_network_policiesNestedMap := make(map[string]interface{})
+			tgw_securityMap["active_network_policies"] = active_network_policiesNestedMap
+		}
+		if data.TGWSecurity.EastWestServicePolicyAllowAll != nil {
+			tgw_securityMap["east_west_service_policy_allow_all"] = map[string]interface{}{}
+		}
+		if data.TGWSecurity.ForwardProxyAllowAll != nil {
+			tgw_securityMap["forward_proxy_allow_all"] = map[string]interface{}{}
+		}
+		if data.TGWSecurity.NoEastWestPolicy != nil {
+			tgw_securityMap["no_east_west_policy"] = map[string]interface{}{}
+		}
+		if data.TGWSecurity.NoForwardProxy != nil {
+			tgw_securityMap["no_forward_proxy"] = map[string]interface{}{}
+		}
+		if data.TGWSecurity.NoNetworkPolicy != nil {
+			tgw_securityMap["no_network_policy"] = map[string]interface{}{}
+		}
+		apiResource.Spec["tgw_security"] = tgw_securityMap
+	}
+	if data.VnConfig != nil {
+		vn_configMap := make(map[string]interface{})
+		if data.VnConfig.AllowedVipPort != nil {
+			allowed_vip_portNestedMap := make(map[string]interface{})
+			vn_configMap["allowed_vip_port"] = allowed_vip_portNestedMap
+		}
+		if data.VnConfig.AllowedVipPortSLI != nil {
+			allowed_vip_port_sliNestedMap := make(map[string]interface{})
+			vn_configMap["allowed_vip_port_sli"] = allowed_vip_port_sliNestedMap
+		}
+		if data.VnConfig.DcClusterGroupInsideVn != nil {
+			dc_cluster_group_inside_vnNestedMap := make(map[string]interface{})
+			if !data.VnConfig.DcClusterGroupInsideVn.Name.IsNull() && !data.VnConfig.DcClusterGroupInsideVn.Name.IsUnknown() {
+				dc_cluster_group_inside_vnNestedMap["name"] = data.VnConfig.DcClusterGroupInsideVn.Name.ValueString()
+			}
+			if !data.VnConfig.DcClusterGroupInsideVn.Namespace.IsNull() && !data.VnConfig.DcClusterGroupInsideVn.Namespace.IsUnknown() {
+				dc_cluster_group_inside_vnNestedMap["namespace"] = data.VnConfig.DcClusterGroupInsideVn.Namespace.ValueString()
+			}
+			if !data.VnConfig.DcClusterGroupInsideVn.Tenant.IsNull() && !data.VnConfig.DcClusterGroupInsideVn.Tenant.IsUnknown() {
+				dc_cluster_group_inside_vnNestedMap["tenant"] = data.VnConfig.DcClusterGroupInsideVn.Tenant.ValueString()
+			}
+			vn_configMap["dc_cluster_group_inside_vn"] = dc_cluster_group_inside_vnNestedMap
+		}
+		if data.VnConfig.DcClusterGroupOutsideVn != nil {
+			dc_cluster_group_outside_vnNestedMap := make(map[string]interface{})
+			if !data.VnConfig.DcClusterGroupOutsideVn.Name.IsNull() && !data.VnConfig.DcClusterGroupOutsideVn.Name.IsUnknown() {
+				dc_cluster_group_outside_vnNestedMap["name"] = data.VnConfig.DcClusterGroupOutsideVn.Name.ValueString()
+			}
+			if !data.VnConfig.DcClusterGroupOutsideVn.Namespace.IsNull() && !data.VnConfig.DcClusterGroupOutsideVn.Namespace.IsUnknown() {
+				dc_cluster_group_outside_vnNestedMap["namespace"] = data.VnConfig.DcClusterGroupOutsideVn.Namespace.ValueString()
+			}
+			if !data.VnConfig.DcClusterGroupOutsideVn.Tenant.IsNull() && !data.VnConfig.DcClusterGroupOutsideVn.Tenant.IsUnknown() {
+				dc_cluster_group_outside_vnNestedMap["tenant"] = data.VnConfig.DcClusterGroupOutsideVn.Tenant.ValueString()
+			}
+			vn_configMap["dc_cluster_group_outside_vn"] = dc_cluster_group_outside_vnNestedMap
+		}
+		if data.VnConfig.GlobalNetworkList != nil {
+			global_network_listNestedMap := make(map[string]interface{})
+			vn_configMap["global_network_list"] = global_network_listNestedMap
+		}
+		if data.VnConfig.InsideStaticRoutes != nil {
+			inside_static_routesNestedMap := make(map[string]interface{})
+			vn_configMap["inside_static_routes"] = inside_static_routesNestedMap
+		}
+		if data.VnConfig.NoDcClusterGroup != nil {
+			vn_configMap["no_dc_cluster_group"] = map[string]interface{}{}
+		}
+		if data.VnConfig.NoGlobalNetwork != nil {
+			vn_configMap["no_global_network"] = map[string]interface{}{}
+		}
+		if data.VnConfig.NoInsideStaticRoutes != nil {
+			vn_configMap["no_inside_static_routes"] = map[string]interface{}{}
+		}
+		if data.VnConfig.NoOutsideStaticRoutes != nil {
+			vn_configMap["no_outside_static_routes"] = map[string]interface{}{}
+		}
+		if data.VnConfig.OutsideStaticRoutes != nil {
+			outside_static_routesNestedMap := make(map[string]interface{})
+			vn_configMap["outside_static_routes"] = outside_static_routesNestedMap
+		}
+		if data.VnConfig.SmConnectionPublicIP != nil {
+			vn_configMap["sm_connection_public_ip"] = map[string]interface{}{}
+		}
+		if data.VnConfig.SmConnectionPvtIP != nil {
+			vn_configMap["sm_connection_pvt_ip"] = map[string]interface{}{}
+		}
+		apiResource.Spec["vn_config"] = vn_configMap
+	}
+	if data.VPCAttachments != nil {
+		vpc_attachmentsMap := make(map[string]interface{})
+		apiResource.Spec["vpc_attachments"] = vpc_attachmentsMap
+	}
+
+
 	updated, err := r.client.UpdateAWSTGWSite(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update AWSTGWSite: %s", err))
@@ -2125,6 +3073,8 @@ func (r *AWSTGWSiteResource) Update(ctx context.Context, req resource.UpdateRequ
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -2137,6 +3087,7 @@ func (r *AWSTGWSiteResource) Update(ctx context.Context, req resource.UpdateRequ
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -2163,6 +3114,15 @@ func (r *AWSTGWSiteResource) Delete(ctx context.Context, req resource.DeleteRequ
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "AWSTGWSite already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "AWSTGWSite delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

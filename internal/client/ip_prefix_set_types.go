@@ -10,13 +10,8 @@ import (
 
 // IPPrefixSet represents a F5XC IPPrefixSet
 type IPPrefixSet struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     IPPrefixSetSpec `json:"spec"`
-}
-
-// IPPrefixSetSpec defines the specification for IPPrefixSet
-type IPPrefixSetSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateIPPrefixSet creates a new IPPrefixSet

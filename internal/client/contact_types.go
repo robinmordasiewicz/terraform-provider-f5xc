@@ -10,19 +10,14 @@ import (
 
 // Contact represents a F5XC Contact
 type Contact struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     ContactSpec `json:"spec"`
-}
-
-// ContactSpec defines the specification for Contact
-type ContactSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateContact creates a new Contact
 func (c *Client) CreateContact(ctx context.Context, resource *Contact) (*Contact, error) {
 	var result Contact
-	path := fmt.Sprintf("/api/config/namespaces/%s/contacts", resource.Metadata.Namespace)
+	path := fmt.Sprintf("/api/web/namespaces/%s/contacts", resource.Metadata.Namespace)
 	err := c.Post(ctx, path, resource, &result)
 	return &result, err
 }
@@ -30,7 +25,7 @@ func (c *Client) CreateContact(ctx context.Context, resource *Contact) (*Contact
 // GetContact retrieves a Contact
 func (c *Client) GetContact(ctx context.Context, namespace, name string) (*Contact, error) {
 	var result Contact
-	path := fmt.Sprintf("/api/config/namespaces/%s/contacts/%s", namespace, name)
+	path := fmt.Sprintf("/api/web/namespaces/%s/contacts/%s", namespace, name)
 	err := c.Get(ctx, path, &result)
 	return &result, err
 }
@@ -38,13 +33,13 @@ func (c *Client) GetContact(ctx context.Context, namespace, name string) (*Conta
 // UpdateContact updates a Contact
 func (c *Client) UpdateContact(ctx context.Context, resource *Contact) (*Contact, error) {
 	var result Contact
-	path := fmt.Sprintf("/api/config/namespaces/%s/contacts/%s", resource.Metadata.Namespace, resource.Metadata.Name)
+	path := fmt.Sprintf("/api/web/namespaces/%s/contacts/%s", resource.Metadata.Namespace, resource.Metadata.Name)
 	err := c.Put(ctx, path, resource, &result)
 	return &result, err
 }
 
 // DeleteContact deletes a Contact
 func (c *Client) DeleteContact(ctx context.Context, namespace, name string) error {
-	path := fmt.Sprintf("/api/config/namespaces/%s/contacts/%s", namespace, name)
+	path := fmt.Sprintf("/api/web/namespaces/%s/contacts/%s", namespace, name)
 	return c.Delete(ctx, path)
 }

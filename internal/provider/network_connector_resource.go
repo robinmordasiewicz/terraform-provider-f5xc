@@ -72,7 +72,7 @@ type NetworkConnectorEnableForwardProxyTLSInterceptModel struct {
 // NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificateModel represents custom_certificate block
 type NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificateModel struct {
 	CertificateURL types.String `tfsdk:"certificate_url"`
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	CustomHashAlgorithms *NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificateCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
 	DisableOcspStapling *NetworkConnectorEmptyModel `tfsdk:"disable_ocsp_stapling"`
 	PrivateKey *NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificatePrivateKeyModel `tfsdk:"private_key"`
@@ -247,7 +247,7 @@ func (r *NetworkConnectorResource) Schema(ctx context.Context, req resource.Sche
 					"white_listed_ports": schema.ListAttribute{
 						MarkdownDescription: "TCP Ports to Skip Protocol Parsing. Traffic to these destination TCP ports is not subjected to protocol parsing Example 'tmate' server port",
 						Optional: true,
-						ElementType: types.StringType,
+						ElementType: types.Int64Type,
 					},
 					"white_listed_prefixes": schema.ListAttribute{
 						MarkdownDescription: "IP Prefixes to Skip Protocol Parsing. Traffic to these destination ip prefixes is not subjected to protocol parsing Example 'tmate' server ip",
@@ -275,7 +275,7 @@ func (r *NetworkConnectorResource) Schema(ctx context.Context, req resource.Sche
 										MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
 										Optional: true,
 									},
-									"description": schema.StringAttribute{
+									"description_spec": schema.StringAttribute{
 										MarkdownDescription: "Description. Description for the certificate",
 										Optional: true,
 									},
@@ -575,7 +575,7 @@ func (r *NetworkConnectorResource) Create(ctx context.Context, req resource.Crea
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.NetworkConnectorSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -600,6 +600,77 @@ func (r *NetworkConnectorResource) Create(ctx context.Context, req resource.Crea
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.DisableForwardProxy != nil {
+		disable_forward_proxyMap := make(map[string]interface{})
+		apiResource.Spec["disable_forward_proxy"] = disable_forward_proxyMap
+	}
+	if data.EnableForwardProxy != nil {
+		enable_forward_proxyMap := make(map[string]interface{})
+		if !data.EnableForwardProxy.ConnectionTimeout.IsNull() && !data.EnableForwardProxy.ConnectionTimeout.IsUnknown() {
+			enable_forward_proxyMap["connection_timeout"] = data.EnableForwardProxy.ConnectionTimeout.ValueInt64()
+		}
+		if !data.EnableForwardProxy.MaxConnectAttempts.IsNull() && !data.EnableForwardProxy.MaxConnectAttempts.IsUnknown() {
+			enable_forward_proxyMap["max_connect_attempts"] = data.EnableForwardProxy.MaxConnectAttempts.ValueInt64()
+		}
+		if data.EnableForwardProxy.NoInterception != nil {
+			enable_forward_proxyMap["no_interception"] = map[string]interface{}{}
+		}
+		if data.EnableForwardProxy.TLSIntercept != nil {
+			tls_interceptNestedMap := make(map[string]interface{})
+			if !data.EnableForwardProxy.TLSIntercept.TrustedCaURL.IsNull() && !data.EnableForwardProxy.TLSIntercept.TrustedCaURL.IsUnknown() {
+				tls_interceptNestedMap["trusted_ca_url"] = data.EnableForwardProxy.TLSIntercept.TrustedCaURL.ValueString()
+			}
+			enable_forward_proxyMap["tls_intercept"] = tls_interceptNestedMap
+		}
+		apiResource.Spec["enable_forward_proxy"] = enable_forward_proxyMap
+	}
+	if data.SLIToGlobalDr != nil {
+		sli_to_global_drMap := make(map[string]interface{})
+		if data.SLIToGlobalDr.GlobalVn != nil {
+			global_vnNestedMap := make(map[string]interface{})
+			if !data.SLIToGlobalDr.GlobalVn.Name.IsNull() && !data.SLIToGlobalDr.GlobalVn.Name.IsUnknown() {
+				global_vnNestedMap["name"] = data.SLIToGlobalDr.GlobalVn.Name.ValueString()
+			}
+			if !data.SLIToGlobalDr.GlobalVn.Namespace.IsNull() && !data.SLIToGlobalDr.GlobalVn.Namespace.IsUnknown() {
+				global_vnNestedMap["namespace"] = data.SLIToGlobalDr.GlobalVn.Namespace.ValueString()
+			}
+			if !data.SLIToGlobalDr.GlobalVn.Tenant.IsNull() && !data.SLIToGlobalDr.GlobalVn.Tenant.IsUnknown() {
+				global_vnNestedMap["tenant"] = data.SLIToGlobalDr.GlobalVn.Tenant.ValueString()
+			}
+			sli_to_global_drMap["global_vn"] = global_vnNestedMap
+		}
+		apiResource.Spec["sli_to_global_dr"] = sli_to_global_drMap
+	}
+	if data.SLIToSLOSnat != nil {
+		sli_to_slo_snatMap := make(map[string]interface{})
+		if data.SLIToSLOSnat.DefaultGwSnat != nil {
+			sli_to_slo_snatMap["default_gw_snat"] = map[string]interface{}{}
+		}
+		if data.SLIToSLOSnat.InterfaceIP != nil {
+			sli_to_slo_snatMap["interface_ip"] = map[string]interface{}{}
+		}
+		apiResource.Spec["sli_to_slo_snat"] = sli_to_slo_snatMap
+	}
+	if data.SLOToGlobalDr != nil {
+		slo_to_global_drMap := make(map[string]interface{})
+		if data.SLOToGlobalDr.GlobalVn != nil {
+			global_vnNestedMap := make(map[string]interface{})
+			if !data.SLOToGlobalDr.GlobalVn.Name.IsNull() && !data.SLOToGlobalDr.GlobalVn.Name.IsUnknown() {
+				global_vnNestedMap["name"] = data.SLOToGlobalDr.GlobalVn.Name.ValueString()
+			}
+			if !data.SLOToGlobalDr.GlobalVn.Namespace.IsNull() && !data.SLOToGlobalDr.GlobalVn.Namespace.IsUnknown() {
+				global_vnNestedMap["namespace"] = data.SLOToGlobalDr.GlobalVn.Namespace.ValueString()
+			}
+			if !data.SLOToGlobalDr.GlobalVn.Tenant.IsNull() && !data.SLOToGlobalDr.GlobalVn.Tenant.IsUnknown() {
+				global_vnNestedMap["tenant"] = data.SLOToGlobalDr.GlobalVn.Tenant.ValueString()
+			}
+			slo_to_global_drMap["global_vn"] = global_vnNestedMap
+		}
+		apiResource.Spec["slo_to_global_dr"] = slo_to_global_drMap
+	}
+
+
 	created, err := r.client.CreateNetworkConnector(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create NetworkConnector: %s", err))
@@ -608,8 +679,13 @@ func (r *NetworkConnectorResource) Create(ctx context.Context, req resource.Crea
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created NetworkConnector resource")
@@ -688,9 +764,61 @@ func (r *NetworkConnectorResource) Read(ctx context.Context, req resource.ReadRe
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if _, ok := apiResource.Spec["disable_forward_proxy"].(map[string]interface{}); ok && isImport && data.DisableForwardProxy == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableForwardProxy = &NetworkConnectorEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["enable_forward_proxy"].(map[string]interface{}); ok && (isImport || data.EnableForwardProxy != nil) {
+		data.EnableForwardProxy = &NetworkConnectorEnableForwardProxyModel{
+			ConnectionTimeout: func() types.Int64 {
+				if v, ok := blockData["connection_timeout"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			MaxConnectAttempts: func() types.Int64 {
+				if v, ok := blockData["max_connect_attempts"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["sli_to_global_dr"].(map[string]interface{}); ok && isImport && data.SLIToGlobalDr == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.SLIToGlobalDr = &NetworkConnectorSLIToGlobalDrModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["sli_to_slo_snat"].(map[string]interface{}); ok && isImport && data.SLIToSLOSnat == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.SLIToSLOSnat = &NetworkConnectorSLIToSLOSnatModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["slo_to_global_dr"].(map[string]interface{}); ok && isImport && data.SLOToGlobalDr == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.SLOToGlobalDr = &NetworkConnectorSLOToGlobalDrModel{}
+	}
+	// Normal Read: preserve existing state value
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -716,7 +844,7 @@ func (r *NetworkConnectorResource) Update(ctx context.Context, req resource.Upda
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.NetworkConnectorSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -741,6 +869,77 @@ func (r *NetworkConnectorResource) Update(ctx context.Context, req resource.Upda
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.DisableForwardProxy != nil {
+		disable_forward_proxyMap := make(map[string]interface{})
+		apiResource.Spec["disable_forward_proxy"] = disable_forward_proxyMap
+	}
+	if data.EnableForwardProxy != nil {
+		enable_forward_proxyMap := make(map[string]interface{})
+		if !data.EnableForwardProxy.ConnectionTimeout.IsNull() && !data.EnableForwardProxy.ConnectionTimeout.IsUnknown() {
+			enable_forward_proxyMap["connection_timeout"] = data.EnableForwardProxy.ConnectionTimeout.ValueInt64()
+		}
+		if !data.EnableForwardProxy.MaxConnectAttempts.IsNull() && !data.EnableForwardProxy.MaxConnectAttempts.IsUnknown() {
+			enable_forward_proxyMap["max_connect_attempts"] = data.EnableForwardProxy.MaxConnectAttempts.ValueInt64()
+		}
+		if data.EnableForwardProxy.NoInterception != nil {
+			enable_forward_proxyMap["no_interception"] = map[string]interface{}{}
+		}
+		if data.EnableForwardProxy.TLSIntercept != nil {
+			tls_interceptNestedMap := make(map[string]interface{})
+			if !data.EnableForwardProxy.TLSIntercept.TrustedCaURL.IsNull() && !data.EnableForwardProxy.TLSIntercept.TrustedCaURL.IsUnknown() {
+				tls_interceptNestedMap["trusted_ca_url"] = data.EnableForwardProxy.TLSIntercept.TrustedCaURL.ValueString()
+			}
+			enable_forward_proxyMap["tls_intercept"] = tls_interceptNestedMap
+		}
+		apiResource.Spec["enable_forward_proxy"] = enable_forward_proxyMap
+	}
+	if data.SLIToGlobalDr != nil {
+		sli_to_global_drMap := make(map[string]interface{})
+		if data.SLIToGlobalDr.GlobalVn != nil {
+			global_vnNestedMap := make(map[string]interface{})
+			if !data.SLIToGlobalDr.GlobalVn.Name.IsNull() && !data.SLIToGlobalDr.GlobalVn.Name.IsUnknown() {
+				global_vnNestedMap["name"] = data.SLIToGlobalDr.GlobalVn.Name.ValueString()
+			}
+			if !data.SLIToGlobalDr.GlobalVn.Namespace.IsNull() && !data.SLIToGlobalDr.GlobalVn.Namespace.IsUnknown() {
+				global_vnNestedMap["namespace"] = data.SLIToGlobalDr.GlobalVn.Namespace.ValueString()
+			}
+			if !data.SLIToGlobalDr.GlobalVn.Tenant.IsNull() && !data.SLIToGlobalDr.GlobalVn.Tenant.IsUnknown() {
+				global_vnNestedMap["tenant"] = data.SLIToGlobalDr.GlobalVn.Tenant.ValueString()
+			}
+			sli_to_global_drMap["global_vn"] = global_vnNestedMap
+		}
+		apiResource.Spec["sli_to_global_dr"] = sli_to_global_drMap
+	}
+	if data.SLIToSLOSnat != nil {
+		sli_to_slo_snatMap := make(map[string]interface{})
+		if data.SLIToSLOSnat.DefaultGwSnat != nil {
+			sli_to_slo_snatMap["default_gw_snat"] = map[string]interface{}{}
+		}
+		if data.SLIToSLOSnat.InterfaceIP != nil {
+			sli_to_slo_snatMap["interface_ip"] = map[string]interface{}{}
+		}
+		apiResource.Spec["sli_to_slo_snat"] = sli_to_slo_snatMap
+	}
+	if data.SLOToGlobalDr != nil {
+		slo_to_global_drMap := make(map[string]interface{})
+		if data.SLOToGlobalDr.GlobalVn != nil {
+			global_vnNestedMap := make(map[string]interface{})
+			if !data.SLOToGlobalDr.GlobalVn.Name.IsNull() && !data.SLOToGlobalDr.GlobalVn.Name.IsUnknown() {
+				global_vnNestedMap["name"] = data.SLOToGlobalDr.GlobalVn.Name.ValueString()
+			}
+			if !data.SLOToGlobalDr.GlobalVn.Namespace.IsNull() && !data.SLOToGlobalDr.GlobalVn.Namespace.IsUnknown() {
+				global_vnNestedMap["namespace"] = data.SLOToGlobalDr.GlobalVn.Namespace.ValueString()
+			}
+			if !data.SLOToGlobalDr.GlobalVn.Tenant.IsNull() && !data.SLOToGlobalDr.GlobalVn.Tenant.IsUnknown() {
+				global_vnNestedMap["tenant"] = data.SLOToGlobalDr.GlobalVn.Tenant.ValueString()
+			}
+			slo_to_global_drMap["global_vn"] = global_vnNestedMap
+		}
+		apiResource.Spec["slo_to_global_dr"] = slo_to_global_drMap
+	}
+
+
 	updated, err := r.client.UpdateNetworkConnector(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update NetworkConnector: %s", err))
@@ -749,6 +948,8 @@ func (r *NetworkConnectorResource) Update(ctx context.Context, req resource.Upda
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -761,6 +962,7 @@ func (r *NetworkConnectorResource) Update(ctx context.Context, req resource.Upda
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -787,6 +989,15 @@ func (r *NetworkConnectorResource) Delete(ctx context.Context, req resource.Dele
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "NetworkConnector already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "NetworkConnector delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

@@ -71,12 +71,12 @@ type ProtocolInspectionEnableDisableSignaturesModel struct {
 type ProtocolInspectionResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Action types.String `tfsdk:"action"`
 	Annotations types.Map `tfsdk:"annotations"`
 	Description types.String `tfsdk:"description"`
 	Disable types.Bool `tfsdk:"disable"`
 	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
+	Action types.String `tfsdk:"action"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
 	EnableDisableComplianceChecks *ProtocolInspectionEnableDisableComplianceChecksModel `tfsdk:"enable_disable_compliance_checks"`
 	EnableDisableSignatures *ProtocolInspectionEnableDisableSignaturesModel `tfsdk:"enable_disable_signatures"`
@@ -111,10 +111,6 @@ func (r *ProtocolInspectionResource) Schema(ctx context.Context, req resource.Sc
 					validators.NamespaceValidator(),
 				},
 			},
-			"action": schema.StringAttribute{
-				MarkdownDescription: "Action. Action after inspection - ALLOW: Allow Allow traffic - DENY: Deny Throw RST error for TCP and ICMP error for UDP - DROP: DROP Silently drop traffic. Possible values are `ALLOW`, `DENY`, `DROP`. Defaults to `ALLOW`.",
-				Optional: true,
-			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
 				Optional: true,
@@ -135,6 +131,14 @@ func (r *ProtocolInspectionResource) Schema(ctx context.Context, req resource.Sc
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"action": schema.StringAttribute{
+				MarkdownDescription: "Action. Action after inspection - ALLOW: Allow Allow traffic - DENY: Deny Throw RST error for TCP and ICMP error for UDP - DROP: DROP Silently drop traffic. Possible values are `ALLOW`, `DENY`, `DROP`. Defaults to `ALLOW`.",
+				Optional: true,
 				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
@@ -312,7 +316,7 @@ func (r *ProtocolInspectionResource) Create(ctx context.Context, req resource.Cr
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.ProtocolInspectionSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -337,6 +341,42 @@ func (r *ProtocolInspectionResource) Create(ctx context.Context, req resource.Cr
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.EnableDisableComplianceChecks != nil {
+		enable_disable_compliance_checksMap := make(map[string]interface{})
+		if data.EnableDisableComplianceChecks.DisableComplianceChecks != nil {
+			enable_disable_compliance_checksMap["disable_compliance_checks"] = map[string]interface{}{}
+		}
+		if data.EnableDisableComplianceChecks.EnableComplianceChecks != nil {
+			enable_compliance_checksNestedMap := make(map[string]interface{})
+			if !data.EnableDisableComplianceChecks.EnableComplianceChecks.Name.IsNull() && !data.EnableDisableComplianceChecks.EnableComplianceChecks.Name.IsUnknown() {
+				enable_compliance_checksNestedMap["name"] = data.EnableDisableComplianceChecks.EnableComplianceChecks.Name.ValueString()
+			}
+			if !data.EnableDisableComplianceChecks.EnableComplianceChecks.Namespace.IsNull() && !data.EnableDisableComplianceChecks.EnableComplianceChecks.Namespace.IsUnknown() {
+				enable_compliance_checksNestedMap["namespace"] = data.EnableDisableComplianceChecks.EnableComplianceChecks.Namespace.ValueString()
+			}
+			if !data.EnableDisableComplianceChecks.EnableComplianceChecks.Tenant.IsNull() && !data.EnableDisableComplianceChecks.EnableComplianceChecks.Tenant.IsUnknown() {
+				enable_compliance_checksNestedMap["tenant"] = data.EnableDisableComplianceChecks.EnableComplianceChecks.Tenant.ValueString()
+			}
+			enable_disable_compliance_checksMap["enable_compliance_checks"] = enable_compliance_checksNestedMap
+		}
+		apiResource.Spec["enable_disable_compliance_checks"] = enable_disable_compliance_checksMap
+	}
+	if data.EnableDisableSignatures != nil {
+		enable_disable_signaturesMap := make(map[string]interface{})
+		if data.EnableDisableSignatures.DisableSignature != nil {
+			enable_disable_signaturesMap["disable_signature"] = map[string]interface{}{}
+		}
+		if data.EnableDisableSignatures.EnableSignature != nil {
+			enable_disable_signaturesMap["enable_signature"] = map[string]interface{}{}
+		}
+		apiResource.Spec["enable_disable_signatures"] = enable_disable_signaturesMap
+	}
+	if !data.Action.IsNull() && !data.Action.IsUnknown() {
+		apiResource.Spec["action"] = data.Action.ValueString()
+	}
+
+
 	created, err := r.client.CreateProtocolInspection(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create ProtocolInspection: %s", err))
@@ -345,8 +385,17 @@ func (r *ProtocolInspectionResource) Create(ctx context.Context, req resource.Cr
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+	if v, ok := created.Spec["action"].(string); ok && v != "" {
+		data.Action = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created ProtocolInspection resource")
@@ -425,9 +474,40 @@ func (r *ProtocolInspectionResource) Read(ctx context.Context, req resource.Read
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if _, ok := apiResource.Spec["enable_disable_compliance_checks"].(map[string]interface{}); ok && isImport && data.EnableDisableComplianceChecks == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.EnableDisableComplianceChecks = &ProtocolInspectionEnableDisableComplianceChecksModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["enable_disable_signatures"].(map[string]interface{}); ok && isImport && data.EnableDisableSignatures == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.EnableDisableSignatures = &ProtocolInspectionEnableDisableSignaturesModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["action"].(string); ok && v != "" {
+		data.Action = types.StringValue(v)
+	} else {
+		data.Action = types.StringNull()
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -453,7 +533,7 @@ func (r *ProtocolInspectionResource) Update(ctx context.Context, req resource.Up
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.ProtocolInspectionSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -478,6 +558,42 @@ func (r *ProtocolInspectionResource) Update(ctx context.Context, req resource.Up
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.EnableDisableComplianceChecks != nil {
+		enable_disable_compliance_checksMap := make(map[string]interface{})
+		if data.EnableDisableComplianceChecks.DisableComplianceChecks != nil {
+			enable_disable_compliance_checksMap["disable_compliance_checks"] = map[string]interface{}{}
+		}
+		if data.EnableDisableComplianceChecks.EnableComplianceChecks != nil {
+			enable_compliance_checksNestedMap := make(map[string]interface{})
+			if !data.EnableDisableComplianceChecks.EnableComplianceChecks.Name.IsNull() && !data.EnableDisableComplianceChecks.EnableComplianceChecks.Name.IsUnknown() {
+				enable_compliance_checksNestedMap["name"] = data.EnableDisableComplianceChecks.EnableComplianceChecks.Name.ValueString()
+			}
+			if !data.EnableDisableComplianceChecks.EnableComplianceChecks.Namespace.IsNull() && !data.EnableDisableComplianceChecks.EnableComplianceChecks.Namespace.IsUnknown() {
+				enable_compliance_checksNestedMap["namespace"] = data.EnableDisableComplianceChecks.EnableComplianceChecks.Namespace.ValueString()
+			}
+			if !data.EnableDisableComplianceChecks.EnableComplianceChecks.Tenant.IsNull() && !data.EnableDisableComplianceChecks.EnableComplianceChecks.Tenant.IsUnknown() {
+				enable_compliance_checksNestedMap["tenant"] = data.EnableDisableComplianceChecks.EnableComplianceChecks.Tenant.ValueString()
+			}
+			enable_disable_compliance_checksMap["enable_compliance_checks"] = enable_compliance_checksNestedMap
+		}
+		apiResource.Spec["enable_disable_compliance_checks"] = enable_disable_compliance_checksMap
+	}
+	if data.EnableDisableSignatures != nil {
+		enable_disable_signaturesMap := make(map[string]interface{})
+		if data.EnableDisableSignatures.DisableSignature != nil {
+			enable_disable_signaturesMap["disable_signature"] = map[string]interface{}{}
+		}
+		if data.EnableDisableSignatures.EnableSignature != nil {
+			enable_disable_signaturesMap["enable_signature"] = map[string]interface{}{}
+		}
+		apiResource.Spec["enable_disable_signatures"] = enable_disable_signaturesMap
+	}
+	if !data.Action.IsNull() && !data.Action.IsUnknown() {
+		apiResource.Spec["action"] = data.Action.ValueString()
+	}
+
+
 	updated, err := r.client.UpdateProtocolInspection(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update ProtocolInspection: %s", err))
@@ -486,6 +602,12 @@ func (r *ProtocolInspectionResource) Update(ctx context.Context, req resource.Up
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
+	if v, ok := updated.Spec["action"].(string); ok && v != "" {
+		data.Action = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -498,6 +620,7 @@ func (r *ProtocolInspectionResource) Update(ctx context.Context, req resource.Up
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -524,6 +647,15 @@ func (r *ProtocolInspectionResource) Delete(ctx context.Context, req resource.De
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "ProtocolInspection already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "ProtocolInspection delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

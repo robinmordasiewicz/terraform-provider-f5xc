@@ -10,19 +10,14 @@ import (
 
 // ReportConfig represents a F5XC ReportConfig
 type ReportConfig struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     ReportConfigSpec `json:"spec"`
-}
-
-// ReportConfigSpec defines the specification for ReportConfig
-type ReportConfigSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateReportConfig creates a new ReportConfig
 func (c *Client) CreateReportConfig(ctx context.Context, resource *ReportConfig) (*ReportConfig, error) {
 	var result ReportConfig
-	path := fmt.Sprintf("/api/config/namespaces/%s/report_configs", resource.Metadata.Namespace)
+	path := fmt.Sprintf("/api/report/namespaces/%s/report_configs", resource.Metadata.Namespace)
 	err := c.Post(ctx, path, resource, &result)
 	return &result, err
 }
@@ -30,7 +25,7 @@ func (c *Client) CreateReportConfig(ctx context.Context, resource *ReportConfig)
 // GetReportConfig retrieves a ReportConfig
 func (c *Client) GetReportConfig(ctx context.Context, namespace, name string) (*ReportConfig, error) {
 	var result ReportConfig
-	path := fmt.Sprintf("/api/config/namespaces/%s/report_configs/%s", namespace, name)
+	path := fmt.Sprintf("/api/report/namespaces/%s/report_configs/%s", namespace, name)
 	err := c.Get(ctx, path, &result)
 	return &result, err
 }
@@ -38,13 +33,13 @@ func (c *Client) GetReportConfig(ctx context.Context, namespace, name string) (*
 // UpdateReportConfig updates a ReportConfig
 func (c *Client) UpdateReportConfig(ctx context.Context, resource *ReportConfig) (*ReportConfig, error) {
 	var result ReportConfig
-	path := fmt.Sprintf("/api/config/namespaces/%s/report_configs/%s", resource.Metadata.Namespace, resource.Metadata.Name)
+	path := fmt.Sprintf("/api/report/namespaces/%s/report_configs/%s", resource.Metadata.Namespace, resource.Metadata.Name)
 	err := c.Put(ctx, path, resource, &result)
 	return &result, err
 }
 
 // DeleteReportConfig deletes a ReportConfig
 func (c *Client) DeleteReportConfig(ctx context.Context, namespace, name string) error {
-	path := fmt.Sprintf("/api/config/namespaces/%s/report_configs/%s", namespace, name)
+	path := fmt.Sprintf("/api/report/namespaces/%s/report_configs/%s", namespace, name)
 	return c.Delete(ctx, path)
 }

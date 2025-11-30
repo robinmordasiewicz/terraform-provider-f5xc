@@ -12,6 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -139,13 +140,13 @@ type EndpointResourceModel struct {
 	Annotations types.Map `tfsdk:"annotations"`
 	Description types.String `tfsdk:"description"`
 	Disable types.Bool `tfsdk:"disable"`
+	Labels types.Map `tfsdk:"labels"`
+	ID types.String `tfsdk:"id"`
 	DNSName types.String `tfsdk:"dns_name"`
 	HealthCheckPort types.Int64 `tfsdk:"health_check_port"`
 	IP types.String `tfsdk:"ip"`
-	Labels types.Map `tfsdk:"labels"`
 	Port types.Int64 `tfsdk:"port"`
 	Protocol types.String `tfsdk:"protocol"`
-	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
 	DNSNameAdvanced *EndpointDNSNameAdvancedModel `tfsdk:"dns_name_advanced"`
 	ServiceInfo *EndpointServiceInfoModel `tfsdk:"service_info"`
@@ -195,33 +196,53 @@ func (r *EndpointResource) Schema(ctx context.Context, req resource.SchemaReques
 				MarkdownDescription: "A value of true will administratively disable the object.",
 				Optional: true,
 			},
-			"dns_name": schema.StringAttribute{
-				MarkdownDescription: "[OneOf: dns_name, dns_name_advanced, ip, service_info] Endpoint Name. Endpoint's ip address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
-				Optional: true,
-			},
-			"health_check_port": schema.Int64Attribute{
-				MarkdownDescription: "Port used for health check. By default the health check port of an endpoint is the same as the endpoint’s port. This option provides an alternative health check port. Setting this with a non-zero value allows an endpoint to have different health check port.",
-				Optional: true,
-			},
-			"ip": schema.StringAttribute{
-				MarkdownDescription: "Endpoint IP Address. Endpoint is reachable at the given ipv4/ipv6 address",
-				Optional: true,
-			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
+			"id": schema.StringAttribute{
+				MarkdownDescription: "Unique identifier for the resource.",
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"dns_name": schema.StringAttribute{
+				MarkdownDescription: "[OneOf: dns_name, dns_name_advanced, ip, service_info] Endpoint Name. Endpoint's ip address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"health_check_port": schema.Int64Attribute{
+				MarkdownDescription: "Port used for health check. By default the health check port of an endpoint is the same as the endpoint’s port. This option provides an alternative health check port. Setting this with a non-zero value allows an endpoint to have different health check port.",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.Int64{
+					int64planmodifier.UseStateForUnknown(),
+				},
+			},
+			"ip": schema.StringAttribute{
+				MarkdownDescription: "Endpoint IP Address. Endpoint is reachable at the given ipv4/ipv6 address",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
 			"port": schema.Int64Attribute{
 				MarkdownDescription: "Port. Endpoint service is available on this port",
 				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.Int64{
+					int64planmodifier.UseStateForUnknown(),
+				},
 			},
 			"protocol": schema.StringAttribute{
 				MarkdownDescription: "Protocol. Endpoint protocol. Default is TCP. Both TCP and UDP protocols are supported",
 				Optional: true,
-			},
-			"id": schema.StringAttribute{
-				MarkdownDescription: "Unique identifier for the resource.",
 				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
@@ -548,7 +569,7 @@ func (r *EndpointResource) Create(ctx context.Context, req resource.CreateReques
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.EndpointSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -573,6 +594,81 @@ func (r *EndpointResource) Create(ctx context.Context, req resource.CreateReques
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.DNSNameAdvanced != nil {
+		dns_name_advancedMap := make(map[string]interface{})
+		if !data.DNSNameAdvanced.Name.IsNull() && !data.DNSNameAdvanced.Name.IsUnknown() {
+			dns_name_advancedMap["name"] = data.DNSNameAdvanced.Name.ValueString()
+		}
+		if !data.DNSNameAdvanced.RefreshInterval.IsNull() && !data.DNSNameAdvanced.RefreshInterval.IsUnknown() {
+			dns_name_advancedMap["refresh_interval"] = data.DNSNameAdvanced.RefreshInterval.ValueInt64()
+		}
+		apiResource.Spec["dns_name_advanced"] = dns_name_advancedMap
+	}
+	if data.ServiceInfo != nil {
+		service_infoMap := make(map[string]interface{})
+		if !data.ServiceInfo.DiscoveryType.IsNull() && !data.ServiceInfo.DiscoveryType.IsUnknown() {
+			service_infoMap["discovery_type"] = data.ServiceInfo.DiscoveryType.ValueString()
+		}
+		if !data.ServiceInfo.ServiceName.IsNull() && !data.ServiceInfo.ServiceName.IsUnknown() {
+			service_infoMap["service_name"] = data.ServiceInfo.ServiceName.ValueString()
+		}
+		if data.ServiceInfo.ServiceSelector != nil {
+			service_selectorNestedMap := make(map[string]interface{})
+			service_infoMap["service_selector"] = service_selectorNestedMap
+		}
+		apiResource.Spec["service_info"] = service_infoMap
+	}
+	if data.SnatPool != nil {
+		snat_poolMap := make(map[string]interface{})
+		if data.SnatPool.NoSnatPool != nil {
+			snat_poolMap["no_snat_pool"] = map[string]interface{}{}
+		}
+		if data.SnatPool.SnatPool != nil {
+			snat_poolNestedMap := make(map[string]interface{})
+			snat_poolMap["snat_pool"] = snat_poolNestedMap
+		}
+		apiResource.Spec["snat_pool"] = snat_poolMap
+	}
+	if data.Where != nil {
+		whereMap := make(map[string]interface{})
+		if data.Where.Site != nil {
+			siteNestedMap := make(map[string]interface{})
+			if !data.Where.Site.NetworkType.IsNull() && !data.Where.Site.NetworkType.IsUnknown() {
+				siteNestedMap["network_type"] = data.Where.Site.NetworkType.ValueString()
+			}
+			whereMap["site"] = siteNestedMap
+		}
+		if data.Where.VirtualNetwork != nil {
+			virtual_networkNestedMap := make(map[string]interface{})
+			whereMap["virtual_network"] = virtual_networkNestedMap
+		}
+		if data.Where.VirtualSite != nil {
+			virtual_siteNestedMap := make(map[string]interface{})
+			if !data.Where.VirtualSite.NetworkType.IsNull() && !data.Where.VirtualSite.NetworkType.IsUnknown() {
+				virtual_siteNestedMap["network_type"] = data.Where.VirtualSite.NetworkType.ValueString()
+			}
+			whereMap["virtual_site"] = virtual_siteNestedMap
+		}
+		apiResource.Spec["where"] = whereMap
+	}
+	if !data.DNSName.IsNull() && !data.DNSName.IsUnknown() {
+		apiResource.Spec["dns_name"] = data.DNSName.ValueString()
+	}
+	if !data.HealthCheckPort.IsNull() && !data.HealthCheckPort.IsUnknown() {
+		apiResource.Spec["health_check_port"] = data.HealthCheckPort.ValueInt64()
+	}
+	if !data.IP.IsNull() && !data.IP.IsUnknown() {
+		apiResource.Spec["ip"] = data.IP.ValueString()
+	}
+	if !data.Port.IsNull() && !data.Port.IsUnknown() {
+		apiResource.Spec["port"] = data.Port.ValueInt64()
+	}
+	if !data.Protocol.IsNull() && !data.Protocol.IsUnknown() {
+		apiResource.Spec["protocol"] = data.Protocol.ValueString()
+	}
+
+
 	created, err := r.client.CreateEndpoint(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create Endpoint: %s", err))
@@ -581,8 +677,33 @@ func (r *EndpointResource) Create(ctx context.Context, req resource.CreateReques
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+	if v, ok := created.Spec["dns_name"].(string); ok && v != "" {
+		data.DNSName = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["health_check_port"].(float64); ok {
+		data.HealthCheckPort = types.Int64Value(int64(v))
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["ip"].(string); ok && v != "" {
+		data.IP = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["port"].(float64); ok {
+		data.Port = types.Int64Value(int64(v))
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["protocol"].(string); ok && v != "" {
+		data.Protocol = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created Endpoint resource")
@@ -661,9 +782,92 @@ func (r *EndpointResource) Read(ctx context.Context, req resource.ReadRequest, r
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if blockData, ok := apiResource.Spec["dns_name_advanced"].(map[string]interface{}); ok && (isImport || data.DNSNameAdvanced != nil) {
+		data.DNSNameAdvanced = &EndpointDNSNameAdvancedModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			RefreshInterval: func() types.Int64 {
+				if v, ok := blockData["refresh_interval"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["service_info"].(map[string]interface{}); ok && (isImport || data.ServiceInfo != nil) {
+		data.ServiceInfo = &EndpointServiceInfoModel{
+			DiscoveryType: func() types.String {
+				if v, ok := blockData["discovery_type"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			ServiceName: func() types.String {
+				if v, ok := blockData["service_name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["snat_pool"].(map[string]interface{}); ok && isImport && data.SnatPool == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.SnatPool = &EndpointSnatPoolModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["where"].(map[string]interface{}); ok && isImport && data.Where == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Where = &EndpointWhereModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["dns_name"].(string); ok && v != "" {
+		data.DNSName = types.StringValue(v)
+	} else {
+		data.DNSName = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["health_check_port"].(float64); ok {
+		data.HealthCheckPort = types.Int64Value(int64(v))
+	} else {
+		data.HealthCheckPort = types.Int64Null()
+	}
+	if v, ok := apiResource.Spec["ip"].(string); ok && v != "" {
+		data.IP = types.StringValue(v)
+	} else {
+		data.IP = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["port"].(float64); ok {
+		data.Port = types.Int64Value(int64(v))
+	} else {
+		data.Port = types.Int64Null()
+	}
+	if v, ok := apiResource.Spec["protocol"].(string); ok && v != "" {
+		data.Protocol = types.StringValue(v)
+	} else {
+		data.Protocol = types.StringNull()
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -689,7 +893,7 @@ func (r *EndpointResource) Update(ctx context.Context, req resource.UpdateReques
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.EndpointSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -714,6 +918,81 @@ func (r *EndpointResource) Update(ctx context.Context, req resource.UpdateReques
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.DNSNameAdvanced != nil {
+		dns_name_advancedMap := make(map[string]interface{})
+		if !data.DNSNameAdvanced.Name.IsNull() && !data.DNSNameAdvanced.Name.IsUnknown() {
+			dns_name_advancedMap["name"] = data.DNSNameAdvanced.Name.ValueString()
+		}
+		if !data.DNSNameAdvanced.RefreshInterval.IsNull() && !data.DNSNameAdvanced.RefreshInterval.IsUnknown() {
+			dns_name_advancedMap["refresh_interval"] = data.DNSNameAdvanced.RefreshInterval.ValueInt64()
+		}
+		apiResource.Spec["dns_name_advanced"] = dns_name_advancedMap
+	}
+	if data.ServiceInfo != nil {
+		service_infoMap := make(map[string]interface{})
+		if !data.ServiceInfo.DiscoveryType.IsNull() && !data.ServiceInfo.DiscoveryType.IsUnknown() {
+			service_infoMap["discovery_type"] = data.ServiceInfo.DiscoveryType.ValueString()
+		}
+		if !data.ServiceInfo.ServiceName.IsNull() && !data.ServiceInfo.ServiceName.IsUnknown() {
+			service_infoMap["service_name"] = data.ServiceInfo.ServiceName.ValueString()
+		}
+		if data.ServiceInfo.ServiceSelector != nil {
+			service_selectorNestedMap := make(map[string]interface{})
+			service_infoMap["service_selector"] = service_selectorNestedMap
+		}
+		apiResource.Spec["service_info"] = service_infoMap
+	}
+	if data.SnatPool != nil {
+		snat_poolMap := make(map[string]interface{})
+		if data.SnatPool.NoSnatPool != nil {
+			snat_poolMap["no_snat_pool"] = map[string]interface{}{}
+		}
+		if data.SnatPool.SnatPool != nil {
+			snat_poolNestedMap := make(map[string]interface{})
+			snat_poolMap["snat_pool"] = snat_poolNestedMap
+		}
+		apiResource.Spec["snat_pool"] = snat_poolMap
+	}
+	if data.Where != nil {
+		whereMap := make(map[string]interface{})
+		if data.Where.Site != nil {
+			siteNestedMap := make(map[string]interface{})
+			if !data.Where.Site.NetworkType.IsNull() && !data.Where.Site.NetworkType.IsUnknown() {
+				siteNestedMap["network_type"] = data.Where.Site.NetworkType.ValueString()
+			}
+			whereMap["site"] = siteNestedMap
+		}
+		if data.Where.VirtualNetwork != nil {
+			virtual_networkNestedMap := make(map[string]interface{})
+			whereMap["virtual_network"] = virtual_networkNestedMap
+		}
+		if data.Where.VirtualSite != nil {
+			virtual_siteNestedMap := make(map[string]interface{})
+			if !data.Where.VirtualSite.NetworkType.IsNull() && !data.Where.VirtualSite.NetworkType.IsUnknown() {
+				virtual_siteNestedMap["network_type"] = data.Where.VirtualSite.NetworkType.ValueString()
+			}
+			whereMap["virtual_site"] = virtual_siteNestedMap
+		}
+		apiResource.Spec["where"] = whereMap
+	}
+	if !data.DNSName.IsNull() && !data.DNSName.IsUnknown() {
+		apiResource.Spec["dns_name"] = data.DNSName.ValueString()
+	}
+	if !data.HealthCheckPort.IsNull() && !data.HealthCheckPort.IsUnknown() {
+		apiResource.Spec["health_check_port"] = data.HealthCheckPort.ValueInt64()
+	}
+	if !data.IP.IsNull() && !data.IP.IsUnknown() {
+		apiResource.Spec["ip"] = data.IP.ValueString()
+	}
+	if !data.Port.IsNull() && !data.Port.IsUnknown() {
+		apiResource.Spec["port"] = data.Port.ValueInt64()
+	}
+	if !data.Protocol.IsNull() && !data.Protocol.IsUnknown() {
+		apiResource.Spec["protocol"] = data.Protocol.ValueString()
+	}
+
+
 	updated, err := r.client.UpdateEndpoint(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update Endpoint: %s", err))
@@ -722,6 +1001,28 @@ func (r *EndpointResource) Update(ctx context.Context, req resource.UpdateReques
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
+	if v, ok := updated.Spec["dns_name"].(string); ok && v != "" {
+		data.DNSName = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["health_check_port"].(float64); ok {
+		data.HealthCheckPort = types.Int64Value(int64(v))
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["ip"].(string); ok && v != "" {
+		data.IP = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["port"].(float64); ok {
+		data.Port = types.Int64Value(int64(v))
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["protocol"].(string); ok && v != "" {
+		data.Protocol = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -734,6 +1035,7 @@ func (r *EndpointResource) Update(ctx context.Context, req resource.UpdateReques
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -760,6 +1062,15 @@ func (r *EndpointResource) Delete(ctx context.Context, req resource.DeleteReques
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "Endpoint already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "Endpoint delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

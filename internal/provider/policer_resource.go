@@ -12,6 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -49,14 +50,14 @@ type PolicerResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Annotations types.Map `tfsdk:"annotations"`
-	BurstSize types.Int64 `tfsdk:"burst_size"`
-	CommittedInformationRate types.Int64 `tfsdk:"committed_information_rate"`
 	Description types.String `tfsdk:"description"`
 	Disable types.Bool `tfsdk:"disable"`
 	Labels types.Map `tfsdk:"labels"`
+	ID types.String `tfsdk:"id"`
+	BurstSize types.Int64 `tfsdk:"burst_size"`
+	CommittedInformationRate types.Int64 `tfsdk:"committed_information_rate"`
 	PolicerMode types.String `tfsdk:"policer_mode"`
 	PolicerType types.String `tfsdk:"policer_type"`
-	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
 }
 
@@ -94,14 +95,6 @@ func (r *PolicerResource) Schema(ctx context.Context, req resource.SchemaRequest
 				Optional: true,
 				ElementType: types.StringType,
 			},
-			"burst_size": schema.Int64Attribute{
-				MarkdownDescription: "Burst Size(pps). The maximum size permitted for bursts of data. e.g. 10000 pps burst",
-				Optional: true,
-			},
-			"committed_information_rate": schema.Int64Attribute{
-				MarkdownDescription: "Committed Information Rate(pps). The committed information rate is the guaranteed packets rate for traffic arriving or departing under normal conditions. e.g. 10000 pps",
-				Optional: true,
-			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
 				Optional: true,
@@ -115,16 +108,40 @@ func (r *PolicerResource) Schema(ctx context.Context, req resource.SchemaRequest
 				Optional: true,
 				ElementType: types.StringType,
 			},
+			"id": schema.StringAttribute{
+				MarkdownDescription: "Unique identifier for the resource.",
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"burst_size": schema.Int64Attribute{
+				MarkdownDescription: "Burst Size(pps). The maximum size permitted for bursts of data. e.g. 10000 pps burst",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.Int64{
+					int64planmodifier.UseStateForUnknown(),
+				},
+			},
+			"committed_information_rate": schema.Int64Attribute{
+				MarkdownDescription: "Committed Information Rate(pps). The committed information rate is the guaranteed packets rate for traffic arriving or departing under normal conditions. e.g. 10000 pps",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.Int64{
+					int64planmodifier.UseStateForUnknown(),
+				},
+			},
 			"policer_mode": schema.StringAttribute{
 				MarkdownDescription: "Policer Mode. - POLICER_MODE_NOT_SHARED: Not Shared A separate policer instance is created for each reference to the policer - POLICER_MODE_SHARED: Shared A common policer instance is used for for all references to the policer. Possible values are `POLICER_MODE_NOT_SHARED`, `POLICER_MODE_SHARED`. Defaults to `POLICER_MODE_NOT_SHARED`.",
 				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
 			},
 			"policer_type": schema.StringAttribute{
 				MarkdownDescription: "Policer Type. Specifies the type of Policer Basic Single-Rate Two-Color Policer. The only possible value is `POLICER_SINGLE_RATE_TWO_COLOR`. Defaults to `POLICER_SINGLE_RATE_TWO_COLOR`.",
 				Optional: true,
-			},
-			"id": schema.StringAttribute{
-				MarkdownDescription: "Unique identifier for the resource.",
 				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
@@ -260,7 +277,7 @@ func (r *PolicerResource) Create(ctx context.Context, req resource.CreateRequest
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.PolicerSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -285,6 +302,21 @@ func (r *PolicerResource) Create(ctx context.Context, req resource.CreateRequest
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if !data.BurstSize.IsNull() && !data.BurstSize.IsUnknown() {
+		apiResource.Spec["burst_size"] = data.BurstSize.ValueInt64()
+	}
+	if !data.CommittedInformationRate.IsNull() && !data.CommittedInformationRate.IsUnknown() {
+		apiResource.Spec["committed_information_rate"] = data.CommittedInformationRate.ValueInt64()
+	}
+	if !data.PolicerMode.IsNull() && !data.PolicerMode.IsUnknown() {
+		apiResource.Spec["policer_mode"] = data.PolicerMode.ValueString()
+	}
+	if !data.PolicerType.IsNull() && !data.PolicerType.IsUnknown() {
+		apiResource.Spec["policer_type"] = data.PolicerType.ValueString()
+	}
+
+
 	created, err := r.client.CreatePolicer(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create Policer: %s", err))
@@ -293,8 +325,29 @@ func (r *PolicerResource) Create(ctx context.Context, req resource.CreateRequest
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+	if v, ok := created.Spec["burst_size"].(float64); ok {
+		data.BurstSize = types.Int64Value(int64(v))
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["committed_information_rate"].(float64); ok {
+		data.CommittedInformationRate = types.Int64Value(int64(v))
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["policer_mode"].(string); ok && v != "" {
+		data.PolicerMode = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["policer_type"].(string); ok && v != "" {
+		data.PolicerType = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created Policer resource")
@@ -373,9 +426,45 @@ func (r *PolicerResource) Read(ctx context.Context, req resource.ReadRequest, re
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if v, ok := apiResource.Spec["burst_size"].(float64); ok {
+		data.BurstSize = types.Int64Value(int64(v))
+	} else {
+		data.BurstSize = types.Int64Null()
+	}
+	if v, ok := apiResource.Spec["committed_information_rate"].(float64); ok {
+		data.CommittedInformationRate = types.Int64Value(int64(v))
+	} else {
+		data.CommittedInformationRate = types.Int64Null()
+	}
+	if v, ok := apiResource.Spec["policer_mode"].(string); ok && v != "" {
+		data.PolicerMode = types.StringValue(v)
+	} else {
+		data.PolicerMode = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["policer_type"].(string); ok && v != "" {
+		data.PolicerType = types.StringValue(v)
+	} else {
+		data.PolicerType = types.StringNull()
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -401,7 +490,7 @@ func (r *PolicerResource) Update(ctx context.Context, req resource.UpdateRequest
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.PolicerSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -426,6 +515,21 @@ func (r *PolicerResource) Update(ctx context.Context, req resource.UpdateRequest
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if !data.BurstSize.IsNull() && !data.BurstSize.IsUnknown() {
+		apiResource.Spec["burst_size"] = data.BurstSize.ValueInt64()
+	}
+	if !data.CommittedInformationRate.IsNull() && !data.CommittedInformationRate.IsUnknown() {
+		apiResource.Spec["committed_information_rate"] = data.CommittedInformationRate.ValueInt64()
+	}
+	if !data.PolicerMode.IsNull() && !data.PolicerMode.IsUnknown() {
+		apiResource.Spec["policer_mode"] = data.PolicerMode.ValueString()
+	}
+	if !data.PolicerType.IsNull() && !data.PolicerType.IsUnknown() {
+		apiResource.Spec["policer_type"] = data.PolicerType.ValueString()
+	}
+
+
 	updated, err := r.client.UpdatePolicer(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update Policer: %s", err))
@@ -434,6 +538,24 @@ func (r *PolicerResource) Update(ctx context.Context, req resource.UpdateRequest
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
+	if v, ok := updated.Spec["burst_size"].(float64); ok {
+		data.BurstSize = types.Int64Value(int64(v))
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["committed_information_rate"].(float64); ok {
+		data.CommittedInformationRate = types.Int64Value(int64(v))
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["policer_mode"].(string); ok && v != "" {
+		data.PolicerMode = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["policer_type"].(string); ok && v != "" {
+		data.PolicerType = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -446,6 +568,7 @@ func (r *PolicerResource) Update(ctx context.Context, req resource.UpdateRequest
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -472,6 +595,15 @@ func (r *PolicerResource) Delete(ctx context.Context, req resource.DeleteRequest
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "Policer already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "Policer delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

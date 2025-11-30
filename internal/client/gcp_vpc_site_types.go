@@ -10,13 +10,8 @@ import (
 
 // GCPVPCSite represents a F5XC GCPVPCSite
 type GCPVPCSite struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     GCPVPCSiteSpec `json:"spec"`
-}
-
-// GCPVPCSiteSpec defines the specification for GCPVPCSite
-type GCPVPCSiteSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateGCPVPCSite creates a new GCPVPCSite

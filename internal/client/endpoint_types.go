@@ -10,13 +10,8 @@ import (
 
 // Endpoint represents a F5XC Endpoint
 type Endpoint struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     EndpointSpec `json:"spec"`
-}
-
-// EndpointSpec defines the specification for Endpoint
-type EndpointSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateEndpoint creates a new Endpoint

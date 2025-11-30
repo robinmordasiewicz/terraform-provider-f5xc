@@ -10,13 +10,8 @@ import (
 
 // Cluster represents a F5XC Cluster
 type Cluster struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     ClusterSpec `json:"spec"`
-}
-
-// ClusterSpec defines the specification for Cluster
-type ClusterSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateCluster creates a new Cluster

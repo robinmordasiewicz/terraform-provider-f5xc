@@ -455,7 +455,7 @@ func (r *FastACLRuleResource) Create(ctx context.Context, req resource.CreateReq
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.FastACLRuleSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -480,6 +480,49 @@ func (r *FastACLRuleResource) Create(ctx context.Context, req resource.CreateReq
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.Action != nil {
+		actionMap := make(map[string]interface{})
+		if data.Action.PolicerAction != nil {
+			policer_actionNestedMap := make(map[string]interface{})
+			actionMap["policer_action"] = policer_actionNestedMap
+		}
+		if data.Action.ProtocolPolicerAction != nil {
+			protocol_policer_actionNestedMap := make(map[string]interface{})
+			actionMap["protocol_policer_action"] = protocol_policer_actionNestedMap
+		}
+		if !data.Action.SimpleAction.IsNull() && !data.Action.SimpleAction.IsUnknown() {
+			actionMap["simple_action"] = data.Action.SimpleAction.ValueString()
+		}
+		apiResource.Spec["action"] = actionMap
+	}
+	if data.IPPrefixSet != nil {
+		ip_prefix_setMap := make(map[string]interface{})
+		apiResource.Spec["ip_prefix_set"] = ip_prefix_setMap
+	}
+	if len(data.Port) > 0 {
+		var portList []map[string]interface{}
+		for _, item := range data.Port {
+			itemMap := make(map[string]interface{})
+			if item.All != nil {
+				itemMap["all"] = map[string]interface{}{}
+			}
+			if item.DNS != nil {
+				itemMap["dns"] = map[string]interface{}{}
+			}
+			if !item.UserDefined.IsNull() && !item.UserDefined.IsUnknown() {
+				itemMap["user_defined"] = item.UserDefined.ValueInt64()
+			}
+			portList = append(portList, itemMap)
+		}
+		apiResource.Spec["port"] = portList
+	}
+	if data.Prefix != nil {
+		prefixMap := make(map[string]interface{})
+		apiResource.Spec["prefix"] = prefixMap
+	}
+
+
 	created, err := r.client.CreateFastACLRule(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create FastACLRule: %s", err))
@@ -488,8 +531,13 @@ func (r *FastACLRuleResource) Create(ctx context.Context, req resource.CreateReq
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created FastACLRule resource")
@@ -568,9 +616,73 @@ func (r *FastACLRuleResource) Read(ctx context.Context, req resource.ReadRequest
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if blockData, ok := apiResource.Spec["action"].(map[string]interface{}); ok && (isImport || data.Action != nil) {
+		data.Action = &FastACLRuleActionModel{
+			SimpleAction: func() types.String {
+				if v, ok := blockData["simple_action"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["ip_prefix_set"].(map[string]interface{}); ok && isImport && data.IPPrefixSet == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.IPPrefixSet = &FastACLRuleIPPrefixSetModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["port"].([]interface{}); ok && len(listData) > 0 {
+		var portList []FastACLRulePortModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				portList = append(portList, FastACLRulePortModel{
+					All: func() *FastACLRuleEmptyModel {
+						if _, ok := itemMap["all"].(map[string]interface{}); ok {
+							return &FastACLRuleEmptyModel{}
+						}
+						return nil
+					}(),
+					DNS: func() *FastACLRuleEmptyModel {
+						if _, ok := itemMap["dns"].(map[string]interface{}); ok {
+							return &FastACLRuleEmptyModel{}
+						}
+						return nil
+					}(),
+					UserDefined: func() types.Int64 {
+						if v, ok := itemMap["user_defined"].(float64); ok {
+							return types.Int64Value(int64(v))
+						}
+						return types.Int64Null()
+					}(),
+				})
+			}
+		}
+		data.Port = portList
+	}
+	if _, ok := apiResource.Spec["prefix"].(map[string]interface{}); ok && isImport && data.Prefix == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Prefix = &FastACLRulePrefixModel{}
+	}
+	// Normal Read: preserve existing state value
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -596,7 +708,7 @@ func (r *FastACLRuleResource) Update(ctx context.Context, req resource.UpdateReq
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.FastACLRuleSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -621,6 +733,49 @@ func (r *FastACLRuleResource) Update(ctx context.Context, req resource.UpdateReq
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.Action != nil {
+		actionMap := make(map[string]interface{})
+		if data.Action.PolicerAction != nil {
+			policer_actionNestedMap := make(map[string]interface{})
+			actionMap["policer_action"] = policer_actionNestedMap
+		}
+		if data.Action.ProtocolPolicerAction != nil {
+			protocol_policer_actionNestedMap := make(map[string]interface{})
+			actionMap["protocol_policer_action"] = protocol_policer_actionNestedMap
+		}
+		if !data.Action.SimpleAction.IsNull() && !data.Action.SimpleAction.IsUnknown() {
+			actionMap["simple_action"] = data.Action.SimpleAction.ValueString()
+		}
+		apiResource.Spec["action"] = actionMap
+	}
+	if data.IPPrefixSet != nil {
+		ip_prefix_setMap := make(map[string]interface{})
+		apiResource.Spec["ip_prefix_set"] = ip_prefix_setMap
+	}
+	if len(data.Port) > 0 {
+		var portList []map[string]interface{}
+		for _, item := range data.Port {
+			itemMap := make(map[string]interface{})
+			if item.All != nil {
+				itemMap["all"] = map[string]interface{}{}
+			}
+			if item.DNS != nil {
+				itemMap["dns"] = map[string]interface{}{}
+			}
+			if !item.UserDefined.IsNull() && !item.UserDefined.IsUnknown() {
+				itemMap["user_defined"] = item.UserDefined.ValueInt64()
+			}
+			portList = append(portList, itemMap)
+		}
+		apiResource.Spec["port"] = portList
+	}
+	if data.Prefix != nil {
+		prefixMap := make(map[string]interface{})
+		apiResource.Spec["prefix"] = prefixMap
+	}
+
+
 	updated, err := r.client.UpdateFastACLRule(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update FastACLRule: %s", err))
@@ -629,6 +784,8 @@ func (r *FastACLRuleResource) Update(ctx context.Context, req resource.UpdateReq
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -641,6 +798,7 @@ func (r *FastACLRuleResource) Update(ctx context.Context, req resource.UpdateReq
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -667,6 +825,15 @@ func (r *FastACLRuleResource) Delete(ctx context.Context, req resource.DeleteReq
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "FastACLRule already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "FastACLRule delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

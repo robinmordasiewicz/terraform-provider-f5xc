@@ -124,8 +124,8 @@ type VoltshareAdminPolicyResourceModel struct {
 	Description types.String `tfsdk:"description"`
 	Disable types.Bool `tfsdk:"disable"`
 	Labels types.Map `tfsdk:"labels"`
-	MaxValidityDuration types.String `tfsdk:"max_validity_duration"`
 	ID types.String `tfsdk:"id"`
+	MaxValidityDuration types.String `tfsdk:"max_validity_duration"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
 	AuthorRestrictions *VoltshareAdminPolicyAuthorRestrictionsModel `tfsdk:"author_restrictions"`
 	UserRestrictions []VoltshareAdminPolicyUserRestrictionsModel `tfsdk:"user_restrictions"`
@@ -178,12 +178,16 @@ func (r *VoltshareAdminPolicyResource) Schema(ctx context.Context, req resource.
 				Optional: true,
 				ElementType: types.StringType,
 			},
+			"id": schema.StringAttribute{
+				MarkdownDescription: "Unique identifier for the resource.",
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
 			"max_validity_duration": schema.StringAttribute{
 				MarkdownDescription: "Maximum Duration for Validity. max_validity_duration contains the maximum amount of time a secret from any users from this team/tenant is valid. Value for this parameter is a string ending in the suffix 's' (indicating seconds), suffix 'm' (indicating minutes) or suffix 'h' (indicating hours)",
 				Optional: true,
-			},
-			"id": schema.StringAttribute{
-				MarkdownDescription: "Unique identifier for the resource.",
 				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
@@ -454,7 +458,7 @@ func (r *VoltshareAdminPolicyResource) Create(ctx context.Context, req resource.
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.VoltshareAdminPolicySpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -479,6 +483,51 @@ func (r *VoltshareAdminPolicyResource) Create(ctx context.Context, req resource.
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.AuthorRestrictions != nil {
+		author_restrictionsMap := make(map[string]interface{})
+		if data.AuthorRestrictions.AllowAll != nil {
+			author_restrictionsMap["allow_all"] = map[string]interface{}{}
+		}
+		if data.AuthorRestrictions.AllowList != nil {
+			allow_listNestedMap := make(map[string]interface{})
+			author_restrictionsMap["allow_list"] = allow_listNestedMap
+		}
+		if data.AuthorRestrictions.DenyAll != nil {
+			author_restrictionsMap["deny_all"] = map[string]interface{}{}
+		}
+		if data.AuthorRestrictions.DenyList != nil {
+			deny_listNestedMap := make(map[string]interface{})
+			author_restrictionsMap["deny_list"] = deny_listNestedMap
+		}
+		apiResource.Spec["author_restrictions"] = author_restrictionsMap
+	}
+	if len(data.UserRestrictions) > 0 {
+		var user_restrictionsList []map[string]interface{}
+		for _, item := range data.UserRestrictions {
+			itemMap := make(map[string]interface{})
+			if item.AllTenants != nil {
+				itemMap["all_tenants"] = map[string]interface{}{}
+			}
+			if item.IndividualUsers != nil {
+				itemMap["individual_users"] = map[string]interface{}{}
+			}
+			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+				itemMap["tenant"] = item.Tenant.ValueString()
+			}
+			if item.UserRestrictions != nil {
+				user_restrictionsNestedMap := make(map[string]interface{})
+				itemMap["user_restrictions"] = user_restrictionsNestedMap
+			}
+			user_restrictionsList = append(user_restrictionsList, itemMap)
+		}
+		apiResource.Spec["user_restrictions"] = user_restrictionsList
+	}
+	if !data.MaxValidityDuration.IsNull() && !data.MaxValidityDuration.IsUnknown() {
+		apiResource.Spec["max_validity_duration"] = data.MaxValidityDuration.ValueString()
+	}
+
+
 	created, err := r.client.CreateVoltshareAdminPolicy(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create VoltshareAdminPolicy: %s", err))
@@ -487,8 +536,17 @@ func (r *VoltshareAdminPolicyResource) Create(ctx context.Context, req resource.
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+	if v, ok := created.Spec["max_validity_duration"].(string); ok && v != "" {
+		data.MaxValidityDuration = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created VoltshareAdminPolicy resource")
@@ -567,9 +625,70 @@ func (r *VoltshareAdminPolicyResource) Read(ctx context.Context, req resource.Re
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if _, ok := apiResource.Spec["author_restrictions"].(map[string]interface{}); ok && isImport && data.AuthorRestrictions == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AuthorRestrictions = &VoltshareAdminPolicyAuthorRestrictionsModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["user_restrictions"].([]interface{}); ok && len(listData) > 0 {
+		var user_restrictionsList []VoltshareAdminPolicyUserRestrictionsModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				user_restrictionsList = append(user_restrictionsList, VoltshareAdminPolicyUserRestrictionsModel{
+					AllTenants: func() *VoltshareAdminPolicyEmptyModel {
+						if _, ok := itemMap["all_tenants"].(map[string]interface{}); ok {
+							return &VoltshareAdminPolicyEmptyModel{}
+						}
+						return nil
+					}(),
+					IndividualUsers: func() *VoltshareAdminPolicyEmptyModel {
+						if _, ok := itemMap["individual_users"].(map[string]interface{}); ok {
+							return &VoltshareAdminPolicyEmptyModel{}
+						}
+						return nil
+					}(),
+					Tenant: func() types.String {
+						if v, ok := itemMap["tenant"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					UserRestrictions: func() *VoltshareAdminPolicyUserRestrictionsUserRestrictionsModel {
+						if _, ok := itemMap["user_restrictions"].(map[string]interface{}); ok {
+							return &VoltshareAdminPolicyUserRestrictionsUserRestrictionsModel{
+							}
+						}
+						return nil
+					}(),
+				})
+			}
+		}
+		data.UserRestrictions = user_restrictionsList
+	}
+	if v, ok := apiResource.Spec["max_validity_duration"].(string); ok && v != "" {
+		data.MaxValidityDuration = types.StringValue(v)
+	} else {
+		data.MaxValidityDuration = types.StringNull()
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -595,7 +714,7 @@ func (r *VoltshareAdminPolicyResource) Update(ctx context.Context, req resource.
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.VoltshareAdminPolicySpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -620,6 +739,51 @@ func (r *VoltshareAdminPolicyResource) Update(ctx context.Context, req resource.
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.AuthorRestrictions != nil {
+		author_restrictionsMap := make(map[string]interface{})
+		if data.AuthorRestrictions.AllowAll != nil {
+			author_restrictionsMap["allow_all"] = map[string]interface{}{}
+		}
+		if data.AuthorRestrictions.AllowList != nil {
+			allow_listNestedMap := make(map[string]interface{})
+			author_restrictionsMap["allow_list"] = allow_listNestedMap
+		}
+		if data.AuthorRestrictions.DenyAll != nil {
+			author_restrictionsMap["deny_all"] = map[string]interface{}{}
+		}
+		if data.AuthorRestrictions.DenyList != nil {
+			deny_listNestedMap := make(map[string]interface{})
+			author_restrictionsMap["deny_list"] = deny_listNestedMap
+		}
+		apiResource.Spec["author_restrictions"] = author_restrictionsMap
+	}
+	if len(data.UserRestrictions) > 0 {
+		var user_restrictionsList []map[string]interface{}
+		for _, item := range data.UserRestrictions {
+			itemMap := make(map[string]interface{})
+			if item.AllTenants != nil {
+				itemMap["all_tenants"] = map[string]interface{}{}
+			}
+			if item.IndividualUsers != nil {
+				itemMap["individual_users"] = map[string]interface{}{}
+			}
+			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+				itemMap["tenant"] = item.Tenant.ValueString()
+			}
+			if item.UserRestrictions != nil {
+				user_restrictionsNestedMap := make(map[string]interface{})
+				itemMap["user_restrictions"] = user_restrictionsNestedMap
+			}
+			user_restrictionsList = append(user_restrictionsList, itemMap)
+		}
+		apiResource.Spec["user_restrictions"] = user_restrictionsList
+	}
+	if !data.MaxValidityDuration.IsNull() && !data.MaxValidityDuration.IsUnknown() {
+		apiResource.Spec["max_validity_duration"] = data.MaxValidityDuration.ValueString()
+	}
+
+
 	updated, err := r.client.UpdateVoltshareAdminPolicy(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update VoltshareAdminPolicy: %s", err))
@@ -628,6 +792,12 @@ func (r *VoltshareAdminPolicyResource) Update(ctx context.Context, req resource.
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
+	if v, ok := updated.Spec["max_validity_duration"].(string); ok && v != "" {
+		data.MaxValidityDuration = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -640,6 +810,7 @@ func (r *VoltshareAdminPolicyResource) Update(ctx context.Context, req resource.
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -666,6 +837,15 @@ func (r *VoltshareAdminPolicyResource) Delete(ctx context.Context, req resource.
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "VoltshareAdminPolicy already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "VoltshareAdminPolicy delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

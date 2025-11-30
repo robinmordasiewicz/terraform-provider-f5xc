@@ -316,7 +316,7 @@ func (r *VirtualK8SResource) Create(ctx context.Context, req resource.CreateRequ
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.VirtualK8SSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -341,6 +341,53 @@ func (r *VirtualK8SResource) Create(ctx context.Context, req resource.CreateRequ
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.DefaultFlavorRef != nil {
+		default_flavor_refMap := make(map[string]interface{})
+		if !data.DefaultFlavorRef.Name.IsNull() && !data.DefaultFlavorRef.Name.IsUnknown() {
+			default_flavor_refMap["name"] = data.DefaultFlavorRef.Name.ValueString()
+		}
+		if !data.DefaultFlavorRef.Namespace.IsNull() && !data.DefaultFlavorRef.Namespace.IsUnknown() {
+			default_flavor_refMap["namespace"] = data.DefaultFlavorRef.Namespace.ValueString()
+		}
+		if !data.DefaultFlavorRef.Tenant.IsNull() && !data.DefaultFlavorRef.Tenant.IsUnknown() {
+			default_flavor_refMap["tenant"] = data.DefaultFlavorRef.Tenant.ValueString()
+		}
+		apiResource.Spec["default_flavor_ref"] = default_flavor_refMap
+	}
+	if data.Disabled != nil {
+		disabledMap := make(map[string]interface{})
+		apiResource.Spec["disabled"] = disabledMap
+	}
+	if data.Isolated != nil {
+		isolatedMap := make(map[string]interface{})
+		apiResource.Spec["isolated"] = isolatedMap
+	}
+	if len(data.VsiteRefs) > 0 {
+		var vsite_refsList []map[string]interface{}
+		for _, item := range data.VsiteRefs {
+			itemMap := make(map[string]interface{})
+			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+				itemMap["kind"] = item.Kind.ValueString()
+			}
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+				itemMap["namespace"] = item.Namespace.ValueString()
+			}
+			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+				itemMap["tenant"] = item.Tenant.ValueString()
+			}
+			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+				itemMap["uid"] = item.Uid.ValueString()
+			}
+			vsite_refsList = append(vsite_refsList, itemMap)
+		}
+		apiResource.Spec["vsite_refs"] = vsite_refsList
+	}
+
+
 	created, err := r.client.CreateVirtualK8S(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create VirtualK8S: %s", err))
@@ -349,8 +396,13 @@ func (r *VirtualK8SResource) Create(ctx context.Context, req resource.CreateRequ
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created VirtualK8S resource")
@@ -429,9 +481,97 @@ func (r *VirtualK8SResource) Read(ctx context.Context, req resource.ReadRequest,
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if blockData, ok := apiResource.Spec["default_flavor_ref"].(map[string]interface{}); ok && (isImport || data.DefaultFlavorRef != nil) {
+		data.DefaultFlavorRef = &VirtualK8SDefaultFlavorRefModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["disabled"].(map[string]interface{}); ok && isImport && data.Disabled == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Disabled = &VirtualK8SEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["isolated"].(map[string]interface{}); ok && isImport && data.Isolated == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Isolated = &VirtualK8SEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["vsite_refs"].([]interface{}); ok && len(listData) > 0 {
+		var vsite_refsList []VirtualK8SVsiteRefsModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				vsite_refsList = append(vsite_refsList, VirtualK8SVsiteRefsModel{
+					Kind: func() types.String {
+						if v, ok := itemMap["kind"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Namespace: func() types.String {
+						if v, ok := itemMap["namespace"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Tenant: func() types.String {
+						if v, ok := itemMap["tenant"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Uid: func() types.String {
+						if v, ok := itemMap["uid"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.VsiteRefs = vsite_refsList
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -457,7 +597,7 @@ func (r *VirtualK8SResource) Update(ctx context.Context, req resource.UpdateRequ
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.VirtualK8SSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -482,6 +622,53 @@ func (r *VirtualK8SResource) Update(ctx context.Context, req resource.UpdateRequ
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.DefaultFlavorRef != nil {
+		default_flavor_refMap := make(map[string]interface{})
+		if !data.DefaultFlavorRef.Name.IsNull() && !data.DefaultFlavorRef.Name.IsUnknown() {
+			default_flavor_refMap["name"] = data.DefaultFlavorRef.Name.ValueString()
+		}
+		if !data.DefaultFlavorRef.Namespace.IsNull() && !data.DefaultFlavorRef.Namespace.IsUnknown() {
+			default_flavor_refMap["namespace"] = data.DefaultFlavorRef.Namespace.ValueString()
+		}
+		if !data.DefaultFlavorRef.Tenant.IsNull() && !data.DefaultFlavorRef.Tenant.IsUnknown() {
+			default_flavor_refMap["tenant"] = data.DefaultFlavorRef.Tenant.ValueString()
+		}
+		apiResource.Spec["default_flavor_ref"] = default_flavor_refMap
+	}
+	if data.Disabled != nil {
+		disabledMap := make(map[string]interface{})
+		apiResource.Spec["disabled"] = disabledMap
+	}
+	if data.Isolated != nil {
+		isolatedMap := make(map[string]interface{})
+		apiResource.Spec["isolated"] = isolatedMap
+	}
+	if len(data.VsiteRefs) > 0 {
+		var vsite_refsList []map[string]interface{}
+		for _, item := range data.VsiteRefs {
+			itemMap := make(map[string]interface{})
+			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+				itemMap["kind"] = item.Kind.ValueString()
+			}
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+				itemMap["namespace"] = item.Namespace.ValueString()
+			}
+			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+				itemMap["tenant"] = item.Tenant.ValueString()
+			}
+			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+				itemMap["uid"] = item.Uid.ValueString()
+			}
+			vsite_refsList = append(vsite_refsList, itemMap)
+		}
+		apiResource.Spec["vsite_refs"] = vsite_refsList
+	}
+
+
 	updated, err := r.client.UpdateVirtualK8S(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update VirtualK8S: %s", err))
@@ -490,6 +677,8 @@ func (r *VirtualK8SResource) Update(ctx context.Context, req resource.UpdateRequ
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -502,6 +691,7 @@ func (r *VirtualK8SResource) Update(ctx context.Context, req resource.UpdateRequ
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -528,6 +718,15 @@ func (r *VirtualK8SResource) Delete(ctx context.Context, req resource.DeleteRequ
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "VirtualK8S already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "VirtualK8S delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

@@ -10,19 +10,14 @@ import (
 
 // SecretPolicyRule represents a F5XC SecretPolicyRule
 type SecretPolicyRule struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     SecretPolicyRuleSpec `json:"spec"`
-}
-
-// SecretPolicyRuleSpec defines the specification for SecretPolicyRule
-type SecretPolicyRuleSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateSecretPolicyRule creates a new SecretPolicyRule
 func (c *Client) CreateSecretPolicyRule(ctx context.Context, resource *SecretPolicyRule) (*SecretPolicyRule, error) {
 	var result SecretPolicyRule
-	path := fmt.Sprintf("/api/config/namespaces/%s/secret_policy_rules", resource.Metadata.Namespace)
+	path := fmt.Sprintf("/api/secret_management/namespaces/%s/secret_policy_rules", resource.Metadata.Namespace)
 	err := c.Post(ctx, path, resource, &result)
 	return &result, err
 }
@@ -30,7 +25,7 @@ func (c *Client) CreateSecretPolicyRule(ctx context.Context, resource *SecretPol
 // GetSecretPolicyRule retrieves a SecretPolicyRule
 func (c *Client) GetSecretPolicyRule(ctx context.Context, namespace, name string) (*SecretPolicyRule, error) {
 	var result SecretPolicyRule
-	path := fmt.Sprintf("/api/config/namespaces/%s/secret_policy_rules/%s", namespace, name)
+	path := fmt.Sprintf("/api/secret_management/namespaces/%s/secret_policy_rules/%s", namespace, name)
 	err := c.Get(ctx, path, &result)
 	return &result, err
 }
@@ -38,13 +33,13 @@ func (c *Client) GetSecretPolicyRule(ctx context.Context, namespace, name string
 // UpdateSecretPolicyRule updates a SecretPolicyRule
 func (c *Client) UpdateSecretPolicyRule(ctx context.Context, resource *SecretPolicyRule) (*SecretPolicyRule, error) {
 	var result SecretPolicyRule
-	path := fmt.Sprintf("/api/config/namespaces/%s/secret_policy_rules/%s", resource.Metadata.Namespace, resource.Metadata.Name)
+	path := fmt.Sprintf("/api/secret_management/namespaces/%s/secret_policy_rules/%s", resource.Metadata.Namespace, resource.Metadata.Name)
 	err := c.Put(ctx, path, resource, &result)
 	return &result, err
 }
 
 // DeleteSecretPolicyRule deletes a SecretPolicyRule
 func (c *Client) DeleteSecretPolicyRule(ctx context.Context, namespace, name string) error {
-	path := fmt.Sprintf("/api/config/namespaces/%s/secret_policy_rules/%s", namespace, name)
+	path := fmt.Sprintf("/api/secret_management/namespaces/%s/secret_policy_rules/%s", namespace, name)
 	return c.Delete(ctx, path)
 }

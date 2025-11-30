@@ -10,13 +10,8 @@ import (
 
 // ForwardingClass represents a F5XC ForwardingClass
 type ForwardingClass struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     ForwardingClassSpec `json:"spec"`
-}
-
-// ForwardingClassSpec defines the specification for ForwardingClass
-type ForwardingClassSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateForwardingClass creates a new ForwardingClass

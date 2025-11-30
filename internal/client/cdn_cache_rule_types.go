@@ -10,13 +10,8 @@ import (
 
 // CDNCacheRule represents a F5XC CDNCacheRule
 type CDNCacheRule struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     CDNCacheRuleSpec `json:"spec"`
-}
-
-// CDNCacheRuleSpec defines the specification for CDNCacheRule
-type CDNCacheRuleSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateCDNCacheRule creates a new CDNCacheRule

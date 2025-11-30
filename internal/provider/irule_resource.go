@@ -51,9 +51,10 @@ type IruleResourceModel struct {
 	Annotations types.Map `tfsdk:"annotations"`
 	Description types.String `tfsdk:"description"`
 	Disable types.Bool `tfsdk:"disable"`
-	Irule types.String `tfsdk:"irule"`
 	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
+	Irule types.String `tfsdk:"irule"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
 }
 
@@ -92,15 +93,11 @@ func (r *IruleResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				ElementType: types.StringType,
 			},
 			"description": schema.StringAttribute{
-				MarkdownDescription: "Description for iRule. Specify Description for iRule",
+				MarkdownDescription: "Human readable description for the object.",
 				Optional: true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
-			},
-			"irule": schema.StringAttribute{
-				MarkdownDescription: "irule. x-example: 'when DNS_REQUEST { if {([string tolower [DNS::question name]] equals 'www.internal.example.f5.com')} DNS::drop} irule content",
 				Optional: true,
 			},
 			"labels": schema.MapAttribute{
@@ -110,6 +107,22 @@ func (r *IruleResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"description_spec": schema.StringAttribute{
+				MarkdownDescription: "Description for iRule. Specify Description for iRule",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"irule": schema.StringAttribute{
+				MarkdownDescription: "irule. x-example: 'when DNS_REQUEST { if {([string tolower [DNS::question name]] equals 'www.internal.example.f5.com')} DNS::drop} irule content",
+				Optional: true,
 				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
@@ -245,7 +258,7 @@ func (r *IruleResource) Create(ctx context.Context, req resource.CreateRequest, 
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.IruleSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -270,6 +283,15 @@ func (r *IruleResource) Create(ctx context.Context, req resource.CreateRequest, 
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if !data.DescriptionSpec.IsNull() && !data.DescriptionSpec.IsUnknown() {
+		apiResource.Spec["description"] = data.DescriptionSpec.ValueString()
+	}
+	if !data.Irule.IsNull() && !data.Irule.IsUnknown() {
+		apiResource.Spec["irule"] = data.Irule.ValueString()
+	}
+
+
 	created, err := r.client.CreateIrule(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create Irule: %s", err))
@@ -278,8 +300,21 @@ func (r *IruleResource) Create(ctx context.Context, req resource.CreateRequest, 
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+	if v, ok := created.Spec["description"].(string); ok && v != "" {
+		data.DescriptionSpec = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["irule"].(string); ok && v != "" {
+		data.Irule = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created Irule resource")
@@ -358,9 +393,35 @@ func (r *IruleResource) Read(ctx context.Context, req resource.ReadRequest, resp
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if v, ok := apiResource.Spec["description"].(string); ok && v != "" {
+		data.DescriptionSpec = types.StringValue(v)
+	} else {
+		data.DescriptionSpec = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["irule"].(string); ok && v != "" {
+		data.Irule = types.StringValue(v)
+	} else {
+		data.Irule = types.StringNull()
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -386,7 +447,7 @@ func (r *IruleResource) Update(ctx context.Context, req resource.UpdateRequest, 
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.IruleSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -411,6 +472,15 @@ func (r *IruleResource) Update(ctx context.Context, req resource.UpdateRequest, 
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if !data.DescriptionSpec.IsNull() && !data.DescriptionSpec.IsUnknown() {
+		apiResource.Spec["description"] = data.DescriptionSpec.ValueString()
+	}
+	if !data.Irule.IsNull() && !data.Irule.IsUnknown() {
+		apiResource.Spec["irule"] = data.Irule.ValueString()
+	}
+
+
 	updated, err := r.client.UpdateIrule(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update Irule: %s", err))
@@ -419,6 +489,16 @@ func (r *IruleResource) Update(ctx context.Context, req resource.UpdateRequest, 
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
+	if v, ok := updated.Spec["description"].(string); ok && v != "" {
+		data.DescriptionSpec = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["irule"].(string); ok && v != "" {
+		data.Irule = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -431,6 +511,7 @@ func (r *IruleResource) Update(ctx context.Context, req resource.UpdateRequest, 
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -457,6 +538,15 @@ func (r *IruleResource) Delete(ctx context.Context, req resource.DeleteRequest, 
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "Irule already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "Irule delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

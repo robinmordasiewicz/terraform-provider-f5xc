@@ -138,7 +138,7 @@ type ServicePolicyRuleListRulesModel struct {
 
 // ServicePolicyRuleListRulesMetadataModel represents metadata block
 type ServicePolicyRuleListRulesMetadataModel struct {
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name types.String `tfsdk:"name"`
 }
 
@@ -515,8 +515,8 @@ type ServicePolicyResourceModel struct {
 	Description types.String `tfsdk:"description"`
 	Disable types.Bool `tfsdk:"disable"`
 	Labels types.Map `tfsdk:"labels"`
-	ServerName types.String `tfsdk:"server_name"`
 	ID types.String `tfsdk:"id"`
+	ServerName types.String `tfsdk:"server_name"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
 	AllowAllRequests *ServicePolicyEmptyModel `tfsdk:"allow_all_requests"`
 	AllowList *ServicePolicyAllowListModel `tfsdk:"allow_list"`
@@ -575,12 +575,16 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 				Optional: true,
 				ElementType: types.StringType,
 			},
+			"id": schema.StringAttribute{
+				MarkdownDescription: "Unique identifier for the resource.",
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
 			"server_name": schema.StringAttribute{
 				MarkdownDescription: "Server Name. The expected name of the server to which the request API is directed. The actual names for the server are extracted from the HTTP Host header and the name of the virtual_host to which the request is directed. If the request is directed to a virtual K8s service, the actual names also contain the name of that service. The predicate evaluates to true if any of the actual names is the same as the expected server name.",
 				Optional: true,
-			},
-			"id": schema.StringAttribute{
-				MarkdownDescription: "Unique identifier for the resource.",
 				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
@@ -623,7 +627,7 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 							"as_numbers": schema.ListAttribute{
 								MarkdownDescription: "AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
 								Optional: true,
-								ElementType: types.StringType,
+								ElementType: types.Int64Type,
 							},
 						},
 					},
@@ -719,7 +723,7 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 							"as_numbers": schema.ListAttribute{
 								MarkdownDescription: "AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
 								Optional: true,
-								ElementType: types.StringType,
+								ElementType: types.Int64Type,
 							},
 						},
 					},
@@ -797,7 +801,7 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 								"metadata": schema.SingleNestedBlock{
 									MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 									Attributes: map[string]schema.Attribute{
-										"description": schema.StringAttribute{
+										"description_spec": schema.StringAttribute{
 											MarkdownDescription: "Description. Human readable description.",
 											Optional: true,
 										},
@@ -896,7 +900,7 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 												"as_numbers": schema.ListAttribute{
 													MarkdownDescription: "AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
 													Optional: true,
-													ElementType: types.StringType,
+													ElementType: types.Int64Type,
 												},
 											},
 										},
@@ -1792,7 +1796,7 @@ func (r *ServicePolicyResource) Create(ctx context.Context, req resource.CreateR
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.ServicePolicySpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -1817,6 +1821,78 @@ func (r *ServicePolicyResource) Create(ctx context.Context, req resource.CreateR
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.AllowAllRequests != nil {
+		allow_all_requestsMap := make(map[string]interface{})
+		apiResource.Spec["allow_all_requests"] = allow_all_requestsMap
+	}
+	if data.AllowList != nil {
+		allow_listMap := make(map[string]interface{})
+		if data.AllowList.AsnList != nil {
+			asn_listNestedMap := make(map[string]interface{})
+			allow_listMap["asn_list"] = asn_listNestedMap
+		}
+		if data.AllowList.DefaultActionAllow != nil {
+			allow_listMap["default_action_allow"] = map[string]interface{}{}
+		}
+		if data.AllowList.DefaultActionDeny != nil {
+			allow_listMap["default_action_deny"] = map[string]interface{}{}
+		}
+		if data.AllowList.DefaultActionNextPolicy != nil {
+			allow_listMap["default_action_next_policy"] = map[string]interface{}{}
+		}
+		if data.AllowList.PrefixList != nil {
+			prefix_listNestedMap := make(map[string]interface{})
+			allow_listMap["prefix_list"] = prefix_listNestedMap
+		}
+		apiResource.Spec["allow_list"] = allow_listMap
+	}
+	if data.AnyServer != nil {
+		any_serverMap := make(map[string]interface{})
+		apiResource.Spec["any_server"] = any_serverMap
+	}
+	if data.DenyAllRequests != nil {
+		deny_all_requestsMap := make(map[string]interface{})
+		apiResource.Spec["deny_all_requests"] = deny_all_requestsMap
+	}
+	if data.DenyList != nil {
+		deny_listMap := make(map[string]interface{})
+		if data.DenyList.AsnList != nil {
+			asn_listNestedMap := make(map[string]interface{})
+			deny_listMap["asn_list"] = asn_listNestedMap
+		}
+		if data.DenyList.DefaultActionAllow != nil {
+			deny_listMap["default_action_allow"] = map[string]interface{}{}
+		}
+		if data.DenyList.DefaultActionDeny != nil {
+			deny_listMap["default_action_deny"] = map[string]interface{}{}
+		}
+		if data.DenyList.DefaultActionNextPolicy != nil {
+			deny_listMap["default_action_next_policy"] = map[string]interface{}{}
+		}
+		if data.DenyList.PrefixList != nil {
+			prefix_listNestedMap := make(map[string]interface{})
+			deny_listMap["prefix_list"] = prefix_listNestedMap
+		}
+		apiResource.Spec["deny_list"] = deny_listMap
+	}
+	if data.RuleList != nil {
+		rule_listMap := make(map[string]interface{})
+		apiResource.Spec["rule_list"] = rule_listMap
+	}
+	if data.ServerNameMatcher != nil {
+		server_name_matcherMap := make(map[string]interface{})
+		apiResource.Spec["server_name_matcher"] = server_name_matcherMap
+	}
+	if data.ServerSelector != nil {
+		server_selectorMap := make(map[string]interface{})
+		apiResource.Spec["server_selector"] = server_selectorMap
+	}
+	if !data.ServerName.IsNull() && !data.ServerName.IsUnknown() {
+		apiResource.Spec["server_name"] = data.ServerName.ValueString()
+	}
+
+
 	created, err := r.client.CreateServicePolicy(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create ServicePolicy: %s", err))
@@ -1825,8 +1901,17 @@ func (r *ServicePolicyResource) Create(ctx context.Context, req resource.CreateR
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+	if v, ok := created.Spec["server_name"].(string); ok && v != "" {
+		data.ServerName = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created ServicePolicy resource")
@@ -1905,9 +1990,70 @@ func (r *ServicePolicyResource) Read(ctx context.Context, req resource.ReadReque
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if _, ok := apiResource.Spec["allow_all_requests"].(map[string]interface{}); ok && isImport && data.AllowAllRequests == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AllowAllRequests = &ServicePolicyEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["allow_list"].(map[string]interface{}); ok && isImport && data.AllowList == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AllowList = &ServicePolicyAllowListModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["any_server"].(map[string]interface{}); ok && isImport && data.AnyServer == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AnyServer = &ServicePolicyEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["deny_all_requests"].(map[string]interface{}); ok && isImport && data.DenyAllRequests == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DenyAllRequests = &ServicePolicyEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["deny_list"].(map[string]interface{}); ok && isImport && data.DenyList == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DenyList = &ServicePolicyDenyListModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["rule_list"].(map[string]interface{}); ok && isImport && data.RuleList == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.RuleList = &ServicePolicyRuleListModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["server_name_matcher"].(map[string]interface{}); ok && isImport && data.ServerNameMatcher == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ServerNameMatcher = &ServicePolicyServerNameMatcherModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["server_selector"].(map[string]interface{}); ok && isImport && data.ServerSelector == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ServerSelector = &ServicePolicyServerSelectorModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["server_name"].(string); ok && v != "" {
+		data.ServerName = types.StringValue(v)
+	} else {
+		data.ServerName = types.StringNull()
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -1933,7 +2079,7 @@ func (r *ServicePolicyResource) Update(ctx context.Context, req resource.UpdateR
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.ServicePolicySpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -1958,6 +2104,78 @@ func (r *ServicePolicyResource) Update(ctx context.Context, req resource.UpdateR
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.AllowAllRequests != nil {
+		allow_all_requestsMap := make(map[string]interface{})
+		apiResource.Spec["allow_all_requests"] = allow_all_requestsMap
+	}
+	if data.AllowList != nil {
+		allow_listMap := make(map[string]interface{})
+		if data.AllowList.AsnList != nil {
+			asn_listNestedMap := make(map[string]interface{})
+			allow_listMap["asn_list"] = asn_listNestedMap
+		}
+		if data.AllowList.DefaultActionAllow != nil {
+			allow_listMap["default_action_allow"] = map[string]interface{}{}
+		}
+		if data.AllowList.DefaultActionDeny != nil {
+			allow_listMap["default_action_deny"] = map[string]interface{}{}
+		}
+		if data.AllowList.DefaultActionNextPolicy != nil {
+			allow_listMap["default_action_next_policy"] = map[string]interface{}{}
+		}
+		if data.AllowList.PrefixList != nil {
+			prefix_listNestedMap := make(map[string]interface{})
+			allow_listMap["prefix_list"] = prefix_listNestedMap
+		}
+		apiResource.Spec["allow_list"] = allow_listMap
+	}
+	if data.AnyServer != nil {
+		any_serverMap := make(map[string]interface{})
+		apiResource.Spec["any_server"] = any_serverMap
+	}
+	if data.DenyAllRequests != nil {
+		deny_all_requestsMap := make(map[string]interface{})
+		apiResource.Spec["deny_all_requests"] = deny_all_requestsMap
+	}
+	if data.DenyList != nil {
+		deny_listMap := make(map[string]interface{})
+		if data.DenyList.AsnList != nil {
+			asn_listNestedMap := make(map[string]interface{})
+			deny_listMap["asn_list"] = asn_listNestedMap
+		}
+		if data.DenyList.DefaultActionAllow != nil {
+			deny_listMap["default_action_allow"] = map[string]interface{}{}
+		}
+		if data.DenyList.DefaultActionDeny != nil {
+			deny_listMap["default_action_deny"] = map[string]interface{}{}
+		}
+		if data.DenyList.DefaultActionNextPolicy != nil {
+			deny_listMap["default_action_next_policy"] = map[string]interface{}{}
+		}
+		if data.DenyList.PrefixList != nil {
+			prefix_listNestedMap := make(map[string]interface{})
+			deny_listMap["prefix_list"] = prefix_listNestedMap
+		}
+		apiResource.Spec["deny_list"] = deny_listMap
+	}
+	if data.RuleList != nil {
+		rule_listMap := make(map[string]interface{})
+		apiResource.Spec["rule_list"] = rule_listMap
+	}
+	if data.ServerNameMatcher != nil {
+		server_name_matcherMap := make(map[string]interface{})
+		apiResource.Spec["server_name_matcher"] = server_name_matcherMap
+	}
+	if data.ServerSelector != nil {
+		server_selectorMap := make(map[string]interface{})
+		apiResource.Spec["server_selector"] = server_selectorMap
+	}
+	if !data.ServerName.IsNull() && !data.ServerName.IsUnknown() {
+		apiResource.Spec["server_name"] = data.ServerName.ValueString()
+	}
+
+
 	updated, err := r.client.UpdateServicePolicy(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update ServicePolicy: %s", err))
@@ -1966,6 +2184,12 @@ func (r *ServicePolicyResource) Update(ctx context.Context, req resource.UpdateR
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
+	if v, ok := updated.Spec["server_name"].(string); ok && v != "" {
+		data.ServerName = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -1978,6 +2202,7 @@ func (r *ServicePolicyResource) Update(ctx context.Context, req resource.UpdateR
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -2004,6 +2229,15 @@ func (r *ServicePolicyResource) Delete(ctx context.Context, req resource.DeleteR
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "ServicePolicy already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "ServicePolicy delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

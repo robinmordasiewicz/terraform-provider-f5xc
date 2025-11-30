@@ -10,13 +10,8 @@ import (
 
 // APITesting represents a F5XC APITesting
 type APITesting struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     APITestingSpec `json:"spec"`
-}
-
-// APITestingSpec defines the specification for APITesting
-type APITestingSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateAPITesting creates a new APITesting

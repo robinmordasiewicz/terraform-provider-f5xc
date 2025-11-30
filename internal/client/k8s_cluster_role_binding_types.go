@@ -10,13 +10,8 @@ import (
 
 // K8SClusterRoleBinding represents a F5XC K8SClusterRoleBinding
 type K8SClusterRoleBinding struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     K8SClusterRoleBindingSpec `json:"spec"`
-}
-
-// K8SClusterRoleBindingSpec defines the specification for K8SClusterRoleBinding
-type K8SClusterRoleBindingSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateK8SClusterRoleBinding creates a new K8SClusterRoleBinding

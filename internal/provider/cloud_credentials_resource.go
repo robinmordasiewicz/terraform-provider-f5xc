@@ -609,7 +609,7 @@ func (r *CloudCredentialsResource) Create(ctx context.Context, req resource.Crea
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.CloudCredentialsSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -634,6 +634,90 @@ func (r *CloudCredentialsResource) Create(ctx context.Context, req resource.Crea
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.AWSAssumeRole != nil {
+		aws_assume_roleMap := make(map[string]interface{})
+		if !data.AWSAssumeRole.CustomExternalID.IsNull() && !data.AWSAssumeRole.CustomExternalID.IsUnknown() {
+			aws_assume_roleMap["custom_external_id"] = data.AWSAssumeRole.CustomExternalID.ValueString()
+		}
+		if !data.AWSAssumeRole.DurationSeconds.IsNull() && !data.AWSAssumeRole.DurationSeconds.IsUnknown() {
+			aws_assume_roleMap["duration_seconds"] = data.AWSAssumeRole.DurationSeconds.ValueInt64()
+		}
+		if data.AWSAssumeRole.ExternalIDIsOptional != nil {
+			aws_assume_roleMap["external_id_is_optional"] = map[string]interface{}{}
+		}
+		if data.AWSAssumeRole.ExternalIDIsTenantID != nil {
+			aws_assume_roleMap["external_id_is_tenant_id"] = map[string]interface{}{}
+		}
+		if !data.AWSAssumeRole.RoleArn.IsNull() && !data.AWSAssumeRole.RoleArn.IsUnknown() {
+			aws_assume_roleMap["role_arn"] = data.AWSAssumeRole.RoleArn.ValueString()
+		}
+		if !data.AWSAssumeRole.SessionName.IsNull() && !data.AWSAssumeRole.SessionName.IsUnknown() {
+			aws_assume_roleMap["session_name"] = data.AWSAssumeRole.SessionName.ValueString()
+		}
+		if data.AWSAssumeRole.SessionTags != nil {
+			aws_assume_roleMap["session_tags"] = map[string]interface{}{}
+		}
+		apiResource.Spec["aws_assume_role"] = aws_assume_roleMap
+	}
+	if data.AWSSecretKey != nil {
+		aws_secret_keyMap := make(map[string]interface{})
+		if !data.AWSSecretKey.AccessKey.IsNull() && !data.AWSSecretKey.AccessKey.IsUnknown() {
+			aws_secret_keyMap["access_key"] = data.AWSSecretKey.AccessKey.ValueString()
+		}
+		if data.AWSSecretKey.SecretKey != nil {
+			secret_keyNestedMap := make(map[string]interface{})
+			aws_secret_keyMap["secret_key"] = secret_keyNestedMap
+		}
+		apiResource.Spec["aws_secret_key"] = aws_secret_keyMap
+	}
+	if data.AzureClientSecret != nil {
+		azure_client_secretMap := make(map[string]interface{})
+		if !data.AzureClientSecret.ClientID.IsNull() && !data.AzureClientSecret.ClientID.IsUnknown() {
+			azure_client_secretMap["client_id"] = data.AzureClientSecret.ClientID.ValueString()
+		}
+		if data.AzureClientSecret.ClientSecret != nil {
+			client_secretNestedMap := make(map[string]interface{})
+			azure_client_secretMap["client_secret"] = client_secretNestedMap
+		}
+		if !data.AzureClientSecret.SubscriptionID.IsNull() && !data.AzureClientSecret.SubscriptionID.IsUnknown() {
+			azure_client_secretMap["subscription_id"] = data.AzureClientSecret.SubscriptionID.ValueString()
+		}
+		if !data.AzureClientSecret.TenantID.IsNull() && !data.AzureClientSecret.TenantID.IsUnknown() {
+			azure_client_secretMap["tenant_id"] = data.AzureClientSecret.TenantID.ValueString()
+		}
+		apiResource.Spec["azure_client_secret"] = azure_client_secretMap
+	}
+	if data.AzurePfxCertificate != nil {
+		azure_pfx_certificateMap := make(map[string]interface{})
+		if !data.AzurePfxCertificate.CertificateURL.IsNull() && !data.AzurePfxCertificate.CertificateURL.IsUnknown() {
+			azure_pfx_certificateMap["certificate_url"] = data.AzurePfxCertificate.CertificateURL.ValueString()
+		}
+		if !data.AzurePfxCertificate.ClientID.IsNull() && !data.AzurePfxCertificate.ClientID.IsUnknown() {
+			azure_pfx_certificateMap["client_id"] = data.AzurePfxCertificate.ClientID.ValueString()
+		}
+		if data.AzurePfxCertificate.Password != nil {
+			passwordNestedMap := make(map[string]interface{})
+			azure_pfx_certificateMap["password"] = passwordNestedMap
+		}
+		if !data.AzurePfxCertificate.SubscriptionID.IsNull() && !data.AzurePfxCertificate.SubscriptionID.IsUnknown() {
+			azure_pfx_certificateMap["subscription_id"] = data.AzurePfxCertificate.SubscriptionID.ValueString()
+		}
+		if !data.AzurePfxCertificate.TenantID.IsNull() && !data.AzurePfxCertificate.TenantID.IsUnknown() {
+			azure_pfx_certificateMap["tenant_id"] = data.AzurePfxCertificate.TenantID.ValueString()
+		}
+		apiResource.Spec["azure_pfx_certificate"] = azure_pfx_certificateMap
+	}
+	if data.GCPCredFile != nil {
+		gcp_cred_fileMap := make(map[string]interface{})
+		if data.GCPCredFile.CredentialFile != nil {
+			credential_fileNestedMap := make(map[string]interface{})
+			gcp_cred_fileMap["credential_file"] = credential_fileNestedMap
+		}
+		apiResource.Spec["gcp_cred_file"] = gcp_cred_fileMap
+	}
+
+
 	created, err := r.client.CreateCloudCredentials(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create CloudCredentials: %s", err))
@@ -642,8 +726,13 @@ func (r *CloudCredentialsResource) Create(ctx context.Context, req resource.Crea
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created CloudCredentials resource")
@@ -722,9 +811,118 @@ func (r *CloudCredentialsResource) Read(ctx context.Context, req resource.ReadRe
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if blockData, ok := apiResource.Spec["aws_assume_role"].(map[string]interface{}); ok && (isImport || data.AWSAssumeRole != nil) {
+		data.AWSAssumeRole = &CloudCredentialsAWSAssumeRoleModel{
+			CustomExternalID: func() types.String {
+				if v, ok := blockData["custom_external_id"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			DurationSeconds: func() types.Int64 {
+				if v, ok := blockData["duration_seconds"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			RoleArn: func() types.String {
+				if v, ok := blockData["role_arn"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			SessionName: func() types.String {
+				if v, ok := blockData["session_name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["aws_secret_key"].(map[string]interface{}); ok && (isImport || data.AWSSecretKey != nil) {
+		data.AWSSecretKey = &CloudCredentialsAWSSecretKeyModel{
+			AccessKey: func() types.String {
+				if v, ok := blockData["access_key"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["azure_client_secret"].(map[string]interface{}); ok && (isImport || data.AzureClientSecret != nil) {
+		data.AzureClientSecret = &CloudCredentialsAzureClientSecretModel{
+			ClientID: func() types.String {
+				if v, ok := blockData["client_id"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			SubscriptionID: func() types.String {
+				if v, ok := blockData["subscription_id"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			TenantID: func() types.String {
+				if v, ok := blockData["tenant_id"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["azure_pfx_certificate"].(map[string]interface{}); ok && (isImport || data.AzurePfxCertificate != nil) {
+		data.AzurePfxCertificate = &CloudCredentialsAzurePfxCertificateModel{
+			CertificateURL: func() types.String {
+				if v, ok := blockData["certificate_url"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			ClientID: func() types.String {
+				if v, ok := blockData["client_id"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			SubscriptionID: func() types.String {
+				if v, ok := blockData["subscription_id"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			TenantID: func() types.String {
+				if v, ok := blockData["tenant_id"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["gcp_cred_file"].(map[string]interface{}); ok && isImport && data.GCPCredFile == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.GCPCredFile = &CloudCredentialsGCPCredFileModel{}
+	}
+	// Normal Read: preserve existing state value
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -750,7 +948,7 @@ func (r *CloudCredentialsResource) Update(ctx context.Context, req resource.Upda
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.CloudCredentialsSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -775,6 +973,90 @@ func (r *CloudCredentialsResource) Update(ctx context.Context, req resource.Upda
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.AWSAssumeRole != nil {
+		aws_assume_roleMap := make(map[string]interface{})
+		if !data.AWSAssumeRole.CustomExternalID.IsNull() && !data.AWSAssumeRole.CustomExternalID.IsUnknown() {
+			aws_assume_roleMap["custom_external_id"] = data.AWSAssumeRole.CustomExternalID.ValueString()
+		}
+		if !data.AWSAssumeRole.DurationSeconds.IsNull() && !data.AWSAssumeRole.DurationSeconds.IsUnknown() {
+			aws_assume_roleMap["duration_seconds"] = data.AWSAssumeRole.DurationSeconds.ValueInt64()
+		}
+		if data.AWSAssumeRole.ExternalIDIsOptional != nil {
+			aws_assume_roleMap["external_id_is_optional"] = map[string]interface{}{}
+		}
+		if data.AWSAssumeRole.ExternalIDIsTenantID != nil {
+			aws_assume_roleMap["external_id_is_tenant_id"] = map[string]interface{}{}
+		}
+		if !data.AWSAssumeRole.RoleArn.IsNull() && !data.AWSAssumeRole.RoleArn.IsUnknown() {
+			aws_assume_roleMap["role_arn"] = data.AWSAssumeRole.RoleArn.ValueString()
+		}
+		if !data.AWSAssumeRole.SessionName.IsNull() && !data.AWSAssumeRole.SessionName.IsUnknown() {
+			aws_assume_roleMap["session_name"] = data.AWSAssumeRole.SessionName.ValueString()
+		}
+		if data.AWSAssumeRole.SessionTags != nil {
+			aws_assume_roleMap["session_tags"] = map[string]interface{}{}
+		}
+		apiResource.Spec["aws_assume_role"] = aws_assume_roleMap
+	}
+	if data.AWSSecretKey != nil {
+		aws_secret_keyMap := make(map[string]interface{})
+		if !data.AWSSecretKey.AccessKey.IsNull() && !data.AWSSecretKey.AccessKey.IsUnknown() {
+			aws_secret_keyMap["access_key"] = data.AWSSecretKey.AccessKey.ValueString()
+		}
+		if data.AWSSecretKey.SecretKey != nil {
+			secret_keyNestedMap := make(map[string]interface{})
+			aws_secret_keyMap["secret_key"] = secret_keyNestedMap
+		}
+		apiResource.Spec["aws_secret_key"] = aws_secret_keyMap
+	}
+	if data.AzureClientSecret != nil {
+		azure_client_secretMap := make(map[string]interface{})
+		if !data.AzureClientSecret.ClientID.IsNull() && !data.AzureClientSecret.ClientID.IsUnknown() {
+			azure_client_secretMap["client_id"] = data.AzureClientSecret.ClientID.ValueString()
+		}
+		if data.AzureClientSecret.ClientSecret != nil {
+			client_secretNestedMap := make(map[string]interface{})
+			azure_client_secretMap["client_secret"] = client_secretNestedMap
+		}
+		if !data.AzureClientSecret.SubscriptionID.IsNull() && !data.AzureClientSecret.SubscriptionID.IsUnknown() {
+			azure_client_secretMap["subscription_id"] = data.AzureClientSecret.SubscriptionID.ValueString()
+		}
+		if !data.AzureClientSecret.TenantID.IsNull() && !data.AzureClientSecret.TenantID.IsUnknown() {
+			azure_client_secretMap["tenant_id"] = data.AzureClientSecret.TenantID.ValueString()
+		}
+		apiResource.Spec["azure_client_secret"] = azure_client_secretMap
+	}
+	if data.AzurePfxCertificate != nil {
+		azure_pfx_certificateMap := make(map[string]interface{})
+		if !data.AzurePfxCertificate.CertificateURL.IsNull() && !data.AzurePfxCertificate.CertificateURL.IsUnknown() {
+			azure_pfx_certificateMap["certificate_url"] = data.AzurePfxCertificate.CertificateURL.ValueString()
+		}
+		if !data.AzurePfxCertificate.ClientID.IsNull() && !data.AzurePfxCertificate.ClientID.IsUnknown() {
+			azure_pfx_certificateMap["client_id"] = data.AzurePfxCertificate.ClientID.ValueString()
+		}
+		if data.AzurePfxCertificate.Password != nil {
+			passwordNestedMap := make(map[string]interface{})
+			azure_pfx_certificateMap["password"] = passwordNestedMap
+		}
+		if !data.AzurePfxCertificate.SubscriptionID.IsNull() && !data.AzurePfxCertificate.SubscriptionID.IsUnknown() {
+			azure_pfx_certificateMap["subscription_id"] = data.AzurePfxCertificate.SubscriptionID.ValueString()
+		}
+		if !data.AzurePfxCertificate.TenantID.IsNull() && !data.AzurePfxCertificate.TenantID.IsUnknown() {
+			azure_pfx_certificateMap["tenant_id"] = data.AzurePfxCertificate.TenantID.ValueString()
+		}
+		apiResource.Spec["azure_pfx_certificate"] = azure_pfx_certificateMap
+	}
+	if data.GCPCredFile != nil {
+		gcp_cred_fileMap := make(map[string]interface{})
+		if data.GCPCredFile.CredentialFile != nil {
+			credential_fileNestedMap := make(map[string]interface{})
+			gcp_cred_fileMap["credential_file"] = credential_fileNestedMap
+		}
+		apiResource.Spec["gcp_cred_file"] = gcp_cred_fileMap
+	}
+
+
 	updated, err := r.client.UpdateCloudCredentials(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update CloudCredentials: %s", err))
@@ -783,6 +1065,8 @@ func (r *CloudCredentialsResource) Update(ctx context.Context, req resource.Upda
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -795,6 +1079,7 @@ func (r *CloudCredentialsResource) Update(ctx context.Context, req resource.Upda
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -821,6 +1106,15 @@ func (r *CloudCredentialsResource) Delete(ctx context.Context, req resource.Dele
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "CloudCredentials already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "CloudCredentials delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

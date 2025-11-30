@@ -10,19 +10,14 @@ import (
 
 // OidcProvider represents a F5XC OidcProvider
 type OidcProvider struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     OidcProviderSpec `json:"spec"`
-}
-
-// OidcProviderSpec defines the specification for OidcProvider
-type OidcProviderSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateOidcProvider creates a new OidcProvider
 func (c *Client) CreateOidcProvider(ctx context.Context, resource *OidcProvider) (*OidcProvider, error) {
 	var result OidcProvider
-	path := fmt.Sprintf("/api/config/namespaces/%s/oidc_providers", resource.Metadata.Namespace)
+	path := fmt.Sprintf("/api/web/custom/namespaces/%s/oidc_providers", resource.Metadata.Namespace)
 	err := c.Post(ctx, path, resource, &result)
 	return &result, err
 }
@@ -30,7 +25,7 @@ func (c *Client) CreateOidcProvider(ctx context.Context, resource *OidcProvider)
 // GetOidcProvider retrieves a OidcProvider
 func (c *Client) GetOidcProvider(ctx context.Context, namespace, name string) (*OidcProvider, error) {
 	var result OidcProvider
-	path := fmt.Sprintf("/api/config/namespaces/%s/oidc_providers/%s", namespace, name)
+	path := fmt.Sprintf("/api/web/custom/namespaces/%s/oidc_providers/%s", namespace, name)
 	err := c.Get(ctx, path, &result)
 	return &result, err
 }
@@ -38,13 +33,13 @@ func (c *Client) GetOidcProvider(ctx context.Context, namespace, name string) (*
 // UpdateOidcProvider updates a OidcProvider
 func (c *Client) UpdateOidcProvider(ctx context.Context, resource *OidcProvider) (*OidcProvider, error) {
 	var result OidcProvider
-	path := fmt.Sprintf("/api/config/namespaces/%s/oidc_providers/%s", resource.Metadata.Namespace, resource.Metadata.Name)
+	path := fmt.Sprintf("/api/web/custom/namespaces/%s/oidc_providers/%s", resource.Metadata.Namespace, resource.Metadata.Name)
 	err := c.Put(ctx, path, resource, &result)
 	return &result, err
 }
 
 // DeleteOidcProvider deletes a OidcProvider
 func (c *Client) DeleteOidcProvider(ctx context.Context, namespace, name string) error {
-	path := fmt.Sprintf("/api/config/namespaces/%s/oidc_providers/%s", namespace, name)
+	path := fmt.Sprintf("/api/web/custom/namespaces/%s/oidc_providers/%s", namespace, name)
 	return c.Delete(ctx, path)
 }

@@ -403,7 +403,7 @@ func (r *DNSLbHealthCheckResource) Create(ctx context.Context, req resource.Crea
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.DNSLbHealthCheckSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -428,6 +428,93 @@ func (r *DNSLbHealthCheckResource) Create(ctx context.Context, req resource.Crea
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.HTTPHealthCheck != nil {
+		http_health_checkMap := make(map[string]interface{})
+		if !data.HTTPHealthCheck.HealthCheckPort.IsNull() && !data.HTTPHealthCheck.HealthCheckPort.IsUnknown() {
+			http_health_checkMap["health_check_port"] = data.HTTPHealthCheck.HealthCheckPort.ValueInt64()
+		}
+		if !data.HTTPHealthCheck.HealthCheckSecondaryPort.IsNull() && !data.HTTPHealthCheck.HealthCheckSecondaryPort.IsUnknown() {
+			http_health_checkMap["health_check_secondary_port"] = data.HTTPHealthCheck.HealthCheckSecondaryPort.ValueInt64()
+		}
+		if !data.HTTPHealthCheck.Receive.IsNull() && !data.HTTPHealthCheck.Receive.IsUnknown() {
+			http_health_checkMap["receive"] = data.HTTPHealthCheck.Receive.ValueString()
+		}
+		if !data.HTTPHealthCheck.Send.IsNull() && !data.HTTPHealthCheck.Send.IsUnknown() {
+			http_health_checkMap["send"] = data.HTTPHealthCheck.Send.ValueString()
+		}
+		apiResource.Spec["http_health_check"] = http_health_checkMap
+	}
+	if data.HTTPSHealthCheck != nil {
+		https_health_checkMap := make(map[string]interface{})
+		if !data.HTTPSHealthCheck.HealthCheckPort.IsNull() && !data.HTTPSHealthCheck.HealthCheckPort.IsUnknown() {
+			https_health_checkMap["health_check_port"] = data.HTTPSHealthCheck.HealthCheckPort.ValueInt64()
+		}
+		if !data.HTTPSHealthCheck.HealthCheckSecondaryPort.IsNull() && !data.HTTPSHealthCheck.HealthCheckSecondaryPort.IsUnknown() {
+			https_health_checkMap["health_check_secondary_port"] = data.HTTPSHealthCheck.HealthCheckSecondaryPort.ValueInt64()
+		}
+		if !data.HTTPSHealthCheck.Receive.IsNull() && !data.HTTPSHealthCheck.Receive.IsUnknown() {
+			https_health_checkMap["receive"] = data.HTTPSHealthCheck.Receive.ValueString()
+		}
+		if !data.HTTPSHealthCheck.Send.IsNull() && !data.HTTPSHealthCheck.Send.IsUnknown() {
+			https_health_checkMap["send"] = data.HTTPSHealthCheck.Send.ValueString()
+		}
+		apiResource.Spec["https_health_check"] = https_health_checkMap
+	}
+	if data.IcmpHealthCheck != nil {
+		icmp_health_checkMap := make(map[string]interface{})
+		apiResource.Spec["icmp_health_check"] = icmp_health_checkMap
+	}
+	if data.TCPHealthCheck != nil {
+		tcp_health_checkMap := make(map[string]interface{})
+		if !data.TCPHealthCheck.HealthCheckPort.IsNull() && !data.TCPHealthCheck.HealthCheckPort.IsUnknown() {
+			tcp_health_checkMap["health_check_port"] = data.TCPHealthCheck.HealthCheckPort.ValueInt64()
+		}
+		if !data.TCPHealthCheck.HealthCheckSecondaryPort.IsNull() && !data.TCPHealthCheck.HealthCheckSecondaryPort.IsUnknown() {
+			tcp_health_checkMap["health_check_secondary_port"] = data.TCPHealthCheck.HealthCheckSecondaryPort.ValueInt64()
+		}
+		if !data.TCPHealthCheck.Receive.IsNull() && !data.TCPHealthCheck.Receive.IsUnknown() {
+			tcp_health_checkMap["receive"] = data.TCPHealthCheck.Receive.ValueString()
+		}
+		if !data.TCPHealthCheck.Send.IsNull() && !data.TCPHealthCheck.Send.IsUnknown() {
+			tcp_health_checkMap["send"] = data.TCPHealthCheck.Send.ValueString()
+		}
+		apiResource.Spec["tcp_health_check"] = tcp_health_checkMap
+	}
+	if data.TCPHexHealthCheck != nil {
+		tcp_hex_health_checkMap := make(map[string]interface{})
+		if !data.TCPHexHealthCheck.HealthCheckPort.IsNull() && !data.TCPHexHealthCheck.HealthCheckPort.IsUnknown() {
+			tcp_hex_health_checkMap["health_check_port"] = data.TCPHexHealthCheck.HealthCheckPort.ValueInt64()
+		}
+		if !data.TCPHexHealthCheck.HealthCheckSecondaryPort.IsNull() && !data.TCPHexHealthCheck.HealthCheckSecondaryPort.IsUnknown() {
+			tcp_hex_health_checkMap["health_check_secondary_port"] = data.TCPHexHealthCheck.HealthCheckSecondaryPort.ValueInt64()
+		}
+		if !data.TCPHexHealthCheck.Receive.IsNull() && !data.TCPHexHealthCheck.Receive.IsUnknown() {
+			tcp_hex_health_checkMap["receive"] = data.TCPHexHealthCheck.Receive.ValueString()
+		}
+		if !data.TCPHexHealthCheck.Send.IsNull() && !data.TCPHexHealthCheck.Send.IsUnknown() {
+			tcp_hex_health_checkMap["send"] = data.TCPHexHealthCheck.Send.ValueString()
+		}
+		apiResource.Spec["tcp_hex_health_check"] = tcp_hex_health_checkMap
+	}
+	if data.UDPHealthCheck != nil {
+		udp_health_checkMap := make(map[string]interface{})
+		if !data.UDPHealthCheck.HealthCheckPort.IsNull() && !data.UDPHealthCheck.HealthCheckPort.IsUnknown() {
+			udp_health_checkMap["health_check_port"] = data.UDPHealthCheck.HealthCheckPort.ValueInt64()
+		}
+		if !data.UDPHealthCheck.HealthCheckSecondaryPort.IsNull() && !data.UDPHealthCheck.HealthCheckSecondaryPort.IsUnknown() {
+			udp_health_checkMap["health_check_secondary_port"] = data.UDPHealthCheck.HealthCheckSecondaryPort.ValueInt64()
+		}
+		if !data.UDPHealthCheck.Receive.IsNull() && !data.UDPHealthCheck.Receive.IsUnknown() {
+			udp_health_checkMap["receive"] = data.UDPHealthCheck.Receive.ValueString()
+		}
+		if !data.UDPHealthCheck.Send.IsNull() && !data.UDPHealthCheck.Send.IsUnknown() {
+			udp_health_checkMap["send"] = data.UDPHealthCheck.Send.ValueString()
+		}
+		apiResource.Spec["udp_health_check"] = udp_health_checkMap
+	}
+
+
 	created, err := r.client.CreateDNSLbHealthCheck(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create DNSLbHealthCheck: %s", err))
@@ -436,8 +523,13 @@ func (r *DNSLbHealthCheckResource) Create(ctx context.Context, req resource.Crea
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created DNSLbHealthCheck resource")
@@ -516,9 +608,170 @@ func (r *DNSLbHealthCheckResource) Read(ctx context.Context, req resource.ReadRe
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if blockData, ok := apiResource.Spec["http_health_check"].(map[string]interface{}); ok && (isImport || data.HTTPHealthCheck != nil) {
+		data.HTTPHealthCheck = &DNSLbHealthCheckHTTPHealthCheckModel{
+			HealthCheckPort: func() types.Int64 {
+				if v, ok := blockData["health_check_port"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			HealthCheckSecondaryPort: func() types.Int64 {
+				if v, ok := blockData["health_check_secondary_port"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			Receive: func() types.String {
+				if v, ok := blockData["receive"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Send: func() types.String {
+				if v, ok := blockData["send"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["https_health_check"].(map[string]interface{}); ok && (isImport || data.HTTPSHealthCheck != nil) {
+		data.HTTPSHealthCheck = &DNSLbHealthCheckHTTPSHealthCheckModel{
+			HealthCheckPort: func() types.Int64 {
+				if v, ok := blockData["health_check_port"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			HealthCheckSecondaryPort: func() types.Int64 {
+				if v, ok := blockData["health_check_secondary_port"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			Receive: func() types.String {
+				if v, ok := blockData["receive"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Send: func() types.String {
+				if v, ok := blockData["send"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["icmp_health_check"].(map[string]interface{}); ok && isImport && data.IcmpHealthCheck == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.IcmpHealthCheck = &DNSLbHealthCheckEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["tcp_health_check"].(map[string]interface{}); ok && (isImport || data.TCPHealthCheck != nil) {
+		data.TCPHealthCheck = &DNSLbHealthCheckTCPHealthCheckModel{
+			HealthCheckPort: func() types.Int64 {
+				if v, ok := blockData["health_check_port"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			HealthCheckSecondaryPort: func() types.Int64 {
+				if v, ok := blockData["health_check_secondary_port"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			Receive: func() types.String {
+				if v, ok := blockData["receive"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Send: func() types.String {
+				if v, ok := blockData["send"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["tcp_hex_health_check"].(map[string]interface{}); ok && (isImport || data.TCPHexHealthCheck != nil) {
+		data.TCPHexHealthCheck = &DNSLbHealthCheckTCPHexHealthCheckModel{
+			HealthCheckPort: func() types.Int64 {
+				if v, ok := blockData["health_check_port"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			HealthCheckSecondaryPort: func() types.Int64 {
+				if v, ok := blockData["health_check_secondary_port"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			Receive: func() types.String {
+				if v, ok := blockData["receive"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Send: func() types.String {
+				if v, ok := blockData["send"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["udp_health_check"].(map[string]interface{}); ok && (isImport || data.UDPHealthCheck != nil) {
+		data.UDPHealthCheck = &DNSLbHealthCheckUDPHealthCheckModel{
+			HealthCheckPort: func() types.Int64 {
+				if v, ok := blockData["health_check_port"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			HealthCheckSecondaryPort: func() types.Int64 {
+				if v, ok := blockData["health_check_secondary_port"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			Receive: func() types.String {
+				if v, ok := blockData["receive"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Send: func() types.String {
+				if v, ok := blockData["send"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -544,7 +797,7 @@ func (r *DNSLbHealthCheckResource) Update(ctx context.Context, req resource.Upda
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.DNSLbHealthCheckSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -569,6 +822,93 @@ func (r *DNSLbHealthCheckResource) Update(ctx context.Context, req resource.Upda
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.HTTPHealthCheck != nil {
+		http_health_checkMap := make(map[string]interface{})
+		if !data.HTTPHealthCheck.HealthCheckPort.IsNull() && !data.HTTPHealthCheck.HealthCheckPort.IsUnknown() {
+			http_health_checkMap["health_check_port"] = data.HTTPHealthCheck.HealthCheckPort.ValueInt64()
+		}
+		if !data.HTTPHealthCheck.HealthCheckSecondaryPort.IsNull() && !data.HTTPHealthCheck.HealthCheckSecondaryPort.IsUnknown() {
+			http_health_checkMap["health_check_secondary_port"] = data.HTTPHealthCheck.HealthCheckSecondaryPort.ValueInt64()
+		}
+		if !data.HTTPHealthCheck.Receive.IsNull() && !data.HTTPHealthCheck.Receive.IsUnknown() {
+			http_health_checkMap["receive"] = data.HTTPHealthCheck.Receive.ValueString()
+		}
+		if !data.HTTPHealthCheck.Send.IsNull() && !data.HTTPHealthCheck.Send.IsUnknown() {
+			http_health_checkMap["send"] = data.HTTPHealthCheck.Send.ValueString()
+		}
+		apiResource.Spec["http_health_check"] = http_health_checkMap
+	}
+	if data.HTTPSHealthCheck != nil {
+		https_health_checkMap := make(map[string]interface{})
+		if !data.HTTPSHealthCheck.HealthCheckPort.IsNull() && !data.HTTPSHealthCheck.HealthCheckPort.IsUnknown() {
+			https_health_checkMap["health_check_port"] = data.HTTPSHealthCheck.HealthCheckPort.ValueInt64()
+		}
+		if !data.HTTPSHealthCheck.HealthCheckSecondaryPort.IsNull() && !data.HTTPSHealthCheck.HealthCheckSecondaryPort.IsUnknown() {
+			https_health_checkMap["health_check_secondary_port"] = data.HTTPSHealthCheck.HealthCheckSecondaryPort.ValueInt64()
+		}
+		if !data.HTTPSHealthCheck.Receive.IsNull() && !data.HTTPSHealthCheck.Receive.IsUnknown() {
+			https_health_checkMap["receive"] = data.HTTPSHealthCheck.Receive.ValueString()
+		}
+		if !data.HTTPSHealthCheck.Send.IsNull() && !data.HTTPSHealthCheck.Send.IsUnknown() {
+			https_health_checkMap["send"] = data.HTTPSHealthCheck.Send.ValueString()
+		}
+		apiResource.Spec["https_health_check"] = https_health_checkMap
+	}
+	if data.IcmpHealthCheck != nil {
+		icmp_health_checkMap := make(map[string]interface{})
+		apiResource.Spec["icmp_health_check"] = icmp_health_checkMap
+	}
+	if data.TCPHealthCheck != nil {
+		tcp_health_checkMap := make(map[string]interface{})
+		if !data.TCPHealthCheck.HealthCheckPort.IsNull() && !data.TCPHealthCheck.HealthCheckPort.IsUnknown() {
+			tcp_health_checkMap["health_check_port"] = data.TCPHealthCheck.HealthCheckPort.ValueInt64()
+		}
+		if !data.TCPHealthCheck.HealthCheckSecondaryPort.IsNull() && !data.TCPHealthCheck.HealthCheckSecondaryPort.IsUnknown() {
+			tcp_health_checkMap["health_check_secondary_port"] = data.TCPHealthCheck.HealthCheckSecondaryPort.ValueInt64()
+		}
+		if !data.TCPHealthCheck.Receive.IsNull() && !data.TCPHealthCheck.Receive.IsUnknown() {
+			tcp_health_checkMap["receive"] = data.TCPHealthCheck.Receive.ValueString()
+		}
+		if !data.TCPHealthCheck.Send.IsNull() && !data.TCPHealthCheck.Send.IsUnknown() {
+			tcp_health_checkMap["send"] = data.TCPHealthCheck.Send.ValueString()
+		}
+		apiResource.Spec["tcp_health_check"] = tcp_health_checkMap
+	}
+	if data.TCPHexHealthCheck != nil {
+		tcp_hex_health_checkMap := make(map[string]interface{})
+		if !data.TCPHexHealthCheck.HealthCheckPort.IsNull() && !data.TCPHexHealthCheck.HealthCheckPort.IsUnknown() {
+			tcp_hex_health_checkMap["health_check_port"] = data.TCPHexHealthCheck.HealthCheckPort.ValueInt64()
+		}
+		if !data.TCPHexHealthCheck.HealthCheckSecondaryPort.IsNull() && !data.TCPHexHealthCheck.HealthCheckSecondaryPort.IsUnknown() {
+			tcp_hex_health_checkMap["health_check_secondary_port"] = data.TCPHexHealthCheck.HealthCheckSecondaryPort.ValueInt64()
+		}
+		if !data.TCPHexHealthCheck.Receive.IsNull() && !data.TCPHexHealthCheck.Receive.IsUnknown() {
+			tcp_hex_health_checkMap["receive"] = data.TCPHexHealthCheck.Receive.ValueString()
+		}
+		if !data.TCPHexHealthCheck.Send.IsNull() && !data.TCPHexHealthCheck.Send.IsUnknown() {
+			tcp_hex_health_checkMap["send"] = data.TCPHexHealthCheck.Send.ValueString()
+		}
+		apiResource.Spec["tcp_hex_health_check"] = tcp_hex_health_checkMap
+	}
+	if data.UDPHealthCheck != nil {
+		udp_health_checkMap := make(map[string]interface{})
+		if !data.UDPHealthCheck.HealthCheckPort.IsNull() && !data.UDPHealthCheck.HealthCheckPort.IsUnknown() {
+			udp_health_checkMap["health_check_port"] = data.UDPHealthCheck.HealthCheckPort.ValueInt64()
+		}
+		if !data.UDPHealthCheck.HealthCheckSecondaryPort.IsNull() && !data.UDPHealthCheck.HealthCheckSecondaryPort.IsUnknown() {
+			udp_health_checkMap["health_check_secondary_port"] = data.UDPHealthCheck.HealthCheckSecondaryPort.ValueInt64()
+		}
+		if !data.UDPHealthCheck.Receive.IsNull() && !data.UDPHealthCheck.Receive.IsUnknown() {
+			udp_health_checkMap["receive"] = data.UDPHealthCheck.Receive.ValueString()
+		}
+		if !data.UDPHealthCheck.Send.IsNull() && !data.UDPHealthCheck.Send.IsUnknown() {
+			udp_health_checkMap["send"] = data.UDPHealthCheck.Send.ValueString()
+		}
+		apiResource.Spec["udp_health_check"] = udp_health_checkMap
+	}
+
+
 	updated, err := r.client.UpdateDNSLbHealthCheck(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update DNSLbHealthCheck: %s", err))
@@ -577,6 +917,8 @@ func (r *DNSLbHealthCheckResource) Update(ctx context.Context, req resource.Upda
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -589,6 +931,7 @@ func (r *DNSLbHealthCheckResource) Update(ctx context.Context, req resource.Upda
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -615,6 +958,15 @@ func (r *DNSLbHealthCheckResource) Delete(ctx context.Context, req resource.Dele
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "DNSLbHealthCheck already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "DNSLbHealthCheck delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

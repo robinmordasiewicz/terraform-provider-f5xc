@@ -104,7 +104,7 @@ type PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesLabelSelectorModel str
 
 // PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesMetadataModel represents metadata block
 type PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesMetadataModel struct {
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name types.String `tfsdk:"name"`
 }
 
@@ -188,7 +188,7 @@ type PolicyBasedRoutingNetworkPbrNetworkPbrRulesIPPrefixSetRefModel struct {
 
 // PolicyBasedRoutingNetworkPbrNetworkPbrRulesMetadataModel represents metadata block
 type PolicyBasedRoutingNetworkPbrNetworkPbrRulesMetadataModel struct {
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name types.String `tfsdk:"name"`
 }
 
@@ -393,7 +393,7 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 								"metadata": schema.SingleNestedBlock{
 									MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 									Attributes: map[string]schema.Attribute{
-										"description": schema.StringAttribute{
+										"description_spec": schema.StringAttribute{
 											MarkdownDescription: "Description. Human readable description.",
 											Optional: true,
 										},
@@ -571,7 +571,7 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 								"metadata": schema.SingleNestedBlock{
 									MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 									Attributes: map[string]schema.Attribute{
-										"description": schema.StringAttribute{
+										"description_spec": schema.StringAttribute{
 											MarkdownDescription: "Description. Human readable description.",
 											Optional: true,
 										},
@@ -743,7 +743,7 @@ func (r *PolicyBasedRoutingResource) Create(ctx context.Context, req resource.Cr
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.PolicyBasedRoutingSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -768,6 +768,45 @@ func (r *PolicyBasedRoutingResource) Create(ctx context.Context, req resource.Cr
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.ForwardProxyPbr != nil {
+		forward_proxy_pbrMap := make(map[string]interface{})
+		apiResource.Spec["forward_proxy_pbr"] = forward_proxy_pbrMap
+	}
+	if len(data.ForwardingClassList) > 0 {
+		var forwarding_class_listList []map[string]interface{}
+		for _, item := range data.ForwardingClassList {
+			itemMap := make(map[string]interface{})
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+				itemMap["namespace"] = item.Namespace.ValueString()
+			}
+			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+				itemMap["tenant"] = item.Tenant.ValueString()
+			}
+			forwarding_class_listList = append(forwarding_class_listList, itemMap)
+		}
+		apiResource.Spec["forwarding_class_list"] = forwarding_class_listList
+	}
+	if data.NetworkPbr != nil {
+		network_pbrMap := make(map[string]interface{})
+		if data.NetworkPbr.Any != nil {
+			network_pbrMap["any"] = map[string]interface{}{}
+		}
+		if data.NetworkPbr.LabelSelector != nil {
+			label_selectorNestedMap := make(map[string]interface{})
+			network_pbrMap["label_selector"] = label_selectorNestedMap
+		}
+		if data.NetworkPbr.PrefixList != nil {
+			prefix_listNestedMap := make(map[string]interface{})
+			network_pbrMap["prefix_list"] = prefix_listNestedMap
+		}
+		apiResource.Spec["network_pbr"] = network_pbrMap
+	}
+
+
 	created, err := r.client.CreatePolicyBasedRouting(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create PolicyBasedRouting: %s", err))
@@ -776,8 +815,13 @@ func (r *PolicyBasedRoutingResource) Create(ctx context.Context, req resource.Cr
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created PolicyBasedRouting resource")
@@ -856,9 +900,63 @@ func (r *PolicyBasedRoutingResource) Read(ctx context.Context, req resource.Read
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if _, ok := apiResource.Spec["forward_proxy_pbr"].(map[string]interface{}); ok && isImport && data.ForwardProxyPbr == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ForwardProxyPbr = &PolicyBasedRoutingForwardProxyPbrModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["forwarding_class_list"].([]interface{}); ok && len(listData) > 0 {
+		var forwarding_class_listList []PolicyBasedRoutingForwardingClassListModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				forwarding_class_listList = append(forwarding_class_listList, PolicyBasedRoutingForwardingClassListModel{
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Namespace: func() types.String {
+						if v, ok := itemMap["namespace"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Tenant: func() types.String {
+						if v, ok := itemMap["tenant"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.ForwardingClassList = forwarding_class_listList
+	}
+	if _, ok := apiResource.Spec["network_pbr"].(map[string]interface{}); ok && isImport && data.NetworkPbr == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NetworkPbr = &PolicyBasedRoutingNetworkPbrModel{}
+	}
+	// Normal Read: preserve existing state value
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -884,7 +982,7 @@ func (r *PolicyBasedRoutingResource) Update(ctx context.Context, req resource.Up
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.PolicyBasedRoutingSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -909,6 +1007,45 @@ func (r *PolicyBasedRoutingResource) Update(ctx context.Context, req resource.Up
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.ForwardProxyPbr != nil {
+		forward_proxy_pbrMap := make(map[string]interface{})
+		apiResource.Spec["forward_proxy_pbr"] = forward_proxy_pbrMap
+	}
+	if len(data.ForwardingClassList) > 0 {
+		var forwarding_class_listList []map[string]interface{}
+		for _, item := range data.ForwardingClassList {
+			itemMap := make(map[string]interface{})
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+				itemMap["namespace"] = item.Namespace.ValueString()
+			}
+			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+				itemMap["tenant"] = item.Tenant.ValueString()
+			}
+			forwarding_class_listList = append(forwarding_class_listList, itemMap)
+		}
+		apiResource.Spec["forwarding_class_list"] = forwarding_class_listList
+	}
+	if data.NetworkPbr != nil {
+		network_pbrMap := make(map[string]interface{})
+		if data.NetworkPbr.Any != nil {
+			network_pbrMap["any"] = map[string]interface{}{}
+		}
+		if data.NetworkPbr.LabelSelector != nil {
+			label_selectorNestedMap := make(map[string]interface{})
+			network_pbrMap["label_selector"] = label_selectorNestedMap
+		}
+		if data.NetworkPbr.PrefixList != nil {
+			prefix_listNestedMap := make(map[string]interface{})
+			network_pbrMap["prefix_list"] = prefix_listNestedMap
+		}
+		apiResource.Spec["network_pbr"] = network_pbrMap
+	}
+
+
 	updated, err := r.client.UpdatePolicyBasedRouting(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update PolicyBasedRouting: %s", err))
@@ -917,6 +1054,8 @@ func (r *PolicyBasedRoutingResource) Update(ctx context.Context, req resource.Up
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -929,6 +1068,7 @@ func (r *PolicyBasedRoutingResource) Update(ctx context.Context, req resource.Up
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -955,6 +1095,15 @@ func (r *PolicyBasedRoutingResource) Delete(ctx context.Context, req resource.De
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "PolicyBasedRouting already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "PolicyBasedRouting delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

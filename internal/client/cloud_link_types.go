@@ -10,13 +10,8 @@ import (
 
 // CloudLink represents a F5XC CloudLink
 type CloudLink struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     CloudLinkSpec `json:"spec"`
-}
-
-// CloudLinkSpec defines the specification for CloudLink
-type CloudLinkSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateCloudLink creates a new CloudLink

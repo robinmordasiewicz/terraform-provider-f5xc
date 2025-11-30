@@ -104,7 +104,7 @@ type NetworkPolicyViewEgressRulesLabelSelectorModel struct {
 
 // NetworkPolicyViewEgressRulesMetadataModel represents metadata block
 type NetworkPolicyViewEgressRulesMetadataModel struct {
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name types.String `tfsdk:"name"`
 }
 
@@ -193,7 +193,7 @@ type NetworkPolicyViewIngressRulesLabelSelectorModel struct {
 
 // NetworkPolicyViewIngressRulesMetadataModel represents metadata block
 type NetworkPolicyViewIngressRulesMetadataModel struct {
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name types.String `tfsdk:"name"`
 }
 
@@ -385,7 +385,7 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 						"metadata": schema.SingleNestedBlock{
 							MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 							Attributes: map[string]schema.Attribute{
-								"description": schema.StringAttribute{
+								"description_spec": schema.StringAttribute{
 									MarkdownDescription: "Description. Human readable description.",
 									Optional: true,
 								},
@@ -564,7 +564,7 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 						"metadata": schema.SingleNestedBlock{
 							MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 							Attributes: map[string]schema.Attribute{
-								"description": schema.StringAttribute{
+								"description_spec": schema.StringAttribute{
 									MarkdownDescription: "Description. Human readable description.",
 									Optional: true,
 								},
@@ -727,7 +727,7 @@ func (r *NetworkPolicyViewResource) Create(ctx context.Context, req resource.Cre
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.NetworkPolicyViewSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -752,6 +752,176 @@ func (r *NetworkPolicyViewResource) Create(ctx context.Context, req resource.Cre
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if len(data.EgressRules) > 0 {
+		var egress_rulesList []map[string]interface{}
+		for _, item := range data.EgressRules {
+			itemMap := make(map[string]interface{})
+			if !item.Action.IsNull() && !item.Action.IsUnknown() {
+				itemMap["action"] = item.Action.ValueString()
+			}
+			if item.AdvAction != nil {
+				adv_actionNestedMap := make(map[string]interface{})
+				if !item.AdvAction.Action.IsNull() && !item.AdvAction.Action.IsUnknown() {
+					adv_actionNestedMap["action"] = item.AdvAction.Action.ValueString()
+				}
+				itemMap["adv_action"] = adv_actionNestedMap
+			}
+			if item.AllTCPTraffic != nil {
+				itemMap["all_tcp_traffic"] = map[string]interface{}{}
+			}
+			if item.AllTraffic != nil {
+				itemMap["all_traffic"] = map[string]interface{}{}
+			}
+			if item.AllUDPTraffic != nil {
+				itemMap["all_udp_traffic"] = map[string]interface{}{}
+			}
+			if item.Any != nil {
+				itemMap["any"] = map[string]interface{}{}
+			}
+			if item.Applications != nil {
+				applicationsNestedMap := make(map[string]interface{})
+				itemMap["applications"] = applicationsNestedMap
+			}
+			if item.InsideEndpoints != nil {
+				itemMap["inside_endpoints"] = map[string]interface{}{}
+			}
+			if item.IPPrefixSet != nil {
+				ip_prefix_setNestedMap := make(map[string]interface{})
+				itemMap["ip_prefix_set"] = ip_prefix_setNestedMap
+			}
+			if item.LabelMatcher != nil {
+				label_matcherNestedMap := make(map[string]interface{})
+				itemMap["label_matcher"] = label_matcherNestedMap
+			}
+			if item.LabelSelector != nil {
+				label_selectorNestedMap := make(map[string]interface{})
+				itemMap["label_selector"] = label_selectorNestedMap
+			}
+			if item.Metadata != nil {
+				metadataNestedMap := make(map[string]interface{})
+				if !item.Metadata.DescriptionSpec.IsNull() && !item.Metadata.DescriptionSpec.IsUnknown() {
+					metadataNestedMap["description"] = item.Metadata.DescriptionSpec.ValueString()
+				}
+				if !item.Metadata.Name.IsNull() && !item.Metadata.Name.IsUnknown() {
+					metadataNestedMap["name"] = item.Metadata.Name.ValueString()
+				}
+				itemMap["metadata"] = metadataNestedMap
+			}
+			if item.OutsideEndpoints != nil {
+				itemMap["outside_endpoints"] = map[string]interface{}{}
+			}
+			if item.PrefixList != nil {
+				prefix_listNestedMap := make(map[string]interface{})
+				itemMap["prefix_list"] = prefix_listNestedMap
+			}
+			if item.ProtocolPortRange != nil {
+				protocol_port_rangeNestedMap := make(map[string]interface{})
+				if !item.ProtocolPortRange.Protocol.IsNull() && !item.ProtocolPortRange.Protocol.IsUnknown() {
+					protocol_port_rangeNestedMap["protocol"] = item.ProtocolPortRange.Protocol.ValueString()
+				}
+				itemMap["protocol_port_range"] = protocol_port_rangeNestedMap
+			}
+			egress_rulesList = append(egress_rulesList, itemMap)
+		}
+		apiResource.Spec["egress_rules"] = egress_rulesList
+	}
+	if data.Endpoint != nil {
+		endpointMap := make(map[string]interface{})
+		if data.Endpoint.Any != nil {
+			endpointMap["any"] = map[string]interface{}{}
+		}
+		if data.Endpoint.InsideEndpoints != nil {
+			endpointMap["inside_endpoints"] = map[string]interface{}{}
+		}
+		if data.Endpoint.LabelSelector != nil {
+			label_selectorNestedMap := make(map[string]interface{})
+			endpointMap["label_selector"] = label_selectorNestedMap
+		}
+		if data.Endpoint.OutsideEndpoints != nil {
+			endpointMap["outside_endpoints"] = map[string]interface{}{}
+		}
+		if data.Endpoint.PrefixList != nil {
+			prefix_listNestedMap := make(map[string]interface{})
+			endpointMap["prefix_list"] = prefix_listNestedMap
+		}
+		apiResource.Spec["endpoint"] = endpointMap
+	}
+	if len(data.IngressRules) > 0 {
+		var ingress_rulesList []map[string]interface{}
+		for _, item := range data.IngressRules {
+			itemMap := make(map[string]interface{})
+			if !item.Action.IsNull() && !item.Action.IsUnknown() {
+				itemMap["action"] = item.Action.ValueString()
+			}
+			if item.AdvAction != nil {
+				adv_actionNestedMap := make(map[string]interface{})
+				if !item.AdvAction.Action.IsNull() && !item.AdvAction.Action.IsUnknown() {
+					adv_actionNestedMap["action"] = item.AdvAction.Action.ValueString()
+				}
+				itemMap["adv_action"] = adv_actionNestedMap
+			}
+			if item.AllTCPTraffic != nil {
+				itemMap["all_tcp_traffic"] = map[string]interface{}{}
+			}
+			if item.AllTraffic != nil {
+				itemMap["all_traffic"] = map[string]interface{}{}
+			}
+			if item.AllUDPTraffic != nil {
+				itemMap["all_udp_traffic"] = map[string]interface{}{}
+			}
+			if item.Any != nil {
+				itemMap["any"] = map[string]interface{}{}
+			}
+			if item.Applications != nil {
+				applicationsNestedMap := make(map[string]interface{})
+				itemMap["applications"] = applicationsNestedMap
+			}
+			if item.InsideEndpoints != nil {
+				itemMap["inside_endpoints"] = map[string]interface{}{}
+			}
+			if item.IPPrefixSet != nil {
+				ip_prefix_setNestedMap := make(map[string]interface{})
+				itemMap["ip_prefix_set"] = ip_prefix_setNestedMap
+			}
+			if item.LabelMatcher != nil {
+				label_matcherNestedMap := make(map[string]interface{})
+				itemMap["label_matcher"] = label_matcherNestedMap
+			}
+			if item.LabelSelector != nil {
+				label_selectorNestedMap := make(map[string]interface{})
+				itemMap["label_selector"] = label_selectorNestedMap
+			}
+			if item.Metadata != nil {
+				metadataNestedMap := make(map[string]interface{})
+				if !item.Metadata.DescriptionSpec.IsNull() && !item.Metadata.DescriptionSpec.IsUnknown() {
+					metadataNestedMap["description"] = item.Metadata.DescriptionSpec.ValueString()
+				}
+				if !item.Metadata.Name.IsNull() && !item.Metadata.Name.IsUnknown() {
+					metadataNestedMap["name"] = item.Metadata.Name.ValueString()
+				}
+				itemMap["metadata"] = metadataNestedMap
+			}
+			if item.OutsideEndpoints != nil {
+				itemMap["outside_endpoints"] = map[string]interface{}{}
+			}
+			if item.PrefixList != nil {
+				prefix_listNestedMap := make(map[string]interface{})
+				itemMap["prefix_list"] = prefix_listNestedMap
+			}
+			if item.ProtocolPortRange != nil {
+				protocol_port_rangeNestedMap := make(map[string]interface{})
+				if !item.ProtocolPortRange.Protocol.IsNull() && !item.ProtocolPortRange.Protocol.IsUnknown() {
+					protocol_port_rangeNestedMap["protocol"] = item.ProtocolPortRange.Protocol.ValueString()
+				}
+				itemMap["protocol_port_range"] = protocol_port_rangeNestedMap
+			}
+			ingress_rulesList = append(ingress_rulesList, itemMap)
+		}
+		apiResource.Spec["ingress_rules"] = ingress_rulesList
+	}
+
+
 	created, err := r.client.CreateNetworkPolicyView(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create NetworkPolicyView: %s", err))
@@ -760,8 +930,13 @@ func (r *NetworkPolicyViewResource) Create(ctx context.Context, req resource.Cre
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created NetworkPolicyView resource")
@@ -840,9 +1015,294 @@ func (r *NetworkPolicyViewResource) Read(ctx context.Context, req resource.ReadR
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if listData, ok := apiResource.Spec["egress_rules"].([]interface{}); ok && len(listData) > 0 {
+		var egress_rulesList []NetworkPolicyViewEgressRulesModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				egress_rulesList = append(egress_rulesList, NetworkPolicyViewEgressRulesModel{
+					Action: func() types.String {
+						if v, ok := itemMap["action"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					AdvAction: func() *NetworkPolicyViewEgressRulesAdvActionModel {
+						if nestedMap, ok := itemMap["adv_action"].(map[string]interface{}); ok {
+							return &NetworkPolicyViewEgressRulesAdvActionModel{
+								Action: func() types.String {
+									if v, ok := nestedMap["action"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					AllTCPTraffic: func() *NetworkPolicyViewEmptyModel {
+						if _, ok := itemMap["all_tcp_traffic"].(map[string]interface{}); ok {
+							return &NetworkPolicyViewEmptyModel{}
+						}
+						return nil
+					}(),
+					AllTraffic: func() *NetworkPolicyViewEmptyModel {
+						if _, ok := itemMap["all_traffic"].(map[string]interface{}); ok {
+							return &NetworkPolicyViewEmptyModel{}
+						}
+						return nil
+					}(),
+					AllUDPTraffic: func() *NetworkPolicyViewEmptyModel {
+						if _, ok := itemMap["all_udp_traffic"].(map[string]interface{}); ok {
+							return &NetworkPolicyViewEmptyModel{}
+						}
+						return nil
+					}(),
+					Any: func() *NetworkPolicyViewEmptyModel {
+						if _, ok := itemMap["any"].(map[string]interface{}); ok {
+							return &NetworkPolicyViewEmptyModel{}
+						}
+						return nil
+					}(),
+					Applications: func() *NetworkPolicyViewEgressRulesApplicationsModel {
+						if _, ok := itemMap["applications"].(map[string]interface{}); ok {
+							return &NetworkPolicyViewEgressRulesApplicationsModel{
+							}
+						}
+						return nil
+					}(),
+					InsideEndpoints: func() *NetworkPolicyViewEmptyModel {
+						if _, ok := itemMap["inside_endpoints"].(map[string]interface{}); ok {
+							return &NetworkPolicyViewEmptyModel{}
+						}
+						return nil
+					}(),
+					IPPrefixSet: func() *NetworkPolicyViewEgressRulesIPPrefixSetModel {
+						if _, ok := itemMap["ip_prefix_set"].(map[string]interface{}); ok {
+							return &NetworkPolicyViewEgressRulesIPPrefixSetModel{
+							}
+						}
+						return nil
+					}(),
+					LabelMatcher: func() *NetworkPolicyViewEgressRulesLabelMatcherModel {
+						if _, ok := itemMap["label_matcher"].(map[string]interface{}); ok {
+							return &NetworkPolicyViewEgressRulesLabelMatcherModel{
+							}
+						}
+						return nil
+					}(),
+					LabelSelector: func() *NetworkPolicyViewEgressRulesLabelSelectorModel {
+						if _, ok := itemMap["label_selector"].(map[string]interface{}); ok {
+							return &NetworkPolicyViewEgressRulesLabelSelectorModel{
+							}
+						}
+						return nil
+					}(),
+					Metadata: func() *NetworkPolicyViewEgressRulesMetadataModel {
+						if nestedMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
+							return &NetworkPolicyViewEgressRulesMetadataModel{
+								DescriptionSpec: func() types.String {
+									if v, ok := nestedMap["description"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Name: func() types.String {
+									if v, ok := nestedMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					OutsideEndpoints: func() *NetworkPolicyViewEmptyModel {
+						if _, ok := itemMap["outside_endpoints"].(map[string]interface{}); ok {
+							return &NetworkPolicyViewEmptyModel{}
+						}
+						return nil
+					}(),
+					PrefixList: func() *NetworkPolicyViewEgressRulesPrefixListModel {
+						if _, ok := itemMap["prefix_list"].(map[string]interface{}); ok {
+							return &NetworkPolicyViewEgressRulesPrefixListModel{
+							}
+						}
+						return nil
+					}(),
+					ProtocolPortRange: func() *NetworkPolicyViewEgressRulesProtocolPortRangeModel {
+						if nestedMap, ok := itemMap["protocol_port_range"].(map[string]interface{}); ok {
+							return &NetworkPolicyViewEgressRulesProtocolPortRangeModel{
+								Protocol: func() types.String {
+									if v, ok := nestedMap["protocol"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+				})
+			}
+		}
+		data.EgressRules = egress_rulesList
+	}
+	if _, ok := apiResource.Spec["endpoint"].(map[string]interface{}); ok && isImport && data.Endpoint == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Endpoint = &NetworkPolicyViewEndpointModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["ingress_rules"].([]interface{}); ok && len(listData) > 0 {
+		var ingress_rulesList []NetworkPolicyViewIngressRulesModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				ingress_rulesList = append(ingress_rulesList, NetworkPolicyViewIngressRulesModel{
+					Action: func() types.String {
+						if v, ok := itemMap["action"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					AdvAction: func() *NetworkPolicyViewIngressRulesAdvActionModel {
+						if nestedMap, ok := itemMap["adv_action"].(map[string]interface{}); ok {
+							return &NetworkPolicyViewIngressRulesAdvActionModel{
+								Action: func() types.String {
+									if v, ok := nestedMap["action"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					AllTCPTraffic: func() *NetworkPolicyViewEmptyModel {
+						if _, ok := itemMap["all_tcp_traffic"].(map[string]interface{}); ok {
+							return &NetworkPolicyViewEmptyModel{}
+						}
+						return nil
+					}(),
+					AllTraffic: func() *NetworkPolicyViewEmptyModel {
+						if _, ok := itemMap["all_traffic"].(map[string]interface{}); ok {
+							return &NetworkPolicyViewEmptyModel{}
+						}
+						return nil
+					}(),
+					AllUDPTraffic: func() *NetworkPolicyViewEmptyModel {
+						if _, ok := itemMap["all_udp_traffic"].(map[string]interface{}); ok {
+							return &NetworkPolicyViewEmptyModel{}
+						}
+						return nil
+					}(),
+					Any: func() *NetworkPolicyViewEmptyModel {
+						if _, ok := itemMap["any"].(map[string]interface{}); ok {
+							return &NetworkPolicyViewEmptyModel{}
+						}
+						return nil
+					}(),
+					Applications: func() *NetworkPolicyViewIngressRulesApplicationsModel {
+						if _, ok := itemMap["applications"].(map[string]interface{}); ok {
+							return &NetworkPolicyViewIngressRulesApplicationsModel{
+							}
+						}
+						return nil
+					}(),
+					InsideEndpoints: func() *NetworkPolicyViewEmptyModel {
+						if _, ok := itemMap["inside_endpoints"].(map[string]interface{}); ok {
+							return &NetworkPolicyViewEmptyModel{}
+						}
+						return nil
+					}(),
+					IPPrefixSet: func() *NetworkPolicyViewIngressRulesIPPrefixSetModel {
+						if _, ok := itemMap["ip_prefix_set"].(map[string]interface{}); ok {
+							return &NetworkPolicyViewIngressRulesIPPrefixSetModel{
+							}
+						}
+						return nil
+					}(),
+					LabelMatcher: func() *NetworkPolicyViewIngressRulesLabelMatcherModel {
+						if _, ok := itemMap["label_matcher"].(map[string]interface{}); ok {
+							return &NetworkPolicyViewIngressRulesLabelMatcherModel{
+							}
+						}
+						return nil
+					}(),
+					LabelSelector: func() *NetworkPolicyViewIngressRulesLabelSelectorModel {
+						if _, ok := itemMap["label_selector"].(map[string]interface{}); ok {
+							return &NetworkPolicyViewIngressRulesLabelSelectorModel{
+							}
+						}
+						return nil
+					}(),
+					Metadata: func() *NetworkPolicyViewIngressRulesMetadataModel {
+						if nestedMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
+							return &NetworkPolicyViewIngressRulesMetadataModel{
+								DescriptionSpec: func() types.String {
+									if v, ok := nestedMap["description"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Name: func() types.String {
+									if v, ok := nestedMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					OutsideEndpoints: func() *NetworkPolicyViewEmptyModel {
+						if _, ok := itemMap["outside_endpoints"].(map[string]interface{}); ok {
+							return &NetworkPolicyViewEmptyModel{}
+						}
+						return nil
+					}(),
+					PrefixList: func() *NetworkPolicyViewIngressRulesPrefixListModel {
+						if _, ok := itemMap["prefix_list"].(map[string]interface{}); ok {
+							return &NetworkPolicyViewIngressRulesPrefixListModel{
+							}
+						}
+						return nil
+					}(),
+					ProtocolPortRange: func() *NetworkPolicyViewIngressRulesProtocolPortRangeModel {
+						if nestedMap, ok := itemMap["protocol_port_range"].(map[string]interface{}); ok {
+							return &NetworkPolicyViewIngressRulesProtocolPortRangeModel{
+								Protocol: func() types.String {
+									if v, ok := nestedMap["protocol"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+				})
+			}
+		}
+		data.IngressRules = ingress_rulesList
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -868,7 +1328,7 @@ func (r *NetworkPolicyViewResource) Update(ctx context.Context, req resource.Upd
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.NetworkPolicyViewSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -893,6 +1353,176 @@ func (r *NetworkPolicyViewResource) Update(ctx context.Context, req resource.Upd
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if len(data.EgressRules) > 0 {
+		var egress_rulesList []map[string]interface{}
+		for _, item := range data.EgressRules {
+			itemMap := make(map[string]interface{})
+			if !item.Action.IsNull() && !item.Action.IsUnknown() {
+				itemMap["action"] = item.Action.ValueString()
+			}
+			if item.AdvAction != nil {
+				adv_actionNestedMap := make(map[string]interface{})
+				if !item.AdvAction.Action.IsNull() && !item.AdvAction.Action.IsUnknown() {
+					adv_actionNestedMap["action"] = item.AdvAction.Action.ValueString()
+				}
+				itemMap["adv_action"] = adv_actionNestedMap
+			}
+			if item.AllTCPTraffic != nil {
+				itemMap["all_tcp_traffic"] = map[string]interface{}{}
+			}
+			if item.AllTraffic != nil {
+				itemMap["all_traffic"] = map[string]interface{}{}
+			}
+			if item.AllUDPTraffic != nil {
+				itemMap["all_udp_traffic"] = map[string]interface{}{}
+			}
+			if item.Any != nil {
+				itemMap["any"] = map[string]interface{}{}
+			}
+			if item.Applications != nil {
+				applicationsNestedMap := make(map[string]interface{})
+				itemMap["applications"] = applicationsNestedMap
+			}
+			if item.InsideEndpoints != nil {
+				itemMap["inside_endpoints"] = map[string]interface{}{}
+			}
+			if item.IPPrefixSet != nil {
+				ip_prefix_setNestedMap := make(map[string]interface{})
+				itemMap["ip_prefix_set"] = ip_prefix_setNestedMap
+			}
+			if item.LabelMatcher != nil {
+				label_matcherNestedMap := make(map[string]interface{})
+				itemMap["label_matcher"] = label_matcherNestedMap
+			}
+			if item.LabelSelector != nil {
+				label_selectorNestedMap := make(map[string]interface{})
+				itemMap["label_selector"] = label_selectorNestedMap
+			}
+			if item.Metadata != nil {
+				metadataNestedMap := make(map[string]interface{})
+				if !item.Metadata.DescriptionSpec.IsNull() && !item.Metadata.DescriptionSpec.IsUnknown() {
+					metadataNestedMap["description"] = item.Metadata.DescriptionSpec.ValueString()
+				}
+				if !item.Metadata.Name.IsNull() && !item.Metadata.Name.IsUnknown() {
+					metadataNestedMap["name"] = item.Metadata.Name.ValueString()
+				}
+				itemMap["metadata"] = metadataNestedMap
+			}
+			if item.OutsideEndpoints != nil {
+				itemMap["outside_endpoints"] = map[string]interface{}{}
+			}
+			if item.PrefixList != nil {
+				prefix_listNestedMap := make(map[string]interface{})
+				itemMap["prefix_list"] = prefix_listNestedMap
+			}
+			if item.ProtocolPortRange != nil {
+				protocol_port_rangeNestedMap := make(map[string]interface{})
+				if !item.ProtocolPortRange.Protocol.IsNull() && !item.ProtocolPortRange.Protocol.IsUnknown() {
+					protocol_port_rangeNestedMap["protocol"] = item.ProtocolPortRange.Protocol.ValueString()
+				}
+				itemMap["protocol_port_range"] = protocol_port_rangeNestedMap
+			}
+			egress_rulesList = append(egress_rulesList, itemMap)
+		}
+		apiResource.Spec["egress_rules"] = egress_rulesList
+	}
+	if data.Endpoint != nil {
+		endpointMap := make(map[string]interface{})
+		if data.Endpoint.Any != nil {
+			endpointMap["any"] = map[string]interface{}{}
+		}
+		if data.Endpoint.InsideEndpoints != nil {
+			endpointMap["inside_endpoints"] = map[string]interface{}{}
+		}
+		if data.Endpoint.LabelSelector != nil {
+			label_selectorNestedMap := make(map[string]interface{})
+			endpointMap["label_selector"] = label_selectorNestedMap
+		}
+		if data.Endpoint.OutsideEndpoints != nil {
+			endpointMap["outside_endpoints"] = map[string]interface{}{}
+		}
+		if data.Endpoint.PrefixList != nil {
+			prefix_listNestedMap := make(map[string]interface{})
+			endpointMap["prefix_list"] = prefix_listNestedMap
+		}
+		apiResource.Spec["endpoint"] = endpointMap
+	}
+	if len(data.IngressRules) > 0 {
+		var ingress_rulesList []map[string]interface{}
+		for _, item := range data.IngressRules {
+			itemMap := make(map[string]interface{})
+			if !item.Action.IsNull() && !item.Action.IsUnknown() {
+				itemMap["action"] = item.Action.ValueString()
+			}
+			if item.AdvAction != nil {
+				adv_actionNestedMap := make(map[string]interface{})
+				if !item.AdvAction.Action.IsNull() && !item.AdvAction.Action.IsUnknown() {
+					adv_actionNestedMap["action"] = item.AdvAction.Action.ValueString()
+				}
+				itemMap["adv_action"] = adv_actionNestedMap
+			}
+			if item.AllTCPTraffic != nil {
+				itemMap["all_tcp_traffic"] = map[string]interface{}{}
+			}
+			if item.AllTraffic != nil {
+				itemMap["all_traffic"] = map[string]interface{}{}
+			}
+			if item.AllUDPTraffic != nil {
+				itemMap["all_udp_traffic"] = map[string]interface{}{}
+			}
+			if item.Any != nil {
+				itemMap["any"] = map[string]interface{}{}
+			}
+			if item.Applications != nil {
+				applicationsNestedMap := make(map[string]interface{})
+				itemMap["applications"] = applicationsNestedMap
+			}
+			if item.InsideEndpoints != nil {
+				itemMap["inside_endpoints"] = map[string]interface{}{}
+			}
+			if item.IPPrefixSet != nil {
+				ip_prefix_setNestedMap := make(map[string]interface{})
+				itemMap["ip_prefix_set"] = ip_prefix_setNestedMap
+			}
+			if item.LabelMatcher != nil {
+				label_matcherNestedMap := make(map[string]interface{})
+				itemMap["label_matcher"] = label_matcherNestedMap
+			}
+			if item.LabelSelector != nil {
+				label_selectorNestedMap := make(map[string]interface{})
+				itemMap["label_selector"] = label_selectorNestedMap
+			}
+			if item.Metadata != nil {
+				metadataNestedMap := make(map[string]interface{})
+				if !item.Metadata.DescriptionSpec.IsNull() && !item.Metadata.DescriptionSpec.IsUnknown() {
+					metadataNestedMap["description"] = item.Metadata.DescriptionSpec.ValueString()
+				}
+				if !item.Metadata.Name.IsNull() && !item.Metadata.Name.IsUnknown() {
+					metadataNestedMap["name"] = item.Metadata.Name.ValueString()
+				}
+				itemMap["metadata"] = metadataNestedMap
+			}
+			if item.OutsideEndpoints != nil {
+				itemMap["outside_endpoints"] = map[string]interface{}{}
+			}
+			if item.PrefixList != nil {
+				prefix_listNestedMap := make(map[string]interface{})
+				itemMap["prefix_list"] = prefix_listNestedMap
+			}
+			if item.ProtocolPortRange != nil {
+				protocol_port_rangeNestedMap := make(map[string]interface{})
+				if !item.ProtocolPortRange.Protocol.IsNull() && !item.ProtocolPortRange.Protocol.IsUnknown() {
+					protocol_port_rangeNestedMap["protocol"] = item.ProtocolPortRange.Protocol.ValueString()
+				}
+				itemMap["protocol_port_range"] = protocol_port_rangeNestedMap
+			}
+			ingress_rulesList = append(ingress_rulesList, itemMap)
+		}
+		apiResource.Spec["ingress_rules"] = ingress_rulesList
+	}
+
+
 	updated, err := r.client.UpdateNetworkPolicyView(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update NetworkPolicyView: %s", err))
@@ -901,6 +1531,8 @@ func (r *NetworkPolicyViewResource) Update(ctx context.Context, req resource.Upd
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -913,6 +1545,7 @@ func (r *NetworkPolicyViewResource) Update(ctx context.Context, req resource.Upd
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -939,6 +1572,15 @@ func (r *NetworkPolicyViewResource) Delete(ctx context.Context, req resource.Del
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "NetworkPolicyView already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "NetworkPolicyView delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

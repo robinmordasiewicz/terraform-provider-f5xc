@@ -10,19 +10,14 @@ import (
 
 // AllowedTenant represents a F5XC AllowedTenant
 type AllowedTenant struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     AllowedTenantSpec `json:"spec"`
-}
-
-// AllowedTenantSpec defines the specification for AllowedTenant
-type AllowedTenantSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateAllowedTenant creates a new AllowedTenant
 func (c *Client) CreateAllowedTenant(ctx context.Context, resource *AllowedTenant) (*AllowedTenant, error) {
 	var result AllowedTenant
-	path := fmt.Sprintf("/api/config/namespaces/%s/allowed_tenants", resource.Metadata.Namespace)
+	path := fmt.Sprintf("/api/web/namespaces/%s/allowed_tenants", resource.Metadata.Namespace)
 	err := c.Post(ctx, path, resource, &result)
 	return &result, err
 }
@@ -30,7 +25,7 @@ func (c *Client) CreateAllowedTenant(ctx context.Context, resource *AllowedTenan
 // GetAllowedTenant retrieves a AllowedTenant
 func (c *Client) GetAllowedTenant(ctx context.Context, namespace, name string) (*AllowedTenant, error) {
 	var result AllowedTenant
-	path := fmt.Sprintf("/api/config/namespaces/%s/allowed_tenants/%s", namespace, name)
+	path := fmt.Sprintf("/api/web/namespaces/%s/allowed_tenants/%s", namespace, name)
 	err := c.Get(ctx, path, &result)
 	return &result, err
 }
@@ -38,13 +33,13 @@ func (c *Client) GetAllowedTenant(ctx context.Context, namespace, name string) (
 // UpdateAllowedTenant updates a AllowedTenant
 func (c *Client) UpdateAllowedTenant(ctx context.Context, resource *AllowedTenant) (*AllowedTenant, error) {
 	var result AllowedTenant
-	path := fmt.Sprintf("/api/config/namespaces/%s/allowed_tenants/%s", resource.Metadata.Namespace, resource.Metadata.Name)
+	path := fmt.Sprintf("/api/web/namespaces/%s/allowed_tenants/%s", resource.Metadata.Namespace, resource.Metadata.Name)
 	err := c.Put(ctx, path, resource, &result)
 	return &result, err
 }
 
 // DeleteAllowedTenant deletes a AllowedTenant
 func (c *Client) DeleteAllowedTenant(ctx context.Context, namespace, name string) error {
-	path := fmt.Sprintf("/api/config/namespaces/%s/allowed_tenants/%s", namespace, name)
+	path := fmt.Sprintf("/api/web/namespaces/%s/allowed_tenants/%s", namespace, name)
 	return c.Delete(ctx, path)
 }

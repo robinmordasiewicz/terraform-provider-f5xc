@@ -10,13 +10,8 @@ import (
 
 // FastACL represents a F5XC FastACL
 type FastACL struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     FastACLSpec `json:"spec"`
-}
-
-// FastACLSpec defines the specification for FastACL
-type FastACLSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateFastACL creates a new FastACL

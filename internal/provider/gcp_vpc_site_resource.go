@@ -12,6 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -770,16 +771,16 @@ type GCPVPCSiteVoltstackClusterStorageClassListStorageClassesModel struct {
 type GCPVPCSiteResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Address types.String `tfsdk:"address"`
 	Annotations types.Map `tfsdk:"annotations"`
 	Description types.String `tfsdk:"description"`
 	Disable types.Bool `tfsdk:"disable"`
+	Labels types.Map `tfsdk:"labels"`
+	ID types.String `tfsdk:"id"`
+	Address types.String `tfsdk:"address"`
 	DiskSize types.Int64 `tfsdk:"disk_size"`
 	GCPRegion types.String `tfsdk:"gcp_region"`
 	InstanceType types.String `tfsdk:"instance_type"`
-	Labels types.Map `tfsdk:"labels"`
 	SSHKey types.String `tfsdk:"ssh_key"`
-	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
 	AdminPassword *GCPVPCSiteAdminPasswordModel `tfsdk:"admin_password"`
 	BlockAllServices *GCPVPCSiteEmptyModel `tfsdk:"block_all_services"`
@@ -831,10 +832,6 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 					validators.NamespaceValidator(),
 				},
 			},
-			"address": schema.StringAttribute{
-				MarkdownDescription: "Geographical Address. Site's geographical address that can be used to determine its latitude and longitude.",
-				Optional: true,
-			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
 				Optional: true,
@@ -848,29 +845,53 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				MarkdownDescription: "A value of true will administratively disable the object.",
 				Optional: true,
 			},
-			"disk_size": schema.Int64Attribute{
-				MarkdownDescription: "Cloud Disk Size. Disk size to be used for this instance in GiB. 80 is 80 GiB",
-				Optional: true,
-			},
-			"gcp_region": schema.StringAttribute{
-				MarkdownDescription: "GCP Region. Name for GCP Region.",
-				Optional: true,
-			},
-			"instance_type": schema.StringAttribute{
-				MarkdownDescription: "GCP Instance Type for Node. Select Instance size based on performance needed",
-				Optional: true,
-			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
+			"id": schema.StringAttribute{
+				MarkdownDescription: "Unique identifier for the resource.",
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"address": schema.StringAttribute{
+				MarkdownDescription: "Geographical Address. Site's geographical address that can be used to determine its latitude and longitude.",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"disk_size": schema.Int64Attribute{
+				MarkdownDescription: "Cloud Disk Size. Disk size to be used for this instance in GiB. 80 is 80 GiB",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.Int64{
+					int64planmodifier.UseStateForUnknown(),
+				},
+			},
+			"gcp_region": schema.StringAttribute{
+				MarkdownDescription: "GCP Region. Name for GCP Region.",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"instance_type": schema.StringAttribute{
+				MarkdownDescription: "GCP Instance Type for Node. Select Instance size based on performance needed",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
 			"ssh_key": schema.StringAttribute{
 				MarkdownDescription: "Public SSH key. Public SSH key for accessing the site.",
 				Optional: true,
-			},
-			"id": schema.StringAttribute{
-				MarkdownDescription: "Unique identifier for the resource.",
 				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
@@ -2427,7 +2448,7 @@ func (r *GCPVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.GCPVPCSiteSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -2452,6 +2473,418 @@ func (r *GCPVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.AdminPassword != nil {
+		admin_passwordMap := make(map[string]interface{})
+		if data.AdminPassword.BlindfoldSecretInfo != nil {
+			blindfold_secret_infoNestedMap := make(map[string]interface{})
+			if !data.AdminPassword.BlindfoldSecretInfo.DecryptionProvider.IsNull() && !data.AdminPassword.BlindfoldSecretInfo.DecryptionProvider.IsUnknown() {
+				blindfold_secret_infoNestedMap["decryption_provider"] = data.AdminPassword.BlindfoldSecretInfo.DecryptionProvider.ValueString()
+			}
+			if !data.AdminPassword.BlindfoldSecretInfo.Location.IsNull() && !data.AdminPassword.BlindfoldSecretInfo.Location.IsUnknown() {
+				blindfold_secret_infoNestedMap["location"] = data.AdminPassword.BlindfoldSecretInfo.Location.ValueString()
+			}
+			if !data.AdminPassword.BlindfoldSecretInfo.StoreProvider.IsNull() && !data.AdminPassword.BlindfoldSecretInfo.StoreProvider.IsUnknown() {
+				blindfold_secret_infoNestedMap["store_provider"] = data.AdminPassword.BlindfoldSecretInfo.StoreProvider.ValueString()
+			}
+			admin_passwordMap["blindfold_secret_info"] = blindfold_secret_infoNestedMap
+		}
+		if data.AdminPassword.ClearSecretInfo != nil {
+			clear_secret_infoNestedMap := make(map[string]interface{})
+			if !data.AdminPassword.ClearSecretInfo.Provider.IsNull() && !data.AdminPassword.ClearSecretInfo.Provider.IsUnknown() {
+				clear_secret_infoNestedMap["provider"] = data.AdminPassword.ClearSecretInfo.Provider.ValueString()
+			}
+			if !data.AdminPassword.ClearSecretInfo.URL.IsNull() && !data.AdminPassword.ClearSecretInfo.URL.IsUnknown() {
+				clear_secret_infoNestedMap["url"] = data.AdminPassword.ClearSecretInfo.URL.ValueString()
+			}
+			admin_passwordMap["clear_secret_info"] = clear_secret_infoNestedMap
+		}
+		apiResource.Spec["admin_password"] = admin_passwordMap
+	}
+	if data.BlockAllServices != nil {
+		block_all_servicesMap := make(map[string]interface{})
+		apiResource.Spec["block_all_services"] = block_all_servicesMap
+	}
+	if data.BlockedServices != nil {
+		blocked_servicesMap := make(map[string]interface{})
+		apiResource.Spec["blocked_services"] = blocked_servicesMap
+	}
+	if data.CloudCredentials != nil {
+		cloud_credentialsMap := make(map[string]interface{})
+		if !data.CloudCredentials.Name.IsNull() && !data.CloudCredentials.Name.IsUnknown() {
+			cloud_credentialsMap["name"] = data.CloudCredentials.Name.ValueString()
+		}
+		if !data.CloudCredentials.Namespace.IsNull() && !data.CloudCredentials.Namespace.IsUnknown() {
+			cloud_credentialsMap["namespace"] = data.CloudCredentials.Namespace.ValueString()
+		}
+		if !data.CloudCredentials.Tenant.IsNull() && !data.CloudCredentials.Tenant.IsUnknown() {
+			cloud_credentialsMap["tenant"] = data.CloudCredentials.Tenant.ValueString()
+		}
+		apiResource.Spec["cloud_credentials"] = cloud_credentialsMap
+	}
+	if data.Coordinates != nil {
+		coordinatesMap := make(map[string]interface{})
+		if !data.Coordinates.Latitude.IsNull() && !data.Coordinates.Latitude.IsUnknown() {
+			coordinatesMap["latitude"] = data.Coordinates.Latitude.ValueInt64()
+		}
+		if !data.Coordinates.Longitude.IsNull() && !data.Coordinates.Longitude.IsUnknown() {
+			coordinatesMap["longitude"] = data.Coordinates.Longitude.ValueInt64()
+		}
+		apiResource.Spec["coordinates"] = coordinatesMap
+	}
+	if data.CustomDNS != nil {
+		custom_dnsMap := make(map[string]interface{})
+		if !data.CustomDNS.InsideNameserver.IsNull() && !data.CustomDNS.InsideNameserver.IsUnknown() {
+			custom_dnsMap["inside_nameserver"] = data.CustomDNS.InsideNameserver.ValueString()
+		}
+		if !data.CustomDNS.OutsideNameserver.IsNull() && !data.CustomDNS.OutsideNameserver.IsUnknown() {
+			custom_dnsMap["outside_nameserver"] = data.CustomDNS.OutsideNameserver.ValueString()
+		}
+		apiResource.Spec["custom_dns"] = custom_dnsMap
+	}
+	if data.DefaultBlockedServices != nil {
+		default_blocked_servicesMap := make(map[string]interface{})
+		apiResource.Spec["default_blocked_services"] = default_blocked_servicesMap
+	}
+	if data.GCPLabels != nil {
+		gcp_labelsMap := make(map[string]interface{})
+		apiResource.Spec["gcp_labels"] = gcp_labelsMap
+	}
+	if data.IngressEgressGw != nil {
+		ingress_egress_gwMap := make(map[string]interface{})
+		if data.IngressEgressGw.ActiveEnhancedFirewallPolicies != nil {
+			active_enhanced_firewall_policiesNestedMap := make(map[string]interface{})
+			ingress_egress_gwMap["active_enhanced_firewall_policies"] = active_enhanced_firewall_policiesNestedMap
+		}
+		if data.IngressEgressGw.ActiveForwardProxyPolicies != nil {
+			active_forward_proxy_policiesNestedMap := make(map[string]interface{})
+			ingress_egress_gwMap["active_forward_proxy_policies"] = active_forward_proxy_policiesNestedMap
+		}
+		if data.IngressEgressGw.ActiveNetworkPolicies != nil {
+			active_network_policiesNestedMap := make(map[string]interface{})
+			ingress_egress_gwMap["active_network_policies"] = active_network_policiesNestedMap
+		}
+		if data.IngressEgressGw.DcClusterGroupInsideVn != nil {
+			dc_cluster_group_inside_vnNestedMap := make(map[string]interface{})
+			if !data.IngressEgressGw.DcClusterGroupInsideVn.Name.IsNull() && !data.IngressEgressGw.DcClusterGroupInsideVn.Name.IsUnknown() {
+				dc_cluster_group_inside_vnNestedMap["name"] = data.IngressEgressGw.DcClusterGroupInsideVn.Name.ValueString()
+			}
+			if !data.IngressEgressGw.DcClusterGroupInsideVn.Namespace.IsNull() && !data.IngressEgressGw.DcClusterGroupInsideVn.Namespace.IsUnknown() {
+				dc_cluster_group_inside_vnNestedMap["namespace"] = data.IngressEgressGw.DcClusterGroupInsideVn.Namespace.ValueString()
+			}
+			if !data.IngressEgressGw.DcClusterGroupInsideVn.Tenant.IsNull() && !data.IngressEgressGw.DcClusterGroupInsideVn.Tenant.IsUnknown() {
+				dc_cluster_group_inside_vnNestedMap["tenant"] = data.IngressEgressGw.DcClusterGroupInsideVn.Tenant.ValueString()
+			}
+			ingress_egress_gwMap["dc_cluster_group_inside_vn"] = dc_cluster_group_inside_vnNestedMap
+		}
+		if data.IngressEgressGw.DcClusterGroupOutsideVn != nil {
+			dc_cluster_group_outside_vnNestedMap := make(map[string]interface{})
+			if !data.IngressEgressGw.DcClusterGroupOutsideVn.Name.IsNull() && !data.IngressEgressGw.DcClusterGroupOutsideVn.Name.IsUnknown() {
+				dc_cluster_group_outside_vnNestedMap["name"] = data.IngressEgressGw.DcClusterGroupOutsideVn.Name.ValueString()
+			}
+			if !data.IngressEgressGw.DcClusterGroupOutsideVn.Namespace.IsNull() && !data.IngressEgressGw.DcClusterGroupOutsideVn.Namespace.IsUnknown() {
+				dc_cluster_group_outside_vnNestedMap["namespace"] = data.IngressEgressGw.DcClusterGroupOutsideVn.Namespace.ValueString()
+			}
+			if !data.IngressEgressGw.DcClusterGroupOutsideVn.Tenant.IsNull() && !data.IngressEgressGw.DcClusterGroupOutsideVn.Tenant.IsUnknown() {
+				dc_cluster_group_outside_vnNestedMap["tenant"] = data.IngressEgressGw.DcClusterGroupOutsideVn.Tenant.ValueString()
+			}
+			ingress_egress_gwMap["dc_cluster_group_outside_vn"] = dc_cluster_group_outside_vnNestedMap
+		}
+		if data.IngressEgressGw.ForwardProxyAllowAll != nil {
+			ingress_egress_gwMap["forward_proxy_allow_all"] = map[string]interface{}{}
+		}
+		if !data.IngressEgressGw.GCPCertifiedHw.IsNull() && !data.IngressEgressGw.GCPCertifiedHw.IsUnknown() {
+			ingress_egress_gwMap["gcp_certified_hw"] = data.IngressEgressGw.GCPCertifiedHw.ValueString()
+		}
+		if data.IngressEgressGw.GlobalNetworkList != nil {
+			global_network_listNestedMap := make(map[string]interface{})
+			ingress_egress_gwMap["global_network_list"] = global_network_listNestedMap
+		}
+		if data.IngressEgressGw.InsideNetwork != nil {
+			inside_networkNestedMap := make(map[string]interface{})
+			ingress_egress_gwMap["inside_network"] = inside_networkNestedMap
+		}
+		if data.IngressEgressGw.InsideStaticRoutes != nil {
+			inside_static_routesNestedMap := make(map[string]interface{})
+			ingress_egress_gwMap["inside_static_routes"] = inside_static_routesNestedMap
+		}
+		if data.IngressEgressGw.InsideSubnet != nil {
+			inside_subnetNestedMap := make(map[string]interface{})
+			ingress_egress_gwMap["inside_subnet"] = inside_subnetNestedMap
+		}
+		if data.IngressEgressGw.NoDcClusterGroup != nil {
+			ingress_egress_gwMap["no_dc_cluster_group"] = map[string]interface{}{}
+		}
+		if data.IngressEgressGw.NoForwardProxy != nil {
+			ingress_egress_gwMap["no_forward_proxy"] = map[string]interface{}{}
+		}
+		if data.IngressEgressGw.NoGlobalNetwork != nil {
+			ingress_egress_gwMap["no_global_network"] = map[string]interface{}{}
+		}
+		if data.IngressEgressGw.NoInsideStaticRoutes != nil {
+			ingress_egress_gwMap["no_inside_static_routes"] = map[string]interface{}{}
+		}
+		if data.IngressEgressGw.NoNetworkPolicy != nil {
+			ingress_egress_gwMap["no_network_policy"] = map[string]interface{}{}
+		}
+		if data.IngressEgressGw.NoOutsideStaticRoutes != nil {
+			ingress_egress_gwMap["no_outside_static_routes"] = map[string]interface{}{}
+		}
+		if !data.IngressEgressGw.NodeNumber.IsNull() && !data.IngressEgressGw.NodeNumber.IsUnknown() {
+			ingress_egress_gwMap["node_number"] = data.IngressEgressGw.NodeNumber.ValueInt64()
+		}
+		if data.IngressEgressGw.OutsideNetwork != nil {
+			outside_networkNestedMap := make(map[string]interface{})
+			ingress_egress_gwMap["outside_network"] = outside_networkNestedMap
+		}
+		if data.IngressEgressGw.OutsideStaticRoutes != nil {
+			outside_static_routesNestedMap := make(map[string]interface{})
+			ingress_egress_gwMap["outside_static_routes"] = outside_static_routesNestedMap
+		}
+		if data.IngressEgressGw.OutsideSubnet != nil {
+			outside_subnetNestedMap := make(map[string]interface{})
+			ingress_egress_gwMap["outside_subnet"] = outside_subnetNestedMap
+		}
+		if data.IngressEgressGw.PerformanceEnhancementMode != nil {
+			performance_enhancement_modeNestedMap := make(map[string]interface{})
+			ingress_egress_gwMap["performance_enhancement_mode"] = performance_enhancement_modeNestedMap
+		}
+		if data.IngressEgressGw.SmConnectionPublicIP != nil {
+			ingress_egress_gwMap["sm_connection_public_ip"] = map[string]interface{}{}
+		}
+		if data.IngressEgressGw.SmConnectionPvtIP != nil {
+			ingress_egress_gwMap["sm_connection_pvt_ip"] = map[string]interface{}{}
+		}
+		apiResource.Spec["ingress_egress_gw"] = ingress_egress_gwMap
+	}
+	if data.IngressGw != nil {
+		ingress_gwMap := make(map[string]interface{})
+		if !data.IngressGw.GCPCertifiedHw.IsNull() && !data.IngressGw.GCPCertifiedHw.IsUnknown() {
+			ingress_gwMap["gcp_certified_hw"] = data.IngressGw.GCPCertifiedHw.ValueString()
+		}
+		if data.IngressGw.LocalNetwork != nil {
+			local_networkNestedMap := make(map[string]interface{})
+			ingress_gwMap["local_network"] = local_networkNestedMap
+		}
+		if data.IngressGw.LocalSubnet != nil {
+			local_subnetNestedMap := make(map[string]interface{})
+			ingress_gwMap["local_subnet"] = local_subnetNestedMap
+		}
+		if !data.IngressGw.NodeNumber.IsNull() && !data.IngressGw.NodeNumber.IsUnknown() {
+			ingress_gwMap["node_number"] = data.IngressGw.NodeNumber.ValueInt64()
+		}
+		if data.IngressGw.PerformanceEnhancementMode != nil {
+			performance_enhancement_modeNestedMap := make(map[string]interface{})
+			ingress_gwMap["performance_enhancement_mode"] = performance_enhancement_modeNestedMap
+		}
+		apiResource.Spec["ingress_gw"] = ingress_gwMap
+	}
+	if data.KubernetesUpgradeDrain != nil {
+		kubernetes_upgrade_drainMap := make(map[string]interface{})
+		if data.KubernetesUpgradeDrain.DisableUpgradeDrain != nil {
+			kubernetes_upgrade_drainMap["disable_upgrade_drain"] = map[string]interface{}{}
+		}
+		if data.KubernetesUpgradeDrain.EnableUpgradeDrain != nil {
+			enable_upgrade_drainNestedMap := make(map[string]interface{})
+			if !data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainMaxUnavailableNodeCount.IsNull() && !data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainMaxUnavailableNodeCount.IsUnknown() {
+				enable_upgrade_drainNestedMap["drain_max_unavailable_node_count"] = data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainMaxUnavailableNodeCount.ValueInt64()
+			}
+			if !data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainNodeTimeout.IsNull() && !data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainNodeTimeout.IsUnknown() {
+				enable_upgrade_drainNestedMap["drain_node_timeout"] = data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainNodeTimeout.ValueInt64()
+			}
+			kubernetes_upgrade_drainMap["enable_upgrade_drain"] = enable_upgrade_drainNestedMap
+		}
+		apiResource.Spec["kubernetes_upgrade_drain"] = kubernetes_upgrade_drainMap
+	}
+	if data.LogReceiver != nil {
+		log_receiverMap := make(map[string]interface{})
+		if !data.LogReceiver.Name.IsNull() && !data.LogReceiver.Name.IsUnknown() {
+			log_receiverMap["name"] = data.LogReceiver.Name.ValueString()
+		}
+		if !data.LogReceiver.Namespace.IsNull() && !data.LogReceiver.Namespace.IsUnknown() {
+			log_receiverMap["namespace"] = data.LogReceiver.Namespace.ValueString()
+		}
+		if !data.LogReceiver.Tenant.IsNull() && !data.LogReceiver.Tenant.IsUnknown() {
+			log_receiverMap["tenant"] = data.LogReceiver.Tenant.ValueString()
+		}
+		apiResource.Spec["log_receiver"] = log_receiverMap
+	}
+	if data.LogsStreamingDisabled != nil {
+		logs_streaming_disabledMap := make(map[string]interface{})
+		apiResource.Spec["logs_streaming_disabled"] = logs_streaming_disabledMap
+	}
+	if data.OfflineSurvivabilityMode != nil {
+		offline_survivability_modeMap := make(map[string]interface{})
+		if data.OfflineSurvivabilityMode.EnableOfflineSurvivabilityMode != nil {
+			offline_survivability_modeMap["enable_offline_survivability_mode"] = map[string]interface{}{}
+		}
+		if data.OfflineSurvivabilityMode.NoOfflineSurvivabilityMode != nil {
+			offline_survivability_modeMap["no_offline_survivability_mode"] = map[string]interface{}{}
+		}
+		apiResource.Spec["offline_survivability_mode"] = offline_survivability_modeMap
+	}
+	if data.Os != nil {
+		osMap := make(map[string]interface{})
+		if data.Os.DefaultOsVersion != nil {
+			osMap["default_os_version"] = map[string]interface{}{}
+		}
+		if !data.Os.OperatingSystemVersion.IsNull() && !data.Os.OperatingSystemVersion.IsUnknown() {
+			osMap["operating_system_version"] = data.Os.OperatingSystemVersion.ValueString()
+		}
+		apiResource.Spec["os"] = osMap
+	}
+	if data.PrivateConnectDisabled != nil {
+		private_connect_disabledMap := make(map[string]interface{})
+		apiResource.Spec["private_connect_disabled"] = private_connect_disabledMap
+	}
+	if data.PrivateConnectivity != nil {
+		private_connectivityMap := make(map[string]interface{})
+		if data.PrivateConnectivity.CloudLink != nil {
+			cloud_linkNestedMap := make(map[string]interface{})
+			if !data.PrivateConnectivity.CloudLink.Name.IsNull() && !data.PrivateConnectivity.CloudLink.Name.IsUnknown() {
+				cloud_linkNestedMap["name"] = data.PrivateConnectivity.CloudLink.Name.ValueString()
+			}
+			if !data.PrivateConnectivity.CloudLink.Namespace.IsNull() && !data.PrivateConnectivity.CloudLink.Namespace.IsUnknown() {
+				cloud_linkNestedMap["namespace"] = data.PrivateConnectivity.CloudLink.Namespace.ValueString()
+			}
+			if !data.PrivateConnectivity.CloudLink.Tenant.IsNull() && !data.PrivateConnectivity.CloudLink.Tenant.IsUnknown() {
+				cloud_linkNestedMap["tenant"] = data.PrivateConnectivity.CloudLink.Tenant.ValueString()
+			}
+			private_connectivityMap["cloud_link"] = cloud_linkNestedMap
+		}
+		if data.PrivateConnectivity.Inside != nil {
+			private_connectivityMap["inside"] = map[string]interface{}{}
+		}
+		if data.PrivateConnectivity.Outside != nil {
+			private_connectivityMap["outside"] = map[string]interface{}{}
+		}
+		apiResource.Spec["private_connectivity"] = private_connectivityMap
+	}
+	if data.Sw != nil {
+		swMap := make(map[string]interface{})
+		if data.Sw.DefaultSwVersion != nil {
+			swMap["default_sw_version"] = map[string]interface{}{}
+		}
+		if !data.Sw.VolterraSoftwareVersion.IsNull() && !data.Sw.VolterraSoftwareVersion.IsUnknown() {
+			swMap["volterra_software_version"] = data.Sw.VolterraSoftwareVersion.ValueString()
+		}
+		apiResource.Spec["sw"] = swMap
+	}
+	if data.VoltstackCluster != nil {
+		voltstack_clusterMap := make(map[string]interface{})
+		if data.VoltstackCluster.ActiveEnhancedFirewallPolicies != nil {
+			active_enhanced_firewall_policiesNestedMap := make(map[string]interface{})
+			voltstack_clusterMap["active_enhanced_firewall_policies"] = active_enhanced_firewall_policiesNestedMap
+		}
+		if data.VoltstackCluster.ActiveForwardProxyPolicies != nil {
+			active_forward_proxy_policiesNestedMap := make(map[string]interface{})
+			voltstack_clusterMap["active_forward_proxy_policies"] = active_forward_proxy_policiesNestedMap
+		}
+		if data.VoltstackCluster.ActiveNetworkPolicies != nil {
+			active_network_policiesNestedMap := make(map[string]interface{})
+			voltstack_clusterMap["active_network_policies"] = active_network_policiesNestedMap
+		}
+		if data.VoltstackCluster.DcClusterGroup != nil {
+			dc_cluster_groupNestedMap := make(map[string]interface{})
+			if !data.VoltstackCluster.DcClusterGroup.Name.IsNull() && !data.VoltstackCluster.DcClusterGroup.Name.IsUnknown() {
+				dc_cluster_groupNestedMap["name"] = data.VoltstackCluster.DcClusterGroup.Name.ValueString()
+			}
+			if !data.VoltstackCluster.DcClusterGroup.Namespace.IsNull() && !data.VoltstackCluster.DcClusterGroup.Namespace.IsUnknown() {
+				dc_cluster_groupNestedMap["namespace"] = data.VoltstackCluster.DcClusterGroup.Namespace.ValueString()
+			}
+			if !data.VoltstackCluster.DcClusterGroup.Tenant.IsNull() && !data.VoltstackCluster.DcClusterGroup.Tenant.IsUnknown() {
+				dc_cluster_groupNestedMap["tenant"] = data.VoltstackCluster.DcClusterGroup.Tenant.ValueString()
+			}
+			voltstack_clusterMap["dc_cluster_group"] = dc_cluster_groupNestedMap
+		}
+		if data.VoltstackCluster.DefaultStorage != nil {
+			voltstack_clusterMap["default_storage"] = map[string]interface{}{}
+		}
+		if data.VoltstackCluster.ForwardProxyAllowAll != nil {
+			voltstack_clusterMap["forward_proxy_allow_all"] = map[string]interface{}{}
+		}
+		if !data.VoltstackCluster.GCPCertifiedHw.IsNull() && !data.VoltstackCluster.GCPCertifiedHw.IsUnknown() {
+			voltstack_clusterMap["gcp_certified_hw"] = data.VoltstackCluster.GCPCertifiedHw.ValueString()
+		}
+		if data.VoltstackCluster.GlobalNetworkList != nil {
+			global_network_listNestedMap := make(map[string]interface{})
+			voltstack_clusterMap["global_network_list"] = global_network_listNestedMap
+		}
+		if data.VoltstackCluster.K8SCluster != nil {
+			k8s_clusterNestedMap := make(map[string]interface{})
+			if !data.VoltstackCluster.K8SCluster.Name.IsNull() && !data.VoltstackCluster.K8SCluster.Name.IsUnknown() {
+				k8s_clusterNestedMap["name"] = data.VoltstackCluster.K8SCluster.Name.ValueString()
+			}
+			if !data.VoltstackCluster.K8SCluster.Namespace.IsNull() && !data.VoltstackCluster.K8SCluster.Namespace.IsUnknown() {
+				k8s_clusterNestedMap["namespace"] = data.VoltstackCluster.K8SCluster.Namespace.ValueString()
+			}
+			if !data.VoltstackCluster.K8SCluster.Tenant.IsNull() && !data.VoltstackCluster.K8SCluster.Tenant.IsUnknown() {
+				k8s_clusterNestedMap["tenant"] = data.VoltstackCluster.K8SCluster.Tenant.ValueString()
+			}
+			voltstack_clusterMap["k8s_cluster"] = k8s_clusterNestedMap
+		}
+		if data.VoltstackCluster.NoDcClusterGroup != nil {
+			voltstack_clusterMap["no_dc_cluster_group"] = map[string]interface{}{}
+		}
+		if data.VoltstackCluster.NoForwardProxy != nil {
+			voltstack_clusterMap["no_forward_proxy"] = map[string]interface{}{}
+		}
+		if data.VoltstackCluster.NoGlobalNetwork != nil {
+			voltstack_clusterMap["no_global_network"] = map[string]interface{}{}
+		}
+		if data.VoltstackCluster.NoK8SCluster != nil {
+			voltstack_clusterMap["no_k8s_cluster"] = map[string]interface{}{}
+		}
+		if data.VoltstackCluster.NoNetworkPolicy != nil {
+			voltstack_clusterMap["no_network_policy"] = map[string]interface{}{}
+		}
+		if data.VoltstackCluster.NoOutsideStaticRoutes != nil {
+			voltstack_clusterMap["no_outside_static_routes"] = map[string]interface{}{}
+		}
+		if !data.VoltstackCluster.NodeNumber.IsNull() && !data.VoltstackCluster.NodeNumber.IsUnknown() {
+			voltstack_clusterMap["node_number"] = data.VoltstackCluster.NodeNumber.ValueInt64()
+		}
+		if data.VoltstackCluster.OutsideStaticRoutes != nil {
+			outside_static_routesNestedMap := make(map[string]interface{})
+			voltstack_clusterMap["outside_static_routes"] = outside_static_routesNestedMap
+		}
+		if data.VoltstackCluster.SiteLocalNetwork != nil {
+			site_local_networkNestedMap := make(map[string]interface{})
+			voltstack_clusterMap["site_local_network"] = site_local_networkNestedMap
+		}
+		if data.VoltstackCluster.SiteLocalSubnet != nil {
+			site_local_subnetNestedMap := make(map[string]interface{})
+			voltstack_clusterMap["site_local_subnet"] = site_local_subnetNestedMap
+		}
+		if data.VoltstackCluster.SmConnectionPublicIP != nil {
+			voltstack_clusterMap["sm_connection_public_ip"] = map[string]interface{}{}
+		}
+		if data.VoltstackCluster.SmConnectionPvtIP != nil {
+			voltstack_clusterMap["sm_connection_pvt_ip"] = map[string]interface{}{}
+		}
+		if data.VoltstackCluster.StorageClassList != nil {
+			storage_class_listNestedMap := make(map[string]interface{})
+			voltstack_clusterMap["storage_class_list"] = storage_class_listNestedMap
+		}
+		apiResource.Spec["voltstack_cluster"] = voltstack_clusterMap
+	}
+	if !data.Address.IsNull() && !data.Address.IsUnknown() {
+		apiResource.Spec["address"] = data.Address.ValueString()
+	}
+	if !data.DiskSize.IsNull() && !data.DiskSize.IsUnknown() {
+		apiResource.Spec["disk_size"] = data.DiskSize.ValueInt64()
+	}
+	if !data.GCPRegion.IsNull() && !data.GCPRegion.IsUnknown() {
+		apiResource.Spec["gcp_region"] = data.GCPRegion.ValueString()
+	}
+	if !data.InstanceType.IsNull() && !data.InstanceType.IsUnknown() {
+		apiResource.Spec["instance_type"] = data.InstanceType.ValueString()
+	}
+	if !data.SSHKey.IsNull() && !data.SSHKey.IsUnknown() {
+		apiResource.Spec["ssh_key"] = data.SSHKey.ValueString()
+	}
+
+
 	created, err := r.client.CreateGCPVPCSite(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create GCPVPCSite: %s", err))
@@ -2460,8 +2893,33 @@ func (r *GCPVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+	if v, ok := created.Spec["address"].(string); ok && v != "" {
+		data.Address = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["disk_size"].(float64); ok {
+		data.DiskSize = types.Int64Value(int64(v))
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["gcp_region"].(string); ok && v != "" {
+		data.GCPRegion = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["instance_type"].(string); ok && v != "" {
+		data.InstanceType = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["ssh_key"].(string); ok && v != "" {
+		data.SSHKey = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created GCPVPCSite resource")
@@ -2540,9 +2998,244 @@ func (r *GCPVPCSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if _, ok := apiResource.Spec["admin_password"].(map[string]interface{}); ok && isImport && data.AdminPassword == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AdminPassword = &GCPVPCSiteAdminPasswordModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["block_all_services"].(map[string]interface{}); ok && isImport && data.BlockAllServices == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.BlockAllServices = &GCPVPCSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["blocked_services"].(map[string]interface{}); ok && isImport && data.BlockedServices == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.BlockedServices = &GCPVPCSiteBlockedServicesModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["cloud_credentials"].(map[string]interface{}); ok && (isImport || data.CloudCredentials != nil) {
+		data.CloudCredentials = &GCPVPCSiteCloudCredentialsModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["coordinates"].(map[string]interface{}); ok && (isImport || data.Coordinates != nil) {
+		data.Coordinates = &GCPVPCSiteCoordinatesModel{
+			Latitude: func() types.Int64 {
+				if v, ok := blockData["latitude"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			Longitude: func() types.Int64 {
+				if v, ok := blockData["longitude"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["custom_dns"].(map[string]interface{}); ok && (isImport || data.CustomDNS != nil) {
+		data.CustomDNS = &GCPVPCSiteCustomDNSModel{
+			InsideNameserver: func() types.String {
+				if v, ok := blockData["inside_nameserver"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			OutsideNameserver: func() types.String {
+				if v, ok := blockData["outside_nameserver"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["default_blocked_services"].(map[string]interface{}); ok && isImport && data.DefaultBlockedServices == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DefaultBlockedServices = &GCPVPCSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["gcp_labels"].(map[string]interface{}); ok && isImport && data.GCPLabels == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.GCPLabels = &GCPVPCSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["ingress_egress_gw"].(map[string]interface{}); ok && (isImport || data.IngressEgressGw != nil) {
+		data.IngressEgressGw = &GCPVPCSiteIngressEgressGwModel{
+			GCPCertifiedHw: func() types.String {
+				if v, ok := blockData["gcp_certified_hw"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			NodeNumber: func() types.Int64 {
+				if v, ok := blockData["node_number"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["ingress_gw"].(map[string]interface{}); ok && (isImport || data.IngressGw != nil) {
+		data.IngressGw = &GCPVPCSiteIngressGwModel{
+			GCPCertifiedHw: func() types.String {
+				if v, ok := blockData["gcp_certified_hw"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			NodeNumber: func() types.Int64 {
+				if v, ok := blockData["node_number"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["kubernetes_upgrade_drain"].(map[string]interface{}); ok && isImport && data.KubernetesUpgradeDrain == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.KubernetesUpgradeDrain = &GCPVPCSiteKubernetesUpgradeDrainModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["log_receiver"].(map[string]interface{}); ok && (isImport || data.LogReceiver != nil) {
+		data.LogReceiver = &GCPVPCSiteLogReceiverModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["logs_streaming_disabled"].(map[string]interface{}); ok && isImport && data.LogsStreamingDisabled == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.LogsStreamingDisabled = &GCPVPCSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["offline_survivability_mode"].(map[string]interface{}); ok && isImport && data.OfflineSurvivabilityMode == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.OfflineSurvivabilityMode = &GCPVPCSiteOfflineSurvivabilityModeModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["os"].(map[string]interface{}); ok && (isImport || data.Os != nil) {
+		data.Os = &GCPVPCSiteOsModel{
+			OperatingSystemVersion: func() types.String {
+				if v, ok := blockData["operating_system_version"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["private_connect_disabled"].(map[string]interface{}); ok && isImport && data.PrivateConnectDisabled == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.PrivateConnectDisabled = &GCPVPCSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["private_connectivity"].(map[string]interface{}); ok && isImport && data.PrivateConnectivity == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.PrivateConnectivity = &GCPVPCSitePrivateConnectivityModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["sw"].(map[string]interface{}); ok && (isImport || data.Sw != nil) {
+		data.Sw = &GCPVPCSiteSwModel{
+			VolterraSoftwareVersion: func() types.String {
+				if v, ok := blockData["volterra_software_version"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["voltstack_cluster"].(map[string]interface{}); ok && (isImport || data.VoltstackCluster != nil) {
+		data.VoltstackCluster = &GCPVPCSiteVoltstackClusterModel{
+			GCPCertifiedHw: func() types.String {
+				if v, ok := blockData["gcp_certified_hw"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			NodeNumber: func() types.Int64 {
+				if v, ok := blockData["node_number"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if v, ok := apiResource.Spec["address"].(string); ok && v != "" {
+		data.Address = types.StringValue(v)
+	} else {
+		data.Address = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["disk_size"].(float64); ok {
+		data.DiskSize = types.Int64Value(int64(v))
+	} else {
+		data.DiskSize = types.Int64Null()
+	}
+	if v, ok := apiResource.Spec["gcp_region"].(string); ok && v != "" {
+		data.GCPRegion = types.StringValue(v)
+	} else {
+		data.GCPRegion = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["instance_type"].(string); ok && v != "" {
+		data.InstanceType = types.StringValue(v)
+	} else {
+		data.InstanceType = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["ssh_key"].(string); ok && v != "" {
+		data.SSHKey = types.StringValue(v)
+	} else {
+		data.SSHKey = types.StringNull()
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -2568,7 +3261,7 @@ func (r *GCPVPCSiteResource) Update(ctx context.Context, req resource.UpdateRequ
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.GCPVPCSiteSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -2593,6 +3286,418 @@ func (r *GCPVPCSiteResource) Update(ctx context.Context, req resource.UpdateRequ
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.AdminPassword != nil {
+		admin_passwordMap := make(map[string]interface{})
+		if data.AdminPassword.BlindfoldSecretInfo != nil {
+			blindfold_secret_infoNestedMap := make(map[string]interface{})
+			if !data.AdminPassword.BlindfoldSecretInfo.DecryptionProvider.IsNull() && !data.AdminPassword.BlindfoldSecretInfo.DecryptionProvider.IsUnknown() {
+				blindfold_secret_infoNestedMap["decryption_provider"] = data.AdminPassword.BlindfoldSecretInfo.DecryptionProvider.ValueString()
+			}
+			if !data.AdminPassword.BlindfoldSecretInfo.Location.IsNull() && !data.AdminPassword.BlindfoldSecretInfo.Location.IsUnknown() {
+				blindfold_secret_infoNestedMap["location"] = data.AdminPassword.BlindfoldSecretInfo.Location.ValueString()
+			}
+			if !data.AdminPassword.BlindfoldSecretInfo.StoreProvider.IsNull() && !data.AdminPassword.BlindfoldSecretInfo.StoreProvider.IsUnknown() {
+				blindfold_secret_infoNestedMap["store_provider"] = data.AdminPassword.BlindfoldSecretInfo.StoreProvider.ValueString()
+			}
+			admin_passwordMap["blindfold_secret_info"] = blindfold_secret_infoNestedMap
+		}
+		if data.AdminPassword.ClearSecretInfo != nil {
+			clear_secret_infoNestedMap := make(map[string]interface{})
+			if !data.AdminPassword.ClearSecretInfo.Provider.IsNull() && !data.AdminPassword.ClearSecretInfo.Provider.IsUnknown() {
+				clear_secret_infoNestedMap["provider"] = data.AdminPassword.ClearSecretInfo.Provider.ValueString()
+			}
+			if !data.AdminPassword.ClearSecretInfo.URL.IsNull() && !data.AdminPassword.ClearSecretInfo.URL.IsUnknown() {
+				clear_secret_infoNestedMap["url"] = data.AdminPassword.ClearSecretInfo.URL.ValueString()
+			}
+			admin_passwordMap["clear_secret_info"] = clear_secret_infoNestedMap
+		}
+		apiResource.Spec["admin_password"] = admin_passwordMap
+	}
+	if data.BlockAllServices != nil {
+		block_all_servicesMap := make(map[string]interface{})
+		apiResource.Spec["block_all_services"] = block_all_servicesMap
+	}
+	if data.BlockedServices != nil {
+		blocked_servicesMap := make(map[string]interface{})
+		apiResource.Spec["blocked_services"] = blocked_servicesMap
+	}
+	if data.CloudCredentials != nil {
+		cloud_credentialsMap := make(map[string]interface{})
+		if !data.CloudCredentials.Name.IsNull() && !data.CloudCredentials.Name.IsUnknown() {
+			cloud_credentialsMap["name"] = data.CloudCredentials.Name.ValueString()
+		}
+		if !data.CloudCredentials.Namespace.IsNull() && !data.CloudCredentials.Namespace.IsUnknown() {
+			cloud_credentialsMap["namespace"] = data.CloudCredentials.Namespace.ValueString()
+		}
+		if !data.CloudCredentials.Tenant.IsNull() && !data.CloudCredentials.Tenant.IsUnknown() {
+			cloud_credentialsMap["tenant"] = data.CloudCredentials.Tenant.ValueString()
+		}
+		apiResource.Spec["cloud_credentials"] = cloud_credentialsMap
+	}
+	if data.Coordinates != nil {
+		coordinatesMap := make(map[string]interface{})
+		if !data.Coordinates.Latitude.IsNull() && !data.Coordinates.Latitude.IsUnknown() {
+			coordinatesMap["latitude"] = data.Coordinates.Latitude.ValueInt64()
+		}
+		if !data.Coordinates.Longitude.IsNull() && !data.Coordinates.Longitude.IsUnknown() {
+			coordinatesMap["longitude"] = data.Coordinates.Longitude.ValueInt64()
+		}
+		apiResource.Spec["coordinates"] = coordinatesMap
+	}
+	if data.CustomDNS != nil {
+		custom_dnsMap := make(map[string]interface{})
+		if !data.CustomDNS.InsideNameserver.IsNull() && !data.CustomDNS.InsideNameserver.IsUnknown() {
+			custom_dnsMap["inside_nameserver"] = data.CustomDNS.InsideNameserver.ValueString()
+		}
+		if !data.CustomDNS.OutsideNameserver.IsNull() && !data.CustomDNS.OutsideNameserver.IsUnknown() {
+			custom_dnsMap["outside_nameserver"] = data.CustomDNS.OutsideNameserver.ValueString()
+		}
+		apiResource.Spec["custom_dns"] = custom_dnsMap
+	}
+	if data.DefaultBlockedServices != nil {
+		default_blocked_servicesMap := make(map[string]interface{})
+		apiResource.Spec["default_blocked_services"] = default_blocked_servicesMap
+	}
+	if data.GCPLabels != nil {
+		gcp_labelsMap := make(map[string]interface{})
+		apiResource.Spec["gcp_labels"] = gcp_labelsMap
+	}
+	if data.IngressEgressGw != nil {
+		ingress_egress_gwMap := make(map[string]interface{})
+		if data.IngressEgressGw.ActiveEnhancedFirewallPolicies != nil {
+			active_enhanced_firewall_policiesNestedMap := make(map[string]interface{})
+			ingress_egress_gwMap["active_enhanced_firewall_policies"] = active_enhanced_firewall_policiesNestedMap
+		}
+		if data.IngressEgressGw.ActiveForwardProxyPolicies != nil {
+			active_forward_proxy_policiesNestedMap := make(map[string]interface{})
+			ingress_egress_gwMap["active_forward_proxy_policies"] = active_forward_proxy_policiesNestedMap
+		}
+		if data.IngressEgressGw.ActiveNetworkPolicies != nil {
+			active_network_policiesNestedMap := make(map[string]interface{})
+			ingress_egress_gwMap["active_network_policies"] = active_network_policiesNestedMap
+		}
+		if data.IngressEgressGw.DcClusterGroupInsideVn != nil {
+			dc_cluster_group_inside_vnNestedMap := make(map[string]interface{})
+			if !data.IngressEgressGw.DcClusterGroupInsideVn.Name.IsNull() && !data.IngressEgressGw.DcClusterGroupInsideVn.Name.IsUnknown() {
+				dc_cluster_group_inside_vnNestedMap["name"] = data.IngressEgressGw.DcClusterGroupInsideVn.Name.ValueString()
+			}
+			if !data.IngressEgressGw.DcClusterGroupInsideVn.Namespace.IsNull() && !data.IngressEgressGw.DcClusterGroupInsideVn.Namespace.IsUnknown() {
+				dc_cluster_group_inside_vnNestedMap["namespace"] = data.IngressEgressGw.DcClusterGroupInsideVn.Namespace.ValueString()
+			}
+			if !data.IngressEgressGw.DcClusterGroupInsideVn.Tenant.IsNull() && !data.IngressEgressGw.DcClusterGroupInsideVn.Tenant.IsUnknown() {
+				dc_cluster_group_inside_vnNestedMap["tenant"] = data.IngressEgressGw.DcClusterGroupInsideVn.Tenant.ValueString()
+			}
+			ingress_egress_gwMap["dc_cluster_group_inside_vn"] = dc_cluster_group_inside_vnNestedMap
+		}
+		if data.IngressEgressGw.DcClusterGroupOutsideVn != nil {
+			dc_cluster_group_outside_vnNestedMap := make(map[string]interface{})
+			if !data.IngressEgressGw.DcClusterGroupOutsideVn.Name.IsNull() && !data.IngressEgressGw.DcClusterGroupOutsideVn.Name.IsUnknown() {
+				dc_cluster_group_outside_vnNestedMap["name"] = data.IngressEgressGw.DcClusterGroupOutsideVn.Name.ValueString()
+			}
+			if !data.IngressEgressGw.DcClusterGroupOutsideVn.Namespace.IsNull() && !data.IngressEgressGw.DcClusterGroupOutsideVn.Namespace.IsUnknown() {
+				dc_cluster_group_outside_vnNestedMap["namespace"] = data.IngressEgressGw.DcClusterGroupOutsideVn.Namespace.ValueString()
+			}
+			if !data.IngressEgressGw.DcClusterGroupOutsideVn.Tenant.IsNull() && !data.IngressEgressGw.DcClusterGroupOutsideVn.Tenant.IsUnknown() {
+				dc_cluster_group_outside_vnNestedMap["tenant"] = data.IngressEgressGw.DcClusterGroupOutsideVn.Tenant.ValueString()
+			}
+			ingress_egress_gwMap["dc_cluster_group_outside_vn"] = dc_cluster_group_outside_vnNestedMap
+		}
+		if data.IngressEgressGw.ForwardProxyAllowAll != nil {
+			ingress_egress_gwMap["forward_proxy_allow_all"] = map[string]interface{}{}
+		}
+		if !data.IngressEgressGw.GCPCertifiedHw.IsNull() && !data.IngressEgressGw.GCPCertifiedHw.IsUnknown() {
+			ingress_egress_gwMap["gcp_certified_hw"] = data.IngressEgressGw.GCPCertifiedHw.ValueString()
+		}
+		if data.IngressEgressGw.GlobalNetworkList != nil {
+			global_network_listNestedMap := make(map[string]interface{})
+			ingress_egress_gwMap["global_network_list"] = global_network_listNestedMap
+		}
+		if data.IngressEgressGw.InsideNetwork != nil {
+			inside_networkNestedMap := make(map[string]interface{})
+			ingress_egress_gwMap["inside_network"] = inside_networkNestedMap
+		}
+		if data.IngressEgressGw.InsideStaticRoutes != nil {
+			inside_static_routesNestedMap := make(map[string]interface{})
+			ingress_egress_gwMap["inside_static_routes"] = inside_static_routesNestedMap
+		}
+		if data.IngressEgressGw.InsideSubnet != nil {
+			inside_subnetNestedMap := make(map[string]interface{})
+			ingress_egress_gwMap["inside_subnet"] = inside_subnetNestedMap
+		}
+		if data.IngressEgressGw.NoDcClusterGroup != nil {
+			ingress_egress_gwMap["no_dc_cluster_group"] = map[string]interface{}{}
+		}
+		if data.IngressEgressGw.NoForwardProxy != nil {
+			ingress_egress_gwMap["no_forward_proxy"] = map[string]interface{}{}
+		}
+		if data.IngressEgressGw.NoGlobalNetwork != nil {
+			ingress_egress_gwMap["no_global_network"] = map[string]interface{}{}
+		}
+		if data.IngressEgressGw.NoInsideStaticRoutes != nil {
+			ingress_egress_gwMap["no_inside_static_routes"] = map[string]interface{}{}
+		}
+		if data.IngressEgressGw.NoNetworkPolicy != nil {
+			ingress_egress_gwMap["no_network_policy"] = map[string]interface{}{}
+		}
+		if data.IngressEgressGw.NoOutsideStaticRoutes != nil {
+			ingress_egress_gwMap["no_outside_static_routes"] = map[string]interface{}{}
+		}
+		if !data.IngressEgressGw.NodeNumber.IsNull() && !data.IngressEgressGw.NodeNumber.IsUnknown() {
+			ingress_egress_gwMap["node_number"] = data.IngressEgressGw.NodeNumber.ValueInt64()
+		}
+		if data.IngressEgressGw.OutsideNetwork != nil {
+			outside_networkNestedMap := make(map[string]interface{})
+			ingress_egress_gwMap["outside_network"] = outside_networkNestedMap
+		}
+		if data.IngressEgressGw.OutsideStaticRoutes != nil {
+			outside_static_routesNestedMap := make(map[string]interface{})
+			ingress_egress_gwMap["outside_static_routes"] = outside_static_routesNestedMap
+		}
+		if data.IngressEgressGw.OutsideSubnet != nil {
+			outside_subnetNestedMap := make(map[string]interface{})
+			ingress_egress_gwMap["outside_subnet"] = outside_subnetNestedMap
+		}
+		if data.IngressEgressGw.PerformanceEnhancementMode != nil {
+			performance_enhancement_modeNestedMap := make(map[string]interface{})
+			ingress_egress_gwMap["performance_enhancement_mode"] = performance_enhancement_modeNestedMap
+		}
+		if data.IngressEgressGw.SmConnectionPublicIP != nil {
+			ingress_egress_gwMap["sm_connection_public_ip"] = map[string]interface{}{}
+		}
+		if data.IngressEgressGw.SmConnectionPvtIP != nil {
+			ingress_egress_gwMap["sm_connection_pvt_ip"] = map[string]interface{}{}
+		}
+		apiResource.Spec["ingress_egress_gw"] = ingress_egress_gwMap
+	}
+	if data.IngressGw != nil {
+		ingress_gwMap := make(map[string]interface{})
+		if !data.IngressGw.GCPCertifiedHw.IsNull() && !data.IngressGw.GCPCertifiedHw.IsUnknown() {
+			ingress_gwMap["gcp_certified_hw"] = data.IngressGw.GCPCertifiedHw.ValueString()
+		}
+		if data.IngressGw.LocalNetwork != nil {
+			local_networkNestedMap := make(map[string]interface{})
+			ingress_gwMap["local_network"] = local_networkNestedMap
+		}
+		if data.IngressGw.LocalSubnet != nil {
+			local_subnetNestedMap := make(map[string]interface{})
+			ingress_gwMap["local_subnet"] = local_subnetNestedMap
+		}
+		if !data.IngressGw.NodeNumber.IsNull() && !data.IngressGw.NodeNumber.IsUnknown() {
+			ingress_gwMap["node_number"] = data.IngressGw.NodeNumber.ValueInt64()
+		}
+		if data.IngressGw.PerformanceEnhancementMode != nil {
+			performance_enhancement_modeNestedMap := make(map[string]interface{})
+			ingress_gwMap["performance_enhancement_mode"] = performance_enhancement_modeNestedMap
+		}
+		apiResource.Spec["ingress_gw"] = ingress_gwMap
+	}
+	if data.KubernetesUpgradeDrain != nil {
+		kubernetes_upgrade_drainMap := make(map[string]interface{})
+		if data.KubernetesUpgradeDrain.DisableUpgradeDrain != nil {
+			kubernetes_upgrade_drainMap["disable_upgrade_drain"] = map[string]interface{}{}
+		}
+		if data.KubernetesUpgradeDrain.EnableUpgradeDrain != nil {
+			enable_upgrade_drainNestedMap := make(map[string]interface{})
+			if !data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainMaxUnavailableNodeCount.IsNull() && !data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainMaxUnavailableNodeCount.IsUnknown() {
+				enable_upgrade_drainNestedMap["drain_max_unavailable_node_count"] = data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainMaxUnavailableNodeCount.ValueInt64()
+			}
+			if !data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainNodeTimeout.IsNull() && !data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainNodeTimeout.IsUnknown() {
+				enable_upgrade_drainNestedMap["drain_node_timeout"] = data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainNodeTimeout.ValueInt64()
+			}
+			kubernetes_upgrade_drainMap["enable_upgrade_drain"] = enable_upgrade_drainNestedMap
+		}
+		apiResource.Spec["kubernetes_upgrade_drain"] = kubernetes_upgrade_drainMap
+	}
+	if data.LogReceiver != nil {
+		log_receiverMap := make(map[string]interface{})
+		if !data.LogReceiver.Name.IsNull() && !data.LogReceiver.Name.IsUnknown() {
+			log_receiverMap["name"] = data.LogReceiver.Name.ValueString()
+		}
+		if !data.LogReceiver.Namespace.IsNull() && !data.LogReceiver.Namespace.IsUnknown() {
+			log_receiverMap["namespace"] = data.LogReceiver.Namespace.ValueString()
+		}
+		if !data.LogReceiver.Tenant.IsNull() && !data.LogReceiver.Tenant.IsUnknown() {
+			log_receiverMap["tenant"] = data.LogReceiver.Tenant.ValueString()
+		}
+		apiResource.Spec["log_receiver"] = log_receiverMap
+	}
+	if data.LogsStreamingDisabled != nil {
+		logs_streaming_disabledMap := make(map[string]interface{})
+		apiResource.Spec["logs_streaming_disabled"] = logs_streaming_disabledMap
+	}
+	if data.OfflineSurvivabilityMode != nil {
+		offline_survivability_modeMap := make(map[string]interface{})
+		if data.OfflineSurvivabilityMode.EnableOfflineSurvivabilityMode != nil {
+			offline_survivability_modeMap["enable_offline_survivability_mode"] = map[string]interface{}{}
+		}
+		if data.OfflineSurvivabilityMode.NoOfflineSurvivabilityMode != nil {
+			offline_survivability_modeMap["no_offline_survivability_mode"] = map[string]interface{}{}
+		}
+		apiResource.Spec["offline_survivability_mode"] = offline_survivability_modeMap
+	}
+	if data.Os != nil {
+		osMap := make(map[string]interface{})
+		if data.Os.DefaultOsVersion != nil {
+			osMap["default_os_version"] = map[string]interface{}{}
+		}
+		if !data.Os.OperatingSystemVersion.IsNull() && !data.Os.OperatingSystemVersion.IsUnknown() {
+			osMap["operating_system_version"] = data.Os.OperatingSystemVersion.ValueString()
+		}
+		apiResource.Spec["os"] = osMap
+	}
+	if data.PrivateConnectDisabled != nil {
+		private_connect_disabledMap := make(map[string]interface{})
+		apiResource.Spec["private_connect_disabled"] = private_connect_disabledMap
+	}
+	if data.PrivateConnectivity != nil {
+		private_connectivityMap := make(map[string]interface{})
+		if data.PrivateConnectivity.CloudLink != nil {
+			cloud_linkNestedMap := make(map[string]interface{})
+			if !data.PrivateConnectivity.CloudLink.Name.IsNull() && !data.PrivateConnectivity.CloudLink.Name.IsUnknown() {
+				cloud_linkNestedMap["name"] = data.PrivateConnectivity.CloudLink.Name.ValueString()
+			}
+			if !data.PrivateConnectivity.CloudLink.Namespace.IsNull() && !data.PrivateConnectivity.CloudLink.Namespace.IsUnknown() {
+				cloud_linkNestedMap["namespace"] = data.PrivateConnectivity.CloudLink.Namespace.ValueString()
+			}
+			if !data.PrivateConnectivity.CloudLink.Tenant.IsNull() && !data.PrivateConnectivity.CloudLink.Tenant.IsUnknown() {
+				cloud_linkNestedMap["tenant"] = data.PrivateConnectivity.CloudLink.Tenant.ValueString()
+			}
+			private_connectivityMap["cloud_link"] = cloud_linkNestedMap
+		}
+		if data.PrivateConnectivity.Inside != nil {
+			private_connectivityMap["inside"] = map[string]interface{}{}
+		}
+		if data.PrivateConnectivity.Outside != nil {
+			private_connectivityMap["outside"] = map[string]interface{}{}
+		}
+		apiResource.Spec["private_connectivity"] = private_connectivityMap
+	}
+	if data.Sw != nil {
+		swMap := make(map[string]interface{})
+		if data.Sw.DefaultSwVersion != nil {
+			swMap["default_sw_version"] = map[string]interface{}{}
+		}
+		if !data.Sw.VolterraSoftwareVersion.IsNull() && !data.Sw.VolterraSoftwareVersion.IsUnknown() {
+			swMap["volterra_software_version"] = data.Sw.VolterraSoftwareVersion.ValueString()
+		}
+		apiResource.Spec["sw"] = swMap
+	}
+	if data.VoltstackCluster != nil {
+		voltstack_clusterMap := make(map[string]interface{})
+		if data.VoltstackCluster.ActiveEnhancedFirewallPolicies != nil {
+			active_enhanced_firewall_policiesNestedMap := make(map[string]interface{})
+			voltstack_clusterMap["active_enhanced_firewall_policies"] = active_enhanced_firewall_policiesNestedMap
+		}
+		if data.VoltstackCluster.ActiveForwardProxyPolicies != nil {
+			active_forward_proxy_policiesNestedMap := make(map[string]interface{})
+			voltstack_clusterMap["active_forward_proxy_policies"] = active_forward_proxy_policiesNestedMap
+		}
+		if data.VoltstackCluster.ActiveNetworkPolicies != nil {
+			active_network_policiesNestedMap := make(map[string]interface{})
+			voltstack_clusterMap["active_network_policies"] = active_network_policiesNestedMap
+		}
+		if data.VoltstackCluster.DcClusterGroup != nil {
+			dc_cluster_groupNestedMap := make(map[string]interface{})
+			if !data.VoltstackCluster.DcClusterGroup.Name.IsNull() && !data.VoltstackCluster.DcClusterGroup.Name.IsUnknown() {
+				dc_cluster_groupNestedMap["name"] = data.VoltstackCluster.DcClusterGroup.Name.ValueString()
+			}
+			if !data.VoltstackCluster.DcClusterGroup.Namespace.IsNull() && !data.VoltstackCluster.DcClusterGroup.Namespace.IsUnknown() {
+				dc_cluster_groupNestedMap["namespace"] = data.VoltstackCluster.DcClusterGroup.Namespace.ValueString()
+			}
+			if !data.VoltstackCluster.DcClusterGroup.Tenant.IsNull() && !data.VoltstackCluster.DcClusterGroup.Tenant.IsUnknown() {
+				dc_cluster_groupNestedMap["tenant"] = data.VoltstackCluster.DcClusterGroup.Tenant.ValueString()
+			}
+			voltstack_clusterMap["dc_cluster_group"] = dc_cluster_groupNestedMap
+		}
+		if data.VoltstackCluster.DefaultStorage != nil {
+			voltstack_clusterMap["default_storage"] = map[string]interface{}{}
+		}
+		if data.VoltstackCluster.ForwardProxyAllowAll != nil {
+			voltstack_clusterMap["forward_proxy_allow_all"] = map[string]interface{}{}
+		}
+		if !data.VoltstackCluster.GCPCertifiedHw.IsNull() && !data.VoltstackCluster.GCPCertifiedHw.IsUnknown() {
+			voltstack_clusterMap["gcp_certified_hw"] = data.VoltstackCluster.GCPCertifiedHw.ValueString()
+		}
+		if data.VoltstackCluster.GlobalNetworkList != nil {
+			global_network_listNestedMap := make(map[string]interface{})
+			voltstack_clusterMap["global_network_list"] = global_network_listNestedMap
+		}
+		if data.VoltstackCluster.K8SCluster != nil {
+			k8s_clusterNestedMap := make(map[string]interface{})
+			if !data.VoltstackCluster.K8SCluster.Name.IsNull() && !data.VoltstackCluster.K8SCluster.Name.IsUnknown() {
+				k8s_clusterNestedMap["name"] = data.VoltstackCluster.K8SCluster.Name.ValueString()
+			}
+			if !data.VoltstackCluster.K8SCluster.Namespace.IsNull() && !data.VoltstackCluster.K8SCluster.Namespace.IsUnknown() {
+				k8s_clusterNestedMap["namespace"] = data.VoltstackCluster.K8SCluster.Namespace.ValueString()
+			}
+			if !data.VoltstackCluster.K8SCluster.Tenant.IsNull() && !data.VoltstackCluster.K8SCluster.Tenant.IsUnknown() {
+				k8s_clusterNestedMap["tenant"] = data.VoltstackCluster.K8SCluster.Tenant.ValueString()
+			}
+			voltstack_clusterMap["k8s_cluster"] = k8s_clusterNestedMap
+		}
+		if data.VoltstackCluster.NoDcClusterGroup != nil {
+			voltstack_clusterMap["no_dc_cluster_group"] = map[string]interface{}{}
+		}
+		if data.VoltstackCluster.NoForwardProxy != nil {
+			voltstack_clusterMap["no_forward_proxy"] = map[string]interface{}{}
+		}
+		if data.VoltstackCluster.NoGlobalNetwork != nil {
+			voltstack_clusterMap["no_global_network"] = map[string]interface{}{}
+		}
+		if data.VoltstackCluster.NoK8SCluster != nil {
+			voltstack_clusterMap["no_k8s_cluster"] = map[string]interface{}{}
+		}
+		if data.VoltstackCluster.NoNetworkPolicy != nil {
+			voltstack_clusterMap["no_network_policy"] = map[string]interface{}{}
+		}
+		if data.VoltstackCluster.NoOutsideStaticRoutes != nil {
+			voltstack_clusterMap["no_outside_static_routes"] = map[string]interface{}{}
+		}
+		if !data.VoltstackCluster.NodeNumber.IsNull() && !data.VoltstackCluster.NodeNumber.IsUnknown() {
+			voltstack_clusterMap["node_number"] = data.VoltstackCluster.NodeNumber.ValueInt64()
+		}
+		if data.VoltstackCluster.OutsideStaticRoutes != nil {
+			outside_static_routesNestedMap := make(map[string]interface{})
+			voltstack_clusterMap["outside_static_routes"] = outside_static_routesNestedMap
+		}
+		if data.VoltstackCluster.SiteLocalNetwork != nil {
+			site_local_networkNestedMap := make(map[string]interface{})
+			voltstack_clusterMap["site_local_network"] = site_local_networkNestedMap
+		}
+		if data.VoltstackCluster.SiteLocalSubnet != nil {
+			site_local_subnetNestedMap := make(map[string]interface{})
+			voltstack_clusterMap["site_local_subnet"] = site_local_subnetNestedMap
+		}
+		if data.VoltstackCluster.SmConnectionPublicIP != nil {
+			voltstack_clusterMap["sm_connection_public_ip"] = map[string]interface{}{}
+		}
+		if data.VoltstackCluster.SmConnectionPvtIP != nil {
+			voltstack_clusterMap["sm_connection_pvt_ip"] = map[string]interface{}{}
+		}
+		if data.VoltstackCluster.StorageClassList != nil {
+			storage_class_listNestedMap := make(map[string]interface{})
+			voltstack_clusterMap["storage_class_list"] = storage_class_listNestedMap
+		}
+		apiResource.Spec["voltstack_cluster"] = voltstack_clusterMap
+	}
+	if !data.Address.IsNull() && !data.Address.IsUnknown() {
+		apiResource.Spec["address"] = data.Address.ValueString()
+	}
+	if !data.DiskSize.IsNull() && !data.DiskSize.IsUnknown() {
+		apiResource.Spec["disk_size"] = data.DiskSize.ValueInt64()
+	}
+	if !data.GCPRegion.IsNull() && !data.GCPRegion.IsUnknown() {
+		apiResource.Spec["gcp_region"] = data.GCPRegion.ValueString()
+	}
+	if !data.InstanceType.IsNull() && !data.InstanceType.IsUnknown() {
+		apiResource.Spec["instance_type"] = data.InstanceType.ValueString()
+	}
+	if !data.SSHKey.IsNull() && !data.SSHKey.IsUnknown() {
+		apiResource.Spec["ssh_key"] = data.SSHKey.ValueString()
+	}
+
+
 	updated, err := r.client.UpdateGCPVPCSite(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update GCPVPCSite: %s", err))
@@ -2601,6 +3706,28 @@ func (r *GCPVPCSiteResource) Update(ctx context.Context, req resource.UpdateRequ
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
+	if v, ok := updated.Spec["address"].(string); ok && v != "" {
+		data.Address = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["disk_size"].(float64); ok {
+		data.DiskSize = types.Int64Value(int64(v))
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["gcp_region"].(string); ok && v != "" {
+		data.GCPRegion = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["instance_type"].(string); ok && v != "" {
+		data.InstanceType = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["ssh_key"].(string); ok && v != "" {
+		data.SSHKey = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -2613,6 +3740,7 @@ func (r *GCPVPCSiteResource) Update(ctx context.Context, req resource.UpdateRequ
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -2639,6 +3767,15 @@ func (r *GCPVPCSiteResource) Delete(ctx context.Context, req resource.DeleteRequ
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "GCPVPCSite already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "GCPVPCSite delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

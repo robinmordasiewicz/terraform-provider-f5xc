@@ -55,10 +55,10 @@ type InfraprotectInternetPrefixAdvertisementResourceModel struct {
 	Annotations types.Map `tfsdk:"annotations"`
 	Description types.String `tfsdk:"description"`
 	Disable types.Bool `tfsdk:"disable"`
-	ExpirationTimestamp types.String `tfsdk:"expiration_timestamp"`
 	Labels types.Map `tfsdk:"labels"`
-	Prefix types.String `tfsdk:"prefix"`
 	ID types.String `tfsdk:"id"`
+	ExpirationTimestamp types.String `tfsdk:"expiration_timestamp"`
+	Prefix types.String `tfsdk:"prefix"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
 	ActivationAnnounce *InfraprotectInternetPrefixAdvertisementEmptyModel `tfsdk:"activation_announce"`
 	ActivationWithdraw *InfraprotectInternetPrefixAdvertisementEmptyModel `tfsdk:"activation_withdraw"`
@@ -107,21 +107,29 @@ func (r *InfraprotectInternetPrefixAdvertisementResource) Schema(ctx context.Con
 				MarkdownDescription: "A value of true will administratively disable the object.",
 				Optional: true,
 			},
-			"expiration_timestamp": schema.StringAttribute{
-				MarkdownDescription: "Expiration Time (UTC). This advertisement will expire at the given timestamp and will be removed from the system afterwards",
-				Optional: true,
-			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
+			"id": schema.StringAttribute{
+				MarkdownDescription: "Unique identifier for the resource.",
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"expiration_timestamp": schema.StringAttribute{
+				MarkdownDescription: "Expiration Time (UTC). This advertisement will expire at the given timestamp and will be removed from the system afterwards",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
 			"prefix": schema.StringAttribute{
 				MarkdownDescription: "Prefix. Advertisement Prefix Advertisement prefix lookup depending on type",
 				Optional: true,
-			},
-			"id": schema.StringAttribute{
-				MarkdownDescription: "Unique identifier for the resource.",
 				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
@@ -266,7 +274,7 @@ func (r *InfraprotectInternetPrefixAdvertisementResource) Create(ctx context.Con
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.InfraprotectInternetPrefixAdvertisementSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -291,6 +299,27 @@ func (r *InfraprotectInternetPrefixAdvertisementResource) Create(ctx context.Con
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.ActivationAnnounce != nil {
+		activation_announceMap := make(map[string]interface{})
+		apiResource.Spec["activation_announce"] = activation_announceMap
+	}
+	if data.ActivationWithdraw != nil {
+		activation_withdrawMap := make(map[string]interface{})
+		apiResource.Spec["activation_withdraw"] = activation_withdrawMap
+	}
+	if data.ExpirationNever != nil {
+		expiration_neverMap := make(map[string]interface{})
+		apiResource.Spec["expiration_never"] = expiration_neverMap
+	}
+	if !data.ExpirationTimestamp.IsNull() && !data.ExpirationTimestamp.IsUnknown() {
+		apiResource.Spec["expiration_timestamp"] = data.ExpirationTimestamp.ValueString()
+	}
+	if !data.Prefix.IsNull() && !data.Prefix.IsUnknown() {
+		apiResource.Spec["prefix"] = data.Prefix.ValueString()
+	}
+
+
 	created, err := r.client.CreateInfraprotectInternetPrefixAdvertisement(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create InfraprotectInternetPrefixAdvertisement: %s", err))
@@ -299,8 +328,21 @@ func (r *InfraprotectInternetPrefixAdvertisementResource) Create(ctx context.Con
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+	if v, ok := created.Spec["expiration_timestamp"].(string); ok && v != "" {
+		data.ExpirationTimestamp = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["prefix"].(string); ok && v != "" {
+		data.Prefix = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created InfraprotectInternetPrefixAdvertisement resource")
@@ -379,9 +421,50 @@ func (r *InfraprotectInternetPrefixAdvertisementResource) Read(ctx context.Conte
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if _, ok := apiResource.Spec["activation_announce"].(map[string]interface{}); ok && isImport && data.ActivationAnnounce == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ActivationAnnounce = &InfraprotectInternetPrefixAdvertisementEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["activation_withdraw"].(map[string]interface{}); ok && isImport && data.ActivationWithdraw == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ActivationWithdraw = &InfraprotectInternetPrefixAdvertisementEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["expiration_never"].(map[string]interface{}); ok && isImport && data.ExpirationNever == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ExpirationNever = &InfraprotectInternetPrefixAdvertisementEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["expiration_timestamp"].(string); ok && v != "" {
+		data.ExpirationTimestamp = types.StringValue(v)
+	} else {
+		data.ExpirationTimestamp = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["prefix"].(string); ok && v != "" {
+		data.Prefix = types.StringValue(v)
+	} else {
+		data.Prefix = types.StringNull()
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -407,7 +490,7 @@ func (r *InfraprotectInternetPrefixAdvertisementResource) Update(ctx context.Con
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.InfraprotectInternetPrefixAdvertisementSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -432,6 +515,27 @@ func (r *InfraprotectInternetPrefixAdvertisementResource) Update(ctx context.Con
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.ActivationAnnounce != nil {
+		activation_announceMap := make(map[string]interface{})
+		apiResource.Spec["activation_announce"] = activation_announceMap
+	}
+	if data.ActivationWithdraw != nil {
+		activation_withdrawMap := make(map[string]interface{})
+		apiResource.Spec["activation_withdraw"] = activation_withdrawMap
+	}
+	if data.ExpirationNever != nil {
+		expiration_neverMap := make(map[string]interface{})
+		apiResource.Spec["expiration_never"] = expiration_neverMap
+	}
+	if !data.ExpirationTimestamp.IsNull() && !data.ExpirationTimestamp.IsUnknown() {
+		apiResource.Spec["expiration_timestamp"] = data.ExpirationTimestamp.ValueString()
+	}
+	if !data.Prefix.IsNull() && !data.Prefix.IsUnknown() {
+		apiResource.Spec["prefix"] = data.Prefix.ValueString()
+	}
+
+
 	updated, err := r.client.UpdateInfraprotectInternetPrefixAdvertisement(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update InfraprotectInternetPrefixAdvertisement: %s", err))
@@ -440,6 +544,16 @@ func (r *InfraprotectInternetPrefixAdvertisementResource) Update(ctx context.Con
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
+	if v, ok := updated.Spec["expiration_timestamp"].(string); ok && v != "" {
+		data.ExpirationTimestamp = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["prefix"].(string); ok && v != "" {
+		data.Prefix = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -452,6 +566,7 @@ func (r *InfraprotectInternetPrefixAdvertisementResource) Update(ctx context.Con
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -478,6 +593,15 @@ func (r *InfraprotectInternetPrefixAdvertisementResource) Delete(ctx context.Con
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "InfraprotectInternetPrefixAdvertisement already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "InfraprotectInternetPrefixAdvertisement delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

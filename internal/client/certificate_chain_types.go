@@ -10,13 +10,8 @@ import (
 
 // CertificateChain represents a F5XC CertificateChain
 type CertificateChain struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     CertificateChainSpec `json:"spec"`
-}
-
-// CertificateChainSpec defines the specification for CertificateChain
-type CertificateChainSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateCertificateChain creates a new CertificateChain

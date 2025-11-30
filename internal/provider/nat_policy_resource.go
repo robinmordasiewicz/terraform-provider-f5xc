@@ -927,7 +927,7 @@ func (r *NatPolicyResource) Create(ctx context.Context, req resource.CreateReque
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.NatPolicySpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -952,6 +952,60 @@ func (r *NatPolicyResource) Create(ctx context.Context, req resource.CreateReque
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if len(data.Rules) > 0 {
+		var rulesList []map[string]interface{}
+		for _, item := range data.Rules {
+			itemMap := make(map[string]interface{})
+			if item.Action != nil {
+				actionNestedMap := make(map[string]interface{})
+				if !item.Action.VirtualCidr.IsNull() && !item.Action.VirtualCidr.IsUnknown() {
+					actionNestedMap["virtual_cidr"] = item.Action.VirtualCidr.ValueString()
+				}
+				itemMap["action"] = actionNestedMap
+			}
+			if item.CloudConnect != nil {
+				cloud_connectNestedMap := make(map[string]interface{})
+				itemMap["cloud_connect"] = cloud_connectNestedMap
+			}
+			if item.Criteria != nil {
+				criteriaNestedMap := make(map[string]interface{})
+				if !item.Criteria.Protocol.IsNull() && !item.Criteria.Protocol.IsUnknown() {
+					criteriaNestedMap["protocol"] = item.Criteria.Protocol.ValueString()
+				}
+				itemMap["criteria"] = criteriaNestedMap
+			}
+			if item.Disable != nil {
+				itemMap["disable"] = map[string]interface{}{}
+			}
+			if item.Enable != nil {
+				itemMap["enable"] = map[string]interface{}{}
+			}
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			if item.NetworkInterface != nil {
+				network_interfaceNestedMap := make(map[string]interface{})
+				itemMap["network_interface"] = network_interfaceNestedMap
+			}
+			if item.Segment != nil {
+				segmentNestedMap := make(map[string]interface{})
+				itemMap["segment"] = segmentNestedMap
+			}
+			if item.VirtualNetwork != nil {
+				virtual_networkNestedMap := make(map[string]interface{})
+				itemMap["virtual_network"] = virtual_networkNestedMap
+			}
+			rulesList = append(rulesList, itemMap)
+		}
+		apiResource.Spec["rules"] = rulesList
+	}
+	if data.Site != nil {
+		siteMap := make(map[string]interface{})
+		apiResource.Spec["site"] = siteMap
+	}
+
+
 	created, err := r.client.CreateNatPolicy(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create NatPolicy: %s", err))
@@ -960,8 +1014,13 @@ func (r *NatPolicyResource) Create(ctx context.Context, req resource.CreateReque
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created NatPolicy resource")
@@ -1040,9 +1099,112 @@ func (r *NatPolicyResource) Read(ctx context.Context, req resource.ReadRequest, 
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if listData, ok := apiResource.Spec["rules"].([]interface{}); ok && len(listData) > 0 {
+		var rulesList []NatPolicyRulesModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				rulesList = append(rulesList, NatPolicyRulesModel{
+					Action: func() *NatPolicyRulesActionModel {
+						if nestedMap, ok := itemMap["action"].(map[string]interface{}); ok {
+							return &NatPolicyRulesActionModel{
+								VirtualCidr: func() types.String {
+									if v, ok := nestedMap["virtual_cidr"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					CloudConnect: func() *NatPolicyRulesCloudConnectModel {
+						if _, ok := itemMap["cloud_connect"].(map[string]interface{}); ok {
+							return &NatPolicyRulesCloudConnectModel{
+							}
+						}
+						return nil
+					}(),
+					Criteria: func() *NatPolicyRulesCriteriaModel {
+						if nestedMap, ok := itemMap["criteria"].(map[string]interface{}); ok {
+							return &NatPolicyRulesCriteriaModel{
+								Protocol: func() types.String {
+									if v, ok := nestedMap["protocol"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					Disable: func() *NatPolicyEmptyModel {
+						if _, ok := itemMap["disable"].(map[string]interface{}); ok {
+							return &NatPolicyEmptyModel{}
+						}
+						return nil
+					}(),
+					Enable: func() *NatPolicyEmptyModel {
+						if _, ok := itemMap["enable"].(map[string]interface{}); ok {
+							return &NatPolicyEmptyModel{}
+						}
+						return nil
+					}(),
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					NetworkInterface: func() *NatPolicyRulesNetworkInterfaceModel {
+						if _, ok := itemMap["network_interface"].(map[string]interface{}); ok {
+							return &NatPolicyRulesNetworkInterfaceModel{
+							}
+						}
+						return nil
+					}(),
+					Segment: func() *NatPolicyRulesSegmentModel {
+						if _, ok := itemMap["segment"].(map[string]interface{}); ok {
+							return &NatPolicyRulesSegmentModel{
+							}
+						}
+						return nil
+					}(),
+					VirtualNetwork: func() *NatPolicyRulesVirtualNetworkModel {
+						if _, ok := itemMap["virtual_network"].(map[string]interface{}); ok {
+							return &NatPolicyRulesVirtualNetworkModel{
+							}
+						}
+						return nil
+					}(),
+				})
+			}
+		}
+		data.Rules = rulesList
+	}
+	if _, ok := apiResource.Spec["site"].(map[string]interface{}); ok && isImport && data.Site == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Site = &NatPolicySiteModel{}
+	}
+	// Normal Read: preserve existing state value
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -1068,7 +1230,7 @@ func (r *NatPolicyResource) Update(ctx context.Context, req resource.UpdateReque
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.NatPolicySpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -1093,6 +1255,60 @@ func (r *NatPolicyResource) Update(ctx context.Context, req resource.UpdateReque
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if len(data.Rules) > 0 {
+		var rulesList []map[string]interface{}
+		for _, item := range data.Rules {
+			itemMap := make(map[string]interface{})
+			if item.Action != nil {
+				actionNestedMap := make(map[string]interface{})
+				if !item.Action.VirtualCidr.IsNull() && !item.Action.VirtualCidr.IsUnknown() {
+					actionNestedMap["virtual_cidr"] = item.Action.VirtualCidr.ValueString()
+				}
+				itemMap["action"] = actionNestedMap
+			}
+			if item.CloudConnect != nil {
+				cloud_connectNestedMap := make(map[string]interface{})
+				itemMap["cloud_connect"] = cloud_connectNestedMap
+			}
+			if item.Criteria != nil {
+				criteriaNestedMap := make(map[string]interface{})
+				if !item.Criteria.Protocol.IsNull() && !item.Criteria.Protocol.IsUnknown() {
+					criteriaNestedMap["protocol"] = item.Criteria.Protocol.ValueString()
+				}
+				itemMap["criteria"] = criteriaNestedMap
+			}
+			if item.Disable != nil {
+				itemMap["disable"] = map[string]interface{}{}
+			}
+			if item.Enable != nil {
+				itemMap["enable"] = map[string]interface{}{}
+			}
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			if item.NetworkInterface != nil {
+				network_interfaceNestedMap := make(map[string]interface{})
+				itemMap["network_interface"] = network_interfaceNestedMap
+			}
+			if item.Segment != nil {
+				segmentNestedMap := make(map[string]interface{})
+				itemMap["segment"] = segmentNestedMap
+			}
+			if item.VirtualNetwork != nil {
+				virtual_networkNestedMap := make(map[string]interface{})
+				itemMap["virtual_network"] = virtual_networkNestedMap
+			}
+			rulesList = append(rulesList, itemMap)
+		}
+		apiResource.Spec["rules"] = rulesList
+	}
+	if data.Site != nil {
+		siteMap := make(map[string]interface{})
+		apiResource.Spec["site"] = siteMap
+	}
+
+
 	updated, err := r.client.UpdateNatPolicy(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update NatPolicy: %s", err))
@@ -1101,6 +1317,8 @@ func (r *NatPolicyResource) Update(ctx context.Context, req resource.UpdateReque
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -1113,6 +1331,7 @@ func (r *NatPolicyResource) Update(ctx context.Context, req resource.UpdateReque
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -1139,6 +1358,15 @@ func (r *NatPolicyResource) Delete(ctx context.Context, req resource.DeleteReque
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "NatPolicy already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "NatPolicy delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

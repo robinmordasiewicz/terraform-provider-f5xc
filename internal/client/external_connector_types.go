@@ -10,13 +10,8 @@ import (
 
 // ExternalConnector represents a F5XC ExternalConnector
 type ExternalConnector struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     ExternalConnectorSpec `json:"spec"`
-}
-
-// ExternalConnectorSpec defines the specification for ExternalConnector
-type ExternalConnectorSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateExternalConnector creates a new ExternalConnector

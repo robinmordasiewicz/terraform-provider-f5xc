@@ -83,11 +83,11 @@ type FilterSetResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Annotations types.Map `tfsdk:"annotations"`
-	ContextKey types.String `tfsdk:"context_key"`
 	Description types.String `tfsdk:"description"`
 	Disable types.Bool `tfsdk:"disable"`
 	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
+	ContextKey types.String `tfsdk:"context_key"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
 	FilterFields []FilterSetFilterFieldsModel `tfsdk:"filter_fields"`
 }
@@ -126,10 +126,6 @@ func (r *FilterSetResource) Schema(ctx context.Context, req resource.SchemaReque
 				Optional: true,
 				ElementType: types.StringType,
 			},
-			"context_key": schema.StringAttribute{
-				MarkdownDescription: "Context Key. indexable context key that identifies a page or page type for which the FilterSet is applicable",
-				Optional: true,
-			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
 				Optional: true,
@@ -145,6 +141,14 @@ func (r *FilterSetResource) Schema(ctx context.Context, req resource.SchemaReque
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"context_key": schema.StringAttribute{
+				MarkdownDescription: "Context Key. indexable context key that identifies a page or page type for which the FilterSet is applicable",
+				Optional: true,
 				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
@@ -337,7 +341,7 @@ func (r *FilterSetResource) Create(ctx context.Context, req resource.CreateReque
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.FilterSetSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -362,6 +366,41 @@ func (r *FilterSetResource) Create(ctx context.Context, req resource.CreateReque
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if len(data.FilterFields) > 0 {
+		var filter_fieldsList []map[string]interface{}
+		for _, item := range data.FilterFields {
+			itemMap := make(map[string]interface{})
+			if item.DateField != nil {
+				date_fieldNestedMap := make(map[string]interface{})
+				if !item.DateField.Relative.IsNull() && !item.DateField.Relative.IsUnknown() {
+					date_fieldNestedMap["relative"] = item.DateField.Relative.ValueString()
+				}
+				itemMap["date_field"] = date_fieldNestedMap
+			}
+			if !item.FieldID.IsNull() && !item.FieldID.IsUnknown() {
+				itemMap["field_id"] = item.FieldID.ValueString()
+			}
+			if item.FilterExpressionField != nil {
+				filter_expression_fieldNestedMap := make(map[string]interface{})
+				if !item.FilterExpressionField.Expression.IsNull() && !item.FilterExpressionField.Expression.IsUnknown() {
+					filter_expression_fieldNestedMap["expression"] = item.FilterExpressionField.Expression.ValueString()
+				}
+				itemMap["filter_expression_field"] = filter_expression_fieldNestedMap
+			}
+			if item.StringField != nil {
+				string_fieldNestedMap := make(map[string]interface{})
+				itemMap["string_field"] = string_fieldNestedMap
+			}
+			filter_fieldsList = append(filter_fieldsList, itemMap)
+		}
+		apiResource.Spec["filter_fields"] = filter_fieldsList
+	}
+	if !data.ContextKey.IsNull() && !data.ContextKey.IsUnknown() {
+		apiResource.Spec["context_key"] = data.ContextKey.ValueString()
+	}
+
+
 	created, err := r.client.CreateFilterSet(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create FilterSet: %s", err))
@@ -370,8 +409,17 @@ func (r *FilterSetResource) Create(ctx context.Context, req resource.CreateReque
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+	if v, ok := created.Spec["context_key"].(string); ok && v != "" {
+		data.ContextKey = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created FilterSet resource")
@@ -450,9 +498,79 @@ func (r *FilterSetResource) Read(ctx context.Context, req resource.ReadRequest, 
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if listData, ok := apiResource.Spec["filter_fields"].([]interface{}); ok && len(listData) > 0 {
+		var filter_fieldsList []FilterSetFilterFieldsModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				filter_fieldsList = append(filter_fieldsList, FilterSetFilterFieldsModel{
+					DateField: func() *FilterSetFilterFieldsDateFieldModel {
+						if nestedMap, ok := itemMap["date_field"].(map[string]interface{}); ok {
+							return &FilterSetFilterFieldsDateFieldModel{
+								Relative: func() types.String {
+									if v, ok := nestedMap["relative"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					FieldID: func() types.String {
+						if v, ok := itemMap["field_id"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					FilterExpressionField: func() *FilterSetFilterFieldsFilterExpressionFieldModel {
+						if nestedMap, ok := itemMap["filter_expression_field"].(map[string]interface{}); ok {
+							return &FilterSetFilterFieldsFilterExpressionFieldModel{
+								Expression: func() types.String {
+									if v, ok := nestedMap["expression"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					StringField: func() *FilterSetFilterFieldsStringFieldModel {
+						if _, ok := itemMap["string_field"].(map[string]interface{}); ok {
+							return &FilterSetFilterFieldsStringFieldModel{
+							}
+						}
+						return nil
+					}(),
+				})
+			}
+		}
+		data.FilterFields = filter_fieldsList
+	}
+	if v, ok := apiResource.Spec["context_key"].(string); ok && v != "" {
+		data.ContextKey = types.StringValue(v)
+	} else {
+		data.ContextKey = types.StringNull()
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -478,7 +596,7 @@ func (r *FilterSetResource) Update(ctx context.Context, req resource.UpdateReque
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.FilterSetSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -503,6 +621,41 @@ func (r *FilterSetResource) Update(ctx context.Context, req resource.UpdateReque
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if len(data.FilterFields) > 0 {
+		var filter_fieldsList []map[string]interface{}
+		for _, item := range data.FilterFields {
+			itemMap := make(map[string]interface{})
+			if item.DateField != nil {
+				date_fieldNestedMap := make(map[string]interface{})
+				if !item.DateField.Relative.IsNull() && !item.DateField.Relative.IsUnknown() {
+					date_fieldNestedMap["relative"] = item.DateField.Relative.ValueString()
+				}
+				itemMap["date_field"] = date_fieldNestedMap
+			}
+			if !item.FieldID.IsNull() && !item.FieldID.IsUnknown() {
+				itemMap["field_id"] = item.FieldID.ValueString()
+			}
+			if item.FilterExpressionField != nil {
+				filter_expression_fieldNestedMap := make(map[string]interface{})
+				if !item.FilterExpressionField.Expression.IsNull() && !item.FilterExpressionField.Expression.IsUnknown() {
+					filter_expression_fieldNestedMap["expression"] = item.FilterExpressionField.Expression.ValueString()
+				}
+				itemMap["filter_expression_field"] = filter_expression_fieldNestedMap
+			}
+			if item.StringField != nil {
+				string_fieldNestedMap := make(map[string]interface{})
+				itemMap["string_field"] = string_fieldNestedMap
+			}
+			filter_fieldsList = append(filter_fieldsList, itemMap)
+		}
+		apiResource.Spec["filter_fields"] = filter_fieldsList
+	}
+	if !data.ContextKey.IsNull() && !data.ContextKey.IsUnknown() {
+		apiResource.Spec["context_key"] = data.ContextKey.ValueString()
+	}
+
+
 	updated, err := r.client.UpdateFilterSet(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update FilterSet: %s", err))
@@ -511,6 +664,12 @@ func (r *FilterSetResource) Update(ctx context.Context, req resource.UpdateReque
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
+	if v, ok := updated.Spec["context_key"].(string); ok && v != "" {
+		data.ContextKey = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -523,6 +682,7 @@ func (r *FilterSetResource) Update(ctx context.Context, req resource.UpdateReque
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -549,6 +709,15 @@ func (r *FilterSetResource) Delete(ctx context.Context, req resource.DeleteReque
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "FilterSet already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "FilterSet delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

@@ -10,13 +10,8 @@ import (
 
 // Healthcheck represents a F5XC Healthcheck
 type Healthcheck struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     HealthcheckSpec `json:"spec"`
-}
-
-// HealthcheckSpec defines the specification for Healthcheck
-type HealthcheckSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateHealthcheck creates a new Healthcheck

@@ -668,7 +668,7 @@ type CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeFal
 
 // CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeFallThroughModeCustomOpenAPIValidationRulesMetadataModel represents metadata block
 type CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeFallThroughModeCustomOpenAPIValidationRulesMetadataModel struct {
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name types.String `tfsdk:"name"`
 }
 
@@ -750,7 +750,7 @@ type CDNLoadBalancerAPISpecificationValidationCustomListFallThroughModeFallThrou
 
 // CDNLoadBalancerAPISpecificationValidationCustomListFallThroughModeFallThroughModeCustomOpenAPIValidationRulesMetadataModel represents metadata block
 type CDNLoadBalancerAPISpecificationValidationCustomListFallThroughModeFallThroughModeCustomOpenAPIValidationRulesMetadataModel struct {
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name types.String `tfsdk:"name"`
 }
 
@@ -773,7 +773,7 @@ type CDNLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesAP
 
 // CDNLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesMetadataModel represents metadata block
 type CDNLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesMetadataModel struct {
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name types.String `tfsdk:"name"`
 }
 
@@ -856,7 +856,7 @@ type CDNLoadBalancerBlockedClientsHTTPHeaderHeadersModel struct {
 
 // CDNLoadBalancerBlockedClientsMetadataModel represents metadata block
 type CDNLoadBalancerBlockedClientsMetadataModel struct {
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name types.String `tfsdk:"name"`
 }
 
@@ -910,7 +910,7 @@ type CDNLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListDomainModel
 
 // CDNLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListMetadataModel represents metadata block
 type CDNLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListMetadataModel struct {
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name types.String `tfsdk:"name"`
 }
 
@@ -944,7 +944,7 @@ type CDNLoadBalancerBotDefensePolicyJsInsertionRulesExcludeListDomainModel struc
 
 // CDNLoadBalancerBotDefensePolicyJsInsertionRulesExcludeListMetadataModel represents metadata block
 type CDNLoadBalancerBotDefensePolicyJsInsertionRulesExcludeListMetadataModel struct {
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name types.String `tfsdk:"name"`
 }
 
@@ -973,7 +973,7 @@ type CDNLoadBalancerBotDefensePolicyJsInsertionRulesRulesDomainModel struct {
 
 // CDNLoadBalancerBotDefensePolicyJsInsertionRulesRulesMetadataModel represents metadata block
 type CDNLoadBalancerBotDefensePolicyJsInsertionRulesRulesMetadataModel struct {
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name types.String `tfsdk:"name"`
 }
 
@@ -1148,7 +1148,7 @@ type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsHeadersItemModel struct
 
 // CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsMetadataModel represents metadata block
 type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsMetadataModel struct {
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name types.String `tfsdk:"name"`
 }
 
@@ -1251,7 +1251,7 @@ type CDNLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListDoma
 
 // CDNLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListMetadataModel represents metadata block
 type CDNLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListMetadataModel struct {
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name types.String `tfsdk:"name"`
 }
 
@@ -1285,7 +1285,7 @@ type CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListDomainMode
 
 // CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListMetadataModel represents metadata block
 type CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListMetadataModel struct {
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name types.String `tfsdk:"name"`
 }
 
@@ -1313,7 +1313,7 @@ type CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesDomainModel stru
 
 // CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesMetadataModel represents metadata block
 type CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesMetadataModel struct {
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name types.String `tfsdk:"name"`
 }
 
@@ -1373,7 +1373,7 @@ type CDNLoadBalancerDataGuardRulesModel struct {
 
 // CDNLoadBalancerDataGuardRulesMetadataModel represents metadata block
 type CDNLoadBalancerDataGuardRulesMetadataModel struct {
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name types.String `tfsdk:"name"`
 }
 
@@ -1426,7 +1426,7 @@ type CDNLoadBalancerDdosMitigationRulesIPPrefixListModel struct {
 
 // CDNLoadBalancerDdosMitigationRulesMetadataModel represents metadata block
 type CDNLoadBalancerDdosMitigationRulesMetadataModel struct {
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name types.String `tfsdk:"name"`
 }
 
@@ -1589,7 +1589,7 @@ type CDNLoadBalancerGraphqlRulesGraphqlSettingsModel struct {
 
 // CDNLoadBalancerGraphqlRulesMetadataModel represents metadata block
 type CDNLoadBalancerGraphqlRulesMetadataModel struct {
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name types.String `tfsdk:"name"`
 }
 
@@ -1684,7 +1684,7 @@ type CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsModel struct {
 // CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSCertificatesModel represents tls_certificates block
 type CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSCertificatesModel struct {
 	CertificateURL types.String `tfsdk:"certificate_url"`
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	CustomHashAlgorithms *CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
 	DisableOcspStapling *CDNLoadBalancerEmptyModel `tfsdk:"disable_ocsp_stapling"`
 	PrivateKey *CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
@@ -1930,7 +1930,7 @@ type CDNLoadBalancerOriginPoolUseTLSUseMtlsModel struct {
 // CDNLoadBalancerOriginPoolUseTLSUseMtlsTLSCertificatesModel represents tls_certificates block
 type CDNLoadBalancerOriginPoolUseTLSUseMtlsTLSCertificatesModel struct {
 	CertificateURL types.String `tfsdk:"certificate_url"`
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	CustomHashAlgorithms *CDNLoadBalancerOriginPoolUseTLSUseMtlsTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
 	DisableOcspStapling *CDNLoadBalancerEmptyModel `tfsdk:"disable_ocsp_stapling"`
 	PrivateKey *CDNLoadBalancerOriginPoolUseTLSUseMtlsTLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
@@ -2115,7 +2115,7 @@ type CDNLoadBalancerPolicyBasedChallengeRuleListRulesModel struct {
 
 // CDNLoadBalancerPolicyBasedChallengeRuleListRulesMetadataModel represents metadata block
 type CDNLoadBalancerPolicyBasedChallengeRuleListRulesMetadataModel struct {
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name types.String `tfsdk:"name"`
 }
 
@@ -2434,7 +2434,7 @@ type CDNLoadBalancerTrustedClientsHTTPHeaderHeadersModel struct {
 
 // CDNLoadBalancerTrustedClientsMetadataModel represents metadata block
 type CDNLoadBalancerTrustedClientsMetadataModel struct {
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name types.String `tfsdk:"name"`
 }
 
@@ -2507,7 +2507,7 @@ type CDNLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetection
 
 // CDNLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesMetadataModel represents metadata block
 type CDNLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesMetadataModel struct {
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name types.String `tfsdk:"name"`
 }
 
@@ -2729,7 +2729,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												"as_numbers": schema.ListAttribute{
 													MarkdownDescription: "AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
 													Optional: true,
-													ElementType: types.StringType,
+													ElementType: types.Int64Type,
 												},
 											},
 										},
@@ -3161,7 +3161,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 														"as_numbers": schema.ListAttribute{
 															MarkdownDescription: "AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
 															Optional: true,
-															ElementType: types.StringType,
+															ElementType: types.Int64Type,
 														},
 													},
 												},
@@ -3554,7 +3554,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												"as_numbers": schema.ListAttribute{
 													MarkdownDescription: "AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
 													Optional: true,
-													ElementType: types.StringType,
+													ElementType: types.Int64Type,
 												},
 											},
 										},
@@ -4003,7 +4003,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 														"metadata": schema.SingleNestedBlock{
 															MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 															Attributes: map[string]schema.Attribute{
-																"description": schema.StringAttribute{
+																"description_spec": schema.StringAttribute{
 																	MarkdownDescription: "Description. Human readable description.",
 																	Optional: true,
 																},
@@ -4165,7 +4165,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 														"metadata": schema.SingleNestedBlock{
 															MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 															Attributes: map[string]schema.Attribute{
-																"description": schema.StringAttribute{
+																"description_spec": schema.StringAttribute{
 																	MarkdownDescription: "Description. Human readable description.",
 																	Optional: true,
 																},
@@ -4220,7 +4220,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 										"metadata": schema.SingleNestedBlock{
 											MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 											Attributes: map[string]schema.Attribute{
-												"description": schema.StringAttribute{
+												"description_spec": schema.StringAttribute{
 													MarkdownDescription: "Description. Human readable description.",
 													Optional: true,
 												},
@@ -4415,7 +4415,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						"metadata": schema.SingleNestedBlock{
 							MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 							Attributes: map[string]schema.Attribute{
-								"description": schema.StringAttribute{
+								"description_spec": schema.StringAttribute{
 									MarkdownDescription: "Description. Human readable description.",
 									Optional: true,
 								},
@@ -4520,7 +4520,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												"metadata": schema.SingleNestedBlock{
 													MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 													Attributes: map[string]schema.Attribute{
-														"description": schema.StringAttribute{
+														"description_spec": schema.StringAttribute{
 															MarkdownDescription: "Description. Human readable description.",
 															Optional: true,
 														},
@@ -4586,7 +4586,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												"metadata": schema.SingleNestedBlock{
 													MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 													Attributes: map[string]schema.Attribute{
-														"description": schema.StringAttribute{
+														"description_spec": schema.StringAttribute{
 															MarkdownDescription: "Description. Human readable description.",
 															Optional: true,
 														},
@@ -4649,7 +4649,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												"metadata": schema.SingleNestedBlock{
 													MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 													Attributes: map[string]schema.Attribute{
-														"description": schema.StringAttribute{
+														"description_spec": schema.StringAttribute{
 															MarkdownDescription: "Description. Human readable description.",
 															Optional: true,
 														},
@@ -5015,7 +5015,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 										"metadata": schema.SingleNestedBlock{
 											MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 											Attributes: map[string]schema.Attribute{
-												"description": schema.StringAttribute{
+												"description_spec": schema.StringAttribute{
 													MarkdownDescription: "Description. Human readable description.",
 													Optional: true,
 												},
@@ -5230,7 +5230,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												"metadata": schema.SingleNestedBlock{
 													MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 													Attributes: map[string]schema.Attribute{
-														"description": schema.StringAttribute{
+														"description_spec": schema.StringAttribute{
 															MarkdownDescription: "Description. Human readable description.",
 															Optional: true,
 														},
@@ -5296,7 +5296,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												"metadata": schema.SingleNestedBlock{
 													MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 													Attributes: map[string]schema.Attribute{
-														"description": schema.StringAttribute{
+														"description_spec": schema.StringAttribute{
 															MarkdownDescription: "Description. Human readable description.",
 															Optional: true,
 														},
@@ -5355,7 +5355,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												"metadata": schema.SingleNestedBlock{
 													MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 													Attributes: map[string]schema.Attribute{
-														"description": schema.StringAttribute{
+														"description_spec": schema.StringAttribute{
 															MarkdownDescription: "Description. Human readable description.",
 															Optional: true,
 														},
@@ -5506,7 +5506,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						"metadata": schema.SingleNestedBlock{
 							MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 							Attributes: map[string]schema.Attribute{
-								"description": schema.StringAttribute{
+								"description_spec": schema.StringAttribute{
 									MarkdownDescription: "Description. Human readable description.",
 									Optional: true,
 								},
@@ -5569,7 +5569,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 										"as_numbers": schema.ListAttribute{
 											MarkdownDescription: "AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
 											Optional: true,
-											ElementType: types.StringType,
+											ElementType: types.Int64Type,
 										},
 									},
 								},
@@ -5622,7 +5622,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						"metadata": schema.SingleNestedBlock{
 							MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 							Attributes: map[string]schema.Attribute{
-								"description": schema.StringAttribute{
+								"description_spec": schema.StringAttribute{
 									MarkdownDescription: "Description. Human readable description.",
 									Optional: true,
 								},
@@ -5986,7 +5986,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						"metadata": schema.SingleNestedBlock{
 							MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 							Attributes: map[string]schema.Attribute{
-								"description": schema.StringAttribute{
+								"description_spec": schema.StringAttribute{
 									MarkdownDescription: "Description. Human readable description.",
 									Optional: true,
 								},
@@ -6186,7 +6186,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
 													Optional: true,
 												},
-												"description": schema.StringAttribute{
+												"description_spec": schema.StringAttribute{
 													MarkdownDescription: "Description. Description for the certificate",
 													Optional: true,
 												},
@@ -6695,7 +6695,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
 													Optional: true,
 												},
-												"description": schema.StringAttribute{
+												"description_spec": schema.StringAttribute{
 													MarkdownDescription: "Description. Description for the certificate",
 													Optional: true,
 												},
@@ -7071,7 +7071,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 										"metadata": schema.SingleNestedBlock{
 											MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 											Attributes: map[string]schema.Attribute{
-												"description": schema.StringAttribute{
+												"description_spec": schema.StringAttribute{
 													MarkdownDescription: "Description. Human readable description.",
 													Optional: true,
 												},
@@ -7148,7 +7148,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 														"as_numbers": schema.ListAttribute{
 															MarkdownDescription: "AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
 															Optional: true,
-															ElementType: types.StringType,
+															ElementType: types.Int64Type,
 														},
 													},
 												},
@@ -7822,7 +7822,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						"metadata": schema.SingleNestedBlock{
 							MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 							Attributes: map[string]schema.Attribute{
-								"description": schema.StringAttribute{
+								"description_spec": schema.StringAttribute{
 									MarkdownDescription: "Description. Human readable description.",
 									Optional: true,
 								},
@@ -7988,7 +7988,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 										"metadata": schema.SingleNestedBlock{
 											MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 											Attributes: map[string]schema.Attribute{
-												"description": schema.StringAttribute{
+												"description_spec": schema.StringAttribute{
 													MarkdownDescription: "Description. Human readable description.",
 													Optional: true,
 												},
@@ -8148,7 +8148,7 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.CDNLoadBalancerSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -8173,6 +8173,933 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.ActiveServicePolicies != nil {
+		active_service_policiesMap := make(map[string]interface{})
+		apiResource.Spec["active_service_policies"] = active_service_policiesMap
+	}
+	if data.APIRateLimit != nil {
+		api_rate_limitMap := make(map[string]interface{})
+		if data.APIRateLimit.BypassRateLimitingRules != nil {
+			bypass_rate_limiting_rulesNestedMap := make(map[string]interface{})
+			api_rate_limitMap["bypass_rate_limiting_rules"] = bypass_rate_limiting_rulesNestedMap
+		}
+		if data.APIRateLimit.CustomIPAllowedList != nil {
+			custom_ip_allowed_listNestedMap := make(map[string]interface{})
+			api_rate_limitMap["custom_ip_allowed_list"] = custom_ip_allowed_listNestedMap
+		}
+		if data.APIRateLimit.IPAllowedList != nil {
+			ip_allowed_listNestedMap := make(map[string]interface{})
+			api_rate_limitMap["ip_allowed_list"] = ip_allowed_listNestedMap
+		}
+		if data.APIRateLimit.NoIPAllowedList != nil {
+			api_rate_limitMap["no_ip_allowed_list"] = map[string]interface{}{}
+		}
+		apiResource.Spec["api_rate_limit"] = api_rate_limitMap
+	}
+	if data.APISpecification != nil {
+		api_specificationMap := make(map[string]interface{})
+		if data.APISpecification.APIDefinition != nil {
+			api_definitionNestedMap := make(map[string]interface{})
+			if !data.APISpecification.APIDefinition.Name.IsNull() && !data.APISpecification.APIDefinition.Name.IsUnknown() {
+				api_definitionNestedMap["name"] = data.APISpecification.APIDefinition.Name.ValueString()
+			}
+			if !data.APISpecification.APIDefinition.Namespace.IsNull() && !data.APISpecification.APIDefinition.Namespace.IsUnknown() {
+				api_definitionNestedMap["namespace"] = data.APISpecification.APIDefinition.Namespace.ValueString()
+			}
+			if !data.APISpecification.APIDefinition.Tenant.IsNull() && !data.APISpecification.APIDefinition.Tenant.IsUnknown() {
+				api_definitionNestedMap["tenant"] = data.APISpecification.APIDefinition.Tenant.ValueString()
+			}
+			api_specificationMap["api_definition"] = api_definitionNestedMap
+		}
+		if data.APISpecification.ValidationAllSpecEndpoints != nil {
+			validation_all_spec_endpointsNestedMap := make(map[string]interface{})
+			api_specificationMap["validation_all_spec_endpoints"] = validation_all_spec_endpointsNestedMap
+		}
+		if data.APISpecification.ValidationCustomList != nil {
+			validation_custom_listNestedMap := make(map[string]interface{})
+			api_specificationMap["validation_custom_list"] = validation_custom_listNestedMap
+		}
+		if data.APISpecification.ValidationDisabled != nil {
+			api_specificationMap["validation_disabled"] = map[string]interface{}{}
+		}
+		apiResource.Spec["api_specification"] = api_specificationMap
+	}
+	if data.AppFirewall != nil {
+		app_firewallMap := make(map[string]interface{})
+		if !data.AppFirewall.Name.IsNull() && !data.AppFirewall.Name.IsUnknown() {
+			app_firewallMap["name"] = data.AppFirewall.Name.ValueString()
+		}
+		if !data.AppFirewall.Namespace.IsNull() && !data.AppFirewall.Namespace.IsUnknown() {
+			app_firewallMap["namespace"] = data.AppFirewall.Namespace.ValueString()
+		}
+		if !data.AppFirewall.Tenant.IsNull() && !data.AppFirewall.Tenant.IsUnknown() {
+			app_firewallMap["tenant"] = data.AppFirewall.Tenant.ValueString()
+		}
+		apiResource.Spec["app_firewall"] = app_firewallMap
+	}
+	if len(data.BlockedClients) > 0 {
+		var blocked_clientsList []map[string]interface{}
+		for _, item := range data.BlockedClients {
+			itemMap := make(map[string]interface{})
+			if !item.AsNumber.IsNull() && !item.AsNumber.IsUnknown() {
+				itemMap["as_number"] = item.AsNumber.ValueInt64()
+			}
+			if item.BotSkipProcessing != nil {
+				itemMap["bot_skip_processing"] = map[string]interface{}{}
+			}
+			if !item.ExpirationTimestamp.IsNull() && !item.ExpirationTimestamp.IsUnknown() {
+				itemMap["expiration_timestamp"] = item.ExpirationTimestamp.ValueString()
+			}
+			if item.HTTPHeader != nil {
+				http_headerNestedMap := make(map[string]interface{})
+				itemMap["http_header"] = http_headerNestedMap
+			}
+			if !item.IPPrefix.IsNull() && !item.IPPrefix.IsUnknown() {
+				itemMap["ip_prefix"] = item.IPPrefix.ValueString()
+			}
+			if !item.IPV6Prefix.IsNull() && !item.IPV6Prefix.IsUnknown() {
+				itemMap["ipv6_prefix"] = item.IPV6Prefix.ValueString()
+			}
+			if item.Metadata != nil {
+				metadataNestedMap := make(map[string]interface{})
+				if !item.Metadata.DescriptionSpec.IsNull() && !item.Metadata.DescriptionSpec.IsUnknown() {
+					metadataNestedMap["description"] = item.Metadata.DescriptionSpec.ValueString()
+				}
+				if !item.Metadata.Name.IsNull() && !item.Metadata.Name.IsUnknown() {
+					metadataNestedMap["name"] = item.Metadata.Name.ValueString()
+				}
+				itemMap["metadata"] = metadataNestedMap
+			}
+			if item.SkipProcessing != nil {
+				itemMap["skip_processing"] = map[string]interface{}{}
+			}
+			if !item.UserIdentifier.IsNull() && !item.UserIdentifier.IsUnknown() {
+				itemMap["user_identifier"] = item.UserIdentifier.ValueString()
+			}
+			if item.WAFSkipProcessing != nil {
+				itemMap["waf_skip_processing"] = map[string]interface{}{}
+			}
+			blocked_clientsList = append(blocked_clientsList, itemMap)
+		}
+		apiResource.Spec["blocked_clients"] = blocked_clientsList
+	}
+	if data.BotDefense != nil {
+		bot_defenseMap := make(map[string]interface{})
+		if data.BotDefense.DisableCorsSupport != nil {
+			bot_defenseMap["disable_cors_support"] = map[string]interface{}{}
+		}
+		if data.BotDefense.EnableCorsSupport != nil {
+			bot_defenseMap["enable_cors_support"] = map[string]interface{}{}
+		}
+		if data.BotDefense.Policy != nil {
+			policyNestedMap := make(map[string]interface{})
+			if !data.BotDefense.Policy.JavascriptMode.IsNull() && !data.BotDefense.Policy.JavascriptMode.IsUnknown() {
+				policyNestedMap["javascript_mode"] = data.BotDefense.Policy.JavascriptMode.ValueString()
+			}
+			if !data.BotDefense.Policy.JsDownloadPath.IsNull() && !data.BotDefense.Policy.JsDownloadPath.IsUnknown() {
+				policyNestedMap["js_download_path"] = data.BotDefense.Policy.JsDownloadPath.ValueString()
+			}
+			bot_defenseMap["policy"] = policyNestedMap
+		}
+		if !data.BotDefense.RegionalEndpoint.IsNull() && !data.BotDefense.RegionalEndpoint.IsUnknown() {
+			bot_defenseMap["regional_endpoint"] = data.BotDefense.RegionalEndpoint.ValueString()
+		}
+		if !data.BotDefense.Timeout.IsNull() && !data.BotDefense.Timeout.IsUnknown() {
+			bot_defenseMap["timeout"] = data.BotDefense.Timeout.ValueInt64()
+		}
+		apiResource.Spec["bot_defense"] = bot_defenseMap
+	}
+	if data.CaptchaChallenge != nil {
+		captcha_challengeMap := make(map[string]interface{})
+		if !data.CaptchaChallenge.CookieExpiry.IsNull() && !data.CaptchaChallenge.CookieExpiry.IsUnknown() {
+			captcha_challengeMap["cookie_expiry"] = data.CaptchaChallenge.CookieExpiry.ValueInt64()
+		}
+		if !data.CaptchaChallenge.CustomPage.IsNull() && !data.CaptchaChallenge.CustomPage.IsUnknown() {
+			captcha_challengeMap["custom_page"] = data.CaptchaChallenge.CustomPage.ValueString()
+		}
+		apiResource.Spec["captcha_challenge"] = captcha_challengeMap
+	}
+	if data.ClientSideDefense != nil {
+		client_side_defenseMap := make(map[string]interface{})
+		if data.ClientSideDefense.Policy != nil {
+			policyNestedMap := make(map[string]interface{})
+			client_side_defenseMap["policy"] = policyNestedMap
+		}
+		apiResource.Spec["client_side_defense"] = client_side_defenseMap
+	}
+	if data.CorsPolicy != nil {
+		cors_policyMap := make(map[string]interface{})
+		if !data.CorsPolicy.AllowCredentials.IsNull() && !data.CorsPolicy.AllowCredentials.IsUnknown() {
+			cors_policyMap["allow_credentials"] = data.CorsPolicy.AllowCredentials.ValueBool()
+		}
+		if !data.CorsPolicy.AllowHeaders.IsNull() && !data.CorsPolicy.AllowHeaders.IsUnknown() {
+			cors_policyMap["allow_headers"] = data.CorsPolicy.AllowHeaders.ValueString()
+		}
+		if !data.CorsPolicy.AllowMethods.IsNull() && !data.CorsPolicy.AllowMethods.IsUnknown() {
+			cors_policyMap["allow_methods"] = data.CorsPolicy.AllowMethods.ValueString()
+		}
+		if !data.CorsPolicy.Disabled.IsNull() && !data.CorsPolicy.Disabled.IsUnknown() {
+			cors_policyMap["disabled"] = data.CorsPolicy.Disabled.ValueBool()
+		}
+		if !data.CorsPolicy.ExposeHeaders.IsNull() && !data.CorsPolicy.ExposeHeaders.IsUnknown() {
+			cors_policyMap["expose_headers"] = data.CorsPolicy.ExposeHeaders.ValueString()
+		}
+		if !data.CorsPolicy.MaximumAge.IsNull() && !data.CorsPolicy.MaximumAge.IsUnknown() {
+			cors_policyMap["maximum_age"] = data.CorsPolicy.MaximumAge.ValueInt64()
+		}
+		apiResource.Spec["cors_policy"] = cors_policyMap
+	}
+	if data.CsrfPolicy != nil {
+		csrf_policyMap := make(map[string]interface{})
+		if data.CsrfPolicy.AllLoadBalancerDomains != nil {
+			csrf_policyMap["all_load_balancer_domains"] = map[string]interface{}{}
+		}
+		if data.CsrfPolicy.CustomDomainList != nil {
+			custom_domain_listNestedMap := make(map[string]interface{})
+			csrf_policyMap["custom_domain_list"] = custom_domain_listNestedMap
+		}
+		if data.CsrfPolicy.Disabled != nil {
+			csrf_policyMap["disabled"] = map[string]interface{}{}
+		}
+		apiResource.Spec["csrf_policy"] = csrf_policyMap
+	}
+	if data.CustomCacheRule != nil {
+		custom_cache_ruleMap := make(map[string]interface{})
+		apiResource.Spec["custom_cache_rule"] = custom_cache_ruleMap
+	}
+	if len(data.DataGuardRules) > 0 {
+		var data_guard_rulesList []map[string]interface{}
+		for _, item := range data.DataGuardRules {
+			itemMap := make(map[string]interface{})
+			if item.AnyDomain != nil {
+				itemMap["any_domain"] = map[string]interface{}{}
+			}
+			if item.ApplyDataGuard != nil {
+				itemMap["apply_data_guard"] = map[string]interface{}{}
+			}
+			if !item.ExactValue.IsNull() && !item.ExactValue.IsUnknown() {
+				itemMap["exact_value"] = item.ExactValue.ValueString()
+			}
+			if item.Metadata != nil {
+				metadataNestedMap := make(map[string]interface{})
+				if !item.Metadata.DescriptionSpec.IsNull() && !item.Metadata.DescriptionSpec.IsUnknown() {
+					metadataNestedMap["description"] = item.Metadata.DescriptionSpec.ValueString()
+				}
+				if !item.Metadata.Name.IsNull() && !item.Metadata.Name.IsUnknown() {
+					metadataNestedMap["name"] = item.Metadata.Name.ValueString()
+				}
+				itemMap["metadata"] = metadataNestedMap
+			}
+			if item.Path != nil {
+				pathNestedMap := make(map[string]interface{})
+				if !item.Path.Path.IsNull() && !item.Path.Path.IsUnknown() {
+					pathNestedMap["path"] = item.Path.Path.ValueString()
+				}
+				if !item.Path.Prefix.IsNull() && !item.Path.Prefix.IsUnknown() {
+					pathNestedMap["prefix"] = item.Path.Prefix.ValueString()
+				}
+				if !item.Path.Regex.IsNull() && !item.Path.Regex.IsUnknown() {
+					pathNestedMap["regex"] = item.Path.Regex.ValueString()
+				}
+				itemMap["path"] = pathNestedMap
+			}
+			if item.SkipDataGuard != nil {
+				itemMap["skip_data_guard"] = map[string]interface{}{}
+			}
+			if !item.SuffixValue.IsNull() && !item.SuffixValue.IsUnknown() {
+				itemMap["suffix_value"] = item.SuffixValue.ValueString()
+			}
+			data_guard_rulesList = append(data_guard_rulesList, itemMap)
+		}
+		apiResource.Spec["data_guard_rules"] = data_guard_rulesList
+	}
+	if len(data.DdosMitigationRules) > 0 {
+		var ddos_mitigation_rulesList []map[string]interface{}
+		for _, item := range data.DdosMitigationRules {
+			itemMap := make(map[string]interface{})
+			if item.Block != nil {
+				itemMap["block"] = map[string]interface{}{}
+			}
+			if item.DdosClientSource != nil {
+				ddos_client_sourceNestedMap := make(map[string]interface{})
+				itemMap["ddos_client_source"] = ddos_client_sourceNestedMap
+			}
+			if !item.ExpirationTimestamp.IsNull() && !item.ExpirationTimestamp.IsUnknown() {
+				itemMap["expiration_timestamp"] = item.ExpirationTimestamp.ValueString()
+			}
+			if item.IPPrefixList != nil {
+				ip_prefix_listNestedMap := make(map[string]interface{})
+				if !item.IPPrefixList.InvertMatch.IsNull() && !item.IPPrefixList.InvertMatch.IsUnknown() {
+					ip_prefix_listNestedMap["invert_match"] = item.IPPrefixList.InvertMatch.ValueBool()
+				}
+				itemMap["ip_prefix_list"] = ip_prefix_listNestedMap
+			}
+			if item.Metadata != nil {
+				metadataNestedMap := make(map[string]interface{})
+				if !item.Metadata.DescriptionSpec.IsNull() && !item.Metadata.DescriptionSpec.IsUnknown() {
+					metadataNestedMap["description"] = item.Metadata.DescriptionSpec.ValueString()
+				}
+				if !item.Metadata.Name.IsNull() && !item.Metadata.Name.IsUnknown() {
+					metadataNestedMap["name"] = item.Metadata.Name.ValueString()
+				}
+				itemMap["metadata"] = metadataNestedMap
+			}
+			ddos_mitigation_rulesList = append(ddos_mitigation_rulesList, itemMap)
+		}
+		apiResource.Spec["ddos_mitigation_rules"] = ddos_mitigation_rulesList
+	}
+	if data.DefaultCacheAction != nil {
+		default_cache_actionMap := make(map[string]interface{})
+		if data.DefaultCacheAction.CacheDisabled != nil {
+			default_cache_actionMap["cache_disabled"] = map[string]interface{}{}
+		}
+		if !data.DefaultCacheAction.CacheTtlDefault.IsNull() && !data.DefaultCacheAction.CacheTtlDefault.IsUnknown() {
+			default_cache_actionMap["cache_ttl_default"] = data.DefaultCacheAction.CacheTtlDefault.ValueString()
+		}
+		if !data.DefaultCacheAction.CacheTtlOverride.IsNull() && !data.DefaultCacheAction.CacheTtlOverride.IsUnknown() {
+			default_cache_actionMap["cache_ttl_override"] = data.DefaultCacheAction.CacheTtlOverride.ValueString()
+		}
+		apiResource.Spec["default_cache_action"] = default_cache_actionMap
+	}
+	if data.DefaultSensitiveDataPolicy != nil {
+		default_sensitive_data_policyMap := make(map[string]interface{})
+		apiResource.Spec["default_sensitive_data_policy"] = default_sensitive_data_policyMap
+	}
+	if data.DisableAPIDefinition != nil {
+		disable_api_definitionMap := make(map[string]interface{})
+		apiResource.Spec["disable_api_definition"] = disable_api_definitionMap
+	}
+	if data.DisableAPIDiscovery != nil {
+		disable_api_discoveryMap := make(map[string]interface{})
+		apiResource.Spec["disable_api_discovery"] = disable_api_discoveryMap
+	}
+	if data.DisableClientSideDefense != nil {
+		disable_client_side_defenseMap := make(map[string]interface{})
+		apiResource.Spec["disable_client_side_defense"] = disable_client_side_defenseMap
+	}
+	if data.DisableIPReputation != nil {
+		disable_ip_reputationMap := make(map[string]interface{})
+		apiResource.Spec["disable_ip_reputation"] = disable_ip_reputationMap
+	}
+	if data.DisableMaliciousUserDetection != nil {
+		disable_malicious_user_detectionMap := make(map[string]interface{})
+		apiResource.Spec["disable_malicious_user_detection"] = disable_malicious_user_detectionMap
+	}
+	if data.DisableRateLimit != nil {
+		disable_rate_limitMap := make(map[string]interface{})
+		apiResource.Spec["disable_rate_limit"] = disable_rate_limitMap
+	}
+	if data.DisableThreatMesh != nil {
+		disable_threat_meshMap := make(map[string]interface{})
+		apiResource.Spec["disable_threat_mesh"] = disable_threat_meshMap
+	}
+	if data.DisableWAF != nil {
+		disable_wafMap := make(map[string]interface{})
+		apiResource.Spec["disable_waf"] = disable_wafMap
+	}
+	if !data.Domains.IsNull() && !data.Domains.IsUnknown() {
+		var domainsList []string
+		resp.Diagnostics.Append(data.Domains.ElementsAs(ctx, &domainsList, false)...)
+		if !resp.Diagnostics.HasError() {
+			apiResource.Spec["domains"] = domainsList
+		}
+	}
+	if data.EnableAPIDiscovery != nil {
+		enable_api_discoveryMap := make(map[string]interface{})
+		if data.EnableAPIDiscovery.APICrawler != nil {
+			api_crawlerNestedMap := make(map[string]interface{})
+			enable_api_discoveryMap["api_crawler"] = api_crawlerNestedMap
+		}
+		if data.EnableAPIDiscovery.APIDiscoveryFromCodeScan != nil {
+			api_discovery_from_code_scanNestedMap := make(map[string]interface{})
+			enable_api_discoveryMap["api_discovery_from_code_scan"] = api_discovery_from_code_scanNestedMap
+		}
+		if data.EnableAPIDiscovery.CustomAPIAuthDiscovery != nil {
+			custom_api_auth_discoveryNestedMap := make(map[string]interface{})
+			enable_api_discoveryMap["custom_api_auth_discovery"] = custom_api_auth_discoveryNestedMap
+		}
+		if data.EnableAPIDiscovery.DefaultAPIAuthDiscovery != nil {
+			enable_api_discoveryMap["default_api_auth_discovery"] = map[string]interface{}{}
+		}
+		if data.EnableAPIDiscovery.DisableLearnFromRedirectTraffic != nil {
+			enable_api_discoveryMap["disable_learn_from_redirect_traffic"] = map[string]interface{}{}
+		}
+		if data.EnableAPIDiscovery.DiscoveredAPISettings != nil {
+			discovered_api_settingsNestedMap := make(map[string]interface{})
+			if !data.EnableAPIDiscovery.DiscoveredAPISettings.PurgeDurationForInactiveDiscoveredApis.IsNull() && !data.EnableAPIDiscovery.DiscoveredAPISettings.PurgeDurationForInactiveDiscoveredApis.IsUnknown() {
+				discovered_api_settingsNestedMap["purge_duration_for_inactive_discovered_apis"] = data.EnableAPIDiscovery.DiscoveredAPISettings.PurgeDurationForInactiveDiscoveredApis.ValueInt64()
+			}
+			enable_api_discoveryMap["discovered_api_settings"] = discovered_api_settingsNestedMap
+		}
+		if data.EnableAPIDiscovery.EnableLearnFromRedirectTraffic != nil {
+			enable_api_discoveryMap["enable_learn_from_redirect_traffic"] = map[string]interface{}{}
+		}
+		apiResource.Spec["enable_api_discovery"] = enable_api_discoveryMap
+	}
+	if data.EnableChallenge != nil {
+		enable_challengeMap := make(map[string]interface{})
+		if data.EnableChallenge.CaptchaChallengeParameters != nil {
+			captcha_challenge_parametersNestedMap := make(map[string]interface{})
+			if !data.EnableChallenge.CaptchaChallengeParameters.CookieExpiry.IsNull() && !data.EnableChallenge.CaptchaChallengeParameters.CookieExpiry.IsUnknown() {
+				captcha_challenge_parametersNestedMap["cookie_expiry"] = data.EnableChallenge.CaptchaChallengeParameters.CookieExpiry.ValueInt64()
+			}
+			if !data.EnableChallenge.CaptchaChallengeParameters.CustomPage.IsNull() && !data.EnableChallenge.CaptchaChallengeParameters.CustomPage.IsUnknown() {
+				captcha_challenge_parametersNestedMap["custom_page"] = data.EnableChallenge.CaptchaChallengeParameters.CustomPage.ValueString()
+			}
+			enable_challengeMap["captcha_challenge_parameters"] = captcha_challenge_parametersNestedMap
+		}
+		if data.EnableChallenge.DefaultCaptchaChallengeParameters != nil {
+			enable_challengeMap["default_captcha_challenge_parameters"] = map[string]interface{}{}
+		}
+		if data.EnableChallenge.DefaultJsChallengeParameters != nil {
+			enable_challengeMap["default_js_challenge_parameters"] = map[string]interface{}{}
+		}
+		if data.EnableChallenge.DefaultMitigationSettings != nil {
+			enable_challengeMap["default_mitigation_settings"] = map[string]interface{}{}
+		}
+		if data.EnableChallenge.JsChallengeParameters != nil {
+			js_challenge_parametersNestedMap := make(map[string]interface{})
+			if !data.EnableChallenge.JsChallengeParameters.CookieExpiry.IsNull() && !data.EnableChallenge.JsChallengeParameters.CookieExpiry.IsUnknown() {
+				js_challenge_parametersNestedMap["cookie_expiry"] = data.EnableChallenge.JsChallengeParameters.CookieExpiry.ValueInt64()
+			}
+			if !data.EnableChallenge.JsChallengeParameters.CustomPage.IsNull() && !data.EnableChallenge.JsChallengeParameters.CustomPage.IsUnknown() {
+				js_challenge_parametersNestedMap["custom_page"] = data.EnableChallenge.JsChallengeParameters.CustomPage.ValueString()
+			}
+			if !data.EnableChallenge.JsChallengeParameters.JsScriptDelay.IsNull() && !data.EnableChallenge.JsChallengeParameters.JsScriptDelay.IsUnknown() {
+				js_challenge_parametersNestedMap["js_script_delay"] = data.EnableChallenge.JsChallengeParameters.JsScriptDelay.ValueInt64()
+			}
+			enable_challengeMap["js_challenge_parameters"] = js_challenge_parametersNestedMap
+		}
+		if data.EnableChallenge.MaliciousUserMitigation != nil {
+			malicious_user_mitigationNestedMap := make(map[string]interface{})
+			if !data.EnableChallenge.MaliciousUserMitigation.Name.IsNull() && !data.EnableChallenge.MaliciousUserMitigation.Name.IsUnknown() {
+				malicious_user_mitigationNestedMap["name"] = data.EnableChallenge.MaliciousUserMitigation.Name.ValueString()
+			}
+			if !data.EnableChallenge.MaliciousUserMitigation.Namespace.IsNull() && !data.EnableChallenge.MaliciousUserMitigation.Namespace.IsUnknown() {
+				malicious_user_mitigationNestedMap["namespace"] = data.EnableChallenge.MaliciousUserMitigation.Namespace.ValueString()
+			}
+			if !data.EnableChallenge.MaliciousUserMitigation.Tenant.IsNull() && !data.EnableChallenge.MaliciousUserMitigation.Tenant.IsUnknown() {
+				malicious_user_mitigationNestedMap["tenant"] = data.EnableChallenge.MaliciousUserMitigation.Tenant.ValueString()
+			}
+			enable_challengeMap["malicious_user_mitigation"] = malicious_user_mitigationNestedMap
+		}
+		apiResource.Spec["enable_challenge"] = enable_challengeMap
+	}
+	if data.EnableIPReputation != nil {
+		enable_ip_reputationMap := make(map[string]interface{})
+		apiResource.Spec["enable_ip_reputation"] = enable_ip_reputationMap
+	}
+	if data.EnableMaliciousUserDetection != nil {
+		enable_malicious_user_detectionMap := make(map[string]interface{})
+		apiResource.Spec["enable_malicious_user_detection"] = enable_malicious_user_detectionMap
+	}
+	if data.EnableThreatMesh != nil {
+		enable_threat_meshMap := make(map[string]interface{})
+		apiResource.Spec["enable_threat_mesh"] = enable_threat_meshMap
+	}
+	if len(data.GraphqlRules) > 0 {
+		var graphql_rulesList []map[string]interface{}
+		for _, item := range data.GraphqlRules {
+			itemMap := make(map[string]interface{})
+			if item.AnyDomain != nil {
+				itemMap["any_domain"] = map[string]interface{}{}
+			}
+			if !item.ExactPath.IsNull() && !item.ExactPath.IsUnknown() {
+				itemMap["exact_path"] = item.ExactPath.ValueString()
+			}
+			if !item.ExactValue.IsNull() && !item.ExactValue.IsUnknown() {
+				itemMap["exact_value"] = item.ExactValue.ValueString()
+			}
+			if item.GraphqlSettings != nil {
+				graphql_settingsNestedMap := make(map[string]interface{})
+				if !item.GraphqlSettings.MaxBatchedQueries.IsNull() && !item.GraphqlSettings.MaxBatchedQueries.IsUnknown() {
+					graphql_settingsNestedMap["max_batched_queries"] = item.GraphqlSettings.MaxBatchedQueries.ValueInt64()
+				}
+				if !item.GraphqlSettings.MaxDepth.IsNull() && !item.GraphqlSettings.MaxDepth.IsUnknown() {
+					graphql_settingsNestedMap["max_depth"] = item.GraphqlSettings.MaxDepth.ValueInt64()
+				}
+				if !item.GraphqlSettings.MaxTotalLength.IsNull() && !item.GraphqlSettings.MaxTotalLength.IsUnknown() {
+					graphql_settingsNestedMap["max_total_length"] = item.GraphqlSettings.MaxTotalLength.ValueInt64()
+				}
+				itemMap["graphql_settings"] = graphql_settingsNestedMap
+			}
+			if item.Metadata != nil {
+				metadataNestedMap := make(map[string]interface{})
+				if !item.Metadata.DescriptionSpec.IsNull() && !item.Metadata.DescriptionSpec.IsUnknown() {
+					metadataNestedMap["description"] = item.Metadata.DescriptionSpec.ValueString()
+				}
+				if !item.Metadata.Name.IsNull() && !item.Metadata.Name.IsUnknown() {
+					metadataNestedMap["name"] = item.Metadata.Name.ValueString()
+				}
+				itemMap["metadata"] = metadataNestedMap
+			}
+			if item.MethodGet != nil {
+				itemMap["method_get"] = map[string]interface{}{}
+			}
+			if item.MethodPost != nil {
+				itemMap["method_post"] = map[string]interface{}{}
+			}
+			if !item.SuffixValue.IsNull() && !item.SuffixValue.IsUnknown() {
+				itemMap["suffix_value"] = item.SuffixValue.ValueString()
+			}
+			graphql_rulesList = append(graphql_rulesList, itemMap)
+		}
+		apiResource.Spec["graphql_rules"] = graphql_rulesList
+	}
+	if data.HTTP != nil {
+		httpMap := make(map[string]interface{})
+		if !data.HTTP.DNSVolterraManaged.IsNull() && !data.HTTP.DNSVolterraManaged.IsUnknown() {
+			httpMap["dns_volterra_managed"] = data.HTTP.DNSVolterraManaged.ValueBool()
+		}
+		if !data.HTTP.Port.IsNull() && !data.HTTP.Port.IsUnknown() {
+			httpMap["port"] = data.HTTP.Port.ValueInt64()
+		}
+		if !data.HTTP.PortRanges.IsNull() && !data.HTTP.PortRanges.IsUnknown() {
+			httpMap["port_ranges"] = data.HTTP.PortRanges.ValueString()
+		}
+		apiResource.Spec["http"] = httpMap
+	}
+	if data.HTTPS != nil {
+		httpsMap := make(map[string]interface{})
+		if !data.HTTPS.AddHsts.IsNull() && !data.HTTPS.AddHsts.IsUnknown() {
+			httpsMap["add_hsts"] = data.HTTPS.AddHsts.ValueBool()
+		}
+		if !data.HTTPS.HTTPRedirect.IsNull() && !data.HTTPS.HTTPRedirect.IsUnknown() {
+			httpsMap["http_redirect"] = data.HTTPS.HTTPRedirect.ValueBool()
+		}
+		if data.HTTPS.TLSCertOptions != nil {
+			tls_cert_optionsNestedMap := make(map[string]interface{})
+			httpsMap["tls_cert_options"] = tls_cert_optionsNestedMap
+		}
+		apiResource.Spec["https"] = httpsMap
+	}
+	if data.HTTPSAutoCert != nil {
+		https_auto_certMap := make(map[string]interface{})
+		if !data.HTTPSAutoCert.AddHsts.IsNull() && !data.HTTPSAutoCert.AddHsts.IsUnknown() {
+			https_auto_certMap["add_hsts"] = data.HTTPSAutoCert.AddHsts.ValueBool()
+		}
+		if !data.HTTPSAutoCert.HTTPRedirect.IsNull() && !data.HTTPSAutoCert.HTTPRedirect.IsUnknown() {
+			https_auto_certMap["http_redirect"] = data.HTTPSAutoCert.HTTPRedirect.ValueBool()
+		}
+		if data.HTTPSAutoCert.TLSConfig != nil {
+			tls_configNestedMap := make(map[string]interface{})
+			https_auto_certMap["tls_config"] = tls_configNestedMap
+		}
+		apiResource.Spec["https_auto_cert"] = https_auto_certMap
+	}
+	if data.JsChallenge != nil {
+		js_challengeMap := make(map[string]interface{})
+		if !data.JsChallenge.CookieExpiry.IsNull() && !data.JsChallenge.CookieExpiry.IsUnknown() {
+			js_challengeMap["cookie_expiry"] = data.JsChallenge.CookieExpiry.ValueInt64()
+		}
+		if !data.JsChallenge.CustomPage.IsNull() && !data.JsChallenge.CustomPage.IsUnknown() {
+			js_challengeMap["custom_page"] = data.JsChallenge.CustomPage.ValueString()
+		}
+		if !data.JsChallenge.JsScriptDelay.IsNull() && !data.JsChallenge.JsScriptDelay.IsUnknown() {
+			js_challengeMap["js_script_delay"] = data.JsChallenge.JsScriptDelay.ValueInt64()
+		}
+		apiResource.Spec["js_challenge"] = js_challengeMap
+	}
+	if data.JwtValidation != nil {
+		jwt_validationMap := make(map[string]interface{})
+		if data.JwtValidation.Action != nil {
+			actionNestedMap := make(map[string]interface{})
+			jwt_validationMap["action"] = actionNestedMap
+		}
+		if data.JwtValidation.JwksConfig != nil {
+			jwks_configNestedMap := make(map[string]interface{})
+			if !data.JwtValidation.JwksConfig.Cleartext.IsNull() && !data.JwtValidation.JwksConfig.Cleartext.IsUnknown() {
+				jwks_configNestedMap["cleartext"] = data.JwtValidation.JwksConfig.Cleartext.ValueString()
+			}
+			jwt_validationMap["jwks_config"] = jwks_configNestedMap
+		}
+		if data.JwtValidation.MandatoryClaims != nil {
+			mandatory_claimsNestedMap := make(map[string]interface{})
+			jwt_validationMap["mandatory_claims"] = mandatory_claimsNestedMap
+		}
+		if data.JwtValidation.ReservedClaims != nil {
+			reserved_claimsNestedMap := make(map[string]interface{})
+			if !data.JwtValidation.ReservedClaims.Issuer.IsNull() && !data.JwtValidation.ReservedClaims.Issuer.IsUnknown() {
+				reserved_claimsNestedMap["issuer"] = data.JwtValidation.ReservedClaims.Issuer.ValueString()
+			}
+			jwt_validationMap["reserved_claims"] = reserved_claimsNestedMap
+		}
+		if data.JwtValidation.Target != nil {
+			targetNestedMap := make(map[string]interface{})
+			jwt_validationMap["target"] = targetNestedMap
+		}
+		if data.JwtValidation.TokenLocation != nil {
+			token_locationNestedMap := make(map[string]interface{})
+			jwt_validationMap["token_location"] = token_locationNestedMap
+		}
+		apiResource.Spec["jwt_validation"] = jwt_validationMap
+	}
+	if data.L7DdosActionBlock != nil {
+		l7_ddos_action_blockMap := make(map[string]interface{})
+		apiResource.Spec["l7_ddos_action_block"] = l7_ddos_action_blockMap
+	}
+	if data.L7DdosActionDefault != nil {
+		l7_ddos_action_defaultMap := make(map[string]interface{})
+		apiResource.Spec["l7_ddos_action_default"] = l7_ddos_action_defaultMap
+	}
+	if data.L7DdosActionJsChallenge != nil {
+		l7_ddos_action_js_challengeMap := make(map[string]interface{})
+		if !data.L7DdosActionJsChallenge.CookieExpiry.IsNull() && !data.L7DdosActionJsChallenge.CookieExpiry.IsUnknown() {
+			l7_ddos_action_js_challengeMap["cookie_expiry"] = data.L7DdosActionJsChallenge.CookieExpiry.ValueInt64()
+		}
+		if !data.L7DdosActionJsChallenge.CustomPage.IsNull() && !data.L7DdosActionJsChallenge.CustomPage.IsUnknown() {
+			l7_ddos_action_js_challengeMap["custom_page"] = data.L7DdosActionJsChallenge.CustomPage.ValueString()
+		}
+		if !data.L7DdosActionJsChallenge.JsScriptDelay.IsNull() && !data.L7DdosActionJsChallenge.JsScriptDelay.IsUnknown() {
+			l7_ddos_action_js_challengeMap["js_script_delay"] = data.L7DdosActionJsChallenge.JsScriptDelay.ValueInt64()
+		}
+		apiResource.Spec["l7_ddos_action_js_challenge"] = l7_ddos_action_js_challengeMap
+	}
+	if data.NoChallenge != nil {
+		no_challengeMap := make(map[string]interface{})
+		apiResource.Spec["no_challenge"] = no_challengeMap
+	}
+	if data.NoServicePolicies != nil {
+		no_service_policiesMap := make(map[string]interface{})
+		apiResource.Spec["no_service_policies"] = no_service_policiesMap
+	}
+	if data.OriginPool != nil {
+		origin_poolMap := make(map[string]interface{})
+		if data.OriginPool.MoreOriginOptions != nil {
+			more_origin_optionsNestedMap := make(map[string]interface{})
+			if !data.OriginPool.MoreOriginOptions.EnableByteRangeRequest.IsNull() && !data.OriginPool.MoreOriginOptions.EnableByteRangeRequest.IsUnknown() {
+				more_origin_optionsNestedMap["enable_byte_range_request"] = data.OriginPool.MoreOriginOptions.EnableByteRangeRequest.ValueBool()
+			}
+			if !data.OriginPool.MoreOriginOptions.WebsocketProxy.IsNull() && !data.OriginPool.MoreOriginOptions.WebsocketProxy.IsUnknown() {
+				more_origin_optionsNestedMap["websocket_proxy"] = data.OriginPool.MoreOriginOptions.WebsocketProxy.ValueBool()
+			}
+			origin_poolMap["more_origin_options"] = more_origin_optionsNestedMap
+		}
+		if data.OriginPool.NoTLS != nil {
+			origin_poolMap["no_tls"] = map[string]interface{}{}
+		}
+		if !data.OriginPool.OriginRequestTimeout.IsNull() && !data.OriginPool.OriginRequestTimeout.IsUnknown() {
+			origin_poolMap["origin_request_timeout"] = data.OriginPool.OriginRequestTimeout.ValueString()
+		}
+		if data.OriginPool.PublicName != nil {
+			public_nameNestedMap := make(map[string]interface{})
+			if !data.OriginPool.PublicName.DNSName.IsNull() && !data.OriginPool.PublicName.DNSName.IsUnknown() {
+				public_nameNestedMap["dns_name"] = data.OriginPool.PublicName.DNSName.ValueString()
+			}
+			if !data.OriginPool.PublicName.RefreshInterval.IsNull() && !data.OriginPool.PublicName.RefreshInterval.IsUnknown() {
+				public_nameNestedMap["refresh_interval"] = data.OriginPool.PublicName.RefreshInterval.ValueInt64()
+			}
+			origin_poolMap["public_name"] = public_nameNestedMap
+		}
+		if data.OriginPool.UseTLS != nil {
+			use_tlsNestedMap := make(map[string]interface{})
+			if !data.OriginPool.UseTLS.MaxSessionKeys.IsNull() && !data.OriginPool.UseTLS.MaxSessionKeys.IsUnknown() {
+				use_tlsNestedMap["max_session_keys"] = data.OriginPool.UseTLS.MaxSessionKeys.ValueInt64()
+			}
+			if !data.OriginPool.UseTLS.Sni.IsNull() && !data.OriginPool.UseTLS.Sni.IsUnknown() {
+				use_tlsNestedMap["sni"] = data.OriginPool.UseTLS.Sni.ValueString()
+			}
+			origin_poolMap["use_tls"] = use_tlsNestedMap
+		}
+		apiResource.Spec["origin_pool"] = origin_poolMap
+	}
+	if data.OtherSettings != nil {
+		other_settingsMap := make(map[string]interface{})
+		if !data.OtherSettings.AddLocation.IsNull() && !data.OtherSettings.AddLocation.IsUnknown() {
+			other_settingsMap["add_location"] = data.OtherSettings.AddLocation.ValueBool()
+		}
+		if data.OtherSettings.HeaderOptions != nil {
+			header_optionsNestedMap := make(map[string]interface{})
+			other_settingsMap["header_options"] = header_optionsNestedMap
+		}
+		if data.OtherSettings.LoggingOptions != nil {
+			logging_optionsNestedMap := make(map[string]interface{})
+			other_settingsMap["logging_options"] = logging_optionsNestedMap
+		}
+		apiResource.Spec["other_settings"] = other_settingsMap
+	}
+	if data.PolicyBasedChallenge != nil {
+		policy_based_challengeMap := make(map[string]interface{})
+		if data.PolicyBasedChallenge.AlwaysEnableCaptchaChallenge != nil {
+			policy_based_challengeMap["always_enable_captcha_challenge"] = map[string]interface{}{}
+		}
+		if data.PolicyBasedChallenge.AlwaysEnableJsChallenge != nil {
+			policy_based_challengeMap["always_enable_js_challenge"] = map[string]interface{}{}
+		}
+		if data.PolicyBasedChallenge.CaptchaChallengeParameters != nil {
+			captcha_challenge_parametersNestedMap := make(map[string]interface{})
+			if !data.PolicyBasedChallenge.CaptchaChallengeParameters.CookieExpiry.IsNull() && !data.PolicyBasedChallenge.CaptchaChallengeParameters.CookieExpiry.IsUnknown() {
+				captcha_challenge_parametersNestedMap["cookie_expiry"] = data.PolicyBasedChallenge.CaptchaChallengeParameters.CookieExpiry.ValueInt64()
+			}
+			if !data.PolicyBasedChallenge.CaptchaChallengeParameters.CustomPage.IsNull() && !data.PolicyBasedChallenge.CaptchaChallengeParameters.CustomPage.IsUnknown() {
+				captcha_challenge_parametersNestedMap["custom_page"] = data.PolicyBasedChallenge.CaptchaChallengeParameters.CustomPage.ValueString()
+			}
+			policy_based_challengeMap["captcha_challenge_parameters"] = captcha_challenge_parametersNestedMap
+		}
+		if data.PolicyBasedChallenge.DefaultCaptchaChallengeParameters != nil {
+			policy_based_challengeMap["default_captcha_challenge_parameters"] = map[string]interface{}{}
+		}
+		if data.PolicyBasedChallenge.DefaultJsChallengeParameters != nil {
+			policy_based_challengeMap["default_js_challenge_parameters"] = map[string]interface{}{}
+		}
+		if data.PolicyBasedChallenge.DefaultMitigationSettings != nil {
+			policy_based_challengeMap["default_mitigation_settings"] = map[string]interface{}{}
+		}
+		if data.PolicyBasedChallenge.DefaultTemporaryBlockingParameters != nil {
+			policy_based_challengeMap["default_temporary_blocking_parameters"] = map[string]interface{}{}
+		}
+		if data.PolicyBasedChallenge.JsChallengeParameters != nil {
+			js_challenge_parametersNestedMap := make(map[string]interface{})
+			if !data.PolicyBasedChallenge.JsChallengeParameters.CookieExpiry.IsNull() && !data.PolicyBasedChallenge.JsChallengeParameters.CookieExpiry.IsUnknown() {
+				js_challenge_parametersNestedMap["cookie_expiry"] = data.PolicyBasedChallenge.JsChallengeParameters.CookieExpiry.ValueInt64()
+			}
+			if !data.PolicyBasedChallenge.JsChallengeParameters.CustomPage.IsNull() && !data.PolicyBasedChallenge.JsChallengeParameters.CustomPage.IsUnknown() {
+				js_challenge_parametersNestedMap["custom_page"] = data.PolicyBasedChallenge.JsChallengeParameters.CustomPage.ValueString()
+			}
+			if !data.PolicyBasedChallenge.JsChallengeParameters.JsScriptDelay.IsNull() && !data.PolicyBasedChallenge.JsChallengeParameters.JsScriptDelay.IsUnknown() {
+				js_challenge_parametersNestedMap["js_script_delay"] = data.PolicyBasedChallenge.JsChallengeParameters.JsScriptDelay.ValueInt64()
+			}
+			policy_based_challengeMap["js_challenge_parameters"] = js_challenge_parametersNestedMap
+		}
+		if data.PolicyBasedChallenge.MaliciousUserMitigation != nil {
+			malicious_user_mitigationNestedMap := make(map[string]interface{})
+			if !data.PolicyBasedChallenge.MaliciousUserMitigation.Name.IsNull() && !data.PolicyBasedChallenge.MaliciousUserMitigation.Name.IsUnknown() {
+				malicious_user_mitigationNestedMap["name"] = data.PolicyBasedChallenge.MaliciousUserMitigation.Name.ValueString()
+			}
+			if !data.PolicyBasedChallenge.MaliciousUserMitigation.Namespace.IsNull() && !data.PolicyBasedChallenge.MaliciousUserMitigation.Namespace.IsUnknown() {
+				malicious_user_mitigationNestedMap["namespace"] = data.PolicyBasedChallenge.MaliciousUserMitigation.Namespace.ValueString()
+			}
+			if !data.PolicyBasedChallenge.MaliciousUserMitigation.Tenant.IsNull() && !data.PolicyBasedChallenge.MaliciousUserMitigation.Tenant.IsUnknown() {
+				malicious_user_mitigationNestedMap["tenant"] = data.PolicyBasedChallenge.MaliciousUserMitigation.Tenant.ValueString()
+			}
+			policy_based_challengeMap["malicious_user_mitigation"] = malicious_user_mitigationNestedMap
+		}
+		if data.PolicyBasedChallenge.NoChallenge != nil {
+			policy_based_challengeMap["no_challenge"] = map[string]interface{}{}
+		}
+		if data.PolicyBasedChallenge.RuleList != nil {
+			rule_listNestedMap := make(map[string]interface{})
+			policy_based_challengeMap["rule_list"] = rule_listNestedMap
+		}
+		if data.PolicyBasedChallenge.TemporaryUserBlocking != nil {
+			temporary_user_blockingNestedMap := make(map[string]interface{})
+			if !data.PolicyBasedChallenge.TemporaryUserBlocking.CustomPage.IsNull() && !data.PolicyBasedChallenge.TemporaryUserBlocking.CustomPage.IsUnknown() {
+				temporary_user_blockingNestedMap["custom_page"] = data.PolicyBasedChallenge.TemporaryUserBlocking.CustomPage.ValueString()
+			}
+			policy_based_challengeMap["temporary_user_blocking"] = temporary_user_blockingNestedMap
+		}
+		apiResource.Spec["policy_based_challenge"] = policy_based_challengeMap
+	}
+	if len(data.ProtectedCookies) > 0 {
+		var protected_cookiesList []map[string]interface{}
+		for _, item := range data.ProtectedCookies {
+			itemMap := make(map[string]interface{})
+			if item.AddHttponly != nil {
+				itemMap["add_httponly"] = map[string]interface{}{}
+			}
+			if item.AddSecure != nil {
+				itemMap["add_secure"] = map[string]interface{}{}
+			}
+			if item.DisableTamperingProtection != nil {
+				itemMap["disable_tampering_protection"] = map[string]interface{}{}
+			}
+			if item.EnableTamperingProtection != nil {
+				itemMap["enable_tampering_protection"] = map[string]interface{}{}
+			}
+			if item.IgnoreHttponly != nil {
+				itemMap["ignore_httponly"] = map[string]interface{}{}
+			}
+			if item.IgnoreMaxAge != nil {
+				itemMap["ignore_max_age"] = map[string]interface{}{}
+			}
+			if item.IgnoreSamesite != nil {
+				itemMap["ignore_samesite"] = map[string]interface{}{}
+			}
+			if item.IgnoreSecure != nil {
+				itemMap["ignore_secure"] = map[string]interface{}{}
+			}
+			if !item.MaxAgeValue.IsNull() && !item.MaxAgeValue.IsUnknown() {
+				itemMap["max_age_value"] = item.MaxAgeValue.ValueInt64()
+			}
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			if item.SamesiteLax != nil {
+				itemMap["samesite_lax"] = map[string]interface{}{}
+			}
+			if item.SamesiteNone != nil {
+				itemMap["samesite_none"] = map[string]interface{}{}
+			}
+			if item.SamesiteStrict != nil {
+				itemMap["samesite_strict"] = map[string]interface{}{}
+			}
+			protected_cookiesList = append(protected_cookiesList, itemMap)
+		}
+		apiResource.Spec["protected_cookies"] = protected_cookiesList
+	}
+	if data.RateLimit != nil {
+		rate_limitMap := make(map[string]interface{})
+		if data.RateLimit.CustomIPAllowedList != nil {
+			custom_ip_allowed_listNestedMap := make(map[string]interface{})
+			rate_limitMap["custom_ip_allowed_list"] = custom_ip_allowed_listNestedMap
+		}
+		if data.RateLimit.IPAllowedList != nil {
+			ip_allowed_listNestedMap := make(map[string]interface{})
+			rate_limitMap["ip_allowed_list"] = ip_allowed_listNestedMap
+		}
+		if data.RateLimit.NoIPAllowedList != nil {
+			rate_limitMap["no_ip_allowed_list"] = map[string]interface{}{}
+		}
+		if data.RateLimit.NoPolicies != nil {
+			rate_limitMap["no_policies"] = map[string]interface{}{}
+		}
+		if data.RateLimit.Policies != nil {
+			policiesNestedMap := make(map[string]interface{})
+			rate_limitMap["policies"] = policiesNestedMap
+		}
+		if data.RateLimit.RateLimiter != nil {
+			rate_limiterNestedMap := make(map[string]interface{})
+			if !data.RateLimit.RateLimiter.BurstMultiplier.IsNull() && !data.RateLimit.RateLimiter.BurstMultiplier.IsUnknown() {
+				rate_limiterNestedMap["burst_multiplier"] = data.RateLimit.RateLimiter.BurstMultiplier.ValueInt64()
+			}
+			if !data.RateLimit.RateLimiter.PeriodMultiplier.IsNull() && !data.RateLimit.RateLimiter.PeriodMultiplier.IsUnknown() {
+				rate_limiterNestedMap["period_multiplier"] = data.RateLimit.RateLimiter.PeriodMultiplier.ValueInt64()
+			}
+			if !data.RateLimit.RateLimiter.TotalNumber.IsNull() && !data.RateLimit.RateLimiter.TotalNumber.IsUnknown() {
+				rate_limiterNestedMap["total_number"] = data.RateLimit.RateLimiter.TotalNumber.ValueInt64()
+			}
+			if !data.RateLimit.RateLimiter.Unit.IsNull() && !data.RateLimit.RateLimiter.Unit.IsUnknown() {
+				rate_limiterNestedMap["unit"] = data.RateLimit.RateLimiter.Unit.ValueString()
+			}
+			rate_limitMap["rate_limiter"] = rate_limiterNestedMap
+		}
+		apiResource.Spec["rate_limit"] = rate_limitMap
+	}
+	if data.SensitiveDataPolicy != nil {
+		sensitive_data_policyMap := make(map[string]interface{})
+		if data.SensitiveDataPolicy.SensitiveDataPolicyRef != nil {
+			sensitive_data_policy_refNestedMap := make(map[string]interface{})
+			if !data.SensitiveDataPolicy.SensitiveDataPolicyRef.Name.IsNull() && !data.SensitiveDataPolicy.SensitiveDataPolicyRef.Name.IsUnknown() {
+				sensitive_data_policy_refNestedMap["name"] = data.SensitiveDataPolicy.SensitiveDataPolicyRef.Name.ValueString()
+			}
+			if !data.SensitiveDataPolicy.SensitiveDataPolicyRef.Namespace.IsNull() && !data.SensitiveDataPolicy.SensitiveDataPolicyRef.Namespace.IsUnknown() {
+				sensitive_data_policy_refNestedMap["namespace"] = data.SensitiveDataPolicy.SensitiveDataPolicyRef.Namespace.ValueString()
+			}
+			if !data.SensitiveDataPolicy.SensitiveDataPolicyRef.Tenant.IsNull() && !data.SensitiveDataPolicy.SensitiveDataPolicyRef.Tenant.IsUnknown() {
+				sensitive_data_policy_refNestedMap["tenant"] = data.SensitiveDataPolicy.SensitiveDataPolicyRef.Tenant.ValueString()
+			}
+			sensitive_data_policyMap["sensitive_data_policy_ref"] = sensitive_data_policy_refNestedMap
+		}
+		apiResource.Spec["sensitive_data_policy"] = sensitive_data_policyMap
+	}
+	if data.ServicePoliciesFromNamespace != nil {
+		service_policies_from_namespaceMap := make(map[string]interface{})
+		apiResource.Spec["service_policies_from_namespace"] = service_policies_from_namespaceMap
+	}
+	if data.SlowDdosMitigation != nil {
+		slow_ddos_mitigationMap := make(map[string]interface{})
+		if data.SlowDdosMitigation.DisableRequestTimeout != nil {
+			slow_ddos_mitigationMap["disable_request_timeout"] = map[string]interface{}{}
+		}
+		if !data.SlowDdosMitigation.RequestHeadersTimeout.IsNull() && !data.SlowDdosMitigation.RequestHeadersTimeout.IsUnknown() {
+			slow_ddos_mitigationMap["request_headers_timeout"] = data.SlowDdosMitigation.RequestHeadersTimeout.ValueInt64()
+		}
+		if !data.SlowDdosMitigation.RequestTimeout.IsNull() && !data.SlowDdosMitigation.RequestTimeout.IsUnknown() {
+			slow_ddos_mitigationMap["request_timeout"] = data.SlowDdosMitigation.RequestTimeout.ValueInt64()
+		}
+		apiResource.Spec["slow_ddos_mitigation"] = slow_ddos_mitigationMap
+	}
+	if data.SystemDefaultTimeouts != nil {
+		system_default_timeoutsMap := make(map[string]interface{})
+		apiResource.Spec["system_default_timeouts"] = system_default_timeoutsMap
+	}
+	if len(data.TrustedClients) > 0 {
+		var trusted_clientsList []map[string]interface{}
+		for _, item := range data.TrustedClients {
+			itemMap := make(map[string]interface{})
+			if !item.AsNumber.IsNull() && !item.AsNumber.IsUnknown() {
+				itemMap["as_number"] = item.AsNumber.ValueInt64()
+			}
+			if item.BotSkipProcessing != nil {
+				itemMap["bot_skip_processing"] = map[string]interface{}{}
+			}
+			if !item.ExpirationTimestamp.IsNull() && !item.ExpirationTimestamp.IsUnknown() {
+				itemMap["expiration_timestamp"] = item.ExpirationTimestamp.ValueString()
+			}
+			if item.HTTPHeader != nil {
+				http_headerNestedMap := make(map[string]interface{})
+				itemMap["http_header"] = http_headerNestedMap
+			}
+			if !item.IPPrefix.IsNull() && !item.IPPrefix.IsUnknown() {
+				itemMap["ip_prefix"] = item.IPPrefix.ValueString()
+			}
+			if !item.IPV6Prefix.IsNull() && !item.IPV6Prefix.IsUnknown() {
+				itemMap["ipv6_prefix"] = item.IPV6Prefix.ValueString()
+			}
+			if item.Metadata != nil {
+				metadataNestedMap := make(map[string]interface{})
+				if !item.Metadata.DescriptionSpec.IsNull() && !item.Metadata.DescriptionSpec.IsUnknown() {
+					metadataNestedMap["description"] = item.Metadata.DescriptionSpec.ValueString()
+				}
+				if !item.Metadata.Name.IsNull() && !item.Metadata.Name.IsUnknown() {
+					metadataNestedMap["name"] = item.Metadata.Name.ValueString()
+				}
+				itemMap["metadata"] = metadataNestedMap
+			}
+			if item.SkipProcessing != nil {
+				itemMap["skip_processing"] = map[string]interface{}{}
+			}
+			if !item.UserIdentifier.IsNull() && !item.UserIdentifier.IsUnknown() {
+				itemMap["user_identifier"] = item.UserIdentifier.ValueString()
+			}
+			if item.WAFSkipProcessing != nil {
+				itemMap["waf_skip_processing"] = map[string]interface{}{}
+			}
+			trusted_clientsList = append(trusted_clientsList, itemMap)
+		}
+		apiResource.Spec["trusted_clients"] = trusted_clientsList
+	}
+	if data.UserIDClientIP != nil {
+		user_id_client_ipMap := make(map[string]interface{})
+		apiResource.Spec["user_id_client_ip"] = user_id_client_ipMap
+	}
+	if data.UserIdentification != nil {
+		user_identificationMap := make(map[string]interface{})
+		if !data.UserIdentification.Name.IsNull() && !data.UserIdentification.Name.IsUnknown() {
+			user_identificationMap["name"] = data.UserIdentification.Name.ValueString()
+		}
+		if !data.UserIdentification.Namespace.IsNull() && !data.UserIdentification.Namespace.IsUnknown() {
+			user_identificationMap["namespace"] = data.UserIdentification.Namespace.ValueString()
+		}
+		if !data.UserIdentification.Tenant.IsNull() && !data.UserIdentification.Tenant.IsUnknown() {
+			user_identificationMap["tenant"] = data.UserIdentification.Tenant.ValueString()
+		}
+		apiResource.Spec["user_identification"] = user_identificationMap
+	}
+	if data.WAFExclusion != nil {
+		waf_exclusionMap := make(map[string]interface{})
+		if data.WAFExclusion.WAFExclusionInlineRules != nil {
+			waf_exclusion_inline_rulesNestedMap := make(map[string]interface{})
+			waf_exclusionMap["waf_exclusion_inline_rules"] = waf_exclusion_inline_rulesNestedMap
+		}
+		if data.WAFExclusion.WAFExclusionPolicy != nil {
+			waf_exclusion_policyNestedMap := make(map[string]interface{})
+			if !data.WAFExclusion.WAFExclusionPolicy.Name.IsNull() && !data.WAFExclusion.WAFExclusionPolicy.Name.IsUnknown() {
+				waf_exclusion_policyNestedMap["name"] = data.WAFExclusion.WAFExclusionPolicy.Name.ValueString()
+			}
+			if !data.WAFExclusion.WAFExclusionPolicy.Namespace.IsNull() && !data.WAFExclusion.WAFExclusionPolicy.Namespace.IsUnknown() {
+				waf_exclusion_policyNestedMap["namespace"] = data.WAFExclusion.WAFExclusionPolicy.Namespace.ValueString()
+			}
+			if !data.WAFExclusion.WAFExclusionPolicy.Tenant.IsNull() && !data.WAFExclusion.WAFExclusionPolicy.Tenant.IsUnknown() {
+				waf_exclusion_policyNestedMap["tenant"] = data.WAFExclusion.WAFExclusionPolicy.Tenant.ValueString()
+			}
+			waf_exclusionMap["waf_exclusion_policy"] = waf_exclusion_policyNestedMap
+		}
+		apiResource.Spec["waf_exclusion"] = waf_exclusionMap
+	}
+
+
 	created, err := r.client.CreateCDNLoadBalancer(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create CDNLoadBalancer: %s", err))
@@ -8181,8 +9108,13 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created CDNLoadBalancer resource")
@@ -8261,9 +9193,997 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if _, ok := apiResource.Spec["active_service_policies"].(map[string]interface{}); ok && isImport && data.ActiveServicePolicies == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ActiveServicePolicies = &CDNLoadBalancerActiveServicePoliciesModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["api_rate_limit"].(map[string]interface{}); ok && isImport && data.APIRateLimit == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.APIRateLimit = &CDNLoadBalancerAPIRateLimitModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["api_specification"].(map[string]interface{}); ok && isImport && data.APISpecification == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.APISpecification = &CDNLoadBalancerAPISpecificationModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["app_firewall"].(map[string]interface{}); ok && (isImport || data.AppFirewall != nil) {
+		data.AppFirewall = &CDNLoadBalancerAppFirewallModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if listData, ok := apiResource.Spec["blocked_clients"].([]interface{}); ok && len(listData) > 0 {
+		var blocked_clientsList []CDNLoadBalancerBlockedClientsModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				blocked_clientsList = append(blocked_clientsList, CDNLoadBalancerBlockedClientsModel{
+					AsNumber: func() types.Int64 {
+						if v, ok := itemMap["as_number"].(float64); ok {
+							return types.Int64Value(int64(v))
+						}
+						return types.Int64Null()
+					}(),
+					BotSkipProcessing: func() *CDNLoadBalancerEmptyModel {
+						if _, ok := itemMap["bot_skip_processing"].(map[string]interface{}); ok {
+							return &CDNLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					ExpirationTimestamp: func() types.String {
+						if v, ok := itemMap["expiration_timestamp"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					HTTPHeader: func() *CDNLoadBalancerBlockedClientsHTTPHeaderModel {
+						if _, ok := itemMap["http_header"].(map[string]interface{}); ok {
+							return &CDNLoadBalancerBlockedClientsHTTPHeaderModel{
+							}
+						}
+						return nil
+					}(),
+					IPPrefix: func() types.String {
+						if v, ok := itemMap["ip_prefix"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					IPV6Prefix: func() types.String {
+						if v, ok := itemMap["ipv6_prefix"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Metadata: func() *CDNLoadBalancerBlockedClientsMetadataModel {
+						if nestedMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
+							return &CDNLoadBalancerBlockedClientsMetadataModel{
+								DescriptionSpec: func() types.String {
+									if v, ok := nestedMap["description"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Name: func() types.String {
+									if v, ok := nestedMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					SkipProcessing: func() *CDNLoadBalancerEmptyModel {
+						if _, ok := itemMap["skip_processing"].(map[string]interface{}); ok {
+							return &CDNLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					UserIdentifier: func() types.String {
+						if v, ok := itemMap["user_identifier"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					WAFSkipProcessing: func() *CDNLoadBalancerEmptyModel {
+						if _, ok := itemMap["waf_skip_processing"].(map[string]interface{}); ok {
+							return &CDNLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+				})
+			}
+		}
+		data.BlockedClients = blocked_clientsList
+	}
+	if blockData, ok := apiResource.Spec["bot_defense"].(map[string]interface{}); ok && (isImport || data.BotDefense != nil) {
+		data.BotDefense = &CDNLoadBalancerBotDefenseModel{
+			RegionalEndpoint: func() types.String {
+				if v, ok := blockData["regional_endpoint"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Timeout: func() types.Int64 {
+				if v, ok := blockData["timeout"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["captcha_challenge"].(map[string]interface{}); ok && (isImport || data.CaptchaChallenge != nil) {
+		data.CaptchaChallenge = &CDNLoadBalancerCaptchaChallengeModel{
+			CookieExpiry: func() types.Int64 {
+				if v, ok := blockData["cookie_expiry"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			CustomPage: func() types.String {
+				if v, ok := blockData["custom_page"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["client_side_defense"].(map[string]interface{}); ok && isImport && data.ClientSideDefense == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ClientSideDefense = &CDNLoadBalancerClientSideDefenseModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["cors_policy"].(map[string]interface{}); ok && (isImport || data.CorsPolicy != nil) {
+		data.CorsPolicy = &CDNLoadBalancerCorsPolicyModel{
+			AllowCredentials: func() types.Bool {
+				if !isImport && data.CorsPolicy != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.CorsPolicy.AllowCredentials
+				}
+				// Import case: read from API
+				if v, ok := blockData["allow_credentials"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			AllowHeaders: func() types.String {
+				if v, ok := blockData["allow_headers"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			AllowMethods: func() types.String {
+				if v, ok := blockData["allow_methods"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Disabled: func() types.Bool {
+				if !isImport && data.CorsPolicy != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.CorsPolicy.Disabled
+				}
+				// Import case: read from API
+				if v, ok := blockData["disabled"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			ExposeHeaders: func() types.String {
+				if v, ok := blockData["expose_headers"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			MaximumAge: func() types.Int64 {
+				if v, ok := blockData["maximum_age"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["csrf_policy"].(map[string]interface{}); ok && isImport && data.CsrfPolicy == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.CsrfPolicy = &CDNLoadBalancerCsrfPolicyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["custom_cache_rule"].(map[string]interface{}); ok && isImport && data.CustomCacheRule == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.CustomCacheRule = &CDNLoadBalancerCustomCacheRuleModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["data_guard_rules"].([]interface{}); ok && len(listData) > 0 {
+		var data_guard_rulesList []CDNLoadBalancerDataGuardRulesModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				data_guard_rulesList = append(data_guard_rulesList, CDNLoadBalancerDataGuardRulesModel{
+					AnyDomain: func() *CDNLoadBalancerEmptyModel {
+						if _, ok := itemMap["any_domain"].(map[string]interface{}); ok {
+							return &CDNLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					ApplyDataGuard: func() *CDNLoadBalancerEmptyModel {
+						if _, ok := itemMap["apply_data_guard"].(map[string]interface{}); ok {
+							return &CDNLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					ExactValue: func() types.String {
+						if v, ok := itemMap["exact_value"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Metadata: func() *CDNLoadBalancerDataGuardRulesMetadataModel {
+						if nestedMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
+							return &CDNLoadBalancerDataGuardRulesMetadataModel{
+								DescriptionSpec: func() types.String {
+									if v, ok := nestedMap["description"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Name: func() types.String {
+									if v, ok := nestedMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					Path: func() *CDNLoadBalancerDataGuardRulesPathModel {
+						if nestedMap, ok := itemMap["path"].(map[string]interface{}); ok {
+							return &CDNLoadBalancerDataGuardRulesPathModel{
+								Path: func() types.String {
+									if v, ok := nestedMap["path"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Prefix: func() types.String {
+									if v, ok := nestedMap["prefix"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Regex: func() types.String {
+									if v, ok := nestedMap["regex"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					SkipDataGuard: func() *CDNLoadBalancerEmptyModel {
+						if _, ok := itemMap["skip_data_guard"].(map[string]interface{}); ok {
+							return &CDNLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					SuffixValue: func() types.String {
+						if v, ok := itemMap["suffix_value"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.DataGuardRules = data_guard_rulesList
+	}
+	if listData, ok := apiResource.Spec["ddos_mitigation_rules"].([]interface{}); ok && len(listData) > 0 {
+		var ddos_mitigation_rulesList []CDNLoadBalancerDdosMitigationRulesModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				ddos_mitigation_rulesList = append(ddos_mitigation_rulesList, CDNLoadBalancerDdosMitigationRulesModel{
+					Block: func() *CDNLoadBalancerEmptyModel {
+						if _, ok := itemMap["block"].(map[string]interface{}); ok {
+							return &CDNLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					DdosClientSource: func() *CDNLoadBalancerDdosMitigationRulesDdosClientSourceModel {
+						if _, ok := itemMap["ddos_client_source"].(map[string]interface{}); ok {
+							return &CDNLoadBalancerDdosMitigationRulesDdosClientSourceModel{
+							}
+						}
+						return nil
+					}(),
+					ExpirationTimestamp: func() types.String {
+						if v, ok := itemMap["expiration_timestamp"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					IPPrefixList: func() *CDNLoadBalancerDdosMitigationRulesIPPrefixListModel {
+						if nestedMap, ok := itemMap["ip_prefix_list"].(map[string]interface{}); ok {
+							return &CDNLoadBalancerDdosMitigationRulesIPPrefixListModel{
+								InvertMatch: func() types.Bool {
+									if v, ok := nestedMap["invert_match"].(bool); ok {
+										return types.BoolValue(v)
+									}
+									return types.BoolNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					Metadata: func() *CDNLoadBalancerDdosMitigationRulesMetadataModel {
+						if nestedMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
+							return &CDNLoadBalancerDdosMitigationRulesMetadataModel{
+								DescriptionSpec: func() types.String {
+									if v, ok := nestedMap["description"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Name: func() types.String {
+									if v, ok := nestedMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+				})
+			}
+		}
+		data.DdosMitigationRules = ddos_mitigation_rulesList
+	}
+	if blockData, ok := apiResource.Spec["default_cache_action"].(map[string]interface{}); ok && (isImport || data.DefaultCacheAction != nil) {
+		data.DefaultCacheAction = &CDNLoadBalancerDefaultCacheActionModel{
+			CacheTtlDefault: func() types.String {
+				if v, ok := blockData["cache_ttl_default"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			CacheTtlOverride: func() types.String {
+				if v, ok := blockData["cache_ttl_override"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["default_sensitive_data_policy"].(map[string]interface{}); ok && isImport && data.DefaultSensitiveDataPolicy == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DefaultSensitiveDataPolicy = &CDNLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["disable_api_definition"].(map[string]interface{}); ok && isImport && data.DisableAPIDefinition == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableAPIDefinition = &CDNLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["disable_api_discovery"].(map[string]interface{}); ok && isImport && data.DisableAPIDiscovery == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableAPIDiscovery = &CDNLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["disable_client_side_defense"].(map[string]interface{}); ok && isImport && data.DisableClientSideDefense == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableClientSideDefense = &CDNLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["disable_ip_reputation"].(map[string]interface{}); ok && isImport && data.DisableIPReputation == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableIPReputation = &CDNLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["disable_malicious_user_detection"].(map[string]interface{}); ok && isImport && data.DisableMaliciousUserDetection == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableMaliciousUserDetection = &CDNLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["disable_rate_limit"].(map[string]interface{}); ok && isImport && data.DisableRateLimit == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableRateLimit = &CDNLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["disable_threat_mesh"].(map[string]interface{}); ok && isImport && data.DisableThreatMesh == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableThreatMesh = &CDNLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["disable_waf"].(map[string]interface{}); ok && isImport && data.DisableWAF == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableWAF = &CDNLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["domains"].([]interface{}); ok && len(v) > 0 {
+		var domainsList []string
+		for _, item := range v {
+			if s, ok := item.(string); ok {
+				domainsList = append(domainsList, s)
+			}
+		}
+		listVal, diags := types.ListValueFrom(ctx, types.StringType, domainsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Domains = listVal
+		}
+	} else {
+		data.Domains = types.ListNull(types.StringType)
+	}
+	if _, ok := apiResource.Spec["enable_api_discovery"].(map[string]interface{}); ok && isImport && data.EnableAPIDiscovery == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.EnableAPIDiscovery = &CDNLoadBalancerEnableAPIDiscoveryModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["enable_challenge"].(map[string]interface{}); ok && isImport && data.EnableChallenge == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.EnableChallenge = &CDNLoadBalancerEnableChallengeModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["enable_ip_reputation"].(map[string]interface{}); ok && isImport && data.EnableIPReputation == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.EnableIPReputation = &CDNLoadBalancerEnableIPReputationModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["enable_malicious_user_detection"].(map[string]interface{}); ok && isImport && data.EnableMaliciousUserDetection == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.EnableMaliciousUserDetection = &CDNLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["enable_threat_mesh"].(map[string]interface{}); ok && isImport && data.EnableThreatMesh == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.EnableThreatMesh = &CDNLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["graphql_rules"].([]interface{}); ok && len(listData) > 0 {
+		var graphql_rulesList []CDNLoadBalancerGraphqlRulesModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				graphql_rulesList = append(graphql_rulesList, CDNLoadBalancerGraphqlRulesModel{
+					AnyDomain: func() *CDNLoadBalancerEmptyModel {
+						if _, ok := itemMap["any_domain"].(map[string]interface{}); ok {
+							return &CDNLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					ExactPath: func() types.String {
+						if v, ok := itemMap["exact_path"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					ExactValue: func() types.String {
+						if v, ok := itemMap["exact_value"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					GraphqlSettings: func() *CDNLoadBalancerGraphqlRulesGraphqlSettingsModel {
+						if nestedMap, ok := itemMap["graphql_settings"].(map[string]interface{}); ok {
+							return &CDNLoadBalancerGraphqlRulesGraphqlSettingsModel{
+								MaxBatchedQueries: func() types.Int64 {
+									if v, ok := nestedMap["max_batched_queries"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								MaxDepth: func() types.Int64 {
+									if v, ok := nestedMap["max_depth"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								MaxTotalLength: func() types.Int64 {
+									if v, ok := nestedMap["max_total_length"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					Metadata: func() *CDNLoadBalancerGraphqlRulesMetadataModel {
+						if nestedMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
+							return &CDNLoadBalancerGraphqlRulesMetadataModel{
+								DescriptionSpec: func() types.String {
+									if v, ok := nestedMap["description"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Name: func() types.String {
+									if v, ok := nestedMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					MethodGet: func() *CDNLoadBalancerEmptyModel {
+						if _, ok := itemMap["method_get"].(map[string]interface{}); ok {
+							return &CDNLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					MethodPost: func() *CDNLoadBalancerEmptyModel {
+						if _, ok := itemMap["method_post"].(map[string]interface{}); ok {
+							return &CDNLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					SuffixValue: func() types.String {
+						if v, ok := itemMap["suffix_value"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.GraphqlRules = graphql_rulesList
+	}
+	if blockData, ok := apiResource.Spec["http"].(map[string]interface{}); ok && (isImport || data.HTTP != nil) {
+		data.HTTP = &CDNLoadBalancerHTTPModel{
+			DNSVolterraManaged: func() types.Bool {
+				if !isImport && data.HTTP != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.HTTP.DNSVolterraManaged
+				}
+				// Import case: read from API
+				if v, ok := blockData["dns_volterra_managed"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			Port: func() types.Int64 {
+				if v, ok := blockData["port"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			PortRanges: func() types.String {
+				if v, ok := blockData["port_ranges"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["https"].(map[string]interface{}); ok && (isImport || data.HTTPS != nil) {
+		data.HTTPS = &CDNLoadBalancerHTTPSModel{
+			AddHsts: func() types.Bool {
+				if !isImport && data.HTTPS != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.HTTPS.AddHsts
+				}
+				// Import case: read from API
+				if v, ok := blockData["add_hsts"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			HTTPRedirect: func() types.Bool {
+				if !isImport && data.HTTPS != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.HTTPS.HTTPRedirect
+				}
+				// Import case: read from API
+				if v, ok := blockData["http_redirect"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["https_auto_cert"].(map[string]interface{}); ok && (isImport || data.HTTPSAutoCert != nil) {
+		data.HTTPSAutoCert = &CDNLoadBalancerHTTPSAutoCertModel{
+			AddHsts: func() types.Bool {
+				if !isImport && data.HTTPSAutoCert != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.HTTPSAutoCert.AddHsts
+				}
+				// Import case: read from API
+				if v, ok := blockData["add_hsts"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			HTTPRedirect: func() types.Bool {
+				if !isImport && data.HTTPSAutoCert != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.HTTPSAutoCert.HTTPRedirect
+				}
+				// Import case: read from API
+				if v, ok := blockData["http_redirect"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["js_challenge"].(map[string]interface{}); ok && (isImport || data.JsChallenge != nil) {
+		data.JsChallenge = &CDNLoadBalancerJsChallengeModel{
+			CookieExpiry: func() types.Int64 {
+				if v, ok := blockData["cookie_expiry"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			CustomPage: func() types.String {
+				if v, ok := blockData["custom_page"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			JsScriptDelay: func() types.Int64 {
+				if v, ok := blockData["js_script_delay"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["jwt_validation"].(map[string]interface{}); ok && isImport && data.JwtValidation == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.JwtValidation = &CDNLoadBalancerJwtValidationModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["l7_ddos_action_block"].(map[string]interface{}); ok && isImport && data.L7DdosActionBlock == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.L7DdosActionBlock = &CDNLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["l7_ddos_action_default"].(map[string]interface{}); ok && isImport && data.L7DdosActionDefault == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.L7DdosActionDefault = &CDNLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["l7_ddos_action_js_challenge"].(map[string]interface{}); ok && (isImport || data.L7DdosActionJsChallenge != nil) {
+		data.L7DdosActionJsChallenge = &CDNLoadBalancerL7DdosActionJsChallengeModel{
+			CookieExpiry: func() types.Int64 {
+				if v, ok := blockData["cookie_expiry"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			CustomPage: func() types.String {
+				if v, ok := blockData["custom_page"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			JsScriptDelay: func() types.Int64 {
+				if v, ok := blockData["js_script_delay"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["no_challenge"].(map[string]interface{}); ok && isImport && data.NoChallenge == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoChallenge = &CDNLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_service_policies"].(map[string]interface{}); ok && isImport && data.NoServicePolicies == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoServicePolicies = &CDNLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["origin_pool"].(map[string]interface{}); ok && (isImport || data.OriginPool != nil) {
+		data.OriginPool = &CDNLoadBalancerOriginPoolModel{
+			OriginRequestTimeout: func() types.String {
+				if v, ok := blockData["origin_request_timeout"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["other_settings"].(map[string]interface{}); ok && (isImport || data.OtherSettings != nil) {
+		data.OtherSettings = &CDNLoadBalancerOtherSettingsModel{
+			AddLocation: func() types.Bool {
+				if !isImport && data.OtherSettings != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.OtherSettings.AddLocation
+				}
+				// Import case: read from API
+				if v, ok := blockData["add_location"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["policy_based_challenge"].(map[string]interface{}); ok && isImport && data.PolicyBasedChallenge == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.PolicyBasedChallenge = &CDNLoadBalancerPolicyBasedChallengeModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["protected_cookies"].([]interface{}); ok && len(listData) > 0 {
+		var protected_cookiesList []CDNLoadBalancerProtectedCookiesModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				protected_cookiesList = append(protected_cookiesList, CDNLoadBalancerProtectedCookiesModel{
+					AddHttponly: func() *CDNLoadBalancerEmptyModel {
+						if _, ok := itemMap["add_httponly"].(map[string]interface{}); ok {
+							return &CDNLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					AddSecure: func() *CDNLoadBalancerEmptyModel {
+						if _, ok := itemMap["add_secure"].(map[string]interface{}); ok {
+							return &CDNLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					DisableTamperingProtection: func() *CDNLoadBalancerEmptyModel {
+						if _, ok := itemMap["disable_tampering_protection"].(map[string]interface{}); ok {
+							return &CDNLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					EnableTamperingProtection: func() *CDNLoadBalancerEmptyModel {
+						if _, ok := itemMap["enable_tampering_protection"].(map[string]interface{}); ok {
+							return &CDNLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					IgnoreHttponly: func() *CDNLoadBalancerEmptyModel {
+						if _, ok := itemMap["ignore_httponly"].(map[string]interface{}); ok {
+							return &CDNLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					IgnoreMaxAge: func() *CDNLoadBalancerEmptyModel {
+						if _, ok := itemMap["ignore_max_age"].(map[string]interface{}); ok {
+							return &CDNLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					IgnoreSamesite: func() *CDNLoadBalancerEmptyModel {
+						if _, ok := itemMap["ignore_samesite"].(map[string]interface{}); ok {
+							return &CDNLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					IgnoreSecure: func() *CDNLoadBalancerEmptyModel {
+						if _, ok := itemMap["ignore_secure"].(map[string]interface{}); ok {
+							return &CDNLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					MaxAgeValue: func() types.Int64 {
+						if v, ok := itemMap["max_age_value"].(float64); ok {
+							return types.Int64Value(int64(v))
+						}
+						return types.Int64Null()
+					}(),
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					SamesiteLax: func() *CDNLoadBalancerEmptyModel {
+						if _, ok := itemMap["samesite_lax"].(map[string]interface{}); ok {
+							return &CDNLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					SamesiteNone: func() *CDNLoadBalancerEmptyModel {
+						if _, ok := itemMap["samesite_none"].(map[string]interface{}); ok {
+							return &CDNLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					SamesiteStrict: func() *CDNLoadBalancerEmptyModel {
+						if _, ok := itemMap["samesite_strict"].(map[string]interface{}); ok {
+							return &CDNLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+				})
+			}
+		}
+		data.ProtectedCookies = protected_cookiesList
+	}
+	if _, ok := apiResource.Spec["rate_limit"].(map[string]interface{}); ok && isImport && data.RateLimit == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.RateLimit = &CDNLoadBalancerRateLimitModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["sensitive_data_policy"].(map[string]interface{}); ok && isImport && data.SensitiveDataPolicy == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.SensitiveDataPolicy = &CDNLoadBalancerSensitiveDataPolicyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["service_policies_from_namespace"].(map[string]interface{}); ok && isImport && data.ServicePoliciesFromNamespace == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ServicePoliciesFromNamespace = &CDNLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["slow_ddos_mitigation"].(map[string]interface{}); ok && (isImport || data.SlowDdosMitigation != nil) {
+		data.SlowDdosMitigation = &CDNLoadBalancerSlowDdosMitigationModel{
+			RequestHeadersTimeout: func() types.Int64 {
+				if v, ok := blockData["request_headers_timeout"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			RequestTimeout: func() types.Int64 {
+				if v, ok := blockData["request_timeout"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["system_default_timeouts"].(map[string]interface{}); ok && isImport && data.SystemDefaultTimeouts == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.SystemDefaultTimeouts = &CDNLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["trusted_clients"].([]interface{}); ok && len(listData) > 0 {
+		var trusted_clientsList []CDNLoadBalancerTrustedClientsModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				trusted_clientsList = append(trusted_clientsList, CDNLoadBalancerTrustedClientsModel{
+					AsNumber: func() types.Int64 {
+						if v, ok := itemMap["as_number"].(float64); ok {
+							return types.Int64Value(int64(v))
+						}
+						return types.Int64Null()
+					}(),
+					BotSkipProcessing: func() *CDNLoadBalancerEmptyModel {
+						if _, ok := itemMap["bot_skip_processing"].(map[string]interface{}); ok {
+							return &CDNLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					ExpirationTimestamp: func() types.String {
+						if v, ok := itemMap["expiration_timestamp"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					HTTPHeader: func() *CDNLoadBalancerTrustedClientsHTTPHeaderModel {
+						if _, ok := itemMap["http_header"].(map[string]interface{}); ok {
+							return &CDNLoadBalancerTrustedClientsHTTPHeaderModel{
+							}
+						}
+						return nil
+					}(),
+					IPPrefix: func() types.String {
+						if v, ok := itemMap["ip_prefix"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					IPV6Prefix: func() types.String {
+						if v, ok := itemMap["ipv6_prefix"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Metadata: func() *CDNLoadBalancerTrustedClientsMetadataModel {
+						if nestedMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
+							return &CDNLoadBalancerTrustedClientsMetadataModel{
+								DescriptionSpec: func() types.String {
+									if v, ok := nestedMap["description"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Name: func() types.String {
+									if v, ok := nestedMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					SkipProcessing: func() *CDNLoadBalancerEmptyModel {
+						if _, ok := itemMap["skip_processing"].(map[string]interface{}); ok {
+							return &CDNLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					UserIdentifier: func() types.String {
+						if v, ok := itemMap["user_identifier"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					WAFSkipProcessing: func() *CDNLoadBalancerEmptyModel {
+						if _, ok := itemMap["waf_skip_processing"].(map[string]interface{}); ok {
+							return &CDNLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+				})
+			}
+		}
+		data.TrustedClients = trusted_clientsList
+	}
+	if _, ok := apiResource.Spec["user_id_client_ip"].(map[string]interface{}); ok && isImport && data.UserIDClientIP == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.UserIDClientIP = &CDNLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["user_identification"].(map[string]interface{}); ok && (isImport || data.UserIdentification != nil) {
+		data.UserIdentification = &CDNLoadBalancerUserIdentificationModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["waf_exclusion"].(map[string]interface{}); ok && isImport && data.WAFExclusion == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.WAFExclusion = &CDNLoadBalancerWAFExclusionModel{}
+	}
+	// Normal Read: preserve existing state value
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -8289,7 +10209,7 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.CDNLoadBalancerSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -8314,6 +10234,933 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.ActiveServicePolicies != nil {
+		active_service_policiesMap := make(map[string]interface{})
+		apiResource.Spec["active_service_policies"] = active_service_policiesMap
+	}
+	if data.APIRateLimit != nil {
+		api_rate_limitMap := make(map[string]interface{})
+		if data.APIRateLimit.BypassRateLimitingRules != nil {
+			bypass_rate_limiting_rulesNestedMap := make(map[string]interface{})
+			api_rate_limitMap["bypass_rate_limiting_rules"] = bypass_rate_limiting_rulesNestedMap
+		}
+		if data.APIRateLimit.CustomIPAllowedList != nil {
+			custom_ip_allowed_listNestedMap := make(map[string]interface{})
+			api_rate_limitMap["custom_ip_allowed_list"] = custom_ip_allowed_listNestedMap
+		}
+		if data.APIRateLimit.IPAllowedList != nil {
+			ip_allowed_listNestedMap := make(map[string]interface{})
+			api_rate_limitMap["ip_allowed_list"] = ip_allowed_listNestedMap
+		}
+		if data.APIRateLimit.NoIPAllowedList != nil {
+			api_rate_limitMap["no_ip_allowed_list"] = map[string]interface{}{}
+		}
+		apiResource.Spec["api_rate_limit"] = api_rate_limitMap
+	}
+	if data.APISpecification != nil {
+		api_specificationMap := make(map[string]interface{})
+		if data.APISpecification.APIDefinition != nil {
+			api_definitionNestedMap := make(map[string]interface{})
+			if !data.APISpecification.APIDefinition.Name.IsNull() && !data.APISpecification.APIDefinition.Name.IsUnknown() {
+				api_definitionNestedMap["name"] = data.APISpecification.APIDefinition.Name.ValueString()
+			}
+			if !data.APISpecification.APIDefinition.Namespace.IsNull() && !data.APISpecification.APIDefinition.Namespace.IsUnknown() {
+				api_definitionNestedMap["namespace"] = data.APISpecification.APIDefinition.Namespace.ValueString()
+			}
+			if !data.APISpecification.APIDefinition.Tenant.IsNull() && !data.APISpecification.APIDefinition.Tenant.IsUnknown() {
+				api_definitionNestedMap["tenant"] = data.APISpecification.APIDefinition.Tenant.ValueString()
+			}
+			api_specificationMap["api_definition"] = api_definitionNestedMap
+		}
+		if data.APISpecification.ValidationAllSpecEndpoints != nil {
+			validation_all_spec_endpointsNestedMap := make(map[string]interface{})
+			api_specificationMap["validation_all_spec_endpoints"] = validation_all_spec_endpointsNestedMap
+		}
+		if data.APISpecification.ValidationCustomList != nil {
+			validation_custom_listNestedMap := make(map[string]interface{})
+			api_specificationMap["validation_custom_list"] = validation_custom_listNestedMap
+		}
+		if data.APISpecification.ValidationDisabled != nil {
+			api_specificationMap["validation_disabled"] = map[string]interface{}{}
+		}
+		apiResource.Spec["api_specification"] = api_specificationMap
+	}
+	if data.AppFirewall != nil {
+		app_firewallMap := make(map[string]interface{})
+		if !data.AppFirewall.Name.IsNull() && !data.AppFirewall.Name.IsUnknown() {
+			app_firewallMap["name"] = data.AppFirewall.Name.ValueString()
+		}
+		if !data.AppFirewall.Namespace.IsNull() && !data.AppFirewall.Namespace.IsUnknown() {
+			app_firewallMap["namespace"] = data.AppFirewall.Namespace.ValueString()
+		}
+		if !data.AppFirewall.Tenant.IsNull() && !data.AppFirewall.Tenant.IsUnknown() {
+			app_firewallMap["tenant"] = data.AppFirewall.Tenant.ValueString()
+		}
+		apiResource.Spec["app_firewall"] = app_firewallMap
+	}
+	if len(data.BlockedClients) > 0 {
+		var blocked_clientsList []map[string]interface{}
+		for _, item := range data.BlockedClients {
+			itemMap := make(map[string]interface{})
+			if !item.AsNumber.IsNull() && !item.AsNumber.IsUnknown() {
+				itemMap["as_number"] = item.AsNumber.ValueInt64()
+			}
+			if item.BotSkipProcessing != nil {
+				itemMap["bot_skip_processing"] = map[string]interface{}{}
+			}
+			if !item.ExpirationTimestamp.IsNull() && !item.ExpirationTimestamp.IsUnknown() {
+				itemMap["expiration_timestamp"] = item.ExpirationTimestamp.ValueString()
+			}
+			if item.HTTPHeader != nil {
+				http_headerNestedMap := make(map[string]interface{})
+				itemMap["http_header"] = http_headerNestedMap
+			}
+			if !item.IPPrefix.IsNull() && !item.IPPrefix.IsUnknown() {
+				itemMap["ip_prefix"] = item.IPPrefix.ValueString()
+			}
+			if !item.IPV6Prefix.IsNull() && !item.IPV6Prefix.IsUnknown() {
+				itemMap["ipv6_prefix"] = item.IPV6Prefix.ValueString()
+			}
+			if item.Metadata != nil {
+				metadataNestedMap := make(map[string]interface{})
+				if !item.Metadata.DescriptionSpec.IsNull() && !item.Metadata.DescriptionSpec.IsUnknown() {
+					metadataNestedMap["description"] = item.Metadata.DescriptionSpec.ValueString()
+				}
+				if !item.Metadata.Name.IsNull() && !item.Metadata.Name.IsUnknown() {
+					metadataNestedMap["name"] = item.Metadata.Name.ValueString()
+				}
+				itemMap["metadata"] = metadataNestedMap
+			}
+			if item.SkipProcessing != nil {
+				itemMap["skip_processing"] = map[string]interface{}{}
+			}
+			if !item.UserIdentifier.IsNull() && !item.UserIdentifier.IsUnknown() {
+				itemMap["user_identifier"] = item.UserIdentifier.ValueString()
+			}
+			if item.WAFSkipProcessing != nil {
+				itemMap["waf_skip_processing"] = map[string]interface{}{}
+			}
+			blocked_clientsList = append(blocked_clientsList, itemMap)
+		}
+		apiResource.Spec["blocked_clients"] = blocked_clientsList
+	}
+	if data.BotDefense != nil {
+		bot_defenseMap := make(map[string]interface{})
+		if data.BotDefense.DisableCorsSupport != nil {
+			bot_defenseMap["disable_cors_support"] = map[string]interface{}{}
+		}
+		if data.BotDefense.EnableCorsSupport != nil {
+			bot_defenseMap["enable_cors_support"] = map[string]interface{}{}
+		}
+		if data.BotDefense.Policy != nil {
+			policyNestedMap := make(map[string]interface{})
+			if !data.BotDefense.Policy.JavascriptMode.IsNull() && !data.BotDefense.Policy.JavascriptMode.IsUnknown() {
+				policyNestedMap["javascript_mode"] = data.BotDefense.Policy.JavascriptMode.ValueString()
+			}
+			if !data.BotDefense.Policy.JsDownloadPath.IsNull() && !data.BotDefense.Policy.JsDownloadPath.IsUnknown() {
+				policyNestedMap["js_download_path"] = data.BotDefense.Policy.JsDownloadPath.ValueString()
+			}
+			bot_defenseMap["policy"] = policyNestedMap
+		}
+		if !data.BotDefense.RegionalEndpoint.IsNull() && !data.BotDefense.RegionalEndpoint.IsUnknown() {
+			bot_defenseMap["regional_endpoint"] = data.BotDefense.RegionalEndpoint.ValueString()
+		}
+		if !data.BotDefense.Timeout.IsNull() && !data.BotDefense.Timeout.IsUnknown() {
+			bot_defenseMap["timeout"] = data.BotDefense.Timeout.ValueInt64()
+		}
+		apiResource.Spec["bot_defense"] = bot_defenseMap
+	}
+	if data.CaptchaChallenge != nil {
+		captcha_challengeMap := make(map[string]interface{})
+		if !data.CaptchaChallenge.CookieExpiry.IsNull() && !data.CaptchaChallenge.CookieExpiry.IsUnknown() {
+			captcha_challengeMap["cookie_expiry"] = data.CaptchaChallenge.CookieExpiry.ValueInt64()
+		}
+		if !data.CaptchaChallenge.CustomPage.IsNull() && !data.CaptchaChallenge.CustomPage.IsUnknown() {
+			captcha_challengeMap["custom_page"] = data.CaptchaChallenge.CustomPage.ValueString()
+		}
+		apiResource.Spec["captcha_challenge"] = captcha_challengeMap
+	}
+	if data.ClientSideDefense != nil {
+		client_side_defenseMap := make(map[string]interface{})
+		if data.ClientSideDefense.Policy != nil {
+			policyNestedMap := make(map[string]interface{})
+			client_side_defenseMap["policy"] = policyNestedMap
+		}
+		apiResource.Spec["client_side_defense"] = client_side_defenseMap
+	}
+	if data.CorsPolicy != nil {
+		cors_policyMap := make(map[string]interface{})
+		if !data.CorsPolicy.AllowCredentials.IsNull() && !data.CorsPolicy.AllowCredentials.IsUnknown() {
+			cors_policyMap["allow_credentials"] = data.CorsPolicy.AllowCredentials.ValueBool()
+		}
+		if !data.CorsPolicy.AllowHeaders.IsNull() && !data.CorsPolicy.AllowHeaders.IsUnknown() {
+			cors_policyMap["allow_headers"] = data.CorsPolicy.AllowHeaders.ValueString()
+		}
+		if !data.CorsPolicy.AllowMethods.IsNull() && !data.CorsPolicy.AllowMethods.IsUnknown() {
+			cors_policyMap["allow_methods"] = data.CorsPolicy.AllowMethods.ValueString()
+		}
+		if !data.CorsPolicy.Disabled.IsNull() && !data.CorsPolicy.Disabled.IsUnknown() {
+			cors_policyMap["disabled"] = data.CorsPolicy.Disabled.ValueBool()
+		}
+		if !data.CorsPolicy.ExposeHeaders.IsNull() && !data.CorsPolicy.ExposeHeaders.IsUnknown() {
+			cors_policyMap["expose_headers"] = data.CorsPolicy.ExposeHeaders.ValueString()
+		}
+		if !data.CorsPolicy.MaximumAge.IsNull() && !data.CorsPolicy.MaximumAge.IsUnknown() {
+			cors_policyMap["maximum_age"] = data.CorsPolicy.MaximumAge.ValueInt64()
+		}
+		apiResource.Spec["cors_policy"] = cors_policyMap
+	}
+	if data.CsrfPolicy != nil {
+		csrf_policyMap := make(map[string]interface{})
+		if data.CsrfPolicy.AllLoadBalancerDomains != nil {
+			csrf_policyMap["all_load_balancer_domains"] = map[string]interface{}{}
+		}
+		if data.CsrfPolicy.CustomDomainList != nil {
+			custom_domain_listNestedMap := make(map[string]interface{})
+			csrf_policyMap["custom_domain_list"] = custom_domain_listNestedMap
+		}
+		if data.CsrfPolicy.Disabled != nil {
+			csrf_policyMap["disabled"] = map[string]interface{}{}
+		}
+		apiResource.Spec["csrf_policy"] = csrf_policyMap
+	}
+	if data.CustomCacheRule != nil {
+		custom_cache_ruleMap := make(map[string]interface{})
+		apiResource.Spec["custom_cache_rule"] = custom_cache_ruleMap
+	}
+	if len(data.DataGuardRules) > 0 {
+		var data_guard_rulesList []map[string]interface{}
+		for _, item := range data.DataGuardRules {
+			itemMap := make(map[string]interface{})
+			if item.AnyDomain != nil {
+				itemMap["any_domain"] = map[string]interface{}{}
+			}
+			if item.ApplyDataGuard != nil {
+				itemMap["apply_data_guard"] = map[string]interface{}{}
+			}
+			if !item.ExactValue.IsNull() && !item.ExactValue.IsUnknown() {
+				itemMap["exact_value"] = item.ExactValue.ValueString()
+			}
+			if item.Metadata != nil {
+				metadataNestedMap := make(map[string]interface{})
+				if !item.Metadata.DescriptionSpec.IsNull() && !item.Metadata.DescriptionSpec.IsUnknown() {
+					metadataNestedMap["description"] = item.Metadata.DescriptionSpec.ValueString()
+				}
+				if !item.Metadata.Name.IsNull() && !item.Metadata.Name.IsUnknown() {
+					metadataNestedMap["name"] = item.Metadata.Name.ValueString()
+				}
+				itemMap["metadata"] = metadataNestedMap
+			}
+			if item.Path != nil {
+				pathNestedMap := make(map[string]interface{})
+				if !item.Path.Path.IsNull() && !item.Path.Path.IsUnknown() {
+					pathNestedMap["path"] = item.Path.Path.ValueString()
+				}
+				if !item.Path.Prefix.IsNull() && !item.Path.Prefix.IsUnknown() {
+					pathNestedMap["prefix"] = item.Path.Prefix.ValueString()
+				}
+				if !item.Path.Regex.IsNull() && !item.Path.Regex.IsUnknown() {
+					pathNestedMap["regex"] = item.Path.Regex.ValueString()
+				}
+				itemMap["path"] = pathNestedMap
+			}
+			if item.SkipDataGuard != nil {
+				itemMap["skip_data_guard"] = map[string]interface{}{}
+			}
+			if !item.SuffixValue.IsNull() && !item.SuffixValue.IsUnknown() {
+				itemMap["suffix_value"] = item.SuffixValue.ValueString()
+			}
+			data_guard_rulesList = append(data_guard_rulesList, itemMap)
+		}
+		apiResource.Spec["data_guard_rules"] = data_guard_rulesList
+	}
+	if len(data.DdosMitigationRules) > 0 {
+		var ddos_mitigation_rulesList []map[string]interface{}
+		for _, item := range data.DdosMitigationRules {
+			itemMap := make(map[string]interface{})
+			if item.Block != nil {
+				itemMap["block"] = map[string]interface{}{}
+			}
+			if item.DdosClientSource != nil {
+				ddos_client_sourceNestedMap := make(map[string]interface{})
+				itemMap["ddos_client_source"] = ddos_client_sourceNestedMap
+			}
+			if !item.ExpirationTimestamp.IsNull() && !item.ExpirationTimestamp.IsUnknown() {
+				itemMap["expiration_timestamp"] = item.ExpirationTimestamp.ValueString()
+			}
+			if item.IPPrefixList != nil {
+				ip_prefix_listNestedMap := make(map[string]interface{})
+				if !item.IPPrefixList.InvertMatch.IsNull() && !item.IPPrefixList.InvertMatch.IsUnknown() {
+					ip_prefix_listNestedMap["invert_match"] = item.IPPrefixList.InvertMatch.ValueBool()
+				}
+				itemMap["ip_prefix_list"] = ip_prefix_listNestedMap
+			}
+			if item.Metadata != nil {
+				metadataNestedMap := make(map[string]interface{})
+				if !item.Metadata.DescriptionSpec.IsNull() && !item.Metadata.DescriptionSpec.IsUnknown() {
+					metadataNestedMap["description"] = item.Metadata.DescriptionSpec.ValueString()
+				}
+				if !item.Metadata.Name.IsNull() && !item.Metadata.Name.IsUnknown() {
+					metadataNestedMap["name"] = item.Metadata.Name.ValueString()
+				}
+				itemMap["metadata"] = metadataNestedMap
+			}
+			ddos_mitigation_rulesList = append(ddos_mitigation_rulesList, itemMap)
+		}
+		apiResource.Spec["ddos_mitigation_rules"] = ddos_mitigation_rulesList
+	}
+	if data.DefaultCacheAction != nil {
+		default_cache_actionMap := make(map[string]interface{})
+		if data.DefaultCacheAction.CacheDisabled != nil {
+			default_cache_actionMap["cache_disabled"] = map[string]interface{}{}
+		}
+		if !data.DefaultCacheAction.CacheTtlDefault.IsNull() && !data.DefaultCacheAction.CacheTtlDefault.IsUnknown() {
+			default_cache_actionMap["cache_ttl_default"] = data.DefaultCacheAction.CacheTtlDefault.ValueString()
+		}
+		if !data.DefaultCacheAction.CacheTtlOverride.IsNull() && !data.DefaultCacheAction.CacheTtlOverride.IsUnknown() {
+			default_cache_actionMap["cache_ttl_override"] = data.DefaultCacheAction.CacheTtlOverride.ValueString()
+		}
+		apiResource.Spec["default_cache_action"] = default_cache_actionMap
+	}
+	if data.DefaultSensitiveDataPolicy != nil {
+		default_sensitive_data_policyMap := make(map[string]interface{})
+		apiResource.Spec["default_sensitive_data_policy"] = default_sensitive_data_policyMap
+	}
+	if data.DisableAPIDefinition != nil {
+		disable_api_definitionMap := make(map[string]interface{})
+		apiResource.Spec["disable_api_definition"] = disable_api_definitionMap
+	}
+	if data.DisableAPIDiscovery != nil {
+		disable_api_discoveryMap := make(map[string]interface{})
+		apiResource.Spec["disable_api_discovery"] = disable_api_discoveryMap
+	}
+	if data.DisableClientSideDefense != nil {
+		disable_client_side_defenseMap := make(map[string]interface{})
+		apiResource.Spec["disable_client_side_defense"] = disable_client_side_defenseMap
+	}
+	if data.DisableIPReputation != nil {
+		disable_ip_reputationMap := make(map[string]interface{})
+		apiResource.Spec["disable_ip_reputation"] = disable_ip_reputationMap
+	}
+	if data.DisableMaliciousUserDetection != nil {
+		disable_malicious_user_detectionMap := make(map[string]interface{})
+		apiResource.Spec["disable_malicious_user_detection"] = disable_malicious_user_detectionMap
+	}
+	if data.DisableRateLimit != nil {
+		disable_rate_limitMap := make(map[string]interface{})
+		apiResource.Spec["disable_rate_limit"] = disable_rate_limitMap
+	}
+	if data.DisableThreatMesh != nil {
+		disable_threat_meshMap := make(map[string]interface{})
+		apiResource.Spec["disable_threat_mesh"] = disable_threat_meshMap
+	}
+	if data.DisableWAF != nil {
+		disable_wafMap := make(map[string]interface{})
+		apiResource.Spec["disable_waf"] = disable_wafMap
+	}
+	if !data.Domains.IsNull() && !data.Domains.IsUnknown() {
+		var domainsList []string
+		resp.Diagnostics.Append(data.Domains.ElementsAs(ctx, &domainsList, false)...)
+		if !resp.Diagnostics.HasError() {
+			apiResource.Spec["domains"] = domainsList
+		}
+	}
+	if data.EnableAPIDiscovery != nil {
+		enable_api_discoveryMap := make(map[string]interface{})
+		if data.EnableAPIDiscovery.APICrawler != nil {
+			api_crawlerNestedMap := make(map[string]interface{})
+			enable_api_discoveryMap["api_crawler"] = api_crawlerNestedMap
+		}
+		if data.EnableAPIDiscovery.APIDiscoveryFromCodeScan != nil {
+			api_discovery_from_code_scanNestedMap := make(map[string]interface{})
+			enable_api_discoveryMap["api_discovery_from_code_scan"] = api_discovery_from_code_scanNestedMap
+		}
+		if data.EnableAPIDiscovery.CustomAPIAuthDiscovery != nil {
+			custom_api_auth_discoveryNestedMap := make(map[string]interface{})
+			enable_api_discoveryMap["custom_api_auth_discovery"] = custom_api_auth_discoveryNestedMap
+		}
+		if data.EnableAPIDiscovery.DefaultAPIAuthDiscovery != nil {
+			enable_api_discoveryMap["default_api_auth_discovery"] = map[string]interface{}{}
+		}
+		if data.EnableAPIDiscovery.DisableLearnFromRedirectTraffic != nil {
+			enable_api_discoveryMap["disable_learn_from_redirect_traffic"] = map[string]interface{}{}
+		}
+		if data.EnableAPIDiscovery.DiscoveredAPISettings != nil {
+			discovered_api_settingsNestedMap := make(map[string]interface{})
+			if !data.EnableAPIDiscovery.DiscoveredAPISettings.PurgeDurationForInactiveDiscoveredApis.IsNull() && !data.EnableAPIDiscovery.DiscoveredAPISettings.PurgeDurationForInactiveDiscoveredApis.IsUnknown() {
+				discovered_api_settingsNestedMap["purge_duration_for_inactive_discovered_apis"] = data.EnableAPIDiscovery.DiscoveredAPISettings.PurgeDurationForInactiveDiscoveredApis.ValueInt64()
+			}
+			enable_api_discoveryMap["discovered_api_settings"] = discovered_api_settingsNestedMap
+		}
+		if data.EnableAPIDiscovery.EnableLearnFromRedirectTraffic != nil {
+			enable_api_discoveryMap["enable_learn_from_redirect_traffic"] = map[string]interface{}{}
+		}
+		apiResource.Spec["enable_api_discovery"] = enable_api_discoveryMap
+	}
+	if data.EnableChallenge != nil {
+		enable_challengeMap := make(map[string]interface{})
+		if data.EnableChallenge.CaptchaChallengeParameters != nil {
+			captcha_challenge_parametersNestedMap := make(map[string]interface{})
+			if !data.EnableChallenge.CaptchaChallengeParameters.CookieExpiry.IsNull() && !data.EnableChallenge.CaptchaChallengeParameters.CookieExpiry.IsUnknown() {
+				captcha_challenge_parametersNestedMap["cookie_expiry"] = data.EnableChallenge.CaptchaChallengeParameters.CookieExpiry.ValueInt64()
+			}
+			if !data.EnableChallenge.CaptchaChallengeParameters.CustomPage.IsNull() && !data.EnableChallenge.CaptchaChallengeParameters.CustomPage.IsUnknown() {
+				captcha_challenge_parametersNestedMap["custom_page"] = data.EnableChallenge.CaptchaChallengeParameters.CustomPage.ValueString()
+			}
+			enable_challengeMap["captcha_challenge_parameters"] = captcha_challenge_parametersNestedMap
+		}
+		if data.EnableChallenge.DefaultCaptchaChallengeParameters != nil {
+			enable_challengeMap["default_captcha_challenge_parameters"] = map[string]interface{}{}
+		}
+		if data.EnableChallenge.DefaultJsChallengeParameters != nil {
+			enable_challengeMap["default_js_challenge_parameters"] = map[string]interface{}{}
+		}
+		if data.EnableChallenge.DefaultMitigationSettings != nil {
+			enable_challengeMap["default_mitigation_settings"] = map[string]interface{}{}
+		}
+		if data.EnableChallenge.JsChallengeParameters != nil {
+			js_challenge_parametersNestedMap := make(map[string]interface{})
+			if !data.EnableChallenge.JsChallengeParameters.CookieExpiry.IsNull() && !data.EnableChallenge.JsChallengeParameters.CookieExpiry.IsUnknown() {
+				js_challenge_parametersNestedMap["cookie_expiry"] = data.EnableChallenge.JsChallengeParameters.CookieExpiry.ValueInt64()
+			}
+			if !data.EnableChallenge.JsChallengeParameters.CustomPage.IsNull() && !data.EnableChallenge.JsChallengeParameters.CustomPage.IsUnknown() {
+				js_challenge_parametersNestedMap["custom_page"] = data.EnableChallenge.JsChallengeParameters.CustomPage.ValueString()
+			}
+			if !data.EnableChallenge.JsChallengeParameters.JsScriptDelay.IsNull() && !data.EnableChallenge.JsChallengeParameters.JsScriptDelay.IsUnknown() {
+				js_challenge_parametersNestedMap["js_script_delay"] = data.EnableChallenge.JsChallengeParameters.JsScriptDelay.ValueInt64()
+			}
+			enable_challengeMap["js_challenge_parameters"] = js_challenge_parametersNestedMap
+		}
+		if data.EnableChallenge.MaliciousUserMitigation != nil {
+			malicious_user_mitigationNestedMap := make(map[string]interface{})
+			if !data.EnableChallenge.MaliciousUserMitigation.Name.IsNull() && !data.EnableChallenge.MaliciousUserMitigation.Name.IsUnknown() {
+				malicious_user_mitigationNestedMap["name"] = data.EnableChallenge.MaliciousUserMitigation.Name.ValueString()
+			}
+			if !data.EnableChallenge.MaliciousUserMitigation.Namespace.IsNull() && !data.EnableChallenge.MaliciousUserMitigation.Namespace.IsUnknown() {
+				malicious_user_mitigationNestedMap["namespace"] = data.EnableChallenge.MaliciousUserMitigation.Namespace.ValueString()
+			}
+			if !data.EnableChallenge.MaliciousUserMitigation.Tenant.IsNull() && !data.EnableChallenge.MaliciousUserMitigation.Tenant.IsUnknown() {
+				malicious_user_mitigationNestedMap["tenant"] = data.EnableChallenge.MaliciousUserMitigation.Tenant.ValueString()
+			}
+			enable_challengeMap["malicious_user_mitigation"] = malicious_user_mitigationNestedMap
+		}
+		apiResource.Spec["enable_challenge"] = enable_challengeMap
+	}
+	if data.EnableIPReputation != nil {
+		enable_ip_reputationMap := make(map[string]interface{})
+		apiResource.Spec["enable_ip_reputation"] = enable_ip_reputationMap
+	}
+	if data.EnableMaliciousUserDetection != nil {
+		enable_malicious_user_detectionMap := make(map[string]interface{})
+		apiResource.Spec["enable_malicious_user_detection"] = enable_malicious_user_detectionMap
+	}
+	if data.EnableThreatMesh != nil {
+		enable_threat_meshMap := make(map[string]interface{})
+		apiResource.Spec["enable_threat_mesh"] = enable_threat_meshMap
+	}
+	if len(data.GraphqlRules) > 0 {
+		var graphql_rulesList []map[string]interface{}
+		for _, item := range data.GraphqlRules {
+			itemMap := make(map[string]interface{})
+			if item.AnyDomain != nil {
+				itemMap["any_domain"] = map[string]interface{}{}
+			}
+			if !item.ExactPath.IsNull() && !item.ExactPath.IsUnknown() {
+				itemMap["exact_path"] = item.ExactPath.ValueString()
+			}
+			if !item.ExactValue.IsNull() && !item.ExactValue.IsUnknown() {
+				itemMap["exact_value"] = item.ExactValue.ValueString()
+			}
+			if item.GraphqlSettings != nil {
+				graphql_settingsNestedMap := make(map[string]interface{})
+				if !item.GraphqlSettings.MaxBatchedQueries.IsNull() && !item.GraphqlSettings.MaxBatchedQueries.IsUnknown() {
+					graphql_settingsNestedMap["max_batched_queries"] = item.GraphqlSettings.MaxBatchedQueries.ValueInt64()
+				}
+				if !item.GraphqlSettings.MaxDepth.IsNull() && !item.GraphqlSettings.MaxDepth.IsUnknown() {
+					graphql_settingsNestedMap["max_depth"] = item.GraphqlSettings.MaxDepth.ValueInt64()
+				}
+				if !item.GraphqlSettings.MaxTotalLength.IsNull() && !item.GraphqlSettings.MaxTotalLength.IsUnknown() {
+					graphql_settingsNestedMap["max_total_length"] = item.GraphqlSettings.MaxTotalLength.ValueInt64()
+				}
+				itemMap["graphql_settings"] = graphql_settingsNestedMap
+			}
+			if item.Metadata != nil {
+				metadataNestedMap := make(map[string]interface{})
+				if !item.Metadata.DescriptionSpec.IsNull() && !item.Metadata.DescriptionSpec.IsUnknown() {
+					metadataNestedMap["description"] = item.Metadata.DescriptionSpec.ValueString()
+				}
+				if !item.Metadata.Name.IsNull() && !item.Metadata.Name.IsUnknown() {
+					metadataNestedMap["name"] = item.Metadata.Name.ValueString()
+				}
+				itemMap["metadata"] = metadataNestedMap
+			}
+			if item.MethodGet != nil {
+				itemMap["method_get"] = map[string]interface{}{}
+			}
+			if item.MethodPost != nil {
+				itemMap["method_post"] = map[string]interface{}{}
+			}
+			if !item.SuffixValue.IsNull() && !item.SuffixValue.IsUnknown() {
+				itemMap["suffix_value"] = item.SuffixValue.ValueString()
+			}
+			graphql_rulesList = append(graphql_rulesList, itemMap)
+		}
+		apiResource.Spec["graphql_rules"] = graphql_rulesList
+	}
+	if data.HTTP != nil {
+		httpMap := make(map[string]interface{})
+		if !data.HTTP.DNSVolterraManaged.IsNull() && !data.HTTP.DNSVolterraManaged.IsUnknown() {
+			httpMap["dns_volterra_managed"] = data.HTTP.DNSVolterraManaged.ValueBool()
+		}
+		if !data.HTTP.Port.IsNull() && !data.HTTP.Port.IsUnknown() {
+			httpMap["port"] = data.HTTP.Port.ValueInt64()
+		}
+		if !data.HTTP.PortRanges.IsNull() && !data.HTTP.PortRanges.IsUnknown() {
+			httpMap["port_ranges"] = data.HTTP.PortRanges.ValueString()
+		}
+		apiResource.Spec["http"] = httpMap
+	}
+	if data.HTTPS != nil {
+		httpsMap := make(map[string]interface{})
+		if !data.HTTPS.AddHsts.IsNull() && !data.HTTPS.AddHsts.IsUnknown() {
+			httpsMap["add_hsts"] = data.HTTPS.AddHsts.ValueBool()
+		}
+		if !data.HTTPS.HTTPRedirect.IsNull() && !data.HTTPS.HTTPRedirect.IsUnknown() {
+			httpsMap["http_redirect"] = data.HTTPS.HTTPRedirect.ValueBool()
+		}
+		if data.HTTPS.TLSCertOptions != nil {
+			tls_cert_optionsNestedMap := make(map[string]interface{})
+			httpsMap["tls_cert_options"] = tls_cert_optionsNestedMap
+		}
+		apiResource.Spec["https"] = httpsMap
+	}
+	if data.HTTPSAutoCert != nil {
+		https_auto_certMap := make(map[string]interface{})
+		if !data.HTTPSAutoCert.AddHsts.IsNull() && !data.HTTPSAutoCert.AddHsts.IsUnknown() {
+			https_auto_certMap["add_hsts"] = data.HTTPSAutoCert.AddHsts.ValueBool()
+		}
+		if !data.HTTPSAutoCert.HTTPRedirect.IsNull() && !data.HTTPSAutoCert.HTTPRedirect.IsUnknown() {
+			https_auto_certMap["http_redirect"] = data.HTTPSAutoCert.HTTPRedirect.ValueBool()
+		}
+		if data.HTTPSAutoCert.TLSConfig != nil {
+			tls_configNestedMap := make(map[string]interface{})
+			https_auto_certMap["tls_config"] = tls_configNestedMap
+		}
+		apiResource.Spec["https_auto_cert"] = https_auto_certMap
+	}
+	if data.JsChallenge != nil {
+		js_challengeMap := make(map[string]interface{})
+		if !data.JsChallenge.CookieExpiry.IsNull() && !data.JsChallenge.CookieExpiry.IsUnknown() {
+			js_challengeMap["cookie_expiry"] = data.JsChallenge.CookieExpiry.ValueInt64()
+		}
+		if !data.JsChallenge.CustomPage.IsNull() && !data.JsChallenge.CustomPage.IsUnknown() {
+			js_challengeMap["custom_page"] = data.JsChallenge.CustomPage.ValueString()
+		}
+		if !data.JsChallenge.JsScriptDelay.IsNull() && !data.JsChallenge.JsScriptDelay.IsUnknown() {
+			js_challengeMap["js_script_delay"] = data.JsChallenge.JsScriptDelay.ValueInt64()
+		}
+		apiResource.Spec["js_challenge"] = js_challengeMap
+	}
+	if data.JwtValidation != nil {
+		jwt_validationMap := make(map[string]interface{})
+		if data.JwtValidation.Action != nil {
+			actionNestedMap := make(map[string]interface{})
+			jwt_validationMap["action"] = actionNestedMap
+		}
+		if data.JwtValidation.JwksConfig != nil {
+			jwks_configNestedMap := make(map[string]interface{})
+			if !data.JwtValidation.JwksConfig.Cleartext.IsNull() && !data.JwtValidation.JwksConfig.Cleartext.IsUnknown() {
+				jwks_configNestedMap["cleartext"] = data.JwtValidation.JwksConfig.Cleartext.ValueString()
+			}
+			jwt_validationMap["jwks_config"] = jwks_configNestedMap
+		}
+		if data.JwtValidation.MandatoryClaims != nil {
+			mandatory_claimsNestedMap := make(map[string]interface{})
+			jwt_validationMap["mandatory_claims"] = mandatory_claimsNestedMap
+		}
+		if data.JwtValidation.ReservedClaims != nil {
+			reserved_claimsNestedMap := make(map[string]interface{})
+			if !data.JwtValidation.ReservedClaims.Issuer.IsNull() && !data.JwtValidation.ReservedClaims.Issuer.IsUnknown() {
+				reserved_claimsNestedMap["issuer"] = data.JwtValidation.ReservedClaims.Issuer.ValueString()
+			}
+			jwt_validationMap["reserved_claims"] = reserved_claimsNestedMap
+		}
+		if data.JwtValidation.Target != nil {
+			targetNestedMap := make(map[string]interface{})
+			jwt_validationMap["target"] = targetNestedMap
+		}
+		if data.JwtValidation.TokenLocation != nil {
+			token_locationNestedMap := make(map[string]interface{})
+			jwt_validationMap["token_location"] = token_locationNestedMap
+		}
+		apiResource.Spec["jwt_validation"] = jwt_validationMap
+	}
+	if data.L7DdosActionBlock != nil {
+		l7_ddos_action_blockMap := make(map[string]interface{})
+		apiResource.Spec["l7_ddos_action_block"] = l7_ddos_action_blockMap
+	}
+	if data.L7DdosActionDefault != nil {
+		l7_ddos_action_defaultMap := make(map[string]interface{})
+		apiResource.Spec["l7_ddos_action_default"] = l7_ddos_action_defaultMap
+	}
+	if data.L7DdosActionJsChallenge != nil {
+		l7_ddos_action_js_challengeMap := make(map[string]interface{})
+		if !data.L7DdosActionJsChallenge.CookieExpiry.IsNull() && !data.L7DdosActionJsChallenge.CookieExpiry.IsUnknown() {
+			l7_ddos_action_js_challengeMap["cookie_expiry"] = data.L7DdosActionJsChallenge.CookieExpiry.ValueInt64()
+		}
+		if !data.L7DdosActionJsChallenge.CustomPage.IsNull() && !data.L7DdosActionJsChallenge.CustomPage.IsUnknown() {
+			l7_ddos_action_js_challengeMap["custom_page"] = data.L7DdosActionJsChallenge.CustomPage.ValueString()
+		}
+		if !data.L7DdosActionJsChallenge.JsScriptDelay.IsNull() && !data.L7DdosActionJsChallenge.JsScriptDelay.IsUnknown() {
+			l7_ddos_action_js_challengeMap["js_script_delay"] = data.L7DdosActionJsChallenge.JsScriptDelay.ValueInt64()
+		}
+		apiResource.Spec["l7_ddos_action_js_challenge"] = l7_ddos_action_js_challengeMap
+	}
+	if data.NoChallenge != nil {
+		no_challengeMap := make(map[string]interface{})
+		apiResource.Spec["no_challenge"] = no_challengeMap
+	}
+	if data.NoServicePolicies != nil {
+		no_service_policiesMap := make(map[string]interface{})
+		apiResource.Spec["no_service_policies"] = no_service_policiesMap
+	}
+	if data.OriginPool != nil {
+		origin_poolMap := make(map[string]interface{})
+		if data.OriginPool.MoreOriginOptions != nil {
+			more_origin_optionsNestedMap := make(map[string]interface{})
+			if !data.OriginPool.MoreOriginOptions.EnableByteRangeRequest.IsNull() && !data.OriginPool.MoreOriginOptions.EnableByteRangeRequest.IsUnknown() {
+				more_origin_optionsNestedMap["enable_byte_range_request"] = data.OriginPool.MoreOriginOptions.EnableByteRangeRequest.ValueBool()
+			}
+			if !data.OriginPool.MoreOriginOptions.WebsocketProxy.IsNull() && !data.OriginPool.MoreOriginOptions.WebsocketProxy.IsUnknown() {
+				more_origin_optionsNestedMap["websocket_proxy"] = data.OriginPool.MoreOriginOptions.WebsocketProxy.ValueBool()
+			}
+			origin_poolMap["more_origin_options"] = more_origin_optionsNestedMap
+		}
+		if data.OriginPool.NoTLS != nil {
+			origin_poolMap["no_tls"] = map[string]interface{}{}
+		}
+		if !data.OriginPool.OriginRequestTimeout.IsNull() && !data.OriginPool.OriginRequestTimeout.IsUnknown() {
+			origin_poolMap["origin_request_timeout"] = data.OriginPool.OriginRequestTimeout.ValueString()
+		}
+		if data.OriginPool.PublicName != nil {
+			public_nameNestedMap := make(map[string]interface{})
+			if !data.OriginPool.PublicName.DNSName.IsNull() && !data.OriginPool.PublicName.DNSName.IsUnknown() {
+				public_nameNestedMap["dns_name"] = data.OriginPool.PublicName.DNSName.ValueString()
+			}
+			if !data.OriginPool.PublicName.RefreshInterval.IsNull() && !data.OriginPool.PublicName.RefreshInterval.IsUnknown() {
+				public_nameNestedMap["refresh_interval"] = data.OriginPool.PublicName.RefreshInterval.ValueInt64()
+			}
+			origin_poolMap["public_name"] = public_nameNestedMap
+		}
+		if data.OriginPool.UseTLS != nil {
+			use_tlsNestedMap := make(map[string]interface{})
+			if !data.OriginPool.UseTLS.MaxSessionKeys.IsNull() && !data.OriginPool.UseTLS.MaxSessionKeys.IsUnknown() {
+				use_tlsNestedMap["max_session_keys"] = data.OriginPool.UseTLS.MaxSessionKeys.ValueInt64()
+			}
+			if !data.OriginPool.UseTLS.Sni.IsNull() && !data.OriginPool.UseTLS.Sni.IsUnknown() {
+				use_tlsNestedMap["sni"] = data.OriginPool.UseTLS.Sni.ValueString()
+			}
+			origin_poolMap["use_tls"] = use_tlsNestedMap
+		}
+		apiResource.Spec["origin_pool"] = origin_poolMap
+	}
+	if data.OtherSettings != nil {
+		other_settingsMap := make(map[string]interface{})
+		if !data.OtherSettings.AddLocation.IsNull() && !data.OtherSettings.AddLocation.IsUnknown() {
+			other_settingsMap["add_location"] = data.OtherSettings.AddLocation.ValueBool()
+		}
+		if data.OtherSettings.HeaderOptions != nil {
+			header_optionsNestedMap := make(map[string]interface{})
+			other_settingsMap["header_options"] = header_optionsNestedMap
+		}
+		if data.OtherSettings.LoggingOptions != nil {
+			logging_optionsNestedMap := make(map[string]interface{})
+			other_settingsMap["logging_options"] = logging_optionsNestedMap
+		}
+		apiResource.Spec["other_settings"] = other_settingsMap
+	}
+	if data.PolicyBasedChallenge != nil {
+		policy_based_challengeMap := make(map[string]interface{})
+		if data.PolicyBasedChallenge.AlwaysEnableCaptchaChallenge != nil {
+			policy_based_challengeMap["always_enable_captcha_challenge"] = map[string]interface{}{}
+		}
+		if data.PolicyBasedChallenge.AlwaysEnableJsChallenge != nil {
+			policy_based_challengeMap["always_enable_js_challenge"] = map[string]interface{}{}
+		}
+		if data.PolicyBasedChallenge.CaptchaChallengeParameters != nil {
+			captcha_challenge_parametersNestedMap := make(map[string]interface{})
+			if !data.PolicyBasedChallenge.CaptchaChallengeParameters.CookieExpiry.IsNull() && !data.PolicyBasedChallenge.CaptchaChallengeParameters.CookieExpiry.IsUnknown() {
+				captcha_challenge_parametersNestedMap["cookie_expiry"] = data.PolicyBasedChallenge.CaptchaChallengeParameters.CookieExpiry.ValueInt64()
+			}
+			if !data.PolicyBasedChallenge.CaptchaChallengeParameters.CustomPage.IsNull() && !data.PolicyBasedChallenge.CaptchaChallengeParameters.CustomPage.IsUnknown() {
+				captcha_challenge_parametersNestedMap["custom_page"] = data.PolicyBasedChallenge.CaptchaChallengeParameters.CustomPage.ValueString()
+			}
+			policy_based_challengeMap["captcha_challenge_parameters"] = captcha_challenge_parametersNestedMap
+		}
+		if data.PolicyBasedChallenge.DefaultCaptchaChallengeParameters != nil {
+			policy_based_challengeMap["default_captcha_challenge_parameters"] = map[string]interface{}{}
+		}
+		if data.PolicyBasedChallenge.DefaultJsChallengeParameters != nil {
+			policy_based_challengeMap["default_js_challenge_parameters"] = map[string]interface{}{}
+		}
+		if data.PolicyBasedChallenge.DefaultMitigationSettings != nil {
+			policy_based_challengeMap["default_mitigation_settings"] = map[string]interface{}{}
+		}
+		if data.PolicyBasedChallenge.DefaultTemporaryBlockingParameters != nil {
+			policy_based_challengeMap["default_temporary_blocking_parameters"] = map[string]interface{}{}
+		}
+		if data.PolicyBasedChallenge.JsChallengeParameters != nil {
+			js_challenge_parametersNestedMap := make(map[string]interface{})
+			if !data.PolicyBasedChallenge.JsChallengeParameters.CookieExpiry.IsNull() && !data.PolicyBasedChallenge.JsChallengeParameters.CookieExpiry.IsUnknown() {
+				js_challenge_parametersNestedMap["cookie_expiry"] = data.PolicyBasedChallenge.JsChallengeParameters.CookieExpiry.ValueInt64()
+			}
+			if !data.PolicyBasedChallenge.JsChallengeParameters.CustomPage.IsNull() && !data.PolicyBasedChallenge.JsChallengeParameters.CustomPage.IsUnknown() {
+				js_challenge_parametersNestedMap["custom_page"] = data.PolicyBasedChallenge.JsChallengeParameters.CustomPage.ValueString()
+			}
+			if !data.PolicyBasedChallenge.JsChallengeParameters.JsScriptDelay.IsNull() && !data.PolicyBasedChallenge.JsChallengeParameters.JsScriptDelay.IsUnknown() {
+				js_challenge_parametersNestedMap["js_script_delay"] = data.PolicyBasedChallenge.JsChallengeParameters.JsScriptDelay.ValueInt64()
+			}
+			policy_based_challengeMap["js_challenge_parameters"] = js_challenge_parametersNestedMap
+		}
+		if data.PolicyBasedChallenge.MaliciousUserMitigation != nil {
+			malicious_user_mitigationNestedMap := make(map[string]interface{})
+			if !data.PolicyBasedChallenge.MaliciousUserMitigation.Name.IsNull() && !data.PolicyBasedChallenge.MaliciousUserMitigation.Name.IsUnknown() {
+				malicious_user_mitigationNestedMap["name"] = data.PolicyBasedChallenge.MaliciousUserMitigation.Name.ValueString()
+			}
+			if !data.PolicyBasedChallenge.MaliciousUserMitigation.Namespace.IsNull() && !data.PolicyBasedChallenge.MaliciousUserMitigation.Namespace.IsUnknown() {
+				malicious_user_mitigationNestedMap["namespace"] = data.PolicyBasedChallenge.MaliciousUserMitigation.Namespace.ValueString()
+			}
+			if !data.PolicyBasedChallenge.MaliciousUserMitigation.Tenant.IsNull() && !data.PolicyBasedChallenge.MaliciousUserMitigation.Tenant.IsUnknown() {
+				malicious_user_mitigationNestedMap["tenant"] = data.PolicyBasedChallenge.MaliciousUserMitigation.Tenant.ValueString()
+			}
+			policy_based_challengeMap["malicious_user_mitigation"] = malicious_user_mitigationNestedMap
+		}
+		if data.PolicyBasedChallenge.NoChallenge != nil {
+			policy_based_challengeMap["no_challenge"] = map[string]interface{}{}
+		}
+		if data.PolicyBasedChallenge.RuleList != nil {
+			rule_listNestedMap := make(map[string]interface{})
+			policy_based_challengeMap["rule_list"] = rule_listNestedMap
+		}
+		if data.PolicyBasedChallenge.TemporaryUserBlocking != nil {
+			temporary_user_blockingNestedMap := make(map[string]interface{})
+			if !data.PolicyBasedChallenge.TemporaryUserBlocking.CustomPage.IsNull() && !data.PolicyBasedChallenge.TemporaryUserBlocking.CustomPage.IsUnknown() {
+				temporary_user_blockingNestedMap["custom_page"] = data.PolicyBasedChallenge.TemporaryUserBlocking.CustomPage.ValueString()
+			}
+			policy_based_challengeMap["temporary_user_blocking"] = temporary_user_blockingNestedMap
+		}
+		apiResource.Spec["policy_based_challenge"] = policy_based_challengeMap
+	}
+	if len(data.ProtectedCookies) > 0 {
+		var protected_cookiesList []map[string]interface{}
+		for _, item := range data.ProtectedCookies {
+			itemMap := make(map[string]interface{})
+			if item.AddHttponly != nil {
+				itemMap["add_httponly"] = map[string]interface{}{}
+			}
+			if item.AddSecure != nil {
+				itemMap["add_secure"] = map[string]interface{}{}
+			}
+			if item.DisableTamperingProtection != nil {
+				itemMap["disable_tampering_protection"] = map[string]interface{}{}
+			}
+			if item.EnableTamperingProtection != nil {
+				itemMap["enable_tampering_protection"] = map[string]interface{}{}
+			}
+			if item.IgnoreHttponly != nil {
+				itemMap["ignore_httponly"] = map[string]interface{}{}
+			}
+			if item.IgnoreMaxAge != nil {
+				itemMap["ignore_max_age"] = map[string]interface{}{}
+			}
+			if item.IgnoreSamesite != nil {
+				itemMap["ignore_samesite"] = map[string]interface{}{}
+			}
+			if item.IgnoreSecure != nil {
+				itemMap["ignore_secure"] = map[string]interface{}{}
+			}
+			if !item.MaxAgeValue.IsNull() && !item.MaxAgeValue.IsUnknown() {
+				itemMap["max_age_value"] = item.MaxAgeValue.ValueInt64()
+			}
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			if item.SamesiteLax != nil {
+				itemMap["samesite_lax"] = map[string]interface{}{}
+			}
+			if item.SamesiteNone != nil {
+				itemMap["samesite_none"] = map[string]interface{}{}
+			}
+			if item.SamesiteStrict != nil {
+				itemMap["samesite_strict"] = map[string]interface{}{}
+			}
+			protected_cookiesList = append(protected_cookiesList, itemMap)
+		}
+		apiResource.Spec["protected_cookies"] = protected_cookiesList
+	}
+	if data.RateLimit != nil {
+		rate_limitMap := make(map[string]interface{})
+		if data.RateLimit.CustomIPAllowedList != nil {
+			custom_ip_allowed_listNestedMap := make(map[string]interface{})
+			rate_limitMap["custom_ip_allowed_list"] = custom_ip_allowed_listNestedMap
+		}
+		if data.RateLimit.IPAllowedList != nil {
+			ip_allowed_listNestedMap := make(map[string]interface{})
+			rate_limitMap["ip_allowed_list"] = ip_allowed_listNestedMap
+		}
+		if data.RateLimit.NoIPAllowedList != nil {
+			rate_limitMap["no_ip_allowed_list"] = map[string]interface{}{}
+		}
+		if data.RateLimit.NoPolicies != nil {
+			rate_limitMap["no_policies"] = map[string]interface{}{}
+		}
+		if data.RateLimit.Policies != nil {
+			policiesNestedMap := make(map[string]interface{})
+			rate_limitMap["policies"] = policiesNestedMap
+		}
+		if data.RateLimit.RateLimiter != nil {
+			rate_limiterNestedMap := make(map[string]interface{})
+			if !data.RateLimit.RateLimiter.BurstMultiplier.IsNull() && !data.RateLimit.RateLimiter.BurstMultiplier.IsUnknown() {
+				rate_limiterNestedMap["burst_multiplier"] = data.RateLimit.RateLimiter.BurstMultiplier.ValueInt64()
+			}
+			if !data.RateLimit.RateLimiter.PeriodMultiplier.IsNull() && !data.RateLimit.RateLimiter.PeriodMultiplier.IsUnknown() {
+				rate_limiterNestedMap["period_multiplier"] = data.RateLimit.RateLimiter.PeriodMultiplier.ValueInt64()
+			}
+			if !data.RateLimit.RateLimiter.TotalNumber.IsNull() && !data.RateLimit.RateLimiter.TotalNumber.IsUnknown() {
+				rate_limiterNestedMap["total_number"] = data.RateLimit.RateLimiter.TotalNumber.ValueInt64()
+			}
+			if !data.RateLimit.RateLimiter.Unit.IsNull() && !data.RateLimit.RateLimiter.Unit.IsUnknown() {
+				rate_limiterNestedMap["unit"] = data.RateLimit.RateLimiter.Unit.ValueString()
+			}
+			rate_limitMap["rate_limiter"] = rate_limiterNestedMap
+		}
+		apiResource.Spec["rate_limit"] = rate_limitMap
+	}
+	if data.SensitiveDataPolicy != nil {
+		sensitive_data_policyMap := make(map[string]interface{})
+		if data.SensitiveDataPolicy.SensitiveDataPolicyRef != nil {
+			sensitive_data_policy_refNestedMap := make(map[string]interface{})
+			if !data.SensitiveDataPolicy.SensitiveDataPolicyRef.Name.IsNull() && !data.SensitiveDataPolicy.SensitiveDataPolicyRef.Name.IsUnknown() {
+				sensitive_data_policy_refNestedMap["name"] = data.SensitiveDataPolicy.SensitiveDataPolicyRef.Name.ValueString()
+			}
+			if !data.SensitiveDataPolicy.SensitiveDataPolicyRef.Namespace.IsNull() && !data.SensitiveDataPolicy.SensitiveDataPolicyRef.Namespace.IsUnknown() {
+				sensitive_data_policy_refNestedMap["namespace"] = data.SensitiveDataPolicy.SensitiveDataPolicyRef.Namespace.ValueString()
+			}
+			if !data.SensitiveDataPolicy.SensitiveDataPolicyRef.Tenant.IsNull() && !data.SensitiveDataPolicy.SensitiveDataPolicyRef.Tenant.IsUnknown() {
+				sensitive_data_policy_refNestedMap["tenant"] = data.SensitiveDataPolicy.SensitiveDataPolicyRef.Tenant.ValueString()
+			}
+			sensitive_data_policyMap["sensitive_data_policy_ref"] = sensitive_data_policy_refNestedMap
+		}
+		apiResource.Spec["sensitive_data_policy"] = sensitive_data_policyMap
+	}
+	if data.ServicePoliciesFromNamespace != nil {
+		service_policies_from_namespaceMap := make(map[string]interface{})
+		apiResource.Spec["service_policies_from_namespace"] = service_policies_from_namespaceMap
+	}
+	if data.SlowDdosMitigation != nil {
+		slow_ddos_mitigationMap := make(map[string]interface{})
+		if data.SlowDdosMitigation.DisableRequestTimeout != nil {
+			slow_ddos_mitigationMap["disable_request_timeout"] = map[string]interface{}{}
+		}
+		if !data.SlowDdosMitigation.RequestHeadersTimeout.IsNull() && !data.SlowDdosMitigation.RequestHeadersTimeout.IsUnknown() {
+			slow_ddos_mitigationMap["request_headers_timeout"] = data.SlowDdosMitigation.RequestHeadersTimeout.ValueInt64()
+		}
+		if !data.SlowDdosMitigation.RequestTimeout.IsNull() && !data.SlowDdosMitigation.RequestTimeout.IsUnknown() {
+			slow_ddos_mitigationMap["request_timeout"] = data.SlowDdosMitigation.RequestTimeout.ValueInt64()
+		}
+		apiResource.Spec["slow_ddos_mitigation"] = slow_ddos_mitigationMap
+	}
+	if data.SystemDefaultTimeouts != nil {
+		system_default_timeoutsMap := make(map[string]interface{})
+		apiResource.Spec["system_default_timeouts"] = system_default_timeoutsMap
+	}
+	if len(data.TrustedClients) > 0 {
+		var trusted_clientsList []map[string]interface{}
+		for _, item := range data.TrustedClients {
+			itemMap := make(map[string]interface{})
+			if !item.AsNumber.IsNull() && !item.AsNumber.IsUnknown() {
+				itemMap["as_number"] = item.AsNumber.ValueInt64()
+			}
+			if item.BotSkipProcessing != nil {
+				itemMap["bot_skip_processing"] = map[string]interface{}{}
+			}
+			if !item.ExpirationTimestamp.IsNull() && !item.ExpirationTimestamp.IsUnknown() {
+				itemMap["expiration_timestamp"] = item.ExpirationTimestamp.ValueString()
+			}
+			if item.HTTPHeader != nil {
+				http_headerNestedMap := make(map[string]interface{})
+				itemMap["http_header"] = http_headerNestedMap
+			}
+			if !item.IPPrefix.IsNull() && !item.IPPrefix.IsUnknown() {
+				itemMap["ip_prefix"] = item.IPPrefix.ValueString()
+			}
+			if !item.IPV6Prefix.IsNull() && !item.IPV6Prefix.IsUnknown() {
+				itemMap["ipv6_prefix"] = item.IPV6Prefix.ValueString()
+			}
+			if item.Metadata != nil {
+				metadataNestedMap := make(map[string]interface{})
+				if !item.Metadata.DescriptionSpec.IsNull() && !item.Metadata.DescriptionSpec.IsUnknown() {
+					metadataNestedMap["description"] = item.Metadata.DescriptionSpec.ValueString()
+				}
+				if !item.Metadata.Name.IsNull() && !item.Metadata.Name.IsUnknown() {
+					metadataNestedMap["name"] = item.Metadata.Name.ValueString()
+				}
+				itemMap["metadata"] = metadataNestedMap
+			}
+			if item.SkipProcessing != nil {
+				itemMap["skip_processing"] = map[string]interface{}{}
+			}
+			if !item.UserIdentifier.IsNull() && !item.UserIdentifier.IsUnknown() {
+				itemMap["user_identifier"] = item.UserIdentifier.ValueString()
+			}
+			if item.WAFSkipProcessing != nil {
+				itemMap["waf_skip_processing"] = map[string]interface{}{}
+			}
+			trusted_clientsList = append(trusted_clientsList, itemMap)
+		}
+		apiResource.Spec["trusted_clients"] = trusted_clientsList
+	}
+	if data.UserIDClientIP != nil {
+		user_id_client_ipMap := make(map[string]interface{})
+		apiResource.Spec["user_id_client_ip"] = user_id_client_ipMap
+	}
+	if data.UserIdentification != nil {
+		user_identificationMap := make(map[string]interface{})
+		if !data.UserIdentification.Name.IsNull() && !data.UserIdentification.Name.IsUnknown() {
+			user_identificationMap["name"] = data.UserIdentification.Name.ValueString()
+		}
+		if !data.UserIdentification.Namespace.IsNull() && !data.UserIdentification.Namespace.IsUnknown() {
+			user_identificationMap["namespace"] = data.UserIdentification.Namespace.ValueString()
+		}
+		if !data.UserIdentification.Tenant.IsNull() && !data.UserIdentification.Tenant.IsUnknown() {
+			user_identificationMap["tenant"] = data.UserIdentification.Tenant.ValueString()
+		}
+		apiResource.Spec["user_identification"] = user_identificationMap
+	}
+	if data.WAFExclusion != nil {
+		waf_exclusionMap := make(map[string]interface{})
+		if data.WAFExclusion.WAFExclusionInlineRules != nil {
+			waf_exclusion_inline_rulesNestedMap := make(map[string]interface{})
+			waf_exclusionMap["waf_exclusion_inline_rules"] = waf_exclusion_inline_rulesNestedMap
+		}
+		if data.WAFExclusion.WAFExclusionPolicy != nil {
+			waf_exclusion_policyNestedMap := make(map[string]interface{})
+			if !data.WAFExclusion.WAFExclusionPolicy.Name.IsNull() && !data.WAFExclusion.WAFExclusionPolicy.Name.IsUnknown() {
+				waf_exclusion_policyNestedMap["name"] = data.WAFExclusion.WAFExclusionPolicy.Name.ValueString()
+			}
+			if !data.WAFExclusion.WAFExclusionPolicy.Namespace.IsNull() && !data.WAFExclusion.WAFExclusionPolicy.Namespace.IsUnknown() {
+				waf_exclusion_policyNestedMap["namespace"] = data.WAFExclusion.WAFExclusionPolicy.Namespace.ValueString()
+			}
+			if !data.WAFExclusion.WAFExclusionPolicy.Tenant.IsNull() && !data.WAFExclusion.WAFExclusionPolicy.Tenant.IsUnknown() {
+				waf_exclusion_policyNestedMap["tenant"] = data.WAFExclusion.WAFExclusionPolicy.Tenant.ValueString()
+			}
+			waf_exclusionMap["waf_exclusion_policy"] = waf_exclusion_policyNestedMap
+		}
+		apiResource.Spec["waf_exclusion"] = waf_exclusionMap
+	}
+
+
 	updated, err := r.client.UpdateCDNLoadBalancer(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update CDNLoadBalancer: %s", err))
@@ -8322,6 +11169,8 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -8334,6 +11183,7 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -8360,6 +11210,15 @@ func (r *CDNLoadBalancerResource) Delete(ctx context.Context, req resource.Delet
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "CDNLoadBalancer already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "CDNLoadBalancer delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

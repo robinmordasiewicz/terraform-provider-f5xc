@@ -10,19 +10,14 @@ import (
 
 // InfraprotectFirewallRuleGroup represents a F5XC InfraprotectFirewallRuleGroup
 type InfraprotectFirewallRuleGroup struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     InfraprotectFirewallRuleGroupSpec `json:"spec"`
-}
-
-// InfraprotectFirewallRuleGroupSpec defines the specification for InfraprotectFirewallRuleGroup
-type InfraprotectFirewallRuleGroupSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateInfraprotectFirewallRuleGroup creates a new InfraprotectFirewallRuleGroup
 func (c *Client) CreateInfraprotectFirewallRuleGroup(ctx context.Context, resource *InfraprotectFirewallRuleGroup) (*InfraprotectFirewallRuleGroup, error) {
 	var result InfraprotectFirewallRuleGroup
-	path := fmt.Sprintf("/api/config/namespaces/%s/infraprotect_firewall_rule_groups", resource.Metadata.Namespace)
+	path := fmt.Sprintf("/api/infraprotect/namespaces/%s/infraprotect_firewall_rule_groups", resource.Metadata.Namespace)
 	err := c.Post(ctx, path, resource, &result)
 	return &result, err
 }
@@ -30,7 +25,7 @@ func (c *Client) CreateInfraprotectFirewallRuleGroup(ctx context.Context, resour
 // GetInfraprotectFirewallRuleGroup retrieves a InfraprotectFirewallRuleGroup
 func (c *Client) GetInfraprotectFirewallRuleGroup(ctx context.Context, namespace, name string) (*InfraprotectFirewallRuleGroup, error) {
 	var result InfraprotectFirewallRuleGroup
-	path := fmt.Sprintf("/api/config/namespaces/%s/infraprotect_firewall_rule_groups/%s", namespace, name)
+	path := fmt.Sprintf("/api/infraprotect/namespaces/%s/infraprotect_firewall_rule_groups/%s", namespace, name)
 	err := c.Get(ctx, path, &result)
 	return &result, err
 }
@@ -38,13 +33,13 @@ func (c *Client) GetInfraprotectFirewallRuleGroup(ctx context.Context, namespace
 // UpdateInfraprotectFirewallRuleGroup updates a InfraprotectFirewallRuleGroup
 func (c *Client) UpdateInfraprotectFirewallRuleGroup(ctx context.Context, resource *InfraprotectFirewallRuleGroup) (*InfraprotectFirewallRuleGroup, error) {
 	var result InfraprotectFirewallRuleGroup
-	path := fmt.Sprintf("/api/config/namespaces/%s/infraprotect_firewall_rule_groups/%s", resource.Metadata.Namespace, resource.Metadata.Name)
+	path := fmt.Sprintf("/api/infraprotect/namespaces/%s/infraprotect_firewall_rule_groups/%s", resource.Metadata.Namespace, resource.Metadata.Name)
 	err := c.Put(ctx, path, resource, &result)
 	return &result, err
 }
 
 // DeleteInfraprotectFirewallRuleGroup deletes a InfraprotectFirewallRuleGroup
 func (c *Client) DeleteInfraprotectFirewallRuleGroup(ctx context.Context, namespace, name string) error {
-	path := fmt.Sprintf("/api/config/namespaces/%s/infraprotect_firewall_rule_groups/%s", namespace, name)
+	path := fmt.Sprintf("/api/infraprotect/namespaces/%s/infraprotect_firewall_rule_groups/%s", namespace, name)
 	return c.Delete(ctx, path)
 }

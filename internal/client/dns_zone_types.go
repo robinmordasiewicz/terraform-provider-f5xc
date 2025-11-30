@@ -10,19 +10,14 @@ import (
 
 // DNSZone represents a F5XC DNSZone
 type DNSZone struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     DNSZoneSpec `json:"spec"`
-}
-
-// DNSZoneSpec defines the specification for DNSZone
-type DNSZoneSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateDNSZone creates a new DNSZone
 func (c *Client) CreateDNSZone(ctx context.Context, resource *DNSZone) (*DNSZone, error) {
 	var result DNSZone
-	path := fmt.Sprintf("/api/config/namespaces/%s/dns_zones", resource.Metadata.Namespace)
+	path := fmt.Sprintf("/api/config/dns/namespaces/%s/dns_zones", resource.Metadata.Namespace)
 	err := c.Post(ctx, path, resource, &result)
 	return &result, err
 }
@@ -30,7 +25,7 @@ func (c *Client) CreateDNSZone(ctx context.Context, resource *DNSZone) (*DNSZone
 // GetDNSZone retrieves a DNSZone
 func (c *Client) GetDNSZone(ctx context.Context, namespace, name string) (*DNSZone, error) {
 	var result DNSZone
-	path := fmt.Sprintf("/api/config/namespaces/%s/dns_zones/%s", namespace, name)
+	path := fmt.Sprintf("/api/config/dns/namespaces/%s/dns_zones/%s", namespace, name)
 	err := c.Get(ctx, path, &result)
 	return &result, err
 }
@@ -38,13 +33,13 @@ func (c *Client) GetDNSZone(ctx context.Context, namespace, name string) (*DNSZo
 // UpdateDNSZone updates a DNSZone
 func (c *Client) UpdateDNSZone(ctx context.Context, resource *DNSZone) (*DNSZone, error) {
 	var result DNSZone
-	path := fmt.Sprintf("/api/config/namespaces/%s/dns_zones/%s", resource.Metadata.Namespace, resource.Metadata.Name)
+	path := fmt.Sprintf("/api/config/dns/namespaces/%s/dns_zones/%s", resource.Metadata.Namespace, resource.Metadata.Name)
 	err := c.Put(ctx, path, resource, &result)
 	return &result, err
 }
 
 // DeleteDNSZone deletes a DNSZone
 func (c *Client) DeleteDNSZone(ctx context.Context, namespace, name string) error {
-	path := fmt.Sprintf("/api/config/namespaces/%s/dns_zones/%s", namespace, name)
+	path := fmt.Sprintf("/api/config/dns/namespaces/%s/dns_zones/%s", namespace, name)
 	return c.Delete(ctx, path)
 }

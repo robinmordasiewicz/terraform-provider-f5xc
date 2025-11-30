@@ -10,19 +10,14 @@ import (
 
 // GeoLocationSet represents a F5XC GeoLocationSet
 type GeoLocationSet struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     GeoLocationSetSpec `json:"spec"`
-}
-
-// GeoLocationSetSpec defines the specification for GeoLocationSet
-type GeoLocationSetSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateGeoLocationSet creates a new GeoLocationSet
 func (c *Client) CreateGeoLocationSet(ctx context.Context, resource *GeoLocationSet) (*GeoLocationSet, error) {
 	var result GeoLocationSet
-	path := fmt.Sprintf("/api/config/namespaces/%s/geo_location_sets", resource.Metadata.Namespace)
+	path := fmt.Sprintf("/api/config/dns/namespaces/%s/geo_location_sets", resource.Metadata.Namespace)
 	err := c.Post(ctx, path, resource, &result)
 	return &result, err
 }
@@ -30,7 +25,7 @@ func (c *Client) CreateGeoLocationSet(ctx context.Context, resource *GeoLocation
 // GetGeoLocationSet retrieves a GeoLocationSet
 func (c *Client) GetGeoLocationSet(ctx context.Context, namespace, name string) (*GeoLocationSet, error) {
 	var result GeoLocationSet
-	path := fmt.Sprintf("/api/config/namespaces/%s/geo_location_sets/%s", namespace, name)
+	path := fmt.Sprintf("/api/config/dns/namespaces/%s/geo_location_sets/%s", namespace, name)
 	err := c.Get(ctx, path, &result)
 	return &result, err
 }
@@ -38,13 +33,13 @@ func (c *Client) GetGeoLocationSet(ctx context.Context, namespace, name string) 
 // UpdateGeoLocationSet updates a GeoLocationSet
 func (c *Client) UpdateGeoLocationSet(ctx context.Context, resource *GeoLocationSet) (*GeoLocationSet, error) {
 	var result GeoLocationSet
-	path := fmt.Sprintf("/api/config/namespaces/%s/geo_location_sets/%s", resource.Metadata.Namespace, resource.Metadata.Name)
+	path := fmt.Sprintf("/api/config/dns/namespaces/%s/geo_location_sets/%s", resource.Metadata.Namespace, resource.Metadata.Name)
 	err := c.Put(ctx, path, resource, &result)
 	return &result, err
 }
 
 // DeleteGeoLocationSet deletes a GeoLocationSet
 func (c *Client) DeleteGeoLocationSet(ctx context.Context, namespace, name string) error {
-	path := fmt.Sprintf("/api/config/namespaces/%s/geo_location_sets/%s", namespace, name)
+	path := fmt.Sprintf("/api/config/dns/namespaces/%s/geo_location_sets/%s", namespace, name)
 	return c.Delete(ctx, path)
 }

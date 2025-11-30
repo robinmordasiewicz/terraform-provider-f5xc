@@ -10,13 +10,8 @@ import (
 
 // AlertReceiver represents a F5XC AlertReceiver
 type AlertReceiver struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     AlertReceiverSpec `json:"spec"`
-}
-
-// AlertReceiverSpec defines the specification for AlertReceiver
-type AlertReceiverSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateAlertReceiver creates a new AlertReceiver

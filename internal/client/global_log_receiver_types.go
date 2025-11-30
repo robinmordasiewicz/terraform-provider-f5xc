@@ -10,13 +10,8 @@ import (
 
 // GlobalLogReceiver represents a F5XC GlobalLogReceiver
 type GlobalLogReceiver struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     GlobalLogReceiverSpec `json:"spec"`
-}
-
-// GlobalLogReceiverSpec defines the specification for GlobalLogReceiver
-type GlobalLogReceiverSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateGlobalLogReceiver creates a new GlobalLogReceiver

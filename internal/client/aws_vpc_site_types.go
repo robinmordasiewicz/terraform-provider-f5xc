@@ -10,13 +10,8 @@ import (
 
 // AWSVPCSite represents a F5XC AWSVPCSite
 type AWSVPCSite struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     AWSVPCSiteSpec `json:"spec"`
-}
-
-// AWSVPCSiteSpec defines the specification for AWSVPCSite
-type AWSVPCSiteSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateAWSVPCSite creates a new AWSVPCSite

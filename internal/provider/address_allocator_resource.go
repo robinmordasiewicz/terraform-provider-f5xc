@@ -64,8 +64,8 @@ type AddressAllocatorResourceModel struct {
 	Description types.String `tfsdk:"description"`
 	Disable types.Bool `tfsdk:"disable"`
 	Labels types.Map `tfsdk:"labels"`
-	Mode types.String `tfsdk:"mode"`
 	ID types.String `tfsdk:"id"`
+	Mode types.String `tfsdk:"mode"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
 	AddressAllocationScheme *AddressAllocatorAddressAllocationSchemeModel `tfsdk:"address_allocation_scheme"`
 }
@@ -122,12 +122,16 @@ func (r *AddressAllocatorResource) Schema(ctx context.Context, req resource.Sche
 				Optional: true,
 				ElementType: types.StringType,
 			},
+			"id": schema.StringAttribute{
+				MarkdownDescription: "Unique identifier for the resource.",
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
 			"mode": schema.StringAttribute{
 				MarkdownDescription: "Allocator Mode. Mode of the address allocator Address allocator is for VERs within the local cluster or site Allocation is per site and then per node. Possible values are `LOCAL`, `GLOBAL_PER_SITE_NODE`. Defaults to `LOCAL`.",
 				Optional: true,
-			},
-			"id": schema.StringAttribute{
-				MarkdownDescription: "Unique identifier for the resource.",
 				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
@@ -281,7 +285,7 @@ func (r *AddressAllocatorResource) Create(ctx context.Context, req resource.Crea
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.AddressAllocatorSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -306,6 +310,32 @@ func (r *AddressAllocatorResource) Create(ctx context.Context, req resource.Crea
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.AddressAllocationScheme != nil {
+		address_allocation_schemeMap := make(map[string]interface{})
+		if !data.AddressAllocationScheme.AllocationUnit.IsNull() && !data.AddressAllocationScheme.AllocationUnit.IsUnknown() {
+			address_allocation_schemeMap["allocation_unit"] = data.AddressAllocationScheme.AllocationUnit.ValueInt64()
+		}
+		if !data.AddressAllocationScheme.LocalInterfaceAddressOffset.IsNull() && !data.AddressAllocationScheme.LocalInterfaceAddressOffset.IsUnknown() {
+			address_allocation_schemeMap["local_interface_address_offset"] = data.AddressAllocationScheme.LocalInterfaceAddressOffset.ValueInt64()
+		}
+		if !data.AddressAllocationScheme.LocalInterfaceAddressType.IsNull() && !data.AddressAllocationScheme.LocalInterfaceAddressType.IsUnknown() {
+			address_allocation_schemeMap["local_interface_address_type"] = data.AddressAllocationScheme.LocalInterfaceAddressType.ValueString()
+		}
+		apiResource.Spec["address_allocation_scheme"] = address_allocation_schemeMap
+	}
+	if !data.AddressPool.IsNull() && !data.AddressPool.IsUnknown() {
+		var address_poolList []string
+		resp.Diagnostics.Append(data.AddressPool.ElementsAs(ctx, &address_poolList, false)...)
+		if !resp.Diagnostics.HasError() {
+			apiResource.Spec["address_pool"] = address_poolList
+		}
+	}
+	if !data.Mode.IsNull() && !data.Mode.IsUnknown() {
+		apiResource.Spec["mode"] = data.Mode.ValueString()
+	}
+
+
 	created, err := r.client.CreateAddressAllocator(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create AddressAllocator: %s", err))
@@ -314,8 +344,17 @@ func (r *AddressAllocatorResource) Create(ctx context.Context, req resource.Crea
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+	if v, ok := created.Spec["mode"].(string); ok && v != "" {
+		data.Mode = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created AddressAllocator resource")
@@ -394,9 +433,67 @@ func (r *AddressAllocatorResource) Read(ctx context.Context, req resource.ReadRe
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if blockData, ok := apiResource.Spec["address_allocation_scheme"].(map[string]interface{}); ok && (isImport || data.AddressAllocationScheme != nil) {
+		data.AddressAllocationScheme = &AddressAllocatorAddressAllocationSchemeModel{
+			AllocationUnit: func() types.Int64 {
+				if v, ok := blockData["allocation_unit"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			LocalInterfaceAddressOffset: func() types.Int64 {
+				if v, ok := blockData["local_interface_address_offset"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			LocalInterfaceAddressType: func() types.String {
+				if v, ok := blockData["local_interface_address_type"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if v, ok := apiResource.Spec["address_pool"].([]interface{}); ok && len(v) > 0 {
+		var address_poolList []string
+		for _, item := range v {
+			if s, ok := item.(string); ok {
+				address_poolList = append(address_poolList, s)
+			}
+		}
+		listVal, diags := types.ListValueFrom(ctx, types.StringType, address_poolList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.AddressPool = listVal
+		}
+	} else {
+		data.AddressPool = types.ListNull(types.StringType)
+	}
+	if v, ok := apiResource.Spec["mode"].(string); ok && v != "" {
+		data.Mode = types.StringValue(v)
+	} else {
+		data.Mode = types.StringNull()
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -422,7 +519,7 @@ func (r *AddressAllocatorResource) Update(ctx context.Context, req resource.Upda
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.AddressAllocatorSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -447,6 +544,32 @@ func (r *AddressAllocatorResource) Update(ctx context.Context, req resource.Upda
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.AddressAllocationScheme != nil {
+		address_allocation_schemeMap := make(map[string]interface{})
+		if !data.AddressAllocationScheme.AllocationUnit.IsNull() && !data.AddressAllocationScheme.AllocationUnit.IsUnknown() {
+			address_allocation_schemeMap["allocation_unit"] = data.AddressAllocationScheme.AllocationUnit.ValueInt64()
+		}
+		if !data.AddressAllocationScheme.LocalInterfaceAddressOffset.IsNull() && !data.AddressAllocationScheme.LocalInterfaceAddressOffset.IsUnknown() {
+			address_allocation_schemeMap["local_interface_address_offset"] = data.AddressAllocationScheme.LocalInterfaceAddressOffset.ValueInt64()
+		}
+		if !data.AddressAllocationScheme.LocalInterfaceAddressType.IsNull() && !data.AddressAllocationScheme.LocalInterfaceAddressType.IsUnknown() {
+			address_allocation_schemeMap["local_interface_address_type"] = data.AddressAllocationScheme.LocalInterfaceAddressType.ValueString()
+		}
+		apiResource.Spec["address_allocation_scheme"] = address_allocation_schemeMap
+	}
+	if !data.AddressPool.IsNull() && !data.AddressPool.IsUnknown() {
+		var address_poolList []string
+		resp.Diagnostics.Append(data.AddressPool.ElementsAs(ctx, &address_poolList, false)...)
+		if !resp.Diagnostics.HasError() {
+			apiResource.Spec["address_pool"] = address_poolList
+		}
+	}
+	if !data.Mode.IsNull() && !data.Mode.IsUnknown() {
+		apiResource.Spec["mode"] = data.Mode.ValueString()
+	}
+
+
 	updated, err := r.client.UpdateAddressAllocator(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update AddressAllocator: %s", err))
@@ -455,6 +578,12 @@ func (r *AddressAllocatorResource) Update(ctx context.Context, req resource.Upda
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
+	if v, ok := updated.Spec["mode"].(string); ok && v != "" {
+		data.Mode = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -467,6 +596,7 @@ func (r *AddressAllocatorResource) Update(ctx context.Context, req resource.Upda
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -493,6 +623,15 @@ func (r *AddressAllocatorResource) Delete(ctx context.Context, req resource.Dele
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "AddressAllocator already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "AddressAllocator delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

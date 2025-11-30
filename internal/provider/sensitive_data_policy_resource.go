@@ -296,7 +296,7 @@ func (r *SensitiveDataPolicyResource) Create(ctx context.Context, req resource.C
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.SensitiveDataPolicySpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -321,6 +321,44 @@ func (r *SensitiveDataPolicyResource) Create(ctx context.Context, req resource.C
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if !data.Compliances.IsNull() && !data.Compliances.IsUnknown() {
+		var compliancesList []string
+		resp.Diagnostics.Append(data.Compliances.ElementsAs(ctx, &compliancesList, false)...)
+		if !resp.Diagnostics.HasError() {
+			apiResource.Spec["compliances"] = compliancesList
+		}
+	}
+	if len(data.CustomDataTypes) > 0 {
+		var custom_data_typesList []map[string]interface{}
+		for _, item := range data.CustomDataTypes {
+			itemMap := make(map[string]interface{})
+			if item.CustomDataTypeRef != nil {
+				custom_data_type_refNestedMap := make(map[string]interface{})
+				if !item.CustomDataTypeRef.Name.IsNull() && !item.CustomDataTypeRef.Name.IsUnknown() {
+					custom_data_type_refNestedMap["name"] = item.CustomDataTypeRef.Name.ValueString()
+				}
+				if !item.CustomDataTypeRef.Namespace.IsNull() && !item.CustomDataTypeRef.Namespace.IsUnknown() {
+					custom_data_type_refNestedMap["namespace"] = item.CustomDataTypeRef.Namespace.ValueString()
+				}
+				if !item.CustomDataTypeRef.Tenant.IsNull() && !item.CustomDataTypeRef.Tenant.IsUnknown() {
+					custom_data_type_refNestedMap["tenant"] = item.CustomDataTypeRef.Tenant.ValueString()
+				}
+				itemMap["custom_data_type_ref"] = custom_data_type_refNestedMap
+			}
+			custom_data_typesList = append(custom_data_typesList, itemMap)
+		}
+		apiResource.Spec["custom_data_types"] = custom_data_typesList
+	}
+	if !data.DisabledPredefinedDataTypes.IsNull() && !data.DisabledPredefinedDataTypes.IsUnknown() {
+		var disabled_predefined_data_typesList []string
+		resp.Diagnostics.Append(data.DisabledPredefinedDataTypes.ElementsAs(ctx, &disabled_predefined_data_typesList, false)...)
+		if !resp.Diagnostics.HasError() {
+			apiResource.Spec["disabled_predefined_data_types"] = disabled_predefined_data_typesList
+		}
+	}
+
+
 	created, err := r.client.CreateSensitiveDataPolicy(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create SensitiveDataPolicy: %s", err))
@@ -329,8 +367,13 @@ func (r *SensitiveDataPolicyResource) Create(ctx context.Context, req resource.C
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created SensitiveDataPolicy resource")
@@ -409,9 +452,90 @@ func (r *SensitiveDataPolicyResource) Read(ctx context.Context, req resource.Rea
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if v, ok := apiResource.Spec["compliances"].([]interface{}); ok && len(v) > 0 {
+		var compliancesList []string
+		for _, item := range v {
+			if s, ok := item.(string); ok {
+				compliancesList = append(compliancesList, s)
+			}
+		}
+		listVal, diags := types.ListValueFrom(ctx, types.StringType, compliancesList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Compliances = listVal
+		}
+	} else {
+		data.Compliances = types.ListNull(types.StringType)
+	}
+	if listData, ok := apiResource.Spec["custom_data_types"].([]interface{}); ok && len(listData) > 0 {
+		var custom_data_typesList []SensitiveDataPolicyCustomDataTypesModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				custom_data_typesList = append(custom_data_typesList, SensitiveDataPolicyCustomDataTypesModel{
+					CustomDataTypeRef: func() *SensitiveDataPolicyCustomDataTypesCustomDataTypeRefModel {
+						if nestedMap, ok := itemMap["custom_data_type_ref"].(map[string]interface{}); ok {
+							return &SensitiveDataPolicyCustomDataTypesCustomDataTypeRefModel{
+								Name: func() types.String {
+									if v, ok := nestedMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := nestedMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := nestedMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+				})
+			}
+		}
+		data.CustomDataTypes = custom_data_typesList
+	}
+	if v, ok := apiResource.Spec["disabled_predefined_data_types"].([]interface{}); ok && len(v) > 0 {
+		var disabled_predefined_data_typesList []string
+		for _, item := range v {
+			if s, ok := item.(string); ok {
+				disabled_predefined_data_typesList = append(disabled_predefined_data_typesList, s)
+			}
+		}
+		listVal, diags := types.ListValueFrom(ctx, types.StringType, disabled_predefined_data_typesList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.DisabledPredefinedDataTypes = listVal
+		}
+	} else {
+		data.DisabledPredefinedDataTypes = types.ListNull(types.StringType)
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -437,7 +561,7 @@ func (r *SensitiveDataPolicyResource) Update(ctx context.Context, req resource.U
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.SensitiveDataPolicySpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -462,6 +586,44 @@ func (r *SensitiveDataPolicyResource) Update(ctx context.Context, req resource.U
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if !data.Compliances.IsNull() && !data.Compliances.IsUnknown() {
+		var compliancesList []string
+		resp.Diagnostics.Append(data.Compliances.ElementsAs(ctx, &compliancesList, false)...)
+		if !resp.Diagnostics.HasError() {
+			apiResource.Spec["compliances"] = compliancesList
+		}
+	}
+	if len(data.CustomDataTypes) > 0 {
+		var custom_data_typesList []map[string]interface{}
+		for _, item := range data.CustomDataTypes {
+			itemMap := make(map[string]interface{})
+			if item.CustomDataTypeRef != nil {
+				custom_data_type_refNestedMap := make(map[string]interface{})
+				if !item.CustomDataTypeRef.Name.IsNull() && !item.CustomDataTypeRef.Name.IsUnknown() {
+					custom_data_type_refNestedMap["name"] = item.CustomDataTypeRef.Name.ValueString()
+				}
+				if !item.CustomDataTypeRef.Namespace.IsNull() && !item.CustomDataTypeRef.Namespace.IsUnknown() {
+					custom_data_type_refNestedMap["namespace"] = item.CustomDataTypeRef.Namespace.ValueString()
+				}
+				if !item.CustomDataTypeRef.Tenant.IsNull() && !item.CustomDataTypeRef.Tenant.IsUnknown() {
+					custom_data_type_refNestedMap["tenant"] = item.CustomDataTypeRef.Tenant.ValueString()
+				}
+				itemMap["custom_data_type_ref"] = custom_data_type_refNestedMap
+			}
+			custom_data_typesList = append(custom_data_typesList, itemMap)
+		}
+		apiResource.Spec["custom_data_types"] = custom_data_typesList
+	}
+	if !data.DisabledPredefinedDataTypes.IsNull() && !data.DisabledPredefinedDataTypes.IsUnknown() {
+		var disabled_predefined_data_typesList []string
+		resp.Diagnostics.Append(data.DisabledPredefinedDataTypes.ElementsAs(ctx, &disabled_predefined_data_typesList, false)...)
+		if !resp.Diagnostics.HasError() {
+			apiResource.Spec["disabled_predefined_data_types"] = disabled_predefined_data_typesList
+		}
+	}
+
+
 	updated, err := r.client.UpdateSensitiveDataPolicy(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update SensitiveDataPolicy: %s", err))
@@ -470,6 +632,8 @@ func (r *SensitiveDataPolicyResource) Update(ctx context.Context, req resource.U
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -482,6 +646,7 @@ func (r *SensitiveDataPolicyResource) Update(ctx context.Context, req resource.U
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -508,6 +673,15 @@ func (r *SensitiveDataPolicyResource) Delete(ctx context.Context, req resource.D
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "SensitiveDataPolicy already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "SensitiveDataPolicy delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

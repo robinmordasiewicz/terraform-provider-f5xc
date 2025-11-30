@@ -49,13 +49,13 @@ type BigIPIruleResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Annotations types.Map `tfsdk:"annotations"`
-	Code types.String `tfsdk:"code"`
 	Description types.String `tfsdk:"description"`
 	Disable types.Bool `tfsdk:"disable"`
-	IruleName types.String `tfsdk:"irule_name"`
 	Labels types.Map `tfsdk:"labels"`
-	Source types.String `tfsdk:"source"`
 	ID types.String `tfsdk:"id"`
+	Code types.String `tfsdk:"code"`
+	IruleName types.String `tfsdk:"irule_name"`
+	Source types.String `tfsdk:"source"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
 }
 
@@ -93,10 +93,6 @@ func (r *BigIPIruleResource) Schema(ctx context.Context, req resource.SchemaRequ
 				Optional: true,
 				ElementType: types.StringType,
 			},
-			"code": schema.StringAttribute{
-				MarkdownDescription: "iRule code. iRule code content, this content will be base64 encoded for preserving formating",
-				Optional: true,
-			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
 				Optional: true,
@@ -105,21 +101,37 @@ func (r *BigIPIruleResource) Schema(ctx context.Context, req resource.SchemaRequ
 				MarkdownDescription: "A value of true will administratively disable the object.",
 				Optional: true,
 			},
-			"irule_name": schema.StringAttribute{
-				MarkdownDescription: "iRule name. iRule name",
-				Optional: true,
-			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
+			"id": schema.StringAttribute{
+				MarkdownDescription: "Unique identifier for the resource.",
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"code": schema.StringAttribute{
+				MarkdownDescription: "iRule code. iRule code content, this content will be base64 encoded for preserving formating",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"irule_name": schema.StringAttribute{
+				MarkdownDescription: "iRule name. iRule name",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
 			"source": schema.StringAttribute{
 				MarkdownDescription: "iRule source. iRule generation/updation source",
 				Optional: true,
-			},
-			"id": schema.StringAttribute{
-				MarkdownDescription: "Unique identifier for the resource.",
 				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
@@ -255,7 +267,7 @@ func (r *BigIPIruleResource) Create(ctx context.Context, req resource.CreateRequ
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.BigIPIruleSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -280,6 +292,18 @@ func (r *BigIPIruleResource) Create(ctx context.Context, req resource.CreateRequ
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if !data.Code.IsNull() && !data.Code.IsUnknown() {
+		apiResource.Spec["code"] = data.Code.ValueString()
+	}
+	if !data.IruleName.IsNull() && !data.IruleName.IsUnknown() {
+		apiResource.Spec["irule_name"] = data.IruleName.ValueString()
+	}
+	if !data.Source.IsNull() && !data.Source.IsUnknown() {
+		apiResource.Spec["source"] = data.Source.ValueString()
+	}
+
+
 	created, err := r.client.CreateBigIPIrule(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create BigIPIrule: %s", err))
@@ -288,8 +312,25 @@ func (r *BigIPIruleResource) Create(ctx context.Context, req resource.CreateRequ
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+	if v, ok := created.Spec["code"].(string); ok && v != "" {
+		data.Code = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["irule_name"].(string); ok && v != "" {
+		data.IruleName = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["source"].(string); ok && v != "" {
+		data.Source = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created BigIPIrule resource")
@@ -368,9 +409,40 @@ func (r *BigIPIruleResource) Read(ctx context.Context, req resource.ReadRequest,
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if v, ok := apiResource.Spec["code"].(string); ok && v != "" {
+		data.Code = types.StringValue(v)
+	} else {
+		data.Code = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["irule_name"].(string); ok && v != "" {
+		data.IruleName = types.StringValue(v)
+	} else {
+		data.IruleName = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["source"].(string); ok && v != "" {
+		data.Source = types.StringValue(v)
+	} else {
+		data.Source = types.StringNull()
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -396,7 +468,7 @@ func (r *BigIPIruleResource) Update(ctx context.Context, req resource.UpdateRequ
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.BigIPIruleSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -421,6 +493,18 @@ func (r *BigIPIruleResource) Update(ctx context.Context, req resource.UpdateRequ
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if !data.Code.IsNull() && !data.Code.IsUnknown() {
+		apiResource.Spec["code"] = data.Code.ValueString()
+	}
+	if !data.IruleName.IsNull() && !data.IruleName.IsUnknown() {
+		apiResource.Spec["irule_name"] = data.IruleName.ValueString()
+	}
+	if !data.Source.IsNull() && !data.Source.IsUnknown() {
+		apiResource.Spec["source"] = data.Source.ValueString()
+	}
+
+
 	updated, err := r.client.UpdateBigIPIrule(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update BigIPIrule: %s", err))
@@ -429,6 +513,20 @@ func (r *BigIPIruleResource) Update(ctx context.Context, req resource.UpdateRequ
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
+	if v, ok := updated.Spec["code"].(string); ok && v != "" {
+		data.Code = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["irule_name"].(string); ok && v != "" {
+		data.IruleName = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["source"].(string); ok && v != "" {
+		data.Source = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -441,6 +539,7 @@ func (r *BigIPIruleResource) Update(ctx context.Context, req resource.UpdateRequ
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -467,6 +566,15 @@ func (r *BigIPIruleResource) Delete(ctx context.Context, req resource.DeleteRequ
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "BigIPIrule already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "BigIPIrule delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

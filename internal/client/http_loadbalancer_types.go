@@ -10,13 +10,8 @@ import (
 
 // HTTPLoadBalancer represents a F5XC HTTPLoadBalancer
 type HTTPLoadBalancer struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     HTTPLoadBalancerSpec `json:"spec"`
-}
-
-// HTTPLoadBalancerSpec defines the specification for HTTPLoadBalancer
-type HTTPLoadBalancerSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateHTTPLoadBalancer creates a new HTTPLoadBalancer

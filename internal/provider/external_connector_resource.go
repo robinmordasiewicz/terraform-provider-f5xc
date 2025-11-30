@@ -553,7 +553,7 @@ func (r *ExternalConnectorResource) Create(ctx context.Context, req resource.Cre
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.ExternalConnectorSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -578,6 +578,43 @@ func (r *ExternalConnectorResource) Create(ctx context.Context, req resource.Cre
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.CeSiteReference != nil {
+		ce_site_referenceMap := make(map[string]interface{})
+		if !data.CeSiteReference.Name.IsNull() && !data.CeSiteReference.Name.IsUnknown() {
+			ce_site_referenceMap["name"] = data.CeSiteReference.Name.ValueString()
+		}
+		if !data.CeSiteReference.Namespace.IsNull() && !data.CeSiteReference.Namespace.IsUnknown() {
+			ce_site_referenceMap["namespace"] = data.CeSiteReference.Namespace.ValueString()
+		}
+		if !data.CeSiteReference.Tenant.IsNull() && !data.CeSiteReference.Tenant.IsUnknown() {
+			ce_site_referenceMap["tenant"] = data.CeSiteReference.Tenant.ValueString()
+		}
+		apiResource.Spec["ce_site_reference"] = ce_site_referenceMap
+	}
+	if data.Ipsec != nil {
+		ipsecMap := make(map[string]interface{})
+		if data.Ipsec.IKEParameters != nil {
+			ike_parametersNestedMap := make(map[string]interface{})
+			if !data.Ipsec.IKEParameters.RmHostname.IsNull() && !data.Ipsec.IKEParameters.RmHostname.IsUnknown() {
+				ike_parametersNestedMap["rm_hostname"] = data.Ipsec.IKEParameters.RmHostname.ValueString()
+			}
+			ipsecMap["ike_parameters"] = ike_parametersNestedMap
+		}
+		if data.Ipsec.IpsecTunnelParameters != nil {
+			ipsec_tunnel_parametersNestedMap := make(map[string]interface{})
+			if !data.Ipsec.IpsecTunnelParameters.Psk.IsNull() && !data.Ipsec.IpsecTunnelParameters.Psk.IsUnknown() {
+				ipsec_tunnel_parametersNestedMap["psk"] = data.Ipsec.IpsecTunnelParameters.Psk.ValueString()
+			}
+			if !data.Ipsec.IpsecTunnelParameters.TunnelMtu.IsNull() && !data.Ipsec.IpsecTunnelParameters.TunnelMtu.IsUnknown() {
+				ipsec_tunnel_parametersNestedMap["tunnel_mtu"] = data.Ipsec.IpsecTunnelParameters.TunnelMtu.ValueInt64()
+			}
+			ipsecMap["ipsec_tunnel_parameters"] = ipsec_tunnel_parametersNestedMap
+		}
+		apiResource.Spec["ipsec"] = ipsecMap
+	}
+
+
 	created, err := r.client.CreateExternalConnector(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create ExternalConnector: %s", err))
@@ -586,8 +623,13 @@ func (r *ExternalConnectorResource) Create(ctx context.Context, req resource.Cre
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created ExternalConnector resource")
@@ -666,9 +708,52 @@ func (r *ExternalConnectorResource) Read(ctx context.Context, req resource.ReadR
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if blockData, ok := apiResource.Spec["ce_site_reference"].(map[string]interface{}); ok && (isImport || data.CeSiteReference != nil) {
+		data.CeSiteReference = &ExternalConnectorCeSiteReferenceModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["ipsec"].(map[string]interface{}); ok && isImport && data.Ipsec == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Ipsec = &ExternalConnectorIpsecModel{}
+	}
+	// Normal Read: preserve existing state value
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -694,7 +779,7 @@ func (r *ExternalConnectorResource) Update(ctx context.Context, req resource.Upd
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.ExternalConnectorSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -719,6 +804,43 @@ func (r *ExternalConnectorResource) Update(ctx context.Context, req resource.Upd
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.CeSiteReference != nil {
+		ce_site_referenceMap := make(map[string]interface{})
+		if !data.CeSiteReference.Name.IsNull() && !data.CeSiteReference.Name.IsUnknown() {
+			ce_site_referenceMap["name"] = data.CeSiteReference.Name.ValueString()
+		}
+		if !data.CeSiteReference.Namespace.IsNull() && !data.CeSiteReference.Namespace.IsUnknown() {
+			ce_site_referenceMap["namespace"] = data.CeSiteReference.Namespace.ValueString()
+		}
+		if !data.CeSiteReference.Tenant.IsNull() && !data.CeSiteReference.Tenant.IsUnknown() {
+			ce_site_referenceMap["tenant"] = data.CeSiteReference.Tenant.ValueString()
+		}
+		apiResource.Spec["ce_site_reference"] = ce_site_referenceMap
+	}
+	if data.Ipsec != nil {
+		ipsecMap := make(map[string]interface{})
+		if data.Ipsec.IKEParameters != nil {
+			ike_parametersNestedMap := make(map[string]interface{})
+			if !data.Ipsec.IKEParameters.RmHostname.IsNull() && !data.Ipsec.IKEParameters.RmHostname.IsUnknown() {
+				ike_parametersNestedMap["rm_hostname"] = data.Ipsec.IKEParameters.RmHostname.ValueString()
+			}
+			ipsecMap["ike_parameters"] = ike_parametersNestedMap
+		}
+		if data.Ipsec.IpsecTunnelParameters != nil {
+			ipsec_tunnel_parametersNestedMap := make(map[string]interface{})
+			if !data.Ipsec.IpsecTunnelParameters.Psk.IsNull() && !data.Ipsec.IpsecTunnelParameters.Psk.IsUnknown() {
+				ipsec_tunnel_parametersNestedMap["psk"] = data.Ipsec.IpsecTunnelParameters.Psk.ValueString()
+			}
+			if !data.Ipsec.IpsecTunnelParameters.TunnelMtu.IsNull() && !data.Ipsec.IpsecTunnelParameters.TunnelMtu.IsUnknown() {
+				ipsec_tunnel_parametersNestedMap["tunnel_mtu"] = data.Ipsec.IpsecTunnelParameters.TunnelMtu.ValueInt64()
+			}
+			ipsecMap["ipsec_tunnel_parameters"] = ipsec_tunnel_parametersNestedMap
+		}
+		apiResource.Spec["ipsec"] = ipsecMap
+	}
+
+
 	updated, err := r.client.UpdateExternalConnector(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update ExternalConnector: %s", err))
@@ -727,6 +849,8 @@ func (r *ExternalConnectorResource) Update(ctx context.Context, req resource.Upd
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -739,6 +863,7 @@ func (r *ExternalConnectorResource) Update(ctx context.Context, req resource.Upd
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -765,6 +890,15 @@ func (r *ExternalConnectorResource) Delete(ctx context.Context, req resource.Del
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "ExternalConnector already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "ExternalConnector delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

@@ -10,13 +10,8 @@ import (
 
 // ForwardProxyPolicy represents a F5XC ForwardProxyPolicy
 type ForwardProxyPolicy struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     ForwardProxyPolicySpec `json:"spec"`
-}
-
-// ForwardProxyPolicySpec defines the specification for ForwardProxyPolicy
-type ForwardProxyPolicySpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateForwardProxyPolicy creates a new ForwardProxyPolicy

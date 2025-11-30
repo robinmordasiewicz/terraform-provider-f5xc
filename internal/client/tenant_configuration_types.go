@@ -10,13 +10,8 @@ import (
 
 // TenantConfiguration represents a F5XC TenantConfiguration
 type TenantConfiguration struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     TenantConfigurationSpec `json:"spec"`
-}
-
-// TenantConfigurationSpec defines the specification for TenantConfiguration
-type TenantConfigurationSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateTenantConfiguration creates a new TenantConfiguration

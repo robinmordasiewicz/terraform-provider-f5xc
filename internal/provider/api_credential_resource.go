@@ -52,11 +52,11 @@ type APICredentialResourceModel struct {
 	Description types.String `tfsdk:"description"`
 	Disable types.Bool `tfsdk:"disable"`
 	Labels types.Map `tfsdk:"labels"`
+	ID types.String `tfsdk:"id"`
 	Password types.String `tfsdk:"password"`
 	Type types.String `tfsdk:"type"`
 	VirtualK8SName types.String `tfsdk:"virtual_k8s_name"`
 	VirtualK8SNamespace types.String `tfsdk:"virtual_k8s_namespace"`
-	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
 }
 
@@ -107,24 +107,40 @@ func (r *APICredentialResource) Schema(ctx context.Context, req resource.SchemaR
 				Optional: true,
 				ElementType: types.StringType,
 			},
+			"id": schema.StringAttribute{
+				MarkdownDescription: "Unique identifier for the resource.",
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
 			"password": schema.StringAttribute{
 				MarkdownDescription: "Password. Password is used for generating an API certificate P12 bundle user can use to protect access to it. this password will not be saved/persisted anywhere in the system. Applicable for credential type API_CERTIFICATE Users have to use this password when they use the certificate, e.g. in curl or while adding to key chain.",
 				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
 			},
 			"type": schema.StringAttribute{
 				MarkdownDescription: "Credential Type. Types of API credential given when requesting credentials from volterra F5XC user certificate to access F5XC public API using mTLS using self credential (my credential) Kubernetes config file to access Virtual Kubernetes API in Volterra using self credential (my credential) API token to access F5XC public API using self credential (my credential) API token for service credentials using service user credential (service credential) API certificate for service credentials using service user credential (service credential) Service Credential kubeconfig using service user credential (service credential) Kubeconfig for accessing Site via Global Controller using self credential (my credential) Token for the SCIM public APIs used to sync users and groups with the F5XC platform. External identity provider's SCIM client can use this token as Bearer token with Authorization header Service Credential Kubeconfig for accessing Site via Global Controller using service user credential (service credential). Possible values are `API_CERTIFICATE`, `KUBE_CONFIG`, `API_TOKEN`, `SERVICE_API_TOKEN`, `SERVICE_API_CERTIFICATE`, `SERVICE_KUBE_CONFIG`, `SITE_GLOBAL_KUBE_CONFIG`, `SCIM_API_TOKEN`, `SERVICE_SITE_GLOBAL_KUBE_CONFIG`. Defaults to `API_CERTIFICATE`.",
 				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
 			},
 			"virtual_k8s_name": schema.StringAttribute{
 				MarkdownDescription: "vK8s Cluster. Name of virtual K8s cluster. Applicable for KUBE_CONFIG.",
 				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
 			},
 			"virtual_k8s_namespace": schema.StringAttribute{
 				MarkdownDescription: "vK8s Namespace. Namespace of virtual K8s cluster. Applicable for KUBE_CONFIG.",
 				Optional: true,
-			},
-			"id": schema.StringAttribute{
-				MarkdownDescription: "Unique identifier for the resource.",
 				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
@@ -260,7 +276,7 @@ func (r *APICredentialResource) Create(ctx context.Context, req resource.CreateR
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.APICredentialSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -285,6 +301,21 @@ func (r *APICredentialResource) Create(ctx context.Context, req resource.CreateR
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if !data.Password.IsNull() && !data.Password.IsUnknown() {
+		apiResource.Spec["password"] = data.Password.ValueString()
+	}
+	if !data.Type.IsNull() && !data.Type.IsUnknown() {
+		apiResource.Spec["type"] = data.Type.ValueString()
+	}
+	if !data.VirtualK8SName.IsNull() && !data.VirtualK8SName.IsUnknown() {
+		apiResource.Spec["virtual_k8s_name"] = data.VirtualK8SName.ValueString()
+	}
+	if !data.VirtualK8SNamespace.IsNull() && !data.VirtualK8SNamespace.IsUnknown() {
+		apiResource.Spec["virtual_k8s_namespace"] = data.VirtualK8SNamespace.ValueString()
+	}
+
+
 	created, err := r.client.CreateAPICredential(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create APICredential: %s", err))
@@ -293,8 +324,29 @@ func (r *APICredentialResource) Create(ctx context.Context, req resource.CreateR
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+	if v, ok := created.Spec["password"].(string); ok && v != "" {
+		data.Password = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["type"].(string); ok && v != "" {
+		data.Type = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["virtual_k8s_name"].(string); ok && v != "" {
+		data.VirtualK8SName = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["virtual_k8s_namespace"].(string); ok && v != "" {
+		data.VirtualK8SNamespace = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created APICredential resource")
@@ -373,9 +425,45 @@ func (r *APICredentialResource) Read(ctx context.Context, req resource.ReadReque
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if v, ok := apiResource.Spec["password"].(string); ok && v != "" {
+		data.Password = types.StringValue(v)
+	} else {
+		data.Password = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["type"].(string); ok && v != "" {
+		data.Type = types.StringValue(v)
+	} else {
+		data.Type = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["virtual_k8s_name"].(string); ok && v != "" {
+		data.VirtualK8SName = types.StringValue(v)
+	} else {
+		data.VirtualK8SName = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["virtual_k8s_namespace"].(string); ok && v != "" {
+		data.VirtualK8SNamespace = types.StringValue(v)
+	} else {
+		data.VirtualK8SNamespace = types.StringNull()
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -401,7 +489,7 @@ func (r *APICredentialResource) Update(ctx context.Context, req resource.UpdateR
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.APICredentialSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -426,6 +514,21 @@ func (r *APICredentialResource) Update(ctx context.Context, req resource.UpdateR
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if !data.Password.IsNull() && !data.Password.IsUnknown() {
+		apiResource.Spec["password"] = data.Password.ValueString()
+	}
+	if !data.Type.IsNull() && !data.Type.IsUnknown() {
+		apiResource.Spec["type"] = data.Type.ValueString()
+	}
+	if !data.VirtualK8SName.IsNull() && !data.VirtualK8SName.IsUnknown() {
+		apiResource.Spec["virtual_k8s_name"] = data.VirtualK8SName.ValueString()
+	}
+	if !data.VirtualK8SNamespace.IsNull() && !data.VirtualK8SNamespace.IsUnknown() {
+		apiResource.Spec["virtual_k8s_namespace"] = data.VirtualK8SNamespace.ValueString()
+	}
+
+
 	updated, err := r.client.UpdateAPICredential(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update APICredential: %s", err))
@@ -434,6 +537,24 @@ func (r *APICredentialResource) Update(ctx context.Context, req resource.UpdateR
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
+	if v, ok := updated.Spec["password"].(string); ok && v != "" {
+		data.Password = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["type"].(string); ok && v != "" {
+		data.Type = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["virtual_k8s_name"].(string); ok && v != "" {
+		data.VirtualK8SName = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["virtual_k8s_namespace"].(string); ok && v != "" {
+		data.VirtualK8SNamespace = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -446,6 +567,7 @@ func (r *APICredentialResource) Update(ctx context.Context, req resource.UpdateR
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -472,6 +594,15 @@ func (r *APICredentialResource) Delete(ctx context.Context, req resource.DeleteR
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "APICredential already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "APICredential delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

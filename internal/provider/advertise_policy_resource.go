@@ -12,6 +12,8 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -79,7 +81,7 @@ type AdvertisePolicyTLSParametersCommonParamsModel struct {
 // AdvertisePolicyTLSParametersCommonParamsTLSCertificatesModel represents tls_certificates block
 type AdvertisePolicyTLSParametersCommonParamsTLSCertificatesModel struct {
 	CertificateURL types.String `tfsdk:"certificate_url"`
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	CustomHashAlgorithms *AdvertisePolicyTLSParametersCommonParamsTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
 	DisableOcspStapling *AdvertisePolicyEmptyModel `tfsdk:"disable_ocsp_stapling"`
 	PrivateKey *AdvertisePolicyTLSParametersCommonParamsTLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
@@ -190,16 +192,16 @@ type AdvertisePolicyWhereVirtualSiteRefModel struct {
 type AdvertisePolicyResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Address types.String `tfsdk:"address"`
 	Annotations types.Map `tfsdk:"annotations"`
 	Description types.String `tfsdk:"description"`
 	Disable types.Bool `tfsdk:"disable"`
 	Labels types.Map `tfsdk:"labels"`
+	ID types.String `tfsdk:"id"`
+	Address types.String `tfsdk:"address"`
 	Port types.Int64 `tfsdk:"port"`
 	PortRanges types.String `tfsdk:"port_ranges"`
 	Protocol types.String `tfsdk:"protocol"`
 	SkipXffAppend types.Bool `tfsdk:"skip_xff_append"`
-	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
 	PublicIP []AdvertisePolicyPublicIPModel `tfsdk:"public_ip"`
 	TLSParameters *AdvertisePolicyTLSParametersModel `tfsdk:"tls_parameters"`
@@ -235,10 +237,6 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 					validators.NamespaceValidator(),
 				},
 			},
-			"address": schema.StringAttribute{
-				MarkdownDescription: "VIP. Optional. VIP to advertise. This VIP can be either V4/V6 address You can not specify this if where contains a site or virtual site of type REGIONAL_EDGE or public network If not specified and 'where' is specified with site or virtual site option, inside_vip or outside_vip specified in the site object will be used based on the network type. If inside_vip/outside_vip is not configured in the site object, system use interface ip in the respected networks.",
-				Optional: true,
-			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
 				Optional: true,
@@ -257,27 +255,51 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 				Optional: true,
 				ElementType: types.StringType,
 			},
-			"port": schema.Int64Attribute{
-				MarkdownDescription: "[OneOf: port, port_ranges] TCP/UDP Port. Port to advertise.",
-				Optional: true,
-			},
-			"port_ranges": schema.StringAttribute{
-				MarkdownDescription: "Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'.",
-				Optional: true,
-			},
-			"protocol": schema.StringAttribute{
-				MarkdownDescription: "Protocol. Protocol to advertise.",
-				Optional: true,
-			},
-			"skip_xff_append": schema.BoolAttribute{
-				MarkdownDescription: "Disable X-Forwarded-For Header. If set, the loadbalancer will not append the remote address to the x-forwarded-for HTTP header.",
-				Optional: true,
-			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
 				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"address": schema.StringAttribute{
+				MarkdownDescription: "VIP. Optional. VIP to advertise. This VIP can be either V4/V6 address You can not specify this if where contains a site or virtual site of type REGIONAL_EDGE or public network If not specified and 'where' is specified with site or virtual site option, inside_vip or outside_vip specified in the site object will be used based on the network type. If inside_vip/outside_vip is not configured in the site object, system use interface ip in the respected networks.",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"port": schema.Int64Attribute{
+				MarkdownDescription: "[OneOf: port, port_ranges] TCP/UDP Port. Port to advertise.",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.Int64{
+					int64planmodifier.UseStateForUnknown(),
+				},
+			},
+			"port_ranges": schema.StringAttribute{
+				MarkdownDescription: "Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'.",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"protocol": schema.StringAttribute{
+				MarkdownDescription: "Protocol. Protocol to advertise.",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"skip_xff_append": schema.BoolAttribute{
+				MarkdownDescription: "Disable X-Forwarded-For Header. If set, the loadbalancer will not append the remote address to the x-forwarded-for HTTP header.",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.Bool{
+					boolplanmodifier.UseStateForUnknown(),
 				},
 			},
 		},
@@ -358,7 +380,7 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 											MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
 											Optional: true,
 										},
-										"description": schema.StringAttribute{
+										"description_spec": schema.StringAttribute{
 											MarkdownDescription: "Description. Description for the certificate",
 											Optional: true,
 										},
@@ -734,7 +756,7 @@ func (r *AdvertisePolicyResource) Create(ctx context.Context, req resource.Creat
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.AdvertisePolicySpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -759,6 +781,92 @@ func (r *AdvertisePolicyResource) Create(ctx context.Context, req resource.Creat
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if len(data.PublicIP) > 0 {
+		var public_ipList []map[string]interface{}
+		for _, item := range data.PublicIP {
+			itemMap := make(map[string]interface{})
+			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+				itemMap["kind"] = item.Kind.ValueString()
+			}
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+				itemMap["namespace"] = item.Namespace.ValueString()
+			}
+			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+				itemMap["tenant"] = item.Tenant.ValueString()
+			}
+			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+				itemMap["uid"] = item.Uid.ValueString()
+			}
+			public_ipList = append(public_ipList, itemMap)
+		}
+		apiResource.Spec["public_ip"] = public_ipList
+	}
+	if data.TLSParameters != nil {
+		tls_parametersMap := make(map[string]interface{})
+		if data.TLSParameters.ClientCertificateOptional != nil {
+			tls_parametersMap["client_certificate_optional"] = map[string]interface{}{}
+		}
+		if data.TLSParameters.ClientCertificateRequired != nil {
+			tls_parametersMap["client_certificate_required"] = map[string]interface{}{}
+		}
+		if data.TLSParameters.CommonParams != nil {
+			common_paramsNestedMap := make(map[string]interface{})
+			if !data.TLSParameters.CommonParams.MaximumProtocolVersion.IsNull() && !data.TLSParameters.CommonParams.MaximumProtocolVersion.IsUnknown() {
+				common_paramsNestedMap["maximum_protocol_version"] = data.TLSParameters.CommonParams.MaximumProtocolVersion.ValueString()
+			}
+			if !data.TLSParameters.CommonParams.MinimumProtocolVersion.IsNull() && !data.TLSParameters.CommonParams.MinimumProtocolVersion.IsUnknown() {
+				common_paramsNestedMap["minimum_protocol_version"] = data.TLSParameters.CommonParams.MinimumProtocolVersion.ValueString()
+			}
+			tls_parametersMap["common_params"] = common_paramsNestedMap
+		}
+		if data.TLSParameters.NoClientCertificate != nil {
+			tls_parametersMap["no_client_certificate"] = map[string]interface{}{}
+		}
+		apiResource.Spec["tls_parameters"] = tls_parametersMap
+	}
+	if data.Where != nil {
+		whereMap := make(map[string]interface{})
+		if data.Where.Site != nil {
+			siteNestedMap := make(map[string]interface{})
+			if !data.Where.Site.NetworkType.IsNull() && !data.Where.Site.NetworkType.IsUnknown() {
+				siteNestedMap["network_type"] = data.Where.Site.NetworkType.ValueString()
+			}
+			whereMap["site"] = siteNestedMap
+		}
+		if data.Where.VirtualNetwork != nil {
+			virtual_networkNestedMap := make(map[string]interface{})
+			whereMap["virtual_network"] = virtual_networkNestedMap
+		}
+		if data.Where.VirtualSite != nil {
+			virtual_siteNestedMap := make(map[string]interface{})
+			if !data.Where.VirtualSite.NetworkType.IsNull() && !data.Where.VirtualSite.NetworkType.IsUnknown() {
+				virtual_siteNestedMap["network_type"] = data.Where.VirtualSite.NetworkType.ValueString()
+			}
+			whereMap["virtual_site"] = virtual_siteNestedMap
+		}
+		apiResource.Spec["where"] = whereMap
+	}
+	if !data.Address.IsNull() && !data.Address.IsUnknown() {
+		apiResource.Spec["address"] = data.Address.ValueString()
+	}
+	if !data.Port.IsNull() && !data.Port.IsUnknown() {
+		apiResource.Spec["port"] = data.Port.ValueInt64()
+	}
+	if !data.PortRanges.IsNull() && !data.PortRanges.IsUnknown() {
+		apiResource.Spec["port_ranges"] = data.PortRanges.ValueString()
+	}
+	if !data.Protocol.IsNull() && !data.Protocol.IsUnknown() {
+		apiResource.Spec["protocol"] = data.Protocol.ValueString()
+	}
+	if !data.SkipXffAppend.IsNull() && !data.SkipXffAppend.IsUnknown() {
+		apiResource.Spec["skip_xff_append"] = data.SkipXffAppend.ValueBool()
+	}
+
+
 	created, err := r.client.CreateAdvertisePolicy(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create AdvertisePolicy: %s", err))
@@ -767,8 +875,33 @@ func (r *AdvertisePolicyResource) Create(ctx context.Context, req resource.Creat
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+	if v, ok := created.Spec["address"].(string); ok && v != "" {
+		data.Address = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["port"].(float64); ok {
+		data.Port = types.Int64Value(int64(v))
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["port_ranges"].(string); ok && v != "" {
+		data.PortRanges = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["protocol"].(string); ok && v != "" {
+		data.Protocol = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["skip_xff_append"].(bool); ok {
+		data.SkipXffAppend = types.BoolValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created AdvertisePolicy resource")
@@ -847,9 +980,106 @@ func (r *AdvertisePolicyResource) Read(ctx context.Context, req resource.ReadReq
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if listData, ok := apiResource.Spec["public_ip"].([]interface{}); ok && len(listData) > 0 {
+		var public_ipList []AdvertisePolicyPublicIPModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				public_ipList = append(public_ipList, AdvertisePolicyPublicIPModel{
+					Kind: func() types.String {
+						if v, ok := itemMap["kind"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Namespace: func() types.String {
+						if v, ok := itemMap["namespace"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Tenant: func() types.String {
+						if v, ok := itemMap["tenant"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Uid: func() types.String {
+						if v, ok := itemMap["uid"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.PublicIP = public_ipList
+	}
+	if _, ok := apiResource.Spec["tls_parameters"].(map[string]interface{}); ok && isImport && data.TLSParameters == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.TLSParameters = &AdvertisePolicyTLSParametersModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["where"].(map[string]interface{}); ok && isImport && data.Where == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Where = &AdvertisePolicyWhereModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["address"].(string); ok && v != "" {
+		data.Address = types.StringValue(v)
+	} else {
+		data.Address = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["port"].(float64); ok {
+		data.Port = types.Int64Value(int64(v))
+	} else {
+		data.Port = types.Int64Null()
+	}
+	if v, ok := apiResource.Spec["port_ranges"].(string); ok && v != "" {
+		data.PortRanges = types.StringValue(v)
+	} else {
+		data.PortRanges = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["protocol"].(string); ok && v != "" {
+		data.Protocol = types.StringValue(v)
+	} else {
+		data.Protocol = types.StringNull()
+	}
+	// Top-level Optional bool: preserve prior state to avoid API default drift
+	if !isImport && !data.SkipXffAppend.IsNull() {
+		// Normal Read: preserve existing state value (do nothing)
+	} else {
+		// Import case or null state: read from API
+		if v, ok := apiResource.Spec["skip_xff_append"].(bool); ok {
+			data.SkipXffAppend = types.BoolValue(v)
+		} else {
+			data.SkipXffAppend = types.BoolNull()
+		}
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -875,7 +1105,7 @@ func (r *AdvertisePolicyResource) Update(ctx context.Context, req resource.Updat
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.AdvertisePolicySpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -900,6 +1130,92 @@ func (r *AdvertisePolicyResource) Update(ctx context.Context, req resource.Updat
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if len(data.PublicIP) > 0 {
+		var public_ipList []map[string]interface{}
+		for _, item := range data.PublicIP {
+			itemMap := make(map[string]interface{})
+			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+				itemMap["kind"] = item.Kind.ValueString()
+			}
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+				itemMap["namespace"] = item.Namespace.ValueString()
+			}
+			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+				itemMap["tenant"] = item.Tenant.ValueString()
+			}
+			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+				itemMap["uid"] = item.Uid.ValueString()
+			}
+			public_ipList = append(public_ipList, itemMap)
+		}
+		apiResource.Spec["public_ip"] = public_ipList
+	}
+	if data.TLSParameters != nil {
+		tls_parametersMap := make(map[string]interface{})
+		if data.TLSParameters.ClientCertificateOptional != nil {
+			tls_parametersMap["client_certificate_optional"] = map[string]interface{}{}
+		}
+		if data.TLSParameters.ClientCertificateRequired != nil {
+			tls_parametersMap["client_certificate_required"] = map[string]interface{}{}
+		}
+		if data.TLSParameters.CommonParams != nil {
+			common_paramsNestedMap := make(map[string]interface{})
+			if !data.TLSParameters.CommonParams.MaximumProtocolVersion.IsNull() && !data.TLSParameters.CommonParams.MaximumProtocolVersion.IsUnknown() {
+				common_paramsNestedMap["maximum_protocol_version"] = data.TLSParameters.CommonParams.MaximumProtocolVersion.ValueString()
+			}
+			if !data.TLSParameters.CommonParams.MinimumProtocolVersion.IsNull() && !data.TLSParameters.CommonParams.MinimumProtocolVersion.IsUnknown() {
+				common_paramsNestedMap["minimum_protocol_version"] = data.TLSParameters.CommonParams.MinimumProtocolVersion.ValueString()
+			}
+			tls_parametersMap["common_params"] = common_paramsNestedMap
+		}
+		if data.TLSParameters.NoClientCertificate != nil {
+			tls_parametersMap["no_client_certificate"] = map[string]interface{}{}
+		}
+		apiResource.Spec["tls_parameters"] = tls_parametersMap
+	}
+	if data.Where != nil {
+		whereMap := make(map[string]interface{})
+		if data.Where.Site != nil {
+			siteNestedMap := make(map[string]interface{})
+			if !data.Where.Site.NetworkType.IsNull() && !data.Where.Site.NetworkType.IsUnknown() {
+				siteNestedMap["network_type"] = data.Where.Site.NetworkType.ValueString()
+			}
+			whereMap["site"] = siteNestedMap
+		}
+		if data.Where.VirtualNetwork != nil {
+			virtual_networkNestedMap := make(map[string]interface{})
+			whereMap["virtual_network"] = virtual_networkNestedMap
+		}
+		if data.Where.VirtualSite != nil {
+			virtual_siteNestedMap := make(map[string]interface{})
+			if !data.Where.VirtualSite.NetworkType.IsNull() && !data.Where.VirtualSite.NetworkType.IsUnknown() {
+				virtual_siteNestedMap["network_type"] = data.Where.VirtualSite.NetworkType.ValueString()
+			}
+			whereMap["virtual_site"] = virtual_siteNestedMap
+		}
+		apiResource.Spec["where"] = whereMap
+	}
+	if !data.Address.IsNull() && !data.Address.IsUnknown() {
+		apiResource.Spec["address"] = data.Address.ValueString()
+	}
+	if !data.Port.IsNull() && !data.Port.IsUnknown() {
+		apiResource.Spec["port"] = data.Port.ValueInt64()
+	}
+	if !data.PortRanges.IsNull() && !data.PortRanges.IsUnknown() {
+		apiResource.Spec["port_ranges"] = data.PortRanges.ValueString()
+	}
+	if !data.Protocol.IsNull() && !data.Protocol.IsUnknown() {
+		apiResource.Spec["protocol"] = data.Protocol.ValueString()
+	}
+	if !data.SkipXffAppend.IsNull() && !data.SkipXffAppend.IsUnknown() {
+		apiResource.Spec["skip_xff_append"] = data.SkipXffAppend.ValueBool()
+	}
+
+
 	updated, err := r.client.UpdateAdvertisePolicy(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update AdvertisePolicy: %s", err))
@@ -908,6 +1224,28 @@ func (r *AdvertisePolicyResource) Update(ctx context.Context, req resource.Updat
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
+	if v, ok := updated.Spec["address"].(string); ok && v != "" {
+		data.Address = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["port"].(float64); ok {
+		data.Port = types.Int64Value(int64(v))
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["port_ranges"].(string); ok && v != "" {
+		data.PortRanges = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["protocol"].(string); ok && v != "" {
+		data.Protocol = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["skip_xff_append"].(bool); ok {
+		data.SkipXffAppend = types.BoolValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -920,6 +1258,7 @@ func (r *AdvertisePolicyResource) Update(ctx context.Context, req resource.Updat
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -946,6 +1285,15 @@ func (r *AdvertisePolicyResource) Delete(ctx context.Context, req resource.Delet
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "AdvertisePolicy already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "AdvertisePolicy delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

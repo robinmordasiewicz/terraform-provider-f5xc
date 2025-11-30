@@ -102,7 +102,11 @@ func (d *RateLimiterDataSource) Read(ctx context.Context, req datasource.ReadReq
 	data.ID = types.StringValue(resource.Metadata.Name)
 	data.Name = types.StringValue(resource.Metadata.Name)
 	data.Namespace = types.StringValue(resource.Metadata.Namespace)
-	data.Description = types.StringValue(resource.Spec.Description)
+	if resource.Metadata.Description != "" {
+		data.Description = types.StringValue(resource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(resource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, resource.Metadata.Labels)

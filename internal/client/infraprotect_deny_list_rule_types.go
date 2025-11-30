@@ -10,19 +10,14 @@ import (
 
 // InfraprotectDenyListRule represents a F5XC InfraprotectDenyListRule
 type InfraprotectDenyListRule struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     InfraprotectDenyListRuleSpec `json:"spec"`
-}
-
-// InfraprotectDenyListRuleSpec defines the specification for InfraprotectDenyListRule
-type InfraprotectDenyListRuleSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateInfraprotectDenyListRule creates a new InfraprotectDenyListRule
 func (c *Client) CreateInfraprotectDenyListRule(ctx context.Context, resource *InfraprotectDenyListRule) (*InfraprotectDenyListRule, error) {
 	var result InfraprotectDenyListRule
-	path := fmt.Sprintf("/api/config/namespaces/%s/infraprotect_deny_list_rules", resource.Metadata.Namespace)
+	path := fmt.Sprintf("/api/infraprotect/namespaces/%s/infraprotect_deny_list_rules", resource.Metadata.Namespace)
 	err := c.Post(ctx, path, resource, &result)
 	return &result, err
 }
@@ -30,7 +25,7 @@ func (c *Client) CreateInfraprotectDenyListRule(ctx context.Context, resource *I
 // GetInfraprotectDenyListRule retrieves a InfraprotectDenyListRule
 func (c *Client) GetInfraprotectDenyListRule(ctx context.Context, namespace, name string) (*InfraprotectDenyListRule, error) {
 	var result InfraprotectDenyListRule
-	path := fmt.Sprintf("/api/config/namespaces/%s/infraprotect_deny_list_rules/%s", namespace, name)
+	path := fmt.Sprintf("/api/infraprotect/namespaces/%s/infraprotect_deny_list_rules/%s", namespace, name)
 	err := c.Get(ctx, path, &result)
 	return &result, err
 }
@@ -38,13 +33,13 @@ func (c *Client) GetInfraprotectDenyListRule(ctx context.Context, namespace, nam
 // UpdateInfraprotectDenyListRule updates a InfraprotectDenyListRule
 func (c *Client) UpdateInfraprotectDenyListRule(ctx context.Context, resource *InfraprotectDenyListRule) (*InfraprotectDenyListRule, error) {
 	var result InfraprotectDenyListRule
-	path := fmt.Sprintf("/api/config/namespaces/%s/infraprotect_deny_list_rules/%s", resource.Metadata.Namespace, resource.Metadata.Name)
+	path := fmt.Sprintf("/api/infraprotect/namespaces/%s/infraprotect_deny_list_rules/%s", resource.Metadata.Namespace, resource.Metadata.Name)
 	err := c.Put(ctx, path, resource, &result)
 	return &result, err
 }
 
 // DeleteInfraprotectDenyListRule deletes a InfraprotectDenyListRule
 func (c *Client) DeleteInfraprotectDenyListRule(ctx context.Context, namespace, name string) error {
-	path := fmt.Sprintf("/api/config/namespaces/%s/infraprotect_deny_list_rules/%s", namespace, name)
+	path := fmt.Sprintf("/api/infraprotect/namespaces/%s/infraprotect_deny_list_rules/%s", namespace, name)
 	return c.Delete(ctx, path)
 }

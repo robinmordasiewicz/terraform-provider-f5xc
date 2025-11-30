@@ -10,13 +10,8 @@ import (
 
 // ContainerRegistry represents a F5XC ContainerRegistry
 type ContainerRegistry struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     ContainerRegistrySpec `json:"spec"`
-}
-
-// ContainerRegistrySpec defines the specification for ContainerRegistry
-type ContainerRegistrySpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateContainerRegistry creates a new ContainerRegistry

@@ -10,13 +10,8 @@ import (
 
 // CloudConnect represents a F5XC CloudConnect
 type CloudConnect struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     CloudConnectSpec `json:"spec"`
-}
-
-// CloudConnectSpec defines the specification for CloudConnect
-type CloudConnectSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateCloudConnect creates a new CloudConnect

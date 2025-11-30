@@ -10,19 +10,14 @@ import (
 
 // ChildTenantManager represents a F5XC ChildTenantManager
 type ChildTenantManager struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     ChildTenantManagerSpec `json:"spec"`
-}
-
-// ChildTenantManagerSpec defines the specification for ChildTenantManager
-type ChildTenantManagerSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateChildTenantManager creates a new ChildTenantManager
 func (c *Client) CreateChildTenantManager(ctx context.Context, resource *ChildTenantManager) (*ChildTenantManager, error) {
 	var result ChildTenantManager
-	path := fmt.Sprintf("/api/config/namespaces/%s/child_tenant_managers", resource.Metadata.Namespace)
+	path := fmt.Sprintf("/api/web/namespaces/%s/child_tenant_managers", resource.Metadata.Namespace)
 	err := c.Post(ctx, path, resource, &result)
 	return &result, err
 }
@@ -30,7 +25,7 @@ func (c *Client) CreateChildTenantManager(ctx context.Context, resource *ChildTe
 // GetChildTenantManager retrieves a ChildTenantManager
 func (c *Client) GetChildTenantManager(ctx context.Context, namespace, name string) (*ChildTenantManager, error) {
 	var result ChildTenantManager
-	path := fmt.Sprintf("/api/config/namespaces/%s/child_tenant_managers/%s", namespace, name)
+	path := fmt.Sprintf("/api/web/namespaces/%s/child_tenant_managers/%s", namespace, name)
 	err := c.Get(ctx, path, &result)
 	return &result, err
 }
@@ -38,13 +33,13 @@ func (c *Client) GetChildTenantManager(ctx context.Context, namespace, name stri
 // UpdateChildTenantManager updates a ChildTenantManager
 func (c *Client) UpdateChildTenantManager(ctx context.Context, resource *ChildTenantManager) (*ChildTenantManager, error) {
 	var result ChildTenantManager
-	path := fmt.Sprintf("/api/config/namespaces/%s/child_tenant_managers/%s", resource.Metadata.Namespace, resource.Metadata.Name)
+	path := fmt.Sprintf("/api/web/namespaces/%s/child_tenant_managers/%s", resource.Metadata.Namespace, resource.Metadata.Name)
 	err := c.Put(ctx, path, resource, &result)
 	return &result, err
 }
 
 // DeleteChildTenantManager deletes a ChildTenantManager
 func (c *Client) DeleteChildTenantManager(ctx context.Context, namespace, name string) error {
-	path := fmt.Sprintf("/api/config/namespaces/%s/child_tenant_managers/%s", namespace, name)
+	path := fmt.Sprintf("/api/web/namespaces/%s/child_tenant_managers/%s", namespace, name)
 	return c.Delete(ctx, path)
 }

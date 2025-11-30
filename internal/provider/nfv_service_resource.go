@@ -196,7 +196,7 @@ type NFVServiceHTTPSManagementAdvertiseOnSLIVipModel struct {
 // NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSCertificatesModel represents tls_certificates block
 type NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSCertificatesModel struct {
 	CertificateURL types.String `tfsdk:"certificate_url"`
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	CustomHashAlgorithms *NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
 	DisableOcspStapling *NFVServiceEmptyModel `tfsdk:"disable_ocsp_stapling"`
 	PrivateKey *NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
@@ -283,7 +283,7 @@ type NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipModel struct {
 // NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesModel represents tls_certificates block
 type NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesModel struct {
 	CertificateURL types.String `tfsdk:"certificate_url"`
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	CustomHashAlgorithms *NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
 	DisableOcspStapling *NFVServiceEmptyModel `tfsdk:"disable_ocsp_stapling"`
 	PrivateKey *NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
@@ -370,7 +370,7 @@ type NFVServiceHTTPSManagementAdvertiseOnSLOSLIModel struct {
 // NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSCertificatesModel represents tls_certificates block
 type NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSCertificatesModel struct {
 	CertificateURL types.String `tfsdk:"certificate_url"`
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	CustomHashAlgorithms *NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
 	DisableOcspStapling *NFVServiceEmptyModel `tfsdk:"disable_ocsp_stapling"`
 	PrivateKey *NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
@@ -457,7 +457,7 @@ type NFVServiceHTTPSManagementAdvertiseOnSLOVipModel struct {
 // NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSCertificatesModel represents tls_certificates block
 type NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSCertificatesModel struct {
 	CertificateURL types.String `tfsdk:"certificate_url"`
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	CustomHashAlgorithms *NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
 	DisableOcspStapling *NFVServiceEmptyModel `tfsdk:"disable_ocsp_stapling"`
 	PrivateKey *NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
@@ -1032,7 +1032,7 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 											MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
 											Optional: true,
 										},
-										"description": schema.StringAttribute{
+										"description_spec": schema.StringAttribute{
 											MarkdownDescription: "Description. Description for the certificate",
 											Optional: true,
 										},
@@ -1211,7 +1211,7 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 											MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
 											Optional: true,
 										},
-										"description": schema.StringAttribute{
+										"description_spec": schema.StringAttribute{
 											MarkdownDescription: "Description. Description for the certificate",
 											Optional: true,
 										},
@@ -1390,7 +1390,7 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 											MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
 											Optional: true,
 										},
-										"description": schema.StringAttribute{
+										"description_spec": schema.StringAttribute{
 											MarkdownDescription: "Description. Description for the certificate",
 											Optional: true,
 										},
@@ -1569,7 +1569,7 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 											MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
 											Optional: true,
 										},
-										"description": schema.StringAttribute{
+										"description_spec": schema.StringAttribute{
 											MarkdownDescription: "Description. Description for the certificate",
 											Optional: true,
 										},
@@ -2108,7 +2108,7 @@ func (r *NFVServiceResource) Create(ctx context.Context, req resource.CreateRequ
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.NFVServiceSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -2133,6 +2133,163 @@ func (r *NFVServiceResource) Create(ctx context.Context, req resource.CreateRequ
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.DisableHTTPSManagement != nil {
+		disable_https_managementMap := make(map[string]interface{})
+		apiResource.Spec["disable_https_management"] = disable_https_managementMap
+	}
+	if data.DisableSSHAccess != nil {
+		disable_ssh_accessMap := make(map[string]interface{})
+		apiResource.Spec["disable_ssh_access"] = disable_ssh_accessMap
+	}
+	if data.EnabledSSHAccess != nil {
+		enabled_ssh_accessMap := make(map[string]interface{})
+		if data.EnabledSSHAccess.AdvertiseOnSLI != nil {
+			enabled_ssh_accessMap["advertise_on_sli"] = map[string]interface{}{}
+		}
+		if data.EnabledSSHAccess.AdvertiseOnSLO != nil {
+			enabled_ssh_accessMap["advertise_on_slo"] = map[string]interface{}{}
+		}
+		if data.EnabledSSHAccess.AdvertiseOnSLOSLI != nil {
+			enabled_ssh_accessMap["advertise_on_slo_sli"] = map[string]interface{}{}
+		}
+		if !data.EnabledSSHAccess.DomainSuffix.IsNull() && !data.EnabledSSHAccess.DomainSuffix.IsUnknown() {
+			enabled_ssh_accessMap["domain_suffix"] = data.EnabledSSHAccess.DomainSuffix.ValueString()
+		}
+		apiResource.Spec["enabled_ssh_access"] = enabled_ssh_accessMap
+	}
+	if data.F5BigIPAWSService != nil {
+		f5_big_ip_aws_serviceMap := make(map[string]interface{})
+		if data.F5BigIPAWSService.AdminPassword != nil {
+			admin_passwordNestedMap := make(map[string]interface{})
+			f5_big_ip_aws_serviceMap["admin_password"] = admin_passwordNestedMap
+		}
+		if !data.F5BigIPAWSService.AdminUsername.IsNull() && !data.F5BigIPAWSService.AdminUsername.IsUnknown() {
+			f5_big_ip_aws_serviceMap["admin_username"] = data.F5BigIPAWSService.AdminUsername.ValueString()
+		}
+		if data.F5BigIPAWSService.AWSTGWSiteParams != nil {
+			aws_tgw_site_paramsNestedMap := make(map[string]interface{})
+			f5_big_ip_aws_serviceMap["aws_tgw_site_params"] = aws_tgw_site_paramsNestedMap
+		}
+		if data.F5BigIPAWSService.EndpointService != nil {
+			endpoint_serviceNestedMap := make(map[string]interface{})
+			if !data.F5BigIPAWSService.EndpointService.ConfiguredVip.IsNull() && !data.F5BigIPAWSService.EndpointService.ConfiguredVip.IsUnknown() {
+				endpoint_serviceNestedMap["configured_vip"] = data.F5BigIPAWSService.EndpointService.ConfiguredVip.ValueString()
+			}
+			f5_big_ip_aws_serviceMap["endpoint_service"] = endpoint_serviceNestedMap
+		}
+		if data.F5BigIPAWSService.MarketPlaceImage != nil {
+			market_place_imageNestedMap := make(map[string]interface{})
+			f5_big_ip_aws_serviceMap["market_place_image"] = market_place_imageNestedMap
+		}
+		if !data.F5BigIPAWSService.SSHKey.IsNull() && !data.F5BigIPAWSService.SSHKey.IsUnknown() {
+			f5_big_ip_aws_serviceMap["ssh_key"] = data.F5BigIPAWSService.SSHKey.ValueString()
+		}
+		if data.F5BigIPAWSService.Tags != nil {
+			f5_big_ip_aws_serviceMap["tags"] = map[string]interface{}{}
+		}
+		apiResource.Spec["f5_big_ip_aws_service"] = f5_big_ip_aws_serviceMap
+	}
+	if data.HTTPSManagement != nil {
+		https_managementMap := make(map[string]interface{})
+		if data.HTTPSManagement.AdvertiseOnInternet != nil {
+			advertise_on_internetNestedMap := make(map[string]interface{})
+			https_managementMap["advertise_on_internet"] = advertise_on_internetNestedMap
+		}
+		if data.HTTPSManagement.AdvertiseOnInternetDefaultVip != nil {
+			https_managementMap["advertise_on_internet_default_vip"] = map[string]interface{}{}
+		}
+		if data.HTTPSManagement.AdvertiseOnSLIVip != nil {
+			advertise_on_sli_vipNestedMap := make(map[string]interface{})
+			https_managementMap["advertise_on_sli_vip"] = advertise_on_sli_vipNestedMap
+		}
+		if data.HTTPSManagement.AdvertiseOnSLOInternetVip != nil {
+			advertise_on_slo_internet_vipNestedMap := make(map[string]interface{})
+			https_managementMap["advertise_on_slo_internet_vip"] = advertise_on_slo_internet_vipNestedMap
+		}
+		if data.HTTPSManagement.AdvertiseOnSLOSLI != nil {
+			advertise_on_slo_sliNestedMap := make(map[string]interface{})
+			https_managementMap["advertise_on_slo_sli"] = advertise_on_slo_sliNestedMap
+		}
+		if data.HTTPSManagement.AdvertiseOnSLOVip != nil {
+			advertise_on_slo_vipNestedMap := make(map[string]interface{})
+			https_managementMap["advertise_on_slo_vip"] = advertise_on_slo_vipNestedMap
+		}
+		if data.HTTPSManagement.DefaultHTTPSPort != nil {
+			https_managementMap["default_https_port"] = map[string]interface{}{}
+		}
+		if !data.HTTPSManagement.DomainSuffix.IsNull() && !data.HTTPSManagement.DomainSuffix.IsUnknown() {
+			https_managementMap["domain_suffix"] = data.HTTPSManagement.DomainSuffix.ValueString()
+		}
+		if !data.HTTPSManagement.HTTPSPort.IsNull() && !data.HTTPSManagement.HTTPSPort.IsUnknown() {
+			https_managementMap["https_port"] = data.HTTPSManagement.HTTPSPort.ValueInt64()
+		}
+		apiResource.Spec["https_management"] = https_managementMap
+	}
+	if data.PaloAltoFwService != nil {
+		palo_alto_fw_serviceMap := make(map[string]interface{})
+		if data.PaloAltoFwService.AutoSetup != nil {
+			auto_setupNestedMap := make(map[string]interface{})
+			if !data.PaloAltoFwService.AutoSetup.AdminUsername.IsNull() && !data.PaloAltoFwService.AutoSetup.AdminUsername.IsUnknown() {
+				auto_setupNestedMap["admin_username"] = data.PaloAltoFwService.AutoSetup.AdminUsername.ValueString()
+			}
+			palo_alto_fw_serviceMap["auto_setup"] = auto_setupNestedMap
+		}
+		if data.PaloAltoFwService.AWSTGWSite != nil {
+			aws_tgw_siteNestedMap := make(map[string]interface{})
+			if !data.PaloAltoFwService.AWSTGWSite.Name.IsNull() && !data.PaloAltoFwService.AWSTGWSite.Name.IsUnknown() {
+				aws_tgw_siteNestedMap["name"] = data.PaloAltoFwService.AWSTGWSite.Name.ValueString()
+			}
+			if !data.PaloAltoFwService.AWSTGWSite.Namespace.IsNull() && !data.PaloAltoFwService.AWSTGWSite.Namespace.IsUnknown() {
+				aws_tgw_siteNestedMap["namespace"] = data.PaloAltoFwService.AWSTGWSite.Namespace.ValueString()
+			}
+			if !data.PaloAltoFwService.AWSTGWSite.Tenant.IsNull() && !data.PaloAltoFwService.AWSTGWSite.Tenant.IsUnknown() {
+				aws_tgw_siteNestedMap["tenant"] = data.PaloAltoFwService.AWSTGWSite.Tenant.ValueString()
+			}
+			palo_alto_fw_serviceMap["aws_tgw_site"] = aws_tgw_siteNestedMap
+		}
+		if data.PaloAltoFwService.DisablePanaroma != nil {
+			palo_alto_fw_serviceMap["disable_panaroma"] = map[string]interface{}{}
+		}
+		if !data.PaloAltoFwService.InstanceType.IsNull() && !data.PaloAltoFwService.InstanceType.IsUnknown() {
+			palo_alto_fw_serviceMap["instance_type"] = data.PaloAltoFwService.InstanceType.ValueString()
+		}
+		if data.PaloAltoFwService.PanAmiBundle1 != nil {
+			palo_alto_fw_serviceMap["pan_ami_bundle1"] = map[string]interface{}{}
+		}
+		if data.PaloAltoFwService.PanAmiBundle2 != nil {
+			palo_alto_fw_serviceMap["pan_ami_bundle2"] = map[string]interface{}{}
+		}
+		if data.PaloAltoFwService.PanoramaServer != nil {
+			panorama_serverNestedMap := make(map[string]interface{})
+			if !data.PaloAltoFwService.PanoramaServer.DeviceGroupName.IsNull() && !data.PaloAltoFwService.PanoramaServer.DeviceGroupName.IsUnknown() {
+				panorama_serverNestedMap["device_group_name"] = data.PaloAltoFwService.PanoramaServer.DeviceGroupName.ValueString()
+			}
+			if !data.PaloAltoFwService.PanoramaServer.Server.IsNull() && !data.PaloAltoFwService.PanoramaServer.Server.IsUnknown() {
+				panorama_serverNestedMap["server"] = data.PaloAltoFwService.PanoramaServer.Server.ValueString()
+			}
+			if !data.PaloAltoFwService.PanoramaServer.TemplateStackName.IsNull() && !data.PaloAltoFwService.PanoramaServer.TemplateStackName.IsUnknown() {
+				panorama_serverNestedMap["template_stack_name"] = data.PaloAltoFwService.PanoramaServer.TemplateStackName.ValueString()
+			}
+			palo_alto_fw_serviceMap["panorama_server"] = panorama_serverNestedMap
+		}
+		if data.PaloAltoFwService.ServiceNodes != nil {
+			service_nodesNestedMap := make(map[string]interface{})
+			palo_alto_fw_serviceMap["service_nodes"] = service_nodesNestedMap
+		}
+		if !data.PaloAltoFwService.SSHKey.IsNull() && !data.PaloAltoFwService.SSHKey.IsUnknown() {
+			palo_alto_fw_serviceMap["ssh_key"] = data.PaloAltoFwService.SSHKey.ValueString()
+		}
+		if data.PaloAltoFwService.Tags != nil {
+			palo_alto_fw_serviceMap["tags"] = map[string]interface{}{}
+		}
+		if !data.PaloAltoFwService.Version.IsNull() && !data.PaloAltoFwService.Version.IsUnknown() {
+			palo_alto_fw_serviceMap["version"] = data.PaloAltoFwService.Version.ValueString()
+		}
+		apiResource.Spec["palo_alto_fw_service"] = palo_alto_fw_serviceMap
+	}
+
+
 	created, err := r.client.CreateNFVService(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create NFVService: %s", err))
@@ -2141,8 +2298,13 @@ func (r *NFVServiceResource) Create(ctx context.Context, req resource.CreateRequ
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created NFVService resource")
@@ -2221,9 +2383,99 @@ func (r *NFVServiceResource) Read(ctx context.Context, req resource.ReadRequest,
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if _, ok := apiResource.Spec["disable_https_management"].(map[string]interface{}); ok && isImport && data.DisableHTTPSManagement == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableHTTPSManagement = &NFVServiceEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["disable_ssh_access"].(map[string]interface{}); ok && isImport && data.DisableSSHAccess == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableSSHAccess = &NFVServiceEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["enabled_ssh_access"].(map[string]interface{}); ok && (isImport || data.EnabledSSHAccess != nil) {
+		data.EnabledSSHAccess = &NFVServiceEnabledSSHAccessModel{
+			DomainSuffix: func() types.String {
+				if v, ok := blockData["domain_suffix"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["f5_big_ip_aws_service"].(map[string]interface{}); ok && (isImport || data.F5BigIPAWSService != nil) {
+		data.F5BigIPAWSService = &NFVServiceF5BigIPAWSServiceModel{
+			AdminUsername: func() types.String {
+				if v, ok := blockData["admin_username"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			SSHKey: func() types.String {
+				if v, ok := blockData["ssh_key"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["https_management"].(map[string]interface{}); ok && (isImport || data.HTTPSManagement != nil) {
+		data.HTTPSManagement = &NFVServiceHTTPSManagementModel{
+			DomainSuffix: func() types.String {
+				if v, ok := blockData["domain_suffix"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			HTTPSPort: func() types.Int64 {
+				if v, ok := blockData["https_port"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["palo_alto_fw_service"].(map[string]interface{}); ok && (isImport || data.PaloAltoFwService != nil) {
+		data.PaloAltoFwService = &NFVServicePaloAltoFwServiceModel{
+			InstanceType: func() types.String {
+				if v, ok := blockData["instance_type"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			SSHKey: func() types.String {
+				if v, ok := blockData["ssh_key"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Version: func() types.String {
+				if v, ok := blockData["version"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -2249,7 +2501,7 @@ func (r *NFVServiceResource) Update(ctx context.Context, req resource.UpdateRequ
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.NFVServiceSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -2274,6 +2526,163 @@ func (r *NFVServiceResource) Update(ctx context.Context, req resource.UpdateRequ
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.DisableHTTPSManagement != nil {
+		disable_https_managementMap := make(map[string]interface{})
+		apiResource.Spec["disable_https_management"] = disable_https_managementMap
+	}
+	if data.DisableSSHAccess != nil {
+		disable_ssh_accessMap := make(map[string]interface{})
+		apiResource.Spec["disable_ssh_access"] = disable_ssh_accessMap
+	}
+	if data.EnabledSSHAccess != nil {
+		enabled_ssh_accessMap := make(map[string]interface{})
+		if data.EnabledSSHAccess.AdvertiseOnSLI != nil {
+			enabled_ssh_accessMap["advertise_on_sli"] = map[string]interface{}{}
+		}
+		if data.EnabledSSHAccess.AdvertiseOnSLO != nil {
+			enabled_ssh_accessMap["advertise_on_slo"] = map[string]interface{}{}
+		}
+		if data.EnabledSSHAccess.AdvertiseOnSLOSLI != nil {
+			enabled_ssh_accessMap["advertise_on_slo_sli"] = map[string]interface{}{}
+		}
+		if !data.EnabledSSHAccess.DomainSuffix.IsNull() && !data.EnabledSSHAccess.DomainSuffix.IsUnknown() {
+			enabled_ssh_accessMap["domain_suffix"] = data.EnabledSSHAccess.DomainSuffix.ValueString()
+		}
+		apiResource.Spec["enabled_ssh_access"] = enabled_ssh_accessMap
+	}
+	if data.F5BigIPAWSService != nil {
+		f5_big_ip_aws_serviceMap := make(map[string]interface{})
+		if data.F5BigIPAWSService.AdminPassword != nil {
+			admin_passwordNestedMap := make(map[string]interface{})
+			f5_big_ip_aws_serviceMap["admin_password"] = admin_passwordNestedMap
+		}
+		if !data.F5BigIPAWSService.AdminUsername.IsNull() && !data.F5BigIPAWSService.AdminUsername.IsUnknown() {
+			f5_big_ip_aws_serviceMap["admin_username"] = data.F5BigIPAWSService.AdminUsername.ValueString()
+		}
+		if data.F5BigIPAWSService.AWSTGWSiteParams != nil {
+			aws_tgw_site_paramsNestedMap := make(map[string]interface{})
+			f5_big_ip_aws_serviceMap["aws_tgw_site_params"] = aws_tgw_site_paramsNestedMap
+		}
+		if data.F5BigIPAWSService.EndpointService != nil {
+			endpoint_serviceNestedMap := make(map[string]interface{})
+			if !data.F5BigIPAWSService.EndpointService.ConfiguredVip.IsNull() && !data.F5BigIPAWSService.EndpointService.ConfiguredVip.IsUnknown() {
+				endpoint_serviceNestedMap["configured_vip"] = data.F5BigIPAWSService.EndpointService.ConfiguredVip.ValueString()
+			}
+			f5_big_ip_aws_serviceMap["endpoint_service"] = endpoint_serviceNestedMap
+		}
+		if data.F5BigIPAWSService.MarketPlaceImage != nil {
+			market_place_imageNestedMap := make(map[string]interface{})
+			f5_big_ip_aws_serviceMap["market_place_image"] = market_place_imageNestedMap
+		}
+		if !data.F5BigIPAWSService.SSHKey.IsNull() && !data.F5BigIPAWSService.SSHKey.IsUnknown() {
+			f5_big_ip_aws_serviceMap["ssh_key"] = data.F5BigIPAWSService.SSHKey.ValueString()
+		}
+		if data.F5BigIPAWSService.Tags != nil {
+			f5_big_ip_aws_serviceMap["tags"] = map[string]interface{}{}
+		}
+		apiResource.Spec["f5_big_ip_aws_service"] = f5_big_ip_aws_serviceMap
+	}
+	if data.HTTPSManagement != nil {
+		https_managementMap := make(map[string]interface{})
+		if data.HTTPSManagement.AdvertiseOnInternet != nil {
+			advertise_on_internetNestedMap := make(map[string]interface{})
+			https_managementMap["advertise_on_internet"] = advertise_on_internetNestedMap
+		}
+		if data.HTTPSManagement.AdvertiseOnInternetDefaultVip != nil {
+			https_managementMap["advertise_on_internet_default_vip"] = map[string]interface{}{}
+		}
+		if data.HTTPSManagement.AdvertiseOnSLIVip != nil {
+			advertise_on_sli_vipNestedMap := make(map[string]interface{})
+			https_managementMap["advertise_on_sli_vip"] = advertise_on_sli_vipNestedMap
+		}
+		if data.HTTPSManagement.AdvertiseOnSLOInternetVip != nil {
+			advertise_on_slo_internet_vipNestedMap := make(map[string]interface{})
+			https_managementMap["advertise_on_slo_internet_vip"] = advertise_on_slo_internet_vipNestedMap
+		}
+		if data.HTTPSManagement.AdvertiseOnSLOSLI != nil {
+			advertise_on_slo_sliNestedMap := make(map[string]interface{})
+			https_managementMap["advertise_on_slo_sli"] = advertise_on_slo_sliNestedMap
+		}
+		if data.HTTPSManagement.AdvertiseOnSLOVip != nil {
+			advertise_on_slo_vipNestedMap := make(map[string]interface{})
+			https_managementMap["advertise_on_slo_vip"] = advertise_on_slo_vipNestedMap
+		}
+		if data.HTTPSManagement.DefaultHTTPSPort != nil {
+			https_managementMap["default_https_port"] = map[string]interface{}{}
+		}
+		if !data.HTTPSManagement.DomainSuffix.IsNull() && !data.HTTPSManagement.DomainSuffix.IsUnknown() {
+			https_managementMap["domain_suffix"] = data.HTTPSManagement.DomainSuffix.ValueString()
+		}
+		if !data.HTTPSManagement.HTTPSPort.IsNull() && !data.HTTPSManagement.HTTPSPort.IsUnknown() {
+			https_managementMap["https_port"] = data.HTTPSManagement.HTTPSPort.ValueInt64()
+		}
+		apiResource.Spec["https_management"] = https_managementMap
+	}
+	if data.PaloAltoFwService != nil {
+		palo_alto_fw_serviceMap := make(map[string]interface{})
+		if data.PaloAltoFwService.AutoSetup != nil {
+			auto_setupNestedMap := make(map[string]interface{})
+			if !data.PaloAltoFwService.AutoSetup.AdminUsername.IsNull() && !data.PaloAltoFwService.AutoSetup.AdminUsername.IsUnknown() {
+				auto_setupNestedMap["admin_username"] = data.PaloAltoFwService.AutoSetup.AdminUsername.ValueString()
+			}
+			palo_alto_fw_serviceMap["auto_setup"] = auto_setupNestedMap
+		}
+		if data.PaloAltoFwService.AWSTGWSite != nil {
+			aws_tgw_siteNestedMap := make(map[string]interface{})
+			if !data.PaloAltoFwService.AWSTGWSite.Name.IsNull() && !data.PaloAltoFwService.AWSTGWSite.Name.IsUnknown() {
+				aws_tgw_siteNestedMap["name"] = data.PaloAltoFwService.AWSTGWSite.Name.ValueString()
+			}
+			if !data.PaloAltoFwService.AWSTGWSite.Namespace.IsNull() && !data.PaloAltoFwService.AWSTGWSite.Namespace.IsUnknown() {
+				aws_tgw_siteNestedMap["namespace"] = data.PaloAltoFwService.AWSTGWSite.Namespace.ValueString()
+			}
+			if !data.PaloAltoFwService.AWSTGWSite.Tenant.IsNull() && !data.PaloAltoFwService.AWSTGWSite.Tenant.IsUnknown() {
+				aws_tgw_siteNestedMap["tenant"] = data.PaloAltoFwService.AWSTGWSite.Tenant.ValueString()
+			}
+			palo_alto_fw_serviceMap["aws_tgw_site"] = aws_tgw_siteNestedMap
+		}
+		if data.PaloAltoFwService.DisablePanaroma != nil {
+			palo_alto_fw_serviceMap["disable_panaroma"] = map[string]interface{}{}
+		}
+		if !data.PaloAltoFwService.InstanceType.IsNull() && !data.PaloAltoFwService.InstanceType.IsUnknown() {
+			palo_alto_fw_serviceMap["instance_type"] = data.PaloAltoFwService.InstanceType.ValueString()
+		}
+		if data.PaloAltoFwService.PanAmiBundle1 != nil {
+			palo_alto_fw_serviceMap["pan_ami_bundle1"] = map[string]interface{}{}
+		}
+		if data.PaloAltoFwService.PanAmiBundle2 != nil {
+			palo_alto_fw_serviceMap["pan_ami_bundle2"] = map[string]interface{}{}
+		}
+		if data.PaloAltoFwService.PanoramaServer != nil {
+			panorama_serverNestedMap := make(map[string]interface{})
+			if !data.PaloAltoFwService.PanoramaServer.DeviceGroupName.IsNull() && !data.PaloAltoFwService.PanoramaServer.DeviceGroupName.IsUnknown() {
+				panorama_serverNestedMap["device_group_name"] = data.PaloAltoFwService.PanoramaServer.DeviceGroupName.ValueString()
+			}
+			if !data.PaloAltoFwService.PanoramaServer.Server.IsNull() && !data.PaloAltoFwService.PanoramaServer.Server.IsUnknown() {
+				panorama_serverNestedMap["server"] = data.PaloAltoFwService.PanoramaServer.Server.ValueString()
+			}
+			if !data.PaloAltoFwService.PanoramaServer.TemplateStackName.IsNull() && !data.PaloAltoFwService.PanoramaServer.TemplateStackName.IsUnknown() {
+				panorama_serverNestedMap["template_stack_name"] = data.PaloAltoFwService.PanoramaServer.TemplateStackName.ValueString()
+			}
+			palo_alto_fw_serviceMap["panorama_server"] = panorama_serverNestedMap
+		}
+		if data.PaloAltoFwService.ServiceNodes != nil {
+			service_nodesNestedMap := make(map[string]interface{})
+			palo_alto_fw_serviceMap["service_nodes"] = service_nodesNestedMap
+		}
+		if !data.PaloAltoFwService.SSHKey.IsNull() && !data.PaloAltoFwService.SSHKey.IsUnknown() {
+			palo_alto_fw_serviceMap["ssh_key"] = data.PaloAltoFwService.SSHKey.ValueString()
+		}
+		if data.PaloAltoFwService.Tags != nil {
+			palo_alto_fw_serviceMap["tags"] = map[string]interface{}{}
+		}
+		if !data.PaloAltoFwService.Version.IsNull() && !data.PaloAltoFwService.Version.IsUnknown() {
+			palo_alto_fw_serviceMap["version"] = data.PaloAltoFwService.Version.ValueString()
+		}
+		apiResource.Spec["palo_alto_fw_service"] = palo_alto_fw_serviceMap
+	}
+
+
 	updated, err := r.client.UpdateNFVService(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update NFVService: %s", err))
@@ -2282,6 +2691,8 @@ func (r *NFVServiceResource) Update(ctx context.Context, req resource.UpdateRequ
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -2294,6 +2705,7 @@ func (r *NFVServiceResource) Update(ctx context.Context, req resource.UpdateRequ
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -2320,6 +2732,15 @@ func (r *NFVServiceResource) Delete(ctx context.Context, req resource.DeleteRequ
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "NFVService already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "NFVService delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

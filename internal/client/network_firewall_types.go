@@ -10,13 +10,8 @@ import (
 
 // NetworkFirewall represents a F5XC NetworkFirewall
 type NetworkFirewall struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     NetworkFirewallSpec `json:"spec"`
-}
-
-// NetworkFirewallSpec defines the specification for NetworkFirewall
-type NetworkFirewallSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateNetworkFirewall creates a new NetworkFirewall

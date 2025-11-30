@@ -10,13 +10,8 @@ import (
 
 // Proxy represents a F5XC Proxy
 type Proxy struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     ProxySpec `json:"spec"`
-}
-
-// ProxySpec defines the specification for Proxy
-type ProxySpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateProxy creates a new Proxy

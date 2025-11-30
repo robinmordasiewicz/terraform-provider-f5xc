@@ -10,13 +10,8 @@ import (
 
 // BGPAsnSet represents a F5XC BGPAsnSet
 type BGPAsnSet struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     BGPAsnSetSpec `json:"spec"`
-}
-
-// BGPAsnSetSpec defines the specification for BGPAsnSet
-type BGPAsnSetSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateBGPAsnSet creates a new BGPAsnSet

@@ -10,13 +10,8 @@ import (
 
 // TrustedCaList represents a F5XC TrustedCaList
 type TrustedCaList struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     TrustedCaListSpec `json:"spec"`
-}
-
-// TrustedCaListSpec defines the specification for TrustedCaList
-type TrustedCaListSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateTrustedCaList creates a new TrustedCaList

@@ -10,13 +10,8 @@ import (
 
 // AppType represents a F5XC AppType
 type AppType struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     AppTypeSpec `json:"spec"`
-}
-
-// AppTypeSpec defines the specification for AppType
-type AppTypeSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateAppType creates a new AppType

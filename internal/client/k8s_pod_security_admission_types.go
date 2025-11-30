@@ -10,13 +10,8 @@ import (
 
 // K8SPodSecurityAdmission represents a F5XC K8SPodSecurityAdmission
 type K8SPodSecurityAdmission struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     K8SPodSecurityAdmissionSpec `json:"spec"`
-}
-
-// K8SPodSecurityAdmissionSpec defines the specification for K8SPodSecurityAdmission
-type K8SPodSecurityAdmissionSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateK8SPodSecurityAdmission creates a new K8SPodSecurityAdmission

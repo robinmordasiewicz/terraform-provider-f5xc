@@ -372,7 +372,7 @@ func (r *ReportConfigResource) Create(ctx context.Context, req resource.CreateRe
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.ReportConfigSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -397,6 +397,51 @@ func (r *ReportConfigResource) Create(ctx context.Context, req resource.CreateRe
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.ReportRecipients != nil {
+		report_recipientsMap := make(map[string]interface{})
+		apiResource.Spec["report_recipients"] = report_recipientsMap
+	}
+	if data.Waap != nil {
+		waapMap := make(map[string]interface{})
+		if data.Waap.CurrentNamespace != nil {
+			waapMap["current_namespace"] = map[string]interface{}{}
+		}
+		if data.Waap.Daily != nil {
+			dailyNestedMap := make(map[string]interface{})
+			if !data.Waap.Daily.ReportGenerationTime.IsNull() && !data.Waap.Daily.ReportGenerationTime.IsUnknown() {
+				dailyNestedMap["report_generation_time"] = data.Waap.Daily.ReportGenerationTime.ValueString()
+			}
+			waapMap["daily"] = dailyNestedMap
+		}
+		if data.Waap.Monthly != nil {
+			monthlyNestedMap := make(map[string]interface{})
+			if !data.Waap.Monthly.Date.IsNull() && !data.Waap.Monthly.Date.IsUnknown() {
+				monthlyNestedMap["date"] = data.Waap.Monthly.Date.ValueString()
+			}
+			if !data.Waap.Monthly.ReportGenerationTime.IsNull() && !data.Waap.Monthly.ReportGenerationTime.IsUnknown() {
+				monthlyNestedMap["report_generation_time"] = data.Waap.Monthly.ReportGenerationTime.ValueString()
+			}
+			waapMap["monthly"] = monthlyNestedMap
+		}
+		if data.Waap.Namespaces != nil {
+			namespacesNestedMap := make(map[string]interface{})
+			waapMap["namespaces"] = namespacesNestedMap
+		}
+		if data.Waap.Weekly != nil {
+			weeklyNestedMap := make(map[string]interface{})
+			if !data.Waap.Weekly.Day.IsNull() && !data.Waap.Weekly.Day.IsUnknown() {
+				weeklyNestedMap["day"] = data.Waap.Weekly.Day.ValueString()
+			}
+			if !data.Waap.Weekly.ReportGenerationTime.IsNull() && !data.Waap.Weekly.ReportGenerationTime.IsUnknown() {
+				weeklyNestedMap["report_generation_time"] = data.Waap.Weekly.ReportGenerationTime.ValueString()
+			}
+			waapMap["weekly"] = weeklyNestedMap
+		}
+		apiResource.Spec["waap"] = waapMap
+	}
+
+
 	created, err := r.client.CreateReportConfig(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create ReportConfig: %s", err))
@@ -405,8 +450,13 @@ func (r *ReportConfigResource) Create(ctx context.Context, req resource.CreateRe
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created ReportConfig resource")
@@ -485,9 +535,35 @@ func (r *ReportConfigResource) Read(ctx context.Context, req resource.ReadReques
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if _, ok := apiResource.Spec["report_recipients"].(map[string]interface{}); ok && isImport && data.ReportRecipients == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ReportRecipients = &ReportConfigReportRecipientsModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["waap"].(map[string]interface{}); ok && isImport && data.Waap == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Waap = &ReportConfigWaapModel{}
+	}
+	// Normal Read: preserve existing state value
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -513,7 +589,7 @@ func (r *ReportConfigResource) Update(ctx context.Context, req resource.UpdateRe
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.ReportConfigSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -538,6 +614,51 @@ func (r *ReportConfigResource) Update(ctx context.Context, req resource.UpdateRe
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.ReportRecipients != nil {
+		report_recipientsMap := make(map[string]interface{})
+		apiResource.Spec["report_recipients"] = report_recipientsMap
+	}
+	if data.Waap != nil {
+		waapMap := make(map[string]interface{})
+		if data.Waap.CurrentNamespace != nil {
+			waapMap["current_namespace"] = map[string]interface{}{}
+		}
+		if data.Waap.Daily != nil {
+			dailyNestedMap := make(map[string]interface{})
+			if !data.Waap.Daily.ReportGenerationTime.IsNull() && !data.Waap.Daily.ReportGenerationTime.IsUnknown() {
+				dailyNestedMap["report_generation_time"] = data.Waap.Daily.ReportGenerationTime.ValueString()
+			}
+			waapMap["daily"] = dailyNestedMap
+		}
+		if data.Waap.Monthly != nil {
+			monthlyNestedMap := make(map[string]interface{})
+			if !data.Waap.Monthly.Date.IsNull() && !data.Waap.Monthly.Date.IsUnknown() {
+				monthlyNestedMap["date"] = data.Waap.Monthly.Date.ValueString()
+			}
+			if !data.Waap.Monthly.ReportGenerationTime.IsNull() && !data.Waap.Monthly.ReportGenerationTime.IsUnknown() {
+				monthlyNestedMap["report_generation_time"] = data.Waap.Monthly.ReportGenerationTime.ValueString()
+			}
+			waapMap["monthly"] = monthlyNestedMap
+		}
+		if data.Waap.Namespaces != nil {
+			namespacesNestedMap := make(map[string]interface{})
+			waapMap["namespaces"] = namespacesNestedMap
+		}
+		if data.Waap.Weekly != nil {
+			weeklyNestedMap := make(map[string]interface{})
+			if !data.Waap.Weekly.Day.IsNull() && !data.Waap.Weekly.Day.IsUnknown() {
+				weeklyNestedMap["day"] = data.Waap.Weekly.Day.ValueString()
+			}
+			if !data.Waap.Weekly.ReportGenerationTime.IsNull() && !data.Waap.Weekly.ReportGenerationTime.IsUnknown() {
+				weeklyNestedMap["report_generation_time"] = data.Waap.Weekly.ReportGenerationTime.ValueString()
+			}
+			waapMap["weekly"] = weeklyNestedMap
+		}
+		apiResource.Spec["waap"] = waapMap
+	}
+
+
 	updated, err := r.client.UpdateReportConfig(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update ReportConfig: %s", err))
@@ -546,6 +667,8 @@ func (r *ReportConfigResource) Update(ctx context.Context, req resource.UpdateRe
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -558,6 +681,7 @@ func (r *ReportConfigResource) Update(ctx context.Context, req resource.UpdateRe
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -584,6 +708,15 @@ func (r *ReportConfigResource) Delete(ctx context.Context, req resource.DeleteRe
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "ReportConfig already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "ReportConfig delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

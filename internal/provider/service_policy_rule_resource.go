@@ -362,14 +362,14 @@ type ServicePolicyRuleWAFActionAppFirewallDetectionControlExcludeViolationContex
 type ServicePolicyRuleResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Action types.String `tfsdk:"action"`
 	Annotations types.Map `tfsdk:"annotations"`
-	ClientName types.String `tfsdk:"client_name"`
 	Description types.String `tfsdk:"description"`
 	Disable types.Bool `tfsdk:"disable"`
-	ExpirationTimestamp types.String `tfsdk:"expiration_timestamp"`
 	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
+	Action types.String `tfsdk:"action"`
+	ClientName types.String `tfsdk:"client_name"`
+	ExpirationTimestamp types.String `tfsdk:"expiration_timestamp"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
 	AnyAsn *ServicePolicyRuleEmptyModel `tfsdk:"any_asn"`
 	AnyClient *ServicePolicyRuleEmptyModel `tfsdk:"any_client"`
@@ -431,18 +431,10 @@ func (r *ServicePolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 					validators.NamespaceValidator(),
 				},
 			},
-			"action": schema.StringAttribute{
-				MarkdownDescription: "Rule Action. The rule action determines the disposition of the input request API. If a policy matches a rule with an ALLOW action, the processing of the request proceeds forward. If it matches a rule with a DENY action, the processing of the request is terminated and an appropriate message/code returned to the originator. If it matches a rule with a NEXT_POLICY_SET action, evaluation of the current policy set terminates and evaluation of the next policy set in the chain begins. - DENY: DENY Deny the request. - ALLOW: ALLOW Allow the request to proceed. - NEXT_POLICY_SET: NEXT_POLICY_SET Terminate evaluation of the current policy set and begin evaluating the next policy set in the chain. Note that the evaluation of any remaining policies in the current policy set is skipped. - NEXT_POLICY: NEXT_POLICY Terminate evaluation of the current policy and begin evaluating the next policy in the policy set. Note that the evaluation of any remaining rules in the current policy is skipped. - LAST_POLICY: LAST_POLICY Terminate evaluation of the current policy and begin evaluating the last policy in the policy set. Note that the evaluation of any remaining rules in the current policy is skipped. - GOTO_POLICY: GOTO_POLICY Terminate evaluation of the current policy and begin evaluating a specific policy in the policy set. The policy is specified using the goto_policy field in the rule and must be after the current policy in the policy set. Possible values are `DENY`, `ALLOW`, `NEXT_POLICY`. Defaults to `DENY`.",
-				Optional: true,
-			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
 				Optional: true,
 				ElementType: types.StringType,
-			},
-			"client_name": schema.StringAttribute{
-				MarkdownDescription: "Client Name. The expected name of the client invoking the request API. The predicate evaluates to true if any of the actual names is the same as the expected client name.",
-				Optional: true,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
@@ -452,10 +444,6 @@ func (r *ServicePolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 				MarkdownDescription: "A value of true will administratively disable the object.",
 				Optional: true,
 			},
-			"expiration_timestamp": schema.StringAttribute{
-				MarkdownDescription: "Expiration Timestamp. The expiration_timestamp is the RFC 3339 format timestamp at which the containing rule is considered to be logically expired. The rule continues to exist in the configuration but is not applied anymore.",
-				Optional: true,
-			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
 				Optional: true,
@@ -463,6 +451,30 @@ func (r *ServicePolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"action": schema.StringAttribute{
+				MarkdownDescription: "Rule Action. The rule action determines the disposition of the input request API. If a policy matches a rule with an ALLOW action, the processing of the request proceeds forward. If it matches a rule with a DENY action, the processing of the request is terminated and an appropriate message/code returned to the originator. If it matches a rule with a NEXT_POLICY_SET action, evaluation of the current policy set terminates and evaluation of the next policy set in the chain begins. - DENY: DENY Deny the request. - ALLOW: ALLOW Allow the request to proceed. - NEXT_POLICY_SET: NEXT_POLICY_SET Terminate evaluation of the current policy set and begin evaluating the next policy set in the chain. Note that the evaluation of any remaining policies in the current policy set is skipped. - NEXT_POLICY: NEXT_POLICY Terminate evaluation of the current policy and begin evaluating the next policy in the policy set. Note that the evaluation of any remaining rules in the current policy is skipped. - LAST_POLICY: LAST_POLICY Terminate evaluation of the current policy and begin evaluating the last policy in the policy set. Note that the evaluation of any remaining rules in the current policy is skipped. - GOTO_POLICY: GOTO_POLICY Terminate evaluation of the current policy and begin evaluating a specific policy in the policy set. The policy is specified using the goto_policy field in the rule and must be after the current policy in the policy set. Possible values are `DENY`, `ALLOW`, `NEXT_POLICY`. Defaults to `DENY`.",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"client_name": schema.StringAttribute{
+				MarkdownDescription: "Client Name. The expected name of the client invoking the request API. The predicate evaluates to true if any of the actual names is the same as the expected client name.",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"expiration_timestamp": schema.StringAttribute{
+				MarkdownDescription: "Expiration Timestamp. The expiration_timestamp is the RFC 3339 format timestamp at which the containing rule is considered to be logically expired. The rule continues to exist in the configuration but is not applied anymore.",
+				Optional: true,
 				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
@@ -550,7 +562,7 @@ func (r *ServicePolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 					"as_numbers": schema.ListAttribute{
 						MarkdownDescription: "AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
 						Optional: true,
-						ElementType: types.StringType,
+						ElementType: types.Int64Type,
 					},
 				},
 
@@ -1410,7 +1422,7 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.ServicePolicyRuleSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -1435,6 +1447,369 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.AnyAsn != nil {
+		any_asnMap := make(map[string]interface{})
+		apiResource.Spec["any_asn"] = any_asnMap
+	}
+	if data.AnyClient != nil {
+		any_clientMap := make(map[string]interface{})
+		apiResource.Spec["any_client"] = any_clientMap
+	}
+	if data.AnyIP != nil {
+		any_ipMap := make(map[string]interface{})
+		apiResource.Spec["any_ip"] = any_ipMap
+	}
+	if data.APIGroupMatcher != nil {
+		api_group_matcherMap := make(map[string]interface{})
+		if !data.APIGroupMatcher.InvertMatcher.IsNull() && !data.APIGroupMatcher.InvertMatcher.IsUnknown() {
+			api_group_matcherMap["invert_matcher"] = data.APIGroupMatcher.InvertMatcher.ValueBool()
+		}
+		apiResource.Spec["api_group_matcher"] = api_group_matcherMap
+	}
+	if len(data.ArgMatchers) > 0 {
+		var arg_matchersList []map[string]interface{}
+		for _, item := range data.ArgMatchers {
+			itemMap := make(map[string]interface{})
+			if item.CheckNotPresent != nil {
+				itemMap["check_not_present"] = map[string]interface{}{}
+			}
+			if item.CheckPresent != nil {
+				itemMap["check_present"] = map[string]interface{}{}
+			}
+			if !item.InvertMatcher.IsNull() && !item.InvertMatcher.IsUnknown() {
+				itemMap["invert_matcher"] = item.InvertMatcher.ValueBool()
+			}
+			if item.Item != nil {
+				itemNestedMap := make(map[string]interface{})
+				itemMap["item"] = itemNestedMap
+			}
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			arg_matchersList = append(arg_matchersList, itemMap)
+		}
+		apiResource.Spec["arg_matchers"] = arg_matchersList
+	}
+	if data.AsnList != nil {
+		asn_listMap := make(map[string]interface{})
+		apiResource.Spec["asn_list"] = asn_listMap
+	}
+	if data.AsnMatcher != nil {
+		asn_matcherMap := make(map[string]interface{})
+		apiResource.Spec["asn_matcher"] = asn_matcherMap
+	}
+	if data.BodyMatcher != nil {
+		body_matcherMap := make(map[string]interface{})
+		apiResource.Spec["body_matcher"] = body_matcherMap
+	}
+	if data.BotAction != nil {
+		bot_actionMap := make(map[string]interface{})
+		if data.BotAction.BotSkipProcessing != nil {
+			bot_actionMap["bot_skip_processing"] = map[string]interface{}{}
+		}
+		if data.BotAction.None != nil {
+			bot_actionMap["none"] = map[string]interface{}{}
+		}
+		apiResource.Spec["bot_action"] = bot_actionMap
+	}
+	if data.ClientNameMatcher != nil {
+		client_name_matcherMap := make(map[string]interface{})
+		apiResource.Spec["client_name_matcher"] = client_name_matcherMap
+	}
+	if data.ClientSelector != nil {
+		client_selectorMap := make(map[string]interface{})
+		apiResource.Spec["client_selector"] = client_selectorMap
+	}
+	if len(data.CookieMatchers) > 0 {
+		var cookie_matchersList []map[string]interface{}
+		for _, item := range data.CookieMatchers {
+			itemMap := make(map[string]interface{})
+			if item.CheckNotPresent != nil {
+				itemMap["check_not_present"] = map[string]interface{}{}
+			}
+			if item.CheckPresent != nil {
+				itemMap["check_present"] = map[string]interface{}{}
+			}
+			if !item.InvertMatcher.IsNull() && !item.InvertMatcher.IsUnknown() {
+				itemMap["invert_matcher"] = item.InvertMatcher.ValueBool()
+			}
+			if item.Item != nil {
+				itemNestedMap := make(map[string]interface{})
+				itemMap["item"] = itemNestedMap
+			}
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			cookie_matchersList = append(cookie_matchersList, itemMap)
+		}
+		apiResource.Spec["cookie_matchers"] = cookie_matchersList
+	}
+	if data.DomainMatcher != nil {
+		domain_matcherMap := make(map[string]interface{})
+		apiResource.Spec["domain_matcher"] = domain_matcherMap
+	}
+	if len(data.Headers) > 0 {
+		var headersList []map[string]interface{}
+		for _, item := range data.Headers {
+			itemMap := make(map[string]interface{})
+			if item.CheckNotPresent != nil {
+				itemMap["check_not_present"] = map[string]interface{}{}
+			}
+			if item.CheckPresent != nil {
+				itemMap["check_present"] = map[string]interface{}{}
+			}
+			if !item.InvertMatcher.IsNull() && !item.InvertMatcher.IsUnknown() {
+				itemMap["invert_matcher"] = item.InvertMatcher.ValueBool()
+			}
+			if item.Item != nil {
+				itemNestedMap := make(map[string]interface{})
+				itemMap["item"] = itemNestedMap
+			}
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			headersList = append(headersList, itemMap)
+		}
+		apiResource.Spec["headers"] = headersList
+	}
+	if data.HTTPMethod != nil {
+		http_methodMap := make(map[string]interface{})
+		if !data.HTTPMethod.InvertMatcher.IsNull() && !data.HTTPMethod.InvertMatcher.IsUnknown() {
+			http_methodMap["invert_matcher"] = data.HTTPMethod.InvertMatcher.ValueBool()
+		}
+		apiResource.Spec["http_method"] = http_methodMap
+	}
+	if data.IPMatcher != nil {
+		ip_matcherMap := make(map[string]interface{})
+		if !data.IPMatcher.InvertMatcher.IsNull() && !data.IPMatcher.InvertMatcher.IsUnknown() {
+			ip_matcherMap["invert_matcher"] = data.IPMatcher.InvertMatcher.ValueBool()
+		}
+		apiResource.Spec["ip_matcher"] = ip_matcherMap
+	}
+	if data.IPPrefixList != nil {
+		ip_prefix_listMap := make(map[string]interface{})
+		if !data.IPPrefixList.InvertMatch.IsNull() && !data.IPPrefixList.InvertMatch.IsUnknown() {
+			ip_prefix_listMap["invert_match"] = data.IPPrefixList.InvertMatch.ValueBool()
+		}
+		apiResource.Spec["ip_prefix_list"] = ip_prefix_listMap
+	}
+	if data.IPThreatCategoryList != nil {
+		ip_threat_category_listMap := make(map[string]interface{})
+		apiResource.Spec["ip_threat_category_list"] = ip_threat_category_listMap
+	}
+	if data.Ja4TLSFingerprint != nil {
+		ja4_tls_fingerprintMap := make(map[string]interface{})
+		apiResource.Spec["ja4_tls_fingerprint"] = ja4_tls_fingerprintMap
+	}
+	if len(data.JwtClaims) > 0 {
+		var jwt_claimsList []map[string]interface{}
+		for _, item := range data.JwtClaims {
+			itemMap := make(map[string]interface{})
+			if item.CheckNotPresent != nil {
+				itemMap["check_not_present"] = map[string]interface{}{}
+			}
+			if item.CheckPresent != nil {
+				itemMap["check_present"] = map[string]interface{}{}
+			}
+			if !item.InvertMatcher.IsNull() && !item.InvertMatcher.IsUnknown() {
+				itemMap["invert_matcher"] = item.InvertMatcher.ValueBool()
+			}
+			if item.Item != nil {
+				itemNestedMap := make(map[string]interface{})
+				itemMap["item"] = itemNestedMap
+			}
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			jwt_claimsList = append(jwt_claimsList, itemMap)
+		}
+		apiResource.Spec["jwt_claims"] = jwt_claimsList
+	}
+	if data.LabelMatcher != nil {
+		label_matcherMap := make(map[string]interface{})
+		apiResource.Spec["label_matcher"] = label_matcherMap
+	}
+	if data.MumAction != nil {
+		mum_actionMap := make(map[string]interface{})
+		if data.MumAction.Default != nil {
+			mum_actionMap["default"] = map[string]interface{}{}
+		}
+		if data.MumAction.SkipProcessing != nil {
+			mum_actionMap["skip_processing"] = map[string]interface{}{}
+		}
+		apiResource.Spec["mum_action"] = mum_actionMap
+	}
+	if data.Path != nil {
+		pathMap := make(map[string]interface{})
+		if !data.Path.InvertMatcher.IsNull() && !data.Path.InvertMatcher.IsUnknown() {
+			pathMap["invert_matcher"] = data.Path.InvertMatcher.ValueBool()
+		}
+		apiResource.Spec["path"] = pathMap
+	}
+	if data.PortMatcher != nil {
+		port_matcherMap := make(map[string]interface{})
+		if !data.PortMatcher.InvertMatcher.IsNull() && !data.PortMatcher.InvertMatcher.IsUnknown() {
+			port_matcherMap["invert_matcher"] = data.PortMatcher.InvertMatcher.ValueBool()
+		}
+		apiResource.Spec["port_matcher"] = port_matcherMap
+	}
+	if len(data.QueryParams) > 0 {
+		var query_paramsList []map[string]interface{}
+		for _, item := range data.QueryParams {
+			itemMap := make(map[string]interface{})
+			if item.CheckNotPresent != nil {
+				itemMap["check_not_present"] = map[string]interface{}{}
+			}
+			if item.CheckPresent != nil {
+				itemMap["check_present"] = map[string]interface{}{}
+			}
+			if !item.InvertMatcher.IsNull() && !item.InvertMatcher.IsUnknown() {
+				itemMap["invert_matcher"] = item.InvertMatcher.ValueBool()
+			}
+			if item.Item != nil {
+				itemNestedMap := make(map[string]interface{})
+				itemMap["item"] = itemNestedMap
+			}
+			if !item.Key.IsNull() && !item.Key.IsUnknown() {
+				itemMap["key"] = item.Key.ValueString()
+			}
+			query_paramsList = append(query_paramsList, itemMap)
+		}
+		apiResource.Spec["query_params"] = query_paramsList
+	}
+	if data.RequestConstraints != nil {
+		request_constraintsMap := make(map[string]interface{})
+		if !data.RequestConstraints.MaxCookieCountExceeds.IsNull() && !data.RequestConstraints.MaxCookieCountExceeds.IsUnknown() {
+			request_constraintsMap["max_cookie_count_exceeds"] = data.RequestConstraints.MaxCookieCountExceeds.ValueInt64()
+		}
+		if data.RequestConstraints.MaxCookieCountNone != nil {
+			request_constraintsMap["max_cookie_count_none"] = map[string]interface{}{}
+		}
+		if !data.RequestConstraints.MaxCookieKeySizeExceeds.IsNull() && !data.RequestConstraints.MaxCookieKeySizeExceeds.IsUnknown() {
+			request_constraintsMap["max_cookie_key_size_exceeds"] = data.RequestConstraints.MaxCookieKeySizeExceeds.ValueInt64()
+		}
+		if data.RequestConstraints.MaxCookieKeySizeNone != nil {
+			request_constraintsMap["max_cookie_key_size_none"] = map[string]interface{}{}
+		}
+		if !data.RequestConstraints.MaxCookieValueSizeExceeds.IsNull() && !data.RequestConstraints.MaxCookieValueSizeExceeds.IsUnknown() {
+			request_constraintsMap["max_cookie_value_size_exceeds"] = data.RequestConstraints.MaxCookieValueSizeExceeds.ValueInt64()
+		}
+		if data.RequestConstraints.MaxCookieValueSizeNone != nil {
+			request_constraintsMap["max_cookie_value_size_none"] = map[string]interface{}{}
+		}
+		if !data.RequestConstraints.MaxHeaderCountExceeds.IsNull() && !data.RequestConstraints.MaxHeaderCountExceeds.IsUnknown() {
+			request_constraintsMap["max_header_count_exceeds"] = data.RequestConstraints.MaxHeaderCountExceeds.ValueInt64()
+		}
+		if data.RequestConstraints.MaxHeaderCountNone != nil {
+			request_constraintsMap["max_header_count_none"] = map[string]interface{}{}
+		}
+		if !data.RequestConstraints.MaxHeaderKeySizeExceeds.IsNull() && !data.RequestConstraints.MaxHeaderKeySizeExceeds.IsUnknown() {
+			request_constraintsMap["max_header_key_size_exceeds"] = data.RequestConstraints.MaxHeaderKeySizeExceeds.ValueInt64()
+		}
+		if data.RequestConstraints.MaxHeaderKeySizeNone != nil {
+			request_constraintsMap["max_header_key_size_none"] = map[string]interface{}{}
+		}
+		if !data.RequestConstraints.MaxHeaderValueSizeExceeds.IsNull() && !data.RequestConstraints.MaxHeaderValueSizeExceeds.IsUnknown() {
+			request_constraintsMap["max_header_value_size_exceeds"] = data.RequestConstraints.MaxHeaderValueSizeExceeds.ValueInt64()
+		}
+		if data.RequestConstraints.MaxHeaderValueSizeNone != nil {
+			request_constraintsMap["max_header_value_size_none"] = map[string]interface{}{}
+		}
+		if !data.RequestConstraints.MaxParameterCountExceeds.IsNull() && !data.RequestConstraints.MaxParameterCountExceeds.IsUnknown() {
+			request_constraintsMap["max_parameter_count_exceeds"] = data.RequestConstraints.MaxParameterCountExceeds.ValueInt64()
+		}
+		if data.RequestConstraints.MaxParameterCountNone != nil {
+			request_constraintsMap["max_parameter_count_none"] = map[string]interface{}{}
+		}
+		if !data.RequestConstraints.MaxParameterNameSizeExceeds.IsNull() && !data.RequestConstraints.MaxParameterNameSizeExceeds.IsUnknown() {
+			request_constraintsMap["max_parameter_name_size_exceeds"] = data.RequestConstraints.MaxParameterNameSizeExceeds.ValueInt64()
+		}
+		if data.RequestConstraints.MaxParameterNameSizeNone != nil {
+			request_constraintsMap["max_parameter_name_size_none"] = map[string]interface{}{}
+		}
+		if !data.RequestConstraints.MaxParameterValueSizeExceeds.IsNull() && !data.RequestConstraints.MaxParameterValueSizeExceeds.IsUnknown() {
+			request_constraintsMap["max_parameter_value_size_exceeds"] = data.RequestConstraints.MaxParameterValueSizeExceeds.ValueInt64()
+		}
+		if data.RequestConstraints.MaxParameterValueSizeNone != nil {
+			request_constraintsMap["max_parameter_value_size_none"] = map[string]interface{}{}
+		}
+		if !data.RequestConstraints.MaxQuerySizeExceeds.IsNull() && !data.RequestConstraints.MaxQuerySizeExceeds.IsUnknown() {
+			request_constraintsMap["max_query_size_exceeds"] = data.RequestConstraints.MaxQuerySizeExceeds.ValueInt64()
+		}
+		if data.RequestConstraints.MaxQuerySizeNone != nil {
+			request_constraintsMap["max_query_size_none"] = map[string]interface{}{}
+		}
+		if !data.RequestConstraints.MaxRequestLineSizeExceeds.IsNull() && !data.RequestConstraints.MaxRequestLineSizeExceeds.IsUnknown() {
+			request_constraintsMap["max_request_line_size_exceeds"] = data.RequestConstraints.MaxRequestLineSizeExceeds.ValueInt64()
+		}
+		if data.RequestConstraints.MaxRequestLineSizeNone != nil {
+			request_constraintsMap["max_request_line_size_none"] = map[string]interface{}{}
+		}
+		if !data.RequestConstraints.MaxRequestSizeExceeds.IsNull() && !data.RequestConstraints.MaxRequestSizeExceeds.IsUnknown() {
+			request_constraintsMap["max_request_size_exceeds"] = data.RequestConstraints.MaxRequestSizeExceeds.ValueInt64()
+		}
+		if data.RequestConstraints.MaxRequestSizeNone != nil {
+			request_constraintsMap["max_request_size_none"] = map[string]interface{}{}
+		}
+		if !data.RequestConstraints.MaxURLSizeExceeds.IsNull() && !data.RequestConstraints.MaxURLSizeExceeds.IsUnknown() {
+			request_constraintsMap["max_url_size_exceeds"] = data.RequestConstraints.MaxURLSizeExceeds.ValueInt64()
+		}
+		if data.RequestConstraints.MaxURLSizeNone != nil {
+			request_constraintsMap["max_url_size_none"] = map[string]interface{}{}
+		}
+		apiResource.Spec["request_constraints"] = request_constraintsMap
+	}
+	if data.SegmentPolicy != nil {
+		segment_policyMap := make(map[string]interface{})
+		if data.SegmentPolicy.DstAny != nil {
+			segment_policyMap["dst_any"] = map[string]interface{}{}
+		}
+		if data.SegmentPolicy.DstSegments != nil {
+			dst_segmentsNestedMap := make(map[string]interface{})
+			segment_policyMap["dst_segments"] = dst_segmentsNestedMap
+		}
+		if data.SegmentPolicy.IntraSegment != nil {
+			segment_policyMap["intra_segment"] = map[string]interface{}{}
+		}
+		if data.SegmentPolicy.SrcAny != nil {
+			segment_policyMap["src_any"] = map[string]interface{}{}
+		}
+		if data.SegmentPolicy.SrcSegments != nil {
+			src_segmentsNestedMap := make(map[string]interface{})
+			segment_policyMap["src_segments"] = src_segmentsNestedMap
+		}
+		apiResource.Spec["segment_policy"] = segment_policyMap
+	}
+	if data.TLSFingerprintMatcher != nil {
+		tls_fingerprint_matcherMap := make(map[string]interface{})
+		apiResource.Spec["tls_fingerprint_matcher"] = tls_fingerprint_matcherMap
+	}
+	if data.WAFAction != nil {
+		waf_actionMap := make(map[string]interface{})
+		if data.WAFAction.AppFirewallDetectionControl != nil {
+			app_firewall_detection_controlNestedMap := make(map[string]interface{})
+			waf_actionMap["app_firewall_detection_control"] = app_firewall_detection_controlNestedMap
+		}
+		if data.WAFAction.None != nil {
+			waf_actionMap["none"] = map[string]interface{}{}
+		}
+		if data.WAFAction.WAFSkipProcessing != nil {
+			waf_actionMap["waf_skip_processing"] = map[string]interface{}{}
+		}
+		apiResource.Spec["waf_action"] = waf_actionMap
+	}
+	if !data.Action.IsNull() && !data.Action.IsUnknown() {
+		apiResource.Spec["action"] = data.Action.ValueString()
+	}
+	if !data.ClientName.IsNull() && !data.ClientName.IsUnknown() {
+		apiResource.Spec["client_name"] = data.ClientName.ValueString()
+	}
+	if !data.ExpirationTimestamp.IsNull() && !data.ExpirationTimestamp.IsUnknown() {
+		apiResource.Spec["expiration_timestamp"] = data.ExpirationTimestamp.ValueString()
+	}
+
+
 	created, err := r.client.CreateServicePolicyRule(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create ServicePolicyRule: %s", err))
@@ -1443,8 +1818,25 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+	if v, ok := created.Spec["action"].(string); ok && v != "" {
+		data.Action = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["client_name"].(string); ok && v != "" {
+		data.ClientName = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["expiration_timestamp"].(string); ok && v != "" {
+		data.ExpirationTimestamp = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created ServicePolicyRule resource")
@@ -1523,9 +1915,502 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if _, ok := apiResource.Spec["any_asn"].(map[string]interface{}); ok && isImport && data.AnyAsn == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AnyAsn = &ServicePolicyRuleEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["any_client"].(map[string]interface{}); ok && isImport && data.AnyClient == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AnyClient = &ServicePolicyRuleEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["any_ip"].(map[string]interface{}); ok && isImport && data.AnyIP == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AnyIP = &ServicePolicyRuleEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["api_group_matcher"].(map[string]interface{}); ok && (isImport || data.APIGroupMatcher != nil) {
+		data.APIGroupMatcher = &ServicePolicyRuleAPIGroupMatcherModel{
+			InvertMatcher: func() types.Bool {
+				if !isImport && data.APIGroupMatcher != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.APIGroupMatcher.InvertMatcher
+				}
+				// Import case: read from API
+				if v, ok := blockData["invert_matcher"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+		}
+	}
+	if listData, ok := apiResource.Spec["arg_matchers"].([]interface{}); ok && len(listData) > 0 {
+		var arg_matchersList []ServicePolicyRuleArgMatchersModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				arg_matchersList = append(arg_matchersList, ServicePolicyRuleArgMatchersModel{
+					CheckNotPresent: func() *ServicePolicyRuleEmptyModel {
+						if _, ok := itemMap["check_not_present"].(map[string]interface{}); ok {
+							return &ServicePolicyRuleEmptyModel{}
+						}
+						return nil
+					}(),
+					CheckPresent: func() *ServicePolicyRuleEmptyModel {
+						if _, ok := itemMap["check_present"].(map[string]interface{}); ok {
+							return &ServicePolicyRuleEmptyModel{}
+						}
+						return nil
+					}(),
+					InvertMatcher: func() types.Bool {
+						if v, ok := itemMap["invert_matcher"].(bool); ok {
+							return types.BoolValue(v)
+						}
+						return types.BoolNull()
+					}(),
+					Item: func() *ServicePolicyRuleArgMatchersItemModel {
+						if _, ok := itemMap["item"].(map[string]interface{}); ok {
+							return &ServicePolicyRuleArgMatchersItemModel{
+							}
+						}
+						return nil
+					}(),
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.ArgMatchers = arg_matchersList
+	}
+	if _, ok := apiResource.Spec["asn_list"].(map[string]interface{}); ok && isImport && data.AsnList == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AsnList = &ServicePolicyRuleAsnListModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["asn_matcher"].(map[string]interface{}); ok && isImport && data.AsnMatcher == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AsnMatcher = &ServicePolicyRuleAsnMatcherModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["body_matcher"].(map[string]interface{}); ok && isImport && data.BodyMatcher == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.BodyMatcher = &ServicePolicyRuleBodyMatcherModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["bot_action"].(map[string]interface{}); ok && isImport && data.BotAction == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.BotAction = &ServicePolicyRuleBotActionModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["client_name_matcher"].(map[string]interface{}); ok && isImport && data.ClientNameMatcher == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ClientNameMatcher = &ServicePolicyRuleClientNameMatcherModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["client_selector"].(map[string]interface{}); ok && isImport && data.ClientSelector == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ClientSelector = &ServicePolicyRuleClientSelectorModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["cookie_matchers"].([]interface{}); ok && len(listData) > 0 {
+		var cookie_matchersList []ServicePolicyRuleCookieMatchersModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				cookie_matchersList = append(cookie_matchersList, ServicePolicyRuleCookieMatchersModel{
+					CheckNotPresent: func() *ServicePolicyRuleEmptyModel {
+						if _, ok := itemMap["check_not_present"].(map[string]interface{}); ok {
+							return &ServicePolicyRuleEmptyModel{}
+						}
+						return nil
+					}(),
+					CheckPresent: func() *ServicePolicyRuleEmptyModel {
+						if _, ok := itemMap["check_present"].(map[string]interface{}); ok {
+							return &ServicePolicyRuleEmptyModel{}
+						}
+						return nil
+					}(),
+					InvertMatcher: func() types.Bool {
+						if v, ok := itemMap["invert_matcher"].(bool); ok {
+							return types.BoolValue(v)
+						}
+						return types.BoolNull()
+					}(),
+					Item: func() *ServicePolicyRuleCookieMatchersItemModel {
+						if _, ok := itemMap["item"].(map[string]interface{}); ok {
+							return &ServicePolicyRuleCookieMatchersItemModel{
+							}
+						}
+						return nil
+					}(),
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.CookieMatchers = cookie_matchersList
+	}
+	if _, ok := apiResource.Spec["domain_matcher"].(map[string]interface{}); ok && isImport && data.DomainMatcher == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DomainMatcher = &ServicePolicyRuleDomainMatcherModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["headers"].([]interface{}); ok && len(listData) > 0 {
+		var headersList []ServicePolicyRuleHeadersModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				headersList = append(headersList, ServicePolicyRuleHeadersModel{
+					CheckNotPresent: func() *ServicePolicyRuleEmptyModel {
+						if _, ok := itemMap["check_not_present"].(map[string]interface{}); ok {
+							return &ServicePolicyRuleEmptyModel{}
+						}
+						return nil
+					}(),
+					CheckPresent: func() *ServicePolicyRuleEmptyModel {
+						if _, ok := itemMap["check_present"].(map[string]interface{}); ok {
+							return &ServicePolicyRuleEmptyModel{}
+						}
+						return nil
+					}(),
+					InvertMatcher: func() types.Bool {
+						if v, ok := itemMap["invert_matcher"].(bool); ok {
+							return types.BoolValue(v)
+						}
+						return types.BoolNull()
+					}(),
+					Item: func() *ServicePolicyRuleHeadersItemModel {
+						if _, ok := itemMap["item"].(map[string]interface{}); ok {
+							return &ServicePolicyRuleHeadersItemModel{
+							}
+						}
+						return nil
+					}(),
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.Headers = headersList
+	}
+	if blockData, ok := apiResource.Spec["http_method"].(map[string]interface{}); ok && (isImport || data.HTTPMethod != nil) {
+		data.HTTPMethod = &ServicePolicyRuleHTTPMethodModel{
+			InvertMatcher: func() types.Bool {
+				if !isImport && data.HTTPMethod != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.HTTPMethod.InvertMatcher
+				}
+				// Import case: read from API
+				if v, ok := blockData["invert_matcher"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["ip_matcher"].(map[string]interface{}); ok && (isImport || data.IPMatcher != nil) {
+		data.IPMatcher = &ServicePolicyRuleIPMatcherModel{
+			InvertMatcher: func() types.Bool {
+				if !isImport && data.IPMatcher != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.IPMatcher.InvertMatcher
+				}
+				// Import case: read from API
+				if v, ok := blockData["invert_matcher"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["ip_prefix_list"].(map[string]interface{}); ok && (isImport || data.IPPrefixList != nil) {
+		data.IPPrefixList = &ServicePolicyRuleIPPrefixListModel{
+			InvertMatch: func() types.Bool {
+				if !isImport && data.IPPrefixList != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.IPPrefixList.InvertMatch
+				}
+				// Import case: read from API
+				if v, ok := blockData["invert_match"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["ip_threat_category_list"].(map[string]interface{}); ok && isImport && data.IPThreatCategoryList == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.IPThreatCategoryList = &ServicePolicyRuleIPThreatCategoryListModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["ja4_tls_fingerprint"].(map[string]interface{}); ok && isImport && data.Ja4TLSFingerprint == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Ja4TLSFingerprint = &ServicePolicyRuleJa4TLSFingerprintModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["jwt_claims"].([]interface{}); ok && len(listData) > 0 {
+		var jwt_claimsList []ServicePolicyRuleJwtClaimsModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				jwt_claimsList = append(jwt_claimsList, ServicePolicyRuleJwtClaimsModel{
+					CheckNotPresent: func() *ServicePolicyRuleEmptyModel {
+						if _, ok := itemMap["check_not_present"].(map[string]interface{}); ok {
+							return &ServicePolicyRuleEmptyModel{}
+						}
+						return nil
+					}(),
+					CheckPresent: func() *ServicePolicyRuleEmptyModel {
+						if _, ok := itemMap["check_present"].(map[string]interface{}); ok {
+							return &ServicePolicyRuleEmptyModel{}
+						}
+						return nil
+					}(),
+					InvertMatcher: func() types.Bool {
+						if v, ok := itemMap["invert_matcher"].(bool); ok {
+							return types.BoolValue(v)
+						}
+						return types.BoolNull()
+					}(),
+					Item: func() *ServicePolicyRuleJwtClaimsItemModel {
+						if _, ok := itemMap["item"].(map[string]interface{}); ok {
+							return &ServicePolicyRuleJwtClaimsItemModel{
+							}
+						}
+						return nil
+					}(),
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.JwtClaims = jwt_claimsList
+	}
+	if _, ok := apiResource.Spec["label_matcher"].(map[string]interface{}); ok && isImport && data.LabelMatcher == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.LabelMatcher = &ServicePolicyRuleLabelMatcherModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["mum_action"].(map[string]interface{}); ok && isImport && data.MumAction == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.MumAction = &ServicePolicyRuleMumActionModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["path"].(map[string]interface{}); ok && (isImport || data.Path != nil) {
+		data.Path = &ServicePolicyRulePathModel{
+			InvertMatcher: func() types.Bool {
+				if !isImport && data.Path != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.Path.InvertMatcher
+				}
+				// Import case: read from API
+				if v, ok := blockData["invert_matcher"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["port_matcher"].(map[string]interface{}); ok && (isImport || data.PortMatcher != nil) {
+		data.PortMatcher = &ServicePolicyRulePortMatcherModel{
+			InvertMatcher: func() types.Bool {
+				if !isImport && data.PortMatcher != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.PortMatcher.InvertMatcher
+				}
+				// Import case: read from API
+				if v, ok := blockData["invert_matcher"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+		}
+	}
+	if listData, ok := apiResource.Spec["query_params"].([]interface{}); ok && len(listData) > 0 {
+		var query_paramsList []ServicePolicyRuleQueryParamsModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				query_paramsList = append(query_paramsList, ServicePolicyRuleQueryParamsModel{
+					CheckNotPresent: func() *ServicePolicyRuleEmptyModel {
+						if _, ok := itemMap["check_not_present"].(map[string]interface{}); ok {
+							return &ServicePolicyRuleEmptyModel{}
+						}
+						return nil
+					}(),
+					CheckPresent: func() *ServicePolicyRuleEmptyModel {
+						if _, ok := itemMap["check_present"].(map[string]interface{}); ok {
+							return &ServicePolicyRuleEmptyModel{}
+						}
+						return nil
+					}(),
+					InvertMatcher: func() types.Bool {
+						if v, ok := itemMap["invert_matcher"].(bool); ok {
+							return types.BoolValue(v)
+						}
+						return types.BoolNull()
+					}(),
+					Item: func() *ServicePolicyRuleQueryParamsItemModel {
+						if _, ok := itemMap["item"].(map[string]interface{}); ok {
+							return &ServicePolicyRuleQueryParamsItemModel{
+							}
+						}
+						return nil
+					}(),
+					Key: func() types.String {
+						if v, ok := itemMap["key"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.QueryParams = query_paramsList
+	}
+	if blockData, ok := apiResource.Spec["request_constraints"].(map[string]interface{}); ok && (isImport || data.RequestConstraints != nil) {
+		data.RequestConstraints = &ServicePolicyRuleRequestConstraintsModel{
+			MaxCookieCountExceeds: func() types.Int64 {
+				if v, ok := blockData["max_cookie_count_exceeds"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			MaxCookieKeySizeExceeds: func() types.Int64 {
+				if v, ok := blockData["max_cookie_key_size_exceeds"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			MaxCookieValueSizeExceeds: func() types.Int64 {
+				if v, ok := blockData["max_cookie_value_size_exceeds"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			MaxHeaderCountExceeds: func() types.Int64 {
+				if v, ok := blockData["max_header_count_exceeds"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			MaxHeaderKeySizeExceeds: func() types.Int64 {
+				if v, ok := blockData["max_header_key_size_exceeds"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			MaxHeaderValueSizeExceeds: func() types.Int64 {
+				if v, ok := blockData["max_header_value_size_exceeds"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			MaxParameterCountExceeds: func() types.Int64 {
+				if v, ok := blockData["max_parameter_count_exceeds"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			MaxParameterNameSizeExceeds: func() types.Int64 {
+				if v, ok := blockData["max_parameter_name_size_exceeds"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			MaxParameterValueSizeExceeds: func() types.Int64 {
+				if v, ok := blockData["max_parameter_value_size_exceeds"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			MaxQuerySizeExceeds: func() types.Int64 {
+				if v, ok := blockData["max_query_size_exceeds"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			MaxRequestLineSizeExceeds: func() types.Int64 {
+				if v, ok := blockData["max_request_line_size_exceeds"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			MaxRequestSizeExceeds: func() types.Int64 {
+				if v, ok := blockData["max_request_size_exceeds"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			MaxURLSizeExceeds: func() types.Int64 {
+				if v, ok := blockData["max_url_size_exceeds"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["segment_policy"].(map[string]interface{}); ok && isImport && data.SegmentPolicy == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.SegmentPolicy = &ServicePolicyRuleSegmentPolicyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["tls_fingerprint_matcher"].(map[string]interface{}); ok && isImport && data.TLSFingerprintMatcher == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.TLSFingerprintMatcher = &ServicePolicyRuleTLSFingerprintMatcherModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["waf_action"].(map[string]interface{}); ok && isImport && data.WAFAction == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.WAFAction = &ServicePolicyRuleWAFActionModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["action"].(string); ok && v != "" {
+		data.Action = types.StringValue(v)
+	} else {
+		data.Action = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["client_name"].(string); ok && v != "" {
+		data.ClientName = types.StringValue(v)
+	} else {
+		data.ClientName = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["expiration_timestamp"].(string); ok && v != "" {
+		data.ExpirationTimestamp = types.StringValue(v)
+	} else {
+		data.ExpirationTimestamp = types.StringNull()
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -1551,7 +2436,7 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.ServicePolicyRuleSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -1576,6 +2461,369 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.AnyAsn != nil {
+		any_asnMap := make(map[string]interface{})
+		apiResource.Spec["any_asn"] = any_asnMap
+	}
+	if data.AnyClient != nil {
+		any_clientMap := make(map[string]interface{})
+		apiResource.Spec["any_client"] = any_clientMap
+	}
+	if data.AnyIP != nil {
+		any_ipMap := make(map[string]interface{})
+		apiResource.Spec["any_ip"] = any_ipMap
+	}
+	if data.APIGroupMatcher != nil {
+		api_group_matcherMap := make(map[string]interface{})
+		if !data.APIGroupMatcher.InvertMatcher.IsNull() && !data.APIGroupMatcher.InvertMatcher.IsUnknown() {
+			api_group_matcherMap["invert_matcher"] = data.APIGroupMatcher.InvertMatcher.ValueBool()
+		}
+		apiResource.Spec["api_group_matcher"] = api_group_matcherMap
+	}
+	if len(data.ArgMatchers) > 0 {
+		var arg_matchersList []map[string]interface{}
+		for _, item := range data.ArgMatchers {
+			itemMap := make(map[string]interface{})
+			if item.CheckNotPresent != nil {
+				itemMap["check_not_present"] = map[string]interface{}{}
+			}
+			if item.CheckPresent != nil {
+				itemMap["check_present"] = map[string]interface{}{}
+			}
+			if !item.InvertMatcher.IsNull() && !item.InvertMatcher.IsUnknown() {
+				itemMap["invert_matcher"] = item.InvertMatcher.ValueBool()
+			}
+			if item.Item != nil {
+				itemNestedMap := make(map[string]interface{})
+				itemMap["item"] = itemNestedMap
+			}
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			arg_matchersList = append(arg_matchersList, itemMap)
+		}
+		apiResource.Spec["arg_matchers"] = arg_matchersList
+	}
+	if data.AsnList != nil {
+		asn_listMap := make(map[string]interface{})
+		apiResource.Spec["asn_list"] = asn_listMap
+	}
+	if data.AsnMatcher != nil {
+		asn_matcherMap := make(map[string]interface{})
+		apiResource.Spec["asn_matcher"] = asn_matcherMap
+	}
+	if data.BodyMatcher != nil {
+		body_matcherMap := make(map[string]interface{})
+		apiResource.Spec["body_matcher"] = body_matcherMap
+	}
+	if data.BotAction != nil {
+		bot_actionMap := make(map[string]interface{})
+		if data.BotAction.BotSkipProcessing != nil {
+			bot_actionMap["bot_skip_processing"] = map[string]interface{}{}
+		}
+		if data.BotAction.None != nil {
+			bot_actionMap["none"] = map[string]interface{}{}
+		}
+		apiResource.Spec["bot_action"] = bot_actionMap
+	}
+	if data.ClientNameMatcher != nil {
+		client_name_matcherMap := make(map[string]interface{})
+		apiResource.Spec["client_name_matcher"] = client_name_matcherMap
+	}
+	if data.ClientSelector != nil {
+		client_selectorMap := make(map[string]interface{})
+		apiResource.Spec["client_selector"] = client_selectorMap
+	}
+	if len(data.CookieMatchers) > 0 {
+		var cookie_matchersList []map[string]interface{}
+		for _, item := range data.CookieMatchers {
+			itemMap := make(map[string]interface{})
+			if item.CheckNotPresent != nil {
+				itemMap["check_not_present"] = map[string]interface{}{}
+			}
+			if item.CheckPresent != nil {
+				itemMap["check_present"] = map[string]interface{}{}
+			}
+			if !item.InvertMatcher.IsNull() && !item.InvertMatcher.IsUnknown() {
+				itemMap["invert_matcher"] = item.InvertMatcher.ValueBool()
+			}
+			if item.Item != nil {
+				itemNestedMap := make(map[string]interface{})
+				itemMap["item"] = itemNestedMap
+			}
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			cookie_matchersList = append(cookie_matchersList, itemMap)
+		}
+		apiResource.Spec["cookie_matchers"] = cookie_matchersList
+	}
+	if data.DomainMatcher != nil {
+		domain_matcherMap := make(map[string]interface{})
+		apiResource.Spec["domain_matcher"] = domain_matcherMap
+	}
+	if len(data.Headers) > 0 {
+		var headersList []map[string]interface{}
+		for _, item := range data.Headers {
+			itemMap := make(map[string]interface{})
+			if item.CheckNotPresent != nil {
+				itemMap["check_not_present"] = map[string]interface{}{}
+			}
+			if item.CheckPresent != nil {
+				itemMap["check_present"] = map[string]interface{}{}
+			}
+			if !item.InvertMatcher.IsNull() && !item.InvertMatcher.IsUnknown() {
+				itemMap["invert_matcher"] = item.InvertMatcher.ValueBool()
+			}
+			if item.Item != nil {
+				itemNestedMap := make(map[string]interface{})
+				itemMap["item"] = itemNestedMap
+			}
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			headersList = append(headersList, itemMap)
+		}
+		apiResource.Spec["headers"] = headersList
+	}
+	if data.HTTPMethod != nil {
+		http_methodMap := make(map[string]interface{})
+		if !data.HTTPMethod.InvertMatcher.IsNull() && !data.HTTPMethod.InvertMatcher.IsUnknown() {
+			http_methodMap["invert_matcher"] = data.HTTPMethod.InvertMatcher.ValueBool()
+		}
+		apiResource.Spec["http_method"] = http_methodMap
+	}
+	if data.IPMatcher != nil {
+		ip_matcherMap := make(map[string]interface{})
+		if !data.IPMatcher.InvertMatcher.IsNull() && !data.IPMatcher.InvertMatcher.IsUnknown() {
+			ip_matcherMap["invert_matcher"] = data.IPMatcher.InvertMatcher.ValueBool()
+		}
+		apiResource.Spec["ip_matcher"] = ip_matcherMap
+	}
+	if data.IPPrefixList != nil {
+		ip_prefix_listMap := make(map[string]interface{})
+		if !data.IPPrefixList.InvertMatch.IsNull() && !data.IPPrefixList.InvertMatch.IsUnknown() {
+			ip_prefix_listMap["invert_match"] = data.IPPrefixList.InvertMatch.ValueBool()
+		}
+		apiResource.Spec["ip_prefix_list"] = ip_prefix_listMap
+	}
+	if data.IPThreatCategoryList != nil {
+		ip_threat_category_listMap := make(map[string]interface{})
+		apiResource.Spec["ip_threat_category_list"] = ip_threat_category_listMap
+	}
+	if data.Ja4TLSFingerprint != nil {
+		ja4_tls_fingerprintMap := make(map[string]interface{})
+		apiResource.Spec["ja4_tls_fingerprint"] = ja4_tls_fingerprintMap
+	}
+	if len(data.JwtClaims) > 0 {
+		var jwt_claimsList []map[string]interface{}
+		for _, item := range data.JwtClaims {
+			itemMap := make(map[string]interface{})
+			if item.CheckNotPresent != nil {
+				itemMap["check_not_present"] = map[string]interface{}{}
+			}
+			if item.CheckPresent != nil {
+				itemMap["check_present"] = map[string]interface{}{}
+			}
+			if !item.InvertMatcher.IsNull() && !item.InvertMatcher.IsUnknown() {
+				itemMap["invert_matcher"] = item.InvertMatcher.ValueBool()
+			}
+			if item.Item != nil {
+				itemNestedMap := make(map[string]interface{})
+				itemMap["item"] = itemNestedMap
+			}
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			jwt_claimsList = append(jwt_claimsList, itemMap)
+		}
+		apiResource.Spec["jwt_claims"] = jwt_claimsList
+	}
+	if data.LabelMatcher != nil {
+		label_matcherMap := make(map[string]interface{})
+		apiResource.Spec["label_matcher"] = label_matcherMap
+	}
+	if data.MumAction != nil {
+		mum_actionMap := make(map[string]interface{})
+		if data.MumAction.Default != nil {
+			mum_actionMap["default"] = map[string]interface{}{}
+		}
+		if data.MumAction.SkipProcessing != nil {
+			mum_actionMap["skip_processing"] = map[string]interface{}{}
+		}
+		apiResource.Spec["mum_action"] = mum_actionMap
+	}
+	if data.Path != nil {
+		pathMap := make(map[string]interface{})
+		if !data.Path.InvertMatcher.IsNull() && !data.Path.InvertMatcher.IsUnknown() {
+			pathMap["invert_matcher"] = data.Path.InvertMatcher.ValueBool()
+		}
+		apiResource.Spec["path"] = pathMap
+	}
+	if data.PortMatcher != nil {
+		port_matcherMap := make(map[string]interface{})
+		if !data.PortMatcher.InvertMatcher.IsNull() && !data.PortMatcher.InvertMatcher.IsUnknown() {
+			port_matcherMap["invert_matcher"] = data.PortMatcher.InvertMatcher.ValueBool()
+		}
+		apiResource.Spec["port_matcher"] = port_matcherMap
+	}
+	if len(data.QueryParams) > 0 {
+		var query_paramsList []map[string]interface{}
+		for _, item := range data.QueryParams {
+			itemMap := make(map[string]interface{})
+			if item.CheckNotPresent != nil {
+				itemMap["check_not_present"] = map[string]interface{}{}
+			}
+			if item.CheckPresent != nil {
+				itemMap["check_present"] = map[string]interface{}{}
+			}
+			if !item.InvertMatcher.IsNull() && !item.InvertMatcher.IsUnknown() {
+				itemMap["invert_matcher"] = item.InvertMatcher.ValueBool()
+			}
+			if item.Item != nil {
+				itemNestedMap := make(map[string]interface{})
+				itemMap["item"] = itemNestedMap
+			}
+			if !item.Key.IsNull() && !item.Key.IsUnknown() {
+				itemMap["key"] = item.Key.ValueString()
+			}
+			query_paramsList = append(query_paramsList, itemMap)
+		}
+		apiResource.Spec["query_params"] = query_paramsList
+	}
+	if data.RequestConstraints != nil {
+		request_constraintsMap := make(map[string]interface{})
+		if !data.RequestConstraints.MaxCookieCountExceeds.IsNull() && !data.RequestConstraints.MaxCookieCountExceeds.IsUnknown() {
+			request_constraintsMap["max_cookie_count_exceeds"] = data.RequestConstraints.MaxCookieCountExceeds.ValueInt64()
+		}
+		if data.RequestConstraints.MaxCookieCountNone != nil {
+			request_constraintsMap["max_cookie_count_none"] = map[string]interface{}{}
+		}
+		if !data.RequestConstraints.MaxCookieKeySizeExceeds.IsNull() && !data.RequestConstraints.MaxCookieKeySizeExceeds.IsUnknown() {
+			request_constraintsMap["max_cookie_key_size_exceeds"] = data.RequestConstraints.MaxCookieKeySizeExceeds.ValueInt64()
+		}
+		if data.RequestConstraints.MaxCookieKeySizeNone != nil {
+			request_constraintsMap["max_cookie_key_size_none"] = map[string]interface{}{}
+		}
+		if !data.RequestConstraints.MaxCookieValueSizeExceeds.IsNull() && !data.RequestConstraints.MaxCookieValueSizeExceeds.IsUnknown() {
+			request_constraintsMap["max_cookie_value_size_exceeds"] = data.RequestConstraints.MaxCookieValueSizeExceeds.ValueInt64()
+		}
+		if data.RequestConstraints.MaxCookieValueSizeNone != nil {
+			request_constraintsMap["max_cookie_value_size_none"] = map[string]interface{}{}
+		}
+		if !data.RequestConstraints.MaxHeaderCountExceeds.IsNull() && !data.RequestConstraints.MaxHeaderCountExceeds.IsUnknown() {
+			request_constraintsMap["max_header_count_exceeds"] = data.RequestConstraints.MaxHeaderCountExceeds.ValueInt64()
+		}
+		if data.RequestConstraints.MaxHeaderCountNone != nil {
+			request_constraintsMap["max_header_count_none"] = map[string]interface{}{}
+		}
+		if !data.RequestConstraints.MaxHeaderKeySizeExceeds.IsNull() && !data.RequestConstraints.MaxHeaderKeySizeExceeds.IsUnknown() {
+			request_constraintsMap["max_header_key_size_exceeds"] = data.RequestConstraints.MaxHeaderKeySizeExceeds.ValueInt64()
+		}
+		if data.RequestConstraints.MaxHeaderKeySizeNone != nil {
+			request_constraintsMap["max_header_key_size_none"] = map[string]interface{}{}
+		}
+		if !data.RequestConstraints.MaxHeaderValueSizeExceeds.IsNull() && !data.RequestConstraints.MaxHeaderValueSizeExceeds.IsUnknown() {
+			request_constraintsMap["max_header_value_size_exceeds"] = data.RequestConstraints.MaxHeaderValueSizeExceeds.ValueInt64()
+		}
+		if data.RequestConstraints.MaxHeaderValueSizeNone != nil {
+			request_constraintsMap["max_header_value_size_none"] = map[string]interface{}{}
+		}
+		if !data.RequestConstraints.MaxParameterCountExceeds.IsNull() && !data.RequestConstraints.MaxParameterCountExceeds.IsUnknown() {
+			request_constraintsMap["max_parameter_count_exceeds"] = data.RequestConstraints.MaxParameterCountExceeds.ValueInt64()
+		}
+		if data.RequestConstraints.MaxParameterCountNone != nil {
+			request_constraintsMap["max_parameter_count_none"] = map[string]interface{}{}
+		}
+		if !data.RequestConstraints.MaxParameterNameSizeExceeds.IsNull() && !data.RequestConstraints.MaxParameterNameSizeExceeds.IsUnknown() {
+			request_constraintsMap["max_parameter_name_size_exceeds"] = data.RequestConstraints.MaxParameterNameSizeExceeds.ValueInt64()
+		}
+		if data.RequestConstraints.MaxParameterNameSizeNone != nil {
+			request_constraintsMap["max_parameter_name_size_none"] = map[string]interface{}{}
+		}
+		if !data.RequestConstraints.MaxParameterValueSizeExceeds.IsNull() && !data.RequestConstraints.MaxParameterValueSizeExceeds.IsUnknown() {
+			request_constraintsMap["max_parameter_value_size_exceeds"] = data.RequestConstraints.MaxParameterValueSizeExceeds.ValueInt64()
+		}
+		if data.RequestConstraints.MaxParameterValueSizeNone != nil {
+			request_constraintsMap["max_parameter_value_size_none"] = map[string]interface{}{}
+		}
+		if !data.RequestConstraints.MaxQuerySizeExceeds.IsNull() && !data.RequestConstraints.MaxQuerySizeExceeds.IsUnknown() {
+			request_constraintsMap["max_query_size_exceeds"] = data.RequestConstraints.MaxQuerySizeExceeds.ValueInt64()
+		}
+		if data.RequestConstraints.MaxQuerySizeNone != nil {
+			request_constraintsMap["max_query_size_none"] = map[string]interface{}{}
+		}
+		if !data.RequestConstraints.MaxRequestLineSizeExceeds.IsNull() && !data.RequestConstraints.MaxRequestLineSizeExceeds.IsUnknown() {
+			request_constraintsMap["max_request_line_size_exceeds"] = data.RequestConstraints.MaxRequestLineSizeExceeds.ValueInt64()
+		}
+		if data.RequestConstraints.MaxRequestLineSizeNone != nil {
+			request_constraintsMap["max_request_line_size_none"] = map[string]interface{}{}
+		}
+		if !data.RequestConstraints.MaxRequestSizeExceeds.IsNull() && !data.RequestConstraints.MaxRequestSizeExceeds.IsUnknown() {
+			request_constraintsMap["max_request_size_exceeds"] = data.RequestConstraints.MaxRequestSizeExceeds.ValueInt64()
+		}
+		if data.RequestConstraints.MaxRequestSizeNone != nil {
+			request_constraintsMap["max_request_size_none"] = map[string]interface{}{}
+		}
+		if !data.RequestConstraints.MaxURLSizeExceeds.IsNull() && !data.RequestConstraints.MaxURLSizeExceeds.IsUnknown() {
+			request_constraintsMap["max_url_size_exceeds"] = data.RequestConstraints.MaxURLSizeExceeds.ValueInt64()
+		}
+		if data.RequestConstraints.MaxURLSizeNone != nil {
+			request_constraintsMap["max_url_size_none"] = map[string]interface{}{}
+		}
+		apiResource.Spec["request_constraints"] = request_constraintsMap
+	}
+	if data.SegmentPolicy != nil {
+		segment_policyMap := make(map[string]interface{})
+		if data.SegmentPolicy.DstAny != nil {
+			segment_policyMap["dst_any"] = map[string]interface{}{}
+		}
+		if data.SegmentPolicy.DstSegments != nil {
+			dst_segmentsNestedMap := make(map[string]interface{})
+			segment_policyMap["dst_segments"] = dst_segmentsNestedMap
+		}
+		if data.SegmentPolicy.IntraSegment != nil {
+			segment_policyMap["intra_segment"] = map[string]interface{}{}
+		}
+		if data.SegmentPolicy.SrcAny != nil {
+			segment_policyMap["src_any"] = map[string]interface{}{}
+		}
+		if data.SegmentPolicy.SrcSegments != nil {
+			src_segmentsNestedMap := make(map[string]interface{})
+			segment_policyMap["src_segments"] = src_segmentsNestedMap
+		}
+		apiResource.Spec["segment_policy"] = segment_policyMap
+	}
+	if data.TLSFingerprintMatcher != nil {
+		tls_fingerprint_matcherMap := make(map[string]interface{})
+		apiResource.Spec["tls_fingerprint_matcher"] = tls_fingerprint_matcherMap
+	}
+	if data.WAFAction != nil {
+		waf_actionMap := make(map[string]interface{})
+		if data.WAFAction.AppFirewallDetectionControl != nil {
+			app_firewall_detection_controlNestedMap := make(map[string]interface{})
+			waf_actionMap["app_firewall_detection_control"] = app_firewall_detection_controlNestedMap
+		}
+		if data.WAFAction.None != nil {
+			waf_actionMap["none"] = map[string]interface{}{}
+		}
+		if data.WAFAction.WAFSkipProcessing != nil {
+			waf_actionMap["waf_skip_processing"] = map[string]interface{}{}
+		}
+		apiResource.Spec["waf_action"] = waf_actionMap
+	}
+	if !data.Action.IsNull() && !data.Action.IsUnknown() {
+		apiResource.Spec["action"] = data.Action.ValueString()
+	}
+	if !data.ClientName.IsNull() && !data.ClientName.IsUnknown() {
+		apiResource.Spec["client_name"] = data.ClientName.ValueString()
+	}
+	if !data.ExpirationTimestamp.IsNull() && !data.ExpirationTimestamp.IsUnknown() {
+		apiResource.Spec["expiration_timestamp"] = data.ExpirationTimestamp.ValueString()
+	}
+
+
 	updated, err := r.client.UpdateServicePolicyRule(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update ServicePolicyRule: %s", err))
@@ -1584,6 +2832,20 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
+	if v, ok := updated.Spec["action"].(string); ok && v != "" {
+		data.Action = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["client_name"].(string); ok && v != "" {
+		data.ClientName = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["expiration_timestamp"].(string); ok && v != "" {
+		data.ExpirationTimestamp = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -1596,6 +2858,7 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -1622,6 +2885,15 @@ func (r *ServicePolicyRuleResource) Delete(ctx context.Context, req resource.Del
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "ServicePolicyRule already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "ServicePolicyRule delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

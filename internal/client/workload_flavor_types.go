@@ -10,13 +10,8 @@ import (
 
 // WorkloadFlavor represents a F5XC WorkloadFlavor
 type WorkloadFlavor struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     WorkloadFlavorSpec `json:"spec"`
-}
-
-// WorkloadFlavorSpec defines the specification for WorkloadFlavor
-type WorkloadFlavorSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateWorkloadFlavor creates a new WorkloadFlavor

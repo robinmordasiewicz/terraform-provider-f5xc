@@ -12,6 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -88,10 +89,10 @@ type TenantProfileResourceModel struct {
 	Annotations types.Map `tfsdk:"annotations"`
 	Description types.String `tfsdk:"description"`
 	Disable types.Bool `tfsdk:"disable"`
-	EnableSupportAccess types.Bool `tfsdk:"enable_support_access"`
 	Labels types.Map `tfsdk:"labels"`
-	SupportEmail types.String `tfsdk:"support_email"`
 	ID types.String `tfsdk:"id"`
+	EnableSupportAccess types.Bool `tfsdk:"enable_support_access"`
+	SupportEmail types.String `tfsdk:"support_email"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
 	CtGroups []TenantProfileCtGroupsModel `tfsdk:"ct_groups"`
 	Favicon *TenantProfileFaviconModel `tfsdk:"favicon"`
@@ -141,21 +142,29 @@ func (r *TenantProfileResource) Schema(ctx context.Context, req resource.SchemaR
 				MarkdownDescription: "A value of true will administratively disable the object.",
 				Optional: true,
 			},
-			"enable_support_access": schema.BoolAttribute{
-				MarkdownDescription: "Support Access. Selecting Support Access will allow for F5XC Support teams to access the new Child Tenant for troubleshooting. Unselecting will pause access for XC Support.",
-				Optional: true,
-			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
+			"id": schema.StringAttribute{
+				MarkdownDescription: "Unique identifier for the resource.",
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"enable_support_access": schema.BoolAttribute{
+				MarkdownDescription: "Support Access. Selecting Support Access will allow for F5XC Support teams to access the new Child Tenant for troubleshooting. Unselecting will pause access for XC Support.",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.Bool{
+					boolplanmodifier.UseStateForUnknown(),
+				},
+			},
 			"support_email": schema.StringAttribute{
 				MarkdownDescription: "Support Email. Support Email address for child tenant",
 				Optional: true,
-			},
-			"id": schema.StringAttribute{
-				MarkdownDescription: "Unique identifier for the resource.",
 				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
@@ -376,7 +385,7 @@ func (r *TenantProfileResource) Create(ctx context.Context, req resource.CreateR
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.TenantProfileSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -401,6 +410,65 @@ func (r *TenantProfileResource) Create(ctx context.Context, req resource.CreateR
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if len(data.CtGroups) > 0 {
+		var ct_groupsList []map[string]interface{}
+		for _, item := range data.CtGroups {
+			itemMap := make(map[string]interface{})
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			ct_groupsList = append(ct_groupsList, itemMap)
+		}
+		apiResource.Spec["ct_groups"] = ct_groupsList
+	}
+	if data.Favicon != nil {
+		faviconMap := make(map[string]interface{})
+		if data.Favicon.AWSS3 != nil {
+			faviconMap["aws_s3"] = map[string]interface{}{}
+		}
+		if !data.Favicon.Content.IsNull() && !data.Favicon.Content.IsUnknown() {
+			faviconMap["content"] = data.Favicon.Content.ValueString()
+		}
+		if !data.Favicon.ContentType.IsNull() && !data.Favicon.ContentType.IsUnknown() {
+			faviconMap["content_type"] = data.Favicon.ContentType.ValueString()
+		}
+		apiResource.Spec["favicon"] = faviconMap
+	}
+	if data.Logo != nil {
+		logoMap := make(map[string]interface{})
+		if data.Logo.AWSS3 != nil {
+			logoMap["aws_s3"] = map[string]interface{}{}
+		}
+		if !data.Logo.Content.IsNull() && !data.Logo.Content.IsUnknown() {
+			logoMap["content"] = data.Logo.Content.ValueString()
+		}
+		if !data.Logo.ContentType.IsNull() && !data.Logo.ContentType.IsUnknown() {
+			logoMap["content_type"] = data.Logo.ContentType.ValueString()
+		}
+		apiResource.Spec["logo"] = logoMap
+	}
+	if data.Plan != nil {
+		planMap := make(map[string]interface{})
+		if !data.Plan.Name.IsNull() && !data.Plan.Name.IsUnknown() {
+			planMap["name"] = data.Plan.Name.ValueString()
+		}
+		if !data.Plan.Namespace.IsNull() && !data.Plan.Namespace.IsUnknown() {
+			planMap["namespace"] = data.Plan.Namespace.ValueString()
+		}
+		if !data.Plan.Tenant.IsNull() && !data.Plan.Tenant.IsUnknown() {
+			planMap["tenant"] = data.Plan.Tenant.ValueString()
+		}
+		apiResource.Spec["plan"] = planMap
+	}
+	if !data.EnableSupportAccess.IsNull() && !data.EnableSupportAccess.IsUnknown() {
+		apiResource.Spec["enable_support_access"] = data.EnableSupportAccess.ValueBool()
+	}
+	if !data.SupportEmail.IsNull() && !data.SupportEmail.IsUnknown() {
+		apiResource.Spec["support_email"] = data.SupportEmail.ValueString()
+	}
+
+
 	created, err := r.client.CreateTenantProfile(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create TenantProfile: %s", err))
@@ -409,8 +477,21 @@ func (r *TenantProfileResource) Create(ctx context.Context, req resource.CreateR
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+	if v, ok := created.Spec["enable_support_access"].(bool); ok {
+		data.EnableSupportAccess = types.BoolValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["support_email"].(string); ok && v != "" {
+		data.SupportEmail = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created TenantProfile resource")
@@ -489,9 +570,111 @@ func (r *TenantProfileResource) Read(ctx context.Context, req resource.ReadReque
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if listData, ok := apiResource.Spec["ct_groups"].([]interface{}); ok && len(listData) > 0 {
+		var ct_groupsList []TenantProfileCtGroupsModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				ct_groupsList = append(ct_groupsList, TenantProfileCtGroupsModel{
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.CtGroups = ct_groupsList
+	}
+	if blockData, ok := apiResource.Spec["favicon"].(map[string]interface{}); ok && (isImport || data.Favicon != nil) {
+		data.Favicon = &TenantProfileFaviconModel{
+			Content: func() types.String {
+				if v, ok := blockData["content"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			ContentType: func() types.String {
+				if v, ok := blockData["content_type"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["logo"].(map[string]interface{}); ok && (isImport || data.Logo != nil) {
+		data.Logo = &TenantProfileLogoModel{
+			Content: func() types.String {
+				if v, ok := blockData["content"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			ContentType: func() types.String {
+				if v, ok := blockData["content_type"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["plan"].(map[string]interface{}); ok && (isImport || data.Plan != nil) {
+		data.Plan = &TenantProfilePlanModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	// Top-level Optional bool: preserve prior state to avoid API default drift
+	if !isImport && !data.EnableSupportAccess.IsNull() {
+		// Normal Read: preserve existing state value (do nothing)
+	} else {
+		// Import case or null state: read from API
+		if v, ok := apiResource.Spec["enable_support_access"].(bool); ok {
+			data.EnableSupportAccess = types.BoolValue(v)
+		} else {
+			data.EnableSupportAccess = types.BoolNull()
+		}
+	}
+	if v, ok := apiResource.Spec["support_email"].(string); ok && v != "" {
+		data.SupportEmail = types.StringValue(v)
+	} else {
+		data.SupportEmail = types.StringNull()
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -517,7 +700,7 @@ func (r *TenantProfileResource) Update(ctx context.Context, req resource.UpdateR
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.TenantProfileSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -542,6 +725,65 @@ func (r *TenantProfileResource) Update(ctx context.Context, req resource.UpdateR
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if len(data.CtGroups) > 0 {
+		var ct_groupsList []map[string]interface{}
+		for _, item := range data.CtGroups {
+			itemMap := make(map[string]interface{})
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			ct_groupsList = append(ct_groupsList, itemMap)
+		}
+		apiResource.Spec["ct_groups"] = ct_groupsList
+	}
+	if data.Favicon != nil {
+		faviconMap := make(map[string]interface{})
+		if data.Favicon.AWSS3 != nil {
+			faviconMap["aws_s3"] = map[string]interface{}{}
+		}
+		if !data.Favicon.Content.IsNull() && !data.Favicon.Content.IsUnknown() {
+			faviconMap["content"] = data.Favicon.Content.ValueString()
+		}
+		if !data.Favicon.ContentType.IsNull() && !data.Favicon.ContentType.IsUnknown() {
+			faviconMap["content_type"] = data.Favicon.ContentType.ValueString()
+		}
+		apiResource.Spec["favicon"] = faviconMap
+	}
+	if data.Logo != nil {
+		logoMap := make(map[string]interface{})
+		if data.Logo.AWSS3 != nil {
+			logoMap["aws_s3"] = map[string]interface{}{}
+		}
+		if !data.Logo.Content.IsNull() && !data.Logo.Content.IsUnknown() {
+			logoMap["content"] = data.Logo.Content.ValueString()
+		}
+		if !data.Logo.ContentType.IsNull() && !data.Logo.ContentType.IsUnknown() {
+			logoMap["content_type"] = data.Logo.ContentType.ValueString()
+		}
+		apiResource.Spec["logo"] = logoMap
+	}
+	if data.Plan != nil {
+		planMap := make(map[string]interface{})
+		if !data.Plan.Name.IsNull() && !data.Plan.Name.IsUnknown() {
+			planMap["name"] = data.Plan.Name.ValueString()
+		}
+		if !data.Plan.Namespace.IsNull() && !data.Plan.Namespace.IsUnknown() {
+			planMap["namespace"] = data.Plan.Namespace.ValueString()
+		}
+		if !data.Plan.Tenant.IsNull() && !data.Plan.Tenant.IsUnknown() {
+			planMap["tenant"] = data.Plan.Tenant.ValueString()
+		}
+		apiResource.Spec["plan"] = planMap
+	}
+	if !data.EnableSupportAccess.IsNull() && !data.EnableSupportAccess.IsUnknown() {
+		apiResource.Spec["enable_support_access"] = data.EnableSupportAccess.ValueBool()
+	}
+	if !data.SupportEmail.IsNull() && !data.SupportEmail.IsUnknown() {
+		apiResource.Spec["support_email"] = data.SupportEmail.ValueString()
+	}
+
+
 	updated, err := r.client.UpdateTenantProfile(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update TenantProfile: %s", err))
@@ -550,6 +792,16 @@ func (r *TenantProfileResource) Update(ctx context.Context, req resource.UpdateR
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
+	if v, ok := updated.Spec["enable_support_access"].(bool); ok {
+		data.EnableSupportAccess = types.BoolValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["support_email"].(string); ok && v != "" {
+		data.SupportEmail = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -562,6 +814,7 @@ func (r *TenantProfileResource) Update(ctx context.Context, req resource.UpdateR
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -588,6 +841,15 @@ func (r *TenantProfileResource) Delete(ctx context.Context, req resource.DeleteR
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "TenantProfile already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "TenantProfile delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

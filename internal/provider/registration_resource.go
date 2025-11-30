@@ -196,7 +196,7 @@ type RegistrationInfraHwInfoUsbModel struct {
 	BcdDevice types.String `tfsdk:"bcd_device"`
 	BcdUsb types.String `tfsdk:"bcd_usb"`
 	Bus types.Int64 `tfsdk:"bus"`
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	IManufacturer types.String `tfsdk:"i_manufacturer"`
 	IProduct types.String `tfsdk:"i_product"`
 	ISerial types.String `tfsdk:"i_serial"`
@@ -243,8 +243,8 @@ type RegistrationResourceModel struct {
 	Description types.String `tfsdk:"description"`
 	Disable types.Bool `tfsdk:"disable"`
 	Labels types.Map `tfsdk:"labels"`
-	Token types.String `tfsdk:"token"`
 	ID types.String `tfsdk:"id"`
+	Token types.String `tfsdk:"token"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
 	Infra *RegistrationInfraModel `tfsdk:"infra"`
 	Passport *RegistrationPassportModel `tfsdk:"passport"`
@@ -297,12 +297,16 @@ func (r *RegistrationResource) Schema(ctx context.Context, req resource.SchemaRe
 				Optional: true,
 				ElementType: types.StringType,
 			},
+			"id": schema.StringAttribute{
+				MarkdownDescription: "Unique identifier for the resource.",
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
 			"token": schema.StringAttribute{
 				MarkdownDescription: "Token. Token is used for machine and tenant identification",
 				Optional: true,
-			},
-			"id": schema.StringAttribute{
-				MarkdownDescription: "Unique identifier for the resource.",
 				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
@@ -687,7 +691,7 @@ func (r *RegistrationResource) Schema(ctx context.Context, req resource.SchemaRe
 											MarkdownDescription: "Bus. The bus on which the device was detected in decimal",
 											Optional: true,
 										},
-										"description": schema.StringAttribute{
+										"description_spec": schema.StringAttribute{
 											MarkdownDescription: "Description. Device description",
 											Optional: true,
 										},
@@ -940,7 +944,7 @@ func (r *RegistrationResource) Create(ctx context.Context, req resource.CreateRe
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.RegistrationSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -965,6 +969,110 @@ func (r *RegistrationResource) Create(ctx context.Context, req resource.CreateRe
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.Infra != nil {
+		infraMap := make(map[string]interface{})
+		if !data.Infra.AvailabilityZone.IsNull() && !data.Infra.AvailabilityZone.IsUnknown() {
+			infraMap["availability_zone"] = data.Infra.AvailabilityZone.ValueString()
+		}
+		if !data.Infra.CertifiedHw.IsNull() && !data.Infra.CertifiedHw.IsUnknown() {
+			infraMap["certified_hw"] = data.Infra.CertifiedHw.ValueString()
+		}
+		if !data.Infra.Domain.IsNull() && !data.Infra.Domain.IsUnknown() {
+			infraMap["domain"] = data.Infra.Domain.ValueString()
+		}
+		if !data.Infra.Hostname.IsNull() && !data.Infra.Hostname.IsUnknown() {
+			infraMap["hostname"] = data.Infra.Hostname.ValueString()
+		}
+		if data.Infra.HwInfo != nil {
+			hw_infoNestedMap := make(map[string]interface{})
+			if !data.Infra.HwInfo.NumaNodes.IsNull() && !data.Infra.HwInfo.NumaNodes.IsUnknown() {
+				hw_infoNestedMap["numa_nodes"] = data.Infra.HwInfo.NumaNodes.ValueInt64()
+			}
+			infraMap["hw_info"] = hw_infoNestedMap
+		}
+		if !data.Infra.InstanceID.IsNull() && !data.Infra.InstanceID.IsUnknown() {
+			infraMap["instance_id"] = data.Infra.InstanceID.ValueString()
+		}
+		if data.Infra.Interfaces != nil {
+			infraMap["interfaces"] = map[string]interface{}{}
+		}
+		if data.Infra.InternetProxy != nil {
+			internet_proxyNestedMap := make(map[string]interface{})
+			if !data.Infra.InternetProxy.HTTPProxy.IsNull() && !data.Infra.InternetProxy.HTTPProxy.IsUnknown() {
+				internet_proxyNestedMap["http_proxy"] = data.Infra.InternetProxy.HTTPProxy.ValueString()
+			}
+			if !data.Infra.InternetProxy.HTTPSProxy.IsNull() && !data.Infra.InternetProxy.HTTPSProxy.IsUnknown() {
+				internet_proxyNestedMap["https_proxy"] = data.Infra.InternetProxy.HTTPSProxy.ValueString()
+			}
+			if !data.Infra.InternetProxy.NoProxy.IsNull() && !data.Infra.InternetProxy.NoProxy.IsUnknown() {
+				internet_proxyNestedMap["no_proxy"] = data.Infra.InternetProxy.NoProxy.ValueString()
+			}
+			if !data.Infra.InternetProxy.ProxyCacertURL.IsNull() && !data.Infra.InternetProxy.ProxyCacertURL.IsUnknown() {
+				internet_proxyNestedMap["proxy_cacert_url"] = data.Infra.InternetProxy.ProxyCacertURL.ValueString()
+			}
+			infraMap["internet_proxy"] = internet_proxyNestedMap
+		}
+		if !data.Infra.MachineID.IsNull() && !data.Infra.MachineID.IsUnknown() {
+			infraMap["machine_id"] = data.Infra.MachineID.ValueString()
+		}
+		if !data.Infra.Provider.IsNull() && !data.Infra.Provider.IsUnknown() {
+			infraMap["provider_ref"] = data.Infra.Provider.ValueString()
+		}
+		if data.Infra.SwInfo != nil {
+			sw_infoNestedMap := make(map[string]interface{})
+			if !data.Infra.SwInfo.SwVersion.IsNull() && !data.Infra.SwInfo.SwVersion.IsUnknown() {
+				sw_infoNestedMap["sw_version"] = data.Infra.SwInfo.SwVersion.ValueString()
+			}
+			infraMap["sw_info"] = sw_infoNestedMap
+		}
+		if !data.Infra.Timestamp.IsNull() && !data.Infra.Timestamp.IsUnknown() {
+			infraMap["timestamp"] = data.Infra.Timestamp.ValueString()
+		}
+		if !data.Infra.Zone.IsNull() && !data.Infra.Zone.IsUnknown() {
+			infraMap["zone"] = data.Infra.Zone.ValueString()
+		}
+		apiResource.Spec["infra"] = infraMap
+	}
+	if data.Passport != nil {
+		passportMap := make(map[string]interface{})
+		if !data.Passport.ClusterName.IsNull() && !data.Passport.ClusterName.IsUnknown() {
+			passportMap["cluster_name"] = data.Passport.ClusterName.ValueString()
+		}
+		if !data.Passport.ClusterSize.IsNull() && !data.Passport.ClusterSize.IsUnknown() {
+			passportMap["cluster_size"] = data.Passport.ClusterSize.ValueInt64()
+		}
+		if !data.Passport.ClusterType.IsNull() && !data.Passport.ClusterType.IsUnknown() {
+			passportMap["cluster_type"] = data.Passport.ClusterType.ValueString()
+		}
+		if data.Passport.DefaultOsVersion != nil {
+			passportMap["default_os_version"] = map[string]interface{}{}
+		}
+		if data.Passport.DefaultSwVersion != nil {
+			passportMap["default_sw_version"] = map[string]interface{}{}
+		}
+		if !data.Passport.Latitude.IsNull() && !data.Passport.Latitude.IsUnknown() {
+			passportMap["latitude"] = data.Passport.Latitude.ValueInt64()
+		}
+		if !data.Passport.Longitude.IsNull() && !data.Passport.Longitude.IsUnknown() {
+			passportMap["longitude"] = data.Passport.Longitude.ValueInt64()
+		}
+		if !data.Passport.OperatingSystemVersion.IsNull() && !data.Passport.OperatingSystemVersion.IsUnknown() {
+			passportMap["operating_system_version"] = data.Passport.OperatingSystemVersion.ValueString()
+		}
+		if !data.Passport.PrivateNetworkName.IsNull() && !data.Passport.PrivateNetworkName.IsUnknown() {
+			passportMap["private_network_name"] = data.Passport.PrivateNetworkName.ValueString()
+		}
+		if !data.Passport.VolterraSoftwareVersion.IsNull() && !data.Passport.VolterraSoftwareVersion.IsUnknown() {
+			passportMap["volterra_software_version"] = data.Passport.VolterraSoftwareVersion.ValueString()
+		}
+		apiResource.Spec["passport"] = passportMap
+	}
+	if !data.Token.IsNull() && !data.Token.IsUnknown() {
+		apiResource.Spec["token"] = data.Token.ValueString()
+	}
+
+
 	created, err := r.client.CreateRegistration(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create Registration: %s", err))
@@ -973,8 +1081,17 @@ func (r *RegistrationResource) Create(ctx context.Context, req resource.CreateRe
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+	if v, ok := created.Spec["token"].(string); ok && v != "" {
+		data.Token = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created Registration resource")
@@ -1053,9 +1170,140 @@ func (r *RegistrationResource) Read(ctx context.Context, req resource.ReadReques
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if blockData, ok := apiResource.Spec["infra"].(map[string]interface{}); ok && (isImport || data.Infra != nil) {
+		data.Infra = &RegistrationInfraModel{
+			AvailabilityZone: func() types.String {
+				if v, ok := blockData["availability_zone"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			CertifiedHw: func() types.String {
+				if v, ok := blockData["certified_hw"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Domain: func() types.String {
+				if v, ok := blockData["domain"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Hostname: func() types.String {
+				if v, ok := blockData["hostname"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			InstanceID: func() types.String {
+				if v, ok := blockData["instance_id"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			MachineID: func() types.String {
+				if v, ok := blockData["machine_id"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Provider: func() types.String {
+				if v, ok := blockData["provider"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Timestamp: func() types.String {
+				if v, ok := blockData["timestamp"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Zone: func() types.String {
+				if v, ok := blockData["zone"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["passport"].(map[string]interface{}); ok && (isImport || data.Passport != nil) {
+		data.Passport = &RegistrationPassportModel{
+			ClusterName: func() types.String {
+				if v, ok := blockData["cluster_name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			ClusterSize: func() types.Int64 {
+				if v, ok := blockData["cluster_size"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			ClusterType: func() types.String {
+				if v, ok := blockData["cluster_type"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Latitude: func() types.Int64 {
+				if v, ok := blockData["latitude"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			Longitude: func() types.Int64 {
+				if v, ok := blockData["longitude"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			OperatingSystemVersion: func() types.String {
+				if v, ok := blockData["operating_system_version"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			PrivateNetworkName: func() types.String {
+				if v, ok := blockData["private_network_name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			VolterraSoftwareVersion: func() types.String {
+				if v, ok := blockData["volterra_software_version"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if v, ok := apiResource.Spec["token"].(string); ok && v != "" {
+		data.Token = types.StringValue(v)
+	} else {
+		data.Token = types.StringNull()
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -1081,7 +1329,7 @@ func (r *RegistrationResource) Update(ctx context.Context, req resource.UpdateRe
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.RegistrationSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -1106,6 +1354,110 @@ func (r *RegistrationResource) Update(ctx context.Context, req resource.UpdateRe
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.Infra != nil {
+		infraMap := make(map[string]interface{})
+		if !data.Infra.AvailabilityZone.IsNull() && !data.Infra.AvailabilityZone.IsUnknown() {
+			infraMap["availability_zone"] = data.Infra.AvailabilityZone.ValueString()
+		}
+		if !data.Infra.CertifiedHw.IsNull() && !data.Infra.CertifiedHw.IsUnknown() {
+			infraMap["certified_hw"] = data.Infra.CertifiedHw.ValueString()
+		}
+		if !data.Infra.Domain.IsNull() && !data.Infra.Domain.IsUnknown() {
+			infraMap["domain"] = data.Infra.Domain.ValueString()
+		}
+		if !data.Infra.Hostname.IsNull() && !data.Infra.Hostname.IsUnknown() {
+			infraMap["hostname"] = data.Infra.Hostname.ValueString()
+		}
+		if data.Infra.HwInfo != nil {
+			hw_infoNestedMap := make(map[string]interface{})
+			if !data.Infra.HwInfo.NumaNodes.IsNull() && !data.Infra.HwInfo.NumaNodes.IsUnknown() {
+				hw_infoNestedMap["numa_nodes"] = data.Infra.HwInfo.NumaNodes.ValueInt64()
+			}
+			infraMap["hw_info"] = hw_infoNestedMap
+		}
+		if !data.Infra.InstanceID.IsNull() && !data.Infra.InstanceID.IsUnknown() {
+			infraMap["instance_id"] = data.Infra.InstanceID.ValueString()
+		}
+		if data.Infra.Interfaces != nil {
+			infraMap["interfaces"] = map[string]interface{}{}
+		}
+		if data.Infra.InternetProxy != nil {
+			internet_proxyNestedMap := make(map[string]interface{})
+			if !data.Infra.InternetProxy.HTTPProxy.IsNull() && !data.Infra.InternetProxy.HTTPProxy.IsUnknown() {
+				internet_proxyNestedMap["http_proxy"] = data.Infra.InternetProxy.HTTPProxy.ValueString()
+			}
+			if !data.Infra.InternetProxy.HTTPSProxy.IsNull() && !data.Infra.InternetProxy.HTTPSProxy.IsUnknown() {
+				internet_proxyNestedMap["https_proxy"] = data.Infra.InternetProxy.HTTPSProxy.ValueString()
+			}
+			if !data.Infra.InternetProxy.NoProxy.IsNull() && !data.Infra.InternetProxy.NoProxy.IsUnknown() {
+				internet_proxyNestedMap["no_proxy"] = data.Infra.InternetProxy.NoProxy.ValueString()
+			}
+			if !data.Infra.InternetProxy.ProxyCacertURL.IsNull() && !data.Infra.InternetProxy.ProxyCacertURL.IsUnknown() {
+				internet_proxyNestedMap["proxy_cacert_url"] = data.Infra.InternetProxy.ProxyCacertURL.ValueString()
+			}
+			infraMap["internet_proxy"] = internet_proxyNestedMap
+		}
+		if !data.Infra.MachineID.IsNull() && !data.Infra.MachineID.IsUnknown() {
+			infraMap["machine_id"] = data.Infra.MachineID.ValueString()
+		}
+		if !data.Infra.Provider.IsNull() && !data.Infra.Provider.IsUnknown() {
+			infraMap["provider_ref"] = data.Infra.Provider.ValueString()
+		}
+		if data.Infra.SwInfo != nil {
+			sw_infoNestedMap := make(map[string]interface{})
+			if !data.Infra.SwInfo.SwVersion.IsNull() && !data.Infra.SwInfo.SwVersion.IsUnknown() {
+				sw_infoNestedMap["sw_version"] = data.Infra.SwInfo.SwVersion.ValueString()
+			}
+			infraMap["sw_info"] = sw_infoNestedMap
+		}
+		if !data.Infra.Timestamp.IsNull() && !data.Infra.Timestamp.IsUnknown() {
+			infraMap["timestamp"] = data.Infra.Timestamp.ValueString()
+		}
+		if !data.Infra.Zone.IsNull() && !data.Infra.Zone.IsUnknown() {
+			infraMap["zone"] = data.Infra.Zone.ValueString()
+		}
+		apiResource.Spec["infra"] = infraMap
+	}
+	if data.Passport != nil {
+		passportMap := make(map[string]interface{})
+		if !data.Passport.ClusterName.IsNull() && !data.Passport.ClusterName.IsUnknown() {
+			passportMap["cluster_name"] = data.Passport.ClusterName.ValueString()
+		}
+		if !data.Passport.ClusterSize.IsNull() && !data.Passport.ClusterSize.IsUnknown() {
+			passportMap["cluster_size"] = data.Passport.ClusterSize.ValueInt64()
+		}
+		if !data.Passport.ClusterType.IsNull() && !data.Passport.ClusterType.IsUnknown() {
+			passportMap["cluster_type"] = data.Passport.ClusterType.ValueString()
+		}
+		if data.Passport.DefaultOsVersion != nil {
+			passportMap["default_os_version"] = map[string]interface{}{}
+		}
+		if data.Passport.DefaultSwVersion != nil {
+			passportMap["default_sw_version"] = map[string]interface{}{}
+		}
+		if !data.Passport.Latitude.IsNull() && !data.Passport.Latitude.IsUnknown() {
+			passportMap["latitude"] = data.Passport.Latitude.ValueInt64()
+		}
+		if !data.Passport.Longitude.IsNull() && !data.Passport.Longitude.IsUnknown() {
+			passportMap["longitude"] = data.Passport.Longitude.ValueInt64()
+		}
+		if !data.Passport.OperatingSystemVersion.IsNull() && !data.Passport.OperatingSystemVersion.IsUnknown() {
+			passportMap["operating_system_version"] = data.Passport.OperatingSystemVersion.ValueString()
+		}
+		if !data.Passport.PrivateNetworkName.IsNull() && !data.Passport.PrivateNetworkName.IsUnknown() {
+			passportMap["private_network_name"] = data.Passport.PrivateNetworkName.ValueString()
+		}
+		if !data.Passport.VolterraSoftwareVersion.IsNull() && !data.Passport.VolterraSoftwareVersion.IsUnknown() {
+			passportMap["volterra_software_version"] = data.Passport.VolterraSoftwareVersion.ValueString()
+		}
+		apiResource.Spec["passport"] = passportMap
+	}
+	if !data.Token.IsNull() && !data.Token.IsUnknown() {
+		apiResource.Spec["token"] = data.Token.ValueString()
+	}
+
+
 	updated, err := r.client.UpdateRegistration(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update Registration: %s", err))
@@ -1114,6 +1466,12 @@ func (r *RegistrationResource) Update(ctx context.Context, req resource.UpdateRe
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
+	if v, ok := updated.Spec["token"].(string); ok && v != "" {
+		data.Token = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -1126,6 +1484,7 @@ func (r *RegistrationResource) Update(ctx context.Context, req resource.UpdateRe
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -1152,6 +1511,15 @@ func (r *RegistrationResource) Delete(ctx context.Context, req resource.DeleteRe
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "Registration already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "Registration delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

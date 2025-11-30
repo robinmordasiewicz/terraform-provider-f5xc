@@ -10,13 +10,8 @@ import (
 
 // SiteMeshGroup represents a F5XC SiteMeshGroup
 type SiteMeshGroup struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     SiteMeshGroupSpec `json:"spec"`
-}
-
-// SiteMeshGroupSpec defines the specification for SiteMeshGroup
-type SiteMeshGroupSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateSiteMeshGroup creates a new SiteMeshGroup

@@ -12,6 +12,8 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -197,14 +199,14 @@ type UDPLoadBalancerResourceModel struct {
 	Annotations types.Map `tfsdk:"annotations"`
 	Description types.String `tfsdk:"description"`
 	Disable types.Bool `tfsdk:"disable"`
-	DNSVolterraManaged types.Bool `tfsdk:"dns_volterra_managed"`
 	Domains types.List `tfsdk:"domains"`
+	Labels types.Map `tfsdk:"labels"`
+	ID types.String `tfsdk:"id"`
+	DNSVolterraManaged types.Bool `tfsdk:"dns_volterra_managed"`
 	EnablePerPacketLoadBalancing types.Bool `tfsdk:"enable_per_packet_load_balancing"`
 	IdleTimeout types.Int64 `tfsdk:"idle_timeout"`
-	Labels types.Map `tfsdk:"labels"`
 	ListenPort types.Int64 `tfsdk:"listen_port"`
 	PortRanges types.String `tfsdk:"port_ranges"`
-	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
 	AdvertiseCustom *UDPLoadBalancerAdvertiseCustomModel `tfsdk:"advertise_custom"`
 	AdvertiseOnPublic *UDPLoadBalancerAdvertiseOnPublicModel `tfsdk:"advertise_on_public"`
@@ -259,38 +261,58 @@ func (r *UDPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 				MarkdownDescription: "A value of true will administratively disable the object.",
 				Optional: true,
 			},
-			"dns_volterra_managed": schema.BoolAttribute{
-				MarkdownDescription: "Automatically Manage DNS Records. DNS records for domains will be managed automatically by F5 Distributed Cloud. As a prerequisite, the domain to be delegated to F5 Distributed Cloud using the Delegated Domain feature or a DNS CNAME record must be created in your DNS provider's portal.",
-				Optional: true,
-			},
 			"domains": schema.ListAttribute{
 				MarkdownDescription: "Domains. A list of domains (host/authority header) that will be matched to this load balancer.",
 				Optional: true,
 				ElementType: types.StringType,
-			},
-			"enable_per_packet_load_balancing": schema.BoolAttribute{
-				MarkdownDescription: "Per Packet Load Balancing. Per packet load balancing: If disabled (default): First packet identified by source IP/port and local IP/port is sent to an upstream server as the load balancing algorithm dictates, and subsequent packets with the same identity are forwarded to the same upstream server without rechecking the algorithm If enabled: Each packet is directed to an upstream server as the load balancing algorithm dictates.",
-				Optional: true,
-			},
-			"idle_timeout": schema.Int64Attribute{
-				MarkdownDescription: "Idle Timeout. The amount of time that a session can exist without upstream or downstream activity, in milliseconds.",
-				Optional: true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
+			"id": schema.StringAttribute{
+				MarkdownDescription: "Unique identifier for the resource.",
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"dns_volterra_managed": schema.BoolAttribute{
+				MarkdownDescription: "Automatically Manage DNS Records. DNS records for domains will be managed automatically by F5 Distributed Cloud. As a prerequisite, the domain to be delegated to F5 Distributed Cloud using the Delegated Domain feature or a DNS CNAME record must be created in your DNS provider's portal.",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.Bool{
+					boolplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"enable_per_packet_load_balancing": schema.BoolAttribute{
+				MarkdownDescription: "Per Packet Load Balancing. Per packet load balancing: If disabled (default): First packet identified by source IP/port and local IP/port is sent to an upstream server as the load balancing algorithm dictates, and subsequent packets with the same identity are forwarded to the same upstream server without rechecking the algorithm If enabled: Each packet is directed to an upstream server as the load balancing algorithm dictates.",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.Bool{
+					boolplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"idle_timeout": schema.Int64Attribute{
+				MarkdownDescription: "Idle Timeout. The amount of time that a session can exist without upstream or downstream activity, in milliseconds.",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.Int64{
+					int64planmodifier.UseStateForUnknown(),
+				},
+			},
 			"listen_port": schema.Int64Attribute{
 				MarkdownDescription: "[OneOf: listen_port, port_ranges] Listen Port. Listen Port for this load balancer",
 				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.Int64{
+					int64planmodifier.UseStateForUnknown(),
+				},
 			},
 			"port_ranges": schema.StringAttribute{
 				MarkdownDescription: "Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'.",
 				Optional: true,
-			},
-			"id": schema.StringAttribute{
-				MarkdownDescription: "Unique identifier for the resource.",
 				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
@@ -747,7 +769,7 @@ func (r *UDPLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.UDPLoadBalancerSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -772,6 +794,119 @@ func (r *UDPLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.AdvertiseCustom != nil {
+		advertise_customMap := make(map[string]interface{})
+		apiResource.Spec["advertise_custom"] = advertise_customMap
+	}
+	if data.AdvertiseOnPublic != nil {
+		advertise_on_publicMap := make(map[string]interface{})
+		if data.AdvertiseOnPublic.PublicIP != nil {
+			public_ipNestedMap := make(map[string]interface{})
+			if !data.AdvertiseOnPublic.PublicIP.Name.IsNull() && !data.AdvertiseOnPublic.PublicIP.Name.IsUnknown() {
+				public_ipNestedMap["name"] = data.AdvertiseOnPublic.PublicIP.Name.ValueString()
+			}
+			if !data.AdvertiseOnPublic.PublicIP.Namespace.IsNull() && !data.AdvertiseOnPublic.PublicIP.Namespace.IsUnknown() {
+				public_ipNestedMap["namespace"] = data.AdvertiseOnPublic.PublicIP.Namespace.ValueString()
+			}
+			if !data.AdvertiseOnPublic.PublicIP.Tenant.IsNull() && !data.AdvertiseOnPublic.PublicIP.Tenant.IsUnknown() {
+				public_ipNestedMap["tenant"] = data.AdvertiseOnPublic.PublicIP.Tenant.ValueString()
+			}
+			advertise_on_publicMap["public_ip"] = public_ipNestedMap
+		}
+		apiResource.Spec["advertise_on_public"] = advertise_on_publicMap
+	}
+	if data.AdvertiseOnPublicDefaultVip != nil {
+		advertise_on_public_default_vipMap := make(map[string]interface{})
+		apiResource.Spec["advertise_on_public_default_vip"] = advertise_on_public_default_vipMap
+	}
+	if data.DoNotAdvertise != nil {
+		do_not_advertiseMap := make(map[string]interface{})
+		apiResource.Spec["do_not_advertise"] = do_not_advertiseMap
+	}
+	if !data.Domains.IsNull() && !data.Domains.IsUnknown() {
+		var domainsList []string
+		resp.Diagnostics.Append(data.Domains.ElementsAs(ctx, &domainsList, false)...)
+		if !resp.Diagnostics.HasError() {
+			apiResource.Spec["domains"] = domainsList
+		}
+	}
+	if data.HashPolicyChoiceRandom != nil {
+		hash_policy_choice_randomMap := make(map[string]interface{})
+		apiResource.Spec["hash_policy_choice_random"] = hash_policy_choice_randomMap
+	}
+	if data.HashPolicyChoiceRoundRobin != nil {
+		hash_policy_choice_round_robinMap := make(map[string]interface{})
+		apiResource.Spec["hash_policy_choice_round_robin"] = hash_policy_choice_round_robinMap
+	}
+	if data.HashPolicyChoiceSourceIPStickiness != nil {
+		hash_policy_choice_source_ip_stickinessMap := make(map[string]interface{})
+		apiResource.Spec["hash_policy_choice_source_ip_stickiness"] = hash_policy_choice_source_ip_stickinessMap
+	}
+	if len(data.OriginPoolsWeights) > 0 {
+		var origin_pools_weightsList []map[string]interface{}
+		for _, item := range data.OriginPoolsWeights {
+			itemMap := make(map[string]interface{})
+			if item.Cluster != nil {
+				clusterNestedMap := make(map[string]interface{})
+				if !item.Cluster.Name.IsNull() && !item.Cluster.Name.IsUnknown() {
+					clusterNestedMap["name"] = item.Cluster.Name.ValueString()
+				}
+				if !item.Cluster.Namespace.IsNull() && !item.Cluster.Namespace.IsUnknown() {
+					clusterNestedMap["namespace"] = item.Cluster.Namespace.ValueString()
+				}
+				if !item.Cluster.Tenant.IsNull() && !item.Cluster.Tenant.IsUnknown() {
+					clusterNestedMap["tenant"] = item.Cluster.Tenant.ValueString()
+				}
+				itemMap["cluster"] = clusterNestedMap
+			}
+			if item.EndpointSubsets != nil {
+				itemMap["endpoint_subsets"] = map[string]interface{}{}
+			}
+			if item.Pool != nil {
+				poolNestedMap := make(map[string]interface{})
+				if !item.Pool.Name.IsNull() && !item.Pool.Name.IsUnknown() {
+					poolNestedMap["name"] = item.Pool.Name.ValueString()
+				}
+				if !item.Pool.Namespace.IsNull() && !item.Pool.Namespace.IsUnknown() {
+					poolNestedMap["namespace"] = item.Pool.Namespace.ValueString()
+				}
+				if !item.Pool.Tenant.IsNull() && !item.Pool.Tenant.IsUnknown() {
+					poolNestedMap["tenant"] = item.Pool.Tenant.ValueString()
+				}
+				itemMap["pool"] = poolNestedMap
+			}
+			if !item.Priority.IsNull() && !item.Priority.IsUnknown() {
+				itemMap["priority"] = item.Priority.ValueInt64()
+			}
+			if !item.Weight.IsNull() && !item.Weight.IsUnknown() {
+				itemMap["weight"] = item.Weight.ValueInt64()
+			}
+			origin_pools_weightsList = append(origin_pools_weightsList, itemMap)
+		}
+		apiResource.Spec["origin_pools_weights"] = origin_pools_weightsList
+	}
+	if data.UDP != nil {
+		udpMap := make(map[string]interface{})
+		apiResource.Spec["udp"] = udpMap
+	}
+	if !data.DNSVolterraManaged.IsNull() && !data.DNSVolterraManaged.IsUnknown() {
+		apiResource.Spec["dns_volterra_managed"] = data.DNSVolterraManaged.ValueBool()
+	}
+	if !data.EnablePerPacketLoadBalancing.IsNull() && !data.EnablePerPacketLoadBalancing.IsUnknown() {
+		apiResource.Spec["enable_per_packet_load_balancing"] = data.EnablePerPacketLoadBalancing.ValueBool()
+	}
+	if !data.IdleTimeout.IsNull() && !data.IdleTimeout.IsUnknown() {
+		apiResource.Spec["idle_timeout"] = data.IdleTimeout.ValueInt64()
+	}
+	if !data.ListenPort.IsNull() && !data.ListenPort.IsUnknown() {
+		apiResource.Spec["listen_port"] = data.ListenPort.ValueInt64()
+	}
+	if !data.PortRanges.IsNull() && !data.PortRanges.IsUnknown() {
+		apiResource.Spec["port_ranges"] = data.PortRanges.ValueString()
+	}
+
+
 	created, err := r.client.CreateUDPLoadBalancer(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create UDPLoadBalancer: %s", err))
@@ -780,8 +915,33 @@ func (r *UDPLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+	if v, ok := created.Spec["dns_volterra_managed"].(bool); ok {
+		data.DNSVolterraManaged = types.BoolValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["enable_per_packet_load_balancing"].(bool); ok {
+		data.EnablePerPacketLoadBalancing = types.BoolValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["idle_timeout"].(float64); ok {
+		data.IdleTimeout = types.Int64Value(int64(v))
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["listen_port"].(float64); ok {
+		data.ListenPort = types.Int64Value(int64(v))
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["port_ranges"].(string); ok && v != "" {
+		data.PortRanges = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created UDPLoadBalancer resource")
@@ -860,9 +1020,195 @@ func (r *UDPLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if _, ok := apiResource.Spec["advertise_custom"].(map[string]interface{}); ok && isImport && data.AdvertiseCustom == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AdvertiseCustom = &UDPLoadBalancerAdvertiseCustomModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["advertise_on_public"].(map[string]interface{}); ok && isImport && data.AdvertiseOnPublic == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AdvertiseOnPublic = &UDPLoadBalancerAdvertiseOnPublicModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["advertise_on_public_default_vip"].(map[string]interface{}); ok && isImport && data.AdvertiseOnPublicDefaultVip == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AdvertiseOnPublicDefaultVip = &UDPLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["do_not_advertise"].(map[string]interface{}); ok && isImport && data.DoNotAdvertise == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DoNotAdvertise = &UDPLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["domains"].([]interface{}); ok && len(v) > 0 {
+		var domainsList []string
+		for _, item := range v {
+			if s, ok := item.(string); ok {
+				domainsList = append(domainsList, s)
+			}
+		}
+		listVal, diags := types.ListValueFrom(ctx, types.StringType, domainsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Domains = listVal
+		}
+	} else {
+		data.Domains = types.ListNull(types.StringType)
+	}
+	if _, ok := apiResource.Spec["hash_policy_choice_random"].(map[string]interface{}); ok && isImport && data.HashPolicyChoiceRandom == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.HashPolicyChoiceRandom = &UDPLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["hash_policy_choice_round_robin"].(map[string]interface{}); ok && isImport && data.HashPolicyChoiceRoundRobin == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.HashPolicyChoiceRoundRobin = &UDPLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["hash_policy_choice_source_ip_stickiness"].(map[string]interface{}); ok && isImport && data.HashPolicyChoiceSourceIPStickiness == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.HashPolicyChoiceSourceIPStickiness = &UDPLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["origin_pools_weights"].([]interface{}); ok && len(listData) > 0 {
+		var origin_pools_weightsList []UDPLoadBalancerOriginPoolsWeightsModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				origin_pools_weightsList = append(origin_pools_weightsList, UDPLoadBalancerOriginPoolsWeightsModel{
+					Cluster: func() *UDPLoadBalancerOriginPoolsWeightsClusterModel {
+						if nestedMap, ok := itemMap["cluster"].(map[string]interface{}); ok {
+							return &UDPLoadBalancerOriginPoolsWeightsClusterModel{
+								Name: func() types.String {
+									if v, ok := nestedMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := nestedMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := nestedMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					EndpointSubsets: func() *UDPLoadBalancerEmptyModel {
+						if _, ok := itemMap["endpoint_subsets"].(map[string]interface{}); ok {
+							return &UDPLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					Pool: func() *UDPLoadBalancerOriginPoolsWeightsPoolModel {
+						if nestedMap, ok := itemMap["pool"].(map[string]interface{}); ok {
+							return &UDPLoadBalancerOriginPoolsWeightsPoolModel{
+								Name: func() types.String {
+									if v, ok := nestedMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := nestedMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := nestedMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					Priority: func() types.Int64 {
+						if v, ok := itemMap["priority"].(float64); ok {
+							return types.Int64Value(int64(v))
+						}
+						return types.Int64Null()
+					}(),
+					Weight: func() types.Int64 {
+						if v, ok := itemMap["weight"].(float64); ok {
+							return types.Int64Value(int64(v))
+						}
+						return types.Int64Null()
+					}(),
+				})
+			}
+		}
+		data.OriginPoolsWeights = origin_pools_weightsList
+	}
+	if _, ok := apiResource.Spec["udp"].(map[string]interface{}); ok && isImport && data.UDP == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.UDP = &UDPLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	// Top-level Optional bool: preserve prior state to avoid API default drift
+	if !isImport && !data.DNSVolterraManaged.IsNull() {
+		// Normal Read: preserve existing state value (do nothing)
+	} else {
+		// Import case or null state: read from API
+		if v, ok := apiResource.Spec["dns_volterra_managed"].(bool); ok {
+			data.DNSVolterraManaged = types.BoolValue(v)
+		} else {
+			data.DNSVolterraManaged = types.BoolNull()
+		}
+	}
+	// Top-level Optional bool: preserve prior state to avoid API default drift
+	if !isImport && !data.EnablePerPacketLoadBalancing.IsNull() {
+		// Normal Read: preserve existing state value (do nothing)
+	} else {
+		// Import case or null state: read from API
+		if v, ok := apiResource.Spec["enable_per_packet_load_balancing"].(bool); ok {
+			data.EnablePerPacketLoadBalancing = types.BoolValue(v)
+		} else {
+			data.EnablePerPacketLoadBalancing = types.BoolNull()
+		}
+	}
+	if v, ok := apiResource.Spec["idle_timeout"].(float64); ok {
+		data.IdleTimeout = types.Int64Value(int64(v))
+	} else {
+		data.IdleTimeout = types.Int64Null()
+	}
+	if v, ok := apiResource.Spec["listen_port"].(float64); ok {
+		data.ListenPort = types.Int64Value(int64(v))
+	} else {
+		data.ListenPort = types.Int64Null()
+	}
+	if v, ok := apiResource.Spec["port_ranges"].(string); ok && v != "" {
+		data.PortRanges = types.StringValue(v)
+	} else {
+		data.PortRanges = types.StringNull()
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -888,7 +1234,7 @@ func (r *UDPLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.UDPLoadBalancerSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -913,6 +1259,119 @@ func (r *UDPLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.AdvertiseCustom != nil {
+		advertise_customMap := make(map[string]interface{})
+		apiResource.Spec["advertise_custom"] = advertise_customMap
+	}
+	if data.AdvertiseOnPublic != nil {
+		advertise_on_publicMap := make(map[string]interface{})
+		if data.AdvertiseOnPublic.PublicIP != nil {
+			public_ipNestedMap := make(map[string]interface{})
+			if !data.AdvertiseOnPublic.PublicIP.Name.IsNull() && !data.AdvertiseOnPublic.PublicIP.Name.IsUnknown() {
+				public_ipNestedMap["name"] = data.AdvertiseOnPublic.PublicIP.Name.ValueString()
+			}
+			if !data.AdvertiseOnPublic.PublicIP.Namespace.IsNull() && !data.AdvertiseOnPublic.PublicIP.Namespace.IsUnknown() {
+				public_ipNestedMap["namespace"] = data.AdvertiseOnPublic.PublicIP.Namespace.ValueString()
+			}
+			if !data.AdvertiseOnPublic.PublicIP.Tenant.IsNull() && !data.AdvertiseOnPublic.PublicIP.Tenant.IsUnknown() {
+				public_ipNestedMap["tenant"] = data.AdvertiseOnPublic.PublicIP.Tenant.ValueString()
+			}
+			advertise_on_publicMap["public_ip"] = public_ipNestedMap
+		}
+		apiResource.Spec["advertise_on_public"] = advertise_on_publicMap
+	}
+	if data.AdvertiseOnPublicDefaultVip != nil {
+		advertise_on_public_default_vipMap := make(map[string]interface{})
+		apiResource.Spec["advertise_on_public_default_vip"] = advertise_on_public_default_vipMap
+	}
+	if data.DoNotAdvertise != nil {
+		do_not_advertiseMap := make(map[string]interface{})
+		apiResource.Spec["do_not_advertise"] = do_not_advertiseMap
+	}
+	if !data.Domains.IsNull() && !data.Domains.IsUnknown() {
+		var domainsList []string
+		resp.Diagnostics.Append(data.Domains.ElementsAs(ctx, &domainsList, false)...)
+		if !resp.Diagnostics.HasError() {
+			apiResource.Spec["domains"] = domainsList
+		}
+	}
+	if data.HashPolicyChoiceRandom != nil {
+		hash_policy_choice_randomMap := make(map[string]interface{})
+		apiResource.Spec["hash_policy_choice_random"] = hash_policy_choice_randomMap
+	}
+	if data.HashPolicyChoiceRoundRobin != nil {
+		hash_policy_choice_round_robinMap := make(map[string]interface{})
+		apiResource.Spec["hash_policy_choice_round_robin"] = hash_policy_choice_round_robinMap
+	}
+	if data.HashPolicyChoiceSourceIPStickiness != nil {
+		hash_policy_choice_source_ip_stickinessMap := make(map[string]interface{})
+		apiResource.Spec["hash_policy_choice_source_ip_stickiness"] = hash_policy_choice_source_ip_stickinessMap
+	}
+	if len(data.OriginPoolsWeights) > 0 {
+		var origin_pools_weightsList []map[string]interface{}
+		for _, item := range data.OriginPoolsWeights {
+			itemMap := make(map[string]interface{})
+			if item.Cluster != nil {
+				clusterNestedMap := make(map[string]interface{})
+				if !item.Cluster.Name.IsNull() && !item.Cluster.Name.IsUnknown() {
+					clusterNestedMap["name"] = item.Cluster.Name.ValueString()
+				}
+				if !item.Cluster.Namespace.IsNull() && !item.Cluster.Namespace.IsUnknown() {
+					clusterNestedMap["namespace"] = item.Cluster.Namespace.ValueString()
+				}
+				if !item.Cluster.Tenant.IsNull() && !item.Cluster.Tenant.IsUnknown() {
+					clusterNestedMap["tenant"] = item.Cluster.Tenant.ValueString()
+				}
+				itemMap["cluster"] = clusterNestedMap
+			}
+			if item.EndpointSubsets != nil {
+				itemMap["endpoint_subsets"] = map[string]interface{}{}
+			}
+			if item.Pool != nil {
+				poolNestedMap := make(map[string]interface{})
+				if !item.Pool.Name.IsNull() && !item.Pool.Name.IsUnknown() {
+					poolNestedMap["name"] = item.Pool.Name.ValueString()
+				}
+				if !item.Pool.Namespace.IsNull() && !item.Pool.Namespace.IsUnknown() {
+					poolNestedMap["namespace"] = item.Pool.Namespace.ValueString()
+				}
+				if !item.Pool.Tenant.IsNull() && !item.Pool.Tenant.IsUnknown() {
+					poolNestedMap["tenant"] = item.Pool.Tenant.ValueString()
+				}
+				itemMap["pool"] = poolNestedMap
+			}
+			if !item.Priority.IsNull() && !item.Priority.IsUnknown() {
+				itemMap["priority"] = item.Priority.ValueInt64()
+			}
+			if !item.Weight.IsNull() && !item.Weight.IsUnknown() {
+				itemMap["weight"] = item.Weight.ValueInt64()
+			}
+			origin_pools_weightsList = append(origin_pools_weightsList, itemMap)
+		}
+		apiResource.Spec["origin_pools_weights"] = origin_pools_weightsList
+	}
+	if data.UDP != nil {
+		udpMap := make(map[string]interface{})
+		apiResource.Spec["udp"] = udpMap
+	}
+	if !data.DNSVolterraManaged.IsNull() && !data.DNSVolterraManaged.IsUnknown() {
+		apiResource.Spec["dns_volterra_managed"] = data.DNSVolterraManaged.ValueBool()
+	}
+	if !data.EnablePerPacketLoadBalancing.IsNull() && !data.EnablePerPacketLoadBalancing.IsUnknown() {
+		apiResource.Spec["enable_per_packet_load_balancing"] = data.EnablePerPacketLoadBalancing.ValueBool()
+	}
+	if !data.IdleTimeout.IsNull() && !data.IdleTimeout.IsUnknown() {
+		apiResource.Spec["idle_timeout"] = data.IdleTimeout.ValueInt64()
+	}
+	if !data.ListenPort.IsNull() && !data.ListenPort.IsUnknown() {
+		apiResource.Spec["listen_port"] = data.ListenPort.ValueInt64()
+	}
+	if !data.PortRanges.IsNull() && !data.PortRanges.IsUnknown() {
+		apiResource.Spec["port_ranges"] = data.PortRanges.ValueString()
+	}
+
+
 	updated, err := r.client.UpdateUDPLoadBalancer(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update UDPLoadBalancer: %s", err))
@@ -921,6 +1380,28 @@ func (r *UDPLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
+	if v, ok := updated.Spec["dns_volterra_managed"].(bool); ok {
+		data.DNSVolterraManaged = types.BoolValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["enable_per_packet_load_balancing"].(bool); ok {
+		data.EnablePerPacketLoadBalancing = types.BoolValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["idle_timeout"].(float64); ok {
+		data.IdleTimeout = types.Int64Value(int64(v))
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["listen_port"].(float64); ok {
+		data.ListenPort = types.Int64Value(int64(v))
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["port_ranges"].(string); ok && v != "" {
+		data.PortRanges = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -933,6 +1414,7 @@ func (r *UDPLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -959,6 +1441,15 @@ func (r *UDPLoadBalancerResource) Delete(ctx context.Context, req resource.Delet
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "UDPLoadBalancer already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "UDPLoadBalancer delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

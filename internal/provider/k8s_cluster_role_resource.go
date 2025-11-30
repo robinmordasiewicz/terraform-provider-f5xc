@@ -86,8 +86,8 @@ type K8SClusterRoleResourceModel struct {
 	Description types.String `tfsdk:"description"`
 	Disable types.Bool `tfsdk:"disable"`
 	Labels types.Map `tfsdk:"labels"`
-	Yaml types.String `tfsdk:"yaml"`
 	ID types.String `tfsdk:"id"`
+	Yaml types.String `tfsdk:"yaml"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
 	K8SClusterRoleSelector *K8SClusterRoleK8SClusterRoleSelectorModel `tfsdk:"k8s_cluster_role_selector"`
 	PolicyRuleList *K8SClusterRolePolicyRuleListModel `tfsdk:"policy_rule_list"`
@@ -140,12 +140,16 @@ func (r *K8SClusterRoleResource) Schema(ctx context.Context, req resource.Schema
 				Optional: true,
 				ElementType: types.StringType,
 			},
+			"id": schema.StringAttribute{
+				MarkdownDescription: "Unique identifier for the resource.",
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
 			"yaml": schema.StringAttribute{
 				MarkdownDescription: "K8s YAML. K8s YAML for ClusterRole",
 				Optional: true,
-			},
-			"id": schema.StringAttribute{
-				MarkdownDescription: "Unique identifier for the resource.",
 				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
@@ -349,7 +353,7 @@ func (r *K8SClusterRoleResource) Create(ctx context.Context, req resource.Create
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.K8SClusterRoleSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -374,6 +378,20 @@ func (r *K8SClusterRoleResource) Create(ctx context.Context, req resource.Create
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.K8SClusterRoleSelector != nil {
+		k8s_cluster_role_selectorMap := make(map[string]interface{})
+		apiResource.Spec["k8s_cluster_role_selector"] = k8s_cluster_role_selectorMap
+	}
+	if data.PolicyRuleList != nil {
+		policy_rule_listMap := make(map[string]interface{})
+		apiResource.Spec["policy_rule_list"] = policy_rule_listMap
+	}
+	if !data.Yaml.IsNull() && !data.Yaml.IsUnknown() {
+		apiResource.Spec["yaml"] = data.Yaml.ValueString()
+	}
+
+
 	created, err := r.client.CreateK8SClusterRole(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create K8SClusterRole: %s", err))
@@ -382,8 +400,17 @@ func (r *K8SClusterRoleResource) Create(ctx context.Context, req resource.Create
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+	if v, ok := created.Spec["yaml"].(string); ok && v != "" {
+		data.Yaml = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created K8SClusterRole resource")
@@ -462,9 +489,40 @@ func (r *K8SClusterRoleResource) Read(ctx context.Context, req resource.ReadRequ
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if _, ok := apiResource.Spec["k8s_cluster_role_selector"].(map[string]interface{}); ok && isImport && data.K8SClusterRoleSelector == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.K8SClusterRoleSelector = &K8SClusterRoleK8SClusterRoleSelectorModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["policy_rule_list"].(map[string]interface{}); ok && isImport && data.PolicyRuleList == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.PolicyRuleList = &K8SClusterRolePolicyRuleListModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["yaml"].(string); ok && v != "" {
+		data.Yaml = types.StringValue(v)
+	} else {
+		data.Yaml = types.StringNull()
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -490,7 +548,7 @@ func (r *K8SClusterRoleResource) Update(ctx context.Context, req resource.Update
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.K8SClusterRoleSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -515,6 +573,20 @@ func (r *K8SClusterRoleResource) Update(ctx context.Context, req resource.Update
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.K8SClusterRoleSelector != nil {
+		k8s_cluster_role_selectorMap := make(map[string]interface{})
+		apiResource.Spec["k8s_cluster_role_selector"] = k8s_cluster_role_selectorMap
+	}
+	if data.PolicyRuleList != nil {
+		policy_rule_listMap := make(map[string]interface{})
+		apiResource.Spec["policy_rule_list"] = policy_rule_listMap
+	}
+	if !data.Yaml.IsNull() && !data.Yaml.IsUnknown() {
+		apiResource.Spec["yaml"] = data.Yaml.ValueString()
+	}
+
+
 	updated, err := r.client.UpdateK8SClusterRole(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update K8SClusterRole: %s", err))
@@ -523,6 +595,12 @@ func (r *K8SClusterRoleResource) Update(ctx context.Context, req resource.Update
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
+	if v, ok := updated.Spec["yaml"].(string); ok && v != "" {
+		data.Yaml = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -535,6 +613,7 @@ func (r *K8SClusterRoleResource) Update(ctx context.Context, req resource.Update
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -561,6 +640,15 @@ func (r *K8SClusterRoleResource) Delete(ctx context.Context, req resource.Delete
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "K8SClusterRole already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "K8SClusterRole delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

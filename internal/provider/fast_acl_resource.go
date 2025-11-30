@@ -124,7 +124,7 @@ type FastACLReACLFastACLRulesIPPrefixSetRefModel struct {
 
 // FastACLReACLFastACLRulesMetadataModel represents metadata block
 type FastACLReACLFastACLRulesMetadataModel struct {
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name types.String `tfsdk:"name"`
 }
 
@@ -223,7 +223,7 @@ type FastACLSiteACLFastACLRulesIPPrefixSetRefModel struct {
 
 // FastACLSiteACLFastACLRulesMetadataModel represents metadata block
 type FastACLSiteACLFastACLRulesMetadataModel struct {
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name types.String `tfsdk:"name"`
 }
 
@@ -466,7 +466,7 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 								"metadata": schema.SingleNestedBlock{
 									MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 									Attributes: map[string]schema.Attribute{
-										"description": schema.StringAttribute{
+										"description_spec": schema.StringAttribute{
 											MarkdownDescription: "Description. Human readable description.",
 											Optional: true,
 										},
@@ -671,7 +671,7 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 								"metadata": schema.SingleNestedBlock{
 									MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 									Attributes: map[string]schema.Attribute{
-										"description": schema.StringAttribute{
+										"description_spec": schema.StringAttribute{
 											MarkdownDescription: "Description. Human readable description.",
 											Optional: true,
 										},
@@ -850,7 +850,7 @@ func (r *FastACLResource) Create(ctx context.Context, req resource.CreateRequest
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.FastACLSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -875,6 +875,58 @@ func (r *FastACLResource) Create(ctx context.Context, req resource.CreateRequest
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.ProtocolPolicer != nil {
+		protocol_policerMap := make(map[string]interface{})
+		if !data.ProtocolPolicer.Name.IsNull() && !data.ProtocolPolicer.Name.IsUnknown() {
+			protocol_policerMap["name"] = data.ProtocolPolicer.Name.ValueString()
+		}
+		if !data.ProtocolPolicer.Namespace.IsNull() && !data.ProtocolPolicer.Namespace.IsUnknown() {
+			protocol_policerMap["namespace"] = data.ProtocolPolicer.Namespace.ValueString()
+		}
+		if !data.ProtocolPolicer.Tenant.IsNull() && !data.ProtocolPolicer.Tenant.IsUnknown() {
+			protocol_policerMap["tenant"] = data.ProtocolPolicer.Tenant.ValueString()
+		}
+		apiResource.Spec["protocol_policer"] = protocol_policerMap
+	}
+	if data.ReACL != nil {
+		re_aclMap := make(map[string]interface{})
+		if data.ReACL.AllPublicVips != nil {
+			re_aclMap["all_public_vips"] = map[string]interface{}{}
+		}
+		if data.ReACL.DefaultTenantVip != nil {
+			re_aclMap["default_tenant_vip"] = map[string]interface{}{}
+		}
+		if data.ReACL.SelectedTenantVip != nil {
+			selected_tenant_vipNestedMap := make(map[string]interface{})
+			if !data.ReACL.SelectedTenantVip.DefaultTenantVip.IsNull() && !data.ReACL.SelectedTenantVip.DefaultTenantVip.IsUnknown() {
+				selected_tenant_vipNestedMap["default_tenant_vip"] = data.ReACL.SelectedTenantVip.DefaultTenantVip.ValueBool()
+			}
+			re_aclMap["selected_tenant_vip"] = selected_tenant_vipNestedMap
+		}
+		apiResource.Spec["re_acl"] = re_aclMap
+	}
+	if data.SiteACL != nil {
+		site_aclMap := make(map[string]interface{})
+		if data.SiteACL.AllServices != nil {
+			site_aclMap["all_services"] = map[string]interface{}{}
+		}
+		if data.SiteACL.InsideNetwork != nil {
+			site_aclMap["inside_network"] = map[string]interface{}{}
+		}
+		if data.SiteACL.InterfaceServices != nil {
+			site_aclMap["interface_services"] = map[string]interface{}{}
+		}
+		if data.SiteACL.OutsideNetwork != nil {
+			site_aclMap["outside_network"] = map[string]interface{}{}
+		}
+		if data.SiteACL.VipServices != nil {
+			site_aclMap["vip_services"] = map[string]interface{}{}
+		}
+		apiResource.Spec["site_acl"] = site_aclMap
+	}
+
+
 	created, err := r.client.CreateFastACL(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create FastACL: %s", err))
@@ -883,8 +935,13 @@ func (r *FastACLResource) Create(ctx context.Context, req resource.CreateRequest
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created FastACL resource")
@@ -963,9 +1020,57 @@ func (r *FastACLResource) Read(ctx context.Context, req resource.ReadRequest, re
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if blockData, ok := apiResource.Spec["protocol_policer"].(map[string]interface{}); ok && (isImport || data.ProtocolPolicer != nil) {
+		data.ProtocolPolicer = &FastACLProtocolPolicerModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["re_acl"].(map[string]interface{}); ok && isImport && data.ReACL == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ReACL = &FastACLReACLModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["site_acl"].(map[string]interface{}); ok && isImport && data.SiteACL == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.SiteACL = &FastACLSiteACLModel{}
+	}
+	// Normal Read: preserve existing state value
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -991,7 +1096,7 @@ func (r *FastACLResource) Update(ctx context.Context, req resource.UpdateRequest
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.FastACLSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -1016,6 +1121,58 @@ func (r *FastACLResource) Update(ctx context.Context, req resource.UpdateRequest
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.ProtocolPolicer != nil {
+		protocol_policerMap := make(map[string]interface{})
+		if !data.ProtocolPolicer.Name.IsNull() && !data.ProtocolPolicer.Name.IsUnknown() {
+			protocol_policerMap["name"] = data.ProtocolPolicer.Name.ValueString()
+		}
+		if !data.ProtocolPolicer.Namespace.IsNull() && !data.ProtocolPolicer.Namespace.IsUnknown() {
+			protocol_policerMap["namespace"] = data.ProtocolPolicer.Namespace.ValueString()
+		}
+		if !data.ProtocolPolicer.Tenant.IsNull() && !data.ProtocolPolicer.Tenant.IsUnknown() {
+			protocol_policerMap["tenant"] = data.ProtocolPolicer.Tenant.ValueString()
+		}
+		apiResource.Spec["protocol_policer"] = protocol_policerMap
+	}
+	if data.ReACL != nil {
+		re_aclMap := make(map[string]interface{})
+		if data.ReACL.AllPublicVips != nil {
+			re_aclMap["all_public_vips"] = map[string]interface{}{}
+		}
+		if data.ReACL.DefaultTenantVip != nil {
+			re_aclMap["default_tenant_vip"] = map[string]interface{}{}
+		}
+		if data.ReACL.SelectedTenantVip != nil {
+			selected_tenant_vipNestedMap := make(map[string]interface{})
+			if !data.ReACL.SelectedTenantVip.DefaultTenantVip.IsNull() && !data.ReACL.SelectedTenantVip.DefaultTenantVip.IsUnknown() {
+				selected_tenant_vipNestedMap["default_tenant_vip"] = data.ReACL.SelectedTenantVip.DefaultTenantVip.ValueBool()
+			}
+			re_aclMap["selected_tenant_vip"] = selected_tenant_vipNestedMap
+		}
+		apiResource.Spec["re_acl"] = re_aclMap
+	}
+	if data.SiteACL != nil {
+		site_aclMap := make(map[string]interface{})
+		if data.SiteACL.AllServices != nil {
+			site_aclMap["all_services"] = map[string]interface{}{}
+		}
+		if data.SiteACL.InsideNetwork != nil {
+			site_aclMap["inside_network"] = map[string]interface{}{}
+		}
+		if data.SiteACL.InterfaceServices != nil {
+			site_aclMap["interface_services"] = map[string]interface{}{}
+		}
+		if data.SiteACL.OutsideNetwork != nil {
+			site_aclMap["outside_network"] = map[string]interface{}{}
+		}
+		if data.SiteACL.VipServices != nil {
+			site_aclMap["vip_services"] = map[string]interface{}{}
+		}
+		apiResource.Spec["site_acl"] = site_aclMap
+	}
+
+
 	updated, err := r.client.UpdateFastACL(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update FastACL: %s", err))
@@ -1024,6 +1181,8 @@ func (r *FastACLResource) Update(ctx context.Context, req resource.UpdateRequest
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -1036,6 +1195,7 @@ func (r *FastACLResource) Update(ctx context.Context, req resource.UpdateRequest
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -1062,6 +1222,15 @@ func (r *FastACLResource) Delete(ctx context.Context, req resource.DeleteRequest
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "FastACL already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "FastACL delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

@@ -10,13 +10,8 @@ import (
 
 // BGP represents a F5XC BGP
 type BGP struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     BGPSpec `json:"spec"`
-}
-
-// BGPSpec defines the specification for BGP
-type BGPSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateBGP creates a new BGP

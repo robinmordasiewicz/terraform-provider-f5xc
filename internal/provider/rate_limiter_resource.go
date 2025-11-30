@@ -386,7 +386,7 @@ func (r *RateLimiterResource) Create(ctx context.Context, req resource.CreateReq
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.RateLimiterSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -411,6 +411,65 @@ func (r *RateLimiterResource) Create(ctx context.Context, req resource.CreateReq
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if len(data.Limits) > 0 {
+		var limitsList []map[string]interface{}
+		for _, item := range data.Limits {
+			itemMap := make(map[string]interface{})
+			if item.ActionBlock != nil {
+				action_blockNestedMap := make(map[string]interface{})
+				itemMap["action_block"] = action_blockNestedMap
+			}
+			if !item.BurstMultiplier.IsNull() && !item.BurstMultiplier.IsUnknown() {
+				itemMap["burst_multiplier"] = item.BurstMultiplier.ValueInt64()
+			}
+			if item.Disabled != nil {
+				itemMap["disabled"] = map[string]interface{}{}
+			}
+			if item.LeakyBucket != nil {
+				itemMap["leaky_bucket"] = map[string]interface{}{}
+			}
+			if !item.PeriodMultiplier.IsNull() && !item.PeriodMultiplier.IsUnknown() {
+				itemMap["period_multiplier"] = item.PeriodMultiplier.ValueInt64()
+			}
+			if item.TokenBucket != nil {
+				itemMap["token_bucket"] = map[string]interface{}{}
+			}
+			if !item.TotalNumber.IsNull() && !item.TotalNumber.IsUnknown() {
+				itemMap["total_number"] = item.TotalNumber.ValueInt64()
+			}
+			if !item.Unit.IsNull() && !item.Unit.IsUnknown() {
+				itemMap["unit"] = item.Unit.ValueString()
+			}
+			limitsList = append(limitsList, itemMap)
+		}
+		apiResource.Spec["limits"] = limitsList
+	}
+	if len(data.UserIdentification) > 0 {
+		var user_identificationList []map[string]interface{}
+		for _, item := range data.UserIdentification {
+			itemMap := make(map[string]interface{})
+			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+				itemMap["kind"] = item.Kind.ValueString()
+			}
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+				itemMap["namespace"] = item.Namespace.ValueString()
+			}
+			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+				itemMap["tenant"] = item.Tenant.ValueString()
+			}
+			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+				itemMap["uid"] = item.Uid.ValueString()
+			}
+			user_identificationList = append(user_identificationList, itemMap)
+		}
+		apiResource.Spec["user_identification"] = user_identificationList
+	}
+
+
 	created, err := r.client.CreateRateLimiter(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create RateLimiter: %s", err))
@@ -419,8 +478,13 @@ func (r *RateLimiterResource) Create(ctx context.Context, req resource.CreateReq
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created RateLimiter resource")
@@ -499,9 +563,124 @@ func (r *RateLimiterResource) Read(ctx context.Context, req resource.ReadRequest
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if listData, ok := apiResource.Spec["limits"].([]interface{}); ok && len(listData) > 0 {
+		var limitsList []RateLimiterLimitsModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				limitsList = append(limitsList, RateLimiterLimitsModel{
+					ActionBlock: func() *RateLimiterLimitsActionBlockModel {
+						if _, ok := itemMap["action_block"].(map[string]interface{}); ok {
+							return &RateLimiterLimitsActionBlockModel{
+							}
+						}
+						return nil
+					}(),
+					BurstMultiplier: func() types.Int64 {
+						if v, ok := itemMap["burst_multiplier"].(float64); ok {
+							return types.Int64Value(int64(v))
+						}
+						return types.Int64Null()
+					}(),
+					Disabled: func() *RateLimiterEmptyModel {
+						if _, ok := itemMap["disabled"].(map[string]interface{}); ok {
+							return &RateLimiterEmptyModel{}
+						}
+						return nil
+					}(),
+					LeakyBucket: func() *RateLimiterEmptyModel {
+						if _, ok := itemMap["leaky_bucket"].(map[string]interface{}); ok {
+							return &RateLimiterEmptyModel{}
+						}
+						return nil
+					}(),
+					PeriodMultiplier: func() types.Int64 {
+						if v, ok := itemMap["period_multiplier"].(float64); ok {
+							return types.Int64Value(int64(v))
+						}
+						return types.Int64Null()
+					}(),
+					TokenBucket: func() *RateLimiterEmptyModel {
+						if _, ok := itemMap["token_bucket"].(map[string]interface{}); ok {
+							return &RateLimiterEmptyModel{}
+						}
+						return nil
+					}(),
+					TotalNumber: func() types.Int64 {
+						if v, ok := itemMap["total_number"].(float64); ok {
+							return types.Int64Value(int64(v))
+						}
+						return types.Int64Null()
+					}(),
+					Unit: func() types.String {
+						if v, ok := itemMap["unit"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.Limits = limitsList
+	}
+	if listData, ok := apiResource.Spec["user_identification"].([]interface{}); ok && len(listData) > 0 {
+		var user_identificationList []RateLimiterUserIdentificationModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				user_identificationList = append(user_identificationList, RateLimiterUserIdentificationModel{
+					Kind: func() types.String {
+						if v, ok := itemMap["kind"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Namespace: func() types.String {
+						if v, ok := itemMap["namespace"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Tenant: func() types.String {
+						if v, ok := itemMap["tenant"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Uid: func() types.String {
+						if v, ok := itemMap["uid"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.UserIdentification = user_identificationList
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -527,7 +706,7 @@ func (r *RateLimiterResource) Update(ctx context.Context, req resource.UpdateReq
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.RateLimiterSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -552,6 +731,65 @@ func (r *RateLimiterResource) Update(ctx context.Context, req resource.UpdateReq
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if len(data.Limits) > 0 {
+		var limitsList []map[string]interface{}
+		for _, item := range data.Limits {
+			itemMap := make(map[string]interface{})
+			if item.ActionBlock != nil {
+				action_blockNestedMap := make(map[string]interface{})
+				itemMap["action_block"] = action_blockNestedMap
+			}
+			if !item.BurstMultiplier.IsNull() && !item.BurstMultiplier.IsUnknown() {
+				itemMap["burst_multiplier"] = item.BurstMultiplier.ValueInt64()
+			}
+			if item.Disabled != nil {
+				itemMap["disabled"] = map[string]interface{}{}
+			}
+			if item.LeakyBucket != nil {
+				itemMap["leaky_bucket"] = map[string]interface{}{}
+			}
+			if !item.PeriodMultiplier.IsNull() && !item.PeriodMultiplier.IsUnknown() {
+				itemMap["period_multiplier"] = item.PeriodMultiplier.ValueInt64()
+			}
+			if item.TokenBucket != nil {
+				itemMap["token_bucket"] = map[string]interface{}{}
+			}
+			if !item.TotalNumber.IsNull() && !item.TotalNumber.IsUnknown() {
+				itemMap["total_number"] = item.TotalNumber.ValueInt64()
+			}
+			if !item.Unit.IsNull() && !item.Unit.IsUnknown() {
+				itemMap["unit"] = item.Unit.ValueString()
+			}
+			limitsList = append(limitsList, itemMap)
+		}
+		apiResource.Spec["limits"] = limitsList
+	}
+	if len(data.UserIdentification) > 0 {
+		var user_identificationList []map[string]interface{}
+		for _, item := range data.UserIdentification {
+			itemMap := make(map[string]interface{})
+			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+				itemMap["kind"] = item.Kind.ValueString()
+			}
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+				itemMap["namespace"] = item.Namespace.ValueString()
+			}
+			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+				itemMap["tenant"] = item.Tenant.ValueString()
+			}
+			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+				itemMap["uid"] = item.Uid.ValueString()
+			}
+			user_identificationList = append(user_identificationList, itemMap)
+		}
+		apiResource.Spec["user_identification"] = user_identificationList
+	}
+
+
 	updated, err := r.client.UpdateRateLimiter(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update RateLimiter: %s", err))
@@ -560,6 +798,8 @@ func (r *RateLimiterResource) Update(ctx context.Context, req resource.UpdateReq
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -572,6 +812,7 @@ func (r *RateLimiterResource) Update(ctx context.Context, req resource.UpdateReq
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -598,6 +839,15 @@ func (r *RateLimiterResource) Delete(ctx context.Context, req resource.DeleteReq
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "RateLimiter already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "RateLimiter delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

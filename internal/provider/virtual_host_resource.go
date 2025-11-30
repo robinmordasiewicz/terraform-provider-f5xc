@@ -12,6 +12,8 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -466,7 +468,7 @@ type VirtualHostTLSParametersCommonParamsModel struct {
 // VirtualHostTLSParametersCommonParamsTLSCertificatesModel represents tls_certificates block
 type VirtualHostTLSParametersCommonParamsTLSCertificatesModel struct {
 	CertificateURL types.String `tfsdk:"certificate_url"`
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	CustomHashAlgorithms *VirtualHostTLSParametersCommonParamsTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
 	DisableOcspStapling *VirtualHostEmptyModel `tfsdk:"disable_ocsp_stapling"`
 	PrivateKey *VirtualHostTLSParametersCommonParamsTLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
@@ -552,25 +554,25 @@ type VirtualHostWAFTypeAppFirewallAppFirewallModel struct {
 type VirtualHostResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	AddLocation types.Bool `tfsdk:"add_location"`
 	Annotations types.Map `tfsdk:"annotations"`
-	AppendServerName types.String `tfsdk:"append_server_name"`
-	ConnectionIdleTimeout types.Int64 `tfsdk:"connection_idle_timeout"`
 	Description types.String `tfsdk:"description"`
 	Disable types.Bool `tfsdk:"disable"`
-	DisableDefaultErrorPages types.Bool `tfsdk:"disable_default_error_pages"`
-	DisableDNSResolve types.Bool `tfsdk:"disable_dns_resolve"`
 	Domains types.List `tfsdk:"domains"`
-	IdleTimeout types.Int64 `tfsdk:"idle_timeout"`
 	Labels types.Map `tfsdk:"labels"`
-	MaxRequestHeaderSize types.Int64 `tfsdk:"max_request_header_size"`
-	Proxy types.String `tfsdk:"proxy"`
 	RequestCookiesToRemove types.List `tfsdk:"request_cookies_to_remove"`
 	RequestHeadersToRemove types.List `tfsdk:"request_headers_to_remove"`
 	ResponseCookiesToRemove types.List `tfsdk:"response_cookies_to_remove"`
 	ResponseHeadersToRemove types.List `tfsdk:"response_headers_to_remove"`
-	ServerName types.String `tfsdk:"server_name"`
 	ID types.String `tfsdk:"id"`
+	AddLocation types.Bool `tfsdk:"add_location"`
+	AppendServerName types.String `tfsdk:"append_server_name"`
+	ConnectionIdleTimeout types.Int64 `tfsdk:"connection_idle_timeout"`
+	DisableDefaultErrorPages types.Bool `tfsdk:"disable_default_error_pages"`
+	DisableDNSResolve types.Bool `tfsdk:"disable_dns_resolve"`
+	IdleTimeout types.Int64 `tfsdk:"idle_timeout"`
+	MaxRequestHeaderSize types.Int64 `tfsdk:"max_request_header_size"`
+	Proxy types.String `tfsdk:"proxy"`
+	ServerName types.String `tfsdk:"server_name"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
 	AdvertisePolicies []VirtualHostAdvertisePoliciesModel `tfsdk:"advertise_policies"`
 	Authentication *VirtualHostAuthenticationModel `tfsdk:"authentication"`
@@ -636,22 +638,10 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 					validators.NamespaceValidator(),
 				},
 			},
-			"add_location": schema.BoolAttribute{
-				MarkdownDescription: "Add Location. x-example: true Appends header x-volterra-location = <re-site-name> in responses. This configuration is ignored on CE sites.",
-				Optional: true,
-			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
 				Optional: true,
 				ElementType: types.StringType,
-			},
-			"append_server_name": schema.StringAttribute{
-				MarkdownDescription: "[OneOf: append_server_name, default_header, pass_through, server_name] Append Server Name if absent. Specifies the value to be used for Server header if it is not already present. If Server Header is already present it is not overwritten. It is just passed.",
-				Optional: true,
-			},
-			"connection_idle_timeout": schema.Int64Attribute{
-				MarkdownDescription: "Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The  minutes. Defaults to `2`.",
-				Optional: true,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
@@ -661,35 +651,15 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 				MarkdownDescription: "A value of true will administratively disable the object.",
 				Optional: true,
 			},
-			"disable_default_error_pages": schema.BoolAttribute{
-				MarkdownDescription: "Disable default error pages. An option to specify whether to disable using default F5XC error pages",
-				Optional: true,
-			},
-			"disable_dns_resolve": schema.BoolAttribute{
-				MarkdownDescription: "Disable DNS resolution. Disable DNS resolution for domains specified in the virtual host When the virtual host is configured as Dynamive Resolve Proxy (DRP), disable DNS resolution for domains configured. This configuration is suitable for HTTP CONNECT proxy.",
-				Optional: true,
-			},
 			"domains": schema.ListAttribute{
 				MarkdownDescription: "Domains. A list of Domains (host/authority header) that will be matched to this Virtual Host. Wildcard hosts are supported in the suffix or prefix form Supported Domains and search order: 1. Exact Domain names: www.foo.com. 2. Domains starting with a Wildcard: *.foo.com. Not supported Domains: - Just a Wildcard: * - A Wildcard and TLD with no root Domain: *.com. - A Wildcard not matching a whole DNS label. e.g. *.foo.com and *.bar.foo.com are valid Wildcards however *bar.foo.com, *-bar.foo.com, and bar*.foo.com are all invalid. Additional notes: A Wildcard will not match empty string. e.g. *.foo.com will match bar.foo.com and baz-bar.foo.com but not .foo.com. The longest Wildcards match first. Only a single virtual host in the entire route configuration can match on *. Also a Domain must be unique across all virtual hosts within an advertise policy. Domains are also used for SNI matching if the virtual host proxy type is TCP_PROXY_WITH_SNI/HTTPS_PROXY Domains also indicate the list of names for which DNS resolution will be automatically resolved to IP addresses by the system.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
-			"idle_timeout": schema.Int64Attribute{
-				MarkdownDescription: "Idle timeout (in milliseconds). Idle timeout is the amount of time that the loadbalancer will allow a stream to exist with no upstream or downstream activity. Idle timeout and Proxy Type: HTTP_PROXY, HTTPS_PROXY: Idle timer is started when the first byte is received on the connection. Each time an encode/decode event for headers or data is processed for the stream, the timer will be reset. If the timeout fires, the stream is terminated with a 504 (Gateway Timeout) error code if no upstream response header has been received, otherwise a stream reset occurs. The default idle timeout is 30 seconds TCP PROXY, TCP_PROXY_WITH_SNI, SMA_PROXY: The idle timeout is defined as the period in which there are no bytes sent or received on either the upstream or downstream connection. The default idle timeout is 1 hour. UDP PROXY: The idle timeout for sessions. Idle timeout is defined as the period in which there are no datagrams sent or received on the session. The default if not specified is 1 minute.",
-				Optional: true,
-			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
 				Optional: true,
 				ElementType: types.StringType,
-			},
-			"max_request_header_size": schema.Int64Attribute{
-				MarkdownDescription: "Maximum Request Header Size (KiB). The maximum request header size in KiB for incoming connections. If un-configured, the default max request headers allowed is 60 KiB. Requests that exceed this limit will receive a 431 response. The max configurable limit is 96 KiB, based on current implementation constraints. Note: a. This configuration parameter is applicable only for HTTP_PROXY and HTTPS_PROXY b. When multiple HTTP_PROXY virtual hosts share the same advertise policy, the effective 'maximum request header size' for such virtual hosts is the highest value configured on any of the virtual hosts",
-				Optional: true,
-			},
-			"proxy": schema.StringAttribute{
-				MarkdownDescription: "Type of Proxy. ProxyType tells the type of proxy to install for the virtual host. Only the following combination of VirtualHosts within same AdvertisePolicy is permitted (None of them should have '*' in domains when used with other VirtualHosts in same AdvertisePolicy) 1. Multiple TCP_PROXY_WITH_SNI and multiple HTTPS_PROXY 2. Multiple HTTP_PROXY 3. Multiple HTTPS_PROXY 4. Multiple TCP_PROXY_WITH_SNI HTTPS_PROXY without TLS parameters is not permitted HTTP_PROXY/HTTPS_PROXY/TCP_PROXY_WITH_SNI/SMA_PROXY with empty domains is not permitted TCP_PROXY_WITH_SNI/SMA_PROXY should not have '*' in domains - HTTP_PROXY: HTTP_PROXY Install HTTP proxy. HTTP Proxy is the default proxy installed. - TCP_PROXY: TCP_PROXY Install TCP proxy - TCP_PROXY_WITH_SNI: TCP_PROXY_WITH_SNI Install TCP proxy with SNI Routing - TLS_TCP_PROXY: TCP_PROXY Install TCP proxy - TLS_TCP_PROXY_WITH_SNI: TCP_PROXY_WITH_SNI Install TCP proxy with SNI Routing - HTTPS_PROXY: HTTPS_PROXY Install HTTPS proxy - UDP_PROXY: UDP_PROXY Install UDP proxy - SMA_PROXY: SMA_PROXY Install Secret Management Access proxy - DNS_PROXY: DNS_PROXY Install DNS proxy - ZTNA_PROXY: ZTNA_PROXY Install ZTNA proxy.This is going to be deprecated with UZTNA_PROXY. - UZTNA_PROXY: UZTNA_PROXY Install UZTNA proxy. Possible values are `UDP_PROXY`, `SMA_PROXY`, `DNS_PROXY`, `ZTNA_PROXY`, `UZTNA_PROXY`. Defaults to `HTTP_PROXY`.",
-				Optional: true,
 			},
 			"request_cookies_to_remove": schema.ListAttribute{
 				MarkdownDescription: "Remove Cookies from Cookie Header. List of keys of Cookies to be removed from the HTTP request being sent towards upstream.",
@@ -711,12 +681,80 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 				Optional: true,
 				ElementType: types.StringType,
 			},
+			"id": schema.StringAttribute{
+				MarkdownDescription: "Unique identifier for the resource.",
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"add_location": schema.BoolAttribute{
+				MarkdownDescription: "Add Location. x-example: true Appends header x-volterra-location = <re-site-name> in responses. This configuration is ignored on CE sites.",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.Bool{
+					boolplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"append_server_name": schema.StringAttribute{
+				MarkdownDescription: "[OneOf: append_server_name, default_header, pass_through, server_name] Append Server Name if absent. Specifies the value to be used for Server header if it is not already present. If Server Header is already present it is not overwritten. It is just passed.",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"connection_idle_timeout": schema.Int64Attribute{
+				MarkdownDescription: "Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The  minutes. Defaults to `2`.",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.Int64{
+					int64planmodifier.UseStateForUnknown(),
+				},
+			},
+			"disable_default_error_pages": schema.BoolAttribute{
+				MarkdownDescription: "Disable default error pages. An option to specify whether to disable using default F5XC error pages",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.Bool{
+					boolplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"disable_dns_resolve": schema.BoolAttribute{
+				MarkdownDescription: "Disable DNS resolution. Disable DNS resolution for domains specified in the virtual host When the virtual host is configured as Dynamive Resolve Proxy (DRP), disable DNS resolution for domains configured. This configuration is suitable for HTTP CONNECT proxy.",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.Bool{
+					boolplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"idle_timeout": schema.Int64Attribute{
+				MarkdownDescription: "Idle timeout (in milliseconds). Idle timeout is the amount of time that the loadbalancer will allow a stream to exist with no upstream or downstream activity. Idle timeout and Proxy Type: HTTP_PROXY, HTTPS_PROXY: Idle timer is started when the first byte is received on the connection. Each time an encode/decode event for headers or data is processed for the stream, the timer will be reset. If the timeout fires, the stream is terminated with a 504 (Gateway Timeout) error code if no upstream response header has been received, otherwise a stream reset occurs. The default idle timeout is 30 seconds TCP PROXY, TCP_PROXY_WITH_SNI, SMA_PROXY: The idle timeout is defined as the period in which there are no bytes sent or received on either the upstream or downstream connection. The default idle timeout is 1 hour. UDP PROXY: The idle timeout for sessions. Idle timeout is defined as the period in which there are no datagrams sent or received on the session. The default if not specified is 1 minute.",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.Int64{
+					int64planmodifier.UseStateForUnknown(),
+				},
+			},
+			"max_request_header_size": schema.Int64Attribute{
+				MarkdownDescription: "Maximum Request Header Size (KiB). The maximum request header size in KiB for incoming connections. If un-configured, the default max request headers allowed is 60 KiB. Requests that exceed this limit will receive a 431 response. The max configurable limit is 96 KiB, based on current implementation constraints. Note: a. This configuration parameter is applicable only for HTTP_PROXY and HTTPS_PROXY b. When multiple HTTP_PROXY virtual hosts share the same advertise policy, the effective 'maximum request header size' for such virtual hosts is the highest value configured on any of the virtual hosts",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.Int64{
+					int64planmodifier.UseStateForUnknown(),
+				},
+			},
+			"proxy": schema.StringAttribute{
+				MarkdownDescription: "Type of Proxy. ProxyType tells the type of proxy to install for the virtual host. Only the following combination of VirtualHosts within same AdvertisePolicy is permitted (None of them should have '*' in domains when used with other VirtualHosts in same AdvertisePolicy) 1. Multiple TCP_PROXY_WITH_SNI and multiple HTTPS_PROXY 2. Multiple HTTP_PROXY 3. Multiple HTTPS_PROXY 4. Multiple TCP_PROXY_WITH_SNI HTTPS_PROXY without TLS parameters is not permitted HTTP_PROXY/HTTPS_PROXY/TCP_PROXY_WITH_SNI/SMA_PROXY with empty domains is not permitted TCP_PROXY_WITH_SNI/SMA_PROXY should not have '*' in domains - HTTP_PROXY: HTTP_PROXY Install HTTP proxy. HTTP Proxy is the default proxy installed. - TCP_PROXY: TCP_PROXY Install TCP proxy - TCP_PROXY_WITH_SNI: TCP_PROXY_WITH_SNI Install TCP proxy with SNI Routing - TLS_TCP_PROXY: TCP_PROXY Install TCP proxy - TLS_TCP_PROXY_WITH_SNI: TCP_PROXY_WITH_SNI Install TCP proxy with SNI Routing - HTTPS_PROXY: HTTPS_PROXY Install HTTPS proxy - UDP_PROXY: UDP_PROXY Install UDP proxy - SMA_PROXY: SMA_PROXY Install Secret Management Access proxy - DNS_PROXY: DNS_PROXY Install DNS proxy - ZTNA_PROXY: ZTNA_PROXY Install ZTNA proxy.This is going to be deprecated with UZTNA_PROXY. - UZTNA_PROXY: UZTNA_PROXY Install UZTNA proxy. Possible values are `UDP_PROXY`, `SMA_PROXY`, `DNS_PROXY`, `ZTNA_PROXY`, `UZTNA_PROXY`. Defaults to `HTTP_PROXY`.",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
 			"server_name": schema.StringAttribute{
 				MarkdownDescription: "Server Name. Specifies the value to be used for Server header inserted in responses. This will overwrite existing values if any for Server Header",
 				Optional: true,
-			},
-			"id": schema.StringAttribute{
-				MarkdownDescription: "Unique identifier for the resource.",
 				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
@@ -1514,7 +1552,7 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 					"retriable_status_codes": schema.ListAttribute{
 						MarkdownDescription: "Status Code to Retry. HTTP status codes that should trigger a retry in addition to those specified by retry_on.",
 						Optional: true,
-						ElementType: types.StringType,
+						ElementType: types.Int64Type,
 					},
 					"retry_condition": schema.ListAttribute{
 						MarkdownDescription: "Retry Condition. Specifies the conditions under which retry takes place. Retries can be on different types of condition depending on application requirements. For example, network failure, all 5xx response codes, idempotent 4xx response codes, etc The possible values are '5xx' : Retry will be done if the upstream server responds with any 5xx response code, or does not respond at all (disconnect/reset/read timeout). 'gateway-error' : Retry will be done only if the upstream server responds with 502, 503 or 504 responses (Included in 5xx) 'connect-failure' : Retry will be done if the request fails because of a connection failure to the upstream server (connect timeout, etc.). (Included in 5xx) 'refused-stream' : Retry is done if the upstream server resets the stream with a REFUSED_STREAM error code (Included in 5xx) 'retriable-4xx' : Retry is done if the upstream server responds with a retriable 4xx response code. The only response code in this category is HTTP CONFLICT (409) 'retriable-status-codes' : Retry is done if the upstream server responds with any response code matching one defined in retriable_status_codes field 'reset' : Retry is done if the upstream server does not respond at all (disconnect/reset/read timeout.)",
@@ -1772,7 +1810,7 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 											MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
 											Optional: true,
 										},
-										"description": schema.StringAttribute{
+										"description_spec": schema.StringAttribute{
 											MarkdownDescription: "Description. Description for the certificate",
 											Optional: true,
 										},
@@ -2094,7 +2132,7 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.VirtualHostSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -2119,6 +2157,607 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if len(data.AdvertisePolicies) > 0 {
+		var advertise_policiesList []map[string]interface{}
+		for _, item := range data.AdvertisePolicies {
+			itemMap := make(map[string]interface{})
+			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+				itemMap["kind"] = item.Kind.ValueString()
+			}
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+				itemMap["namespace"] = item.Namespace.ValueString()
+			}
+			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+				itemMap["tenant"] = item.Tenant.ValueString()
+			}
+			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+				itemMap["uid"] = item.Uid.ValueString()
+			}
+			advertise_policiesList = append(advertise_policiesList, itemMap)
+		}
+		apiResource.Spec["advertise_policies"] = advertise_policiesList
+	}
+	if data.Authentication != nil {
+		authenticationMap := make(map[string]interface{})
+		if data.Authentication.CookieParams != nil {
+			cookie_paramsNestedMap := make(map[string]interface{})
+			if !data.Authentication.CookieParams.CookieExpiry.IsNull() && !data.Authentication.CookieParams.CookieExpiry.IsUnknown() {
+				cookie_paramsNestedMap["cookie_expiry"] = data.Authentication.CookieParams.CookieExpiry.ValueInt64()
+			}
+			if !data.Authentication.CookieParams.CookieRefreshInterval.IsNull() && !data.Authentication.CookieParams.CookieRefreshInterval.IsUnknown() {
+				cookie_paramsNestedMap["cookie_refresh_interval"] = data.Authentication.CookieParams.CookieRefreshInterval.ValueInt64()
+			}
+			if !data.Authentication.CookieParams.SessionExpiry.IsNull() && !data.Authentication.CookieParams.SessionExpiry.IsUnknown() {
+				cookie_paramsNestedMap["session_expiry"] = data.Authentication.CookieParams.SessionExpiry.ValueInt64()
+			}
+			authenticationMap["cookie_params"] = cookie_paramsNestedMap
+		}
+		if data.Authentication.RedirectDynamic != nil {
+			authenticationMap["redirect_dynamic"] = map[string]interface{}{}
+		}
+		if !data.Authentication.RedirectURL.IsNull() && !data.Authentication.RedirectURL.IsUnknown() {
+			authenticationMap["redirect_url"] = data.Authentication.RedirectURL.ValueString()
+		}
+		if data.Authentication.UseAuthObjectConfig != nil {
+			authenticationMap["use_auth_object_config"] = map[string]interface{}{}
+		}
+		apiResource.Spec["authentication"] = authenticationMap
+	}
+	if data.BufferPolicy != nil {
+		buffer_policyMap := make(map[string]interface{})
+		if !data.BufferPolicy.Disabled.IsNull() && !data.BufferPolicy.Disabled.IsUnknown() {
+			buffer_policyMap["disabled"] = data.BufferPolicy.Disabled.ValueBool()
+		}
+		if !data.BufferPolicy.MaxRequestBytes.IsNull() && !data.BufferPolicy.MaxRequestBytes.IsUnknown() {
+			buffer_policyMap["max_request_bytes"] = data.BufferPolicy.MaxRequestBytes.ValueInt64()
+		}
+		apiResource.Spec["buffer_policy"] = buffer_policyMap
+	}
+	if data.CaptchaChallenge != nil {
+		captcha_challengeMap := make(map[string]interface{})
+		if !data.CaptchaChallenge.CookieExpiry.IsNull() && !data.CaptchaChallenge.CookieExpiry.IsUnknown() {
+			captcha_challengeMap["cookie_expiry"] = data.CaptchaChallenge.CookieExpiry.ValueInt64()
+		}
+		if !data.CaptchaChallenge.CustomPage.IsNull() && !data.CaptchaChallenge.CustomPage.IsUnknown() {
+			captcha_challengeMap["custom_page"] = data.CaptchaChallenge.CustomPage.ValueString()
+		}
+		apiResource.Spec["captcha_challenge"] = captcha_challengeMap
+	}
+	if data.CoalescingOptions != nil {
+		coalescing_optionsMap := make(map[string]interface{})
+		if data.CoalescingOptions.DefaultCoalescing != nil {
+			coalescing_optionsMap["default_coalescing"] = map[string]interface{}{}
+		}
+		if data.CoalescingOptions.StrictCoalescing != nil {
+			coalescing_optionsMap["strict_coalescing"] = map[string]interface{}{}
+		}
+		apiResource.Spec["coalescing_options"] = coalescing_optionsMap
+	}
+	if data.CompressionParams != nil {
+		compression_paramsMap := make(map[string]interface{})
+		if !data.CompressionParams.ContentLength.IsNull() && !data.CompressionParams.ContentLength.IsUnknown() {
+			compression_paramsMap["content_length"] = data.CompressionParams.ContentLength.ValueInt64()
+		}
+		if !data.CompressionParams.DisableOnEtagHeader.IsNull() && !data.CompressionParams.DisableOnEtagHeader.IsUnknown() {
+			compression_paramsMap["disable_on_etag_header"] = data.CompressionParams.DisableOnEtagHeader.ValueBool()
+		}
+		if !data.CompressionParams.RemoveAcceptEncodingHeader.IsNull() && !data.CompressionParams.RemoveAcceptEncodingHeader.IsUnknown() {
+			compression_paramsMap["remove_accept_encoding_header"] = data.CompressionParams.RemoveAcceptEncodingHeader.ValueBool()
+		}
+		apiResource.Spec["compression_params"] = compression_paramsMap
+	}
+	if data.CorsPolicy != nil {
+		cors_policyMap := make(map[string]interface{})
+		if !data.CorsPolicy.AllowCredentials.IsNull() && !data.CorsPolicy.AllowCredentials.IsUnknown() {
+			cors_policyMap["allow_credentials"] = data.CorsPolicy.AllowCredentials.ValueBool()
+		}
+		if !data.CorsPolicy.AllowHeaders.IsNull() && !data.CorsPolicy.AllowHeaders.IsUnknown() {
+			cors_policyMap["allow_headers"] = data.CorsPolicy.AllowHeaders.ValueString()
+		}
+		if !data.CorsPolicy.AllowMethods.IsNull() && !data.CorsPolicy.AllowMethods.IsUnknown() {
+			cors_policyMap["allow_methods"] = data.CorsPolicy.AllowMethods.ValueString()
+		}
+		if !data.CorsPolicy.Disabled.IsNull() && !data.CorsPolicy.Disabled.IsUnknown() {
+			cors_policyMap["disabled"] = data.CorsPolicy.Disabled.ValueBool()
+		}
+		if !data.CorsPolicy.ExposeHeaders.IsNull() && !data.CorsPolicy.ExposeHeaders.IsUnknown() {
+			cors_policyMap["expose_headers"] = data.CorsPolicy.ExposeHeaders.ValueString()
+		}
+		if !data.CorsPolicy.MaximumAge.IsNull() && !data.CorsPolicy.MaximumAge.IsUnknown() {
+			cors_policyMap["maximum_age"] = data.CorsPolicy.MaximumAge.ValueInt64()
+		}
+		apiResource.Spec["cors_policy"] = cors_policyMap
+	}
+	if data.CsrfPolicy != nil {
+		csrf_policyMap := make(map[string]interface{})
+		if data.CsrfPolicy.AllLoadBalancerDomains != nil {
+			csrf_policyMap["all_load_balancer_domains"] = map[string]interface{}{}
+		}
+		if data.CsrfPolicy.CustomDomainList != nil {
+			custom_domain_listNestedMap := make(map[string]interface{})
+			csrf_policyMap["custom_domain_list"] = custom_domain_listNestedMap
+		}
+		if data.CsrfPolicy.Disabled != nil {
+			csrf_policyMap["disabled"] = map[string]interface{}{}
+		}
+		apiResource.Spec["csrf_policy"] = csrf_policyMap
+	}
+	if data.CustomErrors != nil {
+		custom_errorsMap := make(map[string]interface{})
+		apiResource.Spec["custom_errors"] = custom_errorsMap
+	}
+	if data.DefaultHeader != nil {
+		default_headerMap := make(map[string]interface{})
+		apiResource.Spec["default_header"] = default_headerMap
+	}
+	if data.DefaultLoadBalancer != nil {
+		default_loadbalancerMap := make(map[string]interface{})
+		apiResource.Spec["default_loadbalancer"] = default_loadbalancerMap
+	}
+	if data.DisablePathNormalize != nil {
+		disable_path_normalizeMap := make(map[string]interface{})
+		apiResource.Spec["disable_path_normalize"] = disable_path_normalizeMap
+	}
+	if !data.Domains.IsNull() && !data.Domains.IsUnknown() {
+		var domainsList []string
+		resp.Diagnostics.Append(data.Domains.ElementsAs(ctx, &domainsList, false)...)
+		if !resp.Diagnostics.HasError() {
+			apiResource.Spec["domains"] = domainsList
+		}
+	}
+	if data.DynamicReverseProxy != nil {
+		dynamic_reverse_proxyMap := make(map[string]interface{})
+		if !data.DynamicReverseProxy.ConnectionTimeout.IsNull() && !data.DynamicReverseProxy.ConnectionTimeout.IsUnknown() {
+			dynamic_reverse_proxyMap["connection_timeout"] = data.DynamicReverseProxy.ConnectionTimeout.ValueInt64()
+		}
+		if !data.DynamicReverseProxy.ResolutionNetworkType.IsNull() && !data.DynamicReverseProxy.ResolutionNetworkType.IsUnknown() {
+			dynamic_reverse_proxyMap["resolution_network_type"] = data.DynamicReverseProxy.ResolutionNetworkType.ValueString()
+		}
+		if !data.DynamicReverseProxy.ResolveEndpointDynamically.IsNull() && !data.DynamicReverseProxy.ResolveEndpointDynamically.IsUnknown() {
+			dynamic_reverse_proxyMap["resolve_endpoint_dynamically"] = data.DynamicReverseProxy.ResolveEndpointDynamically.ValueBool()
+		}
+		apiResource.Spec["dynamic_reverse_proxy"] = dynamic_reverse_proxyMap
+	}
+	if data.EnablePathNormalize != nil {
+		enable_path_normalizeMap := make(map[string]interface{})
+		apiResource.Spec["enable_path_normalize"] = enable_path_normalizeMap
+	}
+	if data.HTTPProtocolOptions != nil {
+		http_protocol_optionsMap := make(map[string]interface{})
+		if data.HTTPProtocolOptions.HTTPProtocolEnableV1Only != nil {
+			http_protocol_enable_v1_onlyNestedMap := make(map[string]interface{})
+			http_protocol_optionsMap["http_protocol_enable_v1_only"] = http_protocol_enable_v1_onlyNestedMap
+		}
+		if data.HTTPProtocolOptions.HTTPProtocolEnableV1V2 != nil {
+			http_protocol_optionsMap["http_protocol_enable_v1_v2"] = map[string]interface{}{}
+		}
+		if data.HTTPProtocolOptions.HTTPProtocolEnableV2Only != nil {
+			http_protocol_optionsMap["http_protocol_enable_v2_only"] = map[string]interface{}{}
+		}
+		apiResource.Spec["http_protocol_options"] = http_protocol_optionsMap
+	}
+	if data.JsChallenge != nil {
+		js_challengeMap := make(map[string]interface{})
+		if !data.JsChallenge.CookieExpiry.IsNull() && !data.JsChallenge.CookieExpiry.IsUnknown() {
+			js_challengeMap["cookie_expiry"] = data.JsChallenge.CookieExpiry.ValueInt64()
+		}
+		if !data.JsChallenge.CustomPage.IsNull() && !data.JsChallenge.CustomPage.IsUnknown() {
+			js_challengeMap["custom_page"] = data.JsChallenge.CustomPage.ValueString()
+		}
+		if !data.JsChallenge.JsScriptDelay.IsNull() && !data.JsChallenge.JsScriptDelay.IsUnknown() {
+			js_challengeMap["js_script_delay"] = data.JsChallenge.JsScriptDelay.ValueInt64()
+		}
+		apiResource.Spec["js_challenge"] = js_challengeMap
+	}
+	if data.NoAuthentication != nil {
+		no_authenticationMap := make(map[string]interface{})
+		apiResource.Spec["no_authentication"] = no_authenticationMap
+	}
+	if data.NoChallenge != nil {
+		no_challengeMap := make(map[string]interface{})
+		apiResource.Spec["no_challenge"] = no_challengeMap
+	}
+	if data.NonDefaultLoadBalancer != nil {
+		non_default_loadbalancerMap := make(map[string]interface{})
+		apiResource.Spec["non_default_loadbalancer"] = non_default_loadbalancerMap
+	}
+	if data.PassThrough != nil {
+		pass_throughMap := make(map[string]interface{})
+		apiResource.Spec["pass_through"] = pass_throughMap
+	}
+	if len(data.RateLimiterAllowedPrefixes) > 0 {
+		var rate_limiter_allowed_prefixesList []map[string]interface{}
+		for _, item := range data.RateLimiterAllowedPrefixes {
+			itemMap := make(map[string]interface{})
+			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+				itemMap["kind"] = item.Kind.ValueString()
+			}
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+				itemMap["namespace"] = item.Namespace.ValueString()
+			}
+			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+				itemMap["tenant"] = item.Tenant.ValueString()
+			}
+			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+				itemMap["uid"] = item.Uid.ValueString()
+			}
+			rate_limiter_allowed_prefixesList = append(rate_limiter_allowed_prefixesList, itemMap)
+		}
+		apiResource.Spec["rate_limiter_allowed_prefixes"] = rate_limiter_allowed_prefixesList
+	}
+	if len(data.RequestCookiesToAdd) > 0 {
+		var request_cookies_to_addList []map[string]interface{}
+		for _, item := range data.RequestCookiesToAdd {
+			itemMap := make(map[string]interface{})
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			if !item.Overwrite.IsNull() && !item.Overwrite.IsUnknown() {
+				itemMap["overwrite"] = item.Overwrite.ValueBool()
+			}
+			if item.SecretValue != nil {
+				secret_valueNestedMap := make(map[string]interface{})
+				itemMap["secret_value"] = secret_valueNestedMap
+			}
+			if !item.Value.IsNull() && !item.Value.IsUnknown() {
+				itemMap["value"] = item.Value.ValueString()
+			}
+			request_cookies_to_addList = append(request_cookies_to_addList, itemMap)
+		}
+		apiResource.Spec["request_cookies_to_add"] = request_cookies_to_addList
+	}
+	if !data.RequestCookiesToRemove.IsNull() && !data.RequestCookiesToRemove.IsUnknown() {
+		var request_cookies_to_removeList []string
+		resp.Diagnostics.Append(data.RequestCookiesToRemove.ElementsAs(ctx, &request_cookies_to_removeList, false)...)
+		if !resp.Diagnostics.HasError() {
+			apiResource.Spec["request_cookies_to_remove"] = request_cookies_to_removeList
+		}
+	}
+	if len(data.RequestHeadersToAdd) > 0 {
+		var request_headers_to_addList []map[string]interface{}
+		for _, item := range data.RequestHeadersToAdd {
+			itemMap := make(map[string]interface{})
+			if !item.Append.IsNull() && !item.Append.IsUnknown() {
+				itemMap["append"] = item.Append.ValueBool()
+			}
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			if item.SecretValue != nil {
+				secret_valueNestedMap := make(map[string]interface{})
+				itemMap["secret_value"] = secret_valueNestedMap
+			}
+			if !item.Value.IsNull() && !item.Value.IsUnknown() {
+				itemMap["value"] = item.Value.ValueString()
+			}
+			request_headers_to_addList = append(request_headers_to_addList, itemMap)
+		}
+		apiResource.Spec["request_headers_to_add"] = request_headers_to_addList
+	}
+	if !data.RequestHeadersToRemove.IsNull() && !data.RequestHeadersToRemove.IsUnknown() {
+		var request_headers_to_removeList []string
+		resp.Diagnostics.Append(data.RequestHeadersToRemove.ElementsAs(ctx, &request_headers_to_removeList, false)...)
+		if !resp.Diagnostics.HasError() {
+			apiResource.Spec["request_headers_to_remove"] = request_headers_to_removeList
+		}
+	}
+	if len(data.ResponseCookiesToAdd) > 0 {
+		var response_cookies_to_addList []map[string]interface{}
+		for _, item := range data.ResponseCookiesToAdd {
+			itemMap := make(map[string]interface{})
+			if !item.AddDomain.IsNull() && !item.AddDomain.IsUnknown() {
+				itemMap["add_domain"] = item.AddDomain.ValueString()
+			}
+			if !item.AddExpiry.IsNull() && !item.AddExpiry.IsUnknown() {
+				itemMap["add_expiry"] = item.AddExpiry.ValueString()
+			}
+			if item.AddHttponly != nil {
+				itemMap["add_httponly"] = map[string]interface{}{}
+			}
+			if item.AddPartitioned != nil {
+				itemMap["add_partitioned"] = map[string]interface{}{}
+			}
+			if !item.AddPath.IsNull() && !item.AddPath.IsUnknown() {
+				itemMap["add_path"] = item.AddPath.ValueString()
+			}
+			if item.AddSecure != nil {
+				itemMap["add_secure"] = map[string]interface{}{}
+			}
+			if item.IgnoreDomain != nil {
+				itemMap["ignore_domain"] = map[string]interface{}{}
+			}
+			if item.IgnoreExpiry != nil {
+				itemMap["ignore_expiry"] = map[string]interface{}{}
+			}
+			if item.IgnoreHttponly != nil {
+				itemMap["ignore_httponly"] = map[string]interface{}{}
+			}
+			if item.IgnoreMaxAge != nil {
+				itemMap["ignore_max_age"] = map[string]interface{}{}
+			}
+			if item.IgnorePartitioned != nil {
+				itemMap["ignore_partitioned"] = map[string]interface{}{}
+			}
+			if item.IgnorePath != nil {
+				itemMap["ignore_path"] = map[string]interface{}{}
+			}
+			if item.IgnoreSamesite != nil {
+				itemMap["ignore_samesite"] = map[string]interface{}{}
+			}
+			if item.IgnoreSecure != nil {
+				itemMap["ignore_secure"] = map[string]interface{}{}
+			}
+			if item.IgnoreValue != nil {
+				itemMap["ignore_value"] = map[string]interface{}{}
+			}
+			if !item.MaxAgeValue.IsNull() && !item.MaxAgeValue.IsUnknown() {
+				itemMap["max_age_value"] = item.MaxAgeValue.ValueInt64()
+			}
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			if !item.Overwrite.IsNull() && !item.Overwrite.IsUnknown() {
+				itemMap["overwrite"] = item.Overwrite.ValueBool()
+			}
+			if item.SamesiteLax != nil {
+				itemMap["samesite_lax"] = map[string]interface{}{}
+			}
+			if item.SamesiteNone != nil {
+				itemMap["samesite_none"] = map[string]interface{}{}
+			}
+			if item.SamesiteStrict != nil {
+				itemMap["samesite_strict"] = map[string]interface{}{}
+			}
+			if item.SecretValue != nil {
+				secret_valueNestedMap := make(map[string]interface{})
+				itemMap["secret_value"] = secret_valueNestedMap
+			}
+			if !item.Value.IsNull() && !item.Value.IsUnknown() {
+				itemMap["value"] = item.Value.ValueString()
+			}
+			response_cookies_to_addList = append(response_cookies_to_addList, itemMap)
+		}
+		apiResource.Spec["response_cookies_to_add"] = response_cookies_to_addList
+	}
+	if !data.ResponseCookiesToRemove.IsNull() && !data.ResponseCookiesToRemove.IsUnknown() {
+		var response_cookies_to_removeList []string
+		resp.Diagnostics.Append(data.ResponseCookiesToRemove.ElementsAs(ctx, &response_cookies_to_removeList, false)...)
+		if !resp.Diagnostics.HasError() {
+			apiResource.Spec["response_cookies_to_remove"] = response_cookies_to_removeList
+		}
+	}
+	if len(data.ResponseHeadersToAdd) > 0 {
+		var response_headers_to_addList []map[string]interface{}
+		for _, item := range data.ResponseHeadersToAdd {
+			itemMap := make(map[string]interface{})
+			if !item.Append.IsNull() && !item.Append.IsUnknown() {
+				itemMap["append"] = item.Append.ValueBool()
+			}
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			if item.SecretValue != nil {
+				secret_valueNestedMap := make(map[string]interface{})
+				itemMap["secret_value"] = secret_valueNestedMap
+			}
+			if !item.Value.IsNull() && !item.Value.IsUnknown() {
+				itemMap["value"] = item.Value.ValueString()
+			}
+			response_headers_to_addList = append(response_headers_to_addList, itemMap)
+		}
+		apiResource.Spec["response_headers_to_add"] = response_headers_to_addList
+	}
+	if !data.ResponseHeadersToRemove.IsNull() && !data.ResponseHeadersToRemove.IsUnknown() {
+		var response_headers_to_removeList []string
+		resp.Diagnostics.Append(data.ResponseHeadersToRemove.ElementsAs(ctx, &response_headers_to_removeList, false)...)
+		if !resp.Diagnostics.HasError() {
+			apiResource.Spec["response_headers_to_remove"] = response_headers_to_removeList
+		}
+	}
+	if data.RetryPolicy != nil {
+		retry_policyMap := make(map[string]interface{})
+		if data.RetryPolicy.BackOff != nil {
+			back_offNestedMap := make(map[string]interface{})
+			if !data.RetryPolicy.BackOff.BaseInterval.IsNull() && !data.RetryPolicy.BackOff.BaseInterval.IsUnknown() {
+				back_offNestedMap["base_interval"] = data.RetryPolicy.BackOff.BaseInterval.ValueInt64()
+			}
+			if !data.RetryPolicy.BackOff.MaxInterval.IsNull() && !data.RetryPolicy.BackOff.MaxInterval.IsUnknown() {
+				back_offNestedMap["max_interval"] = data.RetryPolicy.BackOff.MaxInterval.ValueInt64()
+			}
+			retry_policyMap["back_off"] = back_offNestedMap
+		}
+		if !data.RetryPolicy.NumRetries.IsNull() && !data.RetryPolicy.NumRetries.IsUnknown() {
+			retry_policyMap["num_retries"] = data.RetryPolicy.NumRetries.ValueInt64()
+		}
+		if !data.RetryPolicy.PerTryTimeout.IsNull() && !data.RetryPolicy.PerTryTimeout.IsUnknown() {
+			retry_policyMap["per_try_timeout"] = data.RetryPolicy.PerTryTimeout.ValueInt64()
+		}
+		apiResource.Spec["retry_policy"] = retry_policyMap
+	}
+	if len(data.Routes) > 0 {
+		var routesList []map[string]interface{}
+		for _, item := range data.Routes {
+			itemMap := make(map[string]interface{})
+			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+				itemMap["kind"] = item.Kind.ValueString()
+			}
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+				itemMap["namespace"] = item.Namespace.ValueString()
+			}
+			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+				itemMap["tenant"] = item.Tenant.ValueString()
+			}
+			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+				itemMap["uid"] = item.Uid.ValueString()
+			}
+			routesList = append(routesList, itemMap)
+		}
+		apiResource.Spec["routes"] = routesList
+	}
+	if len(data.SensitiveDataPolicy) > 0 {
+		var sensitive_data_policyList []map[string]interface{}
+		for _, item := range data.SensitiveDataPolicy {
+			itemMap := make(map[string]interface{})
+			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+				itemMap["kind"] = item.Kind.ValueString()
+			}
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+				itemMap["namespace"] = item.Namespace.ValueString()
+			}
+			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+				itemMap["tenant"] = item.Tenant.ValueString()
+			}
+			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+				itemMap["uid"] = item.Uid.ValueString()
+			}
+			sensitive_data_policyList = append(sensitive_data_policyList, itemMap)
+		}
+		apiResource.Spec["sensitive_data_policy"] = sensitive_data_policyList
+	}
+	if data.SlowDdosMitigation != nil {
+		slow_ddos_mitigationMap := make(map[string]interface{})
+		if data.SlowDdosMitigation.DisableRequestTimeout != nil {
+			slow_ddos_mitigationMap["disable_request_timeout"] = map[string]interface{}{}
+		}
+		if !data.SlowDdosMitigation.RequestHeadersTimeout.IsNull() && !data.SlowDdosMitigation.RequestHeadersTimeout.IsUnknown() {
+			slow_ddos_mitigationMap["request_headers_timeout"] = data.SlowDdosMitigation.RequestHeadersTimeout.ValueInt64()
+		}
+		if !data.SlowDdosMitigation.RequestTimeout.IsNull() && !data.SlowDdosMitigation.RequestTimeout.IsUnknown() {
+			slow_ddos_mitigationMap["request_timeout"] = data.SlowDdosMitigation.RequestTimeout.ValueInt64()
+		}
+		apiResource.Spec["slow_ddos_mitigation"] = slow_ddos_mitigationMap
+	}
+	if data.TLSCertParams != nil {
+		tls_cert_paramsMap := make(map[string]interface{})
+		if data.TLSCertParams.ClientCertificateOptional != nil {
+			tls_cert_paramsMap["client_certificate_optional"] = map[string]interface{}{}
+		}
+		if data.TLSCertParams.ClientCertificateRequired != nil {
+			tls_cert_paramsMap["client_certificate_required"] = map[string]interface{}{}
+		}
+		if !data.TLSCertParams.MaximumProtocolVersion.IsNull() && !data.TLSCertParams.MaximumProtocolVersion.IsUnknown() {
+			tls_cert_paramsMap["maximum_protocol_version"] = data.TLSCertParams.MaximumProtocolVersion.ValueString()
+		}
+		if !data.TLSCertParams.MinimumProtocolVersion.IsNull() && !data.TLSCertParams.MinimumProtocolVersion.IsUnknown() {
+			tls_cert_paramsMap["minimum_protocol_version"] = data.TLSCertParams.MinimumProtocolVersion.ValueString()
+		}
+		if data.TLSCertParams.NoClientCertificate != nil {
+			tls_cert_paramsMap["no_client_certificate"] = map[string]interface{}{}
+		}
+		if data.TLSCertParams.ValidationParams != nil {
+			validation_paramsNestedMap := make(map[string]interface{})
+			if !data.TLSCertParams.ValidationParams.SkipHostnameVerification.IsNull() && !data.TLSCertParams.ValidationParams.SkipHostnameVerification.IsUnknown() {
+				validation_paramsNestedMap["skip_hostname_verification"] = data.TLSCertParams.ValidationParams.SkipHostnameVerification.ValueBool()
+			}
+			if !data.TLSCertParams.ValidationParams.TrustedCaURL.IsNull() && !data.TLSCertParams.ValidationParams.TrustedCaURL.IsUnknown() {
+				validation_paramsNestedMap["trusted_ca_url"] = data.TLSCertParams.ValidationParams.TrustedCaURL.ValueString()
+			}
+			tls_cert_paramsMap["validation_params"] = validation_paramsNestedMap
+		}
+		apiResource.Spec["tls_cert_params"] = tls_cert_paramsMap
+	}
+	if data.TLSParameters != nil {
+		tls_parametersMap := make(map[string]interface{})
+		if data.TLSParameters.ClientCertificateOptional != nil {
+			tls_parametersMap["client_certificate_optional"] = map[string]interface{}{}
+		}
+		if data.TLSParameters.ClientCertificateRequired != nil {
+			tls_parametersMap["client_certificate_required"] = map[string]interface{}{}
+		}
+		if data.TLSParameters.CommonParams != nil {
+			common_paramsNestedMap := make(map[string]interface{})
+			if !data.TLSParameters.CommonParams.MaximumProtocolVersion.IsNull() && !data.TLSParameters.CommonParams.MaximumProtocolVersion.IsUnknown() {
+				common_paramsNestedMap["maximum_protocol_version"] = data.TLSParameters.CommonParams.MaximumProtocolVersion.ValueString()
+			}
+			if !data.TLSParameters.CommonParams.MinimumProtocolVersion.IsNull() && !data.TLSParameters.CommonParams.MinimumProtocolVersion.IsUnknown() {
+				common_paramsNestedMap["minimum_protocol_version"] = data.TLSParameters.CommonParams.MinimumProtocolVersion.ValueString()
+			}
+			tls_parametersMap["common_params"] = common_paramsNestedMap
+		}
+		if data.TLSParameters.NoClientCertificate != nil {
+			tls_parametersMap["no_client_certificate"] = map[string]interface{}{}
+		}
+		apiResource.Spec["tls_parameters"] = tls_parametersMap
+	}
+	if len(data.UserIdentification) > 0 {
+		var user_identificationList []map[string]interface{}
+		for _, item := range data.UserIdentification {
+			itemMap := make(map[string]interface{})
+			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+				itemMap["kind"] = item.Kind.ValueString()
+			}
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+				itemMap["namespace"] = item.Namespace.ValueString()
+			}
+			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+				itemMap["tenant"] = item.Tenant.ValueString()
+			}
+			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+				itemMap["uid"] = item.Uid.ValueString()
+			}
+			user_identificationList = append(user_identificationList, itemMap)
+		}
+		apiResource.Spec["user_identification"] = user_identificationList
+	}
+	if data.WAFType != nil {
+		waf_typeMap := make(map[string]interface{})
+		if data.WAFType.AppFirewall != nil {
+			app_firewallNestedMap := make(map[string]interface{})
+			waf_typeMap["app_firewall"] = app_firewallNestedMap
+		}
+		if data.WAFType.DisableWAF != nil {
+			waf_typeMap["disable_waf"] = map[string]interface{}{}
+		}
+		if data.WAFType.InheritWAF != nil {
+			waf_typeMap["inherit_waf"] = map[string]interface{}{}
+		}
+		apiResource.Spec["waf_type"] = waf_typeMap
+	}
+	if !data.AddLocation.IsNull() && !data.AddLocation.IsUnknown() {
+		apiResource.Spec["add_location"] = data.AddLocation.ValueBool()
+	}
+	if !data.AppendServerName.IsNull() && !data.AppendServerName.IsUnknown() {
+		apiResource.Spec["append_server_name"] = data.AppendServerName.ValueString()
+	}
+	if !data.ConnectionIdleTimeout.IsNull() && !data.ConnectionIdleTimeout.IsUnknown() {
+		apiResource.Spec["connection_idle_timeout"] = data.ConnectionIdleTimeout.ValueInt64()
+	}
+	if !data.DisableDefaultErrorPages.IsNull() && !data.DisableDefaultErrorPages.IsUnknown() {
+		apiResource.Spec["disable_default_error_pages"] = data.DisableDefaultErrorPages.ValueBool()
+	}
+	if !data.DisableDNSResolve.IsNull() && !data.DisableDNSResolve.IsUnknown() {
+		apiResource.Spec["disable_dns_resolve"] = data.DisableDNSResolve.ValueBool()
+	}
+	if !data.IdleTimeout.IsNull() && !data.IdleTimeout.IsUnknown() {
+		apiResource.Spec["idle_timeout"] = data.IdleTimeout.ValueInt64()
+	}
+	if !data.MaxRequestHeaderSize.IsNull() && !data.MaxRequestHeaderSize.IsUnknown() {
+		apiResource.Spec["max_request_header_size"] = data.MaxRequestHeaderSize.ValueInt64()
+	}
+	if !data.Proxy.IsNull() && !data.Proxy.IsUnknown() {
+		apiResource.Spec["proxy"] = data.Proxy.ValueString()
+	}
+	if !data.ServerName.IsNull() && !data.ServerName.IsUnknown() {
+		apiResource.Spec["server_name"] = data.ServerName.ValueString()
+	}
+
+
 	created, err := r.client.CreateVirtualHost(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create VirtualHost: %s", err))
@@ -2127,8 +2766,49 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+	if v, ok := created.Spec["add_location"].(bool); ok {
+		data.AddLocation = types.BoolValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["append_server_name"].(string); ok && v != "" {
+		data.AppendServerName = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["connection_idle_timeout"].(float64); ok {
+		data.ConnectionIdleTimeout = types.Int64Value(int64(v))
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["disable_default_error_pages"].(bool); ok {
+		data.DisableDefaultErrorPages = types.BoolValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["disable_dns_resolve"].(bool); ok {
+		data.DisableDNSResolve = types.BoolValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["idle_timeout"].(float64); ok {
+		data.IdleTimeout = types.Int64Value(int64(v))
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["max_request_header_size"].(float64); ok {
+		data.MaxRequestHeaderSize = types.Int64Value(int64(v))
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["proxy"].(string); ok && v != "" {
+		data.Proxy = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["server_name"].(string); ok && v != "" {
+		data.ServerName = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created VirtualHost resource")
@@ -2207,9 +2887,913 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if listData, ok := apiResource.Spec["advertise_policies"].([]interface{}); ok && len(listData) > 0 {
+		var advertise_policiesList []VirtualHostAdvertisePoliciesModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				advertise_policiesList = append(advertise_policiesList, VirtualHostAdvertisePoliciesModel{
+					Kind: func() types.String {
+						if v, ok := itemMap["kind"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Namespace: func() types.String {
+						if v, ok := itemMap["namespace"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Tenant: func() types.String {
+						if v, ok := itemMap["tenant"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Uid: func() types.String {
+						if v, ok := itemMap["uid"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.AdvertisePolicies = advertise_policiesList
+	}
+	if blockData, ok := apiResource.Spec["authentication"].(map[string]interface{}); ok && (isImport || data.Authentication != nil) {
+		data.Authentication = &VirtualHostAuthenticationModel{
+			RedirectURL: func() types.String {
+				if v, ok := blockData["redirect_url"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["buffer_policy"].(map[string]interface{}); ok && (isImport || data.BufferPolicy != nil) {
+		data.BufferPolicy = &VirtualHostBufferPolicyModel{
+			Disabled: func() types.Bool {
+				if !isImport && data.BufferPolicy != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.BufferPolicy.Disabled
+				}
+				// Import case: read from API
+				if v, ok := blockData["disabled"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			MaxRequestBytes: func() types.Int64 {
+				if v, ok := blockData["max_request_bytes"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["captcha_challenge"].(map[string]interface{}); ok && (isImport || data.CaptchaChallenge != nil) {
+		data.CaptchaChallenge = &VirtualHostCaptchaChallengeModel{
+			CookieExpiry: func() types.Int64 {
+				if v, ok := blockData["cookie_expiry"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			CustomPage: func() types.String {
+				if v, ok := blockData["custom_page"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["coalescing_options"].(map[string]interface{}); ok && isImport && data.CoalescingOptions == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.CoalescingOptions = &VirtualHostCoalescingOptionsModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["compression_params"].(map[string]interface{}); ok && (isImport || data.CompressionParams != nil) {
+		data.CompressionParams = &VirtualHostCompressionParamsModel{
+			ContentLength: func() types.Int64 {
+				if v, ok := blockData["content_length"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			DisableOnEtagHeader: func() types.Bool {
+				if !isImport && data.CompressionParams != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.CompressionParams.DisableOnEtagHeader
+				}
+				// Import case: read from API
+				if v, ok := blockData["disable_on_etag_header"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			RemoveAcceptEncodingHeader: func() types.Bool {
+				if !isImport && data.CompressionParams != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.CompressionParams.RemoveAcceptEncodingHeader
+				}
+				// Import case: read from API
+				if v, ok := blockData["remove_accept_encoding_header"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["cors_policy"].(map[string]interface{}); ok && (isImport || data.CorsPolicy != nil) {
+		data.CorsPolicy = &VirtualHostCorsPolicyModel{
+			AllowCredentials: func() types.Bool {
+				if !isImport && data.CorsPolicy != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.CorsPolicy.AllowCredentials
+				}
+				// Import case: read from API
+				if v, ok := blockData["allow_credentials"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			AllowHeaders: func() types.String {
+				if v, ok := blockData["allow_headers"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			AllowMethods: func() types.String {
+				if v, ok := blockData["allow_methods"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Disabled: func() types.Bool {
+				if !isImport && data.CorsPolicy != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.CorsPolicy.Disabled
+				}
+				// Import case: read from API
+				if v, ok := blockData["disabled"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			ExposeHeaders: func() types.String {
+				if v, ok := blockData["expose_headers"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			MaximumAge: func() types.Int64 {
+				if v, ok := blockData["maximum_age"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["csrf_policy"].(map[string]interface{}); ok && isImport && data.CsrfPolicy == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.CsrfPolicy = &VirtualHostCsrfPolicyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["custom_errors"].(map[string]interface{}); ok && isImport && data.CustomErrors == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.CustomErrors = &VirtualHostEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["default_header"].(map[string]interface{}); ok && isImport && data.DefaultHeader == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DefaultHeader = &VirtualHostEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["default_loadbalancer"].(map[string]interface{}); ok && isImport && data.DefaultLoadBalancer == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DefaultLoadBalancer = &VirtualHostEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["disable_path_normalize"].(map[string]interface{}); ok && isImport && data.DisablePathNormalize == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisablePathNormalize = &VirtualHostEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["domains"].([]interface{}); ok && len(v) > 0 {
+		var domainsList []string
+		for _, item := range v {
+			if s, ok := item.(string); ok {
+				domainsList = append(domainsList, s)
+			}
+		}
+		listVal, diags := types.ListValueFrom(ctx, types.StringType, domainsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Domains = listVal
+		}
+	} else {
+		data.Domains = types.ListNull(types.StringType)
+	}
+	if blockData, ok := apiResource.Spec["dynamic_reverse_proxy"].(map[string]interface{}); ok && (isImport || data.DynamicReverseProxy != nil) {
+		data.DynamicReverseProxy = &VirtualHostDynamicReverseProxyModel{
+			ConnectionTimeout: func() types.Int64 {
+				if v, ok := blockData["connection_timeout"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			ResolutionNetworkType: func() types.String {
+				if v, ok := blockData["resolution_network_type"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			ResolveEndpointDynamically: func() types.Bool {
+				if !isImport && data.DynamicReverseProxy != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.DynamicReverseProxy.ResolveEndpointDynamically
+				}
+				// Import case: read from API
+				if v, ok := blockData["resolve_endpoint_dynamically"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["enable_path_normalize"].(map[string]interface{}); ok && isImport && data.EnablePathNormalize == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.EnablePathNormalize = &VirtualHostEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["http_protocol_options"].(map[string]interface{}); ok && isImport && data.HTTPProtocolOptions == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.HTTPProtocolOptions = &VirtualHostHTTPProtocolOptionsModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["js_challenge"].(map[string]interface{}); ok && (isImport || data.JsChallenge != nil) {
+		data.JsChallenge = &VirtualHostJsChallengeModel{
+			CookieExpiry: func() types.Int64 {
+				if v, ok := blockData["cookie_expiry"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			CustomPage: func() types.String {
+				if v, ok := blockData["custom_page"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			JsScriptDelay: func() types.Int64 {
+				if v, ok := blockData["js_script_delay"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["no_authentication"].(map[string]interface{}); ok && isImport && data.NoAuthentication == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoAuthentication = &VirtualHostEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_challenge"].(map[string]interface{}); ok && isImport && data.NoChallenge == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoChallenge = &VirtualHostEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["non_default_loadbalancer"].(map[string]interface{}); ok && isImport && data.NonDefaultLoadBalancer == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NonDefaultLoadBalancer = &VirtualHostEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["pass_through"].(map[string]interface{}); ok && isImport && data.PassThrough == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.PassThrough = &VirtualHostEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["rate_limiter_allowed_prefixes"].([]interface{}); ok && len(listData) > 0 {
+		var rate_limiter_allowed_prefixesList []VirtualHostRateLimiterAllowedPrefixesModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				rate_limiter_allowed_prefixesList = append(rate_limiter_allowed_prefixesList, VirtualHostRateLimiterAllowedPrefixesModel{
+					Kind: func() types.String {
+						if v, ok := itemMap["kind"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Namespace: func() types.String {
+						if v, ok := itemMap["namespace"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Tenant: func() types.String {
+						if v, ok := itemMap["tenant"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Uid: func() types.String {
+						if v, ok := itemMap["uid"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.RateLimiterAllowedPrefixes = rate_limiter_allowed_prefixesList
+	}
+	if listData, ok := apiResource.Spec["request_cookies_to_add"].([]interface{}); ok && len(listData) > 0 {
+		var request_cookies_to_addList []VirtualHostRequestCookiesToAddModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				request_cookies_to_addList = append(request_cookies_to_addList, VirtualHostRequestCookiesToAddModel{
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Overwrite: func() types.Bool {
+						if v, ok := itemMap["overwrite"].(bool); ok {
+							return types.BoolValue(v)
+						}
+						return types.BoolNull()
+					}(),
+					SecretValue: func() *VirtualHostRequestCookiesToAddSecretValueModel {
+						if _, ok := itemMap["secret_value"].(map[string]interface{}); ok {
+							return &VirtualHostRequestCookiesToAddSecretValueModel{
+							}
+						}
+						return nil
+					}(),
+					Value: func() types.String {
+						if v, ok := itemMap["value"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.RequestCookiesToAdd = request_cookies_to_addList
+	}
+	if v, ok := apiResource.Spec["request_cookies_to_remove"].([]interface{}); ok && len(v) > 0 {
+		var request_cookies_to_removeList []string
+		for _, item := range v {
+			if s, ok := item.(string); ok {
+				request_cookies_to_removeList = append(request_cookies_to_removeList, s)
+			}
+		}
+		listVal, diags := types.ListValueFrom(ctx, types.StringType, request_cookies_to_removeList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.RequestCookiesToRemove = listVal
+		}
+	} else {
+		data.RequestCookiesToRemove = types.ListNull(types.StringType)
+	}
+	if listData, ok := apiResource.Spec["request_headers_to_add"].([]interface{}); ok && len(listData) > 0 {
+		var request_headers_to_addList []VirtualHostRequestHeadersToAddModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				request_headers_to_addList = append(request_headers_to_addList, VirtualHostRequestHeadersToAddModel{
+					Append: func() types.Bool {
+						if v, ok := itemMap["append"].(bool); ok {
+							return types.BoolValue(v)
+						}
+						return types.BoolNull()
+					}(),
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					SecretValue: func() *VirtualHostRequestHeadersToAddSecretValueModel {
+						if _, ok := itemMap["secret_value"].(map[string]interface{}); ok {
+							return &VirtualHostRequestHeadersToAddSecretValueModel{
+							}
+						}
+						return nil
+					}(),
+					Value: func() types.String {
+						if v, ok := itemMap["value"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.RequestHeadersToAdd = request_headers_to_addList
+	}
+	if v, ok := apiResource.Spec["request_headers_to_remove"].([]interface{}); ok && len(v) > 0 {
+		var request_headers_to_removeList []string
+		for _, item := range v {
+			if s, ok := item.(string); ok {
+				request_headers_to_removeList = append(request_headers_to_removeList, s)
+			}
+		}
+		listVal, diags := types.ListValueFrom(ctx, types.StringType, request_headers_to_removeList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.RequestHeadersToRemove = listVal
+		}
+	} else {
+		data.RequestHeadersToRemove = types.ListNull(types.StringType)
+	}
+	if listData, ok := apiResource.Spec["response_cookies_to_add"].([]interface{}); ok && len(listData) > 0 {
+		var response_cookies_to_addList []VirtualHostResponseCookiesToAddModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				response_cookies_to_addList = append(response_cookies_to_addList, VirtualHostResponseCookiesToAddModel{
+					AddDomain: func() types.String {
+						if v, ok := itemMap["add_domain"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					AddExpiry: func() types.String {
+						if v, ok := itemMap["add_expiry"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					AddHttponly: func() *VirtualHostEmptyModel {
+						if _, ok := itemMap["add_httponly"].(map[string]interface{}); ok {
+							return &VirtualHostEmptyModel{}
+						}
+						return nil
+					}(),
+					AddPartitioned: func() *VirtualHostEmptyModel {
+						if _, ok := itemMap["add_partitioned"].(map[string]interface{}); ok {
+							return &VirtualHostEmptyModel{}
+						}
+						return nil
+					}(),
+					AddPath: func() types.String {
+						if v, ok := itemMap["add_path"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					AddSecure: func() *VirtualHostEmptyModel {
+						if _, ok := itemMap["add_secure"].(map[string]interface{}); ok {
+							return &VirtualHostEmptyModel{}
+						}
+						return nil
+					}(),
+					IgnoreDomain: func() *VirtualHostEmptyModel {
+						if _, ok := itemMap["ignore_domain"].(map[string]interface{}); ok {
+							return &VirtualHostEmptyModel{}
+						}
+						return nil
+					}(),
+					IgnoreExpiry: func() *VirtualHostEmptyModel {
+						if _, ok := itemMap["ignore_expiry"].(map[string]interface{}); ok {
+							return &VirtualHostEmptyModel{}
+						}
+						return nil
+					}(),
+					IgnoreHttponly: func() *VirtualHostEmptyModel {
+						if _, ok := itemMap["ignore_httponly"].(map[string]interface{}); ok {
+							return &VirtualHostEmptyModel{}
+						}
+						return nil
+					}(),
+					IgnoreMaxAge: func() *VirtualHostEmptyModel {
+						if _, ok := itemMap["ignore_max_age"].(map[string]interface{}); ok {
+							return &VirtualHostEmptyModel{}
+						}
+						return nil
+					}(),
+					IgnorePartitioned: func() *VirtualHostEmptyModel {
+						if _, ok := itemMap["ignore_partitioned"].(map[string]interface{}); ok {
+							return &VirtualHostEmptyModel{}
+						}
+						return nil
+					}(),
+					IgnorePath: func() *VirtualHostEmptyModel {
+						if _, ok := itemMap["ignore_path"].(map[string]interface{}); ok {
+							return &VirtualHostEmptyModel{}
+						}
+						return nil
+					}(),
+					IgnoreSamesite: func() *VirtualHostEmptyModel {
+						if _, ok := itemMap["ignore_samesite"].(map[string]interface{}); ok {
+							return &VirtualHostEmptyModel{}
+						}
+						return nil
+					}(),
+					IgnoreSecure: func() *VirtualHostEmptyModel {
+						if _, ok := itemMap["ignore_secure"].(map[string]interface{}); ok {
+							return &VirtualHostEmptyModel{}
+						}
+						return nil
+					}(),
+					IgnoreValue: func() *VirtualHostEmptyModel {
+						if _, ok := itemMap["ignore_value"].(map[string]interface{}); ok {
+							return &VirtualHostEmptyModel{}
+						}
+						return nil
+					}(),
+					MaxAgeValue: func() types.Int64 {
+						if v, ok := itemMap["max_age_value"].(float64); ok {
+							return types.Int64Value(int64(v))
+						}
+						return types.Int64Null()
+					}(),
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Overwrite: func() types.Bool {
+						if v, ok := itemMap["overwrite"].(bool); ok {
+							return types.BoolValue(v)
+						}
+						return types.BoolNull()
+					}(),
+					SamesiteLax: func() *VirtualHostEmptyModel {
+						if _, ok := itemMap["samesite_lax"].(map[string]interface{}); ok {
+							return &VirtualHostEmptyModel{}
+						}
+						return nil
+					}(),
+					SamesiteNone: func() *VirtualHostEmptyModel {
+						if _, ok := itemMap["samesite_none"].(map[string]interface{}); ok {
+							return &VirtualHostEmptyModel{}
+						}
+						return nil
+					}(),
+					SamesiteStrict: func() *VirtualHostEmptyModel {
+						if _, ok := itemMap["samesite_strict"].(map[string]interface{}); ok {
+							return &VirtualHostEmptyModel{}
+						}
+						return nil
+					}(),
+					SecretValue: func() *VirtualHostResponseCookiesToAddSecretValueModel {
+						if _, ok := itemMap["secret_value"].(map[string]interface{}); ok {
+							return &VirtualHostResponseCookiesToAddSecretValueModel{
+							}
+						}
+						return nil
+					}(),
+					Value: func() types.String {
+						if v, ok := itemMap["value"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.ResponseCookiesToAdd = response_cookies_to_addList
+	}
+	if v, ok := apiResource.Spec["response_cookies_to_remove"].([]interface{}); ok && len(v) > 0 {
+		var response_cookies_to_removeList []string
+		for _, item := range v {
+			if s, ok := item.(string); ok {
+				response_cookies_to_removeList = append(response_cookies_to_removeList, s)
+			}
+		}
+		listVal, diags := types.ListValueFrom(ctx, types.StringType, response_cookies_to_removeList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.ResponseCookiesToRemove = listVal
+		}
+	} else {
+		data.ResponseCookiesToRemove = types.ListNull(types.StringType)
+	}
+	if listData, ok := apiResource.Spec["response_headers_to_add"].([]interface{}); ok && len(listData) > 0 {
+		var response_headers_to_addList []VirtualHostResponseHeadersToAddModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				response_headers_to_addList = append(response_headers_to_addList, VirtualHostResponseHeadersToAddModel{
+					Append: func() types.Bool {
+						if v, ok := itemMap["append"].(bool); ok {
+							return types.BoolValue(v)
+						}
+						return types.BoolNull()
+					}(),
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					SecretValue: func() *VirtualHostResponseHeadersToAddSecretValueModel {
+						if _, ok := itemMap["secret_value"].(map[string]interface{}); ok {
+							return &VirtualHostResponseHeadersToAddSecretValueModel{
+							}
+						}
+						return nil
+					}(),
+					Value: func() types.String {
+						if v, ok := itemMap["value"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.ResponseHeadersToAdd = response_headers_to_addList
+	}
+	if v, ok := apiResource.Spec["response_headers_to_remove"].([]interface{}); ok && len(v) > 0 {
+		var response_headers_to_removeList []string
+		for _, item := range v {
+			if s, ok := item.(string); ok {
+				response_headers_to_removeList = append(response_headers_to_removeList, s)
+			}
+		}
+		listVal, diags := types.ListValueFrom(ctx, types.StringType, response_headers_to_removeList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.ResponseHeadersToRemove = listVal
+		}
+	} else {
+		data.ResponseHeadersToRemove = types.ListNull(types.StringType)
+	}
+	if blockData, ok := apiResource.Spec["retry_policy"].(map[string]interface{}); ok && (isImport || data.RetryPolicy != nil) {
+		data.RetryPolicy = &VirtualHostRetryPolicyModel{
+			NumRetries: func() types.Int64 {
+				if v, ok := blockData["num_retries"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			PerTryTimeout: func() types.Int64 {
+				if v, ok := blockData["per_try_timeout"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if listData, ok := apiResource.Spec["routes"].([]interface{}); ok && len(listData) > 0 {
+		var routesList []VirtualHostRoutesModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				routesList = append(routesList, VirtualHostRoutesModel{
+					Kind: func() types.String {
+						if v, ok := itemMap["kind"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Namespace: func() types.String {
+						if v, ok := itemMap["namespace"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Tenant: func() types.String {
+						if v, ok := itemMap["tenant"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Uid: func() types.String {
+						if v, ok := itemMap["uid"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.Routes = routesList
+	}
+	if listData, ok := apiResource.Spec["sensitive_data_policy"].([]interface{}); ok && len(listData) > 0 {
+		var sensitive_data_policyList []VirtualHostSensitiveDataPolicyModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				sensitive_data_policyList = append(sensitive_data_policyList, VirtualHostSensitiveDataPolicyModel{
+					Kind: func() types.String {
+						if v, ok := itemMap["kind"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Namespace: func() types.String {
+						if v, ok := itemMap["namespace"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Tenant: func() types.String {
+						if v, ok := itemMap["tenant"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Uid: func() types.String {
+						if v, ok := itemMap["uid"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.SensitiveDataPolicy = sensitive_data_policyList
+	}
+	if blockData, ok := apiResource.Spec["slow_ddos_mitigation"].(map[string]interface{}); ok && (isImport || data.SlowDdosMitigation != nil) {
+		data.SlowDdosMitigation = &VirtualHostSlowDdosMitigationModel{
+			RequestHeadersTimeout: func() types.Int64 {
+				if v, ok := blockData["request_headers_timeout"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			RequestTimeout: func() types.Int64 {
+				if v, ok := blockData["request_timeout"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["tls_cert_params"].(map[string]interface{}); ok && (isImport || data.TLSCertParams != nil) {
+		data.TLSCertParams = &VirtualHostTLSCertParamsModel{
+			MaximumProtocolVersion: func() types.String {
+				if v, ok := blockData["maximum_protocol_version"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			MinimumProtocolVersion: func() types.String {
+				if v, ok := blockData["minimum_protocol_version"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["tls_parameters"].(map[string]interface{}); ok && isImport && data.TLSParameters == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.TLSParameters = &VirtualHostTLSParametersModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["user_identification"].([]interface{}); ok && len(listData) > 0 {
+		var user_identificationList []VirtualHostUserIdentificationModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				user_identificationList = append(user_identificationList, VirtualHostUserIdentificationModel{
+					Kind: func() types.String {
+						if v, ok := itemMap["kind"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Namespace: func() types.String {
+						if v, ok := itemMap["namespace"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Tenant: func() types.String {
+						if v, ok := itemMap["tenant"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Uid: func() types.String {
+						if v, ok := itemMap["uid"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.UserIdentification = user_identificationList
+	}
+	if _, ok := apiResource.Spec["waf_type"].(map[string]interface{}); ok && isImport && data.WAFType == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.WAFType = &VirtualHostWAFTypeModel{}
+	}
+	// Normal Read: preserve existing state value
+	// Top-level Optional bool: preserve prior state to avoid API default drift
+	if !isImport && !data.AddLocation.IsNull() {
+		// Normal Read: preserve existing state value (do nothing)
+	} else {
+		// Import case or null state: read from API
+		if v, ok := apiResource.Spec["add_location"].(bool); ok {
+			data.AddLocation = types.BoolValue(v)
+		} else {
+			data.AddLocation = types.BoolNull()
+		}
+	}
+	if v, ok := apiResource.Spec["append_server_name"].(string); ok && v != "" {
+		data.AppendServerName = types.StringValue(v)
+	} else {
+		data.AppendServerName = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["connection_idle_timeout"].(float64); ok {
+		data.ConnectionIdleTimeout = types.Int64Value(int64(v))
+	} else {
+		data.ConnectionIdleTimeout = types.Int64Null()
+	}
+	// Top-level Optional bool: preserve prior state to avoid API default drift
+	if !isImport && !data.DisableDefaultErrorPages.IsNull() {
+		// Normal Read: preserve existing state value (do nothing)
+	} else {
+		// Import case or null state: read from API
+		if v, ok := apiResource.Spec["disable_default_error_pages"].(bool); ok {
+			data.DisableDefaultErrorPages = types.BoolValue(v)
+		} else {
+			data.DisableDefaultErrorPages = types.BoolNull()
+		}
+	}
+	// Top-level Optional bool: preserve prior state to avoid API default drift
+	if !isImport && !data.DisableDNSResolve.IsNull() {
+		// Normal Read: preserve existing state value (do nothing)
+	} else {
+		// Import case or null state: read from API
+		if v, ok := apiResource.Spec["disable_dns_resolve"].(bool); ok {
+			data.DisableDNSResolve = types.BoolValue(v)
+		} else {
+			data.DisableDNSResolve = types.BoolNull()
+		}
+	}
+	if v, ok := apiResource.Spec["idle_timeout"].(float64); ok {
+		data.IdleTimeout = types.Int64Value(int64(v))
+	} else {
+		data.IdleTimeout = types.Int64Null()
+	}
+	if v, ok := apiResource.Spec["max_request_header_size"].(float64); ok {
+		data.MaxRequestHeaderSize = types.Int64Value(int64(v))
+	} else {
+		data.MaxRequestHeaderSize = types.Int64Null()
+	}
+	if v, ok := apiResource.Spec["proxy"].(string); ok && v != "" {
+		data.Proxy = types.StringValue(v)
+	} else {
+		data.Proxy = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["server_name"].(string); ok && v != "" {
+		data.ServerName = types.StringValue(v)
+	} else {
+		data.ServerName = types.StringNull()
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -2235,7 +3819,7 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.VirtualHostSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -2260,6 +3844,607 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if len(data.AdvertisePolicies) > 0 {
+		var advertise_policiesList []map[string]interface{}
+		for _, item := range data.AdvertisePolicies {
+			itemMap := make(map[string]interface{})
+			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+				itemMap["kind"] = item.Kind.ValueString()
+			}
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+				itemMap["namespace"] = item.Namespace.ValueString()
+			}
+			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+				itemMap["tenant"] = item.Tenant.ValueString()
+			}
+			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+				itemMap["uid"] = item.Uid.ValueString()
+			}
+			advertise_policiesList = append(advertise_policiesList, itemMap)
+		}
+		apiResource.Spec["advertise_policies"] = advertise_policiesList
+	}
+	if data.Authentication != nil {
+		authenticationMap := make(map[string]interface{})
+		if data.Authentication.CookieParams != nil {
+			cookie_paramsNestedMap := make(map[string]interface{})
+			if !data.Authentication.CookieParams.CookieExpiry.IsNull() && !data.Authentication.CookieParams.CookieExpiry.IsUnknown() {
+				cookie_paramsNestedMap["cookie_expiry"] = data.Authentication.CookieParams.CookieExpiry.ValueInt64()
+			}
+			if !data.Authentication.CookieParams.CookieRefreshInterval.IsNull() && !data.Authentication.CookieParams.CookieRefreshInterval.IsUnknown() {
+				cookie_paramsNestedMap["cookie_refresh_interval"] = data.Authentication.CookieParams.CookieRefreshInterval.ValueInt64()
+			}
+			if !data.Authentication.CookieParams.SessionExpiry.IsNull() && !data.Authentication.CookieParams.SessionExpiry.IsUnknown() {
+				cookie_paramsNestedMap["session_expiry"] = data.Authentication.CookieParams.SessionExpiry.ValueInt64()
+			}
+			authenticationMap["cookie_params"] = cookie_paramsNestedMap
+		}
+		if data.Authentication.RedirectDynamic != nil {
+			authenticationMap["redirect_dynamic"] = map[string]interface{}{}
+		}
+		if !data.Authentication.RedirectURL.IsNull() && !data.Authentication.RedirectURL.IsUnknown() {
+			authenticationMap["redirect_url"] = data.Authentication.RedirectURL.ValueString()
+		}
+		if data.Authentication.UseAuthObjectConfig != nil {
+			authenticationMap["use_auth_object_config"] = map[string]interface{}{}
+		}
+		apiResource.Spec["authentication"] = authenticationMap
+	}
+	if data.BufferPolicy != nil {
+		buffer_policyMap := make(map[string]interface{})
+		if !data.BufferPolicy.Disabled.IsNull() && !data.BufferPolicy.Disabled.IsUnknown() {
+			buffer_policyMap["disabled"] = data.BufferPolicy.Disabled.ValueBool()
+		}
+		if !data.BufferPolicy.MaxRequestBytes.IsNull() && !data.BufferPolicy.MaxRequestBytes.IsUnknown() {
+			buffer_policyMap["max_request_bytes"] = data.BufferPolicy.MaxRequestBytes.ValueInt64()
+		}
+		apiResource.Spec["buffer_policy"] = buffer_policyMap
+	}
+	if data.CaptchaChallenge != nil {
+		captcha_challengeMap := make(map[string]interface{})
+		if !data.CaptchaChallenge.CookieExpiry.IsNull() && !data.CaptchaChallenge.CookieExpiry.IsUnknown() {
+			captcha_challengeMap["cookie_expiry"] = data.CaptchaChallenge.CookieExpiry.ValueInt64()
+		}
+		if !data.CaptchaChallenge.CustomPage.IsNull() && !data.CaptchaChallenge.CustomPage.IsUnknown() {
+			captcha_challengeMap["custom_page"] = data.CaptchaChallenge.CustomPage.ValueString()
+		}
+		apiResource.Spec["captcha_challenge"] = captcha_challengeMap
+	}
+	if data.CoalescingOptions != nil {
+		coalescing_optionsMap := make(map[string]interface{})
+		if data.CoalescingOptions.DefaultCoalescing != nil {
+			coalescing_optionsMap["default_coalescing"] = map[string]interface{}{}
+		}
+		if data.CoalescingOptions.StrictCoalescing != nil {
+			coalescing_optionsMap["strict_coalescing"] = map[string]interface{}{}
+		}
+		apiResource.Spec["coalescing_options"] = coalescing_optionsMap
+	}
+	if data.CompressionParams != nil {
+		compression_paramsMap := make(map[string]interface{})
+		if !data.CompressionParams.ContentLength.IsNull() && !data.CompressionParams.ContentLength.IsUnknown() {
+			compression_paramsMap["content_length"] = data.CompressionParams.ContentLength.ValueInt64()
+		}
+		if !data.CompressionParams.DisableOnEtagHeader.IsNull() && !data.CompressionParams.DisableOnEtagHeader.IsUnknown() {
+			compression_paramsMap["disable_on_etag_header"] = data.CompressionParams.DisableOnEtagHeader.ValueBool()
+		}
+		if !data.CompressionParams.RemoveAcceptEncodingHeader.IsNull() && !data.CompressionParams.RemoveAcceptEncodingHeader.IsUnknown() {
+			compression_paramsMap["remove_accept_encoding_header"] = data.CompressionParams.RemoveAcceptEncodingHeader.ValueBool()
+		}
+		apiResource.Spec["compression_params"] = compression_paramsMap
+	}
+	if data.CorsPolicy != nil {
+		cors_policyMap := make(map[string]interface{})
+		if !data.CorsPolicy.AllowCredentials.IsNull() && !data.CorsPolicy.AllowCredentials.IsUnknown() {
+			cors_policyMap["allow_credentials"] = data.CorsPolicy.AllowCredentials.ValueBool()
+		}
+		if !data.CorsPolicy.AllowHeaders.IsNull() && !data.CorsPolicy.AllowHeaders.IsUnknown() {
+			cors_policyMap["allow_headers"] = data.CorsPolicy.AllowHeaders.ValueString()
+		}
+		if !data.CorsPolicy.AllowMethods.IsNull() && !data.CorsPolicy.AllowMethods.IsUnknown() {
+			cors_policyMap["allow_methods"] = data.CorsPolicy.AllowMethods.ValueString()
+		}
+		if !data.CorsPolicy.Disabled.IsNull() && !data.CorsPolicy.Disabled.IsUnknown() {
+			cors_policyMap["disabled"] = data.CorsPolicy.Disabled.ValueBool()
+		}
+		if !data.CorsPolicy.ExposeHeaders.IsNull() && !data.CorsPolicy.ExposeHeaders.IsUnknown() {
+			cors_policyMap["expose_headers"] = data.CorsPolicy.ExposeHeaders.ValueString()
+		}
+		if !data.CorsPolicy.MaximumAge.IsNull() && !data.CorsPolicy.MaximumAge.IsUnknown() {
+			cors_policyMap["maximum_age"] = data.CorsPolicy.MaximumAge.ValueInt64()
+		}
+		apiResource.Spec["cors_policy"] = cors_policyMap
+	}
+	if data.CsrfPolicy != nil {
+		csrf_policyMap := make(map[string]interface{})
+		if data.CsrfPolicy.AllLoadBalancerDomains != nil {
+			csrf_policyMap["all_load_balancer_domains"] = map[string]interface{}{}
+		}
+		if data.CsrfPolicy.CustomDomainList != nil {
+			custom_domain_listNestedMap := make(map[string]interface{})
+			csrf_policyMap["custom_domain_list"] = custom_domain_listNestedMap
+		}
+		if data.CsrfPolicy.Disabled != nil {
+			csrf_policyMap["disabled"] = map[string]interface{}{}
+		}
+		apiResource.Spec["csrf_policy"] = csrf_policyMap
+	}
+	if data.CustomErrors != nil {
+		custom_errorsMap := make(map[string]interface{})
+		apiResource.Spec["custom_errors"] = custom_errorsMap
+	}
+	if data.DefaultHeader != nil {
+		default_headerMap := make(map[string]interface{})
+		apiResource.Spec["default_header"] = default_headerMap
+	}
+	if data.DefaultLoadBalancer != nil {
+		default_loadbalancerMap := make(map[string]interface{})
+		apiResource.Spec["default_loadbalancer"] = default_loadbalancerMap
+	}
+	if data.DisablePathNormalize != nil {
+		disable_path_normalizeMap := make(map[string]interface{})
+		apiResource.Spec["disable_path_normalize"] = disable_path_normalizeMap
+	}
+	if !data.Domains.IsNull() && !data.Domains.IsUnknown() {
+		var domainsList []string
+		resp.Diagnostics.Append(data.Domains.ElementsAs(ctx, &domainsList, false)...)
+		if !resp.Diagnostics.HasError() {
+			apiResource.Spec["domains"] = domainsList
+		}
+	}
+	if data.DynamicReverseProxy != nil {
+		dynamic_reverse_proxyMap := make(map[string]interface{})
+		if !data.DynamicReverseProxy.ConnectionTimeout.IsNull() && !data.DynamicReverseProxy.ConnectionTimeout.IsUnknown() {
+			dynamic_reverse_proxyMap["connection_timeout"] = data.DynamicReverseProxy.ConnectionTimeout.ValueInt64()
+		}
+		if !data.DynamicReverseProxy.ResolutionNetworkType.IsNull() && !data.DynamicReverseProxy.ResolutionNetworkType.IsUnknown() {
+			dynamic_reverse_proxyMap["resolution_network_type"] = data.DynamicReverseProxy.ResolutionNetworkType.ValueString()
+		}
+		if !data.DynamicReverseProxy.ResolveEndpointDynamically.IsNull() && !data.DynamicReverseProxy.ResolveEndpointDynamically.IsUnknown() {
+			dynamic_reverse_proxyMap["resolve_endpoint_dynamically"] = data.DynamicReverseProxy.ResolveEndpointDynamically.ValueBool()
+		}
+		apiResource.Spec["dynamic_reverse_proxy"] = dynamic_reverse_proxyMap
+	}
+	if data.EnablePathNormalize != nil {
+		enable_path_normalizeMap := make(map[string]interface{})
+		apiResource.Spec["enable_path_normalize"] = enable_path_normalizeMap
+	}
+	if data.HTTPProtocolOptions != nil {
+		http_protocol_optionsMap := make(map[string]interface{})
+		if data.HTTPProtocolOptions.HTTPProtocolEnableV1Only != nil {
+			http_protocol_enable_v1_onlyNestedMap := make(map[string]interface{})
+			http_protocol_optionsMap["http_protocol_enable_v1_only"] = http_protocol_enable_v1_onlyNestedMap
+		}
+		if data.HTTPProtocolOptions.HTTPProtocolEnableV1V2 != nil {
+			http_protocol_optionsMap["http_protocol_enable_v1_v2"] = map[string]interface{}{}
+		}
+		if data.HTTPProtocolOptions.HTTPProtocolEnableV2Only != nil {
+			http_protocol_optionsMap["http_protocol_enable_v2_only"] = map[string]interface{}{}
+		}
+		apiResource.Spec["http_protocol_options"] = http_protocol_optionsMap
+	}
+	if data.JsChallenge != nil {
+		js_challengeMap := make(map[string]interface{})
+		if !data.JsChallenge.CookieExpiry.IsNull() && !data.JsChallenge.CookieExpiry.IsUnknown() {
+			js_challengeMap["cookie_expiry"] = data.JsChallenge.CookieExpiry.ValueInt64()
+		}
+		if !data.JsChallenge.CustomPage.IsNull() && !data.JsChallenge.CustomPage.IsUnknown() {
+			js_challengeMap["custom_page"] = data.JsChallenge.CustomPage.ValueString()
+		}
+		if !data.JsChallenge.JsScriptDelay.IsNull() && !data.JsChallenge.JsScriptDelay.IsUnknown() {
+			js_challengeMap["js_script_delay"] = data.JsChallenge.JsScriptDelay.ValueInt64()
+		}
+		apiResource.Spec["js_challenge"] = js_challengeMap
+	}
+	if data.NoAuthentication != nil {
+		no_authenticationMap := make(map[string]interface{})
+		apiResource.Spec["no_authentication"] = no_authenticationMap
+	}
+	if data.NoChallenge != nil {
+		no_challengeMap := make(map[string]interface{})
+		apiResource.Spec["no_challenge"] = no_challengeMap
+	}
+	if data.NonDefaultLoadBalancer != nil {
+		non_default_loadbalancerMap := make(map[string]interface{})
+		apiResource.Spec["non_default_loadbalancer"] = non_default_loadbalancerMap
+	}
+	if data.PassThrough != nil {
+		pass_throughMap := make(map[string]interface{})
+		apiResource.Spec["pass_through"] = pass_throughMap
+	}
+	if len(data.RateLimiterAllowedPrefixes) > 0 {
+		var rate_limiter_allowed_prefixesList []map[string]interface{}
+		for _, item := range data.RateLimiterAllowedPrefixes {
+			itemMap := make(map[string]interface{})
+			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+				itemMap["kind"] = item.Kind.ValueString()
+			}
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+				itemMap["namespace"] = item.Namespace.ValueString()
+			}
+			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+				itemMap["tenant"] = item.Tenant.ValueString()
+			}
+			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+				itemMap["uid"] = item.Uid.ValueString()
+			}
+			rate_limiter_allowed_prefixesList = append(rate_limiter_allowed_prefixesList, itemMap)
+		}
+		apiResource.Spec["rate_limiter_allowed_prefixes"] = rate_limiter_allowed_prefixesList
+	}
+	if len(data.RequestCookiesToAdd) > 0 {
+		var request_cookies_to_addList []map[string]interface{}
+		for _, item := range data.RequestCookiesToAdd {
+			itemMap := make(map[string]interface{})
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			if !item.Overwrite.IsNull() && !item.Overwrite.IsUnknown() {
+				itemMap["overwrite"] = item.Overwrite.ValueBool()
+			}
+			if item.SecretValue != nil {
+				secret_valueNestedMap := make(map[string]interface{})
+				itemMap["secret_value"] = secret_valueNestedMap
+			}
+			if !item.Value.IsNull() && !item.Value.IsUnknown() {
+				itemMap["value"] = item.Value.ValueString()
+			}
+			request_cookies_to_addList = append(request_cookies_to_addList, itemMap)
+		}
+		apiResource.Spec["request_cookies_to_add"] = request_cookies_to_addList
+	}
+	if !data.RequestCookiesToRemove.IsNull() && !data.RequestCookiesToRemove.IsUnknown() {
+		var request_cookies_to_removeList []string
+		resp.Diagnostics.Append(data.RequestCookiesToRemove.ElementsAs(ctx, &request_cookies_to_removeList, false)...)
+		if !resp.Diagnostics.HasError() {
+			apiResource.Spec["request_cookies_to_remove"] = request_cookies_to_removeList
+		}
+	}
+	if len(data.RequestHeadersToAdd) > 0 {
+		var request_headers_to_addList []map[string]interface{}
+		for _, item := range data.RequestHeadersToAdd {
+			itemMap := make(map[string]interface{})
+			if !item.Append.IsNull() && !item.Append.IsUnknown() {
+				itemMap["append"] = item.Append.ValueBool()
+			}
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			if item.SecretValue != nil {
+				secret_valueNestedMap := make(map[string]interface{})
+				itemMap["secret_value"] = secret_valueNestedMap
+			}
+			if !item.Value.IsNull() && !item.Value.IsUnknown() {
+				itemMap["value"] = item.Value.ValueString()
+			}
+			request_headers_to_addList = append(request_headers_to_addList, itemMap)
+		}
+		apiResource.Spec["request_headers_to_add"] = request_headers_to_addList
+	}
+	if !data.RequestHeadersToRemove.IsNull() && !data.RequestHeadersToRemove.IsUnknown() {
+		var request_headers_to_removeList []string
+		resp.Diagnostics.Append(data.RequestHeadersToRemove.ElementsAs(ctx, &request_headers_to_removeList, false)...)
+		if !resp.Diagnostics.HasError() {
+			apiResource.Spec["request_headers_to_remove"] = request_headers_to_removeList
+		}
+	}
+	if len(data.ResponseCookiesToAdd) > 0 {
+		var response_cookies_to_addList []map[string]interface{}
+		for _, item := range data.ResponseCookiesToAdd {
+			itemMap := make(map[string]interface{})
+			if !item.AddDomain.IsNull() && !item.AddDomain.IsUnknown() {
+				itemMap["add_domain"] = item.AddDomain.ValueString()
+			}
+			if !item.AddExpiry.IsNull() && !item.AddExpiry.IsUnknown() {
+				itemMap["add_expiry"] = item.AddExpiry.ValueString()
+			}
+			if item.AddHttponly != nil {
+				itemMap["add_httponly"] = map[string]interface{}{}
+			}
+			if item.AddPartitioned != nil {
+				itemMap["add_partitioned"] = map[string]interface{}{}
+			}
+			if !item.AddPath.IsNull() && !item.AddPath.IsUnknown() {
+				itemMap["add_path"] = item.AddPath.ValueString()
+			}
+			if item.AddSecure != nil {
+				itemMap["add_secure"] = map[string]interface{}{}
+			}
+			if item.IgnoreDomain != nil {
+				itemMap["ignore_domain"] = map[string]interface{}{}
+			}
+			if item.IgnoreExpiry != nil {
+				itemMap["ignore_expiry"] = map[string]interface{}{}
+			}
+			if item.IgnoreHttponly != nil {
+				itemMap["ignore_httponly"] = map[string]interface{}{}
+			}
+			if item.IgnoreMaxAge != nil {
+				itemMap["ignore_max_age"] = map[string]interface{}{}
+			}
+			if item.IgnorePartitioned != nil {
+				itemMap["ignore_partitioned"] = map[string]interface{}{}
+			}
+			if item.IgnorePath != nil {
+				itemMap["ignore_path"] = map[string]interface{}{}
+			}
+			if item.IgnoreSamesite != nil {
+				itemMap["ignore_samesite"] = map[string]interface{}{}
+			}
+			if item.IgnoreSecure != nil {
+				itemMap["ignore_secure"] = map[string]interface{}{}
+			}
+			if item.IgnoreValue != nil {
+				itemMap["ignore_value"] = map[string]interface{}{}
+			}
+			if !item.MaxAgeValue.IsNull() && !item.MaxAgeValue.IsUnknown() {
+				itemMap["max_age_value"] = item.MaxAgeValue.ValueInt64()
+			}
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			if !item.Overwrite.IsNull() && !item.Overwrite.IsUnknown() {
+				itemMap["overwrite"] = item.Overwrite.ValueBool()
+			}
+			if item.SamesiteLax != nil {
+				itemMap["samesite_lax"] = map[string]interface{}{}
+			}
+			if item.SamesiteNone != nil {
+				itemMap["samesite_none"] = map[string]interface{}{}
+			}
+			if item.SamesiteStrict != nil {
+				itemMap["samesite_strict"] = map[string]interface{}{}
+			}
+			if item.SecretValue != nil {
+				secret_valueNestedMap := make(map[string]interface{})
+				itemMap["secret_value"] = secret_valueNestedMap
+			}
+			if !item.Value.IsNull() && !item.Value.IsUnknown() {
+				itemMap["value"] = item.Value.ValueString()
+			}
+			response_cookies_to_addList = append(response_cookies_to_addList, itemMap)
+		}
+		apiResource.Spec["response_cookies_to_add"] = response_cookies_to_addList
+	}
+	if !data.ResponseCookiesToRemove.IsNull() && !data.ResponseCookiesToRemove.IsUnknown() {
+		var response_cookies_to_removeList []string
+		resp.Diagnostics.Append(data.ResponseCookiesToRemove.ElementsAs(ctx, &response_cookies_to_removeList, false)...)
+		if !resp.Diagnostics.HasError() {
+			apiResource.Spec["response_cookies_to_remove"] = response_cookies_to_removeList
+		}
+	}
+	if len(data.ResponseHeadersToAdd) > 0 {
+		var response_headers_to_addList []map[string]interface{}
+		for _, item := range data.ResponseHeadersToAdd {
+			itemMap := make(map[string]interface{})
+			if !item.Append.IsNull() && !item.Append.IsUnknown() {
+				itemMap["append"] = item.Append.ValueBool()
+			}
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			if item.SecretValue != nil {
+				secret_valueNestedMap := make(map[string]interface{})
+				itemMap["secret_value"] = secret_valueNestedMap
+			}
+			if !item.Value.IsNull() && !item.Value.IsUnknown() {
+				itemMap["value"] = item.Value.ValueString()
+			}
+			response_headers_to_addList = append(response_headers_to_addList, itemMap)
+		}
+		apiResource.Spec["response_headers_to_add"] = response_headers_to_addList
+	}
+	if !data.ResponseHeadersToRemove.IsNull() && !data.ResponseHeadersToRemove.IsUnknown() {
+		var response_headers_to_removeList []string
+		resp.Diagnostics.Append(data.ResponseHeadersToRemove.ElementsAs(ctx, &response_headers_to_removeList, false)...)
+		if !resp.Diagnostics.HasError() {
+			apiResource.Spec["response_headers_to_remove"] = response_headers_to_removeList
+		}
+	}
+	if data.RetryPolicy != nil {
+		retry_policyMap := make(map[string]interface{})
+		if data.RetryPolicy.BackOff != nil {
+			back_offNestedMap := make(map[string]interface{})
+			if !data.RetryPolicy.BackOff.BaseInterval.IsNull() && !data.RetryPolicy.BackOff.BaseInterval.IsUnknown() {
+				back_offNestedMap["base_interval"] = data.RetryPolicy.BackOff.BaseInterval.ValueInt64()
+			}
+			if !data.RetryPolicy.BackOff.MaxInterval.IsNull() && !data.RetryPolicy.BackOff.MaxInterval.IsUnknown() {
+				back_offNestedMap["max_interval"] = data.RetryPolicy.BackOff.MaxInterval.ValueInt64()
+			}
+			retry_policyMap["back_off"] = back_offNestedMap
+		}
+		if !data.RetryPolicy.NumRetries.IsNull() && !data.RetryPolicy.NumRetries.IsUnknown() {
+			retry_policyMap["num_retries"] = data.RetryPolicy.NumRetries.ValueInt64()
+		}
+		if !data.RetryPolicy.PerTryTimeout.IsNull() && !data.RetryPolicy.PerTryTimeout.IsUnknown() {
+			retry_policyMap["per_try_timeout"] = data.RetryPolicy.PerTryTimeout.ValueInt64()
+		}
+		apiResource.Spec["retry_policy"] = retry_policyMap
+	}
+	if len(data.Routes) > 0 {
+		var routesList []map[string]interface{}
+		for _, item := range data.Routes {
+			itemMap := make(map[string]interface{})
+			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+				itemMap["kind"] = item.Kind.ValueString()
+			}
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+				itemMap["namespace"] = item.Namespace.ValueString()
+			}
+			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+				itemMap["tenant"] = item.Tenant.ValueString()
+			}
+			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+				itemMap["uid"] = item.Uid.ValueString()
+			}
+			routesList = append(routesList, itemMap)
+		}
+		apiResource.Spec["routes"] = routesList
+	}
+	if len(data.SensitiveDataPolicy) > 0 {
+		var sensitive_data_policyList []map[string]interface{}
+		for _, item := range data.SensitiveDataPolicy {
+			itemMap := make(map[string]interface{})
+			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+				itemMap["kind"] = item.Kind.ValueString()
+			}
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+				itemMap["namespace"] = item.Namespace.ValueString()
+			}
+			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+				itemMap["tenant"] = item.Tenant.ValueString()
+			}
+			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+				itemMap["uid"] = item.Uid.ValueString()
+			}
+			sensitive_data_policyList = append(sensitive_data_policyList, itemMap)
+		}
+		apiResource.Spec["sensitive_data_policy"] = sensitive_data_policyList
+	}
+	if data.SlowDdosMitigation != nil {
+		slow_ddos_mitigationMap := make(map[string]interface{})
+		if data.SlowDdosMitigation.DisableRequestTimeout != nil {
+			slow_ddos_mitigationMap["disable_request_timeout"] = map[string]interface{}{}
+		}
+		if !data.SlowDdosMitigation.RequestHeadersTimeout.IsNull() && !data.SlowDdosMitigation.RequestHeadersTimeout.IsUnknown() {
+			slow_ddos_mitigationMap["request_headers_timeout"] = data.SlowDdosMitigation.RequestHeadersTimeout.ValueInt64()
+		}
+		if !data.SlowDdosMitigation.RequestTimeout.IsNull() && !data.SlowDdosMitigation.RequestTimeout.IsUnknown() {
+			slow_ddos_mitigationMap["request_timeout"] = data.SlowDdosMitigation.RequestTimeout.ValueInt64()
+		}
+		apiResource.Spec["slow_ddos_mitigation"] = slow_ddos_mitigationMap
+	}
+	if data.TLSCertParams != nil {
+		tls_cert_paramsMap := make(map[string]interface{})
+		if data.TLSCertParams.ClientCertificateOptional != nil {
+			tls_cert_paramsMap["client_certificate_optional"] = map[string]interface{}{}
+		}
+		if data.TLSCertParams.ClientCertificateRequired != nil {
+			tls_cert_paramsMap["client_certificate_required"] = map[string]interface{}{}
+		}
+		if !data.TLSCertParams.MaximumProtocolVersion.IsNull() && !data.TLSCertParams.MaximumProtocolVersion.IsUnknown() {
+			tls_cert_paramsMap["maximum_protocol_version"] = data.TLSCertParams.MaximumProtocolVersion.ValueString()
+		}
+		if !data.TLSCertParams.MinimumProtocolVersion.IsNull() && !data.TLSCertParams.MinimumProtocolVersion.IsUnknown() {
+			tls_cert_paramsMap["minimum_protocol_version"] = data.TLSCertParams.MinimumProtocolVersion.ValueString()
+		}
+		if data.TLSCertParams.NoClientCertificate != nil {
+			tls_cert_paramsMap["no_client_certificate"] = map[string]interface{}{}
+		}
+		if data.TLSCertParams.ValidationParams != nil {
+			validation_paramsNestedMap := make(map[string]interface{})
+			if !data.TLSCertParams.ValidationParams.SkipHostnameVerification.IsNull() && !data.TLSCertParams.ValidationParams.SkipHostnameVerification.IsUnknown() {
+				validation_paramsNestedMap["skip_hostname_verification"] = data.TLSCertParams.ValidationParams.SkipHostnameVerification.ValueBool()
+			}
+			if !data.TLSCertParams.ValidationParams.TrustedCaURL.IsNull() && !data.TLSCertParams.ValidationParams.TrustedCaURL.IsUnknown() {
+				validation_paramsNestedMap["trusted_ca_url"] = data.TLSCertParams.ValidationParams.TrustedCaURL.ValueString()
+			}
+			tls_cert_paramsMap["validation_params"] = validation_paramsNestedMap
+		}
+		apiResource.Spec["tls_cert_params"] = tls_cert_paramsMap
+	}
+	if data.TLSParameters != nil {
+		tls_parametersMap := make(map[string]interface{})
+		if data.TLSParameters.ClientCertificateOptional != nil {
+			tls_parametersMap["client_certificate_optional"] = map[string]interface{}{}
+		}
+		if data.TLSParameters.ClientCertificateRequired != nil {
+			tls_parametersMap["client_certificate_required"] = map[string]interface{}{}
+		}
+		if data.TLSParameters.CommonParams != nil {
+			common_paramsNestedMap := make(map[string]interface{})
+			if !data.TLSParameters.CommonParams.MaximumProtocolVersion.IsNull() && !data.TLSParameters.CommonParams.MaximumProtocolVersion.IsUnknown() {
+				common_paramsNestedMap["maximum_protocol_version"] = data.TLSParameters.CommonParams.MaximumProtocolVersion.ValueString()
+			}
+			if !data.TLSParameters.CommonParams.MinimumProtocolVersion.IsNull() && !data.TLSParameters.CommonParams.MinimumProtocolVersion.IsUnknown() {
+				common_paramsNestedMap["minimum_protocol_version"] = data.TLSParameters.CommonParams.MinimumProtocolVersion.ValueString()
+			}
+			tls_parametersMap["common_params"] = common_paramsNestedMap
+		}
+		if data.TLSParameters.NoClientCertificate != nil {
+			tls_parametersMap["no_client_certificate"] = map[string]interface{}{}
+		}
+		apiResource.Spec["tls_parameters"] = tls_parametersMap
+	}
+	if len(data.UserIdentification) > 0 {
+		var user_identificationList []map[string]interface{}
+		for _, item := range data.UserIdentification {
+			itemMap := make(map[string]interface{})
+			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+				itemMap["kind"] = item.Kind.ValueString()
+			}
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+				itemMap["namespace"] = item.Namespace.ValueString()
+			}
+			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+				itemMap["tenant"] = item.Tenant.ValueString()
+			}
+			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+				itemMap["uid"] = item.Uid.ValueString()
+			}
+			user_identificationList = append(user_identificationList, itemMap)
+		}
+		apiResource.Spec["user_identification"] = user_identificationList
+	}
+	if data.WAFType != nil {
+		waf_typeMap := make(map[string]interface{})
+		if data.WAFType.AppFirewall != nil {
+			app_firewallNestedMap := make(map[string]interface{})
+			waf_typeMap["app_firewall"] = app_firewallNestedMap
+		}
+		if data.WAFType.DisableWAF != nil {
+			waf_typeMap["disable_waf"] = map[string]interface{}{}
+		}
+		if data.WAFType.InheritWAF != nil {
+			waf_typeMap["inherit_waf"] = map[string]interface{}{}
+		}
+		apiResource.Spec["waf_type"] = waf_typeMap
+	}
+	if !data.AddLocation.IsNull() && !data.AddLocation.IsUnknown() {
+		apiResource.Spec["add_location"] = data.AddLocation.ValueBool()
+	}
+	if !data.AppendServerName.IsNull() && !data.AppendServerName.IsUnknown() {
+		apiResource.Spec["append_server_name"] = data.AppendServerName.ValueString()
+	}
+	if !data.ConnectionIdleTimeout.IsNull() && !data.ConnectionIdleTimeout.IsUnknown() {
+		apiResource.Spec["connection_idle_timeout"] = data.ConnectionIdleTimeout.ValueInt64()
+	}
+	if !data.DisableDefaultErrorPages.IsNull() && !data.DisableDefaultErrorPages.IsUnknown() {
+		apiResource.Spec["disable_default_error_pages"] = data.DisableDefaultErrorPages.ValueBool()
+	}
+	if !data.DisableDNSResolve.IsNull() && !data.DisableDNSResolve.IsUnknown() {
+		apiResource.Spec["disable_dns_resolve"] = data.DisableDNSResolve.ValueBool()
+	}
+	if !data.IdleTimeout.IsNull() && !data.IdleTimeout.IsUnknown() {
+		apiResource.Spec["idle_timeout"] = data.IdleTimeout.ValueInt64()
+	}
+	if !data.MaxRequestHeaderSize.IsNull() && !data.MaxRequestHeaderSize.IsUnknown() {
+		apiResource.Spec["max_request_header_size"] = data.MaxRequestHeaderSize.ValueInt64()
+	}
+	if !data.Proxy.IsNull() && !data.Proxy.IsUnknown() {
+		apiResource.Spec["proxy"] = data.Proxy.ValueString()
+	}
+	if !data.ServerName.IsNull() && !data.ServerName.IsUnknown() {
+		apiResource.Spec["server_name"] = data.ServerName.ValueString()
+	}
+
+
 	updated, err := r.client.UpdateVirtualHost(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update VirtualHost: %s", err))
@@ -2268,6 +4453,44 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
+	if v, ok := updated.Spec["add_location"].(bool); ok {
+		data.AddLocation = types.BoolValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["append_server_name"].(string); ok && v != "" {
+		data.AppendServerName = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["connection_idle_timeout"].(float64); ok {
+		data.ConnectionIdleTimeout = types.Int64Value(int64(v))
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["disable_default_error_pages"].(bool); ok {
+		data.DisableDefaultErrorPages = types.BoolValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["disable_dns_resolve"].(bool); ok {
+		data.DisableDNSResolve = types.BoolValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["idle_timeout"].(float64); ok {
+		data.IdleTimeout = types.Int64Value(int64(v))
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["max_request_header_size"].(float64); ok {
+		data.MaxRequestHeaderSize = types.Int64Value(int64(v))
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["proxy"].(string); ok && v != "" {
+		data.Proxy = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["server_name"].(string); ok && v != "" {
+		data.ServerName = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -2280,6 +4503,7 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -2306,6 +4530,15 @@ func (r *VirtualHostResource) Delete(ctx context.Context, req resource.DeleteReq
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "VirtualHost already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "VirtualHost delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

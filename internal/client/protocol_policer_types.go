@@ -10,13 +10,8 @@ import (
 
 // ProtocolPolicer represents a F5XC ProtocolPolicer
 type ProtocolPolicer struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     ProtocolPolicerSpec `json:"spec"`
-}
-
-// ProtocolPolicerSpec defines the specification for ProtocolPolicer
-type ProtocolPolicerSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateProtocolPolicer creates a new ProtocolPolicer

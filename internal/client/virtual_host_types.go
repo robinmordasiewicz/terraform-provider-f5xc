@@ -10,13 +10,8 @@ import (
 
 // VirtualHost represents a F5XC VirtualHost
 type VirtualHost struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     VirtualHostSpec `json:"spec"`
-}
-
-// VirtualHostSpec defines the specification for VirtualHost
-type VirtualHostSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateVirtualHost creates a new VirtualHost

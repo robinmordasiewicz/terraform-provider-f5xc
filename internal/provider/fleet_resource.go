@@ -12,6 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -227,7 +228,7 @@ type FleetStorageClassListModel struct {
 type FleetStorageClassListStorageClassesModel struct {
 	AllowVolumeExpansion types.Bool `tfsdk:"allow_volume_expansion"`
 	DefaultStorageClass types.Bool `tfsdk:"default_storage_class"`
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	ReclaimPolicy types.String `tfsdk:"reclaim_policy"`
 	StorageClassName types.String `tfsdk:"storage_class_name"`
 	StorageDevice types.String `tfsdk:"storage_device"`
@@ -248,7 +249,7 @@ type FleetStorageClassListStorageClassesHpeStorageModel struct {
 	AllowMutations types.String `tfsdk:"allow_mutations"`
 	AllowOverrides types.String `tfsdk:"allow_overrides"`
 	DedupeEnabled types.Bool `tfsdk:"dedupe_enabled"`
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	DestroyOnDelete types.Bool `tfsdk:"destroy_on_delete"`
 	Encrypted types.Bool `tfsdk:"encrypted"`
 	Folder types.String `tfsdk:"folder"`
@@ -782,12 +783,12 @@ type FleetResourceModel struct {
 	Annotations types.Map `tfsdk:"annotations"`
 	Description types.String `tfsdk:"description"`
 	Disable types.Bool `tfsdk:"disable"`
+	Labels types.Map `tfsdk:"labels"`
+	ID types.String `tfsdk:"id"`
 	EnableDefaultFleetConfigDownload types.Bool `tfsdk:"enable_default_fleet_config_download"`
 	FleetLabel types.String `tfsdk:"fleet_label"`
-	Labels types.Map `tfsdk:"labels"`
 	OperatingSystemVersion types.String `tfsdk:"operating_system_version"`
 	VolterraSoftwareVersion types.String `tfsdk:"volterra_software_version"`
-	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
 	AllowAllUsb *FleetEmptyModel `tfsdk:"allow_all_usb"`
 	BlockedServices []FleetBlockedServicesModel `tfsdk:"blocked_services"`
@@ -868,29 +869,45 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				MarkdownDescription: "A value of true will administratively disable the object.",
 				Optional: true,
 			},
-			"enable_default_fleet_config_download": schema.BoolAttribute{
-				MarkdownDescription: "Enable Default Fleet Config Download. Enable default fleet config, It must be set for storage config and gpu config",
-				Optional: true,
-			},
-			"fleet_label": schema.StringAttribute{
-				MarkdownDescription: "Fleet Label Value. fleet_label value is used to create known_label 'ves.io/fleet=<fleet_label>' The known_label is created in the 'shared' namespace for the tenant. A virtual_site object with name <fleet_label> is also created in 'shared' namespace for tenant. The virtual_site object will select all sites configured with the known_label above fleet_label with 'sfo' will create a known_label 'ves.io/fleet=sfo' in tenant for the fleet",
-				Optional: true,
-			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
+			"id": schema.StringAttribute{
+				MarkdownDescription: "Unique identifier for the resource.",
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"enable_default_fleet_config_download": schema.BoolAttribute{
+				MarkdownDescription: "Enable Default Fleet Config Download. Enable default fleet config, It must be set for storage config and gpu config",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.Bool{
+					boolplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"fleet_label": schema.StringAttribute{
+				MarkdownDescription: "Fleet Label Value. fleet_label value is used to create known_label 'ves.io/fleet=<fleet_label>' The known_label is created in the 'shared' namespace for the tenant. A virtual_site object with name <fleet_label> is also created in 'shared' namespace for tenant. The virtual_site object will select all sites configured with the known_label above fleet_label with 'sfo' will create a known_label 'ves.io/fleet=sfo' in tenant for the fleet",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
 			"operating_system_version": schema.StringAttribute{
 				MarkdownDescription: "Operating System Version. Desired Operating System version that is applied to all sites that are member of the fleet. Current Operating System version can be overridden via site config.",
 				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
 			},
 			"volterra_software_version": schema.StringAttribute{
 				MarkdownDescription: "Software Version. F5XC software version is human readable string matching released set of version components. The given software version is applied to all sites that are member of the fleet. Current software installed can be overridden via site config.",
 				Optional: true,
-			},
-			"id": schema.StringAttribute{
-				MarkdownDescription: "Unique identifier for the resource.",
 				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
@@ -1392,7 +1409,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									MarkdownDescription: "Default Storage Class. Make this storage class default storage class for the K8s cluster",
 									Optional: true,
 								},
-								"description": schema.StringAttribute{
+								"description_spec": schema.StringAttribute{
 									MarkdownDescription: "Storage Class Description. Description for this storage class",
 									Optional: true,
 								},
@@ -1437,7 +1454,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 											MarkdownDescription: "dedupeEnabled. Indicates that the volume should enable deduplication.",
 											Optional: true,
 										},
-										"description": schema.StringAttribute{
+										"description_spec": schema.StringAttribute{
 											MarkdownDescription: "Description. The SecretName parameter is used to identify name of secret to identify backend storage's auth information",
 											Optional: true,
 										},
@@ -2802,7 +2819,7 @@ func (r *FleetResource) Create(ctx context.Context, req resource.CreateRequest, 
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.FleetSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -2827,6 +2844,318 @@ func (r *FleetResource) Create(ctx context.Context, req resource.CreateRequest, 
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.AllowAllUsb != nil {
+		allow_all_usbMap := make(map[string]interface{})
+		apiResource.Spec["allow_all_usb"] = allow_all_usbMap
+	}
+	if len(data.BlockedServices) > 0 {
+		var blocked_servicesList []map[string]interface{}
+		for _, item := range data.BlockedServices {
+			itemMap := make(map[string]interface{})
+			if item.DNS != nil {
+				itemMap["dns"] = map[string]interface{}{}
+			}
+			if !item.NetworkType.IsNull() && !item.NetworkType.IsUnknown() {
+				itemMap["network_type"] = item.NetworkType.ValueString()
+			}
+			if item.SSH != nil {
+				itemMap["ssh"] = map[string]interface{}{}
+			}
+			if item.WebUserInterface != nil {
+				itemMap["web_user_interface"] = map[string]interface{}{}
+			}
+			blocked_servicesList = append(blocked_servicesList, itemMap)
+		}
+		apiResource.Spec["blocked_services"] = blocked_servicesList
+	}
+	if data.BondDeviceList != nil {
+		bond_device_listMap := make(map[string]interface{})
+		apiResource.Spec["bond_device_list"] = bond_device_listMap
+	}
+	if data.DcClusterGroup != nil {
+		dc_cluster_groupMap := make(map[string]interface{})
+		if !data.DcClusterGroup.Name.IsNull() && !data.DcClusterGroup.Name.IsUnknown() {
+			dc_cluster_groupMap["name"] = data.DcClusterGroup.Name.ValueString()
+		}
+		if !data.DcClusterGroup.Namespace.IsNull() && !data.DcClusterGroup.Namespace.IsUnknown() {
+			dc_cluster_groupMap["namespace"] = data.DcClusterGroup.Namespace.ValueString()
+		}
+		if !data.DcClusterGroup.Tenant.IsNull() && !data.DcClusterGroup.Tenant.IsUnknown() {
+			dc_cluster_groupMap["tenant"] = data.DcClusterGroup.Tenant.ValueString()
+		}
+		apiResource.Spec["dc_cluster_group"] = dc_cluster_groupMap
+	}
+	if data.DcClusterGroupInside != nil {
+		dc_cluster_group_insideMap := make(map[string]interface{})
+		if !data.DcClusterGroupInside.Name.IsNull() && !data.DcClusterGroupInside.Name.IsUnknown() {
+			dc_cluster_group_insideMap["name"] = data.DcClusterGroupInside.Name.ValueString()
+		}
+		if !data.DcClusterGroupInside.Namespace.IsNull() && !data.DcClusterGroupInside.Namespace.IsUnknown() {
+			dc_cluster_group_insideMap["namespace"] = data.DcClusterGroupInside.Namespace.ValueString()
+		}
+		if !data.DcClusterGroupInside.Tenant.IsNull() && !data.DcClusterGroupInside.Tenant.IsUnknown() {
+			dc_cluster_group_insideMap["tenant"] = data.DcClusterGroupInside.Tenant.ValueString()
+		}
+		apiResource.Spec["dc_cluster_group_inside"] = dc_cluster_group_insideMap
+	}
+	if data.DefaultConfig != nil {
+		default_configMap := make(map[string]interface{})
+		apiResource.Spec["default_config"] = default_configMap
+	}
+	if data.DefaultSriovInterface != nil {
+		default_sriov_interfaceMap := make(map[string]interface{})
+		apiResource.Spec["default_sriov_interface"] = default_sriov_interfaceMap
+	}
+	if data.DefaultStorageClass != nil {
+		default_storage_classMap := make(map[string]interface{})
+		apiResource.Spec["default_storage_class"] = default_storage_classMap
+	}
+	if data.DenyAllUsb != nil {
+		deny_all_usbMap := make(map[string]interface{})
+		apiResource.Spec["deny_all_usb"] = deny_all_usbMap
+	}
+	if data.DeviceList != nil {
+		device_listMap := make(map[string]interface{})
+		apiResource.Spec["device_list"] = device_listMap
+	}
+	if data.DisableGpu != nil {
+		disable_gpuMap := make(map[string]interface{})
+		apiResource.Spec["disable_gpu"] = disable_gpuMap
+	}
+	if data.DisableVm != nil {
+		disable_vmMap := make(map[string]interface{})
+		apiResource.Spec["disable_vm"] = disable_vmMap
+	}
+	if data.EnableGpu != nil {
+		enable_gpuMap := make(map[string]interface{})
+		apiResource.Spec["enable_gpu"] = enable_gpuMap
+	}
+	if data.EnableVgpu != nil {
+		enable_vgpuMap := make(map[string]interface{})
+		if !data.EnableVgpu.FeatureType.IsNull() && !data.EnableVgpu.FeatureType.IsUnknown() {
+			enable_vgpuMap["feature_type"] = data.EnableVgpu.FeatureType.ValueString()
+		}
+		if !data.EnableVgpu.ServerAddress.IsNull() && !data.EnableVgpu.ServerAddress.IsUnknown() {
+			enable_vgpuMap["server_address"] = data.EnableVgpu.ServerAddress.ValueString()
+		}
+		if !data.EnableVgpu.ServerPort.IsNull() && !data.EnableVgpu.ServerPort.IsUnknown() {
+			enable_vgpuMap["server_port"] = data.EnableVgpu.ServerPort.ValueInt64()
+		}
+		apiResource.Spec["enable_vgpu"] = enable_vgpuMap
+	}
+	if data.EnableVm != nil {
+		enable_vmMap := make(map[string]interface{})
+		apiResource.Spec["enable_vm"] = enable_vmMap
+	}
+	if len(data.InsideVirtualNetwork) > 0 {
+		var inside_virtual_networkList []map[string]interface{}
+		for _, item := range data.InsideVirtualNetwork {
+			itemMap := make(map[string]interface{})
+			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+				itemMap["kind"] = item.Kind.ValueString()
+			}
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+				itemMap["namespace"] = item.Namespace.ValueString()
+			}
+			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+				itemMap["tenant"] = item.Tenant.ValueString()
+			}
+			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+				itemMap["uid"] = item.Uid.ValueString()
+			}
+			inside_virtual_networkList = append(inside_virtual_networkList, itemMap)
+		}
+		apiResource.Spec["inside_virtual_network"] = inside_virtual_networkList
+	}
+	if data.InterfaceList != nil {
+		interface_listMap := make(map[string]interface{})
+		apiResource.Spec["interface_list"] = interface_listMap
+	}
+	if data.KubernetesUpgradeDrain != nil {
+		kubernetes_upgrade_drainMap := make(map[string]interface{})
+		if data.KubernetesUpgradeDrain.DisableUpgradeDrain != nil {
+			kubernetes_upgrade_drainMap["disable_upgrade_drain"] = map[string]interface{}{}
+		}
+		if data.KubernetesUpgradeDrain.EnableUpgradeDrain != nil {
+			enable_upgrade_drainNestedMap := make(map[string]interface{})
+			if !data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainMaxUnavailableNodeCount.IsNull() && !data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainMaxUnavailableNodeCount.IsUnknown() {
+				enable_upgrade_drainNestedMap["drain_max_unavailable_node_count"] = data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainMaxUnavailableNodeCount.ValueInt64()
+			}
+			if !data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainNodeTimeout.IsNull() && !data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainNodeTimeout.IsUnknown() {
+				enable_upgrade_drainNestedMap["drain_node_timeout"] = data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainNodeTimeout.ValueInt64()
+			}
+			kubernetes_upgrade_drainMap["enable_upgrade_drain"] = enable_upgrade_drainNestedMap
+		}
+		apiResource.Spec["kubernetes_upgrade_drain"] = kubernetes_upgrade_drainMap
+	}
+	if data.LogReceiver != nil {
+		log_receiverMap := make(map[string]interface{})
+		if !data.LogReceiver.Name.IsNull() && !data.LogReceiver.Name.IsUnknown() {
+			log_receiverMap["name"] = data.LogReceiver.Name.ValueString()
+		}
+		if !data.LogReceiver.Namespace.IsNull() && !data.LogReceiver.Namespace.IsUnknown() {
+			log_receiverMap["namespace"] = data.LogReceiver.Namespace.ValueString()
+		}
+		if !data.LogReceiver.Tenant.IsNull() && !data.LogReceiver.Tenant.IsUnknown() {
+			log_receiverMap["tenant"] = data.LogReceiver.Tenant.ValueString()
+		}
+		apiResource.Spec["log_receiver"] = log_receiverMap
+	}
+	if data.LogsStreamingDisabled != nil {
+		logs_streaming_disabledMap := make(map[string]interface{})
+		apiResource.Spec["logs_streaming_disabled"] = logs_streaming_disabledMap
+	}
+	if len(data.NetworkConnectors) > 0 {
+		var network_connectorsList []map[string]interface{}
+		for _, item := range data.NetworkConnectors {
+			itemMap := make(map[string]interface{})
+			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+				itemMap["kind"] = item.Kind.ValueString()
+			}
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+				itemMap["namespace"] = item.Namespace.ValueString()
+			}
+			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+				itemMap["tenant"] = item.Tenant.ValueString()
+			}
+			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+				itemMap["uid"] = item.Uid.ValueString()
+			}
+			network_connectorsList = append(network_connectorsList, itemMap)
+		}
+		apiResource.Spec["network_connectors"] = network_connectorsList
+	}
+	if len(data.NetworkFirewall) > 0 {
+		var network_firewallList []map[string]interface{}
+		for _, item := range data.NetworkFirewall {
+			itemMap := make(map[string]interface{})
+			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+				itemMap["kind"] = item.Kind.ValueString()
+			}
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+				itemMap["namespace"] = item.Namespace.ValueString()
+			}
+			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+				itemMap["tenant"] = item.Tenant.ValueString()
+			}
+			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+				itemMap["uid"] = item.Uid.ValueString()
+			}
+			network_firewallList = append(network_firewallList, itemMap)
+		}
+		apiResource.Spec["network_firewall"] = network_firewallList
+	}
+	if data.NoBondDevices != nil {
+		no_bond_devicesMap := make(map[string]interface{})
+		apiResource.Spec["no_bond_devices"] = no_bond_devicesMap
+	}
+	if data.NoDcClusterGroup != nil {
+		no_dc_cluster_groupMap := make(map[string]interface{})
+		apiResource.Spec["no_dc_cluster_group"] = no_dc_cluster_groupMap
+	}
+	if data.NoStorageDevice != nil {
+		no_storage_deviceMap := make(map[string]interface{})
+		apiResource.Spec["no_storage_device"] = no_storage_deviceMap
+	}
+	if data.NoStorageInterfaces != nil {
+		no_storage_interfacesMap := make(map[string]interface{})
+		apiResource.Spec["no_storage_interfaces"] = no_storage_interfacesMap
+	}
+	if data.NoStorageStaticRoutes != nil {
+		no_storage_static_routesMap := make(map[string]interface{})
+		apiResource.Spec["no_storage_static_routes"] = no_storage_static_routesMap
+	}
+	if len(data.OutsideVirtualNetwork) > 0 {
+		var outside_virtual_networkList []map[string]interface{}
+		for _, item := range data.OutsideVirtualNetwork {
+			itemMap := make(map[string]interface{})
+			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+				itemMap["kind"] = item.Kind.ValueString()
+			}
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+				itemMap["namespace"] = item.Namespace.ValueString()
+			}
+			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+				itemMap["tenant"] = item.Tenant.ValueString()
+			}
+			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+				itemMap["uid"] = item.Uid.ValueString()
+			}
+			outside_virtual_networkList = append(outside_virtual_networkList, itemMap)
+		}
+		apiResource.Spec["outside_virtual_network"] = outside_virtual_networkList
+	}
+	if data.PerformanceEnhancementMode != nil {
+		performance_enhancement_modeMap := make(map[string]interface{})
+		if data.PerformanceEnhancementMode.PerfModeL3Enhanced != nil {
+			perf_mode_l3_enhancedNestedMap := make(map[string]interface{})
+			performance_enhancement_modeMap["perf_mode_l3_enhanced"] = perf_mode_l3_enhancedNestedMap
+		}
+		if data.PerformanceEnhancementMode.PerfModeL7Enhanced != nil {
+			performance_enhancement_modeMap["perf_mode_l7_enhanced"] = map[string]interface{}{}
+		}
+		apiResource.Spec["performance_enhancement_mode"] = performance_enhancement_modeMap
+	}
+	if data.SriovInterfaces != nil {
+		sriov_interfacesMap := make(map[string]interface{})
+		apiResource.Spec["sriov_interfaces"] = sriov_interfacesMap
+	}
+	if data.StorageClassList != nil {
+		storage_class_listMap := make(map[string]interface{})
+		apiResource.Spec["storage_class_list"] = storage_class_listMap
+	}
+	if data.StorageDeviceList != nil {
+		storage_device_listMap := make(map[string]interface{})
+		apiResource.Spec["storage_device_list"] = storage_device_listMap
+	}
+	if data.StorageInterfaceList != nil {
+		storage_interface_listMap := make(map[string]interface{})
+		apiResource.Spec["storage_interface_list"] = storage_interface_listMap
+	}
+	if data.StorageStaticRoutes != nil {
+		storage_static_routesMap := make(map[string]interface{})
+		apiResource.Spec["storage_static_routes"] = storage_static_routesMap
+	}
+	if data.UsbPolicy != nil {
+		usb_policyMap := make(map[string]interface{})
+		if !data.UsbPolicy.Name.IsNull() && !data.UsbPolicy.Name.IsUnknown() {
+			usb_policyMap["name"] = data.UsbPolicy.Name.ValueString()
+		}
+		if !data.UsbPolicy.Namespace.IsNull() && !data.UsbPolicy.Namespace.IsUnknown() {
+			usb_policyMap["namespace"] = data.UsbPolicy.Namespace.ValueString()
+		}
+		if !data.UsbPolicy.Tenant.IsNull() && !data.UsbPolicy.Tenant.IsUnknown() {
+			usb_policyMap["tenant"] = data.UsbPolicy.Tenant.ValueString()
+		}
+		apiResource.Spec["usb_policy"] = usb_policyMap
+	}
+	if !data.EnableDefaultFleetConfigDownload.IsNull() && !data.EnableDefaultFleetConfigDownload.IsUnknown() {
+		apiResource.Spec["enable_default_fleet_config_download"] = data.EnableDefaultFleetConfigDownload.ValueBool()
+	}
+	if !data.FleetLabel.IsNull() && !data.FleetLabel.IsUnknown() {
+		apiResource.Spec["fleet_label"] = data.FleetLabel.ValueString()
+	}
+	if !data.OperatingSystemVersion.IsNull() && !data.OperatingSystemVersion.IsUnknown() {
+		apiResource.Spec["operating_system_version"] = data.OperatingSystemVersion.ValueString()
+	}
+	if !data.VolterraSoftwareVersion.IsNull() && !data.VolterraSoftwareVersion.IsUnknown() {
+		apiResource.Spec["volterra_software_version"] = data.VolterraSoftwareVersion.ValueString()
+	}
+
+
 	created, err := r.client.CreateFleet(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create Fleet: %s", err))
@@ -2835,8 +3164,29 @@ func (r *FleetResource) Create(ctx context.Context, req resource.CreateRequest, 
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+	if v, ok := created.Spec["enable_default_fleet_config_download"].(bool); ok {
+		data.EnableDefaultFleetConfigDownload = types.BoolValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["fleet_label"].(string); ok && v != "" {
+		data.FleetLabel = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["operating_system_version"].(string); ok && v != "" {
+		data.OperatingSystemVersion = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["volterra_software_version"].(string); ok && v != "" {
+		data.VolterraSoftwareVersion = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created Fleet resource")
@@ -2915,9 +3265,480 @@ func (r *FleetResource) Read(ctx context.Context, req resource.ReadRequest, resp
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if _, ok := apiResource.Spec["allow_all_usb"].(map[string]interface{}); ok && isImport && data.AllowAllUsb == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AllowAllUsb = &FleetEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["blocked_services"].([]interface{}); ok && len(listData) > 0 {
+		var blocked_servicesList []FleetBlockedServicesModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				blocked_servicesList = append(blocked_servicesList, FleetBlockedServicesModel{
+					DNS: func() *FleetEmptyModel {
+						if _, ok := itemMap["dns"].(map[string]interface{}); ok {
+							return &FleetEmptyModel{}
+						}
+						return nil
+					}(),
+					NetworkType: func() types.String {
+						if v, ok := itemMap["network_type"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					SSH: func() *FleetEmptyModel {
+						if _, ok := itemMap["ssh"].(map[string]interface{}); ok {
+							return &FleetEmptyModel{}
+						}
+						return nil
+					}(),
+					WebUserInterface: func() *FleetEmptyModel {
+						if _, ok := itemMap["web_user_interface"].(map[string]interface{}); ok {
+							return &FleetEmptyModel{}
+						}
+						return nil
+					}(),
+				})
+			}
+		}
+		data.BlockedServices = blocked_servicesList
+	}
+	if _, ok := apiResource.Spec["bond_device_list"].(map[string]interface{}); ok && isImport && data.BondDeviceList == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.BondDeviceList = &FleetBondDeviceListModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["dc_cluster_group"].(map[string]interface{}); ok && (isImport || data.DcClusterGroup != nil) {
+		data.DcClusterGroup = &FleetDcClusterGroupModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["dc_cluster_group_inside"].(map[string]interface{}); ok && (isImport || data.DcClusterGroupInside != nil) {
+		data.DcClusterGroupInside = &FleetDcClusterGroupInsideModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["default_config"].(map[string]interface{}); ok && isImport && data.DefaultConfig == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DefaultConfig = &FleetEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["default_sriov_interface"].(map[string]interface{}); ok && isImport && data.DefaultSriovInterface == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DefaultSriovInterface = &FleetEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["default_storage_class"].(map[string]interface{}); ok && isImport && data.DefaultStorageClass == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DefaultStorageClass = &FleetEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["deny_all_usb"].(map[string]interface{}); ok && isImport && data.DenyAllUsb == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DenyAllUsb = &FleetEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["device_list"].(map[string]interface{}); ok && isImport && data.DeviceList == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DeviceList = &FleetDeviceListModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["disable_gpu"].(map[string]interface{}); ok && isImport && data.DisableGpu == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableGpu = &FleetEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["disable_vm"].(map[string]interface{}); ok && isImport && data.DisableVm == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableVm = &FleetEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["enable_gpu"].(map[string]interface{}); ok && isImport && data.EnableGpu == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.EnableGpu = &FleetEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["enable_vgpu"].(map[string]interface{}); ok && (isImport || data.EnableVgpu != nil) {
+		data.EnableVgpu = &FleetEnableVgpuModel{
+			FeatureType: func() types.String {
+				if v, ok := blockData["feature_type"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			ServerAddress: func() types.String {
+				if v, ok := blockData["server_address"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			ServerPort: func() types.Int64 {
+				if v, ok := blockData["server_port"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["enable_vm"].(map[string]interface{}); ok && isImport && data.EnableVm == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.EnableVm = &FleetEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["inside_virtual_network"].([]interface{}); ok && len(listData) > 0 {
+		var inside_virtual_networkList []FleetInsideVirtualNetworkModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				inside_virtual_networkList = append(inside_virtual_networkList, FleetInsideVirtualNetworkModel{
+					Kind: func() types.String {
+						if v, ok := itemMap["kind"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Namespace: func() types.String {
+						if v, ok := itemMap["namespace"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Tenant: func() types.String {
+						if v, ok := itemMap["tenant"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Uid: func() types.String {
+						if v, ok := itemMap["uid"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.InsideVirtualNetwork = inside_virtual_networkList
+	}
+	if _, ok := apiResource.Spec["interface_list"].(map[string]interface{}); ok && isImport && data.InterfaceList == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.InterfaceList = &FleetInterfaceListModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["kubernetes_upgrade_drain"].(map[string]interface{}); ok && isImport && data.KubernetesUpgradeDrain == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.KubernetesUpgradeDrain = &FleetKubernetesUpgradeDrainModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["log_receiver"].(map[string]interface{}); ok && (isImport || data.LogReceiver != nil) {
+		data.LogReceiver = &FleetLogReceiverModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["logs_streaming_disabled"].(map[string]interface{}); ok && isImport && data.LogsStreamingDisabled == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.LogsStreamingDisabled = &FleetEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["network_connectors"].([]interface{}); ok && len(listData) > 0 {
+		var network_connectorsList []FleetNetworkConnectorsModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				network_connectorsList = append(network_connectorsList, FleetNetworkConnectorsModel{
+					Kind: func() types.String {
+						if v, ok := itemMap["kind"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Namespace: func() types.String {
+						if v, ok := itemMap["namespace"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Tenant: func() types.String {
+						if v, ok := itemMap["tenant"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Uid: func() types.String {
+						if v, ok := itemMap["uid"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.NetworkConnectors = network_connectorsList
+	}
+	if listData, ok := apiResource.Spec["network_firewall"].([]interface{}); ok && len(listData) > 0 {
+		var network_firewallList []FleetNetworkFirewallModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				network_firewallList = append(network_firewallList, FleetNetworkFirewallModel{
+					Kind: func() types.String {
+						if v, ok := itemMap["kind"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Namespace: func() types.String {
+						if v, ok := itemMap["namespace"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Tenant: func() types.String {
+						if v, ok := itemMap["tenant"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Uid: func() types.String {
+						if v, ok := itemMap["uid"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.NetworkFirewall = network_firewallList
+	}
+	if _, ok := apiResource.Spec["no_bond_devices"].(map[string]interface{}); ok && isImport && data.NoBondDevices == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoBondDevices = &FleetEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_dc_cluster_group"].(map[string]interface{}); ok && isImport && data.NoDcClusterGroup == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoDcClusterGroup = &FleetEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_storage_device"].(map[string]interface{}); ok && isImport && data.NoStorageDevice == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoStorageDevice = &FleetEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_storage_interfaces"].(map[string]interface{}); ok && isImport && data.NoStorageInterfaces == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoStorageInterfaces = &FleetEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_storage_static_routes"].(map[string]interface{}); ok && isImport && data.NoStorageStaticRoutes == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoStorageStaticRoutes = &FleetEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["outside_virtual_network"].([]interface{}); ok && len(listData) > 0 {
+		var outside_virtual_networkList []FleetOutsideVirtualNetworkModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				outside_virtual_networkList = append(outside_virtual_networkList, FleetOutsideVirtualNetworkModel{
+					Kind: func() types.String {
+						if v, ok := itemMap["kind"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Namespace: func() types.String {
+						if v, ok := itemMap["namespace"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Tenant: func() types.String {
+						if v, ok := itemMap["tenant"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Uid: func() types.String {
+						if v, ok := itemMap["uid"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.OutsideVirtualNetwork = outside_virtual_networkList
+	}
+	if _, ok := apiResource.Spec["performance_enhancement_mode"].(map[string]interface{}); ok && isImport && data.PerformanceEnhancementMode == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.PerformanceEnhancementMode = &FleetPerformanceEnhancementModeModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["sriov_interfaces"].(map[string]interface{}); ok && isImport && data.SriovInterfaces == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.SriovInterfaces = &FleetSriovInterfacesModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["storage_class_list"].(map[string]interface{}); ok && isImport && data.StorageClassList == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.StorageClassList = &FleetStorageClassListModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["storage_device_list"].(map[string]interface{}); ok && isImport && data.StorageDeviceList == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.StorageDeviceList = &FleetStorageDeviceListModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["storage_interface_list"].(map[string]interface{}); ok && isImport && data.StorageInterfaceList == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.StorageInterfaceList = &FleetStorageInterfaceListModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["storage_static_routes"].(map[string]interface{}); ok && isImport && data.StorageStaticRoutes == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.StorageStaticRoutes = &FleetStorageStaticRoutesModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["usb_policy"].(map[string]interface{}); ok && (isImport || data.UsbPolicy != nil) {
+		data.UsbPolicy = &FleetUsbPolicyModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	// Top-level Optional bool: preserve prior state to avoid API default drift
+	if !isImport && !data.EnableDefaultFleetConfigDownload.IsNull() {
+		// Normal Read: preserve existing state value (do nothing)
+	} else {
+		// Import case or null state: read from API
+		if v, ok := apiResource.Spec["enable_default_fleet_config_download"].(bool); ok {
+			data.EnableDefaultFleetConfigDownload = types.BoolValue(v)
+		} else {
+			data.EnableDefaultFleetConfigDownload = types.BoolNull()
+		}
+	}
+	if v, ok := apiResource.Spec["fleet_label"].(string); ok && v != "" {
+		data.FleetLabel = types.StringValue(v)
+	} else {
+		data.FleetLabel = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["operating_system_version"].(string); ok && v != "" {
+		data.OperatingSystemVersion = types.StringValue(v)
+	} else {
+		data.OperatingSystemVersion = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["volterra_software_version"].(string); ok && v != "" {
+		data.VolterraSoftwareVersion = types.StringValue(v)
+	} else {
+		data.VolterraSoftwareVersion = types.StringNull()
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -2943,7 +3764,7 @@ func (r *FleetResource) Update(ctx context.Context, req resource.UpdateRequest, 
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.FleetSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -2968,6 +3789,318 @@ func (r *FleetResource) Update(ctx context.Context, req resource.UpdateRequest, 
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.AllowAllUsb != nil {
+		allow_all_usbMap := make(map[string]interface{})
+		apiResource.Spec["allow_all_usb"] = allow_all_usbMap
+	}
+	if len(data.BlockedServices) > 0 {
+		var blocked_servicesList []map[string]interface{}
+		for _, item := range data.BlockedServices {
+			itemMap := make(map[string]interface{})
+			if item.DNS != nil {
+				itemMap["dns"] = map[string]interface{}{}
+			}
+			if !item.NetworkType.IsNull() && !item.NetworkType.IsUnknown() {
+				itemMap["network_type"] = item.NetworkType.ValueString()
+			}
+			if item.SSH != nil {
+				itemMap["ssh"] = map[string]interface{}{}
+			}
+			if item.WebUserInterface != nil {
+				itemMap["web_user_interface"] = map[string]interface{}{}
+			}
+			blocked_servicesList = append(blocked_servicesList, itemMap)
+		}
+		apiResource.Spec["blocked_services"] = blocked_servicesList
+	}
+	if data.BondDeviceList != nil {
+		bond_device_listMap := make(map[string]interface{})
+		apiResource.Spec["bond_device_list"] = bond_device_listMap
+	}
+	if data.DcClusterGroup != nil {
+		dc_cluster_groupMap := make(map[string]interface{})
+		if !data.DcClusterGroup.Name.IsNull() && !data.DcClusterGroup.Name.IsUnknown() {
+			dc_cluster_groupMap["name"] = data.DcClusterGroup.Name.ValueString()
+		}
+		if !data.DcClusterGroup.Namespace.IsNull() && !data.DcClusterGroup.Namespace.IsUnknown() {
+			dc_cluster_groupMap["namespace"] = data.DcClusterGroup.Namespace.ValueString()
+		}
+		if !data.DcClusterGroup.Tenant.IsNull() && !data.DcClusterGroup.Tenant.IsUnknown() {
+			dc_cluster_groupMap["tenant"] = data.DcClusterGroup.Tenant.ValueString()
+		}
+		apiResource.Spec["dc_cluster_group"] = dc_cluster_groupMap
+	}
+	if data.DcClusterGroupInside != nil {
+		dc_cluster_group_insideMap := make(map[string]interface{})
+		if !data.DcClusterGroupInside.Name.IsNull() && !data.DcClusterGroupInside.Name.IsUnknown() {
+			dc_cluster_group_insideMap["name"] = data.DcClusterGroupInside.Name.ValueString()
+		}
+		if !data.DcClusterGroupInside.Namespace.IsNull() && !data.DcClusterGroupInside.Namespace.IsUnknown() {
+			dc_cluster_group_insideMap["namespace"] = data.DcClusterGroupInside.Namespace.ValueString()
+		}
+		if !data.DcClusterGroupInside.Tenant.IsNull() && !data.DcClusterGroupInside.Tenant.IsUnknown() {
+			dc_cluster_group_insideMap["tenant"] = data.DcClusterGroupInside.Tenant.ValueString()
+		}
+		apiResource.Spec["dc_cluster_group_inside"] = dc_cluster_group_insideMap
+	}
+	if data.DefaultConfig != nil {
+		default_configMap := make(map[string]interface{})
+		apiResource.Spec["default_config"] = default_configMap
+	}
+	if data.DefaultSriovInterface != nil {
+		default_sriov_interfaceMap := make(map[string]interface{})
+		apiResource.Spec["default_sriov_interface"] = default_sriov_interfaceMap
+	}
+	if data.DefaultStorageClass != nil {
+		default_storage_classMap := make(map[string]interface{})
+		apiResource.Spec["default_storage_class"] = default_storage_classMap
+	}
+	if data.DenyAllUsb != nil {
+		deny_all_usbMap := make(map[string]interface{})
+		apiResource.Spec["deny_all_usb"] = deny_all_usbMap
+	}
+	if data.DeviceList != nil {
+		device_listMap := make(map[string]interface{})
+		apiResource.Spec["device_list"] = device_listMap
+	}
+	if data.DisableGpu != nil {
+		disable_gpuMap := make(map[string]interface{})
+		apiResource.Spec["disable_gpu"] = disable_gpuMap
+	}
+	if data.DisableVm != nil {
+		disable_vmMap := make(map[string]interface{})
+		apiResource.Spec["disable_vm"] = disable_vmMap
+	}
+	if data.EnableGpu != nil {
+		enable_gpuMap := make(map[string]interface{})
+		apiResource.Spec["enable_gpu"] = enable_gpuMap
+	}
+	if data.EnableVgpu != nil {
+		enable_vgpuMap := make(map[string]interface{})
+		if !data.EnableVgpu.FeatureType.IsNull() && !data.EnableVgpu.FeatureType.IsUnknown() {
+			enable_vgpuMap["feature_type"] = data.EnableVgpu.FeatureType.ValueString()
+		}
+		if !data.EnableVgpu.ServerAddress.IsNull() && !data.EnableVgpu.ServerAddress.IsUnknown() {
+			enable_vgpuMap["server_address"] = data.EnableVgpu.ServerAddress.ValueString()
+		}
+		if !data.EnableVgpu.ServerPort.IsNull() && !data.EnableVgpu.ServerPort.IsUnknown() {
+			enable_vgpuMap["server_port"] = data.EnableVgpu.ServerPort.ValueInt64()
+		}
+		apiResource.Spec["enable_vgpu"] = enable_vgpuMap
+	}
+	if data.EnableVm != nil {
+		enable_vmMap := make(map[string]interface{})
+		apiResource.Spec["enable_vm"] = enable_vmMap
+	}
+	if len(data.InsideVirtualNetwork) > 0 {
+		var inside_virtual_networkList []map[string]interface{}
+		for _, item := range data.InsideVirtualNetwork {
+			itemMap := make(map[string]interface{})
+			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+				itemMap["kind"] = item.Kind.ValueString()
+			}
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+				itemMap["namespace"] = item.Namespace.ValueString()
+			}
+			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+				itemMap["tenant"] = item.Tenant.ValueString()
+			}
+			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+				itemMap["uid"] = item.Uid.ValueString()
+			}
+			inside_virtual_networkList = append(inside_virtual_networkList, itemMap)
+		}
+		apiResource.Spec["inside_virtual_network"] = inside_virtual_networkList
+	}
+	if data.InterfaceList != nil {
+		interface_listMap := make(map[string]interface{})
+		apiResource.Spec["interface_list"] = interface_listMap
+	}
+	if data.KubernetesUpgradeDrain != nil {
+		kubernetes_upgrade_drainMap := make(map[string]interface{})
+		if data.KubernetesUpgradeDrain.DisableUpgradeDrain != nil {
+			kubernetes_upgrade_drainMap["disable_upgrade_drain"] = map[string]interface{}{}
+		}
+		if data.KubernetesUpgradeDrain.EnableUpgradeDrain != nil {
+			enable_upgrade_drainNestedMap := make(map[string]interface{})
+			if !data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainMaxUnavailableNodeCount.IsNull() && !data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainMaxUnavailableNodeCount.IsUnknown() {
+				enable_upgrade_drainNestedMap["drain_max_unavailable_node_count"] = data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainMaxUnavailableNodeCount.ValueInt64()
+			}
+			if !data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainNodeTimeout.IsNull() && !data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainNodeTimeout.IsUnknown() {
+				enable_upgrade_drainNestedMap["drain_node_timeout"] = data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainNodeTimeout.ValueInt64()
+			}
+			kubernetes_upgrade_drainMap["enable_upgrade_drain"] = enable_upgrade_drainNestedMap
+		}
+		apiResource.Spec["kubernetes_upgrade_drain"] = kubernetes_upgrade_drainMap
+	}
+	if data.LogReceiver != nil {
+		log_receiverMap := make(map[string]interface{})
+		if !data.LogReceiver.Name.IsNull() && !data.LogReceiver.Name.IsUnknown() {
+			log_receiverMap["name"] = data.LogReceiver.Name.ValueString()
+		}
+		if !data.LogReceiver.Namespace.IsNull() && !data.LogReceiver.Namespace.IsUnknown() {
+			log_receiverMap["namespace"] = data.LogReceiver.Namespace.ValueString()
+		}
+		if !data.LogReceiver.Tenant.IsNull() && !data.LogReceiver.Tenant.IsUnknown() {
+			log_receiverMap["tenant"] = data.LogReceiver.Tenant.ValueString()
+		}
+		apiResource.Spec["log_receiver"] = log_receiverMap
+	}
+	if data.LogsStreamingDisabled != nil {
+		logs_streaming_disabledMap := make(map[string]interface{})
+		apiResource.Spec["logs_streaming_disabled"] = logs_streaming_disabledMap
+	}
+	if len(data.NetworkConnectors) > 0 {
+		var network_connectorsList []map[string]interface{}
+		for _, item := range data.NetworkConnectors {
+			itemMap := make(map[string]interface{})
+			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+				itemMap["kind"] = item.Kind.ValueString()
+			}
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+				itemMap["namespace"] = item.Namespace.ValueString()
+			}
+			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+				itemMap["tenant"] = item.Tenant.ValueString()
+			}
+			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+				itemMap["uid"] = item.Uid.ValueString()
+			}
+			network_connectorsList = append(network_connectorsList, itemMap)
+		}
+		apiResource.Spec["network_connectors"] = network_connectorsList
+	}
+	if len(data.NetworkFirewall) > 0 {
+		var network_firewallList []map[string]interface{}
+		for _, item := range data.NetworkFirewall {
+			itemMap := make(map[string]interface{})
+			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+				itemMap["kind"] = item.Kind.ValueString()
+			}
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+				itemMap["namespace"] = item.Namespace.ValueString()
+			}
+			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+				itemMap["tenant"] = item.Tenant.ValueString()
+			}
+			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+				itemMap["uid"] = item.Uid.ValueString()
+			}
+			network_firewallList = append(network_firewallList, itemMap)
+		}
+		apiResource.Spec["network_firewall"] = network_firewallList
+	}
+	if data.NoBondDevices != nil {
+		no_bond_devicesMap := make(map[string]interface{})
+		apiResource.Spec["no_bond_devices"] = no_bond_devicesMap
+	}
+	if data.NoDcClusterGroup != nil {
+		no_dc_cluster_groupMap := make(map[string]interface{})
+		apiResource.Spec["no_dc_cluster_group"] = no_dc_cluster_groupMap
+	}
+	if data.NoStorageDevice != nil {
+		no_storage_deviceMap := make(map[string]interface{})
+		apiResource.Spec["no_storage_device"] = no_storage_deviceMap
+	}
+	if data.NoStorageInterfaces != nil {
+		no_storage_interfacesMap := make(map[string]interface{})
+		apiResource.Spec["no_storage_interfaces"] = no_storage_interfacesMap
+	}
+	if data.NoStorageStaticRoutes != nil {
+		no_storage_static_routesMap := make(map[string]interface{})
+		apiResource.Spec["no_storage_static_routes"] = no_storage_static_routesMap
+	}
+	if len(data.OutsideVirtualNetwork) > 0 {
+		var outside_virtual_networkList []map[string]interface{}
+		for _, item := range data.OutsideVirtualNetwork {
+			itemMap := make(map[string]interface{})
+			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+				itemMap["kind"] = item.Kind.ValueString()
+			}
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+				itemMap["namespace"] = item.Namespace.ValueString()
+			}
+			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+				itemMap["tenant"] = item.Tenant.ValueString()
+			}
+			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+				itemMap["uid"] = item.Uid.ValueString()
+			}
+			outside_virtual_networkList = append(outside_virtual_networkList, itemMap)
+		}
+		apiResource.Spec["outside_virtual_network"] = outside_virtual_networkList
+	}
+	if data.PerformanceEnhancementMode != nil {
+		performance_enhancement_modeMap := make(map[string]interface{})
+		if data.PerformanceEnhancementMode.PerfModeL3Enhanced != nil {
+			perf_mode_l3_enhancedNestedMap := make(map[string]interface{})
+			performance_enhancement_modeMap["perf_mode_l3_enhanced"] = perf_mode_l3_enhancedNestedMap
+		}
+		if data.PerformanceEnhancementMode.PerfModeL7Enhanced != nil {
+			performance_enhancement_modeMap["perf_mode_l7_enhanced"] = map[string]interface{}{}
+		}
+		apiResource.Spec["performance_enhancement_mode"] = performance_enhancement_modeMap
+	}
+	if data.SriovInterfaces != nil {
+		sriov_interfacesMap := make(map[string]interface{})
+		apiResource.Spec["sriov_interfaces"] = sriov_interfacesMap
+	}
+	if data.StorageClassList != nil {
+		storage_class_listMap := make(map[string]interface{})
+		apiResource.Spec["storage_class_list"] = storage_class_listMap
+	}
+	if data.StorageDeviceList != nil {
+		storage_device_listMap := make(map[string]interface{})
+		apiResource.Spec["storage_device_list"] = storage_device_listMap
+	}
+	if data.StorageInterfaceList != nil {
+		storage_interface_listMap := make(map[string]interface{})
+		apiResource.Spec["storage_interface_list"] = storage_interface_listMap
+	}
+	if data.StorageStaticRoutes != nil {
+		storage_static_routesMap := make(map[string]interface{})
+		apiResource.Spec["storage_static_routes"] = storage_static_routesMap
+	}
+	if data.UsbPolicy != nil {
+		usb_policyMap := make(map[string]interface{})
+		if !data.UsbPolicy.Name.IsNull() && !data.UsbPolicy.Name.IsUnknown() {
+			usb_policyMap["name"] = data.UsbPolicy.Name.ValueString()
+		}
+		if !data.UsbPolicy.Namespace.IsNull() && !data.UsbPolicy.Namespace.IsUnknown() {
+			usb_policyMap["namespace"] = data.UsbPolicy.Namespace.ValueString()
+		}
+		if !data.UsbPolicy.Tenant.IsNull() && !data.UsbPolicy.Tenant.IsUnknown() {
+			usb_policyMap["tenant"] = data.UsbPolicy.Tenant.ValueString()
+		}
+		apiResource.Spec["usb_policy"] = usb_policyMap
+	}
+	if !data.EnableDefaultFleetConfigDownload.IsNull() && !data.EnableDefaultFleetConfigDownload.IsUnknown() {
+		apiResource.Spec["enable_default_fleet_config_download"] = data.EnableDefaultFleetConfigDownload.ValueBool()
+	}
+	if !data.FleetLabel.IsNull() && !data.FleetLabel.IsUnknown() {
+		apiResource.Spec["fleet_label"] = data.FleetLabel.ValueString()
+	}
+	if !data.OperatingSystemVersion.IsNull() && !data.OperatingSystemVersion.IsUnknown() {
+		apiResource.Spec["operating_system_version"] = data.OperatingSystemVersion.ValueString()
+	}
+	if !data.VolterraSoftwareVersion.IsNull() && !data.VolterraSoftwareVersion.IsUnknown() {
+		apiResource.Spec["volterra_software_version"] = data.VolterraSoftwareVersion.ValueString()
+	}
+
+
 	updated, err := r.client.UpdateFleet(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update Fleet: %s", err))
@@ -2976,6 +4109,24 @@ func (r *FleetResource) Update(ctx context.Context, req resource.UpdateRequest, 
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
+	if v, ok := updated.Spec["enable_default_fleet_config_download"].(bool); ok {
+		data.EnableDefaultFleetConfigDownload = types.BoolValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["fleet_label"].(string); ok && v != "" {
+		data.FleetLabel = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["operating_system_version"].(string); ok && v != "" {
+		data.OperatingSystemVersion = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["volterra_software_version"].(string); ok && v != "" {
+		data.VolterraSoftwareVersion = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -2988,6 +4139,7 @@ func (r *FleetResource) Update(ctx context.Context, req resource.UpdateRequest, 
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -3014,6 +4166,15 @@ func (r *FleetResource) Delete(ctx context.Context, req resource.DeleteRequest, 
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "Fleet already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "Fleet delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

@@ -12,6 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -68,11 +69,11 @@ type ForwardingClassResourceModel struct {
 	Annotations types.Map `tfsdk:"annotations"`
 	Description types.String `tfsdk:"description"`
 	Disable types.Bool `tfsdk:"disable"`
-	InterfaceGroup types.String `tfsdk:"interface_group"`
 	Labels types.Map `tfsdk:"labels"`
+	ID types.String `tfsdk:"id"`
+	InterfaceGroup types.String `tfsdk:"interface_group"`
 	QueueIDToUse types.String `tfsdk:"queue_id_to_use"`
 	TosValue types.Int64 `tfsdk:"tos_value"`
-	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
 	Dscp *ForwardingClassDscpModel `tfsdk:"dscp"`
 	DscpBasedQueue *ForwardingClassEmptyModel `tfsdk:"dscp_based_queue"`
@@ -123,28 +124,40 @@ func (r *ForwardingClassResource) Schema(ctx context.Context, req resource.Schem
 				MarkdownDescription: "A value of true will administratively disable the object.",
 				Optional: true,
 			},
-			"interface_group": schema.StringAttribute{
-				MarkdownDescription: "Interface Group. Interface group, group membership by adding group label to interface Choose any of the available interfaces Choose all interfaces with label group1 Choose all interfaces with label group2 Choose all interfaces with label group3. Possible values are `ANY_AVAILABLE_INTERFACE`, `INTERFACE_GROUP1`, `INTERFACE_GROUP2`, `INTERFACE_GROUP3`. Defaults to `ANY_AVAILABLE_INTERFACE`.",
-				Optional: true,
-			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
 				Optional: true,
 				ElementType: types.StringType,
-			},
-			"queue_id_to_use": schema.StringAttribute{
-				MarkdownDescription: "Precedence Level Values. DSCP Precedence Level Values Best Effort service will get any available bandwidth DSCP Class 1 service DSCP Class 2 service DSCP Class 3 service DSCP Class 4 service Express Forwarding is used for low latency traffic Control is used for routing traffic, not recommended Link Layer traffic like LACP or keepalive, not recommended. Possible values are `DSCP_BEST_EFFORT`, `DSCP_CLASS1`, `DSCP_CLASS2`, `DSCP_CLASS3`, `DSCP_CLASS4`, `DSCP_EXPRESS_FORWARDING`, `DSCP_CONTROL_L3`, `DSCP_CONTROL_L2`. Defaults to `DSCP_BEST_EFFORT`.",
-				Optional: true,
-			},
-			"tos_value": schema.Int64Attribute{
-				MarkdownDescription: "TOS value. Decimal value of raw 8 bit TOS. In above example DSCP 10 = Precedence Class 1 and drop precedence low",
-				Optional: true,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
 				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"interface_group": schema.StringAttribute{
+				MarkdownDescription: "Interface Group. Interface group, group membership by adding group label to interface Choose any of the available interfaces Choose all interfaces with label group1 Choose all interfaces with label group2 Choose all interfaces with label group3. Possible values are `ANY_AVAILABLE_INTERFACE`, `INTERFACE_GROUP1`, `INTERFACE_GROUP2`, `INTERFACE_GROUP3`. Defaults to `ANY_AVAILABLE_INTERFACE`.",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"queue_id_to_use": schema.StringAttribute{
+				MarkdownDescription: "Precedence Level Values. DSCP Precedence Level Values Best Effort service will get any available bandwidth DSCP Class 1 service DSCP Class 2 service DSCP Class 3 service DSCP Class 4 service Express Forwarding is used for low latency traffic Control is used for routing traffic, not recommended Link Layer traffic like LACP or keepalive, not recommended. Possible values are `DSCP_BEST_EFFORT`, `DSCP_CLASS1`, `DSCP_CLASS2`, `DSCP_CLASS3`, `DSCP_CLASS4`, `DSCP_EXPRESS_FORWARDING`, `DSCP_CONTROL_L3`, `DSCP_CONTROL_L2`. Defaults to `DSCP_BEST_EFFORT`.",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"tos_value": schema.Int64Attribute{
+				MarkdownDescription: "TOS value. Decimal value of raw 8 bit TOS. In above example DSCP 10 = Precedence Class 1 and drop precedence low",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.Int64{
+					int64planmodifier.UseStateForUnknown(),
 				},
 			},
 		},
@@ -318,7 +331,7 @@ func (r *ForwardingClassResource) Create(ctx context.Context, req resource.Creat
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.ForwardingClassSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -343,6 +356,53 @@ func (r *ForwardingClassResource) Create(ctx context.Context, req resource.Creat
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.Dscp != nil {
+		dscpMap := make(map[string]interface{})
+		if !data.Dscp.DropPrecedence.IsNull() && !data.Dscp.DropPrecedence.IsUnknown() {
+			dscpMap["drop_precedence"] = data.Dscp.DropPrecedence.ValueString()
+		}
+		if !data.Dscp.DscpClass.IsNull() && !data.Dscp.DscpClass.IsUnknown() {
+			dscpMap["dscp_class"] = data.Dscp.DscpClass.ValueString()
+		}
+		apiResource.Spec["dscp"] = dscpMap
+	}
+	if data.DscpBasedQueue != nil {
+		dscp_based_queueMap := make(map[string]interface{})
+		apiResource.Spec["dscp_based_queue"] = dscp_based_queueMap
+	}
+	if data.NoMarking != nil {
+		no_markingMap := make(map[string]interface{})
+		apiResource.Spec["no_marking"] = no_markingMap
+	}
+	if data.NoPolicer != nil {
+		no_policerMap := make(map[string]interface{})
+		apiResource.Spec["no_policer"] = no_policerMap
+	}
+	if data.Policer != nil {
+		policerMap := make(map[string]interface{})
+		if !data.Policer.Name.IsNull() && !data.Policer.Name.IsUnknown() {
+			policerMap["name"] = data.Policer.Name.ValueString()
+		}
+		if !data.Policer.Namespace.IsNull() && !data.Policer.Namespace.IsUnknown() {
+			policerMap["namespace"] = data.Policer.Namespace.ValueString()
+		}
+		if !data.Policer.Tenant.IsNull() && !data.Policer.Tenant.IsUnknown() {
+			policerMap["tenant"] = data.Policer.Tenant.ValueString()
+		}
+		apiResource.Spec["policer"] = policerMap
+	}
+	if !data.InterfaceGroup.IsNull() && !data.InterfaceGroup.IsUnknown() {
+		apiResource.Spec["interface_group"] = data.InterfaceGroup.ValueString()
+	}
+	if !data.QueueIDToUse.IsNull() && !data.QueueIDToUse.IsUnknown() {
+		apiResource.Spec["queue_id_to_use"] = data.QueueIDToUse.ValueString()
+	}
+	if !data.TosValue.IsNull() && !data.TosValue.IsUnknown() {
+		apiResource.Spec["tos_value"] = data.TosValue.ValueInt64()
+	}
+
+
 	created, err := r.client.CreateForwardingClass(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create ForwardingClass: %s", err))
@@ -351,8 +411,25 @@ func (r *ForwardingClassResource) Create(ctx context.Context, req resource.Creat
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+	if v, ok := created.Spec["interface_group"].(string); ok && v != "" {
+		data.InterfaceGroup = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["queue_id_to_use"].(string); ok && v != "" {
+		data.QueueIDToUse = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["tos_value"].(float64); ok {
+		data.TosValue = types.Int64Value(int64(v))
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created ForwardingClass resource")
@@ -431,9 +508,93 @@ func (r *ForwardingClassResource) Read(ctx context.Context, req resource.ReadReq
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if blockData, ok := apiResource.Spec["dscp"].(map[string]interface{}); ok && (isImport || data.Dscp != nil) {
+		data.Dscp = &ForwardingClassDscpModel{
+			DropPrecedence: func() types.String {
+				if v, ok := blockData["drop_precedence"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			DscpClass: func() types.String {
+				if v, ok := blockData["dscp_class"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["dscp_based_queue"].(map[string]interface{}); ok && isImport && data.DscpBasedQueue == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DscpBasedQueue = &ForwardingClassEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_marking"].(map[string]interface{}); ok && isImport && data.NoMarking == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoMarking = &ForwardingClassEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_policer"].(map[string]interface{}); ok && isImport && data.NoPolicer == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoPolicer = &ForwardingClassEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["policer"].(map[string]interface{}); ok && (isImport || data.Policer != nil) {
+		data.Policer = &ForwardingClassPolicerModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if v, ok := apiResource.Spec["interface_group"].(string); ok && v != "" {
+		data.InterfaceGroup = types.StringValue(v)
+	} else {
+		data.InterfaceGroup = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["queue_id_to_use"].(string); ok && v != "" {
+		data.QueueIDToUse = types.StringValue(v)
+	} else {
+		data.QueueIDToUse = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["tos_value"].(float64); ok {
+		data.TosValue = types.Int64Value(int64(v))
+	} else {
+		data.TosValue = types.Int64Null()
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -459,7 +620,7 @@ func (r *ForwardingClassResource) Update(ctx context.Context, req resource.Updat
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.ForwardingClassSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -484,6 +645,53 @@ func (r *ForwardingClassResource) Update(ctx context.Context, req resource.Updat
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.Dscp != nil {
+		dscpMap := make(map[string]interface{})
+		if !data.Dscp.DropPrecedence.IsNull() && !data.Dscp.DropPrecedence.IsUnknown() {
+			dscpMap["drop_precedence"] = data.Dscp.DropPrecedence.ValueString()
+		}
+		if !data.Dscp.DscpClass.IsNull() && !data.Dscp.DscpClass.IsUnknown() {
+			dscpMap["dscp_class"] = data.Dscp.DscpClass.ValueString()
+		}
+		apiResource.Spec["dscp"] = dscpMap
+	}
+	if data.DscpBasedQueue != nil {
+		dscp_based_queueMap := make(map[string]interface{})
+		apiResource.Spec["dscp_based_queue"] = dscp_based_queueMap
+	}
+	if data.NoMarking != nil {
+		no_markingMap := make(map[string]interface{})
+		apiResource.Spec["no_marking"] = no_markingMap
+	}
+	if data.NoPolicer != nil {
+		no_policerMap := make(map[string]interface{})
+		apiResource.Spec["no_policer"] = no_policerMap
+	}
+	if data.Policer != nil {
+		policerMap := make(map[string]interface{})
+		if !data.Policer.Name.IsNull() && !data.Policer.Name.IsUnknown() {
+			policerMap["name"] = data.Policer.Name.ValueString()
+		}
+		if !data.Policer.Namespace.IsNull() && !data.Policer.Namespace.IsUnknown() {
+			policerMap["namespace"] = data.Policer.Namespace.ValueString()
+		}
+		if !data.Policer.Tenant.IsNull() && !data.Policer.Tenant.IsUnknown() {
+			policerMap["tenant"] = data.Policer.Tenant.ValueString()
+		}
+		apiResource.Spec["policer"] = policerMap
+	}
+	if !data.InterfaceGroup.IsNull() && !data.InterfaceGroup.IsUnknown() {
+		apiResource.Spec["interface_group"] = data.InterfaceGroup.ValueString()
+	}
+	if !data.QueueIDToUse.IsNull() && !data.QueueIDToUse.IsUnknown() {
+		apiResource.Spec["queue_id_to_use"] = data.QueueIDToUse.ValueString()
+	}
+	if !data.TosValue.IsNull() && !data.TosValue.IsUnknown() {
+		apiResource.Spec["tos_value"] = data.TosValue.ValueInt64()
+	}
+
+
 	updated, err := r.client.UpdateForwardingClass(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update ForwardingClass: %s", err))
@@ -492,6 +700,20 @@ func (r *ForwardingClassResource) Update(ctx context.Context, req resource.Updat
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
+	if v, ok := updated.Spec["interface_group"].(string); ok && v != "" {
+		data.InterfaceGroup = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["queue_id_to_use"].(string); ok && v != "" {
+		data.QueueIDToUse = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["tos_value"].(float64); ok {
+		data.TosValue = types.Int64Value(int64(v))
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -504,6 +726,7 @@ func (r *ForwardingClassResource) Update(ctx context.Context, req resource.Updat
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -530,6 +753,15 @@ func (r *ForwardingClassResource) Delete(ctx context.Context, req resource.Delet
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "ForwardingClass already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "ForwardingClass delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

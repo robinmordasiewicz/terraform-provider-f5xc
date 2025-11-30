@@ -12,6 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -61,11 +62,11 @@ type CRLResourceModel struct {
 	Description types.String `tfsdk:"description"`
 	Disable types.Bool `tfsdk:"disable"`
 	Labels types.Map `tfsdk:"labels"`
+	ID types.String `tfsdk:"id"`
 	RefreshInterval types.Int64 `tfsdk:"refresh_interval"`
 	ServerAddress types.String `tfsdk:"server_address"`
 	ServerPort types.Int64 `tfsdk:"server_port"`
 	Timeout types.Int64 `tfsdk:"timeout"`
-	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
 	HTTPAccess *CRLHTTPAccessModel `tfsdk:"http_access"`
 }
@@ -117,27 +118,43 @@ func (r *CRLResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 				Optional: true,
 				ElementType: types.StringType,
 			},
-			"refresh_interval": schema.Int64Attribute{
-				MarkdownDescription: "CRL Refresh interval. CRL refresh interval, in hours.",
-				Optional: true,
-			},
-			"server_address": schema.StringAttribute{
-				MarkdownDescription: "CRL Server address. CRL server address or hostname",
-				Optional: true,
-			},
-			"server_port": schema.Int64Attribute{
-				MarkdownDescription: "CRL Server Port. Set CRL Server port number",
-				Optional: true,
-			},
-			"timeout": schema.Int64Attribute{
-				MarkdownDescription: "CRL download timeout. CRL download wait time, in seconds",
-				Optional: true,
-			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
 				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"refresh_interval": schema.Int64Attribute{
+				MarkdownDescription: "CRL Refresh interval. CRL refresh interval, in hours.",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.Int64{
+					int64planmodifier.UseStateForUnknown(),
+				},
+			},
+			"server_address": schema.StringAttribute{
+				MarkdownDescription: "CRL Server address. CRL server address or hostname",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"server_port": schema.Int64Attribute{
+				MarkdownDescription: "CRL Server Port. Set CRL Server port number",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.Int64{
+					int64planmodifier.UseStateForUnknown(),
+				},
+			},
+			"timeout": schema.Int64Attribute{
+				MarkdownDescription: "CRL download timeout. CRL download wait time, in seconds",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.Int64{
+					int64planmodifier.UseStateForUnknown(),
 				},
 			},
 		},
@@ -280,7 +297,7 @@ func (r *CRLResource) Create(ctx context.Context, req resource.CreateRequest, re
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.CRLSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -305,6 +322,28 @@ func (r *CRLResource) Create(ctx context.Context, req resource.CreateRequest, re
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.HTTPAccess != nil {
+		http_accessMap := make(map[string]interface{})
+		if !data.HTTPAccess.Path.IsNull() && !data.HTTPAccess.Path.IsUnknown() {
+			http_accessMap["path"] = data.HTTPAccess.Path.ValueString()
+		}
+		apiResource.Spec["http_access"] = http_accessMap
+	}
+	if !data.RefreshInterval.IsNull() && !data.RefreshInterval.IsUnknown() {
+		apiResource.Spec["refresh_interval"] = data.RefreshInterval.ValueInt64()
+	}
+	if !data.ServerAddress.IsNull() && !data.ServerAddress.IsUnknown() {
+		apiResource.Spec["server_address"] = data.ServerAddress.ValueString()
+	}
+	if !data.ServerPort.IsNull() && !data.ServerPort.IsUnknown() {
+		apiResource.Spec["server_port"] = data.ServerPort.ValueInt64()
+	}
+	if !data.Timeout.IsNull() && !data.Timeout.IsUnknown() {
+		apiResource.Spec["timeout"] = data.Timeout.ValueInt64()
+	}
+
+
 	created, err := r.client.CreateCRL(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create CRL: %s", err))
@@ -313,8 +352,29 @@ func (r *CRLResource) Create(ctx context.Context, req resource.CreateRequest, re
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+	if v, ok := created.Spec["refresh_interval"].(float64); ok {
+		data.RefreshInterval = types.Int64Value(int64(v))
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["server_address"].(string); ok && v != "" {
+		data.ServerAddress = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["server_port"].(float64); ok {
+		data.ServerPort = types.Int64Value(int64(v))
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["timeout"].(float64); ok {
+		data.Timeout = types.Int64Value(int64(v))
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created CRL resource")
@@ -393,9 +453,55 @@ func (r *CRLResource) Read(ctx context.Context, req resource.ReadRequest, resp *
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if blockData, ok := apiResource.Spec["http_access"].(map[string]interface{}); ok && (isImport || data.HTTPAccess != nil) {
+		data.HTTPAccess = &CRLHTTPAccessModel{
+			Path: func() types.String {
+				if v, ok := blockData["path"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if v, ok := apiResource.Spec["refresh_interval"].(float64); ok {
+		data.RefreshInterval = types.Int64Value(int64(v))
+	} else {
+		data.RefreshInterval = types.Int64Null()
+	}
+	if v, ok := apiResource.Spec["server_address"].(string); ok && v != "" {
+		data.ServerAddress = types.StringValue(v)
+	} else {
+		data.ServerAddress = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["server_port"].(float64); ok {
+		data.ServerPort = types.Int64Value(int64(v))
+	} else {
+		data.ServerPort = types.Int64Null()
+	}
+	if v, ok := apiResource.Spec["timeout"].(float64); ok {
+		data.Timeout = types.Int64Value(int64(v))
+	} else {
+		data.Timeout = types.Int64Null()
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -421,7 +527,7 @@ func (r *CRLResource) Update(ctx context.Context, req resource.UpdateRequest, re
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.CRLSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -446,6 +552,28 @@ func (r *CRLResource) Update(ctx context.Context, req resource.UpdateRequest, re
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.HTTPAccess != nil {
+		http_accessMap := make(map[string]interface{})
+		if !data.HTTPAccess.Path.IsNull() && !data.HTTPAccess.Path.IsUnknown() {
+			http_accessMap["path"] = data.HTTPAccess.Path.ValueString()
+		}
+		apiResource.Spec["http_access"] = http_accessMap
+	}
+	if !data.RefreshInterval.IsNull() && !data.RefreshInterval.IsUnknown() {
+		apiResource.Spec["refresh_interval"] = data.RefreshInterval.ValueInt64()
+	}
+	if !data.ServerAddress.IsNull() && !data.ServerAddress.IsUnknown() {
+		apiResource.Spec["server_address"] = data.ServerAddress.ValueString()
+	}
+	if !data.ServerPort.IsNull() && !data.ServerPort.IsUnknown() {
+		apiResource.Spec["server_port"] = data.ServerPort.ValueInt64()
+	}
+	if !data.Timeout.IsNull() && !data.Timeout.IsUnknown() {
+		apiResource.Spec["timeout"] = data.Timeout.ValueInt64()
+	}
+
+
 	updated, err := r.client.UpdateCRL(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update CRL: %s", err))
@@ -454,6 +582,24 @@ func (r *CRLResource) Update(ctx context.Context, req resource.UpdateRequest, re
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
+	if v, ok := updated.Spec["refresh_interval"].(float64); ok {
+		data.RefreshInterval = types.Int64Value(int64(v))
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["server_address"].(string); ok && v != "" {
+		data.ServerAddress = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["server_port"].(float64); ok {
+		data.ServerPort = types.Int64Value(int64(v))
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["timeout"].(float64); ok {
+		data.Timeout = types.Int64Value(int64(v))
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -466,6 +612,7 @@ func (r *CRLResource) Update(ctx context.Context, req resource.UpdateRequest, re
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -492,6 +639,15 @@ func (r *CRLResource) Delete(ctx context.Context, req resource.DeleteRequest, re
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "CRL already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "CRL delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

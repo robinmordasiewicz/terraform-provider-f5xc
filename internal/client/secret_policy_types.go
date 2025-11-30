@@ -10,19 +10,14 @@ import (
 
 // SecretPolicy represents a F5XC SecretPolicy
 type SecretPolicy struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     SecretPolicySpec `json:"spec"`
-}
-
-// SecretPolicySpec defines the specification for SecretPolicy
-type SecretPolicySpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateSecretPolicy creates a new SecretPolicy
 func (c *Client) CreateSecretPolicy(ctx context.Context, resource *SecretPolicy) (*SecretPolicy, error) {
 	var result SecretPolicy
-	path := fmt.Sprintf("/api/config/namespaces/%s/secret_policys", resource.Metadata.Namespace)
+	path := fmt.Sprintf("/api/secret_management/namespaces/%s/secret_policys", resource.Metadata.Namespace)
 	err := c.Post(ctx, path, resource, &result)
 	return &result, err
 }
@@ -30,7 +25,7 @@ func (c *Client) CreateSecretPolicy(ctx context.Context, resource *SecretPolicy)
 // GetSecretPolicy retrieves a SecretPolicy
 func (c *Client) GetSecretPolicy(ctx context.Context, namespace, name string) (*SecretPolicy, error) {
 	var result SecretPolicy
-	path := fmt.Sprintf("/api/config/namespaces/%s/secret_policys/%s", namespace, name)
+	path := fmt.Sprintf("/api/secret_management/namespaces/%s/secret_policys/%s", namespace, name)
 	err := c.Get(ctx, path, &result)
 	return &result, err
 }
@@ -38,13 +33,13 @@ func (c *Client) GetSecretPolicy(ctx context.Context, namespace, name string) (*
 // UpdateSecretPolicy updates a SecretPolicy
 func (c *Client) UpdateSecretPolicy(ctx context.Context, resource *SecretPolicy) (*SecretPolicy, error) {
 	var result SecretPolicy
-	path := fmt.Sprintf("/api/config/namespaces/%s/secret_policys/%s", resource.Metadata.Namespace, resource.Metadata.Name)
+	path := fmt.Sprintf("/api/secret_management/namespaces/%s/secret_policys/%s", resource.Metadata.Namespace, resource.Metadata.Name)
 	err := c.Put(ctx, path, resource, &result)
 	return &result, err
 }
 
 // DeleteSecretPolicy deletes a SecretPolicy
 func (c *Client) DeleteSecretPolicy(ctx context.Context, namespace, name string) error {
-	path := fmt.Sprintf("/api/config/namespaces/%s/secret_policys/%s", namespace, name)
+	path := fmt.Sprintf("/api/secret_management/namespaces/%s/secret_policys/%s", namespace, name)
 	return c.Delete(ctx, path)
 }

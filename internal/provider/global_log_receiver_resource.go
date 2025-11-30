@@ -2331,7 +2331,7 @@ func (r *GlobalLogReceiverResource) Create(ctx context.Context, req resource.Cre
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.GlobalLogReceiverSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -2356,6 +2356,437 @@ func (r *GlobalLogReceiverResource) Create(ctx context.Context, req resource.Cre
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.AuditLogs != nil {
+		audit_logsMap := make(map[string]interface{})
+		apiResource.Spec["audit_logs"] = audit_logsMap
+	}
+	if data.AWSCloudWatchReceiver != nil {
+		aws_cloud_watch_receiverMap := make(map[string]interface{})
+		if data.AWSCloudWatchReceiver.AWSCred != nil {
+			aws_credNestedMap := make(map[string]interface{})
+			if !data.AWSCloudWatchReceiver.AWSCred.Name.IsNull() && !data.AWSCloudWatchReceiver.AWSCred.Name.IsUnknown() {
+				aws_credNestedMap["name"] = data.AWSCloudWatchReceiver.AWSCred.Name.ValueString()
+			}
+			if !data.AWSCloudWatchReceiver.AWSCred.Namespace.IsNull() && !data.AWSCloudWatchReceiver.AWSCred.Namespace.IsUnknown() {
+				aws_credNestedMap["namespace"] = data.AWSCloudWatchReceiver.AWSCred.Namespace.ValueString()
+			}
+			if !data.AWSCloudWatchReceiver.AWSCred.Tenant.IsNull() && !data.AWSCloudWatchReceiver.AWSCred.Tenant.IsUnknown() {
+				aws_credNestedMap["tenant"] = data.AWSCloudWatchReceiver.AWSCred.Tenant.ValueString()
+			}
+			aws_cloud_watch_receiverMap["aws_cred"] = aws_credNestedMap
+		}
+		if !data.AWSCloudWatchReceiver.AWSRegion.IsNull() && !data.AWSCloudWatchReceiver.AWSRegion.IsUnknown() {
+			aws_cloud_watch_receiverMap["aws_region"] = data.AWSCloudWatchReceiver.AWSRegion.ValueString()
+		}
+		if data.AWSCloudWatchReceiver.Batch != nil {
+			batchNestedMap := make(map[string]interface{})
+			if !data.AWSCloudWatchReceiver.Batch.MaxBytes.IsNull() && !data.AWSCloudWatchReceiver.Batch.MaxBytes.IsUnknown() {
+				batchNestedMap["max_bytes"] = data.AWSCloudWatchReceiver.Batch.MaxBytes.ValueInt64()
+			}
+			if !data.AWSCloudWatchReceiver.Batch.MaxEvents.IsNull() && !data.AWSCloudWatchReceiver.Batch.MaxEvents.IsUnknown() {
+				batchNestedMap["max_events"] = data.AWSCloudWatchReceiver.Batch.MaxEvents.ValueInt64()
+			}
+			if !data.AWSCloudWatchReceiver.Batch.TimeoutSeconds.IsNull() && !data.AWSCloudWatchReceiver.Batch.TimeoutSeconds.IsUnknown() {
+				batchNestedMap["timeout_seconds"] = data.AWSCloudWatchReceiver.Batch.TimeoutSeconds.ValueString()
+			}
+			aws_cloud_watch_receiverMap["batch"] = batchNestedMap
+		}
+		if data.AWSCloudWatchReceiver.Compression != nil {
+			compressionNestedMap := make(map[string]interface{})
+			aws_cloud_watch_receiverMap["compression"] = compressionNestedMap
+		}
+		if !data.AWSCloudWatchReceiver.GroupName.IsNull() && !data.AWSCloudWatchReceiver.GroupName.IsUnknown() {
+			aws_cloud_watch_receiverMap["group_name"] = data.AWSCloudWatchReceiver.GroupName.ValueString()
+		}
+		if !data.AWSCloudWatchReceiver.StreamName.IsNull() && !data.AWSCloudWatchReceiver.StreamName.IsUnknown() {
+			aws_cloud_watch_receiverMap["stream_name"] = data.AWSCloudWatchReceiver.StreamName.ValueString()
+		}
+		apiResource.Spec["aws_cloud_watch_receiver"] = aws_cloud_watch_receiverMap
+	}
+	if data.AzureEventHubsReceiver != nil {
+		azure_event_hubs_receiverMap := make(map[string]interface{})
+		if data.AzureEventHubsReceiver.ConnectionString != nil {
+			connection_stringNestedMap := make(map[string]interface{})
+			azure_event_hubs_receiverMap["connection_string"] = connection_stringNestedMap
+		}
+		if !data.AzureEventHubsReceiver.Instance.IsNull() && !data.AzureEventHubsReceiver.Instance.IsUnknown() {
+			azure_event_hubs_receiverMap["instance"] = data.AzureEventHubsReceiver.Instance.ValueString()
+		}
+		if !data.AzureEventHubsReceiver.Namespace.IsNull() && !data.AzureEventHubsReceiver.Namespace.IsUnknown() {
+			azure_event_hubs_receiverMap["namespace"] = data.AzureEventHubsReceiver.Namespace.ValueString()
+		}
+		apiResource.Spec["azure_event_hubs_receiver"] = azure_event_hubs_receiverMap
+	}
+	if data.AzureReceiver != nil {
+		azure_receiverMap := make(map[string]interface{})
+		if data.AzureReceiver.Batch != nil {
+			batchNestedMap := make(map[string]interface{})
+			if !data.AzureReceiver.Batch.MaxBytes.IsNull() && !data.AzureReceiver.Batch.MaxBytes.IsUnknown() {
+				batchNestedMap["max_bytes"] = data.AzureReceiver.Batch.MaxBytes.ValueInt64()
+			}
+			if !data.AzureReceiver.Batch.MaxEvents.IsNull() && !data.AzureReceiver.Batch.MaxEvents.IsUnknown() {
+				batchNestedMap["max_events"] = data.AzureReceiver.Batch.MaxEvents.ValueInt64()
+			}
+			if !data.AzureReceiver.Batch.TimeoutSeconds.IsNull() && !data.AzureReceiver.Batch.TimeoutSeconds.IsUnknown() {
+				batchNestedMap["timeout_seconds"] = data.AzureReceiver.Batch.TimeoutSeconds.ValueString()
+			}
+			azure_receiverMap["batch"] = batchNestedMap
+		}
+		if data.AzureReceiver.Compression != nil {
+			compressionNestedMap := make(map[string]interface{})
+			azure_receiverMap["compression"] = compressionNestedMap
+		}
+		if data.AzureReceiver.ConnectionString != nil {
+			connection_stringNestedMap := make(map[string]interface{})
+			azure_receiverMap["connection_string"] = connection_stringNestedMap
+		}
+		if !data.AzureReceiver.ContainerName.IsNull() && !data.AzureReceiver.ContainerName.IsUnknown() {
+			azure_receiverMap["container_name"] = data.AzureReceiver.ContainerName.ValueString()
+		}
+		if data.AzureReceiver.FilenameOptions != nil {
+			filename_optionsNestedMap := make(map[string]interface{})
+			if !data.AzureReceiver.FilenameOptions.CustomFolder.IsNull() && !data.AzureReceiver.FilenameOptions.CustomFolder.IsUnknown() {
+				filename_optionsNestedMap["custom_folder"] = data.AzureReceiver.FilenameOptions.CustomFolder.ValueString()
+			}
+			azure_receiverMap["filename_options"] = filename_optionsNestedMap
+		}
+		apiResource.Spec["azure_receiver"] = azure_receiverMap
+	}
+	if data.DatadogReceiver != nil {
+		datadog_receiverMap := make(map[string]interface{})
+		if data.DatadogReceiver.Batch != nil {
+			batchNestedMap := make(map[string]interface{})
+			if !data.DatadogReceiver.Batch.MaxBytes.IsNull() && !data.DatadogReceiver.Batch.MaxBytes.IsUnknown() {
+				batchNestedMap["max_bytes"] = data.DatadogReceiver.Batch.MaxBytes.ValueInt64()
+			}
+			if !data.DatadogReceiver.Batch.MaxEvents.IsNull() && !data.DatadogReceiver.Batch.MaxEvents.IsUnknown() {
+				batchNestedMap["max_events"] = data.DatadogReceiver.Batch.MaxEvents.ValueInt64()
+			}
+			if !data.DatadogReceiver.Batch.TimeoutSeconds.IsNull() && !data.DatadogReceiver.Batch.TimeoutSeconds.IsUnknown() {
+				batchNestedMap["timeout_seconds"] = data.DatadogReceiver.Batch.TimeoutSeconds.ValueString()
+			}
+			datadog_receiverMap["batch"] = batchNestedMap
+		}
+		if data.DatadogReceiver.Compression != nil {
+			compressionNestedMap := make(map[string]interface{})
+			datadog_receiverMap["compression"] = compressionNestedMap
+		}
+		if data.DatadogReceiver.DatadogAPIKey != nil {
+			datadog_api_keyNestedMap := make(map[string]interface{})
+			datadog_receiverMap["datadog_api_key"] = datadog_api_keyNestedMap
+		}
+		if !data.DatadogReceiver.Endpoint.IsNull() && !data.DatadogReceiver.Endpoint.IsUnknown() {
+			datadog_receiverMap["endpoint"] = data.DatadogReceiver.Endpoint.ValueString()
+		}
+		if data.DatadogReceiver.NoTLS != nil {
+			datadog_receiverMap["no_tls"] = map[string]interface{}{}
+		}
+		if !data.DatadogReceiver.Site.IsNull() && !data.DatadogReceiver.Site.IsUnknown() {
+			datadog_receiverMap["site"] = data.DatadogReceiver.Site.ValueString()
+		}
+		if data.DatadogReceiver.UseTLS != nil {
+			use_tlsNestedMap := make(map[string]interface{})
+			if !data.DatadogReceiver.UseTLS.TrustedCaURL.IsNull() && !data.DatadogReceiver.UseTLS.TrustedCaURL.IsUnknown() {
+				use_tlsNestedMap["trusted_ca_url"] = data.DatadogReceiver.UseTLS.TrustedCaURL.ValueString()
+			}
+			datadog_receiverMap["use_tls"] = use_tlsNestedMap
+		}
+		apiResource.Spec["datadog_receiver"] = datadog_receiverMap
+	}
+	if data.DNSLogs != nil {
+		dns_logsMap := make(map[string]interface{})
+		apiResource.Spec["dns_logs"] = dns_logsMap
+	}
+	if data.GCPBucketReceiver != nil {
+		gcp_bucket_receiverMap := make(map[string]interface{})
+		if data.GCPBucketReceiver.Batch != nil {
+			batchNestedMap := make(map[string]interface{})
+			if !data.GCPBucketReceiver.Batch.MaxBytes.IsNull() && !data.GCPBucketReceiver.Batch.MaxBytes.IsUnknown() {
+				batchNestedMap["max_bytes"] = data.GCPBucketReceiver.Batch.MaxBytes.ValueInt64()
+			}
+			if !data.GCPBucketReceiver.Batch.MaxEvents.IsNull() && !data.GCPBucketReceiver.Batch.MaxEvents.IsUnknown() {
+				batchNestedMap["max_events"] = data.GCPBucketReceiver.Batch.MaxEvents.ValueInt64()
+			}
+			if !data.GCPBucketReceiver.Batch.TimeoutSeconds.IsNull() && !data.GCPBucketReceiver.Batch.TimeoutSeconds.IsUnknown() {
+				batchNestedMap["timeout_seconds"] = data.GCPBucketReceiver.Batch.TimeoutSeconds.ValueString()
+			}
+			gcp_bucket_receiverMap["batch"] = batchNestedMap
+		}
+		if !data.GCPBucketReceiver.Bucket.IsNull() && !data.GCPBucketReceiver.Bucket.IsUnknown() {
+			gcp_bucket_receiverMap["bucket"] = data.GCPBucketReceiver.Bucket.ValueString()
+		}
+		if data.GCPBucketReceiver.Compression != nil {
+			compressionNestedMap := make(map[string]interface{})
+			gcp_bucket_receiverMap["compression"] = compressionNestedMap
+		}
+		if data.GCPBucketReceiver.FilenameOptions != nil {
+			filename_optionsNestedMap := make(map[string]interface{})
+			if !data.GCPBucketReceiver.FilenameOptions.CustomFolder.IsNull() && !data.GCPBucketReceiver.FilenameOptions.CustomFolder.IsUnknown() {
+				filename_optionsNestedMap["custom_folder"] = data.GCPBucketReceiver.FilenameOptions.CustomFolder.ValueString()
+			}
+			gcp_bucket_receiverMap["filename_options"] = filename_optionsNestedMap
+		}
+		if data.GCPBucketReceiver.GCPCred != nil {
+			gcp_credNestedMap := make(map[string]interface{})
+			if !data.GCPBucketReceiver.GCPCred.Name.IsNull() && !data.GCPBucketReceiver.GCPCred.Name.IsUnknown() {
+				gcp_credNestedMap["name"] = data.GCPBucketReceiver.GCPCred.Name.ValueString()
+			}
+			if !data.GCPBucketReceiver.GCPCred.Namespace.IsNull() && !data.GCPBucketReceiver.GCPCred.Namespace.IsUnknown() {
+				gcp_credNestedMap["namespace"] = data.GCPBucketReceiver.GCPCred.Namespace.ValueString()
+			}
+			if !data.GCPBucketReceiver.GCPCred.Tenant.IsNull() && !data.GCPBucketReceiver.GCPCred.Tenant.IsUnknown() {
+				gcp_credNestedMap["tenant"] = data.GCPBucketReceiver.GCPCred.Tenant.ValueString()
+			}
+			gcp_bucket_receiverMap["gcp_cred"] = gcp_credNestedMap
+		}
+		apiResource.Spec["gcp_bucket_receiver"] = gcp_bucket_receiverMap
+	}
+	if data.HTTPReceiver != nil {
+		http_receiverMap := make(map[string]interface{})
+		if data.HTTPReceiver.AuthBasic != nil {
+			auth_basicNestedMap := make(map[string]interface{})
+			if !data.HTTPReceiver.AuthBasic.UserName.IsNull() && !data.HTTPReceiver.AuthBasic.UserName.IsUnknown() {
+				auth_basicNestedMap["user_name"] = data.HTTPReceiver.AuthBasic.UserName.ValueString()
+			}
+			http_receiverMap["auth_basic"] = auth_basicNestedMap
+		}
+		if data.HTTPReceiver.AuthNone != nil {
+			http_receiverMap["auth_none"] = map[string]interface{}{}
+		}
+		if data.HTTPReceiver.AuthToken != nil {
+			auth_tokenNestedMap := make(map[string]interface{})
+			http_receiverMap["auth_token"] = auth_tokenNestedMap
+		}
+		if data.HTTPReceiver.Batch != nil {
+			batchNestedMap := make(map[string]interface{})
+			if !data.HTTPReceiver.Batch.MaxBytes.IsNull() && !data.HTTPReceiver.Batch.MaxBytes.IsUnknown() {
+				batchNestedMap["max_bytes"] = data.HTTPReceiver.Batch.MaxBytes.ValueInt64()
+			}
+			if !data.HTTPReceiver.Batch.MaxEvents.IsNull() && !data.HTTPReceiver.Batch.MaxEvents.IsUnknown() {
+				batchNestedMap["max_events"] = data.HTTPReceiver.Batch.MaxEvents.ValueInt64()
+			}
+			if !data.HTTPReceiver.Batch.TimeoutSeconds.IsNull() && !data.HTTPReceiver.Batch.TimeoutSeconds.IsUnknown() {
+				batchNestedMap["timeout_seconds"] = data.HTTPReceiver.Batch.TimeoutSeconds.ValueString()
+			}
+			http_receiverMap["batch"] = batchNestedMap
+		}
+		if data.HTTPReceiver.Compression != nil {
+			compressionNestedMap := make(map[string]interface{})
+			http_receiverMap["compression"] = compressionNestedMap
+		}
+		if data.HTTPReceiver.NoTLS != nil {
+			http_receiverMap["no_tls"] = map[string]interface{}{}
+		}
+		if !data.HTTPReceiver.URI.IsNull() && !data.HTTPReceiver.URI.IsUnknown() {
+			http_receiverMap["uri"] = data.HTTPReceiver.URI.ValueString()
+		}
+		if data.HTTPReceiver.UseTLS != nil {
+			use_tlsNestedMap := make(map[string]interface{})
+			if !data.HTTPReceiver.UseTLS.TrustedCaURL.IsNull() && !data.HTTPReceiver.UseTLS.TrustedCaURL.IsUnknown() {
+				use_tlsNestedMap["trusted_ca_url"] = data.HTTPReceiver.UseTLS.TrustedCaURL.ValueString()
+			}
+			http_receiverMap["use_tls"] = use_tlsNestedMap
+		}
+		apiResource.Spec["http_receiver"] = http_receiverMap
+	}
+	if data.KafkaReceiver != nil {
+		kafka_receiverMap := make(map[string]interface{})
+		if data.KafkaReceiver.Batch != nil {
+			batchNestedMap := make(map[string]interface{})
+			if !data.KafkaReceiver.Batch.MaxBytes.IsNull() && !data.KafkaReceiver.Batch.MaxBytes.IsUnknown() {
+				batchNestedMap["max_bytes"] = data.KafkaReceiver.Batch.MaxBytes.ValueInt64()
+			}
+			if !data.KafkaReceiver.Batch.MaxEvents.IsNull() && !data.KafkaReceiver.Batch.MaxEvents.IsUnknown() {
+				batchNestedMap["max_events"] = data.KafkaReceiver.Batch.MaxEvents.ValueInt64()
+			}
+			if !data.KafkaReceiver.Batch.TimeoutSeconds.IsNull() && !data.KafkaReceiver.Batch.TimeoutSeconds.IsUnknown() {
+				batchNestedMap["timeout_seconds"] = data.KafkaReceiver.Batch.TimeoutSeconds.ValueString()
+			}
+			kafka_receiverMap["batch"] = batchNestedMap
+		}
+		if data.KafkaReceiver.Compression != nil {
+			compressionNestedMap := make(map[string]interface{})
+			kafka_receiverMap["compression"] = compressionNestedMap
+		}
+		if !data.KafkaReceiver.KafkaTopic.IsNull() && !data.KafkaReceiver.KafkaTopic.IsUnknown() {
+			kafka_receiverMap["kafka_topic"] = data.KafkaReceiver.KafkaTopic.ValueString()
+		}
+		if data.KafkaReceiver.NoTLS != nil {
+			kafka_receiverMap["no_tls"] = map[string]interface{}{}
+		}
+		if data.KafkaReceiver.UseTLS != nil {
+			use_tlsNestedMap := make(map[string]interface{})
+			if !data.KafkaReceiver.UseTLS.TrustedCaURL.IsNull() && !data.KafkaReceiver.UseTLS.TrustedCaURL.IsUnknown() {
+				use_tlsNestedMap["trusted_ca_url"] = data.KafkaReceiver.UseTLS.TrustedCaURL.ValueString()
+			}
+			kafka_receiverMap["use_tls"] = use_tlsNestedMap
+		}
+		apiResource.Spec["kafka_receiver"] = kafka_receiverMap
+	}
+	if data.NewRelicReceiver != nil {
+		new_relic_receiverMap := make(map[string]interface{})
+		if data.NewRelicReceiver.APIKey != nil {
+			api_keyNestedMap := make(map[string]interface{})
+			new_relic_receiverMap["api_key"] = api_keyNestedMap
+		}
+		if data.NewRelicReceiver.Eu != nil {
+			new_relic_receiverMap["eu"] = map[string]interface{}{}
+		}
+		if data.NewRelicReceiver.Us != nil {
+			new_relic_receiverMap["us"] = map[string]interface{}{}
+		}
+		apiResource.Spec["new_relic_receiver"] = new_relic_receiverMap
+	}
+	if data.NsAll != nil {
+		ns_allMap := make(map[string]interface{})
+		apiResource.Spec["ns_all"] = ns_allMap
+	}
+	if data.NsCurrent != nil {
+		ns_currentMap := make(map[string]interface{})
+		apiResource.Spec["ns_current"] = ns_currentMap
+	}
+	if data.NsList != nil {
+		ns_listMap := make(map[string]interface{})
+		apiResource.Spec["ns_list"] = ns_listMap
+	}
+	if data.QradarReceiver != nil {
+		qradar_receiverMap := make(map[string]interface{})
+		if data.QradarReceiver.Batch != nil {
+			batchNestedMap := make(map[string]interface{})
+			if !data.QradarReceiver.Batch.MaxBytes.IsNull() && !data.QradarReceiver.Batch.MaxBytes.IsUnknown() {
+				batchNestedMap["max_bytes"] = data.QradarReceiver.Batch.MaxBytes.ValueInt64()
+			}
+			if !data.QradarReceiver.Batch.MaxEvents.IsNull() && !data.QradarReceiver.Batch.MaxEvents.IsUnknown() {
+				batchNestedMap["max_events"] = data.QradarReceiver.Batch.MaxEvents.ValueInt64()
+			}
+			if !data.QradarReceiver.Batch.TimeoutSeconds.IsNull() && !data.QradarReceiver.Batch.TimeoutSeconds.IsUnknown() {
+				batchNestedMap["timeout_seconds"] = data.QradarReceiver.Batch.TimeoutSeconds.ValueString()
+			}
+			qradar_receiverMap["batch"] = batchNestedMap
+		}
+		if data.QradarReceiver.Compression != nil {
+			compressionNestedMap := make(map[string]interface{})
+			qradar_receiverMap["compression"] = compressionNestedMap
+		}
+		if data.QradarReceiver.NoTLS != nil {
+			qradar_receiverMap["no_tls"] = map[string]interface{}{}
+		}
+		if !data.QradarReceiver.URI.IsNull() && !data.QradarReceiver.URI.IsUnknown() {
+			qradar_receiverMap["uri"] = data.QradarReceiver.URI.ValueString()
+		}
+		if data.QradarReceiver.UseTLS != nil {
+			use_tlsNestedMap := make(map[string]interface{})
+			if !data.QradarReceiver.UseTLS.TrustedCaURL.IsNull() && !data.QradarReceiver.UseTLS.TrustedCaURL.IsUnknown() {
+				use_tlsNestedMap["trusted_ca_url"] = data.QradarReceiver.UseTLS.TrustedCaURL.ValueString()
+			}
+			qradar_receiverMap["use_tls"] = use_tlsNestedMap
+		}
+		apiResource.Spec["qradar_receiver"] = qradar_receiverMap
+	}
+	if data.RequestLogs != nil {
+		request_logsMap := make(map[string]interface{})
+		apiResource.Spec["request_logs"] = request_logsMap
+	}
+	if data.S3Receiver != nil {
+		s3_receiverMap := make(map[string]interface{})
+		if data.S3Receiver.AWSCred != nil {
+			aws_credNestedMap := make(map[string]interface{})
+			if !data.S3Receiver.AWSCred.Name.IsNull() && !data.S3Receiver.AWSCred.Name.IsUnknown() {
+				aws_credNestedMap["name"] = data.S3Receiver.AWSCred.Name.ValueString()
+			}
+			if !data.S3Receiver.AWSCred.Namespace.IsNull() && !data.S3Receiver.AWSCred.Namespace.IsUnknown() {
+				aws_credNestedMap["namespace"] = data.S3Receiver.AWSCred.Namespace.ValueString()
+			}
+			if !data.S3Receiver.AWSCred.Tenant.IsNull() && !data.S3Receiver.AWSCred.Tenant.IsUnknown() {
+				aws_credNestedMap["tenant"] = data.S3Receiver.AWSCred.Tenant.ValueString()
+			}
+			s3_receiverMap["aws_cred"] = aws_credNestedMap
+		}
+		if !data.S3Receiver.AWSRegion.IsNull() && !data.S3Receiver.AWSRegion.IsUnknown() {
+			s3_receiverMap["aws_region"] = data.S3Receiver.AWSRegion.ValueString()
+		}
+		if data.S3Receiver.Batch != nil {
+			batchNestedMap := make(map[string]interface{})
+			if !data.S3Receiver.Batch.MaxBytes.IsNull() && !data.S3Receiver.Batch.MaxBytes.IsUnknown() {
+				batchNestedMap["max_bytes"] = data.S3Receiver.Batch.MaxBytes.ValueInt64()
+			}
+			if !data.S3Receiver.Batch.MaxEvents.IsNull() && !data.S3Receiver.Batch.MaxEvents.IsUnknown() {
+				batchNestedMap["max_events"] = data.S3Receiver.Batch.MaxEvents.ValueInt64()
+			}
+			if !data.S3Receiver.Batch.TimeoutSeconds.IsNull() && !data.S3Receiver.Batch.TimeoutSeconds.IsUnknown() {
+				batchNestedMap["timeout_seconds"] = data.S3Receiver.Batch.TimeoutSeconds.ValueString()
+			}
+			s3_receiverMap["batch"] = batchNestedMap
+		}
+		if !data.S3Receiver.Bucket.IsNull() && !data.S3Receiver.Bucket.IsUnknown() {
+			s3_receiverMap["bucket"] = data.S3Receiver.Bucket.ValueString()
+		}
+		if data.S3Receiver.Compression != nil {
+			compressionNestedMap := make(map[string]interface{})
+			s3_receiverMap["compression"] = compressionNestedMap
+		}
+		if data.S3Receiver.FilenameOptions != nil {
+			filename_optionsNestedMap := make(map[string]interface{})
+			if !data.S3Receiver.FilenameOptions.CustomFolder.IsNull() && !data.S3Receiver.FilenameOptions.CustomFolder.IsUnknown() {
+				filename_optionsNestedMap["custom_folder"] = data.S3Receiver.FilenameOptions.CustomFolder.ValueString()
+			}
+			s3_receiverMap["filename_options"] = filename_optionsNestedMap
+		}
+		apiResource.Spec["s3_receiver"] = s3_receiverMap
+	}
+	if data.SecurityEvents != nil {
+		security_eventsMap := make(map[string]interface{})
+		apiResource.Spec["security_events"] = security_eventsMap
+	}
+	if data.SplunkReceiver != nil {
+		splunk_receiverMap := make(map[string]interface{})
+		if data.SplunkReceiver.Batch != nil {
+			batchNestedMap := make(map[string]interface{})
+			if !data.SplunkReceiver.Batch.MaxBytes.IsNull() && !data.SplunkReceiver.Batch.MaxBytes.IsUnknown() {
+				batchNestedMap["max_bytes"] = data.SplunkReceiver.Batch.MaxBytes.ValueInt64()
+			}
+			if !data.SplunkReceiver.Batch.MaxEvents.IsNull() && !data.SplunkReceiver.Batch.MaxEvents.IsUnknown() {
+				batchNestedMap["max_events"] = data.SplunkReceiver.Batch.MaxEvents.ValueInt64()
+			}
+			if !data.SplunkReceiver.Batch.TimeoutSeconds.IsNull() && !data.SplunkReceiver.Batch.TimeoutSeconds.IsUnknown() {
+				batchNestedMap["timeout_seconds"] = data.SplunkReceiver.Batch.TimeoutSeconds.ValueString()
+			}
+			splunk_receiverMap["batch"] = batchNestedMap
+		}
+		if data.SplunkReceiver.Compression != nil {
+			compressionNestedMap := make(map[string]interface{})
+			splunk_receiverMap["compression"] = compressionNestedMap
+		}
+		if !data.SplunkReceiver.Endpoint.IsNull() && !data.SplunkReceiver.Endpoint.IsUnknown() {
+			splunk_receiverMap["endpoint"] = data.SplunkReceiver.Endpoint.ValueString()
+		}
+		if data.SplunkReceiver.NoTLS != nil {
+			splunk_receiverMap["no_tls"] = map[string]interface{}{}
+		}
+		if data.SplunkReceiver.SplunkHecToken != nil {
+			splunk_hec_tokenNestedMap := make(map[string]interface{})
+			splunk_receiverMap["splunk_hec_token"] = splunk_hec_tokenNestedMap
+		}
+		if data.SplunkReceiver.UseTLS != nil {
+			use_tlsNestedMap := make(map[string]interface{})
+			if !data.SplunkReceiver.UseTLS.TrustedCaURL.IsNull() && !data.SplunkReceiver.UseTLS.TrustedCaURL.IsUnknown() {
+				use_tlsNestedMap["trusted_ca_url"] = data.SplunkReceiver.UseTLS.TrustedCaURL.ValueString()
+			}
+			splunk_receiverMap["use_tls"] = use_tlsNestedMap
+		}
+		apiResource.Spec["splunk_receiver"] = splunk_receiverMap
+	}
+	if data.SumoLogicReceiver != nil {
+		sumo_logic_receiverMap := make(map[string]interface{})
+		if data.SumoLogicReceiver.URL != nil {
+			urlNestedMap := make(map[string]interface{})
+			sumo_logic_receiverMap["url"] = urlNestedMap
+		}
+		apiResource.Spec["sumo_logic_receiver"] = sumo_logic_receiverMap
+	}
+
+
 	created, err := r.client.CreateGlobalLogReceiver(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create GlobalLogReceiver: %s", err))
@@ -2364,8 +2795,13 @@ func (r *GlobalLogReceiverResource) Create(ctx context.Context, req resource.Cre
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created GlobalLogReceiver resource")
@@ -2444,9 +2880,200 @@ func (r *GlobalLogReceiverResource) Read(ctx context.Context, req resource.ReadR
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if _, ok := apiResource.Spec["audit_logs"].(map[string]interface{}); ok && isImport && data.AuditLogs == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AuditLogs = &GlobalLogReceiverEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["aws_cloud_watch_receiver"].(map[string]interface{}); ok && (isImport || data.AWSCloudWatchReceiver != nil) {
+		data.AWSCloudWatchReceiver = &GlobalLogReceiverAWSCloudWatchReceiverModel{
+			AWSRegion: func() types.String {
+				if v, ok := blockData["aws_region"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			GroupName: func() types.String {
+				if v, ok := blockData["group_name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			StreamName: func() types.String {
+				if v, ok := blockData["stream_name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["azure_event_hubs_receiver"].(map[string]interface{}); ok && (isImport || data.AzureEventHubsReceiver != nil) {
+		data.AzureEventHubsReceiver = &GlobalLogReceiverAzureEventHubsReceiverModel{
+			Instance: func() types.String {
+				if v, ok := blockData["instance"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["azure_receiver"].(map[string]interface{}); ok && (isImport || data.AzureReceiver != nil) {
+		data.AzureReceiver = &GlobalLogReceiverAzureReceiverModel{
+			ContainerName: func() types.String {
+				if v, ok := blockData["container_name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["datadog_receiver"].(map[string]interface{}); ok && (isImport || data.DatadogReceiver != nil) {
+		data.DatadogReceiver = &GlobalLogReceiverDatadogReceiverModel{
+			Endpoint: func() types.String {
+				if v, ok := blockData["endpoint"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Site: func() types.String {
+				if v, ok := blockData["site"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["dns_logs"].(map[string]interface{}); ok && isImport && data.DNSLogs == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DNSLogs = &GlobalLogReceiverEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["gcp_bucket_receiver"].(map[string]interface{}); ok && (isImport || data.GCPBucketReceiver != nil) {
+		data.GCPBucketReceiver = &GlobalLogReceiverGCPBucketReceiverModel{
+			Bucket: func() types.String {
+				if v, ok := blockData["bucket"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["http_receiver"].(map[string]interface{}); ok && (isImport || data.HTTPReceiver != nil) {
+		data.HTTPReceiver = &GlobalLogReceiverHTTPReceiverModel{
+			URI: func() types.String {
+				if v, ok := blockData["uri"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["kafka_receiver"].(map[string]interface{}); ok && (isImport || data.KafkaReceiver != nil) {
+		data.KafkaReceiver = &GlobalLogReceiverKafkaReceiverModel{
+			KafkaTopic: func() types.String {
+				if v, ok := blockData["kafka_topic"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["new_relic_receiver"].(map[string]interface{}); ok && isImport && data.NewRelicReceiver == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NewRelicReceiver = &GlobalLogReceiverNewRelicReceiverModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["ns_all"].(map[string]interface{}); ok && isImport && data.NsAll == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NsAll = &GlobalLogReceiverEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["ns_current"].(map[string]interface{}); ok && isImport && data.NsCurrent == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NsCurrent = &GlobalLogReceiverEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["ns_list"].(map[string]interface{}); ok && isImport && data.NsList == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NsList = &GlobalLogReceiverNsListModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["qradar_receiver"].(map[string]interface{}); ok && (isImport || data.QradarReceiver != nil) {
+		data.QradarReceiver = &GlobalLogReceiverQradarReceiverModel{
+			URI: func() types.String {
+				if v, ok := blockData["uri"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["request_logs"].(map[string]interface{}); ok && isImport && data.RequestLogs == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.RequestLogs = &GlobalLogReceiverEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["s3_receiver"].(map[string]interface{}); ok && (isImport || data.S3Receiver != nil) {
+		data.S3Receiver = &GlobalLogReceiverS3ReceiverModel{
+			AWSRegion: func() types.String {
+				if v, ok := blockData["aws_region"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Bucket: func() types.String {
+				if v, ok := blockData["bucket"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["security_events"].(map[string]interface{}); ok && isImport && data.SecurityEvents == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.SecurityEvents = &GlobalLogReceiverEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["splunk_receiver"].(map[string]interface{}); ok && (isImport || data.SplunkReceiver != nil) {
+		data.SplunkReceiver = &GlobalLogReceiverSplunkReceiverModel{
+			Endpoint: func() types.String {
+				if v, ok := blockData["endpoint"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["sumo_logic_receiver"].(map[string]interface{}); ok && isImport && data.SumoLogicReceiver == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.SumoLogicReceiver = &GlobalLogReceiverSumoLogicReceiverModel{}
+	}
+	// Normal Read: preserve existing state value
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -2472,7 +3099,7 @@ func (r *GlobalLogReceiverResource) Update(ctx context.Context, req resource.Upd
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.GlobalLogReceiverSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -2497,6 +3124,437 @@ func (r *GlobalLogReceiverResource) Update(ctx context.Context, req resource.Upd
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.AuditLogs != nil {
+		audit_logsMap := make(map[string]interface{})
+		apiResource.Spec["audit_logs"] = audit_logsMap
+	}
+	if data.AWSCloudWatchReceiver != nil {
+		aws_cloud_watch_receiverMap := make(map[string]interface{})
+		if data.AWSCloudWatchReceiver.AWSCred != nil {
+			aws_credNestedMap := make(map[string]interface{})
+			if !data.AWSCloudWatchReceiver.AWSCred.Name.IsNull() && !data.AWSCloudWatchReceiver.AWSCred.Name.IsUnknown() {
+				aws_credNestedMap["name"] = data.AWSCloudWatchReceiver.AWSCred.Name.ValueString()
+			}
+			if !data.AWSCloudWatchReceiver.AWSCred.Namespace.IsNull() && !data.AWSCloudWatchReceiver.AWSCred.Namespace.IsUnknown() {
+				aws_credNestedMap["namespace"] = data.AWSCloudWatchReceiver.AWSCred.Namespace.ValueString()
+			}
+			if !data.AWSCloudWatchReceiver.AWSCred.Tenant.IsNull() && !data.AWSCloudWatchReceiver.AWSCred.Tenant.IsUnknown() {
+				aws_credNestedMap["tenant"] = data.AWSCloudWatchReceiver.AWSCred.Tenant.ValueString()
+			}
+			aws_cloud_watch_receiverMap["aws_cred"] = aws_credNestedMap
+		}
+		if !data.AWSCloudWatchReceiver.AWSRegion.IsNull() && !data.AWSCloudWatchReceiver.AWSRegion.IsUnknown() {
+			aws_cloud_watch_receiverMap["aws_region"] = data.AWSCloudWatchReceiver.AWSRegion.ValueString()
+		}
+		if data.AWSCloudWatchReceiver.Batch != nil {
+			batchNestedMap := make(map[string]interface{})
+			if !data.AWSCloudWatchReceiver.Batch.MaxBytes.IsNull() && !data.AWSCloudWatchReceiver.Batch.MaxBytes.IsUnknown() {
+				batchNestedMap["max_bytes"] = data.AWSCloudWatchReceiver.Batch.MaxBytes.ValueInt64()
+			}
+			if !data.AWSCloudWatchReceiver.Batch.MaxEvents.IsNull() && !data.AWSCloudWatchReceiver.Batch.MaxEvents.IsUnknown() {
+				batchNestedMap["max_events"] = data.AWSCloudWatchReceiver.Batch.MaxEvents.ValueInt64()
+			}
+			if !data.AWSCloudWatchReceiver.Batch.TimeoutSeconds.IsNull() && !data.AWSCloudWatchReceiver.Batch.TimeoutSeconds.IsUnknown() {
+				batchNestedMap["timeout_seconds"] = data.AWSCloudWatchReceiver.Batch.TimeoutSeconds.ValueString()
+			}
+			aws_cloud_watch_receiverMap["batch"] = batchNestedMap
+		}
+		if data.AWSCloudWatchReceiver.Compression != nil {
+			compressionNestedMap := make(map[string]interface{})
+			aws_cloud_watch_receiverMap["compression"] = compressionNestedMap
+		}
+		if !data.AWSCloudWatchReceiver.GroupName.IsNull() && !data.AWSCloudWatchReceiver.GroupName.IsUnknown() {
+			aws_cloud_watch_receiverMap["group_name"] = data.AWSCloudWatchReceiver.GroupName.ValueString()
+		}
+		if !data.AWSCloudWatchReceiver.StreamName.IsNull() && !data.AWSCloudWatchReceiver.StreamName.IsUnknown() {
+			aws_cloud_watch_receiverMap["stream_name"] = data.AWSCloudWatchReceiver.StreamName.ValueString()
+		}
+		apiResource.Spec["aws_cloud_watch_receiver"] = aws_cloud_watch_receiverMap
+	}
+	if data.AzureEventHubsReceiver != nil {
+		azure_event_hubs_receiverMap := make(map[string]interface{})
+		if data.AzureEventHubsReceiver.ConnectionString != nil {
+			connection_stringNestedMap := make(map[string]interface{})
+			azure_event_hubs_receiverMap["connection_string"] = connection_stringNestedMap
+		}
+		if !data.AzureEventHubsReceiver.Instance.IsNull() && !data.AzureEventHubsReceiver.Instance.IsUnknown() {
+			azure_event_hubs_receiverMap["instance"] = data.AzureEventHubsReceiver.Instance.ValueString()
+		}
+		if !data.AzureEventHubsReceiver.Namespace.IsNull() && !data.AzureEventHubsReceiver.Namespace.IsUnknown() {
+			azure_event_hubs_receiverMap["namespace"] = data.AzureEventHubsReceiver.Namespace.ValueString()
+		}
+		apiResource.Spec["azure_event_hubs_receiver"] = azure_event_hubs_receiverMap
+	}
+	if data.AzureReceiver != nil {
+		azure_receiverMap := make(map[string]interface{})
+		if data.AzureReceiver.Batch != nil {
+			batchNestedMap := make(map[string]interface{})
+			if !data.AzureReceiver.Batch.MaxBytes.IsNull() && !data.AzureReceiver.Batch.MaxBytes.IsUnknown() {
+				batchNestedMap["max_bytes"] = data.AzureReceiver.Batch.MaxBytes.ValueInt64()
+			}
+			if !data.AzureReceiver.Batch.MaxEvents.IsNull() && !data.AzureReceiver.Batch.MaxEvents.IsUnknown() {
+				batchNestedMap["max_events"] = data.AzureReceiver.Batch.MaxEvents.ValueInt64()
+			}
+			if !data.AzureReceiver.Batch.TimeoutSeconds.IsNull() && !data.AzureReceiver.Batch.TimeoutSeconds.IsUnknown() {
+				batchNestedMap["timeout_seconds"] = data.AzureReceiver.Batch.TimeoutSeconds.ValueString()
+			}
+			azure_receiverMap["batch"] = batchNestedMap
+		}
+		if data.AzureReceiver.Compression != nil {
+			compressionNestedMap := make(map[string]interface{})
+			azure_receiverMap["compression"] = compressionNestedMap
+		}
+		if data.AzureReceiver.ConnectionString != nil {
+			connection_stringNestedMap := make(map[string]interface{})
+			azure_receiverMap["connection_string"] = connection_stringNestedMap
+		}
+		if !data.AzureReceiver.ContainerName.IsNull() && !data.AzureReceiver.ContainerName.IsUnknown() {
+			azure_receiverMap["container_name"] = data.AzureReceiver.ContainerName.ValueString()
+		}
+		if data.AzureReceiver.FilenameOptions != nil {
+			filename_optionsNestedMap := make(map[string]interface{})
+			if !data.AzureReceiver.FilenameOptions.CustomFolder.IsNull() && !data.AzureReceiver.FilenameOptions.CustomFolder.IsUnknown() {
+				filename_optionsNestedMap["custom_folder"] = data.AzureReceiver.FilenameOptions.CustomFolder.ValueString()
+			}
+			azure_receiverMap["filename_options"] = filename_optionsNestedMap
+		}
+		apiResource.Spec["azure_receiver"] = azure_receiverMap
+	}
+	if data.DatadogReceiver != nil {
+		datadog_receiverMap := make(map[string]interface{})
+		if data.DatadogReceiver.Batch != nil {
+			batchNestedMap := make(map[string]interface{})
+			if !data.DatadogReceiver.Batch.MaxBytes.IsNull() && !data.DatadogReceiver.Batch.MaxBytes.IsUnknown() {
+				batchNestedMap["max_bytes"] = data.DatadogReceiver.Batch.MaxBytes.ValueInt64()
+			}
+			if !data.DatadogReceiver.Batch.MaxEvents.IsNull() && !data.DatadogReceiver.Batch.MaxEvents.IsUnknown() {
+				batchNestedMap["max_events"] = data.DatadogReceiver.Batch.MaxEvents.ValueInt64()
+			}
+			if !data.DatadogReceiver.Batch.TimeoutSeconds.IsNull() && !data.DatadogReceiver.Batch.TimeoutSeconds.IsUnknown() {
+				batchNestedMap["timeout_seconds"] = data.DatadogReceiver.Batch.TimeoutSeconds.ValueString()
+			}
+			datadog_receiverMap["batch"] = batchNestedMap
+		}
+		if data.DatadogReceiver.Compression != nil {
+			compressionNestedMap := make(map[string]interface{})
+			datadog_receiverMap["compression"] = compressionNestedMap
+		}
+		if data.DatadogReceiver.DatadogAPIKey != nil {
+			datadog_api_keyNestedMap := make(map[string]interface{})
+			datadog_receiverMap["datadog_api_key"] = datadog_api_keyNestedMap
+		}
+		if !data.DatadogReceiver.Endpoint.IsNull() && !data.DatadogReceiver.Endpoint.IsUnknown() {
+			datadog_receiverMap["endpoint"] = data.DatadogReceiver.Endpoint.ValueString()
+		}
+		if data.DatadogReceiver.NoTLS != nil {
+			datadog_receiverMap["no_tls"] = map[string]interface{}{}
+		}
+		if !data.DatadogReceiver.Site.IsNull() && !data.DatadogReceiver.Site.IsUnknown() {
+			datadog_receiverMap["site"] = data.DatadogReceiver.Site.ValueString()
+		}
+		if data.DatadogReceiver.UseTLS != nil {
+			use_tlsNestedMap := make(map[string]interface{})
+			if !data.DatadogReceiver.UseTLS.TrustedCaURL.IsNull() && !data.DatadogReceiver.UseTLS.TrustedCaURL.IsUnknown() {
+				use_tlsNestedMap["trusted_ca_url"] = data.DatadogReceiver.UseTLS.TrustedCaURL.ValueString()
+			}
+			datadog_receiverMap["use_tls"] = use_tlsNestedMap
+		}
+		apiResource.Spec["datadog_receiver"] = datadog_receiverMap
+	}
+	if data.DNSLogs != nil {
+		dns_logsMap := make(map[string]interface{})
+		apiResource.Spec["dns_logs"] = dns_logsMap
+	}
+	if data.GCPBucketReceiver != nil {
+		gcp_bucket_receiverMap := make(map[string]interface{})
+		if data.GCPBucketReceiver.Batch != nil {
+			batchNestedMap := make(map[string]interface{})
+			if !data.GCPBucketReceiver.Batch.MaxBytes.IsNull() && !data.GCPBucketReceiver.Batch.MaxBytes.IsUnknown() {
+				batchNestedMap["max_bytes"] = data.GCPBucketReceiver.Batch.MaxBytes.ValueInt64()
+			}
+			if !data.GCPBucketReceiver.Batch.MaxEvents.IsNull() && !data.GCPBucketReceiver.Batch.MaxEvents.IsUnknown() {
+				batchNestedMap["max_events"] = data.GCPBucketReceiver.Batch.MaxEvents.ValueInt64()
+			}
+			if !data.GCPBucketReceiver.Batch.TimeoutSeconds.IsNull() && !data.GCPBucketReceiver.Batch.TimeoutSeconds.IsUnknown() {
+				batchNestedMap["timeout_seconds"] = data.GCPBucketReceiver.Batch.TimeoutSeconds.ValueString()
+			}
+			gcp_bucket_receiverMap["batch"] = batchNestedMap
+		}
+		if !data.GCPBucketReceiver.Bucket.IsNull() && !data.GCPBucketReceiver.Bucket.IsUnknown() {
+			gcp_bucket_receiverMap["bucket"] = data.GCPBucketReceiver.Bucket.ValueString()
+		}
+		if data.GCPBucketReceiver.Compression != nil {
+			compressionNestedMap := make(map[string]interface{})
+			gcp_bucket_receiverMap["compression"] = compressionNestedMap
+		}
+		if data.GCPBucketReceiver.FilenameOptions != nil {
+			filename_optionsNestedMap := make(map[string]interface{})
+			if !data.GCPBucketReceiver.FilenameOptions.CustomFolder.IsNull() && !data.GCPBucketReceiver.FilenameOptions.CustomFolder.IsUnknown() {
+				filename_optionsNestedMap["custom_folder"] = data.GCPBucketReceiver.FilenameOptions.CustomFolder.ValueString()
+			}
+			gcp_bucket_receiverMap["filename_options"] = filename_optionsNestedMap
+		}
+		if data.GCPBucketReceiver.GCPCred != nil {
+			gcp_credNestedMap := make(map[string]interface{})
+			if !data.GCPBucketReceiver.GCPCred.Name.IsNull() && !data.GCPBucketReceiver.GCPCred.Name.IsUnknown() {
+				gcp_credNestedMap["name"] = data.GCPBucketReceiver.GCPCred.Name.ValueString()
+			}
+			if !data.GCPBucketReceiver.GCPCred.Namespace.IsNull() && !data.GCPBucketReceiver.GCPCred.Namespace.IsUnknown() {
+				gcp_credNestedMap["namespace"] = data.GCPBucketReceiver.GCPCred.Namespace.ValueString()
+			}
+			if !data.GCPBucketReceiver.GCPCred.Tenant.IsNull() && !data.GCPBucketReceiver.GCPCred.Tenant.IsUnknown() {
+				gcp_credNestedMap["tenant"] = data.GCPBucketReceiver.GCPCred.Tenant.ValueString()
+			}
+			gcp_bucket_receiverMap["gcp_cred"] = gcp_credNestedMap
+		}
+		apiResource.Spec["gcp_bucket_receiver"] = gcp_bucket_receiverMap
+	}
+	if data.HTTPReceiver != nil {
+		http_receiverMap := make(map[string]interface{})
+		if data.HTTPReceiver.AuthBasic != nil {
+			auth_basicNestedMap := make(map[string]interface{})
+			if !data.HTTPReceiver.AuthBasic.UserName.IsNull() && !data.HTTPReceiver.AuthBasic.UserName.IsUnknown() {
+				auth_basicNestedMap["user_name"] = data.HTTPReceiver.AuthBasic.UserName.ValueString()
+			}
+			http_receiverMap["auth_basic"] = auth_basicNestedMap
+		}
+		if data.HTTPReceiver.AuthNone != nil {
+			http_receiverMap["auth_none"] = map[string]interface{}{}
+		}
+		if data.HTTPReceiver.AuthToken != nil {
+			auth_tokenNestedMap := make(map[string]interface{})
+			http_receiverMap["auth_token"] = auth_tokenNestedMap
+		}
+		if data.HTTPReceiver.Batch != nil {
+			batchNestedMap := make(map[string]interface{})
+			if !data.HTTPReceiver.Batch.MaxBytes.IsNull() && !data.HTTPReceiver.Batch.MaxBytes.IsUnknown() {
+				batchNestedMap["max_bytes"] = data.HTTPReceiver.Batch.MaxBytes.ValueInt64()
+			}
+			if !data.HTTPReceiver.Batch.MaxEvents.IsNull() && !data.HTTPReceiver.Batch.MaxEvents.IsUnknown() {
+				batchNestedMap["max_events"] = data.HTTPReceiver.Batch.MaxEvents.ValueInt64()
+			}
+			if !data.HTTPReceiver.Batch.TimeoutSeconds.IsNull() && !data.HTTPReceiver.Batch.TimeoutSeconds.IsUnknown() {
+				batchNestedMap["timeout_seconds"] = data.HTTPReceiver.Batch.TimeoutSeconds.ValueString()
+			}
+			http_receiverMap["batch"] = batchNestedMap
+		}
+		if data.HTTPReceiver.Compression != nil {
+			compressionNestedMap := make(map[string]interface{})
+			http_receiverMap["compression"] = compressionNestedMap
+		}
+		if data.HTTPReceiver.NoTLS != nil {
+			http_receiverMap["no_tls"] = map[string]interface{}{}
+		}
+		if !data.HTTPReceiver.URI.IsNull() && !data.HTTPReceiver.URI.IsUnknown() {
+			http_receiverMap["uri"] = data.HTTPReceiver.URI.ValueString()
+		}
+		if data.HTTPReceiver.UseTLS != nil {
+			use_tlsNestedMap := make(map[string]interface{})
+			if !data.HTTPReceiver.UseTLS.TrustedCaURL.IsNull() && !data.HTTPReceiver.UseTLS.TrustedCaURL.IsUnknown() {
+				use_tlsNestedMap["trusted_ca_url"] = data.HTTPReceiver.UseTLS.TrustedCaURL.ValueString()
+			}
+			http_receiverMap["use_tls"] = use_tlsNestedMap
+		}
+		apiResource.Spec["http_receiver"] = http_receiverMap
+	}
+	if data.KafkaReceiver != nil {
+		kafka_receiverMap := make(map[string]interface{})
+		if data.KafkaReceiver.Batch != nil {
+			batchNestedMap := make(map[string]interface{})
+			if !data.KafkaReceiver.Batch.MaxBytes.IsNull() && !data.KafkaReceiver.Batch.MaxBytes.IsUnknown() {
+				batchNestedMap["max_bytes"] = data.KafkaReceiver.Batch.MaxBytes.ValueInt64()
+			}
+			if !data.KafkaReceiver.Batch.MaxEvents.IsNull() && !data.KafkaReceiver.Batch.MaxEvents.IsUnknown() {
+				batchNestedMap["max_events"] = data.KafkaReceiver.Batch.MaxEvents.ValueInt64()
+			}
+			if !data.KafkaReceiver.Batch.TimeoutSeconds.IsNull() && !data.KafkaReceiver.Batch.TimeoutSeconds.IsUnknown() {
+				batchNestedMap["timeout_seconds"] = data.KafkaReceiver.Batch.TimeoutSeconds.ValueString()
+			}
+			kafka_receiverMap["batch"] = batchNestedMap
+		}
+		if data.KafkaReceiver.Compression != nil {
+			compressionNestedMap := make(map[string]interface{})
+			kafka_receiverMap["compression"] = compressionNestedMap
+		}
+		if !data.KafkaReceiver.KafkaTopic.IsNull() && !data.KafkaReceiver.KafkaTopic.IsUnknown() {
+			kafka_receiverMap["kafka_topic"] = data.KafkaReceiver.KafkaTopic.ValueString()
+		}
+		if data.KafkaReceiver.NoTLS != nil {
+			kafka_receiverMap["no_tls"] = map[string]interface{}{}
+		}
+		if data.KafkaReceiver.UseTLS != nil {
+			use_tlsNestedMap := make(map[string]interface{})
+			if !data.KafkaReceiver.UseTLS.TrustedCaURL.IsNull() && !data.KafkaReceiver.UseTLS.TrustedCaURL.IsUnknown() {
+				use_tlsNestedMap["trusted_ca_url"] = data.KafkaReceiver.UseTLS.TrustedCaURL.ValueString()
+			}
+			kafka_receiverMap["use_tls"] = use_tlsNestedMap
+		}
+		apiResource.Spec["kafka_receiver"] = kafka_receiverMap
+	}
+	if data.NewRelicReceiver != nil {
+		new_relic_receiverMap := make(map[string]interface{})
+		if data.NewRelicReceiver.APIKey != nil {
+			api_keyNestedMap := make(map[string]interface{})
+			new_relic_receiverMap["api_key"] = api_keyNestedMap
+		}
+		if data.NewRelicReceiver.Eu != nil {
+			new_relic_receiverMap["eu"] = map[string]interface{}{}
+		}
+		if data.NewRelicReceiver.Us != nil {
+			new_relic_receiverMap["us"] = map[string]interface{}{}
+		}
+		apiResource.Spec["new_relic_receiver"] = new_relic_receiverMap
+	}
+	if data.NsAll != nil {
+		ns_allMap := make(map[string]interface{})
+		apiResource.Spec["ns_all"] = ns_allMap
+	}
+	if data.NsCurrent != nil {
+		ns_currentMap := make(map[string]interface{})
+		apiResource.Spec["ns_current"] = ns_currentMap
+	}
+	if data.NsList != nil {
+		ns_listMap := make(map[string]interface{})
+		apiResource.Spec["ns_list"] = ns_listMap
+	}
+	if data.QradarReceiver != nil {
+		qradar_receiverMap := make(map[string]interface{})
+		if data.QradarReceiver.Batch != nil {
+			batchNestedMap := make(map[string]interface{})
+			if !data.QradarReceiver.Batch.MaxBytes.IsNull() && !data.QradarReceiver.Batch.MaxBytes.IsUnknown() {
+				batchNestedMap["max_bytes"] = data.QradarReceiver.Batch.MaxBytes.ValueInt64()
+			}
+			if !data.QradarReceiver.Batch.MaxEvents.IsNull() && !data.QradarReceiver.Batch.MaxEvents.IsUnknown() {
+				batchNestedMap["max_events"] = data.QradarReceiver.Batch.MaxEvents.ValueInt64()
+			}
+			if !data.QradarReceiver.Batch.TimeoutSeconds.IsNull() && !data.QradarReceiver.Batch.TimeoutSeconds.IsUnknown() {
+				batchNestedMap["timeout_seconds"] = data.QradarReceiver.Batch.TimeoutSeconds.ValueString()
+			}
+			qradar_receiverMap["batch"] = batchNestedMap
+		}
+		if data.QradarReceiver.Compression != nil {
+			compressionNestedMap := make(map[string]interface{})
+			qradar_receiverMap["compression"] = compressionNestedMap
+		}
+		if data.QradarReceiver.NoTLS != nil {
+			qradar_receiverMap["no_tls"] = map[string]interface{}{}
+		}
+		if !data.QradarReceiver.URI.IsNull() && !data.QradarReceiver.URI.IsUnknown() {
+			qradar_receiverMap["uri"] = data.QradarReceiver.URI.ValueString()
+		}
+		if data.QradarReceiver.UseTLS != nil {
+			use_tlsNestedMap := make(map[string]interface{})
+			if !data.QradarReceiver.UseTLS.TrustedCaURL.IsNull() && !data.QradarReceiver.UseTLS.TrustedCaURL.IsUnknown() {
+				use_tlsNestedMap["trusted_ca_url"] = data.QradarReceiver.UseTLS.TrustedCaURL.ValueString()
+			}
+			qradar_receiverMap["use_tls"] = use_tlsNestedMap
+		}
+		apiResource.Spec["qradar_receiver"] = qradar_receiverMap
+	}
+	if data.RequestLogs != nil {
+		request_logsMap := make(map[string]interface{})
+		apiResource.Spec["request_logs"] = request_logsMap
+	}
+	if data.S3Receiver != nil {
+		s3_receiverMap := make(map[string]interface{})
+		if data.S3Receiver.AWSCred != nil {
+			aws_credNestedMap := make(map[string]interface{})
+			if !data.S3Receiver.AWSCred.Name.IsNull() && !data.S3Receiver.AWSCred.Name.IsUnknown() {
+				aws_credNestedMap["name"] = data.S3Receiver.AWSCred.Name.ValueString()
+			}
+			if !data.S3Receiver.AWSCred.Namespace.IsNull() && !data.S3Receiver.AWSCred.Namespace.IsUnknown() {
+				aws_credNestedMap["namespace"] = data.S3Receiver.AWSCred.Namespace.ValueString()
+			}
+			if !data.S3Receiver.AWSCred.Tenant.IsNull() && !data.S3Receiver.AWSCred.Tenant.IsUnknown() {
+				aws_credNestedMap["tenant"] = data.S3Receiver.AWSCred.Tenant.ValueString()
+			}
+			s3_receiverMap["aws_cred"] = aws_credNestedMap
+		}
+		if !data.S3Receiver.AWSRegion.IsNull() && !data.S3Receiver.AWSRegion.IsUnknown() {
+			s3_receiverMap["aws_region"] = data.S3Receiver.AWSRegion.ValueString()
+		}
+		if data.S3Receiver.Batch != nil {
+			batchNestedMap := make(map[string]interface{})
+			if !data.S3Receiver.Batch.MaxBytes.IsNull() && !data.S3Receiver.Batch.MaxBytes.IsUnknown() {
+				batchNestedMap["max_bytes"] = data.S3Receiver.Batch.MaxBytes.ValueInt64()
+			}
+			if !data.S3Receiver.Batch.MaxEvents.IsNull() && !data.S3Receiver.Batch.MaxEvents.IsUnknown() {
+				batchNestedMap["max_events"] = data.S3Receiver.Batch.MaxEvents.ValueInt64()
+			}
+			if !data.S3Receiver.Batch.TimeoutSeconds.IsNull() && !data.S3Receiver.Batch.TimeoutSeconds.IsUnknown() {
+				batchNestedMap["timeout_seconds"] = data.S3Receiver.Batch.TimeoutSeconds.ValueString()
+			}
+			s3_receiverMap["batch"] = batchNestedMap
+		}
+		if !data.S3Receiver.Bucket.IsNull() && !data.S3Receiver.Bucket.IsUnknown() {
+			s3_receiverMap["bucket"] = data.S3Receiver.Bucket.ValueString()
+		}
+		if data.S3Receiver.Compression != nil {
+			compressionNestedMap := make(map[string]interface{})
+			s3_receiverMap["compression"] = compressionNestedMap
+		}
+		if data.S3Receiver.FilenameOptions != nil {
+			filename_optionsNestedMap := make(map[string]interface{})
+			if !data.S3Receiver.FilenameOptions.CustomFolder.IsNull() && !data.S3Receiver.FilenameOptions.CustomFolder.IsUnknown() {
+				filename_optionsNestedMap["custom_folder"] = data.S3Receiver.FilenameOptions.CustomFolder.ValueString()
+			}
+			s3_receiverMap["filename_options"] = filename_optionsNestedMap
+		}
+		apiResource.Spec["s3_receiver"] = s3_receiverMap
+	}
+	if data.SecurityEvents != nil {
+		security_eventsMap := make(map[string]interface{})
+		apiResource.Spec["security_events"] = security_eventsMap
+	}
+	if data.SplunkReceiver != nil {
+		splunk_receiverMap := make(map[string]interface{})
+		if data.SplunkReceiver.Batch != nil {
+			batchNestedMap := make(map[string]interface{})
+			if !data.SplunkReceiver.Batch.MaxBytes.IsNull() && !data.SplunkReceiver.Batch.MaxBytes.IsUnknown() {
+				batchNestedMap["max_bytes"] = data.SplunkReceiver.Batch.MaxBytes.ValueInt64()
+			}
+			if !data.SplunkReceiver.Batch.MaxEvents.IsNull() && !data.SplunkReceiver.Batch.MaxEvents.IsUnknown() {
+				batchNestedMap["max_events"] = data.SplunkReceiver.Batch.MaxEvents.ValueInt64()
+			}
+			if !data.SplunkReceiver.Batch.TimeoutSeconds.IsNull() && !data.SplunkReceiver.Batch.TimeoutSeconds.IsUnknown() {
+				batchNestedMap["timeout_seconds"] = data.SplunkReceiver.Batch.TimeoutSeconds.ValueString()
+			}
+			splunk_receiverMap["batch"] = batchNestedMap
+		}
+		if data.SplunkReceiver.Compression != nil {
+			compressionNestedMap := make(map[string]interface{})
+			splunk_receiverMap["compression"] = compressionNestedMap
+		}
+		if !data.SplunkReceiver.Endpoint.IsNull() && !data.SplunkReceiver.Endpoint.IsUnknown() {
+			splunk_receiverMap["endpoint"] = data.SplunkReceiver.Endpoint.ValueString()
+		}
+		if data.SplunkReceiver.NoTLS != nil {
+			splunk_receiverMap["no_tls"] = map[string]interface{}{}
+		}
+		if data.SplunkReceiver.SplunkHecToken != nil {
+			splunk_hec_tokenNestedMap := make(map[string]interface{})
+			splunk_receiverMap["splunk_hec_token"] = splunk_hec_tokenNestedMap
+		}
+		if data.SplunkReceiver.UseTLS != nil {
+			use_tlsNestedMap := make(map[string]interface{})
+			if !data.SplunkReceiver.UseTLS.TrustedCaURL.IsNull() && !data.SplunkReceiver.UseTLS.TrustedCaURL.IsUnknown() {
+				use_tlsNestedMap["trusted_ca_url"] = data.SplunkReceiver.UseTLS.TrustedCaURL.ValueString()
+			}
+			splunk_receiverMap["use_tls"] = use_tlsNestedMap
+		}
+		apiResource.Spec["splunk_receiver"] = splunk_receiverMap
+	}
+	if data.SumoLogicReceiver != nil {
+		sumo_logic_receiverMap := make(map[string]interface{})
+		if data.SumoLogicReceiver.URL != nil {
+			urlNestedMap := make(map[string]interface{})
+			sumo_logic_receiverMap["url"] = urlNestedMap
+		}
+		apiResource.Spec["sumo_logic_receiver"] = sumo_logic_receiverMap
+	}
+
+
 	updated, err := r.client.UpdateGlobalLogReceiver(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update GlobalLogReceiver: %s", err))
@@ -2505,6 +3563,8 @@ func (r *GlobalLogReceiverResource) Update(ctx context.Context, req resource.Upd
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -2517,6 +3577,7 @@ func (r *GlobalLogReceiverResource) Update(ctx context.Context, req resource.Upd
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -2543,6 +3604,15 @@ func (r *GlobalLogReceiverResource) Delete(ctx context.Context, req resource.Del
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "GlobalLogReceiver already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "GlobalLogReceiver delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

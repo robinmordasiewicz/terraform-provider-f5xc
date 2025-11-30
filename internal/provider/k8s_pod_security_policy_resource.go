@@ -160,8 +160,8 @@ type K8SPodSecurityPolicyResourceModel struct {
 	Description types.String `tfsdk:"description"`
 	Disable types.Bool `tfsdk:"disable"`
 	Labels types.Map `tfsdk:"labels"`
-	Yaml types.String `tfsdk:"yaml"`
 	ID types.String `tfsdk:"id"`
+	Yaml types.String `tfsdk:"yaml"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
 	PspSpec *K8SPodSecurityPolicyPspSpecModel `tfsdk:"psp_spec"`
 }
@@ -213,12 +213,16 @@ func (r *K8SPodSecurityPolicyResource) Schema(ctx context.Context, req resource.
 				Optional: true,
 				ElementType: types.StringType,
 			},
+			"id": schema.StringAttribute{
+				MarkdownDescription: "Unique identifier for the resource.",
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
 			"yaml": schema.StringAttribute{
 				MarkdownDescription: "K8s YAML. K8s YAML for Pod Security Policy",
 				Optional: true,
-			},
-			"id": schema.StringAttribute{
-				MarkdownDescription: "Unique identifier for the resource.",
 				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
@@ -600,7 +604,7 @@ func (r *K8SPodSecurityPolicyResource) Create(ctx context.Context, req resource.
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.K8SPodSecurityPolicySpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -625,6 +629,107 @@ func (r *K8SPodSecurityPolicyResource) Create(ctx context.Context, req resource.
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.PspSpec != nil {
+		psp_specMap := make(map[string]interface{})
+		if !data.PspSpec.AllowPrivilegeEscalation.IsNull() && !data.PspSpec.AllowPrivilegeEscalation.IsUnknown() {
+			psp_specMap["allow_privilege_escalation"] = data.PspSpec.AllowPrivilegeEscalation.ValueBool()
+		}
+		if data.PspSpec.AllowedCapabilities != nil {
+			allowed_capabilitiesNestedMap := make(map[string]interface{})
+			psp_specMap["allowed_capabilities"] = allowed_capabilitiesNestedMap
+		}
+		if !data.PspSpec.DefaultAllowPrivilegeEscalation.IsNull() && !data.PspSpec.DefaultAllowPrivilegeEscalation.IsUnknown() {
+			psp_specMap["default_allow_privilege_escalation"] = data.PspSpec.DefaultAllowPrivilegeEscalation.ValueBool()
+		}
+		if data.PspSpec.DefaultCapabilities != nil {
+			default_capabilitiesNestedMap := make(map[string]interface{})
+			psp_specMap["default_capabilities"] = default_capabilitiesNestedMap
+		}
+		if data.PspSpec.DropCapabilities != nil {
+			drop_capabilitiesNestedMap := make(map[string]interface{})
+			psp_specMap["drop_capabilities"] = drop_capabilitiesNestedMap
+		}
+		if data.PspSpec.FsGroupStrategyOptions != nil {
+			fs_group_strategy_optionsNestedMap := make(map[string]interface{})
+			if !data.PspSpec.FsGroupStrategyOptions.Rule.IsNull() && !data.PspSpec.FsGroupStrategyOptions.Rule.IsUnknown() {
+				fs_group_strategy_optionsNestedMap["rule"] = data.PspSpec.FsGroupStrategyOptions.Rule.ValueString()
+			}
+			psp_specMap["fs_group_strategy_options"] = fs_group_strategy_optionsNestedMap
+		}
+		if !data.PspSpec.HostIpc.IsNull() && !data.PspSpec.HostIpc.IsUnknown() {
+			psp_specMap["host_ipc"] = data.PspSpec.HostIpc.ValueBool()
+		}
+		if !data.PspSpec.HostNetwork.IsNull() && !data.PspSpec.HostNetwork.IsUnknown() {
+			psp_specMap["host_network"] = data.PspSpec.HostNetwork.ValueBool()
+		}
+		if !data.PspSpec.HostPid.IsNull() && !data.PspSpec.HostPid.IsUnknown() {
+			psp_specMap["host_pid"] = data.PspSpec.HostPid.ValueBool()
+		}
+		if !data.PspSpec.HostPortRanges.IsNull() && !data.PspSpec.HostPortRanges.IsUnknown() {
+			psp_specMap["host_port_ranges"] = data.PspSpec.HostPortRanges.ValueString()
+		}
+		if data.PspSpec.NoAllowedCapabilities != nil {
+			psp_specMap["no_allowed_capabilities"] = map[string]interface{}{}
+		}
+		if data.PspSpec.NoDefaultCapabilities != nil {
+			psp_specMap["no_default_capabilities"] = map[string]interface{}{}
+		}
+		if data.PspSpec.NoDropCapabilities != nil {
+			psp_specMap["no_drop_capabilities"] = map[string]interface{}{}
+		}
+		if data.PspSpec.NoFsGroups != nil {
+			psp_specMap["no_fs_groups"] = map[string]interface{}{}
+		}
+		if data.PspSpec.NoRunAsGroup != nil {
+			psp_specMap["no_run_as_group"] = map[string]interface{}{}
+		}
+		if data.PspSpec.NoRunAsUser != nil {
+			psp_specMap["no_run_as_user"] = map[string]interface{}{}
+		}
+		if data.PspSpec.NoRuntimeClass != nil {
+			psp_specMap["no_runtime_class"] = map[string]interface{}{}
+		}
+		if data.PspSpec.NoSeLinuxOptions != nil {
+			psp_specMap["no_se_linux_options"] = map[string]interface{}{}
+		}
+		if data.PspSpec.NoSupplementalGroups != nil {
+			psp_specMap["no_supplemental_groups"] = map[string]interface{}{}
+		}
+		if !data.PspSpec.Privileged.IsNull() && !data.PspSpec.Privileged.IsUnknown() {
+			psp_specMap["privileged"] = data.PspSpec.Privileged.ValueBool()
+		}
+		if !data.PspSpec.ReadOnlyRootFilesystem.IsNull() && !data.PspSpec.ReadOnlyRootFilesystem.IsUnknown() {
+			psp_specMap["read_only_root_filesystem"] = data.PspSpec.ReadOnlyRootFilesystem.ValueBool()
+		}
+		if data.PspSpec.RunAsGroup != nil {
+			run_as_groupNestedMap := make(map[string]interface{})
+			if !data.PspSpec.RunAsGroup.Rule.IsNull() && !data.PspSpec.RunAsGroup.Rule.IsUnknown() {
+				run_as_groupNestedMap["rule"] = data.PspSpec.RunAsGroup.Rule.ValueString()
+			}
+			psp_specMap["run_as_group"] = run_as_groupNestedMap
+		}
+		if data.PspSpec.RunAsUser != nil {
+			run_as_userNestedMap := make(map[string]interface{})
+			if !data.PspSpec.RunAsUser.Rule.IsNull() && !data.PspSpec.RunAsUser.Rule.IsUnknown() {
+				run_as_userNestedMap["rule"] = data.PspSpec.RunAsUser.Rule.ValueString()
+			}
+			psp_specMap["run_as_user"] = run_as_userNestedMap
+		}
+		if data.PspSpec.SupplementalGroups != nil {
+			supplemental_groupsNestedMap := make(map[string]interface{})
+			if !data.PspSpec.SupplementalGroups.Rule.IsNull() && !data.PspSpec.SupplementalGroups.Rule.IsUnknown() {
+				supplemental_groupsNestedMap["rule"] = data.PspSpec.SupplementalGroups.Rule.ValueString()
+			}
+			psp_specMap["supplemental_groups"] = supplemental_groupsNestedMap
+		}
+		apiResource.Spec["psp_spec"] = psp_specMap
+	}
+	if !data.Yaml.IsNull() && !data.Yaml.IsUnknown() {
+		apiResource.Spec["yaml"] = data.Yaml.ValueString()
+	}
+
+
 	created, err := r.client.CreateK8SPodSecurityPolicy(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create K8SPodSecurityPolicy: %s", err))
@@ -633,8 +738,17 @@ func (r *K8SPodSecurityPolicyResource) Create(ctx context.Context, req resource.
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+	if v, ok := created.Spec["yaml"].(string); ok && v != "" {
+		data.Yaml = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created K8SPodSecurityPolicy resource")
@@ -713,9 +827,117 @@ func (r *K8SPodSecurityPolicyResource) Read(ctx context.Context, req resource.Re
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if blockData, ok := apiResource.Spec["psp_spec"].(map[string]interface{}); ok && (isImport || data.PspSpec != nil) {
+		data.PspSpec = &K8SPodSecurityPolicyPspSpecModel{
+			AllowPrivilegeEscalation: func() types.Bool {
+				if !isImport && data.PspSpec != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.PspSpec.AllowPrivilegeEscalation
+				}
+				// Import case: read from API
+				if v, ok := blockData["allow_privilege_escalation"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			DefaultAllowPrivilegeEscalation: func() types.Bool {
+				if !isImport && data.PspSpec != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.PspSpec.DefaultAllowPrivilegeEscalation
+				}
+				// Import case: read from API
+				if v, ok := blockData["default_allow_privilege_escalation"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			HostIpc: func() types.Bool {
+				if !isImport && data.PspSpec != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.PspSpec.HostIpc
+				}
+				// Import case: read from API
+				if v, ok := blockData["host_ipc"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			HostNetwork: func() types.Bool {
+				if !isImport && data.PspSpec != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.PspSpec.HostNetwork
+				}
+				// Import case: read from API
+				if v, ok := blockData["host_network"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			HostPid: func() types.Bool {
+				if !isImport && data.PspSpec != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.PspSpec.HostPid
+				}
+				// Import case: read from API
+				if v, ok := blockData["host_pid"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			HostPortRanges: func() types.String {
+				if v, ok := blockData["host_port_ranges"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Privileged: func() types.Bool {
+				if !isImport && data.PspSpec != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.PspSpec.Privileged
+				}
+				// Import case: read from API
+				if v, ok := blockData["privileged"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			ReadOnlyRootFilesystem: func() types.Bool {
+				if !isImport && data.PspSpec != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.PspSpec.ReadOnlyRootFilesystem
+				}
+				// Import case: read from API
+				if v, ok := blockData["read_only_root_filesystem"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+		}
+	}
+	if v, ok := apiResource.Spec["yaml"].(string); ok && v != "" {
+		data.Yaml = types.StringValue(v)
+	} else {
+		data.Yaml = types.StringNull()
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -741,7 +963,7 @@ func (r *K8SPodSecurityPolicyResource) Update(ctx context.Context, req resource.
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.K8SPodSecurityPolicySpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -766,6 +988,107 @@ func (r *K8SPodSecurityPolicyResource) Update(ctx context.Context, req resource.
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.PspSpec != nil {
+		psp_specMap := make(map[string]interface{})
+		if !data.PspSpec.AllowPrivilegeEscalation.IsNull() && !data.PspSpec.AllowPrivilegeEscalation.IsUnknown() {
+			psp_specMap["allow_privilege_escalation"] = data.PspSpec.AllowPrivilegeEscalation.ValueBool()
+		}
+		if data.PspSpec.AllowedCapabilities != nil {
+			allowed_capabilitiesNestedMap := make(map[string]interface{})
+			psp_specMap["allowed_capabilities"] = allowed_capabilitiesNestedMap
+		}
+		if !data.PspSpec.DefaultAllowPrivilegeEscalation.IsNull() && !data.PspSpec.DefaultAllowPrivilegeEscalation.IsUnknown() {
+			psp_specMap["default_allow_privilege_escalation"] = data.PspSpec.DefaultAllowPrivilegeEscalation.ValueBool()
+		}
+		if data.PspSpec.DefaultCapabilities != nil {
+			default_capabilitiesNestedMap := make(map[string]interface{})
+			psp_specMap["default_capabilities"] = default_capabilitiesNestedMap
+		}
+		if data.PspSpec.DropCapabilities != nil {
+			drop_capabilitiesNestedMap := make(map[string]interface{})
+			psp_specMap["drop_capabilities"] = drop_capabilitiesNestedMap
+		}
+		if data.PspSpec.FsGroupStrategyOptions != nil {
+			fs_group_strategy_optionsNestedMap := make(map[string]interface{})
+			if !data.PspSpec.FsGroupStrategyOptions.Rule.IsNull() && !data.PspSpec.FsGroupStrategyOptions.Rule.IsUnknown() {
+				fs_group_strategy_optionsNestedMap["rule"] = data.PspSpec.FsGroupStrategyOptions.Rule.ValueString()
+			}
+			psp_specMap["fs_group_strategy_options"] = fs_group_strategy_optionsNestedMap
+		}
+		if !data.PspSpec.HostIpc.IsNull() && !data.PspSpec.HostIpc.IsUnknown() {
+			psp_specMap["host_ipc"] = data.PspSpec.HostIpc.ValueBool()
+		}
+		if !data.PspSpec.HostNetwork.IsNull() && !data.PspSpec.HostNetwork.IsUnknown() {
+			psp_specMap["host_network"] = data.PspSpec.HostNetwork.ValueBool()
+		}
+		if !data.PspSpec.HostPid.IsNull() && !data.PspSpec.HostPid.IsUnknown() {
+			psp_specMap["host_pid"] = data.PspSpec.HostPid.ValueBool()
+		}
+		if !data.PspSpec.HostPortRanges.IsNull() && !data.PspSpec.HostPortRanges.IsUnknown() {
+			psp_specMap["host_port_ranges"] = data.PspSpec.HostPortRanges.ValueString()
+		}
+		if data.PspSpec.NoAllowedCapabilities != nil {
+			psp_specMap["no_allowed_capabilities"] = map[string]interface{}{}
+		}
+		if data.PspSpec.NoDefaultCapabilities != nil {
+			psp_specMap["no_default_capabilities"] = map[string]interface{}{}
+		}
+		if data.PspSpec.NoDropCapabilities != nil {
+			psp_specMap["no_drop_capabilities"] = map[string]interface{}{}
+		}
+		if data.PspSpec.NoFsGroups != nil {
+			psp_specMap["no_fs_groups"] = map[string]interface{}{}
+		}
+		if data.PspSpec.NoRunAsGroup != nil {
+			psp_specMap["no_run_as_group"] = map[string]interface{}{}
+		}
+		if data.PspSpec.NoRunAsUser != nil {
+			psp_specMap["no_run_as_user"] = map[string]interface{}{}
+		}
+		if data.PspSpec.NoRuntimeClass != nil {
+			psp_specMap["no_runtime_class"] = map[string]interface{}{}
+		}
+		if data.PspSpec.NoSeLinuxOptions != nil {
+			psp_specMap["no_se_linux_options"] = map[string]interface{}{}
+		}
+		if data.PspSpec.NoSupplementalGroups != nil {
+			psp_specMap["no_supplemental_groups"] = map[string]interface{}{}
+		}
+		if !data.PspSpec.Privileged.IsNull() && !data.PspSpec.Privileged.IsUnknown() {
+			psp_specMap["privileged"] = data.PspSpec.Privileged.ValueBool()
+		}
+		if !data.PspSpec.ReadOnlyRootFilesystem.IsNull() && !data.PspSpec.ReadOnlyRootFilesystem.IsUnknown() {
+			psp_specMap["read_only_root_filesystem"] = data.PspSpec.ReadOnlyRootFilesystem.ValueBool()
+		}
+		if data.PspSpec.RunAsGroup != nil {
+			run_as_groupNestedMap := make(map[string]interface{})
+			if !data.PspSpec.RunAsGroup.Rule.IsNull() && !data.PspSpec.RunAsGroup.Rule.IsUnknown() {
+				run_as_groupNestedMap["rule"] = data.PspSpec.RunAsGroup.Rule.ValueString()
+			}
+			psp_specMap["run_as_group"] = run_as_groupNestedMap
+		}
+		if data.PspSpec.RunAsUser != nil {
+			run_as_userNestedMap := make(map[string]interface{})
+			if !data.PspSpec.RunAsUser.Rule.IsNull() && !data.PspSpec.RunAsUser.Rule.IsUnknown() {
+				run_as_userNestedMap["rule"] = data.PspSpec.RunAsUser.Rule.ValueString()
+			}
+			psp_specMap["run_as_user"] = run_as_userNestedMap
+		}
+		if data.PspSpec.SupplementalGroups != nil {
+			supplemental_groupsNestedMap := make(map[string]interface{})
+			if !data.PspSpec.SupplementalGroups.Rule.IsNull() && !data.PspSpec.SupplementalGroups.Rule.IsUnknown() {
+				supplemental_groupsNestedMap["rule"] = data.PspSpec.SupplementalGroups.Rule.ValueString()
+			}
+			psp_specMap["supplemental_groups"] = supplemental_groupsNestedMap
+		}
+		apiResource.Spec["psp_spec"] = psp_specMap
+	}
+	if !data.Yaml.IsNull() && !data.Yaml.IsUnknown() {
+		apiResource.Spec["yaml"] = data.Yaml.ValueString()
+	}
+
+
 	updated, err := r.client.UpdateK8SPodSecurityPolicy(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update K8SPodSecurityPolicy: %s", err))
@@ -774,6 +1097,12 @@ func (r *K8SPodSecurityPolicyResource) Update(ctx context.Context, req resource.
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
+	if v, ok := updated.Spec["yaml"].(string); ok && v != "" {
+		data.Yaml = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -786,6 +1115,7 @@ func (r *K8SPodSecurityPolicyResource) Update(ctx context.Context, req resource.
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -812,6 +1142,15 @@ func (r *K8SPodSecurityPolicyResource) Delete(ctx context.Context, req resource.
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "K8SPodSecurityPolicy already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "K8SPodSecurityPolicy delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

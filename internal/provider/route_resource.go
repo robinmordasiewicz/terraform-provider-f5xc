@@ -1306,7 +1306,7 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 										"retriable_status_codes": schema.ListAttribute{
 											MarkdownDescription: "Status Code to Retry. HTTP status codes that should trigger a retry in addition to those specified by retry_on.",
 											Optional: true,
-											ElementType: types.StringType,
+											ElementType: types.Int64Type,
 										},
 										"retry_condition": schema.ListAttribute{
 											MarkdownDescription: "Retry Condition. Specifies the conditions under which retry takes place. Retries can be on different types of condition depending on application requirements. For example, network failure, all 5xx response codes, idempotent 4xx response codes, etc The possible values are '5xx' : Retry will be done if the upstream server responds with any 5xx response code, or does not respond at all (disconnect/reset/read timeout). 'gateway-error' : Retry will be done only if the upstream server responds with 502, 503 or 504 responses (Included in 5xx) 'connect-failure' : Retry will be done if the request fails because of a connection failure to the upstream server (connect timeout, etc.). (Included in 5xx) 'refused-stream' : Retry is done if the upstream server resets the stream with a REFUSED_STREAM error code (Included in 5xx) 'retriable-4xx' : Retry is done if the upstream server responds with a retriable 4xx response code. The only response code in this category is HTTP CONFLICT (409) 'retriable-status-codes' : Retry is done if the upstream server responds with any response code matching one defined in retriable_status_codes field 'reset' : Retry is done if the upstream server does not respond at all (disconnect/reset/read timeout.)",
@@ -1599,7 +1599,7 @@ func (r *RouteResource) Create(ctx context.Context, req resource.CreateRequest, 
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.RouteSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -1624,6 +1624,108 @@ func (r *RouteResource) Create(ctx context.Context, req resource.CreateRequest, 
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if len(data.Routes) > 0 {
+		var routesList []map[string]interface{}
+		for _, item := range data.Routes {
+			itemMap := make(map[string]interface{})
+			if item.BotDefenseJavascriptInjection != nil {
+				bot_defense_javascript_injectionNestedMap := make(map[string]interface{})
+				if !item.BotDefenseJavascriptInjection.JavascriptLocation.IsNull() && !item.BotDefenseJavascriptInjection.JavascriptLocation.IsUnknown() {
+					bot_defense_javascript_injectionNestedMap["javascript_location"] = item.BotDefenseJavascriptInjection.JavascriptLocation.ValueString()
+				}
+				itemMap["bot_defense_javascript_injection"] = bot_defense_javascript_injectionNestedMap
+			}
+			if !item.DisableLocationAdd.IsNull() && !item.DisableLocationAdd.IsUnknown() {
+				itemMap["disable_location_add"] = item.DisableLocationAdd.ValueBool()
+			}
+			if item.InheritedBotDefenseJavascriptInjection != nil {
+				itemMap["inherited_bot_defense_javascript_injection"] = map[string]interface{}{}
+			}
+			if item.InheritedWAFExclusion != nil {
+				itemMap["inherited_waf_exclusion"] = map[string]interface{}{}
+			}
+			if item.RouteDestination != nil {
+				route_destinationNestedMap := make(map[string]interface{})
+				if !item.RouteDestination.AutoHostRewrite.IsNull() && !item.RouteDestination.AutoHostRewrite.IsUnknown() {
+					route_destinationNestedMap["auto_host_rewrite"] = item.RouteDestination.AutoHostRewrite.ValueBool()
+				}
+				if !item.RouteDestination.HostRewrite.IsNull() && !item.RouteDestination.HostRewrite.IsUnknown() {
+					route_destinationNestedMap["host_rewrite"] = item.RouteDestination.HostRewrite.ValueString()
+				}
+				if !item.RouteDestination.PrefixRewrite.IsNull() && !item.RouteDestination.PrefixRewrite.IsUnknown() {
+					route_destinationNestedMap["prefix_rewrite"] = item.RouteDestination.PrefixRewrite.ValueString()
+				}
+				if !item.RouteDestination.Priority.IsNull() && !item.RouteDestination.Priority.IsUnknown() {
+					route_destinationNestedMap["priority"] = item.RouteDestination.Priority.ValueString()
+				}
+				if !item.RouteDestination.Timeout.IsNull() && !item.RouteDestination.Timeout.IsUnknown() {
+					route_destinationNestedMap["timeout"] = item.RouteDestination.Timeout.ValueInt64()
+				}
+				itemMap["route_destination"] = route_destinationNestedMap
+			}
+			if item.RouteDirectResponse != nil {
+				route_direct_responseNestedMap := make(map[string]interface{})
+				if !item.RouteDirectResponse.ResponseBodyEncoded.IsNull() && !item.RouteDirectResponse.ResponseBodyEncoded.IsUnknown() {
+					route_direct_responseNestedMap["response_body_encoded"] = item.RouteDirectResponse.ResponseBodyEncoded.ValueString()
+				}
+				if !item.RouteDirectResponse.ResponseCode.IsNull() && !item.RouteDirectResponse.ResponseCode.IsUnknown() {
+					route_direct_responseNestedMap["response_code"] = item.RouteDirectResponse.ResponseCode.ValueInt64()
+				}
+				itemMap["route_direct_response"] = route_direct_responseNestedMap
+			}
+			if item.RouteRedirect != nil {
+				route_redirectNestedMap := make(map[string]interface{})
+				if !item.RouteRedirect.HostRedirect.IsNull() && !item.RouteRedirect.HostRedirect.IsUnknown() {
+					route_redirectNestedMap["host_redirect"] = item.RouteRedirect.HostRedirect.ValueString()
+				}
+				if !item.RouteRedirect.PathRedirect.IsNull() && !item.RouteRedirect.PathRedirect.IsUnknown() {
+					route_redirectNestedMap["path_redirect"] = item.RouteRedirect.PathRedirect.ValueString()
+				}
+				if !item.RouteRedirect.PrefixRewrite.IsNull() && !item.RouteRedirect.PrefixRewrite.IsUnknown() {
+					route_redirectNestedMap["prefix_rewrite"] = item.RouteRedirect.PrefixRewrite.ValueString()
+				}
+				if !item.RouteRedirect.ProtoRedirect.IsNull() && !item.RouteRedirect.ProtoRedirect.IsUnknown() {
+					route_redirectNestedMap["proto_redirect"] = item.RouteRedirect.ProtoRedirect.ValueString()
+				}
+				if !item.RouteRedirect.ReplaceParams.IsNull() && !item.RouteRedirect.ReplaceParams.IsUnknown() {
+					route_redirectNestedMap["replace_params"] = item.RouteRedirect.ReplaceParams.ValueString()
+				}
+				if !item.RouteRedirect.ResponseCode.IsNull() && !item.RouteRedirect.ResponseCode.IsUnknown() {
+					route_redirectNestedMap["response_code"] = item.RouteRedirect.ResponseCode.ValueInt64()
+				}
+				itemMap["route_redirect"] = route_redirectNestedMap
+			}
+			if item.ServicePolicy != nil {
+				service_policyNestedMap := make(map[string]interface{})
+				if !item.ServicePolicy.Disable.IsNull() && !item.ServicePolicy.Disable.IsUnknown() {
+					service_policyNestedMap["disable"] = item.ServicePolicy.Disable.ValueBool()
+				}
+				itemMap["service_policy"] = service_policyNestedMap
+			}
+			if item.WAFExclusionPolicy != nil {
+				waf_exclusion_policyNestedMap := make(map[string]interface{})
+				if !item.WAFExclusionPolicy.Name.IsNull() && !item.WAFExclusionPolicy.Name.IsUnknown() {
+					waf_exclusion_policyNestedMap["name"] = item.WAFExclusionPolicy.Name.ValueString()
+				}
+				if !item.WAFExclusionPolicy.Namespace.IsNull() && !item.WAFExclusionPolicy.Namespace.IsUnknown() {
+					waf_exclusion_policyNestedMap["namespace"] = item.WAFExclusionPolicy.Namespace.ValueString()
+				}
+				if !item.WAFExclusionPolicy.Tenant.IsNull() && !item.WAFExclusionPolicy.Tenant.IsUnknown() {
+					waf_exclusion_policyNestedMap["tenant"] = item.WAFExclusionPolicy.Tenant.ValueString()
+				}
+				itemMap["waf_exclusion_policy"] = waf_exclusion_policyNestedMap
+			}
+			if item.WAFType != nil {
+				waf_typeNestedMap := make(map[string]interface{})
+				itemMap["waf_type"] = waf_typeNestedMap
+			}
+			routesList = append(routesList, itemMap)
+		}
+		apiResource.Spec["routes"] = routesList
+	}
+
+
 	created, err := r.client.CreateRoute(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create Route: %s", err))
@@ -1632,8 +1734,13 @@ func (r *RouteResource) Create(ctx context.Context, req resource.CreateRequest, 
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created Route resource")
@@ -1712,9 +1819,210 @@ func (r *RouteResource) Read(ctx context.Context, req resource.ReadRequest, resp
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if listData, ok := apiResource.Spec["routes"].([]interface{}); ok && len(listData) > 0 {
+		var routesList []RouteRoutesModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				routesList = append(routesList, RouteRoutesModel{
+					BotDefenseJavascriptInjection: func() *RouteRoutesBotDefenseJavascriptInjectionModel {
+						if nestedMap, ok := itemMap["bot_defense_javascript_injection"].(map[string]interface{}); ok {
+							return &RouteRoutesBotDefenseJavascriptInjectionModel{
+								JavascriptLocation: func() types.String {
+									if v, ok := nestedMap["javascript_location"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					DisableLocationAdd: func() types.Bool {
+						if v, ok := itemMap["disable_location_add"].(bool); ok {
+							return types.BoolValue(v)
+						}
+						return types.BoolNull()
+					}(),
+					InheritedBotDefenseJavascriptInjection: func() *RouteEmptyModel {
+						if _, ok := itemMap["inherited_bot_defense_javascript_injection"].(map[string]interface{}); ok {
+							return &RouteEmptyModel{}
+						}
+						return nil
+					}(),
+					InheritedWAFExclusion: func() *RouteEmptyModel {
+						if _, ok := itemMap["inherited_waf_exclusion"].(map[string]interface{}); ok {
+							return &RouteEmptyModel{}
+						}
+						return nil
+					}(),
+					RouteDestination: func() *RouteRoutesRouteDestinationModel {
+						if nestedMap, ok := itemMap["route_destination"].(map[string]interface{}); ok {
+							return &RouteRoutesRouteDestinationModel{
+								AutoHostRewrite: func() types.Bool {
+									if v, ok := nestedMap["auto_host_rewrite"].(bool); ok {
+										return types.BoolValue(v)
+									}
+									return types.BoolNull()
+								}(),
+								HostRewrite: func() types.String {
+									if v, ok := nestedMap["host_rewrite"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								PrefixRewrite: func() types.String {
+									if v, ok := nestedMap["prefix_rewrite"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Priority: func() types.String {
+									if v, ok := nestedMap["priority"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Timeout: func() types.Int64 {
+									if v, ok := nestedMap["timeout"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					RouteDirectResponse: func() *RouteRoutesRouteDirectResponseModel {
+						if nestedMap, ok := itemMap["route_direct_response"].(map[string]interface{}); ok {
+							return &RouteRoutesRouteDirectResponseModel{
+								ResponseBodyEncoded: func() types.String {
+									if v, ok := nestedMap["response_body_encoded"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								ResponseCode: func() types.Int64 {
+									if v, ok := nestedMap["response_code"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					RouteRedirect: func() *RouteRoutesRouteRedirectModel {
+						if nestedMap, ok := itemMap["route_redirect"].(map[string]interface{}); ok {
+							return &RouteRoutesRouteRedirectModel{
+								HostRedirect: func() types.String {
+									if v, ok := nestedMap["host_redirect"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								PathRedirect: func() types.String {
+									if v, ok := nestedMap["path_redirect"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								PrefixRewrite: func() types.String {
+									if v, ok := nestedMap["prefix_rewrite"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								ProtoRedirect: func() types.String {
+									if v, ok := nestedMap["proto_redirect"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								ReplaceParams: func() types.String {
+									if v, ok := nestedMap["replace_params"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								ResponseCode: func() types.Int64 {
+									if v, ok := nestedMap["response_code"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					ServicePolicy: func() *RouteRoutesServicePolicyModel {
+						if nestedMap, ok := itemMap["service_policy"].(map[string]interface{}); ok {
+							return &RouteRoutesServicePolicyModel{
+								Disable: func() types.Bool {
+									if v, ok := nestedMap["disable"].(bool); ok {
+										return types.BoolValue(v)
+									}
+									return types.BoolNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					WAFExclusionPolicy: func() *RouteRoutesWAFExclusionPolicyModel {
+						if nestedMap, ok := itemMap["waf_exclusion_policy"].(map[string]interface{}); ok {
+							return &RouteRoutesWAFExclusionPolicyModel{
+								Name: func() types.String {
+									if v, ok := nestedMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := nestedMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := nestedMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					WAFType: func() *RouteRoutesWAFTypeModel {
+						if _, ok := itemMap["waf_type"].(map[string]interface{}); ok {
+							return &RouteRoutesWAFTypeModel{
+							}
+						}
+						return nil
+					}(),
+				})
+			}
+		}
+		data.Routes = routesList
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -1740,7 +2048,7 @@ func (r *RouteResource) Update(ctx context.Context, req resource.UpdateRequest, 
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.RouteSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -1765,6 +2073,108 @@ func (r *RouteResource) Update(ctx context.Context, req resource.UpdateRequest, 
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if len(data.Routes) > 0 {
+		var routesList []map[string]interface{}
+		for _, item := range data.Routes {
+			itemMap := make(map[string]interface{})
+			if item.BotDefenseJavascriptInjection != nil {
+				bot_defense_javascript_injectionNestedMap := make(map[string]interface{})
+				if !item.BotDefenseJavascriptInjection.JavascriptLocation.IsNull() && !item.BotDefenseJavascriptInjection.JavascriptLocation.IsUnknown() {
+					bot_defense_javascript_injectionNestedMap["javascript_location"] = item.BotDefenseJavascriptInjection.JavascriptLocation.ValueString()
+				}
+				itemMap["bot_defense_javascript_injection"] = bot_defense_javascript_injectionNestedMap
+			}
+			if !item.DisableLocationAdd.IsNull() && !item.DisableLocationAdd.IsUnknown() {
+				itemMap["disable_location_add"] = item.DisableLocationAdd.ValueBool()
+			}
+			if item.InheritedBotDefenseJavascriptInjection != nil {
+				itemMap["inherited_bot_defense_javascript_injection"] = map[string]interface{}{}
+			}
+			if item.InheritedWAFExclusion != nil {
+				itemMap["inherited_waf_exclusion"] = map[string]interface{}{}
+			}
+			if item.RouteDestination != nil {
+				route_destinationNestedMap := make(map[string]interface{})
+				if !item.RouteDestination.AutoHostRewrite.IsNull() && !item.RouteDestination.AutoHostRewrite.IsUnknown() {
+					route_destinationNestedMap["auto_host_rewrite"] = item.RouteDestination.AutoHostRewrite.ValueBool()
+				}
+				if !item.RouteDestination.HostRewrite.IsNull() && !item.RouteDestination.HostRewrite.IsUnknown() {
+					route_destinationNestedMap["host_rewrite"] = item.RouteDestination.HostRewrite.ValueString()
+				}
+				if !item.RouteDestination.PrefixRewrite.IsNull() && !item.RouteDestination.PrefixRewrite.IsUnknown() {
+					route_destinationNestedMap["prefix_rewrite"] = item.RouteDestination.PrefixRewrite.ValueString()
+				}
+				if !item.RouteDestination.Priority.IsNull() && !item.RouteDestination.Priority.IsUnknown() {
+					route_destinationNestedMap["priority"] = item.RouteDestination.Priority.ValueString()
+				}
+				if !item.RouteDestination.Timeout.IsNull() && !item.RouteDestination.Timeout.IsUnknown() {
+					route_destinationNestedMap["timeout"] = item.RouteDestination.Timeout.ValueInt64()
+				}
+				itemMap["route_destination"] = route_destinationNestedMap
+			}
+			if item.RouteDirectResponse != nil {
+				route_direct_responseNestedMap := make(map[string]interface{})
+				if !item.RouteDirectResponse.ResponseBodyEncoded.IsNull() && !item.RouteDirectResponse.ResponseBodyEncoded.IsUnknown() {
+					route_direct_responseNestedMap["response_body_encoded"] = item.RouteDirectResponse.ResponseBodyEncoded.ValueString()
+				}
+				if !item.RouteDirectResponse.ResponseCode.IsNull() && !item.RouteDirectResponse.ResponseCode.IsUnknown() {
+					route_direct_responseNestedMap["response_code"] = item.RouteDirectResponse.ResponseCode.ValueInt64()
+				}
+				itemMap["route_direct_response"] = route_direct_responseNestedMap
+			}
+			if item.RouteRedirect != nil {
+				route_redirectNestedMap := make(map[string]interface{})
+				if !item.RouteRedirect.HostRedirect.IsNull() && !item.RouteRedirect.HostRedirect.IsUnknown() {
+					route_redirectNestedMap["host_redirect"] = item.RouteRedirect.HostRedirect.ValueString()
+				}
+				if !item.RouteRedirect.PathRedirect.IsNull() && !item.RouteRedirect.PathRedirect.IsUnknown() {
+					route_redirectNestedMap["path_redirect"] = item.RouteRedirect.PathRedirect.ValueString()
+				}
+				if !item.RouteRedirect.PrefixRewrite.IsNull() && !item.RouteRedirect.PrefixRewrite.IsUnknown() {
+					route_redirectNestedMap["prefix_rewrite"] = item.RouteRedirect.PrefixRewrite.ValueString()
+				}
+				if !item.RouteRedirect.ProtoRedirect.IsNull() && !item.RouteRedirect.ProtoRedirect.IsUnknown() {
+					route_redirectNestedMap["proto_redirect"] = item.RouteRedirect.ProtoRedirect.ValueString()
+				}
+				if !item.RouteRedirect.ReplaceParams.IsNull() && !item.RouteRedirect.ReplaceParams.IsUnknown() {
+					route_redirectNestedMap["replace_params"] = item.RouteRedirect.ReplaceParams.ValueString()
+				}
+				if !item.RouteRedirect.ResponseCode.IsNull() && !item.RouteRedirect.ResponseCode.IsUnknown() {
+					route_redirectNestedMap["response_code"] = item.RouteRedirect.ResponseCode.ValueInt64()
+				}
+				itemMap["route_redirect"] = route_redirectNestedMap
+			}
+			if item.ServicePolicy != nil {
+				service_policyNestedMap := make(map[string]interface{})
+				if !item.ServicePolicy.Disable.IsNull() && !item.ServicePolicy.Disable.IsUnknown() {
+					service_policyNestedMap["disable"] = item.ServicePolicy.Disable.ValueBool()
+				}
+				itemMap["service_policy"] = service_policyNestedMap
+			}
+			if item.WAFExclusionPolicy != nil {
+				waf_exclusion_policyNestedMap := make(map[string]interface{})
+				if !item.WAFExclusionPolicy.Name.IsNull() && !item.WAFExclusionPolicy.Name.IsUnknown() {
+					waf_exclusion_policyNestedMap["name"] = item.WAFExclusionPolicy.Name.ValueString()
+				}
+				if !item.WAFExclusionPolicy.Namespace.IsNull() && !item.WAFExclusionPolicy.Namespace.IsUnknown() {
+					waf_exclusion_policyNestedMap["namespace"] = item.WAFExclusionPolicy.Namespace.ValueString()
+				}
+				if !item.WAFExclusionPolicy.Tenant.IsNull() && !item.WAFExclusionPolicy.Tenant.IsUnknown() {
+					waf_exclusion_policyNestedMap["tenant"] = item.WAFExclusionPolicy.Tenant.ValueString()
+				}
+				itemMap["waf_exclusion_policy"] = waf_exclusion_policyNestedMap
+			}
+			if item.WAFType != nil {
+				waf_typeNestedMap := make(map[string]interface{})
+				itemMap["waf_type"] = waf_typeNestedMap
+			}
+			routesList = append(routesList, itemMap)
+		}
+		apiResource.Spec["routes"] = routesList
+	}
+
+
 	updated, err := r.client.UpdateRoute(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update Route: %s", err))
@@ -1773,6 +2183,8 @@ func (r *RouteResource) Update(ctx context.Context, req resource.UpdateRequest, 
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -1785,6 +2197,7 @@ func (r *RouteResource) Update(ctx context.Context, req resource.UpdateRequest, 
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -1811,6 +2224,15 @@ func (r *RouteResource) Delete(ctx context.Context, req resource.DeleteRequest, 
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "Route already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "Route delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

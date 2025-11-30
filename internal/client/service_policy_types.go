@@ -10,13 +10,8 @@ import (
 
 // ServicePolicy represents a F5XC ServicePolicy
 type ServicePolicy struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     ServicePolicySpec `json:"spec"`
-}
-
-// ServicePolicySpec defines the specification for ServicePolicy
-type ServicePolicySpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateServicePolicy creates a new ServicePolicy

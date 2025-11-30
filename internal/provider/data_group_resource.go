@@ -295,7 +295,7 @@ func (r *DataGroupResource) Create(ctx context.Context, req resource.CreateReque
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.DataGroupSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -320,6 +320,30 @@ func (r *DataGroupResource) Create(ctx context.Context, req resource.CreateReque
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.AddressRecords != nil {
+		address_recordsMap := make(map[string]interface{})
+		if data.AddressRecords.Records != nil {
+			address_recordsMap["records"] = map[string]interface{}{}
+		}
+		apiResource.Spec["address_records"] = address_recordsMap
+	}
+	if data.IntegerRecords != nil {
+		integer_recordsMap := make(map[string]interface{})
+		if data.IntegerRecords.Records != nil {
+			integer_recordsMap["records"] = map[string]interface{}{}
+		}
+		apiResource.Spec["integer_records"] = integer_recordsMap
+	}
+	if data.StringRecords != nil {
+		string_recordsMap := make(map[string]interface{})
+		if data.StringRecords.Records != nil {
+			string_recordsMap["records"] = map[string]interface{}{}
+		}
+		apiResource.Spec["string_records"] = string_recordsMap
+	}
+
+
 	created, err := r.client.CreateDataGroup(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create DataGroup: %s", err))
@@ -328,8 +352,13 @@ func (r *DataGroupResource) Create(ctx context.Context, req resource.CreateReque
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created DataGroup resource")
@@ -408,9 +437,40 @@ func (r *DataGroupResource) Read(ctx context.Context, req resource.ReadRequest, 
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if _, ok := apiResource.Spec["address_records"].(map[string]interface{}); ok && isImport && data.AddressRecords == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AddressRecords = &DataGroupAddressRecordsModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["integer_records"].(map[string]interface{}); ok && isImport && data.IntegerRecords == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.IntegerRecords = &DataGroupIntegerRecordsModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["string_records"].(map[string]interface{}); ok && isImport && data.StringRecords == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.StringRecords = &DataGroupStringRecordsModel{}
+	}
+	// Normal Read: preserve existing state value
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -436,7 +496,7 @@ func (r *DataGroupResource) Update(ctx context.Context, req resource.UpdateReque
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.DataGroupSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -461,6 +521,30 @@ func (r *DataGroupResource) Update(ctx context.Context, req resource.UpdateReque
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.AddressRecords != nil {
+		address_recordsMap := make(map[string]interface{})
+		if data.AddressRecords.Records != nil {
+			address_recordsMap["records"] = map[string]interface{}{}
+		}
+		apiResource.Spec["address_records"] = address_recordsMap
+	}
+	if data.IntegerRecords != nil {
+		integer_recordsMap := make(map[string]interface{})
+		if data.IntegerRecords.Records != nil {
+			integer_recordsMap["records"] = map[string]interface{}{}
+		}
+		apiResource.Spec["integer_records"] = integer_recordsMap
+	}
+	if data.StringRecords != nil {
+		string_recordsMap := make(map[string]interface{})
+		if data.StringRecords.Records != nil {
+			string_recordsMap["records"] = map[string]interface{}{}
+		}
+		apiResource.Spec["string_records"] = string_recordsMap
+	}
+
+
 	updated, err := r.client.UpdateDataGroup(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update DataGroup: %s", err))
@@ -469,6 +553,8 @@ func (r *DataGroupResource) Update(ctx context.Context, req resource.UpdateReque
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -481,6 +567,7 @@ func (r *DataGroupResource) Update(ctx context.Context, req resource.UpdateReque
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -507,6 +594,15 @@ func (r *DataGroupResource) Delete(ctx context.Context, req resource.DeleteReque
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "DataGroup already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "DataGroup delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

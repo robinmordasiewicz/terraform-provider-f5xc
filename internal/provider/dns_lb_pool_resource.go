@@ -12,6 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -139,9 +140,9 @@ type DNSLbPoolResourceModel struct {
 	Description types.String `tfsdk:"description"`
 	Disable types.Bool `tfsdk:"disable"`
 	Labels types.Map `tfsdk:"labels"`
+	ID types.String `tfsdk:"id"`
 	LoadBalancingMode types.String `tfsdk:"load_balancing_mode"`
 	Ttl types.Int64 `tfsdk:"ttl"`
-	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
 	APool *DNSLbPoolAPoolModel `tfsdk:"a_pool"`
 	AaaaPool *DNSLbPoolAaaaPoolModel `tfsdk:"aaaa_pool"`
@@ -198,19 +199,27 @@ func (r *DNSLbPoolResource) Schema(ctx context.Context, req resource.SchemaReque
 				Optional: true,
 				ElementType: types.StringType,
 			},
-			"load_balancing_mode": schema.StringAttribute{
-				MarkdownDescription: "LoadBalancing Algorithm. - ROUND_ROBIN: Round-Robin Round Robin will ensure random equal distribution of requests among all pool members in a pool. - RATIO_MEMBER: Ratio-Member Ratio-Member performs load balancing of requests across the pool members based on the ratio assigned to each pool member - STATIC_PERSIST: Static-Persist The Static Persist load balancing method uses the persist mask, with the source IP address of the Local Domain Name Server (LDNS), in a deterministic algorithm to send requests to a specific pool member. If the DNS resolver passes ECS (EDNS-Client-Subnet) information, then a hash of it will be used, to send the client to the same pool member - PRIORITY: Priority The Priority load balancing method returns all available endpoints in a pool with the highest priority. Pool Members have a priority value, starting from zero, where a lower value means a higher priority. Possible values are `ROUND_ROBIN`, `RATIO_MEMBER`, `STATIC_PERSIST`, `PRIORITY`. Defaults to `ROUND_ROBIN`.",
-				Optional: true,
-			},
-			"ttl": schema.Int64Attribute{
-				MarkdownDescription: "[OneOf: ttl, use_rrset_ttl] TTL. Custom TTL in seconds (default 30) for responses from this pool",
-				Optional: true,
-			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
 				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"load_balancing_mode": schema.StringAttribute{
+				MarkdownDescription: "LoadBalancing Algorithm. - ROUND_ROBIN: Round-Robin Round Robin will ensure random equal distribution of requests among all pool members in a pool. - RATIO_MEMBER: Ratio-Member Ratio-Member performs load balancing of requests across the pool members based on the ratio assigned to each pool member - STATIC_PERSIST: Static-Persist The Static Persist load balancing method uses the persist mask, with the source IP address of the Local Domain Name Server (LDNS), in a deterministic algorithm to send requests to a specific pool member. If the DNS resolver passes ECS (EDNS-Client-Subnet) information, then a hash of it will be used, to send the client to the same pool member - PRIORITY: Priority The Priority load balancing method returns all available endpoints in a pool with the highest priority. Pool Members have a priority value, starting from zero, where a lower value means a higher priority. Possible values are `ROUND_ROBIN`, `RATIO_MEMBER`, `STATIC_PERSIST`, `PRIORITY`. Defaults to `ROUND_ROBIN`.",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"ttl": schema.Int64Attribute{
+				MarkdownDescription: "[OneOf: ttl, use_rrset_ttl] TTL. Custom TTL in seconds (default 30) for responses from this pool",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.Int64{
+					int64planmodifier.UseStateForUnknown(),
 				},
 			},
 		},
@@ -557,7 +566,7 @@ func (r *DNSLbPoolResource) Create(ctx context.Context, req resource.CreateReque
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.DNSLbPoolSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -582,6 +591,67 @@ func (r *DNSLbPoolResource) Create(ctx context.Context, req resource.CreateReque
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.APool != nil {
+		a_poolMap := make(map[string]interface{})
+		if data.APool.DisableHealthCheck != nil {
+			a_poolMap["disable_health_check"] = map[string]interface{}{}
+		}
+		if data.APool.HealthCheck != nil {
+			health_checkNestedMap := make(map[string]interface{})
+			if !data.APool.HealthCheck.Name.IsNull() && !data.APool.HealthCheck.Name.IsUnknown() {
+				health_checkNestedMap["name"] = data.APool.HealthCheck.Name.ValueString()
+			}
+			if !data.APool.HealthCheck.Namespace.IsNull() && !data.APool.HealthCheck.Namespace.IsUnknown() {
+				health_checkNestedMap["namespace"] = data.APool.HealthCheck.Namespace.ValueString()
+			}
+			if !data.APool.HealthCheck.Tenant.IsNull() && !data.APool.HealthCheck.Tenant.IsUnknown() {
+				health_checkNestedMap["tenant"] = data.APool.HealthCheck.Tenant.ValueString()
+			}
+			a_poolMap["health_check"] = health_checkNestedMap
+		}
+		if !data.APool.MaxAnswers.IsNull() && !data.APool.MaxAnswers.IsUnknown() {
+			a_poolMap["max_answers"] = data.APool.MaxAnswers.ValueInt64()
+		}
+		apiResource.Spec["a_pool"] = a_poolMap
+	}
+	if data.AaaaPool != nil {
+		aaaa_poolMap := make(map[string]interface{})
+		if !data.AaaaPool.MaxAnswers.IsNull() && !data.AaaaPool.MaxAnswers.IsUnknown() {
+			aaaa_poolMap["max_answers"] = data.AaaaPool.MaxAnswers.ValueInt64()
+		}
+		apiResource.Spec["aaaa_pool"] = aaaa_poolMap
+	}
+	if data.CnamePool != nil {
+		cname_poolMap := make(map[string]interface{})
+		apiResource.Spec["cname_pool"] = cname_poolMap
+	}
+	if data.MxPool != nil {
+		mx_poolMap := make(map[string]interface{})
+		if !data.MxPool.MaxAnswers.IsNull() && !data.MxPool.MaxAnswers.IsUnknown() {
+			mx_poolMap["max_answers"] = data.MxPool.MaxAnswers.ValueInt64()
+		}
+		apiResource.Spec["mx_pool"] = mx_poolMap
+	}
+	if data.SrvPool != nil {
+		srv_poolMap := make(map[string]interface{})
+		if !data.SrvPool.MaxAnswers.IsNull() && !data.SrvPool.MaxAnswers.IsUnknown() {
+			srv_poolMap["max_answers"] = data.SrvPool.MaxAnswers.ValueInt64()
+		}
+		apiResource.Spec["srv_pool"] = srv_poolMap
+	}
+	if data.UseRrsetTtl != nil {
+		use_rrset_ttlMap := make(map[string]interface{})
+		apiResource.Spec["use_rrset_ttl"] = use_rrset_ttlMap
+	}
+	if !data.LoadBalancingMode.IsNull() && !data.LoadBalancingMode.IsUnknown() {
+		apiResource.Spec["load_balancing_mode"] = data.LoadBalancingMode.ValueString()
+	}
+	if !data.Ttl.IsNull() && !data.Ttl.IsUnknown() {
+		apiResource.Spec["ttl"] = data.Ttl.ValueInt64()
+	}
+
+
 	created, err := r.client.CreateDNSLbPool(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create DNSLbPool: %s", err))
@@ -590,8 +660,21 @@ func (r *DNSLbPoolResource) Create(ctx context.Context, req resource.CreateReque
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+	if v, ok := created.Spec["load_balancing_mode"].(string); ok && v != "" {
+		data.LoadBalancingMode = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["ttl"].(float64); ok {
+		data.Ttl = types.Int64Value(int64(v))
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created DNSLbPool resource")
@@ -670,9 +753,85 @@ func (r *DNSLbPoolResource) Read(ctx context.Context, req resource.ReadRequest, 
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if blockData, ok := apiResource.Spec["a_pool"].(map[string]interface{}); ok && (isImport || data.APool != nil) {
+		data.APool = &DNSLbPoolAPoolModel{
+			MaxAnswers: func() types.Int64 {
+				if v, ok := blockData["max_answers"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["aaaa_pool"].(map[string]interface{}); ok && (isImport || data.AaaaPool != nil) {
+		data.AaaaPool = &DNSLbPoolAaaaPoolModel{
+			MaxAnswers: func() types.Int64 {
+				if v, ok := blockData["max_answers"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["cname_pool"].(map[string]interface{}); ok && isImport && data.CnamePool == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.CnamePool = &DNSLbPoolCnamePoolModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["mx_pool"].(map[string]interface{}); ok && (isImport || data.MxPool != nil) {
+		data.MxPool = &DNSLbPoolMxPoolModel{
+			MaxAnswers: func() types.Int64 {
+				if v, ok := blockData["max_answers"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["srv_pool"].(map[string]interface{}); ok && (isImport || data.SrvPool != nil) {
+		data.SrvPool = &DNSLbPoolSrvPoolModel{
+			MaxAnswers: func() types.Int64 {
+				if v, ok := blockData["max_answers"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["use_rrset_ttl"].(map[string]interface{}); ok && isImport && data.UseRrsetTtl == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.UseRrsetTtl = &DNSLbPoolEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["load_balancing_mode"].(string); ok && v != "" {
+		data.LoadBalancingMode = types.StringValue(v)
+	} else {
+		data.LoadBalancingMode = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["ttl"].(float64); ok {
+		data.Ttl = types.Int64Value(int64(v))
+	} else {
+		data.Ttl = types.Int64Null()
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -698,7 +857,7 @@ func (r *DNSLbPoolResource) Update(ctx context.Context, req resource.UpdateReque
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.DNSLbPoolSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -723,6 +882,67 @@ func (r *DNSLbPoolResource) Update(ctx context.Context, req resource.UpdateReque
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.APool != nil {
+		a_poolMap := make(map[string]interface{})
+		if data.APool.DisableHealthCheck != nil {
+			a_poolMap["disable_health_check"] = map[string]interface{}{}
+		}
+		if data.APool.HealthCheck != nil {
+			health_checkNestedMap := make(map[string]interface{})
+			if !data.APool.HealthCheck.Name.IsNull() && !data.APool.HealthCheck.Name.IsUnknown() {
+				health_checkNestedMap["name"] = data.APool.HealthCheck.Name.ValueString()
+			}
+			if !data.APool.HealthCheck.Namespace.IsNull() && !data.APool.HealthCheck.Namespace.IsUnknown() {
+				health_checkNestedMap["namespace"] = data.APool.HealthCheck.Namespace.ValueString()
+			}
+			if !data.APool.HealthCheck.Tenant.IsNull() && !data.APool.HealthCheck.Tenant.IsUnknown() {
+				health_checkNestedMap["tenant"] = data.APool.HealthCheck.Tenant.ValueString()
+			}
+			a_poolMap["health_check"] = health_checkNestedMap
+		}
+		if !data.APool.MaxAnswers.IsNull() && !data.APool.MaxAnswers.IsUnknown() {
+			a_poolMap["max_answers"] = data.APool.MaxAnswers.ValueInt64()
+		}
+		apiResource.Spec["a_pool"] = a_poolMap
+	}
+	if data.AaaaPool != nil {
+		aaaa_poolMap := make(map[string]interface{})
+		if !data.AaaaPool.MaxAnswers.IsNull() && !data.AaaaPool.MaxAnswers.IsUnknown() {
+			aaaa_poolMap["max_answers"] = data.AaaaPool.MaxAnswers.ValueInt64()
+		}
+		apiResource.Spec["aaaa_pool"] = aaaa_poolMap
+	}
+	if data.CnamePool != nil {
+		cname_poolMap := make(map[string]interface{})
+		apiResource.Spec["cname_pool"] = cname_poolMap
+	}
+	if data.MxPool != nil {
+		mx_poolMap := make(map[string]interface{})
+		if !data.MxPool.MaxAnswers.IsNull() && !data.MxPool.MaxAnswers.IsUnknown() {
+			mx_poolMap["max_answers"] = data.MxPool.MaxAnswers.ValueInt64()
+		}
+		apiResource.Spec["mx_pool"] = mx_poolMap
+	}
+	if data.SrvPool != nil {
+		srv_poolMap := make(map[string]interface{})
+		if !data.SrvPool.MaxAnswers.IsNull() && !data.SrvPool.MaxAnswers.IsUnknown() {
+			srv_poolMap["max_answers"] = data.SrvPool.MaxAnswers.ValueInt64()
+		}
+		apiResource.Spec["srv_pool"] = srv_poolMap
+	}
+	if data.UseRrsetTtl != nil {
+		use_rrset_ttlMap := make(map[string]interface{})
+		apiResource.Spec["use_rrset_ttl"] = use_rrset_ttlMap
+	}
+	if !data.LoadBalancingMode.IsNull() && !data.LoadBalancingMode.IsUnknown() {
+		apiResource.Spec["load_balancing_mode"] = data.LoadBalancingMode.ValueString()
+	}
+	if !data.Ttl.IsNull() && !data.Ttl.IsUnknown() {
+		apiResource.Spec["ttl"] = data.Ttl.ValueInt64()
+	}
+
+
 	updated, err := r.client.UpdateDNSLbPool(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update DNSLbPool: %s", err))
@@ -731,6 +951,16 @@ func (r *DNSLbPoolResource) Update(ctx context.Context, req resource.UpdateReque
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
+	if v, ok := updated.Spec["load_balancing_mode"].(string); ok && v != "" {
+		data.LoadBalancingMode = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["ttl"].(float64); ok {
+		data.Ttl = types.Int64Value(int64(v))
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -743,6 +973,7 @@ func (r *DNSLbPoolResource) Update(ctx context.Context, req resource.UpdateReque
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -769,6 +1000,15 @@ func (r *DNSLbPoolResource) Delete(ctx context.Context, req resource.DeleteReque
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "DNSLbPool already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "DNSLbPool delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

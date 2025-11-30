@@ -115,8 +115,8 @@ type OidcProviderResourceModel struct {
 	Description types.String `tfsdk:"description"`
 	Disable types.Bool `tfsdk:"disable"`
 	Labels types.Map `tfsdk:"labels"`
-	ProviderType types.String `tfsdk:"provider_type"`
 	ID types.String `tfsdk:"id"`
+	ProviderType types.String `tfsdk:"provider_type"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
 	AzureOidcSpecType *OidcProviderAzureOidcSpecTypeModel `tfsdk:"azure_oidc_spec_type"`
 	GoogleOidcSpecType *OidcProviderGoogleOidcSpecTypeModel `tfsdk:"google_oidc_spec_type"`
@@ -171,12 +171,16 @@ func (r *OidcProviderResource) Schema(ctx context.Context, req resource.SchemaRe
 				Optional: true,
 				ElementType: types.StringType,
 			},
+			"id": schema.StringAttribute{
+				MarkdownDescription: "Unique identifier for the resource.",
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
 			"provider_type": schema.StringAttribute{
 				MarkdownDescription: "Provider Type. Types of OIDC providers Default provider. use this for standard OpenIDConnect v1.0 Authenticate with Google OIDC Authenticate with Azure OIDC Authenticate with Okta OIDC. Possible values are `DEFAULT`, `GOOGLE`, `AZURE`, `OKTA`. Defaults to `DEFAULT`.",
 				Optional: true,
-			},
-			"id": schema.StringAttribute{
-				MarkdownDescription: "Unique identifier for the resource.",
 				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
@@ -508,7 +512,7 @@ func (r *OidcProviderResource) Create(ctx context.Context, req resource.CreateRe
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.OidcProviderSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -533,6 +537,157 @@ func (r *OidcProviderResource) Create(ctx context.Context, req resource.CreateRe
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.AzureOidcSpecType != nil {
+		azure_oidc_spec_typeMap := make(map[string]interface{})
+		if !data.AzureOidcSpecType.AuthorizationURL.IsNull() && !data.AzureOidcSpecType.AuthorizationURL.IsUnknown() {
+			azure_oidc_spec_typeMap["authorization_url"] = data.AzureOidcSpecType.AuthorizationURL.ValueString()
+		}
+		if !data.AzureOidcSpecType.BackchannelLogout.IsNull() && !data.AzureOidcSpecType.BackchannelLogout.IsUnknown() {
+			azure_oidc_spec_typeMap["backchannel_logout"] = data.AzureOidcSpecType.BackchannelLogout.ValueBool()
+		}
+		if !data.AzureOidcSpecType.ClientID.IsNull() && !data.AzureOidcSpecType.ClientID.IsUnknown() {
+			azure_oidc_spec_typeMap["client_id"] = data.AzureOidcSpecType.ClientID.ValueString()
+		}
+		if !data.AzureOidcSpecType.ClientSecret.IsNull() && !data.AzureOidcSpecType.ClientSecret.IsUnknown() {
+			azure_oidc_spec_typeMap["client_secret"] = data.AzureOidcSpecType.ClientSecret.ValueString()
+		}
+		if !data.AzureOidcSpecType.DefaultScopes.IsNull() && !data.AzureOidcSpecType.DefaultScopes.IsUnknown() {
+			azure_oidc_spec_typeMap["default_scopes"] = data.AzureOidcSpecType.DefaultScopes.ValueString()
+		}
+		if !data.AzureOidcSpecType.Issuer.IsNull() && !data.AzureOidcSpecType.Issuer.IsUnknown() {
+			azure_oidc_spec_typeMap["issuer"] = data.AzureOidcSpecType.Issuer.ValueString()
+		}
+		if !data.AzureOidcSpecType.JwksURL.IsNull() && !data.AzureOidcSpecType.JwksURL.IsUnknown() {
+			azure_oidc_spec_typeMap["jwks_url"] = data.AzureOidcSpecType.JwksURL.ValueString()
+		}
+		if !data.AzureOidcSpecType.LogoutURL.IsNull() && !data.AzureOidcSpecType.LogoutURL.IsUnknown() {
+			azure_oidc_spec_typeMap["logout_url"] = data.AzureOidcSpecType.LogoutURL.ValueString()
+		}
+		if !data.AzureOidcSpecType.Prompt.IsNull() && !data.AzureOidcSpecType.Prompt.IsUnknown() {
+			azure_oidc_spec_typeMap["prompt"] = data.AzureOidcSpecType.Prompt.ValueString()
+		}
+		if !data.AzureOidcSpecType.TokenURL.IsNull() && !data.AzureOidcSpecType.TokenURL.IsUnknown() {
+			azure_oidc_spec_typeMap["token_url"] = data.AzureOidcSpecType.TokenURL.ValueString()
+		}
+		if !data.AzureOidcSpecType.UserInfoURL.IsNull() && !data.AzureOidcSpecType.UserInfoURL.IsUnknown() {
+			azure_oidc_spec_typeMap["user_info_url"] = data.AzureOidcSpecType.UserInfoURL.ValueString()
+		}
+		apiResource.Spec["azure_oidc_spec_type"] = azure_oidc_spec_typeMap
+	}
+	if data.GoogleOidcSpecType != nil {
+		google_oidc_spec_typeMap := make(map[string]interface{})
+		if !data.GoogleOidcSpecType.ClientID.IsNull() && !data.GoogleOidcSpecType.ClientID.IsUnknown() {
+			google_oidc_spec_typeMap["client_id"] = data.GoogleOidcSpecType.ClientID.ValueString()
+		}
+		if !data.GoogleOidcSpecType.ClientSecret.IsNull() && !data.GoogleOidcSpecType.ClientSecret.IsUnknown() {
+			google_oidc_spec_typeMap["client_secret"] = data.GoogleOidcSpecType.ClientSecret.ValueString()
+		}
+		if !data.GoogleOidcSpecType.HostedDomain.IsNull() && !data.GoogleOidcSpecType.HostedDomain.IsUnknown() {
+			google_oidc_spec_typeMap["hosted_domain"] = data.GoogleOidcSpecType.HostedDomain.ValueString()
+		}
+		apiResource.Spec["google_oidc_spec_type"] = google_oidc_spec_typeMap
+	}
+	if data.OidcV10SpecType != nil {
+		oidc_v10_spec_typeMap := make(map[string]interface{})
+		if !data.OidcV10SpecType.AllowedClockSkew.IsNull() && !data.OidcV10SpecType.AllowedClockSkew.IsUnknown() {
+			oidc_v10_spec_typeMap["allowed_clock_skew"] = data.OidcV10SpecType.AllowedClockSkew.ValueString()
+		}
+		if !data.OidcV10SpecType.AuthorizationURL.IsNull() && !data.OidcV10SpecType.AuthorizationURL.IsUnknown() {
+			oidc_v10_spec_typeMap["authorization_url"] = data.OidcV10SpecType.AuthorizationURL.ValueString()
+		}
+		if !data.OidcV10SpecType.BackchannelLogout.IsNull() && !data.OidcV10SpecType.BackchannelLogout.IsUnknown() {
+			oidc_v10_spec_typeMap["backchannel_logout"] = data.OidcV10SpecType.BackchannelLogout.ValueBool()
+		}
+		if !data.OidcV10SpecType.ClientID.IsNull() && !data.OidcV10SpecType.ClientID.IsUnknown() {
+			oidc_v10_spec_typeMap["client_id"] = data.OidcV10SpecType.ClientID.ValueString()
+		}
+		if !data.OidcV10SpecType.ClientSecret.IsNull() && !data.OidcV10SpecType.ClientSecret.IsUnknown() {
+			oidc_v10_spec_typeMap["client_secret"] = data.OidcV10SpecType.ClientSecret.ValueString()
+		}
+		if !data.OidcV10SpecType.DefaultScopes.IsNull() && !data.OidcV10SpecType.DefaultScopes.IsUnknown() {
+			oidc_v10_spec_typeMap["default_scopes"] = data.OidcV10SpecType.DefaultScopes.ValueString()
+		}
+		if !data.OidcV10SpecType.DisableUserInfo.IsNull() && !data.OidcV10SpecType.DisableUserInfo.IsUnknown() {
+			oidc_v10_spec_typeMap["disable_user_info"] = data.OidcV10SpecType.DisableUserInfo.ValueBool()
+		}
+		if !data.OidcV10SpecType.DisplayName.IsNull() && !data.OidcV10SpecType.DisplayName.IsUnknown() {
+			oidc_v10_spec_typeMap["display_name"] = data.OidcV10SpecType.DisplayName.ValueString()
+		}
+		if !data.OidcV10SpecType.ForwardedQueryParameters.IsNull() && !data.OidcV10SpecType.ForwardedQueryParameters.IsUnknown() {
+			oidc_v10_spec_typeMap["forwarded_query_parameters"] = data.OidcV10SpecType.ForwardedQueryParameters.ValueString()
+		}
+		if !data.OidcV10SpecType.Issuer.IsNull() && !data.OidcV10SpecType.Issuer.IsUnknown() {
+			oidc_v10_spec_typeMap["issuer"] = data.OidcV10SpecType.Issuer.ValueString()
+		}
+		if !data.OidcV10SpecType.JwksURL.IsNull() && !data.OidcV10SpecType.JwksURL.IsUnknown() {
+			oidc_v10_spec_typeMap["jwks_url"] = data.OidcV10SpecType.JwksURL.ValueString()
+		}
+		if !data.OidcV10SpecType.LogoutURL.IsNull() && !data.OidcV10SpecType.LogoutURL.IsUnknown() {
+			oidc_v10_spec_typeMap["logout_url"] = data.OidcV10SpecType.LogoutURL.ValueString()
+		}
+		if !data.OidcV10SpecType.PassCurrentLocale.IsNull() && !data.OidcV10SpecType.PassCurrentLocale.IsUnknown() {
+			oidc_v10_spec_typeMap["pass_current_locale"] = data.OidcV10SpecType.PassCurrentLocale.ValueBool()
+		}
+		if !data.OidcV10SpecType.PassLoginHint.IsNull() && !data.OidcV10SpecType.PassLoginHint.IsUnknown() {
+			oidc_v10_spec_typeMap["pass_login_hint"] = data.OidcV10SpecType.PassLoginHint.ValueBool()
+		}
+		if !data.OidcV10SpecType.Prompt.IsNull() && !data.OidcV10SpecType.Prompt.IsUnknown() {
+			oidc_v10_spec_typeMap["prompt"] = data.OidcV10SpecType.Prompt.ValueString()
+		}
+		if !data.OidcV10SpecType.TokenURL.IsNull() && !data.OidcV10SpecType.TokenURL.IsUnknown() {
+			oidc_v10_spec_typeMap["token_url"] = data.OidcV10SpecType.TokenURL.ValueString()
+		}
+		if !data.OidcV10SpecType.UserInfoURL.IsNull() && !data.OidcV10SpecType.UserInfoURL.IsUnknown() {
+			oidc_v10_spec_typeMap["user_info_url"] = data.OidcV10SpecType.UserInfoURL.ValueString()
+		}
+		if !data.OidcV10SpecType.ValidateSignatures.IsNull() && !data.OidcV10SpecType.ValidateSignatures.IsUnknown() {
+			oidc_v10_spec_typeMap["validate_signatures"] = data.OidcV10SpecType.ValidateSignatures.ValueBool()
+		}
+		apiResource.Spec["oidc_v10_spec_type"] = oidc_v10_spec_typeMap
+	}
+	if data.OktaOidcSpecType != nil {
+		okta_oidc_spec_typeMap := make(map[string]interface{})
+		if !data.OktaOidcSpecType.AuthorizationURL.IsNull() && !data.OktaOidcSpecType.AuthorizationURL.IsUnknown() {
+			okta_oidc_spec_typeMap["authorization_url"] = data.OktaOidcSpecType.AuthorizationURL.ValueString()
+		}
+		if !data.OktaOidcSpecType.BackchannelLogout.IsNull() && !data.OktaOidcSpecType.BackchannelLogout.IsUnknown() {
+			okta_oidc_spec_typeMap["backchannel_logout"] = data.OktaOidcSpecType.BackchannelLogout.ValueBool()
+		}
+		if !data.OktaOidcSpecType.ClientID.IsNull() && !data.OktaOidcSpecType.ClientID.IsUnknown() {
+			okta_oidc_spec_typeMap["client_id"] = data.OktaOidcSpecType.ClientID.ValueString()
+		}
+		if !data.OktaOidcSpecType.ClientSecret.IsNull() && !data.OktaOidcSpecType.ClientSecret.IsUnknown() {
+			okta_oidc_spec_typeMap["client_secret"] = data.OktaOidcSpecType.ClientSecret.ValueString()
+		}
+		if !data.OktaOidcSpecType.DefaultScopes.IsNull() && !data.OktaOidcSpecType.DefaultScopes.IsUnknown() {
+			okta_oidc_spec_typeMap["default_scopes"] = data.OktaOidcSpecType.DefaultScopes.ValueString()
+		}
+		if !data.OktaOidcSpecType.Issuer.IsNull() && !data.OktaOidcSpecType.Issuer.IsUnknown() {
+			okta_oidc_spec_typeMap["issuer"] = data.OktaOidcSpecType.Issuer.ValueString()
+		}
+		if !data.OktaOidcSpecType.JwksURL.IsNull() && !data.OktaOidcSpecType.JwksURL.IsUnknown() {
+			okta_oidc_spec_typeMap["jwks_url"] = data.OktaOidcSpecType.JwksURL.ValueString()
+		}
+		if !data.OktaOidcSpecType.LogoutURL.IsNull() && !data.OktaOidcSpecType.LogoutURL.IsUnknown() {
+			okta_oidc_spec_typeMap["logout_url"] = data.OktaOidcSpecType.LogoutURL.ValueString()
+		}
+		if !data.OktaOidcSpecType.Prompt.IsNull() && !data.OktaOidcSpecType.Prompt.IsUnknown() {
+			okta_oidc_spec_typeMap["prompt"] = data.OktaOidcSpecType.Prompt.ValueString()
+		}
+		if !data.OktaOidcSpecType.TokenURL.IsNull() && !data.OktaOidcSpecType.TokenURL.IsUnknown() {
+			okta_oidc_spec_typeMap["token_url"] = data.OktaOidcSpecType.TokenURL.ValueString()
+		}
+		if !data.OktaOidcSpecType.UserInfoURL.IsNull() && !data.OktaOidcSpecType.UserInfoURL.IsUnknown() {
+			okta_oidc_spec_typeMap["user_info_url"] = data.OktaOidcSpecType.UserInfoURL.ValueString()
+		}
+		apiResource.Spec["okta_oidc_spec_type"] = okta_oidc_spec_typeMap
+	}
+	if !data.ProviderType.IsNull() && !data.ProviderType.IsUnknown() {
+		apiResource.Spec["provider_type"] = data.ProviderType.ValueString()
+	}
+
+
 	created, err := r.client.CreateOidcProvider(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create OidcProvider: %s", err))
@@ -541,8 +696,17 @@ func (r *OidcProviderResource) Create(ctx context.Context, req resource.CreateRe
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+	if v, ok := created.Spec["provider_type"].(string); ok && v != "" {
+		data.ProviderType = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created OidcProvider resource")
@@ -621,9 +785,339 @@ func (r *OidcProviderResource) Read(ctx context.Context, req resource.ReadReques
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if blockData, ok := apiResource.Spec["azure_oidc_spec_type"].(map[string]interface{}); ok && (isImport || data.AzureOidcSpecType != nil) {
+		data.AzureOidcSpecType = &OidcProviderAzureOidcSpecTypeModel{
+			AuthorizationURL: func() types.String {
+				if v, ok := blockData["authorization_url"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			BackchannelLogout: func() types.Bool {
+				if !isImport && data.AzureOidcSpecType != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.AzureOidcSpecType.BackchannelLogout
+				}
+				// Import case: read from API
+				if v, ok := blockData["backchannel_logout"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			ClientID: func() types.String {
+				if v, ok := blockData["client_id"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			ClientSecret: func() types.String {
+				if v, ok := blockData["client_secret"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			DefaultScopes: func() types.String {
+				if v, ok := blockData["default_scopes"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Issuer: func() types.String {
+				if v, ok := blockData["issuer"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			JwksURL: func() types.String {
+				if v, ok := blockData["jwks_url"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			LogoutURL: func() types.String {
+				if v, ok := blockData["logout_url"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Prompt: func() types.String {
+				if v, ok := blockData["prompt"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			TokenURL: func() types.String {
+				if v, ok := blockData["token_url"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			UserInfoURL: func() types.String {
+				if v, ok := blockData["user_info_url"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["google_oidc_spec_type"].(map[string]interface{}); ok && (isImport || data.GoogleOidcSpecType != nil) {
+		data.GoogleOidcSpecType = &OidcProviderGoogleOidcSpecTypeModel{
+			ClientID: func() types.String {
+				if v, ok := blockData["client_id"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			ClientSecret: func() types.String {
+				if v, ok := blockData["client_secret"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			HostedDomain: func() types.String {
+				if v, ok := blockData["hosted_domain"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["oidc_v10_spec_type"].(map[string]interface{}); ok && (isImport || data.OidcV10SpecType != nil) {
+		data.OidcV10SpecType = &OidcProviderOidcV10SpecTypeModel{
+			AllowedClockSkew: func() types.String {
+				if v, ok := blockData["allowed_clock_skew"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			AuthorizationURL: func() types.String {
+				if v, ok := blockData["authorization_url"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			BackchannelLogout: func() types.Bool {
+				if !isImport && data.OidcV10SpecType != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.OidcV10SpecType.BackchannelLogout
+				}
+				// Import case: read from API
+				if v, ok := blockData["backchannel_logout"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			ClientID: func() types.String {
+				if v, ok := blockData["client_id"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			ClientSecret: func() types.String {
+				if v, ok := blockData["client_secret"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			DefaultScopes: func() types.String {
+				if v, ok := blockData["default_scopes"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			DisableUserInfo: func() types.Bool {
+				if !isImport && data.OidcV10SpecType != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.OidcV10SpecType.DisableUserInfo
+				}
+				// Import case: read from API
+				if v, ok := blockData["disable_user_info"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			DisplayName: func() types.String {
+				if v, ok := blockData["display_name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			ForwardedQueryParameters: func() types.String {
+				if v, ok := blockData["forwarded_query_parameters"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Issuer: func() types.String {
+				if v, ok := blockData["issuer"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			JwksURL: func() types.String {
+				if v, ok := blockData["jwks_url"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			LogoutURL: func() types.String {
+				if v, ok := blockData["logout_url"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			PassCurrentLocale: func() types.Bool {
+				if !isImport && data.OidcV10SpecType != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.OidcV10SpecType.PassCurrentLocale
+				}
+				// Import case: read from API
+				if v, ok := blockData["pass_current_locale"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			PassLoginHint: func() types.Bool {
+				if !isImport && data.OidcV10SpecType != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.OidcV10SpecType.PassLoginHint
+				}
+				// Import case: read from API
+				if v, ok := blockData["pass_login_hint"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			Prompt: func() types.String {
+				if v, ok := blockData["prompt"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			TokenURL: func() types.String {
+				if v, ok := blockData["token_url"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			UserInfoURL: func() types.String {
+				if v, ok := blockData["user_info_url"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			ValidateSignatures: func() types.Bool {
+				if !isImport && data.OidcV10SpecType != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.OidcV10SpecType.ValidateSignatures
+				}
+				// Import case: read from API
+				if v, ok := blockData["validate_signatures"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["okta_oidc_spec_type"].(map[string]interface{}); ok && (isImport || data.OktaOidcSpecType != nil) {
+		data.OktaOidcSpecType = &OidcProviderOktaOidcSpecTypeModel{
+			AuthorizationURL: func() types.String {
+				if v, ok := blockData["authorization_url"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			BackchannelLogout: func() types.Bool {
+				if !isImport && data.OktaOidcSpecType != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.OktaOidcSpecType.BackchannelLogout
+				}
+				// Import case: read from API
+				if v, ok := blockData["backchannel_logout"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			ClientID: func() types.String {
+				if v, ok := blockData["client_id"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			ClientSecret: func() types.String {
+				if v, ok := blockData["client_secret"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			DefaultScopes: func() types.String {
+				if v, ok := blockData["default_scopes"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Issuer: func() types.String {
+				if v, ok := blockData["issuer"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			JwksURL: func() types.String {
+				if v, ok := blockData["jwks_url"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			LogoutURL: func() types.String {
+				if v, ok := blockData["logout_url"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Prompt: func() types.String {
+				if v, ok := blockData["prompt"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			TokenURL: func() types.String {
+				if v, ok := blockData["token_url"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			UserInfoURL: func() types.String {
+				if v, ok := blockData["user_info_url"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if v, ok := apiResource.Spec["provider_type"].(string); ok && v != "" {
+		data.ProviderType = types.StringValue(v)
+	} else {
+		data.ProviderType = types.StringNull()
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -649,7 +1143,7 @@ func (r *OidcProviderResource) Update(ctx context.Context, req resource.UpdateRe
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.OidcProviderSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -674,6 +1168,157 @@ func (r *OidcProviderResource) Update(ctx context.Context, req resource.UpdateRe
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.AzureOidcSpecType != nil {
+		azure_oidc_spec_typeMap := make(map[string]interface{})
+		if !data.AzureOidcSpecType.AuthorizationURL.IsNull() && !data.AzureOidcSpecType.AuthorizationURL.IsUnknown() {
+			azure_oidc_spec_typeMap["authorization_url"] = data.AzureOidcSpecType.AuthorizationURL.ValueString()
+		}
+		if !data.AzureOidcSpecType.BackchannelLogout.IsNull() && !data.AzureOidcSpecType.BackchannelLogout.IsUnknown() {
+			azure_oidc_spec_typeMap["backchannel_logout"] = data.AzureOidcSpecType.BackchannelLogout.ValueBool()
+		}
+		if !data.AzureOidcSpecType.ClientID.IsNull() && !data.AzureOidcSpecType.ClientID.IsUnknown() {
+			azure_oidc_spec_typeMap["client_id"] = data.AzureOidcSpecType.ClientID.ValueString()
+		}
+		if !data.AzureOidcSpecType.ClientSecret.IsNull() && !data.AzureOidcSpecType.ClientSecret.IsUnknown() {
+			azure_oidc_spec_typeMap["client_secret"] = data.AzureOidcSpecType.ClientSecret.ValueString()
+		}
+		if !data.AzureOidcSpecType.DefaultScopes.IsNull() && !data.AzureOidcSpecType.DefaultScopes.IsUnknown() {
+			azure_oidc_spec_typeMap["default_scopes"] = data.AzureOidcSpecType.DefaultScopes.ValueString()
+		}
+		if !data.AzureOidcSpecType.Issuer.IsNull() && !data.AzureOidcSpecType.Issuer.IsUnknown() {
+			azure_oidc_spec_typeMap["issuer"] = data.AzureOidcSpecType.Issuer.ValueString()
+		}
+		if !data.AzureOidcSpecType.JwksURL.IsNull() && !data.AzureOidcSpecType.JwksURL.IsUnknown() {
+			azure_oidc_spec_typeMap["jwks_url"] = data.AzureOidcSpecType.JwksURL.ValueString()
+		}
+		if !data.AzureOidcSpecType.LogoutURL.IsNull() && !data.AzureOidcSpecType.LogoutURL.IsUnknown() {
+			azure_oidc_spec_typeMap["logout_url"] = data.AzureOidcSpecType.LogoutURL.ValueString()
+		}
+		if !data.AzureOidcSpecType.Prompt.IsNull() && !data.AzureOidcSpecType.Prompt.IsUnknown() {
+			azure_oidc_spec_typeMap["prompt"] = data.AzureOidcSpecType.Prompt.ValueString()
+		}
+		if !data.AzureOidcSpecType.TokenURL.IsNull() && !data.AzureOidcSpecType.TokenURL.IsUnknown() {
+			azure_oidc_spec_typeMap["token_url"] = data.AzureOidcSpecType.TokenURL.ValueString()
+		}
+		if !data.AzureOidcSpecType.UserInfoURL.IsNull() && !data.AzureOidcSpecType.UserInfoURL.IsUnknown() {
+			azure_oidc_spec_typeMap["user_info_url"] = data.AzureOidcSpecType.UserInfoURL.ValueString()
+		}
+		apiResource.Spec["azure_oidc_spec_type"] = azure_oidc_spec_typeMap
+	}
+	if data.GoogleOidcSpecType != nil {
+		google_oidc_spec_typeMap := make(map[string]interface{})
+		if !data.GoogleOidcSpecType.ClientID.IsNull() && !data.GoogleOidcSpecType.ClientID.IsUnknown() {
+			google_oidc_spec_typeMap["client_id"] = data.GoogleOidcSpecType.ClientID.ValueString()
+		}
+		if !data.GoogleOidcSpecType.ClientSecret.IsNull() && !data.GoogleOidcSpecType.ClientSecret.IsUnknown() {
+			google_oidc_spec_typeMap["client_secret"] = data.GoogleOidcSpecType.ClientSecret.ValueString()
+		}
+		if !data.GoogleOidcSpecType.HostedDomain.IsNull() && !data.GoogleOidcSpecType.HostedDomain.IsUnknown() {
+			google_oidc_spec_typeMap["hosted_domain"] = data.GoogleOidcSpecType.HostedDomain.ValueString()
+		}
+		apiResource.Spec["google_oidc_spec_type"] = google_oidc_spec_typeMap
+	}
+	if data.OidcV10SpecType != nil {
+		oidc_v10_spec_typeMap := make(map[string]interface{})
+		if !data.OidcV10SpecType.AllowedClockSkew.IsNull() && !data.OidcV10SpecType.AllowedClockSkew.IsUnknown() {
+			oidc_v10_spec_typeMap["allowed_clock_skew"] = data.OidcV10SpecType.AllowedClockSkew.ValueString()
+		}
+		if !data.OidcV10SpecType.AuthorizationURL.IsNull() && !data.OidcV10SpecType.AuthorizationURL.IsUnknown() {
+			oidc_v10_spec_typeMap["authorization_url"] = data.OidcV10SpecType.AuthorizationURL.ValueString()
+		}
+		if !data.OidcV10SpecType.BackchannelLogout.IsNull() && !data.OidcV10SpecType.BackchannelLogout.IsUnknown() {
+			oidc_v10_spec_typeMap["backchannel_logout"] = data.OidcV10SpecType.BackchannelLogout.ValueBool()
+		}
+		if !data.OidcV10SpecType.ClientID.IsNull() && !data.OidcV10SpecType.ClientID.IsUnknown() {
+			oidc_v10_spec_typeMap["client_id"] = data.OidcV10SpecType.ClientID.ValueString()
+		}
+		if !data.OidcV10SpecType.ClientSecret.IsNull() && !data.OidcV10SpecType.ClientSecret.IsUnknown() {
+			oidc_v10_spec_typeMap["client_secret"] = data.OidcV10SpecType.ClientSecret.ValueString()
+		}
+		if !data.OidcV10SpecType.DefaultScopes.IsNull() && !data.OidcV10SpecType.DefaultScopes.IsUnknown() {
+			oidc_v10_spec_typeMap["default_scopes"] = data.OidcV10SpecType.DefaultScopes.ValueString()
+		}
+		if !data.OidcV10SpecType.DisableUserInfo.IsNull() && !data.OidcV10SpecType.DisableUserInfo.IsUnknown() {
+			oidc_v10_spec_typeMap["disable_user_info"] = data.OidcV10SpecType.DisableUserInfo.ValueBool()
+		}
+		if !data.OidcV10SpecType.DisplayName.IsNull() && !data.OidcV10SpecType.DisplayName.IsUnknown() {
+			oidc_v10_spec_typeMap["display_name"] = data.OidcV10SpecType.DisplayName.ValueString()
+		}
+		if !data.OidcV10SpecType.ForwardedQueryParameters.IsNull() && !data.OidcV10SpecType.ForwardedQueryParameters.IsUnknown() {
+			oidc_v10_spec_typeMap["forwarded_query_parameters"] = data.OidcV10SpecType.ForwardedQueryParameters.ValueString()
+		}
+		if !data.OidcV10SpecType.Issuer.IsNull() && !data.OidcV10SpecType.Issuer.IsUnknown() {
+			oidc_v10_spec_typeMap["issuer"] = data.OidcV10SpecType.Issuer.ValueString()
+		}
+		if !data.OidcV10SpecType.JwksURL.IsNull() && !data.OidcV10SpecType.JwksURL.IsUnknown() {
+			oidc_v10_spec_typeMap["jwks_url"] = data.OidcV10SpecType.JwksURL.ValueString()
+		}
+		if !data.OidcV10SpecType.LogoutURL.IsNull() && !data.OidcV10SpecType.LogoutURL.IsUnknown() {
+			oidc_v10_spec_typeMap["logout_url"] = data.OidcV10SpecType.LogoutURL.ValueString()
+		}
+		if !data.OidcV10SpecType.PassCurrentLocale.IsNull() && !data.OidcV10SpecType.PassCurrentLocale.IsUnknown() {
+			oidc_v10_spec_typeMap["pass_current_locale"] = data.OidcV10SpecType.PassCurrentLocale.ValueBool()
+		}
+		if !data.OidcV10SpecType.PassLoginHint.IsNull() && !data.OidcV10SpecType.PassLoginHint.IsUnknown() {
+			oidc_v10_spec_typeMap["pass_login_hint"] = data.OidcV10SpecType.PassLoginHint.ValueBool()
+		}
+		if !data.OidcV10SpecType.Prompt.IsNull() && !data.OidcV10SpecType.Prompt.IsUnknown() {
+			oidc_v10_spec_typeMap["prompt"] = data.OidcV10SpecType.Prompt.ValueString()
+		}
+		if !data.OidcV10SpecType.TokenURL.IsNull() && !data.OidcV10SpecType.TokenURL.IsUnknown() {
+			oidc_v10_spec_typeMap["token_url"] = data.OidcV10SpecType.TokenURL.ValueString()
+		}
+		if !data.OidcV10SpecType.UserInfoURL.IsNull() && !data.OidcV10SpecType.UserInfoURL.IsUnknown() {
+			oidc_v10_spec_typeMap["user_info_url"] = data.OidcV10SpecType.UserInfoURL.ValueString()
+		}
+		if !data.OidcV10SpecType.ValidateSignatures.IsNull() && !data.OidcV10SpecType.ValidateSignatures.IsUnknown() {
+			oidc_v10_spec_typeMap["validate_signatures"] = data.OidcV10SpecType.ValidateSignatures.ValueBool()
+		}
+		apiResource.Spec["oidc_v10_spec_type"] = oidc_v10_spec_typeMap
+	}
+	if data.OktaOidcSpecType != nil {
+		okta_oidc_spec_typeMap := make(map[string]interface{})
+		if !data.OktaOidcSpecType.AuthorizationURL.IsNull() && !data.OktaOidcSpecType.AuthorizationURL.IsUnknown() {
+			okta_oidc_spec_typeMap["authorization_url"] = data.OktaOidcSpecType.AuthorizationURL.ValueString()
+		}
+		if !data.OktaOidcSpecType.BackchannelLogout.IsNull() && !data.OktaOidcSpecType.BackchannelLogout.IsUnknown() {
+			okta_oidc_spec_typeMap["backchannel_logout"] = data.OktaOidcSpecType.BackchannelLogout.ValueBool()
+		}
+		if !data.OktaOidcSpecType.ClientID.IsNull() && !data.OktaOidcSpecType.ClientID.IsUnknown() {
+			okta_oidc_spec_typeMap["client_id"] = data.OktaOidcSpecType.ClientID.ValueString()
+		}
+		if !data.OktaOidcSpecType.ClientSecret.IsNull() && !data.OktaOidcSpecType.ClientSecret.IsUnknown() {
+			okta_oidc_spec_typeMap["client_secret"] = data.OktaOidcSpecType.ClientSecret.ValueString()
+		}
+		if !data.OktaOidcSpecType.DefaultScopes.IsNull() && !data.OktaOidcSpecType.DefaultScopes.IsUnknown() {
+			okta_oidc_spec_typeMap["default_scopes"] = data.OktaOidcSpecType.DefaultScopes.ValueString()
+		}
+		if !data.OktaOidcSpecType.Issuer.IsNull() && !data.OktaOidcSpecType.Issuer.IsUnknown() {
+			okta_oidc_spec_typeMap["issuer"] = data.OktaOidcSpecType.Issuer.ValueString()
+		}
+		if !data.OktaOidcSpecType.JwksURL.IsNull() && !data.OktaOidcSpecType.JwksURL.IsUnknown() {
+			okta_oidc_spec_typeMap["jwks_url"] = data.OktaOidcSpecType.JwksURL.ValueString()
+		}
+		if !data.OktaOidcSpecType.LogoutURL.IsNull() && !data.OktaOidcSpecType.LogoutURL.IsUnknown() {
+			okta_oidc_spec_typeMap["logout_url"] = data.OktaOidcSpecType.LogoutURL.ValueString()
+		}
+		if !data.OktaOidcSpecType.Prompt.IsNull() && !data.OktaOidcSpecType.Prompt.IsUnknown() {
+			okta_oidc_spec_typeMap["prompt"] = data.OktaOidcSpecType.Prompt.ValueString()
+		}
+		if !data.OktaOidcSpecType.TokenURL.IsNull() && !data.OktaOidcSpecType.TokenURL.IsUnknown() {
+			okta_oidc_spec_typeMap["token_url"] = data.OktaOidcSpecType.TokenURL.ValueString()
+		}
+		if !data.OktaOidcSpecType.UserInfoURL.IsNull() && !data.OktaOidcSpecType.UserInfoURL.IsUnknown() {
+			okta_oidc_spec_typeMap["user_info_url"] = data.OktaOidcSpecType.UserInfoURL.ValueString()
+		}
+		apiResource.Spec["okta_oidc_spec_type"] = okta_oidc_spec_typeMap
+	}
+	if !data.ProviderType.IsNull() && !data.ProviderType.IsUnknown() {
+		apiResource.Spec["provider_type"] = data.ProviderType.ValueString()
+	}
+
+
 	updated, err := r.client.UpdateOidcProvider(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update OidcProvider: %s", err))
@@ -682,6 +1327,12 @@ func (r *OidcProviderResource) Update(ctx context.Context, req resource.UpdateRe
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
+	if v, ok := updated.Spec["provider_type"].(string); ok && v != "" {
+		data.ProviderType = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -694,6 +1345,7 @@ func (r *OidcProviderResource) Update(ctx context.Context, req resource.UpdateRe
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -720,6 +1372,15 @@ func (r *OidcProviderResource) Delete(ctx context.Context, req resource.DeleteRe
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "OidcProvider already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "OidcProvider delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

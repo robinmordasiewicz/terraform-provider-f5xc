@@ -10,19 +10,14 @@ import (
 
 // DNSLbPool represents a F5XC DNSLbPool
 type DNSLbPool struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     DNSLbPoolSpec `json:"spec"`
-}
-
-// DNSLbPoolSpec defines the specification for DNSLbPool
-type DNSLbPoolSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateDNSLbPool creates a new DNSLbPool
 func (c *Client) CreateDNSLbPool(ctx context.Context, resource *DNSLbPool) (*DNSLbPool, error) {
 	var result DNSLbPool
-	path := fmt.Sprintf("/api/config/namespaces/%s/dns_lb_pools", resource.Metadata.Namespace)
+	path := fmt.Sprintf("/api/config/dns/namespaces/%s/dns_lb_pools", resource.Metadata.Namespace)
 	err := c.Post(ctx, path, resource, &result)
 	return &result, err
 }
@@ -30,7 +25,7 @@ func (c *Client) CreateDNSLbPool(ctx context.Context, resource *DNSLbPool) (*DNS
 // GetDNSLbPool retrieves a DNSLbPool
 func (c *Client) GetDNSLbPool(ctx context.Context, namespace, name string) (*DNSLbPool, error) {
 	var result DNSLbPool
-	path := fmt.Sprintf("/api/config/namespaces/%s/dns_lb_pools/%s", namespace, name)
+	path := fmt.Sprintf("/api/config/dns/namespaces/%s/dns_lb_pools/%s", namespace, name)
 	err := c.Get(ctx, path, &result)
 	return &result, err
 }
@@ -38,13 +33,13 @@ func (c *Client) GetDNSLbPool(ctx context.Context, namespace, name string) (*DNS
 // UpdateDNSLbPool updates a DNSLbPool
 func (c *Client) UpdateDNSLbPool(ctx context.Context, resource *DNSLbPool) (*DNSLbPool, error) {
 	var result DNSLbPool
-	path := fmt.Sprintf("/api/config/namespaces/%s/dns_lb_pools/%s", resource.Metadata.Namespace, resource.Metadata.Name)
+	path := fmt.Sprintf("/api/config/dns/namespaces/%s/dns_lb_pools/%s", resource.Metadata.Namespace, resource.Metadata.Name)
 	err := c.Put(ctx, path, resource, &result)
 	return &result, err
 }
 
 // DeleteDNSLbPool deletes a DNSLbPool
 func (c *Client) DeleteDNSLbPool(ctx context.Context, namespace, name string) error {
-	path := fmt.Sprintf("/api/config/namespaces/%s/dns_lb_pools/%s", namespace, name)
+	path := fmt.Sprintf("/api/config/dns/namespaces/%s/dns_lb_pools/%s", namespace, name)
 	return c.Delete(ctx, path)
 }

@@ -10,13 +10,8 @@ import (
 
 // VoltstackSite represents a F5XC VoltstackSite
 type VoltstackSite struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     VoltstackSiteSpec `json:"spec"`
-}
-
-// VoltstackSiteSpec defines the specification for VoltstackSite
-type VoltstackSiteSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateVoltstackSite creates a new VoltstackSite

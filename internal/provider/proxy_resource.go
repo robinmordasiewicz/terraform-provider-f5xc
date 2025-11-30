@@ -12,6 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -415,7 +416,7 @@ type ProxyDynamicProxyHTTPSProxyTLSParamsModel struct {
 // ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesModel represents tls_certificates block
 type ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesModel struct {
 	CertificateURL types.String `tfsdk:"certificate_url"`
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	CustomHashAlgorithms *ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
 	DisableOcspStapling *ProxyEmptyModel `tfsdk:"disable_ocsp_stapling"`
 	PrivateKey *ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
@@ -716,7 +717,7 @@ type ProxyTLSInterceptModel struct {
 // ProxyTLSInterceptCustomCertificateModel represents custom_certificate block
 type ProxyTLSInterceptCustomCertificateModel struct {
 	CertificateURL types.String `tfsdk:"certificate_url"`
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	CustomHashAlgorithms *ProxyTLSInterceptCustomCertificateCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
 	DisableOcspStapling *ProxyEmptyModel `tfsdk:"disable_ocsp_stapling"`
 	PrivateKey *ProxyTLSInterceptCustomCertificatePrivateKeyModel `tfsdk:"private_key"`
@@ -770,11 +771,11 @@ type ProxyResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Annotations types.Map `tfsdk:"annotations"`
-	ConnectionTimeout types.Int64 `tfsdk:"connection_timeout"`
 	Description types.String `tfsdk:"description"`
 	Disable types.Bool `tfsdk:"disable"`
 	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
+	ConnectionTimeout types.Int64 `tfsdk:"connection_timeout"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
 	ActiveForwardProxyPolicies *ProxyActiveForwardProxyPoliciesModel `tfsdk:"active_forward_proxy_policies"`
 	DoNotAdvertise *ProxyEmptyModel `tfsdk:"do_not_advertise"`
@@ -822,10 +823,6 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				Optional: true,
 				ElementType: types.StringType,
 			},
-			"connection_timeout": schema.Int64Attribute{
-				MarkdownDescription: "Connection Timeout. The timeout for new network connections to upstream server. This is specified in milliseconds. The  (2 seconds). Defaults to `2000`.",
-				Optional: true,
-			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
 				Optional: true,
@@ -844,6 +841,14 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"connection_timeout": schema.Int64Attribute{
+				MarkdownDescription: "Connection Timeout. The timeout for new network connections to upstream server. This is specified in milliseconds. The  (2 seconds). Defaults to `2000`.",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.Int64{
+					int64planmodifier.UseStateForUnknown(),
 				},
 			},
 		},
@@ -1680,7 +1685,7 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 													MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
 													Optional: true,
 												},
-												"description": schema.StringAttribute{
+												"description_spec": schema.StringAttribute{
 													MarkdownDescription: "Description. Description for the certificate",
 													Optional: true,
 												},
@@ -2356,7 +2361,7 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 								MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
 								Optional: true,
 							},
-							"description": schema.StringAttribute{
+							"description_spec": schema.StringAttribute{
 								MarkdownDescription: "Description. Description for the certificate",
 								Optional: true,
 							},
@@ -2590,7 +2595,7 @@ func (r *ProxyResource) Create(ctx context.Context, req resource.CreateRequest, 
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.ProxySpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -2615,6 +2620,115 @@ func (r *ProxyResource) Create(ctx context.Context, req resource.CreateRequest, 
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.ActiveForwardProxyPolicies != nil {
+		active_forward_proxy_policiesMap := make(map[string]interface{})
+		apiResource.Spec["active_forward_proxy_policies"] = active_forward_proxy_policiesMap
+	}
+	if data.DoNotAdvertise != nil {
+		do_not_advertiseMap := make(map[string]interface{})
+		apiResource.Spec["do_not_advertise"] = do_not_advertiseMap
+	}
+	if data.DynamicProxy != nil {
+		dynamic_proxyMap := make(map[string]interface{})
+		if data.DynamicProxy.DisableDNSMasquerade != nil {
+			dynamic_proxyMap["disable_dns_masquerade"] = map[string]interface{}{}
+		}
+		if data.DynamicProxy.EnableDNSMasquerade != nil {
+			dynamic_proxyMap["enable_dns_masquerade"] = map[string]interface{}{}
+		}
+		if data.DynamicProxy.HTTPProxy != nil {
+			http_proxyNestedMap := make(map[string]interface{})
+			dynamic_proxyMap["http_proxy"] = http_proxyNestedMap
+		}
+		if data.DynamicProxy.HTTPSProxy != nil {
+			https_proxyNestedMap := make(map[string]interface{})
+			dynamic_proxyMap["https_proxy"] = https_proxyNestedMap
+		}
+		if data.DynamicProxy.SniProxy != nil {
+			sni_proxyNestedMap := make(map[string]interface{})
+			if !data.DynamicProxy.SniProxy.IdleTimeout.IsNull() && !data.DynamicProxy.SniProxy.IdleTimeout.IsUnknown() {
+				sni_proxyNestedMap["idle_timeout"] = data.DynamicProxy.SniProxy.IdleTimeout.ValueInt64()
+			}
+			dynamic_proxyMap["sni_proxy"] = sni_proxyNestedMap
+		}
+		apiResource.Spec["dynamic_proxy"] = dynamic_proxyMap
+	}
+	if data.HTTPProxy != nil {
+		http_proxyMap := make(map[string]interface{})
+		if data.HTTPProxy.EnableHTTP != nil {
+			http_proxyMap["enable_http"] = map[string]interface{}{}
+		}
+		if data.HTTPProxy.MoreOption != nil {
+			more_optionNestedMap := make(map[string]interface{})
+			if !data.HTTPProxy.MoreOption.DisableDefaultErrorPages.IsNull() && !data.HTTPProxy.MoreOption.DisableDefaultErrorPages.IsUnknown() {
+				more_optionNestedMap["disable_default_error_pages"] = data.HTTPProxy.MoreOption.DisableDefaultErrorPages.ValueBool()
+			}
+			if !data.HTTPProxy.MoreOption.IdleTimeout.IsNull() && !data.HTTPProxy.MoreOption.IdleTimeout.IsUnknown() {
+				more_optionNestedMap["idle_timeout"] = data.HTTPProxy.MoreOption.IdleTimeout.ValueInt64()
+			}
+			if !data.HTTPProxy.MoreOption.MaxRequestHeaderSize.IsNull() && !data.HTTPProxy.MoreOption.MaxRequestHeaderSize.IsUnknown() {
+				more_optionNestedMap["max_request_header_size"] = data.HTTPProxy.MoreOption.MaxRequestHeaderSize.ValueInt64()
+			}
+			http_proxyMap["more_option"] = more_optionNestedMap
+		}
+		apiResource.Spec["http_proxy"] = http_proxyMap
+	}
+	if data.NoForwardProxyPolicy != nil {
+		no_forward_proxy_policyMap := make(map[string]interface{})
+		apiResource.Spec["no_forward_proxy_policy"] = no_forward_proxy_policyMap
+	}
+	if data.NoInterception != nil {
+		no_interceptionMap := make(map[string]interface{})
+		apiResource.Spec["no_interception"] = no_interceptionMap
+	}
+	if data.SiteLocalInsideNetwork != nil {
+		site_local_inside_networkMap := make(map[string]interface{})
+		apiResource.Spec["site_local_inside_network"] = site_local_inside_networkMap
+	}
+	if data.SiteLocalNetwork != nil {
+		site_local_networkMap := make(map[string]interface{})
+		apiResource.Spec["site_local_network"] = site_local_networkMap
+	}
+	if data.SiteVirtualSites != nil {
+		site_virtual_sitesMap := make(map[string]interface{})
+		apiResource.Spec["site_virtual_sites"] = site_virtual_sitesMap
+	}
+	if data.TLSIntercept != nil {
+		tls_interceptMap := make(map[string]interface{})
+		if data.TLSIntercept.CustomCertificate != nil {
+			custom_certificateNestedMap := make(map[string]interface{})
+			if !data.TLSIntercept.CustomCertificate.CertificateURL.IsNull() && !data.TLSIntercept.CustomCertificate.CertificateURL.IsUnknown() {
+				custom_certificateNestedMap["certificate_url"] = data.TLSIntercept.CustomCertificate.CertificateURL.ValueString()
+			}
+			if !data.TLSIntercept.CustomCertificate.DescriptionSpec.IsNull() && !data.TLSIntercept.CustomCertificate.DescriptionSpec.IsUnknown() {
+				custom_certificateNestedMap["description"] = data.TLSIntercept.CustomCertificate.DescriptionSpec.ValueString()
+			}
+			tls_interceptMap["custom_certificate"] = custom_certificateNestedMap
+		}
+		if data.TLSIntercept.EnableForAllDomains != nil {
+			tls_interceptMap["enable_for_all_domains"] = map[string]interface{}{}
+		}
+		if data.TLSIntercept.Policy != nil {
+			policyNestedMap := make(map[string]interface{})
+			tls_interceptMap["policy"] = policyNestedMap
+		}
+		if !data.TLSIntercept.TrustedCaURL.IsNull() && !data.TLSIntercept.TrustedCaURL.IsUnknown() {
+			tls_interceptMap["trusted_ca_url"] = data.TLSIntercept.TrustedCaURL.ValueString()
+		}
+		if data.TLSIntercept.VolterraCertificate != nil {
+			tls_interceptMap["volterra_certificate"] = map[string]interface{}{}
+		}
+		if data.TLSIntercept.VolterraTrustedCa != nil {
+			tls_interceptMap["volterra_trusted_ca"] = map[string]interface{}{}
+		}
+		apiResource.Spec["tls_intercept"] = tls_interceptMap
+	}
+	if !data.ConnectionTimeout.IsNull() && !data.ConnectionTimeout.IsUnknown() {
+		apiResource.Spec["connection_timeout"] = data.ConnectionTimeout.ValueInt64()
+	}
+
+
 	created, err := r.client.CreateProxy(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create Proxy: %s", err))
@@ -2623,8 +2737,17 @@ func (r *ProxyResource) Create(ctx context.Context, req resource.CreateRequest, 
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+	if v, ok := created.Spec["connection_timeout"].(float64); ok {
+		data.ConnectionTimeout = types.Int64Value(int64(v))
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created Proxy resource")
@@ -2703,9 +2826,85 @@ func (r *ProxyResource) Read(ctx context.Context, req resource.ReadRequest, resp
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if _, ok := apiResource.Spec["active_forward_proxy_policies"].(map[string]interface{}); ok && isImport && data.ActiveForwardProxyPolicies == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ActiveForwardProxyPolicies = &ProxyActiveForwardProxyPoliciesModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["do_not_advertise"].(map[string]interface{}); ok && isImport && data.DoNotAdvertise == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DoNotAdvertise = &ProxyEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["dynamic_proxy"].(map[string]interface{}); ok && isImport && data.DynamicProxy == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DynamicProxy = &ProxyDynamicProxyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["http_proxy"].(map[string]interface{}); ok && isImport && data.HTTPProxy == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.HTTPProxy = &ProxyHTTPProxyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_forward_proxy_policy"].(map[string]interface{}); ok && isImport && data.NoForwardProxyPolicy == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoForwardProxyPolicy = &ProxyEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_interception"].(map[string]interface{}); ok && isImport && data.NoInterception == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoInterception = &ProxyEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["site_local_inside_network"].(map[string]interface{}); ok && isImport && data.SiteLocalInsideNetwork == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.SiteLocalInsideNetwork = &ProxyEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["site_local_network"].(map[string]interface{}); ok && isImport && data.SiteLocalNetwork == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.SiteLocalNetwork = &ProxyEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["site_virtual_sites"].(map[string]interface{}); ok && isImport && data.SiteVirtualSites == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.SiteVirtualSites = &ProxySiteVirtualSitesModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["tls_intercept"].(map[string]interface{}); ok && (isImport || data.TLSIntercept != nil) {
+		data.TLSIntercept = &ProxyTLSInterceptModel{
+			TrustedCaURL: func() types.String {
+				if v, ok := blockData["trusted_ca_url"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if v, ok := apiResource.Spec["connection_timeout"].(float64); ok {
+		data.ConnectionTimeout = types.Int64Value(int64(v))
+	} else {
+		data.ConnectionTimeout = types.Int64Null()
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -2731,7 +2930,7 @@ func (r *ProxyResource) Update(ctx context.Context, req resource.UpdateRequest, 
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.ProxySpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -2756,6 +2955,115 @@ func (r *ProxyResource) Update(ctx context.Context, req resource.UpdateRequest, 
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.ActiveForwardProxyPolicies != nil {
+		active_forward_proxy_policiesMap := make(map[string]interface{})
+		apiResource.Spec["active_forward_proxy_policies"] = active_forward_proxy_policiesMap
+	}
+	if data.DoNotAdvertise != nil {
+		do_not_advertiseMap := make(map[string]interface{})
+		apiResource.Spec["do_not_advertise"] = do_not_advertiseMap
+	}
+	if data.DynamicProxy != nil {
+		dynamic_proxyMap := make(map[string]interface{})
+		if data.DynamicProxy.DisableDNSMasquerade != nil {
+			dynamic_proxyMap["disable_dns_masquerade"] = map[string]interface{}{}
+		}
+		if data.DynamicProxy.EnableDNSMasquerade != nil {
+			dynamic_proxyMap["enable_dns_masquerade"] = map[string]interface{}{}
+		}
+		if data.DynamicProxy.HTTPProxy != nil {
+			http_proxyNestedMap := make(map[string]interface{})
+			dynamic_proxyMap["http_proxy"] = http_proxyNestedMap
+		}
+		if data.DynamicProxy.HTTPSProxy != nil {
+			https_proxyNestedMap := make(map[string]interface{})
+			dynamic_proxyMap["https_proxy"] = https_proxyNestedMap
+		}
+		if data.DynamicProxy.SniProxy != nil {
+			sni_proxyNestedMap := make(map[string]interface{})
+			if !data.DynamicProxy.SniProxy.IdleTimeout.IsNull() && !data.DynamicProxy.SniProxy.IdleTimeout.IsUnknown() {
+				sni_proxyNestedMap["idle_timeout"] = data.DynamicProxy.SniProxy.IdleTimeout.ValueInt64()
+			}
+			dynamic_proxyMap["sni_proxy"] = sni_proxyNestedMap
+		}
+		apiResource.Spec["dynamic_proxy"] = dynamic_proxyMap
+	}
+	if data.HTTPProxy != nil {
+		http_proxyMap := make(map[string]interface{})
+		if data.HTTPProxy.EnableHTTP != nil {
+			http_proxyMap["enable_http"] = map[string]interface{}{}
+		}
+		if data.HTTPProxy.MoreOption != nil {
+			more_optionNestedMap := make(map[string]interface{})
+			if !data.HTTPProxy.MoreOption.DisableDefaultErrorPages.IsNull() && !data.HTTPProxy.MoreOption.DisableDefaultErrorPages.IsUnknown() {
+				more_optionNestedMap["disable_default_error_pages"] = data.HTTPProxy.MoreOption.DisableDefaultErrorPages.ValueBool()
+			}
+			if !data.HTTPProxy.MoreOption.IdleTimeout.IsNull() && !data.HTTPProxy.MoreOption.IdleTimeout.IsUnknown() {
+				more_optionNestedMap["idle_timeout"] = data.HTTPProxy.MoreOption.IdleTimeout.ValueInt64()
+			}
+			if !data.HTTPProxy.MoreOption.MaxRequestHeaderSize.IsNull() && !data.HTTPProxy.MoreOption.MaxRequestHeaderSize.IsUnknown() {
+				more_optionNestedMap["max_request_header_size"] = data.HTTPProxy.MoreOption.MaxRequestHeaderSize.ValueInt64()
+			}
+			http_proxyMap["more_option"] = more_optionNestedMap
+		}
+		apiResource.Spec["http_proxy"] = http_proxyMap
+	}
+	if data.NoForwardProxyPolicy != nil {
+		no_forward_proxy_policyMap := make(map[string]interface{})
+		apiResource.Spec["no_forward_proxy_policy"] = no_forward_proxy_policyMap
+	}
+	if data.NoInterception != nil {
+		no_interceptionMap := make(map[string]interface{})
+		apiResource.Spec["no_interception"] = no_interceptionMap
+	}
+	if data.SiteLocalInsideNetwork != nil {
+		site_local_inside_networkMap := make(map[string]interface{})
+		apiResource.Spec["site_local_inside_network"] = site_local_inside_networkMap
+	}
+	if data.SiteLocalNetwork != nil {
+		site_local_networkMap := make(map[string]interface{})
+		apiResource.Spec["site_local_network"] = site_local_networkMap
+	}
+	if data.SiteVirtualSites != nil {
+		site_virtual_sitesMap := make(map[string]interface{})
+		apiResource.Spec["site_virtual_sites"] = site_virtual_sitesMap
+	}
+	if data.TLSIntercept != nil {
+		tls_interceptMap := make(map[string]interface{})
+		if data.TLSIntercept.CustomCertificate != nil {
+			custom_certificateNestedMap := make(map[string]interface{})
+			if !data.TLSIntercept.CustomCertificate.CertificateURL.IsNull() && !data.TLSIntercept.CustomCertificate.CertificateURL.IsUnknown() {
+				custom_certificateNestedMap["certificate_url"] = data.TLSIntercept.CustomCertificate.CertificateURL.ValueString()
+			}
+			if !data.TLSIntercept.CustomCertificate.DescriptionSpec.IsNull() && !data.TLSIntercept.CustomCertificate.DescriptionSpec.IsUnknown() {
+				custom_certificateNestedMap["description"] = data.TLSIntercept.CustomCertificate.DescriptionSpec.ValueString()
+			}
+			tls_interceptMap["custom_certificate"] = custom_certificateNestedMap
+		}
+		if data.TLSIntercept.EnableForAllDomains != nil {
+			tls_interceptMap["enable_for_all_domains"] = map[string]interface{}{}
+		}
+		if data.TLSIntercept.Policy != nil {
+			policyNestedMap := make(map[string]interface{})
+			tls_interceptMap["policy"] = policyNestedMap
+		}
+		if !data.TLSIntercept.TrustedCaURL.IsNull() && !data.TLSIntercept.TrustedCaURL.IsUnknown() {
+			tls_interceptMap["trusted_ca_url"] = data.TLSIntercept.TrustedCaURL.ValueString()
+		}
+		if data.TLSIntercept.VolterraCertificate != nil {
+			tls_interceptMap["volterra_certificate"] = map[string]interface{}{}
+		}
+		if data.TLSIntercept.VolterraTrustedCa != nil {
+			tls_interceptMap["volterra_trusted_ca"] = map[string]interface{}{}
+		}
+		apiResource.Spec["tls_intercept"] = tls_interceptMap
+	}
+	if !data.ConnectionTimeout.IsNull() && !data.ConnectionTimeout.IsUnknown() {
+		apiResource.Spec["connection_timeout"] = data.ConnectionTimeout.ValueInt64()
+	}
+
+
 	updated, err := r.client.UpdateProxy(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update Proxy: %s", err))
@@ -2764,6 +3072,12 @@ func (r *ProxyResource) Update(ctx context.Context, req resource.UpdateRequest, 
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
+	if v, ok := updated.Spec["connection_timeout"].(float64); ok {
+		data.ConnectionTimeout = types.Int64Value(int64(v))
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -2776,6 +3090,7 @@ func (r *ProxyResource) Update(ctx context.Context, req resource.UpdateRequest, 
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -2802,6 +3117,15 @@ func (r *ProxyResource) Delete(ctx context.Context, req resource.DeleteRequest, 
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "Proxy already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "Proxy delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

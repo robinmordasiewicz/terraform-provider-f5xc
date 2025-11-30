@@ -10,19 +10,14 @@ import (
 
 // DNSLbHealthCheck represents a F5XC DNSLbHealthCheck
 type DNSLbHealthCheck struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     DNSLbHealthCheckSpec `json:"spec"`
-}
-
-// DNSLbHealthCheckSpec defines the specification for DNSLbHealthCheck
-type DNSLbHealthCheckSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateDNSLbHealthCheck creates a new DNSLbHealthCheck
 func (c *Client) CreateDNSLbHealthCheck(ctx context.Context, resource *DNSLbHealthCheck) (*DNSLbHealthCheck, error) {
 	var result DNSLbHealthCheck
-	path := fmt.Sprintf("/api/config/namespaces/%s/dns_lb_health_checks", resource.Metadata.Namespace)
+	path := fmt.Sprintf("/api/config/dns/namespaces/%s/dns_lb_health_checks", resource.Metadata.Namespace)
 	err := c.Post(ctx, path, resource, &result)
 	return &result, err
 }
@@ -30,7 +25,7 @@ func (c *Client) CreateDNSLbHealthCheck(ctx context.Context, resource *DNSLbHeal
 // GetDNSLbHealthCheck retrieves a DNSLbHealthCheck
 func (c *Client) GetDNSLbHealthCheck(ctx context.Context, namespace, name string) (*DNSLbHealthCheck, error) {
 	var result DNSLbHealthCheck
-	path := fmt.Sprintf("/api/config/namespaces/%s/dns_lb_health_checks/%s", namespace, name)
+	path := fmt.Sprintf("/api/config/dns/namespaces/%s/dns_lb_health_checks/%s", namespace, name)
 	err := c.Get(ctx, path, &result)
 	return &result, err
 }
@@ -38,13 +33,13 @@ func (c *Client) GetDNSLbHealthCheck(ctx context.Context, namespace, name string
 // UpdateDNSLbHealthCheck updates a DNSLbHealthCheck
 func (c *Client) UpdateDNSLbHealthCheck(ctx context.Context, resource *DNSLbHealthCheck) (*DNSLbHealthCheck, error) {
 	var result DNSLbHealthCheck
-	path := fmt.Sprintf("/api/config/namespaces/%s/dns_lb_health_checks/%s", resource.Metadata.Namespace, resource.Metadata.Name)
+	path := fmt.Sprintf("/api/config/dns/namespaces/%s/dns_lb_health_checks/%s", resource.Metadata.Namespace, resource.Metadata.Name)
 	err := c.Put(ctx, path, resource, &result)
 	return &result, err
 }
 
 // DeleteDNSLbHealthCheck deletes a DNSLbHealthCheck
 func (c *Client) DeleteDNSLbHealthCheck(ctx context.Context, namespace, name string) error {
-	path := fmt.Sprintf("/api/config/namespaces/%s/dns_lb_health_checks/%s", namespace, name)
+	path := fmt.Sprintf("/api/config/dns/namespaces/%s/dns_lb_health_checks/%s", namespace, name)
 	return c.Delete(ctx, path)
 }

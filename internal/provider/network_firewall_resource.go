@@ -416,7 +416,7 @@ func (r *NetworkFirewallResource) Create(ctx context.Context, req resource.Creat
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.NetworkFirewallSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -441,6 +441,37 @@ func (r *NetworkFirewallResource) Create(ctx context.Context, req resource.Creat
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.ActiveEnhancedFirewallPolicies != nil {
+		active_enhanced_firewall_policiesMap := make(map[string]interface{})
+		apiResource.Spec["active_enhanced_firewall_policies"] = active_enhanced_firewall_policiesMap
+	}
+	if data.ActiveFastAcls != nil {
+		active_fast_aclsMap := make(map[string]interface{})
+		apiResource.Spec["active_fast_acls"] = active_fast_aclsMap
+	}
+	if data.ActiveForwardProxyPolicies != nil {
+		active_forward_proxy_policiesMap := make(map[string]interface{})
+		apiResource.Spec["active_forward_proxy_policies"] = active_forward_proxy_policiesMap
+	}
+	if data.ActiveNetworkPolicies != nil {
+		active_network_policiesMap := make(map[string]interface{})
+		apiResource.Spec["active_network_policies"] = active_network_policiesMap
+	}
+	if data.DisableFastACL != nil {
+		disable_fast_aclMap := make(map[string]interface{})
+		apiResource.Spec["disable_fast_acl"] = disable_fast_aclMap
+	}
+	if data.DisableForwardProxyPolicy != nil {
+		disable_forward_proxy_policyMap := make(map[string]interface{})
+		apiResource.Spec["disable_forward_proxy_policy"] = disable_forward_proxy_policyMap
+	}
+	if data.DisableNetworkPolicy != nil {
+		disable_network_policyMap := make(map[string]interface{})
+		apiResource.Spec["disable_network_policy"] = disable_network_policyMap
+	}
+
+
 	created, err := r.client.CreateNetworkFirewall(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create NetworkFirewall: %s", err))
@@ -449,8 +480,13 @@ func (r *NetworkFirewallResource) Create(ctx context.Context, req resource.Creat
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created NetworkFirewall resource")
@@ -529,9 +565,60 @@ func (r *NetworkFirewallResource) Read(ctx context.Context, req resource.ReadReq
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if _, ok := apiResource.Spec["active_enhanced_firewall_policies"].(map[string]interface{}); ok && isImport && data.ActiveEnhancedFirewallPolicies == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ActiveEnhancedFirewallPolicies = &NetworkFirewallActiveEnhancedFirewallPoliciesModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["active_fast_acls"].(map[string]interface{}); ok && isImport && data.ActiveFastAcls == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ActiveFastAcls = &NetworkFirewallActiveFastAclsModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["active_forward_proxy_policies"].(map[string]interface{}); ok && isImport && data.ActiveForwardProxyPolicies == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ActiveForwardProxyPolicies = &NetworkFirewallActiveForwardProxyPoliciesModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["active_network_policies"].(map[string]interface{}); ok && isImport && data.ActiveNetworkPolicies == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ActiveNetworkPolicies = &NetworkFirewallActiveNetworkPoliciesModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["disable_fast_acl"].(map[string]interface{}); ok && isImport && data.DisableFastACL == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableFastACL = &NetworkFirewallEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["disable_forward_proxy_policy"].(map[string]interface{}); ok && isImport && data.DisableForwardProxyPolicy == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableForwardProxyPolicy = &NetworkFirewallEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["disable_network_policy"].(map[string]interface{}); ok && isImport && data.DisableNetworkPolicy == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableNetworkPolicy = &NetworkFirewallEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -557,7 +644,7 @@ func (r *NetworkFirewallResource) Update(ctx context.Context, req resource.Updat
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.NetworkFirewallSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -582,6 +669,37 @@ func (r *NetworkFirewallResource) Update(ctx context.Context, req resource.Updat
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.ActiveEnhancedFirewallPolicies != nil {
+		active_enhanced_firewall_policiesMap := make(map[string]interface{})
+		apiResource.Spec["active_enhanced_firewall_policies"] = active_enhanced_firewall_policiesMap
+	}
+	if data.ActiveFastAcls != nil {
+		active_fast_aclsMap := make(map[string]interface{})
+		apiResource.Spec["active_fast_acls"] = active_fast_aclsMap
+	}
+	if data.ActiveForwardProxyPolicies != nil {
+		active_forward_proxy_policiesMap := make(map[string]interface{})
+		apiResource.Spec["active_forward_proxy_policies"] = active_forward_proxy_policiesMap
+	}
+	if data.ActiveNetworkPolicies != nil {
+		active_network_policiesMap := make(map[string]interface{})
+		apiResource.Spec["active_network_policies"] = active_network_policiesMap
+	}
+	if data.DisableFastACL != nil {
+		disable_fast_aclMap := make(map[string]interface{})
+		apiResource.Spec["disable_fast_acl"] = disable_fast_aclMap
+	}
+	if data.DisableForwardProxyPolicy != nil {
+		disable_forward_proxy_policyMap := make(map[string]interface{})
+		apiResource.Spec["disable_forward_proxy_policy"] = disable_forward_proxy_policyMap
+	}
+	if data.DisableNetworkPolicy != nil {
+		disable_network_policyMap := make(map[string]interface{})
+		apiResource.Spec["disable_network_policy"] = disable_network_policyMap
+	}
+
+
 	updated, err := r.client.UpdateNetworkFirewall(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update NetworkFirewall: %s", err))
@@ -590,6 +708,8 @@ func (r *NetworkFirewallResource) Update(ctx context.Context, req resource.Updat
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -602,6 +722,7 @@ func (r *NetworkFirewallResource) Update(ctx context.Context, req resource.Updat
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -628,6 +749,15 @@ func (r *NetworkFirewallResource) Delete(ctx context.Context, req resource.Delet
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "NetworkFirewall already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "NetworkFirewall delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

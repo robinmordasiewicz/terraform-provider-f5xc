@@ -10,13 +10,8 @@ import (
 
 // Segment represents a F5XC Segment
 type Segment struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     SegmentSpec `json:"spec"`
-}
-
-// SegmentSpec defines the specification for Segment
-type SegmentSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateSegment creates a new Segment

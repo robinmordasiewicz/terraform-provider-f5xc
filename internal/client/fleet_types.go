@@ -10,13 +10,8 @@ import (
 
 // Fleet represents a F5XC Fleet
 type Fleet struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     FleetSpec `json:"spec"`
-}
-
-// FleetSpec defines the specification for Fleet
-type FleetSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateFleet creates a new Fleet

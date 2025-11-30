@@ -378,7 +378,7 @@ func (r *SiteMeshGroupResource) Create(ctx context.Context, req resource.CreateR
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.SiteMeshGroupSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -403,6 +403,83 @@ func (r *SiteMeshGroupResource) Create(ctx context.Context, req resource.CreateR
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.DisableReFallback != nil {
+		disable_re_fallbackMap := make(map[string]interface{})
+		apiResource.Spec["disable_re_fallback"] = disable_re_fallbackMap
+	}
+	if data.EnableReFallback != nil {
+		enable_re_fallbackMap := make(map[string]interface{})
+		apiResource.Spec["enable_re_fallback"] = enable_re_fallbackMap
+	}
+	if data.FullMesh != nil {
+		full_meshMap := make(map[string]interface{})
+		if data.FullMesh.ControlAndDataPlaneMesh != nil {
+			full_meshMap["control_and_data_plane_mesh"] = map[string]interface{}{}
+		}
+		if data.FullMesh.DataPlaneMesh != nil {
+			full_meshMap["data_plane_mesh"] = map[string]interface{}{}
+		}
+		apiResource.Spec["full_mesh"] = full_meshMap
+	}
+	if data.HubMesh != nil {
+		hub_meshMap := make(map[string]interface{})
+		if data.HubMesh.ControlAndDataPlaneMesh != nil {
+			hub_meshMap["control_and_data_plane_mesh"] = map[string]interface{}{}
+		}
+		if data.HubMesh.DataPlaneMesh != nil {
+			hub_meshMap["data_plane_mesh"] = map[string]interface{}{}
+		}
+		apiResource.Spec["hub_mesh"] = hub_meshMap
+	}
+	if data.SpokeMesh != nil {
+		spoke_meshMap := make(map[string]interface{})
+		if data.SpokeMesh.ControlAndDataPlaneMesh != nil {
+			spoke_meshMap["control_and_data_plane_mesh"] = map[string]interface{}{}
+		}
+		if data.SpokeMesh.DataPlaneMesh != nil {
+			spoke_meshMap["data_plane_mesh"] = map[string]interface{}{}
+		}
+		if data.SpokeMesh.HubMeshGroup != nil {
+			hub_mesh_groupNestedMap := make(map[string]interface{})
+			if !data.SpokeMesh.HubMeshGroup.Name.IsNull() && !data.SpokeMesh.HubMeshGroup.Name.IsUnknown() {
+				hub_mesh_groupNestedMap["name"] = data.SpokeMesh.HubMeshGroup.Name.ValueString()
+			}
+			if !data.SpokeMesh.HubMeshGroup.Namespace.IsNull() && !data.SpokeMesh.HubMeshGroup.Namespace.IsUnknown() {
+				hub_mesh_groupNestedMap["namespace"] = data.SpokeMesh.HubMeshGroup.Namespace.ValueString()
+			}
+			if !data.SpokeMesh.HubMeshGroup.Tenant.IsNull() && !data.SpokeMesh.HubMeshGroup.Tenant.IsUnknown() {
+				hub_mesh_groupNestedMap["tenant"] = data.SpokeMesh.HubMeshGroup.Tenant.ValueString()
+			}
+			spoke_meshMap["hub_mesh_group"] = hub_mesh_groupNestedMap
+		}
+		apiResource.Spec["spoke_mesh"] = spoke_meshMap
+	}
+	if len(data.VirtualSite) > 0 {
+		var virtual_siteList []map[string]interface{}
+		for _, item := range data.VirtualSite {
+			itemMap := make(map[string]interface{})
+			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+				itemMap["kind"] = item.Kind.ValueString()
+			}
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+				itemMap["namespace"] = item.Namespace.ValueString()
+			}
+			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+				itemMap["tenant"] = item.Tenant.ValueString()
+			}
+			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+				itemMap["uid"] = item.Uid.ValueString()
+			}
+			virtual_siteList = append(virtual_siteList, itemMap)
+		}
+		apiResource.Spec["virtual_site"] = virtual_siteList
+	}
+
+
 	created, err := r.client.CreateSiteMeshGroup(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create SiteMeshGroup: %s", err))
@@ -411,8 +488,13 @@ func (r *SiteMeshGroupResource) Create(ctx context.Context, req resource.CreateR
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created SiteMeshGroup resource")
@@ -491,9 +573,90 @@ func (r *SiteMeshGroupResource) Read(ctx context.Context, req resource.ReadReque
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if _, ok := apiResource.Spec["disable_re_fallback"].(map[string]interface{}); ok && isImport && data.DisableReFallback == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableReFallback = &SiteMeshGroupEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["enable_re_fallback"].(map[string]interface{}); ok && isImport && data.EnableReFallback == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.EnableReFallback = &SiteMeshGroupEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["full_mesh"].(map[string]interface{}); ok && isImport && data.FullMesh == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.FullMesh = &SiteMeshGroupFullMeshModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["hub_mesh"].(map[string]interface{}); ok && isImport && data.HubMesh == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.HubMesh = &SiteMeshGroupHubMeshModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["spoke_mesh"].(map[string]interface{}); ok && isImport && data.SpokeMesh == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.SpokeMesh = &SiteMeshGroupSpokeMeshModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["virtual_site"].([]interface{}); ok && len(listData) > 0 {
+		var virtual_siteList []SiteMeshGroupVirtualSiteModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				virtual_siteList = append(virtual_siteList, SiteMeshGroupVirtualSiteModel{
+					Kind: func() types.String {
+						if v, ok := itemMap["kind"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Namespace: func() types.String {
+						if v, ok := itemMap["namespace"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Tenant: func() types.String {
+						if v, ok := itemMap["tenant"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Uid: func() types.String {
+						if v, ok := itemMap["uid"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.VirtualSite = virtual_siteList
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -519,7 +682,7 @@ func (r *SiteMeshGroupResource) Update(ctx context.Context, req resource.UpdateR
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.SiteMeshGroupSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -544,6 +707,83 @@ func (r *SiteMeshGroupResource) Update(ctx context.Context, req resource.UpdateR
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.DisableReFallback != nil {
+		disable_re_fallbackMap := make(map[string]interface{})
+		apiResource.Spec["disable_re_fallback"] = disable_re_fallbackMap
+	}
+	if data.EnableReFallback != nil {
+		enable_re_fallbackMap := make(map[string]interface{})
+		apiResource.Spec["enable_re_fallback"] = enable_re_fallbackMap
+	}
+	if data.FullMesh != nil {
+		full_meshMap := make(map[string]interface{})
+		if data.FullMesh.ControlAndDataPlaneMesh != nil {
+			full_meshMap["control_and_data_plane_mesh"] = map[string]interface{}{}
+		}
+		if data.FullMesh.DataPlaneMesh != nil {
+			full_meshMap["data_plane_mesh"] = map[string]interface{}{}
+		}
+		apiResource.Spec["full_mesh"] = full_meshMap
+	}
+	if data.HubMesh != nil {
+		hub_meshMap := make(map[string]interface{})
+		if data.HubMesh.ControlAndDataPlaneMesh != nil {
+			hub_meshMap["control_and_data_plane_mesh"] = map[string]interface{}{}
+		}
+		if data.HubMesh.DataPlaneMesh != nil {
+			hub_meshMap["data_plane_mesh"] = map[string]interface{}{}
+		}
+		apiResource.Spec["hub_mesh"] = hub_meshMap
+	}
+	if data.SpokeMesh != nil {
+		spoke_meshMap := make(map[string]interface{})
+		if data.SpokeMesh.ControlAndDataPlaneMesh != nil {
+			spoke_meshMap["control_and_data_plane_mesh"] = map[string]interface{}{}
+		}
+		if data.SpokeMesh.DataPlaneMesh != nil {
+			spoke_meshMap["data_plane_mesh"] = map[string]interface{}{}
+		}
+		if data.SpokeMesh.HubMeshGroup != nil {
+			hub_mesh_groupNestedMap := make(map[string]interface{})
+			if !data.SpokeMesh.HubMeshGroup.Name.IsNull() && !data.SpokeMesh.HubMeshGroup.Name.IsUnknown() {
+				hub_mesh_groupNestedMap["name"] = data.SpokeMesh.HubMeshGroup.Name.ValueString()
+			}
+			if !data.SpokeMesh.HubMeshGroup.Namespace.IsNull() && !data.SpokeMesh.HubMeshGroup.Namespace.IsUnknown() {
+				hub_mesh_groupNestedMap["namespace"] = data.SpokeMesh.HubMeshGroup.Namespace.ValueString()
+			}
+			if !data.SpokeMesh.HubMeshGroup.Tenant.IsNull() && !data.SpokeMesh.HubMeshGroup.Tenant.IsUnknown() {
+				hub_mesh_groupNestedMap["tenant"] = data.SpokeMesh.HubMeshGroup.Tenant.ValueString()
+			}
+			spoke_meshMap["hub_mesh_group"] = hub_mesh_groupNestedMap
+		}
+		apiResource.Spec["spoke_mesh"] = spoke_meshMap
+	}
+	if len(data.VirtualSite) > 0 {
+		var virtual_siteList []map[string]interface{}
+		for _, item := range data.VirtualSite {
+			itemMap := make(map[string]interface{})
+			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+				itemMap["kind"] = item.Kind.ValueString()
+			}
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+				itemMap["namespace"] = item.Namespace.ValueString()
+			}
+			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+				itemMap["tenant"] = item.Tenant.ValueString()
+			}
+			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+				itemMap["uid"] = item.Uid.ValueString()
+			}
+			virtual_siteList = append(virtual_siteList, itemMap)
+		}
+		apiResource.Spec["virtual_site"] = virtual_siteList
+	}
+
+
 	updated, err := r.client.UpdateSiteMeshGroup(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update SiteMeshGroup: %s", err))
@@ -552,6 +792,8 @@ func (r *SiteMeshGroupResource) Update(ctx context.Context, req resource.UpdateR
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -564,6 +806,7 @@ func (r *SiteMeshGroupResource) Update(ctx context.Context, req resource.UpdateR
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -590,6 +833,15 @@ func (r *SiteMeshGroupResource) Delete(ctx context.Context, req resource.DeleteR
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "SiteMeshGroup already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "SiteMeshGroup delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

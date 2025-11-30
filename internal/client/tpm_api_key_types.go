@@ -10,19 +10,14 @@ import (
 
 // TpmAPIKey represents a F5XC TpmAPIKey
 type TpmAPIKey struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     TpmAPIKeySpec `json:"spec"`
-}
-
-// TpmAPIKeySpec defines the specification for TpmAPIKey
-type TpmAPIKeySpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateTpmAPIKey creates a new TpmAPIKey
 func (c *Client) CreateTpmAPIKey(ctx context.Context, resource *TpmAPIKey) (*TpmAPIKey, error) {
 	var result TpmAPIKey
-	path := fmt.Sprintf("/api/config/namespaces/%s/tpm_api_keys", resource.Metadata.Namespace)
+	path := fmt.Sprintf("/api/tpm/namespaces/%s/tpm_api_keys", resource.Metadata.Namespace)
 	err := c.Post(ctx, path, resource, &result)
 	return &result, err
 }
@@ -30,7 +25,7 @@ func (c *Client) CreateTpmAPIKey(ctx context.Context, resource *TpmAPIKey) (*Tpm
 // GetTpmAPIKey retrieves a TpmAPIKey
 func (c *Client) GetTpmAPIKey(ctx context.Context, namespace, name string) (*TpmAPIKey, error) {
 	var result TpmAPIKey
-	path := fmt.Sprintf("/api/config/namespaces/%s/tpm_api_keys/%s", namespace, name)
+	path := fmt.Sprintf("/api/tpm/namespaces/%s/tpm_api_keys/%s", namespace, name)
 	err := c.Get(ctx, path, &result)
 	return &result, err
 }
@@ -38,13 +33,13 @@ func (c *Client) GetTpmAPIKey(ctx context.Context, namespace, name string) (*Tpm
 // UpdateTpmAPIKey updates a TpmAPIKey
 func (c *Client) UpdateTpmAPIKey(ctx context.Context, resource *TpmAPIKey) (*TpmAPIKey, error) {
 	var result TpmAPIKey
-	path := fmt.Sprintf("/api/config/namespaces/%s/tpm_api_keys/%s", resource.Metadata.Namespace, resource.Metadata.Name)
+	path := fmt.Sprintf("/api/tpm/namespaces/%s/tpm_api_keys/%s", resource.Metadata.Namespace, resource.Metadata.Name)
 	err := c.Put(ctx, path, resource, &result)
 	return &result, err
 }
 
 // DeleteTpmAPIKey deletes a TpmAPIKey
 func (c *Client) DeleteTpmAPIKey(ctx context.Context, namespace, name string) error {
-	path := fmt.Sprintf("/api/config/namespaces/%s/tpm_api_keys/%s", namespace, name)
+	path := fmt.Sprintf("/api/tpm/namespaces/%s/tpm_api_keys/%s", namespace, name)
 	return c.Delete(ctx, path)
 }

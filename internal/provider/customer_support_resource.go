@@ -12,6 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -81,10 +82,12 @@ type CustomerSupportResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Annotations types.Map `tfsdk:"annotations"`
-	Category types.String `tfsdk:"category"`
 	Description types.String `tfsdk:"description"`
 	Disable types.Bool `tfsdk:"disable"`
 	Labels types.Map `tfsdk:"labels"`
+	ID types.String `tfsdk:"id"`
+	Category types.String `tfsdk:"category"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Ongoing types.Bool `tfsdk:"ongoing"`
 	Priority types.String `tfsdk:"priority"`
 	ProductData types.String `tfsdk:"product_data"`
@@ -95,7 +98,6 @@ type CustomerSupportResourceModel struct {
 	Topic types.String `tfsdk:"topic"`
 	TpID types.String `tfsdk:"tp_id"`
 	Type types.String `tfsdk:"type"`
-	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
 	Comments []CustomerSupportCommentsModel `tfsdk:"comments"`
 	RelatesTo []CustomerSupportRelatesToModel `tfsdk:"relates_to"`
@@ -135,12 +137,8 @@ func (r *CustomerSupportResource) Schema(ctx context.Context, req resource.Schem
 				Optional: true,
 				ElementType: types.StringType,
 			},
-			"category": schema.StringAttribute{
-				MarkdownDescription: "Category. ticket area further narrows down the ticket - infrastructure, application, dashboards can be examples.",
-				Optional: true,
-			},
 			"description": schema.StringAttribute{
-				MarkdownDescription: "Description. customer's description of the issue (free text)",
+				MarkdownDescription: "Human readable description for the object.",
 				Optional: true,
 			},
 			"disable": schema.BoolAttribute{
@@ -152,48 +150,104 @@ func (r *CustomerSupportResource) Schema(ctx context.Context, req resource.Schem
 				Optional: true,
 				ElementType: types.StringType,
 			},
+			"id": schema.StringAttribute{
+				MarkdownDescription: "Unique identifier for the resource.",
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"category": schema.StringAttribute{
+				MarkdownDescription: "Category. ticket area further narrows down the ticket - infrastructure, application, dashboards can be examples.",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"description_spec": schema.StringAttribute{
+				MarkdownDescription: "Description. customer's description of the issue (free text)",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
 			"ongoing": schema.BoolAttribute{
 				MarkdownDescription: "Ongoing. Ongoing is a flag that indicates whether the issue is ongoing or not.",
 				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.Bool{
+					boolplanmodifier.UseStateForUnknown(),
+				},
 			},
 			"priority": schema.StringAttribute{
 				MarkdownDescription: "Priority. Support ticket priority helps understand importance of the ticket and focus more on more critical issues. Unknown/empty priority Normal priority issue High priority issue Urgent priority issue. Possible values are `PRIORITY_UNKNOWN`, `PRIORITY_NORMAL`, `PRIORITY_HIGH`, `PRIORITY_URGENT`. Defaults to `PRIORITY_UNKNOWN`.",
 				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
 			},
 			"product_data": schema.StringAttribute{
 				MarkdownDescription: "Product Data. Product data is a free text field that can be used to describe the issue in more detail.",
 				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
 			},
 			"service": schema.StringAttribute{
 				MarkdownDescription: "Support Service. Indicates the list of support service Unknown Support Service Account Protection Support Service Administration Support Service Application Traffic Insight Support Service Audit Logs & Alerts Support Service Authentication Intelligence Support Service Billing Support Service Client Side Defense Support Service Cloud & Edge Sites Support Service deprecated: use SS_MULTI_CLOUD_NETWORK_CONNECT instead DDOS & Transit Support Service Deprecated: use SS_ROUTED_DDOS instead Distributed Apps Support Service DNS Management Support Service LoadBalancers Support Service deprecated: use SS_MULTI_CLOUD_APP_CONNECT instead Shared Configuration Support Service Web App & API Protection Support Service Other Support Service Bot Defense Support Service Content delivery network Support Service Observability Support Service Delegated Access Support Service Networking & security across clouds, edge and on-premises Connect apps across clouds, edge and on-premises using Load Balancers BIG-IP Access Policy Manager (APM) Data Intelligence Support Service NGINX One Support Service Web App Scanning Support Service Routed DDoS Support Service Mobile App Shield protects mobile apps from reverse engineering, tampering and malware. Possible values are `SS_UNKNOWN`, `SS_ACCOUNT_PROTECTION`, `SS_ADMINISTRATION`, `SS_APPLICATION_TRAFFIC_INSIGHT`, `SS_AUDIT_LOGS_AND_ALERTS`, `SS_AUTHENTICATION_INTELLIGENCE`, `SS_BILLING`, `SS_CLIENT_SIDE_DEFENSE`, `SS_CLOUD_AND_EDGE_SITES`, `SS_DDOS_AND_TRANSIT_SERVICES`, `SS_DISTRIBUTED_APPS`, `SS_DNS_MANAGEMENT`, `SS_LOAD_BALANCERS`, `SS_SHARED_CONFIGURATION`, `SS_WEB_APP_AND_API_PROTECTION`, `SS_OTHER`, `SS_BOT_DEFENSE`, `SS_CDN`, `SS_OBSERVABILITY`, `SS_DELEGATED_ACCESS`, `SS_MULTI_CLOUD_NETWORK_CONNECT`, `SS_MULTI_CLOUD_APP_CONNECT`, `SS_BIG_IP_APM`, `SS_DATA_INTELLIGENCE`, `SS_NGINX_ONE`, `SS_WEB_APP_SCANNING`, `SS_ROUTED_DDOS`, `SS_MOBILE_APP_SHIELD`. Defaults to `SS_UNKNOWN`.",
 				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
 			},
 			"status": schema.StringAttribute{
 				MarkdownDescription: "Support Ticket Status. State of the ticket so the customers know if the problem is being looked into Unknown or empty support ticket status Indicates a new ticket, waiting to be assigned to an agent Indicates an open issues, actively being looked into Indicates a pending issue, an open issue not actively being looked into Indicates on issue that on-hold, waiting for more information Indicates a solved issue, waiting for customer's confirmation Indicates a closed issue, resolved and customer approved Indicates a failed ticket, a failed ticket didn't make it into Zendesk and a customer should create new one instead. Possible values are `STATUS_UNKNOWN`, `STATUS_NEW`, `STATUS_OPEN`, `STATUS_PENDING`, `STATUS_ONHOLD`, `STATUS_SOLVED`, `STATUS_CLOSED`, `STATUS_FAILED`. Defaults to `STATUS_UNKNOWN`.",
 				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
 			},
 			"subject": schema.StringAttribute{
 				MarkdownDescription: "Subject. subject of the ticket",
 				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
 			},
 			"timeline": schema.StringAttribute{
 				MarkdownDescription: "Timeline. Timeline is a free text field that can be used to describe the issue in more detail.",
 				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
 			},
 			"topic": schema.StringAttribute{
 				MarkdownDescription: "Support Topic. Support Topic indicates the list of topics for service tickets Unknown/empty priority ACCOUNT_SUPPORT_TOPIC_ACCESS_REQUEST ACCOUNT_SUPPORT_TOPIC_ACCOUNT ACCOUNT_SUPPORT_TOPIC_BILLING ACCOUNT_SUPPORT_TOPIC_BILLING_PLAN_CHANGE ACCOUNT_SUPPORT_TOPIC_PUBLIC_IP ACCOUNT_SUPPORT_TOPIC_QUOTA_INCREASE ACCOUNT_SUPPORT_TOPIC_RMA ACCOUNT_SUPPORT_TOPIC_TAX_EXEMPT_VERIFICATION ACCOUNT_SUPPORT_TOPIC_OTHERS TECHNICAL_SUPPORT_TOPIC_CONFIGURATION_CHANGES TECHNICAL_SUPPORT_TOPIC_ERROR_MESSAGE TECHNICAL_SUPPORT_TOPIC_NEW_CONFIGURATION TECHNICAL_SUPPORT_TOPIC_PRODUCT_QUESTION TECHNICAL_SUPPORT_TOPIC_TROUBLESHOOTING TECHNICAL_SUPPORT_TOPIC_OTHERS INCIDENT_SUPPORT_TOPIC_LATENCY INCIDENT_SUPPORT_TOPIC_PERFORMANCE_DEGRADATION INCIDENT_SUPPORT_TOPIC_PARTIAL_OUTAGE INCIDENT_SUPPORT_TOPIC_COMPLETE_OUTAGE INCIDENT_SUPPORT_TOPIC_OTHERS TASK_TOPIC_PLAN_TRANSITION PROBLEM_TOPIC_SUPPORT_ALERT QUESTION_TOPIC_INFRASTRUCTURE TECHNICAL_SUPPORT_TOPIC_DELEGATED_DOMAIN_MIGRATION. Possible values are `TOPIC_UNKNOWN`, `ACCOUNT_SUPPORT_TOPIC_ACCESS_REQUEST`, `ACCOUNT_SUPPORT_TOPIC_ACCOUNT`, `ACCOUNT_SUPPORT_TOPIC_BILLING`, `ACCOUNT_SUPPORT_TOPIC_BILLING_PLAN_CHANGE`, `ACCOUNT_SUPPORT_TOPIC_PUBLIC_IP`, `ACCOUNT_SUPPORT_TOPIC_QUOTA_INCREASE`, `ACCOUNT_SUPPORT_TOPIC_RMA`, `ACCOUNT_SUPPORT_TOPIC_TAX_EXEMPT_VERIFICATION`, `ACCOUNT_SUPPORT_TOPIC_OTHERS`, `TECHNICAL_SUPPORT_TOPIC_CONFIGURATION_CHANGES`, `TECHNICAL_SUPPORT_TOPIC_ERROR_MESSAGE`, `TECHNICAL_SUPPORT_TOPIC_NEW_CONFIGURATION`, `TECHNICAL_SUPPORT_TOPIC_PRODUCT_QUESTION`, `TECHNICAL_SUPPORT_TOPIC_TROUBLESHOOTING`, `TECHNICAL_SUPPORT_TOPIC_OTHERS`, `INCIDENT_SUPPORT_TOPIC_LATENCY`, `INCIDENT_SUPPORT_TOPIC_PERFORMANCE_DEGRADATION`, `INCIDENT_SUPPORT_TOPIC_PARTIAL_OUTAGE`, `INCIDENT_SUPPORT_TOPIC_COMPLETE_OUTAGE`, `INCIDENT_SUPPORT_TOPIC_OTHERS`, `TASK_TOPIC_PLAN_TRANSITION`, `PROBLEM_TOPIC_SUPPORT_ALERT`, `QUESTION_TOPIC_INFRASTRUCTURE`, `TECHNICAL_SUPPORT_TOPIC_DELEGATED_DOMAIN_MIGRATION`. Defaults to `TOPIC_UNKNOWN`.",
 				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
 			},
 			"tp_id": schema.StringAttribute{
 				MarkdownDescription: "Third Party ID. ID assigned to this ticket by our support provider.",
 				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
 			},
 			"type": schema.StringAttribute{
 				MarkdownDescription: "Support Ticket. Several types of issues are supported, such as problems, questions. Unknown or empty ticket type Indicates a problem (e.g. misconfiguration) Indicates a task (a request to do something) Indicates a question (billing, services related) Indicates an incident (something is not working) Indicates a technical support ticket Indicates an account support ticket Indicates an Incident support ticket. Possible values are `TYPE_UNKNOWN`, `TYPE_PROBLEM`, `TYPE_TASK`, `TYPE_QUESTION`, `TYPE_INCIDENT`, `TYPE_TECHNICAL_SUPPORT`, `TYPE_ACCOUNT_SUPPORT`, `TYPE_INCIDENT_SUPPORT`. Defaults to `TYPE_UNKNOWN`.",
 				Optional: true,
-			},
-			"id": schema.StringAttribute{
-				MarkdownDescription: "Unique identifier for the resource.",
 				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
@@ -415,7 +469,7 @@ func (r *CustomerSupportResource) Create(ctx context.Context, req resource.Creat
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.CustomerSupportSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -440,6 +494,91 @@ func (r *CustomerSupportResource) Create(ctx context.Context, req resource.Creat
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if len(data.Comments) > 0 {
+		var commentsList []map[string]interface{}
+		for _, item := range data.Comments {
+			itemMap := make(map[string]interface{})
+			if !item.AuthorEmail.IsNull() && !item.AuthorEmail.IsUnknown() {
+				itemMap["author_email"] = item.AuthorEmail.ValueString()
+			}
+			if !item.AuthorName.IsNull() && !item.AuthorName.IsUnknown() {
+				itemMap["author_name"] = item.AuthorName.ValueString()
+			}
+			if !item.CreatedAt.IsNull() && !item.CreatedAt.IsUnknown() {
+				itemMap["created_at"] = item.CreatedAt.ValueString()
+			}
+			if !item.Html.IsNull() && !item.Html.IsUnknown() {
+				itemMap["html"] = item.Html.ValueString()
+			}
+			if !item.PlainText.IsNull() && !item.PlainText.IsUnknown() {
+				itemMap["plain_text"] = item.PlainText.ValueString()
+			}
+			commentsList = append(commentsList, itemMap)
+		}
+		apiResource.Spec["comments"] = commentsList
+	}
+	if len(data.RelatesTo) > 0 {
+		var relates_toList []map[string]interface{}
+		for _, item := range data.RelatesTo {
+			itemMap := make(map[string]interface{})
+			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+				itemMap["kind"] = item.Kind.ValueString()
+			}
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+				itemMap["namespace"] = item.Namespace.ValueString()
+			}
+			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+				itemMap["tenant"] = item.Tenant.ValueString()
+			}
+			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+				itemMap["uid"] = item.Uid.ValueString()
+			}
+			relates_toList = append(relates_toList, itemMap)
+		}
+		apiResource.Spec["relates_to"] = relates_toList
+	}
+	if !data.Category.IsNull() && !data.Category.IsUnknown() {
+		apiResource.Spec["category"] = data.Category.ValueString()
+	}
+	if !data.DescriptionSpec.IsNull() && !data.DescriptionSpec.IsUnknown() {
+		apiResource.Spec["description"] = data.DescriptionSpec.ValueString()
+	}
+	if !data.Ongoing.IsNull() && !data.Ongoing.IsUnknown() {
+		apiResource.Spec["ongoing"] = data.Ongoing.ValueBool()
+	}
+	if !data.Priority.IsNull() && !data.Priority.IsUnknown() {
+		apiResource.Spec["priority"] = data.Priority.ValueString()
+	}
+	if !data.ProductData.IsNull() && !data.ProductData.IsUnknown() {
+		apiResource.Spec["product_data"] = data.ProductData.ValueString()
+	}
+	if !data.Service.IsNull() && !data.Service.IsUnknown() {
+		apiResource.Spec["service"] = data.Service.ValueString()
+	}
+	if !data.Status.IsNull() && !data.Status.IsUnknown() {
+		apiResource.Spec["status"] = data.Status.ValueString()
+	}
+	if !data.Subject.IsNull() && !data.Subject.IsUnknown() {
+		apiResource.Spec["subject"] = data.Subject.ValueString()
+	}
+	if !data.Timeline.IsNull() && !data.Timeline.IsUnknown() {
+		apiResource.Spec["timeline"] = data.Timeline.ValueString()
+	}
+	if !data.Topic.IsNull() && !data.Topic.IsUnknown() {
+		apiResource.Spec["topic"] = data.Topic.ValueString()
+	}
+	if !data.TpID.IsNull() && !data.TpID.IsUnknown() {
+		apiResource.Spec["tp_id"] = data.TpID.ValueString()
+	}
+	if !data.Type.IsNull() && !data.Type.IsUnknown() {
+		apiResource.Spec["type"] = data.Type.ValueString()
+	}
+
+
 	created, err := r.client.CreateCustomerSupport(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create CustomerSupport: %s", err))
@@ -448,8 +587,61 @@ func (r *CustomerSupportResource) Create(ctx context.Context, req resource.Creat
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+	if v, ok := created.Spec["category"].(string); ok && v != "" {
+		data.Category = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["description"].(string); ok && v != "" {
+		data.DescriptionSpec = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["ongoing"].(bool); ok {
+		data.Ongoing = types.BoolValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["priority"].(string); ok && v != "" {
+		data.Priority = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["product_data"].(string); ok && v != "" {
+		data.ProductData = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["service"].(string); ok && v != "" {
+		data.Service = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["status"].(string); ok && v != "" {
+		data.Status = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["subject"].(string); ok && v != "" {
+		data.Subject = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["timeline"].(string); ok && v != "" {
+		data.Timeline = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["topic"].(string); ok && v != "" {
+		data.Topic = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["tp_id"].(string); ok && v != "" {
+		data.TpID = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["type"].(string); ok && v != "" {
+		data.Type = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created CustomerSupport resource")
@@ -528,9 +720,171 @@ func (r *CustomerSupportResource) Read(ctx context.Context, req resource.ReadReq
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if listData, ok := apiResource.Spec["comments"].([]interface{}); ok && len(listData) > 0 {
+		var commentsList []CustomerSupportCommentsModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				commentsList = append(commentsList, CustomerSupportCommentsModel{
+					AuthorEmail: func() types.String {
+						if v, ok := itemMap["author_email"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					AuthorName: func() types.String {
+						if v, ok := itemMap["author_name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					CreatedAt: func() types.String {
+						if v, ok := itemMap["created_at"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Html: func() types.String {
+						if v, ok := itemMap["html"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					PlainText: func() types.String {
+						if v, ok := itemMap["plain_text"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.Comments = commentsList
+	}
+	if listData, ok := apiResource.Spec["relates_to"].([]interface{}); ok && len(listData) > 0 {
+		var relates_toList []CustomerSupportRelatesToModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				relates_toList = append(relates_toList, CustomerSupportRelatesToModel{
+					Kind: func() types.String {
+						if v, ok := itemMap["kind"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Namespace: func() types.String {
+						if v, ok := itemMap["namespace"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Tenant: func() types.String {
+						if v, ok := itemMap["tenant"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Uid: func() types.String {
+						if v, ok := itemMap["uid"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.RelatesTo = relates_toList
+	}
+	if v, ok := apiResource.Spec["category"].(string); ok && v != "" {
+		data.Category = types.StringValue(v)
+	} else {
+		data.Category = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["description"].(string); ok && v != "" {
+		data.DescriptionSpec = types.StringValue(v)
+	} else {
+		data.DescriptionSpec = types.StringNull()
+	}
+	// Top-level Optional bool: preserve prior state to avoid API default drift
+	if !isImport && !data.Ongoing.IsNull() {
+		// Normal Read: preserve existing state value (do nothing)
+	} else {
+		// Import case or null state: read from API
+		if v, ok := apiResource.Spec["ongoing"].(bool); ok {
+			data.Ongoing = types.BoolValue(v)
+		} else {
+			data.Ongoing = types.BoolNull()
+		}
+	}
+	if v, ok := apiResource.Spec["priority"].(string); ok && v != "" {
+		data.Priority = types.StringValue(v)
+	} else {
+		data.Priority = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["product_data"].(string); ok && v != "" {
+		data.ProductData = types.StringValue(v)
+	} else {
+		data.ProductData = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["service"].(string); ok && v != "" {
+		data.Service = types.StringValue(v)
+	} else {
+		data.Service = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["status"].(string); ok && v != "" {
+		data.Status = types.StringValue(v)
+	} else {
+		data.Status = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["subject"].(string); ok && v != "" {
+		data.Subject = types.StringValue(v)
+	} else {
+		data.Subject = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["timeline"].(string); ok && v != "" {
+		data.Timeline = types.StringValue(v)
+	} else {
+		data.Timeline = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["topic"].(string); ok && v != "" {
+		data.Topic = types.StringValue(v)
+	} else {
+		data.Topic = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["tp_id"].(string); ok && v != "" {
+		data.TpID = types.StringValue(v)
+	} else {
+		data.TpID = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["type"].(string); ok && v != "" {
+		data.Type = types.StringValue(v)
+	} else {
+		data.Type = types.StringNull()
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -556,7 +910,7 @@ func (r *CustomerSupportResource) Update(ctx context.Context, req resource.Updat
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.CustomerSupportSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -581,6 +935,91 @@ func (r *CustomerSupportResource) Update(ctx context.Context, req resource.Updat
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if len(data.Comments) > 0 {
+		var commentsList []map[string]interface{}
+		for _, item := range data.Comments {
+			itemMap := make(map[string]interface{})
+			if !item.AuthorEmail.IsNull() && !item.AuthorEmail.IsUnknown() {
+				itemMap["author_email"] = item.AuthorEmail.ValueString()
+			}
+			if !item.AuthorName.IsNull() && !item.AuthorName.IsUnknown() {
+				itemMap["author_name"] = item.AuthorName.ValueString()
+			}
+			if !item.CreatedAt.IsNull() && !item.CreatedAt.IsUnknown() {
+				itemMap["created_at"] = item.CreatedAt.ValueString()
+			}
+			if !item.Html.IsNull() && !item.Html.IsUnknown() {
+				itemMap["html"] = item.Html.ValueString()
+			}
+			if !item.PlainText.IsNull() && !item.PlainText.IsUnknown() {
+				itemMap["plain_text"] = item.PlainText.ValueString()
+			}
+			commentsList = append(commentsList, itemMap)
+		}
+		apiResource.Spec["comments"] = commentsList
+	}
+	if len(data.RelatesTo) > 0 {
+		var relates_toList []map[string]interface{}
+		for _, item := range data.RelatesTo {
+			itemMap := make(map[string]interface{})
+			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+				itemMap["kind"] = item.Kind.ValueString()
+			}
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+				itemMap["namespace"] = item.Namespace.ValueString()
+			}
+			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+				itemMap["tenant"] = item.Tenant.ValueString()
+			}
+			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+				itemMap["uid"] = item.Uid.ValueString()
+			}
+			relates_toList = append(relates_toList, itemMap)
+		}
+		apiResource.Spec["relates_to"] = relates_toList
+	}
+	if !data.Category.IsNull() && !data.Category.IsUnknown() {
+		apiResource.Spec["category"] = data.Category.ValueString()
+	}
+	if !data.DescriptionSpec.IsNull() && !data.DescriptionSpec.IsUnknown() {
+		apiResource.Spec["description"] = data.DescriptionSpec.ValueString()
+	}
+	if !data.Ongoing.IsNull() && !data.Ongoing.IsUnknown() {
+		apiResource.Spec["ongoing"] = data.Ongoing.ValueBool()
+	}
+	if !data.Priority.IsNull() && !data.Priority.IsUnknown() {
+		apiResource.Spec["priority"] = data.Priority.ValueString()
+	}
+	if !data.ProductData.IsNull() && !data.ProductData.IsUnknown() {
+		apiResource.Spec["product_data"] = data.ProductData.ValueString()
+	}
+	if !data.Service.IsNull() && !data.Service.IsUnknown() {
+		apiResource.Spec["service"] = data.Service.ValueString()
+	}
+	if !data.Status.IsNull() && !data.Status.IsUnknown() {
+		apiResource.Spec["status"] = data.Status.ValueString()
+	}
+	if !data.Subject.IsNull() && !data.Subject.IsUnknown() {
+		apiResource.Spec["subject"] = data.Subject.ValueString()
+	}
+	if !data.Timeline.IsNull() && !data.Timeline.IsUnknown() {
+		apiResource.Spec["timeline"] = data.Timeline.ValueString()
+	}
+	if !data.Topic.IsNull() && !data.Topic.IsUnknown() {
+		apiResource.Spec["topic"] = data.Topic.ValueString()
+	}
+	if !data.TpID.IsNull() && !data.TpID.IsUnknown() {
+		apiResource.Spec["tp_id"] = data.TpID.ValueString()
+	}
+	if !data.Type.IsNull() && !data.Type.IsUnknown() {
+		apiResource.Spec["type"] = data.Type.ValueString()
+	}
+
+
 	updated, err := r.client.UpdateCustomerSupport(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update CustomerSupport: %s", err))
@@ -589,6 +1028,56 @@ func (r *CustomerSupportResource) Update(ctx context.Context, req resource.Updat
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
+	if v, ok := updated.Spec["category"].(string); ok && v != "" {
+		data.Category = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["description"].(string); ok && v != "" {
+		data.DescriptionSpec = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["ongoing"].(bool); ok {
+		data.Ongoing = types.BoolValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["priority"].(string); ok && v != "" {
+		data.Priority = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["product_data"].(string); ok && v != "" {
+		data.ProductData = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["service"].(string); ok && v != "" {
+		data.Service = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["status"].(string); ok && v != "" {
+		data.Status = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["subject"].(string); ok && v != "" {
+		data.Subject = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["timeline"].(string); ok && v != "" {
+		data.Timeline = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["topic"].(string); ok && v != "" {
+		data.Topic = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["tp_id"].(string); ok && v != "" {
+		data.TpID = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["type"].(string); ok && v != "" {
+		data.Type = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -601,6 +1090,7 @@ func (r *CustomerSupportResource) Update(ctx context.Context, req resource.Updat
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -627,6 +1117,15 @@ func (r *CustomerSupportResource) Delete(ctx context.Context, req resource.Delet
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "CustomerSupport already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "CustomerSupport delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

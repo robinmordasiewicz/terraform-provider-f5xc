@@ -10,13 +10,8 @@ import (
 
 // AppSetting represents a F5XC AppSetting
 type AppSetting struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     AppSettingSpec `json:"spec"`
-}
-
-// AppSettingSpec defines the specification for AppSetting
-type AppSettingSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateAppSetting creates a new AppSetting

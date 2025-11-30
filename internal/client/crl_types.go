@@ -10,13 +10,8 @@ import (
 
 // CRL represents a F5XC CRL
 type CRL struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     CRLSpec `json:"spec"`
-}
-
-// CRLSpec defines the specification for CRL
-type CRLSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateCRL creates a new CRL

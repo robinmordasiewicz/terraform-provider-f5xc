@@ -10,13 +10,8 @@ import (
 
 // K8SCluster represents a F5XC K8SCluster
 type K8SCluster struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     K8SClusterSpec `json:"spec"`
-}
-
-// K8SClusterSpec defines the specification for K8SCluster
-type K8SClusterSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateK8SCluster creates a new K8SCluster

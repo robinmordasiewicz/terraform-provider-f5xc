@@ -10,13 +10,8 @@ import (
 
 // Policer represents a F5XC Policer
 type Policer struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     PolicerSpec `json:"spec"`
-}
-
-// PolicerSpec defines the specification for Policer
-type PolicerSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreatePolicer creates a new Policer

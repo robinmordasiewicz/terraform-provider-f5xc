@@ -63,13 +63,13 @@ type SecretPolicyRuleClientSelectorModel struct {
 type SecretPolicyRuleResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Action types.String `tfsdk:"action"`
 	Annotations types.Map `tfsdk:"annotations"`
-	ClientName types.String `tfsdk:"client_name"`
 	Description types.String `tfsdk:"description"`
 	Disable types.Bool `tfsdk:"disable"`
 	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
+	Action types.String `tfsdk:"action"`
+	ClientName types.String `tfsdk:"client_name"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
 	ClientNameMatcher *SecretPolicyRuleClientNameMatcherModel `tfsdk:"client_name_matcher"`
 	ClientSelector *SecretPolicyRuleClientSelectorModel `tfsdk:"client_selector"`
@@ -104,18 +104,10 @@ func (r *SecretPolicyRuleResource) Schema(ctx context.Context, req resource.Sche
 					validators.NamespaceValidator(),
 				},
 			},
-			"action": schema.StringAttribute{
-				MarkdownDescription: "Rule Action. The rule action determines the disposition of the input request API. If a policy matches a rule with an ALLOW action, the processing of the request proceeds forward. If it matches a rule with a DENY action, the processing of the request is terminated and an appropriate message/code returned to the originator. If it matches a rule with a NEXT_POLICY_SET action, evaluation of the current policy set terminates and evaluation of the next policy set in the chain begins. - DENY: DENY Deny the request. - ALLOW: ALLOW Allow the request to proceed. - NEXT_POLICY_SET: NEXT_POLICY_SET Terminate evaluation of the current policy set and begin evaluating the next policy set in the chain. Note that the evaluation of any remaining policies in the current policy set is skipped. - NEXT_POLICY: NEXT_POLICY Terminate evaluation of the current policy and begin evaluating the next policy in the policy set. Note that the evaluation of any remaining rules in the current policy is skipped. - LAST_POLICY: LAST_POLICY Terminate evaluation of the current policy and begin evaluating the last policy in the policy set. Note that the evaluation of any remaining rules in the current policy is skipped. - GOTO_POLICY: GOTO_POLICY Terminate evaluation of the current policy and begin evaluating a specific policy in the policy set. The policy is specified using the goto_policy field in the rule and must be after the current policy in the policy set. Possible values are `DENY`, `ALLOW`, `NEXT_POLICY`. Defaults to `DENY`.",
-				Optional: true,
-			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
 				Optional: true,
 				ElementType: types.StringType,
-			},
-			"client_name": schema.StringAttribute{
-				MarkdownDescription: "[OneOf: client_name, client_name_matcher, client_selector] Client Name. The name of the client trying to access the secret. Name of the client will be extracted from client TLS certificate. This predicate evaluates to true if client name matches the configured name",
-				Optional: true,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
@@ -132,6 +124,22 @@ func (r *SecretPolicyRuleResource) Schema(ctx context.Context, req resource.Sche
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"action": schema.StringAttribute{
+				MarkdownDescription: "Rule Action. The rule action determines the disposition of the input request API. If a policy matches a rule with an ALLOW action, the processing of the request proceeds forward. If it matches a rule with a DENY action, the processing of the request is terminated and an appropriate message/code returned to the originator. If it matches a rule with a NEXT_POLICY_SET action, evaluation of the current policy set terminates and evaluation of the next policy set in the chain begins. - DENY: DENY Deny the request. - ALLOW: ALLOW Allow the request to proceed. - NEXT_POLICY_SET: NEXT_POLICY_SET Terminate evaluation of the current policy set and begin evaluating the next policy set in the chain. Note that the evaluation of any remaining policies in the current policy set is skipped. - NEXT_POLICY: NEXT_POLICY Terminate evaluation of the current policy and begin evaluating the next policy in the policy set. Note that the evaluation of any remaining rules in the current policy is skipped. - LAST_POLICY: LAST_POLICY Terminate evaluation of the current policy and begin evaluating the last policy in the policy set. Note that the evaluation of any remaining rules in the current policy is skipped. - GOTO_POLICY: GOTO_POLICY Terminate evaluation of the current policy and begin evaluating a specific policy in the policy set. The policy is specified using the goto_policy field in the rule and must be after the current policy in the policy set. Possible values are `DENY`, `ALLOW`, `NEXT_POLICY`. Defaults to `DENY`.",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"client_name": schema.StringAttribute{
+				MarkdownDescription: "[OneOf: client_name, client_name_matcher, client_selector] Client Name. The name of the client trying to access the secret. Name of the client will be extracted from client TLS certificate. This predicate evaluates to true if client name matches the configured name",
+				Optional: true,
 				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
@@ -294,7 +302,7 @@ func (r *SecretPolicyRuleResource) Create(ctx context.Context, req resource.Crea
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.SecretPolicyRuleSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -319,6 +327,23 @@ func (r *SecretPolicyRuleResource) Create(ctx context.Context, req resource.Crea
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.ClientNameMatcher != nil {
+		client_name_matcherMap := make(map[string]interface{})
+		apiResource.Spec["client_name_matcher"] = client_name_matcherMap
+	}
+	if data.ClientSelector != nil {
+		client_selectorMap := make(map[string]interface{})
+		apiResource.Spec["client_selector"] = client_selectorMap
+	}
+	if !data.Action.IsNull() && !data.Action.IsUnknown() {
+		apiResource.Spec["action"] = data.Action.ValueString()
+	}
+	if !data.ClientName.IsNull() && !data.ClientName.IsUnknown() {
+		apiResource.Spec["client_name"] = data.ClientName.ValueString()
+	}
+
+
 	created, err := r.client.CreateSecretPolicyRule(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create SecretPolicyRule: %s", err))
@@ -327,8 +352,21 @@ func (r *SecretPolicyRuleResource) Create(ctx context.Context, req resource.Crea
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+	if v, ok := created.Spec["action"].(string); ok && v != "" {
+		data.Action = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["client_name"].(string); ok && v != "" {
+		data.ClientName = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created SecretPolicyRule resource")
@@ -407,9 +445,45 @@ func (r *SecretPolicyRuleResource) Read(ctx context.Context, req resource.ReadRe
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if _, ok := apiResource.Spec["client_name_matcher"].(map[string]interface{}); ok && isImport && data.ClientNameMatcher == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ClientNameMatcher = &SecretPolicyRuleClientNameMatcherModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["client_selector"].(map[string]interface{}); ok && isImport && data.ClientSelector == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ClientSelector = &SecretPolicyRuleClientSelectorModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["action"].(string); ok && v != "" {
+		data.Action = types.StringValue(v)
+	} else {
+		data.Action = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["client_name"].(string); ok && v != "" {
+		data.ClientName = types.StringValue(v)
+	} else {
+		data.ClientName = types.StringNull()
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -435,7 +509,7 @@ func (r *SecretPolicyRuleResource) Update(ctx context.Context, req resource.Upda
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.SecretPolicyRuleSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -460,6 +534,23 @@ func (r *SecretPolicyRuleResource) Update(ctx context.Context, req resource.Upda
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.ClientNameMatcher != nil {
+		client_name_matcherMap := make(map[string]interface{})
+		apiResource.Spec["client_name_matcher"] = client_name_matcherMap
+	}
+	if data.ClientSelector != nil {
+		client_selectorMap := make(map[string]interface{})
+		apiResource.Spec["client_selector"] = client_selectorMap
+	}
+	if !data.Action.IsNull() && !data.Action.IsUnknown() {
+		apiResource.Spec["action"] = data.Action.ValueString()
+	}
+	if !data.ClientName.IsNull() && !data.ClientName.IsUnknown() {
+		apiResource.Spec["client_name"] = data.ClientName.ValueString()
+	}
+
+
 	updated, err := r.client.UpdateSecretPolicyRule(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update SecretPolicyRule: %s", err))
@@ -468,6 +559,16 @@ func (r *SecretPolicyRuleResource) Update(ctx context.Context, req resource.Upda
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
+	if v, ok := updated.Spec["action"].(string); ok && v != "" {
+		data.Action = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["client_name"].(string); ok && v != "" {
+		data.ClientName = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -480,6 +581,7 @@ func (r *SecretPolicyRuleResource) Update(ctx context.Context, req resource.Upda
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -506,6 +608,15 @@ func (r *SecretPolicyRuleResource) Delete(ctx context.Context, req resource.Dele
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "SecretPolicyRule already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "SecretPolicyRule delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

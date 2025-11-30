@@ -128,7 +128,7 @@ type BGPPeersExternalInterfaceListInterfacesModel struct {
 
 // BGPPeersMetadataModel represents metadata block
 type BGPPeersMetadataModel struct {
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name types.String `tfsdk:"name"`
 }
 
@@ -457,7 +457,7 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 						"metadata": schema.SingleNestedBlock{
 							MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 							Attributes: map[string]schema.Attribute{
-								"description": schema.StringAttribute{
+								"description_spec": schema.StringAttribute{
 									MarkdownDescription: "Description. Human readable description.",
 									Optional: true,
 								},
@@ -757,7 +757,7 @@ func (r *BGPResource) Create(ctx context.Context, req resource.CreateRequest, re
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.BGPSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -782,6 +782,124 @@ func (r *BGPResource) Create(ctx context.Context, req resource.CreateRequest, re
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.BGPParameters != nil {
+		bgp_parametersMap := make(map[string]interface{})
+		if !data.BGPParameters.Asn.IsNull() && !data.BGPParameters.Asn.IsUnknown() {
+			bgp_parametersMap["asn"] = data.BGPParameters.Asn.ValueInt64()
+		}
+		if data.BGPParameters.FromSite != nil {
+			bgp_parametersMap["from_site"] = map[string]interface{}{}
+		}
+		if !data.BGPParameters.IPAddress.IsNull() && !data.BGPParameters.IPAddress.IsUnknown() {
+			bgp_parametersMap["ip_address"] = data.BGPParameters.IPAddress.ValueString()
+		}
+		if data.BGPParameters.LocalAddress != nil {
+			bgp_parametersMap["local_address"] = map[string]interface{}{}
+		}
+		apiResource.Spec["bgp_parameters"] = bgp_parametersMap
+	}
+	if len(data.Peers) > 0 {
+		var peersList []map[string]interface{}
+		for _, item := range data.Peers {
+			itemMap := make(map[string]interface{})
+			if item.BfdDisabled != nil {
+				itemMap["bfd_disabled"] = map[string]interface{}{}
+			}
+			if item.BfdEnabled != nil {
+				bfd_enabledNestedMap := make(map[string]interface{})
+				if !item.BfdEnabled.Multiplier.IsNull() && !item.BfdEnabled.Multiplier.IsUnknown() {
+					bfd_enabledNestedMap["multiplier"] = item.BfdEnabled.Multiplier.ValueInt64()
+				}
+				if !item.BfdEnabled.ReceiveIntervalMilliseconds.IsNull() && !item.BfdEnabled.ReceiveIntervalMilliseconds.IsUnknown() {
+					bfd_enabledNestedMap["receive_interval_milliseconds"] = item.BfdEnabled.ReceiveIntervalMilliseconds.ValueInt64()
+				}
+				if !item.BfdEnabled.TransmitIntervalMilliseconds.IsNull() && !item.BfdEnabled.TransmitIntervalMilliseconds.IsUnknown() {
+					bfd_enabledNestedMap["transmit_interval_milliseconds"] = item.BfdEnabled.TransmitIntervalMilliseconds.ValueInt64()
+				}
+				itemMap["bfd_enabled"] = bfd_enabledNestedMap
+			}
+			if item.Disable != nil {
+				itemMap["disable"] = map[string]interface{}{}
+			}
+			if item.External != nil {
+				externalNestedMap := make(map[string]interface{})
+				if !item.External.Address.IsNull() && !item.External.Address.IsUnknown() {
+					externalNestedMap["address"] = item.External.Address.ValueString()
+				}
+				if !item.External.AddressIPV6.IsNull() && !item.External.AddressIPV6.IsUnknown() {
+					externalNestedMap["address_ipv6"] = item.External.AddressIPV6.ValueString()
+				}
+				if !item.External.Asn.IsNull() && !item.External.Asn.IsUnknown() {
+					externalNestedMap["asn"] = item.External.Asn.ValueInt64()
+				}
+				if !item.External.Md5AuthKey.IsNull() && !item.External.Md5AuthKey.IsUnknown() {
+					externalNestedMap["md5_auth_key"] = item.External.Md5AuthKey.ValueString()
+				}
+				if !item.External.Port.IsNull() && !item.External.Port.IsUnknown() {
+					externalNestedMap["port"] = item.External.Port.ValueInt64()
+				}
+				if !item.External.SubnetBeginOffset.IsNull() && !item.External.SubnetBeginOffset.IsUnknown() {
+					externalNestedMap["subnet_begin_offset"] = item.External.SubnetBeginOffset.ValueInt64()
+				}
+				if !item.External.SubnetBeginOffsetV6.IsNull() && !item.External.SubnetBeginOffsetV6.IsUnknown() {
+					externalNestedMap["subnet_begin_offset_v6"] = item.External.SubnetBeginOffsetV6.ValueInt64()
+				}
+				if !item.External.SubnetEndOffset.IsNull() && !item.External.SubnetEndOffset.IsUnknown() {
+					externalNestedMap["subnet_end_offset"] = item.External.SubnetEndOffset.ValueInt64()
+				}
+				if !item.External.SubnetEndOffsetV6.IsNull() && !item.External.SubnetEndOffsetV6.IsUnknown() {
+					externalNestedMap["subnet_end_offset_v6"] = item.External.SubnetEndOffsetV6.ValueInt64()
+				}
+				itemMap["external"] = externalNestedMap
+			}
+			if !item.Label.IsNull() && !item.Label.IsUnknown() {
+				itemMap["label"] = item.Label.ValueString()
+			}
+			if item.Metadata != nil {
+				metadataNestedMap := make(map[string]interface{})
+				if !item.Metadata.DescriptionSpec.IsNull() && !item.Metadata.DescriptionSpec.IsUnknown() {
+					metadataNestedMap["description"] = item.Metadata.DescriptionSpec.ValueString()
+				}
+				if !item.Metadata.Name.IsNull() && !item.Metadata.Name.IsUnknown() {
+					metadataNestedMap["name"] = item.Metadata.Name.ValueString()
+				}
+				itemMap["metadata"] = metadataNestedMap
+			}
+			if item.PassiveModeDisabled != nil {
+				itemMap["passive_mode_disabled"] = map[string]interface{}{}
+			}
+			if item.PassiveModeEnabled != nil {
+				itemMap["passive_mode_enabled"] = map[string]interface{}{}
+			}
+			if item.RoutingPolicies != nil {
+				routing_policiesNestedMap := make(map[string]interface{})
+				itemMap["routing_policies"] = routing_policiesNestedMap
+			}
+			peersList = append(peersList, itemMap)
+		}
+		apiResource.Spec["peers"] = peersList
+	}
+	if data.Where != nil {
+		whereMap := make(map[string]interface{})
+		if data.Where.Site != nil {
+			siteNestedMap := make(map[string]interface{})
+			if !data.Where.Site.NetworkType.IsNull() && !data.Where.Site.NetworkType.IsUnknown() {
+				siteNestedMap["network_type"] = data.Where.Site.NetworkType.ValueString()
+			}
+			whereMap["site"] = siteNestedMap
+		}
+		if data.Where.VirtualSite != nil {
+			virtual_siteNestedMap := make(map[string]interface{})
+			if !data.Where.VirtualSite.NetworkType.IsNull() && !data.Where.VirtualSite.NetworkType.IsUnknown() {
+				virtual_siteNestedMap["network_type"] = data.Where.VirtualSite.NetworkType.ValueString()
+			}
+			whereMap["virtual_site"] = virtual_siteNestedMap
+		}
+		apiResource.Spec["where"] = whereMap
+	}
+
+
 	created, err := r.client.CreateBGP(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create BGP: %s", err))
@@ -790,8 +908,13 @@ func (r *BGPResource) Create(ctx context.Context, req resource.CreateRequest, re
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created BGP resource")
@@ -870,9 +993,198 @@ func (r *BGPResource) Read(ctx context.Context, req resource.ReadRequest, resp *
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if blockData, ok := apiResource.Spec["bgp_parameters"].(map[string]interface{}); ok && (isImport || data.BGPParameters != nil) {
+		data.BGPParameters = &BGPBGPParametersModel{
+			Asn: func() types.Int64 {
+				if v, ok := blockData["asn"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			IPAddress: func() types.String {
+				if v, ok := blockData["ip_address"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if listData, ok := apiResource.Spec["peers"].([]interface{}); ok && len(listData) > 0 {
+		var peersList []BGPPeersModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				peersList = append(peersList, BGPPeersModel{
+					BfdDisabled: func() *BGPEmptyModel {
+						if _, ok := itemMap["bfd_disabled"].(map[string]interface{}); ok {
+							return &BGPEmptyModel{}
+						}
+						return nil
+					}(),
+					BfdEnabled: func() *BGPPeersBfdEnabledModel {
+						if nestedMap, ok := itemMap["bfd_enabled"].(map[string]interface{}); ok {
+							return &BGPPeersBfdEnabledModel{
+								Multiplier: func() types.Int64 {
+									if v, ok := nestedMap["multiplier"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								ReceiveIntervalMilliseconds: func() types.Int64 {
+									if v, ok := nestedMap["receive_interval_milliseconds"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								TransmitIntervalMilliseconds: func() types.Int64 {
+									if v, ok := nestedMap["transmit_interval_milliseconds"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					Disable: func() *BGPEmptyModel {
+						if _, ok := itemMap["disable"].(map[string]interface{}); ok {
+							return &BGPEmptyModel{}
+						}
+						return nil
+					}(),
+					External: func() *BGPPeersExternalModel {
+						if nestedMap, ok := itemMap["external"].(map[string]interface{}); ok {
+							return &BGPPeersExternalModel{
+								Address: func() types.String {
+									if v, ok := nestedMap["address"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								AddressIPV6: func() types.String {
+									if v, ok := nestedMap["address_ipv6"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Asn: func() types.Int64 {
+									if v, ok := nestedMap["asn"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								Md5AuthKey: func() types.String {
+									if v, ok := nestedMap["md5_auth_key"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Port: func() types.Int64 {
+									if v, ok := nestedMap["port"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								SubnetBeginOffset: func() types.Int64 {
+									if v, ok := nestedMap["subnet_begin_offset"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								SubnetBeginOffsetV6: func() types.Int64 {
+									if v, ok := nestedMap["subnet_begin_offset_v6"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								SubnetEndOffset: func() types.Int64 {
+									if v, ok := nestedMap["subnet_end_offset"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								SubnetEndOffsetV6: func() types.Int64 {
+									if v, ok := nestedMap["subnet_end_offset_v6"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					Label: func() types.String {
+						if v, ok := itemMap["label"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Metadata: func() *BGPPeersMetadataModel {
+						if nestedMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
+							return &BGPPeersMetadataModel{
+								DescriptionSpec: func() types.String {
+									if v, ok := nestedMap["description"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Name: func() types.String {
+									if v, ok := nestedMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					PassiveModeDisabled: func() *BGPEmptyModel {
+						if _, ok := itemMap["passive_mode_disabled"].(map[string]interface{}); ok {
+							return &BGPEmptyModel{}
+						}
+						return nil
+					}(),
+					PassiveModeEnabled: func() *BGPEmptyModel {
+						if _, ok := itemMap["passive_mode_enabled"].(map[string]interface{}); ok {
+							return &BGPEmptyModel{}
+						}
+						return nil
+					}(),
+					RoutingPolicies: func() *BGPPeersRoutingPoliciesModel {
+						if _, ok := itemMap["routing_policies"].(map[string]interface{}); ok {
+							return &BGPPeersRoutingPoliciesModel{
+							}
+						}
+						return nil
+					}(),
+				})
+			}
+		}
+		data.Peers = peersList
+	}
+	if _, ok := apiResource.Spec["where"].(map[string]interface{}); ok && isImport && data.Where == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Where = &BGPWhereModel{}
+	}
+	// Normal Read: preserve existing state value
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -898,7 +1210,7 @@ func (r *BGPResource) Update(ctx context.Context, req resource.UpdateRequest, re
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.BGPSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -923,6 +1235,124 @@ func (r *BGPResource) Update(ctx context.Context, req resource.UpdateRequest, re
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.BGPParameters != nil {
+		bgp_parametersMap := make(map[string]interface{})
+		if !data.BGPParameters.Asn.IsNull() && !data.BGPParameters.Asn.IsUnknown() {
+			bgp_parametersMap["asn"] = data.BGPParameters.Asn.ValueInt64()
+		}
+		if data.BGPParameters.FromSite != nil {
+			bgp_parametersMap["from_site"] = map[string]interface{}{}
+		}
+		if !data.BGPParameters.IPAddress.IsNull() && !data.BGPParameters.IPAddress.IsUnknown() {
+			bgp_parametersMap["ip_address"] = data.BGPParameters.IPAddress.ValueString()
+		}
+		if data.BGPParameters.LocalAddress != nil {
+			bgp_parametersMap["local_address"] = map[string]interface{}{}
+		}
+		apiResource.Spec["bgp_parameters"] = bgp_parametersMap
+	}
+	if len(data.Peers) > 0 {
+		var peersList []map[string]interface{}
+		for _, item := range data.Peers {
+			itemMap := make(map[string]interface{})
+			if item.BfdDisabled != nil {
+				itemMap["bfd_disabled"] = map[string]interface{}{}
+			}
+			if item.BfdEnabled != nil {
+				bfd_enabledNestedMap := make(map[string]interface{})
+				if !item.BfdEnabled.Multiplier.IsNull() && !item.BfdEnabled.Multiplier.IsUnknown() {
+					bfd_enabledNestedMap["multiplier"] = item.BfdEnabled.Multiplier.ValueInt64()
+				}
+				if !item.BfdEnabled.ReceiveIntervalMilliseconds.IsNull() && !item.BfdEnabled.ReceiveIntervalMilliseconds.IsUnknown() {
+					bfd_enabledNestedMap["receive_interval_milliseconds"] = item.BfdEnabled.ReceiveIntervalMilliseconds.ValueInt64()
+				}
+				if !item.BfdEnabled.TransmitIntervalMilliseconds.IsNull() && !item.BfdEnabled.TransmitIntervalMilliseconds.IsUnknown() {
+					bfd_enabledNestedMap["transmit_interval_milliseconds"] = item.BfdEnabled.TransmitIntervalMilliseconds.ValueInt64()
+				}
+				itemMap["bfd_enabled"] = bfd_enabledNestedMap
+			}
+			if item.Disable != nil {
+				itemMap["disable"] = map[string]interface{}{}
+			}
+			if item.External != nil {
+				externalNestedMap := make(map[string]interface{})
+				if !item.External.Address.IsNull() && !item.External.Address.IsUnknown() {
+					externalNestedMap["address"] = item.External.Address.ValueString()
+				}
+				if !item.External.AddressIPV6.IsNull() && !item.External.AddressIPV6.IsUnknown() {
+					externalNestedMap["address_ipv6"] = item.External.AddressIPV6.ValueString()
+				}
+				if !item.External.Asn.IsNull() && !item.External.Asn.IsUnknown() {
+					externalNestedMap["asn"] = item.External.Asn.ValueInt64()
+				}
+				if !item.External.Md5AuthKey.IsNull() && !item.External.Md5AuthKey.IsUnknown() {
+					externalNestedMap["md5_auth_key"] = item.External.Md5AuthKey.ValueString()
+				}
+				if !item.External.Port.IsNull() && !item.External.Port.IsUnknown() {
+					externalNestedMap["port"] = item.External.Port.ValueInt64()
+				}
+				if !item.External.SubnetBeginOffset.IsNull() && !item.External.SubnetBeginOffset.IsUnknown() {
+					externalNestedMap["subnet_begin_offset"] = item.External.SubnetBeginOffset.ValueInt64()
+				}
+				if !item.External.SubnetBeginOffsetV6.IsNull() && !item.External.SubnetBeginOffsetV6.IsUnknown() {
+					externalNestedMap["subnet_begin_offset_v6"] = item.External.SubnetBeginOffsetV6.ValueInt64()
+				}
+				if !item.External.SubnetEndOffset.IsNull() && !item.External.SubnetEndOffset.IsUnknown() {
+					externalNestedMap["subnet_end_offset"] = item.External.SubnetEndOffset.ValueInt64()
+				}
+				if !item.External.SubnetEndOffsetV6.IsNull() && !item.External.SubnetEndOffsetV6.IsUnknown() {
+					externalNestedMap["subnet_end_offset_v6"] = item.External.SubnetEndOffsetV6.ValueInt64()
+				}
+				itemMap["external"] = externalNestedMap
+			}
+			if !item.Label.IsNull() && !item.Label.IsUnknown() {
+				itemMap["label"] = item.Label.ValueString()
+			}
+			if item.Metadata != nil {
+				metadataNestedMap := make(map[string]interface{})
+				if !item.Metadata.DescriptionSpec.IsNull() && !item.Metadata.DescriptionSpec.IsUnknown() {
+					metadataNestedMap["description"] = item.Metadata.DescriptionSpec.ValueString()
+				}
+				if !item.Metadata.Name.IsNull() && !item.Metadata.Name.IsUnknown() {
+					metadataNestedMap["name"] = item.Metadata.Name.ValueString()
+				}
+				itemMap["metadata"] = metadataNestedMap
+			}
+			if item.PassiveModeDisabled != nil {
+				itemMap["passive_mode_disabled"] = map[string]interface{}{}
+			}
+			if item.PassiveModeEnabled != nil {
+				itemMap["passive_mode_enabled"] = map[string]interface{}{}
+			}
+			if item.RoutingPolicies != nil {
+				routing_policiesNestedMap := make(map[string]interface{})
+				itemMap["routing_policies"] = routing_policiesNestedMap
+			}
+			peersList = append(peersList, itemMap)
+		}
+		apiResource.Spec["peers"] = peersList
+	}
+	if data.Where != nil {
+		whereMap := make(map[string]interface{})
+		if data.Where.Site != nil {
+			siteNestedMap := make(map[string]interface{})
+			if !data.Where.Site.NetworkType.IsNull() && !data.Where.Site.NetworkType.IsUnknown() {
+				siteNestedMap["network_type"] = data.Where.Site.NetworkType.ValueString()
+			}
+			whereMap["site"] = siteNestedMap
+		}
+		if data.Where.VirtualSite != nil {
+			virtual_siteNestedMap := make(map[string]interface{})
+			if !data.Where.VirtualSite.NetworkType.IsNull() && !data.Where.VirtualSite.NetworkType.IsUnknown() {
+				virtual_siteNestedMap["network_type"] = data.Where.VirtualSite.NetworkType.ValueString()
+			}
+			whereMap["virtual_site"] = virtual_siteNestedMap
+		}
+		apiResource.Spec["where"] = whereMap
+	}
+
+
 	updated, err := r.client.UpdateBGP(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update BGP: %s", err))
@@ -931,6 +1361,8 @@ func (r *BGPResource) Update(ctx context.Context, req resource.UpdateRequest, re
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -943,6 +1375,7 @@ func (r *BGPResource) Update(ctx context.Context, req resource.UpdateRequest, re
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -969,6 +1402,15 @@ func (r *BGPResource) Delete(ctx context.Context, req resource.DeleteRequest, re
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "BGP already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "BGP delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

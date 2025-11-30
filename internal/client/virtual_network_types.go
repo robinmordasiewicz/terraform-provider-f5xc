@@ -10,13 +10,8 @@ import (
 
 // VirtualNetwork represents a F5XC VirtualNetwork
 type VirtualNetwork struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     VirtualNetworkSpec `json:"spec"`
-}
-
-// VirtualNetworkSpec defines the specification for VirtualNetwork
-type VirtualNetworkSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateVirtualNetwork creates a new VirtualNetwork

@@ -10,13 +10,8 @@ import (
 
 // DataType represents a F5XC DataType
 type DataType struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     DataTypeSpec `json:"spec"`
-}
-
-// DataTypeSpec defines the specification for DataType
-type DataTypeSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateDataType creates a new DataType

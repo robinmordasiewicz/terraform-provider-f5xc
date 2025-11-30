@@ -10,13 +10,8 @@ import (
 
 // CDNLoadBalancer represents a F5XC CDNLoadBalancer
 type CDNLoadBalancer struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     CDNLoadBalancerSpec `json:"spec"`
-}
-
-// CDNLoadBalancerSpec defines the specification for CDNLoadBalancer
-type CDNLoadBalancerSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateCDNLoadBalancer creates a new CDNLoadBalancer

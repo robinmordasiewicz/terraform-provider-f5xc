@@ -12,6 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -295,7 +296,7 @@ type AzureVNETSiteIngressEgressGwHubExpressRouteEnabledConnectionsModel struct {
 
 // AzureVNETSiteIngressEgressGwHubExpressRouteEnabledConnectionsMetadataModel represents metadata block
 type AzureVNETSiteIngressEgressGwHubExpressRouteEnabledConnectionsMetadataModel struct {
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name types.String `tfsdk:"name"`
 }
 
@@ -683,7 +684,7 @@ type AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledConnectionsModel struct
 
 // AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledConnectionsMetadataModel represents metadata block
 type AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledConnectionsMetadataModel struct {
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name types.String `tfsdk:"name"`
 }
 
@@ -1571,20 +1572,20 @@ type AzureVNETSiteVoltstackClusterArStorageClassListStorageClassesModel struct {
 type AzureVNETSiteResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Address types.String `tfsdk:"address"`
-	AlternateRegion types.String `tfsdk:"alternate_region"`
 	Annotations types.Map `tfsdk:"annotations"`
-	AzureRegion types.String `tfsdk:"azure_region"`
 	Description types.String `tfsdk:"description"`
 	Disable types.Bool `tfsdk:"disable"`
-	DiskSize types.Int64 `tfsdk:"disk_size"`
 	Labels types.Map `tfsdk:"labels"`
+	ID types.String `tfsdk:"id"`
+	Address types.String `tfsdk:"address"`
+	AlternateRegion types.String `tfsdk:"alternate_region"`
+	AzureRegion types.String `tfsdk:"azure_region"`
+	DiskSize types.Int64 `tfsdk:"disk_size"`
 	MachineType types.String `tfsdk:"machine_type"`
 	NodesPerAz types.Int64 `tfsdk:"nodes_per_az"`
 	ResourceGroup types.String `tfsdk:"resource_group"`
 	SSHKey types.String `tfsdk:"ssh_key"`
 	TotalNodes types.Int64 `tfsdk:"total_nodes"`
-	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
 	AdminPassword *AzureVNETSiteAdminPasswordModel `tfsdk:"admin_password"`
 	AzureCred *AzureVNETSiteAzureCredModel `tfsdk:"azure_cred"`
@@ -1639,22 +1640,10 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 					validators.NamespaceValidator(),
 				},
 			},
-			"address": schema.StringAttribute{
-				MarkdownDescription: "Geographical Address. Site's geographical address that can be used to determine its latitude and longitude.",
-				Optional: true,
-			},
-			"alternate_region": schema.StringAttribute{
-				MarkdownDescription: "[OneOf: alternate_region, azure_region] Alternate Azure Region Name. Name of the azure region which does not support availability zones.",
-				Optional: true,
-			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
 				Optional: true,
 				ElementType: types.StringType,
-			},
-			"azure_region": schema.StringAttribute{
-				MarkdownDescription: "Recommended Azure Region Name. Name of the azure region which supports availability zones.",
-				Optional: true,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
@@ -1664,40 +1653,88 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				MarkdownDescription: "A value of true will administratively disable the object.",
 				Optional: true,
 			},
-			"disk_size": schema.Int64Attribute{
-				MarkdownDescription: "Cloud Disk Size. Disk size to be used for this instance in GiB. 80 is 80 GiB",
-				Optional: true,
-			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
 				Optional: true,
 				ElementType: types.StringType,
-			},
-			"machine_type": schema.StringAttribute{
-				MarkdownDescription: "Azure Machine Type for Node. Select Instance size based on performance needed. The default setting for Accelerated Networking is enabled, thus make sure you select a Virtual Machine that supports accelerated networking or disable the setting under, Select Ingress Gateway or Ingress/Egress Gateway > advanced options.",
-				Optional: true,
-			},
-			"nodes_per_az": schema.Int64Attribute{
-				MarkdownDescription: "Desired Worker Nodes Per AZ. Desired Worker Nodes Per AZ. Max limit is up to 21",
-				Optional: true,
-			},
-			"resource_group": schema.StringAttribute{
-				MarkdownDescription: "Resource Group. Azure resource group for resources that will be created",
-				Optional: true,
-			},
-			"ssh_key": schema.StringAttribute{
-				MarkdownDescription: "Public SSH key. Public SSH key for accessing the site.",
-				Optional: true,
-			},
-			"total_nodes": schema.Int64Attribute{
-				MarkdownDescription: "Total Number of Worker Nodes for a Site. Total number of worker nodes to be deployed across all AZ's used in the Site",
-				Optional: true,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
 				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"address": schema.StringAttribute{
+				MarkdownDescription: "Geographical Address. Site's geographical address that can be used to determine its latitude and longitude.",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"alternate_region": schema.StringAttribute{
+				MarkdownDescription: "[OneOf: alternate_region, azure_region] Alternate Azure Region Name. Name of the azure region which does not support availability zones.",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"azure_region": schema.StringAttribute{
+				MarkdownDescription: "Recommended Azure Region Name. Name of the azure region which supports availability zones.",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"disk_size": schema.Int64Attribute{
+				MarkdownDescription: "Cloud Disk Size. Disk size to be used for this instance in GiB. 80 is 80 GiB",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.Int64{
+					int64planmodifier.UseStateForUnknown(),
+				},
+			},
+			"machine_type": schema.StringAttribute{
+				MarkdownDescription: "Azure Machine Type for Node. Select Instance size based on performance needed. The default setting for Accelerated Networking is enabled, thus make sure you select a Virtual Machine that supports accelerated networking or disable the setting under, Select Ingress Gateway or Ingress/Egress Gateway > advanced options.",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"nodes_per_az": schema.Int64Attribute{
+				MarkdownDescription: "Desired Worker Nodes Per AZ. Desired Worker Nodes Per AZ. Max limit is up to 21",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.Int64{
+					int64planmodifier.UseStateForUnknown(),
+				},
+			},
+			"resource_group": schema.StringAttribute{
+				MarkdownDescription: "Resource Group. Azure resource group for resources that will be created",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"ssh_key": schema.StringAttribute{
+				MarkdownDescription: "Public SSH key. Public SSH key for accessing the site.",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"total_nodes": schema.Int64Attribute{
+				MarkdownDescription: "Total Number of Worker Nodes for a Site. Total number of worker nodes to be deployed across all AZ's used in the Site",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.Int64{
+					int64planmodifier.UseStateForUnknown(),
 				},
 			},
 		},
@@ -2150,7 +2187,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												"metadata": schema.SingleNestedBlock{
 													MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 													Attributes: map[string]schema.Attribute{
-														"description": schema.StringAttribute{
+														"description_spec": schema.StringAttribute{
 															MarkdownDescription: "Description. Human readable description.",
 															Optional: true,
 														},
@@ -2907,7 +2944,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												"metadata": schema.SingleNestedBlock{
 													MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 													Attributes: map[string]schema.Attribute{
-														"description": schema.StringAttribute{
+														"description_spec": schema.StringAttribute{
 															MarkdownDescription: "Description. Human readable description.",
 															Optional: true,
 														},
@@ -4850,7 +4887,7 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.AzureVNETSiteSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -4875,6 +4912,653 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.AdminPassword != nil {
+		admin_passwordMap := make(map[string]interface{})
+		if data.AdminPassword.BlindfoldSecretInfo != nil {
+			blindfold_secret_infoNestedMap := make(map[string]interface{})
+			if !data.AdminPassword.BlindfoldSecretInfo.DecryptionProvider.IsNull() && !data.AdminPassword.BlindfoldSecretInfo.DecryptionProvider.IsUnknown() {
+				blindfold_secret_infoNestedMap["decryption_provider"] = data.AdminPassword.BlindfoldSecretInfo.DecryptionProvider.ValueString()
+			}
+			if !data.AdminPassword.BlindfoldSecretInfo.Location.IsNull() && !data.AdminPassword.BlindfoldSecretInfo.Location.IsUnknown() {
+				blindfold_secret_infoNestedMap["location"] = data.AdminPassword.BlindfoldSecretInfo.Location.ValueString()
+			}
+			if !data.AdminPassword.BlindfoldSecretInfo.StoreProvider.IsNull() && !data.AdminPassword.BlindfoldSecretInfo.StoreProvider.IsUnknown() {
+				blindfold_secret_infoNestedMap["store_provider"] = data.AdminPassword.BlindfoldSecretInfo.StoreProvider.ValueString()
+			}
+			admin_passwordMap["blindfold_secret_info"] = blindfold_secret_infoNestedMap
+		}
+		if data.AdminPassword.ClearSecretInfo != nil {
+			clear_secret_infoNestedMap := make(map[string]interface{})
+			if !data.AdminPassword.ClearSecretInfo.Provider.IsNull() && !data.AdminPassword.ClearSecretInfo.Provider.IsUnknown() {
+				clear_secret_infoNestedMap["provider"] = data.AdminPassword.ClearSecretInfo.Provider.ValueString()
+			}
+			if !data.AdminPassword.ClearSecretInfo.URL.IsNull() && !data.AdminPassword.ClearSecretInfo.URL.IsUnknown() {
+				clear_secret_infoNestedMap["url"] = data.AdminPassword.ClearSecretInfo.URL.ValueString()
+			}
+			admin_passwordMap["clear_secret_info"] = clear_secret_infoNestedMap
+		}
+		apiResource.Spec["admin_password"] = admin_passwordMap
+	}
+	if data.AzureCred != nil {
+		azure_credMap := make(map[string]interface{})
+		if !data.AzureCred.Name.IsNull() && !data.AzureCred.Name.IsUnknown() {
+			azure_credMap["name"] = data.AzureCred.Name.ValueString()
+		}
+		if !data.AzureCred.Namespace.IsNull() && !data.AzureCred.Namespace.IsUnknown() {
+			azure_credMap["namespace"] = data.AzureCred.Namespace.ValueString()
+		}
+		if !data.AzureCred.Tenant.IsNull() && !data.AzureCred.Tenant.IsUnknown() {
+			azure_credMap["tenant"] = data.AzureCred.Tenant.ValueString()
+		}
+		apiResource.Spec["azure_cred"] = azure_credMap
+	}
+	if data.BlockAllServices != nil {
+		block_all_servicesMap := make(map[string]interface{})
+		apiResource.Spec["block_all_services"] = block_all_servicesMap
+	}
+	if data.BlockedServices != nil {
+		blocked_servicesMap := make(map[string]interface{})
+		apiResource.Spec["blocked_services"] = blocked_servicesMap
+	}
+	if data.Coordinates != nil {
+		coordinatesMap := make(map[string]interface{})
+		if !data.Coordinates.Latitude.IsNull() && !data.Coordinates.Latitude.IsUnknown() {
+			coordinatesMap["latitude"] = data.Coordinates.Latitude.ValueInt64()
+		}
+		if !data.Coordinates.Longitude.IsNull() && !data.Coordinates.Longitude.IsUnknown() {
+			coordinatesMap["longitude"] = data.Coordinates.Longitude.ValueInt64()
+		}
+		apiResource.Spec["coordinates"] = coordinatesMap
+	}
+	if data.CustomDNS != nil {
+		custom_dnsMap := make(map[string]interface{})
+		if !data.CustomDNS.InsideNameserver.IsNull() && !data.CustomDNS.InsideNameserver.IsUnknown() {
+			custom_dnsMap["inside_nameserver"] = data.CustomDNS.InsideNameserver.ValueString()
+		}
+		if !data.CustomDNS.OutsideNameserver.IsNull() && !data.CustomDNS.OutsideNameserver.IsUnknown() {
+			custom_dnsMap["outside_nameserver"] = data.CustomDNS.OutsideNameserver.ValueString()
+		}
+		apiResource.Spec["custom_dns"] = custom_dnsMap
+	}
+	if data.DefaultBlockedServices != nil {
+		default_blocked_servicesMap := make(map[string]interface{})
+		apiResource.Spec["default_blocked_services"] = default_blocked_servicesMap
+	}
+	if data.IngressEgressGw != nil {
+		ingress_egress_gwMap := make(map[string]interface{})
+		if data.IngressEgressGw.AcceleratedNetworking != nil {
+			accelerated_networkingNestedMap := make(map[string]interface{})
+			ingress_egress_gwMap["accelerated_networking"] = accelerated_networkingNestedMap
+		}
+		if data.IngressEgressGw.ActiveEnhancedFirewallPolicies != nil {
+			active_enhanced_firewall_policiesNestedMap := make(map[string]interface{})
+			ingress_egress_gwMap["active_enhanced_firewall_policies"] = active_enhanced_firewall_policiesNestedMap
+		}
+		if data.IngressEgressGw.ActiveForwardProxyPolicies != nil {
+			active_forward_proxy_policiesNestedMap := make(map[string]interface{})
+			ingress_egress_gwMap["active_forward_proxy_policies"] = active_forward_proxy_policiesNestedMap
+		}
+		if data.IngressEgressGw.ActiveNetworkPolicies != nil {
+			active_network_policiesNestedMap := make(map[string]interface{})
+			ingress_egress_gwMap["active_network_policies"] = active_network_policiesNestedMap
+		}
+		if !data.IngressEgressGw.AzureCertifiedHw.IsNull() && !data.IngressEgressGw.AzureCertifiedHw.IsUnknown() {
+			ingress_egress_gwMap["azure_certified_hw"] = data.IngressEgressGw.AzureCertifiedHw.ValueString()
+		}
+		if data.IngressEgressGw.DcClusterGroupInsideVn != nil {
+			dc_cluster_group_inside_vnNestedMap := make(map[string]interface{})
+			if !data.IngressEgressGw.DcClusterGroupInsideVn.Name.IsNull() && !data.IngressEgressGw.DcClusterGroupInsideVn.Name.IsUnknown() {
+				dc_cluster_group_inside_vnNestedMap["name"] = data.IngressEgressGw.DcClusterGroupInsideVn.Name.ValueString()
+			}
+			if !data.IngressEgressGw.DcClusterGroupInsideVn.Namespace.IsNull() && !data.IngressEgressGw.DcClusterGroupInsideVn.Namespace.IsUnknown() {
+				dc_cluster_group_inside_vnNestedMap["namespace"] = data.IngressEgressGw.DcClusterGroupInsideVn.Namespace.ValueString()
+			}
+			if !data.IngressEgressGw.DcClusterGroupInsideVn.Tenant.IsNull() && !data.IngressEgressGw.DcClusterGroupInsideVn.Tenant.IsUnknown() {
+				dc_cluster_group_inside_vnNestedMap["tenant"] = data.IngressEgressGw.DcClusterGroupInsideVn.Tenant.ValueString()
+			}
+			ingress_egress_gwMap["dc_cluster_group_inside_vn"] = dc_cluster_group_inside_vnNestedMap
+		}
+		if data.IngressEgressGw.DcClusterGroupOutsideVn != nil {
+			dc_cluster_group_outside_vnNestedMap := make(map[string]interface{})
+			if !data.IngressEgressGw.DcClusterGroupOutsideVn.Name.IsNull() && !data.IngressEgressGw.DcClusterGroupOutsideVn.Name.IsUnknown() {
+				dc_cluster_group_outside_vnNestedMap["name"] = data.IngressEgressGw.DcClusterGroupOutsideVn.Name.ValueString()
+			}
+			if !data.IngressEgressGw.DcClusterGroupOutsideVn.Namespace.IsNull() && !data.IngressEgressGw.DcClusterGroupOutsideVn.Namespace.IsUnknown() {
+				dc_cluster_group_outside_vnNestedMap["namespace"] = data.IngressEgressGw.DcClusterGroupOutsideVn.Namespace.ValueString()
+			}
+			if !data.IngressEgressGw.DcClusterGroupOutsideVn.Tenant.IsNull() && !data.IngressEgressGw.DcClusterGroupOutsideVn.Tenant.IsUnknown() {
+				dc_cluster_group_outside_vnNestedMap["tenant"] = data.IngressEgressGw.DcClusterGroupOutsideVn.Tenant.ValueString()
+			}
+			ingress_egress_gwMap["dc_cluster_group_outside_vn"] = dc_cluster_group_outside_vnNestedMap
+		}
+		if data.IngressEgressGw.ForwardProxyAllowAll != nil {
+			ingress_egress_gwMap["forward_proxy_allow_all"] = map[string]interface{}{}
+		}
+		if data.IngressEgressGw.GlobalNetworkList != nil {
+			global_network_listNestedMap := make(map[string]interface{})
+			ingress_egress_gwMap["global_network_list"] = global_network_listNestedMap
+		}
+		if data.IngressEgressGw.Hub != nil {
+			hubNestedMap := make(map[string]interface{})
+			ingress_egress_gwMap["hub"] = hubNestedMap
+		}
+		if data.IngressEgressGw.InsideStaticRoutes != nil {
+			inside_static_routesNestedMap := make(map[string]interface{})
+			ingress_egress_gwMap["inside_static_routes"] = inside_static_routesNestedMap
+		}
+		if data.IngressEgressGw.NoDcClusterGroup != nil {
+			ingress_egress_gwMap["no_dc_cluster_group"] = map[string]interface{}{}
+		}
+		if data.IngressEgressGw.NoForwardProxy != nil {
+			ingress_egress_gwMap["no_forward_proxy"] = map[string]interface{}{}
+		}
+		if data.IngressEgressGw.NoGlobalNetwork != nil {
+			ingress_egress_gwMap["no_global_network"] = map[string]interface{}{}
+		}
+		if data.IngressEgressGw.NoInsideStaticRoutes != nil {
+			ingress_egress_gwMap["no_inside_static_routes"] = map[string]interface{}{}
+		}
+		if data.IngressEgressGw.NoNetworkPolicy != nil {
+			ingress_egress_gwMap["no_network_policy"] = map[string]interface{}{}
+		}
+		if data.IngressEgressGw.NoOutsideStaticRoutes != nil {
+			ingress_egress_gwMap["no_outside_static_routes"] = map[string]interface{}{}
+		}
+		if data.IngressEgressGw.NotHub != nil {
+			ingress_egress_gwMap["not_hub"] = map[string]interface{}{}
+		}
+		if data.IngressEgressGw.OutsideStaticRoutes != nil {
+			outside_static_routesNestedMap := make(map[string]interface{})
+			ingress_egress_gwMap["outside_static_routes"] = outside_static_routesNestedMap
+		}
+		if data.IngressEgressGw.PerformanceEnhancementMode != nil {
+			performance_enhancement_modeNestedMap := make(map[string]interface{})
+			ingress_egress_gwMap["performance_enhancement_mode"] = performance_enhancement_modeNestedMap
+		}
+		if data.IngressEgressGw.SmConnectionPublicIP != nil {
+			ingress_egress_gwMap["sm_connection_public_ip"] = map[string]interface{}{}
+		}
+		if data.IngressEgressGw.SmConnectionPvtIP != nil {
+			ingress_egress_gwMap["sm_connection_pvt_ip"] = map[string]interface{}{}
+		}
+		apiResource.Spec["ingress_egress_gw"] = ingress_egress_gwMap
+	}
+	if data.IngressEgressGwAr != nil {
+		ingress_egress_gw_arMap := make(map[string]interface{})
+		if data.IngressEgressGwAr.AcceleratedNetworking != nil {
+			accelerated_networkingNestedMap := make(map[string]interface{})
+			ingress_egress_gw_arMap["accelerated_networking"] = accelerated_networkingNestedMap
+		}
+		if data.IngressEgressGwAr.ActiveEnhancedFirewallPolicies != nil {
+			active_enhanced_firewall_policiesNestedMap := make(map[string]interface{})
+			ingress_egress_gw_arMap["active_enhanced_firewall_policies"] = active_enhanced_firewall_policiesNestedMap
+		}
+		if data.IngressEgressGwAr.ActiveForwardProxyPolicies != nil {
+			active_forward_proxy_policiesNestedMap := make(map[string]interface{})
+			ingress_egress_gw_arMap["active_forward_proxy_policies"] = active_forward_proxy_policiesNestedMap
+		}
+		if data.IngressEgressGwAr.ActiveNetworkPolicies != nil {
+			active_network_policiesNestedMap := make(map[string]interface{})
+			ingress_egress_gw_arMap["active_network_policies"] = active_network_policiesNestedMap
+		}
+		if !data.IngressEgressGwAr.AzureCertifiedHw.IsNull() && !data.IngressEgressGwAr.AzureCertifiedHw.IsUnknown() {
+			ingress_egress_gw_arMap["azure_certified_hw"] = data.IngressEgressGwAr.AzureCertifiedHw.ValueString()
+		}
+		if data.IngressEgressGwAr.DcClusterGroupInsideVn != nil {
+			dc_cluster_group_inside_vnNestedMap := make(map[string]interface{})
+			if !data.IngressEgressGwAr.DcClusterGroupInsideVn.Name.IsNull() && !data.IngressEgressGwAr.DcClusterGroupInsideVn.Name.IsUnknown() {
+				dc_cluster_group_inside_vnNestedMap["name"] = data.IngressEgressGwAr.DcClusterGroupInsideVn.Name.ValueString()
+			}
+			if !data.IngressEgressGwAr.DcClusterGroupInsideVn.Namespace.IsNull() && !data.IngressEgressGwAr.DcClusterGroupInsideVn.Namespace.IsUnknown() {
+				dc_cluster_group_inside_vnNestedMap["namespace"] = data.IngressEgressGwAr.DcClusterGroupInsideVn.Namespace.ValueString()
+			}
+			if !data.IngressEgressGwAr.DcClusterGroupInsideVn.Tenant.IsNull() && !data.IngressEgressGwAr.DcClusterGroupInsideVn.Tenant.IsUnknown() {
+				dc_cluster_group_inside_vnNestedMap["tenant"] = data.IngressEgressGwAr.DcClusterGroupInsideVn.Tenant.ValueString()
+			}
+			ingress_egress_gw_arMap["dc_cluster_group_inside_vn"] = dc_cluster_group_inside_vnNestedMap
+		}
+		if data.IngressEgressGwAr.DcClusterGroupOutsideVn != nil {
+			dc_cluster_group_outside_vnNestedMap := make(map[string]interface{})
+			if !data.IngressEgressGwAr.DcClusterGroupOutsideVn.Name.IsNull() && !data.IngressEgressGwAr.DcClusterGroupOutsideVn.Name.IsUnknown() {
+				dc_cluster_group_outside_vnNestedMap["name"] = data.IngressEgressGwAr.DcClusterGroupOutsideVn.Name.ValueString()
+			}
+			if !data.IngressEgressGwAr.DcClusterGroupOutsideVn.Namespace.IsNull() && !data.IngressEgressGwAr.DcClusterGroupOutsideVn.Namespace.IsUnknown() {
+				dc_cluster_group_outside_vnNestedMap["namespace"] = data.IngressEgressGwAr.DcClusterGroupOutsideVn.Namespace.ValueString()
+			}
+			if !data.IngressEgressGwAr.DcClusterGroupOutsideVn.Tenant.IsNull() && !data.IngressEgressGwAr.DcClusterGroupOutsideVn.Tenant.IsUnknown() {
+				dc_cluster_group_outside_vnNestedMap["tenant"] = data.IngressEgressGwAr.DcClusterGroupOutsideVn.Tenant.ValueString()
+			}
+			ingress_egress_gw_arMap["dc_cluster_group_outside_vn"] = dc_cluster_group_outside_vnNestedMap
+		}
+		if data.IngressEgressGwAr.ForwardProxyAllowAll != nil {
+			ingress_egress_gw_arMap["forward_proxy_allow_all"] = map[string]interface{}{}
+		}
+		if data.IngressEgressGwAr.GlobalNetworkList != nil {
+			global_network_listNestedMap := make(map[string]interface{})
+			ingress_egress_gw_arMap["global_network_list"] = global_network_listNestedMap
+		}
+		if data.IngressEgressGwAr.Hub != nil {
+			hubNestedMap := make(map[string]interface{})
+			ingress_egress_gw_arMap["hub"] = hubNestedMap
+		}
+		if data.IngressEgressGwAr.InsideStaticRoutes != nil {
+			inside_static_routesNestedMap := make(map[string]interface{})
+			ingress_egress_gw_arMap["inside_static_routes"] = inside_static_routesNestedMap
+		}
+		if data.IngressEgressGwAr.NoDcClusterGroup != nil {
+			ingress_egress_gw_arMap["no_dc_cluster_group"] = map[string]interface{}{}
+		}
+		if data.IngressEgressGwAr.NoForwardProxy != nil {
+			ingress_egress_gw_arMap["no_forward_proxy"] = map[string]interface{}{}
+		}
+		if data.IngressEgressGwAr.NoGlobalNetwork != nil {
+			ingress_egress_gw_arMap["no_global_network"] = map[string]interface{}{}
+		}
+		if data.IngressEgressGwAr.NoInsideStaticRoutes != nil {
+			ingress_egress_gw_arMap["no_inside_static_routes"] = map[string]interface{}{}
+		}
+		if data.IngressEgressGwAr.NoNetworkPolicy != nil {
+			ingress_egress_gw_arMap["no_network_policy"] = map[string]interface{}{}
+		}
+		if data.IngressEgressGwAr.NoOutsideStaticRoutes != nil {
+			ingress_egress_gw_arMap["no_outside_static_routes"] = map[string]interface{}{}
+		}
+		if data.IngressEgressGwAr.Node != nil {
+			nodeNestedMap := make(map[string]interface{})
+			if !data.IngressEgressGwAr.Node.FaultDomain.IsNull() && !data.IngressEgressGwAr.Node.FaultDomain.IsUnknown() {
+				nodeNestedMap["fault_domain"] = data.IngressEgressGwAr.Node.FaultDomain.ValueInt64()
+			}
+			if !data.IngressEgressGwAr.Node.NodeNumber.IsNull() && !data.IngressEgressGwAr.Node.NodeNumber.IsUnknown() {
+				nodeNestedMap["node_number"] = data.IngressEgressGwAr.Node.NodeNumber.ValueInt64()
+			}
+			if !data.IngressEgressGwAr.Node.UpdateDomain.IsNull() && !data.IngressEgressGwAr.Node.UpdateDomain.IsUnknown() {
+				nodeNestedMap["update_domain"] = data.IngressEgressGwAr.Node.UpdateDomain.ValueInt64()
+			}
+			ingress_egress_gw_arMap["node"] = nodeNestedMap
+		}
+		if data.IngressEgressGwAr.NotHub != nil {
+			ingress_egress_gw_arMap["not_hub"] = map[string]interface{}{}
+		}
+		if data.IngressEgressGwAr.OutsideStaticRoutes != nil {
+			outside_static_routesNestedMap := make(map[string]interface{})
+			ingress_egress_gw_arMap["outside_static_routes"] = outside_static_routesNestedMap
+		}
+		if data.IngressEgressGwAr.PerformanceEnhancementMode != nil {
+			performance_enhancement_modeNestedMap := make(map[string]interface{})
+			ingress_egress_gw_arMap["performance_enhancement_mode"] = performance_enhancement_modeNestedMap
+		}
+		if data.IngressEgressGwAr.SmConnectionPublicIP != nil {
+			ingress_egress_gw_arMap["sm_connection_public_ip"] = map[string]interface{}{}
+		}
+		if data.IngressEgressGwAr.SmConnectionPvtIP != nil {
+			ingress_egress_gw_arMap["sm_connection_pvt_ip"] = map[string]interface{}{}
+		}
+		apiResource.Spec["ingress_egress_gw_ar"] = ingress_egress_gw_arMap
+	}
+	if data.IngressGw != nil {
+		ingress_gwMap := make(map[string]interface{})
+		if data.IngressGw.AcceleratedNetworking != nil {
+			accelerated_networkingNestedMap := make(map[string]interface{})
+			ingress_gwMap["accelerated_networking"] = accelerated_networkingNestedMap
+		}
+		if !data.IngressGw.AzureCertifiedHw.IsNull() && !data.IngressGw.AzureCertifiedHw.IsUnknown() {
+			ingress_gwMap["azure_certified_hw"] = data.IngressGw.AzureCertifiedHw.ValueString()
+		}
+		if data.IngressGw.PerformanceEnhancementMode != nil {
+			performance_enhancement_modeNestedMap := make(map[string]interface{})
+			ingress_gwMap["performance_enhancement_mode"] = performance_enhancement_modeNestedMap
+		}
+		apiResource.Spec["ingress_gw"] = ingress_gwMap
+	}
+	if data.IngressGwAr != nil {
+		ingress_gw_arMap := make(map[string]interface{})
+		if data.IngressGwAr.AcceleratedNetworking != nil {
+			accelerated_networkingNestedMap := make(map[string]interface{})
+			ingress_gw_arMap["accelerated_networking"] = accelerated_networkingNestedMap
+		}
+		if !data.IngressGwAr.AzureCertifiedHw.IsNull() && !data.IngressGwAr.AzureCertifiedHw.IsUnknown() {
+			ingress_gw_arMap["azure_certified_hw"] = data.IngressGwAr.AzureCertifiedHw.ValueString()
+		}
+		if data.IngressGwAr.Node != nil {
+			nodeNestedMap := make(map[string]interface{})
+			if !data.IngressGwAr.Node.FaultDomain.IsNull() && !data.IngressGwAr.Node.FaultDomain.IsUnknown() {
+				nodeNestedMap["fault_domain"] = data.IngressGwAr.Node.FaultDomain.ValueInt64()
+			}
+			if !data.IngressGwAr.Node.NodeNumber.IsNull() && !data.IngressGwAr.Node.NodeNumber.IsUnknown() {
+				nodeNestedMap["node_number"] = data.IngressGwAr.Node.NodeNumber.ValueInt64()
+			}
+			if !data.IngressGwAr.Node.UpdateDomain.IsNull() && !data.IngressGwAr.Node.UpdateDomain.IsUnknown() {
+				nodeNestedMap["update_domain"] = data.IngressGwAr.Node.UpdateDomain.ValueInt64()
+			}
+			ingress_gw_arMap["node"] = nodeNestedMap
+		}
+		if data.IngressGwAr.PerformanceEnhancementMode != nil {
+			performance_enhancement_modeNestedMap := make(map[string]interface{})
+			ingress_gw_arMap["performance_enhancement_mode"] = performance_enhancement_modeNestedMap
+		}
+		apiResource.Spec["ingress_gw_ar"] = ingress_gw_arMap
+	}
+	if data.KubernetesUpgradeDrain != nil {
+		kubernetes_upgrade_drainMap := make(map[string]interface{})
+		if data.KubernetesUpgradeDrain.DisableUpgradeDrain != nil {
+			kubernetes_upgrade_drainMap["disable_upgrade_drain"] = map[string]interface{}{}
+		}
+		if data.KubernetesUpgradeDrain.EnableUpgradeDrain != nil {
+			enable_upgrade_drainNestedMap := make(map[string]interface{})
+			if !data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainMaxUnavailableNodeCount.IsNull() && !data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainMaxUnavailableNodeCount.IsUnknown() {
+				enable_upgrade_drainNestedMap["drain_max_unavailable_node_count"] = data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainMaxUnavailableNodeCount.ValueInt64()
+			}
+			if !data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainNodeTimeout.IsNull() && !data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainNodeTimeout.IsUnknown() {
+				enable_upgrade_drainNestedMap["drain_node_timeout"] = data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainNodeTimeout.ValueInt64()
+			}
+			kubernetes_upgrade_drainMap["enable_upgrade_drain"] = enable_upgrade_drainNestedMap
+		}
+		apiResource.Spec["kubernetes_upgrade_drain"] = kubernetes_upgrade_drainMap
+	}
+	if data.LogReceiver != nil {
+		log_receiverMap := make(map[string]interface{})
+		if !data.LogReceiver.Name.IsNull() && !data.LogReceiver.Name.IsUnknown() {
+			log_receiverMap["name"] = data.LogReceiver.Name.ValueString()
+		}
+		if !data.LogReceiver.Namespace.IsNull() && !data.LogReceiver.Namespace.IsUnknown() {
+			log_receiverMap["namespace"] = data.LogReceiver.Namespace.ValueString()
+		}
+		if !data.LogReceiver.Tenant.IsNull() && !data.LogReceiver.Tenant.IsUnknown() {
+			log_receiverMap["tenant"] = data.LogReceiver.Tenant.ValueString()
+		}
+		apiResource.Spec["log_receiver"] = log_receiverMap
+	}
+	if data.LogsStreamingDisabled != nil {
+		logs_streaming_disabledMap := make(map[string]interface{})
+		apiResource.Spec["logs_streaming_disabled"] = logs_streaming_disabledMap
+	}
+	if data.NoWorkerNodes != nil {
+		no_worker_nodesMap := make(map[string]interface{})
+		apiResource.Spec["no_worker_nodes"] = no_worker_nodesMap
+	}
+	if data.OfflineSurvivabilityMode != nil {
+		offline_survivability_modeMap := make(map[string]interface{})
+		if data.OfflineSurvivabilityMode.EnableOfflineSurvivabilityMode != nil {
+			offline_survivability_modeMap["enable_offline_survivability_mode"] = map[string]interface{}{}
+		}
+		if data.OfflineSurvivabilityMode.NoOfflineSurvivabilityMode != nil {
+			offline_survivability_modeMap["no_offline_survivability_mode"] = map[string]interface{}{}
+		}
+		apiResource.Spec["offline_survivability_mode"] = offline_survivability_modeMap
+	}
+	if data.Os != nil {
+		osMap := make(map[string]interface{})
+		if data.Os.DefaultOsVersion != nil {
+			osMap["default_os_version"] = map[string]interface{}{}
+		}
+		if !data.Os.OperatingSystemVersion.IsNull() && !data.Os.OperatingSystemVersion.IsUnknown() {
+			osMap["operating_system_version"] = data.Os.OperatingSystemVersion.ValueString()
+		}
+		apiResource.Spec["os"] = osMap
+	}
+	if data.Sw != nil {
+		swMap := make(map[string]interface{})
+		if data.Sw.DefaultSwVersion != nil {
+			swMap["default_sw_version"] = map[string]interface{}{}
+		}
+		if !data.Sw.VolterraSoftwareVersion.IsNull() && !data.Sw.VolterraSoftwareVersion.IsUnknown() {
+			swMap["volterra_software_version"] = data.Sw.VolterraSoftwareVersion.ValueString()
+		}
+		apiResource.Spec["sw"] = swMap
+	}
+	if data.Tags != nil {
+		tagsMap := make(map[string]interface{})
+		apiResource.Spec["tags"] = tagsMap
+	}
+	if data.VNET != nil {
+		vnetMap := make(map[string]interface{})
+		if data.VNET.ExistingVNET != nil {
+			existing_vnetNestedMap := make(map[string]interface{})
+			if !data.VNET.ExistingVNET.ResourceGroup.IsNull() && !data.VNET.ExistingVNET.ResourceGroup.IsUnknown() {
+				existing_vnetNestedMap["resource_group"] = data.VNET.ExistingVNET.ResourceGroup.ValueString()
+			}
+			if !data.VNET.ExistingVNET.VNETName.IsNull() && !data.VNET.ExistingVNET.VNETName.IsUnknown() {
+				existing_vnetNestedMap["vnet_name"] = data.VNET.ExistingVNET.VNETName.ValueString()
+			}
+			vnetMap["existing_vnet"] = existing_vnetNestedMap
+		}
+		if data.VNET.NewVNET != nil {
+			new_vnetNestedMap := make(map[string]interface{})
+			if !data.VNET.NewVNET.Name.IsNull() && !data.VNET.NewVNET.Name.IsUnknown() {
+				new_vnetNestedMap["name"] = data.VNET.NewVNET.Name.ValueString()
+			}
+			if !data.VNET.NewVNET.PrimaryIPV4.IsNull() && !data.VNET.NewVNET.PrimaryIPV4.IsUnknown() {
+				new_vnetNestedMap["primary_ipv4"] = data.VNET.NewVNET.PrimaryIPV4.ValueString()
+			}
+			vnetMap["new_vnet"] = new_vnetNestedMap
+		}
+		apiResource.Spec["vnet"] = vnetMap
+	}
+	if data.VoltstackCluster != nil {
+		voltstack_clusterMap := make(map[string]interface{})
+		if data.VoltstackCluster.AcceleratedNetworking != nil {
+			accelerated_networkingNestedMap := make(map[string]interface{})
+			voltstack_clusterMap["accelerated_networking"] = accelerated_networkingNestedMap
+		}
+		if data.VoltstackCluster.ActiveEnhancedFirewallPolicies != nil {
+			active_enhanced_firewall_policiesNestedMap := make(map[string]interface{})
+			voltstack_clusterMap["active_enhanced_firewall_policies"] = active_enhanced_firewall_policiesNestedMap
+		}
+		if data.VoltstackCluster.ActiveForwardProxyPolicies != nil {
+			active_forward_proxy_policiesNestedMap := make(map[string]interface{})
+			voltstack_clusterMap["active_forward_proxy_policies"] = active_forward_proxy_policiesNestedMap
+		}
+		if data.VoltstackCluster.ActiveNetworkPolicies != nil {
+			active_network_policiesNestedMap := make(map[string]interface{})
+			voltstack_clusterMap["active_network_policies"] = active_network_policiesNestedMap
+		}
+		if !data.VoltstackCluster.AzureCertifiedHw.IsNull() && !data.VoltstackCluster.AzureCertifiedHw.IsUnknown() {
+			voltstack_clusterMap["azure_certified_hw"] = data.VoltstackCluster.AzureCertifiedHw.ValueString()
+		}
+		if data.VoltstackCluster.DcClusterGroup != nil {
+			dc_cluster_groupNestedMap := make(map[string]interface{})
+			if !data.VoltstackCluster.DcClusterGroup.Name.IsNull() && !data.VoltstackCluster.DcClusterGroup.Name.IsUnknown() {
+				dc_cluster_groupNestedMap["name"] = data.VoltstackCluster.DcClusterGroup.Name.ValueString()
+			}
+			if !data.VoltstackCluster.DcClusterGroup.Namespace.IsNull() && !data.VoltstackCluster.DcClusterGroup.Namespace.IsUnknown() {
+				dc_cluster_groupNestedMap["namespace"] = data.VoltstackCluster.DcClusterGroup.Namespace.ValueString()
+			}
+			if !data.VoltstackCluster.DcClusterGroup.Tenant.IsNull() && !data.VoltstackCluster.DcClusterGroup.Tenant.IsUnknown() {
+				dc_cluster_groupNestedMap["tenant"] = data.VoltstackCluster.DcClusterGroup.Tenant.ValueString()
+			}
+			voltstack_clusterMap["dc_cluster_group"] = dc_cluster_groupNestedMap
+		}
+		if data.VoltstackCluster.DefaultStorage != nil {
+			voltstack_clusterMap["default_storage"] = map[string]interface{}{}
+		}
+		if data.VoltstackCluster.ForwardProxyAllowAll != nil {
+			voltstack_clusterMap["forward_proxy_allow_all"] = map[string]interface{}{}
+		}
+		if data.VoltstackCluster.GlobalNetworkList != nil {
+			global_network_listNestedMap := make(map[string]interface{})
+			voltstack_clusterMap["global_network_list"] = global_network_listNestedMap
+		}
+		if data.VoltstackCluster.K8SCluster != nil {
+			k8s_clusterNestedMap := make(map[string]interface{})
+			if !data.VoltstackCluster.K8SCluster.Name.IsNull() && !data.VoltstackCluster.K8SCluster.Name.IsUnknown() {
+				k8s_clusterNestedMap["name"] = data.VoltstackCluster.K8SCluster.Name.ValueString()
+			}
+			if !data.VoltstackCluster.K8SCluster.Namespace.IsNull() && !data.VoltstackCluster.K8SCluster.Namespace.IsUnknown() {
+				k8s_clusterNestedMap["namespace"] = data.VoltstackCluster.K8SCluster.Namespace.ValueString()
+			}
+			if !data.VoltstackCluster.K8SCluster.Tenant.IsNull() && !data.VoltstackCluster.K8SCluster.Tenant.IsUnknown() {
+				k8s_clusterNestedMap["tenant"] = data.VoltstackCluster.K8SCluster.Tenant.ValueString()
+			}
+			voltstack_clusterMap["k8s_cluster"] = k8s_clusterNestedMap
+		}
+		if data.VoltstackCluster.NoDcClusterGroup != nil {
+			voltstack_clusterMap["no_dc_cluster_group"] = map[string]interface{}{}
+		}
+		if data.VoltstackCluster.NoForwardProxy != nil {
+			voltstack_clusterMap["no_forward_proxy"] = map[string]interface{}{}
+		}
+		if data.VoltstackCluster.NoGlobalNetwork != nil {
+			voltstack_clusterMap["no_global_network"] = map[string]interface{}{}
+		}
+		if data.VoltstackCluster.NoK8SCluster != nil {
+			voltstack_clusterMap["no_k8s_cluster"] = map[string]interface{}{}
+		}
+		if data.VoltstackCluster.NoNetworkPolicy != nil {
+			voltstack_clusterMap["no_network_policy"] = map[string]interface{}{}
+		}
+		if data.VoltstackCluster.NoOutsideStaticRoutes != nil {
+			voltstack_clusterMap["no_outside_static_routes"] = map[string]interface{}{}
+		}
+		if data.VoltstackCluster.OutsideStaticRoutes != nil {
+			outside_static_routesNestedMap := make(map[string]interface{})
+			voltstack_clusterMap["outside_static_routes"] = outside_static_routesNestedMap
+		}
+		if data.VoltstackCluster.SmConnectionPublicIP != nil {
+			voltstack_clusterMap["sm_connection_public_ip"] = map[string]interface{}{}
+		}
+		if data.VoltstackCluster.SmConnectionPvtIP != nil {
+			voltstack_clusterMap["sm_connection_pvt_ip"] = map[string]interface{}{}
+		}
+		if data.VoltstackCluster.StorageClassList != nil {
+			storage_class_listNestedMap := make(map[string]interface{})
+			voltstack_clusterMap["storage_class_list"] = storage_class_listNestedMap
+		}
+		apiResource.Spec["voltstack_cluster"] = voltstack_clusterMap
+	}
+	if data.VoltstackClusterAr != nil {
+		voltstack_cluster_arMap := make(map[string]interface{})
+		if data.VoltstackClusterAr.AcceleratedNetworking != nil {
+			accelerated_networkingNestedMap := make(map[string]interface{})
+			voltstack_cluster_arMap["accelerated_networking"] = accelerated_networkingNestedMap
+		}
+		if data.VoltstackClusterAr.ActiveEnhancedFirewallPolicies != nil {
+			active_enhanced_firewall_policiesNestedMap := make(map[string]interface{})
+			voltstack_cluster_arMap["active_enhanced_firewall_policies"] = active_enhanced_firewall_policiesNestedMap
+		}
+		if data.VoltstackClusterAr.ActiveForwardProxyPolicies != nil {
+			active_forward_proxy_policiesNestedMap := make(map[string]interface{})
+			voltstack_cluster_arMap["active_forward_proxy_policies"] = active_forward_proxy_policiesNestedMap
+		}
+		if data.VoltstackClusterAr.ActiveNetworkPolicies != nil {
+			active_network_policiesNestedMap := make(map[string]interface{})
+			voltstack_cluster_arMap["active_network_policies"] = active_network_policiesNestedMap
+		}
+		if !data.VoltstackClusterAr.AzureCertifiedHw.IsNull() && !data.VoltstackClusterAr.AzureCertifiedHw.IsUnknown() {
+			voltstack_cluster_arMap["azure_certified_hw"] = data.VoltstackClusterAr.AzureCertifiedHw.ValueString()
+		}
+		if data.VoltstackClusterAr.DcClusterGroup != nil {
+			dc_cluster_groupNestedMap := make(map[string]interface{})
+			if !data.VoltstackClusterAr.DcClusterGroup.Name.IsNull() && !data.VoltstackClusterAr.DcClusterGroup.Name.IsUnknown() {
+				dc_cluster_groupNestedMap["name"] = data.VoltstackClusterAr.DcClusterGroup.Name.ValueString()
+			}
+			if !data.VoltstackClusterAr.DcClusterGroup.Namespace.IsNull() && !data.VoltstackClusterAr.DcClusterGroup.Namespace.IsUnknown() {
+				dc_cluster_groupNestedMap["namespace"] = data.VoltstackClusterAr.DcClusterGroup.Namespace.ValueString()
+			}
+			if !data.VoltstackClusterAr.DcClusterGroup.Tenant.IsNull() && !data.VoltstackClusterAr.DcClusterGroup.Tenant.IsUnknown() {
+				dc_cluster_groupNestedMap["tenant"] = data.VoltstackClusterAr.DcClusterGroup.Tenant.ValueString()
+			}
+			voltstack_cluster_arMap["dc_cluster_group"] = dc_cluster_groupNestedMap
+		}
+		if data.VoltstackClusterAr.DefaultStorage != nil {
+			voltstack_cluster_arMap["default_storage"] = map[string]interface{}{}
+		}
+		if data.VoltstackClusterAr.ForwardProxyAllowAll != nil {
+			voltstack_cluster_arMap["forward_proxy_allow_all"] = map[string]interface{}{}
+		}
+		if data.VoltstackClusterAr.GlobalNetworkList != nil {
+			global_network_listNestedMap := make(map[string]interface{})
+			voltstack_cluster_arMap["global_network_list"] = global_network_listNestedMap
+		}
+		if data.VoltstackClusterAr.K8SCluster != nil {
+			k8s_clusterNestedMap := make(map[string]interface{})
+			if !data.VoltstackClusterAr.K8SCluster.Name.IsNull() && !data.VoltstackClusterAr.K8SCluster.Name.IsUnknown() {
+				k8s_clusterNestedMap["name"] = data.VoltstackClusterAr.K8SCluster.Name.ValueString()
+			}
+			if !data.VoltstackClusterAr.K8SCluster.Namespace.IsNull() && !data.VoltstackClusterAr.K8SCluster.Namespace.IsUnknown() {
+				k8s_clusterNestedMap["namespace"] = data.VoltstackClusterAr.K8SCluster.Namespace.ValueString()
+			}
+			if !data.VoltstackClusterAr.K8SCluster.Tenant.IsNull() && !data.VoltstackClusterAr.K8SCluster.Tenant.IsUnknown() {
+				k8s_clusterNestedMap["tenant"] = data.VoltstackClusterAr.K8SCluster.Tenant.ValueString()
+			}
+			voltstack_cluster_arMap["k8s_cluster"] = k8s_clusterNestedMap
+		}
+		if data.VoltstackClusterAr.NoDcClusterGroup != nil {
+			voltstack_cluster_arMap["no_dc_cluster_group"] = map[string]interface{}{}
+		}
+		if data.VoltstackClusterAr.NoForwardProxy != nil {
+			voltstack_cluster_arMap["no_forward_proxy"] = map[string]interface{}{}
+		}
+		if data.VoltstackClusterAr.NoGlobalNetwork != nil {
+			voltstack_cluster_arMap["no_global_network"] = map[string]interface{}{}
+		}
+		if data.VoltstackClusterAr.NoK8SCluster != nil {
+			voltstack_cluster_arMap["no_k8s_cluster"] = map[string]interface{}{}
+		}
+		if data.VoltstackClusterAr.NoNetworkPolicy != nil {
+			voltstack_cluster_arMap["no_network_policy"] = map[string]interface{}{}
+		}
+		if data.VoltstackClusterAr.NoOutsideStaticRoutes != nil {
+			voltstack_cluster_arMap["no_outside_static_routes"] = map[string]interface{}{}
+		}
+		if data.VoltstackClusterAr.Node != nil {
+			nodeNestedMap := make(map[string]interface{})
+			if !data.VoltstackClusterAr.Node.FaultDomain.IsNull() && !data.VoltstackClusterAr.Node.FaultDomain.IsUnknown() {
+				nodeNestedMap["fault_domain"] = data.VoltstackClusterAr.Node.FaultDomain.ValueInt64()
+			}
+			if !data.VoltstackClusterAr.Node.NodeNumber.IsNull() && !data.VoltstackClusterAr.Node.NodeNumber.IsUnknown() {
+				nodeNestedMap["node_number"] = data.VoltstackClusterAr.Node.NodeNumber.ValueInt64()
+			}
+			if !data.VoltstackClusterAr.Node.UpdateDomain.IsNull() && !data.VoltstackClusterAr.Node.UpdateDomain.IsUnknown() {
+				nodeNestedMap["update_domain"] = data.VoltstackClusterAr.Node.UpdateDomain.ValueInt64()
+			}
+			voltstack_cluster_arMap["node"] = nodeNestedMap
+		}
+		if data.VoltstackClusterAr.OutsideStaticRoutes != nil {
+			outside_static_routesNestedMap := make(map[string]interface{})
+			voltstack_cluster_arMap["outside_static_routes"] = outside_static_routesNestedMap
+		}
+		if data.VoltstackClusterAr.SmConnectionPublicIP != nil {
+			voltstack_cluster_arMap["sm_connection_public_ip"] = map[string]interface{}{}
+		}
+		if data.VoltstackClusterAr.SmConnectionPvtIP != nil {
+			voltstack_cluster_arMap["sm_connection_pvt_ip"] = map[string]interface{}{}
+		}
+		if data.VoltstackClusterAr.StorageClassList != nil {
+			storage_class_listNestedMap := make(map[string]interface{})
+			voltstack_cluster_arMap["storage_class_list"] = storage_class_listNestedMap
+		}
+		apiResource.Spec["voltstack_cluster_ar"] = voltstack_cluster_arMap
+	}
+	if !data.Address.IsNull() && !data.Address.IsUnknown() {
+		apiResource.Spec["address"] = data.Address.ValueString()
+	}
+	if !data.AlternateRegion.IsNull() && !data.AlternateRegion.IsUnknown() {
+		apiResource.Spec["alternate_region"] = data.AlternateRegion.ValueString()
+	}
+	if !data.AzureRegion.IsNull() && !data.AzureRegion.IsUnknown() {
+		apiResource.Spec["azure_region"] = data.AzureRegion.ValueString()
+	}
+	if !data.DiskSize.IsNull() && !data.DiskSize.IsUnknown() {
+		apiResource.Spec["disk_size"] = data.DiskSize.ValueInt64()
+	}
+	if !data.MachineType.IsNull() && !data.MachineType.IsUnknown() {
+		apiResource.Spec["machine_type"] = data.MachineType.ValueString()
+	}
+	if !data.NodesPerAz.IsNull() && !data.NodesPerAz.IsUnknown() {
+		apiResource.Spec["nodes_per_az"] = data.NodesPerAz.ValueInt64()
+	}
+	if !data.ResourceGroup.IsNull() && !data.ResourceGroup.IsUnknown() {
+		apiResource.Spec["resource_group"] = data.ResourceGroup.ValueString()
+	}
+	if !data.SSHKey.IsNull() && !data.SSHKey.IsUnknown() {
+		apiResource.Spec["ssh_key"] = data.SSHKey.ValueString()
+	}
+	if !data.TotalNodes.IsNull() && !data.TotalNodes.IsUnknown() {
+		apiResource.Spec["total_nodes"] = data.TotalNodes.ValueInt64()
+	}
+
+
 	created, err := r.client.CreateAzureVNETSite(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create AzureVNETSite: %s", err))
@@ -4883,8 +5567,49 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+	if v, ok := created.Spec["address"].(string); ok && v != "" {
+		data.Address = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["alternate_region"].(string); ok && v != "" {
+		data.AlternateRegion = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["azure_region"].(string); ok && v != "" {
+		data.AzureRegion = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["disk_size"].(float64); ok {
+		data.DiskSize = types.Int64Value(int64(v))
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["machine_type"].(string); ok && v != "" {
+		data.MachineType = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["nodes_per_az"].(float64); ok {
+		data.NodesPerAz = types.Int64Value(int64(v))
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["resource_group"].(string); ok && v != "" {
+		data.ResourceGroup = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["ssh_key"].(string); ok && v != "" {
+		data.SSHKey = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["total_nodes"].(float64); ok {
+		data.TotalNodes = types.Int64Value(int64(v))
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created AzureVNETSite resource")
@@ -4963,9 +5688,276 @@ func (r *AzureVNETSiteResource) Read(ctx context.Context, req resource.ReadReque
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if _, ok := apiResource.Spec["admin_password"].(map[string]interface{}); ok && isImport && data.AdminPassword == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AdminPassword = &AzureVNETSiteAdminPasswordModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["azure_cred"].(map[string]interface{}); ok && (isImport || data.AzureCred != nil) {
+		data.AzureCred = &AzureVNETSiteAzureCredModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["block_all_services"].(map[string]interface{}); ok && isImport && data.BlockAllServices == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.BlockAllServices = &AzureVNETSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["blocked_services"].(map[string]interface{}); ok && isImport && data.BlockedServices == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.BlockedServices = &AzureVNETSiteBlockedServicesModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["coordinates"].(map[string]interface{}); ok && (isImport || data.Coordinates != nil) {
+		data.Coordinates = &AzureVNETSiteCoordinatesModel{
+			Latitude: func() types.Int64 {
+				if v, ok := blockData["latitude"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			Longitude: func() types.Int64 {
+				if v, ok := blockData["longitude"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["custom_dns"].(map[string]interface{}); ok && (isImport || data.CustomDNS != nil) {
+		data.CustomDNS = &AzureVNETSiteCustomDNSModel{
+			InsideNameserver: func() types.String {
+				if v, ok := blockData["inside_nameserver"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			OutsideNameserver: func() types.String {
+				if v, ok := blockData["outside_nameserver"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["default_blocked_services"].(map[string]interface{}); ok && isImport && data.DefaultBlockedServices == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DefaultBlockedServices = &AzureVNETSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["ingress_egress_gw"].(map[string]interface{}); ok && (isImport || data.IngressEgressGw != nil) {
+		data.IngressEgressGw = &AzureVNETSiteIngressEgressGwModel{
+			AzureCertifiedHw: func() types.String {
+				if v, ok := blockData["azure_certified_hw"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["ingress_egress_gw_ar"].(map[string]interface{}); ok && (isImport || data.IngressEgressGwAr != nil) {
+		data.IngressEgressGwAr = &AzureVNETSiteIngressEgressGwArModel{
+			AzureCertifiedHw: func() types.String {
+				if v, ok := blockData["azure_certified_hw"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["ingress_gw"].(map[string]interface{}); ok && (isImport || data.IngressGw != nil) {
+		data.IngressGw = &AzureVNETSiteIngressGwModel{
+			AzureCertifiedHw: func() types.String {
+				if v, ok := blockData["azure_certified_hw"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["ingress_gw_ar"].(map[string]interface{}); ok && (isImport || data.IngressGwAr != nil) {
+		data.IngressGwAr = &AzureVNETSiteIngressGwArModel{
+			AzureCertifiedHw: func() types.String {
+				if v, ok := blockData["azure_certified_hw"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["kubernetes_upgrade_drain"].(map[string]interface{}); ok && isImport && data.KubernetesUpgradeDrain == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.KubernetesUpgradeDrain = &AzureVNETSiteKubernetesUpgradeDrainModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["log_receiver"].(map[string]interface{}); ok && (isImport || data.LogReceiver != nil) {
+		data.LogReceiver = &AzureVNETSiteLogReceiverModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["logs_streaming_disabled"].(map[string]interface{}); ok && isImport && data.LogsStreamingDisabled == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.LogsStreamingDisabled = &AzureVNETSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_worker_nodes"].(map[string]interface{}); ok && isImport && data.NoWorkerNodes == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoWorkerNodes = &AzureVNETSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["offline_survivability_mode"].(map[string]interface{}); ok && isImport && data.OfflineSurvivabilityMode == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.OfflineSurvivabilityMode = &AzureVNETSiteOfflineSurvivabilityModeModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["os"].(map[string]interface{}); ok && (isImport || data.Os != nil) {
+		data.Os = &AzureVNETSiteOsModel{
+			OperatingSystemVersion: func() types.String {
+				if v, ok := blockData["operating_system_version"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["sw"].(map[string]interface{}); ok && (isImport || data.Sw != nil) {
+		data.Sw = &AzureVNETSiteSwModel{
+			VolterraSoftwareVersion: func() types.String {
+				if v, ok := blockData["volterra_software_version"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["tags"].(map[string]interface{}); ok && isImport && data.Tags == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Tags = &AzureVNETSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["vnet"].(map[string]interface{}); ok && isImport && data.VNET == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.VNET = &AzureVNETSiteVNETModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["voltstack_cluster"].(map[string]interface{}); ok && (isImport || data.VoltstackCluster != nil) {
+		data.VoltstackCluster = &AzureVNETSiteVoltstackClusterModel{
+			AzureCertifiedHw: func() types.String {
+				if v, ok := blockData["azure_certified_hw"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["voltstack_cluster_ar"].(map[string]interface{}); ok && (isImport || data.VoltstackClusterAr != nil) {
+		data.VoltstackClusterAr = &AzureVNETSiteVoltstackClusterArModel{
+			AzureCertifiedHw: func() types.String {
+				if v, ok := blockData["azure_certified_hw"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if v, ok := apiResource.Spec["address"].(string); ok && v != "" {
+		data.Address = types.StringValue(v)
+	} else {
+		data.Address = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["alternate_region"].(string); ok && v != "" {
+		data.AlternateRegion = types.StringValue(v)
+	} else {
+		data.AlternateRegion = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["azure_region"].(string); ok && v != "" {
+		data.AzureRegion = types.StringValue(v)
+	} else {
+		data.AzureRegion = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["disk_size"].(float64); ok {
+		data.DiskSize = types.Int64Value(int64(v))
+	} else {
+		data.DiskSize = types.Int64Null()
+	}
+	if v, ok := apiResource.Spec["machine_type"].(string); ok && v != "" {
+		data.MachineType = types.StringValue(v)
+	} else {
+		data.MachineType = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["nodes_per_az"].(float64); ok {
+		data.NodesPerAz = types.Int64Value(int64(v))
+	} else {
+		data.NodesPerAz = types.Int64Null()
+	}
+	if v, ok := apiResource.Spec["resource_group"].(string); ok && v != "" {
+		data.ResourceGroup = types.StringValue(v)
+	} else {
+		data.ResourceGroup = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["ssh_key"].(string); ok && v != "" {
+		data.SSHKey = types.StringValue(v)
+	} else {
+		data.SSHKey = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["total_nodes"].(float64); ok {
+		data.TotalNodes = types.Int64Value(int64(v))
+	} else {
+		data.TotalNodes = types.Int64Null()
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -4991,7 +5983,7 @@ func (r *AzureVNETSiteResource) Update(ctx context.Context, req resource.UpdateR
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.AzureVNETSiteSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -5016,6 +6008,653 @@ func (r *AzureVNETSiteResource) Update(ctx context.Context, req resource.UpdateR
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.AdminPassword != nil {
+		admin_passwordMap := make(map[string]interface{})
+		if data.AdminPassword.BlindfoldSecretInfo != nil {
+			blindfold_secret_infoNestedMap := make(map[string]interface{})
+			if !data.AdminPassword.BlindfoldSecretInfo.DecryptionProvider.IsNull() && !data.AdminPassword.BlindfoldSecretInfo.DecryptionProvider.IsUnknown() {
+				blindfold_secret_infoNestedMap["decryption_provider"] = data.AdminPassword.BlindfoldSecretInfo.DecryptionProvider.ValueString()
+			}
+			if !data.AdminPassword.BlindfoldSecretInfo.Location.IsNull() && !data.AdminPassword.BlindfoldSecretInfo.Location.IsUnknown() {
+				blindfold_secret_infoNestedMap["location"] = data.AdminPassword.BlindfoldSecretInfo.Location.ValueString()
+			}
+			if !data.AdminPassword.BlindfoldSecretInfo.StoreProvider.IsNull() && !data.AdminPassword.BlindfoldSecretInfo.StoreProvider.IsUnknown() {
+				blindfold_secret_infoNestedMap["store_provider"] = data.AdminPassword.BlindfoldSecretInfo.StoreProvider.ValueString()
+			}
+			admin_passwordMap["blindfold_secret_info"] = blindfold_secret_infoNestedMap
+		}
+		if data.AdminPassword.ClearSecretInfo != nil {
+			clear_secret_infoNestedMap := make(map[string]interface{})
+			if !data.AdminPassword.ClearSecretInfo.Provider.IsNull() && !data.AdminPassword.ClearSecretInfo.Provider.IsUnknown() {
+				clear_secret_infoNestedMap["provider"] = data.AdminPassword.ClearSecretInfo.Provider.ValueString()
+			}
+			if !data.AdminPassword.ClearSecretInfo.URL.IsNull() && !data.AdminPassword.ClearSecretInfo.URL.IsUnknown() {
+				clear_secret_infoNestedMap["url"] = data.AdminPassword.ClearSecretInfo.URL.ValueString()
+			}
+			admin_passwordMap["clear_secret_info"] = clear_secret_infoNestedMap
+		}
+		apiResource.Spec["admin_password"] = admin_passwordMap
+	}
+	if data.AzureCred != nil {
+		azure_credMap := make(map[string]interface{})
+		if !data.AzureCred.Name.IsNull() && !data.AzureCred.Name.IsUnknown() {
+			azure_credMap["name"] = data.AzureCred.Name.ValueString()
+		}
+		if !data.AzureCred.Namespace.IsNull() && !data.AzureCred.Namespace.IsUnknown() {
+			azure_credMap["namespace"] = data.AzureCred.Namespace.ValueString()
+		}
+		if !data.AzureCred.Tenant.IsNull() && !data.AzureCred.Tenant.IsUnknown() {
+			azure_credMap["tenant"] = data.AzureCred.Tenant.ValueString()
+		}
+		apiResource.Spec["azure_cred"] = azure_credMap
+	}
+	if data.BlockAllServices != nil {
+		block_all_servicesMap := make(map[string]interface{})
+		apiResource.Spec["block_all_services"] = block_all_servicesMap
+	}
+	if data.BlockedServices != nil {
+		blocked_servicesMap := make(map[string]interface{})
+		apiResource.Spec["blocked_services"] = blocked_servicesMap
+	}
+	if data.Coordinates != nil {
+		coordinatesMap := make(map[string]interface{})
+		if !data.Coordinates.Latitude.IsNull() && !data.Coordinates.Latitude.IsUnknown() {
+			coordinatesMap["latitude"] = data.Coordinates.Latitude.ValueInt64()
+		}
+		if !data.Coordinates.Longitude.IsNull() && !data.Coordinates.Longitude.IsUnknown() {
+			coordinatesMap["longitude"] = data.Coordinates.Longitude.ValueInt64()
+		}
+		apiResource.Spec["coordinates"] = coordinatesMap
+	}
+	if data.CustomDNS != nil {
+		custom_dnsMap := make(map[string]interface{})
+		if !data.CustomDNS.InsideNameserver.IsNull() && !data.CustomDNS.InsideNameserver.IsUnknown() {
+			custom_dnsMap["inside_nameserver"] = data.CustomDNS.InsideNameserver.ValueString()
+		}
+		if !data.CustomDNS.OutsideNameserver.IsNull() && !data.CustomDNS.OutsideNameserver.IsUnknown() {
+			custom_dnsMap["outside_nameserver"] = data.CustomDNS.OutsideNameserver.ValueString()
+		}
+		apiResource.Spec["custom_dns"] = custom_dnsMap
+	}
+	if data.DefaultBlockedServices != nil {
+		default_blocked_servicesMap := make(map[string]interface{})
+		apiResource.Spec["default_blocked_services"] = default_blocked_servicesMap
+	}
+	if data.IngressEgressGw != nil {
+		ingress_egress_gwMap := make(map[string]interface{})
+		if data.IngressEgressGw.AcceleratedNetworking != nil {
+			accelerated_networkingNestedMap := make(map[string]interface{})
+			ingress_egress_gwMap["accelerated_networking"] = accelerated_networkingNestedMap
+		}
+		if data.IngressEgressGw.ActiveEnhancedFirewallPolicies != nil {
+			active_enhanced_firewall_policiesNestedMap := make(map[string]interface{})
+			ingress_egress_gwMap["active_enhanced_firewall_policies"] = active_enhanced_firewall_policiesNestedMap
+		}
+		if data.IngressEgressGw.ActiveForwardProxyPolicies != nil {
+			active_forward_proxy_policiesNestedMap := make(map[string]interface{})
+			ingress_egress_gwMap["active_forward_proxy_policies"] = active_forward_proxy_policiesNestedMap
+		}
+		if data.IngressEgressGw.ActiveNetworkPolicies != nil {
+			active_network_policiesNestedMap := make(map[string]interface{})
+			ingress_egress_gwMap["active_network_policies"] = active_network_policiesNestedMap
+		}
+		if !data.IngressEgressGw.AzureCertifiedHw.IsNull() && !data.IngressEgressGw.AzureCertifiedHw.IsUnknown() {
+			ingress_egress_gwMap["azure_certified_hw"] = data.IngressEgressGw.AzureCertifiedHw.ValueString()
+		}
+		if data.IngressEgressGw.DcClusterGroupInsideVn != nil {
+			dc_cluster_group_inside_vnNestedMap := make(map[string]interface{})
+			if !data.IngressEgressGw.DcClusterGroupInsideVn.Name.IsNull() && !data.IngressEgressGw.DcClusterGroupInsideVn.Name.IsUnknown() {
+				dc_cluster_group_inside_vnNestedMap["name"] = data.IngressEgressGw.DcClusterGroupInsideVn.Name.ValueString()
+			}
+			if !data.IngressEgressGw.DcClusterGroupInsideVn.Namespace.IsNull() && !data.IngressEgressGw.DcClusterGroupInsideVn.Namespace.IsUnknown() {
+				dc_cluster_group_inside_vnNestedMap["namespace"] = data.IngressEgressGw.DcClusterGroupInsideVn.Namespace.ValueString()
+			}
+			if !data.IngressEgressGw.DcClusterGroupInsideVn.Tenant.IsNull() && !data.IngressEgressGw.DcClusterGroupInsideVn.Tenant.IsUnknown() {
+				dc_cluster_group_inside_vnNestedMap["tenant"] = data.IngressEgressGw.DcClusterGroupInsideVn.Tenant.ValueString()
+			}
+			ingress_egress_gwMap["dc_cluster_group_inside_vn"] = dc_cluster_group_inside_vnNestedMap
+		}
+		if data.IngressEgressGw.DcClusterGroupOutsideVn != nil {
+			dc_cluster_group_outside_vnNestedMap := make(map[string]interface{})
+			if !data.IngressEgressGw.DcClusterGroupOutsideVn.Name.IsNull() && !data.IngressEgressGw.DcClusterGroupOutsideVn.Name.IsUnknown() {
+				dc_cluster_group_outside_vnNestedMap["name"] = data.IngressEgressGw.DcClusterGroupOutsideVn.Name.ValueString()
+			}
+			if !data.IngressEgressGw.DcClusterGroupOutsideVn.Namespace.IsNull() && !data.IngressEgressGw.DcClusterGroupOutsideVn.Namespace.IsUnknown() {
+				dc_cluster_group_outside_vnNestedMap["namespace"] = data.IngressEgressGw.DcClusterGroupOutsideVn.Namespace.ValueString()
+			}
+			if !data.IngressEgressGw.DcClusterGroupOutsideVn.Tenant.IsNull() && !data.IngressEgressGw.DcClusterGroupOutsideVn.Tenant.IsUnknown() {
+				dc_cluster_group_outside_vnNestedMap["tenant"] = data.IngressEgressGw.DcClusterGroupOutsideVn.Tenant.ValueString()
+			}
+			ingress_egress_gwMap["dc_cluster_group_outside_vn"] = dc_cluster_group_outside_vnNestedMap
+		}
+		if data.IngressEgressGw.ForwardProxyAllowAll != nil {
+			ingress_egress_gwMap["forward_proxy_allow_all"] = map[string]interface{}{}
+		}
+		if data.IngressEgressGw.GlobalNetworkList != nil {
+			global_network_listNestedMap := make(map[string]interface{})
+			ingress_egress_gwMap["global_network_list"] = global_network_listNestedMap
+		}
+		if data.IngressEgressGw.Hub != nil {
+			hubNestedMap := make(map[string]interface{})
+			ingress_egress_gwMap["hub"] = hubNestedMap
+		}
+		if data.IngressEgressGw.InsideStaticRoutes != nil {
+			inside_static_routesNestedMap := make(map[string]interface{})
+			ingress_egress_gwMap["inside_static_routes"] = inside_static_routesNestedMap
+		}
+		if data.IngressEgressGw.NoDcClusterGroup != nil {
+			ingress_egress_gwMap["no_dc_cluster_group"] = map[string]interface{}{}
+		}
+		if data.IngressEgressGw.NoForwardProxy != nil {
+			ingress_egress_gwMap["no_forward_proxy"] = map[string]interface{}{}
+		}
+		if data.IngressEgressGw.NoGlobalNetwork != nil {
+			ingress_egress_gwMap["no_global_network"] = map[string]interface{}{}
+		}
+		if data.IngressEgressGw.NoInsideStaticRoutes != nil {
+			ingress_egress_gwMap["no_inside_static_routes"] = map[string]interface{}{}
+		}
+		if data.IngressEgressGw.NoNetworkPolicy != nil {
+			ingress_egress_gwMap["no_network_policy"] = map[string]interface{}{}
+		}
+		if data.IngressEgressGw.NoOutsideStaticRoutes != nil {
+			ingress_egress_gwMap["no_outside_static_routes"] = map[string]interface{}{}
+		}
+		if data.IngressEgressGw.NotHub != nil {
+			ingress_egress_gwMap["not_hub"] = map[string]interface{}{}
+		}
+		if data.IngressEgressGw.OutsideStaticRoutes != nil {
+			outside_static_routesNestedMap := make(map[string]interface{})
+			ingress_egress_gwMap["outside_static_routes"] = outside_static_routesNestedMap
+		}
+		if data.IngressEgressGw.PerformanceEnhancementMode != nil {
+			performance_enhancement_modeNestedMap := make(map[string]interface{})
+			ingress_egress_gwMap["performance_enhancement_mode"] = performance_enhancement_modeNestedMap
+		}
+		if data.IngressEgressGw.SmConnectionPublicIP != nil {
+			ingress_egress_gwMap["sm_connection_public_ip"] = map[string]interface{}{}
+		}
+		if data.IngressEgressGw.SmConnectionPvtIP != nil {
+			ingress_egress_gwMap["sm_connection_pvt_ip"] = map[string]interface{}{}
+		}
+		apiResource.Spec["ingress_egress_gw"] = ingress_egress_gwMap
+	}
+	if data.IngressEgressGwAr != nil {
+		ingress_egress_gw_arMap := make(map[string]interface{})
+		if data.IngressEgressGwAr.AcceleratedNetworking != nil {
+			accelerated_networkingNestedMap := make(map[string]interface{})
+			ingress_egress_gw_arMap["accelerated_networking"] = accelerated_networkingNestedMap
+		}
+		if data.IngressEgressGwAr.ActiveEnhancedFirewallPolicies != nil {
+			active_enhanced_firewall_policiesNestedMap := make(map[string]interface{})
+			ingress_egress_gw_arMap["active_enhanced_firewall_policies"] = active_enhanced_firewall_policiesNestedMap
+		}
+		if data.IngressEgressGwAr.ActiveForwardProxyPolicies != nil {
+			active_forward_proxy_policiesNestedMap := make(map[string]interface{})
+			ingress_egress_gw_arMap["active_forward_proxy_policies"] = active_forward_proxy_policiesNestedMap
+		}
+		if data.IngressEgressGwAr.ActiveNetworkPolicies != nil {
+			active_network_policiesNestedMap := make(map[string]interface{})
+			ingress_egress_gw_arMap["active_network_policies"] = active_network_policiesNestedMap
+		}
+		if !data.IngressEgressGwAr.AzureCertifiedHw.IsNull() && !data.IngressEgressGwAr.AzureCertifiedHw.IsUnknown() {
+			ingress_egress_gw_arMap["azure_certified_hw"] = data.IngressEgressGwAr.AzureCertifiedHw.ValueString()
+		}
+		if data.IngressEgressGwAr.DcClusterGroupInsideVn != nil {
+			dc_cluster_group_inside_vnNestedMap := make(map[string]interface{})
+			if !data.IngressEgressGwAr.DcClusterGroupInsideVn.Name.IsNull() && !data.IngressEgressGwAr.DcClusterGroupInsideVn.Name.IsUnknown() {
+				dc_cluster_group_inside_vnNestedMap["name"] = data.IngressEgressGwAr.DcClusterGroupInsideVn.Name.ValueString()
+			}
+			if !data.IngressEgressGwAr.DcClusterGroupInsideVn.Namespace.IsNull() && !data.IngressEgressGwAr.DcClusterGroupInsideVn.Namespace.IsUnknown() {
+				dc_cluster_group_inside_vnNestedMap["namespace"] = data.IngressEgressGwAr.DcClusterGroupInsideVn.Namespace.ValueString()
+			}
+			if !data.IngressEgressGwAr.DcClusterGroupInsideVn.Tenant.IsNull() && !data.IngressEgressGwAr.DcClusterGroupInsideVn.Tenant.IsUnknown() {
+				dc_cluster_group_inside_vnNestedMap["tenant"] = data.IngressEgressGwAr.DcClusterGroupInsideVn.Tenant.ValueString()
+			}
+			ingress_egress_gw_arMap["dc_cluster_group_inside_vn"] = dc_cluster_group_inside_vnNestedMap
+		}
+		if data.IngressEgressGwAr.DcClusterGroupOutsideVn != nil {
+			dc_cluster_group_outside_vnNestedMap := make(map[string]interface{})
+			if !data.IngressEgressGwAr.DcClusterGroupOutsideVn.Name.IsNull() && !data.IngressEgressGwAr.DcClusterGroupOutsideVn.Name.IsUnknown() {
+				dc_cluster_group_outside_vnNestedMap["name"] = data.IngressEgressGwAr.DcClusterGroupOutsideVn.Name.ValueString()
+			}
+			if !data.IngressEgressGwAr.DcClusterGroupOutsideVn.Namespace.IsNull() && !data.IngressEgressGwAr.DcClusterGroupOutsideVn.Namespace.IsUnknown() {
+				dc_cluster_group_outside_vnNestedMap["namespace"] = data.IngressEgressGwAr.DcClusterGroupOutsideVn.Namespace.ValueString()
+			}
+			if !data.IngressEgressGwAr.DcClusterGroupOutsideVn.Tenant.IsNull() && !data.IngressEgressGwAr.DcClusterGroupOutsideVn.Tenant.IsUnknown() {
+				dc_cluster_group_outside_vnNestedMap["tenant"] = data.IngressEgressGwAr.DcClusterGroupOutsideVn.Tenant.ValueString()
+			}
+			ingress_egress_gw_arMap["dc_cluster_group_outside_vn"] = dc_cluster_group_outside_vnNestedMap
+		}
+		if data.IngressEgressGwAr.ForwardProxyAllowAll != nil {
+			ingress_egress_gw_arMap["forward_proxy_allow_all"] = map[string]interface{}{}
+		}
+		if data.IngressEgressGwAr.GlobalNetworkList != nil {
+			global_network_listNestedMap := make(map[string]interface{})
+			ingress_egress_gw_arMap["global_network_list"] = global_network_listNestedMap
+		}
+		if data.IngressEgressGwAr.Hub != nil {
+			hubNestedMap := make(map[string]interface{})
+			ingress_egress_gw_arMap["hub"] = hubNestedMap
+		}
+		if data.IngressEgressGwAr.InsideStaticRoutes != nil {
+			inside_static_routesNestedMap := make(map[string]interface{})
+			ingress_egress_gw_arMap["inside_static_routes"] = inside_static_routesNestedMap
+		}
+		if data.IngressEgressGwAr.NoDcClusterGroup != nil {
+			ingress_egress_gw_arMap["no_dc_cluster_group"] = map[string]interface{}{}
+		}
+		if data.IngressEgressGwAr.NoForwardProxy != nil {
+			ingress_egress_gw_arMap["no_forward_proxy"] = map[string]interface{}{}
+		}
+		if data.IngressEgressGwAr.NoGlobalNetwork != nil {
+			ingress_egress_gw_arMap["no_global_network"] = map[string]interface{}{}
+		}
+		if data.IngressEgressGwAr.NoInsideStaticRoutes != nil {
+			ingress_egress_gw_arMap["no_inside_static_routes"] = map[string]interface{}{}
+		}
+		if data.IngressEgressGwAr.NoNetworkPolicy != nil {
+			ingress_egress_gw_arMap["no_network_policy"] = map[string]interface{}{}
+		}
+		if data.IngressEgressGwAr.NoOutsideStaticRoutes != nil {
+			ingress_egress_gw_arMap["no_outside_static_routes"] = map[string]interface{}{}
+		}
+		if data.IngressEgressGwAr.Node != nil {
+			nodeNestedMap := make(map[string]interface{})
+			if !data.IngressEgressGwAr.Node.FaultDomain.IsNull() && !data.IngressEgressGwAr.Node.FaultDomain.IsUnknown() {
+				nodeNestedMap["fault_domain"] = data.IngressEgressGwAr.Node.FaultDomain.ValueInt64()
+			}
+			if !data.IngressEgressGwAr.Node.NodeNumber.IsNull() && !data.IngressEgressGwAr.Node.NodeNumber.IsUnknown() {
+				nodeNestedMap["node_number"] = data.IngressEgressGwAr.Node.NodeNumber.ValueInt64()
+			}
+			if !data.IngressEgressGwAr.Node.UpdateDomain.IsNull() && !data.IngressEgressGwAr.Node.UpdateDomain.IsUnknown() {
+				nodeNestedMap["update_domain"] = data.IngressEgressGwAr.Node.UpdateDomain.ValueInt64()
+			}
+			ingress_egress_gw_arMap["node"] = nodeNestedMap
+		}
+		if data.IngressEgressGwAr.NotHub != nil {
+			ingress_egress_gw_arMap["not_hub"] = map[string]interface{}{}
+		}
+		if data.IngressEgressGwAr.OutsideStaticRoutes != nil {
+			outside_static_routesNestedMap := make(map[string]interface{})
+			ingress_egress_gw_arMap["outside_static_routes"] = outside_static_routesNestedMap
+		}
+		if data.IngressEgressGwAr.PerformanceEnhancementMode != nil {
+			performance_enhancement_modeNestedMap := make(map[string]interface{})
+			ingress_egress_gw_arMap["performance_enhancement_mode"] = performance_enhancement_modeNestedMap
+		}
+		if data.IngressEgressGwAr.SmConnectionPublicIP != nil {
+			ingress_egress_gw_arMap["sm_connection_public_ip"] = map[string]interface{}{}
+		}
+		if data.IngressEgressGwAr.SmConnectionPvtIP != nil {
+			ingress_egress_gw_arMap["sm_connection_pvt_ip"] = map[string]interface{}{}
+		}
+		apiResource.Spec["ingress_egress_gw_ar"] = ingress_egress_gw_arMap
+	}
+	if data.IngressGw != nil {
+		ingress_gwMap := make(map[string]interface{})
+		if data.IngressGw.AcceleratedNetworking != nil {
+			accelerated_networkingNestedMap := make(map[string]interface{})
+			ingress_gwMap["accelerated_networking"] = accelerated_networkingNestedMap
+		}
+		if !data.IngressGw.AzureCertifiedHw.IsNull() && !data.IngressGw.AzureCertifiedHw.IsUnknown() {
+			ingress_gwMap["azure_certified_hw"] = data.IngressGw.AzureCertifiedHw.ValueString()
+		}
+		if data.IngressGw.PerformanceEnhancementMode != nil {
+			performance_enhancement_modeNestedMap := make(map[string]interface{})
+			ingress_gwMap["performance_enhancement_mode"] = performance_enhancement_modeNestedMap
+		}
+		apiResource.Spec["ingress_gw"] = ingress_gwMap
+	}
+	if data.IngressGwAr != nil {
+		ingress_gw_arMap := make(map[string]interface{})
+		if data.IngressGwAr.AcceleratedNetworking != nil {
+			accelerated_networkingNestedMap := make(map[string]interface{})
+			ingress_gw_arMap["accelerated_networking"] = accelerated_networkingNestedMap
+		}
+		if !data.IngressGwAr.AzureCertifiedHw.IsNull() && !data.IngressGwAr.AzureCertifiedHw.IsUnknown() {
+			ingress_gw_arMap["azure_certified_hw"] = data.IngressGwAr.AzureCertifiedHw.ValueString()
+		}
+		if data.IngressGwAr.Node != nil {
+			nodeNestedMap := make(map[string]interface{})
+			if !data.IngressGwAr.Node.FaultDomain.IsNull() && !data.IngressGwAr.Node.FaultDomain.IsUnknown() {
+				nodeNestedMap["fault_domain"] = data.IngressGwAr.Node.FaultDomain.ValueInt64()
+			}
+			if !data.IngressGwAr.Node.NodeNumber.IsNull() && !data.IngressGwAr.Node.NodeNumber.IsUnknown() {
+				nodeNestedMap["node_number"] = data.IngressGwAr.Node.NodeNumber.ValueInt64()
+			}
+			if !data.IngressGwAr.Node.UpdateDomain.IsNull() && !data.IngressGwAr.Node.UpdateDomain.IsUnknown() {
+				nodeNestedMap["update_domain"] = data.IngressGwAr.Node.UpdateDomain.ValueInt64()
+			}
+			ingress_gw_arMap["node"] = nodeNestedMap
+		}
+		if data.IngressGwAr.PerformanceEnhancementMode != nil {
+			performance_enhancement_modeNestedMap := make(map[string]interface{})
+			ingress_gw_arMap["performance_enhancement_mode"] = performance_enhancement_modeNestedMap
+		}
+		apiResource.Spec["ingress_gw_ar"] = ingress_gw_arMap
+	}
+	if data.KubernetesUpgradeDrain != nil {
+		kubernetes_upgrade_drainMap := make(map[string]interface{})
+		if data.KubernetesUpgradeDrain.DisableUpgradeDrain != nil {
+			kubernetes_upgrade_drainMap["disable_upgrade_drain"] = map[string]interface{}{}
+		}
+		if data.KubernetesUpgradeDrain.EnableUpgradeDrain != nil {
+			enable_upgrade_drainNestedMap := make(map[string]interface{})
+			if !data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainMaxUnavailableNodeCount.IsNull() && !data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainMaxUnavailableNodeCount.IsUnknown() {
+				enable_upgrade_drainNestedMap["drain_max_unavailable_node_count"] = data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainMaxUnavailableNodeCount.ValueInt64()
+			}
+			if !data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainNodeTimeout.IsNull() && !data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainNodeTimeout.IsUnknown() {
+				enable_upgrade_drainNestedMap["drain_node_timeout"] = data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainNodeTimeout.ValueInt64()
+			}
+			kubernetes_upgrade_drainMap["enable_upgrade_drain"] = enable_upgrade_drainNestedMap
+		}
+		apiResource.Spec["kubernetes_upgrade_drain"] = kubernetes_upgrade_drainMap
+	}
+	if data.LogReceiver != nil {
+		log_receiverMap := make(map[string]interface{})
+		if !data.LogReceiver.Name.IsNull() && !data.LogReceiver.Name.IsUnknown() {
+			log_receiverMap["name"] = data.LogReceiver.Name.ValueString()
+		}
+		if !data.LogReceiver.Namespace.IsNull() && !data.LogReceiver.Namespace.IsUnknown() {
+			log_receiverMap["namespace"] = data.LogReceiver.Namespace.ValueString()
+		}
+		if !data.LogReceiver.Tenant.IsNull() && !data.LogReceiver.Tenant.IsUnknown() {
+			log_receiverMap["tenant"] = data.LogReceiver.Tenant.ValueString()
+		}
+		apiResource.Spec["log_receiver"] = log_receiverMap
+	}
+	if data.LogsStreamingDisabled != nil {
+		logs_streaming_disabledMap := make(map[string]interface{})
+		apiResource.Spec["logs_streaming_disabled"] = logs_streaming_disabledMap
+	}
+	if data.NoWorkerNodes != nil {
+		no_worker_nodesMap := make(map[string]interface{})
+		apiResource.Spec["no_worker_nodes"] = no_worker_nodesMap
+	}
+	if data.OfflineSurvivabilityMode != nil {
+		offline_survivability_modeMap := make(map[string]interface{})
+		if data.OfflineSurvivabilityMode.EnableOfflineSurvivabilityMode != nil {
+			offline_survivability_modeMap["enable_offline_survivability_mode"] = map[string]interface{}{}
+		}
+		if data.OfflineSurvivabilityMode.NoOfflineSurvivabilityMode != nil {
+			offline_survivability_modeMap["no_offline_survivability_mode"] = map[string]interface{}{}
+		}
+		apiResource.Spec["offline_survivability_mode"] = offline_survivability_modeMap
+	}
+	if data.Os != nil {
+		osMap := make(map[string]interface{})
+		if data.Os.DefaultOsVersion != nil {
+			osMap["default_os_version"] = map[string]interface{}{}
+		}
+		if !data.Os.OperatingSystemVersion.IsNull() && !data.Os.OperatingSystemVersion.IsUnknown() {
+			osMap["operating_system_version"] = data.Os.OperatingSystemVersion.ValueString()
+		}
+		apiResource.Spec["os"] = osMap
+	}
+	if data.Sw != nil {
+		swMap := make(map[string]interface{})
+		if data.Sw.DefaultSwVersion != nil {
+			swMap["default_sw_version"] = map[string]interface{}{}
+		}
+		if !data.Sw.VolterraSoftwareVersion.IsNull() && !data.Sw.VolterraSoftwareVersion.IsUnknown() {
+			swMap["volterra_software_version"] = data.Sw.VolterraSoftwareVersion.ValueString()
+		}
+		apiResource.Spec["sw"] = swMap
+	}
+	if data.Tags != nil {
+		tagsMap := make(map[string]interface{})
+		apiResource.Spec["tags"] = tagsMap
+	}
+	if data.VNET != nil {
+		vnetMap := make(map[string]interface{})
+		if data.VNET.ExistingVNET != nil {
+			existing_vnetNestedMap := make(map[string]interface{})
+			if !data.VNET.ExistingVNET.ResourceGroup.IsNull() && !data.VNET.ExistingVNET.ResourceGroup.IsUnknown() {
+				existing_vnetNestedMap["resource_group"] = data.VNET.ExistingVNET.ResourceGroup.ValueString()
+			}
+			if !data.VNET.ExistingVNET.VNETName.IsNull() && !data.VNET.ExistingVNET.VNETName.IsUnknown() {
+				existing_vnetNestedMap["vnet_name"] = data.VNET.ExistingVNET.VNETName.ValueString()
+			}
+			vnetMap["existing_vnet"] = existing_vnetNestedMap
+		}
+		if data.VNET.NewVNET != nil {
+			new_vnetNestedMap := make(map[string]interface{})
+			if !data.VNET.NewVNET.Name.IsNull() && !data.VNET.NewVNET.Name.IsUnknown() {
+				new_vnetNestedMap["name"] = data.VNET.NewVNET.Name.ValueString()
+			}
+			if !data.VNET.NewVNET.PrimaryIPV4.IsNull() && !data.VNET.NewVNET.PrimaryIPV4.IsUnknown() {
+				new_vnetNestedMap["primary_ipv4"] = data.VNET.NewVNET.PrimaryIPV4.ValueString()
+			}
+			vnetMap["new_vnet"] = new_vnetNestedMap
+		}
+		apiResource.Spec["vnet"] = vnetMap
+	}
+	if data.VoltstackCluster != nil {
+		voltstack_clusterMap := make(map[string]interface{})
+		if data.VoltstackCluster.AcceleratedNetworking != nil {
+			accelerated_networkingNestedMap := make(map[string]interface{})
+			voltstack_clusterMap["accelerated_networking"] = accelerated_networkingNestedMap
+		}
+		if data.VoltstackCluster.ActiveEnhancedFirewallPolicies != nil {
+			active_enhanced_firewall_policiesNestedMap := make(map[string]interface{})
+			voltstack_clusterMap["active_enhanced_firewall_policies"] = active_enhanced_firewall_policiesNestedMap
+		}
+		if data.VoltstackCluster.ActiveForwardProxyPolicies != nil {
+			active_forward_proxy_policiesNestedMap := make(map[string]interface{})
+			voltstack_clusterMap["active_forward_proxy_policies"] = active_forward_proxy_policiesNestedMap
+		}
+		if data.VoltstackCluster.ActiveNetworkPolicies != nil {
+			active_network_policiesNestedMap := make(map[string]interface{})
+			voltstack_clusterMap["active_network_policies"] = active_network_policiesNestedMap
+		}
+		if !data.VoltstackCluster.AzureCertifiedHw.IsNull() && !data.VoltstackCluster.AzureCertifiedHw.IsUnknown() {
+			voltstack_clusterMap["azure_certified_hw"] = data.VoltstackCluster.AzureCertifiedHw.ValueString()
+		}
+		if data.VoltstackCluster.DcClusterGroup != nil {
+			dc_cluster_groupNestedMap := make(map[string]interface{})
+			if !data.VoltstackCluster.DcClusterGroup.Name.IsNull() && !data.VoltstackCluster.DcClusterGroup.Name.IsUnknown() {
+				dc_cluster_groupNestedMap["name"] = data.VoltstackCluster.DcClusterGroup.Name.ValueString()
+			}
+			if !data.VoltstackCluster.DcClusterGroup.Namespace.IsNull() && !data.VoltstackCluster.DcClusterGroup.Namespace.IsUnknown() {
+				dc_cluster_groupNestedMap["namespace"] = data.VoltstackCluster.DcClusterGroup.Namespace.ValueString()
+			}
+			if !data.VoltstackCluster.DcClusterGroup.Tenant.IsNull() && !data.VoltstackCluster.DcClusterGroup.Tenant.IsUnknown() {
+				dc_cluster_groupNestedMap["tenant"] = data.VoltstackCluster.DcClusterGroup.Tenant.ValueString()
+			}
+			voltstack_clusterMap["dc_cluster_group"] = dc_cluster_groupNestedMap
+		}
+		if data.VoltstackCluster.DefaultStorage != nil {
+			voltstack_clusterMap["default_storage"] = map[string]interface{}{}
+		}
+		if data.VoltstackCluster.ForwardProxyAllowAll != nil {
+			voltstack_clusterMap["forward_proxy_allow_all"] = map[string]interface{}{}
+		}
+		if data.VoltstackCluster.GlobalNetworkList != nil {
+			global_network_listNestedMap := make(map[string]interface{})
+			voltstack_clusterMap["global_network_list"] = global_network_listNestedMap
+		}
+		if data.VoltstackCluster.K8SCluster != nil {
+			k8s_clusterNestedMap := make(map[string]interface{})
+			if !data.VoltstackCluster.K8SCluster.Name.IsNull() && !data.VoltstackCluster.K8SCluster.Name.IsUnknown() {
+				k8s_clusterNestedMap["name"] = data.VoltstackCluster.K8SCluster.Name.ValueString()
+			}
+			if !data.VoltstackCluster.K8SCluster.Namespace.IsNull() && !data.VoltstackCluster.K8SCluster.Namespace.IsUnknown() {
+				k8s_clusterNestedMap["namespace"] = data.VoltstackCluster.K8SCluster.Namespace.ValueString()
+			}
+			if !data.VoltstackCluster.K8SCluster.Tenant.IsNull() && !data.VoltstackCluster.K8SCluster.Tenant.IsUnknown() {
+				k8s_clusterNestedMap["tenant"] = data.VoltstackCluster.K8SCluster.Tenant.ValueString()
+			}
+			voltstack_clusterMap["k8s_cluster"] = k8s_clusterNestedMap
+		}
+		if data.VoltstackCluster.NoDcClusterGroup != nil {
+			voltstack_clusterMap["no_dc_cluster_group"] = map[string]interface{}{}
+		}
+		if data.VoltstackCluster.NoForwardProxy != nil {
+			voltstack_clusterMap["no_forward_proxy"] = map[string]interface{}{}
+		}
+		if data.VoltstackCluster.NoGlobalNetwork != nil {
+			voltstack_clusterMap["no_global_network"] = map[string]interface{}{}
+		}
+		if data.VoltstackCluster.NoK8SCluster != nil {
+			voltstack_clusterMap["no_k8s_cluster"] = map[string]interface{}{}
+		}
+		if data.VoltstackCluster.NoNetworkPolicy != nil {
+			voltstack_clusterMap["no_network_policy"] = map[string]interface{}{}
+		}
+		if data.VoltstackCluster.NoOutsideStaticRoutes != nil {
+			voltstack_clusterMap["no_outside_static_routes"] = map[string]interface{}{}
+		}
+		if data.VoltstackCluster.OutsideStaticRoutes != nil {
+			outside_static_routesNestedMap := make(map[string]interface{})
+			voltstack_clusterMap["outside_static_routes"] = outside_static_routesNestedMap
+		}
+		if data.VoltstackCluster.SmConnectionPublicIP != nil {
+			voltstack_clusterMap["sm_connection_public_ip"] = map[string]interface{}{}
+		}
+		if data.VoltstackCluster.SmConnectionPvtIP != nil {
+			voltstack_clusterMap["sm_connection_pvt_ip"] = map[string]interface{}{}
+		}
+		if data.VoltstackCluster.StorageClassList != nil {
+			storage_class_listNestedMap := make(map[string]interface{})
+			voltstack_clusterMap["storage_class_list"] = storage_class_listNestedMap
+		}
+		apiResource.Spec["voltstack_cluster"] = voltstack_clusterMap
+	}
+	if data.VoltstackClusterAr != nil {
+		voltstack_cluster_arMap := make(map[string]interface{})
+		if data.VoltstackClusterAr.AcceleratedNetworking != nil {
+			accelerated_networkingNestedMap := make(map[string]interface{})
+			voltstack_cluster_arMap["accelerated_networking"] = accelerated_networkingNestedMap
+		}
+		if data.VoltstackClusterAr.ActiveEnhancedFirewallPolicies != nil {
+			active_enhanced_firewall_policiesNestedMap := make(map[string]interface{})
+			voltstack_cluster_arMap["active_enhanced_firewall_policies"] = active_enhanced_firewall_policiesNestedMap
+		}
+		if data.VoltstackClusterAr.ActiveForwardProxyPolicies != nil {
+			active_forward_proxy_policiesNestedMap := make(map[string]interface{})
+			voltstack_cluster_arMap["active_forward_proxy_policies"] = active_forward_proxy_policiesNestedMap
+		}
+		if data.VoltstackClusterAr.ActiveNetworkPolicies != nil {
+			active_network_policiesNestedMap := make(map[string]interface{})
+			voltstack_cluster_arMap["active_network_policies"] = active_network_policiesNestedMap
+		}
+		if !data.VoltstackClusterAr.AzureCertifiedHw.IsNull() && !data.VoltstackClusterAr.AzureCertifiedHw.IsUnknown() {
+			voltstack_cluster_arMap["azure_certified_hw"] = data.VoltstackClusterAr.AzureCertifiedHw.ValueString()
+		}
+		if data.VoltstackClusterAr.DcClusterGroup != nil {
+			dc_cluster_groupNestedMap := make(map[string]interface{})
+			if !data.VoltstackClusterAr.DcClusterGroup.Name.IsNull() && !data.VoltstackClusterAr.DcClusterGroup.Name.IsUnknown() {
+				dc_cluster_groupNestedMap["name"] = data.VoltstackClusterAr.DcClusterGroup.Name.ValueString()
+			}
+			if !data.VoltstackClusterAr.DcClusterGroup.Namespace.IsNull() && !data.VoltstackClusterAr.DcClusterGroup.Namespace.IsUnknown() {
+				dc_cluster_groupNestedMap["namespace"] = data.VoltstackClusterAr.DcClusterGroup.Namespace.ValueString()
+			}
+			if !data.VoltstackClusterAr.DcClusterGroup.Tenant.IsNull() && !data.VoltstackClusterAr.DcClusterGroup.Tenant.IsUnknown() {
+				dc_cluster_groupNestedMap["tenant"] = data.VoltstackClusterAr.DcClusterGroup.Tenant.ValueString()
+			}
+			voltstack_cluster_arMap["dc_cluster_group"] = dc_cluster_groupNestedMap
+		}
+		if data.VoltstackClusterAr.DefaultStorage != nil {
+			voltstack_cluster_arMap["default_storage"] = map[string]interface{}{}
+		}
+		if data.VoltstackClusterAr.ForwardProxyAllowAll != nil {
+			voltstack_cluster_arMap["forward_proxy_allow_all"] = map[string]interface{}{}
+		}
+		if data.VoltstackClusterAr.GlobalNetworkList != nil {
+			global_network_listNestedMap := make(map[string]interface{})
+			voltstack_cluster_arMap["global_network_list"] = global_network_listNestedMap
+		}
+		if data.VoltstackClusterAr.K8SCluster != nil {
+			k8s_clusterNestedMap := make(map[string]interface{})
+			if !data.VoltstackClusterAr.K8SCluster.Name.IsNull() && !data.VoltstackClusterAr.K8SCluster.Name.IsUnknown() {
+				k8s_clusterNestedMap["name"] = data.VoltstackClusterAr.K8SCluster.Name.ValueString()
+			}
+			if !data.VoltstackClusterAr.K8SCluster.Namespace.IsNull() && !data.VoltstackClusterAr.K8SCluster.Namespace.IsUnknown() {
+				k8s_clusterNestedMap["namespace"] = data.VoltstackClusterAr.K8SCluster.Namespace.ValueString()
+			}
+			if !data.VoltstackClusterAr.K8SCluster.Tenant.IsNull() && !data.VoltstackClusterAr.K8SCluster.Tenant.IsUnknown() {
+				k8s_clusterNestedMap["tenant"] = data.VoltstackClusterAr.K8SCluster.Tenant.ValueString()
+			}
+			voltstack_cluster_arMap["k8s_cluster"] = k8s_clusterNestedMap
+		}
+		if data.VoltstackClusterAr.NoDcClusterGroup != nil {
+			voltstack_cluster_arMap["no_dc_cluster_group"] = map[string]interface{}{}
+		}
+		if data.VoltstackClusterAr.NoForwardProxy != nil {
+			voltstack_cluster_arMap["no_forward_proxy"] = map[string]interface{}{}
+		}
+		if data.VoltstackClusterAr.NoGlobalNetwork != nil {
+			voltstack_cluster_arMap["no_global_network"] = map[string]interface{}{}
+		}
+		if data.VoltstackClusterAr.NoK8SCluster != nil {
+			voltstack_cluster_arMap["no_k8s_cluster"] = map[string]interface{}{}
+		}
+		if data.VoltstackClusterAr.NoNetworkPolicy != nil {
+			voltstack_cluster_arMap["no_network_policy"] = map[string]interface{}{}
+		}
+		if data.VoltstackClusterAr.NoOutsideStaticRoutes != nil {
+			voltstack_cluster_arMap["no_outside_static_routes"] = map[string]interface{}{}
+		}
+		if data.VoltstackClusterAr.Node != nil {
+			nodeNestedMap := make(map[string]interface{})
+			if !data.VoltstackClusterAr.Node.FaultDomain.IsNull() && !data.VoltstackClusterAr.Node.FaultDomain.IsUnknown() {
+				nodeNestedMap["fault_domain"] = data.VoltstackClusterAr.Node.FaultDomain.ValueInt64()
+			}
+			if !data.VoltstackClusterAr.Node.NodeNumber.IsNull() && !data.VoltstackClusterAr.Node.NodeNumber.IsUnknown() {
+				nodeNestedMap["node_number"] = data.VoltstackClusterAr.Node.NodeNumber.ValueInt64()
+			}
+			if !data.VoltstackClusterAr.Node.UpdateDomain.IsNull() && !data.VoltstackClusterAr.Node.UpdateDomain.IsUnknown() {
+				nodeNestedMap["update_domain"] = data.VoltstackClusterAr.Node.UpdateDomain.ValueInt64()
+			}
+			voltstack_cluster_arMap["node"] = nodeNestedMap
+		}
+		if data.VoltstackClusterAr.OutsideStaticRoutes != nil {
+			outside_static_routesNestedMap := make(map[string]interface{})
+			voltstack_cluster_arMap["outside_static_routes"] = outside_static_routesNestedMap
+		}
+		if data.VoltstackClusterAr.SmConnectionPublicIP != nil {
+			voltstack_cluster_arMap["sm_connection_public_ip"] = map[string]interface{}{}
+		}
+		if data.VoltstackClusterAr.SmConnectionPvtIP != nil {
+			voltstack_cluster_arMap["sm_connection_pvt_ip"] = map[string]interface{}{}
+		}
+		if data.VoltstackClusterAr.StorageClassList != nil {
+			storage_class_listNestedMap := make(map[string]interface{})
+			voltstack_cluster_arMap["storage_class_list"] = storage_class_listNestedMap
+		}
+		apiResource.Spec["voltstack_cluster_ar"] = voltstack_cluster_arMap
+	}
+	if !data.Address.IsNull() && !data.Address.IsUnknown() {
+		apiResource.Spec["address"] = data.Address.ValueString()
+	}
+	if !data.AlternateRegion.IsNull() && !data.AlternateRegion.IsUnknown() {
+		apiResource.Spec["alternate_region"] = data.AlternateRegion.ValueString()
+	}
+	if !data.AzureRegion.IsNull() && !data.AzureRegion.IsUnknown() {
+		apiResource.Spec["azure_region"] = data.AzureRegion.ValueString()
+	}
+	if !data.DiskSize.IsNull() && !data.DiskSize.IsUnknown() {
+		apiResource.Spec["disk_size"] = data.DiskSize.ValueInt64()
+	}
+	if !data.MachineType.IsNull() && !data.MachineType.IsUnknown() {
+		apiResource.Spec["machine_type"] = data.MachineType.ValueString()
+	}
+	if !data.NodesPerAz.IsNull() && !data.NodesPerAz.IsUnknown() {
+		apiResource.Spec["nodes_per_az"] = data.NodesPerAz.ValueInt64()
+	}
+	if !data.ResourceGroup.IsNull() && !data.ResourceGroup.IsUnknown() {
+		apiResource.Spec["resource_group"] = data.ResourceGroup.ValueString()
+	}
+	if !data.SSHKey.IsNull() && !data.SSHKey.IsUnknown() {
+		apiResource.Spec["ssh_key"] = data.SSHKey.ValueString()
+	}
+	if !data.TotalNodes.IsNull() && !data.TotalNodes.IsUnknown() {
+		apiResource.Spec["total_nodes"] = data.TotalNodes.ValueInt64()
+	}
+
+
 	updated, err := r.client.UpdateAzureVNETSite(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update AzureVNETSite: %s", err))
@@ -5024,6 +6663,44 @@ func (r *AzureVNETSiteResource) Update(ctx context.Context, req resource.UpdateR
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
+	if v, ok := updated.Spec["address"].(string); ok && v != "" {
+		data.Address = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["alternate_region"].(string); ok && v != "" {
+		data.AlternateRegion = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["azure_region"].(string); ok && v != "" {
+		data.AzureRegion = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["disk_size"].(float64); ok {
+		data.DiskSize = types.Int64Value(int64(v))
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["machine_type"].(string); ok && v != "" {
+		data.MachineType = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["nodes_per_az"].(float64); ok {
+		data.NodesPerAz = types.Int64Value(int64(v))
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["resource_group"].(string); ok && v != "" {
+		data.ResourceGroup = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["ssh_key"].(string); ok && v != "" {
+		data.SSHKey = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["total_nodes"].(float64); ok {
+		data.TotalNodes = types.Int64Value(int64(v))
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -5036,6 +6713,7 @@ func (r *AzureVNETSiteResource) Update(ctx context.Context, req resource.UpdateR
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -5062,6 +6740,15 @@ func (r *AzureVNETSiteResource) Delete(ctx context.Context, req resource.DeleteR
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "AzureVNETSite already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "AzureVNETSite delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

@@ -10,13 +10,8 @@ import (
 
 // OriginPool represents a F5XC OriginPool
 type OriginPool struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     OriginPoolSpec `json:"spec"`
-}
-
-// OriginPoolSpec defines the specification for OriginPool
-type OriginPoolSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateOriginPool creates a new OriginPool

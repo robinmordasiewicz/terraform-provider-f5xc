@@ -10,13 +10,8 @@ import (
 
 // NatPolicy represents a F5XC NatPolicy
 type NatPolicy struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     NatPolicySpec `json:"spec"`
-}
-
-// NatPolicySpec defines the specification for NatPolicy
-type NatPolicySpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateNatPolicy creates a new NatPolicy

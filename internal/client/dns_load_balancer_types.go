@@ -10,19 +10,14 @@ import (
 
 // DNSLoadBalancer represents a F5XC DNSLoadBalancer
 type DNSLoadBalancer struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     DNSLoadBalancerSpec `json:"spec"`
-}
-
-// DNSLoadBalancerSpec defines the specification for DNSLoadBalancer
-type DNSLoadBalancerSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateDNSLoadBalancer creates a new DNSLoadBalancer
 func (c *Client) CreateDNSLoadBalancer(ctx context.Context, resource *DNSLoadBalancer) (*DNSLoadBalancer, error) {
 	var result DNSLoadBalancer
-	path := fmt.Sprintf("/api/config/namespaces/%s/dns_load_balancers", resource.Metadata.Namespace)
+	path := fmt.Sprintf("/api/config/dns/namespaces/%s/dns_load_balancers", resource.Metadata.Namespace)
 	err := c.Post(ctx, path, resource, &result)
 	return &result, err
 }
@@ -30,7 +25,7 @@ func (c *Client) CreateDNSLoadBalancer(ctx context.Context, resource *DNSLoadBal
 // GetDNSLoadBalancer retrieves a DNSLoadBalancer
 func (c *Client) GetDNSLoadBalancer(ctx context.Context, namespace, name string) (*DNSLoadBalancer, error) {
 	var result DNSLoadBalancer
-	path := fmt.Sprintf("/api/config/namespaces/%s/dns_load_balancers/%s", namespace, name)
+	path := fmt.Sprintf("/api/config/dns/namespaces/%s/dns_load_balancers/%s", namespace, name)
 	err := c.Get(ctx, path, &result)
 	return &result, err
 }
@@ -38,13 +33,13 @@ func (c *Client) GetDNSLoadBalancer(ctx context.Context, namespace, name string)
 // UpdateDNSLoadBalancer updates a DNSLoadBalancer
 func (c *Client) UpdateDNSLoadBalancer(ctx context.Context, resource *DNSLoadBalancer) (*DNSLoadBalancer, error) {
 	var result DNSLoadBalancer
-	path := fmt.Sprintf("/api/config/namespaces/%s/dns_load_balancers/%s", resource.Metadata.Namespace, resource.Metadata.Name)
+	path := fmt.Sprintf("/api/config/dns/namespaces/%s/dns_load_balancers/%s", resource.Metadata.Namespace, resource.Metadata.Name)
 	err := c.Put(ctx, path, resource, &result)
 	return &result, err
 }
 
 // DeleteDNSLoadBalancer deletes a DNSLoadBalancer
 func (c *Client) DeleteDNSLoadBalancer(ctx context.Context, namespace, name string) error {
-	path := fmt.Sprintf("/api/config/namespaces/%s/dns_load_balancers/%s", namespace, name)
+	path := fmt.Sprintf("/api/config/dns/namespaces/%s/dns_load_balancers/%s", namespace, name)
 	return c.Delete(ctx, path)
 }

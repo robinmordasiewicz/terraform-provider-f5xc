@@ -10,13 +10,8 @@ import (
 
 // Srv6NetworkSlice represents a F5XC Srv6NetworkSlice
 type Srv6NetworkSlice struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     Srv6NetworkSliceSpec `json:"spec"`
-}
-
-// Srv6NetworkSliceSpec defines the specification for Srv6NetworkSlice
-type Srv6NetworkSliceSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateSrv6NetworkSlice creates a new Srv6NetworkSlice

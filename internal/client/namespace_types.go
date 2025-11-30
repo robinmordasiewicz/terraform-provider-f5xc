@@ -10,19 +10,15 @@ import (
 
 // Namespace represents a F5XC Namespace
 type Namespace struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     NamespaceSpec `json:"spec"`
-}
-
-// NamespaceSpec defines the specification for Namespace
-type NamespaceSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateNamespace creates a new Namespace
 func (c *Client) CreateNamespace(ctx context.Context, resource *Namespace) (*Namespace, error) {
 	var result Namespace
-	path := fmt.Sprintf("/api/config/namespaces/%s/namespaces", resource.Metadata.Namespace)
+	path := "/api/web/namespaces"
+	_ = resource.Metadata.Namespace // Namespace not required in API path for this resource
 	err := c.Post(ctx, path, resource, &result)
 	return &result, err
 }
@@ -30,7 +26,8 @@ func (c *Client) CreateNamespace(ctx context.Context, resource *Namespace) (*Nam
 // GetNamespace retrieves a Namespace
 func (c *Client) GetNamespace(ctx context.Context, namespace, name string) (*Namespace, error) {
 	var result Namespace
-	path := fmt.Sprintf("/api/config/namespaces/%s/namespaces/%s", namespace, name)
+	path := fmt.Sprintf("/api/web/namespaces/%s", name)
+	_ = namespace // Namespace not required in API path for this resource
 	err := c.Get(ctx, path, &result)
 	return &result, err
 }
@@ -38,13 +35,15 @@ func (c *Client) GetNamespace(ctx context.Context, namespace, name string) (*Nam
 // UpdateNamespace updates a Namespace
 func (c *Client) UpdateNamespace(ctx context.Context, resource *Namespace) (*Namespace, error) {
 	var result Namespace
-	path := fmt.Sprintf("/api/config/namespaces/%s/namespaces/%s", resource.Metadata.Namespace, resource.Metadata.Name)
+	path := fmt.Sprintf("/api/web/namespaces/%s", resource.Metadata.Name)
+	_ = resource.Metadata.Namespace // Namespace not required in API path for this resource
 	err := c.Put(ctx, path, resource, &result)
 	return &result, err
 }
 
 // DeleteNamespace deletes a Namespace
 func (c *Client) DeleteNamespace(ctx context.Context, namespace, name string) error {
-	path := fmt.Sprintf("/api/config/namespaces/%s/namespaces/%s", namespace, name)
+	path := fmt.Sprintf("/api/web/namespaces/%s", name)
+	_ = namespace // Namespace not required in API path for this resource
 	return c.Delete(ctx, path)
 }

@@ -315,7 +315,7 @@ func (r *K8SClusterRoleBindingResource) Create(ctx context.Context, req resource
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.K8SClusterRoleBindingSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -340,6 +340,46 @@ func (r *K8SClusterRoleBindingResource) Create(ctx context.Context, req resource
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.K8SClusterRole != nil {
+		k8s_cluster_roleMap := make(map[string]interface{})
+		if !data.K8SClusterRole.Name.IsNull() && !data.K8SClusterRole.Name.IsUnknown() {
+			k8s_cluster_roleMap["name"] = data.K8SClusterRole.Name.ValueString()
+		}
+		if !data.K8SClusterRole.Namespace.IsNull() && !data.K8SClusterRole.Namespace.IsUnknown() {
+			k8s_cluster_roleMap["namespace"] = data.K8SClusterRole.Namespace.ValueString()
+		}
+		if !data.K8SClusterRole.Tenant.IsNull() && !data.K8SClusterRole.Tenant.IsUnknown() {
+			k8s_cluster_roleMap["tenant"] = data.K8SClusterRole.Tenant.ValueString()
+		}
+		apiResource.Spec["k8s_cluster_role"] = k8s_cluster_roleMap
+	}
+	if len(data.Subjects) > 0 {
+		var subjectsList []map[string]interface{}
+		for _, item := range data.Subjects {
+			itemMap := make(map[string]interface{})
+			if !item.Group.IsNull() && !item.Group.IsUnknown() {
+				itemMap["group"] = item.Group.ValueString()
+			}
+			if item.ServiceAccount != nil {
+				service_accountNestedMap := make(map[string]interface{})
+				if !item.ServiceAccount.Name.IsNull() && !item.ServiceAccount.Name.IsUnknown() {
+					service_accountNestedMap["name"] = item.ServiceAccount.Name.ValueString()
+				}
+				if !item.ServiceAccount.Namespace.IsNull() && !item.ServiceAccount.Namespace.IsUnknown() {
+					service_accountNestedMap["namespace"] = item.ServiceAccount.Namespace.ValueString()
+				}
+				itemMap["service_account"] = service_accountNestedMap
+			}
+			if !item.User.IsNull() && !item.User.IsUnknown() {
+				itemMap["user"] = item.User.ValueString()
+			}
+			subjectsList = append(subjectsList, itemMap)
+		}
+		apiResource.Spec["subjects"] = subjectsList
+	}
+
+
 	created, err := r.client.CreateK8SClusterRoleBinding(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create K8SClusterRoleBinding: %s", err))
@@ -348,8 +388,13 @@ func (r *K8SClusterRoleBindingResource) Create(ctx context.Context, req resource
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created K8SClusterRoleBinding resource")
@@ -428,9 +473,88 @@ func (r *K8SClusterRoleBindingResource) Read(ctx context.Context, req resource.R
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if blockData, ok := apiResource.Spec["k8s_cluster_role"].(map[string]interface{}); ok && (isImport || data.K8SClusterRole != nil) {
+		data.K8SClusterRole = &K8SClusterRoleBindingK8SClusterRoleModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if listData, ok := apiResource.Spec["subjects"].([]interface{}); ok && len(listData) > 0 {
+		var subjectsList []K8SClusterRoleBindingSubjectsModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				subjectsList = append(subjectsList, K8SClusterRoleBindingSubjectsModel{
+					Group: func() types.String {
+						if v, ok := itemMap["group"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					ServiceAccount: func() *K8SClusterRoleBindingSubjectsServiceAccountModel {
+						if nestedMap, ok := itemMap["service_account"].(map[string]interface{}); ok {
+							return &K8SClusterRoleBindingSubjectsServiceAccountModel{
+								Name: func() types.String {
+									if v, ok := nestedMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := nestedMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					User: func() types.String {
+						if v, ok := itemMap["user"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.Subjects = subjectsList
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -456,7 +580,7 @@ func (r *K8SClusterRoleBindingResource) Update(ctx context.Context, req resource
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.K8SClusterRoleBindingSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -481,6 +605,46 @@ func (r *K8SClusterRoleBindingResource) Update(ctx context.Context, req resource
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.K8SClusterRole != nil {
+		k8s_cluster_roleMap := make(map[string]interface{})
+		if !data.K8SClusterRole.Name.IsNull() && !data.K8SClusterRole.Name.IsUnknown() {
+			k8s_cluster_roleMap["name"] = data.K8SClusterRole.Name.ValueString()
+		}
+		if !data.K8SClusterRole.Namespace.IsNull() && !data.K8SClusterRole.Namespace.IsUnknown() {
+			k8s_cluster_roleMap["namespace"] = data.K8SClusterRole.Namespace.ValueString()
+		}
+		if !data.K8SClusterRole.Tenant.IsNull() && !data.K8SClusterRole.Tenant.IsUnknown() {
+			k8s_cluster_roleMap["tenant"] = data.K8SClusterRole.Tenant.ValueString()
+		}
+		apiResource.Spec["k8s_cluster_role"] = k8s_cluster_roleMap
+	}
+	if len(data.Subjects) > 0 {
+		var subjectsList []map[string]interface{}
+		for _, item := range data.Subjects {
+			itemMap := make(map[string]interface{})
+			if !item.Group.IsNull() && !item.Group.IsUnknown() {
+				itemMap["group"] = item.Group.ValueString()
+			}
+			if item.ServiceAccount != nil {
+				service_accountNestedMap := make(map[string]interface{})
+				if !item.ServiceAccount.Name.IsNull() && !item.ServiceAccount.Name.IsUnknown() {
+					service_accountNestedMap["name"] = item.ServiceAccount.Name.ValueString()
+				}
+				if !item.ServiceAccount.Namespace.IsNull() && !item.ServiceAccount.Namespace.IsUnknown() {
+					service_accountNestedMap["namespace"] = item.ServiceAccount.Namespace.ValueString()
+				}
+				itemMap["service_account"] = service_accountNestedMap
+			}
+			if !item.User.IsNull() && !item.User.IsUnknown() {
+				itemMap["user"] = item.User.ValueString()
+			}
+			subjectsList = append(subjectsList, itemMap)
+		}
+		apiResource.Spec["subjects"] = subjectsList
+	}
+
+
 	updated, err := r.client.UpdateK8SClusterRoleBinding(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update K8SClusterRoleBinding: %s", err))
@@ -489,6 +653,8 @@ func (r *K8SClusterRoleBindingResource) Update(ctx context.Context, req resource
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -501,6 +667,7 @@ func (r *K8SClusterRoleBindingResource) Update(ctx context.Context, req resource
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -527,6 +694,15 @@ func (r *K8SClusterRoleBindingResource) Delete(ctx context.Context, req resource
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "K8SClusterRoleBinding already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "K8SClusterRoleBinding delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

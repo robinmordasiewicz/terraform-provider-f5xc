@@ -10,13 +10,8 @@ import (
 
 // AppFirewall represents a F5XC AppFirewall
 type AppFirewall struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     AppFirewallSpec `json:"spec"`
-}
-
-// AppFirewallSpec defines the specification for AppFirewall
-type AppFirewallSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateAppFirewall creates a new AppFirewall

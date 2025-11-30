@@ -367,7 +367,7 @@ func (r *SubnetResource) Create(ctx context.Context, req resource.CreateRequest,
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.SubnetSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -392,6 +392,65 @@ func (r *SubnetResource) Create(ctx context.Context, req resource.CreateRequest,
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.ConnectToLayer2 != nil {
+		connect_to_layer2Map := make(map[string]interface{})
+		if data.ConnectToLayer2.Layer2IntfRef != nil {
+			layer2_intf_refNestedMap := make(map[string]interface{})
+			if !data.ConnectToLayer2.Layer2IntfRef.Name.IsNull() && !data.ConnectToLayer2.Layer2IntfRef.Name.IsUnknown() {
+				layer2_intf_refNestedMap["name"] = data.ConnectToLayer2.Layer2IntfRef.Name.ValueString()
+			}
+			if !data.ConnectToLayer2.Layer2IntfRef.Namespace.IsNull() && !data.ConnectToLayer2.Layer2IntfRef.Namespace.IsUnknown() {
+				layer2_intf_refNestedMap["namespace"] = data.ConnectToLayer2.Layer2IntfRef.Namespace.ValueString()
+			}
+			if !data.ConnectToLayer2.Layer2IntfRef.Tenant.IsNull() && !data.ConnectToLayer2.Layer2IntfRef.Tenant.IsUnknown() {
+				layer2_intf_refNestedMap["tenant"] = data.ConnectToLayer2.Layer2IntfRef.Tenant.ValueString()
+			}
+			connect_to_layer2Map["layer2_intf_ref"] = layer2_intf_refNestedMap
+		}
+		apiResource.Spec["connect_to_layer2"] = connect_to_layer2Map
+	}
+	if data.ConnectToSLO != nil {
+		connect_to_sloMap := make(map[string]interface{})
+		apiResource.Spec["connect_to_slo"] = connect_to_sloMap
+	}
+	if data.IsolatedNw != nil {
+		isolated_nwMap := make(map[string]interface{})
+		apiResource.Spec["isolated_nw"] = isolated_nwMap
+	}
+	if len(data.SiteSubnetParams) > 0 {
+		var site_subnet_paramsList []map[string]interface{}
+		for _, item := range data.SiteSubnetParams {
+			itemMap := make(map[string]interface{})
+			if item.Dhcp != nil {
+				itemMap["dhcp"] = map[string]interface{}{}
+			}
+			if item.Site != nil {
+				siteNestedMap := make(map[string]interface{})
+				if !item.Site.Name.IsNull() && !item.Site.Name.IsUnknown() {
+					siteNestedMap["name"] = item.Site.Name.ValueString()
+				}
+				if !item.Site.Namespace.IsNull() && !item.Site.Namespace.IsUnknown() {
+					siteNestedMap["namespace"] = item.Site.Namespace.ValueString()
+				}
+				if !item.Site.Tenant.IsNull() && !item.Site.Tenant.IsUnknown() {
+					siteNestedMap["tenant"] = item.Site.Tenant.ValueString()
+				}
+				itemMap["site"] = siteNestedMap
+			}
+			if item.StaticIP != nil {
+				itemMap["static_ip"] = map[string]interface{}{}
+			}
+			if item.SubnetDhcpServerParams != nil {
+				subnet_dhcp_server_paramsNestedMap := make(map[string]interface{})
+				itemMap["subnet_dhcp_server_params"] = subnet_dhcp_server_paramsNestedMap
+			}
+			site_subnet_paramsList = append(site_subnet_paramsList, itemMap)
+		}
+		apiResource.Spec["site_subnet_params"] = site_subnet_paramsList
+	}
+
+
 	created, err := r.client.CreateSubnet(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create Subnet: %s", err))
@@ -400,8 +459,13 @@ func (r *SubnetResource) Create(ctx context.Context, req resource.CreateRequest,
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created Subnet resource")
@@ -480,9 +544,94 @@ func (r *SubnetResource) Read(ctx context.Context, req resource.ReadRequest, res
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if _, ok := apiResource.Spec["connect_to_layer2"].(map[string]interface{}); ok && isImport && data.ConnectToLayer2 == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ConnectToLayer2 = &SubnetConnectToLayer2Model{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["connect_to_slo"].(map[string]interface{}); ok && isImport && data.ConnectToSLO == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ConnectToSLO = &SubnetEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["isolated_nw"].(map[string]interface{}); ok && isImport && data.IsolatedNw == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.IsolatedNw = &SubnetEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["site_subnet_params"].([]interface{}); ok && len(listData) > 0 {
+		var site_subnet_paramsList []SubnetSiteSubnetParamsModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				site_subnet_paramsList = append(site_subnet_paramsList, SubnetSiteSubnetParamsModel{
+					Dhcp: func() *SubnetEmptyModel {
+						if _, ok := itemMap["dhcp"].(map[string]interface{}); ok {
+							return &SubnetEmptyModel{}
+						}
+						return nil
+					}(),
+					Site: func() *SubnetSiteSubnetParamsSiteModel {
+						if nestedMap, ok := itemMap["site"].(map[string]interface{}); ok {
+							return &SubnetSiteSubnetParamsSiteModel{
+								Name: func() types.String {
+									if v, ok := nestedMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := nestedMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := nestedMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					StaticIP: func() *SubnetEmptyModel {
+						if _, ok := itemMap["static_ip"].(map[string]interface{}); ok {
+							return &SubnetEmptyModel{}
+						}
+						return nil
+					}(),
+					SubnetDhcpServerParams: func() *SubnetSiteSubnetParamsSubnetDhcpServerParamsModel {
+						if _, ok := itemMap["subnet_dhcp_server_params"].(map[string]interface{}); ok {
+							return &SubnetSiteSubnetParamsSubnetDhcpServerParamsModel{
+							}
+						}
+						return nil
+					}(),
+				})
+			}
+		}
+		data.SiteSubnetParams = site_subnet_paramsList
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -508,7 +657,7 @@ func (r *SubnetResource) Update(ctx context.Context, req resource.UpdateRequest,
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.SubnetSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -533,6 +682,65 @@ func (r *SubnetResource) Update(ctx context.Context, req resource.UpdateRequest,
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.ConnectToLayer2 != nil {
+		connect_to_layer2Map := make(map[string]interface{})
+		if data.ConnectToLayer2.Layer2IntfRef != nil {
+			layer2_intf_refNestedMap := make(map[string]interface{})
+			if !data.ConnectToLayer2.Layer2IntfRef.Name.IsNull() && !data.ConnectToLayer2.Layer2IntfRef.Name.IsUnknown() {
+				layer2_intf_refNestedMap["name"] = data.ConnectToLayer2.Layer2IntfRef.Name.ValueString()
+			}
+			if !data.ConnectToLayer2.Layer2IntfRef.Namespace.IsNull() && !data.ConnectToLayer2.Layer2IntfRef.Namespace.IsUnknown() {
+				layer2_intf_refNestedMap["namespace"] = data.ConnectToLayer2.Layer2IntfRef.Namespace.ValueString()
+			}
+			if !data.ConnectToLayer2.Layer2IntfRef.Tenant.IsNull() && !data.ConnectToLayer2.Layer2IntfRef.Tenant.IsUnknown() {
+				layer2_intf_refNestedMap["tenant"] = data.ConnectToLayer2.Layer2IntfRef.Tenant.ValueString()
+			}
+			connect_to_layer2Map["layer2_intf_ref"] = layer2_intf_refNestedMap
+		}
+		apiResource.Spec["connect_to_layer2"] = connect_to_layer2Map
+	}
+	if data.ConnectToSLO != nil {
+		connect_to_sloMap := make(map[string]interface{})
+		apiResource.Spec["connect_to_slo"] = connect_to_sloMap
+	}
+	if data.IsolatedNw != nil {
+		isolated_nwMap := make(map[string]interface{})
+		apiResource.Spec["isolated_nw"] = isolated_nwMap
+	}
+	if len(data.SiteSubnetParams) > 0 {
+		var site_subnet_paramsList []map[string]interface{}
+		for _, item := range data.SiteSubnetParams {
+			itemMap := make(map[string]interface{})
+			if item.Dhcp != nil {
+				itemMap["dhcp"] = map[string]interface{}{}
+			}
+			if item.Site != nil {
+				siteNestedMap := make(map[string]interface{})
+				if !item.Site.Name.IsNull() && !item.Site.Name.IsUnknown() {
+					siteNestedMap["name"] = item.Site.Name.ValueString()
+				}
+				if !item.Site.Namespace.IsNull() && !item.Site.Namespace.IsUnknown() {
+					siteNestedMap["namespace"] = item.Site.Namespace.ValueString()
+				}
+				if !item.Site.Tenant.IsNull() && !item.Site.Tenant.IsUnknown() {
+					siteNestedMap["tenant"] = item.Site.Tenant.ValueString()
+				}
+				itemMap["site"] = siteNestedMap
+			}
+			if item.StaticIP != nil {
+				itemMap["static_ip"] = map[string]interface{}{}
+			}
+			if item.SubnetDhcpServerParams != nil {
+				subnet_dhcp_server_paramsNestedMap := make(map[string]interface{})
+				itemMap["subnet_dhcp_server_params"] = subnet_dhcp_server_paramsNestedMap
+			}
+			site_subnet_paramsList = append(site_subnet_paramsList, itemMap)
+		}
+		apiResource.Spec["site_subnet_params"] = site_subnet_paramsList
+	}
+
+
 	updated, err := r.client.UpdateSubnet(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update Subnet: %s", err))
@@ -541,6 +749,8 @@ func (r *SubnetResource) Update(ctx context.Context, req resource.UpdateRequest,
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -553,6 +763,7 @@ func (r *SubnetResource) Update(ctx context.Context, req resource.UpdateRequest,
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -579,6 +790,15 @@ func (r *SubnetResource) Delete(ctx context.Context, req resource.DeleteRequest,
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "Subnet already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "Subnet delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

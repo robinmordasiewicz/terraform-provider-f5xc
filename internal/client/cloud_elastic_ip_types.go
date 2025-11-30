@@ -10,13 +10,8 @@ import (
 
 // CloudElasticIP represents a F5XC CloudElasticIP
 type CloudElasticIP struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     CloudElasticIPSpec `json:"spec"`
-}
-
-// CloudElasticIPSpec defines the specification for CloudElasticIP
-type CloudElasticIPSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateCloudElasticIP creates a new CloudElasticIP

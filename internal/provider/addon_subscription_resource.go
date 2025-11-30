@@ -80,8 +80,8 @@ type AddonSubscriptionResourceModel struct {
 	Description types.String `tfsdk:"description"`
 	Disable types.Bool `tfsdk:"disable"`
 	Labels types.Map `tfsdk:"labels"`
-	Status types.String `tfsdk:"status"`
 	ID types.String `tfsdk:"id"`
+	Status types.String `tfsdk:"status"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
 	AddonService *AddonSubscriptionAddonServiceModel `tfsdk:"addon_service"`
 	NotificationPreference *AddonSubscriptionNotificationPreferenceModel `tfsdk:"notification_preference"`
@@ -134,12 +134,16 @@ func (r *AddonSubscriptionResource) Schema(ctx context.Context, req resource.Sch
 				Optional: true,
 				ElementType: types.StringType,
 			},
+			"id": schema.StringAttribute{
+				MarkdownDescription: "Unique identifier for the resource.",
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
 			"status": schema.StringAttribute{
 				MarkdownDescription: "Addon Subscription Type. Represents the different states of an addon subscription. - SUBSCRIPTION_PENDING: Subscription Pending Indicates that the subscription is pending enablement. - SUBSCRIPTION_ENABLED: Subscription Enabled Indicates that the subscription is currently enabled and active. - SUBSCRIPTION_DISABLE_PENDING: Subscription Disable Pending Indicates that the addon disable process is pending. - SUBSCRIPTION_DISABLED: Subscription Disabled Indicates that the addon has been disabled. Possible values are `SUBSCRIPTION_PENDING`, `SUBSCRIPTION_ENABLED`, `SUBSCRIPTION_DISABLE_PENDING`, `SUBSCRIPTION_DISABLED`. Defaults to `SUBSCRIPTION_PENDING`.",
 				Optional: true,
-			},
-			"id": schema.StringAttribute{
-				MarkdownDescription: "Unique identifier for the resource.",
 				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
@@ -324,7 +328,7 @@ func (r *AddonSubscriptionResource) Create(ctx context.Context, req resource.Cre
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.AddonSubscriptionSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -349,6 +353,43 @@ func (r *AddonSubscriptionResource) Create(ctx context.Context, req resource.Cre
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.AddonService != nil {
+		addon_serviceMap := make(map[string]interface{})
+		if !data.AddonService.Name.IsNull() && !data.AddonService.Name.IsUnknown() {
+			addon_serviceMap["name"] = data.AddonService.Name.ValueString()
+		}
+		if !data.AddonService.Namespace.IsNull() && !data.AddonService.Namespace.IsUnknown() {
+			addon_serviceMap["namespace"] = data.AddonService.Namespace.ValueString()
+		}
+		if !data.AddonService.Tenant.IsNull() && !data.AddonService.Tenant.IsUnknown() {
+			addon_serviceMap["tenant"] = data.AddonService.Tenant.ValueString()
+		}
+		apiResource.Spec["addon_service"] = addon_serviceMap
+	}
+	if data.NotificationPreference != nil {
+		notification_preferenceMap := make(map[string]interface{})
+		if data.NotificationPreference.Emails != nil {
+			emailsNestedMap := make(map[string]interface{})
+			notification_preferenceMap["emails"] = emailsNestedMap
+		}
+		if data.NotificationPreference.SupportTicketID != nil {
+			support_ticket_idNestedMap := make(map[string]interface{})
+			if !data.NotificationPreference.SupportTicketID.SubscriptionTicketID.IsNull() && !data.NotificationPreference.SupportTicketID.SubscriptionTicketID.IsUnknown() {
+				support_ticket_idNestedMap["subscription_ticket_id"] = data.NotificationPreference.SupportTicketID.SubscriptionTicketID.ValueString()
+			}
+			if !data.NotificationPreference.SupportTicketID.UnsubscriptionTicketID.IsNull() && !data.NotificationPreference.SupportTicketID.UnsubscriptionTicketID.IsUnknown() {
+				support_ticket_idNestedMap["unsubscription_ticket_id"] = data.NotificationPreference.SupportTicketID.UnsubscriptionTicketID.ValueString()
+			}
+			notification_preferenceMap["support_ticket_id"] = support_ticket_idNestedMap
+		}
+		apiResource.Spec["notification_preference"] = notification_preferenceMap
+	}
+	if !data.Status.IsNull() && !data.Status.IsUnknown() {
+		apiResource.Spec["status"] = data.Status.ValueString()
+	}
+
+
 	created, err := r.client.CreateAddonSubscription(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create AddonSubscription: %s", err))
@@ -357,8 +398,17 @@ func (r *AddonSubscriptionResource) Create(ctx context.Context, req resource.Cre
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+	if v, ok := created.Spec["status"].(string); ok && v != "" {
+		data.Status = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created AddonSubscription resource")
@@ -437,9 +487,57 @@ func (r *AddonSubscriptionResource) Read(ctx context.Context, req resource.ReadR
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if blockData, ok := apiResource.Spec["addon_service"].(map[string]interface{}); ok && (isImport || data.AddonService != nil) {
+		data.AddonService = &AddonSubscriptionAddonServiceModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["notification_preference"].(map[string]interface{}); ok && isImport && data.NotificationPreference == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NotificationPreference = &AddonSubscriptionNotificationPreferenceModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["status"].(string); ok && v != "" {
+		data.Status = types.StringValue(v)
+	} else {
+		data.Status = types.StringNull()
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -465,7 +563,7 @@ func (r *AddonSubscriptionResource) Update(ctx context.Context, req resource.Upd
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.AddonSubscriptionSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -490,6 +588,43 @@ func (r *AddonSubscriptionResource) Update(ctx context.Context, req resource.Upd
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.AddonService != nil {
+		addon_serviceMap := make(map[string]interface{})
+		if !data.AddonService.Name.IsNull() && !data.AddonService.Name.IsUnknown() {
+			addon_serviceMap["name"] = data.AddonService.Name.ValueString()
+		}
+		if !data.AddonService.Namespace.IsNull() && !data.AddonService.Namespace.IsUnknown() {
+			addon_serviceMap["namespace"] = data.AddonService.Namespace.ValueString()
+		}
+		if !data.AddonService.Tenant.IsNull() && !data.AddonService.Tenant.IsUnknown() {
+			addon_serviceMap["tenant"] = data.AddonService.Tenant.ValueString()
+		}
+		apiResource.Spec["addon_service"] = addon_serviceMap
+	}
+	if data.NotificationPreference != nil {
+		notification_preferenceMap := make(map[string]interface{})
+		if data.NotificationPreference.Emails != nil {
+			emailsNestedMap := make(map[string]interface{})
+			notification_preferenceMap["emails"] = emailsNestedMap
+		}
+		if data.NotificationPreference.SupportTicketID != nil {
+			support_ticket_idNestedMap := make(map[string]interface{})
+			if !data.NotificationPreference.SupportTicketID.SubscriptionTicketID.IsNull() && !data.NotificationPreference.SupportTicketID.SubscriptionTicketID.IsUnknown() {
+				support_ticket_idNestedMap["subscription_ticket_id"] = data.NotificationPreference.SupportTicketID.SubscriptionTicketID.ValueString()
+			}
+			if !data.NotificationPreference.SupportTicketID.UnsubscriptionTicketID.IsNull() && !data.NotificationPreference.SupportTicketID.UnsubscriptionTicketID.IsUnknown() {
+				support_ticket_idNestedMap["unsubscription_ticket_id"] = data.NotificationPreference.SupportTicketID.UnsubscriptionTicketID.ValueString()
+			}
+			notification_preferenceMap["support_ticket_id"] = support_ticket_idNestedMap
+		}
+		apiResource.Spec["notification_preference"] = notification_preferenceMap
+	}
+	if !data.Status.IsNull() && !data.Status.IsUnknown() {
+		apiResource.Spec["status"] = data.Status.ValueString()
+	}
+
+
 	updated, err := r.client.UpdateAddonSubscription(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update AddonSubscription: %s", err))
@@ -498,6 +633,12 @@ func (r *AddonSubscriptionResource) Update(ctx context.Context, req resource.Upd
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
+	if v, ok := updated.Spec["status"].(string); ok && v != "" {
+		data.Status = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -510,6 +651,7 @@ func (r *AddonSubscriptionResource) Update(ctx context.Context, req resource.Upd
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -536,6 +678,15 @@ func (r *AddonSubscriptionResource) Delete(ctx context.Context, req resource.Del
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "AddonSubscription already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "AddonSubscription delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

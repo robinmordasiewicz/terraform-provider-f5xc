@@ -77,7 +77,7 @@ type InfraprotectFirewallRuleProtocolIcmp6Model struct {
 
 // InfraprotectFirewallRuleProtocolTCPModel represents protocol_tcp block
 type InfraprotectFirewallRuleProtocolTCPModel struct {
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	DestinationPortRange types.String `tfsdk:"destination_port_range"`
 	SourcePortRange types.String `tfsdk:"source_port_range"`
 	DestinationPortAll *InfraprotectFirewallRuleEmptyModel `tfsdk:"destination_port_all"`
@@ -86,7 +86,7 @@ type InfraprotectFirewallRuleProtocolTCPModel struct {
 
 // InfraprotectFirewallRuleProtocolUDPModel represents protocol_udp block
 type InfraprotectFirewallRuleProtocolUDPModel struct {
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	DestinationPortRange types.String `tfsdk:"destination_port_range"`
 	SourcePortRange types.String `tfsdk:"source_port_range"`
 	DestinationPortAll *InfraprotectFirewallRuleEmptyModel `tfsdk:"destination_port_all"`
@@ -98,11 +98,11 @@ type InfraprotectFirewallRuleResourceModel struct {
 	Namespace types.String `tfsdk:"namespace"`
 	Annotations types.Map `tfsdk:"annotations"`
 	Description types.String `tfsdk:"description"`
-	DestinationPrefixSingle types.String `tfsdk:"destination_prefix_single"`
 	Disable types.Bool `tfsdk:"disable"`
 	Labels types.Map `tfsdk:"labels"`
-	SourcePrefixSingle types.String `tfsdk:"source_prefix_single"`
 	ID types.String `tfsdk:"id"`
+	DestinationPrefixSingle types.String `tfsdk:"destination_prefix_single"`
+	SourcePrefixSingle types.String `tfsdk:"source_prefix_single"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
 	ActionAllow *InfraprotectFirewallRuleEmptyModel `tfsdk:"action_allow"`
 	ActionDeny *InfraprotectFirewallRuleEmptyModel `tfsdk:"action_deny"`
@@ -163,10 +163,6 @@ func (r *InfraprotectFirewallRuleResource) Schema(ctx context.Context, req resou
 				MarkdownDescription: "Human readable description for the object.",
 				Optional: true,
 			},
-			"destination_prefix_single": schema.StringAttribute{
-				MarkdownDescription: "Prefix. Prefix",
-				Optional: true,
-			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
 				Optional: true,
@@ -176,12 +172,24 @@ func (r *InfraprotectFirewallRuleResource) Schema(ctx context.Context, req resou
 				Optional: true,
 				ElementType: types.StringType,
 			},
+			"id": schema.StringAttribute{
+				MarkdownDescription: "Unique identifier for the resource.",
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"destination_prefix_single": schema.StringAttribute{
+				MarkdownDescription: "Prefix. Prefix",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
 			"source_prefix_single": schema.StringAttribute{
 				MarkdownDescription: "Prefix. Prefix",
 				Optional: true,
-			},
-			"id": schema.StringAttribute{
-				MarkdownDescription: "Unique identifier for the resource.",
 				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
@@ -312,7 +320,7 @@ func (r *InfraprotectFirewallRuleResource) Schema(ctx context.Context, req resou
 			"protocol_tcp": schema.SingleNestedBlock{
 				MarkdownDescription: "TCP Protocol. x-required TCP Protocol",
 				Attributes: map[string]schema.Attribute{
-					"description": schema.StringAttribute{
+					"description_spec": schema.StringAttribute{
 						MarkdownDescription: "Description. Description",
 						Optional: true,
 					},
@@ -338,7 +346,7 @@ func (r *InfraprotectFirewallRuleResource) Schema(ctx context.Context, req resou
 			"protocol_udp": schema.SingleNestedBlock{
 				MarkdownDescription: "UDP Protocol. x-required UDP Protocol",
 				Attributes: map[string]schema.Attribute{
-					"description": schema.StringAttribute{
+					"description_spec": schema.StringAttribute{
 						MarkdownDescription: "Description. Description",
 						Optional: true,
 					},
@@ -498,7 +506,7 @@ func (r *InfraprotectFirewallRuleResource) Create(ctx context.Context, req resou
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.InfraprotectFirewallRuleSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -523,6 +531,175 @@ func (r *InfraprotectFirewallRuleResource) Create(ctx context.Context, req resou
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.ActionAllow != nil {
+		action_allowMap := make(map[string]interface{})
+		apiResource.Spec["action_allow"] = action_allowMap
+	}
+	if data.ActionDeny != nil {
+		action_denyMap := make(map[string]interface{})
+		apiResource.Spec["action_deny"] = action_denyMap
+	}
+	if data.DestinationPrefixAll != nil {
+		destination_prefix_allMap := make(map[string]interface{})
+		apiResource.Spec["destination_prefix_all"] = destination_prefix_allMap
+	}
+	if data.FragmentsAllow != nil {
+		fragments_allowMap := make(map[string]interface{})
+		apiResource.Spec["fragments_allow"] = fragments_allowMap
+	}
+	if data.FragmentsDeny != nil {
+		fragments_denyMap := make(map[string]interface{})
+		apiResource.Spec["fragments_deny"] = fragments_denyMap
+	}
+	if data.ProtocolAh != nil {
+		protocol_ahMap := make(map[string]interface{})
+		apiResource.Spec["protocol_ah"] = protocol_ahMap
+	}
+	if data.ProtocolAll != nil {
+		protocol_allMap := make(map[string]interface{})
+		apiResource.Spec["protocol_all"] = protocol_allMap
+	}
+	if data.ProtocolEsp != nil {
+		protocol_espMap := make(map[string]interface{})
+		apiResource.Spec["protocol_esp"] = protocol_espMap
+	}
+	if data.ProtocolGre != nil {
+		protocol_greMap := make(map[string]interface{})
+		apiResource.Spec["protocol_gre"] = protocol_greMap
+	}
+	if data.ProtocolIcmp != nil {
+		protocol_icmpMap := make(map[string]interface{})
+		if !data.ProtocolIcmp.EchoReply.IsNull() && !data.ProtocolIcmp.EchoReply.IsUnknown() {
+			protocol_icmpMap["echo_reply"] = data.ProtocolIcmp.EchoReply.ValueBool()
+		}
+		if !data.ProtocolIcmp.EchoRequest.IsNull() && !data.ProtocolIcmp.EchoRequest.IsUnknown() {
+			protocol_icmpMap["echo_request"] = data.ProtocolIcmp.EchoRequest.ValueBool()
+		}
+		if !data.ProtocolIcmp.ParameterProblem.IsNull() && !data.ProtocolIcmp.ParameterProblem.IsUnknown() {
+			protocol_icmpMap["parameter_problem"] = data.ProtocolIcmp.ParameterProblem.ValueBool()
+		}
+		if !data.ProtocolIcmp.Redirect.IsNull() && !data.ProtocolIcmp.Redirect.IsUnknown() {
+			protocol_icmpMap["redirect"] = data.ProtocolIcmp.Redirect.ValueBool()
+		}
+		if !data.ProtocolIcmp.SourceQuench.IsNull() && !data.ProtocolIcmp.SourceQuench.IsUnknown() {
+			protocol_icmpMap["source_quench"] = data.ProtocolIcmp.SourceQuench.ValueBool()
+		}
+		if !data.ProtocolIcmp.TimeExceeded.IsNull() && !data.ProtocolIcmp.TimeExceeded.IsUnknown() {
+			protocol_icmpMap["time_exceeded"] = data.ProtocolIcmp.TimeExceeded.ValueBool()
+		}
+		if !data.ProtocolIcmp.Unreachable.IsNull() && !data.ProtocolIcmp.Unreachable.IsUnknown() {
+			protocol_icmpMap["unreachable"] = data.ProtocolIcmp.Unreachable.ValueBool()
+		}
+		apiResource.Spec["protocol_icmp"] = protocol_icmpMap
+	}
+	if data.ProtocolIcmp6 != nil {
+		protocol_icmp6Map := make(map[string]interface{})
+		if !data.ProtocolIcmp6.DestinationUnreachable.IsNull() && !data.ProtocolIcmp6.DestinationUnreachable.IsUnknown() {
+			protocol_icmp6Map["destination_unreachable"] = data.ProtocolIcmp6.DestinationUnreachable.ValueBool()
+		}
+		if !data.ProtocolIcmp6.EchoReply.IsNull() && !data.ProtocolIcmp6.EchoReply.IsUnknown() {
+			protocol_icmp6Map["echo_reply"] = data.ProtocolIcmp6.EchoReply.ValueBool()
+		}
+		if !data.ProtocolIcmp6.EchoRequest.IsNull() && !data.ProtocolIcmp6.EchoRequest.IsUnknown() {
+			protocol_icmp6Map["echo_request"] = data.ProtocolIcmp6.EchoRequest.ValueBool()
+		}
+		if !data.ProtocolIcmp6.NeighborAdvertisement.IsNull() && !data.ProtocolIcmp6.NeighborAdvertisement.IsUnknown() {
+			protocol_icmp6Map["neighbor_advertisement"] = data.ProtocolIcmp6.NeighborAdvertisement.ValueBool()
+		}
+		if !data.ProtocolIcmp6.NeighborSolicit.IsNull() && !data.ProtocolIcmp6.NeighborSolicit.IsUnknown() {
+			protocol_icmp6Map["neighbor_solicit"] = data.ProtocolIcmp6.NeighborSolicit.ValueBool()
+		}
+		if !data.ProtocolIcmp6.PacketTooBig.IsNull() && !data.ProtocolIcmp6.PacketTooBig.IsUnknown() {
+			protocol_icmp6Map["packet_too_big"] = data.ProtocolIcmp6.PacketTooBig.ValueBool()
+		}
+		if !data.ProtocolIcmp6.ParameterProblem.IsNull() && !data.ProtocolIcmp6.ParameterProblem.IsUnknown() {
+			protocol_icmp6Map["parameter_problem"] = data.ProtocolIcmp6.ParameterProblem.ValueBool()
+		}
+		if !data.ProtocolIcmp6.Redirect.IsNull() && !data.ProtocolIcmp6.Redirect.IsUnknown() {
+			protocol_icmp6Map["redirect"] = data.ProtocolIcmp6.Redirect.ValueBool()
+		}
+		if !data.ProtocolIcmp6.RouterAdvertisement.IsNull() && !data.ProtocolIcmp6.RouterAdvertisement.IsUnknown() {
+			protocol_icmp6Map["router_advertisement"] = data.ProtocolIcmp6.RouterAdvertisement.ValueBool()
+		}
+		if !data.ProtocolIcmp6.RouterSolicit.IsNull() && !data.ProtocolIcmp6.RouterSolicit.IsUnknown() {
+			protocol_icmp6Map["router_solicit"] = data.ProtocolIcmp6.RouterSolicit.ValueBool()
+		}
+		if !data.ProtocolIcmp6.TimeExceeded.IsNull() && !data.ProtocolIcmp6.TimeExceeded.IsUnknown() {
+			protocol_icmp6Map["time_exceeded"] = data.ProtocolIcmp6.TimeExceeded.ValueBool()
+		}
+		apiResource.Spec["protocol_icmp6"] = protocol_icmp6Map
+	}
+	if data.ProtocolIPV6 != nil {
+		protocol_ipv6Map := make(map[string]interface{})
+		apiResource.Spec["protocol_ipv6"] = protocol_ipv6Map
+	}
+	if data.ProtocolTCP != nil {
+		protocol_tcpMap := make(map[string]interface{})
+		if !data.ProtocolTCP.DescriptionSpec.IsNull() && !data.ProtocolTCP.DescriptionSpec.IsUnknown() {
+			protocol_tcpMap["description_spec"] = data.ProtocolTCP.DescriptionSpec.ValueString()
+		}
+		if data.ProtocolTCP.DestinationPortAll != nil {
+			protocol_tcpMap["destination_port_all"] = map[string]interface{}{}
+		}
+		if !data.ProtocolTCP.DestinationPortRange.IsNull() && !data.ProtocolTCP.DestinationPortRange.IsUnknown() {
+			protocol_tcpMap["destination_port_range"] = data.ProtocolTCP.DestinationPortRange.ValueString()
+		}
+		if data.ProtocolTCP.SourcePortAll != nil {
+			protocol_tcpMap["source_port_all"] = map[string]interface{}{}
+		}
+		if !data.ProtocolTCP.SourcePortRange.IsNull() && !data.ProtocolTCP.SourcePortRange.IsUnknown() {
+			protocol_tcpMap["source_port_range"] = data.ProtocolTCP.SourcePortRange.ValueString()
+		}
+		apiResource.Spec["protocol_tcp"] = protocol_tcpMap
+	}
+	if data.ProtocolUDP != nil {
+		protocol_udpMap := make(map[string]interface{})
+		if !data.ProtocolUDP.DescriptionSpec.IsNull() && !data.ProtocolUDP.DescriptionSpec.IsUnknown() {
+			protocol_udpMap["description_spec"] = data.ProtocolUDP.DescriptionSpec.ValueString()
+		}
+		if data.ProtocolUDP.DestinationPortAll != nil {
+			protocol_udpMap["destination_port_all"] = map[string]interface{}{}
+		}
+		if !data.ProtocolUDP.DestinationPortRange.IsNull() && !data.ProtocolUDP.DestinationPortRange.IsUnknown() {
+			protocol_udpMap["destination_port_range"] = data.ProtocolUDP.DestinationPortRange.ValueString()
+		}
+		if data.ProtocolUDP.SourcePortAll != nil {
+			protocol_udpMap["source_port_all"] = map[string]interface{}{}
+		}
+		if !data.ProtocolUDP.SourcePortRange.IsNull() && !data.ProtocolUDP.SourcePortRange.IsUnknown() {
+			protocol_udpMap["source_port_range"] = data.ProtocolUDP.SourcePortRange.ValueString()
+		}
+		apiResource.Spec["protocol_udp"] = protocol_udpMap
+	}
+	if data.SourcePrefixAll != nil {
+		source_prefix_allMap := make(map[string]interface{})
+		apiResource.Spec["source_prefix_all"] = source_prefix_allMap
+	}
+	if data.StateOff != nil {
+		state_offMap := make(map[string]interface{})
+		apiResource.Spec["state_off"] = state_offMap
+	}
+	if data.StateOn != nil {
+		state_onMap := make(map[string]interface{})
+		apiResource.Spec["state_on"] = state_onMap
+	}
+	if data.VersionIPV4 != nil {
+		version_ipv4Map := make(map[string]interface{})
+		apiResource.Spec["version_ipv4"] = version_ipv4Map
+	}
+	if data.VersionIPV6 != nil {
+		version_ipv6Map := make(map[string]interface{})
+		apiResource.Spec["version_ipv6"] = version_ipv6Map
+	}
+	if !data.DestinationPrefixSingle.IsNull() && !data.DestinationPrefixSingle.IsUnknown() {
+		apiResource.Spec["destination_prefix_single"] = data.DestinationPrefixSingle.ValueString()
+	}
+	if !data.SourcePrefixSingle.IsNull() && !data.SourcePrefixSingle.IsUnknown() {
+		apiResource.Spec["source_prefix_single"] = data.SourcePrefixSingle.ValueString()
+	}
+
+
 	created, err := r.client.CreateInfraprotectFirewallRule(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create InfraprotectFirewallRule: %s", err))
@@ -531,8 +708,21 @@ func (r *InfraprotectFirewallRuleResource) Create(ctx context.Context, req resou
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+	if v, ok := created.Spec["destination_prefix_single"].(string); ok && v != "" {
+		data.DestinationPrefixSingle = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["source_prefix_single"].(string); ok && v != "" {
+		data.SourcePrefixSingle = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created InfraprotectFirewallRule resource")
@@ -611,9 +801,360 @@ func (r *InfraprotectFirewallRuleResource) Read(ctx context.Context, req resourc
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if _, ok := apiResource.Spec["action_allow"].(map[string]interface{}); ok && isImport && data.ActionAllow == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ActionAllow = &InfraprotectFirewallRuleEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["action_deny"].(map[string]interface{}); ok && isImport && data.ActionDeny == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ActionDeny = &InfraprotectFirewallRuleEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["destination_prefix_all"].(map[string]interface{}); ok && isImport && data.DestinationPrefixAll == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DestinationPrefixAll = &InfraprotectFirewallRuleEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["fragments_allow"].(map[string]interface{}); ok && isImport && data.FragmentsAllow == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.FragmentsAllow = &InfraprotectFirewallRuleEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["fragments_deny"].(map[string]interface{}); ok && isImport && data.FragmentsDeny == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.FragmentsDeny = &InfraprotectFirewallRuleEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["protocol_ah"].(map[string]interface{}); ok && isImport && data.ProtocolAh == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ProtocolAh = &InfraprotectFirewallRuleEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["protocol_all"].(map[string]interface{}); ok && isImport && data.ProtocolAll == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ProtocolAll = &InfraprotectFirewallRuleEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["protocol_esp"].(map[string]interface{}); ok && isImport && data.ProtocolEsp == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ProtocolEsp = &InfraprotectFirewallRuleEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["protocol_gre"].(map[string]interface{}); ok && isImport && data.ProtocolGre == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ProtocolGre = &InfraprotectFirewallRuleEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["protocol_icmp"].(map[string]interface{}); ok && (isImport || data.ProtocolIcmp != nil) {
+		data.ProtocolIcmp = &InfraprotectFirewallRuleProtocolIcmpModel{
+			EchoReply: func() types.Bool {
+				if !isImport && data.ProtocolIcmp != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.ProtocolIcmp.EchoReply
+				}
+				// Import case: read from API
+				if v, ok := blockData["echo_reply"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			EchoRequest: func() types.Bool {
+				if !isImport && data.ProtocolIcmp != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.ProtocolIcmp.EchoRequest
+				}
+				// Import case: read from API
+				if v, ok := blockData["echo_request"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			ParameterProblem: func() types.Bool {
+				if !isImport && data.ProtocolIcmp != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.ProtocolIcmp.ParameterProblem
+				}
+				// Import case: read from API
+				if v, ok := blockData["parameter_problem"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			Redirect: func() types.Bool {
+				if !isImport && data.ProtocolIcmp != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.ProtocolIcmp.Redirect
+				}
+				// Import case: read from API
+				if v, ok := blockData["redirect"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			SourceQuench: func() types.Bool {
+				if !isImport && data.ProtocolIcmp != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.ProtocolIcmp.SourceQuench
+				}
+				// Import case: read from API
+				if v, ok := blockData["source_quench"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			TimeExceeded: func() types.Bool {
+				if !isImport && data.ProtocolIcmp != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.ProtocolIcmp.TimeExceeded
+				}
+				// Import case: read from API
+				if v, ok := blockData["time_exceeded"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			Unreachable: func() types.Bool {
+				if !isImport && data.ProtocolIcmp != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.ProtocolIcmp.Unreachable
+				}
+				// Import case: read from API
+				if v, ok := blockData["unreachable"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["protocol_icmp6"].(map[string]interface{}); ok && (isImport || data.ProtocolIcmp6 != nil) {
+		data.ProtocolIcmp6 = &InfraprotectFirewallRuleProtocolIcmp6Model{
+			DestinationUnreachable: func() types.Bool {
+				if !isImport && data.ProtocolIcmp6 != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.ProtocolIcmp6.DestinationUnreachable
+				}
+				// Import case: read from API
+				if v, ok := blockData["destination_unreachable"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			EchoReply: func() types.Bool {
+				if !isImport && data.ProtocolIcmp6 != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.ProtocolIcmp6.EchoReply
+				}
+				// Import case: read from API
+				if v, ok := blockData["echo_reply"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			EchoRequest: func() types.Bool {
+				if !isImport && data.ProtocolIcmp6 != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.ProtocolIcmp6.EchoRequest
+				}
+				// Import case: read from API
+				if v, ok := blockData["echo_request"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			NeighborAdvertisement: func() types.Bool {
+				if !isImport && data.ProtocolIcmp6 != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.ProtocolIcmp6.NeighborAdvertisement
+				}
+				// Import case: read from API
+				if v, ok := blockData["neighbor_advertisement"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			NeighborSolicit: func() types.Bool {
+				if !isImport && data.ProtocolIcmp6 != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.ProtocolIcmp6.NeighborSolicit
+				}
+				// Import case: read from API
+				if v, ok := blockData["neighbor_solicit"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			PacketTooBig: func() types.Bool {
+				if !isImport && data.ProtocolIcmp6 != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.ProtocolIcmp6.PacketTooBig
+				}
+				// Import case: read from API
+				if v, ok := blockData["packet_too_big"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			ParameterProblem: func() types.Bool {
+				if !isImport && data.ProtocolIcmp6 != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.ProtocolIcmp6.ParameterProblem
+				}
+				// Import case: read from API
+				if v, ok := blockData["parameter_problem"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			Redirect: func() types.Bool {
+				if !isImport && data.ProtocolIcmp6 != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.ProtocolIcmp6.Redirect
+				}
+				// Import case: read from API
+				if v, ok := blockData["redirect"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			RouterAdvertisement: func() types.Bool {
+				if !isImport && data.ProtocolIcmp6 != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.ProtocolIcmp6.RouterAdvertisement
+				}
+				// Import case: read from API
+				if v, ok := blockData["router_advertisement"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			RouterSolicit: func() types.Bool {
+				if !isImport && data.ProtocolIcmp6 != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.ProtocolIcmp6.RouterSolicit
+				}
+				// Import case: read from API
+				if v, ok := blockData["router_solicit"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			TimeExceeded: func() types.Bool {
+				if !isImport && data.ProtocolIcmp6 != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.ProtocolIcmp6.TimeExceeded
+				}
+				// Import case: read from API
+				if v, ok := blockData["time_exceeded"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["protocol_ipv6"].(map[string]interface{}); ok && isImport && data.ProtocolIPV6 == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ProtocolIPV6 = &InfraprotectFirewallRuleEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["protocol_tcp"].(map[string]interface{}); ok && (isImport || data.ProtocolTCP != nil) {
+		data.ProtocolTCP = &InfraprotectFirewallRuleProtocolTCPModel{
+			DescriptionSpec: func() types.String {
+				if v, ok := blockData["description"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			DestinationPortRange: func() types.String {
+				if v, ok := blockData["destination_port_range"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			SourcePortRange: func() types.String {
+				if v, ok := blockData["source_port_range"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["protocol_udp"].(map[string]interface{}); ok && (isImport || data.ProtocolUDP != nil) {
+		data.ProtocolUDP = &InfraprotectFirewallRuleProtocolUDPModel{
+			DescriptionSpec: func() types.String {
+				if v, ok := blockData["description"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			DestinationPortRange: func() types.String {
+				if v, ok := blockData["destination_port_range"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			SourcePortRange: func() types.String {
+				if v, ok := blockData["source_port_range"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["source_prefix_all"].(map[string]interface{}); ok && isImport && data.SourcePrefixAll == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.SourcePrefixAll = &InfraprotectFirewallRuleEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["state_off"].(map[string]interface{}); ok && isImport && data.StateOff == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.StateOff = &InfraprotectFirewallRuleEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["state_on"].(map[string]interface{}); ok && isImport && data.StateOn == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.StateOn = &InfraprotectFirewallRuleEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["version_ipv4"].(map[string]interface{}); ok && isImport && data.VersionIPV4 == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.VersionIPV4 = &InfraprotectFirewallRuleEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["version_ipv6"].(map[string]interface{}); ok && isImport && data.VersionIPV6 == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.VersionIPV6 = &InfraprotectFirewallRuleEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["destination_prefix_single"].(string); ok && v != "" {
+		data.DestinationPrefixSingle = types.StringValue(v)
+	} else {
+		data.DestinationPrefixSingle = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["source_prefix_single"].(string); ok && v != "" {
+		data.SourcePrefixSingle = types.StringValue(v)
+	} else {
+		data.SourcePrefixSingle = types.StringNull()
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -639,7 +1180,7 @@ func (r *InfraprotectFirewallRuleResource) Update(ctx context.Context, req resou
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.InfraprotectFirewallRuleSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -664,6 +1205,175 @@ func (r *InfraprotectFirewallRuleResource) Update(ctx context.Context, req resou
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.ActionAllow != nil {
+		action_allowMap := make(map[string]interface{})
+		apiResource.Spec["action_allow"] = action_allowMap
+	}
+	if data.ActionDeny != nil {
+		action_denyMap := make(map[string]interface{})
+		apiResource.Spec["action_deny"] = action_denyMap
+	}
+	if data.DestinationPrefixAll != nil {
+		destination_prefix_allMap := make(map[string]interface{})
+		apiResource.Spec["destination_prefix_all"] = destination_prefix_allMap
+	}
+	if data.FragmentsAllow != nil {
+		fragments_allowMap := make(map[string]interface{})
+		apiResource.Spec["fragments_allow"] = fragments_allowMap
+	}
+	if data.FragmentsDeny != nil {
+		fragments_denyMap := make(map[string]interface{})
+		apiResource.Spec["fragments_deny"] = fragments_denyMap
+	}
+	if data.ProtocolAh != nil {
+		protocol_ahMap := make(map[string]interface{})
+		apiResource.Spec["protocol_ah"] = protocol_ahMap
+	}
+	if data.ProtocolAll != nil {
+		protocol_allMap := make(map[string]interface{})
+		apiResource.Spec["protocol_all"] = protocol_allMap
+	}
+	if data.ProtocolEsp != nil {
+		protocol_espMap := make(map[string]interface{})
+		apiResource.Spec["protocol_esp"] = protocol_espMap
+	}
+	if data.ProtocolGre != nil {
+		protocol_greMap := make(map[string]interface{})
+		apiResource.Spec["protocol_gre"] = protocol_greMap
+	}
+	if data.ProtocolIcmp != nil {
+		protocol_icmpMap := make(map[string]interface{})
+		if !data.ProtocolIcmp.EchoReply.IsNull() && !data.ProtocolIcmp.EchoReply.IsUnknown() {
+			protocol_icmpMap["echo_reply"] = data.ProtocolIcmp.EchoReply.ValueBool()
+		}
+		if !data.ProtocolIcmp.EchoRequest.IsNull() && !data.ProtocolIcmp.EchoRequest.IsUnknown() {
+			protocol_icmpMap["echo_request"] = data.ProtocolIcmp.EchoRequest.ValueBool()
+		}
+		if !data.ProtocolIcmp.ParameterProblem.IsNull() && !data.ProtocolIcmp.ParameterProblem.IsUnknown() {
+			protocol_icmpMap["parameter_problem"] = data.ProtocolIcmp.ParameterProblem.ValueBool()
+		}
+		if !data.ProtocolIcmp.Redirect.IsNull() && !data.ProtocolIcmp.Redirect.IsUnknown() {
+			protocol_icmpMap["redirect"] = data.ProtocolIcmp.Redirect.ValueBool()
+		}
+		if !data.ProtocolIcmp.SourceQuench.IsNull() && !data.ProtocolIcmp.SourceQuench.IsUnknown() {
+			protocol_icmpMap["source_quench"] = data.ProtocolIcmp.SourceQuench.ValueBool()
+		}
+		if !data.ProtocolIcmp.TimeExceeded.IsNull() && !data.ProtocolIcmp.TimeExceeded.IsUnknown() {
+			protocol_icmpMap["time_exceeded"] = data.ProtocolIcmp.TimeExceeded.ValueBool()
+		}
+		if !data.ProtocolIcmp.Unreachable.IsNull() && !data.ProtocolIcmp.Unreachable.IsUnknown() {
+			protocol_icmpMap["unreachable"] = data.ProtocolIcmp.Unreachable.ValueBool()
+		}
+		apiResource.Spec["protocol_icmp"] = protocol_icmpMap
+	}
+	if data.ProtocolIcmp6 != nil {
+		protocol_icmp6Map := make(map[string]interface{})
+		if !data.ProtocolIcmp6.DestinationUnreachable.IsNull() && !data.ProtocolIcmp6.DestinationUnreachable.IsUnknown() {
+			protocol_icmp6Map["destination_unreachable"] = data.ProtocolIcmp6.DestinationUnreachable.ValueBool()
+		}
+		if !data.ProtocolIcmp6.EchoReply.IsNull() && !data.ProtocolIcmp6.EchoReply.IsUnknown() {
+			protocol_icmp6Map["echo_reply"] = data.ProtocolIcmp6.EchoReply.ValueBool()
+		}
+		if !data.ProtocolIcmp6.EchoRequest.IsNull() && !data.ProtocolIcmp6.EchoRequest.IsUnknown() {
+			protocol_icmp6Map["echo_request"] = data.ProtocolIcmp6.EchoRequest.ValueBool()
+		}
+		if !data.ProtocolIcmp6.NeighborAdvertisement.IsNull() && !data.ProtocolIcmp6.NeighborAdvertisement.IsUnknown() {
+			protocol_icmp6Map["neighbor_advertisement"] = data.ProtocolIcmp6.NeighborAdvertisement.ValueBool()
+		}
+		if !data.ProtocolIcmp6.NeighborSolicit.IsNull() && !data.ProtocolIcmp6.NeighborSolicit.IsUnknown() {
+			protocol_icmp6Map["neighbor_solicit"] = data.ProtocolIcmp6.NeighborSolicit.ValueBool()
+		}
+		if !data.ProtocolIcmp6.PacketTooBig.IsNull() && !data.ProtocolIcmp6.PacketTooBig.IsUnknown() {
+			protocol_icmp6Map["packet_too_big"] = data.ProtocolIcmp6.PacketTooBig.ValueBool()
+		}
+		if !data.ProtocolIcmp6.ParameterProblem.IsNull() && !data.ProtocolIcmp6.ParameterProblem.IsUnknown() {
+			protocol_icmp6Map["parameter_problem"] = data.ProtocolIcmp6.ParameterProblem.ValueBool()
+		}
+		if !data.ProtocolIcmp6.Redirect.IsNull() && !data.ProtocolIcmp6.Redirect.IsUnknown() {
+			protocol_icmp6Map["redirect"] = data.ProtocolIcmp6.Redirect.ValueBool()
+		}
+		if !data.ProtocolIcmp6.RouterAdvertisement.IsNull() && !data.ProtocolIcmp6.RouterAdvertisement.IsUnknown() {
+			protocol_icmp6Map["router_advertisement"] = data.ProtocolIcmp6.RouterAdvertisement.ValueBool()
+		}
+		if !data.ProtocolIcmp6.RouterSolicit.IsNull() && !data.ProtocolIcmp6.RouterSolicit.IsUnknown() {
+			protocol_icmp6Map["router_solicit"] = data.ProtocolIcmp6.RouterSolicit.ValueBool()
+		}
+		if !data.ProtocolIcmp6.TimeExceeded.IsNull() && !data.ProtocolIcmp6.TimeExceeded.IsUnknown() {
+			protocol_icmp6Map["time_exceeded"] = data.ProtocolIcmp6.TimeExceeded.ValueBool()
+		}
+		apiResource.Spec["protocol_icmp6"] = protocol_icmp6Map
+	}
+	if data.ProtocolIPV6 != nil {
+		protocol_ipv6Map := make(map[string]interface{})
+		apiResource.Spec["protocol_ipv6"] = protocol_ipv6Map
+	}
+	if data.ProtocolTCP != nil {
+		protocol_tcpMap := make(map[string]interface{})
+		if !data.ProtocolTCP.DescriptionSpec.IsNull() && !data.ProtocolTCP.DescriptionSpec.IsUnknown() {
+			protocol_tcpMap["description_spec"] = data.ProtocolTCP.DescriptionSpec.ValueString()
+		}
+		if data.ProtocolTCP.DestinationPortAll != nil {
+			protocol_tcpMap["destination_port_all"] = map[string]interface{}{}
+		}
+		if !data.ProtocolTCP.DestinationPortRange.IsNull() && !data.ProtocolTCP.DestinationPortRange.IsUnknown() {
+			protocol_tcpMap["destination_port_range"] = data.ProtocolTCP.DestinationPortRange.ValueString()
+		}
+		if data.ProtocolTCP.SourcePortAll != nil {
+			protocol_tcpMap["source_port_all"] = map[string]interface{}{}
+		}
+		if !data.ProtocolTCP.SourcePortRange.IsNull() && !data.ProtocolTCP.SourcePortRange.IsUnknown() {
+			protocol_tcpMap["source_port_range"] = data.ProtocolTCP.SourcePortRange.ValueString()
+		}
+		apiResource.Spec["protocol_tcp"] = protocol_tcpMap
+	}
+	if data.ProtocolUDP != nil {
+		protocol_udpMap := make(map[string]interface{})
+		if !data.ProtocolUDP.DescriptionSpec.IsNull() && !data.ProtocolUDP.DescriptionSpec.IsUnknown() {
+			protocol_udpMap["description_spec"] = data.ProtocolUDP.DescriptionSpec.ValueString()
+		}
+		if data.ProtocolUDP.DestinationPortAll != nil {
+			protocol_udpMap["destination_port_all"] = map[string]interface{}{}
+		}
+		if !data.ProtocolUDP.DestinationPortRange.IsNull() && !data.ProtocolUDP.DestinationPortRange.IsUnknown() {
+			protocol_udpMap["destination_port_range"] = data.ProtocolUDP.DestinationPortRange.ValueString()
+		}
+		if data.ProtocolUDP.SourcePortAll != nil {
+			protocol_udpMap["source_port_all"] = map[string]interface{}{}
+		}
+		if !data.ProtocolUDP.SourcePortRange.IsNull() && !data.ProtocolUDP.SourcePortRange.IsUnknown() {
+			protocol_udpMap["source_port_range"] = data.ProtocolUDP.SourcePortRange.ValueString()
+		}
+		apiResource.Spec["protocol_udp"] = protocol_udpMap
+	}
+	if data.SourcePrefixAll != nil {
+		source_prefix_allMap := make(map[string]interface{})
+		apiResource.Spec["source_prefix_all"] = source_prefix_allMap
+	}
+	if data.StateOff != nil {
+		state_offMap := make(map[string]interface{})
+		apiResource.Spec["state_off"] = state_offMap
+	}
+	if data.StateOn != nil {
+		state_onMap := make(map[string]interface{})
+		apiResource.Spec["state_on"] = state_onMap
+	}
+	if data.VersionIPV4 != nil {
+		version_ipv4Map := make(map[string]interface{})
+		apiResource.Spec["version_ipv4"] = version_ipv4Map
+	}
+	if data.VersionIPV6 != nil {
+		version_ipv6Map := make(map[string]interface{})
+		apiResource.Spec["version_ipv6"] = version_ipv6Map
+	}
+	if !data.DestinationPrefixSingle.IsNull() && !data.DestinationPrefixSingle.IsUnknown() {
+		apiResource.Spec["destination_prefix_single"] = data.DestinationPrefixSingle.ValueString()
+	}
+	if !data.SourcePrefixSingle.IsNull() && !data.SourcePrefixSingle.IsUnknown() {
+		apiResource.Spec["source_prefix_single"] = data.SourcePrefixSingle.ValueString()
+	}
+
+
 	updated, err := r.client.UpdateInfraprotectFirewallRule(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update InfraprotectFirewallRule: %s", err))
@@ -672,6 +1382,16 @@ func (r *InfraprotectFirewallRuleResource) Update(ctx context.Context, req resou
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
+	if v, ok := updated.Spec["destination_prefix_single"].(string); ok && v != "" {
+		data.DestinationPrefixSingle = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["source_prefix_single"].(string); ok && v != "" {
+		data.SourcePrefixSingle = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -684,6 +1404,7 @@ func (r *InfraprotectFirewallRuleResource) Update(ctx context.Context, req resou
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -710,6 +1431,15 @@ func (r *InfraprotectFirewallRuleResource) Delete(ctx context.Context, req resou
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "InfraprotectFirewallRule already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "InfraprotectFirewallRule delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

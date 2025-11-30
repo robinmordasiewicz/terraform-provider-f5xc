@@ -12,6 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -62,7 +63,7 @@ type SecretPolicyRuleListRulesModel struct {
 
 // SecretPolicyRuleListRulesMetadataModel represents metadata block
 type SecretPolicyRuleListRulesMetadataModel struct {
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name types.String `tfsdk:"name"`
 }
 
@@ -89,13 +90,13 @@ type SecretPolicyRuleListRulesSpecClientSelectorModel struct {
 type SecretPolicyResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	AllowF5xc types.Bool `tfsdk:"allow_f5xc"`
 	Annotations types.Map `tfsdk:"annotations"`
-	DecryptCacheTimeout types.String `tfsdk:"decrypt_cache_timeout"`
 	Description types.String `tfsdk:"description"`
 	Disable types.Bool `tfsdk:"disable"`
 	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
+	AllowF5xc types.Bool `tfsdk:"allow_f5xc"`
+	DecryptCacheTimeout types.String `tfsdk:"decrypt_cache_timeout"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
 	RuleList *SecretPolicyRuleListModel `tfsdk:"rule_list"`
 }
@@ -129,18 +130,10 @@ func (r *SecretPolicyResource) Schema(ctx context.Context, req resource.SchemaRe
 					validators.NamespaceValidator(),
 				},
 			},
-			"allow_f5xc": schema.BoolAttribute{
-				MarkdownDescription: "Allow F5XC. if allow_f5xc is set to true, it allows relevant F5XC infrastructure services to decrypt the secret encrypted using this policy.",
-				Optional: true,
-			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
 				Optional: true,
 				ElementType: types.StringType,
-			},
-			"decrypt_cache_timeout": schema.StringAttribute{
-				MarkdownDescription: "Decrypt Cache Timeout. decrypt_cache_timeout contains the amount of time a decrypted secret is cached in wingman. Value for this parameter is a string ending in the suffix 's' (indicating seconds), suffix 'm' (indicating minutes) or suffix 'h' (indicating hours)",
-				Optional: true,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
@@ -157,6 +150,22 @@ func (r *SecretPolicyResource) Schema(ctx context.Context, req resource.SchemaRe
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"allow_f5xc": schema.BoolAttribute{
+				MarkdownDescription: "Allow F5XC. if allow_f5xc is set to true, it allows relevant F5XC infrastructure services to decrypt the secret encrypted using this policy.",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.Bool{
+					boolplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"decrypt_cache_timeout": schema.StringAttribute{
+				MarkdownDescription: "Decrypt Cache Timeout. decrypt_cache_timeout contains the amount of time a decrypted secret is cached in wingman. Value for this parameter is a string ending in the suffix 's' (indicating seconds), suffix 'm' (indicating minutes) or suffix 'h' (indicating hours)",
+				Optional: true,
 				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
@@ -184,7 +193,7 @@ func (r *SecretPolicyResource) Schema(ctx context.Context, req resource.SchemaRe
 								"metadata": schema.SingleNestedBlock{
 									MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 									Attributes: map[string]schema.Attribute{
-										"description": schema.StringAttribute{
+										"description_spec": schema.StringAttribute{
 											MarkdownDescription: "Description. Human readable description.",
 											Optional: true,
 										},
@@ -367,7 +376,7 @@ func (r *SecretPolicyResource) Create(ctx context.Context, req resource.CreateRe
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.SecretPolicySpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -392,6 +401,19 @@ func (r *SecretPolicyResource) Create(ctx context.Context, req resource.CreateRe
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.RuleList != nil {
+		rule_listMap := make(map[string]interface{})
+		apiResource.Spec["rule_list"] = rule_listMap
+	}
+	if !data.AllowF5xc.IsNull() && !data.AllowF5xc.IsUnknown() {
+		apiResource.Spec["allow_f5xc"] = data.AllowF5xc.ValueBool()
+	}
+	if !data.DecryptCacheTimeout.IsNull() && !data.DecryptCacheTimeout.IsUnknown() {
+		apiResource.Spec["decrypt_cache_timeout"] = data.DecryptCacheTimeout.ValueString()
+	}
+
+
 	created, err := r.client.CreateSecretPolicy(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create SecretPolicy: %s", err))
@@ -400,8 +422,21 @@ func (r *SecretPolicyResource) Create(ctx context.Context, req resource.CreateRe
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+	if v, ok := created.Spec["allow_f5xc"].(bool); ok {
+		data.AllowF5xc = types.BoolValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["decrypt_cache_timeout"].(string); ok && v != "" {
+		data.DecryptCacheTimeout = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created SecretPolicy resource")
@@ -480,9 +515,46 @@ func (r *SecretPolicyResource) Read(ctx context.Context, req resource.ReadReques
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if _, ok := apiResource.Spec["rule_list"].(map[string]interface{}); ok && isImport && data.RuleList == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.RuleList = &SecretPolicyRuleListModel{}
+	}
+	// Normal Read: preserve existing state value
+	// Top-level Optional bool: preserve prior state to avoid API default drift
+	if !isImport && !data.AllowF5xc.IsNull() {
+		// Normal Read: preserve existing state value (do nothing)
+	} else {
+		// Import case or null state: read from API
+		if v, ok := apiResource.Spec["allow_f5xc"].(bool); ok {
+			data.AllowF5xc = types.BoolValue(v)
+		} else {
+			data.AllowF5xc = types.BoolNull()
+		}
+	}
+	if v, ok := apiResource.Spec["decrypt_cache_timeout"].(string); ok && v != "" {
+		data.DecryptCacheTimeout = types.StringValue(v)
+	} else {
+		data.DecryptCacheTimeout = types.StringNull()
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -508,7 +580,7 @@ func (r *SecretPolicyResource) Update(ctx context.Context, req resource.UpdateRe
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.SecretPolicySpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -533,6 +605,19 @@ func (r *SecretPolicyResource) Update(ctx context.Context, req resource.UpdateRe
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.RuleList != nil {
+		rule_listMap := make(map[string]interface{})
+		apiResource.Spec["rule_list"] = rule_listMap
+	}
+	if !data.AllowF5xc.IsNull() && !data.AllowF5xc.IsUnknown() {
+		apiResource.Spec["allow_f5xc"] = data.AllowF5xc.ValueBool()
+	}
+	if !data.DecryptCacheTimeout.IsNull() && !data.DecryptCacheTimeout.IsUnknown() {
+		apiResource.Spec["decrypt_cache_timeout"] = data.DecryptCacheTimeout.ValueString()
+	}
+
+
 	updated, err := r.client.UpdateSecretPolicy(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update SecretPolicy: %s", err))
@@ -541,6 +626,16 @@ func (r *SecretPolicyResource) Update(ctx context.Context, req resource.UpdateRe
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
+	if v, ok := updated.Spec["allow_f5xc"].(bool); ok {
+		data.AllowF5xc = types.BoolValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["decrypt_cache_timeout"].(string); ok && v != "" {
+		data.DecryptCacheTimeout = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -553,6 +648,7 @@ func (r *SecretPolicyResource) Update(ctx context.Context, req resource.UpdateRe
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -579,6 +675,15 @@ func (r *SecretPolicyResource) Delete(ctx context.Context, req resource.DeleteRe
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "SecretPolicy already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "SecretPolicy delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

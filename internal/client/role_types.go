@@ -10,19 +10,14 @@ import (
 
 // Role represents a F5XC Role
 type Role struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     RoleSpec `json:"spec"`
-}
-
-// RoleSpec defines the specification for Role
-type RoleSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateRole creates a new Role
 func (c *Client) CreateRole(ctx context.Context, resource *Role) (*Role, error) {
 	var result Role
-	path := fmt.Sprintf("/api/config/namespaces/%s/roles", resource.Metadata.Namespace)
+	path := fmt.Sprintf("/api/web/custom/namespaces/%s/roles", resource.Metadata.Namespace)
 	err := c.Post(ctx, path, resource, &result)
 	return &result, err
 }
@@ -30,7 +25,7 @@ func (c *Client) CreateRole(ctx context.Context, resource *Role) (*Role, error) 
 // GetRole retrieves a Role
 func (c *Client) GetRole(ctx context.Context, namespace, name string) (*Role, error) {
 	var result Role
-	path := fmt.Sprintf("/api/config/namespaces/%s/roles/%s", namespace, name)
+	path := fmt.Sprintf("/api/web/custom/namespaces/%s/roles/%s", namespace, name)
 	err := c.Get(ctx, path, &result)
 	return &result, err
 }
@@ -38,13 +33,13 @@ func (c *Client) GetRole(ctx context.Context, namespace, name string) (*Role, er
 // UpdateRole updates a Role
 func (c *Client) UpdateRole(ctx context.Context, resource *Role) (*Role, error) {
 	var result Role
-	path := fmt.Sprintf("/api/config/namespaces/%s/roles/%s", resource.Metadata.Namespace, resource.Metadata.Name)
+	path := fmt.Sprintf("/api/web/custom/namespaces/%s/roles/%s", resource.Metadata.Namespace, resource.Metadata.Name)
 	err := c.Put(ctx, path, resource, &result)
 	return &result, err
 }
 
 // DeleteRole deletes a Role
 func (c *Client) DeleteRole(ctx context.Context, namespace, name string) error {
-	path := fmt.Sprintf("/api/config/namespaces/%s/roles/%s", namespace, name)
+	path := fmt.Sprintf("/api/web/custom/namespaces/%s/roles/%s", namespace, name)
 	return c.Delete(ctx, path)
 }

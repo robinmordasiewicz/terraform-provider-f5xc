@@ -390,7 +390,7 @@ func (r *BGPRoutingPolicyResource) Create(ctx context.Context, req resource.Crea
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.BGPRoutingPolicySpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -415,6 +415,37 @@ func (r *BGPRoutingPolicyResource) Create(ctx context.Context, req resource.Crea
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if len(data.Rules) > 0 {
+		var rulesList []map[string]interface{}
+		for _, item := range data.Rules {
+			itemMap := make(map[string]interface{})
+			if item.Action != nil {
+				actionNestedMap := make(map[string]interface{})
+				if !item.Action.AsPath.IsNull() && !item.Action.AsPath.IsUnknown() {
+					actionNestedMap["as_path"] = item.Action.AsPath.ValueString()
+				}
+				if !item.Action.LocalPreference.IsNull() && !item.Action.LocalPreference.IsUnknown() {
+					actionNestedMap["local_preference"] = item.Action.LocalPreference.ValueInt64()
+				}
+				if !item.Action.Metric.IsNull() && !item.Action.Metric.IsUnknown() {
+					actionNestedMap["metric"] = item.Action.Metric.ValueInt64()
+				}
+				itemMap["action"] = actionNestedMap
+			}
+			if item.Match != nil {
+				matchNestedMap := make(map[string]interface{})
+				if !item.Match.AsPath.IsNull() && !item.Match.AsPath.IsUnknown() {
+					matchNestedMap["as_path"] = item.Match.AsPath.ValueString()
+				}
+				itemMap["match"] = matchNestedMap
+			}
+			rulesList = append(rulesList, itemMap)
+		}
+		apiResource.Spec["rules"] = rulesList
+	}
+
+
 	created, err := r.client.CreateBGPRoutingPolicy(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create BGPRoutingPolicy: %s", err))
@@ -423,8 +454,13 @@ func (r *BGPRoutingPolicyResource) Create(ctx context.Context, req resource.Crea
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created BGPRoutingPolicy resource")
@@ -503,9 +539,73 @@ func (r *BGPRoutingPolicyResource) Read(ctx context.Context, req resource.ReadRe
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if listData, ok := apiResource.Spec["rules"].([]interface{}); ok && len(listData) > 0 {
+		var rulesList []BGPRoutingPolicyRulesModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				rulesList = append(rulesList, BGPRoutingPolicyRulesModel{
+					Action: func() *BGPRoutingPolicyRulesActionModel {
+						if nestedMap, ok := itemMap["action"].(map[string]interface{}); ok {
+							return &BGPRoutingPolicyRulesActionModel{
+								AsPath: func() types.String {
+									if v, ok := nestedMap["as_path"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								LocalPreference: func() types.Int64 {
+									if v, ok := nestedMap["local_preference"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								Metric: func() types.Int64 {
+									if v, ok := nestedMap["metric"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					Match: func() *BGPRoutingPolicyRulesMatchModel {
+						if nestedMap, ok := itemMap["match"].(map[string]interface{}); ok {
+							return &BGPRoutingPolicyRulesMatchModel{
+								AsPath: func() types.String {
+									if v, ok := nestedMap["as_path"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+				})
+			}
+		}
+		data.Rules = rulesList
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -531,7 +631,7 @@ func (r *BGPRoutingPolicyResource) Update(ctx context.Context, req resource.Upda
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.BGPRoutingPolicySpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -556,6 +656,37 @@ func (r *BGPRoutingPolicyResource) Update(ctx context.Context, req resource.Upda
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if len(data.Rules) > 0 {
+		var rulesList []map[string]interface{}
+		for _, item := range data.Rules {
+			itemMap := make(map[string]interface{})
+			if item.Action != nil {
+				actionNestedMap := make(map[string]interface{})
+				if !item.Action.AsPath.IsNull() && !item.Action.AsPath.IsUnknown() {
+					actionNestedMap["as_path"] = item.Action.AsPath.ValueString()
+				}
+				if !item.Action.LocalPreference.IsNull() && !item.Action.LocalPreference.IsUnknown() {
+					actionNestedMap["local_preference"] = item.Action.LocalPreference.ValueInt64()
+				}
+				if !item.Action.Metric.IsNull() && !item.Action.Metric.IsUnknown() {
+					actionNestedMap["metric"] = item.Action.Metric.ValueInt64()
+				}
+				itemMap["action"] = actionNestedMap
+			}
+			if item.Match != nil {
+				matchNestedMap := make(map[string]interface{})
+				if !item.Match.AsPath.IsNull() && !item.Match.AsPath.IsUnknown() {
+					matchNestedMap["as_path"] = item.Match.AsPath.ValueString()
+				}
+				itemMap["match"] = matchNestedMap
+			}
+			rulesList = append(rulesList, itemMap)
+		}
+		apiResource.Spec["rules"] = rulesList
+	}
+
+
 	updated, err := r.client.UpdateBGPRoutingPolicy(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update BGPRoutingPolicy: %s", err))
@@ -564,6 +695,8 @@ func (r *BGPRoutingPolicyResource) Update(ctx context.Context, req resource.Upda
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -576,6 +709,7 @@ func (r *BGPRoutingPolicyResource) Update(ctx context.Context, req resource.Upda
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -602,6 +736,15 @@ func (r *BGPRoutingPolicyResource) Delete(ctx context.Context, req resource.Dele
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "BGPRoutingPolicy already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "BGPRoutingPolicy delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

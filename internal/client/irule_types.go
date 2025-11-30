@@ -10,13 +10,8 @@ import (
 
 // Irule represents a F5XC Irule
 type Irule struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     IruleSpec `json:"spec"`
-}
-
-// IruleSpec defines the specification for Irule
-type IruleSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateIrule creates a new Irule

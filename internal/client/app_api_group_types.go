@@ -10,13 +10,8 @@ import (
 
 // AppAPIGroup represents a F5XC AppAPIGroup
 type AppAPIGroup struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     AppAPIGroupSpec `json:"spec"`
-}
-
-// AppAPIGroupSpec defines the specification for AppAPIGroup
-type AppAPIGroupSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateAppAPIGroup creates a new AppAPIGroup

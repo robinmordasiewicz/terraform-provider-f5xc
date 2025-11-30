@@ -265,7 +265,7 @@ func (r *DcClusterGroupResource) Create(ctx context.Context, req resource.Create
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.DcClusterGroupSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -290,6 +290,19 @@ func (r *DcClusterGroupResource) Create(ctx context.Context, req resource.Create
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.Type != nil {
+		typeMap := make(map[string]interface{})
+		if data.Type.ControlAndDataPlaneMesh != nil {
+			typeMap["control_and_data_plane_mesh"] = map[string]interface{}{}
+		}
+		if data.Type.DataPlaneMesh != nil {
+			typeMap["data_plane_mesh"] = map[string]interface{}{}
+		}
+		apiResource.Spec["type"] = typeMap
+	}
+
+
 	created, err := r.client.CreateDcClusterGroup(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create DcClusterGroup: %s", err))
@@ -298,8 +311,13 @@ func (r *DcClusterGroupResource) Create(ctx context.Context, req resource.Create
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created DcClusterGroup resource")
@@ -378,9 +396,30 @@ func (r *DcClusterGroupResource) Read(ctx context.Context, req resource.ReadRequ
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if _, ok := apiResource.Spec["type"].(map[string]interface{}); ok && isImport && data.Type == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Type = &DcClusterGroupTypeModel{}
+	}
+	// Normal Read: preserve existing state value
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -406,7 +445,7 @@ func (r *DcClusterGroupResource) Update(ctx context.Context, req resource.Update
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.DcClusterGroupSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -431,6 +470,19 @@ func (r *DcClusterGroupResource) Update(ctx context.Context, req resource.Update
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.Type != nil {
+		typeMap := make(map[string]interface{})
+		if data.Type.ControlAndDataPlaneMesh != nil {
+			typeMap["control_and_data_plane_mesh"] = map[string]interface{}{}
+		}
+		if data.Type.DataPlaneMesh != nil {
+			typeMap["data_plane_mesh"] = map[string]interface{}{}
+		}
+		apiResource.Spec["type"] = typeMap
+	}
+
+
 	updated, err := r.client.UpdateDcClusterGroup(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update DcClusterGroup: %s", err))
@@ -439,6 +491,8 @@ func (r *DcClusterGroupResource) Update(ctx context.Context, req resource.Update
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -451,6 +505,7 @@ func (r *DcClusterGroupResource) Update(ctx context.Context, req resource.Update
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -477,6 +532,15 @@ func (r *DcClusterGroupResource) Delete(ctx context.Context, req resource.Delete
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "DcClusterGroup already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "DcClusterGroup delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

@@ -12,6 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -172,7 +173,7 @@ type ClusterTLSParametersCommonParamsModel struct {
 // ClusterTLSParametersCommonParamsTLSCertificatesModel represents tls_certificates block
 type ClusterTLSParametersCommonParamsTLSCertificatesModel struct {
 	CertificateURL types.String `tfsdk:"certificate_url"`
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	CustomHashAlgorithms *ClusterTLSParametersCommonParamsTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
 	DisableOcspStapling *ClusterEmptyModel `tfsdk:"disable_ocsp_stapling"`
 	PrivateKey *ClusterTLSParametersCommonParamsTLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
@@ -235,16 +236,16 @@ type ClusterResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Annotations types.Map `tfsdk:"annotations"`
-	ConnectionTimeout types.Int64 `tfsdk:"connection_timeout"`
 	Description types.String `tfsdk:"description"`
 	Disable types.Bool `tfsdk:"disable"`
+	Labels types.Map `tfsdk:"labels"`
+	ID types.String `tfsdk:"id"`
+	ConnectionTimeout types.Int64 `tfsdk:"connection_timeout"`
 	EndpointSelection types.String `tfsdk:"endpoint_selection"`
 	FallbackPolicy types.String `tfsdk:"fallback_policy"`
 	HTTPIdleTimeout types.Int64 `tfsdk:"http_idle_timeout"`
-	Labels types.Map `tfsdk:"labels"`
 	LoadBalancerAlgorithm types.String `tfsdk:"loadbalancer_algorithm"`
 	PanicThreshold types.Int64 `tfsdk:"panic_threshold"`
-	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
 	AutoHTTPConfig *ClusterEmptyModel `tfsdk:"auto_http_config"`
 	CircuitBreaker *ClusterCircuitBreakerModel `tfsdk:"circuit_breaker"`
@@ -297,10 +298,6 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 				Optional: true,
 				ElementType: types.StringType,
 			},
-			"connection_timeout": schema.Int64Attribute{
-				MarkdownDescription: "Connection Timeout. The timeout for new network connections to endpoints in the cluster. This is specified in milliseconds. The  seconds. Defaults to `2`.",
-				Optional: true,
-			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
 				Optional: true,
@@ -309,36 +306,64 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 				MarkdownDescription: "A value of true will administratively disable the object.",
 				Optional: true,
 			},
-			"endpoint_selection": schema.StringAttribute{
-				MarkdownDescription: "Endpoint Selection Policy. Policy for selection of endpoints from local site/remote site/both Consider both remote and local endpoints for load balancing LOCAL_ONLY: Consider only local endpoints for load balancing Enable this policy to load balance ONLY among locally discovered endpoints Prefer the local endpoints for load balancing. If local endpoints are not present remote endpoints will be considered. Possible values are `DISTRIBUTED`, `LOCAL_ONLY`, `LOCAL_PREFERRED`. Defaults to `DISTRIBUTED`.",
-				Optional: true,
-			},
-			"fallback_policy": schema.StringAttribute{
-				MarkdownDescription: "Subset Fallback Policy. Enumeration for SubsetFallbackPolicy if subset match is not found. The request fails as if the cluster had no endpoint matching the subset policy Any cluster endpoint may be selected if the cluster had no endpoint matching the subset policy Load balancing is done over endpoints matching default_subset if the cluster had no endpoint matching the subset policy. Possible values are `NO_FALLBACK`, `ANY_ENDPOINT`, `DEFAULT_SUBSET`. Defaults to `NO_FALLBACK`.",
-				Optional: true,
-			},
-			"http_idle_timeout": schema.Int64Attribute{
-				MarkdownDescription: "HTTP Idle Timeout. The idle timeout for upstream connection pool connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The  minutes. Defaults to `5`.",
-				Optional: true,
-			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
 				Optional: true,
 				ElementType: types.StringType,
-			},
-			"loadbalancer_algorithm": schema.StringAttribute{
-				MarkdownDescription: "Load Balancer Algorithm. Different load balancing algorithms supported When a connection to a endpoint in an upstream cluster is required, the load balancer uses loadbalancer_algorithm to determine which host is selected. - ROUND_ROBIN: ROUND_ROBIN Policy in which each healthy/available upstream endpoint is selected in round robin order. - LEAST_REQUEST: LEAST_REQUEST Policy in which loadbalancer picks the upstream endpoint which has the fewest active requests - RING_HASH: RING_HASH Policy implements consistent hashing to upstream endpoints using ring hash of endpoint names Hash of the incoming request is calculated using request hash policy. The ring/modulo hash load balancer implements consistent hashing to upstream hosts. The algorithm is based on mapping all hosts onto a circle such that the addition or removal of a host from the host set changes only affect 1/N requests. This technique is also commonly known as “ketama” hashing. A consistent hashing load balancer is only effective when protocol routing is used that specifies a value to hash on. The minimum ring size governs the replication factor for each host in the ring. For example, if the minimum ring size is 1024 and there are 16 hosts, each host will be replicated 64 times. - RANDOM: RANDOM Policy in which each available upstream endpoint is selected in random order. The random load balancer selects a random healthy host. The random load balancer generally performs better than round robin if no health checking policy is configured. Random selection avoids bias towards the host in the set that comes after a failed host. - LB_OVERRIDE: Load Balancer Override Hash policy is taken from from the load balancer which is using this origin pool. Possible values are `ROUND_ROBIN`, `LEAST_REQUEST`, `RING_HASH`, `RANDOM`, `LB_OVERRIDE`. Defaults to `ROUND_ROBIN`.",
-				Optional: true,
-			},
-			"panic_threshold": schema.Int64Attribute{
-				MarkdownDescription: "Panic threshold. Configure a threshold (percentage of unhealthy endpoints) below which all endpoints will be considered for loadbalancing ignoring its health status.",
-				Optional: true,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
 				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"connection_timeout": schema.Int64Attribute{
+				MarkdownDescription: "Connection Timeout. The timeout for new network connections to endpoints in the cluster. This is specified in milliseconds. The  seconds. Defaults to `2`.",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.Int64{
+					int64planmodifier.UseStateForUnknown(),
+				},
+			},
+			"endpoint_selection": schema.StringAttribute{
+				MarkdownDescription: "Endpoint Selection Policy. Policy for selection of endpoints from local site/remote site/both Consider both remote and local endpoints for load balancing LOCAL_ONLY: Consider only local endpoints for load balancing Enable this policy to load balance ONLY among locally discovered endpoints Prefer the local endpoints for load balancing. If local endpoints are not present remote endpoints will be considered. Possible values are `DISTRIBUTED`, `LOCAL_ONLY`, `LOCAL_PREFERRED`. Defaults to `DISTRIBUTED`.",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"fallback_policy": schema.StringAttribute{
+				MarkdownDescription: "Subset Fallback Policy. Enumeration for SubsetFallbackPolicy if subset match is not found. The request fails as if the cluster had no endpoint matching the subset policy Any cluster endpoint may be selected if the cluster had no endpoint matching the subset policy Load balancing is done over endpoints matching default_subset if the cluster had no endpoint matching the subset policy. Possible values are `NO_FALLBACK`, `ANY_ENDPOINT`, `DEFAULT_SUBSET`. Defaults to `NO_FALLBACK`.",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"http_idle_timeout": schema.Int64Attribute{
+				MarkdownDescription: "HTTP Idle Timeout. The idle timeout for upstream connection pool connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The  minutes. Defaults to `5`.",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.Int64{
+					int64planmodifier.UseStateForUnknown(),
+				},
+			},
+			"loadbalancer_algorithm": schema.StringAttribute{
+				MarkdownDescription: "Load Balancer Algorithm. Different load balancing algorithms supported When a connection to a endpoint in an upstream cluster is required, the load balancer uses loadbalancer_algorithm to determine which host is selected. - ROUND_ROBIN: ROUND_ROBIN Policy in which each healthy/available upstream endpoint is selected in round robin order. - LEAST_REQUEST: LEAST_REQUEST Policy in which loadbalancer picks the upstream endpoint which has the fewest active requests - RING_HASH: RING_HASH Policy implements consistent hashing to upstream endpoints using ring hash of endpoint names Hash of the incoming request is calculated using request hash policy. The ring/modulo hash load balancer implements consistent hashing to upstream hosts. The algorithm is based on mapping all hosts onto a circle such that the addition or removal of a host from the host set changes only affect 1/N requests. This technique is also commonly known as “ketama” hashing. A consistent hashing load balancer is only effective when protocol routing is used that specifies a value to hash on. The minimum ring size governs the replication factor for each host in the ring. For example, if the minimum ring size is 1024 and there are 16 hosts, each host will be replicated 64 times. - RANDOM: RANDOM Policy in which each available upstream endpoint is selected in random order. The random load balancer selects a random healthy host. The random load balancer generally performs better than round robin if no health checking policy is configured. Random selection avoids bias towards the host in the set that comes after a failed host. - LB_OVERRIDE: Load Balancer Override Hash policy is taken from from the load balancer which is using this origin pool. Possible values are `ROUND_ROBIN`, `LEAST_REQUEST`, `RING_HASH`, `RANDOM`, `LB_OVERRIDE`. Defaults to `ROUND_ROBIN`.",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"panic_threshold": schema.Int64Attribute{
+				MarkdownDescription: "Panic threshold. Configure a threshold (percentage of unhealthy endpoints) below which all endpoints will be considered for loadbalancing ignoring its health status.",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.Int64{
+					int64planmodifier.UseStateForUnknown(),
 				},
 			},
 		},
@@ -665,7 +690,7 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 											MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
 											Optional: true,
 										},
-										"description": schema.StringAttribute{
+										"description_spec": schema.StringAttribute{
 											MarkdownDescription: "Description. Description for the certificate",
 											Optional: true,
 										},
@@ -934,7 +959,7 @@ func (r *ClusterResource) Create(ctx context.Context, req resource.CreateRequest
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.ClusterSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -959,6 +984,210 @@ func (r *ClusterResource) Create(ctx context.Context, req resource.CreateRequest
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.AutoHTTPConfig != nil {
+		auto_http_configMap := make(map[string]interface{})
+		apiResource.Spec["auto_http_config"] = auto_http_configMap
+	}
+	if data.CircuitBreaker != nil {
+		circuit_breakerMap := make(map[string]interface{})
+		if !data.CircuitBreaker.ConnectionLimit.IsNull() && !data.CircuitBreaker.ConnectionLimit.IsUnknown() {
+			circuit_breakerMap["connection_limit"] = data.CircuitBreaker.ConnectionLimit.ValueInt64()
+		}
+		if !data.CircuitBreaker.MaxRequests.IsNull() && !data.CircuitBreaker.MaxRequests.IsUnknown() {
+			circuit_breakerMap["max_requests"] = data.CircuitBreaker.MaxRequests.ValueInt64()
+		}
+		if !data.CircuitBreaker.PendingRequests.IsNull() && !data.CircuitBreaker.PendingRequests.IsUnknown() {
+			circuit_breakerMap["pending_requests"] = data.CircuitBreaker.PendingRequests.ValueInt64()
+		}
+		if !data.CircuitBreaker.Priority.IsNull() && !data.CircuitBreaker.Priority.IsUnknown() {
+			circuit_breakerMap["priority"] = data.CircuitBreaker.Priority.ValueString()
+		}
+		if !data.CircuitBreaker.Retries.IsNull() && !data.CircuitBreaker.Retries.IsUnknown() {
+			circuit_breakerMap["retries"] = data.CircuitBreaker.Retries.ValueInt64()
+		}
+		apiResource.Spec["circuit_breaker"] = circuit_breakerMap
+	}
+	if data.DefaultSubset != nil {
+		default_subsetMap := make(map[string]interface{})
+		apiResource.Spec["default_subset"] = default_subsetMap
+	}
+	if data.DisableProxyProtocol != nil {
+		disable_proxy_protocolMap := make(map[string]interface{})
+		apiResource.Spec["disable_proxy_protocol"] = disable_proxy_protocolMap
+	}
+	if len(data.EndpointSubsets) > 0 {
+		var endpoint_subsetsList []map[string]interface{}
+		for range data.EndpointSubsets {
+			itemMap := make(map[string]interface{})
+			endpoint_subsetsList = append(endpoint_subsetsList, itemMap)
+		}
+		apiResource.Spec["endpoint_subsets"] = endpoint_subsetsList
+	}
+	if len(data.Endpoints) > 0 {
+		var endpointsList []map[string]interface{}
+		for _, item := range data.Endpoints {
+			itemMap := make(map[string]interface{})
+			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+				itemMap["kind"] = item.Kind.ValueString()
+			}
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+				itemMap["namespace"] = item.Namespace.ValueString()
+			}
+			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+				itemMap["tenant"] = item.Tenant.ValueString()
+			}
+			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+				itemMap["uid"] = item.Uid.ValueString()
+			}
+			endpointsList = append(endpointsList, itemMap)
+		}
+		apiResource.Spec["endpoints"] = endpointsList
+	}
+	if len(data.HealthChecks) > 0 {
+		var health_checksList []map[string]interface{}
+		for _, item := range data.HealthChecks {
+			itemMap := make(map[string]interface{})
+			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+				itemMap["kind"] = item.Kind.ValueString()
+			}
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+				itemMap["namespace"] = item.Namespace.ValueString()
+			}
+			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+				itemMap["tenant"] = item.Tenant.ValueString()
+			}
+			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+				itemMap["uid"] = item.Uid.ValueString()
+			}
+			health_checksList = append(health_checksList, itemMap)
+		}
+		apiResource.Spec["health_checks"] = health_checksList
+	}
+	if data.Http1Config != nil {
+		http1_configMap := make(map[string]interface{})
+		if data.Http1Config.HeaderTransformation != nil {
+			header_transformationNestedMap := make(map[string]interface{})
+			http1_configMap["header_transformation"] = header_transformationNestedMap
+		}
+		apiResource.Spec["http1_config"] = http1_configMap
+	}
+	if data.Http2Options != nil {
+		http2_optionsMap := make(map[string]interface{})
+		if !data.Http2Options.Enabled.IsNull() && !data.Http2Options.Enabled.IsUnknown() {
+			http2_optionsMap["enabled"] = data.Http2Options.Enabled.ValueBool()
+		}
+		apiResource.Spec["http2_options"] = http2_optionsMap
+	}
+	if data.NoPanicThreshold != nil {
+		no_panic_thresholdMap := make(map[string]interface{})
+		apiResource.Spec["no_panic_threshold"] = no_panic_thresholdMap
+	}
+	if data.OutlierDetection != nil {
+		outlier_detectionMap := make(map[string]interface{})
+		if !data.OutlierDetection.BaseEjectionTime.IsNull() && !data.OutlierDetection.BaseEjectionTime.IsUnknown() {
+			outlier_detectionMap["base_ejection_time"] = data.OutlierDetection.BaseEjectionTime.ValueInt64()
+		}
+		if !data.OutlierDetection.Consecutive5xx.IsNull() && !data.OutlierDetection.Consecutive5xx.IsUnknown() {
+			outlier_detectionMap["consecutive_5xx"] = data.OutlierDetection.Consecutive5xx.ValueInt64()
+		}
+		if !data.OutlierDetection.ConsecutiveGatewayFailure.IsNull() && !data.OutlierDetection.ConsecutiveGatewayFailure.IsUnknown() {
+			outlier_detectionMap["consecutive_gateway_failure"] = data.OutlierDetection.ConsecutiveGatewayFailure.ValueInt64()
+		}
+		if !data.OutlierDetection.Interval.IsNull() && !data.OutlierDetection.Interval.IsUnknown() {
+			outlier_detectionMap["interval"] = data.OutlierDetection.Interval.ValueInt64()
+		}
+		if !data.OutlierDetection.MaxEjectionPercent.IsNull() && !data.OutlierDetection.MaxEjectionPercent.IsUnknown() {
+			outlier_detectionMap["max_ejection_percent"] = data.OutlierDetection.MaxEjectionPercent.ValueInt64()
+		}
+		apiResource.Spec["outlier_detection"] = outlier_detectionMap
+	}
+	if data.ProxyProtocolV1 != nil {
+		proxy_protocol_v1Map := make(map[string]interface{})
+		apiResource.Spec["proxy_protocol_v1"] = proxy_protocol_v1Map
+	}
+	if data.ProxyProtocolV2 != nil {
+		proxy_protocol_v2Map := make(map[string]interface{})
+		apiResource.Spec["proxy_protocol_v2"] = proxy_protocol_v2Map
+	}
+	if data.TLSParameters != nil {
+		tls_parametersMap := make(map[string]interface{})
+		if data.TLSParameters.CertParams != nil {
+			cert_paramsNestedMap := make(map[string]interface{})
+			if !data.TLSParameters.CertParams.MaximumProtocolVersion.IsNull() && !data.TLSParameters.CertParams.MaximumProtocolVersion.IsUnknown() {
+				cert_paramsNestedMap["maximum_protocol_version"] = data.TLSParameters.CertParams.MaximumProtocolVersion.ValueString()
+			}
+			if !data.TLSParameters.CertParams.MinimumProtocolVersion.IsNull() && !data.TLSParameters.CertParams.MinimumProtocolVersion.IsUnknown() {
+				cert_paramsNestedMap["minimum_protocol_version"] = data.TLSParameters.CertParams.MinimumProtocolVersion.ValueString()
+			}
+			tls_parametersMap["cert_params"] = cert_paramsNestedMap
+		}
+		if data.TLSParameters.CommonParams != nil {
+			common_paramsNestedMap := make(map[string]interface{})
+			if !data.TLSParameters.CommonParams.MaximumProtocolVersion.IsNull() && !data.TLSParameters.CommonParams.MaximumProtocolVersion.IsUnknown() {
+				common_paramsNestedMap["maximum_protocol_version"] = data.TLSParameters.CommonParams.MaximumProtocolVersion.ValueString()
+			}
+			if !data.TLSParameters.CommonParams.MinimumProtocolVersion.IsNull() && !data.TLSParameters.CommonParams.MinimumProtocolVersion.IsUnknown() {
+				common_paramsNestedMap["minimum_protocol_version"] = data.TLSParameters.CommonParams.MinimumProtocolVersion.ValueString()
+			}
+			tls_parametersMap["common_params"] = common_paramsNestedMap
+		}
+		if data.TLSParameters.DefaultSessionKeyCaching != nil {
+			tls_parametersMap["default_session_key_caching"] = map[string]interface{}{}
+		}
+		if data.TLSParameters.DisableSessionKeyCaching != nil {
+			tls_parametersMap["disable_session_key_caching"] = map[string]interface{}{}
+		}
+		if data.TLSParameters.DisableSni != nil {
+			tls_parametersMap["disable_sni"] = map[string]interface{}{}
+		}
+		if !data.TLSParameters.MaxSessionKeys.IsNull() && !data.TLSParameters.MaxSessionKeys.IsUnknown() {
+			tls_parametersMap["max_session_keys"] = data.TLSParameters.MaxSessionKeys.ValueInt64()
+		}
+		if !data.TLSParameters.Sni.IsNull() && !data.TLSParameters.Sni.IsUnknown() {
+			tls_parametersMap["sni"] = data.TLSParameters.Sni.ValueString()
+		}
+		if data.TLSParameters.UseHostHeaderAsSni != nil {
+			tls_parametersMap["use_host_header_as_sni"] = map[string]interface{}{}
+		}
+		apiResource.Spec["tls_parameters"] = tls_parametersMap
+	}
+	if data.UpstreamConnPoolReuseType != nil {
+		upstream_conn_pool_reuse_typeMap := make(map[string]interface{})
+		if data.UpstreamConnPoolReuseType.DisableConnPoolReuse != nil {
+			upstream_conn_pool_reuse_typeMap["disable_conn_pool_reuse"] = map[string]interface{}{}
+		}
+		if data.UpstreamConnPoolReuseType.EnableConnPoolReuse != nil {
+			upstream_conn_pool_reuse_typeMap["enable_conn_pool_reuse"] = map[string]interface{}{}
+		}
+		apiResource.Spec["upstream_conn_pool_reuse_type"] = upstream_conn_pool_reuse_typeMap
+	}
+	if !data.ConnectionTimeout.IsNull() && !data.ConnectionTimeout.IsUnknown() {
+		apiResource.Spec["connection_timeout"] = data.ConnectionTimeout.ValueInt64()
+	}
+	if !data.EndpointSelection.IsNull() && !data.EndpointSelection.IsUnknown() {
+		apiResource.Spec["endpoint_selection"] = data.EndpointSelection.ValueString()
+	}
+	if !data.FallbackPolicy.IsNull() && !data.FallbackPolicy.IsUnknown() {
+		apiResource.Spec["fallback_policy"] = data.FallbackPolicy.ValueString()
+	}
+	if !data.HTTPIdleTimeout.IsNull() && !data.HTTPIdleTimeout.IsUnknown() {
+		apiResource.Spec["http_idle_timeout"] = data.HTTPIdleTimeout.ValueInt64()
+	}
+	if !data.LoadBalancerAlgorithm.IsNull() && !data.LoadBalancerAlgorithm.IsUnknown() {
+		apiResource.Spec["loadbalancer_algorithm"] = data.LoadBalancerAlgorithm.ValueString()
+	}
+	if !data.PanicThreshold.IsNull() && !data.PanicThreshold.IsUnknown() {
+		apiResource.Spec["panic_threshold"] = data.PanicThreshold.ValueInt64()
+	}
+
+
 	created, err := r.client.CreateCluster(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create Cluster: %s", err))
@@ -967,8 +1196,37 @@ func (r *ClusterResource) Create(ctx context.Context, req resource.CreateRequest
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+	if v, ok := created.Spec["connection_timeout"].(float64); ok {
+		data.ConnectionTimeout = types.Int64Value(int64(v))
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["endpoint_selection"].(string); ok && v != "" {
+		data.EndpointSelection = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["fallback_policy"].(string); ok && v != "" {
+		data.FallbackPolicy = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["http_idle_timeout"].(float64); ok {
+		data.HTTPIdleTimeout = types.Int64Value(int64(v))
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["loadbalancer_algorithm"].(string); ok && v != "" {
+		data.LoadBalancerAlgorithm = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["panic_threshold"].(float64); ok {
+		data.PanicThreshold = types.Int64Value(int64(v))
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created Cluster resource")
@@ -1047,9 +1305,284 @@ func (r *ClusterResource) Read(ctx context.Context, req resource.ReadRequest, re
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if _, ok := apiResource.Spec["auto_http_config"].(map[string]interface{}); ok && isImport && data.AutoHTTPConfig == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AutoHTTPConfig = &ClusterEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["circuit_breaker"].(map[string]interface{}); ok && (isImport || data.CircuitBreaker != nil) {
+		data.CircuitBreaker = &ClusterCircuitBreakerModel{
+			ConnectionLimit: func() types.Int64 {
+				if v, ok := blockData["connection_limit"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			MaxRequests: func() types.Int64 {
+				if v, ok := blockData["max_requests"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			PendingRequests: func() types.Int64 {
+				if v, ok := blockData["pending_requests"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			Priority: func() types.String {
+				if v, ok := blockData["priority"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Retries: func() types.Int64 {
+				if v, ok := blockData["retries"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["default_subset"].(map[string]interface{}); ok && isImport && data.DefaultSubset == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DefaultSubset = &ClusterEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["disable_proxy_protocol"].(map[string]interface{}); ok && isImport && data.DisableProxyProtocol == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableProxyProtocol = &ClusterEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["endpoint_subsets"].([]interface{}); ok && len(listData) > 0 {
+		var endpoint_subsetsList []ClusterEndpointSubsetsModel
+		for range listData {
+			{
+				endpoint_subsetsList = append(endpoint_subsetsList, ClusterEndpointSubsetsModel{
+				})
+			}
+		}
+		data.EndpointSubsets = endpoint_subsetsList
+	}
+	if listData, ok := apiResource.Spec["endpoints"].([]interface{}); ok && len(listData) > 0 {
+		var endpointsList []ClusterEndpointsModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				endpointsList = append(endpointsList, ClusterEndpointsModel{
+					Kind: func() types.String {
+						if v, ok := itemMap["kind"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Namespace: func() types.String {
+						if v, ok := itemMap["namespace"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Tenant: func() types.String {
+						if v, ok := itemMap["tenant"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Uid: func() types.String {
+						if v, ok := itemMap["uid"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.Endpoints = endpointsList
+	}
+	if listData, ok := apiResource.Spec["health_checks"].([]interface{}); ok && len(listData) > 0 {
+		var health_checksList []ClusterHealthChecksModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				health_checksList = append(health_checksList, ClusterHealthChecksModel{
+					Kind: func() types.String {
+						if v, ok := itemMap["kind"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Namespace: func() types.String {
+						if v, ok := itemMap["namespace"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Tenant: func() types.String {
+						if v, ok := itemMap["tenant"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Uid: func() types.String {
+						if v, ok := itemMap["uid"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.HealthChecks = health_checksList
+	}
+	if _, ok := apiResource.Spec["http1_config"].(map[string]interface{}); ok && isImport && data.Http1Config == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Http1Config = &ClusterHttp1ConfigModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["http2_options"].(map[string]interface{}); ok && (isImport || data.Http2Options != nil) {
+		data.Http2Options = &ClusterHttp2OptionsModel{
+			Enabled: func() types.Bool {
+				if !isImport && data.Http2Options != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.Http2Options.Enabled
+				}
+				// Import case: read from API
+				if v, ok := blockData["enabled"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["no_panic_threshold"].(map[string]interface{}); ok && isImport && data.NoPanicThreshold == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoPanicThreshold = &ClusterEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["outlier_detection"].(map[string]interface{}); ok && (isImport || data.OutlierDetection != nil) {
+		data.OutlierDetection = &ClusterOutlierDetectionModel{
+			BaseEjectionTime: func() types.Int64 {
+				if v, ok := blockData["base_ejection_time"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			Consecutive5xx: func() types.Int64 {
+				if v, ok := blockData["consecutive_5xx"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			ConsecutiveGatewayFailure: func() types.Int64 {
+				if v, ok := blockData["consecutive_gateway_failure"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			Interval: func() types.Int64 {
+				if v, ok := blockData["interval"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			MaxEjectionPercent: func() types.Int64 {
+				if v, ok := blockData["max_ejection_percent"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["proxy_protocol_v1"].(map[string]interface{}); ok && isImport && data.ProxyProtocolV1 == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ProxyProtocolV1 = &ClusterEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["proxy_protocol_v2"].(map[string]interface{}); ok && isImport && data.ProxyProtocolV2 == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ProxyProtocolV2 = &ClusterEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["tls_parameters"].(map[string]interface{}); ok && (isImport || data.TLSParameters != nil) {
+		data.TLSParameters = &ClusterTLSParametersModel{
+			MaxSessionKeys: func() types.Int64 {
+				if v, ok := blockData["max_session_keys"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			Sni: func() types.String {
+				if v, ok := blockData["sni"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["upstream_conn_pool_reuse_type"].(map[string]interface{}); ok && isImport && data.UpstreamConnPoolReuseType == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.UpstreamConnPoolReuseType = &ClusterUpstreamConnPoolReuseTypeModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["connection_timeout"].(float64); ok {
+		data.ConnectionTimeout = types.Int64Value(int64(v))
+	} else {
+		data.ConnectionTimeout = types.Int64Null()
+	}
+	if v, ok := apiResource.Spec["endpoint_selection"].(string); ok && v != "" {
+		data.EndpointSelection = types.StringValue(v)
+	} else {
+		data.EndpointSelection = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["fallback_policy"].(string); ok && v != "" {
+		data.FallbackPolicy = types.StringValue(v)
+	} else {
+		data.FallbackPolicy = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["http_idle_timeout"].(float64); ok {
+		data.HTTPIdleTimeout = types.Int64Value(int64(v))
+	} else {
+		data.HTTPIdleTimeout = types.Int64Null()
+	}
+	if v, ok := apiResource.Spec["loadbalancer_algorithm"].(string); ok && v != "" {
+		data.LoadBalancerAlgorithm = types.StringValue(v)
+	} else {
+		data.LoadBalancerAlgorithm = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["panic_threshold"].(float64); ok {
+		data.PanicThreshold = types.Int64Value(int64(v))
+	} else {
+		data.PanicThreshold = types.Int64Null()
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -1075,7 +1608,7 @@ func (r *ClusterResource) Update(ctx context.Context, req resource.UpdateRequest
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.ClusterSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -1100,6 +1633,210 @@ func (r *ClusterResource) Update(ctx context.Context, req resource.UpdateRequest
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.AutoHTTPConfig != nil {
+		auto_http_configMap := make(map[string]interface{})
+		apiResource.Spec["auto_http_config"] = auto_http_configMap
+	}
+	if data.CircuitBreaker != nil {
+		circuit_breakerMap := make(map[string]interface{})
+		if !data.CircuitBreaker.ConnectionLimit.IsNull() && !data.CircuitBreaker.ConnectionLimit.IsUnknown() {
+			circuit_breakerMap["connection_limit"] = data.CircuitBreaker.ConnectionLimit.ValueInt64()
+		}
+		if !data.CircuitBreaker.MaxRequests.IsNull() && !data.CircuitBreaker.MaxRequests.IsUnknown() {
+			circuit_breakerMap["max_requests"] = data.CircuitBreaker.MaxRequests.ValueInt64()
+		}
+		if !data.CircuitBreaker.PendingRequests.IsNull() && !data.CircuitBreaker.PendingRequests.IsUnknown() {
+			circuit_breakerMap["pending_requests"] = data.CircuitBreaker.PendingRequests.ValueInt64()
+		}
+		if !data.CircuitBreaker.Priority.IsNull() && !data.CircuitBreaker.Priority.IsUnknown() {
+			circuit_breakerMap["priority"] = data.CircuitBreaker.Priority.ValueString()
+		}
+		if !data.CircuitBreaker.Retries.IsNull() && !data.CircuitBreaker.Retries.IsUnknown() {
+			circuit_breakerMap["retries"] = data.CircuitBreaker.Retries.ValueInt64()
+		}
+		apiResource.Spec["circuit_breaker"] = circuit_breakerMap
+	}
+	if data.DefaultSubset != nil {
+		default_subsetMap := make(map[string]interface{})
+		apiResource.Spec["default_subset"] = default_subsetMap
+	}
+	if data.DisableProxyProtocol != nil {
+		disable_proxy_protocolMap := make(map[string]interface{})
+		apiResource.Spec["disable_proxy_protocol"] = disable_proxy_protocolMap
+	}
+	if len(data.EndpointSubsets) > 0 {
+		var endpoint_subsetsList []map[string]interface{}
+		for range data.EndpointSubsets {
+			itemMap := make(map[string]interface{})
+			endpoint_subsetsList = append(endpoint_subsetsList, itemMap)
+		}
+		apiResource.Spec["endpoint_subsets"] = endpoint_subsetsList
+	}
+	if len(data.Endpoints) > 0 {
+		var endpointsList []map[string]interface{}
+		for _, item := range data.Endpoints {
+			itemMap := make(map[string]interface{})
+			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+				itemMap["kind"] = item.Kind.ValueString()
+			}
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+				itemMap["namespace"] = item.Namespace.ValueString()
+			}
+			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+				itemMap["tenant"] = item.Tenant.ValueString()
+			}
+			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+				itemMap["uid"] = item.Uid.ValueString()
+			}
+			endpointsList = append(endpointsList, itemMap)
+		}
+		apiResource.Spec["endpoints"] = endpointsList
+	}
+	if len(data.HealthChecks) > 0 {
+		var health_checksList []map[string]interface{}
+		for _, item := range data.HealthChecks {
+			itemMap := make(map[string]interface{})
+			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+				itemMap["kind"] = item.Kind.ValueString()
+			}
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+				itemMap["namespace"] = item.Namespace.ValueString()
+			}
+			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+				itemMap["tenant"] = item.Tenant.ValueString()
+			}
+			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+				itemMap["uid"] = item.Uid.ValueString()
+			}
+			health_checksList = append(health_checksList, itemMap)
+		}
+		apiResource.Spec["health_checks"] = health_checksList
+	}
+	if data.Http1Config != nil {
+		http1_configMap := make(map[string]interface{})
+		if data.Http1Config.HeaderTransformation != nil {
+			header_transformationNestedMap := make(map[string]interface{})
+			http1_configMap["header_transformation"] = header_transformationNestedMap
+		}
+		apiResource.Spec["http1_config"] = http1_configMap
+	}
+	if data.Http2Options != nil {
+		http2_optionsMap := make(map[string]interface{})
+		if !data.Http2Options.Enabled.IsNull() && !data.Http2Options.Enabled.IsUnknown() {
+			http2_optionsMap["enabled"] = data.Http2Options.Enabled.ValueBool()
+		}
+		apiResource.Spec["http2_options"] = http2_optionsMap
+	}
+	if data.NoPanicThreshold != nil {
+		no_panic_thresholdMap := make(map[string]interface{})
+		apiResource.Spec["no_panic_threshold"] = no_panic_thresholdMap
+	}
+	if data.OutlierDetection != nil {
+		outlier_detectionMap := make(map[string]interface{})
+		if !data.OutlierDetection.BaseEjectionTime.IsNull() && !data.OutlierDetection.BaseEjectionTime.IsUnknown() {
+			outlier_detectionMap["base_ejection_time"] = data.OutlierDetection.BaseEjectionTime.ValueInt64()
+		}
+		if !data.OutlierDetection.Consecutive5xx.IsNull() && !data.OutlierDetection.Consecutive5xx.IsUnknown() {
+			outlier_detectionMap["consecutive_5xx"] = data.OutlierDetection.Consecutive5xx.ValueInt64()
+		}
+		if !data.OutlierDetection.ConsecutiveGatewayFailure.IsNull() && !data.OutlierDetection.ConsecutiveGatewayFailure.IsUnknown() {
+			outlier_detectionMap["consecutive_gateway_failure"] = data.OutlierDetection.ConsecutiveGatewayFailure.ValueInt64()
+		}
+		if !data.OutlierDetection.Interval.IsNull() && !data.OutlierDetection.Interval.IsUnknown() {
+			outlier_detectionMap["interval"] = data.OutlierDetection.Interval.ValueInt64()
+		}
+		if !data.OutlierDetection.MaxEjectionPercent.IsNull() && !data.OutlierDetection.MaxEjectionPercent.IsUnknown() {
+			outlier_detectionMap["max_ejection_percent"] = data.OutlierDetection.MaxEjectionPercent.ValueInt64()
+		}
+		apiResource.Spec["outlier_detection"] = outlier_detectionMap
+	}
+	if data.ProxyProtocolV1 != nil {
+		proxy_protocol_v1Map := make(map[string]interface{})
+		apiResource.Spec["proxy_protocol_v1"] = proxy_protocol_v1Map
+	}
+	if data.ProxyProtocolV2 != nil {
+		proxy_protocol_v2Map := make(map[string]interface{})
+		apiResource.Spec["proxy_protocol_v2"] = proxy_protocol_v2Map
+	}
+	if data.TLSParameters != nil {
+		tls_parametersMap := make(map[string]interface{})
+		if data.TLSParameters.CertParams != nil {
+			cert_paramsNestedMap := make(map[string]interface{})
+			if !data.TLSParameters.CertParams.MaximumProtocolVersion.IsNull() && !data.TLSParameters.CertParams.MaximumProtocolVersion.IsUnknown() {
+				cert_paramsNestedMap["maximum_protocol_version"] = data.TLSParameters.CertParams.MaximumProtocolVersion.ValueString()
+			}
+			if !data.TLSParameters.CertParams.MinimumProtocolVersion.IsNull() && !data.TLSParameters.CertParams.MinimumProtocolVersion.IsUnknown() {
+				cert_paramsNestedMap["minimum_protocol_version"] = data.TLSParameters.CertParams.MinimumProtocolVersion.ValueString()
+			}
+			tls_parametersMap["cert_params"] = cert_paramsNestedMap
+		}
+		if data.TLSParameters.CommonParams != nil {
+			common_paramsNestedMap := make(map[string]interface{})
+			if !data.TLSParameters.CommonParams.MaximumProtocolVersion.IsNull() && !data.TLSParameters.CommonParams.MaximumProtocolVersion.IsUnknown() {
+				common_paramsNestedMap["maximum_protocol_version"] = data.TLSParameters.CommonParams.MaximumProtocolVersion.ValueString()
+			}
+			if !data.TLSParameters.CommonParams.MinimumProtocolVersion.IsNull() && !data.TLSParameters.CommonParams.MinimumProtocolVersion.IsUnknown() {
+				common_paramsNestedMap["minimum_protocol_version"] = data.TLSParameters.CommonParams.MinimumProtocolVersion.ValueString()
+			}
+			tls_parametersMap["common_params"] = common_paramsNestedMap
+		}
+		if data.TLSParameters.DefaultSessionKeyCaching != nil {
+			tls_parametersMap["default_session_key_caching"] = map[string]interface{}{}
+		}
+		if data.TLSParameters.DisableSessionKeyCaching != nil {
+			tls_parametersMap["disable_session_key_caching"] = map[string]interface{}{}
+		}
+		if data.TLSParameters.DisableSni != nil {
+			tls_parametersMap["disable_sni"] = map[string]interface{}{}
+		}
+		if !data.TLSParameters.MaxSessionKeys.IsNull() && !data.TLSParameters.MaxSessionKeys.IsUnknown() {
+			tls_parametersMap["max_session_keys"] = data.TLSParameters.MaxSessionKeys.ValueInt64()
+		}
+		if !data.TLSParameters.Sni.IsNull() && !data.TLSParameters.Sni.IsUnknown() {
+			tls_parametersMap["sni"] = data.TLSParameters.Sni.ValueString()
+		}
+		if data.TLSParameters.UseHostHeaderAsSni != nil {
+			tls_parametersMap["use_host_header_as_sni"] = map[string]interface{}{}
+		}
+		apiResource.Spec["tls_parameters"] = tls_parametersMap
+	}
+	if data.UpstreamConnPoolReuseType != nil {
+		upstream_conn_pool_reuse_typeMap := make(map[string]interface{})
+		if data.UpstreamConnPoolReuseType.DisableConnPoolReuse != nil {
+			upstream_conn_pool_reuse_typeMap["disable_conn_pool_reuse"] = map[string]interface{}{}
+		}
+		if data.UpstreamConnPoolReuseType.EnableConnPoolReuse != nil {
+			upstream_conn_pool_reuse_typeMap["enable_conn_pool_reuse"] = map[string]interface{}{}
+		}
+		apiResource.Spec["upstream_conn_pool_reuse_type"] = upstream_conn_pool_reuse_typeMap
+	}
+	if !data.ConnectionTimeout.IsNull() && !data.ConnectionTimeout.IsUnknown() {
+		apiResource.Spec["connection_timeout"] = data.ConnectionTimeout.ValueInt64()
+	}
+	if !data.EndpointSelection.IsNull() && !data.EndpointSelection.IsUnknown() {
+		apiResource.Spec["endpoint_selection"] = data.EndpointSelection.ValueString()
+	}
+	if !data.FallbackPolicy.IsNull() && !data.FallbackPolicy.IsUnknown() {
+		apiResource.Spec["fallback_policy"] = data.FallbackPolicy.ValueString()
+	}
+	if !data.HTTPIdleTimeout.IsNull() && !data.HTTPIdleTimeout.IsUnknown() {
+		apiResource.Spec["http_idle_timeout"] = data.HTTPIdleTimeout.ValueInt64()
+	}
+	if !data.LoadBalancerAlgorithm.IsNull() && !data.LoadBalancerAlgorithm.IsUnknown() {
+		apiResource.Spec["loadbalancer_algorithm"] = data.LoadBalancerAlgorithm.ValueString()
+	}
+	if !data.PanicThreshold.IsNull() && !data.PanicThreshold.IsUnknown() {
+		apiResource.Spec["panic_threshold"] = data.PanicThreshold.ValueInt64()
+	}
+
+
 	updated, err := r.client.UpdateCluster(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update Cluster: %s", err))
@@ -1108,6 +1845,32 @@ func (r *ClusterResource) Update(ctx context.Context, req resource.UpdateRequest
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
+	if v, ok := updated.Spec["connection_timeout"].(float64); ok {
+		data.ConnectionTimeout = types.Int64Value(int64(v))
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["endpoint_selection"].(string); ok && v != "" {
+		data.EndpointSelection = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["fallback_policy"].(string); ok && v != "" {
+		data.FallbackPolicy = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["http_idle_timeout"].(float64); ok {
+		data.HTTPIdleTimeout = types.Int64Value(int64(v))
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["loadbalancer_algorithm"].(string); ok && v != "" {
+		data.LoadBalancerAlgorithm = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["panic_threshold"].(float64); ok {
+		data.PanicThreshold = types.Int64Value(int64(v))
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -1120,6 +1883,7 @@ func (r *ClusterResource) Update(ctx context.Context, req resource.UpdateRequest
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -1146,6 +1910,15 @@ func (r *ClusterResource) Delete(ctx context.Context, req resource.DeleteRequest
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "Cluster already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "Cluster delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

@@ -10,19 +10,14 @@ import (
 
 // BigIPIrule represents a F5XC BigIPIrule
 type BigIPIrule struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     BigIPIruleSpec `json:"spec"`
-}
-
-// BigIPIruleSpec defines the specification for BigIPIrule
-type BigIPIruleSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateBigIPIrule creates a new BigIPIrule
 func (c *Client) CreateBigIPIrule(ctx context.Context, resource *BigIPIrule) (*BigIPIrule, error) {
 	var result BigIPIrule
-	path := fmt.Sprintf("/api/config/namespaces/%s/bigip_irules", resource.Metadata.Namespace)
+	path := fmt.Sprintf("/api/bigipconnector/namespaces/%s/bigip_irules", resource.Metadata.Namespace)
 	err := c.Post(ctx, path, resource, &result)
 	return &result, err
 }
@@ -30,7 +25,7 @@ func (c *Client) CreateBigIPIrule(ctx context.Context, resource *BigIPIrule) (*B
 // GetBigIPIrule retrieves a BigIPIrule
 func (c *Client) GetBigIPIrule(ctx context.Context, namespace, name string) (*BigIPIrule, error) {
 	var result BigIPIrule
-	path := fmt.Sprintf("/api/config/namespaces/%s/bigip_irules/%s", namespace, name)
+	path := fmt.Sprintf("/api/bigipconnector/namespaces/%s/bigip_irules/%s", namespace, name)
 	err := c.Get(ctx, path, &result)
 	return &result, err
 }
@@ -38,13 +33,13 @@ func (c *Client) GetBigIPIrule(ctx context.Context, namespace, name string) (*Bi
 // UpdateBigIPIrule updates a BigIPIrule
 func (c *Client) UpdateBigIPIrule(ctx context.Context, resource *BigIPIrule) (*BigIPIrule, error) {
 	var result BigIPIrule
-	path := fmt.Sprintf("/api/config/namespaces/%s/bigip_irules/%s", resource.Metadata.Namespace, resource.Metadata.Name)
+	path := fmt.Sprintf("/api/bigipconnector/namespaces/%s/bigip_irules/%s", resource.Metadata.Namespace, resource.Metadata.Name)
 	err := c.Put(ctx, path, resource, &result)
 	return &result, err
 }
 
 // DeleteBigIPIrule deletes a BigIPIrule
 func (c *Client) DeleteBigIPIrule(ctx context.Context, namespace, name string) error {
-	path := fmt.Sprintf("/api/config/namespaces/%s/bigip_irules/%s", namespace, name)
+	path := fmt.Sprintf("/api/bigipconnector/namespaces/%s/bigip_irules/%s", namespace, name)
 	return c.Delete(ctx, path)
 }

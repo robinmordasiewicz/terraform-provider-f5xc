@@ -164,7 +164,7 @@ type SecretManagementAccessAccessInfoTLSConfigCommonParamsModel struct {
 // SecretManagementAccessAccessInfoTLSConfigCommonParamsTLSCertificatesModel represents tls_certificates block
 type SecretManagementAccessAccessInfoTLSConfigCommonParamsTLSCertificatesModel struct {
 	CertificateURL types.String `tfsdk:"certificate_url"`
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	CustomHashAlgorithms *SecretManagementAccessAccessInfoTLSConfigCommonParamsTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
 	DisableOcspStapling *SecretManagementAccessEmptyModel `tfsdk:"disable_ocsp_stapling"`
 	PrivateKey *SecretManagementAccessAccessInfoTLSConfigCommonParamsTLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
@@ -329,8 +329,8 @@ type SecretManagementAccessResourceModel struct {
 	Description types.String `tfsdk:"description"`
 	Disable types.Bool `tfsdk:"disable"`
 	Labels types.Map `tfsdk:"labels"`
-	ProviderName types.String `tfsdk:"provider_name"`
 	ID types.String `tfsdk:"id"`
+	ProviderName types.String `tfsdk:"provider_name"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
 	AccessInfo *SecretManagementAccessAccessInfoModel `tfsdk:"access_info"`
 	Where *SecretManagementAccessWhereModel `tfsdk:"where"`
@@ -383,12 +383,16 @@ func (r *SecretManagementAccessResource) Schema(ctx context.Context, req resourc
 				Optional: true,
 				ElementType: types.StringType,
 			},
+			"id": schema.StringAttribute{
+				MarkdownDescription: "Unique identifier for the resource.",
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
 			"provider_name": schema.StringAttribute{
 				MarkdownDescription: "Provider Name. Name given to this secret management backend. site.provider needs to be unique, and will be referenced for using this object",
 				Optional: true,
-			},
-			"id": schema.StringAttribute{
-				MarkdownDescription: "Unique identifier for the resource.",
 				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
@@ -630,7 +634,7 @@ func (r *SecretManagementAccessResource) Schema(ctx context.Context, req resourc
 													MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
 													Optional: true,
 												},
-												"description": schema.StringAttribute{
+												"description_spec": schema.StringAttribute{
 													MarkdownDescription: "Description. Description for the certificate",
 													Optional: true,
 												},
@@ -1109,7 +1113,7 @@ func (r *SecretManagementAccessResource) Create(ctx context.Context, req resourc
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.SecretManagementAccessSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -1134,6 +1138,62 @@ func (r *SecretManagementAccessResource) Create(ctx context.Context, req resourc
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.AccessInfo != nil {
+		access_infoMap := make(map[string]interface{})
+		if data.AccessInfo.RestAuthInfo != nil {
+			rest_auth_infoNestedMap := make(map[string]interface{})
+			access_infoMap["rest_auth_info"] = rest_auth_infoNestedMap
+		}
+		if !data.AccessInfo.Scheme.IsNull() && !data.AccessInfo.Scheme.IsUnknown() {
+			access_infoMap["scheme"] = data.AccessInfo.Scheme.ValueString()
+		}
+		if !data.AccessInfo.ServerEndpoint.IsNull() && !data.AccessInfo.ServerEndpoint.IsUnknown() {
+			access_infoMap["server_endpoint"] = data.AccessInfo.ServerEndpoint.ValueString()
+		}
+		if data.AccessInfo.TLSConfig != nil {
+			tls_configNestedMap := make(map[string]interface{})
+			if !data.AccessInfo.TLSConfig.MaxSessionKeys.IsNull() && !data.AccessInfo.TLSConfig.MaxSessionKeys.IsUnknown() {
+				tls_configNestedMap["max_session_keys"] = data.AccessInfo.TLSConfig.MaxSessionKeys.ValueInt64()
+			}
+			if !data.AccessInfo.TLSConfig.Sni.IsNull() && !data.AccessInfo.TLSConfig.Sni.IsUnknown() {
+				tls_configNestedMap["sni"] = data.AccessInfo.TLSConfig.Sni.ValueString()
+			}
+			access_infoMap["tls_config"] = tls_configNestedMap
+		}
+		if data.AccessInfo.VaultAuthInfo != nil {
+			vault_auth_infoNestedMap := make(map[string]interface{})
+			access_infoMap["vault_auth_info"] = vault_auth_infoNestedMap
+		}
+		apiResource.Spec["access_info"] = access_infoMap
+	}
+	if data.Where != nil {
+		whereMap := make(map[string]interface{})
+		if data.Where.Site != nil {
+			siteNestedMap := make(map[string]interface{})
+			if !data.Where.Site.NetworkType.IsNull() && !data.Where.Site.NetworkType.IsUnknown() {
+				siteNestedMap["network_type"] = data.Where.Site.NetworkType.ValueString()
+			}
+			whereMap["site"] = siteNestedMap
+		}
+		if data.Where.VirtualNetwork != nil {
+			virtual_networkNestedMap := make(map[string]interface{})
+			whereMap["virtual_network"] = virtual_networkNestedMap
+		}
+		if data.Where.VirtualSite != nil {
+			virtual_siteNestedMap := make(map[string]interface{})
+			if !data.Where.VirtualSite.NetworkType.IsNull() && !data.Where.VirtualSite.NetworkType.IsUnknown() {
+				virtual_siteNestedMap["network_type"] = data.Where.VirtualSite.NetworkType.ValueString()
+			}
+			whereMap["virtual_site"] = virtual_siteNestedMap
+		}
+		apiResource.Spec["where"] = whereMap
+	}
+	if !data.ProviderName.IsNull() && !data.ProviderName.IsUnknown() {
+		apiResource.Spec["provider_name"] = data.ProviderName.ValueString()
+	}
+
+
 	created, err := r.client.CreateSecretManagementAccess(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create SecretManagementAccess: %s", err))
@@ -1142,8 +1202,17 @@ func (r *SecretManagementAccessResource) Create(ctx context.Context, req resourc
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+	if v, ok := created.Spec["provider_name"].(string); ok && v != "" {
+		data.ProviderName = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created SecretManagementAccess resource")
@@ -1222,9 +1291,51 @@ func (r *SecretManagementAccessResource) Read(ctx context.Context, req resource.
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if blockData, ok := apiResource.Spec["access_info"].(map[string]interface{}); ok && (isImport || data.AccessInfo != nil) {
+		data.AccessInfo = &SecretManagementAccessAccessInfoModel{
+			Scheme: func() types.String {
+				if v, ok := blockData["scheme"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			ServerEndpoint: func() types.String {
+				if v, ok := blockData["server_endpoint"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["where"].(map[string]interface{}); ok && isImport && data.Where == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Where = &SecretManagementAccessWhereModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["provider_name"].(string); ok && v != "" {
+		data.ProviderName = types.StringValue(v)
+	} else {
+		data.ProviderName = types.StringNull()
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -1250,7 +1361,7 @@ func (r *SecretManagementAccessResource) Update(ctx context.Context, req resourc
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.SecretManagementAccessSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -1275,6 +1386,62 @@ func (r *SecretManagementAccessResource) Update(ctx context.Context, req resourc
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.AccessInfo != nil {
+		access_infoMap := make(map[string]interface{})
+		if data.AccessInfo.RestAuthInfo != nil {
+			rest_auth_infoNestedMap := make(map[string]interface{})
+			access_infoMap["rest_auth_info"] = rest_auth_infoNestedMap
+		}
+		if !data.AccessInfo.Scheme.IsNull() && !data.AccessInfo.Scheme.IsUnknown() {
+			access_infoMap["scheme"] = data.AccessInfo.Scheme.ValueString()
+		}
+		if !data.AccessInfo.ServerEndpoint.IsNull() && !data.AccessInfo.ServerEndpoint.IsUnknown() {
+			access_infoMap["server_endpoint"] = data.AccessInfo.ServerEndpoint.ValueString()
+		}
+		if data.AccessInfo.TLSConfig != nil {
+			tls_configNestedMap := make(map[string]interface{})
+			if !data.AccessInfo.TLSConfig.MaxSessionKeys.IsNull() && !data.AccessInfo.TLSConfig.MaxSessionKeys.IsUnknown() {
+				tls_configNestedMap["max_session_keys"] = data.AccessInfo.TLSConfig.MaxSessionKeys.ValueInt64()
+			}
+			if !data.AccessInfo.TLSConfig.Sni.IsNull() && !data.AccessInfo.TLSConfig.Sni.IsUnknown() {
+				tls_configNestedMap["sni"] = data.AccessInfo.TLSConfig.Sni.ValueString()
+			}
+			access_infoMap["tls_config"] = tls_configNestedMap
+		}
+		if data.AccessInfo.VaultAuthInfo != nil {
+			vault_auth_infoNestedMap := make(map[string]interface{})
+			access_infoMap["vault_auth_info"] = vault_auth_infoNestedMap
+		}
+		apiResource.Spec["access_info"] = access_infoMap
+	}
+	if data.Where != nil {
+		whereMap := make(map[string]interface{})
+		if data.Where.Site != nil {
+			siteNestedMap := make(map[string]interface{})
+			if !data.Where.Site.NetworkType.IsNull() && !data.Where.Site.NetworkType.IsUnknown() {
+				siteNestedMap["network_type"] = data.Where.Site.NetworkType.ValueString()
+			}
+			whereMap["site"] = siteNestedMap
+		}
+		if data.Where.VirtualNetwork != nil {
+			virtual_networkNestedMap := make(map[string]interface{})
+			whereMap["virtual_network"] = virtual_networkNestedMap
+		}
+		if data.Where.VirtualSite != nil {
+			virtual_siteNestedMap := make(map[string]interface{})
+			if !data.Where.VirtualSite.NetworkType.IsNull() && !data.Where.VirtualSite.NetworkType.IsUnknown() {
+				virtual_siteNestedMap["network_type"] = data.Where.VirtualSite.NetworkType.ValueString()
+			}
+			whereMap["virtual_site"] = virtual_siteNestedMap
+		}
+		apiResource.Spec["where"] = whereMap
+	}
+	if !data.ProviderName.IsNull() && !data.ProviderName.IsUnknown() {
+		apiResource.Spec["provider_name"] = data.ProviderName.ValueString()
+	}
+
+
 	updated, err := r.client.UpdateSecretManagementAccess(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update SecretManagementAccess: %s", err))
@@ -1283,6 +1450,12 @@ func (r *SecretManagementAccessResource) Update(ctx context.Context, req resourc
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
+	if v, ok := updated.Spec["provider_name"].(string); ok && v != "" {
+		data.ProviderName = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -1295,6 +1468,7 @@ func (r *SecretManagementAccessResource) Update(ctx context.Context, req resourc
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -1321,6 +1495,15 @@ func (r *SecretManagementAccessResource) Delete(ctx context.Context, req resourc
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "SecretManagementAccess already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "SecretManagementAccess delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

@@ -10,13 +10,8 @@ import (
 
 // VirtualSite represents a F5XC VirtualSite
 type VirtualSite struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     VirtualSiteSpec `json:"spec"`
-}
-
-// VirtualSiteSpec defines the specification for VirtualSite
-type VirtualSiteSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateVirtualSite creates a new VirtualSite

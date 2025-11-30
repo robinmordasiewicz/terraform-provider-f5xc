@@ -97,10 +97,10 @@ type BotDefenseAppInfrastructureResourceModel struct {
 	Annotations types.Map `tfsdk:"annotations"`
 	Description types.String `tfsdk:"description"`
 	Disable types.Bool `tfsdk:"disable"`
-	EnvironmentType types.String `tfsdk:"environment_type"`
 	Labels types.Map `tfsdk:"labels"`
-	TrafficType types.String `tfsdk:"traffic_type"`
 	ID types.String `tfsdk:"id"`
+	EnvironmentType types.String `tfsdk:"environment_type"`
+	TrafficType types.String `tfsdk:"traffic_type"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
 	CloudHosted *BotDefenseAppInfrastructureCloudHostedModel `tfsdk:"cloud_hosted"`
 	DataCenterHosted *BotDefenseAppInfrastructureDataCenterHostedModel `tfsdk:"data_center_hosted"`
@@ -148,21 +148,29 @@ func (r *BotDefenseAppInfrastructureResource) Schema(ctx context.Context, req re
 				MarkdownDescription: "A value of true will administratively disable the object.",
 				Optional: true,
 			},
-			"environment_type": schema.StringAttribute{
-				MarkdownDescription: "Environment Type. Environment Type Production environment Testing environment. Possible values are `PRODUCTION`, `TESTING`. Defaults to `PRODUCTION`.",
-				Optional: true,
-			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
+			"id": schema.StringAttribute{
+				MarkdownDescription: "Unique identifier for the resource.",
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"environment_type": schema.StringAttribute{
+				MarkdownDescription: "Environment Type. Environment Type Production environment Testing environment. Possible values are `PRODUCTION`, `TESTING`. Defaults to `PRODUCTION`.",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
 			"traffic_type": schema.StringAttribute{
 				MarkdownDescription: "Traffic Type. Traffic Type Web traffic Mobile traffic. Possible values are `WEB`, `MOBILE`. Defaults to `WEB`.",
 				Optional: true,
-			},
-			"id": schema.StringAttribute{
-				MarkdownDescription: "Unique identifier for the resource.",
 				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
@@ -398,7 +406,7 @@ func (r *BotDefenseAppInfrastructureResource) Create(ctx context.Context, req re
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.BotDefenseAppInfrastructureSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -423,6 +431,35 @@ func (r *BotDefenseAppInfrastructureResource) Create(ctx context.Context, req re
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.CloudHosted != nil {
+		cloud_hostedMap := make(map[string]interface{})
+		if !data.CloudHosted.InfraHostName.IsNull() && !data.CloudHosted.InfraHostName.IsUnknown() {
+			cloud_hostedMap["infra_host_name"] = data.CloudHosted.InfraHostName.ValueString()
+		}
+		if !data.CloudHosted.Region.IsNull() && !data.CloudHosted.Region.IsUnknown() {
+			cloud_hostedMap["region"] = data.CloudHosted.Region.ValueString()
+		}
+		apiResource.Spec["cloud_hosted"] = cloud_hostedMap
+	}
+	if data.DataCenterHosted != nil {
+		data_center_hostedMap := make(map[string]interface{})
+		if !data.DataCenterHosted.InfraHostName.IsNull() && !data.DataCenterHosted.InfraHostName.IsUnknown() {
+			data_center_hostedMap["infra_host_name"] = data.DataCenterHosted.InfraHostName.ValueString()
+		}
+		if !data.DataCenterHosted.Region.IsNull() && !data.DataCenterHosted.Region.IsUnknown() {
+			data_center_hostedMap["region"] = data.DataCenterHosted.Region.ValueString()
+		}
+		apiResource.Spec["data_center_hosted"] = data_center_hostedMap
+	}
+	if !data.EnvironmentType.IsNull() && !data.EnvironmentType.IsUnknown() {
+		apiResource.Spec["environment_type"] = data.EnvironmentType.ValueString()
+	}
+	if !data.TrafficType.IsNull() && !data.TrafficType.IsUnknown() {
+		apiResource.Spec["traffic_type"] = data.TrafficType.ValueString()
+	}
+
+
 	created, err := r.client.CreateBotDefenseAppInfrastructure(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create BotDefenseAppInfrastructure: %s", err))
@@ -431,8 +468,21 @@ func (r *BotDefenseAppInfrastructureResource) Create(ctx context.Context, req re
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+	if v, ok := created.Spec["environment_type"].(string); ok && v != "" {
+		data.EnvironmentType = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["traffic_type"].(string); ok && v != "" {
+		data.TrafficType = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created BotDefenseAppInfrastructure resource")
@@ -511,9 +561,67 @@ func (r *BotDefenseAppInfrastructureResource) Read(ctx context.Context, req reso
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if blockData, ok := apiResource.Spec["cloud_hosted"].(map[string]interface{}); ok && (isImport || data.CloudHosted != nil) {
+		data.CloudHosted = &BotDefenseAppInfrastructureCloudHostedModel{
+			InfraHostName: func() types.String {
+				if v, ok := blockData["infra_host_name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Region: func() types.String {
+				if v, ok := blockData["region"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["data_center_hosted"].(map[string]interface{}); ok && (isImport || data.DataCenterHosted != nil) {
+		data.DataCenterHosted = &BotDefenseAppInfrastructureDataCenterHostedModel{
+			InfraHostName: func() types.String {
+				if v, ok := blockData["infra_host_name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Region: func() types.String {
+				if v, ok := blockData["region"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if v, ok := apiResource.Spec["environment_type"].(string); ok && v != "" {
+		data.EnvironmentType = types.StringValue(v)
+	} else {
+		data.EnvironmentType = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["traffic_type"].(string); ok && v != "" {
+		data.TrafficType = types.StringValue(v)
+	} else {
+		data.TrafficType = types.StringNull()
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -539,7 +647,7 @@ func (r *BotDefenseAppInfrastructureResource) Update(ctx context.Context, req re
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.BotDefenseAppInfrastructureSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -564,6 +672,35 @@ func (r *BotDefenseAppInfrastructureResource) Update(ctx context.Context, req re
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.CloudHosted != nil {
+		cloud_hostedMap := make(map[string]interface{})
+		if !data.CloudHosted.InfraHostName.IsNull() && !data.CloudHosted.InfraHostName.IsUnknown() {
+			cloud_hostedMap["infra_host_name"] = data.CloudHosted.InfraHostName.ValueString()
+		}
+		if !data.CloudHosted.Region.IsNull() && !data.CloudHosted.Region.IsUnknown() {
+			cloud_hostedMap["region"] = data.CloudHosted.Region.ValueString()
+		}
+		apiResource.Spec["cloud_hosted"] = cloud_hostedMap
+	}
+	if data.DataCenterHosted != nil {
+		data_center_hostedMap := make(map[string]interface{})
+		if !data.DataCenterHosted.InfraHostName.IsNull() && !data.DataCenterHosted.InfraHostName.IsUnknown() {
+			data_center_hostedMap["infra_host_name"] = data.DataCenterHosted.InfraHostName.ValueString()
+		}
+		if !data.DataCenterHosted.Region.IsNull() && !data.DataCenterHosted.Region.IsUnknown() {
+			data_center_hostedMap["region"] = data.DataCenterHosted.Region.ValueString()
+		}
+		apiResource.Spec["data_center_hosted"] = data_center_hostedMap
+	}
+	if !data.EnvironmentType.IsNull() && !data.EnvironmentType.IsUnknown() {
+		apiResource.Spec["environment_type"] = data.EnvironmentType.ValueString()
+	}
+	if !data.TrafficType.IsNull() && !data.TrafficType.IsUnknown() {
+		apiResource.Spec["traffic_type"] = data.TrafficType.ValueString()
+	}
+
+
 	updated, err := r.client.UpdateBotDefenseAppInfrastructure(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update BotDefenseAppInfrastructure: %s", err))
@@ -572,6 +709,16 @@ func (r *BotDefenseAppInfrastructureResource) Update(ctx context.Context, req re
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
+	if v, ok := updated.Spec["environment_type"].(string); ok && v != "" {
+		data.EnvironmentType = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["traffic_type"].(string); ok && v != "" {
+		data.TrafficType = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -584,6 +731,7 @@ func (r *BotDefenseAppInfrastructureResource) Update(ctx context.Context, req re
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -610,6 +758,15 @@ func (r *BotDefenseAppInfrastructureResource) Delete(ctx context.Context, req re
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "BotDefenseAppInfrastructure already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "BotDefenseAppInfrastructure delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

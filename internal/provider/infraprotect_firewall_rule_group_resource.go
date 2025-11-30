@@ -51,9 +51,9 @@ type InfraprotectFirewallRuleGroupResourceModel struct {
 	Annotations types.Map `tfsdk:"annotations"`
 	Description types.String `tfsdk:"description"`
 	Disable types.Bool `tfsdk:"disable"`
-	FirewallRuleGroupName types.String `tfsdk:"firewall_rule_group_name"`
 	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
+	FirewallRuleGroupName types.String `tfsdk:"firewall_rule_group_name"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
 }
 
@@ -99,10 +99,6 @@ func (r *InfraprotectFirewallRuleGroupResource) Schema(ctx context.Context, req 
 				MarkdownDescription: "A value of true will administratively disable the object.",
 				Optional: true,
 			},
-			"firewall_rule_group_name": schema.StringAttribute{
-				MarkdownDescription: "Firewall Rule Group Name. Firewall Rule Group Name",
-				Optional: true,
-			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
 				Optional: true,
@@ -110,6 +106,14 @@ func (r *InfraprotectFirewallRuleGroupResource) Schema(ctx context.Context, req 
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"firewall_rule_group_name": schema.StringAttribute{
+				MarkdownDescription: "Firewall Rule Group Name. Firewall Rule Group Name",
+				Optional: true,
 				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
@@ -245,7 +249,7 @@ func (r *InfraprotectFirewallRuleGroupResource) Create(ctx context.Context, req 
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.InfraprotectFirewallRuleGroupSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -270,6 +274,12 @@ func (r *InfraprotectFirewallRuleGroupResource) Create(ctx context.Context, req 
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if !data.FirewallRuleGroupName.IsNull() && !data.FirewallRuleGroupName.IsUnknown() {
+		apiResource.Spec["firewall_rule_group_name"] = data.FirewallRuleGroupName.ValueString()
+	}
+
+
 	created, err := r.client.CreateInfraprotectFirewallRuleGroup(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create InfraprotectFirewallRuleGroup: %s", err))
@@ -278,8 +288,17 @@ func (r *InfraprotectFirewallRuleGroupResource) Create(ctx context.Context, req 
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+	if v, ok := created.Spec["firewall_rule_group_name"].(string); ok && v != "" {
+		data.FirewallRuleGroupName = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created InfraprotectFirewallRuleGroup resource")
@@ -358,9 +377,30 @@ func (r *InfraprotectFirewallRuleGroupResource) Read(ctx context.Context, req re
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if v, ok := apiResource.Spec["firewall_rule_group_name"].(string); ok && v != "" {
+		data.FirewallRuleGroupName = types.StringValue(v)
+	} else {
+		data.FirewallRuleGroupName = types.StringNull()
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -386,7 +426,7 @@ func (r *InfraprotectFirewallRuleGroupResource) Update(ctx context.Context, req 
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.InfraprotectFirewallRuleGroupSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -411,6 +451,12 @@ func (r *InfraprotectFirewallRuleGroupResource) Update(ctx context.Context, req 
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if !data.FirewallRuleGroupName.IsNull() && !data.FirewallRuleGroupName.IsUnknown() {
+		apiResource.Spec["firewall_rule_group_name"] = data.FirewallRuleGroupName.ValueString()
+	}
+
+
 	updated, err := r.client.UpdateInfraprotectFirewallRuleGroup(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update InfraprotectFirewallRuleGroup: %s", err))
@@ -419,6 +465,12 @@ func (r *InfraprotectFirewallRuleGroupResource) Update(ctx context.Context, req 
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
+	if v, ok := updated.Spec["firewall_rule_group_name"].(string); ok && v != "" {
+		data.FirewallRuleGroupName = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -431,6 +483,7 @@ func (r *InfraprotectFirewallRuleGroupResource) Update(ctx context.Context, req 
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -457,6 +510,15 @@ func (r *InfraprotectFirewallRuleGroupResource) Delete(ctx context.Context, req 
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "InfraprotectFirewallRuleGroup already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "InfraprotectFirewallRuleGroup delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

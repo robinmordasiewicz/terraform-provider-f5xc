@@ -12,6 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -99,9 +100,9 @@ type CminstanceResourceModel struct {
 	Description types.String `tfsdk:"description"`
 	Disable types.Bool `tfsdk:"disable"`
 	Labels types.Map `tfsdk:"labels"`
+	ID types.String `tfsdk:"id"`
 	Port types.Int64 `tfsdk:"port"`
 	Username types.String `tfsdk:"username"`
-	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
 	APIToken *CminstanceAPITokenModel `tfsdk:"api_token"`
 	IP *CminstanceIPModel `tfsdk:"ip"`
@@ -155,16 +156,24 @@ func (r *CminstanceResource) Schema(ctx context.Context, req resource.SchemaRequ
 				Optional: true,
 				ElementType: types.StringType,
 			},
+			"id": schema.StringAttribute{
+				MarkdownDescription: "Unique identifier for the resource.",
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
 			"port": schema.Int64Attribute{
 				MarkdownDescription: "Port. Port of the Central Manager instance to connect to",
 				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.Int64{
+					int64planmodifier.UseStateForUnknown(),
+				},
 			},
 			"username": schema.StringAttribute{
 				MarkdownDescription: "Username. Username for the Central Manager instance",
 				Optional: true,
-			},
-			"id": schema.StringAttribute{
-				MarkdownDescription: "Unique identifier for the resource.",
 				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
@@ -386,7 +395,7 @@ func (r *CminstanceResource) Create(ctx context.Context, req resource.CreateRequ
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.CminstanceSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -411,6 +420,76 @@ func (r *CminstanceResource) Create(ctx context.Context, req resource.CreateRequ
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.APIToken != nil {
+		api_tokenMap := make(map[string]interface{})
+		if data.APIToken.BlindfoldSecretInfo != nil {
+			blindfold_secret_infoNestedMap := make(map[string]interface{})
+			if !data.APIToken.BlindfoldSecretInfo.DecryptionProvider.IsNull() && !data.APIToken.BlindfoldSecretInfo.DecryptionProvider.IsUnknown() {
+				blindfold_secret_infoNestedMap["decryption_provider"] = data.APIToken.BlindfoldSecretInfo.DecryptionProvider.ValueString()
+			}
+			if !data.APIToken.BlindfoldSecretInfo.Location.IsNull() && !data.APIToken.BlindfoldSecretInfo.Location.IsUnknown() {
+				blindfold_secret_infoNestedMap["location"] = data.APIToken.BlindfoldSecretInfo.Location.ValueString()
+			}
+			if !data.APIToken.BlindfoldSecretInfo.StoreProvider.IsNull() && !data.APIToken.BlindfoldSecretInfo.StoreProvider.IsUnknown() {
+				blindfold_secret_infoNestedMap["store_provider"] = data.APIToken.BlindfoldSecretInfo.StoreProvider.ValueString()
+			}
+			api_tokenMap["blindfold_secret_info"] = blindfold_secret_infoNestedMap
+		}
+		if data.APIToken.ClearSecretInfo != nil {
+			clear_secret_infoNestedMap := make(map[string]interface{})
+			if !data.APIToken.ClearSecretInfo.Provider.IsNull() && !data.APIToken.ClearSecretInfo.Provider.IsUnknown() {
+				clear_secret_infoNestedMap["provider"] = data.APIToken.ClearSecretInfo.Provider.ValueString()
+			}
+			if !data.APIToken.ClearSecretInfo.URL.IsNull() && !data.APIToken.ClearSecretInfo.URL.IsUnknown() {
+				clear_secret_infoNestedMap["url"] = data.APIToken.ClearSecretInfo.URL.ValueString()
+			}
+			api_tokenMap["clear_secret_info"] = clear_secret_infoNestedMap
+		}
+		apiResource.Spec["api_token"] = api_tokenMap
+	}
+	if data.IP != nil {
+		ipMap := make(map[string]interface{})
+		if !data.IP.Addr.IsNull() && !data.IP.Addr.IsUnknown() {
+			ipMap["addr"] = data.IP.Addr.ValueString()
+		}
+		apiResource.Spec["ip"] = ipMap
+	}
+	if data.Password != nil {
+		passwordMap := make(map[string]interface{})
+		if data.Password.BlindfoldSecretInfo != nil {
+			blindfold_secret_infoNestedMap := make(map[string]interface{})
+			if !data.Password.BlindfoldSecretInfo.DecryptionProvider.IsNull() && !data.Password.BlindfoldSecretInfo.DecryptionProvider.IsUnknown() {
+				blindfold_secret_infoNestedMap["decryption_provider"] = data.Password.BlindfoldSecretInfo.DecryptionProvider.ValueString()
+			}
+			if !data.Password.BlindfoldSecretInfo.Location.IsNull() && !data.Password.BlindfoldSecretInfo.Location.IsUnknown() {
+				blindfold_secret_infoNestedMap["location"] = data.Password.BlindfoldSecretInfo.Location.ValueString()
+			}
+			if !data.Password.BlindfoldSecretInfo.StoreProvider.IsNull() && !data.Password.BlindfoldSecretInfo.StoreProvider.IsUnknown() {
+				blindfold_secret_infoNestedMap["store_provider"] = data.Password.BlindfoldSecretInfo.StoreProvider.ValueString()
+			}
+			passwordMap["blindfold_secret_info"] = blindfold_secret_infoNestedMap
+		}
+		if data.Password.ClearSecretInfo != nil {
+			clear_secret_infoNestedMap := make(map[string]interface{})
+			if !data.Password.ClearSecretInfo.Provider.IsNull() && !data.Password.ClearSecretInfo.Provider.IsUnknown() {
+				clear_secret_infoNestedMap["provider"] = data.Password.ClearSecretInfo.Provider.ValueString()
+			}
+			if !data.Password.ClearSecretInfo.URL.IsNull() && !data.Password.ClearSecretInfo.URL.IsUnknown() {
+				clear_secret_infoNestedMap["url"] = data.Password.ClearSecretInfo.URL.ValueString()
+			}
+			passwordMap["clear_secret_info"] = clear_secret_infoNestedMap
+		}
+		apiResource.Spec["password"] = passwordMap
+	}
+	if !data.Port.IsNull() && !data.Port.IsUnknown() {
+		apiResource.Spec["port"] = data.Port.ValueInt64()
+	}
+	if !data.Username.IsNull() && !data.Username.IsUnknown() {
+		apiResource.Spec["username"] = data.Username.ValueString()
+	}
+
+
 	created, err := r.client.CreateCminstance(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create Cminstance: %s", err))
@@ -419,8 +498,21 @@ func (r *CminstanceResource) Create(ctx context.Context, req resource.CreateRequ
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+	if v, ok := created.Spec["port"].(float64); ok {
+		data.Port = types.Int64Value(int64(v))
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["username"].(string); ok && v != "" {
+		data.Username = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created Cminstance resource")
@@ -499,9 +591,55 @@ func (r *CminstanceResource) Read(ctx context.Context, req resource.ReadRequest,
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if _, ok := apiResource.Spec["api_token"].(map[string]interface{}); ok && isImport && data.APIToken == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.APIToken = &CminstanceAPITokenModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["ip"].(map[string]interface{}); ok && (isImport || data.IP != nil) {
+		data.IP = &CminstanceIPModel{
+			Addr: func() types.String {
+				if v, ok := blockData["addr"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["password"].(map[string]interface{}); ok && isImport && data.Password == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Password = &CminstancePasswordModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["port"].(float64); ok {
+		data.Port = types.Int64Value(int64(v))
+	} else {
+		data.Port = types.Int64Null()
+	}
+	if v, ok := apiResource.Spec["username"].(string); ok && v != "" {
+		data.Username = types.StringValue(v)
+	} else {
+		data.Username = types.StringNull()
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -527,7 +665,7 @@ func (r *CminstanceResource) Update(ctx context.Context, req resource.UpdateRequ
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.CminstanceSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -552,6 +690,76 @@ func (r *CminstanceResource) Update(ctx context.Context, req resource.UpdateRequ
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.APIToken != nil {
+		api_tokenMap := make(map[string]interface{})
+		if data.APIToken.BlindfoldSecretInfo != nil {
+			blindfold_secret_infoNestedMap := make(map[string]interface{})
+			if !data.APIToken.BlindfoldSecretInfo.DecryptionProvider.IsNull() && !data.APIToken.BlindfoldSecretInfo.DecryptionProvider.IsUnknown() {
+				blindfold_secret_infoNestedMap["decryption_provider"] = data.APIToken.BlindfoldSecretInfo.DecryptionProvider.ValueString()
+			}
+			if !data.APIToken.BlindfoldSecretInfo.Location.IsNull() && !data.APIToken.BlindfoldSecretInfo.Location.IsUnknown() {
+				blindfold_secret_infoNestedMap["location"] = data.APIToken.BlindfoldSecretInfo.Location.ValueString()
+			}
+			if !data.APIToken.BlindfoldSecretInfo.StoreProvider.IsNull() && !data.APIToken.BlindfoldSecretInfo.StoreProvider.IsUnknown() {
+				blindfold_secret_infoNestedMap["store_provider"] = data.APIToken.BlindfoldSecretInfo.StoreProvider.ValueString()
+			}
+			api_tokenMap["blindfold_secret_info"] = blindfold_secret_infoNestedMap
+		}
+		if data.APIToken.ClearSecretInfo != nil {
+			clear_secret_infoNestedMap := make(map[string]interface{})
+			if !data.APIToken.ClearSecretInfo.Provider.IsNull() && !data.APIToken.ClearSecretInfo.Provider.IsUnknown() {
+				clear_secret_infoNestedMap["provider"] = data.APIToken.ClearSecretInfo.Provider.ValueString()
+			}
+			if !data.APIToken.ClearSecretInfo.URL.IsNull() && !data.APIToken.ClearSecretInfo.URL.IsUnknown() {
+				clear_secret_infoNestedMap["url"] = data.APIToken.ClearSecretInfo.URL.ValueString()
+			}
+			api_tokenMap["clear_secret_info"] = clear_secret_infoNestedMap
+		}
+		apiResource.Spec["api_token"] = api_tokenMap
+	}
+	if data.IP != nil {
+		ipMap := make(map[string]interface{})
+		if !data.IP.Addr.IsNull() && !data.IP.Addr.IsUnknown() {
+			ipMap["addr"] = data.IP.Addr.ValueString()
+		}
+		apiResource.Spec["ip"] = ipMap
+	}
+	if data.Password != nil {
+		passwordMap := make(map[string]interface{})
+		if data.Password.BlindfoldSecretInfo != nil {
+			blindfold_secret_infoNestedMap := make(map[string]interface{})
+			if !data.Password.BlindfoldSecretInfo.DecryptionProvider.IsNull() && !data.Password.BlindfoldSecretInfo.DecryptionProvider.IsUnknown() {
+				blindfold_secret_infoNestedMap["decryption_provider"] = data.Password.BlindfoldSecretInfo.DecryptionProvider.ValueString()
+			}
+			if !data.Password.BlindfoldSecretInfo.Location.IsNull() && !data.Password.BlindfoldSecretInfo.Location.IsUnknown() {
+				blindfold_secret_infoNestedMap["location"] = data.Password.BlindfoldSecretInfo.Location.ValueString()
+			}
+			if !data.Password.BlindfoldSecretInfo.StoreProvider.IsNull() && !data.Password.BlindfoldSecretInfo.StoreProvider.IsUnknown() {
+				blindfold_secret_infoNestedMap["store_provider"] = data.Password.BlindfoldSecretInfo.StoreProvider.ValueString()
+			}
+			passwordMap["blindfold_secret_info"] = blindfold_secret_infoNestedMap
+		}
+		if data.Password.ClearSecretInfo != nil {
+			clear_secret_infoNestedMap := make(map[string]interface{})
+			if !data.Password.ClearSecretInfo.Provider.IsNull() && !data.Password.ClearSecretInfo.Provider.IsUnknown() {
+				clear_secret_infoNestedMap["provider"] = data.Password.ClearSecretInfo.Provider.ValueString()
+			}
+			if !data.Password.ClearSecretInfo.URL.IsNull() && !data.Password.ClearSecretInfo.URL.IsUnknown() {
+				clear_secret_infoNestedMap["url"] = data.Password.ClearSecretInfo.URL.ValueString()
+			}
+			passwordMap["clear_secret_info"] = clear_secret_infoNestedMap
+		}
+		apiResource.Spec["password"] = passwordMap
+	}
+	if !data.Port.IsNull() && !data.Port.IsUnknown() {
+		apiResource.Spec["port"] = data.Port.ValueInt64()
+	}
+	if !data.Username.IsNull() && !data.Username.IsUnknown() {
+		apiResource.Spec["username"] = data.Username.ValueString()
+	}
+
+
 	updated, err := r.client.UpdateCminstance(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update Cminstance: %s", err))
@@ -560,6 +768,16 @@ func (r *CminstanceResource) Update(ctx context.Context, req resource.UpdateRequ
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
+	if v, ok := updated.Spec["port"].(float64); ok {
+		data.Port = types.Int64Value(int64(v))
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["username"].(string); ok && v != "" {
+		data.Username = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -572,6 +790,7 @@ func (r *CminstanceResource) Update(ctx context.Context, req resource.UpdateRequ
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -598,6 +817,15 @@ func (r *CminstanceResource) Delete(ctx context.Context, req resource.DeleteRequ
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "Cminstance already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "Cminstance delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

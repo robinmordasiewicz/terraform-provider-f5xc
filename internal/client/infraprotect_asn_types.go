@@ -10,19 +10,14 @@ import (
 
 // InfraprotectAsn represents a F5XC InfraprotectAsn
 type InfraprotectAsn struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     InfraprotectAsnSpec `json:"spec"`
-}
-
-// InfraprotectAsnSpec defines the specification for InfraprotectAsn
-type InfraprotectAsnSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateInfraprotectAsn creates a new InfraprotectAsn
 func (c *Client) CreateInfraprotectAsn(ctx context.Context, resource *InfraprotectAsn) (*InfraprotectAsn, error) {
 	var result InfraprotectAsn
-	path := fmt.Sprintf("/api/config/namespaces/%s/infraprotect_asns", resource.Metadata.Namespace)
+	path := fmt.Sprintf("/api/infraprotect/namespaces/%s/infraprotect_asns", resource.Metadata.Namespace)
 	err := c.Post(ctx, path, resource, &result)
 	return &result, err
 }
@@ -30,7 +25,7 @@ func (c *Client) CreateInfraprotectAsn(ctx context.Context, resource *Infraprote
 // GetInfraprotectAsn retrieves a InfraprotectAsn
 func (c *Client) GetInfraprotectAsn(ctx context.Context, namespace, name string) (*InfraprotectAsn, error) {
 	var result InfraprotectAsn
-	path := fmt.Sprintf("/api/config/namespaces/%s/infraprotect_asns/%s", namespace, name)
+	path := fmt.Sprintf("/api/infraprotect/namespaces/%s/infraprotect_asns/%s", namespace, name)
 	err := c.Get(ctx, path, &result)
 	return &result, err
 }
@@ -38,13 +33,13 @@ func (c *Client) GetInfraprotectAsn(ctx context.Context, namespace, name string)
 // UpdateInfraprotectAsn updates a InfraprotectAsn
 func (c *Client) UpdateInfraprotectAsn(ctx context.Context, resource *InfraprotectAsn) (*InfraprotectAsn, error) {
 	var result InfraprotectAsn
-	path := fmt.Sprintf("/api/config/namespaces/%s/infraprotect_asns/%s", resource.Metadata.Namespace, resource.Metadata.Name)
+	path := fmt.Sprintf("/api/infraprotect/namespaces/%s/infraprotect_asns/%s", resource.Metadata.Namespace, resource.Metadata.Name)
 	err := c.Put(ctx, path, resource, &result)
 	return &result, err
 }
 
 // DeleteInfraprotectAsn deletes a InfraprotectAsn
 func (c *Client) DeleteInfraprotectAsn(ctx context.Context, namespace, name string) error {
-	path := fmt.Sprintf("/api/config/namespaces/%s/infraprotect_asns/%s", namespace, name)
+	path := fmt.Sprintf("/api/infraprotect/namespaces/%s/infraprotect_asns/%s", namespace, name)
 	return c.Delete(ctx, path)
 }

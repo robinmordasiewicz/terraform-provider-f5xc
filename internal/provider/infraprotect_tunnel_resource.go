@@ -520,7 +520,7 @@ func (r *InfraprotectTunnelResource) Create(ctx context.Context, req resource.Cr
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.InfraprotectTunnelSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -545,6 +545,124 @@ func (r *InfraprotectTunnelResource) Create(ctx context.Context, req resource.Cr
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.Bandwidth != nil {
+		bandwidthMap := make(map[string]interface{})
+		if !data.Bandwidth.BandwidthMaxMb.IsNull() && !data.Bandwidth.BandwidthMaxMb.IsUnknown() {
+			bandwidthMap["bandwidth_max_mb"] = data.Bandwidth.BandwidthMaxMb.ValueInt64()
+		}
+		apiResource.Spec["bandwidth"] = bandwidthMap
+	}
+	if data.BGPInformation != nil {
+		bgp_informationMap := make(map[string]interface{})
+		if data.BGPInformation.Asn != nil {
+			asnNestedMap := make(map[string]interface{})
+			if !data.BGPInformation.Asn.Name.IsNull() && !data.BGPInformation.Asn.Name.IsUnknown() {
+				asnNestedMap["name"] = data.BGPInformation.Asn.Name.ValueString()
+			}
+			if !data.BGPInformation.Asn.Namespace.IsNull() && !data.BGPInformation.Asn.Namespace.IsUnknown() {
+				asnNestedMap["namespace"] = data.BGPInformation.Asn.Namespace.ValueString()
+			}
+			if !data.BGPInformation.Asn.Tenant.IsNull() && !data.BGPInformation.Asn.Tenant.IsUnknown() {
+				asnNestedMap["tenant"] = data.BGPInformation.Asn.Tenant.ValueString()
+			}
+			bgp_informationMap["asn"] = asnNestedMap
+		}
+		if !data.BGPInformation.HolddownTimerSeconds.IsNull() && !data.BGPInformation.HolddownTimerSeconds.IsUnknown() {
+			bgp_informationMap["holddown_timer_seconds"] = data.BGPInformation.HolddownTimerSeconds.ValueInt64()
+		}
+		if data.BGPInformation.NoSecret != nil {
+			bgp_informationMap["no_secret"] = map[string]interface{}{}
+		}
+		if data.BGPInformation.PeerSecretOverride != nil {
+			peer_secret_overrideNestedMap := make(map[string]interface{})
+			bgp_informationMap["peer_secret_override"] = peer_secret_overrideNestedMap
+		}
+		if data.BGPInformation.UseDefaultSecret != nil {
+			bgp_informationMap["use_default_secret"] = map[string]interface{}{}
+		}
+		apiResource.Spec["bgp_information"] = bgp_informationMap
+	}
+	if data.FirewallRuleGroup != nil {
+		firewall_rule_groupMap := make(map[string]interface{})
+		if !data.FirewallRuleGroup.Name.IsNull() && !data.FirewallRuleGroup.Name.IsUnknown() {
+			firewall_rule_groupMap["name"] = data.FirewallRuleGroup.Name.ValueString()
+		}
+		if !data.FirewallRuleGroup.Namespace.IsNull() && !data.FirewallRuleGroup.Namespace.IsUnknown() {
+			firewall_rule_groupMap["namespace"] = data.FirewallRuleGroup.Namespace.ValueString()
+		}
+		if !data.FirewallRuleGroup.Tenant.IsNull() && !data.FirewallRuleGroup.Tenant.IsUnknown() {
+			firewall_rule_groupMap["tenant"] = data.FirewallRuleGroup.Tenant.ValueString()
+		}
+		apiResource.Spec["firewall_rule_group"] = firewall_rule_groupMap
+	}
+	if data.GreIPV4 != nil {
+		gre_ipv4Map := make(map[string]interface{})
+		if !data.GreIPV4.CustomerEndpointIPV4.IsNull() && !data.GreIPV4.CustomerEndpointIPV4.IsUnknown() {
+			gre_ipv4Map["customer_endpoint_ipv4"] = data.GreIPV4.CustomerEndpointIPV4.ValueString()
+		}
+		if data.GreIPV4.FragmentationDisabled != nil {
+			gre_ipv4Map["fragmentation_disabled"] = map[string]interface{}{}
+		}
+		if data.GreIPV4.FragmentationEnabled != nil {
+			gre_ipv4Map["fragmentation_enabled"] = map[string]interface{}{}
+		}
+		if data.GreIPV4.IPV6InterconnectDisabled != nil {
+			gre_ipv4Map["ipv6_interconnect_disabled"] = map[string]interface{}{}
+		}
+		if data.GreIPV4.IPV6InterconnectEnabled != nil {
+			gre_ipv4Map["ipv6_interconnect_enabled"] = map[string]interface{}{}
+		}
+		if data.GreIPV4.KeepaliveDisabled != nil {
+			gre_ipv4Map["keepalive_disabled"] = map[string]interface{}{}
+		}
+		if data.GreIPV4.KeepaliveEnabled != nil {
+			gre_ipv4Map["keepalive_enabled"] = map[string]interface{}{}
+		}
+		apiResource.Spec["gre_ipv4"] = gre_ipv4Map
+	}
+	if data.GreIPV6 != nil {
+		gre_ipv6Map := make(map[string]interface{})
+		if !data.GreIPV6.CustomerEndpointIPV6.IsNull() && !data.GreIPV6.CustomerEndpointIPV6.IsUnknown() {
+			gre_ipv6Map["customer_endpoint_ipv6"] = data.GreIPV6.CustomerEndpointIPV6.ValueString()
+		}
+		if data.GreIPV6.IPV4InterconnectDisabled != nil {
+			gre_ipv6Map["ipv4_interconnect_disabled"] = map[string]interface{}{}
+		}
+		if data.GreIPV6.IPV4InterconnectEnabled != nil {
+			gre_ipv6Map["ipv4_interconnect_enabled"] = map[string]interface{}{}
+		}
+		apiResource.Spec["gre_ipv6"] = gre_ipv6Map
+	}
+	if data.IPInIP != nil {
+		ip_in_ipMap := make(map[string]interface{})
+		if !data.IPInIP.CustomerEndpointIPV4.IsNull() && !data.IPInIP.CustomerEndpointIPV4.IsUnknown() {
+			ip_in_ipMap["customer_endpoint_ipv4"] = data.IPInIP.CustomerEndpointIPV4.ValueString()
+		}
+		apiResource.Spec["ip_in_ip"] = ip_in_ipMap
+	}
+	if data.IPV6ToIPV6 != nil {
+		ipv6_to_ipv6Map := make(map[string]interface{})
+		if !data.IPV6ToIPV6.CustomerEndpointIPV6.IsNull() && !data.IPV6ToIPV6.CustomerEndpointIPV6.IsUnknown() {
+			ipv6_to_ipv6Map["customer_endpoint_ipv6"] = data.IPV6ToIPV6.CustomerEndpointIPV6.ValueString()
+		}
+		apiResource.Spec["ipv6_to_ipv6"] = ipv6_to_ipv6Map
+	}
+	if data.TunnelLocation != nil {
+		tunnel_locationMap := make(map[string]interface{})
+		if !data.TunnelLocation.Name.IsNull() && !data.TunnelLocation.Name.IsUnknown() {
+			tunnel_locationMap["name"] = data.TunnelLocation.Name.ValueString()
+		}
+		if data.TunnelLocation.Zone1 != nil {
+			tunnel_locationMap["zone1"] = map[string]interface{}{}
+		}
+		if data.TunnelLocation.Zone2 != nil {
+			tunnel_locationMap["zone2"] = map[string]interface{}{}
+		}
+		apiResource.Spec["tunnel_location"] = tunnel_locationMap
+	}
+
+
 	created, err := r.client.CreateInfraprotectTunnel(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create InfraprotectTunnel: %s", err))
@@ -553,8 +671,13 @@ func (r *InfraprotectTunnelResource) Create(ctx context.Context, req resource.Cr
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created InfraprotectTunnel resource")
@@ -633,9 +756,117 @@ func (r *InfraprotectTunnelResource) Read(ctx context.Context, req resource.Read
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if blockData, ok := apiResource.Spec["bandwidth"].(map[string]interface{}); ok && (isImport || data.Bandwidth != nil) {
+		data.Bandwidth = &InfraprotectTunnelBandwidthModel{
+			BandwidthMaxMb: func() types.Int64 {
+				if v, ok := blockData["bandwidth_max_mb"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["bgp_information"].(map[string]interface{}); ok && (isImport || data.BGPInformation != nil) {
+		data.BGPInformation = &InfraprotectTunnelBGPInformationModel{
+			HolddownTimerSeconds: func() types.Int64 {
+				if v, ok := blockData["holddown_timer_seconds"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["firewall_rule_group"].(map[string]interface{}); ok && (isImport || data.FirewallRuleGroup != nil) {
+		data.FirewallRuleGroup = &InfraprotectTunnelFirewallRuleGroupModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["gre_ipv4"].(map[string]interface{}); ok && (isImport || data.GreIPV4 != nil) {
+		data.GreIPV4 = &InfraprotectTunnelGreIPV4Model{
+			CustomerEndpointIPV4: func() types.String {
+				if v, ok := blockData["customer_endpoint_ipv4"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["gre_ipv6"].(map[string]interface{}); ok && (isImport || data.GreIPV6 != nil) {
+		data.GreIPV6 = &InfraprotectTunnelGreIPV6Model{
+			CustomerEndpointIPV6: func() types.String {
+				if v, ok := blockData["customer_endpoint_ipv6"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["ip_in_ip"].(map[string]interface{}); ok && (isImport || data.IPInIP != nil) {
+		data.IPInIP = &InfraprotectTunnelIPInIPModel{
+			CustomerEndpointIPV4: func() types.String {
+				if v, ok := blockData["customer_endpoint_ipv4"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["ipv6_to_ipv6"].(map[string]interface{}); ok && (isImport || data.IPV6ToIPV6 != nil) {
+		data.IPV6ToIPV6 = &InfraprotectTunnelIPV6ToIPV6Model{
+			CustomerEndpointIPV6: func() types.String {
+				if v, ok := blockData["customer_endpoint_ipv6"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["tunnel_location"].(map[string]interface{}); ok && (isImport || data.TunnelLocation != nil) {
+		data.TunnelLocation = &InfraprotectTunnelTunnelLocationModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -661,7 +892,7 @@ func (r *InfraprotectTunnelResource) Update(ctx context.Context, req resource.Up
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.InfraprotectTunnelSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -686,6 +917,124 @@ func (r *InfraprotectTunnelResource) Update(ctx context.Context, req resource.Up
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.Bandwidth != nil {
+		bandwidthMap := make(map[string]interface{})
+		if !data.Bandwidth.BandwidthMaxMb.IsNull() && !data.Bandwidth.BandwidthMaxMb.IsUnknown() {
+			bandwidthMap["bandwidth_max_mb"] = data.Bandwidth.BandwidthMaxMb.ValueInt64()
+		}
+		apiResource.Spec["bandwidth"] = bandwidthMap
+	}
+	if data.BGPInformation != nil {
+		bgp_informationMap := make(map[string]interface{})
+		if data.BGPInformation.Asn != nil {
+			asnNestedMap := make(map[string]interface{})
+			if !data.BGPInformation.Asn.Name.IsNull() && !data.BGPInformation.Asn.Name.IsUnknown() {
+				asnNestedMap["name"] = data.BGPInformation.Asn.Name.ValueString()
+			}
+			if !data.BGPInformation.Asn.Namespace.IsNull() && !data.BGPInformation.Asn.Namespace.IsUnknown() {
+				asnNestedMap["namespace"] = data.BGPInformation.Asn.Namespace.ValueString()
+			}
+			if !data.BGPInformation.Asn.Tenant.IsNull() && !data.BGPInformation.Asn.Tenant.IsUnknown() {
+				asnNestedMap["tenant"] = data.BGPInformation.Asn.Tenant.ValueString()
+			}
+			bgp_informationMap["asn"] = asnNestedMap
+		}
+		if !data.BGPInformation.HolddownTimerSeconds.IsNull() && !data.BGPInformation.HolddownTimerSeconds.IsUnknown() {
+			bgp_informationMap["holddown_timer_seconds"] = data.BGPInformation.HolddownTimerSeconds.ValueInt64()
+		}
+		if data.BGPInformation.NoSecret != nil {
+			bgp_informationMap["no_secret"] = map[string]interface{}{}
+		}
+		if data.BGPInformation.PeerSecretOverride != nil {
+			peer_secret_overrideNestedMap := make(map[string]interface{})
+			bgp_informationMap["peer_secret_override"] = peer_secret_overrideNestedMap
+		}
+		if data.BGPInformation.UseDefaultSecret != nil {
+			bgp_informationMap["use_default_secret"] = map[string]interface{}{}
+		}
+		apiResource.Spec["bgp_information"] = bgp_informationMap
+	}
+	if data.FirewallRuleGroup != nil {
+		firewall_rule_groupMap := make(map[string]interface{})
+		if !data.FirewallRuleGroup.Name.IsNull() && !data.FirewallRuleGroup.Name.IsUnknown() {
+			firewall_rule_groupMap["name"] = data.FirewallRuleGroup.Name.ValueString()
+		}
+		if !data.FirewallRuleGroup.Namespace.IsNull() && !data.FirewallRuleGroup.Namespace.IsUnknown() {
+			firewall_rule_groupMap["namespace"] = data.FirewallRuleGroup.Namespace.ValueString()
+		}
+		if !data.FirewallRuleGroup.Tenant.IsNull() && !data.FirewallRuleGroup.Tenant.IsUnknown() {
+			firewall_rule_groupMap["tenant"] = data.FirewallRuleGroup.Tenant.ValueString()
+		}
+		apiResource.Spec["firewall_rule_group"] = firewall_rule_groupMap
+	}
+	if data.GreIPV4 != nil {
+		gre_ipv4Map := make(map[string]interface{})
+		if !data.GreIPV4.CustomerEndpointIPV4.IsNull() && !data.GreIPV4.CustomerEndpointIPV4.IsUnknown() {
+			gre_ipv4Map["customer_endpoint_ipv4"] = data.GreIPV4.CustomerEndpointIPV4.ValueString()
+		}
+		if data.GreIPV4.FragmentationDisabled != nil {
+			gre_ipv4Map["fragmentation_disabled"] = map[string]interface{}{}
+		}
+		if data.GreIPV4.FragmentationEnabled != nil {
+			gre_ipv4Map["fragmentation_enabled"] = map[string]interface{}{}
+		}
+		if data.GreIPV4.IPV6InterconnectDisabled != nil {
+			gre_ipv4Map["ipv6_interconnect_disabled"] = map[string]interface{}{}
+		}
+		if data.GreIPV4.IPV6InterconnectEnabled != nil {
+			gre_ipv4Map["ipv6_interconnect_enabled"] = map[string]interface{}{}
+		}
+		if data.GreIPV4.KeepaliveDisabled != nil {
+			gre_ipv4Map["keepalive_disabled"] = map[string]interface{}{}
+		}
+		if data.GreIPV4.KeepaliveEnabled != nil {
+			gre_ipv4Map["keepalive_enabled"] = map[string]interface{}{}
+		}
+		apiResource.Spec["gre_ipv4"] = gre_ipv4Map
+	}
+	if data.GreIPV6 != nil {
+		gre_ipv6Map := make(map[string]interface{})
+		if !data.GreIPV6.CustomerEndpointIPV6.IsNull() && !data.GreIPV6.CustomerEndpointIPV6.IsUnknown() {
+			gre_ipv6Map["customer_endpoint_ipv6"] = data.GreIPV6.CustomerEndpointIPV6.ValueString()
+		}
+		if data.GreIPV6.IPV4InterconnectDisabled != nil {
+			gre_ipv6Map["ipv4_interconnect_disabled"] = map[string]interface{}{}
+		}
+		if data.GreIPV6.IPV4InterconnectEnabled != nil {
+			gre_ipv6Map["ipv4_interconnect_enabled"] = map[string]interface{}{}
+		}
+		apiResource.Spec["gre_ipv6"] = gre_ipv6Map
+	}
+	if data.IPInIP != nil {
+		ip_in_ipMap := make(map[string]interface{})
+		if !data.IPInIP.CustomerEndpointIPV4.IsNull() && !data.IPInIP.CustomerEndpointIPV4.IsUnknown() {
+			ip_in_ipMap["customer_endpoint_ipv4"] = data.IPInIP.CustomerEndpointIPV4.ValueString()
+		}
+		apiResource.Spec["ip_in_ip"] = ip_in_ipMap
+	}
+	if data.IPV6ToIPV6 != nil {
+		ipv6_to_ipv6Map := make(map[string]interface{})
+		if !data.IPV6ToIPV6.CustomerEndpointIPV6.IsNull() && !data.IPV6ToIPV6.CustomerEndpointIPV6.IsUnknown() {
+			ipv6_to_ipv6Map["customer_endpoint_ipv6"] = data.IPV6ToIPV6.CustomerEndpointIPV6.ValueString()
+		}
+		apiResource.Spec["ipv6_to_ipv6"] = ipv6_to_ipv6Map
+	}
+	if data.TunnelLocation != nil {
+		tunnel_locationMap := make(map[string]interface{})
+		if !data.TunnelLocation.Name.IsNull() && !data.TunnelLocation.Name.IsUnknown() {
+			tunnel_locationMap["name"] = data.TunnelLocation.Name.ValueString()
+		}
+		if data.TunnelLocation.Zone1 != nil {
+			tunnel_locationMap["zone1"] = map[string]interface{}{}
+		}
+		if data.TunnelLocation.Zone2 != nil {
+			tunnel_locationMap["zone2"] = map[string]interface{}{}
+		}
+		apiResource.Spec["tunnel_location"] = tunnel_locationMap
+	}
+
+
 	updated, err := r.client.UpdateInfraprotectTunnel(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update InfraprotectTunnel: %s", err))
@@ -694,6 +1043,8 @@ func (r *InfraprotectTunnelResource) Update(ctx context.Context, req resource.Up
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -706,6 +1057,7 @@ func (r *InfraprotectTunnelResource) Update(ctx context.Context, req resource.Up
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -732,6 +1084,15 @@ func (r *InfraprotectTunnelResource) Delete(ctx context.Context, req resource.De
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "InfraprotectTunnel already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "InfraprotectTunnel delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

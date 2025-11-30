@@ -10,13 +10,8 @@ import (
 
 // AddressAllocator represents a F5XC AddressAllocator
 type AddressAllocator struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     AddressAllocatorSpec `json:"spec"`
-}
-
-// AddressAllocatorSpec defines the specification for AddressAllocator
-type AddressAllocatorSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateAddressAllocator creates a new AddressAllocator

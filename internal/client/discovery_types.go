@@ -10,13 +10,8 @@ import (
 
 // Discovery represents a F5XC Discovery
 type Discovery struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     DiscoverySpec `json:"spec"`
-}
-
-// DiscoverySpec defines the specification for Discovery
-type DiscoverySpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateDiscovery creates a new Discovery

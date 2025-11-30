@@ -10,13 +10,8 @@ import (
 
 // Route represents a F5XC Route
 type Route struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     RouteSpec `json:"spec"`
-}
-
-// RouteSpec defines the specification for Route
-type RouteSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateRoute creates a new Route

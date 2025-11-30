@@ -382,7 +382,7 @@ func (r *AppAPIGroupResource) Create(ctx context.Context, req resource.CreateReq
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.AppAPIGroupSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -407,6 +407,71 @@ func (r *AppAPIGroupResource) Create(ctx context.Context, req resource.CreateReq
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.BigIPVirtualServer != nil {
+		bigip_virtual_serverMap := make(map[string]interface{})
+		if data.BigIPVirtualServer.BigIPVirtualServer != nil {
+			bigip_virtual_serverNestedMap := make(map[string]interface{})
+			if !data.BigIPVirtualServer.BigIPVirtualServer.Name.IsNull() && !data.BigIPVirtualServer.BigIPVirtualServer.Name.IsUnknown() {
+				bigip_virtual_serverNestedMap["name"] = data.BigIPVirtualServer.BigIPVirtualServer.Name.ValueString()
+			}
+			if !data.BigIPVirtualServer.BigIPVirtualServer.Namespace.IsNull() && !data.BigIPVirtualServer.BigIPVirtualServer.Namespace.IsUnknown() {
+				bigip_virtual_serverNestedMap["namespace"] = data.BigIPVirtualServer.BigIPVirtualServer.Namespace.ValueString()
+			}
+			if !data.BigIPVirtualServer.BigIPVirtualServer.Tenant.IsNull() && !data.BigIPVirtualServer.BigIPVirtualServer.Tenant.IsUnknown() {
+				bigip_virtual_serverNestedMap["tenant"] = data.BigIPVirtualServer.BigIPVirtualServer.Tenant.ValueString()
+			}
+			bigip_virtual_serverMap["bigip_virtual_server"] = bigip_virtual_serverNestedMap
+		}
+		apiResource.Spec["bigip_virtual_server"] = bigip_virtual_serverMap
+	}
+	if data.CDNLoadBalancer != nil {
+		cdn_loadbalancerMap := make(map[string]interface{})
+		if data.CDNLoadBalancer.CDNLoadBalancer != nil {
+			cdn_loadbalancerNestedMap := make(map[string]interface{})
+			if !data.CDNLoadBalancer.CDNLoadBalancer.Name.IsNull() && !data.CDNLoadBalancer.CDNLoadBalancer.Name.IsUnknown() {
+				cdn_loadbalancerNestedMap["name"] = data.CDNLoadBalancer.CDNLoadBalancer.Name.ValueString()
+			}
+			if !data.CDNLoadBalancer.CDNLoadBalancer.Namespace.IsNull() && !data.CDNLoadBalancer.CDNLoadBalancer.Namespace.IsUnknown() {
+				cdn_loadbalancerNestedMap["namespace"] = data.CDNLoadBalancer.CDNLoadBalancer.Namespace.ValueString()
+			}
+			if !data.CDNLoadBalancer.CDNLoadBalancer.Tenant.IsNull() && !data.CDNLoadBalancer.CDNLoadBalancer.Tenant.IsUnknown() {
+				cdn_loadbalancerNestedMap["tenant"] = data.CDNLoadBalancer.CDNLoadBalancer.Tenant.ValueString()
+			}
+			cdn_loadbalancerMap["cdn_loadbalancer"] = cdn_loadbalancerNestedMap
+		}
+		apiResource.Spec["cdn_loadbalancer"] = cdn_loadbalancerMap
+	}
+	if len(data.Elements) > 0 {
+		var elementsList []map[string]interface{}
+		for _, item := range data.Elements {
+			itemMap := make(map[string]interface{})
+			if !item.PathRegex.IsNull() && !item.PathRegex.IsUnknown() {
+				itemMap["path_regex"] = item.PathRegex.ValueString()
+			}
+			elementsList = append(elementsList, itemMap)
+		}
+		apiResource.Spec["elements"] = elementsList
+	}
+	if data.HTTPLoadBalancer != nil {
+		http_loadbalancerMap := make(map[string]interface{})
+		if data.HTTPLoadBalancer.HTTPLoadBalancer != nil {
+			http_loadbalancerNestedMap := make(map[string]interface{})
+			if !data.HTTPLoadBalancer.HTTPLoadBalancer.Name.IsNull() && !data.HTTPLoadBalancer.HTTPLoadBalancer.Name.IsUnknown() {
+				http_loadbalancerNestedMap["name"] = data.HTTPLoadBalancer.HTTPLoadBalancer.Name.ValueString()
+			}
+			if !data.HTTPLoadBalancer.HTTPLoadBalancer.Namespace.IsNull() && !data.HTTPLoadBalancer.HTTPLoadBalancer.Namespace.IsUnknown() {
+				http_loadbalancerNestedMap["namespace"] = data.HTTPLoadBalancer.HTTPLoadBalancer.Namespace.ValueString()
+			}
+			if !data.HTTPLoadBalancer.HTTPLoadBalancer.Tenant.IsNull() && !data.HTTPLoadBalancer.HTTPLoadBalancer.Tenant.IsUnknown() {
+				http_loadbalancerNestedMap["tenant"] = data.HTTPLoadBalancer.HTTPLoadBalancer.Tenant.ValueString()
+			}
+			http_loadbalancerMap["http_loadbalancer"] = http_loadbalancerNestedMap
+		}
+		apiResource.Spec["http_loadbalancer"] = http_loadbalancerMap
+	}
+
+
 	created, err := r.client.CreateAppAPIGroup(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create AppAPIGroup: %s", err))
@@ -415,8 +480,13 @@ func (r *AppAPIGroupResource) Create(ctx context.Context, req resource.CreateReq
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created AppAPIGroup resource")
@@ -495,9 +565,56 @@ func (r *AppAPIGroupResource) Read(ctx context.Context, req resource.ReadRequest
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if _, ok := apiResource.Spec["bigip_virtual_server"].(map[string]interface{}); ok && isImport && data.BigIPVirtualServer == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.BigIPVirtualServer = &AppAPIGroupBigIPVirtualServerModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["cdn_loadbalancer"].(map[string]interface{}); ok && isImport && data.CDNLoadBalancer == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.CDNLoadBalancer = &AppAPIGroupCDNLoadBalancerModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["elements"].([]interface{}); ok && len(listData) > 0 {
+		var elementsList []AppAPIGroupElementsModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				elementsList = append(elementsList, AppAPIGroupElementsModel{
+					PathRegex: func() types.String {
+						if v, ok := itemMap["path_regex"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.Elements = elementsList
+	}
+	if _, ok := apiResource.Spec["http_loadbalancer"].(map[string]interface{}); ok && isImport && data.HTTPLoadBalancer == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.HTTPLoadBalancer = &AppAPIGroupHTTPLoadBalancerModel{}
+	}
+	// Normal Read: preserve existing state value
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -523,7 +640,7 @@ func (r *AppAPIGroupResource) Update(ctx context.Context, req resource.UpdateReq
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.AppAPIGroupSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -548,6 +665,71 @@ func (r *AppAPIGroupResource) Update(ctx context.Context, req resource.UpdateReq
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.BigIPVirtualServer != nil {
+		bigip_virtual_serverMap := make(map[string]interface{})
+		if data.BigIPVirtualServer.BigIPVirtualServer != nil {
+			bigip_virtual_serverNestedMap := make(map[string]interface{})
+			if !data.BigIPVirtualServer.BigIPVirtualServer.Name.IsNull() && !data.BigIPVirtualServer.BigIPVirtualServer.Name.IsUnknown() {
+				bigip_virtual_serverNestedMap["name"] = data.BigIPVirtualServer.BigIPVirtualServer.Name.ValueString()
+			}
+			if !data.BigIPVirtualServer.BigIPVirtualServer.Namespace.IsNull() && !data.BigIPVirtualServer.BigIPVirtualServer.Namespace.IsUnknown() {
+				bigip_virtual_serverNestedMap["namespace"] = data.BigIPVirtualServer.BigIPVirtualServer.Namespace.ValueString()
+			}
+			if !data.BigIPVirtualServer.BigIPVirtualServer.Tenant.IsNull() && !data.BigIPVirtualServer.BigIPVirtualServer.Tenant.IsUnknown() {
+				bigip_virtual_serverNestedMap["tenant"] = data.BigIPVirtualServer.BigIPVirtualServer.Tenant.ValueString()
+			}
+			bigip_virtual_serverMap["bigip_virtual_server"] = bigip_virtual_serverNestedMap
+		}
+		apiResource.Spec["bigip_virtual_server"] = bigip_virtual_serverMap
+	}
+	if data.CDNLoadBalancer != nil {
+		cdn_loadbalancerMap := make(map[string]interface{})
+		if data.CDNLoadBalancer.CDNLoadBalancer != nil {
+			cdn_loadbalancerNestedMap := make(map[string]interface{})
+			if !data.CDNLoadBalancer.CDNLoadBalancer.Name.IsNull() && !data.CDNLoadBalancer.CDNLoadBalancer.Name.IsUnknown() {
+				cdn_loadbalancerNestedMap["name"] = data.CDNLoadBalancer.CDNLoadBalancer.Name.ValueString()
+			}
+			if !data.CDNLoadBalancer.CDNLoadBalancer.Namespace.IsNull() && !data.CDNLoadBalancer.CDNLoadBalancer.Namespace.IsUnknown() {
+				cdn_loadbalancerNestedMap["namespace"] = data.CDNLoadBalancer.CDNLoadBalancer.Namespace.ValueString()
+			}
+			if !data.CDNLoadBalancer.CDNLoadBalancer.Tenant.IsNull() && !data.CDNLoadBalancer.CDNLoadBalancer.Tenant.IsUnknown() {
+				cdn_loadbalancerNestedMap["tenant"] = data.CDNLoadBalancer.CDNLoadBalancer.Tenant.ValueString()
+			}
+			cdn_loadbalancerMap["cdn_loadbalancer"] = cdn_loadbalancerNestedMap
+		}
+		apiResource.Spec["cdn_loadbalancer"] = cdn_loadbalancerMap
+	}
+	if len(data.Elements) > 0 {
+		var elementsList []map[string]interface{}
+		for _, item := range data.Elements {
+			itemMap := make(map[string]interface{})
+			if !item.PathRegex.IsNull() && !item.PathRegex.IsUnknown() {
+				itemMap["path_regex"] = item.PathRegex.ValueString()
+			}
+			elementsList = append(elementsList, itemMap)
+		}
+		apiResource.Spec["elements"] = elementsList
+	}
+	if data.HTTPLoadBalancer != nil {
+		http_loadbalancerMap := make(map[string]interface{})
+		if data.HTTPLoadBalancer.HTTPLoadBalancer != nil {
+			http_loadbalancerNestedMap := make(map[string]interface{})
+			if !data.HTTPLoadBalancer.HTTPLoadBalancer.Name.IsNull() && !data.HTTPLoadBalancer.HTTPLoadBalancer.Name.IsUnknown() {
+				http_loadbalancerNestedMap["name"] = data.HTTPLoadBalancer.HTTPLoadBalancer.Name.ValueString()
+			}
+			if !data.HTTPLoadBalancer.HTTPLoadBalancer.Namespace.IsNull() && !data.HTTPLoadBalancer.HTTPLoadBalancer.Namespace.IsUnknown() {
+				http_loadbalancerNestedMap["namespace"] = data.HTTPLoadBalancer.HTTPLoadBalancer.Namespace.ValueString()
+			}
+			if !data.HTTPLoadBalancer.HTTPLoadBalancer.Tenant.IsNull() && !data.HTTPLoadBalancer.HTTPLoadBalancer.Tenant.IsUnknown() {
+				http_loadbalancerNestedMap["tenant"] = data.HTTPLoadBalancer.HTTPLoadBalancer.Tenant.ValueString()
+			}
+			http_loadbalancerMap["http_loadbalancer"] = http_loadbalancerNestedMap
+		}
+		apiResource.Spec["http_loadbalancer"] = http_loadbalancerMap
+	}
+
+
 	updated, err := r.client.UpdateAppAPIGroup(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update AppAPIGroup: %s", err))
@@ -556,6 +738,8 @@ func (r *AppAPIGroupResource) Update(ctx context.Context, req resource.UpdateReq
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -568,6 +752,7 @@ func (r *AppAPIGroupResource) Update(ctx context.Context, req resource.UpdateReq
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -594,6 +779,15 @@ func (r *AppAPIGroupResource) Delete(ctx context.Context, req resource.DeleteReq
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "AppAPIGroup already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "AppAPIGroup delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

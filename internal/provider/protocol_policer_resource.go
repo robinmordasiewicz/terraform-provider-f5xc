@@ -348,7 +348,7 @@ func (r *ProtocolPolicerResource) Create(ctx context.Context, req resource.Creat
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.ProtocolPolicerSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -373,6 +373,21 @@ func (r *ProtocolPolicerResource) Create(ctx context.Context, req resource.Creat
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if len(data.ProtocolPolicer) > 0 {
+		var protocol_policerList []map[string]interface{}
+		for _, item := range data.ProtocolPolicer {
+			itemMap := make(map[string]interface{})
+			if item.Protocol != nil {
+				protocolNestedMap := make(map[string]interface{})
+				itemMap["protocol"] = protocolNestedMap
+			}
+			protocol_policerList = append(protocol_policerList, itemMap)
+		}
+		apiResource.Spec["protocol_policer"] = protocol_policerList
+	}
+
+
 	created, err := r.client.CreateProtocolPolicer(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create ProtocolPolicer: %s", err))
@@ -381,8 +396,13 @@ func (r *ProtocolPolicerResource) Create(ctx context.Context, req resource.Creat
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created ProtocolPolicer resource")
@@ -461,9 +481,42 @@ func (r *ProtocolPolicerResource) Read(ctx context.Context, req resource.ReadReq
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if listData, ok := apiResource.Spec["protocol_policer"].([]interface{}); ok && len(listData) > 0 {
+		var protocol_policerList []ProtocolPolicerProtocolPolicerModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				protocol_policerList = append(protocol_policerList, ProtocolPolicerProtocolPolicerModel{
+					Protocol: func() *ProtocolPolicerProtocolPolicerProtocolModel {
+						if _, ok := itemMap["protocol"].(map[string]interface{}); ok {
+							return &ProtocolPolicerProtocolPolicerProtocolModel{
+							}
+						}
+						return nil
+					}(),
+				})
+			}
+		}
+		data.ProtocolPolicer = protocol_policerList
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -489,7 +542,7 @@ func (r *ProtocolPolicerResource) Update(ctx context.Context, req resource.Updat
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.ProtocolPolicerSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -514,6 +567,21 @@ func (r *ProtocolPolicerResource) Update(ctx context.Context, req resource.Updat
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if len(data.ProtocolPolicer) > 0 {
+		var protocol_policerList []map[string]interface{}
+		for _, item := range data.ProtocolPolicer {
+			itemMap := make(map[string]interface{})
+			if item.Protocol != nil {
+				protocolNestedMap := make(map[string]interface{})
+				itemMap["protocol"] = protocolNestedMap
+			}
+			protocol_policerList = append(protocol_policerList, itemMap)
+		}
+		apiResource.Spec["protocol_policer"] = protocol_policerList
+	}
+
+
 	updated, err := r.client.UpdateProtocolPolicer(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update ProtocolPolicer: %s", err))
@@ -522,6 +590,8 @@ func (r *ProtocolPolicerResource) Update(ctx context.Context, req resource.Updat
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -534,6 +604,7 @@ func (r *ProtocolPolicerResource) Update(ctx context.Context, req resource.Updat
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -560,6 +631,15 @@ func (r *ProtocolPolicerResource) Delete(ctx context.Context, req resource.Delet
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "ProtocolPolicer already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "ProtocolPolicer delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

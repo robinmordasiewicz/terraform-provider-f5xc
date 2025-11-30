@@ -10,13 +10,8 @@ import (
 
 // BotDefenseAppInfrastructure represents a F5XC BotDefenseAppInfrastructure
 type BotDefenseAppInfrastructure struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     BotDefenseAppInfrastructureSpec `json:"spec"`
-}
-
-// BotDefenseAppInfrastructureSpec defines the specification for BotDefenseAppInfrastructure
-type BotDefenseAppInfrastructureSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateBotDefenseAppInfrastructure creates a new BotDefenseAppInfrastructure

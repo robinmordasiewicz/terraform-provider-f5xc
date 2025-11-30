@@ -84,11 +84,11 @@ type CertificateResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Annotations types.Map `tfsdk:"annotations"`
-	CertificateURL types.String `tfsdk:"certificate_url"`
 	Description types.String `tfsdk:"description"`
 	Disable types.Bool `tfsdk:"disable"`
 	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
+	CertificateURL types.String `tfsdk:"certificate_url"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
 	CertificateChain *CertificateCertificateChainModel `tfsdk:"certificate_chain"`
 	CustomHashAlgorithms *CertificateCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
@@ -131,10 +131,6 @@ func (r *CertificateResource) Schema(ctx context.Context, req resource.SchemaReq
 				Optional: true,
 				ElementType: types.StringType,
 			},
-			"certificate_url": schema.StringAttribute{
-				MarkdownDescription: "Certificate. Certificate. Certificate or certificate chain in PEM format including the PEM headers.",
-				Optional: true,
-			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
 				Optional: true,
@@ -150,6 +146,14 @@ func (r *CertificateResource) Schema(ctx context.Context, req resource.SchemaReq
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"certificate_url": schema.StringAttribute{
+				MarkdownDescription: "Certificate. Certificate. Certificate or certificate chain in PEM format including the PEM headers.",
+				Optional: true,
 				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
@@ -358,7 +362,7 @@ func (r *CertificateResource) Create(ctx context.Context, req resource.CreateReq
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.CertificateSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -383,6 +387,64 @@ func (r *CertificateResource) Create(ctx context.Context, req resource.CreateReq
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.CertificateChain != nil {
+		certificate_chainMap := make(map[string]interface{})
+		if !data.CertificateChain.Name.IsNull() && !data.CertificateChain.Name.IsUnknown() {
+			certificate_chainMap["name"] = data.CertificateChain.Name.ValueString()
+		}
+		if !data.CertificateChain.Namespace.IsNull() && !data.CertificateChain.Namespace.IsUnknown() {
+			certificate_chainMap["namespace"] = data.CertificateChain.Namespace.ValueString()
+		}
+		if !data.CertificateChain.Tenant.IsNull() && !data.CertificateChain.Tenant.IsUnknown() {
+			certificate_chainMap["tenant"] = data.CertificateChain.Tenant.ValueString()
+		}
+		apiResource.Spec["certificate_chain"] = certificate_chainMap
+	}
+	if data.CustomHashAlgorithms != nil {
+		custom_hash_algorithmsMap := make(map[string]interface{})
+		apiResource.Spec["custom_hash_algorithms"] = custom_hash_algorithmsMap
+	}
+	if data.DisableOcspStapling != nil {
+		disable_ocsp_staplingMap := make(map[string]interface{})
+		apiResource.Spec["disable_ocsp_stapling"] = disable_ocsp_staplingMap
+	}
+	if data.PrivateKey != nil {
+		private_keyMap := make(map[string]interface{})
+		if data.PrivateKey.BlindfoldSecretInfo != nil {
+			blindfold_secret_infoNestedMap := make(map[string]interface{})
+			if !data.PrivateKey.BlindfoldSecretInfo.DecryptionProvider.IsNull() && !data.PrivateKey.BlindfoldSecretInfo.DecryptionProvider.IsUnknown() {
+				blindfold_secret_infoNestedMap["decryption_provider"] = data.PrivateKey.BlindfoldSecretInfo.DecryptionProvider.ValueString()
+			}
+			if !data.PrivateKey.BlindfoldSecretInfo.Location.IsNull() && !data.PrivateKey.BlindfoldSecretInfo.Location.IsUnknown() {
+				blindfold_secret_infoNestedMap["location"] = data.PrivateKey.BlindfoldSecretInfo.Location.ValueString()
+			}
+			if !data.PrivateKey.BlindfoldSecretInfo.StoreProvider.IsNull() && !data.PrivateKey.BlindfoldSecretInfo.StoreProvider.IsUnknown() {
+				blindfold_secret_infoNestedMap["store_provider"] = data.PrivateKey.BlindfoldSecretInfo.StoreProvider.ValueString()
+			}
+			private_keyMap["blindfold_secret_info"] = blindfold_secret_infoNestedMap
+		}
+		if data.PrivateKey.ClearSecretInfo != nil {
+			clear_secret_infoNestedMap := make(map[string]interface{})
+			if !data.PrivateKey.ClearSecretInfo.Provider.IsNull() && !data.PrivateKey.ClearSecretInfo.Provider.IsUnknown() {
+				clear_secret_infoNestedMap["provider"] = data.PrivateKey.ClearSecretInfo.Provider.ValueString()
+			}
+			if !data.PrivateKey.ClearSecretInfo.URL.IsNull() && !data.PrivateKey.ClearSecretInfo.URL.IsUnknown() {
+				clear_secret_infoNestedMap["url"] = data.PrivateKey.ClearSecretInfo.URL.ValueString()
+			}
+			private_keyMap["clear_secret_info"] = clear_secret_infoNestedMap
+		}
+		apiResource.Spec["private_key"] = private_keyMap
+	}
+	if data.UseSystemDefaults != nil {
+		use_system_defaultsMap := make(map[string]interface{})
+		apiResource.Spec["use_system_defaults"] = use_system_defaultsMap
+	}
+	if !data.CertificateURL.IsNull() && !data.CertificateURL.IsUnknown() {
+		apiResource.Spec["certificate_url"] = data.CertificateURL.ValueString()
+	}
+
+
 	created, err := r.client.CreateCertificate(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create Certificate: %s", err))
@@ -391,8 +453,17 @@ func (r *CertificateResource) Create(ctx context.Context, req resource.CreateReq
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+	if v, ok := created.Spec["certificate_url"].(string); ok && v != "" {
+		data.CertificateURL = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created Certificate resource")
@@ -471,9 +542,72 @@ func (r *CertificateResource) Read(ctx context.Context, req resource.ReadRequest
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if blockData, ok := apiResource.Spec["certificate_chain"].(map[string]interface{}); ok && (isImport || data.CertificateChain != nil) {
+		data.CertificateChain = &CertificateCertificateChainModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["custom_hash_algorithms"].(map[string]interface{}); ok && isImport && data.CustomHashAlgorithms == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.CustomHashAlgorithms = &CertificateCustomHashAlgorithmsModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["disable_ocsp_stapling"].(map[string]interface{}); ok && isImport && data.DisableOcspStapling == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableOcspStapling = &CertificateEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["private_key"].(map[string]interface{}); ok && isImport && data.PrivateKey == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.PrivateKey = &CertificatePrivateKeyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["use_system_defaults"].(map[string]interface{}); ok && isImport && data.UseSystemDefaults == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.UseSystemDefaults = &CertificateEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["certificate_url"].(string); ok && v != "" {
+		data.CertificateURL = types.StringValue(v)
+	} else {
+		data.CertificateURL = types.StringNull()
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -499,7 +633,7 @@ func (r *CertificateResource) Update(ctx context.Context, req resource.UpdateReq
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.CertificateSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -524,6 +658,64 @@ func (r *CertificateResource) Update(ctx context.Context, req resource.UpdateReq
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.CertificateChain != nil {
+		certificate_chainMap := make(map[string]interface{})
+		if !data.CertificateChain.Name.IsNull() && !data.CertificateChain.Name.IsUnknown() {
+			certificate_chainMap["name"] = data.CertificateChain.Name.ValueString()
+		}
+		if !data.CertificateChain.Namespace.IsNull() && !data.CertificateChain.Namespace.IsUnknown() {
+			certificate_chainMap["namespace"] = data.CertificateChain.Namespace.ValueString()
+		}
+		if !data.CertificateChain.Tenant.IsNull() && !data.CertificateChain.Tenant.IsUnknown() {
+			certificate_chainMap["tenant"] = data.CertificateChain.Tenant.ValueString()
+		}
+		apiResource.Spec["certificate_chain"] = certificate_chainMap
+	}
+	if data.CustomHashAlgorithms != nil {
+		custom_hash_algorithmsMap := make(map[string]interface{})
+		apiResource.Spec["custom_hash_algorithms"] = custom_hash_algorithmsMap
+	}
+	if data.DisableOcspStapling != nil {
+		disable_ocsp_staplingMap := make(map[string]interface{})
+		apiResource.Spec["disable_ocsp_stapling"] = disable_ocsp_staplingMap
+	}
+	if data.PrivateKey != nil {
+		private_keyMap := make(map[string]interface{})
+		if data.PrivateKey.BlindfoldSecretInfo != nil {
+			blindfold_secret_infoNestedMap := make(map[string]interface{})
+			if !data.PrivateKey.BlindfoldSecretInfo.DecryptionProvider.IsNull() && !data.PrivateKey.BlindfoldSecretInfo.DecryptionProvider.IsUnknown() {
+				blindfold_secret_infoNestedMap["decryption_provider"] = data.PrivateKey.BlindfoldSecretInfo.DecryptionProvider.ValueString()
+			}
+			if !data.PrivateKey.BlindfoldSecretInfo.Location.IsNull() && !data.PrivateKey.BlindfoldSecretInfo.Location.IsUnknown() {
+				blindfold_secret_infoNestedMap["location"] = data.PrivateKey.BlindfoldSecretInfo.Location.ValueString()
+			}
+			if !data.PrivateKey.BlindfoldSecretInfo.StoreProvider.IsNull() && !data.PrivateKey.BlindfoldSecretInfo.StoreProvider.IsUnknown() {
+				blindfold_secret_infoNestedMap["store_provider"] = data.PrivateKey.BlindfoldSecretInfo.StoreProvider.ValueString()
+			}
+			private_keyMap["blindfold_secret_info"] = blindfold_secret_infoNestedMap
+		}
+		if data.PrivateKey.ClearSecretInfo != nil {
+			clear_secret_infoNestedMap := make(map[string]interface{})
+			if !data.PrivateKey.ClearSecretInfo.Provider.IsNull() && !data.PrivateKey.ClearSecretInfo.Provider.IsUnknown() {
+				clear_secret_infoNestedMap["provider"] = data.PrivateKey.ClearSecretInfo.Provider.ValueString()
+			}
+			if !data.PrivateKey.ClearSecretInfo.URL.IsNull() && !data.PrivateKey.ClearSecretInfo.URL.IsUnknown() {
+				clear_secret_infoNestedMap["url"] = data.PrivateKey.ClearSecretInfo.URL.ValueString()
+			}
+			private_keyMap["clear_secret_info"] = clear_secret_infoNestedMap
+		}
+		apiResource.Spec["private_key"] = private_keyMap
+	}
+	if data.UseSystemDefaults != nil {
+		use_system_defaultsMap := make(map[string]interface{})
+		apiResource.Spec["use_system_defaults"] = use_system_defaultsMap
+	}
+	if !data.CertificateURL.IsNull() && !data.CertificateURL.IsUnknown() {
+		apiResource.Spec["certificate_url"] = data.CertificateURL.ValueString()
+	}
+
+
 	updated, err := r.client.UpdateCertificate(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update Certificate: %s", err))
@@ -532,6 +724,12 @@ func (r *CertificateResource) Update(ctx context.Context, req resource.UpdateReq
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
+	if v, ok := updated.Spec["certificate_url"].(string); ok && v != "" {
+		data.CertificateURL = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -544,6 +742,7 @@ func (r *CertificateResource) Update(ctx context.Context, req resource.UpdateReq
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -570,6 +769,15 @@ func (r *CertificateResource) Delete(ctx context.Context, req resource.DeleteReq
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "Certificate already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "Certificate delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

@@ -216,7 +216,7 @@ type ForwardProxyPolicyRuleListRulesLabelSelectorModel struct {
 
 // ForwardProxyPolicyRuleListRulesMetadataModel represents metadata block
 type ForwardProxyPolicyRuleListRulesMetadataModel struct {
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name types.String `tfsdk:"name"`
 }
 
@@ -580,7 +580,7 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 										"as_numbers": schema.ListAttribute{
 											MarkdownDescription: "AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
 											Optional: true,
-											ElementType: types.StringType,
+											ElementType: types.Int64Type,
 										},
 									},
 								},
@@ -711,7 +711,7 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 								"metadata": schema.SingleNestedBlock{
 									MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 									Attributes: map[string]schema.Attribute{
-										"description": schema.StringAttribute{
+										"description_spec": schema.StringAttribute{
 											MarkdownDescription: "Description. Human readable description.",
 											Optional: true,
 										},
@@ -912,7 +912,7 @@ func (r *ForwardProxyPolicyResource) Create(ctx context.Context, req resource.Cr
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.ForwardProxyPolicySpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -937,6 +937,68 @@ func (r *ForwardProxyPolicyResource) Create(ctx context.Context, req resource.Cr
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.AllowAll != nil {
+		allow_allMap := make(map[string]interface{})
+		apiResource.Spec["allow_all"] = allow_allMap
+	}
+	if data.AllowList != nil {
+		allow_listMap := make(map[string]interface{})
+		if data.AllowList.DefaultActionAllow != nil {
+			allow_listMap["default_action_allow"] = map[string]interface{}{}
+		}
+		if data.AllowList.DefaultActionDeny != nil {
+			allow_listMap["default_action_deny"] = map[string]interface{}{}
+		}
+		if data.AllowList.DefaultActionNextPolicy != nil {
+			allow_listMap["default_action_next_policy"] = map[string]interface{}{}
+		}
+		apiResource.Spec["allow_list"] = allow_listMap
+	}
+	if data.AnyProxy != nil {
+		any_proxyMap := make(map[string]interface{})
+		apiResource.Spec["any_proxy"] = any_proxyMap
+	}
+	if data.DenyList != nil {
+		deny_listMap := make(map[string]interface{})
+		if data.DenyList.DefaultActionAllow != nil {
+			deny_listMap["default_action_allow"] = map[string]interface{}{}
+		}
+		if data.DenyList.DefaultActionDeny != nil {
+			deny_listMap["default_action_deny"] = map[string]interface{}{}
+		}
+		if data.DenyList.DefaultActionNextPolicy != nil {
+			deny_listMap["default_action_next_policy"] = map[string]interface{}{}
+		}
+		apiResource.Spec["deny_list"] = deny_listMap
+	}
+	if data.DrpHTTPConnect != nil {
+		drp_http_connectMap := make(map[string]interface{})
+		apiResource.Spec["drp_http_connect"] = drp_http_connectMap
+	}
+	if data.NetworkConnector != nil {
+		network_connectorMap := make(map[string]interface{})
+		if !data.NetworkConnector.Name.IsNull() && !data.NetworkConnector.Name.IsUnknown() {
+			network_connectorMap["name"] = data.NetworkConnector.Name.ValueString()
+		}
+		if !data.NetworkConnector.Namespace.IsNull() && !data.NetworkConnector.Namespace.IsUnknown() {
+			network_connectorMap["namespace"] = data.NetworkConnector.Namespace.ValueString()
+		}
+		if !data.NetworkConnector.Tenant.IsNull() && !data.NetworkConnector.Tenant.IsUnknown() {
+			network_connectorMap["tenant"] = data.NetworkConnector.Tenant.ValueString()
+		}
+		apiResource.Spec["network_connector"] = network_connectorMap
+	}
+	if data.ProxyLabelSelector != nil {
+		proxy_label_selectorMap := make(map[string]interface{})
+		apiResource.Spec["proxy_label_selector"] = proxy_label_selectorMap
+	}
+	if data.RuleList != nil {
+		rule_listMap := make(map[string]interface{})
+		apiResource.Spec["rule_list"] = rule_listMap
+	}
+
+
 	created, err := r.client.CreateForwardProxyPolicy(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create ForwardProxyPolicy: %s", err))
@@ -945,8 +1007,13 @@ func (r *ForwardProxyPolicyResource) Create(ctx context.Context, req resource.Cr
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created ForwardProxyPolicy resource")
@@ -1025,9 +1092,82 @@ func (r *ForwardProxyPolicyResource) Read(ctx context.Context, req resource.Read
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if _, ok := apiResource.Spec["allow_all"].(map[string]interface{}); ok && isImport && data.AllowAll == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AllowAll = &ForwardProxyPolicyEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["allow_list"].(map[string]interface{}); ok && isImport && data.AllowList == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AllowList = &ForwardProxyPolicyAllowListModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["any_proxy"].(map[string]interface{}); ok && isImport && data.AnyProxy == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AnyProxy = &ForwardProxyPolicyEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["deny_list"].(map[string]interface{}); ok && isImport && data.DenyList == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DenyList = &ForwardProxyPolicyDenyListModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["drp_http_connect"].(map[string]interface{}); ok && isImport && data.DrpHTTPConnect == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DrpHTTPConnect = &ForwardProxyPolicyEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["network_connector"].(map[string]interface{}); ok && (isImport || data.NetworkConnector != nil) {
+		data.NetworkConnector = &ForwardProxyPolicyNetworkConnectorModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["proxy_label_selector"].(map[string]interface{}); ok && isImport && data.ProxyLabelSelector == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ProxyLabelSelector = &ForwardProxyPolicyProxyLabelSelectorModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["rule_list"].(map[string]interface{}); ok && isImport && data.RuleList == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.RuleList = &ForwardProxyPolicyRuleListModel{}
+	}
+	// Normal Read: preserve existing state value
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -1053,7 +1193,7 @@ func (r *ForwardProxyPolicyResource) Update(ctx context.Context, req resource.Up
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.ForwardProxyPolicySpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -1078,6 +1218,68 @@ func (r *ForwardProxyPolicyResource) Update(ctx context.Context, req resource.Up
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.AllowAll != nil {
+		allow_allMap := make(map[string]interface{})
+		apiResource.Spec["allow_all"] = allow_allMap
+	}
+	if data.AllowList != nil {
+		allow_listMap := make(map[string]interface{})
+		if data.AllowList.DefaultActionAllow != nil {
+			allow_listMap["default_action_allow"] = map[string]interface{}{}
+		}
+		if data.AllowList.DefaultActionDeny != nil {
+			allow_listMap["default_action_deny"] = map[string]interface{}{}
+		}
+		if data.AllowList.DefaultActionNextPolicy != nil {
+			allow_listMap["default_action_next_policy"] = map[string]interface{}{}
+		}
+		apiResource.Spec["allow_list"] = allow_listMap
+	}
+	if data.AnyProxy != nil {
+		any_proxyMap := make(map[string]interface{})
+		apiResource.Spec["any_proxy"] = any_proxyMap
+	}
+	if data.DenyList != nil {
+		deny_listMap := make(map[string]interface{})
+		if data.DenyList.DefaultActionAllow != nil {
+			deny_listMap["default_action_allow"] = map[string]interface{}{}
+		}
+		if data.DenyList.DefaultActionDeny != nil {
+			deny_listMap["default_action_deny"] = map[string]interface{}{}
+		}
+		if data.DenyList.DefaultActionNextPolicy != nil {
+			deny_listMap["default_action_next_policy"] = map[string]interface{}{}
+		}
+		apiResource.Spec["deny_list"] = deny_listMap
+	}
+	if data.DrpHTTPConnect != nil {
+		drp_http_connectMap := make(map[string]interface{})
+		apiResource.Spec["drp_http_connect"] = drp_http_connectMap
+	}
+	if data.NetworkConnector != nil {
+		network_connectorMap := make(map[string]interface{})
+		if !data.NetworkConnector.Name.IsNull() && !data.NetworkConnector.Name.IsUnknown() {
+			network_connectorMap["name"] = data.NetworkConnector.Name.ValueString()
+		}
+		if !data.NetworkConnector.Namespace.IsNull() && !data.NetworkConnector.Namespace.IsUnknown() {
+			network_connectorMap["namespace"] = data.NetworkConnector.Namespace.ValueString()
+		}
+		if !data.NetworkConnector.Tenant.IsNull() && !data.NetworkConnector.Tenant.IsUnknown() {
+			network_connectorMap["tenant"] = data.NetworkConnector.Tenant.ValueString()
+		}
+		apiResource.Spec["network_connector"] = network_connectorMap
+	}
+	if data.ProxyLabelSelector != nil {
+		proxy_label_selectorMap := make(map[string]interface{})
+		apiResource.Spec["proxy_label_selector"] = proxy_label_selectorMap
+	}
+	if data.RuleList != nil {
+		rule_listMap := make(map[string]interface{})
+		apiResource.Spec["rule_list"] = rule_listMap
+	}
+
+
 	updated, err := r.client.UpdateForwardProxyPolicy(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update ForwardProxyPolicy: %s", err))
@@ -1086,6 +1288,8 @@ func (r *ForwardProxyPolicyResource) Update(ctx context.Context, req resource.Up
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -1098,6 +1302,7 @@ func (r *ForwardProxyPolicyResource) Update(ctx context.Context, req resource.Up
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -1124,6 +1329,15 @@ func (r *ForwardProxyPolicyResource) Delete(ctx context.Context, req resource.De
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "ForwardProxyPolicy already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "ForwardProxyPolicy delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

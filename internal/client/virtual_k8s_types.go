@@ -10,13 +10,8 @@ import (
 
 // VirtualK8S represents a F5XC VirtualK8S
 type VirtualK8S struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     VirtualK8SSpec `json:"spec"`
-}
-
-// VirtualK8SSpec defines the specification for VirtualK8S
-type VirtualK8SSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateVirtualK8S creates a new VirtualK8S

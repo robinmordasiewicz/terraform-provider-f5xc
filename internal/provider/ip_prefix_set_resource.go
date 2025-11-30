@@ -51,7 +51,7 @@ type IPPrefixSetEmptyModel struct {
 
 // IPPrefixSetIPV4PrefixesModel represents ipv4_prefixes block
 type IPPrefixSetIPV4PrefixesModel struct {
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	IPV4Prefix types.String `tfsdk:"ipv4_prefix"`
 }
 
@@ -133,7 +133,7 @@ func (r *IPPrefixSetResource) Schema(ctx context.Context, req resource.SchemaReq
 				MarkdownDescription: "IPv4 Prefixes. list of IPv4 prefixes with description.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
-						"description": schema.StringAttribute{
+						"description_spec": schema.StringAttribute{
 							MarkdownDescription: "Description.",
 							Optional: true,
 						},
@@ -267,7 +267,7 @@ func (r *IPPrefixSetResource) Create(ctx context.Context, req resource.CreateReq
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.IPPrefixSetSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -292,6 +292,23 @@ func (r *IPPrefixSetResource) Create(ctx context.Context, req resource.CreateReq
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if len(data.IPV4Prefixes) > 0 {
+		var ipv4_prefixesList []map[string]interface{}
+		for _, item := range data.IPV4Prefixes {
+			itemMap := make(map[string]interface{})
+			if !item.DescriptionSpec.IsNull() && !item.DescriptionSpec.IsUnknown() {
+				itemMap["description"] = item.DescriptionSpec.ValueString()
+			}
+			if !item.IPV4Prefix.IsNull() && !item.IPV4Prefix.IsUnknown() {
+				itemMap["ipv4_prefix"] = item.IPV4Prefix.ValueString()
+			}
+			ipv4_prefixesList = append(ipv4_prefixesList, itemMap)
+		}
+		apiResource.Spec["ipv4_prefixes"] = ipv4_prefixesList
+	}
+
+
 	created, err := r.client.CreateIPPrefixSet(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create IPPrefixSet: %s", err))
@@ -300,8 +317,13 @@ func (r *IPPrefixSetResource) Create(ctx context.Context, req resource.CreateReq
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created IPPrefixSet resource")
@@ -380,9 +402,47 @@ func (r *IPPrefixSetResource) Read(ctx context.Context, req resource.ReadRequest
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if listData, ok := apiResource.Spec["ipv4_prefixes"].([]interface{}); ok && len(listData) > 0 {
+		var ipv4_prefixesList []IPPrefixSetIPV4PrefixesModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				ipv4_prefixesList = append(ipv4_prefixesList, IPPrefixSetIPV4PrefixesModel{
+					DescriptionSpec: func() types.String {
+						if v, ok := itemMap["description"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					IPV4Prefix: func() types.String {
+						if v, ok := itemMap["ipv4_prefix"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.IPV4Prefixes = ipv4_prefixesList
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -408,7 +468,7 @@ func (r *IPPrefixSetResource) Update(ctx context.Context, req resource.UpdateReq
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.IPPrefixSetSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -433,6 +493,23 @@ func (r *IPPrefixSetResource) Update(ctx context.Context, req resource.UpdateReq
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if len(data.IPV4Prefixes) > 0 {
+		var ipv4_prefixesList []map[string]interface{}
+		for _, item := range data.IPV4Prefixes {
+			itemMap := make(map[string]interface{})
+			if !item.DescriptionSpec.IsNull() && !item.DescriptionSpec.IsUnknown() {
+				itemMap["description"] = item.DescriptionSpec.ValueString()
+			}
+			if !item.IPV4Prefix.IsNull() && !item.IPV4Prefix.IsUnknown() {
+				itemMap["ipv4_prefix"] = item.IPV4Prefix.ValueString()
+			}
+			ipv4_prefixesList = append(ipv4_prefixesList, itemMap)
+		}
+		apiResource.Spec["ipv4_prefixes"] = ipv4_prefixesList
+	}
+
+
 	updated, err := r.client.UpdateIPPrefixSet(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update IPPrefixSet: %s", err))
@@ -441,6 +518,8 @@ func (r *IPPrefixSetResource) Update(ctx context.Context, req resource.UpdateReq
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -453,6 +532,7 @@ func (r *IPPrefixSetResource) Update(ctx context.Context, req resource.UpdateReq
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -479,6 +559,15 @@ func (r *IPPrefixSetResource) Delete(ctx context.Context, req resource.DeleteReq
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "IPPrefixSet already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "IPPrefixSet delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

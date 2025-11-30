@@ -10,19 +10,14 @@ import (
 
 // InfraprotectTunnel represents a F5XC InfraprotectTunnel
 type InfraprotectTunnel struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     InfraprotectTunnelSpec `json:"spec"`
-}
-
-// InfraprotectTunnelSpec defines the specification for InfraprotectTunnel
-type InfraprotectTunnelSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateInfraprotectTunnel creates a new InfraprotectTunnel
 func (c *Client) CreateInfraprotectTunnel(ctx context.Context, resource *InfraprotectTunnel) (*InfraprotectTunnel, error) {
 	var result InfraprotectTunnel
-	path := fmt.Sprintf("/api/config/namespaces/%s/infraprotect_tunnels", resource.Metadata.Namespace)
+	path := fmt.Sprintf("/api/infraprotect/namespaces/%s/infraprotect_tunnels", resource.Metadata.Namespace)
 	err := c.Post(ctx, path, resource, &result)
 	return &result, err
 }
@@ -30,7 +25,7 @@ func (c *Client) CreateInfraprotectTunnel(ctx context.Context, resource *Infrapr
 // GetInfraprotectTunnel retrieves a InfraprotectTunnel
 func (c *Client) GetInfraprotectTunnel(ctx context.Context, namespace, name string) (*InfraprotectTunnel, error) {
 	var result InfraprotectTunnel
-	path := fmt.Sprintf("/api/config/namespaces/%s/infraprotect_tunnels/%s", namespace, name)
+	path := fmt.Sprintf("/api/infraprotect/namespaces/%s/infraprotect_tunnels/%s", namespace, name)
 	err := c.Get(ctx, path, &result)
 	return &result, err
 }
@@ -38,13 +33,13 @@ func (c *Client) GetInfraprotectTunnel(ctx context.Context, namespace, name stri
 // UpdateInfraprotectTunnel updates a InfraprotectTunnel
 func (c *Client) UpdateInfraprotectTunnel(ctx context.Context, resource *InfraprotectTunnel) (*InfraprotectTunnel, error) {
 	var result InfraprotectTunnel
-	path := fmt.Sprintf("/api/config/namespaces/%s/infraprotect_tunnels/%s", resource.Metadata.Namespace, resource.Metadata.Name)
+	path := fmt.Sprintf("/api/infraprotect/namespaces/%s/infraprotect_tunnels/%s", resource.Metadata.Namespace, resource.Metadata.Name)
 	err := c.Put(ctx, path, resource, &result)
 	return &result, err
 }
 
 // DeleteInfraprotectTunnel deletes a InfraprotectTunnel
 func (c *Client) DeleteInfraprotectTunnel(ctx context.Context, namespace, name string) error {
-	path := fmt.Sprintf("/api/config/namespaces/%s/infraprotect_tunnels/%s", namespace, name)
+	path := fmt.Sprintf("/api/infraprotect/namespaces/%s/infraprotect_tunnels/%s", namespace, name)
 	return c.Delete(ctx, path)
 }

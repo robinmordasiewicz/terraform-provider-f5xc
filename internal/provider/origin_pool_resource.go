@@ -12,6 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -427,7 +428,7 @@ type OriginPoolUseTLSUseMtlsModel struct {
 // OriginPoolUseTLSUseMtlsTLSCertificatesModel represents tls_certificates block
 type OriginPoolUseTLSUseMtlsTLSCertificatesModel struct {
 	CertificateURL types.String `tfsdk:"certificate_url"`
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	CustomHashAlgorithms *OriginPoolUseTLSUseMtlsTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
 	DisableOcspStapling *OriginPoolEmptyModel `tfsdk:"disable_ocsp_stapling"`
 	PrivateKey *OriginPoolUseTLSUseMtlsTLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
@@ -484,12 +485,12 @@ type OriginPoolResourceModel struct {
 	Annotations types.Map `tfsdk:"annotations"`
 	Description types.String `tfsdk:"description"`
 	Disable types.Bool `tfsdk:"disable"`
+	Labels types.Map `tfsdk:"labels"`
+	ID types.String `tfsdk:"id"`
 	EndpointSelection types.String `tfsdk:"endpoint_selection"`
 	HealthCheckPort types.Int64 `tfsdk:"health_check_port"`
-	Labels types.Map `tfsdk:"labels"`
 	LoadBalancerAlgorithm types.String `tfsdk:"loadbalancer_algorithm"`
 	Port types.Int64 `tfsdk:"port"`
-	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
 	AdvancedOptions *OriginPoolAdvancedOptionsModel `tfsdk:"advanced_options"`
 	AutomaticPort *OriginPoolEmptyModel `tfsdk:"automatic_port"`
@@ -544,32 +545,48 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 				MarkdownDescription: "A value of true will administratively disable the object.",
 				Optional: true,
 			},
-			"endpoint_selection": schema.StringAttribute{
-				MarkdownDescription: "Endpoint Selection Policy. Policy for selection of endpoints from local site/remote site/both Consider both remote and local endpoints for load balancing LOCAL_ONLY: Consider only local endpoints for load balancing Enable this policy to load balance ONLY among locally discovered endpoints Prefer the local endpoints for load balancing. If local endpoints are not present remote endpoints will be considered. Possible values are `DISTRIBUTED`, `LOCAL_ONLY`, `LOCAL_PREFERRED`. Defaults to `DISTRIBUTED`.",
-				Optional: true,
-			},
-			"health_check_port": schema.Int64Attribute{
-				MarkdownDescription: "[OneOf: health_check_port, same_as_endpoint_port] Health check port. Port used for performing health check",
-				Optional: true,
-			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
 				Optional: true,
 				ElementType: types.StringType,
-			},
-			"loadbalancer_algorithm": schema.StringAttribute{
-				MarkdownDescription: "Load Balancer Algorithm. Different load balancing algorithms supported When a connection to a endpoint in an upstream cluster is required, the load balancer uses loadbalancer_algorithm to determine which host is selected. - ROUND_ROBIN: ROUND_ROBIN Policy in which each healthy/available upstream endpoint is selected in round robin order. - LEAST_REQUEST: LEAST_REQUEST Policy in which loadbalancer picks the upstream endpoint which has the fewest active requests - RING_HASH: RING_HASH Policy implements consistent hashing to upstream endpoints using ring hash of endpoint names Hash of the incoming request is calculated using request hash policy. The ring/modulo hash load balancer implements consistent hashing to upstream hosts. The algorithm is based on mapping all hosts onto a circle such that the addition or removal of a host from the host set changes only affect 1/N requests. This technique is also commonly known as “ketama” hashing. A consistent hashing load balancer is only effective when protocol routing is used that specifies a value to hash on. The minimum ring size governs the replication factor for each host in the ring. For example, if the minimum ring size is 1024 and there are 16 hosts, each host will be replicated 64 times. - RANDOM: RANDOM Policy in which each available upstream endpoint is selected in random order. The random load balancer selects a random healthy host. The random load balancer generally performs better than round robin if no health checking policy is configured. Random selection avoids bias towards the host in the set that comes after a failed host. - LB_OVERRIDE: Load Balancer Override Hash policy is taken from from the load balancer which is using this origin pool. Possible values are `ROUND_ROBIN`, `LEAST_REQUEST`, `RING_HASH`, `RANDOM`, `LB_OVERRIDE`. Defaults to `ROUND_ROBIN`.",
-				Optional: true,
-			},
-			"port": schema.Int64Attribute{
-				MarkdownDescription: "Port. Endpoint service is available on this port",
-				Optional: true,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
 				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"endpoint_selection": schema.StringAttribute{
+				MarkdownDescription: "Endpoint Selection Policy. Policy for selection of endpoints from local site/remote site/both Consider both remote and local endpoints for load balancing LOCAL_ONLY: Consider only local endpoints for load balancing Enable this policy to load balance ONLY among locally discovered endpoints Prefer the local endpoints for load balancing. If local endpoints are not present remote endpoints will be considered. Possible values are `DISTRIBUTED`, `LOCAL_ONLY`, `LOCAL_PREFERRED`. Defaults to `DISTRIBUTED`.",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"health_check_port": schema.Int64Attribute{
+				MarkdownDescription: "[OneOf: health_check_port, same_as_endpoint_port] Health check port. Port used for performing health check",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.Int64{
+					int64planmodifier.UseStateForUnknown(),
+				},
+			},
+			"loadbalancer_algorithm": schema.StringAttribute{
+				MarkdownDescription: "Load Balancer Algorithm. Different load balancing algorithms supported When a connection to a endpoint in an upstream cluster is required, the load balancer uses loadbalancer_algorithm to determine which host is selected. - ROUND_ROBIN: ROUND_ROBIN Policy in which each healthy/available upstream endpoint is selected in round robin order. - LEAST_REQUEST: LEAST_REQUEST Policy in which loadbalancer picks the upstream endpoint which has the fewest active requests - RING_HASH: RING_HASH Policy implements consistent hashing to upstream endpoints using ring hash of endpoint names Hash of the incoming request is calculated using request hash policy. The ring/modulo hash load balancer implements consistent hashing to upstream hosts. The algorithm is based on mapping all hosts onto a circle such that the addition or removal of a host from the host set changes only affect 1/N requests. This technique is also commonly known as “ketama” hashing. A consistent hashing load balancer is only effective when protocol routing is used that specifies a value to hash on. The minimum ring size governs the replication factor for each host in the ring. For example, if the minimum ring size is 1024 and there are 16 hosts, each host will be replicated 64 times. - RANDOM: RANDOM Policy in which each available upstream endpoint is selected in random order. The random load balancer selects a random healthy host. The random load balancer generally performs better than round robin if no health checking policy is configured. Random selection avoids bias towards the host in the set that comes after a failed host. - LB_OVERRIDE: Load Balancer Override Hash policy is taken from from the load balancer which is using this origin pool. Possible values are `ROUND_ROBIN`, `LEAST_REQUEST`, `RING_HASH`, `RANDOM`, `LB_OVERRIDE`. Defaults to `ROUND_ROBIN`.",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"port": schema.Int64Attribute{
+				MarkdownDescription: "Port. Endpoint service is available on this port",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.Int64{
+					int64planmodifier.UseStateForUnknown(),
 				},
 			},
 		},
@@ -1358,7 +1375,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 											MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
 											Optional: true,
 										},
-										"description": schema.StringAttribute{
+										"description_spec": schema.StringAttribute{
 											MarkdownDescription: "Description. Description for the certificate",
 											Optional: true,
 										},
@@ -1595,7 +1612,7 @@ func (r *OriginPoolResource) Create(ctx context.Context, req resource.CreateRequ
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.OriginPoolSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -1620,6 +1637,309 @@ func (r *OriginPoolResource) Create(ctx context.Context, req resource.CreateRequ
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.AdvancedOptions != nil {
+		advanced_optionsMap := make(map[string]interface{})
+		if data.AdvancedOptions.AutoHTTPConfig != nil {
+			advanced_optionsMap["auto_http_config"] = map[string]interface{}{}
+		}
+		if data.AdvancedOptions.CircuitBreaker != nil {
+			circuit_breakerNestedMap := make(map[string]interface{})
+			if !data.AdvancedOptions.CircuitBreaker.ConnectionLimit.IsNull() && !data.AdvancedOptions.CircuitBreaker.ConnectionLimit.IsUnknown() {
+				circuit_breakerNestedMap["connection_limit"] = data.AdvancedOptions.CircuitBreaker.ConnectionLimit.ValueInt64()
+			}
+			if !data.AdvancedOptions.CircuitBreaker.MaxRequests.IsNull() && !data.AdvancedOptions.CircuitBreaker.MaxRequests.IsUnknown() {
+				circuit_breakerNestedMap["max_requests"] = data.AdvancedOptions.CircuitBreaker.MaxRequests.ValueInt64()
+			}
+			if !data.AdvancedOptions.CircuitBreaker.PendingRequests.IsNull() && !data.AdvancedOptions.CircuitBreaker.PendingRequests.IsUnknown() {
+				circuit_breakerNestedMap["pending_requests"] = data.AdvancedOptions.CircuitBreaker.PendingRequests.ValueInt64()
+			}
+			if !data.AdvancedOptions.CircuitBreaker.Priority.IsNull() && !data.AdvancedOptions.CircuitBreaker.Priority.IsUnknown() {
+				circuit_breakerNestedMap["priority"] = data.AdvancedOptions.CircuitBreaker.Priority.ValueString()
+			}
+			if !data.AdvancedOptions.CircuitBreaker.Retries.IsNull() && !data.AdvancedOptions.CircuitBreaker.Retries.IsUnknown() {
+				circuit_breakerNestedMap["retries"] = data.AdvancedOptions.CircuitBreaker.Retries.ValueInt64()
+			}
+			advanced_optionsMap["circuit_breaker"] = circuit_breakerNestedMap
+		}
+		if !data.AdvancedOptions.ConnectionTimeout.IsNull() && !data.AdvancedOptions.ConnectionTimeout.IsUnknown() {
+			advanced_optionsMap["connection_timeout"] = data.AdvancedOptions.ConnectionTimeout.ValueInt64()
+		}
+		if data.AdvancedOptions.DefaultCircuitBreaker != nil {
+			advanced_optionsMap["default_circuit_breaker"] = map[string]interface{}{}
+		}
+		if data.AdvancedOptions.DisableCircuitBreaker != nil {
+			advanced_optionsMap["disable_circuit_breaker"] = map[string]interface{}{}
+		}
+		if data.AdvancedOptions.DisableLbSourceIPPersistance != nil {
+			advanced_optionsMap["disable_lb_source_ip_persistance"] = map[string]interface{}{}
+		}
+		if data.AdvancedOptions.DisableOutlierDetection != nil {
+			advanced_optionsMap["disable_outlier_detection"] = map[string]interface{}{}
+		}
+		if data.AdvancedOptions.DisableProxyProtocol != nil {
+			advanced_optionsMap["disable_proxy_protocol"] = map[string]interface{}{}
+		}
+		if data.AdvancedOptions.DisableSubsets != nil {
+			advanced_optionsMap["disable_subsets"] = map[string]interface{}{}
+		}
+		if data.AdvancedOptions.EnableLbSourceIPPersistance != nil {
+			advanced_optionsMap["enable_lb_source_ip_persistance"] = map[string]interface{}{}
+		}
+		if data.AdvancedOptions.EnableSubsets != nil {
+			enable_subsetsNestedMap := make(map[string]interface{})
+			advanced_optionsMap["enable_subsets"] = enable_subsetsNestedMap
+		}
+		if data.AdvancedOptions.Http1Config != nil {
+			http1_configNestedMap := make(map[string]interface{})
+			advanced_optionsMap["http1_config"] = http1_configNestedMap
+		}
+		if data.AdvancedOptions.Http2Options != nil {
+			http2_optionsNestedMap := make(map[string]interface{})
+			if !data.AdvancedOptions.Http2Options.Enabled.IsNull() && !data.AdvancedOptions.Http2Options.Enabled.IsUnknown() {
+				http2_optionsNestedMap["enabled"] = data.AdvancedOptions.Http2Options.Enabled.ValueBool()
+			}
+			advanced_optionsMap["http2_options"] = http2_optionsNestedMap
+		}
+		if !data.AdvancedOptions.HTTPIdleTimeout.IsNull() && !data.AdvancedOptions.HTTPIdleTimeout.IsUnknown() {
+			advanced_optionsMap["http_idle_timeout"] = data.AdvancedOptions.HTTPIdleTimeout.ValueInt64()
+		}
+		if data.AdvancedOptions.NoPanicThreshold != nil {
+			advanced_optionsMap["no_panic_threshold"] = map[string]interface{}{}
+		}
+		if data.AdvancedOptions.OutlierDetection != nil {
+			outlier_detectionNestedMap := make(map[string]interface{})
+			if !data.AdvancedOptions.OutlierDetection.BaseEjectionTime.IsNull() && !data.AdvancedOptions.OutlierDetection.BaseEjectionTime.IsUnknown() {
+				outlier_detectionNestedMap["base_ejection_time"] = data.AdvancedOptions.OutlierDetection.BaseEjectionTime.ValueInt64()
+			}
+			if !data.AdvancedOptions.OutlierDetection.Consecutive5xx.IsNull() && !data.AdvancedOptions.OutlierDetection.Consecutive5xx.IsUnknown() {
+				outlier_detectionNestedMap["consecutive_5xx"] = data.AdvancedOptions.OutlierDetection.Consecutive5xx.ValueInt64()
+			}
+			if !data.AdvancedOptions.OutlierDetection.ConsecutiveGatewayFailure.IsNull() && !data.AdvancedOptions.OutlierDetection.ConsecutiveGatewayFailure.IsUnknown() {
+				outlier_detectionNestedMap["consecutive_gateway_failure"] = data.AdvancedOptions.OutlierDetection.ConsecutiveGatewayFailure.ValueInt64()
+			}
+			if !data.AdvancedOptions.OutlierDetection.Interval.IsNull() && !data.AdvancedOptions.OutlierDetection.Interval.IsUnknown() {
+				outlier_detectionNestedMap["interval"] = data.AdvancedOptions.OutlierDetection.Interval.ValueInt64()
+			}
+			if !data.AdvancedOptions.OutlierDetection.MaxEjectionPercent.IsNull() && !data.AdvancedOptions.OutlierDetection.MaxEjectionPercent.IsUnknown() {
+				outlier_detectionNestedMap["max_ejection_percent"] = data.AdvancedOptions.OutlierDetection.MaxEjectionPercent.ValueInt64()
+			}
+			advanced_optionsMap["outlier_detection"] = outlier_detectionNestedMap
+		}
+		if !data.AdvancedOptions.PanicThreshold.IsNull() && !data.AdvancedOptions.PanicThreshold.IsUnknown() {
+			advanced_optionsMap["panic_threshold"] = data.AdvancedOptions.PanicThreshold.ValueInt64()
+		}
+		if data.AdvancedOptions.ProxyProtocolV1 != nil {
+			advanced_optionsMap["proxy_protocol_v1"] = map[string]interface{}{}
+		}
+		if data.AdvancedOptions.ProxyProtocolV2 != nil {
+			advanced_optionsMap["proxy_protocol_v2"] = map[string]interface{}{}
+		}
+		apiResource.Spec["advanced_options"] = advanced_optionsMap
+	}
+	if data.AutomaticPort != nil {
+		automatic_portMap := make(map[string]interface{})
+		apiResource.Spec["automatic_port"] = automatic_portMap
+	}
+	if len(data.Healthcheck) > 0 {
+		var healthcheckList []map[string]interface{}
+		for _, item := range data.Healthcheck {
+			itemMap := make(map[string]interface{})
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+				itemMap["namespace"] = item.Namespace.ValueString()
+			}
+			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+				itemMap["tenant"] = item.Tenant.ValueString()
+			}
+			healthcheckList = append(healthcheckList, itemMap)
+		}
+		apiResource.Spec["healthcheck"] = healthcheckList
+	}
+	if data.LbPort != nil {
+		lb_portMap := make(map[string]interface{})
+		apiResource.Spec["lb_port"] = lb_portMap
+	}
+	if data.NoTLS != nil {
+		no_tlsMap := make(map[string]interface{})
+		apiResource.Spec["no_tls"] = no_tlsMap
+	}
+	if len(data.OriginServers) > 0 {
+		var origin_serversList []map[string]interface{}
+		for _, item := range data.OriginServers {
+			itemMap := make(map[string]interface{})
+			if item.CbipService != nil {
+				cbip_serviceNestedMap := make(map[string]interface{})
+				if !item.CbipService.ServiceName.IsNull() && !item.CbipService.ServiceName.IsUnknown() {
+					cbip_serviceNestedMap["service_name"] = item.CbipService.ServiceName.ValueString()
+				}
+				itemMap["cbip_service"] = cbip_serviceNestedMap
+			}
+			if item.ConsulService != nil {
+				consul_serviceNestedMap := make(map[string]interface{})
+				if !item.ConsulService.ServiceName.IsNull() && !item.ConsulService.ServiceName.IsUnknown() {
+					consul_serviceNestedMap["service_name"] = item.ConsulService.ServiceName.ValueString()
+				}
+				itemMap["consul_service"] = consul_serviceNestedMap
+			}
+			if item.CustomEndpointObject != nil {
+				custom_endpoint_objectNestedMap := make(map[string]interface{})
+				itemMap["custom_endpoint_object"] = custom_endpoint_objectNestedMap
+			}
+			if item.K8SService != nil {
+				k8s_serviceNestedMap := make(map[string]interface{})
+				if !item.K8SService.Protocol.IsNull() && !item.K8SService.Protocol.IsUnknown() {
+					k8s_serviceNestedMap["protocol"] = item.K8SService.Protocol.ValueString()
+				}
+				if !item.K8SService.ServiceName.IsNull() && !item.K8SService.ServiceName.IsUnknown() {
+					k8s_serviceNestedMap["service_name"] = item.K8SService.ServiceName.ValueString()
+				}
+				itemMap["k8s_service"] = k8s_serviceNestedMap
+			}
+			if item.Labels != nil {
+				itemMap["labels"] = map[string]interface{}{}
+			}
+			if item.PrivateIP != nil {
+				private_ipNestedMap := make(map[string]interface{})
+				if !item.PrivateIP.IP.IsNull() && !item.PrivateIP.IP.IsUnknown() {
+					private_ipNestedMap["ip"] = item.PrivateIP.IP.ValueString()
+				}
+				itemMap["private_ip"] = private_ipNestedMap
+			}
+			if item.PrivateName != nil {
+				private_nameNestedMap := make(map[string]interface{})
+				if !item.PrivateName.DNSName.IsNull() && !item.PrivateName.DNSName.IsUnknown() {
+					private_nameNestedMap["dns_name"] = item.PrivateName.DNSName.ValueString()
+				}
+				if !item.PrivateName.RefreshInterval.IsNull() && !item.PrivateName.RefreshInterval.IsUnknown() {
+					private_nameNestedMap["refresh_interval"] = item.PrivateName.RefreshInterval.ValueInt64()
+				}
+				itemMap["private_name"] = private_nameNestedMap
+			}
+			if item.PublicIP != nil {
+				public_ipNestedMap := make(map[string]interface{})
+				if !item.PublicIP.IP.IsNull() && !item.PublicIP.IP.IsUnknown() {
+					public_ipNestedMap["ip"] = item.PublicIP.IP.ValueString()
+				}
+				itemMap["public_ip"] = public_ipNestedMap
+			}
+			if item.PublicName != nil {
+				public_nameNestedMap := make(map[string]interface{})
+				if !item.PublicName.DNSName.IsNull() && !item.PublicName.DNSName.IsUnknown() {
+					public_nameNestedMap["dns_name"] = item.PublicName.DNSName.ValueString()
+				}
+				if !item.PublicName.RefreshInterval.IsNull() && !item.PublicName.RefreshInterval.IsUnknown() {
+					public_nameNestedMap["refresh_interval"] = item.PublicName.RefreshInterval.ValueInt64()
+				}
+				itemMap["public_name"] = public_nameNestedMap
+			}
+			if item.VnPrivateIP != nil {
+				vn_private_ipNestedMap := make(map[string]interface{})
+				if !item.VnPrivateIP.IP.IsNull() && !item.VnPrivateIP.IP.IsUnknown() {
+					vn_private_ipNestedMap["ip"] = item.VnPrivateIP.IP.ValueString()
+				}
+				itemMap["vn_private_ip"] = vn_private_ipNestedMap
+			}
+			if item.VnPrivateName != nil {
+				vn_private_nameNestedMap := make(map[string]interface{})
+				if !item.VnPrivateName.DNSName.IsNull() && !item.VnPrivateName.DNSName.IsUnknown() {
+					vn_private_nameNestedMap["dns_name"] = item.VnPrivateName.DNSName.ValueString()
+				}
+				itemMap["vn_private_name"] = vn_private_nameNestedMap
+			}
+			origin_serversList = append(origin_serversList, itemMap)
+		}
+		apiResource.Spec["origin_servers"] = origin_serversList
+	}
+	if data.SameAsEndpointPort != nil {
+		same_as_endpoint_portMap := make(map[string]interface{})
+		apiResource.Spec["same_as_endpoint_port"] = same_as_endpoint_portMap
+	}
+	if data.UpstreamConnPoolReuseType != nil {
+		upstream_conn_pool_reuse_typeMap := make(map[string]interface{})
+		if data.UpstreamConnPoolReuseType.DisableConnPoolReuse != nil {
+			upstream_conn_pool_reuse_typeMap["disable_conn_pool_reuse"] = map[string]interface{}{}
+		}
+		if data.UpstreamConnPoolReuseType.EnableConnPoolReuse != nil {
+			upstream_conn_pool_reuse_typeMap["enable_conn_pool_reuse"] = map[string]interface{}{}
+		}
+		apiResource.Spec["upstream_conn_pool_reuse_type"] = upstream_conn_pool_reuse_typeMap
+	}
+	if data.UseTLS != nil {
+		use_tlsMap := make(map[string]interface{})
+		if data.UseTLS.DefaultSessionKeyCaching != nil {
+			use_tlsMap["default_session_key_caching"] = map[string]interface{}{}
+		}
+		if data.UseTLS.DisableSessionKeyCaching != nil {
+			use_tlsMap["disable_session_key_caching"] = map[string]interface{}{}
+		}
+		if data.UseTLS.DisableSni != nil {
+			use_tlsMap["disable_sni"] = map[string]interface{}{}
+		}
+		if !data.UseTLS.MaxSessionKeys.IsNull() && !data.UseTLS.MaxSessionKeys.IsUnknown() {
+			use_tlsMap["max_session_keys"] = data.UseTLS.MaxSessionKeys.ValueInt64()
+		}
+		if data.UseTLS.NoMtls != nil {
+			use_tlsMap["no_mtls"] = map[string]interface{}{}
+		}
+		if data.UseTLS.SkipServerVerification != nil {
+			use_tlsMap["skip_server_verification"] = map[string]interface{}{}
+		}
+		if !data.UseTLS.Sni.IsNull() && !data.UseTLS.Sni.IsUnknown() {
+			use_tlsMap["sni"] = data.UseTLS.Sni.ValueString()
+		}
+		if data.UseTLS.TLSConfig != nil {
+			tls_configNestedMap := make(map[string]interface{})
+			use_tlsMap["tls_config"] = tls_configNestedMap
+		}
+		if data.UseTLS.UseHostHeaderAsSni != nil {
+			use_tlsMap["use_host_header_as_sni"] = map[string]interface{}{}
+		}
+		if data.UseTLS.UseMtls != nil {
+			use_mtlsNestedMap := make(map[string]interface{})
+			use_tlsMap["use_mtls"] = use_mtlsNestedMap
+		}
+		if data.UseTLS.UseMtlsObj != nil {
+			use_mtls_objNestedMap := make(map[string]interface{})
+			if !data.UseTLS.UseMtlsObj.Name.IsNull() && !data.UseTLS.UseMtlsObj.Name.IsUnknown() {
+				use_mtls_objNestedMap["name"] = data.UseTLS.UseMtlsObj.Name.ValueString()
+			}
+			if !data.UseTLS.UseMtlsObj.Namespace.IsNull() && !data.UseTLS.UseMtlsObj.Namespace.IsUnknown() {
+				use_mtls_objNestedMap["namespace"] = data.UseTLS.UseMtlsObj.Namespace.ValueString()
+			}
+			if !data.UseTLS.UseMtlsObj.Tenant.IsNull() && !data.UseTLS.UseMtlsObj.Tenant.IsUnknown() {
+				use_mtls_objNestedMap["tenant"] = data.UseTLS.UseMtlsObj.Tenant.ValueString()
+			}
+			use_tlsMap["use_mtls_obj"] = use_mtls_objNestedMap
+		}
+		if data.UseTLS.UseServerVerification != nil {
+			use_server_verificationNestedMap := make(map[string]interface{})
+			if !data.UseTLS.UseServerVerification.TrustedCaURL.IsNull() && !data.UseTLS.UseServerVerification.TrustedCaURL.IsUnknown() {
+				use_server_verificationNestedMap["trusted_ca_url"] = data.UseTLS.UseServerVerification.TrustedCaURL.ValueString()
+			}
+			use_tlsMap["use_server_verification"] = use_server_verificationNestedMap
+		}
+		if data.UseTLS.VolterraTrustedCa != nil {
+			use_tlsMap["volterra_trusted_ca"] = map[string]interface{}{}
+		}
+		apiResource.Spec["use_tls"] = use_tlsMap
+	}
+	if !data.EndpointSelection.IsNull() && !data.EndpointSelection.IsUnknown() {
+		apiResource.Spec["endpoint_selection"] = data.EndpointSelection.ValueString()
+	}
+	if !data.HealthCheckPort.IsNull() && !data.HealthCheckPort.IsUnknown() {
+		apiResource.Spec["health_check_port"] = data.HealthCheckPort.ValueInt64()
+	}
+	if !data.LoadBalancerAlgorithm.IsNull() && !data.LoadBalancerAlgorithm.IsUnknown() {
+		apiResource.Spec["loadbalancer_algorithm"] = data.LoadBalancerAlgorithm.ValueString()
+	}
+	if !data.Port.IsNull() && !data.Port.IsUnknown() {
+		apiResource.Spec["port"] = data.Port.ValueInt64()
+	}
+
+
 	created, err := r.client.CreateOriginPool(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create OriginPool: %s", err))
@@ -1628,8 +1948,29 @@ func (r *OriginPoolResource) Create(ctx context.Context, req resource.CreateRequ
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+	if v, ok := created.Spec["endpoint_selection"].(string); ok && v != "" {
+		data.EndpointSelection = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["health_check_port"].(float64); ok {
+		data.HealthCheckPort = types.Int64Value(int64(v))
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["loadbalancer_algorithm"].(string); ok && v != "" {
+		data.LoadBalancerAlgorithm = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["port"].(float64); ok {
+		data.Port = types.Int64Value(int64(v))
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created OriginPool resource")
@@ -1708,9 +2049,294 @@ func (r *OriginPoolResource) Read(ctx context.Context, req resource.ReadRequest,
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if blockData, ok := apiResource.Spec["advanced_options"].(map[string]interface{}); ok && (isImport || data.AdvancedOptions != nil) {
+		data.AdvancedOptions = &OriginPoolAdvancedOptionsModel{
+			ConnectionTimeout: func() types.Int64 {
+				if v, ok := blockData["connection_timeout"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			HTTPIdleTimeout: func() types.Int64 {
+				if v, ok := blockData["http_idle_timeout"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			PanicThreshold: func() types.Int64 {
+				if v, ok := blockData["panic_threshold"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["automatic_port"].(map[string]interface{}); ok && isImport && data.AutomaticPort == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AutomaticPort = &OriginPoolEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["healthcheck"].([]interface{}); ok && len(listData) > 0 {
+		var healthcheckList []OriginPoolHealthcheckModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				healthcheckList = append(healthcheckList, OriginPoolHealthcheckModel{
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Namespace: func() types.String {
+						if v, ok := itemMap["namespace"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Tenant: func() types.String {
+						if v, ok := itemMap["tenant"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.Healthcheck = healthcheckList
+	}
+	if _, ok := apiResource.Spec["lb_port"].(map[string]interface{}); ok && isImport && data.LbPort == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.LbPort = &OriginPoolEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_tls"].(map[string]interface{}); ok && isImport && data.NoTLS == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoTLS = &OriginPoolEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["origin_servers"].([]interface{}); ok && len(listData) > 0 {
+		var origin_serversList []OriginPoolOriginServersModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				origin_serversList = append(origin_serversList, OriginPoolOriginServersModel{
+					CbipService: func() *OriginPoolOriginServersCbipServiceModel {
+						if nestedMap, ok := itemMap["cbip_service"].(map[string]interface{}); ok {
+							return &OriginPoolOriginServersCbipServiceModel{
+								ServiceName: func() types.String {
+									if v, ok := nestedMap["service_name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					ConsulService: func() *OriginPoolOriginServersConsulServiceModel {
+						if nestedMap, ok := itemMap["consul_service"].(map[string]interface{}); ok {
+							return &OriginPoolOriginServersConsulServiceModel{
+								ServiceName: func() types.String {
+									if v, ok := nestedMap["service_name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					CustomEndpointObject: func() *OriginPoolOriginServersCustomEndpointObjectModel {
+						if _, ok := itemMap["custom_endpoint_object"].(map[string]interface{}); ok {
+							return &OriginPoolOriginServersCustomEndpointObjectModel{
+							}
+						}
+						return nil
+					}(),
+					K8SService: func() *OriginPoolOriginServersK8SServiceModel {
+						if nestedMap, ok := itemMap["k8s_service"].(map[string]interface{}); ok {
+							return &OriginPoolOriginServersK8SServiceModel{
+								Protocol: func() types.String {
+									if v, ok := nestedMap["protocol"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								ServiceName: func() types.String {
+									if v, ok := nestedMap["service_name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					Labels: func() *OriginPoolEmptyModel {
+						if _, ok := itemMap["labels"].(map[string]interface{}); ok {
+							return &OriginPoolEmptyModel{}
+						}
+						return nil
+					}(),
+					PrivateIP: func() *OriginPoolOriginServersPrivateIPModel {
+						if nestedMap, ok := itemMap["private_ip"].(map[string]interface{}); ok {
+							return &OriginPoolOriginServersPrivateIPModel{
+								IP: func() types.String {
+									if v, ok := nestedMap["ip"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					PrivateName: func() *OriginPoolOriginServersPrivateNameModel {
+						if nestedMap, ok := itemMap["private_name"].(map[string]interface{}); ok {
+							return &OriginPoolOriginServersPrivateNameModel{
+								DNSName: func() types.String {
+									if v, ok := nestedMap["dns_name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								RefreshInterval: func() types.Int64 {
+									if v, ok := nestedMap["refresh_interval"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					PublicIP: func() *OriginPoolOriginServersPublicIPModel {
+						if nestedMap, ok := itemMap["public_ip"].(map[string]interface{}); ok {
+							return &OriginPoolOriginServersPublicIPModel{
+								IP: func() types.String {
+									if v, ok := nestedMap["ip"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					PublicName: func() *OriginPoolOriginServersPublicNameModel {
+						if nestedMap, ok := itemMap["public_name"].(map[string]interface{}); ok {
+							return &OriginPoolOriginServersPublicNameModel{
+								DNSName: func() types.String {
+									if v, ok := nestedMap["dns_name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								RefreshInterval: func() types.Int64 {
+									if v, ok := nestedMap["refresh_interval"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					VnPrivateIP: func() *OriginPoolOriginServersVnPrivateIPModel {
+						if nestedMap, ok := itemMap["vn_private_ip"].(map[string]interface{}); ok {
+							return &OriginPoolOriginServersVnPrivateIPModel{
+								IP: func() types.String {
+									if v, ok := nestedMap["ip"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					VnPrivateName: func() *OriginPoolOriginServersVnPrivateNameModel {
+						if nestedMap, ok := itemMap["vn_private_name"].(map[string]interface{}); ok {
+							return &OriginPoolOriginServersVnPrivateNameModel{
+								DNSName: func() types.String {
+									if v, ok := nestedMap["dns_name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+				})
+			}
+		}
+		data.OriginServers = origin_serversList
+	}
+	if _, ok := apiResource.Spec["same_as_endpoint_port"].(map[string]interface{}); ok && isImport && data.SameAsEndpointPort == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.SameAsEndpointPort = &OriginPoolEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["upstream_conn_pool_reuse_type"].(map[string]interface{}); ok && isImport && data.UpstreamConnPoolReuseType == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.UpstreamConnPoolReuseType = &OriginPoolUpstreamConnPoolReuseTypeModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["use_tls"].(map[string]interface{}); ok && (isImport || data.UseTLS != nil) {
+		data.UseTLS = &OriginPoolUseTLSModel{
+			MaxSessionKeys: func() types.Int64 {
+				if v, ok := blockData["max_session_keys"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			Sni: func() types.String {
+				if v, ok := blockData["sni"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if v, ok := apiResource.Spec["endpoint_selection"].(string); ok && v != "" {
+		data.EndpointSelection = types.StringValue(v)
+	} else {
+		data.EndpointSelection = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["health_check_port"].(float64); ok {
+		data.HealthCheckPort = types.Int64Value(int64(v))
+	} else {
+		data.HealthCheckPort = types.Int64Null()
+	}
+	if v, ok := apiResource.Spec["loadbalancer_algorithm"].(string); ok && v != "" {
+		data.LoadBalancerAlgorithm = types.StringValue(v)
+	} else {
+		data.LoadBalancerAlgorithm = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["port"].(float64); ok {
+		data.Port = types.Int64Value(int64(v))
+	} else {
+		data.Port = types.Int64Null()
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -1736,7 +2362,7 @@ func (r *OriginPoolResource) Update(ctx context.Context, req resource.UpdateRequ
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.OriginPoolSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -1761,6 +2387,309 @@ func (r *OriginPoolResource) Update(ctx context.Context, req resource.UpdateRequ
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.AdvancedOptions != nil {
+		advanced_optionsMap := make(map[string]interface{})
+		if data.AdvancedOptions.AutoHTTPConfig != nil {
+			advanced_optionsMap["auto_http_config"] = map[string]interface{}{}
+		}
+		if data.AdvancedOptions.CircuitBreaker != nil {
+			circuit_breakerNestedMap := make(map[string]interface{})
+			if !data.AdvancedOptions.CircuitBreaker.ConnectionLimit.IsNull() && !data.AdvancedOptions.CircuitBreaker.ConnectionLimit.IsUnknown() {
+				circuit_breakerNestedMap["connection_limit"] = data.AdvancedOptions.CircuitBreaker.ConnectionLimit.ValueInt64()
+			}
+			if !data.AdvancedOptions.CircuitBreaker.MaxRequests.IsNull() && !data.AdvancedOptions.CircuitBreaker.MaxRequests.IsUnknown() {
+				circuit_breakerNestedMap["max_requests"] = data.AdvancedOptions.CircuitBreaker.MaxRequests.ValueInt64()
+			}
+			if !data.AdvancedOptions.CircuitBreaker.PendingRequests.IsNull() && !data.AdvancedOptions.CircuitBreaker.PendingRequests.IsUnknown() {
+				circuit_breakerNestedMap["pending_requests"] = data.AdvancedOptions.CircuitBreaker.PendingRequests.ValueInt64()
+			}
+			if !data.AdvancedOptions.CircuitBreaker.Priority.IsNull() && !data.AdvancedOptions.CircuitBreaker.Priority.IsUnknown() {
+				circuit_breakerNestedMap["priority"] = data.AdvancedOptions.CircuitBreaker.Priority.ValueString()
+			}
+			if !data.AdvancedOptions.CircuitBreaker.Retries.IsNull() && !data.AdvancedOptions.CircuitBreaker.Retries.IsUnknown() {
+				circuit_breakerNestedMap["retries"] = data.AdvancedOptions.CircuitBreaker.Retries.ValueInt64()
+			}
+			advanced_optionsMap["circuit_breaker"] = circuit_breakerNestedMap
+		}
+		if !data.AdvancedOptions.ConnectionTimeout.IsNull() && !data.AdvancedOptions.ConnectionTimeout.IsUnknown() {
+			advanced_optionsMap["connection_timeout"] = data.AdvancedOptions.ConnectionTimeout.ValueInt64()
+		}
+		if data.AdvancedOptions.DefaultCircuitBreaker != nil {
+			advanced_optionsMap["default_circuit_breaker"] = map[string]interface{}{}
+		}
+		if data.AdvancedOptions.DisableCircuitBreaker != nil {
+			advanced_optionsMap["disable_circuit_breaker"] = map[string]interface{}{}
+		}
+		if data.AdvancedOptions.DisableLbSourceIPPersistance != nil {
+			advanced_optionsMap["disable_lb_source_ip_persistance"] = map[string]interface{}{}
+		}
+		if data.AdvancedOptions.DisableOutlierDetection != nil {
+			advanced_optionsMap["disable_outlier_detection"] = map[string]interface{}{}
+		}
+		if data.AdvancedOptions.DisableProxyProtocol != nil {
+			advanced_optionsMap["disable_proxy_protocol"] = map[string]interface{}{}
+		}
+		if data.AdvancedOptions.DisableSubsets != nil {
+			advanced_optionsMap["disable_subsets"] = map[string]interface{}{}
+		}
+		if data.AdvancedOptions.EnableLbSourceIPPersistance != nil {
+			advanced_optionsMap["enable_lb_source_ip_persistance"] = map[string]interface{}{}
+		}
+		if data.AdvancedOptions.EnableSubsets != nil {
+			enable_subsetsNestedMap := make(map[string]interface{})
+			advanced_optionsMap["enable_subsets"] = enable_subsetsNestedMap
+		}
+		if data.AdvancedOptions.Http1Config != nil {
+			http1_configNestedMap := make(map[string]interface{})
+			advanced_optionsMap["http1_config"] = http1_configNestedMap
+		}
+		if data.AdvancedOptions.Http2Options != nil {
+			http2_optionsNestedMap := make(map[string]interface{})
+			if !data.AdvancedOptions.Http2Options.Enabled.IsNull() && !data.AdvancedOptions.Http2Options.Enabled.IsUnknown() {
+				http2_optionsNestedMap["enabled"] = data.AdvancedOptions.Http2Options.Enabled.ValueBool()
+			}
+			advanced_optionsMap["http2_options"] = http2_optionsNestedMap
+		}
+		if !data.AdvancedOptions.HTTPIdleTimeout.IsNull() && !data.AdvancedOptions.HTTPIdleTimeout.IsUnknown() {
+			advanced_optionsMap["http_idle_timeout"] = data.AdvancedOptions.HTTPIdleTimeout.ValueInt64()
+		}
+		if data.AdvancedOptions.NoPanicThreshold != nil {
+			advanced_optionsMap["no_panic_threshold"] = map[string]interface{}{}
+		}
+		if data.AdvancedOptions.OutlierDetection != nil {
+			outlier_detectionNestedMap := make(map[string]interface{})
+			if !data.AdvancedOptions.OutlierDetection.BaseEjectionTime.IsNull() && !data.AdvancedOptions.OutlierDetection.BaseEjectionTime.IsUnknown() {
+				outlier_detectionNestedMap["base_ejection_time"] = data.AdvancedOptions.OutlierDetection.BaseEjectionTime.ValueInt64()
+			}
+			if !data.AdvancedOptions.OutlierDetection.Consecutive5xx.IsNull() && !data.AdvancedOptions.OutlierDetection.Consecutive5xx.IsUnknown() {
+				outlier_detectionNestedMap["consecutive_5xx"] = data.AdvancedOptions.OutlierDetection.Consecutive5xx.ValueInt64()
+			}
+			if !data.AdvancedOptions.OutlierDetection.ConsecutiveGatewayFailure.IsNull() && !data.AdvancedOptions.OutlierDetection.ConsecutiveGatewayFailure.IsUnknown() {
+				outlier_detectionNestedMap["consecutive_gateway_failure"] = data.AdvancedOptions.OutlierDetection.ConsecutiveGatewayFailure.ValueInt64()
+			}
+			if !data.AdvancedOptions.OutlierDetection.Interval.IsNull() && !data.AdvancedOptions.OutlierDetection.Interval.IsUnknown() {
+				outlier_detectionNestedMap["interval"] = data.AdvancedOptions.OutlierDetection.Interval.ValueInt64()
+			}
+			if !data.AdvancedOptions.OutlierDetection.MaxEjectionPercent.IsNull() && !data.AdvancedOptions.OutlierDetection.MaxEjectionPercent.IsUnknown() {
+				outlier_detectionNestedMap["max_ejection_percent"] = data.AdvancedOptions.OutlierDetection.MaxEjectionPercent.ValueInt64()
+			}
+			advanced_optionsMap["outlier_detection"] = outlier_detectionNestedMap
+		}
+		if !data.AdvancedOptions.PanicThreshold.IsNull() && !data.AdvancedOptions.PanicThreshold.IsUnknown() {
+			advanced_optionsMap["panic_threshold"] = data.AdvancedOptions.PanicThreshold.ValueInt64()
+		}
+		if data.AdvancedOptions.ProxyProtocolV1 != nil {
+			advanced_optionsMap["proxy_protocol_v1"] = map[string]interface{}{}
+		}
+		if data.AdvancedOptions.ProxyProtocolV2 != nil {
+			advanced_optionsMap["proxy_protocol_v2"] = map[string]interface{}{}
+		}
+		apiResource.Spec["advanced_options"] = advanced_optionsMap
+	}
+	if data.AutomaticPort != nil {
+		automatic_portMap := make(map[string]interface{})
+		apiResource.Spec["automatic_port"] = automatic_portMap
+	}
+	if len(data.Healthcheck) > 0 {
+		var healthcheckList []map[string]interface{}
+		for _, item := range data.Healthcheck {
+			itemMap := make(map[string]interface{})
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+				itemMap["namespace"] = item.Namespace.ValueString()
+			}
+			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+				itemMap["tenant"] = item.Tenant.ValueString()
+			}
+			healthcheckList = append(healthcheckList, itemMap)
+		}
+		apiResource.Spec["healthcheck"] = healthcheckList
+	}
+	if data.LbPort != nil {
+		lb_portMap := make(map[string]interface{})
+		apiResource.Spec["lb_port"] = lb_portMap
+	}
+	if data.NoTLS != nil {
+		no_tlsMap := make(map[string]interface{})
+		apiResource.Spec["no_tls"] = no_tlsMap
+	}
+	if len(data.OriginServers) > 0 {
+		var origin_serversList []map[string]interface{}
+		for _, item := range data.OriginServers {
+			itemMap := make(map[string]interface{})
+			if item.CbipService != nil {
+				cbip_serviceNestedMap := make(map[string]interface{})
+				if !item.CbipService.ServiceName.IsNull() && !item.CbipService.ServiceName.IsUnknown() {
+					cbip_serviceNestedMap["service_name"] = item.CbipService.ServiceName.ValueString()
+				}
+				itemMap["cbip_service"] = cbip_serviceNestedMap
+			}
+			if item.ConsulService != nil {
+				consul_serviceNestedMap := make(map[string]interface{})
+				if !item.ConsulService.ServiceName.IsNull() && !item.ConsulService.ServiceName.IsUnknown() {
+					consul_serviceNestedMap["service_name"] = item.ConsulService.ServiceName.ValueString()
+				}
+				itemMap["consul_service"] = consul_serviceNestedMap
+			}
+			if item.CustomEndpointObject != nil {
+				custom_endpoint_objectNestedMap := make(map[string]interface{})
+				itemMap["custom_endpoint_object"] = custom_endpoint_objectNestedMap
+			}
+			if item.K8SService != nil {
+				k8s_serviceNestedMap := make(map[string]interface{})
+				if !item.K8SService.Protocol.IsNull() && !item.K8SService.Protocol.IsUnknown() {
+					k8s_serviceNestedMap["protocol"] = item.K8SService.Protocol.ValueString()
+				}
+				if !item.K8SService.ServiceName.IsNull() && !item.K8SService.ServiceName.IsUnknown() {
+					k8s_serviceNestedMap["service_name"] = item.K8SService.ServiceName.ValueString()
+				}
+				itemMap["k8s_service"] = k8s_serviceNestedMap
+			}
+			if item.Labels != nil {
+				itemMap["labels"] = map[string]interface{}{}
+			}
+			if item.PrivateIP != nil {
+				private_ipNestedMap := make(map[string]interface{})
+				if !item.PrivateIP.IP.IsNull() && !item.PrivateIP.IP.IsUnknown() {
+					private_ipNestedMap["ip"] = item.PrivateIP.IP.ValueString()
+				}
+				itemMap["private_ip"] = private_ipNestedMap
+			}
+			if item.PrivateName != nil {
+				private_nameNestedMap := make(map[string]interface{})
+				if !item.PrivateName.DNSName.IsNull() && !item.PrivateName.DNSName.IsUnknown() {
+					private_nameNestedMap["dns_name"] = item.PrivateName.DNSName.ValueString()
+				}
+				if !item.PrivateName.RefreshInterval.IsNull() && !item.PrivateName.RefreshInterval.IsUnknown() {
+					private_nameNestedMap["refresh_interval"] = item.PrivateName.RefreshInterval.ValueInt64()
+				}
+				itemMap["private_name"] = private_nameNestedMap
+			}
+			if item.PublicIP != nil {
+				public_ipNestedMap := make(map[string]interface{})
+				if !item.PublicIP.IP.IsNull() && !item.PublicIP.IP.IsUnknown() {
+					public_ipNestedMap["ip"] = item.PublicIP.IP.ValueString()
+				}
+				itemMap["public_ip"] = public_ipNestedMap
+			}
+			if item.PublicName != nil {
+				public_nameNestedMap := make(map[string]interface{})
+				if !item.PublicName.DNSName.IsNull() && !item.PublicName.DNSName.IsUnknown() {
+					public_nameNestedMap["dns_name"] = item.PublicName.DNSName.ValueString()
+				}
+				if !item.PublicName.RefreshInterval.IsNull() && !item.PublicName.RefreshInterval.IsUnknown() {
+					public_nameNestedMap["refresh_interval"] = item.PublicName.RefreshInterval.ValueInt64()
+				}
+				itemMap["public_name"] = public_nameNestedMap
+			}
+			if item.VnPrivateIP != nil {
+				vn_private_ipNestedMap := make(map[string]interface{})
+				if !item.VnPrivateIP.IP.IsNull() && !item.VnPrivateIP.IP.IsUnknown() {
+					vn_private_ipNestedMap["ip"] = item.VnPrivateIP.IP.ValueString()
+				}
+				itemMap["vn_private_ip"] = vn_private_ipNestedMap
+			}
+			if item.VnPrivateName != nil {
+				vn_private_nameNestedMap := make(map[string]interface{})
+				if !item.VnPrivateName.DNSName.IsNull() && !item.VnPrivateName.DNSName.IsUnknown() {
+					vn_private_nameNestedMap["dns_name"] = item.VnPrivateName.DNSName.ValueString()
+				}
+				itemMap["vn_private_name"] = vn_private_nameNestedMap
+			}
+			origin_serversList = append(origin_serversList, itemMap)
+		}
+		apiResource.Spec["origin_servers"] = origin_serversList
+	}
+	if data.SameAsEndpointPort != nil {
+		same_as_endpoint_portMap := make(map[string]interface{})
+		apiResource.Spec["same_as_endpoint_port"] = same_as_endpoint_portMap
+	}
+	if data.UpstreamConnPoolReuseType != nil {
+		upstream_conn_pool_reuse_typeMap := make(map[string]interface{})
+		if data.UpstreamConnPoolReuseType.DisableConnPoolReuse != nil {
+			upstream_conn_pool_reuse_typeMap["disable_conn_pool_reuse"] = map[string]interface{}{}
+		}
+		if data.UpstreamConnPoolReuseType.EnableConnPoolReuse != nil {
+			upstream_conn_pool_reuse_typeMap["enable_conn_pool_reuse"] = map[string]interface{}{}
+		}
+		apiResource.Spec["upstream_conn_pool_reuse_type"] = upstream_conn_pool_reuse_typeMap
+	}
+	if data.UseTLS != nil {
+		use_tlsMap := make(map[string]interface{})
+		if data.UseTLS.DefaultSessionKeyCaching != nil {
+			use_tlsMap["default_session_key_caching"] = map[string]interface{}{}
+		}
+		if data.UseTLS.DisableSessionKeyCaching != nil {
+			use_tlsMap["disable_session_key_caching"] = map[string]interface{}{}
+		}
+		if data.UseTLS.DisableSni != nil {
+			use_tlsMap["disable_sni"] = map[string]interface{}{}
+		}
+		if !data.UseTLS.MaxSessionKeys.IsNull() && !data.UseTLS.MaxSessionKeys.IsUnknown() {
+			use_tlsMap["max_session_keys"] = data.UseTLS.MaxSessionKeys.ValueInt64()
+		}
+		if data.UseTLS.NoMtls != nil {
+			use_tlsMap["no_mtls"] = map[string]interface{}{}
+		}
+		if data.UseTLS.SkipServerVerification != nil {
+			use_tlsMap["skip_server_verification"] = map[string]interface{}{}
+		}
+		if !data.UseTLS.Sni.IsNull() && !data.UseTLS.Sni.IsUnknown() {
+			use_tlsMap["sni"] = data.UseTLS.Sni.ValueString()
+		}
+		if data.UseTLS.TLSConfig != nil {
+			tls_configNestedMap := make(map[string]interface{})
+			use_tlsMap["tls_config"] = tls_configNestedMap
+		}
+		if data.UseTLS.UseHostHeaderAsSni != nil {
+			use_tlsMap["use_host_header_as_sni"] = map[string]interface{}{}
+		}
+		if data.UseTLS.UseMtls != nil {
+			use_mtlsNestedMap := make(map[string]interface{})
+			use_tlsMap["use_mtls"] = use_mtlsNestedMap
+		}
+		if data.UseTLS.UseMtlsObj != nil {
+			use_mtls_objNestedMap := make(map[string]interface{})
+			if !data.UseTLS.UseMtlsObj.Name.IsNull() && !data.UseTLS.UseMtlsObj.Name.IsUnknown() {
+				use_mtls_objNestedMap["name"] = data.UseTLS.UseMtlsObj.Name.ValueString()
+			}
+			if !data.UseTLS.UseMtlsObj.Namespace.IsNull() && !data.UseTLS.UseMtlsObj.Namespace.IsUnknown() {
+				use_mtls_objNestedMap["namespace"] = data.UseTLS.UseMtlsObj.Namespace.ValueString()
+			}
+			if !data.UseTLS.UseMtlsObj.Tenant.IsNull() && !data.UseTLS.UseMtlsObj.Tenant.IsUnknown() {
+				use_mtls_objNestedMap["tenant"] = data.UseTLS.UseMtlsObj.Tenant.ValueString()
+			}
+			use_tlsMap["use_mtls_obj"] = use_mtls_objNestedMap
+		}
+		if data.UseTLS.UseServerVerification != nil {
+			use_server_verificationNestedMap := make(map[string]interface{})
+			if !data.UseTLS.UseServerVerification.TrustedCaURL.IsNull() && !data.UseTLS.UseServerVerification.TrustedCaURL.IsUnknown() {
+				use_server_verificationNestedMap["trusted_ca_url"] = data.UseTLS.UseServerVerification.TrustedCaURL.ValueString()
+			}
+			use_tlsMap["use_server_verification"] = use_server_verificationNestedMap
+		}
+		if data.UseTLS.VolterraTrustedCa != nil {
+			use_tlsMap["volterra_trusted_ca"] = map[string]interface{}{}
+		}
+		apiResource.Spec["use_tls"] = use_tlsMap
+	}
+	if !data.EndpointSelection.IsNull() && !data.EndpointSelection.IsUnknown() {
+		apiResource.Spec["endpoint_selection"] = data.EndpointSelection.ValueString()
+	}
+	if !data.HealthCheckPort.IsNull() && !data.HealthCheckPort.IsUnknown() {
+		apiResource.Spec["health_check_port"] = data.HealthCheckPort.ValueInt64()
+	}
+	if !data.LoadBalancerAlgorithm.IsNull() && !data.LoadBalancerAlgorithm.IsUnknown() {
+		apiResource.Spec["loadbalancer_algorithm"] = data.LoadBalancerAlgorithm.ValueString()
+	}
+	if !data.Port.IsNull() && !data.Port.IsUnknown() {
+		apiResource.Spec["port"] = data.Port.ValueInt64()
+	}
+
+
 	updated, err := r.client.UpdateOriginPool(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update OriginPool: %s", err))
@@ -1769,6 +2698,24 @@ func (r *OriginPoolResource) Update(ctx context.Context, req resource.UpdateRequ
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
+	if v, ok := updated.Spec["endpoint_selection"].(string); ok && v != "" {
+		data.EndpointSelection = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["health_check_port"].(float64); ok {
+		data.HealthCheckPort = types.Int64Value(int64(v))
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["loadbalancer_algorithm"].(string); ok && v != "" {
+		data.LoadBalancerAlgorithm = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["port"].(float64); ok {
+		data.Port = types.Int64Value(int64(v))
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -1781,6 +2728,7 @@ func (r *OriginPoolResource) Update(ctx context.Context, req resource.UpdateRequ
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -1807,6 +2755,15 @@ func (r *OriginPoolResource) Delete(ctx context.Context, req resource.DeleteRequ
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "OriginPool already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "OriginPool delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

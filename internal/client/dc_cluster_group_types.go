@@ -10,13 +10,8 @@ import (
 
 // DcClusterGroup represents a F5XC DcClusterGroup
 type DcClusterGroup struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     DcClusterGroupSpec `json:"spec"`
-}
-
-// DcClusterGroupSpec defines the specification for DcClusterGroup
-type DcClusterGroupSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateDcClusterGroup creates a new DcClusterGroup

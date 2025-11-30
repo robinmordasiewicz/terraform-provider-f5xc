@@ -199,7 +199,7 @@ type VoltstackSiteCustomNetworkConfigInterfaceListModel struct {
 
 // VoltstackSiteCustomNetworkConfigInterfaceListInterfacesModel represents interfaces block
 type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesModel struct {
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	DcClusterGroupConnectivityInterfaceDisabled *VoltstackSiteEmptyModel `tfsdk:"dc_cluster_group_connectivity_interface_disabled"`
 	DcClusterGroupConnectivityInterfaceEnabled *VoltstackSiteEmptyModel `tfsdk:"dc_cluster_group_connectivity_interface_enabled"`
 	DedicatedInterface *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesDedicatedInterfaceModel `tfsdk:"dedicated_interface"`
@@ -630,7 +630,7 @@ type VoltstackSiteCustomStorageConfigStorageClassListModel struct {
 type VoltstackSiteCustomStorageConfigStorageClassListStorageClassesModel struct {
 	AllowVolumeExpansion types.Bool `tfsdk:"allow_volume_expansion"`
 	DefaultStorageClass types.Bool `tfsdk:"default_storage_class"`
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	ReclaimPolicy types.String `tfsdk:"reclaim_policy"`
 	StorageClassName types.String `tfsdk:"storage_class_name"`
 	StorageDevice types.String `tfsdk:"storage_device"`
@@ -651,7 +651,7 @@ type VoltstackSiteCustomStorageConfigStorageClassListStorageClassesHpeStorageMod
 	AllowMutations types.String `tfsdk:"allow_mutations"`
 	AllowOverrides types.String `tfsdk:"allow_overrides"`
 	DedupeEnabled types.Bool `tfsdk:"dedupe_enabled"`
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	DestroyOnDelete types.Bool `tfsdk:"destroy_on_delete"`
 	Encrypted types.Bool `tfsdk:"encrypted"`
 	Folder types.String `tfsdk:"folder"`
@@ -1104,7 +1104,7 @@ type VoltstackSiteCustomStorageConfigStorageInterfaceListModel struct {
 
 // VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesModel represents storage_interfaces block
 type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesModel struct {
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Labels *VoltstackSiteEmptyModel `tfsdk:"labels"`
 	StorageInterface *VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceModel `tfsdk:"storage_interface"`
 }
@@ -1369,7 +1369,7 @@ type VoltstackSiteLocalControlPlaneBGPConfigPeersExternalInterfaceListInterfaces
 
 // VoltstackSiteLocalControlPlaneBGPConfigPeersMetadataModel represents metadata block
 type VoltstackSiteLocalControlPlaneBGPConfigPeersMetadataModel struct {
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name types.String `tfsdk:"name"`
 }
 
@@ -1454,14 +1454,14 @@ type VoltstackSiteUsbPolicyModel struct {
 type VoltstackSiteResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Address types.String `tfsdk:"address"`
 	Annotations types.Map `tfsdk:"annotations"`
 	Description types.String `tfsdk:"description"`
 	Disable types.Bool `tfsdk:"disable"`
 	Labels types.Map `tfsdk:"labels"`
-	VolterraCertifiedHw types.String `tfsdk:"volterra_certified_hw"`
 	WorkerNodes types.List `tfsdk:"worker_nodes"`
 	ID types.String `tfsdk:"id"`
+	Address types.String `tfsdk:"address"`
+	VolterraCertifiedHw types.String `tfsdk:"volterra_certified_hw"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
 	AllowAllUsb *VoltstackSiteEmptyModel `tfsdk:"allow_all_usb"`
 	BlockedServices *VoltstackSiteBlockedServicesModel `tfsdk:"blocked_services"`
@@ -1525,10 +1525,6 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 					validators.NamespaceValidator(),
 				},
 			},
-			"address": schema.StringAttribute{
-				MarkdownDescription: "Geographical Address. Site's geographical address that can be used to determine its latitude and longitude.",
-				Optional: true,
-			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
 				Optional: true,
@@ -1547,10 +1543,6 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				Optional: true,
 				ElementType: types.StringType,
 			},
-			"volterra_certified_hw": schema.StringAttribute{
-				MarkdownDescription: "Generic Server Certified Hardware. Name for generic server certified hardware to form this App Stack site.",
-				Optional: true,
-			},
 			"worker_nodes": schema.ListAttribute{
 				MarkdownDescription: "Worker Nodes. Names of worker nodes",
 				Optional: true,
@@ -1558,6 +1550,22 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"address": schema.StringAttribute{
+				MarkdownDescription: "Geographical Address. Site's geographical address that can be used to determine its latitude and longitude.",
+				Optional: true,
+				Computed: true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"volterra_certified_hw": schema.StringAttribute{
+				MarkdownDescription: "Generic Server Certified Hardware. Name for generic server certified hardware to form this App Stack site.",
+				Optional: true,
 				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
@@ -1874,7 +1882,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 								MarkdownDescription: "List of Interface. Configure network interfaces for this App Stack site",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
-										"description": schema.StringAttribute{
+										"description_spec": schema.StringAttribute{
 											MarkdownDescription: "Interface Description. Description for this Interface",
 											Optional: true,
 										},
@@ -2835,7 +2843,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											MarkdownDescription: "Default Storage Class. Make this storage class default storage class for the K8s cluster",
 											Optional: true,
 										},
-										"description": schema.StringAttribute{
+										"description_spec": schema.StringAttribute{
 											MarkdownDescription: "Storage Class Description. Description for this storage class",
 											Optional: true,
 										},
@@ -2880,7 +2888,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 													MarkdownDescription: "dedupeEnabled. Indicates that the volume should enable deduplication.",
 													Optional: true,
 												},
-												"description": schema.StringAttribute{
+												"description_spec": schema.StringAttribute{
 													MarkdownDescription: "Description. The SecretName parameter is used to identify name of secret to identify backend storage's auth information",
 													Optional: true,
 												},
@@ -3962,7 +3970,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 								MarkdownDescription: "List of Interface. Configure storage interfaces for this App Stack site",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
-										"description": schema.StringAttribute{
+										"description_spec": schema.StringAttribute{
 											MarkdownDescription: "Interface Description. Description for this Interface",
 											Optional: true,
 										},
@@ -4555,7 +4563,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										"metadata": schema.SingleNestedBlock{
 											MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 											Attributes: map[string]schema.Attribute{
-												"description": schema.StringAttribute{
+												"description_spec": schema.StringAttribute{
 													MarkdownDescription: "Description. Human readable description.",
 													Optional: true,
 												},
@@ -4904,7 +4912,7 @@ func (r *VoltstackSiteResource) Create(ctx context.Context, req resource.CreateR
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.VoltstackSiteSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -4929,6 +4937,352 @@ func (r *VoltstackSiteResource) Create(ctx context.Context, req resource.CreateR
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.AllowAllUsb != nil {
+		allow_all_usbMap := make(map[string]interface{})
+		apiResource.Spec["allow_all_usb"] = allow_all_usbMap
+	}
+	if data.BlockedServices != nil {
+		blocked_servicesMap := make(map[string]interface{})
+		apiResource.Spec["blocked_services"] = blocked_servicesMap
+	}
+	if data.BondDeviceList != nil {
+		bond_device_listMap := make(map[string]interface{})
+		apiResource.Spec["bond_device_list"] = bond_device_listMap
+	}
+	if data.Coordinates != nil {
+		coordinatesMap := make(map[string]interface{})
+		if !data.Coordinates.Latitude.IsNull() && !data.Coordinates.Latitude.IsUnknown() {
+			coordinatesMap["latitude"] = data.Coordinates.Latitude.ValueInt64()
+		}
+		if !data.Coordinates.Longitude.IsNull() && !data.Coordinates.Longitude.IsUnknown() {
+			coordinatesMap["longitude"] = data.Coordinates.Longitude.ValueInt64()
+		}
+		apiResource.Spec["coordinates"] = coordinatesMap
+	}
+	if data.CustomDNS != nil {
+		custom_dnsMap := make(map[string]interface{})
+		if !data.CustomDNS.InsideNameserver.IsNull() && !data.CustomDNS.InsideNameserver.IsUnknown() {
+			custom_dnsMap["inside_nameserver"] = data.CustomDNS.InsideNameserver.ValueString()
+		}
+		if !data.CustomDNS.OutsideNameserver.IsNull() && !data.CustomDNS.OutsideNameserver.IsUnknown() {
+			custom_dnsMap["outside_nameserver"] = data.CustomDNS.OutsideNameserver.ValueString()
+		}
+		apiResource.Spec["custom_dns"] = custom_dnsMap
+	}
+	if data.CustomNetworkConfig != nil {
+		custom_network_configMap := make(map[string]interface{})
+		if data.CustomNetworkConfig.ActiveEnhancedFirewallPolicies != nil {
+			active_enhanced_firewall_policiesNestedMap := make(map[string]interface{})
+			custom_network_configMap["active_enhanced_firewall_policies"] = active_enhanced_firewall_policiesNestedMap
+		}
+		if data.CustomNetworkConfig.ActiveForwardProxyPolicies != nil {
+			active_forward_proxy_policiesNestedMap := make(map[string]interface{})
+			custom_network_configMap["active_forward_proxy_policies"] = active_forward_proxy_policiesNestedMap
+		}
+		if data.CustomNetworkConfig.ActiveNetworkPolicies != nil {
+			active_network_policiesNestedMap := make(map[string]interface{})
+			custom_network_configMap["active_network_policies"] = active_network_policiesNestedMap
+		}
+		if !data.CustomNetworkConfig.BGPPeerAddress.IsNull() && !data.CustomNetworkConfig.BGPPeerAddress.IsUnknown() {
+			custom_network_configMap["bgp_peer_address"] = data.CustomNetworkConfig.BGPPeerAddress.ValueString()
+		}
+		if !data.CustomNetworkConfig.BGPRouterID.IsNull() && !data.CustomNetworkConfig.BGPRouterID.IsUnknown() {
+			custom_network_configMap["bgp_router_id"] = data.CustomNetworkConfig.BGPRouterID.ValueString()
+		}
+		if data.CustomNetworkConfig.DefaultConfig != nil {
+			custom_network_configMap["default_config"] = map[string]interface{}{}
+		}
+		if data.CustomNetworkConfig.DefaultInterfaceConfig != nil {
+			custom_network_configMap["default_interface_config"] = map[string]interface{}{}
+		}
+		if data.CustomNetworkConfig.DefaultSLIConfig != nil {
+			custom_network_configMap["default_sli_config"] = map[string]interface{}{}
+		}
+		if data.CustomNetworkConfig.ForwardProxyAllowAll != nil {
+			custom_network_configMap["forward_proxy_allow_all"] = map[string]interface{}{}
+		}
+		if data.CustomNetworkConfig.GlobalNetworkList != nil {
+			global_network_listNestedMap := make(map[string]interface{})
+			custom_network_configMap["global_network_list"] = global_network_listNestedMap
+		}
+		if data.CustomNetworkConfig.InterfaceList != nil {
+			interface_listNestedMap := make(map[string]interface{})
+			custom_network_configMap["interface_list"] = interface_listNestedMap
+		}
+		if data.CustomNetworkConfig.NoForwardProxy != nil {
+			custom_network_configMap["no_forward_proxy"] = map[string]interface{}{}
+		}
+		if data.CustomNetworkConfig.NoGlobalNetwork != nil {
+			custom_network_configMap["no_global_network"] = map[string]interface{}{}
+		}
+		if data.CustomNetworkConfig.NoNetworkPolicy != nil {
+			custom_network_configMap["no_network_policy"] = map[string]interface{}{}
+		}
+		if !data.CustomNetworkConfig.OutsideNameserver.IsNull() && !data.CustomNetworkConfig.OutsideNameserver.IsUnknown() {
+			custom_network_configMap["outside_nameserver"] = data.CustomNetworkConfig.OutsideNameserver.ValueString()
+		}
+		if !data.CustomNetworkConfig.OutsideVip.IsNull() && !data.CustomNetworkConfig.OutsideVip.IsUnknown() {
+			custom_network_configMap["outside_vip"] = data.CustomNetworkConfig.OutsideVip.ValueString()
+		}
+		if !data.CustomNetworkConfig.SiteToSiteTunnelIP.IsNull() && !data.CustomNetworkConfig.SiteToSiteTunnelIP.IsUnknown() {
+			custom_network_configMap["site_to_site_tunnel_ip"] = data.CustomNetworkConfig.SiteToSiteTunnelIP.ValueString()
+		}
+		if data.CustomNetworkConfig.SLIConfig != nil {
+			sli_configNestedMap := make(map[string]interface{})
+			custom_network_configMap["sli_config"] = sli_configNestedMap
+		}
+		if data.CustomNetworkConfig.SLOConfig != nil {
+			slo_configNestedMap := make(map[string]interface{})
+			custom_network_configMap["slo_config"] = slo_configNestedMap
+		}
+		if data.CustomNetworkConfig.SmConnectionPublicIP != nil {
+			custom_network_configMap["sm_connection_public_ip"] = map[string]interface{}{}
+		}
+		if data.CustomNetworkConfig.SmConnectionPvtIP != nil {
+			custom_network_configMap["sm_connection_pvt_ip"] = map[string]interface{}{}
+		}
+		if !data.CustomNetworkConfig.TunnelDeadTimeout.IsNull() && !data.CustomNetworkConfig.TunnelDeadTimeout.IsUnknown() {
+			custom_network_configMap["tunnel_dead_timeout"] = data.CustomNetworkConfig.TunnelDeadTimeout.ValueInt64()
+		}
+		if !data.CustomNetworkConfig.VipVrrpMode.IsNull() && !data.CustomNetworkConfig.VipVrrpMode.IsUnknown() {
+			custom_network_configMap["vip_vrrp_mode"] = data.CustomNetworkConfig.VipVrrpMode.ValueString()
+		}
+		apiResource.Spec["custom_network_config"] = custom_network_configMap
+	}
+	if data.CustomStorageConfig != nil {
+		custom_storage_configMap := make(map[string]interface{})
+		if data.CustomStorageConfig.DefaultStorageClass != nil {
+			custom_storage_configMap["default_storage_class"] = map[string]interface{}{}
+		}
+		if data.CustomStorageConfig.NoStaticRoutes != nil {
+			custom_storage_configMap["no_static_routes"] = map[string]interface{}{}
+		}
+		if data.CustomStorageConfig.NoStorageDevice != nil {
+			custom_storage_configMap["no_storage_device"] = map[string]interface{}{}
+		}
+		if data.CustomStorageConfig.NoStorageInterfaces != nil {
+			custom_storage_configMap["no_storage_interfaces"] = map[string]interface{}{}
+		}
+		if data.CustomStorageConfig.StaticRoutes != nil {
+			static_routesNestedMap := make(map[string]interface{})
+			custom_storage_configMap["static_routes"] = static_routesNestedMap
+		}
+		if data.CustomStorageConfig.StorageClassList != nil {
+			storage_class_listNestedMap := make(map[string]interface{})
+			custom_storage_configMap["storage_class_list"] = storage_class_listNestedMap
+		}
+		if data.CustomStorageConfig.StorageDeviceList != nil {
+			storage_device_listNestedMap := make(map[string]interface{})
+			custom_storage_configMap["storage_device_list"] = storage_device_listNestedMap
+		}
+		if data.CustomStorageConfig.StorageInterfaceList != nil {
+			storage_interface_listNestedMap := make(map[string]interface{})
+			custom_storage_configMap["storage_interface_list"] = storage_interface_listNestedMap
+		}
+		apiResource.Spec["custom_storage_config"] = custom_storage_configMap
+	}
+	if data.DefaultBlockedServices != nil {
+		default_blocked_servicesMap := make(map[string]interface{})
+		apiResource.Spec["default_blocked_services"] = default_blocked_servicesMap
+	}
+	if data.DefaultNetworkConfig != nil {
+		default_network_configMap := make(map[string]interface{})
+		apiResource.Spec["default_network_config"] = default_network_configMap
+	}
+	if data.DefaultSriovInterface != nil {
+		default_sriov_interfaceMap := make(map[string]interface{})
+		apiResource.Spec["default_sriov_interface"] = default_sriov_interfaceMap
+	}
+	if data.DefaultStorageConfig != nil {
+		default_storage_configMap := make(map[string]interface{})
+		apiResource.Spec["default_storage_config"] = default_storage_configMap
+	}
+	if data.DenyAllUsb != nil {
+		deny_all_usbMap := make(map[string]interface{})
+		apiResource.Spec["deny_all_usb"] = deny_all_usbMap
+	}
+	if data.DisableGpu != nil {
+		disable_gpuMap := make(map[string]interface{})
+		apiResource.Spec["disable_gpu"] = disable_gpuMap
+	}
+	if data.DisableVm != nil {
+		disable_vmMap := make(map[string]interface{})
+		apiResource.Spec["disable_vm"] = disable_vmMap
+	}
+	if data.EnableGpu != nil {
+		enable_gpuMap := make(map[string]interface{})
+		apiResource.Spec["enable_gpu"] = enable_gpuMap
+	}
+	if data.EnableVgpu != nil {
+		enable_vgpuMap := make(map[string]interface{})
+		if !data.EnableVgpu.FeatureType.IsNull() && !data.EnableVgpu.FeatureType.IsUnknown() {
+			enable_vgpuMap["feature_type"] = data.EnableVgpu.FeatureType.ValueString()
+		}
+		if !data.EnableVgpu.ServerAddress.IsNull() && !data.EnableVgpu.ServerAddress.IsUnknown() {
+			enable_vgpuMap["server_address"] = data.EnableVgpu.ServerAddress.ValueString()
+		}
+		if !data.EnableVgpu.ServerPort.IsNull() && !data.EnableVgpu.ServerPort.IsUnknown() {
+			enable_vgpuMap["server_port"] = data.EnableVgpu.ServerPort.ValueInt64()
+		}
+		apiResource.Spec["enable_vgpu"] = enable_vgpuMap
+	}
+	if data.EnableVm != nil {
+		enable_vmMap := make(map[string]interface{})
+		apiResource.Spec["enable_vm"] = enable_vmMap
+	}
+	if data.K8SCluster != nil {
+		k8s_clusterMap := make(map[string]interface{})
+		if !data.K8SCluster.Name.IsNull() && !data.K8SCluster.Name.IsUnknown() {
+			k8s_clusterMap["name"] = data.K8SCluster.Name.ValueString()
+		}
+		if !data.K8SCluster.Namespace.IsNull() && !data.K8SCluster.Namespace.IsUnknown() {
+			k8s_clusterMap["namespace"] = data.K8SCluster.Namespace.ValueString()
+		}
+		if !data.K8SCluster.Tenant.IsNull() && !data.K8SCluster.Tenant.IsUnknown() {
+			k8s_clusterMap["tenant"] = data.K8SCluster.Tenant.ValueString()
+		}
+		apiResource.Spec["k8s_cluster"] = k8s_clusterMap
+	}
+	if data.KubernetesUpgradeDrain != nil {
+		kubernetes_upgrade_drainMap := make(map[string]interface{})
+		if data.KubernetesUpgradeDrain.DisableUpgradeDrain != nil {
+			kubernetes_upgrade_drainMap["disable_upgrade_drain"] = map[string]interface{}{}
+		}
+		if data.KubernetesUpgradeDrain.EnableUpgradeDrain != nil {
+			enable_upgrade_drainNestedMap := make(map[string]interface{})
+			if !data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainMaxUnavailableNodeCount.IsNull() && !data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainMaxUnavailableNodeCount.IsUnknown() {
+				enable_upgrade_drainNestedMap["drain_max_unavailable_node_count"] = data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainMaxUnavailableNodeCount.ValueInt64()
+			}
+			if !data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainNodeTimeout.IsNull() && !data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainNodeTimeout.IsUnknown() {
+				enable_upgrade_drainNestedMap["drain_node_timeout"] = data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainNodeTimeout.ValueInt64()
+			}
+			kubernetes_upgrade_drainMap["enable_upgrade_drain"] = enable_upgrade_drainNestedMap
+		}
+		apiResource.Spec["kubernetes_upgrade_drain"] = kubernetes_upgrade_drainMap
+	}
+	if data.LocalControlPlane != nil {
+		local_control_planeMap := make(map[string]interface{})
+		if data.LocalControlPlane.BGPConfig != nil {
+			bgp_configNestedMap := make(map[string]interface{})
+			if !data.LocalControlPlane.BGPConfig.Asn.IsNull() && !data.LocalControlPlane.BGPConfig.Asn.IsUnknown() {
+				bgp_configNestedMap["asn"] = data.LocalControlPlane.BGPConfig.Asn.ValueInt64()
+			}
+			local_control_planeMap["bgp_config"] = bgp_configNestedMap
+		}
+		if data.LocalControlPlane.InsideVn != nil {
+			local_control_planeMap["inside_vn"] = map[string]interface{}{}
+		}
+		if data.LocalControlPlane.OutsideVn != nil {
+			local_control_planeMap["outside_vn"] = map[string]interface{}{}
+		}
+		apiResource.Spec["local_control_plane"] = local_control_planeMap
+	}
+	if data.LogReceiver != nil {
+		log_receiverMap := make(map[string]interface{})
+		if !data.LogReceiver.Name.IsNull() && !data.LogReceiver.Name.IsUnknown() {
+			log_receiverMap["name"] = data.LogReceiver.Name.ValueString()
+		}
+		if !data.LogReceiver.Namespace.IsNull() && !data.LogReceiver.Namespace.IsUnknown() {
+			log_receiverMap["namespace"] = data.LogReceiver.Namespace.ValueString()
+		}
+		if !data.LogReceiver.Tenant.IsNull() && !data.LogReceiver.Tenant.IsUnknown() {
+			log_receiverMap["tenant"] = data.LogReceiver.Tenant.ValueString()
+		}
+		apiResource.Spec["log_receiver"] = log_receiverMap
+	}
+	if data.LogsStreamingDisabled != nil {
+		logs_streaming_disabledMap := make(map[string]interface{})
+		apiResource.Spec["logs_streaming_disabled"] = logs_streaming_disabledMap
+	}
+	if len(data.MasterNodeConfiguration) > 0 {
+		var master_node_configurationList []map[string]interface{}
+		for _, item := range data.MasterNodeConfiguration {
+			itemMap := make(map[string]interface{})
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			if !item.PublicIP.IsNull() && !item.PublicIP.IsUnknown() {
+				itemMap["public_ip"] = item.PublicIP.ValueString()
+			}
+			master_node_configurationList = append(master_node_configurationList, itemMap)
+		}
+		apiResource.Spec["master_node_configuration"] = master_node_configurationList
+	}
+	if data.NoBondDevices != nil {
+		no_bond_devicesMap := make(map[string]interface{})
+		apiResource.Spec["no_bond_devices"] = no_bond_devicesMap
+	}
+	if data.NoK8SCluster != nil {
+		no_k8s_clusterMap := make(map[string]interface{})
+		apiResource.Spec["no_k8s_cluster"] = no_k8s_clusterMap
+	}
+	if data.NoLocalControlPlane != nil {
+		no_local_control_planeMap := make(map[string]interface{})
+		apiResource.Spec["no_local_control_plane"] = no_local_control_planeMap
+	}
+	if data.OfflineSurvivabilityMode != nil {
+		offline_survivability_modeMap := make(map[string]interface{})
+		if data.OfflineSurvivabilityMode.EnableOfflineSurvivabilityMode != nil {
+			offline_survivability_modeMap["enable_offline_survivability_mode"] = map[string]interface{}{}
+		}
+		if data.OfflineSurvivabilityMode.NoOfflineSurvivabilityMode != nil {
+			offline_survivability_modeMap["no_offline_survivability_mode"] = map[string]interface{}{}
+		}
+		apiResource.Spec["offline_survivability_mode"] = offline_survivability_modeMap
+	}
+	if data.Os != nil {
+		osMap := make(map[string]interface{})
+		if data.Os.DefaultOsVersion != nil {
+			osMap["default_os_version"] = map[string]interface{}{}
+		}
+		if !data.Os.OperatingSystemVersion.IsNull() && !data.Os.OperatingSystemVersion.IsUnknown() {
+			osMap["operating_system_version"] = data.Os.OperatingSystemVersion.ValueString()
+		}
+		apiResource.Spec["os"] = osMap
+	}
+	if data.SriovInterfaces != nil {
+		sriov_interfacesMap := make(map[string]interface{})
+		apiResource.Spec["sriov_interfaces"] = sriov_interfacesMap
+	}
+	if data.Sw != nil {
+		swMap := make(map[string]interface{})
+		if data.Sw.DefaultSwVersion != nil {
+			swMap["default_sw_version"] = map[string]interface{}{}
+		}
+		if !data.Sw.VolterraSoftwareVersion.IsNull() && !data.Sw.VolterraSoftwareVersion.IsUnknown() {
+			swMap["volterra_software_version"] = data.Sw.VolterraSoftwareVersion.ValueString()
+		}
+		apiResource.Spec["sw"] = swMap
+	}
+	if data.UsbPolicy != nil {
+		usb_policyMap := make(map[string]interface{})
+		if !data.UsbPolicy.Name.IsNull() && !data.UsbPolicy.Name.IsUnknown() {
+			usb_policyMap["name"] = data.UsbPolicy.Name.ValueString()
+		}
+		if !data.UsbPolicy.Namespace.IsNull() && !data.UsbPolicy.Namespace.IsUnknown() {
+			usb_policyMap["namespace"] = data.UsbPolicy.Namespace.ValueString()
+		}
+		if !data.UsbPolicy.Tenant.IsNull() && !data.UsbPolicy.Tenant.IsUnknown() {
+			usb_policyMap["tenant"] = data.UsbPolicy.Tenant.ValueString()
+		}
+		apiResource.Spec["usb_policy"] = usb_policyMap
+	}
+	if !data.WorkerNodes.IsNull() && !data.WorkerNodes.IsUnknown() {
+		var worker_nodesList []string
+		resp.Diagnostics.Append(data.WorkerNodes.ElementsAs(ctx, &worker_nodesList, false)...)
+		if !resp.Diagnostics.HasError() {
+			apiResource.Spec["worker_nodes"] = worker_nodesList
+		}
+	}
+	if !data.Address.IsNull() && !data.Address.IsUnknown() {
+		apiResource.Spec["address"] = data.Address.ValueString()
+	}
+	if !data.VolterraCertifiedHw.IsNull() && !data.VolterraCertifiedHw.IsUnknown() {
+		apiResource.Spec["volterra_certified_hw"] = data.VolterraCertifiedHw.ValueString()
+	}
+
+
 	created, err := r.client.CreateVoltstackSite(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create VoltstackSite: %s", err))
@@ -4937,8 +5291,21 @@ func (r *VoltstackSiteResource) Create(ctx context.Context, req resource.CreateR
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+	if v, ok := created.Spec["address"].(string); ok && v != "" {
+		data.Address = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := created.Spec["volterra_certified_hw"].(string); ok && v != "" {
+		data.VolterraCertifiedHw = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created VoltstackSite resource")
@@ -5017,9 +5384,363 @@ func (r *VoltstackSiteResource) Read(ctx context.Context, req resource.ReadReque
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if _, ok := apiResource.Spec["allow_all_usb"].(map[string]interface{}); ok && isImport && data.AllowAllUsb == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AllowAllUsb = &VoltstackSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["blocked_services"].(map[string]interface{}); ok && isImport && data.BlockedServices == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.BlockedServices = &VoltstackSiteBlockedServicesModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["bond_device_list"].(map[string]interface{}); ok && isImport && data.BondDeviceList == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.BondDeviceList = &VoltstackSiteBondDeviceListModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["coordinates"].(map[string]interface{}); ok && (isImport || data.Coordinates != nil) {
+		data.Coordinates = &VoltstackSiteCoordinatesModel{
+			Latitude: func() types.Int64 {
+				if v, ok := blockData["latitude"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			Longitude: func() types.Int64 {
+				if v, ok := blockData["longitude"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["custom_dns"].(map[string]interface{}); ok && (isImport || data.CustomDNS != nil) {
+		data.CustomDNS = &VoltstackSiteCustomDNSModel{
+			InsideNameserver: func() types.String {
+				if v, ok := blockData["inside_nameserver"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			OutsideNameserver: func() types.String {
+				if v, ok := blockData["outside_nameserver"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["custom_network_config"].(map[string]interface{}); ok && (isImport || data.CustomNetworkConfig != nil) {
+		data.CustomNetworkConfig = &VoltstackSiteCustomNetworkConfigModel{
+			BGPPeerAddress: func() types.String {
+				if v, ok := blockData["bgp_peer_address"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			BGPRouterID: func() types.String {
+				if v, ok := blockData["bgp_router_id"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			OutsideNameserver: func() types.String {
+				if v, ok := blockData["outside_nameserver"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			OutsideVip: func() types.String {
+				if v, ok := blockData["outside_vip"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			SiteToSiteTunnelIP: func() types.String {
+				if v, ok := blockData["site_to_site_tunnel_ip"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			TunnelDeadTimeout: func() types.Int64 {
+				if v, ok := blockData["tunnel_dead_timeout"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			VipVrrpMode: func() types.String {
+				if v, ok := blockData["vip_vrrp_mode"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["custom_storage_config"].(map[string]interface{}); ok && isImport && data.CustomStorageConfig == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.CustomStorageConfig = &VoltstackSiteCustomStorageConfigModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["default_blocked_services"].(map[string]interface{}); ok && isImport && data.DefaultBlockedServices == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DefaultBlockedServices = &VoltstackSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["default_network_config"].(map[string]interface{}); ok && isImport && data.DefaultNetworkConfig == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DefaultNetworkConfig = &VoltstackSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["default_sriov_interface"].(map[string]interface{}); ok && isImport && data.DefaultSriovInterface == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DefaultSriovInterface = &VoltstackSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["default_storage_config"].(map[string]interface{}); ok && isImport && data.DefaultStorageConfig == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DefaultStorageConfig = &VoltstackSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["deny_all_usb"].(map[string]interface{}); ok && isImport && data.DenyAllUsb == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DenyAllUsb = &VoltstackSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["disable_gpu"].(map[string]interface{}); ok && isImport && data.DisableGpu == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableGpu = &VoltstackSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["disable_vm"].(map[string]interface{}); ok && isImport && data.DisableVm == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableVm = &VoltstackSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["enable_gpu"].(map[string]interface{}); ok && isImport && data.EnableGpu == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.EnableGpu = &VoltstackSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["enable_vgpu"].(map[string]interface{}); ok && (isImport || data.EnableVgpu != nil) {
+		data.EnableVgpu = &VoltstackSiteEnableVgpuModel{
+			FeatureType: func() types.String {
+				if v, ok := blockData["feature_type"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			ServerAddress: func() types.String {
+				if v, ok := blockData["server_address"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			ServerPort: func() types.Int64 {
+				if v, ok := blockData["server_port"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["enable_vm"].(map[string]interface{}); ok && isImport && data.EnableVm == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.EnableVm = &VoltstackSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["k8s_cluster"].(map[string]interface{}); ok && (isImport || data.K8SCluster != nil) {
+		data.K8SCluster = &VoltstackSiteK8SClusterModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["kubernetes_upgrade_drain"].(map[string]interface{}); ok && isImport && data.KubernetesUpgradeDrain == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.KubernetesUpgradeDrain = &VoltstackSiteKubernetesUpgradeDrainModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["local_control_plane"].(map[string]interface{}); ok && isImport && data.LocalControlPlane == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.LocalControlPlane = &VoltstackSiteLocalControlPlaneModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["log_receiver"].(map[string]interface{}); ok && (isImport || data.LogReceiver != nil) {
+		data.LogReceiver = &VoltstackSiteLogReceiverModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["logs_streaming_disabled"].(map[string]interface{}); ok && isImport && data.LogsStreamingDisabled == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.LogsStreamingDisabled = &VoltstackSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["master_node_configuration"].([]interface{}); ok && len(listData) > 0 {
+		var master_node_configurationList []VoltstackSiteMasterNodeConfigurationModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				master_node_configurationList = append(master_node_configurationList, VoltstackSiteMasterNodeConfigurationModel{
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					PublicIP: func() types.String {
+						if v, ok := itemMap["public_ip"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.MasterNodeConfiguration = master_node_configurationList
+	}
+	if _, ok := apiResource.Spec["no_bond_devices"].(map[string]interface{}); ok && isImport && data.NoBondDevices == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoBondDevices = &VoltstackSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_k8s_cluster"].(map[string]interface{}); ok && isImport && data.NoK8SCluster == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoK8SCluster = &VoltstackSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_local_control_plane"].(map[string]interface{}); ok && isImport && data.NoLocalControlPlane == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoLocalControlPlane = &VoltstackSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["offline_survivability_mode"].(map[string]interface{}); ok && isImport && data.OfflineSurvivabilityMode == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.OfflineSurvivabilityMode = &VoltstackSiteOfflineSurvivabilityModeModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["os"].(map[string]interface{}); ok && (isImport || data.Os != nil) {
+		data.Os = &VoltstackSiteOsModel{
+			OperatingSystemVersion: func() types.String {
+				if v, ok := blockData["operating_system_version"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["sriov_interfaces"].(map[string]interface{}); ok && isImport && data.SriovInterfaces == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.SriovInterfaces = &VoltstackSiteSriovInterfacesModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["sw"].(map[string]interface{}); ok && (isImport || data.Sw != nil) {
+		data.Sw = &VoltstackSiteSwModel{
+			VolterraSoftwareVersion: func() types.String {
+				if v, ok := blockData["volterra_software_version"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["usb_policy"].(map[string]interface{}); ok && (isImport || data.UsbPolicy != nil) {
+		data.UsbPolicy = &VoltstackSiteUsbPolicyModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if v, ok := apiResource.Spec["worker_nodes"].([]interface{}); ok && len(v) > 0 {
+		var worker_nodesList []string
+		for _, item := range v {
+			if s, ok := item.(string); ok {
+				worker_nodesList = append(worker_nodesList, s)
+			}
+		}
+		listVal, diags := types.ListValueFrom(ctx, types.StringType, worker_nodesList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.WorkerNodes = listVal
+		}
+	} else {
+		data.WorkerNodes = types.ListNull(types.StringType)
+	}
+	if v, ok := apiResource.Spec["address"].(string); ok && v != "" {
+		data.Address = types.StringValue(v)
+	} else {
+		data.Address = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["volterra_certified_hw"].(string); ok && v != "" {
+		data.VolterraCertifiedHw = types.StringValue(v)
+	} else {
+		data.VolterraCertifiedHw = types.StringNull()
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -5045,7 +5766,7 @@ func (r *VoltstackSiteResource) Update(ctx context.Context, req resource.UpdateR
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.VoltstackSiteSpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -5070,6 +5791,352 @@ func (r *VoltstackSiteResource) Update(ctx context.Context, req resource.UpdateR
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if data.AllowAllUsb != nil {
+		allow_all_usbMap := make(map[string]interface{})
+		apiResource.Spec["allow_all_usb"] = allow_all_usbMap
+	}
+	if data.BlockedServices != nil {
+		blocked_servicesMap := make(map[string]interface{})
+		apiResource.Spec["blocked_services"] = blocked_servicesMap
+	}
+	if data.BondDeviceList != nil {
+		bond_device_listMap := make(map[string]interface{})
+		apiResource.Spec["bond_device_list"] = bond_device_listMap
+	}
+	if data.Coordinates != nil {
+		coordinatesMap := make(map[string]interface{})
+		if !data.Coordinates.Latitude.IsNull() && !data.Coordinates.Latitude.IsUnknown() {
+			coordinatesMap["latitude"] = data.Coordinates.Latitude.ValueInt64()
+		}
+		if !data.Coordinates.Longitude.IsNull() && !data.Coordinates.Longitude.IsUnknown() {
+			coordinatesMap["longitude"] = data.Coordinates.Longitude.ValueInt64()
+		}
+		apiResource.Spec["coordinates"] = coordinatesMap
+	}
+	if data.CustomDNS != nil {
+		custom_dnsMap := make(map[string]interface{})
+		if !data.CustomDNS.InsideNameserver.IsNull() && !data.CustomDNS.InsideNameserver.IsUnknown() {
+			custom_dnsMap["inside_nameserver"] = data.CustomDNS.InsideNameserver.ValueString()
+		}
+		if !data.CustomDNS.OutsideNameserver.IsNull() && !data.CustomDNS.OutsideNameserver.IsUnknown() {
+			custom_dnsMap["outside_nameserver"] = data.CustomDNS.OutsideNameserver.ValueString()
+		}
+		apiResource.Spec["custom_dns"] = custom_dnsMap
+	}
+	if data.CustomNetworkConfig != nil {
+		custom_network_configMap := make(map[string]interface{})
+		if data.CustomNetworkConfig.ActiveEnhancedFirewallPolicies != nil {
+			active_enhanced_firewall_policiesNestedMap := make(map[string]interface{})
+			custom_network_configMap["active_enhanced_firewall_policies"] = active_enhanced_firewall_policiesNestedMap
+		}
+		if data.CustomNetworkConfig.ActiveForwardProxyPolicies != nil {
+			active_forward_proxy_policiesNestedMap := make(map[string]interface{})
+			custom_network_configMap["active_forward_proxy_policies"] = active_forward_proxy_policiesNestedMap
+		}
+		if data.CustomNetworkConfig.ActiveNetworkPolicies != nil {
+			active_network_policiesNestedMap := make(map[string]interface{})
+			custom_network_configMap["active_network_policies"] = active_network_policiesNestedMap
+		}
+		if !data.CustomNetworkConfig.BGPPeerAddress.IsNull() && !data.CustomNetworkConfig.BGPPeerAddress.IsUnknown() {
+			custom_network_configMap["bgp_peer_address"] = data.CustomNetworkConfig.BGPPeerAddress.ValueString()
+		}
+		if !data.CustomNetworkConfig.BGPRouterID.IsNull() && !data.CustomNetworkConfig.BGPRouterID.IsUnknown() {
+			custom_network_configMap["bgp_router_id"] = data.CustomNetworkConfig.BGPRouterID.ValueString()
+		}
+		if data.CustomNetworkConfig.DefaultConfig != nil {
+			custom_network_configMap["default_config"] = map[string]interface{}{}
+		}
+		if data.CustomNetworkConfig.DefaultInterfaceConfig != nil {
+			custom_network_configMap["default_interface_config"] = map[string]interface{}{}
+		}
+		if data.CustomNetworkConfig.DefaultSLIConfig != nil {
+			custom_network_configMap["default_sli_config"] = map[string]interface{}{}
+		}
+		if data.CustomNetworkConfig.ForwardProxyAllowAll != nil {
+			custom_network_configMap["forward_proxy_allow_all"] = map[string]interface{}{}
+		}
+		if data.CustomNetworkConfig.GlobalNetworkList != nil {
+			global_network_listNestedMap := make(map[string]interface{})
+			custom_network_configMap["global_network_list"] = global_network_listNestedMap
+		}
+		if data.CustomNetworkConfig.InterfaceList != nil {
+			interface_listNestedMap := make(map[string]interface{})
+			custom_network_configMap["interface_list"] = interface_listNestedMap
+		}
+		if data.CustomNetworkConfig.NoForwardProxy != nil {
+			custom_network_configMap["no_forward_proxy"] = map[string]interface{}{}
+		}
+		if data.CustomNetworkConfig.NoGlobalNetwork != nil {
+			custom_network_configMap["no_global_network"] = map[string]interface{}{}
+		}
+		if data.CustomNetworkConfig.NoNetworkPolicy != nil {
+			custom_network_configMap["no_network_policy"] = map[string]interface{}{}
+		}
+		if !data.CustomNetworkConfig.OutsideNameserver.IsNull() && !data.CustomNetworkConfig.OutsideNameserver.IsUnknown() {
+			custom_network_configMap["outside_nameserver"] = data.CustomNetworkConfig.OutsideNameserver.ValueString()
+		}
+		if !data.CustomNetworkConfig.OutsideVip.IsNull() && !data.CustomNetworkConfig.OutsideVip.IsUnknown() {
+			custom_network_configMap["outside_vip"] = data.CustomNetworkConfig.OutsideVip.ValueString()
+		}
+		if !data.CustomNetworkConfig.SiteToSiteTunnelIP.IsNull() && !data.CustomNetworkConfig.SiteToSiteTunnelIP.IsUnknown() {
+			custom_network_configMap["site_to_site_tunnel_ip"] = data.CustomNetworkConfig.SiteToSiteTunnelIP.ValueString()
+		}
+		if data.CustomNetworkConfig.SLIConfig != nil {
+			sli_configNestedMap := make(map[string]interface{})
+			custom_network_configMap["sli_config"] = sli_configNestedMap
+		}
+		if data.CustomNetworkConfig.SLOConfig != nil {
+			slo_configNestedMap := make(map[string]interface{})
+			custom_network_configMap["slo_config"] = slo_configNestedMap
+		}
+		if data.CustomNetworkConfig.SmConnectionPublicIP != nil {
+			custom_network_configMap["sm_connection_public_ip"] = map[string]interface{}{}
+		}
+		if data.CustomNetworkConfig.SmConnectionPvtIP != nil {
+			custom_network_configMap["sm_connection_pvt_ip"] = map[string]interface{}{}
+		}
+		if !data.CustomNetworkConfig.TunnelDeadTimeout.IsNull() && !data.CustomNetworkConfig.TunnelDeadTimeout.IsUnknown() {
+			custom_network_configMap["tunnel_dead_timeout"] = data.CustomNetworkConfig.TunnelDeadTimeout.ValueInt64()
+		}
+		if !data.CustomNetworkConfig.VipVrrpMode.IsNull() && !data.CustomNetworkConfig.VipVrrpMode.IsUnknown() {
+			custom_network_configMap["vip_vrrp_mode"] = data.CustomNetworkConfig.VipVrrpMode.ValueString()
+		}
+		apiResource.Spec["custom_network_config"] = custom_network_configMap
+	}
+	if data.CustomStorageConfig != nil {
+		custom_storage_configMap := make(map[string]interface{})
+		if data.CustomStorageConfig.DefaultStorageClass != nil {
+			custom_storage_configMap["default_storage_class"] = map[string]interface{}{}
+		}
+		if data.CustomStorageConfig.NoStaticRoutes != nil {
+			custom_storage_configMap["no_static_routes"] = map[string]interface{}{}
+		}
+		if data.CustomStorageConfig.NoStorageDevice != nil {
+			custom_storage_configMap["no_storage_device"] = map[string]interface{}{}
+		}
+		if data.CustomStorageConfig.NoStorageInterfaces != nil {
+			custom_storage_configMap["no_storage_interfaces"] = map[string]interface{}{}
+		}
+		if data.CustomStorageConfig.StaticRoutes != nil {
+			static_routesNestedMap := make(map[string]interface{})
+			custom_storage_configMap["static_routes"] = static_routesNestedMap
+		}
+		if data.CustomStorageConfig.StorageClassList != nil {
+			storage_class_listNestedMap := make(map[string]interface{})
+			custom_storage_configMap["storage_class_list"] = storage_class_listNestedMap
+		}
+		if data.CustomStorageConfig.StorageDeviceList != nil {
+			storage_device_listNestedMap := make(map[string]interface{})
+			custom_storage_configMap["storage_device_list"] = storage_device_listNestedMap
+		}
+		if data.CustomStorageConfig.StorageInterfaceList != nil {
+			storage_interface_listNestedMap := make(map[string]interface{})
+			custom_storage_configMap["storage_interface_list"] = storage_interface_listNestedMap
+		}
+		apiResource.Spec["custom_storage_config"] = custom_storage_configMap
+	}
+	if data.DefaultBlockedServices != nil {
+		default_blocked_servicesMap := make(map[string]interface{})
+		apiResource.Spec["default_blocked_services"] = default_blocked_servicesMap
+	}
+	if data.DefaultNetworkConfig != nil {
+		default_network_configMap := make(map[string]interface{})
+		apiResource.Spec["default_network_config"] = default_network_configMap
+	}
+	if data.DefaultSriovInterface != nil {
+		default_sriov_interfaceMap := make(map[string]interface{})
+		apiResource.Spec["default_sriov_interface"] = default_sriov_interfaceMap
+	}
+	if data.DefaultStorageConfig != nil {
+		default_storage_configMap := make(map[string]interface{})
+		apiResource.Spec["default_storage_config"] = default_storage_configMap
+	}
+	if data.DenyAllUsb != nil {
+		deny_all_usbMap := make(map[string]interface{})
+		apiResource.Spec["deny_all_usb"] = deny_all_usbMap
+	}
+	if data.DisableGpu != nil {
+		disable_gpuMap := make(map[string]interface{})
+		apiResource.Spec["disable_gpu"] = disable_gpuMap
+	}
+	if data.DisableVm != nil {
+		disable_vmMap := make(map[string]interface{})
+		apiResource.Spec["disable_vm"] = disable_vmMap
+	}
+	if data.EnableGpu != nil {
+		enable_gpuMap := make(map[string]interface{})
+		apiResource.Spec["enable_gpu"] = enable_gpuMap
+	}
+	if data.EnableVgpu != nil {
+		enable_vgpuMap := make(map[string]interface{})
+		if !data.EnableVgpu.FeatureType.IsNull() && !data.EnableVgpu.FeatureType.IsUnknown() {
+			enable_vgpuMap["feature_type"] = data.EnableVgpu.FeatureType.ValueString()
+		}
+		if !data.EnableVgpu.ServerAddress.IsNull() && !data.EnableVgpu.ServerAddress.IsUnknown() {
+			enable_vgpuMap["server_address"] = data.EnableVgpu.ServerAddress.ValueString()
+		}
+		if !data.EnableVgpu.ServerPort.IsNull() && !data.EnableVgpu.ServerPort.IsUnknown() {
+			enable_vgpuMap["server_port"] = data.EnableVgpu.ServerPort.ValueInt64()
+		}
+		apiResource.Spec["enable_vgpu"] = enable_vgpuMap
+	}
+	if data.EnableVm != nil {
+		enable_vmMap := make(map[string]interface{})
+		apiResource.Spec["enable_vm"] = enable_vmMap
+	}
+	if data.K8SCluster != nil {
+		k8s_clusterMap := make(map[string]interface{})
+		if !data.K8SCluster.Name.IsNull() && !data.K8SCluster.Name.IsUnknown() {
+			k8s_clusterMap["name"] = data.K8SCluster.Name.ValueString()
+		}
+		if !data.K8SCluster.Namespace.IsNull() && !data.K8SCluster.Namespace.IsUnknown() {
+			k8s_clusterMap["namespace"] = data.K8SCluster.Namespace.ValueString()
+		}
+		if !data.K8SCluster.Tenant.IsNull() && !data.K8SCluster.Tenant.IsUnknown() {
+			k8s_clusterMap["tenant"] = data.K8SCluster.Tenant.ValueString()
+		}
+		apiResource.Spec["k8s_cluster"] = k8s_clusterMap
+	}
+	if data.KubernetesUpgradeDrain != nil {
+		kubernetes_upgrade_drainMap := make(map[string]interface{})
+		if data.KubernetesUpgradeDrain.DisableUpgradeDrain != nil {
+			kubernetes_upgrade_drainMap["disable_upgrade_drain"] = map[string]interface{}{}
+		}
+		if data.KubernetesUpgradeDrain.EnableUpgradeDrain != nil {
+			enable_upgrade_drainNestedMap := make(map[string]interface{})
+			if !data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainMaxUnavailableNodeCount.IsNull() && !data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainMaxUnavailableNodeCount.IsUnknown() {
+				enable_upgrade_drainNestedMap["drain_max_unavailable_node_count"] = data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainMaxUnavailableNodeCount.ValueInt64()
+			}
+			if !data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainNodeTimeout.IsNull() && !data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainNodeTimeout.IsUnknown() {
+				enable_upgrade_drainNestedMap["drain_node_timeout"] = data.KubernetesUpgradeDrain.EnableUpgradeDrain.DrainNodeTimeout.ValueInt64()
+			}
+			kubernetes_upgrade_drainMap["enable_upgrade_drain"] = enable_upgrade_drainNestedMap
+		}
+		apiResource.Spec["kubernetes_upgrade_drain"] = kubernetes_upgrade_drainMap
+	}
+	if data.LocalControlPlane != nil {
+		local_control_planeMap := make(map[string]interface{})
+		if data.LocalControlPlane.BGPConfig != nil {
+			bgp_configNestedMap := make(map[string]interface{})
+			if !data.LocalControlPlane.BGPConfig.Asn.IsNull() && !data.LocalControlPlane.BGPConfig.Asn.IsUnknown() {
+				bgp_configNestedMap["asn"] = data.LocalControlPlane.BGPConfig.Asn.ValueInt64()
+			}
+			local_control_planeMap["bgp_config"] = bgp_configNestedMap
+		}
+		if data.LocalControlPlane.InsideVn != nil {
+			local_control_planeMap["inside_vn"] = map[string]interface{}{}
+		}
+		if data.LocalControlPlane.OutsideVn != nil {
+			local_control_planeMap["outside_vn"] = map[string]interface{}{}
+		}
+		apiResource.Spec["local_control_plane"] = local_control_planeMap
+	}
+	if data.LogReceiver != nil {
+		log_receiverMap := make(map[string]interface{})
+		if !data.LogReceiver.Name.IsNull() && !data.LogReceiver.Name.IsUnknown() {
+			log_receiverMap["name"] = data.LogReceiver.Name.ValueString()
+		}
+		if !data.LogReceiver.Namespace.IsNull() && !data.LogReceiver.Namespace.IsUnknown() {
+			log_receiverMap["namespace"] = data.LogReceiver.Namespace.ValueString()
+		}
+		if !data.LogReceiver.Tenant.IsNull() && !data.LogReceiver.Tenant.IsUnknown() {
+			log_receiverMap["tenant"] = data.LogReceiver.Tenant.ValueString()
+		}
+		apiResource.Spec["log_receiver"] = log_receiverMap
+	}
+	if data.LogsStreamingDisabled != nil {
+		logs_streaming_disabledMap := make(map[string]interface{})
+		apiResource.Spec["logs_streaming_disabled"] = logs_streaming_disabledMap
+	}
+	if len(data.MasterNodeConfiguration) > 0 {
+		var master_node_configurationList []map[string]interface{}
+		for _, item := range data.MasterNodeConfiguration {
+			itemMap := make(map[string]interface{})
+			if !item.Name.IsNull() && !item.Name.IsUnknown() {
+				itemMap["name"] = item.Name.ValueString()
+			}
+			if !item.PublicIP.IsNull() && !item.PublicIP.IsUnknown() {
+				itemMap["public_ip"] = item.PublicIP.ValueString()
+			}
+			master_node_configurationList = append(master_node_configurationList, itemMap)
+		}
+		apiResource.Spec["master_node_configuration"] = master_node_configurationList
+	}
+	if data.NoBondDevices != nil {
+		no_bond_devicesMap := make(map[string]interface{})
+		apiResource.Spec["no_bond_devices"] = no_bond_devicesMap
+	}
+	if data.NoK8SCluster != nil {
+		no_k8s_clusterMap := make(map[string]interface{})
+		apiResource.Spec["no_k8s_cluster"] = no_k8s_clusterMap
+	}
+	if data.NoLocalControlPlane != nil {
+		no_local_control_planeMap := make(map[string]interface{})
+		apiResource.Spec["no_local_control_plane"] = no_local_control_planeMap
+	}
+	if data.OfflineSurvivabilityMode != nil {
+		offline_survivability_modeMap := make(map[string]interface{})
+		if data.OfflineSurvivabilityMode.EnableOfflineSurvivabilityMode != nil {
+			offline_survivability_modeMap["enable_offline_survivability_mode"] = map[string]interface{}{}
+		}
+		if data.OfflineSurvivabilityMode.NoOfflineSurvivabilityMode != nil {
+			offline_survivability_modeMap["no_offline_survivability_mode"] = map[string]interface{}{}
+		}
+		apiResource.Spec["offline_survivability_mode"] = offline_survivability_modeMap
+	}
+	if data.Os != nil {
+		osMap := make(map[string]interface{})
+		if data.Os.DefaultOsVersion != nil {
+			osMap["default_os_version"] = map[string]interface{}{}
+		}
+		if !data.Os.OperatingSystemVersion.IsNull() && !data.Os.OperatingSystemVersion.IsUnknown() {
+			osMap["operating_system_version"] = data.Os.OperatingSystemVersion.ValueString()
+		}
+		apiResource.Spec["os"] = osMap
+	}
+	if data.SriovInterfaces != nil {
+		sriov_interfacesMap := make(map[string]interface{})
+		apiResource.Spec["sriov_interfaces"] = sriov_interfacesMap
+	}
+	if data.Sw != nil {
+		swMap := make(map[string]interface{})
+		if data.Sw.DefaultSwVersion != nil {
+			swMap["default_sw_version"] = map[string]interface{}{}
+		}
+		if !data.Sw.VolterraSoftwareVersion.IsNull() && !data.Sw.VolterraSoftwareVersion.IsUnknown() {
+			swMap["volterra_software_version"] = data.Sw.VolterraSoftwareVersion.ValueString()
+		}
+		apiResource.Spec["sw"] = swMap
+	}
+	if data.UsbPolicy != nil {
+		usb_policyMap := make(map[string]interface{})
+		if !data.UsbPolicy.Name.IsNull() && !data.UsbPolicy.Name.IsUnknown() {
+			usb_policyMap["name"] = data.UsbPolicy.Name.ValueString()
+		}
+		if !data.UsbPolicy.Namespace.IsNull() && !data.UsbPolicy.Namespace.IsUnknown() {
+			usb_policyMap["namespace"] = data.UsbPolicy.Namespace.ValueString()
+		}
+		if !data.UsbPolicy.Tenant.IsNull() && !data.UsbPolicy.Tenant.IsUnknown() {
+			usb_policyMap["tenant"] = data.UsbPolicy.Tenant.ValueString()
+		}
+		apiResource.Spec["usb_policy"] = usb_policyMap
+	}
+	if !data.WorkerNodes.IsNull() && !data.WorkerNodes.IsUnknown() {
+		var worker_nodesList []string
+		resp.Diagnostics.Append(data.WorkerNodes.ElementsAs(ctx, &worker_nodesList, false)...)
+		if !resp.Diagnostics.HasError() {
+			apiResource.Spec["worker_nodes"] = worker_nodesList
+		}
+	}
+	if !data.Address.IsNull() && !data.Address.IsUnknown() {
+		apiResource.Spec["address"] = data.Address.ValueString()
+	}
+	if !data.VolterraCertifiedHw.IsNull() && !data.VolterraCertifiedHw.IsUnknown() {
+		apiResource.Spec["volterra_certified_hw"] = data.VolterraCertifiedHw.ValueString()
+	}
+
+
 	updated, err := r.client.UpdateVoltstackSite(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update VoltstackSite: %s", err))
@@ -5078,6 +6145,16 @@ func (r *VoltstackSiteResource) Update(ctx context.Context, req resource.UpdateR
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
+	if v, ok := updated.Spec["address"].(string); ok && v != "" {
+		data.Address = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
+	if v, ok := updated.Spec["volterra_certified_hw"].(string); ok && v != "" {
+		data.VolterraCertifiedHw = types.StringValue(v)
+	}
+	// If API doesn't return the value, preserve plan value (already in data)
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -5090,6 +6167,7 @@ func (r *VoltstackSiteResource) Update(ctx context.Context, req resource.UpdateR
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -5116,6 +6194,15 @@ func (r *VoltstackSiteResource) Delete(ctx context.Context, req resource.DeleteR
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "VoltstackSite already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "VoltstackSite delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

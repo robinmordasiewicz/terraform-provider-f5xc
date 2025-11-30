@@ -10,13 +10,8 @@ import (
 
 // AlertPolicy represents a F5XC AlertPolicy
 type AlertPolicy struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     AlertPolicySpec `json:"spec"`
-}
-
-// AlertPolicySpec defines the specification for AlertPolicy
-type AlertPolicySpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateAlertPolicy creates a new AlertPolicy

@@ -10,13 +10,8 @@ import (
 
 // Tunnel represents a F5XC Tunnel
 type Tunnel struct {
-	Metadata Metadata       `json:"metadata"`
-	Spec     TunnelSpec `json:"spec"`
-}
-
-// TunnelSpec defines the specification for Tunnel
-type TunnelSpec struct {
-	Description string `json:"description,omitempty"`
+	Metadata Metadata               `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`
 }
 
 // CreateTunnel creates a new Tunnel

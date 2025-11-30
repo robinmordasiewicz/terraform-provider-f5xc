@@ -100,7 +100,7 @@ type WAFExclusionPolicyWAFExclusionRulesAppFirewallDetectionControlExcludeViolat
 
 // WAFExclusionPolicyWAFExclusionRulesMetadataModel represents metadata block
 type WAFExclusionPolicyWAFExclusionRulesMetadataModel struct {
-	Description types.String `tfsdk:"description"`
+	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name types.String `tfsdk:"name"`
 }
 
@@ -293,7 +293,7 @@ func (r *WAFExclusionPolicyResource) Schema(ctx context.Context, req resource.Sc
 						"metadata": schema.SingleNestedBlock{
 							MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 							Attributes: map[string]schema.Attribute{
-								"description": schema.StringAttribute{
+								"description_spec": schema.StringAttribute{
 									MarkdownDescription: "Description. Human readable description.",
 									Optional: true,
 								},
@@ -432,7 +432,7 @@ func (r *WAFExclusionPolicyResource) Create(ctx context.Context, req resource.Cr
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.WAFExclusionPolicySpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -457,6 +457,55 @@ func (r *WAFExclusionPolicyResource) Create(ctx context.Context, req resource.Cr
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if len(data.WAFExclusionRules) > 0 {
+		var waf_exclusion_rulesList []map[string]interface{}
+		for _, item := range data.WAFExclusionRules {
+			itemMap := make(map[string]interface{})
+			if item.AnyDomain != nil {
+				itemMap["any_domain"] = map[string]interface{}{}
+			}
+			if item.AnyPath != nil {
+				itemMap["any_path"] = map[string]interface{}{}
+			}
+			if item.AppFirewallDetectionControl != nil {
+				app_firewall_detection_controlNestedMap := make(map[string]interface{})
+				itemMap["app_firewall_detection_control"] = app_firewall_detection_controlNestedMap
+			}
+			if !item.ExactValue.IsNull() && !item.ExactValue.IsUnknown() {
+				itemMap["exact_value"] = item.ExactValue.ValueString()
+			}
+			if !item.ExpirationTimestamp.IsNull() && !item.ExpirationTimestamp.IsUnknown() {
+				itemMap["expiration_timestamp"] = item.ExpirationTimestamp.ValueString()
+			}
+			if item.Metadata != nil {
+				metadataNestedMap := make(map[string]interface{})
+				if !item.Metadata.DescriptionSpec.IsNull() && !item.Metadata.DescriptionSpec.IsUnknown() {
+					metadataNestedMap["description"] = item.Metadata.DescriptionSpec.ValueString()
+				}
+				if !item.Metadata.Name.IsNull() && !item.Metadata.Name.IsUnknown() {
+					metadataNestedMap["name"] = item.Metadata.Name.ValueString()
+				}
+				itemMap["metadata"] = metadataNestedMap
+			}
+			if !item.PathPrefix.IsNull() && !item.PathPrefix.IsUnknown() {
+				itemMap["path_prefix"] = item.PathPrefix.ValueString()
+			}
+			if !item.PathRegex.IsNull() && !item.PathRegex.IsUnknown() {
+				itemMap["path_regex"] = item.PathRegex.ValueString()
+			}
+			if !item.SuffixValue.IsNull() && !item.SuffixValue.IsUnknown() {
+				itemMap["suffix_value"] = item.SuffixValue.ValueString()
+			}
+			if item.WAFSkipProcessing != nil {
+				itemMap["waf_skip_processing"] = map[string]interface{}{}
+			}
+			waf_exclusion_rulesList = append(waf_exclusion_rulesList, itemMap)
+		}
+		apiResource.Spec["waf_exclusion_rules"] = waf_exclusion_rulesList
+	}
+
+
 	created, err := r.client.CreateWAFExclusionPolicy(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create WAFExclusionPolicy: %s", err))
@@ -465,8 +514,13 @@ func (r *WAFExclusionPolicyResource) Create(ctx context.Context, req resource.Cr
 
 	data.ID = types.StringValue(created.Metadata.Name)
 
+	// Set computed fields from API response
+
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created WAFExclusionPolicy resource")
@@ -545,9 +599,109 @@ func (r *WAFExclusionPolicyResource) Read(ctx context.Context, req resource.Read
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if listData, ok := apiResource.Spec["waf_exclusion_rules"].([]interface{}); ok && len(listData) > 0 {
+		var waf_exclusion_rulesList []WAFExclusionPolicyWAFExclusionRulesModel
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				waf_exclusion_rulesList = append(waf_exclusion_rulesList, WAFExclusionPolicyWAFExclusionRulesModel{
+					AnyDomain: func() *WAFExclusionPolicyEmptyModel {
+						if _, ok := itemMap["any_domain"].(map[string]interface{}); ok {
+							return &WAFExclusionPolicyEmptyModel{}
+						}
+						return nil
+					}(),
+					AnyPath: func() *WAFExclusionPolicyEmptyModel {
+						if _, ok := itemMap["any_path"].(map[string]interface{}); ok {
+							return &WAFExclusionPolicyEmptyModel{}
+						}
+						return nil
+					}(),
+					AppFirewallDetectionControl: func() *WAFExclusionPolicyWAFExclusionRulesAppFirewallDetectionControlModel {
+						if _, ok := itemMap["app_firewall_detection_control"].(map[string]interface{}); ok {
+							return &WAFExclusionPolicyWAFExclusionRulesAppFirewallDetectionControlModel{
+							}
+						}
+						return nil
+					}(),
+					ExactValue: func() types.String {
+						if v, ok := itemMap["exact_value"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					ExpirationTimestamp: func() types.String {
+						if v, ok := itemMap["expiration_timestamp"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Metadata: func() *WAFExclusionPolicyWAFExclusionRulesMetadataModel {
+						if nestedMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
+							return &WAFExclusionPolicyWAFExclusionRulesMetadataModel{
+								DescriptionSpec: func() types.String {
+									if v, ok := nestedMap["description"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Name: func() types.String {
+									if v, ok := nestedMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					PathPrefix: func() types.String {
+						if v, ok := itemMap["path_prefix"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					PathRegex: func() types.String {
+						if v, ok := itemMap["path_regex"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					SuffixValue: func() types.String {
+						if v, ok := itemMap["suffix_value"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					WAFSkipProcessing: func() *WAFExclusionPolicyEmptyModel {
+						if _, ok := itemMap["waf_skip_processing"].(map[string]interface{}); ok {
+							return &WAFExclusionPolicyEmptyModel{}
+						}
+						return nil
+					}(),
+				})
+			}
+		}
+		data.WAFExclusionRules = waf_exclusion_rulesList
+	}
+
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -573,7 +727,7 @@ func (r *WAFExclusionPolicyResource) Update(ctx context.Context, req resource.Up
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.WAFExclusionPolicySpec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -598,6 +752,55 @@ func (r *WAFExclusionPolicyResource) Update(ctx context.Context, req resource.Up
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+	if len(data.WAFExclusionRules) > 0 {
+		var waf_exclusion_rulesList []map[string]interface{}
+		for _, item := range data.WAFExclusionRules {
+			itemMap := make(map[string]interface{})
+			if item.AnyDomain != nil {
+				itemMap["any_domain"] = map[string]interface{}{}
+			}
+			if item.AnyPath != nil {
+				itemMap["any_path"] = map[string]interface{}{}
+			}
+			if item.AppFirewallDetectionControl != nil {
+				app_firewall_detection_controlNestedMap := make(map[string]interface{})
+				itemMap["app_firewall_detection_control"] = app_firewall_detection_controlNestedMap
+			}
+			if !item.ExactValue.IsNull() && !item.ExactValue.IsUnknown() {
+				itemMap["exact_value"] = item.ExactValue.ValueString()
+			}
+			if !item.ExpirationTimestamp.IsNull() && !item.ExpirationTimestamp.IsUnknown() {
+				itemMap["expiration_timestamp"] = item.ExpirationTimestamp.ValueString()
+			}
+			if item.Metadata != nil {
+				metadataNestedMap := make(map[string]interface{})
+				if !item.Metadata.DescriptionSpec.IsNull() && !item.Metadata.DescriptionSpec.IsUnknown() {
+					metadataNestedMap["description"] = item.Metadata.DescriptionSpec.ValueString()
+				}
+				if !item.Metadata.Name.IsNull() && !item.Metadata.Name.IsUnknown() {
+					metadataNestedMap["name"] = item.Metadata.Name.ValueString()
+				}
+				itemMap["metadata"] = metadataNestedMap
+			}
+			if !item.PathPrefix.IsNull() && !item.PathPrefix.IsUnknown() {
+				itemMap["path_prefix"] = item.PathPrefix.ValueString()
+			}
+			if !item.PathRegex.IsNull() && !item.PathRegex.IsUnknown() {
+				itemMap["path_regex"] = item.PathRegex.ValueString()
+			}
+			if !item.SuffixValue.IsNull() && !item.SuffixValue.IsUnknown() {
+				itemMap["suffix_value"] = item.SuffixValue.ValueString()
+			}
+			if item.WAFSkipProcessing != nil {
+				itemMap["waf_skip_processing"] = map[string]interface{}{}
+			}
+			waf_exclusion_rulesList = append(waf_exclusion_rulesList, itemMap)
+		}
+		apiResource.Spec["waf_exclusion_rules"] = waf_exclusion_rulesList
+	}
+
+
 	updated, err := r.client.UpdateWAFExclusionPolicy(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update WAFExclusionPolicy: %s", err))
@@ -606,6 +809,8 @@ func (r *WAFExclusionPolicyResource) Update(ctx context.Context, req resource.Up
 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
+
+	// Set computed fields from API response
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -618,6 +823,7 @@ func (r *WAFExclusionPolicyResource) Update(ctx context.Context, req resource.Up
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -644,6 +850,15 @@ func (r *WAFExclusionPolicyResource) Delete(ctx context.Context, req resource.De
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "WAFExclusionPolicy already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "WAFExclusionPolicy delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})

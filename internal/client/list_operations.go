@@ -94,3 +94,13 @@ func (c *Client) ListMaliciousUserMitigations(ctx context.Context, namespace str
 	err := c.Get(ctx, path, &result)
 	return &result, err
 }
+
+// CascadeDeleteNamespace deletes a namespace and all its contained resources.
+// This is used instead of the regular DELETE endpoint which returns 501 Not Implemented.
+// The cascade_delete endpoint is a POST request that deletes the namespace and all
+// resources within it.
+func (c *Client) CascadeDeleteNamespace(ctx context.Context, name string) error {
+	path := "/api/web/namespaces/" + name + "/cascade_delete"
+	// POST with empty body triggers cascade delete
+	return c.Post(ctx, path, struct{}{}, nil)
+}

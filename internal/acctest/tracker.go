@@ -201,7 +201,8 @@ func deleteTrackedResource(ctx context.Context, c *client.Client, r TrackedResou
 
 	switch r.Type {
 	case "f5xc_namespace":
-		return c.DeleteNamespace(deleteCtx, "", r.Name)
+		// Use cascade delete for namespaces (standard DELETE returns 501)
+		return c.CascadeDeleteNamespace(deleteCtx, r.Name)
 	case "f5xc_http_loadbalancer":
 		return c.DeleteHTTPLoadBalancer(deleteCtx, r.Namespace, r.Name)
 	case "f5xc_origin_pool":

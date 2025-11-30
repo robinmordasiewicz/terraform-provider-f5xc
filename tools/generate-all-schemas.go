@@ -1938,12 +1938,17 @@ func renderSpecUnmarshalCode(attrs []TerraformAttribute, indent string, resource
 							// Model type includes parent list block name: Resource + ListBlock + NestedBlock + Model
 							nestedModelType := resourceTitleCase + attr.GoName + nestedAttr.GoName + "Model"
 
-							// Check if nested block has any primitive attributes
+							// Check if nested block has any primitive or list attributes that we can unmarshal
 							hasDeepPrimitives := false
 							for _, deepAttr := range nestedAttr.NestedAttributes {
 								switch deepAttr.Type {
 								case "string", "int64", "bool":
 									hasDeepPrimitives = true
+								case "list":
+									// Only count lists with primitive element types that we can handle
+									if deepAttr.ElementType == "string" || deepAttr.ElementType == "int64" {
+										hasDeepPrimitives = true
+									}
 								}
 							}
 
@@ -1984,6 +1989,37 @@ func renderSpecUnmarshalCode(attrs []TerraformAttribute, indent string, resource
 									sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t}\n", indent))
 									sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\treturn types.BoolNull()\n", indent))
 									sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t}(),\n", indent))
+								case "list":
+									// Handle list types inside single nested blocks within list items
+									if deepAttr.ElementType == "string" {
+										sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t%s: func() types.List {\n", indent, deepFieldName))
+										sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\tif v, ok := nestedMap[\"%s\"].([]interface{}); ok && len(v) > 0 {\n", indent, deepJsonName))
+										sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t\tvar items []string\n", indent))
+										sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t\tfor _, item := range v {\n", indent))
+										sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t\t\tif s, ok := item.(string); ok {\n", indent))
+										sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t\t\t\titems = append(items, s)\n", indent))
+										sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t\t\t}\n", indent))
+										sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t\t}\n", indent))
+										sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t\tlistVal, _ := types.ListValueFrom(ctx, types.StringType, items)\n", indent))
+										sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t\treturn listVal\n", indent))
+										sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t}\n", indent))
+										sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\treturn types.ListNull(types.StringType)\n", indent))
+										sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t}(),\n", indent))
+									} else if deepAttr.ElementType == "int64" {
+										sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t%s: func() types.List {\n", indent, deepFieldName))
+										sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\tif v, ok := nestedMap[\"%s\"].([]interface{}); ok && len(v) > 0 {\n", indent, deepJsonName))
+										sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t\tvar items []int64\n", indent))
+										sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t\tfor _, item := range v {\n", indent))
+										sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t\t\tif n, ok := item.(float64); ok {\n", indent))
+										sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t\t\t\titems = append(items, int64(n))\n", indent))
+										sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t\t\t}\n", indent))
+										sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t\t}\n", indent))
+										sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t\tlistVal, _ := types.ListValueFrom(ctx, types.Int64Type, items)\n", indent))
+										sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t\treturn listVal\n", indent))
+										sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t}\n", indent))
+										sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\treturn types.ListNull(types.Int64Type)\n", indent))
+										sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t}(),\n", indent))
+									}
 								}
 							}
 							sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t}\n", indent))

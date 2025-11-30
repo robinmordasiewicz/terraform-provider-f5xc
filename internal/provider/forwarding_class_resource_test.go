@@ -24,7 +24,7 @@ import (
 // Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccForwardingClassResource_basic(t *testing.T) {
-	t.Skip("Skipping: forwarding_class API returns BAD_REQUEST - API spec investigation needed")
+	t.Skip("Skipping: forwarding_class requires tenant quota - API returns 'Quota not configured for kind forwarding_class'")
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -63,7 +63,7 @@ func TestAccForwardingClassResource_basic(t *testing.T) {
 // Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccForwardingClassResource_allAttributes(t *testing.T) {
-	t.Skip("Skipping: forwarding_class API returns BAD_REQUEST - API spec investigation needed")
+	t.Skip("Skipping: forwarding_class requires tenant quota - API returns 'Quota not configured for kind forwarding_class'")
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -96,7 +96,7 @@ func TestAccForwardingClassResource_allAttributes(t *testing.T) {
 // Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccForwardingClassResource_updateLabels(t *testing.T) {
-	t.Skip("Skipping: forwarding_class API returns BAD_REQUEST - API spec investigation needed")
+	t.Skip("Skipping: forwarding_class requires tenant quota - API returns 'Quota not configured for kind forwarding_class'")
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -131,7 +131,7 @@ func TestAccForwardingClassResource_updateLabels(t *testing.T) {
 // Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccForwardingClassResource_updateDescription(t *testing.T) {
-	t.Skip("Skipping: forwarding_class API returns BAD_REQUEST - API spec investigation needed")
+	t.Skip("Skipping: forwarding_class requires tenant quota - API returns 'Quota not configured for kind forwarding_class'")
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -165,7 +165,7 @@ func TestAccForwardingClassResource_updateDescription(t *testing.T) {
 // Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccForwardingClassResource_updateAnnotations(t *testing.T) {
-	t.Skip("Skipping: forwarding_class API returns BAD_REQUEST - API spec investigation needed")
+	t.Skip("Skipping: forwarding_class requires tenant quota - API returns 'Quota not configured for kind forwarding_class'")
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -200,7 +200,7 @@ func TestAccForwardingClassResource_updateAnnotations(t *testing.T) {
 // Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccForwardingClassResource_disappears(t *testing.T) {
-	t.Skip("Skipping: forwarding_class API returns BAD_REQUEST - API spec investigation needed")
+	t.Skip("Skipping: forwarding_class requires tenant quota - API returns 'Quota not configured for kind forwarding_class'")
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -229,7 +229,7 @@ func TestAccForwardingClassResource_disappears(t *testing.T) {
 // Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccForwardingClassResource_emptyPlan(t *testing.T) {
-	t.Skip("Skipping: forwarding_class API returns BAD_REQUEST - API spec investigation needed")
+	t.Skip("Skipping: forwarding_class requires tenant quota - API returns 'Quota not configured for kind forwarding_class'")
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -257,7 +257,7 @@ func TestAccForwardingClassResource_emptyPlan(t *testing.T) {
 // Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccForwardingClassResource_planChecks(t *testing.T) {
-	t.Skip("Skipping: forwarding_class API returns BAD_REQUEST - API spec investigation needed")
+	t.Skip("Skipping: forwarding_class requires tenant quota - API returns 'Quota not configured for kind forwarding_class'")
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -295,7 +295,7 @@ func TestAccForwardingClassResource_planChecks(t *testing.T) {
 // Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccForwardingClassResource_knownValues(t *testing.T) {
-	t.Skip("Skipping: forwarding_class API returns BAD_REQUEST - API spec investigation needed")
+	t.Skip("Skipping: forwarding_class requires tenant quota - API returns 'Quota not configured for kind forwarding_class'")
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -323,7 +323,7 @@ func TestAccForwardingClassResource_knownValues(t *testing.T) {
 // Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccForwardingClassResource_invalidName(t *testing.T) {
-	t.Skip("Skipping: forwarding_class API returns BAD_REQUEST - API spec investigation needed")
+	t.Skip("Skipping: forwarding_class requires tenant quota - API returns 'Quota not configured for kind forwarding_class'")
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -344,7 +344,7 @@ func TestAccForwardingClassResource_invalidName(t *testing.T) {
 // Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccForwardingClassResource_nameTooLong(t *testing.T) {
-	t.Skip("Skipping: forwarding_class API returns BAD_REQUEST - API spec investigation needed")
+	t.Skip("Skipping: forwarding_class requires tenant quota - API returns 'Quota not configured for kind forwarding_class'")
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -367,7 +367,7 @@ func TestAccForwardingClassResource_nameTooLong(t *testing.T) {
 // Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccForwardingClassResource_emptyName(t *testing.T) {
-	t.Skip("Skipping: forwarding_class API returns BAD_REQUEST - API spec investigation needed")
+	t.Skip("Skipping: forwarding_class requires tenant quota - API returns 'Quota not configured for kind forwarding_class'")
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -388,7 +388,7 @@ func TestAccForwardingClassResource_emptyName(t *testing.T) {
 // Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccForwardingClassResource_requiresReplace(t *testing.T) {
-	t.Skip("Skipping: forwarding_class API returns BAD_REQUEST - API spec investigation needed")
+	t.Skip("Skipping: forwarding_class requires tenant quota - API returns 'Quota not configured for kind forwarding_class'")
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -425,7 +425,7 @@ func TestAccForwardingClassResource_requiresReplace(t *testing.T) {
 // Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccForwardingClassResource_qosSettings(t *testing.T) {
-	t.Skip("Skipping: forwarding_class API returns BAD_REQUEST - API spec investigation needed")
+	t.Skip("Skipping: forwarding_class requires tenant quota - API returns 'Quota not configured for kind forwarding_class'")
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 

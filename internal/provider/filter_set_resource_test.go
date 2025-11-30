@@ -24,7 +24,7 @@ import (
 // Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccFilterSetResource_basic(t *testing.T) {
-	t.Skip("Skipping: filter_set API returns BAD_REQUEST - API spec investigation needed")
+	// Removed skip - filter_set now includes required filter_fields
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -63,7 +63,7 @@ func TestAccFilterSetResource_basic(t *testing.T) {
 // Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccFilterSetResource_allAttributes(t *testing.T) {
-	t.Skip("Skipping: filter_set API returns BAD_REQUEST - API spec investigation needed")
+	// Removed skip - filter_set now includes required filter_fields
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -96,7 +96,7 @@ func TestAccFilterSetResource_allAttributes(t *testing.T) {
 // Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccFilterSetResource_updateLabels(t *testing.T) {
-	t.Skip("Skipping: filter_set API returns BAD_REQUEST - API spec investigation needed")
+	// Removed skip - filter_set now includes required filter_fields
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -131,7 +131,7 @@ func TestAccFilterSetResource_updateLabels(t *testing.T) {
 // Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccFilterSetResource_updateDescription(t *testing.T) {
-	t.Skip("Skipping: filter_set API returns BAD_REQUEST - API spec investigation needed")
+	// Removed skip - filter_set now includes required filter_fields
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -165,7 +165,7 @@ func TestAccFilterSetResource_updateDescription(t *testing.T) {
 // Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccFilterSetResource_updateAnnotations(t *testing.T) {
-	t.Skip("Skipping: filter_set API returns BAD_REQUEST - API spec investigation needed")
+	// Removed skip - filter_set now includes required filter_fields
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -200,7 +200,7 @@ func TestAccFilterSetResource_updateAnnotations(t *testing.T) {
 // Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccFilterSetResource_disappears(t *testing.T) {
-	t.Skip("Skipping: filter_set API returns BAD_REQUEST - API spec investigation needed")
+	// Removed skip - filter_set now includes required filter_fields
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -229,7 +229,7 @@ func TestAccFilterSetResource_disappears(t *testing.T) {
 // Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccFilterSetResource_emptyPlan(t *testing.T) {
-	t.Skip("Skipping: filter_set API returns BAD_REQUEST - API spec investigation needed")
+	// Removed skip - filter_set now includes required filter_fields
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -257,7 +257,7 @@ func TestAccFilterSetResource_emptyPlan(t *testing.T) {
 // Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccFilterSetResource_planChecks(t *testing.T) {
-	t.Skip("Skipping: filter_set API returns BAD_REQUEST - API spec investigation needed")
+	// Removed skip - filter_set now includes required filter_fields
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -295,7 +295,7 @@ func TestAccFilterSetResource_planChecks(t *testing.T) {
 // Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccFilterSetResource_knownValues(t *testing.T) {
-	t.Skip("Skipping: filter_set API returns BAD_REQUEST - API spec investigation needed")
+	// Removed skip - filter_set now includes required filter_fields
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -323,7 +323,7 @@ func TestAccFilterSetResource_knownValues(t *testing.T) {
 // Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccFilterSetResource_invalidName(t *testing.T) {
-	t.Skip("Skipping: filter_set API returns BAD_REQUEST - API spec investigation needed")
+	// Removed skip - filter_set now includes required filter_fields
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -344,7 +344,7 @@ func TestAccFilterSetResource_invalidName(t *testing.T) {
 // Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccFilterSetResource_nameTooLong(t *testing.T) {
-	t.Skip("Skipping: filter_set API returns BAD_REQUEST - API spec investigation needed")
+	// Removed skip - filter_set now includes required filter_fields
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -367,7 +367,7 @@ func TestAccFilterSetResource_nameTooLong(t *testing.T) {
 // Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccFilterSetResource_emptyName(t *testing.T) {
-	t.Skip("Skipping: filter_set API returns BAD_REQUEST - API spec investigation needed")
+	// Removed skip - filter_set now includes required filter_fields
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -388,7 +388,7 @@ func TestAccFilterSetResource_emptyName(t *testing.T) {
 // Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccFilterSetResource_requiresReplace(t *testing.T) {
-	t.Skip("Skipping: filter_set API returns BAD_REQUEST - API spec investigation needed")
+	// Removed skip - filter_set now includes required filter_fields
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -425,7 +425,7 @@ func TestAccFilterSetResource_requiresReplace(t *testing.T) {
 // Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccFilterSetResource_filterFields(t *testing.T) {
-	t.Skip("Skipping: filter_set API returns BAD_REQUEST - API spec investigation needed")
+	// Removed skip - filter_set now includes required filter_fields
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -474,6 +474,13 @@ resource "f5xc_filter_set" "test" {
   name        = %[1]q
   namespace   = "system"
   context_key = "dashboard"
+
+  filter_fields {
+    field_id = "test-field"
+    string_field {
+      field_values = ["test-value"]
+    }
+  }
 }
 `, fsName)
 }
@@ -494,6 +501,13 @@ resource "f5xc_filter_set" "test" {
   annotations = {
     purpose = "acceptance-testing"
   }
+
+  filter_fields {
+    field_id = "test-field"
+    string_field {
+      field_values = ["test-value"]
+    }
+  }
 }
 `, fsName)
 }
@@ -512,6 +526,13 @@ resource "f5xc_filter_set" "test" {
 
   labels = {
 %[2]s  }
+
+  filter_fields {
+    field_id = "test-field"
+    string_field {
+      field_values = ["test-value"]
+    }
+  }
 }
 `, fsName, labelsHCL)
 }
@@ -523,6 +544,13 @@ resource "f5xc_filter_set" "test" {
   namespace   = "system"
   description = %[2]q
   context_key = "dashboard"
+
+  filter_fields {
+    field_id = "test-field"
+    string_field {
+      field_values = ["test-value"]
+    }
+  }
 }
 `, fsName, description)
 }
@@ -541,6 +569,13 @@ resource "f5xc_filter_set" "test" {
 
   annotations = {
 %[2]s  }
+
+  filter_fields {
+    field_id = "test-field"
+    string_field {
+      field_values = ["test-value"]
+    }
+  }
 }
 `, fsName, annotationsHCL)
 }
@@ -552,6 +587,13 @@ resource "f5xc_filter_set" "test" {
   namespace   = "system"
   context_key = "dashboard"
   description = "Filter set with filter fields"
+
+  filter_fields {
+    field_id = "test-field"
+    string_field {
+      field_values = ["test-value"]
+    }
+  }
 }
 `, fsName)
 }

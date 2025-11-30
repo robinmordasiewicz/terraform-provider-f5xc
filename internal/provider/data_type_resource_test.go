@@ -24,7 +24,6 @@ import (
 // Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccDataTypeResource_basic(t *testing.T) {
-	t.Skip("Skipping: data_type API returns BAD_REQUEST - API spec investigation needed")
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -62,7 +61,6 @@ func TestAccDataTypeResource_basic(t *testing.T) {
 // Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccDataTypeResource_allAttributes(t *testing.T) {
-	t.Skip("Skipping: data_type API returns BAD_REQUEST - API spec investigation needed")
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -94,7 +92,6 @@ func TestAccDataTypeResource_allAttributes(t *testing.T) {
 // Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccDataTypeResource_updateLabels(t *testing.T) {
-	t.Skip("Skipping: data_type API returns BAD_REQUEST - API spec investigation needed")
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -135,7 +132,6 @@ func TestAccDataTypeResource_updateLabels(t *testing.T) {
 // Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccDataTypeResource_updateDescription(t *testing.T) {
-	t.Skip("Skipping: data_type API returns BAD_REQUEST - API spec investigation needed")
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -170,7 +166,6 @@ func TestAccDataTypeResource_updateDescription(t *testing.T) {
 // Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccDataTypeResource_updateAnnotations(t *testing.T) {
-	t.Skip("Skipping: data_type API returns BAD_REQUEST - API spec investigation needed")
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -211,7 +206,6 @@ func TestAccDataTypeResource_updateAnnotations(t *testing.T) {
 // Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccDataTypeResource_disappears(t *testing.T) {
-	t.Skip("Skipping: data_type API returns BAD_REQUEST - API spec investigation needed")
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -240,7 +234,6 @@ func TestAccDataTypeResource_disappears(t *testing.T) {
 // Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccDataTypeResource_emptyPlan(t *testing.T) {
-	t.Skip("Skipping: data_type API returns BAD_REQUEST - API spec investigation needed")
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -272,7 +265,6 @@ func TestAccDataTypeResource_emptyPlan(t *testing.T) {
 // Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccDataTypeResource_planChecks(t *testing.T) {
-	t.Skip("Skipping: data_type API returns BAD_REQUEST - API spec investigation needed")
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -300,7 +292,6 @@ func TestAccDataTypeResource_planChecks(t *testing.T) {
 // Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccDataTypeResource_knownValues(t *testing.T) {
-	t.Skip("Skipping: data_type API returns BAD_REQUEST - API spec investigation needed")
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -336,7 +327,6 @@ func TestAccDataTypeResource_knownValues(t *testing.T) {
 // Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccDataTypeResource_invalidName(t *testing.T) {
-	t.Skip("Skipping: data_type API returns BAD_REQUEST - API spec investigation needed")
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -358,7 +348,6 @@ func TestAccDataTypeResource_invalidName(t *testing.T) {
 // Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccDataTypeResource_nameTooLong(t *testing.T) {
-	t.Skip("Skipping: data_type API returns BAD_REQUEST - API spec investigation needed")
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -382,7 +371,6 @@ func TestAccDataTypeResource_nameTooLong(t *testing.T) {
 // Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccDataTypeResource_emptyName(t *testing.T) {
-	t.Skip("Skipping: data_type API returns BAD_REQUEST - API spec investigation needed")
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -404,7 +392,6 @@ func TestAccDataTypeResource_emptyName(t *testing.T) {
 // Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccDataTypeResource_requiresReplace(t *testing.T) {
-	t.Skip("Skipping: data_type API returns BAD_REQUEST - API spec investigation needed")
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -440,7 +427,6 @@ func TestAccDataTypeResource_requiresReplace(t *testing.T) {
 // Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccDataTypeResource_piiFlags(t *testing.T) {
-	t.Skip("Skipping: data_type API returns BAD_REQUEST - API spec investigation needed")
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -498,6 +484,10 @@ resource "f5xc_data_type" "test" {
   name      = %[1]q
   namespace = "system"
   is_pii    = true
+
+  rules {
+    any_pattern {}
+  }
 }
 `, name)
 }
@@ -519,6 +509,10 @@ resource "f5xc_data_type" "test" {
   annotations = {
     owner = "terraform"
   }
+
+  rules {
+    any_pattern {}
+  }
 }
 `, name)
 }
@@ -537,6 +531,10 @@ resource "f5xc_data_type" "test" {
 
   labels = {
 %[2]s  }
+
+  rules {
+    any_pattern {}
+  }
 }
 `, name, labelsStr)
 }
@@ -548,6 +546,10 @@ resource "f5xc_data_type" "test" {
   namespace   = "system"
   description = %[2]q
   is_pii      = true
+
+  rules {
+    any_pattern {}
+  }
 }
 `, name, description)
 }
@@ -566,6 +568,10 @@ resource "f5xc_data_type" "test" {
 
   annotations = {
 %[2]s  }
+
+  rules {
+    any_pattern {}
+  }
 }
 `, name, annotationsStr)
 }
@@ -577,6 +583,10 @@ resource "f5xc_data_type" "test" {
   namespace         = "system"
   is_pii            = %[2]t
   is_sensitive_data = %[3]t
+
+  rules {
+    any_pattern {}
+  }
 }
 `, name, isPii, isSensitive)
 }

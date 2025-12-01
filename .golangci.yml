@@ -21,3 +21,13 @@ linters:
       - path: _test\.go
         linters:
           - errcheck
+
+# Formatters configuration (golangci-lint v2.x)
+# Run with: golangci-lint fmt --diff (check) or golangci-lint fmt (fix)
+formatters:
+  enable:
+    - gofmt
+  settings:
+    gofmt:
+      # Simplify code: gofmt with -s option
+      simplify: true

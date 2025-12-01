@@ -52,10 +52,10 @@ type DescriptionEnhancement struct {
 
 // EnhancementContext provides context for enhancement decisions
 type EnhancementContext struct {
-	ResourceName string
-	BlockName    string
+	ResourceName  string
+	BlockName     string
 	IsNestedBlock bool
-	OriginalDesc string
+	OriginalDesc  string
 }
 
 // Known problematic patterns and their enhancements
@@ -109,10 +109,10 @@ var enhancements = []DescriptionEnhancement{
 var resourceEnhancements = map[string]map[string]string{
 	"http_loadbalancer": {
 		"active_service_policies": "A list of service policies evaluated sequentially to control request handling. Service policies are evaluated top-to-bottom in order, with the first matching policy taking effect.",
-		"policies": "List of service policies. Service policies form a sequential evaluation engine where each policy (and rules within that policy) are evaluated in order from top to bottom. When a request's characteristics match a policy's criteria, that policy takes effect and no further policies are evaluated. The order of policies in this list is critical for achieving the intended behavior. Each policy is a reference to a service_policy resource.",
+		"policies":                "List of service policies. Service policies form a sequential evaluation engine where each policy (and rules within that policy) are evaluated in order from top to bottom. When a request's characteristics match a policy's criteria, that policy takes effect and no further policies are evaluated. The order of policies in this list is critical for achieving the intended behavior. Each policy is a reference to a service_policy resource.",
 	},
 	"app_firewall": {
-		"detection_settings": "Configuration for WAF attack detection sensitivity and signature coverage. Controls which attack signatures are enabled and how they detect potential threats.",
+		"detection_settings":     "Configuration for WAF attack detection sensitivity and signature coverage. Controls which attack signatures are enabled and how they detect potential threats.",
 		"bot_protection_setting": "Configuration for protecting against automated bot traffic. Enables detection and mitigation of malicious bots while allowing legitimate automation.",
 	},
 }

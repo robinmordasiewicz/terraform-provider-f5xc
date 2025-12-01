@@ -41,15 +41,15 @@ const (
 // RateLimiter provides coordinated rate limiting for acceptance tests
 // to prevent exceeding F5 XC API rate limits
 type RateLimiter struct {
-	mu              sync.Mutex
-	operationDelay  time.Duration
-	testDelay       time.Duration
-	cleanupDelay    time.Duration
-	burstLimit      int
-	burstDelay      time.Duration
-	operationCount  int
-	lastOperation   time.Time
-	enabled         bool
+	mu             sync.Mutex
+	operationDelay time.Duration
+	testDelay      time.Duration
+	cleanupDelay   time.Duration
+	burstLimit     int
+	burstDelay     time.Duration
+	operationCount int
+	lastOperation  time.Time
+	enabled        bool
 }
 
 // Global rate limiter instance

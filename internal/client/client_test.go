@@ -82,13 +82,13 @@ func TestCalculateBackoff(t *testing.T) {
 		attempt int
 		want    time.Duration
 	}{
-		{"Attempt_0", 0, 1 * time.Second},      // 1 * 2^0 = 1s
-		{"Attempt_1", 1, 2 * time.Second},      // 1 * 2^1 = 2s
-		{"Attempt_2", 2, 4 * time.Second},      // 1 * 2^2 = 4s
-		{"Attempt_3", 3, 8 * time.Second},      // 1 * 2^3 = 8s
-		{"Attempt_4", 4, 16 * time.Second},     // 1 * 2^4 = 16s
-		{"Attempt_5", 5, 30 * time.Second},     // 1 * 2^5 = 32s, capped at 30s
-		{"Attempt_10", 10, 30 * time.Second},   // 1 * 2^10 = 1024s, capped at 30s
+		{"Attempt_0", 0, 1 * time.Second},    // 1 * 2^0 = 1s
+		{"Attempt_1", 1, 2 * time.Second},    // 1 * 2^1 = 2s
+		{"Attempt_2", 2, 4 * time.Second},    // 1 * 2^2 = 4s
+		{"Attempt_3", 3, 8 * time.Second},    // 1 * 2^3 = 8s
+		{"Attempt_4", 4, 16 * time.Second},   // 1 * 2^4 = 16s
+		{"Attempt_5", 5, 30 * time.Second},   // 1 * 2^5 = 32s, capped at 30s
+		{"Attempt_10", 10, 30 * time.Second}, // 1 * 2^10 = 1024s, capped at 30s
 	}
 
 	for _, tt := range tests {
@@ -112,11 +112,11 @@ func TestCalculateBackoffCustomWaitTimes(t *testing.T) {
 		attempt int
 		want    time.Duration
 	}{
-		{"Attempt_0", 0, 500 * time.Millisecond},  // 500ms * 2^0 = 500ms
-		{"Attempt_1", 1, 1 * time.Second},         // 500ms * 2^1 = 1s
-		{"Attempt_2", 2, 2 * time.Second},         // 500ms * 2^2 = 2s
-		{"Attempt_3", 3, 4 * time.Second},         // 500ms * 2^3 = 4s
-		{"Attempt_4", 4, 5 * time.Second},         // 500ms * 2^4 = 8s, capped at 5s
+		{"Attempt_0", 0, 500 * time.Millisecond}, // 500ms * 2^0 = 500ms
+		{"Attempt_1", 1, 1 * time.Second},        // 500ms * 2^1 = 1s
+		{"Attempt_2", 2, 2 * time.Second},        // 500ms * 2^2 = 2s
+		{"Attempt_3", 3, 4 * time.Second},        // 500ms * 2^3 = 4s
+		{"Attempt_4", 4, 5 * time.Second},        // 500ms * 2^4 = 8s, capped at 5s
 	}
 
 	for _, tt := range tests {

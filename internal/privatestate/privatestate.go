@@ -17,10 +17,10 @@ import (
 
 // Keys for private state data
 const (
-	KeyAPIMetadata    = "api_metadata"
-	KeyResourceUID    = "resource_uid"
-	KeyLastModified   = "last_modified"
-	KeyETag           = "etag"
+	KeyAPIMetadata     = "api_metadata"
+	KeyResourceUID     = "resource_uid"
+	KeyLastModified    = "last_modified"
+	KeyETag            = "etag"
 	KeyResourceVersion = "resource_version"
 )
 

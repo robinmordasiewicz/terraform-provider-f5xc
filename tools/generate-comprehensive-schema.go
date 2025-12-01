@@ -56,38 +56,38 @@ type SchemaDefinition struct {
 
 // TerraformAttribute represents a Terraform schema attribute
 type TerraformAttribute struct {
-	Name              string
-	GoName            string
-	TfsdkTag          string
-	Type              string // string, int64, bool, list, set, map, object
-	ElementType       string // for list/set/map
-	Description       string
-	Required          bool
-	Optional          bool
-	Computed          bool
-	Sensitive         bool
-	NestedAttributes  []TerraformAttribute
-	NestedBlockType   string // single, list, set
-	IsBlock           bool   // true for nested blocks
-	OneOfGroup        string // group name if part of oneof
-	ValidationMin     string
-	ValidationMax     string
-	PlanModifier      string // RequiresReplace, UseStateForUnknown
+	Name             string
+	GoName           string
+	TfsdkTag         string
+	Type             string // string, int64, bool, list, set, map, object
+	ElementType      string // for list/set/map
+	Description      string
+	Required         bool
+	Optional         bool
+	Computed         bool
+	Sensitive        bool
+	NestedAttributes []TerraformAttribute
+	NestedBlockType  string // single, list, set
+	IsBlock          bool   // true for nested blocks
+	OneOfGroup       string // group name if part of oneof
+	ValidationMin    string
+	ValidationMax    string
+	PlanModifier     string // RequiresReplace, UseStateForUnknown
 }
 
 // ResourceTemplate contains data for generating a resource
 type ResourceTemplate struct {
-	Name                string // snake_case
-	TitleCase           string // TitleCase
-	APIPath             string
-	APIPathPlural       string
-	Description         string
-	Attributes          []TerraformAttribute
-	OneOfGroups         map[string][]string // group name -> field names
-	HasComplexSpec      bool
-	RequiredAttributes  []string
-	OptionalAttributes  []string
-	ComputedAttributes  []string
+	Name               string // snake_case
+	TitleCase          string // TitleCase
+	APIPath            string
+	APIPathPlural      string
+	Description        string
+	Attributes         []TerraformAttribute
+	OneOfGroups        map[string][]string // group name -> field names
+	HasComplexSpec     bool
+	RequiredAttributes []string
+	OptionalAttributes []string
+	ComputedAttributes []string
 }
 
 // Global spec cache
@@ -278,21 +278,21 @@ func extractResourceSchema(spec *OpenAPI3Spec, resourceName string) (*ResourceTe
 	// Add standard metadata attributes
 	standardAttrs := []TerraformAttribute{
 		{
-			Name:        "name",
-			GoName:      "Name",
-			TfsdkTag:    "name",
-			Type:        "string",
-			Description: fmt.Sprintf("Name of the %s. Must be unique within the namespace.", toTitleCase(resourceName)),
-			Required:    true,
+			Name:         "name",
+			GoName:       "Name",
+			TfsdkTag:     "name",
+			Type:         "string",
+			Description:  fmt.Sprintf("Name of the %s. Must be unique within the namespace.", toTitleCase(resourceName)),
+			Required:     true,
 			PlanModifier: "RequiresReplace",
 		},
 		{
-			Name:        "namespace",
-			GoName:      "Namespace",
-			TfsdkTag:    "namespace",
-			Type:        "string",
-			Description: fmt.Sprintf("Namespace where the %s will be created.", toTitleCase(resourceName)),
-			Required:    true,
+			Name:         "namespace",
+			GoName:       "Namespace",
+			TfsdkTag:     "namespace",
+			Type:         "string",
+			Description:  fmt.Sprintf("Namespace where the %s will be created.", toTitleCase(resourceName)),
+			Required:     true,
 			PlanModifier: "RequiresReplace",
 		},
 		{
@@ -314,12 +314,12 @@ func extractResourceSchema(spec *OpenAPI3Spec, resourceName string) (*ResourceTe
 			Optional:    true,
 		},
 		{
-			Name:        "id",
-			GoName:      "ID",
-			TfsdkTag:    "id",
-			Type:        "string",
-			Description: "Unique identifier for the resource.",
-			Computed:    true,
+			Name:         "id",
+			GoName:       "ID",
+			TfsdkTag:     "id",
+			Type:         "string",
+			Description:  "Unique identifier for the resource.",
+			Computed:     true,
 			PlanModifier: "UseStateForUnknown",
 		},
 	}

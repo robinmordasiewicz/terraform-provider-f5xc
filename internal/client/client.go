@@ -269,9 +269,9 @@ type Metadata struct {
 func isRetryableStatus(statusCode int) bool {
 	switch statusCode {
 	case http.StatusTooManyRequests, // 429 - Rate limited
-		http.StatusServiceUnavailable,   // 503
-		http.StatusGatewayTimeout,       // 504
-		http.StatusBadGateway:           // 502
+		http.StatusServiceUnavailable, // 503
+		http.StatusGatewayTimeout,     // 504
+		http.StatusBadGateway:         // 502
 		return true
 	default:
 		return statusCode >= 500

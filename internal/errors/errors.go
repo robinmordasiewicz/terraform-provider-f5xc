@@ -21,15 +21,15 @@ type ErrorCode string
 
 const (
 	// API errors
-	ErrCodeNotFound      ErrorCode = "NOT_FOUND"
-	ErrCodeUnauthorized  ErrorCode = "UNAUTHORIZED"
-	ErrCodeForbidden     ErrorCode = "FORBIDDEN"
-	ErrCodeConflict      ErrorCode = "CONFLICT"
-	ErrCodeRateLimit     ErrorCode = "RATE_LIMIT"
-	ErrCodeServerError   ErrorCode = "SERVER_ERROR"
-	ErrCodeBadRequest    ErrorCode = "BAD_REQUEST"
-	ErrCodeTimeout       ErrorCode = "TIMEOUT"
-	ErrCodeNetworkError  ErrorCode = "NETWORK_ERROR"
+	ErrCodeNotFound     ErrorCode = "NOT_FOUND"
+	ErrCodeUnauthorized ErrorCode = "UNAUTHORIZED"
+	ErrCodeForbidden    ErrorCode = "FORBIDDEN"
+	ErrCodeConflict     ErrorCode = "CONFLICT"
+	ErrCodeRateLimit    ErrorCode = "RATE_LIMIT"
+	ErrCodeServerError  ErrorCode = "SERVER_ERROR"
+	ErrCodeBadRequest   ErrorCode = "BAD_REQUEST"
+	ErrCodeTimeout      ErrorCode = "TIMEOUT"
+	ErrCodeNetworkError ErrorCode = "NETWORK_ERROR"
 
 	// Resource errors
 	ErrCodeValidation    ErrorCode = "VALIDATION"

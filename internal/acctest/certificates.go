@@ -170,7 +170,7 @@ func GenerateTestCertificates() (*TestCertificates, error) {
 // encodeCertToPEM encodes a DER certificate to PEM format
 func encodeCertToPEM(certDER []byte) string {
 	var buf bytes.Buffer
-	pem.Encode(&buf, &pem.Block{
+	_ = pem.Encode(&buf, &pem.Block{
 		Type:  "CERTIFICATE",
 		Bytes: certDER,
 	})
@@ -185,7 +185,7 @@ func encodeKeyToPEM(key *rsa.PrivateKey) string {
 		keyBytes = x509.MarshalPKCS1PrivateKey(key)
 	}
 	var buf bytes.Buffer
-	pem.Encode(&buf, &pem.Block{
+	_ = pem.Encode(&buf, &pem.Block{
 		Type:  "PRIVATE KEY",
 		Bytes: keyBytes,
 	})

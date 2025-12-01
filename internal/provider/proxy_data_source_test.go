@@ -3,7 +3,6 @@
 
 package provider_test
 
-
 import (
 	"fmt"
 	"testing"
@@ -17,7 +16,7 @@ func TestAccProxyDataSource_basic(t *testing.T) {
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
-	rName := acctest.RandomName("tf-acc-test")
+	rName := acctest.RandomName("tf-acc-test-proxy")
 	nsName := acctest.RandomName("tf-acc-test-ns")
 	resourceName := "f5xc_proxy.test"
 	dataSourceName := "data.f5xc_proxy.test"
@@ -41,7 +40,6 @@ func TestAccProxyDataSource_basic(t *testing.T) {
 	})
 }
 
-
 func testAccProxyDataSourceConfig_basic(nsName, name string) string {
 	return acctest.ConfigCompose(
 		acctest.ProviderConfig(),
@@ -59,7 +57,10 @@ resource "f5xc_proxy" "test" {
   depends_on = [time_sleep.wait_for_namespace]
   name       = %[2]q
   namespace  = f5xc_namespace.test.name
-  proxy_url = "http://proxy.example.com:8080"
+
+  http_proxy {}
+  do_not_advertise {}
+  no_interception {}
 }
 
 data "f5xc_proxy" "test" {

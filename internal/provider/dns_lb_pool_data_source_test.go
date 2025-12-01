@@ -3,7 +3,6 @@
 
 package provider_test
 
-
 import (
 	"fmt"
 	"testing"
@@ -17,17 +16,14 @@ func TestAccDnsLbPoolDataSource_basic(t *testing.T) {
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
-	rName := acctest.RandomName("tf-acc-test")
-	nsName := acctest.RandomName("tf-acc-test-ns")
+	rName := acctest.RandomName("tf-acc-test-pool")
+	nsName := "" // unused, DNS LB Pool must be in system namespace
 	resourceName := "f5xc_dns_lb_pool.test"
 	dataSourceName := "data.f5xc_dns_lb_pool.test"
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {Source: "hashicorp/time"},
-		},
 		Steps: []resource.TestStep{
 			{
 				Config: testAccDnsLbPoolDataSourceConfig_basic(nsName, rName),
@@ -41,31 +37,35 @@ func TestAccDnsLbPoolDataSource_basic(t *testing.T) {
 	})
 }
 
-
 func testAccDnsLbPoolDataSourceConfig_basic(nsName, name string) string {
+	// DNS LB Pool can only be created in system namespace
+	_ = nsName // unused but kept for test signature consistency
 	return acctest.ConfigCompose(
 		acctest.ProviderConfig(),
 		fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
-resource "time_sleep" "wait_for_namespace" {
-  depends_on      = [f5xc_namespace.test]
-  create_duration = "5s"
-}
-
 resource "f5xc_dns_lb_pool" "test" {
-  depends_on = [time_sleep.wait_for_namespace]
-  name       = %[2]q
-  namespace  = f5xc_namespace.test.name
-  type = "A"
+  name      = %[1]q
+  namespace = "system"
+
+  # TTL for DNS responses (required)
+  ttl = 60
+
+  # Load balancing mode (required)
+  load_balancing_mode = "ROUND_ROBIN"
+
   a_pool {
+    max_answers = 1
+
     members {
-      public_ip {
-        ip = "1.2.3.4"
-      }
+      name        = "member1"
+      ip_endpoint = "192.168.1.10"
+      priority    = 0
+      ratio       = 0
+      disable     = false
     }
+
+    # Health check disabled by default
+    disable_health_check {}
   }
 }
 
@@ -74,5 +74,5 @@ data "f5xc_dns_lb_pool" "test" {
   name       = f5xc_dns_lb_pool.test.name
   namespace  = f5xc_dns_lb_pool.test.namespace
 }
-`, nsName, name))
+`, name))
 }

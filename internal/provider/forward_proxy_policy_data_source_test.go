@@ -3,7 +3,6 @@
 
 package provider_test
 
-
 import (
 	"fmt"
 	"testing"
@@ -17,20 +16,16 @@ func TestAccForwardProxyPolicyDataSource_basic(t *testing.T) {
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
-	rName := acctest.RandomName("tf-acc-test")
-	nsName := acctest.RandomName("tf-acc-test-ns")
+	rName := acctest.RandomName("tf-acc-test-fpp")
 	resourceName := "f5xc_forward_proxy_policy.test"
 	dataSourceName := "data.f5xc_forward_proxy_policy.test"
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {Source: "hashicorp/time"},
-		},
 		Steps: []resource.TestStep{
 			{
-				Config: testAccForwardProxyPolicyDataSourceConfig_basic(nsName, rName),
+				Config: testAccForwardProxyPolicyDataSourceConfig_basic(rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					resource.TestCheckResourceAttrPair(dataSourceName, "name", resourceName, "name"),
 					resource.TestCheckResourceAttrPair(dataSourceName, "namespace", resourceName, "namespace"),
@@ -41,38 +36,14 @@ func TestAccForwardProxyPolicyDataSource_basic(t *testing.T) {
 	})
 }
 
-
-func testAccForwardProxyPolicyDataSourceConfig_basic(nsName, name string) string {
+func testAccForwardProxyPolicyDataSourceConfig_basic(name string) string {
+	// Forward proxy policy must be in system namespace
 	return acctest.ConfigCompose(
 		acctest.ProviderConfig(),
 		fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
-resource "time_sleep" "wait_for_namespace" {
-  depends_on      = [f5xc_namespace.test]
-  create_duration = "5s"
-}
-
 resource "f5xc_forward_proxy_policy" "test" {
-  depends_on = [time_sleep.wait_for_namespace]
-  name       = %[2]q
-  namespace  = f5xc_namespace.test.name
-  proxy_label = "test-proxy"
-  rule_list {
-    rules {
-      metadata {
-        name = "rule1"
-      }
-      spec {
-        action      = "ALLOW"
-        any_client  = true
-        any_dst     = true
-        rule_description = "Allow all"
-      }
-    }
-  }
+  name      = %[1]q
+  namespace = "system"
 }
 
 data "f5xc_forward_proxy_policy" "test" {
@@ -80,5 +51,5 @@ data "f5xc_forward_proxy_policy" "test" {
   name       = f5xc_forward_proxy_policy.test.name
   namespace  = f5xc_forward_proxy_policy.test.namespace
 }
-`, nsName, name))
+`, name))
 }

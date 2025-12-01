@@ -44,6 +44,10 @@ import (
 // -----------------------------------------------------------------------------
 
 func TestAccTenantConfigurationResource_basic(t *testing.T) {
+	// Skip: Tenant Configuration is a singleton resource that requires tenant admin
+	// permissions and may conflict with existing tenant configuration
+	t.Skip("Skipping: Tenant Configuration is a singleton resource requiring tenant admin permissions")
+
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -87,6 +91,9 @@ func TestAccTenantConfigurationResource_basic(t *testing.T) {
 // -----------------------------------------------------------------------------
 
 func TestAccTenantConfigurationResource_allAttributes(t *testing.T) {
+	// Skip: Tenant Configuration is a singleton resource that requires tenant admin permissions
+	t.Skip("Skipping: Tenant Configuration is a singleton resource requiring tenant admin permissions")
+
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -146,6 +153,9 @@ func TestAccTenantConfigurationResource_allAttributes(t *testing.T) {
 // -----------------------------------------------------------------------------
 
 func TestAccTenantConfigurationResource_updateBasicConfiguration(t *testing.T) {
+	// Skip: Tenant Configuration is a singleton resource that requires tenant admin permissions
+	t.Skip("Skipping: Tenant Configuration is a singleton resource requiring tenant admin permissions")
+
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -194,6 +204,9 @@ func TestAccTenantConfigurationResource_updateBasicConfiguration(t *testing.T) {
 // -----------------------------------------------------------------------------
 
 func TestAccTenantConfigurationResource_updateBruteForceDetection(t *testing.T) {
+	// Skip: Tenant Configuration is a singleton resource that requires tenant admin permissions
+	t.Skip("Skipping: Tenant Configuration is a singleton resource requiring tenant admin permissions")
+
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -235,6 +248,9 @@ func TestAccTenantConfigurationResource_updateBruteForceDetection(t *testing.T) 
 // -----------------------------------------------------------------------------
 
 func TestAccTenantConfigurationResource_updatePasswordPolicy(t *testing.T) {
+	// Skip: Tenant Configuration is a singleton resource that requires tenant admin permissions
+	t.Skip("Skipping: Tenant Configuration is a singleton resource requiring tenant admin permissions")
+
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -284,6 +300,9 @@ func TestAccTenantConfigurationResource_updatePasswordPolicy(t *testing.T) {
 // -----------------------------------------------------------------------------
 
 func TestAccTenantConfigurationResource_updateLabels(t *testing.T) {
+	// Skip: Tenant Configuration is a singleton resource that requires tenant admin permissions
+	t.Skip("Skipping: Tenant Configuration is a singleton resource requiring tenant admin permissions")
+
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -336,6 +355,9 @@ func TestAccTenantConfigurationResource_updateLabels(t *testing.T) {
 // -----------------------------------------------------------------------------
 
 func TestAccTenantConfigurationResource_updateDescription(t *testing.T) {
+	// Skip: Tenant Configuration is a singleton resource that requires tenant admin permissions
+	t.Skip("Skipping: Tenant Configuration is a singleton resource requiring tenant admin permissions")
+
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -392,6 +414,9 @@ func TestAccTenantConfigurationResource_updateDescription(t *testing.T) {
 // -----------------------------------------------------------------------------
 
 func TestAccTenantConfigurationResource_disappears(t *testing.T) {
+	// Skip: Tenant Configuration is a singleton resource that requires tenant admin permissions
+	t.Skip("Skipping: Tenant Configuration is a singleton resource requiring tenant admin permissions")
+
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -428,6 +453,9 @@ func TestAccTenantConfigurationResource_disappears(t *testing.T) {
 // -----------------------------------------------------------------------------
 
 func TestAccTenantConfigurationResource_emptyPlan(t *testing.T) {
+	// Skip: Tenant Configuration is a singleton resource that requires tenant admin permissions
+	t.Skip("Skipping: Tenant Configuration is a singleton resource requiring tenant admin permissions")
+
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -470,6 +498,9 @@ func TestAccTenantConfigurationResource_emptyPlan(t *testing.T) {
 // -----------------------------------------------------------------------------
 
 func TestAccTenantConfigurationResource_planChecks(t *testing.T) {
+	// Skip: Tenant Configuration is a singleton resource that requires tenant admin permissions
+	t.Skip("Skipping: Tenant Configuration is a singleton resource requiring tenant admin permissions")
+
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -525,6 +556,9 @@ func TestAccTenantConfigurationResource_planChecks(t *testing.T) {
 // -----------------------------------------------------------------------------
 
 func TestAccTenantConfigurationResource_knownValues(t *testing.T) {
+	// Skip: Tenant Configuration is a singleton resource that requires tenant admin permissions
+	t.Skip("Skipping: Tenant Configuration is a singleton resource requiring tenant admin permissions")
+
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -569,6 +603,9 @@ func TestAccTenantConfigurationResource_knownValues(t *testing.T) {
 // -----------------------------------------------------------------------------
 
 func TestAccTenantConfigurationResource_invalidName(t *testing.T) {
+	// Skip: Tenant Configuration is a singleton resource that requires tenant admin permissions
+	t.Skip("Skipping: Tenant Configuration is a singleton resource requiring tenant admin permissions")
+
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -597,6 +634,9 @@ func TestAccTenantConfigurationResource_invalidName(t *testing.T) {
 // -----------------------------------------------------------------------------
 
 func TestAccTenantConfigurationResource_nameTooLong(t *testing.T) {
+	// Skip: Tenant Configuration is a singleton resource that requires tenant admin permissions
+	t.Skip("Skipping: Tenant Configuration is a singleton resource requiring tenant admin permissions")
+
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -626,6 +666,9 @@ func TestAccTenantConfigurationResource_nameTooLong(t *testing.T) {
 // -----------------------------------------------------------------------------
 
 func TestAccTenantConfigurationResource_requiresReplace(t *testing.T) {
+	// Skip: Tenant Configuration is a singleton resource that requires tenant admin permissions
+	t.Skip("Skipping: Tenant Configuration is a singleton resource requiring tenant admin permissions")
+
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 

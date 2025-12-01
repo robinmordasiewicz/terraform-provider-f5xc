@@ -3,7 +3,6 @@
 
 package provider_test
 
-
 import (
 	"fmt"
 	"testing"
@@ -41,7 +40,6 @@ func TestAccInfraprotectDenyListRuleDataSource_basic(t *testing.T) {
 	})
 }
 
-
 func testAccInfraprotectDenyListRuleDataSourceConfig_basic(nsName, name string) string {
 	return acctest.ConfigCompose(
 		acctest.ProviderConfig(),
@@ -59,6 +57,9 @@ resource "f5xc_infraprotect_deny_list_rule" "test" {
   depends_on = [time_sleep.wait_for_namespace]
   name       = %[2]q
   namespace  = f5xc_namespace.test.name
+  prefix     = "198.51.100.0/24"
+
+  one_hour {}
 }
 
 data "f5xc_infraprotect_deny_list_rule" "test" {

@@ -3,7 +3,6 @@
 
 package provider_test
 
-
 import (
 	"fmt"
 	"testing"
@@ -41,7 +40,6 @@ func TestAccInfraprotectFirewallRuleDataSource_basic(t *testing.T) {
 	})
 }
 
-
 func testAccInfraprotectFirewallRuleDataSourceConfig_basic(nsName, name string) string {
 	return acctest.ConfigCompose(
 		acctest.ProviderConfig(),
@@ -59,6 +57,15 @@ resource "f5xc_infraprotect_firewall_rule" "test" {
   depends_on = [time_sleep.wait_for_namespace]
   name       = %[2]q
   namespace  = f5xc_namespace.test.name
+
+  source_prefix_single      = "203.0.113.0/24"
+  destination_prefix_single = "192.0.2.0/24"
+
+  version_ipv4    {}
+  action_allow    {}
+  protocol_all    {}
+  state_off       {}
+  fragments_allow {}
 }
 
 data "f5xc_infraprotect_firewall_rule" "test" {

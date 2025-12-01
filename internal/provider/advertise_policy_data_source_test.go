@@ -3,7 +3,6 @@
 
 package provider_test
 
-
 import (
 	"fmt"
 	"testing"
@@ -18,19 +17,15 @@ func TestAccAdvertisePolicyDataSource_basic(t *testing.T) {
 	acctest.PreCheck(t)
 
 	rName := acctest.RandomName("tf-acc-test")
-	nsName := acctest.RandomName("tf-acc-test-ns")
 	resourceName := "f5xc_advertise_policy.test"
 	dataSourceName := "data.f5xc_advertise_policy.test"
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {Source: "hashicorp/time"},
-		},
 		Steps: []resource.TestStep{
 			{
-				Config: testAccAdvertisePolicyDataSourceConfig_basic(nsName, rName),
+				Config: testAccAdvertisePolicyDataSourceConfig_basic(rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					resource.TestCheckResourceAttrPair(dataSourceName, "name", resourceName, "name"),
 					resource.TestCheckResourceAttrPair(dataSourceName, "namespace", resourceName, "namespace"),
@@ -41,31 +36,21 @@ func TestAccAdvertisePolicyDataSource_basic(t *testing.T) {
 	})
 }
 
-
-func testAccAdvertisePolicyDataSourceConfig_basic(nsName, name string) string {
+func testAccAdvertisePolicyDataSourceConfig_basic(name string) string {
+	// Advertise policy must be in system namespace with port and protocol
 	return acctest.ConfigCompose(
 		acctest.ProviderConfig(),
 		fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
-resource "time_sleep" "wait_for_namespace" {
-  depends_on      = [f5xc_namespace.test]
-  create_duration = "5s"
-}
-
 resource "f5xc_advertise_policy" "test" {
-  depends_on = [time_sleep.wait_for_namespace]
-  name       = %[2]q
-  namespace  = f5xc_namespace.test.name
-  port = 80
+  name      = %[1]q
+  namespace = "system"
+  port      = 80
+  protocol  = "TCP"
 }
 
 data "f5xc_advertise_policy" "test" {
-  depends_on = [f5xc_advertise_policy.test]
-  name       = f5xc_advertise_policy.test.name
-  namespace  = f5xc_advertise_policy.test.namespace
+  name      = f5xc_advertise_policy.test.name
+  namespace = f5xc_advertise_policy.test.namespace
 }
-`, nsName, name))
+`, name))
 }

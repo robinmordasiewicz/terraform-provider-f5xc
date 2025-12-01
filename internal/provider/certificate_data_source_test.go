@@ -3,7 +3,6 @@
 
 package provider_test
 
-
 import (
 	"fmt"
 	"testing"
@@ -22,6 +21,9 @@ func TestAccCertificateDataSource_basic(t *testing.T) {
 	resourceName := "f5xc_certificate.test"
 	dataSourceName := "data.f5xc_certificate.test"
 
+	// Generate test certificates dynamically for CI/CD compatibility
+	certs := acctest.MustGenerateTestCertificates()
+
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
@@ -30,7 +32,7 @@ func TestAccCertificateDataSource_basic(t *testing.T) {
 		},
 		Steps: []resource.TestStep{
 			{
-				Config: testAccCertificateDataSourceConfig_basic(nsName, rName),
+				Config: testAccCertificateDataSourceConfig_basic(nsName, rName, certs),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					resource.TestCheckResourceAttrPair(dataSourceName, "name", resourceName, "name"),
 					resource.TestCheckResourceAttrPair(dataSourceName, "namespace", resourceName, "namespace"),
@@ -41,8 +43,7 @@ func TestAccCertificateDataSource_basic(t *testing.T) {
 	})
 }
 
-
-func testAccCertificateDataSourceConfig_basic(nsName, name string) string {
+func testAccCertificateDataSourceConfig_basic(nsName, name string, certs *acctest.TestCertificates) string {
 	return acctest.ConfigCompose(
 		acctest.ProviderConfig(),
 		fmt.Sprintf(`
@@ -59,12 +60,16 @@ resource "f5xc_certificate" "test" {
   depends_on = [time_sleep.wait_for_namespace]
   name       = %[2]q
   namespace  = f5xc_namespace.test.name
-  certificate_url = "string:///LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUNxRENDQVpBQ0NRQ21SN0dCREN4dXRqQU5CZ2txaGtpRzl3MEJBUXNGQURBV01SUXdFZ1lEVlFRRERBdDAKWlhOMExXTmxjblF1WTI5dE1CNFhEVEkxTURFeE1UQXdNREF3TUZvWERUSTJNREV4TVRBd01EQXdNRm93RmpFVQpNQklHQTFVRUF3d0xkR1Z6ZEMxalpYSjBMbU52YlRDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDCkFRb0NnZ0VCQU1wQklYdVhJcmZJT1ZoQndxWnBKNXZsRlk4cEtndnhOdHQ4elEyRWtLVmhmMk1mOXc4bE5RdTIKK3FkZm5YNW5YRUZXS2dhVnpqYUZGZHFOZ0xHaUlRaWQvWVcwa0dDd3RHZURlMGE4OFg1UW5oeTRHdkdHdEhyVgp6V3ZoTlVHaXJSSnJiOGUwemxQdWxGeTA2dEl4ZUdBb1FXT09KU0p1NUtsOWJJenFYZ0hHZG9LWXd0VG9ERzc5CnFXN3VZNGZNVnhSM2dBYm5CSk84eGxMR3dQNndpSU5PQTJObFNUc1g5TmliOHR3b0NuSnpQMm1wOGFOd1VYZWsKNHBiZW1HZ2dxY2ZBM0ROaXNmRUNhLy9SRzFYZlFrNjI1WGtrb3h5UlBuaG9JSU5kVmFhY0RRTDVYZU16akRuRwphaUZaaGZCQWJHWlB3dk1MRnVEN3JPYWllRGRGckZjQ0F3RUFBVEFOQmdrcWhraUc5dzBCQVFzRkFBT0NBUUVBCmdEZjVPMk1DT0JCRURQZnFkRnpiMjBLUm9nNUp3bmNHcklwSVQwQmc1S0M5VElQRDUxdkJtY2w0ZWZxT3Q2TWkKT0lSeEFKa3JvTFFIRW5xMnBCdkxVM0dwT1IxQ1V1STYvRnBmb2toaFlEN1lsSnR4RE9mZW9JT0NOTk0rMXgyaApmTXY1NHVhV0V4R3dwQnVQL1M1dVZ6TU95aVVFcklXejIyUFpsZndIS3ZhdGNuclFBTjhLNmpvMUp1dkc4RmdsCk1VcjNVa3VMWEVYMHBNd1p0WWVoUjJVYlN0ZEVVT1puSTdFalp5TTU5WndFVmRrK1NWYmRVNjQzOEdYVHlDRjcKeGxRTjk3YmZOUnBkZG5JYWpyYU52SXJrclBYVnhERXhDOEo4NzQzRE9ZenZ2bTZNVW1vZW9ML3FuRVRiTGV5RApqQjJWS0MxTi9NeEFjUUdGOWRueHpBPT0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo="
+
+  certificate_url = "string:///%[3]s"
+
   private_key {
     clear_secret_info {
-      url = "string:///LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tCk1JSUV2UUlCQURBTkJna3Foa2lHOXcwQkFRRUZBQVNDQktjd2dnU2pBZ0VBQW9JQkFRREtRU0Y3bHlLM3lEbFkKUWNLbWFTZWI1UldQS1NvTDhUYmJmTTBOaEpDbFlYOWpIL2NQSlRVTHR2cW5YNTErWjF4QlZpb0dsYzQyaFJYYQpqWUN4b2lFSW5mMkZ0SkJnc0xSbmczdEd2UEYrVUo0Y3VCcnhoclI2MWMxcjRUVkJvcTBTYTIvSHRNNVQ3cFJjCnRPclNNWGhnS0VGamlpVWlidVNwZld5TTZsNEJ4bmFDbU1MVTZBeHUvYWx1N21PSHpGY1VkNEFHNXdTVHZNWlMKeHNEK3NJaURUZ05qWlVrN0YvVFltL0xjS0FweWN6OXBxZkdqY0ZGM3BPS1czcGhvSUtuSHdOd3pZckh4QW12LwowUnRWMzBKT3R1VjVKS01ja1Q1NGFDQ0RYVldtbkEwQytWM2pNNHc1eG1vaFdZWHdRR3htVDhMekN4YmcrNnptCm9uZzNSYXhYQWdNQkFBRUNnZ0VBQm8xS1dNNEVQWEZQZVFnTElXLzZ2TUFCRzJaSUZwQmRQS2szL29pVER2RVgKYzBTMGJhdG5MVXl0UkNkcjdFSStUVy9JbFlMQm1uQXl4OGpCSEV4akVJK3Q0Z0VRTkVoSXk0ZnM5emtlYVIrVgpoY0pHaFp5eDVYZjkyMW0zcjBHZkVLZmJEaExjY3daeWRKUCtEa0tkSit1OWtSamY4ZEpITXhuMjZCRXJYbnVvClNiM1pnVE8wTjlJN3hGTUxRN1pvZWlWbWNYZ0ZwdHV5L0FLbHZQcHVKZHRRd0lYcXVqT1JVUEFnYVdpdUFOcUcKcGdObk1BUGhoT3pvdS9TVlBsU25ISGNRM0tqRmMwT0E0cnE2WS9rTCtqRDh5N0RRMTZ6M2piNm5ZM2RTdDA5VQp0UHE3ZCtUMGFIVWVXeUhPY0NWWVorZU9obytzdHdmblUrTFpxQnliQVFLQmdRRHdpeXEzZUd3UjFPNW5Qcm9hClpHaU9KbUVnbkszSjV4UXRLTkV2UmFHYTJBTHV0ZjVuVndVNFVSa1BFejJxME1WOENmYlE2UnVab2ZhTGltUHcKaHk5SGVtYk5JMTZZNXl3NWRIZlFCMWNBQ05jY2VLS1F3WEFneVdxNjBldTFLanBveGozVTdKaTF2WC8wdEVYRgpYVEhVU3B1bHJDMHR2NXN1V0xIelVFaDJWd0tCZ1FEWDRwUFVzaCtqeFBDNUUxcGNKOWY3UTFMK3IxV0dRVHRPCjJTd2F3YVQvQkNsRXRpVDRJZ2lXTTBQL3lSeUVFaFNrbGsycWJFUW40L3RNMkVyZ0ZTOEN1cTdjWWtmblFDckoKSHdKcG15TFVQK01vTy9FZTdQRkYyS1lTSVp5K1ZRZlJ4Z2FEWHhuNFdoOFZMYys2Qk1pTGc1V3FhMkZXVk1ENwpDSHdEOE1tK1FRS0JnRkZmcVBMM2xLQUpiYWJxNEJUOXM0UHRNWjQzbWI5NkdTTDF3dVBuaVVMSFd3U0VVQVRCCmxoNEEzcXU5cmRRQVBnWHBUd0I4QWVKRTVWTE9qb3ljY3k5bWxPd0dQTjBHZmg1S0ZhZndIWHpESTNuZm0wbTUKVzdsRFRDb2g5RTY0bE9UaVpiK0s0MXZ6eDUrMjF0OWJCeEt4YW0xMDNiQzc1aHRjUUxhZTg5TnZBb0dBSi93RQpubTlYR202TDJiaDJ3YmtTRGpRUWdZTGZYVVdxNFBwd3RnY3k2U29yOW43dnZZZ2FCTm5mUUdFaWtwSGM2Q1RMCnRsRU1LZ3VhZ1hlVjUxKy9PS01OUHNxWkhqbksvYkpZRGVYdjE3SjV5d3lBWUpmNFNFMlFLYlI5MkxjdDZYckcKdFhJVHBFNHA2ZjJyWm1KdDBPRHN2VEtqNTVPQ1VuL0prTjl3VEdFQ2dZRUE3QVA4L2o4S0lNVlkzaWM5MXZKMwpkZm1xNWxHb2NRWmxzTkV2NW96elByRGRlMnFQejU4NjQrckQ5WEhKUlNSRSs1OXlKVytqT25TVm1qeFk1dHA1Cnk0U3hYZnFETURCL1lYS05hR0dxNE1vdDNOOGZ0U0drUkRpOGk4RThuRHQ3dlNUZm5xaW5QVW9YVGhYeW9EV2EKUXI2ZURJK3VjL1pPN2V5bWw1N3FrL009Ci0tLS0tRU5EIFBSSVZBVEUgS0VZLS0tLS0K"
+      url = "string:///%[4]s"
     }
   }
+
+  disable_ocsp_stapling {}
 }
 
 data "f5xc_certificate" "test" {
@@ -72,5 +77,5 @@ data "f5xc_certificate" "test" {
   name       = f5xc_certificate.test.name
   namespace  = f5xc_certificate.test.namespace
 }
-`, nsName, name))
+`, nsName, name, certs.ServerCertBase64, certs.ServerKeyBase64))
 }

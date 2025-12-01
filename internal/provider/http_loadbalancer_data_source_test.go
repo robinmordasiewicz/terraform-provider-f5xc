@@ -3,7 +3,6 @@
 
 package provider_test
 
-
 import (
 	"fmt"
 	"testing"
@@ -17,20 +16,16 @@ func TestAccHttpLoadbalancerDataSource_basic(t *testing.T) {
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
-	rName := acctest.RandomName("tf-acc-test")
-	nsName := acctest.RandomName("tf-acc-test-ns")
+	rName := acctest.RandomName("tf-acc-test-http-lb")
 	resourceName := "f5xc_http_loadbalancer.test"
 	dataSourceName := "data.f5xc_http_loadbalancer.test"
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {Source: "hashicorp/time"},
-		},
 		Steps: []resource.TestStep{
 			{
-				Config: testAccHttpLoadbalancerDataSourceConfig_basic(nsName, rName),
+				Config: testAccHttpLoadbalancerDataSourceConfig_basic(rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					resource.TestCheckResourceAttrPair(dataSourceName, "name", resourceName, "name"),
 					resource.TestCheckResourceAttrPair(dataSourceName, "namespace", resourceName, "namespace"),
@@ -41,48 +36,26 @@ func TestAccHttpLoadbalancerDataSource_basic(t *testing.T) {
 	})
 }
 
-
-func testAccHttpLoadbalancerDataSourceConfig_basic(nsName, name string) string {
+func testAccHttpLoadbalancerDataSourceConfig_basic(name string) string {
 	return acctest.ConfigCompose(
 		acctest.ProviderConfig(),
 		fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
-resource "time_sleep" "wait_for_namespace" {
-  depends_on      = [f5xc_namespace.test]
-  create_duration = "5s"
-}
-
-resource "f5xc_origin_pool" "test" {
-  depends_on = [time_sleep.wait_for_namespace]
-  name       = "${%[2]q}-pool"
-  namespace  = f5xc_namespace.test.name
-  origin_servers {
-    public_ip {
-      ip = "1.2.3.4"
-    }
-  }
-  port               = 80
-  endpoint_selection = "LOCAL_PREFERRED"
-  loadbalancer_algorithm = "ROUND_ROBIN"
-}
-
 resource "f5xc_http_loadbalancer" "test" {
-  depends_on = [time_sleep.wait_for_namespace, f5xc_origin_pool.test]
-  name       = %[2]q
-  namespace  = f5xc_namespace.test.name
+  name       = %[1]q
+  namespace  = "system"
+
+  labels = {
+    environment = "test"
+    managed_by  = "terraform"
+  }
+
   domains = ["test.example.com"]
+
   http {
-    dns_volterra_managed = false
+    port = 80
   }
-  default_route_pools {
-    pool {
-      name      = f5xc_origin_pool.test.name
-      namespace = f5xc_namespace.test.name
-    }
-  }
+
+  advertise_on_public_default_vip {}
 }
 
 data "f5xc_http_loadbalancer" "test" {
@@ -90,5 +63,5 @@ data "f5xc_http_loadbalancer" "test" {
   name       = f5xc_http_loadbalancer.test.name
   namespace  = f5xc_http_loadbalancer.test.namespace
 }
-`, nsName, name))
+`, name))
 }

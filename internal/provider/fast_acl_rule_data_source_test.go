@@ -3,7 +3,6 @@
 
 package provider_test
 
-
 import (
 	"fmt"
 	"testing"
@@ -17,20 +16,16 @@ func TestAccFastAclRuleDataSource_basic(t *testing.T) {
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
-	rName := acctest.RandomName("tf-acc-test")
-	nsName := acctest.RandomName("tf-acc-test-ns")
+	rName := acctest.RandomName("tf-acc-test-faclr")
 	resourceName := "f5xc_fast_acl_rule.test"
 	dataSourceName := "data.f5xc_fast_acl_rule.test"
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {Source: "hashicorp/time"},
-		},
 		Steps: []resource.TestStep{
 			{
-				Config: testAccFastAclRuleDataSourceConfig_basic(nsName, rName),
+				Config: testAccFastAclRuleDataSourceConfig_basic(rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					resource.TestCheckResourceAttrPair(dataSourceName, "name", resourceName, "name"),
 					resource.TestCheckResourceAttrPair(dataSourceName, "namespace", resourceName, "namespace"),
@@ -41,36 +36,25 @@ func TestAccFastAclRuleDataSource_basic(t *testing.T) {
 	})
 }
 
-
-func testAccFastAclRuleDataSourceConfig_basic(nsName, name string) string {
+func testAccFastAclRuleDataSourceConfig_basic(name string) string {
+	// Fast ACL Rule must be in system namespace and requires action and source (ip_prefix_set)
 	return acctest.ConfigCompose(
 		acctest.ProviderConfig(),
 		fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
-resource "time_sleep" "wait_for_namespace" {
-  depends_on      = [f5xc_namespace.test]
-  create_duration = "5s"
-}
-
 resource "f5xc_fast_acl_rule" "test" {
-  depends_on = [time_sleep.wait_for_namespace]
-  name       = %[2]q
-  namespace  = f5xc_namespace.test.name
+  name      = %[1]q
+  namespace = "system"
+
   action {
-    deny = true
+    simple_action = "DENY"
   }
-  prefix {
-    prefix = ["10.0.0.0/8"]
-  }
+
+  ip_prefix_set {}
 }
 
 data "f5xc_fast_acl_rule" "test" {
-  depends_on = [f5xc_fast_acl_rule.test]
-  name       = f5xc_fast_acl_rule.test.name
-  namespace  = f5xc_fast_acl_rule.test.namespace
+  name      = f5xc_fast_acl_rule.test.name
+  namespace = f5xc_fast_acl_rule.test.namespace
 }
-`, nsName, name))
+`, name))
 }

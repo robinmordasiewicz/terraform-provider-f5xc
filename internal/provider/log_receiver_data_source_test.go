@@ -3,7 +3,6 @@
 
 package provider_test
 
-
 import (
 	"fmt"
 	"testing"
@@ -41,7 +40,6 @@ func TestAccLogReceiverDataSource_basic(t *testing.T) {
 	})
 }
 
-
 func testAccLogReceiverDataSourceConfig_basic(nsName, name string) string {
 	return acctest.ConfigCompose(
 		acctest.ProviderConfig(),
@@ -59,9 +57,16 @@ resource "f5xc_log_receiver" "test" {
   depends_on = [time_sleep.wait_for_namespace]
   name       = %[2]q
   namespace  = f5xc_namespace.test.name
-  http_receiver {
-    uri = "https://logs.example.com/receive"
+
+  syslog {
+    udp_server {
+      server_name = "syslog.example.com"
+      port        = 514
+    }
+    syslog_rfc5424 = 500
   }
+
+  site_local {}
 }
 
 data "f5xc_log_receiver" "test" {

@@ -3,7 +3,6 @@
 
 package provider_test
 
-
 import (
 	"fmt"
 	"testing"
@@ -17,20 +16,16 @@ func TestAccFleetDataSource_basic(t *testing.T) {
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
-	rName := acctest.RandomName("tf-acc-test")
-	nsName := acctest.RandomName("tf-acc-test-ns")
+	rName := acctest.RandomName("tf-acc-test-fleet")
 	resourceName := "f5xc_fleet.test"
 	dataSourceName := "data.f5xc_fleet.test"
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {Source: "hashicorp/time"},
-		},
 		Steps: []resource.TestStep{
 			{
-				Config: testAccFleetDataSourceConfig_basic(nsName, rName),
+				Config: testAccFleetDataSourceConfig_basic(rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					resource.TestCheckResourceAttrPair(dataSourceName, "name", resourceName, "name"),
 					resource.TestCheckResourceAttrPair(dataSourceName, "namespace", resourceName, "namespace"),
@@ -41,34 +36,21 @@ func TestAccFleetDataSource_basic(t *testing.T) {
 	})
 }
 
-
-func testAccFleetDataSourceConfig_basic(nsName, name string) string {
+func testAccFleetDataSourceConfig_basic(name string) string {
+	// Fleet resources must be created in system namespace per F5XC API requirements
+	// The fleet_label is required for fleet creation
 	return acctest.ConfigCompose(
 		acctest.ProviderConfig(),
 		fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
-resource "time_sleep" "wait_for_namespace" {
-  depends_on      = [f5xc_namespace.test]
-  create_duration = "5s"
-}
-
 resource "f5xc_fleet" "test" {
-  depends_on = [time_sleep.wait_for_namespace]
-  name       = %[2]q
-  namespace  = f5xc_namespace.test.name
-  fleet_label = "test-fleet"
-  network_connectors {
-    disable_forward_proxy = true
-  }
+  name        = %[1]q
+  namespace   = "system"
+  fleet_label = %[1]q
 }
 
 data "f5xc_fleet" "test" {
-  depends_on = [f5xc_fleet.test]
-  name       = f5xc_fleet.test.name
-  namespace  = f5xc_fleet.test.namespace
+  name      = f5xc_fleet.test.name
+  namespace = f5xc_fleet.test.namespace
 }
-`, nsName, name))
+`, name))
 }

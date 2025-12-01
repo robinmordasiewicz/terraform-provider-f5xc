@@ -3,7 +3,6 @@
 
 package provider_test
 
-
 import (
 	"fmt"
 	"testing"
@@ -41,7 +40,6 @@ func TestAccGlobalLogReceiverDataSource_basic(t *testing.T) {
 	})
 }
 
-
 func testAccGlobalLogReceiverDataSourceConfig_basic(nsName, name string) string {
 	return acctest.ConfigCompose(
 		acctest.ProviderConfig(),
@@ -57,11 +55,21 @@ resource "time_sleep" "wait_for_namespace" {
 
 resource "f5xc_global_log_receiver" "test" {
   depends_on = [time_sleep.wait_for_namespace]
-  name       = %[2]q
-  namespace  = f5xc_namespace.test.name
-  http_global_receiver {
-    uri = "https://logs.example.com/receive"
+  name      = %[2]q
+  namespace = f5xc_namespace.test.name
+
+  # Required: select one log_type
+  request_logs {}
+
+  # Required: select one receiver
+  http_receiver {
+    uri = "https://logs.example.com/receiver"
+    auth_none {}
+    no_tls {}
   }
+
+  # Required: select one filter
+  ns_current {}
 }
 
 data "f5xc_global_log_receiver" "test" {

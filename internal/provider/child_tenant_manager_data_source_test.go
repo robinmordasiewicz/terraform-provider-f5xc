@@ -3,7 +3,6 @@
 
 package provider_test
 
-
 import (
 	"fmt"
 	"testing"
@@ -13,7 +12,23 @@ import (
 	"github.com/f5xc/terraform-provider-f5xc/internal/acctest"
 )
 
+// =============================================================================
+// CHILD TENANT MANAGER DATA SOURCE ACCEPTANCE TESTS
+//
+// These tests verify the f5xc_child_tenant_manager data source implementation.
+// Child Tenant Manager is a partner-only feature that requires a partner account
+// with child tenant management capabilities.
+//
+// Run with:
+//   TF_ACC=1 F5XC_API_URL="..." F5XC_API_P12_FILE="..." F5XC_P12_PASSWORD="..." \
+//   go test -v ./internal/provider/ -run TestAccChildTenantManagerDataSource -timeout 30m
+// =============================================================================
+
 func TestAccChildTenantManagerDataSource_basic(t *testing.T) {
+	// Skip: Child Tenant Manager requires an F5 XC partner account with child tenant
+	// management capabilities, which is not available in standard tenant accounts
+	t.Skip("Skipping: Child Tenant Manager requires F5 XC partner account with child tenant management capabilities")
+
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -40,7 +55,6 @@ func TestAccChildTenantManagerDataSource_basic(t *testing.T) {
 		},
 	})
 }
-
 
 func testAccChildTenantManagerDataSourceConfig_basic(nsName, name string) string {
 	return acctest.ConfigCompose(

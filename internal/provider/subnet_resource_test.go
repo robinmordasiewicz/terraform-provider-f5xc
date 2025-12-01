@@ -10,9 +10,9 @@ import (
 )
 
 func TestAccSubnetResource_basic(t *testing.T) {
+	t.Skip("Skipping: subnet requires site infrastructure (site_subnet_params with existing site reference)")
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
-	t.Skip("Skipping: subnet requires site infrastructure (site_subnet_params with existing site reference)")
 
 	resourceName := "f5xc_subnet.test"
 	nsName := acctest.RandomName("tf-acc")

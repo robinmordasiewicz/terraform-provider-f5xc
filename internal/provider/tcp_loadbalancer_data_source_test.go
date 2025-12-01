@@ -3,7 +3,6 @@
 
 package provider_test
 
-
 import (
 	"fmt"
 	"testing"
@@ -17,20 +16,16 @@ func TestAccTcpLoadbalancerDataSource_basic(t *testing.T) {
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
-	rName := acctest.RandomName("tf-acc-test")
-	nsName := acctest.RandomName("tf-acc-test-ns")
+	rName := acctest.RandomName("tf-acc-test-tcp-lb")
 	resourceName := "f5xc_tcp_loadbalancer.test"
 	dataSourceName := "data.f5xc_tcp_loadbalancer.test"
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {Source: "hashicorp/time"},
-		},
 		Steps: []resource.TestStep{
 			{
-				Config: testAccTcpLoadbalancerDataSourceConfig_basic(nsName, rName),
+				Config: testAccTcpLoadbalancerDataSourceConfig_basic("", rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					resource.TestCheckResourceAttrPair(dataSourceName, "name", resourceName, "name"),
 					resource.TestCheckResourceAttrPair(dataSourceName, "namespace", resourceName, "namespace"),
@@ -41,48 +36,59 @@ func TestAccTcpLoadbalancerDataSource_basic(t *testing.T) {
 	})
 }
 
-
 func testAccTcpLoadbalancerDataSourceConfig_basic(nsName, name string) string {
 	return acctest.ConfigCompose(
 		acctest.ProviderConfig(),
 		fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
-resource "time_sleep" "wait_for_namespace" {
-  depends_on      = [f5xc_namespace.test]
-  create_duration = "5s"
-}
-
+# Origin pool is required for TCP load balancer - it needs a backend cluster
 resource "f5xc_origin_pool" "test" {
-  depends_on = [time_sleep.wait_for_namespace]
-  name       = "${%[2]q}-pool"
-  namespace  = f5xc_namespace.test.name
+  name       = "%[2]s-pool"
+  namespace  = "system"
+
+  port = 443
+
   origin_servers {
-    public_ip {
-      ip = "1.2.3.4"
+    labels {}
+    public_name {
+      dns_name = "example.com"
     }
   }
-  port               = 80
-  endpoint_selection = "LOCAL_PREFERRED"
-  loadbalancer_algorithm = "ROUND_ROBIN"
+
+  no_tls {}
+  same_as_endpoint_port {}
 }
 
 resource "f5xc_tcp_loadbalancer" "test" {
-  depends_on = [time_sleep.wait_for_namespace, f5xc_origin_pool.test]
   name       = %[2]q
-  namespace  = f5xc_namespace.test.name
-  domains = ["test.example.com"]
-  tcp {
-    dns_volterra_managed = false
+  namespace  = "system"
+
+  labels = {
+    environment = "test"
+    managed_by  = "terraform-acceptance-test"
   }
+
+  # Domain and SNI are required for TCP on public shared VIP
+  domains = ["%[2]s.example.com"]
+
+  listen_port = 443
+
+  # Required: Specify protocol type (tcp, tls_tcp, or tls_tcp_auto_cert)
+  tcp {}
+
+  # Required: SNI for TCP on public shared VIP
+  sni {}
+
+  # Required: TCP LB needs origin pools for routing
   origin_pools_weights {
     pool {
       name      = f5xc_origin_pool.test.name
-      namespace = f5xc_namespace.test.name
+      namespace = "system"
     }
+    weight = 1
   }
+
+  # Required: Specify advertise configuration
+  advertise_on_public_default_vip {}
 }
 
 data "f5xc_tcp_loadbalancer" "test" {

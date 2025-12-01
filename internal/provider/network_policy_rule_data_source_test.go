@@ -3,7 +3,6 @@
 
 package provider_test
 
-
 import (
 	"fmt"
 	"testing"
@@ -18,19 +17,15 @@ func TestAccNetworkPolicyRuleDataSource_basic(t *testing.T) {
 	acctest.PreCheck(t)
 
 	rName := acctest.RandomName("tf-acc-test")
-	nsName := acctest.RandomName("tf-acc-test-ns")
 	resourceName := "f5xc_network_policy_rule.test"
 	dataSourceName := "data.f5xc_network_policy_rule.test"
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {Source: "hashicorp/time"},
-		},
 		Steps: []resource.TestStep{
 			{
-				Config: testAccNetworkPolicyRuleDataSourceConfig_basic(nsName, rName),
+				Config: testAccNetworkPolicyRuleDataSourceConfig_basic(rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					resource.TestCheckResourceAttrPair(dataSourceName, "name", resourceName, "name"),
 					resource.TestCheckResourceAttrPair(dataSourceName, "namespace", resourceName, "namespace"),
@@ -41,33 +36,27 @@ func TestAccNetworkPolicyRuleDataSource_basic(t *testing.T) {
 	})
 }
 
-
-func testAccNetworkPolicyRuleDataSourceConfig_basic(nsName, name string) string {
+func testAccNetworkPolicyRuleDataSourceConfig_basic(name string) string {
+	// Network policy rule must be in system namespace, protocol must be uppercase
 	return acctest.ConfigCompose(
 		acctest.ProviderConfig(),
 		fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
-resource "time_sleep" "wait_for_namespace" {
-  depends_on      = [f5xc_namespace.test]
-  create_duration = "5s"
-}
-
 resource "f5xc_network_policy_rule" "test" {
-  depends_on = [time_sleep.wait_for_namespace]
-  name       = %[2]q
-  namespace  = f5xc_namespace.test.name
+  name      = %[1]q
+  namespace = "system"
+
   action   = "ALLOW"
-  any      = true
   protocol = "TCP"
+  ports    = ["443", "8080"]
+
+  prefix {
+    prefix = ["192.168.1.0/24"]
+  }
 }
 
 data "f5xc_network_policy_rule" "test" {
-  depends_on = [f5xc_network_policy_rule.test]
-  name       = f5xc_network_policy_rule.test.name
-  namespace  = f5xc_network_policy_rule.test.namespace
+  name      = f5xc_network_policy_rule.test.name
+  namespace = f5xc_network_policy_rule.test.namespace
 }
-`, nsName, name))
+`, name))
 }

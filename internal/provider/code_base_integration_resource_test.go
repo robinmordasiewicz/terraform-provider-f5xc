@@ -17,6 +17,10 @@ func TestAccCodeBaseIntegrationResource_basic(t *testing.T) {
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
+	// Skip: code_base_integration requires valid third-party credentials
+	// (GitHub, GitLab, Bitbucket, Azure Repos access tokens)
+	t.Skip("Skipping: code_base_integration resource requires external VCS credentials (GitHub/GitLab/Bitbucket/Azure Repos access tokens) which are not available in acceptance tests")
+
 	rName := acctest.RandomName("tf-acc-test-cbi")
 	nsName := acctest.RandomName("tf-acc-test-ns")
 	resourceName := "f5xc_code_base_integration.test"

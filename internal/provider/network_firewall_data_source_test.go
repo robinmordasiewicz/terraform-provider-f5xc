@@ -3,7 +3,6 @@
 
 package provider_test
 
-
 import (
 	"fmt"
 	"testing"
@@ -18,19 +17,15 @@ func TestAccNetworkFirewallDataSource_basic(t *testing.T) {
 	acctest.PreCheck(t)
 
 	rName := acctest.RandomName("tf-acc-test")
-	nsName := acctest.RandomName("tf-acc-test-ns")
 	resourceName := "f5xc_network_firewall.test"
 	dataSourceName := "data.f5xc_network_firewall.test"
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {Source: "hashicorp/time"},
-		},
 		Steps: []resource.TestStep{
 			{
-				Config: testAccNetworkFirewallDataSourceConfig_basic(nsName, rName),
+				Config: testAccNetworkFirewallDataSourceConfig_basic(rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					resource.TestCheckResourceAttrPair(dataSourceName, "name", resourceName, "name"),
 					resource.TestCheckResourceAttrPair(dataSourceName, "namespace", resourceName, "namespace"),
@@ -41,56 +36,23 @@ func TestAccNetworkFirewallDataSource_basic(t *testing.T) {
 	})
 }
 
-
-func testAccNetworkFirewallDataSourceConfig_basic(nsName, name string) string {
+func testAccNetworkFirewallDataSourceConfig_basic(name string) string {
+	// Network firewall in system namespace with all policies disabled
 	return acctest.ConfigCompose(
 		acctest.ProviderConfig(),
 		fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
-resource "time_sleep" "wait_for_namespace" {
-  depends_on      = [f5xc_namespace.test]
-  create_duration = "5s"
-}
-
-resource "f5xc_forward_proxy_policy" "test" {
-  depends_on = [time_sleep.wait_for_namespace]
-  name       = "${%[2]q}-fpp"
-  namespace  = f5xc_namespace.test.name
-  proxy_label = "test-proxy"
-  rule_list {
-    rules {
-      metadata {
-        name = "rule1"
-      }
-      spec {
-        action      = "ALLOW"
-        any_client  = true
-        any_dst     = true
-        rule_description = "Allow all"
-      }
-    }
-  }
-}
-
 resource "f5xc_network_firewall" "test" {
-  depends_on = [time_sleep.wait_for_namespace, f5xc_forward_proxy_policy.test]
-  name       = %[2]q
-  namespace  = f5xc_namespace.test.name
-  active_forward_proxy_policies {
-    forward_proxy_policies {
-      name      = f5xc_forward_proxy_policy.test.name
-      namespace = f5xc_namespace.test.name
-    }
-  }
+  name      = %[1]q
+  namespace = "system"
+
+  disable_network_policy {}
+  disable_fast_acl {}
+  disable_forward_proxy_policy {}
 }
 
 data "f5xc_network_firewall" "test" {
-  depends_on = [f5xc_network_firewall.test]
-  name       = f5xc_network_firewall.test.name
-  namespace  = f5xc_network_firewall.test.namespace
+  name      = f5xc_network_firewall.test.name
+  namespace = f5xc_network_firewall.test.namespace
 }
-`, nsName, name))
+`, name))
 }

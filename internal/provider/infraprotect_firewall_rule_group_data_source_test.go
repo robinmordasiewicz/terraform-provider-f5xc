@@ -16,6 +16,7 @@ import (
 func TestAccInfraprotectFirewallRuleGroupDataSource_basic(t *testing.T) {
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
+	t.Skip("Skipping: requires InfraProtect DDoS Transit infrastructure - the infraprotect_firewall_rule_group resource amends external Firewall Rule Groups and requires the InfraProtect add-on with DDoS Transit configuration (AWS Route 53 firewall integration)")
 
 	rName := acctest.RandomName("tf-acc-test")
 	nsName := acctest.RandomName("tf-acc-test-ns")

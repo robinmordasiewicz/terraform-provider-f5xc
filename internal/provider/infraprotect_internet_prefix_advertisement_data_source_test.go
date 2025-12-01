@@ -14,6 +14,7 @@ import (
 )
 
 func TestAccInfraprotectInternetPrefixAdvertisementDataSource_basic(t *testing.T) {
+	t.Skip("Skipping: requires InfraProtect infrastructure (DDoS transit prefix advertisement)")
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 

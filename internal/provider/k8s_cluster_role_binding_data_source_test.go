@@ -3,7 +3,6 @@
 
 package provider_test
 
-
 import (
 	"fmt"
 	"testing"
@@ -18,19 +17,15 @@ func TestAccK8sClusterRoleBindingDataSource_basic(t *testing.T) {
 	acctest.PreCheck(t)
 
 	rName := acctest.RandomName("tf-acc-test")
-	nsName := acctest.RandomName("tf-acc-test-ns")
 	resourceName := "f5xc_k8s_cluster_role_binding.test"
 	dataSourceName := "data.f5xc_k8s_cluster_role_binding.test"
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {Source: "hashicorp/time"},
-		},
 		Steps: []resource.TestStep{
 			{
-				Config: testAccK8sClusterRoleBindingDataSourceConfig_basic(nsName, rName),
+				Config: testAccK8sClusterRoleBindingDataSourceConfig_basic(rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					resource.TestCheckResourceAttrPair(dataSourceName, "name", resourceName, "name"),
 					resource.TestCheckResourceAttrPair(dataSourceName, "namespace", resourceName, "namespace"),
@@ -41,24 +36,26 @@ func TestAccK8sClusterRoleBindingDataSource_basic(t *testing.T) {
 	})
 }
 
-
-func testAccK8sClusterRoleBindingDataSourceConfig_basic(nsName, name string) string {
+func testAccK8sClusterRoleBindingDataSourceConfig_basic(name string) string {
+	// K8s cluster role binding must be in system namespace
+	// Requires k8s_cluster_role reference and subjects
+	// Using shared ves-io-admin-cluster-role from ves-io tenant
 	return acctest.ConfigCompose(
 		acctest.ProviderConfig(),
 		fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
-resource "time_sleep" "wait_for_namespace" {
-  depends_on      = [f5xc_namespace.test]
-  create_duration = "5s"
-}
-
 resource "f5xc_k8s_cluster_role_binding" "test" {
-  depends_on = [time_sleep.wait_for_namespace]
-  name       = %[2]q
-  namespace  = f5xc_namespace.test.name
+  name      = %[1]q
+  namespace = "system"
+
+  k8s_cluster_role {
+    name      = "ves-io-admin-cluster-role"
+    namespace = "shared"
+    tenant    = "ves-io"
+  }
+
+  subjects {
+    user = "test-user"
+  }
 }
 
 data "f5xc_k8s_cluster_role_binding" "test" {
@@ -66,5 +63,5 @@ data "f5xc_k8s_cluster_role_binding" "test" {
   name       = f5xc_k8s_cluster_role_binding.test.name
   namespace  = f5xc_k8s_cluster_role_binding.test.namespace
 }
-`, nsName, name))
+`, name))
 }

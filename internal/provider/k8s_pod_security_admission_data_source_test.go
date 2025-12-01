@@ -3,7 +3,6 @@
 
 package provider_test
 
-
 import (
 	"fmt"
 	"testing"
@@ -14,6 +13,7 @@ import (
 )
 
 func TestAccK8sPodSecurityAdmissionDataSource_basic(t *testing.T) {
+	t.Skip("Skipping: requires K8s cluster with Pod Security Admission (PSA) enabled - PSA resources are only applicable to managed K8s environments")
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -40,7 +40,6 @@ func TestAccK8sPodSecurityAdmissionDataSource_basic(t *testing.T) {
 		},
 	})
 }
-
 
 func testAccK8sPodSecurityAdmissionDataSourceConfig_basic(nsName, name string) string {
 	return acctest.ConfigCompose(

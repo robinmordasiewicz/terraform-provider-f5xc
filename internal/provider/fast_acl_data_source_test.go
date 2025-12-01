@@ -3,7 +3,6 @@
 
 package provider_test
 
-
 import (
 	"fmt"
 	"testing"
@@ -17,20 +16,16 @@ func TestAccFastAclDataSource_basic(t *testing.T) {
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
-	rName := acctest.RandomName("tf-acc-test")
-	nsName := acctest.RandomName("tf-acc-test-ns")
+	rName := acctest.RandomName("tf-acc-test-facl")
 	resourceName := "f5xc_fast_acl.test"
 	dataSourceName := "data.f5xc_fast_acl.test"
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {Source: "hashicorp/time"},
-		},
 		Steps: []resource.TestStep{
 			{
-				Config: testAccFastAclDataSourceConfig_basic(nsName, rName),
+				Config: testAccFastAclDataSourceConfig_basic(rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					resource.TestCheckResourceAttrPair(dataSourceName, "name", resourceName, "name"),
 					resource.TestCheckResourceAttrPair(dataSourceName, "namespace", resourceName, "namespace"),
@@ -41,41 +36,21 @@ func TestAccFastAclDataSource_basic(t *testing.T) {
 	})
 }
 
-
-func testAccFastAclDataSourceConfig_basic(nsName, name string) string {
+func testAccFastAclDataSourceConfig_basic(name string) string {
+	// Fast ACL must be in system namespace and requires site_choice (re_acl or site_acl)
 	return acctest.ConfigCompose(
 		acctest.ProviderConfig(),
 		fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
-resource "time_sleep" "wait_for_namespace" {
-  depends_on      = [f5xc_namespace.test]
-  create_duration = "5s"
-}
-
 resource "f5xc_fast_acl" "test" {
-  depends_on = [time_sleep.wait_for_namespace]
-  name       = %[2]q
-  namespace  = f5xc_namespace.test.name
-  site_acl {
-    fast_acl_rules {
-      name   = "test-rule"
-      action {
-        deny = true
-      }
-      prefix {
-        prefix = ["10.0.0.0/8"]
-      }
-    }
-  }
+  name      = %[1]q
+  namespace = "system"
+
+  re_acl {}
 }
 
 data "f5xc_fast_acl" "test" {
-  depends_on = [f5xc_fast_acl.test]
-  name       = f5xc_fast_acl.test.name
-  namespace  = f5xc_fast_acl.test.namespace
+  name      = f5xc_fast_acl.test.name
+  namespace = f5xc_fast_acl.test.namespace
 }
-`, nsName, name))
+`, name))
 }

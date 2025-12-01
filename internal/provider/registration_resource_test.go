@@ -17,6 +17,10 @@ func TestAccRegistrationResource_basic(t *testing.T) {
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
+	// Skip: registration is used for CE (Customer Edge) node registration by VPM
+	// This resource requires physical infrastructure (CE nodes) and is not intended for direct user management
+	t.Skip("Skipping: registration resource requires physical CE node infrastructure and is used internally by VPM for node registration")
+
 	rName := acctest.RandomName("tf-acc-test-reg")
 	nsName := acctest.RandomName("tf-acc-test-ns")
 	resourceName := "f5xc_registration.test"

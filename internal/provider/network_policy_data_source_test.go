@@ -3,7 +3,6 @@
 
 package provider_test
 
-
 import (
 	"fmt"
 	"testing"
@@ -41,7 +40,6 @@ func TestAccNetworkPolicyDataSource_basic(t *testing.T) {
 	})
 }
 
-
 func testAccNetworkPolicyDataSourceConfig_basic(nsName, name string) string {
 	return acctest.ConfigCompose(
 		acctest.ProviderConfig(),
@@ -59,27 +57,19 @@ resource "f5xc_network_policy" "test" {
   depends_on = [time_sleep.wait_for_namespace]
   name       = %[2]q
   namespace  = f5xc_namespace.test.name
+
   endpoint {
-    any = true
+    any {}
   }
-  ingress_rules {
-    metadata {
-      name = "rule1"
-    }
-    spec {
-      action      = "ALLOW"
-      any         = true
-      protocol    = "TCP"
-    }
-  }
-  egress_rules {
-    metadata {
-      name = "rule1"
-    }
-    spec {
-      action      = "ALLOW"
-      any         = true
-      protocol    = "TCP"
+
+  rules {
+    ingress_rules {
+      action = "ALLOW"
+      any {}
+      all_traffic {}
+      metadata {
+        name = "allow-all"
+      }
     }
   }
 }

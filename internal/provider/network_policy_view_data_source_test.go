@@ -3,7 +3,6 @@
 
 package provider_test
 
-
 import (
 	"fmt"
 	"testing"
@@ -18,19 +17,15 @@ func TestAccNetworkPolicyViewDataSource_basic(t *testing.T) {
 	acctest.PreCheck(t)
 
 	rName := acctest.RandomName("tf-acc-test")
-	nsName := acctest.RandomName("tf-acc-test-ns")
 	resourceName := "f5xc_network_policy_view.test"
 	dataSourceName := "data.f5xc_network_policy_view.test"
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {Source: "hashicorp/time"},
-		},
 		Steps: []resource.TestStep{
 			{
-				Config: testAccNetworkPolicyViewDataSourceConfig_basic(nsName, rName),
+				Config: testAccNetworkPolicyViewDataSourceConfig_basic(rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					resource.TestCheckResourceAttrPair(dataSourceName, "name", resourceName, "name"),
 					resource.TestCheckResourceAttrPair(dataSourceName, "namespace", resourceName, "namespace"),
@@ -41,53 +36,23 @@ func TestAccNetworkPolicyViewDataSource_basic(t *testing.T) {
 	})
 }
 
-
-func testAccNetworkPolicyViewDataSourceConfig_basic(nsName, name string) string {
+func testAccNetworkPolicyViewDataSourceConfig_basic(name string) string {
+	// Network policy view must be in system namespace, requires endpoint block
 	return acctest.ConfigCompose(
 		acctest.ProviderConfig(),
 		fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
-resource "time_sleep" "wait_for_namespace" {
-  depends_on      = [f5xc_namespace.test]
-  create_duration = "5s"
-}
-
 resource "f5xc_network_policy_view" "test" {
-  depends_on = [time_sleep.wait_for_namespace]
-  name       = %[2]q
-  namespace  = f5xc_namespace.test.name
+  name      = %[1]q
+  namespace = "system"
+
   endpoint {
-    any = true
-  }
-  ingress_rules {
-    metadata {
-      name = "rule1"
-    }
-    spec {
-      action      = "ALLOW"
-      any         = true
-      protocol    = "TCP"
-    }
-  }
-  egress_rules {
-    metadata {
-      name = "rule1"
-    }
-    spec {
-      action      = "ALLOW"
-      any         = true
-      protocol    = "TCP"
-    }
+    any {}
   }
 }
 
 data "f5xc_network_policy_view" "test" {
-  depends_on = [f5xc_network_policy_view.test]
-  name       = f5xc_network_policy_view.test.name
-  namespace  = f5xc_network_policy_view.test.namespace
+  name      = f5xc_network_policy_view.test.name
+  namespace = f5xc_network_policy_view.test.namespace
 }
-`, nsName, name))
+`, name))
 }

@@ -3,7 +3,6 @@
 
 package provider_test
 
-
 import (
 	"fmt"
 	"testing"
@@ -41,7 +40,6 @@ func TestAccSecretPolicyRuleDataSource_basic(t *testing.T) {
 	})
 }
 
-
 func testAccSecretPolicyRuleDataSourceConfig_basic(nsName, name string) string {
 	return acctest.ConfigCompose(
 		acctest.ProviderConfig(),
@@ -56,13 +54,10 @@ resource "time_sleep" "wait_for_namespace" {
 }
 
 resource "f5xc_secret_policy_rule" "test" {
-  depends_on = [time_sleep.wait_for_namespace]
-  name       = %[2]q
-  namespace  = f5xc_namespace.test.name
-  action      = "ALLOW"
-  label_selector {
-    expressions = ["key1=value1"]
-  }
+  depends_on  = [time_sleep.wait_for_namespace]
+  name        = %[2]q
+  namespace   = f5xc_namespace.test.name
+  client_name = "test-client"
 }
 
 data "f5xc_secret_policy_rule" "test" {

@@ -79,8 +79,6 @@ resource "f5xc_protocol_inspection" "test" {
   name      = %[2]q
   namespace = f5xc_namespace.test.name
 
-  action = "DETECT"
-
   enable_disable_compliance_checks {
     disable_compliance_checks {}
   }

@@ -3,7 +3,6 @@
 
 package provider_test
 
-
 import (
 	"fmt"
 	"testing"
@@ -14,6 +13,7 @@ import (
 )
 
 func TestAccNetworkInterfaceDataSource_basic(t *testing.T) {
+	t.Skip("Skipping: requires network interface on physical site - network interfaces are only configurable on physical F5XC CE sites (not virtual)")
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -40,7 +40,6 @@ func TestAccNetworkInterfaceDataSource_basic(t *testing.T) {
 		},
 	})
 }
-
 
 func testAccNetworkInterfaceDataSourceConfig_basic(nsName, name string) string {
 	return acctest.ConfigCompose(

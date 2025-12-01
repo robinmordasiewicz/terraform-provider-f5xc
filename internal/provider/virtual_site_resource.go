@@ -55,15 +55,15 @@ type VirtualSiteSiteSelectorModel struct {
 }
 
 type VirtualSiteResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	SiteType types.String `tfsdk:"site_type"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Name         types.String                  `tfsdk:"name"`
+	Namespace    types.String                  `tfsdk:"namespace"`
+	Annotations  types.Map                     `tfsdk:"annotations"`
+	Description  types.String                  `tfsdk:"description"`
+	Disable      types.Bool                    `tfsdk:"disable"`
+	Labels       types.Map                     `tfsdk:"labels"`
+	ID           types.String                  `tfsdk:"id"`
+	SiteType     types.String                  `tfsdk:"site_type"`
+	Timeouts     timeouts.Value                `tfsdk:"timeouts"`
 	SiteSelector *VirtualSiteSiteSelectorModel `tfsdk:"site_selector"`
 }
 
@@ -78,7 +78,7 @@ func (r *VirtualSiteResource) Schema(ctx context.Context, req resource.SchemaReq
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the VirtualSite. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -88,7 +88,7 @@ func (r *VirtualSiteResource) Schema(ctx context.Context, req resource.SchemaReq
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the VirtualSite will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -98,33 +98,33 @@ func (r *VirtualSiteResource) Schema(ctx context.Context, req resource.SchemaReq
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"site_type": schema.StringAttribute{
 				MarkdownDescription: "Site Type. Site Type which can either RE or CE Invalid type of site Regional Edge site Customer Edge site. Possible values are `INVALID`, `REGIONAL_EDGE`, `CUSTOMER_EDGE`, `NGINX_ONE`.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -142,11 +142,10 @@ func (r *VirtualSiteResource) Schema(ctx context.Context, req resource.SchemaReq
 				Attributes: map[string]schema.Attribute{
 					"expressions": schema.ListAttribute{
 						MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections.",
-						Optional: true,
-						ElementType: types.StringType,
+						Optional:            true,
+						ElementType:         types.StringType,
 					},
 				},
-
 			},
 		},
 	}
@@ -311,7 +310,6 @@ func (r *VirtualSiteResource) Create(ctx context.Context, req resource.CreateReq
 		createReq.Spec["site_type"] = data.SiteType.ValueString()
 	}
 
-
 	apiResource, err := r.client.CreateVirtualSite(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create VirtualSite: %s", err))
@@ -323,7 +321,7 @@ func (r *VirtualSiteResource) Create(ctx context.Context, req resource.CreateReq
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if blockData, ok := apiResource.Spec["site_selector"].(map[string]interface{}); ok && (isImport || data.SiteSelector != nil) {
 		data.SiteSelector = &VirtualSiteSiteSelectorModel{
 			Expressions: func() types.List {
@@ -346,7 +344,6 @@ func (r *VirtualSiteResource) Create(ctx context.Context, req resource.CreateReq
 	} else {
 		data.SiteType = types.StringNull()
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -436,9 +433,9 @@ func (r *VirtualSiteResource) Read(ctx context.Context, req resource.ReadRequest
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if blockData, ok := apiResource.Spec["site_selector"].(map[string]interface{}); ok && (isImport || data.SiteSelector != nil) {
 		data.SiteSelector = &VirtualSiteSiteSelectorModel{
@@ -462,7 +459,6 @@ func (r *VirtualSiteResource) Read(ctx context.Context, req resource.ReadRequest
 	} else {
 		data.SiteType = types.StringNull()
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -537,7 +533,6 @@ func (r *VirtualSiteResource) Update(ctx context.Context, req resource.UpdateReq
 	if !data.SiteType.IsNull() && !data.SiteType.IsUnknown() {
 		apiResource.Spec["site_type"] = data.SiteType.ValueString()
 	}
-
 
 	updated, err := r.client.UpdateVirtualSite(ctx, apiResource)
 	if err != nil {

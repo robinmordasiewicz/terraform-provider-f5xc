@@ -50,19 +50,19 @@ type InfraprotectInternetPrefixAdvertisementEmptyModel struct {
 }
 
 type InfraprotectInternetPrefixAdvertisementResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	ExpirationTimestamp types.String `tfsdk:"expiration_timestamp"`
-	Prefix types.String `tfsdk:"prefix"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	ActivationAnnounce *InfraprotectInternetPrefixAdvertisementEmptyModel `tfsdk:"activation_announce"`
-	ActivationWithdraw *InfraprotectInternetPrefixAdvertisementEmptyModel `tfsdk:"activation_withdraw"`
-	ExpirationNever *InfraprotectInternetPrefixAdvertisementEmptyModel `tfsdk:"expiration_never"`
+	Name                types.String                                       `tfsdk:"name"`
+	Namespace           types.String                                       `tfsdk:"namespace"`
+	Annotations         types.Map                                          `tfsdk:"annotations"`
+	Description         types.String                                       `tfsdk:"description"`
+	Disable             types.Bool                                         `tfsdk:"disable"`
+	Labels              types.Map                                          `tfsdk:"labels"`
+	ID                  types.String                                       `tfsdk:"id"`
+	ExpirationTimestamp types.String                                       `tfsdk:"expiration_timestamp"`
+	Prefix              types.String                                       `tfsdk:"prefix"`
+	Timeouts            timeouts.Value                                     `tfsdk:"timeouts"`
+	ActivationAnnounce  *InfraprotectInternetPrefixAdvertisementEmptyModel `tfsdk:"activation_announce"`
+	ActivationWithdraw  *InfraprotectInternetPrefixAdvertisementEmptyModel `tfsdk:"activation_withdraw"`
+	ExpirationNever     *InfraprotectInternetPrefixAdvertisementEmptyModel `tfsdk:"expiration_never"`
 }
 
 func (r *InfraprotectInternetPrefixAdvertisementResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -76,7 +76,7 @@ func (r *InfraprotectInternetPrefixAdvertisementResource) Schema(ctx context.Con
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the InfraprotectInternetPrefixAdvertisement. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -86,7 +86,7 @@ func (r *InfraprotectInternetPrefixAdvertisementResource) Schema(ctx context.Con
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the InfraprotectInternetPrefixAdvertisement will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -96,41 +96,41 @@ func (r *InfraprotectInternetPrefixAdvertisementResource) Schema(ctx context.Con
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"expiration_timestamp": schema.StringAttribute{
 				MarkdownDescription: "Expiration Time (UTC). This advertisement will expire at the given timestamp and will be removed from the system afterwards",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"prefix": schema.StringAttribute{
 				MarkdownDescription: "Prefix. Advertisement Prefix Advertisement prefix lookup depending on type",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -319,7 +319,6 @@ func (r *InfraprotectInternetPrefixAdvertisementResource) Create(ctx context.Con
 		createReq.Spec["prefix"] = data.Prefix.ValueString()
 	}
 
-
 	apiResource, err := r.client.CreateInfraprotectInternetPrefixAdvertisement(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create InfraprotectInternetPrefixAdvertisement: %s", err))
@@ -331,7 +330,7 @@ func (r *InfraprotectInternetPrefixAdvertisementResource) Create(ctx context.Con
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if _, ok := apiResource.Spec["activation_announce"].(map[string]interface{}); ok && isImport && data.ActivationAnnounce == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.ActivationAnnounce = &InfraprotectInternetPrefixAdvertisementEmptyModel{}
@@ -357,7 +356,6 @@ func (r *InfraprotectInternetPrefixAdvertisementResource) Create(ctx context.Con
 	} else {
 		data.Prefix = types.StringNull()
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -447,9 +445,9 @@ func (r *InfraprotectInternetPrefixAdvertisementResource) Read(ctx context.Conte
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if _, ok := apiResource.Spec["activation_announce"].(map[string]interface{}); ok && isImport && data.ActivationAnnounce == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -476,7 +474,6 @@ func (r *InfraprotectInternetPrefixAdvertisementResource) Read(ctx context.Conte
 	} else {
 		data.Prefix = types.StringNull()
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -555,7 +552,6 @@ func (r *InfraprotectInternetPrefixAdvertisementResource) Update(ctx context.Con
 	if !data.Prefix.IsNull() && !data.Prefix.IsUnknown() {
 		apiResource.Spec["prefix"] = data.Prefix.ValueString()
 	}
-
 
 	updated, err := r.client.UpdateInfraprotectInternetPrefixAdvertisement(ctx, apiResource)
 	if err != nil {

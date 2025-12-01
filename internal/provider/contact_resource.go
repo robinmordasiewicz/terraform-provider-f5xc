@@ -46,24 +46,24 @@ type ContactResource struct {
 }
 
 type ContactResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Address1 types.String `tfsdk:"address1"`
-	Address2 types.String `tfsdk:"address2"`
-	City types.String `tfsdk:"city"`
-	ContactType types.String `tfsdk:"contact_type"`
-	Country types.String `tfsdk:"country"`
-	County types.String `tfsdk:"county"`
-	PhoneNumber types.String `tfsdk:"phone_number"`
-	State types.String `tfsdk:"state"`
-	StateCode types.String `tfsdk:"state_code"`
-	ZipCode types.String `tfsdk:"zip_code"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Name        types.String   `tfsdk:"name"`
+	Namespace   types.String   `tfsdk:"namespace"`
+	Annotations types.Map      `tfsdk:"annotations"`
+	Description types.String   `tfsdk:"description"`
+	Disable     types.Bool     `tfsdk:"disable"`
+	Labels      types.Map      `tfsdk:"labels"`
+	ID          types.String   `tfsdk:"id"`
+	Address1    types.String   `tfsdk:"address1"`
+	Address2    types.String   `tfsdk:"address2"`
+	City        types.String   `tfsdk:"city"`
+	ContactType types.String   `tfsdk:"contact_type"`
+	Country     types.String   `tfsdk:"country"`
+	County      types.String   `tfsdk:"county"`
+	PhoneNumber types.String   `tfsdk:"phone_number"`
+	State       types.String   `tfsdk:"state"`
+	StateCode   types.String   `tfsdk:"state_code"`
+	ZipCode     types.String   `tfsdk:"zip_code"`
+	Timeouts    timeouts.Value `tfsdk:"timeouts"`
 }
 
 func (r *ContactResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -77,7 +77,7 @@ func (r *ContactResource) Schema(ctx context.Context, req resource.SchemaRequest
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Contact. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -87,7 +87,7 @@ func (r *ContactResource) Schema(ctx context.Context, req resource.SchemaRequest
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the Contact will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -97,105 +97,105 @@ func (r *ContactResource) Schema(ctx context.Context, req resource.SchemaRequest
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"address1": schema.StringAttribute{
 				MarkdownDescription: "Address Line 1.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"address2": schema.StringAttribute{
 				MarkdownDescription: "Address Line 2.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"city": schema.StringAttribute{
 				MarkdownDescription: "City.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"contact_type": schema.StringAttribute{
 				MarkdownDescription: "Contact Type. Determines the contact type Indicates snail mail address (used for correspondence) Indicates billing address (this address will appear on invoices) Indicates contact used for a payment method (this address is used when charging a payment method). Possible values are `MAILING`, `BILLING`, `PAYMENT`. Defaults to `MAILING`.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"country": schema.StringAttribute{
 				MarkdownDescription: "Country.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"county": schema.StringAttribute{
 				MarkdownDescription: "County.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"phone_number": schema.StringAttribute{
 				MarkdownDescription: "Phone Number.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"state": schema.StringAttribute{
 				MarkdownDescription: "State.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"state_code": schema.StringAttribute{
 				MarkdownDescription: "State Code.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"zip_code": schema.StringAttribute{
 				MarkdownDescription: "ZIP code.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -387,7 +387,6 @@ func (r *ContactResource) Create(ctx context.Context, req resource.CreateRequest
 		createReq.Spec["zip_code"] = data.ZipCode.ValueString()
 	}
 
-
 	apiResource, err := r.client.CreateContact(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create Contact: %s", err))
@@ -399,7 +398,7 @@ func (r *ContactResource) Create(ctx context.Context, req resource.CreateRequest
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if v, ok := apiResource.Spec["address1"].(string); ok && v != "" {
 		data.Address1 = types.StringValue(v)
 	} else {
@@ -450,7 +449,6 @@ func (r *ContactResource) Create(ctx context.Context, req resource.CreateRequest
 	} else {
 		data.ZipCode = types.StringNull()
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -540,9 +538,9 @@ func (r *ContactResource) Read(ctx context.Context, req resource.ReadRequest, re
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if v, ok := apiResource.Spec["address1"].(string); ok && v != "" {
 		data.Address1 = types.StringValue(v)
@@ -594,7 +592,6 @@ func (r *ContactResource) Read(ctx context.Context, req resource.ReadRequest, re
 	} else {
 		data.ZipCode = types.StringNull()
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -685,7 +682,6 @@ func (r *ContactResource) Update(ctx context.Context, req resource.UpdateRequest
 	if !data.ZipCode.IsNull() && !data.ZipCode.IsUnknown() {
 		apiResource.Spec["zip_code"] = data.ZipCode.ValueString()
 	}
-
 
 	updated, err := r.client.UpdateContact(ctx, apiResource)
 	if err != nil {

@@ -51,9 +51,9 @@ type CertificateEmptyModel struct {
 
 // CertificateCertificateChainModel represents certificate_chain block
 type CertificateCertificateChainModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // CertificateCustomHashAlgorithmsModel represents custom_hash_algorithms block
@@ -64,37 +64,37 @@ type CertificateCustomHashAlgorithmsModel struct {
 // CertificatePrivateKeyModel represents private_key block
 type CertificatePrivateKeyModel struct {
 	BlindfoldSecretInfo *CertificatePrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *CertificatePrivateKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *CertificatePrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // CertificatePrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
 type CertificatePrivateKeyBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // CertificatePrivateKeyClearSecretInfoModel represents clear_secret_info block
 type CertificatePrivateKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 type CertificateResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	CertificateURL types.String `tfsdk:"certificate_url"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	CertificateChain *CertificateCertificateChainModel `tfsdk:"certificate_chain"`
+	Name                 types.String                          `tfsdk:"name"`
+	Namespace            types.String                          `tfsdk:"namespace"`
+	Annotations          types.Map                             `tfsdk:"annotations"`
+	Description          types.String                          `tfsdk:"description"`
+	Disable              types.Bool                            `tfsdk:"disable"`
+	Labels               types.Map                             `tfsdk:"labels"`
+	ID                   types.String                          `tfsdk:"id"`
+	CertificateURL       types.String                          `tfsdk:"certificate_url"`
+	Timeouts             timeouts.Value                        `tfsdk:"timeouts"`
+	CertificateChain     *CertificateCertificateChainModel     `tfsdk:"certificate_chain"`
 	CustomHashAlgorithms *CertificateCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
-	DisableOcspStapling *CertificateEmptyModel `tfsdk:"disable_ocsp_stapling"`
-	PrivateKey *CertificatePrivateKeyModel `tfsdk:"private_key"`
-	UseSystemDefaults *CertificateEmptyModel `tfsdk:"use_system_defaults"`
+	DisableOcspStapling  *CertificateEmptyModel                `tfsdk:"disable_ocsp_stapling"`
+	PrivateKey           *CertificatePrivateKeyModel           `tfsdk:"private_key"`
+	UseSystemDefaults    *CertificateEmptyModel                `tfsdk:"use_system_defaults"`
 }
 
 func (r *CertificateResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -108,7 +108,7 @@ func (r *CertificateResource) Schema(ctx context.Context, req resource.SchemaReq
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Certificate. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -118,7 +118,7 @@ func (r *CertificateResource) Schema(ctx context.Context, req resource.SchemaReq
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the Certificate will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -128,33 +128,33 @@ func (r *CertificateResource) Schema(ctx context.Context, req resource.SchemaReq
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"certificate_url": schema.StringAttribute{
 				MarkdownDescription: "Certificate. Certificate. Certificate or certificate chain in PEM format including the PEM headers.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -172,53 +172,50 @@ func (r *CertificateResource) Schema(ctx context.Context, req resource.SchemaReq
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
 						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-						Optional: true,
+						Optional:            true,
 					},
 					"namespace": schema.StringAttribute{
 						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-						Optional: true,
+						Optional:            true,
 					},
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-						Optional: true,
-						Computed: true,
+						Optional:            true,
+						Computed:            true,
 					},
 				},
-
 			},
 			"custom_hash_algorithms": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: custom_hash_algorithms, disable_ocsp_stapling, use_system_defaults] Hash Algorithms. Specifies the hash algorithms to be used",
 				Attributes: map[string]schema.Attribute{
 					"hash_algorithms": schema.ListAttribute{
 						MarkdownDescription: "Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM`.",
-						Optional: true,
-						ElementType: types.StringType,
+						Optional:            true,
+						ElementType:         types.StringType,
 					},
 				},
-
 			},
 			"disable_ocsp_stapling": schema.SingleNestedBlock{
 				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 			},
 			"private_key": schema.SingleNestedBlock{
 				MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"blindfold_secret_info": schema.SingleNestedBlock{
 						MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 						Attributes: map[string]schema.Attribute{
 							"decryption_provider": schema.StringAttribute{
 								MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-								Optional: true,
+								Optional:            true,
 							},
 							"location": schema.StringAttribute{
 								MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-								Optional: true,
+								Optional:            true,
 							},
 							"store_provider": schema.StringAttribute{
 								MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 					},
@@ -227,16 +224,15 @@ func (r *CertificateResource) Schema(ctx context.Context, req resource.SchemaReq
 						Attributes: map[string]schema.Attribute{
 							"provider_ref": schema.StringAttribute{
 								MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-								Optional: true,
+								Optional:            true,
 							},
 							"url": schema.StringAttribute{
 								MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 					},
 				},
-
 			},
 			"use_system_defaults": schema.SingleNestedBlock{
 				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -452,7 +448,6 @@ func (r *CertificateResource) Create(ctx context.Context, req resource.CreateReq
 		createReq.Spec["certificate_url"] = data.CertificateURL.ValueString()
 	}
 
-
 	apiResource, err := r.client.CreateCertificate(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create Certificate: %s", err))
@@ -464,7 +459,7 @@ func (r *CertificateResource) Create(ctx context.Context, req resource.CreateReq
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if blockData, ok := apiResource.Spec["certificate_chain"].(map[string]interface{}); ok && (isImport || data.CertificateChain != nil) {
 		data.CertificateChain = &CertificateCertificateChainModel{
 			Name: func() types.String {
@@ -524,7 +519,6 @@ func (r *CertificateResource) Create(ctx context.Context, req resource.CreateReq
 	} else {
 		data.CertificateURL = types.StringNull()
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -614,9 +608,9 @@ func (r *CertificateResource) Read(ctx context.Context, req resource.ReadRequest
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if blockData, ok := apiResource.Spec["certificate_chain"].(map[string]interface{}); ok && (isImport || data.CertificateChain != nil) {
 		data.CertificateChain = &CertificateCertificateChainModel{
@@ -677,7 +671,6 @@ func (r *CertificateResource) Read(ctx context.Context, req resource.ReadRequest
 	} else {
 		data.CertificateURL = types.StringNull()
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -800,7 +793,6 @@ func (r *CertificateResource) Update(ctx context.Context, req resource.UpdateReq
 	if !data.CertificateURL.IsNull() && !data.CertificateURL.IsUnknown() {
 		apiResource.Spec["certificate_url"] = data.CertificateURL.ValueString()
 	}
-
 
 	updated, err := r.client.UpdateCertificate(ctx, apiResource)
 	if err != nil {

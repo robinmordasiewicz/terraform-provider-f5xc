@@ -51,35 +51,35 @@ type K8SClusterRoleBindingEmptyModel struct {
 
 // K8SClusterRoleBindingK8SClusterRoleModel represents k8s_cluster_role block
 type K8SClusterRoleBindingK8SClusterRoleModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // K8SClusterRoleBindingSubjectsModel represents subjects block
 type K8SClusterRoleBindingSubjectsModel struct {
-	Group types.String `tfsdk:"group"`
-	User types.String `tfsdk:"user"`
+	Group          types.String                                      `tfsdk:"group"`
+	User           types.String                                      `tfsdk:"user"`
 	ServiceAccount *K8SClusterRoleBindingSubjectsServiceAccountModel `tfsdk:"service_account"`
 }
 
 // K8SClusterRoleBindingSubjectsServiceAccountModel represents service_account block
 type K8SClusterRoleBindingSubjectsServiceAccountModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 }
 
 type K8SClusterRoleBindingResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Name           types.String                              `tfsdk:"name"`
+	Namespace      types.String                              `tfsdk:"namespace"`
+	Annotations    types.Map                                 `tfsdk:"annotations"`
+	Description    types.String                              `tfsdk:"description"`
+	Disable        types.Bool                                `tfsdk:"disable"`
+	Labels         types.Map                                 `tfsdk:"labels"`
+	ID             types.String                              `tfsdk:"id"`
+	Timeouts       timeouts.Value                            `tfsdk:"timeouts"`
 	K8SClusterRole *K8SClusterRoleBindingK8SClusterRoleModel `tfsdk:"k8s_cluster_role"`
-	Subjects []K8SClusterRoleBindingSubjectsModel `tfsdk:"subjects"`
+	Subjects       []K8SClusterRoleBindingSubjectsModel      `tfsdk:"subjects"`
 }
 
 func (r *K8SClusterRoleBindingResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -93,7 +93,7 @@ func (r *K8SClusterRoleBindingResource) Schema(ctx context.Context, req resource
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the K8SClusterRoleBinding. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -103,7 +103,7 @@ func (r *K8SClusterRoleBindingResource) Schema(ctx context.Context, req resource
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the K8SClusterRoleBinding will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -113,25 +113,25 @@ func (r *K8SClusterRoleBindingResource) Schema(ctx context.Context, req resource
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -149,19 +149,18 @@ func (r *K8SClusterRoleBindingResource) Schema(ctx context.Context, req resource
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
 						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-						Optional: true,
+						Optional:            true,
 					},
 					"namespace": schema.StringAttribute{
 						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-						Optional: true,
+						Optional:            true,
 					},
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-						Optional: true,
-						Computed: true,
+						Optional:            true,
+						Computed:            true,
 					},
 				},
-
 			},
 			"subjects": schema.ListNestedBlock{
 				MarkdownDescription: "Subjects. List of subjects (user, group or service account) to which this role is bound",
@@ -169,11 +168,11 @@ func (r *K8SClusterRoleBindingResource) Schema(ctx context.Context, req resource
 					Attributes: map[string]schema.Attribute{
 						"group": schema.StringAttribute{
 							MarkdownDescription: "Group. Group id of the user group",
-							Optional: true,
+							Optional:            true,
 						},
 						"user": schema.StringAttribute{
 							MarkdownDescription: "User. User id of the user",
-							Optional: true,
+							Optional:            true,
 						},
 					},
 					Blocks: map[string]schema.Block{
@@ -182,16 +181,15 @@ func (r *K8SClusterRoleBindingResource) Schema(ctx context.Context, req resource
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Name. Name of the service account",
-									Optional: true,
+									Optional:            true,
 								},
 								"namespace": schema.StringAttribute{
 									MarkdownDescription: "Namespace. Namespace of the service account",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 						},
 					},
-
 				},
 			},
 		},
@@ -380,7 +378,6 @@ func (r *K8SClusterRoleBindingResource) Create(ctx context.Context, req resource
 		createReq.Spec["subjects"] = subjectsList
 	}
 
-
 	apiResource, err := r.client.CreateK8SClusterRoleBinding(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create K8SClusterRoleBinding: %s", err))
@@ -392,7 +389,7 @@ func (r *K8SClusterRoleBindingResource) Create(ctx context.Context, req resource
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if blockData, ok := apiResource.Spec["k8s_cluster_role"].(map[string]interface{}); ok && (isImport || data.K8SClusterRole != nil) {
 		data.K8SClusterRole = &K8SClusterRoleBindingK8SClusterRoleModel{
 			Name: func() types.String {
@@ -457,7 +454,6 @@ func (r *K8SClusterRoleBindingResource) Create(ctx context.Context, req resource
 		}
 		data.Subjects = subjectsList
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -547,9 +543,9 @@ func (r *K8SClusterRoleBindingResource) Read(ctx context.Context, req resource.R
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if blockData, ok := apiResource.Spec["k8s_cluster_role"].(map[string]interface{}); ok && (isImport || data.K8SClusterRole != nil) {
 		data.K8SClusterRole = &K8SClusterRoleBindingK8SClusterRoleModel{
@@ -615,7 +611,6 @@ func (r *K8SClusterRoleBindingResource) Read(ctx context.Context, req resource.R
 		}
 		data.Subjects = subjectsList
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -713,7 +708,6 @@ func (r *K8SClusterRoleBindingResource) Update(ctx context.Context, req resource
 		}
 		apiResource.Spec["subjects"] = subjectsList
 	}
-
 
 	updated, err := r.client.UpdateK8SClusterRoleBinding(ctx, apiResource)
 	if err != nil {

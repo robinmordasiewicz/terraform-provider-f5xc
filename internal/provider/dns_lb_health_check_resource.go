@@ -51,59 +51,59 @@ type DNSLbHealthCheckEmptyModel struct {
 
 // DNSLbHealthCheckHTTPHealthCheckModel represents http_health_check block
 type DNSLbHealthCheckHTTPHealthCheckModel struct {
-	HealthCheckPort types.Int64 `tfsdk:"health_check_port"`
-	HealthCheckSecondaryPort types.Int64 `tfsdk:"health_check_secondary_port"`
-	Receive types.String `tfsdk:"receive"`
-	Send types.String `tfsdk:"send"`
+	HealthCheckPort          types.Int64  `tfsdk:"health_check_port"`
+	HealthCheckSecondaryPort types.Int64  `tfsdk:"health_check_secondary_port"`
+	Receive                  types.String `tfsdk:"receive"`
+	Send                     types.String `tfsdk:"send"`
 }
 
 // DNSLbHealthCheckHTTPSHealthCheckModel represents https_health_check block
 type DNSLbHealthCheckHTTPSHealthCheckModel struct {
-	HealthCheckPort types.Int64 `tfsdk:"health_check_port"`
-	HealthCheckSecondaryPort types.Int64 `tfsdk:"health_check_secondary_port"`
-	Receive types.String `tfsdk:"receive"`
-	Send types.String `tfsdk:"send"`
+	HealthCheckPort          types.Int64  `tfsdk:"health_check_port"`
+	HealthCheckSecondaryPort types.Int64  `tfsdk:"health_check_secondary_port"`
+	Receive                  types.String `tfsdk:"receive"`
+	Send                     types.String `tfsdk:"send"`
 }
 
 // DNSLbHealthCheckTCPHealthCheckModel represents tcp_health_check block
 type DNSLbHealthCheckTCPHealthCheckModel struct {
-	HealthCheckPort types.Int64 `tfsdk:"health_check_port"`
-	HealthCheckSecondaryPort types.Int64 `tfsdk:"health_check_secondary_port"`
-	Receive types.String `tfsdk:"receive"`
-	Send types.String `tfsdk:"send"`
+	HealthCheckPort          types.Int64  `tfsdk:"health_check_port"`
+	HealthCheckSecondaryPort types.Int64  `tfsdk:"health_check_secondary_port"`
+	Receive                  types.String `tfsdk:"receive"`
+	Send                     types.String `tfsdk:"send"`
 }
 
 // DNSLbHealthCheckTCPHexHealthCheckModel represents tcp_hex_health_check block
 type DNSLbHealthCheckTCPHexHealthCheckModel struct {
-	HealthCheckPort types.Int64 `tfsdk:"health_check_port"`
-	HealthCheckSecondaryPort types.Int64 `tfsdk:"health_check_secondary_port"`
-	Receive types.String `tfsdk:"receive"`
-	Send types.String `tfsdk:"send"`
+	HealthCheckPort          types.Int64  `tfsdk:"health_check_port"`
+	HealthCheckSecondaryPort types.Int64  `tfsdk:"health_check_secondary_port"`
+	Receive                  types.String `tfsdk:"receive"`
+	Send                     types.String `tfsdk:"send"`
 }
 
 // DNSLbHealthCheckUDPHealthCheckModel represents udp_health_check block
 type DNSLbHealthCheckUDPHealthCheckModel struct {
-	HealthCheckPort types.Int64 `tfsdk:"health_check_port"`
-	HealthCheckSecondaryPort types.Int64 `tfsdk:"health_check_secondary_port"`
-	Receive types.String `tfsdk:"receive"`
-	Send types.String `tfsdk:"send"`
+	HealthCheckPort          types.Int64  `tfsdk:"health_check_port"`
+	HealthCheckSecondaryPort types.Int64  `tfsdk:"health_check_secondary_port"`
+	Receive                  types.String `tfsdk:"receive"`
+	Send                     types.String `tfsdk:"send"`
 }
 
 type DNSLbHealthCheckResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	HTTPHealthCheck *DNSLbHealthCheckHTTPHealthCheckModel `tfsdk:"http_health_check"`
-	HTTPSHealthCheck *DNSLbHealthCheckHTTPSHealthCheckModel `tfsdk:"https_health_check"`
-	IcmpHealthCheck *DNSLbHealthCheckEmptyModel `tfsdk:"icmp_health_check"`
-	TCPHealthCheck *DNSLbHealthCheckTCPHealthCheckModel `tfsdk:"tcp_health_check"`
+	Name              types.String                            `tfsdk:"name"`
+	Namespace         types.String                            `tfsdk:"namespace"`
+	Annotations       types.Map                               `tfsdk:"annotations"`
+	Description       types.String                            `tfsdk:"description"`
+	Disable           types.Bool                              `tfsdk:"disable"`
+	Labels            types.Map                               `tfsdk:"labels"`
+	ID                types.String                            `tfsdk:"id"`
+	Timeouts          timeouts.Value                          `tfsdk:"timeouts"`
+	HTTPHealthCheck   *DNSLbHealthCheckHTTPHealthCheckModel   `tfsdk:"http_health_check"`
+	HTTPSHealthCheck  *DNSLbHealthCheckHTTPSHealthCheckModel  `tfsdk:"https_health_check"`
+	IcmpHealthCheck   *DNSLbHealthCheckEmptyModel             `tfsdk:"icmp_health_check"`
+	TCPHealthCheck    *DNSLbHealthCheckTCPHealthCheckModel    `tfsdk:"tcp_health_check"`
 	TCPHexHealthCheck *DNSLbHealthCheckTCPHexHealthCheckModel `tfsdk:"tcp_hex_health_check"`
-	UDPHealthCheck *DNSLbHealthCheckUDPHealthCheckModel `tfsdk:"udp_health_check"`
+	UDPHealthCheck    *DNSLbHealthCheckUDPHealthCheckModel    `tfsdk:"udp_health_check"`
 }
 
 func (r *DNSLbHealthCheckResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -117,7 +117,7 @@ func (r *DNSLbHealthCheckResource) Schema(ctx context.Context, req resource.Sche
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the DNSLbHealthCheck. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -127,7 +127,7 @@ func (r *DNSLbHealthCheckResource) Schema(ctx context.Context, req resource.Sche
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the DNSLbHealthCheck will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -137,25 +137,25 @@ func (r *DNSLbHealthCheckResource) Schema(ctx context.Context, req resource.Sche
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -173,44 +173,42 @@ func (r *DNSLbHealthCheckResource) Schema(ctx context.Context, req resource.Sche
 				Attributes: map[string]schema.Attribute{
 					"health_check_port": schema.Int64Attribute{
 						MarkdownDescription: "Health Check Port. Port used for performing health check",
-						Optional: true,
+						Optional:            true,
 					},
 					"health_check_secondary_port": schema.Int64Attribute{
 						MarkdownDescription: "Health Check Secondary Port. Secondary port used for performing health check. If included, both ports must be healthy for the health check to pass",
-						Optional: true,
+						Optional:            true,
 					},
 					"receive": schema.StringAttribute{
 						MarkdownDescription: "Receive String. Regular expression used to match against the response to the health check's request. Mark node up upon receipt of a successful regular expression match. Uses re2 regular expression syntax.",
-						Optional: true,
+						Optional:            true,
 					},
 					"send": schema.StringAttribute{
 						MarkdownDescription: "Send String. HTTP payload to send to the target",
-						Optional: true,
+						Optional:            true,
 					},
 				},
-
 			},
 			"https_health_check": schema.SingleNestedBlock{
 				MarkdownDescription: "HTTP Health Check.",
 				Attributes: map[string]schema.Attribute{
 					"health_check_port": schema.Int64Attribute{
 						MarkdownDescription: "Health Check Port. Port used for performing health check",
-						Optional: true,
+						Optional:            true,
 					},
 					"health_check_secondary_port": schema.Int64Attribute{
 						MarkdownDescription: "Health Check Secondary Port. Secondary port used for performing health check. If included, both ports must be healthy for the health check to pass",
-						Optional: true,
+						Optional:            true,
 					},
 					"receive": schema.StringAttribute{
 						MarkdownDescription: "Receive String. Regular expression used to match against the response to the health check's request. Mark node up upon receipt of a successful regular expression match. Uses re2 regular expression syntax.",
-						Optional: true,
+						Optional:            true,
 					},
 					"send": schema.StringAttribute{
 						MarkdownDescription: "Send String. HTTP payload to send to the target",
-						Optional: true,
+						Optional:            true,
 					},
 				},
-
 			},
 			"icmp_health_check": schema.SingleNestedBlock{
 				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -220,66 +218,63 @@ func (r *DNSLbHealthCheckResource) Schema(ctx context.Context, req resource.Sche
 				Attributes: map[string]schema.Attribute{
 					"health_check_port": schema.Int64Attribute{
 						MarkdownDescription: "Health Check Port. Port used for performing health check",
-						Optional: true,
+						Optional:            true,
 					},
 					"health_check_secondary_port": schema.Int64Attribute{
 						MarkdownDescription: "Health Check Secondary Port. Secondary port used for performing health check. If included, both ports must be healthy for the health check to pass",
-						Optional: true,
+						Optional:            true,
 					},
 					"receive": schema.StringAttribute{
 						MarkdownDescription: "Receive String. Regular expression used to match against the response to the monitor's request. Mark node up upon receipt of a successful regular expression match. Uses re2 regular expression syntax.",
-						Optional: true,
+						Optional:            true,
 					},
 					"send": schema.StringAttribute{
 						MarkdownDescription: "Send String. Send this string to target (default empty. When send and receive are both empty, monitor just tests 3WHS)",
-						Optional: true,
+						Optional:            true,
 					},
 				},
-
 			},
 			"tcp_hex_health_check": schema.SingleNestedBlock{
 				MarkdownDescription: "TCP Hex Health Check.",
 				Attributes: map[string]schema.Attribute{
 					"health_check_port": schema.Int64Attribute{
 						MarkdownDescription: "Health Check Port. Port used for performing health check",
-						Optional: true,
+						Optional:            true,
 					},
 					"health_check_secondary_port": schema.Int64Attribute{
 						MarkdownDescription: "Health Check Secondary Port. Secondary port used for performing health check. If included, both ports must be healthy for the health check to pass",
-						Optional: true,
+						Optional:            true,
 					},
 					"receive": schema.StringAttribute{
 						MarkdownDescription: "Receive Payload. Hex encoded raw bytes expected in the response.",
-						Optional: true,
+						Optional:            true,
 					},
 					"send": schema.StringAttribute{
 						MarkdownDescription: "Send Payload. Hex encoded raw bytes sent in the request. Empty payloads imply a connect-only health check.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
-
 			},
 			"udp_health_check": schema.SingleNestedBlock{
 				MarkdownDescription: "UDP Health Check.",
 				Attributes: map[string]schema.Attribute{
 					"health_check_port": schema.Int64Attribute{
 						MarkdownDescription: "Health Check Port. Port used for performing health check",
-						Optional: true,
+						Optional:            true,
 					},
 					"health_check_secondary_port": schema.Int64Attribute{
 						MarkdownDescription: "Health Check Secondary Port. Secondary port used for performing health check. If included, both ports must be healthy for the health check to pass",
-						Optional: true,
+						Optional:            true,
 					},
 					"receive": schema.StringAttribute{
 						MarkdownDescription: "Receive String. UDP response to be matched. It can be a regex.",
-						Optional: true,
+						Optional:            true,
 					},
 					"send": schema.StringAttribute{
 						MarkdownDescription: "Send String. UDP payload",
-						Optional: true,
+						Optional:            true,
 					},
 				},
-
 			},
 		},
 	}
@@ -514,7 +509,6 @@ func (r *DNSLbHealthCheckResource) Create(ctx context.Context, req resource.Crea
 		createReq.Spec["udp_health_check"] = udp_health_checkMap
 	}
 
-
 	apiResource, err := r.client.CreateDNSLbHealthCheck(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create DNSLbHealthCheck: %s", err))
@@ -526,7 +520,7 @@ func (r *DNSLbHealthCheckResource) Create(ctx context.Context, req resource.Crea
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if blockData, ok := apiResource.Spec["http_health_check"].(map[string]interface{}); ok && (isImport || data.HTTPHealthCheck != nil) {
 		data.HTTPHealthCheck = &DNSLbHealthCheckHTTPHealthCheckModel{
 			HealthCheckPort: func() types.Int64 {
@@ -672,7 +666,6 @@ func (r *DNSLbHealthCheckResource) Create(ctx context.Context, req resource.Crea
 			}(),
 		}
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -762,9 +755,9 @@ func (r *DNSLbHealthCheckResource) Read(ctx context.Context, req resource.ReadRe
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if blockData, ok := apiResource.Spec["http_health_check"].(map[string]interface{}); ok && (isImport || data.HTTPHealthCheck != nil) {
 		data.HTTPHealthCheck = &DNSLbHealthCheckHTTPHealthCheckModel{
@@ -911,7 +904,6 @@ func (r *DNSLbHealthCheckResource) Read(ctx context.Context, req resource.ReadRe
 			}(),
 		}
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -1056,7 +1048,6 @@ func (r *DNSLbHealthCheckResource) Update(ctx context.Context, req resource.Upda
 		}
 		apiResource.Spec["udp_health_check"] = udp_health_checkMap
 	}
-
 
 	updated, err := r.client.UpdateDNSLbHealthCheck(ctx, apiResource)
 	if err != nil {

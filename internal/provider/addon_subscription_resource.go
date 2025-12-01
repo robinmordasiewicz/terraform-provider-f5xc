@@ -51,14 +51,14 @@ type AddonSubscriptionEmptyModel struct {
 
 // AddonSubscriptionAddonServiceModel represents addon_service block
 type AddonSubscriptionAddonServiceModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // AddonSubscriptionNotificationPreferenceModel represents notification_preference block
 type AddonSubscriptionNotificationPreferenceModel struct {
-	Emails *AddonSubscriptionNotificationPreferenceEmailsModel `tfsdk:"emails"`
+	Emails          *AddonSubscriptionNotificationPreferenceEmailsModel          `tfsdk:"emails"`
 	SupportTicketID *AddonSubscriptionNotificationPreferenceSupportTicketIDModel `tfsdk:"support_ticket_id"`
 }
 
@@ -69,21 +69,21 @@ type AddonSubscriptionNotificationPreferenceEmailsModel struct {
 
 // AddonSubscriptionNotificationPreferenceSupportTicketIDModel represents support_ticket_id block
 type AddonSubscriptionNotificationPreferenceSupportTicketIDModel struct {
-	SubscriptionTicketID types.String `tfsdk:"subscription_ticket_id"`
+	SubscriptionTicketID   types.String `tfsdk:"subscription_ticket_id"`
 	UnsubscriptionTicketID types.String `tfsdk:"unsubscription_ticket_id"`
 }
 
 type AddonSubscriptionResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Status types.String `tfsdk:"status"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	AddonService *AddonSubscriptionAddonServiceModel `tfsdk:"addon_service"`
+	Name                   types.String                                  `tfsdk:"name"`
+	Namespace              types.String                                  `tfsdk:"namespace"`
+	Annotations            types.Map                                     `tfsdk:"annotations"`
+	Description            types.String                                  `tfsdk:"description"`
+	Disable                types.Bool                                    `tfsdk:"disable"`
+	Labels                 types.Map                                     `tfsdk:"labels"`
+	ID                     types.String                                  `tfsdk:"id"`
+	Status                 types.String                                  `tfsdk:"status"`
+	Timeouts               timeouts.Value                                `tfsdk:"timeouts"`
+	AddonService           *AddonSubscriptionAddonServiceModel           `tfsdk:"addon_service"`
 	NotificationPreference *AddonSubscriptionNotificationPreferenceModel `tfsdk:"notification_preference"`
 }
 
@@ -98,7 +98,7 @@ func (r *AddonSubscriptionResource) Schema(ctx context.Context, req resource.Sch
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the AddonSubscription. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -108,7 +108,7 @@ func (r *AddonSubscriptionResource) Schema(ctx context.Context, req resource.Sch
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the AddonSubscription will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -118,33 +118,33 @@ func (r *AddonSubscriptionResource) Schema(ctx context.Context, req resource.Sch
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"status": schema.StringAttribute{
 				MarkdownDescription: "Addon Subscription Type. Represents the different states of an addon subscription. - SUBSCRIPTION_PENDING: Subscription Pending Indicates that the subscription is pending enablement. - SUBSCRIPTION_ENABLED: Subscription Enabled Indicates that the subscription is currently enabled and active. - SUBSCRIPTION_DISABLE_PENDING: Subscription Disable Pending Indicates that the addon disable process is pending. - SUBSCRIPTION_DISABLED: Subscription Disabled Indicates that the addon has been disabled. Possible values are `SUBSCRIPTION_PENDING`, `SUBSCRIPTION_ENABLED`, `SUBSCRIPTION_DISABLE_PENDING`, `SUBSCRIPTION_DISABLED`. Defaults to `SUBSCRIPTION_PENDING`.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -162,32 +162,30 @@ func (r *AddonSubscriptionResource) Schema(ctx context.Context, req resource.Sch
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
 						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-						Optional: true,
+						Optional:            true,
 					},
 					"namespace": schema.StringAttribute{
 						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-						Optional: true,
+						Optional:            true,
 					},
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-						Optional: true,
-						Computed: true,
+						Optional:            true,
+						Computed:            true,
 					},
 				},
-
 			},
 			"notification_preference": schema.SingleNestedBlock{
 				MarkdownDescription: "Notification Preference. NotificationPreference preference for receiving addon subscription notifications.",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"emails": schema.SingleNestedBlock{
 						MarkdownDescription: "Addon Subscription Associated Emails. Addon Subscription Emails associated with the Addon Subscription",
 						Attributes: map[string]schema.Attribute{
 							"email_ids": schema.ListAttribute{
 								MarkdownDescription: "Emails. Email ids associated with the Addon Subscription",
-								Optional: true,
-								ElementType: types.StringType,
+								Optional:            true,
+								ElementType:         types.StringType,
 							},
 						},
 					},
@@ -196,16 +194,15 @@ func (r *AddonSubscriptionResource) Schema(ctx context.Context, req resource.Sch
 						Attributes: map[string]schema.Attribute{
 							"subscription_ticket_id": schema.StringAttribute{
 								MarkdownDescription: "Subscription Ticket ID. subscription_ticket_id associated with the Addon Subscription subscription.",
-								Optional: true,
+								Optional:            true,
 							},
 							"unsubscription_ticket_id": schema.StringAttribute{
 								MarkdownDescription: "Unsubscription Ticket ID. unsubscription_ticket_id associated with the Addon Subscription unsubscription.",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 					},
 				},
-
 			},
 		},
 	}
@@ -390,7 +387,6 @@ func (r *AddonSubscriptionResource) Create(ctx context.Context, req resource.Cre
 		createReq.Spec["status"] = data.Status.ValueString()
 	}
 
-
 	apiResource, err := r.client.CreateAddonSubscription(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create AddonSubscription: %s", err))
@@ -402,7 +398,7 @@ func (r *AddonSubscriptionResource) Create(ctx context.Context, req resource.Cre
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if blockData, ok := apiResource.Spec["addon_service"].(map[string]interface{}); ok && (isImport || data.AddonService != nil) {
 		data.AddonService = &AddonSubscriptionAddonServiceModel{
 			Name: func() types.String {
@@ -435,7 +431,6 @@ func (r *AddonSubscriptionResource) Create(ctx context.Context, req resource.Cre
 	} else {
 		data.Status = types.StringNull()
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -525,9 +520,9 @@ func (r *AddonSubscriptionResource) Read(ctx context.Context, req resource.ReadR
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if blockData, ok := apiResource.Spec["addon_service"].(map[string]interface{}); ok && (isImport || data.AddonService != nil) {
 		data.AddonService = &AddonSubscriptionAddonServiceModel{
@@ -561,7 +556,6 @@ func (r *AddonSubscriptionResource) Read(ctx context.Context, req resource.ReadR
 	} else {
 		data.Status = types.StringNull()
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -656,7 +650,6 @@ func (r *AddonSubscriptionResource) Update(ctx context.Context, req resource.Upd
 	if !data.Status.IsNull() && !data.Status.IsUnknown() {
 		apiResource.Spec["status"] = data.Status.ValueString()
 	}
-
 
 	updated, err := r.client.UpdateAddonSubscription(ctx, apiResource)
 	if err != nil {

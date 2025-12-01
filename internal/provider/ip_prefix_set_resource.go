@@ -52,18 +52,18 @@ type IPPrefixSetEmptyModel struct {
 // IPPrefixSetIPV4PrefixesModel represents ipv4_prefixes block
 type IPPrefixSetIPV4PrefixesModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
-	IPV4Prefix types.String `tfsdk:"ipv4_prefix"`
+	IPV4Prefix      types.String `tfsdk:"ipv4_prefix"`
 }
 
 type IPPrefixSetResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Name         types.String                   `tfsdk:"name"`
+	Namespace    types.String                   `tfsdk:"namespace"`
+	Annotations  types.Map                      `tfsdk:"annotations"`
+	Description  types.String                   `tfsdk:"description"`
+	Disable      types.Bool                     `tfsdk:"disable"`
+	Labels       types.Map                      `tfsdk:"labels"`
+	ID           types.String                   `tfsdk:"id"`
+	Timeouts     timeouts.Value                 `tfsdk:"timeouts"`
 	IPV4Prefixes []IPPrefixSetIPV4PrefixesModel `tfsdk:"ipv4_prefixes"`
 }
 
@@ -78,7 +78,7 @@ func (r *IPPrefixSetResource) Schema(ctx context.Context, req resource.SchemaReq
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the IPPrefixSet. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -88,7 +88,7 @@ func (r *IPPrefixSetResource) Schema(ctx context.Context, req resource.SchemaReq
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the IPPrefixSet will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -98,25 +98,25 @@ func (r *IPPrefixSetResource) Schema(ctx context.Context, req resource.SchemaReq
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -135,14 +135,13 @@ func (r *IPPrefixSetResource) Schema(ctx context.Context, req resource.SchemaReq
 					Attributes: map[string]schema.Attribute{
 						"description_spec": schema.StringAttribute{
 							MarkdownDescription: "Description.",
-							Optional: true,
+							Optional:            true,
 						},
 						"ipv4_prefix": schema.StringAttribute{
 							MarkdownDescription: "IPv4 Prefix.",
-							Optional: true,
+							Optional:            true,
 						},
 					},
-
 				},
 			},
 		},
@@ -308,7 +307,6 @@ func (r *IPPrefixSetResource) Create(ctx context.Context, req resource.CreateReq
 		createReq.Spec["ipv4_prefixes"] = ipv4_prefixesList
 	}
 
-
 	apiResource, err := r.client.CreateIPPrefixSet(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create IPPrefixSet: %s", err))
@@ -320,7 +318,7 @@ func (r *IPPrefixSetResource) Create(ctx context.Context, req resource.CreateReq
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["ipv4_prefixes"].([]interface{}); ok && len(listData) > 0 {
 		var ipv4_prefixesList []IPPrefixSetIPV4PrefixesModel
 		for listIdx, item := range listData {
@@ -344,7 +342,6 @@ func (r *IPPrefixSetResource) Create(ctx context.Context, req resource.CreateReq
 		}
 		data.IPV4Prefixes = ipv4_prefixesList
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -434,9 +431,9 @@ func (r *IPPrefixSetResource) Read(ctx context.Context, req resource.ReadRequest
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if listData, ok := apiResource.Spec["ipv4_prefixes"].([]interface{}); ok && len(listData) > 0 {
 		var ipv4_prefixesList []IPPrefixSetIPV4PrefixesModel
@@ -461,7 +458,6 @@ func (r *IPPrefixSetResource) Read(ctx context.Context, req resource.ReadRequest
 		}
 		data.IPV4Prefixes = ipv4_prefixesList
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -536,7 +532,6 @@ func (r *IPPrefixSetResource) Update(ctx context.Context, req resource.UpdateReq
 		}
 		apiResource.Spec["ipv4_prefixes"] = ipv4_prefixesList
 	}
-
 
 	updated, err := r.client.UpdateIPPrefixSet(ctx, apiResource)
 	if err != nil {

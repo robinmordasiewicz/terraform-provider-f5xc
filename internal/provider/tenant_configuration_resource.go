@@ -61,28 +61,28 @@ type TenantConfigurationBruteForceDetectionSettingsModel struct {
 
 // TenantConfigurationPasswordPolicyModel represents password_policy block
 type TenantConfigurationPasswordPolicyModel struct {
-	Digits types.Int64 `tfsdk:"digits"`
-	ExpirePassword types.Int64 `tfsdk:"expire_password"`
+	Digits              types.Int64 `tfsdk:"digits"`
+	ExpirePassword      types.Int64 `tfsdk:"expire_password"`
 	LowercaseCharacters types.Int64 `tfsdk:"lowercase_characters"`
-	MinimumLength types.Int64 `tfsdk:"minimum_length"`
-	NotRecentlyUsed types.Int64 `tfsdk:"not_recently_used"`
-	NotUsername types.Bool `tfsdk:"not_username"`
-	SpecialCharacters types.Int64 `tfsdk:"special_characters"`
+	MinimumLength       types.Int64 `tfsdk:"minimum_length"`
+	NotRecentlyUsed     types.Int64 `tfsdk:"not_recently_used"`
+	NotUsername         types.Bool  `tfsdk:"not_username"`
+	SpecialCharacters   types.Int64 `tfsdk:"special_characters"`
 	UppercaseCharacters types.Int64 `tfsdk:"uppercase_characters"`
 }
 
 type TenantConfigurationResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	BasicConfiguration *TenantConfigurationBasicConfigurationModel `tfsdk:"basic_configuration"`
+	Name                        types.String                                         `tfsdk:"name"`
+	Namespace                   types.String                                         `tfsdk:"namespace"`
+	Annotations                 types.Map                                            `tfsdk:"annotations"`
+	Description                 types.String                                         `tfsdk:"description"`
+	Disable                     types.Bool                                           `tfsdk:"disable"`
+	Labels                      types.Map                                            `tfsdk:"labels"`
+	ID                          types.String                                         `tfsdk:"id"`
+	Timeouts                    timeouts.Value                                       `tfsdk:"timeouts"`
+	BasicConfiguration          *TenantConfigurationBasicConfigurationModel          `tfsdk:"basic_configuration"`
 	BruteForceDetectionSettings *TenantConfigurationBruteForceDetectionSettingsModel `tfsdk:"brute_force_detection_settings"`
-	PasswordPolicy *TenantConfigurationPasswordPolicyModel `tfsdk:"password_policy"`
+	PasswordPolicy              *TenantConfigurationPasswordPolicyModel              `tfsdk:"password_policy"`
 }
 
 func (r *TenantConfigurationResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -96,7 +96,7 @@ func (r *TenantConfigurationResource) Schema(ctx context.Context, req resource.S
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the TenantConfiguration. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -106,7 +106,7 @@ func (r *TenantConfigurationResource) Schema(ctx context.Context, req resource.S
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the TenantConfiguration will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -116,25 +116,25 @@ func (r *TenantConfigurationResource) Schema(ctx context.Context, req resource.S
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -152,58 +152,55 @@ func (r *TenantConfigurationResource) Schema(ctx context.Context, req resource.S
 				Attributes: map[string]schema.Attribute{
 					"display_name": schema.StringAttribute{
 						MarkdownDescription: "Display Name. Tenant display name in the login screen",
-						Optional: true,
+						Optional:            true,
 					},
 				},
-
 			},
 			"brute_force_detection_settings": schema.SingleNestedBlock{
 				MarkdownDescription: "BruteForceDetectionSettings.",
 				Attributes: map[string]schema.Attribute{
 					"max_login_failures": schema.Int64Attribute{
 						MarkdownDescription: "Max Login Failures. How many failures before wait is triggered. When login failure count is hit, user will be temporarily locked for a max duration of 15 minutes.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
-
 			},
 			"password_policy": schema.SingleNestedBlock{
 				MarkdownDescription: "PasswordPolicy.",
 				Attributes: map[string]schema.Attribute{
 					"digits": schema.Int64Attribute{
 						MarkdownDescription: "Min Number Of Digits. The number of digits required to be in the password string.",
-						Optional: true,
+						Optional:            true,
 					},
 					"expire_password": schema.Int64Attribute{
 						MarkdownDescription: "Expire Password. The number of days for which the password is valid. After the number of days has expired, the user is required to change their password.",
-						Optional: true,
+						Optional:            true,
 					},
 					"lowercase_characters": schema.Int64Attribute{
 						MarkdownDescription: "Min Number Of Lowercase Characters. The number of lower case letters required to be in the password string.",
-						Optional: true,
+						Optional:            true,
 					},
 					"minimum_length": schema.Int64Attribute{
 						MarkdownDescription: "Minimum Length. Minimum length of password.",
-						Optional: true,
+						Optional:            true,
 					},
 					"not_recently_used": schema.Int64Attribute{
 						MarkdownDescription: "Not Recently Used. This policy is used to restrict user from using previously used passwords. Number that's set determines number of last passwords which user cannot use as new password.",
-						Optional: true,
+						Optional:            true,
 					},
 					"not_username": schema.BoolAttribute{
 						MarkdownDescription: "Not Username. When set, the password is not allowed to be the same as the username.",
-						Optional: true,
+						Optional:            true,
 					},
 					"special_characters": schema.Int64Attribute{
 						MarkdownDescription: "Min Number Of Special Characters. The number of special characters like '?!#%$' required to be in the password string.",
-						Optional: true,
+						Optional:            true,
 					},
 					"uppercase_characters": schema.Int64Attribute{
 						MarkdownDescription: "Min Number Of Uppercase Characters. The number of upper case letters required to be in the password string.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
-
 			},
 		},
 	}
@@ -396,7 +393,6 @@ func (r *TenantConfigurationResource) Create(ctx context.Context, req resource.C
 		createReq.Spec["password_policy"] = password_policyMap
 	}
 
-
 	apiResource, err := r.client.CreateTenantConfiguration(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create TenantConfiguration: %s", err))
@@ -408,7 +404,7 @@ func (r *TenantConfigurationResource) Create(ctx context.Context, req resource.C
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if blockData, ok := apiResource.Spec["basic_configuration"].(map[string]interface{}); ok && (isImport || data.BasicConfiguration != nil) {
 		data.BasicConfiguration = &TenantConfigurationBasicConfigurationModel{
 			DisplayName: func() types.String {
@@ -486,7 +482,6 @@ func (r *TenantConfigurationResource) Create(ctx context.Context, req resource.C
 			}(),
 		}
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -576,9 +571,9 @@ func (r *TenantConfigurationResource) Read(ctx context.Context, req resource.Rea
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if blockData, ok := apiResource.Spec["basic_configuration"].(map[string]interface{}); ok && (isImport || data.BasicConfiguration != nil) {
 		data.BasicConfiguration = &TenantConfigurationBasicConfigurationModel{
@@ -657,7 +652,6 @@ func (r *TenantConfigurationResource) Read(ctx context.Context, req resource.Rea
 			}(),
 		}
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -760,7 +754,6 @@ func (r *TenantConfigurationResource) Update(ctx context.Context, req resource.U
 		}
 		apiResource.Spec["password_policy"] = password_policyMap
 	}
-
 
 	updated, err := r.client.UpdateTenantConfiguration(ctx, apiResource)
 	if err != nil {

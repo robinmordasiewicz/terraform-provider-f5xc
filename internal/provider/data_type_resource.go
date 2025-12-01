@@ -52,16 +52,16 @@ type DataTypeEmptyModel struct {
 
 // DataTypeRulesModel represents rules block
 type DataTypeRulesModel struct {
-	KeyPattern *DataTypeRulesKeyPatternModel `tfsdk:"key_pattern"`
+	KeyPattern      *DataTypeRulesKeyPatternModel      `tfsdk:"key_pattern"`
 	KeyValuePattern *DataTypeRulesKeyValuePatternModel `tfsdk:"key_value_pattern"`
-	ValuePattern *DataTypeRulesValuePatternModel `tfsdk:"value_pattern"`
+	ValuePattern    *DataTypeRulesValuePatternModel    `tfsdk:"value_pattern"`
 }
 
 // DataTypeRulesKeyPatternModel represents key_pattern block
 type DataTypeRulesKeyPatternModel struct {
-	RegexValue types.String `tfsdk:"regex_value"`
-	SubstringValue types.String `tfsdk:"substring_value"`
-	ExactValues *DataTypeRulesKeyPatternExactValuesModel `tfsdk:"exact_values"`
+	RegexValue     types.String                             `tfsdk:"regex_value"`
+	SubstringValue types.String                             `tfsdk:"substring_value"`
+	ExactValues    *DataTypeRulesKeyPatternExactValuesModel `tfsdk:"exact_values"`
 }
 
 // DataTypeRulesKeyPatternExactValuesModel represents exact_values block
@@ -71,15 +71,15 @@ type DataTypeRulesKeyPatternExactValuesModel struct {
 
 // DataTypeRulesKeyValuePatternModel represents key_value_pattern block
 type DataTypeRulesKeyValuePatternModel struct {
-	KeyPattern *DataTypeRulesKeyValuePatternKeyPatternModel `tfsdk:"key_pattern"`
+	KeyPattern   *DataTypeRulesKeyValuePatternKeyPatternModel   `tfsdk:"key_pattern"`
 	ValuePattern *DataTypeRulesKeyValuePatternValuePatternModel `tfsdk:"value_pattern"`
 }
 
 // DataTypeRulesKeyValuePatternKeyPatternModel represents key_pattern block
 type DataTypeRulesKeyValuePatternKeyPatternModel struct {
-	RegexValue types.String `tfsdk:"regex_value"`
-	SubstringValue types.String `tfsdk:"substring_value"`
-	ExactValues *DataTypeRulesKeyValuePatternKeyPatternExactValuesModel `tfsdk:"exact_values"`
+	RegexValue     types.String                                            `tfsdk:"regex_value"`
+	SubstringValue types.String                                            `tfsdk:"substring_value"`
+	ExactValues    *DataTypeRulesKeyValuePatternKeyPatternExactValuesModel `tfsdk:"exact_values"`
 }
 
 // DataTypeRulesKeyValuePatternKeyPatternExactValuesModel represents exact_values block
@@ -89,9 +89,9 @@ type DataTypeRulesKeyValuePatternKeyPatternExactValuesModel struct {
 
 // DataTypeRulesKeyValuePatternValuePatternModel represents value_pattern block
 type DataTypeRulesKeyValuePatternValuePatternModel struct {
-	RegexValue types.String `tfsdk:"regex_value"`
-	SubstringValue types.String `tfsdk:"substring_value"`
-	ExactValues *DataTypeRulesKeyValuePatternValuePatternExactValuesModel `tfsdk:"exact_values"`
+	RegexValue     types.String                                              `tfsdk:"regex_value"`
+	SubstringValue types.String                                              `tfsdk:"substring_value"`
+	ExactValues    *DataTypeRulesKeyValuePatternValuePatternExactValuesModel `tfsdk:"exact_values"`
 }
 
 // DataTypeRulesKeyValuePatternValuePatternExactValuesModel represents exact_values block
@@ -101,9 +101,9 @@ type DataTypeRulesKeyValuePatternValuePatternExactValuesModel struct {
 
 // DataTypeRulesValuePatternModel represents value_pattern block
 type DataTypeRulesValuePatternModel struct {
-	RegexValue types.String `tfsdk:"regex_value"`
-	SubstringValue types.String `tfsdk:"substring_value"`
-	ExactValues *DataTypeRulesValuePatternExactValuesModel `tfsdk:"exact_values"`
+	RegexValue     types.String                               `tfsdk:"regex_value"`
+	SubstringValue types.String                               `tfsdk:"substring_value"`
+	ExactValues    *DataTypeRulesValuePatternExactValuesModel `tfsdk:"exact_values"`
 }
 
 // DataTypeRulesValuePatternExactValuesModel represents exact_values block
@@ -112,18 +112,18 @@ type DataTypeRulesValuePatternExactValuesModel struct {
 }
 
 type DataTypeResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Compliances types.List `tfsdk:"compliances"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	IsPii types.Bool `tfsdk:"is_pii"`
-	IsSensitiveData types.Bool `tfsdk:"is_sensitive_data"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	Rules []DataTypeRulesModel `tfsdk:"rules"`
+	Name            types.String         `tfsdk:"name"`
+	Namespace       types.String         `tfsdk:"namespace"`
+	Annotations     types.Map            `tfsdk:"annotations"`
+	Compliances     types.List           `tfsdk:"compliances"`
+	Description     types.String         `tfsdk:"description"`
+	Disable         types.Bool           `tfsdk:"disable"`
+	Labels          types.Map            `tfsdk:"labels"`
+	ID              types.String         `tfsdk:"id"`
+	IsPii           types.Bool           `tfsdk:"is_pii"`
+	IsSensitiveData types.Bool           `tfsdk:"is_sensitive_data"`
+	Timeouts        timeouts.Value       `tfsdk:"timeouts"`
+	Rules           []DataTypeRulesModel `tfsdk:"rules"`
 }
 
 func (r *DataTypeResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -137,7 +137,7 @@ func (r *DataTypeResource) Schema(ctx context.Context, req resource.SchemaReques
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the DataType. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -147,7 +147,7 @@ func (r *DataTypeResource) Schema(ctx context.Context, req resource.SchemaReques
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the DataType will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -157,46 +157,46 @@ func (r *DataTypeResource) Schema(ctx context.Context, req resource.SchemaReques
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"compliances": schema.ListAttribute{
 				MarkdownDescription: "Relevant Compliances. Choose applicable compliance frameworks such as GDPR, PCI/DSS, or CCPA to ensure the platform identifies whether vulnerabilities in API endpoints handling this data type may cause a compliance breach. Possible values are `GDPR`, `CCPA`, `PIPEDA`, `LGPD`, `DPA_UK`, `PDPA_SG`, `APPI`, `HIPAA`, `CPRA_2023`, `CPA_CO`, `SOC2`, `PCI_DSS`, `ISO_IEC_27001`, `ISO_IEC_27701`, `EPRIVACY_DIRECTIVE`, `GLBA`, `SOX`.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"is_pii": schema.BoolAttribute{
 				MarkdownDescription: "Mark as PII. Select this option to classify the custom data type as personally identifiable information (PII)",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.Bool{
 					boolplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"is_sensitive_data": schema.BoolAttribute{
 				MarkdownDescription: "Mark as Sensitive Data. Select this option to classify the custom data type as sensitive, enabling detection of API vulnerabilities related to this data type.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.Bool{
 					boolplanmodifier.UseStateForUnknown(),
 				},
@@ -212,19 +212,18 @@ func (r *DataTypeResource) Schema(ctx context.Context, req resource.SchemaReques
 			"rules": schema.ListNestedBlock{
 				MarkdownDescription: "Data Type Rules. Configure key/value or regex match rules to enable the platform to detect this custom data type in the API request or response",
 				NestedObject: schema.NestedBlockObject{
-					Attributes: map[string]schema.Attribute{
-					},
+					Attributes: map[string]schema.Attribute{},
 					Blocks: map[string]schema.Block{
 						"key_pattern": schema.SingleNestedBlock{
 							MarkdownDescription: "Rule Pattern Type. test",
 							Attributes: map[string]schema.Attribute{
 								"regex_value": schema.StringAttribute{
 									MarkdownDescription: "Regex Value. Search for values matching this regular expression",
-									Optional: true,
+									Optional:            true,
 								},
 								"substring_value": schema.StringAttribute{
 									MarkdownDescription: "Substring Search. Search for values that include this substring",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
@@ -233,8 +232,8 @@ func (r *DataTypeResource) Schema(ctx context.Context, req resource.SchemaReques
 									Attributes: map[string]schema.Attribute{
 										"exact_values": schema.ListAttribute{
 											MarkdownDescription: "Exact Values. List of exact values to match.",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 									},
 								},
@@ -242,19 +241,18 @@ func (r *DataTypeResource) Schema(ctx context.Context, req resource.SchemaReques
 						},
 						"key_value_pattern": schema.SingleNestedBlock{
 							MarkdownDescription: "Key & Value Pattern. Search for specific key & value patterns in the specified sections.",
-							Attributes: map[string]schema.Attribute{
-							},
+							Attributes:          map[string]schema.Attribute{},
 							Blocks: map[string]schema.Block{
 								"key_pattern": schema.SingleNestedBlock{
 									MarkdownDescription: "Rule Pattern Type. test",
 									Attributes: map[string]schema.Attribute{
 										"regex_value": schema.StringAttribute{
 											MarkdownDescription: "Regex Value. Search for values matching this regular expression",
-											Optional: true,
+											Optional:            true,
 										},
 										"substring_value": schema.StringAttribute{
 											MarkdownDescription: "Substring Search. Search for values that include this substring",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -263,8 +261,8 @@ func (r *DataTypeResource) Schema(ctx context.Context, req resource.SchemaReques
 											Attributes: map[string]schema.Attribute{
 												"exact_values": schema.ListAttribute{
 													MarkdownDescription: "Exact Values. List of exact values to match.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 										},
@@ -275,11 +273,11 @@ func (r *DataTypeResource) Schema(ctx context.Context, req resource.SchemaReques
 									Attributes: map[string]schema.Attribute{
 										"regex_value": schema.StringAttribute{
 											MarkdownDescription: "Regex Value. Search for values matching this regular expression",
-											Optional: true,
+											Optional:            true,
 										},
 										"substring_value": schema.StringAttribute{
 											MarkdownDescription: "Substring Search. Search for values that include this substring",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -288,8 +286,8 @@ func (r *DataTypeResource) Schema(ctx context.Context, req resource.SchemaReques
 											Attributes: map[string]schema.Attribute{
 												"exact_values": schema.ListAttribute{
 													MarkdownDescription: "Exact Values. List of exact values to match.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 										},
@@ -302,11 +300,11 @@ func (r *DataTypeResource) Schema(ctx context.Context, req resource.SchemaReques
 							Attributes: map[string]schema.Attribute{
 								"regex_value": schema.StringAttribute{
 									MarkdownDescription: "Regex Value. Search for values matching this regular expression",
-									Optional: true,
+									Optional:            true,
 								},
 								"substring_value": schema.StringAttribute{
 									MarkdownDescription: "Substring Search. Search for values that include this substring",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
@@ -315,15 +313,14 @@ func (r *DataTypeResource) Schema(ctx context.Context, req resource.SchemaReques
 									Attributes: map[string]schema.Attribute{
 										"exact_values": schema.ListAttribute{
 											MarkdownDescription: "Exact Values. List of exact values to match.",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 									},
 								},
 							},
 						},
 					},
-
 				},
 			},
 		},
@@ -562,7 +559,6 @@ func (r *DataTypeResource) Create(ctx context.Context, req resource.CreateReques
 		createReq.Spec["is_sensitive_data"] = data.IsSensitiveData.ValueBool()
 	}
 
-
 	apiResource, err := r.client.CreateDataType(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create DataType: %s", err))
@@ -574,7 +570,7 @@ func (r *DataTypeResource) Create(ctx context.Context, req resource.CreateReques
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if v, ok := apiResource.Spec["compliances"].([]interface{}); ok && len(v) > 0 {
 		var compliancesList []string
 		for _, item := range v {
@@ -617,8 +613,7 @@ func (r *DataTypeResource) Create(ctx context.Context, req resource.CreateReques
 					}(),
 					KeyValuePattern: func() *DataTypeRulesKeyValuePatternModel {
 						if _, ok := itemMap["key_value_pattern"].(map[string]interface{}); ok {
-							return &DataTypeRulesKeyValuePatternModel{
-							}
+							return &DataTypeRulesKeyValuePatternModel{}
 						}
 						return nil
 					}(),
@@ -668,7 +663,6 @@ func (r *DataTypeResource) Create(ctx context.Context, req resource.CreateReques
 			data.IsSensitiveData = types.BoolNull()
 		}
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -758,9 +752,9 @@ func (r *DataTypeResource) Read(ctx context.Context, req resource.ReadRequest, r
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if v, ok := apiResource.Spec["compliances"].([]interface{}); ok && len(v) > 0 {
 		var compliancesList []string
@@ -804,8 +798,7 @@ func (r *DataTypeResource) Read(ctx context.Context, req resource.ReadRequest, r
 					}(),
 					KeyValuePattern: func() *DataTypeRulesKeyValuePatternModel {
 						if _, ok := itemMap["key_value_pattern"].(map[string]interface{}); ok {
-							return &DataTypeRulesKeyValuePatternModel{
-							}
+							return &DataTypeRulesKeyValuePatternModel{}
 						}
 						return nil
 					}(),
@@ -855,7 +848,6 @@ func (r *DataTypeResource) Read(ctx context.Context, req resource.ReadRequest, r
 			data.IsSensitiveData = types.BoolNull()
 		}
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -1003,7 +995,6 @@ func (r *DataTypeResource) Update(ctx context.Context, req resource.UpdateReques
 	if !data.IsSensitiveData.IsNull() && !data.IsSensitiveData.IsUnknown() {
 		apiResource.Spec["is_sensitive_data"] = data.IsSensitiveData.ValueBool()
 	}
-
 
 	updated, err := r.client.UpdateDataType(ctx, apiResource)
 	if err != nil {

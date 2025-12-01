@@ -61,18 +61,18 @@ type SecretPolicyRuleClientSelectorModel struct {
 }
 
 type SecretPolicyRuleResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Action types.String `tfsdk:"action"`
-	ClientName types.String `tfsdk:"client_name"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Name              types.String                            `tfsdk:"name"`
+	Namespace         types.String                            `tfsdk:"namespace"`
+	Annotations       types.Map                               `tfsdk:"annotations"`
+	Description       types.String                            `tfsdk:"description"`
+	Disable           types.Bool                              `tfsdk:"disable"`
+	Labels            types.Map                               `tfsdk:"labels"`
+	ID                types.String                            `tfsdk:"id"`
+	Action            types.String                            `tfsdk:"action"`
+	ClientName        types.String                            `tfsdk:"client_name"`
+	Timeouts          timeouts.Value                          `tfsdk:"timeouts"`
 	ClientNameMatcher *SecretPolicyRuleClientNameMatcherModel `tfsdk:"client_name_matcher"`
-	ClientSelector *SecretPolicyRuleClientSelectorModel `tfsdk:"client_selector"`
+	ClientSelector    *SecretPolicyRuleClientSelectorModel    `tfsdk:"client_selector"`
 }
 
 func (r *SecretPolicyRuleResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -86,7 +86,7 @@ func (r *SecretPolicyRuleResource) Schema(ctx context.Context, req resource.Sche
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the SecretPolicyRule. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -96,7 +96,7 @@ func (r *SecretPolicyRuleResource) Schema(ctx context.Context, req resource.Sche
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the SecretPolicyRule will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -106,41 +106,41 @@ func (r *SecretPolicyRuleResource) Schema(ctx context.Context, req resource.Sche
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"action": schema.StringAttribute{
 				MarkdownDescription: "Rule Action. The rule action determines the disposition of the input request API. If a policy matches a rule with an ALLOW action, the processing of the request proceeds forward. If it matches a rule with a DENY action, the processing of the request is terminated and an appropriate message/code returned to the originator. If it matches a rule with a NEXT_POLICY_SET action, evaluation of the current policy set terminates and evaluation of the next policy set in the chain begins. - DENY: DENY Deny the request. - ALLOW: ALLOW Allow the request to proceed. - NEXT_POLICY_SET: NEXT_POLICY_SET Terminate evaluation of the current policy set and begin evaluating the next policy set in the chain. Note that the evaluation of any remaining policies in the current policy set is skipped. - NEXT_POLICY: NEXT_POLICY Terminate evaluation of the current policy and begin evaluating the next policy in the policy set. Note that the evaluation of any remaining rules in the current policy is skipped. - LAST_POLICY: LAST_POLICY Terminate evaluation of the current policy and begin evaluating the last policy in the policy set. Note that the evaluation of any remaining rules in the current policy is skipped. - GOTO_POLICY: GOTO_POLICY Terminate evaluation of the current policy and begin evaluating a specific policy in the policy set. The policy is specified using the goto_policy field in the rule and must be after the current policy in the policy set. Possible values are `DENY`, `ALLOW`, `NEXT_POLICY`. Defaults to `DENY`.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"client_name": schema.StringAttribute{
 				MarkdownDescription: "[OneOf: client_name, client_name_matcher, client_selector] Client Name. The name of the client trying to access the secret. Name of the client will be extracted from client TLS certificate. This predicate evaluates to true if client name matches the configured name",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -158,27 +158,25 @@ func (r *SecretPolicyRuleResource) Schema(ctx context.Context, req resource.Sche
 				Attributes: map[string]schema.Attribute{
 					"exact_values": schema.ListAttribute{
 						MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
-						Optional: true,
-						ElementType: types.StringType,
+						Optional:            true,
+						ElementType:         types.StringType,
 					},
 					"regex_values": schema.ListAttribute{
 						MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
-						Optional: true,
-						ElementType: types.StringType,
+						Optional:            true,
+						ElementType:         types.StringType,
 					},
 				},
-
 			},
 			"client_selector": schema.SingleNestedBlock{
 				MarkdownDescription: "Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE",
 				Attributes: map[string]schema.Attribute{
 					"expressions": schema.ListAttribute{
 						MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections.",
-						Optional: true,
-						ElementType: types.StringType,
+						Optional:            true,
+						ElementType:         types.StringType,
 					},
 				},
-
 			},
 		},
 	}
@@ -364,7 +362,6 @@ func (r *SecretPolicyRuleResource) Create(ctx context.Context, req resource.Crea
 		createReq.Spec["client_name"] = data.ClientName.ValueString()
 	}
 
-
 	apiResource, err := r.client.CreateSecretPolicyRule(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create SecretPolicyRule: %s", err))
@@ -376,7 +373,7 @@ func (r *SecretPolicyRuleResource) Create(ctx context.Context, req resource.Crea
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if blockData, ok := apiResource.Spec["client_name_matcher"].(map[string]interface{}); ok && (isImport || data.ClientNameMatcher != nil) {
 		data.ClientNameMatcher = &SecretPolicyRuleClientNameMatcherModel{
 			ExactValues: func() types.List {
@@ -434,7 +431,6 @@ func (r *SecretPolicyRuleResource) Create(ctx context.Context, req resource.Crea
 	} else {
 		data.ClientName = types.StringNull()
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -524,9 +520,9 @@ func (r *SecretPolicyRuleResource) Read(ctx context.Context, req resource.ReadRe
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if blockData, ok := apiResource.Spec["client_name_matcher"].(map[string]interface{}); ok && (isImport || data.ClientNameMatcher != nil) {
 		data.ClientNameMatcher = &SecretPolicyRuleClientNameMatcherModel{
@@ -585,7 +581,6 @@ func (r *SecretPolicyRuleResource) Read(ctx context.Context, req resource.ReadRe
 	} else {
 		data.ClientName = types.StringNull()
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -681,7 +676,6 @@ func (r *SecretPolicyRuleResource) Update(ctx context.Context, req resource.Upda
 	if !data.ClientName.IsNull() && !data.ClientName.IsUnknown() {
 		apiResource.Spec["client_name"] = data.ClientName.ValueString()
 	}
-
 
 	updated, err := r.client.UpdateSecretPolicyRule(ctx, apiResource)
 	if err != nil {

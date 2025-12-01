@@ -58,9 +58,9 @@ type TCPLoadBalancerActiveServicePoliciesModel struct {
 
 // TCPLoadBalancerActiveServicePoliciesPoliciesModel represents policies block
 type TCPLoadBalancerActiveServicePoliciesPoliciesModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // TCPLoadBalancerAdvertiseCustomModel represents advertise_custom block
@@ -70,15 +70,15 @@ type TCPLoadBalancerAdvertiseCustomModel struct {
 
 // TCPLoadBalancerAdvertiseCustomAdvertiseWhereModel represents advertise_where block
 type TCPLoadBalancerAdvertiseCustomAdvertiseWhereModel struct {
-	Port types.Int64 `tfsdk:"port"`
-	PortRanges types.String `tfsdk:"port_ranges"`
-	AdvertiseOnPublic *TCPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicModel `tfsdk:"advertise_on_public"`
-	Site *TCPLoadBalancerAdvertiseCustomAdvertiseWhereSiteModel `tfsdk:"site"`
-	UseDefaultPort *TCPLoadBalancerEmptyModel `tfsdk:"use_default_port"`
-	VirtualNetwork *TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModel `tfsdk:"virtual_network"`
-	VirtualSite *TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteModel `tfsdk:"virtual_site"`
+	Port               types.Int64                                                          `tfsdk:"port"`
+	PortRanges         types.String                                                         `tfsdk:"port_ranges"`
+	AdvertiseOnPublic  *TCPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicModel  `tfsdk:"advertise_on_public"`
+	Site               *TCPLoadBalancerAdvertiseCustomAdvertiseWhereSiteModel               `tfsdk:"site"`
+	UseDefaultPort     *TCPLoadBalancerEmptyModel                                           `tfsdk:"use_default_port"`
+	VirtualNetwork     *TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModel     `tfsdk:"virtual_network"`
+	VirtualSite        *TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteModel        `tfsdk:"virtual_site"`
 	VirtualSiteWithVip *TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipModel `tfsdk:"virtual_site_with_vip"`
-	Vk8sService *TCPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceModel `tfsdk:"vk8s_service"`
+	Vk8sService        *TCPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceModel        `tfsdk:"vk8s_service"`
 }
 
 // TCPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicModel represents advertise_on_public block
@@ -88,86 +88,86 @@ type TCPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicModel struct {
 
 // TCPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicPublicIPModel represents public_ip block
 type TCPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicPublicIPModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // TCPLoadBalancerAdvertiseCustomAdvertiseWhereSiteModel represents site block
 type TCPLoadBalancerAdvertiseCustomAdvertiseWhereSiteModel struct {
-	IP types.String `tfsdk:"ip"`
-	Network types.String `tfsdk:"network"`
-	Site *TCPLoadBalancerAdvertiseCustomAdvertiseWhereSiteSiteModel `tfsdk:"site"`
+	IP      types.String                                               `tfsdk:"ip"`
+	Network types.String                                               `tfsdk:"network"`
+	Site    *TCPLoadBalancerAdvertiseCustomAdvertiseWhereSiteSiteModel `tfsdk:"site"`
 }
 
 // TCPLoadBalancerAdvertiseCustomAdvertiseWhereSiteSiteModel represents site block
 type TCPLoadBalancerAdvertiseCustomAdvertiseWhereSiteSiteModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModel represents virtual_network block
 type TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModel struct {
-	SpecificV6Vip types.String `tfsdk:"specific_v6_vip"`
-	SpecificVip types.String `tfsdk:"specific_vip"`
-	DefaultV6Vip *TCPLoadBalancerEmptyModel `tfsdk:"default_v6_vip"`
-	DefaultVip *TCPLoadBalancerEmptyModel `tfsdk:"default_vip"`
+	SpecificV6Vip  types.String                                                                   `tfsdk:"specific_v6_vip"`
+	SpecificVip    types.String                                                                   `tfsdk:"specific_vip"`
+	DefaultV6Vip   *TCPLoadBalancerEmptyModel                                                     `tfsdk:"default_v6_vip"`
+	DefaultVip     *TCPLoadBalancerEmptyModel                                                     `tfsdk:"default_vip"`
 	VirtualNetwork *TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkVirtualNetworkModel `tfsdk:"virtual_network"`
 }
 
 // TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkVirtualNetworkModel represents virtual_network block
 type TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkVirtualNetworkModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteModel represents virtual_site block
 type TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteModel struct {
-	Network types.String `tfsdk:"network"`
+	Network     types.String                                                             `tfsdk:"network"`
 	VirtualSite *TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteVirtualSiteModel `tfsdk:"virtual_site"`
 }
 
 // TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteVirtualSiteModel represents virtual_site block
 type TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteVirtualSiteModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipModel represents virtual_site_with_vip block
 type TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipModel struct {
-	IP types.String `tfsdk:"ip"`
-	Network types.String `tfsdk:"network"`
+	IP          types.String                                                                    `tfsdk:"ip"`
+	Network     types.String                                                                    `tfsdk:"network"`
 	VirtualSite *TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipVirtualSiteModel `tfsdk:"virtual_site"`
 }
 
 // TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipVirtualSiteModel represents virtual_site block
 type TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipVirtualSiteModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // TCPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceModel represents vk8s_service block
 type TCPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceModel struct {
-	Site *TCPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceSiteModel `tfsdk:"site"`
+	Site        *TCPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceSiteModel        `tfsdk:"site"`
 	VirtualSite *TCPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceVirtualSiteModel `tfsdk:"virtual_site"`
 }
 
 // TCPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceSiteModel represents site block
 type TCPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceSiteModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // TCPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceVirtualSiteModel represents virtual_site block
 type TCPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceVirtualSiteModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // TCPLoadBalancerAdvertiseOnPublicModel represents advertise_on_public block
@@ -177,32 +177,32 @@ type TCPLoadBalancerAdvertiseOnPublicModel struct {
 
 // TCPLoadBalancerAdvertiseOnPublicPublicIPModel represents public_ip block
 type TCPLoadBalancerAdvertiseOnPublicPublicIPModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // TCPLoadBalancerOriginPoolsWeightsModel represents origin_pools_weights block
 type TCPLoadBalancerOriginPoolsWeightsModel struct {
-	Priority types.Int64 `tfsdk:"priority"`
-	Weight types.Int64 `tfsdk:"weight"`
-	Cluster *TCPLoadBalancerOriginPoolsWeightsClusterModel `tfsdk:"cluster"`
-	EndpointSubsets *TCPLoadBalancerEmptyModel `tfsdk:"endpoint_subsets"`
-	Pool *TCPLoadBalancerOriginPoolsWeightsPoolModel `tfsdk:"pool"`
+	Priority        types.Int64                                    `tfsdk:"priority"`
+	Weight          types.Int64                                    `tfsdk:"weight"`
+	Cluster         *TCPLoadBalancerOriginPoolsWeightsClusterModel `tfsdk:"cluster"`
+	EndpointSubsets *TCPLoadBalancerEmptyModel                     `tfsdk:"endpoint_subsets"`
+	Pool            *TCPLoadBalancerOriginPoolsWeightsPoolModel    `tfsdk:"pool"`
 }
 
 // TCPLoadBalancerOriginPoolsWeightsClusterModel represents cluster block
 type TCPLoadBalancerOriginPoolsWeightsClusterModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // TCPLoadBalancerOriginPoolsWeightsPoolModel represents pool block
 type TCPLoadBalancerOriginPoolsWeightsPoolModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // TCPLoadBalancerTLSTCPModel represents tls_tcp block
@@ -214,56 +214,56 @@ type TCPLoadBalancerTLSTCPModel struct {
 // TCPLoadBalancerTLSTCPTLSCertParamsModel represents tls_cert_params block
 type TCPLoadBalancerTLSTCPTLSCertParamsModel struct {
 	Certificates []TCPLoadBalancerTLSTCPTLSCertParamsCertificatesModel `tfsdk:"certificates"`
-	NoMtls *TCPLoadBalancerEmptyModel `tfsdk:"no_mtls"`
-	TLSConfig *TCPLoadBalancerTLSTCPTLSCertParamsTLSConfigModel `tfsdk:"tls_config"`
-	UseMtls *TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsModel `tfsdk:"use_mtls"`
+	NoMtls       *TCPLoadBalancerEmptyModel                            `tfsdk:"no_mtls"`
+	TLSConfig    *TCPLoadBalancerTLSTCPTLSCertParamsTLSConfigModel     `tfsdk:"tls_config"`
+	UseMtls      *TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsModel       `tfsdk:"use_mtls"`
 }
 
 // TCPLoadBalancerTLSTCPTLSCertParamsCertificatesModel represents certificates block
 type TCPLoadBalancerTLSTCPTLSCertParamsCertificatesModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // TCPLoadBalancerTLSTCPTLSCertParamsTLSConfigModel represents tls_config block
 type TCPLoadBalancerTLSTCPTLSCertParamsTLSConfigModel struct {
-	CustomSecurity *TCPLoadBalancerTLSTCPTLSCertParamsTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
-	DefaultSecurity *TCPLoadBalancerEmptyModel `tfsdk:"default_security"`
-	LowSecurity *TCPLoadBalancerEmptyModel `tfsdk:"low_security"`
-	MediumSecurity *TCPLoadBalancerEmptyModel `tfsdk:"medium_security"`
+	CustomSecurity  *TCPLoadBalancerTLSTCPTLSCertParamsTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
+	DefaultSecurity *TCPLoadBalancerEmptyModel                                      `tfsdk:"default_security"`
+	LowSecurity     *TCPLoadBalancerEmptyModel                                      `tfsdk:"low_security"`
+	MediumSecurity  *TCPLoadBalancerEmptyModel                                      `tfsdk:"medium_security"`
 }
 
 // TCPLoadBalancerTLSTCPTLSCertParamsTLSConfigCustomSecurityModel represents custom_security block
 type TCPLoadBalancerTLSTCPTLSCertParamsTLSConfigCustomSecurityModel struct {
-	CipherSuites types.List `tfsdk:"cipher_suites"`
-	MaxVersion types.String `tfsdk:"max_version"`
-	MinVersion types.String `tfsdk:"min_version"`
+	CipherSuites types.List   `tfsdk:"cipher_suites"`
+	MaxVersion   types.String `tfsdk:"max_version"`
+	MinVersion   types.String `tfsdk:"min_version"`
 }
 
 // TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsModel represents use_mtls block
 type TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsModel struct {
-	ClientCertificateOptional types.Bool `tfsdk:"client_certificate_optional"`
-	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
-	CRL *TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsCRLModel `tfsdk:"crl"`
-	NoCRL *TCPLoadBalancerEmptyModel `tfsdk:"no_crl"`
-	TrustedCa *TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsTrustedCaModel `tfsdk:"trusted_ca"`
-	XfccDisabled *TCPLoadBalancerEmptyModel `tfsdk:"xfcc_disabled"`
-	XfccOptions *TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
+	ClientCertificateOptional types.Bool                                                 `tfsdk:"client_certificate_optional"`
+	TrustedCaURL              types.String                                               `tfsdk:"trusted_ca_url"`
+	CRL                       *TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsCRLModel         `tfsdk:"crl"`
+	NoCRL                     *TCPLoadBalancerEmptyModel                                 `tfsdk:"no_crl"`
+	TrustedCa                 *TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsTrustedCaModel   `tfsdk:"trusted_ca"`
+	XfccDisabled              *TCPLoadBalancerEmptyModel                                 `tfsdk:"xfcc_disabled"`
+	XfccOptions               *TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
 
 // TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsCRLModel represents crl block
 type TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsCRLModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsTrustedCaModel represents trusted_ca block
 type TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsTrustedCaModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsXfccOptionsModel represents xfcc_options block
@@ -273,20 +273,20 @@ type TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsXfccOptionsModel struct {
 
 // TCPLoadBalancerTLSTCPTLSParametersModel represents tls_parameters block
 type TCPLoadBalancerTLSTCPTLSParametersModel struct {
-	NoMtls *TCPLoadBalancerEmptyModel `tfsdk:"no_mtls"`
+	NoMtls          *TCPLoadBalancerEmptyModel                               `tfsdk:"no_mtls"`
 	TLSCertificates []TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesModel `tfsdk:"tls_certificates"`
-	TLSConfig *TCPLoadBalancerTLSTCPTLSParametersTLSConfigModel `tfsdk:"tls_config"`
-	UseMtls *TCPLoadBalancerTLSTCPTLSParametersUseMtlsModel `tfsdk:"use_mtls"`
+	TLSConfig       *TCPLoadBalancerTLSTCPTLSParametersTLSConfigModel        `tfsdk:"tls_config"`
+	UseMtls         *TCPLoadBalancerTLSTCPTLSParametersUseMtlsModel          `tfsdk:"use_mtls"`
 }
 
 // TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesModel represents tls_certificates block
 type TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesModel struct {
-	CertificateURL types.String `tfsdk:"certificate_url"`
-	DescriptionSpec types.String `tfsdk:"description_spec"`
+	CertificateURL       types.String                                                                `tfsdk:"certificate_url"`
+	DescriptionSpec      types.String                                                                `tfsdk:"description_spec"`
 	CustomHashAlgorithms *TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
-	DisableOcspStapling *TCPLoadBalancerEmptyModel `tfsdk:"disable_ocsp_stapling"`
-	PrivateKey *TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
-	UseSystemDefaults *TCPLoadBalancerEmptyModel `tfsdk:"use_system_defaults"`
+	DisableOcspStapling  *TCPLoadBalancerEmptyModel                                                  `tfsdk:"disable_ocsp_stapling"`
+	PrivateKey           *TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesPrivateKeyModel           `tfsdk:"private_key"`
+	UseSystemDefaults    *TCPLoadBalancerEmptyModel                                                  `tfsdk:"use_system_defaults"`
 }
 
 // TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
@@ -297,60 +297,60 @@ type TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesCustomHashAlgorithmsModel 
 // TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesPrivateKeyModel represents private_key block
 type TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesPrivateKeyModel struct {
 	BlindfoldSecretInfo *TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
 type TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
 type TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // TCPLoadBalancerTLSTCPTLSParametersTLSConfigModel represents tls_config block
 type TCPLoadBalancerTLSTCPTLSParametersTLSConfigModel struct {
-	CustomSecurity *TCPLoadBalancerTLSTCPTLSParametersTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
-	DefaultSecurity *TCPLoadBalancerEmptyModel `tfsdk:"default_security"`
-	LowSecurity *TCPLoadBalancerEmptyModel `tfsdk:"low_security"`
-	MediumSecurity *TCPLoadBalancerEmptyModel `tfsdk:"medium_security"`
+	CustomSecurity  *TCPLoadBalancerTLSTCPTLSParametersTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
+	DefaultSecurity *TCPLoadBalancerEmptyModel                                      `tfsdk:"default_security"`
+	LowSecurity     *TCPLoadBalancerEmptyModel                                      `tfsdk:"low_security"`
+	MediumSecurity  *TCPLoadBalancerEmptyModel                                      `tfsdk:"medium_security"`
 }
 
 // TCPLoadBalancerTLSTCPTLSParametersTLSConfigCustomSecurityModel represents custom_security block
 type TCPLoadBalancerTLSTCPTLSParametersTLSConfigCustomSecurityModel struct {
-	CipherSuites types.List `tfsdk:"cipher_suites"`
-	MaxVersion types.String `tfsdk:"max_version"`
-	MinVersion types.String `tfsdk:"min_version"`
+	CipherSuites types.List   `tfsdk:"cipher_suites"`
+	MaxVersion   types.String `tfsdk:"max_version"`
+	MinVersion   types.String `tfsdk:"min_version"`
 }
 
 // TCPLoadBalancerTLSTCPTLSParametersUseMtlsModel represents use_mtls block
 type TCPLoadBalancerTLSTCPTLSParametersUseMtlsModel struct {
-	ClientCertificateOptional types.Bool `tfsdk:"client_certificate_optional"`
-	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
-	CRL *TCPLoadBalancerTLSTCPTLSParametersUseMtlsCRLModel `tfsdk:"crl"`
-	NoCRL *TCPLoadBalancerEmptyModel `tfsdk:"no_crl"`
-	TrustedCa *TCPLoadBalancerTLSTCPTLSParametersUseMtlsTrustedCaModel `tfsdk:"trusted_ca"`
-	XfccDisabled *TCPLoadBalancerEmptyModel `tfsdk:"xfcc_disabled"`
-	XfccOptions *TCPLoadBalancerTLSTCPTLSParametersUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
+	ClientCertificateOptional types.Bool                                                 `tfsdk:"client_certificate_optional"`
+	TrustedCaURL              types.String                                               `tfsdk:"trusted_ca_url"`
+	CRL                       *TCPLoadBalancerTLSTCPTLSParametersUseMtlsCRLModel         `tfsdk:"crl"`
+	NoCRL                     *TCPLoadBalancerEmptyModel                                 `tfsdk:"no_crl"`
+	TrustedCa                 *TCPLoadBalancerTLSTCPTLSParametersUseMtlsTrustedCaModel   `tfsdk:"trusted_ca"`
+	XfccDisabled              *TCPLoadBalancerEmptyModel                                 `tfsdk:"xfcc_disabled"`
+	XfccOptions               *TCPLoadBalancerTLSTCPTLSParametersUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
 
 // TCPLoadBalancerTLSTCPTLSParametersUseMtlsCRLModel represents crl block
 type TCPLoadBalancerTLSTCPTLSParametersUseMtlsCRLModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // TCPLoadBalancerTLSTCPTLSParametersUseMtlsTrustedCaModel represents trusted_ca block
 type TCPLoadBalancerTLSTCPTLSParametersUseMtlsTrustedCaModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // TCPLoadBalancerTLSTCPTLSParametersUseMtlsXfccOptionsModel represents xfcc_options block
@@ -360,49 +360,49 @@ type TCPLoadBalancerTLSTCPTLSParametersUseMtlsXfccOptionsModel struct {
 
 // TCPLoadBalancerTLSTCPAutoCertModel represents tls_tcp_auto_cert block
 type TCPLoadBalancerTLSTCPAutoCertModel struct {
-	NoMtls *TCPLoadBalancerEmptyModel `tfsdk:"no_mtls"`
+	NoMtls    *TCPLoadBalancerEmptyModel                   `tfsdk:"no_mtls"`
 	TLSConfig *TCPLoadBalancerTLSTCPAutoCertTLSConfigModel `tfsdk:"tls_config"`
-	UseMtls *TCPLoadBalancerTLSTCPAutoCertUseMtlsModel `tfsdk:"use_mtls"`
+	UseMtls   *TCPLoadBalancerTLSTCPAutoCertUseMtlsModel   `tfsdk:"use_mtls"`
 }
 
 // TCPLoadBalancerTLSTCPAutoCertTLSConfigModel represents tls_config block
 type TCPLoadBalancerTLSTCPAutoCertTLSConfigModel struct {
-	CustomSecurity *TCPLoadBalancerTLSTCPAutoCertTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
-	DefaultSecurity *TCPLoadBalancerEmptyModel `tfsdk:"default_security"`
-	LowSecurity *TCPLoadBalancerEmptyModel `tfsdk:"low_security"`
-	MediumSecurity *TCPLoadBalancerEmptyModel `tfsdk:"medium_security"`
+	CustomSecurity  *TCPLoadBalancerTLSTCPAutoCertTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
+	DefaultSecurity *TCPLoadBalancerEmptyModel                                 `tfsdk:"default_security"`
+	LowSecurity     *TCPLoadBalancerEmptyModel                                 `tfsdk:"low_security"`
+	MediumSecurity  *TCPLoadBalancerEmptyModel                                 `tfsdk:"medium_security"`
 }
 
 // TCPLoadBalancerTLSTCPAutoCertTLSConfigCustomSecurityModel represents custom_security block
 type TCPLoadBalancerTLSTCPAutoCertTLSConfigCustomSecurityModel struct {
-	CipherSuites types.List `tfsdk:"cipher_suites"`
-	MaxVersion types.String `tfsdk:"max_version"`
-	MinVersion types.String `tfsdk:"min_version"`
+	CipherSuites types.List   `tfsdk:"cipher_suites"`
+	MaxVersion   types.String `tfsdk:"max_version"`
+	MinVersion   types.String `tfsdk:"min_version"`
 }
 
 // TCPLoadBalancerTLSTCPAutoCertUseMtlsModel represents use_mtls block
 type TCPLoadBalancerTLSTCPAutoCertUseMtlsModel struct {
-	ClientCertificateOptional types.Bool `tfsdk:"client_certificate_optional"`
-	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
-	CRL *TCPLoadBalancerTLSTCPAutoCertUseMtlsCRLModel `tfsdk:"crl"`
-	NoCRL *TCPLoadBalancerEmptyModel `tfsdk:"no_crl"`
-	TrustedCa *TCPLoadBalancerTLSTCPAutoCertUseMtlsTrustedCaModel `tfsdk:"trusted_ca"`
-	XfccDisabled *TCPLoadBalancerEmptyModel `tfsdk:"xfcc_disabled"`
-	XfccOptions *TCPLoadBalancerTLSTCPAutoCertUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
+	ClientCertificateOptional types.Bool                                            `tfsdk:"client_certificate_optional"`
+	TrustedCaURL              types.String                                          `tfsdk:"trusted_ca_url"`
+	CRL                       *TCPLoadBalancerTLSTCPAutoCertUseMtlsCRLModel         `tfsdk:"crl"`
+	NoCRL                     *TCPLoadBalancerEmptyModel                            `tfsdk:"no_crl"`
+	TrustedCa                 *TCPLoadBalancerTLSTCPAutoCertUseMtlsTrustedCaModel   `tfsdk:"trusted_ca"`
+	XfccDisabled              *TCPLoadBalancerEmptyModel                            `tfsdk:"xfcc_disabled"`
+	XfccOptions               *TCPLoadBalancerTLSTCPAutoCertUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
 
 // TCPLoadBalancerTLSTCPAutoCertUseMtlsCRLModel represents crl block
 type TCPLoadBalancerTLSTCPAutoCertUseMtlsCRLModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // TCPLoadBalancerTLSTCPAutoCertUseMtlsTrustedCaModel represents trusted_ca block
 type TCPLoadBalancerTLSTCPAutoCertUseMtlsTrustedCaModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // TCPLoadBalancerTLSTCPAutoCertUseMtlsXfccOptionsModel represents xfcc_options block
@@ -411,39 +411,39 @@ type TCPLoadBalancerTLSTCPAutoCertUseMtlsXfccOptionsModel struct {
 }
 
 type TCPLoadBalancerResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Domains types.List `tfsdk:"domains"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	DNSVolterraManaged types.Bool `tfsdk:"dns_volterra_managed"`
-	IdleTimeout types.Int64 `tfsdk:"idle_timeout"`
-	ListenPort types.Int64 `tfsdk:"listen_port"`
-	PortRanges types.String `tfsdk:"port_ranges"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	ActiveServicePolicies *TCPLoadBalancerActiveServicePoliciesModel `tfsdk:"active_service_policies"`
-	AdvertiseCustom *TCPLoadBalancerAdvertiseCustomModel `tfsdk:"advertise_custom"`
-	AdvertiseOnPublic *TCPLoadBalancerAdvertiseOnPublicModel `tfsdk:"advertise_on_public"`
-	AdvertiseOnPublicDefaultVip *TCPLoadBalancerEmptyModel `tfsdk:"advertise_on_public_default_vip"`
-	DefaultLbWithSni *TCPLoadBalancerEmptyModel `tfsdk:"default_lb_with_sni"`
-	DoNotAdvertise *TCPLoadBalancerEmptyModel `tfsdk:"do_not_advertise"`
-	DoNotRetractCluster *TCPLoadBalancerEmptyModel `tfsdk:"do_not_retract_cluster"`
-	HashPolicyChoiceLeastActive *TCPLoadBalancerEmptyModel `tfsdk:"hash_policy_choice_least_active"`
-	HashPolicyChoiceRandom *TCPLoadBalancerEmptyModel `tfsdk:"hash_policy_choice_random"`
-	HashPolicyChoiceRoundRobin *TCPLoadBalancerEmptyModel `tfsdk:"hash_policy_choice_round_robin"`
-	HashPolicyChoiceSourceIPStickiness *TCPLoadBalancerEmptyModel `tfsdk:"hash_policy_choice_source_ip_stickiness"`
-	NoServicePolicies *TCPLoadBalancerEmptyModel `tfsdk:"no_service_policies"`
-	NoSni *TCPLoadBalancerEmptyModel `tfsdk:"no_sni"`
-	OriginPoolsWeights []TCPLoadBalancerOriginPoolsWeightsModel `tfsdk:"origin_pools_weights"`
-	RetractCluster *TCPLoadBalancerEmptyModel `tfsdk:"retract_cluster"`
-	ServicePoliciesFromNamespace *TCPLoadBalancerEmptyModel `tfsdk:"service_policies_from_namespace"`
-	Sni *TCPLoadBalancerEmptyModel `tfsdk:"sni"`
-	TCP *TCPLoadBalancerEmptyModel `tfsdk:"tcp"`
-	TLSTCP *TCPLoadBalancerTLSTCPModel `tfsdk:"tls_tcp"`
-	TLSTCPAutoCert *TCPLoadBalancerTLSTCPAutoCertModel `tfsdk:"tls_tcp_auto_cert"`
+	Name                               types.String                               `tfsdk:"name"`
+	Namespace                          types.String                               `tfsdk:"namespace"`
+	Annotations                        types.Map                                  `tfsdk:"annotations"`
+	Description                        types.String                               `tfsdk:"description"`
+	Disable                            types.Bool                                 `tfsdk:"disable"`
+	Domains                            types.List                                 `tfsdk:"domains"`
+	Labels                             types.Map                                  `tfsdk:"labels"`
+	ID                                 types.String                               `tfsdk:"id"`
+	DNSVolterraManaged                 types.Bool                                 `tfsdk:"dns_volterra_managed"`
+	IdleTimeout                        types.Int64                                `tfsdk:"idle_timeout"`
+	ListenPort                         types.Int64                                `tfsdk:"listen_port"`
+	PortRanges                         types.String                               `tfsdk:"port_ranges"`
+	Timeouts                           timeouts.Value                             `tfsdk:"timeouts"`
+	ActiveServicePolicies              *TCPLoadBalancerActiveServicePoliciesModel `tfsdk:"active_service_policies"`
+	AdvertiseCustom                    *TCPLoadBalancerAdvertiseCustomModel       `tfsdk:"advertise_custom"`
+	AdvertiseOnPublic                  *TCPLoadBalancerAdvertiseOnPublicModel     `tfsdk:"advertise_on_public"`
+	AdvertiseOnPublicDefaultVip        *TCPLoadBalancerEmptyModel                 `tfsdk:"advertise_on_public_default_vip"`
+	DefaultLbWithSni                   *TCPLoadBalancerEmptyModel                 `tfsdk:"default_lb_with_sni"`
+	DoNotAdvertise                     *TCPLoadBalancerEmptyModel                 `tfsdk:"do_not_advertise"`
+	DoNotRetractCluster                *TCPLoadBalancerEmptyModel                 `tfsdk:"do_not_retract_cluster"`
+	HashPolicyChoiceLeastActive        *TCPLoadBalancerEmptyModel                 `tfsdk:"hash_policy_choice_least_active"`
+	HashPolicyChoiceRandom             *TCPLoadBalancerEmptyModel                 `tfsdk:"hash_policy_choice_random"`
+	HashPolicyChoiceRoundRobin         *TCPLoadBalancerEmptyModel                 `tfsdk:"hash_policy_choice_round_robin"`
+	HashPolicyChoiceSourceIPStickiness *TCPLoadBalancerEmptyModel                 `tfsdk:"hash_policy_choice_source_ip_stickiness"`
+	NoServicePolicies                  *TCPLoadBalancerEmptyModel                 `tfsdk:"no_service_policies"`
+	NoSni                              *TCPLoadBalancerEmptyModel                 `tfsdk:"no_sni"`
+	OriginPoolsWeights                 []TCPLoadBalancerOriginPoolsWeightsModel   `tfsdk:"origin_pools_weights"`
+	RetractCluster                     *TCPLoadBalancerEmptyModel                 `tfsdk:"retract_cluster"`
+	ServicePoliciesFromNamespace       *TCPLoadBalancerEmptyModel                 `tfsdk:"service_policies_from_namespace"`
+	Sni                                *TCPLoadBalancerEmptyModel                 `tfsdk:"sni"`
+	TCP                                *TCPLoadBalancerEmptyModel                 `tfsdk:"tcp"`
+	TLSTCP                             *TCPLoadBalancerTLSTCPModel                `tfsdk:"tls_tcp"`
+	TLSTCPAutoCert                     *TCPLoadBalancerTLSTCPAutoCertModel        `tfsdk:"tls_tcp_auto_cert"`
 }
 
 func (r *TCPLoadBalancerResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -457,7 +457,7 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the TCPLoadBalancer. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -467,7 +467,7 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the TCPLoadBalancer will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -477,62 +477,62 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"domains": schema.ListAttribute{
 				MarkdownDescription: "Domains. A list of Domains (host/authority header) that will be matched to this Load Balancer. Supported Domains and search order: 1. Exact Domain names: www.foo.com. 2. Domains starting with a Wildcard: *.foo.com. Not supported Domains: - Just a Wildcard: * - A Wildcard and TLD with no root Domain: *.com. - A Wildcard not matching a whole DNS label. e.g. *.foo.com and *.bar.foo.com are valid Wildcards however *bar.foo.com, *-bar.foo.com, and bar*.foo.com are all invalid. Additional notes: A Wildcard will not match empty string. e.g. *.foo.com will match bar.foo.com and baz-bar.foo.com but not .foo.com. The longest Wildcards match first. Only a single virtual host in the entire route configuration can match on *. Also a Domain must be unique across all virtual hosts within an advertise policy. Domains are also used for SNI matching if SNI is activated on the given TCP Load Balancer. Domains also indicate the list of names for which DNS resolution will be automatically resolved to IP addresses by the system.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"dns_volterra_managed": schema.BoolAttribute{
 				MarkdownDescription: "Automatically Manage DNS Records. DNS records for domains will be managed automatically by Volterra. This requires the domain to be delegated to F5XC using the Delegated Domain feature.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.Bool{
 					boolplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"idle_timeout": schema.Int64Attribute{
 				MarkdownDescription: "Idle Timeout. The amount of time that a stream can exist without upstream or downstream activity, in milliseconds.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{
 					int64planmodifier.UseStateForUnknown(),
 				},
 			},
 			"listen_port": schema.Int64Attribute{
 				MarkdownDescription: "[OneOf: listen_port, port_ranges] Listen Port. Listen Port for this load balancer",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{
 					int64planmodifier.UseStateForUnknown(),
 				},
 			},
 			"port_ranges": schema.StringAttribute{
 				MarkdownDescription: "Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -547,8 +547,7 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 			}),
 			"active_service_policies": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: active_service_policies, no_service_policies, service_policies_from_namespace] Service Policy List. List of service policies.",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"policies": schema.ListNestedBlock{
 						MarkdownDescription: "Policies. Service Policies is a sequential engine where policies (and rules within the policy) are evaluated one after the other. It's important to define the correct order (policies evaluated from top to bottom in the list) for service policies, to get the intended result. For each request, its characteristics are evaluated based on the match criteria in each service policy starting at the top. If there is a match in the current policy, then the policy takes effect, and no more policies are evaluated. Otherwise, the next policy is evaluated. If all policies are evaluated and none match, then the request will be denied by default.",
@@ -556,27 +555,25 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-									Optional: true,
+									Optional:            true,
 								},
 								"namespace": schema.StringAttribute{
 									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-									Optional: true,
+									Optional:            true,
 								},
 								"tenant": schema.StringAttribute{
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-									Optional: true,
-									Computed: true,
+									Optional:            true,
+									Computed:            true,
 								},
 							},
 						},
 					},
 				},
-
 			},
 			"advertise_custom": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: advertise_custom, advertise_on_public, advertise_on_public_default_vip, do_not_advertise] Advertise Custom. This defines a way to advertise a VIP on specific sites",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"advertise_where": schema.ListNestedBlock{
 						MarkdownDescription: "List of Sites to Advertise. Where should this load balancer be available",
@@ -584,34 +581,33 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 							Attributes: map[string]schema.Attribute{
 								"port": schema.Int64Attribute{
 									MarkdownDescription: "Listen Port. Port to Listen.",
-									Optional: true,
+									Optional:            true,
 								},
 								"port_ranges": schema.StringAttribute{
 									MarkdownDescription: "Listen Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'.",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
 								"advertise_on_public": schema.SingleNestedBlock{
 									MarkdownDescription: "Advertise Public. This defines a way to advertise a load balancer on public. If optional public_ip is provided, it will only be advertised on RE sites where that public_ip is available",
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"public_ip": schema.SingleNestedBlock{
 											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
 													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-													Optional: true,
+													Optional:            true,
 												},
 												"namespace": schema.StringAttribute{
 													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-													Optional: true,
+													Optional:            true,
 												},
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-													Optional: true,
-													Computed: true,
+													Optional:            true,
+													Computed:            true,
 												},
 											},
 										},
@@ -622,11 +618,11 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									Attributes: map[string]schema.Attribute{
 										"ip": schema.StringAttribute{
 											MarkdownDescription: "IP Address. Use given IP address as VIP on the site",
-											Optional: true,
+											Optional:            true,
 										},
 										"network": schema.StringAttribute{
 											MarkdownDescription: "Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. vK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network. Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`. Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE`.",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -635,16 +631,16 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
 													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-													Optional: true,
+													Optional:            true,
 												},
 												"namespace": schema.StringAttribute{
 													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-													Optional: true,
+													Optional:            true,
 												},
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-													Optional: true,
-													Computed: true,
+													Optional:            true,
+													Computed:            true,
 												},
 											},
 										},
@@ -658,11 +654,11 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									Attributes: map[string]schema.Attribute{
 										"specific_v6_vip": schema.StringAttribute{
 											MarkdownDescription: "Specific V6 VIP. Use given IPV6 address as VIP on virtual Network",
-											Optional: true,
+											Optional:            true,
 										},
 										"specific_vip": schema.StringAttribute{
 											MarkdownDescription: "Specific V4 VIP. Use given IPV4 address as VIP on virtual Network",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -677,16 +673,16 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
 													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-													Optional: true,
+													Optional:            true,
 												},
 												"namespace": schema.StringAttribute{
 													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-													Optional: true,
+													Optional:            true,
 												},
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-													Optional: true,
-													Computed: true,
+													Optional:            true,
+													Computed:            true,
 												},
 											},
 										},
@@ -697,7 +693,7 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									Attributes: map[string]schema.Attribute{
 										"network": schema.StringAttribute{
 											MarkdownDescription: "Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. vK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network. Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`. Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE`.",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -706,16 +702,16 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
 													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-													Optional: true,
+													Optional:            true,
 												},
 												"namespace": schema.StringAttribute{
 													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-													Optional: true,
+													Optional:            true,
 												},
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-													Optional: true,
-													Computed: true,
+													Optional:            true,
+													Computed:            true,
 												},
 											},
 										},
@@ -726,11 +722,11 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									Attributes: map[string]schema.Attribute{
 										"ip": schema.StringAttribute{
 											MarkdownDescription: "IP Address. Use given IP address as VIP on the site",
-											Optional: true,
+											Optional:            true,
 										},
 										"network": schema.StringAttribute{
 											MarkdownDescription: "Site Network. This defines network types to be used on virtual-site with specified VIP All outside networks. All inside networks. Possible values are `SITE_NETWORK_SPECIFIED_VIP_OUTSIDE`, `SITE_NETWORK_SPECIFIED_VIP_INSIDE`. Defaults to `SITE_NETWORK_SPECIFIED_VIP_OUTSIDE`.",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -739,16 +735,16 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
 													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-													Optional: true,
+													Optional:            true,
 												},
 												"namespace": schema.StringAttribute{
 													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-													Optional: true,
+													Optional:            true,
 												},
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-													Optional: true,
-													Computed: true,
+													Optional:            true,
+													Computed:            true,
 												},
 											},
 										},
@@ -756,24 +752,23 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 								},
 								"vk8s_service": schema.SingleNestedBlock{
 									MarkdownDescription: "vK8s Services on RE. This defines a reference to a RE site or virtual site where a load balancer could be advertised in the vK8s service network",
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"site": schema.SingleNestedBlock{
 											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
 													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-													Optional: true,
+													Optional:            true,
 												},
 												"namespace": schema.StringAttribute{
 													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-													Optional: true,
+													Optional:            true,
 												},
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-													Optional: true,
-													Computed: true,
+													Optional:            true,
+													Computed:            true,
 												},
 											},
 										},
@@ -782,16 +777,16 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
 													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-													Optional: true,
+													Optional:            true,
 												},
 												"namespace": schema.StringAttribute{
 													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-													Optional: true,
+													Optional:            true,
 												},
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-													Optional: true,
-													Computed: true,
+													Optional:            true,
+													Computed:            true,
 												},
 											},
 										},
@@ -801,33 +796,30 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						},
 					},
 				},
-
 			},
 			"advertise_on_public": schema.SingleNestedBlock{
 				MarkdownDescription: "Advertise Public. This defines a way to advertise a load balancer on public. If optional public_ip is provided, it will only be advertised on RE sites where that public_ip is available",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"public_ip": schema.SingleNestedBlock{
 						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
 								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-								Optional: true,
+								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
 								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-								Optional: true,
+								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-								Optional: true,
-								Computed: true,
+								Optional:            true,
+								Computed:            true,
 							},
 						},
 					},
 				},
-
 			},
 			"advertise_on_public_default_vip": schema.SingleNestedBlock{
 				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -865,11 +857,11 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 					Attributes: map[string]schema.Attribute{
 						"priority": schema.Int64Attribute{
 							MarkdownDescription: "Priority. Priority of this origin pool, valid only with multiple origin pools. Value of 0 will make the pool as lowest priority origin pool Priority of 1 means highest priority and is considered active. When active origin pool is not available, lower priority origin pools are made active as per the increasing priority.",
-							Optional: true,
+							Optional:            true,
 						},
 						"weight": schema.Int64Attribute{
 							MarkdownDescription: "Weight. Weight of this origin pool, valid only with multiple origin pool. Value of 0 will disable the pool",
-							Optional: true,
+							Optional:            true,
 						},
 					},
 					Blocks: map[string]schema.Block{
@@ -878,16 +870,16 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-									Optional: true,
+									Optional:            true,
 								},
 								"namespace": schema.StringAttribute{
 									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-									Optional: true,
+									Optional:            true,
 								},
 								"tenant": schema.StringAttribute{
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-									Optional: true,
-									Computed: true,
+									Optional:            true,
+									Computed:            true,
 								},
 							},
 						},
@@ -899,21 +891,20 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-									Optional: true,
+									Optional:            true,
 								},
 								"namespace": schema.StringAttribute{
 									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-									Optional: true,
+									Optional:            true,
 								},
 								"tenant": schema.StringAttribute{
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-									Optional: true,
-									Computed: true,
+									Optional:            true,
+									Computed:            true,
 								},
 							},
 						},
 					},
-
 				},
 			},
 			"retract_cluster": schema.SingleNestedBlock{
@@ -930,13 +921,11 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 			},
 			"tls_tcp": schema.SingleNestedBlock{
 				MarkdownDescription: "BYOC TLS over TCP Choice. Choice for selecting TLS over TCP proxy with bring your own certificates",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"tls_cert_params": schema.SingleNestedBlock{
 						MarkdownDescription: "TLS Parameters. Select TLS Parameters and Certificates",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"certificates": schema.ListNestedBlock{
 								MarkdownDescription: "Certificates. Select one or more certificates with any domain names.",
@@ -944,16 +933,16 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-											Optional: true,
+											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
 											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-											Optional: true,
+											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
@@ -963,24 +952,23 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 							},
 							"tls_config": schema.SingleNestedBlock{
 								MarkdownDescription: "TLS Config. This defines various options to configure TLS configuration parameters",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"custom_security": schema.SingleNestedBlock{
 										MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers",
 										Attributes: map[string]schema.Attribute{
 											"cipher_suites": schema.ListAttribute{
 												MarkdownDescription: "Cipher Suites. The TLS listener will only support the specified cipher list.",
-												Optional: true,
-												ElementType: types.StringType,
+												Optional:            true,
+												ElementType:         types.StringType,
 											},
 											"max_version": schema.StringAttribute{
 												MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
-												Optional: true,
+												Optional:            true,
 											},
 											"min_version": schema.StringAttribute{
 												MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -1000,11 +988,11 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 								Attributes: map[string]schema.Attribute{
 									"client_certificate_optional": schema.BoolAttribute{
 										MarkdownDescription: "Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted.",
-										Optional: true,
+										Optional:            true,
 									},
 									"trusted_ca_url": schema.StringAttribute{
 										MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 								Blocks: map[string]schema.Block{
@@ -1013,16 +1001,16 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 										Attributes: map[string]schema.Attribute{
 											"name": schema.StringAttribute{
 												MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-												Optional: true,
+												Optional:            true,
 											},
 											"namespace": schema.StringAttribute{
 												MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-												Optional: true,
+												Optional:            true,
 											},
 											"tenant": schema.StringAttribute{
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-												Optional: true,
-												Computed: true,
+												Optional:            true,
+												Computed:            true,
 											},
 										},
 									},
@@ -1034,16 +1022,16 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 										Attributes: map[string]schema.Attribute{
 											"name": schema.StringAttribute{
 												MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-												Optional: true,
+												Optional:            true,
 											},
 											"namespace": schema.StringAttribute{
 												MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-												Optional: true,
+												Optional:            true,
 											},
 											"tenant": schema.StringAttribute{
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-												Optional: true,
-												Computed: true,
+												Optional:            true,
+												Computed:            true,
 											},
 										},
 									},
@@ -1055,8 +1043,8 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 										Attributes: map[string]schema.Attribute{
 											"xfcc_header_elements": schema.ListAttribute{
 												MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
-												Optional: true,
-												ElementType: types.StringType,
+												Optional:            true,
+												ElementType:         types.StringType,
 											},
 										},
 									},
@@ -1066,8 +1054,7 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 					},
 					"tls_parameters": schema.SingleNestedBlock{
 						MarkdownDescription: "Inline TLS Parameters. Inline TLS parameters",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"no_mtls": schema.SingleNestedBlock{
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -1078,11 +1065,11 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									Attributes: map[string]schema.Attribute{
 										"certificate_url": schema.StringAttribute{
 											MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
-											Optional: true,
+											Optional:            true,
 										},
 										"description_spec": schema.StringAttribute{
 											MarkdownDescription: "Description. Description for the certificate",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -1091,8 +1078,8 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											Attributes: map[string]schema.Attribute{
 												"hash_algorithms": schema.ListAttribute{
 													MarkdownDescription: "Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM`.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 										},
@@ -1101,23 +1088,22 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 										},
 										"private_key": schema.SingleNestedBlock{
 											MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"blindfold_secret_info": schema.SingleNestedBlock{
 													MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 													Attributes: map[string]schema.Attribute{
 														"decryption_provider": schema.StringAttribute{
 															MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-															Optional: true,
+															Optional:            true,
 														},
 														"location": schema.StringAttribute{
 															MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-															Optional: true,
+															Optional:            true,
 														},
 														"store_provider": schema.StringAttribute{
 															MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -1126,11 +1112,11 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													Attributes: map[string]schema.Attribute{
 														"provider_ref": schema.StringAttribute{
 															MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-															Optional: true,
+															Optional:            true,
 														},
 														"url": schema.StringAttribute{
 															MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -1144,24 +1130,23 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 							},
 							"tls_config": schema.SingleNestedBlock{
 								MarkdownDescription: "TLS Config. This defines various options to configure TLS configuration parameters",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"custom_security": schema.SingleNestedBlock{
 										MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers",
 										Attributes: map[string]schema.Attribute{
 											"cipher_suites": schema.ListAttribute{
 												MarkdownDescription: "Cipher Suites. The TLS listener will only support the specified cipher list.",
-												Optional: true,
-												ElementType: types.StringType,
+												Optional:            true,
+												ElementType:         types.StringType,
 											},
 											"max_version": schema.StringAttribute{
 												MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
-												Optional: true,
+												Optional:            true,
 											},
 											"min_version": schema.StringAttribute{
 												MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -1181,11 +1166,11 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 								Attributes: map[string]schema.Attribute{
 									"client_certificate_optional": schema.BoolAttribute{
 										MarkdownDescription: "Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted.",
-										Optional: true,
+										Optional:            true,
 									},
 									"trusted_ca_url": schema.StringAttribute{
 										MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 								Blocks: map[string]schema.Block{
@@ -1194,16 +1179,16 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 										Attributes: map[string]schema.Attribute{
 											"name": schema.StringAttribute{
 												MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-												Optional: true,
+												Optional:            true,
 											},
 											"namespace": schema.StringAttribute{
 												MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-												Optional: true,
+												Optional:            true,
 											},
 											"tenant": schema.StringAttribute{
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-												Optional: true,
-												Computed: true,
+												Optional:            true,
+												Computed:            true,
 											},
 										},
 									},
@@ -1215,16 +1200,16 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 										Attributes: map[string]schema.Attribute{
 											"name": schema.StringAttribute{
 												MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-												Optional: true,
+												Optional:            true,
 											},
 											"namespace": schema.StringAttribute{
 												MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-												Optional: true,
+												Optional:            true,
 											},
 											"tenant": schema.StringAttribute{
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-												Optional: true,
-												Computed: true,
+												Optional:            true,
+												Computed:            true,
 											},
 										},
 									},
@@ -1236,8 +1221,8 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 										Attributes: map[string]schema.Attribute{
 											"xfcc_header_elements": schema.ListAttribute{
 												MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
-												Optional: true,
-												ElementType: types.StringType,
+												Optional:            true,
+												ElementType:         types.StringType,
 											},
 										},
 									},
@@ -1246,36 +1231,33 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						},
 					},
 				},
-
 			},
 			"tls_tcp_auto_cert": schema.SingleNestedBlock{
 				MarkdownDescription: "TLS over TCP with Auto Certs Choice. Choice for selecting TLS over TCP proxy with automatic certificates",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"no_mtls": schema.SingleNestedBlock{
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 					"tls_config": schema.SingleNestedBlock{
 						MarkdownDescription: "TLS Config. This defines various options to configure TLS configuration parameters",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"custom_security": schema.SingleNestedBlock{
 								MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers",
 								Attributes: map[string]schema.Attribute{
 									"cipher_suites": schema.ListAttribute{
 										MarkdownDescription: "Cipher Suites. The TLS listener will only support the specified cipher list.",
-										Optional: true,
-										ElementType: types.StringType,
+										Optional:            true,
+										ElementType:         types.StringType,
 									},
 									"max_version": schema.StringAttribute{
 										MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
-										Optional: true,
+										Optional:            true,
 									},
 									"min_version": schema.StringAttribute{
 										MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -1295,11 +1277,11 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						Attributes: map[string]schema.Attribute{
 							"client_certificate_optional": schema.BoolAttribute{
 								MarkdownDescription: "Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted.",
-								Optional: true,
+								Optional:            true,
 							},
 							"trusted_ca_url": schema.StringAttribute{
 								MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -1308,16 +1290,16 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-										Optional: true,
+										Optional:            true,
 									},
 									"namespace": schema.StringAttribute{
 										MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-										Optional: true,
+										Optional:            true,
 									},
 									"tenant": schema.StringAttribute{
 										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-										Optional: true,
-										Computed: true,
+										Optional:            true,
+										Computed:            true,
 									},
 								},
 							},
@@ -1329,16 +1311,16 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-										Optional: true,
+										Optional:            true,
 									},
 									"namespace": schema.StringAttribute{
 										MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-										Optional: true,
+										Optional:            true,
 									},
 									"tenant": schema.StringAttribute{
 										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-										Optional: true,
-										Computed: true,
+										Optional:            true,
+										Computed:            true,
 									},
 								},
 							},
@@ -1350,15 +1332,14 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 								Attributes: map[string]schema.Attribute{
 									"xfcc_header_elements": schema.ListAttribute{
 										MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
-										Optional: true,
-										ElementType: types.StringType,
+										Optional:            true,
+										ElementType:         types.StringType,
 									},
 								},
 							},
 						},
 					},
 				},
-
 			},
 		},
 	}
@@ -1770,7 +1751,6 @@ func (r *TCPLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 		createReq.Spec["port_ranges"] = data.PortRanges.ValueString()
 	}
 
-
 	apiResource, err := r.client.CreateTCPLoadBalancer(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create TCPLoadBalancer: %s", err))
@@ -1782,7 +1762,7 @@ func (r *TCPLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if blockData, ok := apiResource.Spec["active_service_policies"].(map[string]interface{}); ok && (isImport || data.ActiveServicePolicies != nil) {
 		data.ActiveServicePolicies = &TCPLoadBalancerActiveServicePoliciesModel{
 			Policies: func() []TCPLoadBalancerActiveServicePoliciesPoliciesModel {
@@ -1828,8 +1808,7 @@ func (r *TCPLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 							result = append(result, TCPLoadBalancerAdvertiseCustomAdvertiseWhereModel{
 								AdvertiseOnPublic: func() *TCPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicModel {
 									if _, ok := itemMap["advertise_on_public"].(map[string]interface{}); ok {
-										return &TCPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicModel{
-										}
+										return &TCPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicModel{}
 									}
 									return nil
 								}(),
@@ -1935,8 +1914,7 @@ func (r *TCPLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 								}(),
 								Vk8sService: func() *TCPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceModel {
 									if _, ok := itemMap["vk8s_service"].(map[string]interface{}); ok {
-										return &TCPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceModel{
-										}
+										return &TCPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceModel{}
 									}
 									return nil
 								}(),
@@ -2154,7 +2132,6 @@ func (r *TCPLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 	} else {
 		data.PortRanges = types.StringNull()
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -2244,9 +2221,9 @@ func (r *TCPLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if blockData, ok := apiResource.Spec["active_service_policies"].(map[string]interface{}); ok && (isImport || data.ActiveServicePolicies != nil) {
 		data.ActiveServicePolicies = &TCPLoadBalancerActiveServicePoliciesModel{
@@ -2293,8 +2270,7 @@ func (r *TCPLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 							result = append(result, TCPLoadBalancerAdvertiseCustomAdvertiseWhereModel{
 								AdvertiseOnPublic: func() *TCPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicModel {
 									if _, ok := itemMap["advertise_on_public"].(map[string]interface{}); ok {
-										return &TCPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicModel{
-										}
+										return &TCPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicModel{}
 									}
 									return nil
 								}(),
@@ -2400,8 +2376,7 @@ func (r *TCPLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 								}(),
 								Vk8sService: func() *TCPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceModel {
 									if _, ok := itemMap["vk8s_service"].(map[string]interface{}); ok {
-										return &TCPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceModel{
-										}
+										return &TCPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceModel{}
 									}
 									return nil
 								}(),
@@ -2619,7 +2594,6 @@ func (r *TCPLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 	} else {
 		data.PortRanges = types.StringNull()
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -2941,7 +2915,6 @@ func (r *TCPLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 	if !data.PortRanges.IsNull() && !data.PortRanges.IsUnknown() {
 		apiResource.Spec["port_ranges"] = data.PortRanges.ValueString()
 	}
-
 
 	updated, err := r.client.UpdateTCPLoadBalancer(ctx, apiResource)
 	if err != nil {

@@ -51,16 +51,16 @@ type CloudLinkEmptyModel struct {
 
 // CloudLinkAWSModel represents aws block
 type CloudLinkAWSModel struct {
-	CustomAsn types.Int64 `tfsdk:"custom_asn"`
-	AWSCred *CloudLinkAWSAWSCredModel `tfsdk:"aws_cred"`
-	Byoc *CloudLinkAWSByocModel `tfsdk:"byoc"`
+	CustomAsn types.Int64               `tfsdk:"custom_asn"`
+	AWSCred   *CloudLinkAWSAWSCredModel `tfsdk:"aws_cred"`
+	Byoc      *CloudLinkAWSByocModel    `tfsdk:"byoc"`
 }
 
 // CloudLinkAWSAWSCredModel represents aws_cred block
 type CloudLinkAWSAWSCredModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // CloudLinkAWSByocModel represents byoc block
@@ -70,48 +70,48 @@ type CloudLinkAWSByocModel struct {
 
 // CloudLinkAWSByocConnectionsModel represents connections block
 type CloudLinkAWSByocConnectionsModel struct {
-	BGPAsn types.Int64 `tfsdk:"bgp_asn"`
-	ConnectionID types.String `tfsdk:"connection_id"`
-	Region types.String `tfsdk:"region"`
-	UserAssignedName types.String `tfsdk:"user_assigned_name"`
-	VirtualInterfaceType types.String `tfsdk:"virtual_interface_type"`
-	Vlan types.Int64 `tfsdk:"vlan"`
-	AuthKey *CloudLinkAWSByocConnectionsAuthKeyModel `tfsdk:"auth_key"`
-	IPV4 *CloudLinkAWSByocConnectionsIPV4Model `tfsdk:"ipv4"`
-	Metadata *CloudLinkAWSByocConnectionsMetadataModel `tfsdk:"metadata"`
-	SystemGeneratedName *CloudLinkEmptyModel `tfsdk:"system_generated_name"`
-	Tags *CloudLinkEmptyModel `tfsdk:"tags"`
+	BGPAsn               types.Int64                               `tfsdk:"bgp_asn"`
+	ConnectionID         types.String                              `tfsdk:"connection_id"`
+	Region               types.String                              `tfsdk:"region"`
+	UserAssignedName     types.String                              `tfsdk:"user_assigned_name"`
+	VirtualInterfaceType types.String                              `tfsdk:"virtual_interface_type"`
+	Vlan                 types.Int64                               `tfsdk:"vlan"`
+	AuthKey              *CloudLinkAWSByocConnectionsAuthKeyModel  `tfsdk:"auth_key"`
+	IPV4                 *CloudLinkAWSByocConnectionsIPV4Model     `tfsdk:"ipv4"`
+	Metadata             *CloudLinkAWSByocConnectionsMetadataModel `tfsdk:"metadata"`
+	SystemGeneratedName  *CloudLinkEmptyModel                      `tfsdk:"system_generated_name"`
+	Tags                 *CloudLinkEmptyModel                      `tfsdk:"tags"`
 }
 
 // CloudLinkAWSByocConnectionsAuthKeyModel represents auth_key block
 type CloudLinkAWSByocConnectionsAuthKeyModel struct {
 	BlindfoldSecretInfo *CloudLinkAWSByocConnectionsAuthKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *CloudLinkAWSByocConnectionsAuthKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *CloudLinkAWSByocConnectionsAuthKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // CloudLinkAWSByocConnectionsAuthKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
 type CloudLinkAWSByocConnectionsAuthKeyBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // CloudLinkAWSByocConnectionsAuthKeyClearSecretInfoModel represents clear_secret_info block
 type CloudLinkAWSByocConnectionsAuthKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // CloudLinkAWSByocConnectionsIPV4Model represents ipv4 block
 type CloudLinkAWSByocConnectionsIPV4Model struct {
 	AWSRouterPeerAddress types.String `tfsdk:"aws_router_peer_address"`
-	RouterPeerAddress types.String `tfsdk:"router_peer_address"`
+	RouterPeerAddress    types.String `tfsdk:"router_peer_address"`
 }
 
 // CloudLinkAWSByocConnectionsMetadataModel represents metadata block
 type CloudLinkAWSByocConnectionsMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
-	Name types.String `tfsdk:"name"`
+	Name            types.String `tfsdk:"name"`
 }
 
 // CloudLinkEnabledModel represents enabled block
@@ -121,7 +121,7 @@ type CloudLinkEnabledModel struct {
 
 // CloudLinkGCPModel represents gcp block
 type CloudLinkGCPModel struct {
-	Byoc *CloudLinkGCPByocModel `tfsdk:"byoc"`
+	Byoc    *CloudLinkGCPByocModel    `tfsdk:"byoc"`
 	GCPCred *CloudLinkGCPGCPCredModel `tfsdk:"gcp_cred"`
 }
 
@@ -132,39 +132,39 @@ type CloudLinkGCPByocModel struct {
 
 // CloudLinkGCPByocConnectionsModel represents connections block
 type CloudLinkGCPByocConnectionsModel struct {
-	InterconnectAttachmentName types.String `tfsdk:"interconnect_attachment_name"`
-	Project types.String `tfsdk:"project"`
-	Region types.String `tfsdk:"region"`
-	Metadata *CloudLinkGCPByocConnectionsMetadataModel `tfsdk:"metadata"`
-	SameAsCredential *CloudLinkEmptyModel `tfsdk:"same_as_credential"`
+	InterconnectAttachmentName types.String                              `tfsdk:"interconnect_attachment_name"`
+	Project                    types.String                              `tfsdk:"project"`
+	Region                     types.String                              `tfsdk:"region"`
+	Metadata                   *CloudLinkGCPByocConnectionsMetadataModel `tfsdk:"metadata"`
+	SameAsCredential           *CloudLinkEmptyModel                      `tfsdk:"same_as_credential"`
 }
 
 // CloudLinkGCPByocConnectionsMetadataModel represents metadata block
 type CloudLinkGCPByocConnectionsMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
-	Name types.String `tfsdk:"name"`
+	Name            types.String `tfsdk:"name"`
 }
 
 // CloudLinkGCPGCPCredModel represents gcp_cred block
 type CloudLinkGCPGCPCredModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 type CloudLinkResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	AWS *CloudLinkAWSModel `tfsdk:"aws"`
-	Disabled *CloudLinkEmptyModel `tfsdk:"disabled"`
-	Enabled *CloudLinkEnabledModel `tfsdk:"enabled"`
-	GCP *CloudLinkGCPModel `tfsdk:"gcp"`
+	Name        types.String           `tfsdk:"name"`
+	Namespace   types.String           `tfsdk:"namespace"`
+	Annotations types.Map              `tfsdk:"annotations"`
+	Description types.String           `tfsdk:"description"`
+	Disable     types.Bool             `tfsdk:"disable"`
+	Labels      types.Map              `tfsdk:"labels"`
+	ID          types.String           `tfsdk:"id"`
+	Timeouts    timeouts.Value         `tfsdk:"timeouts"`
+	AWS         *CloudLinkAWSModel     `tfsdk:"aws"`
+	Disabled    *CloudLinkEmptyModel   `tfsdk:"disabled"`
+	Enabled     *CloudLinkEnabledModel `tfsdk:"enabled"`
+	GCP         *CloudLinkGCPModel     `tfsdk:"gcp"`
 }
 
 func (r *CloudLinkResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -178,7 +178,7 @@ func (r *CloudLinkResource) Schema(ctx context.Context, req resource.SchemaReque
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the CloudLink. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -188,7 +188,7 @@ func (r *CloudLinkResource) Schema(ctx context.Context, req resource.SchemaReque
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the CloudLink will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -198,25 +198,25 @@ func (r *CloudLinkResource) Schema(ctx context.Context, req resource.SchemaReque
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -234,7 +234,7 @@ func (r *CloudLinkResource) Schema(ctx context.Context, req resource.SchemaReque
 				Attributes: map[string]schema.Attribute{
 					"custom_asn": schema.Int64Attribute{
 						MarkdownDescription: "Custom ASN. F5XC will use custom ASN to create a Direct Connect Gateway 4200000000-4294967294",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -243,23 +243,22 @@ func (r *CloudLinkResource) Schema(ctx context.Context, req resource.SchemaReque
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
 								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-								Optional: true,
+								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
 								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-								Optional: true,
+								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-								Optional: true,
-								Computed: true,
+								Optional:            true,
+								Computed:            true,
 							},
 						},
 					},
 					"byoc": schema.SingleNestedBlock{
 						MarkdownDescription: "Bring Your Own Connections. List of Bring You Own Connection",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"connections": schema.ListNestedBlock{
 								MarkdownDescription: "Bring Your Own Connections. List of Bring You Own Connections. These AWS Direct Connect connections are not managed by F5XC but will be used for connecting sites and REs.",
@@ -267,49 +266,48 @@ func (r *CloudLinkResource) Schema(ctx context.Context, req resource.SchemaReque
 									Attributes: map[string]schema.Attribute{
 										"bgp_asn": schema.Int64Attribute{
 											MarkdownDescription: "BGP ASN. The Border Gateway Protocol (BGP) Autonomous System Number (ASN) of your on-premises router for the new virtual interface to be configured on AWS.",
-											Optional: true,
+											Optional:            true,
 										},
 										"connection_id": schema.StringAttribute{
 											MarkdownDescription: "Direct Connect Connection Id. Id of the existing AWS Direct Connect Connection",
-											Optional: true,
+											Optional:            true,
 										},
 										"region": schema.StringAttribute{
 											MarkdownDescription: "Region. Region where the connection is setup",
-											Optional: true,
+											Optional:            true,
 										},
 										"user_assigned_name": schema.StringAttribute{
 											MarkdownDescription: "User Assigned. User is managing the AWS resource name",
-											Optional: true,
+											Optional:            true,
 										},
 										"virtual_interface_type": schema.StringAttribute{
 											MarkdownDescription: "Virtual Interface Type. Defines the type of virtual interface that needs to be configured on AWS - PRIVATE: Private A private virtual interface should be used to access an Amazon VPC using private IP addresses. - TRANSIT: Transit A transit virtual interface is a VLAN that transports traffic from a Direct Connect gateway to one or more transit gateways. The only possible value is `PRIVATE`. Defaults to `PRIVATE`.",
-											Optional: true,
+											Optional:            true,
 										},
 										"vlan": schema.Int64Attribute{
 											MarkdownDescription: "Virtual Local Area Network (VLAN). Virtual Local Area Network number for the new virtual interface to be configured on the AWS. This tag is required for any traffic traversing the AWS Direct Connect connection",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"auth_key": schema.SingleNestedBlock{
 											MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"blindfold_secret_info": schema.SingleNestedBlock{
 													MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 													Attributes: map[string]schema.Attribute{
 														"decryption_provider": schema.StringAttribute{
 															MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-															Optional: true,
+															Optional:            true,
 														},
 														"location": schema.StringAttribute{
 															MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-															Optional: true,
+															Optional:            true,
 														},
 														"store_provider": schema.StringAttribute{
 															MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -318,11 +316,11 @@ func (r *CloudLinkResource) Schema(ctx context.Context, req resource.SchemaReque
 													Attributes: map[string]schema.Attribute{
 														"provider_ref": schema.StringAttribute{
 															MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-															Optional: true,
+															Optional:            true,
 														},
 														"url": schema.StringAttribute{
 															MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -333,11 +331,11 @@ func (r *CloudLinkResource) Schema(ctx context.Context, req resource.SchemaReque
 											Attributes: map[string]schema.Attribute{
 												"aws_router_peer_address": schema.StringAttribute{
 													MarkdownDescription: "AWS Router IP/Prefix. The BGP peer IP configured on the AWS endpoint",
-													Optional: true,
+													Optional:            true,
 												},
 												"router_peer_address": schema.StringAttribute{
 													MarkdownDescription: "Customer Router IP/Prefix. The BGP peer IP configured on your (customer) endpoint",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 										},
@@ -346,11 +344,11 @@ func (r *CloudLinkResource) Schema(ctx context.Context, req resource.SchemaReque
 											Attributes: map[string]schema.Attribute{
 												"description_spec": schema.StringAttribute{
 													MarkdownDescription: "Description. Human readable description.",
-													Optional: true,
+													Optional:            true,
 												},
 												"name": schema.StringAttribute{
 													MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 										},
@@ -366,7 +364,6 @@ func (r *CloudLinkResource) Schema(ctx context.Context, req resource.SchemaReque
 						},
 					},
 				},
-
 			},
 			"disabled": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: disabled, enabled] Empty. This can be used for messages where no values are needed",
@@ -376,20 +373,17 @@ func (r *CloudLinkResource) Schema(ctx context.Context, req resource.SchemaReque
 				Attributes: map[string]schema.Attribute{
 					"cloudlink_network_name": schema.StringAttribute{
 						MarkdownDescription: "Private ADN Network. Establish private connectivity with the F5 Distributed Cloud Global Network using a Private ADN network. To provision a Private ADN network, please contact F5 Distributed Cloud support.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
-
 			},
 			"gcp": schema.SingleNestedBlock{
 				MarkdownDescription: "Google Cloud Platform (GCP) CloudLink Provider. CloudLink for GCP Cloud Provider",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"byoc": schema.SingleNestedBlock{
 						MarkdownDescription: "GCP Bring Your Own Connections. List of GCP Bring You Own Connections",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"connections": schema.ListNestedBlock{
 								MarkdownDescription: "Bring Your Own Connections. Each 'Bring Your Own Connection' represents a virtual connection that the customer has provisioned in the Cloud (example: AWS Direct Connect). F5XC will orchestrate networking resources in the cloud to facilitate seamless private connectivity.",
@@ -397,15 +391,15 @@ func (r *CloudLinkResource) Schema(ctx context.Context, req resource.SchemaReque
 									Attributes: map[string]schema.Attribute{
 										"interconnect_attachment_name": schema.StringAttribute{
 											MarkdownDescription: "Interconnect Attachment Name. Name of already-existing GCP Cloud Interconnect Attachment",
-											Optional: true,
+											Optional:            true,
 										},
 										"project": schema.StringAttribute{
 											MarkdownDescription: "Specified Project. Specify a GCP Project for the interconnect attachment",
-											Optional: true,
+											Optional:            true,
 										},
 										"region": schema.StringAttribute{
 											MarkdownDescription: "Region. GCP Region in which the GCP Cloud Interconnect attachment is configured",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -414,11 +408,11 @@ func (r *CloudLinkResource) Schema(ctx context.Context, req resource.SchemaReque
 											Attributes: map[string]schema.Attribute{
 												"description_spec": schema.StringAttribute{
 													MarkdownDescription: "Description. Human readable description.",
-													Optional: true,
+													Optional:            true,
 												},
 												"name": schema.StringAttribute{
 													MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 										},
@@ -435,21 +429,20 @@ func (r *CloudLinkResource) Schema(ctx context.Context, req resource.SchemaReque
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
 								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-								Optional: true,
+								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
 								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-								Optional: true,
+								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-								Optional: true,
-								Computed: true,
+								Optional:            true,
+								Computed:            true,
 							},
 						},
 					},
 				},
-
 			},
 		},
 	}
@@ -656,7 +649,6 @@ func (r *CloudLinkResource) Create(ctx context.Context, req resource.CreateReque
 		createReq.Spec["gcp"] = gcpMap
 	}
 
-
 	apiResource, err := r.client.CreateCloudLink(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create CloudLink: %s", err))
@@ -668,7 +660,7 @@ func (r *CloudLinkResource) Create(ctx context.Context, req resource.CreateReque
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if blockData, ok := apiResource.Spec["aws"].(map[string]interface{}); ok && (isImport || data.AWS != nil) {
 		data.AWS = &CloudLinkAWSModel{
 			AWSCred: func() *CloudLinkAWSAWSCredModel {
@@ -708,8 +700,7 @@ func (r *CloudLinkResource) Create(ctx context.Context, req resource.CreateReque
 				}
 				// Import case: read from API
 				if _, ok := blockData["byoc"].(map[string]interface{}); ok {
-					return &CloudLinkAWSByocModel{
-					}
+					return &CloudLinkAWSByocModel{}
 				}
 				return nil
 			}(),
@@ -741,7 +732,6 @@ func (r *CloudLinkResource) Create(ctx context.Context, req resource.CreateReque
 		data.GCP = &CloudLinkGCPModel{}
 	}
 	// Normal Read: preserve existing state value
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -831,9 +821,9 @@ func (r *CloudLinkResource) Read(ctx context.Context, req resource.ReadRequest, 
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if blockData, ok := apiResource.Spec["aws"].(map[string]interface{}); ok && (isImport || data.AWS != nil) {
 		data.AWS = &CloudLinkAWSModel{
@@ -874,8 +864,7 @@ func (r *CloudLinkResource) Read(ctx context.Context, req resource.ReadRequest, 
 				}
 				// Import case: read from API
 				if _, ok := blockData["byoc"].(map[string]interface{}); ok {
-					return &CloudLinkAWSByocModel{
-					}
+					return &CloudLinkAWSByocModel{}
 				}
 				return nil
 			}(),
@@ -907,7 +896,6 @@ func (r *CloudLinkResource) Read(ctx context.Context, req resource.ReadRequest, 
 		data.GCP = &CloudLinkGCPModel{}
 	}
 	// Normal Read: preserve existing state value
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -1024,7 +1012,6 @@ func (r *CloudLinkResource) Update(ctx context.Context, req resource.UpdateReque
 		}
 		apiResource.Spec["gcp"] = gcpMap
 	}
-
 
 	updated, err := r.client.UpdateCloudLink(ctx, apiResource)
 	if err != nil {

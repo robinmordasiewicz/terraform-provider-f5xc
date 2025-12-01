@@ -56,77 +56,77 @@ type AlertReceiverEmailModel struct {
 
 // AlertReceiverOpsgenieModel represents opsgenie block
 type AlertReceiverOpsgenieModel struct {
-	URL types.String `tfsdk:"url"`
+	URL    types.String                      `tfsdk:"url"`
 	APIKey *AlertReceiverOpsgenieAPIKeyModel `tfsdk:"api_key"`
 }
 
 // AlertReceiverOpsgenieAPIKeyModel represents api_key block
 type AlertReceiverOpsgenieAPIKeyModel struct {
 	BlindfoldSecretInfo *AlertReceiverOpsgenieAPIKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *AlertReceiverOpsgenieAPIKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *AlertReceiverOpsgenieAPIKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // AlertReceiverOpsgenieAPIKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
 type AlertReceiverOpsgenieAPIKeyBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // AlertReceiverOpsgenieAPIKeyClearSecretInfoModel represents clear_secret_info block
 type AlertReceiverOpsgenieAPIKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // AlertReceiverPagerdutyModel represents pagerduty block
 type AlertReceiverPagerdutyModel struct {
-	URL types.String `tfsdk:"url"`
+	URL        types.String                           `tfsdk:"url"`
 	RoutingKey *AlertReceiverPagerdutyRoutingKeyModel `tfsdk:"routing_key"`
 }
 
 // AlertReceiverPagerdutyRoutingKeyModel represents routing_key block
 type AlertReceiverPagerdutyRoutingKeyModel struct {
 	BlindfoldSecretInfo *AlertReceiverPagerdutyRoutingKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *AlertReceiverPagerdutyRoutingKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *AlertReceiverPagerdutyRoutingKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // AlertReceiverPagerdutyRoutingKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
 type AlertReceiverPagerdutyRoutingKeyBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // AlertReceiverPagerdutyRoutingKeyClearSecretInfoModel represents clear_secret_info block
 type AlertReceiverPagerdutyRoutingKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // AlertReceiverSlackModel represents slack block
 type AlertReceiverSlackModel struct {
-	Channel types.String `tfsdk:"channel"`
-	URL *AlertReceiverSlackURLModel `tfsdk:"url"`
+	Channel types.String                `tfsdk:"channel"`
+	URL     *AlertReceiverSlackURLModel `tfsdk:"url"`
 }
 
 // AlertReceiverSlackURLModel represents url block
 type AlertReceiverSlackURLModel struct {
 	BlindfoldSecretInfo *AlertReceiverSlackURLBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *AlertReceiverSlackURLClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *AlertReceiverSlackURLClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // AlertReceiverSlackURLBlindfoldSecretInfoModel represents blindfold_secret_info block
 type AlertReceiverSlackURLBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // AlertReceiverSlackURLClearSecretInfoModel represents clear_secret_info block
 type AlertReceiverSlackURLClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // AlertReceiverSmsModel represents sms block
@@ -137,19 +137,19 @@ type AlertReceiverSmsModel struct {
 // AlertReceiverWebhookModel represents webhook block
 type AlertReceiverWebhookModel struct {
 	HTTPConfig *AlertReceiverWebhookHTTPConfigModel `tfsdk:"http_config"`
-	URL *AlertReceiverWebhookURLModel `tfsdk:"url"`
+	URL        *AlertReceiverWebhookURLModel        `tfsdk:"url"`
 }
 
 // AlertReceiverWebhookHTTPConfigModel represents http_config block
 type AlertReceiverWebhookHTTPConfigModel struct {
-	EnableHttp2 types.Bool `tfsdk:"enable_http2"`
-	FollowRedirects types.Bool `tfsdk:"follow_redirects"`
-	AuthToken *AlertReceiverWebhookHTTPConfigAuthTokenModel `tfsdk:"auth_token"`
-	BasicAuth *AlertReceiverWebhookHTTPConfigBasicAuthModel `tfsdk:"basic_auth"`
-	ClientCertObj *AlertReceiverWebhookHTTPConfigClientCertObjModel `tfsdk:"client_cert_obj"`
-	NoAuthorization *AlertReceiverEmptyModel `tfsdk:"no_authorization"`
-	NoTLS *AlertReceiverEmptyModel `tfsdk:"no_tls"`
-	UseTLS *AlertReceiverWebhookHTTPConfigUseTLSModel `tfsdk:"use_tls"`
+	EnableHttp2     types.Bool                                        `tfsdk:"enable_http2"`
+	FollowRedirects types.Bool                                        `tfsdk:"follow_redirects"`
+	AuthToken       *AlertReceiverWebhookHTTPConfigAuthTokenModel     `tfsdk:"auth_token"`
+	BasicAuth       *AlertReceiverWebhookHTTPConfigBasicAuthModel     `tfsdk:"basic_auth"`
+	ClientCertObj   *AlertReceiverWebhookHTTPConfigClientCertObjModel `tfsdk:"client_cert_obj"`
+	NoAuthorization *AlertReceiverEmptyModel                          `tfsdk:"no_authorization"`
+	NoTLS           *AlertReceiverEmptyModel                          `tfsdk:"no_tls"`
+	UseTLS          *AlertReceiverWebhookHTTPConfigUseTLSModel        `tfsdk:"use_tls"`
 }
 
 // AlertReceiverWebhookHTTPConfigAuthTokenModel represents auth_token block
@@ -160,45 +160,45 @@ type AlertReceiverWebhookHTTPConfigAuthTokenModel struct {
 // AlertReceiverWebhookHTTPConfigAuthTokenTokenModel represents token block
 type AlertReceiverWebhookHTTPConfigAuthTokenTokenModel struct {
 	BlindfoldSecretInfo *AlertReceiverWebhookHTTPConfigAuthTokenTokenBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *AlertReceiverWebhookHTTPConfigAuthTokenTokenClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *AlertReceiverWebhookHTTPConfigAuthTokenTokenClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // AlertReceiverWebhookHTTPConfigAuthTokenTokenBlindfoldSecretInfoModel represents blindfold_secret_info block
 type AlertReceiverWebhookHTTPConfigAuthTokenTokenBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // AlertReceiverWebhookHTTPConfigAuthTokenTokenClearSecretInfoModel represents clear_secret_info block
 type AlertReceiverWebhookHTTPConfigAuthTokenTokenClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // AlertReceiverWebhookHTTPConfigBasicAuthModel represents basic_auth block
 type AlertReceiverWebhookHTTPConfigBasicAuthModel struct {
-	UserName types.String `tfsdk:"user_name"`
+	UserName types.String                                          `tfsdk:"user_name"`
 	Password *AlertReceiverWebhookHTTPConfigBasicAuthPasswordModel `tfsdk:"password"`
 }
 
 // AlertReceiverWebhookHTTPConfigBasicAuthPasswordModel represents password block
 type AlertReceiverWebhookHTTPConfigBasicAuthPasswordModel struct {
 	BlindfoldSecretInfo *AlertReceiverWebhookHTTPConfigBasicAuthPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *AlertReceiverWebhookHTTPConfigBasicAuthPasswordClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *AlertReceiverWebhookHTTPConfigBasicAuthPasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // AlertReceiverWebhookHTTPConfigBasicAuthPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
 type AlertReceiverWebhookHTTPConfigBasicAuthPasswordBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // AlertReceiverWebhookHTTPConfigBasicAuthPasswordClearSecretInfoModel represents clear_secret_info block
 type AlertReceiverWebhookHTTPConfigBasicAuthPasswordClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // AlertReceiverWebhookHTTPConfigClientCertObjModel represents client_cert_obj block
@@ -208,21 +208,21 @@ type AlertReceiverWebhookHTTPConfigClientCertObjModel struct {
 
 // AlertReceiverWebhookHTTPConfigClientCertObjUseTLSObjModel represents use_tls_obj block
 type AlertReceiverWebhookHTTPConfigClientCertObjUseTLSObjModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // AlertReceiverWebhookHTTPConfigUseTLSModel represents use_tls block
 type AlertReceiverWebhookHTTPConfigUseTLSModel struct {
-	MaxVersion types.String `tfsdk:"max_version"`
-	MinVersion types.String `tfsdk:"min_version"`
-	Sni types.String `tfsdk:"sni"`
-	DisableSni *AlertReceiverEmptyModel `tfsdk:"disable_sni"`
+	MaxVersion            types.String                                                    `tfsdk:"max_version"`
+	MinVersion            types.String                                                    `tfsdk:"min_version"`
+	Sni                   types.String                                                    `tfsdk:"sni"`
+	DisableSni            *AlertReceiverEmptyModel                                        `tfsdk:"disable_sni"`
 	UseServerVerification *AlertReceiverWebhookHTTPConfigUseTLSUseServerVerificationModel `tfsdk:"use_server_verification"`
-	VolterraTrustedCa *AlertReceiverEmptyModel `tfsdk:"volterra_trusted_ca"`
+	VolterraTrustedCa     *AlertReceiverEmptyModel                                        `tfsdk:"volterra_trusted_ca"`
 }
 
 // AlertReceiverWebhookHTTPConfigUseTLSUseServerVerificationModel represents use_server_verification block
@@ -237,47 +237,47 @@ type AlertReceiverWebhookHTTPConfigUseTLSUseServerVerificationCaCertObjModel str
 
 // AlertReceiverWebhookHTTPConfigUseTLSUseServerVerificationCaCertObjTrustedCaModel represents trusted_ca block
 type AlertReceiverWebhookHTTPConfigUseTLSUseServerVerificationCaCertObjTrustedCaModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // AlertReceiverWebhookURLModel represents url block
 type AlertReceiverWebhookURLModel struct {
 	BlindfoldSecretInfo *AlertReceiverWebhookURLBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *AlertReceiverWebhookURLClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *AlertReceiverWebhookURLClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // AlertReceiverWebhookURLBlindfoldSecretInfoModel represents blindfold_secret_info block
 type AlertReceiverWebhookURLBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // AlertReceiverWebhookURLClearSecretInfoModel represents clear_secret_info block
 type AlertReceiverWebhookURLClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 type AlertReceiverResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	Email *AlertReceiverEmailModel `tfsdk:"email"`
-	Opsgenie *AlertReceiverOpsgenieModel `tfsdk:"opsgenie"`
-	Pagerduty *AlertReceiverPagerdutyModel `tfsdk:"pagerduty"`
-	Slack *AlertReceiverSlackModel `tfsdk:"slack"`
-	Sms *AlertReceiverSmsModel `tfsdk:"sms"`
-	Webhook *AlertReceiverWebhookModel `tfsdk:"webhook"`
+	Name        types.String                 `tfsdk:"name"`
+	Namespace   types.String                 `tfsdk:"namespace"`
+	Annotations types.Map                    `tfsdk:"annotations"`
+	Description types.String                 `tfsdk:"description"`
+	Disable     types.Bool                   `tfsdk:"disable"`
+	Labels      types.Map                    `tfsdk:"labels"`
+	ID          types.String                 `tfsdk:"id"`
+	Timeouts    timeouts.Value               `tfsdk:"timeouts"`
+	Email       *AlertReceiverEmailModel     `tfsdk:"email"`
+	Opsgenie    *AlertReceiverOpsgenieModel  `tfsdk:"opsgenie"`
+	Pagerduty   *AlertReceiverPagerdutyModel `tfsdk:"pagerduty"`
+	Slack       *AlertReceiverSlackModel     `tfsdk:"slack"`
+	Sms         *AlertReceiverSmsModel       `tfsdk:"sms"`
+	Webhook     *AlertReceiverWebhookModel   `tfsdk:"webhook"`
 }
 
 func (r *AlertReceiverResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -291,7 +291,7 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the AlertReceiver. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -301,7 +301,7 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the AlertReceiver will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -311,25 +311,25 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -347,39 +347,37 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 				Attributes: map[string]schema.Attribute{
 					"email": schema.StringAttribute{
 						MarkdownDescription: "Email. Email id of the user",
-						Optional: true,
+						Optional:            true,
 					},
 				},
-
 			},
 			"opsgenie": schema.SingleNestedBlock{
 				MarkdownDescription: "OpsGenie Config. OpsGenie configuration to send alert notifications",
 				Attributes: map[string]schema.Attribute{
 					"url": schema.StringAttribute{
 						MarkdownDescription: "API URL. URL to send API requests to",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"api_key": schema.SingleNestedBlock{
 						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"blindfold_secret_info": schema.SingleNestedBlock{
 								MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 								Attributes: map[string]schema.Attribute{
 									"decryption_provider": schema.StringAttribute{
 										MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-										Optional: true,
+										Optional:            true,
 									},
 									"location": schema.StringAttribute{
 										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-										Optional: true,
+										Optional:            true,
 									},
 									"store_provider": schema.StringAttribute{
 										MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -388,47 +386,45 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 								Attributes: map[string]schema.Attribute{
 									"provider_ref": schema.StringAttribute{
 										MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-										Optional: true,
+										Optional:            true,
 									},
 									"url": schema.StringAttribute{
 										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
 						},
 					},
 				},
-
 			},
 			"pagerduty": schema.SingleNestedBlock{
 				MarkdownDescription: "PagerDuty Config. PagerDuty configuration to send alert notifications",
 				Attributes: map[string]schema.Attribute{
 					"url": schema.StringAttribute{
 						MarkdownDescription: "Pager Duty URL. URL to send API requests to",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"routing_key": schema.SingleNestedBlock{
 						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"blindfold_secret_info": schema.SingleNestedBlock{
 								MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 								Attributes: map[string]schema.Attribute{
 									"decryption_provider": schema.StringAttribute{
 										MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-										Optional: true,
+										Optional:            true,
 									},
 									"location": schema.StringAttribute{
 										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-										Optional: true,
+										Optional:            true,
 									},
 									"store_provider": schema.StringAttribute{
 										MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -437,47 +433,45 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 								Attributes: map[string]schema.Attribute{
 									"provider_ref": schema.StringAttribute{
 										MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-										Optional: true,
+										Optional:            true,
 									},
 									"url": schema.StringAttribute{
 										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
 						},
 					},
 				},
-
 			},
 			"slack": schema.SingleNestedBlock{
 				MarkdownDescription: "Slack Config. Slack configuration to send alert notifications",
 				Attributes: map[string]schema.Attribute{
 					"channel": schema.StringAttribute{
 						MarkdownDescription: "Channel. Channel or user to send notifications to",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"url": schema.SingleNestedBlock{
 						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"blindfold_secret_info": schema.SingleNestedBlock{
 								MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 								Attributes: map[string]schema.Attribute{
 									"decryption_provider": schema.StringAttribute{
 										MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-										Optional: true,
+										Optional:            true,
 									},
 									"location": schema.StringAttribute{
 										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-										Optional: true,
+										Optional:            true,
 									},
 									"store_provider": schema.StringAttribute{
 										MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -486,71 +480,66 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 								Attributes: map[string]schema.Attribute{
 									"provider_ref": schema.StringAttribute{
 										MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-										Optional: true,
+										Optional:            true,
 									},
 									"url": schema.StringAttribute{
 										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
 						},
 					},
 				},
-
 			},
 			"sms": schema.SingleNestedBlock{
 				MarkdownDescription: "SMS Configuration.",
 				Attributes: map[string]schema.Attribute{
 					"contact_number": schema.StringAttribute{
 						MarkdownDescription: "Contact Number. Contact number of the user in ITU E.164 format [+][country code][subscriber number including area code]",
-						Optional: true,
+						Optional:            true,
 					},
 				},
-
 			},
 			"webhook": schema.SingleNestedBlock{
 				MarkdownDescription: "Webhook Config. Webhook configuration to send alert notifications",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"http_config": schema.SingleNestedBlock{
 						MarkdownDescription: "HTTP Configuration. Configuration for HTTP endpoint",
 						Attributes: map[string]schema.Attribute{
 							"enable_http2": schema.BoolAttribute{
 								MarkdownDescription: "Enable HTTP2. Configure to use HTTP2 protocol.",
-								Optional: true,
+								Optional:            true,
 							},
 							"follow_redirects": schema.BoolAttribute{
 								MarkdownDescription: "Follow Redirects. Configure whether HTTP requests follow HTTP 3xx redirects.",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
 							"auth_token": schema.SingleNestedBlock{
 								MarkdownDescription: "Access Token. Authentication Token for access",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"token": schema.SingleNestedBlock{
 										MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-										Attributes: map[string]schema.Attribute{
-										},
+										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"blindfold_secret_info": schema.SingleNestedBlock{
 												MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 												Attributes: map[string]schema.Attribute{
 													"decryption_provider": schema.StringAttribute{
 														MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-														Optional: true,
+														Optional:            true,
 													},
 													"location": schema.StringAttribute{
 														MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-														Optional: true,
+														Optional:            true,
 													},
 													"store_provider": schema.StringAttribute{
 														MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 											},
@@ -559,11 +548,11 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 												Attributes: map[string]schema.Attribute{
 													"provider_ref": schema.StringAttribute{
 														MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-														Optional: true,
+														Optional:            true,
 													},
 													"url": schema.StringAttribute{
 														MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 											},
@@ -576,29 +565,28 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 								Attributes: map[string]schema.Attribute{
 									"user_name": schema.StringAttribute{
 										MarkdownDescription: "User Name. HTTP Basic Auth User Name",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 								Blocks: map[string]schema.Block{
 									"password": schema.SingleNestedBlock{
 										MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-										Attributes: map[string]schema.Attribute{
-										},
+										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"blindfold_secret_info": schema.SingleNestedBlock{
 												MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 												Attributes: map[string]schema.Attribute{
 													"decryption_provider": schema.StringAttribute{
 														MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-														Optional: true,
+														Optional:            true,
 													},
 													"location": schema.StringAttribute{
 														MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-														Optional: true,
+														Optional:            true,
 													},
 													"store_provider": schema.StringAttribute{
 														MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 											},
@@ -607,11 +595,11 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 												Attributes: map[string]schema.Attribute{
 													"provider_ref": schema.StringAttribute{
 														MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-														Optional: true,
+														Optional:            true,
 													},
 													"url": schema.StringAttribute{
 														MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 											},
@@ -621,8 +609,7 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 							},
 							"client_cert_obj": schema.SingleNestedBlock{
 								MarkdownDescription: "Client Certificate Object. Configuration for client certificate",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"use_tls_obj": schema.ListNestedBlock{
 										MarkdownDescription: "Certificate Object. Reference to client certificate object",
@@ -630,26 +617,26 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 											Attributes: map[string]schema.Attribute{
 												"kind": schema.StringAttribute{
 													MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-													Optional: true,
-													Computed: true,
+													Optional:            true,
+													Computed:            true,
 												},
 												"name": schema.StringAttribute{
 													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-													Optional: true,
+													Optional:            true,
 												},
 												"namespace": schema.StringAttribute{
 													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-													Optional: true,
+													Optional:            true,
 												},
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-													Optional: true,
-													Computed: true,
+													Optional:            true,
+													Computed:            true,
 												},
 												"uid": schema.StringAttribute{
 													MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-													Optional: true,
-													Computed: true,
+													Optional:            true,
+													Computed:            true,
 												},
 											},
 										},
@@ -667,15 +654,15 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 								Attributes: map[string]schema.Attribute{
 									"max_version": schema.StringAttribute{
 										MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
-										Optional: true,
+										Optional:            true,
 									},
 									"min_version": schema.StringAttribute{
 										MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
-										Optional: true,
+										Optional:            true,
 									},
 									"sni": schema.StringAttribute{
 										MarkdownDescription: "SNI Value. SNI value to be used.",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 								Blocks: map[string]schema.Block{
@@ -684,13 +671,11 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 									},
 									"use_server_verification": schema.SingleNestedBlock{
 										MarkdownDescription: "TLS Validation Context for Servers. Upstream TLS Validation Context",
-										Attributes: map[string]schema.Attribute{
-										},
+										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"ca_cert_obj": schema.SingleNestedBlock{
 												MarkdownDescription: "CA Certificate Object. Configuration for CA certificate",
-												Attributes: map[string]schema.Attribute{
-												},
+												Attributes:          map[string]schema.Attribute{},
 												Blocks: map[string]schema.Block{
 													"trusted_ca": schema.ListNestedBlock{
 														MarkdownDescription: "Certificate Object. Reference to client certificate object",
@@ -698,26 +683,26 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 															Attributes: map[string]schema.Attribute{
 																"kind": schema.StringAttribute{
 																	MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-																	Optional: true,
-																	Computed: true,
+																	Optional:            true,
+																	Computed:            true,
 																},
 																"name": schema.StringAttribute{
 																	MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"namespace": schema.StringAttribute{
 																	MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"tenant": schema.StringAttribute{
 																	MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-																	Optional: true,
-																	Computed: true,
+																	Optional:            true,
+																	Computed:            true,
 																},
 																"uid": schema.StringAttribute{
 																	MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-																	Optional: true,
-																	Computed: true,
+																	Optional:            true,
+																	Computed:            true,
 																},
 															},
 														},
@@ -735,23 +720,22 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 					},
 					"url": schema.SingleNestedBlock{
 						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"blindfold_secret_info": schema.SingleNestedBlock{
 								MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 								Attributes: map[string]schema.Attribute{
 									"decryption_provider": schema.StringAttribute{
 										MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-										Optional: true,
+										Optional:            true,
 									},
 									"location": schema.StringAttribute{
 										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-										Optional: true,
+										Optional:            true,
 									},
 									"store_provider": schema.StringAttribute{
 										MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -760,18 +744,17 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 								Attributes: map[string]schema.Attribute{
 									"provider_ref": schema.StringAttribute{
 										MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-										Optional: true,
+										Optional:            true,
 									},
 									"url": schema.StringAttribute{
 										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
 						},
 					},
 				},
-
 			},
 		},
 	}
@@ -987,7 +970,6 @@ func (r *AlertReceiverResource) Create(ctx context.Context, req resource.CreateR
 		createReq.Spec["webhook"] = webhookMap
 	}
 
-
 	apiResource, err := r.client.CreateAlertReceiver(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create AlertReceiver: %s", err))
@@ -999,7 +981,7 @@ func (r *AlertReceiverResource) Create(ctx context.Context, req resource.CreateR
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if blockData, ok := apiResource.Spec["email"].(map[string]interface{}); ok && (isImport || data.Email != nil) {
 		data.Email = &AlertReceiverEmailModel{
 			Email: func() types.String {
@@ -1019,8 +1001,7 @@ func (r *AlertReceiverResource) Create(ctx context.Context, req resource.CreateR
 				}
 				// Import case: read from API
 				if _, ok := blockData["api_key"].(map[string]interface{}); ok {
-					return &AlertReceiverOpsgenieAPIKeyModel{
-					}
+					return &AlertReceiverOpsgenieAPIKeyModel{}
 				}
 				return nil
 			}(),
@@ -1041,8 +1022,7 @@ func (r *AlertReceiverResource) Create(ctx context.Context, req resource.CreateR
 				}
 				// Import case: read from API
 				if _, ok := blockData["routing_key"].(map[string]interface{}); ok {
-					return &AlertReceiverPagerdutyRoutingKeyModel{
-					}
+					return &AlertReceiverPagerdutyRoutingKeyModel{}
 				}
 				return nil
 			}(),
@@ -1069,8 +1049,7 @@ func (r *AlertReceiverResource) Create(ctx context.Context, req resource.CreateR
 				}
 				// Import case: read from API
 				if _, ok := blockData["url"].(map[string]interface{}); ok {
-					return &AlertReceiverSlackURLModel{
-					}
+					return &AlertReceiverSlackURLModel{}
 				}
 				return nil
 			}(),
@@ -1091,7 +1070,6 @@ func (r *AlertReceiverResource) Create(ctx context.Context, req resource.CreateR
 		data.Webhook = &AlertReceiverWebhookModel{}
 	}
 	// Normal Read: preserve existing state value
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -1181,9 +1159,9 @@ func (r *AlertReceiverResource) Read(ctx context.Context, req resource.ReadReque
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if blockData, ok := apiResource.Spec["email"].(map[string]interface{}); ok && (isImport || data.Email != nil) {
 		data.Email = &AlertReceiverEmailModel{
@@ -1204,8 +1182,7 @@ func (r *AlertReceiverResource) Read(ctx context.Context, req resource.ReadReque
 				}
 				// Import case: read from API
 				if _, ok := blockData["api_key"].(map[string]interface{}); ok {
-					return &AlertReceiverOpsgenieAPIKeyModel{
-					}
+					return &AlertReceiverOpsgenieAPIKeyModel{}
 				}
 				return nil
 			}(),
@@ -1226,8 +1203,7 @@ func (r *AlertReceiverResource) Read(ctx context.Context, req resource.ReadReque
 				}
 				// Import case: read from API
 				if _, ok := blockData["routing_key"].(map[string]interface{}); ok {
-					return &AlertReceiverPagerdutyRoutingKeyModel{
-					}
+					return &AlertReceiverPagerdutyRoutingKeyModel{}
 				}
 				return nil
 			}(),
@@ -1254,8 +1230,7 @@ func (r *AlertReceiverResource) Read(ctx context.Context, req resource.ReadReque
 				}
 				// Import case: read from API
 				if _, ok := blockData["url"].(map[string]interface{}); ok {
-					return &AlertReceiverSlackURLModel{
-					}
+					return &AlertReceiverSlackURLModel{}
 				}
 				return nil
 			}(),
@@ -1276,7 +1251,6 @@ func (r *AlertReceiverResource) Read(ctx context.Context, req resource.ReadReque
 		data.Webhook = &AlertReceiverWebhookModel{}
 	}
 	// Normal Read: preserve existing state value
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -1402,7 +1376,6 @@ func (r *AlertReceiverResource) Update(ctx context.Context, req resource.UpdateR
 		}
 		apiResource.Spec["webhook"] = webhookMap
 	}
-
 
 	updated, err := r.client.UpdateAlertReceiver(ctx, apiResource)
 	if err != nil {

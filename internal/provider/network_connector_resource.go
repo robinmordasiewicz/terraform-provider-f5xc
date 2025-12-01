@@ -51,32 +51,32 @@ type NetworkConnectorEmptyModel struct {
 
 // NetworkConnectorEnableForwardProxyModel represents enable_forward_proxy block
 type NetworkConnectorEnableForwardProxyModel struct {
-	ConnectionTimeout types.Int64 `tfsdk:"connection_timeout"`
-	MaxConnectAttempts types.Int64 `tfsdk:"max_connect_attempts"`
-	WhiteListedPorts types.List `tfsdk:"white_listed_ports"`
-	WhiteListedPrefixes types.List `tfsdk:"white_listed_prefixes"`
-	NoInterception *NetworkConnectorEmptyModel `tfsdk:"no_interception"`
-	TLSIntercept *NetworkConnectorEnableForwardProxyTLSInterceptModel `tfsdk:"tls_intercept"`
+	ConnectionTimeout   types.Int64                                          `tfsdk:"connection_timeout"`
+	MaxConnectAttempts  types.Int64                                          `tfsdk:"max_connect_attempts"`
+	WhiteListedPorts    types.List                                           `tfsdk:"white_listed_ports"`
+	WhiteListedPrefixes types.List                                           `tfsdk:"white_listed_prefixes"`
+	NoInterception      *NetworkConnectorEmptyModel                          `tfsdk:"no_interception"`
+	TLSIntercept        *NetworkConnectorEnableForwardProxyTLSInterceptModel `tfsdk:"tls_intercept"`
 }
 
 // NetworkConnectorEnableForwardProxyTLSInterceptModel represents tls_intercept block
 type NetworkConnectorEnableForwardProxyTLSInterceptModel struct {
-	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
-	CustomCertificate *NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificateModel `tfsdk:"custom_certificate"`
-	EnableForAllDomains *NetworkConnectorEmptyModel `tfsdk:"enable_for_all_domains"`
-	Policy *NetworkConnectorEnableForwardProxyTLSInterceptPolicyModel `tfsdk:"policy"`
-	VolterraCertificate *NetworkConnectorEmptyModel `tfsdk:"volterra_certificate"`
-	VolterraTrustedCa *NetworkConnectorEmptyModel `tfsdk:"volterra_trusted_ca"`
+	TrustedCaURL        types.String                                                          `tfsdk:"trusted_ca_url"`
+	CustomCertificate   *NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificateModel `tfsdk:"custom_certificate"`
+	EnableForAllDomains *NetworkConnectorEmptyModel                                           `tfsdk:"enable_for_all_domains"`
+	Policy              *NetworkConnectorEnableForwardProxyTLSInterceptPolicyModel            `tfsdk:"policy"`
+	VolterraCertificate *NetworkConnectorEmptyModel                                           `tfsdk:"volterra_certificate"`
+	VolterraTrustedCa   *NetworkConnectorEmptyModel                                           `tfsdk:"volterra_trusted_ca"`
 }
 
 // NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificateModel represents custom_certificate block
 type NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificateModel struct {
-	CertificateURL types.String `tfsdk:"certificate_url"`
-	DescriptionSpec types.String `tfsdk:"description_spec"`
+	CertificateURL       types.String                                                                              `tfsdk:"certificate_url"`
+	DescriptionSpec      types.String                                                                              `tfsdk:"description_spec"`
 	CustomHashAlgorithms *NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificateCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
-	DisableOcspStapling *NetworkConnectorEmptyModel `tfsdk:"disable_ocsp_stapling"`
-	PrivateKey *NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificatePrivateKeyModel `tfsdk:"private_key"`
-	UseSystemDefaults *NetworkConnectorEmptyModel `tfsdk:"use_system_defaults"`
+	DisableOcspStapling  *NetworkConnectorEmptyModel                                                               `tfsdk:"disable_ocsp_stapling"`
+	PrivateKey           *NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificatePrivateKeyModel           `tfsdk:"private_key"`
+	UseSystemDefaults    *NetworkConnectorEmptyModel                                                               `tfsdk:"use_system_defaults"`
 }
 
 // NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificateCustomHashAlgorithmsModel represents custom_hash_algorithms block
@@ -87,20 +87,20 @@ type NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificateCustomHashAl
 // NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificatePrivateKeyModel represents private_key block
 type NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificatePrivateKeyModel struct {
 	BlindfoldSecretInfo *NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificatePrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificatePrivateKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificatePrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificatePrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
 type NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificatePrivateKeyBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificatePrivateKeyClearSecretInfoModel represents clear_secret_info block
 type NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificatePrivateKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // NetworkConnectorEnableForwardProxyTLSInterceptPolicyModel represents policy block
@@ -110,15 +110,15 @@ type NetworkConnectorEnableForwardProxyTLSInterceptPolicyModel struct {
 
 // NetworkConnectorEnableForwardProxyTLSInterceptPolicyInterceptionRulesModel represents interception_rules block
 type NetworkConnectorEnableForwardProxyTLSInterceptPolicyInterceptionRulesModel struct {
-	DisableInterception *NetworkConnectorEmptyModel `tfsdk:"disable_interception"`
-	DomainMatch *NetworkConnectorEnableForwardProxyTLSInterceptPolicyInterceptionRulesDomainMatchModel `tfsdk:"domain_match"`
-	EnableInterception *NetworkConnectorEmptyModel `tfsdk:"enable_interception"`
+	DisableInterception *NetworkConnectorEmptyModel                                                            `tfsdk:"disable_interception"`
+	DomainMatch         *NetworkConnectorEnableForwardProxyTLSInterceptPolicyInterceptionRulesDomainMatchModel `tfsdk:"domain_match"`
+	EnableInterception  *NetworkConnectorEmptyModel                                                            `tfsdk:"enable_interception"`
 }
 
 // NetworkConnectorEnableForwardProxyTLSInterceptPolicyInterceptionRulesDomainMatchModel represents domain_match block
 type NetworkConnectorEnableForwardProxyTLSInterceptPolicyInterceptionRulesDomainMatchModel struct {
-	ExactValue types.String `tfsdk:"exact_value"`
-	RegexValue types.String `tfsdk:"regex_value"`
+	ExactValue  types.String `tfsdk:"exact_value"`
+	RegexValue  types.String `tfsdk:"regex_value"`
 	SuffixValue types.String `tfsdk:"suffix_value"`
 }
 
@@ -129,15 +129,15 @@ type NetworkConnectorSLIToGlobalDrModel struct {
 
 // NetworkConnectorSLIToGlobalDrGlobalVnModel represents global_vn block
 type NetworkConnectorSLIToGlobalDrGlobalVnModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // NetworkConnectorSLIToSLOSnatModel represents sli_to_slo_snat block
 type NetworkConnectorSLIToSLOSnatModel struct {
 	DefaultGwSnat *NetworkConnectorEmptyModel `tfsdk:"default_gw_snat"`
-	InterfaceIP *NetworkConnectorEmptyModel `tfsdk:"interface_ip"`
+	InterfaceIP   *NetworkConnectorEmptyModel `tfsdk:"interface_ip"`
 }
 
 // NetworkConnectorSLOToGlobalDrModel represents slo_to_global_dr block
@@ -147,25 +147,25 @@ type NetworkConnectorSLOToGlobalDrModel struct {
 
 // NetworkConnectorSLOToGlobalDrGlobalVnModel represents global_vn block
 type NetworkConnectorSLOToGlobalDrGlobalVnModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 type NetworkConnectorResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	DisableForwardProxy *NetworkConnectorEmptyModel `tfsdk:"disable_forward_proxy"`
-	EnableForwardProxy *NetworkConnectorEnableForwardProxyModel `tfsdk:"enable_forward_proxy"`
-	SLIToGlobalDr *NetworkConnectorSLIToGlobalDrModel `tfsdk:"sli_to_global_dr"`
-	SLIToSLOSnat *NetworkConnectorSLIToSLOSnatModel `tfsdk:"sli_to_slo_snat"`
-	SLOToGlobalDr *NetworkConnectorSLOToGlobalDrModel `tfsdk:"slo_to_global_dr"`
+	Name                types.String                             `tfsdk:"name"`
+	Namespace           types.String                             `tfsdk:"namespace"`
+	Annotations         types.Map                                `tfsdk:"annotations"`
+	Description         types.String                             `tfsdk:"description"`
+	Disable             types.Bool                               `tfsdk:"disable"`
+	Labels              types.Map                                `tfsdk:"labels"`
+	ID                  types.String                             `tfsdk:"id"`
+	Timeouts            timeouts.Value                           `tfsdk:"timeouts"`
+	DisableForwardProxy *NetworkConnectorEmptyModel              `tfsdk:"disable_forward_proxy"`
+	EnableForwardProxy  *NetworkConnectorEnableForwardProxyModel `tfsdk:"enable_forward_proxy"`
+	SLIToGlobalDr       *NetworkConnectorSLIToGlobalDrModel      `tfsdk:"sli_to_global_dr"`
+	SLIToSLOSnat        *NetworkConnectorSLIToSLOSnatModel       `tfsdk:"sli_to_slo_snat"`
+	SLOToGlobalDr       *NetworkConnectorSLOToGlobalDrModel      `tfsdk:"slo_to_global_dr"`
 }
 
 func (r *NetworkConnectorResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -179,7 +179,7 @@ func (r *NetworkConnectorResource) Schema(ctx context.Context, req resource.Sche
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the NetworkConnector. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -189,7 +189,7 @@ func (r *NetworkConnectorResource) Schema(ctx context.Context, req resource.Sche
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the NetworkConnector will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -199,25 +199,25 @@ func (r *NetworkConnectorResource) Schema(ctx context.Context, req resource.Sche
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -238,21 +238,21 @@ func (r *NetworkConnectorResource) Schema(ctx context.Context, req resource.Sche
 				Attributes: map[string]schema.Attribute{
 					"connection_timeout": schema.Int64Attribute{
 						MarkdownDescription: "Connection Timeout. The timeout for new network connections to upstream server. This is specified in milliseconds. The  (2 seconds). Defaults to `2000`.",
-						Optional: true,
+						Optional:            true,
 					},
 					"max_connect_attempts": schema.Int64Attribute{
 						MarkdownDescription: "Number of connect attempts. Specifies the allowed number of retries on connect failure to upstream server. Defaults to `1`.",
-						Optional: true,
+						Optional:            true,
 					},
 					"white_listed_ports": schema.ListAttribute{
 						MarkdownDescription: "TCP Ports to Skip Protocol Parsing. Traffic to these destination TCP ports is not subjected to protocol parsing Example 'tmate' server port",
-						Optional: true,
-						ElementType: types.Int64Type,
+						Optional:            true,
+						ElementType:         types.Int64Type,
 					},
 					"white_listed_prefixes": schema.ListAttribute{
 						MarkdownDescription: "IP Prefixes to Skip Protocol Parsing. Traffic to these destination ip prefixes is not subjected to protocol parsing Example 'tmate' server ip",
-						Optional: true,
-						ElementType: types.StringType,
+						Optional:            true,
+						ElementType:         types.StringType,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -264,7 +264,7 @@ func (r *NetworkConnectorResource) Schema(ctx context.Context, req resource.Sche
 						Attributes: map[string]schema.Attribute{
 							"trusted_ca_url": schema.StringAttribute{
 								MarkdownDescription: "Custom Root CA Certificate. Custom Root CA Certificate for validating upstream server certificate",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -273,11 +273,11 @@ func (r *NetworkConnectorResource) Schema(ctx context.Context, req resource.Sche
 								Attributes: map[string]schema.Attribute{
 									"certificate_url": schema.StringAttribute{
 										MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
-										Optional: true,
+										Optional:            true,
 									},
 									"description_spec": schema.StringAttribute{
 										MarkdownDescription: "Description. Description for the certificate",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 								Blocks: map[string]schema.Block{
@@ -286,8 +286,8 @@ func (r *NetworkConnectorResource) Schema(ctx context.Context, req resource.Sche
 										Attributes: map[string]schema.Attribute{
 											"hash_algorithms": schema.ListAttribute{
 												MarkdownDescription: "Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM`.",
-												Optional: true,
-												ElementType: types.StringType,
+												Optional:            true,
+												ElementType:         types.StringType,
 											},
 										},
 									},
@@ -296,23 +296,22 @@ func (r *NetworkConnectorResource) Schema(ctx context.Context, req resource.Sche
 									},
 									"private_key": schema.SingleNestedBlock{
 										MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-										Attributes: map[string]schema.Attribute{
-										},
+										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"blindfold_secret_info": schema.SingleNestedBlock{
 												MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 												Attributes: map[string]schema.Attribute{
 													"decryption_provider": schema.StringAttribute{
 														MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-														Optional: true,
+														Optional:            true,
 													},
 													"location": schema.StringAttribute{
 														MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-														Optional: true,
+														Optional:            true,
 													},
 													"store_provider": schema.StringAttribute{
 														MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 											},
@@ -321,11 +320,11 @@ func (r *NetworkConnectorResource) Schema(ctx context.Context, req resource.Sche
 												Attributes: map[string]schema.Attribute{
 													"provider_ref": schema.StringAttribute{
 														MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-														Optional: true,
+														Optional:            true,
 													},
 													"url": schema.StringAttribute{
 														MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 											},
@@ -341,14 +340,12 @@ func (r *NetworkConnectorResource) Schema(ctx context.Context, req resource.Sche
 							},
 							"policy": schema.SingleNestedBlock{
 								MarkdownDescription: "TLS Interception Policy. Policy to enable or disable TLS interception.",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"interception_rules": schema.ListNestedBlock{
 										MarkdownDescription: "TLS Interception Rules. List of ordered rules to enable or disable for TLS interception",
 										NestedObject: schema.NestedBlockObject{
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes: map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"disable_interception": schema.SingleNestedBlock{
 													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -358,15 +355,15 @@ func (r *NetworkConnectorResource) Schema(ctx context.Context, req resource.Sche
 													Attributes: map[string]schema.Attribute{
 														"exact_value": schema.StringAttribute{
 															MarkdownDescription: "Exact Value. Exact domain name.",
-															Optional: true,
+															Optional:            true,
 														},
 														"regex_value": schema.StringAttribute{
 															MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name",
-															Optional: true,
+															Optional:            true,
 														},
 														"suffix_value": schema.StringAttribute{
 															MarkdownDescription: "Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -387,38 +384,34 @@ func (r *NetworkConnectorResource) Schema(ctx context.Context, req resource.Sche
 						},
 					},
 				},
-
 			},
 			"sli_to_global_dr": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: sli_to_global_dr, sli_to_slo_snat, slo_to_global_dr] Global Network. Global network reference for direct connection",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"global_vn": schema.SingleNestedBlock{
 						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
 								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-								Optional: true,
+								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
 								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-								Optional: true,
+								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-								Optional: true,
-								Computed: true,
+								Optional:            true,
+								Computed:            true,
 							},
 						},
 					},
 				},
-
 			},
 			"sli_to_slo_snat": schema.SingleNestedBlock{
 				MarkdownDescription: "SNAT Configuration. x-example: '' description",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"default_gw_snat": schema.SingleNestedBlock{
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -427,33 +420,30 @@ func (r *NetworkConnectorResource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 			"slo_to_global_dr": schema.SingleNestedBlock{
 				MarkdownDescription: "Global Network. Global network reference for direct connection",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"global_vn": schema.SingleNestedBlock{
 						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
 								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-								Optional: true,
+								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
 								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-								Optional: true,
+								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-								Optional: true,
-								Computed: true,
+								Optional:            true,
+								Computed:            true,
 							},
 						},
 					},
 				},
-
 			},
 		},
 	}
@@ -686,7 +676,6 @@ func (r *NetworkConnectorResource) Create(ctx context.Context, req resource.Crea
 		createReq.Spec["slo_to_global_dr"] = slo_to_global_drMap
 	}
 
-
 	apiResource, err := r.client.CreateNetworkConnector(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create NetworkConnector: %s", err))
@@ -698,7 +687,7 @@ func (r *NetworkConnectorResource) Create(ctx context.Context, req resource.Crea
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if _, ok := apiResource.Spec["disable_forward_proxy"].(map[string]interface{}); ok && isImport && data.DisableForwardProxy == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.DisableForwardProxy = &NetworkConnectorEmptyModel{}
@@ -791,7 +780,6 @@ func (r *NetworkConnectorResource) Create(ctx context.Context, req resource.Crea
 		data.SLOToGlobalDr = &NetworkConnectorSLOToGlobalDrModel{}
 	}
 	// Normal Read: preserve existing state value
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -881,9 +869,9 @@ func (r *NetworkConnectorResource) Read(ctx context.Context, req resource.ReadRe
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if _, ok := apiResource.Spec["disable_forward_proxy"].(map[string]interface{}); ok && isImport && data.DisableForwardProxy == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -977,7 +965,6 @@ func (r *NetworkConnectorResource) Read(ctx context.Context, req resource.ReadRe
 		data.SLOToGlobalDr = &NetworkConnectorSLOToGlobalDrModel{}
 	}
 	// Normal Read: preserve existing state value
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -1120,7 +1107,6 @@ func (r *NetworkConnectorResource) Update(ctx context.Context, req resource.Upda
 		}
 		apiResource.Spec["slo_to_global_dr"] = slo_to_global_drMap
 	}
-
 
 	updated, err := r.client.UpdateNetworkConnector(ctx, apiResource)
 	if err != nil {

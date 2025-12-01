@@ -65,19 +65,19 @@ type Ike2IKEKeylifetimeMinutesModel struct {
 }
 
 type Ike2ResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	DhGroupSet *Ike2DhGroupSetModel `tfsdk:"dh_group_set"`
-	DisablePfs *Ike2EmptyModel `tfsdk:"disable_pfs"`
-	IKEKeylifetimeHours *Ike2IKEKeylifetimeHoursModel `tfsdk:"ike_keylifetime_hours"`
+	Name                  types.String                    `tfsdk:"name"`
+	Namespace             types.String                    `tfsdk:"namespace"`
+	Annotations           types.Map                       `tfsdk:"annotations"`
+	Description           types.String                    `tfsdk:"description"`
+	Disable               types.Bool                      `tfsdk:"disable"`
+	Labels                types.Map                       `tfsdk:"labels"`
+	ID                    types.String                    `tfsdk:"id"`
+	Timeouts              timeouts.Value                  `tfsdk:"timeouts"`
+	DhGroupSet            *Ike2DhGroupSetModel            `tfsdk:"dh_group_set"`
+	DisablePfs            *Ike2EmptyModel                 `tfsdk:"disable_pfs"`
+	IKEKeylifetimeHours   *Ike2IKEKeylifetimeHoursModel   `tfsdk:"ike_keylifetime_hours"`
 	IKEKeylifetimeMinutes *Ike2IKEKeylifetimeMinutesModel `tfsdk:"ike_keylifetime_minutes"`
-	UseDefaultKeylifetime *Ike2EmptyModel `tfsdk:"use_default_keylifetime"`
+	UseDefaultKeylifetime *Ike2EmptyModel                 `tfsdk:"use_default_keylifetime"`
 }
 
 func (r *Ike2Resource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -91,7 +91,7 @@ func (r *Ike2Resource) Schema(ctx context.Context, req resource.SchemaRequest, r
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Ike2. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -101,7 +101,7 @@ func (r *Ike2Resource) Schema(ctx context.Context, req resource.SchemaRequest, r
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the Ike2 will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -111,25 +111,25 @@ func (r *Ike2Resource) Schema(ctx context.Context, req resource.SchemaRequest, r
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -147,11 +147,10 @@ func (r *Ike2Resource) Schema(ctx context.Context, req resource.SchemaRequest, r
 				Attributes: map[string]schema.Attribute{
 					"dh_groups": schema.ListAttribute{
 						MarkdownDescription: "Diffie Hellman Groups. Possible values are `DH_GROUP_DEFAULT`, `DH_GROUP_14`, `DH_GROUP_15`, `DH_GROUP_16`, `DH_GROUP_17`, `DH_GROUP_18`, `DH_GROUP_19`, `DH_GROUP_20`, `DH_GROUP_21`, `DH_GROUP_26`. Defaults to `DH_GROUP_DEFAULT`.",
-						Optional: true,
-						ElementType: types.StringType,
+						Optional:            true,
+						ElementType:         types.StringType,
 					},
 				},
-
 			},
 			"disable_pfs": schema.SingleNestedBlock{
 				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -161,20 +160,18 @@ func (r *Ike2Resource) Schema(ctx context.Context, req resource.SchemaRequest, r
 				Attributes: map[string]schema.Attribute{
 					"duration": schema.Int64Attribute{
 						MarkdownDescription: "Duration.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
-
 			},
 			"ike_keylifetime_minutes": schema.SingleNestedBlock{
 				MarkdownDescription: "Minutes. Set IKE Key Lifetime in minutes",
 				Attributes: map[string]schema.Attribute{
 					"duration": schema.Int64Attribute{
 						MarkdownDescription: "Duration.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
-
 			},
 			"use_default_keylifetime": schema.SingleNestedBlock{
 				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -361,7 +358,6 @@ func (r *Ike2Resource) Create(ctx context.Context, req resource.CreateRequest, r
 		createReq.Spec["use_default_keylifetime"] = use_default_keylifetimeMap
 	}
 
-
 	apiResource, err := r.client.CreateIke2(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create Ike2: %s", err))
@@ -373,7 +369,7 @@ func (r *Ike2Resource) Create(ctx context.Context, req resource.CreateRequest, r
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if blockData, ok := apiResource.Spec["dh_group_set"].(map[string]interface{}); ok && (isImport || data.DhGroupSet != nil) {
 		data.DhGroupSet = &Ike2DhGroupSetModel{
 			DhGroups: func() types.List {
@@ -421,7 +417,6 @@ func (r *Ike2Resource) Create(ctx context.Context, req resource.CreateRequest, r
 		data.UseDefaultKeylifetime = &Ike2EmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -511,9 +506,9 @@ func (r *Ike2Resource) Read(ctx context.Context, req resource.ReadRequest, resp 
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if blockData, ok := apiResource.Spec["dh_group_set"].(map[string]interface{}); ok && (isImport || data.DhGroupSet != nil) {
 		data.DhGroupSet = &Ike2DhGroupSetModel{
@@ -562,7 +557,6 @@ func (r *Ike2Resource) Read(ctx context.Context, req resource.ReadRequest, resp 
 		data.UseDefaultKeylifetime = &Ike2EmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -656,7 +650,6 @@ func (r *Ike2Resource) Update(ctx context.Context, req resource.UpdateRequest, r
 		use_default_keylifetimeMap := make(map[string]interface{})
 		apiResource.Spec["use_default_keylifetime"] = use_default_keylifetimeMap
 	}
-
 
 	updated, err := r.client.UpdateIke2(ctx, apiResource)
 	if err != nil {

@@ -51,7 +51,7 @@ type TunnelEmptyModel struct {
 
 // TunnelLocalIPModel represents local_ip block
 type TunnelLocalIPModel struct {
-	Intf *TunnelLocalIPIntfModel `tfsdk:"intf"`
+	Intf      *TunnelLocalIPIntfModel      `tfsdk:"intf"`
 	IPAddress *TunnelLocalIPIPAddressModel `tfsdk:"ip_address"`
 }
 
@@ -62,17 +62,17 @@ type TunnelLocalIPIntfModel struct {
 
 // TunnelLocalIPIntfLocalIntfModel represents local_intf block
 type TunnelLocalIPIntfLocalIntfModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // TunnelLocalIPIPAddressModel represents ip_address block
 type TunnelLocalIPIPAddressModel struct {
-	Auto *TunnelEmptyModel `tfsdk:"auto"`
-	IPAddress *TunnelLocalIPIPAddressIPAddressModel `tfsdk:"ip_address"`
+	Auto               *TunnelEmptyModel                              `tfsdk:"auto"`
+	IPAddress          *TunnelLocalIPIPAddressIPAddressModel          `tfsdk:"ip_address"`
 	VirtualNetworkType *TunnelLocalIPIPAddressVirtualNetworkTypeModel `tfsdk:"virtual_network_type"`
 }
 
@@ -94,8 +94,8 @@ type TunnelLocalIPIPAddressIPAddressIPV6Model struct {
 
 // TunnelLocalIPIPAddressVirtualNetworkTypeModel represents virtual_network_type block
 type TunnelLocalIPIPAddressVirtualNetworkTypeModel struct {
-	Public *TunnelEmptyModel `tfsdk:"public"`
-	SiteLocal *TunnelEmptyModel `tfsdk:"site_local"`
+	Public          *TunnelEmptyModel `tfsdk:"public"`
+	SiteLocal       *TunnelEmptyModel `tfsdk:"site_local"`
 	SiteLocalInside *TunnelEmptyModel `tfsdk:"site_local_inside"`
 }
 
@@ -112,26 +112,26 @@ type TunnelParamsIpsecModel struct {
 // TunnelParamsIpsecIpsecPskModel represents ipsec_psk block
 type TunnelParamsIpsecIpsecPskModel struct {
 	BlindfoldSecretInfo *TunnelParamsIpsecIpsecPskBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *TunnelParamsIpsecIpsecPskClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *TunnelParamsIpsecIpsecPskClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // TunnelParamsIpsecIpsecPskBlindfoldSecretInfoModel represents blindfold_secret_info block
 type TunnelParamsIpsecIpsecPskBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // TunnelParamsIpsecIpsecPskClearSecretInfoModel represents clear_secret_info block
 type TunnelParamsIpsecIpsecPskClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // TunnelRemoteIPModel represents remote_ip block
 type TunnelRemoteIPModel struct {
 	Endpoints *TunnelRemoteIPEndpointsModel `tfsdk:"endpoints"`
-	IP *TunnelRemoteIPIPModel `tfsdk:"ip"`
+	IP        *TunnelRemoteIPIPModel        `tfsdk:"ip"`
 }
 
 // TunnelRemoteIPEndpointsModel represents endpoints block
@@ -156,18 +156,18 @@ type TunnelRemoteIPIPIPV6Model struct {
 }
 
 type TunnelResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	TunnelType types.String `tfsdk:"tunnel_type"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	LocalIP *TunnelLocalIPModel `tfsdk:"local_ip"`
-	Params *TunnelParamsModel `tfsdk:"params"`
-	RemoteIP *TunnelRemoteIPModel `tfsdk:"remote_ip"`
+	Name        types.String         `tfsdk:"name"`
+	Namespace   types.String         `tfsdk:"namespace"`
+	Annotations types.Map            `tfsdk:"annotations"`
+	Description types.String         `tfsdk:"description"`
+	Disable     types.Bool           `tfsdk:"disable"`
+	Labels      types.Map            `tfsdk:"labels"`
+	ID          types.String         `tfsdk:"id"`
+	TunnelType  types.String         `tfsdk:"tunnel_type"`
+	Timeouts    timeouts.Value       `tfsdk:"timeouts"`
+	LocalIP     *TunnelLocalIPModel  `tfsdk:"local_ip"`
+	Params      *TunnelParamsModel   `tfsdk:"params"`
+	RemoteIP    *TunnelRemoteIPModel `tfsdk:"remote_ip"`
 }
 
 func (r *TunnelResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -181,7 +181,7 @@ func (r *TunnelResource) Schema(ctx context.Context, req resource.SchemaRequest,
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Tunnel. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -191,7 +191,7 @@ func (r *TunnelResource) Schema(ctx context.Context, req resource.SchemaRequest,
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the Tunnel will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -201,33 +201,33 @@ func (r *TunnelResource) Schema(ctx context.Context, req resource.SchemaRequest,
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"tunnel_type": schema.StringAttribute{
 				MarkdownDescription: "Tunnel Type. Supported tunnel types are IPSec IPSEC tunnel type with PSK GRE tunnel type. Possible values are `IPSEC_PSK`, `GRE`. Defaults to `IPSEC_PSK`.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -242,13 +242,11 @@ func (r *TunnelResource) Schema(ctx context.Context, req resource.SchemaRequest,
 			}),
 			"local_ip": schema.SingleNestedBlock{
 				MarkdownDescription: "Local IP Address Selector. Defines the options to select local ip address and virtual network for tunnel object Options available are - 1. Local Interface - Network Interface from which IP address and network will be selected 2. IP Address - IP address and network can be configured explicitly",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"intf": schema.SingleNestedBlock{
 						MarkdownDescription: "Interface Type. Provides the local interface to pick up source IP and network for transporting encapsulated packet",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"local_intf": schema.ListNestedBlock{
 								MarkdownDescription: "Local Interface. Local interface to be used for filling in source information of IP and network for transport",
@@ -256,26 +254,26 @@ func (r *TunnelResource) Schema(ctx context.Context, req resource.SchemaRequest,
 									Attributes: map[string]schema.Attribute{
 										"kind": schema.StringAttribute{
 											MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-											Optional: true,
+											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
 											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-											Optional: true,
+											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 										"uid": schema.StringAttribute{
 											MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
@@ -284,23 +282,21 @@ func (r *TunnelResource) Schema(ctx context.Context, req resource.SchemaRequest,
 					},
 					"ip_address": schema.SingleNestedBlock{
 						MarkdownDescription: "Local IP Address Type. Provides the configuration to pick up source IP and network for transporting encapsulated packet",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"auto": schema.SingleNestedBlock{
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 							},
 							"ip_address": schema.SingleNestedBlock{
 								MarkdownDescription: "IP Address. IP Address used to specify an IPv4 or IPv6 address",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"ipv4": schema.SingleNestedBlock{
 										MarkdownDescription: "IPv4 Address. IPv4 Address in dot-decimal notation",
 										Attributes: map[string]schema.Attribute{
 											"addr": schema.StringAttribute{
 												MarkdownDescription: "IPv4 Address. IPv4 Address in string form with dot-decimal notation",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -309,7 +305,7 @@ func (r *TunnelResource) Schema(ctx context.Context, req resource.SchemaRequest,
 										Attributes: map[string]schema.Attribute{
 											"addr": schema.StringAttribute{
 												MarkdownDescription: "IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -317,8 +313,7 @@ func (r *TunnelResource) Schema(ctx context.Context, req resource.SchemaRequest,
 							},
 							"virtual_network_type": schema.SingleNestedBlock{
 								MarkdownDescription: "Virtual Network Type. Different types of virtual networks understood by the system",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"public": schema.SingleNestedBlock{
 										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -334,37 +329,33 @@ func (r *TunnelResource) Schema(ctx context.Context, req resource.SchemaRequest,
 						},
 					},
 				},
-
 			},
 			"params": schema.SingleNestedBlock{
 				MarkdownDescription: "Tunnel Parameters. Tunnel configuration parameters for supported encapsulation 1. IPSec is supported with PSK for which PSK can be configured",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"ipsec": schema.SingleNestedBlock{
 						MarkdownDescription: "IPSEC tunnel parameters. Configuration for IPSec encapsulation are: 1. PSK - pre shared key to be used by IKE",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"ipsec_psk": schema.SingleNestedBlock{
 								MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"blindfold_secret_info": schema.SingleNestedBlock{
 										MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 										Attributes: map[string]schema.Attribute{
 											"decryption_provider": schema.StringAttribute{
 												MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-												Optional: true,
+												Optional:            true,
 											},
 											"location": schema.StringAttribute{
 												MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-												Optional: true,
+												Optional:            true,
 											},
 											"store_provider": schema.StringAttribute{
 												MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -373,11 +364,11 @@ func (r *TunnelResource) Schema(ctx context.Context, req resource.SchemaRequest,
 										Attributes: map[string]schema.Attribute{
 											"provider_ref": schema.StringAttribute{
 												MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-												Optional: true,
+												Optional:            true,
 											},
 											"url": schema.StringAttribute{
 												MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -386,17 +377,14 @@ func (r *TunnelResource) Schema(ctx context.Context, req resource.SchemaRequest,
 						},
 					},
 				},
-
 			},
 			"remote_ip": schema.SingleNestedBlock{
 				MarkdownDescription: "Remote IP Address Selector. Defines the options to select remote ip address for tunnel object Options available are - 1. IP Address - Specifies the remote IP to which tunnel has to be connected 2. Remote endpoint - Is a map of IP address on per ver node basis",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"endpoints": schema.SingleNestedBlock{
 						MarkdownDescription: "Remote Endpoint Type. Provides a map of ver node name to remote node attributes Ver node should use these attributes to configure as remote tunnel",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"endpoints": schema.SingleNestedBlock{
 								MarkdownDescription: "Remote Endpoints. Map of remote attributes to which tunnel will be established on per site node basis Every node can have a different attributes and IP address to connect to Key is ver node name and value is Remote node attributes",
@@ -405,15 +393,14 @@ func (r *TunnelResource) Schema(ctx context.Context, req resource.SchemaRequest,
 					},
 					"ip": schema.SingleNestedBlock{
 						MarkdownDescription: "IP Address. IP Address used to specify an IPv4 or IPv6 address",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"ipv4": schema.SingleNestedBlock{
 								MarkdownDescription: "IPv4 Address. IPv4 Address in dot-decimal notation",
 								Attributes: map[string]schema.Attribute{
 									"addr": schema.StringAttribute{
 										MarkdownDescription: "IPv4 Address. IPv4 Address in string form with dot-decimal notation",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -422,14 +409,13 @@ func (r *TunnelResource) Schema(ctx context.Context, req resource.SchemaRequest,
 								Attributes: map[string]schema.Attribute{
 									"addr": schema.StringAttribute{
 										MarkdownDescription: "IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
 						},
 					},
 				},
-
 			},
 		},
 	}
@@ -615,7 +601,6 @@ func (r *TunnelResource) Create(ctx context.Context, req resource.CreateRequest,
 		createReq.Spec["tunnel_type"] = data.TunnelType.ValueString()
 	}
 
-
 	apiResource, err := r.client.CreateTunnel(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create Tunnel: %s", err))
@@ -627,7 +612,7 @@ func (r *TunnelResource) Create(ctx context.Context, req resource.CreateRequest,
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if _, ok := apiResource.Spec["local_ip"].(map[string]interface{}); ok && isImport && data.LocalIP == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.LocalIP = &TunnelLocalIPModel{}
@@ -648,7 +633,6 @@ func (r *TunnelResource) Create(ctx context.Context, req resource.CreateRequest,
 	} else {
 		data.TunnelType = types.StringNull()
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -738,9 +722,9 @@ func (r *TunnelResource) Read(ctx context.Context, req resource.ReadRequest, res
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if _, ok := apiResource.Spec["local_ip"].(map[string]interface{}); ok && isImport && data.LocalIP == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -762,7 +746,6 @@ func (r *TunnelResource) Read(ctx context.Context, req resource.ReadRequest, res
 	} else {
 		data.TunnelType = types.StringNull()
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -858,7 +841,6 @@ func (r *TunnelResource) Update(ctx context.Context, req resource.UpdateRequest,
 	if !data.TunnelType.IsNull() && !data.TunnelType.IsUnknown() {
 		apiResource.Spec["tunnel_type"] = data.TunnelType.ValueString()
 	}
-
 
 	updated, err := r.client.UpdateTunnel(ctx, apiResource)
 	if err != nil {

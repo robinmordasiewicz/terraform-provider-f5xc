@@ -51,33 +51,33 @@ type UserIdentificationEmptyModel struct {
 
 // UserIdentificationRulesModel represents rules block
 type UserIdentificationRulesModel struct {
-	CookieName types.String `tfsdk:"cookie_name"`
-	HTTPHeaderName types.String `tfsdk:"http_header_name"`
-	IPAndHTTPHeaderName types.String `tfsdk:"ip_and_http_header_name"`
-	JwtClaimName types.String `tfsdk:"jwt_claim_name"`
-	QueryParamKey types.String `tfsdk:"query_param_key"`
-	ClientAsn *UserIdentificationEmptyModel `tfsdk:"client_asn"`
-	ClientCity *UserIdentificationEmptyModel `tfsdk:"client_city"`
-	ClientCountry *UserIdentificationEmptyModel `tfsdk:"client_country"`
-	ClientIP *UserIdentificationEmptyModel `tfsdk:"client_ip"`
-	ClientRegion *UserIdentificationEmptyModel `tfsdk:"client_region"`
+	CookieName             types.String                  `tfsdk:"cookie_name"`
+	HTTPHeaderName         types.String                  `tfsdk:"http_header_name"`
+	IPAndHTTPHeaderName    types.String                  `tfsdk:"ip_and_http_header_name"`
+	JwtClaimName           types.String                  `tfsdk:"jwt_claim_name"`
+	QueryParamKey          types.String                  `tfsdk:"query_param_key"`
+	ClientAsn              *UserIdentificationEmptyModel `tfsdk:"client_asn"`
+	ClientCity             *UserIdentificationEmptyModel `tfsdk:"client_city"`
+	ClientCountry          *UserIdentificationEmptyModel `tfsdk:"client_country"`
+	ClientIP               *UserIdentificationEmptyModel `tfsdk:"client_ip"`
+	ClientRegion           *UserIdentificationEmptyModel `tfsdk:"client_region"`
 	IPAndJa4TLSFingerprint *UserIdentificationEmptyModel `tfsdk:"ip_and_ja4_tls_fingerprint"`
-	IPAndTLSFingerprint *UserIdentificationEmptyModel `tfsdk:"ip_and_tls_fingerprint"`
-	Ja4TLSFingerprint *UserIdentificationEmptyModel `tfsdk:"ja4_tls_fingerprint"`
-	None *UserIdentificationEmptyModel `tfsdk:"none"`
-	TLSFingerprint *UserIdentificationEmptyModel `tfsdk:"tls_fingerprint"`
+	IPAndTLSFingerprint    *UserIdentificationEmptyModel `tfsdk:"ip_and_tls_fingerprint"`
+	Ja4TLSFingerprint      *UserIdentificationEmptyModel `tfsdk:"ja4_tls_fingerprint"`
+	None                   *UserIdentificationEmptyModel `tfsdk:"none"`
+	TLSFingerprint         *UserIdentificationEmptyModel `tfsdk:"tls_fingerprint"`
 }
 
 type UserIdentificationResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	Rules []UserIdentificationRulesModel `tfsdk:"rules"`
+	Name        types.String                   `tfsdk:"name"`
+	Namespace   types.String                   `tfsdk:"namespace"`
+	Annotations types.Map                      `tfsdk:"annotations"`
+	Description types.String                   `tfsdk:"description"`
+	Disable     types.Bool                     `tfsdk:"disable"`
+	Labels      types.Map                      `tfsdk:"labels"`
+	ID          types.String                   `tfsdk:"id"`
+	Timeouts    timeouts.Value                 `tfsdk:"timeouts"`
+	Rules       []UserIdentificationRulesModel `tfsdk:"rules"`
 }
 
 func (r *UserIdentificationResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -91,7 +91,7 @@ func (r *UserIdentificationResource) Schema(ctx context.Context, req resource.Sc
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the UserIdentification. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -101,7 +101,7 @@ func (r *UserIdentificationResource) Schema(ctx context.Context, req resource.Sc
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the UserIdentification will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -111,25 +111,25 @@ func (r *UserIdentificationResource) Schema(ctx context.Context, req resource.Sc
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -148,23 +148,23 @@ func (r *UserIdentificationResource) Schema(ctx context.Context, req resource.Sc
 					Attributes: map[string]schema.Attribute{
 						"cookie_name": schema.StringAttribute{
 							MarkdownDescription: "Cookie Name. Use the HTTP cookie value for the given name as user identifier.",
-							Optional: true,
+							Optional:            true,
 						},
 						"http_header_name": schema.StringAttribute{
 							MarkdownDescription: "HTTP Header Name. Use the HTTP header value for the given name as user identifier.",
-							Optional: true,
+							Optional:            true,
 						},
 						"ip_and_http_header_name": schema.StringAttribute{
 							MarkdownDescription: "HTTP Header Name. Name of HTTP header from which the value should be extracted.",
-							Optional: true,
+							Optional:            true,
 						},
 						"jwt_claim_name": schema.StringAttribute{
 							MarkdownDescription: "JWT Claim Name. Use the JWT claim value as user identifier.",
-							Optional: true,
+							Optional:            true,
 						},
 						"query_param_key": schema.StringAttribute{
 							MarkdownDescription: "Query Parameter Key. Use the query parameter value for the given key as user identifier.",
-							Optional: true,
+							Optional:            true,
 						},
 					},
 					Blocks: map[string]schema.Block{
@@ -199,7 +199,6 @@ func (r *UserIdentificationResource) Schema(ctx context.Context, req resource.Sc
 							MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 						},
 					},
-
 				},
 			},
 		},
@@ -404,7 +403,6 @@ func (r *UserIdentificationResource) Create(ctx context.Context, req resource.Cr
 		createReq.Spec["rules"] = rulesList
 	}
 
-
 	apiResource, err := r.client.CreateUserIdentification(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create UserIdentification: %s", err))
@@ -416,7 +414,7 @@ func (r *UserIdentificationResource) Create(ctx context.Context, req resource.Cr
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["rules"].([]interface{}); ok && len(listData) > 0 {
 		var rulesList []UserIdentificationRulesModel
 		for listIdx, item := range listData {
@@ -518,7 +516,6 @@ func (r *UserIdentificationResource) Create(ctx context.Context, req resource.Cr
 		}
 		data.Rules = rulesList
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -608,9 +605,9 @@ func (r *UserIdentificationResource) Read(ctx context.Context, req resource.Read
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if listData, ok := apiResource.Spec["rules"].([]interface{}); ok && len(listData) > 0 {
 		var rulesList []UserIdentificationRulesModel
@@ -713,7 +710,6 @@ func (r *UserIdentificationResource) Read(ctx context.Context, req resource.Read
 		}
 		data.Rules = rulesList
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -827,7 +823,6 @@ func (r *UserIdentificationResource) Update(ctx context.Context, req resource.Up
 		}
 		apiResource.Spec["rules"] = rulesList
 	}
-
 
 	updated, err := r.client.UpdateUserIdentification(ctx, apiResource)
 	if err != nil {

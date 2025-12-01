@@ -51,27 +51,27 @@ type NatPolicyEmptyModel struct {
 
 // NatPolicyRulesModel represents rules block
 type NatPolicyRulesModel struct {
-	Name types.String `tfsdk:"name"`
-	Action *NatPolicyRulesActionModel `tfsdk:"action"`
-	CloudConnect *NatPolicyRulesCloudConnectModel `tfsdk:"cloud_connect"`
-	Criteria *NatPolicyRulesCriteriaModel `tfsdk:"criteria"`
-	Disable *NatPolicyEmptyModel `tfsdk:"disable"`
-	Enable *NatPolicyEmptyModel `tfsdk:"enable"`
+	Name             types.String                         `tfsdk:"name"`
+	Action           *NatPolicyRulesActionModel           `tfsdk:"action"`
+	CloudConnect     *NatPolicyRulesCloudConnectModel     `tfsdk:"cloud_connect"`
+	Criteria         *NatPolicyRulesCriteriaModel         `tfsdk:"criteria"`
+	Disable          *NatPolicyEmptyModel                 `tfsdk:"disable"`
+	Enable           *NatPolicyEmptyModel                 `tfsdk:"enable"`
 	NetworkInterface *NatPolicyRulesNetworkInterfaceModel `tfsdk:"network_interface"`
-	Segment *NatPolicyRulesSegmentModel `tfsdk:"segment"`
-	VirtualNetwork *NatPolicyRulesVirtualNetworkModel `tfsdk:"virtual_network"`
+	Segment          *NatPolicyRulesSegmentModel          `tfsdk:"segment"`
+	VirtualNetwork   *NatPolicyRulesVirtualNetworkModel   `tfsdk:"virtual_network"`
 }
 
 // NatPolicyRulesActionModel represents action block
 type NatPolicyRulesActionModel struct {
-	VirtualCidr types.String `tfsdk:"virtual_cidr"`
-	Dynamic *NatPolicyRulesActionDynamicModel `tfsdk:"dynamic"`
+	VirtualCidr types.String                      `tfsdk:"virtual_cidr"`
+	Dynamic     *NatPolicyRulesActionDynamicModel `tfsdk:"dynamic"`
 }
 
 // NatPolicyRulesActionDynamicModel represents dynamic block
 type NatPolicyRulesActionDynamicModel struct {
 	ElasticIps *NatPolicyRulesActionDynamicElasticIpsModel `tfsdk:"elastic_ips"`
-	Pools *NatPolicyRulesActionDynamicPoolsModel `tfsdk:"pools"`
+	Pools      *NatPolicyRulesActionDynamicPoolsModel      `tfsdk:"pools"`
 }
 
 // NatPolicyRulesActionDynamicElasticIpsModel represents elastic_ips block
@@ -81,11 +81,11 @@ type NatPolicyRulesActionDynamicElasticIpsModel struct {
 
 // NatPolicyRulesActionDynamicElasticIpsRefsModel represents refs block
 type NatPolicyRulesActionDynamicElasticIpsRefsModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // NatPolicyRulesActionDynamicPoolsModel represents pools block
@@ -100,32 +100,32 @@ type NatPolicyRulesCloudConnectModel struct {
 
 // NatPolicyRulesCloudConnectRefsModel represents refs block
 type NatPolicyRulesCloudConnectRefsModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // NatPolicyRulesCriteriaModel represents criteria block
 type NatPolicyRulesCriteriaModel struct {
-	DestinationCidr types.List `tfsdk:"destination_cidr"`
-	Protocol types.String `tfsdk:"protocol"`
-	SourceCidr types.List `tfsdk:"source_cidr"`
-	Any *NatPolicyEmptyModel `tfsdk:"any"`
+	DestinationCidr types.List                                  `tfsdk:"destination_cidr"`
+	Protocol        types.String                                `tfsdk:"protocol"`
+	SourceCidr      types.List                                  `tfsdk:"source_cidr"`
+	Any             *NatPolicyEmptyModel                        `tfsdk:"any"`
 	DestinationPort *NatPolicyRulesCriteriaDestinationPortModel `tfsdk:"destination_port"`
-	Icmp *NatPolicyEmptyModel `tfsdk:"icmp"`
-	Segment *NatPolicyRulesCriteriaSegmentModel `tfsdk:"segment"`
-	SourcePort *NatPolicyRulesCriteriaSourcePortModel `tfsdk:"source_port"`
-	TCP *NatPolicyRulesCriteriaTCPModel `tfsdk:"tcp"`
-	UDP *NatPolicyRulesCriteriaUDPModel `tfsdk:"udp"`
-	VirtualNetwork *NatPolicyRulesCriteriaVirtualNetworkModel `tfsdk:"virtual_network"`
+	Icmp            *NatPolicyEmptyModel                        `tfsdk:"icmp"`
+	Segment         *NatPolicyRulesCriteriaSegmentModel         `tfsdk:"segment"`
+	SourcePort      *NatPolicyRulesCriteriaSourcePortModel      `tfsdk:"source_port"`
+	TCP             *NatPolicyRulesCriteriaTCPModel             `tfsdk:"tcp"`
+	UDP             *NatPolicyRulesCriteriaUDPModel             `tfsdk:"udp"`
+	VirtualNetwork  *NatPolicyRulesCriteriaVirtualNetworkModel  `tfsdk:"virtual_network"`
 }
 
 // NatPolicyRulesCriteriaDestinationPortModel represents destination_port block
 type NatPolicyRulesCriteriaDestinationPortModel struct {
-	Port types.Int64 `tfsdk:"port"`
-	PortRanges types.String `tfsdk:"port_ranges"`
+	Port        types.Int64          `tfsdk:"port"`
+	PortRanges  types.String         `tfsdk:"port_ranges"`
 	NoPortMatch *NatPolicyEmptyModel `tfsdk:"no_port_match"`
 }
 
@@ -136,57 +136,57 @@ type NatPolicyRulesCriteriaSegmentModel struct {
 
 // NatPolicyRulesCriteriaSegmentRefsModel represents refs block
 type NatPolicyRulesCriteriaSegmentRefsModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // NatPolicyRulesCriteriaSourcePortModel represents source_port block
 type NatPolicyRulesCriteriaSourcePortModel struct {
-	Port types.Int64 `tfsdk:"port"`
-	PortRanges types.String `tfsdk:"port_ranges"`
+	Port        types.Int64          `tfsdk:"port"`
+	PortRanges  types.String         `tfsdk:"port_ranges"`
 	NoPortMatch *NatPolicyEmptyModel `tfsdk:"no_port_match"`
 }
 
 // NatPolicyRulesCriteriaTCPModel represents tcp block
 type NatPolicyRulesCriteriaTCPModel struct {
 	DestinationPort *NatPolicyRulesCriteriaTCPDestinationPortModel `tfsdk:"destination_port"`
-	SourcePort *NatPolicyRulesCriteriaTCPSourcePortModel `tfsdk:"source_port"`
+	SourcePort      *NatPolicyRulesCriteriaTCPSourcePortModel      `tfsdk:"source_port"`
 }
 
 // NatPolicyRulesCriteriaTCPDestinationPortModel represents destination_port block
 type NatPolicyRulesCriteriaTCPDestinationPortModel struct {
-	Port types.Int64 `tfsdk:"port"`
-	PortRanges types.String `tfsdk:"port_ranges"`
+	Port        types.Int64          `tfsdk:"port"`
+	PortRanges  types.String         `tfsdk:"port_ranges"`
 	NoPortMatch *NatPolicyEmptyModel `tfsdk:"no_port_match"`
 }
 
 // NatPolicyRulesCriteriaTCPSourcePortModel represents source_port block
 type NatPolicyRulesCriteriaTCPSourcePortModel struct {
-	Port types.Int64 `tfsdk:"port"`
-	PortRanges types.String `tfsdk:"port_ranges"`
+	Port        types.Int64          `tfsdk:"port"`
+	PortRanges  types.String         `tfsdk:"port_ranges"`
 	NoPortMatch *NatPolicyEmptyModel `tfsdk:"no_port_match"`
 }
 
 // NatPolicyRulesCriteriaUDPModel represents udp block
 type NatPolicyRulesCriteriaUDPModel struct {
 	DestinationPort *NatPolicyRulesCriteriaUDPDestinationPortModel `tfsdk:"destination_port"`
-	SourcePort *NatPolicyRulesCriteriaUDPSourcePortModel `tfsdk:"source_port"`
+	SourcePort      *NatPolicyRulesCriteriaUDPSourcePortModel      `tfsdk:"source_port"`
 }
 
 // NatPolicyRulesCriteriaUDPDestinationPortModel represents destination_port block
 type NatPolicyRulesCriteriaUDPDestinationPortModel struct {
-	Port types.Int64 `tfsdk:"port"`
-	PortRanges types.String `tfsdk:"port_ranges"`
+	Port        types.Int64          `tfsdk:"port"`
+	PortRanges  types.String         `tfsdk:"port_ranges"`
 	NoPortMatch *NatPolicyEmptyModel `tfsdk:"no_port_match"`
 }
 
 // NatPolicyRulesCriteriaUDPSourcePortModel represents source_port block
 type NatPolicyRulesCriteriaUDPSourcePortModel struct {
-	Port types.Int64 `tfsdk:"port"`
-	PortRanges types.String `tfsdk:"port_ranges"`
+	Port        types.Int64          `tfsdk:"port"`
+	PortRanges  types.String         `tfsdk:"port_ranges"`
 	NoPortMatch *NatPolicyEmptyModel `tfsdk:"no_port_match"`
 }
 
@@ -197,11 +197,11 @@ type NatPolicyRulesCriteriaVirtualNetworkModel struct {
 
 // NatPolicyRulesCriteriaVirtualNetworkRefsModel represents refs block
 type NatPolicyRulesCriteriaVirtualNetworkRefsModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // NatPolicyRulesNetworkInterfaceModel represents network_interface block
@@ -211,11 +211,11 @@ type NatPolicyRulesNetworkInterfaceModel struct {
 
 // NatPolicyRulesNetworkInterfaceRefsModel represents refs block
 type NatPolicyRulesNetworkInterfaceRefsModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // NatPolicyRulesSegmentModel represents segment block
@@ -225,11 +225,11 @@ type NatPolicyRulesSegmentModel struct {
 
 // NatPolicyRulesSegmentRefsModel represents refs block
 type NatPolicyRulesSegmentRefsModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // NatPolicyRulesVirtualNetworkModel represents virtual_network block
@@ -239,11 +239,11 @@ type NatPolicyRulesVirtualNetworkModel struct {
 
 // NatPolicyRulesVirtualNetworkRefsModel represents refs block
 type NatPolicyRulesVirtualNetworkRefsModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // NatPolicySiteModel represents site block
@@ -253,24 +253,24 @@ type NatPolicySiteModel struct {
 
 // NatPolicySiteRefsModel represents refs block
 type NatPolicySiteRefsModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 type NatPolicyResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	Rules []NatPolicyRulesModel `tfsdk:"rules"`
-	Site *NatPolicySiteModel `tfsdk:"site"`
+	Name        types.String          `tfsdk:"name"`
+	Namespace   types.String          `tfsdk:"namespace"`
+	Annotations types.Map             `tfsdk:"annotations"`
+	Description types.String          `tfsdk:"description"`
+	Disable     types.Bool            `tfsdk:"disable"`
+	Labels      types.Map             `tfsdk:"labels"`
+	ID          types.String          `tfsdk:"id"`
+	Timeouts    timeouts.Value        `tfsdk:"timeouts"`
+	Rules       []NatPolicyRulesModel `tfsdk:"rules"`
+	Site        *NatPolicySiteModel   `tfsdk:"site"`
 }
 
 func (r *NatPolicyResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -284,7 +284,7 @@ func (r *NatPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the NatPolicy. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -294,7 +294,7 @@ func (r *NatPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the NatPolicy will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -304,25 +304,25 @@ func (r *NatPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -341,7 +341,7 @@ func (r *NatPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 					Attributes: map[string]schema.Attribute{
 						"name": schema.StringAttribute{
 							MarkdownDescription: "Name. Name of the Rule",
-							Optional: true,
+							Optional:            true,
 						},
 					},
 					Blocks: map[string]schema.Block{
@@ -350,19 +350,17 @@ func (r *NatPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 							Attributes: map[string]schema.Attribute{
 								"virtual_cidr": schema.StringAttribute{
 									MarkdownDescription: "Virtual Subnet NAT. Virtual Subnet NAT is static NAT that does a one-to-one translation between the real source IP CIDR in the policy and the virtual CIDR in a bidirectional fashion. The range of the real CIDR and virtual CIDRs should be the same (e.g. if the real CIDR has the CIDR 10.10.10.0/24, the virtual CIDR has 100.100.100.0/24.",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
 								"dynamic": schema.SingleNestedBlock{
 									MarkdownDescription: "Dynamic Pool. Dynamic Pool Configuration",
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"elastic_ips": schema.SingleNestedBlock{
 											MarkdownDescription: "Cloud Elastic IP Ref List. List of references to Cloud Elastic IP Object",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"refs": schema.ListNestedBlock{
 													MarkdownDescription: "Cloud Elastic IP Reference List. Reference to one or more cloud elastic ip objects",
@@ -370,26 +368,26 @@ func (r *NatPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 														Attributes: map[string]schema.Attribute{
 															"kind": schema.StringAttribute{
 																MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-																Optional: true,
-																Computed: true,
+																Optional:            true,
+																Computed:            true,
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-																Optional: true,
+																Optional:            true,
 															},
 															"namespace": schema.StringAttribute{
 																MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-																Optional: true,
+																Optional:            true,
 															},
 															"tenant": schema.StringAttribute{
 																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-																Optional: true,
-																Computed: true,
+																Optional:            true,
+																Computed:            true,
 															},
 															"uid": schema.StringAttribute{
 																MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-																Optional: true,
-																Computed: true,
+																Optional:            true,
+																Computed:            true,
 															},
 														},
 													},
@@ -401,8 +399,8 @@ func (r *NatPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 											Attributes: map[string]schema.Attribute{
 												"prefixes": schema.ListAttribute{
 													MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 										},
@@ -412,8 +410,7 @@ func (r *NatPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 						},
 						"cloud_connect": schema.SingleNestedBlock{
 							MarkdownDescription: "Cloud Connect Reference Type. Reference to Cloud connect Object",
-							Attributes: map[string]schema.Attribute{
-							},
+							Attributes:          map[string]schema.Attribute{},
 							Blocks: map[string]schema.Block{
 								"refs": schema.ListNestedBlock{
 									MarkdownDescription: "Cloud Connect. Reference to Cloud Connect Object",
@@ -421,26 +418,26 @@ func (r *NatPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 										Attributes: map[string]schema.Attribute{
 											"kind": schema.StringAttribute{
 												MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-												Optional: true,
-												Computed: true,
+												Optional:            true,
+												Computed:            true,
 											},
 											"name": schema.StringAttribute{
 												MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-												Optional: true,
+												Optional:            true,
 											},
 											"namespace": schema.StringAttribute{
 												MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-												Optional: true,
+												Optional:            true,
 											},
 											"tenant": schema.StringAttribute{
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-												Optional: true,
-												Computed: true,
+												Optional:            true,
+												Computed:            true,
 											},
 											"uid": schema.StringAttribute{
 												MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-												Optional: true,
-												Computed: true,
+												Optional:            true,
+												Computed:            true,
 											},
 										},
 									},
@@ -452,17 +449,17 @@ func (r *NatPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 							Attributes: map[string]schema.Attribute{
 								"destination_cidr": schema.ListAttribute{
 									MarkdownDescription: "Destination IP. Destination IP of the packet to match",
-									Optional: true,
-									ElementType: types.StringType,
+									Optional:            true,
+									ElementType:         types.StringType,
 								},
 								"protocol": schema.StringAttribute{
 									MarkdownDescription: "Protocols. Protocols like TCP, UDP. Possible values are `ALL`, `ICMP`, `TCP`, `UDP`. Defaults to `ALL`.",
-									Optional: true,
+									Optional:            true,
 								},
 								"source_cidr": schema.ListAttribute{
 									MarkdownDescription: "Source IP. Source IP of the packet to match",
-									Optional: true,
-									ElementType: types.StringType,
+									Optional:            true,
+									ElementType:         types.StringType,
 								},
 							},
 							Blocks: map[string]schema.Block{
@@ -474,11 +471,11 @@ func (r *NatPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 									Attributes: map[string]schema.Attribute{
 										"port": schema.Int64Attribute{
 											MarkdownDescription: "Port. Exact Port to match",
-											Optional: true,
+											Optional:            true,
 										},
 										"port_ranges": schema.StringAttribute{
 											MarkdownDescription: "Port range. Port range to match",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -492,8 +489,7 @@ func (r *NatPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 								},
 								"segment": schema.SingleNestedBlock{
 									MarkdownDescription: "Segment Reference Type. Reference to Segment Object",
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"refs": schema.ListNestedBlock{
 											MarkdownDescription: "Segment. Reference to Segment Object",
@@ -501,26 +497,26 @@ func (r *NatPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 												Attributes: map[string]schema.Attribute{
 													"kind": schema.StringAttribute{
 														MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-														Optional: true,
-														Computed: true,
+														Optional:            true,
+														Computed:            true,
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-														Optional: true,
+														Optional:            true,
 													},
 													"namespace": schema.StringAttribute{
 														MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-														Optional: true,
+														Optional:            true,
 													},
 													"tenant": schema.StringAttribute{
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-														Optional: true,
-														Computed: true,
+														Optional:            true,
+														Computed:            true,
 													},
 													"uid": schema.StringAttribute{
 														MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-														Optional: true,
-														Computed: true,
+														Optional:            true,
+														Computed:            true,
 													},
 												},
 											},
@@ -532,11 +528,11 @@ func (r *NatPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 									Attributes: map[string]schema.Attribute{
 										"port": schema.Int64Attribute{
 											MarkdownDescription: "Port. Exact Port to match",
-											Optional: true,
+											Optional:            true,
 										},
 										"port_ranges": schema.StringAttribute{
 											MarkdownDescription: "Port range. Port range to match",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -547,19 +543,18 @@ func (r *NatPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 								},
 								"tcp": schema.SingleNestedBlock{
 									MarkdownDescription: "Port Match Configuration. Action to apply on the packet if the NAT rule is applied",
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"destination_port": schema.SingleNestedBlock{
 											MarkdownDescription: "Port to Match. Port match of the request can be a range or a specific port",
 											Attributes: map[string]schema.Attribute{
 												"port": schema.Int64Attribute{
 													MarkdownDescription: "Port. Exact Port to match",
-													Optional: true,
+													Optional:            true,
 												},
 												"port_ranges": schema.StringAttribute{
 													MarkdownDescription: "Port range. Port range to match",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -573,11 +568,11 @@ func (r *NatPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 											Attributes: map[string]schema.Attribute{
 												"port": schema.Int64Attribute{
 													MarkdownDescription: "Port. Exact Port to match",
-													Optional: true,
+													Optional:            true,
 												},
 												"port_ranges": schema.StringAttribute{
 													MarkdownDescription: "Port range. Port range to match",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -590,19 +585,18 @@ func (r *NatPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 								},
 								"udp": schema.SingleNestedBlock{
 									MarkdownDescription: "Port Match Configuration. Action to apply on the packet if the NAT rule is applied",
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"destination_port": schema.SingleNestedBlock{
 											MarkdownDescription: "Port to Match. Port match of the request can be a range or a specific port",
 											Attributes: map[string]schema.Attribute{
 												"port": schema.Int64Attribute{
 													MarkdownDescription: "Port. Exact Port to match",
-													Optional: true,
+													Optional:            true,
 												},
 												"port_ranges": schema.StringAttribute{
 													MarkdownDescription: "Port range. Port range to match",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -616,11 +610,11 @@ func (r *NatPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 											Attributes: map[string]schema.Attribute{
 												"port": schema.Int64Attribute{
 													MarkdownDescription: "Port. Exact Port to match",
-													Optional: true,
+													Optional:            true,
 												},
 												"port_ranges": schema.StringAttribute{
 													MarkdownDescription: "Port range. Port range to match",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -633,8 +627,7 @@ func (r *NatPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 								},
 								"virtual_network": schema.SingleNestedBlock{
 									MarkdownDescription: "Virtual Network Reference Type. Carries the reference to virtual network",
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"refs": schema.ListNestedBlock{
 											MarkdownDescription: "Virtual Network Reference. Reference to virtual network",
@@ -642,26 +635,26 @@ func (r *NatPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 												Attributes: map[string]schema.Attribute{
 													"kind": schema.StringAttribute{
 														MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-														Optional: true,
-														Computed: true,
+														Optional:            true,
+														Computed:            true,
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-														Optional: true,
+														Optional:            true,
 													},
 													"namespace": schema.StringAttribute{
 														MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-														Optional: true,
+														Optional:            true,
 													},
 													"tenant": schema.StringAttribute{
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-														Optional: true,
-														Computed: true,
+														Optional:            true,
+														Computed:            true,
 													},
 													"uid": schema.StringAttribute{
 														MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-														Optional: true,
-														Computed: true,
+														Optional:            true,
+														Computed:            true,
 													},
 												},
 											},
@@ -678,8 +671,7 @@ func (r *NatPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 						},
 						"network_interface": schema.SingleNestedBlock{
 							MarkdownDescription: "NetworkInterface Reference Type. Reference to Network Interface Object",
-							Attributes: map[string]schema.Attribute{
-							},
+							Attributes:          map[string]schema.Attribute{},
 							Blocks: map[string]schema.Block{
 								"refs": schema.ListNestedBlock{
 									MarkdownDescription: "Network Interface. Reference to Network Interface Object",
@@ -687,26 +679,26 @@ func (r *NatPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 										Attributes: map[string]schema.Attribute{
 											"kind": schema.StringAttribute{
 												MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-												Optional: true,
-												Computed: true,
+												Optional:            true,
+												Computed:            true,
 											},
 											"name": schema.StringAttribute{
 												MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-												Optional: true,
+												Optional:            true,
 											},
 											"namespace": schema.StringAttribute{
 												MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-												Optional: true,
+												Optional:            true,
 											},
 											"tenant": schema.StringAttribute{
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-												Optional: true,
-												Computed: true,
+												Optional:            true,
+												Computed:            true,
 											},
 											"uid": schema.StringAttribute{
 												MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-												Optional: true,
-												Computed: true,
+												Optional:            true,
+												Computed:            true,
 											},
 										},
 									},
@@ -715,8 +707,7 @@ func (r *NatPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 						},
 						"segment": schema.SingleNestedBlock{
 							MarkdownDescription: "Segment Reference Type. Reference to Segment Object",
-							Attributes: map[string]schema.Attribute{
-							},
+							Attributes:          map[string]schema.Attribute{},
 							Blocks: map[string]schema.Block{
 								"refs": schema.ListNestedBlock{
 									MarkdownDescription: "Segment. Reference to Segment Object",
@@ -724,26 +715,26 @@ func (r *NatPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 										Attributes: map[string]schema.Attribute{
 											"kind": schema.StringAttribute{
 												MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-												Optional: true,
-												Computed: true,
+												Optional:            true,
+												Computed:            true,
 											},
 											"name": schema.StringAttribute{
 												MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-												Optional: true,
+												Optional:            true,
 											},
 											"namespace": schema.StringAttribute{
 												MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-												Optional: true,
+												Optional:            true,
 											},
 											"tenant": schema.StringAttribute{
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-												Optional: true,
-												Computed: true,
+												Optional:            true,
+												Computed:            true,
 											},
 											"uid": schema.StringAttribute{
 												MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-												Optional: true,
-												Computed: true,
+												Optional:            true,
+												Computed:            true,
 											},
 										},
 									},
@@ -752,8 +743,7 @@ func (r *NatPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 						},
 						"virtual_network": schema.SingleNestedBlock{
 							MarkdownDescription: "Virtual Network Reference Type. Carries the reference to virtual network",
-							Attributes: map[string]schema.Attribute{
-							},
+							Attributes:          map[string]schema.Attribute{},
 							Blocks: map[string]schema.Block{
 								"refs": schema.ListNestedBlock{
 									MarkdownDescription: "Virtual Network Reference. Reference to virtual network",
@@ -761,26 +751,26 @@ func (r *NatPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 										Attributes: map[string]schema.Attribute{
 											"kind": schema.StringAttribute{
 												MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-												Optional: true,
-												Computed: true,
+												Optional:            true,
+												Computed:            true,
 											},
 											"name": schema.StringAttribute{
 												MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-												Optional: true,
+												Optional:            true,
 											},
 											"namespace": schema.StringAttribute{
 												MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-												Optional: true,
+												Optional:            true,
 											},
 											"tenant": schema.StringAttribute{
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-												Optional: true,
-												Computed: true,
+												Optional:            true,
+												Computed:            true,
 											},
 											"uid": schema.StringAttribute{
 												MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-												Optional: true,
-												Computed: true,
+												Optional:            true,
+												Computed:            true,
 											},
 										},
 									},
@@ -788,13 +778,11 @@ func (r *NatPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 							},
 						},
 					},
-
 				},
 			},
 			"site": schema.SingleNestedBlock{
 				MarkdownDescription: "Site Reference Type. Reference to Site Object",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"refs": schema.ListNestedBlock{
 						MarkdownDescription: "Site. Reference to Site Object",
@@ -802,32 +790,31 @@ func (r *NatPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 							Attributes: map[string]schema.Attribute{
 								"kind": schema.StringAttribute{
 									MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-									Optional: true,
-									Computed: true,
+									Optional:            true,
+									Computed:            true,
 								},
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-									Optional: true,
+									Optional:            true,
 								},
 								"namespace": schema.StringAttribute{
 									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-									Optional: true,
+									Optional:            true,
 								},
 								"tenant": schema.StringAttribute{
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-									Optional: true,
-									Computed: true,
+									Optional:            true,
+									Computed:            true,
 								},
 								"uid": schema.StringAttribute{
 									MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-									Optional: true,
-									Computed: true,
+									Optional:            true,
+									Computed:            true,
 								},
 							},
 						},
 					},
 				},
-
 			},
 		},
 	}
@@ -1210,7 +1197,6 @@ func (r *NatPolicyResource) Create(ctx context.Context, req resource.CreateReque
 		createReq.Spec["site"] = siteMap
 	}
 
-
 	apiResource, err := r.client.CreateNatPolicy(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create NatPolicy: %s", err))
@@ -1222,7 +1208,7 @@ func (r *NatPolicyResource) Create(ctx context.Context, req resource.CreateReque
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["rules"].([]interface{}); ok && len(listData) > 0 {
 		var rulesList []NatPolicyRulesModel
 		for listIdx, item := range listData {
@@ -1244,8 +1230,7 @@ func (r *NatPolicyResource) Create(ctx context.Context, req resource.CreateReque
 					}(),
 					CloudConnect: func() *NatPolicyRulesCloudConnectModel {
 						if _, ok := itemMap["cloud_connect"].(map[string]interface{}); ok {
-							return &NatPolicyRulesCloudConnectModel{
-							}
+							return &NatPolicyRulesCloudConnectModel{}
 						}
 						return nil
 					}(),
@@ -1320,22 +1305,19 @@ func (r *NatPolicyResource) Create(ctx context.Context, req resource.CreateReque
 					}(),
 					NetworkInterface: func() *NatPolicyRulesNetworkInterfaceModel {
 						if _, ok := itemMap["network_interface"].(map[string]interface{}); ok {
-							return &NatPolicyRulesNetworkInterfaceModel{
-							}
+							return &NatPolicyRulesNetworkInterfaceModel{}
 						}
 						return nil
 					}(),
 					Segment: func() *NatPolicyRulesSegmentModel {
 						if _, ok := itemMap["segment"].(map[string]interface{}); ok {
-							return &NatPolicyRulesSegmentModel{
-							}
+							return &NatPolicyRulesSegmentModel{}
 						}
 						return nil
 					}(),
 					VirtualNetwork: func() *NatPolicyRulesVirtualNetworkModel {
 						if _, ok := itemMap["virtual_network"].(map[string]interface{}); ok {
-							return &NatPolicyRulesVirtualNetworkModel{
-							}
+							return &NatPolicyRulesVirtualNetworkModel{}
 						}
 						return nil
 					}(),
@@ -1391,7 +1373,6 @@ func (r *NatPolicyResource) Create(ctx context.Context, req resource.CreateReque
 			}(),
 		}
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -1481,9 +1462,9 @@ func (r *NatPolicyResource) Read(ctx context.Context, req resource.ReadRequest, 
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if listData, ok := apiResource.Spec["rules"].([]interface{}); ok && len(listData) > 0 {
 		var rulesList []NatPolicyRulesModel
@@ -1506,8 +1487,7 @@ func (r *NatPolicyResource) Read(ctx context.Context, req resource.ReadRequest, 
 					}(),
 					CloudConnect: func() *NatPolicyRulesCloudConnectModel {
 						if _, ok := itemMap["cloud_connect"].(map[string]interface{}); ok {
-							return &NatPolicyRulesCloudConnectModel{
-							}
+							return &NatPolicyRulesCloudConnectModel{}
 						}
 						return nil
 					}(),
@@ -1582,22 +1562,19 @@ func (r *NatPolicyResource) Read(ctx context.Context, req resource.ReadRequest, 
 					}(),
 					NetworkInterface: func() *NatPolicyRulesNetworkInterfaceModel {
 						if _, ok := itemMap["network_interface"].(map[string]interface{}); ok {
-							return &NatPolicyRulesNetworkInterfaceModel{
-							}
+							return &NatPolicyRulesNetworkInterfaceModel{}
 						}
 						return nil
 					}(),
 					Segment: func() *NatPolicyRulesSegmentModel {
 						if _, ok := itemMap["segment"].(map[string]interface{}); ok {
-							return &NatPolicyRulesSegmentModel{
-							}
+							return &NatPolicyRulesSegmentModel{}
 						}
 						return nil
 					}(),
 					VirtualNetwork: func() *NatPolicyRulesVirtualNetworkModel {
 						if _, ok := itemMap["virtual_network"].(map[string]interface{}); ok {
-							return &NatPolicyRulesVirtualNetworkModel{
-							}
+							return &NatPolicyRulesVirtualNetworkModel{}
 						}
 						return nil
 					}(),
@@ -1653,7 +1630,6 @@ func (r *NatPolicyResource) Read(ctx context.Context, req resource.ReadRequest, 
 			}(),
 		}
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -1946,7 +1922,6 @@ func (r *NatPolicyResource) Update(ctx context.Context, req resource.UpdateReque
 		}
 		apiResource.Spec["site"] = siteMap
 	}
-
 
 	updated, err := r.client.UpdateNatPolicy(ctx, apiResource)
 	if err != nil {

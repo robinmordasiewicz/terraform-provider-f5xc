@@ -51,16 +51,16 @@ type ServicePolicyEmptyModel struct {
 
 // ServicePolicyAllowListModel represents allow_list block
 type ServicePolicyAllowListModel struct {
-	CountryList types.List `tfsdk:"country_list"`
-	TLSFingerprintClasses types.List `tfsdk:"tls_fingerprint_classes"`
-	TLSFingerprintValues types.List `tfsdk:"tls_fingerprint_values"`
-	AsnList *ServicePolicyAllowListAsnListModel `tfsdk:"asn_list"`
-	AsnSet []ServicePolicyAllowListAsnSetModel `tfsdk:"asn_set"`
-	DefaultActionAllow *ServicePolicyEmptyModel `tfsdk:"default_action_allow"`
-	DefaultActionDeny *ServicePolicyEmptyModel `tfsdk:"default_action_deny"`
-	DefaultActionNextPolicy *ServicePolicyEmptyModel `tfsdk:"default_action_next_policy"`
-	IPPrefixSet []ServicePolicyAllowListIPPrefixSetModel `tfsdk:"ip_prefix_set"`
-	PrefixList *ServicePolicyAllowListPrefixListModel `tfsdk:"prefix_list"`
+	CountryList             types.List                               `tfsdk:"country_list"`
+	TLSFingerprintClasses   types.List                               `tfsdk:"tls_fingerprint_classes"`
+	TLSFingerprintValues    types.List                               `tfsdk:"tls_fingerprint_values"`
+	AsnList                 *ServicePolicyAllowListAsnListModel      `tfsdk:"asn_list"`
+	AsnSet                  []ServicePolicyAllowListAsnSetModel      `tfsdk:"asn_set"`
+	DefaultActionAllow      *ServicePolicyEmptyModel                 `tfsdk:"default_action_allow"`
+	DefaultActionDeny       *ServicePolicyEmptyModel                 `tfsdk:"default_action_deny"`
+	DefaultActionNextPolicy *ServicePolicyEmptyModel                 `tfsdk:"default_action_next_policy"`
+	IPPrefixSet             []ServicePolicyAllowListIPPrefixSetModel `tfsdk:"ip_prefix_set"`
+	PrefixList              *ServicePolicyAllowListPrefixListModel   `tfsdk:"prefix_list"`
 }
 
 // ServicePolicyAllowListAsnListModel represents asn_list block
@@ -70,16 +70,16 @@ type ServicePolicyAllowListAsnListModel struct {
 
 // ServicePolicyAllowListAsnSetModel represents asn_set block
 type ServicePolicyAllowListAsnSetModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // ServicePolicyAllowListIPPrefixSetModel represents ip_prefix_set block
 type ServicePolicyAllowListIPPrefixSetModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // ServicePolicyAllowListPrefixListModel represents prefix_list block
@@ -89,16 +89,16 @@ type ServicePolicyAllowListPrefixListModel struct {
 
 // ServicePolicyDenyListModel represents deny_list block
 type ServicePolicyDenyListModel struct {
-	CountryList types.List `tfsdk:"country_list"`
-	TLSFingerprintClasses types.List `tfsdk:"tls_fingerprint_classes"`
-	TLSFingerprintValues types.List `tfsdk:"tls_fingerprint_values"`
-	AsnList *ServicePolicyDenyListAsnListModel `tfsdk:"asn_list"`
-	AsnSet []ServicePolicyDenyListAsnSetModel `tfsdk:"asn_set"`
-	DefaultActionAllow *ServicePolicyEmptyModel `tfsdk:"default_action_allow"`
-	DefaultActionDeny *ServicePolicyEmptyModel `tfsdk:"default_action_deny"`
-	DefaultActionNextPolicy *ServicePolicyEmptyModel `tfsdk:"default_action_next_policy"`
-	IPPrefixSet []ServicePolicyDenyListIPPrefixSetModel `tfsdk:"ip_prefix_set"`
-	PrefixList *ServicePolicyDenyListPrefixListModel `tfsdk:"prefix_list"`
+	CountryList             types.List                              `tfsdk:"country_list"`
+	TLSFingerprintClasses   types.List                              `tfsdk:"tls_fingerprint_classes"`
+	TLSFingerprintValues    types.List                              `tfsdk:"tls_fingerprint_values"`
+	AsnList                 *ServicePolicyDenyListAsnListModel      `tfsdk:"asn_list"`
+	AsnSet                  []ServicePolicyDenyListAsnSetModel      `tfsdk:"asn_set"`
+	DefaultActionAllow      *ServicePolicyEmptyModel                `tfsdk:"default_action_allow"`
+	DefaultActionDeny       *ServicePolicyEmptyModel                `tfsdk:"default_action_deny"`
+	DefaultActionNextPolicy *ServicePolicyEmptyModel                `tfsdk:"default_action_next_policy"`
+	IPPrefixSet             []ServicePolicyDenyListIPPrefixSetModel `tfsdk:"ip_prefix_set"`
+	PrefixList              *ServicePolicyDenyListPrefixListModel   `tfsdk:"prefix_list"`
 }
 
 // ServicePolicyDenyListAsnListModel represents asn_list block
@@ -108,16 +108,16 @@ type ServicePolicyDenyListAsnListModel struct {
 
 // ServicePolicyDenyListAsnSetModel represents asn_set block
 type ServicePolicyDenyListAsnSetModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // ServicePolicyDenyListIPPrefixSetModel represents ip_prefix_set block
 type ServicePolicyDenyListIPPrefixSetModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // ServicePolicyDenyListPrefixListModel represents prefix_list block
@@ -133,71 +133,71 @@ type ServicePolicyRuleListModel struct {
 // ServicePolicyRuleListRulesModel represents rules block
 type ServicePolicyRuleListRulesModel struct {
 	Metadata *ServicePolicyRuleListRulesMetadataModel `tfsdk:"metadata"`
-	Spec *ServicePolicyRuleListRulesSpecModel `tfsdk:"spec"`
+	Spec     *ServicePolicyRuleListRulesSpecModel     `tfsdk:"spec"`
 }
 
 // ServicePolicyRuleListRulesMetadataModel represents metadata block
 type ServicePolicyRuleListRulesMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
-	Name types.String `tfsdk:"name"`
+	Name            types.String `tfsdk:"name"`
 }
 
 // ServicePolicyRuleListRulesSpecModel represents spec block
 type ServicePolicyRuleListRulesSpecModel struct {
-	Action types.String `tfsdk:"action"`
-	ClientName types.String `tfsdk:"client_name"`
-	ExpirationTimestamp types.String `tfsdk:"expiration_timestamp"`
-	AnyAsn *ServicePolicyEmptyModel `tfsdk:"any_asn"`
-	AnyClient *ServicePolicyEmptyModel `tfsdk:"any_client"`
-	AnyIP *ServicePolicyEmptyModel `tfsdk:"any_ip"`
-	APIGroupMatcher *ServicePolicyRuleListRulesSpecAPIGroupMatcherModel `tfsdk:"api_group_matcher"`
-	ArgMatchers []ServicePolicyRuleListRulesSpecArgMatchersModel `tfsdk:"arg_matchers"`
-	AsnList *ServicePolicyRuleListRulesSpecAsnListModel `tfsdk:"asn_list"`
-	AsnMatcher *ServicePolicyRuleListRulesSpecAsnMatcherModel `tfsdk:"asn_matcher"`
-	BodyMatcher *ServicePolicyRuleListRulesSpecBodyMatcherModel `tfsdk:"body_matcher"`
-	BotAction *ServicePolicyRuleListRulesSpecBotActionModel `tfsdk:"bot_action"`
-	ClientNameMatcher *ServicePolicyRuleListRulesSpecClientNameMatcherModel `tfsdk:"client_name_matcher"`
-	ClientSelector *ServicePolicyRuleListRulesSpecClientSelectorModel `tfsdk:"client_selector"`
-	CookieMatchers []ServicePolicyRuleListRulesSpecCookieMatchersModel `tfsdk:"cookie_matchers"`
-	DomainMatcher *ServicePolicyRuleListRulesSpecDomainMatcherModel `tfsdk:"domain_matcher"`
-	Headers []ServicePolicyRuleListRulesSpecHeadersModel `tfsdk:"headers"`
-	HTTPMethod *ServicePolicyRuleListRulesSpecHTTPMethodModel `tfsdk:"http_method"`
-	IPMatcher *ServicePolicyRuleListRulesSpecIPMatcherModel `tfsdk:"ip_matcher"`
-	IPPrefixList *ServicePolicyRuleListRulesSpecIPPrefixListModel `tfsdk:"ip_prefix_list"`
-	IPThreatCategoryList *ServicePolicyRuleListRulesSpecIPThreatCategoryListModel `tfsdk:"ip_threat_category_list"`
-	Ja4TLSFingerprint *ServicePolicyRuleListRulesSpecJa4TLSFingerprintModel `tfsdk:"ja4_tls_fingerprint"`
-	JwtClaims []ServicePolicyRuleListRulesSpecJwtClaimsModel `tfsdk:"jwt_claims"`
-	LabelMatcher *ServicePolicyRuleListRulesSpecLabelMatcherModel `tfsdk:"label_matcher"`
-	MumAction *ServicePolicyRuleListRulesSpecMumActionModel `tfsdk:"mum_action"`
-	Path *ServicePolicyRuleListRulesSpecPathModel `tfsdk:"path"`
-	PortMatcher *ServicePolicyRuleListRulesSpecPortMatcherModel `tfsdk:"port_matcher"`
-	QueryParams []ServicePolicyRuleListRulesSpecQueryParamsModel `tfsdk:"query_params"`
-	RequestConstraints *ServicePolicyRuleListRulesSpecRequestConstraintsModel `tfsdk:"request_constraints"`
-	SegmentPolicy *ServicePolicyRuleListRulesSpecSegmentPolicyModel `tfsdk:"segment_policy"`
+	Action                types.String                                              `tfsdk:"action"`
+	ClientName            types.String                                              `tfsdk:"client_name"`
+	ExpirationTimestamp   types.String                                              `tfsdk:"expiration_timestamp"`
+	AnyAsn                *ServicePolicyEmptyModel                                  `tfsdk:"any_asn"`
+	AnyClient             *ServicePolicyEmptyModel                                  `tfsdk:"any_client"`
+	AnyIP                 *ServicePolicyEmptyModel                                  `tfsdk:"any_ip"`
+	APIGroupMatcher       *ServicePolicyRuleListRulesSpecAPIGroupMatcherModel       `tfsdk:"api_group_matcher"`
+	ArgMatchers           []ServicePolicyRuleListRulesSpecArgMatchersModel          `tfsdk:"arg_matchers"`
+	AsnList               *ServicePolicyRuleListRulesSpecAsnListModel               `tfsdk:"asn_list"`
+	AsnMatcher            *ServicePolicyRuleListRulesSpecAsnMatcherModel            `tfsdk:"asn_matcher"`
+	BodyMatcher           *ServicePolicyRuleListRulesSpecBodyMatcherModel           `tfsdk:"body_matcher"`
+	BotAction             *ServicePolicyRuleListRulesSpecBotActionModel             `tfsdk:"bot_action"`
+	ClientNameMatcher     *ServicePolicyRuleListRulesSpecClientNameMatcherModel     `tfsdk:"client_name_matcher"`
+	ClientSelector        *ServicePolicyRuleListRulesSpecClientSelectorModel        `tfsdk:"client_selector"`
+	CookieMatchers        []ServicePolicyRuleListRulesSpecCookieMatchersModel       `tfsdk:"cookie_matchers"`
+	DomainMatcher         *ServicePolicyRuleListRulesSpecDomainMatcherModel         `tfsdk:"domain_matcher"`
+	Headers               []ServicePolicyRuleListRulesSpecHeadersModel              `tfsdk:"headers"`
+	HTTPMethod            *ServicePolicyRuleListRulesSpecHTTPMethodModel            `tfsdk:"http_method"`
+	IPMatcher             *ServicePolicyRuleListRulesSpecIPMatcherModel             `tfsdk:"ip_matcher"`
+	IPPrefixList          *ServicePolicyRuleListRulesSpecIPPrefixListModel          `tfsdk:"ip_prefix_list"`
+	IPThreatCategoryList  *ServicePolicyRuleListRulesSpecIPThreatCategoryListModel  `tfsdk:"ip_threat_category_list"`
+	Ja4TLSFingerprint     *ServicePolicyRuleListRulesSpecJa4TLSFingerprintModel     `tfsdk:"ja4_tls_fingerprint"`
+	JwtClaims             []ServicePolicyRuleListRulesSpecJwtClaimsModel            `tfsdk:"jwt_claims"`
+	LabelMatcher          *ServicePolicyRuleListRulesSpecLabelMatcherModel          `tfsdk:"label_matcher"`
+	MumAction             *ServicePolicyRuleListRulesSpecMumActionModel             `tfsdk:"mum_action"`
+	Path                  *ServicePolicyRuleListRulesSpecPathModel                  `tfsdk:"path"`
+	PortMatcher           *ServicePolicyRuleListRulesSpecPortMatcherModel           `tfsdk:"port_matcher"`
+	QueryParams           []ServicePolicyRuleListRulesSpecQueryParamsModel          `tfsdk:"query_params"`
+	RequestConstraints    *ServicePolicyRuleListRulesSpecRequestConstraintsModel    `tfsdk:"request_constraints"`
+	SegmentPolicy         *ServicePolicyRuleListRulesSpecSegmentPolicyModel         `tfsdk:"segment_policy"`
 	TLSFingerprintMatcher *ServicePolicyRuleListRulesSpecTLSFingerprintMatcherModel `tfsdk:"tls_fingerprint_matcher"`
-	UserIdentityMatcher *ServicePolicyRuleListRulesSpecUserIdentityMatcherModel `tfsdk:"user_identity_matcher"`
-	WAFAction *ServicePolicyRuleListRulesSpecWAFActionModel `tfsdk:"waf_action"`
+	UserIdentityMatcher   *ServicePolicyRuleListRulesSpecUserIdentityMatcherModel   `tfsdk:"user_identity_matcher"`
+	WAFAction             *ServicePolicyRuleListRulesSpecWAFActionModel             `tfsdk:"waf_action"`
 }
 
 // ServicePolicyRuleListRulesSpecAPIGroupMatcherModel represents api_group_matcher block
 type ServicePolicyRuleListRulesSpecAPIGroupMatcherModel struct {
 	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
-	Match types.List `tfsdk:"match"`
+	Match         types.List `tfsdk:"match"`
 }
 
 // ServicePolicyRuleListRulesSpecArgMatchersModel represents arg_matchers block
 type ServicePolicyRuleListRulesSpecArgMatchersModel struct {
-	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
-	Name types.String `tfsdk:"name"`
-	CheckNotPresent *ServicePolicyEmptyModel `tfsdk:"check_not_present"`
-	CheckPresent *ServicePolicyEmptyModel `tfsdk:"check_present"`
-	Item *ServicePolicyRuleListRulesSpecArgMatchersItemModel `tfsdk:"item"`
+	InvertMatcher   types.Bool                                          `tfsdk:"invert_matcher"`
+	Name            types.String                                        `tfsdk:"name"`
+	CheckNotPresent *ServicePolicyEmptyModel                            `tfsdk:"check_not_present"`
+	CheckPresent    *ServicePolicyEmptyModel                            `tfsdk:"check_present"`
+	Item            *ServicePolicyRuleListRulesSpecArgMatchersItemModel `tfsdk:"item"`
 }
 
 // ServicePolicyRuleListRulesSpecArgMatchersItemModel represents item block
 type ServicePolicyRuleListRulesSpecArgMatchersItemModel struct {
-	ExactValues types.List `tfsdk:"exact_values"`
-	RegexValues types.List `tfsdk:"regex_values"`
+	ExactValues  types.List `tfsdk:"exact_values"`
+	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
 }
 
@@ -213,30 +213,30 @@ type ServicePolicyRuleListRulesSpecAsnMatcherModel struct {
 
 // ServicePolicyRuleListRulesSpecAsnMatcherAsnSetsModel represents asn_sets block
 type ServicePolicyRuleListRulesSpecAsnMatcherAsnSetsModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // ServicePolicyRuleListRulesSpecBodyMatcherModel represents body_matcher block
 type ServicePolicyRuleListRulesSpecBodyMatcherModel struct {
-	ExactValues types.List `tfsdk:"exact_values"`
-	RegexValues types.List `tfsdk:"regex_values"`
+	ExactValues  types.List `tfsdk:"exact_values"`
+	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
 }
 
 // ServicePolicyRuleListRulesSpecBotActionModel represents bot_action block
 type ServicePolicyRuleListRulesSpecBotActionModel struct {
 	BotSkipProcessing *ServicePolicyEmptyModel `tfsdk:"bot_skip_processing"`
-	None *ServicePolicyEmptyModel `tfsdk:"none"`
+	None              *ServicePolicyEmptyModel `tfsdk:"none"`
 }
 
 // ServicePolicyRuleListRulesSpecClientNameMatcherModel represents client_name_matcher block
 type ServicePolicyRuleListRulesSpecClientNameMatcherModel struct {
-	ExactValues types.List `tfsdk:"exact_values"`
-	RegexValues types.List `tfsdk:"regex_values"`
+	ExactValues  types.List `tfsdk:"exact_values"`
+	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
 }
 
@@ -247,68 +247,68 @@ type ServicePolicyRuleListRulesSpecClientSelectorModel struct {
 
 // ServicePolicyRuleListRulesSpecCookieMatchersModel represents cookie_matchers block
 type ServicePolicyRuleListRulesSpecCookieMatchersModel struct {
-	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
-	Name types.String `tfsdk:"name"`
-	CheckNotPresent *ServicePolicyEmptyModel `tfsdk:"check_not_present"`
-	CheckPresent *ServicePolicyEmptyModel `tfsdk:"check_present"`
-	Item *ServicePolicyRuleListRulesSpecCookieMatchersItemModel `tfsdk:"item"`
+	InvertMatcher   types.Bool                                             `tfsdk:"invert_matcher"`
+	Name            types.String                                           `tfsdk:"name"`
+	CheckNotPresent *ServicePolicyEmptyModel                               `tfsdk:"check_not_present"`
+	CheckPresent    *ServicePolicyEmptyModel                               `tfsdk:"check_present"`
+	Item            *ServicePolicyRuleListRulesSpecCookieMatchersItemModel `tfsdk:"item"`
 }
 
 // ServicePolicyRuleListRulesSpecCookieMatchersItemModel represents item block
 type ServicePolicyRuleListRulesSpecCookieMatchersItemModel struct {
-	ExactValues types.List `tfsdk:"exact_values"`
-	RegexValues types.List `tfsdk:"regex_values"`
+	ExactValues  types.List `tfsdk:"exact_values"`
+	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
 }
 
 // ServicePolicyRuleListRulesSpecDomainMatcherModel represents domain_matcher block
 type ServicePolicyRuleListRulesSpecDomainMatcherModel struct {
-	ExactValues types.List `tfsdk:"exact_values"`
-	RegexValues types.List `tfsdk:"regex_values"`
+	ExactValues  types.List `tfsdk:"exact_values"`
+	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
 }
 
 // ServicePolicyRuleListRulesSpecHeadersModel represents headers block
 type ServicePolicyRuleListRulesSpecHeadersModel struct {
-	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
-	Name types.String `tfsdk:"name"`
-	CheckNotPresent *ServicePolicyEmptyModel `tfsdk:"check_not_present"`
-	CheckPresent *ServicePolicyEmptyModel `tfsdk:"check_present"`
-	Item *ServicePolicyRuleListRulesSpecHeadersItemModel `tfsdk:"item"`
+	InvertMatcher   types.Bool                                      `tfsdk:"invert_matcher"`
+	Name            types.String                                    `tfsdk:"name"`
+	CheckNotPresent *ServicePolicyEmptyModel                        `tfsdk:"check_not_present"`
+	CheckPresent    *ServicePolicyEmptyModel                        `tfsdk:"check_present"`
+	Item            *ServicePolicyRuleListRulesSpecHeadersItemModel `tfsdk:"item"`
 }
 
 // ServicePolicyRuleListRulesSpecHeadersItemModel represents item block
 type ServicePolicyRuleListRulesSpecHeadersItemModel struct {
-	ExactValues types.List `tfsdk:"exact_values"`
-	RegexValues types.List `tfsdk:"regex_values"`
+	ExactValues  types.List `tfsdk:"exact_values"`
+	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
 }
 
 // ServicePolicyRuleListRulesSpecHTTPMethodModel represents http_method block
 type ServicePolicyRuleListRulesSpecHTTPMethodModel struct {
 	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
-	Methods types.List `tfsdk:"methods"`
+	Methods       types.List `tfsdk:"methods"`
 }
 
 // ServicePolicyRuleListRulesSpecIPMatcherModel represents ip_matcher block
 type ServicePolicyRuleListRulesSpecIPMatcherModel struct {
-	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
-	PrefixSets []ServicePolicyRuleListRulesSpecIPMatcherPrefixSetsModel `tfsdk:"prefix_sets"`
+	InvertMatcher types.Bool                                               `tfsdk:"invert_matcher"`
+	PrefixSets    []ServicePolicyRuleListRulesSpecIPMatcherPrefixSetsModel `tfsdk:"prefix_sets"`
 }
 
 // ServicePolicyRuleListRulesSpecIPMatcherPrefixSetsModel represents prefix_sets block
 type ServicePolicyRuleListRulesSpecIPMatcherPrefixSetsModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // ServicePolicyRuleListRulesSpecIPPrefixListModel represents ip_prefix_list block
 type ServicePolicyRuleListRulesSpecIPPrefixListModel struct {
 	InvertMatch types.Bool `tfsdk:"invert_match"`
-	IPPrefixes types.List `tfsdk:"ip_prefixes"`
+	IPPrefixes  types.List `tfsdk:"ip_prefixes"`
 }
 
 // ServicePolicyRuleListRulesSpecIPThreatCategoryListModel represents ip_threat_category_list block
@@ -323,17 +323,17 @@ type ServicePolicyRuleListRulesSpecJa4TLSFingerprintModel struct {
 
 // ServicePolicyRuleListRulesSpecJwtClaimsModel represents jwt_claims block
 type ServicePolicyRuleListRulesSpecJwtClaimsModel struct {
-	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
-	Name types.String `tfsdk:"name"`
-	CheckNotPresent *ServicePolicyEmptyModel `tfsdk:"check_not_present"`
-	CheckPresent *ServicePolicyEmptyModel `tfsdk:"check_present"`
-	Item *ServicePolicyRuleListRulesSpecJwtClaimsItemModel `tfsdk:"item"`
+	InvertMatcher   types.Bool                                        `tfsdk:"invert_matcher"`
+	Name            types.String                                      `tfsdk:"name"`
+	CheckNotPresent *ServicePolicyEmptyModel                          `tfsdk:"check_not_present"`
+	CheckPresent    *ServicePolicyEmptyModel                          `tfsdk:"check_present"`
+	Item            *ServicePolicyRuleListRulesSpecJwtClaimsItemModel `tfsdk:"item"`
 }
 
 // ServicePolicyRuleListRulesSpecJwtClaimsItemModel represents item block
 type ServicePolicyRuleListRulesSpecJwtClaimsItemModel struct {
-	ExactValues types.List `tfsdk:"exact_values"`
-	RegexValues types.List `tfsdk:"regex_values"`
+	ExactValues  types.List `tfsdk:"exact_values"`
+	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
 }
 
@@ -344,79 +344,79 @@ type ServicePolicyRuleListRulesSpecLabelMatcherModel struct {
 
 // ServicePolicyRuleListRulesSpecMumActionModel represents mum_action block
 type ServicePolicyRuleListRulesSpecMumActionModel struct {
-	Default *ServicePolicyEmptyModel `tfsdk:"default"`
+	Default        *ServicePolicyEmptyModel `tfsdk:"default"`
 	SkipProcessing *ServicePolicyEmptyModel `tfsdk:"skip_processing"`
 }
 
 // ServicePolicyRuleListRulesSpecPathModel represents path block
 type ServicePolicyRuleListRulesSpecPathModel struct {
-	ExactValues types.List `tfsdk:"exact_values"`
+	ExactValues   types.List `tfsdk:"exact_values"`
 	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
-	PrefixValues types.List `tfsdk:"prefix_values"`
-	RegexValues types.List `tfsdk:"regex_values"`
-	SuffixValues types.List `tfsdk:"suffix_values"`
-	Transformers types.List `tfsdk:"transformers"`
+	PrefixValues  types.List `tfsdk:"prefix_values"`
+	RegexValues   types.List `tfsdk:"regex_values"`
+	SuffixValues  types.List `tfsdk:"suffix_values"`
+	Transformers  types.List `tfsdk:"transformers"`
 }
 
 // ServicePolicyRuleListRulesSpecPortMatcherModel represents port_matcher block
 type ServicePolicyRuleListRulesSpecPortMatcherModel struct {
 	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
-	Ports types.List `tfsdk:"ports"`
+	Ports         types.List `tfsdk:"ports"`
 }
 
 // ServicePolicyRuleListRulesSpecQueryParamsModel represents query_params block
 type ServicePolicyRuleListRulesSpecQueryParamsModel struct {
-	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
-	Key types.String `tfsdk:"key"`
-	CheckNotPresent *ServicePolicyEmptyModel `tfsdk:"check_not_present"`
-	CheckPresent *ServicePolicyEmptyModel `tfsdk:"check_present"`
-	Item *ServicePolicyRuleListRulesSpecQueryParamsItemModel `tfsdk:"item"`
+	InvertMatcher   types.Bool                                          `tfsdk:"invert_matcher"`
+	Key             types.String                                        `tfsdk:"key"`
+	CheckNotPresent *ServicePolicyEmptyModel                            `tfsdk:"check_not_present"`
+	CheckPresent    *ServicePolicyEmptyModel                            `tfsdk:"check_present"`
+	Item            *ServicePolicyRuleListRulesSpecQueryParamsItemModel `tfsdk:"item"`
 }
 
 // ServicePolicyRuleListRulesSpecQueryParamsItemModel represents item block
 type ServicePolicyRuleListRulesSpecQueryParamsItemModel struct {
-	ExactValues types.List `tfsdk:"exact_values"`
-	RegexValues types.List `tfsdk:"regex_values"`
+	ExactValues  types.List `tfsdk:"exact_values"`
+	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
 }
 
 // ServicePolicyRuleListRulesSpecRequestConstraintsModel represents request_constraints block
 type ServicePolicyRuleListRulesSpecRequestConstraintsModel struct {
-	MaxCookieCountExceeds types.Int64 `tfsdk:"max_cookie_count_exceeds"`
-	MaxCookieKeySizeExceeds types.Int64 `tfsdk:"max_cookie_key_size_exceeds"`
-	MaxCookieValueSizeExceeds types.Int64 `tfsdk:"max_cookie_value_size_exceeds"`
-	MaxHeaderCountExceeds types.Int64 `tfsdk:"max_header_count_exceeds"`
-	MaxHeaderKeySizeExceeds types.Int64 `tfsdk:"max_header_key_size_exceeds"`
-	MaxHeaderValueSizeExceeds types.Int64 `tfsdk:"max_header_value_size_exceeds"`
-	MaxParameterCountExceeds types.Int64 `tfsdk:"max_parameter_count_exceeds"`
-	MaxParameterNameSizeExceeds types.Int64 `tfsdk:"max_parameter_name_size_exceeds"`
-	MaxParameterValueSizeExceeds types.Int64 `tfsdk:"max_parameter_value_size_exceeds"`
-	MaxQuerySizeExceeds types.Int64 `tfsdk:"max_query_size_exceeds"`
-	MaxRequestLineSizeExceeds types.Int64 `tfsdk:"max_request_line_size_exceeds"`
-	MaxRequestSizeExceeds types.Int64 `tfsdk:"max_request_size_exceeds"`
-	MaxURLSizeExceeds types.Int64 `tfsdk:"max_url_size_exceeds"`
-	MaxCookieCountNone *ServicePolicyEmptyModel `tfsdk:"max_cookie_count_none"`
-	MaxCookieKeySizeNone *ServicePolicyEmptyModel `tfsdk:"max_cookie_key_size_none"`
-	MaxCookieValueSizeNone *ServicePolicyEmptyModel `tfsdk:"max_cookie_value_size_none"`
-	MaxHeaderCountNone *ServicePolicyEmptyModel `tfsdk:"max_header_count_none"`
-	MaxHeaderKeySizeNone *ServicePolicyEmptyModel `tfsdk:"max_header_key_size_none"`
-	MaxHeaderValueSizeNone *ServicePolicyEmptyModel `tfsdk:"max_header_value_size_none"`
-	MaxParameterCountNone *ServicePolicyEmptyModel `tfsdk:"max_parameter_count_none"`
-	MaxParameterNameSizeNone *ServicePolicyEmptyModel `tfsdk:"max_parameter_name_size_none"`
-	MaxParameterValueSizeNone *ServicePolicyEmptyModel `tfsdk:"max_parameter_value_size_none"`
-	MaxQuerySizeNone *ServicePolicyEmptyModel `tfsdk:"max_query_size_none"`
-	MaxRequestLineSizeNone *ServicePolicyEmptyModel `tfsdk:"max_request_line_size_none"`
-	MaxRequestSizeNone *ServicePolicyEmptyModel `tfsdk:"max_request_size_none"`
-	MaxURLSizeNone *ServicePolicyEmptyModel `tfsdk:"max_url_size_none"`
+	MaxCookieCountExceeds        types.Int64              `tfsdk:"max_cookie_count_exceeds"`
+	MaxCookieKeySizeExceeds      types.Int64              `tfsdk:"max_cookie_key_size_exceeds"`
+	MaxCookieValueSizeExceeds    types.Int64              `tfsdk:"max_cookie_value_size_exceeds"`
+	MaxHeaderCountExceeds        types.Int64              `tfsdk:"max_header_count_exceeds"`
+	MaxHeaderKeySizeExceeds      types.Int64              `tfsdk:"max_header_key_size_exceeds"`
+	MaxHeaderValueSizeExceeds    types.Int64              `tfsdk:"max_header_value_size_exceeds"`
+	MaxParameterCountExceeds     types.Int64              `tfsdk:"max_parameter_count_exceeds"`
+	MaxParameterNameSizeExceeds  types.Int64              `tfsdk:"max_parameter_name_size_exceeds"`
+	MaxParameterValueSizeExceeds types.Int64              `tfsdk:"max_parameter_value_size_exceeds"`
+	MaxQuerySizeExceeds          types.Int64              `tfsdk:"max_query_size_exceeds"`
+	MaxRequestLineSizeExceeds    types.Int64              `tfsdk:"max_request_line_size_exceeds"`
+	MaxRequestSizeExceeds        types.Int64              `tfsdk:"max_request_size_exceeds"`
+	MaxURLSizeExceeds            types.Int64              `tfsdk:"max_url_size_exceeds"`
+	MaxCookieCountNone           *ServicePolicyEmptyModel `tfsdk:"max_cookie_count_none"`
+	MaxCookieKeySizeNone         *ServicePolicyEmptyModel `tfsdk:"max_cookie_key_size_none"`
+	MaxCookieValueSizeNone       *ServicePolicyEmptyModel `tfsdk:"max_cookie_value_size_none"`
+	MaxHeaderCountNone           *ServicePolicyEmptyModel `tfsdk:"max_header_count_none"`
+	MaxHeaderKeySizeNone         *ServicePolicyEmptyModel `tfsdk:"max_header_key_size_none"`
+	MaxHeaderValueSizeNone       *ServicePolicyEmptyModel `tfsdk:"max_header_value_size_none"`
+	MaxParameterCountNone        *ServicePolicyEmptyModel `tfsdk:"max_parameter_count_none"`
+	MaxParameterNameSizeNone     *ServicePolicyEmptyModel `tfsdk:"max_parameter_name_size_none"`
+	MaxParameterValueSizeNone    *ServicePolicyEmptyModel `tfsdk:"max_parameter_value_size_none"`
+	MaxQuerySizeNone             *ServicePolicyEmptyModel `tfsdk:"max_query_size_none"`
+	MaxRequestLineSizeNone       *ServicePolicyEmptyModel `tfsdk:"max_request_line_size_none"`
+	MaxRequestSizeNone           *ServicePolicyEmptyModel `tfsdk:"max_request_size_none"`
+	MaxURLSizeNone               *ServicePolicyEmptyModel `tfsdk:"max_url_size_none"`
 }
 
 // ServicePolicyRuleListRulesSpecSegmentPolicyModel represents segment_policy block
 type ServicePolicyRuleListRulesSpecSegmentPolicyModel struct {
-	DstAny *ServicePolicyEmptyModel `tfsdk:"dst_any"`
-	DstSegments *ServicePolicyRuleListRulesSpecSegmentPolicyDstSegmentsModel `tfsdk:"dst_segments"`
-	IntraSegment *ServicePolicyEmptyModel `tfsdk:"intra_segment"`
-	SrcAny *ServicePolicyEmptyModel `tfsdk:"src_any"`
-	SrcSegments *ServicePolicyRuleListRulesSpecSegmentPolicySrcSegmentsModel `tfsdk:"src_segments"`
+	DstAny       *ServicePolicyEmptyModel                                     `tfsdk:"dst_any"`
+	DstSegments  *ServicePolicyRuleListRulesSpecSegmentPolicyDstSegmentsModel `tfsdk:"dst_segments"`
+	IntraSegment *ServicePolicyEmptyModel                                     `tfsdk:"intra_segment"`
+	SrcAny       *ServicePolicyEmptyModel                                     `tfsdk:"src_any"`
+	SrcSegments  *ServicePolicyRuleListRulesSpecSegmentPolicySrcSegmentsModel `tfsdk:"src_segments"`
 }
 
 // ServicePolicyRuleListRulesSpecSegmentPolicyDstSegmentsModel represents dst_segments block
@@ -426,9 +426,9 @@ type ServicePolicyRuleListRulesSpecSegmentPolicyDstSegmentsModel struct {
 
 // ServicePolicyRuleListRulesSpecSegmentPolicyDstSegmentsSegmentsModel represents segments block
 type ServicePolicyRuleListRulesSpecSegmentPolicyDstSegmentsSegmentsModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // ServicePolicyRuleListRulesSpecSegmentPolicySrcSegmentsModel represents src_segments block
@@ -438,15 +438,15 @@ type ServicePolicyRuleListRulesSpecSegmentPolicySrcSegmentsModel struct {
 
 // ServicePolicyRuleListRulesSpecSegmentPolicySrcSegmentsSegmentsModel represents segments block
 type ServicePolicyRuleListRulesSpecSegmentPolicySrcSegmentsSegmentsModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // ServicePolicyRuleListRulesSpecTLSFingerprintMatcherModel represents tls_fingerprint_matcher block
 type ServicePolicyRuleListRulesSpecTLSFingerprintMatcherModel struct {
-	Classes types.List `tfsdk:"classes"`
-	ExactValues types.List `tfsdk:"exact_values"`
+	Classes        types.List `tfsdk:"classes"`
+	ExactValues    types.List `tfsdk:"exact_values"`
 	ExcludedValues types.List `tfsdk:"excluded_values"`
 }
 
@@ -459,22 +459,22 @@ type ServicePolicyRuleListRulesSpecUserIdentityMatcherModel struct {
 // ServicePolicyRuleListRulesSpecWAFActionModel represents waf_action block
 type ServicePolicyRuleListRulesSpecWAFActionModel struct {
 	AppFirewallDetectionControl *ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlModel `tfsdk:"app_firewall_detection_control"`
-	None *ServicePolicyEmptyModel `tfsdk:"none"`
-	WAFSkipProcessing *ServicePolicyEmptyModel `tfsdk:"waf_skip_processing"`
+	None                        *ServicePolicyEmptyModel                                                 `tfsdk:"none"`
+	WAFSkipProcessing           *ServicePolicyEmptyModel                                                 `tfsdk:"waf_skip_processing"`
 }
 
 // ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlModel represents app_firewall_detection_control block
 type ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlModel struct {
 	ExcludeAttackTypeContexts []ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlExcludeAttackTypeContextsModel `tfsdk:"exclude_attack_type_contexts"`
-	ExcludeBotNameContexts []ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlExcludeBotNameContextsModel `tfsdk:"exclude_bot_name_contexts"`
-	ExcludeSignatureContexts []ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlExcludeSignatureContextsModel `tfsdk:"exclude_signature_contexts"`
-	ExcludeViolationContexts []ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlExcludeViolationContextsModel `tfsdk:"exclude_violation_contexts"`
+	ExcludeBotNameContexts    []ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlExcludeBotNameContextsModel    `tfsdk:"exclude_bot_name_contexts"`
+	ExcludeSignatureContexts  []ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlExcludeSignatureContextsModel  `tfsdk:"exclude_signature_contexts"`
+	ExcludeViolationContexts  []ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlExcludeViolationContextsModel  `tfsdk:"exclude_violation_contexts"`
 }
 
 // ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlExcludeAttackTypeContextsModel represents exclude_attack_type_contexts block
 type ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlExcludeAttackTypeContextsModel struct {
-	Context types.String `tfsdk:"context"`
-	ContextName types.String `tfsdk:"context_name"`
+	Context           types.String `tfsdk:"context"`
+	ContextName       types.String `tfsdk:"context_name"`
 	ExcludeAttackType types.String `tfsdk:"exclude_attack_type"`
 }
 
@@ -485,15 +485,15 @@ type ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlExcludeBo
 
 // ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlExcludeSignatureContextsModel represents exclude_signature_contexts block
 type ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlExcludeSignatureContextsModel struct {
-	Context types.String `tfsdk:"context"`
+	Context     types.String `tfsdk:"context"`
 	ContextName types.String `tfsdk:"context_name"`
-	SignatureID types.Int64 `tfsdk:"signature_id"`
+	SignatureID types.Int64  `tfsdk:"signature_id"`
 }
 
 // ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlExcludeViolationContextsModel represents exclude_violation_contexts block
 type ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlExcludeViolationContextsModel struct {
-	Context types.String `tfsdk:"context"`
-	ContextName types.String `tfsdk:"context_name"`
+	Context          types.String `tfsdk:"context"`
+	ContextName      types.String `tfsdk:"context_name"`
 	ExcludeViolation types.String `tfsdk:"exclude_violation"`
 }
 
@@ -509,23 +509,23 @@ type ServicePolicyServerSelectorModel struct {
 }
 
 type ServicePolicyResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	ServerName types.String `tfsdk:"server_name"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	AllowAllRequests *ServicePolicyEmptyModel `tfsdk:"allow_all_requests"`
-	AllowList *ServicePolicyAllowListModel `tfsdk:"allow_list"`
-	AnyServer *ServicePolicyEmptyModel `tfsdk:"any_server"`
-	DenyAllRequests *ServicePolicyEmptyModel `tfsdk:"deny_all_requests"`
-	DenyList *ServicePolicyDenyListModel `tfsdk:"deny_list"`
-	RuleList *ServicePolicyRuleListModel `tfsdk:"rule_list"`
+	Name              types.String                         `tfsdk:"name"`
+	Namespace         types.String                         `tfsdk:"namespace"`
+	Annotations       types.Map                            `tfsdk:"annotations"`
+	Description       types.String                         `tfsdk:"description"`
+	Disable           types.Bool                           `tfsdk:"disable"`
+	Labels            types.Map                            `tfsdk:"labels"`
+	ID                types.String                         `tfsdk:"id"`
+	ServerName        types.String                         `tfsdk:"server_name"`
+	Timeouts          timeouts.Value                       `tfsdk:"timeouts"`
+	AllowAllRequests  *ServicePolicyEmptyModel             `tfsdk:"allow_all_requests"`
+	AllowList         *ServicePolicyAllowListModel         `tfsdk:"allow_list"`
+	AnyServer         *ServicePolicyEmptyModel             `tfsdk:"any_server"`
+	DenyAllRequests   *ServicePolicyEmptyModel             `tfsdk:"deny_all_requests"`
+	DenyList          *ServicePolicyDenyListModel          `tfsdk:"deny_list"`
+	RuleList          *ServicePolicyRuleListModel          `tfsdk:"rule_list"`
 	ServerNameMatcher *ServicePolicyServerNameMatcherModel `tfsdk:"server_name_matcher"`
-	ServerSelector *ServicePolicyServerSelectorModel `tfsdk:"server_selector"`
+	ServerSelector    *ServicePolicyServerSelectorModel    `tfsdk:"server_selector"`
 }
 
 func (r *ServicePolicyResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -539,7 +539,7 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the ServicePolicy. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -549,7 +549,7 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the ServicePolicy will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -559,33 +559,33 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"server_name": schema.StringAttribute{
 				MarkdownDescription: "Server Name. The expected name of the server to which the request API is directed. The actual names for the server are extracted from the HTTP Host header and the name of the virtual_host to which the request is directed. If the request is directed to a virtual K8s service, the actual names also contain the name of that service. The predicate evaluates to true if any of the actual names is the same as the expected server name.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -606,18 +606,18 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 				Attributes: map[string]schema.Attribute{
 					"country_list": schema.ListAttribute{
 						MarkdownDescription: "Country List. Addresses that belong to one of the countries in the given list The country is obtained by performing a lookup for the source IPv4 Address in a GeoIP DB. Possible values are `COUNTRY_NONE`, `COUNTRY_AD`, `COUNTRY_AE`, `COUNTRY_AF`, `COUNTRY_AG`, `COUNTRY_AI`, `COUNTRY_AL`, `COUNTRY_AM`, `COUNTRY_AN`, `COUNTRY_AO`, `COUNTRY_AQ`, `COUNTRY_AR`, `COUNTRY_AS`, `COUNTRY_AT`, `COUNTRY_AU`, `COUNTRY_AW`, `COUNTRY_AX`, `COUNTRY_AZ`, `COUNTRY_BA`, `COUNTRY_BB`, `COUNTRY_BD`, `COUNTRY_BE`, `COUNTRY_BF`, `COUNTRY_BG`, `COUNTRY_BH`, `COUNTRY_BI`, `COUNTRY_BJ`, `COUNTRY_BL`, `COUNTRY_BM`, `COUNTRY_BN`, `COUNTRY_BO`, `COUNTRY_BQ`, `COUNTRY_BR`, `COUNTRY_BS`, `COUNTRY_BT`, `COUNTRY_BV`, `COUNTRY_BW`, `COUNTRY_BY`, `COUNTRY_BZ`, `COUNTRY_CA`, `COUNTRY_CC`, `COUNTRY_CD`, `COUNTRY_CF`, `COUNTRY_CG`, `COUNTRY_CH`, `COUNTRY_CI`, `COUNTRY_CK`, `COUNTRY_CL`, `COUNTRY_CM`, `COUNTRY_CN`, `COUNTRY_CO`, `COUNTRY_CR`, `COUNTRY_CS`, `COUNTRY_CU`, `COUNTRY_CV`, `COUNTRY_CW`, `COUNTRY_CX`, `COUNTRY_CY`, `COUNTRY_CZ`, `COUNTRY_DE`, `COUNTRY_DJ`, `COUNTRY_DK`, `COUNTRY_DM`, `COUNTRY_DO`, `COUNTRY_DZ`, `COUNTRY_EC`, `COUNTRY_EE`, `COUNTRY_EG`, `COUNTRY_EH`, `COUNTRY_ER`, `COUNTRY_ES`, `COUNTRY_ET`, `COUNTRY_FI`, `COUNTRY_FJ`, `COUNTRY_FK`, `COUNTRY_FM`, `COUNTRY_FO`, `COUNTRY_FR`, `COUNTRY_GA`, `COUNTRY_GB`, `COUNTRY_GD`, `COUNTRY_GE`, `COUNTRY_GF`, `COUNTRY_GG`, `COUNTRY_GH`, `COUNTRY_GI`, `COUNTRY_GL`, `COUNTRY_GM`, `COUNTRY_GN`, `COUNTRY_GP`, `COUNTRY_GQ`, `COUNTRY_GR`, `COUNTRY_GS`, `COUNTRY_GT`, `COUNTRY_GU`, `COUNTRY_GW`, `COUNTRY_GY`, `COUNTRY_HK`, `COUNTRY_HM`, `COUNTRY_HN`, `COUNTRY_HR`, `COUNTRY_HT`, `COUNTRY_HU`, `COUNTRY_ID`, `COUNTRY_IE`, `COUNTRY_IL`, `COUNTRY_IM`, `COUNTRY_IN`, `COUNTRY_IO`, `COUNTRY_IQ`, `COUNTRY_IR`, `COUNTRY_IS`, `COUNTRY_IT`, `COUNTRY_JE`, `COUNTRY_JM`, `COUNTRY_JO`, `COUNTRY_JP`, `COUNTRY_KE`, `COUNTRY_KG`, `COUNTRY_KH`, `COUNTRY_KI`, `COUNTRY_KM`, `COUNTRY_KN`, `COUNTRY_KP`, `COUNTRY_KR`, `COUNTRY_KW`, `COUNTRY_KY`, `COUNTRY_KZ`, `COUNTRY_LA`, `COUNTRY_LB`, `COUNTRY_LC`, `COUNTRY_LI`, `COUNTRY_LK`, `COUNTRY_LR`, `COUNTRY_LS`, `COUNTRY_LT`, `COUNTRY_LU`, `COUNTRY_LV`, `COUNTRY_LY`, `COUNTRY_MA`, `COUNTRY_MC`, `COUNTRY_MD`, `COUNTRY_ME`, `COUNTRY_MF`, `COUNTRY_MG`, `COUNTRY_MH`, `COUNTRY_MK`, `COUNTRY_ML`, `COUNTRY_MM`, `COUNTRY_MN`, `COUNTRY_MO`, `COUNTRY_MP`, `COUNTRY_MQ`, `COUNTRY_MR`, `COUNTRY_MS`, `COUNTRY_MT`, `COUNTRY_MU`, `COUNTRY_MV`, `COUNTRY_MW`, `COUNTRY_MX`, `COUNTRY_MY`, `COUNTRY_MZ`, `COUNTRY_NA`, `COUNTRY_NC`, `COUNTRY_NE`, `COUNTRY_NF`, `COUNTRY_NG`, `COUNTRY_NI`, `COUNTRY_NL`, `COUNTRY_NO`, `COUNTRY_NP`, `COUNTRY_NR`, `COUNTRY_NU`, `COUNTRY_NZ`, `COUNTRY_OM`, `COUNTRY_PA`, `COUNTRY_PE`, `COUNTRY_PF`, `COUNTRY_PG`, `COUNTRY_PH`, `COUNTRY_PK`, `COUNTRY_PL`, `COUNTRY_PM`, `COUNTRY_PN`, `COUNTRY_PR`, `COUNTRY_PS`, `COUNTRY_PT`, `COUNTRY_PW`, `COUNTRY_PY`, `COUNTRY_QA`, `COUNTRY_RE`, `COUNTRY_RO`, `COUNTRY_RS`, `COUNTRY_RU`, `COUNTRY_RW`, `COUNTRY_SA`, `COUNTRY_SB`, `COUNTRY_SC`, `COUNTRY_SD`, `COUNTRY_SE`, `COUNTRY_SG`, `COUNTRY_SH`, `COUNTRY_SI`, `COUNTRY_SJ`, `COUNTRY_SK`, `COUNTRY_SL`, `COUNTRY_SM`, `COUNTRY_SN`, `COUNTRY_SO`, `COUNTRY_SR`, `COUNTRY_SS`, `COUNTRY_ST`, `COUNTRY_SV`, `COUNTRY_SX`, `COUNTRY_SY`, `COUNTRY_SZ`, `COUNTRY_TC`, `COUNTRY_TD`, `COUNTRY_TF`, `COUNTRY_TG`, `COUNTRY_TH`, `COUNTRY_TJ`, `COUNTRY_TK`, `COUNTRY_TL`, `COUNTRY_TM`, `COUNTRY_TN`, `COUNTRY_TO`, `COUNTRY_TR`, `COUNTRY_TT`, `COUNTRY_TV`, `COUNTRY_TW`, `COUNTRY_TZ`, `COUNTRY_UA`, `COUNTRY_UG`, `COUNTRY_UM`, `COUNTRY_US`, `COUNTRY_UY`, `COUNTRY_UZ`, `COUNTRY_VA`, `COUNTRY_VC`, `COUNTRY_VE`, `COUNTRY_VG`, `COUNTRY_VI`, `COUNTRY_VN`, `COUNTRY_VU`, `COUNTRY_WF`, `COUNTRY_WS`, `COUNTRY_XK`, `COUNTRY_XT`, `COUNTRY_YE`, `COUNTRY_YT`, `COUNTRY_ZA`, `COUNTRY_ZM`, `COUNTRY_ZW`. Defaults to `COUNTRY_NONE`.",
-						Optional: true,
-						ElementType: types.StringType,
+						Optional:            true,
+						ElementType:         types.StringType,
 					},
 					"tls_fingerprint_classes": schema.ListAttribute{
 						MarkdownDescription: "TLS Fingerprint Classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against. Possible values are `TLS_FINGERPRINT_NONE`, `ANY_MALICIOUS_FINGERPRINT`, `ADWARE`, `ADWIND`, `DRIDEX`, `GOOTKIT`, `GOZI`, `JBIFROST`, `QUAKBOT`, `RANSOMWARE`, `TROLDESH`, `TOFSEE`, `TORRENTLOCKER`, `TRICKBOT`. Defaults to `TLS_FINGERPRINT_NONE`.",
-						Optional: true,
-						ElementType: types.StringType,
+						Optional:            true,
+						ElementType:         types.StringType,
 					},
 					"tls_fingerprint_values": schema.ListAttribute{
 						MarkdownDescription: "TLS Fingerprint Values. A list of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against.",
-						Optional: true,
-						ElementType: types.StringType,
+						Optional:            true,
+						ElementType:         types.StringType,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -626,8 +626,8 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 						Attributes: map[string]schema.Attribute{
 							"as_numbers": schema.ListAttribute{
 								MarkdownDescription: "AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
-								Optional: true,
-								ElementType: types.Int64Type,
+								Optional:            true,
+								ElementType:         types.Int64Type,
 							},
 						},
 					},
@@ -637,16 +637,16 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-									Optional: true,
+									Optional:            true,
 								},
 								"namespace": schema.StringAttribute{
 									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-									Optional: true,
+									Optional:            true,
 								},
 								"tenant": schema.StringAttribute{
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-									Optional: true,
-									Computed: true,
+									Optional:            true,
+									Computed:            true,
 								},
 							},
 						},
@@ -666,16 +666,16 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-									Optional: true,
+									Optional:            true,
 								},
 								"namespace": schema.StringAttribute{
 									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-									Optional: true,
+									Optional:            true,
 								},
 								"tenant": schema.StringAttribute{
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-									Optional: true,
-									Computed: true,
+									Optional:            true,
+									Computed:            true,
 								},
 							},
 						},
@@ -685,13 +685,12 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 						Attributes: map[string]schema.Attribute{
 							"prefixes": schema.ListAttribute{
 								MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
-								Optional: true,
-								ElementType: types.StringType,
+								Optional:            true,
+								ElementType:         types.StringType,
 							},
 						},
 					},
 				},
-
 			},
 			"any_server": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: any_server, server_name, server_name_matcher, server_selector] Empty. This can be used for messages where no values are needed",
@@ -704,18 +703,18 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 				Attributes: map[string]schema.Attribute{
 					"country_list": schema.ListAttribute{
 						MarkdownDescription: "Country List. Addresses that belong to one of the countries in the given list The country is obtained by performing a lookup for the source IPv4 Address in a GeoIP DB. Possible values are `COUNTRY_NONE`, `COUNTRY_AD`, `COUNTRY_AE`, `COUNTRY_AF`, `COUNTRY_AG`, `COUNTRY_AI`, `COUNTRY_AL`, `COUNTRY_AM`, `COUNTRY_AN`, `COUNTRY_AO`, `COUNTRY_AQ`, `COUNTRY_AR`, `COUNTRY_AS`, `COUNTRY_AT`, `COUNTRY_AU`, `COUNTRY_AW`, `COUNTRY_AX`, `COUNTRY_AZ`, `COUNTRY_BA`, `COUNTRY_BB`, `COUNTRY_BD`, `COUNTRY_BE`, `COUNTRY_BF`, `COUNTRY_BG`, `COUNTRY_BH`, `COUNTRY_BI`, `COUNTRY_BJ`, `COUNTRY_BL`, `COUNTRY_BM`, `COUNTRY_BN`, `COUNTRY_BO`, `COUNTRY_BQ`, `COUNTRY_BR`, `COUNTRY_BS`, `COUNTRY_BT`, `COUNTRY_BV`, `COUNTRY_BW`, `COUNTRY_BY`, `COUNTRY_BZ`, `COUNTRY_CA`, `COUNTRY_CC`, `COUNTRY_CD`, `COUNTRY_CF`, `COUNTRY_CG`, `COUNTRY_CH`, `COUNTRY_CI`, `COUNTRY_CK`, `COUNTRY_CL`, `COUNTRY_CM`, `COUNTRY_CN`, `COUNTRY_CO`, `COUNTRY_CR`, `COUNTRY_CS`, `COUNTRY_CU`, `COUNTRY_CV`, `COUNTRY_CW`, `COUNTRY_CX`, `COUNTRY_CY`, `COUNTRY_CZ`, `COUNTRY_DE`, `COUNTRY_DJ`, `COUNTRY_DK`, `COUNTRY_DM`, `COUNTRY_DO`, `COUNTRY_DZ`, `COUNTRY_EC`, `COUNTRY_EE`, `COUNTRY_EG`, `COUNTRY_EH`, `COUNTRY_ER`, `COUNTRY_ES`, `COUNTRY_ET`, `COUNTRY_FI`, `COUNTRY_FJ`, `COUNTRY_FK`, `COUNTRY_FM`, `COUNTRY_FO`, `COUNTRY_FR`, `COUNTRY_GA`, `COUNTRY_GB`, `COUNTRY_GD`, `COUNTRY_GE`, `COUNTRY_GF`, `COUNTRY_GG`, `COUNTRY_GH`, `COUNTRY_GI`, `COUNTRY_GL`, `COUNTRY_GM`, `COUNTRY_GN`, `COUNTRY_GP`, `COUNTRY_GQ`, `COUNTRY_GR`, `COUNTRY_GS`, `COUNTRY_GT`, `COUNTRY_GU`, `COUNTRY_GW`, `COUNTRY_GY`, `COUNTRY_HK`, `COUNTRY_HM`, `COUNTRY_HN`, `COUNTRY_HR`, `COUNTRY_HT`, `COUNTRY_HU`, `COUNTRY_ID`, `COUNTRY_IE`, `COUNTRY_IL`, `COUNTRY_IM`, `COUNTRY_IN`, `COUNTRY_IO`, `COUNTRY_IQ`, `COUNTRY_IR`, `COUNTRY_IS`, `COUNTRY_IT`, `COUNTRY_JE`, `COUNTRY_JM`, `COUNTRY_JO`, `COUNTRY_JP`, `COUNTRY_KE`, `COUNTRY_KG`, `COUNTRY_KH`, `COUNTRY_KI`, `COUNTRY_KM`, `COUNTRY_KN`, `COUNTRY_KP`, `COUNTRY_KR`, `COUNTRY_KW`, `COUNTRY_KY`, `COUNTRY_KZ`, `COUNTRY_LA`, `COUNTRY_LB`, `COUNTRY_LC`, `COUNTRY_LI`, `COUNTRY_LK`, `COUNTRY_LR`, `COUNTRY_LS`, `COUNTRY_LT`, `COUNTRY_LU`, `COUNTRY_LV`, `COUNTRY_LY`, `COUNTRY_MA`, `COUNTRY_MC`, `COUNTRY_MD`, `COUNTRY_ME`, `COUNTRY_MF`, `COUNTRY_MG`, `COUNTRY_MH`, `COUNTRY_MK`, `COUNTRY_ML`, `COUNTRY_MM`, `COUNTRY_MN`, `COUNTRY_MO`, `COUNTRY_MP`, `COUNTRY_MQ`, `COUNTRY_MR`, `COUNTRY_MS`, `COUNTRY_MT`, `COUNTRY_MU`, `COUNTRY_MV`, `COUNTRY_MW`, `COUNTRY_MX`, `COUNTRY_MY`, `COUNTRY_MZ`, `COUNTRY_NA`, `COUNTRY_NC`, `COUNTRY_NE`, `COUNTRY_NF`, `COUNTRY_NG`, `COUNTRY_NI`, `COUNTRY_NL`, `COUNTRY_NO`, `COUNTRY_NP`, `COUNTRY_NR`, `COUNTRY_NU`, `COUNTRY_NZ`, `COUNTRY_OM`, `COUNTRY_PA`, `COUNTRY_PE`, `COUNTRY_PF`, `COUNTRY_PG`, `COUNTRY_PH`, `COUNTRY_PK`, `COUNTRY_PL`, `COUNTRY_PM`, `COUNTRY_PN`, `COUNTRY_PR`, `COUNTRY_PS`, `COUNTRY_PT`, `COUNTRY_PW`, `COUNTRY_PY`, `COUNTRY_QA`, `COUNTRY_RE`, `COUNTRY_RO`, `COUNTRY_RS`, `COUNTRY_RU`, `COUNTRY_RW`, `COUNTRY_SA`, `COUNTRY_SB`, `COUNTRY_SC`, `COUNTRY_SD`, `COUNTRY_SE`, `COUNTRY_SG`, `COUNTRY_SH`, `COUNTRY_SI`, `COUNTRY_SJ`, `COUNTRY_SK`, `COUNTRY_SL`, `COUNTRY_SM`, `COUNTRY_SN`, `COUNTRY_SO`, `COUNTRY_SR`, `COUNTRY_SS`, `COUNTRY_ST`, `COUNTRY_SV`, `COUNTRY_SX`, `COUNTRY_SY`, `COUNTRY_SZ`, `COUNTRY_TC`, `COUNTRY_TD`, `COUNTRY_TF`, `COUNTRY_TG`, `COUNTRY_TH`, `COUNTRY_TJ`, `COUNTRY_TK`, `COUNTRY_TL`, `COUNTRY_TM`, `COUNTRY_TN`, `COUNTRY_TO`, `COUNTRY_TR`, `COUNTRY_TT`, `COUNTRY_TV`, `COUNTRY_TW`, `COUNTRY_TZ`, `COUNTRY_UA`, `COUNTRY_UG`, `COUNTRY_UM`, `COUNTRY_US`, `COUNTRY_UY`, `COUNTRY_UZ`, `COUNTRY_VA`, `COUNTRY_VC`, `COUNTRY_VE`, `COUNTRY_VG`, `COUNTRY_VI`, `COUNTRY_VN`, `COUNTRY_VU`, `COUNTRY_WF`, `COUNTRY_WS`, `COUNTRY_XK`, `COUNTRY_XT`, `COUNTRY_YE`, `COUNTRY_YT`, `COUNTRY_ZA`, `COUNTRY_ZM`, `COUNTRY_ZW`. Defaults to `COUNTRY_NONE`.",
-						Optional: true,
-						ElementType: types.StringType,
+						Optional:            true,
+						ElementType:         types.StringType,
 					},
 					"tls_fingerprint_classes": schema.ListAttribute{
 						MarkdownDescription: "TLS Fingerprint Classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against. Possible values are `TLS_FINGERPRINT_NONE`, `ANY_MALICIOUS_FINGERPRINT`, `ADWARE`, `ADWIND`, `DRIDEX`, `GOOTKIT`, `GOZI`, `JBIFROST`, `QUAKBOT`, `RANSOMWARE`, `TROLDESH`, `TOFSEE`, `TORRENTLOCKER`, `TRICKBOT`. Defaults to `TLS_FINGERPRINT_NONE`.",
-						Optional: true,
-						ElementType: types.StringType,
+						Optional:            true,
+						ElementType:         types.StringType,
 					},
 					"tls_fingerprint_values": schema.ListAttribute{
 						MarkdownDescription: "TLS Fingerprint Values. A list of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against.",
-						Optional: true,
-						ElementType: types.StringType,
+						Optional:            true,
+						ElementType:         types.StringType,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -724,8 +723,8 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 						Attributes: map[string]schema.Attribute{
 							"as_numbers": schema.ListAttribute{
 								MarkdownDescription: "AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
-								Optional: true,
-								ElementType: types.Int64Type,
+								Optional:            true,
+								ElementType:         types.Int64Type,
 							},
 						},
 					},
@@ -735,16 +734,16 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-									Optional: true,
+									Optional:            true,
 								},
 								"namespace": schema.StringAttribute{
 									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-									Optional: true,
+									Optional:            true,
 								},
 								"tenant": schema.StringAttribute{
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-									Optional: true,
-									Computed: true,
+									Optional:            true,
+									Computed:            true,
 								},
 							},
 						},
@@ -764,16 +763,16 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-									Optional: true,
+									Optional:            true,
 								},
 								"namespace": schema.StringAttribute{
 									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-									Optional: true,
+									Optional:            true,
 								},
 								"tenant": schema.StringAttribute{
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-									Optional: true,
-									Computed: true,
+									Optional:            true,
+									Computed:            true,
 								},
 							},
 						},
@@ -783,35 +782,32 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 						Attributes: map[string]schema.Attribute{
 							"prefixes": schema.ListAttribute{
 								MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
-								Optional: true,
-								ElementType: types.StringType,
+								Optional:            true,
+								ElementType:         types.StringType,
 							},
 						},
 					},
 				},
-
 			},
 			"rule_list": schema.SingleNestedBlock{
 				MarkdownDescription: "Rule List. A list of rules. The order of evaluation of the rules depends on the rule combining algorithm.",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"rules": schema.ListNestedBlock{
 						MarkdownDescription: "Rules. Define the list of rules (with an order) that should be evaluated by this service policy. Rules are evaluated from top to bottom in the list.",
 						NestedObject: schema.NestedBlockObject{
-							Attributes: map[string]schema.Attribute{
-							},
+							Attributes: map[string]schema.Attribute{},
 							Blocks: map[string]schema.Block{
 								"metadata": schema.SingleNestedBlock{
 									MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 									Attributes: map[string]schema.Attribute{
 										"description_spec": schema.StringAttribute{
 											MarkdownDescription: "Description. Human readable description.",
-											Optional: true,
+											Optional:            true,
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 								},
@@ -820,15 +816,15 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 									Attributes: map[string]schema.Attribute{
 										"action": schema.StringAttribute{
 											MarkdownDescription: "Rule Action. The rule action determines the disposition of the input request API. If a policy matches a rule with an ALLOW action, the processing of the request proceeds forward. If it matches a rule with a DENY action, the processing of the request is terminated and an appropriate message/code returned to the originator. If it matches a rule with a NEXT_POLICY_SET action, evaluation of the current policy set terminates and evaluation of the next policy set in the chain begins. - DENY: DENY Deny the request. - ALLOW: ALLOW Allow the request to proceed. - NEXT_POLICY_SET: NEXT_POLICY_SET Terminate evaluation of the current policy set and begin evaluating the next policy set in the chain. Note that the evaluation of any remaining policies in the current policy set is skipped. - NEXT_POLICY: NEXT_POLICY Terminate evaluation of the current policy and begin evaluating the next policy in the policy set. Note that the evaluation of any remaining rules in the current policy is skipped. - LAST_POLICY: LAST_POLICY Terminate evaluation of the current policy and begin evaluating the last policy in the policy set. Note that the evaluation of any remaining rules in the current policy is skipped. - GOTO_POLICY: GOTO_POLICY Terminate evaluation of the current policy and begin evaluating a specific policy in the policy set. The policy is specified using the goto_policy field in the rule and must be after the current policy in the policy set. Possible values are `DENY`, `ALLOW`, `NEXT_POLICY`. Defaults to `DENY`.",
-											Optional: true,
+											Optional:            true,
 										},
 										"client_name": schema.StringAttribute{
 											MarkdownDescription: "Client Name. The expected name of the client invoking the request API. The predicate evaluates to true if any of the actual names is the same as the expected client name.",
-											Optional: true,
+											Optional:            true,
 										},
 										"expiration_timestamp": schema.StringAttribute{
 											MarkdownDescription: "Expiration Timestamp. The expiration_timestamp is the RFC 3339 format timestamp at which the containing rule is considered to be logically expired. The rule continues to exist in the configuration but is not applied anymore.",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -846,12 +842,12 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 											Attributes: map[string]schema.Attribute{
 												"invert_matcher": schema.BoolAttribute{
 													MarkdownDescription: "Invert String Matcher. Invert the match result.",
-													Optional: true,
+													Optional:            true,
 												},
 												"match": schema.ListAttribute{
 													MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 										},
@@ -861,11 +857,11 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 												Attributes: map[string]schema.Attribute{
 													"invert_matcher": schema.BoolAttribute{
 														MarkdownDescription: "Invert Matcher. Invert Match of the expression defined",
-														Optional: true,
+														Optional:            true,
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Argument Name. x-example: 'phones[_]' x-example: 'cars.make.toyota.models[1]' x-example: 'cars.make.honda.models[_]' x-example: 'cars.make[_].models[_]' A case-sensitive JSON path in the HTTP request body.",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 												Blocks: map[string]schema.Block{
@@ -880,18 +876,18 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 														Attributes: map[string]schema.Attribute{
 															"exact_values": schema.ListAttribute{
 																MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
-																Optional: true,
-																ElementType: types.StringType,
+																Optional:            true,
+																ElementType:         types.StringType,
 															},
 															"regex_values": schema.ListAttribute{
 																MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
-																Optional: true,
-																ElementType: types.StringType,
+																Optional:            true,
+																ElementType:         types.StringType,
 															},
 															"transformers": schema.ListAttribute{
 																MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
-																Optional: true,
-																ElementType: types.StringType,
+																Optional:            true,
+																ElementType:         types.StringType,
 															},
 														},
 													},
@@ -903,15 +899,14 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 											Attributes: map[string]schema.Attribute{
 												"as_numbers": schema.ListAttribute{
 													MarkdownDescription: "AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
-													Optional: true,
-													ElementType: types.Int64Type,
+													Optional:            true,
+													ElementType:         types.Int64Type,
 												},
 											},
 										},
 										"asn_matcher": schema.SingleNestedBlock{
 											MarkdownDescription: "ASN Matcher. Match any AS number contained in the list of bgp_asn_sets.",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"asn_sets": schema.ListNestedBlock{
 													MarkdownDescription: "BGP ASN Sets. A list of references to bgp_asn_set objects.",
@@ -919,26 +914,26 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 														Attributes: map[string]schema.Attribute{
 															"kind": schema.StringAttribute{
 																MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-																Optional: true,
-																Computed: true,
+																Optional:            true,
+																Computed:            true,
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-																Optional: true,
+																Optional:            true,
 															},
 															"namespace": schema.StringAttribute{
 																MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-																Optional: true,
+																Optional:            true,
 															},
 															"tenant": schema.StringAttribute{
 																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-																Optional: true,
-																Computed: true,
+																Optional:            true,
+																Computed:            true,
 															},
 															"uid": schema.StringAttribute{
 																MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-																Optional: true,
-																Computed: true,
+																Optional:            true,
+																Computed:            true,
 															},
 														},
 													},
@@ -950,25 +945,24 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 											Attributes: map[string]schema.Attribute{
 												"exact_values": schema.ListAttribute{
 													MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 												"regex_values": schema.ListAttribute{
 													MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 												"transformers": schema.ListAttribute{
 													MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 										},
 										"bot_action": schema.SingleNestedBlock{
 											MarkdownDescription: "Bot Action. Modify Bot protection behavior for a matching request. The modification could be to entirely skip Bot processing.",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"bot_skip_processing": schema.SingleNestedBlock{
 													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -983,18 +977,18 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 											Attributes: map[string]schema.Attribute{
 												"exact_values": schema.ListAttribute{
 													MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 												"regex_values": schema.ListAttribute{
 													MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 												"transformers": schema.ListAttribute{
 													MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 										},
@@ -1003,8 +997,8 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 											Attributes: map[string]schema.Attribute{
 												"expressions": schema.ListAttribute{
 													MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 										},
@@ -1014,11 +1008,11 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 												Attributes: map[string]schema.Attribute{
 													"invert_matcher": schema.BoolAttribute{
 														MarkdownDescription: "Invert Matcher. Invert Match of the expression defined",
-														Optional: true,
+														Optional:            true,
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Cookie Name. A case-sensitive cookie name.",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 												Blocks: map[string]schema.Block{
@@ -1033,18 +1027,18 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 														Attributes: map[string]schema.Attribute{
 															"exact_values": schema.ListAttribute{
 																MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
-																Optional: true,
-																ElementType: types.StringType,
+																Optional:            true,
+																ElementType:         types.StringType,
 															},
 															"regex_values": schema.ListAttribute{
 																MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
-																Optional: true,
-																ElementType: types.StringType,
+																Optional:            true,
+																ElementType:         types.StringType,
 															},
 															"transformers": schema.ListAttribute{
 																MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
-																Optional: true,
-																ElementType: types.StringType,
+																Optional:            true,
+																ElementType:         types.StringType,
 															},
 														},
 													},
@@ -1056,18 +1050,18 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 											Attributes: map[string]schema.Attribute{
 												"exact_values": schema.ListAttribute{
 													MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 												"regex_values": schema.ListAttribute{
 													MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 												"transformers": schema.ListAttribute{
 													MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 										},
@@ -1077,11 +1071,11 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 												Attributes: map[string]schema.Attribute{
 													"invert_matcher": schema.BoolAttribute{
 														MarkdownDescription: "Invert Header Matcher. Invert the match result.",
-														Optional: true,
+														Optional:            true,
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Header Name. A case-insensitive HTTP header name.",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 												Blocks: map[string]schema.Block{
@@ -1096,18 +1090,18 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 														Attributes: map[string]schema.Attribute{
 															"exact_values": schema.ListAttribute{
 																MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
-																Optional: true,
-																ElementType: types.StringType,
+																Optional:            true,
+																ElementType:         types.StringType,
 															},
 															"regex_values": schema.ListAttribute{
 																MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
-																Optional: true,
-																ElementType: types.StringType,
+																Optional:            true,
+																ElementType:         types.StringType,
 															},
 															"transformers": schema.ListAttribute{
 																MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
-																Optional: true,
-																ElementType: types.StringType,
+																Optional:            true,
+																ElementType:         types.StringType,
 															},
 														},
 													},
@@ -1119,12 +1113,12 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 											Attributes: map[string]schema.Attribute{
 												"invert_matcher": schema.BoolAttribute{
 													MarkdownDescription: "Invert Method Matcher. Invert the match result.",
-													Optional: true,
+													Optional:            true,
 												},
 												"methods": schema.ListAttribute{
 													MarkdownDescription: "Method List. List of methods values to match against. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 										},
@@ -1133,7 +1127,7 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 											Attributes: map[string]schema.Attribute{
 												"invert_matcher": schema.BoolAttribute{
 													MarkdownDescription: "Invert IP Matcher. Invert the match result.",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -1143,26 +1137,26 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 														Attributes: map[string]schema.Attribute{
 															"kind": schema.StringAttribute{
 																MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-																Optional: true,
-																Computed: true,
+																Optional:            true,
+																Computed:            true,
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-																Optional: true,
+																Optional:            true,
 															},
 															"namespace": schema.StringAttribute{
 																MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-																Optional: true,
+																Optional:            true,
 															},
 															"tenant": schema.StringAttribute{
 																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-																Optional: true,
-																Computed: true,
+																Optional:            true,
+																Computed:            true,
 															},
 															"uid": schema.StringAttribute{
 																MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-																Optional: true,
-																Computed: true,
+																Optional:            true,
+																Computed:            true,
 															},
 														},
 													},
@@ -1174,12 +1168,12 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 											Attributes: map[string]schema.Attribute{
 												"invert_match": schema.BoolAttribute{
 													MarkdownDescription: "Invert Match Result. Invert the match result.",
-													Optional: true,
+													Optional:            true,
 												},
 												"ip_prefixes": schema.ListAttribute{
 													MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefix strings.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 										},
@@ -1188,8 +1182,8 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 											Attributes: map[string]schema.Attribute{
 												"ip_threat_categories": schema.ListAttribute{
 													MarkdownDescription: "List of IP Threat Categories to choose. The IP threat categories is obtained from the list and is used to auto-generate equivalent label selection expressions. Possible values are `SPAM_SOURCES`, `WINDOWS_EXPLOITS`, `WEB_ATTACKS`, `BOTNETS`, `SCANNERS`, `REPUTATION`, `PHISHING`, `PROXY`, `MOBILE_THREATS`, `TOR_PROXY`, `DENIAL_OF_SERVICE`, `NETWORK`. Defaults to `SPAM_SOURCES`.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 										},
@@ -1198,8 +1192,8 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 											Attributes: map[string]schema.Attribute{
 												"exact_values": schema.ListAttribute{
 													MarkdownDescription: "Exact Values. A list of exact JA4 TLS fingerprint to match the input JA4 TLS fingerprint against",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 										},
@@ -1209,11 +1203,11 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 												Attributes: map[string]schema.Attribute{
 													"invert_matcher": schema.BoolAttribute{
 														MarkdownDescription: "Invert Matcher. Invert the match result.",
-														Optional: true,
+														Optional:            true,
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "JWT Claim Name. JWT claim name.",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 												Blocks: map[string]schema.Block{
@@ -1228,18 +1222,18 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 														Attributes: map[string]schema.Attribute{
 															"exact_values": schema.ListAttribute{
 																MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
-																Optional: true,
-																ElementType: types.StringType,
+																Optional:            true,
+																ElementType:         types.StringType,
 															},
 															"regex_values": schema.ListAttribute{
 																MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
-																Optional: true,
-																ElementType: types.StringType,
+																Optional:            true,
+																ElementType:         types.StringType,
 															},
 															"transformers": schema.ListAttribute{
 																MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
-																Optional: true,
-																ElementType: types.StringType,
+																Optional:            true,
+																ElementType:         types.StringType,
 															},
 														},
 													},
@@ -1251,15 +1245,14 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 											Attributes: map[string]schema.Attribute{
 												"keys": schema.ListAttribute{
 													MarkdownDescription: "Keys. The list of label key names that have to match",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 										},
 										"mum_action": schema.SingleNestedBlock{
 											MarkdownDescription: "Select Modification Action. Modify behavior for a matching request. The modification could be to entirely skip processing.",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"default": schema.SingleNestedBlock{
 													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -1274,32 +1267,32 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 											Attributes: map[string]schema.Attribute{
 												"exact_values": schema.ListAttribute{
 													MarkdownDescription: "Exact Values. A list of exact path values to match the input HTTP path against.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 												"invert_matcher": schema.BoolAttribute{
 													MarkdownDescription: "Invert Path Matcher. Invert the match result.",
-													Optional: true,
+													Optional:            true,
 												},
 												"prefix_values": schema.ListAttribute{
 													MarkdownDescription: "Prefix Values. A list of path prefix values to match the input HTTP path against.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 												"regex_values": schema.ListAttribute{
 													MarkdownDescription: "Regex Values. A list of regular expressions to match the input HTTP path against.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 												"suffix_values": schema.ListAttribute{
 													MarkdownDescription: "Suffix Values. A list of path suffix values to match the input HTTP path against.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 												"transformers": schema.ListAttribute{
 													MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 										},
@@ -1308,12 +1301,12 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 											Attributes: map[string]schema.Attribute{
 												"invert_matcher": schema.BoolAttribute{
 													MarkdownDescription: "Invert Port Matcher. Invert the match result.",
-													Optional: true,
+													Optional:            true,
 												},
 												"ports": schema.ListAttribute{
 													MarkdownDescription: "Port Ranges. A list of strings, each of which is a single port value or a tuple of start and end port values separated by '-'. The start and end values are considered to be part of the range.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 										},
@@ -1323,11 +1316,11 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 												Attributes: map[string]schema.Attribute{
 													"invert_matcher": schema.BoolAttribute{
 														MarkdownDescription: "Invert Query Parameter Matcher. Invert the match result.",
-														Optional: true,
+														Optional:            true,
 													},
 													"key": schema.StringAttribute{
 														MarkdownDescription: "Query Parameter Name. A case-sensitive HTTP query parameter name.",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 												Blocks: map[string]schema.Block{
@@ -1342,18 +1335,18 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 														Attributes: map[string]schema.Attribute{
 															"exact_values": schema.ListAttribute{
 																MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
-																Optional: true,
-																ElementType: types.StringType,
+																Optional:            true,
+																ElementType:         types.StringType,
 															},
 															"regex_values": schema.ListAttribute{
 																MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
-																Optional: true,
-																ElementType: types.StringType,
+																Optional:            true,
+																ElementType:         types.StringType,
 															},
 															"transformers": schema.ListAttribute{
 																MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
-																Optional: true,
-																ElementType: types.StringType,
+																Optional:            true,
+																ElementType:         types.StringType,
 															},
 														},
 													},
@@ -1365,55 +1358,55 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 											Attributes: map[string]schema.Attribute{
 												"max_cookie_count_exceeds": schema.Int64Attribute{
 													MarkdownDescription: "Match on the Count for all Cookies that exceed this value.",
-													Optional: true,
+													Optional:            true,
 												},
 												"max_cookie_key_size_exceeds": schema.Int64Attribute{
 													MarkdownDescription: "Match on the Name Size per Cookie that exceed this value.",
-													Optional: true,
+													Optional:            true,
 												},
 												"max_cookie_value_size_exceeds": schema.Int64Attribute{
 													MarkdownDescription: "Match on the Value Size per Cookie that exceed this value.",
-													Optional: true,
+													Optional:            true,
 												},
 												"max_header_count_exceeds": schema.Int64Attribute{
 													MarkdownDescription: "Match on the Count for all Headers that exceed this value.",
-													Optional: true,
+													Optional:            true,
 												},
 												"max_header_key_size_exceeds": schema.Int64Attribute{
 													MarkdownDescription: "Match on the Name Size per Header that exceed this value.",
-													Optional: true,
+													Optional:            true,
 												},
 												"max_header_value_size_exceeds": schema.Int64Attribute{
 													MarkdownDescription: "Match on the Value Size per Header that exceed this value.",
-													Optional: true,
+													Optional:            true,
 												},
 												"max_parameter_count_exceeds": schema.Int64Attribute{
 													MarkdownDescription: "Match on the Parameter Count that exceed this value.",
-													Optional: true,
+													Optional:            true,
 												},
 												"max_parameter_name_size_exceeds": schema.Int64Attribute{
 													MarkdownDescription: "Match on the Parameter Name Size that exceed this value.",
-													Optional: true,
+													Optional:            true,
 												},
 												"max_parameter_value_size_exceeds": schema.Int64Attribute{
 													MarkdownDescription: "Match on the Parameter Value Size that exceed this value.",
-													Optional: true,
+													Optional:            true,
 												},
 												"max_query_size_exceeds": schema.Int64Attribute{
 													MarkdownDescription: "Match on the URL Query Size that exceed this value.",
-													Optional: true,
+													Optional:            true,
 												},
 												"max_request_line_size_exceeds": schema.Int64Attribute{
 													MarkdownDescription: "Match on the Request Line Size that exceed this value.",
-													Optional: true,
+													Optional:            true,
 												},
 												"max_request_size_exceeds": schema.Int64Attribute{
 													MarkdownDescription: "Match on the Request Size that exceed this value.",
-													Optional: true,
+													Optional:            true,
 												},
 												"max_url_size_exceeds": schema.Int64Attribute{
 													MarkdownDescription: "Match on the URL Size that exceed this value.",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -1460,16 +1453,14 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 										},
 										"segment_policy": schema.SingleNestedBlock{
 											MarkdownDescription: "Configure Segments. Configure source and destination segment for policy",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"dst_any": schema.SingleNestedBlock{
 													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 												},
 												"dst_segments": schema.SingleNestedBlock{
 													MarkdownDescription: "Segment List. List of references to Segments",
-													Attributes: map[string]schema.Attribute{
-													},
+													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"segments": schema.ListNestedBlock{
 															MarkdownDescription: "Segments. Select list of segments",
@@ -1477,16 +1468,16 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 																Attributes: map[string]schema.Attribute{
 																	"name": schema.StringAttribute{
 																		MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"namespace": schema.StringAttribute{
 																		MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"tenant": schema.StringAttribute{
 																		MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-																		Optional: true,
-																		Computed: true,
+																		Optional:            true,
+																		Computed:            true,
 																	},
 																},
 															},
@@ -1501,8 +1492,7 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 												},
 												"src_segments": schema.SingleNestedBlock{
 													MarkdownDescription: "Segment List. List of references to Segments",
-													Attributes: map[string]schema.Attribute{
-													},
+													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"segments": schema.ListNestedBlock{
 															MarkdownDescription: "Segments. Select list of segments",
@@ -1510,16 +1500,16 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 																Attributes: map[string]schema.Attribute{
 																	"name": schema.StringAttribute{
 																		MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"namespace": schema.StringAttribute{
 																		MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"tenant": schema.StringAttribute{
 																		MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-																		Optional: true,
-																		Computed: true,
+																		Optional:            true,
+																		Computed:            true,
 																	},
 																},
 															},
@@ -1533,18 +1523,18 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 											Attributes: map[string]schema.Attribute{
 												"classes": schema.ListAttribute{
 													MarkdownDescription: "TLS fingerprint classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against. Possible values are `TLS_FINGERPRINT_NONE`, `ANY_MALICIOUS_FINGERPRINT`, `ADWARE`, `ADWIND`, `DRIDEX`, `GOOTKIT`, `GOZI`, `JBIFROST`, `QUAKBOT`, `RANSOMWARE`, `TROLDESH`, `TOFSEE`, `TORRENTLOCKER`, `TRICKBOT`. Defaults to `TLS_FINGERPRINT_NONE`.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 												"exact_values": schema.ListAttribute{
 													MarkdownDescription: "Exact Values. A list of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 												"excluded_values": schema.ListAttribute{
 													MarkdownDescription: "Excluded Values. A list of TLS JA3 fingerprints to be excluded when matching the input TLS JA3 fingerprint. This can be used to skip known false positives when using one or more known TLS fingerprint classes in the enclosing matcher.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 										},
@@ -1553,25 +1543,23 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 											Attributes: map[string]schema.Attribute{
 												"exact_values": schema.ListAttribute{
 													MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 												"regex_values": schema.ListAttribute{
 													MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 										},
 										"waf_action": schema.SingleNestedBlock{
 											MarkdownDescription: "App Firewall Action. Modify App Firewall behavior for a matching request. The modification could either be to entirely skip firewall processing or to customize the firewall rules to be applied as defined by App Firewall Rule Control settings.",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"app_firewall_detection_control": schema.SingleNestedBlock{
 													MarkdownDescription: "App Firewall Detection Control. Define the list of Signature IDs, Violations, Attack Types and Bot Names that should be excluded from triggering on the defined match criteria.",
-													Attributes: map[string]schema.Attribute{
-													},
+													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"exclude_attack_type_contexts": schema.ListNestedBlock{
 															MarkdownDescription: "Attack Types. Attack Types to be excluded for the defined match criteria",
@@ -1579,15 +1567,15 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 																Attributes: map[string]schema.Attribute{
 																	"context": schema.StringAttribute{
 																		MarkdownDescription: "WAF Exclusion Context Options. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE: CONTEXT_RESPONSE - CONTEXT_PARAMETER: CONTEXT_PARAMETER Detection will be excluded for the parameters. The parameter name is required in the Context name field. If the field is left empty, the detection will be excluded for all parameters. - CONTEXT_HEADER: CONTEXT_HEADER Detection will be excluded for the headers. The header name is required in the Context name field. If the field is left empty, the detection will be excluded for all headers. - CONTEXT_COOKIE: CONTEXT_COOKIE Detection will be excluded for the cookies. The cookie name is required in the Context name field. If the field is left empty, the detection will be excluded for all cookies. - CONTEXT_URL: CONTEXT_URL Detection will be excluded for the request URL. - CONTEXT_URI: CONTEXT_URI. Possible values are `CONTEXT_ANY`, `CONTEXT_BODY`, `CONTEXT_REQUEST`, `CONTEXT_RESPONSE`, `CONTEXT_PARAMETER`, `CONTEXT_HEADER`, `CONTEXT_COOKIE`, `CONTEXT_URL`, `CONTEXT_URI`. Defaults to `CONTEXT_ANY`.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"context_name": schema.StringAttribute{
 																		MarkdownDescription: "Context Name. Relevant only for contexts: Header, Cookie and Parameter. Name of the Context that the WAF Exclusion Rules will check. Wildcard matching can be used by prefixing or suffixing the context name with an wildcard asterisk (*).",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"exclude_attack_type": schema.StringAttribute{
 																		MarkdownDescription: "Attack Types. List of all Attack Types ATTACK_TYPE_NONE ATTACK_TYPE_NON_BROWSER_CLIENT ATTACK_TYPE_OTHER_APPLICATION_ATTACKS ATTACK_TYPE_TROJAN_BACKDOOR_SPYWARE ATTACK_TYPE_DETECTION_EVASION ATTACK_TYPE_VULNERABILITY_SCAN ATTACK_TYPE_ABUSE_OF_FUNCTIONALITY ATTACK_TYPE_AUTHENTICATION_AUTHORIZATION_ATTACKS ATTACK_TYPE_BUFFER_OVERFLOW ATTACK_TYPE_PREDICTABLE_RESOURCE_LOCATION ATTACK_TYPE_INFORMATION_LEAKAGE ATTACK_TYPE_DIRECTORY_INDEXING ATTACK_TYPE_PATH_TRAVERSAL ATTACK_TYPE_XPATH_INJECTION ATTACK_TYPE_LDAP_INJECTION ATTACK_TYPE_SERVER_SIDE_CODE_INJECTION ATTACK_TYPE_COMMAND_EXECUTION ATTACK_TYPE_SQL_INJECTION ATTACK_TYPE_CROSS_SITE_SCRIPTING ATTACK_TYPE_DENIAL_OF_SERVICE ATTACK_TYPE_HTTP_PARSER_ATTACK ATTACK_TYPE_SESSION_HIJACKING ATTACK_TYPE_HTTP_RESPONSE_SPLITTING ATTACK_TYPE_FORCEFUL_BROWSING ATTACK_TYPE_REMOTE_FILE_INCLUDE ATTACK_TYPE_MALICIOUS_FILE_UPLOAD ATTACK_TYPE_GRAPHQL_PARSER_ATTACK. Possible values are `ATTACK_TYPE_NONE`, `ATTACK_TYPE_NON_BROWSER_CLIENT`, `ATTACK_TYPE_OTHER_APPLICATION_ATTACKS`, `ATTACK_TYPE_TROJAN_BACKDOOR_SPYWARE`, `ATTACK_TYPE_DETECTION_EVASION`, `ATTACK_TYPE_VULNERABILITY_SCAN`, `ATTACK_TYPE_ABUSE_OF_FUNCTIONALITY`, `ATTACK_TYPE_AUTHENTICATION_AUTHORIZATION_ATTACKS`, `ATTACK_TYPE_BUFFER_OVERFLOW`, `ATTACK_TYPE_PREDICTABLE_RESOURCE_LOCATION`, `ATTACK_TYPE_INFORMATION_LEAKAGE`, `ATTACK_TYPE_DIRECTORY_INDEXING`, `ATTACK_TYPE_PATH_TRAVERSAL`, `ATTACK_TYPE_XPATH_INJECTION`, `ATTACK_TYPE_LDAP_INJECTION`, `ATTACK_TYPE_SERVER_SIDE_CODE_INJECTION`, `ATTACK_TYPE_COMMAND_EXECUTION`, `ATTACK_TYPE_SQL_INJECTION`, `ATTACK_TYPE_CROSS_SITE_SCRIPTING`, `ATTACK_TYPE_DENIAL_OF_SERVICE`, `ATTACK_TYPE_HTTP_PARSER_ATTACK`, `ATTACK_TYPE_SESSION_HIJACKING`, `ATTACK_TYPE_HTTP_RESPONSE_SPLITTING`, `ATTACK_TYPE_FORCEFUL_BROWSING`, `ATTACK_TYPE_REMOTE_FILE_INCLUDE`, `ATTACK_TYPE_MALICIOUS_FILE_UPLOAD`, `ATTACK_TYPE_GRAPHQL_PARSER_ATTACK`. Defaults to `ATTACK_TYPE_NONE`.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 															},
@@ -1598,7 +1586,7 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 																Attributes: map[string]schema.Attribute{
 																	"bot_name": schema.StringAttribute{
 																		MarkdownDescription: "Bot Name.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 															},
@@ -1609,15 +1597,15 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 																Attributes: map[string]schema.Attribute{
 																	"context": schema.StringAttribute{
 																		MarkdownDescription: "WAF Exclusion Context Options. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE: CONTEXT_RESPONSE - CONTEXT_PARAMETER: CONTEXT_PARAMETER Detection will be excluded for the parameters. The parameter name is required in the Context name field. If the field is left empty, the detection will be excluded for all parameters. - CONTEXT_HEADER: CONTEXT_HEADER Detection will be excluded for the headers. The header name is required in the Context name field. If the field is left empty, the detection will be excluded for all headers. - CONTEXT_COOKIE: CONTEXT_COOKIE Detection will be excluded for the cookies. The cookie name is required in the Context name field. If the field is left empty, the detection will be excluded for all cookies. - CONTEXT_URL: CONTEXT_URL Detection will be excluded for the request URL. - CONTEXT_URI: CONTEXT_URI. Possible values are `CONTEXT_ANY`, `CONTEXT_BODY`, `CONTEXT_REQUEST`, `CONTEXT_RESPONSE`, `CONTEXT_PARAMETER`, `CONTEXT_HEADER`, `CONTEXT_COOKIE`, `CONTEXT_URL`, `CONTEXT_URI`. Defaults to `CONTEXT_ANY`.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"context_name": schema.StringAttribute{
 																		MarkdownDescription: "Context Name. Relevant only for contexts: Header, Cookie and Parameter. Name of the Context that the WAF Exclusion Rules will check. Wildcard matching can be used by prefixing or suffixing the context name with an wildcard asterisk (*).",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"signature_id": schema.Int64Attribute{
 																		MarkdownDescription: "SignatureID. The allowed values for signature id are 0 and in the range of 200000001-299999999. 0 implies that all signatures will be excluded for the specified context.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 															},
@@ -1628,15 +1616,15 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 																Attributes: map[string]schema.Attribute{
 																	"context": schema.StringAttribute{
 																		MarkdownDescription: "WAF Exclusion Context Options. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE: CONTEXT_RESPONSE - CONTEXT_PARAMETER: CONTEXT_PARAMETER Detection will be excluded for the parameters. The parameter name is required in the Context name field. If the field is left empty, the detection will be excluded for all parameters. - CONTEXT_HEADER: CONTEXT_HEADER Detection will be excluded for the headers. The header name is required in the Context name field. If the field is left empty, the detection will be excluded for all headers. - CONTEXT_COOKIE: CONTEXT_COOKIE Detection will be excluded for the cookies. The cookie name is required in the Context name field. If the field is left empty, the detection will be excluded for all cookies. - CONTEXT_URL: CONTEXT_URL Detection will be excluded for the request URL. - CONTEXT_URI: CONTEXT_URI. Possible values are `CONTEXT_ANY`, `CONTEXT_BODY`, `CONTEXT_REQUEST`, `CONTEXT_RESPONSE`, `CONTEXT_PARAMETER`, `CONTEXT_HEADER`, `CONTEXT_COOKIE`, `CONTEXT_URL`, `CONTEXT_URI`. Defaults to `CONTEXT_ANY`.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"context_name": schema.StringAttribute{
 																		MarkdownDescription: "Context Name. Relevant only for contexts: Header, Cookie and Parameter. Name of the Context that the WAF Exclusion Rules will check. Wildcard matching can be used by prefixing or suffixing the context name with an wildcard asterisk (*).",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"exclude_violation": schema.StringAttribute{
 																		MarkdownDescription: "App Firewall Violation Type. List of all supported Violation Types VIOL_NONE VIOL_FILETYPE VIOL_METHOD VIOL_MANDATORY_HEADER VIOL_HTTP_RESPONSE_STATUS VIOL_REQUEST_MAX_LENGTH VIOL_FILE_UPLOAD VIOL_FILE_UPLOAD_IN_BODY VIOL_XML_MALFORMED VIOL_JSON_MALFORMED VIOL_ASM_COOKIE_MODIFIED VIOL_HTTP_PROTOCOL_MULTIPLE_HOST_HEADERS VIOL_HTTP_PROTOCOL_BAD_HOST_HEADER_VALUE VIOL_HTTP_PROTOCOL_UNPARSABLE_REQUEST_CONTENT VIOL_HTTP_PROTOCOL_NULL_IN_REQUEST VIOL_HTTP_PROTOCOL_BAD_HTTP_VERSION VIOL_HTTP_PROTOCOL_CRLF_CHARACTERS_BEFORE_REQUEST_START VIOL_HTTP_PROTOCOL_NO_HOST_HEADER_IN_HTTP_1_1_REQUEST VIOL_HTTP_PROTOCOL_BAD_MULTIPART_PARAMETERS_PARSING VIOL_HTTP_PROTOCOL_SEVERAL_CONTENT_LENGTH_HEADERS VIOL_HTTP_PROTOCOL_CONTENT_LENGTH_SHOULD_BE_A_POSITIVE_NUMBER VIOL_EVASION_DIRECTORY_TRAVERSALS VIOL_MALFORMED_REQUEST VIOL_EVASION_MULTIPLE_DECODING VIOL_DATA_GUARD VIOL_EVASION_APACHE_WHITESPACE VIOL_COOKIE_MODIFIED VIOL_EVASION_IIS_UNICODE_CODEPOINTS VIOL_EVASION_IIS_BACKSLASHES VIOL_EVASION_PERCENT_U_DECODING VIOL_EVASION_BARE_BYTE_DECODING VIOL_EVASION_BAD_UNESCAPE VIOL_HTTP_PROTOCOL_BAD_MULTIPART_FORMDATA_REQUEST_PARSING VIOL_HTTP_PROTOCOL_BODY_IN_GET_OR_HEAD_REQUEST VIOL_HTTP_PROTOCOL_HIGH_ASCII_CHARACTERS_IN_HEADERS VIOL_ENCODING VIOL_COOKIE_MALFORMED VIOL_GRAPHQL_FORMAT VIOL_GRAPHQL_MALFORMED VIOL_GRAPHQL_INTROSPECTION_QUERY. Possible values are `VIOL_NONE`, `VIOL_FILETYPE`, `VIOL_METHOD`, `VIOL_MANDATORY_HEADER`, `VIOL_HTTP_RESPONSE_STATUS`, `VIOL_REQUEST_MAX_LENGTH`, `VIOL_FILE_UPLOAD`, `VIOL_FILE_UPLOAD_IN_BODY`, `VIOL_XML_MALFORMED`, `VIOL_JSON_MALFORMED`, `VIOL_ASM_COOKIE_MODIFIED`, `VIOL_HTTP_PROTOCOL_MULTIPLE_HOST_HEADERS`, `VIOL_HTTP_PROTOCOL_BAD_HOST_HEADER_VALUE`, `VIOL_HTTP_PROTOCOL_UNPARSABLE_REQUEST_CONTENT`, `VIOL_HTTP_PROTOCOL_NULL_IN_REQUEST`, `VIOL_HTTP_PROTOCOL_BAD_HTTP_VERSION`, `VIOL_HTTP_PROTOCOL_SEVERAL_CONTENT_LENGTH_HEADERS`, `VIOL_EVASION_DIRECTORY_TRAVERSALS`, `VIOL_MALFORMED_REQUEST`, `VIOL_EVASION_MULTIPLE_DECODING`, `VIOL_DATA_GUARD`, `VIOL_EVASION_APACHE_WHITESPACE`, `VIOL_COOKIE_MODIFIED`, `VIOL_EVASION_IIS_UNICODE_CODEPOINTS`, `VIOL_EVASION_IIS_BACKSLASHES`, `VIOL_EVASION_PERCENT_U_DECODING`, `VIOL_EVASION_BARE_BYTE_DECODING`, `VIOL_EVASION_BAD_UNESCAPE`, `VIOL_HTTP_PROTOCOL_BODY_IN_GET_OR_HEAD_REQUEST`, `VIOL_ENCODING`, `VIOL_COOKIE_MALFORMED`, `VIOL_GRAPHQL_FORMAT`, `VIOL_GRAPHQL_MALFORMED`, `VIOL_GRAPHQL_INTROSPECTION_QUERY`. Defaults to `VIOL_NONE`.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 															},
@@ -1657,34 +1645,31 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 				},
-
 			},
 			"server_name_matcher": schema.SingleNestedBlock{
 				MarkdownDescription: "Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
 				Attributes: map[string]schema.Attribute{
 					"exact_values": schema.ListAttribute{
 						MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
-						Optional: true,
-						ElementType: types.StringType,
+						Optional:            true,
+						ElementType:         types.StringType,
 					},
 					"regex_values": schema.ListAttribute{
 						MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
-						Optional: true,
-						ElementType: types.StringType,
+						Optional:            true,
+						ElementType:         types.StringType,
 					},
 				},
-
 			},
 			"server_selector": schema.SingleNestedBlock{
 				MarkdownDescription: "Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE",
 				Attributes: map[string]schema.Attribute{
 					"expressions": schema.ListAttribute{
 						MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections.",
-						Optional: true,
-						ElementType: types.StringType,
+						Optional:            true,
+						ElementType:         types.StringType,
 					},
 				},
-
 			},
 		},
 	}
@@ -2075,7 +2060,6 @@ func (r *ServicePolicyResource) Create(ctx context.Context, req resource.CreateR
 		createReq.Spec["server_name"] = data.ServerName.ValueString()
 	}
 
-
 	apiResource, err := r.client.CreateServicePolicy(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create ServicePolicy: %s", err))
@@ -2087,7 +2071,7 @@ func (r *ServicePolicyResource) Create(ctx context.Context, req resource.CreateR
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if _, ok := apiResource.Spec["allow_all_requests"].(map[string]interface{}); ok && isImport && data.AllowAllRequests == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.AllowAllRequests = &ServicePolicyEmptyModel{}
@@ -2616,7 +2600,6 @@ func (r *ServicePolicyResource) Create(ctx context.Context, req resource.CreateR
 	} else {
 		data.ServerName = types.StringNull()
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -2706,9 +2689,9 @@ func (r *ServicePolicyResource) Read(ctx context.Context, req resource.ReadReque
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if _, ok := apiResource.Spec["allow_all_requests"].(map[string]interface{}); ok && isImport && data.AllowAllRequests == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -3238,7 +3221,6 @@ func (r *ServicePolicyResource) Read(ctx context.Context, req resource.ReadReque
 	} else {
 		data.ServerName = types.StringNull()
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -3539,7 +3521,6 @@ func (r *ServicePolicyResource) Update(ctx context.Context, req resource.UpdateR
 	if !data.ServerName.IsNull() && !data.ServerName.IsUnknown() {
 		apiResource.Spec["server_name"] = data.ServerName.ValueString()
 	}
-
 
 	updated, err := r.client.UpdateServicePolicy(ctx, apiResource)
 	if err != nil {

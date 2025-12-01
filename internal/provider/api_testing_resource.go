@@ -51,70 +51,70 @@ type APITestingEmptyModel struct {
 
 // APITestingDomainsModel represents domains block
 type APITestingDomainsModel struct {
-	AllowDestructiveMethods types.Bool `tfsdk:"allow_destructive_methods"`
-	Domain types.String `tfsdk:"domain"`
-	Credentials []APITestingDomainsCredentialsModel `tfsdk:"credentials"`
+	AllowDestructiveMethods types.Bool                          `tfsdk:"allow_destructive_methods"`
+	Domain                  types.String                        `tfsdk:"domain"`
+	Credentials             []APITestingDomainsCredentialsModel `tfsdk:"credentials"`
 }
 
 // APITestingDomainsCredentialsModel represents credentials block
 type APITestingDomainsCredentialsModel struct {
-	CredentialName types.String `tfsdk:"credential_name"`
-	Admin *APITestingEmptyModel `tfsdk:"admin"`
-	APIKey *APITestingDomainsCredentialsAPIKeyModel `tfsdk:"api_key"`
-	BasicAuth *APITestingDomainsCredentialsBasicAuthModel `tfsdk:"basic_auth"`
-	BearerToken *APITestingDomainsCredentialsBearerTokenModel `tfsdk:"bearer_token"`
-	LoginEndpoint *APITestingDomainsCredentialsLoginEndpointModel `tfsdk:"login_endpoint"`
-	Standard *APITestingEmptyModel `tfsdk:"standard"`
+	CredentialName types.String                                    `tfsdk:"credential_name"`
+	Admin          *APITestingEmptyModel                           `tfsdk:"admin"`
+	APIKey         *APITestingDomainsCredentialsAPIKeyModel        `tfsdk:"api_key"`
+	BasicAuth      *APITestingDomainsCredentialsBasicAuthModel     `tfsdk:"basic_auth"`
+	BearerToken    *APITestingDomainsCredentialsBearerTokenModel   `tfsdk:"bearer_token"`
+	LoginEndpoint  *APITestingDomainsCredentialsLoginEndpointModel `tfsdk:"login_endpoint"`
+	Standard       *APITestingEmptyModel                           `tfsdk:"standard"`
 }
 
 // APITestingDomainsCredentialsAPIKeyModel represents api_key block
 type APITestingDomainsCredentialsAPIKeyModel struct {
-	Key types.String `tfsdk:"key"`
+	Key   types.String                                  `tfsdk:"key"`
 	Value *APITestingDomainsCredentialsAPIKeyValueModel `tfsdk:"value"`
 }
 
 // APITestingDomainsCredentialsAPIKeyValueModel represents value block
 type APITestingDomainsCredentialsAPIKeyValueModel struct {
 	BlindfoldSecretInfo *APITestingDomainsCredentialsAPIKeyValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *APITestingDomainsCredentialsAPIKeyValueClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *APITestingDomainsCredentialsAPIKeyValueClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // APITestingDomainsCredentialsAPIKeyValueBlindfoldSecretInfoModel represents blindfold_secret_info block
 type APITestingDomainsCredentialsAPIKeyValueBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // APITestingDomainsCredentialsAPIKeyValueClearSecretInfoModel represents clear_secret_info block
 type APITestingDomainsCredentialsAPIKeyValueClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // APITestingDomainsCredentialsBasicAuthModel represents basic_auth block
 type APITestingDomainsCredentialsBasicAuthModel struct {
-	User types.String `tfsdk:"user"`
+	User     types.String                                        `tfsdk:"user"`
 	Password *APITestingDomainsCredentialsBasicAuthPasswordModel `tfsdk:"password"`
 }
 
 // APITestingDomainsCredentialsBasicAuthPasswordModel represents password block
 type APITestingDomainsCredentialsBasicAuthPasswordModel struct {
 	BlindfoldSecretInfo *APITestingDomainsCredentialsBasicAuthPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *APITestingDomainsCredentialsBasicAuthPasswordClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *APITestingDomainsCredentialsBasicAuthPasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // APITestingDomainsCredentialsBasicAuthPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
 type APITestingDomainsCredentialsBasicAuthPasswordBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // APITestingDomainsCredentialsBasicAuthPasswordClearSecretInfoModel represents clear_secret_info block
 type APITestingDomainsCredentialsBasicAuthPasswordClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // APITestingDomainsCredentialsBearerTokenModel represents bearer_token block
@@ -125,63 +125,63 @@ type APITestingDomainsCredentialsBearerTokenModel struct {
 // APITestingDomainsCredentialsBearerTokenTokenModel represents token block
 type APITestingDomainsCredentialsBearerTokenTokenModel struct {
 	BlindfoldSecretInfo *APITestingDomainsCredentialsBearerTokenTokenBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *APITestingDomainsCredentialsBearerTokenTokenClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *APITestingDomainsCredentialsBearerTokenTokenClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // APITestingDomainsCredentialsBearerTokenTokenBlindfoldSecretInfoModel represents blindfold_secret_info block
 type APITestingDomainsCredentialsBearerTokenTokenBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // APITestingDomainsCredentialsBearerTokenTokenClearSecretInfoModel represents clear_secret_info block
 type APITestingDomainsCredentialsBearerTokenTokenClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // APITestingDomainsCredentialsLoginEndpointModel represents login_endpoint block
 type APITestingDomainsCredentialsLoginEndpointModel struct {
-	Method types.String `tfsdk:"method"`
-	Path types.String `tfsdk:"path"`
-	TokenResponseKey types.String `tfsdk:"token_response_key"`
-	JsonPayload *APITestingDomainsCredentialsLoginEndpointJsonPayloadModel `tfsdk:"json_payload"`
+	Method           types.String                                               `tfsdk:"method"`
+	Path             types.String                                               `tfsdk:"path"`
+	TokenResponseKey types.String                                               `tfsdk:"token_response_key"`
+	JsonPayload      *APITestingDomainsCredentialsLoginEndpointJsonPayloadModel `tfsdk:"json_payload"`
 }
 
 // APITestingDomainsCredentialsLoginEndpointJsonPayloadModel represents json_payload block
 type APITestingDomainsCredentialsLoginEndpointJsonPayloadModel struct {
 	BlindfoldSecretInfo *APITestingDomainsCredentialsLoginEndpointJsonPayloadBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *APITestingDomainsCredentialsLoginEndpointJsonPayloadClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *APITestingDomainsCredentialsLoginEndpointJsonPayloadClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // APITestingDomainsCredentialsLoginEndpointJsonPayloadBlindfoldSecretInfoModel represents blindfold_secret_info block
 type APITestingDomainsCredentialsLoginEndpointJsonPayloadBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // APITestingDomainsCredentialsLoginEndpointJsonPayloadClearSecretInfoModel represents clear_secret_info block
 type APITestingDomainsCredentialsLoginEndpointJsonPayloadClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 type APITestingResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	CustomHeaderValue types.String `tfsdk:"custom_header_value"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	Domains []APITestingDomainsModel `tfsdk:"domains"`
-	EveryDay *APITestingEmptyModel `tfsdk:"every_day"`
-	EveryMonth *APITestingEmptyModel `tfsdk:"every_month"`
-	EveryWeek *APITestingEmptyModel `tfsdk:"every_week"`
+	Name              types.String             `tfsdk:"name"`
+	Namespace         types.String             `tfsdk:"namespace"`
+	Annotations       types.Map                `tfsdk:"annotations"`
+	Description       types.String             `tfsdk:"description"`
+	Disable           types.Bool               `tfsdk:"disable"`
+	Labels            types.Map                `tfsdk:"labels"`
+	ID                types.String             `tfsdk:"id"`
+	CustomHeaderValue types.String             `tfsdk:"custom_header_value"`
+	Timeouts          timeouts.Value           `tfsdk:"timeouts"`
+	Domains           []APITestingDomainsModel `tfsdk:"domains"`
+	EveryDay          *APITestingEmptyModel    `tfsdk:"every_day"`
+	EveryMonth        *APITestingEmptyModel    `tfsdk:"every_month"`
+	EveryWeek         *APITestingEmptyModel    `tfsdk:"every_week"`
 }
 
 func (r *APITestingResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -195,7 +195,7 @@ func (r *APITestingResource) Schema(ctx context.Context, req resource.SchemaRequ
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the APITesting. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -205,7 +205,7 @@ func (r *APITestingResource) Schema(ctx context.Context, req resource.SchemaRequ
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the APITesting will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -215,33 +215,33 @@ func (r *APITestingResource) Schema(ctx context.Context, req resource.SchemaRequ
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"custom_header_value": schema.StringAttribute{
 				MarkdownDescription: "Custom Header. Add x-f5-api-testing-identifier header value to prevent security flags on API testing traffic",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -260,11 +260,11 @@ func (r *APITestingResource) Schema(ctx context.Context, req resource.SchemaRequ
 					Attributes: map[string]schema.Attribute{
 						"allow_destructive_methods": schema.BoolAttribute{
 							MarkdownDescription: "Run API tests for destructive methods (e.g., DELETE, PUT). Enable to allow API test to execute destructive methods. Be cautious as these can alter or delete data",
-							Optional: true,
+							Optional:            true,
 						},
 						"domain": schema.StringAttribute{
 							MarkdownDescription: "Domain. Add your testing environment domain. Be aware that running tests on a production domain can impact live applications, as API testing cannot distinguish between production and testing environments.",
-							Optional: true,
+							Optional:            true,
 						},
 					},
 					Blocks: map[string]schema.Block{
@@ -274,7 +274,7 @@ func (r *APITestingResource) Schema(ctx context.Context, req resource.SchemaRequ
 								Attributes: map[string]schema.Attribute{
 									"credential_name": schema.StringAttribute{
 										MarkdownDescription: "Name. Enter a unique name for the credentials used in API testing",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 								Blocks: map[string]schema.Block{
@@ -286,29 +286,28 @@ func (r *APITestingResource) Schema(ctx context.Context, req resource.SchemaRequ
 										Attributes: map[string]schema.Attribute{
 											"key": schema.StringAttribute{
 												MarkdownDescription: "Key.",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 										Blocks: map[string]schema.Block{
 											"value": schema.SingleNestedBlock{
 												MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-												Attributes: map[string]schema.Attribute{
-												},
+												Attributes:          map[string]schema.Attribute{},
 												Blocks: map[string]schema.Block{
 													"blindfold_secret_info": schema.SingleNestedBlock{
 														MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 														Attributes: map[string]schema.Attribute{
 															"decryption_provider": schema.StringAttribute{
 																MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-																Optional: true,
+																Optional:            true,
 															},
 															"location": schema.StringAttribute{
 																MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-																Optional: true,
+																Optional:            true,
 															},
 															"store_provider": schema.StringAttribute{
 																MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 													},
@@ -317,11 +316,11 @@ func (r *APITestingResource) Schema(ctx context.Context, req resource.SchemaRequ
 														Attributes: map[string]schema.Attribute{
 															"provider_ref": schema.StringAttribute{
 																MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																Optional: true,
+																Optional:            true,
 															},
 															"url": schema.StringAttribute{
 																MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 													},
@@ -334,29 +333,28 @@ func (r *APITestingResource) Schema(ctx context.Context, req resource.SchemaRequ
 										Attributes: map[string]schema.Attribute{
 											"user": schema.StringAttribute{
 												MarkdownDescription: "User.",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 										Blocks: map[string]schema.Block{
 											"password": schema.SingleNestedBlock{
 												MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-												Attributes: map[string]schema.Attribute{
-												},
+												Attributes:          map[string]schema.Attribute{},
 												Blocks: map[string]schema.Block{
 													"blindfold_secret_info": schema.SingleNestedBlock{
 														MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 														Attributes: map[string]schema.Attribute{
 															"decryption_provider": schema.StringAttribute{
 																MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-																Optional: true,
+																Optional:            true,
 															},
 															"location": schema.StringAttribute{
 																MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-																Optional: true,
+																Optional:            true,
 															},
 															"store_provider": schema.StringAttribute{
 																MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 													},
@@ -365,11 +363,11 @@ func (r *APITestingResource) Schema(ctx context.Context, req resource.SchemaRequ
 														Attributes: map[string]schema.Attribute{
 															"provider_ref": schema.StringAttribute{
 																MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																Optional: true,
+																Optional:            true,
 															},
 															"url": schema.StringAttribute{
 																MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 													},
@@ -379,28 +377,26 @@ func (r *APITestingResource) Schema(ctx context.Context, req resource.SchemaRequ
 									},
 									"bearer_token": schema.SingleNestedBlock{
 										MarkdownDescription: "Bearer.",
-										Attributes: map[string]schema.Attribute{
-										},
+										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"token": schema.SingleNestedBlock{
 												MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-												Attributes: map[string]schema.Attribute{
-												},
+												Attributes:          map[string]schema.Attribute{},
 												Blocks: map[string]schema.Block{
 													"blindfold_secret_info": schema.SingleNestedBlock{
 														MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 														Attributes: map[string]schema.Attribute{
 															"decryption_provider": schema.StringAttribute{
 																MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-																Optional: true,
+																Optional:            true,
 															},
 															"location": schema.StringAttribute{
 																MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-																Optional: true,
+																Optional:            true,
 															},
 															"store_provider": schema.StringAttribute{
 																MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 													},
@@ -409,11 +405,11 @@ func (r *APITestingResource) Schema(ctx context.Context, req resource.SchemaRequ
 														Attributes: map[string]schema.Attribute{
 															"provider_ref": schema.StringAttribute{
 																MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																Optional: true,
+																Optional:            true,
 															},
 															"url": schema.StringAttribute{
 																MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 													},
@@ -426,37 +422,36 @@ func (r *APITestingResource) Schema(ctx context.Context, req resource.SchemaRequ
 										Attributes: map[string]schema.Attribute{
 											"method": schema.StringAttribute{
 												MarkdownDescription: "HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
-												Optional: true,
+												Optional:            true,
 											},
 											"path": schema.StringAttribute{
 												MarkdownDescription: "Path.",
-												Optional: true,
+												Optional:            true,
 											},
 											"token_response_key": schema.StringAttribute{
 												MarkdownDescription: "Token Response Key.",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 										Blocks: map[string]schema.Block{
 											"json_payload": schema.SingleNestedBlock{
 												MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-												Attributes: map[string]schema.Attribute{
-												},
+												Attributes:          map[string]schema.Attribute{},
 												Blocks: map[string]schema.Block{
 													"blindfold_secret_info": schema.SingleNestedBlock{
 														MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 														Attributes: map[string]schema.Attribute{
 															"decryption_provider": schema.StringAttribute{
 																MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-																Optional: true,
+																Optional:            true,
 															},
 															"location": schema.StringAttribute{
 																MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-																Optional: true,
+																Optional:            true,
 															},
 															"store_provider": schema.StringAttribute{
 																MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 													},
@@ -465,11 +460,11 @@ func (r *APITestingResource) Schema(ctx context.Context, req resource.SchemaRequ
 														Attributes: map[string]schema.Attribute{
 															"provider_ref": schema.StringAttribute{
 																MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																Optional: true,
+																Optional:            true,
 															},
 															"url": schema.StringAttribute{
 																MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 													},
@@ -484,7 +479,6 @@ func (r *APITestingResource) Schema(ctx context.Context, req resource.SchemaRequ
 							},
 						},
 					},
-
 				},
 			},
 			"every_day": schema.SingleNestedBlock{
@@ -685,7 +679,6 @@ func (r *APITestingResource) Create(ctx context.Context, req resource.CreateRequ
 		createReq.Spec["custom_header_value"] = data.CustomHeaderValue.ValueString()
 	}
 
-
 	apiResource, err := r.client.CreateAPITesting(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create APITesting: %s", err))
@@ -697,7 +690,7 @@ func (r *APITestingResource) Create(ctx context.Context, req resource.CreateRequ
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["domains"].([]interface{}); ok && len(listData) > 0 {
 		var domainsList []APITestingDomainsModel
 		for listIdx, item := range listData {
@@ -760,7 +753,6 @@ func (r *APITestingResource) Create(ctx context.Context, req resource.CreateRequ
 	} else {
 		data.CustomHeaderValue = types.StringNull()
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -850,9 +842,9 @@ func (r *APITestingResource) Read(ctx context.Context, req resource.ReadRequest,
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if listData, ok := apiResource.Spec["domains"].([]interface{}); ok && len(listData) > 0 {
 		var domainsList []APITestingDomainsModel
@@ -916,7 +908,6 @@ func (r *APITestingResource) Read(ctx context.Context, req resource.ReadRequest,
 	} else {
 		data.CustomHeaderValue = types.StringNull()
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -1017,7 +1008,6 @@ func (r *APITestingResource) Update(ctx context.Context, req resource.UpdateRequ
 	if !data.CustomHeaderValue.IsNull() && !data.CustomHeaderValue.IsUnknown() {
 		apiResource.Spec["custom_header_value"] = data.CustomHeaderValue.ValueString()
 	}
-
 
 	updated, err := r.client.UpdateAPITesting(ctx, apiResource)
 	if err != nil {

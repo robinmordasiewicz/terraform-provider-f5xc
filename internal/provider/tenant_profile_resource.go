@@ -52,52 +52,52 @@ type TenantProfileEmptyModel struct {
 
 // TenantProfileCtGroupsModel represents ct_groups block
 type TenantProfileCtGroupsModel struct {
-	Name types.String `tfsdk:"name"`
+	Name           types.String                               `tfsdk:"name"`
 	NamespaceRoles []TenantProfileCtGroupsNamespaceRolesModel `tfsdk:"namespace_roles"`
 }
 
 // TenantProfileCtGroupsNamespaceRolesModel represents namespace_roles block
 type TenantProfileCtGroupsNamespaceRolesModel struct {
 	Namespace types.String `tfsdk:"namespace"`
-	Role types.String `tfsdk:"role"`
+	Role      types.String `tfsdk:"role"`
 }
 
 // TenantProfileFaviconModel represents favicon block
 type TenantProfileFaviconModel struct {
-	Content types.String `tfsdk:"content"`
-	ContentType types.String `tfsdk:"content_type"`
-	AWSS3 *TenantProfileEmptyModel `tfsdk:"aws_s3"`
+	Content     types.String             `tfsdk:"content"`
+	ContentType types.String             `tfsdk:"content_type"`
+	AWSS3       *TenantProfileEmptyModel `tfsdk:"aws_s3"`
 }
 
 // TenantProfileLogoModel represents logo block
 type TenantProfileLogoModel struct {
-	Content types.String `tfsdk:"content"`
-	ContentType types.String `tfsdk:"content_type"`
-	AWSS3 *TenantProfileEmptyModel `tfsdk:"aws_s3"`
+	Content     types.String             `tfsdk:"content"`
+	ContentType types.String             `tfsdk:"content_type"`
+	AWSS3       *TenantProfileEmptyModel `tfsdk:"aws_s3"`
 }
 
 // TenantProfilePlanModel represents plan block
 type TenantProfilePlanModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 type TenantProfileResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	EnableSupportAccess types.Bool `tfsdk:"enable_support_access"`
-	SupportEmail types.String `tfsdk:"support_email"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	CtGroups []TenantProfileCtGroupsModel `tfsdk:"ct_groups"`
-	Favicon *TenantProfileFaviconModel `tfsdk:"favicon"`
-	Logo *TenantProfileLogoModel `tfsdk:"logo"`
-	Plan *TenantProfilePlanModel `tfsdk:"plan"`
+	Name                types.String                 `tfsdk:"name"`
+	Namespace           types.String                 `tfsdk:"namespace"`
+	Annotations         types.Map                    `tfsdk:"annotations"`
+	Description         types.String                 `tfsdk:"description"`
+	Disable             types.Bool                   `tfsdk:"disable"`
+	Labels              types.Map                    `tfsdk:"labels"`
+	ID                  types.String                 `tfsdk:"id"`
+	EnableSupportAccess types.Bool                   `tfsdk:"enable_support_access"`
+	SupportEmail        types.String                 `tfsdk:"support_email"`
+	Timeouts            timeouts.Value               `tfsdk:"timeouts"`
+	CtGroups            []TenantProfileCtGroupsModel `tfsdk:"ct_groups"`
+	Favicon             *TenantProfileFaviconModel   `tfsdk:"favicon"`
+	Logo                *TenantProfileLogoModel      `tfsdk:"logo"`
+	Plan                *TenantProfilePlanModel      `tfsdk:"plan"`
 }
 
 func (r *TenantProfileResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -111,7 +111,7 @@ func (r *TenantProfileResource) Schema(ctx context.Context, req resource.SchemaR
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the TenantProfile. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -121,7 +121,7 @@ func (r *TenantProfileResource) Schema(ctx context.Context, req resource.SchemaR
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the TenantProfile will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -131,41 +131,41 @@ func (r *TenantProfileResource) Schema(ctx context.Context, req resource.SchemaR
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"enable_support_access": schema.BoolAttribute{
 				MarkdownDescription: "Support Access. Selecting Support Access will allow for F5XC Support teams to access the new Child Tenant for troubleshooting. Unselecting will pause access for XC Support.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.Bool{
 					boolplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"support_email": schema.StringAttribute{
 				MarkdownDescription: "Support Email. Support Email address for child tenant",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -184,7 +184,7 @@ func (r *TenantProfileResource) Schema(ctx context.Context, req resource.SchemaR
 					Attributes: map[string]schema.Attribute{
 						"name": schema.StringAttribute{
 							MarkdownDescription: "Name. Name of the child tenant user group.",
-							Optional: true,
+							Optional:            true,
 						},
 					},
 					Blocks: map[string]schema.Block{
@@ -194,17 +194,16 @@ func (r *TenantProfileResource) Schema(ctx context.Context, req resource.SchemaR
 								Attributes: map[string]schema.Attribute{
 									"namespace": schema.StringAttribute{
 										MarkdownDescription: "Namespace. All Namespaces with custom names will be created in the new Child Tenant. Input a '*' to apply to all application namespaces. The System, Shared, and Default namespaces will be created automatically.",
-										Optional: true,
+										Optional:            true,
 									},
 									"role": schema.StringAttribute{
 										MarkdownDescription: "Role. User role that users in the newly created group will inherit",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
 						},
 					},
-
 				},
 			},
 			"favicon": schema.SingleNestedBlock{
@@ -212,11 +211,11 @@ func (r *TenantProfileResource) Schema(ctx context.Context, req resource.SchemaR
 				Attributes: map[string]schema.Attribute{
 					"content": schema.StringAttribute{
 						MarkdownDescription: "Content. Content of the file",
-						Optional: true,
+						Optional:            true,
 					},
 					"content_type": schema.StringAttribute{
 						MarkdownDescription: "Content Type. Content type of the file (MIME type)",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -224,18 +223,17 @@ func (r *TenantProfileResource) Schema(ctx context.Context, req resource.SchemaR
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 			"logo": schema.SingleNestedBlock{
 				MarkdownDescription: "File. Contains file data",
 				Attributes: map[string]schema.Attribute{
 					"content": schema.StringAttribute{
 						MarkdownDescription: "Content. Content of the file",
-						Optional: true,
+						Optional:            true,
 					},
 					"content_type": schema.StringAttribute{
 						MarkdownDescription: "Content Type. Content type of the file (MIME type)",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -243,26 +241,24 @@ func (r *TenantProfileResource) Schema(ctx context.Context, req resource.SchemaR
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 			"plan": schema.SingleNestedBlock{
 				MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
 						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-						Optional: true,
+						Optional:            true,
 					},
 					"namespace": schema.StringAttribute{
 						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-						Optional: true,
+						Optional:            true,
 					},
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-						Optional: true,
-						Computed: true,
+						Optional:            true,
+						Computed:            true,
 					},
 				},
-
 			},
 		},
 	}
@@ -483,7 +479,6 @@ func (r *TenantProfileResource) Create(ctx context.Context, req resource.CreateR
 		createReq.Spec["support_email"] = data.SupportEmail.ValueString()
 	}
 
-
 	apiResource, err := r.client.CreateTenantProfile(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create TenantProfile: %s", err))
@@ -495,7 +490,7 @@ func (r *TenantProfileResource) Create(ctx context.Context, req resource.CreateR
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["ct_groups"].([]interface{}); ok && len(listData) > 0 {
 		var ct_groupsList []TenantProfileCtGroupsModel
 		for listIdx, item := range listData {
@@ -632,7 +627,6 @@ func (r *TenantProfileResource) Create(ctx context.Context, req resource.CreateR
 	} else {
 		data.SupportEmail = types.StringNull()
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -722,9 +716,9 @@ func (r *TenantProfileResource) Read(ctx context.Context, req resource.ReadReque
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if listData, ok := apiResource.Spec["ct_groups"].([]interface{}); ok && len(listData) > 0 {
 		var ct_groupsList []TenantProfileCtGroupsModel
@@ -862,7 +856,6 @@ func (r *TenantProfileResource) Read(ctx context.Context, req resource.ReadReque
 	} else {
 		data.SupportEmail = types.StringNull()
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -993,7 +986,6 @@ func (r *TenantProfileResource) Update(ctx context.Context, req resource.UpdateR
 	if !data.SupportEmail.IsNull() && !data.SupportEmail.IsUnknown() {
 		apiResource.Spec["support_email"] = data.SupportEmail.ValueString()
 	}
-
 
 	updated, err := r.client.UpdateTenantProfile(ctx, apiResource)
 	if err != nil {

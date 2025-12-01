@@ -53,33 +53,33 @@ type ForwardingClassEmptyModel struct {
 // ForwardingClassDscpModel represents dscp block
 type ForwardingClassDscpModel struct {
 	DropPrecedence types.String `tfsdk:"drop_precedence"`
-	DscpClass types.String `tfsdk:"dscp_class"`
+	DscpClass      types.String `tfsdk:"dscp_class"`
 }
 
 // ForwardingClassPolicerModel represents policer block
 type ForwardingClassPolicerModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 type ForwardingClassResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	InterfaceGroup types.String `tfsdk:"interface_group"`
-	QueueIDToUse types.String `tfsdk:"queue_id_to_use"`
-	TosValue types.Int64 `tfsdk:"tos_value"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	Dscp *ForwardingClassDscpModel `tfsdk:"dscp"`
-	DscpBasedQueue *ForwardingClassEmptyModel `tfsdk:"dscp_based_queue"`
-	NoMarking *ForwardingClassEmptyModel `tfsdk:"no_marking"`
-	NoPolicer *ForwardingClassEmptyModel `tfsdk:"no_policer"`
-	Policer *ForwardingClassPolicerModel `tfsdk:"policer"`
+	Name           types.String                 `tfsdk:"name"`
+	Namespace      types.String                 `tfsdk:"namespace"`
+	Annotations    types.Map                    `tfsdk:"annotations"`
+	Description    types.String                 `tfsdk:"description"`
+	Disable        types.Bool                   `tfsdk:"disable"`
+	Labels         types.Map                    `tfsdk:"labels"`
+	ID             types.String                 `tfsdk:"id"`
+	InterfaceGroup types.String                 `tfsdk:"interface_group"`
+	QueueIDToUse   types.String                 `tfsdk:"queue_id_to_use"`
+	TosValue       types.Int64                  `tfsdk:"tos_value"`
+	Timeouts       timeouts.Value               `tfsdk:"timeouts"`
+	Dscp           *ForwardingClassDscpModel    `tfsdk:"dscp"`
+	DscpBasedQueue *ForwardingClassEmptyModel   `tfsdk:"dscp_based_queue"`
+	NoMarking      *ForwardingClassEmptyModel   `tfsdk:"no_marking"`
+	NoPolicer      *ForwardingClassEmptyModel   `tfsdk:"no_policer"`
+	Policer        *ForwardingClassPolicerModel `tfsdk:"policer"`
 }
 
 func (r *ForwardingClassResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -93,7 +93,7 @@ func (r *ForwardingClassResource) Schema(ctx context.Context, req resource.Schem
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the ForwardingClass. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -103,7 +103,7 @@ func (r *ForwardingClassResource) Schema(ctx context.Context, req resource.Schem
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the ForwardingClass will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -113,49 +113,49 @@ func (r *ForwardingClassResource) Schema(ctx context.Context, req resource.Schem
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"interface_group": schema.StringAttribute{
 				MarkdownDescription: "Interface Group. Interface group, group membership by adding group label to interface Choose any of the available interfaces Choose all interfaces with label group1 Choose all interfaces with label group2 Choose all interfaces with label group3. Possible values are `ANY_AVAILABLE_INTERFACE`, `INTERFACE_GROUP1`, `INTERFACE_GROUP2`, `INTERFACE_GROUP3`. Defaults to `ANY_AVAILABLE_INTERFACE`.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"queue_id_to_use": schema.StringAttribute{
 				MarkdownDescription: "Precedence Level Values. DSCP Precedence Level Values Best Effort service will get any available bandwidth DSCP Class 1 service DSCP Class 2 service DSCP Class 3 service DSCP Class 4 service Express Forwarding is used for low latency traffic Control is used for routing traffic, not recommended Link Layer traffic like LACP or keepalive, not recommended. Possible values are `DSCP_BEST_EFFORT`, `DSCP_CLASS1`, `DSCP_CLASS2`, `DSCP_CLASS3`, `DSCP_CLASS4`, `DSCP_EXPRESS_FORWARDING`, `DSCP_CONTROL_L3`, `DSCP_CONTROL_L2`. Defaults to `DSCP_BEST_EFFORT`.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"tos_value": schema.Int64Attribute{
 				MarkdownDescription: "TOS value. Decimal value of raw 8 bit TOS. In above example DSCP 10 = Precedence Class 1 and drop precedence low",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{
 					int64planmodifier.UseStateForUnknown(),
 				},
@@ -173,14 +173,13 @@ func (r *ForwardingClassResource) Schema(ctx context.Context, req resource.Schem
 				Attributes: map[string]schema.Attribute{
 					"drop_precedence": schema.StringAttribute{
 						MarkdownDescription: "DSCP AF Drop Precedence. DSCP Assured forwarding drop precedence DSCP Low drop precedence DSCP Low drop precedence DSCP Low drop precedence DSCP drop precedence value is taken from output of policer. Possible values are `DSCP_AF_LOW`, `DSCP_AF_MEDIUM`, `DSCP_AF_HIGH`, `DSCP_AF_POLICER`. Defaults to `DSCP_AF_FAKE`.",
-						Optional: true,
+						Optional:            true,
 					},
 					"dscp_class": schema.StringAttribute{
 						MarkdownDescription: "Precedence Level Values. DSCP Precedence Level Values Best Effort service will get any available bandwidth DSCP Class 1 service DSCP Class 2 service DSCP Class 3 service DSCP Class 4 service Express Forwarding is used for low latency traffic Control is used for routing traffic, not recommended Link Layer traffic like LACP or keepalive, not recommended. Possible values are `DSCP_BEST_EFFORT`, `DSCP_CLASS1`, `DSCP_CLASS2`, `DSCP_CLASS3`, `DSCP_CLASS4`, `DSCP_EXPRESS_FORWARDING`, `DSCP_CONTROL_L3`, `DSCP_CONTROL_L2`. Defaults to `DSCP_BEST_EFFORT`.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
-
 			},
 			"dscp_based_queue": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: dscp_based_queue, queue_id_to_use] Empty. This can be used for messages where no values are needed",
@@ -196,19 +195,18 @@ func (r *ForwardingClassResource) Schema(ctx context.Context, req resource.Schem
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
 						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-						Optional: true,
+						Optional:            true,
 					},
 					"namespace": schema.StringAttribute{
 						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-						Optional: true,
+						Optional:            true,
 					},
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-						Optional: true,
-						Computed: true,
+						Optional:            true,
+						Computed:            true,
 					},
 				},
-
 			},
 		},
 	}
@@ -403,7 +401,6 @@ func (r *ForwardingClassResource) Create(ctx context.Context, req resource.Creat
 		createReq.Spec["tos_value"] = data.TosValue.ValueInt64()
 	}
 
-
 	apiResource, err := r.client.CreateForwardingClass(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create ForwardingClass: %s", err))
@@ -415,7 +412,7 @@ func (r *ForwardingClassResource) Create(ctx context.Context, req resource.Creat
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if blockData, ok := apiResource.Spec["dscp"].(map[string]interface{}); ok && (isImport || data.Dscp != nil) {
 		data.Dscp = &ForwardingClassDscpModel{
 			DropPrecedence: func() types.String {
@@ -484,7 +481,6 @@ func (r *ForwardingClassResource) Create(ctx context.Context, req resource.Creat
 	} else {
 		data.TosValue = types.Int64Null()
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -574,9 +570,9 @@ func (r *ForwardingClassResource) Read(ctx context.Context, req resource.ReadReq
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if blockData, ok := apiResource.Spec["dscp"].(map[string]interface{}); ok && (isImport || data.Dscp != nil) {
 		data.Dscp = &ForwardingClassDscpModel{
@@ -646,7 +642,6 @@ func (r *ForwardingClassResource) Read(ctx context.Context, req resource.ReadReq
 	} else {
 		data.TosValue = types.Int64Null()
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -751,7 +746,6 @@ func (r *ForwardingClassResource) Update(ctx context.Context, req resource.Updat
 	if !data.TosValue.IsNull() && !data.TosValue.IsUnknown() {
 		apiResource.Spec["tos_value"] = data.TosValue.ValueInt64()
 	}
-
 
 	updated, err := r.client.UpdateForwardingClass(ctx, apiResource)
 	if err != nil {

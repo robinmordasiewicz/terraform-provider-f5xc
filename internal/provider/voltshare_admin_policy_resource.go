@@ -51,10 +51,10 @@ type VoltshareAdminPolicyEmptyModel struct {
 
 // VoltshareAdminPolicyAuthorRestrictionsModel represents author_restrictions block
 type VoltshareAdminPolicyAuthorRestrictionsModel struct {
-	AllowAll *VoltshareAdminPolicyEmptyModel `tfsdk:"allow_all"`
+	AllowAll  *VoltshareAdminPolicyEmptyModel                       `tfsdk:"allow_all"`
 	AllowList *VoltshareAdminPolicyAuthorRestrictionsAllowListModel `tfsdk:"allow_list"`
-	DenyAll *VoltshareAdminPolicyEmptyModel `tfsdk:"deny_all"`
-	DenyList *VoltshareAdminPolicyAuthorRestrictionsDenyListModel `tfsdk:"deny_list"`
+	DenyAll   *VoltshareAdminPolicyEmptyModel                       `tfsdk:"deny_all"`
+	DenyList  *VoltshareAdminPolicyAuthorRestrictionsDenyListModel  `tfsdk:"deny_list"`
 }
 
 // VoltshareAdminPolicyAuthorRestrictionsAllowListModel represents allow_list block
@@ -64,7 +64,7 @@ type VoltshareAdminPolicyAuthorRestrictionsAllowListModel struct {
 
 // VoltshareAdminPolicyAuthorRestrictionsAllowListCustomListModel represents custom_list block
 type VoltshareAdminPolicyAuthorRestrictionsAllowListCustomListModel struct {
-	ExactValue types.String `tfsdk:"exact_value"`
+	ExactValue   types.String `tfsdk:"exact_value"`
 	RegexPattern types.String `tfsdk:"regex_pattern"`
 }
 
@@ -75,24 +75,24 @@ type VoltshareAdminPolicyAuthorRestrictionsDenyListModel struct {
 
 // VoltshareAdminPolicyAuthorRestrictionsDenyListCustomListModel represents custom_list block
 type VoltshareAdminPolicyAuthorRestrictionsDenyListCustomListModel struct {
-	ExactValue types.String `tfsdk:"exact_value"`
+	ExactValue   types.String `tfsdk:"exact_value"`
 	RegexPattern types.String `tfsdk:"regex_pattern"`
 }
 
 // VoltshareAdminPolicyUserRestrictionsModel represents user_restrictions block
 type VoltshareAdminPolicyUserRestrictionsModel struct {
-	Tenant types.String `tfsdk:"tenant"`
-	AllTenants *VoltshareAdminPolicyEmptyModel `tfsdk:"all_tenants"`
-	IndividualUsers *VoltshareAdminPolicyEmptyModel `tfsdk:"individual_users"`
+	Tenant           types.String                                               `tfsdk:"tenant"`
+	AllTenants       *VoltshareAdminPolicyEmptyModel                            `tfsdk:"all_tenants"`
+	IndividualUsers  *VoltshareAdminPolicyEmptyModel                            `tfsdk:"individual_users"`
 	UserRestrictions *VoltshareAdminPolicyUserRestrictionsUserRestrictionsModel `tfsdk:"user_restrictions"`
 }
 
 // VoltshareAdminPolicyUserRestrictionsUserRestrictionsModel represents user_restrictions block
 type VoltshareAdminPolicyUserRestrictionsUserRestrictionsModel struct {
-	AllowAll *VoltshareAdminPolicyEmptyModel `tfsdk:"allow_all"`
+	AllowAll  *VoltshareAdminPolicyEmptyModel                                     `tfsdk:"allow_all"`
 	AllowList *VoltshareAdminPolicyUserRestrictionsUserRestrictionsAllowListModel `tfsdk:"allow_list"`
-	DenyAll *VoltshareAdminPolicyEmptyModel `tfsdk:"deny_all"`
-	DenyList *VoltshareAdminPolicyUserRestrictionsUserRestrictionsDenyListModel `tfsdk:"deny_list"`
+	DenyAll   *VoltshareAdminPolicyEmptyModel                                     `tfsdk:"deny_all"`
+	DenyList  *VoltshareAdminPolicyUserRestrictionsUserRestrictionsDenyListModel  `tfsdk:"deny_list"`
 }
 
 // VoltshareAdminPolicyUserRestrictionsUserRestrictionsAllowListModel represents allow_list block
@@ -102,7 +102,7 @@ type VoltshareAdminPolicyUserRestrictionsUserRestrictionsAllowListModel struct {
 
 // VoltshareAdminPolicyUserRestrictionsUserRestrictionsAllowListCustomListModel represents custom_list block
 type VoltshareAdminPolicyUserRestrictionsUserRestrictionsAllowListCustomListModel struct {
-	ExactValue types.String `tfsdk:"exact_value"`
+	ExactValue   types.String `tfsdk:"exact_value"`
 	RegexPattern types.String `tfsdk:"regex_pattern"`
 }
 
@@ -113,22 +113,22 @@ type VoltshareAdminPolicyUserRestrictionsUserRestrictionsDenyListModel struct {
 
 // VoltshareAdminPolicyUserRestrictionsUserRestrictionsDenyListCustomListModel represents custom_list block
 type VoltshareAdminPolicyUserRestrictionsUserRestrictionsDenyListCustomListModel struct {
-	ExactValue types.String `tfsdk:"exact_value"`
+	ExactValue   types.String `tfsdk:"exact_value"`
 	RegexPattern types.String `tfsdk:"regex_pattern"`
 }
 
 type VoltshareAdminPolicyResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	MaxValidityDuration types.String `tfsdk:"max_validity_duration"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	AuthorRestrictions *VoltshareAdminPolicyAuthorRestrictionsModel `tfsdk:"author_restrictions"`
-	UserRestrictions []VoltshareAdminPolicyUserRestrictionsModel `tfsdk:"user_restrictions"`
+	Name                types.String                                 `tfsdk:"name"`
+	Namespace           types.String                                 `tfsdk:"namespace"`
+	Annotations         types.Map                                    `tfsdk:"annotations"`
+	Description         types.String                                 `tfsdk:"description"`
+	Disable             types.Bool                                   `tfsdk:"disable"`
+	Labels              types.Map                                    `tfsdk:"labels"`
+	ID                  types.String                                 `tfsdk:"id"`
+	MaxValidityDuration types.String                                 `tfsdk:"max_validity_duration"`
+	Timeouts            timeouts.Value                               `tfsdk:"timeouts"`
+	AuthorRestrictions  *VoltshareAdminPolicyAuthorRestrictionsModel `tfsdk:"author_restrictions"`
+	UserRestrictions    []VoltshareAdminPolicyUserRestrictionsModel  `tfsdk:"user_restrictions"`
 }
 
 func (r *VoltshareAdminPolicyResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -142,7 +142,7 @@ func (r *VoltshareAdminPolicyResource) Schema(ctx context.Context, req resource.
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the VoltshareAdminPolicy. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -152,7 +152,7 @@ func (r *VoltshareAdminPolicyResource) Schema(ctx context.Context, req resource.
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the VoltshareAdminPolicy will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -162,33 +162,33 @@ func (r *VoltshareAdminPolicyResource) Schema(ctx context.Context, req resource.
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"max_validity_duration": schema.StringAttribute{
 				MarkdownDescription: "Maximum Duration for Validity. max_validity_duration contains the maximum amount of time a secret from any users from this team/tenant is valid. Value for this parameter is a string ending in the suffix 's' (indicating seconds), suffix 'm' (indicating minutes) or suffix 'h' (indicating hours)",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -203,16 +203,14 @@ func (r *VoltshareAdminPolicyResource) Schema(ctx context.Context, req resource.
 			}),
 			"author_restrictions": schema.SingleNestedBlock{
 				MarkdownDescription: "User Matcher. user_matcher contains contains the allow/deny list of users/authors.",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"allow_all": schema.SingleNestedBlock{
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 					"allow_list": schema.SingleNestedBlock{
 						MarkdownDescription: "Custom List. Custom List contains user customized list of matcher values",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"custom_list": schema.ListNestedBlock{
 								MarkdownDescription: "List of User Id(s). List of user id(s)",
@@ -220,11 +218,11 @@ func (r *VoltshareAdminPolicyResource) Schema(ctx context.Context, req resource.
 									Attributes: map[string]schema.Attribute{
 										"exact_value": schema.StringAttribute{
 											MarkdownDescription: "Exact User Id. exact_match contains user_id to match against.",
-											Optional: true,
+											Optional:            true,
 										},
 										"regex_pattern": schema.StringAttribute{
 											MarkdownDescription: "Regex For User Id. regex_values contains a regex pattern to match against.",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 								},
@@ -236,8 +234,7 @@ func (r *VoltshareAdminPolicyResource) Schema(ctx context.Context, req resource.
 					},
 					"deny_list": schema.SingleNestedBlock{
 						MarkdownDescription: "Custom List. Custom List contains user customized list of matcher values",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"custom_list": schema.ListNestedBlock{
 								MarkdownDescription: "List of User Id(s). List of user id(s)",
@@ -245,11 +242,11 @@ func (r *VoltshareAdminPolicyResource) Schema(ctx context.Context, req resource.
 									Attributes: map[string]schema.Attribute{
 										"exact_value": schema.StringAttribute{
 											MarkdownDescription: "Exact User Id. exact_match contains user_id to match against.",
-											Optional: true,
+											Optional:            true,
 										},
 										"regex_pattern": schema.StringAttribute{
 											MarkdownDescription: "Regex For User Id. regex_values contains a regex pattern to match against.",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 								},
@@ -257,7 +254,6 @@ func (r *VoltshareAdminPolicyResource) Schema(ctx context.Context, req resource.
 						},
 					},
 				},
-
 			},
 			"user_restrictions": schema.ListNestedBlock{
 				MarkdownDescription: "Per Team Decryption Policy. user_restrictions contains per tenant/team list of allowed/disallowed users with whom a secret can be shared using F5XC VoltShare.",
@@ -265,8 +261,8 @@ func (r *VoltshareAdminPolicyResource) Schema(ctx context.Context, req resource.
 					Attributes: map[string]schema.Attribute{
 						"tenant": schema.StringAttribute{
 							MarkdownDescription: "Team/Tenant. Team/Tenant for which this rule is valid.",
-							Optional: true,
-							Computed: true,
+							Optional:            true,
+							Computed:            true,
 						},
 					},
 					Blocks: map[string]schema.Block{
@@ -278,16 +274,14 @@ func (r *VoltshareAdminPolicyResource) Schema(ctx context.Context, req resource.
 						},
 						"user_restrictions": schema.SingleNestedBlock{
 							MarkdownDescription: "User Matcher. user_matcher contains contains the allow/deny list of users/authors.",
-							Attributes: map[string]schema.Attribute{
-							},
+							Attributes:          map[string]schema.Attribute{},
 							Blocks: map[string]schema.Block{
 								"allow_all": schema.SingleNestedBlock{
 									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 								},
 								"allow_list": schema.SingleNestedBlock{
 									MarkdownDescription: "Custom List. Custom List contains user customized list of matcher values",
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"custom_list": schema.ListNestedBlock{
 											MarkdownDescription: "List of User Id(s). List of user id(s)",
@@ -295,11 +289,11 @@ func (r *VoltshareAdminPolicyResource) Schema(ctx context.Context, req resource.
 												Attributes: map[string]schema.Attribute{
 													"exact_value": schema.StringAttribute{
 														MarkdownDescription: "Exact User Id. exact_match contains user_id to match against.",
-														Optional: true,
+														Optional:            true,
 													},
 													"regex_pattern": schema.StringAttribute{
 														MarkdownDescription: "Regex For User Id. regex_values contains a regex pattern to match against.",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 											},
@@ -311,8 +305,7 @@ func (r *VoltshareAdminPolicyResource) Schema(ctx context.Context, req resource.
 								},
 								"deny_list": schema.SingleNestedBlock{
 									MarkdownDescription: "Custom List. Custom List contains user customized list of matcher values",
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"custom_list": schema.ListNestedBlock{
 											MarkdownDescription: "List of User Id(s). List of user id(s)",
@@ -320,11 +313,11 @@ func (r *VoltshareAdminPolicyResource) Schema(ctx context.Context, req resource.
 												Attributes: map[string]schema.Attribute{
 													"exact_value": schema.StringAttribute{
 														MarkdownDescription: "Exact User Id. exact_match contains user_id to match against.",
-														Optional: true,
+														Optional:            true,
 													},
 													"regex_pattern": schema.StringAttribute{
 														MarkdownDescription: "Regex For User Id. regex_values contains a regex pattern to match against.",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 											},
@@ -334,7 +327,6 @@ func (r *VoltshareAdminPolicyResource) Schema(ctx context.Context, req resource.
 							},
 						},
 					},
-
 				},
 			},
 		},
@@ -542,7 +534,6 @@ func (r *VoltshareAdminPolicyResource) Create(ctx context.Context, req resource.
 		createReq.Spec["max_validity_duration"] = data.MaxValidityDuration.ValueString()
 	}
 
-
 	apiResource, err := r.client.CreateVoltshareAdminPolicy(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create VoltshareAdminPolicy: %s", err))
@@ -554,7 +545,7 @@ func (r *VoltshareAdminPolicyResource) Create(ctx context.Context, req resource.
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if _, ok := apiResource.Spec["author_restrictions"].(map[string]interface{}); ok && isImport && data.AuthorRestrictions == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.AuthorRestrictions = &VoltshareAdminPolicyAuthorRestrictionsModel{}
@@ -613,7 +604,6 @@ func (r *VoltshareAdminPolicyResource) Create(ctx context.Context, req resource.
 	} else {
 		data.MaxValidityDuration = types.StringNull()
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -703,9 +693,9 @@ func (r *VoltshareAdminPolicyResource) Read(ctx context.Context, req resource.Re
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if _, ok := apiResource.Spec["author_restrictions"].(map[string]interface{}); ok && isImport && data.AuthorRestrictions == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -765,7 +755,6 @@ func (r *VoltshareAdminPolicyResource) Read(ctx context.Context, req resource.Re
 	} else {
 		data.MaxValidityDuration = types.StringNull()
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -882,7 +871,6 @@ func (r *VoltshareAdminPolicyResource) Update(ctx context.Context, req resource.
 	if !data.MaxValidityDuration.IsNull() && !data.MaxValidityDuration.IsUnknown() {
 		apiResource.Spec["max_validity_duration"] = data.MaxValidityDuration.ValueString()
 	}
-
 
 	updated, err := r.client.UpdateVoltshareAdminPolicy(ctx, apiResource)
 	if err != nil {

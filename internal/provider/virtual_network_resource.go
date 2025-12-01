@@ -51,11 +51,11 @@ type VirtualNetworkEmptyModel struct {
 
 // VirtualNetworkStaticRoutesModel represents static_routes block
 type VirtualNetworkStaticRoutesModel struct {
-	Attrs types.List `tfsdk:"attrs"`
-	IPAddress types.String `tfsdk:"ip_address"`
-	IPPrefixes types.List `tfsdk:"ip_prefixes"`
-	DefaultGateway *VirtualNetworkEmptyModel `tfsdk:"default_gateway"`
-	NodeInterface *VirtualNetworkStaticRoutesNodeInterfaceModel `tfsdk:"node_interface"`
+	Attrs          types.List                                    `tfsdk:"attrs"`
+	IPAddress      types.String                                  `tfsdk:"ip_address"`
+	IPPrefixes     types.List                                    `tfsdk:"ip_prefixes"`
+	DefaultGateway *VirtualNetworkEmptyModel                     `tfsdk:"default_gateway"`
+	NodeInterface  *VirtualNetworkStaticRoutesNodeInterfaceModel `tfsdk:"node_interface"`
 }
 
 // VirtualNetworkStaticRoutesNodeInterfaceModel represents node_interface block
@@ -65,33 +65,33 @@ type VirtualNetworkStaticRoutesNodeInterfaceModel struct {
 
 // VirtualNetworkStaticRoutesNodeInterfaceListModel represents list block
 type VirtualNetworkStaticRoutesNodeInterfaceListModel struct {
-	Node types.String `tfsdk:"node"`
+	Node      types.String                                                `tfsdk:"node"`
 	Interface []VirtualNetworkStaticRoutesNodeInterfaceListInterfaceModel `tfsdk:"interface"`
 }
 
 // VirtualNetworkStaticRoutesNodeInterfaceListInterfaceModel represents interface block
 type VirtualNetworkStaticRoutesNodeInterfaceListInterfaceModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 type VirtualNetworkResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	LegacyType types.String `tfsdk:"legacy_type"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	GlobalNetwork *VirtualNetworkEmptyModel `tfsdk:"global_network"`
-	SiteLocalInsideNetwork *VirtualNetworkEmptyModel `tfsdk:"site_local_inside_network"`
-	SiteLocalNetwork *VirtualNetworkEmptyModel `tfsdk:"site_local_network"`
-	StaticRoutes []VirtualNetworkStaticRoutesModel `tfsdk:"static_routes"`
+	Name                   types.String                      `tfsdk:"name"`
+	Namespace              types.String                      `tfsdk:"namespace"`
+	Annotations            types.Map                         `tfsdk:"annotations"`
+	Description            types.String                      `tfsdk:"description"`
+	Disable                types.Bool                        `tfsdk:"disable"`
+	Labels                 types.Map                         `tfsdk:"labels"`
+	ID                     types.String                      `tfsdk:"id"`
+	LegacyType             types.String                      `tfsdk:"legacy_type"`
+	Timeouts               timeouts.Value                    `tfsdk:"timeouts"`
+	GlobalNetwork          *VirtualNetworkEmptyModel         `tfsdk:"global_network"`
+	SiteLocalInsideNetwork *VirtualNetworkEmptyModel         `tfsdk:"site_local_inside_network"`
+	SiteLocalNetwork       *VirtualNetworkEmptyModel         `tfsdk:"site_local_network"`
+	StaticRoutes           []VirtualNetworkStaticRoutesModel `tfsdk:"static_routes"`
 }
 
 func (r *VirtualNetworkResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -105,7 +105,7 @@ func (r *VirtualNetworkResource) Schema(ctx context.Context, req resource.Schema
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the VirtualNetwork. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -115,7 +115,7 @@ func (r *VirtualNetworkResource) Schema(ctx context.Context, req resource.Schema
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the VirtualNetwork will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -125,33 +125,33 @@ func (r *VirtualNetworkResource) Schema(ctx context.Context, req resource.Schema
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"legacy_type": schema.StringAttribute{
 				MarkdownDescription: "Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user. Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`. Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -179,17 +179,17 @@ func (r *VirtualNetworkResource) Schema(ctx context.Context, req resource.Schema
 					Attributes: map[string]schema.Attribute{
 						"attrs": schema.ListAttribute{
 							MarkdownDescription: "Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP`.",
-							Optional: true,
-							ElementType: types.StringType,
+							Optional:            true,
+							ElementType:         types.StringType,
 						},
 						"ip_address": schema.StringAttribute{
 							MarkdownDescription: "IP Address. Traffic matching the ip prefixes is sent to this IP Address",
-							Optional: true,
+							Optional:            true,
 						},
 						"ip_prefixes": schema.ListAttribute{
 							MarkdownDescription: "IP Prefixes. List of route prefixes that have common next hop and attributes",
-							Optional: true,
-							ElementType: types.StringType,
+							Optional:            true,
+							ElementType:         types.StringType,
 						},
 					},
 					Blocks: map[string]schema.Block{
@@ -198,8 +198,7 @@ func (r *VirtualNetworkResource) Schema(ctx context.Context, req resource.Schema
 						},
 						"node_interface": schema.SingleNestedBlock{
 							MarkdownDescription: "NodeInterfaceType. On multinode site, this type holds the information about per node interfaces",
-							Attributes: map[string]schema.Attribute{
-							},
+							Attributes:          map[string]schema.Attribute{},
 							Blocks: map[string]schema.Block{
 								"list": schema.ListNestedBlock{
 									MarkdownDescription: "Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface",
@@ -207,7 +206,7 @@ func (r *VirtualNetworkResource) Schema(ctx context.Context, req resource.Schema
 										Attributes: map[string]schema.Attribute{
 											"node": schema.StringAttribute{
 												MarkdownDescription: "Node. Node name on this site",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 										Blocks: map[string]schema.Block{
@@ -217,26 +216,26 @@ func (r *VirtualNetworkResource) Schema(ctx context.Context, req resource.Schema
 													Attributes: map[string]schema.Attribute{
 														"kind": schema.StringAttribute{
 															MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-															Optional: true,
-															Computed: true,
+															Optional:            true,
+															Computed:            true,
 														},
 														"name": schema.StringAttribute{
 															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-															Optional: true,
+															Optional:            true,
 														},
 														"namespace": schema.StringAttribute{
 															MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-															Optional: true,
+															Optional:            true,
 														},
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-															Optional: true,
-															Computed: true,
+															Optional:            true,
+															Computed:            true,
 														},
 														"uid": schema.StringAttribute{
 															MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-															Optional: true,
-															Computed: true,
+															Optional:            true,
+															Computed:            true,
 														},
 													},
 												},
@@ -247,7 +246,6 @@ func (r *VirtualNetworkResource) Schema(ctx context.Context, req resource.Schema
 							},
 						},
 					},
-
 				},
 			},
 		},
@@ -443,7 +441,6 @@ func (r *VirtualNetworkResource) Create(ctx context.Context, req resource.Create
 		createReq.Spec["legacy_type"] = data.LegacyType.ValueString()
 	}
 
-
 	apiResource, err := r.client.CreateVirtualNetwork(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create VirtualNetwork: %s", err))
@@ -455,7 +452,7 @@ func (r *VirtualNetworkResource) Create(ctx context.Context, req resource.Create
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if _, ok := apiResource.Spec["global_network"].(map[string]interface{}); ok && isImport && data.GlobalNetwork == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.GlobalNetwork = &VirtualNetworkEmptyModel{}
@@ -517,8 +514,7 @@ func (r *VirtualNetworkResource) Create(ctx context.Context, req resource.Create
 					}(),
 					NodeInterface: func() *VirtualNetworkStaticRoutesNodeInterfaceModel {
 						if _, ok := itemMap["node_interface"].(map[string]interface{}); ok {
-							return &VirtualNetworkStaticRoutesNodeInterfaceModel{
-							}
+							return &VirtualNetworkStaticRoutesNodeInterfaceModel{}
 						}
 						return nil
 					}(),
@@ -532,7 +528,6 @@ func (r *VirtualNetworkResource) Create(ctx context.Context, req resource.Create
 	} else {
 		data.LegacyType = types.StringNull()
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -622,9 +617,9 @@ func (r *VirtualNetworkResource) Read(ctx context.Context, req resource.ReadRequ
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if _, ok := apiResource.Spec["global_network"].(map[string]interface{}); ok && isImport && data.GlobalNetwork == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -687,8 +682,7 @@ func (r *VirtualNetworkResource) Read(ctx context.Context, req resource.ReadRequ
 					}(),
 					NodeInterface: func() *VirtualNetworkStaticRoutesNodeInterfaceModel {
 						if _, ok := itemMap["node_interface"].(map[string]interface{}); ok {
-							return &VirtualNetworkStaticRoutesNodeInterfaceModel{
-							}
+							return &VirtualNetworkStaticRoutesNodeInterfaceModel{}
 						}
 						return nil
 					}(),
@@ -702,7 +696,6 @@ func (r *VirtualNetworkResource) Read(ctx context.Context, req resource.ReadRequ
 	} else {
 		data.LegacyType = types.StringNull()
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -807,7 +800,6 @@ func (r *VirtualNetworkResource) Update(ctx context.Context, req resource.Update
 	if !data.LegacyType.IsNull() && !data.LegacyType.IsUnknown() {
 		apiResource.Spec["legacy_type"] = data.LegacyType.ValueString()
 	}
-
 
 	updated, err := r.client.UpdateVirtualNetwork(ctx, apiResource)
 	if err != nil {

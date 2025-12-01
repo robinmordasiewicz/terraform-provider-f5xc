@@ -55,16 +55,16 @@ type GeoLocationSetCustomGeoLocationSelectorModel struct {
 }
 
 type GeoLocationSetResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Name                      types.String                                  `tfsdk:"name"`
+	Namespace                 types.String                                  `tfsdk:"namespace"`
+	Annotations               types.Map                                     `tfsdk:"annotations"`
+	Description               types.String                                  `tfsdk:"description"`
+	Disable                   types.Bool                                    `tfsdk:"disable"`
+	Labels                    types.Map                                     `tfsdk:"labels"`
+	ID                        types.String                                  `tfsdk:"id"`
+	Timeouts                  timeouts.Value                                `tfsdk:"timeouts"`
 	CustomGeoLocationSelector *GeoLocationSetCustomGeoLocationSelectorModel `tfsdk:"custom_geo_location_selector"`
-	Global *GeoLocationSetEmptyModel `tfsdk:"global"`
+	Global                    *GeoLocationSetEmptyModel                     `tfsdk:"global"`
 }
 
 func (r *GeoLocationSetResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -78,7 +78,7 @@ func (r *GeoLocationSetResource) Schema(ctx context.Context, req resource.Schema
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the GeoLocationSet. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -88,7 +88,7 @@ func (r *GeoLocationSetResource) Schema(ctx context.Context, req resource.Schema
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the GeoLocationSet will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -98,25 +98,25 @@ func (r *GeoLocationSetResource) Schema(ctx context.Context, req resource.Schema
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -134,11 +134,10 @@ func (r *GeoLocationSetResource) Schema(ctx context.Context, req resource.Schema
 				Attributes: map[string]schema.Attribute{
 					"expressions": schema.ListAttribute{
 						MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections.",
-						Optional: true,
-						ElementType: types.StringType,
+						Optional:            true,
+						ElementType:         types.StringType,
 					},
 				},
-
 			},
 			"global": schema.SingleNestedBlock{
 				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -307,7 +306,6 @@ func (r *GeoLocationSetResource) Create(ctx context.Context, req resource.Create
 		createReq.Spec["global"] = globalMap
 	}
 
-
 	apiResource, err := r.client.CreateGeoLocationSet(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create GeoLocationSet: %s", err))
@@ -319,7 +317,7 @@ func (r *GeoLocationSetResource) Create(ctx context.Context, req resource.Create
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if blockData, ok := apiResource.Spec["custom_geo_location_selector"].(map[string]interface{}); ok && (isImport || data.CustomGeoLocationSelector != nil) {
 		data.CustomGeoLocationSelector = &GeoLocationSetCustomGeoLocationSelectorModel{
 			Expressions: func() types.List {
@@ -342,7 +340,6 @@ func (r *GeoLocationSetResource) Create(ctx context.Context, req resource.Create
 		data.Global = &GeoLocationSetEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -432,9 +429,9 @@ func (r *GeoLocationSetResource) Read(ctx context.Context, req resource.ReadRequ
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if blockData, ok := apiResource.Spec["custom_geo_location_selector"].(map[string]interface{}); ok && (isImport || data.CustomGeoLocationSelector != nil) {
 		data.CustomGeoLocationSelector = &GeoLocationSetCustomGeoLocationSelectorModel{
@@ -458,7 +455,6 @@ func (r *GeoLocationSetResource) Read(ctx context.Context, req resource.ReadRequ
 		data.Global = &GeoLocationSetEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -534,7 +530,6 @@ func (r *GeoLocationSetResource) Update(ctx context.Context, req resource.Update
 		globalMap := make(map[string]interface{})
 		apiResource.Spec["global"] = globalMap
 	}
-
 
 	updated, err := r.client.UpdateGeoLocationSet(ctx, apiResource)
 	if err != nil {

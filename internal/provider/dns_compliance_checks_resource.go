@@ -46,17 +46,17 @@ type DNSComplianceChecksResource struct {
 }
 
 type DNSComplianceChecksResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	DisallowedQueryTypeList types.List `tfsdk:"disallowed_query_type_list"`
-	DisallowedResourceRecordTypeList types.List `tfsdk:"disallowed_resource_record_type_list"`
-	DomainDenylist types.List `tfsdk:"domain_denylist"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Name                             types.String   `tfsdk:"name"`
+	Namespace                        types.String   `tfsdk:"namespace"`
+	Annotations                      types.Map      `tfsdk:"annotations"`
+	Description                      types.String   `tfsdk:"description"`
+	Disable                          types.Bool     `tfsdk:"disable"`
+	DisallowedQueryTypeList          types.List     `tfsdk:"disallowed_query_type_list"`
+	DisallowedResourceRecordTypeList types.List     `tfsdk:"disallowed_resource_record_type_list"`
+	DomainDenylist                   types.List     `tfsdk:"domain_denylist"`
+	Labels                           types.Map      `tfsdk:"labels"`
+	ID                               types.String   `tfsdk:"id"`
+	Timeouts                         timeouts.Value `tfsdk:"timeouts"`
 }
 
 func (r *DNSComplianceChecksResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -70,7 +70,7 @@ func (r *DNSComplianceChecksResource) Schema(ctx context.Context, req resource.S
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the DNSComplianceChecks. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -80,7 +80,7 @@ func (r *DNSComplianceChecksResource) Schema(ctx context.Context, req resource.S
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the DNSComplianceChecks will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -90,40 +90,40 @@ func (r *DNSComplianceChecksResource) Schema(ctx context.Context, req resource.S
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disallowed_query_type_list": schema.ListAttribute{
 				MarkdownDescription: "Disallowed Query Type Values. Disallowed Query Type Values. Possible values are `QUERY`, `IQUERY`, `STATUS`, `NOTIFY`, `UPDATE`. Defaults to `QUERY`.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"disallowed_resource_record_type_list": schema.ListAttribute{
 				MarkdownDescription: "Disallowed Resource Record Types. Disallowed Resource Record Type List. Possible values are `T`, `A`, `NS`, `MD`, `MF`, `CNAME`, `SOA`, `MB`, `MG`, `MR`, `NULL`, `WKS`, `PTR`, `HINFO`, `MINFO`, `MX`, `TXT`, `RP`, `AFSDB`, `X25`, `ISDN`, `RT`, `NSAP`, `NSAP_PTR`, `SIG`, `KEY`, `PX`, `GPOS`, `AAAA`, `LOC`, `NXT`, `EID`, `NIMLOC`, `SRV`, `ATMA`, `NAPTR`, `KX`, `CERT`, `A6`, `DNAME`, `SINK`, `OPT`, `APL`, `DS`, `SSHFP`, `IPSECKEY`, `RRSIG`, `NSEC`, `DNSKEY`, `DHCID`, `NSEC3`, `NSEC3PARAM`, `TLSA`, `SMIMEA`, `HIP`, `NINFO`, `RKEY`, `TALINK`, `CDS`, `CDNSKEY`, `OPENPGPKEY`, `CSYNC`, `SPF`, `UINFO`, `UID`, `GID`, `UNSPEC`, `NID`, `L32`, `L64`, `LP`, `EUI48`, `EUI64`, `TKEY`, `TSIG`, `IXFR`, `AXFR`, `MAILB`, `MAILA`, `URI`, `CAA`, `TA`, `DLV`. Defaults to `T`.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"domain_denylist": schema.ListAttribute{
 				MarkdownDescription: "Domain Deny list. List of domains to be denied by configuration object",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -306,7 +306,6 @@ func (r *DNSComplianceChecksResource) Create(ctx context.Context, req resource.C
 		}
 	}
 
-
 	apiResource, err := r.client.CreateDNSComplianceChecks(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create DNSComplianceChecks: %s", err))
@@ -318,7 +317,7 @@ func (r *DNSComplianceChecksResource) Create(ctx context.Context, req resource.C
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if v, ok := apiResource.Spec["disallowed_query_type_list"].([]interface{}); ok && len(v) > 0 {
 		var disallowed_query_type_listList []string
 		for _, item := range v {
@@ -364,7 +363,6 @@ func (r *DNSComplianceChecksResource) Create(ctx context.Context, req resource.C
 	} else {
 		data.DomainDenylist = types.ListNull(types.StringType)
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -454,9 +452,9 @@ func (r *DNSComplianceChecksResource) Read(ctx context.Context, req resource.Rea
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if v, ok := apiResource.Spec["disallowed_query_type_list"].([]interface{}); ok && len(v) > 0 {
 		var disallowed_query_type_listList []string
@@ -503,7 +501,6 @@ func (r *DNSComplianceChecksResource) Read(ctx context.Context, req resource.Rea
 	} else {
 		data.DomainDenylist = types.ListNull(types.StringType)
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -585,7 +582,6 @@ func (r *DNSComplianceChecksResource) Update(ctx context.Context, req resource.U
 			apiResource.Spec["domain_denylist"] = domain_denylistList
 		}
 	}
-
 
 	updated, err := r.client.UpdateDNSComplianceChecks(ctx, apiResource)
 	if err != nil {

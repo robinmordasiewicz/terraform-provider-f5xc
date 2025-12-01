@@ -76,33 +76,33 @@ type EnhancedFirewallPolicyRuleListModel struct {
 
 // EnhancedFirewallPolicyRuleListRulesModel represents rules block
 type EnhancedFirewallPolicyRuleListRulesModel struct {
-	AdvancedAction *EnhancedFirewallPolicyRuleListRulesAdvancedActionModel `tfsdk:"advanced_action"`
-	AllDestinations *EnhancedFirewallPolicyEmptyModel `tfsdk:"all_destinations"`
-	AllSLIVips *EnhancedFirewallPolicyEmptyModel `tfsdk:"all_sli_vips"`
-	AllSLOVips *EnhancedFirewallPolicyEmptyModel `tfsdk:"all_slo_vips"`
-	AllSources *EnhancedFirewallPolicyEmptyModel `tfsdk:"all_sources"`
-	AllTCPTraffic *EnhancedFirewallPolicyEmptyModel `tfsdk:"all_tcp_traffic"`
-	AllTraffic *EnhancedFirewallPolicyEmptyModel `tfsdk:"all_traffic"`
-	AllUDPTraffic *EnhancedFirewallPolicyEmptyModel `tfsdk:"all_udp_traffic"`
-	Allow *EnhancedFirewallPolicyEmptyModel `tfsdk:"allow"`
-	Applications *EnhancedFirewallPolicyRuleListRulesApplicationsModel `tfsdk:"applications"`
-	Deny *EnhancedFirewallPolicyEmptyModel `tfsdk:"deny"`
-	DestinationAWSVPCIds *EnhancedFirewallPolicyRuleListRulesDestinationAWSVPCIdsModel `tfsdk:"destination_aws_vpc_ids"`
-	DestinationIPPrefixSet *EnhancedFirewallPolicyRuleListRulesDestinationIPPrefixSetModel `tfsdk:"destination_ip_prefix_set"`
+	AdvancedAction           *EnhancedFirewallPolicyRuleListRulesAdvancedActionModel           `tfsdk:"advanced_action"`
+	AllDestinations          *EnhancedFirewallPolicyEmptyModel                                 `tfsdk:"all_destinations"`
+	AllSLIVips               *EnhancedFirewallPolicyEmptyModel                                 `tfsdk:"all_sli_vips"`
+	AllSLOVips               *EnhancedFirewallPolicyEmptyModel                                 `tfsdk:"all_slo_vips"`
+	AllSources               *EnhancedFirewallPolicyEmptyModel                                 `tfsdk:"all_sources"`
+	AllTCPTraffic            *EnhancedFirewallPolicyEmptyModel                                 `tfsdk:"all_tcp_traffic"`
+	AllTraffic               *EnhancedFirewallPolicyEmptyModel                                 `tfsdk:"all_traffic"`
+	AllUDPTraffic            *EnhancedFirewallPolicyEmptyModel                                 `tfsdk:"all_udp_traffic"`
+	Allow                    *EnhancedFirewallPolicyEmptyModel                                 `tfsdk:"allow"`
+	Applications             *EnhancedFirewallPolicyRuleListRulesApplicationsModel             `tfsdk:"applications"`
+	Deny                     *EnhancedFirewallPolicyEmptyModel                                 `tfsdk:"deny"`
+	DestinationAWSVPCIds     *EnhancedFirewallPolicyRuleListRulesDestinationAWSVPCIdsModel     `tfsdk:"destination_aws_vpc_ids"`
+	DestinationIPPrefixSet   *EnhancedFirewallPolicyRuleListRulesDestinationIPPrefixSetModel   `tfsdk:"destination_ip_prefix_set"`
 	DestinationLabelSelector *EnhancedFirewallPolicyRuleListRulesDestinationLabelSelectorModel `tfsdk:"destination_label_selector"`
-	DestinationPrefixList *EnhancedFirewallPolicyRuleListRulesDestinationPrefixListModel `tfsdk:"destination_prefix_list"`
-	InsertService *EnhancedFirewallPolicyRuleListRulesInsertServiceModel `tfsdk:"insert_service"`
-	InsideDestinations *EnhancedFirewallPolicyEmptyModel `tfsdk:"inside_destinations"`
-	InsideSources *EnhancedFirewallPolicyEmptyModel `tfsdk:"inside_sources"`
-	LabelMatcher *EnhancedFirewallPolicyRuleListRulesLabelMatcherModel `tfsdk:"label_matcher"`
-	Metadata *EnhancedFirewallPolicyRuleListRulesMetadataModel `tfsdk:"metadata"`
-	OutsideDestinations *EnhancedFirewallPolicyEmptyModel `tfsdk:"outside_destinations"`
-	OutsideSources *EnhancedFirewallPolicyEmptyModel `tfsdk:"outside_sources"`
-	ProtocolPortRange *EnhancedFirewallPolicyRuleListRulesProtocolPortRangeModel `tfsdk:"protocol_port_range"`
-	SourceAWSVPCIds *EnhancedFirewallPolicyRuleListRulesSourceAWSVPCIdsModel `tfsdk:"source_aws_vpc_ids"`
-	SourceIPPrefixSet *EnhancedFirewallPolicyRuleListRulesSourceIPPrefixSetModel `tfsdk:"source_ip_prefix_set"`
-	SourceLabelSelector *EnhancedFirewallPolicyRuleListRulesSourceLabelSelectorModel `tfsdk:"source_label_selector"`
-	SourcePrefixList *EnhancedFirewallPolicyRuleListRulesSourcePrefixListModel `tfsdk:"source_prefix_list"`
+	DestinationPrefixList    *EnhancedFirewallPolicyRuleListRulesDestinationPrefixListModel    `tfsdk:"destination_prefix_list"`
+	InsertService            *EnhancedFirewallPolicyRuleListRulesInsertServiceModel            `tfsdk:"insert_service"`
+	InsideDestinations       *EnhancedFirewallPolicyEmptyModel                                 `tfsdk:"inside_destinations"`
+	InsideSources            *EnhancedFirewallPolicyEmptyModel                                 `tfsdk:"inside_sources"`
+	LabelMatcher             *EnhancedFirewallPolicyRuleListRulesLabelMatcherModel             `tfsdk:"label_matcher"`
+	Metadata                 *EnhancedFirewallPolicyRuleListRulesMetadataModel                 `tfsdk:"metadata"`
+	OutsideDestinations      *EnhancedFirewallPolicyEmptyModel                                 `tfsdk:"outside_destinations"`
+	OutsideSources           *EnhancedFirewallPolicyEmptyModel                                 `tfsdk:"outside_sources"`
+	ProtocolPortRange        *EnhancedFirewallPolicyRuleListRulesProtocolPortRangeModel        `tfsdk:"protocol_port_range"`
+	SourceAWSVPCIds          *EnhancedFirewallPolicyRuleListRulesSourceAWSVPCIdsModel          `tfsdk:"source_aws_vpc_ids"`
+	SourceIPPrefixSet        *EnhancedFirewallPolicyRuleListRulesSourceIPPrefixSetModel        `tfsdk:"source_ip_prefix_set"`
+	SourceLabelSelector      *EnhancedFirewallPolicyRuleListRulesSourceLabelSelectorModel      `tfsdk:"source_label_selector"`
+	SourcePrefixList         *EnhancedFirewallPolicyRuleListRulesSourcePrefixListModel         `tfsdk:"source_prefix_list"`
 }
 
 // EnhancedFirewallPolicyRuleListRulesAdvancedActionModel represents advanced_action block
@@ -127,11 +127,11 @@ type EnhancedFirewallPolicyRuleListRulesDestinationIPPrefixSetModel struct {
 
 // EnhancedFirewallPolicyRuleListRulesDestinationIPPrefixSetRefModel represents ref block
 type EnhancedFirewallPolicyRuleListRulesDestinationIPPrefixSetRefModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // EnhancedFirewallPolicyRuleListRulesDestinationLabelSelectorModel represents destination_label_selector block
@@ -151,9 +151,9 @@ type EnhancedFirewallPolicyRuleListRulesInsertServiceModel struct {
 
 // EnhancedFirewallPolicyRuleListRulesInsertServiceNFVServiceModel represents nfv_service block
 type EnhancedFirewallPolicyRuleListRulesInsertServiceNFVServiceModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // EnhancedFirewallPolicyRuleListRulesLabelMatcherModel represents label_matcher block
@@ -164,13 +164,13 @@ type EnhancedFirewallPolicyRuleListRulesLabelMatcherModel struct {
 // EnhancedFirewallPolicyRuleListRulesMetadataModel represents metadata block
 type EnhancedFirewallPolicyRuleListRulesMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
-	Name types.String `tfsdk:"name"`
+	Name            types.String `tfsdk:"name"`
 }
 
 // EnhancedFirewallPolicyRuleListRulesProtocolPortRangeModel represents protocol_port_range block
 type EnhancedFirewallPolicyRuleListRulesProtocolPortRangeModel struct {
-	PortRanges types.List `tfsdk:"port_ranges"`
-	Protocol types.String `tfsdk:"protocol"`
+	PortRanges types.List   `tfsdk:"port_ranges"`
+	Protocol   types.String `tfsdk:"protocol"`
 }
 
 // EnhancedFirewallPolicyRuleListRulesSourceAWSVPCIdsModel represents source_aws_vpc_ids block
@@ -185,11 +185,11 @@ type EnhancedFirewallPolicyRuleListRulesSourceIPPrefixSetModel struct {
 
 // EnhancedFirewallPolicyRuleListRulesSourceIPPrefixSetRefModel represents ref block
 type EnhancedFirewallPolicyRuleListRulesSourceIPPrefixSetRefModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // EnhancedFirewallPolicyRuleListRulesSourceLabelSelectorModel represents source_label_selector block
@@ -203,21 +203,21 @@ type EnhancedFirewallPolicyRuleListRulesSourcePrefixListModel struct {
 }
 
 type EnhancedFirewallPolicyResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	AllowAll *EnhancedFirewallPolicyEmptyModel `tfsdk:"allow_all"`
+	Name                types.String                                    `tfsdk:"name"`
+	Namespace           types.String                                    `tfsdk:"namespace"`
+	Annotations         types.Map                                       `tfsdk:"annotations"`
+	Description         types.String                                    `tfsdk:"description"`
+	Disable             types.Bool                                      `tfsdk:"disable"`
+	Labels              types.Map                                       `tfsdk:"labels"`
+	ID                  types.String                                    `tfsdk:"id"`
+	Timeouts            timeouts.Value                                  `tfsdk:"timeouts"`
+	AllowAll            *EnhancedFirewallPolicyEmptyModel               `tfsdk:"allow_all"`
 	AllowedDestinations *EnhancedFirewallPolicyAllowedDestinationsModel `tfsdk:"allowed_destinations"`
-	AllowedSources *EnhancedFirewallPolicyAllowedSourcesModel `tfsdk:"allowed_sources"`
-	DeniedDestinations *EnhancedFirewallPolicyDeniedDestinationsModel `tfsdk:"denied_destinations"`
-	DeniedSources *EnhancedFirewallPolicyDeniedSourcesModel `tfsdk:"denied_sources"`
-	DenyAll *EnhancedFirewallPolicyEmptyModel `tfsdk:"deny_all"`
-	RuleList *EnhancedFirewallPolicyRuleListModel `tfsdk:"rule_list"`
+	AllowedSources      *EnhancedFirewallPolicyAllowedSourcesModel      `tfsdk:"allowed_sources"`
+	DeniedDestinations  *EnhancedFirewallPolicyDeniedDestinationsModel  `tfsdk:"denied_destinations"`
+	DeniedSources       *EnhancedFirewallPolicyDeniedSourcesModel       `tfsdk:"denied_sources"`
+	DenyAll             *EnhancedFirewallPolicyEmptyModel               `tfsdk:"deny_all"`
+	RuleList            *EnhancedFirewallPolicyRuleListModel            `tfsdk:"rule_list"`
 }
 
 func (r *EnhancedFirewallPolicyResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -231,7 +231,7 @@ func (r *EnhancedFirewallPolicyResource) Schema(ctx context.Context, req resourc
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the EnhancedFirewallPolicy. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -241,7 +241,7 @@ func (r *EnhancedFirewallPolicyResource) Schema(ctx context.Context, req resourc
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the EnhancedFirewallPolicy will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -251,25 +251,25 @@ func (r *EnhancedFirewallPolicyResource) Schema(ctx context.Context, req resourc
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -290,65 +290,59 @@ func (r *EnhancedFirewallPolicyResource) Schema(ctx context.Context, req resourc
 				Attributes: map[string]schema.Attribute{
 					"prefix": schema.ListAttribute{
 						MarkdownDescription: "Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length",
-						Optional: true,
-						ElementType: types.StringType,
+						Optional:            true,
+						ElementType:         types.StringType,
 					},
 				},
-
 			},
 			"allowed_sources": schema.SingleNestedBlock{
 				MarkdownDescription: "IP Prefix List. List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes",
 				Attributes: map[string]schema.Attribute{
 					"prefix": schema.ListAttribute{
 						MarkdownDescription: "Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length",
-						Optional: true,
-						ElementType: types.StringType,
+						Optional:            true,
+						ElementType:         types.StringType,
 					},
 				},
-
 			},
 			"denied_destinations": schema.SingleNestedBlock{
 				MarkdownDescription: "IP Prefix List. List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes",
 				Attributes: map[string]schema.Attribute{
 					"prefix": schema.ListAttribute{
 						MarkdownDescription: "Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length",
-						Optional: true,
-						ElementType: types.StringType,
+						Optional:            true,
+						ElementType:         types.StringType,
 					},
 				},
-
 			},
 			"denied_sources": schema.SingleNestedBlock{
 				MarkdownDescription: "IP Prefix List. List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes",
 				Attributes: map[string]schema.Attribute{
 					"prefix": schema.ListAttribute{
 						MarkdownDescription: "Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length",
-						Optional: true,
-						ElementType: types.StringType,
+						Optional:            true,
+						ElementType:         types.StringType,
 					},
 				},
-
 			},
 			"deny_all": schema.SingleNestedBlock{
 				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 			},
 			"rule_list": schema.SingleNestedBlock{
 				MarkdownDescription: "Custom Enhanced Firewall Policy Rules. Custom Enhanced Firewall Policy Rules",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"rules": schema.ListNestedBlock{
 						MarkdownDescription: "List of Enhanced Firewall Policy Rules. Ordered List of Enhanced Firewall Policy Rules",
 						NestedObject: schema.NestedBlockObject{
-							Attributes: map[string]schema.Attribute{
-							},
+							Attributes: map[string]schema.Attribute{},
 							Blocks: map[string]schema.Block{
 								"advanced_action": schema.SingleNestedBlock{
 									MarkdownDescription: "Network Policy Rule Advanced Action. Network Policy Rule Advanced Action provides additional options along with RuleAction and PBRRuleAction",
 									Attributes: map[string]schema.Attribute{
 										"action": schema.StringAttribute{
 											MarkdownDescription: "Log Action. Choice to choose logging or no logging This works together with option selected via NetworkPolicyRuleAction or any other action specified x-example: (No Selection in NetworkPolicyRuleAction + AdvancedAction as LOG) = LOG Only, (ALLOW/DENY in NetworkPolicyRuleAction + AdvancedAction as LOG) = Log and Allow/Deny, (ALLOW/DENY in NetworkPolicyRuleAction + NOLOG in AdvancedAction) = Allow/Deny with no log Don't sample the traffic hitting the rule Sample the traffic hitting the rule. Possible values are `NOLOG`, `LOG`. Defaults to `NOLOG`.",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 								},
@@ -381,8 +375,8 @@ func (r *EnhancedFirewallPolicyResource) Schema(ctx context.Context, req resourc
 									Attributes: map[string]schema.Attribute{
 										"applications": schema.ListAttribute{
 											MarkdownDescription: "Application Protocols. Application protocols like HTTP, SNMP. Possible values are `APPLICATION_HTTP`, `APPLICATION_HTTPS`, `APPLICATION_SNMP`, `APPLICATION_DNS`. Defaults to `APPLICATION_HTTP`.",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 									},
 								},
@@ -394,15 +388,14 @@ func (r *EnhancedFirewallPolicyResource) Schema(ctx context.Context, req resourc
 									Attributes: map[string]schema.Attribute{
 										"vpc_id": schema.ListAttribute{
 											MarkdownDescription: "AWS VPC List. List of VPC Identifiers in AWS",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 									},
 								},
 								"destination_ip_prefix_set": schema.SingleNestedBlock{
 									MarkdownDescription: "IP Prefix Set Reference. A list of references to ip_prefix_set objects.",
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"ref": schema.ListNestedBlock{
 											MarkdownDescription: "Reference. A list of references to ip_prefix_set objects.",
@@ -410,26 +403,26 @@ func (r *EnhancedFirewallPolicyResource) Schema(ctx context.Context, req resourc
 												Attributes: map[string]schema.Attribute{
 													"kind": schema.StringAttribute{
 														MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-														Optional: true,
-														Computed: true,
+														Optional:            true,
+														Computed:            true,
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-														Optional: true,
+														Optional:            true,
 													},
 													"namespace": schema.StringAttribute{
 														MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-														Optional: true,
+														Optional:            true,
 													},
 													"tenant": schema.StringAttribute{
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-														Optional: true,
-														Computed: true,
+														Optional:            true,
+														Computed:            true,
 													},
 													"uid": schema.StringAttribute{
 														MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-														Optional: true,
-														Computed: true,
+														Optional:            true,
+														Computed:            true,
 													},
 												},
 											},
@@ -441,8 +434,8 @@ func (r *EnhancedFirewallPolicyResource) Schema(ctx context.Context, req resourc
 									Attributes: map[string]schema.Attribute{
 										"expressions": schema.ListAttribute{
 											MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections.",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 									},
 								},
@@ -451,31 +444,30 @@ func (r *EnhancedFirewallPolicyResource) Schema(ctx context.Context, req resourc
 									Attributes: map[string]schema.Attribute{
 										"prefixes": schema.ListAttribute{
 											MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 									},
 								},
 								"insert_service": schema.SingleNestedBlock{
 									MarkdownDescription: "Policy Action to Forward Traffic to External Service. Action to forward traffic to external service",
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"nfv_service": schema.SingleNestedBlock{
 											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
 													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-													Optional: true,
+													Optional:            true,
 												},
 												"namespace": schema.StringAttribute{
 													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-													Optional: true,
+													Optional:            true,
 												},
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-													Optional: true,
-													Computed: true,
+													Optional:            true,
+													Computed:            true,
 												},
 											},
 										},
@@ -492,8 +484,8 @@ func (r *EnhancedFirewallPolicyResource) Schema(ctx context.Context, req resourc
 									Attributes: map[string]schema.Attribute{
 										"keys": schema.ListAttribute{
 											MarkdownDescription: "Keys. The list of label key names that have to match",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 									},
 								},
@@ -502,11 +494,11 @@ func (r *EnhancedFirewallPolicyResource) Schema(ctx context.Context, req resourc
 									Attributes: map[string]schema.Attribute{
 										"description_spec": schema.StringAttribute{
 											MarkdownDescription: "Description. Human readable description.",
-											Optional: true,
+											Optional:            true,
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 								},
@@ -521,12 +513,12 @@ func (r *EnhancedFirewallPolicyResource) Schema(ctx context.Context, req resourc
 									Attributes: map[string]schema.Attribute{
 										"port_ranges": schema.ListAttribute{
 											MarkdownDescription: "List of Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 										"protocol": schema.StringAttribute{
 											MarkdownDescription: "Protocol. Protocol in IP packet to be used as match criteria Values are tcp, udp, and icmp",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 								},
@@ -535,15 +527,14 @@ func (r *EnhancedFirewallPolicyResource) Schema(ctx context.Context, req resourc
 									Attributes: map[string]schema.Attribute{
 										"vpc_id": schema.ListAttribute{
 											MarkdownDescription: "AWS VPC List. List of VPC Identifiers in AWS",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 									},
 								},
 								"source_ip_prefix_set": schema.SingleNestedBlock{
 									MarkdownDescription: "IP Prefix Set Reference. A list of references to ip_prefix_set objects.",
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"ref": schema.ListNestedBlock{
 											MarkdownDescription: "Reference. A list of references to ip_prefix_set objects.",
@@ -551,26 +542,26 @@ func (r *EnhancedFirewallPolicyResource) Schema(ctx context.Context, req resourc
 												Attributes: map[string]schema.Attribute{
 													"kind": schema.StringAttribute{
 														MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-														Optional: true,
-														Computed: true,
+														Optional:            true,
+														Computed:            true,
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-														Optional: true,
+														Optional:            true,
 													},
 													"namespace": schema.StringAttribute{
 														MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-														Optional: true,
+														Optional:            true,
 													},
 													"tenant": schema.StringAttribute{
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-														Optional: true,
-														Computed: true,
+														Optional:            true,
+														Computed:            true,
 													},
 													"uid": schema.StringAttribute{
 														MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-														Optional: true,
-														Computed: true,
+														Optional:            true,
+														Computed:            true,
 													},
 												},
 											},
@@ -582,8 +573,8 @@ func (r *EnhancedFirewallPolicyResource) Schema(ctx context.Context, req resourc
 									Attributes: map[string]schema.Attribute{
 										"expressions": schema.ListAttribute{
 											MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections.",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 									},
 								},
@@ -592,8 +583,8 @@ func (r *EnhancedFirewallPolicyResource) Schema(ctx context.Context, req resourc
 									Attributes: map[string]schema.Attribute{
 										"prefixes": schema.ListAttribute{
 											MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 									},
 								},
@@ -601,7 +592,6 @@ func (r *EnhancedFirewallPolicyResource) Schema(ctx context.Context, req resourc
 						},
 					},
 				},
-
 			},
 		},
 	}
@@ -923,7 +913,6 @@ func (r *EnhancedFirewallPolicyResource) Create(ctx context.Context, req resourc
 		createReq.Spec["rule_list"] = rule_listMap
 	}
 
-
 	apiResource, err := r.client.CreateEnhancedFirewallPolicy(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create EnhancedFirewallPolicy: %s", err))
@@ -935,7 +924,7 @@ func (r *EnhancedFirewallPolicyResource) Create(ctx context.Context, req resourc
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if _, ok := apiResource.Spec["allow_all"].(map[string]interface{}); ok && isImport && data.AllowAll == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.AllowAll = &EnhancedFirewallPolicyEmptyModel{}
@@ -1085,8 +1074,7 @@ func (r *EnhancedFirewallPolicyResource) Create(ctx context.Context, req resourc
 								}(),
 								Applications: func() *EnhancedFirewallPolicyRuleListRulesApplicationsModel {
 									if _, ok := itemMap["applications"].(map[string]interface{}); ok {
-										return &EnhancedFirewallPolicyRuleListRulesApplicationsModel{
-										}
+										return &EnhancedFirewallPolicyRuleListRulesApplicationsModel{}
 									}
 									return nil
 								}(),
@@ -1098,36 +1086,31 @@ func (r *EnhancedFirewallPolicyResource) Create(ctx context.Context, req resourc
 								}(),
 								DestinationAWSVPCIds: func() *EnhancedFirewallPolicyRuleListRulesDestinationAWSVPCIdsModel {
 									if _, ok := itemMap["destination_aws_vpc_ids"].(map[string]interface{}); ok {
-										return &EnhancedFirewallPolicyRuleListRulesDestinationAWSVPCIdsModel{
-										}
+										return &EnhancedFirewallPolicyRuleListRulesDestinationAWSVPCIdsModel{}
 									}
 									return nil
 								}(),
 								DestinationIPPrefixSet: func() *EnhancedFirewallPolicyRuleListRulesDestinationIPPrefixSetModel {
 									if _, ok := itemMap["destination_ip_prefix_set"].(map[string]interface{}); ok {
-										return &EnhancedFirewallPolicyRuleListRulesDestinationIPPrefixSetModel{
-										}
+										return &EnhancedFirewallPolicyRuleListRulesDestinationIPPrefixSetModel{}
 									}
 									return nil
 								}(),
 								DestinationLabelSelector: func() *EnhancedFirewallPolicyRuleListRulesDestinationLabelSelectorModel {
 									if _, ok := itemMap["destination_label_selector"].(map[string]interface{}); ok {
-										return &EnhancedFirewallPolicyRuleListRulesDestinationLabelSelectorModel{
-										}
+										return &EnhancedFirewallPolicyRuleListRulesDestinationLabelSelectorModel{}
 									}
 									return nil
 								}(),
 								DestinationPrefixList: func() *EnhancedFirewallPolicyRuleListRulesDestinationPrefixListModel {
 									if _, ok := itemMap["destination_prefix_list"].(map[string]interface{}); ok {
-										return &EnhancedFirewallPolicyRuleListRulesDestinationPrefixListModel{
-										}
+										return &EnhancedFirewallPolicyRuleListRulesDestinationPrefixListModel{}
 									}
 									return nil
 								}(),
 								InsertService: func() *EnhancedFirewallPolicyRuleListRulesInsertServiceModel {
 									if _, ok := itemMap["insert_service"].(map[string]interface{}); ok {
-										return &EnhancedFirewallPolicyRuleListRulesInsertServiceModel{
-										}
+										return &EnhancedFirewallPolicyRuleListRulesInsertServiceModel{}
 									}
 									return nil
 								}(),
@@ -1145,8 +1128,7 @@ func (r *EnhancedFirewallPolicyResource) Create(ctx context.Context, req resourc
 								}(),
 								LabelMatcher: func() *EnhancedFirewallPolicyRuleListRulesLabelMatcherModel {
 									if _, ok := itemMap["label_matcher"].(map[string]interface{}); ok {
-										return &EnhancedFirewallPolicyRuleListRulesLabelMatcherModel{
-										}
+										return &EnhancedFirewallPolicyRuleListRulesLabelMatcherModel{}
 									}
 									return nil
 								}(),
@@ -1196,29 +1178,25 @@ func (r *EnhancedFirewallPolicyResource) Create(ctx context.Context, req resourc
 								}(),
 								SourceAWSVPCIds: func() *EnhancedFirewallPolicyRuleListRulesSourceAWSVPCIdsModel {
 									if _, ok := itemMap["source_aws_vpc_ids"].(map[string]interface{}); ok {
-										return &EnhancedFirewallPolicyRuleListRulesSourceAWSVPCIdsModel{
-										}
+										return &EnhancedFirewallPolicyRuleListRulesSourceAWSVPCIdsModel{}
 									}
 									return nil
 								}(),
 								SourceIPPrefixSet: func() *EnhancedFirewallPolicyRuleListRulesSourceIPPrefixSetModel {
 									if _, ok := itemMap["source_ip_prefix_set"].(map[string]interface{}); ok {
-										return &EnhancedFirewallPolicyRuleListRulesSourceIPPrefixSetModel{
-										}
+										return &EnhancedFirewallPolicyRuleListRulesSourceIPPrefixSetModel{}
 									}
 									return nil
 								}(),
 								SourceLabelSelector: func() *EnhancedFirewallPolicyRuleListRulesSourceLabelSelectorModel {
 									if _, ok := itemMap["source_label_selector"].(map[string]interface{}); ok {
-										return &EnhancedFirewallPolicyRuleListRulesSourceLabelSelectorModel{
-										}
+										return &EnhancedFirewallPolicyRuleListRulesSourceLabelSelectorModel{}
 									}
 									return nil
 								}(),
 								SourcePrefixList: func() *EnhancedFirewallPolicyRuleListRulesSourcePrefixListModel {
 									if _, ok := itemMap["source_prefix_list"].(map[string]interface{}); ok {
-										return &EnhancedFirewallPolicyRuleListRulesSourcePrefixListModel{
-										}
+										return &EnhancedFirewallPolicyRuleListRulesSourcePrefixListModel{}
 									}
 									return nil
 								}(),
@@ -1231,7 +1209,6 @@ func (r *EnhancedFirewallPolicyResource) Create(ctx context.Context, req resourc
 			}(),
 		}
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -1321,9 +1298,9 @@ func (r *EnhancedFirewallPolicyResource) Read(ctx context.Context, req resource.
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if _, ok := apiResource.Spec["allow_all"].(map[string]interface{}); ok && isImport && data.AllowAll == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -1474,8 +1451,7 @@ func (r *EnhancedFirewallPolicyResource) Read(ctx context.Context, req resource.
 								}(),
 								Applications: func() *EnhancedFirewallPolicyRuleListRulesApplicationsModel {
 									if _, ok := itemMap["applications"].(map[string]interface{}); ok {
-										return &EnhancedFirewallPolicyRuleListRulesApplicationsModel{
-										}
+										return &EnhancedFirewallPolicyRuleListRulesApplicationsModel{}
 									}
 									return nil
 								}(),
@@ -1487,36 +1463,31 @@ func (r *EnhancedFirewallPolicyResource) Read(ctx context.Context, req resource.
 								}(),
 								DestinationAWSVPCIds: func() *EnhancedFirewallPolicyRuleListRulesDestinationAWSVPCIdsModel {
 									if _, ok := itemMap["destination_aws_vpc_ids"].(map[string]interface{}); ok {
-										return &EnhancedFirewallPolicyRuleListRulesDestinationAWSVPCIdsModel{
-										}
+										return &EnhancedFirewallPolicyRuleListRulesDestinationAWSVPCIdsModel{}
 									}
 									return nil
 								}(),
 								DestinationIPPrefixSet: func() *EnhancedFirewallPolicyRuleListRulesDestinationIPPrefixSetModel {
 									if _, ok := itemMap["destination_ip_prefix_set"].(map[string]interface{}); ok {
-										return &EnhancedFirewallPolicyRuleListRulesDestinationIPPrefixSetModel{
-										}
+										return &EnhancedFirewallPolicyRuleListRulesDestinationIPPrefixSetModel{}
 									}
 									return nil
 								}(),
 								DestinationLabelSelector: func() *EnhancedFirewallPolicyRuleListRulesDestinationLabelSelectorModel {
 									if _, ok := itemMap["destination_label_selector"].(map[string]interface{}); ok {
-										return &EnhancedFirewallPolicyRuleListRulesDestinationLabelSelectorModel{
-										}
+										return &EnhancedFirewallPolicyRuleListRulesDestinationLabelSelectorModel{}
 									}
 									return nil
 								}(),
 								DestinationPrefixList: func() *EnhancedFirewallPolicyRuleListRulesDestinationPrefixListModel {
 									if _, ok := itemMap["destination_prefix_list"].(map[string]interface{}); ok {
-										return &EnhancedFirewallPolicyRuleListRulesDestinationPrefixListModel{
-										}
+										return &EnhancedFirewallPolicyRuleListRulesDestinationPrefixListModel{}
 									}
 									return nil
 								}(),
 								InsertService: func() *EnhancedFirewallPolicyRuleListRulesInsertServiceModel {
 									if _, ok := itemMap["insert_service"].(map[string]interface{}); ok {
-										return &EnhancedFirewallPolicyRuleListRulesInsertServiceModel{
-										}
+										return &EnhancedFirewallPolicyRuleListRulesInsertServiceModel{}
 									}
 									return nil
 								}(),
@@ -1534,8 +1505,7 @@ func (r *EnhancedFirewallPolicyResource) Read(ctx context.Context, req resource.
 								}(),
 								LabelMatcher: func() *EnhancedFirewallPolicyRuleListRulesLabelMatcherModel {
 									if _, ok := itemMap["label_matcher"].(map[string]interface{}); ok {
-										return &EnhancedFirewallPolicyRuleListRulesLabelMatcherModel{
-										}
+										return &EnhancedFirewallPolicyRuleListRulesLabelMatcherModel{}
 									}
 									return nil
 								}(),
@@ -1585,29 +1555,25 @@ func (r *EnhancedFirewallPolicyResource) Read(ctx context.Context, req resource.
 								}(),
 								SourceAWSVPCIds: func() *EnhancedFirewallPolicyRuleListRulesSourceAWSVPCIdsModel {
 									if _, ok := itemMap["source_aws_vpc_ids"].(map[string]interface{}); ok {
-										return &EnhancedFirewallPolicyRuleListRulesSourceAWSVPCIdsModel{
-										}
+										return &EnhancedFirewallPolicyRuleListRulesSourceAWSVPCIdsModel{}
 									}
 									return nil
 								}(),
 								SourceIPPrefixSet: func() *EnhancedFirewallPolicyRuleListRulesSourceIPPrefixSetModel {
 									if _, ok := itemMap["source_ip_prefix_set"].(map[string]interface{}); ok {
-										return &EnhancedFirewallPolicyRuleListRulesSourceIPPrefixSetModel{
-										}
+										return &EnhancedFirewallPolicyRuleListRulesSourceIPPrefixSetModel{}
 									}
 									return nil
 								}(),
 								SourceLabelSelector: func() *EnhancedFirewallPolicyRuleListRulesSourceLabelSelectorModel {
 									if _, ok := itemMap["source_label_selector"].(map[string]interface{}); ok {
-										return &EnhancedFirewallPolicyRuleListRulesSourceLabelSelectorModel{
-										}
+										return &EnhancedFirewallPolicyRuleListRulesSourceLabelSelectorModel{}
 									}
 									return nil
 								}(),
 								SourcePrefixList: func() *EnhancedFirewallPolicyRuleListRulesSourcePrefixListModel {
 									if _, ok := itemMap["source_prefix_list"].(map[string]interface{}); ok {
-										return &EnhancedFirewallPolicyRuleListRulesSourcePrefixListModel{
-										}
+										return &EnhancedFirewallPolicyRuleListRulesSourcePrefixListModel{}
 									}
 									return nil
 								}(),
@@ -1620,7 +1586,6 @@ func (r *EnhancedFirewallPolicyResource) Read(ctx context.Context, req resource.
 			}(),
 		}
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -1852,7 +1817,6 @@ func (r *EnhancedFirewallPolicyResource) Update(ctx context.Context, req resourc
 		}
 		apiResource.Spec["rule_list"] = rule_listMap
 	}
-
 
 	updated, err := r.client.UpdateEnhancedFirewallPolicy(ctx, apiResource)
 	if err != nil {

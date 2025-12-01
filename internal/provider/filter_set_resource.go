@@ -51,21 +51,21 @@ type FilterSetEmptyModel struct {
 
 // FilterSetFilterFieldsModel represents filter_fields block
 type FilterSetFilterFieldsModel struct {
-	FieldID types.String `tfsdk:"field_id"`
-	DateField *FilterSetFilterFieldsDateFieldModel `tfsdk:"date_field"`
+	FieldID               types.String                                     `tfsdk:"field_id"`
+	DateField             *FilterSetFilterFieldsDateFieldModel             `tfsdk:"date_field"`
 	FilterExpressionField *FilterSetFilterFieldsFilterExpressionFieldModel `tfsdk:"filter_expression_field"`
-	StringField *FilterSetFilterFieldsStringFieldModel `tfsdk:"string_field"`
+	StringField           *FilterSetFilterFieldsStringFieldModel           `tfsdk:"string_field"`
 }
 
 // FilterSetFilterFieldsDateFieldModel represents date_field block
 type FilterSetFilterFieldsDateFieldModel struct {
-	Relative types.String `tfsdk:"relative"`
+	Relative types.String                                 `tfsdk:"relative"`
 	Absolute *FilterSetFilterFieldsDateFieldAbsoluteModel `tfsdk:"absolute"`
 }
 
 // FilterSetFilterFieldsDateFieldAbsoluteModel represents absolute block
 type FilterSetFilterFieldsDateFieldAbsoluteModel struct {
-	EndDate types.String `tfsdk:"end_date"`
+	EndDate   types.String `tfsdk:"end_date"`
 	StartDate types.String `tfsdk:"start_date"`
 }
 
@@ -80,15 +80,15 @@ type FilterSetFilterFieldsStringFieldModel struct {
 }
 
 type FilterSetResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	ContextKey types.String `tfsdk:"context_key"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Name         types.String                 `tfsdk:"name"`
+	Namespace    types.String                 `tfsdk:"namespace"`
+	Annotations  types.Map                    `tfsdk:"annotations"`
+	Description  types.String                 `tfsdk:"description"`
+	Disable      types.Bool                   `tfsdk:"disable"`
+	Labels       types.Map                    `tfsdk:"labels"`
+	ID           types.String                 `tfsdk:"id"`
+	ContextKey   types.String                 `tfsdk:"context_key"`
+	Timeouts     timeouts.Value               `tfsdk:"timeouts"`
 	FilterFields []FilterSetFilterFieldsModel `tfsdk:"filter_fields"`
 }
 
@@ -103,7 +103,7 @@ func (r *FilterSetResource) Schema(ctx context.Context, req resource.SchemaReque
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the FilterSet. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -113,7 +113,7 @@ func (r *FilterSetResource) Schema(ctx context.Context, req resource.SchemaReque
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the FilterSet will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -123,33 +123,33 @@ func (r *FilterSetResource) Schema(ctx context.Context, req resource.SchemaReque
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"context_key": schema.StringAttribute{
 				MarkdownDescription: "Context Key. indexable context key that identifies a page or page type for which the FilterSet is applicable",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -168,7 +168,7 @@ func (r *FilterSetResource) Schema(ctx context.Context, req resource.SchemaReque
 					Attributes: map[string]schema.Attribute{
 						"field_id": schema.StringAttribute{
 							MarkdownDescription: "Field ID. an identifier for the field that maps to some UI filter component",
-							Optional: true,
+							Optional:            true,
 						},
 					},
 					Blocks: map[string]schema.Block{
@@ -177,7 +177,7 @@ func (r *FilterSetResource) Schema(ctx context.Context, req resource.SchemaReque
 							Attributes: map[string]schema.Attribute{
 								"relative": schema.StringAttribute{
 									MarkdownDescription: "Relative. relative time duration",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
@@ -186,11 +186,11 @@ func (r *FilterSetResource) Schema(ctx context.Context, req resource.SchemaReque
 									Attributes: map[string]schema.Attribute{
 										"end_date": schema.StringAttribute{
 											MarkdownDescription: "End Date. Contains end date",
-											Optional: true,
+											Optional:            true,
 										},
 										"start_date": schema.StringAttribute{
 											MarkdownDescription: "Start Date. Contains start date",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 								},
@@ -201,7 +201,7 @@ func (r *FilterSetResource) Schema(ctx context.Context, req resource.SchemaReque
 							Attributes: map[string]schema.Attribute{
 								"expression": schema.StringAttribute{
 									MarkdownDescription: "Expression Value. expression is a kubernetes style label expression for selections, but differs in that it allows special characters in the keys and values",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 						},
@@ -210,13 +210,12 @@ func (r *FilterSetResource) Schema(ctx context.Context, req resource.SchemaReque
 							Attributes: map[string]schema.Attribute{
 								"field_values": schema.ListAttribute{
 									MarkdownDescription: "String Value(s).",
-									Optional: true,
-									ElementType: types.StringType,
+									Optional:            true,
+									ElementType:         types.StringType,
 								},
 							},
 						},
 					},
-
 				},
 			},
 		},
@@ -417,7 +416,6 @@ func (r *FilterSetResource) Create(ctx context.Context, req resource.CreateReque
 		createReq.Spec["context_key"] = data.ContextKey.ValueString()
 	}
 
-
 	apiResource, err := r.client.CreateFilterSet(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create FilterSet: %s", err))
@@ -429,7 +427,7 @@ func (r *FilterSetResource) Create(ctx context.Context, req resource.CreateReque
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["filter_fields"].([]interface{}); ok && len(listData) > 0 {
 		var filter_fieldsList []FilterSetFilterFieldsModel
 		for listIdx, item := range listData {
@@ -498,7 +496,6 @@ func (r *FilterSetResource) Create(ctx context.Context, req resource.CreateReque
 	} else {
 		data.ContextKey = types.StringNull()
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -588,9 +585,9 @@ func (r *FilterSetResource) Read(ctx context.Context, req resource.ReadRequest, 
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if listData, ok := apiResource.Spec["filter_fields"].([]interface{}); ok && len(listData) > 0 {
 		var filter_fieldsList []FilterSetFilterFieldsModel
@@ -660,7 +657,6 @@ func (r *FilterSetResource) Read(ctx context.Context, req resource.ReadRequest, 
 	} else {
 		data.ContextKey = types.StringNull()
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -770,7 +766,6 @@ func (r *FilterSetResource) Update(ctx context.Context, req resource.UpdateReque
 	if !data.ContextKey.IsNull() && !data.ContextKey.IsUnknown() {
 		apiResource.Spec["context_key"] = data.ContextKey.ValueString()
 	}
-
 
 	updated, err := r.client.UpdateFilterSet(ctx, apiResource)
 	if err != nil {

@@ -51,37 +51,37 @@ type K8SPodSecurityPolicyEmptyModel struct {
 
 // K8SPodSecurityPolicyPspSpecModel represents psp_spec block
 type K8SPodSecurityPolicyPspSpecModel struct {
-	AllowPrivilegeEscalation types.Bool `tfsdk:"allow_privilege_escalation"`
-	AllowedCsiDrivers types.List `tfsdk:"allowed_csi_drivers"`
-	AllowedFlexVolumes types.List `tfsdk:"allowed_flex_volumes"`
-	AllowedProcMounts types.List `tfsdk:"allowed_proc_mounts"`
-	AllowedUnsafeSysctls types.List `tfsdk:"allowed_unsafe_sysctls"`
-	DefaultAllowPrivilegeEscalation types.Bool `tfsdk:"default_allow_privilege_escalation"`
-	ForbiddenSysctls types.List `tfsdk:"forbidden_sysctls"`
-	HostIpc types.Bool `tfsdk:"host_ipc"`
-	HostNetwork types.Bool `tfsdk:"host_network"`
-	HostPid types.Bool `tfsdk:"host_pid"`
-	HostPortRanges types.String `tfsdk:"host_port_ranges"`
-	Privileged types.Bool `tfsdk:"privileged"`
-	ReadOnlyRootFilesystem types.Bool `tfsdk:"read_only_root_filesystem"`
-	Volumes types.List `tfsdk:"volumes"`
-	AllowedCapabilities *K8SPodSecurityPolicyPspSpecAllowedCapabilitiesModel `tfsdk:"allowed_capabilities"`
-	AllowedHostPaths []K8SPodSecurityPolicyPspSpecAllowedHostPathsModel `tfsdk:"allowed_host_paths"`
-	DefaultCapabilities *K8SPodSecurityPolicyPspSpecDefaultCapabilitiesModel `tfsdk:"default_capabilities"`
-	DropCapabilities *K8SPodSecurityPolicyPspSpecDropCapabilitiesModel `tfsdk:"drop_capabilities"`
-	FsGroupStrategyOptions *K8SPodSecurityPolicyPspSpecFsGroupStrategyOptionsModel `tfsdk:"fs_group_strategy_options"`
-	NoAllowedCapabilities *K8SPodSecurityPolicyEmptyModel `tfsdk:"no_allowed_capabilities"`
-	NoDefaultCapabilities *K8SPodSecurityPolicyEmptyModel `tfsdk:"no_default_capabilities"`
-	NoDropCapabilities *K8SPodSecurityPolicyEmptyModel `tfsdk:"no_drop_capabilities"`
-	NoFsGroups *K8SPodSecurityPolicyEmptyModel `tfsdk:"no_fs_groups"`
-	NoRunAsGroup *K8SPodSecurityPolicyEmptyModel `tfsdk:"no_run_as_group"`
-	NoRunAsUser *K8SPodSecurityPolicyEmptyModel `tfsdk:"no_run_as_user"`
-	NoRuntimeClass *K8SPodSecurityPolicyEmptyModel `tfsdk:"no_runtime_class"`
-	NoSeLinuxOptions *K8SPodSecurityPolicyEmptyModel `tfsdk:"no_se_linux_options"`
-	NoSupplementalGroups *K8SPodSecurityPolicyEmptyModel `tfsdk:"no_supplemental_groups"`
-	RunAsGroup *K8SPodSecurityPolicyPspSpecRunAsGroupModel `tfsdk:"run_as_group"`
-	RunAsUser *K8SPodSecurityPolicyPspSpecRunAsUserModel `tfsdk:"run_as_user"`
-	SupplementalGroups *K8SPodSecurityPolicyPspSpecSupplementalGroupsModel `tfsdk:"supplemental_groups"`
+	AllowPrivilegeEscalation        types.Bool                                              `tfsdk:"allow_privilege_escalation"`
+	AllowedCsiDrivers               types.List                                              `tfsdk:"allowed_csi_drivers"`
+	AllowedFlexVolumes              types.List                                              `tfsdk:"allowed_flex_volumes"`
+	AllowedProcMounts               types.List                                              `tfsdk:"allowed_proc_mounts"`
+	AllowedUnsafeSysctls            types.List                                              `tfsdk:"allowed_unsafe_sysctls"`
+	DefaultAllowPrivilegeEscalation types.Bool                                              `tfsdk:"default_allow_privilege_escalation"`
+	ForbiddenSysctls                types.List                                              `tfsdk:"forbidden_sysctls"`
+	HostIpc                         types.Bool                                              `tfsdk:"host_ipc"`
+	HostNetwork                     types.Bool                                              `tfsdk:"host_network"`
+	HostPid                         types.Bool                                              `tfsdk:"host_pid"`
+	HostPortRanges                  types.String                                            `tfsdk:"host_port_ranges"`
+	Privileged                      types.Bool                                              `tfsdk:"privileged"`
+	ReadOnlyRootFilesystem          types.Bool                                              `tfsdk:"read_only_root_filesystem"`
+	Volumes                         types.List                                              `tfsdk:"volumes"`
+	AllowedCapabilities             *K8SPodSecurityPolicyPspSpecAllowedCapabilitiesModel    `tfsdk:"allowed_capabilities"`
+	AllowedHostPaths                []K8SPodSecurityPolicyPspSpecAllowedHostPathsModel      `tfsdk:"allowed_host_paths"`
+	DefaultCapabilities             *K8SPodSecurityPolicyPspSpecDefaultCapabilitiesModel    `tfsdk:"default_capabilities"`
+	DropCapabilities                *K8SPodSecurityPolicyPspSpecDropCapabilitiesModel       `tfsdk:"drop_capabilities"`
+	FsGroupStrategyOptions          *K8SPodSecurityPolicyPspSpecFsGroupStrategyOptionsModel `tfsdk:"fs_group_strategy_options"`
+	NoAllowedCapabilities           *K8SPodSecurityPolicyEmptyModel                         `tfsdk:"no_allowed_capabilities"`
+	NoDefaultCapabilities           *K8SPodSecurityPolicyEmptyModel                         `tfsdk:"no_default_capabilities"`
+	NoDropCapabilities              *K8SPodSecurityPolicyEmptyModel                         `tfsdk:"no_drop_capabilities"`
+	NoFsGroups                      *K8SPodSecurityPolicyEmptyModel                         `tfsdk:"no_fs_groups"`
+	NoRunAsGroup                    *K8SPodSecurityPolicyEmptyModel                         `tfsdk:"no_run_as_group"`
+	NoRunAsUser                     *K8SPodSecurityPolicyEmptyModel                         `tfsdk:"no_run_as_user"`
+	NoRuntimeClass                  *K8SPodSecurityPolicyEmptyModel                         `tfsdk:"no_runtime_class"`
+	NoSeLinuxOptions                *K8SPodSecurityPolicyEmptyModel                         `tfsdk:"no_se_linux_options"`
+	NoSupplementalGroups            *K8SPodSecurityPolicyEmptyModel                         `tfsdk:"no_supplemental_groups"`
+	RunAsGroup                      *K8SPodSecurityPolicyPspSpecRunAsGroupModel             `tfsdk:"run_as_group"`
+	RunAsUser                       *K8SPodSecurityPolicyPspSpecRunAsUserModel              `tfsdk:"run_as_user"`
+	SupplementalGroups              *K8SPodSecurityPolicyPspSpecSupplementalGroupsModel     `tfsdk:"supplemental_groups"`
 }
 
 // K8SPodSecurityPolicyPspSpecAllowedCapabilitiesModel represents allowed_capabilities block
@@ -92,7 +92,7 @@ type K8SPodSecurityPolicyPspSpecAllowedCapabilitiesModel struct {
 // K8SPodSecurityPolicyPspSpecAllowedHostPathsModel represents allowed_host_paths block
 type K8SPodSecurityPolicyPspSpecAllowedHostPathsModel struct {
 	PathPrefix types.String `tfsdk:"path_prefix"`
-	ReadOnly types.Bool `tfsdk:"read_only"`
+	ReadOnly   types.Bool   `tfsdk:"read_only"`
 }
 
 // K8SPodSecurityPolicyPspSpecDefaultCapabilitiesModel represents default_capabilities block
@@ -107,7 +107,7 @@ type K8SPodSecurityPolicyPspSpecDropCapabilitiesModel struct {
 
 // K8SPodSecurityPolicyPspSpecFsGroupStrategyOptionsModel represents fs_group_strategy_options block
 type K8SPodSecurityPolicyPspSpecFsGroupStrategyOptionsModel struct {
-	Rule types.String `tfsdk:"rule"`
+	Rule     types.String                                                     `tfsdk:"rule"`
 	IDRanges []K8SPodSecurityPolicyPspSpecFsGroupStrategyOptionsIDRangesModel `tfsdk:"id_ranges"`
 }
 
@@ -119,7 +119,7 @@ type K8SPodSecurityPolicyPspSpecFsGroupStrategyOptionsIDRangesModel struct {
 
 // K8SPodSecurityPolicyPspSpecRunAsGroupModel represents run_as_group block
 type K8SPodSecurityPolicyPspSpecRunAsGroupModel struct {
-	Rule types.String `tfsdk:"rule"`
+	Rule     types.String                                         `tfsdk:"rule"`
 	IDRanges []K8SPodSecurityPolicyPspSpecRunAsGroupIDRangesModel `tfsdk:"id_ranges"`
 }
 
@@ -131,7 +131,7 @@ type K8SPodSecurityPolicyPspSpecRunAsGroupIDRangesModel struct {
 
 // K8SPodSecurityPolicyPspSpecRunAsUserModel represents run_as_user block
 type K8SPodSecurityPolicyPspSpecRunAsUserModel struct {
-	Rule types.String `tfsdk:"rule"`
+	Rule     types.String                                        `tfsdk:"rule"`
 	IDRanges []K8SPodSecurityPolicyPspSpecRunAsUserIDRangesModel `tfsdk:"id_ranges"`
 }
 
@@ -143,7 +143,7 @@ type K8SPodSecurityPolicyPspSpecRunAsUserIDRangesModel struct {
 
 // K8SPodSecurityPolicyPspSpecSupplementalGroupsModel represents supplemental_groups block
 type K8SPodSecurityPolicyPspSpecSupplementalGroupsModel struct {
-	Rule types.String `tfsdk:"rule"`
+	Rule     types.String                                                 `tfsdk:"rule"`
 	IDRanges []K8SPodSecurityPolicyPspSpecSupplementalGroupsIDRangesModel `tfsdk:"id_ranges"`
 }
 
@@ -154,16 +154,16 @@ type K8SPodSecurityPolicyPspSpecSupplementalGroupsIDRangesModel struct {
 }
 
 type K8SPodSecurityPolicyResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Yaml types.String `tfsdk:"yaml"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	PspSpec *K8SPodSecurityPolicyPspSpecModel `tfsdk:"psp_spec"`
+	Name        types.String                      `tfsdk:"name"`
+	Namespace   types.String                      `tfsdk:"namespace"`
+	Annotations types.Map                         `tfsdk:"annotations"`
+	Description types.String                      `tfsdk:"description"`
+	Disable     types.Bool                        `tfsdk:"disable"`
+	Labels      types.Map                         `tfsdk:"labels"`
+	ID          types.String                      `tfsdk:"id"`
+	Yaml        types.String                      `tfsdk:"yaml"`
+	Timeouts    timeouts.Value                    `tfsdk:"timeouts"`
+	PspSpec     *K8SPodSecurityPolicyPspSpecModel `tfsdk:"psp_spec"`
 }
 
 func (r *K8SPodSecurityPolicyResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -177,7 +177,7 @@ func (r *K8SPodSecurityPolicyResource) Schema(ctx context.Context, req resource.
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the K8SPodSecurityPolicy. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -187,7 +187,7 @@ func (r *K8SPodSecurityPolicyResource) Schema(ctx context.Context, req resource.
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the K8SPodSecurityPolicy will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -197,33 +197,33 @@ func (r *K8SPodSecurityPolicyResource) Schema(ctx context.Context, req resource.
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"yaml": schema.StringAttribute{
 				MarkdownDescription: "K8s YAML. K8s YAML for Pod Security Policy",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -241,65 +241,65 @@ func (r *K8SPodSecurityPolicyResource) Schema(ctx context.Context, req resource.
 				Attributes: map[string]schema.Attribute{
 					"allow_privilege_escalation": schema.BoolAttribute{
 						MarkdownDescription: "Allow Privilege Escalation. Pod can request to privilege escalation",
-						Optional: true,
+						Optional:            true,
 					},
 					"allowed_csi_drivers": schema.ListAttribute{
 						MarkdownDescription: "Allowed CSI drivers. Restrict the available CSI drivers for POD, default all drivers are available.",
-						Optional: true,
-						ElementType: types.StringType,
+						Optional:            true,
+						ElementType:         types.StringType,
 					},
 					"allowed_flex_volumes": schema.ListAttribute{
 						MarkdownDescription: "Allowed Flex Volumes. Restrict list of Flex volumes, default all volumes are allowed",
-						Optional: true,
-						ElementType: types.StringType,
+						Optional:            true,
+						ElementType:         types.StringType,
 					},
 					"allowed_proc_mounts": schema.ListAttribute{
 						MarkdownDescription: "Allowed Proc Mounts. allowed list of proc mounts, empty list allows default proc mounts.",
-						Optional: true,
-						ElementType: types.StringType,
+						Optional:            true,
+						ElementType:         types.StringType,
 					},
 					"allowed_unsafe_sysctls": schema.ListAttribute{
 						MarkdownDescription: "Allowed Unsafe Sysctls. allowed list of unsafe sysctls, empty list allows none. supports prefix reg-ex",
-						Optional: true,
-						ElementType: types.StringType,
+						Optional:            true,
+						ElementType:         types.StringType,
 					},
 					"default_allow_privilege_escalation": schema.BoolAttribute{
 						MarkdownDescription: "Default Allow Privilege Escalation. Pod has permission for privilege escalation by default",
-						Optional: true,
+						Optional:            true,
 					},
 					"forbidden_sysctls": schema.ListAttribute{
 						MarkdownDescription: "Forbidden Sysctls. Forbidden list of sysctls, empty list forbids none. supports prefix reg-ex",
-						Optional: true,
-						ElementType: types.StringType,
+						Optional:            true,
+						ElementType:         types.StringType,
 					},
 					"host_ipc": schema.BoolAttribute{
 						MarkdownDescription: "Host IPC. Host IPC determines if the policy allows the use of host IPC in the pod spec.",
-						Optional: true,
+						Optional:            true,
 					},
 					"host_network": schema.BoolAttribute{
 						MarkdownDescription: "Host Network. Host Network determines if the policy allows the use of host network in the pod spec.",
-						Optional: true,
+						Optional:            true,
 					},
 					"host_pid": schema.BoolAttribute{
 						MarkdownDescription: "Host PID. Host PID determines if the policy allows the use of host PID in the pod spec.",
-						Optional: true,
+						Optional:            true,
 					},
 					"host_port_ranges": schema.StringAttribute{
 						MarkdownDescription: "Host Ports Ranges. Host port ranges determines which ports ranges are allowed to be exposed",
-						Optional: true,
+						Optional:            true,
 					},
 					"privileged": schema.BoolAttribute{
 						MarkdownDescription: "Privileged. Privileged determines if a pod can request to be run as privileged.",
-						Optional: true,
+						Optional:            true,
 					},
 					"read_only_root_filesystem": schema.BoolAttribute{
 						MarkdownDescription: "Read Only Root Filesystem. Containers can only run with read only root filesystem.",
-						Optional: true,
+						Optional:            true,
 					},
 					"volumes": schema.ListAttribute{
 						MarkdownDescription: "Volume. Allow List of volume plugins. Empty no volumes are allowed",
-						Optional: true,
-						ElementType: types.StringType,
+						Optional:            true,
+						ElementType:         types.StringType,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -308,8 +308,8 @@ func (r *K8SPodSecurityPolicyResource) Schema(ctx context.Context, req resource.
 						Attributes: map[string]schema.Attribute{
 							"capabilities": schema.ListAttribute{
 								MarkdownDescription: "Capability List. List of capabilities that docker container has.",
-								Optional: true,
-								ElementType: types.StringType,
+								Optional:            true,
+								ElementType:         types.StringType,
 							},
 						},
 					},
@@ -319,11 +319,11 @@ func (r *K8SPodSecurityPolicyResource) Schema(ctx context.Context, req resource.
 							Attributes: map[string]schema.Attribute{
 								"path_prefix": schema.StringAttribute{
 									MarkdownDescription: "Host Path Prefix. Host path prefix is the path prefix that the host volume must match. It does not support *.",
-									Optional: true,
+									Optional:            true,
 								},
 								"read_only": schema.BoolAttribute{
 									MarkdownDescription: "Read Only. This volume will be allowed to mount read only.",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 						},
@@ -333,8 +333,8 @@ func (r *K8SPodSecurityPolicyResource) Schema(ctx context.Context, req resource.
 						Attributes: map[string]schema.Attribute{
 							"capabilities": schema.ListAttribute{
 								MarkdownDescription: "Capability List. List of capabilities that docker container has.",
-								Optional: true,
-								ElementType: types.StringType,
+								Optional:            true,
+								ElementType:         types.StringType,
 							},
 						},
 					},
@@ -343,8 +343,8 @@ func (r *K8SPodSecurityPolicyResource) Schema(ctx context.Context, req resource.
 						Attributes: map[string]schema.Attribute{
 							"capabilities": schema.ListAttribute{
 								MarkdownDescription: "Capability List. List of capabilities that docker container has.",
-								Optional: true,
-								ElementType: types.StringType,
+								Optional:            true,
+								ElementType:         types.StringType,
 							},
 						},
 					},
@@ -353,7 +353,7 @@ func (r *K8SPodSecurityPolicyResource) Schema(ctx context.Context, req resource.
 						Attributes: map[string]schema.Attribute{
 							"rule": schema.StringAttribute{
 								MarkdownDescription: "Rule. Rule indicated how the FS group ID range is used",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -363,11 +363,11 @@ func (r *K8SPodSecurityPolicyResource) Schema(ctx context.Context, req resource.
 									Attributes: map[string]schema.Attribute{
 										"max_id": schema.Int64Attribute{
 											MarkdownDescription: "Ending ID. Ending(maximum) ID for for ID range",
-											Optional: true,
+											Optional:            true,
 										},
 										"min_id": schema.Int64Attribute{
 											MarkdownDescription: "Starting ID. Starting(minimum) ID for for ID range",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 								},
@@ -406,7 +406,7 @@ func (r *K8SPodSecurityPolicyResource) Schema(ctx context.Context, req resource.
 						Attributes: map[string]schema.Attribute{
 							"rule": schema.StringAttribute{
 								MarkdownDescription: "Rule. Rule indicated how the FS group ID range is used",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -416,11 +416,11 @@ func (r *K8SPodSecurityPolicyResource) Schema(ctx context.Context, req resource.
 									Attributes: map[string]schema.Attribute{
 										"max_id": schema.Int64Attribute{
 											MarkdownDescription: "Ending ID. Ending(maximum) ID for for ID range",
-											Optional: true,
+											Optional:            true,
 										},
 										"min_id": schema.Int64Attribute{
 											MarkdownDescription: "Starting ID. Starting(minimum) ID for for ID range",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 								},
@@ -432,7 +432,7 @@ func (r *K8SPodSecurityPolicyResource) Schema(ctx context.Context, req resource.
 						Attributes: map[string]schema.Attribute{
 							"rule": schema.StringAttribute{
 								MarkdownDescription: "Rule. Rule indicated how the FS group ID range is used",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -442,11 +442,11 @@ func (r *K8SPodSecurityPolicyResource) Schema(ctx context.Context, req resource.
 									Attributes: map[string]schema.Attribute{
 										"max_id": schema.Int64Attribute{
 											MarkdownDescription: "Ending ID. Ending(maximum) ID for for ID range",
-											Optional: true,
+											Optional:            true,
 										},
 										"min_id": schema.Int64Attribute{
 											MarkdownDescription: "Starting ID. Starting(minimum) ID for for ID range",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 								},
@@ -458,7 +458,7 @@ func (r *K8SPodSecurityPolicyResource) Schema(ctx context.Context, req resource.
 						Attributes: map[string]schema.Attribute{
 							"rule": schema.StringAttribute{
 								MarkdownDescription: "Rule. Rule indicated how the FS group ID range is used",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -468,11 +468,11 @@ func (r *K8SPodSecurityPolicyResource) Schema(ctx context.Context, req resource.
 									Attributes: map[string]schema.Attribute{
 										"max_id": schema.Int64Attribute{
 											MarkdownDescription: "Ending ID. Ending(maximum) ID for for ID range",
-											Optional: true,
+											Optional:            true,
 										},
 										"min_id": schema.Int64Attribute{
 											MarkdownDescription: "Starting ID. Starting(minimum) ID for for ID range",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 								},
@@ -480,7 +480,6 @@ func (r *K8SPodSecurityPolicyResource) Schema(ctx context.Context, req resource.
 						},
 					},
 				},
-
 			},
 		},
 	}
@@ -785,7 +784,6 @@ func (r *K8SPodSecurityPolicyResource) Create(ctx context.Context, req resource.
 		createReq.Spec["yaml"] = data.Yaml.ValueString()
 	}
 
-
 	apiResource, err := r.client.CreateK8SPodSecurityPolicy(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create K8SPodSecurityPolicy: %s", err))
@@ -797,7 +795,7 @@ func (r *K8SPodSecurityPolicyResource) Create(ctx context.Context, req resource.
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if blockData, ok := apiResource.Spec["psp_spec"].(map[string]interface{}); ok && (isImport || data.PspSpec != nil) {
 		data.PspSpec = &K8SPodSecurityPolicyPspSpecModel{
 			AllowPrivilegeEscalation: func() types.Bool {
@@ -1248,7 +1246,6 @@ func (r *K8SPodSecurityPolicyResource) Create(ctx context.Context, req resource.
 	} else {
 		data.Yaml = types.StringNull()
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -1338,9 +1335,9 @@ func (r *K8SPodSecurityPolicyResource) Read(ctx context.Context, req resource.Re
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if blockData, ok := apiResource.Spec["psp_spec"].(map[string]interface{}); ok && (isImport || data.PspSpec != nil) {
 		data.PspSpec = &K8SPodSecurityPolicyPspSpecModel{
@@ -1792,7 +1789,6 @@ func (r *K8SPodSecurityPolicyResource) Read(ctx context.Context, req resource.Re
 	} else {
 		data.Yaml = types.StringNull()
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -2007,7 +2003,6 @@ func (r *K8SPodSecurityPolicyResource) Update(ctx context.Context, req resource.
 	if !data.Yaml.IsNull() && !data.Yaml.IsUnknown() {
 		apiResource.Spec["yaml"] = data.Yaml.ValueString()
 	}
-
 
 	updated, err := r.client.UpdateK8SPodSecurityPolicy(ctx, apiResource)
 	if err != nil {

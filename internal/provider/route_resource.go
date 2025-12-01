@@ -51,257 +51,257 @@ type RouteEmptyModel struct {
 
 // RouteRoutesModel represents routes block
 type RouteRoutesModel struct {
-	DisableLocationAdd types.Bool `tfsdk:"disable_location_add"`
-	RequestCookiesToRemove types.List `tfsdk:"request_cookies_to_remove"`
-	RequestHeadersToRemove types.List `tfsdk:"request_headers_to_remove"`
-	ResponseCookiesToRemove types.List `tfsdk:"response_cookies_to_remove"`
-	ResponseHeadersToRemove types.List `tfsdk:"response_headers_to_remove"`
-	BotDefenseJavascriptInjection *RouteRoutesBotDefenseJavascriptInjectionModel `tfsdk:"bot_defense_javascript_injection"`
-	InheritedBotDefenseJavascriptInjection *RouteEmptyModel `tfsdk:"inherited_bot_defense_javascript_injection"`
-	InheritedWAFExclusion *RouteEmptyModel `tfsdk:"inherited_waf_exclusion"`
-	Match []RouteRoutesMatchModel `tfsdk:"match"`
-	RequestCookiesToAdd []RouteRoutesRequestCookiesToAddModel `tfsdk:"request_cookies_to_add"`
-	RequestHeadersToAdd []RouteRoutesRequestHeadersToAddModel `tfsdk:"request_headers_to_add"`
-	ResponseCookiesToAdd []RouteRoutesResponseCookiesToAddModel `tfsdk:"response_cookies_to_add"`
-	ResponseHeadersToAdd []RouteRoutesResponseHeadersToAddModel `tfsdk:"response_headers_to_add"`
-	RouteDestination *RouteRoutesRouteDestinationModel `tfsdk:"route_destination"`
-	RouteDirectResponse *RouteRoutesRouteDirectResponseModel `tfsdk:"route_direct_response"`
-	RouteRedirect *RouteRoutesRouteRedirectModel `tfsdk:"route_redirect"`
-	ServicePolicy *RouteRoutesServicePolicyModel `tfsdk:"service_policy"`
-	WAFExclusionPolicy *RouteRoutesWAFExclusionPolicyModel `tfsdk:"waf_exclusion_policy"`
-	WAFType *RouteRoutesWAFTypeModel `tfsdk:"waf_type"`
+	DisableLocationAdd                     types.Bool                                     `tfsdk:"disable_location_add"`
+	RequestCookiesToRemove                 types.List                                     `tfsdk:"request_cookies_to_remove"`
+	RequestHeadersToRemove                 types.List                                     `tfsdk:"request_headers_to_remove"`
+	ResponseCookiesToRemove                types.List                                     `tfsdk:"response_cookies_to_remove"`
+	ResponseHeadersToRemove                types.List                                     `tfsdk:"response_headers_to_remove"`
+	BotDefenseJavascriptInjection          *RouteRoutesBotDefenseJavascriptInjectionModel `tfsdk:"bot_defense_javascript_injection"`
+	InheritedBotDefenseJavascriptInjection *RouteEmptyModel                               `tfsdk:"inherited_bot_defense_javascript_injection"`
+	InheritedWAFExclusion                  *RouteEmptyModel                               `tfsdk:"inherited_waf_exclusion"`
+	Match                                  []RouteRoutesMatchModel                        `tfsdk:"match"`
+	RequestCookiesToAdd                    []RouteRoutesRequestCookiesToAddModel          `tfsdk:"request_cookies_to_add"`
+	RequestHeadersToAdd                    []RouteRoutesRequestHeadersToAddModel          `tfsdk:"request_headers_to_add"`
+	ResponseCookiesToAdd                   []RouteRoutesResponseCookiesToAddModel         `tfsdk:"response_cookies_to_add"`
+	ResponseHeadersToAdd                   []RouteRoutesResponseHeadersToAddModel         `tfsdk:"response_headers_to_add"`
+	RouteDestination                       *RouteRoutesRouteDestinationModel              `tfsdk:"route_destination"`
+	RouteDirectResponse                    *RouteRoutesRouteDirectResponseModel           `tfsdk:"route_direct_response"`
+	RouteRedirect                          *RouteRoutesRouteRedirectModel                 `tfsdk:"route_redirect"`
+	ServicePolicy                          *RouteRoutesServicePolicyModel                 `tfsdk:"service_policy"`
+	WAFExclusionPolicy                     *RouteRoutesWAFExclusionPolicyModel            `tfsdk:"waf_exclusion_policy"`
+	WAFType                                *RouteRoutesWAFTypeModel                       `tfsdk:"waf_type"`
 }
 
 // RouteRoutesBotDefenseJavascriptInjectionModel represents bot_defense_javascript_injection block
 type RouteRoutesBotDefenseJavascriptInjectionModel struct {
-	JavascriptLocation types.String `tfsdk:"javascript_location"`
-	JavascriptTags []RouteRoutesBotDefenseJavascriptInjectionJavascriptTagsModel `tfsdk:"javascript_tags"`
+	JavascriptLocation types.String                                                  `tfsdk:"javascript_location"`
+	JavascriptTags     []RouteRoutesBotDefenseJavascriptInjectionJavascriptTagsModel `tfsdk:"javascript_tags"`
 }
 
 // RouteRoutesBotDefenseJavascriptInjectionJavascriptTagsModel represents javascript_tags block
 type RouteRoutesBotDefenseJavascriptInjectionJavascriptTagsModel struct {
-	JavascriptURL types.String `tfsdk:"javascript_url"`
+	JavascriptURL types.String                                                               `tfsdk:"javascript_url"`
 	TagAttributes []RouteRoutesBotDefenseJavascriptInjectionJavascriptTagsTagAttributesModel `tfsdk:"tag_attributes"`
 }
 
 // RouteRoutesBotDefenseJavascriptInjectionJavascriptTagsTagAttributesModel represents tag_attributes block
 type RouteRoutesBotDefenseJavascriptInjectionJavascriptTagsTagAttributesModel struct {
 	JavascriptTag types.String `tfsdk:"javascript_tag"`
-	TagValue types.String `tfsdk:"tag_value"`
+	TagValue      types.String `tfsdk:"tag_value"`
 }
 
 // RouteRoutesMatchModel represents match block
 type RouteRoutesMatchModel struct {
-	HTTPMethod types.String `tfsdk:"http_method"`
-	Headers []RouteRoutesMatchHeadersModel `tfsdk:"headers"`
+	HTTPMethod   types.String                       `tfsdk:"http_method"`
+	Headers      []RouteRoutesMatchHeadersModel     `tfsdk:"headers"`
 	IncomingPort *RouteRoutesMatchIncomingPortModel `tfsdk:"incoming_port"`
-	Path *RouteRoutesMatchPathModel `tfsdk:"path"`
-	QueryParams []RouteRoutesMatchQueryParamsModel `tfsdk:"query_params"`
+	Path         *RouteRoutesMatchPathModel         `tfsdk:"path"`
+	QueryParams  []RouteRoutesMatchQueryParamsModel `tfsdk:"query_params"`
 }
 
 // RouteRoutesMatchHeadersModel represents headers block
 type RouteRoutesMatchHeadersModel struct {
-	Exact types.String `tfsdk:"exact"`
-	InvertMatch types.Bool `tfsdk:"invert_match"`
-	Name types.String `tfsdk:"name"`
-	Presence types.Bool `tfsdk:"presence"`
-	Regex types.String `tfsdk:"regex"`
+	Exact       types.String `tfsdk:"exact"`
+	InvertMatch types.Bool   `tfsdk:"invert_match"`
+	Name        types.String `tfsdk:"name"`
+	Presence    types.Bool   `tfsdk:"presence"`
+	Regex       types.String `tfsdk:"regex"`
 }
 
 // RouteRoutesMatchIncomingPortModel represents incoming_port block
 type RouteRoutesMatchIncomingPortModel struct {
-	Port types.Int64 `tfsdk:"port"`
-	PortRanges types.String `tfsdk:"port_ranges"`
+	Port        types.Int64      `tfsdk:"port"`
+	PortRanges  types.String     `tfsdk:"port_ranges"`
 	NoPortMatch *RouteEmptyModel `tfsdk:"no_port_match"`
 }
 
 // RouteRoutesMatchPathModel represents path block
 type RouteRoutesMatchPathModel struct {
-	Path types.String `tfsdk:"path"`
+	Path   types.String `tfsdk:"path"`
 	Prefix types.String `tfsdk:"prefix"`
-	Regex types.String `tfsdk:"regex"`
+	Regex  types.String `tfsdk:"regex"`
 }
 
 // RouteRoutesMatchQueryParamsModel represents query_params block
 type RouteRoutesMatchQueryParamsModel struct {
 	Exact types.String `tfsdk:"exact"`
-	Key types.String `tfsdk:"key"`
+	Key   types.String `tfsdk:"key"`
 	Regex types.String `tfsdk:"regex"`
 }
 
 // RouteRoutesRequestCookiesToAddModel represents request_cookies_to_add block
 type RouteRoutesRequestCookiesToAddModel struct {
-	Name types.String `tfsdk:"name"`
-	Overwrite types.Bool `tfsdk:"overwrite"`
-	Value types.String `tfsdk:"value"`
+	Name        types.String                                    `tfsdk:"name"`
+	Overwrite   types.Bool                                      `tfsdk:"overwrite"`
+	Value       types.String                                    `tfsdk:"value"`
 	SecretValue *RouteRoutesRequestCookiesToAddSecretValueModel `tfsdk:"secret_value"`
 }
 
 // RouteRoutesRequestCookiesToAddSecretValueModel represents secret_value block
 type RouteRoutesRequestCookiesToAddSecretValueModel struct {
 	BlindfoldSecretInfo *RouteRoutesRequestCookiesToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *RouteRoutesRequestCookiesToAddSecretValueClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *RouteRoutesRequestCookiesToAddSecretValueClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // RouteRoutesRequestCookiesToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
 type RouteRoutesRequestCookiesToAddSecretValueBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // RouteRoutesRequestCookiesToAddSecretValueClearSecretInfoModel represents clear_secret_info block
 type RouteRoutesRequestCookiesToAddSecretValueClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // RouteRoutesRequestHeadersToAddModel represents request_headers_to_add block
 type RouteRoutesRequestHeadersToAddModel struct {
-	Append types.Bool `tfsdk:"append"`
-	Name types.String `tfsdk:"name"`
-	Value types.String `tfsdk:"value"`
+	Append      types.Bool                                      `tfsdk:"append"`
+	Name        types.String                                    `tfsdk:"name"`
+	Value       types.String                                    `tfsdk:"value"`
 	SecretValue *RouteRoutesRequestHeadersToAddSecretValueModel `tfsdk:"secret_value"`
 }
 
 // RouteRoutesRequestHeadersToAddSecretValueModel represents secret_value block
 type RouteRoutesRequestHeadersToAddSecretValueModel struct {
 	BlindfoldSecretInfo *RouteRoutesRequestHeadersToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *RouteRoutesRequestHeadersToAddSecretValueClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *RouteRoutesRequestHeadersToAddSecretValueClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // RouteRoutesRequestHeadersToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
 type RouteRoutesRequestHeadersToAddSecretValueBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // RouteRoutesRequestHeadersToAddSecretValueClearSecretInfoModel represents clear_secret_info block
 type RouteRoutesRequestHeadersToAddSecretValueClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // RouteRoutesResponseCookiesToAddModel represents response_cookies_to_add block
 type RouteRoutesResponseCookiesToAddModel struct {
-	AddDomain types.String `tfsdk:"add_domain"`
-	AddExpiry types.String `tfsdk:"add_expiry"`
-	AddPath types.String `tfsdk:"add_path"`
-	MaxAgeValue types.Int64 `tfsdk:"max_age_value"`
-	Name types.String `tfsdk:"name"`
-	Overwrite types.Bool `tfsdk:"overwrite"`
-	Value types.String `tfsdk:"value"`
-	AddHttponly *RouteEmptyModel `tfsdk:"add_httponly"`
-	AddPartitioned *RouteEmptyModel `tfsdk:"add_partitioned"`
-	AddSecure *RouteEmptyModel `tfsdk:"add_secure"`
-	IgnoreDomain *RouteEmptyModel `tfsdk:"ignore_domain"`
-	IgnoreExpiry *RouteEmptyModel `tfsdk:"ignore_expiry"`
-	IgnoreHttponly *RouteEmptyModel `tfsdk:"ignore_httponly"`
-	IgnoreMaxAge *RouteEmptyModel `tfsdk:"ignore_max_age"`
-	IgnorePartitioned *RouteEmptyModel `tfsdk:"ignore_partitioned"`
-	IgnorePath *RouteEmptyModel `tfsdk:"ignore_path"`
-	IgnoreSamesite *RouteEmptyModel `tfsdk:"ignore_samesite"`
-	IgnoreSecure *RouteEmptyModel `tfsdk:"ignore_secure"`
-	IgnoreValue *RouteEmptyModel `tfsdk:"ignore_value"`
-	SamesiteLax *RouteEmptyModel `tfsdk:"samesite_lax"`
-	SamesiteNone *RouteEmptyModel `tfsdk:"samesite_none"`
-	SamesiteStrict *RouteEmptyModel `tfsdk:"samesite_strict"`
-	SecretValue *RouteRoutesResponseCookiesToAddSecretValueModel `tfsdk:"secret_value"`
+	AddDomain         types.String                                     `tfsdk:"add_domain"`
+	AddExpiry         types.String                                     `tfsdk:"add_expiry"`
+	AddPath           types.String                                     `tfsdk:"add_path"`
+	MaxAgeValue       types.Int64                                      `tfsdk:"max_age_value"`
+	Name              types.String                                     `tfsdk:"name"`
+	Overwrite         types.Bool                                       `tfsdk:"overwrite"`
+	Value             types.String                                     `tfsdk:"value"`
+	AddHttponly       *RouteEmptyModel                                 `tfsdk:"add_httponly"`
+	AddPartitioned    *RouteEmptyModel                                 `tfsdk:"add_partitioned"`
+	AddSecure         *RouteEmptyModel                                 `tfsdk:"add_secure"`
+	IgnoreDomain      *RouteEmptyModel                                 `tfsdk:"ignore_domain"`
+	IgnoreExpiry      *RouteEmptyModel                                 `tfsdk:"ignore_expiry"`
+	IgnoreHttponly    *RouteEmptyModel                                 `tfsdk:"ignore_httponly"`
+	IgnoreMaxAge      *RouteEmptyModel                                 `tfsdk:"ignore_max_age"`
+	IgnorePartitioned *RouteEmptyModel                                 `tfsdk:"ignore_partitioned"`
+	IgnorePath        *RouteEmptyModel                                 `tfsdk:"ignore_path"`
+	IgnoreSamesite    *RouteEmptyModel                                 `tfsdk:"ignore_samesite"`
+	IgnoreSecure      *RouteEmptyModel                                 `tfsdk:"ignore_secure"`
+	IgnoreValue       *RouteEmptyModel                                 `tfsdk:"ignore_value"`
+	SamesiteLax       *RouteEmptyModel                                 `tfsdk:"samesite_lax"`
+	SamesiteNone      *RouteEmptyModel                                 `tfsdk:"samesite_none"`
+	SamesiteStrict    *RouteEmptyModel                                 `tfsdk:"samesite_strict"`
+	SecretValue       *RouteRoutesResponseCookiesToAddSecretValueModel `tfsdk:"secret_value"`
 }
 
 // RouteRoutesResponseCookiesToAddSecretValueModel represents secret_value block
 type RouteRoutesResponseCookiesToAddSecretValueModel struct {
 	BlindfoldSecretInfo *RouteRoutesResponseCookiesToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *RouteRoutesResponseCookiesToAddSecretValueClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *RouteRoutesResponseCookiesToAddSecretValueClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // RouteRoutesResponseCookiesToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
 type RouteRoutesResponseCookiesToAddSecretValueBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // RouteRoutesResponseCookiesToAddSecretValueClearSecretInfoModel represents clear_secret_info block
 type RouteRoutesResponseCookiesToAddSecretValueClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // RouteRoutesResponseHeadersToAddModel represents response_headers_to_add block
 type RouteRoutesResponseHeadersToAddModel struct {
-	Append types.Bool `tfsdk:"append"`
-	Name types.String `tfsdk:"name"`
-	Value types.String `tfsdk:"value"`
+	Append      types.Bool                                       `tfsdk:"append"`
+	Name        types.String                                     `tfsdk:"name"`
+	Value       types.String                                     `tfsdk:"value"`
 	SecretValue *RouteRoutesResponseHeadersToAddSecretValueModel `tfsdk:"secret_value"`
 }
 
 // RouteRoutesResponseHeadersToAddSecretValueModel represents secret_value block
 type RouteRoutesResponseHeadersToAddSecretValueModel struct {
 	BlindfoldSecretInfo *RouteRoutesResponseHeadersToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *RouteRoutesResponseHeadersToAddSecretValueClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *RouteRoutesResponseHeadersToAddSecretValueClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // RouteRoutesResponseHeadersToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
 type RouteRoutesResponseHeadersToAddSecretValueBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // RouteRoutesResponseHeadersToAddSecretValueClearSecretInfoModel represents clear_secret_info block
 type RouteRoutesResponseHeadersToAddSecretValueClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // RouteRoutesRouteDestinationModel represents route_destination block
 type RouteRoutesRouteDestinationModel struct {
-	AutoHostRewrite types.Bool `tfsdk:"auto_host_rewrite"`
-	HostRewrite types.String `tfsdk:"host_rewrite"`
-	PrefixRewrite types.String `tfsdk:"prefix_rewrite"`
-	Priority types.String `tfsdk:"priority"`
-	Timeout types.Int64 `tfsdk:"timeout"`
-	BufferPolicy *RouteRoutesRouteDestinationBufferPolicyModel `tfsdk:"buffer_policy"`
-	CorsPolicy *RouteRoutesRouteDestinationCorsPolicyModel `tfsdk:"cors_policy"`
-	CsrfPolicy *RouteRoutesRouteDestinationCsrfPolicyModel `tfsdk:"csrf_policy"`
-	Destinations []RouteRoutesRouteDestinationDestinationsModel `tfsdk:"destinations"`
-	DoNotRetractCluster *RouteEmptyModel `tfsdk:"do_not_retract_cluster"`
-	EndpointSubsets *RouteEmptyModel `tfsdk:"endpoint_subsets"`
-	HashPolicy []RouteRoutesRouteDestinationHashPolicyModel `tfsdk:"hash_policy"`
-	MirrorPolicy *RouteRoutesRouteDestinationMirrorPolicyModel `tfsdk:"mirror_policy"`
-	QueryParams *RouteRoutesRouteDestinationQueryParamsModel `tfsdk:"query_params"`
-	RegexRewrite *RouteRoutesRouteDestinationRegexRewriteModel `tfsdk:"regex_rewrite"`
-	RetractCluster *RouteEmptyModel `tfsdk:"retract_cluster"`
-	RetryPolicy *RouteRoutesRouteDestinationRetryPolicyModel `tfsdk:"retry_policy"`
-	SpdyConfig *RouteRoutesRouteDestinationSpdyConfigModel `tfsdk:"spdy_config"`
-	WebSocketConfig *RouteRoutesRouteDestinationWebSocketConfigModel `tfsdk:"web_socket_config"`
+	AutoHostRewrite     types.Bool                                       `tfsdk:"auto_host_rewrite"`
+	HostRewrite         types.String                                     `tfsdk:"host_rewrite"`
+	PrefixRewrite       types.String                                     `tfsdk:"prefix_rewrite"`
+	Priority            types.String                                     `tfsdk:"priority"`
+	Timeout             types.Int64                                      `tfsdk:"timeout"`
+	BufferPolicy        *RouteRoutesRouteDestinationBufferPolicyModel    `tfsdk:"buffer_policy"`
+	CorsPolicy          *RouteRoutesRouteDestinationCorsPolicyModel      `tfsdk:"cors_policy"`
+	CsrfPolicy          *RouteRoutesRouteDestinationCsrfPolicyModel      `tfsdk:"csrf_policy"`
+	Destinations        []RouteRoutesRouteDestinationDestinationsModel   `tfsdk:"destinations"`
+	DoNotRetractCluster *RouteEmptyModel                                 `tfsdk:"do_not_retract_cluster"`
+	EndpointSubsets     *RouteEmptyModel                                 `tfsdk:"endpoint_subsets"`
+	HashPolicy          []RouteRoutesRouteDestinationHashPolicyModel     `tfsdk:"hash_policy"`
+	MirrorPolicy        *RouteRoutesRouteDestinationMirrorPolicyModel    `tfsdk:"mirror_policy"`
+	QueryParams         *RouteRoutesRouteDestinationQueryParamsModel     `tfsdk:"query_params"`
+	RegexRewrite        *RouteRoutesRouteDestinationRegexRewriteModel    `tfsdk:"regex_rewrite"`
+	RetractCluster      *RouteEmptyModel                                 `tfsdk:"retract_cluster"`
+	RetryPolicy         *RouteRoutesRouteDestinationRetryPolicyModel     `tfsdk:"retry_policy"`
+	SpdyConfig          *RouteRoutesRouteDestinationSpdyConfigModel      `tfsdk:"spdy_config"`
+	WebSocketConfig     *RouteRoutesRouteDestinationWebSocketConfigModel `tfsdk:"web_socket_config"`
 }
 
 // RouteRoutesRouteDestinationBufferPolicyModel represents buffer_policy block
 type RouteRoutesRouteDestinationBufferPolicyModel struct {
-	Disabled types.Bool `tfsdk:"disabled"`
+	Disabled        types.Bool  `tfsdk:"disabled"`
 	MaxRequestBytes types.Int64 `tfsdk:"max_request_bytes"`
 }
 
 // RouteRoutesRouteDestinationCorsPolicyModel represents cors_policy block
 type RouteRoutesRouteDestinationCorsPolicyModel struct {
-	AllowCredentials types.Bool `tfsdk:"allow_credentials"`
-	AllowHeaders types.String `tfsdk:"allow_headers"`
-	AllowMethods types.String `tfsdk:"allow_methods"`
-	AllowOrigin types.List `tfsdk:"allow_origin"`
-	AllowOriginRegex types.List `tfsdk:"allow_origin_regex"`
-	Disabled types.Bool `tfsdk:"disabled"`
-	ExposeHeaders types.String `tfsdk:"expose_headers"`
-	MaximumAge types.Int64 `tfsdk:"maximum_age"`
+	AllowCredentials types.Bool   `tfsdk:"allow_credentials"`
+	AllowHeaders     types.String `tfsdk:"allow_headers"`
+	AllowMethods     types.String `tfsdk:"allow_methods"`
+	AllowOrigin      types.List   `tfsdk:"allow_origin"`
+	AllowOriginRegex types.List   `tfsdk:"allow_origin_regex"`
+	Disabled         types.Bool   `tfsdk:"disabled"`
+	ExposeHeaders    types.String `tfsdk:"expose_headers"`
+	MaximumAge       types.Int64  `tfsdk:"maximum_age"`
 }
 
 // RouteRoutesRouteDestinationCsrfPolicyModel represents csrf_policy block
 type RouteRoutesRouteDestinationCsrfPolicyModel struct {
-	AllLoadBalancerDomains *RouteEmptyModel `tfsdk:"all_load_balancer_domains"`
-	CustomDomainList *RouteRoutesRouteDestinationCsrfPolicyCustomDomainListModel `tfsdk:"custom_domain_list"`
-	Disabled *RouteEmptyModel `tfsdk:"disabled"`
+	AllLoadBalancerDomains *RouteEmptyModel                                            `tfsdk:"all_load_balancer_domains"`
+	CustomDomainList       *RouteRoutesRouteDestinationCsrfPolicyCustomDomainListModel `tfsdk:"custom_domain_list"`
+	Disabled               *RouteEmptyModel                                            `tfsdk:"disabled"`
 }
 
 // RouteRoutesRouteDestinationCsrfPolicyCustomDomainListModel represents custom_domain_list block
@@ -311,91 +311,91 @@ type RouteRoutesRouteDestinationCsrfPolicyCustomDomainListModel struct {
 
 // RouteRoutesRouteDestinationDestinationsModel represents destinations block
 type RouteRoutesRouteDestinationDestinationsModel struct {
-	Priority types.Int64 `tfsdk:"priority"`
-	Weight types.Int64 `tfsdk:"weight"`
-	Cluster []RouteRoutesRouteDestinationDestinationsClusterModel `tfsdk:"cluster"`
-	EndpointSubsets *RouteEmptyModel `tfsdk:"endpoint_subsets"`
+	Priority        types.Int64                                           `tfsdk:"priority"`
+	Weight          types.Int64                                           `tfsdk:"weight"`
+	Cluster         []RouteRoutesRouteDestinationDestinationsClusterModel `tfsdk:"cluster"`
+	EndpointSubsets *RouteEmptyModel                                      `tfsdk:"endpoint_subsets"`
 }
 
 // RouteRoutesRouteDestinationDestinationsClusterModel represents cluster block
 type RouteRoutesRouteDestinationDestinationsClusterModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // RouteRoutesRouteDestinationHashPolicyModel represents hash_policy block
 type RouteRoutesRouteDestinationHashPolicyModel struct {
-	HeaderName types.String `tfsdk:"header_name"`
-	SourceIP types.Bool `tfsdk:"source_ip"`
-	Terminal types.Bool `tfsdk:"terminal"`
-	Cookie *RouteRoutesRouteDestinationHashPolicyCookieModel `tfsdk:"cookie"`
+	HeaderName types.String                                      `tfsdk:"header_name"`
+	SourceIP   types.Bool                                        `tfsdk:"source_ip"`
+	Terminal   types.Bool                                        `tfsdk:"terminal"`
+	Cookie     *RouteRoutesRouteDestinationHashPolicyCookieModel `tfsdk:"cookie"`
 }
 
 // RouteRoutesRouteDestinationHashPolicyCookieModel represents cookie block
 type RouteRoutesRouteDestinationHashPolicyCookieModel struct {
-	Name types.String `tfsdk:"name"`
-	Path types.String `tfsdk:"path"`
-	Ttl types.Int64 `tfsdk:"ttl"`
-	AddHttponly *RouteEmptyModel `tfsdk:"add_httponly"`
-	AddSecure *RouteEmptyModel `tfsdk:"add_secure"`
+	Name           types.String     `tfsdk:"name"`
+	Path           types.String     `tfsdk:"path"`
+	Ttl            types.Int64      `tfsdk:"ttl"`
+	AddHttponly    *RouteEmptyModel `tfsdk:"add_httponly"`
+	AddSecure      *RouteEmptyModel `tfsdk:"add_secure"`
 	IgnoreHttponly *RouteEmptyModel `tfsdk:"ignore_httponly"`
 	IgnoreSamesite *RouteEmptyModel `tfsdk:"ignore_samesite"`
-	IgnoreSecure *RouteEmptyModel `tfsdk:"ignore_secure"`
-	SamesiteLax *RouteEmptyModel `tfsdk:"samesite_lax"`
-	SamesiteNone *RouteEmptyModel `tfsdk:"samesite_none"`
+	IgnoreSecure   *RouteEmptyModel `tfsdk:"ignore_secure"`
+	SamesiteLax    *RouteEmptyModel `tfsdk:"samesite_lax"`
+	SamesiteNone   *RouteEmptyModel `tfsdk:"samesite_none"`
 	SamesiteStrict *RouteEmptyModel `tfsdk:"samesite_strict"`
 }
 
 // RouteRoutesRouteDestinationMirrorPolicyModel represents mirror_policy block
 type RouteRoutesRouteDestinationMirrorPolicyModel struct {
 	Cluster []RouteRoutesRouteDestinationMirrorPolicyClusterModel `tfsdk:"cluster"`
-	Percent *RouteRoutesRouteDestinationMirrorPolicyPercentModel `tfsdk:"percent"`
+	Percent *RouteRoutesRouteDestinationMirrorPolicyPercentModel  `tfsdk:"percent"`
 }
 
 // RouteRoutesRouteDestinationMirrorPolicyClusterModel represents cluster block
 type RouteRoutesRouteDestinationMirrorPolicyClusterModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // RouteRoutesRouteDestinationMirrorPolicyPercentModel represents percent block
 type RouteRoutesRouteDestinationMirrorPolicyPercentModel struct {
 	Denominator types.String `tfsdk:"denominator"`
-	Numerator types.Int64 `tfsdk:"numerator"`
+	Numerator   types.Int64  `tfsdk:"numerator"`
 }
 
 // RouteRoutesRouteDestinationQueryParamsModel represents query_params block
 type RouteRoutesRouteDestinationQueryParamsModel struct {
-	ReplaceParams types.String `tfsdk:"replace_params"`
+	ReplaceParams   types.String     `tfsdk:"replace_params"`
 	RemoveAllParams *RouteEmptyModel `tfsdk:"remove_all_params"`
 	RetainAllParams *RouteEmptyModel `tfsdk:"retain_all_params"`
 }
 
 // RouteRoutesRouteDestinationRegexRewriteModel represents regex_rewrite block
 type RouteRoutesRouteDestinationRegexRewriteModel struct {
-	Pattern types.String `tfsdk:"pattern"`
+	Pattern      types.String `tfsdk:"pattern"`
 	Substitution types.String `tfsdk:"substitution"`
 }
 
 // RouteRoutesRouteDestinationRetryPolicyModel represents retry_policy block
 type RouteRoutesRouteDestinationRetryPolicyModel struct {
-	NumRetries types.Int64 `tfsdk:"num_retries"`
-	PerTryTimeout types.Int64 `tfsdk:"per_try_timeout"`
-	RetriableStatusCodes types.List `tfsdk:"retriable_status_codes"`
-	RetryCondition types.List `tfsdk:"retry_condition"`
-	BackOff *RouteRoutesRouteDestinationRetryPolicyBackOffModel `tfsdk:"back_off"`
+	NumRetries           types.Int64                                         `tfsdk:"num_retries"`
+	PerTryTimeout        types.Int64                                         `tfsdk:"per_try_timeout"`
+	RetriableStatusCodes types.List                                          `tfsdk:"retriable_status_codes"`
+	RetryCondition       types.List                                          `tfsdk:"retry_condition"`
+	BackOff              *RouteRoutesRouteDestinationRetryPolicyBackOffModel `tfsdk:"back_off"`
 }
 
 // RouteRoutesRouteDestinationRetryPolicyBackOffModel represents back_off block
 type RouteRoutesRouteDestinationRetryPolicyBackOffModel struct {
 	BaseInterval types.Int64 `tfsdk:"base_interval"`
-	MaxInterval types.Int64 `tfsdk:"max_interval"`
+	MaxInterval  types.Int64 `tfsdk:"max_interval"`
 }
 
 // RouteRoutesRouteDestinationSpdyConfigModel represents spdy_config block
@@ -411,17 +411,17 @@ type RouteRoutesRouteDestinationWebSocketConfigModel struct {
 // RouteRoutesRouteDirectResponseModel represents route_direct_response block
 type RouteRoutesRouteDirectResponseModel struct {
 	ResponseBodyEncoded types.String `tfsdk:"response_body_encoded"`
-	ResponseCode types.Int64 `tfsdk:"response_code"`
+	ResponseCode        types.Int64  `tfsdk:"response_code"`
 }
 
 // RouteRoutesRouteRedirectModel represents route_redirect block
 type RouteRoutesRouteRedirectModel struct {
-	HostRedirect types.String `tfsdk:"host_redirect"`
-	PathRedirect types.String `tfsdk:"path_redirect"`
-	PrefixRewrite types.String `tfsdk:"prefix_rewrite"`
-	ProtoRedirect types.String `tfsdk:"proto_redirect"`
-	ReplaceParams types.String `tfsdk:"replace_params"`
-	ResponseCode types.Int64 `tfsdk:"response_code"`
+	HostRedirect    types.String     `tfsdk:"host_redirect"`
+	PathRedirect    types.String     `tfsdk:"path_redirect"`
+	PrefixRewrite   types.String     `tfsdk:"prefix_rewrite"`
+	ProtoRedirect   types.String     `tfsdk:"proto_redirect"`
+	ReplaceParams   types.String     `tfsdk:"replace_params"`
+	ResponseCode    types.Int64      `tfsdk:"response_code"`
 	RemoveAllParams *RouteEmptyModel `tfsdk:"remove_all_params"`
 	RetainAllParams *RouteEmptyModel `tfsdk:"retain_all_params"`
 }
@@ -433,16 +433,16 @@ type RouteRoutesServicePolicyModel struct {
 
 // RouteRoutesWAFExclusionPolicyModel represents waf_exclusion_policy block
 type RouteRoutesWAFExclusionPolicyModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // RouteRoutesWAFTypeModel represents waf_type block
 type RouteRoutesWAFTypeModel struct {
 	AppFirewall *RouteRoutesWAFTypeAppFirewallModel `tfsdk:"app_firewall"`
-	DisableWAF *RouteEmptyModel `tfsdk:"disable_waf"`
-	InheritWAF *RouteEmptyModel `tfsdk:"inherit_waf"`
+	DisableWAF  *RouteEmptyModel                    `tfsdk:"disable_waf"`
+	InheritWAF  *RouteEmptyModel                    `tfsdk:"inherit_waf"`
 }
 
 // RouteRoutesWAFTypeAppFirewallModel represents app_firewall block
@@ -452,23 +452,23 @@ type RouteRoutesWAFTypeAppFirewallModel struct {
 
 // RouteRoutesWAFTypeAppFirewallAppFirewallModel represents app_firewall block
 type RouteRoutesWAFTypeAppFirewallAppFirewallModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 type RouteResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	Routes []RouteRoutesModel `tfsdk:"routes"`
+	Name        types.String       `tfsdk:"name"`
+	Namespace   types.String       `tfsdk:"namespace"`
+	Annotations types.Map          `tfsdk:"annotations"`
+	Description types.String       `tfsdk:"description"`
+	Disable     types.Bool         `tfsdk:"disable"`
+	Labels      types.Map          `tfsdk:"labels"`
+	ID          types.String       `tfsdk:"id"`
+	Timeouts    timeouts.Value     `tfsdk:"timeouts"`
+	Routes      []RouteRoutesModel `tfsdk:"routes"`
 }
 
 func (r *RouteResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -482,7 +482,7 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Route. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -492,7 +492,7 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the Route will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -502,25 +502,25 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -539,27 +539,27 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 					Attributes: map[string]schema.Attribute{
 						"disable_location_add": schema.BoolAttribute{
 							MarkdownDescription: "Disable Location Addition. disables append of x-volterra-location = <re-site-name> at route level, if it is configured at virtual-host level. This configuration is ignored on CE sites.",
-							Optional: true,
+							Optional:            true,
 						},
 						"request_cookies_to_remove": schema.ListAttribute{
 							MarkdownDescription: "Remove Cookies from Cookie Header. List of keys of Cookies to be removed from the HTTP request being sent towards upstream.",
-							Optional: true,
-							ElementType: types.StringType,
+							Optional:            true,
+							ElementType:         types.StringType,
 						},
 						"request_headers_to_remove": schema.ListAttribute{
 							MarkdownDescription: "Request Headers to Remove. List of keys of Headers to be removed from the HTTP request being sent towards upstream.",
-							Optional: true,
-							ElementType: types.StringType,
+							Optional:            true,
+							ElementType:         types.StringType,
 						},
 						"response_cookies_to_remove": schema.ListAttribute{
 							MarkdownDescription: "Remove Cookies from Set-Cookie Headers. List of name of Cookies to be removed from the HTTP response being sent towards downstream. Entire set-cookie header will be removed",
-							Optional: true,
-							ElementType: types.StringType,
+							Optional:            true,
+							ElementType:         types.StringType,
 						},
 						"response_headers_to_remove": schema.ListAttribute{
 							MarkdownDescription: "Response Headers to Remove. List of keys of Headers to be removed from the HTTP response being sent towards downstream.",
-							Optional: true,
-							ElementType: types.StringType,
+							Optional:            true,
+							ElementType:         types.StringType,
 						},
 					},
 					Blocks: map[string]schema.Block{
@@ -568,7 +568,7 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 							Attributes: map[string]schema.Attribute{
 								"javascript_location": schema.StringAttribute{
 									MarkdownDescription: "JavaScript Location. All inside networks. Insert JavaScript after <head> tag Insert JavaScript after </title> tag. Insert JavaScript before first <script> tag. Possible values are `AFTER_HEAD`, `AFTER_TITLE_END`, `BEFORE_SCRIPT`. Defaults to `AFTER_HEAD`.",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
@@ -578,7 +578,7 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 										Attributes: map[string]schema.Attribute{
 											"javascript_url": schema.StringAttribute{
 												MarkdownDescription: "URL. Please enter the full URL (include domain and path), or relative path.",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 										Blocks: map[string]schema.Block{
@@ -588,11 +588,11 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 													Attributes: map[string]schema.Attribute{
 														"javascript_tag": schema.StringAttribute{
 															MarkdownDescription: "Tag Attribute Name. Select from one of the predefined tag attributes. Possible values are `JS_ATTR_ID`, `JS_ATTR_CID`, `JS_ATTR_CN`, `JS_ATTR_API_DOMAIN`, `JS_ATTR_API_URL`, `JS_ATTR_API_PATH`, `JS_ATTR_ASYNC`, `JS_ATTR_DEFER`. Defaults to `JS_ATTR_ID`.",
-															Optional: true,
+															Optional:            true,
 														},
 														"tag_value": schema.StringAttribute{
 															MarkdownDescription: "Value. Add the tag attribute value.",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -614,7 +614,7 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 								Attributes: map[string]schema.Attribute{
 									"http_method": schema.StringAttribute{
 										MarkdownDescription: "HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 								Blocks: map[string]schema.Block{
@@ -624,23 +624,23 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 											Attributes: map[string]schema.Attribute{
 												"exact": schema.StringAttribute{
 													MarkdownDescription: "Exact. Header value to match exactly",
-													Optional: true,
+													Optional:            true,
 												},
 												"invert_match": schema.BoolAttribute{
 													MarkdownDescription: "NOT of match. Invert the result of the match to detect missing header or non-matching value",
-													Optional: true,
+													Optional:            true,
 												},
 												"name": schema.StringAttribute{
 													MarkdownDescription: "Name. Name of the header",
-													Optional: true,
+													Optional:            true,
 												},
 												"presence": schema.BoolAttribute{
 													MarkdownDescription: "Presence. If true, check for presence of header",
-													Optional: true,
+													Optional:            true,
 												},
 												"regex": schema.StringAttribute{
 													MarkdownDescription: "Regex. Regex match of the header value in re2 format",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 										},
@@ -650,11 +650,11 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 										Attributes: map[string]schema.Attribute{
 											"port": schema.Int64Attribute{
 												MarkdownDescription: "Port. Exact Port to match",
-												Optional: true,
+												Optional:            true,
 											},
 											"port_ranges": schema.StringAttribute{
 												MarkdownDescription: "Port range. Port range to match",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 										Blocks: map[string]schema.Block{
@@ -668,15 +668,15 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 										Attributes: map[string]schema.Attribute{
 											"path": schema.StringAttribute{
 												MarkdownDescription: "Exact. Exact path value to match",
-												Optional: true,
+												Optional:            true,
 											},
 											"prefix": schema.StringAttribute{
 												MarkdownDescription: "Prefix. Path prefix to match (e.g. the value / will match on all paths)",
-												Optional: true,
+												Optional:            true,
 											},
 											"regex": schema.StringAttribute{
 												MarkdownDescription: "Regex. Regular expression of path match (e.g. the value .* will match on all paths)",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -686,15 +686,15 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 											Attributes: map[string]schema.Attribute{
 												"exact": schema.StringAttribute{
 													MarkdownDescription: "Exact. Exact match value for the query parameter key",
-													Optional: true,
+													Optional:            true,
 												},
 												"key": schema.StringAttribute{
 													MarkdownDescription: "Key. Query parameter key In the above example, assignee_username is the key",
-													Optional: true,
+													Optional:            true,
 												},
 												"regex": schema.StringAttribute{
 													MarkdownDescription: "Regex. Regex match value for the query parameter key",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 										},
@@ -708,37 +708,36 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Name. Name of the cookie in Cookie header.",
-										Optional: true,
+										Optional:            true,
 									},
 									"overwrite": schema.BoolAttribute{
 										MarkdownDescription: "Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values.  not overwrite. Defaults to `do`.",
-										Optional: true,
+										Optional:            true,
 									},
 									"value": schema.StringAttribute{
 										MarkdownDescription: "Value. Value of the Cookie header.",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 								Blocks: map[string]schema.Block{
 									"secret_value": schema.SingleNestedBlock{
 										MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-										Attributes: map[string]schema.Attribute{
-										},
+										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"blindfold_secret_info": schema.SingleNestedBlock{
 												MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 												Attributes: map[string]schema.Attribute{
 													"decryption_provider": schema.StringAttribute{
 														MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-														Optional: true,
+														Optional:            true,
 													},
 													"location": schema.StringAttribute{
 														MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-														Optional: true,
+														Optional:            true,
 													},
 													"store_provider": schema.StringAttribute{
 														MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 											},
@@ -747,11 +746,11 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 												Attributes: map[string]schema.Attribute{
 													"provider_ref": schema.StringAttribute{
 														MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-														Optional: true,
+														Optional:            true,
 													},
 													"url": schema.StringAttribute{
 														MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 											},
@@ -766,37 +765,36 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 								Attributes: map[string]schema.Attribute{
 									"append": schema.BoolAttribute{
 										MarkdownDescription: "Append. Should the value be appended? If true, the value is appended to existing values.  not append. Defaults to `do`.",
-										Optional: true,
+										Optional:            true,
 									},
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Name. Name of the HTTP header.",
-										Optional: true,
+										Optional:            true,
 									},
 									"value": schema.StringAttribute{
 										MarkdownDescription: "Value. Value of the HTTP header.",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 								Blocks: map[string]schema.Block{
 									"secret_value": schema.SingleNestedBlock{
 										MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-										Attributes: map[string]schema.Attribute{
-										},
+										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"blindfold_secret_info": schema.SingleNestedBlock{
 												MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 												Attributes: map[string]schema.Attribute{
 													"decryption_provider": schema.StringAttribute{
 														MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-														Optional: true,
+														Optional:            true,
 													},
 													"location": schema.StringAttribute{
 														MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-														Optional: true,
+														Optional:            true,
 													},
 													"store_provider": schema.StringAttribute{
 														MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 											},
@@ -805,11 +803,11 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 												Attributes: map[string]schema.Attribute{
 													"provider_ref": schema.StringAttribute{
 														MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-														Optional: true,
+														Optional:            true,
 													},
 													"url": schema.StringAttribute{
 														MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 											},
@@ -824,31 +822,31 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 								Attributes: map[string]schema.Attribute{
 									"add_domain": schema.StringAttribute{
 										MarkdownDescription: "Add Domain. Add domain attribute",
-										Optional: true,
+										Optional:            true,
 									},
 									"add_expiry": schema.StringAttribute{
 										MarkdownDescription: "Add expiry. Add expiry attribute",
-										Optional: true,
+										Optional:            true,
 									},
 									"add_path": schema.StringAttribute{
 										MarkdownDescription: "Add path. Add path attribute",
-										Optional: true,
+										Optional:            true,
 									},
 									"max_age_value": schema.Int64Attribute{
 										MarkdownDescription: "Add Max Age. Add max age attribute",
-										Optional: true,
+										Optional:            true,
 									},
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Name. Name of the cookie in Cookie header.",
-										Optional: true,
+										Optional:            true,
 									},
 									"overwrite": schema.BoolAttribute{
 										MarkdownDescription: "Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values.  not overwrite. Defaults to `do`.",
-										Optional: true,
+										Optional:            true,
 									},
 									"value": schema.StringAttribute{
 										MarkdownDescription: "Value. Value of the Cookie header.",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 								Blocks: map[string]schema.Block{
@@ -899,23 +897,22 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									},
 									"secret_value": schema.SingleNestedBlock{
 										MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-										Attributes: map[string]schema.Attribute{
-										},
+										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"blindfold_secret_info": schema.SingleNestedBlock{
 												MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 												Attributes: map[string]schema.Attribute{
 													"decryption_provider": schema.StringAttribute{
 														MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-														Optional: true,
+														Optional:            true,
 													},
 													"location": schema.StringAttribute{
 														MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-														Optional: true,
+														Optional:            true,
 													},
 													"store_provider": schema.StringAttribute{
 														MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 											},
@@ -924,11 +921,11 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 												Attributes: map[string]schema.Attribute{
 													"provider_ref": schema.StringAttribute{
 														MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-														Optional: true,
+														Optional:            true,
 													},
 													"url": schema.StringAttribute{
 														MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 											},
@@ -943,37 +940,36 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 								Attributes: map[string]schema.Attribute{
 									"append": schema.BoolAttribute{
 										MarkdownDescription: "Append. Should the value be appended? If true, the value is appended to existing values.  not append. Defaults to `do`.",
-										Optional: true,
+										Optional:            true,
 									},
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Name. Name of the HTTP header.",
-										Optional: true,
+										Optional:            true,
 									},
 									"value": schema.StringAttribute{
 										MarkdownDescription: "Value. Value of the HTTP header.",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 								Blocks: map[string]schema.Block{
 									"secret_value": schema.SingleNestedBlock{
 										MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-										Attributes: map[string]schema.Attribute{
-										},
+										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"blindfold_secret_info": schema.SingleNestedBlock{
 												MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 												Attributes: map[string]schema.Attribute{
 													"decryption_provider": schema.StringAttribute{
 														MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-														Optional: true,
+														Optional:            true,
 													},
 													"location": schema.StringAttribute{
 														MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-														Optional: true,
+														Optional:            true,
 													},
 													"store_provider": schema.StringAttribute{
 														MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 											},
@@ -982,11 +978,11 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 												Attributes: map[string]schema.Attribute{
 													"provider_ref": schema.StringAttribute{
 														MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-														Optional: true,
+														Optional:            true,
 													},
 													"url": schema.StringAttribute{
 														MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 											},
@@ -1000,23 +996,23 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 							Attributes: map[string]schema.Attribute{
 								"auto_host_rewrite": schema.BoolAttribute{
 									MarkdownDescription: "Automatic Host Rewrite. Indicates that during forwarding, the host header will be swapped with the hostname of the upstream host chosen by the cluster",
-									Optional: true,
+									Optional:            true,
 								},
 								"host_rewrite": schema.StringAttribute{
 									MarkdownDescription: "Host Rewrite. Indicates that during forwarding, the host header will be swapped with this value",
-									Optional: true,
+									Optional:            true,
 								},
 								"prefix_rewrite": schema.StringAttribute{
 									MarkdownDescription: "Prefix Rewrite. prefix_rewrite indicates that during forwarding, the matched prefix (or path) should be swapped with its value. When using regex path matching, the entire path (not including the query string) will be swapped with this value. This option allows application URLs to be rooted at a different path from those exposed at the reverse proxy layer. Example : gcSpec: routes: - match: - headers: [] path: prefix : /register/ query_params: [] - headers: [] path: prefix: /register query_params: [] routeDestination: prefixRewrite: '/' destinations: - cluster: - kind: cluster.Object uid: cluster-1 Having above entries in the config, requests to /register will be stripped to /, while requests to /register/public will be stripped to /public",
-									Optional: true,
+									Optional:            true,
 								},
 								"priority": schema.StringAttribute{
 									MarkdownDescription: "Routing Priority. Priority routing for each request. Different connection pools are used based on the priority selected for the request. Also, circuit-breaker configuration at destination cluster is chosen based on selected priority. Default routing mechanism High-Priority routing mechanism. Possible values are `DEFAULT`, `HIGH`. Defaults to `DEFAULT`.",
-									Optional: true,
+									Optional:            true,
 								},
 								"timeout": schema.Int64Attribute{
 									MarkdownDescription: "Timeout. Specifies the timeout for the route in milliseconds. This timeout includes all retries. For server side streaming, configure this field with higher value or leave it un-configured for infinite timeout",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
@@ -1025,11 +1021,11 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									Attributes: map[string]schema.Attribute{
 										"disabled": schema.BoolAttribute{
 											MarkdownDescription: "Disable. Disable buffering for a particular route. This is useful when virtual-host has buffering, but we need to disable it on a specific route. The value of this field is ignored for virtual-host",
-											Optional: true,
+											Optional:            true,
 										},
 										"max_request_bytes": schema.Int64Attribute{
 											MarkdownDescription: "Max Request Bytes. The maximum request size that the filter will buffer before the connection manager will stop buffering and return a RequestEntityTooLarge (413) response.",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 								},
@@ -1038,44 +1034,43 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									Attributes: map[string]schema.Attribute{
 										"allow_credentials": schema.BoolAttribute{
 											MarkdownDescription: "Allow Credentials. Specifies whether the resource allows credentials",
-											Optional: true,
+											Optional:            true,
 										},
 										"allow_headers": schema.StringAttribute{
 											MarkdownDescription: "Allow Headers. Specifies the content for the access-control-allow-headers header",
-											Optional: true,
+											Optional:            true,
 										},
 										"allow_methods": schema.StringAttribute{
 											MarkdownDescription: "Allow Methods. Specifies the content for the access-control-allow-methods header",
-											Optional: true,
+											Optional:            true,
 										},
 										"allow_origin": schema.ListAttribute{
 											MarkdownDescription: "Allow Origin. Specifies the origins that will be allowed to do CORS requests. An origin is allowed if either allow_origin or allow_origin_regex match",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 										"allow_origin_regex": schema.ListAttribute{
 											MarkdownDescription: "Allow Origin Regex. Specifies regex patterns that match allowed origins. An origin is allowed if either allow_origin or allow_origin_regex match",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 										"disabled": schema.BoolAttribute{
 											MarkdownDescription: "Disabled. Disable the CorsPolicy for a particular route. This is useful when virtual-host has CorsPolicy, but we need to disable it on a specific route. The value of this field is ignored for virtual-host",
-											Optional: true,
+											Optional:            true,
 										},
 										"expose_headers": schema.StringAttribute{
 											MarkdownDescription: "Expose Headers. Specifies the content for the access-control-expose-headers header",
-											Optional: true,
+											Optional:            true,
 										},
 										"maximum_age": schema.Int64Attribute{
 											MarkdownDescription: "Maximum Age. Specifies the content for the access-control-max-age header in seconds. This indicates the maximum number of seconds the results can be cached A value of -1 will disable caching. Maximum permitted value is 86400 seconds (24 hours)",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 								},
 								"csrf_policy": schema.SingleNestedBlock{
 									MarkdownDescription: "CSRF Policy. To mitigate CSRF attack , the policy checks where a request is coming from to determine if the request's origin is the same as its detination.The policy relies on two pieces of information used in determining if a request originated from the same host. 1. The origin that caused the user agent to issue the request (source origin). 2. The origin that the request is going to (target origin). When the policy evaluating a request, it ensures both pieces of information are present and compare their values. If the source origin is missing or origins do not match the request is rejected. The exception to this being if the source-origin has been added to they policy as valid. Because CSRF attacks specifically target state-changing requests, the policy only acts on the HTTP requests that have state-changing method (PUT,POST, etc.).",
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"all_load_balancer_domains": schema.SingleNestedBlock{
 											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -1085,8 +1080,8 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 											Attributes: map[string]schema.Attribute{
 												"domains": schema.ListAttribute{
 													MarkdownDescription: "Domain names. A list of domain names that will be matched to loadbalancer. These domains are not used for SNI match. Wildcard names are supported in the suffix or prefix form.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 										},
@@ -1101,11 +1096,11 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 										Attributes: map[string]schema.Attribute{
 											"priority": schema.Int64Attribute{
 												MarkdownDescription: "Priority. Priority of this cluster, valid only with multiple destinations are configured. Value of 0 will make the cluster as lowest priority upstream cluster Priority of 1 means highest priority and is considered active. When active cluster is not available, lower priority clusters are made active as per the increasing priority.",
-												Optional: true,
+												Optional:            true,
 											},
 											"weight": schema.Int64Attribute{
 												MarkdownDescription: "Weight. When requests have to distributed among multiple upstream clusters, multiple destinations are configured, each having its own cluster and weight. Traffic is distributed among clusters based on the weight configured. destinations: - cluster: - kind: ves.io.vega.cfg.adc.cluster.Object uid: cluster-1 weight: 20 - cluster: - kind: ves.io.vega.cfg.adc.cluster.Object uid: cluster-2 weight: 30 - cluster: - kind: ves.io.vega.cfg.adc.cluster.Object uid: cluster-3 weight: 10 This indicates that out of every 60 requests, 10 goes to cluster-3, 30 to cluster-2 and 20 to cluster-1 When single destination is configured, weight is ignored. All the requests are sent to the cluster specified in the destination",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 										Blocks: map[string]schema.Block{
@@ -1115,26 +1110,26 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 													Attributes: map[string]schema.Attribute{
 														"kind": schema.StringAttribute{
 															MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-															Optional: true,
-															Computed: true,
+															Optional:            true,
+															Computed:            true,
 														},
 														"name": schema.StringAttribute{
 															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-															Optional: true,
+															Optional:            true,
 														},
 														"namespace": schema.StringAttribute{
 															MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-															Optional: true,
+															Optional:            true,
 														},
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-															Optional: true,
-															Computed: true,
+															Optional:            true,
+															Computed:            true,
 														},
 														"uid": schema.StringAttribute{
 															MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-															Optional: true,
-															Computed: true,
+															Optional:            true,
+															Computed:            true,
 														},
 													},
 												},
@@ -1157,15 +1152,15 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 										Attributes: map[string]schema.Attribute{
 											"header_name": schema.StringAttribute{
 												MarkdownDescription: "Header Name. The name or key of the request header that will be used to obtain the hash key",
-												Optional: true,
+												Optional:            true,
 											},
 											"source_ip": schema.BoolAttribute{
 												MarkdownDescription: "Source IP. Hash based on source IP address",
-												Optional: true,
+												Optional:            true,
 											},
 											"terminal": schema.BoolAttribute{
 												MarkdownDescription: "Terminal. Specify if its a terminal policy",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 										Blocks: map[string]schema.Block{
@@ -1174,15 +1169,15 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 												Attributes: map[string]schema.Attribute{
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Name. The name of the cookie that will be used to obtain the hash key. If the cookie is not present and TTL below is not set, no hash will be produced",
-														Optional: true,
+														Optional:            true,
 													},
 													"path": schema.StringAttribute{
 														MarkdownDescription: "Path. The name of the path for the cookie. If no path is specified here, no path will be set for the cookie",
-														Optional: true,
+														Optional:            true,
 													},
 													"ttl": schema.Int64Attribute{
 														MarkdownDescription: "TTL. If specified, a cookie with the TTL will be generated if the cookie is not present. If the TTL is present and zero, the generated cookie will be a session cookie. TTL value is in milliseconds",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 												Blocks: map[string]schema.Block{
@@ -1217,8 +1212,7 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 								},
 								"mirror_policy": schema.SingleNestedBlock{
 									MarkdownDescription: "Mirror Policy. MirrorPolicy is used for shadowing traffic from one cluster to another. The approach used is 'fire and forget', meaning it will not wait for the shadow cluster to respond before returning the response from the primary cluster. All normal statistics are collected for the shadow cluster making this feature useful for testing and troubleshooting.",
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"cluster": schema.ListNestedBlock{
 											MarkdownDescription: "Mirror Destination Cluster. Specifies the cluster to which the requests will be mirrored. The cluster object referred here must be present.",
@@ -1226,26 +1220,26 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 												Attributes: map[string]schema.Attribute{
 													"kind": schema.StringAttribute{
 														MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-														Optional: true,
-														Computed: true,
+														Optional:            true,
+														Computed:            true,
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-														Optional: true,
+														Optional:            true,
 													},
 													"namespace": schema.StringAttribute{
 														MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-														Optional: true,
+														Optional:            true,
 													},
 													"tenant": schema.StringAttribute{
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-														Optional: true,
-														Computed: true,
+														Optional:            true,
+														Computed:            true,
 													},
 													"uid": schema.StringAttribute{
 														MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-														Optional: true,
-														Computed: true,
+														Optional:            true,
+														Computed:            true,
 													},
 												},
 											},
@@ -1255,11 +1249,11 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 											Attributes: map[string]schema.Attribute{
 												"denominator": schema.StringAttribute{
 													MarkdownDescription: "Denominator. Denominator used in fraction where sampling percentages are needed. example sampled requests Use hundred as denominator Use ten thousand as denominator Use million as denominator. Possible values are `HUNDRED`, `TEN_THOUSAND`, `MILLION`. Defaults to `HUNDRED`.",
-													Optional: true,
+													Optional:            true,
 												},
 												"numerator": schema.Int64Attribute{
 													MarkdownDescription: "Numerator. sampled parts per denominator. If denominator was 10000, then value of 5 will be 5 in 10000",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 										},
@@ -1270,7 +1264,7 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									Attributes: map[string]schema.Attribute{
 										"replace_params": schema.StringAttribute{
 											MarkdownDescription: "Replace All Parameters.",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -1287,11 +1281,11 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									Attributes: map[string]schema.Attribute{
 										"pattern": schema.StringAttribute{
 											MarkdownDescription: "Pattern. The regular expression used to find portions of a string that should be replaced.",
-											Optional: true,
+											Optional:            true,
 										},
 										"substitution": schema.StringAttribute{
 											MarkdownDescription: "Substitution. The string that should be substituted into matching portions of the subject string during a substitution operation to produce a new string.",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 								},
@@ -1303,21 +1297,21 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									Attributes: map[string]schema.Attribute{
 										"num_retries": schema.Int64Attribute{
 											MarkdownDescription: "Number of Retries. Specifies the allowed number of retries. Retries can be done any number of times. An exponential back-off algorithm is used between each retry. Defaults to `1`.",
-											Optional: true,
+											Optional:            true,
 										},
 										"per_try_timeout": schema.Int64Attribute{
 											MarkdownDescription: "Per Try Timeout. Specifies a non-zero timeout per retry attempt. In milliseconds",
-											Optional: true,
+											Optional:            true,
 										},
 										"retriable_status_codes": schema.ListAttribute{
 											MarkdownDescription: "Status Code to Retry. HTTP status codes that should trigger a retry in addition to those specified by retry_on.",
-											Optional: true,
-											ElementType: types.Int64Type,
+											Optional:            true,
+											ElementType:         types.Int64Type,
 										},
 										"retry_condition": schema.ListAttribute{
 											MarkdownDescription: "Retry Condition. Specifies the conditions under which retry takes place. Retries can be on different types of condition depending on application requirements. For example, network failure, all 5xx response codes, idempotent 4xx response codes, etc The possible values are '5xx' : Retry will be done if the upstream server responds with any 5xx response code, or does not respond at all (disconnect/reset/read timeout). 'gateway-error' : Retry will be done only if the upstream server responds with 502, 503 or 504 responses (Included in 5xx) 'connect-failure' : Retry will be done if the request fails because of a connection failure to the upstream server (connect timeout, etc.). (Included in 5xx) 'refused-stream' : Retry is done if the upstream server resets the stream with a REFUSED_STREAM error code (Included in 5xx) 'retriable-4xx' : Retry is done if the upstream server responds with a retriable 4xx response code. The only response code in this category is HTTP CONFLICT (409) 'retriable-status-codes' : Retry is done if the upstream server responds with any response code matching one defined in retriable_status_codes field 'reset' : Retry is done if the upstream server does not respond at all (disconnect/reset/read timeout.)",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -1326,11 +1320,11 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 											Attributes: map[string]schema.Attribute{
 												"base_interval": schema.Int64Attribute{
 													MarkdownDescription: "Base Retry Interval. Specifies the base interval between retries in milliseconds",
-													Optional: true,
+													Optional:            true,
 												},
 												"max_interval": schema.Int64Attribute{
 													MarkdownDescription: "Maximum Retry Interval. Specifies the maximum interval between retries in milliseconds. This parameter is optional, but must be greater than or equal to the base_interval if set. The  times the base_interval. Defaults to `10`.",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 										},
@@ -1341,7 +1335,7 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									Attributes: map[string]schema.Attribute{
 										"use_spdy": schema.BoolAttribute{
 											MarkdownDescription: "Use SPDY. Specifies that the HTTP client connection to this route is allowed to upgrade to a SPDY connection",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 								},
@@ -1350,7 +1344,7 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									Attributes: map[string]schema.Attribute{
 										"use_websocket": schema.BoolAttribute{
 											MarkdownDescription: "Use Websocket. Specifies that the HTTP client connection to this route is allowed to upgrade to a WebSocket connection",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 								},
@@ -1361,11 +1355,11 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 							Attributes: map[string]schema.Attribute{
 								"response_body_encoded": schema.StringAttribute{
 									MarkdownDescription: "Response Body. Response body to send. Currently supported URL schemes is string:/// for which message should be encoded in Base64 format. The message can be either plain text or html. E.g. '<p> Access Denied </p>'. Base64 encoded string url for this is string:///PHA+IEFjY2VzcyBEZW5pZWQgPC9wPg==",
-									Optional: true,
+									Optional:            true,
 								},
 								"response_code": schema.Int64Attribute{
 									MarkdownDescription: "Response Code. response code to send",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 						},
@@ -1374,27 +1368,27 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 							Attributes: map[string]schema.Attribute{
 								"host_redirect": schema.StringAttribute{
 									MarkdownDescription: "Host. swap host part of incoming URL in redirect URL",
-									Optional: true,
+									Optional:            true,
 								},
 								"path_redirect": schema.StringAttribute{
 									MarkdownDescription: "Path. swap path part of incoming URL in redirect URL",
-									Optional: true,
+									Optional:            true,
 								},
 								"prefix_rewrite": schema.StringAttribute{
 									MarkdownDescription: "Prefix Rewrite. In Redirect response, the matched prefix (or path) should be swapped with this value. This option allows redirect URLs be dynamically created based on the request",
-									Optional: true,
+									Optional:            true,
 								},
 								"proto_redirect": schema.StringAttribute{
 									MarkdownDescription: "Protocol. swap protocol part of incoming URL in redirect URL The protocol can be swapped with either http or https When incoming-proto option is specified, swapping of protocol is not done.",
-									Optional: true,
+									Optional:            true,
 								},
 								"replace_params": schema.StringAttribute{
 									MarkdownDescription: "Replace All Parameters.",
-									Optional: true,
+									Optional:            true,
 								},
 								"response_code": schema.Int64Attribute{
 									MarkdownDescription: "Response Code. The HTTP status code to use in the redirect response.",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
@@ -1411,7 +1405,7 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 							Attributes: map[string]schema.Attribute{
 								"disable": schema.BoolAttribute{
 									MarkdownDescription: "Disable. disable service policy at route level, if it is configured at virtual-host level",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 						},
@@ -1420,28 +1414,26 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-									Optional: true,
+									Optional:            true,
 								},
 								"namespace": schema.StringAttribute{
 									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-									Optional: true,
+									Optional:            true,
 								},
 								"tenant": schema.StringAttribute{
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-									Optional: true,
-									Computed: true,
+									Optional:            true,
+									Computed:            true,
 								},
 							},
 						},
 						"waf_type": schema.SingleNestedBlock{
 							MarkdownDescription: "WAF Instance. WAF instance will be pointing to an app_firewall object",
-							Attributes: map[string]schema.Attribute{
-							},
+							Attributes:          map[string]schema.Attribute{},
 							Blocks: map[string]schema.Block{
 								"app_firewall": schema.SingleNestedBlock{
 									MarkdownDescription: "App Firewall Reference. A list of references to the app_firewall configuration objects",
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"app_firewall": schema.ListNestedBlock{
 											MarkdownDescription: "Application Firewall. References to an Application Firewall configuration object",
@@ -1449,26 +1441,26 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 												Attributes: map[string]schema.Attribute{
 													"kind": schema.StringAttribute{
 														MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-														Optional: true,
-														Computed: true,
+														Optional:            true,
+														Computed:            true,
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-														Optional: true,
+														Optional:            true,
 													},
 													"namespace": schema.StringAttribute{
 														MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-														Optional: true,
+														Optional:            true,
 													},
 													"tenant": schema.StringAttribute{
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-														Optional: true,
-														Computed: true,
+														Optional:            true,
+														Computed:            true,
 													},
 													"uid": schema.StringAttribute{
 														MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-														Optional: true,
-														Computed: true,
+														Optional:            true,
+														Computed:            true,
 													},
 												},
 											},
@@ -1484,7 +1476,6 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 							},
 						},
 					},
-
 				},
 			},
 		},
@@ -2010,7 +2001,6 @@ func (r *RouteResource) Create(ctx context.Context, req resource.CreateRequest, 
 		createReq.Spec["routes"] = routesList
 	}
 
-
 	apiResource, err := r.client.CreateRoute(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create Route: %s", err))
@@ -2022,7 +2012,7 @@ func (r *RouteResource) Create(ctx context.Context, req resource.CreateRequest, 
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["routes"].([]interface{}); ok && len(listData) > 0 {
 		var routesList []RouteRoutesModel
 		for listIdx, item := range listData {
@@ -2470,7 +2460,6 @@ func (r *RouteResource) Create(ctx context.Context, req resource.CreateRequest, 
 		}
 		data.Routes = routesList
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -2560,9 +2549,9 @@ func (r *RouteResource) Read(ctx context.Context, req resource.ReadRequest, resp
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if listData, ok := apiResource.Spec["routes"].([]interface{}); ok && len(listData) > 0 {
 		var routesList []RouteRoutesModel
@@ -3011,7 +3000,6 @@ func (r *RouteResource) Read(ctx context.Context, req resource.ReadRequest, resp
 		}
 		data.Routes = routesList
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -3446,7 +3434,6 @@ func (r *RouteResource) Update(ctx context.Context, req resource.UpdateRequest, 
 		}
 		apiResource.Spec["routes"] = routesList
 	}
-
 
 	updated, err := r.client.UpdateRoute(ctx, apiResource)
 	if err != nil {

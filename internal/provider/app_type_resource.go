@@ -51,9 +51,9 @@ type AppTypeEmptyModel struct {
 
 // AppTypeBusinessLogicMarkupSettingModel represents business_logic_markup_setting block
 type AppTypeBusinessLogicMarkupSettingModel struct {
-	Disable *AppTypeEmptyModel `tfsdk:"disable"`
+	Disable               *AppTypeEmptyModel                                           `tfsdk:"disable"`
 	DiscoveredAPISettings *AppTypeBusinessLogicMarkupSettingDiscoveredAPISettingsModel `tfsdk:"discovered_api_settings"`
-	Enable *AppTypeEmptyModel `tfsdk:"enable"`
+	Enable                *AppTypeEmptyModel                                           `tfsdk:"enable"`
 }
 
 // AppTypeBusinessLogicMarkupSettingDiscoveredAPISettingsModel represents discovered_api_settings block
@@ -67,16 +67,16 @@ type AppTypeFeaturesModel struct {
 }
 
 type AppTypeResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Name                       types.String                            `tfsdk:"name"`
+	Namespace                  types.String                            `tfsdk:"namespace"`
+	Annotations                types.Map                               `tfsdk:"annotations"`
+	Description                types.String                            `tfsdk:"description"`
+	Disable                    types.Bool                              `tfsdk:"disable"`
+	Labels                     types.Map                               `tfsdk:"labels"`
+	ID                         types.String                            `tfsdk:"id"`
+	Timeouts                   timeouts.Value                          `tfsdk:"timeouts"`
 	BusinessLogicMarkupSetting *AppTypeBusinessLogicMarkupSettingModel `tfsdk:"business_logic_markup_setting"`
-	Features []AppTypeFeaturesModel `tfsdk:"features"`
+	Features                   []AppTypeFeaturesModel                  `tfsdk:"features"`
 }
 
 func (r *AppTypeResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -90,7 +90,7 @@ func (r *AppTypeResource) Schema(ctx context.Context, req resource.SchemaRequest
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the AppType. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -100,7 +100,7 @@ func (r *AppTypeResource) Schema(ctx context.Context, req resource.SchemaRequest
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the AppType will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -110,25 +110,25 @@ func (r *AppTypeResource) Schema(ctx context.Context, req resource.SchemaRequest
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -143,8 +143,7 @@ func (r *AppTypeResource) Schema(ctx context.Context, req resource.SchemaRequest
 			}),
 			"business_logic_markup_setting": schema.SingleNestedBlock{
 				MarkdownDescription: "API Discovery Settings. Settings specifying how API Discovery will be performed",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"disable": schema.SingleNestedBlock{
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -154,7 +153,7 @@ func (r *AppTypeResource) Schema(ctx context.Context, req resource.SchemaRequest
 						Attributes: map[string]schema.Attribute{
 							"purge_duration_for_inactive_discovered_apis": schema.Int64Attribute{
 								MarkdownDescription: "Purge Duration for Inactive Discovered APIs from Traffic. Inactive discovered API will be deleted after configured duration.",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 					},
@@ -162,7 +161,6 @@ func (r *AppTypeResource) Schema(ctx context.Context, req resource.SchemaRequest
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 			"features": schema.ListNestedBlock{
 				MarkdownDescription: "Features. List of various AI/ML features enabled",
@@ -170,10 +168,9 @@ func (r *AppTypeResource) Schema(ctx context.Context, req resource.SchemaRequest
 					Attributes: map[string]schema.Attribute{
 						"type": schema.StringAttribute{
 							MarkdownDescription: "AI/ML Features. Enumeration for AI/ML features supported API Discovery enables generation of model for various API interactions between services of App type. Enable analysis of timeseries for various metric collected like requests, errors, latency etc. Enable anomaly detection per API request, i.e. the probability density function (PDF) charts generation for API endpoints Enable user behavior analysis. Possible values are `BUSINESS_LOGIC_MARKUP`, `TIMESERIES_ANOMALY_DETECTION`, `PER_REQ_ANOMALY_DETECTION`, `USER_BEHAVIOR_ANALYSIS`. Defaults to `BUSINESS_LOGIC_MARKUP`.",
-							Optional: true,
+							Optional:            true,
 						},
 					},
-
 				},
 			},
 		},
@@ -353,7 +350,6 @@ func (r *AppTypeResource) Create(ctx context.Context, req resource.CreateRequest
 		createReq.Spec["features"] = featuresList
 	}
 
-
 	apiResource, err := r.client.CreateAppType(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create AppType: %s", err))
@@ -365,7 +361,7 @@ func (r *AppTypeResource) Create(ctx context.Context, req resource.CreateRequest
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if _, ok := apiResource.Spec["business_logic_markup_setting"].(map[string]interface{}); ok && isImport && data.BusinessLogicMarkupSetting == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.BusinessLogicMarkupSetting = &AppTypeBusinessLogicMarkupSettingModel{}
@@ -388,7 +384,6 @@ func (r *AppTypeResource) Create(ctx context.Context, req resource.CreateRequest
 		}
 		data.Features = featuresList
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -478,9 +473,9 @@ func (r *AppTypeResource) Read(ctx context.Context, req resource.ReadRequest, re
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if _, ok := apiResource.Spec["business_logic_markup_setting"].(map[string]interface{}); ok && isImport && data.BusinessLogicMarkupSetting == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -504,7 +499,6 @@ func (r *AppTypeResource) Read(ctx context.Context, req resource.ReadRequest, re
 		}
 		data.Features = featuresList
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -593,7 +587,6 @@ func (r *AppTypeResource) Update(ctx context.Context, req resource.UpdateRequest
 		}
 		apiResource.Spec["features"] = featuresList
 	}
-
 
 	updated, err := r.client.UpdateAppType(ctx, apiResource)
 	if err != nil {

@@ -51,13 +51,13 @@ type AlertPolicyEmptyModel struct {
 
 // AlertPolicyNotificationParametersModel represents notification_parameters block
 type AlertPolicyNotificationParametersModel struct {
-	GroupInterval types.String `tfsdk:"group_interval"`
-	GroupWait types.String `tfsdk:"group_wait"`
-	RepeatInterval types.String `tfsdk:"repeat_interval"`
-	Custom *AlertPolicyNotificationParametersCustomModel `tfsdk:"custom"`
-	Default *AlertPolicyEmptyModel `tfsdk:"default"`
-	Individual *AlertPolicyEmptyModel `tfsdk:"individual"`
-	VesIoGroup *AlertPolicyEmptyModel `tfsdk:"ves_io_group"`
+	GroupInterval  types.String                                  `tfsdk:"group_interval"`
+	GroupWait      types.String                                  `tfsdk:"group_wait"`
+	RepeatInterval types.String                                  `tfsdk:"repeat_interval"`
+	Custom         *AlertPolicyNotificationParametersCustomModel `tfsdk:"custom"`
+	Default        *AlertPolicyEmptyModel                        `tfsdk:"default"`
+	Individual     *AlertPolicyEmptyModel                        `tfsdk:"individual"`
+	VesIoGroup     *AlertPolicyEmptyModel                        `tfsdk:"ves_io_group"`
 }
 
 // AlertPolicyNotificationParametersCustomModel represents custom block
@@ -67,32 +67,32 @@ type AlertPolicyNotificationParametersCustomModel struct {
 
 // AlertPolicyReceiversModel represents receivers block
 type AlertPolicyReceiversModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // AlertPolicyRoutesModel represents routes block
 type AlertPolicyRoutesModel struct {
-	Alertname types.String `tfsdk:"alertname"`
-	AlertnameRegex types.String `tfsdk:"alertname_regex"`
-	Any *AlertPolicyEmptyModel `tfsdk:"any"`
-	Custom *AlertPolicyRoutesCustomModel `tfsdk:"custom"`
-	DontSend *AlertPolicyEmptyModel `tfsdk:"dont_send"`
-	Group *AlertPolicyRoutesGroupModel `tfsdk:"group"`
+	Alertname              types.String                                  `tfsdk:"alertname"`
+	AlertnameRegex         types.String                                  `tfsdk:"alertname_regex"`
+	Any                    *AlertPolicyEmptyModel                        `tfsdk:"any"`
+	Custom                 *AlertPolicyRoutesCustomModel                 `tfsdk:"custom"`
+	DontSend               *AlertPolicyEmptyModel                        `tfsdk:"dont_send"`
+	Group                  *AlertPolicyRoutesGroupModel                  `tfsdk:"group"`
 	NotificationParameters *AlertPolicyRoutesNotificationParametersModel `tfsdk:"notification_parameters"`
-	Send *AlertPolicyEmptyModel `tfsdk:"send"`
-	Severity *AlertPolicyRoutesSeverityModel `tfsdk:"severity"`
+	Send                   *AlertPolicyEmptyModel                        `tfsdk:"send"`
+	Severity               *AlertPolicyRoutesSeverityModel               `tfsdk:"severity"`
 }
 
 // AlertPolicyRoutesCustomModel represents custom block
 type AlertPolicyRoutesCustomModel struct {
-	Alertlabel *AlertPolicyEmptyModel `tfsdk:"alertlabel"`
-	Alertname *AlertPolicyRoutesCustomAlertnameModel `tfsdk:"alertname"`
-	Group *AlertPolicyRoutesCustomGroupModel `tfsdk:"group"`
-	Severity *AlertPolicyRoutesCustomSeverityModel `tfsdk:"severity"`
+	Alertlabel *AlertPolicyEmptyModel                 `tfsdk:"alertlabel"`
+	Alertname  *AlertPolicyRoutesCustomAlertnameModel `tfsdk:"alertname"`
+	Group      *AlertPolicyRoutesCustomGroupModel     `tfsdk:"group"`
+	Severity   *AlertPolicyRoutesCustomSeverityModel  `tfsdk:"severity"`
 }
 
 // AlertPolicyRoutesCustomAlertnameModel represents alertname block
@@ -120,13 +120,13 @@ type AlertPolicyRoutesGroupModel struct {
 
 // AlertPolicyRoutesNotificationParametersModel represents notification_parameters block
 type AlertPolicyRoutesNotificationParametersModel struct {
-	GroupInterval types.String `tfsdk:"group_interval"`
-	GroupWait types.String `tfsdk:"group_wait"`
-	RepeatInterval types.String `tfsdk:"repeat_interval"`
-	Custom *AlertPolicyRoutesNotificationParametersCustomModel `tfsdk:"custom"`
-	Default *AlertPolicyEmptyModel `tfsdk:"default"`
-	Individual *AlertPolicyEmptyModel `tfsdk:"individual"`
-	VesIoGroup *AlertPolicyEmptyModel `tfsdk:"ves_io_group"`
+	GroupInterval  types.String                                        `tfsdk:"group_interval"`
+	GroupWait      types.String                                        `tfsdk:"group_wait"`
+	RepeatInterval types.String                                        `tfsdk:"repeat_interval"`
+	Custom         *AlertPolicyRoutesNotificationParametersCustomModel `tfsdk:"custom"`
+	Default        *AlertPolicyEmptyModel                              `tfsdk:"default"`
+	Individual     *AlertPolicyEmptyModel                              `tfsdk:"individual"`
+	VesIoGroup     *AlertPolicyEmptyModel                              `tfsdk:"ves_io_group"`
 }
 
 // AlertPolicyRoutesNotificationParametersCustomModel represents custom block
@@ -140,17 +140,17 @@ type AlertPolicyRoutesSeverityModel struct {
 }
 
 type AlertPolicyResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Name                   types.String                            `tfsdk:"name"`
+	Namespace              types.String                            `tfsdk:"namespace"`
+	Annotations            types.Map                               `tfsdk:"annotations"`
+	Description            types.String                            `tfsdk:"description"`
+	Disable                types.Bool                              `tfsdk:"disable"`
+	Labels                 types.Map                               `tfsdk:"labels"`
+	ID                     types.String                            `tfsdk:"id"`
+	Timeouts               timeouts.Value                          `tfsdk:"timeouts"`
 	NotificationParameters *AlertPolicyNotificationParametersModel `tfsdk:"notification_parameters"`
-	Receivers []AlertPolicyReceiversModel `tfsdk:"receivers"`
-	Routes []AlertPolicyRoutesModel `tfsdk:"routes"`
+	Receivers              []AlertPolicyReceiversModel             `tfsdk:"receivers"`
+	Routes                 []AlertPolicyRoutesModel                `tfsdk:"routes"`
 }
 
 func (r *AlertPolicyResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -164,7 +164,7 @@ func (r *AlertPolicyResource) Schema(ctx context.Context, req resource.SchemaReq
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the AlertPolicy. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -174,7 +174,7 @@ func (r *AlertPolicyResource) Schema(ctx context.Context, req resource.SchemaReq
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the AlertPolicy will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -184,25 +184,25 @@ func (r *AlertPolicyResource) Schema(ctx context.Context, req resource.SchemaReq
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -220,15 +220,15 @@ func (r *AlertPolicyResource) Schema(ctx context.Context, req resource.SchemaReq
 				Attributes: map[string]schema.Attribute{
 					"group_interval": schema.StringAttribute{
 						MarkdownDescription: "Notify Interval for a Group. Group Interval is used to specify how long to wait before sending a notification about new alerts that are added to the group for which an initial notification has already been sent. Format: [0-9][smhd], where s - seconds, m - minutes, h - hours, d - days If not specified, group_interval defaults to '1m'",
-						Optional: true,
+						Optional:            true,
 					},
 					"group_wait": schema.StringAttribute{
 						MarkdownDescription: "Wait to Notify. Time value used to specify how long to initially wait for an inhibiting alert to arrive or collect more alerts for the same group. Format: [0-9][smhd], where s - seconds, m - minutes, h - hours, d - days If not specified, group_wait defaults to '30s'",
-						Optional: true,
+						Optional:            true,
 					},
 					"repeat_interval": schema.StringAttribute{
 						MarkdownDescription: "Notify Interval For a Alert. Repeat Interval is used to specify how long to wait before sending a notification again if it has already been sent successfully. Format: [0-9][smhd], where s - seconds, m - minutes, h - hours, d - days If not specified, group_interval defaults to '4h'",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -237,8 +237,8 @@ func (r *AlertPolicyResource) Schema(ctx context.Context, req resource.SchemaReq
 						Attributes: map[string]schema.Attribute{
 							"labels": schema.ListAttribute{
 								MarkdownDescription: "Labels. Name of labels to group/aggregate the alerts",
-								Optional: true,
-								ElementType: types.StringType,
+								Optional:            true,
+								ElementType:         types.StringType,
 							},
 						},
 					},
@@ -252,7 +252,6 @@ func (r *AlertPolicyResource) Schema(ctx context.Context, req resource.SchemaReq
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 			"receivers": schema.ListNestedBlock{
 				MarkdownDescription: "Alert Receivers. list of Alert Receivers where the alerts will be sent",
@@ -260,29 +259,28 @@ func (r *AlertPolicyResource) Schema(ctx context.Context, req resource.SchemaReq
 					Attributes: map[string]schema.Attribute{
 						"kind": schema.StringAttribute{
 							MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-							Optional: true,
-							Computed: true,
+							Optional:            true,
+							Computed:            true,
 						},
 						"name": schema.StringAttribute{
 							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-							Optional: true,
+							Optional:            true,
 						},
 						"namespace": schema.StringAttribute{
 							MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-							Optional: true,
+							Optional:            true,
 						},
 						"tenant": schema.StringAttribute{
 							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-							Optional: true,
-							Computed: true,
+							Optional:            true,
+							Computed:            true,
 						},
 						"uid": schema.StringAttribute{
 							MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-							Optional: true,
-							Computed: true,
+							Optional:            true,
+							Computed:            true,
 						},
 					},
-
 				},
 			},
 			"routes": schema.ListNestedBlock{
@@ -291,11 +289,11 @@ func (r *AlertPolicyResource) Schema(ctx context.Context, req resource.SchemaReq
 					Attributes: map[string]schema.Attribute{
 						"alertname": schema.StringAttribute{
 							MarkdownDescription: "AlertName. List of Alert Names Customer tunnel interface down Physical Interface down Tunnel Interfaces to Customer Site Down Virutal Host server error Virtual Host client error Service Health Low Service Unavailable Virtual Host server error Virtual Host client error Endpoint Healthcheck failure Synthetic monitor health critical Malicious user detected Virtual Host WAF security events detected Virtual Host API security events detected Virtual Host Service Policy security events detected Virtual Host Many Malicious Bots based WAF security events detected Virtual Host Many Malicious Bots based Bot Defense security events detected Virtual Host Many Threat campaign based WAF security events detected Suspicious domain identified by Client-Side Defense service Client-Side Defense has identified a suspicious script that is reading sensitive form field Error rate anomaly detected Request rate anomaly detected Request throughput anomaly detected Response latency anomaly detected Response throughput anomaly detected TLS Automatic Certificate renewal is failing TLS Automatic Certificate renewal is still failing after multiple retries TLS Automatic Certificate has expired TLS Custom Certificate will expire in less than 28 days TLS Custom Certificate will expire in less than 15 days TLS Custom Certificate has expired DDoS security event detected DNS Zone Ignored a Duplicate Record Create Request Unused APIs Detected Shadow APIs Detected Endpoints With Sensitive Data In Response Detected High Risk Score Endpoints Detected A routed DDoS traffic anomaly has been detected A routed DDoS mitigation has been implemented to block malicious traffic. Possible values are `SITE_CUSTOMER_TUNNEL_INTERFACE_DOWN`, `SITE_PHYSICAL_INTERFACE_DOWN`, `TUNNELS_TO_CUSTOMER_SITE_DOWN`, `SERVICE_SERVER_ERROR`, `SERVICE_CLIENT_ERROR`, `SERVICE_HEALTH_LOW`, `SERVICE_UNAVAILABLE`, `SERVICE_SERVER_ERROR_PER_SOURCE_SITE`, `SERVICE_CLIENT_ERROR_PER_SOURCE_SITE`, `SERVICE_ENDPOINT_HEALTHCHECK_FAILURE`, `SYNTHETIC_MONITOR_HEALTH_CRITICAL`, `MALICIOUS_USER_DETECTED`, `WAF_TOO_MANY_ATTACKS`, `API_SECURITY_TOO_MANY_ATTACKS`, `SERVICE_POLICY_TOO_MANY_ATTACKS`, `WAF_TOO_MANY_MALICIOUS_BOTS`, `BOT_DEFENSE_TOO_MANY_SECURITY_EVENTS`, `THREAT_CAMPAIGN`, `VES_CLIENT_SIDE_DEFENSE_SUSPICIOUS_DOMAIN`, `VES_CLIENT_SIDE_DEFENSE_SENSITIVE_FIELD_READ`, `ERROR_RATE_ANOMALY`, `REQUEST_RATE_ANOMALY`, `REQUEST_THROUGHPUT_ANOMALY`, `RESPONSE_LATENCY_ANOMALY`, `RESPONSE_THROUGHPUT_ANOMALY`, `TLS_AUTOMATIC_CERTIFICATE_RENEWAL_FAILURE`, `TLS_AUTOMATIC_CERTIFICATE_RENEWAL_STILL_FAILING`, `TLS_AUTOMATIC_CERTIFICATE_EXPIRED`, `TLS_CUSTOM_CERTIFICATE_EXPIRING`, `TLS_CUSTOM_CERTIFICATE_EXPIRING_SOON`, `TLS_CUSTOM_CERTIFICATE_EXPIRED`, `L7DDOS`, `DNS_ZONE_IGNORED_DUPLICATE_RECORD`, `API_SECURITY_UNUSED_API_DETECTED`, `API_SECURITY_SHADOW_API_DETECTED`, `API_SECURITY_SENSITIVE_DATA_IN_RESPONSE_DETECTED`, `API_SECURITY_RISK_SCORE_HIGH_DETECTED`, `ROUTED_DDOS_ALERT_NOTIFICATION`, `ROUTED_DDOS_MITIGATION_NOTIFICATION`. Defaults to `SITE_CUSTOMER_TUNNEL_INTERFACE_DOWN`.",
-							Optional: true,
+							Optional:            true,
 						},
 						"alertname_regex": schema.StringAttribute{
 							MarkdownDescription: "Matching RegEx of Alertname. Regular Expression match for the alertname",
-							Optional: true,
+							Optional:            true,
 						},
 					},
 					Blocks: map[string]schema.Block{
@@ -304,8 +302,7 @@ func (r *AlertPolicyResource) Schema(ctx context.Context, req resource.SchemaReq
 						},
 						"custom": schema.SingleNestedBlock{
 							MarkdownDescription: "Custom Matcher. A set of matchers an alert has to fulfill to match the route",
-							Attributes: map[string]schema.Attribute{
-							},
+							Attributes:          map[string]schema.Attribute{},
 							Blocks: map[string]schema.Block{
 								"alertlabel": schema.SingleNestedBlock{
 									MarkdownDescription: "AlertLabel. AlertLabel to configure the alert policy rule",
@@ -315,11 +312,11 @@ func (r *AlertPolicyResource) Schema(ctx context.Context, req resource.SchemaReq
 									Attributes: map[string]schema.Attribute{
 										"exact_match": schema.StringAttribute{
 											MarkdownDescription: "Exact Match. Equality match value for the label",
-											Optional: true,
+											Optional:            true,
 										},
 										"regex_match": schema.StringAttribute{
 											MarkdownDescription: "RegEx Match. Regular expression match value for the label",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 								},
@@ -328,11 +325,11 @@ func (r *AlertPolicyResource) Schema(ctx context.Context, req resource.SchemaReq
 									Attributes: map[string]schema.Attribute{
 										"exact_match": schema.StringAttribute{
 											MarkdownDescription: "Exact Match. Equality match value for the label",
-											Optional: true,
+											Optional:            true,
 										},
 										"regex_match": schema.StringAttribute{
 											MarkdownDescription: "RegEx Match. Regular expression match value for the label",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 								},
@@ -341,11 +338,11 @@ func (r *AlertPolicyResource) Schema(ctx context.Context, req resource.SchemaReq
 									Attributes: map[string]schema.Attribute{
 										"exact_match": schema.StringAttribute{
 											MarkdownDescription: "Exact Match. Equality match value for the label",
-											Optional: true,
+											Optional:            true,
 										},
 										"regex_match": schema.StringAttribute{
 											MarkdownDescription: "RegEx Match. Regular expression match value for the label",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 								},
@@ -359,8 +356,8 @@ func (r *AlertPolicyResource) Schema(ctx context.Context, req resource.SchemaReq
 							Attributes: map[string]schema.Attribute{
 								"groups": schema.ListAttribute{
 									MarkdownDescription: "Groups. Name of groups to match the alert. Possible values are `INFRASTRUCTURE`, `IAAS_CAAS`, `VIRTUAL_HOST`, `VOLT_SHARE`, `UAM`, `SECURITY`, `TIMESERIES_ANOMALY`, `SHAPE_SECURITY`, `SECURITY_CSD`, `CDN`, `SYNTHETIC_MONITORS`, `TLS`, `SECURITY_BOT_DEFENSE`, `CLOUD_LINK`, `DNS`, `ROUTED_DDOS`. Defaults to `INFRASTRUCTURE`.",
-									Optional: true,
-									ElementType: types.StringType,
+									Optional:            true,
+									ElementType:         types.StringType,
 								},
 							},
 						},
@@ -369,15 +366,15 @@ func (r *AlertPolicyResource) Schema(ctx context.Context, req resource.SchemaReq
 							Attributes: map[string]schema.Attribute{
 								"group_interval": schema.StringAttribute{
 									MarkdownDescription: "Notify Interval for a Group. Group Interval is used to specify how long to wait before sending a notification about new alerts that are added to the group for which an initial notification has already been sent. Format: [0-9][smhd], where s - seconds, m - minutes, h - hours, d - days If not specified, group_interval defaults to '1m'",
-									Optional: true,
+									Optional:            true,
 								},
 								"group_wait": schema.StringAttribute{
 									MarkdownDescription: "Wait to Notify. Time value used to specify how long to initially wait for an inhibiting alert to arrive or collect more alerts for the same group. Format: [0-9][smhd], where s - seconds, m - minutes, h - hours, d - days If not specified, group_wait defaults to '30s'",
-									Optional: true,
+									Optional:            true,
 								},
 								"repeat_interval": schema.StringAttribute{
 									MarkdownDescription: "Notify Interval For a Alert. Repeat Interval is used to specify how long to wait before sending a notification again if it has already been sent successfully. Format: [0-9][smhd], where s - seconds, m - minutes, h - hours, d - days If not specified, group_interval defaults to '4h'",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
@@ -386,8 +383,8 @@ func (r *AlertPolicyResource) Schema(ctx context.Context, req resource.SchemaReq
 									Attributes: map[string]schema.Attribute{
 										"labels": schema.ListAttribute{
 											MarkdownDescription: "Labels. Name of labels to group/aggregate the alerts",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 									},
 								},
@@ -410,13 +407,12 @@ func (r *AlertPolicyResource) Schema(ctx context.Context, req resource.SchemaReq
 							Attributes: map[string]schema.Attribute{
 								"severities": schema.ListAttribute{
 									MarkdownDescription: "Severities. List of severity levels. Possible values are `MINOR`, `MAJOR`, `CRITICAL`. Defaults to `MINOR`.",
-									Optional: true,
-									ElementType: types.StringType,
+									Optional:            true,
+									ElementType:         types.StringType,
 								},
 							},
 						},
 					},
-
 				},
 			},
 		},
@@ -732,7 +728,6 @@ func (r *AlertPolicyResource) Create(ctx context.Context, req resource.CreateReq
 		createReq.Spec["routes"] = routesList
 	}
 
-
 	apiResource, err := r.client.CreateAlertPolicy(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create AlertPolicy: %s", err))
@@ -744,7 +739,7 @@ func (r *AlertPolicyResource) Create(ctx context.Context, req resource.CreateReq
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if blockData, ok := apiResource.Spec["notification_parameters"].(map[string]interface{}); ok && (isImport || data.NotificationParameters != nil) {
 		data.NotificationParameters = &AlertPolicyNotificationParametersModel{
 			Custom: func() *AlertPolicyNotificationParametersCustomModel {
@@ -1006,7 +1001,6 @@ func (r *AlertPolicyResource) Create(ctx context.Context, req resource.CreateReq
 		}
 		data.Routes = routesList
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -1096,9 +1090,9 @@ func (r *AlertPolicyResource) Read(ctx context.Context, req resource.ReadRequest
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if blockData, ok := apiResource.Spec["notification_parameters"].(map[string]interface{}); ok && (isImport || data.NotificationParameters != nil) {
 		data.NotificationParameters = &AlertPolicyNotificationParametersModel{
@@ -1361,7 +1355,6 @@ func (r *AlertPolicyResource) Read(ctx context.Context, req resource.ReadRequest
 		}
 		data.Routes = routesList
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -1586,7 +1579,6 @@ func (r *AlertPolicyResource) Update(ctx context.Context, req resource.UpdateReq
 		}
 		apiResource.Spec["routes"] = routesList
 	}
-
 
 	updated, err := r.client.UpdateAlertPolicy(ctx, apiResource)
 	if err != nil {

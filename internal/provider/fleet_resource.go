@@ -52,9 +52,9 @@ type FleetEmptyModel struct {
 
 // FleetBlockedServicesModel represents blocked_services block
 type FleetBlockedServicesModel struct {
-	NetworkType types.String `tfsdk:"network_type"`
-	DNS *FleetEmptyModel `tfsdk:"dns"`
-	SSH *FleetEmptyModel `tfsdk:"ssh"`
+	NetworkType      types.String     `tfsdk:"network_type"`
+	DNS              *FleetEmptyModel `tfsdk:"dns"`
+	SSH              *FleetEmptyModel `tfsdk:"ssh"`
 	WebUserInterface *FleetEmptyModel `tfsdk:"web_user_interface"`
 }
 
@@ -65,12 +65,12 @@ type FleetBondDeviceListModel struct {
 
 // FleetBondDeviceListBondDevicesModel represents bond_devices block
 type FleetBondDeviceListBondDevicesModel struct {
-	Devices types.List `tfsdk:"devices"`
-	LinkPollingInterval types.Int64 `tfsdk:"link_polling_interval"`
-	LinkUpDelay types.Int64 `tfsdk:"link_up_delay"`
-	Name types.String `tfsdk:"name"`
-	ActiveBackup *FleetEmptyModel `tfsdk:"active_backup"`
-	Lacp *FleetBondDeviceListBondDevicesLacpModel `tfsdk:"lacp"`
+	Devices             types.List                               `tfsdk:"devices"`
+	LinkPollingInterval types.Int64                              `tfsdk:"link_polling_interval"`
+	LinkUpDelay         types.Int64                              `tfsdk:"link_up_delay"`
+	Name                types.String                             `tfsdk:"name"`
+	ActiveBackup        *FleetEmptyModel                         `tfsdk:"active_backup"`
+	Lacp                *FleetBondDeviceListBondDevicesLacpModel `tfsdk:"lacp"`
 }
 
 // FleetBondDeviceListBondDevicesLacpModel represents lacp block
@@ -80,16 +80,16 @@ type FleetBondDeviceListBondDevicesLacpModel struct {
 
 // FleetDcClusterGroupModel represents dc_cluster_group block
 type FleetDcClusterGroupModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // FleetDcClusterGroupInsideModel represents dc_cluster_group_inside block
 type FleetDcClusterGroupInsideModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // FleetDeviceListModel represents device_list block
@@ -99,40 +99,40 @@ type FleetDeviceListModel struct {
 
 // FleetDeviceListDevicesModel represents devices block
 type FleetDeviceListDevicesModel struct {
-	Name types.String `tfsdk:"name"`
-	Owner types.String `tfsdk:"owner"`
+	Name          types.String                              `tfsdk:"name"`
+	Owner         types.String                              `tfsdk:"owner"`
 	NetworkDevice *FleetDeviceListDevicesNetworkDeviceModel `tfsdk:"network_device"`
 }
 
 // FleetDeviceListDevicesNetworkDeviceModel represents network_device block
 type FleetDeviceListDevicesNetworkDeviceModel struct {
-	Use types.String `tfsdk:"use"`
+	Use       types.String                                        `tfsdk:"use"`
 	Interface []FleetDeviceListDevicesNetworkDeviceInterfaceModel `tfsdk:"interface"`
 }
 
 // FleetDeviceListDevicesNetworkDeviceInterfaceModel represents interface block
 type FleetDeviceListDevicesNetworkDeviceInterfaceModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // FleetEnableVgpuModel represents enable_vgpu block
 type FleetEnableVgpuModel struct {
-	FeatureType types.String `tfsdk:"feature_type"`
+	FeatureType   types.String `tfsdk:"feature_type"`
 	ServerAddress types.String `tfsdk:"server_address"`
-	ServerPort types.Int64 `tfsdk:"server_port"`
+	ServerPort    types.Int64  `tfsdk:"server_port"`
 }
 
 // FleetInsideVirtualNetworkModel represents inside_virtual_network block
 type FleetInsideVirtualNetworkModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // FleetInterfaceListModel represents interface_list block
@@ -142,68 +142,68 @@ type FleetInterfaceListModel struct {
 
 // FleetInterfaceListInterfacesModel represents interfaces block
 type FleetInterfaceListInterfacesModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // FleetKubernetesUpgradeDrainModel represents kubernetes_upgrade_drain block
 type FleetKubernetesUpgradeDrainModel struct {
-	DisableUpgradeDrain *FleetEmptyModel `tfsdk:"disable_upgrade_drain"`
-	EnableUpgradeDrain *FleetKubernetesUpgradeDrainEnableUpgradeDrainModel `tfsdk:"enable_upgrade_drain"`
+	DisableUpgradeDrain *FleetEmptyModel                                    `tfsdk:"disable_upgrade_drain"`
+	EnableUpgradeDrain  *FleetKubernetesUpgradeDrainEnableUpgradeDrainModel `tfsdk:"enable_upgrade_drain"`
 }
 
 // FleetKubernetesUpgradeDrainEnableUpgradeDrainModel represents enable_upgrade_drain block
 type FleetKubernetesUpgradeDrainEnableUpgradeDrainModel struct {
-	DrainMaxUnavailableNodeCount types.Int64 `tfsdk:"drain_max_unavailable_node_count"`
-	DrainNodeTimeout types.Int64 `tfsdk:"drain_node_timeout"`
-	DisableVegaUpgradeMode *FleetEmptyModel `tfsdk:"disable_vega_upgrade_mode"`
-	EnableVegaUpgradeMode *FleetEmptyModel `tfsdk:"enable_vega_upgrade_mode"`
+	DrainMaxUnavailableNodeCount types.Int64      `tfsdk:"drain_max_unavailable_node_count"`
+	DrainNodeTimeout             types.Int64      `tfsdk:"drain_node_timeout"`
+	DisableVegaUpgradeMode       *FleetEmptyModel `tfsdk:"disable_vega_upgrade_mode"`
+	EnableVegaUpgradeMode        *FleetEmptyModel `tfsdk:"enable_vega_upgrade_mode"`
 }
 
 // FleetLogReceiverModel represents log_receiver block
 type FleetLogReceiverModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // FleetNetworkConnectorsModel represents network_connectors block
 type FleetNetworkConnectorsModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // FleetNetworkFirewallModel represents network_firewall block
 type FleetNetworkFirewallModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // FleetOutsideVirtualNetworkModel represents outside_virtual_network block
 type FleetOutsideVirtualNetworkModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // FleetPerformanceEnhancementModeModel represents performance_enhancement_mode block
 type FleetPerformanceEnhancementModeModel struct {
 	PerfModeL3Enhanced *FleetPerformanceEnhancementModePerfModeL3EnhancedModel `tfsdk:"perf_mode_l3_enhanced"`
-	PerfModeL7Enhanced *FleetEmptyModel `tfsdk:"perf_mode_l7_enhanced"`
+	PerfModeL7Enhanced *FleetEmptyModel                                        `tfsdk:"perf_mode_l7_enhanced"`
 }
 
 // FleetPerformanceEnhancementModePerfModeL3EnhancedModel represents perf_mode_l3_enhanced block
 type FleetPerformanceEnhancementModePerfModeL3EnhancedModel struct {
-	Jumbo *FleetEmptyModel `tfsdk:"jumbo"`
+	Jumbo   *FleetEmptyModel `tfsdk:"jumbo"`
 	NoJumbo *FleetEmptyModel `tfsdk:"no_jumbo"`
 }
 
@@ -214,9 +214,9 @@ type FleetSriovInterfacesModel struct {
 
 // FleetSriovInterfacesSriovInterfaceModel represents sriov_interface block
 type FleetSriovInterfacesSriovInterfaceModel struct {
-	InterfaceName types.String `tfsdk:"interface_name"`
-	NumberOfVfioVfs types.Int64 `tfsdk:"number_of_vfio_vfs"`
-	NumberOfVfs types.Int64 `tfsdk:"number_of_vfs"`
+	InterfaceName   types.String `tfsdk:"interface_name"`
+	NumberOfVfioVfs types.Int64  `tfsdk:"number_of_vfio_vfs"`
+	NumberOfVfs     types.Int64  `tfsdk:"number_of_vfs"`
 }
 
 // FleetStorageClassListModel represents storage_class_list block
@@ -226,17 +226,17 @@ type FleetStorageClassListModel struct {
 
 // FleetStorageClassListStorageClassesModel represents storage_classes block
 type FleetStorageClassListStorageClassesModel struct {
-	AllowVolumeExpansion types.Bool `tfsdk:"allow_volume_expansion"`
-	DefaultStorageClass types.Bool `tfsdk:"default_storage_class"`
-	DescriptionSpec types.String `tfsdk:"description_spec"`
-	ReclaimPolicy types.String `tfsdk:"reclaim_policy"`
-	StorageClassName types.String `tfsdk:"storage_class_name"`
-	StorageDevice types.String `tfsdk:"storage_device"`
-	AdvancedStorageParameters *FleetEmptyModel `tfsdk:"advanced_storage_parameters"`
-	CustomStorage *FleetStorageClassListStorageClassesCustomStorageModel `tfsdk:"custom_storage"`
-	HpeStorage *FleetStorageClassListStorageClassesHpeStorageModel `tfsdk:"hpe_storage"`
-	NetappTrident *FleetStorageClassListStorageClassesNetappTridentModel `tfsdk:"netapp_trident"`
-	PureServiceOrchestrator *FleetStorageClassListStorageClassesPureServiceOrchestratorModel `tfsdk:"pure_service_orchestrator"`
+	AllowVolumeExpansion      types.Bool                                                       `tfsdk:"allow_volume_expansion"`
+	DefaultStorageClass       types.Bool                                                       `tfsdk:"default_storage_class"`
+	DescriptionSpec           types.String                                                     `tfsdk:"description_spec"`
+	ReclaimPolicy             types.String                                                     `tfsdk:"reclaim_policy"`
+	StorageClassName          types.String                                                     `tfsdk:"storage_class_name"`
+	StorageDevice             types.String                                                     `tfsdk:"storage_device"`
+	AdvancedStorageParameters *FleetEmptyModel                                                 `tfsdk:"advanced_storage_parameters"`
+	CustomStorage             *FleetStorageClassListStorageClassesCustomStorageModel           `tfsdk:"custom_storage"`
+	HpeStorage                *FleetStorageClassListStorageClassesHpeStorageModel              `tfsdk:"hpe_storage"`
+	NetappTrident             *FleetStorageClassListStorageClassesNetappTridentModel           `tfsdk:"netapp_trident"`
+	PureServiceOrchestrator   *FleetStorageClassListStorageClassesPureServiceOrchestratorModel `tfsdk:"pure_service_orchestrator"`
 }
 
 // FleetStorageClassListStorageClassesCustomStorageModel represents custom_storage block
@@ -246,35 +246,35 @@ type FleetStorageClassListStorageClassesCustomStorageModel struct {
 
 // FleetStorageClassListStorageClassesHpeStorageModel represents hpe_storage block
 type FleetStorageClassListStorageClassesHpeStorageModel struct {
-	AllowMutations types.String `tfsdk:"allow_mutations"`
-	AllowOverrides types.String `tfsdk:"allow_overrides"`
-	DedupeEnabled types.Bool `tfsdk:"dedupe_enabled"`
-	DescriptionSpec types.String `tfsdk:"description_spec"`
-	DestroyOnDelete types.Bool `tfsdk:"destroy_on_delete"`
-	Encrypted types.Bool `tfsdk:"encrypted"`
-	Folder types.String `tfsdk:"folder"`
-	LimitIops types.String `tfsdk:"limit_iops"`
-	LimitMbps types.String `tfsdk:"limit_mbps"`
-	PerformancePolicy types.String `tfsdk:"performance_policy"`
-	Pool types.String `tfsdk:"pool"`
+	AllowMutations     types.String `tfsdk:"allow_mutations"`
+	AllowOverrides     types.String `tfsdk:"allow_overrides"`
+	DedupeEnabled      types.Bool   `tfsdk:"dedupe_enabled"`
+	DescriptionSpec    types.String `tfsdk:"description_spec"`
+	DestroyOnDelete    types.Bool   `tfsdk:"destroy_on_delete"`
+	Encrypted          types.Bool   `tfsdk:"encrypted"`
+	Folder             types.String `tfsdk:"folder"`
+	LimitIops          types.String `tfsdk:"limit_iops"`
+	LimitMbps          types.String `tfsdk:"limit_mbps"`
+	PerformancePolicy  types.String `tfsdk:"performance_policy"`
+	Pool               types.String `tfsdk:"pool"`
 	ProtectionTemplate types.String `tfsdk:"protection_template"`
-	SecretName types.String `tfsdk:"secret_name"`
-	SecretNamespace types.String `tfsdk:"secret_namespace"`
-	SyncOnDetach types.Bool `tfsdk:"sync_on_detach"`
-	Thick types.Bool `tfsdk:"thick"`
+	SecretName         types.String `tfsdk:"secret_name"`
+	SecretNamespace    types.String `tfsdk:"secret_namespace"`
+	SyncOnDetach       types.Bool   `tfsdk:"sync_on_detach"`
+	Thick              types.Bool   `tfsdk:"thick"`
 }
 
 // FleetStorageClassListStorageClassesNetappTridentModel represents netapp_trident block
 type FleetStorageClassListStorageClassesNetappTridentModel struct {
-	StoragePools types.String `tfsdk:"storage_pools"`
-	Selector *FleetEmptyModel `tfsdk:"selector"`
+	StoragePools types.String     `tfsdk:"storage_pools"`
+	Selector     *FleetEmptyModel `tfsdk:"selector"`
 }
 
 // FleetStorageClassListStorageClassesPureServiceOrchestratorModel represents pure_service_orchestrator block
 type FleetStorageClassListStorageClassesPureServiceOrchestratorModel struct {
-	Backend types.String `tfsdk:"backend"`
+	Backend        types.String `tfsdk:"backend"`
 	BandwidthLimit types.String `tfsdk:"bandwidth_limit"`
-	IopsLimit types.Int64 `tfsdk:"iops_limit"`
+	IopsLimit      types.Int64  `tfsdk:"iops_limit"`
 }
 
 // FleetStorageDeviceListModel represents storage_device_list block
@@ -284,61 +284,61 @@ type FleetStorageDeviceListModel struct {
 
 // FleetStorageDeviceListStorageDevicesModel represents storage_devices block
 type FleetStorageDeviceListStorageDevicesModel struct {
-	StorageDevice types.String `tfsdk:"storage_device"`
-	AdvancedAdvancedParameters *FleetEmptyModel `tfsdk:"advanced_advanced_parameters"`
-	CustomStorage *FleetEmptyModel `tfsdk:"custom_storage"`
-	HpeStorage *FleetStorageDeviceListStorageDevicesHpeStorageModel `tfsdk:"hpe_storage"`
-	NetappTrident *FleetStorageDeviceListStorageDevicesNetappTridentModel `tfsdk:"netapp_trident"`
-	PureServiceOrchestrator *FleetStorageDeviceListStorageDevicesPureServiceOrchestratorModel `tfsdk:"pure_service_orchestrator"`
+	StorageDevice              types.String                                                      `tfsdk:"storage_device"`
+	AdvancedAdvancedParameters *FleetEmptyModel                                                  `tfsdk:"advanced_advanced_parameters"`
+	CustomStorage              *FleetEmptyModel                                                  `tfsdk:"custom_storage"`
+	HpeStorage                 *FleetStorageDeviceListStorageDevicesHpeStorageModel              `tfsdk:"hpe_storage"`
+	NetappTrident              *FleetStorageDeviceListStorageDevicesNetappTridentModel           `tfsdk:"netapp_trident"`
+	PureServiceOrchestrator    *FleetStorageDeviceListStorageDevicesPureServiceOrchestratorModel `tfsdk:"pure_service_orchestrator"`
 }
 
 // FleetStorageDeviceListStorageDevicesHpeStorageModel represents hpe_storage block
 type FleetStorageDeviceListStorageDevicesHpeStorageModel struct {
-	APIServerPort types.Int64 `tfsdk:"api_server_port"`
-	IscsiChapUser types.String `tfsdk:"iscsi_chap_user"`
-	StorageServerIPAddress types.String `tfsdk:"storage_server_ip_address"`
-	StorageServerName types.String `tfsdk:"storage_server_name"`
-	Username types.String `tfsdk:"username"`
-	IscsiChapPassword *FleetStorageDeviceListStorageDevicesHpeStorageIscsiChapPasswordModel `tfsdk:"iscsi_chap_password"`
-	Password *FleetStorageDeviceListStorageDevicesHpeStoragePasswordModel `tfsdk:"password"`
+	APIServerPort          types.Int64                                                           `tfsdk:"api_server_port"`
+	IscsiChapUser          types.String                                                          `tfsdk:"iscsi_chap_user"`
+	StorageServerIPAddress types.String                                                          `tfsdk:"storage_server_ip_address"`
+	StorageServerName      types.String                                                          `tfsdk:"storage_server_name"`
+	Username               types.String                                                          `tfsdk:"username"`
+	IscsiChapPassword      *FleetStorageDeviceListStorageDevicesHpeStorageIscsiChapPasswordModel `tfsdk:"iscsi_chap_password"`
+	Password               *FleetStorageDeviceListStorageDevicesHpeStoragePasswordModel          `tfsdk:"password"`
 }
 
 // FleetStorageDeviceListStorageDevicesHpeStorageIscsiChapPasswordModel represents iscsi_chap_password block
 type FleetStorageDeviceListStorageDevicesHpeStorageIscsiChapPasswordModel struct {
 	BlindfoldSecretInfo *FleetStorageDeviceListStorageDevicesHpeStorageIscsiChapPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *FleetStorageDeviceListStorageDevicesHpeStorageIscsiChapPasswordClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *FleetStorageDeviceListStorageDevicesHpeStorageIscsiChapPasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // FleetStorageDeviceListStorageDevicesHpeStorageIscsiChapPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
 type FleetStorageDeviceListStorageDevicesHpeStorageIscsiChapPasswordBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // FleetStorageDeviceListStorageDevicesHpeStorageIscsiChapPasswordClearSecretInfoModel represents clear_secret_info block
 type FleetStorageDeviceListStorageDevicesHpeStorageIscsiChapPasswordClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // FleetStorageDeviceListStorageDevicesHpeStoragePasswordModel represents password block
 type FleetStorageDeviceListStorageDevicesHpeStoragePasswordModel struct {
 	BlindfoldSecretInfo *FleetStorageDeviceListStorageDevicesHpeStoragePasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *FleetStorageDeviceListStorageDevicesHpeStoragePasswordClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *FleetStorageDeviceListStorageDevicesHpeStoragePasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // FleetStorageDeviceListStorageDevicesHpeStoragePasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
 type FleetStorageDeviceListStorageDevicesHpeStoragePasswordBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // FleetStorageDeviceListStorageDevicesHpeStoragePasswordClearSecretInfoModel represents clear_secret_info block
 type FleetStorageDeviceListStorageDevicesHpeStoragePasswordClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // FleetStorageDeviceListStorageDevicesNetappTridentModel represents netapp_trident block
@@ -349,28 +349,28 @@ type FleetStorageDeviceListStorageDevicesNetappTridentModel struct {
 
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasModel represents netapp_backend_ontap_nas block
 type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasModel struct {
-	AutoExportPolicy types.Bool `tfsdk:"auto_export_policy"`
-	BackendName types.String `tfsdk:"backend_name"`
-	ClientCertificate types.String `tfsdk:"client_certificate"`
-	DataLifDNSName types.String `tfsdk:"data_lif_dns_name"`
-	DataLifIP types.String `tfsdk:"data_lif_ip"`
-	LimitAggregateUsage types.String `tfsdk:"limit_aggregate_usage"`
-	LimitVolumeSize types.String `tfsdk:"limit_volume_size"`
-	ManagementLifDNSName types.String `tfsdk:"management_lif_dns_name"`
-	ManagementLifIP types.String `tfsdk:"management_lif_ip"`
-	NfsMountOptions types.String `tfsdk:"nfs_mount_options"`
-	Region types.String `tfsdk:"region"`
-	StorageDriverName types.String `tfsdk:"storage_driver_name"`
-	StoragePrefix types.String `tfsdk:"storage_prefix"`
-	Svm types.String `tfsdk:"svm"`
-	TrustedCaCertificate types.String `tfsdk:"trusted_ca_certificate"`
-	Username types.String `tfsdk:"username"`
-	AutoExportCidrs *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasAutoExportCidrsModel `tfsdk:"auto_export_cidrs"`
-	ClientPrivateKey *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasClientPrivateKeyModel `tfsdk:"client_private_key"`
-	Labels *FleetEmptyModel `tfsdk:"labels"`
-	Password *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasPasswordModel `tfsdk:"password"`
-	Storage []FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasStorageModel `tfsdk:"storage"`
-	VolumeDefaults *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasVolumeDefaultsModel `tfsdk:"volume_defaults"`
+	AutoExportPolicy     types.Bool                                                                                   `tfsdk:"auto_export_policy"`
+	BackendName          types.String                                                                                 `tfsdk:"backend_name"`
+	ClientCertificate    types.String                                                                                 `tfsdk:"client_certificate"`
+	DataLifDNSName       types.String                                                                                 `tfsdk:"data_lif_dns_name"`
+	DataLifIP            types.String                                                                                 `tfsdk:"data_lif_ip"`
+	LimitAggregateUsage  types.String                                                                                 `tfsdk:"limit_aggregate_usage"`
+	LimitVolumeSize      types.String                                                                                 `tfsdk:"limit_volume_size"`
+	ManagementLifDNSName types.String                                                                                 `tfsdk:"management_lif_dns_name"`
+	ManagementLifIP      types.String                                                                                 `tfsdk:"management_lif_ip"`
+	NfsMountOptions      types.String                                                                                 `tfsdk:"nfs_mount_options"`
+	Region               types.String                                                                                 `tfsdk:"region"`
+	StorageDriverName    types.String                                                                                 `tfsdk:"storage_driver_name"`
+	StoragePrefix        types.String                                                                                 `tfsdk:"storage_prefix"`
+	Svm                  types.String                                                                                 `tfsdk:"svm"`
+	TrustedCaCertificate types.String                                                                                 `tfsdk:"trusted_ca_certificate"`
+	Username             types.String                                                                                 `tfsdk:"username"`
+	AutoExportCidrs      *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasAutoExportCidrsModel  `tfsdk:"auto_export_cidrs"`
+	ClientPrivateKey     *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasClientPrivateKeyModel `tfsdk:"client_private_key"`
+	Labels               *FleetEmptyModel                                                                             `tfsdk:"labels"`
+	Password             *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasPasswordModel         `tfsdk:"password"`
+	Storage              []FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasStorageModel         `tfsdk:"storage"`
+	VolumeDefaults       *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasVolumeDefaultsModel   `tfsdk:"volume_defaults"`
 }
 
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasAutoExportCidrsModel represents auto_export_cidrs block
@@ -381,238 +381,238 @@ type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasAutoE
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasClientPrivateKeyModel represents client_private_key block
 type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasClientPrivateKeyModel struct {
 	BlindfoldSecretInfo *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasClientPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasClientPrivateKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasClientPrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasClientPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
 type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasClientPrivateKeyBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasClientPrivateKeyClearSecretInfoModel represents clear_secret_info block
 type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasClientPrivateKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasPasswordModel represents password block
 type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasPasswordModel struct {
 	BlindfoldSecretInfo *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasPasswordClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasPasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
 type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasPasswordBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasPasswordClearSecretInfoModel represents clear_secret_info block
 type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasPasswordClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasStorageModel represents storage block
 type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasStorageModel struct {
-	Zone types.String `tfsdk:"zone"`
-	Labels *FleetEmptyModel `tfsdk:"labels"`
+	Zone           types.String                                                                                      `tfsdk:"zone"`
+	Labels         *FleetEmptyModel                                                                                  `tfsdk:"labels"`
 	VolumeDefaults *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasStorageVolumeDefaultsModel `tfsdk:"volume_defaults"`
 }
 
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasStorageVolumeDefaultsModel represents volume_defaults block
 type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasStorageVolumeDefaultsModel struct {
-	AdaptiveQosPolicy types.String `tfsdk:"adaptive_qos_policy"`
-	Encryption types.Bool `tfsdk:"encryption"`
-	ExportPolicy types.String `tfsdk:"export_policy"`
-	QosPolicy types.String `tfsdk:"qos_policy"`
-	SecurityStyle types.String `tfsdk:"security_style"`
-	SnapshotDir types.Bool `tfsdk:"snapshot_dir"`
-	SnapshotPolicy types.String `tfsdk:"snapshot_policy"`
-	SnapshotReserve types.String `tfsdk:"snapshot_reserve"`
-	SpaceReserve types.String `tfsdk:"space_reserve"`
-	SplitOnClone types.Bool `tfsdk:"split_on_clone"`
-	TieringPolicy types.String `tfsdk:"tiering_policy"`
-	UnixPermissions types.Int64 `tfsdk:"unix_permissions"`
-	NoQos *FleetEmptyModel `tfsdk:"no_qos"`
+	AdaptiveQosPolicy types.String     `tfsdk:"adaptive_qos_policy"`
+	Encryption        types.Bool       `tfsdk:"encryption"`
+	ExportPolicy      types.String     `tfsdk:"export_policy"`
+	QosPolicy         types.String     `tfsdk:"qos_policy"`
+	SecurityStyle     types.String     `tfsdk:"security_style"`
+	SnapshotDir       types.Bool       `tfsdk:"snapshot_dir"`
+	SnapshotPolicy    types.String     `tfsdk:"snapshot_policy"`
+	SnapshotReserve   types.String     `tfsdk:"snapshot_reserve"`
+	SpaceReserve      types.String     `tfsdk:"space_reserve"`
+	SplitOnClone      types.Bool       `tfsdk:"split_on_clone"`
+	TieringPolicy     types.String     `tfsdk:"tiering_policy"`
+	UnixPermissions   types.Int64      `tfsdk:"unix_permissions"`
+	NoQos             *FleetEmptyModel `tfsdk:"no_qos"`
 }
 
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasVolumeDefaultsModel represents volume_defaults block
 type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasVolumeDefaultsModel struct {
-	AdaptiveQosPolicy types.String `tfsdk:"adaptive_qos_policy"`
-	Encryption types.Bool `tfsdk:"encryption"`
-	ExportPolicy types.String `tfsdk:"export_policy"`
-	QosPolicy types.String `tfsdk:"qos_policy"`
-	SecurityStyle types.String `tfsdk:"security_style"`
-	SnapshotDir types.Bool `tfsdk:"snapshot_dir"`
-	SnapshotPolicy types.String `tfsdk:"snapshot_policy"`
-	SnapshotReserve types.String `tfsdk:"snapshot_reserve"`
-	SpaceReserve types.String `tfsdk:"space_reserve"`
-	SplitOnClone types.Bool `tfsdk:"split_on_clone"`
-	TieringPolicy types.String `tfsdk:"tiering_policy"`
-	UnixPermissions types.Int64 `tfsdk:"unix_permissions"`
-	NoQos *FleetEmptyModel `tfsdk:"no_qos"`
+	AdaptiveQosPolicy types.String     `tfsdk:"adaptive_qos_policy"`
+	Encryption        types.Bool       `tfsdk:"encryption"`
+	ExportPolicy      types.String     `tfsdk:"export_policy"`
+	QosPolicy         types.String     `tfsdk:"qos_policy"`
+	SecurityStyle     types.String     `tfsdk:"security_style"`
+	SnapshotDir       types.Bool       `tfsdk:"snapshot_dir"`
+	SnapshotPolicy    types.String     `tfsdk:"snapshot_policy"`
+	SnapshotReserve   types.String     `tfsdk:"snapshot_reserve"`
+	SpaceReserve      types.String     `tfsdk:"space_reserve"`
+	SplitOnClone      types.Bool       `tfsdk:"split_on_clone"`
+	TieringPolicy     types.String     `tfsdk:"tiering_policy"`
+	UnixPermissions   types.Int64      `tfsdk:"unix_permissions"`
+	NoQos             *FleetEmptyModel `tfsdk:"no_qos"`
 }
 
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanModel represents netapp_backend_ontap_san block
 type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanModel struct {
-	ClientCertificate types.String `tfsdk:"client_certificate"`
-	DataLifDNSName types.String `tfsdk:"data_lif_dns_name"`
-	DataLifIP types.String `tfsdk:"data_lif_ip"`
-	IgroupName types.String `tfsdk:"igroup_name"`
-	LimitAggregateUsage types.Int64 `tfsdk:"limit_aggregate_usage"`
-	LimitVolumeSize types.Int64 `tfsdk:"limit_volume_size"`
-	ManagementLifDNSName types.String `tfsdk:"management_lif_dns_name"`
-	ManagementLifIP types.String `tfsdk:"management_lif_ip"`
-	Region types.String `tfsdk:"region"`
-	StorageDriverName types.String `tfsdk:"storage_driver_name"`
-	StoragePrefix types.String `tfsdk:"storage_prefix"`
-	Svm types.String `tfsdk:"svm"`
-	TrustedCaCertificate types.String `tfsdk:"trusted_ca_certificate"`
-	Username types.String `tfsdk:"username"`
-	ClientPrivateKey *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanClientPrivateKeyModel `tfsdk:"client_private_key"`
-	Labels *FleetEmptyModel `tfsdk:"labels"`
-	NoChap *FleetEmptyModel `tfsdk:"no_chap"`
-	Password *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanPasswordModel `tfsdk:"password"`
-	Storage []FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanStorageModel `tfsdk:"storage"`
-	UseChap *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapModel `tfsdk:"use_chap"`
-	VolumeDefaults *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanVolumeDefaultsModel `tfsdk:"volume_defaults"`
+	ClientCertificate    types.String                                                                                 `tfsdk:"client_certificate"`
+	DataLifDNSName       types.String                                                                                 `tfsdk:"data_lif_dns_name"`
+	DataLifIP            types.String                                                                                 `tfsdk:"data_lif_ip"`
+	IgroupName           types.String                                                                                 `tfsdk:"igroup_name"`
+	LimitAggregateUsage  types.Int64                                                                                  `tfsdk:"limit_aggregate_usage"`
+	LimitVolumeSize      types.Int64                                                                                  `tfsdk:"limit_volume_size"`
+	ManagementLifDNSName types.String                                                                                 `tfsdk:"management_lif_dns_name"`
+	ManagementLifIP      types.String                                                                                 `tfsdk:"management_lif_ip"`
+	Region               types.String                                                                                 `tfsdk:"region"`
+	StorageDriverName    types.String                                                                                 `tfsdk:"storage_driver_name"`
+	StoragePrefix        types.String                                                                                 `tfsdk:"storage_prefix"`
+	Svm                  types.String                                                                                 `tfsdk:"svm"`
+	TrustedCaCertificate types.String                                                                                 `tfsdk:"trusted_ca_certificate"`
+	Username             types.String                                                                                 `tfsdk:"username"`
+	ClientPrivateKey     *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanClientPrivateKeyModel `tfsdk:"client_private_key"`
+	Labels               *FleetEmptyModel                                                                             `tfsdk:"labels"`
+	NoChap               *FleetEmptyModel                                                                             `tfsdk:"no_chap"`
+	Password             *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanPasswordModel         `tfsdk:"password"`
+	Storage              []FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanStorageModel         `tfsdk:"storage"`
+	UseChap              *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapModel          `tfsdk:"use_chap"`
+	VolumeDefaults       *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanVolumeDefaultsModel   `tfsdk:"volume_defaults"`
 }
 
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanClientPrivateKeyModel represents client_private_key block
 type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanClientPrivateKeyModel struct {
 	BlindfoldSecretInfo *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanClientPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanClientPrivateKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanClientPrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanClientPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
 type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanClientPrivateKeyBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanClientPrivateKeyClearSecretInfoModel represents clear_secret_info block
 type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanClientPrivateKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanPasswordModel represents password block
 type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanPasswordModel struct {
 	BlindfoldSecretInfo *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanPasswordClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanPasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
 type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanPasswordBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanPasswordClearSecretInfoModel represents clear_secret_info block
 type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanPasswordClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanStorageModel represents storage block
 type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanStorageModel struct {
-	Zone types.String `tfsdk:"zone"`
-	Labels *FleetEmptyModel `tfsdk:"labels"`
+	Zone           types.String                                                                                      `tfsdk:"zone"`
+	Labels         *FleetEmptyModel                                                                                  `tfsdk:"labels"`
 	VolumeDefaults *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanStorageVolumeDefaultsModel `tfsdk:"volume_defaults"`
 }
 
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanStorageVolumeDefaultsModel represents volume_defaults block
 type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanStorageVolumeDefaultsModel struct {
-	AdaptiveQosPolicy types.String `tfsdk:"adaptive_qos_policy"`
-	Encryption types.Bool `tfsdk:"encryption"`
-	ExportPolicy types.String `tfsdk:"export_policy"`
-	QosPolicy types.String `tfsdk:"qos_policy"`
-	SecurityStyle types.String `tfsdk:"security_style"`
-	SnapshotDir types.Bool `tfsdk:"snapshot_dir"`
-	SnapshotPolicy types.String `tfsdk:"snapshot_policy"`
-	SnapshotReserve types.String `tfsdk:"snapshot_reserve"`
-	SpaceReserve types.String `tfsdk:"space_reserve"`
-	SplitOnClone types.Bool `tfsdk:"split_on_clone"`
-	TieringPolicy types.String `tfsdk:"tiering_policy"`
-	UnixPermissions types.Int64 `tfsdk:"unix_permissions"`
-	NoQos *FleetEmptyModel `tfsdk:"no_qos"`
+	AdaptiveQosPolicy types.String     `tfsdk:"adaptive_qos_policy"`
+	Encryption        types.Bool       `tfsdk:"encryption"`
+	ExportPolicy      types.String     `tfsdk:"export_policy"`
+	QosPolicy         types.String     `tfsdk:"qos_policy"`
+	SecurityStyle     types.String     `tfsdk:"security_style"`
+	SnapshotDir       types.Bool       `tfsdk:"snapshot_dir"`
+	SnapshotPolicy    types.String     `tfsdk:"snapshot_policy"`
+	SnapshotReserve   types.String     `tfsdk:"snapshot_reserve"`
+	SpaceReserve      types.String     `tfsdk:"space_reserve"`
+	SplitOnClone      types.Bool       `tfsdk:"split_on_clone"`
+	TieringPolicy     types.String     `tfsdk:"tiering_policy"`
+	UnixPermissions   types.Int64      `tfsdk:"unix_permissions"`
+	NoQos             *FleetEmptyModel `tfsdk:"no_qos"`
 }
 
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapModel represents use_chap block
 type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapModel struct {
-	ChapTargetUsername types.String `tfsdk:"chap_target_username"`
-	ChapUsername types.String `tfsdk:"chap_username"`
-	ChapInitiatorSecret *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapInitiatorSecretModel `tfsdk:"chap_initiator_secret"`
+	ChapTargetUsername        types.String                                                                                                 `tfsdk:"chap_target_username"`
+	ChapUsername              types.String                                                                                                 `tfsdk:"chap_username"`
+	ChapInitiatorSecret       *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapInitiatorSecretModel       `tfsdk:"chap_initiator_secret"`
 	ChapTargetInitiatorSecret *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapTargetInitiatorSecretModel `tfsdk:"chap_target_initiator_secret"`
 }
 
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapInitiatorSecretModel represents chap_initiator_secret block
 type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapInitiatorSecretModel struct {
 	BlindfoldSecretInfo *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapInitiatorSecretBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapInitiatorSecretClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapInitiatorSecretClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapInitiatorSecretBlindfoldSecretInfoModel represents blindfold_secret_info block
 type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapInitiatorSecretBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapInitiatorSecretClearSecretInfoModel represents clear_secret_info block
 type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapInitiatorSecretClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapTargetInitiatorSecretModel represents chap_target_initiator_secret block
 type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapTargetInitiatorSecretModel struct {
 	BlindfoldSecretInfo *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapTargetInitiatorSecretBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapTargetInitiatorSecretClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapTargetInitiatorSecretClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapTargetInitiatorSecretBlindfoldSecretInfoModel represents blindfold_secret_info block
 type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapTargetInitiatorSecretBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapTargetInitiatorSecretClearSecretInfoModel represents clear_secret_info block
 type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapTargetInitiatorSecretClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanVolumeDefaultsModel represents volume_defaults block
 type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanVolumeDefaultsModel struct {
-	AdaptiveQosPolicy types.String `tfsdk:"adaptive_qos_policy"`
-	Encryption types.Bool `tfsdk:"encryption"`
-	ExportPolicy types.String `tfsdk:"export_policy"`
-	QosPolicy types.String `tfsdk:"qos_policy"`
-	SecurityStyle types.String `tfsdk:"security_style"`
-	SnapshotDir types.Bool `tfsdk:"snapshot_dir"`
-	SnapshotPolicy types.String `tfsdk:"snapshot_policy"`
-	SnapshotReserve types.String `tfsdk:"snapshot_reserve"`
-	SpaceReserve types.String `tfsdk:"space_reserve"`
-	SplitOnClone types.Bool `tfsdk:"split_on_clone"`
-	TieringPolicy types.String `tfsdk:"tiering_policy"`
-	UnixPermissions types.Int64 `tfsdk:"unix_permissions"`
-	NoQos *FleetEmptyModel `tfsdk:"no_qos"`
+	AdaptiveQosPolicy types.String     `tfsdk:"adaptive_qos_policy"`
+	Encryption        types.Bool       `tfsdk:"encryption"`
+	ExportPolicy      types.String     `tfsdk:"export_policy"`
+	QosPolicy         types.String     `tfsdk:"qos_policy"`
+	SecurityStyle     types.String     `tfsdk:"security_style"`
+	SnapshotDir       types.Bool       `tfsdk:"snapshot_dir"`
+	SnapshotPolicy    types.String     `tfsdk:"snapshot_policy"`
+	SnapshotReserve   types.String     `tfsdk:"snapshot_reserve"`
+	SpaceReserve      types.String     `tfsdk:"space_reserve"`
+	SplitOnClone      types.Bool       `tfsdk:"split_on_clone"`
+	TieringPolicy     types.String     `tfsdk:"tiering_policy"`
+	UnixPermissions   types.Int64      `tfsdk:"unix_permissions"`
+	NoQos             *FleetEmptyModel `tfsdk:"no_qos"`
 }
 
 // FleetStorageDeviceListStorageDevicesPureServiceOrchestratorModel represents pure_service_orchestrator block
 type FleetStorageDeviceListStorageDevicesPureServiceOrchestratorModel struct {
-	ClusterID types.String `tfsdk:"cluster_id"`
-	EnableStorageTopology types.Bool `tfsdk:"enable_storage_topology"`
-	EnableStrictTopology types.Bool `tfsdk:"enable_strict_topology"`
-	Arrays *FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysModel `tfsdk:"arrays"`
+	ClusterID             types.String                                                            `tfsdk:"cluster_id"`
+	EnableStorageTopology types.Bool                                                              `tfsdk:"enable_storage_topology"`
+	EnableStrictTopology  types.Bool                                                              `tfsdk:"enable_strict_topology"`
+	Arrays                *FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysModel `tfsdk:"arrays"`
 }
 
 // FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysModel represents arrays block
@@ -623,76 +623,76 @@ type FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysModel stru
 
 // FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayModel represents flash_array block
 type FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayModel struct {
-	DefaultFsOpt types.String `tfsdk:"default_fs_opt"`
-	DefaultFsType types.String `tfsdk:"default_fs_type"`
-	DefaultMountOpts types.List `tfsdk:"default_mount_opts"`
-	DisablePreemptAttachments types.Bool `tfsdk:"disable_preempt_attachments"`
-	IscsiLoginTimeout types.Int64 `tfsdk:"iscsi_login_timeout"`
-	SanType types.String `tfsdk:"san_type"`
-	FlashArrays []FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysModel `tfsdk:"flash_arrays"`
+	DefaultFsOpt              types.String                                                                                  `tfsdk:"default_fs_opt"`
+	DefaultFsType             types.String                                                                                  `tfsdk:"default_fs_type"`
+	DefaultMountOpts          types.List                                                                                    `tfsdk:"default_mount_opts"`
+	DisablePreemptAttachments types.Bool                                                                                    `tfsdk:"disable_preempt_attachments"`
+	IscsiLoginTimeout         types.Int64                                                                                   `tfsdk:"iscsi_login_timeout"`
+	SanType                   types.String                                                                                  `tfsdk:"san_type"`
+	FlashArrays               []FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysModel `tfsdk:"flash_arrays"`
 }
 
 // FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysModel represents flash_arrays block
 type FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysModel struct {
-	MgmtDNSName types.String `tfsdk:"mgmt_dns_name"`
-	MgmtIP types.String `tfsdk:"mgmt_ip"`
-	APIToken *FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysAPITokenModel `tfsdk:"api_token"`
-	Labels *FleetEmptyModel `tfsdk:"labels"`
+	MgmtDNSName types.String                                                                                         `tfsdk:"mgmt_dns_name"`
+	MgmtIP      types.String                                                                                         `tfsdk:"mgmt_ip"`
+	APIToken    *FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysAPITokenModel `tfsdk:"api_token"`
+	Labels      *FleetEmptyModel                                                                                     `tfsdk:"labels"`
 }
 
 // FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysAPITokenModel represents api_token block
 type FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysAPITokenModel struct {
 	BlindfoldSecretInfo *FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysAPITokenBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysAPITokenClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysAPITokenClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysAPITokenBlindfoldSecretInfoModel represents blindfold_secret_info block
 type FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysAPITokenBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysAPITokenClearSecretInfoModel represents clear_secret_info block
 type FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysAPITokenClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeModel represents flash_blade block
 type FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeModel struct {
-	EnableSnapshotDirectory types.Bool `tfsdk:"enable_snapshot_directory"`
-	ExportRules types.String `tfsdk:"export_rules"`
-	FlashBlades []FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesModel `tfsdk:"flash_blades"`
+	EnableSnapshotDirectory types.Bool                                                                                    `tfsdk:"enable_snapshot_directory"`
+	ExportRules             types.String                                                                                  `tfsdk:"export_rules"`
+	FlashBlades             []FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesModel `tfsdk:"flash_blades"`
 }
 
 // FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesModel represents flash_blades block
 type FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesModel struct {
-	MgmtDNSName types.String `tfsdk:"mgmt_dns_name"`
-	MgmtIP types.String `tfsdk:"mgmt_ip"`
-	NfsEndpointDNSName types.String `tfsdk:"nfs_endpoint_dns_name"`
-	NfsEndpointIP types.String `tfsdk:"nfs_endpoint_ip"`
-	APIToken *FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesAPITokenModel `tfsdk:"api_token"`
-	Lables *FleetEmptyModel `tfsdk:"lables"`
+	MgmtDNSName        types.String                                                                                         `tfsdk:"mgmt_dns_name"`
+	MgmtIP             types.String                                                                                         `tfsdk:"mgmt_ip"`
+	NfsEndpointDNSName types.String                                                                                         `tfsdk:"nfs_endpoint_dns_name"`
+	NfsEndpointIP      types.String                                                                                         `tfsdk:"nfs_endpoint_ip"`
+	APIToken           *FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesAPITokenModel `tfsdk:"api_token"`
+	Lables             *FleetEmptyModel                                                                                     `tfsdk:"lables"`
 }
 
 // FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesAPITokenModel represents api_token block
 type FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesAPITokenModel struct {
 	BlindfoldSecretInfo *FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesAPITokenBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesAPITokenClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesAPITokenClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesAPITokenBlindfoldSecretInfoModel represents blindfold_secret_info block
 type FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesAPITokenBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesAPITokenClearSecretInfoModel represents clear_secret_info block
 type FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesAPITokenClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // FleetStorageInterfaceListModel represents storage_interface_list block
@@ -702,9 +702,9 @@ type FleetStorageInterfaceListModel struct {
 
 // FleetStorageInterfaceListInterfacesModel represents interfaces block
 type FleetStorageInterfaceListInterfacesModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // FleetStorageStaticRoutesModel represents storage_static_routes block
@@ -714,26 +714,26 @@ type FleetStorageStaticRoutesModel struct {
 
 // FleetStorageStaticRoutesStorageRoutesModel represents storage_routes block
 type FleetStorageStaticRoutesStorageRoutesModel struct {
-	Attrs types.List `tfsdk:"attrs"`
-	Labels *FleetEmptyModel `tfsdk:"labels"`
-	Nexthop *FleetStorageStaticRoutesStorageRoutesNexthopModel `tfsdk:"nexthop"`
+	Attrs   types.List                                          `tfsdk:"attrs"`
+	Labels  *FleetEmptyModel                                    `tfsdk:"labels"`
+	Nexthop *FleetStorageStaticRoutesStorageRoutesNexthopModel  `tfsdk:"nexthop"`
 	Subnets []FleetStorageStaticRoutesStorageRoutesSubnetsModel `tfsdk:"subnets"`
 }
 
 // FleetStorageStaticRoutesStorageRoutesNexthopModel represents nexthop block
 type FleetStorageStaticRoutesStorageRoutesNexthopModel struct {
-	Type types.String `tfsdk:"type"`
-	Interface []FleetStorageStaticRoutesStorageRoutesNexthopInterfaceModel `tfsdk:"interface"`
+	Type           types.String                                                     `tfsdk:"type"`
+	Interface      []FleetStorageStaticRoutesStorageRoutesNexthopInterfaceModel     `tfsdk:"interface"`
 	NexthopAddress *FleetStorageStaticRoutesStorageRoutesNexthopNexthopAddressModel `tfsdk:"nexthop_address"`
 }
 
 // FleetStorageStaticRoutesStorageRoutesNexthopInterfaceModel represents interface block
 type FleetStorageStaticRoutesStorageRoutesNexthopInterfaceModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // FleetStorageStaticRoutesStorageRoutesNexthopNexthopAddressModel represents nexthop_address block
@@ -760,71 +760,71 @@ type FleetStorageStaticRoutesStorageRoutesSubnetsModel struct {
 
 // FleetStorageStaticRoutesStorageRoutesSubnetsIPV4Model represents ipv4 block
 type FleetStorageStaticRoutesStorageRoutesSubnetsIPV4Model struct {
-	Plen types.Int64 `tfsdk:"plen"`
+	Plen   types.Int64  `tfsdk:"plen"`
 	Prefix types.String `tfsdk:"prefix"`
 }
 
 // FleetStorageStaticRoutesStorageRoutesSubnetsIPV6Model represents ipv6 block
 type FleetStorageStaticRoutesStorageRoutesSubnetsIPV6Model struct {
-	Plen types.Int64 `tfsdk:"plen"`
+	Plen   types.Int64  `tfsdk:"plen"`
 	Prefix types.String `tfsdk:"prefix"`
 }
 
 // FleetUsbPolicyModel represents usb_policy block
 type FleetUsbPolicyModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 type FleetResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	EnableDefaultFleetConfigDownload types.Bool `tfsdk:"enable_default_fleet_config_download"`
-	FleetLabel types.String `tfsdk:"fleet_label"`
-	OperatingSystemVersion types.String `tfsdk:"operating_system_version"`
-	VolterraSoftwareVersion types.String `tfsdk:"volterra_software_version"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	AllowAllUsb *FleetEmptyModel `tfsdk:"allow_all_usb"`
-	BlockedServices []FleetBlockedServicesModel `tfsdk:"blocked_services"`
-	BondDeviceList *FleetBondDeviceListModel `tfsdk:"bond_device_list"`
-	DcClusterGroup *FleetDcClusterGroupModel `tfsdk:"dc_cluster_group"`
-	DcClusterGroupInside *FleetDcClusterGroupInsideModel `tfsdk:"dc_cluster_group_inside"`
-	DefaultConfig *FleetEmptyModel `tfsdk:"default_config"`
-	DefaultSriovInterface *FleetEmptyModel `tfsdk:"default_sriov_interface"`
-	DefaultStorageClass *FleetEmptyModel `tfsdk:"default_storage_class"`
-	DenyAllUsb *FleetEmptyModel `tfsdk:"deny_all_usb"`
-	DeviceList *FleetDeviceListModel `tfsdk:"device_list"`
-	DisableGpu *FleetEmptyModel `tfsdk:"disable_gpu"`
-	DisableVm *FleetEmptyModel `tfsdk:"disable_vm"`
-	EnableGpu *FleetEmptyModel `tfsdk:"enable_gpu"`
-	EnableVgpu *FleetEnableVgpuModel `tfsdk:"enable_vgpu"`
-	EnableVm *FleetEmptyModel `tfsdk:"enable_vm"`
-	InsideVirtualNetwork []FleetInsideVirtualNetworkModel `tfsdk:"inside_virtual_network"`
-	InterfaceList *FleetInterfaceListModel `tfsdk:"interface_list"`
-	KubernetesUpgradeDrain *FleetKubernetesUpgradeDrainModel `tfsdk:"kubernetes_upgrade_drain"`
-	LogReceiver *FleetLogReceiverModel `tfsdk:"log_receiver"`
-	LogsStreamingDisabled *FleetEmptyModel `tfsdk:"logs_streaming_disabled"`
-	NetworkConnectors []FleetNetworkConnectorsModel `tfsdk:"network_connectors"`
-	NetworkFirewall []FleetNetworkFirewallModel `tfsdk:"network_firewall"`
-	NoBondDevices *FleetEmptyModel `tfsdk:"no_bond_devices"`
-	NoDcClusterGroup *FleetEmptyModel `tfsdk:"no_dc_cluster_group"`
-	NoStorageDevice *FleetEmptyModel `tfsdk:"no_storage_device"`
-	NoStorageInterfaces *FleetEmptyModel `tfsdk:"no_storage_interfaces"`
-	NoStorageStaticRoutes *FleetEmptyModel `tfsdk:"no_storage_static_routes"`
-	OutsideVirtualNetwork []FleetOutsideVirtualNetworkModel `tfsdk:"outside_virtual_network"`
-	PerformanceEnhancementMode *FleetPerformanceEnhancementModeModel `tfsdk:"performance_enhancement_mode"`
-	SriovInterfaces *FleetSriovInterfacesModel `tfsdk:"sriov_interfaces"`
-	StorageClassList *FleetStorageClassListModel `tfsdk:"storage_class_list"`
-	StorageDeviceList *FleetStorageDeviceListModel `tfsdk:"storage_device_list"`
-	StorageInterfaceList *FleetStorageInterfaceListModel `tfsdk:"storage_interface_list"`
-	StorageStaticRoutes *FleetStorageStaticRoutesModel `tfsdk:"storage_static_routes"`
-	UsbPolicy *FleetUsbPolicyModel `tfsdk:"usb_policy"`
+	Name                             types.String                          `tfsdk:"name"`
+	Namespace                        types.String                          `tfsdk:"namespace"`
+	Annotations                      types.Map                             `tfsdk:"annotations"`
+	Description                      types.String                          `tfsdk:"description"`
+	Disable                          types.Bool                            `tfsdk:"disable"`
+	Labels                           types.Map                             `tfsdk:"labels"`
+	ID                               types.String                          `tfsdk:"id"`
+	EnableDefaultFleetConfigDownload types.Bool                            `tfsdk:"enable_default_fleet_config_download"`
+	FleetLabel                       types.String                          `tfsdk:"fleet_label"`
+	OperatingSystemVersion           types.String                          `tfsdk:"operating_system_version"`
+	VolterraSoftwareVersion          types.String                          `tfsdk:"volterra_software_version"`
+	Timeouts                         timeouts.Value                        `tfsdk:"timeouts"`
+	AllowAllUsb                      *FleetEmptyModel                      `tfsdk:"allow_all_usb"`
+	BlockedServices                  []FleetBlockedServicesModel           `tfsdk:"blocked_services"`
+	BondDeviceList                   *FleetBondDeviceListModel             `tfsdk:"bond_device_list"`
+	DcClusterGroup                   *FleetDcClusterGroupModel             `tfsdk:"dc_cluster_group"`
+	DcClusterGroupInside             *FleetDcClusterGroupInsideModel       `tfsdk:"dc_cluster_group_inside"`
+	DefaultConfig                    *FleetEmptyModel                      `tfsdk:"default_config"`
+	DefaultSriovInterface            *FleetEmptyModel                      `tfsdk:"default_sriov_interface"`
+	DefaultStorageClass              *FleetEmptyModel                      `tfsdk:"default_storage_class"`
+	DenyAllUsb                       *FleetEmptyModel                      `tfsdk:"deny_all_usb"`
+	DeviceList                       *FleetDeviceListModel                 `tfsdk:"device_list"`
+	DisableGpu                       *FleetEmptyModel                      `tfsdk:"disable_gpu"`
+	DisableVm                        *FleetEmptyModel                      `tfsdk:"disable_vm"`
+	EnableGpu                        *FleetEmptyModel                      `tfsdk:"enable_gpu"`
+	EnableVgpu                       *FleetEnableVgpuModel                 `tfsdk:"enable_vgpu"`
+	EnableVm                         *FleetEmptyModel                      `tfsdk:"enable_vm"`
+	InsideVirtualNetwork             []FleetInsideVirtualNetworkModel      `tfsdk:"inside_virtual_network"`
+	InterfaceList                    *FleetInterfaceListModel              `tfsdk:"interface_list"`
+	KubernetesUpgradeDrain           *FleetKubernetesUpgradeDrainModel     `tfsdk:"kubernetes_upgrade_drain"`
+	LogReceiver                      *FleetLogReceiverModel                `tfsdk:"log_receiver"`
+	LogsStreamingDisabled            *FleetEmptyModel                      `tfsdk:"logs_streaming_disabled"`
+	NetworkConnectors                []FleetNetworkConnectorsModel         `tfsdk:"network_connectors"`
+	NetworkFirewall                  []FleetNetworkFirewallModel           `tfsdk:"network_firewall"`
+	NoBondDevices                    *FleetEmptyModel                      `tfsdk:"no_bond_devices"`
+	NoDcClusterGroup                 *FleetEmptyModel                      `tfsdk:"no_dc_cluster_group"`
+	NoStorageDevice                  *FleetEmptyModel                      `tfsdk:"no_storage_device"`
+	NoStorageInterfaces              *FleetEmptyModel                      `tfsdk:"no_storage_interfaces"`
+	NoStorageStaticRoutes            *FleetEmptyModel                      `tfsdk:"no_storage_static_routes"`
+	OutsideVirtualNetwork            []FleetOutsideVirtualNetworkModel     `tfsdk:"outside_virtual_network"`
+	PerformanceEnhancementMode       *FleetPerformanceEnhancementModeModel `tfsdk:"performance_enhancement_mode"`
+	SriovInterfaces                  *FleetSriovInterfacesModel            `tfsdk:"sriov_interfaces"`
+	StorageClassList                 *FleetStorageClassListModel           `tfsdk:"storage_class_list"`
+	StorageDeviceList                *FleetStorageDeviceListModel          `tfsdk:"storage_device_list"`
+	StorageInterfaceList             *FleetStorageInterfaceListModel       `tfsdk:"storage_interface_list"`
+	StorageStaticRoutes              *FleetStorageStaticRoutesModel        `tfsdk:"storage_static_routes"`
+	UsbPolicy                        *FleetUsbPolicyModel                  `tfsdk:"usb_policy"`
 }
 
 func (r *FleetResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -838,7 +838,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Fleet. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -848,7 +848,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the Fleet will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -858,57 +858,57 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"enable_default_fleet_config_download": schema.BoolAttribute{
 				MarkdownDescription: "Enable Default Fleet Config Download. Enable default fleet config, It must be set for storage config and gpu config",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.Bool{
 					boolplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"fleet_label": schema.StringAttribute{
 				MarkdownDescription: "Fleet Label Value. fleet_label value is used to create known_label 'ves.io/fleet=<fleet_label>' The known_label is created in the 'shared' namespace for the tenant. A virtual_site object with name <fleet_label> is also created in 'shared' namespace for tenant. The virtual_site object will select all sites configured with the known_label above fleet_label with 'sfo' will create a known_label 'ves.io/fleet=sfo' in tenant for the fleet",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"operating_system_version": schema.StringAttribute{
 				MarkdownDescription: "Operating System Version. Desired Operating System version that is applied to all sites that are member of the fleet. Current Operating System version can be overridden via site config.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"volterra_software_version": schema.StringAttribute{
 				MarkdownDescription: "Software Version. F5XC software version is human readable string matching released set of version components. The given software version is applied to all sites that are member of the fleet. Current software installed can be overridden via site config.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -930,7 +930,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 					Attributes: map[string]schema.Attribute{
 						"network_type": schema.StringAttribute{
 							MarkdownDescription: "Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user. Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`. Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`.",
-							Optional: true,
+							Optional:            true,
 						},
 					},
 					Blocks: map[string]schema.Block{
@@ -944,13 +944,11 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 							MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 						},
 					},
-
 				},
 			},
 			"bond_device_list": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: bond_device_list, no_bond_devices] Bond Devices List. List of bond devices for this fleet",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"bond_devices": schema.ListNestedBlock{
 						MarkdownDescription: "Bond Devices. List of bond devices",
@@ -958,20 +956,20 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 							Attributes: map[string]schema.Attribute{
 								"devices": schema.ListAttribute{
 									MarkdownDescription: "Member Ethernet Devices. Ethernet devices that will make up this bond",
-									Optional: true,
-									ElementType: types.StringType,
+									Optional:            true,
+									ElementType:         types.StringType,
 								},
 								"link_polling_interval": schema.Int64Attribute{
 									MarkdownDescription: "Link Polling Interval. Link polling interval in milliseconds",
-									Optional: true,
+									Optional:            true,
 								},
 								"link_up_delay": schema.Int64Attribute{
 									MarkdownDescription: "Link Up Delay. Milliseconds wait before link is declared up",
-									Optional: true,
+									Optional:            true,
 								},
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Bond Device Name. Name for the Bond. Ex 'bond0'",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
@@ -983,7 +981,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									Attributes: map[string]schema.Attribute{
 										"rate": schema.Int64Attribute{
 											MarkdownDescription: "LACP Packet Interval. Interval in seconds to transmit LACP packets",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 								},
@@ -991,45 +989,42 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 						},
 					},
 				},
-
 			},
 			"dc_cluster_group": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: dc_cluster_group, dc_cluster_group_inside, no_dc_cluster_group] Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
 						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-						Optional: true,
+						Optional:            true,
 					},
 					"namespace": schema.StringAttribute{
 						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-						Optional: true,
+						Optional:            true,
 					},
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-						Optional: true,
-						Computed: true,
+						Optional:            true,
+						Computed:            true,
 					},
 				},
-
 			},
 			"dc_cluster_group_inside": schema.SingleNestedBlock{
 				MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
 						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-						Optional: true,
+						Optional:            true,
 					},
 					"namespace": schema.StringAttribute{
 						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-						Optional: true,
+						Optional:            true,
 					},
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-						Optional: true,
-						Computed: true,
+						Optional:            true,
+						Computed:            true,
 					},
 				},
-
 			},
 			"default_config": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: default_config, device_list, interface_list] Empty. This can be used for messages where no values are needed",
@@ -1045,8 +1040,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 			},
 			"device_list": schema.SingleNestedBlock{
 				MarkdownDescription: "List of Devices. Add device for all interfaces belonging to this fleet",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"devices": schema.ListNestedBlock{
 						MarkdownDescription: "Devices. Configuration for all devices in the fleet. Examples of devices are - network interfaces, cameras, scanners etc. Configuration a device is applied on VER node if the VER node is member of this fleet and has an corresponding interface/device. The mapping from device configured in fleet with interface/device in VER node depends on the type of device and is documented in device instance specific sections",
@@ -1054,11 +1048,11 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Device Name. Name of the device including the unit number (e.g. eth0 or disk1). The name must match name of device in host-os of node",
-									Optional: true,
+									Optional:            true,
 								},
 								"owner": schema.StringAttribute{
 									MarkdownDescription: "Device Owner Type. Defines ownership for a device. Device owner is invalid Device is owned by VER pod. usually it will be network interface device or accelerator like crypto engine. Device is available to be owned by vK8s workload on the site, like camera GPU etc. Device is not available to be owned by vK8s or VER. Can be exposed via some other service. Like TPM. Possible values are `DEVICE_OWNER_INVALID`, `DEVICE_OWNER_VER`, `DEVICE_OWNER_VK8S_WORK_LOAD`, `DEVICE_OWNER_HOST`. Defaults to `DEVICE_OWNER_INVALID`.",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
@@ -1067,7 +1061,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									Attributes: map[string]schema.Attribute{
 										"use": schema.StringAttribute{
 											MarkdownDescription: "Network Device Use. Defines how the device is used If networking device is owned by VER, it is available for users to configure as required If networking device is owned by VER, it is included in bootstrap config and member of outside network. If networking device is owned by VER, it is included in bootstrap config and member of inside network. Possible values are `NETWORK_INTERFACE_USE_REGULAR`, `NETWORK_INTERFACE_USE_OUTSIDE`, `NETWORK_INTERFACE_USE_INSIDE`. Defaults to `NETWORK_INTERFACE_USE_REGULAR`.",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -1077,26 +1071,26 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 												Attributes: map[string]schema.Attribute{
 													"kind": schema.StringAttribute{
 														MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-														Optional: true,
-														Computed: true,
+														Optional:            true,
+														Computed:            true,
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-														Optional: true,
+														Optional:            true,
 													},
 													"namespace": schema.StringAttribute{
 														MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-														Optional: true,
+														Optional:            true,
 													},
 													"tenant": schema.StringAttribute{
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-														Optional: true,
-														Computed: true,
+														Optional:            true,
+														Computed:            true,
 													},
 													"uid": schema.StringAttribute{
 														MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-														Optional: true,
-														Computed: true,
+														Optional:            true,
+														Computed:            true,
 													},
 												},
 											},
@@ -1107,7 +1101,6 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 						},
 					},
 				},
-
 			},
 			"disable_gpu": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: disable_gpu, enable_gpu, enable_vgpu] Empty. This can be used for messages where no values are needed",
@@ -1123,18 +1116,17 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				Attributes: map[string]schema.Attribute{
 					"feature_type": schema.StringAttribute{
 						MarkdownDescription: "Feature Type. Set feature to be enabled Operate with a degraded vGPU performance Enable NVIDIA vGPU Enable NVIDIA RTX Virtual Workstation Enable NVIDIA Virtual Compute Server. Possible values are `UNLICENSED`, `VGPU`, `VWS`, `VCS`. Defaults to `UNLICENSED`.",
-						Optional: true,
+						Optional:            true,
 					},
 					"server_address": schema.StringAttribute{
 						MarkdownDescription: "License Server Address. Set License Server Address",
-						Optional: true,
+						Optional:            true,
 					},
 					"server_port": schema.Int64Attribute{
 						MarkdownDescription: "License Server Port Number. Set License Server port number",
-						Optional: true,
+						Optional:            true,
 					},
 				},
-
 			},
 			"enable_vm": schema.SingleNestedBlock{
 				MarkdownDescription: "VM Configuration. VMs support configuration",
@@ -1145,35 +1137,33 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 					Attributes: map[string]schema.Attribute{
 						"kind": schema.StringAttribute{
 							MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-							Optional: true,
-							Computed: true,
+							Optional:            true,
+							Computed:            true,
 						},
 						"name": schema.StringAttribute{
 							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-							Optional: true,
+							Optional:            true,
 						},
 						"namespace": schema.StringAttribute{
 							MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-							Optional: true,
+							Optional:            true,
 						},
 						"tenant": schema.StringAttribute{
 							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-							Optional: true,
-							Computed: true,
+							Optional:            true,
+							Computed:            true,
 						},
 						"uid": schema.StringAttribute{
 							MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-							Optional: true,
-							Computed: true,
+							Optional:            true,
+							Computed:            true,
 						},
 					},
-
 				},
 			},
 			"interface_list": schema.SingleNestedBlock{
 				MarkdownDescription: "List of Interfaces. Add all interfaces belonging to this fleet",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"interfaces": schema.ListNestedBlock{
 						MarkdownDescription: "List of Interfaces. Add all interfaces belonging to this fleet",
@@ -1181,27 +1171,25 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-									Optional: true,
+									Optional:            true,
 								},
 								"namespace": schema.StringAttribute{
 									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-									Optional: true,
+									Optional:            true,
 								},
 								"tenant": schema.StringAttribute{
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-									Optional: true,
-									Computed: true,
+									Optional:            true,
+									Computed:            true,
 								},
 							},
 						},
 					},
 				},
-
 			},
 			"kubernetes_upgrade_drain": schema.SingleNestedBlock{
 				MarkdownDescription: "Node by Node Upgrade. Specify how worker nodes within a site will be upgraded.",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"disable_upgrade_drain": schema.SingleNestedBlock{
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -1211,11 +1199,11 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 						Attributes: map[string]schema.Attribute{
 							"drain_max_unavailable_node_count": schema.Int64Attribute{
 								MarkdownDescription: "Node Batch Size Count.",
-								Optional: true,
+								Optional:            true,
 							},
 							"drain_node_timeout": schema.Int64Attribute{
 								MarkdownDescription: "Upgrade Wait Time. Seconds to wait before initiating upgrade on the next set of nodes. Setting it to 0 will wait indefinitely for all services on nodes to be upgraded gracefully before proceeding to the next set of nodes. (Warning: It may block upgrade if services on a node cannot be gracefully upgraded. It is recommended to use the default value).",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -1228,26 +1216,24 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 						},
 					},
 				},
-
 			},
 			"log_receiver": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: log_receiver, logs_streaming_disabled] Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
 						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-						Optional: true,
+						Optional:            true,
 					},
 					"namespace": schema.StringAttribute{
 						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-						Optional: true,
+						Optional:            true,
 					},
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-						Optional: true,
-						Computed: true,
+						Optional:            true,
+						Computed:            true,
 					},
 				},
-
 			},
 			"logs_streaming_disabled": schema.SingleNestedBlock{
 				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -1258,29 +1244,28 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 					Attributes: map[string]schema.Attribute{
 						"kind": schema.StringAttribute{
 							MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-							Optional: true,
-							Computed: true,
+							Optional:            true,
+							Computed:            true,
 						},
 						"name": schema.StringAttribute{
 							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-							Optional: true,
+							Optional:            true,
 						},
 						"namespace": schema.StringAttribute{
 							MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-							Optional: true,
+							Optional:            true,
 						},
 						"tenant": schema.StringAttribute{
 							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-							Optional: true,
-							Computed: true,
+							Optional:            true,
+							Computed:            true,
 						},
 						"uid": schema.StringAttribute{
 							MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-							Optional: true,
-							Computed: true,
+							Optional:            true,
+							Computed:            true,
 						},
 					},
-
 				},
 			},
 			"network_firewall": schema.ListNestedBlock{
@@ -1289,29 +1274,28 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 					Attributes: map[string]schema.Attribute{
 						"kind": schema.StringAttribute{
 							MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-							Optional: true,
-							Computed: true,
+							Optional:            true,
+							Computed:            true,
 						},
 						"name": schema.StringAttribute{
 							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-							Optional: true,
+							Optional:            true,
 						},
 						"namespace": schema.StringAttribute{
 							MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-							Optional: true,
+							Optional:            true,
 						},
 						"tenant": schema.StringAttribute{
 							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-							Optional: true,
-							Computed: true,
+							Optional:            true,
+							Computed:            true,
 						},
 						"uid": schema.StringAttribute{
 							MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-							Optional: true,
-							Computed: true,
+							Optional:            true,
+							Computed:            true,
 						},
 					},
-
 				},
 			},
 			"no_bond_devices": schema.SingleNestedBlock{
@@ -1335,40 +1319,37 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 					Attributes: map[string]schema.Attribute{
 						"kind": schema.StringAttribute{
 							MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-							Optional: true,
-							Computed: true,
+							Optional:            true,
+							Computed:            true,
 						},
 						"name": schema.StringAttribute{
 							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-							Optional: true,
+							Optional:            true,
 						},
 						"namespace": schema.StringAttribute{
 							MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-							Optional: true,
+							Optional:            true,
 						},
 						"tenant": schema.StringAttribute{
 							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-							Optional: true,
-							Computed: true,
+							Optional:            true,
+							Computed:            true,
 						},
 						"uid": schema.StringAttribute{
 							MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-							Optional: true,
-							Computed: true,
+							Optional:            true,
+							Computed:            true,
 						},
 					},
-
 				},
 			},
 			"performance_enhancement_mode": schema.SingleNestedBlock{
 				MarkdownDescription: "Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default.",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"perf_mode_l3_enhanced": schema.SingleNestedBlock{
 						MarkdownDescription: "L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"jumbo": schema.SingleNestedBlock{
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -1382,12 +1363,10 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 			"sriov_interfaces": schema.SingleNestedBlock{
 				MarkdownDescription: "Custom SR-IOV interfaces Configuration List. List of all custom SR-IOV interfaces configuration",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"sriov_interface": schema.ListNestedBlock{
 						MarkdownDescription: "Custom SR-IOV interfaces Configuration. Use custom SR-IOV interfaces Configuration",
@@ -1395,26 +1374,24 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 							Attributes: map[string]schema.Attribute{
 								"interface_name": schema.StringAttribute{
 									MarkdownDescription: "Name of physical interface. Name of SR-IOV physical interface",
-									Optional: true,
+									Optional:            true,
 								},
 								"number_of_vfio_vfs": schema.Int64Attribute{
 									MarkdownDescription: "Number of virtual functions reserved for vfio. Number of virtual functions reserved for VNFs and DPDK-based CNFs",
-									Optional: true,
+									Optional:            true,
 								},
 								"number_of_vfs": schema.Int64Attribute{
 									MarkdownDescription: "Total number of virtual functions. Total number of virtual functions",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 						},
 					},
 				},
-
 			},
 			"storage_class_list": schema.SingleNestedBlock{
 				MarkdownDescription: "Custom Storage Class List. Add additional custom storage classes in kubernetes for this fleet",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"storage_classes": schema.ListNestedBlock{
 						MarkdownDescription: "List of Storage Classes. List of custom storage classes",
@@ -1422,27 +1399,27 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 							Attributes: map[string]schema.Attribute{
 								"allow_volume_expansion": schema.BoolAttribute{
 									MarkdownDescription: "Allow Volume Expansion. Allow volume expansion.",
-									Optional: true,
+									Optional:            true,
 								},
 								"default_storage_class": schema.BoolAttribute{
 									MarkdownDescription: "Default Storage Class. Make this storage class default storage class for the K8s cluster",
-									Optional: true,
+									Optional:            true,
 								},
 								"description_spec": schema.StringAttribute{
 									MarkdownDescription: "Storage Class Description. Description for this storage class",
-									Optional: true,
+									Optional:            true,
 								},
 								"reclaim_policy": schema.StringAttribute{
 									MarkdownDescription: "Reclaim Policy. Reclaim Policy",
-									Optional: true,
+									Optional:            true,
 								},
 								"storage_class_name": schema.StringAttribute{
 									MarkdownDescription: "Storage Class Name. Name of the storage class as it will appear in K8s.",
-									Optional: true,
+									Optional:            true,
 								},
 								"storage_device": schema.StringAttribute{
 									MarkdownDescription: "Storage Device. Storage device that this class will use. The Device name defined at previous step.",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
@@ -1454,7 +1431,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									Attributes: map[string]schema.Attribute{
 										"yaml": schema.StringAttribute{
 											MarkdownDescription: "Storage Class YAML. K8s YAML for StorageClass",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 								},
@@ -1463,67 +1440,67 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									Attributes: map[string]schema.Attribute{
 										"allow_mutations": schema.StringAttribute{
 											MarkdownDescription: "allowMutations. mutation can override specified parameters",
-											Optional: true,
+											Optional:            true,
 										},
 										"allow_overrides": schema.StringAttribute{
 											MarkdownDescription: "allowOverrides. PVC can override specified parameters",
-											Optional: true,
+											Optional:            true,
 										},
 										"dedupe_enabled": schema.BoolAttribute{
 											MarkdownDescription: "dedupeEnabled. Indicates that the volume should enable deduplication.",
-											Optional: true,
+											Optional:            true,
 										},
 										"description_spec": schema.StringAttribute{
 											MarkdownDescription: "Description. The SecretName parameter is used to identify name of secret to identify backend storage's auth information",
-											Optional: true,
+											Optional:            true,
 										},
 										"destroy_on_delete": schema.BoolAttribute{
 											MarkdownDescription: "destroyOnDelete. Indicates the backing Nimble volume (including snapshots) should be destroyed when the PVC is deleted",
-											Optional: true,
+											Optional:            true,
 										},
 										"encrypted": schema.BoolAttribute{
 											MarkdownDescription: "encrypted. Indicates that the volume should be encrypted.",
-											Optional: true,
+											Optional:            true,
 										},
 										"folder": schema.StringAttribute{
 											MarkdownDescription: "folder. The name of the folder in which to place the volume.",
-											Optional: true,
+											Optional:            true,
 										},
 										"limit_iops": schema.StringAttribute{
 											MarkdownDescription: "limitIops. The IOPS limit of the volume.",
-											Optional: true,
+											Optional:            true,
 										},
 										"limit_mbps": schema.StringAttribute{
 											MarkdownDescription: "limitMbps. The IOPS limit of the volume.",
-											Optional: true,
+											Optional:            true,
 										},
 										"performance_policy": schema.StringAttribute{
 											MarkdownDescription: "performancePolicy. The name of the performance policy to assign to the volume.",
-											Optional: true,
+											Optional:            true,
 										},
 										"pool": schema.StringAttribute{
 											MarkdownDescription: "pool. The name of the pool in which to place the volume.",
-											Optional: true,
+											Optional:            true,
 										},
 										"protection_template": schema.StringAttribute{
 											MarkdownDescription: "protectionTemplate. The name of the performance policy to assign to the volume.",
-											Optional: true,
+											Optional:            true,
 										},
 										"secret_name": schema.StringAttribute{
 											MarkdownDescription: "Secret Name. The SecretName parameter is used to identify name of secret to identify backend storage's auth information",
-											Optional: true,
+											Optional:            true,
 										},
 										"secret_namespace": schema.StringAttribute{
 											MarkdownDescription: "Secret Namespace. The SecretNamespace parameter is used to identify name of namespace where secret resides",
-											Optional: true,
+											Optional:            true,
 										},
 										"sync_on_detach": schema.BoolAttribute{
 											MarkdownDescription: "syncOnDetach. Indicates that a snapshot of the volume should be synced to the replication partner each time it is detached from a node.",
-											Optional: true,
+											Optional:            true,
 										},
 										"thick": schema.BoolAttribute{
 											MarkdownDescription: "thick. Indicates that the volume should be thick provisioned.",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 								},
@@ -1532,7 +1509,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									Attributes: map[string]schema.Attribute{
 										"storage_pools": schema.StringAttribute{
 											MarkdownDescription: "Storage Pools. The storagePools parameter is used to further restrict the set of pools that match any specified attributes",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -1546,15 +1523,15 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									Attributes: map[string]schema.Attribute{
 										"backend": schema.StringAttribute{
 											MarkdownDescription: "Backend. Defines type of Pure storage backend block or file. The volume will have the aspects defined in the chosen virtual pool.",
-											Optional: true,
+											Optional:            true,
 										},
 										"bandwidth_limit": schema.StringAttribute{
 											MarkdownDescription: "Bandwidth Limit. It must be between 1 MB/s and 512 GB/s. Enter the size as a number (bytes must be multiple of 512) or number with a single character unit symbol. Valid unit symbols are K, M, G, representing KiB, MiB, and GiB.",
-											Optional: true,
+											Optional:            true,
 										},
 										"iops_limit": schema.Int64Attribute{
 											MarkdownDescription: "IOPS Limit. Enable IOPS limitation. It must be between 100 and 100 million. If value is 0, IOPS limit is not defined.",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 								},
@@ -1562,12 +1539,10 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 						},
 					},
 				},
-
 			},
 			"storage_device_list": schema.SingleNestedBlock{
 				MarkdownDescription: "Custom Storage Device List. Add additional custom storage classes in kubernetes for this fleet",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"storage_devices": schema.ListNestedBlock{
 						MarkdownDescription: "List of Storage Devices. List of custom storage devices",
@@ -1575,7 +1550,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 							Attributes: map[string]schema.Attribute{
 								"storage_device": schema.StringAttribute{
 									MarkdownDescription: "Storage Device. Storage device and device unit",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
@@ -1590,45 +1565,44 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									Attributes: map[string]schema.Attribute{
 										"api_server_port": schema.Int64Attribute{
 											MarkdownDescription: "Storage server Port. Enter Storage Server Port",
-											Optional: true,
+											Optional:            true,
 										},
 										"iscsi_chap_user": schema.StringAttribute{
 											MarkdownDescription: "iscsi chapUser. chap Username to connect to the HPE storage",
-											Optional: true,
+											Optional:            true,
 										},
 										"storage_server_ip_address": schema.StringAttribute{
 											MarkdownDescription: "Storage Server IP address. Enter storage server IP address",
-											Optional: true,
+											Optional:            true,
 										},
 										"storage_server_name": schema.StringAttribute{
 											MarkdownDescription: "Storage Server Name. Enter storage server Name",
-											Optional: true,
+											Optional:            true,
 										},
 										"username": schema.StringAttribute{
 											MarkdownDescription: "Username. Username to connect to the HPE storage management IP",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"iscsi_chap_password": schema.SingleNestedBlock{
 											MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"blindfold_secret_info": schema.SingleNestedBlock{
 													MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 													Attributes: map[string]schema.Attribute{
 														"decryption_provider": schema.StringAttribute{
 															MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-															Optional: true,
+															Optional:            true,
 														},
 														"location": schema.StringAttribute{
 															MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-															Optional: true,
+															Optional:            true,
 														},
 														"store_provider": schema.StringAttribute{
 															MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -1637,11 +1611,11 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 													Attributes: map[string]schema.Attribute{
 														"provider_ref": schema.StringAttribute{
 															MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-															Optional: true,
+															Optional:            true,
 														},
 														"url": schema.StringAttribute{
 															MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -1649,23 +1623,22 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 										},
 										"password": schema.SingleNestedBlock{
 											MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"blindfold_secret_info": schema.SingleNestedBlock{
 													MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 													Attributes: map[string]schema.Attribute{
 														"decryption_provider": schema.StringAttribute{
 															MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-															Optional: true,
+															Optional:            true,
 														},
 														"location": schema.StringAttribute{
 															MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-															Optional: true,
+															Optional:            true,
 														},
 														"store_provider": schema.StringAttribute{
 															MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -1674,11 +1647,11 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 													Attributes: map[string]schema.Attribute{
 														"provider_ref": schema.StringAttribute{
 															MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-															Optional: true,
+															Optional:            true,
 														},
 														"url": schema.StringAttribute{
 															MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -1688,75 +1661,74 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 								},
 								"netapp_trident": schema.SingleNestedBlock{
 									MarkdownDescription: "NetApp Trident. Device configuration for NetApp Trident Storage",
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"netapp_backend_ontap_nas": schema.SingleNestedBlock{
 											MarkdownDescription: "Storage Backend NetApp ONTAP NAS. Configuration of storage backend for NetApp ONTAP NAS",
 											Attributes: map[string]schema.Attribute{
 												"auto_export_policy": schema.BoolAttribute{
 													MarkdownDescription: "Auto Export Policy. Enable automatic export policy creation and updating",
-													Optional: true,
+													Optional:            true,
 												},
 												"backend_name": schema.StringAttribute{
 													MarkdownDescription: "Storage Backend Name. Configuration of Backend Name. Driver is name + '_' + dataLIF",
-													Optional: true,
+													Optional:            true,
 												},
 												"client_certificate": schema.StringAttribute{
 													MarkdownDescription: "Client Certificate. Please Enter Base64-encoded value of client certificate. Used for certificate-based auth.",
-													Optional: true,
+													Optional:            true,
 												},
 												"data_lif_dns_name": schema.StringAttribute{
 													MarkdownDescription: "Backend Data LIF Name. Backend Data LIF IP Address's ip address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
-													Optional: true,
+													Optional:            true,
 												},
 												"data_lif_ip": schema.StringAttribute{
 													MarkdownDescription: "Backend Data LIF IP Address. Backend Data LIF IP Address is reachable at the given ip address",
-													Optional: true,
+													Optional:            true,
 												},
 												"limit_aggregate_usage": schema.StringAttribute{
 													MarkdownDescription: "Limit Aggregate Usage. Fail provisioning if usage is above this percentage. Not enforced by default.",
-													Optional: true,
+													Optional:            true,
 												},
 												"limit_volume_size": schema.StringAttribute{
 													MarkdownDescription: "Limit Volume Size. Fail provisioning if requested volume size is above this value. Not enforced by default.",
-													Optional: true,
+													Optional:            true,
 												},
 												"management_lif_dns_name": schema.StringAttribute{
 													MarkdownDescription: "Backend Management LIF Name. Backend Management LIF IP Address's ip address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
-													Optional: true,
+													Optional:            true,
 												},
 												"management_lif_ip": schema.StringAttribute{
 													MarkdownDescription: "Backend Management LIF IP Address. Backend Management LIF IP Address is reachable at the given ip address",
-													Optional: true,
+													Optional:            true,
 												},
 												"nfs_mount_options": schema.StringAttribute{
 													MarkdownDescription: "NFS Mount Options. Comma-separated list of NFS mount options. Not enforced by default.",
-													Optional: true,
+													Optional:            true,
 												},
 												"region": schema.StringAttribute{
 													MarkdownDescription: "Backend Region. Virtual Pool Region",
-													Optional: true,
+													Optional:            true,
 												},
 												"storage_driver_name": schema.StringAttribute{
 													MarkdownDescription: "Storage Backend Driver. Configuration of Backend Name",
-													Optional: true,
+													Optional:            true,
 												},
 												"storage_prefix": schema.StringAttribute{
 													MarkdownDescription: "Storage Prefix. Prefix used when provisioning new volumes in the SVM. Once set this cannot be updated",
-													Optional: true,
+													Optional:            true,
 												},
 												"svm": schema.StringAttribute{
 													MarkdownDescription: "Backend SVM. Storage virtual machine to use. Derived if an SVM managementLIF is specified",
-													Optional: true,
+													Optional:            true,
 												},
 												"trusted_ca_certificate": schema.StringAttribute{
 													MarkdownDescription: "Trusted CA Certificate. Please Enter Base64-encoded value of trusted CA certificate. Optional. Used for certificate-based auth.",
-													Optional: true,
+													Optional:            true,
 												},
 												"username": schema.StringAttribute{
 													MarkdownDescription: "Username. Username to connect to the cluster/SVM",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -1765,30 +1737,29 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 													Attributes: map[string]schema.Attribute{
 														"prefixes": schema.ListAttribute{
 															MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
-															Optional: true,
-															ElementType: types.StringType,
+															Optional:            true,
+															ElementType:         types.StringType,
 														},
 													},
 												},
 												"client_private_key": schema.SingleNestedBlock{
 													MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-													Attributes: map[string]schema.Attribute{
-													},
+													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"blindfold_secret_info": schema.SingleNestedBlock{
 															MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 															Attributes: map[string]schema.Attribute{
 																"decryption_provider": schema.StringAttribute{
 																	MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"location": schema.StringAttribute{
 																	MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"store_provider": schema.StringAttribute{
 																	MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																	Optional: true,
+																	Optional:            true,
 																},
 															},
 														},
@@ -1797,11 +1768,11 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 															Attributes: map[string]schema.Attribute{
 																"provider_ref": schema.StringAttribute{
 																	MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"url": schema.StringAttribute{
 																	MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-																	Optional: true,
+																	Optional:            true,
 																},
 															},
 														},
@@ -1812,23 +1783,22 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 												},
 												"password": schema.SingleNestedBlock{
 													MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-													Attributes: map[string]schema.Attribute{
-													},
+													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"blindfold_secret_info": schema.SingleNestedBlock{
 															MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 															Attributes: map[string]schema.Attribute{
 																"decryption_provider": schema.StringAttribute{
 																	MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"location": schema.StringAttribute{
 																	MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"store_provider": schema.StringAttribute{
 																	MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																	Optional: true,
+																	Optional:            true,
 																},
 															},
 														},
@@ -1837,11 +1807,11 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 															Attributes: map[string]schema.Attribute{
 																"provider_ref": schema.StringAttribute{
 																	MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"url": schema.StringAttribute{
 																	MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-																	Optional: true,
+																	Optional:            true,
 																},
 															},
 														},
@@ -1853,7 +1823,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 														Attributes: map[string]schema.Attribute{
 															"zone": schema.StringAttribute{
 																MarkdownDescription: "Virtual Pool Zone. Virtual Storage Pool zone definition.",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 														Blocks: map[string]schema.Block{
@@ -1865,51 +1835,51 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 																Attributes: map[string]schema.Attribute{
 																	"adaptive_qos_policy": schema.StringAttribute{
 																		MarkdownDescription: "Adaptive QoS Policy name. Enter Adaptive QoS Policy Name",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"encryption": schema.BoolAttribute{
 																		MarkdownDescription: "Enable Encryption. Enable NetApp volume encryption.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"export_policy": schema.StringAttribute{
 																		MarkdownDescription: "Export Policy. Export policy to use.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"qos_policy": schema.StringAttribute{
 																		MarkdownDescription: "QoS Policy Name. Enter QoS Policy Name",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"security_style": schema.StringAttribute{
 																		MarkdownDescription: "Security Style. Security style for new volumes.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"snapshot_dir": schema.BoolAttribute{
 																		MarkdownDescription: "Access to Snapshot Directory. Access to the .snapshot directory.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"snapshot_policy": schema.StringAttribute{
 																		MarkdownDescription: "Snapshot Policy. Snapshot policy to use",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"snapshot_reserve": schema.StringAttribute{
 																		MarkdownDescription: "Snapshot Reserved. Percentage of volume reserved for snapshots. '0' if snapshot policy is 'none', else ''",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"space_reserve": schema.StringAttribute{
 																		MarkdownDescription: "Space Reservation Mode. Space reservation mode; “none” (thin) or “volume” (thick)",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"split_on_clone": schema.BoolAttribute{
 																		MarkdownDescription: "Split on Clone. Split a clone from its parent upon creation.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"tiering_policy": schema.StringAttribute{
 																		MarkdownDescription: "Tiering Policy. Tiering policy to use. 'none' is default.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"unix_permissions": schema.Int64Attribute{
 																		MarkdownDescription: "Unix Mode Permissions. Unix permission mode for new volumes. All allowed 777",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 																Blocks: map[string]schema.Block{
@@ -1926,51 +1896,51 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 													Attributes: map[string]schema.Attribute{
 														"adaptive_qos_policy": schema.StringAttribute{
 															MarkdownDescription: "Adaptive QoS Policy name. Enter Adaptive QoS Policy Name",
-															Optional: true,
+															Optional:            true,
 														},
 														"encryption": schema.BoolAttribute{
 															MarkdownDescription: "Enable Encryption. Enable NetApp volume encryption.",
-															Optional: true,
+															Optional:            true,
 														},
 														"export_policy": schema.StringAttribute{
 															MarkdownDescription: "Export Policy. Export policy to use.",
-															Optional: true,
+															Optional:            true,
 														},
 														"qos_policy": schema.StringAttribute{
 															MarkdownDescription: "QoS Policy Name. Enter QoS Policy Name",
-															Optional: true,
+															Optional:            true,
 														},
 														"security_style": schema.StringAttribute{
 															MarkdownDescription: "Security Style. Security style for new volumes.",
-															Optional: true,
+															Optional:            true,
 														},
 														"snapshot_dir": schema.BoolAttribute{
 															MarkdownDescription: "Access to Snapshot Directory. Access to the .snapshot directory.",
-															Optional: true,
+															Optional:            true,
 														},
 														"snapshot_policy": schema.StringAttribute{
 															MarkdownDescription: "Snapshot Policy. Snapshot policy to use",
-															Optional: true,
+															Optional:            true,
 														},
 														"snapshot_reserve": schema.StringAttribute{
 															MarkdownDescription: "Snapshot Reserved. Percentage of volume reserved for snapshots. '0' if snapshot policy is 'none', else ''",
-															Optional: true,
+															Optional:            true,
 														},
 														"space_reserve": schema.StringAttribute{
 															MarkdownDescription: "Space Reservation Mode. Space reservation mode; “none” (thin) or “volume” (thick)",
-															Optional: true,
+															Optional:            true,
 														},
 														"split_on_clone": schema.BoolAttribute{
 															MarkdownDescription: "Split on Clone. Split a clone from its parent upon creation.",
-															Optional: true,
+															Optional:            true,
 														},
 														"tiering_policy": schema.StringAttribute{
 															MarkdownDescription: "Tiering Policy. Tiering policy to use. 'none' is default.",
-															Optional: true,
+															Optional:            true,
 														},
 														"unix_permissions": schema.Int64Attribute{
 															MarkdownDescription: "Unix Mode Permissions. Unix permission mode for new volumes. All allowed 777",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 													Blocks: map[string]schema.Block{
@@ -1986,81 +1956,80 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 											Attributes: map[string]schema.Attribute{
 												"client_certificate": schema.StringAttribute{
 													MarkdownDescription: "Client Certificate. Please Enter Base64-encoded value of client certificate. Used for certificate-based auth.",
-													Optional: true,
+													Optional:            true,
 												},
 												"data_lif_dns_name": schema.StringAttribute{
 													MarkdownDescription: "Backend Data LIF Name. Backend Data LIF IP Address's ip address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
-													Optional: true,
+													Optional:            true,
 												},
 												"data_lif_ip": schema.StringAttribute{
 													MarkdownDescription: "Backend Data LIF IP Address. Backend Data LIF IP Address is reachable at the given ip address",
-													Optional: true,
+													Optional:            true,
 												},
 												"igroup_name": schema.StringAttribute{
 													MarkdownDescription: "iGroup Name. Name of the igroup for SAN volumes to use",
-													Optional: true,
+													Optional:            true,
 												},
 												"limit_aggregate_usage": schema.Int64Attribute{
 													MarkdownDescription: "Limit Aggregate Usage. Fail provisioning if usage is above this percentage. Not enforced by default.",
-													Optional: true,
+													Optional:            true,
 												},
 												"limit_volume_size": schema.Int64Attribute{
 													MarkdownDescription: "Limit Volume Size. Fail provisioning if requested volume size in GBi is above this value. Not enforced by default.",
-													Optional: true,
+													Optional:            true,
 												},
 												"management_lif_dns_name": schema.StringAttribute{
 													MarkdownDescription: "Backend Management LIF Name. Backend Management LIF IP Address's ip address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
-													Optional: true,
+													Optional:            true,
 												},
 												"management_lif_ip": schema.StringAttribute{
 													MarkdownDescription: "Backend Management LIF IP Address. Backend Management LIF IP Address is reachable at the given ip address",
-													Optional: true,
+													Optional:            true,
 												},
 												"region": schema.StringAttribute{
 													MarkdownDescription: "Backend Region. Virtual Pool Region",
-													Optional: true,
+													Optional:            true,
 												},
 												"storage_driver_name": schema.StringAttribute{
 													MarkdownDescription: "Storage Backend Driver. Configuration of Backend Name",
-													Optional: true,
+													Optional:            true,
 												},
 												"storage_prefix": schema.StringAttribute{
 													MarkdownDescription: "Storage Prefix. Prefix used when provisioning new volumes in the SVM. Once set this cannot be updated",
-													Optional: true,
+													Optional:            true,
 												},
 												"svm": schema.StringAttribute{
 													MarkdownDescription: "Backend SVM. Storage virtual machine to use. Derived if an SVM managementLIF is specified",
-													Optional: true,
+													Optional:            true,
 												},
 												"trusted_ca_certificate": schema.StringAttribute{
 													MarkdownDescription: "Trusted CA Certificate. Please Enter Base64-encoded value of trusted CA certificate. Optional. Used for certificate-based auth.",
-													Optional: true,
+													Optional:            true,
 												},
 												"username": schema.StringAttribute{
 													MarkdownDescription: "Username. Username to connect to the cluster/SVM",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 											Blocks: map[string]schema.Block{
 												"client_private_key": schema.SingleNestedBlock{
 													MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-													Attributes: map[string]schema.Attribute{
-													},
+													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"blindfold_secret_info": schema.SingleNestedBlock{
 															MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 															Attributes: map[string]schema.Attribute{
 																"decryption_provider": schema.StringAttribute{
 																	MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"location": schema.StringAttribute{
 																	MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"store_provider": schema.StringAttribute{
 																	MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																	Optional: true,
+																	Optional:            true,
 																},
 															},
 														},
@@ -2069,11 +2038,11 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 															Attributes: map[string]schema.Attribute{
 																"provider_ref": schema.StringAttribute{
 																	MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"url": schema.StringAttribute{
 																	MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-																	Optional: true,
+																	Optional:            true,
 																},
 															},
 														},
@@ -2087,23 +2056,22 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 												},
 												"password": schema.SingleNestedBlock{
 													MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-													Attributes: map[string]schema.Attribute{
-													},
+													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"blindfold_secret_info": schema.SingleNestedBlock{
 															MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 															Attributes: map[string]schema.Attribute{
 																"decryption_provider": schema.StringAttribute{
 																	MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"location": schema.StringAttribute{
 																	MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"store_provider": schema.StringAttribute{
 																	MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																	Optional: true,
+																	Optional:            true,
 																},
 															},
 														},
@@ -2112,11 +2080,11 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 															Attributes: map[string]schema.Attribute{
 																"provider_ref": schema.StringAttribute{
 																	MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"url": schema.StringAttribute{
 																	MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-																	Optional: true,
+																	Optional:            true,
 																},
 															},
 														},
@@ -2128,7 +2096,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 														Attributes: map[string]schema.Attribute{
 															"zone": schema.StringAttribute{
 																MarkdownDescription: "Virtual Pool Zone. Virtual Storage Pool zone definition.",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 														Blocks: map[string]schema.Block{
@@ -2140,51 +2108,51 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 																Attributes: map[string]schema.Attribute{
 																	"adaptive_qos_policy": schema.StringAttribute{
 																		MarkdownDescription: "Adaptive QoS Policy name. Enter Adaptive QoS Policy Name",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"encryption": schema.BoolAttribute{
 																		MarkdownDescription: "Enable Encryption. Enable NetApp volume encryption.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"export_policy": schema.StringAttribute{
 																		MarkdownDescription: "Export Policy. Export policy to use.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"qos_policy": schema.StringAttribute{
 																		MarkdownDescription: "QoS Policy Name. Enter QoS Policy Name",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"security_style": schema.StringAttribute{
 																		MarkdownDescription: "Security Style. Security style for new volumes.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"snapshot_dir": schema.BoolAttribute{
 																		MarkdownDescription: "Access to Snapshot Directory. Access to the .snapshot directory.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"snapshot_policy": schema.StringAttribute{
 																		MarkdownDescription: "Snapshot Policy. Snapshot policy to use",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"snapshot_reserve": schema.StringAttribute{
 																		MarkdownDescription: "Snapshot Reserved. Percentage of volume reserved for snapshots. '0' if snapshot policy is 'none', else ''",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"space_reserve": schema.StringAttribute{
 																		MarkdownDescription: "Space Reservation Mode. Space reservation mode; “none” (thin) or “volume” (thick)",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"split_on_clone": schema.BoolAttribute{
 																		MarkdownDescription: "Split on Clone. Split a clone from its parent upon creation.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"tiering_policy": schema.StringAttribute{
 																		MarkdownDescription: "Tiering Policy. Tiering policy to use. 'none' is default.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"unix_permissions": schema.Int64Attribute{
 																		MarkdownDescription: "Unix Mode Permissions. Unix permission mode for new volumes. All allowed 777",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 																Blocks: map[string]schema.Block{
@@ -2201,33 +2169,32 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 													Attributes: map[string]schema.Attribute{
 														"chap_target_username": schema.StringAttribute{
 															MarkdownDescription: "CHAP Target Username. Target username. Required if useCHAP=true",
-															Optional: true,
+															Optional:            true,
 														},
 														"chap_username": schema.StringAttribute{
 															MarkdownDescription: "CHAP Username. Inbound username. Required if useCHAP=true",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 													Blocks: map[string]schema.Block{
 														"chap_initiator_secret": schema.SingleNestedBlock{
 															MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-															Attributes: map[string]schema.Attribute{
-															},
+															Attributes:          map[string]schema.Attribute{},
 															Blocks: map[string]schema.Block{
 																"blindfold_secret_info": schema.SingleNestedBlock{
 																	MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 																	Attributes: map[string]schema.Attribute{
 																		"decryption_provider": schema.StringAttribute{
 																			MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																		"location": schema.StringAttribute{
 																			MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																		"store_provider": schema.StringAttribute{
 																			MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																	},
 																},
@@ -2236,11 +2203,11 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 																	Attributes: map[string]schema.Attribute{
 																		"provider_ref": schema.StringAttribute{
 																			MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																		"url": schema.StringAttribute{
 																			MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																	},
 																},
@@ -2248,23 +2215,22 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 														},
 														"chap_target_initiator_secret": schema.SingleNestedBlock{
 															MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-															Attributes: map[string]schema.Attribute{
-															},
+															Attributes:          map[string]schema.Attribute{},
 															Blocks: map[string]schema.Block{
 																"blindfold_secret_info": schema.SingleNestedBlock{
 																	MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 																	Attributes: map[string]schema.Attribute{
 																		"decryption_provider": schema.StringAttribute{
 																			MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																		"location": schema.StringAttribute{
 																			MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																		"store_provider": schema.StringAttribute{
 																			MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																	},
 																},
@@ -2273,11 +2239,11 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 																	Attributes: map[string]schema.Attribute{
 																		"provider_ref": schema.StringAttribute{
 																			MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																		"url": schema.StringAttribute{
 																			MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																	},
 																},
@@ -2290,51 +2256,51 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 													Attributes: map[string]schema.Attribute{
 														"adaptive_qos_policy": schema.StringAttribute{
 															MarkdownDescription: "Adaptive QoS Policy name. Enter Adaptive QoS Policy Name",
-															Optional: true,
+															Optional:            true,
 														},
 														"encryption": schema.BoolAttribute{
 															MarkdownDescription: "Enable Encryption. Enable NetApp volume encryption.",
-															Optional: true,
+															Optional:            true,
 														},
 														"export_policy": schema.StringAttribute{
 															MarkdownDescription: "Export Policy. Export policy to use.",
-															Optional: true,
+															Optional:            true,
 														},
 														"qos_policy": schema.StringAttribute{
 															MarkdownDescription: "QoS Policy Name. Enter QoS Policy Name",
-															Optional: true,
+															Optional:            true,
 														},
 														"security_style": schema.StringAttribute{
 															MarkdownDescription: "Security Style. Security style for new volumes.",
-															Optional: true,
+															Optional:            true,
 														},
 														"snapshot_dir": schema.BoolAttribute{
 															MarkdownDescription: "Access to Snapshot Directory. Access to the .snapshot directory.",
-															Optional: true,
+															Optional:            true,
 														},
 														"snapshot_policy": schema.StringAttribute{
 															MarkdownDescription: "Snapshot Policy. Snapshot policy to use",
-															Optional: true,
+															Optional:            true,
 														},
 														"snapshot_reserve": schema.StringAttribute{
 															MarkdownDescription: "Snapshot Reserved. Percentage of volume reserved for snapshots. '0' if snapshot policy is 'none', else ''",
-															Optional: true,
+															Optional:            true,
 														},
 														"space_reserve": schema.StringAttribute{
 															MarkdownDescription: "Space Reservation Mode. Space reservation mode; “none” (thin) or “volume” (thick)",
-															Optional: true,
+															Optional:            true,
 														},
 														"split_on_clone": schema.BoolAttribute{
 															MarkdownDescription: "Split on Clone. Split a clone from its parent upon creation.",
-															Optional: true,
+															Optional:            true,
 														},
 														"tiering_policy": schema.StringAttribute{
 															MarkdownDescription: "Tiering Policy. Tiering policy to use. 'none' is default.",
-															Optional: true,
+															Optional:            true,
 														},
 														"unix_permissions": schema.Int64Attribute{
 															MarkdownDescription: "Unix Mode Permissions. Unix permission mode for new volumes. All allowed 777",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 													Blocks: map[string]schema.Block{
@@ -2352,50 +2318,49 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									Attributes: map[string]schema.Attribute{
 										"cluster_id": schema.StringAttribute{
 											MarkdownDescription: "Cluster ID. clusterID is added as a prefix for all volumes created by this PSO installation. clusterID is also used to identify the volumes used by the datastore, pso-db. clusterID MUST BE UNIQUE for multiple K8s clusters running on top of the same storage arrays. characters allowed: alphanumeric and underscores",
-											Optional: true,
+											Optional:            true,
 										},
 										"enable_storage_topology": schema.BoolAttribute{
 											MarkdownDescription: "Enable Storage Topology. This option is to enable/disable the csi topology feature for pso-csi",
-											Optional: true,
+											Optional:            true,
 										},
 										"enable_strict_topology": schema.BoolAttribute{
 											MarkdownDescription: "Enable Strict Topology. This option is to enable/disable the strict csi topology feature for pso-csi",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"arrays": schema.SingleNestedBlock{
 											MarkdownDescription: "Arrays Configuration. Device configuration for PSO Arrays",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"flash_array": schema.SingleNestedBlock{
 													MarkdownDescription: "Flash Arrays. Specify what storage flash arrays should be managed the plugin",
 													Attributes: map[string]schema.Attribute{
 														"default_fs_opt": schema.StringAttribute{
 															MarkdownDescription: "Default Filesystem Options. Block volume default mkfs options. Not recommended to change!",
-															Optional: true,
+															Optional:            true,
 														},
 														"default_fs_type": schema.StringAttribute{
 															MarkdownDescription: "Default Filesystem Type. Block volume default filesystem type. Not recommended to change!",
-															Optional: true,
+															Optional:            true,
 														},
 														"default_mount_opts": schema.ListAttribute{
 															MarkdownDescription: "Default Mount Options. Block volume default filesystem mount options. Not recommended to change!",
-															Optional: true,
-															ElementType: types.StringType,
+															Optional:            true,
+															ElementType:         types.StringType,
 														},
 														"disable_preempt_attachments": schema.BoolAttribute{
 															MarkdownDescription: "Disable Preempt Attachments. Enable/Disable attachment preemption!",
-															Optional: true,
+															Optional:            true,
 														},
 														"iscsi_login_timeout": schema.Int64Attribute{
 															MarkdownDescription: "iSCSI Login Timeout. iSCSI login timeout in seconds. Not recommended to change!",
-															Optional: true,
+															Optional:            true,
 														},
 														"san_type": schema.StringAttribute{
 															MarkdownDescription: "SAN Type. Block volume access protocol, either ISCSI or FC",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 													Blocks: map[string]schema.Block{
@@ -2405,33 +2370,32 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 																Attributes: map[string]schema.Attribute{
 																	"mgmt_dns_name": schema.StringAttribute{
 																		MarkdownDescription: "Management Endpoint Name. Management Endpoint's ip address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"mgmt_ip": schema.StringAttribute{
 																		MarkdownDescription: "Management Endpoint IP Address. Management Endpoint is reachable at the given ip address",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 																Blocks: map[string]schema.Block{
 																	"api_token": schema.SingleNestedBlock{
 																		MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-																		Attributes: map[string]schema.Attribute{
-																		},
+																		Attributes:          map[string]schema.Attribute{},
 																		Blocks: map[string]schema.Block{
 																			"blindfold_secret_info": schema.SingleNestedBlock{
 																				MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 																				Attributes: map[string]schema.Attribute{
 																					"decryption_provider": schema.StringAttribute{
 																						MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-																						Optional: true,
+																						Optional:            true,
 																					},
 																					"location": schema.StringAttribute{
 																						MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-																						Optional: true,
+																						Optional:            true,
 																					},
 																					"store_provider": schema.StringAttribute{
 																						MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																						Optional: true,
+																						Optional:            true,
 																					},
 																				},
 																			},
@@ -2440,11 +2404,11 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 																				Attributes: map[string]schema.Attribute{
 																					"provider_ref": schema.StringAttribute{
 																						MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																						Optional: true,
+																						Optional:            true,
 																					},
 																					"url": schema.StringAttribute{
 																						MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-																						Optional: true,
+																						Optional:            true,
 																					},
 																				},
 																			},
@@ -2463,11 +2427,11 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 													Attributes: map[string]schema.Attribute{
 														"enable_snapshot_directory": schema.BoolAttribute{
 															MarkdownDescription: "Enable Snapshot Directory. Enable/Disable FlashBlade snapshots",
-															Optional: true,
+															Optional:            true,
 														},
 														"export_rules": schema.StringAttribute{
 															MarkdownDescription: "NFS Export Rules. NFS Export rules",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 													Blocks: map[string]schema.Block{
@@ -2477,41 +2441,40 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 																Attributes: map[string]schema.Attribute{
 																	"mgmt_dns_name": schema.StringAttribute{
 																		MarkdownDescription: "Management Endpoint Name. Management Endpoint's ip address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"mgmt_ip": schema.StringAttribute{
 																		MarkdownDescription: "Management Endpoint IP Address. Management Endpoint is reachable at the given ip address",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"nfs_endpoint_dns_name": schema.StringAttribute{
 																		MarkdownDescription: "NFS DNS Name. Endpoint's ip address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"nfs_endpoint_ip": schema.StringAttribute{
 																		MarkdownDescription: "NFS IP Address. Endpoint is reachable at the given ip address",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 																Blocks: map[string]schema.Block{
 																	"api_token": schema.SingleNestedBlock{
 																		MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-																		Attributes: map[string]schema.Attribute{
-																		},
+																		Attributes:          map[string]schema.Attribute{},
 																		Blocks: map[string]schema.Block{
 																			"blindfold_secret_info": schema.SingleNestedBlock{
 																				MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 																				Attributes: map[string]schema.Attribute{
 																					"decryption_provider": schema.StringAttribute{
 																						MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-																						Optional: true,
+																						Optional:            true,
 																					},
 																					"location": schema.StringAttribute{
 																						MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-																						Optional: true,
+																						Optional:            true,
 																					},
 																					"store_provider": schema.StringAttribute{
 																						MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																						Optional: true,
+																						Optional:            true,
 																					},
 																				},
 																			},
@@ -2520,11 +2483,11 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 																				Attributes: map[string]schema.Attribute{
 																					"provider_ref": schema.StringAttribute{
 																						MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																						Optional: true,
+																						Optional:            true,
 																					},
 																					"url": schema.StringAttribute{
 																						MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-																						Optional: true,
+																						Optional:            true,
 																					},
 																				},
 																			},
@@ -2546,12 +2509,10 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 						},
 					},
 				},
-
 			},
 			"storage_interface_list": schema.SingleNestedBlock{
 				MarkdownDescription: "List of Interfaces. Add all interfaces belonging to this fleet",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"interfaces": schema.ListNestedBlock{
 						MarkdownDescription: "List of Interfaces. Add all interfaces belonging to this fleet",
@@ -2559,27 +2520,25 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-									Optional: true,
+									Optional:            true,
 								},
 								"namespace": schema.StringAttribute{
 									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-									Optional: true,
+									Optional:            true,
 								},
 								"tenant": schema.StringAttribute{
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-									Optional: true,
-									Computed: true,
+									Optional:            true,
+									Computed:            true,
 								},
 							},
 						},
 					},
 				},
-
 			},
 			"storage_static_routes": schema.SingleNestedBlock{
 				MarkdownDescription: "Storage Static Routes List. List of storage static routes",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"storage_routes": schema.ListNestedBlock{
 						MarkdownDescription: "List of Static Routes. List of storage static routes",
@@ -2587,8 +2546,8 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 							Attributes: map[string]schema.Attribute{
 								"attrs": schema.ListAttribute{
 									MarkdownDescription: "Attributes. List of route attributes associated with the static route. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP`.",
-									Optional: true,
-									ElementType: types.StringType,
+									Optional:            true,
+									ElementType:         types.StringType,
 								},
 							},
 							Blocks: map[string]schema.Block{
@@ -2600,7 +2559,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									Attributes: map[string]schema.Attribute{
 										"type": schema.StringAttribute{
 											MarkdownDescription: "Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network. Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`. Defaults to `NEXT_HOP_DEFAULT_GATEWAY`.",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -2610,41 +2569,40 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 												Attributes: map[string]schema.Attribute{
 													"kind": schema.StringAttribute{
 														MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-														Optional: true,
-														Computed: true,
+														Optional:            true,
+														Computed:            true,
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-														Optional: true,
+														Optional:            true,
 													},
 													"namespace": schema.StringAttribute{
 														MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-														Optional: true,
+														Optional:            true,
 													},
 													"tenant": schema.StringAttribute{
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-														Optional: true,
-														Computed: true,
+														Optional:            true,
+														Computed:            true,
 													},
 													"uid": schema.StringAttribute{
 														MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-														Optional: true,
-														Computed: true,
+														Optional:            true,
+														Computed:            true,
 													},
 												},
 											},
 										},
 										"nexthop_address": schema.SingleNestedBlock{
 											MarkdownDescription: "IP Address. IP Address used to specify an IPv4 or IPv6 address",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"ipv4": schema.SingleNestedBlock{
 													MarkdownDescription: "IPv4 Address. IPv4 Address in dot-decimal notation",
 													Attributes: map[string]schema.Attribute{
 														"addr": schema.StringAttribute{
 															MarkdownDescription: "IPv4 Address. IPv4 Address in string form with dot-decimal notation",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -2653,7 +2611,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 													Attributes: map[string]schema.Attribute{
 														"addr": schema.StringAttribute{
 															MarkdownDescription: "IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -2664,19 +2622,18 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 								"subnets": schema.ListNestedBlock{
 									MarkdownDescription: "Subnets. List of route prefixes",
 									NestedObject: schema.NestedBlockObject{
-										Attributes: map[string]schema.Attribute{
-										},
+										Attributes: map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"ipv4": schema.SingleNestedBlock{
 												MarkdownDescription: "IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32",
 												Attributes: map[string]schema.Attribute{
 													"plen": schema.Int64Attribute{
 														MarkdownDescription: "Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32",
-														Optional: true,
+														Optional:            true,
 													},
 													"prefix": schema.StringAttribute{
 														MarkdownDescription: "Prefix. Prefix part of the IPv4 subnet in string form with dot-decimal notation",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 											},
@@ -2685,11 +2642,11 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 												Attributes: map[string]schema.Attribute{
 													"plen": schema.Int64Attribute{
 														MarkdownDescription: "Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128",
-														Optional: true,
+														Optional:            true,
 													},
 													"prefix": schema.StringAttribute{
 														MarkdownDescription: "Prefix. Prefix part of the IPv6 subnet given in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' e.g. '2001:db8:0:0:0:2:0:0' The address can be compacted by suppressing zeros e.g. '2001:db8::2::'",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 											},
@@ -2700,26 +2657,24 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 						},
 					},
 				},
-
 			},
 			"usb_policy": schema.SingleNestedBlock{
 				MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
 						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-						Optional: true,
+						Optional:            true,
 					},
 					"namespace": schema.StringAttribute{
 						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-						Optional: true,
+						Optional:            true,
 					},
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-						Optional: true,
-						Computed: true,
+						Optional:            true,
+						Computed:            true,
 					},
 				},
-
 			},
 		},
 	}
@@ -3460,7 +3415,6 @@ func (r *FleetResource) Create(ctx context.Context, req resource.CreateRequest, 
 		createReq.Spec["volterra_software_version"] = data.VolterraSoftwareVersion.ValueString()
 	}
 
-
 	apiResource, err := r.client.CreateFleet(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create Fleet: %s", err))
@@ -3472,7 +3426,7 @@ func (r *FleetResource) Create(ctx context.Context, req resource.CreateRequest, 
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if _, ok := apiResource.Spec["allow_all_usb"].(map[string]interface{}); ok && isImport && data.AllowAllUsb == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.AllowAllUsb = &FleetEmptyModel{}
@@ -4289,8 +4243,7 @@ func (r *FleetResource) Create(ctx context.Context, req resource.CreateRequest, 
 								}(),
 								NetappTrident: func() *FleetStorageDeviceListStorageDevicesNetappTridentModel {
 									if _, ok := itemMap["netapp_trident"].(map[string]interface{}); ok {
-										return &FleetStorageDeviceListStorageDevicesNetappTridentModel{
-										}
+										return &FleetStorageDeviceListStorageDevicesNetappTridentModel{}
 									}
 									return nil
 								}(),
@@ -4453,7 +4406,6 @@ func (r *FleetResource) Create(ctx context.Context, req resource.CreateRequest, 
 	} else {
 		data.VolterraSoftwareVersion = types.StringNull()
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -4543,9 +4495,9 @@ func (r *FleetResource) Read(ctx context.Context, req resource.ReadRequest, resp
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if _, ok := apiResource.Spec["allow_all_usb"].(map[string]interface{}); ok && isImport && data.AllowAllUsb == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -5363,8 +5315,7 @@ func (r *FleetResource) Read(ctx context.Context, req resource.ReadRequest, resp
 								}(),
 								NetappTrident: func() *FleetStorageDeviceListStorageDevicesNetappTridentModel {
 									if _, ok := itemMap["netapp_trident"].(map[string]interface{}); ok {
-										return &FleetStorageDeviceListStorageDevicesNetappTridentModel{
-										}
+										return &FleetStorageDeviceListStorageDevicesNetappTridentModel{}
 									}
 									return nil
 								}(),
@@ -5527,7 +5478,6 @@ func (r *FleetResource) Read(ctx context.Context, req resource.ReadRequest, resp
 	} else {
 		data.VolterraSoftwareVersion = types.StringNull()
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -6178,7 +6128,6 @@ func (r *FleetResource) Update(ctx context.Context, req resource.UpdateRequest, 
 	if !data.VolterraSoftwareVersion.IsNull() && !data.VolterraSoftwareVersion.IsUnknown() {
 		apiResource.Spec["volterra_software_version"] = data.VolterraSoftwareVersion.ValueString()
 	}
-
 
 	updated, err := r.client.UpdateFleet(ctx, apiResource)
 	if err != nil {

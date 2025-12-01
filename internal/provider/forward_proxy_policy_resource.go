@@ -51,79 +51,79 @@ type ForwardProxyPolicyEmptyModel struct {
 
 // ForwardProxyPolicyAllowListModel represents allow_list block
 type ForwardProxyPolicyAllowListModel struct {
-	DefaultActionAllow *ForwardProxyPolicyEmptyModel `tfsdk:"default_action_allow"`
-	DefaultActionDeny *ForwardProxyPolicyEmptyModel `tfsdk:"default_action_deny"`
-	DefaultActionNextPolicy *ForwardProxyPolicyEmptyModel `tfsdk:"default_action_next_policy"`
-	DestList []ForwardProxyPolicyAllowListDestListModel `tfsdk:"dest_list"`
-	HTTPList []ForwardProxyPolicyAllowListHTTPListModel `tfsdk:"http_list"`
-	TLSList []ForwardProxyPolicyAllowListTLSListModel `tfsdk:"tls_list"`
+	DefaultActionAllow      *ForwardProxyPolicyEmptyModel              `tfsdk:"default_action_allow"`
+	DefaultActionDeny       *ForwardProxyPolicyEmptyModel              `tfsdk:"default_action_deny"`
+	DefaultActionNextPolicy *ForwardProxyPolicyEmptyModel              `tfsdk:"default_action_next_policy"`
+	DestList                []ForwardProxyPolicyAllowListDestListModel `tfsdk:"dest_list"`
+	HTTPList                []ForwardProxyPolicyAllowListHTTPListModel `tfsdk:"http_list"`
+	TLSList                 []ForwardProxyPolicyAllowListTLSListModel  `tfsdk:"tls_list"`
 }
 
 // ForwardProxyPolicyAllowListDestListModel represents dest_list block
 type ForwardProxyPolicyAllowListDestListModel struct {
-	IPV6Prefixes types.List `tfsdk:"ipv6_prefixes"`
-	PortRanges types.String `tfsdk:"port_ranges"`
-	Prefixes types.List `tfsdk:"prefixes"`
+	IPV6Prefixes types.List   `tfsdk:"ipv6_prefixes"`
+	PortRanges   types.String `tfsdk:"port_ranges"`
+	Prefixes     types.List   `tfsdk:"prefixes"`
 }
 
 // ForwardProxyPolicyAllowListHTTPListModel represents http_list block
 type ForwardProxyPolicyAllowListHTTPListModel struct {
-	ExactValue types.String `tfsdk:"exact_value"`
-	PathExactValue types.String `tfsdk:"path_exact_value"`
-	PathPrefixValue types.String `tfsdk:"path_prefix_value"`
-	PathRegexValue types.String `tfsdk:"path_regex_value"`
-	RegexValue types.String `tfsdk:"regex_value"`
-	SuffixValue types.String `tfsdk:"suffix_value"`
-	AnyPath *ForwardProxyPolicyEmptyModel `tfsdk:"any_path"`
+	ExactValue      types.String                  `tfsdk:"exact_value"`
+	PathExactValue  types.String                  `tfsdk:"path_exact_value"`
+	PathPrefixValue types.String                  `tfsdk:"path_prefix_value"`
+	PathRegexValue  types.String                  `tfsdk:"path_regex_value"`
+	RegexValue      types.String                  `tfsdk:"regex_value"`
+	SuffixValue     types.String                  `tfsdk:"suffix_value"`
+	AnyPath         *ForwardProxyPolicyEmptyModel `tfsdk:"any_path"`
 }
 
 // ForwardProxyPolicyAllowListTLSListModel represents tls_list block
 type ForwardProxyPolicyAllowListTLSListModel struct {
-	ExactValue types.String `tfsdk:"exact_value"`
-	RegexValue types.String `tfsdk:"regex_value"`
+	ExactValue  types.String `tfsdk:"exact_value"`
+	RegexValue  types.String `tfsdk:"regex_value"`
 	SuffixValue types.String `tfsdk:"suffix_value"`
 }
 
 // ForwardProxyPolicyDenyListModel represents deny_list block
 type ForwardProxyPolicyDenyListModel struct {
-	DefaultActionAllow *ForwardProxyPolicyEmptyModel `tfsdk:"default_action_allow"`
-	DefaultActionDeny *ForwardProxyPolicyEmptyModel `tfsdk:"default_action_deny"`
-	DefaultActionNextPolicy *ForwardProxyPolicyEmptyModel `tfsdk:"default_action_next_policy"`
-	DestList []ForwardProxyPolicyDenyListDestListModel `tfsdk:"dest_list"`
-	HTTPList []ForwardProxyPolicyDenyListHTTPListModel `tfsdk:"http_list"`
-	TLSList []ForwardProxyPolicyDenyListTLSListModel `tfsdk:"tls_list"`
+	DefaultActionAllow      *ForwardProxyPolicyEmptyModel             `tfsdk:"default_action_allow"`
+	DefaultActionDeny       *ForwardProxyPolicyEmptyModel             `tfsdk:"default_action_deny"`
+	DefaultActionNextPolicy *ForwardProxyPolicyEmptyModel             `tfsdk:"default_action_next_policy"`
+	DestList                []ForwardProxyPolicyDenyListDestListModel `tfsdk:"dest_list"`
+	HTTPList                []ForwardProxyPolicyDenyListHTTPListModel `tfsdk:"http_list"`
+	TLSList                 []ForwardProxyPolicyDenyListTLSListModel  `tfsdk:"tls_list"`
 }
 
 // ForwardProxyPolicyDenyListDestListModel represents dest_list block
 type ForwardProxyPolicyDenyListDestListModel struct {
-	IPV6Prefixes types.List `tfsdk:"ipv6_prefixes"`
-	PortRanges types.String `tfsdk:"port_ranges"`
-	Prefixes types.List `tfsdk:"prefixes"`
+	IPV6Prefixes types.List   `tfsdk:"ipv6_prefixes"`
+	PortRanges   types.String `tfsdk:"port_ranges"`
+	Prefixes     types.List   `tfsdk:"prefixes"`
 }
 
 // ForwardProxyPolicyDenyListHTTPListModel represents http_list block
 type ForwardProxyPolicyDenyListHTTPListModel struct {
-	ExactValue types.String `tfsdk:"exact_value"`
-	PathExactValue types.String `tfsdk:"path_exact_value"`
-	PathPrefixValue types.String `tfsdk:"path_prefix_value"`
-	PathRegexValue types.String `tfsdk:"path_regex_value"`
-	RegexValue types.String `tfsdk:"regex_value"`
-	SuffixValue types.String `tfsdk:"suffix_value"`
-	AnyPath *ForwardProxyPolicyEmptyModel `tfsdk:"any_path"`
+	ExactValue      types.String                  `tfsdk:"exact_value"`
+	PathExactValue  types.String                  `tfsdk:"path_exact_value"`
+	PathPrefixValue types.String                  `tfsdk:"path_prefix_value"`
+	PathRegexValue  types.String                  `tfsdk:"path_regex_value"`
+	RegexValue      types.String                  `tfsdk:"regex_value"`
+	SuffixValue     types.String                  `tfsdk:"suffix_value"`
+	AnyPath         *ForwardProxyPolicyEmptyModel `tfsdk:"any_path"`
 }
 
 // ForwardProxyPolicyDenyListTLSListModel represents tls_list block
 type ForwardProxyPolicyDenyListTLSListModel struct {
-	ExactValue types.String `tfsdk:"exact_value"`
-	RegexValue types.String `tfsdk:"regex_value"`
+	ExactValue  types.String `tfsdk:"exact_value"`
+	RegexValue  types.String `tfsdk:"regex_value"`
 	SuffixValue types.String `tfsdk:"suffix_value"`
 }
 
 // ForwardProxyPolicyNetworkConnectorModel represents network_connector block
 type ForwardProxyPolicyNetworkConnectorModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // ForwardProxyPolicyProxyLabelSelectorModel represents proxy_label_selector block
@@ -138,23 +138,23 @@ type ForwardProxyPolicyRuleListModel struct {
 
 // ForwardProxyPolicyRuleListRulesModel represents rules block
 type ForwardProxyPolicyRuleListRulesModel struct {
-	Action types.String `tfsdk:"action"`
-	AllDestinations *ForwardProxyPolicyEmptyModel `tfsdk:"all_destinations"`
-	AllSources *ForwardProxyPolicyEmptyModel `tfsdk:"all_sources"`
-	DstAsnList *ForwardProxyPolicyRuleListRulesDstAsnListModel `tfsdk:"dst_asn_list"`
-	DstAsnSet *ForwardProxyPolicyRuleListRulesDstAsnSetModel `tfsdk:"dst_asn_set"`
-	DstIPPrefixSet *ForwardProxyPolicyRuleListRulesDstIPPrefixSetModel `tfsdk:"dst_ip_prefix_set"`
-	DstLabelSelector *ForwardProxyPolicyRuleListRulesDstLabelSelectorModel `tfsdk:"dst_label_selector"`
-	DstPrefixList *ForwardProxyPolicyRuleListRulesDstPrefixListModel `tfsdk:"dst_prefix_list"`
-	HTTPList *ForwardProxyPolicyRuleListRulesHTTPListModel `tfsdk:"http_list"`
-	IPPrefixSet *ForwardProxyPolicyRuleListRulesIPPrefixSetModel `tfsdk:"ip_prefix_set"`
-	LabelSelector *ForwardProxyPolicyRuleListRulesLabelSelectorModel `tfsdk:"label_selector"`
-	Metadata *ForwardProxyPolicyRuleListRulesMetadataModel `tfsdk:"metadata"`
-	NoHTTPConnectPort *ForwardProxyPolicyEmptyModel `tfsdk:"no_http_connect_port"`
-	PortMatcher *ForwardProxyPolicyRuleListRulesPortMatcherModel `tfsdk:"port_matcher"`
-	PrefixList *ForwardProxyPolicyRuleListRulesPrefixListModel `tfsdk:"prefix_list"`
-	TLSList *ForwardProxyPolicyRuleListRulesTLSListModel `tfsdk:"tls_list"`
-	URLCategoryList *ForwardProxyPolicyRuleListRulesURLCategoryListModel `tfsdk:"url_category_list"`
+	Action            types.String                                          `tfsdk:"action"`
+	AllDestinations   *ForwardProxyPolicyEmptyModel                         `tfsdk:"all_destinations"`
+	AllSources        *ForwardProxyPolicyEmptyModel                         `tfsdk:"all_sources"`
+	DstAsnList        *ForwardProxyPolicyRuleListRulesDstAsnListModel       `tfsdk:"dst_asn_list"`
+	DstAsnSet         *ForwardProxyPolicyRuleListRulesDstAsnSetModel        `tfsdk:"dst_asn_set"`
+	DstIPPrefixSet    *ForwardProxyPolicyRuleListRulesDstIPPrefixSetModel   `tfsdk:"dst_ip_prefix_set"`
+	DstLabelSelector  *ForwardProxyPolicyRuleListRulesDstLabelSelectorModel `tfsdk:"dst_label_selector"`
+	DstPrefixList     *ForwardProxyPolicyRuleListRulesDstPrefixListModel    `tfsdk:"dst_prefix_list"`
+	HTTPList          *ForwardProxyPolicyRuleListRulesHTTPListModel         `tfsdk:"http_list"`
+	IPPrefixSet       *ForwardProxyPolicyRuleListRulesIPPrefixSetModel      `tfsdk:"ip_prefix_set"`
+	LabelSelector     *ForwardProxyPolicyRuleListRulesLabelSelectorModel    `tfsdk:"label_selector"`
+	Metadata          *ForwardProxyPolicyRuleListRulesMetadataModel         `tfsdk:"metadata"`
+	NoHTTPConnectPort *ForwardProxyPolicyEmptyModel                         `tfsdk:"no_http_connect_port"`
+	PortMatcher       *ForwardProxyPolicyRuleListRulesPortMatcherModel      `tfsdk:"port_matcher"`
+	PrefixList        *ForwardProxyPolicyRuleListRulesPrefixListModel       `tfsdk:"prefix_list"`
+	TLSList           *ForwardProxyPolicyRuleListRulesTLSListModel          `tfsdk:"tls_list"`
+	URLCategoryList   *ForwardProxyPolicyRuleListRulesURLCategoryListModel  `tfsdk:"url_category_list"`
 }
 
 // ForwardProxyPolicyRuleListRulesDstAsnListModel represents dst_asn_list block
@@ -164,16 +164,16 @@ type ForwardProxyPolicyRuleListRulesDstAsnListModel struct {
 
 // ForwardProxyPolicyRuleListRulesDstAsnSetModel represents dst_asn_set block
 type ForwardProxyPolicyRuleListRulesDstAsnSetModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // ForwardProxyPolicyRuleListRulesDstIPPrefixSetModel represents dst_ip_prefix_set block
 type ForwardProxyPolicyRuleListRulesDstIPPrefixSetModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // ForwardProxyPolicyRuleListRulesDstLabelSelectorModel represents dst_label_selector block
@@ -193,20 +193,20 @@ type ForwardProxyPolicyRuleListRulesHTTPListModel struct {
 
 // ForwardProxyPolicyRuleListRulesHTTPListHTTPListModel represents http_list block
 type ForwardProxyPolicyRuleListRulesHTTPListHTTPListModel struct {
-	ExactValue types.String `tfsdk:"exact_value"`
-	PathExactValue types.String `tfsdk:"path_exact_value"`
-	PathPrefixValue types.String `tfsdk:"path_prefix_value"`
-	PathRegexValue types.String `tfsdk:"path_regex_value"`
-	RegexValue types.String `tfsdk:"regex_value"`
-	SuffixValue types.String `tfsdk:"suffix_value"`
-	AnyPath *ForwardProxyPolicyEmptyModel `tfsdk:"any_path"`
+	ExactValue      types.String                  `tfsdk:"exact_value"`
+	PathExactValue  types.String                  `tfsdk:"path_exact_value"`
+	PathPrefixValue types.String                  `tfsdk:"path_prefix_value"`
+	PathRegexValue  types.String                  `tfsdk:"path_regex_value"`
+	RegexValue      types.String                  `tfsdk:"regex_value"`
+	SuffixValue     types.String                  `tfsdk:"suffix_value"`
+	AnyPath         *ForwardProxyPolicyEmptyModel `tfsdk:"any_path"`
 }
 
 // ForwardProxyPolicyRuleListRulesIPPrefixSetModel represents ip_prefix_set block
 type ForwardProxyPolicyRuleListRulesIPPrefixSetModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // ForwardProxyPolicyRuleListRulesLabelSelectorModel represents label_selector block
@@ -217,13 +217,13 @@ type ForwardProxyPolicyRuleListRulesLabelSelectorModel struct {
 // ForwardProxyPolicyRuleListRulesMetadataModel represents metadata block
 type ForwardProxyPolicyRuleListRulesMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
-	Name types.String `tfsdk:"name"`
+	Name            types.String `tfsdk:"name"`
 }
 
 // ForwardProxyPolicyRuleListRulesPortMatcherModel represents port_matcher block
 type ForwardProxyPolicyRuleListRulesPortMatcherModel struct {
 	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
-	Ports types.List `tfsdk:"ports"`
+	Ports         types.List `tfsdk:"ports"`
 }
 
 // ForwardProxyPolicyRuleListRulesPrefixListModel represents prefix_list block
@@ -238,8 +238,8 @@ type ForwardProxyPolicyRuleListRulesTLSListModel struct {
 
 // ForwardProxyPolicyRuleListRulesTLSListTLSListModel represents tls_list block
 type ForwardProxyPolicyRuleListRulesTLSListTLSListModel struct {
-	ExactValue types.String `tfsdk:"exact_value"`
-	RegexValue types.String `tfsdk:"regex_value"`
+	ExactValue  types.String `tfsdk:"exact_value"`
+	RegexValue  types.String `tfsdk:"regex_value"`
 	SuffixValue types.String `tfsdk:"suffix_value"`
 }
 
@@ -249,22 +249,22 @@ type ForwardProxyPolicyRuleListRulesURLCategoryListModel struct {
 }
 
 type ForwardProxyPolicyResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	AllowAll *ForwardProxyPolicyEmptyModel `tfsdk:"allow_all"`
-	AllowList *ForwardProxyPolicyAllowListModel `tfsdk:"allow_list"`
-	AnyProxy *ForwardProxyPolicyEmptyModel `tfsdk:"any_proxy"`
-	DenyList *ForwardProxyPolicyDenyListModel `tfsdk:"deny_list"`
-	DrpHTTPConnect *ForwardProxyPolicyEmptyModel `tfsdk:"drp_http_connect"`
-	NetworkConnector *ForwardProxyPolicyNetworkConnectorModel `tfsdk:"network_connector"`
+	Name               types.String                               `tfsdk:"name"`
+	Namespace          types.String                               `tfsdk:"namespace"`
+	Annotations        types.Map                                  `tfsdk:"annotations"`
+	Description        types.String                               `tfsdk:"description"`
+	Disable            types.Bool                                 `tfsdk:"disable"`
+	Labels             types.Map                                  `tfsdk:"labels"`
+	ID                 types.String                               `tfsdk:"id"`
+	Timeouts           timeouts.Value                             `tfsdk:"timeouts"`
+	AllowAll           *ForwardProxyPolicyEmptyModel              `tfsdk:"allow_all"`
+	AllowList          *ForwardProxyPolicyAllowListModel          `tfsdk:"allow_list"`
+	AnyProxy           *ForwardProxyPolicyEmptyModel              `tfsdk:"any_proxy"`
+	DenyList           *ForwardProxyPolicyDenyListModel           `tfsdk:"deny_list"`
+	DrpHTTPConnect     *ForwardProxyPolicyEmptyModel              `tfsdk:"drp_http_connect"`
+	NetworkConnector   *ForwardProxyPolicyNetworkConnectorModel   `tfsdk:"network_connector"`
 	ProxyLabelSelector *ForwardProxyPolicyProxyLabelSelectorModel `tfsdk:"proxy_label_selector"`
-	RuleList *ForwardProxyPolicyRuleListModel `tfsdk:"rule_list"`
+	RuleList           *ForwardProxyPolicyRuleListModel           `tfsdk:"rule_list"`
 }
 
 func (r *ForwardProxyPolicyResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -278,7 +278,7 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the ForwardProxyPolicy. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -288,7 +288,7 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the ForwardProxyPolicy will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -298,25 +298,25 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -334,8 +334,7 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 			},
 			"allow_list": schema.SingleNestedBlock{
 				MarkdownDescription: "Forward Proxy Rule. URL(s) and domains policy for forward proxy for a connection type (TLS or HTTP)",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"default_action_allow": schema.SingleNestedBlock{
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -352,17 +351,17 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 							Attributes: map[string]schema.Attribute{
 								"ipv6_prefixes": schema.ListAttribute{
 									MarkdownDescription: "IPv6 Prefixes. Destination IPv6 prefixes.",
-									Optional: true,
-									ElementType: types.StringType,
+									Optional:            true,
+									ElementType:         types.StringType,
 								},
 								"port_ranges": schema.StringAttribute{
 									MarkdownDescription: "Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'.",
-									Optional: true,
+									Optional:            true,
 								},
 								"prefixes": schema.ListAttribute{
 									MarkdownDescription: "IPv4 Prefixes. Destination IPv4 prefixes.",
-									Optional: true,
-									ElementType: types.StringType,
+									Optional:            true,
+									ElementType:         types.StringType,
 								},
 							},
 						},
@@ -373,27 +372,27 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 							Attributes: map[string]schema.Attribute{
 								"exact_value": schema.StringAttribute{
 									MarkdownDescription: "Exact Values. Exact domain name",
-									Optional: true,
+									Optional:            true,
 								},
 								"path_exact_value": schema.StringAttribute{
 									MarkdownDescription: "Exact Path. Exact Path to match.",
-									Optional: true,
+									Optional:            true,
 								},
 								"path_prefix_value": schema.StringAttribute{
 									MarkdownDescription: "Prefix of Path. Prefix of Path e.g '/abc/xyz' will match '/abc/xyz/.*'",
-									Optional: true,
+									Optional:            true,
 								},
 								"path_regex_value": schema.StringAttribute{
 									MarkdownDescription: "Regex of Path. Regular Expression value for the Path to match",
-									Optional: true,
+									Optional:            true,
 								},
 								"regex_value": schema.StringAttribute{
 									MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name",
-									Optional: true,
+									Optional:            true,
 								},
 								"suffix_value": schema.StringAttribute{
 									MarkdownDescription: "Suffix Values. Suffix of domain names e.g 'xyz.com' will match '*.xyz.com'",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
@@ -409,29 +408,27 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 							Attributes: map[string]schema.Attribute{
 								"exact_value": schema.StringAttribute{
 									MarkdownDescription: "Exact Value. Exact domain name.",
-									Optional: true,
+									Optional:            true,
 								},
 								"regex_value": schema.StringAttribute{
 									MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name",
-									Optional: true,
+									Optional:            true,
 								},
 								"suffix_value": schema.StringAttribute{
 									MarkdownDescription: "Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 						},
 					},
 				},
-
 			},
 			"any_proxy": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: any_proxy, drp_http_connect, network_connector, proxy_label_selector] Empty. This can be used for messages where no values are needed",
 			},
 			"deny_list": schema.SingleNestedBlock{
 				MarkdownDescription: "Forward Proxy Rule. URL(s) and domains policy for forward proxy for a connection type (TLS or HTTP)",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"default_action_allow": schema.SingleNestedBlock{
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -448,17 +445,17 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 							Attributes: map[string]schema.Attribute{
 								"ipv6_prefixes": schema.ListAttribute{
 									MarkdownDescription: "IPv6 Prefixes. Destination IPv6 prefixes.",
-									Optional: true,
-									ElementType: types.StringType,
+									Optional:            true,
+									ElementType:         types.StringType,
 								},
 								"port_ranges": schema.StringAttribute{
 									MarkdownDescription: "Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'.",
-									Optional: true,
+									Optional:            true,
 								},
 								"prefixes": schema.ListAttribute{
 									MarkdownDescription: "IPv4 Prefixes. Destination IPv4 prefixes.",
-									Optional: true,
-									ElementType: types.StringType,
+									Optional:            true,
+									ElementType:         types.StringType,
 								},
 							},
 						},
@@ -469,27 +466,27 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 							Attributes: map[string]schema.Attribute{
 								"exact_value": schema.StringAttribute{
 									MarkdownDescription: "Exact Values. Exact domain name",
-									Optional: true,
+									Optional:            true,
 								},
 								"path_exact_value": schema.StringAttribute{
 									MarkdownDescription: "Exact Path. Exact Path to match.",
-									Optional: true,
+									Optional:            true,
 								},
 								"path_prefix_value": schema.StringAttribute{
 									MarkdownDescription: "Prefix of Path. Prefix of Path e.g '/abc/xyz' will match '/abc/xyz/.*'",
-									Optional: true,
+									Optional:            true,
 								},
 								"path_regex_value": schema.StringAttribute{
 									MarkdownDescription: "Regex of Path. Regular Expression value for the Path to match",
-									Optional: true,
+									Optional:            true,
 								},
 								"regex_value": schema.StringAttribute{
 									MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name",
-									Optional: true,
+									Optional:            true,
 								},
 								"suffix_value": schema.StringAttribute{
 									MarkdownDescription: "Suffix Values. Suffix of domain names e.g 'xyz.com' will match '*.xyz.com'",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
@@ -505,21 +502,20 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 							Attributes: map[string]schema.Attribute{
 								"exact_value": schema.StringAttribute{
 									MarkdownDescription: "Exact Value. Exact domain name.",
-									Optional: true,
+									Optional:            true,
 								},
 								"regex_value": schema.StringAttribute{
 									MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name",
-									Optional: true,
+									Optional:            true,
 								},
 								"suffix_value": schema.StringAttribute{
 									MarkdownDescription: "Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 						},
 					},
 				},
-
 			},
 			"drp_http_connect": schema.SingleNestedBlock{
 				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -529,35 +525,32 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
 						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-						Optional: true,
+						Optional:            true,
 					},
 					"namespace": schema.StringAttribute{
 						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-						Optional: true,
+						Optional:            true,
 					},
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-						Optional: true,
-						Computed: true,
+						Optional:            true,
+						Computed:            true,
 					},
 				},
-
 			},
 			"proxy_label_selector": schema.SingleNestedBlock{
 				MarkdownDescription: "Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE",
 				Attributes: map[string]schema.Attribute{
 					"expressions": schema.ListAttribute{
 						MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections.",
-						Optional: true,
-						ElementType: types.StringType,
+						Optional:            true,
+						ElementType:         types.StringType,
 					},
 				},
-
 			},
 			"rule_list": schema.SingleNestedBlock{
 				MarkdownDescription: "Custom Rule List. List of custom rules",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"rules": schema.ListNestedBlock{
 						MarkdownDescription: "Custom Rule List. List of custom rules",
@@ -565,7 +558,7 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 							Attributes: map[string]schema.Attribute{
 								"action": schema.StringAttribute{
 									MarkdownDescription: "Rule Action. The rule action determines the disposition of the input request API. If a policy matches a rule with an ALLOW action, the processing of the request proceeds forward. If it matches a rule with a DENY action, the processing of the request is terminated and an appropriate message/code returned to the originator. If it matches a rule with a NEXT_POLICY_SET action, evaluation of the current policy set terminates and evaluation of the next policy set in the chain begins. - DENY: DENY Deny the request. - ALLOW: ALLOW Allow the request to proceed. - NEXT_POLICY_SET: NEXT_POLICY_SET Terminate evaluation of the current policy set and begin evaluating the next policy set in the chain. Note that the evaluation of any remaining policies in the current policy set is skipped. - NEXT_POLICY: NEXT_POLICY Terminate evaluation of the current policy and begin evaluating the next policy in the policy set. Note that the evaluation of any remaining rules in the current policy is skipped. - LAST_POLICY: LAST_POLICY Terminate evaluation of the current policy and begin evaluating the last policy in the policy set. Note that the evaluation of any remaining rules in the current policy is skipped. - GOTO_POLICY: GOTO_POLICY Terminate evaluation of the current policy and begin evaluating a specific policy in the policy set. The policy is specified using the goto_policy field in the rule and must be after the current policy in the policy set. Possible values are `DENY`, `ALLOW`, `NEXT_POLICY`. Defaults to `DENY`.",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
@@ -580,8 +573,8 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 									Attributes: map[string]schema.Attribute{
 										"as_numbers": schema.ListAttribute{
 											MarkdownDescription: "AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
-											Optional: true,
-											ElementType: types.Int64Type,
+											Optional:            true,
+											ElementType:         types.Int64Type,
 										},
 									},
 								},
@@ -590,16 +583,16 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-											Optional: true,
+											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
 											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-											Optional: true,
+											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
@@ -608,16 +601,16 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-											Optional: true,
+											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
 											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-											Optional: true,
+											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
@@ -626,8 +619,8 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 									Attributes: map[string]schema.Attribute{
 										"expressions": schema.ListAttribute{
 											MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections.",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 									},
 								},
@@ -636,15 +629,14 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 									Attributes: map[string]schema.Attribute{
 										"prefixes": schema.ListAttribute{
 											MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 									},
 								},
 								"http_list": schema.SingleNestedBlock{
 									MarkdownDescription: "URLListType.",
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"http_list": schema.ListNestedBlock{
 											MarkdownDescription: "HTTP URLs. URLs for HTTP connections",
@@ -652,27 +644,27 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 												Attributes: map[string]schema.Attribute{
 													"exact_value": schema.StringAttribute{
 														MarkdownDescription: "Exact Values. Exact domain name",
-														Optional: true,
+														Optional:            true,
 													},
 													"path_exact_value": schema.StringAttribute{
 														MarkdownDescription: "Exact Path. Exact Path to match.",
-														Optional: true,
+														Optional:            true,
 													},
 													"path_prefix_value": schema.StringAttribute{
 														MarkdownDescription: "Prefix of Path. Prefix of Path e.g '/abc/xyz' will match '/abc/xyz/.*'",
-														Optional: true,
+														Optional:            true,
 													},
 													"path_regex_value": schema.StringAttribute{
 														MarkdownDescription: "Regex of Path. Regular Expression value for the Path to match",
-														Optional: true,
+														Optional:            true,
 													},
 													"regex_value": schema.StringAttribute{
 														MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name",
-														Optional: true,
+														Optional:            true,
 													},
 													"suffix_value": schema.StringAttribute{
 														MarkdownDescription: "Suffix Values. Suffix of domain names e.g 'xyz.com' will match '*.xyz.com'",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 												Blocks: map[string]schema.Block{
@@ -689,16 +681,16 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-											Optional: true,
+											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
 											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-											Optional: true,
+											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
@@ -707,8 +699,8 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 									Attributes: map[string]schema.Attribute{
 										"expressions": schema.ListAttribute{
 											MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections.",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 									},
 								},
@@ -717,11 +709,11 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 									Attributes: map[string]schema.Attribute{
 										"description_spec": schema.StringAttribute{
 											MarkdownDescription: "Description. Human readable description.",
-											Optional: true,
+											Optional:            true,
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 								},
@@ -733,12 +725,12 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 									Attributes: map[string]schema.Attribute{
 										"invert_matcher": schema.BoolAttribute{
 											MarkdownDescription: "Invert Port Matcher. Invert the match result.",
-											Optional: true,
+											Optional:            true,
 										},
 										"ports": schema.ListAttribute{
 											MarkdownDescription: "Port Ranges. A list of strings, each of which is a single port value or a tuple of start and end port values separated by '-'. The start and end values are considered to be part of the range.",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 									},
 								},
@@ -747,15 +739,14 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 									Attributes: map[string]schema.Attribute{
 										"prefixes": schema.ListAttribute{
 											MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 									},
 								},
 								"tls_list": schema.SingleNestedBlock{
 									MarkdownDescription: "DomainListType.",
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"tls_list": schema.ListNestedBlock{
 											MarkdownDescription: "TLS Domains. Domains in SNI for TLS connections",
@@ -763,15 +754,15 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 												Attributes: map[string]schema.Attribute{
 													"exact_value": schema.StringAttribute{
 														MarkdownDescription: "Exact Value. Exact domain name.",
-														Optional: true,
+														Optional:            true,
 													},
 													"regex_value": schema.StringAttribute{
 														MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name",
-														Optional: true,
+														Optional:            true,
 													},
 													"suffix_value": schema.StringAttribute{
 														MarkdownDescription: "Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 											},
@@ -783,8 +774,8 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 									Attributes: map[string]schema.Attribute{
 										"url_categories": schema.ListAttribute{
 											MarkdownDescription: "URL Categories. List of url categories to be selected. Possible values are `UNCATEGORIZED`, `REAL_ESTATE`, `COMPUTER_AND_INTERNET_SECURITY`, `FINANCIAL_SERVICES`, `BUSINESS_AND_ECONOMY`, `COMPUTER_AND_INTERNET_INFO`, `AUCTIONS`, `SHOPPING`, `CULT_AND_OCCULT`, `TRAVEL`, `ABUSED_DRUGS`, `ADULT_AND_PORNOGRAPHY`, `HOME_AND_GARDEN`, `MILITARY`, `SOCIAL_NETWORKING`, `DEAD_SITES`, `INDIVIDUAL_STOCK_ADVICE_AND_TOOLS`, `TRAINING_AND_TOOLS`, `DATING`, `SEX_EDUCATION`, `RELIGION`, `ENTERTAINMENT_AND_ARTS`, `PERSONAL_SITES_AND_BLOGS`, `LEGAL`, `LOCAL_INFORMATION`, `STREAMING_MEDIA`, `JOB_SEARCH`, `GAMBLING`, `TRANSLATION`, `REFERENCE_AND_RESEARCH`, `SHAREWARE_AND_FREEWARE`, `PEER_TO_PEER`, `MARIJUANA`, `HACKING`, `GAMES`, `PHILOSOPHY_AND_POLITICAL_ADVOCACY`, `WEAPONS`, `PAY_TO_SURF`, `HUNTING_AND_FISHING`, `SOCIETY`, `EDUCATIONAL_INSTITUTIONS`, `ONLINE_GREETING_CARDS`, `SPORTS`, `SWIMSUITS_AND_INTIMATE_APPAREL`, `QUESTIONABLE`, `KIDS`, `HATE_AND_RACISM`, `PERSONAL_STORAGE`, `VIOLENCE`, `KEYLOGGERS_AND_MONITORING`, `SEARCH_ENGINES`, `INTERNET_PORTALS`, `WEB_ADVERTISEMENTS`, `CHEATING`, `GROSS`, `WEB_BASED_EMAIL`, `MALWARE_SITES`, `PHISHING_AND_OTHER_FRAUDS`, `PROXY_AVOIDANCE_AND_ANONYMIZERS`, `SPYWARE_AND_ADWARE`, `MUSIC`, `GOVERNMENT`, `NUDITY`, `NEWS_AND_MEDIA`, `ILLEGAL`, `CONTENT_DELIVERY_NETWORKS`, `INTERNET_COMMUNICATIONS`, `BOT_NETS`, `ABORTION`, `HEALTH_AND_MEDICINE`, `CONFIRMED_SPAM_SOURCES`, `SPAM_URLS`, `UNCONFIRMED_SPAM_SOURCES`, `OPEN_HTTP_PROXIES`, `DYNAMICALLY_GENERATED_CONTENT`, `PARKED_DOMAINS`, `ALCOHOL_AND_TOBACCO`, `PRIVATE_IP_ADDRESSES`, `IMAGE_AND_VIDEO_SEARCH`, `FASHION_AND_BEAUTY`, `RECREATION_AND_HOBBIES`, `MOTOR_VEHICLES`, `WEB_HOSTING`. Defaults to `UNCATEGORIZED`.",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 									},
 								},
@@ -792,7 +783,6 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 						},
 					},
 				},
-
 			},
 		},
 	}
@@ -1231,7 +1221,6 @@ func (r *ForwardProxyPolicyResource) Create(ctx context.Context, req resource.Cr
 		createReq.Spec["rule_list"] = rule_listMap
 	}
 
-
 	apiResource, err := r.client.CreateForwardProxyPolicy(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create ForwardProxyPolicy: %s", err))
@@ -1243,7 +1232,7 @@ func (r *ForwardProxyPolicyResource) Create(ctx context.Context, req resource.Cr
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if _, ok := apiResource.Spec["allow_all"].(map[string]interface{}); ok && isImport && data.AllowAll == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.AllowAll = &ForwardProxyPolicyEmptyModel{}
@@ -1616,8 +1605,7 @@ func (r *ForwardProxyPolicyResource) Create(ctx context.Context, req resource.Cr
 								}(),
 								DstAsnList: func() *ForwardProxyPolicyRuleListRulesDstAsnListModel {
 									if _, ok := itemMap["dst_asn_list"].(map[string]interface{}); ok {
-										return &ForwardProxyPolicyRuleListRulesDstAsnListModel{
-										}
+										return &ForwardProxyPolicyRuleListRulesDstAsnListModel{}
 									}
 									return nil
 								}(),
@@ -1673,22 +1661,19 @@ func (r *ForwardProxyPolicyResource) Create(ctx context.Context, req resource.Cr
 								}(),
 								DstLabelSelector: func() *ForwardProxyPolicyRuleListRulesDstLabelSelectorModel {
 									if _, ok := itemMap["dst_label_selector"].(map[string]interface{}); ok {
-										return &ForwardProxyPolicyRuleListRulesDstLabelSelectorModel{
-										}
+										return &ForwardProxyPolicyRuleListRulesDstLabelSelectorModel{}
 									}
 									return nil
 								}(),
 								DstPrefixList: func() *ForwardProxyPolicyRuleListRulesDstPrefixListModel {
 									if _, ok := itemMap["dst_prefix_list"].(map[string]interface{}); ok {
-										return &ForwardProxyPolicyRuleListRulesDstPrefixListModel{
-										}
+										return &ForwardProxyPolicyRuleListRulesDstPrefixListModel{}
 									}
 									return nil
 								}(),
 								HTTPList: func() *ForwardProxyPolicyRuleListRulesHTTPListModel {
 									if _, ok := itemMap["http_list"].(map[string]interface{}); ok {
-										return &ForwardProxyPolicyRuleListRulesHTTPListModel{
-										}
+										return &ForwardProxyPolicyRuleListRulesHTTPListModel{}
 									}
 									return nil
 								}(),
@@ -1719,8 +1704,7 @@ func (r *ForwardProxyPolicyResource) Create(ctx context.Context, req resource.Cr
 								}(),
 								LabelSelector: func() *ForwardProxyPolicyRuleListRulesLabelSelectorModel {
 									if _, ok := itemMap["label_selector"].(map[string]interface{}); ok {
-										return &ForwardProxyPolicyRuleListRulesLabelSelectorModel{
-										}
+										return &ForwardProxyPolicyRuleListRulesLabelSelectorModel{}
 									}
 									return nil
 								}(),
@@ -1764,22 +1748,19 @@ func (r *ForwardProxyPolicyResource) Create(ctx context.Context, req resource.Cr
 								}(),
 								PrefixList: func() *ForwardProxyPolicyRuleListRulesPrefixListModel {
 									if _, ok := itemMap["prefix_list"].(map[string]interface{}); ok {
-										return &ForwardProxyPolicyRuleListRulesPrefixListModel{
-										}
+										return &ForwardProxyPolicyRuleListRulesPrefixListModel{}
 									}
 									return nil
 								}(),
 								TLSList: func() *ForwardProxyPolicyRuleListRulesTLSListModel {
 									if _, ok := itemMap["tls_list"].(map[string]interface{}); ok {
-										return &ForwardProxyPolicyRuleListRulesTLSListModel{
-										}
+										return &ForwardProxyPolicyRuleListRulesTLSListModel{}
 									}
 									return nil
 								}(),
 								URLCategoryList: func() *ForwardProxyPolicyRuleListRulesURLCategoryListModel {
 									if _, ok := itemMap["url_category_list"].(map[string]interface{}); ok {
-										return &ForwardProxyPolicyRuleListRulesURLCategoryListModel{
-										}
+										return &ForwardProxyPolicyRuleListRulesURLCategoryListModel{}
 									}
 									return nil
 								}(),
@@ -1792,7 +1773,6 @@ func (r *ForwardProxyPolicyResource) Create(ctx context.Context, req resource.Cr
 			}(),
 		}
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -1882,9 +1862,9 @@ func (r *ForwardProxyPolicyResource) Read(ctx context.Context, req resource.Read
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if _, ok := apiResource.Spec["allow_all"].(map[string]interface{}); ok && isImport && data.AllowAll == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -2258,8 +2238,7 @@ func (r *ForwardProxyPolicyResource) Read(ctx context.Context, req resource.Read
 								}(),
 								DstAsnList: func() *ForwardProxyPolicyRuleListRulesDstAsnListModel {
 									if _, ok := itemMap["dst_asn_list"].(map[string]interface{}); ok {
-										return &ForwardProxyPolicyRuleListRulesDstAsnListModel{
-										}
+										return &ForwardProxyPolicyRuleListRulesDstAsnListModel{}
 									}
 									return nil
 								}(),
@@ -2315,22 +2294,19 @@ func (r *ForwardProxyPolicyResource) Read(ctx context.Context, req resource.Read
 								}(),
 								DstLabelSelector: func() *ForwardProxyPolicyRuleListRulesDstLabelSelectorModel {
 									if _, ok := itemMap["dst_label_selector"].(map[string]interface{}); ok {
-										return &ForwardProxyPolicyRuleListRulesDstLabelSelectorModel{
-										}
+										return &ForwardProxyPolicyRuleListRulesDstLabelSelectorModel{}
 									}
 									return nil
 								}(),
 								DstPrefixList: func() *ForwardProxyPolicyRuleListRulesDstPrefixListModel {
 									if _, ok := itemMap["dst_prefix_list"].(map[string]interface{}); ok {
-										return &ForwardProxyPolicyRuleListRulesDstPrefixListModel{
-										}
+										return &ForwardProxyPolicyRuleListRulesDstPrefixListModel{}
 									}
 									return nil
 								}(),
 								HTTPList: func() *ForwardProxyPolicyRuleListRulesHTTPListModel {
 									if _, ok := itemMap["http_list"].(map[string]interface{}); ok {
-										return &ForwardProxyPolicyRuleListRulesHTTPListModel{
-										}
+										return &ForwardProxyPolicyRuleListRulesHTTPListModel{}
 									}
 									return nil
 								}(),
@@ -2361,8 +2337,7 @@ func (r *ForwardProxyPolicyResource) Read(ctx context.Context, req resource.Read
 								}(),
 								LabelSelector: func() *ForwardProxyPolicyRuleListRulesLabelSelectorModel {
 									if _, ok := itemMap["label_selector"].(map[string]interface{}); ok {
-										return &ForwardProxyPolicyRuleListRulesLabelSelectorModel{
-										}
+										return &ForwardProxyPolicyRuleListRulesLabelSelectorModel{}
 									}
 									return nil
 								}(),
@@ -2406,22 +2381,19 @@ func (r *ForwardProxyPolicyResource) Read(ctx context.Context, req resource.Read
 								}(),
 								PrefixList: func() *ForwardProxyPolicyRuleListRulesPrefixListModel {
 									if _, ok := itemMap["prefix_list"].(map[string]interface{}); ok {
-										return &ForwardProxyPolicyRuleListRulesPrefixListModel{
-										}
+										return &ForwardProxyPolicyRuleListRulesPrefixListModel{}
 									}
 									return nil
 								}(),
 								TLSList: func() *ForwardProxyPolicyRuleListRulesTLSListModel {
 									if _, ok := itemMap["tls_list"].(map[string]interface{}); ok {
-										return &ForwardProxyPolicyRuleListRulesTLSListModel{
-										}
+										return &ForwardProxyPolicyRuleListRulesTLSListModel{}
 									}
 									return nil
 								}(),
 								URLCategoryList: func() *ForwardProxyPolicyRuleListRulesURLCategoryListModel {
 									if _, ok := itemMap["url_category_list"].(map[string]interface{}); ok {
-										return &ForwardProxyPolicyRuleListRulesURLCategoryListModel{
-										}
+										return &ForwardProxyPolicyRuleListRulesURLCategoryListModel{}
 									}
 									return nil
 								}(),
@@ -2434,7 +2406,6 @@ func (r *ForwardProxyPolicyResource) Read(ctx context.Context, req resource.Read
 			}(),
 		}
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -2783,7 +2754,6 @@ func (r *ForwardProxyPolicyResource) Update(ctx context.Context, req resource.Up
 		}
 		apiResource.Spec["rule_list"] = rule_listMap
 	}
-
 
 	updated, err := r.client.UpdateForwardProxyPolicy(ctx, apiResource)
 	if err != nil {

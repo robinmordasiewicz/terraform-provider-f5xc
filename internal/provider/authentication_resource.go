@@ -51,104 +51,104 @@ type AuthenticationEmptyModel struct {
 
 // AuthenticationCookieParamsModel represents cookie_params block
 type AuthenticationCookieParamsModel struct {
-	CookieExpiry types.Int64 `tfsdk:"cookie_expiry"`
-	CookieRefreshInterval types.Int64 `tfsdk:"cookie_refresh_interval"`
-	SessionExpiry types.Int64 `tfsdk:"session_expiry"`
-	AuthHmac *AuthenticationCookieParamsAuthHmacModel `tfsdk:"auth_hmac"`
-	KmsKeyHmac *AuthenticationEmptyModel `tfsdk:"kms_key_hmac"`
+	CookieExpiry          types.Int64                              `tfsdk:"cookie_expiry"`
+	CookieRefreshInterval types.Int64                              `tfsdk:"cookie_refresh_interval"`
+	SessionExpiry         types.Int64                              `tfsdk:"session_expiry"`
+	AuthHmac              *AuthenticationCookieParamsAuthHmacModel `tfsdk:"auth_hmac"`
+	KmsKeyHmac            *AuthenticationEmptyModel                `tfsdk:"kms_key_hmac"`
 }
 
 // AuthenticationCookieParamsAuthHmacModel represents auth_hmac block
 type AuthenticationCookieParamsAuthHmacModel struct {
-	PrimKeyExpiry types.String `tfsdk:"prim_key_expiry"`
-	SecKeyExpiry types.String `tfsdk:"sec_key_expiry"`
-	PrimKey *AuthenticationCookieParamsAuthHmacPrimKeyModel `tfsdk:"prim_key"`
-	SecKey *AuthenticationCookieParamsAuthHmacSecKeyModel `tfsdk:"sec_key"`
+	PrimKeyExpiry types.String                                    `tfsdk:"prim_key_expiry"`
+	SecKeyExpiry  types.String                                    `tfsdk:"sec_key_expiry"`
+	PrimKey       *AuthenticationCookieParamsAuthHmacPrimKeyModel `tfsdk:"prim_key"`
+	SecKey        *AuthenticationCookieParamsAuthHmacSecKeyModel  `tfsdk:"sec_key"`
 }
 
 // AuthenticationCookieParamsAuthHmacPrimKeyModel represents prim_key block
 type AuthenticationCookieParamsAuthHmacPrimKeyModel struct {
 	BlindfoldSecretInfo *AuthenticationCookieParamsAuthHmacPrimKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *AuthenticationCookieParamsAuthHmacPrimKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *AuthenticationCookieParamsAuthHmacPrimKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // AuthenticationCookieParamsAuthHmacPrimKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
 type AuthenticationCookieParamsAuthHmacPrimKeyBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // AuthenticationCookieParamsAuthHmacPrimKeyClearSecretInfoModel represents clear_secret_info block
 type AuthenticationCookieParamsAuthHmacPrimKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // AuthenticationCookieParamsAuthHmacSecKeyModel represents sec_key block
 type AuthenticationCookieParamsAuthHmacSecKeyModel struct {
 	BlindfoldSecretInfo *AuthenticationCookieParamsAuthHmacSecKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *AuthenticationCookieParamsAuthHmacSecKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *AuthenticationCookieParamsAuthHmacSecKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // AuthenticationCookieParamsAuthHmacSecKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
 type AuthenticationCookieParamsAuthHmacSecKeyBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // AuthenticationCookieParamsAuthHmacSecKeyClearSecretInfoModel represents clear_secret_info block
 type AuthenticationCookieParamsAuthHmacSecKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // AuthenticationOidcAuthModel represents oidc_auth block
 type AuthenticationOidcAuthModel struct {
-	OidcClientID types.String `tfsdk:"oidc_client_id"`
-	OidcWellKnownConfigURL types.String `tfsdk:"oidc_well_known_config_url"`
-	ClientSecret *AuthenticationOidcAuthClientSecretModel `tfsdk:"client_secret"`
-	OidcAuthParams *AuthenticationOidcAuthOidcAuthParamsModel `tfsdk:"oidc_auth_params"`
+	OidcClientID           types.String                               `tfsdk:"oidc_client_id"`
+	OidcWellKnownConfigURL types.String                               `tfsdk:"oidc_well_known_config_url"`
+	ClientSecret           *AuthenticationOidcAuthClientSecretModel   `tfsdk:"client_secret"`
+	OidcAuthParams         *AuthenticationOidcAuthOidcAuthParamsModel `tfsdk:"oidc_auth_params"`
 }
 
 // AuthenticationOidcAuthClientSecretModel represents client_secret block
 type AuthenticationOidcAuthClientSecretModel struct {
 	BlindfoldSecretInfo *AuthenticationOidcAuthClientSecretBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *AuthenticationOidcAuthClientSecretClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *AuthenticationOidcAuthClientSecretClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // AuthenticationOidcAuthClientSecretBlindfoldSecretInfoModel represents blindfold_secret_info block
 type AuthenticationOidcAuthClientSecretBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // AuthenticationOidcAuthClientSecretClearSecretInfoModel represents clear_secret_info block
 type AuthenticationOidcAuthClientSecretClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // AuthenticationOidcAuthOidcAuthParamsModel represents oidc_auth_params block
 type AuthenticationOidcAuthOidcAuthParamsModel struct {
-	AuthEndpointURL types.String `tfsdk:"auth_endpoint_url"`
+	AuthEndpointURL       types.String `tfsdk:"auth_endpoint_url"`
 	EndSessionEndpointURL types.String `tfsdk:"end_session_endpoint_url"`
-	TokenEndpointURL types.String `tfsdk:"token_endpoint_url"`
+	TokenEndpointURL      types.String `tfsdk:"token_endpoint_url"`
 }
 
 type AuthenticationResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Name         types.String                     `tfsdk:"name"`
+	Namespace    types.String                     `tfsdk:"namespace"`
+	Annotations  types.Map                        `tfsdk:"annotations"`
+	Description  types.String                     `tfsdk:"description"`
+	Disable      types.Bool                       `tfsdk:"disable"`
+	Labels       types.Map                        `tfsdk:"labels"`
+	ID           types.String                     `tfsdk:"id"`
+	Timeouts     timeouts.Value                   `tfsdk:"timeouts"`
 	CookieParams *AuthenticationCookieParamsModel `tfsdk:"cookie_params"`
-	OidcAuth *AuthenticationOidcAuthModel `tfsdk:"oidc_auth"`
+	OidcAuth     *AuthenticationOidcAuthModel     `tfsdk:"oidc_auth"`
 }
 
 func (r *AuthenticationResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -162,7 +162,7 @@ func (r *AuthenticationResource) Schema(ctx context.Context, req resource.Schema
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Authentication. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -172,7 +172,7 @@ func (r *AuthenticationResource) Schema(ctx context.Context, req resource.Schema
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the Authentication will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -182,25 +182,25 @@ func (r *AuthenticationResource) Schema(ctx context.Context, req resource.Schema
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -218,15 +218,15 @@ func (r *AuthenticationResource) Schema(ctx context.Context, req resource.Schema
 				Attributes: map[string]schema.Attribute{
 					"cookie_expiry": schema.Int64Attribute{
 						MarkdownDescription: "Cookie Expiry duration. specifies in seconds max duration of the allocated cookie. This maps to “Max-Age” attribute in the session cookie. This will act as an expiry duration on the client side after which client will not be setting the cookie as part of the request. Default cookie expiry is 3600 seconds",
-						Optional: true,
+						Optional:            true,
 					},
 					"cookie_refresh_interval": schema.Int64Attribute{
 						MarkdownDescription: "Cookie Refresh Interval. Specifies in seconds refresh interval for session cookie. This is used to keep the active user active and reduce re-login. When an incoming cookie's session expiry is still valid, and time to expire falls behind this interval, re-issue a cookie with new expiry and with the same original session expiry. Default refresh interval is 3000 seconds",
-						Optional: true,
+						Optional:            true,
 					},
 					"session_expiry": schema.Int64Attribute{
 						MarkdownDescription: "Session Expiry duration. specifies in seconds max lifetime of an authenticated session after which the user will be forced to login again. Default session expiry is 86400 seconds(24 hours).",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -235,33 +235,32 @@ func (r *AuthenticationResource) Schema(ctx context.Context, req resource.Schema
 						Attributes: map[string]schema.Attribute{
 							"prim_key_expiry": schema.StringAttribute{
 								MarkdownDescription: "HMAC Primary Key Expiry. Primary HMAC Key Expiry time",
-								Optional: true,
+								Optional:            true,
 							},
 							"sec_key_expiry": schema.StringAttribute{
 								MarkdownDescription: "HMAC Secondary Key Expiry. Secondary HMAC Key Expiry time",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
 							"prim_key": schema.SingleNestedBlock{
 								MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"blindfold_secret_info": schema.SingleNestedBlock{
 										MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 										Attributes: map[string]schema.Attribute{
 											"decryption_provider": schema.StringAttribute{
 												MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-												Optional: true,
+												Optional:            true,
 											},
 											"location": schema.StringAttribute{
 												MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-												Optional: true,
+												Optional:            true,
 											},
 											"store_provider": schema.StringAttribute{
 												MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -270,11 +269,11 @@ func (r *AuthenticationResource) Schema(ctx context.Context, req resource.Schema
 										Attributes: map[string]schema.Attribute{
 											"provider_ref": schema.StringAttribute{
 												MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-												Optional: true,
+												Optional:            true,
 											},
 											"url": schema.StringAttribute{
 												MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -282,23 +281,22 @@ func (r *AuthenticationResource) Schema(ctx context.Context, req resource.Schema
 							},
 							"sec_key": schema.SingleNestedBlock{
 								MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"blindfold_secret_info": schema.SingleNestedBlock{
 										MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 										Attributes: map[string]schema.Attribute{
 											"decryption_provider": schema.StringAttribute{
 												MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-												Optional: true,
+												Optional:            true,
 											},
 											"location": schema.StringAttribute{
 												MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-												Optional: true,
+												Optional:            true,
 											},
 											"store_provider": schema.StringAttribute{
 												MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -307,11 +305,11 @@ func (r *AuthenticationResource) Schema(ctx context.Context, req resource.Schema
 										Attributes: map[string]schema.Attribute{
 											"provider_ref": schema.StringAttribute{
 												MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-												Optional: true,
+												Optional:            true,
 											},
 											"url": schema.StringAttribute{
 												MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -323,40 +321,38 @@ func (r *AuthenticationResource) Schema(ctx context.Context, req resource.Schema
 						MarkdownDescription: "KMS Key Reference. Reference to KMS Key Object",
 					},
 				},
-
 			},
 			"oidc_auth": schema.SingleNestedBlock{
 				MarkdownDescription: "OIDCAuthType.",
 				Attributes: map[string]schema.Attribute{
 					"oidc_client_id": schema.StringAttribute{
 						MarkdownDescription: "OIDC Client ID. Client ID used while sending the Authorization Request to OIDC server",
-						Optional: true,
+						Optional:            true,
 					},
 					"oidc_well_known_config_url": schema.StringAttribute{
 						MarkdownDescription: "Well-known Configuration URL. An OIDC well-known configuration URL that will be used to fetch authentication related endpoints",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"client_secret": schema.SingleNestedBlock{
 						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"blindfold_secret_info": schema.SingleNestedBlock{
 								MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 								Attributes: map[string]schema.Attribute{
 									"decryption_provider": schema.StringAttribute{
 										MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-										Optional: true,
+										Optional:            true,
 									},
 									"location": schema.StringAttribute{
 										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-										Optional: true,
+										Optional:            true,
 									},
 									"store_provider": schema.StringAttribute{
 										MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -365,11 +361,11 @@ func (r *AuthenticationResource) Schema(ctx context.Context, req resource.Schema
 								Attributes: map[string]schema.Attribute{
 									"provider_ref": schema.StringAttribute{
 										MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-										Optional: true,
+										Optional:            true,
 									},
 									"url": schema.StringAttribute{
 										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -380,20 +376,19 @@ func (r *AuthenticationResource) Schema(ctx context.Context, req resource.Schema
 						Attributes: map[string]schema.Attribute{
 							"auth_endpoint_url": schema.StringAttribute{
 								MarkdownDescription: "Authorization Endpoint. URL of the authorization server's authorization endpoint.",
-								Optional: true,
+								Optional:            true,
 							},
 							"end_session_endpoint_url": schema.StringAttribute{
 								MarkdownDescription: "Logout Endpoint. URL of the authorization server's Logout endpoint.",
-								Optional: true,
+								Optional:            true,
 							},
 							"token_endpoint_url": schema.StringAttribute{
 								MarkdownDescription: "Token Endpoint. URL of the authorization server's Token endpoint.",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 					},
 				},
-
 			},
 		},
 	}
@@ -597,7 +592,6 @@ func (r *AuthenticationResource) Create(ctx context.Context, req resource.Create
 		createReq.Spec["oidc_auth"] = oidc_authMap
 	}
 
-
 	apiResource, err := r.client.CreateAuthentication(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create Authentication: %s", err))
@@ -609,7 +603,7 @@ func (r *AuthenticationResource) Create(ctx context.Context, req resource.Create
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if blockData, ok := apiResource.Spec["cookie_params"].(map[string]interface{}); ok && (isImport || data.CookieParams != nil) {
 		data.CookieParams = &AuthenticationCookieParamsModel{
 			AuthHmac: func() *AuthenticationCookieParamsAuthHmacModel {
@@ -677,8 +671,7 @@ func (r *AuthenticationResource) Create(ctx context.Context, req resource.Create
 				}
 				// Import case: read from API
 				if _, ok := blockData["client_secret"].(map[string]interface{}); ok {
-					return &AuthenticationOidcAuthClientSecretModel{
-					}
+					return &AuthenticationOidcAuthClientSecretModel{}
 				}
 				return nil
 			}(),
@@ -726,7 +719,6 @@ func (r *AuthenticationResource) Create(ctx context.Context, req resource.Create
 			}(),
 		}
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -816,9 +808,9 @@ func (r *AuthenticationResource) Read(ctx context.Context, req resource.ReadRequ
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if blockData, ok := apiResource.Spec["cookie_params"].(map[string]interface{}); ok && (isImport || data.CookieParams != nil) {
 		data.CookieParams = &AuthenticationCookieParamsModel{
@@ -887,8 +879,7 @@ func (r *AuthenticationResource) Read(ctx context.Context, req resource.ReadRequ
 				}
 				// Import case: read from API
 				if _, ok := blockData["client_secret"].(map[string]interface{}); ok {
-					return &AuthenticationOidcAuthClientSecretModel{
-					}
+					return &AuthenticationOidcAuthClientSecretModel{}
 				}
 				return nil
 			}(),
@@ -936,7 +927,6 @@ func (r *AuthenticationResource) Read(ctx context.Context, req resource.ReadRequ
 			}(),
 		}
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -1050,7 +1040,6 @@ func (r *AuthenticationResource) Update(ctx context.Context, req resource.Update
 		}
 		apiResource.Spec["oidc_auth"] = oidc_authMap
 	}
-
 
 	updated, err := r.client.UpdateAuthentication(ctx, apiResource)
 	if err != nil {

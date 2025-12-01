@@ -51,22 +51,22 @@ type AddressAllocatorEmptyModel struct {
 
 // AddressAllocatorAddressAllocationSchemeModel represents address_allocation_scheme block
 type AddressAllocatorAddressAllocationSchemeModel struct {
-	AllocationUnit types.Int64 `tfsdk:"allocation_unit"`
-	LocalInterfaceAddressOffset types.Int64 `tfsdk:"local_interface_address_offset"`
-	LocalInterfaceAddressType types.String `tfsdk:"local_interface_address_type"`
+	AllocationUnit              types.Int64  `tfsdk:"allocation_unit"`
+	LocalInterfaceAddressOffset types.Int64  `tfsdk:"local_interface_address_offset"`
+	LocalInterfaceAddressType   types.String `tfsdk:"local_interface_address_type"`
 }
 
 type AddressAllocatorResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	AddressPool types.List `tfsdk:"address_pool"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Mode types.String `tfsdk:"mode"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Name                    types.String                                  `tfsdk:"name"`
+	Namespace               types.String                                  `tfsdk:"namespace"`
+	AddressPool             types.List                                    `tfsdk:"address_pool"`
+	Annotations             types.Map                                     `tfsdk:"annotations"`
+	Description             types.String                                  `tfsdk:"description"`
+	Disable                 types.Bool                                    `tfsdk:"disable"`
+	Labels                  types.Map                                     `tfsdk:"labels"`
+	ID                      types.String                                  `tfsdk:"id"`
+	Mode                    types.String                                  `tfsdk:"mode"`
+	Timeouts                timeouts.Value                                `tfsdk:"timeouts"`
 	AddressAllocationScheme *AddressAllocatorAddressAllocationSchemeModel `tfsdk:"address_allocation_scheme"`
 }
 
@@ -81,7 +81,7 @@ func (r *AddressAllocatorResource) Schema(ctx context.Context, req resource.Sche
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the AddressAllocator. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -91,7 +91,7 @@ func (r *AddressAllocatorResource) Schema(ctx context.Context, req resource.Sche
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the AddressAllocator will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -101,38 +101,38 @@ func (r *AddressAllocatorResource) Schema(ctx context.Context, req resource.Sche
 			},
 			"address_pool": schema.ListAttribute{
 				MarkdownDescription: "Address Pool. Address pool from which the allocator carves out subnets or addresses to its clients.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"mode": schema.StringAttribute{
 				MarkdownDescription: "Allocator Mode. Mode of the address allocator Address allocator is for VERs within the local cluster or site Allocation is per site and then per node. Possible values are `LOCAL`, `GLOBAL_PER_SITE_NODE`. Defaults to `LOCAL`.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -150,18 +150,17 @@ func (r *AddressAllocatorResource) Schema(ctx context.Context, req resource.Sche
 				Attributes: map[string]schema.Attribute{
 					"allocation_unit": schema.Int64Attribute{
 						MarkdownDescription: "Allocation Unit. Prefix length indicating the size of each allocated subnet. For example, if this is specified as 30, subnets of /30 will be allocated from the given address pool.",
-						Optional: true,
+						Optional:            true,
 					},
 					"local_interface_address_offset": schema.Int64Attribute{
 						MarkdownDescription: "Local Interface Address Offset. This is used to derive address for the local interface from the allocated subnet. If Local Interface Address Type is set to 'Offset from beginning of Subnet', this offset value is added to the allocated subnet and used as the local interface address. For example, if the allocated subnet is 169.254.0.0/30 and offset is set to 2 with Local Interface Address Type set to 'Offset from beginning of Subnet', local interface address of 169.254.0.2 is used. If Local Interface Address Type is set to 'Offset from end of Subnet', this offset value is subtracted from the end of the allocated subnet and used as the local interface address. For example, if the allocated subnet is 169.254.0.0/30 and offset is set to 1 with Local Interface Address Type set to 'Offset from end of Subnet', local interface address of 169.254.0.2 is used.",
-						Optional: true,
+						Optional:            true,
 					},
 					"local_interface_address_type": schema.StringAttribute{
 						MarkdownDescription: "Local Interface Address Type. Dictates how local interface address is derived from the allocated subnet Use Nth address of the allocated subnet as the local interface address, N being the Local Interface Address Offset. For example, if the allocated subnet is 169.254.0.0/30, Local Interface Address Offset is set to 2 and Local Interface Address Type is set to 'Offset from beginning of Subnet', local address of 169.254.0.2 is used. Use Nth last address of the allocated subnet as the local interface address, N being the Local Interface Address Offset. For example, if the allocated subnet is 169.254.0.0/30, Local Interface Address Offset is set to 1 and Local Interface Address Type is set to 'Offset from end of Subnet', local address of 169.254.0.2 is used. This case is used for external_connector. Possible values are `LOCAL_INTERFACE_ADDRESS_OFFSET_FROM_SUBNET_BEGIN`, `LOCAL_INTERFACE_ADDRESS_OFFSET_FROM_SUBNET_END`, `LOCAL_INTERFACE_ADDRESS_FROM_PREFIX`. Defaults to `LOCAL_INTERFACE_ADDRESS_OFFSET_FROM_SUBNET_BEGIN`.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
-
 			},
 		},
 	}
@@ -335,7 +334,6 @@ func (r *AddressAllocatorResource) Create(ctx context.Context, req resource.Crea
 		createReq.Spec["mode"] = data.Mode.ValueString()
 	}
 
-
 	apiResource, err := r.client.CreateAddressAllocator(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create AddressAllocator: %s", err))
@@ -347,7 +345,7 @@ func (r *AddressAllocatorResource) Create(ctx context.Context, req resource.Crea
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if blockData, ok := apiResource.Spec["address_allocation_scheme"].(map[string]interface{}); ok && (isImport || data.AddressAllocationScheme != nil) {
 		data.AddressAllocationScheme = &AddressAllocatorAddressAllocationSchemeModel{
 			AllocationUnit: func() types.Int64 {
@@ -390,7 +388,6 @@ func (r *AddressAllocatorResource) Create(ctx context.Context, req resource.Crea
 	} else {
 		data.Mode = types.StringNull()
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -480,9 +477,9 @@ func (r *AddressAllocatorResource) Read(ctx context.Context, req resource.ReadRe
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if blockData, ok := apiResource.Spec["address_allocation_scheme"].(map[string]interface{}); ok && (isImport || data.AddressAllocationScheme != nil) {
 		data.AddressAllocationScheme = &AddressAllocatorAddressAllocationSchemeModel{
@@ -526,7 +523,6 @@ func (r *AddressAllocatorResource) Read(ctx context.Context, req resource.ReadRe
 	} else {
 		data.Mode = types.StringNull()
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -610,7 +606,6 @@ func (r *AddressAllocatorResource) Update(ctx context.Context, req resource.Upda
 	if !data.Mode.IsNull() && !data.Mode.IsUnknown() {
 		apiResource.Spec["mode"] = data.Mode.ValueString()
 	}
-
 
 	updated, err := r.client.UpdateAddressAllocator(ctx, apiResource)
 	if err != nil {

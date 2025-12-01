@@ -31,13 +31,13 @@ type F5XCProvider struct {
 
 // F5XCProviderModel describes the provider data model.
 type F5XCProviderModel struct {
-	APIToken     types.String `tfsdk:"api_token"`
-	APIURL       types.String `tfsdk:"api_url"`
-	APIP12File   types.String `tfsdk:"api_p12_file"`
-	P12Password  types.String `tfsdk:"p12_password"`
-	APICert      types.String `tfsdk:"api_cert"`
-	APIKey       types.String `tfsdk:"api_key"`
-	APICACert    types.String `tfsdk:"api_ca_cert"`
+	APIToken    types.String `tfsdk:"api_token"`
+	APIURL      types.String `tfsdk:"api_url"`
+	APIP12File  types.String `tfsdk:"api_p12_file"`
+	P12Password types.String `tfsdk:"p12_password"`
+	APICert     types.String `tfsdk:"api_cert"`
+	APIKey      types.String `tfsdk:"api_key"`
+	APICACert   types.String `tfsdk:"api_ca_cert"`
 }
 
 func (p *F5XCProvider) Metadata(ctx context.Context, req provider.MetadataRequest, resp *provider.MetadataResponse) {

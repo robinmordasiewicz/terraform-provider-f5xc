@@ -52,38 +52,38 @@ type HealthcheckEmptyModel struct {
 
 // HealthcheckHTTPHealthCheckModel represents http_health_check block
 type HealthcheckHTTPHealthCheckModel struct {
-	ExpectedStatusCodes types.List `tfsdk:"expected_status_codes"`
-	HostHeader types.String `tfsdk:"host_header"`
-	Path types.String `tfsdk:"path"`
-	RequestHeadersToRemove types.List `tfsdk:"request_headers_to_remove"`
-	UseHttp2 types.Bool `tfsdk:"use_http2"`
-	Headers *HealthcheckEmptyModel `tfsdk:"headers"`
-	UseOriginServerName *HealthcheckEmptyModel `tfsdk:"use_origin_server_name"`
+	ExpectedStatusCodes    types.List             `tfsdk:"expected_status_codes"`
+	HostHeader             types.String           `tfsdk:"host_header"`
+	Path                   types.String           `tfsdk:"path"`
+	RequestHeadersToRemove types.List             `tfsdk:"request_headers_to_remove"`
+	UseHttp2               types.Bool             `tfsdk:"use_http2"`
+	Headers                *HealthcheckEmptyModel `tfsdk:"headers"`
+	UseOriginServerName    *HealthcheckEmptyModel `tfsdk:"use_origin_server_name"`
 }
 
 // HealthcheckTCPHealthCheckModel represents tcp_health_check block
 type HealthcheckTCPHealthCheckModel struct {
 	ExpectedResponse types.String `tfsdk:"expected_response"`
-	SendPayload types.String `tfsdk:"send_payload"`
+	SendPayload      types.String `tfsdk:"send_payload"`
 }
 
 type HealthcheckResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	HealthyThreshold types.Int64 `tfsdk:"healthy_threshold"`
-	Interval types.Int64 `tfsdk:"interval"`
-	JitterPercent types.Int64 `tfsdk:"jitter_percent"`
-	Timeout types.Int64 `tfsdk:"timeout"`
-	UnhealthyThreshold types.Int64 `tfsdk:"unhealthy_threshold"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	HTTPHealthCheck *HealthcheckHTTPHealthCheckModel `tfsdk:"http_health_check"`
-	TCPHealthCheck *HealthcheckTCPHealthCheckModel `tfsdk:"tcp_health_check"`
-	UDPIcmpHealthCheck *HealthcheckEmptyModel `tfsdk:"udp_icmp_health_check"`
+	Name               types.String                     `tfsdk:"name"`
+	Namespace          types.String                     `tfsdk:"namespace"`
+	Annotations        types.Map                        `tfsdk:"annotations"`
+	Description        types.String                     `tfsdk:"description"`
+	Disable            types.Bool                       `tfsdk:"disable"`
+	Labels             types.Map                        `tfsdk:"labels"`
+	ID                 types.String                     `tfsdk:"id"`
+	HealthyThreshold   types.Int64                      `tfsdk:"healthy_threshold"`
+	Interval           types.Int64                      `tfsdk:"interval"`
+	JitterPercent      types.Int64                      `tfsdk:"jitter_percent"`
+	Timeout            types.Int64                      `tfsdk:"timeout"`
+	UnhealthyThreshold types.Int64                      `tfsdk:"unhealthy_threshold"`
+	Timeouts           timeouts.Value                   `tfsdk:"timeouts"`
+	HTTPHealthCheck    *HealthcheckHTTPHealthCheckModel `tfsdk:"http_health_check"`
+	TCPHealthCheck     *HealthcheckTCPHealthCheckModel  `tfsdk:"tcp_health_check"`
+	UDPIcmpHealthCheck *HealthcheckEmptyModel           `tfsdk:"udp_icmp_health_check"`
 }
 
 func (r *HealthcheckResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -97,7 +97,7 @@ func (r *HealthcheckResource) Schema(ctx context.Context, req resource.SchemaReq
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Healthcheck. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -107,7 +107,7 @@ func (r *HealthcheckResource) Schema(ctx context.Context, req resource.SchemaReq
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the Healthcheck will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -117,65 +117,65 @@ func (r *HealthcheckResource) Schema(ctx context.Context, req resource.SchemaReq
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"healthy_threshold": schema.Int64Attribute{
 				MarkdownDescription: "Healthy Threshold. Number of successful responses before declaring healthy. In other words, this is the number of healthy health checks required before a host is marked healthy. Note that during startup, only a single successful health check is required to mark a host healthy.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{
 					int64planmodifier.UseStateForUnknown(),
 				},
 			},
 			"interval": schema.Int64Attribute{
 				MarkdownDescription: "Interval. Time interval in seconds between two healthcheck requests.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{
 					int64planmodifier.UseStateForUnknown(),
 				},
 			},
 			"jitter_percent": schema.Int64Attribute{
 				MarkdownDescription: "Jitter Percent. Add a random amount of time as a percent value to the interval between successive healthcheck requests.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{
 					int64planmodifier.UseStateForUnknown(),
 				},
 			},
 			"timeout": schema.Int64Attribute{
 				MarkdownDescription: "Timeout. Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{
 					int64planmodifier.UseStateForUnknown(),
 				},
 			},
 			"unhealthy_threshold": schema.Int64Attribute{
 				MarkdownDescription: "Unhealthy Threshold. Number of failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a host is marked unhealthy. Note that for http health checking if a host responds with 503 this threshold is ignored and the host is considered unhealthy immediately.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{
 					int64planmodifier.UseStateForUnknown(),
 				},
@@ -193,25 +193,25 @@ func (r *HealthcheckResource) Schema(ctx context.Context, req resource.SchemaReq
 				Attributes: map[string]schema.Attribute{
 					"expected_status_codes": schema.ListAttribute{
 						MarkdownDescription: "Expected Status Codes. Specifies a list of HTTP response status codes considered healthy. To treat default HTTP expected status code 200 as healthy, user has to configure it explicitly. This is a list of strings, each of which is single HTTP status code or a range with start and end values separated by '-'.",
-						Optional: true,
-						ElementType: types.StringType,
+						Optional:            true,
+						ElementType:         types.StringType,
 					},
 					"host_header": schema.StringAttribute{
 						MarkdownDescription: "Host Header Value. The value of the host header.",
-						Optional: true,
+						Optional:            true,
 					},
 					"path": schema.StringAttribute{
 						MarkdownDescription: "Path. Specifies the HTTP path that will be requested during health checking.",
-						Optional: true,
+						Optional:            true,
 					},
 					"request_headers_to_remove": schema.ListAttribute{
 						MarkdownDescription: "Request Headers to Remove. Specifies a list of HTTP headers that should be removed from each request that is sent to the health checked cluster. This is a list of keys of headers.",
-						Optional: true,
-						ElementType: types.StringType,
+						Optional:            true,
+						ElementType:         types.StringType,
 					},
 					"use_http2": schema.BoolAttribute{
 						MarkdownDescription: "Use HTTP2. If set, health checks will be made using http/2.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -222,21 +222,19 @@ func (r *HealthcheckResource) Schema(ctx context.Context, req resource.SchemaReq
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 			"tcp_health_check": schema.SingleNestedBlock{
 				MarkdownDescription: "TCP Health Check. Healthy if TCP connection is successful and response payload matches <expected_response>",
 				Attributes: map[string]schema.Attribute{
 					"expected_response": schema.StringAttribute{
 						MarkdownDescription: "Expected Response. raw bytes expected in the request. Describes the encoding of the payload bytes in the payload. Hex encoded payload.",
-						Optional: true,
+						Optional:            true,
 					},
 					"send_payload": schema.StringAttribute{
 						MarkdownDescription: "Send Payload. raw bytes sent in the request. Empty payloads imply a connect-only health check. Describes the encoding of the payload bytes in the payload. Hex encoded payload.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
-
 			},
 			"udp_icmp_health_check": schema.SingleNestedBlock{
 				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -452,7 +450,6 @@ func (r *HealthcheckResource) Create(ctx context.Context, req resource.CreateReq
 		createReq.Spec["unhealthy_threshold"] = data.UnhealthyThreshold.ValueInt64()
 	}
 
-
 	apiResource, err := r.client.CreateHealthcheck(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create Healthcheck: %s", err))
@@ -464,7 +461,7 @@ func (r *HealthcheckResource) Create(ctx context.Context, req resource.CreateReq
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if blockData, ok := apiResource.Spec["http_health_check"].(map[string]interface{}); ok && (isImport || data.HTTPHealthCheck != nil) {
 		data.HTTPHealthCheck = &HealthcheckHTTPHealthCheckModel{
 			ExpectedStatusCodes: func() types.List {
@@ -588,7 +585,6 @@ func (r *HealthcheckResource) Create(ctx context.Context, req resource.CreateReq
 	} else {
 		data.UnhealthyThreshold = types.Int64Null()
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -678,9 +674,9 @@ func (r *HealthcheckResource) Read(ctx context.Context, req resource.ReadRequest
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if blockData, ok := apiResource.Spec["http_health_check"].(map[string]interface{}); ok && (isImport || data.HTTPHealthCheck != nil) {
 		data.HTTPHealthCheck = &HealthcheckHTTPHealthCheckModel{
@@ -805,7 +801,6 @@ func (r *HealthcheckResource) Read(ctx context.Context, req resource.ReadRequest
 	} else {
 		data.UnhealthyThreshold = types.Int64Null()
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -928,7 +923,6 @@ func (r *HealthcheckResource) Update(ctx context.Context, req resource.UpdateReq
 	if !data.UnhealthyThreshold.IsNull() && !data.UnhealthyThreshold.IsUnknown() {
 		apiResource.Spec["unhealthy_threshold"] = data.UnhealthyThreshold.ValueInt64()
 	}
-
 
 	updated, err := r.client.UpdateHealthcheck(ctx, apiResource)
 	if err != nil {

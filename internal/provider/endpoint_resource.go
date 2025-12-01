@@ -52,14 +52,14 @@ type EndpointEmptyModel struct {
 
 // EndpointDNSNameAdvancedModel represents dns_name_advanced block
 type EndpointDNSNameAdvancedModel struct {
-	Name types.String `tfsdk:"name"`
-	RefreshInterval types.Int64 `tfsdk:"refresh_interval"`
+	Name            types.String `tfsdk:"name"`
+	RefreshInterval types.Int64  `tfsdk:"refresh_interval"`
 }
 
 // EndpointServiceInfoModel represents service_info block
 type EndpointServiceInfoModel struct {
-	DiscoveryType types.String `tfsdk:"discovery_type"`
-	ServiceName types.String `tfsdk:"service_name"`
+	DiscoveryType   types.String                             `tfsdk:"discovery_type"`
+	ServiceName     types.String                             `tfsdk:"service_name"`
 	ServiceSelector *EndpointServiceInfoServiceSelectorModel `tfsdk:"service_selector"`
 }
 
@@ -70,8 +70,8 @@ type EndpointServiceInfoServiceSelectorModel struct {
 
 // EndpointSnatPoolModel represents snat_pool block
 type EndpointSnatPoolModel struct {
-	NoSnatPool *EndpointEmptyModel `tfsdk:"no_snat_pool"`
-	SnatPool *EndpointSnatPoolSnatPoolModel `tfsdk:"snat_pool"`
+	NoSnatPool *EndpointEmptyModel            `tfsdk:"no_snat_pool"`
+	SnatPool   *EndpointSnatPoolSnatPoolModel `tfsdk:"snat_pool"`
 }
 
 // EndpointSnatPoolSnatPoolModel represents snat_pool block
@@ -81,26 +81,26 @@ type EndpointSnatPoolSnatPoolModel struct {
 
 // EndpointWhereModel represents where block
 type EndpointWhereModel struct {
-	Site *EndpointWhereSiteModel `tfsdk:"site"`
+	Site           *EndpointWhereSiteModel           `tfsdk:"site"`
 	VirtualNetwork *EndpointWhereVirtualNetworkModel `tfsdk:"virtual_network"`
-	VirtualSite *EndpointWhereVirtualSiteModel `tfsdk:"virtual_site"`
+	VirtualSite    *EndpointWhereVirtualSiteModel    `tfsdk:"virtual_site"`
 }
 
 // EndpointWhereSiteModel represents site block
 type EndpointWhereSiteModel struct {
-	NetworkType types.String `tfsdk:"network_type"`
-	DisableInternetVip *EndpointEmptyModel `tfsdk:"disable_internet_vip"`
-	EnableInternetVip *EndpointEmptyModel `tfsdk:"enable_internet_vip"`
-	Ref []EndpointWhereSiteRefModel `tfsdk:"ref"`
+	NetworkType        types.String                `tfsdk:"network_type"`
+	DisableInternetVip *EndpointEmptyModel         `tfsdk:"disable_internet_vip"`
+	EnableInternetVip  *EndpointEmptyModel         `tfsdk:"enable_internet_vip"`
+	Ref                []EndpointWhereSiteRefModel `tfsdk:"ref"`
 }
 
 // EndpointWhereSiteRefModel represents ref block
 type EndpointWhereSiteRefModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // EndpointWhereVirtualNetworkModel represents virtual_network block
@@ -110,48 +110,48 @@ type EndpointWhereVirtualNetworkModel struct {
 
 // EndpointWhereVirtualNetworkRefModel represents ref block
 type EndpointWhereVirtualNetworkRefModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // EndpointWhereVirtualSiteModel represents virtual_site block
 type EndpointWhereVirtualSiteModel struct {
-	NetworkType types.String `tfsdk:"network_type"`
-	DisableInternetVip *EndpointEmptyModel `tfsdk:"disable_internet_vip"`
-	EnableInternetVip *EndpointEmptyModel `tfsdk:"enable_internet_vip"`
-	Ref []EndpointWhereVirtualSiteRefModel `tfsdk:"ref"`
+	NetworkType        types.String                       `tfsdk:"network_type"`
+	DisableInternetVip *EndpointEmptyModel                `tfsdk:"disable_internet_vip"`
+	EnableInternetVip  *EndpointEmptyModel                `tfsdk:"enable_internet_vip"`
+	Ref                []EndpointWhereVirtualSiteRefModel `tfsdk:"ref"`
 }
 
 // EndpointWhereVirtualSiteRefModel represents ref block
 type EndpointWhereVirtualSiteRefModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 type EndpointResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	DNSName types.String `tfsdk:"dns_name"`
-	HealthCheckPort types.Int64 `tfsdk:"health_check_port"`
-	IP types.String `tfsdk:"ip"`
-	Port types.Int64 `tfsdk:"port"`
-	Protocol types.String `tfsdk:"protocol"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Name            types.String                  `tfsdk:"name"`
+	Namespace       types.String                  `tfsdk:"namespace"`
+	Annotations     types.Map                     `tfsdk:"annotations"`
+	Description     types.String                  `tfsdk:"description"`
+	Disable         types.Bool                    `tfsdk:"disable"`
+	Labels          types.Map                     `tfsdk:"labels"`
+	ID              types.String                  `tfsdk:"id"`
+	DNSName         types.String                  `tfsdk:"dns_name"`
+	HealthCheckPort types.Int64                   `tfsdk:"health_check_port"`
+	IP              types.String                  `tfsdk:"ip"`
+	Port            types.Int64                   `tfsdk:"port"`
+	Protocol        types.String                  `tfsdk:"protocol"`
+	Timeouts        timeouts.Value                `tfsdk:"timeouts"`
 	DNSNameAdvanced *EndpointDNSNameAdvancedModel `tfsdk:"dns_name_advanced"`
-	ServiceInfo *EndpointServiceInfoModel `tfsdk:"service_info"`
-	SnatPool *EndpointSnatPoolModel `tfsdk:"snat_pool"`
-	Where *EndpointWhereModel `tfsdk:"where"`
+	ServiceInfo     *EndpointServiceInfoModel     `tfsdk:"service_info"`
+	SnatPool        *EndpointSnatPoolModel        `tfsdk:"snat_pool"`
+	Where           *EndpointWhereModel           `tfsdk:"where"`
 }
 
 func (r *EndpointResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -165,7 +165,7 @@ func (r *EndpointResource) Schema(ctx context.Context, req resource.SchemaReques
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Endpoint. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -175,7 +175,7 @@ func (r *EndpointResource) Schema(ctx context.Context, req resource.SchemaReques
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the Endpoint will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -185,65 +185,65 @@ func (r *EndpointResource) Schema(ctx context.Context, req resource.SchemaReques
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"dns_name": schema.StringAttribute{
 				MarkdownDescription: "[OneOf: dns_name, dns_name_advanced, ip, service_info] Endpoint Name. Endpoint's ip address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"health_check_port": schema.Int64Attribute{
 				MarkdownDescription: "Port used for health check. By default the health check port of an endpoint is the same as the endpoint’s port. This option provides an alternative health check port. Setting this with a non-zero value allows an endpoint to have different health check port.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{
 					int64planmodifier.UseStateForUnknown(),
 				},
 			},
 			"ip": schema.StringAttribute{
 				MarkdownDescription: "Endpoint IP Address. Endpoint is reachable at the given ipv4/ipv6 address",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"port": schema.Int64Attribute{
 				MarkdownDescription: "Port. Endpoint service is available on this port",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{
 					int64planmodifier.UseStateForUnknown(),
 				},
 			},
 			"protocol": schema.StringAttribute{
 				MarkdownDescription: "Protocol. Endpoint protocol. Default is TCP. Both TCP and UDP protocols are supported",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -261,25 +261,24 @@ func (r *EndpointResource) Schema(ctx context.Context, req resource.SchemaReques
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
 						MarkdownDescription: "Endpoint DNS Name. Endpoint's ip address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
-						Optional: true,
+						Optional:            true,
 					},
 					"refresh_interval": schema.Int64Attribute{
 						MarkdownDescription: "DNS Refresh Interval. Interval for DNS refresh in seconds.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
-
 			},
 			"service_info": schema.SingleNestedBlock{
 				MarkdownDescription: "Service Info Type. Specifies whether endpoint service is discovered by name or labels",
 				Attributes: map[string]schema.Attribute{
 					"discovery_type": schema.StringAttribute{
 						MarkdownDescription: "Discovery Type. Specifies whether the discovery is from Kubernetes or Consul cluster Invalid Discovery mechanism Discover from Kubernetes cluster Discover from Consul service Discover from Classic BIG-IP Clusters Discover for Third Party Application. Possible values are `INVALID_DISCOVERY`, `K8S`, `CONSUL`, `CLASSIC_BIGIP`, `THIRD_PARTY`. Defaults to `INVALID_DISCOVERY`.",
-						Optional: true,
+						Optional:            true,
 					},
 					"service_name": schema.StringAttribute{
 						MarkdownDescription: "Service Name. Name of the service to discover with an optional namespace and cluster identifier. The format is service_name.namespace_name:cluster_identifier for K8S and service_name:cluster_identifier for Consul Endpoint will be discovered in all discovery objects where the cluster identifier matches. If cluster identifier is not specified then discovery will be done in all discovery objects of the site.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -288,18 +287,16 @@ func (r *EndpointResource) Schema(ctx context.Context, req resource.SchemaReques
 						Attributes: map[string]schema.Attribute{
 							"expressions": schema.ListAttribute{
 								MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections.",
-								Optional: true,
-								ElementType: types.StringType,
+								Optional:            true,
+								ElementType:         types.StringType,
 							},
 						},
 					},
 				},
-
 			},
 			"snat_pool": schema.SingleNestedBlock{
 				MarkdownDescription: "Snat Pool. Snat Pool configuration",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"no_snat_pool": schema.SingleNestedBlock{
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -309,25 +306,23 @@ func (r *EndpointResource) Schema(ctx context.Context, req resource.SchemaReques
 						Attributes: map[string]schema.Attribute{
 							"prefixes": schema.ListAttribute{
 								MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
-								Optional: true,
-								ElementType: types.StringType,
+								Optional:            true,
+								ElementType:         types.StringType,
 							},
 						},
 					},
 				},
-
 			},
 			"where": schema.SingleNestedBlock{
 				MarkdownDescription: "Network or Site Reference. NetworkSiteRefSelector defines a union of reference to site or reference to virtual_network or reference to virtual_site It is used to determine virtual network using following rules * Direct reference to virtual_network object * Site local network when refering to site object * All site local networks for sites selected by refering to virtual_site object",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"site": schema.SingleNestedBlock{
 						MarkdownDescription: "Site Reference. This specifies a direct reference to a site configuration object",
 						Attributes: map[string]schema.Attribute{
 							"network_type": schema.StringAttribute{
 								MarkdownDescription: "Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user. Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`. Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`.",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -343,26 +338,26 @@ func (r *EndpointResource) Schema(ctx context.Context, req resource.SchemaReques
 									Attributes: map[string]schema.Attribute{
 										"kind": schema.StringAttribute{
 											MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-											Optional: true,
+											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
 											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-											Optional: true,
+											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 										"uid": schema.StringAttribute{
 											MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
@@ -371,8 +366,7 @@ func (r *EndpointResource) Schema(ctx context.Context, req resource.SchemaReques
 					},
 					"virtual_network": schema.SingleNestedBlock{
 						MarkdownDescription: "Network Reference. This specifies a direct reference to a network configuration object",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"ref": schema.ListNestedBlock{
 								MarkdownDescription: "Reference. A virtual network direct reference",
@@ -380,26 +374,26 @@ func (r *EndpointResource) Schema(ctx context.Context, req resource.SchemaReques
 									Attributes: map[string]schema.Attribute{
 										"kind": schema.StringAttribute{
 											MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-											Optional: true,
+											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
 											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-											Optional: true,
+											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 										"uid": schema.StringAttribute{
 											MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
@@ -411,7 +405,7 @@ func (r *EndpointResource) Schema(ctx context.Context, req resource.SchemaReques
 						Attributes: map[string]schema.Attribute{
 							"network_type": schema.StringAttribute{
 								MarkdownDescription: "Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user. Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`. Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`.",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -427,26 +421,26 @@ func (r *EndpointResource) Schema(ctx context.Context, req resource.SchemaReques
 									Attributes: map[string]schema.Attribute{
 										"kind": schema.StringAttribute{
 											MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-											Optional: true,
+											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
 											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-											Optional: true,
+											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 										"uid": schema.StringAttribute{
 											MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
@@ -454,7 +448,6 @@ func (r *EndpointResource) Schema(ctx context.Context, req resource.SchemaReques
 						},
 					},
 				},
-
 			},
 		},
 	}
@@ -677,7 +670,6 @@ func (r *EndpointResource) Create(ctx context.Context, req resource.CreateReques
 		createReq.Spec["protocol"] = data.Protocol.ValueString()
 	}
 
-
 	apiResource, err := r.client.CreateEndpoint(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create Endpoint: %s", err))
@@ -689,7 +681,7 @@ func (r *EndpointResource) Create(ctx context.Context, req resource.CreateReques
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if blockData, ok := apiResource.Spec["dns_name_advanced"].(map[string]interface{}); ok && (isImport || data.DNSNameAdvanced != nil) {
 		data.DNSNameAdvanced = &EndpointDNSNameAdvancedModel{
 			Name: func() types.String {
@@ -782,7 +774,6 @@ func (r *EndpointResource) Create(ctx context.Context, req resource.CreateReques
 	} else {
 		data.Protocol = types.StringNull()
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -872,9 +863,9 @@ func (r *EndpointResource) Read(ctx context.Context, req resource.ReadRequest, r
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if blockData, ok := apiResource.Spec["dns_name_advanced"].(map[string]interface{}); ok && (isImport || data.DNSNameAdvanced != nil) {
 		data.DNSNameAdvanced = &EndpointDNSNameAdvancedModel{
@@ -968,7 +959,6 @@ func (r *EndpointResource) Read(ctx context.Context, req resource.ReadRequest, r
 	} else {
 		data.Protocol = types.StringNull()
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -1101,7 +1091,6 @@ func (r *EndpointResource) Update(ctx context.Context, req resource.UpdateReques
 	if !data.Protocol.IsNull() && !data.Protocol.IsUnknown() {
 		apiResource.Spec["protocol"] = data.Protocol.ValueString()
 	}
-
 
 	updated, err := r.client.UpdateEndpoint(ctx, apiResource)
 	if err != nil {

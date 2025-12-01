@@ -51,55 +51,55 @@ type ChildTenantEmptyModel struct {
 
 // ChildTenantChildTenantManagerModel represents child_tenant_manager block
 type ChildTenantChildTenantManagerModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // ChildTenantContactDetailModel represents contact_detail block
 type ChildTenantContactDetailModel struct {
-	Address1 types.String `tfsdk:"address1"`
-	Address2 types.String `tfsdk:"address2"`
-	City types.String `tfsdk:"city"`
+	Address1    types.String `tfsdk:"address1"`
+	Address2    types.String `tfsdk:"address2"`
+	City        types.String `tfsdk:"city"`
 	ContactType types.String `tfsdk:"contact_type"`
-	Country types.String `tfsdk:"country"`
-	County types.String `tfsdk:"county"`
+	Country     types.String `tfsdk:"country"`
+	County      types.String `tfsdk:"county"`
 	PhoneNumber types.String `tfsdk:"phone_number"`
-	State types.String `tfsdk:"state"`
-	StateCode types.String `tfsdk:"state_code"`
-	ZipCode types.String `tfsdk:"zip_code"`
+	State       types.String `tfsdk:"state"`
+	StateCode   types.String `tfsdk:"state_code"`
+	ZipCode     types.String `tfsdk:"zip_code"`
 }
 
 // ChildTenantCustomerInfoModel represents customer_info block
 type ChildTenantCustomerInfoModel struct {
 	AdditionalInfo types.String `tfsdk:"additional_info"`
-	Email types.String `tfsdk:"email"`
-	FirstName types.String `tfsdk:"first_name"`
-	LastName types.String `tfsdk:"last_name"`
+	Email          types.String `tfsdk:"email"`
+	FirstName      types.String `tfsdk:"first_name"`
+	LastName       types.String `tfsdk:"last_name"`
 }
 
 // ChildTenantTenantProfileModel represents tenant_profile block
 type ChildTenantTenantProfileModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 type ChildTenantResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	CompanyName types.String `tfsdk:"company_name"`
-	Domain types.String `tfsdk:"domain"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Name               types.String                        `tfsdk:"name"`
+	Namespace          types.String                        `tfsdk:"namespace"`
+	Annotations        types.Map                           `tfsdk:"annotations"`
+	Description        types.String                        `tfsdk:"description"`
+	Disable            types.Bool                          `tfsdk:"disable"`
+	Labels             types.Map                           `tfsdk:"labels"`
+	ID                 types.String                        `tfsdk:"id"`
+	CompanyName        types.String                        `tfsdk:"company_name"`
+	Domain             types.String                        `tfsdk:"domain"`
+	Timeouts           timeouts.Value                      `tfsdk:"timeouts"`
 	ChildTenantManager *ChildTenantChildTenantManagerModel `tfsdk:"child_tenant_manager"`
-	ContactDetail *ChildTenantContactDetailModel `tfsdk:"contact_detail"`
-	CustomerInfo *ChildTenantCustomerInfoModel `tfsdk:"customer_info"`
-	TenantProfile *ChildTenantTenantProfileModel `tfsdk:"tenant_profile"`
+	ContactDetail      *ChildTenantContactDetailModel      `tfsdk:"contact_detail"`
+	CustomerInfo       *ChildTenantCustomerInfoModel       `tfsdk:"customer_info"`
+	TenantProfile      *ChildTenantTenantProfileModel      `tfsdk:"tenant_profile"`
 }
 
 func (r *ChildTenantResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -113,7 +113,7 @@ func (r *ChildTenantResource) Schema(ctx context.Context, req resource.SchemaReq
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the ChildTenant. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -123,7 +123,7 @@ func (r *ChildTenantResource) Schema(ctx context.Context, req resource.SchemaReq
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the ChildTenant will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -133,41 +133,41 @@ func (r *ChildTenantResource) Schema(ctx context.Context, req resource.SchemaReq
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"company_name": schema.StringAttribute{
 				MarkdownDescription: "Company Name. Company name (enterprise only)",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"domain": schema.StringAttribute{
 				MarkdownDescription: "Domain. Text string that will be used for the subdomain of the new Child Tenant. This will be where users will directly log into the new Child Tenant. example domain.console.ves.volterra.io.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -185,106 +185,102 @@ func (r *ChildTenantResource) Schema(ctx context.Context, req resource.SchemaReq
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
 						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-						Optional: true,
+						Optional:            true,
 					},
 					"namespace": schema.StringAttribute{
 						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-						Optional: true,
+						Optional:            true,
 					},
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-						Optional: true,
-						Computed: true,
+						Optional:            true,
+						Computed:            true,
 					},
 				},
-
 			},
 			"contact_detail": schema.SingleNestedBlock{
 				MarkdownDescription: "Contact. Instance of one single contact that can be used to communicate with customers. Depending on contact type we use these details to send general communication (regular, physical mail) or invoices.",
 				Attributes: map[string]schema.Attribute{
 					"address1": schema.StringAttribute{
 						MarkdownDescription: "Address Line 1.",
-						Optional: true,
+						Optional:            true,
 					},
 					"address2": schema.StringAttribute{
 						MarkdownDescription: "Address Line 2.",
-						Optional: true,
+						Optional:            true,
 					},
 					"city": schema.StringAttribute{
 						MarkdownDescription: "City.",
-						Optional: true,
+						Optional:            true,
 					},
 					"contact_type": schema.StringAttribute{
 						MarkdownDescription: "Contact Type. Determines the contact type Indicates snail mail address (used for correspondence) Indicates billing address (this address will appear on invoices) Indicates contact used for a payment method (this address is used when charging a payment method). Possible values are `MAILING`, `BILLING`, `PAYMENT`. Defaults to `MAILING`.",
-						Optional: true,
+						Optional:            true,
 					},
 					"country": schema.StringAttribute{
 						MarkdownDescription: "Country.",
-						Optional: true,
+						Optional:            true,
 					},
 					"county": schema.StringAttribute{
 						MarkdownDescription: "County.",
-						Optional: true,
+						Optional:            true,
 					},
 					"phone_number": schema.StringAttribute{
 						MarkdownDescription: "Phone Number.",
-						Optional: true,
+						Optional:            true,
 					},
 					"state": schema.StringAttribute{
 						MarkdownDescription: "State.",
-						Optional: true,
+						Optional:            true,
 					},
 					"state_code": schema.StringAttribute{
 						MarkdownDescription: "State Code.",
-						Optional: true,
+						Optional:            true,
 					},
 					"zip_code": schema.StringAttribute{
 						MarkdownDescription: "ZIP code.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
-
 			},
 			"customer_info": schema.SingleNestedBlock{
 				MarkdownDescription: "Customer Info. Optional details for the new child tenant",
 				Attributes: map[string]schema.Attribute{
 					"additional_info": schema.StringAttribute{
 						MarkdownDescription: "Additional Info. Use this field for any additional information about the new child tenant",
-						Optional: true,
+						Optional:            true,
 					},
 					"email": schema.StringAttribute{
 						MarkdownDescription: "Email.",
-						Optional: true,
+						Optional:            true,
 					},
 					"first_name": schema.StringAttribute{
 						MarkdownDescription: "First Name.",
-						Optional: true,
+						Optional:            true,
 					},
 					"last_name": schema.StringAttribute{
 						MarkdownDescription: "Last Name.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
-
 			},
 			"tenant_profile": schema.SingleNestedBlock{
 				MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
 						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-						Optional: true,
+						Optional:            true,
 					},
 					"namespace": schema.StringAttribute{
 						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-						Optional: true,
+						Optional:            true,
 					},
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-						Optional: true,
-						Computed: true,
+						Optional:            true,
+						Computed:            true,
 					},
 				},
-
 			},
 		},
 	}
@@ -517,7 +513,6 @@ func (r *ChildTenantResource) Create(ctx context.Context, req resource.CreateReq
 		createReq.Spec["domain"] = data.Domain.ValueString()
 	}
 
-
 	apiResource, err := r.client.CreateChildTenant(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create ChildTenant: %s", err))
@@ -525,11 +520,13 @@ func (r *ChildTenantResource) Create(ctx context.Context, req resource.CreateReq
 	}
 
 	data.ID = types.StringValue(apiResource.Metadata.Name)
+	// For resources without namespace in API path, namespace is computed from API response
+	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
 
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if blockData, ok := apiResource.Spec["child_tenant_manager"].(map[string]interface{}); ok && (isImport || data.ChildTenantManager != nil) {
 		data.ChildTenantManager = &ChildTenantChildTenantManagerModel{
 			Name: func() types.String {
@@ -676,7 +673,6 @@ func (r *ChildTenantResource) Create(ctx context.Context, req resource.CreateReq
 	} else {
 		data.Domain = types.StringNull()
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -766,9 +762,9 @@ func (r *ChildTenantResource) Read(ctx context.Context, req resource.ReadRequest
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if blockData, ok := apiResource.Spec["child_tenant_manager"].(map[string]interface{}); ok && (isImport || data.ChildTenantManager != nil) {
 		data.ChildTenantManager = &ChildTenantChildTenantManagerModel{
@@ -916,7 +912,6 @@ func (r *ChildTenantResource) Read(ctx context.Context, req resource.ReadRequest
 	} else {
 		data.Domain = types.StringNull()
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -1060,7 +1055,6 @@ func (r *ChildTenantResource) Update(ctx context.Context, req resource.UpdateReq
 		apiResource.Spec["domain"] = data.Domain.ValueString()
 	}
 
-
 	updated, err := r.client.UpdateChildTenant(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update ChildTenant: %s", err))
@@ -1143,19 +1137,17 @@ func (r *ChildTenantResource) Delete(ctx context.Context, req resource.DeleteReq
 }
 
 func (r *ChildTenantResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	// Import ID format: namespace/name
-	parts := strings.Split(req.ID, "/")
-	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+	// Import ID format: name (no namespace for this resource type)
+	name := req.ID
+	if name == "" {
 		resp.Diagnostics.AddError(
 			"Invalid Import ID",
-			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+			"Expected import ID to be the resource name, got empty string",
 		)
 		return
 	}
-	namespace := parts[0]
-	name := parts[1]
 
-	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), "")...)
 	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
 	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

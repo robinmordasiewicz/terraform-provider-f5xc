@@ -51,21 +51,21 @@ type AllowedTenantEmptyModel struct {
 
 // AllowedTenantAllowedGroupsModel represents allowed_groups block
 type AllowedTenantAllowedGroupsModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 type AllowedTenantResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	TenantID types.String `tfsdk:"tenant_id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Name          types.String                      `tfsdk:"name"`
+	Namespace     types.String                      `tfsdk:"namespace"`
+	Annotations   types.Map                         `tfsdk:"annotations"`
+	Description   types.String                      `tfsdk:"description"`
+	Disable       types.Bool                        `tfsdk:"disable"`
+	Labels        types.Map                         `tfsdk:"labels"`
+	ID            types.String                      `tfsdk:"id"`
+	TenantID      types.String                      `tfsdk:"tenant_id"`
+	Timeouts      timeouts.Value                    `tfsdk:"timeouts"`
 	AllowedGroups []AllowedTenantAllowedGroupsModel `tfsdk:"allowed_groups"`
 }
 
@@ -80,7 +80,7 @@ func (r *AllowedTenantResource) Schema(ctx context.Context, req resource.SchemaR
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the AllowedTenant. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -90,7 +90,7 @@ func (r *AllowedTenantResource) Schema(ctx context.Context, req resource.SchemaR
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the AllowedTenant will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -100,33 +100,33 @@ func (r *AllowedTenantResource) Schema(ctx context.Context, req resource.SchemaR
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"tenant_id": schema.StringAttribute{
 				MarkdownDescription: "Allowed Tenant ID. Specify the Tenant ID of the Original Tenant which is allowed to manage. NOTE: this is the name of the tenant configuration obj. not UID.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -145,19 +145,18 @@ func (r *AllowedTenantResource) Schema(ctx context.Context, req resource.SchemaR
 					Attributes: map[string]schema.Attribute{
 						"name": schema.StringAttribute{
 							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-							Optional: true,
+							Optional:            true,
 						},
 						"namespace": schema.StringAttribute{
 							MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-							Optional: true,
+							Optional:            true,
 						},
 						"tenant": schema.StringAttribute{
 							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-							Optional: true,
-							Computed: true,
+							Optional:            true,
+							Computed:            true,
 						},
 					},
-
 				},
 			},
 		},
@@ -329,7 +328,6 @@ func (r *AllowedTenantResource) Create(ctx context.Context, req resource.CreateR
 		createReq.Spec["tenant_id"] = data.TenantID.ValueString()
 	}
 
-
 	apiResource, err := r.client.CreateAllowedTenant(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create AllowedTenant: %s", err))
@@ -341,7 +339,7 @@ func (r *AllowedTenantResource) Create(ctx context.Context, req resource.CreateR
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["allowed_groups"].([]interface{}); ok && len(listData) > 0 {
 		var allowed_groupsList []AllowedTenantAllowedGroupsModel
 		for listIdx, item := range listData {
@@ -376,7 +374,6 @@ func (r *AllowedTenantResource) Create(ctx context.Context, req resource.CreateR
 	} else {
 		data.TenantID = types.StringNull()
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -466,9 +463,9 @@ func (r *AllowedTenantResource) Read(ctx context.Context, req resource.ReadReque
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if listData, ok := apiResource.Spec["allowed_groups"].([]interface{}); ok && len(listData) > 0 {
 		var allowed_groupsList []AllowedTenantAllowedGroupsModel
@@ -504,7 +501,6 @@ func (r *AllowedTenantResource) Read(ctx context.Context, req resource.ReadReque
 	} else {
 		data.TenantID = types.StringNull()
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -585,7 +581,6 @@ func (r *AllowedTenantResource) Update(ctx context.Context, req resource.UpdateR
 	if !data.TenantID.IsNull() && !data.TenantID.IsUnknown() {
 		apiResource.Spec["tenant_id"] = data.TenantID.ValueString()
 	}
-
 
 	updated, err := r.client.UpdateAllowedTenant(ctx, apiResource)
 	if err != nil {

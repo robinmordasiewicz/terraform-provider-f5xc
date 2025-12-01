@@ -51,93 +51,93 @@ type CloudCredentialsEmptyModel struct {
 
 // CloudCredentialsAWSAssumeRoleModel represents aws_assume_role block
 type CloudCredentialsAWSAssumeRoleModel struct {
-	CustomExternalID types.String `tfsdk:"custom_external_id"`
-	DurationSeconds types.Int64 `tfsdk:"duration_seconds"`
-	RoleArn types.String `tfsdk:"role_arn"`
-	SessionName types.String `tfsdk:"session_name"`
+	CustomExternalID     types.String                `tfsdk:"custom_external_id"`
+	DurationSeconds      types.Int64                 `tfsdk:"duration_seconds"`
+	RoleArn              types.String                `tfsdk:"role_arn"`
+	SessionName          types.String                `tfsdk:"session_name"`
 	ExternalIDIsOptional *CloudCredentialsEmptyModel `tfsdk:"external_id_is_optional"`
 	ExternalIDIsTenantID *CloudCredentialsEmptyModel `tfsdk:"external_id_is_tenant_id"`
-	SessionTags *CloudCredentialsEmptyModel `tfsdk:"session_tags"`
+	SessionTags          *CloudCredentialsEmptyModel `tfsdk:"session_tags"`
 }
 
 // CloudCredentialsAWSSecretKeyModel represents aws_secret_key block
 type CloudCredentialsAWSSecretKeyModel struct {
-	AccessKey types.String `tfsdk:"access_key"`
+	AccessKey types.String                                `tfsdk:"access_key"`
 	SecretKey *CloudCredentialsAWSSecretKeySecretKeyModel `tfsdk:"secret_key"`
 }
 
 // CloudCredentialsAWSSecretKeySecretKeyModel represents secret_key block
 type CloudCredentialsAWSSecretKeySecretKeyModel struct {
 	BlindfoldSecretInfo *CloudCredentialsAWSSecretKeySecretKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *CloudCredentialsAWSSecretKeySecretKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *CloudCredentialsAWSSecretKeySecretKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // CloudCredentialsAWSSecretKeySecretKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
 type CloudCredentialsAWSSecretKeySecretKeyBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // CloudCredentialsAWSSecretKeySecretKeyClearSecretInfoModel represents clear_secret_info block
 type CloudCredentialsAWSSecretKeySecretKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // CloudCredentialsAzureClientSecretModel represents azure_client_secret block
 type CloudCredentialsAzureClientSecretModel struct {
-	ClientID types.String `tfsdk:"client_id"`
-	SubscriptionID types.String `tfsdk:"subscription_id"`
-	TenantID types.String `tfsdk:"tenant_id"`
-	ClientSecret *CloudCredentialsAzureClientSecretClientSecretModel `tfsdk:"client_secret"`
+	ClientID       types.String                                        `tfsdk:"client_id"`
+	SubscriptionID types.String                                        `tfsdk:"subscription_id"`
+	TenantID       types.String                                        `tfsdk:"tenant_id"`
+	ClientSecret   *CloudCredentialsAzureClientSecretClientSecretModel `tfsdk:"client_secret"`
 }
 
 // CloudCredentialsAzureClientSecretClientSecretModel represents client_secret block
 type CloudCredentialsAzureClientSecretClientSecretModel struct {
 	BlindfoldSecretInfo *CloudCredentialsAzureClientSecretClientSecretBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *CloudCredentialsAzureClientSecretClientSecretClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *CloudCredentialsAzureClientSecretClientSecretClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // CloudCredentialsAzureClientSecretClientSecretBlindfoldSecretInfoModel represents blindfold_secret_info block
 type CloudCredentialsAzureClientSecretClientSecretBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // CloudCredentialsAzureClientSecretClientSecretClearSecretInfoModel represents clear_secret_info block
 type CloudCredentialsAzureClientSecretClientSecretClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // CloudCredentialsAzurePfxCertificateModel represents azure_pfx_certificate block
 type CloudCredentialsAzurePfxCertificateModel struct {
-	CertificateURL types.String `tfsdk:"certificate_url"`
-	ClientID types.String `tfsdk:"client_id"`
-	SubscriptionID types.String `tfsdk:"subscription_id"`
-	TenantID types.String `tfsdk:"tenant_id"`
-	Password *CloudCredentialsAzurePfxCertificatePasswordModel `tfsdk:"password"`
+	CertificateURL types.String                                      `tfsdk:"certificate_url"`
+	ClientID       types.String                                      `tfsdk:"client_id"`
+	SubscriptionID types.String                                      `tfsdk:"subscription_id"`
+	TenantID       types.String                                      `tfsdk:"tenant_id"`
+	Password       *CloudCredentialsAzurePfxCertificatePasswordModel `tfsdk:"password"`
 }
 
 // CloudCredentialsAzurePfxCertificatePasswordModel represents password block
 type CloudCredentialsAzurePfxCertificatePasswordModel struct {
 	BlindfoldSecretInfo *CloudCredentialsAzurePfxCertificatePasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *CloudCredentialsAzurePfxCertificatePasswordClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *CloudCredentialsAzurePfxCertificatePasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // CloudCredentialsAzurePfxCertificatePasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
 type CloudCredentialsAzurePfxCertificatePasswordBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // CloudCredentialsAzurePfxCertificatePasswordClearSecretInfoModel represents clear_secret_info block
 type CloudCredentialsAzurePfxCertificatePasswordClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // CloudCredentialsGCPCredFileModel represents gcp_cred_file block
@@ -148,36 +148,36 @@ type CloudCredentialsGCPCredFileModel struct {
 // CloudCredentialsGCPCredFileCredentialFileModel represents credential_file block
 type CloudCredentialsGCPCredFileCredentialFileModel struct {
 	BlindfoldSecretInfo *CloudCredentialsGCPCredFileCredentialFileBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *CloudCredentialsGCPCredFileCredentialFileClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *CloudCredentialsGCPCredFileCredentialFileClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // CloudCredentialsGCPCredFileCredentialFileBlindfoldSecretInfoModel represents blindfold_secret_info block
 type CloudCredentialsGCPCredFileCredentialFileBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // CloudCredentialsGCPCredFileCredentialFileClearSecretInfoModel represents clear_secret_info block
 type CloudCredentialsGCPCredFileCredentialFileClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 type CloudCredentialsResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	AWSAssumeRole *CloudCredentialsAWSAssumeRoleModel `tfsdk:"aws_assume_role"`
-	AWSSecretKey *CloudCredentialsAWSSecretKeyModel `tfsdk:"aws_secret_key"`
-	AzureClientSecret *CloudCredentialsAzureClientSecretModel `tfsdk:"azure_client_secret"`
+	Name                types.String                              `tfsdk:"name"`
+	Namespace           types.String                              `tfsdk:"namespace"`
+	Annotations         types.Map                                 `tfsdk:"annotations"`
+	Description         types.String                              `tfsdk:"description"`
+	Disable             types.Bool                                `tfsdk:"disable"`
+	Labels              types.Map                                 `tfsdk:"labels"`
+	ID                  types.String                              `tfsdk:"id"`
+	Timeouts            timeouts.Value                            `tfsdk:"timeouts"`
+	AWSAssumeRole       *CloudCredentialsAWSAssumeRoleModel       `tfsdk:"aws_assume_role"`
+	AWSSecretKey        *CloudCredentialsAWSSecretKeyModel        `tfsdk:"aws_secret_key"`
+	AzureClientSecret   *CloudCredentialsAzureClientSecretModel   `tfsdk:"azure_client_secret"`
 	AzurePfxCertificate *CloudCredentialsAzurePfxCertificateModel `tfsdk:"azure_pfx_certificate"`
-	GCPCredFile *CloudCredentialsGCPCredFileModel `tfsdk:"gcp_cred_file"`
+	GCPCredFile         *CloudCredentialsGCPCredFileModel         `tfsdk:"gcp_cred_file"`
 }
 
 func (r *CloudCredentialsResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -191,7 +191,7 @@ func (r *CloudCredentialsResource) Schema(ctx context.Context, req resource.Sche
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the CloudCredentials. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -201,7 +201,7 @@ func (r *CloudCredentialsResource) Schema(ctx context.Context, req resource.Sche
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the CloudCredentials will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -211,25 +211,25 @@ func (r *CloudCredentialsResource) Schema(ctx context.Context, req resource.Sche
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -247,19 +247,19 @@ func (r *CloudCredentialsResource) Schema(ctx context.Context, req resource.Sche
 				Attributes: map[string]schema.Attribute{
 					"custom_external_id": schema.StringAttribute{
 						MarkdownDescription: "External ID is Custom ID. External ID is Custom ID",
-						Optional: true,
+						Optional:            true,
 					},
 					"duration_seconds": schema.Int64Attribute{
 						MarkdownDescription: "Role Session Duration Seconds. The duration, in seconds of the role session.",
-						Optional: true,
+						Optional:            true,
 					},
 					"role_arn": schema.StringAttribute{
 						MarkdownDescription: "IAM Role ARN. IAM Role ARN to assume the role",
-						Optional: true,
+						Optional:            true,
 					},
 					"session_name": schema.StringAttribute{
 						MarkdownDescription: "Role Session Name. Use the role session name to uniquely identify a session, which will be used for deploy, monitor from F5XC console",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -273,36 +273,34 @@ func (r *CloudCredentialsResource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Role Session Tags. Session tags are key-value pair attributes that you pass when you assume an IAM role",
 					},
 				},
-
 			},
 			"aws_secret_key": schema.SingleNestedBlock{
 				MarkdownDescription: "AWS Programmatic Access Credentials. AWS Programmatic Access Credentials type",
 				Attributes: map[string]schema.Attribute{
 					"access_key": schema.StringAttribute{
 						MarkdownDescription: "Access Key ID. Access key ID for your AWS account",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"secret_key": schema.SingleNestedBlock{
 						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"blindfold_secret_info": schema.SingleNestedBlock{
 								MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 								Attributes: map[string]schema.Attribute{
 									"decryption_provider": schema.StringAttribute{
 										MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-										Optional: true,
+										Optional:            true,
 									},
 									"location": schema.StringAttribute{
 										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-										Optional: true,
+										Optional:            true,
 									},
 									"store_provider": schema.StringAttribute{
 										MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -311,55 +309,53 @@ func (r *CloudCredentialsResource) Schema(ctx context.Context, req resource.Sche
 								Attributes: map[string]schema.Attribute{
 									"provider_ref": schema.StringAttribute{
 										MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-										Optional: true,
+										Optional:            true,
 									},
 									"url": schema.StringAttribute{
 										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
 						},
 					},
 				},
-
 			},
 			"azure_client_secret": schema.SingleNestedBlock{
 				MarkdownDescription: "Azure Client Secret. Azure Credentials Client Secret type",
 				Attributes: map[string]schema.Attribute{
 					"client_id": schema.StringAttribute{
 						MarkdownDescription: "Client ID. Client ID for your Azure service principal",
-						Optional: true,
+						Optional:            true,
 					},
 					"subscription_id": schema.StringAttribute{
 						MarkdownDescription: "Subscription ID. Subscription ID for your Azure service principal",
-						Optional: true,
+						Optional:            true,
 					},
 					"tenant_id": schema.StringAttribute{
 						MarkdownDescription: "Tenant ID. Tenant ID for your Azure service principal",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"client_secret": schema.SingleNestedBlock{
 						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"blindfold_secret_info": schema.SingleNestedBlock{
 								MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 								Attributes: map[string]schema.Attribute{
 									"decryption_provider": schema.StringAttribute{
 										MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-										Optional: true,
+										Optional:            true,
 									},
 									"location": schema.StringAttribute{
 										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-										Optional: true,
+										Optional:            true,
 									},
 									"store_provider": schema.StringAttribute{
 										MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -368,59 +364,57 @@ func (r *CloudCredentialsResource) Schema(ctx context.Context, req resource.Sche
 								Attributes: map[string]schema.Attribute{
 									"provider_ref": schema.StringAttribute{
 										MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-										Optional: true,
+										Optional:            true,
 									},
 									"url": schema.StringAttribute{
 										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
 						},
 					},
 				},
-
 			},
 			"azure_pfx_certificate": schema.SingleNestedBlock{
 				MarkdownDescription: "Client Certificate. Azure Credentials Client Certificate type",
 				Attributes: map[string]schema.Attribute{
 					"certificate_url": schema.StringAttribute{
 						MarkdownDescription: "URL for Client Certificate. URL for Client Certificate in '.pfx' or '.p12' whose certificate is linked to service principal object Certificate URL can contain client certificate in string:///<Base64 of certificate> format. Here <Base64 of certificate> is base64 of '.pfx' or '.p12' binary file",
-						Optional: true,
+						Optional:            true,
 					},
 					"client_id": schema.StringAttribute{
 						MarkdownDescription: "Client ID. Client ID for your Azure service principal",
-						Optional: true,
+						Optional:            true,
 					},
 					"subscription_id": schema.StringAttribute{
 						MarkdownDescription: "Subscription ID. Subscription ID for your Azure service principal",
-						Optional: true,
+						Optional:            true,
 					},
 					"tenant_id": schema.StringAttribute{
 						MarkdownDescription: "Tenant ID. Tenant ID for your Azure service principal",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"password": schema.SingleNestedBlock{
 						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"blindfold_secret_info": schema.SingleNestedBlock{
 								MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 								Attributes: map[string]schema.Attribute{
 									"decryption_provider": schema.StringAttribute{
 										MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-										Optional: true,
+										Optional:            true,
 									},
 									"location": schema.StringAttribute{
 										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-										Optional: true,
+										Optional:            true,
 									},
 									"store_provider": schema.StringAttribute{
 										MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -429,43 +423,40 @@ func (r *CloudCredentialsResource) Schema(ctx context.Context, req resource.Sche
 								Attributes: map[string]schema.Attribute{
 									"provider_ref": schema.StringAttribute{
 										MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-										Optional: true,
+										Optional:            true,
 									},
 									"url": schema.StringAttribute{
 										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
 						},
 					},
 				},
-
 			},
 			"gcp_cred_file": schema.SingleNestedBlock{
 				MarkdownDescription: "GCP Credentials. GCP Credentials type",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"credential_file": schema.SingleNestedBlock{
 						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"blindfold_secret_info": schema.SingleNestedBlock{
 								MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 								Attributes: map[string]schema.Attribute{
 									"decryption_provider": schema.StringAttribute{
 										MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-										Optional: true,
+										Optional:            true,
 									},
 									"location": schema.StringAttribute{
 										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-										Optional: true,
+										Optional:            true,
 									},
 									"store_provider": schema.StringAttribute{
 										MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -474,18 +465,17 @@ func (r *CloudCredentialsResource) Schema(ctx context.Context, req resource.Sche
 								Attributes: map[string]schema.Attribute{
 									"provider_ref": schema.StringAttribute{
 										MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-										Optional: true,
+										Optional:            true,
 									},
 									"url": schema.StringAttribute{
 										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
 						},
 					},
 				},
-
 			},
 		},
 	}
@@ -717,7 +707,6 @@ func (r *CloudCredentialsResource) Create(ctx context.Context, req resource.Crea
 		createReq.Spec["gcp_cred_file"] = gcp_cred_fileMap
 	}
 
-
 	apiResource, err := r.client.CreateCloudCredentials(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create CloudCredentials: %s", err))
@@ -729,7 +718,7 @@ func (r *CloudCredentialsResource) Create(ctx context.Context, req resource.Crea
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if blockData, ok := apiResource.Spec["aws_assume_role"].(map[string]interface{}); ok && (isImport || data.AWSAssumeRole != nil) {
 		data.AWSAssumeRole = &CloudCredentialsAWSAssumeRoleModel{
 			CustomExternalID: func() types.String {
@@ -809,8 +798,7 @@ func (r *CloudCredentialsResource) Create(ctx context.Context, req resource.Crea
 				}
 				// Import case: read from API
 				if _, ok := blockData["secret_key"].(map[string]interface{}); ok {
-					return &CloudCredentialsAWSSecretKeySecretKeyModel{
-					}
+					return &CloudCredentialsAWSSecretKeySecretKeyModel{}
 				}
 				return nil
 			}(),
@@ -831,8 +819,7 @@ func (r *CloudCredentialsResource) Create(ctx context.Context, req resource.Crea
 				}
 				// Import case: read from API
 				if _, ok := blockData["client_secret"].(map[string]interface{}); ok {
-					return &CloudCredentialsAzureClientSecretClientSecretModel{
-					}
+					return &CloudCredentialsAzureClientSecretClientSecretModel{}
 				}
 				return nil
 			}(),
@@ -871,8 +858,7 @@ func (r *CloudCredentialsResource) Create(ctx context.Context, req resource.Crea
 				}
 				// Import case: read from API
 				if _, ok := blockData["password"].(map[string]interface{}); ok {
-					return &CloudCredentialsAzurePfxCertificatePasswordModel{
-					}
+					return &CloudCredentialsAzurePfxCertificatePasswordModel{}
 				}
 				return nil
 			}(),
@@ -895,7 +881,6 @@ func (r *CloudCredentialsResource) Create(ctx context.Context, req resource.Crea
 		data.GCPCredFile = &CloudCredentialsGCPCredFileModel{}
 	}
 	// Normal Read: preserve existing state value
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -985,9 +970,9 @@ func (r *CloudCredentialsResource) Read(ctx context.Context, req resource.ReadRe
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if blockData, ok := apiResource.Spec["aws_assume_role"].(map[string]interface{}); ok && (isImport || data.AWSAssumeRole != nil) {
 		data.AWSAssumeRole = &CloudCredentialsAWSAssumeRoleModel{
@@ -1068,8 +1053,7 @@ func (r *CloudCredentialsResource) Read(ctx context.Context, req resource.ReadRe
 				}
 				// Import case: read from API
 				if _, ok := blockData["secret_key"].(map[string]interface{}); ok {
-					return &CloudCredentialsAWSSecretKeySecretKeyModel{
-					}
+					return &CloudCredentialsAWSSecretKeySecretKeyModel{}
 				}
 				return nil
 			}(),
@@ -1090,8 +1074,7 @@ func (r *CloudCredentialsResource) Read(ctx context.Context, req resource.ReadRe
 				}
 				// Import case: read from API
 				if _, ok := blockData["client_secret"].(map[string]interface{}); ok {
-					return &CloudCredentialsAzureClientSecretClientSecretModel{
-					}
+					return &CloudCredentialsAzureClientSecretClientSecretModel{}
 				}
 				return nil
 			}(),
@@ -1130,8 +1113,7 @@ func (r *CloudCredentialsResource) Read(ctx context.Context, req resource.ReadRe
 				}
 				// Import case: read from API
 				if _, ok := blockData["password"].(map[string]interface{}); ok {
-					return &CloudCredentialsAzurePfxCertificatePasswordModel{
-					}
+					return &CloudCredentialsAzurePfxCertificatePasswordModel{}
 				}
 				return nil
 			}(),
@@ -1154,7 +1136,6 @@ func (r *CloudCredentialsResource) Read(ctx context.Context, req resource.ReadRe
 		data.GCPCredFile = &CloudCredentialsGCPCredFileModel{}
 	}
 	// Normal Read: preserve existing state value
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -1296,7 +1277,6 @@ func (r *CloudCredentialsResource) Update(ctx context.Context, req resource.Upda
 		}
 		apiResource.Spec["gcp_cred_file"] = gcp_cred_fileMap
 	}
-
 
 	updated, err := r.client.UpdateCloudCredentials(ctx, apiResource)
 	if err != nil {

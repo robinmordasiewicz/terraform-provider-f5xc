@@ -46,15 +46,15 @@ type BGPAsnSetResource struct {
 }
 
 type BGPAsnSetResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	AsNumbers types.List `tfsdk:"as_numbers"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Name        types.String   `tfsdk:"name"`
+	Namespace   types.String   `tfsdk:"namespace"`
+	Annotations types.Map      `tfsdk:"annotations"`
+	AsNumbers   types.List     `tfsdk:"as_numbers"`
+	Description types.String   `tfsdk:"description"`
+	Disable     types.Bool     `tfsdk:"disable"`
+	Labels      types.Map      `tfsdk:"labels"`
+	ID          types.String   `tfsdk:"id"`
+	Timeouts    timeouts.Value `tfsdk:"timeouts"`
 }
 
 func (r *BGPAsnSetResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -68,7 +68,7 @@ func (r *BGPAsnSetResource) Schema(ctx context.Context, req resource.SchemaReque
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the BGPAsnSet. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -78,7 +78,7 @@ func (r *BGPAsnSetResource) Schema(ctx context.Context, req resource.SchemaReque
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the BGPAsnSet will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -88,30 +88,30 @@ func (r *BGPAsnSetResource) Schema(ctx context.Context, req resource.SchemaReque
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"as_numbers": schema.ListAttribute{
 				MarkdownDescription: "AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create whitelists or blacklists for use in network policy or service policy.",
-				Optional: true,
-				ElementType: types.Int64Type,
+				Optional:            true,
+				ElementType:         types.Int64Type,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -280,7 +280,6 @@ func (r *BGPAsnSetResource) Create(ctx context.Context, req resource.CreateReque
 		}
 	}
 
-
 	apiResource, err := r.client.CreateBGPAsnSet(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create BGPAsnSet: %s", err))
@@ -292,7 +291,7 @@ func (r *BGPAsnSetResource) Create(ctx context.Context, req resource.CreateReque
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if v, ok := apiResource.Spec["as_numbers"].([]interface{}); ok && len(v) > 0 {
 		var as_numbersList []int64
 		for _, item := range v {
@@ -308,7 +307,6 @@ func (r *BGPAsnSetResource) Create(ctx context.Context, req resource.CreateReque
 	} else {
 		data.AsNumbers = types.ListNull(types.Int64Type)
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -398,9 +396,9 @@ func (r *BGPAsnSetResource) Read(ctx context.Context, req resource.ReadRequest, 
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if v, ok := apiResource.Spec["as_numbers"].([]interface{}); ok && len(v) > 0 {
 		var as_numbersList []int64
@@ -417,7 +415,6 @@ func (r *BGPAsnSetResource) Read(ctx context.Context, req resource.ReadRequest, 
 	} else {
 		data.AsNumbers = types.ListNull(types.Int64Type)
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -485,7 +482,6 @@ func (r *BGPAsnSetResource) Update(ctx context.Context, req resource.UpdateReque
 			apiResource.Spec["as_numbers"] = as_numbersList
 		}
 	}
-
 
 	updated, err := r.client.UpdateBGPAsnSet(ctx, apiResource)
 	if err != nil {

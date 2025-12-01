@@ -51,58 +51,58 @@ type BotDefenseAppInfrastructureEmptyModel struct {
 
 // BotDefenseAppInfrastructureCloudHostedModel represents cloud_hosted block
 type BotDefenseAppInfrastructureCloudHostedModel struct {
-	InfraHostName types.String `tfsdk:"infra_host_name"`
-	Region types.String `tfsdk:"region"`
-	Egress []BotDefenseAppInfrastructureCloudHostedEgressModel `tfsdk:"egress"`
-	Ingress []BotDefenseAppInfrastructureCloudHostedIngressModel `tfsdk:"ingress"`
+	InfraHostName types.String                                         `tfsdk:"infra_host_name"`
+	Region        types.String                                         `tfsdk:"region"`
+	Egress        []BotDefenseAppInfrastructureCloudHostedEgressModel  `tfsdk:"egress"`
+	Ingress       []BotDefenseAppInfrastructureCloudHostedIngressModel `tfsdk:"ingress"`
 }
 
 // BotDefenseAppInfrastructureCloudHostedEgressModel represents egress block
 type BotDefenseAppInfrastructureCloudHostedEgressModel struct {
 	IPAddress types.String `tfsdk:"ip_address"`
-	Location types.String `tfsdk:"location"`
+	Location  types.String `tfsdk:"location"`
 }
 
 // BotDefenseAppInfrastructureCloudHostedIngressModel represents ingress block
 type BotDefenseAppInfrastructureCloudHostedIngressModel struct {
-	HostName types.String `tfsdk:"host_name"`
+	HostName  types.String `tfsdk:"host_name"`
 	IPAddress types.String `tfsdk:"ip_address"`
-	Location types.String `tfsdk:"location"`
+	Location  types.String `tfsdk:"location"`
 }
 
 // BotDefenseAppInfrastructureDataCenterHostedModel represents data_center_hosted block
 type BotDefenseAppInfrastructureDataCenterHostedModel struct {
-	InfraHostName types.String `tfsdk:"infra_host_name"`
-	Region types.String `tfsdk:"region"`
-	Egress []BotDefenseAppInfrastructureDataCenterHostedEgressModel `tfsdk:"egress"`
-	Ingress []BotDefenseAppInfrastructureDataCenterHostedIngressModel `tfsdk:"ingress"`
+	InfraHostName types.String                                              `tfsdk:"infra_host_name"`
+	Region        types.String                                              `tfsdk:"region"`
+	Egress        []BotDefenseAppInfrastructureDataCenterHostedEgressModel  `tfsdk:"egress"`
+	Ingress       []BotDefenseAppInfrastructureDataCenterHostedIngressModel `tfsdk:"ingress"`
 }
 
 // BotDefenseAppInfrastructureDataCenterHostedEgressModel represents egress block
 type BotDefenseAppInfrastructureDataCenterHostedEgressModel struct {
 	IPAddress types.String `tfsdk:"ip_address"`
-	Location types.String `tfsdk:"location"`
+	Location  types.String `tfsdk:"location"`
 }
 
 // BotDefenseAppInfrastructureDataCenterHostedIngressModel represents ingress block
 type BotDefenseAppInfrastructureDataCenterHostedIngressModel struct {
-	HostName types.String `tfsdk:"host_name"`
+	HostName  types.String `tfsdk:"host_name"`
 	IPAddress types.String `tfsdk:"ip_address"`
-	Location types.String `tfsdk:"location"`
+	Location  types.String `tfsdk:"location"`
 }
 
 type BotDefenseAppInfrastructureResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	EnvironmentType types.String `tfsdk:"environment_type"`
-	TrafficType types.String `tfsdk:"traffic_type"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	CloudHosted *BotDefenseAppInfrastructureCloudHostedModel `tfsdk:"cloud_hosted"`
+	Name             types.String                                      `tfsdk:"name"`
+	Namespace        types.String                                      `tfsdk:"namespace"`
+	Annotations      types.Map                                         `tfsdk:"annotations"`
+	Description      types.String                                      `tfsdk:"description"`
+	Disable          types.Bool                                        `tfsdk:"disable"`
+	Labels           types.Map                                         `tfsdk:"labels"`
+	ID               types.String                                      `tfsdk:"id"`
+	EnvironmentType  types.String                                      `tfsdk:"environment_type"`
+	TrafficType      types.String                                      `tfsdk:"traffic_type"`
+	Timeouts         timeouts.Value                                    `tfsdk:"timeouts"`
+	CloudHosted      *BotDefenseAppInfrastructureCloudHostedModel      `tfsdk:"cloud_hosted"`
 	DataCenterHosted *BotDefenseAppInfrastructureDataCenterHostedModel `tfsdk:"data_center_hosted"`
 }
 
@@ -117,7 +117,7 @@ func (r *BotDefenseAppInfrastructureResource) Schema(ctx context.Context, req re
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the BotDefenseAppInfrastructure. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -127,7 +127,7 @@ func (r *BotDefenseAppInfrastructureResource) Schema(ctx context.Context, req re
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the BotDefenseAppInfrastructure will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -137,41 +137,41 @@ func (r *BotDefenseAppInfrastructureResource) Schema(ctx context.Context, req re
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"environment_type": schema.StringAttribute{
 				MarkdownDescription: "Environment Type. Environment Type Production environment Testing environment. Possible values are `PRODUCTION`, `TESTING`. Defaults to `PRODUCTION`.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"traffic_type": schema.StringAttribute{
 				MarkdownDescription: "Traffic Type. Traffic Type Web traffic Mobile traffic. Possible values are `WEB`, `MOBILE`. Defaults to `WEB`.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -189,11 +189,11 @@ func (r *BotDefenseAppInfrastructureResource) Schema(ctx context.Context, req re
 				Attributes: map[string]schema.Attribute{
 					"infra_host_name": schema.StringAttribute{
 						MarkdownDescription: "Infra Host Name. Infra Host Name",
-						Optional: true,
+						Optional:            true,
 					},
 					"region": schema.StringAttribute{
 						MarkdownDescription: "Bot Defense Advanced Region. Defines a selection for Bot Defense Advanced region - US: US US region - EU: EU European Union region - ASIA: ASIA Asia region. Possible values are `US`, `EU`, `ASIA`. Defaults to `US`.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -203,11 +203,11 @@ func (r *BotDefenseAppInfrastructureResource) Schema(ctx context.Context, req re
 							Attributes: map[string]schema.Attribute{
 								"ip_address": schema.StringAttribute{
 									MarkdownDescription: "IP Address. Egress IP address",
-									Optional: true,
+									Optional:            true,
 								},
 								"location": schema.StringAttribute{
 									MarkdownDescription: "Location. Region location AWS_AP_NORTHEAST_1 AWS_AP_NORTHEAST_3 AWS_AP_SOUTH_1 AWS_AP_SOUTH_2 AWS_AP_SOUTHEAST_1 AWS_AP_SOUTHEAST_2 AWS_AP_SOUTHEAST_3 AWS_EU_CENTRAL_1 AWS_EU_NORTH_1 AWS_EU_WEST_1 AWS_ME_SOUTH_1 AWS_SA_EAST_1 AWS_US_EAST_1 AWS_US_EAST_2 AWS_US_WEST_1 AWS_US_WEST_2 GCP_ASIA_EAST_1 GCP_ASIA_EAST_2 GCP_ASIA_NORTHEAST_1 GCP_ASIA_NORTHEAST_2 GCP_ASIA_NORTHEAST_3 GCP_ASIA_SOUTH_1 GCP_ASIA_SOUTHEAST_1 GCP_ASIA_SOUTHEAST_2 GCP_AUSTRALIA_SOUTHEAST_1 GCP_EUROPE_WEST_1 GCP_EUROPE_WEST_2 GCP_EUROPE_WEST_3 GCP_NORTHAMERICA_NORTHEAST_1 GCP_NORTHAMERICA_NORTHEAST_2 GCP_SOUTHAMERICA_EAST_1 GCP_SOUTHAMERICA_WEST_1 GCP_US_CENTRAL_1 GCP_US_EAST_1 GCP_US_EAST_4 GCP_US_WEST_1 GCP_US_WEST_2. Possible values are `AWS_AP_NORTHEAST_1`, `AWS_AP_NORTHEAST_3`, `AWS_AP_SOUTH_1`, `AWS_AP_SOUTH_2`, `AWS_AP_SOUTHEAST_1`, `AWS_AP_SOUTHEAST_2`, `AWS_AP_SOUTHEAST_3`, `AWS_EU_CENTRAL_1`, `AWS_EU_NORTH_1`, `AWS_EU_WEST_1`, `AWS_ME_SOUTH_1`, `AWS_SA_EAST_1`, `AWS_US_EAST_1`, `AWS_US_EAST_2`, `AWS_US_WEST_1`, `AWS_US_WEST_2`, `GCP_ASIA_EAST_1`, `GCP_ASIA_EAST_2`, `GCP_ASIA_NORTHEAST_1`, `GCP_ASIA_NORTHEAST_2`, `GCP_ASIA_NORTHEAST_3`, `GCP_ASIA_SOUTH_1`, `GCP_ASIA_SOUTHEAST_1`, `GCP_ASIA_SOUTHEAST_2`, `GCP_AUSTRALIA_SOUTHEAST_1`, `GCP_EUROPE_WEST_1`, `GCP_EUROPE_WEST_2`, `GCP_EUROPE_WEST_3`, `GCP_NORTHAMERICA_NORTHEAST_1`, `GCP_NORTHAMERICA_NORTHEAST_2`, `GCP_SOUTHAMERICA_EAST_1`, `GCP_SOUTHAMERICA_WEST_1`, `GCP_US_CENTRAL_1`, `GCP_US_EAST_1`, `GCP_US_EAST_4`, `GCP_US_WEST_1`, `GCP_US_WEST_2`. Defaults to `AWS_AP_NORTHEAST_1`.",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 						},
@@ -218,32 +218,31 @@ func (r *BotDefenseAppInfrastructureResource) Schema(ctx context.Context, req re
 							Attributes: map[string]schema.Attribute{
 								"host_name": schema.StringAttribute{
 									MarkdownDescription: "Ingress value. Ingress Host Name",
-									Optional: true,
+									Optional:            true,
 								},
 								"ip_address": schema.StringAttribute{
 									MarkdownDescription: "Ingress value. Ingress IP Address",
-									Optional: true,
+									Optional:            true,
 								},
 								"location": schema.StringAttribute{
 									MarkdownDescription: "Location. Region location AWS_AP_NORTHEAST_1 AWS_AP_NORTHEAST_3 AWS_AP_SOUTH_1 AWS_AP_SOUTH_2 AWS_AP_SOUTHEAST_1 AWS_AP_SOUTHEAST_2 AWS_AP_SOUTHEAST_3 AWS_EU_CENTRAL_1 AWS_EU_NORTH_1 AWS_EU_WEST_1 AWS_ME_SOUTH_1 AWS_SA_EAST_1 AWS_US_EAST_1 AWS_US_EAST_2 AWS_US_WEST_1 AWS_US_WEST_2 GCP_ASIA_EAST_1 GCP_ASIA_EAST_2 GCP_ASIA_NORTHEAST_1 GCP_ASIA_NORTHEAST_2 GCP_ASIA_NORTHEAST_3 GCP_ASIA_SOUTH_1 GCP_ASIA_SOUTHEAST_1 GCP_ASIA_SOUTHEAST_2 GCP_AUSTRALIA_SOUTHEAST_1 GCP_EUROPE_WEST_1 GCP_EUROPE_WEST_2 GCP_EUROPE_WEST_3 GCP_NORTHAMERICA_NORTHEAST_1 GCP_NORTHAMERICA_NORTHEAST_2 GCP_SOUTHAMERICA_EAST_1 GCP_SOUTHAMERICA_WEST_1 GCP_US_CENTRAL_1 GCP_US_EAST_1 GCP_US_EAST_4 GCP_US_WEST_1 GCP_US_WEST_2. Possible values are `AWS_AP_NORTHEAST_1`, `AWS_AP_NORTHEAST_3`, `AWS_AP_SOUTH_1`, `AWS_AP_SOUTH_2`, `AWS_AP_SOUTHEAST_1`, `AWS_AP_SOUTHEAST_2`, `AWS_AP_SOUTHEAST_3`, `AWS_EU_CENTRAL_1`, `AWS_EU_NORTH_1`, `AWS_EU_WEST_1`, `AWS_ME_SOUTH_1`, `AWS_SA_EAST_1`, `AWS_US_EAST_1`, `AWS_US_EAST_2`, `AWS_US_WEST_1`, `AWS_US_WEST_2`, `GCP_ASIA_EAST_1`, `GCP_ASIA_EAST_2`, `GCP_ASIA_NORTHEAST_1`, `GCP_ASIA_NORTHEAST_2`, `GCP_ASIA_NORTHEAST_3`, `GCP_ASIA_SOUTH_1`, `GCP_ASIA_SOUTHEAST_1`, `GCP_ASIA_SOUTHEAST_2`, `GCP_AUSTRALIA_SOUTHEAST_1`, `GCP_EUROPE_WEST_1`, `GCP_EUROPE_WEST_2`, `GCP_EUROPE_WEST_3`, `GCP_NORTHAMERICA_NORTHEAST_1`, `GCP_NORTHAMERICA_NORTHEAST_2`, `GCP_SOUTHAMERICA_EAST_1`, `GCP_SOUTHAMERICA_WEST_1`, `GCP_US_CENTRAL_1`, `GCP_US_EAST_1`, `GCP_US_EAST_4`, `GCP_US_WEST_1`, `GCP_US_WEST_2`. Defaults to `AWS_AP_NORTHEAST_1`.",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 						},
 					},
 				},
-
 			},
 			"data_center_hosted": schema.SingleNestedBlock{
 				MarkdownDescription: "F5 Hosted. Infra F5 Hosted",
 				Attributes: map[string]schema.Attribute{
 					"infra_host_name": schema.StringAttribute{
 						MarkdownDescription: "Infra Host Name. Infra Host Name",
-						Optional: true,
+						Optional:            true,
 					},
 					"region": schema.StringAttribute{
 						MarkdownDescription: "Bot Defense Advanced Region. Defines a selection for Bot Defense Advanced region - US: US US region - EU: EU European Union region - ASIA: ASIA Asia region. Possible values are `US`, `EU`, `ASIA`. Defaults to `US`.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -253,11 +252,11 @@ func (r *BotDefenseAppInfrastructureResource) Schema(ctx context.Context, req re
 							Attributes: map[string]schema.Attribute{
 								"ip_address": schema.StringAttribute{
 									MarkdownDescription: "IP Address. Egress IP address",
-									Optional: true,
+									Optional:            true,
 								},
 								"location": schema.StringAttribute{
 									MarkdownDescription: "Location. Region location AWS_AP_NORTHEAST_1 AWS_AP_NORTHEAST_3 AWS_AP_SOUTH_1 AWS_AP_SOUTH_2 AWS_AP_SOUTHEAST_1 AWS_AP_SOUTHEAST_2 AWS_AP_SOUTHEAST_3 AWS_EU_CENTRAL_1 AWS_EU_NORTH_1 AWS_EU_WEST_1 AWS_ME_SOUTH_1 AWS_SA_EAST_1 AWS_US_EAST_1 AWS_US_EAST_2 AWS_US_WEST_1 AWS_US_WEST_2 GCP_ASIA_EAST_1 GCP_ASIA_EAST_2 GCP_ASIA_NORTHEAST_1 GCP_ASIA_NORTHEAST_2 GCP_ASIA_NORTHEAST_3 GCP_ASIA_SOUTH_1 GCP_ASIA_SOUTHEAST_1 GCP_ASIA_SOUTHEAST_2 GCP_AUSTRALIA_SOUTHEAST_1 GCP_EUROPE_WEST_1 GCP_EUROPE_WEST_2 GCP_EUROPE_WEST_3 GCP_NORTHAMERICA_NORTHEAST_1 GCP_NORTHAMERICA_NORTHEAST_2 GCP_SOUTHAMERICA_EAST_1 GCP_SOUTHAMERICA_WEST_1 GCP_US_CENTRAL_1 GCP_US_EAST_1 GCP_US_EAST_4 GCP_US_WEST_1 GCP_US_WEST_2. Possible values are `AWS_AP_NORTHEAST_1`, `AWS_AP_NORTHEAST_3`, `AWS_AP_SOUTH_1`, `AWS_AP_SOUTH_2`, `AWS_AP_SOUTHEAST_1`, `AWS_AP_SOUTHEAST_2`, `AWS_AP_SOUTHEAST_3`, `AWS_EU_CENTRAL_1`, `AWS_EU_NORTH_1`, `AWS_EU_WEST_1`, `AWS_ME_SOUTH_1`, `AWS_SA_EAST_1`, `AWS_US_EAST_1`, `AWS_US_EAST_2`, `AWS_US_WEST_1`, `AWS_US_WEST_2`, `GCP_ASIA_EAST_1`, `GCP_ASIA_EAST_2`, `GCP_ASIA_NORTHEAST_1`, `GCP_ASIA_NORTHEAST_2`, `GCP_ASIA_NORTHEAST_3`, `GCP_ASIA_SOUTH_1`, `GCP_ASIA_SOUTHEAST_1`, `GCP_ASIA_SOUTHEAST_2`, `GCP_AUSTRALIA_SOUTHEAST_1`, `GCP_EUROPE_WEST_1`, `GCP_EUROPE_WEST_2`, `GCP_EUROPE_WEST_3`, `GCP_NORTHAMERICA_NORTHEAST_1`, `GCP_NORTHAMERICA_NORTHEAST_2`, `GCP_SOUTHAMERICA_EAST_1`, `GCP_SOUTHAMERICA_WEST_1`, `GCP_US_CENTRAL_1`, `GCP_US_EAST_1`, `GCP_US_EAST_4`, `GCP_US_WEST_1`, `GCP_US_WEST_2`. Defaults to `AWS_AP_NORTHEAST_1`.",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 						},
@@ -268,21 +267,20 @@ func (r *BotDefenseAppInfrastructureResource) Schema(ctx context.Context, req re
 							Attributes: map[string]schema.Attribute{
 								"host_name": schema.StringAttribute{
 									MarkdownDescription: "Ingress value. Ingress Host Name",
-									Optional: true,
+									Optional:            true,
 								},
 								"ip_address": schema.StringAttribute{
 									MarkdownDescription: "Ingress value. Ingress IP Address",
-									Optional: true,
+									Optional:            true,
 								},
 								"location": schema.StringAttribute{
 									MarkdownDescription: "Location. Region location AWS_AP_NORTHEAST_1 AWS_AP_NORTHEAST_3 AWS_AP_SOUTH_1 AWS_AP_SOUTH_2 AWS_AP_SOUTHEAST_1 AWS_AP_SOUTHEAST_2 AWS_AP_SOUTHEAST_3 AWS_EU_CENTRAL_1 AWS_EU_NORTH_1 AWS_EU_WEST_1 AWS_ME_SOUTH_1 AWS_SA_EAST_1 AWS_US_EAST_1 AWS_US_EAST_2 AWS_US_WEST_1 AWS_US_WEST_2 GCP_ASIA_EAST_1 GCP_ASIA_EAST_2 GCP_ASIA_NORTHEAST_1 GCP_ASIA_NORTHEAST_2 GCP_ASIA_NORTHEAST_3 GCP_ASIA_SOUTH_1 GCP_ASIA_SOUTHEAST_1 GCP_ASIA_SOUTHEAST_2 GCP_AUSTRALIA_SOUTHEAST_1 GCP_EUROPE_WEST_1 GCP_EUROPE_WEST_2 GCP_EUROPE_WEST_3 GCP_NORTHAMERICA_NORTHEAST_1 GCP_NORTHAMERICA_NORTHEAST_2 GCP_SOUTHAMERICA_EAST_1 GCP_SOUTHAMERICA_WEST_1 GCP_US_CENTRAL_1 GCP_US_EAST_1 GCP_US_EAST_4 GCP_US_WEST_1 GCP_US_WEST_2. Possible values are `AWS_AP_NORTHEAST_1`, `AWS_AP_NORTHEAST_3`, `AWS_AP_SOUTH_1`, `AWS_AP_SOUTH_2`, `AWS_AP_SOUTHEAST_1`, `AWS_AP_SOUTHEAST_2`, `AWS_AP_SOUTHEAST_3`, `AWS_EU_CENTRAL_1`, `AWS_EU_NORTH_1`, `AWS_EU_WEST_1`, `AWS_ME_SOUTH_1`, `AWS_SA_EAST_1`, `AWS_US_EAST_1`, `AWS_US_EAST_2`, `AWS_US_WEST_1`, `AWS_US_WEST_2`, `GCP_ASIA_EAST_1`, `GCP_ASIA_EAST_2`, `GCP_ASIA_NORTHEAST_1`, `GCP_ASIA_NORTHEAST_2`, `GCP_ASIA_NORTHEAST_3`, `GCP_ASIA_SOUTH_1`, `GCP_ASIA_SOUTHEAST_1`, `GCP_ASIA_SOUTHEAST_2`, `GCP_AUSTRALIA_SOUTHEAST_1`, `GCP_EUROPE_WEST_1`, `GCP_EUROPE_WEST_2`, `GCP_EUROPE_WEST_3`, `GCP_NORTHAMERICA_NORTHEAST_1`, `GCP_NORTHAMERICA_NORTHEAST_2`, `GCP_SOUTHAMERICA_EAST_1`, `GCP_SOUTHAMERICA_WEST_1`, `GCP_US_CENTRAL_1`, `GCP_US_EAST_1`, `GCP_US_EAST_4`, `GCP_US_WEST_1`, `GCP_US_WEST_2`. Defaults to `AWS_AP_NORTHEAST_1`.",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 						},
 					},
 				},
-
 			},
 		},
 	}
@@ -521,7 +519,6 @@ func (r *BotDefenseAppInfrastructureResource) Create(ctx context.Context, req re
 		createReq.Spec["traffic_type"] = data.TrafficType.ValueString()
 	}
 
-
 	apiResource, err := r.client.CreateBotDefenseAppInfrastructure(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create BotDefenseAppInfrastructure: %s", err))
@@ -533,7 +530,7 @@ func (r *BotDefenseAppInfrastructureResource) Create(ctx context.Context, req re
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if blockData, ok := apiResource.Spec["cloud_hosted"].(map[string]interface{}); ok && (isImport || data.CloudHosted != nil) {
 		data.CloudHosted = &BotDefenseAppInfrastructureCloudHostedModel{
 			Egress: func() []BotDefenseAppInfrastructureCloudHostedEgressModel {
@@ -688,7 +685,6 @@ func (r *BotDefenseAppInfrastructureResource) Create(ctx context.Context, req re
 	} else {
 		data.TrafficType = types.StringNull()
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -778,9 +774,9 @@ func (r *BotDefenseAppInfrastructureResource) Read(ctx context.Context, req reso
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if blockData, ok := apiResource.Spec["cloud_hosted"].(map[string]interface{}); ok && (isImport || data.CloudHosted != nil) {
 		data.CloudHosted = &BotDefenseAppInfrastructureCloudHostedModel{
@@ -936,7 +932,6 @@ func (r *BotDefenseAppInfrastructureResource) Read(ctx context.Context, req reso
 	} else {
 		data.TrafficType = types.StringNull()
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -1085,7 +1080,6 @@ func (r *BotDefenseAppInfrastructureResource) Update(ctx context.Context, req re
 	if !data.TrafficType.IsNull() && !data.TrafficType.IsUnknown() {
 		apiResource.Spec["traffic_type"] = data.TrafficType.ValueString()
 	}
-
 
 	updated, err := r.client.UpdateBotDefenseAppInfrastructure(ctx, apiResource)
 	if err != nil {

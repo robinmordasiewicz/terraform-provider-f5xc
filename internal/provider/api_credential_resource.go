@@ -46,18 +46,18 @@ type APICredentialResource struct {
 }
 
 type APICredentialResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Password types.String `tfsdk:"password"`
-	Type types.String `tfsdk:"type"`
-	VirtualK8SName types.String `tfsdk:"virtual_k8s_name"`
-	VirtualK8SNamespace types.String `tfsdk:"virtual_k8s_namespace"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Name                types.String   `tfsdk:"name"`
+	Namespace           types.String   `tfsdk:"namespace"`
+	Annotations         types.Map      `tfsdk:"annotations"`
+	Description         types.String   `tfsdk:"description"`
+	Disable             types.Bool     `tfsdk:"disable"`
+	Labels              types.Map      `tfsdk:"labels"`
+	ID                  types.String   `tfsdk:"id"`
+	Password            types.String   `tfsdk:"password"`
+	Type                types.String   `tfsdk:"type"`
+	VirtualK8SName      types.String   `tfsdk:"virtual_k8s_name"`
+	VirtualK8SNamespace types.String   `tfsdk:"virtual_k8s_namespace"`
+	Timeouts            timeouts.Value `tfsdk:"timeouts"`
 }
 
 func (r *APICredentialResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -71,7 +71,7 @@ func (r *APICredentialResource) Schema(ctx context.Context, req resource.SchemaR
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the APICredential. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -80,11 +80,10 @@ func (r *APICredentialResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace for the APICredential. For this resource type, namespace should be empty or omitted.",
-				Optional: true,
-				Computed: true,
+				MarkdownDescription: "Namespace where the APICredential will be created.",
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.UseStateForUnknown(),
+					stringplanmodifier.RequiresReplace(),
 				},
 				Validators: []validator.String{
 					validators.NamespaceValidator(),
@@ -92,57 +91,57 @@ func (r *APICredentialResource) Schema(ctx context.Context, req resource.SchemaR
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"password": schema.StringAttribute{
 				MarkdownDescription: "Password. Password is used for generating an API certificate P12 bundle user can use to protect access to it. this password will not be saved/persisted anywhere in the system. Applicable for credential type API_CERTIFICATE Users have to use this password when they use the certificate, e.g. in curl or while adding to key chain.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"type": schema.StringAttribute{
 				MarkdownDescription: "Credential Type. Types of API credential given when requesting credentials from volterra F5XC user certificate to access F5XC public API using mTLS using self credential (my credential) Kubernetes config file to access Virtual Kubernetes API in Volterra using self credential (my credential) API token to access F5XC public API using self credential (my credential) API token for service credentials using service user credential (service credential) API certificate for service credentials using service user credential (service credential) Service Credential kubeconfig using service user credential (service credential) Kubeconfig for accessing Site via Global Controller using self credential (my credential) Token for the SCIM public APIs used to sync users and groups with the F5XC platform. External identity provider's SCIM client can use this token as Bearer token with Authorization header Service Credential Kubeconfig for accessing Site via Global Controller using service user credential (service credential). Possible values are `API_CERTIFICATE`, `KUBE_CONFIG`, `API_TOKEN`, `SERVICE_API_TOKEN`, `SERVICE_API_CERTIFICATE`, `SERVICE_KUBE_CONFIG`, `SITE_GLOBAL_KUBE_CONFIG`, `SCIM_API_TOKEN`, `SERVICE_SITE_GLOBAL_KUBE_CONFIG`. Defaults to `API_CERTIFICATE`.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"virtual_k8s_name": schema.StringAttribute{
 				MarkdownDescription: "vK8s Cluster. Name of virtual K8s cluster. Applicable for KUBE_CONFIG.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"virtual_k8s_namespace": schema.StringAttribute{
 				MarkdownDescription: "vK8s Namespace. Namespace of virtual K8s cluster. Applicable for KUBE_CONFIG.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -316,7 +315,6 @@ func (r *APICredentialResource) Create(ctx context.Context, req resource.CreateR
 		createReq.Spec["virtual_k8s_namespace"] = data.VirtualK8SNamespace.ValueString()
 	}
 
-
 	apiResource, err := r.client.CreateAPICredential(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create APICredential: %s", err))
@@ -324,13 +322,11 @@ func (r *APICredentialResource) Create(ctx context.Context, req resource.CreateR
 	}
 
 	data.ID = types.StringValue(apiResource.Metadata.Name)
-	// For resources without namespace in API path, namespace is computed from API response
-	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
 
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if v, ok := apiResource.Spec["password"].(string); ok && v != "" {
 		data.Password = types.StringValue(v)
 	} else {
@@ -351,7 +347,6 @@ func (r *APICredentialResource) Create(ctx context.Context, req resource.CreateR
 	} else {
 		data.VirtualK8SNamespace = types.StringNull()
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -441,9 +436,9 @@ func (r *APICredentialResource) Read(ctx context.Context, req resource.ReadReque
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if v, ok := apiResource.Spec["password"].(string); ok && v != "" {
 		data.Password = types.StringValue(v)
@@ -465,7 +460,6 @@ func (r *APICredentialResource) Read(ctx context.Context, req resource.ReadReque
 	} else {
 		data.VirtualK8SNamespace = types.StringNull()
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -538,7 +532,6 @@ func (r *APICredentialResource) Update(ctx context.Context, req resource.UpdateR
 	if !data.VirtualK8SNamespace.IsNull() && !data.VirtualK8SNamespace.IsUnknown() {
 		apiResource.Spec["virtual_k8s_namespace"] = data.VirtualK8SNamespace.ValueString()
 	}
-
 
 	updated, err := r.client.UpdateAPICredential(ctx, apiResource)
 	if err != nil {
@@ -636,17 +629,19 @@ func (r *APICredentialResource) Delete(ctx context.Context, req resource.DeleteR
 }
 
 func (r *APICredentialResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	// Import ID format: name (no namespace for this resource type)
-	name := req.ID
-	if name == "" {
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
 		resp.Diagnostics.AddError(
 			"Invalid Import ID",
-			"Expected import ID to be the resource name, got empty string",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
 		)
 		return
 	}
+	namespace := parts[0]
+	name := parts[1]
 
-	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), "")...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
 	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
 	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

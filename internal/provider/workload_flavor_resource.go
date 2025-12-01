@@ -47,17 +47,17 @@ type WorkloadFlavorResource struct {
 }
 
 type WorkloadFlavorResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	EphemeralStorage types.String `tfsdk:"ephemeral_storage"`
-	Memory types.String `tfsdk:"memory"`
-	Vcpus types.Int64 `tfsdk:"vcpus"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Name             types.String   `tfsdk:"name"`
+	Namespace        types.String   `tfsdk:"namespace"`
+	Annotations      types.Map      `tfsdk:"annotations"`
+	Description      types.String   `tfsdk:"description"`
+	Disable          types.Bool     `tfsdk:"disable"`
+	Labels           types.Map      `tfsdk:"labels"`
+	ID               types.String   `tfsdk:"id"`
+	EphemeralStorage types.String   `tfsdk:"ephemeral_storage"`
+	Memory           types.String   `tfsdk:"memory"`
+	Vcpus            types.Int64    `tfsdk:"vcpus"`
+	Timeouts         timeouts.Value `tfsdk:"timeouts"`
 }
 
 func (r *WorkloadFlavorResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -71,7 +71,7 @@ func (r *WorkloadFlavorResource) Schema(ctx context.Context, req resource.Schema
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the WorkloadFlavor. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -81,7 +81,7 @@ func (r *WorkloadFlavorResource) Schema(ctx context.Context, req resource.Schema
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the WorkloadFlavor will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -91,49 +91,49 @@ func (r *WorkloadFlavorResource) Schema(ctx context.Context, req resource.Schema
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"ephemeral_storage": schema.StringAttribute{
 				MarkdownDescription: "Ephemeral Storage (MiB). Ephemeral storage in MiB (mebibyte) allocated for the workload_flavor.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"memory": schema.StringAttribute{
 				MarkdownDescription: "Memory (MiB). Memory in MiB (mebibyte) allocated for the workload_flavor.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"vcpus": schema.Int64Attribute{
 				MarkdownDescription: "vCPUs. Number of vCPUs allocated for the workload_flavor. Each vCPU is a thread on a CPU core.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{
 					int64planmodifier.UseStateForUnknown(),
 				},
@@ -304,7 +304,6 @@ func (r *WorkloadFlavorResource) Create(ctx context.Context, req resource.Create
 		createReq.Spec["vcpus"] = data.Vcpus.ValueInt64()
 	}
 
-
 	apiResource, err := r.client.CreateWorkloadFlavor(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create WorkloadFlavor: %s", err))
@@ -316,7 +315,7 @@ func (r *WorkloadFlavorResource) Create(ctx context.Context, req resource.Create
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if v, ok := apiResource.Spec["ephemeral_storage"].(string); ok && v != "" {
 		data.EphemeralStorage = types.StringValue(v)
 	} else {
@@ -332,7 +331,6 @@ func (r *WorkloadFlavorResource) Create(ctx context.Context, req resource.Create
 	} else {
 		data.Vcpus = types.Int64Null()
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -422,9 +420,9 @@ func (r *WorkloadFlavorResource) Read(ctx context.Context, req resource.ReadRequ
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if v, ok := apiResource.Spec["ephemeral_storage"].(string); ok && v != "" {
 		data.EphemeralStorage = types.StringValue(v)
@@ -441,7 +439,6 @@ func (r *WorkloadFlavorResource) Read(ctx context.Context, req resource.ReadRequ
 	} else {
 		data.Vcpus = types.Int64Null()
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -511,7 +508,6 @@ func (r *WorkloadFlavorResource) Update(ctx context.Context, req resource.Update
 	if !data.Vcpus.IsNull() && !data.Vcpus.IsUnknown() {
 		apiResource.Spec["vcpus"] = data.Vcpus.ValueInt64()
 	}
-
 
 	updated, err := r.client.UpdateWorkloadFlavor(ctx, apiResource)
 	if err != nil {

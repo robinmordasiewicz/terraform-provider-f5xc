@@ -61,11 +61,11 @@ type NetworkPolicyRuleIPPrefixSetModel struct {
 
 // NetworkPolicyRuleIPPrefixSetRefModel represents ref block
 type NetworkPolicyRuleIPPrefixSetRefModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // NetworkPolicyRuleLabelMatcherModel represents label_matcher block
@@ -84,21 +84,21 @@ type NetworkPolicyRulePrefixSelectorModel struct {
 }
 
 type NetworkPolicyRuleResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	Ports types.List `tfsdk:"ports"`
-	ID types.String `tfsdk:"id"`
-	Action types.String `tfsdk:"action"`
-	Protocol types.String `tfsdk:"protocol"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Name           types.String                          `tfsdk:"name"`
+	Namespace      types.String                          `tfsdk:"namespace"`
+	Annotations    types.Map                             `tfsdk:"annotations"`
+	Description    types.String                          `tfsdk:"description"`
+	Disable        types.Bool                            `tfsdk:"disable"`
+	Labels         types.Map                             `tfsdk:"labels"`
+	Ports          types.List                            `tfsdk:"ports"`
+	ID             types.String                          `tfsdk:"id"`
+	Action         types.String                          `tfsdk:"action"`
+	Protocol       types.String                          `tfsdk:"protocol"`
+	Timeouts       timeouts.Value                        `tfsdk:"timeouts"`
 	AdvancedAction *NetworkPolicyRuleAdvancedActionModel `tfsdk:"advanced_action"`
-	IPPrefixSet *NetworkPolicyRuleIPPrefixSetModel `tfsdk:"ip_prefix_set"`
-	LabelMatcher *NetworkPolicyRuleLabelMatcherModel `tfsdk:"label_matcher"`
-	Prefix *NetworkPolicyRulePrefixModel `tfsdk:"prefix"`
+	IPPrefixSet    *NetworkPolicyRuleIPPrefixSetModel    `tfsdk:"ip_prefix_set"`
+	LabelMatcher   *NetworkPolicyRuleLabelMatcherModel   `tfsdk:"label_matcher"`
+	Prefix         *NetworkPolicyRulePrefixModel         `tfsdk:"prefix"`
 	PrefixSelector *NetworkPolicyRulePrefixSelectorModel `tfsdk:"prefix_selector"`
 }
 
@@ -113,7 +113,7 @@ func (r *NetworkPolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the NetworkPolicyRule. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -123,7 +123,7 @@ func (r *NetworkPolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the NetworkPolicyRule will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -133,46 +133,46 @@ func (r *NetworkPolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"ports": schema.ListAttribute{
 				MarkdownDescription: "List of Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"action": schema.StringAttribute{
 				MarkdownDescription: "Network Policy Rule Action. Network policy rule action configures the action to be taken on rule match Apply deny action on rule match Apply allow action on rule match. Possible values are `DENY`, `ALLOW`. Defaults to `DENY`.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"protocol": schema.StringAttribute{
 				MarkdownDescription: "Protocol. Protocol in IP packet to be used as match criteria Values are tcp, udp, and icmp",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -190,15 +190,13 @@ func (r *NetworkPolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 				Attributes: map[string]schema.Attribute{
 					"action": schema.StringAttribute{
 						MarkdownDescription: "Log Action. Choice to choose logging or no logging This works together with option selected via NetworkPolicyRuleAction or any other action specified x-example: (No Selection in NetworkPolicyRuleAction + AdvancedAction as LOG) = LOG Only, (ALLOW/DENY in NetworkPolicyRuleAction + AdvancedAction as LOG) = Log and Allow/Deny, (ALLOW/DENY in NetworkPolicyRuleAction + NOLOG in AdvancedAction) = Allow/Deny with no log Don't sample the traffic hitting the rule Sample the traffic hitting the rule. Possible values are `NOLOG`, `LOG`. Defaults to `NOLOG`.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
-
 			},
 			"ip_prefix_set": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: ip_prefix_set, prefix, prefix_selector] IP Prefix Set Reference. A list of references to ip_prefix_set objects.",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"ref": schema.ListNestedBlock{
 						MarkdownDescription: "Reference. A list of references to ip_prefix_set objects.",
@@ -206,65 +204,61 @@ func (r *NetworkPolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 							Attributes: map[string]schema.Attribute{
 								"kind": schema.StringAttribute{
 									MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-									Optional: true,
-									Computed: true,
+									Optional:            true,
+									Computed:            true,
 								},
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-									Optional: true,
+									Optional:            true,
 								},
 								"namespace": schema.StringAttribute{
 									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-									Optional: true,
+									Optional:            true,
 								},
 								"tenant": schema.StringAttribute{
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-									Optional: true,
-									Computed: true,
+									Optional:            true,
+									Computed:            true,
 								},
 								"uid": schema.StringAttribute{
 									MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-									Optional: true,
-									Computed: true,
+									Optional:            true,
+									Computed:            true,
 								},
 							},
 						},
 					},
 				},
-
 			},
 			"label_matcher": schema.SingleNestedBlock{
 				MarkdownDescription: "Label Matcher. A label matcher specifies a list of label keys whose values need to match for source/client and destination/server. Note that the actual label values are not specified and do not matter. This allows an ability to scope grouping by the label key name.",
 				Attributes: map[string]schema.Attribute{
 					"keys": schema.ListAttribute{
 						MarkdownDescription: "Keys. The list of label key names that have to match",
-						Optional: true,
-						ElementType: types.StringType,
+						Optional:            true,
+						ElementType:         types.StringType,
 					},
 				},
-
 			},
 			"prefix": schema.SingleNestedBlock{
 				MarkdownDescription: "IP Prefix List. List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes",
 				Attributes: map[string]schema.Attribute{
 					"prefix": schema.ListAttribute{
 						MarkdownDescription: "Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length",
-						Optional: true,
-						ElementType: types.StringType,
+						Optional:            true,
+						ElementType:         types.StringType,
 					},
 				},
-
 			},
 			"prefix_selector": schema.SingleNestedBlock{
 				MarkdownDescription: "Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE",
 				Attributes: map[string]schema.Attribute{
 					"expressions": schema.ListAttribute{
 						MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections.",
-						Optional: true,
-						ElementType: types.StringType,
+						Optional:            true,
+						ElementType:         types.StringType,
 					},
 				},
-
 			},
 		},
 	}
@@ -495,7 +489,6 @@ func (r *NetworkPolicyRuleResource) Create(ctx context.Context, req resource.Cre
 		createReq.Spec["protocol"] = data.Protocol.ValueString()
 	}
 
-
 	apiResource, err := r.client.CreateNetworkPolicyRule(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create NetworkPolicyRule: %s", err))
@@ -507,7 +500,7 @@ func (r *NetworkPolicyRuleResource) Create(ctx context.Context, req resource.Cre
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if blockData, ok := apiResource.Spec["advanced_action"].(map[string]interface{}); ok && (isImport || data.AdvancedAction != nil) {
 		data.AdvancedAction = &NetworkPolicyRuleAdvancedActionModel{
 			Action: func() types.String {
@@ -641,7 +634,6 @@ func (r *NetworkPolicyRuleResource) Create(ctx context.Context, req resource.Cre
 	} else {
 		data.Protocol = types.StringNull()
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -731,9 +723,9 @@ func (r *NetworkPolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if blockData, ok := apiResource.Spec["advanced_action"].(map[string]interface{}); ok && (isImport || data.AdvancedAction != nil) {
 		data.AdvancedAction = &NetworkPolicyRuleAdvancedActionModel{
@@ -868,7 +860,6 @@ func (r *NetworkPolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 	} else {
 		data.Protocol = types.StringNull()
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -1009,7 +1000,6 @@ func (r *NetworkPolicyRuleResource) Update(ctx context.Context, req resource.Upd
 	if !data.Protocol.IsNull() && !data.Protocol.IsUnknown() {
 		apiResource.Spec["protocol"] = data.Protocol.ValueString()
 	}
-
 
 	updated, err := r.client.UpdateNetworkPolicyRule(ctx, apiResource)
 	if err != nil {

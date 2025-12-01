@@ -51,72 +51,72 @@ type LogReceiverEmptyModel struct {
 
 // LogReceiverSyslogModel represents syslog block
 type LogReceiverSyslogModel struct {
-	SyslogRfc5424 types.Int64 `tfsdk:"syslog_rfc5424"`
-	TCPServer *LogReceiverSyslogTCPServerModel `tfsdk:"tcp_server"`
-	TLSServer *LogReceiverSyslogTLSServerModel `tfsdk:"tls_server"`
-	UDPServer *LogReceiverSyslogUDPServerModel `tfsdk:"udp_server"`
+	SyslogRfc5424 types.Int64                      `tfsdk:"syslog_rfc5424"`
+	TCPServer     *LogReceiverSyslogTCPServerModel `tfsdk:"tcp_server"`
+	TLSServer     *LogReceiverSyslogTLSServerModel `tfsdk:"tls_server"`
+	UDPServer     *LogReceiverSyslogUDPServerModel `tfsdk:"udp_server"`
 }
 
 // LogReceiverSyslogTCPServerModel represents tcp_server block
 type LogReceiverSyslogTCPServerModel struct {
-	Port types.Int64 `tfsdk:"port"`
+	Port       types.Int64  `tfsdk:"port"`
 	ServerName types.String `tfsdk:"server_name"`
 }
 
 // LogReceiverSyslogTLSServerModel represents tls_server block
 type LogReceiverSyslogTLSServerModel struct {
-	Port types.Int64 `tfsdk:"port"`
-	ServerName types.String `tfsdk:"server_name"`
-	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
-	DefaultHTTPSPort *LogReceiverEmptyModel `tfsdk:"default_https_port"`
-	DefaultSyslogTLSPort *LogReceiverEmptyModel `tfsdk:"default_syslog_tls_port"`
-	MtlsDisabled *LogReceiverEmptyModel `tfsdk:"mtls_disabled"`
-	MtlsEnable *LogReceiverSyslogTLSServerMtlsEnableModel `tfsdk:"mtls_enable"`
-	VolterraCa *LogReceiverEmptyModel `tfsdk:"volterra_ca"`
+	Port                 types.Int64                                `tfsdk:"port"`
+	ServerName           types.String                               `tfsdk:"server_name"`
+	TrustedCaURL         types.String                               `tfsdk:"trusted_ca_url"`
+	DefaultHTTPSPort     *LogReceiverEmptyModel                     `tfsdk:"default_https_port"`
+	DefaultSyslogTLSPort *LogReceiverEmptyModel                     `tfsdk:"default_syslog_tls_port"`
+	MtlsDisabled         *LogReceiverEmptyModel                     `tfsdk:"mtls_disabled"`
+	MtlsEnable           *LogReceiverSyslogTLSServerMtlsEnableModel `tfsdk:"mtls_enable"`
+	VolterraCa           *LogReceiverEmptyModel                     `tfsdk:"volterra_ca"`
 }
 
 // LogReceiverSyslogTLSServerMtlsEnableModel represents mtls_enable block
 type LogReceiverSyslogTLSServerMtlsEnableModel struct {
-	Certificate types.String `tfsdk:"certificate"`
-	KeyURL *LogReceiverSyslogTLSServerMtlsEnableKeyURLModel `tfsdk:"key_url"`
+	Certificate types.String                                     `tfsdk:"certificate"`
+	KeyURL      *LogReceiverSyslogTLSServerMtlsEnableKeyURLModel `tfsdk:"key_url"`
 }
 
 // LogReceiverSyslogTLSServerMtlsEnableKeyURLModel represents key_url block
 type LogReceiverSyslogTLSServerMtlsEnableKeyURLModel struct {
 	BlindfoldSecretInfo *LogReceiverSyslogTLSServerMtlsEnableKeyURLBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *LogReceiverSyslogTLSServerMtlsEnableKeyURLClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *LogReceiverSyslogTLSServerMtlsEnableKeyURLClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // LogReceiverSyslogTLSServerMtlsEnableKeyURLBlindfoldSecretInfoModel represents blindfold_secret_info block
 type LogReceiverSyslogTLSServerMtlsEnableKeyURLBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // LogReceiverSyslogTLSServerMtlsEnableKeyURLClearSecretInfoModel represents clear_secret_info block
 type LogReceiverSyslogTLSServerMtlsEnableKeyURLClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // LogReceiverSyslogUDPServerModel represents udp_server block
 type LogReceiverSyslogUDPServerModel struct {
-	Port types.Int64 `tfsdk:"port"`
+	Port       types.Int64  `tfsdk:"port"`
 	ServerName types.String `tfsdk:"server_name"`
 }
 
 type LogReceiverResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	SiteLocal *LogReceiverEmptyModel `tfsdk:"site_local"`
-	Syslog *LogReceiverSyslogModel `tfsdk:"syslog"`
+	Name        types.String            `tfsdk:"name"`
+	Namespace   types.String            `tfsdk:"namespace"`
+	Annotations types.Map               `tfsdk:"annotations"`
+	Description types.String            `tfsdk:"description"`
+	Disable     types.Bool              `tfsdk:"disable"`
+	Labels      types.Map               `tfsdk:"labels"`
+	ID          types.String            `tfsdk:"id"`
+	Timeouts    timeouts.Value          `tfsdk:"timeouts"`
+	SiteLocal   *LogReceiverEmptyModel  `tfsdk:"site_local"`
+	Syslog      *LogReceiverSyslogModel `tfsdk:"syslog"`
 }
 
 func (r *LogReceiverResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -130,7 +130,7 @@ func (r *LogReceiverResource) Schema(ctx context.Context, req resource.SchemaReq
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the LogReceiver. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -140,7 +140,7 @@ func (r *LogReceiverResource) Schema(ctx context.Context, req resource.SchemaReq
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the LogReceiver will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -150,25 +150,25 @@ func (r *LogReceiverResource) Schema(ctx context.Context, req resource.SchemaReq
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -189,7 +189,7 @@ func (r *LogReceiverResource) Schema(ctx context.Context, req resource.SchemaReq
 				Attributes: map[string]schema.Attribute{
 					"syslog_rfc5424": schema.Int64Attribute{
 						MarkdownDescription: "Syslog RFC5424 Format. Select RFC5424 syslog format and maximum message length.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -198,11 +198,11 @@ func (r *LogReceiverResource) Schema(ctx context.Context, req resource.SchemaReq
 						Attributes: map[string]schema.Attribute{
 							"port": schema.Int64Attribute{
 								MarkdownDescription: "Port Number. Port number used for communication",
-								Optional: true,
+								Optional:            true,
 							},
 							"server_name": schema.StringAttribute{
 								MarkdownDescription: "Server name. Server name is fully qualified domain name or IP address of the server",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 					},
@@ -211,15 +211,15 @@ func (r *LogReceiverResource) Schema(ctx context.Context, req resource.SchemaReq
 						Attributes: map[string]schema.Attribute{
 							"port": schema.Int64Attribute{
 								MarkdownDescription: "TCP Port Number. Custom port number used for communication",
-								Optional: true,
+								Optional:            true,
 							},
 							"server_name": schema.StringAttribute{
 								MarkdownDescription: "SNI name. ServerName is passed to the server for SNI and is used in the client to check server certificates against.",
-								Optional: true,
+								Optional:            true,
 							},
 							"trusted_ca_url": schema.StringAttribute{
 								MarkdownDescription: "Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers.",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -237,29 +237,28 @@ func (r *LogReceiverResource) Schema(ctx context.Context, req resource.SchemaReq
 								Attributes: map[string]schema.Attribute{
 									"certificate": schema.StringAttribute{
 										MarkdownDescription: "Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain.",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 								Blocks: map[string]schema.Block{
 									"key_url": schema.SingleNestedBlock{
 										MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-										Attributes: map[string]schema.Attribute{
-										},
+										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"blindfold_secret_info": schema.SingleNestedBlock{
 												MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 												Attributes: map[string]schema.Attribute{
 													"decryption_provider": schema.StringAttribute{
 														MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-														Optional: true,
+														Optional:            true,
 													},
 													"location": schema.StringAttribute{
 														MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-														Optional: true,
+														Optional:            true,
 													},
 													"store_provider": schema.StringAttribute{
 														MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 											},
@@ -268,11 +267,11 @@ func (r *LogReceiverResource) Schema(ctx context.Context, req resource.SchemaReq
 												Attributes: map[string]schema.Attribute{
 													"provider_ref": schema.StringAttribute{
 														MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-														Optional: true,
+														Optional:            true,
 													},
 													"url": schema.StringAttribute{
 														MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 											},
@@ -290,16 +289,15 @@ func (r *LogReceiverResource) Schema(ctx context.Context, req resource.SchemaReq
 						Attributes: map[string]schema.Attribute{
 							"port": schema.Int64Attribute{
 								MarkdownDescription: "Port Number. Port number used for communication",
-								Optional: true,
+								Optional:            true,
 							},
 							"server_name": schema.StringAttribute{
 								MarkdownDescription: "Server name. Server name is fully qualified domain name or IP address of the server",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 					},
 				},
-
 			},
 		},
 	}
@@ -494,7 +492,6 @@ func (r *LogReceiverResource) Create(ctx context.Context, req resource.CreateReq
 		createReq.Spec["syslog"] = syslogMap
 	}
 
-
 	apiResource, err := r.client.CreateLogReceiver(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create LogReceiver: %s", err))
@@ -506,7 +503,7 @@ func (r *LogReceiverResource) Create(ctx context.Context, req resource.CreateReq
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if _, ok := apiResource.Spec["site_local"].(map[string]interface{}); ok && isImport && data.SiteLocal == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.SiteLocal = &LogReceiverEmptyModel{}
@@ -600,7 +597,6 @@ func (r *LogReceiverResource) Create(ctx context.Context, req resource.CreateReq
 			}(),
 		}
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -690,9 +686,9 @@ func (r *LogReceiverResource) Read(ctx context.Context, req resource.ReadRequest
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if _, ok := apiResource.Spec["site_local"].(map[string]interface{}); ok && isImport && data.SiteLocal == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -787,7 +783,6 @@ func (r *LogReceiverResource) Read(ctx context.Context, req resource.ReadRequest
 			}(),
 		}
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -892,7 +887,6 @@ func (r *LogReceiverResource) Update(ctx context.Context, req resource.UpdateReq
 		}
 		apiResource.Spec["syslog"] = syslogMap
 	}
-
 
 	updated, err := r.client.UpdateLogReceiver(ctx, apiResource)
 	if err != nil {

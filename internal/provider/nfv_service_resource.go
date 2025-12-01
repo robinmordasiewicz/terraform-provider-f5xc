@@ -51,48 +51,48 @@ type NFVServiceEmptyModel struct {
 
 // NFVServiceEnabledSSHAccessModel represents enabled_ssh_access block
 type NFVServiceEnabledSSHAccessModel struct {
-	DomainSuffix types.String `tfsdk:"domain_suffix"`
-	AdvertiseOnSLI *NFVServiceEmptyModel `tfsdk:"advertise_on_sli"`
-	AdvertiseOnSLO *NFVServiceEmptyModel `tfsdk:"advertise_on_slo"`
-	AdvertiseOnSLOSLI *NFVServiceEmptyModel `tfsdk:"advertise_on_slo_sli"`
-	NodeSSHPorts []NFVServiceEnabledSSHAccessNodeSSHPortsModel `tfsdk:"node_ssh_ports"`
+	DomainSuffix      types.String                                  `tfsdk:"domain_suffix"`
+	AdvertiseOnSLI    *NFVServiceEmptyModel                         `tfsdk:"advertise_on_sli"`
+	AdvertiseOnSLO    *NFVServiceEmptyModel                         `tfsdk:"advertise_on_slo"`
+	AdvertiseOnSLOSLI *NFVServiceEmptyModel                         `tfsdk:"advertise_on_slo_sli"`
+	NodeSSHPorts      []NFVServiceEnabledSSHAccessNodeSSHPortsModel `tfsdk:"node_ssh_ports"`
 }
 
 // NFVServiceEnabledSSHAccessNodeSSHPortsModel represents node_ssh_ports block
 type NFVServiceEnabledSSHAccessNodeSSHPortsModel struct {
 	NodeName types.String `tfsdk:"node_name"`
-	SSHPort types.Int64 `tfsdk:"ssh_port"`
+	SSHPort  types.Int64  `tfsdk:"ssh_port"`
 }
 
 // NFVServiceF5BigIPAWSServiceModel represents f5_big_ip_aws_service block
 type NFVServiceF5BigIPAWSServiceModel struct {
-	AdminUsername types.String `tfsdk:"admin_username"`
-	SSHKey types.String `tfsdk:"ssh_key"`
-	AdminPassword *NFVServiceF5BigIPAWSServiceAdminPasswordModel `tfsdk:"admin_password"`
+	AdminUsername    types.String                                      `tfsdk:"admin_username"`
+	SSHKey           types.String                                      `tfsdk:"ssh_key"`
+	AdminPassword    *NFVServiceF5BigIPAWSServiceAdminPasswordModel    `tfsdk:"admin_password"`
 	AWSTGWSiteParams *NFVServiceF5BigIPAWSServiceAWSTGWSiteParamsModel `tfsdk:"aws_tgw_site_params"`
-	EndpointService *NFVServiceF5BigIPAWSServiceEndpointServiceModel `tfsdk:"endpoint_service"`
+	EndpointService  *NFVServiceF5BigIPAWSServiceEndpointServiceModel  `tfsdk:"endpoint_service"`
 	MarketPlaceImage *NFVServiceF5BigIPAWSServiceMarketPlaceImageModel `tfsdk:"market_place_image"`
-	Nodes []NFVServiceF5BigIPAWSServiceNodesModel `tfsdk:"nodes"`
-	Tags *NFVServiceEmptyModel `tfsdk:"tags"`
+	Nodes            []NFVServiceF5BigIPAWSServiceNodesModel           `tfsdk:"nodes"`
+	Tags             *NFVServiceEmptyModel                             `tfsdk:"tags"`
 }
 
 // NFVServiceF5BigIPAWSServiceAdminPasswordModel represents admin_password block
 type NFVServiceF5BigIPAWSServiceAdminPasswordModel struct {
 	BlindfoldSecretInfo *NFVServiceF5BigIPAWSServiceAdminPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *NFVServiceF5BigIPAWSServiceAdminPasswordClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *NFVServiceF5BigIPAWSServiceAdminPasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // NFVServiceF5BigIPAWSServiceAdminPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
 type NFVServiceF5BigIPAWSServiceAdminPasswordBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // NFVServiceF5BigIPAWSServiceAdminPasswordClearSecretInfoModel represents clear_secret_info block
 type NFVServiceF5BigIPAWSServiceAdminPasswordClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // NFVServiceF5BigIPAWSServiceAWSTGWSiteParamsModel represents aws_tgw_site_params block
@@ -102,25 +102,25 @@ type NFVServiceF5BigIPAWSServiceAWSTGWSiteParamsModel struct {
 
 // NFVServiceF5BigIPAWSServiceAWSTGWSiteParamsAWSTGWSiteModel represents aws_tgw_site block
 type NFVServiceF5BigIPAWSServiceAWSTGWSiteParamsAWSTGWSiteModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // NFVServiceF5BigIPAWSServiceEndpointServiceModel represents endpoint_service block
 type NFVServiceF5BigIPAWSServiceEndpointServiceModel struct {
-	ConfiguredVip types.String `tfsdk:"configured_vip"`
-	AdvertiseOnSLOIP *NFVServiceEmptyModel `tfsdk:"advertise_on_slo_ip"`
-	AdvertiseOnSLOIPExternal *NFVServiceEmptyModel `tfsdk:"advertise_on_slo_ip_external"`
-	AutomaticVip *NFVServiceEmptyModel `tfsdk:"automatic_vip"`
-	CustomTCPPorts *NFVServiceF5BigIPAWSServiceEndpointServiceCustomTCPPortsModel `tfsdk:"custom_tcp_ports"`
-	CustomUDPPorts *NFVServiceF5BigIPAWSServiceEndpointServiceCustomUDPPortsModel `tfsdk:"custom_udp_ports"`
-	DefaultTCPPorts *NFVServiceEmptyModel `tfsdk:"default_tcp_ports"`
-	DisableAdvertiseOnSLOIP *NFVServiceEmptyModel `tfsdk:"disable_advertise_on_slo_ip"`
-	HTTPPort *NFVServiceEmptyModel `tfsdk:"http_port"`
-	HTTPSPort *NFVServiceEmptyModel `tfsdk:"https_port"`
-	NoTCPPorts *NFVServiceEmptyModel `tfsdk:"no_tcp_ports"`
-	NoUDPPorts *NFVServiceEmptyModel `tfsdk:"no_udp_ports"`
+	ConfiguredVip            types.String                                                   `tfsdk:"configured_vip"`
+	AdvertiseOnSLOIP         *NFVServiceEmptyModel                                          `tfsdk:"advertise_on_slo_ip"`
+	AdvertiseOnSLOIPExternal *NFVServiceEmptyModel                                          `tfsdk:"advertise_on_slo_ip_external"`
+	AutomaticVip             *NFVServiceEmptyModel                                          `tfsdk:"automatic_vip"`
+	CustomTCPPorts           *NFVServiceF5BigIPAWSServiceEndpointServiceCustomTCPPortsModel `tfsdk:"custom_tcp_ports"`
+	CustomUDPPorts           *NFVServiceF5BigIPAWSServiceEndpointServiceCustomUDPPortsModel `tfsdk:"custom_udp_ports"`
+	DefaultTCPPorts          *NFVServiceEmptyModel                                          `tfsdk:"default_tcp_ports"`
+	DisableAdvertiseOnSLOIP  *NFVServiceEmptyModel                                          `tfsdk:"disable_advertise_on_slo_ip"`
+	HTTPPort                 *NFVServiceEmptyModel                                          `tfsdk:"http_port"`
+	HTTPSPort                *NFVServiceEmptyModel                                          `tfsdk:"https_port"`
+	NoTCPPorts               *NFVServiceEmptyModel                                          `tfsdk:"no_tcp_ports"`
+	NoUDPPorts               *NFVServiceEmptyModel                                          `tfsdk:"no_udp_ports"`
 }
 
 // NFVServiceF5BigIPAWSServiceEndpointServiceCustomTCPPortsModel represents custom_tcp_ports block
@@ -136,23 +136,23 @@ type NFVServiceF5BigIPAWSServiceEndpointServiceCustomUDPPortsModel struct {
 // NFVServiceF5BigIPAWSServiceMarketPlaceImageModel represents market_place_image block
 type NFVServiceF5BigIPAWSServiceMarketPlaceImageModel struct {
 	Awafpayg200mbps *NFVServiceEmptyModel `tfsdk:"awafpay_g200_mbps"`
-	Awafpayg3gbps *NFVServiceEmptyModel `tfsdk:"awafpay_g3_gbps"`
+	Awafpayg3gbps   *NFVServiceEmptyModel `tfsdk:"awafpay_g3_gbps"`
 }
 
 // NFVServiceF5BigIPAWSServiceNodesModel represents nodes block
 type NFVServiceF5BigIPAWSServiceNodesModel struct {
-	AWSAzName types.String `tfsdk:"aws_az_name"`
-	NodeName types.String `tfsdk:"node_name"`
-	TunnelPrefix types.String `tfsdk:"tunnel_prefix"`
-	AutomaticPrefix *NFVServiceEmptyModel `tfsdk:"automatic_prefix"`
-	MgmtSubnet *NFVServiceF5BigIPAWSServiceNodesMgmtSubnetModel `tfsdk:"mgmt_subnet"`
-	ReservedMgmtSubnet *NFVServiceEmptyModel `tfsdk:"reserved_mgmt_subnet"`
+	AWSAzName          types.String                                     `tfsdk:"aws_az_name"`
+	NodeName           types.String                                     `tfsdk:"node_name"`
+	TunnelPrefix       types.String                                     `tfsdk:"tunnel_prefix"`
+	AutomaticPrefix    *NFVServiceEmptyModel                            `tfsdk:"automatic_prefix"`
+	MgmtSubnet         *NFVServiceF5BigIPAWSServiceNodesMgmtSubnetModel `tfsdk:"mgmt_subnet"`
+	ReservedMgmtSubnet *NFVServiceEmptyModel                            `tfsdk:"reserved_mgmt_subnet"`
 }
 
 // NFVServiceF5BigIPAWSServiceNodesMgmtSubnetModel represents mgmt_subnet block
 type NFVServiceF5BigIPAWSServiceNodesMgmtSubnetModel struct {
-	ExistingSubnetID types.String `tfsdk:"existing_subnet_id"`
-	SubnetParam *NFVServiceF5BigIPAWSServiceNodesMgmtSubnetSubnetParamModel `tfsdk:"subnet_param"`
+	ExistingSubnetID types.String                                                `tfsdk:"existing_subnet_id"`
+	SubnetParam      *NFVServiceF5BigIPAWSServiceNodesMgmtSubnetSubnetParamModel `tfsdk:"subnet_param"`
 }
 
 // NFVServiceF5BigIPAWSServiceNodesMgmtSubnetSubnetParamModel represents subnet_param block
@@ -162,15 +162,15 @@ type NFVServiceF5BigIPAWSServiceNodesMgmtSubnetSubnetParamModel struct {
 
 // NFVServiceHTTPSManagementModel represents https_management block
 type NFVServiceHTTPSManagementModel struct {
-	DomainSuffix types.String `tfsdk:"domain_suffix"`
-	HTTPSPort types.Int64 `tfsdk:"https_port"`
-	AdvertiseOnInternet *NFVServiceHTTPSManagementAdvertiseOnInternetModel `tfsdk:"advertise_on_internet"`
-	AdvertiseOnInternetDefaultVip *NFVServiceEmptyModel `tfsdk:"advertise_on_internet_default_vip"`
-	AdvertiseOnSLIVip *NFVServiceHTTPSManagementAdvertiseOnSLIVipModel `tfsdk:"advertise_on_sli_vip"`
-	AdvertiseOnSLOInternetVip *NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipModel `tfsdk:"advertise_on_slo_internet_vip"`
-	AdvertiseOnSLOSLI *NFVServiceHTTPSManagementAdvertiseOnSLOSLIModel `tfsdk:"advertise_on_slo_sli"`
-	AdvertiseOnSLOVip *NFVServiceHTTPSManagementAdvertiseOnSLOVipModel `tfsdk:"advertise_on_slo_vip"`
-	DefaultHTTPSPort *NFVServiceEmptyModel `tfsdk:"default_https_port"`
+	DomainSuffix                  types.String                                             `tfsdk:"domain_suffix"`
+	HTTPSPort                     types.Int64                                              `tfsdk:"https_port"`
+	AdvertiseOnInternet           *NFVServiceHTTPSManagementAdvertiseOnInternetModel       `tfsdk:"advertise_on_internet"`
+	AdvertiseOnInternetDefaultVip *NFVServiceEmptyModel                                    `tfsdk:"advertise_on_internet_default_vip"`
+	AdvertiseOnSLIVip             *NFVServiceHTTPSManagementAdvertiseOnSLIVipModel         `tfsdk:"advertise_on_sli_vip"`
+	AdvertiseOnSLOInternetVip     *NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipModel `tfsdk:"advertise_on_slo_internet_vip"`
+	AdvertiseOnSLOSLI             *NFVServiceHTTPSManagementAdvertiseOnSLOSLIModel         `tfsdk:"advertise_on_slo_sli"`
+	AdvertiseOnSLOVip             *NFVServiceHTTPSManagementAdvertiseOnSLOVipModel         `tfsdk:"advertise_on_slo_vip"`
+	DefaultHTTPSPort              *NFVServiceEmptyModel                                    `tfsdk:"default_https_port"`
 }
 
 // NFVServiceHTTPSManagementAdvertiseOnInternetModel represents advertise_on_internet block
@@ -180,27 +180,27 @@ type NFVServiceHTTPSManagementAdvertiseOnInternetModel struct {
 
 // NFVServiceHTTPSManagementAdvertiseOnInternetPublicIPModel represents public_ip block
 type NFVServiceHTTPSManagementAdvertiseOnInternetPublicIPModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // NFVServiceHTTPSManagementAdvertiseOnSLIVipModel represents advertise_on_sli_vip block
 type NFVServiceHTTPSManagementAdvertiseOnSLIVipModel struct {
-	NoMtls *NFVServiceEmptyModel `tfsdk:"no_mtls"`
+	NoMtls          *NFVServiceEmptyModel                                            `tfsdk:"no_mtls"`
 	TLSCertificates []NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSCertificatesModel `tfsdk:"tls_certificates"`
-	TLSConfig *NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSConfigModel `tfsdk:"tls_config"`
-	UseMtls *NFVServiceHTTPSManagementAdvertiseOnSLIVipUseMtlsModel `tfsdk:"use_mtls"`
+	TLSConfig       *NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSConfigModel        `tfsdk:"tls_config"`
+	UseMtls         *NFVServiceHTTPSManagementAdvertiseOnSLIVipUseMtlsModel          `tfsdk:"use_mtls"`
 }
 
 // NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSCertificatesModel represents tls_certificates block
 type NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSCertificatesModel struct {
-	CertificateURL types.String `tfsdk:"certificate_url"`
-	DescriptionSpec types.String `tfsdk:"description_spec"`
+	CertificateURL       types.String                                                                        `tfsdk:"certificate_url"`
+	DescriptionSpec      types.String                                                                        `tfsdk:"description_spec"`
 	CustomHashAlgorithms *NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
-	DisableOcspStapling *NFVServiceEmptyModel `tfsdk:"disable_ocsp_stapling"`
-	PrivateKey *NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
-	UseSystemDefaults *NFVServiceEmptyModel `tfsdk:"use_system_defaults"`
+	DisableOcspStapling  *NFVServiceEmptyModel                                                               `tfsdk:"disable_ocsp_stapling"`
+	PrivateKey           *NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSCertificatesPrivateKeyModel           `tfsdk:"private_key"`
+	UseSystemDefaults    *NFVServiceEmptyModel                                                               `tfsdk:"use_system_defaults"`
 }
 
 // NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
@@ -211,60 +211,60 @@ type NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSCertificatesCustomHashAlgorith
 // NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSCertificatesPrivateKeyModel represents private_key block
 type NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSCertificatesPrivateKeyModel struct {
 	BlindfoldSecretInfo *NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSCertificatesPrivateKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSCertificatesPrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
 type NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSCertificatesPrivateKeyBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
 type NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSCertificatesPrivateKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSConfigModel represents tls_config block
 type NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSConfigModel struct {
-	CustomSecurity *NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
-	DefaultSecurity *NFVServiceEmptyModel `tfsdk:"default_security"`
-	LowSecurity *NFVServiceEmptyModel `tfsdk:"low_security"`
-	MediumSecurity *NFVServiceEmptyModel `tfsdk:"medium_security"`
+	CustomSecurity  *NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
+	DefaultSecurity *NFVServiceEmptyModel                                                   `tfsdk:"default_security"`
+	LowSecurity     *NFVServiceEmptyModel                                                   `tfsdk:"low_security"`
+	MediumSecurity  *NFVServiceEmptyModel                                                   `tfsdk:"medium_security"`
 }
 
 // NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSConfigCustomSecurityModel represents custom_security block
 type NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSConfigCustomSecurityModel struct {
-	CipherSuites types.List `tfsdk:"cipher_suites"`
-	MaxVersion types.String `tfsdk:"max_version"`
-	MinVersion types.String `tfsdk:"min_version"`
+	CipherSuites types.List   `tfsdk:"cipher_suites"`
+	MaxVersion   types.String `tfsdk:"max_version"`
+	MinVersion   types.String `tfsdk:"min_version"`
 }
 
 // NFVServiceHTTPSManagementAdvertiseOnSLIVipUseMtlsModel represents use_mtls block
 type NFVServiceHTTPSManagementAdvertiseOnSLIVipUseMtlsModel struct {
-	ClientCertificateOptional types.Bool `tfsdk:"client_certificate_optional"`
-	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
-	CRL *NFVServiceHTTPSManagementAdvertiseOnSLIVipUseMtlsCRLModel `tfsdk:"crl"`
-	NoCRL *NFVServiceEmptyModel `tfsdk:"no_crl"`
-	TrustedCa *NFVServiceHTTPSManagementAdvertiseOnSLIVipUseMtlsTrustedCaModel `tfsdk:"trusted_ca"`
-	XfccDisabled *NFVServiceEmptyModel `tfsdk:"xfcc_disabled"`
-	XfccOptions *NFVServiceHTTPSManagementAdvertiseOnSLIVipUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
+	ClientCertificateOptional types.Bool                                                         `tfsdk:"client_certificate_optional"`
+	TrustedCaURL              types.String                                                       `tfsdk:"trusted_ca_url"`
+	CRL                       *NFVServiceHTTPSManagementAdvertiseOnSLIVipUseMtlsCRLModel         `tfsdk:"crl"`
+	NoCRL                     *NFVServiceEmptyModel                                              `tfsdk:"no_crl"`
+	TrustedCa                 *NFVServiceHTTPSManagementAdvertiseOnSLIVipUseMtlsTrustedCaModel   `tfsdk:"trusted_ca"`
+	XfccDisabled              *NFVServiceEmptyModel                                              `tfsdk:"xfcc_disabled"`
+	XfccOptions               *NFVServiceHTTPSManagementAdvertiseOnSLIVipUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
 
 // NFVServiceHTTPSManagementAdvertiseOnSLIVipUseMtlsCRLModel represents crl block
 type NFVServiceHTTPSManagementAdvertiseOnSLIVipUseMtlsCRLModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // NFVServiceHTTPSManagementAdvertiseOnSLIVipUseMtlsTrustedCaModel represents trusted_ca block
 type NFVServiceHTTPSManagementAdvertiseOnSLIVipUseMtlsTrustedCaModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // NFVServiceHTTPSManagementAdvertiseOnSLIVipUseMtlsXfccOptionsModel represents xfcc_options block
@@ -274,20 +274,20 @@ type NFVServiceHTTPSManagementAdvertiseOnSLIVipUseMtlsXfccOptionsModel struct {
 
 // NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipModel represents advertise_on_slo_internet_vip block
 type NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipModel struct {
-	NoMtls *NFVServiceEmptyModel `tfsdk:"no_mtls"`
+	NoMtls          *NFVServiceEmptyModel                                                    `tfsdk:"no_mtls"`
 	TLSCertificates []NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesModel `tfsdk:"tls_certificates"`
-	TLSConfig *NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSConfigModel `tfsdk:"tls_config"`
-	UseMtls *NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsModel `tfsdk:"use_mtls"`
+	TLSConfig       *NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSConfigModel        `tfsdk:"tls_config"`
+	UseMtls         *NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsModel          `tfsdk:"use_mtls"`
 }
 
 // NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesModel represents tls_certificates block
 type NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesModel struct {
-	CertificateURL types.String `tfsdk:"certificate_url"`
-	DescriptionSpec types.String `tfsdk:"description_spec"`
+	CertificateURL       types.String                                                                                `tfsdk:"certificate_url"`
+	DescriptionSpec      types.String                                                                                `tfsdk:"description_spec"`
 	CustomHashAlgorithms *NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
-	DisableOcspStapling *NFVServiceEmptyModel `tfsdk:"disable_ocsp_stapling"`
-	PrivateKey *NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
-	UseSystemDefaults *NFVServiceEmptyModel `tfsdk:"use_system_defaults"`
+	DisableOcspStapling  *NFVServiceEmptyModel                                                                       `tfsdk:"disable_ocsp_stapling"`
+	PrivateKey           *NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesPrivateKeyModel           `tfsdk:"private_key"`
+	UseSystemDefaults    *NFVServiceEmptyModel                                                                       `tfsdk:"use_system_defaults"`
 }
 
 // NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
@@ -298,60 +298,60 @@ type NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesCustomHash
 // NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesPrivateKeyModel represents private_key block
 type NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesPrivateKeyModel struct {
 	BlindfoldSecretInfo *NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesPrivateKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesPrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
 type NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesPrivateKeyBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
 type NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesPrivateKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSConfigModel represents tls_config block
 type NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSConfigModel struct {
-	CustomSecurity *NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
-	DefaultSecurity *NFVServiceEmptyModel `tfsdk:"default_security"`
-	LowSecurity *NFVServiceEmptyModel `tfsdk:"low_security"`
-	MediumSecurity *NFVServiceEmptyModel `tfsdk:"medium_security"`
+	CustomSecurity  *NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
+	DefaultSecurity *NFVServiceEmptyModel                                                           `tfsdk:"default_security"`
+	LowSecurity     *NFVServiceEmptyModel                                                           `tfsdk:"low_security"`
+	MediumSecurity  *NFVServiceEmptyModel                                                           `tfsdk:"medium_security"`
 }
 
 // NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSConfigCustomSecurityModel represents custom_security block
 type NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSConfigCustomSecurityModel struct {
-	CipherSuites types.List `tfsdk:"cipher_suites"`
-	MaxVersion types.String `tfsdk:"max_version"`
-	MinVersion types.String `tfsdk:"min_version"`
+	CipherSuites types.List   `tfsdk:"cipher_suites"`
+	MaxVersion   types.String `tfsdk:"max_version"`
+	MinVersion   types.String `tfsdk:"min_version"`
 }
 
 // NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsModel represents use_mtls block
 type NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsModel struct {
-	ClientCertificateOptional types.Bool `tfsdk:"client_certificate_optional"`
-	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
-	CRL *NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsCRLModel `tfsdk:"crl"`
-	NoCRL *NFVServiceEmptyModel `tfsdk:"no_crl"`
-	TrustedCa *NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsTrustedCaModel `tfsdk:"trusted_ca"`
-	XfccDisabled *NFVServiceEmptyModel `tfsdk:"xfcc_disabled"`
-	XfccOptions *NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
+	ClientCertificateOptional types.Bool                                                                 `tfsdk:"client_certificate_optional"`
+	TrustedCaURL              types.String                                                               `tfsdk:"trusted_ca_url"`
+	CRL                       *NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsCRLModel         `tfsdk:"crl"`
+	NoCRL                     *NFVServiceEmptyModel                                                      `tfsdk:"no_crl"`
+	TrustedCa                 *NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsTrustedCaModel   `tfsdk:"trusted_ca"`
+	XfccDisabled              *NFVServiceEmptyModel                                                      `tfsdk:"xfcc_disabled"`
+	XfccOptions               *NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
 
 // NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsCRLModel represents crl block
 type NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsCRLModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsTrustedCaModel represents trusted_ca block
 type NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsTrustedCaModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsXfccOptionsModel represents xfcc_options block
@@ -361,20 +361,20 @@ type NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsXfccOptionsModel s
 
 // NFVServiceHTTPSManagementAdvertiseOnSLOSLIModel represents advertise_on_slo_sli block
 type NFVServiceHTTPSManagementAdvertiseOnSLOSLIModel struct {
-	NoMtls *NFVServiceEmptyModel `tfsdk:"no_mtls"`
+	NoMtls          *NFVServiceEmptyModel                                            `tfsdk:"no_mtls"`
 	TLSCertificates []NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSCertificatesModel `tfsdk:"tls_certificates"`
-	TLSConfig *NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSConfigModel `tfsdk:"tls_config"`
-	UseMtls *NFVServiceHTTPSManagementAdvertiseOnSLOSLIUseMtlsModel `tfsdk:"use_mtls"`
+	TLSConfig       *NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSConfigModel        `tfsdk:"tls_config"`
+	UseMtls         *NFVServiceHTTPSManagementAdvertiseOnSLOSLIUseMtlsModel          `tfsdk:"use_mtls"`
 }
 
 // NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSCertificatesModel represents tls_certificates block
 type NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSCertificatesModel struct {
-	CertificateURL types.String `tfsdk:"certificate_url"`
-	DescriptionSpec types.String `tfsdk:"description_spec"`
+	CertificateURL       types.String                                                                        `tfsdk:"certificate_url"`
+	DescriptionSpec      types.String                                                                        `tfsdk:"description_spec"`
 	CustomHashAlgorithms *NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
-	DisableOcspStapling *NFVServiceEmptyModel `tfsdk:"disable_ocsp_stapling"`
-	PrivateKey *NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
-	UseSystemDefaults *NFVServiceEmptyModel `tfsdk:"use_system_defaults"`
+	DisableOcspStapling  *NFVServiceEmptyModel                                                               `tfsdk:"disable_ocsp_stapling"`
+	PrivateKey           *NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSCertificatesPrivateKeyModel           `tfsdk:"private_key"`
+	UseSystemDefaults    *NFVServiceEmptyModel                                                               `tfsdk:"use_system_defaults"`
 }
 
 // NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
@@ -385,60 +385,60 @@ type NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSCertificatesCustomHashAlgorith
 // NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSCertificatesPrivateKeyModel represents private_key block
 type NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSCertificatesPrivateKeyModel struct {
 	BlindfoldSecretInfo *NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSCertificatesPrivateKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSCertificatesPrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
 type NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSCertificatesPrivateKeyBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
 type NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSCertificatesPrivateKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSConfigModel represents tls_config block
 type NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSConfigModel struct {
-	CustomSecurity *NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSConfigCustomSecurityModel `tfsdk:"custom_security"`
-	DefaultSecurity *NFVServiceEmptyModel `tfsdk:"default_security"`
-	LowSecurity *NFVServiceEmptyModel `tfsdk:"low_security"`
-	MediumSecurity *NFVServiceEmptyModel `tfsdk:"medium_security"`
+	CustomSecurity  *NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSConfigCustomSecurityModel `tfsdk:"custom_security"`
+	DefaultSecurity *NFVServiceEmptyModel                                                   `tfsdk:"default_security"`
+	LowSecurity     *NFVServiceEmptyModel                                                   `tfsdk:"low_security"`
+	MediumSecurity  *NFVServiceEmptyModel                                                   `tfsdk:"medium_security"`
 }
 
 // NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSConfigCustomSecurityModel represents custom_security block
 type NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSConfigCustomSecurityModel struct {
-	CipherSuites types.List `tfsdk:"cipher_suites"`
-	MaxVersion types.String `tfsdk:"max_version"`
-	MinVersion types.String `tfsdk:"min_version"`
+	CipherSuites types.List   `tfsdk:"cipher_suites"`
+	MaxVersion   types.String `tfsdk:"max_version"`
+	MinVersion   types.String `tfsdk:"min_version"`
 }
 
 // NFVServiceHTTPSManagementAdvertiseOnSLOSLIUseMtlsModel represents use_mtls block
 type NFVServiceHTTPSManagementAdvertiseOnSLOSLIUseMtlsModel struct {
-	ClientCertificateOptional types.Bool `tfsdk:"client_certificate_optional"`
-	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
-	CRL *NFVServiceHTTPSManagementAdvertiseOnSLOSLIUseMtlsCRLModel `tfsdk:"crl"`
-	NoCRL *NFVServiceEmptyModel `tfsdk:"no_crl"`
-	TrustedCa *NFVServiceHTTPSManagementAdvertiseOnSLOSLIUseMtlsTrustedCaModel `tfsdk:"trusted_ca"`
-	XfccDisabled *NFVServiceEmptyModel `tfsdk:"xfcc_disabled"`
-	XfccOptions *NFVServiceHTTPSManagementAdvertiseOnSLOSLIUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
+	ClientCertificateOptional types.Bool                                                         `tfsdk:"client_certificate_optional"`
+	TrustedCaURL              types.String                                                       `tfsdk:"trusted_ca_url"`
+	CRL                       *NFVServiceHTTPSManagementAdvertiseOnSLOSLIUseMtlsCRLModel         `tfsdk:"crl"`
+	NoCRL                     *NFVServiceEmptyModel                                              `tfsdk:"no_crl"`
+	TrustedCa                 *NFVServiceHTTPSManagementAdvertiseOnSLOSLIUseMtlsTrustedCaModel   `tfsdk:"trusted_ca"`
+	XfccDisabled              *NFVServiceEmptyModel                                              `tfsdk:"xfcc_disabled"`
+	XfccOptions               *NFVServiceHTTPSManagementAdvertiseOnSLOSLIUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
 
 // NFVServiceHTTPSManagementAdvertiseOnSLOSLIUseMtlsCRLModel represents crl block
 type NFVServiceHTTPSManagementAdvertiseOnSLOSLIUseMtlsCRLModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // NFVServiceHTTPSManagementAdvertiseOnSLOSLIUseMtlsTrustedCaModel represents trusted_ca block
 type NFVServiceHTTPSManagementAdvertiseOnSLOSLIUseMtlsTrustedCaModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // NFVServiceHTTPSManagementAdvertiseOnSLOSLIUseMtlsXfccOptionsModel represents xfcc_options block
@@ -448,20 +448,20 @@ type NFVServiceHTTPSManagementAdvertiseOnSLOSLIUseMtlsXfccOptionsModel struct {
 
 // NFVServiceHTTPSManagementAdvertiseOnSLOVipModel represents advertise_on_slo_vip block
 type NFVServiceHTTPSManagementAdvertiseOnSLOVipModel struct {
-	NoMtls *NFVServiceEmptyModel `tfsdk:"no_mtls"`
+	NoMtls          *NFVServiceEmptyModel                                            `tfsdk:"no_mtls"`
 	TLSCertificates []NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSCertificatesModel `tfsdk:"tls_certificates"`
-	TLSConfig *NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSConfigModel `tfsdk:"tls_config"`
-	UseMtls *NFVServiceHTTPSManagementAdvertiseOnSLOVipUseMtlsModel `tfsdk:"use_mtls"`
+	TLSConfig       *NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSConfigModel        `tfsdk:"tls_config"`
+	UseMtls         *NFVServiceHTTPSManagementAdvertiseOnSLOVipUseMtlsModel          `tfsdk:"use_mtls"`
 }
 
 // NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSCertificatesModel represents tls_certificates block
 type NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSCertificatesModel struct {
-	CertificateURL types.String `tfsdk:"certificate_url"`
-	DescriptionSpec types.String `tfsdk:"description_spec"`
+	CertificateURL       types.String                                                                        `tfsdk:"certificate_url"`
+	DescriptionSpec      types.String                                                                        `tfsdk:"description_spec"`
 	CustomHashAlgorithms *NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
-	DisableOcspStapling *NFVServiceEmptyModel `tfsdk:"disable_ocsp_stapling"`
-	PrivateKey *NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
-	UseSystemDefaults *NFVServiceEmptyModel `tfsdk:"use_system_defaults"`
+	DisableOcspStapling  *NFVServiceEmptyModel                                                               `tfsdk:"disable_ocsp_stapling"`
+	PrivateKey           *NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSCertificatesPrivateKeyModel           `tfsdk:"private_key"`
+	UseSystemDefaults    *NFVServiceEmptyModel                                                               `tfsdk:"use_system_defaults"`
 }
 
 // NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
@@ -472,60 +472,60 @@ type NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSCertificatesCustomHashAlgorith
 // NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSCertificatesPrivateKeyModel represents private_key block
 type NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSCertificatesPrivateKeyModel struct {
 	BlindfoldSecretInfo *NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSCertificatesPrivateKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSCertificatesPrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
 type NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSCertificatesPrivateKeyBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
 type NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSCertificatesPrivateKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSConfigModel represents tls_config block
 type NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSConfigModel struct {
-	CustomSecurity *NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
-	DefaultSecurity *NFVServiceEmptyModel `tfsdk:"default_security"`
-	LowSecurity *NFVServiceEmptyModel `tfsdk:"low_security"`
-	MediumSecurity *NFVServiceEmptyModel `tfsdk:"medium_security"`
+	CustomSecurity  *NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
+	DefaultSecurity *NFVServiceEmptyModel                                                   `tfsdk:"default_security"`
+	LowSecurity     *NFVServiceEmptyModel                                                   `tfsdk:"low_security"`
+	MediumSecurity  *NFVServiceEmptyModel                                                   `tfsdk:"medium_security"`
 }
 
 // NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSConfigCustomSecurityModel represents custom_security block
 type NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSConfigCustomSecurityModel struct {
-	CipherSuites types.List `tfsdk:"cipher_suites"`
-	MaxVersion types.String `tfsdk:"max_version"`
-	MinVersion types.String `tfsdk:"min_version"`
+	CipherSuites types.List   `tfsdk:"cipher_suites"`
+	MaxVersion   types.String `tfsdk:"max_version"`
+	MinVersion   types.String `tfsdk:"min_version"`
 }
 
 // NFVServiceHTTPSManagementAdvertiseOnSLOVipUseMtlsModel represents use_mtls block
 type NFVServiceHTTPSManagementAdvertiseOnSLOVipUseMtlsModel struct {
-	ClientCertificateOptional types.Bool `tfsdk:"client_certificate_optional"`
-	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
-	CRL *NFVServiceHTTPSManagementAdvertiseOnSLOVipUseMtlsCRLModel `tfsdk:"crl"`
-	NoCRL *NFVServiceEmptyModel `tfsdk:"no_crl"`
-	TrustedCa *NFVServiceHTTPSManagementAdvertiseOnSLOVipUseMtlsTrustedCaModel `tfsdk:"trusted_ca"`
-	XfccDisabled *NFVServiceEmptyModel `tfsdk:"xfcc_disabled"`
-	XfccOptions *NFVServiceHTTPSManagementAdvertiseOnSLOVipUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
+	ClientCertificateOptional types.Bool                                                         `tfsdk:"client_certificate_optional"`
+	TrustedCaURL              types.String                                                       `tfsdk:"trusted_ca_url"`
+	CRL                       *NFVServiceHTTPSManagementAdvertiseOnSLOVipUseMtlsCRLModel         `tfsdk:"crl"`
+	NoCRL                     *NFVServiceEmptyModel                                              `tfsdk:"no_crl"`
+	TrustedCa                 *NFVServiceHTTPSManagementAdvertiseOnSLOVipUseMtlsTrustedCaModel   `tfsdk:"trusted_ca"`
+	XfccDisabled              *NFVServiceEmptyModel                                              `tfsdk:"xfcc_disabled"`
+	XfccOptions               *NFVServiceHTTPSManagementAdvertiseOnSLOVipUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
 
 // NFVServiceHTTPSManagementAdvertiseOnSLOVipUseMtlsCRLModel represents crl block
 type NFVServiceHTTPSManagementAdvertiseOnSLOVipUseMtlsCRLModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // NFVServiceHTTPSManagementAdvertiseOnSLOVipUseMtlsTrustedCaModel represents trusted_ca block
 type NFVServiceHTTPSManagementAdvertiseOnSLOVipUseMtlsTrustedCaModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // NFVServiceHTTPSManagementAdvertiseOnSLOVipUseMtlsXfccOptionsModel represents xfcc_options block
@@ -535,22 +535,22 @@ type NFVServiceHTTPSManagementAdvertiseOnSLOVipUseMtlsXfccOptionsModel struct {
 
 // NFVServicePaloAltoFwServiceModel represents palo_alto_fw_service block
 type NFVServicePaloAltoFwServiceModel struct {
-	InstanceType types.String `tfsdk:"instance_type"`
-	SSHKey types.String `tfsdk:"ssh_key"`
-	Version types.String `tfsdk:"version"`
-	AutoSetup *NFVServicePaloAltoFwServiceAutoSetupModel `tfsdk:"auto_setup"`
-	AWSTGWSite *NFVServicePaloAltoFwServiceAWSTGWSiteModel `tfsdk:"aws_tgw_site"`
-	DisablePanaroma *NFVServiceEmptyModel `tfsdk:"disable_panaroma"`
-	PanAmiBundle1 *NFVServiceEmptyModel `tfsdk:"pan_ami_bundle1"`
-	PanAmiBundle2 *NFVServiceEmptyModel `tfsdk:"pan_ami_bundle2"`
-	PanoramaServer *NFVServicePaloAltoFwServicePanoramaServerModel `tfsdk:"panorama_server"`
-	ServiceNodes *NFVServicePaloAltoFwServiceServiceNodesModel `tfsdk:"service_nodes"`
-	Tags *NFVServiceEmptyModel `tfsdk:"tags"`
+	InstanceType    types.String                                    `tfsdk:"instance_type"`
+	SSHKey          types.String                                    `tfsdk:"ssh_key"`
+	Version         types.String                                    `tfsdk:"version"`
+	AutoSetup       *NFVServicePaloAltoFwServiceAutoSetupModel      `tfsdk:"auto_setup"`
+	AWSTGWSite      *NFVServicePaloAltoFwServiceAWSTGWSiteModel     `tfsdk:"aws_tgw_site"`
+	DisablePanaroma *NFVServiceEmptyModel                           `tfsdk:"disable_panaroma"`
+	PanAmiBundle1   *NFVServiceEmptyModel                           `tfsdk:"pan_ami_bundle1"`
+	PanAmiBundle2   *NFVServiceEmptyModel                           `tfsdk:"pan_ami_bundle2"`
+	PanoramaServer  *NFVServicePaloAltoFwServicePanoramaServerModel `tfsdk:"panorama_server"`
+	ServiceNodes    *NFVServicePaloAltoFwServiceServiceNodesModel   `tfsdk:"service_nodes"`
+	Tags            *NFVServiceEmptyModel                           `tfsdk:"tags"`
 }
 
 // NFVServicePaloAltoFwServiceAutoSetupModel represents auto_setup block
 type NFVServicePaloAltoFwServiceAutoSetupModel struct {
-	AdminUsername types.String `tfsdk:"admin_username"`
+	AdminUsername types.String                                            `tfsdk:"admin_username"`
 	AdminPassword *NFVServicePaloAltoFwServiceAutoSetupAdminPasswordModel `tfsdk:"admin_password"`
 	ManualSSHKeys *NFVServicePaloAltoFwServiceAutoSetupManualSSHKeysModel `tfsdk:"manual_ssh_keys"`
 }
@@ -558,79 +558,79 @@ type NFVServicePaloAltoFwServiceAutoSetupModel struct {
 // NFVServicePaloAltoFwServiceAutoSetupAdminPasswordModel represents admin_password block
 type NFVServicePaloAltoFwServiceAutoSetupAdminPasswordModel struct {
 	BlindfoldSecretInfo *NFVServicePaloAltoFwServiceAutoSetupAdminPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *NFVServicePaloAltoFwServiceAutoSetupAdminPasswordClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *NFVServicePaloAltoFwServiceAutoSetupAdminPasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // NFVServicePaloAltoFwServiceAutoSetupAdminPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
 type NFVServicePaloAltoFwServiceAutoSetupAdminPasswordBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // NFVServicePaloAltoFwServiceAutoSetupAdminPasswordClearSecretInfoModel represents clear_secret_info block
 type NFVServicePaloAltoFwServiceAutoSetupAdminPasswordClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // NFVServicePaloAltoFwServiceAutoSetupManualSSHKeysModel represents manual_ssh_keys block
 type NFVServicePaloAltoFwServiceAutoSetupManualSSHKeysModel struct {
-	PublicKey types.String `tfsdk:"public_key"`
+	PublicKey  types.String                                                      `tfsdk:"public_key"`
 	PrivateKey *NFVServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyModel `tfsdk:"private_key"`
 }
 
 // NFVServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyModel represents private_key block
 type NFVServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyModel struct {
 	BlindfoldSecretInfo *NFVServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *NFVServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *NFVServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // NFVServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
 type NFVServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // NFVServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyClearSecretInfoModel represents clear_secret_info block
 type NFVServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // NFVServicePaloAltoFwServiceAWSTGWSiteModel represents aws_tgw_site block
 type NFVServicePaloAltoFwServiceAWSTGWSiteModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // NFVServicePaloAltoFwServicePanoramaServerModel represents panorama_server block
 type NFVServicePaloAltoFwServicePanoramaServerModel struct {
-	DeviceGroupName types.String `tfsdk:"device_group_name"`
-	Server types.String `tfsdk:"server"`
-	TemplateStackName types.String `tfsdk:"template_stack_name"`
-	AuthorizationKey *NFVServicePaloAltoFwServicePanoramaServerAuthorizationKeyModel `tfsdk:"authorization_key"`
+	DeviceGroupName   types.String                                                    `tfsdk:"device_group_name"`
+	Server            types.String                                                    `tfsdk:"server"`
+	TemplateStackName types.String                                                    `tfsdk:"template_stack_name"`
+	AuthorizationKey  *NFVServicePaloAltoFwServicePanoramaServerAuthorizationKeyModel `tfsdk:"authorization_key"`
 }
 
 // NFVServicePaloAltoFwServicePanoramaServerAuthorizationKeyModel represents authorization_key block
 type NFVServicePaloAltoFwServicePanoramaServerAuthorizationKeyModel struct {
 	BlindfoldSecretInfo *NFVServicePaloAltoFwServicePanoramaServerAuthorizationKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *NFVServicePaloAltoFwServicePanoramaServerAuthorizationKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *NFVServicePaloAltoFwServicePanoramaServerAuthorizationKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // NFVServicePaloAltoFwServicePanoramaServerAuthorizationKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
 type NFVServicePaloAltoFwServicePanoramaServerAuthorizationKeyBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // NFVServicePaloAltoFwServicePanoramaServerAuthorizationKeyClearSecretInfoModel represents clear_secret_info block
 type NFVServicePaloAltoFwServicePanoramaServerAuthorizationKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // NFVServicePaloAltoFwServiceServiceNodesModel represents service_nodes block
@@ -640,16 +640,16 @@ type NFVServicePaloAltoFwServiceServiceNodesModel struct {
 
 // NFVServicePaloAltoFwServiceServiceNodesNodesModel represents nodes block
 type NFVServicePaloAltoFwServiceServiceNodesNodesModel struct {
-	AWSAzName types.String `tfsdk:"aws_az_name"`
-	NodeName types.String `tfsdk:"node_name"`
-	MgmtSubnet *NFVServicePaloAltoFwServiceServiceNodesNodesMgmtSubnetModel `tfsdk:"mgmt_subnet"`
-	ReservedMgmtSubnet *NFVServiceEmptyModel `tfsdk:"reserved_mgmt_subnet"`
+	AWSAzName          types.String                                                 `tfsdk:"aws_az_name"`
+	NodeName           types.String                                                 `tfsdk:"node_name"`
+	MgmtSubnet         *NFVServicePaloAltoFwServiceServiceNodesNodesMgmtSubnetModel `tfsdk:"mgmt_subnet"`
+	ReservedMgmtSubnet *NFVServiceEmptyModel                                        `tfsdk:"reserved_mgmt_subnet"`
 }
 
 // NFVServicePaloAltoFwServiceServiceNodesNodesMgmtSubnetModel represents mgmt_subnet block
 type NFVServicePaloAltoFwServiceServiceNodesNodesMgmtSubnetModel struct {
-	ExistingSubnetID types.String `tfsdk:"existing_subnet_id"`
-	SubnetParam *NFVServicePaloAltoFwServiceServiceNodesNodesMgmtSubnetSubnetParamModel `tfsdk:"subnet_param"`
+	ExistingSubnetID types.String                                                            `tfsdk:"existing_subnet_id"`
+	SubnetParam      *NFVServicePaloAltoFwServiceServiceNodesNodesMgmtSubnetSubnetParamModel `tfsdk:"subnet_param"`
 }
 
 // NFVServicePaloAltoFwServiceServiceNodesNodesMgmtSubnetSubnetParamModel represents subnet_param block
@@ -658,20 +658,20 @@ type NFVServicePaloAltoFwServiceServiceNodesNodesMgmtSubnetSubnetParamModel stru
 }
 
 type NFVServiceResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	DisableHTTPSManagement *NFVServiceEmptyModel `tfsdk:"disable_https_management"`
-	DisableSSHAccess *NFVServiceEmptyModel `tfsdk:"disable_ssh_access"`
-	EnabledSSHAccess *NFVServiceEnabledSSHAccessModel `tfsdk:"enabled_ssh_access"`
-	F5BigIPAWSService *NFVServiceF5BigIPAWSServiceModel `tfsdk:"f5_big_ip_aws_service"`
-	HTTPSManagement *NFVServiceHTTPSManagementModel `tfsdk:"https_management"`
-	PaloAltoFwService *NFVServicePaloAltoFwServiceModel `tfsdk:"palo_alto_fw_service"`
+	Name                   types.String                      `tfsdk:"name"`
+	Namespace              types.String                      `tfsdk:"namespace"`
+	Annotations            types.Map                         `tfsdk:"annotations"`
+	Description            types.String                      `tfsdk:"description"`
+	Disable                types.Bool                        `tfsdk:"disable"`
+	Labels                 types.Map                         `tfsdk:"labels"`
+	ID                     types.String                      `tfsdk:"id"`
+	Timeouts               timeouts.Value                    `tfsdk:"timeouts"`
+	DisableHTTPSManagement *NFVServiceEmptyModel             `tfsdk:"disable_https_management"`
+	DisableSSHAccess       *NFVServiceEmptyModel             `tfsdk:"disable_ssh_access"`
+	EnabledSSHAccess       *NFVServiceEnabledSSHAccessModel  `tfsdk:"enabled_ssh_access"`
+	F5BigIPAWSService      *NFVServiceF5BigIPAWSServiceModel `tfsdk:"f5_big_ip_aws_service"`
+	HTTPSManagement        *NFVServiceHTTPSManagementModel   `tfsdk:"https_management"`
+	PaloAltoFwService      *NFVServicePaloAltoFwServiceModel `tfsdk:"palo_alto_fw_service"`
 }
 
 func (r *NFVServiceResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -685,7 +685,7 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the NFVService. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -695,7 +695,7 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the NFVService will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -705,25 +705,25 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -747,7 +747,7 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 				Attributes: map[string]schema.Attribute{
 					"domain_suffix": schema.StringAttribute{
 						MarkdownDescription: "Domain Suffix. Domain suffix will be used along with node name to form the hostname for ssh node management",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -766,50 +766,48 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 							Attributes: map[string]schema.Attribute{
 								"node_name": schema.StringAttribute{
 									MarkdownDescription: "Node Name. Node name will be used to match a particular node with the desired TCP port",
-									Optional: true,
+									Optional:            true,
 								},
 								"ssh_port": schema.Int64Attribute{
 									MarkdownDescription: "SSH Port. Enter TCP port per node",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 						},
 					},
 				},
-
 			},
 			"f5_big_ip_aws_service": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: f5_big_ip_aws_service, palo_alto_fw_service] Virtual BIG-IP AWS. Virtual BIG-IP specification for AWS",
 				Attributes: map[string]schema.Attribute{
 					"admin_username": schema.StringAttribute{
 						MarkdownDescription: "Admin Username. Admin Username for BIG-IP",
-						Optional: true,
+						Optional:            true,
 					},
 					"ssh_key": schema.StringAttribute{
 						MarkdownDescription: "Public SSH key. Public SSH key for accessing the Big IP nodes.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"admin_password": schema.SingleNestedBlock{
 						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"blindfold_secret_info": schema.SingleNestedBlock{
 								MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 								Attributes: map[string]schema.Attribute{
 									"decryption_provider": schema.StringAttribute{
 										MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-										Optional: true,
+										Optional:            true,
 									},
 									"location": schema.StringAttribute{
 										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-										Optional: true,
+										Optional:            true,
 									},
 									"store_provider": schema.StringAttribute{
 										MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -818,11 +816,11 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 								Attributes: map[string]schema.Attribute{
 									"provider_ref": schema.StringAttribute{
 										MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-										Optional: true,
+										Optional:            true,
 									},
 									"url": schema.StringAttribute{
 										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -830,24 +828,23 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 					},
 					"aws_tgw_site_params": schema.SingleNestedBlock{
 						MarkdownDescription: "BIG-IP AWS TGW Site. BIG-IP AWS TGW site specification",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"aws_tgw_site": schema.SingleNestedBlock{
 								MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-										Optional: true,
+										Optional:            true,
 									},
 									"namespace": schema.StringAttribute{
 										MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-										Optional: true,
+										Optional:            true,
 									},
 									"tenant": schema.StringAttribute{
 										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-										Optional: true,
-										Computed: true,
+										Optional:            true,
+										Computed:            true,
 									},
 								},
 							},
@@ -858,7 +855,7 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 						Attributes: map[string]schema.Attribute{
 							"configured_vip": schema.StringAttribute{
 								MarkdownDescription: "Configured VIP. Enter IP address for the default VIP",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -876,8 +873,8 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 								Attributes: map[string]schema.Attribute{
 									"ports": schema.ListAttribute{
 										MarkdownDescription: "Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192",
-										Optional: true,
-										ElementType: types.StringType,
+										Optional:            true,
+										ElementType:         types.StringType,
 									},
 								},
 							},
@@ -886,8 +883,8 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 								Attributes: map[string]schema.Attribute{
 									"ports": schema.ListAttribute{
 										MarkdownDescription: "Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192",
-										Optional: true,
-										ElementType: types.StringType,
+										Optional:            true,
+										ElementType:         types.StringType,
 									},
 								},
 							},
@@ -913,8 +910,7 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 					},
 					"market_place_image": schema.SingleNestedBlock{
 						MarkdownDescription: "BIG-IP AWS Pay as You Go Image. BIG-IP AWS Pay as You Go Image Selection",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"awafpay_g200_mbps": schema.SingleNestedBlock{
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -930,15 +926,15 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 							Attributes: map[string]schema.Attribute{
 								"aws_az_name": schema.StringAttribute{
 									MarkdownDescription: "AWS AZ Name. The AWS Availability Zone must be consistent with the AWS Region chosen. Please select an AZ in the same Region as your TGW Site",
-									Optional: true,
+									Optional:            true,
 								},
 								"node_name": schema.StringAttribute{
 									MarkdownDescription: "Node Name. Node Name will be used to assign as hostname to the service",
-									Optional: true,
+									Optional:            true,
 								},
 								"tunnel_prefix": schema.StringAttribute{
 									MarkdownDescription: "Tunnel IP Prefix. Enter IP prefix for the tunnel, it has to be /30",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
@@ -950,7 +946,7 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 									Attributes: map[string]schema.Attribute{
 										"existing_subnet_id": schema.StringAttribute{
 											MarkdownDescription: "Existing Subnet ID. Information about existing subnet ID",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -959,7 +955,7 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 											Attributes: map[string]schema.Attribute{
 												"ipv4": schema.StringAttribute{
 													MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 										},
@@ -975,41 +971,39 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 						MarkdownDescription: "AWS Tags. AWS Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in AWS console.",
 					},
 				},
-
 			},
 			"https_management": schema.SingleNestedBlock{
 				MarkdownDescription: "HTTPS based management. HTTPS based configuration",
 				Attributes: map[string]schema.Attribute{
 					"domain_suffix": schema.StringAttribute{
 						MarkdownDescription: "Domain Suffix. Domain suffix will be used along with node name to form URL to access node management",
-						Optional: true,
+						Optional:            true,
 					},
 					"https_port": schema.Int64Attribute{
 						MarkdownDescription: "HTTPS Port. Enter TCP port number",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"advertise_on_internet": schema.SingleNestedBlock{
 						MarkdownDescription: "Advertise Public. This defines a way to advertise a load balancer on public. If optional public_ip is provided, it will only be advertised on RE sites where that public_ip is available",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"public_ip": schema.SingleNestedBlock{
 								MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-										Optional: true,
+										Optional:            true,
 									},
 									"namespace": schema.StringAttribute{
 										MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-										Optional: true,
+										Optional:            true,
 									},
 									"tenant": schema.StringAttribute{
 										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-										Optional: true,
-										Computed: true,
+										Optional:            true,
+										Computed:            true,
 									},
 								},
 							},
@@ -1020,8 +1014,7 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 					},
 					"advertise_on_sli_vip": schema.SingleNestedBlock{
 						MarkdownDescription: "Inline TLS Parameters. Inline TLS parameters",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"no_mtls": schema.SingleNestedBlock{
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -1032,11 +1025,11 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 									Attributes: map[string]schema.Attribute{
 										"certificate_url": schema.StringAttribute{
 											MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
-											Optional: true,
+											Optional:            true,
 										},
 										"description_spec": schema.StringAttribute{
 											MarkdownDescription: "Description. Description for the certificate",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -1045,8 +1038,8 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 											Attributes: map[string]schema.Attribute{
 												"hash_algorithms": schema.ListAttribute{
 													MarkdownDescription: "Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM`.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 										},
@@ -1055,23 +1048,22 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 										},
 										"private_key": schema.SingleNestedBlock{
 											MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"blindfold_secret_info": schema.SingleNestedBlock{
 													MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 													Attributes: map[string]schema.Attribute{
 														"decryption_provider": schema.StringAttribute{
 															MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-															Optional: true,
+															Optional:            true,
 														},
 														"location": schema.StringAttribute{
 															MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-															Optional: true,
+															Optional:            true,
 														},
 														"store_provider": schema.StringAttribute{
 															MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -1080,11 +1072,11 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 													Attributes: map[string]schema.Attribute{
 														"provider_ref": schema.StringAttribute{
 															MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-															Optional: true,
+															Optional:            true,
 														},
 														"url": schema.StringAttribute{
 															MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -1098,24 +1090,23 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 							},
 							"tls_config": schema.SingleNestedBlock{
 								MarkdownDescription: "TLS Config. This defines various options to configure TLS configuration parameters",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"custom_security": schema.SingleNestedBlock{
 										MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers",
 										Attributes: map[string]schema.Attribute{
 											"cipher_suites": schema.ListAttribute{
 												MarkdownDescription: "Cipher Suites. The TLS listener will only support the specified cipher list.",
-												Optional: true,
-												ElementType: types.StringType,
+												Optional:            true,
+												ElementType:         types.StringType,
 											},
 											"max_version": schema.StringAttribute{
 												MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
-												Optional: true,
+												Optional:            true,
 											},
 											"min_version": schema.StringAttribute{
 												MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -1135,11 +1126,11 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 								Attributes: map[string]schema.Attribute{
 									"client_certificate_optional": schema.BoolAttribute{
 										MarkdownDescription: "Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted.",
-										Optional: true,
+										Optional:            true,
 									},
 									"trusted_ca_url": schema.StringAttribute{
 										MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 								Blocks: map[string]schema.Block{
@@ -1148,16 +1139,16 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 										Attributes: map[string]schema.Attribute{
 											"name": schema.StringAttribute{
 												MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-												Optional: true,
+												Optional:            true,
 											},
 											"namespace": schema.StringAttribute{
 												MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-												Optional: true,
+												Optional:            true,
 											},
 											"tenant": schema.StringAttribute{
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-												Optional: true,
-												Computed: true,
+												Optional:            true,
+												Computed:            true,
 											},
 										},
 									},
@@ -1169,16 +1160,16 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 										Attributes: map[string]schema.Attribute{
 											"name": schema.StringAttribute{
 												MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-												Optional: true,
+												Optional:            true,
 											},
 											"namespace": schema.StringAttribute{
 												MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-												Optional: true,
+												Optional:            true,
 											},
 											"tenant": schema.StringAttribute{
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-												Optional: true,
-												Computed: true,
+												Optional:            true,
+												Computed:            true,
 											},
 										},
 									},
@@ -1190,8 +1181,8 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 										Attributes: map[string]schema.Attribute{
 											"xfcc_header_elements": schema.ListAttribute{
 												MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
-												Optional: true,
-												ElementType: types.StringType,
+												Optional:            true,
+												ElementType:         types.StringType,
 											},
 										},
 									},
@@ -1201,8 +1192,7 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 					},
 					"advertise_on_slo_internet_vip": schema.SingleNestedBlock{
 						MarkdownDescription: "Inline TLS Parameters. Inline TLS parameters",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"no_mtls": schema.SingleNestedBlock{
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -1213,11 +1203,11 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 									Attributes: map[string]schema.Attribute{
 										"certificate_url": schema.StringAttribute{
 											MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
-											Optional: true,
+											Optional:            true,
 										},
 										"description_spec": schema.StringAttribute{
 											MarkdownDescription: "Description. Description for the certificate",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -1226,8 +1216,8 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 											Attributes: map[string]schema.Attribute{
 												"hash_algorithms": schema.ListAttribute{
 													MarkdownDescription: "Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM`.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 										},
@@ -1236,23 +1226,22 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 										},
 										"private_key": schema.SingleNestedBlock{
 											MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"blindfold_secret_info": schema.SingleNestedBlock{
 													MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 													Attributes: map[string]schema.Attribute{
 														"decryption_provider": schema.StringAttribute{
 															MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-															Optional: true,
+															Optional:            true,
 														},
 														"location": schema.StringAttribute{
 															MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-															Optional: true,
+															Optional:            true,
 														},
 														"store_provider": schema.StringAttribute{
 															MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -1261,11 +1250,11 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 													Attributes: map[string]schema.Attribute{
 														"provider_ref": schema.StringAttribute{
 															MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-															Optional: true,
+															Optional:            true,
 														},
 														"url": schema.StringAttribute{
 															MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -1279,24 +1268,23 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 							},
 							"tls_config": schema.SingleNestedBlock{
 								MarkdownDescription: "TLS Config. This defines various options to configure TLS configuration parameters",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"custom_security": schema.SingleNestedBlock{
 										MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers",
 										Attributes: map[string]schema.Attribute{
 											"cipher_suites": schema.ListAttribute{
 												MarkdownDescription: "Cipher Suites. The TLS listener will only support the specified cipher list.",
-												Optional: true,
-												ElementType: types.StringType,
+												Optional:            true,
+												ElementType:         types.StringType,
 											},
 											"max_version": schema.StringAttribute{
 												MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
-												Optional: true,
+												Optional:            true,
 											},
 											"min_version": schema.StringAttribute{
 												MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -1316,11 +1304,11 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 								Attributes: map[string]schema.Attribute{
 									"client_certificate_optional": schema.BoolAttribute{
 										MarkdownDescription: "Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted.",
-										Optional: true,
+										Optional:            true,
 									},
 									"trusted_ca_url": schema.StringAttribute{
 										MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 								Blocks: map[string]schema.Block{
@@ -1329,16 +1317,16 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 										Attributes: map[string]schema.Attribute{
 											"name": schema.StringAttribute{
 												MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-												Optional: true,
+												Optional:            true,
 											},
 											"namespace": schema.StringAttribute{
 												MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-												Optional: true,
+												Optional:            true,
 											},
 											"tenant": schema.StringAttribute{
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-												Optional: true,
-												Computed: true,
+												Optional:            true,
+												Computed:            true,
 											},
 										},
 									},
@@ -1350,16 +1338,16 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 										Attributes: map[string]schema.Attribute{
 											"name": schema.StringAttribute{
 												MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-												Optional: true,
+												Optional:            true,
 											},
 											"namespace": schema.StringAttribute{
 												MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-												Optional: true,
+												Optional:            true,
 											},
 											"tenant": schema.StringAttribute{
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-												Optional: true,
-												Computed: true,
+												Optional:            true,
+												Computed:            true,
 											},
 										},
 									},
@@ -1371,8 +1359,8 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 										Attributes: map[string]schema.Attribute{
 											"xfcc_header_elements": schema.ListAttribute{
 												MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
-												Optional: true,
-												ElementType: types.StringType,
+												Optional:            true,
+												ElementType:         types.StringType,
 											},
 										},
 									},
@@ -1382,8 +1370,7 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 					},
 					"advertise_on_slo_sli": schema.SingleNestedBlock{
 						MarkdownDescription: "Inline TLS Parameters. Inline TLS parameters",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"no_mtls": schema.SingleNestedBlock{
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -1394,11 +1381,11 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 									Attributes: map[string]schema.Attribute{
 										"certificate_url": schema.StringAttribute{
 											MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
-											Optional: true,
+											Optional:            true,
 										},
 										"description_spec": schema.StringAttribute{
 											MarkdownDescription: "Description. Description for the certificate",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -1407,8 +1394,8 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 											Attributes: map[string]schema.Attribute{
 												"hash_algorithms": schema.ListAttribute{
 													MarkdownDescription: "Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM`.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 										},
@@ -1417,23 +1404,22 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 										},
 										"private_key": schema.SingleNestedBlock{
 											MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"blindfold_secret_info": schema.SingleNestedBlock{
 													MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 													Attributes: map[string]schema.Attribute{
 														"decryption_provider": schema.StringAttribute{
 															MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-															Optional: true,
+															Optional:            true,
 														},
 														"location": schema.StringAttribute{
 															MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-															Optional: true,
+															Optional:            true,
 														},
 														"store_provider": schema.StringAttribute{
 															MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -1442,11 +1428,11 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 													Attributes: map[string]schema.Attribute{
 														"provider_ref": schema.StringAttribute{
 															MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-															Optional: true,
+															Optional:            true,
 														},
 														"url": schema.StringAttribute{
 															MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -1460,24 +1446,23 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 							},
 							"tls_config": schema.SingleNestedBlock{
 								MarkdownDescription: "TLS Config. This defines various options to configure TLS configuration parameters",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"custom_security": schema.SingleNestedBlock{
 										MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers",
 										Attributes: map[string]schema.Attribute{
 											"cipher_suites": schema.ListAttribute{
 												MarkdownDescription: "Cipher Suites. The TLS listener will only support the specified cipher list.",
-												Optional: true,
-												ElementType: types.StringType,
+												Optional:            true,
+												ElementType:         types.StringType,
 											},
 											"max_version": schema.StringAttribute{
 												MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
-												Optional: true,
+												Optional:            true,
 											},
 											"min_version": schema.StringAttribute{
 												MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -1497,11 +1482,11 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 								Attributes: map[string]schema.Attribute{
 									"client_certificate_optional": schema.BoolAttribute{
 										MarkdownDescription: "Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted.",
-										Optional: true,
+										Optional:            true,
 									},
 									"trusted_ca_url": schema.StringAttribute{
 										MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 								Blocks: map[string]schema.Block{
@@ -1510,16 +1495,16 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 										Attributes: map[string]schema.Attribute{
 											"name": schema.StringAttribute{
 												MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-												Optional: true,
+												Optional:            true,
 											},
 											"namespace": schema.StringAttribute{
 												MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-												Optional: true,
+												Optional:            true,
 											},
 											"tenant": schema.StringAttribute{
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-												Optional: true,
-												Computed: true,
+												Optional:            true,
+												Computed:            true,
 											},
 										},
 									},
@@ -1531,16 +1516,16 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 										Attributes: map[string]schema.Attribute{
 											"name": schema.StringAttribute{
 												MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-												Optional: true,
+												Optional:            true,
 											},
 											"namespace": schema.StringAttribute{
 												MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-												Optional: true,
+												Optional:            true,
 											},
 											"tenant": schema.StringAttribute{
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-												Optional: true,
-												Computed: true,
+												Optional:            true,
+												Computed:            true,
 											},
 										},
 									},
@@ -1552,8 +1537,8 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 										Attributes: map[string]schema.Attribute{
 											"xfcc_header_elements": schema.ListAttribute{
 												MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
-												Optional: true,
-												ElementType: types.StringType,
+												Optional:            true,
+												ElementType:         types.StringType,
 											},
 										},
 									},
@@ -1563,8 +1548,7 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 					},
 					"advertise_on_slo_vip": schema.SingleNestedBlock{
 						MarkdownDescription: "Inline TLS Parameters. Inline TLS parameters",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"no_mtls": schema.SingleNestedBlock{
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -1575,11 +1559,11 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 									Attributes: map[string]schema.Attribute{
 										"certificate_url": schema.StringAttribute{
 											MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
-											Optional: true,
+											Optional:            true,
 										},
 										"description_spec": schema.StringAttribute{
 											MarkdownDescription: "Description. Description for the certificate",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -1588,8 +1572,8 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 											Attributes: map[string]schema.Attribute{
 												"hash_algorithms": schema.ListAttribute{
 													MarkdownDescription: "Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM`.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 										},
@@ -1598,23 +1582,22 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 										},
 										"private_key": schema.SingleNestedBlock{
 											MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"blindfold_secret_info": schema.SingleNestedBlock{
 													MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 													Attributes: map[string]schema.Attribute{
 														"decryption_provider": schema.StringAttribute{
 															MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-															Optional: true,
+															Optional:            true,
 														},
 														"location": schema.StringAttribute{
 															MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-															Optional: true,
+															Optional:            true,
 														},
 														"store_provider": schema.StringAttribute{
 															MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -1623,11 +1606,11 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 													Attributes: map[string]schema.Attribute{
 														"provider_ref": schema.StringAttribute{
 															MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-															Optional: true,
+															Optional:            true,
 														},
 														"url": schema.StringAttribute{
 															MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -1641,24 +1624,23 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 							},
 							"tls_config": schema.SingleNestedBlock{
 								MarkdownDescription: "TLS Config. This defines various options to configure TLS configuration parameters",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"custom_security": schema.SingleNestedBlock{
 										MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers",
 										Attributes: map[string]schema.Attribute{
 											"cipher_suites": schema.ListAttribute{
 												MarkdownDescription: "Cipher Suites. The TLS listener will only support the specified cipher list.",
-												Optional: true,
-												ElementType: types.StringType,
+												Optional:            true,
+												ElementType:         types.StringType,
 											},
 											"max_version": schema.StringAttribute{
 												MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
-												Optional: true,
+												Optional:            true,
 											},
 											"min_version": schema.StringAttribute{
 												MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -1678,11 +1660,11 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 								Attributes: map[string]schema.Attribute{
 									"client_certificate_optional": schema.BoolAttribute{
 										MarkdownDescription: "Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted.",
-										Optional: true,
+										Optional:            true,
 									},
 									"trusted_ca_url": schema.StringAttribute{
 										MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 								Blocks: map[string]schema.Block{
@@ -1691,16 +1673,16 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 										Attributes: map[string]schema.Attribute{
 											"name": schema.StringAttribute{
 												MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-												Optional: true,
+												Optional:            true,
 											},
 											"namespace": schema.StringAttribute{
 												MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-												Optional: true,
+												Optional:            true,
 											},
 											"tenant": schema.StringAttribute{
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-												Optional: true,
-												Computed: true,
+												Optional:            true,
+												Computed:            true,
 											},
 										},
 									},
@@ -1712,16 +1694,16 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 										Attributes: map[string]schema.Attribute{
 											"name": schema.StringAttribute{
 												MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-												Optional: true,
+												Optional:            true,
 											},
 											"namespace": schema.StringAttribute{
 												MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-												Optional: true,
+												Optional:            true,
 											},
 											"tenant": schema.StringAttribute{
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-												Optional: true,
-												Computed: true,
+												Optional:            true,
+												Computed:            true,
 											},
 										},
 									},
@@ -1733,8 +1715,8 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 										Attributes: map[string]schema.Attribute{
 											"xfcc_header_elements": schema.ListAttribute{
 												MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
-												Optional: true,
-												ElementType: types.StringType,
+												Optional:            true,
+												ElementType:         types.StringType,
 											},
 										},
 									},
@@ -1746,22 +1728,21 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 			"palo_alto_fw_service": schema.SingleNestedBlock{
 				MarkdownDescription: "Palo Alto Networks VM-Series Firewall. Palo Alto Networks VM-Series next-generation firewall configuration",
 				Attributes: map[string]schema.Attribute{
 					"instance_type": schema.StringAttribute{
 						MarkdownDescription: "Palo Alto Networks VM-Series Instance Typ. - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_XLARGE: m4.xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_2XLARGE: m4.2xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_4XLARGE: m4.4xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_LARGE: m5.large - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_XLARGE: m5.xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_2XLARGE: m5.2xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_4XLARGE: m5.4xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_12XLARGE: m5.12xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5N_LARGE: m5n.large - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5N_XLARGE: m5n.xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5N_2XLARGE: m5n.2xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5N_4XLARGE: m5n.4xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_LARGE: c4.large - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_XLARGE: c4.xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_2XLARGE: c4.2xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_4XLARGE: c4.4xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_8XLARGE: c4.8xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_LARGE: c5.large - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_XLARGE: c5.xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_2XLARGE: c5.2xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_4XLARGE: c5.4xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_9XLARGE: c5.9xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_18XLARGE: c5.18xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_LARGE: c5n.large - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_XLARGE: c5n.xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_2XLARGE: c5n.2xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_4XLARGE: c5n.4xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_9XLARGE: c5n.9xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_18XLARGE: c5n.18xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_R5_2XLARGE: r5.2xlarge. Possible values are `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_2XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_4XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_LARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_2XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_4XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_12XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5N_LARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5N_XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5N_2XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5N_4XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_LARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_2XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_4XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_8XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_LARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_2XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_4XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_9XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_18XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_LARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_2XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_4XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_9XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_18XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_R5_2XLARGE`. Defaults to `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_XLARGE`.",
-						Optional: true,
+						Optional:            true,
 					},
 					"ssh_key": schema.StringAttribute{
 						MarkdownDescription: "Setup Authorized Public SSH key. Setup Authorized Public SSH key. User will be able to ssh to the vmseries nodes using its corresponding ssh private key.",
-						Optional: true,
+						Optional:            true,
 					},
 					"version": schema.StringAttribute{
 						MarkdownDescription: "PAN VM-Series version. PAN-OS version",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -1770,29 +1751,28 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 						Attributes: map[string]schema.Attribute{
 							"admin_username": schema.StringAttribute{
 								MarkdownDescription: "Firewall Admin Username. Firewall Admin Username",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
 							"admin_password": schema.SingleNestedBlock{
 								MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"blindfold_secret_info": schema.SingleNestedBlock{
 										MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 										Attributes: map[string]schema.Attribute{
 											"decryption_provider": schema.StringAttribute{
 												MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-												Optional: true,
+												Optional:            true,
 											},
 											"location": schema.StringAttribute{
 												MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-												Optional: true,
+												Optional:            true,
 											},
 											"store_provider": schema.StringAttribute{
 												MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -1801,11 +1781,11 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 										Attributes: map[string]schema.Attribute{
 											"provider_ref": schema.StringAttribute{
 												MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-												Optional: true,
+												Optional:            true,
 											},
 											"url": schema.StringAttribute{
 												MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -1816,29 +1796,28 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 								Attributes: map[string]schema.Attribute{
 									"public_key": schema.StringAttribute{
 										MarkdownDescription: "Public SSH key. Authorized Public SSH key which will be programmed on the node",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 								Blocks: map[string]schema.Block{
 									"private_key": schema.SingleNestedBlock{
 										MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-										Attributes: map[string]schema.Attribute{
-										},
+										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"blindfold_secret_info": schema.SingleNestedBlock{
 												MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 												Attributes: map[string]schema.Attribute{
 													"decryption_provider": schema.StringAttribute{
 														MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-														Optional: true,
+														Optional:            true,
 													},
 													"location": schema.StringAttribute{
 														MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-														Optional: true,
+														Optional:            true,
 													},
 													"store_provider": schema.StringAttribute{
 														MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 											},
@@ -1847,11 +1826,11 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 												Attributes: map[string]schema.Attribute{
 													"provider_ref": schema.StringAttribute{
 														MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-														Optional: true,
+														Optional:            true,
 													},
 													"url": schema.StringAttribute{
 														MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 											},
@@ -1866,16 +1845,16 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
 								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-								Optional: true,
+								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
 								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-								Optional: true,
+								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-								Optional: true,
-								Computed: true,
+								Optional:            true,
+								Computed:            true,
 							},
 						},
 					},
@@ -1893,37 +1872,36 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 						Attributes: map[string]schema.Attribute{
 							"device_group_name": schema.StringAttribute{
 								MarkdownDescription: "Device Group Name. Device Group Name",
-								Optional: true,
+								Optional:            true,
 							},
 							"server": schema.StringAttribute{
 								MarkdownDescription: "Server Ipv4 Address. Panorama Server Address to which the firewall should connect to",
-								Optional: true,
+								Optional:            true,
 							},
 							"template_stack_name": schema.StringAttribute{
 								MarkdownDescription: "template stack name. Template Stack Name",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
 							"authorization_key": schema.SingleNestedBlock{
 								MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"blindfold_secret_info": schema.SingleNestedBlock{
 										MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 										Attributes: map[string]schema.Attribute{
 											"decryption_provider": schema.StringAttribute{
 												MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-												Optional: true,
+												Optional:            true,
 											},
 											"location": schema.StringAttribute{
 												MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-												Optional: true,
+												Optional:            true,
 											},
 											"store_provider": schema.StringAttribute{
 												MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -1932,11 +1910,11 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 										Attributes: map[string]schema.Attribute{
 											"provider_ref": schema.StringAttribute{
 												MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-												Optional: true,
+												Optional:            true,
 											},
 											"url": schema.StringAttribute{
 												MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -1946,8 +1924,7 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 					},
 					"service_nodes": schema.SingleNestedBlock{
 						MarkdownDescription: "Palo Alto Networks Vm-Series AZ Nodes.",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"nodes": schema.ListNestedBlock{
 								MarkdownDescription: "Palo Alto Networks AZ Nodes.",
@@ -1955,11 +1932,11 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 									Attributes: map[string]schema.Attribute{
 										"aws_az_name": schema.StringAttribute{
 											MarkdownDescription: "AWS AZ Name. AWS availability zone, must be consistent with the selected AWS region. It is recommended that AZ is one of the AZ for sites",
-											Optional: true,
+											Optional:            true,
 										},
 										"node_name": schema.StringAttribute{
 											MarkdownDescription: "Node Name. Node Name will be used to assign as hostname to the service",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -1968,7 +1945,7 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 											Attributes: map[string]schema.Attribute{
 												"existing_subnet_id": schema.StringAttribute{
 													MarkdownDescription: "Existing Subnet ID. Information about existing subnet ID",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -1977,7 +1954,7 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 													Attributes: map[string]schema.Attribute{
 														"ipv4": schema.StringAttribute{
 															MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -1995,7 +1972,6 @@ func (r *NFVServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 						MarkdownDescription: "AWS Tags. AWS Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in AWS console.",
 					},
 				},
-
 			},
 		},
 	}
@@ -2344,7 +2320,6 @@ func (r *NFVServiceResource) Create(ctx context.Context, req resource.CreateRequ
 		createReq.Spec["palo_alto_fw_service"] = palo_alto_fw_serviceMap
 	}
 
-
 	apiResource, err := r.client.CreateNFVService(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create NFVService: %s", err))
@@ -2356,7 +2331,7 @@ func (r *NFVServiceResource) Create(ctx context.Context, req resource.CreateRequ
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if _, ok := apiResource.Spec["disable_https_management"].(map[string]interface{}); ok && isImport && data.DisableHTTPSManagement == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.DisableHTTPSManagement = &NFVServiceEmptyModel{}
@@ -2447,8 +2422,7 @@ func (r *NFVServiceResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				// Import case: read from API
 				if _, ok := blockData["admin_password"].(map[string]interface{}); ok {
-					return &NFVServiceF5BigIPAWSServiceAdminPasswordModel{
-					}
+					return &NFVServiceF5BigIPAWSServiceAdminPasswordModel{}
 				}
 				return nil
 			}(),
@@ -2465,8 +2439,7 @@ func (r *NFVServiceResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				// Import case: read from API
 				if _, ok := blockData["aws_tgw_site_params"].(map[string]interface{}); ok {
-					return &NFVServiceF5BigIPAWSServiceAWSTGWSiteParamsModel{
-					}
+					return &NFVServiceF5BigIPAWSServiceAWSTGWSiteParamsModel{}
 				}
 				return nil
 			}(),
@@ -2495,8 +2468,7 @@ func (r *NFVServiceResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				// Import case: read from API
 				if _, ok := blockData["market_place_image"].(map[string]interface{}); ok {
-					return &NFVServiceF5BigIPAWSServiceMarketPlaceImageModel{
-					}
+					return &NFVServiceF5BigIPAWSServiceMarketPlaceImageModel{}
 				}
 				return nil
 			}(),
@@ -2585,8 +2557,7 @@ func (r *NFVServiceResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				// Import case: read from API
 				if _, ok := blockData["advertise_on_internet"].(map[string]interface{}); ok {
-					return &NFVServiceHTTPSManagementAdvertiseOnInternetModel{
-					}
+					return &NFVServiceHTTPSManagementAdvertiseOnInternetModel{}
 				}
 				return nil
 			}(),
@@ -2609,8 +2580,7 @@ func (r *NFVServiceResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				// Import case: read from API
 				if _, ok := blockData["advertise_on_sli_vip"].(map[string]interface{}); ok {
-					return &NFVServiceHTTPSManagementAdvertiseOnSLIVipModel{
-					}
+					return &NFVServiceHTTPSManagementAdvertiseOnSLIVipModel{}
 				}
 				return nil
 			}(),
@@ -2621,8 +2591,7 @@ func (r *NFVServiceResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				// Import case: read from API
 				if _, ok := blockData["advertise_on_slo_internet_vip"].(map[string]interface{}); ok {
-					return &NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipModel{
-					}
+					return &NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipModel{}
 				}
 				return nil
 			}(),
@@ -2633,8 +2602,7 @@ func (r *NFVServiceResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				// Import case: read from API
 				if _, ok := blockData["advertise_on_slo_sli"].(map[string]interface{}); ok {
-					return &NFVServiceHTTPSManagementAdvertiseOnSLOSLIModel{
-					}
+					return &NFVServiceHTTPSManagementAdvertiseOnSLOSLIModel{}
 				}
 				return nil
 			}(),
@@ -2645,8 +2613,7 @@ func (r *NFVServiceResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				// Import case: read from API
 				if _, ok := blockData["advertise_on_slo_vip"].(map[string]interface{}); ok {
-					return &NFVServiceHTTPSManagementAdvertiseOnSLOVipModel{
-					}
+					return &NFVServiceHTTPSManagementAdvertiseOnSLOVipModel{}
 				}
 				return nil
 			}(),
@@ -2805,8 +2772,7 @@ func (r *NFVServiceResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				// Import case: read from API
 				if _, ok := blockData["service_nodes"].(map[string]interface{}); ok {
-					return &NFVServicePaloAltoFwServiceServiceNodesModel{
-					}
+					return &NFVServicePaloAltoFwServiceServiceNodesModel{}
 				}
 				return nil
 			}(),
@@ -2836,7 +2802,6 @@ func (r *NFVServiceResource) Create(ctx context.Context, req resource.CreateRequ
 			}(),
 		}
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -2926,9 +2891,9 @@ func (r *NFVServiceResource) Read(ctx context.Context, req resource.ReadRequest,
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if _, ok := apiResource.Spec["disable_https_management"].(map[string]interface{}); ok && isImport && data.DisableHTTPSManagement == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -3020,8 +2985,7 @@ func (r *NFVServiceResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				// Import case: read from API
 				if _, ok := blockData["admin_password"].(map[string]interface{}); ok {
-					return &NFVServiceF5BigIPAWSServiceAdminPasswordModel{
-					}
+					return &NFVServiceF5BigIPAWSServiceAdminPasswordModel{}
 				}
 				return nil
 			}(),
@@ -3038,8 +3002,7 @@ func (r *NFVServiceResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				// Import case: read from API
 				if _, ok := blockData["aws_tgw_site_params"].(map[string]interface{}); ok {
-					return &NFVServiceF5BigIPAWSServiceAWSTGWSiteParamsModel{
-					}
+					return &NFVServiceF5BigIPAWSServiceAWSTGWSiteParamsModel{}
 				}
 				return nil
 			}(),
@@ -3068,8 +3031,7 @@ func (r *NFVServiceResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				// Import case: read from API
 				if _, ok := blockData["market_place_image"].(map[string]interface{}); ok {
-					return &NFVServiceF5BigIPAWSServiceMarketPlaceImageModel{
-					}
+					return &NFVServiceF5BigIPAWSServiceMarketPlaceImageModel{}
 				}
 				return nil
 			}(),
@@ -3158,8 +3120,7 @@ func (r *NFVServiceResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				// Import case: read from API
 				if _, ok := blockData["advertise_on_internet"].(map[string]interface{}); ok {
-					return &NFVServiceHTTPSManagementAdvertiseOnInternetModel{
-					}
+					return &NFVServiceHTTPSManagementAdvertiseOnInternetModel{}
 				}
 				return nil
 			}(),
@@ -3182,8 +3143,7 @@ func (r *NFVServiceResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				// Import case: read from API
 				if _, ok := blockData["advertise_on_sli_vip"].(map[string]interface{}); ok {
-					return &NFVServiceHTTPSManagementAdvertiseOnSLIVipModel{
-					}
+					return &NFVServiceHTTPSManagementAdvertiseOnSLIVipModel{}
 				}
 				return nil
 			}(),
@@ -3194,8 +3154,7 @@ func (r *NFVServiceResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				// Import case: read from API
 				if _, ok := blockData["advertise_on_slo_internet_vip"].(map[string]interface{}); ok {
-					return &NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipModel{
-					}
+					return &NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipModel{}
 				}
 				return nil
 			}(),
@@ -3206,8 +3165,7 @@ func (r *NFVServiceResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				// Import case: read from API
 				if _, ok := blockData["advertise_on_slo_sli"].(map[string]interface{}); ok {
-					return &NFVServiceHTTPSManagementAdvertiseOnSLOSLIModel{
-					}
+					return &NFVServiceHTTPSManagementAdvertiseOnSLOSLIModel{}
 				}
 				return nil
 			}(),
@@ -3218,8 +3176,7 @@ func (r *NFVServiceResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				// Import case: read from API
 				if _, ok := blockData["advertise_on_slo_vip"].(map[string]interface{}); ok {
-					return &NFVServiceHTTPSManagementAdvertiseOnSLOVipModel{
-					}
+					return &NFVServiceHTTPSManagementAdvertiseOnSLOVipModel{}
 				}
 				return nil
 			}(),
@@ -3378,8 +3335,7 @@ func (r *NFVServiceResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				// Import case: read from API
 				if _, ok := blockData["service_nodes"].(map[string]interface{}); ok {
-					return &NFVServicePaloAltoFwServiceServiceNodesModel{
-					}
+					return &NFVServicePaloAltoFwServiceServiceNodesModel{}
 				}
 				return nil
 			}(),
@@ -3409,7 +3365,6 @@ func (r *NFVServiceResource) Read(ctx context.Context, req resource.ReadRequest,
 			}(),
 		}
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -3668,7 +3623,6 @@ func (r *NFVServiceResource) Update(ctx context.Context, req resource.UpdateRequ
 		}
 		apiResource.Spec["palo_alto_fw_service"] = palo_alto_fw_serviceMap
 	}
-
 
 	updated, err := r.client.UpdateNFVService(ctx, apiResource)
 	if err != nil {

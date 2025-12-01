@@ -51,20 +51,20 @@ type NetworkPolicyViewEmptyModel struct {
 
 // NetworkPolicyViewEgressRulesModel represents egress_rules block
 type NetworkPolicyViewEgressRulesModel struct {
-	Action types.String `tfsdk:"action"`
-	AdvAction *NetworkPolicyViewEgressRulesAdvActionModel `tfsdk:"adv_action"`
-	AllTCPTraffic *NetworkPolicyViewEmptyModel `tfsdk:"all_tcp_traffic"`
-	AllTraffic *NetworkPolicyViewEmptyModel `tfsdk:"all_traffic"`
-	AllUDPTraffic *NetworkPolicyViewEmptyModel `tfsdk:"all_udp_traffic"`
-	Any *NetworkPolicyViewEmptyModel `tfsdk:"any"`
-	Applications *NetworkPolicyViewEgressRulesApplicationsModel `tfsdk:"applications"`
-	InsideEndpoints *NetworkPolicyViewEmptyModel `tfsdk:"inside_endpoints"`
-	IPPrefixSet *NetworkPolicyViewEgressRulesIPPrefixSetModel `tfsdk:"ip_prefix_set"`
-	LabelMatcher *NetworkPolicyViewEgressRulesLabelMatcherModel `tfsdk:"label_matcher"`
-	LabelSelector *NetworkPolicyViewEgressRulesLabelSelectorModel `tfsdk:"label_selector"`
-	Metadata *NetworkPolicyViewEgressRulesMetadataModel `tfsdk:"metadata"`
-	OutsideEndpoints *NetworkPolicyViewEmptyModel `tfsdk:"outside_endpoints"`
-	PrefixList *NetworkPolicyViewEgressRulesPrefixListModel `tfsdk:"prefix_list"`
+	Action            types.String                                        `tfsdk:"action"`
+	AdvAction         *NetworkPolicyViewEgressRulesAdvActionModel         `tfsdk:"adv_action"`
+	AllTCPTraffic     *NetworkPolicyViewEmptyModel                        `tfsdk:"all_tcp_traffic"`
+	AllTraffic        *NetworkPolicyViewEmptyModel                        `tfsdk:"all_traffic"`
+	AllUDPTraffic     *NetworkPolicyViewEmptyModel                        `tfsdk:"all_udp_traffic"`
+	Any               *NetworkPolicyViewEmptyModel                        `tfsdk:"any"`
+	Applications      *NetworkPolicyViewEgressRulesApplicationsModel      `tfsdk:"applications"`
+	InsideEndpoints   *NetworkPolicyViewEmptyModel                        `tfsdk:"inside_endpoints"`
+	IPPrefixSet       *NetworkPolicyViewEgressRulesIPPrefixSetModel       `tfsdk:"ip_prefix_set"`
+	LabelMatcher      *NetworkPolicyViewEgressRulesLabelMatcherModel      `tfsdk:"label_matcher"`
+	LabelSelector     *NetworkPolicyViewEgressRulesLabelSelectorModel     `tfsdk:"label_selector"`
+	Metadata          *NetworkPolicyViewEgressRulesMetadataModel          `tfsdk:"metadata"`
+	OutsideEndpoints  *NetworkPolicyViewEmptyModel                        `tfsdk:"outside_endpoints"`
+	PrefixList        *NetworkPolicyViewEgressRulesPrefixListModel        `tfsdk:"prefix_list"`
 	ProtocolPortRange *NetworkPolicyViewEgressRulesProtocolPortRangeModel `tfsdk:"protocol_port_range"`
 }
 
@@ -85,11 +85,11 @@ type NetworkPolicyViewEgressRulesIPPrefixSetModel struct {
 
 // NetworkPolicyViewEgressRulesIPPrefixSetRefModel represents ref block
 type NetworkPolicyViewEgressRulesIPPrefixSetRefModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // NetworkPolicyViewEgressRulesLabelMatcherModel represents label_matcher block
@@ -105,7 +105,7 @@ type NetworkPolicyViewEgressRulesLabelSelectorModel struct {
 // NetworkPolicyViewEgressRulesMetadataModel represents metadata block
 type NetworkPolicyViewEgressRulesMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
-	Name types.String `tfsdk:"name"`
+	Name            types.String `tfsdk:"name"`
 }
 
 // NetworkPolicyViewEgressRulesPrefixListModel represents prefix_list block
@@ -115,17 +115,17 @@ type NetworkPolicyViewEgressRulesPrefixListModel struct {
 
 // NetworkPolicyViewEgressRulesProtocolPortRangeModel represents protocol_port_range block
 type NetworkPolicyViewEgressRulesProtocolPortRangeModel struct {
-	PortRanges types.List `tfsdk:"port_ranges"`
-	Protocol types.String `tfsdk:"protocol"`
+	PortRanges types.List   `tfsdk:"port_ranges"`
+	Protocol   types.String `tfsdk:"protocol"`
 }
 
 // NetworkPolicyViewEndpointModel represents endpoint block
 type NetworkPolicyViewEndpointModel struct {
-	Any *NetworkPolicyViewEmptyModel `tfsdk:"any"`
-	InsideEndpoints *NetworkPolicyViewEmptyModel `tfsdk:"inside_endpoints"`
-	LabelSelector *NetworkPolicyViewEndpointLabelSelectorModel `tfsdk:"label_selector"`
-	OutsideEndpoints *NetworkPolicyViewEmptyModel `tfsdk:"outside_endpoints"`
-	PrefixList *NetworkPolicyViewEndpointPrefixListModel `tfsdk:"prefix_list"`
+	Any              *NetworkPolicyViewEmptyModel                 `tfsdk:"any"`
+	InsideEndpoints  *NetworkPolicyViewEmptyModel                 `tfsdk:"inside_endpoints"`
+	LabelSelector    *NetworkPolicyViewEndpointLabelSelectorModel `tfsdk:"label_selector"`
+	OutsideEndpoints *NetworkPolicyViewEmptyModel                 `tfsdk:"outside_endpoints"`
+	PrefixList       *NetworkPolicyViewEndpointPrefixListModel    `tfsdk:"prefix_list"`
 }
 
 // NetworkPolicyViewEndpointLabelSelectorModel represents label_selector block
@@ -140,20 +140,20 @@ type NetworkPolicyViewEndpointPrefixListModel struct {
 
 // NetworkPolicyViewIngressRulesModel represents ingress_rules block
 type NetworkPolicyViewIngressRulesModel struct {
-	Action types.String `tfsdk:"action"`
-	AdvAction *NetworkPolicyViewIngressRulesAdvActionModel `tfsdk:"adv_action"`
-	AllTCPTraffic *NetworkPolicyViewEmptyModel `tfsdk:"all_tcp_traffic"`
-	AllTraffic *NetworkPolicyViewEmptyModel `tfsdk:"all_traffic"`
-	AllUDPTraffic *NetworkPolicyViewEmptyModel `tfsdk:"all_udp_traffic"`
-	Any *NetworkPolicyViewEmptyModel `tfsdk:"any"`
-	Applications *NetworkPolicyViewIngressRulesApplicationsModel `tfsdk:"applications"`
-	InsideEndpoints *NetworkPolicyViewEmptyModel `tfsdk:"inside_endpoints"`
-	IPPrefixSet *NetworkPolicyViewIngressRulesIPPrefixSetModel `tfsdk:"ip_prefix_set"`
-	LabelMatcher *NetworkPolicyViewIngressRulesLabelMatcherModel `tfsdk:"label_matcher"`
-	LabelSelector *NetworkPolicyViewIngressRulesLabelSelectorModel `tfsdk:"label_selector"`
-	Metadata *NetworkPolicyViewIngressRulesMetadataModel `tfsdk:"metadata"`
-	OutsideEndpoints *NetworkPolicyViewEmptyModel `tfsdk:"outside_endpoints"`
-	PrefixList *NetworkPolicyViewIngressRulesPrefixListModel `tfsdk:"prefix_list"`
+	Action            types.String                                         `tfsdk:"action"`
+	AdvAction         *NetworkPolicyViewIngressRulesAdvActionModel         `tfsdk:"adv_action"`
+	AllTCPTraffic     *NetworkPolicyViewEmptyModel                         `tfsdk:"all_tcp_traffic"`
+	AllTraffic        *NetworkPolicyViewEmptyModel                         `tfsdk:"all_traffic"`
+	AllUDPTraffic     *NetworkPolicyViewEmptyModel                         `tfsdk:"all_udp_traffic"`
+	Any               *NetworkPolicyViewEmptyModel                         `tfsdk:"any"`
+	Applications      *NetworkPolicyViewIngressRulesApplicationsModel      `tfsdk:"applications"`
+	InsideEndpoints   *NetworkPolicyViewEmptyModel                         `tfsdk:"inside_endpoints"`
+	IPPrefixSet       *NetworkPolicyViewIngressRulesIPPrefixSetModel       `tfsdk:"ip_prefix_set"`
+	LabelMatcher      *NetworkPolicyViewIngressRulesLabelMatcherModel      `tfsdk:"label_matcher"`
+	LabelSelector     *NetworkPolicyViewIngressRulesLabelSelectorModel     `tfsdk:"label_selector"`
+	Metadata          *NetworkPolicyViewIngressRulesMetadataModel          `tfsdk:"metadata"`
+	OutsideEndpoints  *NetworkPolicyViewEmptyModel                         `tfsdk:"outside_endpoints"`
+	PrefixList        *NetworkPolicyViewIngressRulesPrefixListModel        `tfsdk:"prefix_list"`
 	ProtocolPortRange *NetworkPolicyViewIngressRulesProtocolPortRangeModel `tfsdk:"protocol_port_range"`
 }
 
@@ -174,11 +174,11 @@ type NetworkPolicyViewIngressRulesIPPrefixSetModel struct {
 
 // NetworkPolicyViewIngressRulesIPPrefixSetRefModel represents ref block
 type NetworkPolicyViewIngressRulesIPPrefixSetRefModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // NetworkPolicyViewIngressRulesLabelMatcherModel represents label_matcher block
@@ -194,7 +194,7 @@ type NetworkPolicyViewIngressRulesLabelSelectorModel struct {
 // NetworkPolicyViewIngressRulesMetadataModel represents metadata block
 type NetworkPolicyViewIngressRulesMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
-	Name types.String `tfsdk:"name"`
+	Name            types.String `tfsdk:"name"`
 }
 
 // NetworkPolicyViewIngressRulesPrefixListModel represents prefix_list block
@@ -204,21 +204,21 @@ type NetworkPolicyViewIngressRulesPrefixListModel struct {
 
 // NetworkPolicyViewIngressRulesProtocolPortRangeModel represents protocol_port_range block
 type NetworkPolicyViewIngressRulesProtocolPortRangeModel struct {
-	PortRanges types.List `tfsdk:"port_ranges"`
-	Protocol types.String `tfsdk:"protocol"`
+	PortRanges types.List   `tfsdk:"port_ranges"`
+	Protocol   types.String `tfsdk:"protocol"`
 }
 
 type NetworkPolicyViewResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	EgressRules []NetworkPolicyViewEgressRulesModel `tfsdk:"egress_rules"`
-	Endpoint *NetworkPolicyViewEndpointModel `tfsdk:"endpoint"`
+	Name         types.String                         `tfsdk:"name"`
+	Namespace    types.String                         `tfsdk:"namespace"`
+	Annotations  types.Map                            `tfsdk:"annotations"`
+	Description  types.String                         `tfsdk:"description"`
+	Disable      types.Bool                           `tfsdk:"disable"`
+	Labels       types.Map                            `tfsdk:"labels"`
+	ID           types.String                         `tfsdk:"id"`
+	Timeouts     timeouts.Value                       `tfsdk:"timeouts"`
+	EgressRules  []NetworkPolicyViewEgressRulesModel  `tfsdk:"egress_rules"`
+	Endpoint     *NetworkPolicyViewEndpointModel      `tfsdk:"endpoint"`
 	IngressRules []NetworkPolicyViewIngressRulesModel `tfsdk:"ingress_rules"`
 }
 
@@ -233,7 +233,7 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the NetworkPolicyView. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -243,7 +243,7 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the NetworkPolicyView will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -253,25 +253,25 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -290,7 +290,7 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 					Attributes: map[string]schema.Attribute{
 						"action": schema.StringAttribute{
 							MarkdownDescription: "Network Policy Rule Action. Network policy rule action configures the action to be taken on rule match Apply deny action on rule match Apply allow action on rule match. Possible values are `DENY`, `ALLOW`. Defaults to `DENY`.",
-							Optional: true,
+							Optional:            true,
 						},
 					},
 					Blocks: map[string]schema.Block{
@@ -299,7 +299,7 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 							Attributes: map[string]schema.Attribute{
 								"action": schema.StringAttribute{
 									MarkdownDescription: "Log Action. Choice to choose logging or no logging This works together with option selected via NetworkPolicyRuleAction or any other action specified x-example: (No Selection in NetworkPolicyRuleAction + AdvancedAction as LOG) = LOG Only, (ALLOW/DENY in NetworkPolicyRuleAction + AdvancedAction as LOG) = Log and Allow/Deny, (ALLOW/DENY in NetworkPolicyRuleAction + NOLOG in AdvancedAction) = Allow/Deny with no log Don't sample the traffic hitting the rule Sample the traffic hitting the rule. Possible values are `NOLOG`, `LOG`. Defaults to `NOLOG`.",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 						},
@@ -320,8 +320,8 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 							Attributes: map[string]schema.Attribute{
 								"applications": schema.ListAttribute{
 									MarkdownDescription: "Application Protocols. Application protocols like HTTP, SNMP. Possible values are `APPLICATION_HTTP`, `APPLICATION_HTTPS`, `APPLICATION_SNMP`, `APPLICATION_DNS`. Defaults to `APPLICATION_HTTP`.",
-									Optional: true,
-									ElementType: types.StringType,
+									Optional:            true,
+									ElementType:         types.StringType,
 								},
 							},
 						},
@@ -330,8 +330,7 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 						},
 						"ip_prefix_set": schema.SingleNestedBlock{
 							MarkdownDescription: "IP Prefix Set Reference. A list of references to ip_prefix_set objects.",
-							Attributes: map[string]schema.Attribute{
-							},
+							Attributes:          map[string]schema.Attribute{},
 							Blocks: map[string]schema.Block{
 								"ref": schema.ListNestedBlock{
 									MarkdownDescription: "Reference. A list of references to ip_prefix_set objects.",
@@ -339,26 +338,26 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 										Attributes: map[string]schema.Attribute{
 											"kind": schema.StringAttribute{
 												MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-												Optional: true,
-												Computed: true,
+												Optional:            true,
+												Computed:            true,
 											},
 											"name": schema.StringAttribute{
 												MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-												Optional: true,
+												Optional:            true,
 											},
 											"namespace": schema.StringAttribute{
 												MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-												Optional: true,
+												Optional:            true,
 											},
 											"tenant": schema.StringAttribute{
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-												Optional: true,
-												Computed: true,
+												Optional:            true,
+												Computed:            true,
 											},
 											"uid": schema.StringAttribute{
 												MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-												Optional: true,
-												Computed: true,
+												Optional:            true,
+												Computed:            true,
 											},
 										},
 									},
@@ -370,8 +369,8 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 							Attributes: map[string]schema.Attribute{
 								"keys": schema.ListAttribute{
 									MarkdownDescription: "Keys. The list of label key names that have to match",
-									Optional: true,
-									ElementType: types.StringType,
+									Optional:            true,
+									ElementType:         types.StringType,
 								},
 							},
 						},
@@ -380,8 +379,8 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 							Attributes: map[string]schema.Attribute{
 								"expressions": schema.ListAttribute{
 									MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections.",
-									Optional: true,
-									ElementType: types.StringType,
+									Optional:            true,
+									ElementType:         types.StringType,
 								},
 							},
 						},
@@ -390,11 +389,11 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 							Attributes: map[string]schema.Attribute{
 								"description_spec": schema.StringAttribute{
 									MarkdownDescription: "Description. Human readable description.",
-									Optional: true,
+									Optional:            true,
 								},
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 						},
@@ -406,8 +405,8 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 							Attributes: map[string]schema.Attribute{
 								"prefixes": schema.ListAttribute{
 									MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
-									Optional: true,
-									ElementType: types.StringType,
+									Optional:            true,
+									ElementType:         types.StringType,
 								},
 							},
 						},
@@ -416,23 +415,21 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 							Attributes: map[string]schema.Attribute{
 								"port_ranges": schema.ListAttribute{
 									MarkdownDescription: "List of Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192",
-									Optional: true,
-									ElementType: types.StringType,
+									Optional:            true,
+									ElementType:         types.StringType,
 								},
 								"protocol": schema.StringAttribute{
 									MarkdownDescription: "Protocol. Protocol in IP packet to be used as match criteria Values are tcp, udp, and icmp",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 						},
 					},
-
 				},
 			},
 			"endpoint": schema.SingleNestedBlock{
 				MarkdownDescription: "Endpoint Choice. Shape of the endpoint choices for a view",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"any": schema.SingleNestedBlock{
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -445,8 +442,8 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 						Attributes: map[string]schema.Attribute{
 							"expressions": schema.ListAttribute{
 								MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections.",
-								Optional: true,
-								ElementType: types.StringType,
+								Optional:            true,
+								ElementType:         types.StringType,
 							},
 						},
 					},
@@ -458,13 +455,12 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 						Attributes: map[string]schema.Attribute{
 							"prefixes": schema.ListAttribute{
 								MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
-								Optional: true,
-								ElementType: types.StringType,
+								Optional:            true,
+								ElementType:         types.StringType,
 							},
 						},
 					},
 				},
-
 			},
 			"ingress_rules": schema.ListNestedBlock{
 				MarkdownDescription: "Ingress Rules. Ordered list of rules applied to connections to policy endpoints.",
@@ -472,7 +468,7 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 					Attributes: map[string]schema.Attribute{
 						"action": schema.StringAttribute{
 							MarkdownDescription: "Network Policy Rule Action. Network policy rule action configures the action to be taken on rule match Apply deny action on rule match Apply allow action on rule match. Possible values are `DENY`, `ALLOW`. Defaults to `DENY`.",
-							Optional: true,
+							Optional:            true,
 						},
 					},
 					Blocks: map[string]schema.Block{
@@ -481,7 +477,7 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 							Attributes: map[string]schema.Attribute{
 								"action": schema.StringAttribute{
 									MarkdownDescription: "Log Action. Choice to choose logging or no logging This works together with option selected via NetworkPolicyRuleAction or any other action specified x-example: (No Selection in NetworkPolicyRuleAction + AdvancedAction as LOG) = LOG Only, (ALLOW/DENY in NetworkPolicyRuleAction + AdvancedAction as LOG) = Log and Allow/Deny, (ALLOW/DENY in NetworkPolicyRuleAction + NOLOG in AdvancedAction) = Allow/Deny with no log Don't sample the traffic hitting the rule Sample the traffic hitting the rule. Possible values are `NOLOG`, `LOG`. Defaults to `NOLOG`.",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 						},
@@ -502,8 +498,8 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 							Attributes: map[string]schema.Attribute{
 								"applications": schema.ListAttribute{
 									MarkdownDescription: "Application Protocols. Application protocols like HTTP, SNMP. Possible values are `APPLICATION_HTTP`, `APPLICATION_HTTPS`, `APPLICATION_SNMP`, `APPLICATION_DNS`. Defaults to `APPLICATION_HTTP`.",
-									Optional: true,
-									ElementType: types.StringType,
+									Optional:            true,
+									ElementType:         types.StringType,
 								},
 							},
 						},
@@ -512,8 +508,7 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 						},
 						"ip_prefix_set": schema.SingleNestedBlock{
 							MarkdownDescription: "IP Prefix Set Reference. A list of references to ip_prefix_set objects.",
-							Attributes: map[string]schema.Attribute{
-							},
+							Attributes:          map[string]schema.Attribute{},
 							Blocks: map[string]schema.Block{
 								"ref": schema.ListNestedBlock{
 									MarkdownDescription: "Reference. A list of references to ip_prefix_set objects.",
@@ -521,26 +516,26 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 										Attributes: map[string]schema.Attribute{
 											"kind": schema.StringAttribute{
 												MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-												Optional: true,
-												Computed: true,
+												Optional:            true,
+												Computed:            true,
 											},
 											"name": schema.StringAttribute{
 												MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-												Optional: true,
+												Optional:            true,
 											},
 											"namespace": schema.StringAttribute{
 												MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-												Optional: true,
+												Optional:            true,
 											},
 											"tenant": schema.StringAttribute{
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-												Optional: true,
-												Computed: true,
+												Optional:            true,
+												Computed:            true,
 											},
 											"uid": schema.StringAttribute{
 												MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-												Optional: true,
-												Computed: true,
+												Optional:            true,
+												Computed:            true,
 											},
 										},
 									},
@@ -552,8 +547,8 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 							Attributes: map[string]schema.Attribute{
 								"keys": schema.ListAttribute{
 									MarkdownDescription: "Keys. The list of label key names that have to match",
-									Optional: true,
-									ElementType: types.StringType,
+									Optional:            true,
+									ElementType:         types.StringType,
 								},
 							},
 						},
@@ -562,8 +557,8 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 							Attributes: map[string]schema.Attribute{
 								"expressions": schema.ListAttribute{
 									MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections.",
-									Optional: true,
-									ElementType: types.StringType,
+									Optional:            true,
+									ElementType:         types.StringType,
 								},
 							},
 						},
@@ -572,11 +567,11 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 							Attributes: map[string]schema.Attribute{
 								"description_spec": schema.StringAttribute{
 									MarkdownDescription: "Description. Human readable description.",
-									Optional: true,
+									Optional:            true,
 								},
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 						},
@@ -588,8 +583,8 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 							Attributes: map[string]schema.Attribute{
 								"prefixes": schema.ListAttribute{
 									MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
-									Optional: true,
-									ElementType: types.StringType,
+									Optional:            true,
+									ElementType:         types.StringType,
 								},
 							},
 						},
@@ -598,17 +593,16 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 							Attributes: map[string]schema.Attribute{
 								"port_ranges": schema.ListAttribute{
 									MarkdownDescription: "List of Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192",
-									Optional: true,
-									ElementType: types.StringType,
+									Optional:            true,
+									ElementType:         types.StringType,
 								},
 								"protocol": schema.StringAttribute{
 									MarkdownDescription: "Protocol. Protocol in IP packet to be used as match criteria Values are tcp, udp, and icmp",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 						},
 					},
-
 				},
 			},
 		},
@@ -1043,7 +1037,6 @@ func (r *NetworkPolicyViewResource) Create(ctx context.Context, req resource.Cre
 		createReq.Spec["ingress_rules"] = ingress_rulesList
 	}
 
-
 	apiResource, err := r.client.CreateNetworkPolicyView(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create NetworkPolicyView: %s", err))
@@ -1055,7 +1048,7 @@ func (r *NetworkPolicyViewResource) Create(ctx context.Context, req resource.Cre
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["egress_rules"].([]interface{}); ok && len(listData) > 0 {
 		var egress_rulesList []NetworkPolicyViewEgressRulesModel
 		for listIdx, item := range listData {
@@ -1133,8 +1126,7 @@ func (r *NetworkPolicyViewResource) Create(ctx context.Context, req resource.Cre
 					}(),
 					IPPrefixSet: func() *NetworkPolicyViewEgressRulesIPPrefixSetModel {
 						if _, ok := itemMap["ip_prefix_set"].(map[string]interface{}); ok {
-							return &NetworkPolicyViewEgressRulesIPPrefixSetModel{
-							}
+							return &NetworkPolicyViewEgressRulesIPPrefixSetModel{}
 						}
 						return nil
 					}(),
@@ -1336,8 +1328,7 @@ func (r *NetworkPolicyViewResource) Create(ctx context.Context, req resource.Cre
 					}(),
 					IPPrefixSet: func() *NetworkPolicyViewIngressRulesIPPrefixSetModel {
 						if _, ok := itemMap["ip_prefix_set"].(map[string]interface{}); ok {
-							return &NetworkPolicyViewIngressRulesIPPrefixSetModel{
-							}
+							return &NetworkPolicyViewIngressRulesIPPrefixSetModel{}
 						}
 						return nil
 					}(),
@@ -1457,7 +1448,6 @@ func (r *NetworkPolicyViewResource) Create(ctx context.Context, req resource.Cre
 		}
 		data.IngressRules = ingress_rulesList
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -1547,9 +1537,9 @@ func (r *NetworkPolicyViewResource) Read(ctx context.Context, req resource.ReadR
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if listData, ok := apiResource.Spec["egress_rules"].([]interface{}); ok && len(listData) > 0 {
 		var egress_rulesList []NetworkPolicyViewEgressRulesModel
@@ -1628,8 +1618,7 @@ func (r *NetworkPolicyViewResource) Read(ctx context.Context, req resource.ReadR
 					}(),
 					IPPrefixSet: func() *NetworkPolicyViewEgressRulesIPPrefixSetModel {
 						if _, ok := itemMap["ip_prefix_set"].(map[string]interface{}); ok {
-							return &NetworkPolicyViewEgressRulesIPPrefixSetModel{
-							}
+							return &NetworkPolicyViewEgressRulesIPPrefixSetModel{}
 						}
 						return nil
 					}(),
@@ -1831,8 +1820,7 @@ func (r *NetworkPolicyViewResource) Read(ctx context.Context, req resource.ReadR
 					}(),
 					IPPrefixSet: func() *NetworkPolicyViewIngressRulesIPPrefixSetModel {
 						if _, ok := itemMap["ip_prefix_set"].(map[string]interface{}); ok {
-							return &NetworkPolicyViewIngressRulesIPPrefixSetModel{
-							}
+							return &NetworkPolicyViewIngressRulesIPPrefixSetModel{}
 						}
 						return nil
 					}(),
@@ -1952,7 +1940,6 @@ func (r *NetworkPolicyViewResource) Read(ctx context.Context, req resource.ReadR
 		}
 		data.IngressRules = ingress_rulesList
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -2296,7 +2283,6 @@ func (r *NetworkPolicyViewResource) Update(ctx context.Context, req resource.Upd
 		}
 		apiResource.Spec["ingress_rules"] = ingress_rulesList
 	}
-
 
 	updated, err := r.client.UpdateNetworkPolicyView(ctx, apiResource)
 	if err != nil {

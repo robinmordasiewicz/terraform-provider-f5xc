@@ -56,49 +56,49 @@ type CDNLoadBalancerActiveServicePoliciesModel struct {
 
 // CDNLoadBalancerActiveServicePoliciesPoliciesModel represents policies block
 type CDNLoadBalancerActiveServicePoliciesPoliciesModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // CDNLoadBalancerAPIRateLimitModel represents api_rate_limit block
 type CDNLoadBalancerAPIRateLimitModel struct {
-	APIEndpointRules []CDNLoadBalancerAPIRateLimitAPIEndpointRulesModel `tfsdk:"api_endpoint_rules"`
+	APIEndpointRules        []CDNLoadBalancerAPIRateLimitAPIEndpointRulesModel       `tfsdk:"api_endpoint_rules"`
 	BypassRateLimitingRules *CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesModel `tfsdk:"bypass_rate_limiting_rules"`
-	CustomIPAllowedList *CDNLoadBalancerAPIRateLimitCustomIPAllowedListModel `tfsdk:"custom_ip_allowed_list"`
-	IPAllowedList *CDNLoadBalancerAPIRateLimitIPAllowedListModel `tfsdk:"ip_allowed_list"`
-	NoIPAllowedList *CDNLoadBalancerEmptyModel `tfsdk:"no_ip_allowed_list"`
-	ServerURLRules []CDNLoadBalancerAPIRateLimitServerURLRulesModel `tfsdk:"server_url_rules"`
+	CustomIPAllowedList     *CDNLoadBalancerAPIRateLimitCustomIPAllowedListModel     `tfsdk:"custom_ip_allowed_list"`
+	IPAllowedList           *CDNLoadBalancerAPIRateLimitIPAllowedListModel           `tfsdk:"ip_allowed_list"`
+	NoIPAllowedList         *CDNLoadBalancerEmptyModel                               `tfsdk:"no_ip_allowed_list"`
+	ServerURLRules          []CDNLoadBalancerAPIRateLimitServerURLRulesModel         `tfsdk:"server_url_rules"`
 }
 
 // CDNLoadBalancerAPIRateLimitAPIEndpointRulesModel represents api_endpoint_rules block
 type CDNLoadBalancerAPIRateLimitAPIEndpointRulesModel struct {
-	APIEndpointPath types.String `tfsdk:"api_endpoint_path"`
-	SpecificDomain types.String `tfsdk:"specific_domain"`
-	AnyDomain *CDNLoadBalancerEmptyModel `tfsdk:"any_domain"`
+	APIEndpointPath   types.String                                                       `tfsdk:"api_endpoint_path"`
+	SpecificDomain    types.String                                                       `tfsdk:"specific_domain"`
+	AnyDomain         *CDNLoadBalancerEmptyModel                                         `tfsdk:"any_domain"`
 	APIEndpointMethod *CDNLoadBalancerAPIRateLimitAPIEndpointRulesAPIEndpointMethodModel `tfsdk:"api_endpoint_method"`
-	ClientMatcher *CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherModel `tfsdk:"client_matcher"`
+	ClientMatcher     *CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherModel     `tfsdk:"client_matcher"`
 	InlineRateLimiter *CDNLoadBalancerAPIRateLimitAPIEndpointRulesInlineRateLimiterModel `tfsdk:"inline_rate_limiter"`
-	RefRateLimiter *CDNLoadBalancerAPIRateLimitAPIEndpointRulesRefRateLimiterModel `tfsdk:"ref_rate_limiter"`
-	RequestMatcher *CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherModel `tfsdk:"request_matcher"`
+	RefRateLimiter    *CDNLoadBalancerAPIRateLimitAPIEndpointRulesRefRateLimiterModel    `tfsdk:"ref_rate_limiter"`
+	RequestMatcher    *CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherModel    `tfsdk:"request_matcher"`
 }
 
 // CDNLoadBalancerAPIRateLimitAPIEndpointRulesAPIEndpointMethodModel represents api_endpoint_method block
 type CDNLoadBalancerAPIRateLimitAPIEndpointRulesAPIEndpointMethodModel struct {
 	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
-	Methods types.List `tfsdk:"methods"`
+	Methods       types.List `tfsdk:"methods"`
 }
 
 // CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherModel represents client_matcher block
 type CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherModel struct {
-	AnyClient *CDNLoadBalancerEmptyModel `tfsdk:"any_client"`
-	AnyIP *CDNLoadBalancerEmptyModel `tfsdk:"any_ip"`
-	AsnList *CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherAsnListModel `tfsdk:"asn_list"`
-	AsnMatcher *CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherAsnMatcherModel `tfsdk:"asn_matcher"`
-	ClientSelector *CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherClientSelectorModel `tfsdk:"client_selector"`
-	IPMatcher *CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherIPMatcherModel `tfsdk:"ip_matcher"`
-	IPPrefixList *CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherIPPrefixListModel `tfsdk:"ip_prefix_list"`
-	IPThreatCategoryList *CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherIPThreatCategoryListModel `tfsdk:"ip_threat_category_list"`
+	AnyClient             *CDNLoadBalancerEmptyModel                                                          `tfsdk:"any_client"`
+	AnyIP                 *CDNLoadBalancerEmptyModel                                                          `tfsdk:"any_ip"`
+	AsnList               *CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherAsnListModel               `tfsdk:"asn_list"`
+	AsnMatcher            *CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherAsnMatcherModel            `tfsdk:"asn_matcher"`
+	ClientSelector        *CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherClientSelectorModel        `tfsdk:"client_selector"`
+	IPMatcher             *CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherIPMatcherModel             `tfsdk:"ip_matcher"`
+	IPPrefixList          *CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherIPPrefixListModel          `tfsdk:"ip_prefix_list"`
+	IPThreatCategoryList  *CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherIPThreatCategoryListModel  `tfsdk:"ip_threat_category_list"`
 	TLSFingerprintMatcher *CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherTLSFingerprintMatcherModel `tfsdk:"tls_fingerprint_matcher"`
 }
 
@@ -114,11 +114,11 @@ type CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherAsnMatcherModel str
 
 // CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherAsnMatcherAsnSetsModel represents asn_sets block
 type CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherAsnMatcherAsnSetsModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherClientSelectorModel represents client_selector block
@@ -128,23 +128,23 @@ type CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherClientSelectorModel
 
 // CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherIPMatcherModel represents ip_matcher block
 type CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherIPMatcherModel struct {
-	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
-	PrefixSets []CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherIPMatcherPrefixSetsModel `tfsdk:"prefix_sets"`
+	InvertMatcher types.Bool                                                                         `tfsdk:"invert_matcher"`
+	PrefixSets    []CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherIPMatcherPrefixSetsModel `tfsdk:"prefix_sets"`
 }
 
 // CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherIPMatcherPrefixSetsModel represents prefix_sets block
 type CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherIPMatcherPrefixSetsModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherIPPrefixListModel represents ip_prefix_list block
 type CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherIPPrefixListModel struct {
 	InvertMatch types.Bool `tfsdk:"invert_match"`
-	IPPrefixes types.List `tfsdk:"ip_prefixes"`
+	IPPrefixes  types.List `tfsdk:"ip_prefixes"`
 }
 
 // CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherIPThreatCategoryListModel represents ip_threat_category_list block
@@ -154,102 +154,102 @@ type CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherIPThreatCategoryLis
 
 // CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherTLSFingerprintMatcherModel represents tls_fingerprint_matcher block
 type CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherTLSFingerprintMatcherModel struct {
-	Classes types.List `tfsdk:"classes"`
-	ExactValues types.List `tfsdk:"exact_values"`
+	Classes        types.List `tfsdk:"classes"`
+	ExactValues    types.List `tfsdk:"exact_values"`
 	ExcludedValues types.List `tfsdk:"excluded_values"`
 }
 
 // CDNLoadBalancerAPIRateLimitAPIEndpointRulesInlineRateLimiterModel represents inline_rate_limiter block
 type CDNLoadBalancerAPIRateLimitAPIEndpointRulesInlineRateLimiterModel struct {
-	Threshold types.Int64 `tfsdk:"threshold"`
-	Unit types.String `tfsdk:"unit"`
-	RefUserID *CDNLoadBalancerAPIRateLimitAPIEndpointRulesInlineRateLimiterRefUserIDModel `tfsdk:"ref_user_id"`
-	UseHTTPLbUserID *CDNLoadBalancerEmptyModel `tfsdk:"use_http_lb_user_id"`
+	Threshold       types.Int64                                                                 `tfsdk:"threshold"`
+	Unit            types.String                                                                `tfsdk:"unit"`
+	RefUserID       *CDNLoadBalancerAPIRateLimitAPIEndpointRulesInlineRateLimiterRefUserIDModel `tfsdk:"ref_user_id"`
+	UseHTTPLbUserID *CDNLoadBalancerEmptyModel                                                  `tfsdk:"use_http_lb_user_id"`
 }
 
 // CDNLoadBalancerAPIRateLimitAPIEndpointRulesInlineRateLimiterRefUserIDModel represents ref_user_id block
 type CDNLoadBalancerAPIRateLimitAPIEndpointRulesInlineRateLimiterRefUserIDModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // CDNLoadBalancerAPIRateLimitAPIEndpointRulesRefRateLimiterModel represents ref_rate_limiter block
 type CDNLoadBalancerAPIRateLimitAPIEndpointRulesRefRateLimiterModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherModel represents request_matcher block
 type CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherModel struct {
 	CookieMatchers []CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherCookieMatchersModel `tfsdk:"cookie_matchers"`
-	Headers []CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherHeadersModel `tfsdk:"headers"`
-	JwtClaims []CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherJwtClaimsModel `tfsdk:"jwt_claims"`
-	QueryParams []CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherQueryParamsModel `tfsdk:"query_params"`
+	Headers        []CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherHeadersModel        `tfsdk:"headers"`
+	JwtClaims      []CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherJwtClaimsModel      `tfsdk:"jwt_claims"`
+	QueryParams    []CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherQueryParamsModel    `tfsdk:"query_params"`
 }
 
 // CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherCookieMatchersModel represents cookie_matchers block
 type CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherCookieMatchersModel struct {
-	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
-	Name types.String `tfsdk:"name"`
-	CheckNotPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_not_present"`
-	CheckPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_present"`
-	Item *CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherCookieMatchersItemModel `tfsdk:"item"`
+	InvertMatcher   types.Bool                                                                        `tfsdk:"invert_matcher"`
+	Name            types.String                                                                      `tfsdk:"name"`
+	CheckNotPresent *CDNLoadBalancerEmptyModel                                                        `tfsdk:"check_not_present"`
+	CheckPresent    *CDNLoadBalancerEmptyModel                                                        `tfsdk:"check_present"`
+	Item            *CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherCookieMatchersItemModel `tfsdk:"item"`
 }
 
 // CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherCookieMatchersItemModel represents item block
 type CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherCookieMatchersItemModel struct {
-	ExactValues types.List `tfsdk:"exact_values"`
-	RegexValues types.List `tfsdk:"regex_values"`
+	ExactValues  types.List `tfsdk:"exact_values"`
+	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
 }
 
 // CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherHeadersModel represents headers block
 type CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherHeadersModel struct {
-	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
-	Name types.String `tfsdk:"name"`
-	CheckNotPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_not_present"`
-	CheckPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_present"`
-	Item *CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherHeadersItemModel `tfsdk:"item"`
+	InvertMatcher   types.Bool                                                                 `tfsdk:"invert_matcher"`
+	Name            types.String                                                               `tfsdk:"name"`
+	CheckNotPresent *CDNLoadBalancerEmptyModel                                                 `tfsdk:"check_not_present"`
+	CheckPresent    *CDNLoadBalancerEmptyModel                                                 `tfsdk:"check_present"`
+	Item            *CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherHeadersItemModel `tfsdk:"item"`
 }
 
 // CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherHeadersItemModel represents item block
 type CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherHeadersItemModel struct {
-	ExactValues types.List `tfsdk:"exact_values"`
-	RegexValues types.List `tfsdk:"regex_values"`
+	ExactValues  types.List `tfsdk:"exact_values"`
+	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
 }
 
 // CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherJwtClaimsModel represents jwt_claims block
 type CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherJwtClaimsModel struct {
-	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
-	Name types.String `tfsdk:"name"`
-	CheckNotPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_not_present"`
-	CheckPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_present"`
-	Item *CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherJwtClaimsItemModel `tfsdk:"item"`
+	InvertMatcher   types.Bool                                                                   `tfsdk:"invert_matcher"`
+	Name            types.String                                                                 `tfsdk:"name"`
+	CheckNotPresent *CDNLoadBalancerEmptyModel                                                   `tfsdk:"check_not_present"`
+	CheckPresent    *CDNLoadBalancerEmptyModel                                                   `tfsdk:"check_present"`
+	Item            *CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherJwtClaimsItemModel `tfsdk:"item"`
 }
 
 // CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherJwtClaimsItemModel represents item block
 type CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherJwtClaimsItemModel struct {
-	ExactValues types.List `tfsdk:"exact_values"`
-	RegexValues types.List `tfsdk:"regex_values"`
+	ExactValues  types.List `tfsdk:"exact_values"`
+	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
 }
 
 // CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherQueryParamsModel represents query_params block
 type CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherQueryParamsModel struct {
-	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
-	Key types.String `tfsdk:"key"`
-	CheckNotPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_not_present"`
-	CheckPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_present"`
-	Item *CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherQueryParamsItemModel `tfsdk:"item"`
+	InvertMatcher   types.Bool                                                                     `tfsdk:"invert_matcher"`
+	Key             types.String                                                                   `tfsdk:"key"`
+	CheckNotPresent *CDNLoadBalancerEmptyModel                                                     `tfsdk:"check_not_present"`
+	CheckPresent    *CDNLoadBalancerEmptyModel                                                     `tfsdk:"check_present"`
+	Item            *CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherQueryParamsItemModel `tfsdk:"item"`
 }
 
 // CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherQueryParamsItemModel represents item block
 type CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherQueryParamsItemModel struct {
-	ExactValues types.List `tfsdk:"exact_values"`
-	RegexValues types.List `tfsdk:"regex_values"`
+	ExactValues  types.List `tfsdk:"exact_values"`
+	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
 }
 
@@ -260,20 +260,20 @@ type CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesModel struct {
 
 // CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesModel represents bypass_rate_limiting_rules block
 type CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesModel struct {
-	BasePath types.String `tfsdk:"base_path"`
-	SpecificDomain types.String `tfsdk:"specific_domain"`
-	AnyDomain *CDNLoadBalancerEmptyModel `tfsdk:"any_domain"`
-	AnyURL *CDNLoadBalancerEmptyModel `tfsdk:"any_url"`
-	APIEndpoint *CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesAPIEndpointModel `tfsdk:"api_endpoint"`
-	APIGroups *CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesAPIGroupsModel `tfsdk:"api_groups"`
-	ClientMatcher *CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherModel `tfsdk:"client_matcher"`
+	BasePath       types.String                                                                                  `tfsdk:"base_path"`
+	SpecificDomain types.String                                                                                  `tfsdk:"specific_domain"`
+	AnyDomain      *CDNLoadBalancerEmptyModel                                                                    `tfsdk:"any_domain"`
+	AnyURL         *CDNLoadBalancerEmptyModel                                                                    `tfsdk:"any_url"`
+	APIEndpoint    *CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesAPIEndpointModel    `tfsdk:"api_endpoint"`
+	APIGroups      *CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesAPIGroupsModel      `tfsdk:"api_groups"`
+	ClientMatcher  *CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherModel  `tfsdk:"client_matcher"`
 	RequestMatcher *CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherModel `tfsdk:"request_matcher"`
 }
 
 // CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesAPIEndpointModel represents api_endpoint block
 type CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesAPIEndpointModel struct {
-	Methods types.List `tfsdk:"methods"`
-	Path types.String `tfsdk:"path"`
+	Methods types.List   `tfsdk:"methods"`
+	Path    types.String `tfsdk:"path"`
 }
 
 // CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesAPIGroupsModel represents api_groups block
@@ -283,14 +283,14 @@ type CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesAP
 
 // CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherModel represents client_matcher block
 type CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherModel struct {
-	AnyClient *CDNLoadBalancerEmptyModel `tfsdk:"any_client"`
-	AnyIP *CDNLoadBalancerEmptyModel `tfsdk:"any_ip"`
-	AsnList *CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherAsnListModel `tfsdk:"asn_list"`
-	AsnMatcher *CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherAsnMatcherModel `tfsdk:"asn_matcher"`
-	ClientSelector *CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherClientSelectorModel `tfsdk:"client_selector"`
-	IPMatcher *CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherIPMatcherModel `tfsdk:"ip_matcher"`
-	IPPrefixList *CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherIPPrefixListModel `tfsdk:"ip_prefix_list"`
-	IPThreatCategoryList *CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherIPThreatCategoryListModel `tfsdk:"ip_threat_category_list"`
+	AnyClient             *CDNLoadBalancerEmptyModel                                                                                        `tfsdk:"any_client"`
+	AnyIP                 *CDNLoadBalancerEmptyModel                                                                                        `tfsdk:"any_ip"`
+	AsnList               *CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherAsnListModel               `tfsdk:"asn_list"`
+	AsnMatcher            *CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherAsnMatcherModel            `tfsdk:"asn_matcher"`
+	ClientSelector        *CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherClientSelectorModel        `tfsdk:"client_selector"`
+	IPMatcher             *CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherIPMatcherModel             `tfsdk:"ip_matcher"`
+	IPPrefixList          *CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherIPPrefixListModel          `tfsdk:"ip_prefix_list"`
+	IPThreatCategoryList  *CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherIPThreatCategoryListModel  `tfsdk:"ip_threat_category_list"`
 	TLSFingerprintMatcher *CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherTLSFingerprintMatcherModel `tfsdk:"tls_fingerprint_matcher"`
 }
 
@@ -306,11 +306,11 @@ type CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesCl
 
 // CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherAsnMatcherAsnSetsModel represents asn_sets block
 type CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherAsnMatcherAsnSetsModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherClientSelectorModel represents client_selector block
@@ -320,23 +320,23 @@ type CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesCl
 
 // CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherIPMatcherModel represents ip_matcher block
 type CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherIPMatcherModel struct {
-	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
-	PrefixSets []CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherIPMatcherPrefixSetsModel `tfsdk:"prefix_sets"`
+	InvertMatcher types.Bool                                                                                                       `tfsdk:"invert_matcher"`
+	PrefixSets    []CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherIPMatcherPrefixSetsModel `tfsdk:"prefix_sets"`
 }
 
 // CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherIPMatcherPrefixSetsModel represents prefix_sets block
 type CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherIPMatcherPrefixSetsModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherIPPrefixListModel represents ip_prefix_list block
 type CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherIPPrefixListModel struct {
 	InvertMatch types.Bool `tfsdk:"invert_match"`
-	IPPrefixes types.List `tfsdk:"ip_prefixes"`
+	IPPrefixes  types.List `tfsdk:"ip_prefixes"`
 }
 
 // CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherIPThreatCategoryListModel represents ip_threat_category_list block
@@ -346,80 +346,80 @@ type CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesCl
 
 // CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherTLSFingerprintMatcherModel represents tls_fingerprint_matcher block
 type CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherTLSFingerprintMatcherModel struct {
-	Classes types.List `tfsdk:"classes"`
-	ExactValues types.List `tfsdk:"exact_values"`
+	Classes        types.List `tfsdk:"classes"`
+	ExactValues    types.List `tfsdk:"exact_values"`
 	ExcludedValues types.List `tfsdk:"excluded_values"`
 }
 
 // CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherModel represents request_matcher block
 type CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherModel struct {
 	CookieMatchers []CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherCookieMatchersModel `tfsdk:"cookie_matchers"`
-	Headers []CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherHeadersModel `tfsdk:"headers"`
-	JwtClaims []CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherJwtClaimsModel `tfsdk:"jwt_claims"`
-	QueryParams []CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherQueryParamsModel `tfsdk:"query_params"`
+	Headers        []CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherHeadersModel        `tfsdk:"headers"`
+	JwtClaims      []CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherJwtClaimsModel      `tfsdk:"jwt_claims"`
+	QueryParams    []CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherQueryParamsModel    `tfsdk:"query_params"`
 }
 
 // CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherCookieMatchersModel represents cookie_matchers block
 type CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherCookieMatchersModel struct {
-	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
-	Name types.String `tfsdk:"name"`
-	CheckNotPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_not_present"`
-	CheckPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_present"`
-	Item *CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherCookieMatchersItemModel `tfsdk:"item"`
+	InvertMatcher   types.Bool                                                                                                      `tfsdk:"invert_matcher"`
+	Name            types.String                                                                                                    `tfsdk:"name"`
+	CheckNotPresent *CDNLoadBalancerEmptyModel                                                                                      `tfsdk:"check_not_present"`
+	CheckPresent    *CDNLoadBalancerEmptyModel                                                                                      `tfsdk:"check_present"`
+	Item            *CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherCookieMatchersItemModel `tfsdk:"item"`
 }
 
 // CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherCookieMatchersItemModel represents item block
 type CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherCookieMatchersItemModel struct {
-	ExactValues types.List `tfsdk:"exact_values"`
-	RegexValues types.List `tfsdk:"regex_values"`
+	ExactValues  types.List `tfsdk:"exact_values"`
+	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
 }
 
 // CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherHeadersModel represents headers block
 type CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherHeadersModel struct {
-	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
-	Name types.String `tfsdk:"name"`
-	CheckNotPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_not_present"`
-	CheckPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_present"`
-	Item *CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherHeadersItemModel `tfsdk:"item"`
+	InvertMatcher   types.Bool                                                                                               `tfsdk:"invert_matcher"`
+	Name            types.String                                                                                             `tfsdk:"name"`
+	CheckNotPresent *CDNLoadBalancerEmptyModel                                                                               `tfsdk:"check_not_present"`
+	CheckPresent    *CDNLoadBalancerEmptyModel                                                                               `tfsdk:"check_present"`
+	Item            *CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherHeadersItemModel `tfsdk:"item"`
 }
 
 // CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherHeadersItemModel represents item block
 type CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherHeadersItemModel struct {
-	ExactValues types.List `tfsdk:"exact_values"`
-	RegexValues types.List `tfsdk:"regex_values"`
+	ExactValues  types.List `tfsdk:"exact_values"`
+	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
 }
 
 // CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherJwtClaimsModel represents jwt_claims block
 type CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherJwtClaimsModel struct {
-	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
-	Name types.String `tfsdk:"name"`
-	CheckNotPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_not_present"`
-	CheckPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_present"`
-	Item *CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherJwtClaimsItemModel `tfsdk:"item"`
+	InvertMatcher   types.Bool                                                                                                 `tfsdk:"invert_matcher"`
+	Name            types.String                                                                                               `tfsdk:"name"`
+	CheckNotPresent *CDNLoadBalancerEmptyModel                                                                                 `tfsdk:"check_not_present"`
+	CheckPresent    *CDNLoadBalancerEmptyModel                                                                                 `tfsdk:"check_present"`
+	Item            *CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherJwtClaimsItemModel `tfsdk:"item"`
 }
 
 // CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherJwtClaimsItemModel represents item block
 type CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherJwtClaimsItemModel struct {
-	ExactValues types.List `tfsdk:"exact_values"`
-	RegexValues types.List `tfsdk:"regex_values"`
+	ExactValues  types.List `tfsdk:"exact_values"`
+	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
 }
 
 // CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherQueryParamsModel represents query_params block
 type CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherQueryParamsModel struct {
-	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
-	Key types.String `tfsdk:"key"`
-	CheckNotPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_not_present"`
-	CheckPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_present"`
-	Item *CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherQueryParamsItemModel `tfsdk:"item"`
+	InvertMatcher   types.Bool                                                                                                   `tfsdk:"invert_matcher"`
+	Key             types.String                                                                                                 `tfsdk:"key"`
+	CheckNotPresent *CDNLoadBalancerEmptyModel                                                                                   `tfsdk:"check_not_present"`
+	CheckPresent    *CDNLoadBalancerEmptyModel                                                                                   `tfsdk:"check_present"`
+	Item            *CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherQueryParamsItemModel `tfsdk:"item"`
 }
 
 // CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherQueryParamsItemModel represents item block
 type CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherQueryParamsItemModel struct {
-	ExactValues types.List `tfsdk:"exact_values"`
-	RegexValues types.List `tfsdk:"regex_values"`
+	ExactValues  types.List `tfsdk:"exact_values"`
+	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
 }
 
@@ -430,9 +430,9 @@ type CDNLoadBalancerAPIRateLimitCustomIPAllowedListModel struct {
 
 // CDNLoadBalancerAPIRateLimitCustomIPAllowedListRateLimiterAllowedPrefixesModel represents rate_limiter_allowed_prefixes block
 type CDNLoadBalancerAPIRateLimitCustomIPAllowedListRateLimiterAllowedPrefixesModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // CDNLoadBalancerAPIRateLimitIPAllowedListModel represents ip_allowed_list block
@@ -442,26 +442,26 @@ type CDNLoadBalancerAPIRateLimitIPAllowedListModel struct {
 
 // CDNLoadBalancerAPIRateLimitServerURLRulesModel represents server_url_rules block
 type CDNLoadBalancerAPIRateLimitServerURLRulesModel struct {
-	APIGroup types.String `tfsdk:"api_group"`
-	BasePath types.String `tfsdk:"base_path"`
-	SpecificDomain types.String `tfsdk:"specific_domain"`
-	AnyDomain *CDNLoadBalancerEmptyModel `tfsdk:"any_domain"`
-	ClientMatcher *CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherModel `tfsdk:"client_matcher"`
+	APIGroup          types.String                                                     `tfsdk:"api_group"`
+	BasePath          types.String                                                     `tfsdk:"base_path"`
+	SpecificDomain    types.String                                                     `tfsdk:"specific_domain"`
+	AnyDomain         *CDNLoadBalancerEmptyModel                                       `tfsdk:"any_domain"`
+	ClientMatcher     *CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherModel     `tfsdk:"client_matcher"`
 	InlineRateLimiter *CDNLoadBalancerAPIRateLimitServerURLRulesInlineRateLimiterModel `tfsdk:"inline_rate_limiter"`
-	RefRateLimiter *CDNLoadBalancerAPIRateLimitServerURLRulesRefRateLimiterModel `tfsdk:"ref_rate_limiter"`
-	RequestMatcher *CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherModel `tfsdk:"request_matcher"`
+	RefRateLimiter    *CDNLoadBalancerAPIRateLimitServerURLRulesRefRateLimiterModel    `tfsdk:"ref_rate_limiter"`
+	RequestMatcher    *CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherModel    `tfsdk:"request_matcher"`
 }
 
 // CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherModel represents client_matcher block
 type CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherModel struct {
-	AnyClient *CDNLoadBalancerEmptyModel `tfsdk:"any_client"`
-	AnyIP *CDNLoadBalancerEmptyModel `tfsdk:"any_ip"`
-	AsnList *CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherAsnListModel `tfsdk:"asn_list"`
-	AsnMatcher *CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherAsnMatcherModel `tfsdk:"asn_matcher"`
-	ClientSelector *CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherClientSelectorModel `tfsdk:"client_selector"`
-	IPMatcher *CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherIPMatcherModel `tfsdk:"ip_matcher"`
-	IPPrefixList *CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherIPPrefixListModel `tfsdk:"ip_prefix_list"`
-	IPThreatCategoryList *CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherIPThreatCategoryListModel `tfsdk:"ip_threat_category_list"`
+	AnyClient             *CDNLoadBalancerEmptyModel                                                        `tfsdk:"any_client"`
+	AnyIP                 *CDNLoadBalancerEmptyModel                                                        `tfsdk:"any_ip"`
+	AsnList               *CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherAsnListModel               `tfsdk:"asn_list"`
+	AsnMatcher            *CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherAsnMatcherModel            `tfsdk:"asn_matcher"`
+	ClientSelector        *CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherClientSelectorModel        `tfsdk:"client_selector"`
+	IPMatcher             *CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherIPMatcherModel             `tfsdk:"ip_matcher"`
+	IPPrefixList          *CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherIPPrefixListModel          `tfsdk:"ip_prefix_list"`
+	IPThreatCategoryList  *CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherIPThreatCategoryListModel  `tfsdk:"ip_threat_category_list"`
 	TLSFingerprintMatcher *CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherTLSFingerprintMatcherModel `tfsdk:"tls_fingerprint_matcher"`
 }
 
@@ -477,11 +477,11 @@ type CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherAsnMatcherModel struc
 
 // CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherAsnMatcherAsnSetsModel represents asn_sets block
 type CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherAsnMatcherAsnSetsModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherClientSelectorModel represents client_selector block
@@ -491,23 +491,23 @@ type CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherClientSelectorModel s
 
 // CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherIPMatcherModel represents ip_matcher block
 type CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherIPMatcherModel struct {
-	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
-	PrefixSets []CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherIPMatcherPrefixSetsModel `tfsdk:"prefix_sets"`
+	InvertMatcher types.Bool                                                                       `tfsdk:"invert_matcher"`
+	PrefixSets    []CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherIPMatcherPrefixSetsModel `tfsdk:"prefix_sets"`
 }
 
 // CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherIPMatcherPrefixSetsModel represents prefix_sets block
 type CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherIPMatcherPrefixSetsModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherIPPrefixListModel represents ip_prefix_list block
 type CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherIPPrefixListModel struct {
 	InvertMatch types.Bool `tfsdk:"invert_match"`
-	IPPrefixes types.List `tfsdk:"ip_prefixes"`
+	IPPrefixes  types.List `tfsdk:"ip_prefixes"`
 }
 
 // CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherIPThreatCategoryListModel represents ip_threat_category_list block
@@ -517,130 +517,130 @@ type CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherIPThreatCategoryListM
 
 // CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherTLSFingerprintMatcherModel represents tls_fingerprint_matcher block
 type CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherTLSFingerprintMatcherModel struct {
-	Classes types.List `tfsdk:"classes"`
-	ExactValues types.List `tfsdk:"exact_values"`
+	Classes        types.List `tfsdk:"classes"`
+	ExactValues    types.List `tfsdk:"exact_values"`
 	ExcludedValues types.List `tfsdk:"excluded_values"`
 }
 
 // CDNLoadBalancerAPIRateLimitServerURLRulesInlineRateLimiterModel represents inline_rate_limiter block
 type CDNLoadBalancerAPIRateLimitServerURLRulesInlineRateLimiterModel struct {
-	Threshold types.Int64 `tfsdk:"threshold"`
-	Unit types.String `tfsdk:"unit"`
-	RefUserID *CDNLoadBalancerAPIRateLimitServerURLRulesInlineRateLimiterRefUserIDModel `tfsdk:"ref_user_id"`
-	UseHTTPLbUserID *CDNLoadBalancerEmptyModel `tfsdk:"use_http_lb_user_id"`
+	Threshold       types.Int64                                                               `tfsdk:"threshold"`
+	Unit            types.String                                                              `tfsdk:"unit"`
+	RefUserID       *CDNLoadBalancerAPIRateLimitServerURLRulesInlineRateLimiterRefUserIDModel `tfsdk:"ref_user_id"`
+	UseHTTPLbUserID *CDNLoadBalancerEmptyModel                                                `tfsdk:"use_http_lb_user_id"`
 }
 
 // CDNLoadBalancerAPIRateLimitServerURLRulesInlineRateLimiterRefUserIDModel represents ref_user_id block
 type CDNLoadBalancerAPIRateLimitServerURLRulesInlineRateLimiterRefUserIDModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // CDNLoadBalancerAPIRateLimitServerURLRulesRefRateLimiterModel represents ref_rate_limiter block
 type CDNLoadBalancerAPIRateLimitServerURLRulesRefRateLimiterModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherModel represents request_matcher block
 type CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherModel struct {
 	CookieMatchers []CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherCookieMatchersModel `tfsdk:"cookie_matchers"`
-	Headers []CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherHeadersModel `tfsdk:"headers"`
-	JwtClaims []CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherJwtClaimsModel `tfsdk:"jwt_claims"`
-	QueryParams []CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherQueryParamsModel `tfsdk:"query_params"`
+	Headers        []CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherHeadersModel        `tfsdk:"headers"`
+	JwtClaims      []CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherJwtClaimsModel      `tfsdk:"jwt_claims"`
+	QueryParams    []CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherQueryParamsModel    `tfsdk:"query_params"`
 }
 
 // CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherCookieMatchersModel represents cookie_matchers block
 type CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherCookieMatchersModel struct {
-	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
-	Name types.String `tfsdk:"name"`
-	CheckNotPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_not_present"`
-	CheckPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_present"`
-	Item *CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherCookieMatchersItemModel `tfsdk:"item"`
+	InvertMatcher   types.Bool                                                                      `tfsdk:"invert_matcher"`
+	Name            types.String                                                                    `tfsdk:"name"`
+	CheckNotPresent *CDNLoadBalancerEmptyModel                                                      `tfsdk:"check_not_present"`
+	CheckPresent    *CDNLoadBalancerEmptyModel                                                      `tfsdk:"check_present"`
+	Item            *CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherCookieMatchersItemModel `tfsdk:"item"`
 }
 
 // CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherCookieMatchersItemModel represents item block
 type CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherCookieMatchersItemModel struct {
-	ExactValues types.List `tfsdk:"exact_values"`
-	RegexValues types.List `tfsdk:"regex_values"`
+	ExactValues  types.List `tfsdk:"exact_values"`
+	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
 }
 
 // CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherHeadersModel represents headers block
 type CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherHeadersModel struct {
-	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
-	Name types.String `tfsdk:"name"`
-	CheckNotPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_not_present"`
-	CheckPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_present"`
-	Item *CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherHeadersItemModel `tfsdk:"item"`
+	InvertMatcher   types.Bool                                                               `tfsdk:"invert_matcher"`
+	Name            types.String                                                             `tfsdk:"name"`
+	CheckNotPresent *CDNLoadBalancerEmptyModel                                               `tfsdk:"check_not_present"`
+	CheckPresent    *CDNLoadBalancerEmptyModel                                               `tfsdk:"check_present"`
+	Item            *CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherHeadersItemModel `tfsdk:"item"`
 }
 
 // CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherHeadersItemModel represents item block
 type CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherHeadersItemModel struct {
-	ExactValues types.List `tfsdk:"exact_values"`
-	RegexValues types.List `tfsdk:"regex_values"`
+	ExactValues  types.List `tfsdk:"exact_values"`
+	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
 }
 
 // CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherJwtClaimsModel represents jwt_claims block
 type CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherJwtClaimsModel struct {
-	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
-	Name types.String `tfsdk:"name"`
-	CheckNotPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_not_present"`
-	CheckPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_present"`
-	Item *CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherJwtClaimsItemModel `tfsdk:"item"`
+	InvertMatcher   types.Bool                                                                 `tfsdk:"invert_matcher"`
+	Name            types.String                                                               `tfsdk:"name"`
+	CheckNotPresent *CDNLoadBalancerEmptyModel                                                 `tfsdk:"check_not_present"`
+	CheckPresent    *CDNLoadBalancerEmptyModel                                                 `tfsdk:"check_present"`
+	Item            *CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherJwtClaimsItemModel `tfsdk:"item"`
 }
 
 // CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherJwtClaimsItemModel represents item block
 type CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherJwtClaimsItemModel struct {
-	ExactValues types.List `tfsdk:"exact_values"`
-	RegexValues types.List `tfsdk:"regex_values"`
+	ExactValues  types.List `tfsdk:"exact_values"`
+	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
 }
 
 // CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherQueryParamsModel represents query_params block
 type CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherQueryParamsModel struct {
-	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
-	Key types.String `tfsdk:"key"`
-	CheckNotPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_not_present"`
-	CheckPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_present"`
-	Item *CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherQueryParamsItemModel `tfsdk:"item"`
+	InvertMatcher   types.Bool                                                                   `tfsdk:"invert_matcher"`
+	Key             types.String                                                                 `tfsdk:"key"`
+	CheckNotPresent *CDNLoadBalancerEmptyModel                                                   `tfsdk:"check_not_present"`
+	CheckPresent    *CDNLoadBalancerEmptyModel                                                   `tfsdk:"check_present"`
+	Item            *CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherQueryParamsItemModel `tfsdk:"item"`
 }
 
 // CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherQueryParamsItemModel represents item block
 type CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherQueryParamsItemModel struct {
-	ExactValues types.List `tfsdk:"exact_values"`
-	RegexValues types.List `tfsdk:"regex_values"`
+	ExactValues  types.List `tfsdk:"exact_values"`
+	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
 }
 
 // CDNLoadBalancerAPISpecificationModel represents api_specification block
 type CDNLoadBalancerAPISpecificationModel struct {
-	APIDefinition *CDNLoadBalancerAPISpecificationAPIDefinitionModel `tfsdk:"api_definition"`
+	APIDefinition              *CDNLoadBalancerAPISpecificationAPIDefinitionModel              `tfsdk:"api_definition"`
 	ValidationAllSpecEndpoints *CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsModel `tfsdk:"validation_all_spec_endpoints"`
-	ValidationCustomList *CDNLoadBalancerAPISpecificationValidationCustomListModel `tfsdk:"validation_custom_list"`
-	ValidationDisabled *CDNLoadBalancerEmptyModel `tfsdk:"validation_disabled"`
+	ValidationCustomList       *CDNLoadBalancerAPISpecificationValidationCustomListModel       `tfsdk:"validation_custom_list"`
+	ValidationDisabled         *CDNLoadBalancerEmptyModel                                      `tfsdk:"validation_disabled"`
 }
 
 // CDNLoadBalancerAPISpecificationAPIDefinitionModel represents api_definition block
 type CDNLoadBalancerAPISpecificationAPIDefinitionModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsModel represents validation_all_spec_endpoints block
 type CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsModel struct {
 	FallThroughMode *CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeModel `tfsdk:"fall_through_mode"`
-	Settings *CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsSettingsModel `tfsdk:"settings"`
-	ValidationMode *CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsValidationModeModel `tfsdk:"validation_mode"`
+	Settings        *CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsSettingsModel        `tfsdk:"settings"`
+	ValidationMode  *CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsValidationModeModel  `tfsdk:"validation_mode"`
 }
 
 // CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeModel represents fall_through_mode block
 type CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeModel struct {
-	FallThroughModeAllow *CDNLoadBalancerEmptyModel `tfsdk:"fall_through_mode_allow"`
+	FallThroughModeAllow  *CDNLoadBalancerEmptyModel                                                                          `tfsdk:"fall_through_mode_allow"`
 	FallThroughModeCustom *CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeFallThroughModeCustomModel `tfsdk:"fall_through_mode_custom"`
 }
 
@@ -651,33 +651,33 @@ type CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeFal
 
 // CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeFallThroughModeCustomOpenAPIValidationRulesModel represents open_api_validation_rules block
 type CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeFallThroughModeCustomOpenAPIValidationRulesModel struct {
-	APIGroup types.String `tfsdk:"api_group"`
-	BasePath types.String `tfsdk:"base_path"`
-	ActionBlock *CDNLoadBalancerEmptyModel `tfsdk:"action_block"`
-	ActionReport *CDNLoadBalancerEmptyModel `tfsdk:"action_report"`
-	ActionSkip *CDNLoadBalancerEmptyModel `tfsdk:"action_skip"`
-	APIEndpoint *CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeFallThroughModeCustomOpenAPIValidationRulesAPIEndpointModel `tfsdk:"api_endpoint"`
-	Metadata *CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeFallThroughModeCustomOpenAPIValidationRulesMetadataModel `tfsdk:"metadata"`
+	APIGroup     types.String                                                                                                                         `tfsdk:"api_group"`
+	BasePath     types.String                                                                                                                         `tfsdk:"base_path"`
+	ActionBlock  *CDNLoadBalancerEmptyModel                                                                                                           `tfsdk:"action_block"`
+	ActionReport *CDNLoadBalancerEmptyModel                                                                                                           `tfsdk:"action_report"`
+	ActionSkip   *CDNLoadBalancerEmptyModel                                                                                                           `tfsdk:"action_skip"`
+	APIEndpoint  *CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeFallThroughModeCustomOpenAPIValidationRulesAPIEndpointModel `tfsdk:"api_endpoint"`
+	Metadata     *CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeFallThroughModeCustomOpenAPIValidationRulesMetadataModel    `tfsdk:"metadata"`
 }
 
 // CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeFallThroughModeCustomOpenAPIValidationRulesAPIEndpointModel represents api_endpoint block
 type CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeFallThroughModeCustomOpenAPIValidationRulesAPIEndpointModel struct {
-	Methods types.List `tfsdk:"methods"`
-	Path types.String `tfsdk:"path"`
+	Methods types.List   `tfsdk:"methods"`
+	Path    types.String `tfsdk:"path"`
 }
 
 // CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeFallThroughModeCustomOpenAPIValidationRulesMetadataModel represents metadata block
 type CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeFallThroughModeCustomOpenAPIValidationRulesMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
-	Name types.String `tfsdk:"name"`
+	Name            types.String `tfsdk:"name"`
 }
 
 // CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsSettingsModel represents settings block
 type CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsSettingsModel struct {
-	OversizedBodyFailValidation *CDNLoadBalancerEmptyModel `tfsdk:"oversized_body_fail_validation"`
-	OversizedBodySkipValidation *CDNLoadBalancerEmptyModel `tfsdk:"oversized_body_skip_validation"`
-	PropertyValidationSettingsCustom *CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsSettingsPropertyValidationSettingsCustomModel `tfsdk:"property_validation_settings_custom"`
-	PropertyValidationSettingsDefault *CDNLoadBalancerEmptyModel `tfsdk:"property_validation_settings_default"`
+	OversizedBodyFailValidation       *CDNLoadBalancerEmptyModel                                                                              `tfsdk:"oversized_body_fail_validation"`
+	OversizedBodySkipValidation       *CDNLoadBalancerEmptyModel                                                                              `tfsdk:"oversized_body_skip_validation"`
+	PropertyValidationSettingsCustom  *CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsSettingsPropertyValidationSettingsCustomModel `tfsdk:"property_validation_settings_custom"`
+	PropertyValidationSettingsDefault *CDNLoadBalancerEmptyModel                                                                              `tfsdk:"property_validation_settings_default"`
 }
 
 // CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsSettingsPropertyValidationSettingsCustomModel represents property_validation_settings_custom block
@@ -687,42 +687,42 @@ type CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsSettingsPropertyVa
 
 // CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsSettingsPropertyValidationSettingsCustomQueryParametersModel represents query_parameters block
 type CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsSettingsPropertyValidationSettingsCustomQueryParametersModel struct {
-	AllowAdditionalParameters *CDNLoadBalancerEmptyModel `tfsdk:"allow_additional_parameters"`
+	AllowAdditionalParameters    *CDNLoadBalancerEmptyModel `tfsdk:"allow_additional_parameters"`
 	DisallowAdditionalParameters *CDNLoadBalancerEmptyModel `tfsdk:"disallow_additional_parameters"`
 }
 
 // CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsValidationModeModel represents validation_mode block
 type CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsValidationModeModel struct {
 	ResponseValidationModeActive *CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsValidationModeResponseValidationModeActiveModel `tfsdk:"response_validation_mode_active"`
-	SkipResponseValidation *CDNLoadBalancerEmptyModel `tfsdk:"skip_response_validation"`
-	SkipValidation *CDNLoadBalancerEmptyModel `tfsdk:"skip_validation"`
-	ValidationModeActive *CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsValidationModeValidationModeActiveModel `tfsdk:"validation_mode_active"`
+	SkipResponseValidation       *CDNLoadBalancerEmptyModel                                                                                `tfsdk:"skip_response_validation"`
+	SkipValidation               *CDNLoadBalancerEmptyModel                                                                                `tfsdk:"skip_validation"`
+	ValidationModeActive         *CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsValidationModeValidationModeActiveModel         `tfsdk:"validation_mode_active"`
 }
 
 // CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsValidationModeResponseValidationModeActiveModel represents response_validation_mode_active block
 type CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsValidationModeResponseValidationModeActiveModel struct {
-	ResponseValidationProperties types.List `tfsdk:"response_validation_properties"`
-	EnforcementBlock *CDNLoadBalancerEmptyModel `tfsdk:"enforcement_block"`
-	EnforcementReport *CDNLoadBalancerEmptyModel `tfsdk:"enforcement_report"`
+	ResponseValidationProperties types.List                 `tfsdk:"response_validation_properties"`
+	EnforcementBlock             *CDNLoadBalancerEmptyModel `tfsdk:"enforcement_block"`
+	EnforcementReport            *CDNLoadBalancerEmptyModel `tfsdk:"enforcement_report"`
 }
 
 // CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsValidationModeValidationModeActiveModel represents validation_mode_active block
 type CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsValidationModeValidationModeActiveModel struct {
-	RequestValidationProperties types.List `tfsdk:"request_validation_properties"`
-	EnforcementBlock *CDNLoadBalancerEmptyModel `tfsdk:"enforcement_block"`
-	EnforcementReport *CDNLoadBalancerEmptyModel `tfsdk:"enforcement_report"`
+	RequestValidationProperties types.List                 `tfsdk:"request_validation_properties"`
+	EnforcementBlock            *CDNLoadBalancerEmptyModel `tfsdk:"enforcement_block"`
+	EnforcementReport           *CDNLoadBalancerEmptyModel `tfsdk:"enforcement_report"`
 }
 
 // CDNLoadBalancerAPISpecificationValidationCustomListModel represents validation_custom_list block
 type CDNLoadBalancerAPISpecificationValidationCustomListModel struct {
-	FallThroughMode *CDNLoadBalancerAPISpecificationValidationCustomListFallThroughModeModel `tfsdk:"fall_through_mode"`
+	FallThroughMode        *CDNLoadBalancerAPISpecificationValidationCustomListFallThroughModeModel         `tfsdk:"fall_through_mode"`
 	OpenAPIValidationRules []CDNLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesModel `tfsdk:"open_api_validation_rules"`
-	Settings *CDNLoadBalancerAPISpecificationValidationCustomListSettingsModel `tfsdk:"settings"`
+	Settings               *CDNLoadBalancerAPISpecificationValidationCustomListSettingsModel                `tfsdk:"settings"`
 }
 
 // CDNLoadBalancerAPISpecificationValidationCustomListFallThroughModeModel represents fall_through_mode block
 type CDNLoadBalancerAPISpecificationValidationCustomListFallThroughModeModel struct {
-	FallThroughModeAllow *CDNLoadBalancerEmptyModel `tfsdk:"fall_through_mode_allow"`
+	FallThroughModeAllow  *CDNLoadBalancerEmptyModel                                                                    `tfsdk:"fall_through_mode_allow"`
 	FallThroughModeCustom *CDNLoadBalancerAPISpecificationValidationCustomListFallThroughModeFallThroughModeCustomModel `tfsdk:"fall_through_mode_custom"`
 }
 
@@ -733,78 +733,78 @@ type CDNLoadBalancerAPISpecificationValidationCustomListFallThroughModeFallThrou
 
 // CDNLoadBalancerAPISpecificationValidationCustomListFallThroughModeFallThroughModeCustomOpenAPIValidationRulesModel represents open_api_validation_rules block
 type CDNLoadBalancerAPISpecificationValidationCustomListFallThroughModeFallThroughModeCustomOpenAPIValidationRulesModel struct {
-	APIGroup types.String `tfsdk:"api_group"`
-	BasePath types.String `tfsdk:"base_path"`
-	ActionBlock *CDNLoadBalancerEmptyModel `tfsdk:"action_block"`
-	ActionReport *CDNLoadBalancerEmptyModel `tfsdk:"action_report"`
-	ActionSkip *CDNLoadBalancerEmptyModel `tfsdk:"action_skip"`
-	APIEndpoint *CDNLoadBalancerAPISpecificationValidationCustomListFallThroughModeFallThroughModeCustomOpenAPIValidationRulesAPIEndpointModel `tfsdk:"api_endpoint"`
-	Metadata *CDNLoadBalancerAPISpecificationValidationCustomListFallThroughModeFallThroughModeCustomOpenAPIValidationRulesMetadataModel `tfsdk:"metadata"`
+	APIGroup     types.String                                                                                                                   `tfsdk:"api_group"`
+	BasePath     types.String                                                                                                                   `tfsdk:"base_path"`
+	ActionBlock  *CDNLoadBalancerEmptyModel                                                                                                     `tfsdk:"action_block"`
+	ActionReport *CDNLoadBalancerEmptyModel                                                                                                     `tfsdk:"action_report"`
+	ActionSkip   *CDNLoadBalancerEmptyModel                                                                                                     `tfsdk:"action_skip"`
+	APIEndpoint  *CDNLoadBalancerAPISpecificationValidationCustomListFallThroughModeFallThroughModeCustomOpenAPIValidationRulesAPIEndpointModel `tfsdk:"api_endpoint"`
+	Metadata     *CDNLoadBalancerAPISpecificationValidationCustomListFallThroughModeFallThroughModeCustomOpenAPIValidationRulesMetadataModel    `tfsdk:"metadata"`
 }
 
 // CDNLoadBalancerAPISpecificationValidationCustomListFallThroughModeFallThroughModeCustomOpenAPIValidationRulesAPIEndpointModel represents api_endpoint block
 type CDNLoadBalancerAPISpecificationValidationCustomListFallThroughModeFallThroughModeCustomOpenAPIValidationRulesAPIEndpointModel struct {
-	Methods types.List `tfsdk:"methods"`
-	Path types.String `tfsdk:"path"`
+	Methods types.List   `tfsdk:"methods"`
+	Path    types.String `tfsdk:"path"`
 }
 
 // CDNLoadBalancerAPISpecificationValidationCustomListFallThroughModeFallThroughModeCustomOpenAPIValidationRulesMetadataModel represents metadata block
 type CDNLoadBalancerAPISpecificationValidationCustomListFallThroughModeFallThroughModeCustomOpenAPIValidationRulesMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
-	Name types.String `tfsdk:"name"`
+	Name            types.String `tfsdk:"name"`
 }
 
 // CDNLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesModel represents open_api_validation_rules block
 type CDNLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesModel struct {
-	APIGroup types.String `tfsdk:"api_group"`
-	BasePath types.String `tfsdk:"base_path"`
-	SpecificDomain types.String `tfsdk:"specific_domain"`
-	AnyDomain *CDNLoadBalancerEmptyModel `tfsdk:"any_domain"`
-	APIEndpoint *CDNLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesAPIEndpointModel `tfsdk:"api_endpoint"`
-	Metadata *CDNLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesMetadataModel `tfsdk:"metadata"`
+	APIGroup       types.String                                                                                  `tfsdk:"api_group"`
+	BasePath       types.String                                                                                  `tfsdk:"base_path"`
+	SpecificDomain types.String                                                                                  `tfsdk:"specific_domain"`
+	AnyDomain      *CDNLoadBalancerEmptyModel                                                                    `tfsdk:"any_domain"`
+	APIEndpoint    *CDNLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesAPIEndpointModel    `tfsdk:"api_endpoint"`
+	Metadata       *CDNLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesMetadataModel       `tfsdk:"metadata"`
 	ValidationMode *CDNLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesValidationModeModel `tfsdk:"validation_mode"`
 }
 
 // CDNLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesAPIEndpointModel represents api_endpoint block
 type CDNLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesAPIEndpointModel struct {
-	Methods types.List `tfsdk:"methods"`
-	Path types.String `tfsdk:"path"`
+	Methods types.List   `tfsdk:"methods"`
+	Path    types.String `tfsdk:"path"`
 }
 
 // CDNLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesMetadataModel represents metadata block
 type CDNLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
-	Name types.String `tfsdk:"name"`
+	Name            types.String `tfsdk:"name"`
 }
 
 // CDNLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesValidationModeModel represents validation_mode block
 type CDNLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesValidationModeModel struct {
 	ResponseValidationModeActive *CDNLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesValidationModeResponseValidationModeActiveModel `tfsdk:"response_validation_mode_active"`
-	SkipResponseValidation *CDNLoadBalancerEmptyModel `tfsdk:"skip_response_validation"`
-	SkipValidation *CDNLoadBalancerEmptyModel `tfsdk:"skip_validation"`
-	ValidationModeActive *CDNLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesValidationModeValidationModeActiveModel `tfsdk:"validation_mode_active"`
+	SkipResponseValidation       *CDNLoadBalancerEmptyModel                                                                                                `tfsdk:"skip_response_validation"`
+	SkipValidation               *CDNLoadBalancerEmptyModel                                                                                                `tfsdk:"skip_validation"`
+	ValidationModeActive         *CDNLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesValidationModeValidationModeActiveModel         `tfsdk:"validation_mode_active"`
 }
 
 // CDNLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesValidationModeResponseValidationModeActiveModel represents response_validation_mode_active block
 type CDNLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesValidationModeResponseValidationModeActiveModel struct {
-	ResponseValidationProperties types.List `tfsdk:"response_validation_properties"`
-	EnforcementBlock *CDNLoadBalancerEmptyModel `tfsdk:"enforcement_block"`
-	EnforcementReport *CDNLoadBalancerEmptyModel `tfsdk:"enforcement_report"`
+	ResponseValidationProperties types.List                 `tfsdk:"response_validation_properties"`
+	EnforcementBlock             *CDNLoadBalancerEmptyModel `tfsdk:"enforcement_block"`
+	EnforcementReport            *CDNLoadBalancerEmptyModel `tfsdk:"enforcement_report"`
 }
 
 // CDNLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesValidationModeValidationModeActiveModel represents validation_mode_active block
 type CDNLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesValidationModeValidationModeActiveModel struct {
-	RequestValidationProperties types.List `tfsdk:"request_validation_properties"`
-	EnforcementBlock *CDNLoadBalancerEmptyModel `tfsdk:"enforcement_block"`
-	EnforcementReport *CDNLoadBalancerEmptyModel `tfsdk:"enforcement_report"`
+	RequestValidationProperties types.List                 `tfsdk:"request_validation_properties"`
+	EnforcementBlock            *CDNLoadBalancerEmptyModel `tfsdk:"enforcement_block"`
+	EnforcementReport           *CDNLoadBalancerEmptyModel `tfsdk:"enforcement_report"`
 }
 
 // CDNLoadBalancerAPISpecificationValidationCustomListSettingsModel represents settings block
 type CDNLoadBalancerAPISpecificationValidationCustomListSettingsModel struct {
-	OversizedBodyFailValidation *CDNLoadBalancerEmptyModel `tfsdk:"oversized_body_fail_validation"`
-	OversizedBodySkipValidation *CDNLoadBalancerEmptyModel `tfsdk:"oversized_body_skip_validation"`
-	PropertyValidationSettingsCustom *CDNLoadBalancerAPISpecificationValidationCustomListSettingsPropertyValidationSettingsCustomModel `tfsdk:"property_validation_settings_custom"`
-	PropertyValidationSettingsDefault *CDNLoadBalancerEmptyModel `tfsdk:"property_validation_settings_default"`
+	OversizedBodyFailValidation       *CDNLoadBalancerEmptyModel                                                                        `tfsdk:"oversized_body_fail_validation"`
+	OversizedBodySkipValidation       *CDNLoadBalancerEmptyModel                                                                        `tfsdk:"oversized_body_skip_validation"`
+	PropertyValidationSettingsCustom  *CDNLoadBalancerAPISpecificationValidationCustomListSettingsPropertyValidationSettingsCustomModel `tfsdk:"property_validation_settings_custom"`
+	PropertyValidationSettingsDefault *CDNLoadBalancerEmptyModel                                                                        `tfsdk:"property_validation_settings_default"`
 }
 
 // CDNLoadBalancerAPISpecificationValidationCustomListSettingsPropertyValidationSettingsCustomModel represents property_validation_settings_custom block
@@ -814,30 +814,30 @@ type CDNLoadBalancerAPISpecificationValidationCustomListSettingsPropertyValidati
 
 // CDNLoadBalancerAPISpecificationValidationCustomListSettingsPropertyValidationSettingsCustomQueryParametersModel represents query_parameters block
 type CDNLoadBalancerAPISpecificationValidationCustomListSettingsPropertyValidationSettingsCustomQueryParametersModel struct {
-	AllowAdditionalParameters *CDNLoadBalancerEmptyModel `tfsdk:"allow_additional_parameters"`
+	AllowAdditionalParameters    *CDNLoadBalancerEmptyModel `tfsdk:"allow_additional_parameters"`
 	DisallowAdditionalParameters *CDNLoadBalancerEmptyModel `tfsdk:"disallow_additional_parameters"`
 }
 
 // CDNLoadBalancerAppFirewallModel represents app_firewall block
 type CDNLoadBalancerAppFirewallModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // CDNLoadBalancerBlockedClientsModel represents blocked_clients block
 type CDNLoadBalancerBlockedClientsModel struct {
-	Actions types.List `tfsdk:"actions"`
-	AsNumber types.Int64 `tfsdk:"as_number"`
-	ExpirationTimestamp types.String `tfsdk:"expiration_timestamp"`
-	IPPrefix types.String `tfsdk:"ip_prefix"`
-	IPV6Prefix types.String `tfsdk:"ipv6_prefix"`
-	UserIdentifier types.String `tfsdk:"user_identifier"`
-	BotSkipProcessing *CDNLoadBalancerEmptyModel `tfsdk:"bot_skip_processing"`
-	HTTPHeader *CDNLoadBalancerBlockedClientsHTTPHeaderModel `tfsdk:"http_header"`
-	Metadata *CDNLoadBalancerBlockedClientsMetadataModel `tfsdk:"metadata"`
-	SkipProcessing *CDNLoadBalancerEmptyModel `tfsdk:"skip_processing"`
-	WAFSkipProcessing *CDNLoadBalancerEmptyModel `tfsdk:"waf_skip_processing"`
+	Actions             types.List                                    `tfsdk:"actions"`
+	AsNumber            types.Int64                                   `tfsdk:"as_number"`
+	ExpirationTimestamp types.String                                  `tfsdk:"expiration_timestamp"`
+	IPPrefix            types.String                                  `tfsdk:"ip_prefix"`
+	IPV6Prefix          types.String                                  `tfsdk:"ipv6_prefix"`
+	UserIdentifier      types.String                                  `tfsdk:"user_identifier"`
+	BotSkipProcessing   *CDNLoadBalancerEmptyModel                    `tfsdk:"bot_skip_processing"`
+	HTTPHeader          *CDNLoadBalancerBlockedClientsHTTPHeaderModel `tfsdk:"http_header"`
+	Metadata            *CDNLoadBalancerBlockedClientsMetadataModel   `tfsdk:"metadata"`
+	SkipProcessing      *CDNLoadBalancerEmptyModel                    `tfsdk:"skip_processing"`
+	WAFSkipProcessing   *CDNLoadBalancerEmptyModel                    `tfsdk:"waf_skip_processing"`
 }
 
 // CDNLoadBalancerBlockedClientsHTTPHeaderModel represents http_header block
@@ -847,39 +847,39 @@ type CDNLoadBalancerBlockedClientsHTTPHeaderModel struct {
 
 // CDNLoadBalancerBlockedClientsHTTPHeaderHeadersModel represents headers block
 type CDNLoadBalancerBlockedClientsHTTPHeaderHeadersModel struct {
-	Exact types.String `tfsdk:"exact"`
-	InvertMatch types.Bool `tfsdk:"invert_match"`
-	Name types.String `tfsdk:"name"`
-	Presence types.Bool `tfsdk:"presence"`
-	Regex types.String `tfsdk:"regex"`
+	Exact       types.String `tfsdk:"exact"`
+	InvertMatch types.Bool   `tfsdk:"invert_match"`
+	Name        types.String `tfsdk:"name"`
+	Presence    types.Bool   `tfsdk:"presence"`
+	Regex       types.String `tfsdk:"regex"`
 }
 
 // CDNLoadBalancerBlockedClientsMetadataModel represents metadata block
 type CDNLoadBalancerBlockedClientsMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
-	Name types.String `tfsdk:"name"`
+	Name            types.String `tfsdk:"name"`
 }
 
 // CDNLoadBalancerBotDefenseModel represents bot_defense block
 type CDNLoadBalancerBotDefenseModel struct {
-	RegionalEndpoint types.String `tfsdk:"regional_endpoint"`
-	Timeout types.Int64 `tfsdk:"timeout"`
-	DisableCorsSupport *CDNLoadBalancerEmptyModel `tfsdk:"disable_cors_support"`
-	EnableCorsSupport *CDNLoadBalancerEmptyModel `tfsdk:"enable_cors_support"`
-	Policy *CDNLoadBalancerBotDefensePolicyModel `tfsdk:"policy"`
+	RegionalEndpoint   types.String                          `tfsdk:"regional_endpoint"`
+	Timeout            types.Int64                           `tfsdk:"timeout"`
+	DisableCorsSupport *CDNLoadBalancerEmptyModel            `tfsdk:"disable_cors_support"`
+	EnableCorsSupport  *CDNLoadBalancerEmptyModel            `tfsdk:"enable_cors_support"`
+	Policy             *CDNLoadBalancerBotDefensePolicyModel `tfsdk:"policy"`
 }
 
 // CDNLoadBalancerBotDefensePolicyModel represents policy block
 type CDNLoadBalancerBotDefensePolicyModel struct {
-	JavascriptMode types.String `tfsdk:"javascript_mode"`
-	JsDownloadPath types.String `tfsdk:"js_download_path"`
-	DisableJsInsert *CDNLoadBalancerEmptyModel `tfsdk:"disable_js_insert"`
-	DisableMobileSdk *CDNLoadBalancerEmptyModel `tfsdk:"disable_mobile_sdk"`
-	JsInsertAllPages *CDNLoadBalancerBotDefensePolicyJsInsertAllPagesModel `tfsdk:"js_insert_all_pages"`
+	JavascriptMode         types.String                                                `tfsdk:"javascript_mode"`
+	JsDownloadPath         types.String                                                `tfsdk:"js_download_path"`
+	DisableJsInsert        *CDNLoadBalancerEmptyModel                                  `tfsdk:"disable_js_insert"`
+	DisableMobileSdk       *CDNLoadBalancerEmptyModel                                  `tfsdk:"disable_mobile_sdk"`
+	JsInsertAllPages       *CDNLoadBalancerBotDefensePolicyJsInsertAllPagesModel       `tfsdk:"js_insert_all_pages"`
 	JsInsertAllPagesExcept *CDNLoadBalancerBotDefensePolicyJsInsertAllPagesExceptModel `tfsdk:"js_insert_all_pages_except"`
-	JsInsertionRules *CDNLoadBalancerBotDefensePolicyJsInsertionRulesModel `tfsdk:"js_insertion_rules"`
-	MobileSdkConfig *CDNLoadBalancerBotDefensePolicyMobileSdkConfigModel `tfsdk:"mobile_sdk_config"`
-	ProtectedAppEndpoints []CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsModel `tfsdk:"protected_app_endpoints"`
+	JsInsertionRules       *CDNLoadBalancerBotDefensePolicyJsInsertionRulesModel       `tfsdk:"js_insertion_rules"`
+	MobileSdkConfig        *CDNLoadBalancerBotDefensePolicyMobileSdkConfigModel        `tfsdk:"mobile_sdk_config"`
+	ProtectedAppEndpoints  []CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsModel `tfsdk:"protected_app_endpoints"`
 }
 
 // CDNLoadBalancerBotDefensePolicyJsInsertAllPagesModel represents js_insert_all_pages block
@@ -889,99 +889,99 @@ type CDNLoadBalancerBotDefensePolicyJsInsertAllPagesModel struct {
 
 // CDNLoadBalancerBotDefensePolicyJsInsertAllPagesExceptModel represents js_insert_all_pages_except block
 type CDNLoadBalancerBotDefensePolicyJsInsertAllPagesExceptModel struct {
-	JavascriptLocation types.String `tfsdk:"javascript_location"`
-	ExcludeList []CDNLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListModel `tfsdk:"exclude_list"`
+	JavascriptLocation types.String                                                            `tfsdk:"javascript_location"`
+	ExcludeList        []CDNLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListModel `tfsdk:"exclude_list"`
 }
 
 // CDNLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListModel represents exclude_list block
 type CDNLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListModel struct {
-	AnyDomain *CDNLoadBalancerEmptyModel `tfsdk:"any_domain"`
-	Domain *CDNLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListDomainModel `tfsdk:"domain"`
-	Metadata *CDNLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListMetadataModel `tfsdk:"metadata"`
-	Path *CDNLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListPathModel `tfsdk:"path"`
+	AnyDomain *CDNLoadBalancerEmptyModel                                                     `tfsdk:"any_domain"`
+	Domain    *CDNLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListDomainModel   `tfsdk:"domain"`
+	Metadata  *CDNLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListMetadataModel `tfsdk:"metadata"`
+	Path      *CDNLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListPathModel     `tfsdk:"path"`
 }
 
 // CDNLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListDomainModel represents domain block
 type CDNLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListDomainModel struct {
-	ExactValue types.String `tfsdk:"exact_value"`
-	RegexValue types.String `tfsdk:"regex_value"`
+	ExactValue  types.String `tfsdk:"exact_value"`
+	RegexValue  types.String `tfsdk:"regex_value"`
 	SuffixValue types.String `tfsdk:"suffix_value"`
 }
 
 // CDNLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListMetadataModel represents metadata block
 type CDNLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
-	Name types.String `tfsdk:"name"`
+	Name            types.String `tfsdk:"name"`
 }
 
 // CDNLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListPathModel represents path block
 type CDNLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListPathModel struct {
-	Path types.String `tfsdk:"path"`
+	Path   types.String `tfsdk:"path"`
 	Prefix types.String `tfsdk:"prefix"`
-	Regex types.String `tfsdk:"regex"`
+	Regex  types.String `tfsdk:"regex"`
 }
 
 // CDNLoadBalancerBotDefensePolicyJsInsertionRulesModel represents js_insertion_rules block
 type CDNLoadBalancerBotDefensePolicyJsInsertionRulesModel struct {
 	ExcludeList []CDNLoadBalancerBotDefensePolicyJsInsertionRulesExcludeListModel `tfsdk:"exclude_list"`
-	Rules []CDNLoadBalancerBotDefensePolicyJsInsertionRulesRulesModel `tfsdk:"rules"`
+	Rules       []CDNLoadBalancerBotDefensePolicyJsInsertionRulesRulesModel       `tfsdk:"rules"`
 }
 
 // CDNLoadBalancerBotDefensePolicyJsInsertionRulesExcludeListModel represents exclude_list block
 type CDNLoadBalancerBotDefensePolicyJsInsertionRulesExcludeListModel struct {
-	AnyDomain *CDNLoadBalancerEmptyModel `tfsdk:"any_domain"`
-	Domain *CDNLoadBalancerBotDefensePolicyJsInsertionRulesExcludeListDomainModel `tfsdk:"domain"`
-	Metadata *CDNLoadBalancerBotDefensePolicyJsInsertionRulesExcludeListMetadataModel `tfsdk:"metadata"`
-	Path *CDNLoadBalancerBotDefensePolicyJsInsertionRulesExcludeListPathModel `tfsdk:"path"`
+	AnyDomain *CDNLoadBalancerEmptyModel                                               `tfsdk:"any_domain"`
+	Domain    *CDNLoadBalancerBotDefensePolicyJsInsertionRulesExcludeListDomainModel   `tfsdk:"domain"`
+	Metadata  *CDNLoadBalancerBotDefensePolicyJsInsertionRulesExcludeListMetadataModel `tfsdk:"metadata"`
+	Path      *CDNLoadBalancerBotDefensePolicyJsInsertionRulesExcludeListPathModel     `tfsdk:"path"`
 }
 
 // CDNLoadBalancerBotDefensePolicyJsInsertionRulesExcludeListDomainModel represents domain block
 type CDNLoadBalancerBotDefensePolicyJsInsertionRulesExcludeListDomainModel struct {
-	ExactValue types.String `tfsdk:"exact_value"`
-	RegexValue types.String `tfsdk:"regex_value"`
+	ExactValue  types.String `tfsdk:"exact_value"`
+	RegexValue  types.String `tfsdk:"regex_value"`
 	SuffixValue types.String `tfsdk:"suffix_value"`
 }
 
 // CDNLoadBalancerBotDefensePolicyJsInsertionRulesExcludeListMetadataModel represents metadata block
 type CDNLoadBalancerBotDefensePolicyJsInsertionRulesExcludeListMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
-	Name types.String `tfsdk:"name"`
+	Name            types.String `tfsdk:"name"`
 }
 
 // CDNLoadBalancerBotDefensePolicyJsInsertionRulesExcludeListPathModel represents path block
 type CDNLoadBalancerBotDefensePolicyJsInsertionRulesExcludeListPathModel struct {
-	Path types.String `tfsdk:"path"`
+	Path   types.String `tfsdk:"path"`
 	Prefix types.String `tfsdk:"prefix"`
-	Regex types.String `tfsdk:"regex"`
+	Regex  types.String `tfsdk:"regex"`
 }
 
 // CDNLoadBalancerBotDefensePolicyJsInsertionRulesRulesModel represents rules block
 type CDNLoadBalancerBotDefensePolicyJsInsertionRulesRulesModel struct {
-	JavascriptLocation types.String `tfsdk:"javascript_location"`
-	AnyDomain *CDNLoadBalancerEmptyModel `tfsdk:"any_domain"`
-	Domain *CDNLoadBalancerBotDefensePolicyJsInsertionRulesRulesDomainModel `tfsdk:"domain"`
-	Metadata *CDNLoadBalancerBotDefensePolicyJsInsertionRulesRulesMetadataModel `tfsdk:"metadata"`
-	Path *CDNLoadBalancerBotDefensePolicyJsInsertionRulesRulesPathModel `tfsdk:"path"`
+	JavascriptLocation types.String                                                       `tfsdk:"javascript_location"`
+	AnyDomain          *CDNLoadBalancerEmptyModel                                         `tfsdk:"any_domain"`
+	Domain             *CDNLoadBalancerBotDefensePolicyJsInsertionRulesRulesDomainModel   `tfsdk:"domain"`
+	Metadata           *CDNLoadBalancerBotDefensePolicyJsInsertionRulesRulesMetadataModel `tfsdk:"metadata"`
+	Path               *CDNLoadBalancerBotDefensePolicyJsInsertionRulesRulesPathModel     `tfsdk:"path"`
 }
 
 // CDNLoadBalancerBotDefensePolicyJsInsertionRulesRulesDomainModel represents domain block
 type CDNLoadBalancerBotDefensePolicyJsInsertionRulesRulesDomainModel struct {
-	ExactValue types.String `tfsdk:"exact_value"`
-	RegexValue types.String `tfsdk:"regex_value"`
+	ExactValue  types.String `tfsdk:"exact_value"`
+	RegexValue  types.String `tfsdk:"regex_value"`
 	SuffixValue types.String `tfsdk:"suffix_value"`
 }
 
 // CDNLoadBalancerBotDefensePolicyJsInsertionRulesRulesMetadataModel represents metadata block
 type CDNLoadBalancerBotDefensePolicyJsInsertionRulesRulesMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
-	Name types.String `tfsdk:"name"`
+	Name            types.String `tfsdk:"name"`
 }
 
 // CDNLoadBalancerBotDefensePolicyJsInsertionRulesRulesPathModel represents path block
 type CDNLoadBalancerBotDefensePolicyJsInsertionRulesRulesPathModel struct {
-	Path types.String `tfsdk:"path"`
+	Path   types.String `tfsdk:"path"`
 	Prefix types.String `tfsdk:"prefix"`
-	Regex types.String `tfsdk:"regex"`
+	Regex  types.String `tfsdk:"regex"`
 }
 
 // CDNLoadBalancerBotDefensePolicyMobileSdkConfigModel represents mobile_sdk_config block
@@ -996,76 +996,76 @@ type CDNLoadBalancerBotDefensePolicyMobileSdkConfigMobileIdentifierModel struct 
 
 // CDNLoadBalancerBotDefensePolicyMobileSdkConfigMobileIdentifierHeadersModel represents headers block
 type CDNLoadBalancerBotDefensePolicyMobileSdkConfigMobileIdentifierHeadersModel struct {
-	Name types.String `tfsdk:"name"`
-	CheckNotPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_not_present"`
-	CheckPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_present"`
-	Item *CDNLoadBalancerBotDefensePolicyMobileSdkConfigMobileIdentifierHeadersItemModel `tfsdk:"item"`
+	Name            types.String                                                                    `tfsdk:"name"`
+	CheckNotPresent *CDNLoadBalancerEmptyModel                                                      `tfsdk:"check_not_present"`
+	CheckPresent    *CDNLoadBalancerEmptyModel                                                      `tfsdk:"check_present"`
+	Item            *CDNLoadBalancerBotDefensePolicyMobileSdkConfigMobileIdentifierHeadersItemModel `tfsdk:"item"`
 }
 
 // CDNLoadBalancerBotDefensePolicyMobileSdkConfigMobileIdentifierHeadersItemModel represents item block
 type CDNLoadBalancerBotDefensePolicyMobileSdkConfigMobileIdentifierHeadersItemModel struct {
-	ExactValues types.List `tfsdk:"exact_values"`
-	RegexValues types.List `tfsdk:"regex_values"`
+	ExactValues  types.List `tfsdk:"exact_values"`
+	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
 }
 
 // CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsModel represents protected_app_endpoints block
 type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsModel struct {
-	HTTPMethods types.List `tfsdk:"http_methods"`
-	Protocol types.String `tfsdk:"protocol"`
-	AllowGoodBots *CDNLoadBalancerEmptyModel `tfsdk:"allow_good_bots"`
-	AnyDomain *CDNLoadBalancerEmptyModel `tfsdk:"any_domain"`
-	Domain *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsDomainModel `tfsdk:"domain"`
-	FlowLabel *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelModel `tfsdk:"flow_label"`
-	Headers []CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsHeadersModel `tfsdk:"headers"`
-	Metadata *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsMetadataModel `tfsdk:"metadata"`
-	MitigateGoodBots *CDNLoadBalancerEmptyModel `tfsdk:"mitigate_good_bots"`
-	Mitigation *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationModel `tfsdk:"mitigation"`
-	Mobile *CDNLoadBalancerEmptyModel `tfsdk:"mobile"`
-	Path *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsPathModel `tfsdk:"path"`
-	QueryParams []CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsQueryParamsModel `tfsdk:"query_params"`
-	UndefinedFlowLabel *CDNLoadBalancerEmptyModel `tfsdk:"undefined_flow_label"`
-	Web *CDNLoadBalancerEmptyModel `tfsdk:"web"`
-	WebMobile *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsWebMobileModel `tfsdk:"web_mobile"`
+	HTTPMethods        types.List                                                             `tfsdk:"http_methods"`
+	Protocol           types.String                                                           `tfsdk:"protocol"`
+	AllowGoodBots      *CDNLoadBalancerEmptyModel                                             `tfsdk:"allow_good_bots"`
+	AnyDomain          *CDNLoadBalancerEmptyModel                                             `tfsdk:"any_domain"`
+	Domain             *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsDomainModel       `tfsdk:"domain"`
+	FlowLabel          *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelModel    `tfsdk:"flow_label"`
+	Headers            []CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsHeadersModel     `tfsdk:"headers"`
+	Metadata           *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsMetadataModel     `tfsdk:"metadata"`
+	MitigateGoodBots   *CDNLoadBalancerEmptyModel                                             `tfsdk:"mitigate_good_bots"`
+	Mitigation         *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationModel   `tfsdk:"mitigation"`
+	Mobile             *CDNLoadBalancerEmptyModel                                             `tfsdk:"mobile"`
+	Path               *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsPathModel         `tfsdk:"path"`
+	QueryParams        []CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsQueryParamsModel `tfsdk:"query_params"`
+	UndefinedFlowLabel *CDNLoadBalancerEmptyModel                                             `tfsdk:"undefined_flow_label"`
+	Web                *CDNLoadBalancerEmptyModel                                             `tfsdk:"web"`
+	WebMobile          *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsWebMobileModel    `tfsdk:"web_mobile"`
 }
 
 // CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsDomainModel represents domain block
 type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsDomainModel struct {
-	ExactValue types.String `tfsdk:"exact_value"`
-	RegexValue types.String `tfsdk:"regex_value"`
+	ExactValue  types.String `tfsdk:"exact_value"`
+	RegexValue  types.String `tfsdk:"regex_value"`
 	SuffixValue types.String `tfsdk:"suffix_value"`
 }
 
 // CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelModel represents flow_label block
 type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelModel struct {
 	AccountManagement *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAccountManagementModel `tfsdk:"account_management"`
-	Authentication *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationModel `tfsdk:"authentication"`
+	Authentication    *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationModel    `tfsdk:"authentication"`
 	FinancialServices *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelFinancialServicesModel `tfsdk:"financial_services"`
-	Flight *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelFlightModel `tfsdk:"flight"`
+	Flight            *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelFlightModel            `tfsdk:"flight"`
 	ProfileManagement *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelProfileManagementModel `tfsdk:"profile_management"`
-	Search *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelSearchModel `tfsdk:"search"`
+	Search            *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelSearchModel            `tfsdk:"search"`
 	ShoppingGiftCards *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelShoppingGiftCardsModel `tfsdk:"shopping_gift_cards"`
 }
 
 // CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAccountManagementModel represents account_management block
 type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAccountManagementModel struct {
-	Create *CDNLoadBalancerEmptyModel `tfsdk:"create"`
+	Create        *CDNLoadBalancerEmptyModel `tfsdk:"create"`
 	PasswordReset *CDNLoadBalancerEmptyModel `tfsdk:"password_reset"`
 }
 
 // CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationModel represents authentication block
 type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationModel struct {
-	Login *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginModel `tfsdk:"login"`
-	LoginMfa *CDNLoadBalancerEmptyModel `tfsdk:"login_mfa"`
-	LoginPartner *CDNLoadBalancerEmptyModel `tfsdk:"login_partner"`
-	Logout *CDNLoadBalancerEmptyModel `tfsdk:"logout"`
-	TokenRefresh *CDNLoadBalancerEmptyModel `tfsdk:"token_refresh"`
+	Login        *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginModel `tfsdk:"login"`
+	LoginMfa     *CDNLoadBalancerEmptyModel                                                             `tfsdk:"login_mfa"`
+	LoginPartner *CDNLoadBalancerEmptyModel                                                             `tfsdk:"login_partner"`
+	Logout       *CDNLoadBalancerEmptyModel                                                             `tfsdk:"logout"`
+	TokenRefresh *CDNLoadBalancerEmptyModel                                                             `tfsdk:"token_refresh"`
 }
 
 // CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginModel represents login block
 type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginModel struct {
-	DisableTransactionResult *CDNLoadBalancerEmptyModel `tfsdk:"disable_transaction_result"`
-	TransactionResult *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginTransactionResultModel `tfsdk:"transaction_result"`
+	DisableTransactionResult *CDNLoadBalancerEmptyModel                                                                              `tfsdk:"disable_transaction_result"`
+	TransactionResult        *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginTransactionResultModel `tfsdk:"transaction_result"`
 }
 
 // CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginTransactionResultModel represents transaction_result block
@@ -1076,21 +1076,21 @@ type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthentication
 
 // CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginTransactionResultFailureConditionsModel represents failure_conditions block
 type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginTransactionResultFailureConditionsModel struct {
-	Name types.String `tfsdk:"name"`
-	RegexValues types.List `tfsdk:"regex_values"`
-	Status types.String `tfsdk:"status"`
+	Name        types.String `tfsdk:"name"`
+	RegexValues types.List   `tfsdk:"regex_values"`
+	Status      types.String `tfsdk:"status"`
 }
 
 // CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginTransactionResultSuccessConditionsModel represents success_conditions block
 type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginTransactionResultSuccessConditionsModel struct {
-	Name types.String `tfsdk:"name"`
-	RegexValues types.List `tfsdk:"regex_values"`
-	Status types.String `tfsdk:"status"`
+	Name        types.String `tfsdk:"name"`
+	RegexValues types.List   `tfsdk:"regex_values"`
+	Status      types.String `tfsdk:"status"`
 }
 
 // CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelFinancialServicesModel represents financial_services block
 type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelFinancialServicesModel struct {
-	Apply *CDNLoadBalancerEmptyModel `tfsdk:"apply"`
+	Apply         *CDNLoadBalancerEmptyModel `tfsdk:"apply"`
 	MoneyTransfer *CDNLoadBalancerEmptyModel `tfsdk:"money_transfer"`
 }
 
@@ -1103,77 +1103,77 @@ type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelFlightModel st
 type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelProfileManagementModel struct {
 	Create *CDNLoadBalancerEmptyModel `tfsdk:"create"`
 	Update *CDNLoadBalancerEmptyModel `tfsdk:"update"`
-	View *CDNLoadBalancerEmptyModel `tfsdk:"view"`
+	View   *CDNLoadBalancerEmptyModel `tfsdk:"view"`
 }
 
 // CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelSearchModel represents search block
 type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelSearchModel struct {
-	FlightSearch *CDNLoadBalancerEmptyModel `tfsdk:"flight_search"`
-	ProductSearch *CDNLoadBalancerEmptyModel `tfsdk:"product_search"`
+	FlightSearch      *CDNLoadBalancerEmptyModel `tfsdk:"flight_search"`
+	ProductSearch     *CDNLoadBalancerEmptyModel `tfsdk:"product_search"`
 	ReservationSearch *CDNLoadBalancerEmptyModel `tfsdk:"reservation_search"`
-	RoomSearch *CDNLoadBalancerEmptyModel `tfsdk:"room_search"`
+	RoomSearch        *CDNLoadBalancerEmptyModel `tfsdk:"room_search"`
 }
 
 // CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelShoppingGiftCardsModel represents shopping_gift_cards block
 type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelShoppingGiftCardsModel struct {
 	GiftCardMakePurchaseWithGiftCard *CDNLoadBalancerEmptyModel `tfsdk:"gift_card_make_purchase_with_gift_card"`
-	GiftCardValidation *CDNLoadBalancerEmptyModel `tfsdk:"gift_card_validation"`
-	ShopAddToCart *CDNLoadBalancerEmptyModel `tfsdk:"shop_add_to_cart"`
-	ShopCheckout *CDNLoadBalancerEmptyModel `tfsdk:"shop_checkout"`
-	ShopChooseSeat *CDNLoadBalancerEmptyModel `tfsdk:"shop_choose_seat"`
-	ShopEnterDrawingSubmission *CDNLoadBalancerEmptyModel `tfsdk:"shop_enter_drawing_submission"`
-	ShopMakePayment *CDNLoadBalancerEmptyModel `tfsdk:"shop_make_payment"`
-	ShopOrder *CDNLoadBalancerEmptyModel `tfsdk:"shop_order"`
-	ShopPriceInquiry *CDNLoadBalancerEmptyModel `tfsdk:"shop_price_inquiry"`
-	ShopPromoCodeValidation *CDNLoadBalancerEmptyModel `tfsdk:"shop_promo_code_validation"`
-	ShopPurchaseGiftCard *CDNLoadBalancerEmptyModel `tfsdk:"shop_purchase_gift_card"`
-	ShopUpdateQuantity *CDNLoadBalancerEmptyModel `tfsdk:"shop_update_quantity"`
+	GiftCardValidation               *CDNLoadBalancerEmptyModel `tfsdk:"gift_card_validation"`
+	ShopAddToCart                    *CDNLoadBalancerEmptyModel `tfsdk:"shop_add_to_cart"`
+	ShopCheckout                     *CDNLoadBalancerEmptyModel `tfsdk:"shop_checkout"`
+	ShopChooseSeat                   *CDNLoadBalancerEmptyModel `tfsdk:"shop_choose_seat"`
+	ShopEnterDrawingSubmission       *CDNLoadBalancerEmptyModel `tfsdk:"shop_enter_drawing_submission"`
+	ShopMakePayment                  *CDNLoadBalancerEmptyModel `tfsdk:"shop_make_payment"`
+	ShopOrder                        *CDNLoadBalancerEmptyModel `tfsdk:"shop_order"`
+	ShopPriceInquiry                 *CDNLoadBalancerEmptyModel `tfsdk:"shop_price_inquiry"`
+	ShopPromoCodeValidation          *CDNLoadBalancerEmptyModel `tfsdk:"shop_promo_code_validation"`
+	ShopPurchaseGiftCard             *CDNLoadBalancerEmptyModel `tfsdk:"shop_purchase_gift_card"`
+	ShopUpdateQuantity               *CDNLoadBalancerEmptyModel `tfsdk:"shop_update_quantity"`
 }
 
 // CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsHeadersModel represents headers block
 type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsHeadersModel struct {
-	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
-	Name types.String `tfsdk:"name"`
-	CheckNotPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_not_present"`
-	CheckPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_present"`
-	Item *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsHeadersItemModel `tfsdk:"item"`
+	InvertMatcher   types.Bool                                                            `tfsdk:"invert_matcher"`
+	Name            types.String                                                          `tfsdk:"name"`
+	CheckNotPresent *CDNLoadBalancerEmptyModel                                            `tfsdk:"check_not_present"`
+	CheckPresent    *CDNLoadBalancerEmptyModel                                            `tfsdk:"check_present"`
+	Item            *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsHeadersItemModel `tfsdk:"item"`
 }
 
 // CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsHeadersItemModel represents item block
 type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsHeadersItemModel struct {
-	ExactValues types.List `tfsdk:"exact_values"`
-	RegexValues types.List `tfsdk:"regex_values"`
+	ExactValues  types.List `tfsdk:"exact_values"`
+	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
 }
 
 // CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsMetadataModel represents metadata block
 type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
-	Name types.String `tfsdk:"name"`
+	Name            types.String `tfsdk:"name"`
 }
 
 // CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationModel represents mitigation block
 type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationModel struct {
-	Block *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationBlockModel `tfsdk:"block"`
-	Flag *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationFlagModel `tfsdk:"flag"`
+	Block    *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationBlockModel    `tfsdk:"block"`
+	Flag     *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationFlagModel     `tfsdk:"flag"`
 	Redirect *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationRedirectModel `tfsdk:"redirect"`
 }
 
 // CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationBlockModel represents block block
 type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationBlockModel struct {
-	Body types.String `tfsdk:"body"`
+	Body   types.String `tfsdk:"body"`
 	Status types.String `tfsdk:"status"`
 }
 
 // CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationFlagModel represents flag block
 type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationFlagModel struct {
 	AppendHeaders *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationFlagAppendHeadersModel `tfsdk:"append_headers"`
-	NoHeaders *CDNLoadBalancerEmptyModel `tfsdk:"no_headers"`
+	NoHeaders     *CDNLoadBalancerEmptyModel                                                            `tfsdk:"no_headers"`
 }
 
 // CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationFlagAppendHeadersModel represents append_headers block
 type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationFlagAppendHeadersModel struct {
-	AutoTypeHeaderName types.String `tfsdk:"auto_type_header_name"`
+	AutoTypeHeaderName  types.String `tfsdk:"auto_type_header_name"`
 	InferenceHeaderName types.String `tfsdk:"inference_header_name"`
 }
 
@@ -1184,24 +1184,24 @@ type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationRedirectModel
 
 // CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsPathModel represents path block
 type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsPathModel struct {
-	Path types.String `tfsdk:"path"`
+	Path   types.String `tfsdk:"path"`
 	Prefix types.String `tfsdk:"prefix"`
-	Regex types.String `tfsdk:"regex"`
+	Regex  types.String `tfsdk:"regex"`
 }
 
 // CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsQueryParamsModel represents query_params block
 type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsQueryParamsModel struct {
-	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
-	Key types.String `tfsdk:"key"`
-	CheckNotPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_not_present"`
-	CheckPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_present"`
-	Item *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsQueryParamsItemModel `tfsdk:"item"`
+	InvertMatcher   types.Bool                                                                `tfsdk:"invert_matcher"`
+	Key             types.String                                                              `tfsdk:"key"`
+	CheckNotPresent *CDNLoadBalancerEmptyModel                                                `tfsdk:"check_not_present"`
+	CheckPresent    *CDNLoadBalancerEmptyModel                                                `tfsdk:"check_present"`
+	Item            *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsQueryParamsItemModel `tfsdk:"item"`
 }
 
 // CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsQueryParamsItemModel represents item block
 type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsQueryParamsItemModel struct {
-	ExactValues types.List `tfsdk:"exact_values"`
-	RegexValues types.List `tfsdk:"regex_values"`
+	ExactValues  types.List `tfsdk:"exact_values"`
+	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
 }
 
@@ -1212,8 +1212,8 @@ type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsWebMobileModel struct {
 
 // CDNLoadBalancerCaptchaChallengeModel represents captcha_challenge block
 type CDNLoadBalancerCaptchaChallengeModel struct {
-	CookieExpiry types.Int64 `tfsdk:"cookie_expiry"`
-	CustomPage types.String `tfsdk:"custom_page"`
+	CookieExpiry types.Int64  `tfsdk:"cookie_expiry"`
+	CustomPage   types.String `tfsdk:"custom_page"`
 }
 
 // CDNLoadBalancerClientSideDefenseModel represents client_side_defense block
@@ -1223,10 +1223,10 @@ type CDNLoadBalancerClientSideDefenseModel struct {
 
 // CDNLoadBalancerClientSideDefensePolicyModel represents policy block
 type CDNLoadBalancerClientSideDefensePolicyModel struct {
-	DisableJsInsert *CDNLoadBalancerEmptyModel `tfsdk:"disable_js_insert"`
-	JsInsertAllPages *CDNLoadBalancerEmptyModel `tfsdk:"js_insert_all_pages"`
+	DisableJsInsert        *CDNLoadBalancerEmptyModel                                         `tfsdk:"disable_js_insert"`
+	JsInsertAllPages       *CDNLoadBalancerEmptyModel                                         `tfsdk:"js_insert_all_pages"`
 	JsInsertAllPagesExcept *CDNLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptModel `tfsdk:"js_insert_all_pages_except"`
-	JsInsertionRules *CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesModel `tfsdk:"js_insertion_rules"`
+	JsInsertionRules       *CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesModel       `tfsdk:"js_insertion_rules"`
 }
 
 // CDNLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptModel represents js_insert_all_pages_except block
@@ -1236,111 +1236,111 @@ type CDNLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptModel struct {
 
 // CDNLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListModel represents exclude_list block
 type CDNLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListModel struct {
-	AnyDomain *CDNLoadBalancerEmptyModel `tfsdk:"any_domain"`
-	Domain *CDNLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListDomainModel `tfsdk:"domain"`
-	Metadata *CDNLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListMetadataModel `tfsdk:"metadata"`
-	Path *CDNLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListPathModel `tfsdk:"path"`
+	AnyDomain *CDNLoadBalancerEmptyModel                                                            `tfsdk:"any_domain"`
+	Domain    *CDNLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListDomainModel   `tfsdk:"domain"`
+	Metadata  *CDNLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListMetadataModel `tfsdk:"metadata"`
+	Path      *CDNLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListPathModel     `tfsdk:"path"`
 }
 
 // CDNLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListDomainModel represents domain block
 type CDNLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListDomainModel struct {
-	ExactValue types.String `tfsdk:"exact_value"`
-	RegexValue types.String `tfsdk:"regex_value"`
+	ExactValue  types.String `tfsdk:"exact_value"`
+	RegexValue  types.String `tfsdk:"regex_value"`
 	SuffixValue types.String `tfsdk:"suffix_value"`
 }
 
 // CDNLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListMetadataModel represents metadata block
 type CDNLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
-	Name types.String `tfsdk:"name"`
+	Name            types.String `tfsdk:"name"`
 }
 
 // CDNLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListPathModel represents path block
 type CDNLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListPathModel struct {
-	Path types.String `tfsdk:"path"`
+	Path   types.String `tfsdk:"path"`
 	Prefix types.String `tfsdk:"prefix"`
-	Regex types.String `tfsdk:"regex"`
+	Regex  types.String `tfsdk:"regex"`
 }
 
 // CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesModel represents js_insertion_rules block
 type CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesModel struct {
 	ExcludeList []CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListModel `tfsdk:"exclude_list"`
-	Rules []CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesModel `tfsdk:"rules"`
+	Rules       []CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesModel       `tfsdk:"rules"`
 }
 
 // CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListModel represents exclude_list block
 type CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListModel struct {
-	AnyDomain *CDNLoadBalancerEmptyModel `tfsdk:"any_domain"`
-	Domain *CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListDomainModel `tfsdk:"domain"`
-	Metadata *CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListMetadataModel `tfsdk:"metadata"`
-	Path *CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListPathModel `tfsdk:"path"`
+	AnyDomain *CDNLoadBalancerEmptyModel                                                      `tfsdk:"any_domain"`
+	Domain    *CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListDomainModel   `tfsdk:"domain"`
+	Metadata  *CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListMetadataModel `tfsdk:"metadata"`
+	Path      *CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListPathModel     `tfsdk:"path"`
 }
 
 // CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListDomainModel represents domain block
 type CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListDomainModel struct {
-	ExactValue types.String `tfsdk:"exact_value"`
-	RegexValue types.String `tfsdk:"regex_value"`
+	ExactValue  types.String `tfsdk:"exact_value"`
+	RegexValue  types.String `tfsdk:"regex_value"`
 	SuffixValue types.String `tfsdk:"suffix_value"`
 }
 
 // CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListMetadataModel represents metadata block
 type CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
-	Name types.String `tfsdk:"name"`
+	Name            types.String `tfsdk:"name"`
 }
 
 // CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListPathModel represents path block
 type CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListPathModel struct {
-	Path types.String `tfsdk:"path"`
+	Path   types.String `tfsdk:"path"`
 	Prefix types.String `tfsdk:"prefix"`
-	Regex types.String `tfsdk:"regex"`
+	Regex  types.String `tfsdk:"regex"`
 }
 
 // CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesModel represents rules block
 type CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesModel struct {
-	AnyDomain *CDNLoadBalancerEmptyModel `tfsdk:"any_domain"`
-	Domain *CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesDomainModel `tfsdk:"domain"`
-	Metadata *CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesMetadataModel `tfsdk:"metadata"`
-	Path *CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesPathModel `tfsdk:"path"`
+	AnyDomain *CDNLoadBalancerEmptyModel                                                `tfsdk:"any_domain"`
+	Domain    *CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesDomainModel   `tfsdk:"domain"`
+	Metadata  *CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesMetadataModel `tfsdk:"metadata"`
+	Path      *CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesPathModel     `tfsdk:"path"`
 }
 
 // CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesDomainModel represents domain block
 type CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesDomainModel struct {
-	ExactValue types.String `tfsdk:"exact_value"`
-	RegexValue types.String `tfsdk:"regex_value"`
+	ExactValue  types.String `tfsdk:"exact_value"`
+	RegexValue  types.String `tfsdk:"regex_value"`
 	SuffixValue types.String `tfsdk:"suffix_value"`
 }
 
 // CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesMetadataModel represents metadata block
 type CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
-	Name types.String `tfsdk:"name"`
+	Name            types.String `tfsdk:"name"`
 }
 
 // CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesPathModel represents path block
 type CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesPathModel struct {
-	Path types.String `tfsdk:"path"`
+	Path   types.String `tfsdk:"path"`
 	Prefix types.String `tfsdk:"prefix"`
-	Regex types.String `tfsdk:"regex"`
+	Regex  types.String `tfsdk:"regex"`
 }
 
 // CDNLoadBalancerCorsPolicyModel represents cors_policy block
 type CDNLoadBalancerCorsPolicyModel struct {
-	AllowCredentials types.Bool `tfsdk:"allow_credentials"`
-	AllowHeaders types.String `tfsdk:"allow_headers"`
-	AllowMethods types.String `tfsdk:"allow_methods"`
-	AllowOrigin types.List `tfsdk:"allow_origin"`
-	AllowOriginRegex types.List `tfsdk:"allow_origin_regex"`
-	Disabled types.Bool `tfsdk:"disabled"`
-	ExposeHeaders types.String `tfsdk:"expose_headers"`
-	MaximumAge types.Int64 `tfsdk:"maximum_age"`
+	AllowCredentials types.Bool   `tfsdk:"allow_credentials"`
+	AllowHeaders     types.String `tfsdk:"allow_headers"`
+	AllowMethods     types.String `tfsdk:"allow_methods"`
+	AllowOrigin      types.List   `tfsdk:"allow_origin"`
+	AllowOriginRegex types.List   `tfsdk:"allow_origin_regex"`
+	Disabled         types.Bool   `tfsdk:"disabled"`
+	ExposeHeaders    types.String `tfsdk:"expose_headers"`
+	MaximumAge       types.Int64  `tfsdk:"maximum_age"`
 }
 
 // CDNLoadBalancerCsrfPolicyModel represents csrf_policy block
 type CDNLoadBalancerCsrfPolicyModel struct {
-	AllLoadBalancerDomains *CDNLoadBalancerEmptyModel `tfsdk:"all_load_balancer_domains"`
-	CustomDomainList *CDNLoadBalancerCsrfPolicyCustomDomainListModel `tfsdk:"custom_domain_list"`
-	Disabled *CDNLoadBalancerEmptyModel `tfsdk:"disabled"`
+	AllLoadBalancerDomains *CDNLoadBalancerEmptyModel                      `tfsdk:"all_load_balancer_domains"`
+	CustomDomainList       *CDNLoadBalancerCsrfPolicyCustomDomainListModel `tfsdk:"custom_domain_list"`
+	Disabled               *CDNLoadBalancerEmptyModel                      `tfsdk:"disabled"`
 }
 
 // CDNLoadBalancerCsrfPolicyCustomDomainListModel represents custom_domain_list block
@@ -1355,50 +1355,50 @@ type CDNLoadBalancerCustomCacheRuleModel struct {
 
 // CDNLoadBalancerCustomCacheRuleCDNCacheRulesModel represents cdn_cache_rules block
 type CDNLoadBalancerCustomCacheRuleCDNCacheRulesModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // CDNLoadBalancerDataGuardRulesModel represents data_guard_rules block
 type CDNLoadBalancerDataGuardRulesModel struct {
-	ExactValue types.String `tfsdk:"exact_value"`
-	SuffixValue types.String `tfsdk:"suffix_value"`
-	AnyDomain *CDNLoadBalancerEmptyModel `tfsdk:"any_domain"`
-	ApplyDataGuard *CDNLoadBalancerEmptyModel `tfsdk:"apply_data_guard"`
-	Metadata *CDNLoadBalancerDataGuardRulesMetadataModel `tfsdk:"metadata"`
-	Path *CDNLoadBalancerDataGuardRulesPathModel `tfsdk:"path"`
-	SkipDataGuard *CDNLoadBalancerEmptyModel `tfsdk:"skip_data_guard"`
+	ExactValue     types.String                                `tfsdk:"exact_value"`
+	SuffixValue    types.String                                `tfsdk:"suffix_value"`
+	AnyDomain      *CDNLoadBalancerEmptyModel                  `tfsdk:"any_domain"`
+	ApplyDataGuard *CDNLoadBalancerEmptyModel                  `tfsdk:"apply_data_guard"`
+	Metadata       *CDNLoadBalancerDataGuardRulesMetadataModel `tfsdk:"metadata"`
+	Path           *CDNLoadBalancerDataGuardRulesPathModel     `tfsdk:"path"`
+	SkipDataGuard  *CDNLoadBalancerEmptyModel                  `tfsdk:"skip_data_guard"`
 }
 
 // CDNLoadBalancerDataGuardRulesMetadataModel represents metadata block
 type CDNLoadBalancerDataGuardRulesMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
-	Name types.String `tfsdk:"name"`
+	Name            types.String `tfsdk:"name"`
 }
 
 // CDNLoadBalancerDataGuardRulesPathModel represents path block
 type CDNLoadBalancerDataGuardRulesPathModel struct {
-	Path types.String `tfsdk:"path"`
+	Path   types.String `tfsdk:"path"`
 	Prefix types.String `tfsdk:"prefix"`
-	Regex types.String `tfsdk:"regex"`
+	Regex  types.String `tfsdk:"regex"`
 }
 
 // CDNLoadBalancerDdosMitigationRulesModel represents ddos_mitigation_rules block
 type CDNLoadBalancerDdosMitigationRulesModel struct {
-	ExpirationTimestamp types.String `tfsdk:"expiration_timestamp"`
-	Block *CDNLoadBalancerEmptyModel `tfsdk:"block"`
-	DdosClientSource *CDNLoadBalancerDdosMitigationRulesDdosClientSourceModel `tfsdk:"ddos_client_source"`
-	IPPrefixList *CDNLoadBalancerDdosMitigationRulesIPPrefixListModel `tfsdk:"ip_prefix_list"`
-	Metadata *CDNLoadBalancerDdosMitigationRulesMetadataModel `tfsdk:"metadata"`
+	ExpirationTimestamp types.String                                             `tfsdk:"expiration_timestamp"`
+	Block               *CDNLoadBalancerEmptyModel                               `tfsdk:"block"`
+	DdosClientSource    *CDNLoadBalancerDdosMitigationRulesDdosClientSourceModel `tfsdk:"ddos_client_source"`
+	IPPrefixList        *CDNLoadBalancerDdosMitigationRulesIPPrefixListModel     `tfsdk:"ip_prefix_list"`
+	Metadata            *CDNLoadBalancerDdosMitigationRulesMetadataModel         `tfsdk:"metadata"`
 }
 
 // CDNLoadBalancerDdosMitigationRulesDdosClientSourceModel represents ddos_client_source block
 type CDNLoadBalancerDdosMitigationRulesDdosClientSourceModel struct {
-	CountryList types.List `tfsdk:"country_list"`
-	AsnList *CDNLoadBalancerDdosMitigationRulesDdosClientSourceAsnListModel `tfsdk:"asn_list"`
+	CountryList              types.List                                                                       `tfsdk:"country_list"`
+	AsnList                  *CDNLoadBalancerDdosMitigationRulesDdosClientSourceAsnListModel                  `tfsdk:"asn_list"`
 	Ja4TLSFingerprintMatcher *CDNLoadBalancerDdosMitigationRulesDdosClientSourceJa4TLSFingerprintMatcherModel `tfsdk:"ja4_tls_fingerprint_matcher"`
-	TLSFingerprintMatcher *CDNLoadBalancerDdosMitigationRulesDdosClientSourceTLSFingerprintMatcherModel `tfsdk:"tls_fingerprint_matcher"`
+	TLSFingerprintMatcher    *CDNLoadBalancerDdosMitigationRulesDdosClientSourceTLSFingerprintMatcherModel    `tfsdk:"tls_fingerprint_matcher"`
 }
 
 // CDNLoadBalancerDdosMitigationRulesDdosClientSourceAsnListModel represents asn_list block
@@ -1413,45 +1413,45 @@ type CDNLoadBalancerDdosMitigationRulesDdosClientSourceJa4TLSFingerprintMatcherM
 
 // CDNLoadBalancerDdosMitigationRulesDdosClientSourceTLSFingerprintMatcherModel represents tls_fingerprint_matcher block
 type CDNLoadBalancerDdosMitigationRulesDdosClientSourceTLSFingerprintMatcherModel struct {
-	Classes types.List `tfsdk:"classes"`
-	ExactValues types.List `tfsdk:"exact_values"`
+	Classes        types.List `tfsdk:"classes"`
+	ExactValues    types.List `tfsdk:"exact_values"`
 	ExcludedValues types.List `tfsdk:"excluded_values"`
 }
 
 // CDNLoadBalancerDdosMitigationRulesIPPrefixListModel represents ip_prefix_list block
 type CDNLoadBalancerDdosMitigationRulesIPPrefixListModel struct {
 	InvertMatch types.Bool `tfsdk:"invert_match"`
-	IPPrefixes types.List `tfsdk:"ip_prefixes"`
+	IPPrefixes  types.List `tfsdk:"ip_prefixes"`
 }
 
 // CDNLoadBalancerDdosMitigationRulesMetadataModel represents metadata block
 type CDNLoadBalancerDdosMitigationRulesMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
-	Name types.String `tfsdk:"name"`
+	Name            types.String `tfsdk:"name"`
 }
 
 // CDNLoadBalancerDefaultCacheActionModel represents default_cache_action block
 type CDNLoadBalancerDefaultCacheActionModel struct {
-	CacheTtlDefault types.String `tfsdk:"cache_ttl_default"`
-	CacheTtlOverride types.String `tfsdk:"cache_ttl_override"`
-	CacheDisabled *CDNLoadBalancerEmptyModel `tfsdk:"cache_disabled"`
+	CacheTtlDefault  types.String               `tfsdk:"cache_ttl_default"`
+	CacheTtlOverride types.String               `tfsdk:"cache_ttl_override"`
+	CacheDisabled    *CDNLoadBalancerEmptyModel `tfsdk:"cache_disabled"`
 }
 
 // CDNLoadBalancerEnableAPIDiscoveryModel represents enable_api_discovery block
 type CDNLoadBalancerEnableAPIDiscoveryModel struct {
-	APICrawler *CDNLoadBalancerEnableAPIDiscoveryAPICrawlerModel `tfsdk:"api_crawler"`
-	APIDiscoveryFromCodeScan *CDNLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanModel `tfsdk:"api_discovery_from_code_scan"`
-	CustomAPIAuthDiscovery *CDNLoadBalancerEnableAPIDiscoveryCustomAPIAuthDiscoveryModel `tfsdk:"custom_api_auth_discovery"`
-	DefaultAPIAuthDiscovery *CDNLoadBalancerEmptyModel `tfsdk:"default_api_auth_discovery"`
-	DisableLearnFromRedirectTraffic *CDNLoadBalancerEmptyModel `tfsdk:"disable_learn_from_redirect_traffic"`
-	DiscoveredAPISettings *CDNLoadBalancerEnableAPIDiscoveryDiscoveredAPISettingsModel `tfsdk:"discovered_api_settings"`
-	EnableLearnFromRedirectTraffic *CDNLoadBalancerEmptyModel `tfsdk:"enable_learn_from_redirect_traffic"`
+	APICrawler                      *CDNLoadBalancerEnableAPIDiscoveryAPICrawlerModel               `tfsdk:"api_crawler"`
+	APIDiscoveryFromCodeScan        *CDNLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanModel `tfsdk:"api_discovery_from_code_scan"`
+	CustomAPIAuthDiscovery          *CDNLoadBalancerEnableAPIDiscoveryCustomAPIAuthDiscoveryModel   `tfsdk:"custom_api_auth_discovery"`
+	DefaultAPIAuthDiscovery         *CDNLoadBalancerEmptyModel                                      `tfsdk:"default_api_auth_discovery"`
+	DisableLearnFromRedirectTraffic *CDNLoadBalancerEmptyModel                                      `tfsdk:"disable_learn_from_redirect_traffic"`
+	DiscoveredAPISettings           *CDNLoadBalancerEnableAPIDiscoveryDiscoveredAPISettingsModel    `tfsdk:"discovered_api_settings"`
+	EnableLearnFromRedirectTraffic  *CDNLoadBalancerEmptyModel                                      `tfsdk:"enable_learn_from_redirect_traffic"`
 }
 
 // CDNLoadBalancerEnableAPIDiscoveryAPICrawlerModel represents api_crawler block
 type CDNLoadBalancerEnableAPIDiscoveryAPICrawlerModel struct {
-	APICrawlerConfig *CDNLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigModel `tfsdk:"api_crawler_config"`
-	DisableAPICrawler *CDNLoadBalancerEmptyModel `tfsdk:"disable_api_crawler"`
+	APICrawlerConfig  *CDNLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigModel `tfsdk:"api_crawler_config"`
+	DisableAPICrawler *CDNLoadBalancerEmptyModel                                        `tfsdk:"disable_api_crawler"`
 }
 
 // CDNLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigModel represents api_crawler_config block
@@ -1461,33 +1461,33 @@ type CDNLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigModel struct {
 
 // CDNLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsModel represents domains block
 type CDNLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsModel struct {
-	Domain types.String `tfsdk:"domain"`
+	Domain      types.String                                                                        `tfsdk:"domain"`
 	SimpleLogin *CDNLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginModel `tfsdk:"simple_login"`
 }
 
 // CDNLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginModel represents simple_login block
 type CDNLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginModel struct {
-	User types.String `tfsdk:"user"`
+	User     types.String                                                                                `tfsdk:"user"`
 	Password *CDNLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordModel `tfsdk:"password"`
 }
 
 // CDNLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordModel represents password block
 type CDNLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordModel struct {
 	BlindfoldSecretInfo *CDNLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *CDNLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *CDNLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // CDNLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
 type CDNLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // CDNLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordClearSecretInfoModel represents clear_secret_info block
 type CDNLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // CDNLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanModel represents api_discovery_from_code_scan block
@@ -1497,16 +1497,16 @@ type CDNLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanModel struct {
 
 // CDNLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsModel represents code_base_integrations block
 type CDNLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsModel struct {
-	AllRepos *CDNLoadBalancerEmptyModel `tfsdk:"all_repos"`
+	AllRepos            *CDNLoadBalancerEmptyModel                                                                             `tfsdk:"all_repos"`
 	CodeBaseIntegration *CDNLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsCodeBaseIntegrationModel `tfsdk:"code_base_integration"`
-	SelectedRepos *CDNLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsSelectedReposModel `tfsdk:"selected_repos"`
+	SelectedRepos       *CDNLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsSelectedReposModel       `tfsdk:"selected_repos"`
 }
 
 // CDNLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsCodeBaseIntegrationModel represents code_base_integration block
 type CDNLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsCodeBaseIntegrationModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // CDNLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsSelectedReposModel represents selected_repos block
@@ -1521,9 +1521,9 @@ type CDNLoadBalancerEnableAPIDiscoveryCustomAPIAuthDiscoveryModel struct {
 
 // CDNLoadBalancerEnableAPIDiscoveryCustomAPIAuthDiscoveryAPIDiscoveryRefModel represents api_discovery_ref block
 type CDNLoadBalancerEnableAPIDiscoveryCustomAPIAuthDiscoveryAPIDiscoveryRefModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // CDNLoadBalancerEnableAPIDiscoveryDiscoveredAPISettingsModel represents discovered_api_settings block
@@ -1533,32 +1533,32 @@ type CDNLoadBalancerEnableAPIDiscoveryDiscoveredAPISettingsModel struct {
 
 // CDNLoadBalancerEnableChallengeModel represents enable_challenge block
 type CDNLoadBalancerEnableChallengeModel struct {
-	CaptchaChallengeParameters *CDNLoadBalancerEnableChallengeCaptchaChallengeParametersModel `tfsdk:"captcha_challenge_parameters"`
-	DefaultCaptchaChallengeParameters *CDNLoadBalancerEmptyModel `tfsdk:"default_captcha_challenge_parameters"`
-	DefaultJsChallengeParameters *CDNLoadBalancerEmptyModel `tfsdk:"default_js_challenge_parameters"`
-	DefaultMitigationSettings *CDNLoadBalancerEmptyModel `tfsdk:"default_mitigation_settings"`
-	JsChallengeParameters *CDNLoadBalancerEnableChallengeJsChallengeParametersModel `tfsdk:"js_challenge_parameters"`
-	MaliciousUserMitigation *CDNLoadBalancerEnableChallengeMaliciousUserMitigationModel `tfsdk:"malicious_user_mitigation"`
+	CaptchaChallengeParameters        *CDNLoadBalancerEnableChallengeCaptchaChallengeParametersModel `tfsdk:"captcha_challenge_parameters"`
+	DefaultCaptchaChallengeParameters *CDNLoadBalancerEmptyModel                                     `tfsdk:"default_captcha_challenge_parameters"`
+	DefaultJsChallengeParameters      *CDNLoadBalancerEmptyModel                                     `tfsdk:"default_js_challenge_parameters"`
+	DefaultMitigationSettings         *CDNLoadBalancerEmptyModel                                     `tfsdk:"default_mitigation_settings"`
+	JsChallengeParameters             *CDNLoadBalancerEnableChallengeJsChallengeParametersModel      `tfsdk:"js_challenge_parameters"`
+	MaliciousUserMitigation           *CDNLoadBalancerEnableChallengeMaliciousUserMitigationModel    `tfsdk:"malicious_user_mitigation"`
 }
 
 // CDNLoadBalancerEnableChallengeCaptchaChallengeParametersModel represents captcha_challenge_parameters block
 type CDNLoadBalancerEnableChallengeCaptchaChallengeParametersModel struct {
-	CookieExpiry types.Int64 `tfsdk:"cookie_expiry"`
-	CustomPage types.String `tfsdk:"custom_page"`
+	CookieExpiry types.Int64  `tfsdk:"cookie_expiry"`
+	CustomPage   types.String `tfsdk:"custom_page"`
 }
 
 // CDNLoadBalancerEnableChallengeJsChallengeParametersModel represents js_challenge_parameters block
 type CDNLoadBalancerEnableChallengeJsChallengeParametersModel struct {
-	CookieExpiry types.Int64 `tfsdk:"cookie_expiry"`
-	CustomPage types.String `tfsdk:"custom_page"`
-	JsScriptDelay types.Int64 `tfsdk:"js_script_delay"`
+	CookieExpiry  types.Int64  `tfsdk:"cookie_expiry"`
+	CustomPage    types.String `tfsdk:"custom_page"`
+	JsScriptDelay types.Int64  `tfsdk:"js_script_delay"`
 }
 
 // CDNLoadBalancerEnableChallengeMaliciousUserMitigationModel represents malicious_user_mitigation block
 type CDNLoadBalancerEnableChallengeMaliciousUserMitigationModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // CDNLoadBalancerEnableIPReputationModel represents enable_ip_reputation block
@@ -1568,104 +1568,104 @@ type CDNLoadBalancerEnableIPReputationModel struct {
 
 // CDNLoadBalancerGraphqlRulesModel represents graphql_rules block
 type CDNLoadBalancerGraphqlRulesModel struct {
-	ExactPath types.String `tfsdk:"exact_path"`
-	ExactValue types.String `tfsdk:"exact_value"`
-	SuffixValue types.String `tfsdk:"suffix_value"`
-	AnyDomain *CDNLoadBalancerEmptyModel `tfsdk:"any_domain"`
+	ExactPath       types.String                                     `tfsdk:"exact_path"`
+	ExactValue      types.String                                     `tfsdk:"exact_value"`
+	SuffixValue     types.String                                     `tfsdk:"suffix_value"`
+	AnyDomain       *CDNLoadBalancerEmptyModel                       `tfsdk:"any_domain"`
 	GraphqlSettings *CDNLoadBalancerGraphqlRulesGraphqlSettingsModel `tfsdk:"graphql_settings"`
-	Metadata *CDNLoadBalancerGraphqlRulesMetadataModel `tfsdk:"metadata"`
-	MethodGet *CDNLoadBalancerEmptyModel `tfsdk:"method_get"`
-	MethodPost *CDNLoadBalancerEmptyModel `tfsdk:"method_post"`
+	Metadata        *CDNLoadBalancerGraphqlRulesMetadataModel        `tfsdk:"metadata"`
+	MethodGet       *CDNLoadBalancerEmptyModel                       `tfsdk:"method_get"`
+	MethodPost      *CDNLoadBalancerEmptyModel                       `tfsdk:"method_post"`
 }
 
 // CDNLoadBalancerGraphqlRulesGraphqlSettingsModel represents graphql_settings block
 type CDNLoadBalancerGraphqlRulesGraphqlSettingsModel struct {
-	MaxBatchedQueries types.Int64 `tfsdk:"max_batched_queries"`
-	MaxDepth types.Int64 `tfsdk:"max_depth"`
-	MaxTotalLength types.Int64 `tfsdk:"max_total_length"`
+	MaxBatchedQueries    types.Int64                `tfsdk:"max_batched_queries"`
+	MaxDepth             types.Int64                `tfsdk:"max_depth"`
+	MaxTotalLength       types.Int64                `tfsdk:"max_total_length"`
 	DisableIntrospection *CDNLoadBalancerEmptyModel `tfsdk:"disable_introspection"`
-	EnableIntrospection *CDNLoadBalancerEmptyModel `tfsdk:"enable_introspection"`
+	EnableIntrospection  *CDNLoadBalancerEmptyModel `tfsdk:"enable_introspection"`
 }
 
 // CDNLoadBalancerGraphqlRulesMetadataModel represents metadata block
 type CDNLoadBalancerGraphqlRulesMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
-	Name types.String `tfsdk:"name"`
+	Name            types.String `tfsdk:"name"`
 }
 
 // CDNLoadBalancerHTTPModel represents http block
 type CDNLoadBalancerHTTPModel struct {
-	DNSVolterraManaged types.Bool `tfsdk:"dns_volterra_managed"`
-	Port types.Int64 `tfsdk:"port"`
-	PortRanges types.String `tfsdk:"port_ranges"`
+	DNSVolterraManaged types.Bool   `tfsdk:"dns_volterra_managed"`
+	Port               types.Int64  `tfsdk:"port"`
+	PortRanges         types.String `tfsdk:"port_ranges"`
 }
 
 // CDNLoadBalancerHTTPSModel represents https block
 type CDNLoadBalancerHTTPSModel struct {
-	AddHsts types.Bool `tfsdk:"add_hsts"`
-	HTTPRedirect types.Bool `tfsdk:"http_redirect"`
+	AddHsts        types.Bool                               `tfsdk:"add_hsts"`
+	HTTPRedirect   types.Bool                               `tfsdk:"http_redirect"`
 	TLSCertOptions *CDNLoadBalancerHTTPSTLSCertOptionsModel `tfsdk:"tls_cert_options"`
 }
 
 // CDNLoadBalancerHTTPSTLSCertOptionsModel represents tls_cert_options block
 type CDNLoadBalancerHTTPSTLSCertOptionsModel struct {
-	TLSCertParams *CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsModel `tfsdk:"tls_cert_params"`
+	TLSCertParams   *CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsModel   `tfsdk:"tls_cert_params"`
 	TLSInlineParams *CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsModel `tfsdk:"tls_inline_params"`
 }
 
 // CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsModel represents tls_cert_params block
 type CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsModel struct {
 	Certificates []CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsCertificatesModel `tfsdk:"certificates"`
-	NoMtls *CDNLoadBalancerEmptyModel `tfsdk:"no_mtls"`
-	TLSConfig *CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsTLSConfigModel `tfsdk:"tls_config"`
-	UseMtls *CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsUseMtlsModel `tfsdk:"use_mtls"`
+	NoMtls       *CDNLoadBalancerEmptyModel                                         `tfsdk:"no_mtls"`
+	TLSConfig    *CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsTLSConfigModel     `tfsdk:"tls_config"`
+	UseMtls      *CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsUseMtlsModel       `tfsdk:"use_mtls"`
 }
 
 // CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsCertificatesModel represents certificates block
 type CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsCertificatesModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsTLSConfigModel represents tls_config block
 type CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsTLSConfigModel struct {
-	CustomSecurity *CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
-	DefaultSecurity *CDNLoadBalancerEmptyModel `tfsdk:"default_security"`
-	LowSecurity *CDNLoadBalancerEmptyModel `tfsdk:"low_security"`
-	MediumSecurity *CDNLoadBalancerEmptyModel `tfsdk:"medium_security"`
+	CustomSecurity  *CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
+	DefaultSecurity *CDNLoadBalancerEmptyModel                                                   `tfsdk:"default_security"`
+	LowSecurity     *CDNLoadBalancerEmptyModel                                                   `tfsdk:"low_security"`
+	MediumSecurity  *CDNLoadBalancerEmptyModel                                                   `tfsdk:"medium_security"`
 }
 
 // CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsTLSConfigCustomSecurityModel represents custom_security block
 type CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsTLSConfigCustomSecurityModel struct {
-	CipherSuites types.List `tfsdk:"cipher_suites"`
-	MaxVersion types.String `tfsdk:"max_version"`
-	MinVersion types.String `tfsdk:"min_version"`
+	CipherSuites types.List   `tfsdk:"cipher_suites"`
+	MaxVersion   types.String `tfsdk:"max_version"`
+	MinVersion   types.String `tfsdk:"min_version"`
 }
 
 // CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsUseMtlsModel represents use_mtls block
 type CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsUseMtlsModel struct {
-	ClientCertificateOptional types.Bool `tfsdk:"client_certificate_optional"`
-	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
-	CRL *CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsUseMtlsCRLModel `tfsdk:"crl"`
-	NoCRL *CDNLoadBalancerEmptyModel `tfsdk:"no_crl"`
-	TrustedCa *CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsUseMtlsTrustedCaModel `tfsdk:"trusted_ca"`
-	XfccDisabled *CDNLoadBalancerEmptyModel `tfsdk:"xfcc_disabled"`
-	XfccOptions *CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
+	ClientCertificateOptional types.Bool                                                              `tfsdk:"client_certificate_optional"`
+	TrustedCaURL              types.String                                                            `tfsdk:"trusted_ca_url"`
+	CRL                       *CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsUseMtlsCRLModel         `tfsdk:"crl"`
+	NoCRL                     *CDNLoadBalancerEmptyModel                                              `tfsdk:"no_crl"`
+	TrustedCa                 *CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsUseMtlsTrustedCaModel   `tfsdk:"trusted_ca"`
+	XfccDisabled              *CDNLoadBalancerEmptyModel                                              `tfsdk:"xfcc_disabled"`
+	XfccOptions               *CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
 
 // CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsUseMtlsCRLModel represents crl block
 type CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsUseMtlsCRLModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsUseMtlsTrustedCaModel represents trusted_ca block
 type CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsUseMtlsTrustedCaModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsUseMtlsXfccOptionsModel represents xfcc_options block
@@ -1675,20 +1675,20 @@ type CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsUseMtlsXfccOptionsModel stru
 
 // CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsModel represents tls_inline_params block
 type CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsModel struct {
-	NoMtls *CDNLoadBalancerEmptyModel `tfsdk:"no_mtls"`
+	NoMtls          *CDNLoadBalancerEmptyModel                                              `tfsdk:"no_mtls"`
 	TLSCertificates []CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSCertificatesModel `tfsdk:"tls_certificates"`
-	TLSConfig *CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSConfigModel `tfsdk:"tls_config"`
-	UseMtls *CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsUseMtlsModel `tfsdk:"use_mtls"`
+	TLSConfig       *CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSConfigModel        `tfsdk:"tls_config"`
+	UseMtls         *CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsUseMtlsModel          `tfsdk:"use_mtls"`
 }
 
 // CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSCertificatesModel represents tls_certificates block
 type CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSCertificatesModel struct {
-	CertificateURL types.String `tfsdk:"certificate_url"`
-	DescriptionSpec types.String `tfsdk:"description_spec"`
+	CertificateURL       types.String                                                                               `tfsdk:"certificate_url"`
+	DescriptionSpec      types.String                                                                               `tfsdk:"description_spec"`
 	CustomHashAlgorithms *CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
-	DisableOcspStapling *CDNLoadBalancerEmptyModel `tfsdk:"disable_ocsp_stapling"`
-	PrivateKey *CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
-	UseSystemDefaults *CDNLoadBalancerEmptyModel `tfsdk:"use_system_defaults"`
+	DisableOcspStapling  *CDNLoadBalancerEmptyModel                                                                 `tfsdk:"disable_ocsp_stapling"`
+	PrivateKey           *CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSCertificatesPrivateKeyModel           `tfsdk:"private_key"`
+	UseSystemDefaults    *CDNLoadBalancerEmptyModel                                                                 `tfsdk:"use_system_defaults"`
 }
 
 // CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
@@ -1699,60 +1699,60 @@ type CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSCertificatesCustomHashA
 // CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSCertificatesPrivateKeyModel represents private_key block
 type CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSCertificatesPrivateKeyModel struct {
 	BlindfoldSecretInfo *CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSCertificatesPrivateKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSCertificatesPrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
 type CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSCertificatesPrivateKeyBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
 type CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSCertificatesPrivateKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSConfigModel represents tls_config block
 type CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSConfigModel struct {
-	CustomSecurity *CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
-	DefaultSecurity *CDNLoadBalancerEmptyModel `tfsdk:"default_security"`
-	LowSecurity *CDNLoadBalancerEmptyModel `tfsdk:"low_security"`
-	MediumSecurity *CDNLoadBalancerEmptyModel `tfsdk:"medium_security"`
+	CustomSecurity  *CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
+	DefaultSecurity *CDNLoadBalancerEmptyModel                                                     `tfsdk:"default_security"`
+	LowSecurity     *CDNLoadBalancerEmptyModel                                                     `tfsdk:"low_security"`
+	MediumSecurity  *CDNLoadBalancerEmptyModel                                                     `tfsdk:"medium_security"`
 }
 
 // CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSConfigCustomSecurityModel represents custom_security block
 type CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSConfigCustomSecurityModel struct {
-	CipherSuites types.List `tfsdk:"cipher_suites"`
-	MaxVersion types.String `tfsdk:"max_version"`
-	MinVersion types.String `tfsdk:"min_version"`
+	CipherSuites types.List   `tfsdk:"cipher_suites"`
+	MaxVersion   types.String `tfsdk:"max_version"`
+	MinVersion   types.String `tfsdk:"min_version"`
 }
 
 // CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsUseMtlsModel represents use_mtls block
 type CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsUseMtlsModel struct {
-	ClientCertificateOptional types.Bool `tfsdk:"client_certificate_optional"`
-	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
-	CRL *CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsUseMtlsCRLModel `tfsdk:"crl"`
-	NoCRL *CDNLoadBalancerEmptyModel `tfsdk:"no_crl"`
-	TrustedCa *CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsUseMtlsTrustedCaModel `tfsdk:"trusted_ca"`
-	XfccDisabled *CDNLoadBalancerEmptyModel `tfsdk:"xfcc_disabled"`
-	XfccOptions *CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
+	ClientCertificateOptional types.Bool                                                                `tfsdk:"client_certificate_optional"`
+	TrustedCaURL              types.String                                                              `tfsdk:"trusted_ca_url"`
+	CRL                       *CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsUseMtlsCRLModel         `tfsdk:"crl"`
+	NoCRL                     *CDNLoadBalancerEmptyModel                                                `tfsdk:"no_crl"`
+	TrustedCa                 *CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsUseMtlsTrustedCaModel   `tfsdk:"trusted_ca"`
+	XfccDisabled              *CDNLoadBalancerEmptyModel                                                `tfsdk:"xfcc_disabled"`
+	XfccOptions               *CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
 
 // CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsUseMtlsCRLModel represents crl block
 type CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsUseMtlsCRLModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsUseMtlsTrustedCaModel represents trusted_ca block
 type CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsUseMtlsTrustedCaModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsUseMtlsXfccOptionsModel represents xfcc_options block
@@ -1762,9 +1762,9 @@ type CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsUseMtlsXfccOptionsModel st
 
 // CDNLoadBalancerHTTPSAutoCertModel represents https_auto_cert block
 type CDNLoadBalancerHTTPSAutoCertModel struct {
-	AddHsts types.Bool `tfsdk:"add_hsts"`
-	HTTPRedirect types.Bool `tfsdk:"http_redirect"`
-	TLSConfig *CDNLoadBalancerHTTPSAutoCertTLSConfigModel `tfsdk:"tls_config"`
+	AddHsts      types.Bool                                  `tfsdk:"add_hsts"`
+	HTTPRedirect types.Bool                                  `tfsdk:"http_redirect"`
+	TLSConfig    *CDNLoadBalancerHTTPSAutoCertTLSConfigModel `tfsdk:"tls_config"`
 }
 
 // CDNLoadBalancerHTTPSAutoCertTLSConfigModel represents tls_config block
@@ -1775,24 +1775,24 @@ type CDNLoadBalancerHTTPSAutoCertTLSConfigModel struct {
 
 // CDNLoadBalancerJsChallengeModel represents js_challenge block
 type CDNLoadBalancerJsChallengeModel struct {
-	CookieExpiry types.Int64 `tfsdk:"cookie_expiry"`
-	CustomPage types.String `tfsdk:"custom_page"`
-	JsScriptDelay types.Int64 `tfsdk:"js_script_delay"`
+	CookieExpiry  types.Int64  `tfsdk:"cookie_expiry"`
+	CustomPage    types.String `tfsdk:"custom_page"`
+	JsScriptDelay types.Int64  `tfsdk:"js_script_delay"`
 }
 
 // CDNLoadBalancerJwtValidationModel represents jwt_validation block
 type CDNLoadBalancerJwtValidationModel struct {
-	Action *CDNLoadBalancerJwtValidationActionModel `tfsdk:"action"`
-	JwksConfig *CDNLoadBalancerJwtValidationJwksConfigModel `tfsdk:"jwks_config"`
+	Action          *CDNLoadBalancerJwtValidationActionModel          `tfsdk:"action"`
+	JwksConfig      *CDNLoadBalancerJwtValidationJwksConfigModel      `tfsdk:"jwks_config"`
 	MandatoryClaims *CDNLoadBalancerJwtValidationMandatoryClaimsModel `tfsdk:"mandatory_claims"`
-	ReservedClaims *CDNLoadBalancerJwtValidationReservedClaimsModel `tfsdk:"reserved_claims"`
-	Target *CDNLoadBalancerJwtValidationTargetModel `tfsdk:"target"`
-	TokenLocation *CDNLoadBalancerJwtValidationTokenLocationModel `tfsdk:"token_location"`
+	ReservedClaims  *CDNLoadBalancerJwtValidationReservedClaimsModel  `tfsdk:"reserved_claims"`
+	Target          *CDNLoadBalancerJwtValidationTargetModel          `tfsdk:"target"`
+	TokenLocation   *CDNLoadBalancerJwtValidationTokenLocationModel   `tfsdk:"token_location"`
 }
 
 // CDNLoadBalancerJwtValidationActionModel represents action block
 type CDNLoadBalancerJwtValidationActionModel struct {
-	Block *CDNLoadBalancerEmptyModel `tfsdk:"block"`
+	Block  *CDNLoadBalancerEmptyModel `tfsdk:"block"`
 	Report *CDNLoadBalancerEmptyModel `tfsdk:"report"`
 }
 
@@ -1808,12 +1808,12 @@ type CDNLoadBalancerJwtValidationMandatoryClaimsModel struct {
 
 // CDNLoadBalancerJwtValidationReservedClaimsModel represents reserved_claims block
 type CDNLoadBalancerJwtValidationReservedClaimsModel struct {
-	Issuer types.String `tfsdk:"issuer"`
-	Audience *CDNLoadBalancerJwtValidationReservedClaimsAudienceModel `tfsdk:"audience"`
-	AudienceDisable *CDNLoadBalancerEmptyModel `tfsdk:"audience_disable"`
-	IssuerDisable *CDNLoadBalancerEmptyModel `tfsdk:"issuer_disable"`
-	ValidatePeriodDisable *CDNLoadBalancerEmptyModel `tfsdk:"validate_period_disable"`
-	ValidatePeriodEnable *CDNLoadBalancerEmptyModel `tfsdk:"validate_period_enable"`
+	Issuer                types.String                                             `tfsdk:"issuer"`
+	Audience              *CDNLoadBalancerJwtValidationReservedClaimsAudienceModel `tfsdk:"audience"`
+	AudienceDisable       *CDNLoadBalancerEmptyModel                               `tfsdk:"audience_disable"`
+	IssuerDisable         *CDNLoadBalancerEmptyModel                               `tfsdk:"issuer_disable"`
+	ValidatePeriodDisable *CDNLoadBalancerEmptyModel                               `tfsdk:"validate_period_disable"`
+	ValidatePeriodEnable  *CDNLoadBalancerEmptyModel                               `tfsdk:"validate_period_enable"`
 }
 
 // CDNLoadBalancerJwtValidationReservedClaimsAudienceModel represents audience block
@@ -1823,9 +1823,9 @@ type CDNLoadBalancerJwtValidationReservedClaimsAudienceModel struct {
 
 // CDNLoadBalancerJwtValidationTargetModel represents target block
 type CDNLoadBalancerJwtValidationTargetModel struct {
-	AllEndpoint *CDNLoadBalancerEmptyModel `tfsdk:"all_endpoint"`
-	APIGroups *CDNLoadBalancerJwtValidationTargetAPIGroupsModel `tfsdk:"api_groups"`
-	BasePaths *CDNLoadBalancerJwtValidationTargetBasePathsModel `tfsdk:"base_paths"`
+	AllEndpoint *CDNLoadBalancerEmptyModel                        `tfsdk:"all_endpoint"`
+	APIGroups   *CDNLoadBalancerJwtValidationTargetAPIGroupsModel `tfsdk:"api_groups"`
+	BasePaths   *CDNLoadBalancerJwtValidationTargetBasePathsModel `tfsdk:"base_paths"`
 }
 
 // CDNLoadBalancerJwtValidationTargetAPIGroupsModel represents api_groups block
@@ -1845,31 +1845,31 @@ type CDNLoadBalancerJwtValidationTokenLocationModel struct {
 
 // CDNLoadBalancerL7DdosActionJsChallengeModel represents l7_ddos_action_js_challenge block
 type CDNLoadBalancerL7DdosActionJsChallengeModel struct {
-	CookieExpiry types.Int64 `tfsdk:"cookie_expiry"`
-	CustomPage types.String `tfsdk:"custom_page"`
-	JsScriptDelay types.Int64 `tfsdk:"js_script_delay"`
+	CookieExpiry  types.Int64  `tfsdk:"cookie_expiry"`
+	CustomPage    types.String `tfsdk:"custom_page"`
+	JsScriptDelay types.Int64  `tfsdk:"js_script_delay"`
 }
 
 // CDNLoadBalancerOriginPoolModel represents origin_pool block
 type CDNLoadBalancerOriginPoolModel struct {
-	OriginRequestTimeout types.String `tfsdk:"origin_request_timeout"`
-	MoreOriginOptions *CDNLoadBalancerOriginPoolMoreOriginOptionsModel `tfsdk:"more_origin_options"`
-	NoTLS *CDNLoadBalancerEmptyModel `tfsdk:"no_tls"`
-	OriginServers []CDNLoadBalancerOriginPoolOriginServersModel `tfsdk:"origin_servers"`
-	PublicName *CDNLoadBalancerOriginPoolPublicNameModel `tfsdk:"public_name"`
-	UseTLS *CDNLoadBalancerOriginPoolUseTLSModel `tfsdk:"use_tls"`
+	OriginRequestTimeout types.String                                     `tfsdk:"origin_request_timeout"`
+	MoreOriginOptions    *CDNLoadBalancerOriginPoolMoreOriginOptionsModel `tfsdk:"more_origin_options"`
+	NoTLS                *CDNLoadBalancerEmptyModel                       `tfsdk:"no_tls"`
+	OriginServers        []CDNLoadBalancerOriginPoolOriginServersModel    `tfsdk:"origin_servers"`
+	PublicName           *CDNLoadBalancerOriginPoolPublicNameModel        `tfsdk:"public_name"`
+	UseTLS               *CDNLoadBalancerOriginPoolUseTLSModel            `tfsdk:"use_tls"`
 }
 
 // CDNLoadBalancerOriginPoolMoreOriginOptionsModel represents more_origin_options block
 type CDNLoadBalancerOriginPoolMoreOriginOptionsModel struct {
 	EnableByteRangeRequest types.Bool `tfsdk:"enable_byte_range_request"`
-	WebsocketProxy types.Bool `tfsdk:"websocket_proxy"`
+	WebsocketProxy         types.Bool `tfsdk:"websocket_proxy"`
 }
 
 // CDNLoadBalancerOriginPoolOriginServersModel represents origin_servers block
 type CDNLoadBalancerOriginPoolOriginServersModel struct {
-	Port types.Int64 `tfsdk:"port"`
-	PublicIP *CDNLoadBalancerOriginPoolOriginServersPublicIPModel `tfsdk:"public_ip"`
+	Port       types.Int64                                            `tfsdk:"port"`
+	PublicIP   *CDNLoadBalancerOriginPoolOriginServersPublicIPModel   `tfsdk:"public_ip"`
 	PublicName *CDNLoadBalancerOriginPoolOriginServersPublicNameModel `tfsdk:"public_name"`
 }
 
@@ -1880,46 +1880,46 @@ type CDNLoadBalancerOriginPoolOriginServersPublicIPModel struct {
 
 // CDNLoadBalancerOriginPoolOriginServersPublicNameModel represents public_name block
 type CDNLoadBalancerOriginPoolOriginServersPublicNameModel struct {
-	DNSName types.String `tfsdk:"dns_name"`
-	RefreshInterval types.Int64 `tfsdk:"refresh_interval"`
+	DNSName         types.String `tfsdk:"dns_name"`
+	RefreshInterval types.Int64  `tfsdk:"refresh_interval"`
 }
 
 // CDNLoadBalancerOriginPoolPublicNameModel represents public_name block
 type CDNLoadBalancerOriginPoolPublicNameModel struct {
-	DNSName types.String `tfsdk:"dns_name"`
-	RefreshInterval types.Int64 `tfsdk:"refresh_interval"`
+	DNSName         types.String `tfsdk:"dns_name"`
+	RefreshInterval types.Int64  `tfsdk:"refresh_interval"`
 }
 
 // CDNLoadBalancerOriginPoolUseTLSModel represents use_tls block
 type CDNLoadBalancerOriginPoolUseTLSModel struct {
-	MaxSessionKeys types.Int64 `tfsdk:"max_session_keys"`
-	Sni types.String `tfsdk:"sni"`
-	DefaultSessionKeyCaching *CDNLoadBalancerEmptyModel `tfsdk:"default_session_key_caching"`
-	DisableSessionKeyCaching *CDNLoadBalancerEmptyModel `tfsdk:"disable_session_key_caching"`
-	DisableSni *CDNLoadBalancerEmptyModel `tfsdk:"disable_sni"`
-	NoMtls *CDNLoadBalancerEmptyModel `tfsdk:"no_mtls"`
-	SkipServerVerification *CDNLoadBalancerEmptyModel `tfsdk:"skip_server_verification"`
-	TLSConfig *CDNLoadBalancerOriginPoolUseTLSTLSConfigModel `tfsdk:"tls_config"`
-	UseHostHeaderAsSni *CDNLoadBalancerEmptyModel `tfsdk:"use_host_header_as_sni"`
-	UseMtls *CDNLoadBalancerOriginPoolUseTLSUseMtlsModel `tfsdk:"use_mtls"`
-	UseMtlsObj *CDNLoadBalancerOriginPoolUseTLSUseMtlsObjModel `tfsdk:"use_mtls_obj"`
-	UseServerVerification *CDNLoadBalancerOriginPoolUseTLSUseServerVerificationModel `tfsdk:"use_server_verification"`
-	VolterraTrustedCa *CDNLoadBalancerEmptyModel `tfsdk:"volterra_trusted_ca"`
+	MaxSessionKeys           types.Int64                                                `tfsdk:"max_session_keys"`
+	Sni                      types.String                                               `tfsdk:"sni"`
+	DefaultSessionKeyCaching *CDNLoadBalancerEmptyModel                                 `tfsdk:"default_session_key_caching"`
+	DisableSessionKeyCaching *CDNLoadBalancerEmptyModel                                 `tfsdk:"disable_session_key_caching"`
+	DisableSni               *CDNLoadBalancerEmptyModel                                 `tfsdk:"disable_sni"`
+	NoMtls                   *CDNLoadBalancerEmptyModel                                 `tfsdk:"no_mtls"`
+	SkipServerVerification   *CDNLoadBalancerEmptyModel                                 `tfsdk:"skip_server_verification"`
+	TLSConfig                *CDNLoadBalancerOriginPoolUseTLSTLSConfigModel             `tfsdk:"tls_config"`
+	UseHostHeaderAsSni       *CDNLoadBalancerEmptyModel                                 `tfsdk:"use_host_header_as_sni"`
+	UseMtls                  *CDNLoadBalancerOriginPoolUseTLSUseMtlsModel               `tfsdk:"use_mtls"`
+	UseMtlsObj               *CDNLoadBalancerOriginPoolUseTLSUseMtlsObjModel            `tfsdk:"use_mtls_obj"`
+	UseServerVerification    *CDNLoadBalancerOriginPoolUseTLSUseServerVerificationModel `tfsdk:"use_server_verification"`
+	VolterraTrustedCa        *CDNLoadBalancerEmptyModel                                 `tfsdk:"volterra_trusted_ca"`
 }
 
 // CDNLoadBalancerOriginPoolUseTLSTLSConfigModel represents tls_config block
 type CDNLoadBalancerOriginPoolUseTLSTLSConfigModel struct {
-	CustomSecurity *CDNLoadBalancerOriginPoolUseTLSTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
-	DefaultSecurity *CDNLoadBalancerEmptyModel `tfsdk:"default_security"`
-	LowSecurity *CDNLoadBalancerEmptyModel `tfsdk:"low_security"`
-	MediumSecurity *CDNLoadBalancerEmptyModel `tfsdk:"medium_security"`
+	CustomSecurity  *CDNLoadBalancerOriginPoolUseTLSTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
+	DefaultSecurity *CDNLoadBalancerEmptyModel                                   `tfsdk:"default_security"`
+	LowSecurity     *CDNLoadBalancerEmptyModel                                   `tfsdk:"low_security"`
+	MediumSecurity  *CDNLoadBalancerEmptyModel                                   `tfsdk:"medium_security"`
 }
 
 // CDNLoadBalancerOriginPoolUseTLSTLSConfigCustomSecurityModel represents custom_security block
 type CDNLoadBalancerOriginPoolUseTLSTLSConfigCustomSecurityModel struct {
-	CipherSuites types.List `tfsdk:"cipher_suites"`
-	MaxVersion types.String `tfsdk:"max_version"`
-	MinVersion types.String `tfsdk:"min_version"`
+	CipherSuites types.List   `tfsdk:"cipher_suites"`
+	MaxVersion   types.String `tfsdk:"max_version"`
+	MinVersion   types.String `tfsdk:"min_version"`
 }
 
 // CDNLoadBalancerOriginPoolUseTLSUseMtlsModel represents use_mtls block
@@ -1929,12 +1929,12 @@ type CDNLoadBalancerOriginPoolUseTLSUseMtlsModel struct {
 
 // CDNLoadBalancerOriginPoolUseTLSUseMtlsTLSCertificatesModel represents tls_certificates block
 type CDNLoadBalancerOriginPoolUseTLSUseMtlsTLSCertificatesModel struct {
-	CertificateURL types.String `tfsdk:"certificate_url"`
-	DescriptionSpec types.String `tfsdk:"description_spec"`
+	CertificateURL       types.String                                                                    `tfsdk:"certificate_url"`
+	DescriptionSpec      types.String                                                                    `tfsdk:"description_spec"`
 	CustomHashAlgorithms *CDNLoadBalancerOriginPoolUseTLSUseMtlsTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
-	DisableOcspStapling *CDNLoadBalancerEmptyModel `tfsdk:"disable_ocsp_stapling"`
-	PrivateKey *CDNLoadBalancerOriginPoolUseTLSUseMtlsTLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
-	UseSystemDefaults *CDNLoadBalancerEmptyModel `tfsdk:"use_system_defaults"`
+	DisableOcspStapling  *CDNLoadBalancerEmptyModel                                                      `tfsdk:"disable_ocsp_stapling"`
+	PrivateKey           *CDNLoadBalancerOriginPoolUseTLSUseMtlsTLSCertificatesPrivateKeyModel           `tfsdk:"private_key"`
+	UseSystemDefaults    *CDNLoadBalancerEmptyModel                                                      `tfsdk:"use_system_defaults"`
 }
 
 // CDNLoadBalancerOriginPoolUseTLSUseMtlsTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
@@ -1945,109 +1945,109 @@ type CDNLoadBalancerOriginPoolUseTLSUseMtlsTLSCertificatesCustomHashAlgorithmsMo
 // CDNLoadBalancerOriginPoolUseTLSUseMtlsTLSCertificatesPrivateKeyModel represents private_key block
 type CDNLoadBalancerOriginPoolUseTLSUseMtlsTLSCertificatesPrivateKeyModel struct {
 	BlindfoldSecretInfo *CDNLoadBalancerOriginPoolUseTLSUseMtlsTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *CDNLoadBalancerOriginPoolUseTLSUseMtlsTLSCertificatesPrivateKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *CDNLoadBalancerOriginPoolUseTLSUseMtlsTLSCertificatesPrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // CDNLoadBalancerOriginPoolUseTLSUseMtlsTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
 type CDNLoadBalancerOriginPoolUseTLSUseMtlsTLSCertificatesPrivateKeyBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // CDNLoadBalancerOriginPoolUseTLSUseMtlsTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
 type CDNLoadBalancerOriginPoolUseTLSUseMtlsTLSCertificatesPrivateKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // CDNLoadBalancerOriginPoolUseTLSUseMtlsObjModel represents use_mtls_obj block
 type CDNLoadBalancerOriginPoolUseTLSUseMtlsObjModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // CDNLoadBalancerOriginPoolUseTLSUseServerVerificationModel represents use_server_verification block
 type CDNLoadBalancerOriginPoolUseTLSUseServerVerificationModel struct {
-	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
-	TrustedCa *CDNLoadBalancerOriginPoolUseTLSUseServerVerificationTrustedCaModel `tfsdk:"trusted_ca"`
+	TrustedCaURL types.String                                                        `tfsdk:"trusted_ca_url"`
+	TrustedCa    *CDNLoadBalancerOriginPoolUseTLSUseServerVerificationTrustedCaModel `tfsdk:"trusted_ca"`
 }
 
 // CDNLoadBalancerOriginPoolUseTLSUseServerVerificationTrustedCaModel represents trusted_ca block
 type CDNLoadBalancerOriginPoolUseTLSUseServerVerificationTrustedCaModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // CDNLoadBalancerOtherSettingsModel represents other_settings block
 type CDNLoadBalancerOtherSettingsModel struct {
-	AddLocation types.Bool `tfsdk:"add_location"`
-	HeaderOptions *CDNLoadBalancerOtherSettingsHeaderOptionsModel `tfsdk:"header_options"`
+	AddLocation    types.Bool                                       `tfsdk:"add_location"`
+	HeaderOptions  *CDNLoadBalancerOtherSettingsHeaderOptionsModel  `tfsdk:"header_options"`
 	LoggingOptions *CDNLoadBalancerOtherSettingsLoggingOptionsModel `tfsdk:"logging_options"`
 }
 
 // CDNLoadBalancerOtherSettingsHeaderOptionsModel represents header_options block
 type CDNLoadBalancerOtherSettingsHeaderOptionsModel struct {
-	RequestHeadersToRemove types.List `tfsdk:"request_headers_to_remove"`
-	ResponseHeadersToRemove types.List `tfsdk:"response_headers_to_remove"`
-	RequestHeadersToAdd []CDNLoadBalancerOtherSettingsHeaderOptionsRequestHeadersToAddModel `tfsdk:"request_headers_to_add"`
-	ResponseHeadersToAdd []CDNLoadBalancerOtherSettingsHeaderOptionsResponseHeadersToAddModel `tfsdk:"response_headers_to_add"`
+	RequestHeadersToRemove  types.List                                                           `tfsdk:"request_headers_to_remove"`
+	ResponseHeadersToRemove types.List                                                           `tfsdk:"response_headers_to_remove"`
+	RequestHeadersToAdd     []CDNLoadBalancerOtherSettingsHeaderOptionsRequestHeadersToAddModel  `tfsdk:"request_headers_to_add"`
+	ResponseHeadersToAdd    []CDNLoadBalancerOtherSettingsHeaderOptionsResponseHeadersToAddModel `tfsdk:"response_headers_to_add"`
 }
 
 // CDNLoadBalancerOtherSettingsHeaderOptionsRequestHeadersToAddModel represents request_headers_to_add block
 type CDNLoadBalancerOtherSettingsHeaderOptionsRequestHeadersToAddModel struct {
-	Append types.Bool `tfsdk:"append"`
-	Name types.String `tfsdk:"name"`
-	Value types.String `tfsdk:"value"`
+	Append      types.Bool                                                                    `tfsdk:"append"`
+	Name        types.String                                                                  `tfsdk:"name"`
+	Value       types.String                                                                  `tfsdk:"value"`
 	SecretValue *CDNLoadBalancerOtherSettingsHeaderOptionsRequestHeadersToAddSecretValueModel `tfsdk:"secret_value"`
 }
 
 // CDNLoadBalancerOtherSettingsHeaderOptionsRequestHeadersToAddSecretValueModel represents secret_value block
 type CDNLoadBalancerOtherSettingsHeaderOptionsRequestHeadersToAddSecretValueModel struct {
 	BlindfoldSecretInfo *CDNLoadBalancerOtherSettingsHeaderOptionsRequestHeadersToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *CDNLoadBalancerOtherSettingsHeaderOptionsRequestHeadersToAddSecretValueClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *CDNLoadBalancerOtherSettingsHeaderOptionsRequestHeadersToAddSecretValueClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // CDNLoadBalancerOtherSettingsHeaderOptionsRequestHeadersToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
 type CDNLoadBalancerOtherSettingsHeaderOptionsRequestHeadersToAddSecretValueBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // CDNLoadBalancerOtherSettingsHeaderOptionsRequestHeadersToAddSecretValueClearSecretInfoModel represents clear_secret_info block
 type CDNLoadBalancerOtherSettingsHeaderOptionsRequestHeadersToAddSecretValueClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // CDNLoadBalancerOtherSettingsHeaderOptionsResponseHeadersToAddModel represents response_headers_to_add block
 type CDNLoadBalancerOtherSettingsHeaderOptionsResponseHeadersToAddModel struct {
-	Append types.Bool `tfsdk:"append"`
-	Name types.String `tfsdk:"name"`
-	Value types.String `tfsdk:"value"`
+	Append      types.Bool                                                                     `tfsdk:"append"`
+	Name        types.String                                                                   `tfsdk:"name"`
+	Value       types.String                                                                   `tfsdk:"value"`
 	SecretValue *CDNLoadBalancerOtherSettingsHeaderOptionsResponseHeadersToAddSecretValueModel `tfsdk:"secret_value"`
 }
 
 // CDNLoadBalancerOtherSettingsHeaderOptionsResponseHeadersToAddSecretValueModel represents secret_value block
 type CDNLoadBalancerOtherSettingsHeaderOptionsResponseHeadersToAddSecretValueModel struct {
 	BlindfoldSecretInfo *CDNLoadBalancerOtherSettingsHeaderOptionsResponseHeadersToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *CDNLoadBalancerOtherSettingsHeaderOptionsResponseHeadersToAddSecretValueClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *CDNLoadBalancerOtherSettingsHeaderOptionsResponseHeadersToAddSecretValueClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // CDNLoadBalancerOtherSettingsHeaderOptionsResponseHeadersToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
 type CDNLoadBalancerOtherSettingsHeaderOptionsResponseHeadersToAddSecretValueBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // CDNLoadBalancerOtherSettingsHeaderOptionsResponseHeadersToAddSecretValueClearSecretInfoModel represents clear_secret_info block
 type CDNLoadBalancerOtherSettingsHeaderOptionsResponseHeadersToAddSecretValueClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // CDNLoadBalancerOtherSettingsLoggingOptionsModel represents logging_options block
@@ -2068,38 +2068,38 @@ type CDNLoadBalancerOtherSettingsLoggingOptionsOriginLogOptionsModel struct {
 
 // CDNLoadBalancerPolicyBasedChallengeModel represents policy_based_challenge block
 type CDNLoadBalancerPolicyBasedChallengeModel struct {
-	AlwaysEnableCaptchaChallenge *CDNLoadBalancerEmptyModel `tfsdk:"always_enable_captcha_challenge"`
-	AlwaysEnableJsChallenge *CDNLoadBalancerEmptyModel `tfsdk:"always_enable_js_challenge"`
-	CaptchaChallengeParameters *CDNLoadBalancerPolicyBasedChallengeCaptchaChallengeParametersModel `tfsdk:"captcha_challenge_parameters"`
-	DefaultCaptchaChallengeParameters *CDNLoadBalancerEmptyModel `tfsdk:"default_captcha_challenge_parameters"`
-	DefaultJsChallengeParameters *CDNLoadBalancerEmptyModel `tfsdk:"default_js_challenge_parameters"`
-	DefaultMitigationSettings *CDNLoadBalancerEmptyModel `tfsdk:"default_mitigation_settings"`
-	DefaultTemporaryBlockingParameters *CDNLoadBalancerEmptyModel `tfsdk:"default_temporary_blocking_parameters"`
-	JsChallengeParameters *CDNLoadBalancerPolicyBasedChallengeJsChallengeParametersModel `tfsdk:"js_challenge_parameters"`
-	MaliciousUserMitigation *CDNLoadBalancerPolicyBasedChallengeMaliciousUserMitigationModel `tfsdk:"malicious_user_mitigation"`
-	NoChallenge *CDNLoadBalancerEmptyModel `tfsdk:"no_challenge"`
-	RuleList *CDNLoadBalancerPolicyBasedChallengeRuleListModel `tfsdk:"rule_list"`
-	TemporaryUserBlocking *CDNLoadBalancerPolicyBasedChallengeTemporaryUserBlockingModel `tfsdk:"temporary_user_blocking"`
+	AlwaysEnableCaptchaChallenge       *CDNLoadBalancerEmptyModel                                          `tfsdk:"always_enable_captcha_challenge"`
+	AlwaysEnableJsChallenge            *CDNLoadBalancerEmptyModel                                          `tfsdk:"always_enable_js_challenge"`
+	CaptchaChallengeParameters         *CDNLoadBalancerPolicyBasedChallengeCaptchaChallengeParametersModel `tfsdk:"captcha_challenge_parameters"`
+	DefaultCaptchaChallengeParameters  *CDNLoadBalancerEmptyModel                                          `tfsdk:"default_captcha_challenge_parameters"`
+	DefaultJsChallengeParameters       *CDNLoadBalancerEmptyModel                                          `tfsdk:"default_js_challenge_parameters"`
+	DefaultMitigationSettings          *CDNLoadBalancerEmptyModel                                          `tfsdk:"default_mitigation_settings"`
+	DefaultTemporaryBlockingParameters *CDNLoadBalancerEmptyModel                                          `tfsdk:"default_temporary_blocking_parameters"`
+	JsChallengeParameters              *CDNLoadBalancerPolicyBasedChallengeJsChallengeParametersModel      `tfsdk:"js_challenge_parameters"`
+	MaliciousUserMitigation            *CDNLoadBalancerPolicyBasedChallengeMaliciousUserMitigationModel    `tfsdk:"malicious_user_mitigation"`
+	NoChallenge                        *CDNLoadBalancerEmptyModel                                          `tfsdk:"no_challenge"`
+	RuleList                           *CDNLoadBalancerPolicyBasedChallengeRuleListModel                   `tfsdk:"rule_list"`
+	TemporaryUserBlocking              *CDNLoadBalancerPolicyBasedChallengeTemporaryUserBlockingModel      `tfsdk:"temporary_user_blocking"`
 }
 
 // CDNLoadBalancerPolicyBasedChallengeCaptchaChallengeParametersModel represents captcha_challenge_parameters block
 type CDNLoadBalancerPolicyBasedChallengeCaptchaChallengeParametersModel struct {
-	CookieExpiry types.Int64 `tfsdk:"cookie_expiry"`
-	CustomPage types.String `tfsdk:"custom_page"`
+	CookieExpiry types.Int64  `tfsdk:"cookie_expiry"`
+	CustomPage   types.String `tfsdk:"custom_page"`
 }
 
 // CDNLoadBalancerPolicyBasedChallengeJsChallengeParametersModel represents js_challenge_parameters block
 type CDNLoadBalancerPolicyBasedChallengeJsChallengeParametersModel struct {
-	CookieExpiry types.Int64 `tfsdk:"cookie_expiry"`
-	CustomPage types.String `tfsdk:"custom_page"`
-	JsScriptDelay types.Int64 `tfsdk:"js_script_delay"`
+	CookieExpiry  types.Int64  `tfsdk:"cookie_expiry"`
+	CustomPage    types.String `tfsdk:"custom_page"`
+	JsScriptDelay types.Int64  `tfsdk:"js_script_delay"`
 }
 
 // CDNLoadBalancerPolicyBasedChallengeMaliciousUserMitigationModel represents malicious_user_mitigation block
 type CDNLoadBalancerPolicyBasedChallengeMaliciousUserMitigationModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // CDNLoadBalancerPolicyBasedChallengeRuleListModel represents rule_list block
@@ -2110,53 +2110,53 @@ type CDNLoadBalancerPolicyBasedChallengeRuleListModel struct {
 // CDNLoadBalancerPolicyBasedChallengeRuleListRulesModel represents rules block
 type CDNLoadBalancerPolicyBasedChallengeRuleListRulesModel struct {
 	Metadata *CDNLoadBalancerPolicyBasedChallengeRuleListRulesMetadataModel `tfsdk:"metadata"`
-	Spec *CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecModel `tfsdk:"spec"`
+	Spec     *CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecModel     `tfsdk:"spec"`
 }
 
 // CDNLoadBalancerPolicyBasedChallengeRuleListRulesMetadataModel represents metadata block
 type CDNLoadBalancerPolicyBasedChallengeRuleListRulesMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
-	Name types.String `tfsdk:"name"`
+	Name            types.String `tfsdk:"name"`
 }
 
 // CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecModel represents spec block
 type CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecModel struct {
-	ExpirationTimestamp types.String `tfsdk:"expiration_timestamp"`
-	AnyAsn *CDNLoadBalancerEmptyModel `tfsdk:"any_asn"`
-	AnyClient *CDNLoadBalancerEmptyModel `tfsdk:"any_client"`
-	AnyIP *CDNLoadBalancerEmptyModel `tfsdk:"any_ip"`
-	ArgMatchers []CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecArgMatchersModel `tfsdk:"arg_matchers"`
-	AsnList *CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecAsnListModel `tfsdk:"asn_list"`
-	AsnMatcher *CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecAsnMatcherModel `tfsdk:"asn_matcher"`
-	BodyMatcher *CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecBodyMatcherModel `tfsdk:"body_matcher"`
-	ClientSelector *CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecClientSelectorModel `tfsdk:"client_selector"`
-	CookieMatchers []CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecCookieMatchersModel `tfsdk:"cookie_matchers"`
-	DisableChallenge *CDNLoadBalancerEmptyModel `tfsdk:"disable_challenge"`
-	DomainMatcher *CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecDomainMatcherModel `tfsdk:"domain_matcher"`
-	EnableCaptchaChallenge *CDNLoadBalancerEmptyModel `tfsdk:"enable_captcha_challenge"`
-	EnableJavascriptChallenge *CDNLoadBalancerEmptyModel `tfsdk:"enable_javascript_challenge"`
-	Headers []CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecHeadersModel `tfsdk:"headers"`
-	HTTPMethod *CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecHTTPMethodModel `tfsdk:"http_method"`
-	IPMatcher *CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecIPMatcherModel `tfsdk:"ip_matcher"`
-	IPPrefixList *CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecIPPrefixListModel `tfsdk:"ip_prefix_list"`
-	Path *CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecPathModel `tfsdk:"path"`
-	QueryParams []CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecQueryParamsModel `tfsdk:"query_params"`
-	TLSFingerprintMatcher *CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecTLSFingerprintMatcherModel `tfsdk:"tls_fingerprint_matcher"`
+	ExpirationTimestamp       types.String                                                                    `tfsdk:"expiration_timestamp"`
+	AnyAsn                    *CDNLoadBalancerEmptyModel                                                      `tfsdk:"any_asn"`
+	AnyClient                 *CDNLoadBalancerEmptyModel                                                      `tfsdk:"any_client"`
+	AnyIP                     *CDNLoadBalancerEmptyModel                                                      `tfsdk:"any_ip"`
+	ArgMatchers               []CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecArgMatchersModel          `tfsdk:"arg_matchers"`
+	AsnList                   *CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecAsnListModel               `tfsdk:"asn_list"`
+	AsnMatcher                *CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecAsnMatcherModel            `tfsdk:"asn_matcher"`
+	BodyMatcher               *CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecBodyMatcherModel           `tfsdk:"body_matcher"`
+	ClientSelector            *CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecClientSelectorModel        `tfsdk:"client_selector"`
+	CookieMatchers            []CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecCookieMatchersModel       `tfsdk:"cookie_matchers"`
+	DisableChallenge          *CDNLoadBalancerEmptyModel                                                      `tfsdk:"disable_challenge"`
+	DomainMatcher             *CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecDomainMatcherModel         `tfsdk:"domain_matcher"`
+	EnableCaptchaChallenge    *CDNLoadBalancerEmptyModel                                                      `tfsdk:"enable_captcha_challenge"`
+	EnableJavascriptChallenge *CDNLoadBalancerEmptyModel                                                      `tfsdk:"enable_javascript_challenge"`
+	Headers                   []CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecHeadersModel              `tfsdk:"headers"`
+	HTTPMethod                *CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecHTTPMethodModel            `tfsdk:"http_method"`
+	IPMatcher                 *CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecIPMatcherModel             `tfsdk:"ip_matcher"`
+	IPPrefixList              *CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecIPPrefixListModel          `tfsdk:"ip_prefix_list"`
+	Path                      *CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecPathModel                  `tfsdk:"path"`
+	QueryParams               []CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecQueryParamsModel          `tfsdk:"query_params"`
+	TLSFingerprintMatcher     *CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecTLSFingerprintMatcherModel `tfsdk:"tls_fingerprint_matcher"`
 }
 
 // CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecArgMatchersModel represents arg_matchers block
 type CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecArgMatchersModel struct {
-	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
-	Name types.String `tfsdk:"name"`
-	CheckNotPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_not_present"`
-	CheckPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_present"`
-	Item *CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecArgMatchersItemModel `tfsdk:"item"`
+	InvertMatcher   types.Bool                                                                `tfsdk:"invert_matcher"`
+	Name            types.String                                                              `tfsdk:"name"`
+	CheckNotPresent *CDNLoadBalancerEmptyModel                                                `tfsdk:"check_not_present"`
+	CheckPresent    *CDNLoadBalancerEmptyModel                                                `tfsdk:"check_present"`
+	Item            *CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecArgMatchersItemModel `tfsdk:"item"`
 }
 
 // CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecArgMatchersItemModel represents item block
 type CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecArgMatchersItemModel struct {
-	ExactValues types.List `tfsdk:"exact_values"`
-	RegexValues types.List `tfsdk:"regex_values"`
+	ExactValues  types.List `tfsdk:"exact_values"`
+	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
 }
 
@@ -2172,17 +2172,17 @@ type CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecAsnMatcherModel struct 
 
 // CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecAsnMatcherAsnSetsModel represents asn_sets block
 type CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecAsnMatcherAsnSetsModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecBodyMatcherModel represents body_matcher block
 type CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecBodyMatcherModel struct {
-	ExactValues types.List `tfsdk:"exact_values"`
-	RegexValues types.List `tfsdk:"regex_values"`
+	ExactValues  types.List `tfsdk:"exact_values"`
+	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
 }
 
@@ -2193,17 +2193,17 @@ type CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecClientSelectorModel str
 
 // CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecCookieMatchersModel represents cookie_matchers block
 type CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecCookieMatchersModel struct {
-	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
-	Name types.String `tfsdk:"name"`
-	CheckNotPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_not_present"`
-	CheckPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_present"`
-	Item *CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecCookieMatchersItemModel `tfsdk:"item"`
+	InvertMatcher   types.Bool                                                                   `tfsdk:"invert_matcher"`
+	Name            types.String                                                                 `tfsdk:"name"`
+	CheckNotPresent *CDNLoadBalancerEmptyModel                                                   `tfsdk:"check_not_present"`
+	CheckPresent    *CDNLoadBalancerEmptyModel                                                   `tfsdk:"check_present"`
+	Item            *CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecCookieMatchersItemModel `tfsdk:"item"`
 }
 
 // CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecCookieMatchersItemModel represents item block
 type CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecCookieMatchersItemModel struct {
-	ExactValues types.List `tfsdk:"exact_values"`
-	RegexValues types.List `tfsdk:"regex_values"`
+	ExactValues  types.List `tfsdk:"exact_values"`
+	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
 }
 
@@ -2215,77 +2215,77 @@ type CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecDomainMatcherModel stru
 
 // CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecHeadersModel represents headers block
 type CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecHeadersModel struct {
-	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
-	Name types.String `tfsdk:"name"`
-	CheckNotPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_not_present"`
-	CheckPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_present"`
-	Item *CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecHeadersItemModel `tfsdk:"item"`
+	InvertMatcher   types.Bool                                                            `tfsdk:"invert_matcher"`
+	Name            types.String                                                          `tfsdk:"name"`
+	CheckNotPresent *CDNLoadBalancerEmptyModel                                            `tfsdk:"check_not_present"`
+	CheckPresent    *CDNLoadBalancerEmptyModel                                            `tfsdk:"check_present"`
+	Item            *CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecHeadersItemModel `tfsdk:"item"`
 }
 
 // CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecHeadersItemModel represents item block
 type CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecHeadersItemModel struct {
-	ExactValues types.List `tfsdk:"exact_values"`
-	RegexValues types.List `tfsdk:"regex_values"`
+	ExactValues  types.List `tfsdk:"exact_values"`
+	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
 }
 
 // CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecHTTPMethodModel represents http_method block
 type CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecHTTPMethodModel struct {
 	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
-	Methods types.List `tfsdk:"methods"`
+	Methods       types.List `tfsdk:"methods"`
 }
 
 // CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecIPMatcherModel represents ip_matcher block
 type CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecIPMatcherModel struct {
-	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
-	PrefixSets []CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecIPMatcherPrefixSetsModel `tfsdk:"prefix_sets"`
+	InvertMatcher types.Bool                                                                     `tfsdk:"invert_matcher"`
+	PrefixSets    []CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecIPMatcherPrefixSetsModel `tfsdk:"prefix_sets"`
 }
 
 // CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecIPMatcherPrefixSetsModel represents prefix_sets block
 type CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecIPMatcherPrefixSetsModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecIPPrefixListModel represents ip_prefix_list block
 type CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecIPPrefixListModel struct {
 	InvertMatch types.Bool `tfsdk:"invert_match"`
-	IPPrefixes types.List `tfsdk:"ip_prefixes"`
+	IPPrefixes  types.List `tfsdk:"ip_prefixes"`
 }
 
 // CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecPathModel represents path block
 type CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecPathModel struct {
-	ExactValues types.List `tfsdk:"exact_values"`
+	ExactValues   types.List `tfsdk:"exact_values"`
 	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
-	PrefixValues types.List `tfsdk:"prefix_values"`
-	RegexValues types.List `tfsdk:"regex_values"`
-	SuffixValues types.List `tfsdk:"suffix_values"`
-	Transformers types.List `tfsdk:"transformers"`
+	PrefixValues  types.List `tfsdk:"prefix_values"`
+	RegexValues   types.List `tfsdk:"regex_values"`
+	SuffixValues  types.List `tfsdk:"suffix_values"`
+	Transformers  types.List `tfsdk:"transformers"`
 }
 
 // CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecQueryParamsModel represents query_params block
 type CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecQueryParamsModel struct {
-	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
-	Key types.String `tfsdk:"key"`
-	CheckNotPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_not_present"`
-	CheckPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_present"`
-	Item *CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecQueryParamsItemModel `tfsdk:"item"`
+	InvertMatcher   types.Bool                                                                `tfsdk:"invert_matcher"`
+	Key             types.String                                                              `tfsdk:"key"`
+	CheckNotPresent *CDNLoadBalancerEmptyModel                                                `tfsdk:"check_not_present"`
+	CheckPresent    *CDNLoadBalancerEmptyModel                                                `tfsdk:"check_present"`
+	Item            *CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecQueryParamsItemModel `tfsdk:"item"`
 }
 
 // CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecQueryParamsItemModel represents item block
 type CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecQueryParamsItemModel struct {
-	ExactValues types.List `tfsdk:"exact_values"`
-	RegexValues types.List `tfsdk:"regex_values"`
+	ExactValues  types.List `tfsdk:"exact_values"`
+	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
 }
 
 // CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecTLSFingerprintMatcherModel represents tls_fingerprint_matcher block
 type CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecTLSFingerprintMatcherModel struct {
-	Classes types.List `tfsdk:"classes"`
-	ExactValues types.List `tfsdk:"exact_values"`
+	Classes        types.List `tfsdk:"classes"`
+	ExactValues    types.List `tfsdk:"exact_values"`
 	ExcludedValues types.List `tfsdk:"excluded_values"`
 }
 
@@ -2296,29 +2296,29 @@ type CDNLoadBalancerPolicyBasedChallengeTemporaryUserBlockingModel struct {
 
 // CDNLoadBalancerProtectedCookiesModel represents protected_cookies block
 type CDNLoadBalancerProtectedCookiesModel struct {
-	MaxAgeValue types.Int64 `tfsdk:"max_age_value"`
-	Name types.String `tfsdk:"name"`
-	AddHttponly *CDNLoadBalancerEmptyModel `tfsdk:"add_httponly"`
-	AddSecure *CDNLoadBalancerEmptyModel `tfsdk:"add_secure"`
+	MaxAgeValue                types.Int64                `tfsdk:"max_age_value"`
+	Name                       types.String               `tfsdk:"name"`
+	AddHttponly                *CDNLoadBalancerEmptyModel `tfsdk:"add_httponly"`
+	AddSecure                  *CDNLoadBalancerEmptyModel `tfsdk:"add_secure"`
 	DisableTamperingProtection *CDNLoadBalancerEmptyModel `tfsdk:"disable_tampering_protection"`
-	EnableTamperingProtection *CDNLoadBalancerEmptyModel `tfsdk:"enable_tampering_protection"`
-	IgnoreHttponly *CDNLoadBalancerEmptyModel `tfsdk:"ignore_httponly"`
-	IgnoreMaxAge *CDNLoadBalancerEmptyModel `tfsdk:"ignore_max_age"`
-	IgnoreSamesite *CDNLoadBalancerEmptyModel `tfsdk:"ignore_samesite"`
-	IgnoreSecure *CDNLoadBalancerEmptyModel `tfsdk:"ignore_secure"`
-	SamesiteLax *CDNLoadBalancerEmptyModel `tfsdk:"samesite_lax"`
-	SamesiteNone *CDNLoadBalancerEmptyModel `tfsdk:"samesite_none"`
-	SamesiteStrict *CDNLoadBalancerEmptyModel `tfsdk:"samesite_strict"`
+	EnableTamperingProtection  *CDNLoadBalancerEmptyModel `tfsdk:"enable_tampering_protection"`
+	IgnoreHttponly             *CDNLoadBalancerEmptyModel `tfsdk:"ignore_httponly"`
+	IgnoreMaxAge               *CDNLoadBalancerEmptyModel `tfsdk:"ignore_max_age"`
+	IgnoreSamesite             *CDNLoadBalancerEmptyModel `tfsdk:"ignore_samesite"`
+	IgnoreSecure               *CDNLoadBalancerEmptyModel `tfsdk:"ignore_secure"`
+	SamesiteLax                *CDNLoadBalancerEmptyModel `tfsdk:"samesite_lax"`
+	SamesiteNone               *CDNLoadBalancerEmptyModel `tfsdk:"samesite_none"`
+	SamesiteStrict             *CDNLoadBalancerEmptyModel `tfsdk:"samesite_strict"`
 }
 
 // CDNLoadBalancerRateLimitModel represents rate_limit block
 type CDNLoadBalancerRateLimitModel struct {
 	CustomIPAllowedList *CDNLoadBalancerRateLimitCustomIPAllowedListModel `tfsdk:"custom_ip_allowed_list"`
-	IPAllowedList *CDNLoadBalancerRateLimitIPAllowedListModel `tfsdk:"ip_allowed_list"`
-	NoIPAllowedList *CDNLoadBalancerEmptyModel `tfsdk:"no_ip_allowed_list"`
-	NoPolicies *CDNLoadBalancerEmptyModel `tfsdk:"no_policies"`
-	Policies *CDNLoadBalancerRateLimitPoliciesModel `tfsdk:"policies"`
-	RateLimiter *CDNLoadBalancerRateLimitRateLimiterModel `tfsdk:"rate_limiter"`
+	IPAllowedList       *CDNLoadBalancerRateLimitIPAllowedListModel       `tfsdk:"ip_allowed_list"`
+	NoIPAllowedList     *CDNLoadBalancerEmptyModel                        `tfsdk:"no_ip_allowed_list"`
+	NoPolicies          *CDNLoadBalancerEmptyModel                        `tfsdk:"no_policies"`
+	Policies            *CDNLoadBalancerRateLimitPoliciesModel            `tfsdk:"policies"`
+	RateLimiter         *CDNLoadBalancerRateLimitRateLimiterModel         `tfsdk:"rate_limiter"`
 }
 
 // CDNLoadBalancerRateLimitCustomIPAllowedListModel represents custom_ip_allowed_list block
@@ -2328,9 +2328,9 @@ type CDNLoadBalancerRateLimitCustomIPAllowedListModel struct {
 
 // CDNLoadBalancerRateLimitCustomIPAllowedListRateLimiterAllowedPrefixesModel represents rate_limiter_allowed_prefixes block
 type CDNLoadBalancerRateLimitCustomIPAllowedListRateLimiterAllowedPrefixesModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // CDNLoadBalancerRateLimitIPAllowedListModel represents ip_allowed_list block
@@ -2345,26 +2345,26 @@ type CDNLoadBalancerRateLimitPoliciesModel struct {
 
 // CDNLoadBalancerRateLimitPoliciesPoliciesModel represents policies block
 type CDNLoadBalancerRateLimitPoliciesPoliciesModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // CDNLoadBalancerRateLimitRateLimiterModel represents rate_limiter block
 type CDNLoadBalancerRateLimitRateLimiterModel struct {
-	BurstMultiplier types.Int64 `tfsdk:"burst_multiplier"`
-	PeriodMultiplier types.Int64 `tfsdk:"period_multiplier"`
-	TotalNumber types.Int64 `tfsdk:"total_number"`
-	Unit types.String `tfsdk:"unit"`
-	ActionBlock *CDNLoadBalancerRateLimitRateLimiterActionBlockModel `tfsdk:"action_block"`
-	Disabled *CDNLoadBalancerEmptyModel `tfsdk:"disabled"`
-	LeakyBucket *CDNLoadBalancerEmptyModel `tfsdk:"leaky_bucket"`
-	TokenBucket *CDNLoadBalancerEmptyModel `tfsdk:"token_bucket"`
+	BurstMultiplier  types.Int64                                          `tfsdk:"burst_multiplier"`
+	PeriodMultiplier types.Int64                                          `tfsdk:"period_multiplier"`
+	TotalNumber      types.Int64                                          `tfsdk:"total_number"`
+	Unit             types.String                                         `tfsdk:"unit"`
+	ActionBlock      *CDNLoadBalancerRateLimitRateLimiterActionBlockModel `tfsdk:"action_block"`
+	Disabled         *CDNLoadBalancerEmptyModel                           `tfsdk:"disabled"`
+	LeakyBucket      *CDNLoadBalancerEmptyModel                           `tfsdk:"leaky_bucket"`
+	TokenBucket      *CDNLoadBalancerEmptyModel                           `tfsdk:"token_bucket"`
 }
 
 // CDNLoadBalancerRateLimitRateLimiterActionBlockModel represents action_block block
 type CDNLoadBalancerRateLimitRateLimiterActionBlockModel struct {
-	Hours *CDNLoadBalancerRateLimitRateLimiterActionBlockHoursModel `tfsdk:"hours"`
+	Hours   *CDNLoadBalancerRateLimitRateLimiterActionBlockHoursModel   `tfsdk:"hours"`
 	Minutes *CDNLoadBalancerRateLimitRateLimiterActionBlockMinutesModel `tfsdk:"minutes"`
 	Seconds *CDNLoadBalancerRateLimitRateLimiterActionBlockSecondsModel `tfsdk:"seconds"`
 }
@@ -2391,31 +2391,31 @@ type CDNLoadBalancerSensitiveDataPolicyModel struct {
 
 // CDNLoadBalancerSensitiveDataPolicySensitiveDataPolicyRefModel represents sensitive_data_policy_ref block
 type CDNLoadBalancerSensitiveDataPolicySensitiveDataPolicyRefModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // CDNLoadBalancerSlowDdosMitigationModel represents slow_ddos_mitigation block
 type CDNLoadBalancerSlowDdosMitigationModel struct {
-	RequestHeadersTimeout types.Int64 `tfsdk:"request_headers_timeout"`
-	RequestTimeout types.Int64 `tfsdk:"request_timeout"`
+	RequestHeadersTimeout types.Int64                `tfsdk:"request_headers_timeout"`
+	RequestTimeout        types.Int64                `tfsdk:"request_timeout"`
 	DisableRequestTimeout *CDNLoadBalancerEmptyModel `tfsdk:"disable_request_timeout"`
 }
 
 // CDNLoadBalancerTrustedClientsModel represents trusted_clients block
 type CDNLoadBalancerTrustedClientsModel struct {
-	Actions types.List `tfsdk:"actions"`
-	AsNumber types.Int64 `tfsdk:"as_number"`
-	ExpirationTimestamp types.String `tfsdk:"expiration_timestamp"`
-	IPPrefix types.String `tfsdk:"ip_prefix"`
-	IPV6Prefix types.String `tfsdk:"ipv6_prefix"`
-	UserIdentifier types.String `tfsdk:"user_identifier"`
-	BotSkipProcessing *CDNLoadBalancerEmptyModel `tfsdk:"bot_skip_processing"`
-	HTTPHeader *CDNLoadBalancerTrustedClientsHTTPHeaderModel `tfsdk:"http_header"`
-	Metadata *CDNLoadBalancerTrustedClientsMetadataModel `tfsdk:"metadata"`
-	SkipProcessing *CDNLoadBalancerEmptyModel `tfsdk:"skip_processing"`
-	WAFSkipProcessing *CDNLoadBalancerEmptyModel `tfsdk:"waf_skip_processing"`
+	Actions             types.List                                    `tfsdk:"actions"`
+	AsNumber            types.Int64                                   `tfsdk:"as_number"`
+	ExpirationTimestamp types.String                                  `tfsdk:"expiration_timestamp"`
+	IPPrefix            types.String                                  `tfsdk:"ip_prefix"`
+	IPV6Prefix          types.String                                  `tfsdk:"ipv6_prefix"`
+	UserIdentifier      types.String                                  `tfsdk:"user_identifier"`
+	BotSkipProcessing   *CDNLoadBalancerEmptyModel                    `tfsdk:"bot_skip_processing"`
+	HTTPHeader          *CDNLoadBalancerTrustedClientsHTTPHeaderModel `tfsdk:"http_header"`
+	Metadata            *CDNLoadBalancerTrustedClientsMetadataModel   `tfsdk:"metadata"`
+	SkipProcessing      *CDNLoadBalancerEmptyModel                    `tfsdk:"skip_processing"`
+	WAFSkipProcessing   *CDNLoadBalancerEmptyModel                    `tfsdk:"waf_skip_processing"`
 }
 
 // CDNLoadBalancerTrustedClientsHTTPHeaderModel represents http_header block
@@ -2425,30 +2425,30 @@ type CDNLoadBalancerTrustedClientsHTTPHeaderModel struct {
 
 // CDNLoadBalancerTrustedClientsHTTPHeaderHeadersModel represents headers block
 type CDNLoadBalancerTrustedClientsHTTPHeaderHeadersModel struct {
-	Exact types.String `tfsdk:"exact"`
-	InvertMatch types.Bool `tfsdk:"invert_match"`
-	Name types.String `tfsdk:"name"`
-	Presence types.Bool `tfsdk:"presence"`
-	Regex types.String `tfsdk:"regex"`
+	Exact       types.String `tfsdk:"exact"`
+	InvertMatch types.Bool   `tfsdk:"invert_match"`
+	Name        types.String `tfsdk:"name"`
+	Presence    types.Bool   `tfsdk:"presence"`
+	Regex       types.String `tfsdk:"regex"`
 }
 
 // CDNLoadBalancerTrustedClientsMetadataModel represents metadata block
 type CDNLoadBalancerTrustedClientsMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
-	Name types.String `tfsdk:"name"`
+	Name            types.String `tfsdk:"name"`
 }
 
 // CDNLoadBalancerUserIdentificationModel represents user_identification block
 type CDNLoadBalancerUserIdentificationModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // CDNLoadBalancerWAFExclusionModel represents waf_exclusion block
 type CDNLoadBalancerWAFExclusionModel struct {
 	WAFExclusionInlineRules *CDNLoadBalancerWAFExclusionWAFExclusionInlineRulesModel `tfsdk:"waf_exclusion_inline_rules"`
-	WAFExclusionPolicy *CDNLoadBalancerWAFExclusionWAFExclusionPolicyModel `tfsdk:"waf_exclusion_policy"`
+	WAFExclusionPolicy      *CDNLoadBalancerWAFExclusionWAFExclusionPolicyModel      `tfsdk:"waf_exclusion_policy"`
 }
 
 // CDNLoadBalancerWAFExclusionWAFExclusionInlineRulesModel represents waf_exclusion_inline_rules block
@@ -2458,31 +2458,31 @@ type CDNLoadBalancerWAFExclusionWAFExclusionInlineRulesModel struct {
 
 // CDNLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesModel represents rules block
 type CDNLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesModel struct {
-	ExactValue types.String `tfsdk:"exact_value"`
-	ExpirationTimestamp types.String `tfsdk:"expiration_timestamp"`
-	Methods types.List `tfsdk:"methods"`
-	PathPrefix types.String `tfsdk:"path_prefix"`
-	PathRegex types.String `tfsdk:"path_regex"`
-	SuffixValue types.String `tfsdk:"suffix_value"`
-	AnyDomain *CDNLoadBalancerEmptyModel `tfsdk:"any_domain"`
-	AnyPath *CDNLoadBalancerEmptyModel `tfsdk:"any_path"`
+	ExactValue                  types.String                                                                             `tfsdk:"exact_value"`
+	ExpirationTimestamp         types.String                                                                             `tfsdk:"expiration_timestamp"`
+	Methods                     types.List                                                                               `tfsdk:"methods"`
+	PathPrefix                  types.String                                                                             `tfsdk:"path_prefix"`
+	PathRegex                   types.String                                                                             `tfsdk:"path_regex"`
+	SuffixValue                 types.String                                                                             `tfsdk:"suffix_value"`
+	AnyDomain                   *CDNLoadBalancerEmptyModel                                                               `tfsdk:"any_domain"`
+	AnyPath                     *CDNLoadBalancerEmptyModel                                                               `tfsdk:"any_path"`
 	AppFirewallDetectionControl *CDNLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlModel `tfsdk:"app_firewall_detection_control"`
-	Metadata *CDNLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesMetadataModel `tfsdk:"metadata"`
-	WAFSkipProcessing *CDNLoadBalancerEmptyModel `tfsdk:"waf_skip_processing"`
+	Metadata                    *CDNLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesMetadataModel                    `tfsdk:"metadata"`
+	WAFSkipProcessing           *CDNLoadBalancerEmptyModel                                                               `tfsdk:"waf_skip_processing"`
 }
 
 // CDNLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlModel represents app_firewall_detection_control block
 type CDNLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlModel struct {
 	ExcludeAttackTypeContexts []CDNLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlExcludeAttackTypeContextsModel `tfsdk:"exclude_attack_type_contexts"`
-	ExcludeBotNameContexts []CDNLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlExcludeBotNameContextsModel `tfsdk:"exclude_bot_name_contexts"`
-	ExcludeSignatureContexts []CDNLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlExcludeSignatureContextsModel `tfsdk:"exclude_signature_contexts"`
-	ExcludeViolationContexts []CDNLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlExcludeViolationContextsModel `tfsdk:"exclude_violation_contexts"`
+	ExcludeBotNameContexts    []CDNLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlExcludeBotNameContextsModel    `tfsdk:"exclude_bot_name_contexts"`
+	ExcludeSignatureContexts  []CDNLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlExcludeSignatureContextsModel  `tfsdk:"exclude_signature_contexts"`
+	ExcludeViolationContexts  []CDNLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlExcludeViolationContextsModel  `tfsdk:"exclude_violation_contexts"`
 }
 
 // CDNLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlExcludeAttackTypeContextsModel represents exclude_attack_type_contexts block
 type CDNLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlExcludeAttackTypeContextsModel struct {
-	Context types.String `tfsdk:"context"`
-	ContextName types.String `tfsdk:"context_name"`
+	Context           types.String `tfsdk:"context"`
+	ContextName       types.String `tfsdk:"context_name"`
 	ExcludeAttackType types.String `tfsdk:"exclude_attack_type"`
 }
 
@@ -2493,93 +2493,93 @@ type CDNLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetection
 
 // CDNLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlExcludeSignatureContextsModel represents exclude_signature_contexts block
 type CDNLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlExcludeSignatureContextsModel struct {
-	Context types.String `tfsdk:"context"`
+	Context     types.String `tfsdk:"context"`
 	ContextName types.String `tfsdk:"context_name"`
-	SignatureID types.Int64 `tfsdk:"signature_id"`
+	SignatureID types.Int64  `tfsdk:"signature_id"`
 }
 
 // CDNLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlExcludeViolationContextsModel represents exclude_violation_contexts block
 type CDNLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlExcludeViolationContextsModel struct {
-	Context types.String `tfsdk:"context"`
-	ContextName types.String `tfsdk:"context_name"`
+	Context          types.String `tfsdk:"context"`
+	ContextName      types.String `tfsdk:"context_name"`
 	ExcludeViolation types.String `tfsdk:"exclude_violation"`
 }
 
 // CDNLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesMetadataModel represents metadata block
 type CDNLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
-	Name types.String `tfsdk:"name"`
+	Name            types.String `tfsdk:"name"`
 }
 
 // CDNLoadBalancerWAFExclusionWAFExclusionPolicyModel represents waf_exclusion_policy block
 type CDNLoadBalancerWAFExclusionWAFExclusionPolicyModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 type CDNLoadBalancerResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Domains types.List `tfsdk:"domains"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	ActiveServicePolicies *CDNLoadBalancerActiveServicePoliciesModel `tfsdk:"active_service_policies"`
-	APIRateLimit *CDNLoadBalancerAPIRateLimitModel `tfsdk:"api_rate_limit"`
-	APISpecification *CDNLoadBalancerAPISpecificationModel `tfsdk:"api_specification"`
-	AppFirewall *CDNLoadBalancerAppFirewallModel `tfsdk:"app_firewall"`
-	BlockedClients []CDNLoadBalancerBlockedClientsModel `tfsdk:"blocked_clients"`
-	BotDefense *CDNLoadBalancerBotDefenseModel `tfsdk:"bot_defense"`
-	CaptchaChallenge *CDNLoadBalancerCaptchaChallengeModel `tfsdk:"captcha_challenge"`
-	ClientSideDefense *CDNLoadBalancerClientSideDefenseModel `tfsdk:"client_side_defense"`
-	CorsPolicy *CDNLoadBalancerCorsPolicyModel `tfsdk:"cors_policy"`
-	CsrfPolicy *CDNLoadBalancerCsrfPolicyModel `tfsdk:"csrf_policy"`
-	CustomCacheRule *CDNLoadBalancerCustomCacheRuleModel `tfsdk:"custom_cache_rule"`
-	DataGuardRules []CDNLoadBalancerDataGuardRulesModel `tfsdk:"data_guard_rules"`
-	DdosMitigationRules []CDNLoadBalancerDdosMitigationRulesModel `tfsdk:"ddos_mitigation_rules"`
-	DefaultCacheAction *CDNLoadBalancerDefaultCacheActionModel `tfsdk:"default_cache_action"`
-	DefaultSensitiveDataPolicy *CDNLoadBalancerEmptyModel `tfsdk:"default_sensitive_data_policy"`
-	DisableAPIDefinition *CDNLoadBalancerEmptyModel `tfsdk:"disable_api_definition"`
-	DisableAPIDiscovery *CDNLoadBalancerEmptyModel `tfsdk:"disable_api_discovery"`
-	DisableClientSideDefense *CDNLoadBalancerEmptyModel `tfsdk:"disable_client_side_defense"`
-	DisableIPReputation *CDNLoadBalancerEmptyModel `tfsdk:"disable_ip_reputation"`
-	DisableMaliciousUserDetection *CDNLoadBalancerEmptyModel `tfsdk:"disable_malicious_user_detection"`
-	DisableRateLimit *CDNLoadBalancerEmptyModel `tfsdk:"disable_rate_limit"`
-	DisableThreatMesh *CDNLoadBalancerEmptyModel `tfsdk:"disable_threat_mesh"`
-	DisableWAF *CDNLoadBalancerEmptyModel `tfsdk:"disable_waf"`
-	EnableAPIDiscovery *CDNLoadBalancerEnableAPIDiscoveryModel `tfsdk:"enable_api_discovery"`
-	EnableChallenge *CDNLoadBalancerEnableChallengeModel `tfsdk:"enable_challenge"`
-	EnableIPReputation *CDNLoadBalancerEnableIPReputationModel `tfsdk:"enable_ip_reputation"`
-	EnableMaliciousUserDetection *CDNLoadBalancerEmptyModel `tfsdk:"enable_malicious_user_detection"`
-	EnableThreatMesh *CDNLoadBalancerEmptyModel `tfsdk:"enable_threat_mesh"`
-	GraphqlRules []CDNLoadBalancerGraphqlRulesModel `tfsdk:"graphql_rules"`
-	HTTP *CDNLoadBalancerHTTPModel `tfsdk:"http"`
-	HTTPS *CDNLoadBalancerHTTPSModel `tfsdk:"https"`
-	HTTPSAutoCert *CDNLoadBalancerHTTPSAutoCertModel `tfsdk:"https_auto_cert"`
-	JsChallenge *CDNLoadBalancerJsChallengeModel `tfsdk:"js_challenge"`
-	JwtValidation *CDNLoadBalancerJwtValidationModel `tfsdk:"jwt_validation"`
-	L7DdosActionBlock *CDNLoadBalancerEmptyModel `tfsdk:"l7_ddos_action_block"`
-	L7DdosActionDefault *CDNLoadBalancerEmptyModel `tfsdk:"l7_ddos_action_default"`
-	L7DdosActionJsChallenge *CDNLoadBalancerL7DdosActionJsChallengeModel `tfsdk:"l7_ddos_action_js_challenge"`
-	NoChallenge *CDNLoadBalancerEmptyModel `tfsdk:"no_challenge"`
-	NoServicePolicies *CDNLoadBalancerEmptyModel `tfsdk:"no_service_policies"`
-	OriginPool *CDNLoadBalancerOriginPoolModel `tfsdk:"origin_pool"`
-	OtherSettings *CDNLoadBalancerOtherSettingsModel `tfsdk:"other_settings"`
-	PolicyBasedChallenge *CDNLoadBalancerPolicyBasedChallengeModel `tfsdk:"policy_based_challenge"`
-	ProtectedCookies []CDNLoadBalancerProtectedCookiesModel `tfsdk:"protected_cookies"`
-	RateLimit *CDNLoadBalancerRateLimitModel `tfsdk:"rate_limit"`
-	SensitiveDataPolicy *CDNLoadBalancerSensitiveDataPolicyModel `tfsdk:"sensitive_data_policy"`
-	ServicePoliciesFromNamespace *CDNLoadBalancerEmptyModel `tfsdk:"service_policies_from_namespace"`
-	SlowDdosMitigation *CDNLoadBalancerSlowDdosMitigationModel `tfsdk:"slow_ddos_mitigation"`
-	SystemDefaultTimeouts *CDNLoadBalancerEmptyModel `tfsdk:"system_default_timeouts"`
-	TrustedClients []CDNLoadBalancerTrustedClientsModel `tfsdk:"trusted_clients"`
-	UserIDClientIP *CDNLoadBalancerEmptyModel `tfsdk:"user_id_client_ip"`
-	UserIdentification *CDNLoadBalancerUserIdentificationModel `tfsdk:"user_identification"`
-	WAFExclusion *CDNLoadBalancerWAFExclusionModel `tfsdk:"waf_exclusion"`
+	Name                          types.String                                 `tfsdk:"name"`
+	Namespace                     types.String                                 `tfsdk:"namespace"`
+	Annotations                   types.Map                                    `tfsdk:"annotations"`
+	Description                   types.String                                 `tfsdk:"description"`
+	Disable                       types.Bool                                   `tfsdk:"disable"`
+	Domains                       types.List                                   `tfsdk:"domains"`
+	Labels                        types.Map                                    `tfsdk:"labels"`
+	ID                            types.String                                 `tfsdk:"id"`
+	Timeouts                      timeouts.Value                               `tfsdk:"timeouts"`
+	ActiveServicePolicies         *CDNLoadBalancerActiveServicePoliciesModel   `tfsdk:"active_service_policies"`
+	APIRateLimit                  *CDNLoadBalancerAPIRateLimitModel            `tfsdk:"api_rate_limit"`
+	APISpecification              *CDNLoadBalancerAPISpecificationModel        `tfsdk:"api_specification"`
+	AppFirewall                   *CDNLoadBalancerAppFirewallModel             `tfsdk:"app_firewall"`
+	BlockedClients                []CDNLoadBalancerBlockedClientsModel         `tfsdk:"blocked_clients"`
+	BotDefense                    *CDNLoadBalancerBotDefenseModel              `tfsdk:"bot_defense"`
+	CaptchaChallenge              *CDNLoadBalancerCaptchaChallengeModel        `tfsdk:"captcha_challenge"`
+	ClientSideDefense             *CDNLoadBalancerClientSideDefenseModel       `tfsdk:"client_side_defense"`
+	CorsPolicy                    *CDNLoadBalancerCorsPolicyModel              `tfsdk:"cors_policy"`
+	CsrfPolicy                    *CDNLoadBalancerCsrfPolicyModel              `tfsdk:"csrf_policy"`
+	CustomCacheRule               *CDNLoadBalancerCustomCacheRuleModel         `tfsdk:"custom_cache_rule"`
+	DataGuardRules                []CDNLoadBalancerDataGuardRulesModel         `tfsdk:"data_guard_rules"`
+	DdosMitigationRules           []CDNLoadBalancerDdosMitigationRulesModel    `tfsdk:"ddos_mitigation_rules"`
+	DefaultCacheAction            *CDNLoadBalancerDefaultCacheActionModel      `tfsdk:"default_cache_action"`
+	DefaultSensitiveDataPolicy    *CDNLoadBalancerEmptyModel                   `tfsdk:"default_sensitive_data_policy"`
+	DisableAPIDefinition          *CDNLoadBalancerEmptyModel                   `tfsdk:"disable_api_definition"`
+	DisableAPIDiscovery           *CDNLoadBalancerEmptyModel                   `tfsdk:"disable_api_discovery"`
+	DisableClientSideDefense      *CDNLoadBalancerEmptyModel                   `tfsdk:"disable_client_side_defense"`
+	DisableIPReputation           *CDNLoadBalancerEmptyModel                   `tfsdk:"disable_ip_reputation"`
+	DisableMaliciousUserDetection *CDNLoadBalancerEmptyModel                   `tfsdk:"disable_malicious_user_detection"`
+	DisableRateLimit              *CDNLoadBalancerEmptyModel                   `tfsdk:"disable_rate_limit"`
+	DisableThreatMesh             *CDNLoadBalancerEmptyModel                   `tfsdk:"disable_threat_mesh"`
+	DisableWAF                    *CDNLoadBalancerEmptyModel                   `tfsdk:"disable_waf"`
+	EnableAPIDiscovery            *CDNLoadBalancerEnableAPIDiscoveryModel      `tfsdk:"enable_api_discovery"`
+	EnableChallenge               *CDNLoadBalancerEnableChallengeModel         `tfsdk:"enable_challenge"`
+	EnableIPReputation            *CDNLoadBalancerEnableIPReputationModel      `tfsdk:"enable_ip_reputation"`
+	EnableMaliciousUserDetection  *CDNLoadBalancerEmptyModel                   `tfsdk:"enable_malicious_user_detection"`
+	EnableThreatMesh              *CDNLoadBalancerEmptyModel                   `tfsdk:"enable_threat_mesh"`
+	GraphqlRules                  []CDNLoadBalancerGraphqlRulesModel           `tfsdk:"graphql_rules"`
+	HTTP                          *CDNLoadBalancerHTTPModel                    `tfsdk:"http"`
+	HTTPS                         *CDNLoadBalancerHTTPSModel                   `tfsdk:"https"`
+	HTTPSAutoCert                 *CDNLoadBalancerHTTPSAutoCertModel           `tfsdk:"https_auto_cert"`
+	JsChallenge                   *CDNLoadBalancerJsChallengeModel             `tfsdk:"js_challenge"`
+	JwtValidation                 *CDNLoadBalancerJwtValidationModel           `tfsdk:"jwt_validation"`
+	L7DdosActionBlock             *CDNLoadBalancerEmptyModel                   `tfsdk:"l7_ddos_action_block"`
+	L7DdosActionDefault           *CDNLoadBalancerEmptyModel                   `tfsdk:"l7_ddos_action_default"`
+	L7DdosActionJsChallenge       *CDNLoadBalancerL7DdosActionJsChallengeModel `tfsdk:"l7_ddos_action_js_challenge"`
+	NoChallenge                   *CDNLoadBalancerEmptyModel                   `tfsdk:"no_challenge"`
+	NoServicePolicies             *CDNLoadBalancerEmptyModel                   `tfsdk:"no_service_policies"`
+	OriginPool                    *CDNLoadBalancerOriginPoolModel              `tfsdk:"origin_pool"`
+	OtherSettings                 *CDNLoadBalancerOtherSettingsModel           `tfsdk:"other_settings"`
+	PolicyBasedChallenge          *CDNLoadBalancerPolicyBasedChallengeModel    `tfsdk:"policy_based_challenge"`
+	ProtectedCookies              []CDNLoadBalancerProtectedCookiesModel       `tfsdk:"protected_cookies"`
+	RateLimit                     *CDNLoadBalancerRateLimitModel               `tfsdk:"rate_limit"`
+	SensitiveDataPolicy           *CDNLoadBalancerSensitiveDataPolicyModel     `tfsdk:"sensitive_data_policy"`
+	ServicePoliciesFromNamespace  *CDNLoadBalancerEmptyModel                   `tfsdk:"service_policies_from_namespace"`
+	SlowDdosMitigation            *CDNLoadBalancerSlowDdosMitigationModel      `tfsdk:"slow_ddos_mitigation"`
+	SystemDefaultTimeouts         *CDNLoadBalancerEmptyModel                   `tfsdk:"system_default_timeouts"`
+	TrustedClients                []CDNLoadBalancerTrustedClientsModel         `tfsdk:"trusted_clients"`
+	UserIDClientIP                *CDNLoadBalancerEmptyModel                   `tfsdk:"user_id_client_ip"`
+	UserIdentification            *CDNLoadBalancerUserIdentificationModel      `tfsdk:"user_identification"`
+	WAFExclusion                  *CDNLoadBalancerWAFExclusionModel            `tfsdk:"waf_exclusion"`
 }
 
 func (r *CDNLoadBalancerResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -2593,7 +2593,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the CDNLoadBalancer. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -2603,7 +2603,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the CDNLoadBalancer will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -2613,30 +2613,30 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"domains": schema.ListAttribute{
 				MarkdownDescription: "Domains. A list of fully qualified domain names. The CDN Distribution will be setup for these FQDN name(s). [This can be a domain or a sub-domain]",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -2651,8 +2651,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 			}),
 			"active_service_policies": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: active_service_policies, no_service_policies, service_policies_from_namespace] Service Policy List. List of service policies.",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"policies": schema.ListNestedBlock{
 						MarkdownDescription: "Policies. Service Policies is a sequential engine where policies (and rules within the policy) are evaluated one after the other. It's important to define the correct order (policies evaluated from top to bottom in the list) for service policies, to get the intended result. For each request, its characteristics are evaluated based on the match criteria in each service policy starting at the top. If there is a match in the current policy, then the policy takes effect, and no more policies are evaluated. Otherwise, the next policy is evaluated. If all policies are evaluated and none match, then the request will be denied by default.",
@@ -2660,27 +2659,25 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-									Optional: true,
+									Optional:            true,
 								},
 								"namespace": schema.StringAttribute{
 									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-									Optional: true,
+									Optional:            true,
 								},
 								"tenant": schema.StringAttribute{
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-									Optional: true,
-									Computed: true,
+									Optional:            true,
+									Computed:            true,
 								},
 							},
 						},
 					},
 				},
-
 			},
 			"api_rate_limit": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: api_rate_limit, disable_rate_limit, rate_limit] APIRateLimit.",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"api_endpoint_rules": schema.ListNestedBlock{
 						MarkdownDescription: "API Endpoints. Sets of rules for a specific endpoints. Order is matter as it uses first match policy. For creating rule that contain a whole domain or group of endpoints, please use the server URL rules above.",
@@ -2688,11 +2685,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 							Attributes: map[string]schema.Attribute{
 								"api_endpoint_path": schema.StringAttribute{
 									MarkdownDescription: "API Endpoint. The endpoint (path) of the request.",
-									Optional: true,
+									Optional:            true,
 								},
 								"specific_domain": schema.StringAttribute{
 									MarkdownDescription: "Specific Domain. The rule will apply for a specific domain.",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
@@ -2704,19 +2701,18 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									Attributes: map[string]schema.Attribute{
 										"invert_matcher": schema.BoolAttribute{
 											MarkdownDescription: "Invert Method Matcher. Invert the match result.",
-											Optional: true,
+											Optional:            true,
 										},
 										"methods": schema.ListAttribute{
 											MarkdownDescription: "Method List. List of methods values to match against. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 									},
 								},
 								"client_matcher": schema.SingleNestedBlock{
 									MarkdownDescription: "Client Matcher. Client conditions for matching a rule",
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"any_client": schema.SingleNestedBlock{
 											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -2729,15 +2725,14 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											Attributes: map[string]schema.Attribute{
 												"as_numbers": schema.ListAttribute{
 													MarkdownDescription: "AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
-													Optional: true,
-													ElementType: types.Int64Type,
+													Optional:            true,
+													ElementType:         types.Int64Type,
 												},
 											},
 										},
 										"asn_matcher": schema.SingleNestedBlock{
 											MarkdownDescription: "ASN Matcher. Match any AS number contained in the list of bgp_asn_sets.",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"asn_sets": schema.ListNestedBlock{
 													MarkdownDescription: "BGP ASN Sets. A list of references to bgp_asn_set objects.",
@@ -2745,26 +2740,26 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 														Attributes: map[string]schema.Attribute{
 															"kind": schema.StringAttribute{
 																MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-																Optional: true,
-																Computed: true,
+																Optional:            true,
+																Computed:            true,
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-																Optional: true,
+																Optional:            true,
 															},
 															"namespace": schema.StringAttribute{
 																MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-																Optional: true,
+																Optional:            true,
 															},
 															"tenant": schema.StringAttribute{
 																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-																Optional: true,
-																Computed: true,
+																Optional:            true,
+																Computed:            true,
 															},
 															"uid": schema.StringAttribute{
 																MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-																Optional: true,
-																Computed: true,
+																Optional:            true,
+																Computed:            true,
 															},
 														},
 													},
@@ -2776,8 +2771,8 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											Attributes: map[string]schema.Attribute{
 												"expressions": schema.ListAttribute{
 													MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 										},
@@ -2786,7 +2781,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											Attributes: map[string]schema.Attribute{
 												"invert_matcher": schema.BoolAttribute{
 													MarkdownDescription: "Invert IP Matcher. Invert the match result.",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -2796,26 +2791,26 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 														Attributes: map[string]schema.Attribute{
 															"kind": schema.StringAttribute{
 																MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-																Optional: true,
-																Computed: true,
+																Optional:            true,
+																Computed:            true,
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-																Optional: true,
+																Optional:            true,
 															},
 															"namespace": schema.StringAttribute{
 																MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-																Optional: true,
+																Optional:            true,
 															},
 															"tenant": schema.StringAttribute{
 																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-																Optional: true,
-																Computed: true,
+																Optional:            true,
+																Computed:            true,
 															},
 															"uid": schema.StringAttribute{
 																MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-																Optional: true,
-																Computed: true,
+																Optional:            true,
+																Computed:            true,
 															},
 														},
 													},
@@ -2827,12 +2822,12 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											Attributes: map[string]schema.Attribute{
 												"invert_match": schema.BoolAttribute{
 													MarkdownDescription: "Invert Match Result. Invert the match result.",
-													Optional: true,
+													Optional:            true,
 												},
 												"ip_prefixes": schema.ListAttribute{
 													MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefix strings.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 										},
@@ -2841,8 +2836,8 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											Attributes: map[string]schema.Attribute{
 												"ip_threat_categories": schema.ListAttribute{
 													MarkdownDescription: "List of IP Threat Categories to choose. The IP threat categories is obtained from the list and is used to auto-generate equivalent label selection expressions. Possible values are `SPAM_SOURCES`, `WINDOWS_EXPLOITS`, `WEB_ATTACKS`, `BOTNETS`, `SCANNERS`, `REPUTATION`, `PHISHING`, `PROXY`, `MOBILE_THREATS`, `TOR_PROXY`, `DENIAL_OF_SERVICE`, `NETWORK`. Defaults to `SPAM_SOURCES`.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 										},
@@ -2851,18 +2846,18 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											Attributes: map[string]schema.Attribute{
 												"classes": schema.ListAttribute{
 													MarkdownDescription: "TLS fingerprint classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against. Possible values are `TLS_FINGERPRINT_NONE`, `ANY_MALICIOUS_FINGERPRINT`, `ADWARE`, `ADWIND`, `DRIDEX`, `GOOTKIT`, `GOZI`, `JBIFROST`, `QUAKBOT`, `RANSOMWARE`, `TROLDESH`, `TOFSEE`, `TORRENTLOCKER`, `TRICKBOT`. Defaults to `TLS_FINGERPRINT_NONE`.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 												"exact_values": schema.ListAttribute{
 													MarkdownDescription: "Exact Values. A list of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 												"excluded_values": schema.ListAttribute{
 													MarkdownDescription: "Excluded Values. A list of TLS JA3 fingerprints to be excluded when matching the input TLS JA3 fingerprint. This can be used to skip known false positives when using one or more known TLS fingerprint classes in the enclosing matcher.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 										},
@@ -2873,11 +2868,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									Attributes: map[string]schema.Attribute{
 										"threshold": schema.Int64Attribute{
 											MarkdownDescription: "Threshold. The total number of allowed requests for 1 unit (e.g. SECOND/MINUTE/HOUR etc.) of the specified period.",
-											Optional: true,
+											Optional:            true,
 										},
 										"unit": schema.StringAttribute{
 											MarkdownDescription: "Rate Limit Period Unit. Unit for the period per which the rate limit is applied. - SECOND: Second Rate limit period unit is seconds - MINUTE: Minute Rate limit period unit is minutes - HOUR: Hour Rate limit period unit is hours - DAY: Day Rate limit period unit is days. Possible values are `SECOND`, `MINUTE`, `HOUR`. Defaults to `SECOND`.",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -2886,16 +2881,16 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
 													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-													Optional: true,
+													Optional:            true,
 												},
 												"namespace": schema.StringAttribute{
 													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-													Optional: true,
+													Optional:            true,
 												},
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-													Optional: true,
-													Computed: true,
+													Optional:            true,
+													Computed:            true,
 												},
 											},
 										},
@@ -2909,23 +2904,22 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-											Optional: true,
+											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
 											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-											Optional: true,
+											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
 								"request_matcher": schema.SingleNestedBlock{
 									MarkdownDescription: "Request Matcher. Request conditions for matching a rule",
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"cookie_matchers": schema.ListNestedBlock{
 											MarkdownDescription: "Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true.",
@@ -2933,11 +2927,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												Attributes: map[string]schema.Attribute{
 													"invert_matcher": schema.BoolAttribute{
 														MarkdownDescription: "Invert Matcher. Invert Match of the expression defined",
-														Optional: true,
+														Optional:            true,
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Cookie Name. A case-sensitive cookie name.",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 												Blocks: map[string]schema.Block{
@@ -2952,18 +2946,18 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 														Attributes: map[string]schema.Attribute{
 															"exact_values": schema.ListAttribute{
 																MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
-																Optional: true,
-																ElementType: types.StringType,
+																Optional:            true,
+																ElementType:         types.StringType,
 															},
 															"regex_values": schema.ListAttribute{
 																MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
-																Optional: true,
-																ElementType: types.StringType,
+																Optional:            true,
+																ElementType:         types.StringType,
 															},
 															"transformers": schema.ListAttribute{
 																MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
-																Optional: true,
-																ElementType: types.StringType,
+																Optional:            true,
+																ElementType:         types.StringType,
 															},
 														},
 													},
@@ -2976,11 +2970,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												Attributes: map[string]schema.Attribute{
 													"invert_matcher": schema.BoolAttribute{
 														MarkdownDescription: "Invert Header Matcher. Invert the match result.",
-														Optional: true,
+														Optional:            true,
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Header Name. A case-insensitive HTTP header name.",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 												Blocks: map[string]schema.Block{
@@ -2995,18 +2989,18 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 														Attributes: map[string]schema.Attribute{
 															"exact_values": schema.ListAttribute{
 																MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
-																Optional: true,
-																ElementType: types.StringType,
+																Optional:            true,
+																ElementType:         types.StringType,
 															},
 															"regex_values": schema.ListAttribute{
 																MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
-																Optional: true,
-																ElementType: types.StringType,
+																Optional:            true,
+																ElementType:         types.StringType,
 															},
 															"transformers": schema.ListAttribute{
 																MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
-																Optional: true,
-																ElementType: types.StringType,
+																Optional:            true,
+																ElementType:         types.StringType,
 															},
 														},
 													},
@@ -3019,11 +3013,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												Attributes: map[string]schema.Attribute{
 													"invert_matcher": schema.BoolAttribute{
 														MarkdownDescription: "Invert Matcher. Invert the match result.",
-														Optional: true,
+														Optional:            true,
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "JWT Claim Name. JWT claim name.",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 												Blocks: map[string]schema.Block{
@@ -3038,18 +3032,18 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 														Attributes: map[string]schema.Attribute{
 															"exact_values": schema.ListAttribute{
 																MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
-																Optional: true,
-																ElementType: types.StringType,
+																Optional:            true,
+																ElementType:         types.StringType,
 															},
 															"regex_values": schema.ListAttribute{
 																MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
-																Optional: true,
-																ElementType: types.StringType,
+																Optional:            true,
+																ElementType:         types.StringType,
 															},
 															"transformers": schema.ListAttribute{
 																MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
-																Optional: true,
-																ElementType: types.StringType,
+																Optional:            true,
+																ElementType:         types.StringType,
 															},
 														},
 													},
@@ -3062,11 +3056,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												Attributes: map[string]schema.Attribute{
 													"invert_matcher": schema.BoolAttribute{
 														MarkdownDescription: "Invert Query Parameter Matcher. Invert the match result.",
-														Optional: true,
+														Optional:            true,
 													},
 													"key": schema.StringAttribute{
 														MarkdownDescription: "Query Parameter Name. A case-sensitive HTTP query parameter name.",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 												Blocks: map[string]schema.Block{
@@ -3081,18 +3075,18 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 														Attributes: map[string]schema.Attribute{
 															"exact_values": schema.ListAttribute{
 																MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
-																Optional: true,
-																ElementType: types.StringType,
+																Optional:            true,
+																ElementType:         types.StringType,
 															},
 															"regex_values": schema.ListAttribute{
 																MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
-																Optional: true,
-																ElementType: types.StringType,
+																Optional:            true,
+																ElementType:         types.StringType,
 															},
 															"transformers": schema.ListAttribute{
 																MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
-																Optional: true,
-																ElementType: types.StringType,
+																Optional:            true,
+																ElementType:         types.StringType,
 															},
 														},
 													},
@@ -3106,8 +3100,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 					},
 					"bypass_rate_limiting_rules": schema.SingleNestedBlock{
 						MarkdownDescription: "Bypass Rate Limiting. This category defines rules per URL or API group. If request matches any of these rules, skip Rate Limiting.",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"bypass_rate_limiting_rules": schema.ListNestedBlock{
 								MarkdownDescription: "Bypass Rate Limiting. This category defines rules per URL or API group. If request matches any of these rules, skip Rate Limiting.",
@@ -3115,11 +3108,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									Attributes: map[string]schema.Attribute{
 										"base_path": schema.StringAttribute{
 											MarkdownDescription: "Base Path. The base path which this validation applies to",
-											Optional: true,
+											Optional:            true,
 										},
 										"specific_domain": schema.StringAttribute{
 											MarkdownDescription: "Specific Domain. The rule will apply for a specific domain. For example: api.example.com",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -3134,12 +3127,12 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											Attributes: map[string]schema.Attribute{
 												"methods": schema.ListAttribute{
 													MarkdownDescription: "Methods. Methods to be matched. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 												"path": schema.StringAttribute{
 													MarkdownDescription: "Path. Path to be matched",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 										},
@@ -3148,15 +3141,14 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											Attributes: map[string]schema.Attribute{
 												"api_groups": schema.ListAttribute{
 													MarkdownDescription: "API Groups.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 										},
 										"client_matcher": schema.SingleNestedBlock{
 											MarkdownDescription: "Client Matcher. Client conditions for matching a rule",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"any_client": schema.SingleNestedBlock{
 													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -3169,15 +3161,14 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													Attributes: map[string]schema.Attribute{
 														"as_numbers": schema.ListAttribute{
 															MarkdownDescription: "AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
-															Optional: true,
-															ElementType: types.Int64Type,
+															Optional:            true,
+															ElementType:         types.Int64Type,
 														},
 													},
 												},
 												"asn_matcher": schema.SingleNestedBlock{
 													MarkdownDescription: "ASN Matcher. Match any AS number contained in the list of bgp_asn_sets.",
-													Attributes: map[string]schema.Attribute{
-													},
+													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"asn_sets": schema.ListNestedBlock{
 															MarkdownDescription: "BGP ASN Sets. A list of references to bgp_asn_set objects.",
@@ -3185,26 +3176,26 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 																Attributes: map[string]schema.Attribute{
 																	"kind": schema.StringAttribute{
 																		MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-																		Optional: true,
-																		Computed: true,
+																		Optional:            true,
+																		Computed:            true,
 																	},
 																	"name": schema.StringAttribute{
 																		MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"namespace": schema.StringAttribute{
 																		MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"tenant": schema.StringAttribute{
 																		MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-																		Optional: true,
-																		Computed: true,
+																		Optional:            true,
+																		Computed:            true,
 																	},
 																	"uid": schema.StringAttribute{
 																		MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-																		Optional: true,
-																		Computed: true,
+																		Optional:            true,
+																		Computed:            true,
 																	},
 																},
 															},
@@ -3216,8 +3207,8 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													Attributes: map[string]schema.Attribute{
 														"expressions": schema.ListAttribute{
 															MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections.",
-															Optional: true,
-															ElementType: types.StringType,
+															Optional:            true,
+															ElementType:         types.StringType,
 														},
 													},
 												},
@@ -3226,7 +3217,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													Attributes: map[string]schema.Attribute{
 														"invert_matcher": schema.BoolAttribute{
 															MarkdownDescription: "Invert IP Matcher. Invert the match result.",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 													Blocks: map[string]schema.Block{
@@ -3236,26 +3227,26 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 																Attributes: map[string]schema.Attribute{
 																	"kind": schema.StringAttribute{
 																		MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-																		Optional: true,
-																		Computed: true,
+																		Optional:            true,
+																		Computed:            true,
 																	},
 																	"name": schema.StringAttribute{
 																		MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"namespace": schema.StringAttribute{
 																		MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"tenant": schema.StringAttribute{
 																		MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-																		Optional: true,
-																		Computed: true,
+																		Optional:            true,
+																		Computed:            true,
 																	},
 																	"uid": schema.StringAttribute{
 																		MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-																		Optional: true,
-																		Computed: true,
+																		Optional:            true,
+																		Computed:            true,
 																	},
 																},
 															},
@@ -3267,12 +3258,12 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													Attributes: map[string]schema.Attribute{
 														"invert_match": schema.BoolAttribute{
 															MarkdownDescription: "Invert Match Result. Invert the match result.",
-															Optional: true,
+															Optional:            true,
 														},
 														"ip_prefixes": schema.ListAttribute{
 															MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefix strings.",
-															Optional: true,
-															ElementType: types.StringType,
+															Optional:            true,
+															ElementType:         types.StringType,
 														},
 													},
 												},
@@ -3281,8 +3272,8 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													Attributes: map[string]schema.Attribute{
 														"ip_threat_categories": schema.ListAttribute{
 															MarkdownDescription: "List of IP Threat Categories to choose. The IP threat categories is obtained from the list and is used to auto-generate equivalent label selection expressions. Possible values are `SPAM_SOURCES`, `WINDOWS_EXPLOITS`, `WEB_ATTACKS`, `BOTNETS`, `SCANNERS`, `REPUTATION`, `PHISHING`, `PROXY`, `MOBILE_THREATS`, `TOR_PROXY`, `DENIAL_OF_SERVICE`, `NETWORK`. Defaults to `SPAM_SOURCES`.",
-															Optional: true,
-															ElementType: types.StringType,
+															Optional:            true,
+															ElementType:         types.StringType,
 														},
 													},
 												},
@@ -3291,18 +3282,18 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													Attributes: map[string]schema.Attribute{
 														"classes": schema.ListAttribute{
 															MarkdownDescription: "TLS fingerprint classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against. Possible values are `TLS_FINGERPRINT_NONE`, `ANY_MALICIOUS_FINGERPRINT`, `ADWARE`, `ADWIND`, `DRIDEX`, `GOOTKIT`, `GOZI`, `JBIFROST`, `QUAKBOT`, `RANSOMWARE`, `TROLDESH`, `TOFSEE`, `TORRENTLOCKER`, `TRICKBOT`. Defaults to `TLS_FINGERPRINT_NONE`.",
-															Optional: true,
-															ElementType: types.StringType,
+															Optional:            true,
+															ElementType:         types.StringType,
 														},
 														"exact_values": schema.ListAttribute{
 															MarkdownDescription: "Exact Values. A list of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against.",
-															Optional: true,
-															ElementType: types.StringType,
+															Optional:            true,
+															ElementType:         types.StringType,
 														},
 														"excluded_values": schema.ListAttribute{
 															MarkdownDescription: "Excluded Values. A list of TLS JA3 fingerprints to be excluded when matching the input TLS JA3 fingerprint. This can be used to skip known false positives when using one or more known TLS fingerprint classes in the enclosing matcher.",
-															Optional: true,
-															ElementType: types.StringType,
+															Optional:            true,
+															ElementType:         types.StringType,
 														},
 													},
 												},
@@ -3310,8 +3301,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 										},
 										"request_matcher": schema.SingleNestedBlock{
 											MarkdownDescription: "Request Matcher. Request conditions for matching a rule",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"cookie_matchers": schema.ListNestedBlock{
 													MarkdownDescription: "Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true.",
@@ -3319,11 +3309,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 														Attributes: map[string]schema.Attribute{
 															"invert_matcher": schema.BoolAttribute{
 																MarkdownDescription: "Invert Matcher. Invert Match of the expression defined",
-																Optional: true,
+																Optional:            true,
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Cookie Name. A case-sensitive cookie name.",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 														Blocks: map[string]schema.Block{
@@ -3338,18 +3328,18 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 																Attributes: map[string]schema.Attribute{
 																	"exact_values": schema.ListAttribute{
 																		MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
-																		Optional: true,
-																		ElementType: types.StringType,
+																		Optional:            true,
+																		ElementType:         types.StringType,
 																	},
 																	"regex_values": schema.ListAttribute{
 																		MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
-																		Optional: true,
-																		ElementType: types.StringType,
+																		Optional:            true,
+																		ElementType:         types.StringType,
 																	},
 																	"transformers": schema.ListAttribute{
 																		MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
-																		Optional: true,
-																		ElementType: types.StringType,
+																		Optional:            true,
+																		ElementType:         types.StringType,
 																	},
 																},
 															},
@@ -3362,11 +3352,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 														Attributes: map[string]schema.Attribute{
 															"invert_matcher": schema.BoolAttribute{
 																MarkdownDescription: "Invert Header Matcher. Invert the match result.",
-																Optional: true,
+																Optional:            true,
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Header Name. A case-insensitive HTTP header name.",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 														Blocks: map[string]schema.Block{
@@ -3381,18 +3371,18 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 																Attributes: map[string]schema.Attribute{
 																	"exact_values": schema.ListAttribute{
 																		MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
-																		Optional: true,
-																		ElementType: types.StringType,
+																		Optional:            true,
+																		ElementType:         types.StringType,
 																	},
 																	"regex_values": schema.ListAttribute{
 																		MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
-																		Optional: true,
-																		ElementType: types.StringType,
+																		Optional:            true,
+																		ElementType:         types.StringType,
 																	},
 																	"transformers": schema.ListAttribute{
 																		MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
-																		Optional: true,
-																		ElementType: types.StringType,
+																		Optional:            true,
+																		ElementType:         types.StringType,
 																	},
 																},
 															},
@@ -3405,11 +3395,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 														Attributes: map[string]schema.Attribute{
 															"invert_matcher": schema.BoolAttribute{
 																MarkdownDescription: "Invert Matcher. Invert the match result.",
-																Optional: true,
+																Optional:            true,
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "JWT Claim Name. JWT claim name.",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 														Blocks: map[string]schema.Block{
@@ -3424,18 +3414,18 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 																Attributes: map[string]schema.Attribute{
 																	"exact_values": schema.ListAttribute{
 																		MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
-																		Optional: true,
-																		ElementType: types.StringType,
+																		Optional:            true,
+																		ElementType:         types.StringType,
 																	},
 																	"regex_values": schema.ListAttribute{
 																		MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
-																		Optional: true,
-																		ElementType: types.StringType,
+																		Optional:            true,
+																		ElementType:         types.StringType,
 																	},
 																	"transformers": schema.ListAttribute{
 																		MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
-																		Optional: true,
-																		ElementType: types.StringType,
+																		Optional:            true,
+																		ElementType:         types.StringType,
 																	},
 																},
 															},
@@ -3448,11 +3438,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 														Attributes: map[string]schema.Attribute{
 															"invert_matcher": schema.BoolAttribute{
 																MarkdownDescription: "Invert Query Parameter Matcher. Invert the match result.",
-																Optional: true,
+																Optional:            true,
 															},
 															"key": schema.StringAttribute{
 																MarkdownDescription: "Query Parameter Name. A case-sensitive HTTP query parameter name.",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 														Blocks: map[string]schema.Block{
@@ -3467,18 +3457,18 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 																Attributes: map[string]schema.Attribute{
 																	"exact_values": schema.ListAttribute{
 																		MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
-																		Optional: true,
-																		ElementType: types.StringType,
+																		Optional:            true,
+																		ElementType:         types.StringType,
 																	},
 																	"regex_values": schema.ListAttribute{
 																		MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
-																		Optional: true,
-																		ElementType: types.StringType,
+																		Optional:            true,
+																		ElementType:         types.StringType,
 																	},
 																	"transformers": schema.ListAttribute{
 																		MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
-																		Optional: true,
-																		ElementType: types.StringType,
+																		Optional:            true,
+																		ElementType:         types.StringType,
 																	},
 																},
 															},
@@ -3494,8 +3484,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 					},
 					"custom_ip_allowed_list": schema.SingleNestedBlock{
 						MarkdownDescription: "Custom IP Allowed List. IP Allowed list using existing ip_prefix_set objects",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"rate_limiter_allowed_prefixes": schema.ListNestedBlock{
 								MarkdownDescription: "List of IP Prefix Sets. References to ip_prefix_set objects. Requests from source IP addresses that are covered by one of the allowed IP Prefixes are not subjected to rate limiting.",
@@ -3503,16 +3492,16 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-											Optional: true,
+											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
 											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-											Optional: true,
+											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
@@ -3524,8 +3513,8 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						Attributes: map[string]schema.Attribute{
 							"prefixes": schema.ListAttribute{
 								MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
-								Optional: true,
-								ElementType: types.StringType,
+								Optional:            true,
+								ElementType:         types.StringType,
 							},
 						},
 					},
@@ -3538,15 +3527,15 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 							Attributes: map[string]schema.Attribute{
 								"api_group": schema.StringAttribute{
 									MarkdownDescription: "API Group. API groups derived from API Definition swaggers. For example oas-all-operations including all paths and methods from the swaggers, oas-base-urls covering all requests under base-paths from the swaggers. Custom groups can be created if user tags paths or operations with 'x-volterra-api-group' extensions inside swaggers.",
-									Optional: true,
+									Optional:            true,
 								},
 								"base_path": schema.StringAttribute{
 									MarkdownDescription: "Base Path. Prefix of the request path.",
-									Optional: true,
+									Optional:            true,
 								},
 								"specific_domain": schema.StringAttribute{
 									MarkdownDescription: "Specific Domain. The rule will apply for a specific domain.",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
@@ -3555,8 +3544,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 								},
 								"client_matcher": schema.SingleNestedBlock{
 									MarkdownDescription: "Client Matcher. Client conditions for matching a rule",
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"any_client": schema.SingleNestedBlock{
 											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -3569,15 +3557,14 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											Attributes: map[string]schema.Attribute{
 												"as_numbers": schema.ListAttribute{
 													MarkdownDescription: "AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
-													Optional: true,
-													ElementType: types.Int64Type,
+													Optional:            true,
+													ElementType:         types.Int64Type,
 												},
 											},
 										},
 										"asn_matcher": schema.SingleNestedBlock{
 											MarkdownDescription: "ASN Matcher. Match any AS number contained in the list of bgp_asn_sets.",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"asn_sets": schema.ListNestedBlock{
 													MarkdownDescription: "BGP ASN Sets. A list of references to bgp_asn_set objects.",
@@ -3585,26 +3572,26 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 														Attributes: map[string]schema.Attribute{
 															"kind": schema.StringAttribute{
 																MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-																Optional: true,
-																Computed: true,
+																Optional:            true,
+																Computed:            true,
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-																Optional: true,
+																Optional:            true,
 															},
 															"namespace": schema.StringAttribute{
 																MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-																Optional: true,
+																Optional:            true,
 															},
 															"tenant": schema.StringAttribute{
 																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-																Optional: true,
-																Computed: true,
+																Optional:            true,
+																Computed:            true,
 															},
 															"uid": schema.StringAttribute{
 																MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-																Optional: true,
-																Computed: true,
+																Optional:            true,
+																Computed:            true,
 															},
 														},
 													},
@@ -3616,8 +3603,8 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											Attributes: map[string]schema.Attribute{
 												"expressions": schema.ListAttribute{
 													MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 										},
@@ -3626,7 +3613,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											Attributes: map[string]schema.Attribute{
 												"invert_matcher": schema.BoolAttribute{
 													MarkdownDescription: "Invert IP Matcher. Invert the match result.",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -3636,26 +3623,26 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 														Attributes: map[string]schema.Attribute{
 															"kind": schema.StringAttribute{
 																MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-																Optional: true,
-																Computed: true,
+																Optional:            true,
+																Computed:            true,
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-																Optional: true,
+																Optional:            true,
 															},
 															"namespace": schema.StringAttribute{
 																MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-																Optional: true,
+																Optional:            true,
 															},
 															"tenant": schema.StringAttribute{
 																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-																Optional: true,
-																Computed: true,
+																Optional:            true,
+																Computed:            true,
 															},
 															"uid": schema.StringAttribute{
 																MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-																Optional: true,
-																Computed: true,
+																Optional:            true,
+																Computed:            true,
 															},
 														},
 													},
@@ -3667,12 +3654,12 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											Attributes: map[string]schema.Attribute{
 												"invert_match": schema.BoolAttribute{
 													MarkdownDescription: "Invert Match Result. Invert the match result.",
-													Optional: true,
+													Optional:            true,
 												},
 												"ip_prefixes": schema.ListAttribute{
 													MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefix strings.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 										},
@@ -3681,8 +3668,8 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											Attributes: map[string]schema.Attribute{
 												"ip_threat_categories": schema.ListAttribute{
 													MarkdownDescription: "List of IP Threat Categories to choose. The IP threat categories is obtained from the list and is used to auto-generate equivalent label selection expressions. Possible values are `SPAM_SOURCES`, `WINDOWS_EXPLOITS`, `WEB_ATTACKS`, `BOTNETS`, `SCANNERS`, `REPUTATION`, `PHISHING`, `PROXY`, `MOBILE_THREATS`, `TOR_PROXY`, `DENIAL_OF_SERVICE`, `NETWORK`. Defaults to `SPAM_SOURCES`.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 										},
@@ -3691,18 +3678,18 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											Attributes: map[string]schema.Attribute{
 												"classes": schema.ListAttribute{
 													MarkdownDescription: "TLS fingerprint classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against. Possible values are `TLS_FINGERPRINT_NONE`, `ANY_MALICIOUS_FINGERPRINT`, `ADWARE`, `ADWIND`, `DRIDEX`, `GOOTKIT`, `GOZI`, `JBIFROST`, `QUAKBOT`, `RANSOMWARE`, `TROLDESH`, `TOFSEE`, `TORRENTLOCKER`, `TRICKBOT`. Defaults to `TLS_FINGERPRINT_NONE`.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 												"exact_values": schema.ListAttribute{
 													MarkdownDescription: "Exact Values. A list of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 												"excluded_values": schema.ListAttribute{
 													MarkdownDescription: "Excluded Values. A list of TLS JA3 fingerprints to be excluded when matching the input TLS JA3 fingerprint. This can be used to skip known false positives when using one or more known TLS fingerprint classes in the enclosing matcher.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 										},
@@ -3713,11 +3700,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									Attributes: map[string]schema.Attribute{
 										"threshold": schema.Int64Attribute{
 											MarkdownDescription: "Threshold. The total number of allowed requests for 1 unit (e.g. SECOND/MINUTE/HOUR etc.) of the specified period.",
-											Optional: true,
+											Optional:            true,
 										},
 										"unit": schema.StringAttribute{
 											MarkdownDescription: "Rate Limit Period Unit. Unit for the period per which the rate limit is applied. - SECOND: Second Rate limit period unit is seconds - MINUTE: Minute Rate limit period unit is minutes - HOUR: Hour Rate limit period unit is hours - DAY: Day Rate limit period unit is days. Possible values are `SECOND`, `MINUTE`, `HOUR`. Defaults to `SECOND`.",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -3726,16 +3713,16 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
 													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-													Optional: true,
+													Optional:            true,
 												},
 												"namespace": schema.StringAttribute{
 													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-													Optional: true,
+													Optional:            true,
 												},
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-													Optional: true,
-													Computed: true,
+													Optional:            true,
+													Computed:            true,
 												},
 											},
 										},
@@ -3749,23 +3736,22 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-											Optional: true,
+											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
 											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-											Optional: true,
+											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
 								"request_matcher": schema.SingleNestedBlock{
 									MarkdownDescription: "Request Matcher. Request conditions for matching a rule",
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"cookie_matchers": schema.ListNestedBlock{
 											MarkdownDescription: "Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true.",
@@ -3773,11 +3759,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												Attributes: map[string]schema.Attribute{
 													"invert_matcher": schema.BoolAttribute{
 														MarkdownDescription: "Invert Matcher. Invert Match of the expression defined",
-														Optional: true,
+														Optional:            true,
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Cookie Name. A case-sensitive cookie name.",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 												Blocks: map[string]schema.Block{
@@ -3792,18 +3778,18 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 														Attributes: map[string]schema.Attribute{
 															"exact_values": schema.ListAttribute{
 																MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
-																Optional: true,
-																ElementType: types.StringType,
+																Optional:            true,
+																ElementType:         types.StringType,
 															},
 															"regex_values": schema.ListAttribute{
 																MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
-																Optional: true,
-																ElementType: types.StringType,
+																Optional:            true,
+																ElementType:         types.StringType,
 															},
 															"transformers": schema.ListAttribute{
 																MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
-																Optional: true,
-																ElementType: types.StringType,
+																Optional:            true,
+																ElementType:         types.StringType,
 															},
 														},
 													},
@@ -3816,11 +3802,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												Attributes: map[string]schema.Attribute{
 													"invert_matcher": schema.BoolAttribute{
 														MarkdownDescription: "Invert Header Matcher. Invert the match result.",
-														Optional: true,
+														Optional:            true,
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Header Name. A case-insensitive HTTP header name.",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 												Blocks: map[string]schema.Block{
@@ -3835,18 +3821,18 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 														Attributes: map[string]schema.Attribute{
 															"exact_values": schema.ListAttribute{
 																MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
-																Optional: true,
-																ElementType: types.StringType,
+																Optional:            true,
+																ElementType:         types.StringType,
 															},
 															"regex_values": schema.ListAttribute{
 																MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
-																Optional: true,
-																ElementType: types.StringType,
+																Optional:            true,
+																ElementType:         types.StringType,
 															},
 															"transformers": schema.ListAttribute{
 																MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
-																Optional: true,
-																ElementType: types.StringType,
+																Optional:            true,
+																ElementType:         types.StringType,
 															},
 														},
 													},
@@ -3859,11 +3845,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												Attributes: map[string]schema.Attribute{
 													"invert_matcher": schema.BoolAttribute{
 														MarkdownDescription: "Invert Matcher. Invert the match result.",
-														Optional: true,
+														Optional:            true,
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "JWT Claim Name. JWT claim name.",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 												Blocks: map[string]schema.Block{
@@ -3878,18 +3864,18 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 														Attributes: map[string]schema.Attribute{
 															"exact_values": schema.ListAttribute{
 																MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
-																Optional: true,
-																ElementType: types.StringType,
+																Optional:            true,
+																ElementType:         types.StringType,
 															},
 															"regex_values": schema.ListAttribute{
 																MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
-																Optional: true,
-																ElementType: types.StringType,
+																Optional:            true,
+																ElementType:         types.StringType,
 															},
 															"transformers": schema.ListAttribute{
 																MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
-																Optional: true,
-																ElementType: types.StringType,
+																Optional:            true,
+																ElementType:         types.StringType,
 															},
 														},
 													},
@@ -3902,11 +3888,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												Attributes: map[string]schema.Attribute{
 													"invert_matcher": schema.BoolAttribute{
 														MarkdownDescription: "Invert Query Parameter Matcher. Invert the match result.",
-														Optional: true,
+														Optional:            true,
 													},
 													"key": schema.StringAttribute{
 														MarkdownDescription: "Query Parameter Name. A case-sensitive HTTP query parameter name.",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 												Blocks: map[string]schema.Block{
@@ -3921,18 +3907,18 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 														Attributes: map[string]schema.Attribute{
 															"exact_values": schema.ListAttribute{
 																MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
-																Optional: true,
-																ElementType: types.StringType,
+																Optional:            true,
+																ElementType:         types.StringType,
 															},
 															"regex_values": schema.ListAttribute{
 																MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
-																Optional: true,
-																ElementType: types.StringType,
+																Optional:            true,
+																ElementType:         types.StringType,
 															},
 															"transformers": schema.ListAttribute{
 																MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
-																Optional: true,
-																ElementType: types.StringType,
+																Optional:            true,
+																ElementType:         types.StringType,
 															},
 														},
 													},
@@ -3945,48 +3931,43 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						},
 					},
 				},
-
 			},
 			"api_specification": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: api_specification, disable_api_definition] API Specification and Validation. Settings for api specification (api definition, OpenAPI validation, etc.)",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"api_definition": schema.SingleNestedBlock{
 						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
 								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-								Optional: true,
+								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
 								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-								Optional: true,
+								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-								Optional: true,
-								Computed: true,
+								Optional:            true,
+								Computed:            true,
 							},
 						},
 					},
 					"validation_all_spec_endpoints": schema.SingleNestedBlock{
 						MarkdownDescription: "API Inventory. Settings for API Inventory validation",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"fall_through_mode": schema.SingleNestedBlock{
 								MarkdownDescription: "Fall Through Mode. x-required Determine what to do with unprotected endpoints (not in the OpenAPI specification file (a.k.a. swagger) or doesn't have a specific rule in custom rules)",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"fall_through_mode_allow": schema.SingleNestedBlock{
 										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 									},
 									"fall_through_mode_custom": schema.SingleNestedBlock{
 										MarkdownDescription: "Custom Fall Through Mode. Define the fall through settings",
-										Attributes: map[string]schema.Attribute{
-										},
+										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"open_api_validation_rules": schema.ListNestedBlock{
 												MarkdownDescription: "Custom Fall Through Rule List.",
@@ -3994,11 +3975,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													Attributes: map[string]schema.Attribute{
 														"api_group": schema.StringAttribute{
 															MarkdownDescription: "API Group. The API group which this validation applies to",
-															Optional: true,
+															Optional:            true,
 														},
 														"base_path": schema.StringAttribute{
 															MarkdownDescription: "Base Path. The base path which this validation applies to",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 													Blocks: map[string]schema.Block{
@@ -4016,12 +3997,12 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 															Attributes: map[string]schema.Attribute{
 																"methods": schema.ListAttribute{
 																	MarkdownDescription: "Methods. Methods to be matched. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
-																	Optional: true,
-																	ElementType: types.StringType,
+																	Optional:            true,
+																	ElementType:         types.StringType,
 																},
 																"path": schema.StringAttribute{
 																	MarkdownDescription: "Path. Path to be matched",
-																	Optional: true,
+																	Optional:            true,
 																},
 															},
 														},
@@ -4030,11 +4011,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 															Attributes: map[string]schema.Attribute{
 																"description_spec": schema.StringAttribute{
 																	MarkdownDescription: "Description. Human readable description.",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"name": schema.StringAttribute{
 																	MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
-																	Optional: true,
+																	Optional:            true,
 																},
 															},
 														},
@@ -4047,8 +4028,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 							},
 							"settings": schema.SingleNestedBlock{
 								MarkdownDescription: "Common Settings. OpenAPI specification validation settings relevant for 'API Inventory' enforcement and for 'Custom list' enforcement",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"oversized_body_fail_validation": schema.SingleNestedBlock{
 										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -4058,13 +4038,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									},
 									"property_validation_settings_custom": schema.SingleNestedBlock{
 										MarkdownDescription: "Validation Property Settings. Custom property validation settings",
-										Attributes: map[string]schema.Attribute{
-										},
+										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"query_parameters": schema.SingleNestedBlock{
 												MarkdownDescription: "Validation Settings For Query Parameters. Custom settings for query parameters validation",
-												Attributes: map[string]schema.Attribute{
-												},
+												Attributes:          map[string]schema.Attribute{},
 												Blocks: map[string]schema.Block{
 													"allow_additional_parameters": schema.SingleNestedBlock{
 														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -4083,16 +4061,15 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 							},
 							"validation_mode": schema.SingleNestedBlock{
 								MarkdownDescription: "Validation Mode. x-required Validation mode of OpenAPI specification. When a validation mismatch occurs on a request to one of the endpoints listed on the OpenAPI specification file (a.k.a. swagger)",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"response_validation_mode_active": schema.SingleNestedBlock{
 										MarkdownDescription: "Open API Validation Mode Active. Validation mode properties of response",
 										Attributes: map[string]schema.Attribute{
 											"response_validation_properties": schema.ListAttribute{
 												MarkdownDescription: "Response Validation Properties. List of properties of the response to validate according to the OpenAPI specification file (a.k.a. swagger). Possible values are `PROPERTY_QUERY_PARAMETERS`, `PROPERTY_PATH_PARAMETERS`, `PROPERTY_CONTENT_TYPE`, `PROPERTY_COOKIE_PARAMETERS`, `PROPERTY_HTTP_HEADERS`, `PROPERTY_HTTP_BODY`, `PROPERTY_SECURITY_SCHEMA`, `PROPERTY_RESPONSE_CODE`. Defaults to `PROPERTY_QUERY_PARAMETERS`.",
-												Optional: true,
-												ElementType: types.StringType,
+												Optional:            true,
+												ElementType:         types.StringType,
 											},
 										},
 										Blocks: map[string]schema.Block{
@@ -4115,8 +4092,8 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 										Attributes: map[string]schema.Attribute{
 											"request_validation_properties": schema.ListAttribute{
 												MarkdownDescription: "Request Validation Properties. List of properties of the request to validate according to the OpenAPI specification file (a.k.a. swagger). Possible values are `PROPERTY_QUERY_PARAMETERS`, `PROPERTY_PATH_PARAMETERS`, `PROPERTY_CONTENT_TYPE`, `PROPERTY_COOKIE_PARAMETERS`, `PROPERTY_HTTP_HEADERS`, `PROPERTY_HTTP_BODY`, `PROPERTY_SECURITY_SCHEMA`, `PROPERTY_RESPONSE_CODE`. Defaults to `PROPERTY_QUERY_PARAMETERS`.",
-												Optional: true,
-												ElementType: types.StringType,
+												Optional:            true,
+												ElementType:         types.StringType,
 											},
 										},
 										Blocks: map[string]schema.Block{
@@ -4134,21 +4111,18 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 					},
 					"validation_custom_list": schema.SingleNestedBlock{
 						MarkdownDescription: "Custom List. Define API groups, base paths, or API endpoints and their OpenAPI validation modes. Any other api-endpoint not listed will act according to 'Fall Through Mode'.",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"fall_through_mode": schema.SingleNestedBlock{
 								MarkdownDescription: "Fall Through Mode. x-required Determine what to do with unprotected endpoints (not in the OpenAPI specification file (a.k.a. swagger) or doesn't have a specific rule in custom rules)",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"fall_through_mode_allow": schema.SingleNestedBlock{
 										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 									},
 									"fall_through_mode_custom": schema.SingleNestedBlock{
 										MarkdownDescription: "Custom Fall Through Mode. Define the fall through settings",
-										Attributes: map[string]schema.Attribute{
-										},
+										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"open_api_validation_rules": schema.ListNestedBlock{
 												MarkdownDescription: "Custom Fall Through Rule List.",
@@ -4156,11 +4130,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													Attributes: map[string]schema.Attribute{
 														"api_group": schema.StringAttribute{
 															MarkdownDescription: "API Group. The API group which this validation applies to",
-															Optional: true,
+															Optional:            true,
 														},
 														"base_path": schema.StringAttribute{
 															MarkdownDescription: "Base Path. The base path which this validation applies to",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 													Blocks: map[string]schema.Block{
@@ -4178,12 +4152,12 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 															Attributes: map[string]schema.Attribute{
 																"methods": schema.ListAttribute{
 																	MarkdownDescription: "Methods. Methods to be matched. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
-																	Optional: true,
-																	ElementType: types.StringType,
+																	Optional:            true,
+																	ElementType:         types.StringType,
 																},
 																"path": schema.StringAttribute{
 																	MarkdownDescription: "Path. Path to be matched",
-																	Optional: true,
+																	Optional:            true,
 																},
 															},
 														},
@@ -4192,11 +4166,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 															Attributes: map[string]schema.Attribute{
 																"description_spec": schema.StringAttribute{
 																	MarkdownDescription: "Description. Human readable description.",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"name": schema.StringAttribute{
 																	MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
-																	Optional: true,
+																	Optional:            true,
 																},
 															},
 														},
@@ -4213,15 +4187,15 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									Attributes: map[string]schema.Attribute{
 										"api_group": schema.StringAttribute{
 											MarkdownDescription: "API Group. The API group which this validation applies to",
-											Optional: true,
+											Optional:            true,
 										},
 										"base_path": schema.StringAttribute{
 											MarkdownDescription: "Base Path. The base path which this validation applies to",
-											Optional: true,
+											Optional:            true,
 										},
 										"specific_domain": schema.StringAttribute{
 											MarkdownDescription: "Specific Domain. The rule will apply for a specific domain.",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -4233,12 +4207,12 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											Attributes: map[string]schema.Attribute{
 												"methods": schema.ListAttribute{
 													MarkdownDescription: "Methods. Methods to be matched. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 												"path": schema.StringAttribute{
 													MarkdownDescription: "Path. Path to be matched",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 										},
@@ -4247,26 +4221,25 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											Attributes: map[string]schema.Attribute{
 												"description_spec": schema.StringAttribute{
 													MarkdownDescription: "Description. Human readable description.",
-													Optional: true,
+													Optional:            true,
 												},
 												"name": schema.StringAttribute{
 													MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 										},
 										"validation_mode": schema.SingleNestedBlock{
 											MarkdownDescription: "Validation Mode. x-required Validation mode of OpenAPI specification. When a validation mismatch occurs on a request to one of the endpoints listed on the OpenAPI specification file (a.k.a. swagger)",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"response_validation_mode_active": schema.SingleNestedBlock{
 													MarkdownDescription: "Open API Validation Mode Active. Validation mode properties of response",
 													Attributes: map[string]schema.Attribute{
 														"response_validation_properties": schema.ListAttribute{
 															MarkdownDescription: "Response Validation Properties. List of properties of the response to validate according to the OpenAPI specification file (a.k.a. swagger). Possible values are `PROPERTY_QUERY_PARAMETERS`, `PROPERTY_PATH_PARAMETERS`, `PROPERTY_CONTENT_TYPE`, `PROPERTY_COOKIE_PARAMETERS`, `PROPERTY_HTTP_HEADERS`, `PROPERTY_HTTP_BODY`, `PROPERTY_SECURITY_SCHEMA`, `PROPERTY_RESPONSE_CODE`. Defaults to `PROPERTY_QUERY_PARAMETERS`.",
-															Optional: true,
-															ElementType: types.StringType,
+															Optional:            true,
+															ElementType:         types.StringType,
 														},
 													},
 													Blocks: map[string]schema.Block{
@@ -4289,8 +4262,8 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													Attributes: map[string]schema.Attribute{
 														"request_validation_properties": schema.ListAttribute{
 															MarkdownDescription: "Request Validation Properties. List of properties of the request to validate according to the OpenAPI specification file (a.k.a. swagger). Possible values are `PROPERTY_QUERY_PARAMETERS`, `PROPERTY_PATH_PARAMETERS`, `PROPERTY_CONTENT_TYPE`, `PROPERTY_COOKIE_PARAMETERS`, `PROPERTY_HTTP_HEADERS`, `PROPERTY_HTTP_BODY`, `PROPERTY_SECURITY_SCHEMA`, `PROPERTY_RESPONSE_CODE`. Defaults to `PROPERTY_QUERY_PARAMETERS`.",
-															Optional: true,
-															ElementType: types.StringType,
+															Optional:            true,
+															ElementType:         types.StringType,
 														},
 													},
 													Blocks: map[string]schema.Block{
@@ -4309,8 +4282,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 							},
 							"settings": schema.SingleNestedBlock{
 								MarkdownDescription: "Common Settings. OpenAPI specification validation settings relevant for 'API Inventory' enforcement and for 'Custom list' enforcement",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"oversized_body_fail_validation": schema.SingleNestedBlock{
 										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -4320,13 +4292,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									},
 									"property_validation_settings_custom": schema.SingleNestedBlock{
 										MarkdownDescription: "Validation Property Settings. Custom property validation settings",
-										Attributes: map[string]schema.Attribute{
-										},
+										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"query_parameters": schema.SingleNestedBlock{
 												MarkdownDescription: "Validation Settings For Query Parameters. Custom settings for query parameters validation",
-												Attributes: map[string]schema.Attribute{
-												},
+												Attributes:          map[string]schema.Attribute{},
 												Blocks: map[string]schema.Block{
 													"allow_additional_parameters": schema.SingleNestedBlock{
 														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -4349,26 +4319,24 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 			"app_firewall": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: app_firewall, disable_waf] Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
 						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-						Optional: true,
+						Optional:            true,
 					},
 					"namespace": schema.StringAttribute{
 						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-						Optional: true,
+						Optional:            true,
 					},
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-						Optional: true,
-						Computed: true,
+						Optional:            true,
+						Computed:            true,
 					},
 				},
-
 			},
 			"blocked_clients": schema.ListNestedBlock{
 				MarkdownDescription: "Client Blocking Rules. Define rules to block IP Prefixes or AS numbers.",
@@ -4376,28 +4344,28 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 					Attributes: map[string]schema.Attribute{
 						"actions": schema.ListAttribute{
 							MarkdownDescription: "Actions. Actions that should be taken when client identifier matches the rule. Possible values are `SKIP_PROCESSING_WAF`, `SKIP_PROCESSING_BOT`, `SKIP_PROCESSING_MUM`, `SKIP_PROCESSING_IP_REPUTATION`, `SKIP_PROCESSING_API_PROTECTION`, `SKIP_PROCESSING_OAS_VALIDATION`, `SKIP_PROCESSING_DDOS_PROTECTION`, `SKIP_PROCESSING_THREAT_MESH`, `SKIP_PROCESSING_MALWARE_PROTECTION`. Defaults to `SKIP_PROCESSING_WAF`.",
-							Optional: true,
-							ElementType: types.StringType,
+							Optional:            true,
+							ElementType:         types.StringType,
 						},
 						"as_number": schema.Int64Attribute{
 							MarkdownDescription: "AS Number. RFC 6793 defined 4-byte AS number",
-							Optional: true,
+							Optional:            true,
 						},
 						"expiration_timestamp": schema.StringAttribute{
 							MarkdownDescription: "Expiration Timestamp. The expiration_timestamp is the RFC 3339 format timestamp at which the containing rule is considered to be logically expired. The rule continues to exist in the configuration but is not applied anymore.",
-							Optional: true,
+							Optional:            true,
 						},
 						"ip_prefix": schema.StringAttribute{
 							MarkdownDescription: "IPv4 Prefix. IPv4 prefix string.",
-							Optional: true,
+							Optional:            true,
 						},
 						"ipv6_prefix": schema.StringAttribute{
 							MarkdownDescription: "IPv6 Prefix. IPv6 prefix string.",
-							Optional: true,
+							Optional:            true,
 						},
 						"user_identifier": schema.StringAttribute{
 							MarkdownDescription: "User Identifier. Identify user based on user identifier. User identifier value needs to be copied from security event.",
-							Optional: true,
+							Optional:            true,
 						},
 					},
 					Blocks: map[string]schema.Block{
@@ -4406,8 +4374,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						},
 						"http_header": schema.SingleNestedBlock{
 							MarkdownDescription: "HTTP Header. Request header name and value pairs",
-							Attributes: map[string]schema.Attribute{
-							},
+							Attributes:          map[string]schema.Attribute{},
 							Blocks: map[string]schema.Block{
 								"headers": schema.ListNestedBlock{
 									MarkdownDescription: "HTTP Headers. List of HTTP header name and value pairs",
@@ -4415,23 +4382,23 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 										Attributes: map[string]schema.Attribute{
 											"exact": schema.StringAttribute{
 												MarkdownDescription: "Exact. Header value to match exactly",
-												Optional: true,
+												Optional:            true,
 											},
 											"invert_match": schema.BoolAttribute{
 												MarkdownDescription: "NOT of match. Invert the result of the match to detect missing header or non-matching value",
-												Optional: true,
+												Optional:            true,
 											},
 											"name": schema.StringAttribute{
 												MarkdownDescription: "Name. Name of the header",
-												Optional: true,
+												Optional:            true,
 											},
 											"presence": schema.BoolAttribute{
 												MarkdownDescription: "Presence. If true, check for presence of header",
-												Optional: true,
+												Optional:            true,
 											},
 											"regex": schema.StringAttribute{
 												MarkdownDescription: "Regex. Regex match of the header value in re2 format",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -4443,11 +4410,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 							Attributes: map[string]schema.Attribute{
 								"description_spec": schema.StringAttribute{
 									MarkdownDescription: "Description. Human readable description.",
-									Optional: true,
+									Optional:            true,
 								},
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 						},
@@ -4458,7 +4425,6 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 							MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 						},
 					},
-
 				},
 			},
 			"bot_defense": schema.SingleNestedBlock{
@@ -4466,11 +4432,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 				Attributes: map[string]schema.Attribute{
 					"regional_endpoint": schema.StringAttribute{
 						MarkdownDescription: "Bot Defense Region. Defines a selection for Bot Defense region - AUTO: AUTO Automatic selection based on client IP address - US: US US region - EU: EU European Union region - ASIA: ASIA Asia region. Possible values are `AUTO`, `US`, `EU`, `ASIA`. Defaults to `AUTO`.",
-						Optional: true,
+						Optional:            true,
 					},
 					"timeout": schema.Int64Attribute{
 						MarkdownDescription: "Timeout. The timeout for the inference check, in milliseconds.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -4485,11 +4451,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						Attributes: map[string]schema.Attribute{
 							"javascript_mode": schema.StringAttribute{
 								MarkdownDescription: "Web Client JavaScript Mode. Web Client JavaScript Mode. Bot Defense JavaScript for telemetry collection is requested asynchronously, and it is non-cacheable Bot Defense JavaScript for telemetry collection is requested asynchronously, and it is cacheable Bot Defense JavaScript for telemetry collection is requested synchronously, and it is non-cacheable Bot Defense JavaScript for telemetry collection is requested synchronously, and it is cacheable. Possible values are `ASYNC_JS_NO_CACHING`, `ASYNC_JS_CACHING`, `SYNC_JS_NO_CACHING`, `SYNC_JS_CACHING`. Defaults to `ASYNC_JS_NO_CACHING`.",
-								Optional: true,
+								Optional:            true,
 							},
 							"js_download_path": schema.StringAttribute{
 								MarkdownDescription: "JavaScript Download Path. Customize Bot Defense Client JavaScript path. If not specified, default `/common.js`",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -4504,7 +4470,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 								Attributes: map[string]schema.Attribute{
 									"javascript_location": schema.StringAttribute{
 										MarkdownDescription: "JavaScript Location. All inside networks. Insert JavaScript after <head> tag Insert JavaScript after </title> tag. Insert JavaScript before first <script> tag. Possible values are `AFTER_HEAD`, `AFTER_TITLE_END`, `BEFORE_SCRIPT`. Defaults to `AFTER_HEAD`.",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -4513,15 +4479,14 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 								Attributes: map[string]schema.Attribute{
 									"javascript_location": schema.StringAttribute{
 										MarkdownDescription: "JavaScript Location. All inside networks. Insert JavaScript after <head> tag Insert JavaScript after </title> tag. Insert JavaScript before first <script> tag. Possible values are `AFTER_HEAD`, `AFTER_TITLE_END`, `BEFORE_SCRIPT`. Defaults to `AFTER_HEAD`.",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 								Blocks: map[string]schema.Block{
 									"exclude_list": schema.ListNestedBlock{
 										MarkdownDescription: "Exclude Pages. Optional JavaScript insertions exclude list of domain and path matchers.",
 										NestedObject: schema.NestedBlockObject{
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes: map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"any_domain": schema.SingleNestedBlock{
 													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -4531,15 +4496,15 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													Attributes: map[string]schema.Attribute{
 														"exact_value": schema.StringAttribute{
 															MarkdownDescription: "Exact Value. Exact domain name.",
-															Optional: true,
+															Optional:            true,
 														},
 														"regex_value": schema.StringAttribute{
 															MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name",
-															Optional: true,
+															Optional:            true,
 														},
 														"suffix_value": schema.StringAttribute{
 															MarkdownDescription: "Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -4548,11 +4513,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													Attributes: map[string]schema.Attribute{
 														"description_spec": schema.StringAttribute{
 															MarkdownDescription: "Description. Human readable description.",
-															Optional: true,
+															Optional:            true,
 														},
 														"name": schema.StringAttribute{
 															MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -4561,15 +4526,15 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													Attributes: map[string]schema.Attribute{
 														"path": schema.StringAttribute{
 															MarkdownDescription: "Exact. Exact path value to match",
-															Optional: true,
+															Optional:            true,
 														},
 														"prefix": schema.StringAttribute{
 															MarkdownDescription: "Prefix. Path prefix to match (e.g. the value / will match on all paths)",
-															Optional: true,
+															Optional:            true,
 														},
 														"regex": schema.StringAttribute{
 															MarkdownDescription: "Regex. Regular expression of path match (e.g. the value .* will match on all paths)",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -4580,14 +4545,12 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 							},
 							"js_insertion_rules": schema.SingleNestedBlock{
 								MarkdownDescription: "JavaScript Custom Insertion Rules. This defines custom JavaScript insertion rules for Bot Defense Policy.",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"exclude_list": schema.ListNestedBlock{
 										MarkdownDescription: "Exclude Paths. Optional JavaScript insertions exclude list of domain and path matchers.",
 										NestedObject: schema.NestedBlockObject{
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes: map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"any_domain": schema.SingleNestedBlock{
 													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -4597,15 +4560,15 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													Attributes: map[string]schema.Attribute{
 														"exact_value": schema.StringAttribute{
 															MarkdownDescription: "Exact Value. Exact domain name.",
-															Optional: true,
+															Optional:            true,
 														},
 														"regex_value": schema.StringAttribute{
 															MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name",
-															Optional: true,
+															Optional:            true,
 														},
 														"suffix_value": schema.StringAttribute{
 															MarkdownDescription: "Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -4614,11 +4577,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													Attributes: map[string]schema.Attribute{
 														"description_spec": schema.StringAttribute{
 															MarkdownDescription: "Description. Human readable description.",
-															Optional: true,
+															Optional:            true,
 														},
 														"name": schema.StringAttribute{
 															MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -4627,15 +4590,15 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													Attributes: map[string]schema.Attribute{
 														"path": schema.StringAttribute{
 															MarkdownDescription: "Exact. Exact path value to match",
-															Optional: true,
+															Optional:            true,
 														},
 														"prefix": schema.StringAttribute{
 															MarkdownDescription: "Prefix. Path prefix to match (e.g. the value / will match on all paths)",
-															Optional: true,
+															Optional:            true,
 														},
 														"regex": schema.StringAttribute{
 															MarkdownDescription: "Regex. Regular expression of path match (e.g. the value .* will match on all paths)",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -4648,7 +4611,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											Attributes: map[string]schema.Attribute{
 												"javascript_location": schema.StringAttribute{
 													MarkdownDescription: "JavaScript Location. All inside networks. Insert JavaScript after <head> tag Insert JavaScript after </title> tag. Insert JavaScript before first <script> tag. Possible values are `AFTER_HEAD`, `AFTER_TITLE_END`, `BEFORE_SCRIPT`. Defaults to `AFTER_HEAD`.",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -4660,15 +4623,15 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													Attributes: map[string]schema.Attribute{
 														"exact_value": schema.StringAttribute{
 															MarkdownDescription: "Exact Value. Exact domain name.",
-															Optional: true,
+															Optional:            true,
 														},
 														"regex_value": schema.StringAttribute{
 															MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name",
-															Optional: true,
+															Optional:            true,
 														},
 														"suffix_value": schema.StringAttribute{
 															MarkdownDescription: "Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -4677,11 +4640,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													Attributes: map[string]schema.Attribute{
 														"description_spec": schema.StringAttribute{
 															MarkdownDescription: "Description. Human readable description.",
-															Optional: true,
+															Optional:            true,
 														},
 														"name": schema.StringAttribute{
 															MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -4690,15 +4653,15 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													Attributes: map[string]schema.Attribute{
 														"path": schema.StringAttribute{
 															MarkdownDescription: "Exact. Exact path value to match",
-															Optional: true,
+															Optional:            true,
 														},
 														"prefix": schema.StringAttribute{
 															MarkdownDescription: "Prefix. Path prefix to match (e.g. the value / will match on all paths)",
-															Optional: true,
+															Optional:            true,
 														},
 														"regex": schema.StringAttribute{
 															MarkdownDescription: "Regex. Regular expression of path match (e.g. the value .* will match on all paths)",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -4709,13 +4672,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 							},
 							"mobile_sdk_config": schema.SingleNestedBlock{
 								MarkdownDescription: "Mobile SDK Configuration. Mobile SDK configuration.",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"mobile_identifier": schema.SingleNestedBlock{
 										MarkdownDescription: "Mobile Traffic Identifier. Mobile traffic identifier type.",
-										Attributes: map[string]schema.Attribute{
-										},
+										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"headers": schema.ListNestedBlock{
 												MarkdownDescription: "Headers. Headers that can be used to identify mobile traffic.",
@@ -4723,7 +4684,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													Attributes: map[string]schema.Attribute{
 														"name": schema.StringAttribute{
 															MarkdownDescription: "Header Name. A case-insensitive HTTP header name.",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 													Blocks: map[string]schema.Block{
@@ -4738,18 +4699,18 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 															Attributes: map[string]schema.Attribute{
 																"exact_values": schema.ListAttribute{
 																	MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
-																	Optional: true,
-																	ElementType: types.StringType,
+																	Optional:            true,
+																	ElementType:         types.StringType,
 																},
 																"regex_values": schema.ListAttribute{
 																	MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
-																	Optional: true,
-																	ElementType: types.StringType,
+																	Optional:            true,
+																	ElementType:         types.StringType,
 																},
 																"transformers": schema.ListAttribute{
 																	MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
-																	Optional: true,
-																	ElementType: types.StringType,
+																	Optional:            true,
+																	ElementType:         types.StringType,
 																},
 															},
 														},
@@ -4766,12 +4727,12 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									Attributes: map[string]schema.Attribute{
 										"http_methods": schema.ListAttribute{
 											MarkdownDescription: "HTTP Methods. List of HTTP methods. Possible values are `METHOD_ANY`, `METHOD_GET`, `METHOD_POST`, `METHOD_PUT`, `METHOD_PATCH`, `METHOD_DELETE`, `METHOD_GET_DOCUMENT`. Defaults to `METHOD_ANY`.",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 										"protocol": schema.StringAttribute{
 											MarkdownDescription: "URL Scheme. SchemeType is used to indicate URL scheme. - BOTH: BOTH URL scheme for https:// or http://. - HTTP: HTTP URL scheme http:// only. - HTTPS: HTTPS URL scheme https:// only. Possible values are `BOTH`, `HTTP`, `HTTPS`. Defaults to `BOTH`.",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -4786,27 +4747,25 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											Attributes: map[string]schema.Attribute{
 												"exact_value": schema.StringAttribute{
 													MarkdownDescription: "Exact Value. Exact domain name.",
-													Optional: true,
+													Optional:            true,
 												},
 												"regex_value": schema.StringAttribute{
 													MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name",
-													Optional: true,
+													Optional:            true,
 												},
 												"suffix_value": schema.StringAttribute{
 													MarkdownDescription: "Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 										},
 										"flow_label": schema.SingleNestedBlock{
 											MarkdownDescription: "Bot Defense Flow Label Category. Bot Defense Flow Label Category allows to associate traffic with selected category",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"account_management": schema.SingleNestedBlock{
 													MarkdownDescription: "Bot Defense Flow Label Account Management Category. Bot Defense Flow Label Account Management Category",
-													Attributes: map[string]schema.Attribute{
-													},
+													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"create": schema.SingleNestedBlock{
 															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -4818,21 +4777,18 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												},
 												"authentication": schema.SingleNestedBlock{
 													MarkdownDescription: "Bot Defense Flow Label Authentication Category. Bot Defense Flow Label Authentication Category",
-													Attributes: map[string]schema.Attribute{
-													},
+													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"login": schema.SingleNestedBlock{
 															MarkdownDescription: "Bot Defense Transaction Result. Bot Defense Transaction Result",
-															Attributes: map[string]schema.Attribute{
-															},
+															Attributes:          map[string]schema.Attribute{},
 															Blocks: map[string]schema.Block{
 																"disable_transaction_result": schema.SingleNestedBlock{
 																	MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 																},
 																"transaction_result": schema.SingleNestedBlock{
 																	MarkdownDescription: "Bot Defense Transaction Result Type. Bot Defense Transaction ResultType",
-																	Attributes: map[string]schema.Attribute{
-																	},
+																	Attributes:          map[string]schema.Attribute{},
 																	Blocks: map[string]schema.Block{
 																		"failure_conditions": schema.ListNestedBlock{
 																			MarkdownDescription: "Failure Conditions. Failure Conditions",
@@ -4840,16 +4796,16 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 																				Attributes: map[string]schema.Attribute{
 																					"name": schema.StringAttribute{
 																						MarkdownDescription: "Header Name. A case-insensitive HTTP header name.",
-																						Optional: true,
+																						Optional:            true,
 																					},
 																					"regex_values": schema.ListAttribute{
 																						MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
-																						Optional: true,
-																						ElementType: types.StringType,
+																						Optional:            true,
+																						ElementType:         types.StringType,
 																					},
 																					"status": schema.StringAttribute{
 																						MarkdownDescription: "HTTP Status Code. HTTP response status codes EmptyStatusCode response codes means it is not specified Continue status code OK status code Created status code Accepted status code Non Authoritative Information status code No Content status code Reset Content status code Partial Content status code Multi Status status code Already Reported status code Im Used status code Multiple Choices status code Moved Permanently status code Found status code See Other status code Not Modified status code Use Proxy status code Temporary Redirect status code Permanent Redirect status code Bad Request status code Unauthorized status code Payment Required status code Forbidden status code Not Found status code Method Not Allowed status code Not Acceptable status code Proxy Authentication Required status code Request Timeout status code Conflict status code Gone status code Length Required status code Precondition Failed status code Payload Too Large status code Uri Too Long status code Unsupported Media Type status code Range Not Satisfiable status code Expectation Failed status code Misdirected Request status code Unprocessable Entity status code Locked status code Failed Dependency status code Upgrade Required status code Precondition Required status code Too Many Requests status code Request Header Fields Too Large status code Internal Server Error status code Not Implemented status code Bad Gateway status code Service Unavailable status code Gateway Timeout status code Http Version Not Supported status code Variant Also Negotiates status code Insufficient Storage status code Loop Detected status code Not Extended status code Network Authentication Required status code. Possible values are `EmptyStatusCode`, `Continue`, `OK`, `Created`, `Accepted`, `NonAuthoritativeInformation`, `NoContent`, `ResetContent`, `PartialContent`, `MultiStatus`, `AlreadyReported`, `IMUsed`, `MultipleChoices`, `MovedPermanently`, `Found`, `SeeOther`, `NotModified`, `UseProxy`, `TemporaryRedirect`, `PermanentRedirect`, `BadRequest`, `Unauthorized`, `PaymentRequired`, `Forbidden`, `NotFound`, `MethodNotAllowed`, `NotAcceptable`, `ProxyAuthenticationRequired`, `RequestTimeout`, `Conflict`, `Gone`, `LengthRequired`, `PreconditionFailed`, `PayloadTooLarge`, `URITooLong`, `UnsupportedMediaType`, `RangeNotSatisfiable`, `ExpectationFailed`, `MisdirectedRequest`, `UnprocessableEntity`, `Locked`, `FailedDependency`, `UpgradeRequired`, `PreconditionRequired`, `TooManyRequests`, `RequestHeaderFieldsTooLarge`, `InternalServerError`, `NotImplemented`, `BadGateway`, `ServiceUnavailable`, `GatewayTimeout`, `HTTPVersionNotSupported`, `VariantAlsoNegotiates`, `InsufficientStorage`, `LoopDetected`, `NotExtended`, `NetworkAuthenticationRequired`. Defaults to `EmptyStatusCode`.",
-																						Optional: true,
+																						Optional:            true,
 																					},
 																				},
 																			},
@@ -4860,16 +4816,16 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 																				Attributes: map[string]schema.Attribute{
 																					"name": schema.StringAttribute{
 																						MarkdownDescription: "Header Name. A case-insensitive HTTP header name.",
-																						Optional: true,
+																						Optional:            true,
 																					},
 																					"regex_values": schema.ListAttribute{
 																						MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
-																						Optional: true,
-																						ElementType: types.StringType,
+																						Optional:            true,
+																						ElementType:         types.StringType,
 																					},
 																					"status": schema.StringAttribute{
 																						MarkdownDescription: "HTTP Status Code. HTTP response status codes EmptyStatusCode response codes means it is not specified Continue status code OK status code Created status code Accepted status code Non Authoritative Information status code No Content status code Reset Content status code Partial Content status code Multi Status status code Already Reported status code Im Used status code Multiple Choices status code Moved Permanently status code Found status code See Other status code Not Modified status code Use Proxy status code Temporary Redirect status code Permanent Redirect status code Bad Request status code Unauthorized status code Payment Required status code Forbidden status code Not Found status code Method Not Allowed status code Not Acceptable status code Proxy Authentication Required status code Request Timeout status code Conflict status code Gone status code Length Required status code Precondition Failed status code Payload Too Large status code Uri Too Long status code Unsupported Media Type status code Range Not Satisfiable status code Expectation Failed status code Misdirected Request status code Unprocessable Entity status code Locked status code Failed Dependency status code Upgrade Required status code Precondition Required status code Too Many Requests status code Request Header Fields Too Large status code Internal Server Error status code Not Implemented status code Bad Gateway status code Service Unavailable status code Gateway Timeout status code Http Version Not Supported status code Variant Also Negotiates status code Insufficient Storage status code Loop Detected status code Not Extended status code Network Authentication Required status code. Possible values are `EmptyStatusCode`, `Continue`, `OK`, `Created`, `Accepted`, `NonAuthoritativeInformation`, `NoContent`, `ResetContent`, `PartialContent`, `MultiStatus`, `AlreadyReported`, `IMUsed`, `MultipleChoices`, `MovedPermanently`, `Found`, `SeeOther`, `NotModified`, `UseProxy`, `TemporaryRedirect`, `PermanentRedirect`, `BadRequest`, `Unauthorized`, `PaymentRequired`, `Forbidden`, `NotFound`, `MethodNotAllowed`, `NotAcceptable`, `ProxyAuthenticationRequired`, `RequestTimeout`, `Conflict`, `Gone`, `LengthRequired`, `PreconditionFailed`, `PayloadTooLarge`, `URITooLong`, `UnsupportedMediaType`, `RangeNotSatisfiable`, `ExpectationFailed`, `MisdirectedRequest`, `UnprocessableEntity`, `Locked`, `FailedDependency`, `UpgradeRequired`, `PreconditionRequired`, `TooManyRequests`, `RequestHeaderFieldsTooLarge`, `InternalServerError`, `NotImplemented`, `BadGateway`, `ServiceUnavailable`, `GatewayTimeout`, `HTTPVersionNotSupported`, `VariantAlsoNegotiates`, `InsufficientStorage`, `LoopDetected`, `NotExtended`, `NetworkAuthenticationRequired`. Defaults to `EmptyStatusCode`.",
-																						Optional: true,
+																						Optional:            true,
 																					},
 																				},
 																			},
@@ -4894,8 +4850,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												},
 												"financial_services": schema.SingleNestedBlock{
 													MarkdownDescription: "Bot Defense Flow Label Financial Services Category. Bot Defense Flow Label Financial Services Category",
-													Attributes: map[string]schema.Attribute{
-													},
+													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"apply": schema.SingleNestedBlock{
 															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -4907,8 +4862,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												},
 												"flight": schema.SingleNestedBlock{
 													MarkdownDescription: "Bot Defense Flow Label Flight Category. Bot Defense Flow Label Flight Category",
-													Attributes: map[string]schema.Attribute{
-													},
+													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"checkin": schema.SingleNestedBlock{
 															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -4917,8 +4871,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												},
 												"profile_management": schema.SingleNestedBlock{
 													MarkdownDescription: "Bot Defense Flow Label Profile Management Category. Bot Defense Flow Label Profile Management Category",
-													Attributes: map[string]schema.Attribute{
-													},
+													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"create": schema.SingleNestedBlock{
 															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -4933,8 +4886,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												},
 												"search": schema.SingleNestedBlock{
 													MarkdownDescription: "Bot Defense Flow Label Search Category. Bot Defense Flow Label Search Category",
-													Attributes: map[string]schema.Attribute{
-													},
+													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"flight_search": schema.SingleNestedBlock{
 															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -4952,8 +4904,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												},
 												"shopping_gift_cards": schema.SingleNestedBlock{
 													MarkdownDescription: "Bot Defense Flow Label Shopping & Gift Cards Category. Bot Defense Flow Label Shopping & Gift Cards Category",
-													Attributes: map[string]schema.Attribute{
-													},
+													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"gift_card_make_purchase_with_gift_card": schema.SingleNestedBlock{
 															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -5001,11 +4952,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												Attributes: map[string]schema.Attribute{
 													"invert_matcher": schema.BoolAttribute{
 														MarkdownDescription: "Invert Header Matcher. Invert the match result.",
-														Optional: true,
+														Optional:            true,
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Header Name. A case-insensitive HTTP header name.",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 												Blocks: map[string]schema.Block{
@@ -5020,18 +4971,18 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 														Attributes: map[string]schema.Attribute{
 															"exact_values": schema.ListAttribute{
 																MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
-																Optional: true,
-																ElementType: types.StringType,
+																Optional:            true,
+																ElementType:         types.StringType,
 															},
 															"regex_values": schema.ListAttribute{
 																MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
-																Optional: true,
-																ElementType: types.StringType,
+																Optional:            true,
+																ElementType:         types.StringType,
 															},
 															"transformers": schema.ListAttribute{
 																MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
-																Optional: true,
-																ElementType: types.StringType,
+																Optional:            true,
+																ElementType:         types.StringType,
 															},
 														},
 													},
@@ -5043,11 +4994,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											Attributes: map[string]schema.Attribute{
 												"description_spec": schema.StringAttribute{
 													MarkdownDescription: "Description. Human readable description.",
-													Optional: true,
+													Optional:            true,
 												},
 												"name": schema.StringAttribute{
 													MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 										},
@@ -5056,37 +5007,35 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 										},
 										"mitigation": schema.SingleNestedBlock{
 											MarkdownDescription: "Bot Mitigation Action. Modify Bot Defense behavior for a matching request.",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"block": schema.SingleNestedBlock{
 													MarkdownDescription: "Block bot mitigation. Block request and respond with custom content.",
 													Attributes: map[string]schema.Attribute{
 														"body": schema.StringAttribute{
 															MarkdownDescription: "Body. Custom body message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Your request was blocked' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Your request was blocked </p>'. Base64 encoded string for this html is 'LzxwPiBZb3VyIHJlcXVlc3Qgd2FzIGJsb2NrZWQgPC9wPg=='",
-															Optional: true,
+															Optional:            true,
 														},
 														"status": schema.StringAttribute{
 															MarkdownDescription: "HTTP Status Code. HTTP response status codes EmptyStatusCode response codes means it is not specified Continue status code OK status code Created status code Accepted status code Non Authoritative Information status code No Content status code Reset Content status code Partial Content status code Multi Status status code Already Reported status code Im Used status code Multiple Choices status code Moved Permanently status code Found status code See Other status code Not Modified status code Use Proxy status code Temporary Redirect status code Permanent Redirect status code Bad Request status code Unauthorized status code Payment Required status code Forbidden status code Not Found status code Method Not Allowed status code Not Acceptable status code Proxy Authentication Required status code Request Timeout status code Conflict status code Gone status code Length Required status code Precondition Failed status code Payload Too Large status code Uri Too Long status code Unsupported Media Type status code Range Not Satisfiable status code Expectation Failed status code Misdirected Request status code Unprocessable Entity status code Locked status code Failed Dependency status code Upgrade Required status code Precondition Required status code Too Many Requests status code Request Header Fields Too Large status code Internal Server Error status code Not Implemented status code Bad Gateway status code Service Unavailable status code Gateway Timeout status code Http Version Not Supported status code Variant Also Negotiates status code Insufficient Storage status code Loop Detected status code Not Extended status code Network Authentication Required status code. Possible values are `EmptyStatusCode`, `Continue`, `OK`, `Created`, `Accepted`, `NonAuthoritativeInformation`, `NoContent`, `ResetContent`, `PartialContent`, `MultiStatus`, `AlreadyReported`, `IMUsed`, `MultipleChoices`, `MovedPermanently`, `Found`, `SeeOther`, `NotModified`, `UseProxy`, `TemporaryRedirect`, `PermanentRedirect`, `BadRequest`, `Unauthorized`, `PaymentRequired`, `Forbidden`, `NotFound`, `MethodNotAllowed`, `NotAcceptable`, `ProxyAuthenticationRequired`, `RequestTimeout`, `Conflict`, `Gone`, `LengthRequired`, `PreconditionFailed`, `PayloadTooLarge`, `URITooLong`, `UnsupportedMediaType`, `RangeNotSatisfiable`, `ExpectationFailed`, `MisdirectedRequest`, `UnprocessableEntity`, `Locked`, `FailedDependency`, `UpgradeRequired`, `PreconditionRequired`, `TooManyRequests`, `RequestHeaderFieldsTooLarge`, `InternalServerError`, `NotImplemented`, `BadGateway`, `ServiceUnavailable`, `GatewayTimeout`, `HTTPVersionNotSupported`, `VariantAlsoNegotiates`, `InsufficientStorage`, `LoopDetected`, `NotExtended`, `NetworkAuthenticationRequired`. Defaults to `EmptyStatusCode`.",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
 												"flag": schema.SingleNestedBlock{
 													MarkdownDescription: "Select Flag Bot Mitigation Action. Flag mitigation action.",
-													Attributes: map[string]schema.Attribute{
-													},
+													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"append_headers": schema.SingleNestedBlock{
 															MarkdownDescription: "Append Flag Mitigation Headers. Append flag mitigation headers to forwarded request.",
 															Attributes: map[string]schema.Attribute{
 																"auto_type_header_name": schema.StringAttribute{
 																	MarkdownDescription: "Automation Type Header Name. A case-insensitive HTTP header name.",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"inference_header_name": schema.StringAttribute{
 																	MarkdownDescription: "Inference Header Name. A case-insensitive HTTP header name.",
-																	Optional: true,
+																	Optional:            true,
 																},
 															},
 														},
@@ -5100,7 +5049,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													Attributes: map[string]schema.Attribute{
 														"uri": schema.StringAttribute{
 															MarkdownDescription: "URI. URI location for redirect may be relative or absolute.",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -5114,15 +5063,15 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											Attributes: map[string]schema.Attribute{
 												"path": schema.StringAttribute{
 													MarkdownDescription: "Exact. Exact path value to match",
-													Optional: true,
+													Optional:            true,
 												},
 												"prefix": schema.StringAttribute{
 													MarkdownDescription: "Prefix. Path prefix to match (e.g. the value / will match on all paths)",
-													Optional: true,
+													Optional:            true,
 												},
 												"regex": schema.StringAttribute{
 													MarkdownDescription: "Regex. Regular expression of path match (e.g. the value .* will match on all paths)",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 										},
@@ -5132,11 +5081,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												Attributes: map[string]schema.Attribute{
 													"invert_matcher": schema.BoolAttribute{
 														MarkdownDescription: "Invert Query Parameter Matcher. Invert the match result.",
-														Optional: true,
+														Optional:            true,
 													},
 													"key": schema.StringAttribute{
 														MarkdownDescription: "Query Parameter Name. A case-sensitive HTTP query parameter name.",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 												Blocks: map[string]schema.Block{
@@ -5151,18 +5100,18 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 														Attributes: map[string]schema.Attribute{
 															"exact_values": schema.ListAttribute{
 																MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
-																Optional: true,
-																ElementType: types.StringType,
+																Optional:            true,
+																ElementType:         types.StringType,
 															},
 															"regex_values": schema.ListAttribute{
 																MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
-																Optional: true,
-																ElementType: types.StringType,
+																Optional:            true,
+																ElementType:         types.StringType,
 															},
 															"transformers": schema.ListAttribute{
 																MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
-																Optional: true,
-																ElementType: types.StringType,
+																Optional:            true,
+																ElementType:         types.StringType,
 															},
 														},
 													},
@@ -5180,7 +5129,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											Attributes: map[string]schema.Attribute{
 												"mobile_identifier": schema.StringAttribute{
 													MarkdownDescription: "Mobile Identifier. Mobile identifier type - HEADERS: Headers Headers. The only possible value is `HEADERS`. Defaults to `HEADERS`.",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 										},
@@ -5190,31 +5139,27 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						},
 					},
 				},
-
 			},
 			"captcha_challenge": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: captcha_challenge, enable_challenge, js_challenge, no_challenge, policy_based_challenge] Captcha Challenge Parameters. Enables loadbalancer to perform captcha challenge Captcha challenge will be based on Google Recaptcha. With this feature enabled, only clients that pass the captcha challenge will be allowed to complete the HTTP request. When loadbalancer is configured to do Captcha Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have captcha challenge embedded in it. Client will be allowed to make the request only if the captcha challenge is successful. Loadbalancer will tag response header with a cookie to avoid Captcha challenge for subsequent requests. CAPTCHA is mainly used as a security check to ensure only human users can pass through. Generally, computers or bots are not capable of solving a captcha. You can enable either Javascript challenge or Captcha challenge on a virtual host",
 				Attributes: map[string]schema.Attribute{
 					"cookie_expiry": schema.Int64Attribute{
 						MarkdownDescription: "Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge.",
-						Optional: true,
+						Optional:            true,
 					},
 					"custom_page": schema.StringAttribute{
 						MarkdownDescription: "Custom message for Captcha Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Please Wait.' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Please Wait </p>'. Base64 encoded string for this html is 'PHA+IFBsZWFzZSBXYWl0IDwvcD4='",
-						Optional: true,
+						Optional:            true,
 					},
 				},
-
 			},
 			"client_side_defense": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: client_side_defense, disable_client_side_defense] Client-Side Defense. This defines various configuration options for Client-Side Defense Policy.",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"policy": schema.SingleNestedBlock{
 						MarkdownDescription: "Client-Side Defense Policy. This defines various configuration options for Client-Side Defense policy.",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"disable_js_insert": schema.SingleNestedBlock{
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -5224,14 +5169,12 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 							},
 							"js_insert_all_pages_except": schema.SingleNestedBlock{
 								MarkdownDescription: "Insert JavaScript in All Pages with the Exceptions. Insert Client-Side Defense JavaScript in all pages with the exceptions",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"exclude_list": schema.ListNestedBlock{
 										MarkdownDescription: "Exclude Pages. Optional JavaScript insertions exclude list of domain and path matchers.",
 										NestedObject: schema.NestedBlockObject{
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes: map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"any_domain": schema.SingleNestedBlock{
 													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -5241,15 +5184,15 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													Attributes: map[string]schema.Attribute{
 														"exact_value": schema.StringAttribute{
 															MarkdownDescription: "Exact Value. Exact domain name.",
-															Optional: true,
+															Optional:            true,
 														},
 														"regex_value": schema.StringAttribute{
 															MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name",
-															Optional: true,
+															Optional:            true,
 														},
 														"suffix_value": schema.StringAttribute{
 															MarkdownDescription: "Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -5258,11 +5201,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													Attributes: map[string]schema.Attribute{
 														"description_spec": schema.StringAttribute{
 															MarkdownDescription: "Description. Human readable description.",
-															Optional: true,
+															Optional:            true,
 														},
 														"name": schema.StringAttribute{
 															MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -5271,15 +5214,15 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													Attributes: map[string]schema.Attribute{
 														"path": schema.StringAttribute{
 															MarkdownDescription: "Exact. Exact path value to match",
-															Optional: true,
+															Optional:            true,
 														},
 														"prefix": schema.StringAttribute{
 															MarkdownDescription: "Prefix. Path prefix to match (e.g. the value / will match on all paths)",
-															Optional: true,
+															Optional:            true,
 														},
 														"regex": schema.StringAttribute{
 															MarkdownDescription: "Regex. Regular expression of path match (e.g. the value .* will match on all paths)",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -5290,14 +5233,12 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 							},
 							"js_insertion_rules": schema.SingleNestedBlock{
 								MarkdownDescription: "JavaScript Custom Insertion Rules. This defines custom JavaScript insertion rules for Client-Side Defense Policy.",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"exclude_list": schema.ListNestedBlock{
 										MarkdownDescription: "Exclude Paths. Optional JavaScript insertions exclude list of domain and path matchers.",
 										NestedObject: schema.NestedBlockObject{
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes: map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"any_domain": schema.SingleNestedBlock{
 													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -5307,15 +5248,15 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													Attributes: map[string]schema.Attribute{
 														"exact_value": schema.StringAttribute{
 															MarkdownDescription: "Exact Value. Exact domain name.",
-															Optional: true,
+															Optional:            true,
 														},
 														"regex_value": schema.StringAttribute{
 															MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name",
-															Optional: true,
+															Optional:            true,
 														},
 														"suffix_value": schema.StringAttribute{
 															MarkdownDescription: "Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -5324,11 +5265,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													Attributes: map[string]schema.Attribute{
 														"description_spec": schema.StringAttribute{
 															MarkdownDescription: "Description. Human readable description.",
-															Optional: true,
+															Optional:            true,
 														},
 														"name": schema.StringAttribute{
 															MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -5337,15 +5278,15 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													Attributes: map[string]schema.Attribute{
 														"path": schema.StringAttribute{
 															MarkdownDescription: "Exact. Exact path value to match",
-															Optional: true,
+															Optional:            true,
 														},
 														"prefix": schema.StringAttribute{
 															MarkdownDescription: "Prefix. Path prefix to match (e.g. the value / will match on all paths)",
-															Optional: true,
+															Optional:            true,
 														},
 														"regex": schema.StringAttribute{
 															MarkdownDescription: "Regex. Regular expression of path match (e.g. the value .* will match on all paths)",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -5355,8 +5296,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									"rules": schema.ListNestedBlock{
 										MarkdownDescription: "JavaScript Insertions. Required list of pages to insert Client-Side Defense client JavaScript.",
 										NestedObject: schema.NestedBlockObject{
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes: map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"any_domain": schema.SingleNestedBlock{
 													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -5366,15 +5306,15 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													Attributes: map[string]schema.Attribute{
 														"exact_value": schema.StringAttribute{
 															MarkdownDescription: "Exact Value. Exact domain name.",
-															Optional: true,
+															Optional:            true,
 														},
 														"regex_value": schema.StringAttribute{
 															MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name",
-															Optional: true,
+															Optional:            true,
 														},
 														"suffix_value": schema.StringAttribute{
 															MarkdownDescription: "Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -5383,11 +5323,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													Attributes: map[string]schema.Attribute{
 														"description_spec": schema.StringAttribute{
 															MarkdownDescription: "Description. Human readable description.",
-															Optional: true,
+															Optional:            true,
 														},
 														"name": schema.StringAttribute{
 															MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -5396,15 +5336,15 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													Attributes: map[string]schema.Attribute{
 														"path": schema.StringAttribute{
 															MarkdownDescription: "Exact. Exact path value to match",
-															Optional: true,
+															Optional:            true,
 														},
 														"prefix": schema.StringAttribute{
 															MarkdownDescription: "Prefix. Path prefix to match (e.g. the value / will match on all paths)",
-															Optional: true,
+															Optional:            true,
 														},
 														"regex": schema.StringAttribute{
 															MarkdownDescription: "Regex. Regular expression of path match (e.g. the value .* will match on all paths)",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -5416,52 +5356,49 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						},
 					},
 				},
-
 			},
 			"cors_policy": schema.SingleNestedBlock{
 				MarkdownDescription: "CORS Policy. Cross-Origin Resource Sharing requests configuration specified at Virtual-host or Route level. Route level configuration takes precedence. An example of an Cross origin HTTP request GET /resources/public-data/ HTTP/1.1 Host: bar.other User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US; rv:1.9.1b3pre) Gecko/20081130 Minefield/3.1b3pre Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8 Accept-Language: en-us,en;q=0.5 Accept-Encoding: gzip,deflate Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7 Connection: keep-alive Referrer: http://foo.example/examples/access-control/simpleXSInvocation.html Origin: http://foo.example HTTP/1.1 200 OK Date: Mon, 01 Dec 2008 00:23:53 GMT Server: Apache/2.0.61 Access-Control-Allow-Origin: * Keep-Alive: timeout=2, max=100 Connection: Keep-Alive Transfer-Encoding: chunked Content-Type: application/xml An example for cross origin HTTP OPTIONS request with Access-Control-Request-* header OPTIONS /resources/post-here/ HTTP/1.1 Host: bar.other User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US; rv:1.9.1b3pre) Gecko/20081130 Minefield/3.1b3pre Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8 Accept-Language: en-us,en;q=0.5 Accept-Encoding: gzip,deflate Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7 Connection: keep-alive Origin: http://foo.example Access-Control-Request-Method: POST Access-Control-Request-Headers: X-PINGOTHER, Content-Type HTTP/1.1 204 No Content Date: Mon, 01 Dec 2008 01:15:39 GMT Server: Apache/2.0.61 (Unix) Access-Control-Allow-Origin: http://foo.example Access-Control-Allow-Methods: POST, GET, OPTIONS Access-Control-Allow-Headers: X-PINGOTHER, Content-Type Access-Control-Max-Age: 86400 Vary: Accept-Encoding, Origin Keep-Alive: timeout=2, max=100 Connection: Keep-Alive",
 				Attributes: map[string]schema.Attribute{
 					"allow_credentials": schema.BoolAttribute{
 						MarkdownDescription: "Allow Credentials. Specifies whether the resource allows credentials",
-						Optional: true,
+						Optional:            true,
 					},
 					"allow_headers": schema.StringAttribute{
 						MarkdownDescription: "Allow Headers. Specifies the content for the access-control-allow-headers header",
-						Optional: true,
+						Optional:            true,
 					},
 					"allow_methods": schema.StringAttribute{
 						MarkdownDescription: "Allow Methods. Specifies the content for the access-control-allow-methods header",
-						Optional: true,
+						Optional:            true,
 					},
 					"allow_origin": schema.ListAttribute{
 						MarkdownDescription: "Allow Origin. Specifies the origins that will be allowed to do CORS requests. An origin is allowed if either allow_origin or allow_origin_regex match",
-						Optional: true,
-						ElementType: types.StringType,
+						Optional:            true,
+						ElementType:         types.StringType,
 					},
 					"allow_origin_regex": schema.ListAttribute{
 						MarkdownDescription: "Allow Origin Regex. Specifies regex patterns that match allowed origins. An origin is allowed if either allow_origin or allow_origin_regex match",
-						Optional: true,
-						ElementType: types.StringType,
+						Optional:            true,
+						ElementType:         types.StringType,
 					},
 					"disabled": schema.BoolAttribute{
 						MarkdownDescription: "Disabled. Disable the CorsPolicy for a particular route. This is useful when virtual-host has CorsPolicy, but we need to disable it on a specific route. The value of this field is ignored for virtual-host",
-						Optional: true,
+						Optional:            true,
 					},
 					"expose_headers": schema.StringAttribute{
 						MarkdownDescription: "Expose Headers. Specifies the content for the access-control-expose-headers header",
-						Optional: true,
+						Optional:            true,
 					},
 					"maximum_age": schema.Int64Attribute{
 						MarkdownDescription: "Maximum Age. Specifies the content for the access-control-max-age header in seconds. This indicates the maximum number of seconds the results can be cached A value of -1 will disable caching. Maximum permitted value is 86400 seconds (24 hours)",
-						Optional: true,
+						Optional:            true,
 					},
 				},
-
 			},
 			"csrf_policy": schema.SingleNestedBlock{
 				MarkdownDescription: "CSRF Policy. To mitigate CSRF attack , the policy checks where a request is coming from to determine if the request's origin is the same as its detination.The policy relies on two pieces of information used in determining if a request originated from the same host. 1. The origin that caused the user agent to issue the request (source origin). 2. The origin that the request is going to (target origin). When the policy evaluating a request, it ensures both pieces of information are present and compare their values. If the source origin is missing or origins do not match the request is rejected. The exception to this being if the source-origin has been added to they policy as valid. Because CSRF attacks specifically target state-changing requests, the policy only acts on the HTTP requests that have state-changing method (PUT,POST, etc.).",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"all_load_balancer_domains": schema.SingleNestedBlock{
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -5471,8 +5408,8 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						Attributes: map[string]schema.Attribute{
 							"domains": schema.ListAttribute{
 								MarkdownDescription: "Domain names. A list of domain names that will be matched to loadbalancer. These domains are not used for SNI match. Wildcard names are supported in the suffix or prefix form.",
-								Optional: true,
-								ElementType: types.StringType,
+								Optional:            true,
+								ElementType:         types.StringType,
 							},
 						},
 					},
@@ -5480,12 +5417,10 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 			"custom_cache_rule": schema.SingleNestedBlock{
 				MarkdownDescription: "Custom Cache Rules. Caching policies for CDN",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"cdn_cache_rules": schema.ListNestedBlock{
 						MarkdownDescription: "CDN Cache Rule. Reference to CDN Cache Rule configuration object",
@@ -5493,22 +5428,21 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-									Optional: true,
+									Optional:            true,
 								},
 								"namespace": schema.StringAttribute{
 									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-									Optional: true,
+									Optional:            true,
 								},
 								"tenant": schema.StringAttribute{
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-									Optional: true,
-									Computed: true,
+									Optional:            true,
+									Computed:            true,
 								},
 							},
 						},
 					},
 				},
-
 			},
 			"data_guard_rules": schema.ListNestedBlock{
 				MarkdownDescription: "Data Guard Rules. Data Guard prevents responses from exposing sensitive information by masking the data. The system masks credit card numbers and social security numbers leaked from the application from within the http response with a string of asterisks (*). Note: App Firewall should be enabled, to use Data Guard feature.",
@@ -5516,11 +5450,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 					Attributes: map[string]schema.Attribute{
 						"exact_value": schema.StringAttribute{
 							MarkdownDescription: "Exact Value. Exact domain name",
-							Optional: true,
+							Optional:            true,
 						},
 						"suffix_value": schema.StringAttribute{
 							MarkdownDescription: "Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'",
-							Optional: true,
+							Optional:            true,
 						},
 					},
 					Blocks: map[string]schema.Block{
@@ -5535,11 +5469,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 							Attributes: map[string]schema.Attribute{
 								"description_spec": schema.StringAttribute{
 									MarkdownDescription: "Description. Human readable description.",
-									Optional: true,
+									Optional:            true,
 								},
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 						},
@@ -5548,15 +5482,15 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 							Attributes: map[string]schema.Attribute{
 								"path": schema.StringAttribute{
 									MarkdownDescription: "Exact. Exact path value to match",
-									Optional: true,
+									Optional:            true,
 								},
 								"prefix": schema.StringAttribute{
 									MarkdownDescription: "Prefix. Path prefix to match (e.g. the value / will match on all paths)",
-									Optional: true,
+									Optional:            true,
 								},
 								"regex": schema.StringAttribute{
 									MarkdownDescription: "Regex. Regular expression of path match (e.g. the value .* will match on all paths)",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 						},
@@ -5564,7 +5498,6 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 							MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 						},
 					},
-
 				},
 			},
 			"ddos_mitigation_rules": schema.ListNestedBlock{
@@ -5573,7 +5506,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 					Attributes: map[string]schema.Attribute{
 						"expiration_timestamp": schema.StringAttribute{
 							MarkdownDescription: "Expiration Timestamp. The expiration_timestamp is the RFC 3339 format timestamp at which the containing rule is considered to be logically expired. The rule continues to exist in the configuration but is not applied anymore.",
-							Optional: true,
+							Optional:            true,
 						},
 					},
 					Blocks: map[string]schema.Block{
@@ -5585,8 +5518,8 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 							Attributes: map[string]schema.Attribute{
 								"country_list": schema.ListAttribute{
 									MarkdownDescription: "Country List. Sources that are located in one of the countries in the given list. Possible values are `COUNTRY_NONE`, `COUNTRY_AD`, `COUNTRY_AE`, `COUNTRY_AF`, `COUNTRY_AG`, `COUNTRY_AI`, `COUNTRY_AL`, `COUNTRY_AM`, `COUNTRY_AN`, `COUNTRY_AO`, `COUNTRY_AQ`, `COUNTRY_AR`, `COUNTRY_AS`, `COUNTRY_AT`, `COUNTRY_AU`, `COUNTRY_AW`, `COUNTRY_AX`, `COUNTRY_AZ`, `COUNTRY_BA`, `COUNTRY_BB`, `COUNTRY_BD`, `COUNTRY_BE`, `COUNTRY_BF`, `COUNTRY_BG`, `COUNTRY_BH`, `COUNTRY_BI`, `COUNTRY_BJ`, `COUNTRY_BL`, `COUNTRY_BM`, `COUNTRY_BN`, `COUNTRY_BO`, `COUNTRY_BQ`, `COUNTRY_BR`, `COUNTRY_BS`, `COUNTRY_BT`, `COUNTRY_BV`, `COUNTRY_BW`, `COUNTRY_BY`, `COUNTRY_BZ`, `COUNTRY_CA`, `COUNTRY_CC`, `COUNTRY_CD`, `COUNTRY_CF`, `COUNTRY_CG`, `COUNTRY_CH`, `COUNTRY_CI`, `COUNTRY_CK`, `COUNTRY_CL`, `COUNTRY_CM`, `COUNTRY_CN`, `COUNTRY_CO`, `COUNTRY_CR`, `COUNTRY_CS`, `COUNTRY_CU`, `COUNTRY_CV`, `COUNTRY_CW`, `COUNTRY_CX`, `COUNTRY_CY`, `COUNTRY_CZ`, `COUNTRY_DE`, `COUNTRY_DJ`, `COUNTRY_DK`, `COUNTRY_DM`, `COUNTRY_DO`, `COUNTRY_DZ`, `COUNTRY_EC`, `COUNTRY_EE`, `COUNTRY_EG`, `COUNTRY_EH`, `COUNTRY_ER`, `COUNTRY_ES`, `COUNTRY_ET`, `COUNTRY_FI`, `COUNTRY_FJ`, `COUNTRY_FK`, `COUNTRY_FM`, `COUNTRY_FO`, `COUNTRY_FR`, `COUNTRY_GA`, `COUNTRY_GB`, `COUNTRY_GD`, `COUNTRY_GE`, `COUNTRY_GF`, `COUNTRY_GG`, `COUNTRY_GH`, `COUNTRY_GI`, `COUNTRY_GL`, `COUNTRY_GM`, `COUNTRY_GN`, `COUNTRY_GP`, `COUNTRY_GQ`, `COUNTRY_GR`, `COUNTRY_GS`, `COUNTRY_GT`, `COUNTRY_GU`, `COUNTRY_GW`, `COUNTRY_GY`, `COUNTRY_HK`, `COUNTRY_HM`, `COUNTRY_HN`, `COUNTRY_HR`, `COUNTRY_HT`, `COUNTRY_HU`, `COUNTRY_ID`, `COUNTRY_IE`, `COUNTRY_IL`, `COUNTRY_IM`, `COUNTRY_IN`, `COUNTRY_IO`, `COUNTRY_IQ`, `COUNTRY_IR`, `COUNTRY_IS`, `COUNTRY_IT`, `COUNTRY_JE`, `COUNTRY_JM`, `COUNTRY_JO`, `COUNTRY_JP`, `COUNTRY_KE`, `COUNTRY_KG`, `COUNTRY_KH`, `COUNTRY_KI`, `COUNTRY_KM`, `COUNTRY_KN`, `COUNTRY_KP`, `COUNTRY_KR`, `COUNTRY_KW`, `COUNTRY_KY`, `COUNTRY_KZ`, `COUNTRY_LA`, `COUNTRY_LB`, `COUNTRY_LC`, `COUNTRY_LI`, `COUNTRY_LK`, `COUNTRY_LR`, `COUNTRY_LS`, `COUNTRY_LT`, `COUNTRY_LU`, `COUNTRY_LV`, `COUNTRY_LY`, `COUNTRY_MA`, `COUNTRY_MC`, `COUNTRY_MD`, `COUNTRY_ME`, `COUNTRY_MF`, `COUNTRY_MG`, `COUNTRY_MH`, `COUNTRY_MK`, `COUNTRY_ML`, `COUNTRY_MM`, `COUNTRY_MN`, `COUNTRY_MO`, `COUNTRY_MP`, `COUNTRY_MQ`, `COUNTRY_MR`, `COUNTRY_MS`, `COUNTRY_MT`, `COUNTRY_MU`, `COUNTRY_MV`, `COUNTRY_MW`, `COUNTRY_MX`, `COUNTRY_MY`, `COUNTRY_MZ`, `COUNTRY_NA`, `COUNTRY_NC`, `COUNTRY_NE`, `COUNTRY_NF`, `COUNTRY_NG`, `COUNTRY_NI`, `COUNTRY_NL`, `COUNTRY_NO`, `COUNTRY_NP`, `COUNTRY_NR`, `COUNTRY_NU`, `COUNTRY_NZ`, `COUNTRY_OM`, `COUNTRY_PA`, `COUNTRY_PE`, `COUNTRY_PF`, `COUNTRY_PG`, `COUNTRY_PH`, `COUNTRY_PK`, `COUNTRY_PL`, `COUNTRY_PM`, `COUNTRY_PN`, `COUNTRY_PR`, `COUNTRY_PS`, `COUNTRY_PT`, `COUNTRY_PW`, `COUNTRY_PY`, `COUNTRY_QA`, `COUNTRY_RE`, `COUNTRY_RO`, `COUNTRY_RS`, `COUNTRY_RU`, `COUNTRY_RW`, `COUNTRY_SA`, `COUNTRY_SB`, `COUNTRY_SC`, `COUNTRY_SD`, `COUNTRY_SE`, `COUNTRY_SG`, `COUNTRY_SH`, `COUNTRY_SI`, `COUNTRY_SJ`, `COUNTRY_SK`, `COUNTRY_SL`, `COUNTRY_SM`, `COUNTRY_SN`, `COUNTRY_SO`, `COUNTRY_SR`, `COUNTRY_SS`, `COUNTRY_ST`, `COUNTRY_SV`, `COUNTRY_SX`, `COUNTRY_SY`, `COUNTRY_SZ`, `COUNTRY_TC`, `COUNTRY_TD`, `COUNTRY_TF`, `COUNTRY_TG`, `COUNTRY_TH`, `COUNTRY_TJ`, `COUNTRY_TK`, `COUNTRY_TL`, `COUNTRY_TM`, `COUNTRY_TN`, `COUNTRY_TO`, `COUNTRY_TR`, `COUNTRY_TT`, `COUNTRY_TV`, `COUNTRY_TW`, `COUNTRY_TZ`, `COUNTRY_UA`, `COUNTRY_UG`, `COUNTRY_UM`, `COUNTRY_US`, `COUNTRY_UY`, `COUNTRY_UZ`, `COUNTRY_VA`, `COUNTRY_VC`, `COUNTRY_VE`, `COUNTRY_VG`, `COUNTRY_VI`, `COUNTRY_VN`, `COUNTRY_VU`, `COUNTRY_WF`, `COUNTRY_WS`, `COUNTRY_XK`, `COUNTRY_XT`, `COUNTRY_YE`, `COUNTRY_YT`, `COUNTRY_ZA`, `COUNTRY_ZM`, `COUNTRY_ZW`. Defaults to `COUNTRY_NONE`.",
-									Optional: true,
-									ElementType: types.StringType,
+									Optional:            true,
+									ElementType:         types.StringType,
 								},
 							},
 							Blocks: map[string]schema.Block{
@@ -5595,8 +5528,8 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									Attributes: map[string]schema.Attribute{
 										"as_numbers": schema.ListAttribute{
 											MarkdownDescription: "AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
-											Optional: true,
-											ElementType: types.Int64Type,
+											Optional:            true,
+											ElementType:         types.Int64Type,
 										},
 									},
 								},
@@ -5605,8 +5538,8 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									Attributes: map[string]schema.Attribute{
 										"exact_values": schema.ListAttribute{
 											MarkdownDescription: "Exact Values. A list of exact JA4 TLS fingerprint to match the input JA4 TLS fingerprint against",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 									},
 								},
@@ -5615,18 +5548,18 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									Attributes: map[string]schema.Attribute{
 										"classes": schema.ListAttribute{
 											MarkdownDescription: "TLS fingerprint classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against. Possible values are `TLS_FINGERPRINT_NONE`, `ANY_MALICIOUS_FINGERPRINT`, `ADWARE`, `ADWIND`, `DRIDEX`, `GOOTKIT`, `GOZI`, `JBIFROST`, `QUAKBOT`, `RANSOMWARE`, `TROLDESH`, `TOFSEE`, `TORRENTLOCKER`, `TRICKBOT`. Defaults to `TLS_FINGERPRINT_NONE`.",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 										"exact_values": schema.ListAttribute{
 											MarkdownDescription: "Exact Values. A list of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against.",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 										"excluded_values": schema.ListAttribute{
 											MarkdownDescription: "Excluded Values. A list of TLS JA3 fingerprints to be excluded when matching the input TLS JA3 fingerprint. This can be used to skip known false positives when using one or more known TLS fingerprint classes in the enclosing matcher.",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 									},
 								},
@@ -5637,12 +5570,12 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 							Attributes: map[string]schema.Attribute{
 								"invert_match": schema.BoolAttribute{
 									MarkdownDescription: "Invert Match Result. Invert the match result.",
-									Optional: true,
+									Optional:            true,
 								},
 								"ip_prefixes": schema.ListAttribute{
 									MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefix strings.",
-									Optional: true,
-									ElementType: types.StringType,
+									Optional:            true,
+									ElementType:         types.StringType,
 								},
 							},
 						},
@@ -5651,16 +5584,15 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 							Attributes: map[string]schema.Attribute{
 								"description_spec": schema.StringAttribute{
 									MarkdownDescription: "Description. Human readable description.",
-									Optional: true,
+									Optional:            true,
 								},
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 						},
 					},
-
 				},
 			},
 			"default_cache_action": schema.SingleNestedBlock{
@@ -5668,11 +5600,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 				Attributes: map[string]schema.Attribute{
 					"cache_ttl_default": schema.StringAttribute{
 						MarkdownDescription: "Fallback Cache TTL (d/ h/ m). Use Cache TTL Provided by Origin, and set a contigency TTL value in case one is not provided",
-						Optional: true,
+						Optional:            true,
 					},
 					"cache_ttl_override": schema.StringAttribute{
 						MarkdownDescription: "Override Cache TTL (d/ h/ m/ s). Always override the Cahce TTL provided by Origin",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -5680,7 +5612,6 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 			"default_sensitive_data_policy": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: default_sensitive_data_policy, sensitive_data_policy] Empty. This can be used for messages where no values are needed",
@@ -5711,18 +5642,15 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 			},
 			"enable_api_discovery": schema.SingleNestedBlock{
 				MarkdownDescription: "API Discovery Setting. Specifies the settings used for API discovery",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"api_crawler": schema.SingleNestedBlock{
 						MarkdownDescription: "API Crawling. Api Crawler message",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"api_crawler_config": schema.SingleNestedBlock{
 								MarkdownDescription: "Crawler Configure.",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"domains": schema.ListNestedBlock{
 										MarkdownDescription: "Domains to Crawl. Enter domains and their credentials to allow authenticated API crawling. You can only include domains you own that are associated with this Load Balancer.",
@@ -5730,7 +5658,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											Attributes: map[string]schema.Attribute{
 												"domain": schema.StringAttribute{
 													MarkdownDescription: "Domain. Select the domain to execute API Crawling with given credentials.",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -5739,29 +5667,28 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													Attributes: map[string]schema.Attribute{
 														"user": schema.StringAttribute{
 															MarkdownDescription: "User. Enter the username to assign credentials for the selected domain to crawl",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 													Blocks: map[string]schema.Block{
 														"password": schema.SingleNestedBlock{
 															MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-															Attributes: map[string]schema.Attribute{
-															},
+															Attributes:          map[string]schema.Attribute{},
 															Blocks: map[string]schema.Block{
 																"blindfold_secret_info": schema.SingleNestedBlock{
 																	MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 																	Attributes: map[string]schema.Attribute{
 																		"decryption_provider": schema.StringAttribute{
 																			MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																		"location": schema.StringAttribute{
 																			MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																		"store_provider": schema.StringAttribute{
 																			MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																	},
 																},
@@ -5770,11 +5697,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 																	Attributes: map[string]schema.Attribute{
 																		"provider_ref": schema.StringAttribute{
 																			MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																		"url": schema.StringAttribute{
 																			MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																	},
 																},
@@ -5794,14 +5721,12 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 					},
 					"api_discovery_from_code_scan": schema.SingleNestedBlock{
 						MarkdownDescription: "Select Code Base and Repositories. x-required",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"code_base_integrations": schema.ListNestedBlock{
 								MarkdownDescription: "Select Code Base Integrations.",
 								NestedObject: schema.NestedBlockObject{
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes: map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"all_repos": schema.SingleNestedBlock{
 											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -5811,16 +5736,16 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
 													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-													Optional: true,
+													Optional:            true,
 												},
 												"namespace": schema.StringAttribute{
 													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-													Optional: true,
+													Optional:            true,
 												},
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-													Optional: true,
-													Computed: true,
+													Optional:            true,
+													Computed:            true,
 												},
 											},
 										},
@@ -5829,8 +5754,8 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											Attributes: map[string]schema.Attribute{
 												"api_code_repo": schema.ListAttribute{
 													MarkdownDescription: "API Code Repository. Code repository which contain API endpoints",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 										},
@@ -5841,24 +5766,23 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 					},
 					"custom_api_auth_discovery": schema.SingleNestedBlock{
 						MarkdownDescription: "API Discovery Advanced Settings. API Discovery Advanced settings",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"api_discovery_ref": schema.SingleNestedBlock{
 								MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-										Optional: true,
+										Optional:            true,
 									},
 									"namespace": schema.StringAttribute{
 										MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-										Optional: true,
+										Optional:            true,
 									},
 									"tenant": schema.StringAttribute{
 										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-										Optional: true,
-										Computed: true,
+										Optional:            true,
+										Computed:            true,
 									},
 								},
 							},
@@ -5875,7 +5799,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						Attributes: map[string]schema.Attribute{
 							"purge_duration_for_inactive_discovered_apis": schema.Int64Attribute{
 								MarkdownDescription: "Purge Duration for Inactive Discovered APIs from Traffic. Inactive discovered API will be deleted after configured duration.",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 					},
@@ -5883,23 +5807,21 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 			"enable_challenge": schema.SingleNestedBlock{
 				MarkdownDescription: "Enable Malicious User Challenge. Configure auto mitigation i.e risk based challenges for malicious users",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"captcha_challenge_parameters": schema.SingleNestedBlock{
 						MarkdownDescription: "Captcha Challenge Parameters. Enables loadbalancer to perform captcha challenge Captcha challenge will be based on Google Recaptcha. With this feature enabled, only clients that pass the captcha challenge will be allowed to complete the HTTP request. When loadbalancer is configured to do Captcha Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have captcha challenge embedded in it. Client will be allowed to make the request only if the captcha challenge is successful. Loadbalancer will tag response header with a cookie to avoid Captcha challenge for subsequent requests. CAPTCHA is mainly used as a security check to ensure only human users can pass through. Generally, computers or bots are not capable of solving a captcha. You can enable either Javascript challenge or Captcha challenge on a virtual host",
 						Attributes: map[string]schema.Attribute{
 							"cookie_expiry": schema.Int64Attribute{
 								MarkdownDescription: "Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge.",
-								Optional: true,
+								Optional:            true,
 							},
 							"custom_page": schema.StringAttribute{
 								MarkdownDescription: "Custom message for Captcha Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Please Wait.' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Please Wait </p>'. Base64 encoded string for this html is 'PHA+IFBsZWFzZSBXYWl0IDwvcD4='",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 					},
@@ -5917,15 +5839,15 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						Attributes: map[string]schema.Attribute{
 							"cookie_expiry": schema.Int64Attribute{
 								MarkdownDescription: "Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge.",
-								Optional: true,
+								Optional:            true,
 							},
 							"custom_page": schema.StringAttribute{
 								MarkdownDescription: "Custom Message for Javascript Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Please Wait.' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Please Wait </p>'. Base64 encoded string for this html is 'PHA+IFBsZWFzZSBXYWl0IDwvcD4='",
-								Optional: true,
+								Optional:            true,
 							},
 							"js_script_delay": schema.Int64Attribute{
 								MarkdownDescription: "Javascript Delay. Delay introduced by Javascript, in milliseconds.",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 					},
@@ -5934,32 +5856,30 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
 								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-								Optional: true,
+								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
 								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-								Optional: true,
+								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-								Optional: true,
-								Computed: true,
+								Optional:            true,
+								Computed:            true,
 							},
 						},
 					},
 				},
-
 			},
 			"enable_ip_reputation": schema.SingleNestedBlock{
 				MarkdownDescription: "IP Threat Category List. List of ip threat categories",
 				Attributes: map[string]schema.Attribute{
 					"ip_threat_categories": schema.ListAttribute{
 						MarkdownDescription: "List of IP Threat Categories to choose. If the source IP matches on atleast one of the enabled IP threat categories, the request will be denied. Possible values are `SPAM_SOURCES`, `WINDOWS_EXPLOITS`, `WEB_ATTACKS`, `BOTNETS`, `SCANNERS`, `REPUTATION`, `PHISHING`, `PROXY`, `MOBILE_THREATS`, `TOR_PROXY`, `DENIAL_OF_SERVICE`, `NETWORK`. Defaults to `SPAM_SOURCES`.",
-						Optional: true,
-						ElementType: types.StringType,
+						Optional:            true,
+						ElementType:         types.StringType,
 					},
 				},
-
 			},
 			"enable_malicious_user_detection": schema.SingleNestedBlock{
 				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -5973,15 +5893,15 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 					Attributes: map[string]schema.Attribute{
 						"exact_path": schema.StringAttribute{
 							MarkdownDescription: "Path. Specifies the exact path to GraphQL endpoint. Defaults to `/graphql`.",
-							Optional: true,
+							Optional:            true,
 						},
 						"exact_value": schema.StringAttribute{
 							MarkdownDescription: "Exact Value. Exact domain name",
-							Optional: true,
+							Optional:            true,
 						},
 						"suffix_value": schema.StringAttribute{
 							MarkdownDescription: "Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'",
-							Optional: true,
+							Optional:            true,
 						},
 					},
 					Blocks: map[string]schema.Block{
@@ -5993,15 +5913,15 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 							Attributes: map[string]schema.Attribute{
 								"max_batched_queries": schema.Int64Attribute{
 									MarkdownDescription: "Maximum Batched Queries. Specify maximum number of queries in a single batched request.",
-									Optional: true,
+									Optional:            true,
 								},
 								"max_depth": schema.Int64Attribute{
 									MarkdownDescription: "Maximum Structure Depth. Specify maximum depth for the GraphQL query.",
-									Optional: true,
+									Optional:            true,
 								},
 								"max_total_length": schema.Int64Attribute{
 									MarkdownDescription: "Maximum Total Length. Specify maximum length in bytes for the GraphQL query.",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
@@ -6018,11 +5938,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 							Attributes: map[string]schema.Attribute{
 								"description_spec": schema.StringAttribute{
 									MarkdownDescription: "Description. Human readable description.",
-									Optional: true,
+									Optional:            true,
 								},
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 						},
@@ -6033,7 +5953,6 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 							MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 						},
 					},
-
 				},
 			},
 			"http": schema.SingleNestedBlock{
@@ -6041,41 +5960,38 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 				Attributes: map[string]schema.Attribute{
 					"dns_volterra_managed": schema.BoolAttribute{
 						MarkdownDescription: "Automatically Manage DNS Records. DNS records for domains will be managed automatically by F5 Distributed Cloud. As a prerequisite, the domain must be delegated to F5 Distributed Cloud using Delegated domain feature or a DNS CNAME record should be created in your DNS provider's portal.",
-						Optional: true,
+						Optional:            true,
 					},
 					"port": schema.Int64Attribute{
 						MarkdownDescription: "HTTP Listen Port. HTTP port to Listen.",
-						Optional: true,
+						Optional:            true,
 					},
 					"port_ranges": schema.StringAttribute{
 						MarkdownDescription: "Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
-
 			},
 			"https": schema.SingleNestedBlock{
 				MarkdownDescription: "BYOC HTTPS Choice. Choice for selecting CDN Distribution with bring your own certificates",
 				Attributes: map[string]schema.Attribute{
 					"add_hsts": schema.BoolAttribute{
 						MarkdownDescription: "Add HSTS Header. Add HTTP Strict-Transport-Security response header",
-						Optional: true,
+						Optional:            true,
 					},
 					"http_redirect": schema.BoolAttribute{
 						MarkdownDescription: "HTTP Redirect to HTTPS. Redirect HTTP traffic to HTTPS",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"tls_cert_options": schema.SingleNestedBlock{
 						MarkdownDescription: "TLS Options. TLS Certificate Options",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"tls_cert_params": schema.SingleNestedBlock{
 								MarkdownDescription: "TLS Parameters. Select TLS Parameters and Certificates",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"certificates": schema.ListNestedBlock{
 										MarkdownDescription: "Certificates. Select one or more certificates with any domain names.",
@@ -6083,16 +5999,16 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
 													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-													Optional: true,
+													Optional:            true,
 												},
 												"namespace": schema.StringAttribute{
 													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-													Optional: true,
+													Optional:            true,
 												},
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-													Optional: true,
-													Computed: true,
+													Optional:            true,
+													Computed:            true,
 												},
 											},
 										},
@@ -6102,24 +6018,23 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									},
 									"tls_config": schema.SingleNestedBlock{
 										MarkdownDescription: "TLS Config. This defines various options to configure TLS configuration parameters",
-										Attributes: map[string]schema.Attribute{
-										},
+										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"custom_security": schema.SingleNestedBlock{
 												MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers",
 												Attributes: map[string]schema.Attribute{
 													"cipher_suites": schema.ListAttribute{
 														MarkdownDescription: "Cipher Suites. The TLS listener will only support the specified cipher list.",
-														Optional: true,
-														ElementType: types.StringType,
+														Optional:            true,
+														ElementType:         types.StringType,
 													},
 													"max_version": schema.StringAttribute{
 														MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
-														Optional: true,
+														Optional:            true,
 													},
 													"min_version": schema.StringAttribute{
 														MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 											},
@@ -6139,11 +6054,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 										Attributes: map[string]schema.Attribute{
 											"client_certificate_optional": schema.BoolAttribute{
 												MarkdownDescription: "Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted.",
-												Optional: true,
+												Optional:            true,
 											},
 											"trusted_ca_url": schema.StringAttribute{
 												MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 										Blocks: map[string]schema.Block{
@@ -6152,16 +6067,16 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												Attributes: map[string]schema.Attribute{
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-														Optional: true,
+														Optional:            true,
 													},
 													"namespace": schema.StringAttribute{
 														MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-														Optional: true,
+														Optional:            true,
 													},
 													"tenant": schema.StringAttribute{
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-														Optional: true,
-														Computed: true,
+														Optional:            true,
+														Computed:            true,
 													},
 												},
 											},
@@ -6173,16 +6088,16 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												Attributes: map[string]schema.Attribute{
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-														Optional: true,
+														Optional:            true,
 													},
 													"namespace": schema.StringAttribute{
 														MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-														Optional: true,
+														Optional:            true,
 													},
 													"tenant": schema.StringAttribute{
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-														Optional: true,
-														Computed: true,
+														Optional:            true,
+														Computed:            true,
 													},
 												},
 											},
@@ -6194,8 +6109,8 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												Attributes: map[string]schema.Attribute{
 													"xfcc_header_elements": schema.ListAttribute{
 														MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
-														Optional: true,
-														ElementType: types.StringType,
+														Optional:            true,
+														ElementType:         types.StringType,
 													},
 												},
 											},
@@ -6205,8 +6120,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 							},
 							"tls_inline_params": schema.SingleNestedBlock{
 								MarkdownDescription: "Inline TLS Parameters. Inline TLS parameters",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"no_mtls": schema.SingleNestedBlock{
 										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -6217,11 +6131,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											Attributes: map[string]schema.Attribute{
 												"certificate_url": schema.StringAttribute{
 													MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
-													Optional: true,
+													Optional:            true,
 												},
 												"description_spec": schema.StringAttribute{
 													MarkdownDescription: "Description. Description for the certificate",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -6230,8 +6144,8 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													Attributes: map[string]schema.Attribute{
 														"hash_algorithms": schema.ListAttribute{
 															MarkdownDescription: "Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM`.",
-															Optional: true,
-															ElementType: types.StringType,
+															Optional:            true,
+															ElementType:         types.StringType,
 														},
 													},
 												},
@@ -6240,23 +6154,22 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												},
 												"private_key": schema.SingleNestedBlock{
 													MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-													Attributes: map[string]schema.Attribute{
-													},
+													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"blindfold_secret_info": schema.SingleNestedBlock{
 															MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 															Attributes: map[string]schema.Attribute{
 																"decryption_provider": schema.StringAttribute{
 																	MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"location": schema.StringAttribute{
 																	MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"store_provider": schema.StringAttribute{
 																	MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																	Optional: true,
+																	Optional:            true,
 																},
 															},
 														},
@@ -6265,11 +6178,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 															Attributes: map[string]schema.Attribute{
 																"provider_ref": schema.StringAttribute{
 																	MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"url": schema.StringAttribute{
 																	MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-																	Optional: true,
+																	Optional:            true,
 																},
 															},
 														},
@@ -6283,24 +6196,23 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									},
 									"tls_config": schema.SingleNestedBlock{
 										MarkdownDescription: "TLS Config. This defines various options to configure TLS configuration parameters",
-										Attributes: map[string]schema.Attribute{
-										},
+										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"custom_security": schema.SingleNestedBlock{
 												MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers",
 												Attributes: map[string]schema.Attribute{
 													"cipher_suites": schema.ListAttribute{
 														MarkdownDescription: "Cipher Suites. The TLS listener will only support the specified cipher list.",
-														Optional: true,
-														ElementType: types.StringType,
+														Optional:            true,
+														ElementType:         types.StringType,
 													},
 													"max_version": schema.StringAttribute{
 														MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
-														Optional: true,
+														Optional:            true,
 													},
 													"min_version": schema.StringAttribute{
 														MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 											},
@@ -6320,11 +6232,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 										Attributes: map[string]schema.Attribute{
 											"client_certificate_optional": schema.BoolAttribute{
 												MarkdownDescription: "Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted.",
-												Optional: true,
+												Optional:            true,
 											},
 											"trusted_ca_url": schema.StringAttribute{
 												MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 										Blocks: map[string]schema.Block{
@@ -6333,16 +6245,16 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												Attributes: map[string]schema.Attribute{
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-														Optional: true,
+														Optional:            true,
 													},
 													"namespace": schema.StringAttribute{
 														MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-														Optional: true,
+														Optional:            true,
 													},
 													"tenant": schema.StringAttribute{
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-														Optional: true,
-														Computed: true,
+														Optional:            true,
+														Computed:            true,
 													},
 												},
 											},
@@ -6354,16 +6266,16 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												Attributes: map[string]schema.Attribute{
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-														Optional: true,
+														Optional:            true,
 													},
 													"namespace": schema.StringAttribute{
 														MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-														Optional: true,
+														Optional:            true,
 													},
 													"tenant": schema.StringAttribute{
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-														Optional: true,
-														Computed: true,
+														Optional:            true,
+														Computed:            true,
 													},
 												},
 											},
@@ -6375,8 +6287,8 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												Attributes: map[string]schema.Attribute{
 													"xfcc_header_elements": schema.ListAttribute{
 														MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
-														Optional: true,
-														ElementType: types.StringType,
+														Optional:            true,
+														ElementType:         types.StringType,
 													},
 												},
 											},
@@ -6387,25 +6299,23 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						},
 					},
 				},
-
 			},
 			"https_auto_cert": schema.SingleNestedBlock{
 				MarkdownDescription: "HTTPS with Automatic Certificate. Choice for selecting HTTPS CDN distribution with bring your own certificates",
 				Attributes: map[string]schema.Attribute{
 					"add_hsts": schema.BoolAttribute{
 						MarkdownDescription: "Add HSTS Header. Add HTTP Strict-Transport-Security response header",
-						Optional: true,
+						Optional:            true,
 					},
 					"http_redirect": schema.BoolAttribute{
 						MarkdownDescription: "HTTP Redirect to HTTPS. Redirect HTTP traffic to HTTPS",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"tls_config": schema.SingleNestedBlock{
 						MarkdownDescription: "TLS Config. This defines various options to configure TLS configuration parameters",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"tls_11_plus": schema.SingleNestedBlock{
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -6416,35 +6326,31 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						},
 					},
 				},
-
 			},
 			"js_challenge": schema.SingleNestedBlock{
 				MarkdownDescription: "Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set of random numbers for every new client and sends these numbers along with an encrypted answer with the request such that it embed these numbers as input in the Javascript. Javascript will run on the requestor browser and perform a complex Math operation. Script will submit the answer to loadbalancer. Loadbalancer will validate the answer by comparing the calculated answer with the decrypted answer (which was encrypted when it was sent back as reply) and allow the request to the upstream server only if the answer is correct. Loadbalancer will tag response header with a cookie to avoid Javascript challenge for subsequent requests. Javascript challenge serves following purposes * Validate that the request is coming via a browser that is capable for running Javascript * Force the browser to run a complex operation, f(X), that requires it to spend a large number of CPU cycles. This is to slow down a potential DoS attacker by making it difficult to launch a large request flood without having to spend even larger CPU cost at their end. You can enable either Javascript challenge or Captcha challenge on a virtual host",
 				Attributes: map[string]schema.Attribute{
 					"cookie_expiry": schema.Int64Attribute{
 						MarkdownDescription: "Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge.",
-						Optional: true,
+						Optional:            true,
 					},
 					"custom_page": schema.StringAttribute{
 						MarkdownDescription: "Custom Message for Javascript Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Please Wait.' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Please Wait </p>'. Base64 encoded string for this html is 'PHA+IFBsZWFzZSBXYWl0IDwvcD4='",
-						Optional: true,
+						Optional:            true,
 					},
 					"js_script_delay": schema.Int64Attribute{
 						MarkdownDescription: "Javascript Delay. Delay introduced by Javascript, in milliseconds.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
-
 			},
 			"jwt_validation": schema.SingleNestedBlock{
 				MarkdownDescription: "JWT Validation. JWT Validation stops JWT replay attacks and JWT tampering by cryptographically verifying incoming JWTs before they are passed to your API origin. JWT Validation will also stop requests with expired tokens or tokens that are not yet valid.",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"action": schema.SingleNestedBlock{
 						MarkdownDescription: "Action.",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"block": schema.SingleNestedBlock{
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -6459,7 +6365,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						Attributes: map[string]schema.Attribute{
 							"cleartext": schema.StringAttribute{
 								MarkdownDescription: "JSON Web Key Set (JWKS). The JSON Web Key Set (JWKS) is a set of keys used to verify JSON Web Token (JWT) issued by the Authorization Server. See RFC 7517 for more details.",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 					},
@@ -6468,8 +6374,8 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						Attributes: map[string]schema.Attribute{
 							"claim_names": schema.ListAttribute{
 								MarkdownDescription: "Claim Names.",
-								Optional: true,
-								ElementType: types.StringType,
+								Optional:            true,
+								ElementType:         types.StringType,
 							},
 						},
 					},
@@ -6478,7 +6384,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						Attributes: map[string]schema.Attribute{
 							"issuer": schema.StringAttribute{
 								MarkdownDescription: "Exact Match.",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -6487,8 +6393,8 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 								Attributes: map[string]schema.Attribute{
 									"audiences": schema.ListAttribute{
 										MarkdownDescription: "Values.",
-										Optional: true,
-										ElementType: types.StringType,
+										Optional:            true,
+										ElementType:         types.StringType,
 									},
 								},
 							},
@@ -6508,8 +6414,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 					},
 					"target": schema.SingleNestedBlock{
 						MarkdownDescription: "Target. Define endpoints for which JWT token validation will be performed",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"all_endpoint": schema.SingleNestedBlock{
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -6519,8 +6424,8 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 								Attributes: map[string]schema.Attribute{
 									"api_groups": schema.ListAttribute{
 										MarkdownDescription: "API Groups.",
-										Optional: true,
-										ElementType: types.StringType,
+										Optional:            true,
+										ElementType:         types.StringType,
 									},
 								},
 							},
@@ -6529,8 +6434,8 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 								Attributes: map[string]schema.Attribute{
 									"base_paths": schema.ListAttribute{
 										MarkdownDescription: "Prefix Values.",
-										Optional: true,
-										ElementType: types.StringType,
+										Optional:            true,
+										ElementType:         types.StringType,
 									},
 								},
 							},
@@ -6538,8 +6443,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 					},
 					"token_location": schema.SingleNestedBlock{
 						MarkdownDescription: "Token Location. Location of JWT in Http request",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"bearer_token": schema.SingleNestedBlock{
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -6547,7 +6451,6 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						},
 					},
 				},
-
 			},
 			"l7_ddos_action_block": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: l7_ddos_action_block, l7_ddos_action_default, l7_ddos_action_js_challenge] Empty. This can be used for messages where no values are needed",
@@ -6560,18 +6463,17 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 				Attributes: map[string]schema.Attribute{
 					"cookie_expiry": schema.Int64Attribute{
 						MarkdownDescription: "Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge.",
-						Optional: true,
+						Optional:            true,
 					},
 					"custom_page": schema.StringAttribute{
 						MarkdownDescription: "Custom Message for Javascript Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Please Wait.' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Please Wait </p>'. Base64 encoded string for this html is 'PHA+IFBsZWFzZSBXYWl0IDwvcD4='",
-						Optional: true,
+						Optional:            true,
 					},
 					"js_script_delay": schema.Int64Attribute{
 						MarkdownDescription: "Javascript Delay. Delay introduced by Javascript, in milliseconds.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
-
 			},
 			"no_challenge": schema.SingleNestedBlock{
 				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -6584,7 +6486,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 				Attributes: map[string]schema.Attribute{
 					"origin_request_timeout": schema.StringAttribute{
 						MarkdownDescription: "Origin Request Timeout Duration. Configures the time after which a request to the origin will time out waiting for a response",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -6593,11 +6495,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						Attributes: map[string]schema.Attribute{
 							"enable_byte_range_request": schema.BoolAttribute{
 								MarkdownDescription: "Enable Origin Byte Range Requests. Choice to enable/disable byte range requests towards origin",
-								Optional: true,
+								Optional:            true,
 							},
 							"websocket_proxy": schema.BoolAttribute{
 								MarkdownDescription: "Enable websocket proxy to the origin. Option to enable proxying of websocket connections to the origin server",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 					},
@@ -6610,7 +6512,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 							Attributes: map[string]schema.Attribute{
 								"port": schema.Int64Attribute{
 									MarkdownDescription: "Origin Server Port. Port the workload can be reached on",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
@@ -6619,7 +6521,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									Attributes: map[string]schema.Attribute{
 										"ip": schema.StringAttribute{
 											MarkdownDescription: "Public IPV4. Public IPV4 address",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 								},
@@ -6628,11 +6530,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									Attributes: map[string]schema.Attribute{
 										"dns_name": schema.StringAttribute{
 											MarkdownDescription: "DNS Name. DNS Name",
-											Optional: true,
+											Optional:            true,
 										},
 										"refresh_interval": schema.Int64Attribute{
 											MarkdownDescription: "DNS Refresh Interval. Interval for DNS refresh in seconds. Max value is 7 days as per https://datatracker.ietf.org/doc/html/rfc8767",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 								},
@@ -6644,11 +6546,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						Attributes: map[string]schema.Attribute{
 							"dns_name": schema.StringAttribute{
 								MarkdownDescription: "DNS Name. DNS Name",
-								Optional: true,
+								Optional:            true,
 							},
 							"refresh_interval": schema.Int64Attribute{
 								MarkdownDescription: "DNS Refresh Interval. Interval for DNS refresh in seconds. Max value is 7 days as per https://datatracker.ietf.org/doc/html/rfc8767",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 					},
@@ -6657,11 +6559,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						Attributes: map[string]schema.Attribute{
 							"max_session_keys": schema.Int64Attribute{
 								MarkdownDescription: "Max Session Keys Cached. x-example:'25' Number of session keys that are cached.",
-								Optional: true,
+								Optional:            true,
 							},
 							"sni": schema.StringAttribute{
 								MarkdownDescription: "SNI Value. SNI value to be used.",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -6682,24 +6584,23 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 							},
 							"tls_config": schema.SingleNestedBlock{
 								MarkdownDescription: "TLS Config. This defines various options to configure TLS configuration parameters",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"custom_security": schema.SingleNestedBlock{
 										MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers",
 										Attributes: map[string]schema.Attribute{
 											"cipher_suites": schema.ListAttribute{
 												MarkdownDescription: "Cipher Suites. The TLS listener will only support the specified cipher list.",
-												Optional: true,
-												ElementType: types.StringType,
+												Optional:            true,
+												ElementType:         types.StringType,
 											},
 											"max_version": schema.StringAttribute{
 												MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
-												Optional: true,
+												Optional:            true,
 											},
 											"min_version": schema.StringAttribute{
 												MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -6719,8 +6620,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 							},
 							"use_mtls": schema.SingleNestedBlock{
 								MarkdownDescription: "mTLS Certificate. mTLS Client Certificate",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"tls_certificates": schema.ListNestedBlock{
 										MarkdownDescription: "mTLS Client Certificate. mTLS Client Certificate",
@@ -6728,11 +6628,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											Attributes: map[string]schema.Attribute{
 												"certificate_url": schema.StringAttribute{
 													MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
-													Optional: true,
+													Optional:            true,
 												},
 												"description_spec": schema.StringAttribute{
 													MarkdownDescription: "Description. Description for the certificate",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -6741,8 +6641,8 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													Attributes: map[string]schema.Attribute{
 														"hash_algorithms": schema.ListAttribute{
 															MarkdownDescription: "Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM`.",
-															Optional: true,
-															ElementType: types.StringType,
+															Optional:            true,
+															ElementType:         types.StringType,
 														},
 													},
 												},
@@ -6751,23 +6651,22 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												},
 												"private_key": schema.SingleNestedBlock{
 													MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-													Attributes: map[string]schema.Attribute{
-													},
+													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"blindfold_secret_info": schema.SingleNestedBlock{
 															MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 															Attributes: map[string]schema.Attribute{
 																"decryption_provider": schema.StringAttribute{
 																	MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"location": schema.StringAttribute{
 																	MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"store_provider": schema.StringAttribute{
 																	MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																	Optional: true,
+																	Optional:            true,
 																},
 															},
 														},
@@ -6776,11 +6675,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 															Attributes: map[string]schema.Attribute{
 																"provider_ref": schema.StringAttribute{
 																	MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"url": schema.StringAttribute{
 																	MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-																	Optional: true,
+																	Optional:            true,
 																},
 															},
 														},
@@ -6799,16 +6698,16 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-										Optional: true,
+										Optional:            true,
 									},
 									"namespace": schema.StringAttribute{
 										MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-										Optional: true,
+										Optional:            true,
 									},
 									"tenant": schema.StringAttribute{
 										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-										Optional: true,
-										Computed: true,
+										Optional:            true,
+										Computed:            true,
 									},
 								},
 							},
@@ -6817,7 +6716,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 								Attributes: map[string]schema.Attribute{
 									"trusted_ca_url": schema.StringAttribute{
 										MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Origin Pool for verification of server's certificate",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 								Blocks: map[string]schema.Block{
@@ -6826,16 +6725,16 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 										Attributes: map[string]schema.Attribute{
 											"name": schema.StringAttribute{
 												MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-												Optional: true,
+												Optional:            true,
 											},
 											"namespace": schema.StringAttribute{
 												MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-												Optional: true,
+												Optional:            true,
 											},
 											"tenant": schema.StringAttribute{
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-												Optional: true,
-												Computed: true,
+												Optional:            true,
+												Computed:            true,
 											},
 										},
 									},
@@ -6847,14 +6746,13 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						},
 					},
 				},
-
 			},
 			"other_settings": schema.SingleNestedBlock{
 				MarkdownDescription: "Other Settings. Other Settings",
 				Attributes: map[string]schema.Attribute{
 					"add_location": schema.BoolAttribute{
 						MarkdownDescription: "Add Location. x-example: true Appends header x-volterra-location = <re-site-name> in responses.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -6863,13 +6761,13 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						Attributes: map[string]schema.Attribute{
 							"request_headers_to_remove": schema.ListAttribute{
 								MarkdownDescription: "Remove Origin Request Headers. List of keys of Headers to be removed from the HTTP request being sent towards upstream.",
-								Optional: true,
-								ElementType: types.StringType,
+								Optional:            true,
+								ElementType:         types.StringType,
 							},
 							"response_headers_to_remove": schema.ListAttribute{
 								MarkdownDescription: "Remove Response Headers. List of keys of Headers to be removed from the HTTP response being sent towards downstream.",
-								Optional: true,
-								ElementType: types.StringType,
+								Optional:            true,
+								ElementType:         types.StringType,
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -6879,37 +6777,36 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									Attributes: map[string]schema.Attribute{
 										"append": schema.BoolAttribute{
 											MarkdownDescription: "Append. Should the value be appended? If true, the value is appended to existing values.  not append. Defaults to `do`.",
-											Optional: true,
+											Optional:            true,
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. Name of the HTTP header.",
-											Optional: true,
+											Optional:            true,
 										},
 										"value": schema.StringAttribute{
 											MarkdownDescription: "Value. Value of the HTTP header.",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"secret_value": schema.SingleNestedBlock{
 											MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"blindfold_secret_info": schema.SingleNestedBlock{
 													MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 													Attributes: map[string]schema.Attribute{
 														"decryption_provider": schema.StringAttribute{
 															MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-															Optional: true,
+															Optional:            true,
 														},
 														"location": schema.StringAttribute{
 															MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-															Optional: true,
+															Optional:            true,
 														},
 														"store_provider": schema.StringAttribute{
 															MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -6918,11 +6815,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													Attributes: map[string]schema.Attribute{
 														"provider_ref": schema.StringAttribute{
 															MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-															Optional: true,
+															Optional:            true,
 														},
 														"url": schema.StringAttribute{
 															MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -6937,37 +6834,36 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									Attributes: map[string]schema.Attribute{
 										"append": schema.BoolAttribute{
 											MarkdownDescription: "Append. Should the value be appended? If true, the value is appended to existing values.  not append. Defaults to `do`.",
-											Optional: true,
+											Optional:            true,
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. Name of the HTTP header.",
-											Optional: true,
+											Optional:            true,
 										},
 										"value": schema.StringAttribute{
 											MarkdownDescription: "Value. Value of the HTTP header.",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"secret_value": schema.SingleNestedBlock{
 											MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"blindfold_secret_info": schema.SingleNestedBlock{
 													MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 													Attributes: map[string]schema.Attribute{
 														"decryption_provider": schema.StringAttribute{
 															MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-															Optional: true,
+															Optional:            true,
 														},
 														"location": schema.StringAttribute{
 															MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-															Optional: true,
+															Optional:            true,
 														},
 														"store_provider": schema.StringAttribute{
 															MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -6976,11 +6872,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													Attributes: map[string]schema.Attribute{
 														"provider_ref": schema.StringAttribute{
 															MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-															Optional: true,
+															Optional:            true,
 														},
 														"url": schema.StringAttribute{
 															MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -6993,16 +6889,15 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 					},
 					"logging_options": schema.SingleNestedBlock{
 						MarkdownDescription: "Logging Options. This defines various options related to logging",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"client_log_options": schema.SingleNestedBlock{
 								MarkdownDescription: "Headers to Log. List of headers to Log",
 								Attributes: map[string]schema.Attribute{
 									"header_list": schema.ListAttribute{
 										MarkdownDescription: "Headers. List of headers",
-										Optional: true,
-										ElementType: types.StringType,
+										Optional:            true,
+										ElementType:         types.StringType,
 									},
 								},
 							},
@@ -7011,20 +6906,18 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 								Attributes: map[string]schema.Attribute{
 									"header_list": schema.ListAttribute{
 										MarkdownDescription: "Headers. List of headers",
-										Optional: true,
-										ElementType: types.StringType,
+										Optional:            true,
+										ElementType:         types.StringType,
 									},
 								},
 							},
 						},
 					},
 				},
-
 			},
 			"policy_based_challenge": schema.SingleNestedBlock{
 				MarkdownDescription: "Policy Based Challenge. Specifies the settings for policy rule based challenge",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"always_enable_captcha_challenge": schema.SingleNestedBlock{
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -7037,11 +6930,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						Attributes: map[string]schema.Attribute{
 							"cookie_expiry": schema.Int64Attribute{
 								MarkdownDescription: "Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge.",
-								Optional: true,
+								Optional:            true,
 							},
 							"custom_page": schema.StringAttribute{
 								MarkdownDescription: "Custom message for Captcha Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Please Wait.' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Please Wait </p>'. Base64 encoded string for this html is 'PHA+IFBsZWFzZSBXYWl0IDwvcD4='",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 					},
@@ -7062,15 +6955,15 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						Attributes: map[string]schema.Attribute{
 							"cookie_expiry": schema.Int64Attribute{
 								MarkdownDescription: "Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge.",
-								Optional: true,
+								Optional:            true,
 							},
 							"custom_page": schema.StringAttribute{
 								MarkdownDescription: "Custom Message for Javascript Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Please Wait.' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Please Wait </p>'. Base64 encoded string for this html is 'PHA+IFBsZWFzZSBXYWl0IDwvcD4='",
-								Optional: true,
+								Optional:            true,
 							},
 							"js_script_delay": schema.Int64Attribute{
 								MarkdownDescription: "Javascript Delay. Delay introduced by Javascript, in milliseconds.",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 					},
@@ -7079,16 +6972,16 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
 								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-								Optional: true,
+								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
 								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-								Optional: true,
+								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-								Optional: true,
-								Computed: true,
+								Optional:            true,
+								Computed:            true,
 							},
 						},
 					},
@@ -7097,25 +6990,23 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 					},
 					"rule_list": schema.SingleNestedBlock{
 						MarkdownDescription: "Challenge Rule List. List of challenge rules to be used in policy based challenge",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"rules": schema.ListNestedBlock{
 								MarkdownDescription: "Rules. Rules that specify the match conditions and challenge type to be launched. When a challenge type is selected to be always enabled, these rules can be used to disable challenge or launch a different challenge for requests that match the specified conditions",
 								NestedObject: schema.NestedBlockObject{
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes: map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"metadata": schema.SingleNestedBlock{
 											MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 											Attributes: map[string]schema.Attribute{
 												"description_spec": schema.StringAttribute{
 													MarkdownDescription: "Description. Human readable description.",
-													Optional: true,
+													Optional:            true,
 												},
 												"name": schema.StringAttribute{
 													MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 										},
@@ -7124,7 +7015,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											Attributes: map[string]schema.Attribute{
 												"expiration_timestamp": schema.StringAttribute{
 													MarkdownDescription: "The expiration_timestamp is the RFC 3339 format timestamp at which the containing rule is considered to be logically expired. The rule continues to exist in the configuration but is not applied anymore.",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -7143,11 +7034,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 														Attributes: map[string]schema.Attribute{
 															"invert_matcher": schema.BoolAttribute{
 																MarkdownDescription: "Invert Matcher. Invert Match of the expression defined",
-																Optional: true,
+																Optional:            true,
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Argument Name. x-example: 'phones[_]' x-example: 'cars.make.toyota.models[1]' x-example: 'cars.make.honda.models[_]' x-example: 'cars.make[_].models[_]' A case-sensitive JSON path in the HTTP request body.",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 														Blocks: map[string]schema.Block{
@@ -7162,18 +7053,18 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 																Attributes: map[string]schema.Attribute{
 																	"exact_values": schema.ListAttribute{
 																		MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
-																		Optional: true,
-																		ElementType: types.StringType,
+																		Optional:            true,
+																		ElementType:         types.StringType,
 																	},
 																	"regex_values": schema.ListAttribute{
 																		MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
-																		Optional: true,
-																		ElementType: types.StringType,
+																		Optional:            true,
+																		ElementType:         types.StringType,
 																	},
 																	"transformers": schema.ListAttribute{
 																		MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
-																		Optional: true,
-																		ElementType: types.StringType,
+																		Optional:            true,
+																		ElementType:         types.StringType,
 																	},
 																},
 															},
@@ -7185,15 +7076,14 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													Attributes: map[string]schema.Attribute{
 														"as_numbers": schema.ListAttribute{
 															MarkdownDescription: "AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
-															Optional: true,
-															ElementType: types.Int64Type,
+															Optional:            true,
+															ElementType:         types.Int64Type,
 														},
 													},
 												},
 												"asn_matcher": schema.SingleNestedBlock{
 													MarkdownDescription: "ASN Matcher. Match any AS number contained in the list of bgp_asn_sets.",
-													Attributes: map[string]schema.Attribute{
-													},
+													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"asn_sets": schema.ListNestedBlock{
 															MarkdownDescription: "BGP ASN Sets. A list of references to bgp_asn_set objects.",
@@ -7201,26 +7091,26 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 																Attributes: map[string]schema.Attribute{
 																	"kind": schema.StringAttribute{
 																		MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-																		Optional: true,
-																		Computed: true,
+																		Optional:            true,
+																		Computed:            true,
 																	},
 																	"name": schema.StringAttribute{
 																		MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"namespace": schema.StringAttribute{
 																		MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"tenant": schema.StringAttribute{
 																		MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-																		Optional: true,
-																		Computed: true,
+																		Optional:            true,
+																		Computed:            true,
 																	},
 																	"uid": schema.StringAttribute{
 																		MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-																		Optional: true,
-																		Computed: true,
+																		Optional:            true,
+																		Computed:            true,
 																	},
 																},
 															},
@@ -7232,18 +7122,18 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													Attributes: map[string]schema.Attribute{
 														"exact_values": schema.ListAttribute{
 															MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
-															Optional: true,
-															ElementType: types.StringType,
+															Optional:            true,
+															ElementType:         types.StringType,
 														},
 														"regex_values": schema.ListAttribute{
 															MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
-															Optional: true,
-															ElementType: types.StringType,
+															Optional:            true,
+															ElementType:         types.StringType,
 														},
 														"transformers": schema.ListAttribute{
 															MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
-															Optional: true,
-															ElementType: types.StringType,
+															Optional:            true,
+															ElementType:         types.StringType,
 														},
 													},
 												},
@@ -7252,8 +7142,8 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													Attributes: map[string]schema.Attribute{
 														"expressions": schema.ListAttribute{
 															MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections.",
-															Optional: true,
-															ElementType: types.StringType,
+															Optional:            true,
+															ElementType:         types.StringType,
 														},
 													},
 												},
@@ -7263,11 +7153,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 														Attributes: map[string]schema.Attribute{
 															"invert_matcher": schema.BoolAttribute{
 																MarkdownDescription: "Invert Matcher. Invert Match of the expression defined",
-																Optional: true,
+																Optional:            true,
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Cookie Name. A case-sensitive cookie name.",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 														Blocks: map[string]schema.Block{
@@ -7282,18 +7172,18 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 																Attributes: map[string]schema.Attribute{
 																	"exact_values": schema.ListAttribute{
 																		MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
-																		Optional: true,
-																		ElementType: types.StringType,
+																		Optional:            true,
+																		ElementType:         types.StringType,
 																	},
 																	"regex_values": schema.ListAttribute{
 																		MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
-																		Optional: true,
-																		ElementType: types.StringType,
+																		Optional:            true,
+																		ElementType:         types.StringType,
 																	},
 																	"transformers": schema.ListAttribute{
 																		MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
-																		Optional: true,
-																		ElementType: types.StringType,
+																		Optional:            true,
+																		ElementType:         types.StringType,
 																	},
 																},
 															},
@@ -7308,13 +7198,13 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													Attributes: map[string]schema.Attribute{
 														"exact_values": schema.ListAttribute{
 															MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
-															Optional: true,
-															ElementType: types.StringType,
+															Optional:            true,
+															ElementType:         types.StringType,
 														},
 														"regex_values": schema.ListAttribute{
 															MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
-															Optional: true,
-															ElementType: types.StringType,
+															Optional:            true,
+															ElementType:         types.StringType,
 														},
 													},
 												},
@@ -7330,11 +7220,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 														Attributes: map[string]schema.Attribute{
 															"invert_matcher": schema.BoolAttribute{
 																MarkdownDescription: "Invert Header Matcher. Invert the match result.",
-																Optional: true,
+																Optional:            true,
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Header Name. A case-insensitive HTTP header name.",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 														Blocks: map[string]schema.Block{
@@ -7349,18 +7239,18 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 																Attributes: map[string]schema.Attribute{
 																	"exact_values": schema.ListAttribute{
 																		MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
-																		Optional: true,
-																		ElementType: types.StringType,
+																		Optional:            true,
+																		ElementType:         types.StringType,
 																	},
 																	"regex_values": schema.ListAttribute{
 																		MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
-																		Optional: true,
-																		ElementType: types.StringType,
+																		Optional:            true,
+																		ElementType:         types.StringType,
 																	},
 																	"transformers": schema.ListAttribute{
 																		MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
-																		Optional: true,
-																		ElementType: types.StringType,
+																		Optional:            true,
+																		ElementType:         types.StringType,
 																	},
 																},
 															},
@@ -7372,12 +7262,12 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													Attributes: map[string]schema.Attribute{
 														"invert_matcher": schema.BoolAttribute{
 															MarkdownDescription: "Invert Method Matcher. Invert the match result.",
-															Optional: true,
+															Optional:            true,
 														},
 														"methods": schema.ListAttribute{
 															MarkdownDescription: "Method List. List of methods values to match against. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
-															Optional: true,
-															ElementType: types.StringType,
+															Optional:            true,
+															ElementType:         types.StringType,
 														},
 													},
 												},
@@ -7386,7 +7276,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													Attributes: map[string]schema.Attribute{
 														"invert_matcher": schema.BoolAttribute{
 															MarkdownDescription: "Invert IP Matcher. Invert the match result.",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 													Blocks: map[string]schema.Block{
@@ -7396,26 +7286,26 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 																Attributes: map[string]schema.Attribute{
 																	"kind": schema.StringAttribute{
 																		MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-																		Optional: true,
-																		Computed: true,
+																		Optional:            true,
+																		Computed:            true,
 																	},
 																	"name": schema.StringAttribute{
 																		MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"namespace": schema.StringAttribute{
 																		MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"tenant": schema.StringAttribute{
 																		MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-																		Optional: true,
-																		Computed: true,
+																		Optional:            true,
+																		Computed:            true,
 																	},
 																	"uid": schema.StringAttribute{
 																		MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-																		Optional: true,
-																		Computed: true,
+																		Optional:            true,
+																		Computed:            true,
 																	},
 																},
 															},
@@ -7427,12 +7317,12 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													Attributes: map[string]schema.Attribute{
 														"invert_match": schema.BoolAttribute{
 															MarkdownDescription: "Invert Match Result. Invert the match result.",
-															Optional: true,
+															Optional:            true,
 														},
 														"ip_prefixes": schema.ListAttribute{
 															MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefix strings.",
-															Optional: true,
-															ElementType: types.StringType,
+															Optional:            true,
+															ElementType:         types.StringType,
 														},
 													},
 												},
@@ -7441,32 +7331,32 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													Attributes: map[string]schema.Attribute{
 														"exact_values": schema.ListAttribute{
 															MarkdownDescription: "Exact Values. A list of exact path values to match the input HTTP path against.",
-															Optional: true,
-															ElementType: types.StringType,
+															Optional:            true,
+															ElementType:         types.StringType,
 														},
 														"invert_matcher": schema.BoolAttribute{
 															MarkdownDescription: "Invert Path Matcher. Invert the match result.",
-															Optional: true,
+															Optional:            true,
 														},
 														"prefix_values": schema.ListAttribute{
 															MarkdownDescription: "Prefix Values. A list of path prefix values to match the input HTTP path against.",
-															Optional: true,
-															ElementType: types.StringType,
+															Optional:            true,
+															ElementType:         types.StringType,
 														},
 														"regex_values": schema.ListAttribute{
 															MarkdownDescription: "Regex Values. A list of regular expressions to match the input HTTP path against.",
-															Optional: true,
-															ElementType: types.StringType,
+															Optional:            true,
+															ElementType:         types.StringType,
 														},
 														"suffix_values": schema.ListAttribute{
 															MarkdownDescription: "Suffix Values. A list of path suffix values to match the input HTTP path against.",
-															Optional: true,
-															ElementType: types.StringType,
+															Optional:            true,
+															ElementType:         types.StringType,
 														},
 														"transformers": schema.ListAttribute{
 															MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
-															Optional: true,
-															ElementType: types.StringType,
+															Optional:            true,
+															ElementType:         types.StringType,
 														},
 													},
 												},
@@ -7476,11 +7366,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 														Attributes: map[string]schema.Attribute{
 															"invert_matcher": schema.BoolAttribute{
 																MarkdownDescription: "Invert Query Parameter Matcher. Invert the match result.",
-																Optional: true,
+																Optional:            true,
 															},
 															"key": schema.StringAttribute{
 																MarkdownDescription: "Query Parameter Name. A case-sensitive HTTP query parameter name.",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 														Blocks: map[string]schema.Block{
@@ -7495,18 +7385,18 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 																Attributes: map[string]schema.Attribute{
 																	"exact_values": schema.ListAttribute{
 																		MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
-																		Optional: true,
-																		ElementType: types.StringType,
+																		Optional:            true,
+																		ElementType:         types.StringType,
 																	},
 																	"regex_values": schema.ListAttribute{
 																		MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
-																		Optional: true,
-																		ElementType: types.StringType,
+																		Optional:            true,
+																		ElementType:         types.StringType,
 																	},
 																	"transformers": schema.ListAttribute{
 																		MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
-																		Optional: true,
-																		ElementType: types.StringType,
+																		Optional:            true,
+																		ElementType:         types.StringType,
 																	},
 																},
 															},
@@ -7518,18 +7408,18 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													Attributes: map[string]schema.Attribute{
 														"classes": schema.ListAttribute{
 															MarkdownDescription: "TLS fingerprint classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against. Possible values are `TLS_FINGERPRINT_NONE`, `ANY_MALICIOUS_FINGERPRINT`, `ADWARE`, `ADWIND`, `DRIDEX`, `GOOTKIT`, `GOZI`, `JBIFROST`, `QUAKBOT`, `RANSOMWARE`, `TROLDESH`, `TOFSEE`, `TORRENTLOCKER`, `TRICKBOT`. Defaults to `TLS_FINGERPRINT_NONE`.",
-															Optional: true,
-															ElementType: types.StringType,
+															Optional:            true,
+															ElementType:         types.StringType,
 														},
 														"exact_values": schema.ListAttribute{
 															MarkdownDescription: "Exact Values. A list of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against.",
-															Optional: true,
-															ElementType: types.StringType,
+															Optional:            true,
+															ElementType:         types.StringType,
 														},
 														"excluded_values": schema.ListAttribute{
 															MarkdownDescription: "Excluded Values. A list of TLS JA3 fingerprints to be excluded when matching the input TLS JA3 fingerprint. This can be used to skip known false positives when using one or more known TLS fingerprint classes in the enclosing matcher.",
-															Optional: true,
-															ElementType: types.StringType,
+															Optional:            true,
+															ElementType:         types.StringType,
 														},
 													},
 												},
@@ -7545,12 +7435,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						Attributes: map[string]schema.Attribute{
 							"custom_page": schema.StringAttribute{
 								MarkdownDescription: "Custom Message for Temporary Blocking. Custom message is of type `uri_ref`. Currently supported URL schemes is `string:///`. For `string:///` scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Blocked.' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Blocked </p>'. Base64 encoded string for this html is 'PHA+IFBsZWFzZSBXYWl0IDwvcD4='",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 					},
 				},
-
 			},
 			"protected_cookies": schema.ListNestedBlock{
 				MarkdownDescription: "Cookie Protection. Allows setting attributes (SameSite, Secure, and HttpOnly) on cookies in responses. Cookie Tampering Protection prevents attackers from modifying the value of session cookies. For Cookie Tampering Protection, enabling a web app firewall (WAF) is a prerequisite. The configured mode of WAF (monitoring or blocking) will be enforced on the request when cookie tampering is identified. Note: We recommend enabling Secure and HttpOnly attributes along with cookie tampering protection.",
@@ -7558,11 +7447,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 					Attributes: map[string]schema.Attribute{
 						"max_age_value": schema.Int64Attribute{
 							MarkdownDescription: "Add Max Age. Add max age attribute",
-							Optional: true,
+							Optional:            true,
 						},
 						"name": schema.StringAttribute{
 							MarkdownDescription: "Cookie Name. Name of the Cookie",
-							Optional: true,
+							Optional:            true,
 						},
 					},
 					Blocks: map[string]schema.Block{
@@ -7600,18 +7489,15 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 							MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 						},
 					},
-
 				},
 			},
 			"rate_limit": schema.SingleNestedBlock{
 				MarkdownDescription: "RateLimitConfigType.",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"custom_ip_allowed_list": schema.SingleNestedBlock{
 						MarkdownDescription: "Custom IP Allowed List. IP Allowed list using existing ip_prefix_set objects",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"rate_limiter_allowed_prefixes": schema.ListNestedBlock{
 								MarkdownDescription: "List of IP Prefix Sets. References to ip_prefix_set objects. Requests from source IP addresses that are covered by one of the allowed IP Prefixes are not subjected to rate limiting.",
@@ -7619,16 +7505,16 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-											Optional: true,
+											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
 											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-											Optional: true,
+											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
@@ -7640,8 +7526,8 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						Attributes: map[string]schema.Attribute{
 							"prefixes": schema.ListAttribute{
 								MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
-								Optional: true,
-								ElementType: types.StringType,
+								Optional:            true,
+								ElementType:         types.StringType,
 							},
 						},
 					},
@@ -7653,8 +7539,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 					},
 					"policies": schema.SingleNestedBlock{
 						MarkdownDescription: "Rate Limiter Policy List. List of rate limiter policies to be applied.",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"policies": schema.ListNestedBlock{
 								MarkdownDescription: "Rate Limiter Policies. Ordered list of rate limiter policies.",
@@ -7662,16 +7547,16 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-											Optional: true,
+											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
 											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-											Optional: true,
+											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
@@ -7683,33 +7568,32 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						Attributes: map[string]schema.Attribute{
 							"burst_multiplier": schema.Int64Attribute{
 								MarkdownDescription: "Burst Multiplier. The maximum burst of requests to accommodate, expressed as a multiple of the rate.",
-								Optional: true,
+								Optional:            true,
 							},
 							"period_multiplier": schema.Int64Attribute{
 								MarkdownDescription: "Periods. This setting, combined with Per Period units, provides a duration",
-								Optional: true,
+								Optional:            true,
 							},
 							"total_number": schema.Int64Attribute{
 								MarkdownDescription: "Number Of Requests. The total number of allowed requests per rate-limiting period.",
-								Optional: true,
+								Optional:            true,
 							},
 							"unit": schema.StringAttribute{
 								MarkdownDescription: "Rate Limit Period Unit. Unit for the period per which the rate limit is applied. - SECOND: Second Rate limit period unit is seconds - MINUTE: Minute Rate limit period unit is minutes - HOUR: Hour Rate limit period unit is hours - DAY: Day Rate limit period unit is days. Possible values are `SECOND`, `MINUTE`, `HOUR`. Defaults to `SECOND`.",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
 							"action_block": schema.SingleNestedBlock{
 								MarkdownDescription: "Rate Limit Block Action. Action where a user is blocked from making further requests after exceeding rate limit threshold.",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"hours": schema.SingleNestedBlock{
 										MarkdownDescription: "Hours. Input Duration Hours",
 										Attributes: map[string]schema.Attribute{
 											"duration": schema.Int64Attribute{
 												MarkdownDescription: "Duration.",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -7718,7 +7602,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 										Attributes: map[string]schema.Attribute{
 											"duration": schema.Int64Attribute{
 												MarkdownDescription: "Duration.",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -7727,7 +7611,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 										Attributes: map[string]schema.Attribute{
 											"duration": schema.Int64Attribute{
 												MarkdownDescription: "Duration.",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -7745,33 +7629,30 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						},
 					},
 				},
-
 			},
 			"sensitive_data_policy": schema.SingleNestedBlock{
 				MarkdownDescription: "Sensitive Data Discovery. Settings for data type policy",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"sensitive_data_policy_ref": schema.SingleNestedBlock{
 						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
 								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-								Optional: true,
+								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
 								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-								Optional: true,
+								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-								Optional: true,
-								Computed: true,
+								Optional:            true,
+								Computed:            true,
 							},
 						},
 					},
 				},
-
 			},
 			"service_policies_from_namespace": schema.SingleNestedBlock{
 				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -7781,11 +7662,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 				Attributes: map[string]schema.Attribute{
 					"request_headers_timeout": schema.Int64Attribute{
 						MarkdownDescription: "Request Headers Timeout. The amount of time the client has to send only the headers on the request stream before the stream is cancelled. The  milliseconds. This setting provides protection against Slowloris attacks. Defaults to `10000`.",
-						Optional: true,
+						Optional:            true,
 					},
 					"request_timeout": schema.Int64Attribute{
 						MarkdownDescription: "Custom Timeout.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -7793,7 +7674,6 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 			"system_default_timeouts": schema.SingleNestedBlock{
 				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -7804,28 +7684,28 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 					Attributes: map[string]schema.Attribute{
 						"actions": schema.ListAttribute{
 							MarkdownDescription: "Actions. Actions that should be taken when client identifier matches the rule. Possible values are `SKIP_PROCESSING_WAF`, `SKIP_PROCESSING_BOT`, `SKIP_PROCESSING_MUM`, `SKIP_PROCESSING_IP_REPUTATION`, `SKIP_PROCESSING_API_PROTECTION`, `SKIP_PROCESSING_OAS_VALIDATION`, `SKIP_PROCESSING_DDOS_PROTECTION`, `SKIP_PROCESSING_THREAT_MESH`, `SKIP_PROCESSING_MALWARE_PROTECTION`. Defaults to `SKIP_PROCESSING_WAF`.",
-							Optional: true,
-							ElementType: types.StringType,
+							Optional:            true,
+							ElementType:         types.StringType,
 						},
 						"as_number": schema.Int64Attribute{
 							MarkdownDescription: "AS Number. RFC 6793 defined 4-byte AS number",
-							Optional: true,
+							Optional:            true,
 						},
 						"expiration_timestamp": schema.StringAttribute{
 							MarkdownDescription: "Expiration Timestamp. The expiration_timestamp is the RFC 3339 format timestamp at which the containing rule is considered to be logically expired. The rule continues to exist in the configuration but is not applied anymore.",
-							Optional: true,
+							Optional:            true,
 						},
 						"ip_prefix": schema.StringAttribute{
 							MarkdownDescription: "IPv4 Prefix. IPv4 prefix string.",
-							Optional: true,
+							Optional:            true,
 						},
 						"ipv6_prefix": schema.StringAttribute{
 							MarkdownDescription: "IPv6 Prefix. IPv6 prefix string.",
-							Optional: true,
+							Optional:            true,
 						},
 						"user_identifier": schema.StringAttribute{
 							MarkdownDescription: "User Identifier. Identify user based on user identifier. User identifier value needs to be copied from security event.",
-							Optional: true,
+							Optional:            true,
 						},
 					},
 					Blocks: map[string]schema.Block{
@@ -7834,8 +7714,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						},
 						"http_header": schema.SingleNestedBlock{
 							MarkdownDescription: "HTTP Header. Request header name and value pairs",
-							Attributes: map[string]schema.Attribute{
-							},
+							Attributes:          map[string]schema.Attribute{},
 							Blocks: map[string]schema.Block{
 								"headers": schema.ListNestedBlock{
 									MarkdownDescription: "HTTP Headers. List of HTTP header name and value pairs",
@@ -7843,23 +7722,23 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 										Attributes: map[string]schema.Attribute{
 											"exact": schema.StringAttribute{
 												MarkdownDescription: "Exact. Header value to match exactly",
-												Optional: true,
+												Optional:            true,
 											},
 											"invert_match": schema.BoolAttribute{
 												MarkdownDescription: "NOT of match. Invert the result of the match to detect missing header or non-matching value",
-												Optional: true,
+												Optional:            true,
 											},
 											"name": schema.StringAttribute{
 												MarkdownDescription: "Name. Name of the header",
-												Optional: true,
+												Optional:            true,
 											},
 											"presence": schema.BoolAttribute{
 												MarkdownDescription: "Presence. If true, check for presence of header",
-												Optional: true,
+												Optional:            true,
 											},
 											"regex": schema.StringAttribute{
 												MarkdownDescription: "Regex. Regex match of the header value in re2 format",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -7871,11 +7750,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 							Attributes: map[string]schema.Attribute{
 								"description_spec": schema.StringAttribute{
 									MarkdownDescription: "Description. Human readable description.",
-									Optional: true,
+									Optional:            true,
 								},
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 						},
@@ -7886,7 +7765,6 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 							MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 						},
 					},
-
 				},
 			},
 			"user_id_client_ip": schema.SingleNestedBlock{
@@ -7897,29 +7775,26 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
 						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-						Optional: true,
+						Optional:            true,
 					},
 					"namespace": schema.StringAttribute{
 						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-						Optional: true,
+						Optional:            true,
 					},
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-						Optional: true,
-						Computed: true,
+						Optional:            true,
+						Computed:            true,
 					},
 				},
-
 			},
 			"waf_exclusion": schema.SingleNestedBlock{
 				MarkdownDescription: "WAF Exclusion.",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"waf_exclusion_inline_rules": schema.SingleNestedBlock{
 						MarkdownDescription: "WAF Exclusion Inline Rules. A list of WAF exclusion rules that will be applied inline",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"rules": schema.ListNestedBlock{
 								MarkdownDescription: "WAF Exclusion Rules. An ordered list of WAF Exclusions specific to this Load Balancer.",
@@ -7927,28 +7802,28 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									Attributes: map[string]schema.Attribute{
 										"exact_value": schema.StringAttribute{
 											MarkdownDescription: "Exact Value. Exact domain name",
-											Optional: true,
+											Optional:            true,
 										},
 										"expiration_timestamp": schema.StringAttribute{
 											MarkdownDescription: "Expiration Timestamp. The expiration_timestamp is the RFC 3339 format timestamp at which the containing rule is considered to be logically expired. The rule continues to exist in the configuration but is not applied anymore.",
-											Optional: true,
+											Optional:            true,
 										},
 										"methods": schema.ListAttribute{
 											MarkdownDescription: "Methods. methods to be matched. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 										"path_prefix": schema.StringAttribute{
 											MarkdownDescription: "Prefix. Path prefix to match (e.g. the value / will match on all paths)",
-											Optional: true,
+											Optional:            true,
 										},
 										"path_regex": schema.StringAttribute{
 											MarkdownDescription: "Path Regex. Define the regex for the path. For example, the regex ^/.*$ will match on all paths",
-											Optional: true,
+											Optional:            true,
 										},
 										"suffix_value": schema.StringAttribute{
 											MarkdownDescription: "Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -7960,8 +7835,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 										},
 										"app_firewall_detection_control": schema.SingleNestedBlock{
 											MarkdownDescription: "App Firewall Detection Control. Define the list of Signature IDs, Violations, Attack Types and Bot Names that should be excluded from triggering on the defined match criteria.",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"exclude_attack_type_contexts": schema.ListNestedBlock{
 													MarkdownDescription: "Attack Types. Attack Types to be excluded for the defined match criteria",
@@ -7969,15 +7843,15 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 														Attributes: map[string]schema.Attribute{
 															"context": schema.StringAttribute{
 																MarkdownDescription: "WAF Exclusion Context Options. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE: CONTEXT_RESPONSE - CONTEXT_PARAMETER: CONTEXT_PARAMETER Detection will be excluded for the parameters. The parameter name is required in the Context name field. If the field is left empty, the detection will be excluded for all parameters. - CONTEXT_HEADER: CONTEXT_HEADER Detection will be excluded for the headers. The header name is required in the Context name field. If the field is left empty, the detection will be excluded for all headers. - CONTEXT_COOKIE: CONTEXT_COOKIE Detection will be excluded for the cookies. The cookie name is required in the Context name field. If the field is left empty, the detection will be excluded for all cookies. - CONTEXT_URL: CONTEXT_URL Detection will be excluded for the request URL. - CONTEXT_URI: CONTEXT_URI. Possible values are `CONTEXT_ANY`, `CONTEXT_BODY`, `CONTEXT_REQUEST`, `CONTEXT_RESPONSE`, `CONTEXT_PARAMETER`, `CONTEXT_HEADER`, `CONTEXT_COOKIE`, `CONTEXT_URL`, `CONTEXT_URI`. Defaults to `CONTEXT_ANY`.",
-																Optional: true,
+																Optional:            true,
 															},
 															"context_name": schema.StringAttribute{
 																MarkdownDescription: "Context Name. Relevant only for contexts: Header, Cookie and Parameter. Name of the Context that the WAF Exclusion Rules will check. Wildcard matching can be used by prefixing or suffixing the context name with an wildcard asterisk (*).",
-																Optional: true,
+																Optional:            true,
 															},
 															"exclude_attack_type": schema.StringAttribute{
 																MarkdownDescription: "Attack Types. List of all Attack Types ATTACK_TYPE_NONE ATTACK_TYPE_NON_BROWSER_CLIENT ATTACK_TYPE_OTHER_APPLICATION_ATTACKS ATTACK_TYPE_TROJAN_BACKDOOR_SPYWARE ATTACK_TYPE_DETECTION_EVASION ATTACK_TYPE_VULNERABILITY_SCAN ATTACK_TYPE_ABUSE_OF_FUNCTIONALITY ATTACK_TYPE_AUTHENTICATION_AUTHORIZATION_ATTACKS ATTACK_TYPE_BUFFER_OVERFLOW ATTACK_TYPE_PREDICTABLE_RESOURCE_LOCATION ATTACK_TYPE_INFORMATION_LEAKAGE ATTACK_TYPE_DIRECTORY_INDEXING ATTACK_TYPE_PATH_TRAVERSAL ATTACK_TYPE_XPATH_INJECTION ATTACK_TYPE_LDAP_INJECTION ATTACK_TYPE_SERVER_SIDE_CODE_INJECTION ATTACK_TYPE_COMMAND_EXECUTION ATTACK_TYPE_SQL_INJECTION ATTACK_TYPE_CROSS_SITE_SCRIPTING ATTACK_TYPE_DENIAL_OF_SERVICE ATTACK_TYPE_HTTP_PARSER_ATTACK ATTACK_TYPE_SESSION_HIJACKING ATTACK_TYPE_HTTP_RESPONSE_SPLITTING ATTACK_TYPE_FORCEFUL_BROWSING ATTACK_TYPE_REMOTE_FILE_INCLUDE ATTACK_TYPE_MALICIOUS_FILE_UPLOAD ATTACK_TYPE_GRAPHQL_PARSER_ATTACK. Possible values are `ATTACK_TYPE_NONE`, `ATTACK_TYPE_NON_BROWSER_CLIENT`, `ATTACK_TYPE_OTHER_APPLICATION_ATTACKS`, `ATTACK_TYPE_TROJAN_BACKDOOR_SPYWARE`, `ATTACK_TYPE_DETECTION_EVASION`, `ATTACK_TYPE_VULNERABILITY_SCAN`, `ATTACK_TYPE_ABUSE_OF_FUNCTIONALITY`, `ATTACK_TYPE_AUTHENTICATION_AUTHORIZATION_ATTACKS`, `ATTACK_TYPE_BUFFER_OVERFLOW`, `ATTACK_TYPE_PREDICTABLE_RESOURCE_LOCATION`, `ATTACK_TYPE_INFORMATION_LEAKAGE`, `ATTACK_TYPE_DIRECTORY_INDEXING`, `ATTACK_TYPE_PATH_TRAVERSAL`, `ATTACK_TYPE_XPATH_INJECTION`, `ATTACK_TYPE_LDAP_INJECTION`, `ATTACK_TYPE_SERVER_SIDE_CODE_INJECTION`, `ATTACK_TYPE_COMMAND_EXECUTION`, `ATTACK_TYPE_SQL_INJECTION`, `ATTACK_TYPE_CROSS_SITE_SCRIPTING`, `ATTACK_TYPE_DENIAL_OF_SERVICE`, `ATTACK_TYPE_HTTP_PARSER_ATTACK`, `ATTACK_TYPE_SESSION_HIJACKING`, `ATTACK_TYPE_HTTP_RESPONSE_SPLITTING`, `ATTACK_TYPE_FORCEFUL_BROWSING`, `ATTACK_TYPE_REMOTE_FILE_INCLUDE`, `ATTACK_TYPE_MALICIOUS_FILE_UPLOAD`, `ATTACK_TYPE_GRAPHQL_PARSER_ATTACK`. Defaults to `ATTACK_TYPE_NONE`.",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 													},
@@ -7988,7 +7862,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 														Attributes: map[string]schema.Attribute{
 															"bot_name": schema.StringAttribute{
 																MarkdownDescription: "Bot Name.",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 													},
@@ -7999,15 +7873,15 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 														Attributes: map[string]schema.Attribute{
 															"context": schema.StringAttribute{
 																MarkdownDescription: "WAF Exclusion Context Options. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE: CONTEXT_RESPONSE - CONTEXT_PARAMETER: CONTEXT_PARAMETER Detection will be excluded for the parameters. The parameter name is required in the Context name field. If the field is left empty, the detection will be excluded for all parameters. - CONTEXT_HEADER: CONTEXT_HEADER Detection will be excluded for the headers. The header name is required in the Context name field. If the field is left empty, the detection will be excluded for all headers. - CONTEXT_COOKIE: CONTEXT_COOKIE Detection will be excluded for the cookies. The cookie name is required in the Context name field. If the field is left empty, the detection will be excluded for all cookies. - CONTEXT_URL: CONTEXT_URL Detection will be excluded for the request URL. - CONTEXT_URI: CONTEXT_URI. Possible values are `CONTEXT_ANY`, `CONTEXT_BODY`, `CONTEXT_REQUEST`, `CONTEXT_RESPONSE`, `CONTEXT_PARAMETER`, `CONTEXT_HEADER`, `CONTEXT_COOKIE`, `CONTEXT_URL`, `CONTEXT_URI`. Defaults to `CONTEXT_ANY`.",
-																Optional: true,
+																Optional:            true,
 															},
 															"context_name": schema.StringAttribute{
 																MarkdownDescription: "Context Name. Relevant only for contexts: Header, Cookie and Parameter. Name of the Context that the WAF Exclusion Rules will check. Wildcard matching can be used by prefixing or suffixing the context name with an wildcard asterisk (*).",
-																Optional: true,
+																Optional:            true,
 															},
 															"signature_id": schema.Int64Attribute{
 																MarkdownDescription: "SignatureID. The allowed values for signature id are 0 and in the range of 200000001-299999999. 0 implies that all signatures will be excluded for the specified context.",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 													},
@@ -8018,15 +7892,15 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 														Attributes: map[string]schema.Attribute{
 															"context": schema.StringAttribute{
 																MarkdownDescription: "WAF Exclusion Context Options. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE: CONTEXT_RESPONSE - CONTEXT_PARAMETER: CONTEXT_PARAMETER Detection will be excluded for the parameters. The parameter name is required in the Context name field. If the field is left empty, the detection will be excluded for all parameters. - CONTEXT_HEADER: CONTEXT_HEADER Detection will be excluded for the headers. The header name is required in the Context name field. If the field is left empty, the detection will be excluded for all headers. - CONTEXT_COOKIE: CONTEXT_COOKIE Detection will be excluded for the cookies. The cookie name is required in the Context name field. If the field is left empty, the detection will be excluded for all cookies. - CONTEXT_URL: CONTEXT_URL Detection will be excluded for the request URL. - CONTEXT_URI: CONTEXT_URI. Possible values are `CONTEXT_ANY`, `CONTEXT_BODY`, `CONTEXT_REQUEST`, `CONTEXT_RESPONSE`, `CONTEXT_PARAMETER`, `CONTEXT_HEADER`, `CONTEXT_COOKIE`, `CONTEXT_URL`, `CONTEXT_URI`. Defaults to `CONTEXT_ANY`.",
-																Optional: true,
+																Optional:            true,
 															},
 															"context_name": schema.StringAttribute{
 																MarkdownDescription: "Context Name. Relevant only for contexts: Header, Cookie and Parameter. Name of the Context that the WAF Exclusion Rules will check. Wildcard matching can be used by prefixing or suffixing the context name with an wildcard asterisk (*).",
-																Optional: true,
+																Optional:            true,
 															},
 															"exclude_violation": schema.StringAttribute{
 																MarkdownDescription: "App Firewall Violation Type. List of all supported Violation Types VIOL_NONE VIOL_FILETYPE VIOL_METHOD VIOL_MANDATORY_HEADER VIOL_HTTP_RESPONSE_STATUS VIOL_REQUEST_MAX_LENGTH VIOL_FILE_UPLOAD VIOL_FILE_UPLOAD_IN_BODY VIOL_XML_MALFORMED VIOL_JSON_MALFORMED VIOL_ASM_COOKIE_MODIFIED VIOL_HTTP_PROTOCOL_MULTIPLE_HOST_HEADERS VIOL_HTTP_PROTOCOL_BAD_HOST_HEADER_VALUE VIOL_HTTP_PROTOCOL_UNPARSABLE_REQUEST_CONTENT VIOL_HTTP_PROTOCOL_NULL_IN_REQUEST VIOL_HTTP_PROTOCOL_BAD_HTTP_VERSION VIOL_HTTP_PROTOCOL_CRLF_CHARACTERS_BEFORE_REQUEST_START VIOL_HTTP_PROTOCOL_NO_HOST_HEADER_IN_HTTP_1_1_REQUEST VIOL_HTTP_PROTOCOL_BAD_MULTIPART_PARAMETERS_PARSING VIOL_HTTP_PROTOCOL_SEVERAL_CONTENT_LENGTH_HEADERS VIOL_HTTP_PROTOCOL_CONTENT_LENGTH_SHOULD_BE_A_POSITIVE_NUMBER VIOL_EVASION_DIRECTORY_TRAVERSALS VIOL_MALFORMED_REQUEST VIOL_EVASION_MULTIPLE_DECODING VIOL_DATA_GUARD VIOL_EVASION_APACHE_WHITESPACE VIOL_COOKIE_MODIFIED VIOL_EVASION_IIS_UNICODE_CODEPOINTS VIOL_EVASION_IIS_BACKSLASHES VIOL_EVASION_PERCENT_U_DECODING VIOL_EVASION_BARE_BYTE_DECODING VIOL_EVASION_BAD_UNESCAPE VIOL_HTTP_PROTOCOL_BAD_MULTIPART_FORMDATA_REQUEST_PARSING VIOL_HTTP_PROTOCOL_BODY_IN_GET_OR_HEAD_REQUEST VIOL_HTTP_PROTOCOL_HIGH_ASCII_CHARACTERS_IN_HEADERS VIOL_ENCODING VIOL_COOKIE_MALFORMED VIOL_GRAPHQL_FORMAT VIOL_GRAPHQL_MALFORMED VIOL_GRAPHQL_INTROSPECTION_QUERY. Possible values are `VIOL_NONE`, `VIOL_FILETYPE`, `VIOL_METHOD`, `VIOL_MANDATORY_HEADER`, `VIOL_HTTP_RESPONSE_STATUS`, `VIOL_REQUEST_MAX_LENGTH`, `VIOL_FILE_UPLOAD`, `VIOL_FILE_UPLOAD_IN_BODY`, `VIOL_XML_MALFORMED`, `VIOL_JSON_MALFORMED`, `VIOL_ASM_COOKIE_MODIFIED`, `VIOL_HTTP_PROTOCOL_MULTIPLE_HOST_HEADERS`, `VIOL_HTTP_PROTOCOL_BAD_HOST_HEADER_VALUE`, `VIOL_HTTP_PROTOCOL_UNPARSABLE_REQUEST_CONTENT`, `VIOL_HTTP_PROTOCOL_NULL_IN_REQUEST`, `VIOL_HTTP_PROTOCOL_BAD_HTTP_VERSION`, `VIOL_HTTP_PROTOCOL_SEVERAL_CONTENT_LENGTH_HEADERS`, `VIOL_EVASION_DIRECTORY_TRAVERSALS`, `VIOL_MALFORMED_REQUEST`, `VIOL_EVASION_MULTIPLE_DECODING`, `VIOL_DATA_GUARD`, `VIOL_EVASION_APACHE_WHITESPACE`, `VIOL_COOKIE_MODIFIED`, `VIOL_EVASION_IIS_UNICODE_CODEPOINTS`, `VIOL_EVASION_IIS_BACKSLASHES`, `VIOL_EVASION_PERCENT_U_DECODING`, `VIOL_EVASION_BARE_BYTE_DECODING`, `VIOL_EVASION_BAD_UNESCAPE`, `VIOL_HTTP_PROTOCOL_BODY_IN_GET_OR_HEAD_REQUEST`, `VIOL_ENCODING`, `VIOL_COOKIE_MALFORMED`, `VIOL_GRAPHQL_FORMAT`, `VIOL_GRAPHQL_MALFORMED`, `VIOL_GRAPHQL_INTROSPECTION_QUERY`. Defaults to `VIOL_NONE`.",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 													},
@@ -8038,11 +7912,11 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											Attributes: map[string]schema.Attribute{
 												"description_spec": schema.StringAttribute{
 													MarkdownDescription: "Description. Human readable description.",
-													Optional: true,
+													Optional:            true,
 												},
 												"name": schema.StringAttribute{
 													MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 										},
@@ -8059,21 +7933,20 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
 								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-								Optional: true,
+								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
 								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-								Optional: true,
+								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-								Optional: true,
-								Computed: true,
+								Optional:            true,
+								Computed:            true,
 							},
 						},
 					},
 				},
-
 			},
 		},
 	}
@@ -9461,7 +9334,6 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 		createReq.Spec["waf_exclusion"] = waf_exclusionMap
 	}
 
-
 	apiResource, err := r.client.CreateCDNLoadBalancer(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create CDNLoadBalancer: %s", err))
@@ -9473,7 +9345,7 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if blockData, ok := apiResource.Spec["active_service_policies"].(map[string]interface{}); ok && (isImport || data.ActiveServicePolicies != nil) {
 		data.ActiveServicePolicies = &CDNLoadBalancerActiveServicePoliciesModel{
 			Policies: func() []CDNLoadBalancerActiveServicePoliciesPoliciesModel {
@@ -9613,8 +9485,7 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 								}(),
 								RequestMatcher: func() *CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherModel {
 									if _, ok := itemMap["request_matcher"].(map[string]interface{}); ok {
-										return &CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherModel{
-										}
+										return &CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherModel{}
 									}
 									return nil
 								}(),
@@ -9638,8 +9509,7 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 				}
 				// Import case: read from API
 				if _, ok := blockData["bypass_rate_limiting_rules"].(map[string]interface{}); ok {
-					return &CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesModel{
-					}
+					return &CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesModel{}
 				}
 				return nil
 			}(),
@@ -9650,8 +9520,7 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 				}
 				// Import case: read from API
 				if _, ok := blockData["custom_ip_allowed_list"].(map[string]interface{}); ok {
-					return &CDNLoadBalancerAPIRateLimitCustomIPAllowedListModel{
-					}
+					return &CDNLoadBalancerAPIRateLimitCustomIPAllowedListModel{}
 				}
 				return nil
 			}(),
@@ -9787,8 +9656,7 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 								}(),
 								RequestMatcher: func() *CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherModel {
 									if _, ok := itemMap["request_matcher"].(map[string]interface{}); ok {
-										return &CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherModel{
-										}
+										return &CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherModel{}
 									}
 									return nil
 								}(),
@@ -9873,8 +9741,7 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 					}(),
 					HTTPHeader: func() *CDNLoadBalancerBlockedClientsHTTPHeaderModel {
 						if _, ok := itemMap["http_header"].(map[string]interface{}); ok {
-							return &CDNLoadBalancerBlockedClientsHTTPHeaderModel{
-							}
+							return &CDNLoadBalancerBlockedClientsHTTPHeaderModel{}
 						}
 						return nil
 					}(),
@@ -10592,8 +10459,7 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 				}
 				// Import case: read from API
 				if _, ok := blockData["tls_cert_options"].(map[string]interface{}); ok {
-					return &CDNLoadBalancerHTTPSTLSCertOptionsModel{
-					}
+					return &CDNLoadBalancerHTTPSTLSCertOptionsModel{}
 				}
 				return nil
 			}(),
@@ -10630,8 +10496,7 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 				}
 				// Import case: read from API
 				if _, ok := blockData["tls_config"].(map[string]interface{}); ok {
-					return &CDNLoadBalancerHTTPSAutoCertTLSConfigModel{
-					}
+					return &CDNLoadBalancerHTTPSAutoCertTLSConfigModel{}
 				}
 				return nil
 			}(),
@@ -10909,8 +10774,7 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 				}
 				// Import case: read from API
 				if _, ok := blockData["logging_options"].(map[string]interface{}); ok {
-					return &CDNLoadBalancerOtherSettingsLoggingOptionsModel{
-					}
+					return &CDNLoadBalancerOtherSettingsLoggingOptionsModel{}
 				}
 				return nil
 			}(),
@@ -11097,8 +10961,7 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 					}(),
 					HTTPHeader: func() *CDNLoadBalancerTrustedClientsHTTPHeaderModel {
 						if _, ok := itemMap["http_header"].(map[string]interface{}); ok {
-							return &CDNLoadBalancerTrustedClientsHTTPHeaderModel{
-							}
+							return &CDNLoadBalancerTrustedClientsHTTPHeaderModel{}
 						}
 						return nil
 					}(),
@@ -11188,7 +11051,6 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 		data.WAFExclusion = &CDNLoadBalancerWAFExclusionModel{}
 	}
 	// Normal Read: preserve existing state value
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -11278,9 +11140,9 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if blockData, ok := apiResource.Spec["active_service_policies"].(map[string]interface{}); ok && (isImport || data.ActiveServicePolicies != nil) {
 		data.ActiveServicePolicies = &CDNLoadBalancerActiveServicePoliciesModel{
@@ -11421,8 +11283,7 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 								}(),
 								RequestMatcher: func() *CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherModel {
 									if _, ok := itemMap["request_matcher"].(map[string]interface{}); ok {
-										return &CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherModel{
-										}
+										return &CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherModel{}
 									}
 									return nil
 								}(),
@@ -11446,8 +11307,7 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 				}
 				// Import case: read from API
 				if _, ok := blockData["bypass_rate_limiting_rules"].(map[string]interface{}); ok {
-					return &CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesModel{
-					}
+					return &CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesModel{}
 				}
 				return nil
 			}(),
@@ -11458,8 +11318,7 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 				}
 				// Import case: read from API
 				if _, ok := blockData["custom_ip_allowed_list"].(map[string]interface{}); ok {
-					return &CDNLoadBalancerAPIRateLimitCustomIPAllowedListModel{
-					}
+					return &CDNLoadBalancerAPIRateLimitCustomIPAllowedListModel{}
 				}
 				return nil
 			}(),
@@ -11595,8 +11454,7 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 								}(),
 								RequestMatcher: func() *CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherModel {
 									if _, ok := itemMap["request_matcher"].(map[string]interface{}); ok {
-										return &CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherModel{
-										}
+										return &CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherModel{}
 									}
 									return nil
 								}(),
@@ -11681,8 +11539,7 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 					}(),
 					HTTPHeader: func() *CDNLoadBalancerBlockedClientsHTTPHeaderModel {
 						if _, ok := itemMap["http_header"].(map[string]interface{}); ok {
-							return &CDNLoadBalancerBlockedClientsHTTPHeaderModel{
-							}
+							return &CDNLoadBalancerBlockedClientsHTTPHeaderModel{}
 						}
 						return nil
 					}(),
@@ -12400,8 +12257,7 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 				}
 				// Import case: read from API
 				if _, ok := blockData["tls_cert_options"].(map[string]interface{}); ok {
-					return &CDNLoadBalancerHTTPSTLSCertOptionsModel{
-					}
+					return &CDNLoadBalancerHTTPSTLSCertOptionsModel{}
 				}
 				return nil
 			}(),
@@ -12438,8 +12294,7 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 				}
 				// Import case: read from API
 				if _, ok := blockData["tls_config"].(map[string]interface{}); ok {
-					return &CDNLoadBalancerHTTPSAutoCertTLSConfigModel{
-					}
+					return &CDNLoadBalancerHTTPSAutoCertTLSConfigModel{}
 				}
 				return nil
 			}(),
@@ -12717,8 +12572,7 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 				}
 				// Import case: read from API
 				if _, ok := blockData["logging_options"].(map[string]interface{}); ok {
-					return &CDNLoadBalancerOtherSettingsLoggingOptionsModel{
-					}
+					return &CDNLoadBalancerOtherSettingsLoggingOptionsModel{}
 				}
 				return nil
 			}(),
@@ -12905,8 +12759,7 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 					}(),
 					HTTPHeader: func() *CDNLoadBalancerTrustedClientsHTTPHeaderModel {
 						if _, ok := itemMap["http_header"].(map[string]interface{}); ok {
-							return &CDNLoadBalancerTrustedClientsHTTPHeaderModel{
-							}
+							return &CDNLoadBalancerTrustedClientsHTTPHeaderModel{}
 						}
 						return nil
 					}(),
@@ -12996,7 +12849,6 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 		data.WAFExclusion = &CDNLoadBalancerWAFExclusionModel{}
 	}
 	// Normal Read: preserve existing state value
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -14294,7 +14146,6 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 		}
 		apiResource.Spec["waf_exclusion"] = waf_exclusionMap
 	}
-
 
 	updated, err := r.client.UpdateCDNLoadBalancer(ctx, apiResource)
 	if err != nil {

@@ -70,24 +70,24 @@ type IKEPhase1ProfileReauthTimeoutHoursModel struct {
 }
 
 type IKEPhase1ProfileResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	AuthenticationAlgos types.List `tfsdk:"authentication_algos"`
-	Description types.String `tfsdk:"description"`
-	DhGroup types.List `tfsdk:"dh_group"`
-	Disable types.Bool `tfsdk:"disable"`
-	EncryptionAlgos types.List `tfsdk:"encryption_algos"`
-	Labels types.Map `tfsdk:"labels"`
-	Prf types.List `tfsdk:"prf"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	IKEKeylifetimeHours *IKEPhase1ProfileIKEKeylifetimeHoursModel `tfsdk:"ike_keylifetime_hours"`
+	Name                  types.String                                `tfsdk:"name"`
+	Namespace             types.String                                `tfsdk:"namespace"`
+	Annotations           types.Map                                   `tfsdk:"annotations"`
+	AuthenticationAlgos   types.List                                  `tfsdk:"authentication_algos"`
+	Description           types.String                                `tfsdk:"description"`
+	DhGroup               types.List                                  `tfsdk:"dh_group"`
+	Disable               types.Bool                                  `tfsdk:"disable"`
+	EncryptionAlgos       types.List                                  `tfsdk:"encryption_algos"`
+	Labels                types.Map                                   `tfsdk:"labels"`
+	Prf                   types.List                                  `tfsdk:"prf"`
+	ID                    types.String                                `tfsdk:"id"`
+	Timeouts              timeouts.Value                              `tfsdk:"timeouts"`
+	IKEKeylifetimeHours   *IKEPhase1ProfileIKEKeylifetimeHoursModel   `tfsdk:"ike_keylifetime_hours"`
 	IKEKeylifetimeMinutes *IKEPhase1ProfileIKEKeylifetimeMinutesModel `tfsdk:"ike_keylifetime_minutes"`
-	ReauthDisabled *IKEPhase1ProfileEmptyModel `tfsdk:"reauth_disabled"`
-	ReauthTimeoutDays *IKEPhase1ProfileReauthTimeoutDaysModel `tfsdk:"reauth_timeout_days"`
-	ReauthTimeoutHours *IKEPhase1ProfileReauthTimeoutHoursModel `tfsdk:"reauth_timeout_hours"`
-	UseDefaultKeylifetime *IKEPhase1ProfileEmptyModel `tfsdk:"use_default_keylifetime"`
+	ReauthDisabled        *IKEPhase1ProfileEmptyModel                 `tfsdk:"reauth_disabled"`
+	ReauthTimeoutDays     *IKEPhase1ProfileReauthTimeoutDaysModel     `tfsdk:"reauth_timeout_days"`
+	ReauthTimeoutHours    *IKEPhase1ProfileReauthTimeoutHoursModel    `tfsdk:"reauth_timeout_hours"`
+	UseDefaultKeylifetime *IKEPhase1ProfileEmptyModel                 `tfsdk:"use_default_keylifetime"`
 }
 
 func (r *IKEPhase1ProfileResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -101,7 +101,7 @@ func (r *IKEPhase1ProfileResource) Schema(ctx context.Context, req resource.Sche
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the IKEPhase1Profile. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -111,7 +111,7 @@ func (r *IKEPhase1ProfileResource) Schema(ctx context.Context, req resource.Sche
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the IKEPhase1Profile will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -121,45 +121,45 @@ func (r *IKEPhase1ProfileResource) Schema(ctx context.Context, req resource.Sche
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"authentication_algos": schema.ListAttribute{
 				MarkdownDescription: "Authentication Algorithms. Choose one or more Authentication Algorithm. Use None option when using the aes-gcm or aes-ccm encryption algorithms. Possible values are `AUTH_ALG_DEFAULT`, `SHA256_HMAC`, `SHA384_HMAC`, `SHA512_HMAC`, `AUTH_ALG_NONE`. Defaults to `AUTH_ALG_DEFAULT`.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"dh_group": schema.ListAttribute{
 				MarkdownDescription: "Diffie Hellman Groups. Choose the acceptable Diffie Hellman (DH) Group or Groups that you are willing to accept as part of this profile. Possible values are `DH_GROUP_DEFAULT`, `DH_GROUP_14`, `DH_GROUP_15`, `DH_GROUP_16`, `DH_GROUP_17`, `DH_GROUP_18`, `DH_GROUP_19`, `DH_GROUP_20`, `DH_GROUP_21`, `DH_GROUP_26`. Defaults to `DH_GROUP_DEFAULT`.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"encryption_algos": schema.ListAttribute{
 				MarkdownDescription: "Configure Encryption Algorithms. Choose one or more encryption algorithms. Possible values are `ENC_ALG_DEFAULT`, `AES128_CBC`, `AES192_CBC`, `AES256_CBC`, `TRIPLE_DES_CBC`, `AES128_GCM`, `AES192_GCM`, `AES256_GCM`. Defaults to `ENC_ALG_DEFAULT`.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"prf": schema.ListAttribute{
 				MarkdownDescription: "PseudoRandomFunction. Select PseudoRandomFunction for IKE SA. Possible values are `PRF_DEFAULT`, `PRFSHA256`, `PRFSHA384`, `PRFSHA512`. Defaults to `PRF_DEFAULT`.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -177,20 +177,18 @@ func (r *IKEPhase1ProfileResource) Schema(ctx context.Context, req resource.Sche
 				Attributes: map[string]schema.Attribute{
 					"duration": schema.Int64Attribute{
 						MarkdownDescription: "Duration.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
-
 			},
 			"ike_keylifetime_minutes": schema.SingleNestedBlock{
 				MarkdownDescription: "Minutes. Set IKE Key Lifetime in minutes",
 				Attributes: map[string]schema.Attribute{
 					"duration": schema.Int64Attribute{
 						MarkdownDescription: "Duration.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
-
 			},
 			"reauth_disabled": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: reauth_disabled, reauth_timeout_days, reauth_timeout_hours] Empty. This can be used for messages where no values are needed",
@@ -200,20 +198,18 @@ func (r *IKEPhase1ProfileResource) Schema(ctx context.Context, req resource.Sche
 				Attributes: map[string]schema.Attribute{
 					"duration": schema.Int64Attribute{
 						MarkdownDescription: "Duration.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
-
 			},
 			"reauth_timeout_hours": schema.SingleNestedBlock{
 				MarkdownDescription: "Hours. Input Hours",
 				Attributes: map[string]schema.Attribute{
 					"duration": schema.Int64Attribute{
 						MarkdownDescription: "Duration.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
-
 			},
 			"use_default_keylifetime": schema.SingleNestedBlock{
 				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -431,7 +427,6 @@ func (r *IKEPhase1ProfileResource) Create(ctx context.Context, req resource.Crea
 		createReq.Spec["use_default_keylifetime"] = use_default_keylifetimeMap
 	}
 
-
 	apiResource, err := r.client.CreateIKEPhase1Profile(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create IKEPhase1Profile: %s", err))
@@ -443,7 +438,7 @@ func (r *IKEPhase1ProfileResource) Create(ctx context.Context, req resource.Crea
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if v, ok := apiResource.Spec["authentication_algos"].([]interface{}); ok && len(v) > 0 {
 		var authentication_algosList []string
 		for _, item := range v {
@@ -554,7 +549,6 @@ func (r *IKEPhase1ProfileResource) Create(ctx context.Context, req resource.Crea
 		data.UseDefaultKeylifetime = &IKEPhase1ProfileEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -644,9 +638,9 @@ func (r *IKEPhase1ProfileResource) Read(ctx context.Context, req resource.ReadRe
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if v, ok := apiResource.Spec["authentication_algos"].([]interface{}); ok && len(v) > 0 {
 		var authentication_algosList []string
@@ -758,7 +752,6 @@ func (r *IKEPhase1ProfileResource) Read(ctx context.Context, req resource.ReadRe
 		data.UseDefaultKeylifetime = &IKEPhase1ProfileEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -883,7 +876,6 @@ func (r *IKEPhase1ProfileResource) Update(ctx context.Context, req resource.Upda
 		use_default_keylifetimeMap := make(map[string]interface{})
 		apiResource.Spec["use_default_keylifetime"] = use_default_keylifetimeMap
 	}
-
 
 	updated, err := r.client.UpdateIKEPhase1Profile(ctx, apiResource)
 	if err != nil {

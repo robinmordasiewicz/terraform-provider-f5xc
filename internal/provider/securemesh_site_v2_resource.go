@@ -57,9 +57,9 @@ type SecuremeshSiteV2ActiveEnhancedFirewallPoliciesModel struct {
 
 // SecuremeshSiteV2ActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel represents enhanced_firewall_policies block
 type SecuremeshSiteV2ActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // SecuremeshSiteV2ActiveForwardProxyPoliciesModel represents active_forward_proxy_policies block
@@ -69,34 +69,34 @@ type SecuremeshSiteV2ActiveForwardProxyPoliciesModel struct {
 
 // SecuremeshSiteV2ActiveForwardProxyPoliciesForwardProxyPoliciesModel represents forward_proxy_policies block
 type SecuremeshSiteV2ActiveForwardProxyPoliciesForwardProxyPoliciesModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // SecuremeshSiteV2AdminUserCredentialsModel represents admin_user_credentials block
 type SecuremeshSiteV2AdminUserCredentialsModel struct {
-	SSHKey types.String `tfsdk:"ssh_key"`
+	SSHKey        types.String                                            `tfsdk:"ssh_key"`
 	AdminPassword *SecuremeshSiteV2AdminUserCredentialsAdminPasswordModel `tfsdk:"admin_password"`
 }
 
 // SecuremeshSiteV2AdminUserCredentialsAdminPasswordModel represents admin_password block
 type SecuremeshSiteV2AdminUserCredentialsAdminPasswordModel struct {
 	BlindfoldSecretInfo *SecuremeshSiteV2AdminUserCredentialsAdminPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *SecuremeshSiteV2AdminUserCredentialsAdminPasswordClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *SecuremeshSiteV2AdminUserCredentialsAdminPasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // SecuremeshSiteV2AdminUserCredentialsAdminPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
 type SecuremeshSiteV2AdminUserCredentialsAdminPasswordBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // SecuremeshSiteV2AdminUserCredentialsAdminPasswordClearSecretInfoModel represents clear_secret_info block
 type SecuremeshSiteV2AdminUserCredentialsAdminPasswordClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // SecuremeshSiteV2AWSModel represents aws block
@@ -111,43 +111,43 @@ type SecuremeshSiteV2AWSNotManagedModel struct {
 
 // SecuremeshSiteV2AWSNotManagedNodeListModel represents node_list block
 type SecuremeshSiteV2AWSNotManagedNodeListModel struct {
-	Hostname types.String `tfsdk:"hostname"`
-	PublicIP types.String `tfsdk:"public_ip"`
-	Type types.String `tfsdk:"type"`
+	Hostname      types.String                                              `tfsdk:"hostname"`
+	PublicIP      types.String                                              `tfsdk:"public_ip"`
+	Type          types.String                                              `tfsdk:"type"`
 	InterfaceList []SecuremeshSiteV2AWSNotManagedNodeListInterfaceListModel `tfsdk:"interface_list"`
 }
 
 // SecuremeshSiteV2AWSNotManagedNodeListInterfaceListModel represents interface_list block
 type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListModel struct {
-	DescriptionSpec types.String `tfsdk:"description_spec"`
-	Mtu types.Int64 `tfsdk:"mtu"`
-	Name types.String `tfsdk:"name"`
-	Priority types.Int64 `tfsdk:"priority"`
-	BondInterface *SecuremeshSiteV2AWSNotManagedNodeListInterfaceListBondInterfaceModel `tfsdk:"bond_interface"`
-	DhcpClient *SecuremeshSiteV2EmptyModel `tfsdk:"dhcp_client"`
-	EthernetInterface *SecuremeshSiteV2AWSNotManagedNodeListInterfaceListEthernetInterfaceModel `tfsdk:"ethernet_interface"`
-	IPV6AutoConfig *SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigModel `tfsdk:"ipv6_auto_config"`
-	Labels *SecuremeshSiteV2EmptyModel `tfsdk:"labels"`
-	Monitor *SecuremeshSiteV2EmptyModel `tfsdk:"monitor"`
-	MonitorDisabled *SecuremeshSiteV2EmptyModel `tfsdk:"monitor_disabled"`
-	NetworkOption *SecuremeshSiteV2AWSNotManagedNodeListInterfaceListNetworkOptionModel `tfsdk:"network_option"`
-	NoIPV4Address *SecuremeshSiteV2EmptyModel `tfsdk:"no_ipv4_address"`
-	NoIPV6Address *SecuremeshSiteV2EmptyModel `tfsdk:"no_ipv6_address"`
-	SiteToSiteConnectivityInterfaceDisabled *SecuremeshSiteV2EmptyModel `tfsdk:"site_to_site_connectivity_interface_disabled"`
-	SiteToSiteConnectivityInterfaceEnabled *SecuremeshSiteV2EmptyModel `tfsdk:"site_to_site_connectivity_interface_enabled"`
-	StaticIP *SecuremeshSiteV2AWSNotManagedNodeListInterfaceListStaticIPModel `tfsdk:"static_ip"`
-	StaticIPV6Address *SecuremeshSiteV2AWSNotManagedNodeListInterfaceListStaticIPV6AddressModel `tfsdk:"static_ipv6_address"`
-	VlanInterface *SecuremeshSiteV2AWSNotManagedNodeListInterfaceListVlanInterfaceModel `tfsdk:"vlan_interface"`
+	DescriptionSpec                         types.String                                                              `tfsdk:"description_spec"`
+	Mtu                                     types.Int64                                                               `tfsdk:"mtu"`
+	Name                                    types.String                                                              `tfsdk:"name"`
+	Priority                                types.Int64                                                               `tfsdk:"priority"`
+	BondInterface                           *SecuremeshSiteV2AWSNotManagedNodeListInterfaceListBondInterfaceModel     `tfsdk:"bond_interface"`
+	DhcpClient                              *SecuremeshSiteV2EmptyModel                                               `tfsdk:"dhcp_client"`
+	EthernetInterface                       *SecuremeshSiteV2AWSNotManagedNodeListInterfaceListEthernetInterfaceModel `tfsdk:"ethernet_interface"`
+	IPV6AutoConfig                          *SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigModel    `tfsdk:"ipv6_auto_config"`
+	Labels                                  *SecuremeshSiteV2EmptyModel                                               `tfsdk:"labels"`
+	Monitor                                 *SecuremeshSiteV2EmptyModel                                               `tfsdk:"monitor"`
+	MonitorDisabled                         *SecuremeshSiteV2EmptyModel                                               `tfsdk:"monitor_disabled"`
+	NetworkOption                           *SecuremeshSiteV2AWSNotManagedNodeListInterfaceListNetworkOptionModel     `tfsdk:"network_option"`
+	NoIPV4Address                           *SecuremeshSiteV2EmptyModel                                               `tfsdk:"no_ipv4_address"`
+	NoIPV6Address                           *SecuremeshSiteV2EmptyModel                                               `tfsdk:"no_ipv6_address"`
+	SiteToSiteConnectivityInterfaceDisabled *SecuremeshSiteV2EmptyModel                                               `tfsdk:"site_to_site_connectivity_interface_disabled"`
+	SiteToSiteConnectivityInterfaceEnabled  *SecuremeshSiteV2EmptyModel                                               `tfsdk:"site_to_site_connectivity_interface_enabled"`
+	StaticIP                                *SecuremeshSiteV2AWSNotManagedNodeListInterfaceListStaticIPModel          `tfsdk:"static_ip"`
+	StaticIPV6Address                       *SecuremeshSiteV2AWSNotManagedNodeListInterfaceListStaticIPV6AddressModel `tfsdk:"static_ipv6_address"`
+	VlanInterface                           *SecuremeshSiteV2AWSNotManagedNodeListInterfaceListVlanInterfaceModel     `tfsdk:"vlan_interface"`
 }
 
 // SecuremeshSiteV2AWSNotManagedNodeListInterfaceListBondInterfaceModel represents bond_interface block
 type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListBondInterfaceModel struct {
-	Devices types.List `tfsdk:"devices"`
-	LinkPollingInterval types.Int64 `tfsdk:"link_polling_interval"`
-	LinkUpDelay types.Int64 `tfsdk:"link_up_delay"`
-	Name types.String `tfsdk:"name"`
-	ActiveBackup *SecuremeshSiteV2EmptyModel `tfsdk:"active_backup"`
-	Lacp *SecuremeshSiteV2AWSNotManagedNodeListInterfaceListBondInterfaceLacpModel `tfsdk:"lacp"`
+	Devices             types.List                                                                `tfsdk:"devices"`
+	LinkPollingInterval types.Int64                                                               `tfsdk:"link_polling_interval"`
+	LinkUpDelay         types.Int64                                                               `tfsdk:"link_up_delay"`
+	Name                types.String                                                              `tfsdk:"name"`
+	ActiveBackup        *SecuremeshSiteV2EmptyModel                                               `tfsdk:"active_backup"`
+	Lacp                *SecuremeshSiteV2AWSNotManagedNodeListInterfaceListBondInterfaceLacpModel `tfsdk:"lacp"`
 }
 
 // SecuremeshSiteV2AWSNotManagedNodeListInterfaceListBondInterfaceLacpModel represents lacp block
@@ -158,26 +158,26 @@ type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListBondInterfaceLacpModel st
 // SecuremeshSiteV2AWSNotManagedNodeListInterfaceListEthernetInterfaceModel represents ethernet_interface block
 type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListEthernetInterfaceModel struct {
 	Device types.String `tfsdk:"device"`
-	Mac types.String `tfsdk:"mac"`
+	Mac    types.String `tfsdk:"mac"`
 }
 
 // SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigModel represents ipv6_auto_config block
 type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigModel struct {
-	Host *SecuremeshSiteV2EmptyModel `tfsdk:"host"`
+	Host   *SecuremeshSiteV2EmptyModel                                                  `tfsdk:"host"`
 	Router *SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigRouterModel `tfsdk:"router"`
 }
 
 // SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigRouterModel represents router block
 type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigRouterModel struct {
-	NetworkPrefix types.String `tfsdk:"network_prefix"`
-	DNSConfig *SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel `tfsdk:"dns_config"`
-	Stateful *SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel `tfsdk:"stateful"`
+	NetworkPrefix types.String                                                                          `tfsdk:"network_prefix"`
+	DNSConfig     *SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel `tfsdk:"dns_config"`
+	Stateful      *SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel  `tfsdk:"stateful"`
 }
 
 // SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel represents dns_config block
 type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel struct {
 	ConfiguredList *SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigConfiguredListModel `tfsdk:"configured_list"`
-	LocalDNS *SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel `tfsdk:"local_dns"`
+	LocalDNS       *SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel       `tfsdk:"local_dns"`
 }
 
 // SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigConfiguredListModel represents configured_list block
@@ -187,30 +187,30 @@ type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSCo
 
 // SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel represents local_dns block
 type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel struct {
-	ConfiguredAddress types.String `tfsdk:"configured_address"`
-	FirstAddress *SecuremeshSiteV2EmptyModel `tfsdk:"first_address"`
-	LastAddress *SecuremeshSiteV2EmptyModel `tfsdk:"last_address"`
+	ConfiguredAddress types.String                `tfsdk:"configured_address"`
+	FirstAddress      *SecuremeshSiteV2EmptyModel `tfsdk:"first_address"`
+	LastAddress       *SecuremeshSiteV2EmptyModel `tfsdk:"last_address"`
 }
 
 // SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel represents stateful block
 type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel struct {
-	AutomaticFromEnd *SecuremeshSiteV2EmptyModel `tfsdk:"automatic_from_end"`
-	AutomaticFromStart *SecuremeshSiteV2EmptyModel `tfsdk:"automatic_from_start"`
-	DhcpNetworks []SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel `tfsdk:"dhcp_networks"`
-	FixedIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"fixed_ip_map"`
-	InterfaceIPMap *SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulInterfaceIPMapModel `tfsdk:"interface_ip_map"`
+	AutomaticFromEnd   *SecuremeshSiteV2EmptyModel                                                                        `tfsdk:"automatic_from_end"`
+	AutomaticFromStart *SecuremeshSiteV2EmptyModel                                                                        `tfsdk:"automatic_from_start"`
+	DhcpNetworks       []SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel  `tfsdk:"dhcp_networks"`
+	FixedIPMap         *SecuremeshSiteV2EmptyModel                                                                        `tfsdk:"fixed_ip_map"`
+	InterfaceIPMap     *SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulInterfaceIPMapModel `tfsdk:"interface_ip_map"`
 }
 
 // SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel represents dhcp_networks block
 type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel struct {
-	NetworkPrefix types.String `tfsdk:"network_prefix"`
-	PoolSettings types.String `tfsdk:"pool_settings"`
-	Pools []SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel `tfsdk:"pools"`
+	NetworkPrefix types.String                                                                                           `tfsdk:"network_prefix"`
+	PoolSettings  types.String                                                                                           `tfsdk:"pool_settings"`
+	Pools         []SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel `tfsdk:"pools"`
 }
 
 // SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel represents pools block
 type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel struct {
-	EndIP types.String `tfsdk:"end_ip"`
+	EndIP   types.String `tfsdk:"end_ip"`
 	StartIP types.String `tfsdk:"start_ip"`
 }
 
@@ -222,7 +222,7 @@ type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigRouterState
 // SecuremeshSiteV2AWSNotManagedNodeListInterfaceListNetworkOptionModel represents network_option block
 type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListNetworkOptionModel struct {
 	SiteLocalInsideNetwork *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_inside_network"`
-	SiteLocalNetwork *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_network"`
+	SiteLocalNetwork       *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_network"`
 }
 
 // SecuremeshSiteV2AWSNotManagedNodeListInterfaceListStaticIPModel represents static_ip block
@@ -234,7 +234,7 @@ type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListStaticIPModel struct {
 // SecuremeshSiteV2AWSNotManagedNodeListInterfaceListStaticIPV6AddressModel represents static_ipv6_address block
 type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListStaticIPV6AddressModel struct {
 	ClusterStaticIP *SecuremeshSiteV2AWSNotManagedNodeListInterfaceListStaticIPV6AddressClusterStaticIPModel `tfsdk:"cluster_static_ip"`
-	NodeStaticIP *SecuremeshSiteV2AWSNotManagedNodeListInterfaceListStaticIPV6AddressNodeStaticIPModel `tfsdk:"node_static_ip"`
+	NodeStaticIP    *SecuremeshSiteV2AWSNotManagedNodeListInterfaceListStaticIPV6AddressNodeStaticIPModel    `tfsdk:"node_static_ip"`
 }
 
 // SecuremeshSiteV2AWSNotManagedNodeListInterfaceListStaticIPV6AddressClusterStaticIPModel represents cluster_static_ip block
@@ -251,7 +251,7 @@ type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListStaticIPV6AddressNodeStat
 // SecuremeshSiteV2AWSNotManagedNodeListInterfaceListVlanInterfaceModel represents vlan_interface block
 type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListVlanInterfaceModel struct {
 	Device types.String `tfsdk:"device"`
-	VlanID types.Int64 `tfsdk:"vlan_id"`
+	VlanID types.Int64  `tfsdk:"vlan_id"`
 }
 
 // SecuremeshSiteV2AzureModel represents azure block
@@ -266,43 +266,43 @@ type SecuremeshSiteV2AzureNotManagedModel struct {
 
 // SecuremeshSiteV2AzureNotManagedNodeListModel represents node_list block
 type SecuremeshSiteV2AzureNotManagedNodeListModel struct {
-	Hostname types.String `tfsdk:"hostname"`
-	PublicIP types.String `tfsdk:"public_ip"`
-	Type types.String `tfsdk:"type"`
+	Hostname      types.String                                                `tfsdk:"hostname"`
+	PublicIP      types.String                                                `tfsdk:"public_ip"`
+	Type          types.String                                                `tfsdk:"type"`
 	InterfaceList []SecuremeshSiteV2AzureNotManagedNodeListInterfaceListModel `tfsdk:"interface_list"`
 }
 
 // SecuremeshSiteV2AzureNotManagedNodeListInterfaceListModel represents interface_list block
 type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListModel struct {
-	DescriptionSpec types.String `tfsdk:"description_spec"`
-	Mtu types.Int64 `tfsdk:"mtu"`
-	Name types.String `tfsdk:"name"`
-	Priority types.Int64 `tfsdk:"priority"`
-	BondInterface *SecuremeshSiteV2AzureNotManagedNodeListInterfaceListBondInterfaceModel `tfsdk:"bond_interface"`
-	DhcpClient *SecuremeshSiteV2EmptyModel `tfsdk:"dhcp_client"`
-	EthernetInterface *SecuremeshSiteV2AzureNotManagedNodeListInterfaceListEthernetInterfaceModel `tfsdk:"ethernet_interface"`
-	IPV6AutoConfig *SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigModel `tfsdk:"ipv6_auto_config"`
-	Labels *SecuremeshSiteV2EmptyModel `tfsdk:"labels"`
-	Monitor *SecuremeshSiteV2EmptyModel `tfsdk:"monitor"`
-	MonitorDisabled *SecuremeshSiteV2EmptyModel `tfsdk:"monitor_disabled"`
-	NetworkOption *SecuremeshSiteV2AzureNotManagedNodeListInterfaceListNetworkOptionModel `tfsdk:"network_option"`
-	NoIPV4Address *SecuremeshSiteV2EmptyModel `tfsdk:"no_ipv4_address"`
-	NoIPV6Address *SecuremeshSiteV2EmptyModel `tfsdk:"no_ipv6_address"`
-	SiteToSiteConnectivityInterfaceDisabled *SecuremeshSiteV2EmptyModel `tfsdk:"site_to_site_connectivity_interface_disabled"`
-	SiteToSiteConnectivityInterfaceEnabled *SecuremeshSiteV2EmptyModel `tfsdk:"site_to_site_connectivity_interface_enabled"`
-	StaticIP *SecuremeshSiteV2AzureNotManagedNodeListInterfaceListStaticIPModel `tfsdk:"static_ip"`
-	StaticIPV6Address *SecuremeshSiteV2AzureNotManagedNodeListInterfaceListStaticIPV6AddressModel `tfsdk:"static_ipv6_address"`
-	VlanInterface *SecuremeshSiteV2AzureNotManagedNodeListInterfaceListVlanInterfaceModel `tfsdk:"vlan_interface"`
+	DescriptionSpec                         types.String                                                                `tfsdk:"description_spec"`
+	Mtu                                     types.Int64                                                                 `tfsdk:"mtu"`
+	Name                                    types.String                                                                `tfsdk:"name"`
+	Priority                                types.Int64                                                                 `tfsdk:"priority"`
+	BondInterface                           *SecuremeshSiteV2AzureNotManagedNodeListInterfaceListBondInterfaceModel     `tfsdk:"bond_interface"`
+	DhcpClient                              *SecuremeshSiteV2EmptyModel                                                 `tfsdk:"dhcp_client"`
+	EthernetInterface                       *SecuremeshSiteV2AzureNotManagedNodeListInterfaceListEthernetInterfaceModel `tfsdk:"ethernet_interface"`
+	IPV6AutoConfig                          *SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigModel    `tfsdk:"ipv6_auto_config"`
+	Labels                                  *SecuremeshSiteV2EmptyModel                                                 `tfsdk:"labels"`
+	Monitor                                 *SecuremeshSiteV2EmptyModel                                                 `tfsdk:"monitor"`
+	MonitorDisabled                         *SecuremeshSiteV2EmptyModel                                                 `tfsdk:"monitor_disabled"`
+	NetworkOption                           *SecuremeshSiteV2AzureNotManagedNodeListInterfaceListNetworkOptionModel     `tfsdk:"network_option"`
+	NoIPV4Address                           *SecuremeshSiteV2EmptyModel                                                 `tfsdk:"no_ipv4_address"`
+	NoIPV6Address                           *SecuremeshSiteV2EmptyModel                                                 `tfsdk:"no_ipv6_address"`
+	SiteToSiteConnectivityInterfaceDisabled *SecuremeshSiteV2EmptyModel                                                 `tfsdk:"site_to_site_connectivity_interface_disabled"`
+	SiteToSiteConnectivityInterfaceEnabled  *SecuremeshSiteV2EmptyModel                                                 `tfsdk:"site_to_site_connectivity_interface_enabled"`
+	StaticIP                                *SecuremeshSiteV2AzureNotManagedNodeListInterfaceListStaticIPModel          `tfsdk:"static_ip"`
+	StaticIPV6Address                       *SecuremeshSiteV2AzureNotManagedNodeListInterfaceListStaticIPV6AddressModel `tfsdk:"static_ipv6_address"`
+	VlanInterface                           *SecuremeshSiteV2AzureNotManagedNodeListInterfaceListVlanInterfaceModel     `tfsdk:"vlan_interface"`
 }
 
 // SecuremeshSiteV2AzureNotManagedNodeListInterfaceListBondInterfaceModel represents bond_interface block
 type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListBondInterfaceModel struct {
-	Devices types.List `tfsdk:"devices"`
-	LinkPollingInterval types.Int64 `tfsdk:"link_polling_interval"`
-	LinkUpDelay types.Int64 `tfsdk:"link_up_delay"`
-	Name types.String `tfsdk:"name"`
-	ActiveBackup *SecuremeshSiteV2EmptyModel `tfsdk:"active_backup"`
-	Lacp *SecuremeshSiteV2AzureNotManagedNodeListInterfaceListBondInterfaceLacpModel `tfsdk:"lacp"`
+	Devices             types.List                                                                  `tfsdk:"devices"`
+	LinkPollingInterval types.Int64                                                                 `tfsdk:"link_polling_interval"`
+	LinkUpDelay         types.Int64                                                                 `tfsdk:"link_up_delay"`
+	Name                types.String                                                                `tfsdk:"name"`
+	ActiveBackup        *SecuremeshSiteV2EmptyModel                                                 `tfsdk:"active_backup"`
+	Lacp                *SecuremeshSiteV2AzureNotManagedNodeListInterfaceListBondInterfaceLacpModel `tfsdk:"lacp"`
 }
 
 // SecuremeshSiteV2AzureNotManagedNodeListInterfaceListBondInterfaceLacpModel represents lacp block
@@ -313,26 +313,26 @@ type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListBondInterfaceLacpModel 
 // SecuremeshSiteV2AzureNotManagedNodeListInterfaceListEthernetInterfaceModel represents ethernet_interface block
 type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListEthernetInterfaceModel struct {
 	Device types.String `tfsdk:"device"`
-	Mac types.String `tfsdk:"mac"`
+	Mac    types.String `tfsdk:"mac"`
 }
 
 // SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigModel represents ipv6_auto_config block
 type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigModel struct {
-	Host *SecuremeshSiteV2EmptyModel `tfsdk:"host"`
+	Host   *SecuremeshSiteV2EmptyModel                                                    `tfsdk:"host"`
 	Router *SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigRouterModel `tfsdk:"router"`
 }
 
 // SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigRouterModel represents router block
 type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigRouterModel struct {
-	NetworkPrefix types.String `tfsdk:"network_prefix"`
-	DNSConfig *SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel `tfsdk:"dns_config"`
-	Stateful *SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel `tfsdk:"stateful"`
+	NetworkPrefix types.String                                                                            `tfsdk:"network_prefix"`
+	DNSConfig     *SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel `tfsdk:"dns_config"`
+	Stateful      *SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel  `tfsdk:"stateful"`
 }
 
 // SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel represents dns_config block
 type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel struct {
 	ConfiguredList *SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigConfiguredListModel `tfsdk:"configured_list"`
-	LocalDNS *SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel `tfsdk:"local_dns"`
+	LocalDNS       *SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel       `tfsdk:"local_dns"`
 }
 
 // SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigConfiguredListModel represents configured_list block
@@ -342,30 +342,30 @@ type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNS
 
 // SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel represents local_dns block
 type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel struct {
-	ConfiguredAddress types.String `tfsdk:"configured_address"`
-	FirstAddress *SecuremeshSiteV2EmptyModel `tfsdk:"first_address"`
-	LastAddress *SecuremeshSiteV2EmptyModel `tfsdk:"last_address"`
+	ConfiguredAddress types.String                `tfsdk:"configured_address"`
+	FirstAddress      *SecuremeshSiteV2EmptyModel `tfsdk:"first_address"`
+	LastAddress       *SecuremeshSiteV2EmptyModel `tfsdk:"last_address"`
 }
 
 // SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel represents stateful block
 type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel struct {
-	AutomaticFromEnd *SecuremeshSiteV2EmptyModel `tfsdk:"automatic_from_end"`
-	AutomaticFromStart *SecuremeshSiteV2EmptyModel `tfsdk:"automatic_from_start"`
-	DhcpNetworks []SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel `tfsdk:"dhcp_networks"`
-	FixedIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"fixed_ip_map"`
-	InterfaceIPMap *SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulInterfaceIPMapModel `tfsdk:"interface_ip_map"`
+	AutomaticFromEnd   *SecuremeshSiteV2EmptyModel                                                                          `tfsdk:"automatic_from_end"`
+	AutomaticFromStart *SecuremeshSiteV2EmptyModel                                                                          `tfsdk:"automatic_from_start"`
+	DhcpNetworks       []SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel  `tfsdk:"dhcp_networks"`
+	FixedIPMap         *SecuremeshSiteV2EmptyModel                                                                          `tfsdk:"fixed_ip_map"`
+	InterfaceIPMap     *SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulInterfaceIPMapModel `tfsdk:"interface_ip_map"`
 }
 
 // SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel represents dhcp_networks block
 type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel struct {
-	NetworkPrefix types.String `tfsdk:"network_prefix"`
-	PoolSettings types.String `tfsdk:"pool_settings"`
-	Pools []SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel `tfsdk:"pools"`
+	NetworkPrefix types.String                                                                                             `tfsdk:"network_prefix"`
+	PoolSettings  types.String                                                                                             `tfsdk:"pool_settings"`
+	Pools         []SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel `tfsdk:"pools"`
 }
 
 // SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel represents pools block
 type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel struct {
-	EndIP types.String `tfsdk:"end_ip"`
+	EndIP   types.String `tfsdk:"end_ip"`
 	StartIP types.String `tfsdk:"start_ip"`
 }
 
@@ -377,7 +377,7 @@ type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigRouterSta
 // SecuremeshSiteV2AzureNotManagedNodeListInterfaceListNetworkOptionModel represents network_option block
 type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListNetworkOptionModel struct {
 	SiteLocalInsideNetwork *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_inside_network"`
-	SiteLocalNetwork *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_network"`
+	SiteLocalNetwork       *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_network"`
 }
 
 // SecuremeshSiteV2AzureNotManagedNodeListInterfaceListStaticIPModel represents static_ip block
@@ -389,7 +389,7 @@ type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListStaticIPModel struct {
 // SecuremeshSiteV2AzureNotManagedNodeListInterfaceListStaticIPV6AddressModel represents static_ipv6_address block
 type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListStaticIPV6AddressModel struct {
 	ClusterStaticIP *SecuremeshSiteV2AzureNotManagedNodeListInterfaceListStaticIPV6AddressClusterStaticIPModel `tfsdk:"cluster_static_ip"`
-	NodeStaticIP *SecuremeshSiteV2AzureNotManagedNodeListInterfaceListStaticIPV6AddressNodeStaticIPModel `tfsdk:"node_static_ip"`
+	NodeStaticIP    *SecuremeshSiteV2AzureNotManagedNodeListInterfaceListStaticIPV6AddressNodeStaticIPModel    `tfsdk:"node_static_ip"`
 }
 
 // SecuremeshSiteV2AzureNotManagedNodeListInterfaceListStaticIPV6AddressClusterStaticIPModel represents cluster_static_ip block
@@ -406,7 +406,7 @@ type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListStaticIPV6AddressNodeSt
 // SecuremeshSiteV2AzureNotManagedNodeListInterfaceListVlanInterfaceModel represents vlan_interface block
 type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListVlanInterfaceModel struct {
 	Device types.String `tfsdk:"device"`
-	VlanID types.Int64 `tfsdk:"vlan_id"`
+	VlanID types.Int64  `tfsdk:"vlan_id"`
 }
 
 // SecuremeshSiteV2BaremetalModel represents baremetal block
@@ -421,43 +421,43 @@ type SecuremeshSiteV2BaremetalNotManagedModel struct {
 
 // SecuremeshSiteV2BaremetalNotManagedNodeListModel represents node_list block
 type SecuremeshSiteV2BaremetalNotManagedNodeListModel struct {
-	Hostname types.String `tfsdk:"hostname"`
-	PublicIP types.String `tfsdk:"public_ip"`
-	Type types.String `tfsdk:"type"`
+	Hostname      types.String                                                    `tfsdk:"hostname"`
+	PublicIP      types.String                                                    `tfsdk:"public_ip"`
+	Type          types.String                                                    `tfsdk:"type"`
 	InterfaceList []SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListModel `tfsdk:"interface_list"`
 }
 
 // SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListModel represents interface_list block
 type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListModel struct {
-	DescriptionSpec types.String `tfsdk:"description_spec"`
-	Mtu types.Int64 `tfsdk:"mtu"`
-	Name types.String `tfsdk:"name"`
-	Priority types.Int64 `tfsdk:"priority"`
-	BondInterface *SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListBondInterfaceModel `tfsdk:"bond_interface"`
-	DhcpClient *SecuremeshSiteV2EmptyModel `tfsdk:"dhcp_client"`
-	EthernetInterface *SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListEthernetInterfaceModel `tfsdk:"ethernet_interface"`
-	IPV6AutoConfig *SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigModel `tfsdk:"ipv6_auto_config"`
-	Labels *SecuremeshSiteV2EmptyModel `tfsdk:"labels"`
-	Monitor *SecuremeshSiteV2EmptyModel `tfsdk:"monitor"`
-	MonitorDisabled *SecuremeshSiteV2EmptyModel `tfsdk:"monitor_disabled"`
-	NetworkOption *SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListNetworkOptionModel `tfsdk:"network_option"`
-	NoIPV4Address *SecuremeshSiteV2EmptyModel `tfsdk:"no_ipv4_address"`
-	NoIPV6Address *SecuremeshSiteV2EmptyModel `tfsdk:"no_ipv6_address"`
-	SiteToSiteConnectivityInterfaceDisabled *SecuremeshSiteV2EmptyModel `tfsdk:"site_to_site_connectivity_interface_disabled"`
-	SiteToSiteConnectivityInterfaceEnabled *SecuremeshSiteV2EmptyModel `tfsdk:"site_to_site_connectivity_interface_enabled"`
-	StaticIP *SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListStaticIPModel `tfsdk:"static_ip"`
-	StaticIPV6Address *SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListStaticIPV6AddressModel `tfsdk:"static_ipv6_address"`
-	VlanInterface *SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListVlanInterfaceModel `tfsdk:"vlan_interface"`
+	DescriptionSpec                         types.String                                                                    `tfsdk:"description_spec"`
+	Mtu                                     types.Int64                                                                     `tfsdk:"mtu"`
+	Name                                    types.String                                                                    `tfsdk:"name"`
+	Priority                                types.Int64                                                                     `tfsdk:"priority"`
+	BondInterface                           *SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListBondInterfaceModel     `tfsdk:"bond_interface"`
+	DhcpClient                              *SecuremeshSiteV2EmptyModel                                                     `tfsdk:"dhcp_client"`
+	EthernetInterface                       *SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListEthernetInterfaceModel `tfsdk:"ethernet_interface"`
+	IPV6AutoConfig                          *SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigModel    `tfsdk:"ipv6_auto_config"`
+	Labels                                  *SecuremeshSiteV2EmptyModel                                                     `tfsdk:"labels"`
+	Monitor                                 *SecuremeshSiteV2EmptyModel                                                     `tfsdk:"monitor"`
+	MonitorDisabled                         *SecuremeshSiteV2EmptyModel                                                     `tfsdk:"monitor_disabled"`
+	NetworkOption                           *SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListNetworkOptionModel     `tfsdk:"network_option"`
+	NoIPV4Address                           *SecuremeshSiteV2EmptyModel                                                     `tfsdk:"no_ipv4_address"`
+	NoIPV6Address                           *SecuremeshSiteV2EmptyModel                                                     `tfsdk:"no_ipv6_address"`
+	SiteToSiteConnectivityInterfaceDisabled *SecuremeshSiteV2EmptyModel                                                     `tfsdk:"site_to_site_connectivity_interface_disabled"`
+	SiteToSiteConnectivityInterfaceEnabled  *SecuremeshSiteV2EmptyModel                                                     `tfsdk:"site_to_site_connectivity_interface_enabled"`
+	StaticIP                                *SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListStaticIPModel          `tfsdk:"static_ip"`
+	StaticIPV6Address                       *SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListStaticIPV6AddressModel `tfsdk:"static_ipv6_address"`
+	VlanInterface                           *SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListVlanInterfaceModel     `tfsdk:"vlan_interface"`
 }
 
 // SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListBondInterfaceModel represents bond_interface block
 type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListBondInterfaceModel struct {
-	Devices types.List `tfsdk:"devices"`
-	LinkPollingInterval types.Int64 `tfsdk:"link_polling_interval"`
-	LinkUpDelay types.Int64 `tfsdk:"link_up_delay"`
-	Name types.String `tfsdk:"name"`
-	ActiveBackup *SecuremeshSiteV2EmptyModel `tfsdk:"active_backup"`
-	Lacp *SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListBondInterfaceLacpModel `tfsdk:"lacp"`
+	Devices             types.List                                                                      `tfsdk:"devices"`
+	LinkPollingInterval types.Int64                                                                     `tfsdk:"link_polling_interval"`
+	LinkUpDelay         types.Int64                                                                     `tfsdk:"link_up_delay"`
+	Name                types.String                                                                    `tfsdk:"name"`
+	ActiveBackup        *SecuremeshSiteV2EmptyModel                                                     `tfsdk:"active_backup"`
+	Lacp                *SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListBondInterfaceLacpModel `tfsdk:"lacp"`
 }
 
 // SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListBondInterfaceLacpModel represents lacp block
@@ -468,26 +468,26 @@ type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListBondInterfaceLacpMo
 // SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListEthernetInterfaceModel represents ethernet_interface block
 type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListEthernetInterfaceModel struct {
 	Device types.String `tfsdk:"device"`
-	Mac types.String `tfsdk:"mac"`
+	Mac    types.String `tfsdk:"mac"`
 }
 
 // SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigModel represents ipv6_auto_config block
 type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigModel struct {
-	Host *SecuremeshSiteV2EmptyModel `tfsdk:"host"`
+	Host   *SecuremeshSiteV2EmptyModel                                                        `tfsdk:"host"`
 	Router *SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigRouterModel `tfsdk:"router"`
 }
 
 // SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigRouterModel represents router block
 type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigRouterModel struct {
-	NetworkPrefix types.String `tfsdk:"network_prefix"`
-	DNSConfig *SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel `tfsdk:"dns_config"`
-	Stateful *SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel `tfsdk:"stateful"`
+	NetworkPrefix types.String                                                                                `tfsdk:"network_prefix"`
+	DNSConfig     *SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel `tfsdk:"dns_config"`
+	Stateful      *SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel  `tfsdk:"stateful"`
 }
 
 // SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel represents dns_config block
 type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel struct {
 	ConfiguredList *SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigConfiguredListModel `tfsdk:"configured_list"`
-	LocalDNS *SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel `tfsdk:"local_dns"`
+	LocalDNS       *SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel       `tfsdk:"local_dns"`
 }
 
 // SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigConfiguredListModel represents configured_list block
@@ -497,30 +497,30 @@ type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigRoute
 
 // SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel represents local_dns block
 type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel struct {
-	ConfiguredAddress types.String `tfsdk:"configured_address"`
-	FirstAddress *SecuremeshSiteV2EmptyModel `tfsdk:"first_address"`
-	LastAddress *SecuremeshSiteV2EmptyModel `tfsdk:"last_address"`
+	ConfiguredAddress types.String                `tfsdk:"configured_address"`
+	FirstAddress      *SecuremeshSiteV2EmptyModel `tfsdk:"first_address"`
+	LastAddress       *SecuremeshSiteV2EmptyModel `tfsdk:"last_address"`
 }
 
 // SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel represents stateful block
 type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel struct {
-	AutomaticFromEnd *SecuremeshSiteV2EmptyModel `tfsdk:"automatic_from_end"`
-	AutomaticFromStart *SecuremeshSiteV2EmptyModel `tfsdk:"automatic_from_start"`
-	DhcpNetworks []SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel `tfsdk:"dhcp_networks"`
-	FixedIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"fixed_ip_map"`
-	InterfaceIPMap *SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulInterfaceIPMapModel `tfsdk:"interface_ip_map"`
+	AutomaticFromEnd   *SecuremeshSiteV2EmptyModel                                                                              `tfsdk:"automatic_from_end"`
+	AutomaticFromStart *SecuremeshSiteV2EmptyModel                                                                              `tfsdk:"automatic_from_start"`
+	DhcpNetworks       []SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel  `tfsdk:"dhcp_networks"`
+	FixedIPMap         *SecuremeshSiteV2EmptyModel                                                                              `tfsdk:"fixed_ip_map"`
+	InterfaceIPMap     *SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulInterfaceIPMapModel `tfsdk:"interface_ip_map"`
 }
 
 // SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel represents dhcp_networks block
 type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel struct {
-	NetworkPrefix types.String `tfsdk:"network_prefix"`
-	PoolSettings types.String `tfsdk:"pool_settings"`
-	Pools []SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel `tfsdk:"pools"`
+	NetworkPrefix types.String                                                                                                 `tfsdk:"network_prefix"`
+	PoolSettings  types.String                                                                                                 `tfsdk:"pool_settings"`
+	Pools         []SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel `tfsdk:"pools"`
 }
 
 // SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel represents pools block
 type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel struct {
-	EndIP types.String `tfsdk:"end_ip"`
+	EndIP   types.String `tfsdk:"end_ip"`
 	StartIP types.String `tfsdk:"start_ip"`
 }
 
@@ -532,7 +532,7 @@ type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigRoute
 // SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListNetworkOptionModel represents network_option block
 type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListNetworkOptionModel struct {
 	SiteLocalInsideNetwork *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_inside_network"`
-	SiteLocalNetwork *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_network"`
+	SiteLocalNetwork       *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_network"`
 }
 
 // SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListStaticIPModel represents static_ip block
@@ -544,7 +544,7 @@ type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListStaticIPModel struc
 // SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListStaticIPV6AddressModel represents static_ipv6_address block
 type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListStaticIPV6AddressModel struct {
 	ClusterStaticIP *SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListStaticIPV6AddressClusterStaticIPModel `tfsdk:"cluster_static_ip"`
-	NodeStaticIP *SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListStaticIPV6AddressNodeStaticIPModel `tfsdk:"node_static_ip"`
+	NodeStaticIP    *SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListStaticIPV6AddressNodeStaticIPModel    `tfsdk:"node_static_ip"`
 }
 
 // SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListStaticIPV6AddressClusterStaticIPModel represents cluster_static_ip block
@@ -561,7 +561,7 @@ type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListStaticIPV6AddressNo
 // SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListVlanInterfaceModel represents vlan_interface block
 type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListVlanInterfaceModel struct {
 	Device types.String `tfsdk:"device"`
-	VlanID types.Int64 `tfsdk:"vlan_id"`
+	VlanID types.Int64  `tfsdk:"vlan_id"`
 }
 
 // SecuremeshSiteV2BlockedServicesModel represents blocked_services block
@@ -571,39 +571,39 @@ type SecuremeshSiteV2BlockedServicesModel struct {
 
 // SecuremeshSiteV2BlockedServicesBlockedSeviceModel represents blocked_sevice block
 type SecuremeshSiteV2BlockedServicesBlockedSeviceModel struct {
-	NetworkType types.String `tfsdk:"network_type"`
-	DNS *SecuremeshSiteV2EmptyModel `tfsdk:"dns"`
-	SSH *SecuremeshSiteV2EmptyModel `tfsdk:"ssh"`
+	NetworkType      types.String                `tfsdk:"network_type"`
+	DNS              *SecuremeshSiteV2EmptyModel `tfsdk:"dns"`
+	SSH              *SecuremeshSiteV2EmptyModel `tfsdk:"ssh"`
 	WebUserInterface *SecuremeshSiteV2EmptyModel `tfsdk:"web_user_interface"`
 }
 
 // SecuremeshSiteV2CustomProxyModel represents custom_proxy block
 type SecuremeshSiteV2CustomProxyModel struct {
-	ProxyIPAddress types.String `tfsdk:"proxy_ip_address"`
-	ProxyPort types.Int64 `tfsdk:"proxy_port"`
-	Username types.String `tfsdk:"username"`
-	DisableReTunnel *SecuremeshSiteV2EmptyModel `tfsdk:"disable_re_tunnel"`
-	EnableReTunnel *SecuremeshSiteV2EmptyModel `tfsdk:"enable_re_tunnel"`
-	Password *SecuremeshSiteV2CustomProxyPasswordModel `tfsdk:"password"`
+	ProxyIPAddress  types.String                              `tfsdk:"proxy_ip_address"`
+	ProxyPort       types.Int64                               `tfsdk:"proxy_port"`
+	Username        types.String                              `tfsdk:"username"`
+	DisableReTunnel *SecuremeshSiteV2EmptyModel               `tfsdk:"disable_re_tunnel"`
+	EnableReTunnel  *SecuremeshSiteV2EmptyModel               `tfsdk:"enable_re_tunnel"`
+	Password        *SecuremeshSiteV2CustomProxyPasswordModel `tfsdk:"password"`
 }
 
 // SecuremeshSiteV2CustomProxyPasswordModel represents password block
 type SecuremeshSiteV2CustomProxyPasswordModel struct {
 	BlindfoldSecretInfo *SecuremeshSiteV2CustomProxyPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *SecuremeshSiteV2CustomProxyPasswordClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *SecuremeshSiteV2CustomProxyPasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // SecuremeshSiteV2CustomProxyPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
 type SecuremeshSiteV2CustomProxyPasswordBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // SecuremeshSiteV2CustomProxyPasswordClearSecretInfoModel represents clear_secret_info block
 type SecuremeshSiteV2CustomProxyPasswordClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // SecuremeshSiteV2CustomProxyBypassModel represents custom_proxy_bypass block
@@ -613,24 +613,24 @@ type SecuremeshSiteV2CustomProxyBypassModel struct {
 
 // SecuremeshSiteV2DcClusterGroupSLIModel represents dc_cluster_group_sli block
 type SecuremeshSiteV2DcClusterGroupSLIModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // SecuremeshSiteV2DcClusterGroupSLOModel represents dc_cluster_group_slo block
 type SecuremeshSiteV2DcClusterGroupSLOModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // SecuremeshSiteV2DNSNTPConfigModel represents dns_ntp_config block
 type SecuremeshSiteV2DNSNTPConfigModel struct {
-	CustomDNS *SecuremeshSiteV2DNSNTPConfigCustomDNSModel `tfsdk:"custom_dns"`
-	CustomNTP *SecuremeshSiteV2DNSNTPConfigCustomNTPModel `tfsdk:"custom_ntp"`
-	F5DNSDefault *SecuremeshSiteV2EmptyModel `tfsdk:"f5_dns_default"`
-	F5NTPDefault *SecuremeshSiteV2EmptyModel `tfsdk:"f5_ntp_default"`
+	CustomDNS    *SecuremeshSiteV2DNSNTPConfigCustomDNSModel `tfsdk:"custom_dns"`
+	CustomNTP    *SecuremeshSiteV2DNSNTPConfigCustomNTPModel `tfsdk:"custom_ntp"`
+	F5DNSDefault *SecuremeshSiteV2EmptyModel                 `tfsdk:"f5_dns_default"`
+	F5NTPDefault *SecuremeshSiteV2EmptyModel                 `tfsdk:"f5_ntp_default"`
 }
 
 // SecuremeshSiteV2DNSNTPConfigCustomDNSModel represents custom_dns block
@@ -655,43 +655,43 @@ type SecuremeshSiteV2EquinixNotManagedModel struct {
 
 // SecuremeshSiteV2EquinixNotManagedNodeListModel represents node_list block
 type SecuremeshSiteV2EquinixNotManagedNodeListModel struct {
-	Hostname types.String `tfsdk:"hostname"`
-	PublicIP types.String `tfsdk:"public_ip"`
-	Type types.String `tfsdk:"type"`
+	Hostname      types.String                                                  `tfsdk:"hostname"`
+	PublicIP      types.String                                                  `tfsdk:"public_ip"`
+	Type          types.String                                                  `tfsdk:"type"`
 	InterfaceList []SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListModel `tfsdk:"interface_list"`
 }
 
 // SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListModel represents interface_list block
 type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListModel struct {
-	DescriptionSpec types.String `tfsdk:"description_spec"`
-	Mtu types.Int64 `tfsdk:"mtu"`
-	Name types.String `tfsdk:"name"`
-	Priority types.Int64 `tfsdk:"priority"`
-	BondInterface *SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListBondInterfaceModel `tfsdk:"bond_interface"`
-	DhcpClient *SecuremeshSiteV2EmptyModel `tfsdk:"dhcp_client"`
-	EthernetInterface *SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListEthernetInterfaceModel `tfsdk:"ethernet_interface"`
-	IPV6AutoConfig *SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigModel `tfsdk:"ipv6_auto_config"`
-	Labels *SecuremeshSiteV2EmptyModel `tfsdk:"labels"`
-	Monitor *SecuremeshSiteV2EmptyModel `tfsdk:"monitor"`
-	MonitorDisabled *SecuremeshSiteV2EmptyModel `tfsdk:"monitor_disabled"`
-	NetworkOption *SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListNetworkOptionModel `tfsdk:"network_option"`
-	NoIPV4Address *SecuremeshSiteV2EmptyModel `tfsdk:"no_ipv4_address"`
-	NoIPV6Address *SecuremeshSiteV2EmptyModel `tfsdk:"no_ipv6_address"`
-	SiteToSiteConnectivityInterfaceDisabled *SecuremeshSiteV2EmptyModel `tfsdk:"site_to_site_connectivity_interface_disabled"`
-	SiteToSiteConnectivityInterfaceEnabled *SecuremeshSiteV2EmptyModel `tfsdk:"site_to_site_connectivity_interface_enabled"`
-	StaticIP *SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListStaticIPModel `tfsdk:"static_ip"`
-	StaticIPV6Address *SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListStaticIPV6AddressModel `tfsdk:"static_ipv6_address"`
-	VlanInterface *SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListVlanInterfaceModel `tfsdk:"vlan_interface"`
+	DescriptionSpec                         types.String                                                                  `tfsdk:"description_spec"`
+	Mtu                                     types.Int64                                                                   `tfsdk:"mtu"`
+	Name                                    types.String                                                                  `tfsdk:"name"`
+	Priority                                types.Int64                                                                   `tfsdk:"priority"`
+	BondInterface                           *SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListBondInterfaceModel     `tfsdk:"bond_interface"`
+	DhcpClient                              *SecuremeshSiteV2EmptyModel                                                   `tfsdk:"dhcp_client"`
+	EthernetInterface                       *SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListEthernetInterfaceModel `tfsdk:"ethernet_interface"`
+	IPV6AutoConfig                          *SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigModel    `tfsdk:"ipv6_auto_config"`
+	Labels                                  *SecuremeshSiteV2EmptyModel                                                   `tfsdk:"labels"`
+	Monitor                                 *SecuremeshSiteV2EmptyModel                                                   `tfsdk:"monitor"`
+	MonitorDisabled                         *SecuremeshSiteV2EmptyModel                                                   `tfsdk:"monitor_disabled"`
+	NetworkOption                           *SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListNetworkOptionModel     `tfsdk:"network_option"`
+	NoIPV4Address                           *SecuremeshSiteV2EmptyModel                                                   `tfsdk:"no_ipv4_address"`
+	NoIPV6Address                           *SecuremeshSiteV2EmptyModel                                                   `tfsdk:"no_ipv6_address"`
+	SiteToSiteConnectivityInterfaceDisabled *SecuremeshSiteV2EmptyModel                                                   `tfsdk:"site_to_site_connectivity_interface_disabled"`
+	SiteToSiteConnectivityInterfaceEnabled  *SecuremeshSiteV2EmptyModel                                                   `tfsdk:"site_to_site_connectivity_interface_enabled"`
+	StaticIP                                *SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListStaticIPModel          `tfsdk:"static_ip"`
+	StaticIPV6Address                       *SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListStaticIPV6AddressModel `tfsdk:"static_ipv6_address"`
+	VlanInterface                           *SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListVlanInterfaceModel     `tfsdk:"vlan_interface"`
 }
 
 // SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListBondInterfaceModel represents bond_interface block
 type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListBondInterfaceModel struct {
-	Devices types.List `tfsdk:"devices"`
-	LinkPollingInterval types.Int64 `tfsdk:"link_polling_interval"`
-	LinkUpDelay types.Int64 `tfsdk:"link_up_delay"`
-	Name types.String `tfsdk:"name"`
-	ActiveBackup *SecuremeshSiteV2EmptyModel `tfsdk:"active_backup"`
-	Lacp *SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListBondInterfaceLacpModel `tfsdk:"lacp"`
+	Devices             types.List                                                                    `tfsdk:"devices"`
+	LinkPollingInterval types.Int64                                                                   `tfsdk:"link_polling_interval"`
+	LinkUpDelay         types.Int64                                                                   `tfsdk:"link_up_delay"`
+	Name                types.String                                                                  `tfsdk:"name"`
+	ActiveBackup        *SecuremeshSiteV2EmptyModel                                                   `tfsdk:"active_backup"`
+	Lacp                *SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListBondInterfaceLacpModel `tfsdk:"lacp"`
 }
 
 // SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListBondInterfaceLacpModel represents lacp block
@@ -702,26 +702,26 @@ type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListBondInterfaceLacpMode
 // SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListEthernetInterfaceModel represents ethernet_interface block
 type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListEthernetInterfaceModel struct {
 	Device types.String `tfsdk:"device"`
-	Mac types.String `tfsdk:"mac"`
+	Mac    types.String `tfsdk:"mac"`
 }
 
 // SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigModel represents ipv6_auto_config block
 type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigModel struct {
-	Host *SecuremeshSiteV2EmptyModel `tfsdk:"host"`
+	Host   *SecuremeshSiteV2EmptyModel                                                      `tfsdk:"host"`
 	Router *SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigRouterModel `tfsdk:"router"`
 }
 
 // SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigRouterModel represents router block
 type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigRouterModel struct {
-	NetworkPrefix types.String `tfsdk:"network_prefix"`
-	DNSConfig *SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel `tfsdk:"dns_config"`
-	Stateful *SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel `tfsdk:"stateful"`
+	NetworkPrefix types.String                                                                              `tfsdk:"network_prefix"`
+	DNSConfig     *SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel `tfsdk:"dns_config"`
+	Stateful      *SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel  `tfsdk:"stateful"`
 }
 
 // SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel represents dns_config block
 type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel struct {
 	ConfiguredList *SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigConfiguredListModel `tfsdk:"configured_list"`
-	LocalDNS *SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel `tfsdk:"local_dns"`
+	LocalDNS       *SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel       `tfsdk:"local_dns"`
 }
 
 // SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigConfiguredListModel represents configured_list block
@@ -731,30 +731,30 @@ type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigRouterD
 
 // SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel represents local_dns block
 type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel struct {
-	ConfiguredAddress types.String `tfsdk:"configured_address"`
-	FirstAddress *SecuremeshSiteV2EmptyModel `tfsdk:"first_address"`
-	LastAddress *SecuremeshSiteV2EmptyModel `tfsdk:"last_address"`
+	ConfiguredAddress types.String                `tfsdk:"configured_address"`
+	FirstAddress      *SecuremeshSiteV2EmptyModel `tfsdk:"first_address"`
+	LastAddress       *SecuremeshSiteV2EmptyModel `tfsdk:"last_address"`
 }
 
 // SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel represents stateful block
 type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel struct {
-	AutomaticFromEnd *SecuremeshSiteV2EmptyModel `tfsdk:"automatic_from_end"`
-	AutomaticFromStart *SecuremeshSiteV2EmptyModel `tfsdk:"automatic_from_start"`
-	DhcpNetworks []SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel `tfsdk:"dhcp_networks"`
-	FixedIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"fixed_ip_map"`
-	InterfaceIPMap *SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulInterfaceIPMapModel `tfsdk:"interface_ip_map"`
+	AutomaticFromEnd   *SecuremeshSiteV2EmptyModel                                                                            `tfsdk:"automatic_from_end"`
+	AutomaticFromStart *SecuremeshSiteV2EmptyModel                                                                            `tfsdk:"automatic_from_start"`
+	DhcpNetworks       []SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel  `tfsdk:"dhcp_networks"`
+	FixedIPMap         *SecuremeshSiteV2EmptyModel                                                                            `tfsdk:"fixed_ip_map"`
+	InterfaceIPMap     *SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulInterfaceIPMapModel `tfsdk:"interface_ip_map"`
 }
 
 // SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel represents dhcp_networks block
 type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel struct {
-	NetworkPrefix types.String `tfsdk:"network_prefix"`
-	PoolSettings types.String `tfsdk:"pool_settings"`
-	Pools []SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel `tfsdk:"pools"`
+	NetworkPrefix types.String                                                                                               `tfsdk:"network_prefix"`
+	PoolSettings  types.String                                                                                               `tfsdk:"pool_settings"`
+	Pools         []SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel `tfsdk:"pools"`
 }
 
 // SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel represents pools block
 type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel struct {
-	EndIP types.String `tfsdk:"end_ip"`
+	EndIP   types.String `tfsdk:"end_ip"`
 	StartIP types.String `tfsdk:"start_ip"`
 }
 
@@ -766,7 +766,7 @@ type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigRouterS
 // SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListNetworkOptionModel represents network_option block
 type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListNetworkOptionModel struct {
 	SiteLocalInsideNetwork *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_inside_network"`
-	SiteLocalNetwork *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_network"`
+	SiteLocalNetwork       *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_network"`
 }
 
 // SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListStaticIPModel represents static_ip block
@@ -778,7 +778,7 @@ type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListStaticIPModel struct 
 // SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListStaticIPV6AddressModel represents static_ipv6_address block
 type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListStaticIPV6AddressModel struct {
 	ClusterStaticIP *SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListStaticIPV6AddressClusterStaticIPModel `tfsdk:"cluster_static_ip"`
-	NodeStaticIP *SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListStaticIPV6AddressNodeStaticIPModel `tfsdk:"node_static_ip"`
+	NodeStaticIP    *SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListStaticIPV6AddressNodeStaticIPModel    `tfsdk:"node_static_ip"`
 }
 
 // SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListStaticIPV6AddressClusterStaticIPModel represents cluster_static_ip block
@@ -795,7 +795,7 @@ type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListStaticIPV6AddressNode
 // SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListVlanInterfaceModel represents vlan_interface block
 type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListVlanInterfaceModel struct {
 	Device types.String `tfsdk:"device"`
-	VlanID types.Int64 `tfsdk:"vlan_id"`
+	VlanID types.Int64  `tfsdk:"vlan_id"`
 }
 
 // SecuremeshSiteV2GCPModel represents gcp block
@@ -810,43 +810,43 @@ type SecuremeshSiteV2GCPNotManagedModel struct {
 
 // SecuremeshSiteV2GCPNotManagedNodeListModel represents node_list block
 type SecuremeshSiteV2GCPNotManagedNodeListModel struct {
-	Hostname types.String `tfsdk:"hostname"`
-	PublicIP types.String `tfsdk:"public_ip"`
-	Type types.String `tfsdk:"type"`
+	Hostname      types.String                                              `tfsdk:"hostname"`
+	PublicIP      types.String                                              `tfsdk:"public_ip"`
+	Type          types.String                                              `tfsdk:"type"`
 	InterfaceList []SecuremeshSiteV2GCPNotManagedNodeListInterfaceListModel `tfsdk:"interface_list"`
 }
 
 // SecuremeshSiteV2GCPNotManagedNodeListInterfaceListModel represents interface_list block
 type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListModel struct {
-	DescriptionSpec types.String `tfsdk:"description_spec"`
-	Mtu types.Int64 `tfsdk:"mtu"`
-	Name types.String `tfsdk:"name"`
-	Priority types.Int64 `tfsdk:"priority"`
-	BondInterface *SecuremeshSiteV2GCPNotManagedNodeListInterfaceListBondInterfaceModel `tfsdk:"bond_interface"`
-	DhcpClient *SecuremeshSiteV2EmptyModel `tfsdk:"dhcp_client"`
-	EthernetInterface *SecuremeshSiteV2GCPNotManagedNodeListInterfaceListEthernetInterfaceModel `tfsdk:"ethernet_interface"`
-	IPV6AutoConfig *SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigModel `tfsdk:"ipv6_auto_config"`
-	Labels *SecuremeshSiteV2EmptyModel `tfsdk:"labels"`
-	Monitor *SecuremeshSiteV2EmptyModel `tfsdk:"monitor"`
-	MonitorDisabled *SecuremeshSiteV2EmptyModel `tfsdk:"monitor_disabled"`
-	NetworkOption *SecuremeshSiteV2GCPNotManagedNodeListInterfaceListNetworkOptionModel `tfsdk:"network_option"`
-	NoIPV4Address *SecuremeshSiteV2EmptyModel `tfsdk:"no_ipv4_address"`
-	NoIPV6Address *SecuremeshSiteV2EmptyModel `tfsdk:"no_ipv6_address"`
-	SiteToSiteConnectivityInterfaceDisabled *SecuremeshSiteV2EmptyModel `tfsdk:"site_to_site_connectivity_interface_disabled"`
-	SiteToSiteConnectivityInterfaceEnabled *SecuremeshSiteV2EmptyModel `tfsdk:"site_to_site_connectivity_interface_enabled"`
-	StaticIP *SecuremeshSiteV2GCPNotManagedNodeListInterfaceListStaticIPModel `tfsdk:"static_ip"`
-	StaticIPV6Address *SecuremeshSiteV2GCPNotManagedNodeListInterfaceListStaticIPV6AddressModel `tfsdk:"static_ipv6_address"`
-	VlanInterface *SecuremeshSiteV2GCPNotManagedNodeListInterfaceListVlanInterfaceModel `tfsdk:"vlan_interface"`
+	DescriptionSpec                         types.String                                                              `tfsdk:"description_spec"`
+	Mtu                                     types.Int64                                                               `tfsdk:"mtu"`
+	Name                                    types.String                                                              `tfsdk:"name"`
+	Priority                                types.Int64                                                               `tfsdk:"priority"`
+	BondInterface                           *SecuremeshSiteV2GCPNotManagedNodeListInterfaceListBondInterfaceModel     `tfsdk:"bond_interface"`
+	DhcpClient                              *SecuremeshSiteV2EmptyModel                                               `tfsdk:"dhcp_client"`
+	EthernetInterface                       *SecuremeshSiteV2GCPNotManagedNodeListInterfaceListEthernetInterfaceModel `tfsdk:"ethernet_interface"`
+	IPV6AutoConfig                          *SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigModel    `tfsdk:"ipv6_auto_config"`
+	Labels                                  *SecuremeshSiteV2EmptyModel                                               `tfsdk:"labels"`
+	Monitor                                 *SecuremeshSiteV2EmptyModel                                               `tfsdk:"monitor"`
+	MonitorDisabled                         *SecuremeshSiteV2EmptyModel                                               `tfsdk:"monitor_disabled"`
+	NetworkOption                           *SecuremeshSiteV2GCPNotManagedNodeListInterfaceListNetworkOptionModel     `tfsdk:"network_option"`
+	NoIPV4Address                           *SecuremeshSiteV2EmptyModel                                               `tfsdk:"no_ipv4_address"`
+	NoIPV6Address                           *SecuremeshSiteV2EmptyModel                                               `tfsdk:"no_ipv6_address"`
+	SiteToSiteConnectivityInterfaceDisabled *SecuremeshSiteV2EmptyModel                                               `tfsdk:"site_to_site_connectivity_interface_disabled"`
+	SiteToSiteConnectivityInterfaceEnabled  *SecuremeshSiteV2EmptyModel                                               `tfsdk:"site_to_site_connectivity_interface_enabled"`
+	StaticIP                                *SecuremeshSiteV2GCPNotManagedNodeListInterfaceListStaticIPModel          `tfsdk:"static_ip"`
+	StaticIPV6Address                       *SecuremeshSiteV2GCPNotManagedNodeListInterfaceListStaticIPV6AddressModel `tfsdk:"static_ipv6_address"`
+	VlanInterface                           *SecuremeshSiteV2GCPNotManagedNodeListInterfaceListVlanInterfaceModel     `tfsdk:"vlan_interface"`
 }
 
 // SecuremeshSiteV2GCPNotManagedNodeListInterfaceListBondInterfaceModel represents bond_interface block
 type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListBondInterfaceModel struct {
-	Devices types.List `tfsdk:"devices"`
-	LinkPollingInterval types.Int64 `tfsdk:"link_polling_interval"`
-	LinkUpDelay types.Int64 `tfsdk:"link_up_delay"`
-	Name types.String `tfsdk:"name"`
-	ActiveBackup *SecuremeshSiteV2EmptyModel `tfsdk:"active_backup"`
-	Lacp *SecuremeshSiteV2GCPNotManagedNodeListInterfaceListBondInterfaceLacpModel `tfsdk:"lacp"`
+	Devices             types.List                                                                `tfsdk:"devices"`
+	LinkPollingInterval types.Int64                                                               `tfsdk:"link_polling_interval"`
+	LinkUpDelay         types.Int64                                                               `tfsdk:"link_up_delay"`
+	Name                types.String                                                              `tfsdk:"name"`
+	ActiveBackup        *SecuremeshSiteV2EmptyModel                                               `tfsdk:"active_backup"`
+	Lacp                *SecuremeshSiteV2GCPNotManagedNodeListInterfaceListBondInterfaceLacpModel `tfsdk:"lacp"`
 }
 
 // SecuremeshSiteV2GCPNotManagedNodeListInterfaceListBondInterfaceLacpModel represents lacp block
@@ -857,26 +857,26 @@ type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListBondInterfaceLacpModel st
 // SecuremeshSiteV2GCPNotManagedNodeListInterfaceListEthernetInterfaceModel represents ethernet_interface block
 type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListEthernetInterfaceModel struct {
 	Device types.String `tfsdk:"device"`
-	Mac types.String `tfsdk:"mac"`
+	Mac    types.String `tfsdk:"mac"`
 }
 
 // SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigModel represents ipv6_auto_config block
 type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigModel struct {
-	Host *SecuremeshSiteV2EmptyModel `tfsdk:"host"`
+	Host   *SecuremeshSiteV2EmptyModel                                                  `tfsdk:"host"`
 	Router *SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigRouterModel `tfsdk:"router"`
 }
 
 // SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigRouterModel represents router block
 type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigRouterModel struct {
-	NetworkPrefix types.String `tfsdk:"network_prefix"`
-	DNSConfig *SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel `tfsdk:"dns_config"`
-	Stateful *SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel `tfsdk:"stateful"`
+	NetworkPrefix types.String                                                                          `tfsdk:"network_prefix"`
+	DNSConfig     *SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel `tfsdk:"dns_config"`
+	Stateful      *SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel  `tfsdk:"stateful"`
 }
 
 // SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel represents dns_config block
 type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel struct {
 	ConfiguredList *SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigConfiguredListModel `tfsdk:"configured_list"`
-	LocalDNS *SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel `tfsdk:"local_dns"`
+	LocalDNS       *SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel       `tfsdk:"local_dns"`
 }
 
 // SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigConfiguredListModel represents configured_list block
@@ -886,30 +886,30 @@ type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSCo
 
 // SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel represents local_dns block
 type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel struct {
-	ConfiguredAddress types.String `tfsdk:"configured_address"`
-	FirstAddress *SecuremeshSiteV2EmptyModel `tfsdk:"first_address"`
-	LastAddress *SecuremeshSiteV2EmptyModel `tfsdk:"last_address"`
+	ConfiguredAddress types.String                `tfsdk:"configured_address"`
+	FirstAddress      *SecuremeshSiteV2EmptyModel `tfsdk:"first_address"`
+	LastAddress       *SecuremeshSiteV2EmptyModel `tfsdk:"last_address"`
 }
 
 // SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel represents stateful block
 type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel struct {
-	AutomaticFromEnd *SecuremeshSiteV2EmptyModel `tfsdk:"automatic_from_end"`
-	AutomaticFromStart *SecuremeshSiteV2EmptyModel `tfsdk:"automatic_from_start"`
-	DhcpNetworks []SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel `tfsdk:"dhcp_networks"`
-	FixedIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"fixed_ip_map"`
-	InterfaceIPMap *SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulInterfaceIPMapModel `tfsdk:"interface_ip_map"`
+	AutomaticFromEnd   *SecuremeshSiteV2EmptyModel                                                                        `tfsdk:"automatic_from_end"`
+	AutomaticFromStart *SecuremeshSiteV2EmptyModel                                                                        `tfsdk:"automatic_from_start"`
+	DhcpNetworks       []SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel  `tfsdk:"dhcp_networks"`
+	FixedIPMap         *SecuremeshSiteV2EmptyModel                                                                        `tfsdk:"fixed_ip_map"`
+	InterfaceIPMap     *SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulInterfaceIPMapModel `tfsdk:"interface_ip_map"`
 }
 
 // SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel represents dhcp_networks block
 type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel struct {
-	NetworkPrefix types.String `tfsdk:"network_prefix"`
-	PoolSettings types.String `tfsdk:"pool_settings"`
-	Pools []SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel `tfsdk:"pools"`
+	NetworkPrefix types.String                                                                                           `tfsdk:"network_prefix"`
+	PoolSettings  types.String                                                                                           `tfsdk:"pool_settings"`
+	Pools         []SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel `tfsdk:"pools"`
 }
 
 // SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel represents pools block
 type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel struct {
-	EndIP types.String `tfsdk:"end_ip"`
+	EndIP   types.String `tfsdk:"end_ip"`
 	StartIP types.String `tfsdk:"start_ip"`
 }
 
@@ -921,7 +921,7 @@ type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigRouterState
 // SecuremeshSiteV2GCPNotManagedNodeListInterfaceListNetworkOptionModel represents network_option block
 type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListNetworkOptionModel struct {
 	SiteLocalInsideNetwork *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_inside_network"`
-	SiteLocalNetwork *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_network"`
+	SiteLocalNetwork       *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_network"`
 }
 
 // SecuremeshSiteV2GCPNotManagedNodeListInterfaceListStaticIPModel represents static_ip block
@@ -933,7 +933,7 @@ type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListStaticIPModel struct {
 // SecuremeshSiteV2GCPNotManagedNodeListInterfaceListStaticIPV6AddressModel represents static_ipv6_address block
 type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListStaticIPV6AddressModel struct {
 	ClusterStaticIP *SecuremeshSiteV2GCPNotManagedNodeListInterfaceListStaticIPV6AddressClusterStaticIPModel `tfsdk:"cluster_static_ip"`
-	NodeStaticIP *SecuremeshSiteV2GCPNotManagedNodeListInterfaceListStaticIPV6AddressNodeStaticIPModel `tfsdk:"node_static_ip"`
+	NodeStaticIP    *SecuremeshSiteV2GCPNotManagedNodeListInterfaceListStaticIPV6AddressNodeStaticIPModel    `tfsdk:"node_static_ip"`
 }
 
 // SecuremeshSiteV2GCPNotManagedNodeListInterfaceListStaticIPV6AddressClusterStaticIPModel represents cluster_static_ip block
@@ -950,7 +950,7 @@ type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListStaticIPV6AddressNodeStat
 // SecuremeshSiteV2GCPNotManagedNodeListInterfaceListVlanInterfaceModel represents vlan_interface block
 type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListVlanInterfaceModel struct {
 	Device types.String `tfsdk:"device"`
-	VlanID types.Int64 `tfsdk:"vlan_id"`
+	VlanID types.Int64  `tfsdk:"vlan_id"`
 }
 
 // SecuremeshSiteV2KVMModel represents kvm block
@@ -965,43 +965,43 @@ type SecuremeshSiteV2KVMNotManagedModel struct {
 
 // SecuremeshSiteV2KVMNotManagedNodeListModel represents node_list block
 type SecuremeshSiteV2KVMNotManagedNodeListModel struct {
-	Hostname types.String `tfsdk:"hostname"`
-	PublicIP types.String `tfsdk:"public_ip"`
-	Type types.String `tfsdk:"type"`
+	Hostname      types.String                                              `tfsdk:"hostname"`
+	PublicIP      types.String                                              `tfsdk:"public_ip"`
+	Type          types.String                                              `tfsdk:"type"`
 	InterfaceList []SecuremeshSiteV2KVMNotManagedNodeListInterfaceListModel `tfsdk:"interface_list"`
 }
 
 // SecuremeshSiteV2KVMNotManagedNodeListInterfaceListModel represents interface_list block
 type SecuremeshSiteV2KVMNotManagedNodeListInterfaceListModel struct {
-	DescriptionSpec types.String `tfsdk:"description_spec"`
-	Mtu types.Int64 `tfsdk:"mtu"`
-	Name types.String `tfsdk:"name"`
-	Priority types.Int64 `tfsdk:"priority"`
-	BondInterface *SecuremeshSiteV2KVMNotManagedNodeListInterfaceListBondInterfaceModel `tfsdk:"bond_interface"`
-	DhcpClient *SecuremeshSiteV2EmptyModel `tfsdk:"dhcp_client"`
-	EthernetInterface *SecuremeshSiteV2KVMNotManagedNodeListInterfaceListEthernetInterfaceModel `tfsdk:"ethernet_interface"`
-	IPV6AutoConfig *SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigModel `tfsdk:"ipv6_auto_config"`
-	Labels *SecuremeshSiteV2EmptyModel `tfsdk:"labels"`
-	Monitor *SecuremeshSiteV2EmptyModel `tfsdk:"monitor"`
-	MonitorDisabled *SecuremeshSiteV2EmptyModel `tfsdk:"monitor_disabled"`
-	NetworkOption *SecuremeshSiteV2KVMNotManagedNodeListInterfaceListNetworkOptionModel `tfsdk:"network_option"`
-	NoIPV4Address *SecuremeshSiteV2EmptyModel `tfsdk:"no_ipv4_address"`
-	NoIPV6Address *SecuremeshSiteV2EmptyModel `tfsdk:"no_ipv6_address"`
-	SiteToSiteConnectivityInterfaceDisabled *SecuremeshSiteV2EmptyModel `tfsdk:"site_to_site_connectivity_interface_disabled"`
-	SiteToSiteConnectivityInterfaceEnabled *SecuremeshSiteV2EmptyModel `tfsdk:"site_to_site_connectivity_interface_enabled"`
-	StaticIP *SecuremeshSiteV2KVMNotManagedNodeListInterfaceListStaticIPModel `tfsdk:"static_ip"`
-	StaticIPV6Address *SecuremeshSiteV2KVMNotManagedNodeListInterfaceListStaticIPV6AddressModel `tfsdk:"static_ipv6_address"`
-	VlanInterface *SecuremeshSiteV2KVMNotManagedNodeListInterfaceListVlanInterfaceModel `tfsdk:"vlan_interface"`
+	DescriptionSpec                         types.String                                                              `tfsdk:"description_spec"`
+	Mtu                                     types.Int64                                                               `tfsdk:"mtu"`
+	Name                                    types.String                                                              `tfsdk:"name"`
+	Priority                                types.Int64                                                               `tfsdk:"priority"`
+	BondInterface                           *SecuremeshSiteV2KVMNotManagedNodeListInterfaceListBondInterfaceModel     `tfsdk:"bond_interface"`
+	DhcpClient                              *SecuremeshSiteV2EmptyModel                                               `tfsdk:"dhcp_client"`
+	EthernetInterface                       *SecuremeshSiteV2KVMNotManagedNodeListInterfaceListEthernetInterfaceModel `tfsdk:"ethernet_interface"`
+	IPV6AutoConfig                          *SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigModel    `tfsdk:"ipv6_auto_config"`
+	Labels                                  *SecuremeshSiteV2EmptyModel                                               `tfsdk:"labels"`
+	Monitor                                 *SecuremeshSiteV2EmptyModel                                               `tfsdk:"monitor"`
+	MonitorDisabled                         *SecuremeshSiteV2EmptyModel                                               `tfsdk:"monitor_disabled"`
+	NetworkOption                           *SecuremeshSiteV2KVMNotManagedNodeListInterfaceListNetworkOptionModel     `tfsdk:"network_option"`
+	NoIPV4Address                           *SecuremeshSiteV2EmptyModel                                               `tfsdk:"no_ipv4_address"`
+	NoIPV6Address                           *SecuremeshSiteV2EmptyModel                                               `tfsdk:"no_ipv6_address"`
+	SiteToSiteConnectivityInterfaceDisabled *SecuremeshSiteV2EmptyModel                                               `tfsdk:"site_to_site_connectivity_interface_disabled"`
+	SiteToSiteConnectivityInterfaceEnabled  *SecuremeshSiteV2EmptyModel                                               `tfsdk:"site_to_site_connectivity_interface_enabled"`
+	StaticIP                                *SecuremeshSiteV2KVMNotManagedNodeListInterfaceListStaticIPModel          `tfsdk:"static_ip"`
+	StaticIPV6Address                       *SecuremeshSiteV2KVMNotManagedNodeListInterfaceListStaticIPV6AddressModel `tfsdk:"static_ipv6_address"`
+	VlanInterface                           *SecuremeshSiteV2KVMNotManagedNodeListInterfaceListVlanInterfaceModel     `tfsdk:"vlan_interface"`
 }
 
 // SecuremeshSiteV2KVMNotManagedNodeListInterfaceListBondInterfaceModel represents bond_interface block
 type SecuremeshSiteV2KVMNotManagedNodeListInterfaceListBondInterfaceModel struct {
-	Devices types.List `tfsdk:"devices"`
-	LinkPollingInterval types.Int64 `tfsdk:"link_polling_interval"`
-	LinkUpDelay types.Int64 `tfsdk:"link_up_delay"`
-	Name types.String `tfsdk:"name"`
-	ActiveBackup *SecuremeshSiteV2EmptyModel `tfsdk:"active_backup"`
-	Lacp *SecuremeshSiteV2KVMNotManagedNodeListInterfaceListBondInterfaceLacpModel `tfsdk:"lacp"`
+	Devices             types.List                                                                `tfsdk:"devices"`
+	LinkPollingInterval types.Int64                                                               `tfsdk:"link_polling_interval"`
+	LinkUpDelay         types.Int64                                                               `tfsdk:"link_up_delay"`
+	Name                types.String                                                              `tfsdk:"name"`
+	ActiveBackup        *SecuremeshSiteV2EmptyModel                                               `tfsdk:"active_backup"`
+	Lacp                *SecuremeshSiteV2KVMNotManagedNodeListInterfaceListBondInterfaceLacpModel `tfsdk:"lacp"`
 }
 
 // SecuremeshSiteV2KVMNotManagedNodeListInterfaceListBondInterfaceLacpModel represents lacp block
@@ -1012,26 +1012,26 @@ type SecuremeshSiteV2KVMNotManagedNodeListInterfaceListBondInterfaceLacpModel st
 // SecuremeshSiteV2KVMNotManagedNodeListInterfaceListEthernetInterfaceModel represents ethernet_interface block
 type SecuremeshSiteV2KVMNotManagedNodeListInterfaceListEthernetInterfaceModel struct {
 	Device types.String `tfsdk:"device"`
-	Mac types.String `tfsdk:"mac"`
+	Mac    types.String `tfsdk:"mac"`
 }
 
 // SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigModel represents ipv6_auto_config block
 type SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigModel struct {
-	Host *SecuremeshSiteV2EmptyModel `tfsdk:"host"`
+	Host   *SecuremeshSiteV2EmptyModel                                                  `tfsdk:"host"`
 	Router *SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigRouterModel `tfsdk:"router"`
 }
 
 // SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigRouterModel represents router block
 type SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigRouterModel struct {
-	NetworkPrefix types.String `tfsdk:"network_prefix"`
-	DNSConfig *SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel `tfsdk:"dns_config"`
-	Stateful *SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel `tfsdk:"stateful"`
+	NetworkPrefix types.String                                                                          `tfsdk:"network_prefix"`
+	DNSConfig     *SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel `tfsdk:"dns_config"`
+	Stateful      *SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel  `tfsdk:"stateful"`
 }
 
 // SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel represents dns_config block
 type SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel struct {
 	ConfiguredList *SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigConfiguredListModel `tfsdk:"configured_list"`
-	LocalDNS *SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel `tfsdk:"local_dns"`
+	LocalDNS       *SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel       `tfsdk:"local_dns"`
 }
 
 // SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigConfiguredListModel represents configured_list block
@@ -1041,30 +1041,30 @@ type SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSCo
 
 // SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel represents local_dns block
 type SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel struct {
-	ConfiguredAddress types.String `tfsdk:"configured_address"`
-	FirstAddress *SecuremeshSiteV2EmptyModel `tfsdk:"first_address"`
-	LastAddress *SecuremeshSiteV2EmptyModel `tfsdk:"last_address"`
+	ConfiguredAddress types.String                `tfsdk:"configured_address"`
+	FirstAddress      *SecuremeshSiteV2EmptyModel `tfsdk:"first_address"`
+	LastAddress       *SecuremeshSiteV2EmptyModel `tfsdk:"last_address"`
 }
 
 // SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel represents stateful block
 type SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel struct {
-	AutomaticFromEnd *SecuremeshSiteV2EmptyModel `tfsdk:"automatic_from_end"`
-	AutomaticFromStart *SecuremeshSiteV2EmptyModel `tfsdk:"automatic_from_start"`
-	DhcpNetworks []SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel `tfsdk:"dhcp_networks"`
-	FixedIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"fixed_ip_map"`
-	InterfaceIPMap *SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulInterfaceIPMapModel `tfsdk:"interface_ip_map"`
+	AutomaticFromEnd   *SecuremeshSiteV2EmptyModel                                                                        `tfsdk:"automatic_from_end"`
+	AutomaticFromStart *SecuremeshSiteV2EmptyModel                                                                        `tfsdk:"automatic_from_start"`
+	DhcpNetworks       []SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel  `tfsdk:"dhcp_networks"`
+	FixedIPMap         *SecuremeshSiteV2EmptyModel                                                                        `tfsdk:"fixed_ip_map"`
+	InterfaceIPMap     *SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulInterfaceIPMapModel `tfsdk:"interface_ip_map"`
 }
 
 // SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel represents dhcp_networks block
 type SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel struct {
-	NetworkPrefix types.String `tfsdk:"network_prefix"`
-	PoolSettings types.String `tfsdk:"pool_settings"`
-	Pools []SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel `tfsdk:"pools"`
+	NetworkPrefix types.String                                                                                           `tfsdk:"network_prefix"`
+	PoolSettings  types.String                                                                                           `tfsdk:"pool_settings"`
+	Pools         []SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel `tfsdk:"pools"`
 }
 
 // SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel represents pools block
 type SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel struct {
-	EndIP types.String `tfsdk:"end_ip"`
+	EndIP   types.String `tfsdk:"end_ip"`
 	StartIP types.String `tfsdk:"start_ip"`
 }
 
@@ -1076,7 +1076,7 @@ type SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigRouterState
 // SecuremeshSiteV2KVMNotManagedNodeListInterfaceListNetworkOptionModel represents network_option block
 type SecuremeshSiteV2KVMNotManagedNodeListInterfaceListNetworkOptionModel struct {
 	SiteLocalInsideNetwork *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_inside_network"`
-	SiteLocalNetwork *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_network"`
+	SiteLocalNetwork       *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_network"`
 }
 
 // SecuremeshSiteV2KVMNotManagedNodeListInterfaceListStaticIPModel represents static_ip block
@@ -1088,7 +1088,7 @@ type SecuremeshSiteV2KVMNotManagedNodeListInterfaceListStaticIPModel struct {
 // SecuremeshSiteV2KVMNotManagedNodeListInterfaceListStaticIPV6AddressModel represents static_ipv6_address block
 type SecuremeshSiteV2KVMNotManagedNodeListInterfaceListStaticIPV6AddressModel struct {
 	ClusterStaticIP *SecuremeshSiteV2KVMNotManagedNodeListInterfaceListStaticIPV6AddressClusterStaticIPModel `tfsdk:"cluster_static_ip"`
-	NodeStaticIP *SecuremeshSiteV2KVMNotManagedNodeListInterfaceListStaticIPV6AddressNodeStaticIPModel `tfsdk:"node_static_ip"`
+	NodeStaticIP    *SecuremeshSiteV2KVMNotManagedNodeListInterfaceListStaticIPV6AddressNodeStaticIPModel    `tfsdk:"node_static_ip"`
 }
 
 // SecuremeshSiteV2KVMNotManagedNodeListInterfaceListStaticIPV6AddressClusterStaticIPModel represents cluster_static_ip block
@@ -1105,7 +1105,7 @@ type SecuremeshSiteV2KVMNotManagedNodeListInterfaceListStaticIPV6AddressNodeStat
 // SecuremeshSiteV2KVMNotManagedNodeListInterfaceListVlanInterfaceModel represents vlan_interface block
 type SecuremeshSiteV2KVMNotManagedNodeListInterfaceListVlanInterfaceModel struct {
 	Device types.String `tfsdk:"device"`
-	VlanID types.Int64 `tfsdk:"vlan_id"`
+	VlanID types.Int64  `tfsdk:"vlan_id"`
 }
 
 // SecuremeshSiteV2LoadBalancingModel represents load_balancing block
@@ -1115,21 +1115,21 @@ type SecuremeshSiteV2LoadBalancingModel struct {
 
 // SecuremeshSiteV2LocalVrfModel represents local_vrf block
 type SecuremeshSiteV2LocalVrfModel struct {
-	DefaultConfig *SecuremeshSiteV2EmptyModel `tfsdk:"default_config"`
-	DefaultSLIConfig *SecuremeshSiteV2EmptyModel `tfsdk:"default_sli_config"`
-	SLIConfig *SecuremeshSiteV2LocalVrfSLIConfigModel `tfsdk:"sli_config"`
-	SLOConfig *SecuremeshSiteV2LocalVrfSLOConfigModel `tfsdk:"slo_config"`
+	DefaultConfig    *SecuremeshSiteV2EmptyModel             `tfsdk:"default_config"`
+	DefaultSLIConfig *SecuremeshSiteV2EmptyModel             `tfsdk:"default_sli_config"`
+	SLIConfig        *SecuremeshSiteV2LocalVrfSLIConfigModel `tfsdk:"sli_config"`
+	SLOConfig        *SecuremeshSiteV2LocalVrfSLOConfigModel `tfsdk:"slo_config"`
 }
 
 // SecuremeshSiteV2LocalVrfSLIConfigModel represents sli_config block
 type SecuremeshSiteV2LocalVrfSLIConfigModel struct {
-	Nameserver types.String `tfsdk:"nameserver"`
-	Vip types.String `tfsdk:"vip"`
-	Labels *SecuremeshSiteV2EmptyModel `tfsdk:"labels"`
-	NoStaticRoutes *SecuremeshSiteV2EmptyModel `tfsdk:"no_static_routes"`
-	NoV6StaticRoutes *SecuremeshSiteV2EmptyModel `tfsdk:"no_v6_static_routes"`
-	StaticRoutes *SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesModel `tfsdk:"static_routes"`
-	StaticV6Routes *SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesModel `tfsdk:"static_v6_routes"`
+	Nameserver       types.String                                          `tfsdk:"nameserver"`
+	Vip              types.String                                          `tfsdk:"vip"`
+	Labels           *SecuremeshSiteV2EmptyModel                           `tfsdk:"labels"`
+	NoStaticRoutes   *SecuremeshSiteV2EmptyModel                           `tfsdk:"no_static_routes"`
+	NoV6StaticRoutes *SecuremeshSiteV2EmptyModel                           `tfsdk:"no_v6_static_routes"`
+	StaticRoutes     *SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesModel   `tfsdk:"static_routes"`
+	StaticV6Routes   *SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesModel `tfsdk:"static_v6_routes"`
 }
 
 // SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesModel represents static_routes block
@@ -1139,11 +1139,11 @@ type SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesModel struct {
 
 // SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesStaticRoutesModel represents static_routes block
 type SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesStaticRoutesModel struct {
-	Attrs types.List `tfsdk:"attrs"`
-	IPAddress types.String `tfsdk:"ip_address"`
-	IPPrefixes types.List `tfsdk:"ip_prefixes"`
-	DefaultGateway *SecuremeshSiteV2EmptyModel `tfsdk:"default_gateway"`
-	NodeInterface *SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesStaticRoutesNodeInterfaceModel `tfsdk:"node_interface"`
+	Attrs          types.List                                                                   `tfsdk:"attrs"`
+	IPAddress      types.String                                                                 `tfsdk:"ip_address"`
+	IPPrefixes     types.List                                                                   `tfsdk:"ip_prefixes"`
+	DefaultGateway *SecuremeshSiteV2EmptyModel                                                  `tfsdk:"default_gateway"`
+	NodeInterface  *SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesStaticRoutesNodeInterfaceModel `tfsdk:"node_interface"`
 }
 
 // SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesStaticRoutesNodeInterfaceModel represents node_interface block
@@ -1153,17 +1153,17 @@ type SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesStaticRoutesNodeInterfaceModel
 
 // SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesStaticRoutesNodeInterfaceListModel represents list block
 type SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesStaticRoutesNodeInterfaceListModel struct {
-	Node types.String `tfsdk:"node"`
+	Node      types.String                                                                               `tfsdk:"node"`
 	Interface []SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesStaticRoutesNodeInterfaceListInterfaceModel `tfsdk:"interface"`
 }
 
 // SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesStaticRoutesNodeInterfaceListInterfaceModel represents interface block
 type SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesStaticRoutesNodeInterfaceListInterfaceModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesModel represents static_v6_routes block
@@ -1173,11 +1173,11 @@ type SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesModel struct {
 
 // SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesStaticRoutesModel represents static_routes block
 type SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesStaticRoutesModel struct {
-	Attrs types.List `tfsdk:"attrs"`
-	IPAddress types.String `tfsdk:"ip_address"`
-	IPPrefixes types.List `tfsdk:"ip_prefixes"`
-	DefaultGateway *SecuremeshSiteV2EmptyModel `tfsdk:"default_gateway"`
-	NodeInterface *SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceModel `tfsdk:"node_interface"`
+	Attrs          types.List                                                                     `tfsdk:"attrs"`
+	IPAddress      types.String                                                                   `tfsdk:"ip_address"`
+	IPPrefixes     types.List                                                                     `tfsdk:"ip_prefixes"`
+	DefaultGateway *SecuremeshSiteV2EmptyModel                                                    `tfsdk:"default_gateway"`
+	NodeInterface  *SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceModel `tfsdk:"node_interface"`
 }
 
 // SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceModel represents node_interface block
@@ -1187,28 +1187,28 @@ type SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceMod
 
 // SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceListModel represents list block
 type SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceListModel struct {
-	Node types.String `tfsdk:"node"`
+	Node      types.String                                                                                 `tfsdk:"node"`
 	Interface []SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceListInterfaceModel `tfsdk:"interface"`
 }
 
 // SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceListInterfaceModel represents interface block
 type SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceListInterfaceModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // SecuremeshSiteV2LocalVrfSLOConfigModel represents slo_config block
 type SecuremeshSiteV2LocalVrfSLOConfigModel struct {
-	Nameserver types.String `tfsdk:"nameserver"`
-	Vip types.String `tfsdk:"vip"`
-	Labels *SecuremeshSiteV2EmptyModel `tfsdk:"labels"`
-	NoStaticRoutes *SecuremeshSiteV2EmptyModel `tfsdk:"no_static_routes"`
-	NoV6StaticRoutes *SecuremeshSiteV2EmptyModel `tfsdk:"no_v6_static_routes"`
-	StaticRoutes *SecuremeshSiteV2LocalVrfSLOConfigStaticRoutesModel `tfsdk:"static_routes"`
-	StaticV6Routes *SecuremeshSiteV2LocalVrfSLOConfigStaticV6RoutesModel `tfsdk:"static_v6_routes"`
+	Nameserver       types.String                                          `tfsdk:"nameserver"`
+	Vip              types.String                                          `tfsdk:"vip"`
+	Labels           *SecuremeshSiteV2EmptyModel                           `tfsdk:"labels"`
+	NoStaticRoutes   *SecuremeshSiteV2EmptyModel                           `tfsdk:"no_static_routes"`
+	NoV6StaticRoutes *SecuremeshSiteV2EmptyModel                           `tfsdk:"no_v6_static_routes"`
+	StaticRoutes     *SecuremeshSiteV2LocalVrfSLOConfigStaticRoutesModel   `tfsdk:"static_routes"`
+	StaticV6Routes   *SecuremeshSiteV2LocalVrfSLOConfigStaticV6RoutesModel `tfsdk:"static_v6_routes"`
 }
 
 // SecuremeshSiteV2LocalVrfSLOConfigStaticRoutesModel represents static_routes block
@@ -1218,11 +1218,11 @@ type SecuremeshSiteV2LocalVrfSLOConfigStaticRoutesModel struct {
 
 // SecuremeshSiteV2LocalVrfSLOConfigStaticRoutesStaticRoutesModel represents static_routes block
 type SecuremeshSiteV2LocalVrfSLOConfigStaticRoutesStaticRoutesModel struct {
-	Attrs types.List `tfsdk:"attrs"`
-	IPAddress types.String `tfsdk:"ip_address"`
-	IPPrefixes types.List `tfsdk:"ip_prefixes"`
-	DefaultGateway *SecuremeshSiteV2EmptyModel `tfsdk:"default_gateway"`
-	NodeInterface *SecuremeshSiteV2LocalVrfSLOConfigStaticRoutesStaticRoutesNodeInterfaceModel `tfsdk:"node_interface"`
+	Attrs          types.List                                                                   `tfsdk:"attrs"`
+	IPAddress      types.String                                                                 `tfsdk:"ip_address"`
+	IPPrefixes     types.List                                                                   `tfsdk:"ip_prefixes"`
+	DefaultGateway *SecuremeshSiteV2EmptyModel                                                  `tfsdk:"default_gateway"`
+	NodeInterface  *SecuremeshSiteV2LocalVrfSLOConfigStaticRoutesStaticRoutesNodeInterfaceModel `tfsdk:"node_interface"`
 }
 
 // SecuremeshSiteV2LocalVrfSLOConfigStaticRoutesStaticRoutesNodeInterfaceModel represents node_interface block
@@ -1232,17 +1232,17 @@ type SecuremeshSiteV2LocalVrfSLOConfigStaticRoutesStaticRoutesNodeInterfaceModel
 
 // SecuremeshSiteV2LocalVrfSLOConfigStaticRoutesStaticRoutesNodeInterfaceListModel represents list block
 type SecuremeshSiteV2LocalVrfSLOConfigStaticRoutesStaticRoutesNodeInterfaceListModel struct {
-	Node types.String `tfsdk:"node"`
+	Node      types.String                                                                               `tfsdk:"node"`
 	Interface []SecuremeshSiteV2LocalVrfSLOConfigStaticRoutesStaticRoutesNodeInterfaceListInterfaceModel `tfsdk:"interface"`
 }
 
 // SecuremeshSiteV2LocalVrfSLOConfigStaticRoutesStaticRoutesNodeInterfaceListInterfaceModel represents interface block
 type SecuremeshSiteV2LocalVrfSLOConfigStaticRoutesStaticRoutesNodeInterfaceListInterfaceModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // SecuremeshSiteV2LocalVrfSLOConfigStaticV6RoutesModel represents static_v6_routes block
@@ -1252,11 +1252,11 @@ type SecuremeshSiteV2LocalVrfSLOConfigStaticV6RoutesModel struct {
 
 // SecuremeshSiteV2LocalVrfSLOConfigStaticV6RoutesStaticRoutesModel represents static_routes block
 type SecuremeshSiteV2LocalVrfSLOConfigStaticV6RoutesStaticRoutesModel struct {
-	Attrs types.List `tfsdk:"attrs"`
-	IPAddress types.String `tfsdk:"ip_address"`
-	IPPrefixes types.List `tfsdk:"ip_prefixes"`
-	DefaultGateway *SecuremeshSiteV2EmptyModel `tfsdk:"default_gateway"`
-	NodeInterface *SecuremeshSiteV2LocalVrfSLOConfigStaticV6RoutesStaticRoutesNodeInterfaceModel `tfsdk:"node_interface"`
+	Attrs          types.List                                                                     `tfsdk:"attrs"`
+	IPAddress      types.String                                                                   `tfsdk:"ip_address"`
+	IPPrefixes     types.List                                                                     `tfsdk:"ip_prefixes"`
+	DefaultGateway *SecuremeshSiteV2EmptyModel                                                    `tfsdk:"default_gateway"`
+	NodeInterface  *SecuremeshSiteV2LocalVrfSLOConfigStaticV6RoutesStaticRoutesNodeInterfaceModel `tfsdk:"node_interface"`
 }
 
 // SecuremeshSiteV2LocalVrfSLOConfigStaticV6RoutesStaticRoutesNodeInterfaceModel represents node_interface block
@@ -1266,24 +1266,24 @@ type SecuremeshSiteV2LocalVrfSLOConfigStaticV6RoutesStaticRoutesNodeInterfaceMod
 
 // SecuremeshSiteV2LocalVrfSLOConfigStaticV6RoutesStaticRoutesNodeInterfaceListModel represents list block
 type SecuremeshSiteV2LocalVrfSLOConfigStaticV6RoutesStaticRoutesNodeInterfaceListModel struct {
-	Node types.String `tfsdk:"node"`
+	Node      types.String                                                                                 `tfsdk:"node"`
 	Interface []SecuremeshSiteV2LocalVrfSLOConfigStaticV6RoutesStaticRoutesNodeInterfaceListInterfaceModel `tfsdk:"interface"`
 }
 
 // SecuremeshSiteV2LocalVrfSLOConfigStaticV6RoutesStaticRoutesNodeInterfaceListInterfaceModel represents interface block
 type SecuremeshSiteV2LocalVrfSLOConfigStaticV6RoutesStaticRoutesNodeInterfaceListInterfaceModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // SecuremeshSiteV2LogReceiverModel represents log_receiver block
 type SecuremeshSiteV2LogReceiverModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // SecuremeshSiteV2NutanixModel represents nutanix block
@@ -1298,43 +1298,43 @@ type SecuremeshSiteV2NutanixNotManagedModel struct {
 
 // SecuremeshSiteV2NutanixNotManagedNodeListModel represents node_list block
 type SecuremeshSiteV2NutanixNotManagedNodeListModel struct {
-	Hostname types.String `tfsdk:"hostname"`
-	PublicIP types.String `tfsdk:"public_ip"`
-	Type types.String `tfsdk:"type"`
+	Hostname      types.String                                                  `tfsdk:"hostname"`
+	PublicIP      types.String                                                  `tfsdk:"public_ip"`
+	Type          types.String                                                  `tfsdk:"type"`
 	InterfaceList []SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListModel `tfsdk:"interface_list"`
 }
 
 // SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListModel represents interface_list block
 type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListModel struct {
-	DescriptionSpec types.String `tfsdk:"description_spec"`
-	Mtu types.Int64 `tfsdk:"mtu"`
-	Name types.String `tfsdk:"name"`
-	Priority types.Int64 `tfsdk:"priority"`
-	BondInterface *SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListBondInterfaceModel `tfsdk:"bond_interface"`
-	DhcpClient *SecuremeshSiteV2EmptyModel `tfsdk:"dhcp_client"`
-	EthernetInterface *SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListEthernetInterfaceModel `tfsdk:"ethernet_interface"`
-	IPV6AutoConfig *SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigModel `tfsdk:"ipv6_auto_config"`
-	Labels *SecuremeshSiteV2EmptyModel `tfsdk:"labels"`
-	Monitor *SecuremeshSiteV2EmptyModel `tfsdk:"monitor"`
-	MonitorDisabled *SecuremeshSiteV2EmptyModel `tfsdk:"monitor_disabled"`
-	NetworkOption *SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListNetworkOptionModel `tfsdk:"network_option"`
-	NoIPV4Address *SecuremeshSiteV2EmptyModel `tfsdk:"no_ipv4_address"`
-	NoIPV6Address *SecuremeshSiteV2EmptyModel `tfsdk:"no_ipv6_address"`
-	SiteToSiteConnectivityInterfaceDisabled *SecuremeshSiteV2EmptyModel `tfsdk:"site_to_site_connectivity_interface_disabled"`
-	SiteToSiteConnectivityInterfaceEnabled *SecuremeshSiteV2EmptyModel `tfsdk:"site_to_site_connectivity_interface_enabled"`
-	StaticIP *SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListStaticIPModel `tfsdk:"static_ip"`
-	StaticIPV6Address *SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListStaticIPV6AddressModel `tfsdk:"static_ipv6_address"`
-	VlanInterface *SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListVlanInterfaceModel `tfsdk:"vlan_interface"`
+	DescriptionSpec                         types.String                                                                  `tfsdk:"description_spec"`
+	Mtu                                     types.Int64                                                                   `tfsdk:"mtu"`
+	Name                                    types.String                                                                  `tfsdk:"name"`
+	Priority                                types.Int64                                                                   `tfsdk:"priority"`
+	BondInterface                           *SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListBondInterfaceModel     `tfsdk:"bond_interface"`
+	DhcpClient                              *SecuremeshSiteV2EmptyModel                                                   `tfsdk:"dhcp_client"`
+	EthernetInterface                       *SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListEthernetInterfaceModel `tfsdk:"ethernet_interface"`
+	IPV6AutoConfig                          *SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigModel    `tfsdk:"ipv6_auto_config"`
+	Labels                                  *SecuremeshSiteV2EmptyModel                                                   `tfsdk:"labels"`
+	Monitor                                 *SecuremeshSiteV2EmptyModel                                                   `tfsdk:"monitor"`
+	MonitorDisabled                         *SecuremeshSiteV2EmptyModel                                                   `tfsdk:"monitor_disabled"`
+	NetworkOption                           *SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListNetworkOptionModel     `tfsdk:"network_option"`
+	NoIPV4Address                           *SecuremeshSiteV2EmptyModel                                                   `tfsdk:"no_ipv4_address"`
+	NoIPV6Address                           *SecuremeshSiteV2EmptyModel                                                   `tfsdk:"no_ipv6_address"`
+	SiteToSiteConnectivityInterfaceDisabled *SecuremeshSiteV2EmptyModel                                                   `tfsdk:"site_to_site_connectivity_interface_disabled"`
+	SiteToSiteConnectivityInterfaceEnabled  *SecuremeshSiteV2EmptyModel                                                   `tfsdk:"site_to_site_connectivity_interface_enabled"`
+	StaticIP                                *SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListStaticIPModel          `tfsdk:"static_ip"`
+	StaticIPV6Address                       *SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListStaticIPV6AddressModel `tfsdk:"static_ipv6_address"`
+	VlanInterface                           *SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListVlanInterfaceModel     `tfsdk:"vlan_interface"`
 }
 
 // SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListBondInterfaceModel represents bond_interface block
 type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListBondInterfaceModel struct {
-	Devices types.List `tfsdk:"devices"`
-	LinkPollingInterval types.Int64 `tfsdk:"link_polling_interval"`
-	LinkUpDelay types.Int64 `tfsdk:"link_up_delay"`
-	Name types.String `tfsdk:"name"`
-	ActiveBackup *SecuremeshSiteV2EmptyModel `tfsdk:"active_backup"`
-	Lacp *SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListBondInterfaceLacpModel `tfsdk:"lacp"`
+	Devices             types.List                                                                    `tfsdk:"devices"`
+	LinkPollingInterval types.Int64                                                                   `tfsdk:"link_polling_interval"`
+	LinkUpDelay         types.Int64                                                                   `tfsdk:"link_up_delay"`
+	Name                types.String                                                                  `tfsdk:"name"`
+	ActiveBackup        *SecuremeshSiteV2EmptyModel                                                   `tfsdk:"active_backup"`
+	Lacp                *SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListBondInterfaceLacpModel `tfsdk:"lacp"`
 }
 
 // SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListBondInterfaceLacpModel represents lacp block
@@ -1345,26 +1345,26 @@ type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListBondInterfaceLacpMode
 // SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListEthernetInterfaceModel represents ethernet_interface block
 type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListEthernetInterfaceModel struct {
 	Device types.String `tfsdk:"device"`
-	Mac types.String `tfsdk:"mac"`
+	Mac    types.String `tfsdk:"mac"`
 }
 
 // SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigModel represents ipv6_auto_config block
 type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigModel struct {
-	Host *SecuremeshSiteV2EmptyModel `tfsdk:"host"`
+	Host   *SecuremeshSiteV2EmptyModel                                                      `tfsdk:"host"`
 	Router *SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigRouterModel `tfsdk:"router"`
 }
 
 // SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigRouterModel represents router block
 type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigRouterModel struct {
-	NetworkPrefix types.String `tfsdk:"network_prefix"`
-	DNSConfig *SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel `tfsdk:"dns_config"`
-	Stateful *SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel `tfsdk:"stateful"`
+	NetworkPrefix types.String                                                                              `tfsdk:"network_prefix"`
+	DNSConfig     *SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel `tfsdk:"dns_config"`
+	Stateful      *SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel  `tfsdk:"stateful"`
 }
 
 // SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel represents dns_config block
 type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel struct {
 	ConfiguredList *SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigConfiguredListModel `tfsdk:"configured_list"`
-	LocalDNS *SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel `tfsdk:"local_dns"`
+	LocalDNS       *SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel       `tfsdk:"local_dns"`
 }
 
 // SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigConfiguredListModel represents configured_list block
@@ -1374,30 +1374,30 @@ type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigRouterD
 
 // SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel represents local_dns block
 type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel struct {
-	ConfiguredAddress types.String `tfsdk:"configured_address"`
-	FirstAddress *SecuremeshSiteV2EmptyModel `tfsdk:"first_address"`
-	LastAddress *SecuremeshSiteV2EmptyModel `tfsdk:"last_address"`
+	ConfiguredAddress types.String                `tfsdk:"configured_address"`
+	FirstAddress      *SecuremeshSiteV2EmptyModel `tfsdk:"first_address"`
+	LastAddress       *SecuremeshSiteV2EmptyModel `tfsdk:"last_address"`
 }
 
 // SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel represents stateful block
 type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel struct {
-	AutomaticFromEnd *SecuremeshSiteV2EmptyModel `tfsdk:"automatic_from_end"`
-	AutomaticFromStart *SecuremeshSiteV2EmptyModel `tfsdk:"automatic_from_start"`
-	DhcpNetworks []SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel `tfsdk:"dhcp_networks"`
-	FixedIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"fixed_ip_map"`
-	InterfaceIPMap *SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulInterfaceIPMapModel `tfsdk:"interface_ip_map"`
+	AutomaticFromEnd   *SecuremeshSiteV2EmptyModel                                                                            `tfsdk:"automatic_from_end"`
+	AutomaticFromStart *SecuremeshSiteV2EmptyModel                                                                            `tfsdk:"automatic_from_start"`
+	DhcpNetworks       []SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel  `tfsdk:"dhcp_networks"`
+	FixedIPMap         *SecuremeshSiteV2EmptyModel                                                                            `tfsdk:"fixed_ip_map"`
+	InterfaceIPMap     *SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulInterfaceIPMapModel `tfsdk:"interface_ip_map"`
 }
 
 // SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel represents dhcp_networks block
 type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel struct {
-	NetworkPrefix types.String `tfsdk:"network_prefix"`
-	PoolSettings types.String `tfsdk:"pool_settings"`
-	Pools []SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel `tfsdk:"pools"`
+	NetworkPrefix types.String                                                                                               `tfsdk:"network_prefix"`
+	PoolSettings  types.String                                                                                               `tfsdk:"pool_settings"`
+	Pools         []SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel `tfsdk:"pools"`
 }
 
 // SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel represents pools block
 type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel struct {
-	EndIP types.String `tfsdk:"end_ip"`
+	EndIP   types.String `tfsdk:"end_ip"`
 	StartIP types.String `tfsdk:"start_ip"`
 }
 
@@ -1409,7 +1409,7 @@ type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigRouterS
 // SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListNetworkOptionModel represents network_option block
 type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListNetworkOptionModel struct {
 	SiteLocalInsideNetwork *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_inside_network"`
-	SiteLocalNetwork *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_network"`
+	SiteLocalNetwork       *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_network"`
 }
 
 // SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListStaticIPModel represents static_ip block
@@ -1421,7 +1421,7 @@ type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListStaticIPModel struct 
 // SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListStaticIPV6AddressModel represents static_ipv6_address block
 type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListStaticIPV6AddressModel struct {
 	ClusterStaticIP *SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListStaticIPV6AddressClusterStaticIPModel `tfsdk:"cluster_static_ip"`
-	NodeStaticIP *SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListStaticIPV6AddressNodeStaticIPModel `tfsdk:"node_static_ip"`
+	NodeStaticIP    *SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListStaticIPV6AddressNodeStaticIPModel    `tfsdk:"node_static_ip"`
 }
 
 // SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListStaticIPV6AddressClusterStaticIPModel represents cluster_static_ip block
@@ -1438,7 +1438,7 @@ type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListStaticIPV6AddressNode
 // SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListVlanInterfaceModel represents vlan_interface block
 type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListVlanInterfaceModel struct {
 	Device types.String `tfsdk:"device"`
-	VlanID types.Int64 `tfsdk:"vlan_id"`
+	VlanID types.Int64  `tfsdk:"vlan_id"`
 }
 
 // SecuremeshSiteV2OCIModel represents oci block
@@ -1453,43 +1453,43 @@ type SecuremeshSiteV2OCINotManagedModel struct {
 
 // SecuremeshSiteV2OCINotManagedNodeListModel represents node_list block
 type SecuremeshSiteV2OCINotManagedNodeListModel struct {
-	Hostname types.String `tfsdk:"hostname"`
-	PublicIP types.String `tfsdk:"public_ip"`
-	Type types.String `tfsdk:"type"`
+	Hostname      types.String                                              `tfsdk:"hostname"`
+	PublicIP      types.String                                              `tfsdk:"public_ip"`
+	Type          types.String                                              `tfsdk:"type"`
 	InterfaceList []SecuremeshSiteV2OCINotManagedNodeListInterfaceListModel `tfsdk:"interface_list"`
 }
 
 // SecuremeshSiteV2OCINotManagedNodeListInterfaceListModel represents interface_list block
 type SecuremeshSiteV2OCINotManagedNodeListInterfaceListModel struct {
-	DescriptionSpec types.String `tfsdk:"description_spec"`
-	Mtu types.Int64 `tfsdk:"mtu"`
-	Name types.String `tfsdk:"name"`
-	Priority types.Int64 `tfsdk:"priority"`
-	BondInterface *SecuremeshSiteV2OCINotManagedNodeListInterfaceListBondInterfaceModel `tfsdk:"bond_interface"`
-	DhcpClient *SecuremeshSiteV2EmptyModel `tfsdk:"dhcp_client"`
-	EthernetInterface *SecuremeshSiteV2OCINotManagedNodeListInterfaceListEthernetInterfaceModel `tfsdk:"ethernet_interface"`
-	IPV6AutoConfig *SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigModel `tfsdk:"ipv6_auto_config"`
-	Labels *SecuremeshSiteV2EmptyModel `tfsdk:"labels"`
-	Monitor *SecuremeshSiteV2EmptyModel `tfsdk:"monitor"`
-	MonitorDisabled *SecuremeshSiteV2EmptyModel `tfsdk:"monitor_disabled"`
-	NetworkOption *SecuremeshSiteV2OCINotManagedNodeListInterfaceListNetworkOptionModel `tfsdk:"network_option"`
-	NoIPV4Address *SecuremeshSiteV2EmptyModel `tfsdk:"no_ipv4_address"`
-	NoIPV6Address *SecuremeshSiteV2EmptyModel `tfsdk:"no_ipv6_address"`
-	SiteToSiteConnectivityInterfaceDisabled *SecuremeshSiteV2EmptyModel `tfsdk:"site_to_site_connectivity_interface_disabled"`
-	SiteToSiteConnectivityInterfaceEnabled *SecuremeshSiteV2EmptyModel `tfsdk:"site_to_site_connectivity_interface_enabled"`
-	StaticIP *SecuremeshSiteV2OCINotManagedNodeListInterfaceListStaticIPModel `tfsdk:"static_ip"`
-	StaticIPV6Address *SecuremeshSiteV2OCINotManagedNodeListInterfaceListStaticIPV6AddressModel `tfsdk:"static_ipv6_address"`
-	VlanInterface *SecuremeshSiteV2OCINotManagedNodeListInterfaceListVlanInterfaceModel `tfsdk:"vlan_interface"`
+	DescriptionSpec                         types.String                                                              `tfsdk:"description_spec"`
+	Mtu                                     types.Int64                                                               `tfsdk:"mtu"`
+	Name                                    types.String                                                              `tfsdk:"name"`
+	Priority                                types.Int64                                                               `tfsdk:"priority"`
+	BondInterface                           *SecuremeshSiteV2OCINotManagedNodeListInterfaceListBondInterfaceModel     `tfsdk:"bond_interface"`
+	DhcpClient                              *SecuremeshSiteV2EmptyModel                                               `tfsdk:"dhcp_client"`
+	EthernetInterface                       *SecuremeshSiteV2OCINotManagedNodeListInterfaceListEthernetInterfaceModel `tfsdk:"ethernet_interface"`
+	IPV6AutoConfig                          *SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigModel    `tfsdk:"ipv6_auto_config"`
+	Labels                                  *SecuremeshSiteV2EmptyModel                                               `tfsdk:"labels"`
+	Monitor                                 *SecuremeshSiteV2EmptyModel                                               `tfsdk:"monitor"`
+	MonitorDisabled                         *SecuremeshSiteV2EmptyModel                                               `tfsdk:"monitor_disabled"`
+	NetworkOption                           *SecuremeshSiteV2OCINotManagedNodeListInterfaceListNetworkOptionModel     `tfsdk:"network_option"`
+	NoIPV4Address                           *SecuremeshSiteV2EmptyModel                                               `tfsdk:"no_ipv4_address"`
+	NoIPV6Address                           *SecuremeshSiteV2EmptyModel                                               `tfsdk:"no_ipv6_address"`
+	SiteToSiteConnectivityInterfaceDisabled *SecuremeshSiteV2EmptyModel                                               `tfsdk:"site_to_site_connectivity_interface_disabled"`
+	SiteToSiteConnectivityInterfaceEnabled  *SecuremeshSiteV2EmptyModel                                               `tfsdk:"site_to_site_connectivity_interface_enabled"`
+	StaticIP                                *SecuremeshSiteV2OCINotManagedNodeListInterfaceListStaticIPModel          `tfsdk:"static_ip"`
+	StaticIPV6Address                       *SecuremeshSiteV2OCINotManagedNodeListInterfaceListStaticIPV6AddressModel `tfsdk:"static_ipv6_address"`
+	VlanInterface                           *SecuremeshSiteV2OCINotManagedNodeListInterfaceListVlanInterfaceModel     `tfsdk:"vlan_interface"`
 }
 
 // SecuremeshSiteV2OCINotManagedNodeListInterfaceListBondInterfaceModel represents bond_interface block
 type SecuremeshSiteV2OCINotManagedNodeListInterfaceListBondInterfaceModel struct {
-	Devices types.List `tfsdk:"devices"`
-	LinkPollingInterval types.Int64 `tfsdk:"link_polling_interval"`
-	LinkUpDelay types.Int64 `tfsdk:"link_up_delay"`
-	Name types.String `tfsdk:"name"`
-	ActiveBackup *SecuremeshSiteV2EmptyModel `tfsdk:"active_backup"`
-	Lacp *SecuremeshSiteV2OCINotManagedNodeListInterfaceListBondInterfaceLacpModel `tfsdk:"lacp"`
+	Devices             types.List                                                                `tfsdk:"devices"`
+	LinkPollingInterval types.Int64                                                               `tfsdk:"link_polling_interval"`
+	LinkUpDelay         types.Int64                                                               `tfsdk:"link_up_delay"`
+	Name                types.String                                                              `tfsdk:"name"`
+	ActiveBackup        *SecuremeshSiteV2EmptyModel                                               `tfsdk:"active_backup"`
+	Lacp                *SecuremeshSiteV2OCINotManagedNodeListInterfaceListBondInterfaceLacpModel `tfsdk:"lacp"`
 }
 
 // SecuremeshSiteV2OCINotManagedNodeListInterfaceListBondInterfaceLacpModel represents lacp block
@@ -1500,26 +1500,26 @@ type SecuremeshSiteV2OCINotManagedNodeListInterfaceListBondInterfaceLacpModel st
 // SecuremeshSiteV2OCINotManagedNodeListInterfaceListEthernetInterfaceModel represents ethernet_interface block
 type SecuremeshSiteV2OCINotManagedNodeListInterfaceListEthernetInterfaceModel struct {
 	Device types.String `tfsdk:"device"`
-	Mac types.String `tfsdk:"mac"`
+	Mac    types.String `tfsdk:"mac"`
 }
 
 // SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigModel represents ipv6_auto_config block
 type SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigModel struct {
-	Host *SecuremeshSiteV2EmptyModel `tfsdk:"host"`
+	Host   *SecuremeshSiteV2EmptyModel                                                  `tfsdk:"host"`
 	Router *SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigRouterModel `tfsdk:"router"`
 }
 
 // SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigRouterModel represents router block
 type SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigRouterModel struct {
-	NetworkPrefix types.String `tfsdk:"network_prefix"`
-	DNSConfig *SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel `tfsdk:"dns_config"`
-	Stateful *SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel `tfsdk:"stateful"`
+	NetworkPrefix types.String                                                                          `tfsdk:"network_prefix"`
+	DNSConfig     *SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel `tfsdk:"dns_config"`
+	Stateful      *SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel  `tfsdk:"stateful"`
 }
 
 // SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel represents dns_config block
 type SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel struct {
 	ConfiguredList *SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigConfiguredListModel `tfsdk:"configured_list"`
-	LocalDNS *SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel `tfsdk:"local_dns"`
+	LocalDNS       *SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel       `tfsdk:"local_dns"`
 }
 
 // SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigConfiguredListModel represents configured_list block
@@ -1529,30 +1529,30 @@ type SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSCo
 
 // SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel represents local_dns block
 type SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel struct {
-	ConfiguredAddress types.String `tfsdk:"configured_address"`
-	FirstAddress *SecuremeshSiteV2EmptyModel `tfsdk:"first_address"`
-	LastAddress *SecuremeshSiteV2EmptyModel `tfsdk:"last_address"`
+	ConfiguredAddress types.String                `tfsdk:"configured_address"`
+	FirstAddress      *SecuremeshSiteV2EmptyModel `tfsdk:"first_address"`
+	LastAddress       *SecuremeshSiteV2EmptyModel `tfsdk:"last_address"`
 }
 
 // SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel represents stateful block
 type SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel struct {
-	AutomaticFromEnd *SecuremeshSiteV2EmptyModel `tfsdk:"automatic_from_end"`
-	AutomaticFromStart *SecuremeshSiteV2EmptyModel `tfsdk:"automatic_from_start"`
-	DhcpNetworks []SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel `tfsdk:"dhcp_networks"`
-	FixedIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"fixed_ip_map"`
-	InterfaceIPMap *SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulInterfaceIPMapModel `tfsdk:"interface_ip_map"`
+	AutomaticFromEnd   *SecuremeshSiteV2EmptyModel                                                                        `tfsdk:"automatic_from_end"`
+	AutomaticFromStart *SecuremeshSiteV2EmptyModel                                                                        `tfsdk:"automatic_from_start"`
+	DhcpNetworks       []SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel  `tfsdk:"dhcp_networks"`
+	FixedIPMap         *SecuremeshSiteV2EmptyModel                                                                        `tfsdk:"fixed_ip_map"`
+	InterfaceIPMap     *SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulInterfaceIPMapModel `tfsdk:"interface_ip_map"`
 }
 
 // SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel represents dhcp_networks block
 type SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel struct {
-	NetworkPrefix types.String `tfsdk:"network_prefix"`
-	PoolSettings types.String `tfsdk:"pool_settings"`
-	Pools []SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel `tfsdk:"pools"`
+	NetworkPrefix types.String                                                                                           `tfsdk:"network_prefix"`
+	PoolSettings  types.String                                                                                           `tfsdk:"pool_settings"`
+	Pools         []SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel `tfsdk:"pools"`
 }
 
 // SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel represents pools block
 type SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel struct {
-	EndIP types.String `tfsdk:"end_ip"`
+	EndIP   types.String `tfsdk:"end_ip"`
 	StartIP types.String `tfsdk:"start_ip"`
 }
 
@@ -1564,7 +1564,7 @@ type SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigRouterState
 // SecuremeshSiteV2OCINotManagedNodeListInterfaceListNetworkOptionModel represents network_option block
 type SecuremeshSiteV2OCINotManagedNodeListInterfaceListNetworkOptionModel struct {
 	SiteLocalInsideNetwork *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_inside_network"`
-	SiteLocalNetwork *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_network"`
+	SiteLocalNetwork       *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_network"`
 }
 
 // SecuremeshSiteV2OCINotManagedNodeListInterfaceListStaticIPModel represents static_ip block
@@ -1576,7 +1576,7 @@ type SecuremeshSiteV2OCINotManagedNodeListInterfaceListStaticIPModel struct {
 // SecuremeshSiteV2OCINotManagedNodeListInterfaceListStaticIPV6AddressModel represents static_ipv6_address block
 type SecuremeshSiteV2OCINotManagedNodeListInterfaceListStaticIPV6AddressModel struct {
 	ClusterStaticIP *SecuremeshSiteV2OCINotManagedNodeListInterfaceListStaticIPV6AddressClusterStaticIPModel `tfsdk:"cluster_static_ip"`
-	NodeStaticIP *SecuremeshSiteV2OCINotManagedNodeListInterfaceListStaticIPV6AddressNodeStaticIPModel `tfsdk:"node_static_ip"`
+	NodeStaticIP    *SecuremeshSiteV2OCINotManagedNodeListInterfaceListStaticIPV6AddressNodeStaticIPModel    `tfsdk:"node_static_ip"`
 }
 
 // SecuremeshSiteV2OCINotManagedNodeListInterfaceListStaticIPV6AddressClusterStaticIPModel represents cluster_static_ip block
@@ -1593,13 +1593,13 @@ type SecuremeshSiteV2OCINotManagedNodeListInterfaceListStaticIPV6AddressNodeStat
 // SecuremeshSiteV2OCINotManagedNodeListInterfaceListVlanInterfaceModel represents vlan_interface block
 type SecuremeshSiteV2OCINotManagedNodeListInterfaceListVlanInterfaceModel struct {
 	Device types.String `tfsdk:"device"`
-	VlanID types.Int64 `tfsdk:"vlan_id"`
+	VlanID types.Int64  `tfsdk:"vlan_id"`
 }
 
 // SecuremeshSiteV2OfflineSurvivabilityModeModel represents offline_survivability_mode block
 type SecuremeshSiteV2OfflineSurvivabilityModeModel struct {
 	EnableOfflineSurvivabilityMode *SecuremeshSiteV2EmptyModel `tfsdk:"enable_offline_survivability_mode"`
-	NoOfflineSurvivabilityMode *SecuremeshSiteV2EmptyModel `tfsdk:"no_offline_survivability_mode"`
+	NoOfflineSurvivabilityMode     *SecuremeshSiteV2EmptyModel `tfsdk:"no_offline_survivability_mode"`
 }
 
 // SecuremeshSiteV2OpenstackModel represents openstack block
@@ -1614,43 +1614,43 @@ type SecuremeshSiteV2OpenstackNotManagedModel struct {
 
 // SecuremeshSiteV2OpenstackNotManagedNodeListModel represents node_list block
 type SecuremeshSiteV2OpenstackNotManagedNodeListModel struct {
-	Hostname types.String `tfsdk:"hostname"`
-	PublicIP types.String `tfsdk:"public_ip"`
-	Type types.String `tfsdk:"type"`
+	Hostname      types.String                                                    `tfsdk:"hostname"`
+	PublicIP      types.String                                                    `tfsdk:"public_ip"`
+	Type          types.String                                                    `tfsdk:"type"`
 	InterfaceList []SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListModel `tfsdk:"interface_list"`
 }
 
 // SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListModel represents interface_list block
 type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListModel struct {
-	DescriptionSpec types.String `tfsdk:"description_spec"`
-	Mtu types.Int64 `tfsdk:"mtu"`
-	Name types.String `tfsdk:"name"`
-	Priority types.Int64 `tfsdk:"priority"`
-	BondInterface *SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListBondInterfaceModel `tfsdk:"bond_interface"`
-	DhcpClient *SecuremeshSiteV2EmptyModel `tfsdk:"dhcp_client"`
-	EthernetInterface *SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListEthernetInterfaceModel `tfsdk:"ethernet_interface"`
-	IPV6AutoConfig *SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigModel `tfsdk:"ipv6_auto_config"`
-	Labels *SecuremeshSiteV2EmptyModel `tfsdk:"labels"`
-	Monitor *SecuremeshSiteV2EmptyModel `tfsdk:"monitor"`
-	MonitorDisabled *SecuremeshSiteV2EmptyModel `tfsdk:"monitor_disabled"`
-	NetworkOption *SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListNetworkOptionModel `tfsdk:"network_option"`
-	NoIPV4Address *SecuremeshSiteV2EmptyModel `tfsdk:"no_ipv4_address"`
-	NoIPV6Address *SecuremeshSiteV2EmptyModel `tfsdk:"no_ipv6_address"`
-	SiteToSiteConnectivityInterfaceDisabled *SecuremeshSiteV2EmptyModel `tfsdk:"site_to_site_connectivity_interface_disabled"`
-	SiteToSiteConnectivityInterfaceEnabled *SecuremeshSiteV2EmptyModel `tfsdk:"site_to_site_connectivity_interface_enabled"`
-	StaticIP *SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListStaticIPModel `tfsdk:"static_ip"`
-	StaticIPV6Address *SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListStaticIPV6AddressModel `tfsdk:"static_ipv6_address"`
-	VlanInterface *SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListVlanInterfaceModel `tfsdk:"vlan_interface"`
+	DescriptionSpec                         types.String                                                                    `tfsdk:"description_spec"`
+	Mtu                                     types.Int64                                                                     `tfsdk:"mtu"`
+	Name                                    types.String                                                                    `tfsdk:"name"`
+	Priority                                types.Int64                                                                     `tfsdk:"priority"`
+	BondInterface                           *SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListBondInterfaceModel     `tfsdk:"bond_interface"`
+	DhcpClient                              *SecuremeshSiteV2EmptyModel                                                     `tfsdk:"dhcp_client"`
+	EthernetInterface                       *SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListEthernetInterfaceModel `tfsdk:"ethernet_interface"`
+	IPV6AutoConfig                          *SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigModel    `tfsdk:"ipv6_auto_config"`
+	Labels                                  *SecuremeshSiteV2EmptyModel                                                     `tfsdk:"labels"`
+	Monitor                                 *SecuremeshSiteV2EmptyModel                                                     `tfsdk:"monitor"`
+	MonitorDisabled                         *SecuremeshSiteV2EmptyModel                                                     `tfsdk:"monitor_disabled"`
+	NetworkOption                           *SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListNetworkOptionModel     `tfsdk:"network_option"`
+	NoIPV4Address                           *SecuremeshSiteV2EmptyModel                                                     `tfsdk:"no_ipv4_address"`
+	NoIPV6Address                           *SecuremeshSiteV2EmptyModel                                                     `tfsdk:"no_ipv6_address"`
+	SiteToSiteConnectivityInterfaceDisabled *SecuremeshSiteV2EmptyModel                                                     `tfsdk:"site_to_site_connectivity_interface_disabled"`
+	SiteToSiteConnectivityInterfaceEnabled  *SecuremeshSiteV2EmptyModel                                                     `tfsdk:"site_to_site_connectivity_interface_enabled"`
+	StaticIP                                *SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListStaticIPModel          `tfsdk:"static_ip"`
+	StaticIPV6Address                       *SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListStaticIPV6AddressModel `tfsdk:"static_ipv6_address"`
+	VlanInterface                           *SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListVlanInterfaceModel     `tfsdk:"vlan_interface"`
 }
 
 // SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListBondInterfaceModel represents bond_interface block
 type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListBondInterfaceModel struct {
-	Devices types.List `tfsdk:"devices"`
-	LinkPollingInterval types.Int64 `tfsdk:"link_polling_interval"`
-	LinkUpDelay types.Int64 `tfsdk:"link_up_delay"`
-	Name types.String `tfsdk:"name"`
-	ActiveBackup *SecuremeshSiteV2EmptyModel `tfsdk:"active_backup"`
-	Lacp *SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListBondInterfaceLacpModel `tfsdk:"lacp"`
+	Devices             types.List                                                                      `tfsdk:"devices"`
+	LinkPollingInterval types.Int64                                                                     `tfsdk:"link_polling_interval"`
+	LinkUpDelay         types.Int64                                                                     `tfsdk:"link_up_delay"`
+	Name                types.String                                                                    `tfsdk:"name"`
+	ActiveBackup        *SecuremeshSiteV2EmptyModel                                                     `tfsdk:"active_backup"`
+	Lacp                *SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListBondInterfaceLacpModel `tfsdk:"lacp"`
 }
 
 // SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListBondInterfaceLacpModel represents lacp block
@@ -1661,26 +1661,26 @@ type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListBondInterfaceLacpMo
 // SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListEthernetInterfaceModel represents ethernet_interface block
 type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListEthernetInterfaceModel struct {
 	Device types.String `tfsdk:"device"`
-	Mac types.String `tfsdk:"mac"`
+	Mac    types.String `tfsdk:"mac"`
 }
 
 // SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigModel represents ipv6_auto_config block
 type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigModel struct {
-	Host *SecuremeshSiteV2EmptyModel `tfsdk:"host"`
+	Host   *SecuremeshSiteV2EmptyModel                                                        `tfsdk:"host"`
 	Router *SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigRouterModel `tfsdk:"router"`
 }
 
 // SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigRouterModel represents router block
 type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigRouterModel struct {
-	NetworkPrefix types.String `tfsdk:"network_prefix"`
-	DNSConfig *SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel `tfsdk:"dns_config"`
-	Stateful *SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel `tfsdk:"stateful"`
+	NetworkPrefix types.String                                                                                `tfsdk:"network_prefix"`
+	DNSConfig     *SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel `tfsdk:"dns_config"`
+	Stateful      *SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel  `tfsdk:"stateful"`
 }
 
 // SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel represents dns_config block
 type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel struct {
 	ConfiguredList *SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigConfiguredListModel `tfsdk:"configured_list"`
-	LocalDNS *SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel `tfsdk:"local_dns"`
+	LocalDNS       *SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel       `tfsdk:"local_dns"`
 }
 
 // SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigConfiguredListModel represents configured_list block
@@ -1690,30 +1690,30 @@ type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigRoute
 
 // SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel represents local_dns block
 type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel struct {
-	ConfiguredAddress types.String `tfsdk:"configured_address"`
-	FirstAddress *SecuremeshSiteV2EmptyModel `tfsdk:"first_address"`
-	LastAddress *SecuremeshSiteV2EmptyModel `tfsdk:"last_address"`
+	ConfiguredAddress types.String                `tfsdk:"configured_address"`
+	FirstAddress      *SecuremeshSiteV2EmptyModel `tfsdk:"first_address"`
+	LastAddress       *SecuremeshSiteV2EmptyModel `tfsdk:"last_address"`
 }
 
 // SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel represents stateful block
 type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel struct {
-	AutomaticFromEnd *SecuremeshSiteV2EmptyModel `tfsdk:"automatic_from_end"`
-	AutomaticFromStart *SecuremeshSiteV2EmptyModel `tfsdk:"automatic_from_start"`
-	DhcpNetworks []SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel `tfsdk:"dhcp_networks"`
-	FixedIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"fixed_ip_map"`
-	InterfaceIPMap *SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulInterfaceIPMapModel `tfsdk:"interface_ip_map"`
+	AutomaticFromEnd   *SecuremeshSiteV2EmptyModel                                                                              `tfsdk:"automatic_from_end"`
+	AutomaticFromStart *SecuremeshSiteV2EmptyModel                                                                              `tfsdk:"automatic_from_start"`
+	DhcpNetworks       []SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel  `tfsdk:"dhcp_networks"`
+	FixedIPMap         *SecuremeshSiteV2EmptyModel                                                                              `tfsdk:"fixed_ip_map"`
+	InterfaceIPMap     *SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulInterfaceIPMapModel `tfsdk:"interface_ip_map"`
 }
 
 // SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel represents dhcp_networks block
 type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel struct {
-	NetworkPrefix types.String `tfsdk:"network_prefix"`
-	PoolSettings types.String `tfsdk:"pool_settings"`
-	Pools []SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel `tfsdk:"pools"`
+	NetworkPrefix types.String                                                                                                 `tfsdk:"network_prefix"`
+	PoolSettings  types.String                                                                                                 `tfsdk:"pool_settings"`
+	Pools         []SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel `tfsdk:"pools"`
 }
 
 // SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel represents pools block
 type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel struct {
-	EndIP types.String `tfsdk:"end_ip"`
+	EndIP   types.String `tfsdk:"end_ip"`
 	StartIP types.String `tfsdk:"start_ip"`
 }
 
@@ -1725,7 +1725,7 @@ type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigRoute
 // SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListNetworkOptionModel represents network_option block
 type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListNetworkOptionModel struct {
 	SiteLocalInsideNetwork *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_inside_network"`
-	SiteLocalNetwork *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_network"`
+	SiteLocalNetwork       *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_network"`
 }
 
 // SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListStaticIPModel represents static_ip block
@@ -1737,7 +1737,7 @@ type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListStaticIPModel struc
 // SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListStaticIPV6AddressModel represents static_ipv6_address block
 type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListStaticIPV6AddressModel struct {
 	ClusterStaticIP *SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListStaticIPV6AddressClusterStaticIPModel `tfsdk:"cluster_static_ip"`
-	NodeStaticIP *SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListStaticIPV6AddressNodeStaticIPModel `tfsdk:"node_static_ip"`
+	NodeStaticIP    *SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListStaticIPV6AddressNodeStaticIPModel    `tfsdk:"node_static_ip"`
 }
 
 // SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListStaticIPV6AddressClusterStaticIPModel represents cluster_static_ip block
@@ -1754,25 +1754,25 @@ type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListStaticIPV6AddressNo
 // SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListVlanInterfaceModel represents vlan_interface block
 type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListVlanInterfaceModel struct {
 	Device types.String `tfsdk:"device"`
-	VlanID types.Int64 `tfsdk:"vlan_id"`
+	VlanID types.Int64  `tfsdk:"vlan_id"`
 }
 
 // SecuremeshSiteV2PerformanceEnhancementModeModel represents performance_enhancement_mode block
 type SecuremeshSiteV2PerformanceEnhancementModeModel struct {
 	PerfModeL3Enhanced *SecuremeshSiteV2PerformanceEnhancementModePerfModeL3EnhancedModel `tfsdk:"perf_mode_l3_enhanced"`
-	PerfModeL7Enhanced *SecuremeshSiteV2EmptyModel `tfsdk:"perf_mode_l7_enhanced"`
+	PerfModeL7Enhanced *SecuremeshSiteV2EmptyModel                                        `tfsdk:"perf_mode_l7_enhanced"`
 }
 
 // SecuremeshSiteV2PerformanceEnhancementModePerfModeL3EnhancedModel represents perf_mode_l3_enhanced block
 type SecuremeshSiteV2PerformanceEnhancementModePerfModeL3EnhancedModel struct {
-	Jumbo *SecuremeshSiteV2EmptyModel `tfsdk:"jumbo"`
+	Jumbo   *SecuremeshSiteV2EmptyModel `tfsdk:"jumbo"`
 	NoJumbo *SecuremeshSiteV2EmptyModel `tfsdk:"no_jumbo"`
 }
 
 // SecuremeshSiteV2ReSelectModel represents re_select block
 type SecuremeshSiteV2ReSelectModel struct {
-	GeoProximity *SecuremeshSiteV2EmptyModel `tfsdk:"geo_proximity"`
-	SpecificRe *SecuremeshSiteV2ReSelectSpecificReModel `tfsdk:"specific_re"`
+	GeoProximity *SecuremeshSiteV2EmptyModel              `tfsdk:"geo_proximity"`
+	SpecificRe   *SecuremeshSiteV2ReSelectSpecificReModel `tfsdk:"specific_re"`
 }
 
 // SecuremeshSiteV2ReSelectSpecificReModel represents specific_re block
@@ -1782,17 +1782,17 @@ type SecuremeshSiteV2ReSelectSpecificReModel struct {
 
 // SecuremeshSiteV2SiteMeshGroupOnSLOModel represents site_mesh_group_on_slo block
 type SecuremeshSiteV2SiteMeshGroupOnSLOModel struct {
-	NoSiteMeshGroup *SecuremeshSiteV2EmptyModel `tfsdk:"no_site_mesh_group"`
-	SiteMeshGroup *SecuremeshSiteV2SiteMeshGroupOnSLOSiteMeshGroupModel `tfsdk:"site_mesh_group"`
-	SmConnectionPublicIP *SecuremeshSiteV2EmptyModel `tfsdk:"sm_connection_public_ip"`
-	SmConnectionPvtIP *SecuremeshSiteV2EmptyModel `tfsdk:"sm_connection_pvt_ip"`
+	NoSiteMeshGroup      *SecuremeshSiteV2EmptyModel                           `tfsdk:"no_site_mesh_group"`
+	SiteMeshGroup        *SecuremeshSiteV2SiteMeshGroupOnSLOSiteMeshGroupModel `tfsdk:"site_mesh_group"`
+	SmConnectionPublicIP *SecuremeshSiteV2EmptyModel                           `tfsdk:"sm_connection_public_ip"`
+	SmConnectionPvtIP    *SecuremeshSiteV2EmptyModel                           `tfsdk:"sm_connection_pvt_ip"`
 }
 
 // SecuremeshSiteV2SiteMeshGroupOnSLOSiteMeshGroupModel represents site_mesh_group block
 type SecuremeshSiteV2SiteMeshGroupOnSLOSiteMeshGroupModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // SecuremeshSiteV2SoftwareSettingsModel represents software_settings block
@@ -1803,14 +1803,14 @@ type SecuremeshSiteV2SoftwareSettingsModel struct {
 
 // SecuremeshSiteV2SoftwareSettingsOsModel represents os block
 type SecuremeshSiteV2SoftwareSettingsOsModel struct {
-	OperatingSystemVersion types.String `tfsdk:"operating_system_version"`
-	DefaultOsVersion *SecuremeshSiteV2EmptyModel `tfsdk:"default_os_version"`
+	OperatingSystemVersion types.String                `tfsdk:"operating_system_version"`
+	DefaultOsVersion       *SecuremeshSiteV2EmptyModel `tfsdk:"default_os_version"`
 }
 
 // SecuremeshSiteV2SoftwareSettingsSwModel represents sw block
 type SecuremeshSiteV2SoftwareSettingsSwModel struct {
-	VolterraSoftwareVersion types.String `tfsdk:"volterra_software_version"`
-	DefaultSwVersion *SecuremeshSiteV2EmptyModel `tfsdk:"default_sw_version"`
+	VolterraSoftwareVersion types.String                `tfsdk:"volterra_software_version"`
+	DefaultSwVersion        *SecuremeshSiteV2EmptyModel `tfsdk:"default_sw_version"`
 }
 
 // SecuremeshSiteV2UpgradeSettingsModel represents upgrade_settings block
@@ -1820,16 +1820,16 @@ type SecuremeshSiteV2UpgradeSettingsModel struct {
 
 // SecuremeshSiteV2UpgradeSettingsKubernetesUpgradeDrainModel represents kubernetes_upgrade_drain block
 type SecuremeshSiteV2UpgradeSettingsKubernetesUpgradeDrainModel struct {
-	DisableUpgradeDrain *SecuremeshSiteV2EmptyModel `tfsdk:"disable_upgrade_drain"`
-	EnableUpgradeDrain *SecuremeshSiteV2UpgradeSettingsKubernetesUpgradeDrainEnableUpgradeDrainModel `tfsdk:"enable_upgrade_drain"`
+	DisableUpgradeDrain *SecuremeshSiteV2EmptyModel                                                   `tfsdk:"disable_upgrade_drain"`
+	EnableUpgradeDrain  *SecuremeshSiteV2UpgradeSettingsKubernetesUpgradeDrainEnableUpgradeDrainModel `tfsdk:"enable_upgrade_drain"`
 }
 
 // SecuremeshSiteV2UpgradeSettingsKubernetesUpgradeDrainEnableUpgradeDrainModel represents enable_upgrade_drain block
 type SecuremeshSiteV2UpgradeSettingsKubernetesUpgradeDrainEnableUpgradeDrainModel struct {
-	DrainMaxUnavailableNodeCount types.Int64 `tfsdk:"drain_max_unavailable_node_count"`
-	DrainNodeTimeout types.Int64 `tfsdk:"drain_node_timeout"`
-	DisableVegaUpgradeMode *SecuremeshSiteV2EmptyModel `tfsdk:"disable_vega_upgrade_mode"`
-	EnableVegaUpgradeMode *SecuremeshSiteV2EmptyModel `tfsdk:"enable_vega_upgrade_mode"`
+	DrainMaxUnavailableNodeCount types.Int64                 `tfsdk:"drain_max_unavailable_node_count"`
+	DrainNodeTimeout             types.Int64                 `tfsdk:"drain_node_timeout"`
+	DisableVegaUpgradeMode       *SecuremeshSiteV2EmptyModel `tfsdk:"disable_vega_upgrade_mode"`
+	EnableVegaUpgradeMode        *SecuremeshSiteV2EmptyModel `tfsdk:"enable_vega_upgrade_mode"`
 }
 
 // SecuremeshSiteV2VmwareModel represents vmware block
@@ -1844,43 +1844,43 @@ type SecuremeshSiteV2VmwareNotManagedModel struct {
 
 // SecuremeshSiteV2VmwareNotManagedNodeListModel represents node_list block
 type SecuremeshSiteV2VmwareNotManagedNodeListModel struct {
-	Hostname types.String `tfsdk:"hostname"`
-	PublicIP types.String `tfsdk:"public_ip"`
-	Type types.String `tfsdk:"type"`
+	Hostname      types.String                                                 `tfsdk:"hostname"`
+	PublicIP      types.String                                                 `tfsdk:"public_ip"`
+	Type          types.String                                                 `tfsdk:"type"`
 	InterfaceList []SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListModel `tfsdk:"interface_list"`
 }
 
 // SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListModel represents interface_list block
 type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListModel struct {
-	DescriptionSpec types.String `tfsdk:"description_spec"`
-	Mtu types.Int64 `tfsdk:"mtu"`
-	Name types.String `tfsdk:"name"`
-	Priority types.Int64 `tfsdk:"priority"`
-	BondInterface *SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListBondInterfaceModel `tfsdk:"bond_interface"`
-	DhcpClient *SecuremeshSiteV2EmptyModel `tfsdk:"dhcp_client"`
-	EthernetInterface *SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListEthernetInterfaceModel `tfsdk:"ethernet_interface"`
-	IPV6AutoConfig *SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigModel `tfsdk:"ipv6_auto_config"`
-	Labels *SecuremeshSiteV2EmptyModel `tfsdk:"labels"`
-	Monitor *SecuremeshSiteV2EmptyModel `tfsdk:"monitor"`
-	MonitorDisabled *SecuremeshSiteV2EmptyModel `tfsdk:"monitor_disabled"`
-	NetworkOption *SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListNetworkOptionModel `tfsdk:"network_option"`
-	NoIPV4Address *SecuremeshSiteV2EmptyModel `tfsdk:"no_ipv4_address"`
-	NoIPV6Address *SecuremeshSiteV2EmptyModel `tfsdk:"no_ipv6_address"`
-	SiteToSiteConnectivityInterfaceDisabled *SecuremeshSiteV2EmptyModel `tfsdk:"site_to_site_connectivity_interface_disabled"`
-	SiteToSiteConnectivityInterfaceEnabled *SecuremeshSiteV2EmptyModel `tfsdk:"site_to_site_connectivity_interface_enabled"`
-	StaticIP *SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListStaticIPModel `tfsdk:"static_ip"`
-	StaticIPV6Address *SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListStaticIPV6AddressModel `tfsdk:"static_ipv6_address"`
-	VlanInterface *SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListVlanInterfaceModel `tfsdk:"vlan_interface"`
+	DescriptionSpec                         types.String                                                                 `tfsdk:"description_spec"`
+	Mtu                                     types.Int64                                                                  `tfsdk:"mtu"`
+	Name                                    types.String                                                                 `tfsdk:"name"`
+	Priority                                types.Int64                                                                  `tfsdk:"priority"`
+	BondInterface                           *SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListBondInterfaceModel     `tfsdk:"bond_interface"`
+	DhcpClient                              *SecuremeshSiteV2EmptyModel                                                  `tfsdk:"dhcp_client"`
+	EthernetInterface                       *SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListEthernetInterfaceModel `tfsdk:"ethernet_interface"`
+	IPV6AutoConfig                          *SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigModel    `tfsdk:"ipv6_auto_config"`
+	Labels                                  *SecuremeshSiteV2EmptyModel                                                  `tfsdk:"labels"`
+	Monitor                                 *SecuremeshSiteV2EmptyModel                                                  `tfsdk:"monitor"`
+	MonitorDisabled                         *SecuremeshSiteV2EmptyModel                                                  `tfsdk:"monitor_disabled"`
+	NetworkOption                           *SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListNetworkOptionModel     `tfsdk:"network_option"`
+	NoIPV4Address                           *SecuremeshSiteV2EmptyModel                                                  `tfsdk:"no_ipv4_address"`
+	NoIPV6Address                           *SecuremeshSiteV2EmptyModel                                                  `tfsdk:"no_ipv6_address"`
+	SiteToSiteConnectivityInterfaceDisabled *SecuremeshSiteV2EmptyModel                                                  `tfsdk:"site_to_site_connectivity_interface_disabled"`
+	SiteToSiteConnectivityInterfaceEnabled  *SecuremeshSiteV2EmptyModel                                                  `tfsdk:"site_to_site_connectivity_interface_enabled"`
+	StaticIP                                *SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListStaticIPModel          `tfsdk:"static_ip"`
+	StaticIPV6Address                       *SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListStaticIPV6AddressModel `tfsdk:"static_ipv6_address"`
+	VlanInterface                           *SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListVlanInterfaceModel     `tfsdk:"vlan_interface"`
 }
 
 // SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListBondInterfaceModel represents bond_interface block
 type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListBondInterfaceModel struct {
-	Devices types.List `tfsdk:"devices"`
-	LinkPollingInterval types.Int64 `tfsdk:"link_polling_interval"`
-	LinkUpDelay types.Int64 `tfsdk:"link_up_delay"`
-	Name types.String `tfsdk:"name"`
-	ActiveBackup *SecuremeshSiteV2EmptyModel `tfsdk:"active_backup"`
-	Lacp *SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListBondInterfaceLacpModel `tfsdk:"lacp"`
+	Devices             types.List                                                                   `tfsdk:"devices"`
+	LinkPollingInterval types.Int64                                                                  `tfsdk:"link_polling_interval"`
+	LinkUpDelay         types.Int64                                                                  `tfsdk:"link_up_delay"`
+	Name                types.String                                                                 `tfsdk:"name"`
+	ActiveBackup        *SecuremeshSiteV2EmptyModel                                                  `tfsdk:"active_backup"`
+	Lacp                *SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListBondInterfaceLacpModel `tfsdk:"lacp"`
 }
 
 // SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListBondInterfaceLacpModel represents lacp block
@@ -1891,26 +1891,26 @@ type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListBondInterfaceLacpModel
 // SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListEthernetInterfaceModel represents ethernet_interface block
 type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListEthernetInterfaceModel struct {
 	Device types.String `tfsdk:"device"`
-	Mac types.String `tfsdk:"mac"`
+	Mac    types.String `tfsdk:"mac"`
 }
 
 // SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigModel represents ipv6_auto_config block
 type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigModel struct {
-	Host *SecuremeshSiteV2EmptyModel `tfsdk:"host"`
+	Host   *SecuremeshSiteV2EmptyModel                                                     `tfsdk:"host"`
 	Router *SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigRouterModel `tfsdk:"router"`
 }
 
 // SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigRouterModel represents router block
 type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigRouterModel struct {
-	NetworkPrefix types.String `tfsdk:"network_prefix"`
-	DNSConfig *SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel `tfsdk:"dns_config"`
-	Stateful *SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel `tfsdk:"stateful"`
+	NetworkPrefix types.String                                                                             `tfsdk:"network_prefix"`
+	DNSConfig     *SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel `tfsdk:"dns_config"`
+	Stateful      *SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel  `tfsdk:"stateful"`
 }
 
 // SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel represents dns_config block
 type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel struct {
 	ConfiguredList *SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigConfiguredListModel `tfsdk:"configured_list"`
-	LocalDNS *SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel `tfsdk:"local_dns"`
+	LocalDNS       *SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel       `tfsdk:"local_dns"`
 }
 
 // SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigConfiguredListModel represents configured_list block
@@ -1920,30 +1920,30 @@ type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigRouterDN
 
 // SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel represents local_dns block
 type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel struct {
-	ConfiguredAddress types.String `tfsdk:"configured_address"`
-	FirstAddress *SecuremeshSiteV2EmptyModel `tfsdk:"first_address"`
-	LastAddress *SecuremeshSiteV2EmptyModel `tfsdk:"last_address"`
+	ConfiguredAddress types.String                `tfsdk:"configured_address"`
+	FirstAddress      *SecuremeshSiteV2EmptyModel `tfsdk:"first_address"`
+	LastAddress       *SecuremeshSiteV2EmptyModel `tfsdk:"last_address"`
 }
 
 // SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel represents stateful block
 type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel struct {
-	AutomaticFromEnd *SecuremeshSiteV2EmptyModel `tfsdk:"automatic_from_end"`
-	AutomaticFromStart *SecuremeshSiteV2EmptyModel `tfsdk:"automatic_from_start"`
-	DhcpNetworks []SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel `tfsdk:"dhcp_networks"`
-	FixedIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"fixed_ip_map"`
-	InterfaceIPMap *SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulInterfaceIPMapModel `tfsdk:"interface_ip_map"`
+	AutomaticFromEnd   *SecuremeshSiteV2EmptyModel                                                                           `tfsdk:"automatic_from_end"`
+	AutomaticFromStart *SecuremeshSiteV2EmptyModel                                                                           `tfsdk:"automatic_from_start"`
+	DhcpNetworks       []SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel  `tfsdk:"dhcp_networks"`
+	FixedIPMap         *SecuremeshSiteV2EmptyModel                                                                           `tfsdk:"fixed_ip_map"`
+	InterfaceIPMap     *SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulInterfaceIPMapModel `tfsdk:"interface_ip_map"`
 }
 
 // SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel represents dhcp_networks block
 type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel struct {
-	NetworkPrefix types.String `tfsdk:"network_prefix"`
-	PoolSettings types.String `tfsdk:"pool_settings"`
-	Pools []SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel `tfsdk:"pools"`
+	NetworkPrefix types.String                                                                                              `tfsdk:"network_prefix"`
+	PoolSettings  types.String                                                                                              `tfsdk:"pool_settings"`
+	Pools         []SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel `tfsdk:"pools"`
 }
 
 // SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel represents pools block
 type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel struct {
-	EndIP types.String `tfsdk:"end_ip"`
+	EndIP   types.String `tfsdk:"end_ip"`
 	StartIP types.String `tfsdk:"start_ip"`
 }
 
@@ -1955,7 +1955,7 @@ type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigRouterSt
 // SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListNetworkOptionModel represents network_option block
 type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListNetworkOptionModel struct {
 	SiteLocalInsideNetwork *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_inside_network"`
-	SiteLocalNetwork *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_network"`
+	SiteLocalNetwork       *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_network"`
 }
 
 // SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListStaticIPModel represents static_ip block
@@ -1967,7 +1967,7 @@ type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListStaticIPModel struct {
 // SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListStaticIPV6AddressModel represents static_ipv6_address block
 type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListStaticIPV6AddressModel struct {
 	ClusterStaticIP *SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListStaticIPV6AddressClusterStaticIPModel `tfsdk:"cluster_static_ip"`
-	NodeStaticIP *SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListStaticIPV6AddressNodeStaticIPModel `tfsdk:"node_static_ip"`
+	NodeStaticIP    *SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListStaticIPV6AddressNodeStaticIPModel    `tfsdk:"node_static_ip"`
 }
 
 // SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListStaticIPV6AddressClusterStaticIPModel represents cluster_static_ip block
@@ -1984,60 +1984,60 @@ type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListStaticIPV6AddressNodeS
 // SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListVlanInterfaceModel represents vlan_interface block
 type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListVlanInterfaceModel struct {
 	Device types.String `tfsdk:"device"`
-	VlanID types.Int64 `tfsdk:"vlan_id"`
+	VlanID types.Int64  `tfsdk:"vlan_id"`
 }
 
 type SecuremeshSiteV2ResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	TunnelDeadTimeout types.Int64 `tfsdk:"tunnel_dead_timeout"`
-	TunnelType types.String `tfsdk:"tunnel_type"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Name                           types.String                                         `tfsdk:"name"`
+	Namespace                      types.String                                         `tfsdk:"namespace"`
+	Annotations                    types.Map                                            `tfsdk:"annotations"`
+	Description                    types.String                                         `tfsdk:"description"`
+	Disable                        types.Bool                                           `tfsdk:"disable"`
+	Labels                         types.Map                                            `tfsdk:"labels"`
+	ID                             types.String                                         `tfsdk:"id"`
+	TunnelDeadTimeout              types.Int64                                          `tfsdk:"tunnel_dead_timeout"`
+	TunnelType                     types.String                                         `tfsdk:"tunnel_type"`
+	Timeouts                       timeouts.Value                                       `tfsdk:"timeouts"`
 	ActiveEnhancedFirewallPolicies *SecuremeshSiteV2ActiveEnhancedFirewallPoliciesModel `tfsdk:"active_enhanced_firewall_policies"`
-	ActiveForwardProxyPolicies *SecuremeshSiteV2ActiveForwardProxyPoliciesModel `tfsdk:"active_forward_proxy_policies"`
-	AdminUserCredentials *SecuremeshSiteV2AdminUserCredentialsModel `tfsdk:"admin_user_credentials"`
-	AWS *SecuremeshSiteV2AWSModel `tfsdk:"aws"`
-	Azure *SecuremeshSiteV2AzureModel `tfsdk:"azure"`
-	Baremetal *SecuremeshSiteV2BaremetalModel `tfsdk:"baremetal"`
-	BlockAllServices *SecuremeshSiteV2EmptyModel `tfsdk:"block_all_services"`
-	BlockedServices *SecuremeshSiteV2BlockedServicesModel `tfsdk:"blocked_services"`
-	CustomProxy *SecuremeshSiteV2CustomProxyModel `tfsdk:"custom_proxy"`
-	CustomProxyBypass *SecuremeshSiteV2CustomProxyBypassModel `tfsdk:"custom_proxy_bypass"`
-	DcClusterGroupSLI *SecuremeshSiteV2DcClusterGroupSLIModel `tfsdk:"dc_cluster_group_sli"`
-	DcClusterGroupSLO *SecuremeshSiteV2DcClusterGroupSLOModel `tfsdk:"dc_cluster_group_slo"`
-	DisableHA *SecuremeshSiteV2EmptyModel `tfsdk:"disable_ha"`
-	DisableURLCategorization *SecuremeshSiteV2EmptyModel `tfsdk:"disable_url_categorization"`
-	DNSNTPConfig *SecuremeshSiteV2DNSNTPConfigModel `tfsdk:"dns_ntp_config"`
-	EnableHA *SecuremeshSiteV2EmptyModel `tfsdk:"enable_ha"`
-	EnableURLCategorization *SecuremeshSiteV2EmptyModel `tfsdk:"enable_url_categorization"`
-	Equinix *SecuremeshSiteV2EquinixModel `tfsdk:"equinix"`
-	F5Proxy *SecuremeshSiteV2EmptyModel `tfsdk:"f5_proxy"`
-	GCP *SecuremeshSiteV2GCPModel `tfsdk:"gcp"`
-	KVM *SecuremeshSiteV2KVMModel `tfsdk:"kvm"`
-	LoadBalancing *SecuremeshSiteV2LoadBalancingModel `tfsdk:"load_balancing"`
-	LocalVrf *SecuremeshSiteV2LocalVrfModel `tfsdk:"local_vrf"`
-	LogReceiver *SecuremeshSiteV2LogReceiverModel `tfsdk:"log_receiver"`
-	LogsStreamingDisabled *SecuremeshSiteV2EmptyModel `tfsdk:"logs_streaming_disabled"`
-	NoForwardProxy *SecuremeshSiteV2EmptyModel `tfsdk:"no_forward_proxy"`
-	NoNetworkPolicy *SecuremeshSiteV2EmptyModel `tfsdk:"no_network_policy"`
-	NoProxyBypass *SecuremeshSiteV2EmptyModel `tfsdk:"no_proxy_bypass"`
-	NoS2SConnectivitySLI *SecuremeshSiteV2EmptyModel `tfsdk:"no_s2s_connectivity_sli"`
-	NoS2SConnectivitySLO *SecuremeshSiteV2EmptyModel `tfsdk:"no_s2s_connectivity_slo"`
-	Nutanix *SecuremeshSiteV2NutanixModel `tfsdk:"nutanix"`
-	OCI *SecuremeshSiteV2OCIModel `tfsdk:"oci"`
-	OfflineSurvivabilityMode *SecuremeshSiteV2OfflineSurvivabilityModeModel `tfsdk:"offline_survivability_mode"`
-	Openstack *SecuremeshSiteV2OpenstackModel `tfsdk:"openstack"`
-	PerformanceEnhancementMode *SecuremeshSiteV2PerformanceEnhancementModeModel `tfsdk:"performance_enhancement_mode"`
-	ReSelect *SecuremeshSiteV2ReSelectModel `tfsdk:"re_select"`
-	SiteMeshGroupOnSLO *SecuremeshSiteV2SiteMeshGroupOnSLOModel `tfsdk:"site_mesh_group_on_slo"`
-	SoftwareSettings *SecuremeshSiteV2SoftwareSettingsModel `tfsdk:"software_settings"`
-	UpgradeSettings *SecuremeshSiteV2UpgradeSettingsModel `tfsdk:"upgrade_settings"`
-	Vmware *SecuremeshSiteV2VmwareModel `tfsdk:"vmware"`
+	ActiveForwardProxyPolicies     *SecuremeshSiteV2ActiveForwardProxyPoliciesModel     `tfsdk:"active_forward_proxy_policies"`
+	AdminUserCredentials           *SecuremeshSiteV2AdminUserCredentialsModel           `tfsdk:"admin_user_credentials"`
+	AWS                            *SecuremeshSiteV2AWSModel                            `tfsdk:"aws"`
+	Azure                          *SecuremeshSiteV2AzureModel                          `tfsdk:"azure"`
+	Baremetal                      *SecuremeshSiteV2BaremetalModel                      `tfsdk:"baremetal"`
+	BlockAllServices               *SecuremeshSiteV2EmptyModel                          `tfsdk:"block_all_services"`
+	BlockedServices                *SecuremeshSiteV2BlockedServicesModel                `tfsdk:"blocked_services"`
+	CustomProxy                    *SecuremeshSiteV2CustomProxyModel                    `tfsdk:"custom_proxy"`
+	CustomProxyBypass              *SecuremeshSiteV2CustomProxyBypassModel              `tfsdk:"custom_proxy_bypass"`
+	DcClusterGroupSLI              *SecuremeshSiteV2DcClusterGroupSLIModel              `tfsdk:"dc_cluster_group_sli"`
+	DcClusterGroupSLO              *SecuremeshSiteV2DcClusterGroupSLOModel              `tfsdk:"dc_cluster_group_slo"`
+	DisableHA                      *SecuremeshSiteV2EmptyModel                          `tfsdk:"disable_ha"`
+	DisableURLCategorization       *SecuremeshSiteV2EmptyModel                          `tfsdk:"disable_url_categorization"`
+	DNSNTPConfig                   *SecuremeshSiteV2DNSNTPConfigModel                   `tfsdk:"dns_ntp_config"`
+	EnableHA                       *SecuremeshSiteV2EmptyModel                          `tfsdk:"enable_ha"`
+	EnableURLCategorization        *SecuremeshSiteV2EmptyModel                          `tfsdk:"enable_url_categorization"`
+	Equinix                        *SecuremeshSiteV2EquinixModel                        `tfsdk:"equinix"`
+	F5Proxy                        *SecuremeshSiteV2EmptyModel                          `tfsdk:"f5_proxy"`
+	GCP                            *SecuremeshSiteV2GCPModel                            `tfsdk:"gcp"`
+	KVM                            *SecuremeshSiteV2KVMModel                            `tfsdk:"kvm"`
+	LoadBalancing                  *SecuremeshSiteV2LoadBalancingModel                  `tfsdk:"load_balancing"`
+	LocalVrf                       *SecuremeshSiteV2LocalVrfModel                       `tfsdk:"local_vrf"`
+	LogReceiver                    *SecuremeshSiteV2LogReceiverModel                    `tfsdk:"log_receiver"`
+	LogsStreamingDisabled          *SecuremeshSiteV2EmptyModel                          `tfsdk:"logs_streaming_disabled"`
+	NoForwardProxy                 *SecuremeshSiteV2EmptyModel                          `tfsdk:"no_forward_proxy"`
+	NoNetworkPolicy                *SecuremeshSiteV2EmptyModel                          `tfsdk:"no_network_policy"`
+	NoProxyBypass                  *SecuremeshSiteV2EmptyModel                          `tfsdk:"no_proxy_bypass"`
+	NoS2SConnectivitySLI           *SecuremeshSiteV2EmptyModel                          `tfsdk:"no_s2s_connectivity_sli"`
+	NoS2SConnectivitySLO           *SecuremeshSiteV2EmptyModel                          `tfsdk:"no_s2s_connectivity_slo"`
+	Nutanix                        *SecuremeshSiteV2NutanixModel                        `tfsdk:"nutanix"`
+	OCI                            *SecuremeshSiteV2OCIModel                            `tfsdk:"oci"`
+	OfflineSurvivabilityMode       *SecuremeshSiteV2OfflineSurvivabilityModeModel       `tfsdk:"offline_survivability_mode"`
+	Openstack                      *SecuremeshSiteV2OpenstackModel                      `tfsdk:"openstack"`
+	PerformanceEnhancementMode     *SecuremeshSiteV2PerformanceEnhancementModeModel     `tfsdk:"performance_enhancement_mode"`
+	ReSelect                       *SecuremeshSiteV2ReSelectModel                       `tfsdk:"re_select"`
+	SiteMeshGroupOnSLO             *SecuremeshSiteV2SiteMeshGroupOnSLOModel             `tfsdk:"site_mesh_group_on_slo"`
+	SoftwareSettings               *SecuremeshSiteV2SoftwareSettingsModel               `tfsdk:"software_settings"`
+	UpgradeSettings                *SecuremeshSiteV2UpgradeSettingsModel                `tfsdk:"upgrade_settings"`
+	Vmware                         *SecuremeshSiteV2VmwareModel                         `tfsdk:"vmware"`
 }
 
 func (r *SecuremeshSiteV2Resource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -2051,7 +2051,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the SecuremeshSiteV2. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -2061,7 +2061,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the SecuremeshSiteV2 will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -2071,41 +2071,41 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"tunnel_dead_timeout": schema.Int64Attribute{
 				MarkdownDescription: "Tunnel Dead Timeout (msec). Time interval, in millisec, within which any ipsec / ssl connection from the site going down is detected. When not set (== 0), a default value of 10000 msec will be used.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{
 					int64planmodifier.UseStateForUnknown(),
 				},
 			},
 			"tunnel_type": schema.StringAttribute{
 				MarkdownDescription: "Tunnel type. Tunnel encapsulation to be used between sites Tunnel can operate in both IPsec and SSL, with IPsec being prefered over SSL. Tunnel is of type IPsec Tunnel is of type SSL. Possible values are `SITE_TO_SITE_TUNNEL_IPSEC_OR_SSL`, `SITE_TO_SITE_TUNNEL_IPSEC`, `SITE_TO_SITE_TUNNEL_SSL`. Defaults to `SITE_TO_SITE_TUNNEL_IPSEC_OR_SSL`.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -2120,8 +2120,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 			}),
 			"active_enhanced_firewall_policies": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: active_enhanced_firewall_policies, no_network_policy] Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion.",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"enhanced_firewall_policies": schema.ListNestedBlock{
 						MarkdownDescription: "Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active",
@@ -2129,27 +2128,25 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-									Optional: true,
+									Optional:            true,
 								},
 								"namespace": schema.StringAttribute{
 									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-									Optional: true,
+									Optional:            true,
 								},
 								"tenant": schema.StringAttribute{
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-									Optional: true,
-									Computed: true,
+									Optional:            true,
+									Computed:            true,
 								},
 							},
 						},
 					},
 				},
-
 			},
 			"active_forward_proxy_policies": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: active_forward_proxy_policies, no_forward_proxy] Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"forward_proxy_policies": schema.ListNestedBlock{
 						MarkdownDescription: "Forward Proxy Policies. Ordered List of Forward Proxy Policies active",
@@ -2157,51 +2154,49 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-									Optional: true,
+									Optional:            true,
 								},
 								"namespace": schema.StringAttribute{
 									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-									Optional: true,
+									Optional:            true,
 								},
 								"tenant": schema.StringAttribute{
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-									Optional: true,
-									Computed: true,
+									Optional:            true,
+									Computed:            true,
 								},
 							},
 						},
 					},
 				},
-
 			},
 			"admin_user_credentials": schema.SingleNestedBlock{
 				MarkdownDescription: "Admin User Credentials. Setup user credentials to manage access to nodes belonging to the site. When configured, 'admin' user will be setup and customers can access these nodes via either the node local WebUI or via SSH to access shell/CLI Ensure 'Node Local Services' are enabled to allow for required access",
 				Attributes: map[string]schema.Attribute{
 					"ssh_key": schema.StringAttribute{
 						MarkdownDescription: "Public SSH key. Provided Public SSH key can be used for accessing nodes of the site. When provided, customers can ssh to the nodes of this Customer Edge site using admin as the user.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"admin_password": schema.SingleNestedBlock{
 						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"blindfold_secret_info": schema.SingleNestedBlock{
 								MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 								Attributes: map[string]schema.Attribute{
 									"decryption_provider": schema.StringAttribute{
 										MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-										Optional: true,
+										Optional:            true,
 									},
 									"location": schema.StringAttribute{
 										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-										Optional: true,
+										Optional:            true,
 									},
 									"store_provider": schema.StringAttribute{
 										MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -2210,28 +2205,25 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 								Attributes: map[string]schema.Attribute{
 									"provider_ref": schema.StringAttribute{
 										MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-										Optional: true,
+										Optional:            true,
 									},
 									"url": schema.StringAttribute{
 										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
 						},
 					},
 				},
-
 			},
 			"aws": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: aws, azure, baremetal, equinix, gcp, kvm, nutanix, oci, openstack, vmware] AWS Provider Type. AWS Provider Type",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"not_managed": schema.SingleNestedBlock{
 						MarkdownDescription: "List of Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section.",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"node_list": schema.ListNestedBlock{
 								MarkdownDescription: "Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section.",
@@ -2239,15 +2231,15 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 									Attributes: map[string]schema.Attribute{
 										"hostname": schema.StringAttribute{
 											MarkdownDescription: "Hostname. Hostname for this Node",
-											Optional: true,
+											Optional:            true,
 										},
 										"public_ip": schema.StringAttribute{
 											MarkdownDescription: "Public IP. Public IP for this Node",
-											Optional: true,
+											Optional:            true,
 										},
 										"type": schema.StringAttribute{
 											MarkdownDescription: "Type. Type for this Node, can be Control or Worker",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -2257,19 +2249,19 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 												Attributes: map[string]schema.Attribute{
 													"description_spec": schema.StringAttribute{
 														MarkdownDescription: "Interface Description. Description for this Interface",
-														Optional: true,
+														Optional:            true,
 													},
 													"mtu": schema.Int64Attribute{
 														MarkdownDescription: "Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, mtu must be between 512 and 16384",
-														Optional: true,
+														Optional:            true,
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Interface Name. Name of this Interface",
-														Optional: true,
+														Optional:            true,
 													},
 													"priority": schema.Int64Attribute{
 														MarkdownDescription: "Priority. For a node, if multiple interfaces are configured in a VRF, interfaces with highest priority will be used as active and interfaces with lower priority will be used as backup. If multiple interfaces have the same priority, ECMP will be used. Greater the value, higher the priority",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 												Blocks: map[string]schema.Block{
@@ -2278,20 +2270,20 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														Attributes: map[string]schema.Attribute{
 															"devices": schema.ListAttribute{
 																MarkdownDescription: "Member Ethernet Devices. Ethernet devices that will make up this bond",
-																Optional: true,
-																ElementType: types.StringType,
+																Optional:            true,
+																ElementType:         types.StringType,
 															},
 															"link_polling_interval": schema.Int64Attribute{
 																MarkdownDescription: "Link Polling Interval. Link polling interval in milliseconds",
-																Optional: true,
+																Optional:            true,
 															},
 															"link_up_delay": schema.Int64Attribute{
 																MarkdownDescription: "Link Up Delay. Milliseconds wait before link is declared up",
-																Optional: true,
+																Optional:            true,
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Bond Device Name. Name for the Bond. Ex 'bond0'",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 														Blocks: map[string]schema.Block{
@@ -2303,7 +2295,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																Attributes: map[string]schema.Attribute{
 																	"rate": schema.Int64Attribute{
 																		MarkdownDescription: "LACP Packet Interval. Interval in seconds to transmit LACP packets",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 															},
@@ -2317,18 +2309,17 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														Attributes: map[string]schema.Attribute{
 															"device": schema.StringAttribute{
 																MarkdownDescription: "Ethernet Device. Select an Ethernet device from the discovered interfaces to configure. Once configured, this interface will be part of this sites dataplane and can participate in the networking services configured on this site.",
-																Optional: true,
+																Optional:            true,
 															},
 															"mac": schema.StringAttribute{
 																MarkdownDescription: "MAC Address.",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 													},
 													"ipv6_auto_config": schema.SingleNestedBlock{
 														MarkdownDescription: "IPV6AutoConfigType.",
-														Attributes: map[string]schema.Attribute{
-														},
+														Attributes:          map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"host": schema.SingleNestedBlock{
 																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -2338,22 +2329,21 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																Attributes: map[string]schema.Attribute{
 																	"network_prefix": schema.StringAttribute{
 																		MarkdownDescription: "Network Prefix. Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 																Blocks: map[string]schema.Block{
 																	"dns_config": schema.SingleNestedBlock{
 																		MarkdownDescription: "IPV6DnsConfig.",
-																		Attributes: map[string]schema.Attribute{
-																		},
+																		Attributes:          map[string]schema.Attribute{},
 																		Blocks: map[string]schema.Block{
 																			"configured_list": schema.SingleNestedBlock{
 																				MarkdownDescription: "IPV6DnsList.",
 																				Attributes: map[string]schema.Attribute{
 																					"dns_list": schema.ListAttribute{
 																						MarkdownDescription: "Dns List. List of IPV6 Addresses acting as Dns servers",
-																						Optional: true,
-																						ElementType: types.StringType,
+																						Optional:            true,
+																						ElementType:         types.StringType,
 																					},
 																				},
 																			},
@@ -2362,7 +2352,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																				Attributes: map[string]schema.Attribute{
 																					"configured_address": schema.StringAttribute{
 																						MarkdownDescription: "Configured Address. Configured address from the network prefix is chosen as dns server",
-																						Optional: true,
+																						Optional:            true,
 																					},
 																				},
 																				Blocks: map[string]schema.Block{
@@ -2378,8 +2368,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																	},
 																	"stateful": schema.SingleNestedBlock{
 																		MarkdownDescription: "DHCPIPV6 Stateful Server.",
-																		Attributes: map[string]schema.Attribute{
-																		},
+																		Attributes:          map[string]schema.Attribute{},
 																		Blocks: map[string]schema.Block{
 																			"automatic_from_end": schema.SingleNestedBlock{
 																				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -2393,11 +2382,11 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																					Attributes: map[string]schema.Attribute{
 																						"network_prefix": schema.StringAttribute{
 																							MarkdownDescription: "Network Prefix. Network Prefix to be used for IPV6 address auto configuration",
-																							Optional: true,
+																							Optional:            true,
 																						},
 																						"pool_settings": schema.StringAttribute{
 																							MarkdownDescription: "Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation. Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`. Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`.",
-																							Optional: true,
+																							Optional:            true,
 																						},
 																					},
 																					Blocks: map[string]schema.Block{
@@ -2407,11 +2396,11 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																								Attributes: map[string]schema.Attribute{
 																									"end_ip": schema.StringAttribute{
 																										MarkdownDescription: "Ending IPV6. Ending IPV6 address of the pool range. In case of address allocator, offset is derived based on network prefix.",
-																										Optional: true,
+																										Optional:            true,
 																									},
 																									"start_ip": schema.StringAttribute{
 																										MarkdownDescription: "Starting IPV6. Starting IPV6 address of the pool range. In case of address allocator, offset is derived based on network prefix. 2001::1 with prefix length of 64, start offset is 5",
-																										Optional: true,
+																										Optional:            true,
 																									},
 																								},
 																							},
@@ -2424,8 +2413,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																			},
 																			"interface_ip_map": schema.SingleNestedBlock{
 																				MarkdownDescription: "Interface IPV6 Assignments. Map of Interface IPV6 assignments per node",
-																				Attributes: map[string]schema.Attribute{
-																				},
+																				Attributes:          map[string]schema.Attribute{},
 																				Blocks: map[string]schema.Block{
 																					"interface_ip_map": schema.SingleNestedBlock{
 																						MarkdownDescription: "Site:Node to IPV6 Mapping. Map of Site:Node to IPV6 address.",
@@ -2449,8 +2437,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 													},
 													"network_option": schema.SingleNestedBlock{
 														MarkdownDescription: "Network Select. x-required Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional. Global VRFs are configured via Networking > Segments. A site can have multple Network Segments (global VRFs).",
-														Attributes: map[string]schema.Attribute{
-														},
+														Attributes:          map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"site_local_inside_network": schema.SingleNestedBlock{
 																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -2477,23 +2464,21 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														Attributes: map[string]schema.Attribute{
 															"default_gw": schema.StringAttribute{
 																MarkdownDescription: "Default Gateway. IP address of the default gateway.",
-																Optional: true,
+																Optional:            true,
 															},
 															"ip_address": schema.StringAttribute{
 																MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 													},
 													"static_ipv6_address": schema.SingleNestedBlock{
 														MarkdownDescription: "Static IP Parameters. Configure Static IP parameters",
-														Attributes: map[string]schema.Attribute{
-														},
+														Attributes:          map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"cluster_static_ip": schema.SingleNestedBlock{
 																MarkdownDescription: "Cluster: Static IP Parameters. Configure Static IP parameters for cluster",
-																Attributes: map[string]schema.Attribute{
-																},
+																Attributes:          map[string]schema.Attribute{},
 																Blocks: map[string]schema.Block{
 																	"interface_ip_map": schema.SingleNestedBlock{
 																		MarkdownDescription: "Node to IP Mapping. Map of Node to Static ip configuration value, Key:Node, Value:IP Address",
@@ -2505,11 +2490,11 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																Attributes: map[string]schema.Attribute{
 																	"default_gw": schema.StringAttribute{
 																		MarkdownDescription: "Default Gateway. IP address of the default gateway.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"ip_address": schema.StringAttribute{
 																		MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 															},
@@ -2520,11 +2505,11 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														Attributes: map[string]schema.Attribute{
 															"device": schema.StringAttribute{
 																MarkdownDescription: "Parent Interface. Select a parent interface from the dropdown.",
-																Optional: true,
+																Optional:            true,
 															},
 															"vlan_id": schema.Int64Attribute{
 																MarkdownDescription: "VLAN ID. Configure the VLAN tag for this interface.",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 													},
@@ -2537,17 +2522,14 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 						},
 					},
 				},
-
 			},
 			"azure": schema.SingleNestedBlock{
 				MarkdownDescription: "Azure Provider Type. Azure Provider Type",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"not_managed": schema.SingleNestedBlock{
 						MarkdownDescription: "List of Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section.",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"node_list": schema.ListNestedBlock{
 								MarkdownDescription: "Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section.",
@@ -2555,15 +2537,15 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 									Attributes: map[string]schema.Attribute{
 										"hostname": schema.StringAttribute{
 											MarkdownDescription: "Hostname. Hostname for this Node",
-											Optional: true,
+											Optional:            true,
 										},
 										"public_ip": schema.StringAttribute{
 											MarkdownDescription: "Public IP. Public IP for this Node",
-											Optional: true,
+											Optional:            true,
 										},
 										"type": schema.StringAttribute{
 											MarkdownDescription: "Type. Type for this Node, can be Control or Worker",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -2573,19 +2555,19 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 												Attributes: map[string]schema.Attribute{
 													"description_spec": schema.StringAttribute{
 														MarkdownDescription: "Interface Description. Description for this Interface",
-														Optional: true,
+														Optional:            true,
 													},
 													"mtu": schema.Int64Attribute{
 														MarkdownDescription: "Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, mtu must be between 512 and 16384",
-														Optional: true,
+														Optional:            true,
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Interface Name. Name of this Interface",
-														Optional: true,
+														Optional:            true,
 													},
 													"priority": schema.Int64Attribute{
 														MarkdownDescription: "Priority. For a node, if multiple interfaces are configured in a VRF, interfaces with highest priority will be used as active and interfaces with lower priority will be used as backup. If multiple interfaces have the same priority, ECMP will be used. Greater the value, higher the priority",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 												Blocks: map[string]schema.Block{
@@ -2594,20 +2576,20 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														Attributes: map[string]schema.Attribute{
 															"devices": schema.ListAttribute{
 																MarkdownDescription: "Member Ethernet Devices. Ethernet devices that will make up this bond",
-																Optional: true,
-																ElementType: types.StringType,
+																Optional:            true,
+																ElementType:         types.StringType,
 															},
 															"link_polling_interval": schema.Int64Attribute{
 																MarkdownDescription: "Link Polling Interval. Link polling interval in milliseconds",
-																Optional: true,
+																Optional:            true,
 															},
 															"link_up_delay": schema.Int64Attribute{
 																MarkdownDescription: "Link Up Delay. Milliseconds wait before link is declared up",
-																Optional: true,
+																Optional:            true,
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Bond Device Name. Name for the Bond. Ex 'bond0'",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 														Blocks: map[string]schema.Block{
@@ -2619,7 +2601,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																Attributes: map[string]schema.Attribute{
 																	"rate": schema.Int64Attribute{
 																		MarkdownDescription: "LACP Packet Interval. Interval in seconds to transmit LACP packets",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 															},
@@ -2633,18 +2615,17 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														Attributes: map[string]schema.Attribute{
 															"device": schema.StringAttribute{
 																MarkdownDescription: "Ethernet Device. Select an Ethernet device from the discovered interfaces to configure. Once configured, this interface will be part of this sites dataplane and can participate in the networking services configured on this site.",
-																Optional: true,
+																Optional:            true,
 															},
 															"mac": schema.StringAttribute{
 																MarkdownDescription: "MAC Address.",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 													},
 													"ipv6_auto_config": schema.SingleNestedBlock{
 														MarkdownDescription: "IPV6AutoConfigType.",
-														Attributes: map[string]schema.Attribute{
-														},
+														Attributes:          map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"host": schema.SingleNestedBlock{
 																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -2654,22 +2635,21 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																Attributes: map[string]schema.Attribute{
 																	"network_prefix": schema.StringAttribute{
 																		MarkdownDescription: "Network Prefix. Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 																Blocks: map[string]schema.Block{
 																	"dns_config": schema.SingleNestedBlock{
 																		MarkdownDescription: "IPV6DnsConfig.",
-																		Attributes: map[string]schema.Attribute{
-																		},
+																		Attributes:          map[string]schema.Attribute{},
 																		Blocks: map[string]schema.Block{
 																			"configured_list": schema.SingleNestedBlock{
 																				MarkdownDescription: "IPV6DnsList.",
 																				Attributes: map[string]schema.Attribute{
 																					"dns_list": schema.ListAttribute{
 																						MarkdownDescription: "Dns List. List of IPV6 Addresses acting as Dns servers",
-																						Optional: true,
-																						ElementType: types.StringType,
+																						Optional:            true,
+																						ElementType:         types.StringType,
 																					},
 																				},
 																			},
@@ -2678,7 +2658,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																				Attributes: map[string]schema.Attribute{
 																					"configured_address": schema.StringAttribute{
 																						MarkdownDescription: "Configured Address. Configured address from the network prefix is chosen as dns server",
-																						Optional: true,
+																						Optional:            true,
 																					},
 																				},
 																				Blocks: map[string]schema.Block{
@@ -2694,8 +2674,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																	},
 																	"stateful": schema.SingleNestedBlock{
 																		MarkdownDescription: "DHCPIPV6 Stateful Server.",
-																		Attributes: map[string]schema.Attribute{
-																		},
+																		Attributes:          map[string]schema.Attribute{},
 																		Blocks: map[string]schema.Block{
 																			"automatic_from_end": schema.SingleNestedBlock{
 																				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -2709,11 +2688,11 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																					Attributes: map[string]schema.Attribute{
 																						"network_prefix": schema.StringAttribute{
 																							MarkdownDescription: "Network Prefix. Network Prefix to be used for IPV6 address auto configuration",
-																							Optional: true,
+																							Optional:            true,
 																						},
 																						"pool_settings": schema.StringAttribute{
 																							MarkdownDescription: "Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation. Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`. Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`.",
-																							Optional: true,
+																							Optional:            true,
 																						},
 																					},
 																					Blocks: map[string]schema.Block{
@@ -2723,11 +2702,11 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																								Attributes: map[string]schema.Attribute{
 																									"end_ip": schema.StringAttribute{
 																										MarkdownDescription: "Ending IPV6. Ending IPV6 address of the pool range. In case of address allocator, offset is derived based on network prefix.",
-																										Optional: true,
+																										Optional:            true,
 																									},
 																									"start_ip": schema.StringAttribute{
 																										MarkdownDescription: "Starting IPV6. Starting IPV6 address of the pool range. In case of address allocator, offset is derived based on network prefix. 2001::1 with prefix length of 64, start offset is 5",
-																										Optional: true,
+																										Optional:            true,
 																									},
 																								},
 																							},
@@ -2740,8 +2719,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																			},
 																			"interface_ip_map": schema.SingleNestedBlock{
 																				MarkdownDescription: "Interface IPV6 Assignments. Map of Interface IPV6 assignments per node",
-																				Attributes: map[string]schema.Attribute{
-																				},
+																				Attributes:          map[string]schema.Attribute{},
 																				Blocks: map[string]schema.Block{
 																					"interface_ip_map": schema.SingleNestedBlock{
 																						MarkdownDescription: "Site:Node to IPV6 Mapping. Map of Site:Node to IPV6 address.",
@@ -2765,8 +2743,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 													},
 													"network_option": schema.SingleNestedBlock{
 														MarkdownDescription: "Network Select. x-required Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional. Global VRFs are configured via Networking > Segments. A site can have multple Network Segments (global VRFs).",
-														Attributes: map[string]schema.Attribute{
-														},
+														Attributes:          map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"site_local_inside_network": schema.SingleNestedBlock{
 																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -2793,23 +2770,21 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														Attributes: map[string]schema.Attribute{
 															"default_gw": schema.StringAttribute{
 																MarkdownDescription: "Default Gateway. IP address of the default gateway.",
-																Optional: true,
+																Optional:            true,
 															},
 															"ip_address": schema.StringAttribute{
 																MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 													},
 													"static_ipv6_address": schema.SingleNestedBlock{
 														MarkdownDescription: "Static IP Parameters. Configure Static IP parameters",
-														Attributes: map[string]schema.Attribute{
-														},
+														Attributes:          map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"cluster_static_ip": schema.SingleNestedBlock{
 																MarkdownDescription: "Cluster: Static IP Parameters. Configure Static IP parameters for cluster",
-																Attributes: map[string]schema.Attribute{
-																},
+																Attributes:          map[string]schema.Attribute{},
 																Blocks: map[string]schema.Block{
 																	"interface_ip_map": schema.SingleNestedBlock{
 																		MarkdownDescription: "Node to IP Mapping. Map of Node to Static ip configuration value, Key:Node, Value:IP Address",
@@ -2821,11 +2796,11 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																Attributes: map[string]schema.Attribute{
 																	"default_gw": schema.StringAttribute{
 																		MarkdownDescription: "Default Gateway. IP address of the default gateway.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"ip_address": schema.StringAttribute{
 																		MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 															},
@@ -2836,11 +2811,11 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														Attributes: map[string]schema.Attribute{
 															"device": schema.StringAttribute{
 																MarkdownDescription: "Parent Interface. Select a parent interface from the dropdown.",
-																Optional: true,
+																Optional:            true,
 															},
 															"vlan_id": schema.Int64Attribute{
 																MarkdownDescription: "VLAN ID. Configure the VLAN tag for this interface.",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 													},
@@ -2853,17 +2828,14 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 						},
 					},
 				},
-
 			},
 			"baremetal": schema.SingleNestedBlock{
 				MarkdownDescription: "Baremetal Provider Type. Baremetal Provider Type",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"not_managed": schema.SingleNestedBlock{
 						MarkdownDescription: "List of Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section.",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"node_list": schema.ListNestedBlock{
 								MarkdownDescription: "Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section.",
@@ -2871,15 +2843,15 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 									Attributes: map[string]schema.Attribute{
 										"hostname": schema.StringAttribute{
 											MarkdownDescription: "Hostname. Hostname for this Node",
-											Optional: true,
+											Optional:            true,
 										},
 										"public_ip": schema.StringAttribute{
 											MarkdownDescription: "Public IP. Public IP for this Node",
-											Optional: true,
+											Optional:            true,
 										},
 										"type": schema.StringAttribute{
 											MarkdownDescription: "Type. Type for this Node, can be Control or Worker",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -2889,19 +2861,19 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 												Attributes: map[string]schema.Attribute{
 													"description_spec": schema.StringAttribute{
 														MarkdownDescription: "Interface Description. Description for this Interface",
-														Optional: true,
+														Optional:            true,
 													},
 													"mtu": schema.Int64Attribute{
 														MarkdownDescription: "Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, mtu must be between 512 and 16384",
-														Optional: true,
+														Optional:            true,
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Interface Name. Name of this Interface",
-														Optional: true,
+														Optional:            true,
 													},
 													"priority": schema.Int64Attribute{
 														MarkdownDescription: "Priority. For a node, if multiple interfaces are configured in a VRF, interfaces with highest priority will be used as active and interfaces with lower priority will be used as backup. If multiple interfaces have the same priority, ECMP will be used. Greater the value, higher the priority",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 												Blocks: map[string]schema.Block{
@@ -2910,20 +2882,20 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														Attributes: map[string]schema.Attribute{
 															"devices": schema.ListAttribute{
 																MarkdownDescription: "Member Ethernet Devices. Ethernet devices that will make up this bond",
-																Optional: true,
-																ElementType: types.StringType,
+																Optional:            true,
+																ElementType:         types.StringType,
 															},
 															"link_polling_interval": schema.Int64Attribute{
 																MarkdownDescription: "Link Polling Interval. Link polling interval in milliseconds",
-																Optional: true,
+																Optional:            true,
 															},
 															"link_up_delay": schema.Int64Attribute{
 																MarkdownDescription: "Link Up Delay. Milliseconds wait before link is declared up",
-																Optional: true,
+																Optional:            true,
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Bond Device Name. Name for the Bond. Ex 'bond0'",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 														Blocks: map[string]schema.Block{
@@ -2935,7 +2907,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																Attributes: map[string]schema.Attribute{
 																	"rate": schema.Int64Attribute{
 																		MarkdownDescription: "LACP Packet Interval. Interval in seconds to transmit LACP packets",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 															},
@@ -2949,18 +2921,17 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														Attributes: map[string]schema.Attribute{
 															"device": schema.StringAttribute{
 																MarkdownDescription: "Ethernet Device. Select an Ethernet device from the discovered interfaces to configure. Once configured, this interface will be part of this sites dataplane and can participate in the networking services configured on this site.",
-																Optional: true,
+																Optional:            true,
 															},
 															"mac": schema.StringAttribute{
 																MarkdownDescription: "MAC Address.",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 													},
 													"ipv6_auto_config": schema.SingleNestedBlock{
 														MarkdownDescription: "IPV6AutoConfigType.",
-														Attributes: map[string]schema.Attribute{
-														},
+														Attributes:          map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"host": schema.SingleNestedBlock{
 																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -2970,22 +2941,21 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																Attributes: map[string]schema.Attribute{
 																	"network_prefix": schema.StringAttribute{
 																		MarkdownDescription: "Network Prefix. Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 																Blocks: map[string]schema.Block{
 																	"dns_config": schema.SingleNestedBlock{
 																		MarkdownDescription: "IPV6DnsConfig.",
-																		Attributes: map[string]schema.Attribute{
-																		},
+																		Attributes:          map[string]schema.Attribute{},
 																		Blocks: map[string]schema.Block{
 																			"configured_list": schema.SingleNestedBlock{
 																				MarkdownDescription: "IPV6DnsList.",
 																				Attributes: map[string]schema.Attribute{
 																					"dns_list": schema.ListAttribute{
 																						MarkdownDescription: "Dns List. List of IPV6 Addresses acting as Dns servers",
-																						Optional: true,
-																						ElementType: types.StringType,
+																						Optional:            true,
+																						ElementType:         types.StringType,
 																					},
 																				},
 																			},
@@ -2994,7 +2964,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																				Attributes: map[string]schema.Attribute{
 																					"configured_address": schema.StringAttribute{
 																						MarkdownDescription: "Configured Address. Configured address from the network prefix is chosen as dns server",
-																						Optional: true,
+																						Optional:            true,
 																					},
 																				},
 																				Blocks: map[string]schema.Block{
@@ -3010,8 +2980,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																	},
 																	"stateful": schema.SingleNestedBlock{
 																		MarkdownDescription: "DHCPIPV6 Stateful Server.",
-																		Attributes: map[string]schema.Attribute{
-																		},
+																		Attributes:          map[string]schema.Attribute{},
 																		Blocks: map[string]schema.Block{
 																			"automatic_from_end": schema.SingleNestedBlock{
 																				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -3025,11 +2994,11 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																					Attributes: map[string]schema.Attribute{
 																						"network_prefix": schema.StringAttribute{
 																							MarkdownDescription: "Network Prefix. Network Prefix to be used for IPV6 address auto configuration",
-																							Optional: true,
+																							Optional:            true,
 																						},
 																						"pool_settings": schema.StringAttribute{
 																							MarkdownDescription: "Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation. Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`. Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`.",
-																							Optional: true,
+																							Optional:            true,
 																						},
 																					},
 																					Blocks: map[string]schema.Block{
@@ -3039,11 +3008,11 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																								Attributes: map[string]schema.Attribute{
 																									"end_ip": schema.StringAttribute{
 																										MarkdownDescription: "Ending IPV6. Ending IPV6 address of the pool range. In case of address allocator, offset is derived based on network prefix.",
-																										Optional: true,
+																										Optional:            true,
 																									},
 																									"start_ip": schema.StringAttribute{
 																										MarkdownDescription: "Starting IPV6. Starting IPV6 address of the pool range. In case of address allocator, offset is derived based on network prefix. 2001::1 with prefix length of 64, start offset is 5",
-																										Optional: true,
+																										Optional:            true,
 																									},
 																								},
 																							},
@@ -3056,8 +3025,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																			},
 																			"interface_ip_map": schema.SingleNestedBlock{
 																				MarkdownDescription: "Interface IPV6 Assignments. Map of Interface IPV6 assignments per node",
-																				Attributes: map[string]schema.Attribute{
-																				},
+																				Attributes:          map[string]schema.Attribute{},
 																				Blocks: map[string]schema.Block{
 																					"interface_ip_map": schema.SingleNestedBlock{
 																						MarkdownDescription: "Site:Node to IPV6 Mapping. Map of Site:Node to IPV6 address.",
@@ -3081,8 +3049,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 													},
 													"network_option": schema.SingleNestedBlock{
 														MarkdownDescription: "Network Select. x-required Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional. Global VRFs are configured via Networking > Segments. A site can have multple Network Segments (global VRFs).",
-														Attributes: map[string]schema.Attribute{
-														},
+														Attributes:          map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"site_local_inside_network": schema.SingleNestedBlock{
 																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -3109,23 +3076,21 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														Attributes: map[string]schema.Attribute{
 															"default_gw": schema.StringAttribute{
 																MarkdownDescription: "Default Gateway. IP address of the default gateway.",
-																Optional: true,
+																Optional:            true,
 															},
 															"ip_address": schema.StringAttribute{
 																MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 													},
 													"static_ipv6_address": schema.SingleNestedBlock{
 														MarkdownDescription: "Static IP Parameters. Configure Static IP parameters",
-														Attributes: map[string]schema.Attribute{
-														},
+														Attributes:          map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"cluster_static_ip": schema.SingleNestedBlock{
 																MarkdownDescription: "Cluster: Static IP Parameters. Configure Static IP parameters for cluster",
-																Attributes: map[string]schema.Attribute{
-																},
+																Attributes:          map[string]schema.Attribute{},
 																Blocks: map[string]schema.Block{
 																	"interface_ip_map": schema.SingleNestedBlock{
 																		MarkdownDescription: "Node to IP Mapping. Map of Node to Static ip configuration value, Key:Node, Value:IP Address",
@@ -3137,11 +3102,11 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																Attributes: map[string]schema.Attribute{
 																	"default_gw": schema.StringAttribute{
 																		MarkdownDescription: "Default Gateway. IP address of the default gateway.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"ip_address": schema.StringAttribute{
 																		MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 															},
@@ -3152,11 +3117,11 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														Attributes: map[string]schema.Attribute{
 															"device": schema.StringAttribute{
 																MarkdownDescription: "Parent Interface. Select a parent interface from the dropdown.",
-																Optional: true,
+																Optional:            true,
 															},
 															"vlan_id": schema.Int64Attribute{
 																MarkdownDescription: "VLAN ID. Configure the VLAN tag for this interface.",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 													},
@@ -3169,15 +3134,13 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 						},
 					},
 				},
-
 			},
 			"block_all_services": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: block_all_services, blocked_services] Empty. This can be used for messages where no values are needed",
 			},
 			"blocked_services": schema.SingleNestedBlock{
 				MarkdownDescription: "Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site.",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"blocked_sevice": schema.ListNestedBlock{
 						MarkdownDescription: "Disable Node Local Services.",
@@ -3185,7 +3148,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 							Attributes: map[string]schema.Attribute{
 								"network_type": schema.StringAttribute{
 									MarkdownDescription: "Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user. Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`. Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`.",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
@@ -3202,22 +3165,21 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 						},
 					},
 				},
-
 			},
 			"custom_proxy": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: custom_proxy, f5_proxy] Custom Enterprise Proxy. Custom Enterprise Proxy",
 				Attributes: map[string]schema.Attribute{
 					"proxy_ip_address": schema.StringAttribute{
 						MarkdownDescription: "Proxy IPv4 Address. Specify the IPv4 Address of the internal Enterprise Proxy",
-						Optional: true,
+						Optional:            true,
 					},
 					"proxy_port": schema.Int64Attribute{
 						MarkdownDescription: "Proxy Port. Specify the Port of the internal Enterprise Proxy",
-						Optional: true,
+						Optional:            true,
 					},
 					"username": schema.StringAttribute{
 						MarkdownDescription: "Username. If the internal Enterprise Proxy is using basic authentication, specify the username. This is an optional field.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -3229,23 +3191,22 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 					},
 					"password": schema.SingleNestedBlock{
 						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"blindfold_secret_info": schema.SingleNestedBlock{
 								MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 								Attributes: map[string]schema.Attribute{
 									"decryption_provider": schema.StringAttribute{
 										MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-										Optional: true,
+										Optional:            true,
 									},
 									"location": schema.StringAttribute{
 										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-										Optional: true,
+										Optional:            true,
 									},
 									"store_provider": schema.StringAttribute{
 										MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -3254,67 +3215,63 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 								Attributes: map[string]schema.Attribute{
 									"provider_ref": schema.StringAttribute{
 										MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-										Optional: true,
+										Optional:            true,
 									},
 									"url": schema.StringAttribute{
 										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
 						},
 					},
 				},
-
 			},
 			"custom_proxy_bypass": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: custom_proxy_bypass, no_proxy_bypass] Proxy Bypass. List of domains to bypass the proxy",
 				Attributes: map[string]schema.Attribute{
 					"proxy_bypass": schema.ListAttribute{
 						MarkdownDescription: "Proxy Bypass. List of domains to bypass the proxy",
-						Optional: true,
-						ElementType: types.StringType,
+						Optional:            true,
+						ElementType:         types.StringType,
 					},
 				},
-
 			},
 			"dc_cluster_group_sli": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: dc_cluster_group_sli, no_s2s_connectivity_sli] Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
 						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-						Optional: true,
+						Optional:            true,
 					},
 					"namespace": schema.StringAttribute{
 						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-						Optional: true,
+						Optional:            true,
 					},
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-						Optional: true,
-						Computed: true,
+						Optional:            true,
+						Computed:            true,
 					},
 				},
-
 			},
 			"dc_cluster_group_slo": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: dc_cluster_group_slo, no_s2s_connectivity_slo, site_mesh_group_on_slo] Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
 						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-						Optional: true,
+						Optional:            true,
 					},
 					"namespace": schema.StringAttribute{
 						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-						Optional: true,
+						Optional:            true,
 					},
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-						Optional: true,
-						Computed: true,
+						Optional:            true,
+						Computed:            true,
 					},
 				},
-
 			},
 			"disable_ha": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: disable_ha, enable_ha] Empty. This can be used for messages where no values are needed",
@@ -3324,16 +3281,15 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 			},
 			"dns_ntp_config": schema.SingleNestedBlock{
 				MarkdownDescription: "DNS & NTP Servers Settings. Specify DNS and NTP servers that will be used by the nodes in this Customer Edge site.",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"custom_dns": schema.SingleNestedBlock{
 						MarkdownDescription: "DNS Servers. DNS Servers",
 						Attributes: map[string]schema.Attribute{
 							"dns_servers": schema.ListAttribute{
 								MarkdownDescription: "DNS Servers. DNS Servers",
-								Optional: true,
-								ElementType: types.StringType,
+								Optional:            true,
+								ElementType:         types.StringType,
 							},
 						},
 					},
@@ -3342,8 +3298,8 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 						Attributes: map[string]schema.Attribute{
 							"ntp_servers": schema.ListAttribute{
 								MarkdownDescription: "NTP Servers. NTP Servers",
-								Optional: true,
-								ElementType: types.StringType,
+								Optional:            true,
+								ElementType:         types.StringType,
 							},
 						},
 					},
@@ -3354,7 +3310,6 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 			"enable_ha": schema.SingleNestedBlock{
 				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -3364,13 +3319,11 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 			},
 			"equinix": schema.SingleNestedBlock{
 				MarkdownDescription: "Equinix Provider Type. Equinix Provider Type",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"not_managed": schema.SingleNestedBlock{
 						MarkdownDescription: "List of Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section.",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"node_list": schema.ListNestedBlock{
 								MarkdownDescription: "Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section.",
@@ -3378,15 +3331,15 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 									Attributes: map[string]schema.Attribute{
 										"hostname": schema.StringAttribute{
 											MarkdownDescription: "Hostname. Hostname for this Node",
-											Optional: true,
+											Optional:            true,
 										},
 										"public_ip": schema.StringAttribute{
 											MarkdownDescription: "Public IP. Public IP for this Node",
-											Optional: true,
+											Optional:            true,
 										},
 										"type": schema.StringAttribute{
 											MarkdownDescription: "Type. Type for this Node, can be Control or Worker",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -3396,19 +3349,19 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 												Attributes: map[string]schema.Attribute{
 													"description_spec": schema.StringAttribute{
 														MarkdownDescription: "Interface Description. Description for this Interface",
-														Optional: true,
+														Optional:            true,
 													},
 													"mtu": schema.Int64Attribute{
 														MarkdownDescription: "Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, mtu must be between 512 and 16384",
-														Optional: true,
+														Optional:            true,
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Interface Name. Name of this Interface",
-														Optional: true,
+														Optional:            true,
 													},
 													"priority": schema.Int64Attribute{
 														MarkdownDescription: "Priority. For a node, if multiple interfaces are configured in a VRF, interfaces with highest priority will be used as active and interfaces with lower priority will be used as backup. If multiple interfaces have the same priority, ECMP will be used. Greater the value, higher the priority",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 												Blocks: map[string]schema.Block{
@@ -3417,20 +3370,20 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														Attributes: map[string]schema.Attribute{
 															"devices": schema.ListAttribute{
 																MarkdownDescription: "Member Ethernet Devices. Ethernet devices that will make up this bond",
-																Optional: true,
-																ElementType: types.StringType,
+																Optional:            true,
+																ElementType:         types.StringType,
 															},
 															"link_polling_interval": schema.Int64Attribute{
 																MarkdownDescription: "Link Polling Interval. Link polling interval in milliseconds",
-																Optional: true,
+																Optional:            true,
 															},
 															"link_up_delay": schema.Int64Attribute{
 																MarkdownDescription: "Link Up Delay. Milliseconds wait before link is declared up",
-																Optional: true,
+																Optional:            true,
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Bond Device Name. Name for the Bond. Ex 'bond0'",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 														Blocks: map[string]schema.Block{
@@ -3442,7 +3395,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																Attributes: map[string]schema.Attribute{
 																	"rate": schema.Int64Attribute{
 																		MarkdownDescription: "LACP Packet Interval. Interval in seconds to transmit LACP packets",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 															},
@@ -3456,18 +3409,17 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														Attributes: map[string]schema.Attribute{
 															"device": schema.StringAttribute{
 																MarkdownDescription: "Ethernet Device. Select an Ethernet device from the discovered interfaces to configure. Once configured, this interface will be part of this sites dataplane and can participate in the networking services configured on this site.",
-																Optional: true,
+																Optional:            true,
 															},
 															"mac": schema.StringAttribute{
 																MarkdownDescription: "MAC Address.",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 													},
 													"ipv6_auto_config": schema.SingleNestedBlock{
 														MarkdownDescription: "IPV6AutoConfigType.",
-														Attributes: map[string]schema.Attribute{
-														},
+														Attributes:          map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"host": schema.SingleNestedBlock{
 																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -3477,22 +3429,21 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																Attributes: map[string]schema.Attribute{
 																	"network_prefix": schema.StringAttribute{
 																		MarkdownDescription: "Network Prefix. Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 																Blocks: map[string]schema.Block{
 																	"dns_config": schema.SingleNestedBlock{
 																		MarkdownDescription: "IPV6DnsConfig.",
-																		Attributes: map[string]schema.Attribute{
-																		},
+																		Attributes:          map[string]schema.Attribute{},
 																		Blocks: map[string]schema.Block{
 																			"configured_list": schema.SingleNestedBlock{
 																				MarkdownDescription: "IPV6DnsList.",
 																				Attributes: map[string]schema.Attribute{
 																					"dns_list": schema.ListAttribute{
 																						MarkdownDescription: "Dns List. List of IPV6 Addresses acting as Dns servers",
-																						Optional: true,
-																						ElementType: types.StringType,
+																						Optional:            true,
+																						ElementType:         types.StringType,
 																					},
 																				},
 																			},
@@ -3501,7 +3452,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																				Attributes: map[string]schema.Attribute{
 																					"configured_address": schema.StringAttribute{
 																						MarkdownDescription: "Configured Address. Configured address from the network prefix is chosen as dns server",
-																						Optional: true,
+																						Optional:            true,
 																					},
 																				},
 																				Blocks: map[string]schema.Block{
@@ -3517,8 +3468,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																	},
 																	"stateful": schema.SingleNestedBlock{
 																		MarkdownDescription: "DHCPIPV6 Stateful Server.",
-																		Attributes: map[string]schema.Attribute{
-																		},
+																		Attributes:          map[string]schema.Attribute{},
 																		Blocks: map[string]schema.Block{
 																			"automatic_from_end": schema.SingleNestedBlock{
 																				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -3532,11 +3482,11 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																					Attributes: map[string]schema.Attribute{
 																						"network_prefix": schema.StringAttribute{
 																							MarkdownDescription: "Network Prefix. Network Prefix to be used for IPV6 address auto configuration",
-																							Optional: true,
+																							Optional:            true,
 																						},
 																						"pool_settings": schema.StringAttribute{
 																							MarkdownDescription: "Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation. Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`. Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`.",
-																							Optional: true,
+																							Optional:            true,
 																						},
 																					},
 																					Blocks: map[string]schema.Block{
@@ -3546,11 +3496,11 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																								Attributes: map[string]schema.Attribute{
 																									"end_ip": schema.StringAttribute{
 																										MarkdownDescription: "Ending IPV6. Ending IPV6 address of the pool range. In case of address allocator, offset is derived based on network prefix.",
-																										Optional: true,
+																										Optional:            true,
 																									},
 																									"start_ip": schema.StringAttribute{
 																										MarkdownDescription: "Starting IPV6. Starting IPV6 address of the pool range. In case of address allocator, offset is derived based on network prefix. 2001::1 with prefix length of 64, start offset is 5",
-																										Optional: true,
+																										Optional:            true,
 																									},
 																								},
 																							},
@@ -3563,8 +3513,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																			},
 																			"interface_ip_map": schema.SingleNestedBlock{
 																				MarkdownDescription: "Interface IPV6 Assignments. Map of Interface IPV6 assignments per node",
-																				Attributes: map[string]schema.Attribute{
-																				},
+																				Attributes:          map[string]schema.Attribute{},
 																				Blocks: map[string]schema.Block{
 																					"interface_ip_map": schema.SingleNestedBlock{
 																						MarkdownDescription: "Site:Node to IPV6 Mapping. Map of Site:Node to IPV6 address.",
@@ -3588,8 +3537,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 													},
 													"network_option": schema.SingleNestedBlock{
 														MarkdownDescription: "Network Select. x-required Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional. Global VRFs are configured via Networking > Segments. A site can have multple Network Segments (global VRFs).",
-														Attributes: map[string]schema.Attribute{
-														},
+														Attributes:          map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"site_local_inside_network": schema.SingleNestedBlock{
 																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -3616,23 +3564,21 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														Attributes: map[string]schema.Attribute{
 															"default_gw": schema.StringAttribute{
 																MarkdownDescription: "Default Gateway. IP address of the default gateway.",
-																Optional: true,
+																Optional:            true,
 															},
 															"ip_address": schema.StringAttribute{
 																MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 													},
 													"static_ipv6_address": schema.SingleNestedBlock{
 														MarkdownDescription: "Static IP Parameters. Configure Static IP parameters",
-														Attributes: map[string]schema.Attribute{
-														},
+														Attributes:          map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"cluster_static_ip": schema.SingleNestedBlock{
 																MarkdownDescription: "Cluster: Static IP Parameters. Configure Static IP parameters for cluster",
-																Attributes: map[string]schema.Attribute{
-																},
+																Attributes:          map[string]schema.Attribute{},
 																Blocks: map[string]schema.Block{
 																	"interface_ip_map": schema.SingleNestedBlock{
 																		MarkdownDescription: "Node to IP Mapping. Map of Node to Static ip configuration value, Key:Node, Value:IP Address",
@@ -3644,11 +3590,11 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																Attributes: map[string]schema.Attribute{
 																	"default_gw": schema.StringAttribute{
 																		MarkdownDescription: "Default Gateway. IP address of the default gateway.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"ip_address": schema.StringAttribute{
 																		MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 															},
@@ -3659,11 +3605,11 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														Attributes: map[string]schema.Attribute{
 															"device": schema.StringAttribute{
 																MarkdownDescription: "Parent Interface. Select a parent interface from the dropdown.",
-																Optional: true,
+																Optional:            true,
 															},
 															"vlan_id": schema.Int64Attribute{
 																MarkdownDescription: "VLAN ID. Configure the VLAN tag for this interface.",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 													},
@@ -3676,20 +3622,17 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 						},
 					},
 				},
-
 			},
 			"f5_proxy": schema.SingleNestedBlock{
 				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 			},
 			"gcp": schema.SingleNestedBlock{
 				MarkdownDescription: "GCP Provider Type. GCP Provider Type",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"not_managed": schema.SingleNestedBlock{
 						MarkdownDescription: "List of Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section.",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"node_list": schema.ListNestedBlock{
 								MarkdownDescription: "Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section.",
@@ -3697,15 +3640,15 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 									Attributes: map[string]schema.Attribute{
 										"hostname": schema.StringAttribute{
 											MarkdownDescription: "Hostname. Hostname for this Node",
-											Optional: true,
+											Optional:            true,
 										},
 										"public_ip": schema.StringAttribute{
 											MarkdownDescription: "Public IP. Public IP for this Node",
-											Optional: true,
+											Optional:            true,
 										},
 										"type": schema.StringAttribute{
 											MarkdownDescription: "Type. Type for this Node, can be Control or Worker",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -3715,19 +3658,19 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 												Attributes: map[string]schema.Attribute{
 													"description_spec": schema.StringAttribute{
 														MarkdownDescription: "Interface Description. Description for this Interface",
-														Optional: true,
+														Optional:            true,
 													},
 													"mtu": schema.Int64Attribute{
 														MarkdownDescription: "Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, mtu must be between 512 and 16384",
-														Optional: true,
+														Optional:            true,
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Interface Name. Name of this Interface",
-														Optional: true,
+														Optional:            true,
 													},
 													"priority": schema.Int64Attribute{
 														MarkdownDescription: "Priority. For a node, if multiple interfaces are configured in a VRF, interfaces with highest priority will be used as active and interfaces with lower priority will be used as backup. If multiple interfaces have the same priority, ECMP will be used. Greater the value, higher the priority",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 												Blocks: map[string]schema.Block{
@@ -3736,20 +3679,20 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														Attributes: map[string]schema.Attribute{
 															"devices": schema.ListAttribute{
 																MarkdownDescription: "Member Ethernet Devices. Ethernet devices that will make up this bond",
-																Optional: true,
-																ElementType: types.StringType,
+																Optional:            true,
+																ElementType:         types.StringType,
 															},
 															"link_polling_interval": schema.Int64Attribute{
 																MarkdownDescription: "Link Polling Interval. Link polling interval in milliseconds",
-																Optional: true,
+																Optional:            true,
 															},
 															"link_up_delay": schema.Int64Attribute{
 																MarkdownDescription: "Link Up Delay. Milliseconds wait before link is declared up",
-																Optional: true,
+																Optional:            true,
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Bond Device Name. Name for the Bond. Ex 'bond0'",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 														Blocks: map[string]schema.Block{
@@ -3761,7 +3704,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																Attributes: map[string]schema.Attribute{
 																	"rate": schema.Int64Attribute{
 																		MarkdownDescription: "LACP Packet Interval. Interval in seconds to transmit LACP packets",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 															},
@@ -3775,18 +3718,17 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														Attributes: map[string]schema.Attribute{
 															"device": schema.StringAttribute{
 																MarkdownDescription: "Ethernet Device. Select an Ethernet device from the discovered interfaces to configure. Once configured, this interface will be part of this sites dataplane and can participate in the networking services configured on this site.",
-																Optional: true,
+																Optional:            true,
 															},
 															"mac": schema.StringAttribute{
 																MarkdownDescription: "MAC Address.",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 													},
 													"ipv6_auto_config": schema.SingleNestedBlock{
 														MarkdownDescription: "IPV6AutoConfigType.",
-														Attributes: map[string]schema.Attribute{
-														},
+														Attributes:          map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"host": schema.SingleNestedBlock{
 																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -3796,22 +3738,21 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																Attributes: map[string]schema.Attribute{
 																	"network_prefix": schema.StringAttribute{
 																		MarkdownDescription: "Network Prefix. Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 																Blocks: map[string]schema.Block{
 																	"dns_config": schema.SingleNestedBlock{
 																		MarkdownDescription: "IPV6DnsConfig.",
-																		Attributes: map[string]schema.Attribute{
-																		},
+																		Attributes:          map[string]schema.Attribute{},
 																		Blocks: map[string]schema.Block{
 																			"configured_list": schema.SingleNestedBlock{
 																				MarkdownDescription: "IPV6DnsList.",
 																				Attributes: map[string]schema.Attribute{
 																					"dns_list": schema.ListAttribute{
 																						MarkdownDescription: "Dns List. List of IPV6 Addresses acting as Dns servers",
-																						Optional: true,
-																						ElementType: types.StringType,
+																						Optional:            true,
+																						ElementType:         types.StringType,
 																					},
 																				},
 																			},
@@ -3820,7 +3761,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																				Attributes: map[string]schema.Attribute{
 																					"configured_address": schema.StringAttribute{
 																						MarkdownDescription: "Configured Address. Configured address from the network prefix is chosen as dns server",
-																						Optional: true,
+																						Optional:            true,
 																					},
 																				},
 																				Blocks: map[string]schema.Block{
@@ -3836,8 +3777,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																	},
 																	"stateful": schema.SingleNestedBlock{
 																		MarkdownDescription: "DHCPIPV6 Stateful Server.",
-																		Attributes: map[string]schema.Attribute{
-																		},
+																		Attributes:          map[string]schema.Attribute{},
 																		Blocks: map[string]schema.Block{
 																			"automatic_from_end": schema.SingleNestedBlock{
 																				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -3851,11 +3791,11 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																					Attributes: map[string]schema.Attribute{
 																						"network_prefix": schema.StringAttribute{
 																							MarkdownDescription: "Network Prefix. Network Prefix to be used for IPV6 address auto configuration",
-																							Optional: true,
+																							Optional:            true,
 																						},
 																						"pool_settings": schema.StringAttribute{
 																							MarkdownDescription: "Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation. Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`. Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`.",
-																							Optional: true,
+																							Optional:            true,
 																						},
 																					},
 																					Blocks: map[string]schema.Block{
@@ -3865,11 +3805,11 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																								Attributes: map[string]schema.Attribute{
 																									"end_ip": schema.StringAttribute{
 																										MarkdownDescription: "Ending IPV6. Ending IPV6 address of the pool range. In case of address allocator, offset is derived based on network prefix.",
-																										Optional: true,
+																										Optional:            true,
 																									},
 																									"start_ip": schema.StringAttribute{
 																										MarkdownDescription: "Starting IPV6. Starting IPV6 address of the pool range. In case of address allocator, offset is derived based on network prefix. 2001::1 with prefix length of 64, start offset is 5",
-																										Optional: true,
+																										Optional:            true,
 																									},
 																								},
 																							},
@@ -3882,8 +3822,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																			},
 																			"interface_ip_map": schema.SingleNestedBlock{
 																				MarkdownDescription: "Interface IPV6 Assignments. Map of Interface IPV6 assignments per node",
-																				Attributes: map[string]schema.Attribute{
-																				},
+																				Attributes:          map[string]schema.Attribute{},
 																				Blocks: map[string]schema.Block{
 																					"interface_ip_map": schema.SingleNestedBlock{
 																						MarkdownDescription: "Site:Node to IPV6 Mapping. Map of Site:Node to IPV6 address.",
@@ -3907,8 +3846,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 													},
 													"network_option": schema.SingleNestedBlock{
 														MarkdownDescription: "Network Select. x-required Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional. Global VRFs are configured via Networking > Segments. A site can have multple Network Segments (global VRFs).",
-														Attributes: map[string]schema.Attribute{
-														},
+														Attributes:          map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"site_local_inside_network": schema.SingleNestedBlock{
 																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -3935,23 +3873,21 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														Attributes: map[string]schema.Attribute{
 															"default_gw": schema.StringAttribute{
 																MarkdownDescription: "Default Gateway. IP address of the default gateway.",
-																Optional: true,
+																Optional:            true,
 															},
 															"ip_address": schema.StringAttribute{
 																MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 													},
 													"static_ipv6_address": schema.SingleNestedBlock{
 														MarkdownDescription: "Static IP Parameters. Configure Static IP parameters",
-														Attributes: map[string]schema.Attribute{
-														},
+														Attributes:          map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"cluster_static_ip": schema.SingleNestedBlock{
 																MarkdownDescription: "Cluster: Static IP Parameters. Configure Static IP parameters for cluster",
-																Attributes: map[string]schema.Attribute{
-																},
+																Attributes:          map[string]schema.Attribute{},
 																Blocks: map[string]schema.Block{
 																	"interface_ip_map": schema.SingleNestedBlock{
 																		MarkdownDescription: "Node to IP Mapping. Map of Node to Static ip configuration value, Key:Node, Value:IP Address",
@@ -3963,11 +3899,11 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																Attributes: map[string]schema.Attribute{
 																	"default_gw": schema.StringAttribute{
 																		MarkdownDescription: "Default Gateway. IP address of the default gateway.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"ip_address": schema.StringAttribute{
 																		MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 															},
@@ -3978,11 +3914,11 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														Attributes: map[string]schema.Attribute{
 															"device": schema.StringAttribute{
 																MarkdownDescription: "Parent Interface. Select a parent interface from the dropdown.",
-																Optional: true,
+																Optional:            true,
 															},
 															"vlan_id": schema.Int64Attribute{
 																MarkdownDescription: "VLAN ID. Configure the VLAN tag for this interface.",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 													},
@@ -3995,17 +3931,14 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 						},
 					},
 				},
-
 			},
 			"kvm": schema.SingleNestedBlock{
 				MarkdownDescription: "KVM Provider Type. KVM Provider Type",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"not_managed": schema.SingleNestedBlock{
 						MarkdownDescription: "List of Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section.",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"node_list": schema.ListNestedBlock{
 								MarkdownDescription: "Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section.",
@@ -4013,15 +3946,15 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 									Attributes: map[string]schema.Attribute{
 										"hostname": schema.StringAttribute{
 											MarkdownDescription: "Hostname. Hostname for this Node",
-											Optional: true,
+											Optional:            true,
 										},
 										"public_ip": schema.StringAttribute{
 											MarkdownDescription: "Public IP. Public IP for this Node",
-											Optional: true,
+											Optional:            true,
 										},
 										"type": schema.StringAttribute{
 											MarkdownDescription: "Type. Type for this Node, can be Control or Worker",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -4031,19 +3964,19 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 												Attributes: map[string]schema.Attribute{
 													"description_spec": schema.StringAttribute{
 														MarkdownDescription: "Interface Description. Description for this Interface",
-														Optional: true,
+														Optional:            true,
 													},
 													"mtu": schema.Int64Attribute{
 														MarkdownDescription: "Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, mtu must be between 512 and 16384",
-														Optional: true,
+														Optional:            true,
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Interface Name. Name of this Interface",
-														Optional: true,
+														Optional:            true,
 													},
 													"priority": schema.Int64Attribute{
 														MarkdownDescription: "Priority. For a node, if multiple interfaces are configured in a VRF, interfaces with highest priority will be used as active and interfaces with lower priority will be used as backup. If multiple interfaces have the same priority, ECMP will be used. Greater the value, higher the priority",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 												Blocks: map[string]schema.Block{
@@ -4052,20 +3985,20 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														Attributes: map[string]schema.Attribute{
 															"devices": schema.ListAttribute{
 																MarkdownDescription: "Member Ethernet Devices. Ethernet devices that will make up this bond",
-																Optional: true,
-																ElementType: types.StringType,
+																Optional:            true,
+																ElementType:         types.StringType,
 															},
 															"link_polling_interval": schema.Int64Attribute{
 																MarkdownDescription: "Link Polling Interval. Link polling interval in milliseconds",
-																Optional: true,
+																Optional:            true,
 															},
 															"link_up_delay": schema.Int64Attribute{
 																MarkdownDescription: "Link Up Delay. Milliseconds wait before link is declared up",
-																Optional: true,
+																Optional:            true,
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Bond Device Name. Name for the Bond. Ex 'bond0'",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 														Blocks: map[string]schema.Block{
@@ -4077,7 +4010,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																Attributes: map[string]schema.Attribute{
 																	"rate": schema.Int64Attribute{
 																		MarkdownDescription: "LACP Packet Interval. Interval in seconds to transmit LACP packets",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 															},
@@ -4091,18 +4024,17 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														Attributes: map[string]schema.Attribute{
 															"device": schema.StringAttribute{
 																MarkdownDescription: "Ethernet Device. Select an Ethernet device from the discovered interfaces to configure. Once configured, this interface will be part of this sites dataplane and can participate in the networking services configured on this site.",
-																Optional: true,
+																Optional:            true,
 															},
 															"mac": schema.StringAttribute{
 																MarkdownDescription: "MAC Address.",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 													},
 													"ipv6_auto_config": schema.SingleNestedBlock{
 														MarkdownDescription: "IPV6AutoConfigType.",
-														Attributes: map[string]schema.Attribute{
-														},
+														Attributes:          map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"host": schema.SingleNestedBlock{
 																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -4112,22 +4044,21 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																Attributes: map[string]schema.Attribute{
 																	"network_prefix": schema.StringAttribute{
 																		MarkdownDescription: "Network Prefix. Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 																Blocks: map[string]schema.Block{
 																	"dns_config": schema.SingleNestedBlock{
 																		MarkdownDescription: "IPV6DnsConfig.",
-																		Attributes: map[string]schema.Attribute{
-																		},
+																		Attributes:          map[string]schema.Attribute{},
 																		Blocks: map[string]schema.Block{
 																			"configured_list": schema.SingleNestedBlock{
 																				MarkdownDescription: "IPV6DnsList.",
 																				Attributes: map[string]schema.Attribute{
 																					"dns_list": schema.ListAttribute{
 																						MarkdownDescription: "Dns List. List of IPV6 Addresses acting as Dns servers",
-																						Optional: true,
-																						ElementType: types.StringType,
+																						Optional:            true,
+																						ElementType:         types.StringType,
 																					},
 																				},
 																			},
@@ -4136,7 +4067,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																				Attributes: map[string]schema.Attribute{
 																					"configured_address": schema.StringAttribute{
 																						MarkdownDescription: "Configured Address. Configured address from the network prefix is chosen as dns server",
-																						Optional: true,
+																						Optional:            true,
 																					},
 																				},
 																				Blocks: map[string]schema.Block{
@@ -4152,8 +4083,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																	},
 																	"stateful": schema.SingleNestedBlock{
 																		MarkdownDescription: "DHCPIPV6 Stateful Server.",
-																		Attributes: map[string]schema.Attribute{
-																		},
+																		Attributes:          map[string]schema.Attribute{},
 																		Blocks: map[string]schema.Block{
 																			"automatic_from_end": schema.SingleNestedBlock{
 																				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -4167,11 +4097,11 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																					Attributes: map[string]schema.Attribute{
 																						"network_prefix": schema.StringAttribute{
 																							MarkdownDescription: "Network Prefix. Network Prefix to be used for IPV6 address auto configuration",
-																							Optional: true,
+																							Optional:            true,
 																						},
 																						"pool_settings": schema.StringAttribute{
 																							MarkdownDescription: "Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation. Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`. Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`.",
-																							Optional: true,
+																							Optional:            true,
 																						},
 																					},
 																					Blocks: map[string]schema.Block{
@@ -4181,11 +4111,11 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																								Attributes: map[string]schema.Attribute{
 																									"end_ip": schema.StringAttribute{
 																										MarkdownDescription: "Ending IPV6. Ending IPV6 address of the pool range. In case of address allocator, offset is derived based on network prefix.",
-																										Optional: true,
+																										Optional:            true,
 																									},
 																									"start_ip": schema.StringAttribute{
 																										MarkdownDescription: "Starting IPV6. Starting IPV6 address of the pool range. In case of address allocator, offset is derived based on network prefix. 2001::1 with prefix length of 64, start offset is 5",
-																										Optional: true,
+																										Optional:            true,
 																									},
 																								},
 																							},
@@ -4198,8 +4128,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																			},
 																			"interface_ip_map": schema.SingleNestedBlock{
 																				MarkdownDescription: "Interface IPV6 Assignments. Map of Interface IPV6 assignments per node",
-																				Attributes: map[string]schema.Attribute{
-																				},
+																				Attributes:          map[string]schema.Attribute{},
 																				Blocks: map[string]schema.Block{
 																					"interface_ip_map": schema.SingleNestedBlock{
 																						MarkdownDescription: "Site:Node to IPV6 Mapping. Map of Site:Node to IPV6 address.",
@@ -4223,8 +4152,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 													},
 													"network_option": schema.SingleNestedBlock{
 														MarkdownDescription: "Network Select. x-required Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional. Global VRFs are configured via Networking > Segments. A site can have multple Network Segments (global VRFs).",
-														Attributes: map[string]schema.Attribute{
-														},
+														Attributes:          map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"site_local_inside_network": schema.SingleNestedBlock{
 																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -4251,23 +4179,21 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														Attributes: map[string]schema.Attribute{
 															"default_gw": schema.StringAttribute{
 																MarkdownDescription: "Default Gateway. IP address of the default gateway.",
-																Optional: true,
+																Optional:            true,
 															},
 															"ip_address": schema.StringAttribute{
 																MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 													},
 													"static_ipv6_address": schema.SingleNestedBlock{
 														MarkdownDescription: "Static IP Parameters. Configure Static IP parameters",
-														Attributes: map[string]schema.Attribute{
-														},
+														Attributes:          map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"cluster_static_ip": schema.SingleNestedBlock{
 																MarkdownDescription: "Cluster: Static IP Parameters. Configure Static IP parameters for cluster",
-																Attributes: map[string]schema.Attribute{
-																},
+																Attributes:          map[string]schema.Attribute{},
 																Blocks: map[string]schema.Block{
 																	"interface_ip_map": schema.SingleNestedBlock{
 																		MarkdownDescription: "Node to IP Mapping. Map of Node to Static ip configuration value, Key:Node, Value:IP Address",
@@ -4279,11 +4205,11 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																Attributes: map[string]schema.Attribute{
 																	"default_gw": schema.StringAttribute{
 																		MarkdownDescription: "Default Gateway. IP address of the default gateway.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"ip_address": schema.StringAttribute{
 																		MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 															},
@@ -4294,11 +4220,11 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														Attributes: map[string]schema.Attribute{
 															"device": schema.StringAttribute{
 																MarkdownDescription: "Parent Interface. Select a parent interface from the dropdown.",
-																Optional: true,
+																Optional:            true,
 															},
 															"vlan_id": schema.Int64Attribute{
 																MarkdownDescription: "VLAN ID. Configure the VLAN tag for this interface.",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 													},
@@ -4311,22 +4237,19 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 						},
 					},
 				},
-
 			},
 			"load_balancing": schema.SingleNestedBlock{
 				MarkdownDescription: "Load Balancing Settings. This section contains settings on the site that relate to Load Balancing functionality.",
 				Attributes: map[string]schema.Attribute{
 					"vip_vrrp_mode": schema.StringAttribute{
 						MarkdownDescription: "VRRP Virtual-IP. VRRP advertisement mode for VIP Invalid VRRP mode. Possible values are `VIP_VRRP_INVALID`, `VIP_VRRP_ENABLE`, `VIP_VRRP_DISABLE`. Defaults to `VIP_VRRP_INVALID`.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
-
 			},
 			"local_vrf": schema.SingleNestedBlock{
 				MarkdownDescription: "Local VRF Settings. There can be two local VRFs on each site. The Site Local Outside (SLO) local VRF is used to connect WAN side workloads to this site and to connect the site to F5 Distributed Cloud for management. All sites are required to have an SLO local VRF. The Site Local Inside (SLI) local VRF is used to connect LAN side workloads to this site. SLI local VRF is optional.",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"default_config": schema.SingleNestedBlock{
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -4339,11 +4262,11 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 						Attributes: map[string]schema.Attribute{
 							"nameserver": schema.StringAttribute{
 								MarkdownDescription: "DNS V4 Server. Optional DNS V4 server IP to be used for name resolution",
-								Optional: true,
+								Optional:            true,
 							},
 							"vip": schema.StringAttribute{
 								MarkdownDescription: "Common V4 VIP. Optional common virtual V4 IP across all nodes to be used as automatic VIP.",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -4358,8 +4281,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 							},
 							"static_routes": schema.SingleNestedBlock{
 								MarkdownDescription: "Static Routes List.",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"static_routes": schema.ListNestedBlock{
 										MarkdownDescription: "Static Routes.",
@@ -4367,17 +4289,17 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 											Attributes: map[string]schema.Attribute{
 												"attrs": schema.ListAttribute{
 													MarkdownDescription: "Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP`.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 												"ip_address": schema.StringAttribute{
 													MarkdownDescription: "IP Address. Traffic matching the ip prefixes is sent to this IP Address",
-													Optional: true,
+													Optional:            true,
 												},
 												"ip_prefixes": schema.ListAttribute{
 													MarkdownDescription: "IP Prefixes. List of route prefixes that have common next hop and attributes",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -4386,8 +4308,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 												},
 												"node_interface": schema.SingleNestedBlock{
 													MarkdownDescription: "NodeInterfaceType. On multinode site, this type holds the information about per node interfaces",
-													Attributes: map[string]schema.Attribute{
-													},
+													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"list": schema.ListNestedBlock{
 															MarkdownDescription: "Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface",
@@ -4395,7 +4316,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																Attributes: map[string]schema.Attribute{
 																	"node": schema.StringAttribute{
 																		MarkdownDescription: "Node. Node name on this site",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 																Blocks: map[string]schema.Block{
@@ -4405,26 +4326,26 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																			Attributes: map[string]schema.Attribute{
 																				"kind": schema.StringAttribute{
 																					MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-																					Optional: true,
-																					Computed: true,
+																					Optional:            true,
+																					Computed:            true,
 																				},
 																				"name": schema.StringAttribute{
 																					MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-																					Optional: true,
+																					Optional:            true,
 																				},
 																				"namespace": schema.StringAttribute{
 																					MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-																					Optional: true,
+																					Optional:            true,
 																				},
 																				"tenant": schema.StringAttribute{
 																					MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-																					Optional: true,
-																					Computed: true,
+																					Optional:            true,
+																					Computed:            true,
 																				},
 																				"uid": schema.StringAttribute{
 																					MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-																					Optional: true,
-																					Computed: true,
+																					Optional:            true,
+																					Computed:            true,
 																				},
 																			},
 																		},
@@ -4441,8 +4362,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 							},
 							"static_v6_routes": schema.SingleNestedBlock{
 								MarkdownDescription: "Static IPv6 Routes List. List of IPv6 static routes",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"static_routes": schema.ListNestedBlock{
 										MarkdownDescription: "Static IPv6 Routes. List of IPv6 static routes",
@@ -4450,17 +4370,17 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 											Attributes: map[string]schema.Attribute{
 												"attrs": schema.ListAttribute{
 													MarkdownDescription: "Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP`.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 												"ip_address": schema.StringAttribute{
 													MarkdownDescription: "IP Address. Traffic matching the ip prefixes is sent to this IP Address",
-													Optional: true,
+													Optional:            true,
 												},
 												"ip_prefixes": schema.ListAttribute{
 													MarkdownDescription: "IPv6 Prefixes. List of IPv6 route prefixes that have common next hop and attributes",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -4469,8 +4389,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 												},
 												"node_interface": schema.SingleNestedBlock{
 													MarkdownDescription: "NodeInterfaceType. On multinode site, this type holds the information about per node interfaces",
-													Attributes: map[string]schema.Attribute{
-													},
+													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"list": schema.ListNestedBlock{
 															MarkdownDescription: "Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface",
@@ -4478,7 +4397,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																Attributes: map[string]schema.Attribute{
 																	"node": schema.StringAttribute{
 																		MarkdownDescription: "Node. Node name on this site",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 																Blocks: map[string]schema.Block{
@@ -4488,26 +4407,26 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																			Attributes: map[string]schema.Attribute{
 																				"kind": schema.StringAttribute{
 																					MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-																					Optional: true,
-																					Computed: true,
+																					Optional:            true,
+																					Computed:            true,
 																				},
 																				"name": schema.StringAttribute{
 																					MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-																					Optional: true,
+																					Optional:            true,
 																				},
 																				"namespace": schema.StringAttribute{
 																					MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-																					Optional: true,
+																					Optional:            true,
 																				},
 																				"tenant": schema.StringAttribute{
 																					MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-																					Optional: true,
-																					Computed: true,
+																					Optional:            true,
+																					Computed:            true,
 																				},
 																				"uid": schema.StringAttribute{
 																					MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-																					Optional: true,
-																					Computed: true,
+																					Optional:            true,
+																					Computed:            true,
 																				},
 																			},
 																		},
@@ -4529,11 +4448,11 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 						Attributes: map[string]schema.Attribute{
 							"nameserver": schema.StringAttribute{
 								MarkdownDescription: "DNS V4 Server. Optional DNS V4 server IP to be used for name resolution",
-								Optional: true,
+								Optional:            true,
 							},
 							"vip": schema.StringAttribute{
 								MarkdownDescription: "Common V4 VIP. Optional common virtual V4 IP across all nodes to be used as automatic VIP.",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -4548,8 +4467,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 							},
 							"static_routes": schema.SingleNestedBlock{
 								MarkdownDescription: "Static Routes List.",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"static_routes": schema.ListNestedBlock{
 										MarkdownDescription: "Static Routes.",
@@ -4557,17 +4475,17 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 											Attributes: map[string]schema.Attribute{
 												"attrs": schema.ListAttribute{
 													MarkdownDescription: "Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP`.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 												"ip_address": schema.StringAttribute{
 													MarkdownDescription: "IP Address. Traffic matching the ip prefixes is sent to this IP Address",
-													Optional: true,
+													Optional:            true,
 												},
 												"ip_prefixes": schema.ListAttribute{
 													MarkdownDescription: "IP Prefixes. List of route prefixes that have common next hop and attributes",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -4576,8 +4494,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 												},
 												"node_interface": schema.SingleNestedBlock{
 													MarkdownDescription: "NodeInterfaceType. On multinode site, this type holds the information about per node interfaces",
-													Attributes: map[string]schema.Attribute{
-													},
+													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"list": schema.ListNestedBlock{
 															MarkdownDescription: "Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface",
@@ -4585,7 +4502,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																Attributes: map[string]schema.Attribute{
 																	"node": schema.StringAttribute{
 																		MarkdownDescription: "Node. Node name on this site",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 																Blocks: map[string]schema.Block{
@@ -4595,26 +4512,26 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																			Attributes: map[string]schema.Attribute{
 																				"kind": schema.StringAttribute{
 																					MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-																					Optional: true,
-																					Computed: true,
+																					Optional:            true,
+																					Computed:            true,
 																				},
 																				"name": schema.StringAttribute{
 																					MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-																					Optional: true,
+																					Optional:            true,
 																				},
 																				"namespace": schema.StringAttribute{
 																					MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-																					Optional: true,
+																					Optional:            true,
 																				},
 																				"tenant": schema.StringAttribute{
 																					MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-																					Optional: true,
-																					Computed: true,
+																					Optional:            true,
+																					Computed:            true,
 																				},
 																				"uid": schema.StringAttribute{
 																					MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-																					Optional: true,
-																					Computed: true,
+																					Optional:            true,
+																					Computed:            true,
 																				},
 																			},
 																		},
@@ -4631,8 +4548,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 							},
 							"static_v6_routes": schema.SingleNestedBlock{
 								MarkdownDescription: "Static IPv6 Routes List. List of IPv6 static routes",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"static_routes": schema.ListNestedBlock{
 										MarkdownDescription: "Static IPv6 Routes. List of IPv6 static routes",
@@ -4640,17 +4556,17 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 											Attributes: map[string]schema.Attribute{
 												"attrs": schema.ListAttribute{
 													MarkdownDescription: "Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP`.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 												"ip_address": schema.StringAttribute{
 													MarkdownDescription: "IP Address. Traffic matching the ip prefixes is sent to this IP Address",
-													Optional: true,
+													Optional:            true,
 												},
 												"ip_prefixes": schema.ListAttribute{
 													MarkdownDescription: "IPv6 Prefixes. List of IPv6 route prefixes that have common next hop and attributes",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -4659,8 +4575,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 												},
 												"node_interface": schema.SingleNestedBlock{
 													MarkdownDescription: "NodeInterfaceType. On multinode site, this type holds the information about per node interfaces",
-													Attributes: map[string]schema.Attribute{
-													},
+													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"list": schema.ListNestedBlock{
 															MarkdownDescription: "Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface",
@@ -4668,7 +4583,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																Attributes: map[string]schema.Attribute{
 																	"node": schema.StringAttribute{
 																		MarkdownDescription: "Node. Node name on this site",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 																Blocks: map[string]schema.Block{
@@ -4678,26 +4593,26 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																			Attributes: map[string]schema.Attribute{
 																				"kind": schema.StringAttribute{
 																					MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-																					Optional: true,
-																					Computed: true,
+																					Optional:            true,
+																					Computed:            true,
 																				},
 																				"name": schema.StringAttribute{
 																					MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-																					Optional: true,
+																					Optional:            true,
 																				},
 																				"namespace": schema.StringAttribute{
 																					MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-																					Optional: true,
+																					Optional:            true,
 																				},
 																				"tenant": schema.StringAttribute{
 																					MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-																					Optional: true,
-																					Computed: true,
+																					Optional:            true,
+																					Computed:            true,
 																				},
 																				"uid": schema.StringAttribute{
 																					MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-																					Optional: true,
-																					Computed: true,
+																					Optional:            true,
+																					Computed:            true,
 																				},
 																			},
 																		},
@@ -4715,26 +4630,24 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 						},
 					},
 				},
-
 			},
 			"log_receiver": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: log_receiver, logs_streaming_disabled] Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
 						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-						Optional: true,
+						Optional:            true,
 					},
 					"namespace": schema.StringAttribute{
 						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-						Optional: true,
+						Optional:            true,
 					},
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-						Optional: true,
-						Computed: true,
+						Optional:            true,
+						Computed:            true,
 					},
 				},
-
 			},
 			"logs_streaming_disabled": schema.SingleNestedBlock{
 				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -4756,13 +4669,11 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 			},
 			"nutanix": schema.SingleNestedBlock{
 				MarkdownDescription: "Nutanix Provider Type. Nutanix Provider Type",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"not_managed": schema.SingleNestedBlock{
 						MarkdownDescription: "List of Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section.",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"node_list": schema.ListNestedBlock{
 								MarkdownDescription: "Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section.",
@@ -4770,15 +4681,15 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 									Attributes: map[string]schema.Attribute{
 										"hostname": schema.StringAttribute{
 											MarkdownDescription: "Hostname. Hostname for this Node",
-											Optional: true,
+											Optional:            true,
 										},
 										"public_ip": schema.StringAttribute{
 											MarkdownDescription: "Public IP. Public IP for this Node",
-											Optional: true,
+											Optional:            true,
 										},
 										"type": schema.StringAttribute{
 											MarkdownDescription: "Type. Type for this Node, can be Control or Worker",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -4788,19 +4699,19 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 												Attributes: map[string]schema.Attribute{
 													"description_spec": schema.StringAttribute{
 														MarkdownDescription: "Interface Description. Description for this Interface",
-														Optional: true,
+														Optional:            true,
 													},
 													"mtu": schema.Int64Attribute{
 														MarkdownDescription: "Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, mtu must be between 512 and 16384",
-														Optional: true,
+														Optional:            true,
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Interface Name. Name of this Interface",
-														Optional: true,
+														Optional:            true,
 													},
 													"priority": schema.Int64Attribute{
 														MarkdownDescription: "Priority. For a node, if multiple interfaces are configured in a VRF, interfaces with highest priority will be used as active and interfaces with lower priority will be used as backup. If multiple interfaces have the same priority, ECMP will be used. Greater the value, higher the priority",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 												Blocks: map[string]schema.Block{
@@ -4809,20 +4720,20 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														Attributes: map[string]schema.Attribute{
 															"devices": schema.ListAttribute{
 																MarkdownDescription: "Member Ethernet Devices. Ethernet devices that will make up this bond",
-																Optional: true,
-																ElementType: types.StringType,
+																Optional:            true,
+																ElementType:         types.StringType,
 															},
 															"link_polling_interval": schema.Int64Attribute{
 																MarkdownDescription: "Link Polling Interval. Link polling interval in milliseconds",
-																Optional: true,
+																Optional:            true,
 															},
 															"link_up_delay": schema.Int64Attribute{
 																MarkdownDescription: "Link Up Delay. Milliseconds wait before link is declared up",
-																Optional: true,
+																Optional:            true,
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Bond Device Name. Name for the Bond. Ex 'bond0'",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 														Blocks: map[string]schema.Block{
@@ -4834,7 +4745,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																Attributes: map[string]schema.Attribute{
 																	"rate": schema.Int64Attribute{
 																		MarkdownDescription: "LACP Packet Interval. Interval in seconds to transmit LACP packets",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 															},
@@ -4848,18 +4759,17 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														Attributes: map[string]schema.Attribute{
 															"device": schema.StringAttribute{
 																MarkdownDescription: "Ethernet Device. Select an Ethernet device from the discovered interfaces to configure. Once configured, this interface will be part of this sites dataplane and can participate in the networking services configured on this site.",
-																Optional: true,
+																Optional:            true,
 															},
 															"mac": schema.StringAttribute{
 																MarkdownDescription: "MAC Address.",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 													},
 													"ipv6_auto_config": schema.SingleNestedBlock{
 														MarkdownDescription: "IPV6AutoConfigType.",
-														Attributes: map[string]schema.Attribute{
-														},
+														Attributes:          map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"host": schema.SingleNestedBlock{
 																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -4869,22 +4779,21 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																Attributes: map[string]schema.Attribute{
 																	"network_prefix": schema.StringAttribute{
 																		MarkdownDescription: "Network Prefix. Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 																Blocks: map[string]schema.Block{
 																	"dns_config": schema.SingleNestedBlock{
 																		MarkdownDescription: "IPV6DnsConfig.",
-																		Attributes: map[string]schema.Attribute{
-																		},
+																		Attributes:          map[string]schema.Attribute{},
 																		Blocks: map[string]schema.Block{
 																			"configured_list": schema.SingleNestedBlock{
 																				MarkdownDescription: "IPV6DnsList.",
 																				Attributes: map[string]schema.Attribute{
 																					"dns_list": schema.ListAttribute{
 																						MarkdownDescription: "Dns List. List of IPV6 Addresses acting as Dns servers",
-																						Optional: true,
-																						ElementType: types.StringType,
+																						Optional:            true,
+																						ElementType:         types.StringType,
 																					},
 																				},
 																			},
@@ -4893,7 +4802,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																				Attributes: map[string]schema.Attribute{
 																					"configured_address": schema.StringAttribute{
 																						MarkdownDescription: "Configured Address. Configured address from the network prefix is chosen as dns server",
-																						Optional: true,
+																						Optional:            true,
 																					},
 																				},
 																				Blocks: map[string]schema.Block{
@@ -4909,8 +4818,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																	},
 																	"stateful": schema.SingleNestedBlock{
 																		MarkdownDescription: "DHCPIPV6 Stateful Server.",
-																		Attributes: map[string]schema.Attribute{
-																		},
+																		Attributes:          map[string]schema.Attribute{},
 																		Blocks: map[string]schema.Block{
 																			"automatic_from_end": schema.SingleNestedBlock{
 																				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -4924,11 +4832,11 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																					Attributes: map[string]schema.Attribute{
 																						"network_prefix": schema.StringAttribute{
 																							MarkdownDescription: "Network Prefix. Network Prefix to be used for IPV6 address auto configuration",
-																							Optional: true,
+																							Optional:            true,
 																						},
 																						"pool_settings": schema.StringAttribute{
 																							MarkdownDescription: "Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation. Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`. Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`.",
-																							Optional: true,
+																							Optional:            true,
 																						},
 																					},
 																					Blocks: map[string]schema.Block{
@@ -4938,11 +4846,11 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																								Attributes: map[string]schema.Attribute{
 																									"end_ip": schema.StringAttribute{
 																										MarkdownDescription: "Ending IPV6. Ending IPV6 address of the pool range. In case of address allocator, offset is derived based on network prefix.",
-																										Optional: true,
+																										Optional:            true,
 																									},
 																									"start_ip": schema.StringAttribute{
 																										MarkdownDescription: "Starting IPV6. Starting IPV6 address of the pool range. In case of address allocator, offset is derived based on network prefix. 2001::1 with prefix length of 64, start offset is 5",
-																										Optional: true,
+																										Optional:            true,
 																									},
 																								},
 																							},
@@ -4955,8 +4863,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																			},
 																			"interface_ip_map": schema.SingleNestedBlock{
 																				MarkdownDescription: "Interface IPV6 Assignments. Map of Interface IPV6 assignments per node",
-																				Attributes: map[string]schema.Attribute{
-																				},
+																				Attributes:          map[string]schema.Attribute{},
 																				Blocks: map[string]schema.Block{
 																					"interface_ip_map": schema.SingleNestedBlock{
 																						MarkdownDescription: "Site:Node to IPV6 Mapping. Map of Site:Node to IPV6 address.",
@@ -4980,8 +4887,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 													},
 													"network_option": schema.SingleNestedBlock{
 														MarkdownDescription: "Network Select. x-required Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional. Global VRFs are configured via Networking > Segments. A site can have multple Network Segments (global VRFs).",
-														Attributes: map[string]schema.Attribute{
-														},
+														Attributes:          map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"site_local_inside_network": schema.SingleNestedBlock{
 																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -5008,23 +4914,21 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														Attributes: map[string]schema.Attribute{
 															"default_gw": schema.StringAttribute{
 																MarkdownDescription: "Default Gateway. IP address of the default gateway.",
-																Optional: true,
+																Optional:            true,
 															},
 															"ip_address": schema.StringAttribute{
 																MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 													},
 													"static_ipv6_address": schema.SingleNestedBlock{
 														MarkdownDescription: "Static IP Parameters. Configure Static IP parameters",
-														Attributes: map[string]schema.Attribute{
-														},
+														Attributes:          map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"cluster_static_ip": schema.SingleNestedBlock{
 																MarkdownDescription: "Cluster: Static IP Parameters. Configure Static IP parameters for cluster",
-																Attributes: map[string]schema.Attribute{
-																},
+																Attributes:          map[string]schema.Attribute{},
 																Blocks: map[string]schema.Block{
 																	"interface_ip_map": schema.SingleNestedBlock{
 																		MarkdownDescription: "Node to IP Mapping. Map of Node to Static ip configuration value, Key:Node, Value:IP Address",
@@ -5036,11 +4940,11 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																Attributes: map[string]schema.Attribute{
 																	"default_gw": schema.StringAttribute{
 																		MarkdownDescription: "Default Gateway. IP address of the default gateway.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"ip_address": schema.StringAttribute{
 																		MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 															},
@@ -5051,11 +4955,11 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														Attributes: map[string]schema.Attribute{
 															"device": schema.StringAttribute{
 																MarkdownDescription: "Parent Interface. Select a parent interface from the dropdown.",
-																Optional: true,
+																Optional:            true,
 															},
 															"vlan_id": schema.Int64Attribute{
 																MarkdownDescription: "VLAN ID. Configure the VLAN tag for this interface.",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 													},
@@ -5068,17 +4972,14 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 						},
 					},
 				},
-
 			},
 			"oci": schema.SingleNestedBlock{
 				MarkdownDescription: "OCI Provider Type. OCI Provider Type",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"not_managed": schema.SingleNestedBlock{
 						MarkdownDescription: "List of Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section.",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"node_list": schema.ListNestedBlock{
 								MarkdownDescription: "Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section.",
@@ -5086,15 +4987,15 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 									Attributes: map[string]schema.Attribute{
 										"hostname": schema.StringAttribute{
 											MarkdownDescription: "Hostname. Hostname for this Node",
-											Optional: true,
+											Optional:            true,
 										},
 										"public_ip": schema.StringAttribute{
 											MarkdownDescription: "Public IP. Public IP for this Node",
-											Optional: true,
+											Optional:            true,
 										},
 										"type": schema.StringAttribute{
 											MarkdownDescription: "Type. Type for this Node, can be Control or Worker",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -5104,19 +5005,19 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 												Attributes: map[string]schema.Attribute{
 													"description_spec": schema.StringAttribute{
 														MarkdownDescription: "Interface Description. Description for this Interface",
-														Optional: true,
+														Optional:            true,
 													},
 													"mtu": schema.Int64Attribute{
 														MarkdownDescription: "Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, mtu must be between 512 and 16384",
-														Optional: true,
+														Optional:            true,
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Interface Name. Name of this Interface",
-														Optional: true,
+														Optional:            true,
 													},
 													"priority": schema.Int64Attribute{
 														MarkdownDescription: "Priority. For a node, if multiple interfaces are configured in a VRF, interfaces with highest priority will be used as active and interfaces with lower priority will be used as backup. If multiple interfaces have the same priority, ECMP will be used. Greater the value, higher the priority",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 												Blocks: map[string]schema.Block{
@@ -5125,20 +5026,20 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														Attributes: map[string]schema.Attribute{
 															"devices": schema.ListAttribute{
 																MarkdownDescription: "Member Ethernet Devices. Ethernet devices that will make up this bond",
-																Optional: true,
-																ElementType: types.StringType,
+																Optional:            true,
+																ElementType:         types.StringType,
 															},
 															"link_polling_interval": schema.Int64Attribute{
 																MarkdownDescription: "Link Polling Interval. Link polling interval in milliseconds",
-																Optional: true,
+																Optional:            true,
 															},
 															"link_up_delay": schema.Int64Attribute{
 																MarkdownDescription: "Link Up Delay. Milliseconds wait before link is declared up",
-																Optional: true,
+																Optional:            true,
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Bond Device Name. Name for the Bond. Ex 'bond0'",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 														Blocks: map[string]schema.Block{
@@ -5150,7 +5051,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																Attributes: map[string]schema.Attribute{
 																	"rate": schema.Int64Attribute{
 																		MarkdownDescription: "LACP Packet Interval. Interval in seconds to transmit LACP packets",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 															},
@@ -5164,18 +5065,17 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														Attributes: map[string]schema.Attribute{
 															"device": schema.StringAttribute{
 																MarkdownDescription: "Ethernet Device. Select an Ethernet device from the discovered interfaces to configure. Once configured, this interface will be part of this sites dataplane and can participate in the networking services configured on this site.",
-																Optional: true,
+																Optional:            true,
 															},
 															"mac": schema.StringAttribute{
 																MarkdownDescription: "MAC Address.",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 													},
 													"ipv6_auto_config": schema.SingleNestedBlock{
 														MarkdownDescription: "IPV6AutoConfigType.",
-														Attributes: map[string]schema.Attribute{
-														},
+														Attributes:          map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"host": schema.SingleNestedBlock{
 																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -5185,22 +5085,21 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																Attributes: map[string]schema.Attribute{
 																	"network_prefix": schema.StringAttribute{
 																		MarkdownDescription: "Network Prefix. Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 																Blocks: map[string]schema.Block{
 																	"dns_config": schema.SingleNestedBlock{
 																		MarkdownDescription: "IPV6DnsConfig.",
-																		Attributes: map[string]schema.Attribute{
-																		},
+																		Attributes:          map[string]schema.Attribute{},
 																		Blocks: map[string]schema.Block{
 																			"configured_list": schema.SingleNestedBlock{
 																				MarkdownDescription: "IPV6DnsList.",
 																				Attributes: map[string]schema.Attribute{
 																					"dns_list": schema.ListAttribute{
 																						MarkdownDescription: "Dns List. List of IPV6 Addresses acting as Dns servers",
-																						Optional: true,
-																						ElementType: types.StringType,
+																						Optional:            true,
+																						ElementType:         types.StringType,
 																					},
 																				},
 																			},
@@ -5209,7 +5108,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																				Attributes: map[string]schema.Attribute{
 																					"configured_address": schema.StringAttribute{
 																						MarkdownDescription: "Configured Address. Configured address from the network prefix is chosen as dns server",
-																						Optional: true,
+																						Optional:            true,
 																					},
 																				},
 																				Blocks: map[string]schema.Block{
@@ -5225,8 +5124,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																	},
 																	"stateful": schema.SingleNestedBlock{
 																		MarkdownDescription: "DHCPIPV6 Stateful Server.",
-																		Attributes: map[string]schema.Attribute{
-																		},
+																		Attributes:          map[string]schema.Attribute{},
 																		Blocks: map[string]schema.Block{
 																			"automatic_from_end": schema.SingleNestedBlock{
 																				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -5240,11 +5138,11 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																					Attributes: map[string]schema.Attribute{
 																						"network_prefix": schema.StringAttribute{
 																							MarkdownDescription: "Network Prefix. Network Prefix to be used for IPV6 address auto configuration",
-																							Optional: true,
+																							Optional:            true,
 																						},
 																						"pool_settings": schema.StringAttribute{
 																							MarkdownDescription: "Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation. Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`. Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`.",
-																							Optional: true,
+																							Optional:            true,
 																						},
 																					},
 																					Blocks: map[string]schema.Block{
@@ -5254,11 +5152,11 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																								Attributes: map[string]schema.Attribute{
 																									"end_ip": schema.StringAttribute{
 																										MarkdownDescription: "Ending IPV6. Ending IPV6 address of the pool range. In case of address allocator, offset is derived based on network prefix.",
-																										Optional: true,
+																										Optional:            true,
 																									},
 																									"start_ip": schema.StringAttribute{
 																										MarkdownDescription: "Starting IPV6. Starting IPV6 address of the pool range. In case of address allocator, offset is derived based on network prefix. 2001::1 with prefix length of 64, start offset is 5",
-																										Optional: true,
+																										Optional:            true,
 																									},
 																								},
 																							},
@@ -5271,8 +5169,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																			},
 																			"interface_ip_map": schema.SingleNestedBlock{
 																				MarkdownDescription: "Interface IPV6 Assignments. Map of Interface IPV6 assignments per node",
-																				Attributes: map[string]schema.Attribute{
-																				},
+																				Attributes:          map[string]schema.Attribute{},
 																				Blocks: map[string]schema.Block{
 																					"interface_ip_map": schema.SingleNestedBlock{
 																						MarkdownDescription: "Site:Node to IPV6 Mapping. Map of Site:Node to IPV6 address.",
@@ -5296,8 +5193,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 													},
 													"network_option": schema.SingleNestedBlock{
 														MarkdownDescription: "Network Select. x-required Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional. Global VRFs are configured via Networking > Segments. A site can have multple Network Segments (global VRFs).",
-														Attributes: map[string]schema.Attribute{
-														},
+														Attributes:          map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"site_local_inside_network": schema.SingleNestedBlock{
 																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -5324,23 +5220,21 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														Attributes: map[string]schema.Attribute{
 															"default_gw": schema.StringAttribute{
 																MarkdownDescription: "Default Gateway. IP address of the default gateway.",
-																Optional: true,
+																Optional:            true,
 															},
 															"ip_address": schema.StringAttribute{
 																MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 													},
 													"static_ipv6_address": schema.SingleNestedBlock{
 														MarkdownDescription: "Static IP Parameters. Configure Static IP parameters",
-														Attributes: map[string]schema.Attribute{
-														},
+														Attributes:          map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"cluster_static_ip": schema.SingleNestedBlock{
 																MarkdownDescription: "Cluster: Static IP Parameters. Configure Static IP parameters for cluster",
-																Attributes: map[string]schema.Attribute{
-																},
+																Attributes:          map[string]schema.Attribute{},
 																Blocks: map[string]schema.Block{
 																	"interface_ip_map": schema.SingleNestedBlock{
 																		MarkdownDescription: "Node to IP Mapping. Map of Node to Static ip configuration value, Key:Node, Value:IP Address",
@@ -5352,11 +5246,11 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																Attributes: map[string]schema.Attribute{
 																	"default_gw": schema.StringAttribute{
 																		MarkdownDescription: "Default Gateway. IP address of the default gateway.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"ip_address": schema.StringAttribute{
 																		MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 															},
@@ -5367,11 +5261,11 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														Attributes: map[string]schema.Attribute{
 															"device": schema.StringAttribute{
 																MarkdownDescription: "Parent Interface. Select a parent interface from the dropdown.",
-																Optional: true,
+																Optional:            true,
 															},
 															"vlan_id": schema.Int64Attribute{
 																MarkdownDescription: "VLAN ID. Configure the VLAN tag for this interface.",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 													},
@@ -5384,12 +5278,10 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 						},
 					},
 				},
-
 			},
 			"offline_survivability_mode": schema.SingleNestedBlock{
 				MarkdownDescription: "Offline Survivability Mode. Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7 days, even when the site is offline. The certificates needed to keep the services running on this site are signed using a local CA. Secrets would also be cached locally to handle the connectivity loss. When the mode is toggled, services will restart and traffic disruption will be seen.",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"enable_offline_survivability_mode": schema.SingleNestedBlock{
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -5398,17 +5290,14 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 			"openstack": schema.SingleNestedBlock{
 				MarkdownDescription: "Openstack Provider Type. Openstack Provider Type",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"not_managed": schema.SingleNestedBlock{
 						MarkdownDescription: "List of Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section.",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"node_list": schema.ListNestedBlock{
 								MarkdownDescription: "Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section.",
@@ -5416,15 +5305,15 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 									Attributes: map[string]schema.Attribute{
 										"hostname": schema.StringAttribute{
 											MarkdownDescription: "Hostname. Hostname for this Node",
-											Optional: true,
+											Optional:            true,
 										},
 										"public_ip": schema.StringAttribute{
 											MarkdownDescription: "Public IP. Public IP for this Node",
-											Optional: true,
+											Optional:            true,
 										},
 										"type": schema.StringAttribute{
 											MarkdownDescription: "Type. Type for this Node, can be Control or Worker",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -5434,19 +5323,19 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 												Attributes: map[string]schema.Attribute{
 													"description_spec": schema.StringAttribute{
 														MarkdownDescription: "Interface Description. Description for this Interface",
-														Optional: true,
+														Optional:            true,
 													},
 													"mtu": schema.Int64Attribute{
 														MarkdownDescription: "Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, mtu must be between 512 and 16384",
-														Optional: true,
+														Optional:            true,
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Interface Name. Name of this Interface",
-														Optional: true,
+														Optional:            true,
 													},
 													"priority": schema.Int64Attribute{
 														MarkdownDescription: "Priority. For a node, if multiple interfaces are configured in a VRF, interfaces with highest priority will be used as active and interfaces with lower priority will be used as backup. If multiple interfaces have the same priority, ECMP will be used. Greater the value, higher the priority",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 												Blocks: map[string]schema.Block{
@@ -5455,20 +5344,20 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														Attributes: map[string]schema.Attribute{
 															"devices": schema.ListAttribute{
 																MarkdownDescription: "Member Ethernet Devices. Ethernet devices that will make up this bond",
-																Optional: true,
-																ElementType: types.StringType,
+																Optional:            true,
+																ElementType:         types.StringType,
 															},
 															"link_polling_interval": schema.Int64Attribute{
 																MarkdownDescription: "Link Polling Interval. Link polling interval in milliseconds",
-																Optional: true,
+																Optional:            true,
 															},
 															"link_up_delay": schema.Int64Attribute{
 																MarkdownDescription: "Link Up Delay. Milliseconds wait before link is declared up",
-																Optional: true,
+																Optional:            true,
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Bond Device Name. Name for the Bond. Ex 'bond0'",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 														Blocks: map[string]schema.Block{
@@ -5480,7 +5369,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																Attributes: map[string]schema.Attribute{
 																	"rate": schema.Int64Attribute{
 																		MarkdownDescription: "LACP Packet Interval. Interval in seconds to transmit LACP packets",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 															},
@@ -5494,18 +5383,17 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														Attributes: map[string]schema.Attribute{
 															"device": schema.StringAttribute{
 																MarkdownDescription: "Ethernet Device. Select an Ethernet device from the discovered interfaces to configure. Once configured, this interface will be part of this sites dataplane and can participate in the networking services configured on this site.",
-																Optional: true,
+																Optional:            true,
 															},
 															"mac": schema.StringAttribute{
 																MarkdownDescription: "MAC Address.",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 													},
 													"ipv6_auto_config": schema.SingleNestedBlock{
 														MarkdownDescription: "IPV6AutoConfigType.",
-														Attributes: map[string]schema.Attribute{
-														},
+														Attributes:          map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"host": schema.SingleNestedBlock{
 																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -5515,22 +5403,21 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																Attributes: map[string]schema.Attribute{
 																	"network_prefix": schema.StringAttribute{
 																		MarkdownDescription: "Network Prefix. Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 																Blocks: map[string]schema.Block{
 																	"dns_config": schema.SingleNestedBlock{
 																		MarkdownDescription: "IPV6DnsConfig.",
-																		Attributes: map[string]schema.Attribute{
-																		},
+																		Attributes:          map[string]schema.Attribute{},
 																		Blocks: map[string]schema.Block{
 																			"configured_list": schema.SingleNestedBlock{
 																				MarkdownDescription: "IPV6DnsList.",
 																				Attributes: map[string]schema.Attribute{
 																					"dns_list": schema.ListAttribute{
 																						MarkdownDescription: "Dns List. List of IPV6 Addresses acting as Dns servers",
-																						Optional: true,
-																						ElementType: types.StringType,
+																						Optional:            true,
+																						ElementType:         types.StringType,
 																					},
 																				},
 																			},
@@ -5539,7 +5426,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																				Attributes: map[string]schema.Attribute{
 																					"configured_address": schema.StringAttribute{
 																						MarkdownDescription: "Configured Address. Configured address from the network prefix is chosen as dns server",
-																						Optional: true,
+																						Optional:            true,
 																					},
 																				},
 																				Blocks: map[string]schema.Block{
@@ -5555,8 +5442,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																	},
 																	"stateful": schema.SingleNestedBlock{
 																		MarkdownDescription: "DHCPIPV6 Stateful Server.",
-																		Attributes: map[string]schema.Attribute{
-																		},
+																		Attributes:          map[string]schema.Attribute{},
 																		Blocks: map[string]schema.Block{
 																			"automatic_from_end": schema.SingleNestedBlock{
 																				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -5570,11 +5456,11 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																					Attributes: map[string]schema.Attribute{
 																						"network_prefix": schema.StringAttribute{
 																							MarkdownDescription: "Network Prefix. Network Prefix to be used for IPV6 address auto configuration",
-																							Optional: true,
+																							Optional:            true,
 																						},
 																						"pool_settings": schema.StringAttribute{
 																							MarkdownDescription: "Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation. Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`. Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`.",
-																							Optional: true,
+																							Optional:            true,
 																						},
 																					},
 																					Blocks: map[string]schema.Block{
@@ -5584,11 +5470,11 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																								Attributes: map[string]schema.Attribute{
 																									"end_ip": schema.StringAttribute{
 																										MarkdownDescription: "Ending IPV6. Ending IPV6 address of the pool range. In case of address allocator, offset is derived based on network prefix.",
-																										Optional: true,
+																										Optional:            true,
 																									},
 																									"start_ip": schema.StringAttribute{
 																										MarkdownDescription: "Starting IPV6. Starting IPV6 address of the pool range. In case of address allocator, offset is derived based on network prefix. 2001::1 with prefix length of 64, start offset is 5",
-																										Optional: true,
+																										Optional:            true,
 																									},
 																								},
 																							},
@@ -5601,8 +5487,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																			},
 																			"interface_ip_map": schema.SingleNestedBlock{
 																				MarkdownDescription: "Interface IPV6 Assignments. Map of Interface IPV6 assignments per node",
-																				Attributes: map[string]schema.Attribute{
-																				},
+																				Attributes:          map[string]schema.Attribute{},
 																				Blocks: map[string]schema.Block{
 																					"interface_ip_map": schema.SingleNestedBlock{
 																						MarkdownDescription: "Site:Node to IPV6 Mapping. Map of Site:Node to IPV6 address.",
@@ -5626,8 +5511,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 													},
 													"network_option": schema.SingleNestedBlock{
 														MarkdownDescription: "Network Select. x-required Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional. Global VRFs are configured via Networking > Segments. A site can have multple Network Segments (global VRFs).",
-														Attributes: map[string]schema.Attribute{
-														},
+														Attributes:          map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"site_local_inside_network": schema.SingleNestedBlock{
 																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -5654,23 +5538,21 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														Attributes: map[string]schema.Attribute{
 															"default_gw": schema.StringAttribute{
 																MarkdownDescription: "Default Gateway. IP address of the default gateway.",
-																Optional: true,
+																Optional:            true,
 															},
 															"ip_address": schema.StringAttribute{
 																MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 													},
 													"static_ipv6_address": schema.SingleNestedBlock{
 														MarkdownDescription: "Static IP Parameters. Configure Static IP parameters",
-														Attributes: map[string]schema.Attribute{
-														},
+														Attributes:          map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"cluster_static_ip": schema.SingleNestedBlock{
 																MarkdownDescription: "Cluster: Static IP Parameters. Configure Static IP parameters for cluster",
-																Attributes: map[string]schema.Attribute{
-																},
+																Attributes:          map[string]schema.Attribute{},
 																Blocks: map[string]schema.Block{
 																	"interface_ip_map": schema.SingleNestedBlock{
 																		MarkdownDescription: "Node to IP Mapping. Map of Node to Static ip configuration value, Key:Node, Value:IP Address",
@@ -5682,11 +5564,11 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																Attributes: map[string]schema.Attribute{
 																	"default_gw": schema.StringAttribute{
 																		MarkdownDescription: "Default Gateway. IP address of the default gateway.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"ip_address": schema.StringAttribute{
 																		MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 															},
@@ -5697,11 +5579,11 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														Attributes: map[string]schema.Attribute{
 															"device": schema.StringAttribute{
 																MarkdownDescription: "Parent Interface. Select a parent interface from the dropdown.",
-																Optional: true,
+																Optional:            true,
 															},
 															"vlan_id": schema.Int64Attribute{
 																MarkdownDescription: "VLAN ID. Configure the VLAN tag for this interface.",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 													},
@@ -5714,17 +5596,14 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 						},
 					},
 				},
-
 			},
 			"performance_enhancement_mode": schema.SingleNestedBlock{
 				MarkdownDescription: "Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default.",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"perf_mode_l3_enhanced": schema.SingleNestedBlock{
 						MarkdownDescription: "L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"jumbo": schema.SingleNestedBlock{
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -5738,12 +5617,10 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 			"re_select": schema.SingleNestedBlock{
 				MarkdownDescription: "Regional Edge Selection. Selection criteria to connect the site with F5 Distributed Cloud Regional Edge(s).",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"geo_proximity": schema.SingleNestedBlock{
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -5753,17 +5630,15 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 						Attributes: map[string]schema.Attribute{
 							"primary_re": schema.StringAttribute{
 								MarkdownDescription: "Primary RE Geography. Select primary RE for this site.",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 					},
 				},
-
 			},
 			"site_mesh_group_on_slo": schema.SingleNestedBlock{
 				MarkdownDescription: "Site Mesh Group Type. Select how the site mesh group will be connected. By default, public IPs of the control nodes of the site will be used.",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"no_site_mesh_group": schema.SingleNestedBlock{
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -5773,16 +5648,16 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
 								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-								Optional: true,
+								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
 								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-								Optional: true,
+								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-								Optional: true,
-								Computed: true,
+								Optional:            true,
+								Computed:            true,
 							},
 						},
 					},
@@ -5793,19 +5668,17 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 			"software_settings": schema.SingleNestedBlock{
 				MarkdownDescription: "F5XC Software Settings. Select OS and Software version for the site. All nodes in the site will run the same OS and Software version. These settings cannot be changed after the site is created.",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"os": schema.SingleNestedBlock{
 						MarkdownDescription: "Operating System Version. Select the F5XC Operating System Version for the site. By default, latest available OS Version will be used. Refer to release notes to find required released OS versions.",
 						Attributes: map[string]schema.Attribute{
 							"operating_system_version": schema.StringAttribute{
 								MarkdownDescription: "Operating System Version. Specify a OS version to be used e.g. 9.2024.6.",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -5819,7 +5692,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 						Attributes: map[string]schema.Attribute{
 							"volterra_software_version": schema.StringAttribute{
 								MarkdownDescription: "F5XC Software Version. Specify a F5XC Software Version to be used e.g. crt-20210329-1002.",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -5829,17 +5702,14 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 						},
 					},
 				},
-
 			},
 			"upgrade_settings": schema.SingleNestedBlock{
 				MarkdownDescription: "Upgrade Settings. Specify how a site will be upgraded.",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"kubernetes_upgrade_drain": schema.SingleNestedBlock{
 						MarkdownDescription: "Node by Node Upgrade. Specify how worker nodes within a site will be upgraded.",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"disable_upgrade_drain": schema.SingleNestedBlock{
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -5849,11 +5719,11 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 								Attributes: map[string]schema.Attribute{
 									"drain_max_unavailable_node_count": schema.Int64Attribute{
 										MarkdownDescription: "Node Batch Size Count.",
-										Optional: true,
+										Optional:            true,
 									},
 									"drain_node_timeout": schema.Int64Attribute{
 										MarkdownDescription: "Upgrade Wait Time. Seconds to wait before initiating upgrade on the next set of nodes. Setting it to 0 will wait indefinitely for all services on nodes to be upgraded gracefully before proceeding to the next set of nodes. (Warning: It may block upgrade if services on a node cannot be gracefully upgraded. It is recommended to use the default value).",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 								Blocks: map[string]schema.Block{
@@ -5868,17 +5738,14 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 						},
 					},
 				},
-
 			},
 			"vmware": schema.SingleNestedBlock{
 				MarkdownDescription: "VMware Provider Type. VMware Provider Type",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"not_managed": schema.SingleNestedBlock{
 						MarkdownDescription: "List of Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section.",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"node_list": schema.ListNestedBlock{
 								MarkdownDescription: "Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section.",
@@ -5886,15 +5753,15 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 									Attributes: map[string]schema.Attribute{
 										"hostname": schema.StringAttribute{
 											MarkdownDescription: "Hostname. Hostname for this Node",
-											Optional: true,
+											Optional:            true,
 										},
 										"public_ip": schema.StringAttribute{
 											MarkdownDescription: "Public IP. Public IP for this Node",
-											Optional: true,
+											Optional:            true,
 										},
 										"type": schema.StringAttribute{
 											MarkdownDescription: "Type. Type for this Node, can be Control or Worker",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -5904,19 +5771,19 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 												Attributes: map[string]schema.Attribute{
 													"description_spec": schema.StringAttribute{
 														MarkdownDescription: "Interface Description. Description for this Interface",
-														Optional: true,
+														Optional:            true,
 													},
 													"mtu": schema.Int64Attribute{
 														MarkdownDescription: "Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, mtu must be between 512 and 16384",
-														Optional: true,
+														Optional:            true,
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Interface Name. Name of this Interface",
-														Optional: true,
+														Optional:            true,
 													},
 													"priority": schema.Int64Attribute{
 														MarkdownDescription: "Priority. For a node, if multiple interfaces are configured in a VRF, interfaces with highest priority will be used as active and interfaces with lower priority will be used as backup. If multiple interfaces have the same priority, ECMP will be used. Greater the value, higher the priority",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 												Blocks: map[string]schema.Block{
@@ -5925,20 +5792,20 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														Attributes: map[string]schema.Attribute{
 															"devices": schema.ListAttribute{
 																MarkdownDescription: "Member Ethernet Devices. Ethernet devices that will make up this bond",
-																Optional: true,
-																ElementType: types.StringType,
+																Optional:            true,
+																ElementType:         types.StringType,
 															},
 															"link_polling_interval": schema.Int64Attribute{
 																MarkdownDescription: "Link Polling Interval. Link polling interval in milliseconds",
-																Optional: true,
+																Optional:            true,
 															},
 															"link_up_delay": schema.Int64Attribute{
 																MarkdownDescription: "Link Up Delay. Milliseconds wait before link is declared up",
-																Optional: true,
+																Optional:            true,
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Bond Device Name. Name for the Bond. Ex 'bond0'",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 														Blocks: map[string]schema.Block{
@@ -5950,7 +5817,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																Attributes: map[string]schema.Attribute{
 																	"rate": schema.Int64Attribute{
 																		MarkdownDescription: "LACP Packet Interval. Interval in seconds to transmit LACP packets",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 															},
@@ -5964,18 +5831,17 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														Attributes: map[string]schema.Attribute{
 															"device": schema.StringAttribute{
 																MarkdownDescription: "Ethernet Device. Select an Ethernet device from the discovered interfaces to configure. Once configured, this interface will be part of this sites dataplane and can participate in the networking services configured on this site.",
-																Optional: true,
+																Optional:            true,
 															},
 															"mac": schema.StringAttribute{
 																MarkdownDescription: "MAC Address.",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 													},
 													"ipv6_auto_config": schema.SingleNestedBlock{
 														MarkdownDescription: "IPV6AutoConfigType.",
-														Attributes: map[string]schema.Attribute{
-														},
+														Attributes:          map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"host": schema.SingleNestedBlock{
 																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -5985,22 +5851,21 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																Attributes: map[string]schema.Attribute{
 																	"network_prefix": schema.StringAttribute{
 																		MarkdownDescription: "Network Prefix. Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 																Blocks: map[string]schema.Block{
 																	"dns_config": schema.SingleNestedBlock{
 																		MarkdownDescription: "IPV6DnsConfig.",
-																		Attributes: map[string]schema.Attribute{
-																		},
+																		Attributes:          map[string]schema.Attribute{},
 																		Blocks: map[string]schema.Block{
 																			"configured_list": schema.SingleNestedBlock{
 																				MarkdownDescription: "IPV6DnsList.",
 																				Attributes: map[string]schema.Attribute{
 																					"dns_list": schema.ListAttribute{
 																						MarkdownDescription: "Dns List. List of IPV6 Addresses acting as Dns servers",
-																						Optional: true,
-																						ElementType: types.StringType,
+																						Optional:            true,
+																						ElementType:         types.StringType,
 																					},
 																				},
 																			},
@@ -6009,7 +5874,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																				Attributes: map[string]schema.Attribute{
 																					"configured_address": schema.StringAttribute{
 																						MarkdownDescription: "Configured Address. Configured address from the network prefix is chosen as dns server",
-																						Optional: true,
+																						Optional:            true,
 																					},
 																				},
 																				Blocks: map[string]schema.Block{
@@ -6025,8 +5890,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																	},
 																	"stateful": schema.SingleNestedBlock{
 																		MarkdownDescription: "DHCPIPV6 Stateful Server.",
-																		Attributes: map[string]schema.Attribute{
-																		},
+																		Attributes:          map[string]schema.Attribute{},
 																		Blocks: map[string]schema.Block{
 																			"automatic_from_end": schema.SingleNestedBlock{
 																				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -6040,11 +5904,11 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																					Attributes: map[string]schema.Attribute{
 																						"network_prefix": schema.StringAttribute{
 																							MarkdownDescription: "Network Prefix. Network Prefix to be used for IPV6 address auto configuration",
-																							Optional: true,
+																							Optional:            true,
 																						},
 																						"pool_settings": schema.StringAttribute{
 																							MarkdownDescription: "Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation. Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`. Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`.",
-																							Optional: true,
+																							Optional:            true,
 																						},
 																					},
 																					Blocks: map[string]schema.Block{
@@ -6054,11 +5918,11 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																								Attributes: map[string]schema.Attribute{
 																									"end_ip": schema.StringAttribute{
 																										MarkdownDescription: "Ending IPV6. Ending IPV6 address of the pool range. In case of address allocator, offset is derived based on network prefix.",
-																										Optional: true,
+																										Optional:            true,
 																									},
 																									"start_ip": schema.StringAttribute{
 																										MarkdownDescription: "Starting IPV6. Starting IPV6 address of the pool range. In case of address allocator, offset is derived based on network prefix. 2001::1 with prefix length of 64, start offset is 5",
-																										Optional: true,
+																										Optional:            true,
 																									},
 																								},
 																							},
@@ -6071,8 +5935,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																			},
 																			"interface_ip_map": schema.SingleNestedBlock{
 																				MarkdownDescription: "Interface IPV6 Assignments. Map of Interface IPV6 assignments per node",
-																				Attributes: map[string]schema.Attribute{
-																				},
+																				Attributes:          map[string]schema.Attribute{},
 																				Blocks: map[string]schema.Block{
 																					"interface_ip_map": schema.SingleNestedBlock{
 																						MarkdownDescription: "Site:Node to IPV6 Mapping. Map of Site:Node to IPV6 address.",
@@ -6096,8 +5959,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 													},
 													"network_option": schema.SingleNestedBlock{
 														MarkdownDescription: "Network Select. x-required Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional. Global VRFs are configured via Networking > Segments. A site can have multple Network Segments (global VRFs).",
-														Attributes: map[string]schema.Attribute{
-														},
+														Attributes:          map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"site_local_inside_network": schema.SingleNestedBlock{
 																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -6124,23 +5986,21 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														Attributes: map[string]schema.Attribute{
 															"default_gw": schema.StringAttribute{
 																MarkdownDescription: "Default Gateway. IP address of the default gateway.",
-																Optional: true,
+																Optional:            true,
 															},
 															"ip_address": schema.StringAttribute{
 																MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 													},
 													"static_ipv6_address": schema.SingleNestedBlock{
 														MarkdownDescription: "Static IP Parameters. Configure Static IP parameters",
-														Attributes: map[string]schema.Attribute{
-														},
+														Attributes:          map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"cluster_static_ip": schema.SingleNestedBlock{
 																MarkdownDescription: "Cluster: Static IP Parameters. Configure Static IP parameters for cluster",
-																Attributes: map[string]schema.Attribute{
-																},
+																Attributes:          map[string]schema.Attribute{},
 																Blocks: map[string]schema.Block{
 																	"interface_ip_map": schema.SingleNestedBlock{
 																		MarkdownDescription: "Node to IP Mapping. Map of Node to Static ip configuration value, Key:Node, Value:IP Address",
@@ -6152,11 +6012,11 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																Attributes: map[string]schema.Attribute{
 																	"default_gw": schema.StringAttribute{
 																		MarkdownDescription: "Default Gateway. IP address of the default gateway.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"ip_address": schema.StringAttribute{
 																		MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 															},
@@ -6167,11 +6027,11 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 														Attributes: map[string]schema.Attribute{
 															"device": schema.StringAttribute{
 																MarkdownDescription: "Parent Interface. Select a parent interface from the dropdown.",
-																Optional: true,
+																Optional:            true,
 															},
 															"vlan_id": schema.Int64Attribute{
 																MarkdownDescription: "VLAN ID. Configure the VLAN tag for this interface.",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 													},
@@ -6184,7 +6044,6 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 						},
 					},
 				},
-
 			},
 		},
 	}
@@ -6761,7 +6620,6 @@ func (r *SecuremeshSiteV2Resource) Create(ctx context.Context, req resource.Crea
 		createReq.Spec["tunnel_type"] = data.TunnelType.ValueString()
 	}
 
-
 	apiResource, err := r.client.CreateSecuremeshSiteV2(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create SecuremeshSiteV2: %s", err))
@@ -6773,7 +6631,7 @@ func (r *SecuremeshSiteV2Resource) Create(ctx context.Context, req resource.Crea
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if blockData, ok := apiResource.Spec["active_enhanced_firewall_policies"].(map[string]interface{}); ok && (isImport || data.ActiveEnhancedFirewallPolicies != nil) {
 		data.ActiveEnhancedFirewallPolicies = &SecuremeshSiteV2ActiveEnhancedFirewallPoliciesModel{
 			EnhancedFirewallPolicies: func() []SecuremeshSiteV2ActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel {
@@ -6853,8 +6711,7 @@ func (r *SecuremeshSiteV2Resource) Create(ctx context.Context, req resource.Crea
 				}
 				// Import case: read from API
 				if _, ok := blockData["admin_password"].(map[string]interface{}); ok {
-					return &SecuremeshSiteV2AdminUserCredentialsAdminPasswordModel{
-					}
+					return &SecuremeshSiteV2AdminUserCredentialsAdminPasswordModel{}
 				}
 				return nil
 			}(),
@@ -6960,8 +6817,7 @@ func (r *SecuremeshSiteV2Resource) Create(ctx context.Context, req resource.Crea
 				}
 				// Import case: read from API
 				if _, ok := blockData["password"].(map[string]interface{}); ok {
-					return &SecuremeshSiteV2CustomProxyPasswordModel{
-					}
+					return &SecuremeshSiteV2CustomProxyPasswordModel{}
 				}
 				return nil
 			}(),
@@ -7218,7 +7074,6 @@ func (r *SecuremeshSiteV2Resource) Create(ctx context.Context, req resource.Crea
 	} else {
 		data.TunnelType = types.StringNull()
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -7308,9 +7163,9 @@ func (r *SecuremeshSiteV2Resource) Read(ctx context.Context, req resource.ReadRe
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if blockData, ok := apiResource.Spec["active_enhanced_firewall_policies"].(map[string]interface{}); ok && (isImport || data.ActiveEnhancedFirewallPolicies != nil) {
 		data.ActiveEnhancedFirewallPolicies = &SecuremeshSiteV2ActiveEnhancedFirewallPoliciesModel{
@@ -7391,8 +7246,7 @@ func (r *SecuremeshSiteV2Resource) Read(ctx context.Context, req resource.ReadRe
 				}
 				// Import case: read from API
 				if _, ok := blockData["admin_password"].(map[string]interface{}); ok {
-					return &SecuremeshSiteV2AdminUserCredentialsAdminPasswordModel{
-					}
+					return &SecuremeshSiteV2AdminUserCredentialsAdminPasswordModel{}
 				}
 				return nil
 			}(),
@@ -7498,8 +7352,7 @@ func (r *SecuremeshSiteV2Resource) Read(ctx context.Context, req resource.ReadRe
 				}
 				// Import case: read from API
 				if _, ok := blockData["password"].(map[string]interface{}); ok {
-					return &SecuremeshSiteV2CustomProxyPasswordModel{
-					}
+					return &SecuremeshSiteV2CustomProxyPasswordModel{}
 				}
 				return nil
 			}(),
@@ -7756,7 +7609,6 @@ func (r *SecuremeshSiteV2Resource) Read(ctx context.Context, req resource.ReadRe
 	} else {
 		data.TunnelType = types.StringNull()
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -8243,7 +8095,6 @@ func (r *SecuremeshSiteV2Resource) Update(ctx context.Context, req resource.Upda
 	if !data.TunnelType.IsNull() && !data.TunnelType.IsUnknown() {
 		apiResource.Spec["tunnel_type"] = data.TunnelType.ValueString()
 	}
-
 
 	updated, err := r.client.UpdateSecuremeshSiteV2(ctx, apiResource)
 	if err != nil {

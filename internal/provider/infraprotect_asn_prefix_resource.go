@@ -51,22 +51,22 @@ type InfraprotectAsnPrefixEmptyModel struct {
 
 // InfraprotectAsnPrefixAsnModel represents asn block
 type InfraprotectAsnPrefixAsnModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 type InfraprotectAsnPrefixResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Prefix types.String `tfsdk:"prefix"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	Asn *InfraprotectAsnPrefixAsnModel `tfsdk:"asn"`
+	Name        types.String                   `tfsdk:"name"`
+	Namespace   types.String                   `tfsdk:"namespace"`
+	Annotations types.Map                      `tfsdk:"annotations"`
+	Description types.String                   `tfsdk:"description"`
+	Disable     types.Bool                     `tfsdk:"disable"`
+	Labels      types.Map                      `tfsdk:"labels"`
+	ID          types.String                   `tfsdk:"id"`
+	Prefix      types.String                   `tfsdk:"prefix"`
+	Timeouts    timeouts.Value                 `tfsdk:"timeouts"`
+	Asn         *InfraprotectAsnPrefixAsnModel `tfsdk:"asn"`
 }
 
 func (r *InfraprotectAsnPrefixResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -80,7 +80,7 @@ func (r *InfraprotectAsnPrefixResource) Schema(ctx context.Context, req resource
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the InfraprotectAsnPrefix. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -90,7 +90,7 @@ func (r *InfraprotectAsnPrefixResource) Schema(ctx context.Context, req resource
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the InfraprotectAsnPrefix will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -100,33 +100,33 @@ func (r *InfraprotectAsnPrefixResource) Schema(ctx context.Context, req resource
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"prefix": schema.StringAttribute{
 				MarkdownDescription: "Prefix. Prefix",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -144,19 +144,18 @@ func (r *InfraprotectAsnPrefixResource) Schema(ctx context.Context, req resource
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
 						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-						Optional: true,
+						Optional:            true,
 					},
 					"namespace": schema.StringAttribute{
 						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-						Optional: true,
+						Optional:            true,
 					},
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-						Optional: true,
-						Computed: true,
+						Optional:            true,
+						Computed:            true,
 					},
 				},
-
 			},
 		},
 	}
@@ -323,7 +322,6 @@ func (r *InfraprotectAsnPrefixResource) Create(ctx context.Context, req resource
 		createReq.Spec["prefix"] = data.Prefix.ValueString()
 	}
 
-
 	apiResource, err := r.client.CreateInfraprotectAsnPrefix(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create InfraprotectAsnPrefix: %s", err))
@@ -335,7 +333,7 @@ func (r *InfraprotectAsnPrefixResource) Create(ctx context.Context, req resource
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if blockData, ok := apiResource.Spec["asn"].(map[string]interface{}); ok && (isImport || data.Asn != nil) {
 		data.Asn = &InfraprotectAsnPrefixAsnModel{
 			Name: func() types.String {
@@ -363,7 +361,6 @@ func (r *InfraprotectAsnPrefixResource) Create(ctx context.Context, req resource
 	} else {
 		data.Prefix = types.StringNull()
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -453,9 +450,9 @@ func (r *InfraprotectAsnPrefixResource) Read(ctx context.Context, req resource.R
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if blockData, ok := apiResource.Spec["asn"].(map[string]interface{}); ok && (isImport || data.Asn != nil) {
 		data.Asn = &InfraprotectAsnPrefixAsnModel{
@@ -484,7 +481,6 @@ func (r *InfraprotectAsnPrefixResource) Read(ctx context.Context, req resource.R
 	} else {
 		data.Prefix = types.StringNull()
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -561,7 +557,6 @@ func (r *InfraprotectAsnPrefixResource) Update(ctx context.Context, req resource
 	if !data.Prefix.IsNull() && !data.Prefix.IsUnknown() {
 		apiResource.Spec["prefix"] = data.Prefix.ValueString()
 	}
-
 
 	updated, err := r.client.UpdateInfraprotectAsnPrefix(ctx, apiResource)
 	if err != nil {

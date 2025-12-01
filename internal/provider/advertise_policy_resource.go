@@ -53,39 +53,39 @@ type AdvertisePolicyEmptyModel struct {
 
 // AdvertisePolicyPublicIPModel represents public_ip block
 type AdvertisePolicyPublicIPModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // AdvertisePolicyTLSParametersModel represents tls_parameters block
 type AdvertisePolicyTLSParametersModel struct {
-	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
-	ClientCertificateOptional *AdvertisePolicyEmptyModel `tfsdk:"client_certificate_optional"`
-	ClientCertificateRequired *AdvertisePolicyEmptyModel `tfsdk:"client_certificate_required"`
-	CommonParams *AdvertisePolicyTLSParametersCommonParamsModel `tfsdk:"common_params"`
-	NoClientCertificate *AdvertisePolicyEmptyModel `tfsdk:"no_client_certificate"`
+	XfccHeaderElements        types.List                                     `tfsdk:"xfcc_header_elements"`
+	ClientCertificateOptional *AdvertisePolicyEmptyModel                     `tfsdk:"client_certificate_optional"`
+	ClientCertificateRequired *AdvertisePolicyEmptyModel                     `tfsdk:"client_certificate_required"`
+	CommonParams              *AdvertisePolicyTLSParametersCommonParamsModel `tfsdk:"common_params"`
+	NoClientCertificate       *AdvertisePolicyEmptyModel                     `tfsdk:"no_client_certificate"`
 }
 
 // AdvertisePolicyTLSParametersCommonParamsModel represents common_params block
 type AdvertisePolicyTLSParametersCommonParamsModel struct {
-	CipherSuites types.List `tfsdk:"cipher_suites"`
-	MaximumProtocolVersion types.String `tfsdk:"maximum_protocol_version"`
-	MinimumProtocolVersion types.String `tfsdk:"minimum_protocol_version"`
-	TLSCertificates []AdvertisePolicyTLSParametersCommonParamsTLSCertificatesModel `tfsdk:"tls_certificates"`
-	ValidationParams *AdvertisePolicyTLSParametersCommonParamsValidationParamsModel `tfsdk:"validation_params"`
+	CipherSuites           types.List                                                     `tfsdk:"cipher_suites"`
+	MaximumProtocolVersion types.String                                                   `tfsdk:"maximum_protocol_version"`
+	MinimumProtocolVersion types.String                                                   `tfsdk:"minimum_protocol_version"`
+	TLSCertificates        []AdvertisePolicyTLSParametersCommonParamsTLSCertificatesModel `tfsdk:"tls_certificates"`
+	ValidationParams       *AdvertisePolicyTLSParametersCommonParamsValidationParamsModel `tfsdk:"validation_params"`
 }
 
 // AdvertisePolicyTLSParametersCommonParamsTLSCertificatesModel represents tls_certificates block
 type AdvertisePolicyTLSParametersCommonParamsTLSCertificatesModel struct {
-	CertificateURL types.String `tfsdk:"certificate_url"`
-	DescriptionSpec types.String `tfsdk:"description_spec"`
+	CertificateURL       types.String                                                                      `tfsdk:"certificate_url"`
+	DescriptionSpec      types.String                                                                      `tfsdk:"description_spec"`
 	CustomHashAlgorithms *AdvertisePolicyTLSParametersCommonParamsTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
-	DisableOcspStapling *AdvertisePolicyEmptyModel `tfsdk:"disable_ocsp_stapling"`
-	PrivateKey *AdvertisePolicyTLSParametersCommonParamsTLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
-	UseSystemDefaults *AdvertisePolicyEmptyModel `tfsdk:"use_system_defaults"`
+	DisableOcspStapling  *AdvertisePolicyEmptyModel                                                        `tfsdk:"disable_ocsp_stapling"`
+	PrivateKey           *AdvertisePolicyTLSParametersCommonParamsTLSCertificatesPrivateKeyModel           `tfsdk:"private_key"`
+	UseSystemDefaults    *AdvertisePolicyEmptyModel                                                        `tfsdk:"use_system_defaults"`
 }
 
 // AdvertisePolicyTLSParametersCommonParamsTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
@@ -96,28 +96,28 @@ type AdvertisePolicyTLSParametersCommonParamsTLSCertificatesCustomHashAlgorithms
 // AdvertisePolicyTLSParametersCommonParamsTLSCertificatesPrivateKeyModel represents private_key block
 type AdvertisePolicyTLSParametersCommonParamsTLSCertificatesPrivateKeyModel struct {
 	BlindfoldSecretInfo *AdvertisePolicyTLSParametersCommonParamsTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *AdvertisePolicyTLSParametersCommonParamsTLSCertificatesPrivateKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *AdvertisePolicyTLSParametersCommonParamsTLSCertificatesPrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // AdvertisePolicyTLSParametersCommonParamsTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
 type AdvertisePolicyTLSParametersCommonParamsTLSCertificatesPrivateKeyBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // AdvertisePolicyTLSParametersCommonParamsTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
 type AdvertisePolicyTLSParametersCommonParamsTLSCertificatesPrivateKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // AdvertisePolicyTLSParametersCommonParamsValidationParamsModel represents validation_params block
 type AdvertisePolicyTLSParametersCommonParamsValidationParamsModel struct {
-	SkipHostnameVerification types.Bool `tfsdk:"skip_hostname_verification"`
-	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
-	VerifySubjectAltNames types.List `tfsdk:"verify_subject_alt_names"`
-	TrustedCa *AdvertisePolicyTLSParametersCommonParamsValidationParamsTrustedCaModel `tfsdk:"trusted_ca"`
+	SkipHostnameVerification types.Bool                                                              `tfsdk:"skip_hostname_verification"`
+	TrustedCaURL             types.String                                                            `tfsdk:"trusted_ca_url"`
+	VerifySubjectAltNames    types.List                                                              `tfsdk:"verify_subject_alt_names"`
+	TrustedCa                *AdvertisePolicyTLSParametersCommonParamsValidationParamsTrustedCaModel `tfsdk:"trusted_ca"`
 }
 
 // AdvertisePolicyTLSParametersCommonParamsValidationParamsTrustedCaModel represents trusted_ca block
@@ -127,35 +127,35 @@ type AdvertisePolicyTLSParametersCommonParamsValidationParamsTrustedCaModel stru
 
 // AdvertisePolicyTLSParametersCommonParamsValidationParamsTrustedCaTrustedCaListModel represents trusted_ca_list block
 type AdvertisePolicyTLSParametersCommonParamsValidationParamsTrustedCaTrustedCaListModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // AdvertisePolicyWhereModel represents where block
 type AdvertisePolicyWhereModel struct {
-	Site *AdvertisePolicyWhereSiteModel `tfsdk:"site"`
+	Site           *AdvertisePolicyWhereSiteModel           `tfsdk:"site"`
 	VirtualNetwork *AdvertisePolicyWhereVirtualNetworkModel `tfsdk:"virtual_network"`
-	VirtualSite *AdvertisePolicyWhereVirtualSiteModel `tfsdk:"virtual_site"`
+	VirtualSite    *AdvertisePolicyWhereVirtualSiteModel    `tfsdk:"virtual_site"`
 }
 
 // AdvertisePolicyWhereSiteModel represents site block
 type AdvertisePolicyWhereSiteModel struct {
-	NetworkType types.String `tfsdk:"network_type"`
-	DisableInternetVip *AdvertisePolicyEmptyModel `tfsdk:"disable_internet_vip"`
-	EnableInternetVip *AdvertisePolicyEmptyModel `tfsdk:"enable_internet_vip"`
-	Ref []AdvertisePolicyWhereSiteRefModel `tfsdk:"ref"`
+	NetworkType        types.String                       `tfsdk:"network_type"`
+	DisableInternetVip *AdvertisePolicyEmptyModel         `tfsdk:"disable_internet_vip"`
+	EnableInternetVip  *AdvertisePolicyEmptyModel         `tfsdk:"enable_internet_vip"`
+	Ref                []AdvertisePolicyWhereSiteRefModel `tfsdk:"ref"`
 }
 
 // AdvertisePolicyWhereSiteRefModel represents ref block
 type AdvertisePolicyWhereSiteRefModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // AdvertisePolicyWhereVirtualNetworkModel represents virtual_network block
@@ -165,47 +165,47 @@ type AdvertisePolicyWhereVirtualNetworkModel struct {
 
 // AdvertisePolicyWhereVirtualNetworkRefModel represents ref block
 type AdvertisePolicyWhereVirtualNetworkRefModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // AdvertisePolicyWhereVirtualSiteModel represents virtual_site block
 type AdvertisePolicyWhereVirtualSiteModel struct {
-	NetworkType types.String `tfsdk:"network_type"`
-	DisableInternetVip *AdvertisePolicyEmptyModel `tfsdk:"disable_internet_vip"`
-	EnableInternetVip *AdvertisePolicyEmptyModel `tfsdk:"enable_internet_vip"`
-	Ref []AdvertisePolicyWhereVirtualSiteRefModel `tfsdk:"ref"`
+	NetworkType        types.String                              `tfsdk:"network_type"`
+	DisableInternetVip *AdvertisePolicyEmptyModel                `tfsdk:"disable_internet_vip"`
+	EnableInternetVip  *AdvertisePolicyEmptyModel                `tfsdk:"enable_internet_vip"`
+	Ref                []AdvertisePolicyWhereVirtualSiteRefModel `tfsdk:"ref"`
 }
 
 // AdvertisePolicyWhereVirtualSiteRefModel represents ref block
 type AdvertisePolicyWhereVirtualSiteRefModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 type AdvertisePolicyResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Address types.String `tfsdk:"address"`
-	Port types.Int64 `tfsdk:"port"`
-	PortRanges types.String `tfsdk:"port_ranges"`
-	Protocol types.String `tfsdk:"protocol"`
-	SkipXffAppend types.Bool `tfsdk:"skip_xff_append"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	PublicIP []AdvertisePolicyPublicIPModel `tfsdk:"public_ip"`
+	Name          types.String                       `tfsdk:"name"`
+	Namespace     types.String                       `tfsdk:"namespace"`
+	Annotations   types.Map                          `tfsdk:"annotations"`
+	Description   types.String                       `tfsdk:"description"`
+	Disable       types.Bool                         `tfsdk:"disable"`
+	Labels        types.Map                          `tfsdk:"labels"`
+	ID            types.String                       `tfsdk:"id"`
+	Address       types.String                       `tfsdk:"address"`
+	Port          types.Int64                        `tfsdk:"port"`
+	PortRanges    types.String                       `tfsdk:"port_ranges"`
+	Protocol      types.String                       `tfsdk:"protocol"`
+	SkipXffAppend types.Bool                         `tfsdk:"skip_xff_append"`
+	Timeouts      timeouts.Value                     `tfsdk:"timeouts"`
+	PublicIP      []AdvertisePolicyPublicIPModel     `tfsdk:"public_ip"`
 	TLSParameters *AdvertisePolicyTLSParametersModel `tfsdk:"tls_parameters"`
-	Where *AdvertisePolicyWhereModel `tfsdk:"where"`
+	Where         *AdvertisePolicyWhereModel         `tfsdk:"where"`
 }
 
 func (r *AdvertisePolicyResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -219,7 +219,7 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the AdvertisePolicy. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -229,7 +229,7 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the AdvertisePolicy will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -239,65 +239,65 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"address": schema.StringAttribute{
 				MarkdownDescription: "VIP. Optional. VIP to advertise. This VIP can be either V4/V6 address You can not specify this if where contains a site or virtual site of type REGIONAL_EDGE or public network If not specified and 'where' is specified with site or virtual site option, inside_vip or outside_vip specified in the site object will be used based on the network type. If inside_vip/outside_vip is not configured in the site object, system use interface ip in the respected networks.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"port": schema.Int64Attribute{
 				MarkdownDescription: "[OneOf: port, port_ranges] TCP/UDP Port. Port to advertise.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{
 					int64planmodifier.UseStateForUnknown(),
 				},
 			},
 			"port_ranges": schema.StringAttribute{
 				MarkdownDescription: "Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"protocol": schema.StringAttribute{
 				MarkdownDescription: "Protocol. Protocol to advertise.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"skip_xff_append": schema.BoolAttribute{
 				MarkdownDescription: "Disable X-Forwarded-For Header. If set, the loadbalancer will not append the remote address to the x-forwarded-for HTTP header.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.Bool{
 					boolplanmodifier.UseStateForUnknown(),
 				},
@@ -316,29 +316,28 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 					Attributes: map[string]schema.Attribute{
 						"kind": schema.StringAttribute{
 							MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-							Optional: true,
-							Computed: true,
+							Optional:            true,
+							Computed:            true,
 						},
 						"name": schema.StringAttribute{
 							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-							Optional: true,
+							Optional:            true,
 						},
 						"namespace": schema.StringAttribute{
 							MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-							Optional: true,
+							Optional:            true,
 						},
 						"tenant": schema.StringAttribute{
 							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-							Optional: true,
-							Computed: true,
+							Optional:            true,
+							Computed:            true,
 						},
 						"uid": schema.StringAttribute{
 							MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-							Optional: true,
-							Computed: true,
+							Optional:            true,
+							Computed:            true,
 						},
 					},
-
 				},
 			},
 			"tls_parameters": schema.SingleNestedBlock{
@@ -346,8 +345,8 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 				Attributes: map[string]schema.Attribute{
 					"xfcc_header_elements": schema.ListAttribute{
 						MarkdownDescription: "XFCC Header. X-Forwarded-Client-Cert header elements to be set in an mTLS enabled connections. If none are defined, the header will not be added. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
-						Optional: true,
-						ElementType: types.StringType,
+						Optional:            true,
+						ElementType:         types.StringType,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -362,16 +361,16 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 						Attributes: map[string]schema.Attribute{
 							"cipher_suites": schema.ListAttribute{
 								MarkdownDescription: "Cipher Suites. The following list specifies the supported cipher suite TLS_AES_128_GCM_SHA256 TLS_AES_256_GCM_SHA384 TLS_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA TLS_RSA_WITH_AES_128_CBC_SHA TLS_RSA_WITH_AES_128_GCM_SHA256 TLS_RSA_WITH_AES_256_CBC_SHA TLS_RSA_WITH_AES_256_GCM_SHA384 If not specified, the default list: TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 will be used.",
-								Optional: true,
-								ElementType: types.StringType,
+								Optional:            true,
+								ElementType:         types.StringType,
 							},
 							"maximum_protocol_version": schema.StringAttribute{
 								MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
-								Optional: true,
+								Optional:            true,
 							},
 							"minimum_protocol_version": schema.StringAttribute{
 								MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -381,11 +380,11 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 									Attributes: map[string]schema.Attribute{
 										"certificate_url": schema.StringAttribute{
 											MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
-											Optional: true,
+											Optional:            true,
 										},
 										"description_spec": schema.StringAttribute{
 											MarkdownDescription: "Description. Description for the certificate",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -394,8 +393,8 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 											Attributes: map[string]schema.Attribute{
 												"hash_algorithms": schema.ListAttribute{
 													MarkdownDescription: "Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM`.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 										},
@@ -404,23 +403,22 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 										},
 										"private_key": schema.SingleNestedBlock{
 											MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"blindfold_secret_info": schema.SingleNestedBlock{
 													MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 													Attributes: map[string]schema.Attribute{
 														"decryption_provider": schema.StringAttribute{
 															MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-															Optional: true,
+															Optional:            true,
 														},
 														"location": schema.StringAttribute{
 															MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-															Optional: true,
+															Optional:            true,
 														},
 														"store_provider": schema.StringAttribute{
 															MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -429,11 +427,11 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 													Attributes: map[string]schema.Attribute{
 														"provider_ref": schema.StringAttribute{
 															MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-															Optional: true,
+															Optional:            true,
 														},
 														"url": schema.StringAttribute{
 															MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -450,23 +448,22 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 								Attributes: map[string]schema.Attribute{
 									"skip_hostname_verification": schema.BoolAttribute{
 										MarkdownDescription: "Skip verification of hostname. When True, skip verification of hostname i.e. CN/Subject Alt Name of certificate is not matched to the connecting hostname",
-										Optional: true,
+										Optional:            true,
 									},
 									"trusted_ca_url": schema.StringAttribute{
 										MarkdownDescription: "Inline Root CA Certificate (legacy). Inline Root CA Certificate",
-										Optional: true,
+										Optional:            true,
 									},
 									"verify_subject_alt_names": schema.ListAttribute{
 										MarkdownDescription: "List of SANs for matching. List of acceptable Subject Alt Names/CN in the peer's certificate. When skip_hostname_verification is false and verify_subject_alt_names is empty, the hostname of the peer will be used for matching against SAN/CN of peer's certificate",
-										Optional: true,
-										ElementType: types.StringType,
+										Optional:            true,
+										ElementType:         types.StringType,
 									},
 								},
 								Blocks: map[string]schema.Block{
 									"trusted_ca": schema.SingleNestedBlock{
 										MarkdownDescription: "Root CA Certificate Reference. Reference to Root CA Certificate",
-										Attributes: map[string]schema.Attribute{
-										},
+										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"trusted_ca_list": schema.ListNestedBlock{
 												MarkdownDescription: "Root CA Certificate Reference. Reference to Root CA Certificate",
@@ -474,26 +471,26 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 													Attributes: map[string]schema.Attribute{
 														"kind": schema.StringAttribute{
 															MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-															Optional: true,
-															Computed: true,
+															Optional:            true,
+															Computed:            true,
 														},
 														"name": schema.StringAttribute{
 															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-															Optional: true,
+															Optional:            true,
 														},
 														"namespace": schema.StringAttribute{
 															MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-															Optional: true,
+															Optional:            true,
 														},
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-															Optional: true,
-															Computed: true,
+															Optional:            true,
+															Computed:            true,
 														},
 														"uid": schema.StringAttribute{
 															MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-															Optional: true,
-															Computed: true,
+															Optional:            true,
+															Computed:            true,
 														},
 													},
 												},
@@ -508,19 +505,17 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 			"where": schema.SingleNestedBlock{
 				MarkdownDescription: "Network or Site Reference. NetworkSiteRefSelector defines a union of reference to site or reference to virtual_network or reference to virtual_site It is used to determine virtual network using following rules * Direct reference to virtual_network object * Site local network when refering to site object * All site local networks for sites selected by refering to virtual_site object",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"site": schema.SingleNestedBlock{
 						MarkdownDescription: "Site Reference. This specifies a direct reference to a site configuration object",
 						Attributes: map[string]schema.Attribute{
 							"network_type": schema.StringAttribute{
 								MarkdownDescription: "Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user. Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`. Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`.",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -536,26 +531,26 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 									Attributes: map[string]schema.Attribute{
 										"kind": schema.StringAttribute{
 											MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-											Optional: true,
+											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
 											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-											Optional: true,
+											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 										"uid": schema.StringAttribute{
 											MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
@@ -564,8 +559,7 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 					},
 					"virtual_network": schema.SingleNestedBlock{
 						MarkdownDescription: "Network Reference. This specifies a direct reference to a network configuration object",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"ref": schema.ListNestedBlock{
 								MarkdownDescription: "Reference. A virtual network direct reference",
@@ -573,26 +567,26 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 									Attributes: map[string]schema.Attribute{
 										"kind": schema.StringAttribute{
 											MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-											Optional: true,
+											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
 											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-											Optional: true,
+											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 										"uid": schema.StringAttribute{
 											MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
@@ -604,7 +598,7 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 						Attributes: map[string]schema.Attribute{
 							"network_type": schema.StringAttribute{
 								MarkdownDescription: "Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user. Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`. Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`.",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -620,26 +614,26 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 									Attributes: map[string]schema.Attribute{
 										"kind": schema.StringAttribute{
 											MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-											Optional: true,
+											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
 											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-											Optional: true,
+											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 										"uid": schema.StringAttribute{
 											MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
@@ -647,7 +641,6 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 						},
 					},
 				},
-
 			},
 		},
 	}
@@ -888,7 +881,6 @@ func (r *AdvertisePolicyResource) Create(ctx context.Context, req resource.Creat
 		createReq.Spec["skip_xff_append"] = data.SkipXffAppend.ValueBool()
 	}
 
-
 	apiResource, err := r.client.CreateAdvertisePolicy(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create AdvertisePolicy: %s", err))
@@ -900,7 +892,7 @@ func (r *AdvertisePolicyResource) Create(ctx context.Context, req resource.Creat
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["public_ip"].([]interface{}); ok && len(listData) > 0 {
 		var public_ipList []AdvertisePolicyPublicIPModel
 		for listIdx, item := range listData {
@@ -1068,7 +1060,6 @@ func (r *AdvertisePolicyResource) Create(ctx context.Context, req resource.Creat
 			data.SkipXffAppend = types.BoolNull()
 		}
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -1158,9 +1149,9 @@ func (r *AdvertisePolicyResource) Read(ctx context.Context, req resource.ReadReq
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if listData, ok := apiResource.Spec["public_ip"].([]interface{}); ok && len(listData) > 0 {
 		var public_ipList []AdvertisePolicyPublicIPModel
@@ -1329,7 +1320,6 @@ func (r *AdvertisePolicyResource) Read(ctx context.Context, req resource.ReadReq
 			data.SkipXffAppend = types.BoolNull()
 		}
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -1480,7 +1470,6 @@ func (r *AdvertisePolicyResource) Update(ctx context.Context, req resource.Updat
 	if !data.SkipXffAppend.IsNull() && !data.SkipXffAppend.IsUnknown() {
 		apiResource.Spec["skip_xff_append"] = data.SkipXffAppend.ValueBool()
 	}
-
 
 	updated, err := r.client.UpdateAdvertisePolicy(ctx, apiResource)
 	if err != nil {

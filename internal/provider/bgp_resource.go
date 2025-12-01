@@ -51,67 +51,67 @@ type BGPEmptyModel struct {
 
 // BGPBGPParametersModel represents bgp_parameters block
 type BGPBGPParametersModel struct {
-	Asn types.Int64 `tfsdk:"asn"`
-	IPAddress types.String `tfsdk:"ip_address"`
-	FromSite *BGPEmptyModel `tfsdk:"from_site"`
+	Asn          types.Int64    `tfsdk:"asn"`
+	IPAddress    types.String   `tfsdk:"ip_address"`
+	FromSite     *BGPEmptyModel `tfsdk:"from_site"`
 	LocalAddress *BGPEmptyModel `tfsdk:"local_address"`
 }
 
 // BGPPeersModel represents peers block
 type BGPPeersModel struct {
-	Label types.String `tfsdk:"label"`
-	BfdDisabled *BGPEmptyModel `tfsdk:"bfd_disabled"`
-	BfdEnabled *BGPPeersBfdEnabledModel `tfsdk:"bfd_enabled"`
-	Disable *BGPEmptyModel `tfsdk:"disable"`
-	External *BGPPeersExternalModel `tfsdk:"external"`
-	Metadata *BGPPeersMetadataModel `tfsdk:"metadata"`
-	PassiveModeDisabled *BGPEmptyModel `tfsdk:"passive_mode_disabled"`
-	PassiveModeEnabled *BGPEmptyModel `tfsdk:"passive_mode_enabled"`
-	RoutingPolicies *BGPPeersRoutingPoliciesModel `tfsdk:"routing_policies"`
+	Label               types.String                  `tfsdk:"label"`
+	BfdDisabled         *BGPEmptyModel                `tfsdk:"bfd_disabled"`
+	BfdEnabled          *BGPPeersBfdEnabledModel      `tfsdk:"bfd_enabled"`
+	Disable             *BGPEmptyModel                `tfsdk:"disable"`
+	External            *BGPPeersExternalModel        `tfsdk:"external"`
+	Metadata            *BGPPeersMetadataModel        `tfsdk:"metadata"`
+	PassiveModeDisabled *BGPEmptyModel                `tfsdk:"passive_mode_disabled"`
+	PassiveModeEnabled  *BGPEmptyModel                `tfsdk:"passive_mode_enabled"`
+	RoutingPolicies     *BGPPeersRoutingPoliciesModel `tfsdk:"routing_policies"`
 }
 
 // BGPPeersBfdEnabledModel represents bfd_enabled block
 type BGPPeersBfdEnabledModel struct {
-	Multiplier types.Int64 `tfsdk:"multiplier"`
-	ReceiveIntervalMilliseconds types.Int64 `tfsdk:"receive_interval_milliseconds"`
+	Multiplier                   types.Int64 `tfsdk:"multiplier"`
+	ReceiveIntervalMilliseconds  types.Int64 `tfsdk:"receive_interval_milliseconds"`
 	TransmitIntervalMilliseconds types.Int64 `tfsdk:"transmit_interval_milliseconds"`
 }
 
 // BGPPeersExternalModel represents external block
 type BGPPeersExternalModel struct {
-	Address types.String `tfsdk:"address"`
-	AddressIPV6 types.String `tfsdk:"address_ipv6"`
-	Asn types.Int64 `tfsdk:"asn"`
-	Md5AuthKey types.String `tfsdk:"md5_auth_key"`
-	Port types.Int64 `tfsdk:"port"`
-	SubnetBeginOffset types.Int64 `tfsdk:"subnet_begin_offset"`
-	SubnetBeginOffsetV6 types.Int64 `tfsdk:"subnet_begin_offset_v6"`
-	SubnetEndOffset types.Int64 `tfsdk:"subnet_end_offset"`
-	SubnetEndOffsetV6 types.Int64 `tfsdk:"subnet_end_offset_v6"`
-	DefaultGateway *BGPEmptyModel `tfsdk:"default_gateway"`
-	DefaultGatewayV6 *BGPEmptyModel `tfsdk:"default_gateway_v6"`
-	Disable *BGPEmptyModel `tfsdk:"disable"`
-	DisableV6 *BGPEmptyModel `tfsdk:"disable_v6"`
-	ExternalConnector *BGPEmptyModel `tfsdk:"external_connector"`
-	FamilyInet *BGPPeersExternalFamilyInetModel `tfsdk:"family_inet"`
-	FromSite *BGPEmptyModel `tfsdk:"from_site"`
-	FromSiteV6 *BGPEmptyModel `tfsdk:"from_site_v6"`
-	Interface *BGPPeersExternalInterfaceModel `tfsdk:"interface"`
-	InterfaceList *BGPPeersExternalInterfaceListModel `tfsdk:"interface_list"`
-	NoAuthentication *BGPEmptyModel `tfsdk:"no_authentication"`
+	Address             types.String                        `tfsdk:"address"`
+	AddressIPV6         types.String                        `tfsdk:"address_ipv6"`
+	Asn                 types.Int64                         `tfsdk:"asn"`
+	Md5AuthKey          types.String                        `tfsdk:"md5_auth_key"`
+	Port                types.Int64                         `tfsdk:"port"`
+	SubnetBeginOffset   types.Int64                         `tfsdk:"subnet_begin_offset"`
+	SubnetBeginOffsetV6 types.Int64                         `tfsdk:"subnet_begin_offset_v6"`
+	SubnetEndOffset     types.Int64                         `tfsdk:"subnet_end_offset"`
+	SubnetEndOffsetV6   types.Int64                         `tfsdk:"subnet_end_offset_v6"`
+	DefaultGateway      *BGPEmptyModel                      `tfsdk:"default_gateway"`
+	DefaultGatewayV6    *BGPEmptyModel                      `tfsdk:"default_gateway_v6"`
+	Disable             *BGPEmptyModel                      `tfsdk:"disable"`
+	DisableV6           *BGPEmptyModel                      `tfsdk:"disable_v6"`
+	ExternalConnector   *BGPEmptyModel                      `tfsdk:"external_connector"`
+	FamilyInet          *BGPPeersExternalFamilyInetModel    `tfsdk:"family_inet"`
+	FromSite            *BGPEmptyModel                      `tfsdk:"from_site"`
+	FromSiteV6          *BGPEmptyModel                      `tfsdk:"from_site_v6"`
+	Interface           *BGPPeersExternalInterfaceModel     `tfsdk:"interface"`
+	InterfaceList       *BGPPeersExternalInterfaceListModel `tfsdk:"interface_list"`
+	NoAuthentication    *BGPEmptyModel                      `tfsdk:"no_authentication"`
 }
 
 // BGPPeersExternalFamilyInetModel represents family_inet block
 type BGPPeersExternalFamilyInetModel struct {
 	Disable *BGPEmptyModel `tfsdk:"disable"`
-	Enable *BGPEmptyModel `tfsdk:"enable"`
+	Enable  *BGPEmptyModel `tfsdk:"enable"`
 }
 
 // BGPPeersExternalInterfaceModel represents interface block
 type BGPPeersExternalInterfaceModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // BGPPeersExternalInterfaceListModel represents interface_list block
@@ -121,15 +121,15 @@ type BGPPeersExternalInterfaceListModel struct {
 
 // BGPPeersExternalInterfaceListInterfacesModel represents interfaces block
 type BGPPeersExternalInterfaceListInterfacesModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // BGPPeersMetadataModel represents metadata block
 type BGPPeersMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
-	Name types.String `tfsdk:"name"`
+	Name            types.String `tfsdk:"name"`
 }
 
 // BGPPeersRoutingPoliciesModel represents routing_policies block
@@ -139,11 +139,11 @@ type BGPPeersRoutingPoliciesModel struct {
 
 // BGPPeersRoutingPoliciesRoutePolicyModel represents route_policy block
 type BGPPeersRoutingPoliciesRoutePolicyModel struct {
-	AllNodes *BGPEmptyModel `tfsdk:"all_nodes"`
-	Inbound *BGPEmptyModel `tfsdk:"inbound"`
-	NodeName *BGPPeersRoutingPoliciesRoutePolicyNodeNameModel `tfsdk:"node_name"`
+	AllNodes   *BGPEmptyModel                                      `tfsdk:"all_nodes"`
+	Inbound    *BGPEmptyModel                                      `tfsdk:"inbound"`
+	NodeName   *BGPPeersRoutingPoliciesRoutePolicyNodeNameModel    `tfsdk:"node_name"`
 	ObjectRefs []BGPPeersRoutingPoliciesRoutePolicyObjectRefsModel `tfsdk:"object_refs"`
-	Outbound *BGPEmptyModel `tfsdk:"outbound"`
+	Outbound   *BGPEmptyModel                                      `tfsdk:"outbound"`
 }
 
 // BGPPeersRoutingPoliciesRoutePolicyNodeNameModel represents node_name block
@@ -153,65 +153,65 @@ type BGPPeersRoutingPoliciesRoutePolicyNodeNameModel struct {
 
 // BGPPeersRoutingPoliciesRoutePolicyObjectRefsModel represents object_refs block
 type BGPPeersRoutingPoliciesRoutePolicyObjectRefsModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // BGPWhereModel represents where block
 type BGPWhereModel struct {
-	Site *BGPWhereSiteModel `tfsdk:"site"`
+	Site        *BGPWhereSiteModel        `tfsdk:"site"`
 	VirtualSite *BGPWhereVirtualSiteModel `tfsdk:"virtual_site"`
 }
 
 // BGPWhereSiteModel represents site block
 type BGPWhereSiteModel struct {
-	NetworkType types.String `tfsdk:"network_type"`
-	DisableInternetVip *BGPEmptyModel `tfsdk:"disable_internet_vip"`
-	EnableInternetVip *BGPEmptyModel `tfsdk:"enable_internet_vip"`
-	Ref []BGPWhereSiteRefModel `tfsdk:"ref"`
+	NetworkType        types.String           `tfsdk:"network_type"`
+	DisableInternetVip *BGPEmptyModel         `tfsdk:"disable_internet_vip"`
+	EnableInternetVip  *BGPEmptyModel         `tfsdk:"enable_internet_vip"`
+	Ref                []BGPWhereSiteRefModel `tfsdk:"ref"`
 }
 
 // BGPWhereSiteRefModel represents ref block
 type BGPWhereSiteRefModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // BGPWhereVirtualSiteModel represents virtual_site block
 type BGPWhereVirtualSiteModel struct {
-	NetworkType types.String `tfsdk:"network_type"`
-	DisableInternetVip *BGPEmptyModel `tfsdk:"disable_internet_vip"`
-	EnableInternetVip *BGPEmptyModel `tfsdk:"enable_internet_vip"`
-	Ref []BGPWhereVirtualSiteRefModel `tfsdk:"ref"`
+	NetworkType        types.String                  `tfsdk:"network_type"`
+	DisableInternetVip *BGPEmptyModel                `tfsdk:"disable_internet_vip"`
+	EnableInternetVip  *BGPEmptyModel                `tfsdk:"enable_internet_vip"`
+	Ref                []BGPWhereVirtualSiteRefModel `tfsdk:"ref"`
 }
 
 // BGPWhereVirtualSiteRefModel represents ref block
 type BGPWhereVirtualSiteRefModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 type BGPResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Name          types.String           `tfsdk:"name"`
+	Namespace     types.String           `tfsdk:"namespace"`
+	Annotations   types.Map              `tfsdk:"annotations"`
+	Description   types.String           `tfsdk:"description"`
+	Disable       types.Bool             `tfsdk:"disable"`
+	Labels        types.Map              `tfsdk:"labels"`
+	ID            types.String           `tfsdk:"id"`
+	Timeouts      timeouts.Value         `tfsdk:"timeouts"`
 	BGPParameters *BGPBGPParametersModel `tfsdk:"bgp_parameters"`
-	Peers []BGPPeersModel `tfsdk:"peers"`
-	Where *BGPWhereModel `tfsdk:"where"`
+	Peers         []BGPPeersModel        `tfsdk:"peers"`
+	Where         *BGPWhereModel         `tfsdk:"where"`
 }
 
 func (r *BGPResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -225,7 +225,7 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the BGP. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -235,7 +235,7 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the BGP will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -245,25 +245,25 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -281,11 +281,11 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 				Attributes: map[string]schema.Attribute{
 					"asn": schema.Int64Attribute{
 						MarkdownDescription: "ASN. Autonomous System Number",
-						Optional: true,
+						Optional:            true,
 					},
 					"ip_address": schema.StringAttribute{
 						MarkdownDescription: "IP Address. Use the configured IPv4 Address as Router ID.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -296,7 +296,6 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 			"peers": schema.ListNestedBlock{
 				MarkdownDescription: "Peers. List of peers",
@@ -304,7 +303,7 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 					Attributes: map[string]schema.Attribute{
 						"label": schema.StringAttribute{
 							MarkdownDescription: "Label. Specify whether this peer should be",
-							Optional: true,
+							Optional:            true,
 						},
 					},
 					Blocks: map[string]schema.Block{
@@ -316,15 +315,15 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 							Attributes: map[string]schema.Attribute{
 								"multiplier": schema.Int64Attribute{
 									MarkdownDescription: "Multiplier. Specify Number of missed packets to bring session down'",
-									Optional: true,
+									Optional:            true,
 								},
 								"receive_interval_milliseconds": schema.Int64Attribute{
 									MarkdownDescription: "Minimum Receive Interval. BFD receive interval timer, in milliseconds",
-									Optional: true,
+									Optional:            true,
 								},
 								"transmit_interval_milliseconds": schema.Int64Attribute{
 									MarkdownDescription: "Transmit Interval. BFD transmit interval timer, in milliseconds",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 						},
@@ -336,39 +335,39 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 							Attributes: map[string]schema.Attribute{
 								"address": schema.StringAttribute{
 									MarkdownDescription: "Peer Address. Specify IPV4 peer address.",
-									Optional: true,
+									Optional:            true,
 								},
 								"address_ipv6": schema.StringAttribute{
 									MarkdownDescription: "Peer IPv6 Address. Specify peer IPv6 address.",
-									Optional: true,
+									Optional:            true,
 								},
 								"asn": schema.Int64Attribute{
 									MarkdownDescription: "ASN. Autonomous System Number for BGP peer",
-									Optional: true,
+									Optional:            true,
 								},
 								"md5_auth_key": schema.StringAttribute{
 									MarkdownDescription: "MD5 Authentication Key. MD5 key for protecting BGP Sessions (RFC 2385)",
-									Optional: true,
+									Optional:            true,
 								},
 								"port": schema.Int64Attribute{
 									MarkdownDescription: "Peer Port. Peer TCP port number.",
-									Optional: true,
+									Optional:            true,
 								},
 								"subnet_begin_offset": schema.Int64Attribute{
 									MarkdownDescription: "Offset From Beginning Of Subnet. Calculate peer address using offset from the beginning of the subnet.",
-									Optional: true,
+									Optional:            true,
 								},
 								"subnet_begin_offset_v6": schema.Int64Attribute{
 									MarkdownDescription: "Offset From Beginning Of Subnet. Calculate peer address using offset from the beginning of the subnet.",
-									Optional: true,
+									Optional:            true,
 								},
 								"subnet_end_offset": schema.Int64Attribute{
 									MarkdownDescription: "Offset From End Of Subnet. Calculate peer address using offset from the end of the subnet.",
-									Optional: true,
+									Optional:            true,
 								},
 								"subnet_end_offset_v6": schema.Int64Attribute{
 									MarkdownDescription: "Offset From End Of Subnet. Calculate peer address using offset from the end of the subnet.",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
@@ -389,8 +388,7 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 								},
 								"family_inet": schema.SingleNestedBlock{
 									MarkdownDescription: "BGP Family Inet. Parameters for inet family.",
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"disable": schema.SingleNestedBlock{
 											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -411,23 +409,22 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-											Optional: true,
+											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
 											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-											Optional: true,
+											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
 								"interface_list": schema.SingleNestedBlock{
 									MarkdownDescription: "Interface List. List of network interfaces.",
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"interfaces": schema.ListNestedBlock{
 											MarkdownDescription: "Interface List. List of network interfaces.",
@@ -435,16 +432,16 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 												Attributes: map[string]schema.Attribute{
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-														Optional: true,
+														Optional:            true,
 													},
 													"namespace": schema.StringAttribute{
 														MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-														Optional: true,
+														Optional:            true,
 													},
 													"tenant": schema.StringAttribute{
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-														Optional: true,
-														Computed: true,
+														Optional:            true,
+														Computed:            true,
 													},
 												},
 											},
@@ -461,11 +458,11 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 							Attributes: map[string]schema.Attribute{
 								"description_spec": schema.StringAttribute{
 									MarkdownDescription: "Description. Human readable description.",
-									Optional: true,
+									Optional:            true,
 								},
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 						},
@@ -477,14 +474,12 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 						},
 						"routing_policies": schema.SingleNestedBlock{
 							MarkdownDescription: "BGP Routing Policy. List of rules which can be applied on all or particular nodes",
-							Attributes: map[string]schema.Attribute{
-							},
+							Attributes:          map[string]schema.Attribute{},
 							Blocks: map[string]schema.Block{
 								"route_policy": schema.ListNestedBlock{
 									MarkdownDescription: "BGP Routing policy. Route policy to be applied",
 									NestedObject: schema.NestedBlockObject{
-										Attributes: map[string]schema.Attribute{
-										},
+										Attributes: map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"all_nodes": schema.SingleNestedBlock{
 												MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -497,8 +492,8 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 												Attributes: map[string]schema.Attribute{
 													"node": schema.ListAttribute{
 														MarkdownDescription: "Node of choice. Select BGP Session on which policy will be applied.",
-														Optional: true,
-														ElementType: types.StringType,
+														Optional:            true,
+														ElementType:         types.StringType,
 													},
 												},
 											},
@@ -508,26 +503,26 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 													Attributes: map[string]schema.Attribute{
 														"kind": schema.StringAttribute{
 															MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-															Optional: true,
-															Computed: true,
+															Optional:            true,
+															Computed:            true,
 														},
 														"name": schema.StringAttribute{
 															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-															Optional: true,
+															Optional:            true,
 														},
 														"namespace": schema.StringAttribute{
 															MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-															Optional: true,
+															Optional:            true,
 														},
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-															Optional: true,
-															Computed: true,
+															Optional:            true,
+															Computed:            true,
 														},
 														"uid": schema.StringAttribute{
 															MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-															Optional: true,
-															Computed: true,
+															Optional:            true,
+															Computed:            true,
 														},
 													},
 												},
@@ -541,20 +536,18 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 							},
 						},
 					},
-
 				},
 			},
 			"where": schema.SingleNestedBlock{
 				MarkdownDescription: "Site or Virtual Site Reference. VirtualSiteSiteRefSelector defines a union of reference to site or reference to virtual_site It used to refer site or a group of sites indicated by virtual site.",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"site": schema.SingleNestedBlock{
 						MarkdownDescription: "Site Reference. This specifies a direct reference to a site configuration object",
 						Attributes: map[string]schema.Attribute{
 							"network_type": schema.StringAttribute{
 								MarkdownDescription: "Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user. Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`. Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`.",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -570,26 +563,26 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 									Attributes: map[string]schema.Attribute{
 										"kind": schema.StringAttribute{
 											MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-											Optional: true,
+											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
 											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-											Optional: true,
+											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 										"uid": schema.StringAttribute{
 											MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
@@ -601,7 +594,7 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 						Attributes: map[string]schema.Attribute{
 							"network_type": schema.StringAttribute{
 								MarkdownDescription: "Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user. Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`. Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`.",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -617,26 +610,26 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 									Attributes: map[string]schema.Attribute{
 										"kind": schema.StringAttribute{
 											MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-											Optional: true,
+											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
 											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-											Optional: true,
+											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 										"uid": schema.StringAttribute{
 											MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
@@ -644,7 +637,6 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 						},
 					},
 				},
-
 			},
 		},
 	}
@@ -978,7 +970,6 @@ func (r *BGPResource) Create(ctx context.Context, req resource.CreateRequest, re
 		createReq.Spec["where"] = whereMap
 	}
 
-
 	apiResource, err := r.client.CreateBGP(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create BGP: %s", err))
@@ -990,7 +981,7 @@ func (r *BGPResource) Create(ctx context.Context, req resource.CreateRequest, re
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if blockData, ok := apiResource.Spec["bgp_parameters"].(map[string]interface{}); ok && (isImport || data.BGPParameters != nil) {
 		data.BGPParameters = &BGPBGPParametersModel{
 			Asn: func() types.Int64 {
@@ -1222,8 +1213,7 @@ func (r *BGPResource) Create(ctx context.Context, req resource.CreateRequest, re
 					}(),
 					RoutingPolicies: func() *BGPPeersRoutingPoliciesModel {
 						if _, ok := itemMap["routing_policies"].(map[string]interface{}); ok {
-							return &BGPPeersRoutingPoliciesModel{
-							}
+							return &BGPPeersRoutingPoliciesModel{}
 						}
 						return nil
 					}(),
@@ -1237,7 +1227,6 @@ func (r *BGPResource) Create(ctx context.Context, req resource.CreateRequest, re
 		data.Where = &BGPWhereModel{}
 	}
 	// Normal Read: preserve existing state value
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -1327,9 +1316,9 @@ func (r *BGPResource) Read(ctx context.Context, req resource.ReadRequest, resp *
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if blockData, ok := apiResource.Spec["bgp_parameters"].(map[string]interface{}); ok && (isImport || data.BGPParameters != nil) {
 		data.BGPParameters = &BGPBGPParametersModel{
@@ -1562,8 +1551,7 @@ func (r *BGPResource) Read(ctx context.Context, req resource.ReadRequest, resp *
 					}(),
 					RoutingPolicies: func() *BGPPeersRoutingPoliciesModel {
 						if _, ok := itemMap["routing_policies"].(map[string]interface{}); ok {
-							return &BGPPeersRoutingPoliciesModel{
-							}
+							return &BGPPeersRoutingPoliciesModel{}
 						}
 						return nil
 					}(),
@@ -1577,7 +1565,6 @@ func (r *BGPResource) Read(ctx context.Context, req resource.ReadRequest, resp *
 		data.Where = &BGPWhereModel{}
 	}
 	// Normal Read: preserve existing state value
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -1821,7 +1808,6 @@ func (r *BGPResource) Update(ctx context.Context, req resource.UpdateRequest, re
 		}
 		apiResource.Spec["where"] = whereMap
 	}
-
 
 	updated, err := r.client.UpdateBGP(ctx, apiResource)
 	if err != nil {

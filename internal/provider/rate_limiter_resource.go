@@ -51,19 +51,19 @@ type RateLimiterEmptyModel struct {
 
 // RateLimiterLimitsModel represents limits block
 type RateLimiterLimitsModel struct {
-	BurstMultiplier types.Int64 `tfsdk:"burst_multiplier"`
-	PeriodMultiplier types.Int64 `tfsdk:"period_multiplier"`
-	TotalNumber types.Int64 `tfsdk:"total_number"`
-	Unit types.String `tfsdk:"unit"`
-	ActionBlock *RateLimiterLimitsActionBlockModel `tfsdk:"action_block"`
-	Disabled *RateLimiterEmptyModel `tfsdk:"disabled"`
-	LeakyBucket *RateLimiterEmptyModel `tfsdk:"leaky_bucket"`
-	TokenBucket *RateLimiterEmptyModel `tfsdk:"token_bucket"`
+	BurstMultiplier  types.Int64                        `tfsdk:"burst_multiplier"`
+	PeriodMultiplier types.Int64                        `tfsdk:"period_multiplier"`
+	TotalNumber      types.Int64                        `tfsdk:"total_number"`
+	Unit             types.String                       `tfsdk:"unit"`
+	ActionBlock      *RateLimiterLimitsActionBlockModel `tfsdk:"action_block"`
+	Disabled         *RateLimiterEmptyModel             `tfsdk:"disabled"`
+	LeakyBucket      *RateLimiterEmptyModel             `tfsdk:"leaky_bucket"`
+	TokenBucket      *RateLimiterEmptyModel             `tfsdk:"token_bucket"`
 }
 
 // RateLimiterLimitsActionBlockModel represents action_block block
 type RateLimiterLimitsActionBlockModel struct {
-	Hours *RateLimiterLimitsActionBlockHoursModel `tfsdk:"hours"`
+	Hours   *RateLimiterLimitsActionBlockHoursModel   `tfsdk:"hours"`
 	Minutes *RateLimiterLimitsActionBlockMinutesModel `tfsdk:"minutes"`
 	Seconds *RateLimiterLimitsActionBlockSecondsModel `tfsdk:"seconds"`
 }
@@ -85,23 +85,23 @@ type RateLimiterLimitsActionBlockSecondsModel struct {
 
 // RateLimiterUserIdentificationModel represents user_identification block
 type RateLimiterUserIdentificationModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 type RateLimiterResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	Limits []RateLimiterLimitsModel `tfsdk:"limits"`
+	Name               types.String                         `tfsdk:"name"`
+	Namespace          types.String                         `tfsdk:"namespace"`
+	Annotations        types.Map                            `tfsdk:"annotations"`
+	Description        types.String                         `tfsdk:"description"`
+	Disable            types.Bool                           `tfsdk:"disable"`
+	Labels             types.Map                            `tfsdk:"labels"`
+	ID                 types.String                         `tfsdk:"id"`
+	Timeouts           timeouts.Value                       `tfsdk:"timeouts"`
+	Limits             []RateLimiterLimitsModel             `tfsdk:"limits"`
 	UserIdentification []RateLimiterUserIdentificationModel `tfsdk:"user_identification"`
 }
 
@@ -116,7 +116,7 @@ func (r *RateLimiterResource) Schema(ctx context.Context, req resource.SchemaReq
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the RateLimiter. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -126,7 +126,7 @@ func (r *RateLimiterResource) Schema(ctx context.Context, req resource.SchemaReq
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the RateLimiter will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -136,25 +136,25 @@ func (r *RateLimiterResource) Schema(ctx context.Context, req resource.SchemaReq
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -173,33 +173,32 @@ func (r *RateLimiterResource) Schema(ctx context.Context, req resource.SchemaReq
 					Attributes: map[string]schema.Attribute{
 						"burst_multiplier": schema.Int64Attribute{
 							MarkdownDescription: "Burst Multiplier. The maximum burst of requests to accommodate, expressed as a multiple of the rate.",
-							Optional: true,
+							Optional:            true,
 						},
 						"period_multiplier": schema.Int64Attribute{
 							MarkdownDescription: "Periods. This setting, combined with Per Period units, provides a duration",
-							Optional: true,
+							Optional:            true,
 						},
 						"total_number": schema.Int64Attribute{
 							MarkdownDescription: "Number Of Requests. The total number of allowed requests per rate-limiting period.",
-							Optional: true,
+							Optional:            true,
 						},
 						"unit": schema.StringAttribute{
 							MarkdownDescription: "Rate Limit Period Unit. Unit for the period per which the rate limit is applied. - SECOND: Second Rate limit period unit is seconds - MINUTE: Minute Rate limit period unit is minutes - HOUR: Hour Rate limit period unit is hours - DAY: Day Rate limit period unit is days. Possible values are `SECOND`, `MINUTE`, `HOUR`. Defaults to `SECOND`.",
-							Optional: true,
+							Optional:            true,
 						},
 					},
 					Blocks: map[string]schema.Block{
 						"action_block": schema.SingleNestedBlock{
 							MarkdownDescription: "Rate Limit Block Action. Action where a user is blocked from making further requests after exceeding rate limit threshold.",
-							Attributes: map[string]schema.Attribute{
-							},
+							Attributes:          map[string]schema.Attribute{},
 							Blocks: map[string]schema.Block{
 								"hours": schema.SingleNestedBlock{
 									MarkdownDescription: "Hours. Input Duration Hours",
 									Attributes: map[string]schema.Attribute{
 										"duration": schema.Int64Attribute{
 											MarkdownDescription: "Duration.",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 								},
@@ -208,7 +207,7 @@ func (r *RateLimiterResource) Schema(ctx context.Context, req resource.SchemaReq
 									Attributes: map[string]schema.Attribute{
 										"duration": schema.Int64Attribute{
 											MarkdownDescription: "Duration.",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 								},
@@ -217,7 +216,7 @@ func (r *RateLimiterResource) Schema(ctx context.Context, req resource.SchemaReq
 									Attributes: map[string]schema.Attribute{
 										"duration": schema.Int64Attribute{
 											MarkdownDescription: "Duration.",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 								},
@@ -233,7 +232,6 @@ func (r *RateLimiterResource) Schema(ctx context.Context, req resource.SchemaReq
 							MarkdownDescription: "Token Bucket Rate Limiter. Token-Bucket is a rate limiter algorithm that is stricter with enforcing limits",
 						},
 					},
-
 				},
 			},
 			"user_identification": schema.ListNestedBlock{
@@ -242,29 +240,28 @@ func (r *RateLimiterResource) Schema(ctx context.Context, req resource.SchemaReq
 					Attributes: map[string]schema.Attribute{
 						"kind": schema.StringAttribute{
 							MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-							Optional: true,
-							Computed: true,
+							Optional:            true,
+							Computed:            true,
 						},
 						"name": schema.StringAttribute{
 							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-							Optional: true,
+							Optional:            true,
 						},
 						"namespace": schema.StringAttribute{
 							MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-							Optional: true,
+							Optional:            true,
 						},
 						"tenant": schema.StringAttribute{
 							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-							Optional: true,
-							Computed: true,
+							Optional:            true,
+							Computed:            true,
 						},
 						"uid": schema.StringAttribute{
 							MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-							Optional: true,
-							Computed: true,
+							Optional:            true,
+							Computed:            true,
 						},
 					},
-
 				},
 			},
 		},
@@ -493,7 +490,6 @@ func (r *RateLimiterResource) Create(ctx context.Context, req resource.CreateReq
 		createReq.Spec["user_identification"] = user_identificationList
 	}
 
-
 	apiResource, err := r.client.CreateRateLimiter(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create RateLimiter: %s", err))
@@ -505,7 +501,7 @@ func (r *RateLimiterResource) Create(ctx context.Context, req resource.CreateReq
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["limits"].([]interface{}); ok && len(listData) > 0 {
 		var limitsList []RateLimiterLimitsModel
 		for listIdx, item := range listData {
@@ -514,8 +510,7 @@ func (r *RateLimiterResource) Create(ctx context.Context, req resource.CreateReq
 				limitsList = append(limitsList, RateLimiterLimitsModel{
 					ActionBlock: func() *RateLimiterLimitsActionBlockModel {
 						if _, ok := itemMap["action_block"].(map[string]interface{}); ok {
-							return &RateLimiterLimitsActionBlockModel{
-							}
+							return &RateLimiterLimitsActionBlockModel{}
 						}
 						return nil
 					}(),
@@ -607,7 +602,6 @@ func (r *RateLimiterResource) Create(ctx context.Context, req resource.CreateReq
 		}
 		data.UserIdentification = user_identificationList
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -697,9 +691,9 @@ func (r *RateLimiterResource) Read(ctx context.Context, req resource.ReadRequest
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if listData, ok := apiResource.Spec["limits"].([]interface{}); ok && len(listData) > 0 {
 		var limitsList []RateLimiterLimitsModel
@@ -709,8 +703,7 @@ func (r *RateLimiterResource) Read(ctx context.Context, req resource.ReadRequest
 				limitsList = append(limitsList, RateLimiterLimitsModel{
 					ActionBlock: func() *RateLimiterLimitsActionBlockModel {
 						if _, ok := itemMap["action_block"].(map[string]interface{}); ok {
-							return &RateLimiterLimitsActionBlockModel{
-							}
+							return &RateLimiterLimitsActionBlockModel{}
 						}
 						return nil
 					}(),
@@ -802,7 +795,6 @@ func (r *RateLimiterResource) Read(ctx context.Context, req resource.ReadRequest
 		}
 		data.UserIdentification = user_identificationList
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -940,7 +932,6 @@ func (r *RateLimiterResource) Update(ctx context.Context, req resource.UpdateReq
 		}
 		apiResource.Spec["user_identification"] = user_identificationList
 	}
-
 
 	updated, err := r.client.UpdateRateLimiter(ctx, apiResource)
 	if err != nil {

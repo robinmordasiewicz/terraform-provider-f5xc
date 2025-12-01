@@ -52,41 +52,41 @@ type DNSLbPoolEmptyModel struct {
 
 // DNSLbPoolAPoolModel represents a_pool block
 type DNSLbPoolAPoolModel struct {
-	MaxAnswers types.Int64 `tfsdk:"max_answers"`
-	DisableHealthCheck *DNSLbPoolEmptyModel `tfsdk:"disable_health_check"`
-	HealthCheck *DNSLbPoolAPoolHealthCheckModel `tfsdk:"health_check"`
-	Members []DNSLbPoolAPoolMembersModel `tfsdk:"members"`
+	MaxAnswers         types.Int64                     `tfsdk:"max_answers"`
+	DisableHealthCheck *DNSLbPoolEmptyModel            `tfsdk:"disable_health_check"`
+	HealthCheck        *DNSLbPoolAPoolHealthCheckModel `tfsdk:"health_check"`
+	Members            []DNSLbPoolAPoolMembersModel    `tfsdk:"members"`
 }
 
 // DNSLbPoolAPoolHealthCheckModel represents health_check block
 type DNSLbPoolAPoolHealthCheckModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // DNSLbPoolAPoolMembersModel represents members block
 type DNSLbPoolAPoolMembersModel struct {
-	Disable types.Bool `tfsdk:"disable"`
+	Disable    types.Bool   `tfsdk:"disable"`
 	IPEndpoint types.String `tfsdk:"ip_endpoint"`
-	Name types.String `tfsdk:"name"`
-	Priority types.Int64 `tfsdk:"priority"`
-	Ratio types.Int64 `tfsdk:"ratio"`
+	Name       types.String `tfsdk:"name"`
+	Priority   types.Int64  `tfsdk:"priority"`
+	Ratio      types.Int64  `tfsdk:"ratio"`
 }
 
 // DNSLbPoolAaaaPoolModel represents aaaa_pool block
 type DNSLbPoolAaaaPoolModel struct {
-	MaxAnswers types.Int64 `tfsdk:"max_answers"`
-	Members []DNSLbPoolAaaaPoolMembersModel `tfsdk:"members"`
+	MaxAnswers types.Int64                     `tfsdk:"max_answers"`
+	Members    []DNSLbPoolAaaaPoolMembersModel `tfsdk:"members"`
 }
 
 // DNSLbPoolAaaaPoolMembersModel represents members block
 type DNSLbPoolAaaaPoolMembersModel struct {
-	Disable types.Bool `tfsdk:"disable"`
+	Disable    types.Bool   `tfsdk:"disable"`
 	IPEndpoint types.String `tfsdk:"ip_endpoint"`
-	Name types.String `tfsdk:"name"`
-	Priority types.Int64 `tfsdk:"priority"`
-	Ratio types.Int64 `tfsdk:"ratio"`
+	Name       types.String `tfsdk:"name"`
+	Priority   types.Int64  `tfsdk:"priority"`
+	Ratio      types.Int64  `tfsdk:"ratio"`
 }
 
 // DNSLbPoolCnamePoolModel represents cname_pool block
@@ -96,60 +96,60 @@ type DNSLbPoolCnamePoolModel struct {
 
 // DNSLbPoolCnamePoolMembersModel represents members block
 type DNSLbPoolCnamePoolMembersModel struct {
-	Domain types.String `tfsdk:"domain"`
-	FinalTranslation types.Bool `tfsdk:"final_translation"`
-	Name types.String `tfsdk:"name"`
-	Ratio types.Int64 `tfsdk:"ratio"`
+	Domain           types.String `tfsdk:"domain"`
+	FinalTranslation types.Bool   `tfsdk:"final_translation"`
+	Name             types.String `tfsdk:"name"`
+	Ratio            types.Int64  `tfsdk:"ratio"`
 }
 
 // DNSLbPoolMxPoolModel represents mx_pool block
 type DNSLbPoolMxPoolModel struct {
-	MaxAnswers types.Int64 `tfsdk:"max_answers"`
-	Members []DNSLbPoolMxPoolMembersModel `tfsdk:"members"`
+	MaxAnswers types.Int64                   `tfsdk:"max_answers"`
+	Members    []DNSLbPoolMxPoolMembersModel `tfsdk:"members"`
 }
 
 // DNSLbPoolMxPoolMembersModel represents members block
 type DNSLbPoolMxPoolMembersModel struct {
-	Domain types.String `tfsdk:"domain"`
-	Name types.String `tfsdk:"name"`
-	Priority types.Int64 `tfsdk:"priority"`
-	Ratio types.Int64 `tfsdk:"ratio"`
+	Domain   types.String `tfsdk:"domain"`
+	Name     types.String `tfsdk:"name"`
+	Priority types.Int64  `tfsdk:"priority"`
+	Ratio    types.Int64  `tfsdk:"ratio"`
 }
 
 // DNSLbPoolSrvPoolModel represents srv_pool block
 type DNSLbPoolSrvPoolModel struct {
-	MaxAnswers types.Int64 `tfsdk:"max_answers"`
-	Members []DNSLbPoolSrvPoolMembersModel `tfsdk:"members"`
+	MaxAnswers types.Int64                    `tfsdk:"max_answers"`
+	Members    []DNSLbPoolSrvPoolMembersModel `tfsdk:"members"`
 }
 
 // DNSLbPoolSrvPoolMembersModel represents members block
 type DNSLbPoolSrvPoolMembersModel struct {
-	FinalTranslation types.Bool `tfsdk:"final_translation"`
-	Name types.String `tfsdk:"name"`
-	Port types.Int64 `tfsdk:"port"`
-	Priority types.Int64 `tfsdk:"priority"`
-	Ratio types.Int64 `tfsdk:"ratio"`
-	Target types.String `tfsdk:"target"`
-	Weight types.Int64 `tfsdk:"weight"`
+	FinalTranslation types.Bool   `tfsdk:"final_translation"`
+	Name             types.String `tfsdk:"name"`
+	Port             types.Int64  `tfsdk:"port"`
+	Priority         types.Int64  `tfsdk:"priority"`
+	Ratio            types.Int64  `tfsdk:"ratio"`
+	Target           types.String `tfsdk:"target"`
+	Weight           types.Int64  `tfsdk:"weight"`
 }
 
 type DNSLbPoolResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	LoadBalancingMode types.String `tfsdk:"load_balancing_mode"`
-	Ttl types.Int64 `tfsdk:"ttl"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	APool *DNSLbPoolAPoolModel `tfsdk:"a_pool"`
-	AaaaPool *DNSLbPoolAaaaPoolModel `tfsdk:"aaaa_pool"`
-	CnamePool *DNSLbPoolCnamePoolModel `tfsdk:"cname_pool"`
-	MxPool *DNSLbPoolMxPoolModel `tfsdk:"mx_pool"`
-	SrvPool *DNSLbPoolSrvPoolModel `tfsdk:"srv_pool"`
-	UseRrsetTtl *DNSLbPoolEmptyModel `tfsdk:"use_rrset_ttl"`
+	Name              types.String             `tfsdk:"name"`
+	Namespace         types.String             `tfsdk:"namespace"`
+	Annotations       types.Map                `tfsdk:"annotations"`
+	Description       types.String             `tfsdk:"description"`
+	Disable           types.Bool               `tfsdk:"disable"`
+	Labels            types.Map                `tfsdk:"labels"`
+	ID                types.String             `tfsdk:"id"`
+	LoadBalancingMode types.String             `tfsdk:"load_balancing_mode"`
+	Ttl               types.Int64              `tfsdk:"ttl"`
+	Timeouts          timeouts.Value           `tfsdk:"timeouts"`
+	APool             *DNSLbPoolAPoolModel     `tfsdk:"a_pool"`
+	AaaaPool          *DNSLbPoolAaaaPoolModel  `tfsdk:"aaaa_pool"`
+	CnamePool         *DNSLbPoolCnamePoolModel `tfsdk:"cname_pool"`
+	MxPool            *DNSLbPoolMxPoolModel    `tfsdk:"mx_pool"`
+	SrvPool           *DNSLbPoolSrvPoolModel   `tfsdk:"srv_pool"`
+	UseRrsetTtl       *DNSLbPoolEmptyModel     `tfsdk:"use_rrset_ttl"`
 }
 
 func (r *DNSLbPoolResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -163,7 +163,7 @@ func (r *DNSLbPoolResource) Schema(ctx context.Context, req resource.SchemaReque
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the DNSLbPool. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -173,7 +173,7 @@ func (r *DNSLbPoolResource) Schema(ctx context.Context, req resource.SchemaReque
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the DNSLbPool will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -183,41 +183,41 @@ func (r *DNSLbPoolResource) Schema(ctx context.Context, req resource.SchemaReque
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"load_balancing_mode": schema.StringAttribute{
 				MarkdownDescription: "LoadBalancing Algorithm. - ROUND_ROBIN: Round-Robin Round Robin will ensure random equal distribution of requests among all pool members in a pool. - RATIO_MEMBER: Ratio-Member Ratio-Member performs load balancing of requests across the pool members based on the ratio assigned to each pool member - STATIC_PERSIST: Static-Persist The Static Persist load balancing method uses the persist mask, with the source IP address of the Local Domain Name Server (LDNS), in a deterministic algorithm to send requests to a specific pool member. If the DNS resolver passes ECS (EDNS-Client-Subnet) information, then a hash of it will be used, to send the client to the same pool member - PRIORITY: Priority The Priority load balancing method returns all available endpoints in a pool with the highest priority. Pool Members have a priority value, starting from zero, where a lower value means a higher priority. Possible values are `ROUND_ROBIN`, `RATIO_MEMBER`, `STATIC_PERSIST`, `PRIORITY`. Defaults to `ROUND_ROBIN`.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"ttl": schema.Int64Attribute{
 				MarkdownDescription: "[OneOf: ttl, use_rrset_ttl] TTL. Custom TTL in seconds (default 30) for responses from this pool",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{
 					int64planmodifier.UseStateForUnknown(),
 				},
@@ -235,7 +235,7 @@ func (r *DNSLbPoolResource) Schema(ctx context.Context, req resource.SchemaReque
 				Attributes: map[string]schema.Attribute{
 					"max_answers": schema.Int64Attribute{
 						MarkdownDescription: "Maximum Answers. Limit on number of Resource Records to be included in the response to query",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -247,16 +247,16 @@ func (r *DNSLbPoolResource) Schema(ctx context.Context, req resource.SchemaReque
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
 								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-								Optional: true,
+								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
 								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-								Optional: true,
+								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-								Optional: true,
-								Computed: true,
+								Optional:            true,
+								Computed:            true,
 							},
 						},
 					},
@@ -266,36 +266,35 @@ func (r *DNSLbPoolResource) Schema(ctx context.Context, req resource.SchemaReque
 							Attributes: map[string]schema.Attribute{
 								"disable": schema.BoolAttribute{
 									MarkdownDescription: "Disable. A value of true will disable the pool-member",
-									Optional: true,
+									Optional:            true,
 								},
 								"ip_endpoint": schema.StringAttribute{
 									MarkdownDescription: "Public IP. Public IP address",
-									Optional: true,
+									Optional:            true,
 								},
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Name. Pool member name",
-									Optional: true,
+									Optional:            true,
 								},
 								"priority": schema.Int64Attribute{
 									MarkdownDescription: "Load Balancing Priority. Used if the pool’s load balancing mode is set to Priority",
-									Optional: true,
+									Optional:            true,
 								},
 								"ratio": schema.Int64Attribute{
 									MarkdownDescription: "Load Balancing Ratio. Used if the pool’s load balancing mode is set to Ratio-Member",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 						},
 					},
 				},
-
 			},
 			"aaaa_pool": schema.SingleNestedBlock{
 				MarkdownDescription: "Pool for AAAA Record.",
 				Attributes: map[string]schema.Attribute{
 					"max_answers": schema.Int64Attribute{
 						MarkdownDescription: "Maximum Answers. Limit on number of Resource Records to be included in the response to query",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -305,34 +304,32 @@ func (r *DNSLbPoolResource) Schema(ctx context.Context, req resource.SchemaReque
 							Attributes: map[string]schema.Attribute{
 								"disable": schema.BoolAttribute{
 									MarkdownDescription: "Disable. A value of true will disable the pool-member",
-									Optional: true,
+									Optional:            true,
 								},
 								"ip_endpoint": schema.StringAttribute{
 									MarkdownDescription: "Public IP. Public IP address",
-									Optional: true,
+									Optional:            true,
 								},
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Name. Pool member name",
-									Optional: true,
+									Optional:            true,
 								},
 								"priority": schema.Int64Attribute{
 									MarkdownDescription: "Load Balancing Priority. Used if the pool’s load balancing mode is set to Priority",
-									Optional: true,
+									Optional:            true,
 								},
 								"ratio": schema.Int64Attribute{
 									MarkdownDescription: "Load Balancing Ratio. Used if the pool’s load balancing mode is set to Ratio-Member",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 						},
 					},
 				},
-
 			},
 			"cname_pool": schema.SingleNestedBlock{
 				MarkdownDescription: "Pool for CNAME Record.",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"members": schema.ListNestedBlock{
 						MarkdownDescription: "Pool Members.",
@@ -340,32 +337,31 @@ func (r *DNSLbPoolResource) Schema(ctx context.Context, req resource.SchemaReque
 							Attributes: map[string]schema.Attribute{
 								"domain": schema.StringAttribute{
 									MarkdownDescription: "Domain.",
-									Optional: true,
+									Optional:            true,
 								},
 								"final_translation": schema.BoolAttribute{
 									MarkdownDescription: "Final Translation. If this flag is true, the CNAME record will not be translated further.",
-									Optional: true,
+									Optional:            true,
 								},
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Name. Pool member name",
-									Optional: true,
+									Optional:            true,
 								},
 								"ratio": schema.Int64Attribute{
 									MarkdownDescription: "Load Balancing Ratio. Ratio",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 						},
 					},
 				},
-
 			},
 			"mx_pool": schema.SingleNestedBlock{
 				MarkdownDescription: "Pool for MX Record.",
 				Attributes: map[string]schema.Attribute{
 					"max_answers": schema.Int64Attribute{
 						MarkdownDescription: "Maximum Answers. Limit on number of Resource Records to be included in the response to query",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -375,32 +371,31 @@ func (r *DNSLbPoolResource) Schema(ctx context.Context, req resource.SchemaReque
 							Attributes: map[string]schema.Attribute{
 								"domain": schema.StringAttribute{
 									MarkdownDescription: "Domain.",
-									Optional: true,
+									Optional:            true,
 								},
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Name. Pool member name",
-									Optional: true,
+									Optional:            true,
 								},
 								"priority": schema.Int64Attribute{
 									MarkdownDescription: "MX Record Priority. MX Record priority",
-									Optional: true,
+									Optional:            true,
 								},
 								"ratio": schema.Int64Attribute{
 									MarkdownDescription: "Load Balancing Ratio. Load Balancing Ratio",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 						},
 					},
 				},
-
 			},
 			"srv_pool": schema.SingleNestedBlock{
 				MarkdownDescription: "Pool for SRV Record.",
 				Attributes: map[string]schema.Attribute{
 					"max_answers": schema.Int64Attribute{
 						MarkdownDescription: "Maximum Answers. Limit on number of Resource Records to be included in the response to query",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -410,37 +405,36 @@ func (r *DNSLbPoolResource) Schema(ctx context.Context, req resource.SchemaReque
 							Attributes: map[string]schema.Attribute{
 								"final_translation": schema.BoolAttribute{
 									MarkdownDescription: "Final Translation. If this flag is true, the SRV record will not be translated further.",
-									Optional: true,
+									Optional:            true,
 								},
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Name. Pool member name",
-									Optional: true,
+									Optional:            true,
 								},
 								"port": schema.Int64Attribute{
 									MarkdownDescription: "Port. Port on which the service can be found",
-									Optional: true,
+									Optional:            true,
 								},
 								"priority": schema.Int64Attribute{
 									MarkdownDescription: "Priority. Priority of the target. A lower number indicates a higher preference.",
-									Optional: true,
+									Optional:            true,
 								},
 								"ratio": schema.Int64Attribute{
 									MarkdownDescription: "Load Balancing Ratio. Ratio",
-									Optional: true,
+									Optional:            true,
 								},
 								"target": schema.StringAttribute{
 									MarkdownDescription: "Target. Domain name of the machine providing the service",
-									Optional: true,
+									Optional:            true,
 								},
 								"weight": schema.Int64Attribute{
 									MarkdownDescription: "Weight. Weight of the target. A higher number indicates a higher preference.",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 						},
 					},
 				},
-
 			},
 			"use_rrset_ttl": schema.SingleNestedBlock{
 				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -767,7 +761,6 @@ func (r *DNSLbPoolResource) Create(ctx context.Context, req resource.CreateReque
 		createReq.Spec["ttl"] = data.Ttl.ValueInt64()
 	}
 
-
 	apiResource, err := r.client.CreateDNSLbPool(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create DNSLbPool: %s", err))
@@ -779,7 +772,7 @@ func (r *DNSLbPoolResource) Create(ctx context.Context, req resource.CreateReque
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if blockData, ok := apiResource.Spec["a_pool"].(map[string]interface{}); ok && (isImport || data.APool != nil) {
 		data.APool = &DNSLbPoolAPoolModel{
 			DisableHealthCheck: func() *DNSLbPoolEmptyModel {
@@ -1096,7 +1089,6 @@ func (r *DNSLbPoolResource) Create(ctx context.Context, req resource.CreateReque
 	} else {
 		data.Ttl = types.Int64Null()
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -1186,9 +1178,9 @@ func (r *DNSLbPoolResource) Read(ctx context.Context, req resource.ReadRequest, 
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if blockData, ok := apiResource.Spec["a_pool"].(map[string]interface{}); ok && (isImport || data.APool != nil) {
 		data.APool = &DNSLbPoolAPoolModel{
@@ -1506,7 +1498,6 @@ func (r *DNSLbPoolResource) Read(ctx context.Context, req resource.ReadRequest, 
 	} else {
 		data.Ttl = types.Int64Null()
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -1740,7 +1731,6 @@ func (r *DNSLbPoolResource) Update(ctx context.Context, req resource.UpdateReque
 	if !data.Ttl.IsNull() && !data.Ttl.IsUnknown() {
 		apiResource.Spec["ttl"] = data.Ttl.ValueInt64()
 	}
-
 
 	updated, err := r.client.UpdateDNSLbPool(ctx, apiResource)
 	if err != nil {

@@ -51,12 +51,12 @@ type CodeBaseIntegrationEmptyModel struct {
 
 // CodeBaseIntegrationCodeBaseIntegrationModel represents code_base_integration block
 type CodeBaseIntegrationCodeBaseIntegrationModel struct {
-	AzureRepos *CodeBaseIntegrationCodeBaseIntegrationAzureReposModel `tfsdk:"azure_repos"`
-	Bitbucket *CodeBaseIntegrationCodeBaseIntegrationBitbucketModel `tfsdk:"bitbucket"`
-	BitbucketServer *CodeBaseIntegrationCodeBaseIntegrationBitbucketServerModel `tfsdk:"bitbucket_server"`
-	Github *CodeBaseIntegrationCodeBaseIntegrationGithubModel `tfsdk:"github"`
+	AzureRepos       *CodeBaseIntegrationCodeBaseIntegrationAzureReposModel       `tfsdk:"azure_repos"`
+	Bitbucket        *CodeBaseIntegrationCodeBaseIntegrationBitbucketModel        `tfsdk:"bitbucket"`
+	BitbucketServer  *CodeBaseIntegrationCodeBaseIntegrationBitbucketServerModel  `tfsdk:"bitbucket_server"`
+	Github           *CodeBaseIntegrationCodeBaseIntegrationGithubModel           `tfsdk:"github"`
 	GithubEnterprise *CodeBaseIntegrationCodeBaseIntegrationGithubEnterpriseModel `tfsdk:"github_enterprise"`
-	Gitlab *CodeBaseIntegrationCodeBaseIntegrationGitlabModel `tfsdk:"gitlab"`
+	Gitlab           *CodeBaseIntegrationCodeBaseIntegrationGitlabModel           `tfsdk:"gitlab"`
 	GitlabEnterprise *CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseModel `tfsdk:"gitlab_enterprise"`
 }
 
@@ -68,124 +68,124 @@ type CodeBaseIntegrationCodeBaseIntegrationAzureReposModel struct {
 // CodeBaseIntegrationCodeBaseIntegrationAzureReposAccessTokenModel represents access_token block
 type CodeBaseIntegrationCodeBaseIntegrationAzureReposAccessTokenModel struct {
 	BlindfoldSecretInfo *CodeBaseIntegrationCodeBaseIntegrationAzureReposAccessTokenBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *CodeBaseIntegrationCodeBaseIntegrationAzureReposAccessTokenClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *CodeBaseIntegrationCodeBaseIntegrationAzureReposAccessTokenClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // CodeBaseIntegrationCodeBaseIntegrationAzureReposAccessTokenBlindfoldSecretInfoModel represents blindfold_secret_info block
 type CodeBaseIntegrationCodeBaseIntegrationAzureReposAccessTokenBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // CodeBaseIntegrationCodeBaseIntegrationAzureReposAccessTokenClearSecretInfoModel represents clear_secret_info block
 type CodeBaseIntegrationCodeBaseIntegrationAzureReposAccessTokenClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // CodeBaseIntegrationCodeBaseIntegrationBitbucketModel represents bitbucket block
 type CodeBaseIntegrationCodeBaseIntegrationBitbucketModel struct {
-	Username types.String `tfsdk:"username"`
-	Passwd *CodeBaseIntegrationCodeBaseIntegrationBitbucketPasswdModel `tfsdk:"passwd"`
+	Username types.String                                                `tfsdk:"username"`
+	Passwd   *CodeBaseIntegrationCodeBaseIntegrationBitbucketPasswdModel `tfsdk:"passwd"`
 }
 
 // CodeBaseIntegrationCodeBaseIntegrationBitbucketPasswdModel represents passwd block
 type CodeBaseIntegrationCodeBaseIntegrationBitbucketPasswdModel struct {
 	BlindfoldSecretInfo *CodeBaseIntegrationCodeBaseIntegrationBitbucketPasswdBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *CodeBaseIntegrationCodeBaseIntegrationBitbucketPasswdClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *CodeBaseIntegrationCodeBaseIntegrationBitbucketPasswdClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // CodeBaseIntegrationCodeBaseIntegrationBitbucketPasswdBlindfoldSecretInfoModel represents blindfold_secret_info block
 type CodeBaseIntegrationCodeBaseIntegrationBitbucketPasswdBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // CodeBaseIntegrationCodeBaseIntegrationBitbucketPasswdClearSecretInfoModel represents clear_secret_info block
 type CodeBaseIntegrationCodeBaseIntegrationBitbucketPasswdClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // CodeBaseIntegrationCodeBaseIntegrationBitbucketServerModel represents bitbucket_server block
 type CodeBaseIntegrationCodeBaseIntegrationBitbucketServerModel struct {
-	URL types.String `tfsdk:"url"`
-	Username types.String `tfsdk:"username"`
-	VerifySSL types.Bool `tfsdk:"verify_ssl"`
-	Passwd *CodeBaseIntegrationCodeBaseIntegrationBitbucketServerPasswdModel `tfsdk:"passwd"`
+	URL       types.String                                                      `tfsdk:"url"`
+	Username  types.String                                                      `tfsdk:"username"`
+	VerifySSL types.Bool                                                        `tfsdk:"verify_ssl"`
+	Passwd    *CodeBaseIntegrationCodeBaseIntegrationBitbucketServerPasswdModel `tfsdk:"passwd"`
 }
 
 // CodeBaseIntegrationCodeBaseIntegrationBitbucketServerPasswdModel represents passwd block
 type CodeBaseIntegrationCodeBaseIntegrationBitbucketServerPasswdModel struct {
 	BlindfoldSecretInfo *CodeBaseIntegrationCodeBaseIntegrationBitbucketServerPasswdBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *CodeBaseIntegrationCodeBaseIntegrationBitbucketServerPasswdClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *CodeBaseIntegrationCodeBaseIntegrationBitbucketServerPasswdClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // CodeBaseIntegrationCodeBaseIntegrationBitbucketServerPasswdBlindfoldSecretInfoModel represents blindfold_secret_info block
 type CodeBaseIntegrationCodeBaseIntegrationBitbucketServerPasswdBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // CodeBaseIntegrationCodeBaseIntegrationBitbucketServerPasswdClearSecretInfoModel represents clear_secret_info block
 type CodeBaseIntegrationCodeBaseIntegrationBitbucketServerPasswdClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // CodeBaseIntegrationCodeBaseIntegrationGithubModel represents github block
 type CodeBaseIntegrationCodeBaseIntegrationGithubModel struct {
-	Username types.String `tfsdk:"username"`
-	VerifySSL types.Bool `tfsdk:"verify_ssl"`
+	Username    types.String                                                  `tfsdk:"username"`
+	VerifySSL   types.Bool                                                    `tfsdk:"verify_ssl"`
 	AccessToken *CodeBaseIntegrationCodeBaseIntegrationGithubAccessTokenModel `tfsdk:"access_token"`
 }
 
 // CodeBaseIntegrationCodeBaseIntegrationGithubAccessTokenModel represents access_token block
 type CodeBaseIntegrationCodeBaseIntegrationGithubAccessTokenModel struct {
 	BlindfoldSecretInfo *CodeBaseIntegrationCodeBaseIntegrationGithubAccessTokenBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *CodeBaseIntegrationCodeBaseIntegrationGithubAccessTokenClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *CodeBaseIntegrationCodeBaseIntegrationGithubAccessTokenClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // CodeBaseIntegrationCodeBaseIntegrationGithubAccessTokenBlindfoldSecretInfoModel represents blindfold_secret_info block
 type CodeBaseIntegrationCodeBaseIntegrationGithubAccessTokenBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // CodeBaseIntegrationCodeBaseIntegrationGithubAccessTokenClearSecretInfoModel represents clear_secret_info block
 type CodeBaseIntegrationCodeBaseIntegrationGithubAccessTokenClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // CodeBaseIntegrationCodeBaseIntegrationGithubEnterpriseModel represents github_enterprise block
 type CodeBaseIntegrationCodeBaseIntegrationGithubEnterpriseModel struct {
-	Hostname types.String `tfsdk:"hostname"`
-	Username types.String `tfsdk:"username"`
+	Hostname    types.String                                                            `tfsdk:"hostname"`
+	Username    types.String                                                            `tfsdk:"username"`
 	AccessToken *CodeBaseIntegrationCodeBaseIntegrationGithubEnterpriseAccessTokenModel `tfsdk:"access_token"`
 }
 
 // CodeBaseIntegrationCodeBaseIntegrationGithubEnterpriseAccessTokenModel represents access_token block
 type CodeBaseIntegrationCodeBaseIntegrationGithubEnterpriseAccessTokenModel struct {
 	BlindfoldSecretInfo *CodeBaseIntegrationCodeBaseIntegrationGithubEnterpriseAccessTokenBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *CodeBaseIntegrationCodeBaseIntegrationGithubEnterpriseAccessTokenClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *CodeBaseIntegrationCodeBaseIntegrationGithubEnterpriseAccessTokenClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // CodeBaseIntegrationCodeBaseIntegrationGithubEnterpriseAccessTokenBlindfoldSecretInfoModel represents blindfold_secret_info block
 type CodeBaseIntegrationCodeBaseIntegrationGithubEnterpriseAccessTokenBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // CodeBaseIntegrationCodeBaseIntegrationGithubEnterpriseAccessTokenClearSecretInfoModel represents clear_secret_info block
 type CodeBaseIntegrationCodeBaseIntegrationGithubEnterpriseAccessTokenClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // CodeBaseIntegrationCodeBaseIntegrationGitlabModel represents gitlab block
@@ -196,56 +196,56 @@ type CodeBaseIntegrationCodeBaseIntegrationGitlabModel struct {
 // CodeBaseIntegrationCodeBaseIntegrationGitlabAccessTokenModel represents access_token block
 type CodeBaseIntegrationCodeBaseIntegrationGitlabAccessTokenModel struct {
 	BlindfoldSecretInfo *CodeBaseIntegrationCodeBaseIntegrationGitlabAccessTokenBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *CodeBaseIntegrationCodeBaseIntegrationGitlabAccessTokenClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *CodeBaseIntegrationCodeBaseIntegrationGitlabAccessTokenClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // CodeBaseIntegrationCodeBaseIntegrationGitlabAccessTokenBlindfoldSecretInfoModel represents blindfold_secret_info block
 type CodeBaseIntegrationCodeBaseIntegrationGitlabAccessTokenBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // CodeBaseIntegrationCodeBaseIntegrationGitlabAccessTokenClearSecretInfoModel represents clear_secret_info block
 type CodeBaseIntegrationCodeBaseIntegrationGitlabAccessTokenClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseModel represents gitlab_enterprise block
 type CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseModel struct {
-	URL types.String `tfsdk:"url"`
+	URL         types.String                                                            `tfsdk:"url"`
 	AccessToken *CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseAccessTokenModel `tfsdk:"access_token"`
 }
 
 // CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseAccessTokenModel represents access_token block
 type CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseAccessTokenModel struct {
 	BlindfoldSecretInfo *CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseAccessTokenBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseAccessTokenClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseAccessTokenClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseAccessTokenBlindfoldSecretInfoModel represents blindfold_secret_info block
 type CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseAccessTokenBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseAccessTokenClearSecretInfoModel represents clear_secret_info block
 type CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseAccessTokenClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 type CodeBaseIntegrationResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Name                types.String                                 `tfsdk:"name"`
+	Namespace           types.String                                 `tfsdk:"namespace"`
+	Annotations         types.Map                                    `tfsdk:"annotations"`
+	Description         types.String                                 `tfsdk:"description"`
+	Disable             types.Bool                                   `tfsdk:"disable"`
+	Labels              types.Map                                    `tfsdk:"labels"`
+	ID                  types.String                                 `tfsdk:"id"`
+	Timeouts            timeouts.Value                               `tfsdk:"timeouts"`
 	CodeBaseIntegration *CodeBaseIntegrationCodeBaseIntegrationModel `tfsdk:"code_base_integration"`
 }
 
@@ -260,7 +260,7 @@ func (r *CodeBaseIntegrationResource) Schema(ctx context.Context, req resource.S
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the CodeBaseIntegration. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -270,7 +270,7 @@ func (r *CodeBaseIntegrationResource) Schema(ctx context.Context, req resource.S
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the CodeBaseIntegration will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -280,25 +280,25 @@ func (r *CodeBaseIntegrationResource) Schema(ctx context.Context, req resource.S
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -313,33 +313,30 @@ func (r *CodeBaseIntegrationResource) Schema(ctx context.Context, req resource.S
 			}),
 			"code_base_integration": schema.SingleNestedBlock{
 				MarkdownDescription: "Integration Data. Choose your code base (e.g. GitHub, GitLab, Bitbucket, Azure) and provide credentials and connection details",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"azure_repos": schema.SingleNestedBlock{
 						MarkdownDescription: "Azure Repos Integration.",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"access_token": schema.SingleNestedBlock{
 								MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"blindfold_secret_info": schema.SingleNestedBlock{
 										MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 										Attributes: map[string]schema.Attribute{
 											"decryption_provider": schema.StringAttribute{
 												MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-												Optional: true,
+												Optional:            true,
 											},
 											"location": schema.StringAttribute{
 												MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-												Optional: true,
+												Optional:            true,
 											},
 											"store_provider": schema.StringAttribute{
 												MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -348,11 +345,11 @@ func (r *CodeBaseIntegrationResource) Schema(ctx context.Context, req resource.S
 										Attributes: map[string]schema.Attribute{
 											"provider_ref": schema.StringAttribute{
 												MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-												Optional: true,
+												Optional:            true,
 											},
 											"url": schema.StringAttribute{
 												MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -365,29 +362,28 @@ func (r *CodeBaseIntegrationResource) Schema(ctx context.Context, req resource.S
 						Attributes: map[string]schema.Attribute{
 							"username": schema.StringAttribute{
 								MarkdownDescription: "BitBucket Username.",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
 							"passwd": schema.SingleNestedBlock{
 								MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"blindfold_secret_info": schema.SingleNestedBlock{
 										MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 										Attributes: map[string]schema.Attribute{
 											"decryption_provider": schema.StringAttribute{
 												MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-												Optional: true,
+												Optional:            true,
 											},
 											"location": schema.StringAttribute{
 												MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-												Optional: true,
+												Optional:            true,
 											},
 											"store_provider": schema.StringAttribute{
 												MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -396,11 +392,11 @@ func (r *CodeBaseIntegrationResource) Schema(ctx context.Context, req resource.S
 										Attributes: map[string]schema.Attribute{
 											"provider_ref": schema.StringAttribute{
 												MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-												Optional: true,
+												Optional:            true,
 											},
 											"url": schema.StringAttribute{
 												MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -413,37 +409,36 @@ func (r *CodeBaseIntegrationResource) Schema(ctx context.Context, req resource.S
 						Attributes: map[string]schema.Attribute{
 							"url": schema.StringAttribute{
 								MarkdownDescription: "BitBucket Server URL.",
-								Optional: true,
+								Optional:            true,
 							},
 							"username": schema.StringAttribute{
 								MarkdownDescription: "BitBucket Server Username.",
-								Optional: true,
+								Optional:            true,
 							},
 							"verify_ssl": schema.BoolAttribute{
 								MarkdownDescription: "Verify SSL.",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
 							"passwd": schema.SingleNestedBlock{
 								MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"blindfold_secret_info": schema.SingleNestedBlock{
 										MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 										Attributes: map[string]schema.Attribute{
 											"decryption_provider": schema.StringAttribute{
 												MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-												Optional: true,
+												Optional:            true,
 											},
 											"location": schema.StringAttribute{
 												MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-												Optional: true,
+												Optional:            true,
 											},
 											"store_provider": schema.StringAttribute{
 												MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -452,11 +447,11 @@ func (r *CodeBaseIntegrationResource) Schema(ctx context.Context, req resource.S
 										Attributes: map[string]schema.Attribute{
 											"provider_ref": schema.StringAttribute{
 												MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-												Optional: true,
+												Optional:            true,
 											},
 											"url": schema.StringAttribute{
 												MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -469,33 +464,32 @@ func (r *CodeBaseIntegrationResource) Schema(ctx context.Context, req resource.S
 						Attributes: map[string]schema.Attribute{
 							"username": schema.StringAttribute{
 								MarkdownDescription: "GitHub Username.",
-								Optional: true,
+								Optional:            true,
 							},
 							"verify_ssl": schema.BoolAttribute{
 								MarkdownDescription: "GitHub Verify SSL.",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
 							"access_token": schema.SingleNestedBlock{
 								MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"blindfold_secret_info": schema.SingleNestedBlock{
 										MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 										Attributes: map[string]schema.Attribute{
 											"decryption_provider": schema.StringAttribute{
 												MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-												Optional: true,
+												Optional:            true,
 											},
 											"location": schema.StringAttribute{
 												MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-												Optional: true,
+												Optional:            true,
 											},
 											"store_provider": schema.StringAttribute{
 												MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -504,11 +498,11 @@ func (r *CodeBaseIntegrationResource) Schema(ctx context.Context, req resource.S
 										Attributes: map[string]schema.Attribute{
 											"provider_ref": schema.StringAttribute{
 												MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-												Optional: true,
+												Optional:            true,
 											},
 											"url": schema.StringAttribute{
 												MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -521,33 +515,32 @@ func (r *CodeBaseIntegrationResource) Schema(ctx context.Context, req resource.S
 						Attributes: map[string]schema.Attribute{
 							"hostname": schema.StringAttribute{
 								MarkdownDescription: "GitHub Hostname.",
-								Optional: true,
+								Optional:            true,
 							},
 							"username": schema.StringAttribute{
 								MarkdownDescription: "GitHub Username.",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
 							"access_token": schema.SingleNestedBlock{
 								MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"blindfold_secret_info": schema.SingleNestedBlock{
 										MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 										Attributes: map[string]schema.Attribute{
 											"decryption_provider": schema.StringAttribute{
 												MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-												Optional: true,
+												Optional:            true,
 											},
 											"location": schema.StringAttribute{
 												MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-												Optional: true,
+												Optional:            true,
 											},
 											"store_provider": schema.StringAttribute{
 												MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -556,11 +549,11 @@ func (r *CodeBaseIntegrationResource) Schema(ctx context.Context, req resource.S
 										Attributes: map[string]schema.Attribute{
 											"provider_ref": schema.StringAttribute{
 												MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-												Optional: true,
+												Optional:            true,
 											},
 											"url": schema.StringAttribute{
 												MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -570,28 +563,26 @@ func (r *CodeBaseIntegrationResource) Schema(ctx context.Context, req resource.S
 					},
 					"gitlab": schema.SingleNestedBlock{
 						MarkdownDescription: "GitLab Cloud Integration.",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"access_token": schema.SingleNestedBlock{
 								MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"blindfold_secret_info": schema.SingleNestedBlock{
 										MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 										Attributes: map[string]schema.Attribute{
 											"decryption_provider": schema.StringAttribute{
 												MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-												Optional: true,
+												Optional:            true,
 											},
 											"location": schema.StringAttribute{
 												MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-												Optional: true,
+												Optional:            true,
 											},
 											"store_provider": schema.StringAttribute{
 												MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -600,11 +591,11 @@ func (r *CodeBaseIntegrationResource) Schema(ctx context.Context, req resource.S
 										Attributes: map[string]schema.Attribute{
 											"provider_ref": schema.StringAttribute{
 												MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-												Optional: true,
+												Optional:            true,
 											},
 											"url": schema.StringAttribute{
 												MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -617,29 +608,28 @@ func (r *CodeBaseIntegrationResource) Schema(ctx context.Context, req resource.S
 						Attributes: map[string]schema.Attribute{
 							"url": schema.StringAttribute{
 								MarkdownDescription: "GitLab URL.",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
 							"access_token": schema.SingleNestedBlock{
 								MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"blindfold_secret_info": schema.SingleNestedBlock{
 										MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 										Attributes: map[string]schema.Attribute{
 											"decryption_provider": schema.StringAttribute{
 												MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-												Optional: true,
+												Optional:            true,
 											},
 											"location": schema.StringAttribute{
 												MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-												Optional: true,
+												Optional:            true,
 											},
 											"store_provider": schema.StringAttribute{
 												MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -648,11 +638,11 @@ func (r *CodeBaseIntegrationResource) Schema(ctx context.Context, req resource.S
 										Attributes: map[string]schema.Attribute{
 											"provider_ref": schema.StringAttribute{
 												MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-												Optional: true,
+												Optional:            true,
 											},
 											"url": schema.StringAttribute{
 												MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -661,7 +651,6 @@ func (r *CodeBaseIntegrationResource) Schema(ctx context.Context, req resource.S
 						},
 					},
 				},
-
 			},
 		},
 	}
@@ -871,7 +860,6 @@ func (r *CodeBaseIntegrationResource) Create(ctx context.Context, req resource.C
 		createReq.Spec["code_base_integration"] = code_base_integrationMap
 	}
 
-
 	apiResource, err := r.client.CreateCodeBaseIntegration(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create CodeBaseIntegration: %s", err))
@@ -883,13 +871,12 @@ func (r *CodeBaseIntegrationResource) Create(ctx context.Context, req resource.C
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if _, ok := apiResource.Spec["code_base_integration"].(map[string]interface{}); ok && isImport && data.CodeBaseIntegration == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.CodeBaseIntegration = &CodeBaseIntegrationCodeBaseIntegrationModel{}
 	}
 	// Normal Read: preserve existing state value
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -979,16 +966,15 @@ func (r *CodeBaseIntegrationResource) Read(ctx context.Context, req resource.Rea
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if _, ok := apiResource.Spec["code_base_integration"].(map[string]interface{}); ok && isImport && data.CodeBaseIntegration == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.CodeBaseIntegration = &CodeBaseIntegrationCodeBaseIntegrationModel{}
 	}
 	// Normal Read: preserve existing state value
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -1108,7 +1094,6 @@ func (r *CodeBaseIntegrationResource) Update(ctx context.Context, req resource.U
 		}
 		apiResource.Spec["code_base_integration"] = code_base_integrationMap
 	}
-
 
 	updated, err := r.client.UpdateCodeBaseIntegration(ctx, apiResource)
 	if err != nil {

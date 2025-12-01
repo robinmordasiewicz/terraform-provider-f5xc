@@ -52,24 +52,24 @@ type CloudElasticIPEmptyModel struct {
 
 // CloudElasticIPSiteRefModel represents site_ref block
 type CloudElasticIPSiteRefModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 type CloudElasticIPResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Count types.Int64 `tfsdk:"item_count"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	SiteRef []CloudElasticIPSiteRefModel `tfsdk:"site_ref"`
+	Name        types.String                 `tfsdk:"name"`
+	Namespace   types.String                 `tfsdk:"namespace"`
+	Annotations types.Map                    `tfsdk:"annotations"`
+	Description types.String                 `tfsdk:"description"`
+	Disable     types.Bool                   `tfsdk:"disable"`
+	Labels      types.Map                    `tfsdk:"labels"`
+	ID          types.String                 `tfsdk:"id"`
+	Count       types.Int64                  `tfsdk:"item_count"`
+	Timeouts    timeouts.Value               `tfsdk:"timeouts"`
+	SiteRef     []CloudElasticIPSiteRefModel `tfsdk:"site_ref"`
 }
 
 func (r *CloudElasticIPResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -83,7 +83,7 @@ func (r *CloudElasticIPResource) Schema(ctx context.Context, req resource.Schema
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the CloudElasticIP. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -93,7 +93,7 @@ func (r *CloudElasticIPResource) Schema(ctx context.Context, req resource.Schema
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the CloudElasticIP will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -103,33 +103,33 @@ func (r *CloudElasticIPResource) Schema(ctx context.Context, req resource.Schema
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"item_count": schema.Int64Attribute{
 				MarkdownDescription: "Elastic IP Count Per Node. number of Elastic Ips / Public Ips associated with this object per Node",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{
 					int64planmodifier.UseStateForUnknown(),
 				},
@@ -148,29 +148,28 @@ func (r *CloudElasticIPResource) Schema(ctx context.Context, req resource.Schema
 					Attributes: map[string]schema.Attribute{
 						"kind": schema.StringAttribute{
 							MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-							Optional: true,
-							Computed: true,
+							Optional:            true,
+							Computed:            true,
 						},
 						"name": schema.StringAttribute{
 							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-							Optional: true,
+							Optional:            true,
 						},
 						"namespace": schema.StringAttribute{
 							MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-							Optional: true,
+							Optional:            true,
 						},
 						"tenant": schema.StringAttribute{
 							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-							Optional: true,
-							Computed: true,
+							Optional:            true,
+							Computed:            true,
 						},
 						"uid": schema.StringAttribute{
 							MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-							Optional: true,
-							Computed: true,
+							Optional:            true,
+							Computed:            true,
 						},
 					},
-
 				},
 			},
 		},
@@ -348,7 +347,6 @@ func (r *CloudElasticIPResource) Create(ctx context.Context, req resource.Create
 		createReq.Spec["count"] = data.Count.ValueInt64()
 	}
 
-
 	apiResource, err := r.client.CreateCloudElasticIP(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create CloudElasticIP: %s", err))
@@ -360,7 +358,7 @@ func (r *CloudElasticIPResource) Create(ctx context.Context, req resource.Create
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["site_ref"].([]interface{}); ok && len(listData) > 0 {
 		var site_refList []CloudElasticIPSiteRefModel
 		for listIdx, item := range listData {
@@ -407,7 +405,6 @@ func (r *CloudElasticIPResource) Create(ctx context.Context, req resource.Create
 	} else {
 		data.Count = types.Int64Null()
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -497,9 +494,9 @@ func (r *CloudElasticIPResource) Read(ctx context.Context, req resource.ReadRequ
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if listData, ok := apiResource.Spec["site_ref"].([]interface{}); ok && len(listData) > 0 {
 		var site_refList []CloudElasticIPSiteRefModel
@@ -547,7 +544,6 @@ func (r *CloudElasticIPResource) Read(ctx context.Context, req resource.ReadRequ
 	} else {
 		data.Count = types.Int64Null()
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -634,7 +630,6 @@ func (r *CloudElasticIPResource) Update(ctx context.Context, req resource.Update
 	if !data.Count.IsNull() && !data.Count.IsUnknown() {
 		apiResource.Spec["count"] = data.Count.ValueInt64()
 	}
-
 
 	updated, err := r.client.UpdateCloudElasticIP(ctx, apiResource)
 	if err != nil {

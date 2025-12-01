@@ -56,24 +56,24 @@ type SubnetConnectToLayer2Model struct {
 
 // SubnetConnectToLayer2Layer2IntfRefModel represents layer2_intf_ref block
 type SubnetConnectToLayer2Layer2IntfRefModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // SubnetSiteSubnetParamsModel represents site_subnet_params block
 type SubnetSiteSubnetParamsModel struct {
-	Dhcp *SubnetEmptyModel `tfsdk:"dhcp"`
-	Site *SubnetSiteSubnetParamsSiteModel `tfsdk:"site"`
-	StaticIP *SubnetEmptyModel `tfsdk:"static_ip"`
+	Dhcp                   *SubnetEmptyModel                                  `tfsdk:"dhcp"`
+	Site                   *SubnetSiteSubnetParamsSiteModel                   `tfsdk:"site"`
+	StaticIP               *SubnetEmptyModel                                  `tfsdk:"static_ip"`
 	SubnetDhcpServerParams *SubnetSiteSubnetParamsSubnetDhcpServerParamsModel `tfsdk:"subnet_dhcp_server_params"`
 }
 
 // SubnetSiteSubnetParamsSiteModel represents site block
 type SubnetSiteSubnetParamsSiteModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // SubnetSiteSubnetParamsSubnetDhcpServerParamsModel represents subnet_dhcp_server_params block
@@ -87,17 +87,17 @@ type SubnetSiteSubnetParamsSubnetDhcpServerParamsDhcpNetworksModel struct {
 }
 
 type SubnetResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	ConnectToLayer2 *SubnetConnectToLayer2Model `tfsdk:"connect_to_layer2"`
-	ConnectToSLO *SubnetEmptyModel `tfsdk:"connect_to_slo"`
-	IsolatedNw *SubnetEmptyModel `tfsdk:"isolated_nw"`
+	Name             types.String                  `tfsdk:"name"`
+	Namespace        types.String                  `tfsdk:"namespace"`
+	Annotations      types.Map                     `tfsdk:"annotations"`
+	Description      types.String                  `tfsdk:"description"`
+	Disable          types.Bool                    `tfsdk:"disable"`
+	Labels           types.Map                     `tfsdk:"labels"`
+	ID               types.String                  `tfsdk:"id"`
+	Timeouts         timeouts.Value                `tfsdk:"timeouts"`
+	ConnectToLayer2  *SubnetConnectToLayer2Model   `tfsdk:"connect_to_layer2"`
+	ConnectToSLO     *SubnetEmptyModel             `tfsdk:"connect_to_slo"`
+	IsolatedNw       *SubnetEmptyModel             `tfsdk:"isolated_nw"`
 	SiteSubnetParams []SubnetSiteSubnetParamsModel `tfsdk:"site_subnet_params"`
 }
 
@@ -112,7 +112,7 @@ func (r *SubnetResource) Schema(ctx context.Context, req resource.SchemaRequest,
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Subnet. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -122,7 +122,7 @@ func (r *SubnetResource) Schema(ctx context.Context, req resource.SchemaRequest,
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the Subnet will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -132,25 +132,25 @@ func (r *SubnetResource) Schema(ctx context.Context, req resource.SchemaRequest,
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -165,29 +165,27 @@ func (r *SubnetResource) Schema(ctx context.Context, req resource.SchemaRequest,
 			}),
 			"connect_to_layer2": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: connect_to_layer2, connect_to_slo, isolated_nw] Subnet connection to Layer2 Interface.",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"layer2_intf_ref": schema.SingleNestedBlock{
 						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
 								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-								Optional: true,
+								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
 								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-								Optional: true,
+								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-								Optional: true,
-								Computed: true,
+								Optional:            true,
+								Computed:            true,
 							},
 						},
 					},
 				},
-
 			},
 			"connect_to_slo": schema.SingleNestedBlock{
 				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -198,8 +196,7 @@ func (r *SubnetResource) Schema(ctx context.Context, req resource.SchemaRequest,
 			"site_subnet_params": schema.ListNestedBlock{
 				MarkdownDescription: "Site Subnet Parameters. Configure subnet parameters per site",
 				NestedObject: schema.NestedBlockObject{
-					Attributes: map[string]schema.Attribute{
-					},
+					Attributes: map[string]schema.Attribute{},
 					Blocks: map[string]schema.Block{
 						"dhcp": schema.SingleNestedBlock{
 							MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -209,16 +206,16 @@ func (r *SubnetResource) Schema(ctx context.Context, req resource.SchemaRequest,
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-									Optional: true,
+									Optional:            true,
 								},
 								"namespace": schema.StringAttribute{
 									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-									Optional: true,
+									Optional:            true,
 								},
 								"tenant": schema.StringAttribute{
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-									Optional: true,
-									Computed: true,
+									Optional:            true,
+									Computed:            true,
 								},
 							},
 						},
@@ -227,8 +224,7 @@ func (r *SubnetResource) Schema(ctx context.Context, req resource.SchemaRequest,
 						},
 						"subnet_dhcp_server_params": schema.SingleNestedBlock{
 							MarkdownDescription: "Subnet DHCP parameters. Subnet DHCP parameters will be a subset of network_interface.DHCPServerParametersType as all features in network_interface.DHCPServerParametersType may not be supported in a subnet.",
-							Attributes: map[string]schema.Attribute{
-							},
+							Attributes:          map[string]schema.Attribute{},
 							Blocks: map[string]schema.Block{
 								"dhcp_networks": schema.ListNestedBlock{
 									MarkdownDescription: "Subnet DHCP Networks. List of networks from which DHCP server can allocate IP addresses",
@@ -236,7 +232,7 @@ func (r *SubnetResource) Schema(ctx context.Context, req resource.SchemaRequest,
 										Attributes: map[string]schema.Attribute{
 											"network_prefix": schema.StringAttribute{
 												MarkdownDescription: "Network Prefix. Network prefix for subnet",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -244,7 +240,6 @@ func (r *SubnetResource) Schema(ctx context.Context, req resource.SchemaRequest,
 							},
 						},
 					},
-
 				},
 			},
 		},
@@ -463,7 +458,6 @@ func (r *SubnetResource) Create(ctx context.Context, req resource.CreateRequest,
 		createReq.Spec["site_subnet_params"] = site_subnet_paramsList
 	}
 
-
 	apiResource, err := r.client.CreateSubnet(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create Subnet: %s", err))
@@ -475,7 +469,7 @@ func (r *SubnetResource) Create(ctx context.Context, req resource.CreateRequest,
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if _, ok := apiResource.Spec["connect_to_layer2"].(map[string]interface{}); ok && isImport && data.ConnectToLayer2 == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.ConnectToLayer2 = &SubnetConnectToLayer2Model{}
@@ -536,8 +530,7 @@ func (r *SubnetResource) Create(ctx context.Context, req resource.CreateRequest,
 					}(),
 					SubnetDhcpServerParams: func() *SubnetSiteSubnetParamsSubnetDhcpServerParamsModel {
 						if _, ok := itemMap["subnet_dhcp_server_params"].(map[string]interface{}); ok {
-							return &SubnetSiteSubnetParamsSubnetDhcpServerParamsModel{
-							}
+							return &SubnetSiteSubnetParamsSubnetDhcpServerParamsModel{}
 						}
 						return nil
 					}(),
@@ -546,7 +539,6 @@ func (r *SubnetResource) Create(ctx context.Context, req resource.CreateRequest,
 		}
 		data.SiteSubnetParams = site_subnet_paramsList
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -636,9 +628,9 @@ func (r *SubnetResource) Read(ctx context.Context, req resource.ReadRequest, res
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if _, ok := apiResource.Spec["connect_to_layer2"].(map[string]interface{}); ok && isImport && data.ConnectToLayer2 == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -700,8 +692,7 @@ func (r *SubnetResource) Read(ctx context.Context, req resource.ReadRequest, res
 					}(),
 					SubnetDhcpServerParams: func() *SubnetSiteSubnetParamsSubnetDhcpServerParamsModel {
 						if _, ok := itemMap["subnet_dhcp_server_params"].(map[string]interface{}); ok {
-							return &SubnetSiteSubnetParamsSubnetDhcpServerParamsModel{
-							}
+							return &SubnetSiteSubnetParamsSubnetDhcpServerParamsModel{}
 						}
 						return nil
 					}(),
@@ -710,7 +701,6 @@ func (r *SubnetResource) Read(ctx context.Context, req resource.ReadRequest, res
 		}
 		data.SiteSubnetParams = site_subnet_paramsList
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -838,7 +828,6 @@ func (r *SubnetResource) Update(ctx context.Context, req resource.UpdateRequest,
 		}
 		apiResource.Spec["site_subnet_params"] = site_subnet_paramsList
 	}
-
 
 	updated, err := r.client.UpdateSubnet(ctx, apiResource)
 	if err != nil {

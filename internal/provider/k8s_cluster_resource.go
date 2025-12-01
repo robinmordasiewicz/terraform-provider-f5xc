@@ -56,10 +56,10 @@ type K8SClusterClusterWideAppListModel struct {
 
 // K8SClusterClusterWideAppListClusterWideAppsModel represents cluster_wide_apps block
 type K8SClusterClusterWideAppListClusterWideAppsModel struct {
-	ArgoCd *K8SClusterClusterWideAppListClusterWideAppsArgoCdModel `tfsdk:"argo_cd"`
-	Dashboard *K8SClusterEmptyModel `tfsdk:"dashboard"`
-	MetricsServer *K8SClusterEmptyModel `tfsdk:"metrics_server"`
-	Prometheus *K8SClusterEmptyModel `tfsdk:"prometheus"`
+	ArgoCd        *K8SClusterClusterWideAppListClusterWideAppsArgoCdModel `tfsdk:"argo_cd"`
+	Dashboard     *K8SClusterEmptyModel                                   `tfsdk:"dashboard"`
+	MetricsServer *K8SClusterEmptyModel                                   `tfsdk:"metrics_server"`
+	Prometheus    *K8SClusterEmptyModel                                   `tfsdk:"prometheus"`
 }
 
 // K8SClusterClusterWideAppListClusterWideAppsArgoCdModel represents argo_cd block
@@ -69,29 +69,29 @@ type K8SClusterClusterWideAppListClusterWideAppsArgoCdModel struct {
 
 // K8SClusterClusterWideAppListClusterWideAppsArgoCdLocalDomainModel represents local_domain block
 type K8SClusterClusterWideAppListClusterWideAppsArgoCdLocalDomainModel struct {
-	LocalDomain types.String `tfsdk:"local_domain"`
-	Port types.Int64 `tfsdk:"port"`
-	DefaultPort *K8SClusterEmptyModel `tfsdk:"default_port"`
-	Password *K8SClusterClusterWideAppListClusterWideAppsArgoCdLocalDomainPasswordModel `tfsdk:"password"`
+	LocalDomain types.String                                                               `tfsdk:"local_domain"`
+	Port        types.Int64                                                                `tfsdk:"port"`
+	DefaultPort *K8SClusterEmptyModel                                                      `tfsdk:"default_port"`
+	Password    *K8SClusterClusterWideAppListClusterWideAppsArgoCdLocalDomainPasswordModel `tfsdk:"password"`
 }
 
 // K8SClusterClusterWideAppListClusterWideAppsArgoCdLocalDomainPasswordModel represents password block
 type K8SClusterClusterWideAppListClusterWideAppsArgoCdLocalDomainPasswordModel struct {
 	BlindfoldSecretInfo *K8SClusterClusterWideAppListClusterWideAppsArgoCdLocalDomainPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *K8SClusterClusterWideAppListClusterWideAppsArgoCdLocalDomainPasswordClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *K8SClusterClusterWideAppListClusterWideAppsArgoCdLocalDomainPasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // K8SClusterClusterWideAppListClusterWideAppsArgoCdLocalDomainPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
 type K8SClusterClusterWideAppListClusterWideAppsArgoCdLocalDomainPasswordBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // K8SClusterClusterWideAppListClusterWideAppsArgoCdLocalDomainPasswordClearSecretInfoModel represents clear_secret_info block
 type K8SClusterClusterWideAppListClusterWideAppsArgoCdLocalDomainPasswordClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // K8SClusterInsecureRegistryListModel represents insecure_registry_list block
@@ -101,8 +101,8 @@ type K8SClusterInsecureRegistryListModel struct {
 
 // K8SClusterLocalAccessConfigModel represents local_access_config block
 type K8SClusterLocalAccessConfigModel struct {
-	LocalDomain types.String `tfsdk:"local_domain"`
-	Port types.Int64 `tfsdk:"port"`
+	LocalDomain types.String          `tfsdk:"local_domain"`
+	Port        types.Int64           `tfsdk:"port"`
 	DefaultPort *K8SClusterEmptyModel `tfsdk:"default_port"`
 }
 
@@ -113,9 +113,9 @@ type K8SClusterUseCustomClusterRoleBindingsModel struct {
 
 // K8SClusterUseCustomClusterRoleBindingsClusterRoleBindingsModel represents cluster_role_bindings block
 type K8SClusterUseCustomClusterRoleBindingsClusterRoleBindingsModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // K8SClusterUseCustomClusterRoleListModel represents use_custom_cluster_role_list block
@@ -125,16 +125,16 @@ type K8SClusterUseCustomClusterRoleListModel struct {
 
 // K8SClusterUseCustomClusterRoleListClusterRolesModel represents cluster_roles block
 type K8SClusterUseCustomClusterRoleListClusterRolesModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // K8SClusterUseCustomPodSecurityAdmissionModel represents use_custom_pod_security_admission block
 type K8SClusterUseCustomPodSecurityAdmissionModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // K8SClusterUseCustomPspListModel represents use_custom_psp_list block
@@ -144,40 +144,40 @@ type K8SClusterUseCustomPspListModel struct {
 
 // K8SClusterUseCustomPspListPodSecurityPoliciesModel represents pod_security_policies block
 type K8SClusterUseCustomPspListPodSecurityPoliciesModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 type K8SClusterResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	ClusterScopedAccessDeny *K8SClusterEmptyModel `tfsdk:"cluster_scoped_access_deny"`
-	ClusterScopedAccessPermit *K8SClusterEmptyModel `tfsdk:"cluster_scoped_access_permit"`
-	ClusterWideAppList *K8SClusterClusterWideAppListModel `tfsdk:"cluster_wide_app_list"`
-	GlobalAccessEnable *K8SClusterEmptyModel `tfsdk:"global_access_enable"`
-	InsecureRegistryList *K8SClusterInsecureRegistryListModel `tfsdk:"insecure_registry_list"`
-	LocalAccessConfig *K8SClusterLocalAccessConfigModel `tfsdk:"local_access_config"`
-	NoClusterWideApps *K8SClusterEmptyModel `tfsdk:"no_cluster_wide_apps"`
-	NoGlobalAccess *K8SClusterEmptyModel `tfsdk:"no_global_access"`
-	NoInsecureRegistries *K8SClusterEmptyModel `tfsdk:"no_insecure_registries"`
-	NoLocalAccess *K8SClusterEmptyModel `tfsdk:"no_local_access"`
-	UseCustomClusterRoleBindings *K8SClusterUseCustomClusterRoleBindingsModel `tfsdk:"use_custom_cluster_role_bindings"`
-	UseCustomClusterRoleList *K8SClusterUseCustomClusterRoleListModel `tfsdk:"use_custom_cluster_role_list"`
-	UseCustomPodSecurityAdmission *K8SClusterUseCustomPodSecurityAdmissionModel `tfsdk:"use_custom_pod_security_admission"`
-	UseCustomPspList *K8SClusterUseCustomPspListModel `tfsdk:"use_custom_psp_list"`
-	UseDefaultClusterRoleBindings *K8SClusterEmptyModel `tfsdk:"use_default_cluster_role_bindings"`
-	UseDefaultClusterRoles *K8SClusterEmptyModel `tfsdk:"use_default_cluster_roles"`
-	UseDefaultPodSecurityAdmission *K8SClusterEmptyModel `tfsdk:"use_default_pod_security_admission"`
-	UseDefaultPsp *K8SClusterEmptyModel `tfsdk:"use_default_psp"`
-	Vk8sNamespaceAccessDeny *K8SClusterEmptyModel `tfsdk:"vk8s_namespace_access_deny"`
-	Vk8sNamespaceAccessPermit *K8SClusterEmptyModel `tfsdk:"vk8s_namespace_access_permit"`
+	Name                           types.String                                  `tfsdk:"name"`
+	Namespace                      types.String                                  `tfsdk:"namespace"`
+	Annotations                    types.Map                                     `tfsdk:"annotations"`
+	Description                    types.String                                  `tfsdk:"description"`
+	Disable                        types.Bool                                    `tfsdk:"disable"`
+	Labels                         types.Map                                     `tfsdk:"labels"`
+	ID                             types.String                                  `tfsdk:"id"`
+	Timeouts                       timeouts.Value                                `tfsdk:"timeouts"`
+	ClusterScopedAccessDeny        *K8SClusterEmptyModel                         `tfsdk:"cluster_scoped_access_deny"`
+	ClusterScopedAccessPermit      *K8SClusterEmptyModel                         `tfsdk:"cluster_scoped_access_permit"`
+	ClusterWideAppList             *K8SClusterClusterWideAppListModel            `tfsdk:"cluster_wide_app_list"`
+	GlobalAccessEnable             *K8SClusterEmptyModel                         `tfsdk:"global_access_enable"`
+	InsecureRegistryList           *K8SClusterInsecureRegistryListModel          `tfsdk:"insecure_registry_list"`
+	LocalAccessConfig              *K8SClusterLocalAccessConfigModel             `tfsdk:"local_access_config"`
+	NoClusterWideApps              *K8SClusterEmptyModel                         `tfsdk:"no_cluster_wide_apps"`
+	NoGlobalAccess                 *K8SClusterEmptyModel                         `tfsdk:"no_global_access"`
+	NoInsecureRegistries           *K8SClusterEmptyModel                         `tfsdk:"no_insecure_registries"`
+	NoLocalAccess                  *K8SClusterEmptyModel                         `tfsdk:"no_local_access"`
+	UseCustomClusterRoleBindings   *K8SClusterUseCustomClusterRoleBindingsModel  `tfsdk:"use_custom_cluster_role_bindings"`
+	UseCustomClusterRoleList       *K8SClusterUseCustomClusterRoleListModel      `tfsdk:"use_custom_cluster_role_list"`
+	UseCustomPodSecurityAdmission  *K8SClusterUseCustomPodSecurityAdmissionModel `tfsdk:"use_custom_pod_security_admission"`
+	UseCustomPspList               *K8SClusterUseCustomPspListModel              `tfsdk:"use_custom_psp_list"`
+	UseDefaultClusterRoleBindings  *K8SClusterEmptyModel                         `tfsdk:"use_default_cluster_role_bindings"`
+	UseDefaultClusterRoles         *K8SClusterEmptyModel                         `tfsdk:"use_default_cluster_roles"`
+	UseDefaultPodSecurityAdmission *K8SClusterEmptyModel                         `tfsdk:"use_default_pod_security_admission"`
+	UseDefaultPsp                  *K8SClusterEmptyModel                         `tfsdk:"use_default_psp"`
+	Vk8sNamespaceAccessDeny        *K8SClusterEmptyModel                         `tfsdk:"vk8s_namespace_access_deny"`
+	Vk8sNamespaceAccessPermit      *K8SClusterEmptyModel                         `tfsdk:"vk8s_namespace_access_permit"`
 }
 
 func (r *K8SClusterResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -191,7 +191,7 @@ func (r *K8SClusterResource) Schema(ctx context.Context, req resource.SchemaRequ
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the K8SCluster. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -201,7 +201,7 @@ func (r *K8SClusterResource) Schema(ctx context.Context, req resource.SchemaRequ
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the K8SCluster will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -211,25 +211,25 @@ func (r *K8SClusterResource) Schema(ctx context.Context, req resource.SchemaRequ
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -250,30 +250,27 @@ func (r *K8SClusterResource) Schema(ctx context.Context, req resource.SchemaRequ
 			},
 			"cluster_wide_app_list": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: cluster_wide_app_list, no_cluster_wide_apps] Cluster Wide Application List. List of cluster wide applications",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"cluster_wide_apps": schema.ListNestedBlock{
 						MarkdownDescription: "Cluster Wide Application List. List of cluster wide applications",
 						NestedObject: schema.NestedBlockObject{
-							Attributes: map[string]schema.Attribute{
-							},
+							Attributes: map[string]schema.Attribute{},
 							Blocks: map[string]schema.Block{
 								"argo_cd": schema.SingleNestedBlock{
 									MarkdownDescription: "Argo CD configuration. description Parameters for Argo Continuous Deployment(CD) application",
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"local_domain": schema.SingleNestedBlock{
 											MarkdownDescription: "Local Access Configuration. Parameters required to enable local access",
 											Attributes: map[string]schema.Attribute{
 												"local_domain": schema.StringAttribute{
 													MarkdownDescription: "Local Domain. ArgoCD will be accessible at <site name>.<local domain>.",
-													Optional: true,
+													Optional:            true,
 												},
 												"port": schema.Int64Attribute{
 													MarkdownDescription: "Custom ArgoCD Port. Use custom ArgoCD port. Available port range is less than 65000 except reserved ports.",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -282,23 +279,22 @@ func (r *K8SClusterResource) Schema(ctx context.Context, req resource.SchemaRequ
 												},
 												"password": schema.SingleNestedBlock{
 													MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-													Attributes: map[string]schema.Attribute{
-													},
+													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"blindfold_secret_info": schema.SingleNestedBlock{
 															MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 															Attributes: map[string]schema.Attribute{
 																"decryption_provider": schema.StringAttribute{
 																	MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"location": schema.StringAttribute{
 																	MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"store_provider": schema.StringAttribute{
 																	MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																	Optional: true,
+																	Optional:            true,
 																},
 															},
 														},
@@ -307,11 +303,11 @@ func (r *K8SClusterResource) Schema(ctx context.Context, req resource.SchemaRequ
 															Attributes: map[string]schema.Attribute{
 																"provider_ref": schema.StringAttribute{
 																	MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"url": schema.StringAttribute{
 																	MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-																	Optional: true,
+																	Optional:            true,
 																},
 															},
 														},
@@ -334,7 +330,6 @@ func (r *K8SClusterResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 				},
-
 			},
 			"global_access_enable": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: global_access_enable, no_global_access] Empty. This can be used for messages where no values are needed",
@@ -344,22 +339,21 @@ func (r *K8SClusterResource) Schema(ctx context.Context, req resource.SchemaRequ
 				Attributes: map[string]schema.Attribute{
 					"insecure_registries": schema.ListAttribute{
 						MarkdownDescription: "Docker Insecure Registry List. List of docker insecure registries in format 'example.com:5000'",
-						Optional: true,
-						ElementType: types.StringType,
+						Optional:            true,
+						ElementType:         types.StringType,
 					},
 				},
-
 			},
 			"local_access_config": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: local_access_config, no_local_access] Local Access Configuration. Parameters required to enable local access",
 				Attributes: map[string]schema.Attribute{
 					"local_domain": schema.StringAttribute{
 						MarkdownDescription: "Local Domain. Local K8s API server will be accessible at <site name>.<local domain>.",
-						Optional: true,
+						Optional:            true,
 					},
 					"port": schema.Int64Attribute{
 						MarkdownDescription: "Custom k8s Port. Use custom K8s port for API server. Available port range is less than 65000 except reserved ports.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -367,7 +361,6 @@ func (r *K8SClusterResource) Schema(ctx context.Context, req resource.SchemaRequ
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 			"no_cluster_wide_apps": schema.SingleNestedBlock{
 				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -383,8 +376,7 @@ func (r *K8SClusterResource) Schema(ctx context.Context, req resource.SchemaRequ
 			},
 			"use_custom_cluster_role_bindings": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: use_custom_cluster_role_bindings, use_default_cluster_role_bindings] Cluster Role Binding List. List of active cluster role binding list for a K8s cluster",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"cluster_role_bindings": schema.ListNestedBlock{
 						MarkdownDescription: "Cluster Role Binding List. List of active cluster role binding list for a K8s cluster",
@@ -392,27 +384,25 @@ func (r *K8SClusterResource) Schema(ctx context.Context, req resource.SchemaRequ
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-									Optional: true,
+									Optional:            true,
 								},
 								"namespace": schema.StringAttribute{
 									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-									Optional: true,
+									Optional:            true,
 								},
 								"tenant": schema.StringAttribute{
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-									Optional: true,
-									Computed: true,
+									Optional:            true,
+									Computed:            true,
 								},
 							},
 						},
 					},
 				},
-
 			},
 			"use_custom_cluster_role_list": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: use_custom_cluster_role_list, use_default_cluster_roles] Cluster Role List. List of active cluster role list for a K8s cluster",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"cluster_roles": schema.ListNestedBlock{
 						MarkdownDescription: "Cluster Role List. List of active cluster role list for a K8s cluster",
@@ -420,46 +410,43 @@ func (r *K8SClusterResource) Schema(ctx context.Context, req resource.SchemaRequ
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-									Optional: true,
+									Optional:            true,
 								},
 								"namespace": schema.StringAttribute{
 									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-									Optional: true,
+									Optional:            true,
 								},
 								"tenant": schema.StringAttribute{
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-									Optional: true,
-									Computed: true,
+									Optional:            true,
+									Computed:            true,
 								},
 							},
 						},
 					},
 				},
-
 			},
 			"use_custom_pod_security_admission": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: use_custom_pod_security_admission, use_default_pod_security_admission] Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
 						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-						Optional: true,
+						Optional:            true,
 					},
 					"namespace": schema.StringAttribute{
 						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-						Optional: true,
+						Optional:            true,
 					},
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-						Optional: true,
-						Computed: true,
+						Optional:            true,
+						Computed:            true,
 					},
 				},
-
 			},
 			"use_custom_psp_list": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: use_custom_psp_list, use_default_psp] Pod Security Policy List. List of active Pod security policies for a K8s cluster",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"pod_security_policies": schema.ListNestedBlock{
 						MarkdownDescription: "Pod Security Policy List. List of active Pod security policies for a K8s cluster",
@@ -467,22 +454,21 @@ func (r *K8SClusterResource) Schema(ctx context.Context, req resource.SchemaRequ
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-									Optional: true,
+									Optional:            true,
 								},
 								"namespace": schema.StringAttribute{
 									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-									Optional: true,
+									Optional:            true,
 								},
 								"tenant": schema.StringAttribute{
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-									Optional: true,
-									Computed: true,
+									Optional:            true,
+									Computed:            true,
 								},
 							},
 						},
 					},
 				},
-
 			},
 			"use_default_cluster_role_bindings": schema.SingleNestedBlock{
 				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -828,7 +814,6 @@ func (r *K8SClusterResource) Create(ctx context.Context, req resource.CreateRequ
 		createReq.Spec["vk8s_namespace_access_permit"] = vk8s_namespace_access_permitMap
 	}
 
-
 	apiResource, err := r.client.CreateK8SCluster(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create K8SCluster: %s", err))
@@ -840,7 +825,7 @@ func (r *K8SClusterResource) Create(ctx context.Context, req resource.CreateRequ
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if _, ok := apiResource.Spec["cluster_scoped_access_deny"].(map[string]interface{}); ok && isImport && data.ClusterScopedAccessDeny == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.ClusterScopedAccessDeny = &K8SClusterEmptyModel{}
@@ -861,8 +846,7 @@ func (r *K8SClusterResource) Create(ctx context.Context, req resource.CreateRequ
 							result = append(result, K8SClusterClusterWideAppListClusterWideAppsModel{
 								ArgoCd: func() *K8SClusterClusterWideAppListClusterWideAppsArgoCdModel {
 									if _, ok := itemMap["argo_cd"].(map[string]interface{}); ok {
-										return &K8SClusterClusterWideAppListClusterWideAppsArgoCdModel{
-										}
+										return &K8SClusterClusterWideAppListClusterWideAppsArgoCdModel{}
 									}
 									return nil
 								}(),
@@ -1120,7 +1104,6 @@ func (r *K8SClusterResource) Create(ctx context.Context, req resource.CreateRequ
 		data.Vk8sNamespaceAccessPermit = &K8SClusterEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -1210,9 +1193,9 @@ func (r *K8SClusterResource) Read(ctx context.Context, req resource.ReadRequest,
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if _, ok := apiResource.Spec["cluster_scoped_access_deny"].(map[string]interface{}); ok && isImport && data.ClusterScopedAccessDeny == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -1234,8 +1217,7 @@ func (r *K8SClusterResource) Read(ctx context.Context, req resource.ReadRequest,
 							result = append(result, K8SClusterClusterWideAppListClusterWideAppsModel{
 								ArgoCd: func() *K8SClusterClusterWideAppListClusterWideAppsArgoCdModel {
 									if _, ok := itemMap["argo_cd"].(map[string]interface{}); ok {
-										return &K8SClusterClusterWideAppListClusterWideAppsArgoCdModel{
-										}
+										return &K8SClusterClusterWideAppListClusterWideAppsArgoCdModel{}
 									}
 									return nil
 								}(),
@@ -1493,7 +1475,6 @@ func (r *K8SClusterResource) Read(ctx context.Context, req resource.ReadRequest,
 		data.Vk8sNamespaceAccessPermit = &K8SClusterEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -1731,7 +1712,6 @@ func (r *K8SClusterResource) Update(ctx context.Context, req resource.UpdateRequ
 		vk8s_namespace_access_permitMap := make(map[string]interface{})
 		apiResource.Spec["vk8s_namespace_access_permit"] = vk8s_namespace_access_permitMap
 	}
-
 
 	updated, err := r.client.UpdateK8SCluster(ctx, apiResource)
 	if err != nil {

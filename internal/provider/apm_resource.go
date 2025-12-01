@@ -51,38 +51,38 @@ type APMEmptyModel struct {
 
 // APMAWSSiteTypeChoiceModel represents aws_site_type_choice block
 type APMAWSSiteTypeChoiceModel struct {
-	APMAWSSite *APMAWSSiteTypeChoiceAPMAWSSiteModel `tfsdk:"apm_aws_site"`
+	APMAWSSite       *APMAWSSiteTypeChoiceAPMAWSSiteModel       `tfsdk:"apm_aws_site"`
 	MarketPlaceImage *APMAWSSiteTypeChoiceMarketPlaceImageModel `tfsdk:"market_place_image"`
 }
 
 // APMAWSSiteTypeChoiceAPMAWSSiteModel represents apm_aws_site block
 type APMAWSSiteTypeChoiceAPMAWSSiteModel struct {
-	AdminUsername types.String `tfsdk:"admin_username"`
-	SSHKey types.String `tfsdk:"ssh_key"`
-	AdminPassword *APMAWSSiteTypeChoiceAPMAWSSiteAdminPasswordModel `tfsdk:"admin_password"`
-	AWSTGWSite *APMAWSSiteTypeChoiceAPMAWSSiteAWSTGWSiteModel `tfsdk:"aws_tgw_site"`
+	AdminUsername   types.String                                        `tfsdk:"admin_username"`
+	SSHKey          types.String                                        `tfsdk:"ssh_key"`
+	AdminPassword   *APMAWSSiteTypeChoiceAPMAWSSiteAdminPasswordModel   `tfsdk:"admin_password"`
+	AWSTGWSite      *APMAWSSiteTypeChoiceAPMAWSSiteAWSTGWSiteModel      `tfsdk:"aws_tgw_site"`
 	EndpointService *APMAWSSiteTypeChoiceAPMAWSSiteEndpointServiceModel `tfsdk:"endpoint_service"`
-	Nodes []APMAWSSiteTypeChoiceAPMAWSSiteNodesModel `tfsdk:"nodes"`
-	Tags *APMEmptyModel `tfsdk:"tags"`
+	Nodes           []APMAWSSiteTypeChoiceAPMAWSSiteNodesModel          `tfsdk:"nodes"`
+	Tags            *APMEmptyModel                                      `tfsdk:"tags"`
 }
 
 // APMAWSSiteTypeChoiceAPMAWSSiteAdminPasswordModel represents admin_password block
 type APMAWSSiteTypeChoiceAPMAWSSiteAdminPasswordModel struct {
 	BlindfoldSecretInfo *APMAWSSiteTypeChoiceAPMAWSSiteAdminPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *APMAWSSiteTypeChoiceAPMAWSSiteAdminPasswordClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *APMAWSSiteTypeChoiceAPMAWSSiteAdminPasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // APMAWSSiteTypeChoiceAPMAWSSiteAdminPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
 type APMAWSSiteTypeChoiceAPMAWSSiteAdminPasswordBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // APMAWSSiteTypeChoiceAPMAWSSiteAdminPasswordClearSecretInfoModel represents clear_secret_info block
 type APMAWSSiteTypeChoiceAPMAWSSiteAdminPasswordClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // APMAWSSiteTypeChoiceAPMAWSSiteAWSTGWSiteModel represents aws_tgw_site block
@@ -92,25 +92,25 @@ type APMAWSSiteTypeChoiceAPMAWSSiteAWSTGWSiteModel struct {
 
 // APMAWSSiteTypeChoiceAPMAWSSiteAWSTGWSiteAWSTGWSiteModel represents aws_tgw_site block
 type APMAWSSiteTypeChoiceAPMAWSSiteAWSTGWSiteAWSTGWSiteModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // APMAWSSiteTypeChoiceAPMAWSSiteEndpointServiceModel represents endpoint_service block
 type APMAWSSiteTypeChoiceAPMAWSSiteEndpointServiceModel struct {
-	ConfiguredVip types.String `tfsdk:"configured_vip"`
-	AdvertiseOnSLOIP *APMEmptyModel `tfsdk:"advertise_on_slo_ip"`
-	AdvertiseOnSLOIPExternal *APMEmptyModel `tfsdk:"advertise_on_slo_ip_external"`
-	AutomaticVip *APMEmptyModel `tfsdk:"automatic_vip"`
-	CustomTCPPorts *APMAWSSiteTypeChoiceAPMAWSSiteEndpointServiceCustomTCPPortsModel `tfsdk:"custom_tcp_ports"`
-	CustomUDPPorts *APMAWSSiteTypeChoiceAPMAWSSiteEndpointServiceCustomUDPPortsModel `tfsdk:"custom_udp_ports"`
-	DefaultTCPPorts *APMEmptyModel `tfsdk:"default_tcp_ports"`
-	DisableAdvertiseOnSLOIP *APMEmptyModel `tfsdk:"disable_advertise_on_slo_ip"`
-	HTTPPort *APMEmptyModel `tfsdk:"http_port"`
-	HTTPSPort *APMEmptyModel `tfsdk:"https_port"`
-	NoTCPPorts *APMEmptyModel `tfsdk:"no_tcp_ports"`
-	NoUDPPorts *APMEmptyModel `tfsdk:"no_udp_ports"`
+	ConfiguredVip            types.String                                                      `tfsdk:"configured_vip"`
+	AdvertiseOnSLOIP         *APMEmptyModel                                                    `tfsdk:"advertise_on_slo_ip"`
+	AdvertiseOnSLOIPExternal *APMEmptyModel                                                    `tfsdk:"advertise_on_slo_ip_external"`
+	AutomaticVip             *APMEmptyModel                                                    `tfsdk:"automatic_vip"`
+	CustomTCPPorts           *APMAWSSiteTypeChoiceAPMAWSSiteEndpointServiceCustomTCPPortsModel `tfsdk:"custom_tcp_ports"`
+	CustomUDPPorts           *APMAWSSiteTypeChoiceAPMAWSSiteEndpointServiceCustomUDPPortsModel `tfsdk:"custom_udp_ports"`
+	DefaultTCPPorts          *APMEmptyModel                                                    `tfsdk:"default_tcp_ports"`
+	DisableAdvertiseOnSLOIP  *APMEmptyModel                                                    `tfsdk:"disable_advertise_on_slo_ip"`
+	HTTPPort                 *APMEmptyModel                                                    `tfsdk:"http_port"`
+	HTTPSPort                *APMEmptyModel                                                    `tfsdk:"https_port"`
+	NoTCPPorts               *APMEmptyModel                                                    `tfsdk:"no_tcp_ports"`
+	NoUDPPorts               *APMEmptyModel                                                    `tfsdk:"no_udp_ports"`
 }
 
 // APMAWSSiteTypeChoiceAPMAWSSiteEndpointServiceCustomTCPPortsModel represents custom_tcp_ports block
@@ -125,18 +125,18 @@ type APMAWSSiteTypeChoiceAPMAWSSiteEndpointServiceCustomUDPPortsModel struct {
 
 // APMAWSSiteTypeChoiceAPMAWSSiteNodesModel represents nodes block
 type APMAWSSiteTypeChoiceAPMAWSSiteNodesModel struct {
-	AWSAzName types.String `tfsdk:"aws_az_name"`
-	NodeName types.String `tfsdk:"node_name"`
-	TunnelPrefix types.String `tfsdk:"tunnel_prefix"`
-	AutomaticPrefix *APMEmptyModel `tfsdk:"automatic_prefix"`
-	MgmtSubnet *APMAWSSiteTypeChoiceAPMAWSSiteNodesMgmtSubnetModel `tfsdk:"mgmt_subnet"`
-	ReservedMgmtSubnet *APMEmptyModel `tfsdk:"reserved_mgmt_subnet"`
+	AWSAzName          types.String                                        `tfsdk:"aws_az_name"`
+	NodeName           types.String                                        `tfsdk:"node_name"`
+	TunnelPrefix       types.String                                        `tfsdk:"tunnel_prefix"`
+	AutomaticPrefix    *APMEmptyModel                                      `tfsdk:"automatic_prefix"`
+	MgmtSubnet         *APMAWSSiteTypeChoiceAPMAWSSiteNodesMgmtSubnetModel `tfsdk:"mgmt_subnet"`
+	ReservedMgmtSubnet *APMEmptyModel                                      `tfsdk:"reserved_mgmt_subnet"`
 }
 
 // APMAWSSiteTypeChoiceAPMAWSSiteNodesMgmtSubnetModel represents mgmt_subnet block
 type APMAWSSiteTypeChoiceAPMAWSSiteNodesMgmtSubnetModel struct {
-	ExistingSubnetID types.String `tfsdk:"existing_subnet_id"`
-	SubnetParam *APMAWSSiteTypeChoiceAPMAWSSiteNodesMgmtSubnetSubnetParamModel `tfsdk:"subnet_param"`
+	ExistingSubnetID types.String                                                   `tfsdk:"existing_subnet_id"`
+	SubnetParam      *APMAWSSiteTypeChoiceAPMAWSSiteNodesMgmtSubnetSubnetParamModel `tfsdk:"subnet_param"`
 }
 
 // APMAWSSiteTypeChoiceAPMAWSSiteNodesMgmtSubnetSubnetParamModel represents subnet_param block
@@ -147,7 +147,7 @@ type APMAWSSiteTypeChoiceAPMAWSSiteNodesMgmtSubnetSubnetParamModel struct {
 // APMAWSSiteTypeChoiceMarketPlaceImageModel represents market_place_image block
 type APMAWSSiteTypeChoiceMarketPlaceImageModel struct {
 	Bestpluspayg200mbps *APMEmptyModel `tfsdk:"best_plus_pay_g200_mbps"`
-	BestPlusPayg1gbps *APMEmptyModel `tfsdk:"best_plus_payg_1gbps"`
+	BestPlusPayg1gbps   *APMEmptyModel `tfsdk:"best_plus_payg_1gbps"`
 }
 
 // APMBaremetalSiteTypeChoiceModel represents baremetal_site_type_choice block
@@ -157,117 +157,117 @@ type APMBaremetalSiteTypeChoiceModel struct {
 
 // APMBaremetalSiteTypeChoiceF5BareMetalSiteModel represents f5_bare_metal_site block
 type APMBaremetalSiteTypeChoiceF5BareMetalSiteModel struct {
-	AdminUsername types.String `tfsdk:"admin_username"`
-	PublicDownloadURL types.String `tfsdk:"public_download_url"`
-	SSHKey types.String `tfsdk:"ssh_key"`
-	AdminPassword *APMBaremetalSiteTypeChoiceF5BareMetalSiteAdminPasswordModel `tfsdk:"admin_password"`
-	BareMetalSite *APMBaremetalSiteTypeChoiceF5BareMetalSiteBareMetalSiteModel `tfsdk:"bare_metal_site"`
-	BigiqInstance *APMBaremetalSiteTypeChoiceF5BareMetalSiteBigiqInstanceModel `tfsdk:"bigiq_instance"`
-	Nodes []APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesModel `tfsdk:"nodes"`
+	AdminUsername     types.String                                                 `tfsdk:"admin_username"`
+	PublicDownloadURL types.String                                                 `tfsdk:"public_download_url"`
+	SSHKey            types.String                                                 `tfsdk:"ssh_key"`
+	AdminPassword     *APMBaremetalSiteTypeChoiceF5BareMetalSiteAdminPasswordModel `tfsdk:"admin_password"`
+	BareMetalSite     *APMBaremetalSiteTypeChoiceF5BareMetalSiteBareMetalSiteModel `tfsdk:"bare_metal_site"`
+	BigiqInstance     *APMBaremetalSiteTypeChoiceF5BareMetalSiteBigiqInstanceModel `tfsdk:"bigiq_instance"`
+	Nodes             []APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesModel        `tfsdk:"nodes"`
 }
 
 // APMBaremetalSiteTypeChoiceF5BareMetalSiteAdminPasswordModel represents admin_password block
 type APMBaremetalSiteTypeChoiceF5BareMetalSiteAdminPasswordModel struct {
 	BlindfoldSecretInfo *APMBaremetalSiteTypeChoiceF5BareMetalSiteAdminPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *APMBaremetalSiteTypeChoiceF5BareMetalSiteAdminPasswordClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *APMBaremetalSiteTypeChoiceF5BareMetalSiteAdminPasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // APMBaremetalSiteTypeChoiceF5BareMetalSiteAdminPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
 type APMBaremetalSiteTypeChoiceF5BareMetalSiteAdminPasswordBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // APMBaremetalSiteTypeChoiceF5BareMetalSiteAdminPasswordClearSecretInfoModel represents clear_secret_info block
 type APMBaremetalSiteTypeChoiceF5BareMetalSiteAdminPasswordClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // APMBaremetalSiteTypeChoiceF5BareMetalSiteBareMetalSiteModel represents bare_metal_site block
 type APMBaremetalSiteTypeChoiceF5BareMetalSiteBareMetalSiteModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // APMBaremetalSiteTypeChoiceF5BareMetalSiteBigiqInstanceModel represents bigiq_instance block
 type APMBaremetalSiteTypeChoiceF5BareMetalSiteBigiqInstanceModel struct {
-	LicensePoolName types.String `tfsdk:"license_pool_name"`
-	LicenseServerIP types.String `tfsdk:"license_server_ip"`
-	SkuName types.String `tfsdk:"sku_name"`
-	Username types.String `tfsdk:"username"`
-	Password *APMBaremetalSiteTypeChoiceF5BareMetalSiteBigiqInstancePasswordModel `tfsdk:"password"`
+	LicensePoolName types.String                                                         `tfsdk:"license_pool_name"`
+	LicenseServerIP types.String                                                         `tfsdk:"license_server_ip"`
+	SkuName         types.String                                                         `tfsdk:"sku_name"`
+	Username        types.String                                                         `tfsdk:"username"`
+	Password        *APMBaremetalSiteTypeChoiceF5BareMetalSiteBigiqInstancePasswordModel `tfsdk:"password"`
 }
 
 // APMBaremetalSiteTypeChoiceF5BareMetalSiteBigiqInstancePasswordModel represents password block
 type APMBaremetalSiteTypeChoiceF5BareMetalSiteBigiqInstancePasswordModel struct {
 	BlindfoldSecretInfo *APMBaremetalSiteTypeChoiceF5BareMetalSiteBigiqInstancePasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *APMBaremetalSiteTypeChoiceF5BareMetalSiteBigiqInstancePasswordClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *APMBaremetalSiteTypeChoiceF5BareMetalSiteBigiqInstancePasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // APMBaremetalSiteTypeChoiceF5BareMetalSiteBigiqInstancePasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
 type APMBaremetalSiteTypeChoiceF5BareMetalSiteBigiqInstancePasswordBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // APMBaremetalSiteTypeChoiceF5BareMetalSiteBigiqInstancePasswordClearSecretInfoModel represents clear_secret_info block
 type APMBaremetalSiteTypeChoiceF5BareMetalSiteBigiqInstancePasswordClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesModel represents nodes block
 type APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesModel struct {
-	BmNodeMemorySize types.String `tfsdk:"bm_node_memory_size"`
-	BmVirtualCpuCount types.String `tfsdk:"bm_virtual_cpu_count"`
-	NodeName types.String `tfsdk:"node_name"`
+	BmNodeMemorySize  types.String                                                          `tfsdk:"bm_node_memory_size"`
+	BmVirtualCpuCount types.String                                                          `tfsdk:"bm_virtual_cpu_count"`
+	NodeName          types.String                                                          `tfsdk:"node_name"`
 	ExternalInterface *APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesExternalInterfaceModel `tfsdk:"external_interface"`
 	InternalInterface *APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesInternalInterfaceModel `tfsdk:"internal_interface"`
 }
 
 // APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesExternalInterfaceModel represents external_interface block
 type APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesExternalInterfaceModel struct {
-	NetworkGateway types.String `tfsdk:"network_gateway"`
-	NetworkSelfIP types.String `tfsdk:"network_self_ip"`
-	Interface *APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesExternalInterfaceInterfaceModel `tfsdk:"interface"`
+	NetworkGateway types.String                                                                   `tfsdk:"network_gateway"`
+	NetworkSelfIP  types.String                                                                   `tfsdk:"network_self_ip"`
+	Interface      *APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesExternalInterfaceInterfaceModel `tfsdk:"interface"`
 }
 
 // APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesExternalInterfaceInterfaceModel represents interface block
 type APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesExternalInterfaceInterfaceModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesInternalInterfaceModel represents internal_interface block
 type APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesInternalInterfaceModel struct {
-	NetworkGateway types.String `tfsdk:"network_gateway"`
-	NetworkSelfIP types.String `tfsdk:"network_self_ip"`
-	Interface *APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesInternalInterfaceInterfaceModel `tfsdk:"interface"`
+	NetworkGateway types.String                                                                   `tfsdk:"network_gateway"`
+	NetworkSelfIP  types.String                                                                   `tfsdk:"network_self_ip"`
+	Interface      *APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesInternalInterfaceInterfaceModel `tfsdk:"interface"`
 }
 
 // APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesInternalInterfaceInterfaceModel represents interface block
 type APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesInternalInterfaceInterfaceModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // APMHTTPSManagementModel represents https_management block
 type APMHTTPSManagementModel struct {
-	DomainSuffix types.String `tfsdk:"domain_suffix"`
-	HTTPSPort types.Int64 `tfsdk:"https_port"`
-	AdvertiseOnInternet *APMHTTPSManagementAdvertiseOnInternetModel `tfsdk:"advertise_on_internet"`
-	AdvertiseOnInternetDefaultVip *APMEmptyModel `tfsdk:"advertise_on_internet_default_vip"`
-	AdvertiseOnSLIVip *APMHTTPSManagementAdvertiseOnSLIVipModel `tfsdk:"advertise_on_sli_vip"`
-	AdvertiseOnSLOInternetVip *APMHTTPSManagementAdvertiseOnSLOInternetVipModel `tfsdk:"advertise_on_slo_internet_vip"`
-	AdvertiseOnSLOSLI *APMHTTPSManagementAdvertiseOnSLOSLIModel `tfsdk:"advertise_on_slo_sli"`
-	AdvertiseOnSLOVip *APMHTTPSManagementAdvertiseOnSLOVipModel `tfsdk:"advertise_on_slo_vip"`
-	DefaultHTTPSPort *APMEmptyModel `tfsdk:"default_https_port"`
+	DomainSuffix                  types.String                                      `tfsdk:"domain_suffix"`
+	HTTPSPort                     types.Int64                                       `tfsdk:"https_port"`
+	AdvertiseOnInternet           *APMHTTPSManagementAdvertiseOnInternetModel       `tfsdk:"advertise_on_internet"`
+	AdvertiseOnInternetDefaultVip *APMEmptyModel                                    `tfsdk:"advertise_on_internet_default_vip"`
+	AdvertiseOnSLIVip             *APMHTTPSManagementAdvertiseOnSLIVipModel         `tfsdk:"advertise_on_sli_vip"`
+	AdvertiseOnSLOInternetVip     *APMHTTPSManagementAdvertiseOnSLOInternetVipModel `tfsdk:"advertise_on_slo_internet_vip"`
+	AdvertiseOnSLOSLI             *APMHTTPSManagementAdvertiseOnSLOSLIModel         `tfsdk:"advertise_on_slo_sli"`
+	AdvertiseOnSLOVip             *APMHTTPSManagementAdvertiseOnSLOVipModel         `tfsdk:"advertise_on_slo_vip"`
+	DefaultHTTPSPort              *APMEmptyModel                                    `tfsdk:"default_https_port"`
 }
 
 // APMHTTPSManagementAdvertiseOnInternetModel represents advertise_on_internet block
@@ -277,27 +277,27 @@ type APMHTTPSManagementAdvertiseOnInternetModel struct {
 
 // APMHTTPSManagementAdvertiseOnInternetPublicIPModel represents public_ip block
 type APMHTTPSManagementAdvertiseOnInternetPublicIPModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // APMHTTPSManagementAdvertiseOnSLIVipModel represents advertise_on_sli_vip block
 type APMHTTPSManagementAdvertiseOnSLIVipModel struct {
-	NoMtls *APMEmptyModel `tfsdk:"no_mtls"`
+	NoMtls          *APMEmptyModel                                            `tfsdk:"no_mtls"`
 	TLSCertificates []APMHTTPSManagementAdvertiseOnSLIVipTLSCertificatesModel `tfsdk:"tls_certificates"`
-	TLSConfig *APMHTTPSManagementAdvertiseOnSLIVipTLSConfigModel `tfsdk:"tls_config"`
-	UseMtls *APMHTTPSManagementAdvertiseOnSLIVipUseMtlsModel `tfsdk:"use_mtls"`
+	TLSConfig       *APMHTTPSManagementAdvertiseOnSLIVipTLSConfigModel        `tfsdk:"tls_config"`
+	UseMtls         *APMHTTPSManagementAdvertiseOnSLIVipUseMtlsModel          `tfsdk:"use_mtls"`
 }
 
 // APMHTTPSManagementAdvertiseOnSLIVipTLSCertificatesModel represents tls_certificates block
 type APMHTTPSManagementAdvertiseOnSLIVipTLSCertificatesModel struct {
-	CertificateURL types.String `tfsdk:"certificate_url"`
-	DescriptionSpec types.String `tfsdk:"description_spec"`
+	CertificateURL       types.String                                                                 `tfsdk:"certificate_url"`
+	DescriptionSpec      types.String                                                                 `tfsdk:"description_spec"`
 	CustomHashAlgorithms *APMHTTPSManagementAdvertiseOnSLIVipTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
-	DisableOcspStapling *APMEmptyModel `tfsdk:"disable_ocsp_stapling"`
-	PrivateKey *APMHTTPSManagementAdvertiseOnSLIVipTLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
-	UseSystemDefaults *APMEmptyModel `tfsdk:"use_system_defaults"`
+	DisableOcspStapling  *APMEmptyModel                                                               `tfsdk:"disable_ocsp_stapling"`
+	PrivateKey           *APMHTTPSManagementAdvertiseOnSLIVipTLSCertificatesPrivateKeyModel           `tfsdk:"private_key"`
+	UseSystemDefaults    *APMEmptyModel                                                               `tfsdk:"use_system_defaults"`
 }
 
 // APMHTTPSManagementAdvertiseOnSLIVipTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
@@ -308,60 +308,60 @@ type APMHTTPSManagementAdvertiseOnSLIVipTLSCertificatesCustomHashAlgorithmsModel
 // APMHTTPSManagementAdvertiseOnSLIVipTLSCertificatesPrivateKeyModel represents private_key block
 type APMHTTPSManagementAdvertiseOnSLIVipTLSCertificatesPrivateKeyModel struct {
 	BlindfoldSecretInfo *APMHTTPSManagementAdvertiseOnSLIVipTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *APMHTTPSManagementAdvertiseOnSLIVipTLSCertificatesPrivateKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *APMHTTPSManagementAdvertiseOnSLIVipTLSCertificatesPrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // APMHTTPSManagementAdvertiseOnSLIVipTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
 type APMHTTPSManagementAdvertiseOnSLIVipTLSCertificatesPrivateKeyBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // APMHTTPSManagementAdvertiseOnSLIVipTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
 type APMHTTPSManagementAdvertiseOnSLIVipTLSCertificatesPrivateKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // APMHTTPSManagementAdvertiseOnSLIVipTLSConfigModel represents tls_config block
 type APMHTTPSManagementAdvertiseOnSLIVipTLSConfigModel struct {
-	CustomSecurity *APMHTTPSManagementAdvertiseOnSLIVipTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
-	DefaultSecurity *APMEmptyModel `tfsdk:"default_security"`
-	LowSecurity *APMEmptyModel `tfsdk:"low_security"`
-	MediumSecurity *APMEmptyModel `tfsdk:"medium_security"`
+	CustomSecurity  *APMHTTPSManagementAdvertiseOnSLIVipTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
+	DefaultSecurity *APMEmptyModel                                                   `tfsdk:"default_security"`
+	LowSecurity     *APMEmptyModel                                                   `tfsdk:"low_security"`
+	MediumSecurity  *APMEmptyModel                                                   `tfsdk:"medium_security"`
 }
 
 // APMHTTPSManagementAdvertiseOnSLIVipTLSConfigCustomSecurityModel represents custom_security block
 type APMHTTPSManagementAdvertiseOnSLIVipTLSConfigCustomSecurityModel struct {
-	CipherSuites types.List `tfsdk:"cipher_suites"`
-	MaxVersion types.String `tfsdk:"max_version"`
-	MinVersion types.String `tfsdk:"min_version"`
+	CipherSuites types.List   `tfsdk:"cipher_suites"`
+	MaxVersion   types.String `tfsdk:"max_version"`
+	MinVersion   types.String `tfsdk:"min_version"`
 }
 
 // APMHTTPSManagementAdvertiseOnSLIVipUseMtlsModel represents use_mtls block
 type APMHTTPSManagementAdvertiseOnSLIVipUseMtlsModel struct {
-	ClientCertificateOptional types.Bool `tfsdk:"client_certificate_optional"`
-	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
-	CRL *APMHTTPSManagementAdvertiseOnSLIVipUseMtlsCRLModel `tfsdk:"crl"`
-	NoCRL *APMEmptyModel `tfsdk:"no_crl"`
-	TrustedCa *APMHTTPSManagementAdvertiseOnSLIVipUseMtlsTrustedCaModel `tfsdk:"trusted_ca"`
-	XfccDisabled *APMEmptyModel `tfsdk:"xfcc_disabled"`
-	XfccOptions *APMHTTPSManagementAdvertiseOnSLIVipUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
+	ClientCertificateOptional types.Bool                                                  `tfsdk:"client_certificate_optional"`
+	TrustedCaURL              types.String                                                `tfsdk:"trusted_ca_url"`
+	CRL                       *APMHTTPSManagementAdvertiseOnSLIVipUseMtlsCRLModel         `tfsdk:"crl"`
+	NoCRL                     *APMEmptyModel                                              `tfsdk:"no_crl"`
+	TrustedCa                 *APMHTTPSManagementAdvertiseOnSLIVipUseMtlsTrustedCaModel   `tfsdk:"trusted_ca"`
+	XfccDisabled              *APMEmptyModel                                              `tfsdk:"xfcc_disabled"`
+	XfccOptions               *APMHTTPSManagementAdvertiseOnSLIVipUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
 
 // APMHTTPSManagementAdvertiseOnSLIVipUseMtlsCRLModel represents crl block
 type APMHTTPSManagementAdvertiseOnSLIVipUseMtlsCRLModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // APMHTTPSManagementAdvertiseOnSLIVipUseMtlsTrustedCaModel represents trusted_ca block
 type APMHTTPSManagementAdvertiseOnSLIVipUseMtlsTrustedCaModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // APMHTTPSManagementAdvertiseOnSLIVipUseMtlsXfccOptionsModel represents xfcc_options block
@@ -371,20 +371,20 @@ type APMHTTPSManagementAdvertiseOnSLIVipUseMtlsXfccOptionsModel struct {
 
 // APMHTTPSManagementAdvertiseOnSLOInternetVipModel represents advertise_on_slo_internet_vip block
 type APMHTTPSManagementAdvertiseOnSLOInternetVipModel struct {
-	NoMtls *APMEmptyModel `tfsdk:"no_mtls"`
+	NoMtls          *APMEmptyModel                                                    `tfsdk:"no_mtls"`
 	TLSCertificates []APMHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesModel `tfsdk:"tls_certificates"`
-	TLSConfig *APMHTTPSManagementAdvertiseOnSLOInternetVipTLSConfigModel `tfsdk:"tls_config"`
-	UseMtls *APMHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsModel `tfsdk:"use_mtls"`
+	TLSConfig       *APMHTTPSManagementAdvertiseOnSLOInternetVipTLSConfigModel        `tfsdk:"tls_config"`
+	UseMtls         *APMHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsModel          `tfsdk:"use_mtls"`
 }
 
 // APMHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesModel represents tls_certificates block
 type APMHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesModel struct {
-	CertificateURL types.String `tfsdk:"certificate_url"`
-	DescriptionSpec types.String `tfsdk:"description_spec"`
+	CertificateURL       types.String                                                                         `tfsdk:"certificate_url"`
+	DescriptionSpec      types.String                                                                         `tfsdk:"description_spec"`
 	CustomHashAlgorithms *APMHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
-	DisableOcspStapling *APMEmptyModel `tfsdk:"disable_ocsp_stapling"`
-	PrivateKey *APMHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
-	UseSystemDefaults *APMEmptyModel `tfsdk:"use_system_defaults"`
+	DisableOcspStapling  *APMEmptyModel                                                                       `tfsdk:"disable_ocsp_stapling"`
+	PrivateKey           *APMHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesPrivateKeyModel           `tfsdk:"private_key"`
+	UseSystemDefaults    *APMEmptyModel                                                                       `tfsdk:"use_system_defaults"`
 }
 
 // APMHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
@@ -395,60 +395,60 @@ type APMHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesCustomHashAlgorit
 // APMHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesPrivateKeyModel represents private_key block
 type APMHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesPrivateKeyModel struct {
 	BlindfoldSecretInfo *APMHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *APMHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesPrivateKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *APMHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesPrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // APMHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
 type APMHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesPrivateKeyBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // APMHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
 type APMHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesPrivateKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // APMHTTPSManagementAdvertiseOnSLOInternetVipTLSConfigModel represents tls_config block
 type APMHTTPSManagementAdvertiseOnSLOInternetVipTLSConfigModel struct {
-	CustomSecurity *APMHTTPSManagementAdvertiseOnSLOInternetVipTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
-	DefaultSecurity *APMEmptyModel `tfsdk:"default_security"`
-	LowSecurity *APMEmptyModel `tfsdk:"low_security"`
-	MediumSecurity *APMEmptyModel `tfsdk:"medium_security"`
+	CustomSecurity  *APMHTTPSManagementAdvertiseOnSLOInternetVipTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
+	DefaultSecurity *APMEmptyModel                                                           `tfsdk:"default_security"`
+	LowSecurity     *APMEmptyModel                                                           `tfsdk:"low_security"`
+	MediumSecurity  *APMEmptyModel                                                           `tfsdk:"medium_security"`
 }
 
 // APMHTTPSManagementAdvertiseOnSLOInternetVipTLSConfigCustomSecurityModel represents custom_security block
 type APMHTTPSManagementAdvertiseOnSLOInternetVipTLSConfigCustomSecurityModel struct {
-	CipherSuites types.List `tfsdk:"cipher_suites"`
-	MaxVersion types.String `tfsdk:"max_version"`
-	MinVersion types.String `tfsdk:"min_version"`
+	CipherSuites types.List   `tfsdk:"cipher_suites"`
+	MaxVersion   types.String `tfsdk:"max_version"`
+	MinVersion   types.String `tfsdk:"min_version"`
 }
 
 // APMHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsModel represents use_mtls block
 type APMHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsModel struct {
-	ClientCertificateOptional types.Bool `tfsdk:"client_certificate_optional"`
-	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
-	CRL *APMHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsCRLModel `tfsdk:"crl"`
-	NoCRL *APMEmptyModel `tfsdk:"no_crl"`
-	TrustedCa *APMHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsTrustedCaModel `tfsdk:"trusted_ca"`
-	XfccDisabled *APMEmptyModel `tfsdk:"xfcc_disabled"`
-	XfccOptions *APMHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
+	ClientCertificateOptional types.Bool                                                          `tfsdk:"client_certificate_optional"`
+	TrustedCaURL              types.String                                                        `tfsdk:"trusted_ca_url"`
+	CRL                       *APMHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsCRLModel         `tfsdk:"crl"`
+	NoCRL                     *APMEmptyModel                                                      `tfsdk:"no_crl"`
+	TrustedCa                 *APMHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsTrustedCaModel   `tfsdk:"trusted_ca"`
+	XfccDisabled              *APMEmptyModel                                                      `tfsdk:"xfcc_disabled"`
+	XfccOptions               *APMHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
 
 // APMHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsCRLModel represents crl block
 type APMHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsCRLModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // APMHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsTrustedCaModel represents trusted_ca block
 type APMHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsTrustedCaModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // APMHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsXfccOptionsModel represents xfcc_options block
@@ -458,20 +458,20 @@ type APMHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsXfccOptionsModel struct {
 
 // APMHTTPSManagementAdvertiseOnSLOSLIModel represents advertise_on_slo_sli block
 type APMHTTPSManagementAdvertiseOnSLOSLIModel struct {
-	NoMtls *APMEmptyModel `tfsdk:"no_mtls"`
+	NoMtls          *APMEmptyModel                                            `tfsdk:"no_mtls"`
 	TLSCertificates []APMHTTPSManagementAdvertiseOnSLOSLITLSCertificatesModel `tfsdk:"tls_certificates"`
-	TLSConfig *APMHTTPSManagementAdvertiseOnSLOSLITLSConfigModel `tfsdk:"tls_config"`
-	UseMtls *APMHTTPSManagementAdvertiseOnSLOSLIUseMtlsModel `tfsdk:"use_mtls"`
+	TLSConfig       *APMHTTPSManagementAdvertiseOnSLOSLITLSConfigModel        `tfsdk:"tls_config"`
+	UseMtls         *APMHTTPSManagementAdvertiseOnSLOSLIUseMtlsModel          `tfsdk:"use_mtls"`
 }
 
 // APMHTTPSManagementAdvertiseOnSLOSLITLSCertificatesModel represents tls_certificates block
 type APMHTTPSManagementAdvertiseOnSLOSLITLSCertificatesModel struct {
-	CertificateURL types.String `tfsdk:"certificate_url"`
-	DescriptionSpec types.String `tfsdk:"description_spec"`
+	CertificateURL       types.String                                                                 `tfsdk:"certificate_url"`
+	DescriptionSpec      types.String                                                                 `tfsdk:"description_spec"`
 	CustomHashAlgorithms *APMHTTPSManagementAdvertiseOnSLOSLITLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
-	DisableOcspStapling *APMEmptyModel `tfsdk:"disable_ocsp_stapling"`
-	PrivateKey *APMHTTPSManagementAdvertiseOnSLOSLITLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
-	UseSystemDefaults *APMEmptyModel `tfsdk:"use_system_defaults"`
+	DisableOcspStapling  *APMEmptyModel                                                               `tfsdk:"disable_ocsp_stapling"`
+	PrivateKey           *APMHTTPSManagementAdvertiseOnSLOSLITLSCertificatesPrivateKeyModel           `tfsdk:"private_key"`
+	UseSystemDefaults    *APMEmptyModel                                                               `tfsdk:"use_system_defaults"`
 }
 
 // APMHTTPSManagementAdvertiseOnSLOSLITLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
@@ -482,60 +482,60 @@ type APMHTTPSManagementAdvertiseOnSLOSLITLSCertificatesCustomHashAlgorithmsModel
 // APMHTTPSManagementAdvertiseOnSLOSLITLSCertificatesPrivateKeyModel represents private_key block
 type APMHTTPSManagementAdvertiseOnSLOSLITLSCertificatesPrivateKeyModel struct {
 	BlindfoldSecretInfo *APMHTTPSManagementAdvertiseOnSLOSLITLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *APMHTTPSManagementAdvertiseOnSLOSLITLSCertificatesPrivateKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *APMHTTPSManagementAdvertiseOnSLOSLITLSCertificatesPrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // APMHTTPSManagementAdvertiseOnSLOSLITLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
 type APMHTTPSManagementAdvertiseOnSLOSLITLSCertificatesPrivateKeyBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // APMHTTPSManagementAdvertiseOnSLOSLITLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
 type APMHTTPSManagementAdvertiseOnSLOSLITLSCertificatesPrivateKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // APMHTTPSManagementAdvertiseOnSLOSLITLSConfigModel represents tls_config block
 type APMHTTPSManagementAdvertiseOnSLOSLITLSConfigModel struct {
-	CustomSecurity *APMHTTPSManagementAdvertiseOnSLOSLITLSConfigCustomSecurityModel `tfsdk:"custom_security"`
-	DefaultSecurity *APMEmptyModel `tfsdk:"default_security"`
-	LowSecurity *APMEmptyModel `tfsdk:"low_security"`
-	MediumSecurity *APMEmptyModel `tfsdk:"medium_security"`
+	CustomSecurity  *APMHTTPSManagementAdvertiseOnSLOSLITLSConfigCustomSecurityModel `tfsdk:"custom_security"`
+	DefaultSecurity *APMEmptyModel                                                   `tfsdk:"default_security"`
+	LowSecurity     *APMEmptyModel                                                   `tfsdk:"low_security"`
+	MediumSecurity  *APMEmptyModel                                                   `tfsdk:"medium_security"`
 }
 
 // APMHTTPSManagementAdvertiseOnSLOSLITLSConfigCustomSecurityModel represents custom_security block
 type APMHTTPSManagementAdvertiseOnSLOSLITLSConfigCustomSecurityModel struct {
-	CipherSuites types.List `tfsdk:"cipher_suites"`
-	MaxVersion types.String `tfsdk:"max_version"`
-	MinVersion types.String `tfsdk:"min_version"`
+	CipherSuites types.List   `tfsdk:"cipher_suites"`
+	MaxVersion   types.String `tfsdk:"max_version"`
+	MinVersion   types.String `tfsdk:"min_version"`
 }
 
 // APMHTTPSManagementAdvertiseOnSLOSLIUseMtlsModel represents use_mtls block
 type APMHTTPSManagementAdvertiseOnSLOSLIUseMtlsModel struct {
-	ClientCertificateOptional types.Bool `tfsdk:"client_certificate_optional"`
-	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
-	CRL *APMHTTPSManagementAdvertiseOnSLOSLIUseMtlsCRLModel `tfsdk:"crl"`
-	NoCRL *APMEmptyModel `tfsdk:"no_crl"`
-	TrustedCa *APMHTTPSManagementAdvertiseOnSLOSLIUseMtlsTrustedCaModel `tfsdk:"trusted_ca"`
-	XfccDisabled *APMEmptyModel `tfsdk:"xfcc_disabled"`
-	XfccOptions *APMHTTPSManagementAdvertiseOnSLOSLIUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
+	ClientCertificateOptional types.Bool                                                  `tfsdk:"client_certificate_optional"`
+	TrustedCaURL              types.String                                                `tfsdk:"trusted_ca_url"`
+	CRL                       *APMHTTPSManagementAdvertiseOnSLOSLIUseMtlsCRLModel         `tfsdk:"crl"`
+	NoCRL                     *APMEmptyModel                                              `tfsdk:"no_crl"`
+	TrustedCa                 *APMHTTPSManagementAdvertiseOnSLOSLIUseMtlsTrustedCaModel   `tfsdk:"trusted_ca"`
+	XfccDisabled              *APMEmptyModel                                              `tfsdk:"xfcc_disabled"`
+	XfccOptions               *APMHTTPSManagementAdvertiseOnSLOSLIUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
 
 // APMHTTPSManagementAdvertiseOnSLOSLIUseMtlsCRLModel represents crl block
 type APMHTTPSManagementAdvertiseOnSLOSLIUseMtlsCRLModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // APMHTTPSManagementAdvertiseOnSLOSLIUseMtlsTrustedCaModel represents trusted_ca block
 type APMHTTPSManagementAdvertiseOnSLOSLIUseMtlsTrustedCaModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // APMHTTPSManagementAdvertiseOnSLOSLIUseMtlsXfccOptionsModel represents xfcc_options block
@@ -545,20 +545,20 @@ type APMHTTPSManagementAdvertiseOnSLOSLIUseMtlsXfccOptionsModel struct {
 
 // APMHTTPSManagementAdvertiseOnSLOVipModel represents advertise_on_slo_vip block
 type APMHTTPSManagementAdvertiseOnSLOVipModel struct {
-	NoMtls *APMEmptyModel `tfsdk:"no_mtls"`
+	NoMtls          *APMEmptyModel                                            `tfsdk:"no_mtls"`
 	TLSCertificates []APMHTTPSManagementAdvertiseOnSLOVipTLSCertificatesModel `tfsdk:"tls_certificates"`
-	TLSConfig *APMHTTPSManagementAdvertiseOnSLOVipTLSConfigModel `tfsdk:"tls_config"`
-	UseMtls *APMHTTPSManagementAdvertiseOnSLOVipUseMtlsModel `tfsdk:"use_mtls"`
+	TLSConfig       *APMHTTPSManagementAdvertiseOnSLOVipTLSConfigModel        `tfsdk:"tls_config"`
+	UseMtls         *APMHTTPSManagementAdvertiseOnSLOVipUseMtlsModel          `tfsdk:"use_mtls"`
 }
 
 // APMHTTPSManagementAdvertiseOnSLOVipTLSCertificatesModel represents tls_certificates block
 type APMHTTPSManagementAdvertiseOnSLOVipTLSCertificatesModel struct {
-	CertificateURL types.String `tfsdk:"certificate_url"`
-	DescriptionSpec types.String `tfsdk:"description_spec"`
+	CertificateURL       types.String                                                                 `tfsdk:"certificate_url"`
+	DescriptionSpec      types.String                                                                 `tfsdk:"description_spec"`
 	CustomHashAlgorithms *APMHTTPSManagementAdvertiseOnSLOVipTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
-	DisableOcspStapling *APMEmptyModel `tfsdk:"disable_ocsp_stapling"`
-	PrivateKey *APMHTTPSManagementAdvertiseOnSLOVipTLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
-	UseSystemDefaults *APMEmptyModel `tfsdk:"use_system_defaults"`
+	DisableOcspStapling  *APMEmptyModel                                                               `tfsdk:"disable_ocsp_stapling"`
+	PrivateKey           *APMHTTPSManagementAdvertiseOnSLOVipTLSCertificatesPrivateKeyModel           `tfsdk:"private_key"`
+	UseSystemDefaults    *APMEmptyModel                                                               `tfsdk:"use_system_defaults"`
 }
 
 // APMHTTPSManagementAdvertiseOnSLOVipTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
@@ -569,60 +569,60 @@ type APMHTTPSManagementAdvertiseOnSLOVipTLSCertificatesCustomHashAlgorithmsModel
 // APMHTTPSManagementAdvertiseOnSLOVipTLSCertificatesPrivateKeyModel represents private_key block
 type APMHTTPSManagementAdvertiseOnSLOVipTLSCertificatesPrivateKeyModel struct {
 	BlindfoldSecretInfo *APMHTTPSManagementAdvertiseOnSLOVipTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *APMHTTPSManagementAdvertiseOnSLOVipTLSCertificatesPrivateKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *APMHTTPSManagementAdvertiseOnSLOVipTLSCertificatesPrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // APMHTTPSManagementAdvertiseOnSLOVipTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
 type APMHTTPSManagementAdvertiseOnSLOVipTLSCertificatesPrivateKeyBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // APMHTTPSManagementAdvertiseOnSLOVipTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
 type APMHTTPSManagementAdvertiseOnSLOVipTLSCertificatesPrivateKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // APMHTTPSManagementAdvertiseOnSLOVipTLSConfigModel represents tls_config block
 type APMHTTPSManagementAdvertiseOnSLOVipTLSConfigModel struct {
-	CustomSecurity *APMHTTPSManagementAdvertiseOnSLOVipTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
-	DefaultSecurity *APMEmptyModel `tfsdk:"default_security"`
-	LowSecurity *APMEmptyModel `tfsdk:"low_security"`
-	MediumSecurity *APMEmptyModel `tfsdk:"medium_security"`
+	CustomSecurity  *APMHTTPSManagementAdvertiseOnSLOVipTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
+	DefaultSecurity *APMEmptyModel                                                   `tfsdk:"default_security"`
+	LowSecurity     *APMEmptyModel                                                   `tfsdk:"low_security"`
+	MediumSecurity  *APMEmptyModel                                                   `tfsdk:"medium_security"`
 }
 
 // APMHTTPSManagementAdvertiseOnSLOVipTLSConfigCustomSecurityModel represents custom_security block
 type APMHTTPSManagementAdvertiseOnSLOVipTLSConfigCustomSecurityModel struct {
-	CipherSuites types.List `tfsdk:"cipher_suites"`
-	MaxVersion types.String `tfsdk:"max_version"`
-	MinVersion types.String `tfsdk:"min_version"`
+	CipherSuites types.List   `tfsdk:"cipher_suites"`
+	MaxVersion   types.String `tfsdk:"max_version"`
+	MinVersion   types.String `tfsdk:"min_version"`
 }
 
 // APMHTTPSManagementAdvertiseOnSLOVipUseMtlsModel represents use_mtls block
 type APMHTTPSManagementAdvertiseOnSLOVipUseMtlsModel struct {
-	ClientCertificateOptional types.Bool `tfsdk:"client_certificate_optional"`
-	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
-	CRL *APMHTTPSManagementAdvertiseOnSLOVipUseMtlsCRLModel `tfsdk:"crl"`
-	NoCRL *APMEmptyModel `tfsdk:"no_crl"`
-	TrustedCa *APMHTTPSManagementAdvertiseOnSLOVipUseMtlsTrustedCaModel `tfsdk:"trusted_ca"`
-	XfccDisabled *APMEmptyModel `tfsdk:"xfcc_disabled"`
-	XfccOptions *APMHTTPSManagementAdvertiseOnSLOVipUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
+	ClientCertificateOptional types.Bool                                                  `tfsdk:"client_certificate_optional"`
+	TrustedCaURL              types.String                                                `tfsdk:"trusted_ca_url"`
+	CRL                       *APMHTTPSManagementAdvertiseOnSLOVipUseMtlsCRLModel         `tfsdk:"crl"`
+	NoCRL                     *APMEmptyModel                                              `tfsdk:"no_crl"`
+	TrustedCa                 *APMHTTPSManagementAdvertiseOnSLOVipUseMtlsTrustedCaModel   `tfsdk:"trusted_ca"`
+	XfccDisabled              *APMEmptyModel                                              `tfsdk:"xfcc_disabled"`
+	XfccOptions               *APMHTTPSManagementAdvertiseOnSLOVipUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
 
 // APMHTTPSManagementAdvertiseOnSLOVipUseMtlsCRLModel represents crl block
 type APMHTTPSManagementAdvertiseOnSLOVipUseMtlsCRLModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // APMHTTPSManagementAdvertiseOnSLOVipUseMtlsTrustedCaModel represents trusted_ca block
 type APMHTTPSManagementAdvertiseOnSLOVipUseMtlsTrustedCaModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // APMHTTPSManagementAdvertiseOnSLOVipUseMtlsXfccOptionsModel represents xfcc_options block
@@ -631,17 +631,17 @@ type APMHTTPSManagementAdvertiseOnSLOVipUseMtlsXfccOptionsModel struct {
 }
 
 type APMResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	AWSSiteTypeChoice *APMAWSSiteTypeChoiceModel `tfsdk:"aws_site_type_choice"`
+	Name                    types.String                     `tfsdk:"name"`
+	Namespace               types.String                     `tfsdk:"namespace"`
+	Annotations             types.Map                        `tfsdk:"annotations"`
+	Description             types.String                     `tfsdk:"description"`
+	Disable                 types.Bool                       `tfsdk:"disable"`
+	Labels                  types.Map                        `tfsdk:"labels"`
+	ID                      types.String                     `tfsdk:"id"`
+	Timeouts                timeouts.Value                   `tfsdk:"timeouts"`
+	AWSSiteTypeChoice       *APMAWSSiteTypeChoiceModel       `tfsdk:"aws_site_type_choice"`
 	BaremetalSiteTypeChoice *APMBaremetalSiteTypeChoiceModel `tfsdk:"baremetal_site_type_choice"`
-	HTTPSManagement *APMHTTPSManagementModel `tfsdk:"https_management"`
+	HTTPSManagement         *APMHTTPSManagementModel         `tfsdk:"https_management"`
 }
 
 func (r *APMResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -655,7 +655,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the APM. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -665,7 +665,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the APM will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -675,25 +675,25 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -708,41 +708,39 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 			}),
 			"aws_site_type_choice": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: aws_site_type_choice, baremetal_site_type_choice] AWS Transit Gateway Site choice. Virtual F5 BIG-IP APM service to be deployed as external service on AWS Transit Gateway Site",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"apm_aws_site": schema.SingleNestedBlock{
 						MarkdownDescription: "Virtual F5 BIG-IP APM configuration on AWS TGW Site. Virtual F5 BIG-IP configuration for AWS TGW Site using BIG-IP APM service",
 						Attributes: map[string]schema.Attribute{
 							"admin_username": schema.StringAttribute{
 								MarkdownDescription: "Admin Username. Admin Username for BIG-IP",
-								Optional: true,
+								Optional:            true,
 							},
 							"ssh_key": schema.StringAttribute{
 								MarkdownDescription: "Public SSH key. Public SSH key for accessing the BIG-IP nodes.",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
 							"admin_password": schema.SingleNestedBlock{
 								MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"blindfold_secret_info": schema.SingleNestedBlock{
 										MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 										Attributes: map[string]schema.Attribute{
 											"decryption_provider": schema.StringAttribute{
 												MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-												Optional: true,
+												Optional:            true,
 											},
 											"location": schema.StringAttribute{
 												MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-												Optional: true,
+												Optional:            true,
 											},
 											"store_provider": schema.StringAttribute{
 												MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -751,11 +749,11 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 										Attributes: map[string]schema.Attribute{
 											"provider_ref": schema.StringAttribute{
 												MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-												Optional: true,
+												Optional:            true,
 											},
 											"url": schema.StringAttribute{
 												MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -763,24 +761,23 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 							},
 							"aws_tgw_site": schema.SingleNestedBlock{
 								MarkdownDescription: "BIG-IP AWS TGW Site. BIG-IP AWS TGW site specification",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"aws_tgw_site": schema.SingleNestedBlock{
 										MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 										Attributes: map[string]schema.Attribute{
 											"name": schema.StringAttribute{
 												MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-												Optional: true,
+												Optional:            true,
 											},
 											"namespace": schema.StringAttribute{
 												MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-												Optional: true,
+												Optional:            true,
 											},
 											"tenant": schema.StringAttribute{
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-												Optional: true,
-												Computed: true,
+												Optional:            true,
+												Computed:            true,
 											},
 										},
 									},
@@ -791,7 +788,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 								Attributes: map[string]schema.Attribute{
 									"configured_vip": schema.StringAttribute{
 										MarkdownDescription: "Configured VIP. Enter IP address for the default VIP",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 								Blocks: map[string]schema.Block{
@@ -809,8 +806,8 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 										Attributes: map[string]schema.Attribute{
 											"ports": schema.ListAttribute{
 												MarkdownDescription: "Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192",
-												Optional: true,
-												ElementType: types.StringType,
+												Optional:            true,
+												ElementType:         types.StringType,
 											},
 										},
 									},
@@ -819,8 +816,8 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 										Attributes: map[string]schema.Attribute{
 											"ports": schema.ListAttribute{
 												MarkdownDescription: "Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192",
-												Optional: true,
-												ElementType: types.StringType,
+												Optional:            true,
+												ElementType:         types.StringType,
 											},
 										},
 									},
@@ -850,15 +847,15 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 									Attributes: map[string]schema.Attribute{
 										"aws_az_name": schema.StringAttribute{
 											MarkdownDescription: "AWS AZ Name. The AWS Availability Zone must be consistent with the AWS Region chosen. Please select an AZ in the same Region as your TGW Site",
-											Optional: true,
+											Optional:            true,
 										},
 										"node_name": schema.StringAttribute{
 											MarkdownDescription: "Node Name. Node Name will be used to assign as hostname to the service",
-											Optional: true,
+											Optional:            true,
 										},
 										"tunnel_prefix": schema.StringAttribute{
 											MarkdownDescription: "Tunnel IP Prefix. Enter IP prefix for the tunnel, it has to be /30",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -870,7 +867,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 											Attributes: map[string]schema.Attribute{
 												"existing_subnet_id": schema.StringAttribute{
 													MarkdownDescription: "Existing Subnet ID. Information about existing subnet ID",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -879,7 +876,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 													Attributes: map[string]schema.Attribute{
 														"ipv4": schema.StringAttribute{
 															MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -898,8 +895,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 					},
 					"market_place_image": schema.SingleNestedBlock{
 						MarkdownDescription: "BIG-IP AWS Marketplace Image. Select the flavor of BIG-IP AWS Marketplace to launch the instance on AWS TGW Site",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"best_plus_pay_g200_mbps": schema.SingleNestedBlock{
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -910,49 +906,46 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 						},
 					},
 				},
-
 			},
 			"baremetal_site_type_choice": schema.SingleNestedBlock{
 				MarkdownDescription: "Virtual BIG-IP on App Stack Bare Metal Site. Virtual BIG-IP specification for App Stack Bare Metal Site",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"f5_bare_metal_site": schema.SingleNestedBlock{
 						MarkdownDescription: "Virtual BIG-IP on App Stack bare metal. Virtual BIG-IP specification for App Stack bare metal",
 						Attributes: map[string]schema.Attribute{
 							"admin_username": schema.StringAttribute{
 								MarkdownDescription: "Admin Username. Admin Username for BIG-IP",
-								Optional: true,
+								Optional:            true,
 							},
 							"public_download_url": schema.StringAttribute{
 								MarkdownDescription: "Image URL. Public URL where BIG-IP VE image (qcow2) is hosted",
-								Optional: true,
+								Optional:            true,
 							},
 							"ssh_key": schema.StringAttribute{
 								MarkdownDescription: "Public SSH key. Public SSH key for accessing the BIG-IP nodes.",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
 							"admin_password": schema.SingleNestedBlock{
 								MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"blindfold_secret_info": schema.SingleNestedBlock{
 										MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 										Attributes: map[string]schema.Attribute{
 											"decryption_provider": schema.StringAttribute{
 												MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-												Optional: true,
+												Optional:            true,
 											},
 											"location": schema.StringAttribute{
 												MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-												Optional: true,
+												Optional:            true,
 											},
 											"store_provider": schema.StringAttribute{
 												MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -961,11 +954,11 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 										Attributes: map[string]schema.Attribute{
 											"provider_ref": schema.StringAttribute{
 												MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-												Optional: true,
+												Optional:            true,
 											},
 											"url": schema.StringAttribute{
 												MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -976,16 +969,16 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-										Optional: true,
+										Optional:            true,
 									},
 									"namespace": schema.StringAttribute{
 										MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-										Optional: true,
+										Optional:            true,
 									},
 									"tenant": schema.StringAttribute{
 										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-										Optional: true,
-										Computed: true,
+										Optional:            true,
+										Computed:            true,
 									},
 								},
 							},
@@ -994,41 +987,40 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 								Attributes: map[string]schema.Attribute{
 									"license_pool_name": schema.StringAttribute{
 										MarkdownDescription: "License Pool Name. Name of Utility Pool on BIG-IQ",
-										Optional: true,
+										Optional:            true,
 									},
 									"license_server_ip": schema.StringAttribute{
 										MarkdownDescription: "License Server IP. IP Address from the TCP Load Balancer which is configured to communicate with License Server",
-										Optional: true,
+										Optional:            true,
 									},
 									"sku_name": schema.StringAttribute{
 										MarkdownDescription: "Offering Name. License offering name aka SKU name",
-										Optional: true,
+										Optional:            true,
 									},
 									"username": schema.StringAttribute{
 										MarkdownDescription: "User Name. User Name used to access BIG-IQ to activate the license",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 								Blocks: map[string]schema.Block{
 									"password": schema.SingleNestedBlock{
 										MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-										Attributes: map[string]schema.Attribute{
-										},
+										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"blindfold_secret_info": schema.SingleNestedBlock{
 												MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 												Attributes: map[string]schema.Attribute{
 													"decryption_provider": schema.StringAttribute{
 														MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-														Optional: true,
+														Optional:            true,
 													},
 													"location": schema.StringAttribute{
 														MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-														Optional: true,
+														Optional:            true,
 													},
 													"store_provider": schema.StringAttribute{
 														MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 											},
@@ -1037,11 +1029,11 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 												Attributes: map[string]schema.Attribute{
 													"provider_ref": schema.StringAttribute{
 														MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-														Optional: true,
+														Optional:            true,
 													},
 													"url": schema.StringAttribute{
 														MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 											},
@@ -1055,15 +1047,15 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 									Attributes: map[string]schema.Attribute{
 										"bm_node_memory_size": schema.StringAttribute{
 											MarkdownDescription: "Bare Metal ServiceNode Memory Size. Enum to define amount of memory to be assigned to the node - BM_8_GB_MEMORY: 8 GB - BM_16_GB_MEMORY: 16 GB - BM_32_GB_MEMORY: 32 GB. Possible values are `BM_8_GB_MEMORY`, `BM_16_GB_MEMORY`, `BM_32_GB_MEMORY`. Defaults to `BM_8_GB_MEMORY`.",
-											Optional: true,
+											Optional:            true,
 										},
 										"bm_virtual_cpu_count": schema.StringAttribute{
 											MarkdownDescription: "Bare Metal ServiceNode Virtual CPU Count. Enum to define number of virtual CPU's to be assigned to the node - BM_4_VCPU: 4 virtual CPUs - BM_8_VCPU: 8 virtual CPUs. Possible values are `BM_4_VCPU`, `BM_8_VCPU`. Defaults to `BM_4_VCPU`.",
-											Optional: true,
+											Optional:            true,
 										},
 										"node_name": schema.StringAttribute{
 											MarkdownDescription: "Node Name. Node Name will be used to assign as hostname to the service",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -1072,11 +1064,11 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 											Attributes: map[string]schema.Attribute{
 												"network_gateway": schema.StringAttribute{
 													MarkdownDescription: "Default Gateway.",
-													Optional: true,
+													Optional:            true,
 												},
 												"network_self_ip": schema.StringAttribute{
 													MarkdownDescription: "Self IP. Self IP CIDR",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -1085,16 +1077,16 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 													Attributes: map[string]schema.Attribute{
 														"name": schema.StringAttribute{
 															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-															Optional: true,
+															Optional:            true,
 														},
 														"namespace": schema.StringAttribute{
 															MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-															Optional: true,
+															Optional:            true,
 														},
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-															Optional: true,
-															Computed: true,
+															Optional:            true,
+															Computed:            true,
 														},
 													},
 												},
@@ -1105,11 +1097,11 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 											Attributes: map[string]schema.Attribute{
 												"network_gateway": schema.StringAttribute{
 													MarkdownDescription: "Default Gateway.",
-													Optional: true,
+													Optional:            true,
 												},
 												"network_self_ip": schema.StringAttribute{
 													MarkdownDescription: "Self IP. Self IP CIDR",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -1118,16 +1110,16 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 													Attributes: map[string]schema.Attribute{
 														"name": schema.StringAttribute{
 															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-															Optional: true,
+															Optional:            true,
 														},
 														"namespace": schema.StringAttribute{
 															MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-															Optional: true,
+															Optional:            true,
 														},
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-															Optional: true,
-															Computed: true,
+															Optional:            true,
+															Computed:            true,
 														},
 													},
 												},
@@ -1139,41 +1131,39 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 						},
 					},
 				},
-
 			},
 			"https_management": schema.SingleNestedBlock{
 				MarkdownDescription: "HTTPS based management. HTTPS based configuration",
 				Attributes: map[string]schema.Attribute{
 					"domain_suffix": schema.StringAttribute{
 						MarkdownDescription: "Domain Suffix. Domain suffix will be used along with node name to form URL to access node management",
-						Optional: true,
+						Optional:            true,
 					},
 					"https_port": schema.Int64Attribute{
 						MarkdownDescription: "HTTPS Port. Enter TCP port number",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"advertise_on_internet": schema.SingleNestedBlock{
 						MarkdownDescription: "Advertise Public. This defines a way to advertise a load balancer on public. If optional public_ip is provided, it will only be advertised on RE sites where that public_ip is available",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"public_ip": schema.SingleNestedBlock{
 								MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-										Optional: true,
+										Optional:            true,
 									},
 									"namespace": schema.StringAttribute{
 										MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-										Optional: true,
+										Optional:            true,
 									},
 									"tenant": schema.StringAttribute{
 										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-										Optional: true,
-										Computed: true,
+										Optional:            true,
+										Computed:            true,
 									},
 								},
 							},
@@ -1184,8 +1174,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 					},
 					"advertise_on_sli_vip": schema.SingleNestedBlock{
 						MarkdownDescription: "Inline TLS Parameters. Inline TLS parameters",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"no_mtls": schema.SingleNestedBlock{
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -1196,11 +1185,11 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 									Attributes: map[string]schema.Attribute{
 										"certificate_url": schema.StringAttribute{
 											MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
-											Optional: true,
+											Optional:            true,
 										},
 										"description_spec": schema.StringAttribute{
 											MarkdownDescription: "Description. Description for the certificate",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -1209,8 +1198,8 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 											Attributes: map[string]schema.Attribute{
 												"hash_algorithms": schema.ListAttribute{
 													MarkdownDescription: "Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM`.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 										},
@@ -1219,23 +1208,22 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 										},
 										"private_key": schema.SingleNestedBlock{
 											MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"blindfold_secret_info": schema.SingleNestedBlock{
 													MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 													Attributes: map[string]schema.Attribute{
 														"decryption_provider": schema.StringAttribute{
 															MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-															Optional: true,
+															Optional:            true,
 														},
 														"location": schema.StringAttribute{
 															MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-															Optional: true,
+															Optional:            true,
 														},
 														"store_provider": schema.StringAttribute{
 															MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -1244,11 +1232,11 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 													Attributes: map[string]schema.Attribute{
 														"provider_ref": schema.StringAttribute{
 															MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-															Optional: true,
+															Optional:            true,
 														},
 														"url": schema.StringAttribute{
 															MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -1262,24 +1250,23 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 							},
 							"tls_config": schema.SingleNestedBlock{
 								MarkdownDescription: "TLS Config. This defines various options to configure TLS configuration parameters",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"custom_security": schema.SingleNestedBlock{
 										MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers",
 										Attributes: map[string]schema.Attribute{
 											"cipher_suites": schema.ListAttribute{
 												MarkdownDescription: "Cipher Suites. The TLS listener will only support the specified cipher list.",
-												Optional: true,
-												ElementType: types.StringType,
+												Optional:            true,
+												ElementType:         types.StringType,
 											},
 											"max_version": schema.StringAttribute{
 												MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
-												Optional: true,
+												Optional:            true,
 											},
 											"min_version": schema.StringAttribute{
 												MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -1299,11 +1286,11 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 								Attributes: map[string]schema.Attribute{
 									"client_certificate_optional": schema.BoolAttribute{
 										MarkdownDescription: "Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted.",
-										Optional: true,
+										Optional:            true,
 									},
 									"trusted_ca_url": schema.StringAttribute{
 										MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 								Blocks: map[string]schema.Block{
@@ -1312,16 +1299,16 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 										Attributes: map[string]schema.Attribute{
 											"name": schema.StringAttribute{
 												MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-												Optional: true,
+												Optional:            true,
 											},
 											"namespace": schema.StringAttribute{
 												MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-												Optional: true,
+												Optional:            true,
 											},
 											"tenant": schema.StringAttribute{
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-												Optional: true,
-												Computed: true,
+												Optional:            true,
+												Computed:            true,
 											},
 										},
 									},
@@ -1333,16 +1320,16 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 										Attributes: map[string]schema.Attribute{
 											"name": schema.StringAttribute{
 												MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-												Optional: true,
+												Optional:            true,
 											},
 											"namespace": schema.StringAttribute{
 												MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-												Optional: true,
+												Optional:            true,
 											},
 											"tenant": schema.StringAttribute{
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-												Optional: true,
-												Computed: true,
+												Optional:            true,
+												Computed:            true,
 											},
 										},
 									},
@@ -1354,8 +1341,8 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 										Attributes: map[string]schema.Attribute{
 											"xfcc_header_elements": schema.ListAttribute{
 												MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
-												Optional: true,
-												ElementType: types.StringType,
+												Optional:            true,
+												ElementType:         types.StringType,
 											},
 										},
 									},
@@ -1365,8 +1352,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 					},
 					"advertise_on_slo_internet_vip": schema.SingleNestedBlock{
 						MarkdownDescription: "Inline TLS Parameters. Inline TLS parameters",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"no_mtls": schema.SingleNestedBlock{
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -1377,11 +1363,11 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 									Attributes: map[string]schema.Attribute{
 										"certificate_url": schema.StringAttribute{
 											MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
-											Optional: true,
+											Optional:            true,
 										},
 										"description_spec": schema.StringAttribute{
 											MarkdownDescription: "Description. Description for the certificate",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -1390,8 +1376,8 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 											Attributes: map[string]schema.Attribute{
 												"hash_algorithms": schema.ListAttribute{
 													MarkdownDescription: "Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM`.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 										},
@@ -1400,23 +1386,22 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 										},
 										"private_key": schema.SingleNestedBlock{
 											MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"blindfold_secret_info": schema.SingleNestedBlock{
 													MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 													Attributes: map[string]schema.Attribute{
 														"decryption_provider": schema.StringAttribute{
 															MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-															Optional: true,
+															Optional:            true,
 														},
 														"location": schema.StringAttribute{
 															MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-															Optional: true,
+															Optional:            true,
 														},
 														"store_provider": schema.StringAttribute{
 															MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -1425,11 +1410,11 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 													Attributes: map[string]schema.Attribute{
 														"provider_ref": schema.StringAttribute{
 															MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-															Optional: true,
+															Optional:            true,
 														},
 														"url": schema.StringAttribute{
 															MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -1443,24 +1428,23 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 							},
 							"tls_config": schema.SingleNestedBlock{
 								MarkdownDescription: "TLS Config. This defines various options to configure TLS configuration parameters",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"custom_security": schema.SingleNestedBlock{
 										MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers",
 										Attributes: map[string]schema.Attribute{
 											"cipher_suites": schema.ListAttribute{
 												MarkdownDescription: "Cipher Suites. The TLS listener will only support the specified cipher list.",
-												Optional: true,
-												ElementType: types.StringType,
+												Optional:            true,
+												ElementType:         types.StringType,
 											},
 											"max_version": schema.StringAttribute{
 												MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
-												Optional: true,
+												Optional:            true,
 											},
 											"min_version": schema.StringAttribute{
 												MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -1480,11 +1464,11 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 								Attributes: map[string]schema.Attribute{
 									"client_certificate_optional": schema.BoolAttribute{
 										MarkdownDescription: "Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted.",
-										Optional: true,
+										Optional:            true,
 									},
 									"trusted_ca_url": schema.StringAttribute{
 										MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 								Blocks: map[string]schema.Block{
@@ -1493,16 +1477,16 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 										Attributes: map[string]schema.Attribute{
 											"name": schema.StringAttribute{
 												MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-												Optional: true,
+												Optional:            true,
 											},
 											"namespace": schema.StringAttribute{
 												MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-												Optional: true,
+												Optional:            true,
 											},
 											"tenant": schema.StringAttribute{
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-												Optional: true,
-												Computed: true,
+												Optional:            true,
+												Computed:            true,
 											},
 										},
 									},
@@ -1514,16 +1498,16 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 										Attributes: map[string]schema.Attribute{
 											"name": schema.StringAttribute{
 												MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-												Optional: true,
+												Optional:            true,
 											},
 											"namespace": schema.StringAttribute{
 												MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-												Optional: true,
+												Optional:            true,
 											},
 											"tenant": schema.StringAttribute{
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-												Optional: true,
-												Computed: true,
+												Optional:            true,
+												Computed:            true,
 											},
 										},
 									},
@@ -1535,8 +1519,8 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 										Attributes: map[string]schema.Attribute{
 											"xfcc_header_elements": schema.ListAttribute{
 												MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
-												Optional: true,
-												ElementType: types.StringType,
+												Optional:            true,
+												ElementType:         types.StringType,
 											},
 										},
 									},
@@ -1546,8 +1530,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 					},
 					"advertise_on_slo_sli": schema.SingleNestedBlock{
 						MarkdownDescription: "Inline TLS Parameters. Inline TLS parameters",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"no_mtls": schema.SingleNestedBlock{
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -1558,11 +1541,11 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 									Attributes: map[string]schema.Attribute{
 										"certificate_url": schema.StringAttribute{
 											MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
-											Optional: true,
+											Optional:            true,
 										},
 										"description_spec": schema.StringAttribute{
 											MarkdownDescription: "Description. Description for the certificate",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -1571,8 +1554,8 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 											Attributes: map[string]schema.Attribute{
 												"hash_algorithms": schema.ListAttribute{
 													MarkdownDescription: "Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM`.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 										},
@@ -1581,23 +1564,22 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 										},
 										"private_key": schema.SingleNestedBlock{
 											MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"blindfold_secret_info": schema.SingleNestedBlock{
 													MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 													Attributes: map[string]schema.Attribute{
 														"decryption_provider": schema.StringAttribute{
 															MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-															Optional: true,
+															Optional:            true,
 														},
 														"location": schema.StringAttribute{
 															MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-															Optional: true,
+															Optional:            true,
 														},
 														"store_provider": schema.StringAttribute{
 															MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -1606,11 +1588,11 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 													Attributes: map[string]schema.Attribute{
 														"provider_ref": schema.StringAttribute{
 															MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-															Optional: true,
+															Optional:            true,
 														},
 														"url": schema.StringAttribute{
 															MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -1624,24 +1606,23 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 							},
 							"tls_config": schema.SingleNestedBlock{
 								MarkdownDescription: "TLS Config. This defines various options to configure TLS configuration parameters",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"custom_security": schema.SingleNestedBlock{
 										MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers",
 										Attributes: map[string]schema.Attribute{
 											"cipher_suites": schema.ListAttribute{
 												MarkdownDescription: "Cipher Suites. The TLS listener will only support the specified cipher list.",
-												Optional: true,
-												ElementType: types.StringType,
+												Optional:            true,
+												ElementType:         types.StringType,
 											},
 											"max_version": schema.StringAttribute{
 												MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
-												Optional: true,
+												Optional:            true,
 											},
 											"min_version": schema.StringAttribute{
 												MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -1661,11 +1642,11 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 								Attributes: map[string]schema.Attribute{
 									"client_certificate_optional": schema.BoolAttribute{
 										MarkdownDescription: "Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted.",
-										Optional: true,
+										Optional:            true,
 									},
 									"trusted_ca_url": schema.StringAttribute{
 										MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 								Blocks: map[string]schema.Block{
@@ -1674,16 +1655,16 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 										Attributes: map[string]schema.Attribute{
 											"name": schema.StringAttribute{
 												MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-												Optional: true,
+												Optional:            true,
 											},
 											"namespace": schema.StringAttribute{
 												MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-												Optional: true,
+												Optional:            true,
 											},
 											"tenant": schema.StringAttribute{
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-												Optional: true,
-												Computed: true,
+												Optional:            true,
+												Computed:            true,
 											},
 										},
 									},
@@ -1695,16 +1676,16 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 										Attributes: map[string]schema.Attribute{
 											"name": schema.StringAttribute{
 												MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-												Optional: true,
+												Optional:            true,
 											},
 											"namespace": schema.StringAttribute{
 												MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-												Optional: true,
+												Optional:            true,
 											},
 											"tenant": schema.StringAttribute{
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-												Optional: true,
-												Computed: true,
+												Optional:            true,
+												Computed:            true,
 											},
 										},
 									},
@@ -1716,8 +1697,8 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 										Attributes: map[string]schema.Attribute{
 											"xfcc_header_elements": schema.ListAttribute{
 												MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
-												Optional: true,
-												ElementType: types.StringType,
+												Optional:            true,
+												ElementType:         types.StringType,
 											},
 										},
 									},
@@ -1727,8 +1708,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 					},
 					"advertise_on_slo_vip": schema.SingleNestedBlock{
 						MarkdownDescription: "Inline TLS Parameters. Inline TLS parameters",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"no_mtls": schema.SingleNestedBlock{
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -1739,11 +1719,11 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 									Attributes: map[string]schema.Attribute{
 										"certificate_url": schema.StringAttribute{
 											MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
-											Optional: true,
+											Optional:            true,
 										},
 										"description_spec": schema.StringAttribute{
 											MarkdownDescription: "Description. Description for the certificate",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -1752,8 +1732,8 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 											Attributes: map[string]schema.Attribute{
 												"hash_algorithms": schema.ListAttribute{
 													MarkdownDescription: "Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM`.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 										},
@@ -1762,23 +1742,22 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 										},
 										"private_key": schema.SingleNestedBlock{
 											MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"blindfold_secret_info": schema.SingleNestedBlock{
 													MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 													Attributes: map[string]schema.Attribute{
 														"decryption_provider": schema.StringAttribute{
 															MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-															Optional: true,
+															Optional:            true,
 														},
 														"location": schema.StringAttribute{
 															MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-															Optional: true,
+															Optional:            true,
 														},
 														"store_provider": schema.StringAttribute{
 															MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -1787,11 +1766,11 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 													Attributes: map[string]schema.Attribute{
 														"provider_ref": schema.StringAttribute{
 															MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-															Optional: true,
+															Optional:            true,
 														},
 														"url": schema.StringAttribute{
 															MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -1805,24 +1784,23 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 							},
 							"tls_config": schema.SingleNestedBlock{
 								MarkdownDescription: "TLS Config. This defines various options to configure TLS configuration parameters",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"custom_security": schema.SingleNestedBlock{
 										MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers",
 										Attributes: map[string]schema.Attribute{
 											"cipher_suites": schema.ListAttribute{
 												MarkdownDescription: "Cipher Suites. The TLS listener will only support the specified cipher list.",
-												Optional: true,
-												ElementType: types.StringType,
+												Optional:            true,
+												ElementType:         types.StringType,
 											},
 											"max_version": schema.StringAttribute{
 												MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
-												Optional: true,
+												Optional:            true,
 											},
 											"min_version": schema.StringAttribute{
 												MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -1842,11 +1820,11 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 								Attributes: map[string]schema.Attribute{
 									"client_certificate_optional": schema.BoolAttribute{
 										MarkdownDescription: "Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted.",
-										Optional: true,
+										Optional:            true,
 									},
 									"trusted_ca_url": schema.StringAttribute{
 										MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 								Blocks: map[string]schema.Block{
@@ -1855,16 +1833,16 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 										Attributes: map[string]schema.Attribute{
 											"name": schema.StringAttribute{
 												MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-												Optional: true,
+												Optional:            true,
 											},
 											"namespace": schema.StringAttribute{
 												MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-												Optional: true,
+												Optional:            true,
 											},
 											"tenant": schema.StringAttribute{
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-												Optional: true,
-												Computed: true,
+												Optional:            true,
+												Computed:            true,
 											},
 										},
 									},
@@ -1876,16 +1854,16 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 										Attributes: map[string]schema.Attribute{
 											"name": schema.StringAttribute{
 												MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-												Optional: true,
+												Optional:            true,
 											},
 											"namespace": schema.StringAttribute{
 												MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-												Optional: true,
+												Optional:            true,
 											},
 											"tenant": schema.StringAttribute{
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-												Optional: true,
-												Computed: true,
+												Optional:            true,
+												Computed:            true,
 											},
 										},
 									},
@@ -1897,8 +1875,8 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 										Attributes: map[string]schema.Attribute{
 											"xfcc_header_elements": schema.ListAttribute{
 												MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
-												Optional: true,
-												ElementType: types.StringType,
+												Optional:            true,
+												ElementType:         types.StringType,
 											},
 										},
 									},
@@ -1910,7 +1888,6 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 		},
 	}
@@ -2132,7 +2109,6 @@ func (r *APMResource) Create(ctx context.Context, req resource.CreateRequest, re
 		createReq.Spec["https_management"] = https_managementMap
 	}
 
-
 	apiResource, err := r.client.CreateAPM(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create APM: %s", err))
@@ -2144,7 +2120,7 @@ func (r *APMResource) Create(ctx context.Context, req resource.CreateRequest, re
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if _, ok := apiResource.Spec["aws_site_type_choice"].(map[string]interface{}); ok && isImport && data.AWSSiteTypeChoice == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.AWSSiteTypeChoice = &APMAWSSiteTypeChoiceModel{}
@@ -2164,8 +2140,7 @@ func (r *APMResource) Create(ctx context.Context, req resource.CreateRequest, re
 				}
 				// Import case: read from API
 				if _, ok := blockData["advertise_on_internet"].(map[string]interface{}); ok {
-					return &APMHTTPSManagementAdvertiseOnInternetModel{
-					}
+					return &APMHTTPSManagementAdvertiseOnInternetModel{}
 				}
 				return nil
 			}(),
@@ -2188,8 +2163,7 @@ func (r *APMResource) Create(ctx context.Context, req resource.CreateRequest, re
 				}
 				// Import case: read from API
 				if _, ok := blockData["advertise_on_sli_vip"].(map[string]interface{}); ok {
-					return &APMHTTPSManagementAdvertiseOnSLIVipModel{
-					}
+					return &APMHTTPSManagementAdvertiseOnSLIVipModel{}
 				}
 				return nil
 			}(),
@@ -2200,8 +2174,7 @@ func (r *APMResource) Create(ctx context.Context, req resource.CreateRequest, re
 				}
 				// Import case: read from API
 				if _, ok := blockData["advertise_on_slo_internet_vip"].(map[string]interface{}); ok {
-					return &APMHTTPSManagementAdvertiseOnSLOInternetVipModel{
-					}
+					return &APMHTTPSManagementAdvertiseOnSLOInternetVipModel{}
 				}
 				return nil
 			}(),
@@ -2212,8 +2185,7 @@ func (r *APMResource) Create(ctx context.Context, req resource.CreateRequest, re
 				}
 				// Import case: read from API
 				if _, ok := blockData["advertise_on_slo_sli"].(map[string]interface{}); ok {
-					return &APMHTTPSManagementAdvertiseOnSLOSLIModel{
-					}
+					return &APMHTTPSManagementAdvertiseOnSLOSLIModel{}
 				}
 				return nil
 			}(),
@@ -2224,8 +2196,7 @@ func (r *APMResource) Create(ctx context.Context, req resource.CreateRequest, re
 				}
 				// Import case: read from API
 				if _, ok := blockData["advertise_on_slo_vip"].(map[string]interface{}); ok {
-					return &APMHTTPSManagementAdvertiseOnSLOVipModel{
-					}
+					return &APMHTTPSManagementAdvertiseOnSLOVipModel{}
 				}
 				return nil
 			}(),
@@ -2255,7 +2226,6 @@ func (r *APMResource) Create(ctx context.Context, req resource.CreateRequest, re
 			}(),
 		}
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -2345,9 +2315,9 @@ func (r *APMResource) Read(ctx context.Context, req resource.ReadRequest, resp *
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if _, ok := apiResource.Spec["aws_site_type_choice"].(map[string]interface{}); ok && isImport && data.AWSSiteTypeChoice == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -2368,8 +2338,7 @@ func (r *APMResource) Read(ctx context.Context, req resource.ReadRequest, resp *
 				}
 				// Import case: read from API
 				if _, ok := blockData["advertise_on_internet"].(map[string]interface{}); ok {
-					return &APMHTTPSManagementAdvertiseOnInternetModel{
-					}
+					return &APMHTTPSManagementAdvertiseOnInternetModel{}
 				}
 				return nil
 			}(),
@@ -2392,8 +2361,7 @@ func (r *APMResource) Read(ctx context.Context, req resource.ReadRequest, resp *
 				}
 				// Import case: read from API
 				if _, ok := blockData["advertise_on_sli_vip"].(map[string]interface{}); ok {
-					return &APMHTTPSManagementAdvertiseOnSLIVipModel{
-					}
+					return &APMHTTPSManagementAdvertiseOnSLIVipModel{}
 				}
 				return nil
 			}(),
@@ -2404,8 +2372,7 @@ func (r *APMResource) Read(ctx context.Context, req resource.ReadRequest, resp *
 				}
 				// Import case: read from API
 				if _, ok := blockData["advertise_on_slo_internet_vip"].(map[string]interface{}); ok {
-					return &APMHTTPSManagementAdvertiseOnSLOInternetVipModel{
-					}
+					return &APMHTTPSManagementAdvertiseOnSLOInternetVipModel{}
 				}
 				return nil
 			}(),
@@ -2416,8 +2383,7 @@ func (r *APMResource) Read(ctx context.Context, req resource.ReadRequest, resp *
 				}
 				// Import case: read from API
 				if _, ok := blockData["advertise_on_slo_sli"].(map[string]interface{}); ok {
-					return &APMHTTPSManagementAdvertiseOnSLOSLIModel{
-					}
+					return &APMHTTPSManagementAdvertiseOnSLOSLIModel{}
 				}
 				return nil
 			}(),
@@ -2428,8 +2394,7 @@ func (r *APMResource) Read(ctx context.Context, req resource.ReadRequest, resp *
 				}
 				// Import case: read from API
 				if _, ok := blockData["advertise_on_slo_vip"].(map[string]interface{}); ok {
-					return &APMHTTPSManagementAdvertiseOnSLOVipModel{
-					}
+					return &APMHTTPSManagementAdvertiseOnSLOVipModel{}
 				}
 				return nil
 			}(),
@@ -2459,7 +2424,6 @@ func (r *APMResource) Read(ctx context.Context, req resource.ReadRequest, resp *
 			}(),
 		}
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -2591,7 +2555,6 @@ func (r *APMResource) Update(ctx context.Context, req resource.UpdateRequest, re
 		}
 		apiResource.Spec["https_management"] = https_managementMap
 	}
-
 
 	updated, err := r.client.UpdateAPM(ctx, apiResource)
 	if err != nil {

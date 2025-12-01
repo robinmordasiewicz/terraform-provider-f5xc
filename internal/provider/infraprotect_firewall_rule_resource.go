@@ -51,78 +51,78 @@ type InfraprotectFirewallRuleEmptyModel struct {
 
 // InfraprotectFirewallRuleProtocolIcmpModel represents protocol_icmp block
 type InfraprotectFirewallRuleProtocolIcmpModel struct {
-	EchoReply types.Bool `tfsdk:"echo_reply"`
-	EchoRequest types.Bool `tfsdk:"echo_request"`
+	EchoReply        types.Bool `tfsdk:"echo_reply"`
+	EchoRequest      types.Bool `tfsdk:"echo_request"`
 	ParameterProblem types.Bool `tfsdk:"parameter_problem"`
-	Redirect types.Bool `tfsdk:"redirect"`
-	SourceQuench types.Bool `tfsdk:"source_quench"`
-	TimeExceeded types.Bool `tfsdk:"time_exceeded"`
-	Unreachable types.Bool `tfsdk:"unreachable"`
+	Redirect         types.Bool `tfsdk:"redirect"`
+	SourceQuench     types.Bool `tfsdk:"source_quench"`
+	TimeExceeded     types.Bool `tfsdk:"time_exceeded"`
+	Unreachable      types.Bool `tfsdk:"unreachable"`
 }
 
 // InfraprotectFirewallRuleProtocolIcmp6Model represents protocol_icmp6 block
 type InfraprotectFirewallRuleProtocolIcmp6Model struct {
 	DestinationUnreachable types.Bool `tfsdk:"destination_unreachable"`
-	EchoReply types.Bool `tfsdk:"echo_reply"`
-	EchoRequest types.Bool `tfsdk:"echo_request"`
-	NeighborAdvertisement types.Bool `tfsdk:"neighbor_advertisement"`
-	NeighborSolicit types.Bool `tfsdk:"neighbor_solicit"`
-	PacketTooBig types.Bool `tfsdk:"packet_too_big"`
-	ParameterProblem types.Bool `tfsdk:"parameter_problem"`
-	Redirect types.Bool `tfsdk:"redirect"`
-	RouterAdvertisement types.Bool `tfsdk:"router_advertisement"`
-	RouterSolicit types.Bool `tfsdk:"router_solicit"`
-	TimeExceeded types.Bool `tfsdk:"time_exceeded"`
+	EchoReply              types.Bool `tfsdk:"echo_reply"`
+	EchoRequest            types.Bool `tfsdk:"echo_request"`
+	NeighborAdvertisement  types.Bool `tfsdk:"neighbor_advertisement"`
+	NeighborSolicit        types.Bool `tfsdk:"neighbor_solicit"`
+	PacketTooBig           types.Bool `tfsdk:"packet_too_big"`
+	ParameterProblem       types.Bool `tfsdk:"parameter_problem"`
+	Redirect               types.Bool `tfsdk:"redirect"`
+	RouterAdvertisement    types.Bool `tfsdk:"router_advertisement"`
+	RouterSolicit          types.Bool `tfsdk:"router_solicit"`
+	TimeExceeded           types.Bool `tfsdk:"time_exceeded"`
 }
 
 // InfraprotectFirewallRuleProtocolTCPModel represents protocol_tcp block
 type InfraprotectFirewallRuleProtocolTCPModel struct {
-	DescriptionSpec types.String `tfsdk:"description_spec"`
-	DestinationPortRange types.String `tfsdk:"destination_port_range"`
-	SourcePortRange types.String `tfsdk:"source_port_range"`
-	DestinationPortAll *InfraprotectFirewallRuleEmptyModel `tfsdk:"destination_port_all"`
-	SourcePortAll *InfraprotectFirewallRuleEmptyModel `tfsdk:"source_port_all"`
+	DescriptionSpec      types.String                        `tfsdk:"description_spec"`
+	DestinationPortRange types.String                        `tfsdk:"destination_port_range"`
+	SourcePortRange      types.String                        `tfsdk:"source_port_range"`
+	DestinationPortAll   *InfraprotectFirewallRuleEmptyModel `tfsdk:"destination_port_all"`
+	SourcePortAll        *InfraprotectFirewallRuleEmptyModel `tfsdk:"source_port_all"`
 }
 
 // InfraprotectFirewallRuleProtocolUDPModel represents protocol_udp block
 type InfraprotectFirewallRuleProtocolUDPModel struct {
-	DescriptionSpec types.String `tfsdk:"description_spec"`
-	DestinationPortRange types.String `tfsdk:"destination_port_range"`
-	SourcePortRange types.String `tfsdk:"source_port_range"`
-	DestinationPortAll *InfraprotectFirewallRuleEmptyModel `tfsdk:"destination_port_all"`
-	SourcePortAll *InfraprotectFirewallRuleEmptyModel `tfsdk:"source_port_all"`
+	DescriptionSpec      types.String                        `tfsdk:"description_spec"`
+	DestinationPortRange types.String                        `tfsdk:"destination_port_range"`
+	SourcePortRange      types.String                        `tfsdk:"source_port_range"`
+	DestinationPortAll   *InfraprotectFirewallRuleEmptyModel `tfsdk:"destination_port_all"`
+	SourcePortAll        *InfraprotectFirewallRuleEmptyModel `tfsdk:"source_port_all"`
 }
 
 type InfraprotectFirewallRuleResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	DestinationPrefixSingle types.String `tfsdk:"destination_prefix_single"`
-	SourcePrefixSingle types.String `tfsdk:"source_prefix_single"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	ActionAllow *InfraprotectFirewallRuleEmptyModel `tfsdk:"action_allow"`
-	ActionDeny *InfraprotectFirewallRuleEmptyModel `tfsdk:"action_deny"`
-	DestinationPrefixAll *InfraprotectFirewallRuleEmptyModel `tfsdk:"destination_prefix_all"`
-	FragmentsAllow *InfraprotectFirewallRuleEmptyModel `tfsdk:"fragments_allow"`
-	FragmentsDeny *InfraprotectFirewallRuleEmptyModel `tfsdk:"fragments_deny"`
-	ProtocolAh *InfraprotectFirewallRuleEmptyModel `tfsdk:"protocol_ah"`
-	ProtocolAll *InfraprotectFirewallRuleEmptyModel `tfsdk:"protocol_all"`
-	ProtocolEsp *InfraprotectFirewallRuleEmptyModel `tfsdk:"protocol_esp"`
-	ProtocolGre *InfraprotectFirewallRuleEmptyModel `tfsdk:"protocol_gre"`
-	ProtocolIcmp *InfraprotectFirewallRuleProtocolIcmpModel `tfsdk:"protocol_icmp"`
-	ProtocolIcmp6 *InfraprotectFirewallRuleProtocolIcmp6Model `tfsdk:"protocol_icmp6"`
-	ProtocolIPV6 *InfraprotectFirewallRuleEmptyModel `tfsdk:"protocol_ipv6"`
-	ProtocolTCP *InfraprotectFirewallRuleProtocolTCPModel `tfsdk:"protocol_tcp"`
-	ProtocolUDP *InfraprotectFirewallRuleProtocolUDPModel `tfsdk:"protocol_udp"`
-	SourcePrefixAll *InfraprotectFirewallRuleEmptyModel `tfsdk:"source_prefix_all"`
-	StateOff *InfraprotectFirewallRuleEmptyModel `tfsdk:"state_off"`
-	StateOn *InfraprotectFirewallRuleEmptyModel `tfsdk:"state_on"`
-	VersionIPV4 *InfraprotectFirewallRuleEmptyModel `tfsdk:"version_ipv4"`
-	VersionIPV6 *InfraprotectFirewallRuleEmptyModel `tfsdk:"version_ipv6"`
+	Name                    types.String                                `tfsdk:"name"`
+	Namespace               types.String                                `tfsdk:"namespace"`
+	Annotations             types.Map                                   `tfsdk:"annotations"`
+	Description             types.String                                `tfsdk:"description"`
+	Disable                 types.Bool                                  `tfsdk:"disable"`
+	Labels                  types.Map                                   `tfsdk:"labels"`
+	ID                      types.String                                `tfsdk:"id"`
+	DestinationPrefixSingle types.String                                `tfsdk:"destination_prefix_single"`
+	SourcePrefixSingle      types.String                                `tfsdk:"source_prefix_single"`
+	Timeouts                timeouts.Value                              `tfsdk:"timeouts"`
+	ActionAllow             *InfraprotectFirewallRuleEmptyModel         `tfsdk:"action_allow"`
+	ActionDeny              *InfraprotectFirewallRuleEmptyModel         `tfsdk:"action_deny"`
+	DestinationPrefixAll    *InfraprotectFirewallRuleEmptyModel         `tfsdk:"destination_prefix_all"`
+	FragmentsAllow          *InfraprotectFirewallRuleEmptyModel         `tfsdk:"fragments_allow"`
+	FragmentsDeny           *InfraprotectFirewallRuleEmptyModel         `tfsdk:"fragments_deny"`
+	ProtocolAh              *InfraprotectFirewallRuleEmptyModel         `tfsdk:"protocol_ah"`
+	ProtocolAll             *InfraprotectFirewallRuleEmptyModel         `tfsdk:"protocol_all"`
+	ProtocolEsp             *InfraprotectFirewallRuleEmptyModel         `tfsdk:"protocol_esp"`
+	ProtocolGre             *InfraprotectFirewallRuleEmptyModel         `tfsdk:"protocol_gre"`
+	ProtocolIcmp            *InfraprotectFirewallRuleProtocolIcmpModel  `tfsdk:"protocol_icmp"`
+	ProtocolIcmp6           *InfraprotectFirewallRuleProtocolIcmp6Model `tfsdk:"protocol_icmp6"`
+	ProtocolIPV6            *InfraprotectFirewallRuleEmptyModel         `tfsdk:"protocol_ipv6"`
+	ProtocolTCP             *InfraprotectFirewallRuleProtocolTCPModel   `tfsdk:"protocol_tcp"`
+	ProtocolUDP             *InfraprotectFirewallRuleProtocolUDPModel   `tfsdk:"protocol_udp"`
+	SourcePrefixAll         *InfraprotectFirewallRuleEmptyModel         `tfsdk:"source_prefix_all"`
+	StateOff                *InfraprotectFirewallRuleEmptyModel         `tfsdk:"state_off"`
+	StateOn                 *InfraprotectFirewallRuleEmptyModel         `tfsdk:"state_on"`
+	VersionIPV4             *InfraprotectFirewallRuleEmptyModel         `tfsdk:"version_ipv4"`
+	VersionIPV6             *InfraprotectFirewallRuleEmptyModel         `tfsdk:"version_ipv6"`
 }
 
 func (r *InfraprotectFirewallRuleResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -136,7 +136,7 @@ func (r *InfraprotectFirewallRuleResource) Schema(ctx context.Context, req resou
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the InfraprotectFirewallRule. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -146,7 +146,7 @@ func (r *InfraprotectFirewallRuleResource) Schema(ctx context.Context, req resou
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the InfraprotectFirewallRule will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -156,41 +156,41 @@ func (r *InfraprotectFirewallRuleResource) Schema(ctx context.Context, req resou
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"destination_prefix_single": schema.StringAttribute{
 				MarkdownDescription: "Prefix. Prefix",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"source_prefix_single": schema.StringAttribute{
 				MarkdownDescription: "Prefix. Prefix",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -235,84 +235,82 @@ func (r *InfraprotectFirewallRuleResource) Schema(ctx context.Context, req resou
 				Attributes: map[string]schema.Attribute{
 					"echo_reply": schema.BoolAttribute{
 						MarkdownDescription: "Echo-Reply. Echo-Reply",
-						Optional: true,
+						Optional:            true,
 					},
 					"echo_request": schema.BoolAttribute{
 						MarkdownDescription: "Echo-Request. Echo-Request",
-						Optional: true,
+						Optional:            true,
 					},
 					"parameter_problem": schema.BoolAttribute{
 						MarkdownDescription: "Parameter-Problem. Parameter-Problem",
-						Optional: true,
+						Optional:            true,
 					},
 					"redirect": schema.BoolAttribute{
 						MarkdownDescription: "Redirect. Redirect",
-						Optional: true,
+						Optional:            true,
 					},
 					"source_quench": schema.BoolAttribute{
 						MarkdownDescription: "Source-Quench. Source-Quench",
-						Optional: true,
+						Optional:            true,
 					},
 					"time_exceeded": schema.BoolAttribute{
 						MarkdownDescription: "Time-Exceeded. Time-Exceeded",
-						Optional: true,
+						Optional:            true,
 					},
 					"unreachable": schema.BoolAttribute{
 						MarkdownDescription: "Unreachable. Unreachable",
-						Optional: true,
+						Optional:            true,
 					},
 				},
-
 			},
 			"protocol_icmp6": schema.SingleNestedBlock{
 				MarkdownDescription: "ICMP6 Protocol. x-required ICMP6 Protocol",
 				Attributes: map[string]schema.Attribute{
 					"destination_unreachable": schema.BoolAttribute{
 						MarkdownDescription: "Destination-Unreachable. Destination-Unreachable",
-						Optional: true,
+						Optional:            true,
 					},
 					"echo_reply": schema.BoolAttribute{
 						MarkdownDescription: "Echo-Reply. Echo-Reply",
-						Optional: true,
+						Optional:            true,
 					},
 					"echo_request": schema.BoolAttribute{
 						MarkdownDescription: "Echo-Request. Echo-Request",
-						Optional: true,
+						Optional:            true,
 					},
 					"neighbor_advertisement": schema.BoolAttribute{
 						MarkdownDescription: "Neighbor-Advertisement. Neighbor-Advertisement",
-						Optional: true,
+						Optional:            true,
 					},
 					"neighbor_solicit": schema.BoolAttribute{
 						MarkdownDescription: "Neighbor-Solicit. Neighbor-Solicit",
-						Optional: true,
+						Optional:            true,
 					},
 					"packet_too_big": schema.BoolAttribute{
 						MarkdownDescription: "Packet-Too-Big. Packet-Too-Big",
-						Optional: true,
+						Optional:            true,
 					},
 					"parameter_problem": schema.BoolAttribute{
 						MarkdownDescription: "Parameter-Problem. Parameter-Problem",
-						Optional: true,
+						Optional:            true,
 					},
 					"redirect": schema.BoolAttribute{
 						MarkdownDescription: "Redirect. Redirect",
-						Optional: true,
+						Optional:            true,
 					},
 					"router_advertisement": schema.BoolAttribute{
 						MarkdownDescription: "Router-Advertisement. Router-Advertisement",
-						Optional: true,
+						Optional:            true,
 					},
 					"router_solicit": schema.BoolAttribute{
 						MarkdownDescription: "Router-Solicit. Router-Solicit",
-						Optional: true,
+						Optional:            true,
 					},
 					"time_exceeded": schema.BoolAttribute{
 						MarkdownDescription: "Time-Exceeded. Time-Exceeded",
-						Optional: true,
+						Optional:            true,
 					},
 				},
-
 			},
 			"protocol_ipv6": schema.SingleNestedBlock{
 				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -322,15 +320,15 @@ func (r *InfraprotectFirewallRuleResource) Schema(ctx context.Context, req resou
 				Attributes: map[string]schema.Attribute{
 					"description_spec": schema.StringAttribute{
 						MarkdownDescription: "Description. Description",
-						Optional: true,
+						Optional:            true,
 					},
 					"destination_port_range": schema.StringAttribute{
 						MarkdownDescription: "Port Range. Port Range",
-						Optional: true,
+						Optional:            true,
 					},
 					"source_port_range": schema.StringAttribute{
 						MarkdownDescription: "Port Range. Port Range",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -341,22 +339,21 @@ func (r *InfraprotectFirewallRuleResource) Schema(ctx context.Context, req resou
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 			"protocol_udp": schema.SingleNestedBlock{
 				MarkdownDescription: "UDP Protocol. x-required UDP Protocol",
 				Attributes: map[string]schema.Attribute{
 					"description_spec": schema.StringAttribute{
 						MarkdownDescription: "Description. Description",
-						Optional: true,
+						Optional:            true,
 					},
 					"destination_port_range": schema.StringAttribute{
 						MarkdownDescription: "Port Range. Port Range",
-						Optional: true,
+						Optional:            true,
 					},
 					"source_port_range": schema.StringAttribute{
 						MarkdownDescription: "Port Range. Port Range",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -367,7 +364,6 @@ func (r *InfraprotectFirewallRuleResource) Schema(ctx context.Context, req resou
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 			"source_prefix_all": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: source_prefix_all, source_prefix_single] Empty. This can be used for messages where no values are needed",
@@ -699,7 +695,6 @@ func (r *InfraprotectFirewallRuleResource) Create(ctx context.Context, req resou
 		createReq.Spec["source_prefix_single"] = data.SourcePrefixSingle.ValueString()
 	}
 
-
 	apiResource, err := r.client.CreateInfraprotectFirewallRule(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create InfraprotectFirewallRule: %s", err))
@@ -711,7 +706,7 @@ func (r *InfraprotectFirewallRuleResource) Create(ctx context.Context, req resou
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if _, ok := apiResource.Spec["action_allow"].(map[string]interface{}); ok && isImport && data.ActionAllow == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.ActionAllow = &InfraprotectFirewallRuleEmptyModel{}
@@ -1095,7 +1090,6 @@ func (r *InfraprotectFirewallRuleResource) Create(ctx context.Context, req resou
 	} else {
 		data.SourcePrefixSingle = types.StringNull()
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -1185,9 +1179,9 @@ func (r *InfraprotectFirewallRuleResource) Read(ctx context.Context, req resourc
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if _, ok := apiResource.Spec["action_allow"].(map[string]interface{}); ok && isImport && data.ActionAllow == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -1572,7 +1566,6 @@ func (r *InfraprotectFirewallRuleResource) Read(ctx context.Context, req resourc
 	} else {
 		data.SourcePrefixSingle = types.StringNull()
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -1799,7 +1792,6 @@ func (r *InfraprotectFirewallRuleResource) Update(ctx context.Context, req resou
 	if !data.SourcePrefixSingle.IsNull() && !data.SourcePrefixSingle.IsUnknown() {
 		apiResource.Spec["source_prefix_single"] = data.SourcePrefixSingle.ValueString()
 	}
-
 
 	updated, err := r.client.UpdateInfraprotectFirewallRule(ctx, apiResource)
 	if err != nil {

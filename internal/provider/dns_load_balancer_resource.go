@@ -51,23 +51,23 @@ type DNSLoadBalancerEmptyModel struct {
 
 // DNSLoadBalancerFallbackPoolModel represents fallback_pool block
 type DNSLoadBalancerFallbackPoolModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // DNSLoadBalancerResponseCacheModel represents response_cache block
 type DNSLoadBalancerResponseCacheModel struct {
-	DefaultResponseCacheParameters *DNSLoadBalancerEmptyModel `tfsdk:"default_response_cache_parameters"`
-	Disable *DNSLoadBalancerEmptyModel `tfsdk:"disable"`
-	ResponseCacheParameters *DNSLoadBalancerResponseCacheResponseCacheParametersModel `tfsdk:"response_cache_parameters"`
+	DefaultResponseCacheParameters *DNSLoadBalancerEmptyModel                                `tfsdk:"default_response_cache_parameters"`
+	Disable                        *DNSLoadBalancerEmptyModel                                `tfsdk:"disable"`
+	ResponseCacheParameters        *DNSLoadBalancerResponseCacheResponseCacheParametersModel `tfsdk:"response_cache_parameters"`
 }
 
 // DNSLoadBalancerResponseCacheResponseCacheParametersModel represents response_cache_parameters block
 type DNSLoadBalancerResponseCacheResponseCacheParametersModel struct {
 	CacheCidrIPV4 types.Int64 `tfsdk:"cache_cidr_ipv4"`
 	CacheCidrIPV6 types.Int64 `tfsdk:"cache_cidr_ipv6"`
-	CacheTtl types.Int64 `tfsdk:"cache_ttl"`
+	CacheTtl      types.Int64 `tfsdk:"cache_ttl"`
 }
 
 // DNSLoadBalancerRuleListModel represents rule_list block
@@ -77,14 +77,14 @@ type DNSLoadBalancerRuleListModel struct {
 
 // DNSLoadBalancerRuleListRulesModel represents rules block
 type DNSLoadBalancerRuleListRulesModel struct {
-	Score types.Int64 `tfsdk:"score"`
-	AsnList *DNSLoadBalancerRuleListRulesAsnListModel `tfsdk:"asn_list"`
-	AsnMatcher *DNSLoadBalancerRuleListRulesAsnMatcherModel `tfsdk:"asn_matcher"`
+	Score                    types.Int64                                                `tfsdk:"score"`
+	AsnList                  *DNSLoadBalancerRuleListRulesAsnListModel                  `tfsdk:"asn_list"`
+	AsnMatcher               *DNSLoadBalancerRuleListRulesAsnMatcherModel               `tfsdk:"asn_matcher"`
 	GeoLocationLabelSelector *DNSLoadBalancerRuleListRulesGeoLocationLabelSelectorModel `tfsdk:"geo_location_label_selector"`
-	GeoLocationSet *DNSLoadBalancerRuleListRulesGeoLocationSetModel `tfsdk:"geo_location_set"`
-	IPPrefixList *DNSLoadBalancerRuleListRulesIPPrefixListModel `tfsdk:"ip_prefix_list"`
-	IPPrefixSet *DNSLoadBalancerRuleListRulesIPPrefixSetModel `tfsdk:"ip_prefix_set"`
-	Pool *DNSLoadBalancerRuleListRulesPoolModel `tfsdk:"pool"`
+	GeoLocationSet           *DNSLoadBalancerRuleListRulesGeoLocationSetModel           `tfsdk:"geo_location_set"`
+	IPPrefixList             *DNSLoadBalancerRuleListRulesIPPrefixListModel             `tfsdk:"ip_prefix_list"`
+	IPPrefixSet              *DNSLoadBalancerRuleListRulesIPPrefixSetModel              `tfsdk:"ip_prefix_set"`
+	Pool                     *DNSLoadBalancerRuleListRulesPoolModel                     `tfsdk:"pool"`
 }
 
 // DNSLoadBalancerRuleListRulesAsnListModel represents asn_list block
@@ -99,11 +99,11 @@ type DNSLoadBalancerRuleListRulesAsnMatcherModel struct {
 
 // DNSLoadBalancerRuleListRulesAsnMatcherAsnSetsModel represents asn_sets block
 type DNSLoadBalancerRuleListRulesAsnMatcherAsnSetsModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // DNSLoadBalancerRuleListRulesGeoLocationLabelSelectorModel represents geo_location_label_selector block
@@ -113,52 +113,52 @@ type DNSLoadBalancerRuleListRulesGeoLocationLabelSelectorModel struct {
 
 // DNSLoadBalancerRuleListRulesGeoLocationSetModel represents geo_location_set block
 type DNSLoadBalancerRuleListRulesGeoLocationSetModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // DNSLoadBalancerRuleListRulesIPPrefixListModel represents ip_prefix_list block
 type DNSLoadBalancerRuleListRulesIPPrefixListModel struct {
 	InvertMatch types.Bool `tfsdk:"invert_match"`
-	IPPrefixes types.List `tfsdk:"ip_prefixes"`
+	IPPrefixes  types.List `tfsdk:"ip_prefixes"`
 }
 
 // DNSLoadBalancerRuleListRulesIPPrefixSetModel represents ip_prefix_set block
 type DNSLoadBalancerRuleListRulesIPPrefixSetModel struct {
-	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
-	PrefixSets []DNSLoadBalancerRuleListRulesIPPrefixSetPrefixSetsModel `tfsdk:"prefix_sets"`
+	InvertMatcher types.Bool                                               `tfsdk:"invert_matcher"`
+	PrefixSets    []DNSLoadBalancerRuleListRulesIPPrefixSetPrefixSetsModel `tfsdk:"prefix_sets"`
 }
 
 // DNSLoadBalancerRuleListRulesIPPrefixSetPrefixSetsModel represents prefix_sets block
 type DNSLoadBalancerRuleListRulesIPPrefixSetPrefixSetsModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // DNSLoadBalancerRuleListRulesPoolModel represents pool block
 type DNSLoadBalancerRuleListRulesPoolModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 type DNSLoadBalancerResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	RecordType types.String `tfsdk:"record_type"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	FallbackPool *DNSLoadBalancerFallbackPoolModel `tfsdk:"fallback_pool"`
+	Name          types.String                       `tfsdk:"name"`
+	Namespace     types.String                       `tfsdk:"namespace"`
+	Annotations   types.Map                          `tfsdk:"annotations"`
+	Description   types.String                       `tfsdk:"description"`
+	Disable       types.Bool                         `tfsdk:"disable"`
+	Labels        types.Map                          `tfsdk:"labels"`
+	ID            types.String                       `tfsdk:"id"`
+	RecordType    types.String                       `tfsdk:"record_type"`
+	Timeouts      timeouts.Value                     `tfsdk:"timeouts"`
+	FallbackPool  *DNSLoadBalancerFallbackPoolModel  `tfsdk:"fallback_pool"`
 	ResponseCache *DNSLoadBalancerResponseCacheModel `tfsdk:"response_cache"`
-	RuleList *DNSLoadBalancerRuleListModel `tfsdk:"rule_list"`
+	RuleList      *DNSLoadBalancerRuleListModel      `tfsdk:"rule_list"`
 }
 
 func (r *DNSLoadBalancerResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -172,7 +172,7 @@ func (r *DNSLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the DNSLoadBalancer. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -182,7 +182,7 @@ func (r *DNSLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the DNSLoadBalancer will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -192,33 +192,33 @@ func (r *DNSLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"record_type": schema.StringAttribute{
 				MarkdownDescription: "Resource Record Type. Resource Record Type - A: A - AAAA: AAAA - MX: MX - CNAME: CNAME - SRV: SRV. Possible values are `A`, `AAAA`, `MX`, `CNAME`, `SRV`. Defaults to `A`.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -236,24 +236,22 @@ func (r *DNSLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
 						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-						Optional: true,
+						Optional:            true,
 					},
 					"namespace": schema.StringAttribute{
 						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-						Optional: true,
+						Optional:            true,
 					},
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-						Optional: true,
-						Computed: true,
+						Optional:            true,
+						Computed:            true,
 					},
 				},
-
 			},
 			"response_cache": schema.SingleNestedBlock{
 				MarkdownDescription: "Response Cache. Response Cache x-required",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"default_response_cache_parameters": schema.SingleNestedBlock{
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -266,25 +264,23 @@ func (r *DNSLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						Attributes: map[string]schema.Attribute{
 							"cache_cidr_ipv4": schema.Int64Attribute{
 								MarkdownDescription: "Length of IPv4 CIDR masks. Length of CIDR masks used to group IPv4 clients",
-								Optional: true,
+								Optional:            true,
 							},
 							"cache_cidr_ipv6": schema.Int64Attribute{
 								MarkdownDescription: "Length of IPv6 CIDR masks. Length of CIDR masks used to group IPv6 clients",
-								Optional: true,
+								Optional:            true,
 							},
 							"cache_ttl": schema.Int64Attribute{
 								MarkdownDescription: "TTL. TTL for response cache",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 					},
 				},
-
 			},
 			"rule_list": schema.SingleNestedBlock{
 				MarkdownDescription: "Load Balancing Rule List. List of the Load Balancing Rules",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"rules": schema.ListNestedBlock{
 						MarkdownDescription: "Load Balancing Rules. Rules to perform load balancing",
@@ -292,7 +288,7 @@ func (r *DNSLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 							Attributes: map[string]schema.Attribute{
 								"score": schema.Int64Attribute{
 									MarkdownDescription: "Score. When multiple load balancing rules match a query, the one with the highest score is chosen",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
@@ -301,15 +297,14 @@ func (r *DNSLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									Attributes: map[string]schema.Attribute{
 										"as_numbers": schema.ListAttribute{
 											MarkdownDescription: "AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
-											Optional: true,
-											ElementType: types.Int64Type,
+											Optional:            true,
+											ElementType:         types.Int64Type,
 										},
 									},
 								},
 								"asn_matcher": schema.SingleNestedBlock{
 									MarkdownDescription: "ASN Matcher. Match any AS number contained in the list of bgp_asn_sets.",
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"asn_sets": schema.ListNestedBlock{
 											MarkdownDescription: "BGP ASN Sets. A list of references to bgp_asn_set objects.",
@@ -317,26 +312,26 @@ func (r *DNSLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												Attributes: map[string]schema.Attribute{
 													"kind": schema.StringAttribute{
 														MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-														Optional: true,
-														Computed: true,
+														Optional:            true,
+														Computed:            true,
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-														Optional: true,
+														Optional:            true,
 													},
 													"namespace": schema.StringAttribute{
 														MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-														Optional: true,
+														Optional:            true,
 													},
 													"tenant": schema.StringAttribute{
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-														Optional: true,
-														Computed: true,
+														Optional:            true,
+														Computed:            true,
 													},
 													"uid": schema.StringAttribute{
 														MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-														Optional: true,
-														Computed: true,
+														Optional:            true,
+														Computed:            true,
 													},
 												},
 											},
@@ -348,8 +343,8 @@ func (r *DNSLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									Attributes: map[string]schema.Attribute{
 										"expressions": schema.ListAttribute{
 											MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections.",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 									},
 								},
@@ -358,16 +353,16 @@ func (r *DNSLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-											Optional: true,
+											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
 											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-											Optional: true,
+											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
@@ -376,12 +371,12 @@ func (r *DNSLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									Attributes: map[string]schema.Attribute{
 										"invert_match": schema.BoolAttribute{
 											MarkdownDescription: "Invert Match Result. Invert the match result.",
-											Optional: true,
+											Optional:            true,
 										},
 										"ip_prefixes": schema.ListAttribute{
 											MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefix strings.",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 									},
 								},
@@ -390,7 +385,7 @@ func (r *DNSLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									Attributes: map[string]schema.Attribute{
 										"invert_matcher": schema.BoolAttribute{
 											MarkdownDescription: "Invert IP Matcher. Invert the match result.",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -400,26 +395,26 @@ func (r *DNSLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												Attributes: map[string]schema.Attribute{
 													"kind": schema.StringAttribute{
 														MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-														Optional: true,
-														Computed: true,
+														Optional:            true,
+														Computed:            true,
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-														Optional: true,
+														Optional:            true,
 													},
 													"namespace": schema.StringAttribute{
 														MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-														Optional: true,
+														Optional:            true,
 													},
 													"tenant": schema.StringAttribute{
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-														Optional: true,
-														Computed: true,
+														Optional:            true,
+														Computed:            true,
 													},
 													"uid": schema.StringAttribute{
 														MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-														Optional: true,
-														Computed: true,
+														Optional:            true,
+														Computed:            true,
 													},
 												},
 											},
@@ -431,16 +426,16 @@ func (r *DNSLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-											Optional: true,
+											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
 											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-											Optional: true,
+											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
@@ -448,7 +443,6 @@ func (r *DNSLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						},
 					},
 				},
-
 			},
 		},
 	}
@@ -705,7 +699,6 @@ func (r *DNSLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 		createReq.Spec["record_type"] = data.RecordType.ValueString()
 	}
 
-
 	apiResource, err := r.client.CreateDNSLoadBalancer(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create DNSLoadBalancer: %s", err))
@@ -717,7 +710,7 @@ func (r *DNSLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if blockData, ok := apiResource.Spec["fallback_pool"].(map[string]interface{}); ok && (isImport || data.FallbackPool != nil) {
 		data.FallbackPool = &DNSLoadBalancerFallbackPoolModel{
 			Name: func() types.String {
@@ -755,22 +748,19 @@ func (r *DNSLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 							result = append(result, DNSLoadBalancerRuleListRulesModel{
 								AsnList: func() *DNSLoadBalancerRuleListRulesAsnListModel {
 									if _, ok := itemMap["asn_list"].(map[string]interface{}); ok {
-										return &DNSLoadBalancerRuleListRulesAsnListModel{
-										}
+										return &DNSLoadBalancerRuleListRulesAsnListModel{}
 									}
 									return nil
 								}(),
 								AsnMatcher: func() *DNSLoadBalancerRuleListRulesAsnMatcherModel {
 									if _, ok := itemMap["asn_matcher"].(map[string]interface{}); ok {
-										return &DNSLoadBalancerRuleListRulesAsnMatcherModel{
-										}
+										return &DNSLoadBalancerRuleListRulesAsnMatcherModel{}
 									}
 									return nil
 								}(),
 								GeoLocationLabelSelector: func() *DNSLoadBalancerRuleListRulesGeoLocationLabelSelectorModel {
 									if _, ok := itemMap["geo_location_label_selector"].(map[string]interface{}); ok {
-										return &DNSLoadBalancerRuleListRulesGeoLocationLabelSelectorModel{
-										}
+										return &DNSLoadBalancerRuleListRulesGeoLocationLabelSelectorModel{}
 									}
 									return nil
 								}(),
@@ -870,7 +860,6 @@ func (r *DNSLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 	} else {
 		data.RecordType = types.StringNull()
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -960,9 +949,9 @@ func (r *DNSLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if blockData, ok := apiResource.Spec["fallback_pool"].(map[string]interface{}); ok && (isImport || data.FallbackPool != nil) {
 		data.FallbackPool = &DNSLoadBalancerFallbackPoolModel{
@@ -1001,22 +990,19 @@ func (r *DNSLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 							result = append(result, DNSLoadBalancerRuleListRulesModel{
 								AsnList: func() *DNSLoadBalancerRuleListRulesAsnListModel {
 									if _, ok := itemMap["asn_list"].(map[string]interface{}); ok {
-										return &DNSLoadBalancerRuleListRulesAsnListModel{
-										}
+										return &DNSLoadBalancerRuleListRulesAsnListModel{}
 									}
 									return nil
 								}(),
 								AsnMatcher: func() *DNSLoadBalancerRuleListRulesAsnMatcherModel {
 									if _, ok := itemMap["asn_matcher"].(map[string]interface{}); ok {
-										return &DNSLoadBalancerRuleListRulesAsnMatcherModel{
-										}
+										return &DNSLoadBalancerRuleListRulesAsnMatcherModel{}
 									}
 									return nil
 								}(),
 								GeoLocationLabelSelector: func() *DNSLoadBalancerRuleListRulesGeoLocationLabelSelectorModel {
 									if _, ok := itemMap["geo_location_label_selector"].(map[string]interface{}); ok {
-										return &DNSLoadBalancerRuleListRulesGeoLocationLabelSelectorModel{
-										}
+										return &DNSLoadBalancerRuleListRulesGeoLocationLabelSelectorModel{}
 									}
 									return nil
 								}(),
@@ -1116,7 +1102,6 @@ func (r *DNSLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 	} else {
 		data.RecordType = types.StringNull()
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -1283,7 +1268,6 @@ func (r *DNSLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 	if !data.RecordType.IsNull() && !data.RecordType.IsUnknown() {
 		apiResource.Spec["record_type"] = data.RecordType.ValueString()
 	}
-
 
 	updated, err := r.client.UpdateDNSLoadBalancer(ctx, apiResource)
 	if err != nil {

@@ -51,17 +51,17 @@ type InfraprotectAsnEmptyModel struct {
 }
 
 type InfraprotectAsnResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Asn types.Int64 `tfsdk:"asn"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Name               types.String               `tfsdk:"name"`
+	Namespace          types.String               `tfsdk:"namespace"`
+	Annotations        types.Map                  `tfsdk:"annotations"`
+	Description        types.String               `tfsdk:"description"`
+	Disable            types.Bool                 `tfsdk:"disable"`
+	Labels             types.Map                  `tfsdk:"labels"`
+	ID                 types.String               `tfsdk:"id"`
+	Asn                types.Int64                `tfsdk:"asn"`
+	Timeouts           timeouts.Value             `tfsdk:"timeouts"`
 	BGPSessionDisabled *InfraprotectAsnEmptyModel `tfsdk:"bgp_session_disabled"`
-	BGPSessionEnabled *InfraprotectAsnEmptyModel `tfsdk:"bgp_session_enabled"`
+	BGPSessionEnabled  *InfraprotectAsnEmptyModel `tfsdk:"bgp_session_enabled"`
 }
 
 func (r *InfraprotectAsnResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -75,7 +75,7 @@ func (r *InfraprotectAsnResource) Schema(ctx context.Context, req resource.Schem
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the InfraprotectAsn. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -85,7 +85,7 @@ func (r *InfraprotectAsnResource) Schema(ctx context.Context, req resource.Schem
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the InfraprotectAsn will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -95,33 +95,33 @@ func (r *InfraprotectAsnResource) Schema(ctx context.Context, req resource.Schem
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"asn": schema.Int64Attribute{
 				MarkdownDescription: "ASN. 2-byte or 4-byte Autonomous System Number (ASN)",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{
 					int64planmodifier.UseStateForUnknown(),
 				},
@@ -300,7 +300,6 @@ func (r *InfraprotectAsnResource) Create(ctx context.Context, req resource.Creat
 		createReq.Spec["asn"] = data.Asn.ValueInt64()
 	}
 
-
 	apiResource, err := r.client.CreateInfraprotectAsn(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create InfraprotectAsn: %s", err))
@@ -312,7 +311,7 @@ func (r *InfraprotectAsnResource) Create(ctx context.Context, req resource.Creat
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if _, ok := apiResource.Spec["bgp_session_disabled"].(map[string]interface{}); ok && isImport && data.BGPSessionDisabled == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.BGPSessionDisabled = &InfraprotectAsnEmptyModel{}
@@ -328,7 +327,6 @@ func (r *InfraprotectAsnResource) Create(ctx context.Context, req resource.Creat
 	} else {
 		data.Asn = types.Int64Null()
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -418,9 +416,9 @@ func (r *InfraprotectAsnResource) Read(ctx context.Context, req resource.ReadReq
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if _, ok := apiResource.Spec["bgp_session_disabled"].(map[string]interface{}); ok && isImport && data.BGPSessionDisabled == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -437,7 +435,6 @@ func (r *InfraprotectAsnResource) Read(ctx context.Context, req resource.ReadReq
 	} else {
 		data.Asn = types.Int64Null()
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -509,7 +506,6 @@ func (r *InfraprotectAsnResource) Update(ctx context.Context, req resource.Updat
 	if !data.Asn.IsNull() && !data.Asn.IsUnknown() {
 		apiResource.Spec["asn"] = data.Asn.ValueInt64()
 	}
-
 
 	updated, err := r.client.UpdateInfraprotectAsn(ctx, apiResource)
 	if err != nil {

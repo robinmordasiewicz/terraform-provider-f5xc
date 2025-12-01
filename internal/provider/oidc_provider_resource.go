@@ -51,77 +51,77 @@ type OidcProviderEmptyModel struct {
 
 // OidcProviderAzureOidcSpecTypeModel represents azure_oidc_spec_type block
 type OidcProviderAzureOidcSpecTypeModel struct {
-	AuthorizationURL types.String `tfsdk:"authorization_url"`
-	BackchannelLogout types.Bool `tfsdk:"backchannel_logout"`
-	ClientID types.String `tfsdk:"client_id"`
-	ClientSecret types.String `tfsdk:"client_secret"`
-	DefaultScopes types.String `tfsdk:"default_scopes"`
-	Issuer types.String `tfsdk:"issuer"`
-	JwksURL types.String `tfsdk:"jwks_url"`
-	LogoutURL types.String `tfsdk:"logout_url"`
-	Prompt types.String `tfsdk:"prompt"`
-	TokenURL types.String `tfsdk:"token_url"`
-	UserInfoURL types.String `tfsdk:"user_info_url"`
+	AuthorizationURL  types.String `tfsdk:"authorization_url"`
+	BackchannelLogout types.Bool   `tfsdk:"backchannel_logout"`
+	ClientID          types.String `tfsdk:"client_id"`
+	ClientSecret      types.String `tfsdk:"client_secret"`
+	DefaultScopes     types.String `tfsdk:"default_scopes"`
+	Issuer            types.String `tfsdk:"issuer"`
+	JwksURL           types.String `tfsdk:"jwks_url"`
+	LogoutURL         types.String `tfsdk:"logout_url"`
+	Prompt            types.String `tfsdk:"prompt"`
+	TokenURL          types.String `tfsdk:"token_url"`
+	UserInfoURL       types.String `tfsdk:"user_info_url"`
 }
 
 // OidcProviderGoogleOidcSpecTypeModel represents google_oidc_spec_type block
 type OidcProviderGoogleOidcSpecTypeModel struct {
-	ClientID types.String `tfsdk:"client_id"`
+	ClientID     types.String `tfsdk:"client_id"`
 	ClientSecret types.String `tfsdk:"client_secret"`
 	HostedDomain types.String `tfsdk:"hosted_domain"`
 }
 
 // OidcProviderOidcV10SpecTypeModel represents oidc_v10_spec_type block
 type OidcProviderOidcV10SpecTypeModel struct {
-	AllowedClockSkew types.String `tfsdk:"allowed_clock_skew"`
-	AuthorizationURL types.String `tfsdk:"authorization_url"`
-	BackchannelLogout types.Bool `tfsdk:"backchannel_logout"`
-	ClientID types.String `tfsdk:"client_id"`
-	ClientSecret types.String `tfsdk:"client_secret"`
-	DefaultScopes types.String `tfsdk:"default_scopes"`
-	DisableUserInfo types.Bool `tfsdk:"disable_user_info"`
-	DisplayName types.String `tfsdk:"display_name"`
+	AllowedClockSkew         types.String `tfsdk:"allowed_clock_skew"`
+	AuthorizationURL         types.String `tfsdk:"authorization_url"`
+	BackchannelLogout        types.Bool   `tfsdk:"backchannel_logout"`
+	ClientID                 types.String `tfsdk:"client_id"`
+	ClientSecret             types.String `tfsdk:"client_secret"`
+	DefaultScopes            types.String `tfsdk:"default_scopes"`
+	DisableUserInfo          types.Bool   `tfsdk:"disable_user_info"`
+	DisplayName              types.String `tfsdk:"display_name"`
 	ForwardedQueryParameters types.String `tfsdk:"forwarded_query_parameters"`
-	Issuer types.String `tfsdk:"issuer"`
-	JwksURL types.String `tfsdk:"jwks_url"`
-	LogoutURL types.String `tfsdk:"logout_url"`
-	PassCurrentLocale types.Bool `tfsdk:"pass_current_locale"`
-	PassLoginHint types.Bool `tfsdk:"pass_login_hint"`
-	Prompt types.String `tfsdk:"prompt"`
-	TokenURL types.String `tfsdk:"token_url"`
-	UserInfoURL types.String `tfsdk:"user_info_url"`
-	ValidateSignatures types.Bool `tfsdk:"validate_signatures"`
+	Issuer                   types.String `tfsdk:"issuer"`
+	JwksURL                  types.String `tfsdk:"jwks_url"`
+	LogoutURL                types.String `tfsdk:"logout_url"`
+	PassCurrentLocale        types.Bool   `tfsdk:"pass_current_locale"`
+	PassLoginHint            types.Bool   `tfsdk:"pass_login_hint"`
+	Prompt                   types.String `tfsdk:"prompt"`
+	TokenURL                 types.String `tfsdk:"token_url"`
+	UserInfoURL              types.String `tfsdk:"user_info_url"`
+	ValidateSignatures       types.Bool   `tfsdk:"validate_signatures"`
 }
 
 // OidcProviderOktaOidcSpecTypeModel represents okta_oidc_spec_type block
 type OidcProviderOktaOidcSpecTypeModel struct {
-	AuthorizationURL types.String `tfsdk:"authorization_url"`
-	BackchannelLogout types.Bool `tfsdk:"backchannel_logout"`
-	ClientID types.String `tfsdk:"client_id"`
-	ClientSecret types.String `tfsdk:"client_secret"`
-	DefaultScopes types.String `tfsdk:"default_scopes"`
-	Issuer types.String `tfsdk:"issuer"`
-	JwksURL types.String `tfsdk:"jwks_url"`
-	LogoutURL types.String `tfsdk:"logout_url"`
-	Prompt types.String `tfsdk:"prompt"`
-	TokenURL types.String `tfsdk:"token_url"`
-	UserInfoURL types.String `tfsdk:"user_info_url"`
+	AuthorizationURL  types.String `tfsdk:"authorization_url"`
+	BackchannelLogout types.Bool   `tfsdk:"backchannel_logout"`
+	ClientID          types.String `tfsdk:"client_id"`
+	ClientSecret      types.String `tfsdk:"client_secret"`
+	DefaultScopes     types.String `tfsdk:"default_scopes"`
+	Issuer            types.String `tfsdk:"issuer"`
+	JwksURL           types.String `tfsdk:"jwks_url"`
+	LogoutURL         types.String `tfsdk:"logout_url"`
+	Prompt            types.String `tfsdk:"prompt"`
+	TokenURL          types.String `tfsdk:"token_url"`
+	UserInfoURL       types.String `tfsdk:"user_info_url"`
 }
 
 type OidcProviderResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	ProviderType types.String `tfsdk:"provider_type"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	AzureOidcSpecType *OidcProviderAzureOidcSpecTypeModel `tfsdk:"azure_oidc_spec_type"`
+	Name               types.String                         `tfsdk:"name"`
+	Namespace          types.String                         `tfsdk:"namespace"`
+	Annotations        types.Map                            `tfsdk:"annotations"`
+	Description        types.String                         `tfsdk:"description"`
+	Disable            types.Bool                           `tfsdk:"disable"`
+	Labels             types.Map                            `tfsdk:"labels"`
+	ID                 types.String                         `tfsdk:"id"`
+	ProviderType       types.String                         `tfsdk:"provider_type"`
+	Timeouts           timeouts.Value                       `tfsdk:"timeouts"`
+	AzureOidcSpecType  *OidcProviderAzureOidcSpecTypeModel  `tfsdk:"azure_oidc_spec_type"`
 	GoogleOidcSpecType *OidcProviderGoogleOidcSpecTypeModel `tfsdk:"google_oidc_spec_type"`
-	OidcV10SpecType *OidcProviderOidcV10SpecTypeModel `tfsdk:"oidc_v10_spec_type"`
-	OktaOidcSpecType *OidcProviderOktaOidcSpecTypeModel `tfsdk:"okta_oidc_spec_type"`
+	OidcV10SpecType    *OidcProviderOidcV10SpecTypeModel    `tfsdk:"oidc_v10_spec_type"`
+	OktaOidcSpecType   *OidcProviderOktaOidcSpecTypeModel   `tfsdk:"okta_oidc_spec_type"`
 }
 
 func (r *OidcProviderResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -135,7 +135,7 @@ func (r *OidcProviderResource) Schema(ctx context.Context, req resource.SchemaRe
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the OidcProvider. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -145,7 +145,7 @@ func (r *OidcProviderResource) Schema(ctx context.Context, req resource.SchemaRe
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the OidcProvider will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -155,33 +155,33 @@ func (r *OidcProviderResource) Schema(ctx context.Context, req resource.SchemaRe
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"provider_type": schema.StringAttribute{
 				MarkdownDescription: "Provider Type. Types of OIDC providers Default provider. use this for standard OpenIDConnect v1.0 Authenticate with Google OIDC Authenticate with Azure OIDC Authenticate with Okta OIDC. Possible values are `DEFAULT`, `GOOGLE`, `AZURE`, `OKTA`. Defaults to `DEFAULT`.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -199,196 +199,192 @@ func (r *OidcProviderResource) Schema(ctx context.Context, req resource.SchemaRe
 				Attributes: map[string]schema.Attribute{
 					"authorization_url": schema.StringAttribute{
 						MarkdownDescription: "Authorization URL. The authorization url of your OIDC application.",
-						Optional: true,
+						Optional:            true,
 					},
 					"backchannel_logout": schema.BoolAttribute{
 						MarkdownDescription: "Backchannel Logout. Does the external IDP support backchannel logout?",
-						Optional: true,
+						Optional:            true,
 					},
 					"client_id": schema.StringAttribute{
 						MarkdownDescription: "Client ID. Client ID of the OIDC application registered with azure provider. REQUIRED field",
-						Optional: true,
+						Optional:            true,
 					},
 					"client_secret": schema.StringAttribute{
 						MarkdownDescription: "Client Secret. Secret of the OIDC application registered with azure provider.",
-						Optional: true,
+						Optional:            true,
 					},
 					"default_scopes": schema.StringAttribute{
 						MarkdownDescription: "Default Scopes. The scopes to be sent when asking for authorization. It can be a space-separated list of scopes. The recommendation is to set the default scopes as 'openid profile email' and is to add additional scopes if needed.",
-						Optional: true,
+						Optional:            true,
 					},
 					"issuer": schema.StringAttribute{
 						MarkdownDescription: "Issuer. The issuer identifier for the issuer of the response. If not provided, no validation will be performed",
-						Optional: true,
+						Optional:            true,
 					},
 					"jwks_url": schema.StringAttribute{
 						MarkdownDescription: "JWKS URL. URL where identity provider keys in JWK format are stored.",
-						Optional: true,
+						Optional:            true,
 					},
 					"logout_url": schema.StringAttribute{
 						MarkdownDescription: "Logout URL. Logout URL specified in your OIDC application.",
-						Optional: true,
+						Optional:            true,
 					},
 					"prompt": schema.StringAttribute{
 						MarkdownDescription: "Prompt Type. Type of prompt authorization server for end-user reauthentication and consent default value for no prompt. when this is set, no prompt parameter will be set on authorization request. The Authorization Server will not display any authentication or consent user interface page. The Authorization Server prompts the End-User for consent before returning information to the Client The Authorization Server prompts the End-User for reauthentication. The Authorization Server prompts the End-User to select a user account. This enables an End-User who has multiple accounts at the Authorization Server to select amongst the multiple accounts that they might have current sessions for. Possible values are `UNSPECIFIED`, `NONE`, `CONSENT`, `LOGIN`, `SELECT_ACCOUNT`.",
-						Optional: true,
+						Optional:            true,
 					},
 					"token_url": schema.StringAttribute{
 						MarkdownDescription: "Token URL. The token URL of your OIDC application.",
-						Optional: true,
+						Optional:            true,
 					},
 					"user_info_url": schema.StringAttribute{
 						MarkdownDescription: "User Info URL. The User Info Url specified in your OIDC application.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
-
 			},
 			"google_oidc_spec_type": schema.SingleNestedBlock{
 				MarkdownDescription: "Google OIDC Spec Type. GoogleOIDCSpecType specifies the attributes required to configure google provider",
 				Attributes: map[string]schema.Attribute{
 					"client_id": schema.StringAttribute{
 						MarkdownDescription: "Client ID. Client ID of the OIDC application registered with google provider. REQUIRED field",
-						Optional: true,
+						Optional:            true,
 					},
 					"client_secret": schema.StringAttribute{
 						MarkdownDescription: "Client Secret. Secret of the OIDC application registered with google provider.",
-						Optional: true,
+						Optional:            true,
 					},
 					"hosted_domain": schema.StringAttribute{
 						MarkdownDescription: "Hosted Domain. set hosted domain to restrict user input on login form to use email address from this email domain. for example, setting value company.com will enforce user email input to have only username@company.com leave empty if no restriction is required for email address. ie for example allow user@company1.com and user@company2.com",
-						Optional: true,
+						Optional:            true,
 					},
 				},
-
 			},
 			"oidc_v10_spec_type": schema.SingleNestedBlock{
 				MarkdownDescription: "OpenID Connect v1.0 Spec Type. OIDCV10SpecType specifies the attributes required to configure OIDC provider",
 				Attributes: map[string]schema.Attribute{
 					"allowed_clock_skew": schema.StringAttribute{
 						MarkdownDescription: "Allowed Clock Skew. Clock skew in seconds that is tolerated when validating identity provider tokens. Defaults to `zero`.",
-						Optional: true,
+						Optional:            true,
 					},
 					"authorization_url": schema.StringAttribute{
 						MarkdownDescription: "Authorization URL. The authorization url of your OIDC application.",
-						Optional: true,
+						Optional:            true,
 					},
 					"backchannel_logout": schema.BoolAttribute{
 						MarkdownDescription: "Backchannel Logout. Does the external IDP support backchannel logout?",
-						Optional: true,
+						Optional:            true,
 					},
 					"client_id": schema.StringAttribute{
 						MarkdownDescription: "Client ID. Client ID of the OIDC application registered with your identity/OIDC provider.",
-						Optional: true,
+						Optional:            true,
 					},
 					"client_secret": schema.StringAttribute{
 						MarkdownDescription: "Client Secret. Secret of the OIDC application registered with your identity/OIDC provider.",
-						Optional: true,
+						Optional:            true,
 					},
 					"default_scopes": schema.StringAttribute{
 						MarkdownDescription: "Default Scopes. The scopes to be sent when asking for authorization. It can be a space-separated list of scopes. The recommendation is to set the default scopes as 'openid profile email' and is to add additional scopes if needed.",
-						Optional: true,
+						Optional:            true,
 					},
 					"disable_user_info": schema.BoolAttribute{
 						MarkdownDescription: "Disable User Info. Disable fetching of user info information.",
-						Optional: true,
+						Optional:            true,
 					},
 					"display_name": schema.StringAttribute{
 						MarkdownDescription: "Display Name. Friendly name for identity provider",
-						Optional: true,
+						Optional:            true,
 					},
 					"forwarded_query_parameters": schema.StringAttribute{
 						MarkdownDescription: "Forwarded Query Parameters. Non OpenID Connect/OAuth standard query parameters to be forwarded to external IDP from the initial application request to Authorization Endpoint. Multiple parameters can be entered, separated by comma (,).",
-						Optional: true,
+						Optional:            true,
 					},
 					"issuer": schema.StringAttribute{
 						MarkdownDescription: "Issuer. The issuer identifier for the issuer of the response. If not provided, no validation will be performed.",
-						Optional: true,
+						Optional:            true,
 					},
 					"jwks_url": schema.StringAttribute{
 						MarkdownDescription: "JWKS URL. URL where identity provider keys in JWK format are stored.",
-						Optional: true,
+						Optional:            true,
 					},
 					"logout_url": schema.StringAttribute{
 						MarkdownDescription: "Logout URL. Logout URL specified in your OIDC application.",
-						Optional: true,
+						Optional:            true,
 					},
 					"pass_current_locale": schema.BoolAttribute{
 						MarkdownDescription: "Pass Current Locale. Pass the current locale to the identity provider.",
-						Optional: true,
+						Optional:            true,
 					},
 					"pass_login_hint": schema.BoolAttribute{
 						MarkdownDescription: "Pass Login Hint. Pass login_hint to identity provider.",
-						Optional: true,
+						Optional:            true,
 					},
 					"prompt": schema.StringAttribute{
 						MarkdownDescription: "Prompt Type. Type of prompt authorization server for end-user reauthentication and consent default value for no prompt. when this is set, no prompt parameter will be set on authorization request. The Authorization Server will not display any authentication or consent user interface page. The Authorization Server prompts the End-User for consent before returning information to the Client The Authorization Server prompts the End-User for reauthentication. The Authorization Server prompts the End-User to select a user account. This enables an End-User who has multiple accounts at the Authorization Server to select amongst the multiple accounts that they might have current sessions for. Possible values are `UNSPECIFIED`, `NONE`, `CONSENT`, `LOGIN`, `SELECT_ACCOUNT`.",
-						Optional: true,
+						Optional:            true,
 					},
 					"token_url": schema.StringAttribute{
 						MarkdownDescription: "Token URL. The token URL of your OIDC application.",
-						Optional: true,
+						Optional:            true,
 					},
 					"user_info_url": schema.StringAttribute{
 						MarkdownDescription: "User Info URL. The User Info Url specified in your OIDC application.",
-						Optional: true,
+						Optional:            true,
 					},
 					"validate_signatures": schema.BoolAttribute{
 						MarkdownDescription: "Validate Signatures. Enable/disable signature validation of external IDP signatures.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
-
 			},
 			"okta_oidc_spec_type": schema.SingleNestedBlock{
 				MarkdownDescription: "Okta OpenID Connect Spec Type. OKTAOIDCSpecType specifies the attributes required to configure okta OIDC provider",
 				Attributes: map[string]schema.Attribute{
 					"authorization_url": schema.StringAttribute{
 						MarkdownDescription: "Authorization URL. The authorization url of your OIDC application.",
-						Optional: true,
+						Optional:            true,
 					},
 					"backchannel_logout": schema.BoolAttribute{
 						MarkdownDescription: "Backchannel Logout. Does the external IDP support backchannel logout?",
-						Optional: true,
+						Optional:            true,
 					},
 					"client_id": schema.StringAttribute{
 						MarkdownDescription: "Client ID. Client ID of the OIDC application registered with azure provider.",
-						Optional: true,
+						Optional:            true,
 					},
 					"client_secret": schema.StringAttribute{
 						MarkdownDescription: "Client Secret. Secret of the OIDC application registered with azure provider.",
-						Optional: true,
+						Optional:            true,
 					},
 					"default_scopes": schema.StringAttribute{
 						MarkdownDescription: "Default Scopes. The scopes to be sent when asking for authorization. It can be a space-separated list of scopes. The recommendation is to set the default scopes as 'openid profile email' and is to add additional scopes if needed.",
-						Optional: true,
+						Optional:            true,
 					},
 					"issuer": schema.StringAttribute{
 						MarkdownDescription: "Issuer. The issuer identifier for the issuer of the response. If not provided, no validation will be performed",
-						Optional: true,
+						Optional:            true,
 					},
 					"jwks_url": schema.StringAttribute{
 						MarkdownDescription: "JWKS URL. URL where identity provider keys in JWK format are stored.",
-						Optional: true,
+						Optional:            true,
 					},
 					"logout_url": schema.StringAttribute{
 						MarkdownDescription: "Logout URL. Logout URL specified in your OIDC application.",
-						Optional: true,
+						Optional:            true,
 					},
 					"prompt": schema.StringAttribute{
 						MarkdownDescription: "Prompt Type. Type of prompt authorization server for end-user reauthentication and consent default value for no prompt. when this is set, no prompt parameter will be set on authorization request. The Authorization Server will not display any authentication or consent user interface page. The Authorization Server prompts the End-User for consent before returning information to the Client The Authorization Server prompts the End-User for reauthentication. The Authorization Server prompts the End-User to select a user account. This enables an End-User who has multiple accounts at the Authorization Server to select amongst the multiple accounts that they might have current sessions for. Possible values are `UNSPECIFIED`, `NONE`, `CONSENT`, `LOGIN`, `SELECT_ACCOUNT`.",
-						Optional: true,
+						Optional:            true,
 					},
 					"token_url": schema.StringAttribute{
 						MarkdownDescription: "Token URL. The token URL of your OIDC application.",
-						Optional: true,
+						Optional:            true,
 					},
 					"user_info_url": schema.StringAttribute{
 						MarkdownDescription: "User Info URL. The User Info Url specified in your OIDC application.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
-
 			},
 		},
 	}
@@ -687,7 +683,6 @@ func (r *OidcProviderResource) Create(ctx context.Context, req resource.CreateRe
 		createReq.Spec["provider_type"] = data.ProviderType.ValueString()
 	}
 
-
 	apiResource, err := r.client.CreateOidcProvider(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create OidcProvider: %s", err))
@@ -699,7 +694,7 @@ func (r *OidcProviderResource) Create(ctx context.Context, req resource.CreateRe
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if blockData, ok := apiResource.Spec["azure_oidc_spec_type"].(map[string]interface{}); ok && (isImport || data.AzureOidcSpecType != nil) {
 		data.AzureOidcSpecType = &OidcProviderAzureOidcSpecTypeModel{
 			AuthorizationURL: func() types.String {
@@ -1014,7 +1009,6 @@ func (r *OidcProviderResource) Create(ctx context.Context, req resource.CreateRe
 	} else {
 		data.ProviderType = types.StringNull()
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -1104,9 +1098,9 @@ func (r *OidcProviderResource) Read(ctx context.Context, req resource.ReadReques
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if blockData, ok := apiResource.Spec["azure_oidc_spec_type"].(map[string]interface{}); ok && (isImport || data.AzureOidcSpecType != nil) {
 		data.AzureOidcSpecType = &OidcProviderAzureOidcSpecTypeModel{
@@ -1422,7 +1416,6 @@ func (r *OidcProviderResource) Read(ctx context.Context, req resource.ReadReques
 	} else {
 		data.ProviderType = types.StringNull()
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -1631,7 +1624,6 @@ func (r *OidcProviderResource) Update(ctx context.Context, req resource.UpdateRe
 	if !data.ProviderType.IsNull() && !data.ProviderType.IsUnknown() {
 		apiResource.Spec["provider_type"] = data.ProviderType.ValueString()
 	}
-
 
 	updated, err := r.client.UpdateOidcProvider(ctx, apiResource)
 	if err != nil {

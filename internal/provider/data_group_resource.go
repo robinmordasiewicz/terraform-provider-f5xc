@@ -65,17 +65,17 @@ type DataGroupStringRecordsModel struct {
 }
 
 type DataGroupResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Name           types.String                  `tfsdk:"name"`
+	Namespace      types.String                  `tfsdk:"namespace"`
+	Annotations    types.Map                     `tfsdk:"annotations"`
+	Description    types.String                  `tfsdk:"description"`
+	Disable        types.Bool                    `tfsdk:"disable"`
+	Labels         types.Map                     `tfsdk:"labels"`
+	ID             types.String                  `tfsdk:"id"`
+	Timeouts       timeouts.Value                `tfsdk:"timeouts"`
 	AddressRecords *DataGroupAddressRecordsModel `tfsdk:"address_records"`
 	IntegerRecords *DataGroupIntegerRecordsModel `tfsdk:"integer_records"`
-	StringRecords *DataGroupStringRecordsModel `tfsdk:"string_records"`
+	StringRecords  *DataGroupStringRecordsModel  `tfsdk:"string_records"`
 }
 
 func (r *DataGroupResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -89,7 +89,7 @@ func (r *DataGroupResource) Schema(ctx context.Context, req resource.SchemaReque
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the DataGroup. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -99,7 +99,7 @@ func (r *DataGroupResource) Schema(ctx context.Context, req resource.SchemaReque
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the DataGroup will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -109,25 +109,25 @@ func (r *DataGroupResource) Schema(ctx context.Context, req resource.SchemaReque
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -142,36 +142,30 @@ func (r *DataGroupResource) Schema(ctx context.Context, req resource.SchemaReque
 			}),
 			"address_records": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: address_records, integer_records, string_records] Address Record. Data group with address record List",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"records": schema.SingleNestedBlock{
 						MarkdownDescription: "Address records.",
 					},
 				},
-
 			},
 			"integer_records": schema.SingleNestedBlock{
 				MarkdownDescription: "Integer record List. Data group with integer record List",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"records": schema.SingleNestedBlock{
 						MarkdownDescription: "Integer records.",
 					},
 				},
-
 			},
 			"string_records": schema.SingleNestedBlock{
 				MarkdownDescription: "String record List. Data group with strings record List",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"records": schema.SingleNestedBlock{
 						MarkdownDescription: "String records.",
 					},
 				},
-
 			},
 		},
 	}
@@ -343,7 +337,6 @@ func (r *DataGroupResource) Create(ctx context.Context, req resource.CreateReque
 		createReq.Spec["string_records"] = string_recordsMap
 	}
 
-
 	apiResource, err := r.client.CreateDataGroup(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create DataGroup: %s", err))
@@ -355,7 +348,7 @@ func (r *DataGroupResource) Create(ctx context.Context, req resource.CreateReque
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if _, ok := apiResource.Spec["address_records"].(map[string]interface{}); ok && isImport && data.AddressRecords == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.AddressRecords = &DataGroupAddressRecordsModel{}
@@ -371,7 +364,6 @@ func (r *DataGroupResource) Create(ctx context.Context, req resource.CreateReque
 		data.StringRecords = &DataGroupStringRecordsModel{}
 	}
 	// Normal Read: preserve existing state value
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -461,9 +453,9 @@ func (r *DataGroupResource) Read(ctx context.Context, req resource.ReadRequest, 
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if _, ok := apiResource.Spec["address_records"].(map[string]interface{}); ok && isImport && data.AddressRecords == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -480,7 +472,6 @@ func (r *DataGroupResource) Read(ctx context.Context, req resource.ReadRequest, 
 		data.StringRecords = &DataGroupStringRecordsModel{}
 	}
 	// Normal Read: preserve existing state value
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -562,7 +553,6 @@ func (r *DataGroupResource) Update(ctx context.Context, req resource.UpdateReque
 		}
 		apiResource.Spec["string_records"] = string_recordsMap
 	}
-
 
 	updated, err := r.client.UpdateDataGroup(ctx, apiResource)
 	if err != nil {

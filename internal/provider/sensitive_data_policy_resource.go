@@ -56,23 +56,23 @@ type SensitiveDataPolicyCustomDataTypesModel struct {
 
 // SensitiveDataPolicyCustomDataTypesCustomDataTypeRefModel represents custom_data_type_ref block
 type SensitiveDataPolicyCustomDataTypesCustomDataTypeRefModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 type SensitiveDataPolicyResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Compliances types.List `tfsdk:"compliances"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	DisabledPredefinedDataTypes types.List `tfsdk:"disabled_predefined_data_types"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	CustomDataTypes []SensitiveDataPolicyCustomDataTypesModel `tfsdk:"custom_data_types"`
+	Name                        types.String                              `tfsdk:"name"`
+	Namespace                   types.String                              `tfsdk:"namespace"`
+	Annotations                 types.Map                                 `tfsdk:"annotations"`
+	Compliances                 types.List                                `tfsdk:"compliances"`
+	Description                 types.String                              `tfsdk:"description"`
+	Disable                     types.Bool                                `tfsdk:"disable"`
+	DisabledPredefinedDataTypes types.List                                `tfsdk:"disabled_predefined_data_types"`
+	Labels                      types.Map                                 `tfsdk:"labels"`
+	ID                          types.String                              `tfsdk:"id"`
+	Timeouts                    timeouts.Value                            `tfsdk:"timeouts"`
+	CustomDataTypes             []SensitiveDataPolicyCustomDataTypesModel `tfsdk:"custom_data_types"`
 }
 
 func (r *SensitiveDataPolicyResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -86,7 +86,7 @@ func (r *SensitiveDataPolicyResource) Schema(ctx context.Context, req resource.S
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the SensitiveDataPolicy. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -96,7 +96,7 @@ func (r *SensitiveDataPolicyResource) Schema(ctx context.Context, req resource.S
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the SensitiveDataPolicy will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -106,35 +106,35 @@ func (r *SensitiveDataPolicyResource) Schema(ctx context.Context, req resource.S
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"compliances": schema.ListAttribute{
 				MarkdownDescription: "Compliance Frameworks. Select relevant compliance frameworks, such as GDPR, HIPAA, or PCI-DSS, to ensure monitoring under your sensitive data discovery. Possible values are `GDPR`, `CCPA`, `PIPEDA`, `LGPD`, `DPA_UK`, `PDPA_SG`, `APPI`, `HIPAA`, `CPRA_2023`, `CPA_CO`, `SOC2`, `PCI_DSS`, `ISO_IEC_27001`, `ISO_IEC_27701`, `EPRIVACY_DIRECTIVE`, `GLBA`, `SOX`.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disabled_predefined_data_types": schema.ListAttribute{
 				MarkdownDescription: "Disabled Built-In Sensitive Data Types. Select which pre-configured data types to disable, disabled data types will not be shown as sensitive in the API discovery",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -150,29 +150,27 @@ func (r *SensitiveDataPolicyResource) Schema(ctx context.Context, req resource.S
 			"custom_data_types": schema.ListNestedBlock{
 				MarkdownDescription: "Defined Custom Sensitive Data Types. Select your custom data types to be monitored in the API discovery",
 				NestedObject: schema.NestedBlockObject{
-					Attributes: map[string]schema.Attribute{
-					},
+					Attributes: map[string]schema.Attribute{},
 					Blocks: map[string]schema.Block{
 						"custom_data_type_ref": schema.SingleNestedBlock{
 							MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-									Optional: true,
+									Optional:            true,
 								},
 								"namespace": schema.StringAttribute{
 									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-									Optional: true,
+									Optional:            true,
 								},
 								"tenant": schema.StringAttribute{
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-									Optional: true,
-									Computed: true,
+									Optional:            true,
+									Computed:            true,
 								},
 							},
 						},
 					},
-
 				},
 			},
 		},
@@ -359,7 +357,6 @@ func (r *SensitiveDataPolicyResource) Create(ctx context.Context, req resource.C
 		}
 	}
 
-
 	apiResource, err := r.client.CreateSensitiveDataPolicy(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create SensitiveDataPolicy: %s", err))
@@ -371,7 +368,7 @@ func (r *SensitiveDataPolicyResource) Create(ctx context.Context, req resource.C
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if v, ok := apiResource.Spec["compliances"].([]interface{}); ok && len(v) > 0 {
 		var compliancesList []string
 		for _, item := range v {
@@ -438,7 +435,6 @@ func (r *SensitiveDataPolicyResource) Create(ctx context.Context, req resource.C
 	} else {
 		data.DisabledPredefinedDataTypes = types.ListNull(types.StringType)
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -528,9 +524,9 @@ func (r *SensitiveDataPolicyResource) Read(ctx context.Context, req resource.Rea
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if v, ok := apiResource.Spec["compliances"].([]interface{}); ok && len(v) > 0 {
 		var compliancesList []string
@@ -598,7 +594,6 @@ func (r *SensitiveDataPolicyResource) Read(ctx context.Context, req resource.Rea
 	} else {
 		data.DisabledPredefinedDataTypes = types.ListNull(types.StringType)
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -694,7 +689,6 @@ func (r *SensitiveDataPolicyResource) Update(ctx context.Context, req resource.U
 			apiResource.Spec["disabled_predefined_data_types"] = disabled_predefined_data_typesList
 		}
 	}
-
 
 	updated, err := r.client.UpdateSensitiveDataPolicy(ctx, apiResource)
 	if err != nil {

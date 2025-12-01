@@ -56,9 +56,9 @@ type VoltstackSiteBlockedServicesModel struct {
 
 // VoltstackSiteBlockedServicesBlockedSeviceModel represents blocked_sevice block
 type VoltstackSiteBlockedServicesBlockedSeviceModel struct {
-	NetworkType types.String `tfsdk:"network_type"`
-	DNS *VoltstackSiteEmptyModel `tfsdk:"dns"`
-	SSH *VoltstackSiteEmptyModel `tfsdk:"ssh"`
+	NetworkType      types.String             `tfsdk:"network_type"`
+	DNS              *VoltstackSiteEmptyModel `tfsdk:"dns"`
+	SSH              *VoltstackSiteEmptyModel `tfsdk:"ssh"`
 	WebUserInterface *VoltstackSiteEmptyModel `tfsdk:"web_user_interface"`
 }
 
@@ -69,12 +69,12 @@ type VoltstackSiteBondDeviceListModel struct {
 
 // VoltstackSiteBondDeviceListBondDevicesModel represents bond_devices block
 type VoltstackSiteBondDeviceListBondDevicesModel struct {
-	Devices types.List `tfsdk:"devices"`
-	LinkPollingInterval types.Int64 `tfsdk:"link_polling_interval"`
-	LinkUpDelay types.Int64 `tfsdk:"link_up_delay"`
-	Name types.String `tfsdk:"name"`
-	ActiveBackup *VoltstackSiteEmptyModel `tfsdk:"active_backup"`
-	Lacp *VoltstackSiteBondDeviceListBondDevicesLacpModel `tfsdk:"lacp"`
+	Devices             types.List                                       `tfsdk:"devices"`
+	LinkPollingInterval types.Int64                                      `tfsdk:"link_polling_interval"`
+	LinkUpDelay         types.Int64                                      `tfsdk:"link_up_delay"`
+	Name                types.String                                     `tfsdk:"name"`
+	ActiveBackup        *VoltstackSiteEmptyModel                         `tfsdk:"active_backup"`
+	Lacp                *VoltstackSiteBondDeviceListBondDevicesLacpModel `tfsdk:"lacp"`
 }
 
 // VoltstackSiteBondDeviceListBondDevicesLacpModel represents lacp block
@@ -84,41 +84,41 @@ type VoltstackSiteBondDeviceListBondDevicesLacpModel struct {
 
 // VoltstackSiteCoordinatesModel represents coordinates block
 type VoltstackSiteCoordinatesModel struct {
-	Latitude types.Int64 `tfsdk:"latitude"`
+	Latitude  types.Int64 `tfsdk:"latitude"`
 	Longitude types.Int64 `tfsdk:"longitude"`
 }
 
 // VoltstackSiteCustomDNSModel represents custom_dns block
 type VoltstackSiteCustomDNSModel struct {
-	InsideNameserver types.String `tfsdk:"inside_nameserver"`
+	InsideNameserver  types.String `tfsdk:"inside_nameserver"`
 	OutsideNameserver types.String `tfsdk:"outside_nameserver"`
 }
 
 // VoltstackSiteCustomNetworkConfigModel represents custom_network_config block
 type VoltstackSiteCustomNetworkConfigModel struct {
-	BGPPeerAddress types.String `tfsdk:"bgp_peer_address"`
-	BGPRouterID types.String `tfsdk:"bgp_router_id"`
-	OutsideNameserver types.String `tfsdk:"outside_nameserver"`
-	OutsideVip types.String `tfsdk:"outside_vip"`
-	SiteToSiteTunnelIP types.String `tfsdk:"site_to_site_tunnel_ip"`
-	TunnelDeadTimeout types.Int64 `tfsdk:"tunnel_dead_timeout"`
-	VipVrrpMode types.String `tfsdk:"vip_vrrp_mode"`
+	BGPPeerAddress                 types.String                                                         `tfsdk:"bgp_peer_address"`
+	BGPRouterID                    types.String                                                         `tfsdk:"bgp_router_id"`
+	OutsideNameserver              types.String                                                         `tfsdk:"outside_nameserver"`
+	OutsideVip                     types.String                                                         `tfsdk:"outside_vip"`
+	SiteToSiteTunnelIP             types.String                                                         `tfsdk:"site_to_site_tunnel_ip"`
+	TunnelDeadTimeout              types.Int64                                                          `tfsdk:"tunnel_dead_timeout"`
+	VipVrrpMode                    types.String                                                         `tfsdk:"vip_vrrp_mode"`
 	ActiveEnhancedFirewallPolicies *VoltstackSiteCustomNetworkConfigActiveEnhancedFirewallPoliciesModel `tfsdk:"active_enhanced_firewall_policies"`
-	ActiveForwardProxyPolicies *VoltstackSiteCustomNetworkConfigActiveForwardProxyPoliciesModel `tfsdk:"active_forward_proxy_policies"`
-	ActiveNetworkPolicies *VoltstackSiteCustomNetworkConfigActiveNetworkPoliciesModel `tfsdk:"active_network_policies"`
-	DefaultConfig *VoltstackSiteEmptyModel `tfsdk:"default_config"`
-	DefaultInterfaceConfig *VoltstackSiteEmptyModel `tfsdk:"default_interface_config"`
-	DefaultSLIConfig *VoltstackSiteEmptyModel `tfsdk:"default_sli_config"`
-	ForwardProxyAllowAll *VoltstackSiteEmptyModel `tfsdk:"forward_proxy_allow_all"`
-	GlobalNetworkList *VoltstackSiteCustomNetworkConfigGlobalNetworkListModel `tfsdk:"global_network_list"`
-	InterfaceList *VoltstackSiteCustomNetworkConfigInterfaceListModel `tfsdk:"interface_list"`
-	NoForwardProxy *VoltstackSiteEmptyModel `tfsdk:"no_forward_proxy"`
-	NoGlobalNetwork *VoltstackSiteEmptyModel `tfsdk:"no_global_network"`
-	NoNetworkPolicy *VoltstackSiteEmptyModel `tfsdk:"no_network_policy"`
-	SLIConfig *VoltstackSiteCustomNetworkConfigSLIConfigModel `tfsdk:"sli_config"`
-	SLOConfig *VoltstackSiteCustomNetworkConfigSLOConfigModel `tfsdk:"slo_config"`
-	SmConnectionPublicIP *VoltstackSiteEmptyModel `tfsdk:"sm_connection_public_ip"`
-	SmConnectionPvtIP *VoltstackSiteEmptyModel `tfsdk:"sm_connection_pvt_ip"`
+	ActiveForwardProxyPolicies     *VoltstackSiteCustomNetworkConfigActiveForwardProxyPoliciesModel     `tfsdk:"active_forward_proxy_policies"`
+	ActiveNetworkPolicies          *VoltstackSiteCustomNetworkConfigActiveNetworkPoliciesModel          `tfsdk:"active_network_policies"`
+	DefaultConfig                  *VoltstackSiteEmptyModel                                             `tfsdk:"default_config"`
+	DefaultInterfaceConfig         *VoltstackSiteEmptyModel                                             `tfsdk:"default_interface_config"`
+	DefaultSLIConfig               *VoltstackSiteEmptyModel                                             `tfsdk:"default_sli_config"`
+	ForwardProxyAllowAll           *VoltstackSiteEmptyModel                                             `tfsdk:"forward_proxy_allow_all"`
+	GlobalNetworkList              *VoltstackSiteCustomNetworkConfigGlobalNetworkListModel              `tfsdk:"global_network_list"`
+	InterfaceList                  *VoltstackSiteCustomNetworkConfigInterfaceListModel                  `tfsdk:"interface_list"`
+	NoForwardProxy                 *VoltstackSiteEmptyModel                                             `tfsdk:"no_forward_proxy"`
+	NoGlobalNetwork                *VoltstackSiteEmptyModel                                             `tfsdk:"no_global_network"`
+	NoNetworkPolicy                *VoltstackSiteEmptyModel                                             `tfsdk:"no_network_policy"`
+	SLIConfig                      *VoltstackSiteCustomNetworkConfigSLIConfigModel                      `tfsdk:"sli_config"`
+	SLOConfig                      *VoltstackSiteCustomNetworkConfigSLOConfigModel                      `tfsdk:"slo_config"`
+	SmConnectionPublicIP           *VoltstackSiteEmptyModel                                             `tfsdk:"sm_connection_public_ip"`
+	SmConnectionPvtIP              *VoltstackSiteEmptyModel                                             `tfsdk:"sm_connection_pvt_ip"`
 }
 
 // VoltstackSiteCustomNetworkConfigActiveEnhancedFirewallPoliciesModel represents active_enhanced_firewall_policies block
@@ -128,9 +128,9 @@ type VoltstackSiteCustomNetworkConfigActiveEnhancedFirewallPoliciesModel struct 
 
 // VoltstackSiteCustomNetworkConfigActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel represents enhanced_firewall_policies block
 type VoltstackSiteCustomNetworkConfigActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // VoltstackSiteCustomNetworkConfigActiveForwardProxyPoliciesModel represents active_forward_proxy_policies block
@@ -140,9 +140,9 @@ type VoltstackSiteCustomNetworkConfigActiveForwardProxyPoliciesModel struct {
 
 // VoltstackSiteCustomNetworkConfigActiveForwardProxyPoliciesForwardProxyPoliciesModel represents forward_proxy_policies block
 type VoltstackSiteCustomNetworkConfigActiveForwardProxyPoliciesForwardProxyPoliciesModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // VoltstackSiteCustomNetworkConfigActiveNetworkPoliciesModel represents active_network_policies block
@@ -152,9 +152,9 @@ type VoltstackSiteCustomNetworkConfigActiveNetworkPoliciesModel struct {
 
 // VoltstackSiteCustomNetworkConfigActiveNetworkPoliciesNetworkPoliciesModel represents network_policies block
 type VoltstackSiteCustomNetworkConfigActiveNetworkPoliciesNetworkPoliciesModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // VoltstackSiteCustomNetworkConfigGlobalNetworkListModel represents global_network_list block
@@ -175,9 +175,9 @@ type VoltstackSiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSL
 
 // VoltstackSiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrGlobalVnModel represents global_vn block
 type VoltstackSiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrGlobalVnModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // VoltstackSiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrModel represents slo_to_global_dr block
@@ -187,9 +187,9 @@ type VoltstackSiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSL
 
 // VoltstackSiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrGlobalVnModel represents global_vn block
 type VoltstackSiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrGlobalVnModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // VoltstackSiteCustomNetworkConfigInterfaceListModel represents interface_list block
@@ -199,85 +199,85 @@ type VoltstackSiteCustomNetworkConfigInterfaceListModel struct {
 
 // VoltstackSiteCustomNetworkConfigInterfaceListInterfacesModel represents interfaces block
 type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesModel struct {
-	DescriptionSpec types.String `tfsdk:"description_spec"`
-	DcClusterGroupConnectivityInterfaceDisabled *VoltstackSiteEmptyModel `tfsdk:"dc_cluster_group_connectivity_interface_disabled"`
-	DcClusterGroupConnectivityInterfaceEnabled *VoltstackSiteEmptyModel `tfsdk:"dc_cluster_group_connectivity_interface_enabled"`
-	DedicatedInterface *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesDedicatedInterfaceModel `tfsdk:"dedicated_interface"`
-	DedicatedManagementInterface *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesDedicatedManagementInterfaceModel `tfsdk:"dedicated_management_interface"`
-	EthernetInterface *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceModel `tfsdk:"ethernet_interface"`
-	Labels *VoltstackSiteEmptyModel `tfsdk:"labels"`
-	TunnelInterface *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesTunnelInterfaceModel `tfsdk:"tunnel_interface"`
+	DescriptionSpec                             types.String                                                                              `tfsdk:"description_spec"`
+	DcClusterGroupConnectivityInterfaceDisabled *VoltstackSiteEmptyModel                                                                  `tfsdk:"dc_cluster_group_connectivity_interface_disabled"`
+	DcClusterGroupConnectivityInterfaceEnabled  *VoltstackSiteEmptyModel                                                                  `tfsdk:"dc_cluster_group_connectivity_interface_enabled"`
+	DedicatedInterface                          *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesDedicatedInterfaceModel           `tfsdk:"dedicated_interface"`
+	DedicatedManagementInterface                *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesDedicatedManagementInterfaceModel `tfsdk:"dedicated_management_interface"`
+	EthernetInterface                           *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceModel            `tfsdk:"ethernet_interface"`
+	Labels                                      *VoltstackSiteEmptyModel                                                                  `tfsdk:"labels"`
+	TunnelInterface                             *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesTunnelInterfaceModel              `tfsdk:"tunnel_interface"`
 }
 
 // VoltstackSiteCustomNetworkConfigInterfaceListInterfacesDedicatedInterfaceModel represents dedicated_interface block
 type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesDedicatedInterfaceModel struct {
-	Device types.String `tfsdk:"device"`
-	Mtu types.Int64 `tfsdk:"mtu"`
-	Node types.String `tfsdk:"node"`
-	Priority types.Int64 `tfsdk:"priority"`
-	Cluster *VoltstackSiteEmptyModel `tfsdk:"cluster"`
-	IsPrimary *VoltstackSiteEmptyModel `tfsdk:"is_primary"`
-	Monitor *VoltstackSiteEmptyModel `tfsdk:"monitor"`
+	Device          types.String             `tfsdk:"device"`
+	Mtu             types.Int64              `tfsdk:"mtu"`
+	Node            types.String             `tfsdk:"node"`
+	Priority        types.Int64              `tfsdk:"priority"`
+	Cluster         *VoltstackSiteEmptyModel `tfsdk:"cluster"`
+	IsPrimary       *VoltstackSiteEmptyModel `tfsdk:"is_primary"`
+	Monitor         *VoltstackSiteEmptyModel `tfsdk:"monitor"`
 	MonitorDisabled *VoltstackSiteEmptyModel `tfsdk:"monitor_disabled"`
-	NotPrimary *VoltstackSiteEmptyModel `tfsdk:"not_primary"`
+	NotPrimary      *VoltstackSiteEmptyModel `tfsdk:"not_primary"`
 }
 
 // VoltstackSiteCustomNetworkConfigInterfaceListInterfacesDedicatedManagementInterfaceModel represents dedicated_management_interface block
 type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesDedicatedManagementInterfaceModel struct {
-	Device types.String `tfsdk:"device"`
-	Mtu types.Int64 `tfsdk:"mtu"`
-	Node types.String `tfsdk:"node"`
+	Device  types.String             `tfsdk:"device"`
+	Mtu     types.Int64              `tfsdk:"mtu"`
+	Node    types.String             `tfsdk:"node"`
 	Cluster *VoltstackSiteEmptyModel `tfsdk:"cluster"`
 }
 
 // VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceModel represents ethernet_interface block
 type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceModel struct {
-	Device types.String `tfsdk:"device"`
-	Mtu types.Int64 `tfsdk:"mtu"`
-	Node types.String `tfsdk:"node"`
-	Priority types.Int64 `tfsdk:"priority"`
-	VlanID types.Int64 `tfsdk:"vlan_id"`
-	Cluster *VoltstackSiteEmptyModel `tfsdk:"cluster"`
-	DhcpClient *VoltstackSiteEmptyModel `tfsdk:"dhcp_client"`
-	DhcpServer *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDhcpServerModel `tfsdk:"dhcp_server"`
-	IPV6AutoConfig *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigModel `tfsdk:"ipv6_auto_config"`
-	IsPrimary *VoltstackSiteEmptyModel `tfsdk:"is_primary"`
-	Monitor *VoltstackSiteEmptyModel `tfsdk:"monitor"`
-	MonitorDisabled *VoltstackSiteEmptyModel `tfsdk:"monitor_disabled"`
-	NoIPV6Address *VoltstackSiteEmptyModel `tfsdk:"no_ipv6_address"`
-	NotPrimary *VoltstackSiteEmptyModel `tfsdk:"not_primary"`
-	SiteLocalInsideNetwork *VoltstackSiteEmptyModel `tfsdk:"site_local_inside_network"`
-	SiteLocalNetwork *VoltstackSiteEmptyModel `tfsdk:"site_local_network"`
-	StaticIP *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPModel `tfsdk:"static_ip"`
-	StaticIPV6Address *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPV6AddressModel `tfsdk:"static_ipv6_address"`
-	StorageNetwork *VoltstackSiteEmptyModel `tfsdk:"storage_network"`
-	Untagged *VoltstackSiteEmptyModel `tfsdk:"untagged"`
+	Device                 types.String                                                                                    `tfsdk:"device"`
+	Mtu                    types.Int64                                                                                     `tfsdk:"mtu"`
+	Node                   types.String                                                                                    `tfsdk:"node"`
+	Priority               types.Int64                                                                                     `tfsdk:"priority"`
+	VlanID                 types.Int64                                                                                     `tfsdk:"vlan_id"`
+	Cluster                *VoltstackSiteEmptyModel                                                                        `tfsdk:"cluster"`
+	DhcpClient             *VoltstackSiteEmptyModel                                                                        `tfsdk:"dhcp_client"`
+	DhcpServer             *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDhcpServerModel        `tfsdk:"dhcp_server"`
+	IPV6AutoConfig         *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigModel    `tfsdk:"ipv6_auto_config"`
+	IsPrimary              *VoltstackSiteEmptyModel                                                                        `tfsdk:"is_primary"`
+	Monitor                *VoltstackSiteEmptyModel                                                                        `tfsdk:"monitor"`
+	MonitorDisabled        *VoltstackSiteEmptyModel                                                                        `tfsdk:"monitor_disabled"`
+	NoIPV6Address          *VoltstackSiteEmptyModel                                                                        `tfsdk:"no_ipv6_address"`
+	NotPrimary             *VoltstackSiteEmptyModel                                                                        `tfsdk:"not_primary"`
+	SiteLocalInsideNetwork *VoltstackSiteEmptyModel                                                                        `tfsdk:"site_local_inside_network"`
+	SiteLocalNetwork       *VoltstackSiteEmptyModel                                                                        `tfsdk:"site_local_network"`
+	StaticIP               *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPModel          `tfsdk:"static_ip"`
+	StaticIPV6Address      *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPV6AddressModel `tfsdk:"static_ipv6_address"`
+	StorageNetwork         *VoltstackSiteEmptyModel                                                                        `tfsdk:"storage_network"`
+	Untagged               *VoltstackSiteEmptyModel                                                                        `tfsdk:"untagged"`
 }
 
 // VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDhcpServerModel represents dhcp_server block
 type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDhcpServerModel struct {
-	AutomaticFromEnd *VoltstackSiteEmptyModel `tfsdk:"automatic_from_end"`
-	AutomaticFromStart *VoltstackSiteEmptyModel `tfsdk:"automatic_from_start"`
-	DhcpNetworks []VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDhcpServerDhcpNetworksModel `tfsdk:"dhcp_networks"`
-	FixedIPMap *VoltstackSiteEmptyModel `tfsdk:"fixed_ip_map"`
-	InterfaceIPMap *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDhcpServerInterfaceIPMapModel `tfsdk:"interface_ip_map"`
+	AutomaticFromEnd   *VoltstackSiteEmptyModel                                                                               `tfsdk:"automatic_from_end"`
+	AutomaticFromStart *VoltstackSiteEmptyModel                                                                               `tfsdk:"automatic_from_start"`
+	DhcpNetworks       []VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDhcpServerDhcpNetworksModel  `tfsdk:"dhcp_networks"`
+	FixedIPMap         *VoltstackSiteEmptyModel                                                                               `tfsdk:"fixed_ip_map"`
+	InterfaceIPMap     *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDhcpServerInterfaceIPMapModel `tfsdk:"interface_ip_map"`
 }
 
 // VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDhcpServerDhcpNetworksModel represents dhcp_networks block
 type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDhcpServerDhcpNetworksModel struct {
-	DgwAddress types.String `tfsdk:"dgw_address"`
-	DNSAddress types.String `tfsdk:"dns_address"`
-	NetworkPrefix types.String `tfsdk:"network_prefix"`
-	PoolSettings types.String `tfsdk:"pool_settings"`
-	FirstAddress *VoltstackSiteEmptyModel `tfsdk:"first_address"`
-	LastAddress *VoltstackSiteEmptyModel `tfsdk:"last_address"`
-	Pools []VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDhcpServerDhcpNetworksPoolsModel `tfsdk:"pools"`
-	SameAsDgw *VoltstackSiteEmptyModel `tfsdk:"same_as_dgw"`
+	DgwAddress    types.String                                                                                               `tfsdk:"dgw_address"`
+	DNSAddress    types.String                                                                                               `tfsdk:"dns_address"`
+	NetworkPrefix types.String                                                                                               `tfsdk:"network_prefix"`
+	PoolSettings  types.String                                                                                               `tfsdk:"pool_settings"`
+	FirstAddress  *VoltstackSiteEmptyModel                                                                                   `tfsdk:"first_address"`
+	LastAddress   *VoltstackSiteEmptyModel                                                                                   `tfsdk:"last_address"`
+	Pools         []VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDhcpServerDhcpNetworksPoolsModel `tfsdk:"pools"`
+	SameAsDgw     *VoltstackSiteEmptyModel                                                                                   `tfsdk:"same_as_dgw"`
 }
 
 // VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDhcpServerDhcpNetworksPoolsModel represents pools block
 type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDhcpServerDhcpNetworksPoolsModel struct {
-	EndIP types.String `tfsdk:"end_ip"`
+	EndIP   types.String `tfsdk:"end_ip"`
 	StartIP types.String `tfsdk:"start_ip"`
 }
 
@@ -288,21 +288,21 @@ type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDhc
 
 // VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigModel represents ipv6_auto_config block
 type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigModel struct {
-	Host *VoltstackSiteEmptyModel `tfsdk:"host"`
+	Host   *VoltstackSiteEmptyModel                                                                           `tfsdk:"host"`
 	Router *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigRouterModel `tfsdk:"router"`
 }
 
 // VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigRouterModel represents router block
 type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigRouterModel struct {
-	NetworkPrefix types.String `tfsdk:"network_prefix"`
-	DNSConfig *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigRouterDNSConfigModel `tfsdk:"dns_config"`
-	Stateful *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigRouterStatefulModel `tfsdk:"stateful"`
+	NetworkPrefix types.String                                                                                                `tfsdk:"network_prefix"`
+	DNSConfig     *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigRouterDNSConfigModel `tfsdk:"dns_config"`
+	Stateful      *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigRouterStatefulModel  `tfsdk:"stateful"`
 }
 
 // VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigRouterDNSConfigModel represents dns_config block
 type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigRouterDNSConfigModel struct {
 	ConfiguredList *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigRouterDNSConfigConfiguredListModel `tfsdk:"configured_list"`
-	LocalDNS *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigRouterDNSConfigLocalDNSModel `tfsdk:"local_dns"`
+	LocalDNS       *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigRouterDNSConfigLocalDNSModel       `tfsdk:"local_dns"`
 }
 
 // VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigRouterDNSConfigConfiguredListModel represents configured_list block
@@ -312,30 +312,30 @@ type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV
 
 // VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigRouterDNSConfigLocalDNSModel represents local_dns block
 type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigRouterDNSConfigLocalDNSModel struct {
-	ConfiguredAddress types.String `tfsdk:"configured_address"`
-	FirstAddress *VoltstackSiteEmptyModel `tfsdk:"first_address"`
-	LastAddress *VoltstackSiteEmptyModel `tfsdk:"last_address"`
+	ConfiguredAddress types.String             `tfsdk:"configured_address"`
+	FirstAddress      *VoltstackSiteEmptyModel `tfsdk:"first_address"`
+	LastAddress       *VoltstackSiteEmptyModel `tfsdk:"last_address"`
 }
 
 // VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigRouterStatefulModel represents stateful block
 type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigRouterStatefulModel struct {
-	AutomaticFromEnd *VoltstackSiteEmptyModel `tfsdk:"automatic_from_end"`
-	AutomaticFromStart *VoltstackSiteEmptyModel `tfsdk:"automatic_from_start"`
-	DhcpNetworks []VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigRouterStatefulDhcpNetworksModel `tfsdk:"dhcp_networks"`
-	FixedIPMap *VoltstackSiteEmptyModel `tfsdk:"fixed_ip_map"`
-	InterfaceIPMap *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigRouterStatefulInterfaceIPMapModel `tfsdk:"interface_ip_map"`
+	AutomaticFromEnd   *VoltstackSiteEmptyModel                                                                                                 `tfsdk:"automatic_from_end"`
+	AutomaticFromStart *VoltstackSiteEmptyModel                                                                                                 `tfsdk:"automatic_from_start"`
+	DhcpNetworks       []VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigRouterStatefulDhcpNetworksModel  `tfsdk:"dhcp_networks"`
+	FixedIPMap         *VoltstackSiteEmptyModel                                                                                                 `tfsdk:"fixed_ip_map"`
+	InterfaceIPMap     *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigRouterStatefulInterfaceIPMapModel `tfsdk:"interface_ip_map"`
 }
 
 // VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigRouterStatefulDhcpNetworksModel represents dhcp_networks block
 type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigRouterStatefulDhcpNetworksModel struct {
-	NetworkPrefix types.String `tfsdk:"network_prefix"`
-	PoolSettings types.String `tfsdk:"pool_settings"`
-	Pools []VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel `tfsdk:"pools"`
+	NetworkPrefix types.String                                                                                                                 `tfsdk:"network_prefix"`
+	PoolSettings  types.String                                                                                                                 `tfsdk:"pool_settings"`
+	Pools         []VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel `tfsdk:"pools"`
 }
 
 // VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel represents pools block
 type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel struct {
-	EndIP types.String `tfsdk:"end_ip"`
+	EndIP   types.String `tfsdk:"end_ip"`
 	StartIP types.String `tfsdk:"start_ip"`
 }
 
@@ -347,7 +347,7 @@ type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIPV
 // VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPModel represents static_ip block
 type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPModel struct {
 	ClusterStaticIP *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPClusterStaticIPModel `tfsdk:"cluster_static_ip"`
-	NodeStaticIP *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPNodeStaticIPModel `tfsdk:"node_static_ip"`
+	NodeStaticIP    *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPNodeStaticIPModel    `tfsdk:"node_static_ip"`
 }
 
 // VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPClusterStaticIPModel represents cluster_static_ip block
@@ -364,7 +364,7 @@ type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceSta
 // VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPV6AddressModel represents static_ipv6_address block
 type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPV6AddressModel struct {
 	ClusterStaticIP *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPV6AddressClusterStaticIPModel `tfsdk:"cluster_static_ip"`
-	NodeStaticIP *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPV6AddressNodeStaticIPModel `tfsdk:"node_static_ip"`
+	NodeStaticIP    *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPV6AddressNodeStaticIPModel    `tfsdk:"node_static_ip"`
 }
 
 // VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPV6AddressClusterStaticIPModel represents cluster_static_ip block
@@ -380,19 +380,19 @@ type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceSta
 
 // VoltstackSiteCustomNetworkConfigInterfaceListInterfacesTunnelInterfaceModel represents tunnel_interface block
 type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesTunnelInterfaceModel struct {
-	Mtu types.Int64 `tfsdk:"mtu"`
-	Node types.String `tfsdk:"node"`
-	Priority types.Int64 `tfsdk:"priority"`
-	SiteLocalInsideNetwork *VoltstackSiteEmptyModel `tfsdk:"site_local_inside_network"`
-	SiteLocalNetwork *VoltstackSiteEmptyModel `tfsdk:"site_local_network"`
-	StaticIP *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesTunnelInterfaceStaticIPModel `tfsdk:"static_ip"`
-	Tunnel *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesTunnelInterfaceTunnelModel `tfsdk:"tunnel"`
+	Mtu                    types.Int64                                                                          `tfsdk:"mtu"`
+	Node                   types.String                                                                         `tfsdk:"node"`
+	Priority               types.Int64                                                                          `tfsdk:"priority"`
+	SiteLocalInsideNetwork *VoltstackSiteEmptyModel                                                             `tfsdk:"site_local_inside_network"`
+	SiteLocalNetwork       *VoltstackSiteEmptyModel                                                             `tfsdk:"site_local_network"`
+	StaticIP               *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesTunnelInterfaceStaticIPModel `tfsdk:"static_ip"`
+	Tunnel                 *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesTunnelInterfaceTunnelModel   `tfsdk:"tunnel"`
 }
 
 // VoltstackSiteCustomNetworkConfigInterfaceListInterfacesTunnelInterfaceStaticIPModel represents static_ip block
 type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesTunnelInterfaceStaticIPModel struct {
 	ClusterStaticIP *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesTunnelInterfaceStaticIPClusterStaticIPModel `tfsdk:"cluster_static_ip"`
-	NodeStaticIP *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesTunnelInterfaceStaticIPNodeStaticIPModel `tfsdk:"node_static_ip"`
+	NodeStaticIP    *VoltstackSiteCustomNetworkConfigInterfaceListInterfacesTunnelInterfaceStaticIPNodeStaticIPModel    `tfsdk:"node_static_ip"`
 }
 
 // VoltstackSiteCustomNetworkConfigInterfaceListInterfacesTunnelInterfaceStaticIPClusterStaticIPModel represents cluster_static_ip block
@@ -408,17 +408,17 @@ type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesTunnelInterfaceStati
 
 // VoltstackSiteCustomNetworkConfigInterfaceListInterfacesTunnelInterfaceTunnelModel represents tunnel block
 type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesTunnelInterfaceTunnelModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // VoltstackSiteCustomNetworkConfigSLIConfigModel represents sli_config block
 type VoltstackSiteCustomNetworkConfigSLIConfigModel struct {
-	NoStaticRoutes *VoltstackSiteEmptyModel `tfsdk:"no_static_routes"`
-	NoV6StaticRoutes *VoltstackSiteEmptyModel `tfsdk:"no_v6_static_routes"`
-	StaticRoutes *VoltstackSiteCustomNetworkConfigSLIConfigStaticRoutesModel `tfsdk:"static_routes"`
-	StaticV6Routes *VoltstackSiteCustomNetworkConfigSLIConfigStaticV6RoutesModel `tfsdk:"static_v6_routes"`
+	NoStaticRoutes   *VoltstackSiteEmptyModel                                      `tfsdk:"no_static_routes"`
+	NoV6StaticRoutes *VoltstackSiteEmptyModel                                      `tfsdk:"no_v6_static_routes"`
+	StaticRoutes     *VoltstackSiteCustomNetworkConfigSLIConfigStaticRoutesModel   `tfsdk:"static_routes"`
+	StaticV6Routes   *VoltstackSiteCustomNetworkConfigSLIConfigStaticV6RoutesModel `tfsdk:"static_v6_routes"`
 }
 
 // VoltstackSiteCustomNetworkConfigSLIConfigStaticRoutesModel represents static_routes block
@@ -428,11 +428,11 @@ type VoltstackSiteCustomNetworkConfigSLIConfigStaticRoutesModel struct {
 
 // VoltstackSiteCustomNetworkConfigSLIConfigStaticRoutesStaticRoutesModel represents static_routes block
 type VoltstackSiteCustomNetworkConfigSLIConfigStaticRoutesStaticRoutesModel struct {
-	Attrs types.List `tfsdk:"attrs"`
-	IPAddress types.String `tfsdk:"ip_address"`
-	IPPrefixes types.List `tfsdk:"ip_prefixes"`
-	DefaultGateway *VoltstackSiteEmptyModel `tfsdk:"default_gateway"`
-	NodeInterface *VoltstackSiteCustomNetworkConfigSLIConfigStaticRoutesStaticRoutesNodeInterfaceModel `tfsdk:"node_interface"`
+	Attrs          types.List                                                                           `tfsdk:"attrs"`
+	IPAddress      types.String                                                                         `tfsdk:"ip_address"`
+	IPPrefixes     types.List                                                                           `tfsdk:"ip_prefixes"`
+	DefaultGateway *VoltstackSiteEmptyModel                                                             `tfsdk:"default_gateway"`
+	NodeInterface  *VoltstackSiteCustomNetworkConfigSLIConfigStaticRoutesStaticRoutesNodeInterfaceModel `tfsdk:"node_interface"`
 }
 
 // VoltstackSiteCustomNetworkConfigSLIConfigStaticRoutesStaticRoutesNodeInterfaceModel represents node_interface block
@@ -442,17 +442,17 @@ type VoltstackSiteCustomNetworkConfigSLIConfigStaticRoutesStaticRoutesNodeInterf
 
 // VoltstackSiteCustomNetworkConfigSLIConfigStaticRoutesStaticRoutesNodeInterfaceListModel represents list block
 type VoltstackSiteCustomNetworkConfigSLIConfigStaticRoutesStaticRoutesNodeInterfaceListModel struct {
-	Node types.String `tfsdk:"node"`
+	Node      types.String                                                                                       `tfsdk:"node"`
 	Interface []VoltstackSiteCustomNetworkConfigSLIConfigStaticRoutesStaticRoutesNodeInterfaceListInterfaceModel `tfsdk:"interface"`
 }
 
 // VoltstackSiteCustomNetworkConfigSLIConfigStaticRoutesStaticRoutesNodeInterfaceListInterfaceModel represents interface block
 type VoltstackSiteCustomNetworkConfigSLIConfigStaticRoutesStaticRoutesNodeInterfaceListInterfaceModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // VoltstackSiteCustomNetworkConfigSLIConfigStaticV6RoutesModel represents static_v6_routes block
@@ -462,11 +462,11 @@ type VoltstackSiteCustomNetworkConfigSLIConfigStaticV6RoutesModel struct {
 
 // VoltstackSiteCustomNetworkConfigSLIConfigStaticV6RoutesStaticRoutesModel represents static_routes block
 type VoltstackSiteCustomNetworkConfigSLIConfigStaticV6RoutesStaticRoutesModel struct {
-	Attrs types.List `tfsdk:"attrs"`
-	IPAddress types.String `tfsdk:"ip_address"`
-	IPPrefixes types.List `tfsdk:"ip_prefixes"`
-	DefaultGateway *VoltstackSiteEmptyModel `tfsdk:"default_gateway"`
-	NodeInterface *VoltstackSiteCustomNetworkConfigSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceModel `tfsdk:"node_interface"`
+	Attrs          types.List                                                                             `tfsdk:"attrs"`
+	IPAddress      types.String                                                                           `tfsdk:"ip_address"`
+	IPPrefixes     types.List                                                                             `tfsdk:"ip_prefixes"`
+	DefaultGateway *VoltstackSiteEmptyModel                                                               `tfsdk:"default_gateway"`
+	NodeInterface  *VoltstackSiteCustomNetworkConfigSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceModel `tfsdk:"node_interface"`
 }
 
 // VoltstackSiteCustomNetworkConfigSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceModel represents node_interface block
@@ -476,35 +476,35 @@ type VoltstackSiteCustomNetworkConfigSLIConfigStaticV6RoutesStaticRoutesNodeInte
 
 // VoltstackSiteCustomNetworkConfigSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceListModel represents list block
 type VoltstackSiteCustomNetworkConfigSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceListModel struct {
-	Node types.String `tfsdk:"node"`
+	Node      types.String                                                                                         `tfsdk:"node"`
 	Interface []VoltstackSiteCustomNetworkConfigSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceListInterfaceModel `tfsdk:"interface"`
 }
 
 // VoltstackSiteCustomNetworkConfigSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceListInterfaceModel represents interface block
 type VoltstackSiteCustomNetworkConfigSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceListInterfaceModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // VoltstackSiteCustomNetworkConfigSLOConfigModel represents slo_config block
 type VoltstackSiteCustomNetworkConfigSLOConfigModel struct {
-	DcClusterGroup *VoltstackSiteCustomNetworkConfigSLOConfigDcClusterGroupModel `tfsdk:"dc_cluster_group"`
-	Labels *VoltstackSiteEmptyModel `tfsdk:"labels"`
-	NoDcClusterGroup *VoltstackSiteEmptyModel `tfsdk:"no_dc_cluster_group"`
-	NoStaticRoutes *VoltstackSiteEmptyModel `tfsdk:"no_static_routes"`
-	NoStaticV6Routes *VoltstackSiteEmptyModel `tfsdk:"no_static_v6_routes"`
-	StaticRoutes *VoltstackSiteCustomNetworkConfigSLOConfigStaticRoutesModel `tfsdk:"static_routes"`
-	StaticV6Routes *VoltstackSiteCustomNetworkConfigSLOConfigStaticV6RoutesModel `tfsdk:"static_v6_routes"`
+	DcClusterGroup   *VoltstackSiteCustomNetworkConfigSLOConfigDcClusterGroupModel `tfsdk:"dc_cluster_group"`
+	Labels           *VoltstackSiteEmptyModel                                      `tfsdk:"labels"`
+	NoDcClusterGroup *VoltstackSiteEmptyModel                                      `tfsdk:"no_dc_cluster_group"`
+	NoStaticRoutes   *VoltstackSiteEmptyModel                                      `tfsdk:"no_static_routes"`
+	NoStaticV6Routes *VoltstackSiteEmptyModel                                      `tfsdk:"no_static_v6_routes"`
+	StaticRoutes     *VoltstackSiteCustomNetworkConfigSLOConfigStaticRoutesModel   `tfsdk:"static_routes"`
+	StaticV6Routes   *VoltstackSiteCustomNetworkConfigSLOConfigStaticV6RoutesModel `tfsdk:"static_v6_routes"`
 }
 
 // VoltstackSiteCustomNetworkConfigSLOConfigDcClusterGroupModel represents dc_cluster_group block
 type VoltstackSiteCustomNetworkConfigSLOConfigDcClusterGroupModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // VoltstackSiteCustomNetworkConfigSLOConfigStaticRoutesModel represents static_routes block
@@ -514,11 +514,11 @@ type VoltstackSiteCustomNetworkConfigSLOConfigStaticRoutesModel struct {
 
 // VoltstackSiteCustomNetworkConfigSLOConfigStaticRoutesStaticRoutesModel represents static_routes block
 type VoltstackSiteCustomNetworkConfigSLOConfigStaticRoutesStaticRoutesModel struct {
-	Attrs types.List `tfsdk:"attrs"`
-	IPAddress types.String `tfsdk:"ip_address"`
-	IPPrefixes types.List `tfsdk:"ip_prefixes"`
-	DefaultGateway *VoltstackSiteEmptyModel `tfsdk:"default_gateway"`
-	NodeInterface *VoltstackSiteCustomNetworkConfigSLOConfigStaticRoutesStaticRoutesNodeInterfaceModel `tfsdk:"node_interface"`
+	Attrs          types.List                                                                           `tfsdk:"attrs"`
+	IPAddress      types.String                                                                         `tfsdk:"ip_address"`
+	IPPrefixes     types.List                                                                           `tfsdk:"ip_prefixes"`
+	DefaultGateway *VoltstackSiteEmptyModel                                                             `tfsdk:"default_gateway"`
+	NodeInterface  *VoltstackSiteCustomNetworkConfigSLOConfigStaticRoutesStaticRoutesNodeInterfaceModel `tfsdk:"node_interface"`
 }
 
 // VoltstackSiteCustomNetworkConfigSLOConfigStaticRoutesStaticRoutesNodeInterfaceModel represents node_interface block
@@ -528,17 +528,17 @@ type VoltstackSiteCustomNetworkConfigSLOConfigStaticRoutesStaticRoutesNodeInterf
 
 // VoltstackSiteCustomNetworkConfigSLOConfigStaticRoutesStaticRoutesNodeInterfaceListModel represents list block
 type VoltstackSiteCustomNetworkConfigSLOConfigStaticRoutesStaticRoutesNodeInterfaceListModel struct {
-	Node types.String `tfsdk:"node"`
+	Node      types.String                                                                                       `tfsdk:"node"`
 	Interface []VoltstackSiteCustomNetworkConfigSLOConfigStaticRoutesStaticRoutesNodeInterfaceListInterfaceModel `tfsdk:"interface"`
 }
 
 // VoltstackSiteCustomNetworkConfigSLOConfigStaticRoutesStaticRoutesNodeInterfaceListInterfaceModel represents interface block
 type VoltstackSiteCustomNetworkConfigSLOConfigStaticRoutesStaticRoutesNodeInterfaceListInterfaceModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // VoltstackSiteCustomNetworkConfigSLOConfigStaticV6RoutesModel represents static_v6_routes block
@@ -548,11 +548,11 @@ type VoltstackSiteCustomNetworkConfigSLOConfigStaticV6RoutesModel struct {
 
 // VoltstackSiteCustomNetworkConfigSLOConfigStaticV6RoutesStaticRoutesModel represents static_routes block
 type VoltstackSiteCustomNetworkConfigSLOConfigStaticV6RoutesStaticRoutesModel struct {
-	Attrs types.List `tfsdk:"attrs"`
-	IPAddress types.String `tfsdk:"ip_address"`
-	IPPrefixes types.List `tfsdk:"ip_prefixes"`
-	DefaultGateway *VoltstackSiteEmptyModel `tfsdk:"default_gateway"`
-	NodeInterface *VoltstackSiteCustomNetworkConfigSLOConfigStaticV6RoutesStaticRoutesNodeInterfaceModel `tfsdk:"node_interface"`
+	Attrs          types.List                                                                             `tfsdk:"attrs"`
+	IPAddress      types.String                                                                           `tfsdk:"ip_address"`
+	IPPrefixes     types.List                                                                             `tfsdk:"ip_prefixes"`
+	DefaultGateway *VoltstackSiteEmptyModel                                                               `tfsdk:"default_gateway"`
+	NodeInterface  *VoltstackSiteCustomNetworkConfigSLOConfigStaticV6RoutesStaticRoutesNodeInterfaceModel `tfsdk:"node_interface"`
 }
 
 // VoltstackSiteCustomNetworkConfigSLOConfigStaticV6RoutesStaticRoutesNodeInterfaceModel represents node_interface block
@@ -562,28 +562,28 @@ type VoltstackSiteCustomNetworkConfigSLOConfigStaticV6RoutesStaticRoutesNodeInte
 
 // VoltstackSiteCustomNetworkConfigSLOConfigStaticV6RoutesStaticRoutesNodeInterfaceListModel represents list block
 type VoltstackSiteCustomNetworkConfigSLOConfigStaticV6RoutesStaticRoutesNodeInterfaceListModel struct {
-	Node types.String `tfsdk:"node"`
+	Node      types.String                                                                                         `tfsdk:"node"`
 	Interface []VoltstackSiteCustomNetworkConfigSLOConfigStaticV6RoutesStaticRoutesNodeInterfaceListInterfaceModel `tfsdk:"interface"`
 }
 
 // VoltstackSiteCustomNetworkConfigSLOConfigStaticV6RoutesStaticRoutesNodeInterfaceListInterfaceModel represents interface block
 type VoltstackSiteCustomNetworkConfigSLOConfigStaticV6RoutesStaticRoutesNodeInterfaceListInterfaceModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // VoltstackSiteCustomStorageConfigModel represents custom_storage_config block
 type VoltstackSiteCustomStorageConfigModel struct {
-	DefaultStorageClass *VoltstackSiteEmptyModel `tfsdk:"default_storage_class"`
-	NoStaticRoutes *VoltstackSiteEmptyModel `tfsdk:"no_static_routes"`
-	NoStorageDevice *VoltstackSiteEmptyModel `tfsdk:"no_storage_device"`
-	NoStorageInterfaces *VoltstackSiteEmptyModel `tfsdk:"no_storage_interfaces"`
-	StaticRoutes *VoltstackSiteCustomStorageConfigStaticRoutesModel `tfsdk:"static_routes"`
-	StorageClassList *VoltstackSiteCustomStorageConfigStorageClassListModel `tfsdk:"storage_class_list"`
-	StorageDeviceList *VoltstackSiteCustomStorageConfigStorageDeviceListModel `tfsdk:"storage_device_list"`
+	DefaultStorageClass  *VoltstackSiteEmptyModel                                   `tfsdk:"default_storage_class"`
+	NoStaticRoutes       *VoltstackSiteEmptyModel                                   `tfsdk:"no_static_routes"`
+	NoStorageDevice      *VoltstackSiteEmptyModel                                   `tfsdk:"no_storage_device"`
+	NoStorageInterfaces  *VoltstackSiteEmptyModel                                   `tfsdk:"no_storage_interfaces"`
+	StaticRoutes         *VoltstackSiteCustomStorageConfigStaticRoutesModel         `tfsdk:"static_routes"`
+	StorageClassList     *VoltstackSiteCustomStorageConfigStorageClassListModel     `tfsdk:"storage_class_list"`
+	StorageDeviceList    *VoltstackSiteCustomStorageConfigStorageDeviceListModel    `tfsdk:"storage_device_list"`
 	StorageInterfaceList *VoltstackSiteCustomStorageConfigStorageInterfaceListModel `tfsdk:"storage_interface_list"`
 }
 
@@ -594,11 +594,11 @@ type VoltstackSiteCustomStorageConfigStaticRoutesModel struct {
 
 // VoltstackSiteCustomStorageConfigStaticRoutesStaticRoutesModel represents static_routes block
 type VoltstackSiteCustomStorageConfigStaticRoutesStaticRoutesModel struct {
-	Attrs types.List `tfsdk:"attrs"`
-	IPAddress types.String `tfsdk:"ip_address"`
-	IPPrefixes types.List `tfsdk:"ip_prefixes"`
-	DefaultGateway *VoltstackSiteEmptyModel `tfsdk:"default_gateway"`
-	NodeInterface *VoltstackSiteCustomStorageConfigStaticRoutesStaticRoutesNodeInterfaceModel `tfsdk:"node_interface"`
+	Attrs          types.List                                                                  `tfsdk:"attrs"`
+	IPAddress      types.String                                                                `tfsdk:"ip_address"`
+	IPPrefixes     types.List                                                                  `tfsdk:"ip_prefixes"`
+	DefaultGateway *VoltstackSiteEmptyModel                                                    `tfsdk:"default_gateway"`
+	NodeInterface  *VoltstackSiteCustomStorageConfigStaticRoutesStaticRoutesNodeInterfaceModel `tfsdk:"node_interface"`
 }
 
 // VoltstackSiteCustomStorageConfigStaticRoutesStaticRoutesNodeInterfaceModel represents node_interface block
@@ -608,17 +608,17 @@ type VoltstackSiteCustomStorageConfigStaticRoutesStaticRoutesNodeInterfaceModel 
 
 // VoltstackSiteCustomStorageConfigStaticRoutesStaticRoutesNodeInterfaceListModel represents list block
 type VoltstackSiteCustomStorageConfigStaticRoutesStaticRoutesNodeInterfaceListModel struct {
-	Node types.String `tfsdk:"node"`
+	Node      types.String                                                                              `tfsdk:"node"`
 	Interface []VoltstackSiteCustomStorageConfigStaticRoutesStaticRoutesNodeInterfaceListInterfaceModel `tfsdk:"interface"`
 }
 
 // VoltstackSiteCustomStorageConfigStaticRoutesStaticRoutesNodeInterfaceListInterfaceModel represents interface block
 type VoltstackSiteCustomStorageConfigStaticRoutesStaticRoutesNodeInterfaceListInterfaceModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageClassListModel represents storage_class_list block
@@ -628,17 +628,17 @@ type VoltstackSiteCustomStorageConfigStorageClassListModel struct {
 
 // VoltstackSiteCustomStorageConfigStorageClassListStorageClassesModel represents storage_classes block
 type VoltstackSiteCustomStorageConfigStorageClassListStorageClassesModel struct {
-	AllowVolumeExpansion types.Bool `tfsdk:"allow_volume_expansion"`
-	DefaultStorageClass types.Bool `tfsdk:"default_storage_class"`
-	DescriptionSpec types.String `tfsdk:"description_spec"`
-	ReclaimPolicy types.String `tfsdk:"reclaim_policy"`
-	StorageClassName types.String `tfsdk:"storage_class_name"`
-	StorageDevice types.String `tfsdk:"storage_device"`
-	AdvancedStorageParameters *VoltstackSiteEmptyModel `tfsdk:"advanced_storage_parameters"`
-	CustomStorage *VoltstackSiteCustomStorageConfigStorageClassListStorageClassesCustomStorageModel `tfsdk:"custom_storage"`
-	HpeStorage *VoltstackSiteCustomStorageConfigStorageClassListStorageClassesHpeStorageModel `tfsdk:"hpe_storage"`
-	NetappTrident *VoltstackSiteCustomStorageConfigStorageClassListStorageClassesNetappTridentModel `tfsdk:"netapp_trident"`
-	PureServiceOrchestrator *VoltstackSiteCustomStorageConfigStorageClassListStorageClassesPureServiceOrchestratorModel `tfsdk:"pure_service_orchestrator"`
+	AllowVolumeExpansion      types.Bool                                                                                  `tfsdk:"allow_volume_expansion"`
+	DefaultStorageClass       types.Bool                                                                                  `tfsdk:"default_storage_class"`
+	DescriptionSpec           types.String                                                                                `tfsdk:"description_spec"`
+	ReclaimPolicy             types.String                                                                                `tfsdk:"reclaim_policy"`
+	StorageClassName          types.String                                                                                `tfsdk:"storage_class_name"`
+	StorageDevice             types.String                                                                                `tfsdk:"storage_device"`
+	AdvancedStorageParameters *VoltstackSiteEmptyModel                                                                    `tfsdk:"advanced_storage_parameters"`
+	CustomStorage             *VoltstackSiteCustomStorageConfigStorageClassListStorageClassesCustomStorageModel           `tfsdk:"custom_storage"`
+	HpeStorage                *VoltstackSiteCustomStorageConfigStorageClassListStorageClassesHpeStorageModel              `tfsdk:"hpe_storage"`
+	NetappTrident             *VoltstackSiteCustomStorageConfigStorageClassListStorageClassesNetappTridentModel           `tfsdk:"netapp_trident"`
+	PureServiceOrchestrator   *VoltstackSiteCustomStorageConfigStorageClassListStorageClassesPureServiceOrchestratorModel `tfsdk:"pure_service_orchestrator"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageClassListStorageClassesCustomStorageModel represents custom_storage block
@@ -648,35 +648,35 @@ type VoltstackSiteCustomStorageConfigStorageClassListStorageClassesCustomStorage
 
 // VoltstackSiteCustomStorageConfigStorageClassListStorageClassesHpeStorageModel represents hpe_storage block
 type VoltstackSiteCustomStorageConfigStorageClassListStorageClassesHpeStorageModel struct {
-	AllowMutations types.String `tfsdk:"allow_mutations"`
-	AllowOverrides types.String `tfsdk:"allow_overrides"`
-	DedupeEnabled types.Bool `tfsdk:"dedupe_enabled"`
-	DescriptionSpec types.String `tfsdk:"description_spec"`
-	DestroyOnDelete types.Bool `tfsdk:"destroy_on_delete"`
-	Encrypted types.Bool `tfsdk:"encrypted"`
-	Folder types.String `tfsdk:"folder"`
-	LimitIops types.String `tfsdk:"limit_iops"`
-	LimitMbps types.String `tfsdk:"limit_mbps"`
-	PerformancePolicy types.String `tfsdk:"performance_policy"`
-	Pool types.String `tfsdk:"pool"`
+	AllowMutations     types.String `tfsdk:"allow_mutations"`
+	AllowOverrides     types.String `tfsdk:"allow_overrides"`
+	DedupeEnabled      types.Bool   `tfsdk:"dedupe_enabled"`
+	DescriptionSpec    types.String `tfsdk:"description_spec"`
+	DestroyOnDelete    types.Bool   `tfsdk:"destroy_on_delete"`
+	Encrypted          types.Bool   `tfsdk:"encrypted"`
+	Folder             types.String `tfsdk:"folder"`
+	LimitIops          types.String `tfsdk:"limit_iops"`
+	LimitMbps          types.String `tfsdk:"limit_mbps"`
+	PerformancePolicy  types.String `tfsdk:"performance_policy"`
+	Pool               types.String `tfsdk:"pool"`
 	ProtectionTemplate types.String `tfsdk:"protection_template"`
-	SecretName types.String `tfsdk:"secret_name"`
-	SecretNamespace types.String `tfsdk:"secret_namespace"`
-	SyncOnDetach types.Bool `tfsdk:"sync_on_detach"`
-	Thick types.Bool `tfsdk:"thick"`
+	SecretName         types.String `tfsdk:"secret_name"`
+	SecretNamespace    types.String `tfsdk:"secret_namespace"`
+	SyncOnDetach       types.Bool   `tfsdk:"sync_on_detach"`
+	Thick              types.Bool   `tfsdk:"thick"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageClassListStorageClassesNetappTridentModel represents netapp_trident block
 type VoltstackSiteCustomStorageConfigStorageClassListStorageClassesNetappTridentModel struct {
-	StoragePools types.String `tfsdk:"storage_pools"`
-	Selector *VoltstackSiteEmptyModel `tfsdk:"selector"`
+	StoragePools types.String             `tfsdk:"storage_pools"`
+	Selector     *VoltstackSiteEmptyModel `tfsdk:"selector"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageClassListStorageClassesPureServiceOrchestratorModel represents pure_service_orchestrator block
 type VoltstackSiteCustomStorageConfigStorageClassListStorageClassesPureServiceOrchestratorModel struct {
-	Backend types.String `tfsdk:"backend"`
+	Backend        types.String `tfsdk:"backend"`
 	BandwidthLimit types.String `tfsdk:"bandwidth_limit"`
-	IopsLimit types.Int64 `tfsdk:"iops_limit"`
+	IopsLimit      types.Int64  `tfsdk:"iops_limit"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListModel represents storage_device_list block
@@ -686,61 +686,61 @@ type VoltstackSiteCustomStorageConfigStorageDeviceListModel struct {
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesModel represents storage_devices block
 type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesModel struct {
-	StorageDevice types.String `tfsdk:"storage_device"`
-	AdvancedAdvancedParameters *VoltstackSiteEmptyModel `tfsdk:"advanced_advanced_parameters"`
-	CustomStorage *VoltstackSiteEmptyModel `tfsdk:"custom_storage"`
-	HpeStorage *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesHpeStorageModel `tfsdk:"hpe_storage"`
-	NetappTrident *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentModel `tfsdk:"netapp_trident"`
-	PureServiceOrchestrator *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesPureServiceOrchestratorModel `tfsdk:"pure_service_orchestrator"`
+	StorageDevice              types.String                                                                                 `tfsdk:"storage_device"`
+	AdvancedAdvancedParameters *VoltstackSiteEmptyModel                                                                     `tfsdk:"advanced_advanced_parameters"`
+	CustomStorage              *VoltstackSiteEmptyModel                                                                     `tfsdk:"custom_storage"`
+	HpeStorage                 *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesHpeStorageModel              `tfsdk:"hpe_storage"`
+	NetappTrident              *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentModel           `tfsdk:"netapp_trident"`
+	PureServiceOrchestrator    *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesPureServiceOrchestratorModel `tfsdk:"pure_service_orchestrator"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesHpeStorageModel represents hpe_storage block
 type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesHpeStorageModel struct {
-	APIServerPort types.Int64 `tfsdk:"api_server_port"`
-	IscsiChapUser types.String `tfsdk:"iscsi_chap_user"`
-	StorageServerIPAddress types.String `tfsdk:"storage_server_ip_address"`
-	StorageServerName types.String `tfsdk:"storage_server_name"`
-	Username types.String `tfsdk:"username"`
-	IscsiChapPassword *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesHpeStorageIscsiChapPasswordModel `tfsdk:"iscsi_chap_password"`
-	Password *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesHpeStoragePasswordModel `tfsdk:"password"`
+	APIServerPort          types.Int64                                                                                      `tfsdk:"api_server_port"`
+	IscsiChapUser          types.String                                                                                     `tfsdk:"iscsi_chap_user"`
+	StorageServerIPAddress types.String                                                                                     `tfsdk:"storage_server_ip_address"`
+	StorageServerName      types.String                                                                                     `tfsdk:"storage_server_name"`
+	Username               types.String                                                                                     `tfsdk:"username"`
+	IscsiChapPassword      *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesHpeStorageIscsiChapPasswordModel `tfsdk:"iscsi_chap_password"`
+	Password               *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesHpeStoragePasswordModel          `tfsdk:"password"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesHpeStorageIscsiChapPasswordModel represents iscsi_chap_password block
 type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesHpeStorageIscsiChapPasswordModel struct {
 	BlindfoldSecretInfo *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesHpeStorageIscsiChapPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesHpeStorageIscsiChapPasswordClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesHpeStorageIscsiChapPasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesHpeStorageIscsiChapPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
 type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesHpeStorageIscsiChapPasswordBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesHpeStorageIscsiChapPasswordClearSecretInfoModel represents clear_secret_info block
 type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesHpeStorageIscsiChapPasswordClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesHpeStoragePasswordModel represents password block
 type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesHpeStoragePasswordModel struct {
 	BlindfoldSecretInfo *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesHpeStoragePasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesHpeStoragePasswordClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesHpeStoragePasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesHpeStoragePasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
 type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesHpeStoragePasswordBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesHpeStoragePasswordClearSecretInfoModel represents clear_secret_info block
 type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesHpeStoragePasswordClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentModel represents netapp_trident block
@@ -751,28 +751,28 @@ type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTriden
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasModel represents netapp_backend_ontap_nas block
 type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasModel struct {
-	AutoExportPolicy types.Bool `tfsdk:"auto_export_policy"`
-	BackendName types.String `tfsdk:"backend_name"`
-	ClientCertificate types.String `tfsdk:"client_certificate"`
-	DataLifDNSName types.String `tfsdk:"data_lif_dns_name"`
-	DataLifIP types.String `tfsdk:"data_lif_ip"`
-	LimitAggregateUsage types.String `tfsdk:"limit_aggregate_usage"`
-	LimitVolumeSize types.String `tfsdk:"limit_volume_size"`
-	ManagementLifDNSName types.String `tfsdk:"management_lif_dns_name"`
-	ManagementLifIP types.String `tfsdk:"management_lif_ip"`
-	NfsMountOptions types.String `tfsdk:"nfs_mount_options"`
-	Region types.String `tfsdk:"region"`
-	StorageDriverName types.String `tfsdk:"storage_driver_name"`
-	StoragePrefix types.String `tfsdk:"storage_prefix"`
-	Svm types.String `tfsdk:"svm"`
-	TrustedCaCertificate types.String `tfsdk:"trusted_ca_certificate"`
-	Username types.String `tfsdk:"username"`
-	AutoExportCidrs *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasAutoExportCidrsModel `tfsdk:"auto_export_cidrs"`
-	ClientPrivateKey *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasClientPrivateKeyModel `tfsdk:"client_private_key"`
-	Labels *VoltstackSiteEmptyModel `tfsdk:"labels"`
-	Password *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasPasswordModel `tfsdk:"password"`
-	Storage []VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasStorageModel `tfsdk:"storage"`
-	VolumeDefaults *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasVolumeDefaultsModel `tfsdk:"volume_defaults"`
+	AutoExportPolicy     types.Bool                                                                                                              `tfsdk:"auto_export_policy"`
+	BackendName          types.String                                                                                                            `tfsdk:"backend_name"`
+	ClientCertificate    types.String                                                                                                            `tfsdk:"client_certificate"`
+	DataLifDNSName       types.String                                                                                                            `tfsdk:"data_lif_dns_name"`
+	DataLifIP            types.String                                                                                                            `tfsdk:"data_lif_ip"`
+	LimitAggregateUsage  types.String                                                                                                            `tfsdk:"limit_aggregate_usage"`
+	LimitVolumeSize      types.String                                                                                                            `tfsdk:"limit_volume_size"`
+	ManagementLifDNSName types.String                                                                                                            `tfsdk:"management_lif_dns_name"`
+	ManagementLifIP      types.String                                                                                                            `tfsdk:"management_lif_ip"`
+	NfsMountOptions      types.String                                                                                                            `tfsdk:"nfs_mount_options"`
+	Region               types.String                                                                                                            `tfsdk:"region"`
+	StorageDriverName    types.String                                                                                                            `tfsdk:"storage_driver_name"`
+	StoragePrefix        types.String                                                                                                            `tfsdk:"storage_prefix"`
+	Svm                  types.String                                                                                                            `tfsdk:"svm"`
+	TrustedCaCertificate types.String                                                                                                            `tfsdk:"trusted_ca_certificate"`
+	Username             types.String                                                                                                            `tfsdk:"username"`
+	AutoExportCidrs      *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasAutoExportCidrsModel  `tfsdk:"auto_export_cidrs"`
+	ClientPrivateKey     *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasClientPrivateKeyModel `tfsdk:"client_private_key"`
+	Labels               *VoltstackSiteEmptyModel                                                                                                `tfsdk:"labels"`
+	Password             *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasPasswordModel         `tfsdk:"password"`
+	Storage              []VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasStorageModel         `tfsdk:"storage"`
+	VolumeDefaults       *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasVolumeDefaultsModel   `tfsdk:"volume_defaults"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasAutoExportCidrsModel represents auto_export_cidrs block
@@ -783,238 +783,238 @@ type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTriden
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasClientPrivateKeyModel represents client_private_key block
 type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasClientPrivateKeyModel struct {
 	BlindfoldSecretInfo *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasClientPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasClientPrivateKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasClientPrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasClientPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
 type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasClientPrivateKeyBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasClientPrivateKeyClearSecretInfoModel represents clear_secret_info block
 type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasClientPrivateKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasPasswordModel represents password block
 type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasPasswordModel struct {
 	BlindfoldSecretInfo *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasPasswordClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasPasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
 type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasPasswordBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasPasswordClearSecretInfoModel represents clear_secret_info block
 type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasPasswordClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasStorageModel represents storage block
 type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasStorageModel struct {
-	Zone types.String `tfsdk:"zone"`
-	Labels *VoltstackSiteEmptyModel `tfsdk:"labels"`
+	Zone           types.String                                                                                                                 `tfsdk:"zone"`
+	Labels         *VoltstackSiteEmptyModel                                                                                                     `tfsdk:"labels"`
 	VolumeDefaults *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasStorageVolumeDefaultsModel `tfsdk:"volume_defaults"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasStorageVolumeDefaultsModel represents volume_defaults block
 type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasStorageVolumeDefaultsModel struct {
-	AdaptiveQosPolicy types.String `tfsdk:"adaptive_qos_policy"`
-	Encryption types.Bool `tfsdk:"encryption"`
-	ExportPolicy types.String `tfsdk:"export_policy"`
-	QosPolicy types.String `tfsdk:"qos_policy"`
-	SecurityStyle types.String `tfsdk:"security_style"`
-	SnapshotDir types.Bool `tfsdk:"snapshot_dir"`
-	SnapshotPolicy types.String `tfsdk:"snapshot_policy"`
-	SnapshotReserve types.String `tfsdk:"snapshot_reserve"`
-	SpaceReserve types.String `tfsdk:"space_reserve"`
-	SplitOnClone types.Bool `tfsdk:"split_on_clone"`
-	TieringPolicy types.String `tfsdk:"tiering_policy"`
-	UnixPermissions types.Int64 `tfsdk:"unix_permissions"`
-	NoQos *VoltstackSiteEmptyModel `tfsdk:"no_qos"`
+	AdaptiveQosPolicy types.String             `tfsdk:"adaptive_qos_policy"`
+	Encryption        types.Bool               `tfsdk:"encryption"`
+	ExportPolicy      types.String             `tfsdk:"export_policy"`
+	QosPolicy         types.String             `tfsdk:"qos_policy"`
+	SecurityStyle     types.String             `tfsdk:"security_style"`
+	SnapshotDir       types.Bool               `tfsdk:"snapshot_dir"`
+	SnapshotPolicy    types.String             `tfsdk:"snapshot_policy"`
+	SnapshotReserve   types.String             `tfsdk:"snapshot_reserve"`
+	SpaceReserve      types.String             `tfsdk:"space_reserve"`
+	SplitOnClone      types.Bool               `tfsdk:"split_on_clone"`
+	TieringPolicy     types.String             `tfsdk:"tiering_policy"`
+	UnixPermissions   types.Int64              `tfsdk:"unix_permissions"`
+	NoQos             *VoltstackSiteEmptyModel `tfsdk:"no_qos"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasVolumeDefaultsModel represents volume_defaults block
 type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasVolumeDefaultsModel struct {
-	AdaptiveQosPolicy types.String `tfsdk:"adaptive_qos_policy"`
-	Encryption types.Bool `tfsdk:"encryption"`
-	ExportPolicy types.String `tfsdk:"export_policy"`
-	QosPolicy types.String `tfsdk:"qos_policy"`
-	SecurityStyle types.String `tfsdk:"security_style"`
-	SnapshotDir types.Bool `tfsdk:"snapshot_dir"`
-	SnapshotPolicy types.String `tfsdk:"snapshot_policy"`
-	SnapshotReserve types.String `tfsdk:"snapshot_reserve"`
-	SpaceReserve types.String `tfsdk:"space_reserve"`
-	SplitOnClone types.Bool `tfsdk:"split_on_clone"`
-	TieringPolicy types.String `tfsdk:"tiering_policy"`
-	UnixPermissions types.Int64 `tfsdk:"unix_permissions"`
-	NoQos *VoltstackSiteEmptyModel `tfsdk:"no_qos"`
+	AdaptiveQosPolicy types.String             `tfsdk:"adaptive_qos_policy"`
+	Encryption        types.Bool               `tfsdk:"encryption"`
+	ExportPolicy      types.String             `tfsdk:"export_policy"`
+	QosPolicy         types.String             `tfsdk:"qos_policy"`
+	SecurityStyle     types.String             `tfsdk:"security_style"`
+	SnapshotDir       types.Bool               `tfsdk:"snapshot_dir"`
+	SnapshotPolicy    types.String             `tfsdk:"snapshot_policy"`
+	SnapshotReserve   types.String             `tfsdk:"snapshot_reserve"`
+	SpaceReserve      types.String             `tfsdk:"space_reserve"`
+	SplitOnClone      types.Bool               `tfsdk:"split_on_clone"`
+	TieringPolicy     types.String             `tfsdk:"tiering_policy"`
+	UnixPermissions   types.Int64              `tfsdk:"unix_permissions"`
+	NoQos             *VoltstackSiteEmptyModel `tfsdk:"no_qos"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanModel represents netapp_backend_ontap_san block
 type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanModel struct {
-	ClientCertificate types.String `tfsdk:"client_certificate"`
-	DataLifDNSName types.String `tfsdk:"data_lif_dns_name"`
-	DataLifIP types.String `tfsdk:"data_lif_ip"`
-	IgroupName types.String `tfsdk:"igroup_name"`
-	LimitAggregateUsage types.Int64 `tfsdk:"limit_aggregate_usage"`
-	LimitVolumeSize types.Int64 `tfsdk:"limit_volume_size"`
-	ManagementLifDNSName types.String `tfsdk:"management_lif_dns_name"`
-	ManagementLifIP types.String `tfsdk:"management_lif_ip"`
-	Region types.String `tfsdk:"region"`
-	StorageDriverName types.String `tfsdk:"storage_driver_name"`
-	StoragePrefix types.String `tfsdk:"storage_prefix"`
-	Svm types.String `tfsdk:"svm"`
-	TrustedCaCertificate types.String `tfsdk:"trusted_ca_certificate"`
-	Username types.String `tfsdk:"username"`
-	ClientPrivateKey *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanClientPrivateKeyModel `tfsdk:"client_private_key"`
-	Labels *VoltstackSiteEmptyModel `tfsdk:"labels"`
-	NoChap *VoltstackSiteEmptyModel `tfsdk:"no_chap"`
-	Password *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanPasswordModel `tfsdk:"password"`
-	Storage []VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanStorageModel `tfsdk:"storage"`
-	UseChap *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapModel `tfsdk:"use_chap"`
-	VolumeDefaults *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanVolumeDefaultsModel `tfsdk:"volume_defaults"`
+	ClientCertificate    types.String                                                                                                            `tfsdk:"client_certificate"`
+	DataLifDNSName       types.String                                                                                                            `tfsdk:"data_lif_dns_name"`
+	DataLifIP            types.String                                                                                                            `tfsdk:"data_lif_ip"`
+	IgroupName           types.String                                                                                                            `tfsdk:"igroup_name"`
+	LimitAggregateUsage  types.Int64                                                                                                             `tfsdk:"limit_aggregate_usage"`
+	LimitVolumeSize      types.Int64                                                                                                             `tfsdk:"limit_volume_size"`
+	ManagementLifDNSName types.String                                                                                                            `tfsdk:"management_lif_dns_name"`
+	ManagementLifIP      types.String                                                                                                            `tfsdk:"management_lif_ip"`
+	Region               types.String                                                                                                            `tfsdk:"region"`
+	StorageDriverName    types.String                                                                                                            `tfsdk:"storage_driver_name"`
+	StoragePrefix        types.String                                                                                                            `tfsdk:"storage_prefix"`
+	Svm                  types.String                                                                                                            `tfsdk:"svm"`
+	TrustedCaCertificate types.String                                                                                                            `tfsdk:"trusted_ca_certificate"`
+	Username             types.String                                                                                                            `tfsdk:"username"`
+	ClientPrivateKey     *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanClientPrivateKeyModel `tfsdk:"client_private_key"`
+	Labels               *VoltstackSiteEmptyModel                                                                                                `tfsdk:"labels"`
+	NoChap               *VoltstackSiteEmptyModel                                                                                                `tfsdk:"no_chap"`
+	Password             *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanPasswordModel         `tfsdk:"password"`
+	Storage              []VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanStorageModel         `tfsdk:"storage"`
+	UseChap              *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapModel          `tfsdk:"use_chap"`
+	VolumeDefaults       *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanVolumeDefaultsModel   `tfsdk:"volume_defaults"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanClientPrivateKeyModel represents client_private_key block
 type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanClientPrivateKeyModel struct {
 	BlindfoldSecretInfo *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanClientPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanClientPrivateKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanClientPrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanClientPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
 type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanClientPrivateKeyBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanClientPrivateKeyClearSecretInfoModel represents clear_secret_info block
 type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanClientPrivateKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanPasswordModel represents password block
 type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanPasswordModel struct {
 	BlindfoldSecretInfo *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanPasswordClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanPasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
 type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanPasswordBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanPasswordClearSecretInfoModel represents clear_secret_info block
 type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanPasswordClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanStorageModel represents storage block
 type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanStorageModel struct {
-	Zone types.String `tfsdk:"zone"`
-	Labels *VoltstackSiteEmptyModel `tfsdk:"labels"`
+	Zone           types.String                                                                                                                 `tfsdk:"zone"`
+	Labels         *VoltstackSiteEmptyModel                                                                                                     `tfsdk:"labels"`
 	VolumeDefaults *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanStorageVolumeDefaultsModel `tfsdk:"volume_defaults"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanStorageVolumeDefaultsModel represents volume_defaults block
 type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanStorageVolumeDefaultsModel struct {
-	AdaptiveQosPolicy types.String `tfsdk:"adaptive_qos_policy"`
-	Encryption types.Bool `tfsdk:"encryption"`
-	ExportPolicy types.String `tfsdk:"export_policy"`
-	QosPolicy types.String `tfsdk:"qos_policy"`
-	SecurityStyle types.String `tfsdk:"security_style"`
-	SnapshotDir types.Bool `tfsdk:"snapshot_dir"`
-	SnapshotPolicy types.String `tfsdk:"snapshot_policy"`
-	SnapshotReserve types.String `tfsdk:"snapshot_reserve"`
-	SpaceReserve types.String `tfsdk:"space_reserve"`
-	SplitOnClone types.Bool `tfsdk:"split_on_clone"`
-	TieringPolicy types.String `tfsdk:"tiering_policy"`
-	UnixPermissions types.Int64 `tfsdk:"unix_permissions"`
-	NoQos *VoltstackSiteEmptyModel `tfsdk:"no_qos"`
+	AdaptiveQosPolicy types.String             `tfsdk:"adaptive_qos_policy"`
+	Encryption        types.Bool               `tfsdk:"encryption"`
+	ExportPolicy      types.String             `tfsdk:"export_policy"`
+	QosPolicy         types.String             `tfsdk:"qos_policy"`
+	SecurityStyle     types.String             `tfsdk:"security_style"`
+	SnapshotDir       types.Bool               `tfsdk:"snapshot_dir"`
+	SnapshotPolicy    types.String             `tfsdk:"snapshot_policy"`
+	SnapshotReserve   types.String             `tfsdk:"snapshot_reserve"`
+	SpaceReserve      types.String             `tfsdk:"space_reserve"`
+	SplitOnClone      types.Bool               `tfsdk:"split_on_clone"`
+	TieringPolicy     types.String             `tfsdk:"tiering_policy"`
+	UnixPermissions   types.Int64              `tfsdk:"unix_permissions"`
+	NoQos             *VoltstackSiteEmptyModel `tfsdk:"no_qos"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapModel represents use_chap block
 type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapModel struct {
-	ChapTargetUsername types.String `tfsdk:"chap_target_username"`
-	ChapUsername types.String `tfsdk:"chap_username"`
-	ChapInitiatorSecret *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapInitiatorSecretModel `tfsdk:"chap_initiator_secret"`
+	ChapTargetUsername        types.String                                                                                                                            `tfsdk:"chap_target_username"`
+	ChapUsername              types.String                                                                                                                            `tfsdk:"chap_username"`
+	ChapInitiatorSecret       *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapInitiatorSecretModel       `tfsdk:"chap_initiator_secret"`
 	ChapTargetInitiatorSecret *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapTargetInitiatorSecretModel `tfsdk:"chap_target_initiator_secret"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapInitiatorSecretModel represents chap_initiator_secret block
 type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapInitiatorSecretModel struct {
 	BlindfoldSecretInfo *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapInitiatorSecretBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapInitiatorSecretClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapInitiatorSecretClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapInitiatorSecretBlindfoldSecretInfoModel represents blindfold_secret_info block
 type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapInitiatorSecretBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapInitiatorSecretClearSecretInfoModel represents clear_secret_info block
 type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapInitiatorSecretClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapTargetInitiatorSecretModel represents chap_target_initiator_secret block
 type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapTargetInitiatorSecretModel struct {
 	BlindfoldSecretInfo *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapTargetInitiatorSecretBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapTargetInitiatorSecretClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapTargetInitiatorSecretClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapTargetInitiatorSecretBlindfoldSecretInfoModel represents blindfold_secret_info block
 type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapTargetInitiatorSecretBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapTargetInitiatorSecretClearSecretInfoModel represents clear_secret_info block
 type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapTargetInitiatorSecretClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanVolumeDefaultsModel represents volume_defaults block
 type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanVolumeDefaultsModel struct {
-	AdaptiveQosPolicy types.String `tfsdk:"adaptive_qos_policy"`
-	Encryption types.Bool `tfsdk:"encryption"`
-	ExportPolicy types.String `tfsdk:"export_policy"`
-	QosPolicy types.String `tfsdk:"qos_policy"`
-	SecurityStyle types.String `tfsdk:"security_style"`
-	SnapshotDir types.Bool `tfsdk:"snapshot_dir"`
-	SnapshotPolicy types.String `tfsdk:"snapshot_policy"`
-	SnapshotReserve types.String `tfsdk:"snapshot_reserve"`
-	SpaceReserve types.String `tfsdk:"space_reserve"`
-	SplitOnClone types.Bool `tfsdk:"split_on_clone"`
-	TieringPolicy types.String `tfsdk:"tiering_policy"`
-	UnixPermissions types.Int64 `tfsdk:"unix_permissions"`
-	NoQos *VoltstackSiteEmptyModel `tfsdk:"no_qos"`
+	AdaptiveQosPolicy types.String             `tfsdk:"adaptive_qos_policy"`
+	Encryption        types.Bool               `tfsdk:"encryption"`
+	ExportPolicy      types.String             `tfsdk:"export_policy"`
+	QosPolicy         types.String             `tfsdk:"qos_policy"`
+	SecurityStyle     types.String             `tfsdk:"security_style"`
+	SnapshotDir       types.Bool               `tfsdk:"snapshot_dir"`
+	SnapshotPolicy    types.String             `tfsdk:"snapshot_policy"`
+	SnapshotReserve   types.String             `tfsdk:"snapshot_reserve"`
+	SpaceReserve      types.String             `tfsdk:"space_reserve"`
+	SplitOnClone      types.Bool               `tfsdk:"split_on_clone"`
+	TieringPolicy     types.String             `tfsdk:"tiering_policy"`
+	UnixPermissions   types.Int64              `tfsdk:"unix_permissions"`
+	NoQos             *VoltstackSiteEmptyModel `tfsdk:"no_qos"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesPureServiceOrchestratorModel represents pure_service_orchestrator block
 type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesPureServiceOrchestratorModel struct {
-	ClusterID types.String `tfsdk:"cluster_id"`
-	EnableStorageTopology types.Bool `tfsdk:"enable_storage_topology"`
-	EnableStrictTopology types.Bool `tfsdk:"enable_strict_topology"`
-	Arrays *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesPureServiceOrchestratorArraysModel `tfsdk:"arrays"`
+	ClusterID             types.String                                                                                       `tfsdk:"cluster_id"`
+	EnableStorageTopology types.Bool                                                                                         `tfsdk:"enable_storage_topology"`
+	EnableStrictTopology  types.Bool                                                                                         `tfsdk:"enable_strict_topology"`
+	Arrays                *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesPureServiceOrchestratorArraysModel `tfsdk:"arrays"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesPureServiceOrchestratorArraysModel represents arrays block
@@ -1025,76 +1025,76 @@ type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesPureServiceO
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayModel represents flash_array block
 type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayModel struct {
-	DefaultFsOpt types.String `tfsdk:"default_fs_opt"`
-	DefaultFsType types.String `tfsdk:"default_fs_type"`
-	DefaultMountOpts types.List `tfsdk:"default_mount_opts"`
-	DisablePreemptAttachments types.Bool `tfsdk:"disable_preempt_attachments"`
-	IscsiLoginTimeout types.Int64 `tfsdk:"iscsi_login_timeout"`
-	SanType types.String `tfsdk:"san_type"`
-	FlashArrays []VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysModel `tfsdk:"flash_arrays"`
+	DefaultFsOpt              types.String                                                                                                             `tfsdk:"default_fs_opt"`
+	DefaultFsType             types.String                                                                                                             `tfsdk:"default_fs_type"`
+	DefaultMountOpts          types.List                                                                                                               `tfsdk:"default_mount_opts"`
+	DisablePreemptAttachments types.Bool                                                                                                               `tfsdk:"disable_preempt_attachments"`
+	IscsiLoginTimeout         types.Int64                                                                                                              `tfsdk:"iscsi_login_timeout"`
+	SanType                   types.String                                                                                                             `tfsdk:"san_type"`
+	FlashArrays               []VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysModel `tfsdk:"flash_arrays"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysModel represents flash_arrays block
 type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysModel struct {
-	MgmtDNSName types.String `tfsdk:"mgmt_dns_name"`
-	MgmtIP types.String `tfsdk:"mgmt_ip"`
-	APIToken *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysAPITokenModel `tfsdk:"api_token"`
-	Labels *VoltstackSiteEmptyModel `tfsdk:"labels"`
+	MgmtDNSName types.String                                                                                                                    `tfsdk:"mgmt_dns_name"`
+	MgmtIP      types.String                                                                                                                    `tfsdk:"mgmt_ip"`
+	APIToken    *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysAPITokenModel `tfsdk:"api_token"`
+	Labels      *VoltstackSiteEmptyModel                                                                                                        `tfsdk:"labels"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysAPITokenModel represents api_token block
 type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysAPITokenModel struct {
 	BlindfoldSecretInfo *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysAPITokenBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysAPITokenClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysAPITokenClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysAPITokenBlindfoldSecretInfoModel represents blindfold_secret_info block
 type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysAPITokenBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysAPITokenClearSecretInfoModel represents clear_secret_info block
 type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysAPITokenClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeModel represents flash_blade block
 type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeModel struct {
-	EnableSnapshotDirectory types.Bool `tfsdk:"enable_snapshot_directory"`
-	ExportRules types.String `tfsdk:"export_rules"`
-	FlashBlades []VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesModel `tfsdk:"flash_blades"`
+	EnableSnapshotDirectory types.Bool                                                                                                               `tfsdk:"enable_snapshot_directory"`
+	ExportRules             types.String                                                                                                             `tfsdk:"export_rules"`
+	FlashBlades             []VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesModel `tfsdk:"flash_blades"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesModel represents flash_blades block
 type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesModel struct {
-	MgmtDNSName types.String `tfsdk:"mgmt_dns_name"`
-	MgmtIP types.String `tfsdk:"mgmt_ip"`
-	NfsEndpointDNSName types.String `tfsdk:"nfs_endpoint_dns_name"`
-	NfsEndpointIP types.String `tfsdk:"nfs_endpoint_ip"`
-	APIToken *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesAPITokenModel `tfsdk:"api_token"`
-	Lables *VoltstackSiteEmptyModel `tfsdk:"lables"`
+	MgmtDNSName        types.String                                                                                                                    `tfsdk:"mgmt_dns_name"`
+	MgmtIP             types.String                                                                                                                    `tfsdk:"mgmt_ip"`
+	NfsEndpointDNSName types.String                                                                                                                    `tfsdk:"nfs_endpoint_dns_name"`
+	NfsEndpointIP      types.String                                                                                                                    `tfsdk:"nfs_endpoint_ip"`
+	APIToken           *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesAPITokenModel `tfsdk:"api_token"`
+	Lables             *VoltstackSiteEmptyModel                                                                                                        `tfsdk:"lables"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesAPITokenModel represents api_token block
 type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesAPITokenModel struct {
 	BlindfoldSecretInfo *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesAPITokenBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesAPITokenClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesAPITokenClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesAPITokenBlindfoldSecretInfoModel represents blindfold_secret_info block
 type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesAPITokenBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesAPITokenClearSecretInfoModel represents clear_secret_info block
 type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesAPITokenClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageInterfaceListModel represents storage_interface_list block
@@ -1104,59 +1104,59 @@ type VoltstackSiteCustomStorageConfigStorageInterfaceListModel struct {
 
 // VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesModel represents storage_interfaces block
 type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesModel struct {
-	DescriptionSpec types.String `tfsdk:"description_spec"`
-	Labels *VoltstackSiteEmptyModel `tfsdk:"labels"`
+	DescriptionSpec  types.String                                                                                `tfsdk:"description_spec"`
+	Labels           *VoltstackSiteEmptyModel                                                                    `tfsdk:"labels"`
 	StorageInterface *VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceModel `tfsdk:"storage_interface"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceModel represents storage_interface block
 type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceModel struct {
-	Device types.String `tfsdk:"device"`
-	Mtu types.Int64 `tfsdk:"mtu"`
-	Node types.String `tfsdk:"node"`
-	Priority types.Int64 `tfsdk:"priority"`
-	VlanID types.Int64 `tfsdk:"vlan_id"`
-	Cluster *VoltstackSiteEmptyModel `tfsdk:"cluster"`
-	DhcpClient *VoltstackSiteEmptyModel `tfsdk:"dhcp_client"`
-	DhcpServer *VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceDhcpServerModel `tfsdk:"dhcp_server"`
-	IPV6AutoConfig *VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigModel `tfsdk:"ipv6_auto_config"`
-	IsPrimary *VoltstackSiteEmptyModel `tfsdk:"is_primary"`
-	Monitor *VoltstackSiteEmptyModel `tfsdk:"monitor"`
-	MonitorDisabled *VoltstackSiteEmptyModel `tfsdk:"monitor_disabled"`
-	NoIPV6Address *VoltstackSiteEmptyModel `tfsdk:"no_ipv6_address"`
-	NotPrimary *VoltstackSiteEmptyModel `tfsdk:"not_primary"`
-	SiteLocalInsideNetwork *VoltstackSiteEmptyModel `tfsdk:"site_local_inside_network"`
-	SiteLocalNetwork *VoltstackSiteEmptyModel `tfsdk:"site_local_network"`
-	StaticIP *VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceStaticIPModel `tfsdk:"static_ip"`
-	StaticIPV6Address *VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceStaticIPV6AddressModel `tfsdk:"static_ipv6_address"`
-	StorageNetwork *VoltstackSiteEmptyModel `tfsdk:"storage_network"`
-	Untagged *VoltstackSiteEmptyModel `tfsdk:"untagged"`
+	Device                 types.String                                                                                                 `tfsdk:"device"`
+	Mtu                    types.Int64                                                                                                  `tfsdk:"mtu"`
+	Node                   types.String                                                                                                 `tfsdk:"node"`
+	Priority               types.Int64                                                                                                  `tfsdk:"priority"`
+	VlanID                 types.Int64                                                                                                  `tfsdk:"vlan_id"`
+	Cluster                *VoltstackSiteEmptyModel                                                                                     `tfsdk:"cluster"`
+	DhcpClient             *VoltstackSiteEmptyModel                                                                                     `tfsdk:"dhcp_client"`
+	DhcpServer             *VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceDhcpServerModel        `tfsdk:"dhcp_server"`
+	IPV6AutoConfig         *VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigModel    `tfsdk:"ipv6_auto_config"`
+	IsPrimary              *VoltstackSiteEmptyModel                                                                                     `tfsdk:"is_primary"`
+	Monitor                *VoltstackSiteEmptyModel                                                                                     `tfsdk:"monitor"`
+	MonitorDisabled        *VoltstackSiteEmptyModel                                                                                     `tfsdk:"monitor_disabled"`
+	NoIPV6Address          *VoltstackSiteEmptyModel                                                                                     `tfsdk:"no_ipv6_address"`
+	NotPrimary             *VoltstackSiteEmptyModel                                                                                     `tfsdk:"not_primary"`
+	SiteLocalInsideNetwork *VoltstackSiteEmptyModel                                                                                     `tfsdk:"site_local_inside_network"`
+	SiteLocalNetwork       *VoltstackSiteEmptyModel                                                                                     `tfsdk:"site_local_network"`
+	StaticIP               *VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceStaticIPModel          `tfsdk:"static_ip"`
+	StaticIPV6Address      *VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceStaticIPV6AddressModel `tfsdk:"static_ipv6_address"`
+	StorageNetwork         *VoltstackSiteEmptyModel                                                                                     `tfsdk:"storage_network"`
+	Untagged               *VoltstackSiteEmptyModel                                                                                     `tfsdk:"untagged"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceDhcpServerModel represents dhcp_server block
 type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceDhcpServerModel struct {
-	AutomaticFromEnd *VoltstackSiteEmptyModel `tfsdk:"automatic_from_end"`
-	AutomaticFromStart *VoltstackSiteEmptyModel `tfsdk:"automatic_from_start"`
-	DhcpNetworks []VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceDhcpServerDhcpNetworksModel `tfsdk:"dhcp_networks"`
-	FixedIPMap *VoltstackSiteEmptyModel `tfsdk:"fixed_ip_map"`
-	InterfaceIPMap *VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceDhcpServerInterfaceIPMapModel `tfsdk:"interface_ip_map"`
+	AutomaticFromEnd   *VoltstackSiteEmptyModel                                                                                            `tfsdk:"automatic_from_end"`
+	AutomaticFromStart *VoltstackSiteEmptyModel                                                                                            `tfsdk:"automatic_from_start"`
+	DhcpNetworks       []VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceDhcpServerDhcpNetworksModel  `tfsdk:"dhcp_networks"`
+	FixedIPMap         *VoltstackSiteEmptyModel                                                                                            `tfsdk:"fixed_ip_map"`
+	InterfaceIPMap     *VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceDhcpServerInterfaceIPMapModel `tfsdk:"interface_ip_map"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceDhcpServerDhcpNetworksModel represents dhcp_networks block
 type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceDhcpServerDhcpNetworksModel struct {
-	DgwAddress types.String `tfsdk:"dgw_address"`
-	DNSAddress types.String `tfsdk:"dns_address"`
-	NetworkPrefix types.String `tfsdk:"network_prefix"`
-	PoolSettings types.String `tfsdk:"pool_settings"`
-	FirstAddress *VoltstackSiteEmptyModel `tfsdk:"first_address"`
-	LastAddress *VoltstackSiteEmptyModel `tfsdk:"last_address"`
-	Pools []VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceDhcpServerDhcpNetworksPoolsModel `tfsdk:"pools"`
-	SameAsDgw *VoltstackSiteEmptyModel `tfsdk:"same_as_dgw"`
+	DgwAddress    types.String                                                                                                            `tfsdk:"dgw_address"`
+	DNSAddress    types.String                                                                                                            `tfsdk:"dns_address"`
+	NetworkPrefix types.String                                                                                                            `tfsdk:"network_prefix"`
+	PoolSettings  types.String                                                                                                            `tfsdk:"pool_settings"`
+	FirstAddress  *VoltstackSiteEmptyModel                                                                                                `tfsdk:"first_address"`
+	LastAddress   *VoltstackSiteEmptyModel                                                                                                `tfsdk:"last_address"`
+	Pools         []VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceDhcpServerDhcpNetworksPoolsModel `tfsdk:"pools"`
+	SameAsDgw     *VoltstackSiteEmptyModel                                                                                                `tfsdk:"same_as_dgw"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceDhcpServerDhcpNetworksPoolsModel represents pools block
 type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceDhcpServerDhcpNetworksPoolsModel struct {
-	EndIP types.String `tfsdk:"end_ip"`
+	EndIP   types.String `tfsdk:"end_ip"`
 	StartIP types.String `tfsdk:"start_ip"`
 }
 
@@ -1167,21 +1167,21 @@ type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorag
 
 // VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigModel represents ipv6_auto_config block
 type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigModel struct {
-	Host *VoltstackSiteEmptyModel `tfsdk:"host"`
+	Host   *VoltstackSiteEmptyModel                                                                                        `tfsdk:"host"`
 	Router *VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigRouterModel `tfsdk:"router"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigRouterModel represents router block
 type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigRouterModel struct {
-	NetworkPrefix types.String `tfsdk:"network_prefix"`
-	DNSConfig *VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigRouterDNSConfigModel `tfsdk:"dns_config"`
-	Stateful *VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigRouterStatefulModel `tfsdk:"stateful"`
+	NetworkPrefix types.String                                                                                                             `tfsdk:"network_prefix"`
+	DNSConfig     *VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigRouterDNSConfigModel `tfsdk:"dns_config"`
+	Stateful      *VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigRouterStatefulModel  `tfsdk:"stateful"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigRouterDNSConfigModel represents dns_config block
 type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigRouterDNSConfigModel struct {
 	ConfiguredList *VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigRouterDNSConfigConfiguredListModel `tfsdk:"configured_list"`
-	LocalDNS *VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigRouterDNSConfigLocalDNSModel `tfsdk:"local_dns"`
+	LocalDNS       *VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigRouterDNSConfigLocalDNSModel       `tfsdk:"local_dns"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigRouterDNSConfigConfiguredListModel represents configured_list block
@@ -1191,30 +1191,30 @@ type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorag
 
 // VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigRouterDNSConfigLocalDNSModel represents local_dns block
 type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigRouterDNSConfigLocalDNSModel struct {
-	ConfiguredAddress types.String `tfsdk:"configured_address"`
-	FirstAddress *VoltstackSiteEmptyModel `tfsdk:"first_address"`
-	LastAddress *VoltstackSiteEmptyModel `tfsdk:"last_address"`
+	ConfiguredAddress types.String             `tfsdk:"configured_address"`
+	FirstAddress      *VoltstackSiteEmptyModel `tfsdk:"first_address"`
+	LastAddress       *VoltstackSiteEmptyModel `tfsdk:"last_address"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigRouterStatefulModel represents stateful block
 type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigRouterStatefulModel struct {
-	AutomaticFromEnd *VoltstackSiteEmptyModel `tfsdk:"automatic_from_end"`
-	AutomaticFromStart *VoltstackSiteEmptyModel `tfsdk:"automatic_from_start"`
-	DhcpNetworks []VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigRouterStatefulDhcpNetworksModel `tfsdk:"dhcp_networks"`
-	FixedIPMap *VoltstackSiteEmptyModel `tfsdk:"fixed_ip_map"`
-	InterfaceIPMap *VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigRouterStatefulInterfaceIPMapModel `tfsdk:"interface_ip_map"`
+	AutomaticFromEnd   *VoltstackSiteEmptyModel                                                                                                              `tfsdk:"automatic_from_end"`
+	AutomaticFromStart *VoltstackSiteEmptyModel                                                                                                              `tfsdk:"automatic_from_start"`
+	DhcpNetworks       []VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigRouterStatefulDhcpNetworksModel  `tfsdk:"dhcp_networks"`
+	FixedIPMap         *VoltstackSiteEmptyModel                                                                                                              `tfsdk:"fixed_ip_map"`
+	InterfaceIPMap     *VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigRouterStatefulInterfaceIPMapModel `tfsdk:"interface_ip_map"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigRouterStatefulDhcpNetworksModel represents dhcp_networks block
 type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigRouterStatefulDhcpNetworksModel struct {
-	NetworkPrefix types.String `tfsdk:"network_prefix"`
-	PoolSettings types.String `tfsdk:"pool_settings"`
-	Pools []VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel `tfsdk:"pools"`
+	NetworkPrefix types.String                                                                                                                              `tfsdk:"network_prefix"`
+	PoolSettings  types.String                                                                                                                              `tfsdk:"pool_settings"`
+	Pools         []VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel `tfsdk:"pools"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel represents pools block
 type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel struct {
-	EndIP types.String `tfsdk:"end_ip"`
+	EndIP   types.String `tfsdk:"end_ip"`
 	StartIP types.String `tfsdk:"start_ip"`
 }
 
@@ -1226,7 +1226,7 @@ type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorag
 // VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceStaticIPModel represents static_ip block
 type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceStaticIPModel struct {
 	ClusterStaticIP *VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceStaticIPClusterStaticIPModel `tfsdk:"cluster_static_ip"`
-	NodeStaticIP *VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceStaticIPNodeStaticIPModel `tfsdk:"node_static_ip"`
+	NodeStaticIP    *VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceStaticIPNodeStaticIPModel    `tfsdk:"node_static_ip"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceStaticIPClusterStaticIPModel represents cluster_static_ip block
@@ -1243,7 +1243,7 @@ type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorag
 // VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceStaticIPV6AddressModel represents static_ipv6_address block
 type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceStaticIPV6AddressModel struct {
 	ClusterStaticIP *VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceStaticIPV6AddressClusterStaticIPModel `tfsdk:"cluster_static_ip"`
-	NodeStaticIP *VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceStaticIPV6AddressNodeStaticIPModel `tfsdk:"node_static_ip"`
+	NodeStaticIP    *VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceStaticIPV6AddressNodeStaticIPModel    `tfsdk:"node_static_ip"`
 }
 
 // VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceStaticIPV6AddressClusterStaticIPModel represents cluster_static_ip block
@@ -1259,100 +1259,100 @@ type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorag
 
 // VoltstackSiteEnableVgpuModel represents enable_vgpu block
 type VoltstackSiteEnableVgpuModel struct {
-	FeatureType types.String `tfsdk:"feature_type"`
+	FeatureType   types.String `tfsdk:"feature_type"`
 	ServerAddress types.String `tfsdk:"server_address"`
-	ServerPort types.Int64 `tfsdk:"server_port"`
+	ServerPort    types.Int64  `tfsdk:"server_port"`
 }
 
 // VoltstackSiteK8SClusterModel represents k8s_cluster block
 type VoltstackSiteK8SClusterModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // VoltstackSiteKubernetesUpgradeDrainModel represents kubernetes_upgrade_drain block
 type VoltstackSiteKubernetesUpgradeDrainModel struct {
-	DisableUpgradeDrain *VoltstackSiteEmptyModel `tfsdk:"disable_upgrade_drain"`
-	EnableUpgradeDrain *VoltstackSiteKubernetesUpgradeDrainEnableUpgradeDrainModel `tfsdk:"enable_upgrade_drain"`
+	DisableUpgradeDrain *VoltstackSiteEmptyModel                                    `tfsdk:"disable_upgrade_drain"`
+	EnableUpgradeDrain  *VoltstackSiteKubernetesUpgradeDrainEnableUpgradeDrainModel `tfsdk:"enable_upgrade_drain"`
 }
 
 // VoltstackSiteKubernetesUpgradeDrainEnableUpgradeDrainModel represents enable_upgrade_drain block
 type VoltstackSiteKubernetesUpgradeDrainEnableUpgradeDrainModel struct {
-	DrainMaxUnavailableNodeCount types.Int64 `tfsdk:"drain_max_unavailable_node_count"`
-	DrainNodeTimeout types.Int64 `tfsdk:"drain_node_timeout"`
-	DisableVegaUpgradeMode *VoltstackSiteEmptyModel `tfsdk:"disable_vega_upgrade_mode"`
-	EnableVegaUpgradeMode *VoltstackSiteEmptyModel `tfsdk:"enable_vega_upgrade_mode"`
+	DrainMaxUnavailableNodeCount types.Int64              `tfsdk:"drain_max_unavailable_node_count"`
+	DrainNodeTimeout             types.Int64              `tfsdk:"drain_node_timeout"`
+	DisableVegaUpgradeMode       *VoltstackSiteEmptyModel `tfsdk:"disable_vega_upgrade_mode"`
+	EnableVegaUpgradeMode        *VoltstackSiteEmptyModel `tfsdk:"enable_vega_upgrade_mode"`
 }
 
 // VoltstackSiteLocalControlPlaneModel represents local_control_plane block
 type VoltstackSiteLocalControlPlaneModel struct {
 	BGPConfig *VoltstackSiteLocalControlPlaneBGPConfigModel `tfsdk:"bgp_config"`
-	InsideVn *VoltstackSiteEmptyModel `tfsdk:"inside_vn"`
-	OutsideVn *VoltstackSiteEmptyModel `tfsdk:"outside_vn"`
+	InsideVn  *VoltstackSiteEmptyModel                      `tfsdk:"inside_vn"`
+	OutsideVn *VoltstackSiteEmptyModel                      `tfsdk:"outside_vn"`
 }
 
 // VoltstackSiteLocalControlPlaneBGPConfigModel represents bgp_config block
 type VoltstackSiteLocalControlPlaneBGPConfigModel struct {
-	Asn types.Int64 `tfsdk:"asn"`
+	Asn   types.Int64                                         `tfsdk:"asn"`
 	Peers []VoltstackSiteLocalControlPlaneBGPConfigPeersModel `tfsdk:"peers"`
 }
 
 // VoltstackSiteLocalControlPlaneBGPConfigPeersModel represents peers block
 type VoltstackSiteLocalControlPlaneBGPConfigPeersModel struct {
-	Label types.String `tfsdk:"label"`
-	BfdDisabled *VoltstackSiteEmptyModel `tfsdk:"bfd_disabled"`
-	BfdEnabled *VoltstackSiteLocalControlPlaneBGPConfigPeersBfdEnabledModel `tfsdk:"bfd_enabled"`
-	Disable *VoltstackSiteEmptyModel `tfsdk:"disable"`
-	External *VoltstackSiteLocalControlPlaneBGPConfigPeersExternalModel `tfsdk:"external"`
-	Metadata *VoltstackSiteLocalControlPlaneBGPConfigPeersMetadataModel `tfsdk:"metadata"`
-	PassiveModeDisabled *VoltstackSiteEmptyModel `tfsdk:"passive_mode_disabled"`
-	PassiveModeEnabled *VoltstackSiteEmptyModel `tfsdk:"passive_mode_enabled"`
-	RoutingPolicies *VoltstackSiteLocalControlPlaneBGPConfigPeersRoutingPoliciesModel `tfsdk:"routing_policies"`
+	Label               types.String                                                      `tfsdk:"label"`
+	BfdDisabled         *VoltstackSiteEmptyModel                                          `tfsdk:"bfd_disabled"`
+	BfdEnabled          *VoltstackSiteLocalControlPlaneBGPConfigPeersBfdEnabledModel      `tfsdk:"bfd_enabled"`
+	Disable             *VoltstackSiteEmptyModel                                          `tfsdk:"disable"`
+	External            *VoltstackSiteLocalControlPlaneBGPConfigPeersExternalModel        `tfsdk:"external"`
+	Metadata            *VoltstackSiteLocalControlPlaneBGPConfigPeersMetadataModel        `tfsdk:"metadata"`
+	PassiveModeDisabled *VoltstackSiteEmptyModel                                          `tfsdk:"passive_mode_disabled"`
+	PassiveModeEnabled  *VoltstackSiteEmptyModel                                          `tfsdk:"passive_mode_enabled"`
+	RoutingPolicies     *VoltstackSiteLocalControlPlaneBGPConfigPeersRoutingPoliciesModel `tfsdk:"routing_policies"`
 }
 
 // VoltstackSiteLocalControlPlaneBGPConfigPeersBfdEnabledModel represents bfd_enabled block
 type VoltstackSiteLocalControlPlaneBGPConfigPeersBfdEnabledModel struct {
-	Multiplier types.Int64 `tfsdk:"multiplier"`
-	ReceiveIntervalMilliseconds types.Int64 `tfsdk:"receive_interval_milliseconds"`
+	Multiplier                   types.Int64 `tfsdk:"multiplier"`
+	ReceiveIntervalMilliseconds  types.Int64 `tfsdk:"receive_interval_milliseconds"`
 	TransmitIntervalMilliseconds types.Int64 `tfsdk:"transmit_interval_milliseconds"`
 }
 
 // VoltstackSiteLocalControlPlaneBGPConfigPeersExternalModel represents external block
 type VoltstackSiteLocalControlPlaneBGPConfigPeersExternalModel struct {
-	Address types.String `tfsdk:"address"`
-	AddressIPV6 types.String `tfsdk:"address_ipv6"`
-	Asn types.Int64 `tfsdk:"asn"`
-	Md5AuthKey types.String `tfsdk:"md5_auth_key"`
-	Port types.Int64 `tfsdk:"port"`
-	SubnetBeginOffset types.Int64 `tfsdk:"subnet_begin_offset"`
-	SubnetBeginOffsetV6 types.Int64 `tfsdk:"subnet_begin_offset_v6"`
-	SubnetEndOffset types.Int64 `tfsdk:"subnet_end_offset"`
-	SubnetEndOffsetV6 types.Int64 `tfsdk:"subnet_end_offset_v6"`
-	DefaultGateway *VoltstackSiteEmptyModel `tfsdk:"default_gateway"`
-	DefaultGatewayV6 *VoltstackSiteEmptyModel `tfsdk:"default_gateway_v6"`
-	Disable *VoltstackSiteEmptyModel `tfsdk:"disable"`
-	DisableV6 *VoltstackSiteEmptyModel `tfsdk:"disable_v6"`
-	ExternalConnector *VoltstackSiteEmptyModel `tfsdk:"external_connector"`
-	FamilyInet *VoltstackSiteLocalControlPlaneBGPConfigPeersExternalFamilyInetModel `tfsdk:"family_inet"`
-	FromSite *VoltstackSiteEmptyModel `tfsdk:"from_site"`
-	FromSiteV6 *VoltstackSiteEmptyModel `tfsdk:"from_site_v6"`
-	Interface *VoltstackSiteLocalControlPlaneBGPConfigPeersExternalInterfaceModel `tfsdk:"interface"`
-	InterfaceList *VoltstackSiteLocalControlPlaneBGPConfigPeersExternalInterfaceListModel `tfsdk:"interface_list"`
-	NoAuthentication *VoltstackSiteEmptyModel `tfsdk:"no_authentication"`
+	Address             types.String                                                            `tfsdk:"address"`
+	AddressIPV6         types.String                                                            `tfsdk:"address_ipv6"`
+	Asn                 types.Int64                                                             `tfsdk:"asn"`
+	Md5AuthKey          types.String                                                            `tfsdk:"md5_auth_key"`
+	Port                types.Int64                                                             `tfsdk:"port"`
+	SubnetBeginOffset   types.Int64                                                             `tfsdk:"subnet_begin_offset"`
+	SubnetBeginOffsetV6 types.Int64                                                             `tfsdk:"subnet_begin_offset_v6"`
+	SubnetEndOffset     types.Int64                                                             `tfsdk:"subnet_end_offset"`
+	SubnetEndOffsetV6   types.Int64                                                             `tfsdk:"subnet_end_offset_v6"`
+	DefaultGateway      *VoltstackSiteEmptyModel                                                `tfsdk:"default_gateway"`
+	DefaultGatewayV6    *VoltstackSiteEmptyModel                                                `tfsdk:"default_gateway_v6"`
+	Disable             *VoltstackSiteEmptyModel                                                `tfsdk:"disable"`
+	DisableV6           *VoltstackSiteEmptyModel                                                `tfsdk:"disable_v6"`
+	ExternalConnector   *VoltstackSiteEmptyModel                                                `tfsdk:"external_connector"`
+	FamilyInet          *VoltstackSiteLocalControlPlaneBGPConfigPeersExternalFamilyInetModel    `tfsdk:"family_inet"`
+	FromSite            *VoltstackSiteEmptyModel                                                `tfsdk:"from_site"`
+	FromSiteV6          *VoltstackSiteEmptyModel                                                `tfsdk:"from_site_v6"`
+	Interface           *VoltstackSiteLocalControlPlaneBGPConfigPeersExternalInterfaceModel     `tfsdk:"interface"`
+	InterfaceList       *VoltstackSiteLocalControlPlaneBGPConfigPeersExternalInterfaceListModel `tfsdk:"interface_list"`
+	NoAuthentication    *VoltstackSiteEmptyModel                                                `tfsdk:"no_authentication"`
 }
 
 // VoltstackSiteLocalControlPlaneBGPConfigPeersExternalFamilyInetModel represents family_inet block
 type VoltstackSiteLocalControlPlaneBGPConfigPeersExternalFamilyInetModel struct {
 	Disable *VoltstackSiteEmptyModel `tfsdk:"disable"`
-	Enable *VoltstackSiteEmptyModel `tfsdk:"enable"`
+	Enable  *VoltstackSiteEmptyModel `tfsdk:"enable"`
 }
 
 // VoltstackSiteLocalControlPlaneBGPConfigPeersExternalInterfaceModel represents interface block
 type VoltstackSiteLocalControlPlaneBGPConfigPeersExternalInterfaceModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // VoltstackSiteLocalControlPlaneBGPConfigPeersExternalInterfaceListModel represents interface_list block
@@ -1362,15 +1362,15 @@ type VoltstackSiteLocalControlPlaneBGPConfigPeersExternalInterfaceListModel stru
 
 // VoltstackSiteLocalControlPlaneBGPConfigPeersExternalInterfaceListInterfacesModel represents interfaces block
 type VoltstackSiteLocalControlPlaneBGPConfigPeersExternalInterfaceListInterfacesModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // VoltstackSiteLocalControlPlaneBGPConfigPeersMetadataModel represents metadata block
 type VoltstackSiteLocalControlPlaneBGPConfigPeersMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
-	Name types.String `tfsdk:"name"`
+	Name            types.String `tfsdk:"name"`
 }
 
 // VoltstackSiteLocalControlPlaneBGPConfigPeersRoutingPoliciesModel represents routing_policies block
@@ -1380,11 +1380,11 @@ type VoltstackSiteLocalControlPlaneBGPConfigPeersRoutingPoliciesModel struct {
 
 // VoltstackSiteLocalControlPlaneBGPConfigPeersRoutingPoliciesRoutePolicyModel represents route_policy block
 type VoltstackSiteLocalControlPlaneBGPConfigPeersRoutingPoliciesRoutePolicyModel struct {
-	AllNodes *VoltstackSiteEmptyModel `tfsdk:"all_nodes"`
-	Inbound *VoltstackSiteEmptyModel `tfsdk:"inbound"`
-	NodeName *VoltstackSiteLocalControlPlaneBGPConfigPeersRoutingPoliciesRoutePolicyNodeNameModel `tfsdk:"node_name"`
+	AllNodes   *VoltstackSiteEmptyModel                                                                `tfsdk:"all_nodes"`
+	Inbound    *VoltstackSiteEmptyModel                                                                `tfsdk:"inbound"`
+	NodeName   *VoltstackSiteLocalControlPlaneBGPConfigPeersRoutingPoliciesRoutePolicyNodeNameModel    `tfsdk:"node_name"`
 	ObjectRefs []VoltstackSiteLocalControlPlaneBGPConfigPeersRoutingPoliciesRoutePolicyObjectRefsModel `tfsdk:"object_refs"`
-	Outbound *VoltstackSiteEmptyModel `tfsdk:"outbound"`
+	Outbound   *VoltstackSiteEmptyModel                                                                `tfsdk:"outbound"`
 }
 
 // VoltstackSiteLocalControlPlaneBGPConfigPeersRoutingPoliciesRoutePolicyNodeNameModel represents node_name block
@@ -1394,36 +1394,36 @@ type VoltstackSiteLocalControlPlaneBGPConfigPeersRoutingPoliciesRoutePolicyNodeN
 
 // VoltstackSiteLocalControlPlaneBGPConfigPeersRoutingPoliciesRoutePolicyObjectRefsModel represents object_refs block
 type VoltstackSiteLocalControlPlaneBGPConfigPeersRoutingPoliciesRoutePolicyObjectRefsModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // VoltstackSiteLogReceiverModel represents log_receiver block
 type VoltstackSiteLogReceiverModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // VoltstackSiteMasterNodeConfigurationModel represents master_node_configuration block
 type VoltstackSiteMasterNodeConfigurationModel struct {
-	Name types.String `tfsdk:"name"`
+	Name     types.String `tfsdk:"name"`
 	PublicIP types.String `tfsdk:"public_ip"`
 }
 
 // VoltstackSiteOfflineSurvivabilityModeModel represents offline_survivability_mode block
 type VoltstackSiteOfflineSurvivabilityModeModel struct {
 	EnableOfflineSurvivabilityMode *VoltstackSiteEmptyModel `tfsdk:"enable_offline_survivability_mode"`
-	NoOfflineSurvivabilityMode *VoltstackSiteEmptyModel `tfsdk:"no_offline_survivability_mode"`
+	NoOfflineSurvivabilityMode     *VoltstackSiteEmptyModel `tfsdk:"no_offline_survivability_mode"`
 }
 
 // VoltstackSiteOsModel represents os block
 type VoltstackSiteOsModel struct {
-	OperatingSystemVersion types.String `tfsdk:"operating_system_version"`
-	DefaultOsVersion *VoltstackSiteEmptyModel `tfsdk:"default_os_version"`
+	OperatingSystemVersion types.String             `tfsdk:"operating_system_version"`
+	DefaultOsVersion       *VoltstackSiteEmptyModel `tfsdk:"default_os_version"`
 }
 
 // VoltstackSiteSriovInterfacesModel represents sriov_interfaces block
@@ -1433,67 +1433,67 @@ type VoltstackSiteSriovInterfacesModel struct {
 
 // VoltstackSiteSriovInterfacesSriovInterfaceModel represents sriov_interface block
 type VoltstackSiteSriovInterfacesSriovInterfaceModel struct {
-	InterfaceName types.String `tfsdk:"interface_name"`
-	NumberOfVfioVfs types.Int64 `tfsdk:"number_of_vfio_vfs"`
-	NumberOfVfs types.Int64 `tfsdk:"number_of_vfs"`
+	InterfaceName   types.String `tfsdk:"interface_name"`
+	NumberOfVfioVfs types.Int64  `tfsdk:"number_of_vfio_vfs"`
+	NumberOfVfs     types.Int64  `tfsdk:"number_of_vfs"`
 }
 
 // VoltstackSiteSwModel represents sw block
 type VoltstackSiteSwModel struct {
-	VolterraSoftwareVersion types.String `tfsdk:"volterra_software_version"`
-	DefaultSwVersion *VoltstackSiteEmptyModel `tfsdk:"default_sw_version"`
+	VolterraSoftwareVersion types.String             `tfsdk:"volterra_software_version"`
+	DefaultSwVersion        *VoltstackSiteEmptyModel `tfsdk:"default_sw_version"`
 }
 
 // VoltstackSiteUsbPolicyModel represents usb_policy block
 type VoltstackSiteUsbPolicyModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 type VoltstackSiteResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	WorkerNodes types.List `tfsdk:"worker_nodes"`
-	ID types.String `tfsdk:"id"`
-	Address types.String `tfsdk:"address"`
-	VolterraCertifiedHw types.String `tfsdk:"volterra_certified_hw"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	AllowAllUsb *VoltstackSiteEmptyModel `tfsdk:"allow_all_usb"`
-	BlockedServices *VoltstackSiteBlockedServicesModel `tfsdk:"blocked_services"`
-	BondDeviceList *VoltstackSiteBondDeviceListModel `tfsdk:"bond_device_list"`
-	Coordinates *VoltstackSiteCoordinatesModel `tfsdk:"coordinates"`
-	CustomDNS *VoltstackSiteCustomDNSModel `tfsdk:"custom_dns"`
-	CustomNetworkConfig *VoltstackSiteCustomNetworkConfigModel `tfsdk:"custom_network_config"`
-	CustomStorageConfig *VoltstackSiteCustomStorageConfigModel `tfsdk:"custom_storage_config"`
-	DefaultBlockedServices *VoltstackSiteEmptyModel `tfsdk:"default_blocked_services"`
-	DefaultNetworkConfig *VoltstackSiteEmptyModel `tfsdk:"default_network_config"`
-	DefaultSriovInterface *VoltstackSiteEmptyModel `tfsdk:"default_sriov_interface"`
-	DefaultStorageConfig *VoltstackSiteEmptyModel `tfsdk:"default_storage_config"`
-	DenyAllUsb *VoltstackSiteEmptyModel `tfsdk:"deny_all_usb"`
-	DisableGpu *VoltstackSiteEmptyModel `tfsdk:"disable_gpu"`
-	DisableVm *VoltstackSiteEmptyModel `tfsdk:"disable_vm"`
-	EnableGpu *VoltstackSiteEmptyModel `tfsdk:"enable_gpu"`
-	EnableVgpu *VoltstackSiteEnableVgpuModel `tfsdk:"enable_vgpu"`
-	EnableVm *VoltstackSiteEmptyModel `tfsdk:"enable_vm"`
-	K8SCluster *VoltstackSiteK8SClusterModel `tfsdk:"k8s_cluster"`
-	KubernetesUpgradeDrain *VoltstackSiteKubernetesUpgradeDrainModel `tfsdk:"kubernetes_upgrade_drain"`
-	LocalControlPlane *VoltstackSiteLocalControlPlaneModel `tfsdk:"local_control_plane"`
-	LogReceiver *VoltstackSiteLogReceiverModel `tfsdk:"log_receiver"`
-	LogsStreamingDisabled *VoltstackSiteEmptyModel `tfsdk:"logs_streaming_disabled"`
-	MasterNodeConfiguration []VoltstackSiteMasterNodeConfigurationModel `tfsdk:"master_node_configuration"`
-	NoBondDevices *VoltstackSiteEmptyModel `tfsdk:"no_bond_devices"`
-	NoK8SCluster *VoltstackSiteEmptyModel `tfsdk:"no_k8s_cluster"`
-	NoLocalControlPlane *VoltstackSiteEmptyModel `tfsdk:"no_local_control_plane"`
+	Name                     types.String                                `tfsdk:"name"`
+	Namespace                types.String                                `tfsdk:"namespace"`
+	Annotations              types.Map                                   `tfsdk:"annotations"`
+	Description              types.String                                `tfsdk:"description"`
+	Disable                  types.Bool                                  `tfsdk:"disable"`
+	Labels                   types.Map                                   `tfsdk:"labels"`
+	WorkerNodes              types.List                                  `tfsdk:"worker_nodes"`
+	ID                       types.String                                `tfsdk:"id"`
+	Address                  types.String                                `tfsdk:"address"`
+	VolterraCertifiedHw      types.String                                `tfsdk:"volterra_certified_hw"`
+	Timeouts                 timeouts.Value                              `tfsdk:"timeouts"`
+	AllowAllUsb              *VoltstackSiteEmptyModel                    `tfsdk:"allow_all_usb"`
+	BlockedServices          *VoltstackSiteBlockedServicesModel          `tfsdk:"blocked_services"`
+	BondDeviceList           *VoltstackSiteBondDeviceListModel           `tfsdk:"bond_device_list"`
+	Coordinates              *VoltstackSiteCoordinatesModel              `tfsdk:"coordinates"`
+	CustomDNS                *VoltstackSiteCustomDNSModel                `tfsdk:"custom_dns"`
+	CustomNetworkConfig      *VoltstackSiteCustomNetworkConfigModel      `tfsdk:"custom_network_config"`
+	CustomStorageConfig      *VoltstackSiteCustomStorageConfigModel      `tfsdk:"custom_storage_config"`
+	DefaultBlockedServices   *VoltstackSiteEmptyModel                    `tfsdk:"default_blocked_services"`
+	DefaultNetworkConfig     *VoltstackSiteEmptyModel                    `tfsdk:"default_network_config"`
+	DefaultSriovInterface    *VoltstackSiteEmptyModel                    `tfsdk:"default_sriov_interface"`
+	DefaultStorageConfig     *VoltstackSiteEmptyModel                    `tfsdk:"default_storage_config"`
+	DenyAllUsb               *VoltstackSiteEmptyModel                    `tfsdk:"deny_all_usb"`
+	DisableGpu               *VoltstackSiteEmptyModel                    `tfsdk:"disable_gpu"`
+	DisableVm                *VoltstackSiteEmptyModel                    `tfsdk:"disable_vm"`
+	EnableGpu                *VoltstackSiteEmptyModel                    `tfsdk:"enable_gpu"`
+	EnableVgpu               *VoltstackSiteEnableVgpuModel               `tfsdk:"enable_vgpu"`
+	EnableVm                 *VoltstackSiteEmptyModel                    `tfsdk:"enable_vm"`
+	K8SCluster               *VoltstackSiteK8SClusterModel               `tfsdk:"k8s_cluster"`
+	KubernetesUpgradeDrain   *VoltstackSiteKubernetesUpgradeDrainModel   `tfsdk:"kubernetes_upgrade_drain"`
+	LocalControlPlane        *VoltstackSiteLocalControlPlaneModel        `tfsdk:"local_control_plane"`
+	LogReceiver              *VoltstackSiteLogReceiverModel              `tfsdk:"log_receiver"`
+	LogsStreamingDisabled    *VoltstackSiteEmptyModel                    `tfsdk:"logs_streaming_disabled"`
+	MasterNodeConfiguration  []VoltstackSiteMasterNodeConfigurationModel `tfsdk:"master_node_configuration"`
+	NoBondDevices            *VoltstackSiteEmptyModel                    `tfsdk:"no_bond_devices"`
+	NoK8SCluster             *VoltstackSiteEmptyModel                    `tfsdk:"no_k8s_cluster"`
+	NoLocalControlPlane      *VoltstackSiteEmptyModel                    `tfsdk:"no_local_control_plane"`
 	OfflineSurvivabilityMode *VoltstackSiteOfflineSurvivabilityModeModel `tfsdk:"offline_survivability_mode"`
-	Os *VoltstackSiteOsModel `tfsdk:"os"`
-	SriovInterfaces *VoltstackSiteSriovInterfacesModel `tfsdk:"sriov_interfaces"`
-	Sw *VoltstackSiteSwModel `tfsdk:"sw"`
-	UsbPolicy *VoltstackSiteUsbPolicyModel `tfsdk:"usb_policy"`
+	Os                       *VoltstackSiteOsModel                       `tfsdk:"os"`
+	SriovInterfaces          *VoltstackSiteSriovInterfacesModel          `tfsdk:"sriov_interfaces"`
+	Sw                       *VoltstackSiteSwModel                       `tfsdk:"sw"`
+	UsbPolicy                *VoltstackSiteUsbPolicyModel                `tfsdk:"usb_policy"`
 }
 
 func (r *VoltstackSiteResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -1507,7 +1507,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the VoltstackSite. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -1517,7 +1517,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the VoltstackSite will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -1527,46 +1527,46 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"worker_nodes": schema.ListAttribute{
 				MarkdownDescription: "Worker Nodes. Names of worker nodes",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"address": schema.StringAttribute{
 				MarkdownDescription: "Geographical Address. Site's geographical address that can be used to determine its latitude and longitude.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"volterra_certified_hw": schema.StringAttribute{
 				MarkdownDescription: "Generic Server Certified Hardware. Name for generic server certified hardware to form this App Stack site.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -1584,8 +1584,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 			},
 			"blocked_services": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: blocked_services, default_blocked_services] Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site.",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"blocked_sevice": schema.ListNestedBlock{
 						MarkdownDescription: "Disable Node Local Services.",
@@ -1593,7 +1592,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 							Attributes: map[string]schema.Attribute{
 								"network_type": schema.StringAttribute{
 									MarkdownDescription: "Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user. Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`. Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`.",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
@@ -1610,12 +1609,10 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 				},
-
 			},
 			"bond_device_list": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: bond_device_list, no_bond_devices] Bond Devices List. List of bond devices for this fleet",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"bond_devices": schema.ListNestedBlock{
 						MarkdownDescription: "Bond Devices. List of bond devices",
@@ -1623,20 +1620,20 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 							Attributes: map[string]schema.Attribute{
 								"devices": schema.ListAttribute{
 									MarkdownDescription: "Member Ethernet Devices. Ethernet devices that will make up this bond",
-									Optional: true,
-									ElementType: types.StringType,
+									Optional:            true,
+									ElementType:         types.StringType,
 								},
 								"link_polling_interval": schema.Int64Attribute{
 									MarkdownDescription: "Link Polling Interval. Link polling interval in milliseconds",
-									Optional: true,
+									Optional:            true,
 								},
 								"link_up_delay": schema.Int64Attribute{
 									MarkdownDescription: "Link Up Delay. Milliseconds wait before link is declared up",
-									Optional: true,
+									Optional:            true,
 								},
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Bond Device Name. Name for the Bond. Ex 'bond0'",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
@@ -1648,7 +1645,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 									Attributes: map[string]schema.Attribute{
 										"rate": schema.Int64Attribute{
 											MarkdownDescription: "LACP Packet Interval. Interval in seconds to transmit LACP packets",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 								},
@@ -1656,73 +1653,69 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 				},
-
 			},
 			"coordinates": schema.SingleNestedBlock{
 				MarkdownDescription: "Site Coordinates. Coordinates of the site which provides the site physical location",
 				Attributes: map[string]schema.Attribute{
 					"latitude": schema.Int64Attribute{
 						MarkdownDescription: "Latitude. Latitude of the site location",
-						Optional: true,
+						Optional:            true,
 					},
 					"longitude": schema.Int64Attribute{
 						MarkdownDescription: "Longitude. longitude of site location",
-						Optional: true,
+						Optional:            true,
 					},
 				},
-
 			},
 			"custom_dns": schema.SingleNestedBlock{
 				MarkdownDescription: "Custom DNS. Custom DNS is the configured for specify CE site",
 				Attributes: map[string]schema.Attribute{
 					"inside_nameserver": schema.StringAttribute{
 						MarkdownDescription: "DNS Server for Inside Network. Optional DNS server IP to be used for name resolution in inside network",
-						Optional: true,
+						Optional:            true,
 					},
 					"outside_nameserver": schema.StringAttribute{
 						MarkdownDescription: "DNS Server for Outside Network. Optional DNS server IP to be used for name resolution in outside network",
-						Optional: true,
+						Optional:            true,
 					},
 				},
-
 			},
 			"custom_network_config": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: custom_network_config, default_network_config] VssNetworkConfiguration.",
 				Attributes: map[string]schema.Attribute{
 					"bgp_peer_address": schema.StringAttribute{
 						MarkdownDescription: "BGP Peer Address. Optional bgp peer address that can be used as parameter for BGP configuration when BGP is configured to fetch BGP peer address from site Object. This can be used to change peer address per site in fleet.",
-						Optional: true,
+						Optional:            true,
 					},
 					"bgp_router_id": schema.StringAttribute{
 						MarkdownDescription: "BGP Router ID. Optional bgp router id that can be used as parameter for BGP configuration when BGP is configured to fetch BGP router ID from site object.",
-						Optional: true,
+						Optional:            true,
 					},
 					"outside_nameserver": schema.StringAttribute{
 						MarkdownDescription: "DNS V4 Server for Local Network. Optional DNS server V4 IP to be used for name resolution in local network",
-						Optional: true,
+						Optional:            true,
 					},
 					"outside_vip": schema.StringAttribute{
 						MarkdownDescription: "Common V4 VIP. Optional common virtual V4 IP across all nodes to be used as automatic VIP for site local network.",
-						Optional: true,
+						Optional:            true,
 					},
 					"site_to_site_tunnel_ip": schema.StringAttribute{
 						MarkdownDescription: "Site Mesh Group Connection Via Virtual Ip. Site Mesh Group Connection Via Virtual IP. This option will use the Virtual IP provided for creating ipsec between two sites which are part of the site mesh group",
-						Optional: true,
+						Optional:            true,
 					},
 					"tunnel_dead_timeout": schema.Int64Attribute{
 						MarkdownDescription: "Tunnel Dead Timeout (msec). Time interval, in millisec, within which any ipsec / ssl connection from the site going down is detected. When not set (== 0), a default value of 10000 msec will be used.",
-						Optional: true,
+						Optional:            true,
 					},
 					"vip_vrrp_mode": schema.StringAttribute{
 						MarkdownDescription: "VRRP Virtual-IP. VRRP advertisement mode for VIP Invalid VRRP mode. Possible values are `VIP_VRRP_INVALID`, `VIP_VRRP_ENABLE`, `VIP_VRRP_DISABLE`. Defaults to `VIP_VRRP_INVALID`.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"active_enhanced_firewall_policies": schema.SingleNestedBlock{
 						MarkdownDescription: "Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion.",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"enhanced_firewall_policies": schema.ListNestedBlock{
 								MarkdownDescription: "Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active",
@@ -1730,16 +1723,16 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-											Optional: true,
+											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
 											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-											Optional: true,
+											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
@@ -1748,8 +1741,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 					},
 					"active_forward_proxy_policies": schema.SingleNestedBlock{
 						MarkdownDescription: "Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"forward_proxy_policies": schema.ListNestedBlock{
 								MarkdownDescription: "Forward Proxy Policies. Ordered List of Forward Proxy Policies active",
@@ -1757,16 +1749,16 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-											Optional: true,
+											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
 											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-											Optional: true,
+											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
@@ -1775,8 +1767,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 					},
 					"active_network_policies": schema.SingleNestedBlock{
 						MarkdownDescription: "Active Firewall Policies Type. List of firewall policy views.",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"network_policies": schema.ListNestedBlock{
 								MarkdownDescription: "Firewall Policy. Ordered List of Firewall Policies active for this network firewall",
@@ -1784,16 +1775,16 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-											Optional: true,
+											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
 											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-											Optional: true,
+											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
@@ -1814,35 +1805,32 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 					},
 					"global_network_list": schema.SingleNestedBlock{
 						MarkdownDescription: "Global Network Connection List. List of global network connections",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"global_network_connections": schema.ListNestedBlock{
 								MarkdownDescription: "Global Network Connections. Global network connections",
 								NestedObject: schema.NestedBlockObject{
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes: map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"sli_to_global_dr": schema.SingleNestedBlock{
 											MarkdownDescription: "Global Network. Global network reference for direct connection",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"global_vn": schema.SingleNestedBlock{
 													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 													Attributes: map[string]schema.Attribute{
 														"name": schema.StringAttribute{
 															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-															Optional: true,
+															Optional:            true,
 														},
 														"namespace": schema.StringAttribute{
 															MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-															Optional: true,
+															Optional:            true,
 														},
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-															Optional: true,
-															Computed: true,
+															Optional:            true,
+															Computed:            true,
 														},
 													},
 												},
@@ -1850,24 +1838,23 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										},
 										"slo_to_global_dr": schema.SingleNestedBlock{
 											MarkdownDescription: "Global Network. Global network reference for direct connection",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"global_vn": schema.SingleNestedBlock{
 													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 													Attributes: map[string]schema.Attribute{
 														"name": schema.StringAttribute{
 															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-															Optional: true,
+															Optional:            true,
 														},
 														"namespace": schema.StringAttribute{
 															MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-															Optional: true,
+															Optional:            true,
 														},
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-															Optional: true,
-															Computed: true,
+															Optional:            true,
+															Computed:            true,
 														},
 													},
 												},
@@ -1880,8 +1867,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 					},
 					"interface_list": schema.SingleNestedBlock{
 						MarkdownDescription: "List of Interface. Configure network interfaces for this App Stack site",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"interfaces": schema.ListNestedBlock{
 								MarkdownDescription: "List of Interface. Configure network interfaces for this App Stack site",
@@ -1889,7 +1875,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 									Attributes: map[string]schema.Attribute{
 										"description_spec": schema.StringAttribute{
 											MarkdownDescription: "Interface Description. Description for this Interface",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -1904,19 +1890,19 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											Attributes: map[string]schema.Attribute{
 												"device": schema.StringAttribute{
 													MarkdownDescription: "Interface Device. Name of the device for which interface is configured. Use wwan0 for 4G/LTE.",
-													Optional: true,
+													Optional:            true,
 												},
 												"mtu": schema.Int64Attribute{
 													MarkdownDescription: "Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, mtu must be between 512 and 16384",
-													Optional: true,
+													Optional:            true,
 												},
 												"node": schema.StringAttribute{
 													MarkdownDescription: "Specific Node. Configuration will apply to a device on the given node of the site.",
-													Optional: true,
+													Optional:            true,
 												},
 												"priority": schema.Int64Attribute{
 													MarkdownDescription: "Priority. Priority of the network interface when multiple network interfaces are present in outside network Greater the value, higher the priority",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -1942,15 +1928,15 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											Attributes: map[string]schema.Attribute{
 												"device": schema.StringAttribute{
 													MarkdownDescription: "Interface Device. Name of the device for which interface is configured",
-													Optional: true,
+													Optional:            true,
 												},
 												"mtu": schema.Int64Attribute{
 													MarkdownDescription: "Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, mtu must be between 512 and 16384",
-													Optional: true,
+													Optional:            true,
 												},
 												"node": schema.StringAttribute{
 													MarkdownDescription: "Specific Node. Configuration will apply to a device on the given node of the site.",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -1964,23 +1950,23 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											Attributes: map[string]schema.Attribute{
 												"device": schema.StringAttribute{
 													MarkdownDescription: "Ethernet Device. Interface configuration for the ethernet device",
-													Optional: true,
+													Optional:            true,
 												},
 												"mtu": schema.Int64Attribute{
 													MarkdownDescription: "Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, mtu must be between 512 and 16384",
-													Optional: true,
+													Optional:            true,
 												},
 												"node": schema.StringAttribute{
 													MarkdownDescription: "Specific Node. Configuration will apply to a device on the given node.",
-													Optional: true,
+													Optional:            true,
 												},
 												"priority": schema.Int64Attribute{
 													MarkdownDescription: "Priority. Priority of the network interface when multiple network interfaces are present in outside network Greater the value, higher the priority",
-													Optional: true,
+													Optional:            true,
 												},
 												"vlan_id": schema.Int64Attribute{
 													MarkdownDescription: "VLAN Id. Configure a VLAN tagged ethernet interface",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -1992,8 +1978,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												},
 												"dhcp_server": schema.SingleNestedBlock{
 													MarkdownDescription: "DHCPServerParametersType.",
-													Attributes: map[string]schema.Attribute{
-													},
+													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"automatic_from_end": schema.SingleNestedBlock{
 															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -2007,19 +1992,19 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																Attributes: map[string]schema.Attribute{
 																	"dgw_address": schema.StringAttribute{
 																		MarkdownDescription: "Static IPv4 Configuration. Enter a IPv4 address from the network prefix to be used as the default gateway.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"dns_address": schema.StringAttribute{
 																		MarkdownDescription: "Static IPv4 Configuration. Enter a IPv4 address from the network prefix to be used as the DNS server.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"network_prefix": schema.StringAttribute{
 																		MarkdownDescription: "Network Prefix. Set the network prefix for the site. ex: 10.1.1.0/24",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"pool_settings": schema.StringAttribute{
 																		MarkdownDescription: "Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation. Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`. Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 																Blocks: map[string]schema.Block{
@@ -2035,11 +2020,11 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																			Attributes: map[string]schema.Attribute{
 																				"end_ip": schema.StringAttribute{
 																					MarkdownDescription: "Ending IP. Ending IP of the pool range. In case of address allocator, offset is derived based on network prefix. 10.1.1.200 with prefix length of 24, end offset is 0.0.0.200",
-																					Optional: true,
+																					Optional:            true,
 																				},
 																				"start_ip": schema.StringAttribute{
 																					MarkdownDescription: "Starting IP. Starting IP of the pool range. In case of address allocator, offset is derived based on network prefix. 10.1.1.5 with prefix length of 24, start offset is 0.0.0.5",
-																					Optional: true,
+																					Optional:            true,
 																				},
 																			},
 																		},
@@ -2055,8 +2040,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 														},
 														"interface_ip_map": schema.SingleNestedBlock{
 															MarkdownDescription: "Interface IPv4 Assignments. Specify static IPv4 addresses per node.",
-															Attributes: map[string]schema.Attribute{
-															},
+															Attributes:          map[string]schema.Attribute{},
 															Blocks: map[string]schema.Block{
 																"interface_ip_map": schema.SingleNestedBlock{
 																	MarkdownDescription: "Site:Node to IPv4 Address Mapping. Specify static IPv4 addresses per site:node.",
@@ -2067,8 +2051,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												},
 												"ipv6_auto_config": schema.SingleNestedBlock{
 													MarkdownDescription: "IPV6AutoConfigType.",
-													Attributes: map[string]schema.Attribute{
-													},
+													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"host": schema.SingleNestedBlock{
 															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -2078,22 +2061,21 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 															Attributes: map[string]schema.Attribute{
 																"network_prefix": schema.StringAttribute{
 																	MarkdownDescription: "Network Prefix. Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862",
-																	Optional: true,
+																	Optional:            true,
 																},
 															},
 															Blocks: map[string]schema.Block{
 																"dns_config": schema.SingleNestedBlock{
 																	MarkdownDescription: "IPV6DnsConfig.",
-																	Attributes: map[string]schema.Attribute{
-																	},
+																	Attributes:          map[string]schema.Attribute{},
 																	Blocks: map[string]schema.Block{
 																		"configured_list": schema.SingleNestedBlock{
 																			MarkdownDescription: "IPV6DnsList.",
 																			Attributes: map[string]schema.Attribute{
 																				"dns_list": schema.ListAttribute{
 																					MarkdownDescription: "Dns List. List of IPV6 Addresses acting as Dns servers",
-																					Optional: true,
-																					ElementType: types.StringType,
+																					Optional:            true,
+																					ElementType:         types.StringType,
 																				},
 																			},
 																		},
@@ -2102,7 +2084,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																			Attributes: map[string]schema.Attribute{
 																				"configured_address": schema.StringAttribute{
 																					MarkdownDescription: "Configured Address. Configured address from the network prefix is chosen as dns server",
-																					Optional: true,
+																					Optional:            true,
 																				},
 																			},
 																			Blocks: map[string]schema.Block{
@@ -2118,8 +2100,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																},
 																"stateful": schema.SingleNestedBlock{
 																	MarkdownDescription: "DHCPIPV6 Stateful Server.",
-																	Attributes: map[string]schema.Attribute{
-																	},
+																	Attributes:          map[string]schema.Attribute{},
 																	Blocks: map[string]schema.Block{
 																		"automatic_from_end": schema.SingleNestedBlock{
 																			MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -2133,11 +2114,11 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																				Attributes: map[string]schema.Attribute{
 																					"network_prefix": schema.StringAttribute{
 																						MarkdownDescription: "Network Prefix. Network Prefix to be used for IPV6 address auto configuration",
-																						Optional: true,
+																						Optional:            true,
 																					},
 																					"pool_settings": schema.StringAttribute{
 																						MarkdownDescription: "Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation. Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`. Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`.",
-																						Optional: true,
+																						Optional:            true,
 																					},
 																				},
 																				Blocks: map[string]schema.Block{
@@ -2147,11 +2128,11 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																							Attributes: map[string]schema.Attribute{
 																								"end_ip": schema.StringAttribute{
 																									MarkdownDescription: "Ending IPV6. Ending IPV6 address of the pool range. In case of address allocator, offset is derived based on network prefix.",
-																									Optional: true,
+																									Optional:            true,
 																								},
 																								"start_ip": schema.StringAttribute{
 																									MarkdownDescription: "Starting IPV6. Starting IPV6 address of the pool range. In case of address allocator, offset is derived based on network prefix. 2001::1 with prefix length of 64, start offset is 5",
-																									Optional: true,
+																									Optional:            true,
 																								},
 																							},
 																						},
@@ -2164,8 +2145,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																		},
 																		"interface_ip_map": schema.SingleNestedBlock{
 																			MarkdownDescription: "Interface IPV6 Assignments. Map of Interface IPV6 assignments per node",
-																			Attributes: map[string]schema.Attribute{
-																			},
+																			Attributes:          map[string]schema.Attribute{},
 																			Blocks: map[string]schema.Block{
 																				"interface_ip_map": schema.SingleNestedBlock{
 																					MarkdownDescription: "Site:Node to IPV6 Mapping. Map of Site:Node to IPV6 address.",
@@ -2201,13 +2181,11 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												},
 												"static_ip": schema.SingleNestedBlock{
 													MarkdownDescription: "Static IP Parameters. Configure Static IP parameters",
-													Attributes: map[string]schema.Attribute{
-													},
+													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"cluster_static_ip": schema.SingleNestedBlock{
 															MarkdownDescription: "Cluster: Static IP Parameters. Configure Static IP parameters for cluster",
-															Attributes: map[string]schema.Attribute{
-															},
+															Attributes:          map[string]schema.Attribute{},
 															Blocks: map[string]schema.Block{
 																"interface_ip_map": schema.SingleNestedBlock{
 																	MarkdownDescription: "Node to IP Mapping. Map of Node to Static ip configuration value, Key:Node, Value:IP Address",
@@ -2219,11 +2197,11 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 															Attributes: map[string]schema.Attribute{
 																"default_gw": schema.StringAttribute{
 																	MarkdownDescription: "Default Gateway. IP address of the default gateway.",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"ip_address": schema.StringAttribute{
 																	MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
-																	Optional: true,
+																	Optional:            true,
 																},
 															},
 														},
@@ -2231,13 +2209,11 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												},
 												"static_ipv6_address": schema.SingleNestedBlock{
 													MarkdownDescription: "Static IP Parameters. Configure Static IP parameters",
-													Attributes: map[string]schema.Attribute{
-													},
+													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"cluster_static_ip": schema.SingleNestedBlock{
 															MarkdownDescription: "Cluster: Static IP Parameters. Configure Static IP parameters for cluster",
-															Attributes: map[string]schema.Attribute{
-															},
+															Attributes:          map[string]schema.Attribute{},
 															Blocks: map[string]schema.Block{
 																"interface_ip_map": schema.SingleNestedBlock{
 																	MarkdownDescription: "Node to IP Mapping. Map of Node to Static ip configuration value, Key:Node, Value:IP Address",
@@ -2249,11 +2225,11 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 															Attributes: map[string]schema.Attribute{
 																"default_gw": schema.StringAttribute{
 																	MarkdownDescription: "Default Gateway. IP address of the default gateway.",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"ip_address": schema.StringAttribute{
 																	MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
-																	Optional: true,
+																	Optional:            true,
 																},
 															},
 														},
@@ -2275,15 +2251,15 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											Attributes: map[string]schema.Attribute{
 												"mtu": schema.Int64Attribute{
 													MarkdownDescription: "Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, mtu must be between 512 and 16384",
-													Optional: true,
+													Optional:            true,
 												},
 												"node": schema.StringAttribute{
 													MarkdownDescription: "Specific Node. Configuration will apply to a given device on the given node.",
-													Optional: true,
+													Optional:            true,
 												},
 												"priority": schema.Int64Attribute{
 													MarkdownDescription: "Priority. Priority of the network interface when multiple network interfaces are present in outside network Greater the value, higher the priority",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -2295,13 +2271,11 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												},
 												"static_ip": schema.SingleNestedBlock{
 													MarkdownDescription: "Static IP Parameters. Configure Static IP parameters",
-													Attributes: map[string]schema.Attribute{
-													},
+													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"cluster_static_ip": schema.SingleNestedBlock{
 															MarkdownDescription: "Cluster: Static IP Parameters. Configure Static IP parameters for cluster",
-															Attributes: map[string]schema.Attribute{
-															},
+															Attributes:          map[string]schema.Attribute{},
 															Blocks: map[string]schema.Block{
 																"interface_ip_map": schema.SingleNestedBlock{
 																	MarkdownDescription: "Node to IP Mapping. Map of Node to Static ip configuration value, Key:Node, Value:IP Address",
@@ -2313,11 +2287,11 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 															Attributes: map[string]schema.Attribute{
 																"default_gw": schema.StringAttribute{
 																	MarkdownDescription: "Default Gateway. IP address of the default gateway.",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"ip_address": schema.StringAttribute{
 																	MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
-																	Optional: true,
+																	Optional:            true,
 																},
 															},
 														},
@@ -2328,16 +2302,16 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 													Attributes: map[string]schema.Attribute{
 														"name": schema.StringAttribute{
 															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-															Optional: true,
+															Optional:            true,
 														},
 														"namespace": schema.StringAttribute{
 															MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-															Optional: true,
+															Optional:            true,
 														},
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-															Optional: true,
-															Computed: true,
+															Optional:            true,
+															Computed:            true,
 														},
 													},
 												},
@@ -2359,8 +2333,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 					},
 					"sli_config": schema.SingleNestedBlock{
 						MarkdownDescription: "Site Local Inside Network Configuration. Site local inside network configuration",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"no_static_routes": schema.SingleNestedBlock{
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -2370,8 +2343,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 							},
 							"static_routes": schema.SingleNestedBlock{
 								MarkdownDescription: "Static Routes List. List of static routes",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"static_routes": schema.ListNestedBlock{
 										MarkdownDescription: "Static Routes. List of static routes",
@@ -2379,17 +2351,17 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											Attributes: map[string]schema.Attribute{
 												"attrs": schema.ListAttribute{
 													MarkdownDescription: "Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP`.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 												"ip_address": schema.StringAttribute{
 													MarkdownDescription: "IP Address. Traffic matching the ip prefixes is sent to this IP Address",
-													Optional: true,
+													Optional:            true,
 												},
 												"ip_prefixes": schema.ListAttribute{
 													MarkdownDescription: "IP Prefixes. List of route prefixes that have common next hop and attributes",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -2398,8 +2370,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												},
 												"node_interface": schema.SingleNestedBlock{
 													MarkdownDescription: "NodeInterfaceType. On multinode site, this type holds the information about per node interfaces",
-													Attributes: map[string]schema.Attribute{
-													},
+													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"list": schema.ListNestedBlock{
 															MarkdownDescription: "Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface",
@@ -2407,7 +2378,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																Attributes: map[string]schema.Attribute{
 																	"node": schema.StringAttribute{
 																		MarkdownDescription: "Node. Node name on this site",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 																Blocks: map[string]schema.Block{
@@ -2417,26 +2388,26 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																			Attributes: map[string]schema.Attribute{
 																				"kind": schema.StringAttribute{
 																					MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-																					Optional: true,
-																					Computed: true,
+																					Optional:            true,
+																					Computed:            true,
 																				},
 																				"name": schema.StringAttribute{
 																					MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-																					Optional: true,
+																					Optional:            true,
 																				},
 																				"namespace": schema.StringAttribute{
 																					MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-																					Optional: true,
+																					Optional:            true,
 																				},
 																				"tenant": schema.StringAttribute{
 																					MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-																					Optional: true,
-																					Computed: true,
+																					Optional:            true,
+																					Computed:            true,
 																				},
 																				"uid": schema.StringAttribute{
 																					MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-																					Optional: true,
-																					Computed: true,
+																					Optional:            true,
+																					Computed:            true,
 																				},
 																			},
 																		},
@@ -2453,8 +2424,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 							},
 							"static_v6_routes": schema.SingleNestedBlock{
 								MarkdownDescription: "Static IPv6 Routes List. List of IPv6 static routes",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"static_routes": schema.ListNestedBlock{
 										MarkdownDescription: "Static IPv6 Routes. List of IPv6 static routes",
@@ -2462,17 +2432,17 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											Attributes: map[string]schema.Attribute{
 												"attrs": schema.ListAttribute{
 													MarkdownDescription: "Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP`.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 												"ip_address": schema.StringAttribute{
 													MarkdownDescription: "IP Address. Traffic matching the ip prefixes is sent to this IP Address",
-													Optional: true,
+													Optional:            true,
 												},
 												"ip_prefixes": schema.ListAttribute{
 													MarkdownDescription: "IPv6 Prefixes. List of IPv6 route prefixes that have common next hop and attributes",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -2481,8 +2451,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												},
 												"node_interface": schema.SingleNestedBlock{
 													MarkdownDescription: "NodeInterfaceType. On multinode site, this type holds the information about per node interfaces",
-													Attributes: map[string]schema.Attribute{
-													},
+													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"list": schema.ListNestedBlock{
 															MarkdownDescription: "Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface",
@@ -2490,7 +2459,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																Attributes: map[string]schema.Attribute{
 																	"node": schema.StringAttribute{
 																		MarkdownDescription: "Node. Node name on this site",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 																Blocks: map[string]schema.Block{
@@ -2500,26 +2469,26 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																			Attributes: map[string]schema.Attribute{
 																				"kind": schema.StringAttribute{
 																					MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-																					Optional: true,
-																					Computed: true,
+																					Optional:            true,
+																					Computed:            true,
 																				},
 																				"name": schema.StringAttribute{
 																					MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-																					Optional: true,
+																					Optional:            true,
 																				},
 																				"namespace": schema.StringAttribute{
 																					MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-																					Optional: true,
+																					Optional:            true,
 																				},
 																				"tenant": schema.StringAttribute{
 																					MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-																					Optional: true,
-																					Computed: true,
+																					Optional:            true,
+																					Computed:            true,
 																				},
 																				"uid": schema.StringAttribute{
 																					MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-																					Optional: true,
-																					Computed: true,
+																					Optional:            true,
+																					Computed:            true,
 																				},
 																			},
 																		},
@@ -2538,24 +2507,23 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 					},
 					"slo_config": schema.SingleNestedBlock{
 						MarkdownDescription: "Site Local Network Configuration. Site local network configuration",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"dc_cluster_group": schema.SingleNestedBlock{
 								MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-										Optional: true,
+										Optional:            true,
 									},
 									"namespace": schema.StringAttribute{
 										MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-										Optional: true,
+										Optional:            true,
 									},
 									"tenant": schema.StringAttribute{
 										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-										Optional: true,
-										Computed: true,
+										Optional:            true,
+										Computed:            true,
 									},
 								},
 							},
@@ -2573,8 +2541,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 							},
 							"static_routes": schema.SingleNestedBlock{
 								MarkdownDescription: "Static Routes List. List of static routes",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"static_routes": schema.ListNestedBlock{
 										MarkdownDescription: "Static Routes. List of static routes",
@@ -2582,17 +2549,17 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											Attributes: map[string]schema.Attribute{
 												"attrs": schema.ListAttribute{
 													MarkdownDescription: "Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP`.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 												"ip_address": schema.StringAttribute{
 													MarkdownDescription: "IP Address. Traffic matching the ip prefixes is sent to this IP Address",
-													Optional: true,
+													Optional:            true,
 												},
 												"ip_prefixes": schema.ListAttribute{
 													MarkdownDescription: "IP Prefixes. List of route prefixes that have common next hop and attributes",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -2601,8 +2568,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												},
 												"node_interface": schema.SingleNestedBlock{
 													MarkdownDescription: "NodeInterfaceType. On multinode site, this type holds the information about per node interfaces",
-													Attributes: map[string]schema.Attribute{
-													},
+													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"list": schema.ListNestedBlock{
 															MarkdownDescription: "Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface",
@@ -2610,7 +2576,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																Attributes: map[string]schema.Attribute{
 																	"node": schema.StringAttribute{
 																		MarkdownDescription: "Node. Node name on this site",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 																Blocks: map[string]schema.Block{
@@ -2620,26 +2586,26 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																			Attributes: map[string]schema.Attribute{
 																				"kind": schema.StringAttribute{
 																					MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-																					Optional: true,
-																					Computed: true,
+																					Optional:            true,
+																					Computed:            true,
 																				},
 																				"name": schema.StringAttribute{
 																					MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-																					Optional: true,
+																					Optional:            true,
 																				},
 																				"namespace": schema.StringAttribute{
 																					MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-																					Optional: true,
+																					Optional:            true,
 																				},
 																				"tenant": schema.StringAttribute{
 																					MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-																					Optional: true,
-																					Computed: true,
+																					Optional:            true,
+																					Computed:            true,
 																				},
 																				"uid": schema.StringAttribute{
 																					MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-																					Optional: true,
-																					Computed: true,
+																					Optional:            true,
+																					Computed:            true,
 																				},
 																			},
 																		},
@@ -2656,8 +2622,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 							},
 							"static_v6_routes": schema.SingleNestedBlock{
 								MarkdownDescription: "Static IPv6 Routes List. List of IPv6 static routes",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"static_routes": schema.ListNestedBlock{
 										MarkdownDescription: "Static IPv6 Routes. List of IPv6 static routes",
@@ -2665,17 +2630,17 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											Attributes: map[string]schema.Attribute{
 												"attrs": schema.ListAttribute{
 													MarkdownDescription: "Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP`.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 												"ip_address": schema.StringAttribute{
 													MarkdownDescription: "IP Address. Traffic matching the ip prefixes is sent to this IP Address",
-													Optional: true,
+													Optional:            true,
 												},
 												"ip_prefixes": schema.ListAttribute{
 													MarkdownDescription: "IPv6 Prefixes. List of IPv6 route prefixes that have common next hop and attributes",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -2684,8 +2649,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												},
 												"node_interface": schema.SingleNestedBlock{
 													MarkdownDescription: "NodeInterfaceType. On multinode site, this type holds the information about per node interfaces",
-													Attributes: map[string]schema.Attribute{
-													},
+													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"list": schema.ListNestedBlock{
 															MarkdownDescription: "Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface",
@@ -2693,7 +2657,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																Attributes: map[string]schema.Attribute{
 																	"node": schema.StringAttribute{
 																		MarkdownDescription: "Node. Node name on this site",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 																Blocks: map[string]schema.Block{
@@ -2703,26 +2667,26 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																			Attributes: map[string]schema.Attribute{
 																				"kind": schema.StringAttribute{
 																					MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-																					Optional: true,
-																					Computed: true,
+																					Optional:            true,
+																					Computed:            true,
 																				},
 																				"name": schema.StringAttribute{
 																					MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-																					Optional: true,
+																					Optional:            true,
 																				},
 																				"namespace": schema.StringAttribute{
 																					MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-																					Optional: true,
+																					Optional:            true,
 																				},
 																				"tenant": schema.StringAttribute{
 																					MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-																					Optional: true,
-																					Computed: true,
+																					Optional:            true,
+																					Computed:            true,
 																				},
 																				"uid": schema.StringAttribute{
 																					MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-																					Optional: true,
-																					Computed: true,
+																					Optional:            true,
+																					Computed:            true,
 																				},
 																			},
 																		},
@@ -2746,12 +2710,10 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 			"custom_storage_config": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: custom_storage_config, default_storage_config] VssStorageConfiguration.",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"default_storage_class": schema.SingleNestedBlock{
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -2767,8 +2729,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 					},
 					"static_routes": schema.SingleNestedBlock{
 						MarkdownDescription: "Static Routes List. List of static routes",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"static_routes": schema.ListNestedBlock{
 								MarkdownDescription: "Static Routes. List of static routes",
@@ -2776,17 +2737,17 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 									Attributes: map[string]schema.Attribute{
 										"attrs": schema.ListAttribute{
 											MarkdownDescription: "Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP`.",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 										"ip_address": schema.StringAttribute{
 											MarkdownDescription: "IP Address. Traffic matching the ip prefixes is sent to this IP Address",
-											Optional: true,
+											Optional:            true,
 										},
 										"ip_prefixes": schema.ListAttribute{
 											MarkdownDescription: "IP Prefixes. List of route prefixes that have common next hop and attributes",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -2795,8 +2756,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										},
 										"node_interface": schema.SingleNestedBlock{
 											MarkdownDescription: "NodeInterfaceType. On multinode site, this type holds the information about per node interfaces",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"list": schema.ListNestedBlock{
 													MarkdownDescription: "Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface",
@@ -2804,7 +2764,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 														Attributes: map[string]schema.Attribute{
 															"node": schema.StringAttribute{
 																MarkdownDescription: "Node. Node name on this site",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 														Blocks: map[string]schema.Block{
@@ -2814,26 +2774,26 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																	Attributes: map[string]schema.Attribute{
 																		"kind": schema.StringAttribute{
 																			MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-																			Optional: true,
-																			Computed: true,
+																			Optional:            true,
+																			Computed:            true,
 																		},
 																		"name": schema.StringAttribute{
 																			MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																		"namespace": schema.StringAttribute{
 																			MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																		"tenant": schema.StringAttribute{
 																			MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-																			Optional: true,
-																			Computed: true,
+																			Optional:            true,
+																			Computed:            true,
 																		},
 																		"uid": schema.StringAttribute{
 																			MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-																			Optional: true,
-																			Computed: true,
+																			Optional:            true,
+																			Computed:            true,
 																		},
 																	},
 																},
@@ -2850,8 +2810,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 					},
 					"storage_class_list": schema.SingleNestedBlock{
 						MarkdownDescription: "Custom Storage Class List. Add additional custom storage classes in kubernetes for this fleet",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"storage_classes": schema.ListNestedBlock{
 								MarkdownDescription: "List of Storage Classes. List of custom storage classes",
@@ -2859,27 +2818,27 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 									Attributes: map[string]schema.Attribute{
 										"allow_volume_expansion": schema.BoolAttribute{
 											MarkdownDescription: "Allow Volume Expansion. Allow volume expansion.",
-											Optional: true,
+											Optional:            true,
 										},
 										"default_storage_class": schema.BoolAttribute{
 											MarkdownDescription: "Default Storage Class. Make this storage class default storage class for the K8s cluster",
-											Optional: true,
+											Optional:            true,
 										},
 										"description_spec": schema.StringAttribute{
 											MarkdownDescription: "Storage Class Description. Description for this storage class",
-											Optional: true,
+											Optional:            true,
 										},
 										"reclaim_policy": schema.StringAttribute{
 											MarkdownDescription: "Reclaim Policy. Reclaim Policy",
-											Optional: true,
+											Optional:            true,
 										},
 										"storage_class_name": schema.StringAttribute{
 											MarkdownDescription: "Storage Class Name. Name of the storage class as it will appear in K8s.",
-											Optional: true,
+											Optional:            true,
 										},
 										"storage_device": schema.StringAttribute{
 											MarkdownDescription: "Storage Device. Storage device that this class will use. The Device name defined at previous step.",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -2891,7 +2850,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											Attributes: map[string]schema.Attribute{
 												"yaml": schema.StringAttribute{
 													MarkdownDescription: "Storage Class YAML. K8s YAML for StorageClass",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 										},
@@ -2900,67 +2859,67 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											Attributes: map[string]schema.Attribute{
 												"allow_mutations": schema.StringAttribute{
 													MarkdownDescription: "allowMutations. mutation can override specified parameters",
-													Optional: true,
+													Optional:            true,
 												},
 												"allow_overrides": schema.StringAttribute{
 													MarkdownDescription: "allowOverrides. PVC can override specified parameters",
-													Optional: true,
+													Optional:            true,
 												},
 												"dedupe_enabled": schema.BoolAttribute{
 													MarkdownDescription: "dedupeEnabled. Indicates that the volume should enable deduplication.",
-													Optional: true,
+													Optional:            true,
 												},
 												"description_spec": schema.StringAttribute{
 													MarkdownDescription: "Description. The SecretName parameter is used to identify name of secret to identify backend storage's auth information",
-													Optional: true,
+													Optional:            true,
 												},
 												"destroy_on_delete": schema.BoolAttribute{
 													MarkdownDescription: "destroyOnDelete. Indicates the backing Nimble volume (including snapshots) should be destroyed when the PVC is deleted",
-													Optional: true,
+													Optional:            true,
 												},
 												"encrypted": schema.BoolAttribute{
 													MarkdownDescription: "encrypted. Indicates that the volume should be encrypted.",
-													Optional: true,
+													Optional:            true,
 												},
 												"folder": schema.StringAttribute{
 													MarkdownDescription: "folder. The name of the folder in which to place the volume.",
-													Optional: true,
+													Optional:            true,
 												},
 												"limit_iops": schema.StringAttribute{
 													MarkdownDescription: "limitIops. The IOPS limit of the volume.",
-													Optional: true,
+													Optional:            true,
 												},
 												"limit_mbps": schema.StringAttribute{
 													MarkdownDescription: "limitMbps. The IOPS limit of the volume.",
-													Optional: true,
+													Optional:            true,
 												},
 												"performance_policy": schema.StringAttribute{
 													MarkdownDescription: "performancePolicy. The name of the performance policy to assign to the volume.",
-													Optional: true,
+													Optional:            true,
 												},
 												"pool": schema.StringAttribute{
 													MarkdownDescription: "pool. The name of the pool in which to place the volume.",
-													Optional: true,
+													Optional:            true,
 												},
 												"protection_template": schema.StringAttribute{
 													MarkdownDescription: "protectionTemplate. The name of the performance policy to assign to the volume.",
-													Optional: true,
+													Optional:            true,
 												},
 												"secret_name": schema.StringAttribute{
 													MarkdownDescription: "Secret Name. The SecretName parameter is used to identify name of secret to identify backend storage's auth information",
-													Optional: true,
+													Optional:            true,
 												},
 												"secret_namespace": schema.StringAttribute{
 													MarkdownDescription: "Secret Namespace. The SecretNamespace parameter is used to identify name of namespace where secret resides",
-													Optional: true,
+													Optional:            true,
 												},
 												"sync_on_detach": schema.BoolAttribute{
 													MarkdownDescription: "syncOnDetach. Indicates that a snapshot of the volume should be synced to the replication partner each time it is detached from a node.",
-													Optional: true,
+													Optional:            true,
 												},
 												"thick": schema.BoolAttribute{
 													MarkdownDescription: "thick. Indicates that the volume should be thick provisioned.",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 										},
@@ -2969,7 +2928,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											Attributes: map[string]schema.Attribute{
 												"storage_pools": schema.StringAttribute{
 													MarkdownDescription: "Storage Pools. The storagePools parameter is used to further restrict the set of pools that match any specified attributes",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -2983,15 +2942,15 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											Attributes: map[string]schema.Attribute{
 												"backend": schema.StringAttribute{
 													MarkdownDescription: "Backend. Defines type of Pure storage backend block or file. The volume will have the aspects defined in the chosen virtual pool.",
-													Optional: true,
+													Optional:            true,
 												},
 												"bandwidth_limit": schema.StringAttribute{
 													MarkdownDescription: "Bandwidth Limit. It must be between 1 MB/s and 512 GB/s. Enter the size as a number (bytes must be multiple of 512) or number with a single character unit symbol. Valid unit symbols are K, M, G, representing KiB, MiB, and GiB.",
-													Optional: true,
+													Optional:            true,
 												},
 												"iops_limit": schema.Int64Attribute{
 													MarkdownDescription: "IOPS Limit. Enable IOPS limitation. It must be between 100 and 100 million. If value is 0, IOPS limit is not defined.",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 										},
@@ -3002,8 +2961,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 					},
 					"storage_device_list": schema.SingleNestedBlock{
 						MarkdownDescription: "Custom Storage Device List. Add additional custom storage classes in kubernetes for this fleet",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"storage_devices": schema.ListNestedBlock{
 								MarkdownDescription: "List of Storage Devices. List of custom storage devices",
@@ -3011,7 +2969,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 									Attributes: map[string]schema.Attribute{
 										"storage_device": schema.StringAttribute{
 											MarkdownDescription: "Storage Device. Storage device and device unit",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -3026,45 +2984,44 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											Attributes: map[string]schema.Attribute{
 												"api_server_port": schema.Int64Attribute{
 													MarkdownDescription: "Storage server Port. Enter Storage Server Port",
-													Optional: true,
+													Optional:            true,
 												},
 												"iscsi_chap_user": schema.StringAttribute{
 													MarkdownDescription: "iscsi chapUser. chap Username to connect to the HPE storage",
-													Optional: true,
+													Optional:            true,
 												},
 												"storage_server_ip_address": schema.StringAttribute{
 													MarkdownDescription: "Storage Server IP address. Enter storage server IP address",
-													Optional: true,
+													Optional:            true,
 												},
 												"storage_server_name": schema.StringAttribute{
 													MarkdownDescription: "Storage Server Name. Enter storage server Name",
-													Optional: true,
+													Optional:            true,
 												},
 												"username": schema.StringAttribute{
 													MarkdownDescription: "Username. Username to connect to the HPE storage management IP",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 											Blocks: map[string]schema.Block{
 												"iscsi_chap_password": schema.SingleNestedBlock{
 													MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-													Attributes: map[string]schema.Attribute{
-													},
+													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"blindfold_secret_info": schema.SingleNestedBlock{
 															MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 															Attributes: map[string]schema.Attribute{
 																"decryption_provider": schema.StringAttribute{
 																	MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"location": schema.StringAttribute{
 																	MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"store_provider": schema.StringAttribute{
 																	MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																	Optional: true,
+																	Optional:            true,
 																},
 															},
 														},
@@ -3073,11 +3030,11 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 															Attributes: map[string]schema.Attribute{
 																"provider_ref": schema.StringAttribute{
 																	MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"url": schema.StringAttribute{
 																	MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-																	Optional: true,
+																	Optional:            true,
 																},
 															},
 														},
@@ -3085,23 +3042,22 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												},
 												"password": schema.SingleNestedBlock{
 													MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-													Attributes: map[string]schema.Attribute{
-													},
+													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"blindfold_secret_info": schema.SingleNestedBlock{
 															MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 															Attributes: map[string]schema.Attribute{
 																"decryption_provider": schema.StringAttribute{
 																	MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"location": schema.StringAttribute{
 																	MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"store_provider": schema.StringAttribute{
 																	MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																	Optional: true,
+																	Optional:            true,
 																},
 															},
 														},
@@ -3110,11 +3066,11 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 															Attributes: map[string]schema.Attribute{
 																"provider_ref": schema.StringAttribute{
 																	MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"url": schema.StringAttribute{
 																	MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-																	Optional: true,
+																	Optional:            true,
 																},
 															},
 														},
@@ -3124,75 +3080,74 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										},
 										"netapp_trident": schema.SingleNestedBlock{
 											MarkdownDescription: "NetApp Trident. Device configuration for NetApp Trident Storage",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"netapp_backend_ontap_nas": schema.SingleNestedBlock{
 													MarkdownDescription: "Storage Backend NetApp ONTAP NAS. Configuration of storage backend for NetApp ONTAP NAS",
 													Attributes: map[string]schema.Attribute{
 														"auto_export_policy": schema.BoolAttribute{
 															MarkdownDescription: "Auto Export Policy. Enable automatic export policy creation and updating",
-															Optional: true,
+															Optional:            true,
 														},
 														"backend_name": schema.StringAttribute{
 															MarkdownDescription: "Storage Backend Name. Configuration of Backend Name. Driver is name + '_' + dataLIF",
-															Optional: true,
+															Optional:            true,
 														},
 														"client_certificate": schema.StringAttribute{
 															MarkdownDescription: "Client Certificate. Please Enter Base64-encoded value of client certificate. Used for certificate-based auth.",
-															Optional: true,
+															Optional:            true,
 														},
 														"data_lif_dns_name": schema.StringAttribute{
 															MarkdownDescription: "Backend Data LIF Name. Backend Data LIF IP Address's ip address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
-															Optional: true,
+															Optional:            true,
 														},
 														"data_lif_ip": schema.StringAttribute{
 															MarkdownDescription: "Backend Data LIF IP Address. Backend Data LIF IP Address is reachable at the given ip address",
-															Optional: true,
+															Optional:            true,
 														},
 														"limit_aggregate_usage": schema.StringAttribute{
 															MarkdownDescription: "Limit Aggregate Usage. Fail provisioning if usage is above this percentage. Not enforced by default.",
-															Optional: true,
+															Optional:            true,
 														},
 														"limit_volume_size": schema.StringAttribute{
 															MarkdownDescription: "Limit Volume Size. Fail provisioning if requested volume size is above this value. Not enforced by default.",
-															Optional: true,
+															Optional:            true,
 														},
 														"management_lif_dns_name": schema.StringAttribute{
 															MarkdownDescription: "Backend Management LIF Name. Backend Management LIF IP Address's ip address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
-															Optional: true,
+															Optional:            true,
 														},
 														"management_lif_ip": schema.StringAttribute{
 															MarkdownDescription: "Backend Management LIF IP Address. Backend Management LIF IP Address is reachable at the given ip address",
-															Optional: true,
+															Optional:            true,
 														},
 														"nfs_mount_options": schema.StringAttribute{
 															MarkdownDescription: "NFS Mount Options. Comma-separated list of NFS mount options. Not enforced by default.",
-															Optional: true,
+															Optional:            true,
 														},
 														"region": schema.StringAttribute{
 															MarkdownDescription: "Backend Region. Virtual Pool Region",
-															Optional: true,
+															Optional:            true,
 														},
 														"storage_driver_name": schema.StringAttribute{
 															MarkdownDescription: "Storage Backend Driver. Configuration of Backend Name",
-															Optional: true,
+															Optional:            true,
 														},
 														"storage_prefix": schema.StringAttribute{
 															MarkdownDescription: "Storage Prefix. Prefix used when provisioning new volumes in the SVM. Once set this cannot be updated",
-															Optional: true,
+															Optional:            true,
 														},
 														"svm": schema.StringAttribute{
 															MarkdownDescription: "Backend SVM. Storage virtual machine to use. Derived if an SVM managementLIF is specified",
-															Optional: true,
+															Optional:            true,
 														},
 														"trusted_ca_certificate": schema.StringAttribute{
 															MarkdownDescription: "Trusted CA Certificate. Please Enter Base64-encoded value of trusted CA certificate. Optional. Used for certificate-based auth.",
-															Optional: true,
+															Optional:            true,
 														},
 														"username": schema.StringAttribute{
 															MarkdownDescription: "Username. Username to connect to the cluster/SVM",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 													Blocks: map[string]schema.Block{
@@ -3201,30 +3156,29 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 															Attributes: map[string]schema.Attribute{
 																"prefixes": schema.ListAttribute{
 																	MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
-																	Optional: true,
-																	ElementType: types.StringType,
+																	Optional:            true,
+																	ElementType:         types.StringType,
 																},
 															},
 														},
 														"client_private_key": schema.SingleNestedBlock{
 															MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-															Attributes: map[string]schema.Attribute{
-															},
+															Attributes:          map[string]schema.Attribute{},
 															Blocks: map[string]schema.Block{
 																"blindfold_secret_info": schema.SingleNestedBlock{
 																	MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 																	Attributes: map[string]schema.Attribute{
 																		"decryption_provider": schema.StringAttribute{
 																			MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																		"location": schema.StringAttribute{
 																			MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																		"store_provider": schema.StringAttribute{
 																			MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																	},
 																},
@@ -3233,11 +3187,11 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																	Attributes: map[string]schema.Attribute{
 																		"provider_ref": schema.StringAttribute{
 																			MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																		"url": schema.StringAttribute{
 																			MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																	},
 																},
@@ -3248,23 +3202,22 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 														},
 														"password": schema.SingleNestedBlock{
 															MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-															Attributes: map[string]schema.Attribute{
-															},
+															Attributes:          map[string]schema.Attribute{},
 															Blocks: map[string]schema.Block{
 																"blindfold_secret_info": schema.SingleNestedBlock{
 																	MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 																	Attributes: map[string]schema.Attribute{
 																		"decryption_provider": schema.StringAttribute{
 																			MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																		"location": schema.StringAttribute{
 																			MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																		"store_provider": schema.StringAttribute{
 																			MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																	},
 																},
@@ -3273,11 +3226,11 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																	Attributes: map[string]schema.Attribute{
 																		"provider_ref": schema.StringAttribute{
 																			MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																		"url": schema.StringAttribute{
 																			MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																	},
 																},
@@ -3289,7 +3242,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																Attributes: map[string]schema.Attribute{
 																	"zone": schema.StringAttribute{
 																		MarkdownDescription: "Virtual Pool Zone. Virtual Storage Pool zone definition.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 																Blocks: map[string]schema.Block{
@@ -3301,51 +3254,51 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																		Attributes: map[string]schema.Attribute{
 																			"adaptive_qos_policy": schema.StringAttribute{
 																				MarkdownDescription: "Adaptive QoS Policy name. Enter Adaptive QoS Policy Name",
-																				Optional: true,
+																				Optional:            true,
 																			},
 																			"encryption": schema.BoolAttribute{
 																				MarkdownDescription: "Enable Encryption. Enable NetApp volume encryption.",
-																				Optional: true,
+																				Optional:            true,
 																			},
 																			"export_policy": schema.StringAttribute{
 																				MarkdownDescription: "Export Policy. Export policy to use.",
-																				Optional: true,
+																				Optional:            true,
 																			},
 																			"qos_policy": schema.StringAttribute{
 																				MarkdownDescription: "QoS Policy Name. Enter QoS Policy Name",
-																				Optional: true,
+																				Optional:            true,
 																			},
 																			"security_style": schema.StringAttribute{
 																				MarkdownDescription: "Security Style. Security style for new volumes.",
-																				Optional: true,
+																				Optional:            true,
 																			},
 																			"snapshot_dir": schema.BoolAttribute{
 																				MarkdownDescription: "Access to Snapshot Directory. Access to the .snapshot directory.",
-																				Optional: true,
+																				Optional:            true,
 																			},
 																			"snapshot_policy": schema.StringAttribute{
 																				MarkdownDescription: "Snapshot Policy. Snapshot policy to use",
-																				Optional: true,
+																				Optional:            true,
 																			},
 																			"snapshot_reserve": schema.StringAttribute{
 																				MarkdownDescription: "Snapshot Reserved. Percentage of volume reserved for snapshots. '0' if snapshot policy is 'none', else ''",
-																				Optional: true,
+																				Optional:            true,
 																			},
 																			"space_reserve": schema.StringAttribute{
 																				MarkdownDescription: "Space Reservation Mode. Space reservation mode; “none” (thin) or “volume” (thick)",
-																				Optional: true,
+																				Optional:            true,
 																			},
 																			"split_on_clone": schema.BoolAttribute{
 																				MarkdownDescription: "Split on Clone. Split a clone from its parent upon creation.",
-																				Optional: true,
+																				Optional:            true,
 																			},
 																			"tiering_policy": schema.StringAttribute{
 																				MarkdownDescription: "Tiering Policy. Tiering policy to use. 'none' is default.",
-																				Optional: true,
+																				Optional:            true,
 																			},
 																			"unix_permissions": schema.Int64Attribute{
 																				MarkdownDescription: "Unix Mode Permissions. Unix permission mode for new volumes. All allowed 777",
-																				Optional: true,
+																				Optional:            true,
 																			},
 																		},
 																		Blocks: map[string]schema.Block{
@@ -3362,51 +3315,51 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 															Attributes: map[string]schema.Attribute{
 																"adaptive_qos_policy": schema.StringAttribute{
 																	MarkdownDescription: "Adaptive QoS Policy name. Enter Adaptive QoS Policy Name",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"encryption": schema.BoolAttribute{
 																	MarkdownDescription: "Enable Encryption. Enable NetApp volume encryption.",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"export_policy": schema.StringAttribute{
 																	MarkdownDescription: "Export Policy. Export policy to use.",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"qos_policy": schema.StringAttribute{
 																	MarkdownDescription: "QoS Policy Name. Enter QoS Policy Name",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"security_style": schema.StringAttribute{
 																	MarkdownDescription: "Security Style. Security style for new volumes.",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"snapshot_dir": schema.BoolAttribute{
 																	MarkdownDescription: "Access to Snapshot Directory. Access to the .snapshot directory.",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"snapshot_policy": schema.StringAttribute{
 																	MarkdownDescription: "Snapshot Policy. Snapshot policy to use",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"snapshot_reserve": schema.StringAttribute{
 																	MarkdownDescription: "Snapshot Reserved. Percentage of volume reserved for snapshots. '0' if snapshot policy is 'none', else ''",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"space_reserve": schema.StringAttribute{
 																	MarkdownDescription: "Space Reservation Mode. Space reservation mode; “none” (thin) or “volume” (thick)",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"split_on_clone": schema.BoolAttribute{
 																	MarkdownDescription: "Split on Clone. Split a clone from its parent upon creation.",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"tiering_policy": schema.StringAttribute{
 																	MarkdownDescription: "Tiering Policy. Tiering policy to use. 'none' is default.",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"unix_permissions": schema.Int64Attribute{
 																	MarkdownDescription: "Unix Mode Permissions. Unix permission mode for new volumes. All allowed 777",
-																	Optional: true,
+																	Optional:            true,
 																},
 															},
 															Blocks: map[string]schema.Block{
@@ -3422,81 +3375,80 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 													Attributes: map[string]schema.Attribute{
 														"client_certificate": schema.StringAttribute{
 															MarkdownDescription: "Client Certificate. Please Enter Base64-encoded value of client certificate. Used for certificate-based auth.",
-															Optional: true,
+															Optional:            true,
 														},
 														"data_lif_dns_name": schema.StringAttribute{
 															MarkdownDescription: "Backend Data LIF Name. Backend Data LIF IP Address's ip address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
-															Optional: true,
+															Optional:            true,
 														},
 														"data_lif_ip": schema.StringAttribute{
 															MarkdownDescription: "Backend Data LIF IP Address. Backend Data LIF IP Address is reachable at the given ip address",
-															Optional: true,
+															Optional:            true,
 														},
 														"igroup_name": schema.StringAttribute{
 															MarkdownDescription: "iGroup Name. Name of the igroup for SAN volumes to use",
-															Optional: true,
+															Optional:            true,
 														},
 														"limit_aggregate_usage": schema.Int64Attribute{
 															MarkdownDescription: "Limit Aggregate Usage. Fail provisioning if usage is above this percentage. Not enforced by default.",
-															Optional: true,
+															Optional:            true,
 														},
 														"limit_volume_size": schema.Int64Attribute{
 															MarkdownDescription: "Limit Volume Size. Fail provisioning if requested volume size in GBi is above this value. Not enforced by default.",
-															Optional: true,
+															Optional:            true,
 														},
 														"management_lif_dns_name": schema.StringAttribute{
 															MarkdownDescription: "Backend Management LIF Name. Backend Management LIF IP Address's ip address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
-															Optional: true,
+															Optional:            true,
 														},
 														"management_lif_ip": schema.StringAttribute{
 															MarkdownDescription: "Backend Management LIF IP Address. Backend Management LIF IP Address is reachable at the given ip address",
-															Optional: true,
+															Optional:            true,
 														},
 														"region": schema.StringAttribute{
 															MarkdownDescription: "Backend Region. Virtual Pool Region",
-															Optional: true,
+															Optional:            true,
 														},
 														"storage_driver_name": schema.StringAttribute{
 															MarkdownDescription: "Storage Backend Driver. Configuration of Backend Name",
-															Optional: true,
+															Optional:            true,
 														},
 														"storage_prefix": schema.StringAttribute{
 															MarkdownDescription: "Storage Prefix. Prefix used when provisioning new volumes in the SVM. Once set this cannot be updated",
-															Optional: true,
+															Optional:            true,
 														},
 														"svm": schema.StringAttribute{
 															MarkdownDescription: "Backend SVM. Storage virtual machine to use. Derived if an SVM managementLIF is specified",
-															Optional: true,
+															Optional:            true,
 														},
 														"trusted_ca_certificate": schema.StringAttribute{
 															MarkdownDescription: "Trusted CA Certificate. Please Enter Base64-encoded value of trusted CA certificate. Optional. Used for certificate-based auth.",
-															Optional: true,
+															Optional:            true,
 														},
 														"username": schema.StringAttribute{
 															MarkdownDescription: "Username. Username to connect to the cluster/SVM",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 													Blocks: map[string]schema.Block{
 														"client_private_key": schema.SingleNestedBlock{
 															MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-															Attributes: map[string]schema.Attribute{
-															},
+															Attributes:          map[string]schema.Attribute{},
 															Blocks: map[string]schema.Block{
 																"blindfold_secret_info": schema.SingleNestedBlock{
 																	MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 																	Attributes: map[string]schema.Attribute{
 																		"decryption_provider": schema.StringAttribute{
 																			MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																		"location": schema.StringAttribute{
 																			MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																		"store_provider": schema.StringAttribute{
 																			MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																	},
 																},
@@ -3505,11 +3457,11 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																	Attributes: map[string]schema.Attribute{
 																		"provider_ref": schema.StringAttribute{
 																			MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																		"url": schema.StringAttribute{
 																			MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																	},
 																},
@@ -3523,23 +3475,22 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 														},
 														"password": schema.SingleNestedBlock{
 															MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-															Attributes: map[string]schema.Attribute{
-															},
+															Attributes:          map[string]schema.Attribute{},
 															Blocks: map[string]schema.Block{
 																"blindfold_secret_info": schema.SingleNestedBlock{
 																	MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 																	Attributes: map[string]schema.Attribute{
 																		"decryption_provider": schema.StringAttribute{
 																			MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																		"location": schema.StringAttribute{
 																			MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																		"store_provider": schema.StringAttribute{
 																			MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																	},
 																},
@@ -3548,11 +3499,11 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																	Attributes: map[string]schema.Attribute{
 																		"provider_ref": schema.StringAttribute{
 																			MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																		"url": schema.StringAttribute{
 																			MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																	},
 																},
@@ -3564,7 +3515,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																Attributes: map[string]schema.Attribute{
 																	"zone": schema.StringAttribute{
 																		MarkdownDescription: "Virtual Pool Zone. Virtual Storage Pool zone definition.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 																Blocks: map[string]schema.Block{
@@ -3576,51 +3527,51 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																		Attributes: map[string]schema.Attribute{
 																			"adaptive_qos_policy": schema.StringAttribute{
 																				MarkdownDescription: "Adaptive QoS Policy name. Enter Adaptive QoS Policy Name",
-																				Optional: true,
+																				Optional:            true,
 																			},
 																			"encryption": schema.BoolAttribute{
 																				MarkdownDescription: "Enable Encryption. Enable NetApp volume encryption.",
-																				Optional: true,
+																				Optional:            true,
 																			},
 																			"export_policy": schema.StringAttribute{
 																				MarkdownDescription: "Export Policy. Export policy to use.",
-																				Optional: true,
+																				Optional:            true,
 																			},
 																			"qos_policy": schema.StringAttribute{
 																				MarkdownDescription: "QoS Policy Name. Enter QoS Policy Name",
-																				Optional: true,
+																				Optional:            true,
 																			},
 																			"security_style": schema.StringAttribute{
 																				MarkdownDescription: "Security Style. Security style for new volumes.",
-																				Optional: true,
+																				Optional:            true,
 																			},
 																			"snapshot_dir": schema.BoolAttribute{
 																				MarkdownDescription: "Access to Snapshot Directory. Access to the .snapshot directory.",
-																				Optional: true,
+																				Optional:            true,
 																			},
 																			"snapshot_policy": schema.StringAttribute{
 																				MarkdownDescription: "Snapshot Policy. Snapshot policy to use",
-																				Optional: true,
+																				Optional:            true,
 																			},
 																			"snapshot_reserve": schema.StringAttribute{
 																				MarkdownDescription: "Snapshot Reserved. Percentage of volume reserved for snapshots. '0' if snapshot policy is 'none', else ''",
-																				Optional: true,
+																				Optional:            true,
 																			},
 																			"space_reserve": schema.StringAttribute{
 																				MarkdownDescription: "Space Reservation Mode. Space reservation mode; “none” (thin) or “volume” (thick)",
-																				Optional: true,
+																				Optional:            true,
 																			},
 																			"split_on_clone": schema.BoolAttribute{
 																				MarkdownDescription: "Split on Clone. Split a clone from its parent upon creation.",
-																				Optional: true,
+																				Optional:            true,
 																			},
 																			"tiering_policy": schema.StringAttribute{
 																				MarkdownDescription: "Tiering Policy. Tiering policy to use. 'none' is default.",
-																				Optional: true,
+																				Optional:            true,
 																			},
 																			"unix_permissions": schema.Int64Attribute{
 																				MarkdownDescription: "Unix Mode Permissions. Unix permission mode for new volumes. All allowed 777",
-																				Optional: true,
+																				Optional:            true,
 																			},
 																		},
 																		Blocks: map[string]schema.Block{
@@ -3637,33 +3588,32 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 															Attributes: map[string]schema.Attribute{
 																"chap_target_username": schema.StringAttribute{
 																	MarkdownDescription: "CHAP Target Username. Target username. Required if useCHAP=true",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"chap_username": schema.StringAttribute{
 																	MarkdownDescription: "CHAP Username. Inbound username. Required if useCHAP=true",
-																	Optional: true,
+																	Optional:            true,
 																},
 															},
 															Blocks: map[string]schema.Block{
 																"chap_initiator_secret": schema.SingleNestedBlock{
 																	MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-																	Attributes: map[string]schema.Attribute{
-																	},
+																	Attributes:          map[string]schema.Attribute{},
 																	Blocks: map[string]schema.Block{
 																		"blindfold_secret_info": schema.SingleNestedBlock{
 																			MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 																			Attributes: map[string]schema.Attribute{
 																				"decryption_provider": schema.StringAttribute{
 																					MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-																					Optional: true,
+																					Optional:            true,
 																				},
 																				"location": schema.StringAttribute{
 																					MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-																					Optional: true,
+																					Optional:            true,
 																				},
 																				"store_provider": schema.StringAttribute{
 																					MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																					Optional: true,
+																					Optional:            true,
 																				},
 																			},
 																		},
@@ -3672,11 +3622,11 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																			Attributes: map[string]schema.Attribute{
 																				"provider_ref": schema.StringAttribute{
 																					MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																					Optional: true,
+																					Optional:            true,
 																				},
 																				"url": schema.StringAttribute{
 																					MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-																					Optional: true,
+																					Optional:            true,
 																				},
 																			},
 																		},
@@ -3684,23 +3634,22 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																},
 																"chap_target_initiator_secret": schema.SingleNestedBlock{
 																	MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-																	Attributes: map[string]schema.Attribute{
-																	},
+																	Attributes:          map[string]schema.Attribute{},
 																	Blocks: map[string]schema.Block{
 																		"blindfold_secret_info": schema.SingleNestedBlock{
 																			MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 																			Attributes: map[string]schema.Attribute{
 																				"decryption_provider": schema.StringAttribute{
 																					MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-																					Optional: true,
+																					Optional:            true,
 																				},
 																				"location": schema.StringAttribute{
 																					MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-																					Optional: true,
+																					Optional:            true,
 																				},
 																				"store_provider": schema.StringAttribute{
 																					MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																					Optional: true,
+																					Optional:            true,
 																				},
 																			},
 																		},
@@ -3709,11 +3658,11 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																			Attributes: map[string]schema.Attribute{
 																				"provider_ref": schema.StringAttribute{
 																					MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																					Optional: true,
+																					Optional:            true,
 																				},
 																				"url": schema.StringAttribute{
 																					MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-																					Optional: true,
+																					Optional:            true,
 																				},
 																			},
 																		},
@@ -3726,51 +3675,51 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 															Attributes: map[string]schema.Attribute{
 																"adaptive_qos_policy": schema.StringAttribute{
 																	MarkdownDescription: "Adaptive QoS Policy name. Enter Adaptive QoS Policy Name",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"encryption": schema.BoolAttribute{
 																	MarkdownDescription: "Enable Encryption. Enable NetApp volume encryption.",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"export_policy": schema.StringAttribute{
 																	MarkdownDescription: "Export Policy. Export policy to use.",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"qos_policy": schema.StringAttribute{
 																	MarkdownDescription: "QoS Policy Name. Enter QoS Policy Name",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"security_style": schema.StringAttribute{
 																	MarkdownDescription: "Security Style. Security style for new volumes.",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"snapshot_dir": schema.BoolAttribute{
 																	MarkdownDescription: "Access to Snapshot Directory. Access to the .snapshot directory.",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"snapshot_policy": schema.StringAttribute{
 																	MarkdownDescription: "Snapshot Policy. Snapshot policy to use",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"snapshot_reserve": schema.StringAttribute{
 																	MarkdownDescription: "Snapshot Reserved. Percentage of volume reserved for snapshots. '0' if snapshot policy is 'none', else ''",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"space_reserve": schema.StringAttribute{
 																	MarkdownDescription: "Space Reservation Mode. Space reservation mode; “none” (thin) or “volume” (thick)",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"split_on_clone": schema.BoolAttribute{
 																	MarkdownDescription: "Split on Clone. Split a clone from its parent upon creation.",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"tiering_policy": schema.StringAttribute{
 																	MarkdownDescription: "Tiering Policy. Tiering policy to use. 'none' is default.",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"unix_permissions": schema.Int64Attribute{
 																	MarkdownDescription: "Unix Mode Permissions. Unix permission mode for new volumes. All allowed 777",
-																	Optional: true,
+																	Optional:            true,
 																},
 															},
 															Blocks: map[string]schema.Block{
@@ -3788,50 +3737,49 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											Attributes: map[string]schema.Attribute{
 												"cluster_id": schema.StringAttribute{
 													MarkdownDescription: "Cluster ID. clusterID is added as a prefix for all volumes created by this PSO installation. clusterID is also used to identify the volumes used by the datastore, pso-db. clusterID MUST BE UNIQUE for multiple K8s clusters running on top of the same storage arrays. characters allowed: alphanumeric and underscores",
-													Optional: true,
+													Optional:            true,
 												},
 												"enable_storage_topology": schema.BoolAttribute{
 													MarkdownDescription: "Enable Storage Topology. This option is to enable/disable the csi topology feature for pso-csi",
-													Optional: true,
+													Optional:            true,
 												},
 												"enable_strict_topology": schema.BoolAttribute{
 													MarkdownDescription: "Enable Strict Topology. This option is to enable/disable the strict csi topology feature for pso-csi",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 											Blocks: map[string]schema.Block{
 												"arrays": schema.SingleNestedBlock{
 													MarkdownDescription: "Arrays Configuration. Device configuration for PSO Arrays",
-													Attributes: map[string]schema.Attribute{
-													},
+													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"flash_array": schema.SingleNestedBlock{
 															MarkdownDescription: "Flash Arrays. Specify what storage flash arrays should be managed the plugin",
 															Attributes: map[string]schema.Attribute{
 																"default_fs_opt": schema.StringAttribute{
 																	MarkdownDescription: "Default Filesystem Options. Block volume default mkfs options. Not recommended to change!",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"default_fs_type": schema.StringAttribute{
 																	MarkdownDescription: "Default Filesystem Type. Block volume default filesystem type. Not recommended to change!",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"default_mount_opts": schema.ListAttribute{
 																	MarkdownDescription: "Default Mount Options. Block volume default filesystem mount options. Not recommended to change!",
-																	Optional: true,
-																	ElementType: types.StringType,
+																	Optional:            true,
+																	ElementType:         types.StringType,
 																},
 																"disable_preempt_attachments": schema.BoolAttribute{
 																	MarkdownDescription: "Disable Preempt Attachments. Enable/Disable attachment preemption!",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"iscsi_login_timeout": schema.Int64Attribute{
 																	MarkdownDescription: "iSCSI Login Timeout. iSCSI login timeout in seconds. Not recommended to change!",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"san_type": schema.StringAttribute{
 																	MarkdownDescription: "SAN Type. Block volume access protocol, either ISCSI or FC",
-																	Optional: true,
+																	Optional:            true,
 																},
 															},
 															Blocks: map[string]schema.Block{
@@ -3841,33 +3789,32 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																		Attributes: map[string]schema.Attribute{
 																			"mgmt_dns_name": schema.StringAttribute{
 																				MarkdownDescription: "Management Endpoint Name. Management Endpoint's ip address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
-																				Optional: true,
+																				Optional:            true,
 																			},
 																			"mgmt_ip": schema.StringAttribute{
 																				MarkdownDescription: "Management Endpoint IP Address. Management Endpoint is reachable at the given ip address",
-																				Optional: true,
+																				Optional:            true,
 																			},
 																		},
 																		Blocks: map[string]schema.Block{
 																			"api_token": schema.SingleNestedBlock{
 																				MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-																				Attributes: map[string]schema.Attribute{
-																				},
+																				Attributes:          map[string]schema.Attribute{},
 																				Blocks: map[string]schema.Block{
 																					"blindfold_secret_info": schema.SingleNestedBlock{
 																						MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 																						Attributes: map[string]schema.Attribute{
 																							"decryption_provider": schema.StringAttribute{
 																								MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-																								Optional: true,
+																								Optional:            true,
 																							},
 																							"location": schema.StringAttribute{
 																								MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-																								Optional: true,
+																								Optional:            true,
 																							},
 																							"store_provider": schema.StringAttribute{
 																								MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																								Optional: true,
+																								Optional:            true,
 																							},
 																						},
 																					},
@@ -3876,11 +3823,11 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																						Attributes: map[string]schema.Attribute{
 																							"provider_ref": schema.StringAttribute{
 																								MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																								Optional: true,
+																								Optional:            true,
 																							},
 																							"url": schema.StringAttribute{
 																								MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-																								Optional: true,
+																								Optional:            true,
 																							},
 																						},
 																					},
@@ -3899,11 +3846,11 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 															Attributes: map[string]schema.Attribute{
 																"enable_snapshot_directory": schema.BoolAttribute{
 																	MarkdownDescription: "Enable Snapshot Directory. Enable/Disable FlashBlade snapshots",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"export_rules": schema.StringAttribute{
 																	MarkdownDescription: "NFS Export Rules. NFS Export rules",
-																	Optional: true,
+																	Optional:            true,
 																},
 															},
 															Blocks: map[string]schema.Block{
@@ -3913,41 +3860,40 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																		Attributes: map[string]schema.Attribute{
 																			"mgmt_dns_name": schema.StringAttribute{
 																				MarkdownDescription: "Management Endpoint Name. Management Endpoint's ip address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
-																				Optional: true,
+																				Optional:            true,
 																			},
 																			"mgmt_ip": schema.StringAttribute{
 																				MarkdownDescription: "Management Endpoint IP Address. Management Endpoint is reachable at the given ip address",
-																				Optional: true,
+																				Optional:            true,
 																			},
 																			"nfs_endpoint_dns_name": schema.StringAttribute{
 																				MarkdownDescription: "NFS DNS Name. Endpoint's ip address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
-																				Optional: true,
+																				Optional:            true,
 																			},
 																			"nfs_endpoint_ip": schema.StringAttribute{
 																				MarkdownDescription: "NFS IP Address. Endpoint is reachable at the given ip address",
-																				Optional: true,
+																				Optional:            true,
 																			},
 																		},
 																		Blocks: map[string]schema.Block{
 																			"api_token": schema.SingleNestedBlock{
 																				MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-																				Attributes: map[string]schema.Attribute{
-																				},
+																				Attributes:          map[string]schema.Attribute{},
 																				Blocks: map[string]schema.Block{
 																					"blindfold_secret_info": schema.SingleNestedBlock{
 																						MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 																						Attributes: map[string]schema.Attribute{
 																							"decryption_provider": schema.StringAttribute{
 																								MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-																								Optional: true,
+																								Optional:            true,
 																							},
 																							"location": schema.StringAttribute{
 																								MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-																								Optional: true,
+																								Optional:            true,
 																							},
 																							"store_provider": schema.StringAttribute{
 																								MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																								Optional: true,
+																								Optional:            true,
 																							},
 																						},
 																					},
@@ -3956,11 +3902,11 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																						Attributes: map[string]schema.Attribute{
 																							"provider_ref": schema.StringAttribute{
 																								MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																								Optional: true,
+																								Optional:            true,
 																							},
 																							"url": schema.StringAttribute{
 																								MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-																								Optional: true,
+																								Optional:            true,
 																							},
 																						},
 																					},
@@ -3985,8 +3931,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 					},
 					"storage_interface_list": schema.SingleNestedBlock{
 						MarkdownDescription: "List of Interface. Configure storage interfaces for this App Stack site",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"storage_interfaces": schema.ListNestedBlock{
 								MarkdownDescription: "List of Interface. Configure storage interfaces for this App Stack site",
@@ -3994,7 +3939,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 									Attributes: map[string]schema.Attribute{
 										"description_spec": schema.StringAttribute{
 											MarkdownDescription: "Interface Description. Description for this Interface",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -4006,23 +3951,23 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											Attributes: map[string]schema.Attribute{
 												"device": schema.StringAttribute{
 													MarkdownDescription: "Ethernet Device. Interface configuration for the ethernet device",
-													Optional: true,
+													Optional:            true,
 												},
 												"mtu": schema.Int64Attribute{
 													MarkdownDescription: "Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, mtu must be between 512 and 16384",
-													Optional: true,
+													Optional:            true,
 												},
 												"node": schema.StringAttribute{
 													MarkdownDescription: "Specific Node. Configuration will apply to a device on the given node.",
-													Optional: true,
+													Optional:            true,
 												},
 												"priority": schema.Int64Attribute{
 													MarkdownDescription: "Priority. Priority of the network interface when multiple network interfaces are present in outside network Greater the value, higher the priority",
-													Optional: true,
+													Optional:            true,
 												},
 												"vlan_id": schema.Int64Attribute{
 													MarkdownDescription: "VLAN Id. Configure a VLAN tagged ethernet interface",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -4034,8 +3979,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												},
 												"dhcp_server": schema.SingleNestedBlock{
 													MarkdownDescription: "DHCPServerParametersType.",
-													Attributes: map[string]schema.Attribute{
-													},
+													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"automatic_from_end": schema.SingleNestedBlock{
 															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -4049,19 +3993,19 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																Attributes: map[string]schema.Attribute{
 																	"dgw_address": schema.StringAttribute{
 																		MarkdownDescription: "Static IPv4 Configuration. Enter a IPv4 address from the network prefix to be used as the default gateway.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"dns_address": schema.StringAttribute{
 																		MarkdownDescription: "Static IPv4 Configuration. Enter a IPv4 address from the network prefix to be used as the DNS server.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"network_prefix": schema.StringAttribute{
 																		MarkdownDescription: "Network Prefix. Set the network prefix for the site. ex: 10.1.1.0/24",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"pool_settings": schema.StringAttribute{
 																		MarkdownDescription: "Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation. Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`. Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 																Blocks: map[string]schema.Block{
@@ -4077,11 +4021,11 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																			Attributes: map[string]schema.Attribute{
 																				"end_ip": schema.StringAttribute{
 																					MarkdownDescription: "Ending IP. Ending IP of the pool range. In case of address allocator, offset is derived based on network prefix. 10.1.1.200 with prefix length of 24, end offset is 0.0.0.200",
-																					Optional: true,
+																					Optional:            true,
 																				},
 																				"start_ip": schema.StringAttribute{
 																					MarkdownDescription: "Starting IP. Starting IP of the pool range. In case of address allocator, offset is derived based on network prefix. 10.1.1.5 with prefix length of 24, start offset is 0.0.0.5",
-																					Optional: true,
+																					Optional:            true,
 																				},
 																			},
 																		},
@@ -4097,8 +4041,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 														},
 														"interface_ip_map": schema.SingleNestedBlock{
 															MarkdownDescription: "Interface IPv4 Assignments. Specify static IPv4 addresses per node.",
-															Attributes: map[string]schema.Attribute{
-															},
+															Attributes:          map[string]schema.Attribute{},
 															Blocks: map[string]schema.Block{
 																"interface_ip_map": schema.SingleNestedBlock{
 																	MarkdownDescription: "Site:Node to IPv4 Address Mapping. Specify static IPv4 addresses per site:node.",
@@ -4109,8 +4052,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												},
 												"ipv6_auto_config": schema.SingleNestedBlock{
 													MarkdownDescription: "IPV6AutoConfigType.",
-													Attributes: map[string]schema.Attribute{
-													},
+													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"host": schema.SingleNestedBlock{
 															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -4120,22 +4062,21 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 															Attributes: map[string]schema.Attribute{
 																"network_prefix": schema.StringAttribute{
 																	MarkdownDescription: "Network Prefix. Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862",
-																	Optional: true,
+																	Optional:            true,
 																},
 															},
 															Blocks: map[string]schema.Block{
 																"dns_config": schema.SingleNestedBlock{
 																	MarkdownDescription: "IPV6DnsConfig.",
-																	Attributes: map[string]schema.Attribute{
-																	},
+																	Attributes:          map[string]schema.Attribute{},
 																	Blocks: map[string]schema.Block{
 																		"configured_list": schema.SingleNestedBlock{
 																			MarkdownDescription: "IPV6DnsList.",
 																			Attributes: map[string]schema.Attribute{
 																				"dns_list": schema.ListAttribute{
 																					MarkdownDescription: "Dns List. List of IPV6 Addresses acting as Dns servers",
-																					Optional: true,
-																					ElementType: types.StringType,
+																					Optional:            true,
+																					ElementType:         types.StringType,
 																				},
 																			},
 																		},
@@ -4144,7 +4085,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																			Attributes: map[string]schema.Attribute{
 																				"configured_address": schema.StringAttribute{
 																					MarkdownDescription: "Configured Address. Configured address from the network prefix is chosen as dns server",
-																					Optional: true,
+																					Optional:            true,
 																				},
 																			},
 																			Blocks: map[string]schema.Block{
@@ -4160,8 +4101,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																},
 																"stateful": schema.SingleNestedBlock{
 																	MarkdownDescription: "DHCPIPV6 Stateful Server.",
-																	Attributes: map[string]schema.Attribute{
-																	},
+																	Attributes:          map[string]schema.Attribute{},
 																	Blocks: map[string]schema.Block{
 																		"automatic_from_end": schema.SingleNestedBlock{
 																			MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -4175,11 +4115,11 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																				Attributes: map[string]schema.Attribute{
 																					"network_prefix": schema.StringAttribute{
 																						MarkdownDescription: "Network Prefix. Network Prefix to be used for IPV6 address auto configuration",
-																						Optional: true,
+																						Optional:            true,
 																					},
 																					"pool_settings": schema.StringAttribute{
 																						MarkdownDescription: "Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation. Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`. Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`.",
-																						Optional: true,
+																						Optional:            true,
 																					},
 																				},
 																				Blocks: map[string]schema.Block{
@@ -4189,11 +4129,11 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																							Attributes: map[string]schema.Attribute{
 																								"end_ip": schema.StringAttribute{
 																									MarkdownDescription: "Ending IPV6. Ending IPV6 address of the pool range. In case of address allocator, offset is derived based on network prefix.",
-																									Optional: true,
+																									Optional:            true,
 																								},
 																								"start_ip": schema.StringAttribute{
 																									MarkdownDescription: "Starting IPV6. Starting IPV6 address of the pool range. In case of address allocator, offset is derived based on network prefix. 2001::1 with prefix length of 64, start offset is 5",
-																									Optional: true,
+																									Optional:            true,
 																								},
 																							},
 																						},
@@ -4206,8 +4146,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																		},
 																		"interface_ip_map": schema.SingleNestedBlock{
 																			MarkdownDescription: "Interface IPV6 Assignments. Map of Interface IPV6 assignments per node",
-																			Attributes: map[string]schema.Attribute{
-																			},
+																			Attributes:          map[string]schema.Attribute{},
 																			Blocks: map[string]schema.Block{
 																				"interface_ip_map": schema.SingleNestedBlock{
 																					MarkdownDescription: "Site:Node to IPV6 Mapping. Map of Site:Node to IPV6 address.",
@@ -4243,13 +4182,11 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												},
 												"static_ip": schema.SingleNestedBlock{
 													MarkdownDescription: "Static IP Parameters. Configure Static IP parameters",
-													Attributes: map[string]schema.Attribute{
-													},
+													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"cluster_static_ip": schema.SingleNestedBlock{
 															MarkdownDescription: "Cluster: Static IP Parameters. Configure Static IP parameters for cluster",
-															Attributes: map[string]schema.Attribute{
-															},
+															Attributes:          map[string]schema.Attribute{},
 															Blocks: map[string]schema.Block{
 																"interface_ip_map": schema.SingleNestedBlock{
 																	MarkdownDescription: "Node to IP Mapping. Map of Node to Static ip configuration value, Key:Node, Value:IP Address",
@@ -4261,11 +4198,11 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 															Attributes: map[string]schema.Attribute{
 																"default_gw": schema.StringAttribute{
 																	MarkdownDescription: "Default Gateway. IP address of the default gateway.",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"ip_address": schema.StringAttribute{
 																	MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
-																	Optional: true,
+																	Optional:            true,
 																},
 															},
 														},
@@ -4273,13 +4210,11 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												},
 												"static_ipv6_address": schema.SingleNestedBlock{
 													MarkdownDescription: "Static IP Parameters. Configure Static IP parameters",
-													Attributes: map[string]schema.Attribute{
-													},
+													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"cluster_static_ip": schema.SingleNestedBlock{
 															MarkdownDescription: "Cluster: Static IP Parameters. Configure Static IP parameters for cluster",
-															Attributes: map[string]schema.Attribute{
-															},
+															Attributes:          map[string]schema.Attribute{},
 															Blocks: map[string]schema.Block{
 																"interface_ip_map": schema.SingleNestedBlock{
 																	MarkdownDescription: "Node to IP Mapping. Map of Node to Static ip configuration value, Key:Node, Value:IP Address",
@@ -4291,11 +4226,11 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 															Attributes: map[string]schema.Attribute{
 																"default_gw": schema.StringAttribute{
 																	MarkdownDescription: "Default Gateway. IP address of the default gateway.",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"ip_address": schema.StringAttribute{
 																	MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
-																	Optional: true,
+																	Optional:            true,
 																},
 															},
 														},
@@ -4315,7 +4250,6 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 				},
-
 			},
 			"default_blocked_services": schema.SingleNestedBlock{
 				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -4346,18 +4280,17 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				Attributes: map[string]schema.Attribute{
 					"feature_type": schema.StringAttribute{
 						MarkdownDescription: "Feature Type. Set feature to be enabled Operate with a degraded vGPU performance Enable NVIDIA vGPU Enable NVIDIA RTX Virtual Workstation Enable NVIDIA Virtual Compute Server. Possible values are `UNLICENSED`, `VGPU`, `VWS`, `VCS`. Defaults to `UNLICENSED`.",
-						Optional: true,
+						Optional:            true,
 					},
 					"server_address": schema.StringAttribute{
 						MarkdownDescription: "License Server Address. Set License Server Address",
-						Optional: true,
+						Optional:            true,
 					},
 					"server_port": schema.Int64Attribute{
 						MarkdownDescription: "License Server Port Number. Set License Server port number",
-						Optional: true,
+						Optional:            true,
 					},
 				},
-
 			},
 			"enable_vm": schema.SingleNestedBlock{
 				MarkdownDescription: "VM Configuration. VMs support configuration",
@@ -4367,24 +4300,22 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
 						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-						Optional: true,
+						Optional:            true,
 					},
 					"namespace": schema.StringAttribute{
 						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-						Optional: true,
+						Optional:            true,
 					},
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-						Optional: true,
-						Computed: true,
+						Optional:            true,
+						Computed:            true,
 					},
 				},
-
 			},
 			"kubernetes_upgrade_drain": schema.SingleNestedBlock{
 				MarkdownDescription: "Node by Node Upgrade. Specify how worker nodes within a site will be upgraded.",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"disable_upgrade_drain": schema.SingleNestedBlock{
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -4394,11 +4325,11 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						Attributes: map[string]schema.Attribute{
 							"drain_max_unavailable_node_count": schema.Int64Attribute{
 								MarkdownDescription: "Node Batch Size Count.",
-								Optional: true,
+								Optional:            true,
 							},
 							"drain_node_timeout": schema.Int64Attribute{
 								MarkdownDescription: "Upgrade Wait Time. Seconds to wait before initiating upgrade on the next set of nodes. Setting it to 0 will wait indefinitely for all services on nodes to be upgraded gracefully before proceeding to the next set of nodes. (Warning: It may block upgrade if services on a node cannot be gracefully upgraded. It is recommended to use the default value).",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -4411,19 +4342,17 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 				},
-
 			},
 			"local_control_plane": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: local_control_plane, no_local_control_plane] Local Control Plane. Enable local control plane for L3VPN, SRV6, EVPN etc",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"bgp_config": schema.SingleNestedBlock{
 						MarkdownDescription: "BGP Configuration. BGP configuration parameters",
 						Attributes: map[string]schema.Attribute{
 							"asn": schema.Int64Attribute{
 								MarkdownDescription: "ASN. Autonomous System Number",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -4433,7 +4362,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 									Attributes: map[string]schema.Attribute{
 										"label": schema.StringAttribute{
 											MarkdownDescription: "Label. Specify whether this peer should be",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -4445,15 +4374,15 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											Attributes: map[string]schema.Attribute{
 												"multiplier": schema.Int64Attribute{
 													MarkdownDescription: "Multiplier. Specify Number of missed packets to bring session down'",
-													Optional: true,
+													Optional:            true,
 												},
 												"receive_interval_milliseconds": schema.Int64Attribute{
 													MarkdownDescription: "Minimum Receive Interval. BFD receive interval timer, in milliseconds",
-													Optional: true,
+													Optional:            true,
 												},
 												"transmit_interval_milliseconds": schema.Int64Attribute{
 													MarkdownDescription: "Transmit Interval. BFD transmit interval timer, in milliseconds",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 										},
@@ -4465,39 +4394,39 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											Attributes: map[string]schema.Attribute{
 												"address": schema.StringAttribute{
 													MarkdownDescription: "Peer Address. Specify IPV4 peer address.",
-													Optional: true,
+													Optional:            true,
 												},
 												"address_ipv6": schema.StringAttribute{
 													MarkdownDescription: "Peer IPv6 Address. Specify peer IPv6 address.",
-													Optional: true,
+													Optional:            true,
 												},
 												"asn": schema.Int64Attribute{
 													MarkdownDescription: "ASN. Autonomous System Number for BGP peer",
-													Optional: true,
+													Optional:            true,
 												},
 												"md5_auth_key": schema.StringAttribute{
 													MarkdownDescription: "MD5 Authentication Key. MD5 key for protecting BGP Sessions (RFC 2385)",
-													Optional: true,
+													Optional:            true,
 												},
 												"port": schema.Int64Attribute{
 													MarkdownDescription: "Peer Port. Peer TCP port number.",
-													Optional: true,
+													Optional:            true,
 												},
 												"subnet_begin_offset": schema.Int64Attribute{
 													MarkdownDescription: "Offset From Beginning Of Subnet. Calculate peer address using offset from the beginning of the subnet.",
-													Optional: true,
+													Optional:            true,
 												},
 												"subnet_begin_offset_v6": schema.Int64Attribute{
 													MarkdownDescription: "Offset From Beginning Of Subnet. Calculate peer address using offset from the beginning of the subnet.",
-													Optional: true,
+													Optional:            true,
 												},
 												"subnet_end_offset": schema.Int64Attribute{
 													MarkdownDescription: "Offset From End Of Subnet. Calculate peer address using offset from the end of the subnet.",
-													Optional: true,
+													Optional:            true,
 												},
 												"subnet_end_offset_v6": schema.Int64Attribute{
 													MarkdownDescription: "Offset From End Of Subnet. Calculate peer address using offset from the end of the subnet.",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -4518,8 +4447,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												},
 												"family_inet": schema.SingleNestedBlock{
 													MarkdownDescription: "BGP Family Inet. Parameters for inet family.",
-													Attributes: map[string]schema.Attribute{
-													},
+													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"disable": schema.SingleNestedBlock{
 															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -4540,23 +4468,22 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 													Attributes: map[string]schema.Attribute{
 														"name": schema.StringAttribute{
 															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-															Optional: true,
+															Optional:            true,
 														},
 														"namespace": schema.StringAttribute{
 															MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-															Optional: true,
+															Optional:            true,
 														},
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-															Optional: true,
-															Computed: true,
+															Optional:            true,
+															Computed:            true,
 														},
 													},
 												},
 												"interface_list": schema.SingleNestedBlock{
 													MarkdownDescription: "Interface List. List of network interfaces.",
-													Attributes: map[string]schema.Attribute{
-													},
+													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"interfaces": schema.ListNestedBlock{
 															MarkdownDescription: "Interface List. List of network interfaces.",
@@ -4564,16 +4491,16 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																Attributes: map[string]schema.Attribute{
 																	"name": schema.StringAttribute{
 																		MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"namespace": schema.StringAttribute{
 																		MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"tenant": schema.StringAttribute{
 																		MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-																		Optional: true,
-																		Computed: true,
+																		Optional:            true,
+																		Computed:            true,
 																	},
 																},
 															},
@@ -4590,11 +4517,11 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											Attributes: map[string]schema.Attribute{
 												"description_spec": schema.StringAttribute{
 													MarkdownDescription: "Description. Human readable description.",
-													Optional: true,
+													Optional:            true,
 												},
 												"name": schema.StringAttribute{
 													MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 										},
@@ -4606,14 +4533,12 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										},
 										"routing_policies": schema.SingleNestedBlock{
 											MarkdownDescription: "BGP Routing Policy. List of rules which can be applied on all or particular nodes",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"route_policy": schema.ListNestedBlock{
 													MarkdownDescription: "BGP Routing policy. Route policy to be applied",
 													NestedObject: schema.NestedBlockObject{
-														Attributes: map[string]schema.Attribute{
-														},
+														Attributes: map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"all_nodes": schema.SingleNestedBlock{
 																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -4626,8 +4551,8 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																Attributes: map[string]schema.Attribute{
 																	"node": schema.ListAttribute{
 																		MarkdownDescription: "Node of choice. Select BGP Session on which policy will be applied.",
-																		Optional: true,
-																		ElementType: types.StringType,
+																		Optional:            true,
+																		ElementType:         types.StringType,
 																	},
 																},
 															},
@@ -4637,26 +4562,26 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																	Attributes: map[string]schema.Attribute{
 																		"kind": schema.StringAttribute{
 																			MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-																			Optional: true,
-																			Computed: true,
+																			Optional:            true,
+																			Computed:            true,
 																		},
 																		"name": schema.StringAttribute{
 																			MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																		"namespace": schema.StringAttribute{
 																			MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																		"tenant": schema.StringAttribute{
 																			MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-																			Optional: true,
-																			Computed: true,
+																			Optional:            true,
+																			Computed:            true,
 																		},
 																		"uid": schema.StringAttribute{
 																			MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-																			Optional: true,
-																			Computed: true,
+																			Optional:            true,
+																			Computed:            true,
 																		},
 																	},
 																},
@@ -4681,26 +4606,24 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 			"log_receiver": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: log_receiver, logs_streaming_disabled] Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
 						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-						Optional: true,
+						Optional:            true,
 					},
 					"namespace": schema.StringAttribute{
 						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-						Optional: true,
+						Optional:            true,
 					},
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-						Optional: true,
-						Computed: true,
+						Optional:            true,
+						Computed:            true,
 					},
 				},
-
 			},
 			"logs_streaming_disabled": schema.SingleNestedBlock{
 				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -4711,14 +4634,13 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 					Attributes: map[string]schema.Attribute{
 						"name": schema.StringAttribute{
 							MarkdownDescription: "Name. Names of master node",
-							Optional: true,
+							Optional:            true,
 						},
 						"public_ip": schema.StringAttribute{
 							MarkdownDescription: "Public IP. IP Address of the master node. This ip will be used when other sites connect via Site Mesh Group",
-							Optional: true,
+							Optional:            true,
 						},
 					},
-
 				},
 			},
 			"no_bond_devices": schema.SingleNestedBlock{
@@ -4732,8 +4654,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 			},
 			"offline_survivability_mode": schema.SingleNestedBlock{
 				MarkdownDescription: "Offline Survivability Mode. Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7 days, even when the site is offline. The certificates needed to keep the services running on this site are signed using a local CA. Secrets would also be cached locally to handle the connectivity loss. When the mode is toggled, services will restart and traffic disruption will be seen.",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"enable_offline_survivability_mode": schema.SingleNestedBlock{
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -4742,14 +4663,13 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 			"os": schema.SingleNestedBlock{
 				MarkdownDescription: "Operating System Version. Select the F5XC Operating System Version for the site. By default, latest available OS Version will be used. Refer to release notes to find required released OS versions.",
 				Attributes: map[string]schema.Attribute{
 					"operating_system_version": schema.StringAttribute{
 						MarkdownDescription: "Operating System Version. Specify a OS version to be used e.g. 9.2024.6.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -4757,12 +4677,10 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 			"sriov_interfaces": schema.SingleNestedBlock{
 				MarkdownDescription: "Custom SR-IOV interfaces Configuration List. List of all custom SR-IOV interfaces configuration",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"sriov_interface": schema.ListNestedBlock{
 						MarkdownDescription: "Custom SR-IOV interfaces Configuration. Use custom SR-IOV interfaces Configuration",
@@ -4770,28 +4688,27 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 							Attributes: map[string]schema.Attribute{
 								"interface_name": schema.StringAttribute{
 									MarkdownDescription: "Name of physical interface. Name of SR-IOV physical interface",
-									Optional: true,
+									Optional:            true,
 								},
 								"number_of_vfio_vfs": schema.Int64Attribute{
 									MarkdownDescription: "Number of virtual functions reserved for vfio. Number of virtual functions reserved for VNFs and DPDK-based CNFs",
-									Optional: true,
+									Optional:            true,
 								},
 								"number_of_vfs": schema.Int64Attribute{
 									MarkdownDescription: "Total number of virtual functions. Total number of virtual functions",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 						},
 					},
 				},
-
 			},
 			"sw": schema.SingleNestedBlock{
 				MarkdownDescription: "F5XC Software Version. Select the F5XC Software Version for the site. By default, latest available F5XC Software Version will be used. Refer to release notes to find required released SW versions.",
 				Attributes: map[string]schema.Attribute{
 					"volterra_software_version": schema.StringAttribute{
 						MarkdownDescription: "F5XC Software Version. Specify a F5XC Software Version to be used e.g. crt-20210329-1002.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -4799,26 +4716,24 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 			"usb_policy": schema.SingleNestedBlock{
 				MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
 						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-						Optional: true,
+						Optional:            true,
 					},
 					"namespace": schema.StringAttribute{
 						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-						Optional: true,
+						Optional:            true,
 					},
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-						Optional: true,
-						Computed: true,
+						Optional:            true,
+						Computed:            true,
 					},
 				},
-
 			},
 		},
 	}
@@ -5376,7 +5291,6 @@ func (r *VoltstackSiteResource) Create(ctx context.Context, req resource.CreateR
 		createReq.Spec["volterra_certified_hw"] = data.VolterraCertifiedHw.ValueString()
 	}
 
-
 	apiResource, err := r.client.CreateVoltstackSite(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create VoltstackSite: %s", err))
@@ -5388,7 +5302,7 @@ func (r *VoltstackSiteResource) Create(ctx context.Context, req resource.CreateR
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if _, ok := apiResource.Spec["allow_all_usb"].(map[string]interface{}); ok && isImport && data.AllowAllUsb == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.AllowAllUsb = &VoltstackSiteEmptyModel{}
@@ -5530,8 +5444,7 @@ func (r *VoltstackSiteResource) Create(ctx context.Context, req resource.CreateR
 				}
 				// Import case: read from API
 				if _, ok := blockData["active_enhanced_firewall_policies"].(map[string]interface{}); ok {
-					return &VoltstackSiteCustomNetworkConfigActiveEnhancedFirewallPoliciesModel{
-					}
+					return &VoltstackSiteCustomNetworkConfigActiveEnhancedFirewallPoliciesModel{}
 				}
 				return nil
 			}(),
@@ -5542,8 +5455,7 @@ func (r *VoltstackSiteResource) Create(ctx context.Context, req resource.CreateR
 				}
 				// Import case: read from API
 				if _, ok := blockData["active_forward_proxy_policies"].(map[string]interface{}); ok {
-					return &VoltstackSiteCustomNetworkConfigActiveForwardProxyPoliciesModel{
-					}
+					return &VoltstackSiteCustomNetworkConfigActiveForwardProxyPoliciesModel{}
 				}
 				return nil
 			}(),
@@ -5554,8 +5466,7 @@ func (r *VoltstackSiteResource) Create(ctx context.Context, req resource.CreateR
 				}
 				// Import case: read from API
 				if _, ok := blockData["active_network_policies"].(map[string]interface{}); ok {
-					return &VoltstackSiteCustomNetworkConfigActiveNetworkPoliciesModel{
-					}
+					return &VoltstackSiteCustomNetworkConfigActiveNetworkPoliciesModel{}
 				}
 				return nil
 			}(),
@@ -5626,8 +5537,7 @@ func (r *VoltstackSiteResource) Create(ctx context.Context, req resource.CreateR
 				}
 				// Import case: read from API
 				if _, ok := blockData["global_network_list"].(map[string]interface{}); ok {
-					return &VoltstackSiteCustomNetworkConfigGlobalNetworkListModel{
-					}
+					return &VoltstackSiteCustomNetworkConfigGlobalNetworkListModel{}
 				}
 				return nil
 			}(),
@@ -5638,8 +5548,7 @@ func (r *VoltstackSiteResource) Create(ctx context.Context, req resource.CreateR
 				}
 				// Import case: read from API
 				if _, ok := blockData["interface_list"].(map[string]interface{}); ok {
-					return &VoltstackSiteCustomNetworkConfigInterfaceListModel{
-					}
+					return &VoltstackSiteCustomNetworkConfigInterfaceListModel{}
 				}
 				return nil
 			}(),
@@ -5704,8 +5613,7 @@ func (r *VoltstackSiteResource) Create(ctx context.Context, req resource.CreateR
 				}
 				// Import case: read from API
 				if _, ok := blockData["sli_config"].(map[string]interface{}); ok {
-					return &VoltstackSiteCustomNetworkConfigSLIConfigModel{
-					}
+					return &VoltstackSiteCustomNetworkConfigSLIConfigModel{}
 				}
 				return nil
 			}(),
@@ -5716,8 +5624,7 @@ func (r *VoltstackSiteResource) Create(ctx context.Context, req resource.CreateR
 				}
 				// Import case: read from API
 				if _, ok := blockData["slo_config"].(map[string]interface{}); ok {
-					return &VoltstackSiteCustomNetworkConfigSLOConfigModel{
-					}
+					return &VoltstackSiteCustomNetworkConfigSLOConfigModel{}
 				}
 				return nil
 			}(),
@@ -6059,7 +5966,6 @@ func (r *VoltstackSiteResource) Create(ctx context.Context, req resource.CreateR
 	} else {
 		data.VolterraCertifiedHw = types.StringNull()
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -6149,9 +6055,9 @@ func (r *VoltstackSiteResource) Read(ctx context.Context, req resource.ReadReque
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if _, ok := apiResource.Spec["allow_all_usb"].(map[string]interface{}); ok && isImport && data.AllowAllUsb == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -6294,8 +6200,7 @@ func (r *VoltstackSiteResource) Read(ctx context.Context, req resource.ReadReque
 				}
 				// Import case: read from API
 				if _, ok := blockData["active_enhanced_firewall_policies"].(map[string]interface{}); ok {
-					return &VoltstackSiteCustomNetworkConfigActiveEnhancedFirewallPoliciesModel{
-					}
+					return &VoltstackSiteCustomNetworkConfigActiveEnhancedFirewallPoliciesModel{}
 				}
 				return nil
 			}(),
@@ -6306,8 +6211,7 @@ func (r *VoltstackSiteResource) Read(ctx context.Context, req resource.ReadReque
 				}
 				// Import case: read from API
 				if _, ok := blockData["active_forward_proxy_policies"].(map[string]interface{}); ok {
-					return &VoltstackSiteCustomNetworkConfigActiveForwardProxyPoliciesModel{
-					}
+					return &VoltstackSiteCustomNetworkConfigActiveForwardProxyPoliciesModel{}
 				}
 				return nil
 			}(),
@@ -6318,8 +6222,7 @@ func (r *VoltstackSiteResource) Read(ctx context.Context, req resource.ReadReque
 				}
 				// Import case: read from API
 				if _, ok := blockData["active_network_policies"].(map[string]interface{}); ok {
-					return &VoltstackSiteCustomNetworkConfigActiveNetworkPoliciesModel{
-					}
+					return &VoltstackSiteCustomNetworkConfigActiveNetworkPoliciesModel{}
 				}
 				return nil
 			}(),
@@ -6390,8 +6293,7 @@ func (r *VoltstackSiteResource) Read(ctx context.Context, req resource.ReadReque
 				}
 				// Import case: read from API
 				if _, ok := blockData["global_network_list"].(map[string]interface{}); ok {
-					return &VoltstackSiteCustomNetworkConfigGlobalNetworkListModel{
-					}
+					return &VoltstackSiteCustomNetworkConfigGlobalNetworkListModel{}
 				}
 				return nil
 			}(),
@@ -6402,8 +6304,7 @@ func (r *VoltstackSiteResource) Read(ctx context.Context, req resource.ReadReque
 				}
 				// Import case: read from API
 				if _, ok := blockData["interface_list"].(map[string]interface{}); ok {
-					return &VoltstackSiteCustomNetworkConfigInterfaceListModel{
-					}
+					return &VoltstackSiteCustomNetworkConfigInterfaceListModel{}
 				}
 				return nil
 			}(),
@@ -6468,8 +6369,7 @@ func (r *VoltstackSiteResource) Read(ctx context.Context, req resource.ReadReque
 				}
 				// Import case: read from API
 				if _, ok := blockData["sli_config"].(map[string]interface{}); ok {
-					return &VoltstackSiteCustomNetworkConfigSLIConfigModel{
-					}
+					return &VoltstackSiteCustomNetworkConfigSLIConfigModel{}
 				}
 				return nil
 			}(),
@@ -6480,8 +6380,7 @@ func (r *VoltstackSiteResource) Read(ctx context.Context, req resource.ReadReque
 				}
 				// Import case: read from API
 				if _, ok := blockData["slo_config"].(map[string]interface{}); ok {
-					return &VoltstackSiteCustomNetworkConfigSLOConfigModel{
-					}
+					return &VoltstackSiteCustomNetworkConfigSLOConfigModel{}
 				}
 				return nil
 			}(),
@@ -6823,7 +6722,6 @@ func (r *VoltstackSiteResource) Read(ctx context.Context, req resource.ReadReque
 	} else {
 		data.VolterraCertifiedHw = types.StringNull()
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -7291,7 +7189,6 @@ func (r *VoltstackSiteResource) Update(ctx context.Context, req resource.UpdateR
 	if !data.VolterraCertifiedHw.IsNull() && !data.VolterraCertifiedHw.IsUnknown() {
 		apiResource.Spec["volterra_certified_hw"] = data.VolterraCertifiedHw.ValueString()
 	}
-
 
 	updated, err := r.client.UpdateVoltstackSite(ctx, apiResource)
 	if err != nil {

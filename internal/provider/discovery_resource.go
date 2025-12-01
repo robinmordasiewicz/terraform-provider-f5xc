@@ -51,72 +51,72 @@ type DiscoveryEmptyModel struct {
 
 // DiscoveryDiscoveryConsulModel represents discovery_consul block
 type DiscoveryDiscoveryConsulModel struct {
-	AccessInfo *DiscoveryDiscoveryConsulAccessInfoModel `tfsdk:"access_info"`
+	AccessInfo  *DiscoveryDiscoveryConsulAccessInfoModel  `tfsdk:"access_info"`
 	PublishInfo *DiscoveryDiscoveryConsulPublishInfoModel `tfsdk:"publish_info"`
 }
 
 // DiscoveryDiscoveryConsulAccessInfoModel represents access_info block
 type DiscoveryDiscoveryConsulAccessInfoModel struct {
-	ConnectionInfo *DiscoveryDiscoveryConsulAccessInfoConnectionInfoModel `tfsdk:"connection_info"`
+	ConnectionInfo    *DiscoveryDiscoveryConsulAccessInfoConnectionInfoModel    `tfsdk:"connection_info"`
 	HTTPBasicAuthInfo *DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoModel `tfsdk:"http_basic_auth_info"`
 }
 
 // DiscoveryDiscoveryConsulAccessInfoConnectionInfoModel represents connection_info block
 type DiscoveryDiscoveryConsulAccessInfoConnectionInfoModel struct {
-	APIServer types.String `tfsdk:"api_server"`
-	TLSInfo *DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoModel `tfsdk:"tls_info"`
+	APIServer types.String                                                  `tfsdk:"api_server"`
+	TLSInfo   *DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoModel `tfsdk:"tls_info"`
 }
 
 // DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoModel represents tls_info block
 type DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoModel struct {
-	Certificate types.String `tfsdk:"certificate"`
-	ServerName types.String `tfsdk:"server_name"`
-	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
-	KeyURL *DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoKeyURLModel `tfsdk:"key_url"`
+	Certificate  types.String                                                        `tfsdk:"certificate"`
+	ServerName   types.String                                                        `tfsdk:"server_name"`
+	TrustedCaURL types.String                                                        `tfsdk:"trusted_ca_url"`
+	KeyURL       *DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoKeyURLModel `tfsdk:"key_url"`
 }
 
 // DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoKeyURLModel represents key_url block
 type DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoKeyURLModel struct {
 	BlindfoldSecretInfo *DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoKeyURLBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoKeyURLClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoKeyURLClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoKeyURLBlindfoldSecretInfoModel represents blindfold_secret_info block
 type DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoKeyURLBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoKeyURLClearSecretInfoModel represents clear_secret_info block
 type DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoKeyURLClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoModel represents http_basic_auth_info block
 type DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoModel struct {
-	UserName types.String `tfsdk:"user_name"`
+	UserName  types.String                                                       `tfsdk:"user_name"`
 	PasswdURL *DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoPasswdURLModel `tfsdk:"passwd_url"`
 }
 
 // DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoPasswdURLModel represents passwd_url block
 type DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoPasswdURLModel struct {
 	BlindfoldSecretInfo *DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoPasswdURLBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoPasswdURLClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoPasswdURLClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoPasswdURLBlindfoldSecretInfoModel represents blindfold_secret_info block
 type DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoPasswdURLBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoPasswdURLClearSecretInfoModel represents clear_secret_info block
 type DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoPasswdURLClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // DiscoveryDiscoveryConsulPublishInfoModel represents publish_info block
@@ -127,70 +127,70 @@ type DiscoveryDiscoveryConsulPublishInfoModel struct {
 
 // DiscoveryDiscoveryK8SModel represents discovery_k8s block
 type DiscoveryDiscoveryK8SModel struct {
-	AccessInfo *DiscoveryDiscoveryK8SAccessInfoModel `tfsdk:"access_info"`
-	DefaultAll *DiscoveryEmptyModel `tfsdk:"default_all"`
+	AccessInfo       *DiscoveryDiscoveryK8SAccessInfoModel       `tfsdk:"access_info"`
+	DefaultAll       *DiscoveryEmptyModel                        `tfsdk:"default_all"`
 	NamespaceMapping *DiscoveryDiscoveryK8SNamespaceMappingModel `tfsdk:"namespace_mapping"`
-	PublishInfo *DiscoveryDiscoveryK8SPublishInfoModel `tfsdk:"publish_info"`
+	PublishInfo      *DiscoveryDiscoveryK8SPublishInfoModel      `tfsdk:"publish_info"`
 }
 
 // DiscoveryDiscoveryK8SAccessInfoModel represents access_info block
 type DiscoveryDiscoveryK8SAccessInfoModel struct {
 	ConnectionInfo *DiscoveryDiscoveryK8SAccessInfoConnectionInfoModel `tfsdk:"connection_info"`
-	Isolated *DiscoveryEmptyModel `tfsdk:"isolated"`
-	KubeconfigURL *DiscoveryDiscoveryK8SAccessInfoKubeconfigURLModel `tfsdk:"kubeconfig_url"`
-	Reachable *DiscoveryEmptyModel `tfsdk:"reachable"`
+	Isolated       *DiscoveryEmptyModel                                `tfsdk:"isolated"`
+	KubeconfigURL  *DiscoveryDiscoveryK8SAccessInfoKubeconfigURLModel  `tfsdk:"kubeconfig_url"`
+	Reachable      *DiscoveryEmptyModel                                `tfsdk:"reachable"`
 }
 
 // DiscoveryDiscoveryK8SAccessInfoConnectionInfoModel represents connection_info block
 type DiscoveryDiscoveryK8SAccessInfoConnectionInfoModel struct {
-	APIServer types.String `tfsdk:"api_server"`
-	TLSInfo *DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoModel `tfsdk:"tls_info"`
+	APIServer types.String                                               `tfsdk:"api_server"`
+	TLSInfo   *DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoModel `tfsdk:"tls_info"`
 }
 
 // DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoModel represents tls_info block
 type DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoModel struct {
-	Certificate types.String `tfsdk:"certificate"`
-	ServerName types.String `tfsdk:"server_name"`
-	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
-	KeyURL *DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoKeyURLModel `tfsdk:"key_url"`
+	Certificate  types.String                                                     `tfsdk:"certificate"`
+	ServerName   types.String                                                     `tfsdk:"server_name"`
+	TrustedCaURL types.String                                                     `tfsdk:"trusted_ca_url"`
+	KeyURL       *DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoKeyURLModel `tfsdk:"key_url"`
 }
 
 // DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoKeyURLModel represents key_url block
 type DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoKeyURLModel struct {
 	BlindfoldSecretInfo *DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoKeyURLBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoKeyURLClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoKeyURLClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoKeyURLBlindfoldSecretInfoModel represents blindfold_secret_info block
 type DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoKeyURLBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoKeyURLClearSecretInfoModel represents clear_secret_info block
 type DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoKeyURLClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // DiscoveryDiscoveryK8SAccessInfoKubeconfigURLModel represents kubeconfig_url block
 type DiscoveryDiscoveryK8SAccessInfoKubeconfigURLModel struct {
 	BlindfoldSecretInfo *DiscoveryDiscoveryK8SAccessInfoKubeconfigURLBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *DiscoveryDiscoveryK8SAccessInfoKubeconfigURLClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *DiscoveryDiscoveryK8SAccessInfoKubeconfigURLClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // DiscoveryDiscoveryK8SAccessInfoKubeconfigURLBlindfoldSecretInfoModel represents blindfold_secret_info block
 type DiscoveryDiscoveryK8SAccessInfoKubeconfigURLBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // DiscoveryDiscoveryK8SAccessInfoKubeconfigURLClearSecretInfoModel represents clear_secret_info block
 type DiscoveryDiscoveryK8SAccessInfoKubeconfigURLClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // DiscoveryDiscoveryK8SNamespaceMappingModel represents namespace_mapping block
@@ -200,21 +200,21 @@ type DiscoveryDiscoveryK8SNamespaceMappingModel struct {
 
 // DiscoveryDiscoveryK8SNamespaceMappingItemsModel represents items block
 type DiscoveryDiscoveryK8SNamespaceMappingItemsModel struct {
-	Namespace types.String `tfsdk:"namespace"`
+	Namespace      types.String `tfsdk:"namespace"`
 	NamespaceRegex types.String `tfsdk:"namespace_regex"`
 }
 
 // DiscoveryDiscoveryK8SPublishInfoModel represents publish_info block
 type DiscoveryDiscoveryK8SPublishInfoModel struct {
-	Disable *DiscoveryEmptyModel `tfsdk:"disable"`
+	Disable       *DiscoveryEmptyModel                                `tfsdk:"disable"`
 	DNSDelegation *DiscoveryDiscoveryK8SPublishInfoDNSDelegationModel `tfsdk:"dns_delegation"`
-	Publish *DiscoveryDiscoveryK8SPublishInfoPublishModel `tfsdk:"publish"`
-	PublishFqdns *DiscoveryEmptyModel `tfsdk:"publish_fqdns"`
+	Publish       *DiscoveryDiscoveryK8SPublishInfoPublishModel       `tfsdk:"publish"`
+	PublishFqdns  *DiscoveryEmptyModel                                `tfsdk:"publish_fqdns"`
 }
 
 // DiscoveryDiscoveryK8SPublishInfoDNSDelegationModel represents dns_delegation block
 type DiscoveryDiscoveryK8SPublishInfoDNSDelegationModel struct {
-	DNSMode types.String `tfsdk:"dns_mode"`
+	DNSMode   types.String `tfsdk:"dns_mode"`
 	Subdomain types.String `tfsdk:"subdomain"`
 }
 
@@ -225,26 +225,26 @@ type DiscoveryDiscoveryK8SPublishInfoPublishModel struct {
 
 // DiscoveryWhereModel represents where block
 type DiscoveryWhereModel struct {
-	Site *DiscoveryWhereSiteModel `tfsdk:"site"`
+	Site           *DiscoveryWhereSiteModel           `tfsdk:"site"`
 	VirtualNetwork *DiscoveryWhereVirtualNetworkModel `tfsdk:"virtual_network"`
-	VirtualSite *DiscoveryWhereVirtualSiteModel `tfsdk:"virtual_site"`
+	VirtualSite    *DiscoveryWhereVirtualSiteModel    `tfsdk:"virtual_site"`
 }
 
 // DiscoveryWhereSiteModel represents site block
 type DiscoveryWhereSiteModel struct {
-	NetworkType types.String `tfsdk:"network_type"`
-	DisableInternetVip *DiscoveryEmptyModel `tfsdk:"disable_internet_vip"`
-	EnableInternetVip *DiscoveryEmptyModel `tfsdk:"enable_internet_vip"`
-	Ref []DiscoveryWhereSiteRefModel `tfsdk:"ref"`
+	NetworkType        types.String                 `tfsdk:"network_type"`
+	DisableInternetVip *DiscoveryEmptyModel         `tfsdk:"disable_internet_vip"`
+	EnableInternetVip  *DiscoveryEmptyModel         `tfsdk:"enable_internet_vip"`
+	Ref                []DiscoveryWhereSiteRefModel `tfsdk:"ref"`
 }
 
 // DiscoveryWhereSiteRefModel represents ref block
 type DiscoveryWhereSiteRefModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // DiscoveryWhereVirtualNetworkModel represents virtual_network block
@@ -254,44 +254,44 @@ type DiscoveryWhereVirtualNetworkModel struct {
 
 // DiscoveryWhereVirtualNetworkRefModel represents ref block
 type DiscoveryWhereVirtualNetworkRefModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // DiscoveryWhereVirtualSiteModel represents virtual_site block
 type DiscoveryWhereVirtualSiteModel struct {
-	NetworkType types.String `tfsdk:"network_type"`
-	DisableInternetVip *DiscoveryEmptyModel `tfsdk:"disable_internet_vip"`
-	EnableInternetVip *DiscoveryEmptyModel `tfsdk:"enable_internet_vip"`
-	Ref []DiscoveryWhereVirtualSiteRefModel `tfsdk:"ref"`
+	NetworkType        types.String                        `tfsdk:"network_type"`
+	DisableInternetVip *DiscoveryEmptyModel                `tfsdk:"disable_internet_vip"`
+	EnableInternetVip  *DiscoveryEmptyModel                `tfsdk:"enable_internet_vip"`
+	Ref                []DiscoveryWhereVirtualSiteRefModel `tfsdk:"ref"`
 }
 
 // DiscoveryWhereVirtualSiteRefModel represents ref block
 type DiscoveryWhereVirtualSiteRefModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 type DiscoveryResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	ClusterID types.String `tfsdk:"cluster_id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Name            types.String                   `tfsdk:"name"`
+	Namespace       types.String                   `tfsdk:"namespace"`
+	Annotations     types.Map                      `tfsdk:"annotations"`
+	Description     types.String                   `tfsdk:"description"`
+	Disable         types.Bool                     `tfsdk:"disable"`
+	Labels          types.Map                      `tfsdk:"labels"`
+	ID              types.String                   `tfsdk:"id"`
+	ClusterID       types.String                   `tfsdk:"cluster_id"`
+	Timeouts        timeouts.Value                 `tfsdk:"timeouts"`
 	DiscoveryConsul *DiscoveryDiscoveryConsulModel `tfsdk:"discovery_consul"`
-	DiscoveryK8S *DiscoveryDiscoveryK8SModel `tfsdk:"discovery_k8s"`
-	NoClusterID *DiscoveryEmptyModel `tfsdk:"no_cluster_id"`
-	Where *DiscoveryWhereModel `tfsdk:"where"`
+	DiscoveryK8S    *DiscoveryDiscoveryK8SModel    `tfsdk:"discovery_k8s"`
+	NoClusterID     *DiscoveryEmptyModel           `tfsdk:"no_cluster_id"`
+	Where           *DiscoveryWhereModel           `tfsdk:"where"`
 }
 
 func (r *DiscoveryResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -305,7 +305,7 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Discovery. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -315,7 +315,7 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the Discovery will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -325,33 +325,33 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"cluster_id": schema.StringAttribute{
 				MarkdownDescription: "[OneOf: cluster_id, no_cluster_id] Discovery cluster Identifier. Specify identifier for discovery cluster. This identifier can be specified in endpoint object to discover only from this discovery object.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -366,20 +366,18 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 			}),
 			"discovery_consul": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: discovery_consul, discovery_k8s] Consul Discovery Configuration. Discovery configuration for Hashicorp Consul",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"access_info": schema.SingleNestedBlock{
 						MarkdownDescription: "Hashicorp Consul Parameters. Hashicorp Consul API server information",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"connection_info": schema.SingleNestedBlock{
 								MarkdownDescription: "REST API Config. Configuration details to access discovery service rest API.",
 								Attributes: map[string]schema.Attribute{
 									"api_server": schema.StringAttribute{
 										MarkdownDescription: "API Server and Port. API server must be a fully qualified domain string and port specified as host:port pair",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 								Blocks: map[string]schema.Block{
@@ -388,37 +386,36 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 										Attributes: map[string]schema.Attribute{
 											"certificate": schema.StringAttribute{
 												MarkdownDescription: "Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain.",
-												Optional: true,
+												Optional:            true,
 											},
 											"server_name": schema.StringAttribute{
 												MarkdownDescription: "SNI name. ServerName is passed to the server for SNI and is used in the client to check server certificates against. If ServerName is empty, the hostname used to contact the server is used",
-												Optional: true,
+												Optional:            true,
 											},
 											"trusted_ca_url": schema.StringAttribute{
 												MarkdownDescription: "Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers.",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 										Blocks: map[string]schema.Block{
 											"key_url": schema.SingleNestedBlock{
 												MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-												Attributes: map[string]schema.Attribute{
-												},
+												Attributes:          map[string]schema.Attribute{},
 												Blocks: map[string]schema.Block{
 													"blindfold_secret_info": schema.SingleNestedBlock{
 														MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 														Attributes: map[string]schema.Attribute{
 															"decryption_provider": schema.StringAttribute{
 																MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-																Optional: true,
+																Optional:            true,
 															},
 															"location": schema.StringAttribute{
 																MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-																Optional: true,
+																Optional:            true,
 															},
 															"store_provider": schema.StringAttribute{
 																MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 													},
@@ -427,11 +424,11 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 														Attributes: map[string]schema.Attribute{
 															"provider_ref": schema.StringAttribute{
 																MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																Optional: true,
+																Optional:            true,
 															},
 															"url": schema.StringAttribute{
 																MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 													},
@@ -446,29 +443,28 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 								Attributes: map[string]schema.Attribute{
 									"user_name": schema.StringAttribute{
 										MarkdownDescription: "User Name. username in consul",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 								Blocks: map[string]schema.Block{
 									"passwd_url": schema.SingleNestedBlock{
 										MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-										Attributes: map[string]schema.Attribute{
-										},
+										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"blindfold_secret_info": schema.SingleNestedBlock{
 												MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 												Attributes: map[string]schema.Attribute{
 													"decryption_provider": schema.StringAttribute{
 														MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-														Optional: true,
+														Optional:            true,
 													},
 													"location": schema.StringAttribute{
 														MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-														Optional: true,
+														Optional:            true,
 													},
 													"store_provider": schema.StringAttribute{
 														MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 											},
@@ -477,11 +473,11 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 												Attributes: map[string]schema.Attribute{
 													"provider_ref": schema.StringAttribute{
 														MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-														Optional: true,
+														Optional:            true,
 													},
 													"url": schema.StringAttribute{
 														MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 											},
@@ -493,8 +489,7 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 					},
 					"publish_info": schema.SingleNestedBlock{
 						MarkdownDescription: "VIP Publish Configuration. Consul Configuration to publish VIPs",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"disable": schema.SingleNestedBlock{
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -505,24 +500,21 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 						},
 					},
 				},
-
 			},
 			"discovery_k8s": schema.SingleNestedBlock{
 				MarkdownDescription: "K8S Discovery Configuration. Discovery configuration for K8s.",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"access_info": schema.SingleNestedBlock{
 						MarkdownDescription: "K8s API Server. K8S API server access",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"connection_info": schema.SingleNestedBlock{
 								MarkdownDescription: "REST API Config. Configuration details to access discovery service rest API.",
 								Attributes: map[string]schema.Attribute{
 									"api_server": schema.StringAttribute{
 										MarkdownDescription: "API Server and Port. API server must be a fully qualified domain string and port specified as host:port pair",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 								Blocks: map[string]schema.Block{
@@ -531,37 +523,36 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 										Attributes: map[string]schema.Attribute{
 											"certificate": schema.StringAttribute{
 												MarkdownDescription: "Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain.",
-												Optional: true,
+												Optional:            true,
 											},
 											"server_name": schema.StringAttribute{
 												MarkdownDescription: "SNI name. ServerName is passed to the server for SNI and is used in the client to check server certificates against. If ServerName is empty, the hostname used to contact the server is used",
-												Optional: true,
+												Optional:            true,
 											},
 											"trusted_ca_url": schema.StringAttribute{
 												MarkdownDescription: "Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers.",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 										Blocks: map[string]schema.Block{
 											"key_url": schema.SingleNestedBlock{
 												MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-												Attributes: map[string]schema.Attribute{
-												},
+												Attributes:          map[string]schema.Attribute{},
 												Blocks: map[string]schema.Block{
 													"blindfold_secret_info": schema.SingleNestedBlock{
 														MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 														Attributes: map[string]schema.Attribute{
 															"decryption_provider": schema.StringAttribute{
 																MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-																Optional: true,
+																Optional:            true,
 															},
 															"location": schema.StringAttribute{
 																MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-																Optional: true,
+																Optional:            true,
 															},
 															"store_provider": schema.StringAttribute{
 																MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 													},
@@ -570,11 +561,11 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 														Attributes: map[string]schema.Attribute{
 															"provider_ref": schema.StringAttribute{
 																MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																Optional: true,
+																Optional:            true,
 															},
 															"url": schema.StringAttribute{
 																MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 													},
@@ -589,23 +580,22 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 							},
 							"kubeconfig_url": schema.SingleNestedBlock{
 								MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"blindfold_secret_info": schema.SingleNestedBlock{
 										MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 										Attributes: map[string]schema.Attribute{
 											"decryption_provider": schema.StringAttribute{
 												MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-												Optional: true,
+												Optional:            true,
 											},
 											"location": schema.StringAttribute{
 												MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-												Optional: true,
+												Optional:            true,
 											},
 											"store_provider": schema.StringAttribute{
 												MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -614,11 +604,11 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 										Attributes: map[string]schema.Attribute{
 											"provider_ref": schema.StringAttribute{
 												MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-												Optional: true,
+												Optional:            true,
 											},
 											"url": schema.StringAttribute{
 												MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -634,8 +624,7 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 					},
 					"namespace_mapping": schema.SingleNestedBlock{
 						MarkdownDescription: "K8S Namespace Mapping. Select the mapping between K8s namespaces from which services will be discovered and App Namespace to which the discovered services will be shared.",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"items": schema.ListNestedBlock{
 								MarkdownDescription: "Regex Matching. Map K8s namespace(s) to App Namespaces. In Shared Configuration, Discovered Services can only be mapped to a single App Namespace, which is determined by the first matched regex.",
@@ -643,11 +632,11 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 									Attributes: map[string]schema.Attribute{
 										"namespace": schema.StringAttribute{
 											MarkdownDescription: "F5XC Application Namespaces. Select a namespace",
-											Optional: true,
+											Optional:            true,
 										},
 										"namespace_regex": schema.StringAttribute{
 											MarkdownDescription: "K8S Namespaces. The regex here will be used to match K8s namespace(s).",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 								},
@@ -656,8 +645,7 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 					},
 					"publish_info": schema.SingleNestedBlock{
 						MarkdownDescription: "VIP Publish Configurations. K8S Configuration to publish VIPs",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"disable": schema.SingleNestedBlock{
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -667,11 +655,11 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 								Attributes: map[string]schema.Attribute{
 									"dns_mode": schema.StringAttribute{
 										MarkdownDescription: "DNS Mode. Two modes are possible CoreDNS: Whether external K8s cluster is running core-dns KubeDNS: External K8s cluster is running kube-dns. Possible values are `CORE_DNS`, `KUBE_DNS`. Defaults to `CORE_DNS`.",
-										Optional: true,
+										Optional:            true,
 									},
 									"subdomain": schema.StringAttribute{
 										MarkdownDescription: "Subdomain. The DNS subdomain for which F5XC will respond to DNS queries.",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -680,7 +668,7 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 								Attributes: map[string]schema.Attribute{
 									"namespace": schema.StringAttribute{
 										MarkdownDescription: "Default Namespace. The namespace where the service/endpoints need to be created if it's not included in the domain. The external K8S administrator needs to ensure that the namespace exists.",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -690,22 +678,20 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 						},
 					},
 				},
-
 			},
 			"no_cluster_id": schema.SingleNestedBlock{
 				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 			},
 			"where": schema.SingleNestedBlock{
 				MarkdownDescription: "Network or Site Reference. NetworkSiteRefSelector defines a union of reference to site or reference to virtual_network or reference to virtual_site It is used to determine virtual network using following rules * Direct reference to virtual_network object * Site local network when refering to site object * All site local networks for sites selected by refering to virtual_site object",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"site": schema.SingleNestedBlock{
 						MarkdownDescription: "Site Reference. This specifies a direct reference to a site configuration object",
 						Attributes: map[string]schema.Attribute{
 							"network_type": schema.StringAttribute{
 								MarkdownDescription: "Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user. Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`. Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`.",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -721,26 +707,26 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 									Attributes: map[string]schema.Attribute{
 										"kind": schema.StringAttribute{
 											MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-											Optional: true,
+											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
 											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-											Optional: true,
+											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 										"uid": schema.StringAttribute{
 											MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
@@ -749,8 +735,7 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 					},
 					"virtual_network": schema.SingleNestedBlock{
 						MarkdownDescription: "Network Reference. This specifies a direct reference to a network configuration object",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"ref": schema.ListNestedBlock{
 								MarkdownDescription: "Reference. A virtual network direct reference",
@@ -758,26 +743,26 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 									Attributes: map[string]schema.Attribute{
 										"kind": schema.StringAttribute{
 											MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-											Optional: true,
+											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
 											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-											Optional: true,
+											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 										"uid": schema.StringAttribute{
 											MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
@@ -789,7 +774,7 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 						Attributes: map[string]schema.Attribute{
 							"network_type": schema.StringAttribute{
 								MarkdownDescription: "Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user. Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`. Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`.",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -805,26 +790,26 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 									Attributes: map[string]schema.Attribute{
 										"kind": schema.StringAttribute{
 											MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-											Optional: true,
+											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
 											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-											Optional: true,
+											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 										"uid": schema.StringAttribute{
 											MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
@@ -832,7 +817,6 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 						},
 					},
 				},
-
 			},
 		},
 	}
@@ -1043,7 +1027,6 @@ func (r *DiscoveryResource) Create(ctx context.Context, req resource.CreateReque
 		createReq.Spec["cluster_id"] = data.ClusterID.ValueString()
 	}
 
-
 	apiResource, err := r.client.CreateDiscovery(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create Discovery: %s", err))
@@ -1055,7 +1038,7 @@ func (r *DiscoveryResource) Create(ctx context.Context, req resource.CreateReque
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if _, ok := apiResource.Spec["discovery_consul"].(map[string]interface{}); ok && isImport && data.DiscoveryConsul == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.DiscoveryConsul = &DiscoveryDiscoveryConsulModel{}
@@ -1081,7 +1064,6 @@ func (r *DiscoveryResource) Create(ctx context.Context, req resource.CreateReque
 	} else {
 		data.ClusterID = types.StringNull()
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -1171,9 +1153,9 @@ func (r *DiscoveryResource) Read(ctx context.Context, req resource.ReadRequest, 
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if _, ok := apiResource.Spec["discovery_consul"].(map[string]interface{}); ok && isImport && data.DiscoveryConsul == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -1200,7 +1182,6 @@ func (r *DiscoveryResource) Read(ctx context.Context, req resource.ReadRequest, 
 	} else {
 		data.ClusterID = types.StringNull()
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -1321,7 +1302,6 @@ func (r *DiscoveryResource) Update(ctx context.Context, req resource.UpdateReque
 	if !data.ClusterID.IsNull() && !data.ClusterID.IsUnknown() {
 		apiResource.Spec["cluster_id"] = data.ClusterID.ValueString()
 	}
-
 
 	updated, err := r.client.UpdateDiscovery(ctx, apiResource)
 	if err != nil {

@@ -47,18 +47,18 @@ type PolicerResource struct {
 }
 
 type PolicerResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	BurstSize types.Int64 `tfsdk:"burst_size"`
-	CommittedInformationRate types.Int64 `tfsdk:"committed_information_rate"`
-	PolicerMode types.String `tfsdk:"policer_mode"`
-	PolicerType types.String `tfsdk:"policer_type"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Name                     types.String   `tfsdk:"name"`
+	Namespace                types.String   `tfsdk:"namespace"`
+	Annotations              types.Map      `tfsdk:"annotations"`
+	Description              types.String   `tfsdk:"description"`
+	Disable                  types.Bool     `tfsdk:"disable"`
+	Labels                   types.Map      `tfsdk:"labels"`
+	ID                       types.String   `tfsdk:"id"`
+	BurstSize                types.Int64    `tfsdk:"burst_size"`
+	CommittedInformationRate types.Int64    `tfsdk:"committed_information_rate"`
+	PolicerMode              types.String   `tfsdk:"policer_mode"`
+	PolicerType              types.String   `tfsdk:"policer_type"`
+	Timeouts                 timeouts.Value `tfsdk:"timeouts"`
 }
 
 func (r *PolicerResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -72,7 +72,7 @@ func (r *PolicerResource) Schema(ctx context.Context, req resource.SchemaRequest
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Policer. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -82,7 +82,7 @@ func (r *PolicerResource) Schema(ctx context.Context, req resource.SchemaRequest
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the Policer will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -92,57 +92,57 @@ func (r *PolicerResource) Schema(ctx context.Context, req resource.SchemaRequest
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"burst_size": schema.Int64Attribute{
 				MarkdownDescription: "Burst Size(pps). The maximum size permitted for bursts of data. e.g. 10000 pps burst",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{
 					int64planmodifier.UseStateForUnknown(),
 				},
 			},
 			"committed_information_rate": schema.Int64Attribute{
 				MarkdownDescription: "Committed Information Rate(pps). The committed information rate is the guaranteed packets rate for traffic arriving or departing under normal conditions. e.g. 10000 pps",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{
 					int64planmodifier.UseStateForUnknown(),
 				},
 			},
 			"policer_mode": schema.StringAttribute{
 				MarkdownDescription: "Policer Mode. - POLICER_MODE_NOT_SHARED: Not Shared A separate policer instance is created for each reference to the policer - POLICER_MODE_SHARED: Shared A common policer instance is used for for all references to the policer. Possible values are `POLICER_MODE_NOT_SHARED`, `POLICER_MODE_SHARED`. Defaults to `POLICER_MODE_NOT_SHARED`.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"policer_type": schema.StringAttribute{
 				MarkdownDescription: "Policer Type. Specifies the type of Policer Basic Single-Rate Two-Color Policer. The only possible value is `POLICER_SINGLE_RATE_TWO_COLOR`. Defaults to `POLICER_SINGLE_RATE_TWO_COLOR`.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -316,7 +316,6 @@ func (r *PolicerResource) Create(ctx context.Context, req resource.CreateRequest
 		createReq.Spec["policer_type"] = data.PolicerType.ValueString()
 	}
 
-
 	apiResource, err := r.client.CreatePolicer(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create Policer: %s", err))
@@ -328,7 +327,7 @@ func (r *PolicerResource) Create(ctx context.Context, req resource.CreateRequest
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if v, ok := apiResource.Spec["burst_size"].(float64); ok {
 		data.BurstSize = types.Int64Value(int64(v))
 	} else {
@@ -349,7 +348,6 @@ func (r *PolicerResource) Create(ctx context.Context, req resource.CreateRequest
 	} else {
 		data.PolicerType = types.StringNull()
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -439,9 +437,9 @@ func (r *PolicerResource) Read(ctx context.Context, req resource.ReadRequest, re
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if v, ok := apiResource.Spec["burst_size"].(float64); ok {
 		data.BurstSize = types.Int64Value(int64(v))
@@ -463,7 +461,6 @@ func (r *PolicerResource) Read(ctx context.Context, req resource.ReadRequest, re
 	} else {
 		data.PolicerType = types.StringNull()
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -536,7 +533,6 @@ func (r *PolicerResource) Update(ctx context.Context, req resource.UpdateRequest
 	if !data.PolicerType.IsNull() && !data.PolicerType.IsUnknown() {
 		apiResource.Spec["policer_type"] = data.PolicerType.ValueString()
 	}
-
 
 	updated, err := r.client.UpdatePolicer(ctx, apiResource)
 	if err != nil {

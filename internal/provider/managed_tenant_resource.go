@@ -51,28 +51,28 @@ type ManagedTenantEmptyModel struct {
 
 // ManagedTenantGroupsModel represents groups block
 type ManagedTenantGroupsModel struct {
-	ManagedTenantGroups types.List `tfsdk:"managed_tenant_groups"`
-	Group *ManagedTenantGroupsGroupModel `tfsdk:"group"`
+	ManagedTenantGroups types.List                     `tfsdk:"managed_tenant_groups"`
+	Group               *ManagedTenantGroupsGroupModel `tfsdk:"group"`
 }
 
 // ManagedTenantGroupsGroupModel represents group block
 type ManagedTenantGroupsGroupModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 type ManagedTenantResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	TenantID types.String `tfsdk:"tenant_id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	Groups []ManagedTenantGroupsModel `tfsdk:"groups"`
+	Name        types.String               `tfsdk:"name"`
+	Namespace   types.String               `tfsdk:"namespace"`
+	Annotations types.Map                  `tfsdk:"annotations"`
+	Description types.String               `tfsdk:"description"`
+	Disable     types.Bool                 `tfsdk:"disable"`
+	Labels      types.Map                  `tfsdk:"labels"`
+	ID          types.String               `tfsdk:"id"`
+	TenantID    types.String               `tfsdk:"tenant_id"`
+	Timeouts    timeouts.Value             `tfsdk:"timeouts"`
+	Groups      []ManagedTenantGroupsModel `tfsdk:"groups"`
 }
 
 func (r *ManagedTenantResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -86,7 +86,7 @@ func (r *ManagedTenantResource) Schema(ctx context.Context, req resource.SchemaR
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the ManagedTenant. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -96,7 +96,7 @@ func (r *ManagedTenantResource) Schema(ctx context.Context, req resource.SchemaR
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the ManagedTenant will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -106,33 +106,33 @@ func (r *ManagedTenantResource) Schema(ctx context.Context, req resource.SchemaR
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"tenant_id": schema.StringAttribute{
 				MarkdownDescription: "Managed Tenant ID. Specify the Tenant ID of the existing tenant which needs to be managed. User can select Tenant ID from dropdown if managed tenant has already configured delegated access or manually input the Tenant ID if managed tenant configuration will happen in future.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -151,8 +151,8 @@ func (r *ManagedTenantResource) Schema(ctx context.Context, req resource.SchemaR
 					Attributes: map[string]schema.Attribute{
 						"managed_tenant_groups": schema.ListAttribute{
 							MarkdownDescription: "Managed Tenant Groups. List of group names in managed tenant (MT). Note - To properly establish access, admin of managed tenant need to create corresponding Allowed Tenant configuration object with access to use same group names. Once it's setup, when user from original tenant access managed tenant, underlying roles from managed tenant will be applied to user.",
-							Optional: true,
-							ElementType: types.StringType,
+							Optional:            true,
+							ElementType:         types.StringType,
 						},
 					},
 					Blocks: map[string]schema.Block{
@@ -161,21 +161,20 @@ func (r *ManagedTenantResource) Schema(ctx context.Context, req resource.SchemaR
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-									Optional: true,
+									Optional:            true,
 								},
 								"namespace": schema.StringAttribute{
 									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-									Optional: true,
+									Optional:            true,
 								},
 								"tenant": schema.StringAttribute{
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-									Optional: true,
-									Computed: true,
+									Optional:            true,
+									Computed:            true,
 								},
 							},
 						},
 					},
-
 				},
 			},
 		},
@@ -351,7 +350,6 @@ func (r *ManagedTenantResource) Create(ctx context.Context, req resource.CreateR
 		createReq.Spec["tenant_id"] = data.TenantID.ValueString()
 	}
 
-
 	apiResource, err := r.client.CreateManagedTenant(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create ManagedTenant: %s", err))
@@ -359,13 +357,11 @@ func (r *ManagedTenantResource) Create(ctx context.Context, req resource.CreateR
 	}
 
 	data.ID = types.StringValue(apiResource.Metadata.Name)
-	// For resources without namespace in API path, namespace is computed from API response
-	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
 
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["groups"].([]interface{}); ok && len(listData) > 0 {
 		var groupsList []ManagedTenantGroupsModel
 		for listIdx, item := range listData {
@@ -420,7 +416,6 @@ func (r *ManagedTenantResource) Create(ctx context.Context, req resource.CreateR
 	} else {
 		data.TenantID = types.StringNull()
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -510,9 +505,9 @@ func (r *ManagedTenantResource) Read(ctx context.Context, req resource.ReadReque
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if listData, ok := apiResource.Spec["groups"].([]interface{}); ok && len(listData) > 0 {
 		var groupsList []ManagedTenantGroupsModel
@@ -568,7 +563,6 @@ func (r *ManagedTenantResource) Read(ctx context.Context, req resource.ReadReque
 	} else {
 		data.TenantID = types.StringNull()
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -654,7 +648,6 @@ func (r *ManagedTenantResource) Update(ctx context.Context, req resource.UpdateR
 		apiResource.Spec["tenant_id"] = data.TenantID.ValueString()
 	}
 
-
 	updated, err := r.client.UpdateManagedTenant(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update ManagedTenant: %s", err))
@@ -730,17 +723,19 @@ func (r *ManagedTenantResource) Delete(ctx context.Context, req resource.DeleteR
 }
 
 func (r *ManagedTenantResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	// Import ID format: name (no namespace for this resource type)
-	name := req.ID
-	if name == "" {
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
 		resp.Diagnostics.AddError(
 			"Invalid Import ID",
-			"Expected import ID to be the resource name, got empty string",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
 		)
 		return
 	}
+	namespace := parts[0]
+	name := parts[1]
 
-	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), "")...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
 	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
 	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

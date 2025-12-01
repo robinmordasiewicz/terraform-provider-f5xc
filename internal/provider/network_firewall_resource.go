@@ -56,9 +56,9 @@ type NetworkFirewallActiveEnhancedFirewallPoliciesModel struct {
 
 // NetworkFirewallActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel represents enhanced_firewall_policies block
 type NetworkFirewallActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // NetworkFirewallActiveFastAclsModel represents active_fast_acls block
@@ -68,9 +68,9 @@ type NetworkFirewallActiveFastAclsModel struct {
 
 // NetworkFirewallActiveFastAclsFastAclsModel represents fast_acls block
 type NetworkFirewallActiveFastAclsFastAclsModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // NetworkFirewallActiveForwardProxyPoliciesModel represents active_forward_proxy_policies block
@@ -80,9 +80,9 @@ type NetworkFirewallActiveForwardProxyPoliciesModel struct {
 
 // NetworkFirewallActiveForwardProxyPoliciesForwardProxyPoliciesModel represents forward_proxy_policies block
 type NetworkFirewallActiveForwardProxyPoliciesForwardProxyPoliciesModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // NetworkFirewallActiveNetworkPoliciesModel represents active_network_policies block
@@ -92,27 +92,27 @@ type NetworkFirewallActiveNetworkPoliciesModel struct {
 
 // NetworkFirewallActiveNetworkPoliciesNetworkPoliciesModel represents network_policies block
 type NetworkFirewallActiveNetworkPoliciesNetworkPoliciesModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 type NetworkFirewallResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Name                           types.String                                        `tfsdk:"name"`
+	Namespace                      types.String                                        `tfsdk:"namespace"`
+	Annotations                    types.Map                                           `tfsdk:"annotations"`
+	Description                    types.String                                        `tfsdk:"description"`
+	Disable                        types.Bool                                          `tfsdk:"disable"`
+	Labels                         types.Map                                           `tfsdk:"labels"`
+	ID                             types.String                                        `tfsdk:"id"`
+	Timeouts                       timeouts.Value                                      `tfsdk:"timeouts"`
 	ActiveEnhancedFirewallPolicies *NetworkFirewallActiveEnhancedFirewallPoliciesModel `tfsdk:"active_enhanced_firewall_policies"`
-	ActiveFastAcls *NetworkFirewallActiveFastAclsModel `tfsdk:"active_fast_acls"`
-	ActiveForwardProxyPolicies *NetworkFirewallActiveForwardProxyPoliciesModel `tfsdk:"active_forward_proxy_policies"`
-	ActiveNetworkPolicies *NetworkFirewallActiveNetworkPoliciesModel `tfsdk:"active_network_policies"`
-	DisableFastACL *NetworkFirewallEmptyModel `tfsdk:"disable_fast_acl"`
-	DisableForwardProxyPolicy *NetworkFirewallEmptyModel `tfsdk:"disable_forward_proxy_policy"`
-	DisableNetworkPolicy *NetworkFirewallEmptyModel `tfsdk:"disable_network_policy"`
+	ActiveFastAcls                 *NetworkFirewallActiveFastAclsModel                 `tfsdk:"active_fast_acls"`
+	ActiveForwardProxyPolicies     *NetworkFirewallActiveForwardProxyPoliciesModel     `tfsdk:"active_forward_proxy_policies"`
+	ActiveNetworkPolicies          *NetworkFirewallActiveNetworkPoliciesModel          `tfsdk:"active_network_policies"`
+	DisableFastACL                 *NetworkFirewallEmptyModel                          `tfsdk:"disable_fast_acl"`
+	DisableForwardProxyPolicy      *NetworkFirewallEmptyModel                          `tfsdk:"disable_forward_proxy_policy"`
+	DisableNetworkPolicy           *NetworkFirewallEmptyModel                          `tfsdk:"disable_network_policy"`
 }
 
 func (r *NetworkFirewallResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -126,7 +126,7 @@ func (r *NetworkFirewallResource) Schema(ctx context.Context, req resource.Schem
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the NetworkFirewall. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -136,7 +136,7 @@ func (r *NetworkFirewallResource) Schema(ctx context.Context, req resource.Schem
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the NetworkFirewall will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -146,25 +146,25 @@ func (r *NetworkFirewallResource) Schema(ctx context.Context, req resource.Schem
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -179,8 +179,7 @@ func (r *NetworkFirewallResource) Schema(ctx context.Context, req resource.Schem
 			}),
 			"active_enhanced_firewall_policies": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: active_enhanced_firewall_policies, active_network_policies, disable_network_policy] Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion.",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"enhanced_firewall_policies": schema.ListNestedBlock{
 						MarkdownDescription: "Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active",
@@ -188,27 +187,25 @@ func (r *NetworkFirewallResource) Schema(ctx context.Context, req resource.Schem
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-									Optional: true,
+									Optional:            true,
 								},
 								"namespace": schema.StringAttribute{
 									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-									Optional: true,
+									Optional:            true,
 								},
 								"tenant": schema.StringAttribute{
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-									Optional: true,
-									Computed: true,
+									Optional:            true,
+									Computed:            true,
 								},
 							},
 						},
 					},
 				},
-
 			},
 			"active_fast_acls": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: active_fast_acls, disable_fast_acl] Active Fast ACL(s). List of Fast ACL(s).",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"fast_acls": schema.ListNestedBlock{
 						MarkdownDescription: "Fast ACL(s). Ordered List of Fast ACL(s) active for this network firewall",
@@ -216,27 +213,25 @@ func (r *NetworkFirewallResource) Schema(ctx context.Context, req resource.Schem
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-									Optional: true,
+									Optional:            true,
 								},
 								"namespace": schema.StringAttribute{
 									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-									Optional: true,
+									Optional:            true,
 								},
 								"tenant": schema.StringAttribute{
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-									Optional: true,
-									Computed: true,
+									Optional:            true,
+									Computed:            true,
 								},
 							},
 						},
 					},
 				},
-
 			},
 			"active_forward_proxy_policies": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: active_forward_proxy_policies, disable_forward_proxy_policy] Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"forward_proxy_policies": schema.ListNestedBlock{
 						MarkdownDescription: "Forward Proxy Policies. Ordered List of Forward Proxy Policies active",
@@ -244,27 +239,25 @@ func (r *NetworkFirewallResource) Schema(ctx context.Context, req resource.Schem
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-									Optional: true,
+									Optional:            true,
 								},
 								"namespace": schema.StringAttribute{
 									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-									Optional: true,
+									Optional:            true,
 								},
 								"tenant": schema.StringAttribute{
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-									Optional: true,
-									Computed: true,
+									Optional:            true,
+									Computed:            true,
 								},
 							},
 						},
 					},
 				},
-
 			},
 			"active_network_policies": schema.SingleNestedBlock{
 				MarkdownDescription: "Active Firewall Policies Type. List of firewall policy views.",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"network_policies": schema.ListNestedBlock{
 						MarkdownDescription: "Firewall Policy. Ordered List of Firewall Policies active for this network firewall",
@@ -272,22 +265,21 @@ func (r *NetworkFirewallResource) Schema(ctx context.Context, req resource.Schem
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-									Optional: true,
+									Optional:            true,
 								},
 								"namespace": schema.StringAttribute{
 									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-									Optional: true,
+									Optional:            true,
 								},
 								"tenant": schema.StringAttribute{
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-									Optional: true,
-									Computed: true,
+									Optional:            true,
+									Computed:            true,
 								},
 							},
 						},
 					},
 				},
-
 			},
 			"disable_fast_acl": schema.SingleNestedBlock{
 				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -543,7 +535,6 @@ func (r *NetworkFirewallResource) Create(ctx context.Context, req resource.Creat
 		createReq.Spec["disable_network_policy"] = disable_network_policyMap
 	}
 
-
 	apiResource, err := r.client.CreateNetworkFirewall(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create NetworkFirewall: %s", err))
@@ -555,7 +546,7 @@ func (r *NetworkFirewallResource) Create(ctx context.Context, req resource.Creat
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if blockData, ok := apiResource.Spec["active_enhanced_firewall_policies"].(map[string]interface{}); ok && (isImport || data.ActiveEnhancedFirewallPolicies != nil) {
 		data.ActiveEnhancedFirewallPolicies = &NetworkFirewallActiveEnhancedFirewallPoliciesModel{
 			EnhancedFirewallPolicies: func() []NetworkFirewallActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel {
@@ -711,7 +702,6 @@ func (r *NetworkFirewallResource) Create(ctx context.Context, req resource.Creat
 		data.DisableNetworkPolicy = &NetworkFirewallEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -801,9 +791,9 @@ func (r *NetworkFirewallResource) Read(ctx context.Context, req resource.ReadReq
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if blockData, ok := apiResource.Spec["active_enhanced_firewall_policies"].(map[string]interface{}); ok && (isImport || data.ActiveEnhancedFirewallPolicies != nil) {
 		data.ActiveEnhancedFirewallPolicies = &NetworkFirewallActiveEnhancedFirewallPoliciesModel{
@@ -960,7 +950,6 @@ func (r *NetworkFirewallResource) Read(ctx context.Context, req resource.ReadReq
 		data.DisableNetworkPolicy = &NetworkFirewallEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -1117,7 +1106,6 @@ func (r *NetworkFirewallResource) Update(ctx context.Context, req resource.Updat
 		disable_network_policyMap := make(map[string]interface{})
 		apiResource.Spec["disable_network_policy"] = disable_network_policyMap
 	}
-
 
 	updated, err := r.client.UpdateNetworkFirewall(ctx, apiResource)
 	if err != nil {

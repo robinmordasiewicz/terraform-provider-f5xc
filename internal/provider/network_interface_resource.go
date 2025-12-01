@@ -51,73 +51,73 @@ type NetworkInterfaceEmptyModel struct {
 
 // NetworkInterfaceDedicatedInterfaceModel represents dedicated_interface block
 type NetworkInterfaceDedicatedInterfaceModel struct {
-	Device types.String `tfsdk:"device"`
-	Mtu types.Int64 `tfsdk:"mtu"`
-	Node types.String `tfsdk:"node"`
-	Priority types.Int64 `tfsdk:"priority"`
-	Cluster *NetworkInterfaceEmptyModel `tfsdk:"cluster"`
-	IsPrimary *NetworkInterfaceEmptyModel `tfsdk:"is_primary"`
-	Monitor *NetworkInterfaceEmptyModel `tfsdk:"monitor"`
+	Device          types.String                `tfsdk:"device"`
+	Mtu             types.Int64                 `tfsdk:"mtu"`
+	Node            types.String                `tfsdk:"node"`
+	Priority        types.Int64                 `tfsdk:"priority"`
+	Cluster         *NetworkInterfaceEmptyModel `tfsdk:"cluster"`
+	IsPrimary       *NetworkInterfaceEmptyModel `tfsdk:"is_primary"`
+	Monitor         *NetworkInterfaceEmptyModel `tfsdk:"monitor"`
 	MonitorDisabled *NetworkInterfaceEmptyModel `tfsdk:"monitor_disabled"`
-	NotPrimary *NetworkInterfaceEmptyModel `tfsdk:"not_primary"`
+	NotPrimary      *NetworkInterfaceEmptyModel `tfsdk:"not_primary"`
 }
 
 // NetworkInterfaceDedicatedManagementInterfaceModel represents dedicated_management_interface block
 type NetworkInterfaceDedicatedManagementInterfaceModel struct {
-	Device types.String `tfsdk:"device"`
-	Mtu types.Int64 `tfsdk:"mtu"`
-	Node types.String `tfsdk:"node"`
+	Device  types.String                `tfsdk:"device"`
+	Mtu     types.Int64                 `tfsdk:"mtu"`
+	Node    types.String                `tfsdk:"node"`
 	Cluster *NetworkInterfaceEmptyModel `tfsdk:"cluster"`
 }
 
 // NetworkInterfaceEthernetInterfaceModel represents ethernet_interface block
 type NetworkInterfaceEthernetInterfaceModel struct {
-	Device types.String `tfsdk:"device"`
-	Mtu types.Int64 `tfsdk:"mtu"`
-	Node types.String `tfsdk:"node"`
-	Priority types.Int64 `tfsdk:"priority"`
-	VlanID types.Int64 `tfsdk:"vlan_id"`
-	Cluster *NetworkInterfaceEmptyModel `tfsdk:"cluster"`
-	DhcpClient *NetworkInterfaceEmptyModel `tfsdk:"dhcp_client"`
-	DhcpServer *NetworkInterfaceEthernetInterfaceDhcpServerModel `tfsdk:"dhcp_server"`
-	IPV6AutoConfig *NetworkInterfaceEthernetInterfaceIPV6AutoConfigModel `tfsdk:"ipv6_auto_config"`
-	IsPrimary *NetworkInterfaceEmptyModel `tfsdk:"is_primary"`
-	Monitor *NetworkInterfaceEmptyModel `tfsdk:"monitor"`
-	MonitorDisabled *NetworkInterfaceEmptyModel `tfsdk:"monitor_disabled"`
-	NoIPV6Address *NetworkInterfaceEmptyModel `tfsdk:"no_ipv6_address"`
-	NotPrimary *NetworkInterfaceEmptyModel `tfsdk:"not_primary"`
-	SiteLocalInsideNetwork *NetworkInterfaceEmptyModel `tfsdk:"site_local_inside_network"`
-	SiteLocalNetwork *NetworkInterfaceEmptyModel `tfsdk:"site_local_network"`
-	StaticIP *NetworkInterfaceEthernetInterfaceStaticIPModel `tfsdk:"static_ip"`
-	StaticIPV6Address *NetworkInterfaceEthernetInterfaceStaticIPV6AddressModel `tfsdk:"static_ipv6_address"`
-	StorageNetwork *NetworkInterfaceEmptyModel `tfsdk:"storage_network"`
-	Untagged *NetworkInterfaceEmptyModel `tfsdk:"untagged"`
+	Device                 types.String                                             `tfsdk:"device"`
+	Mtu                    types.Int64                                              `tfsdk:"mtu"`
+	Node                   types.String                                             `tfsdk:"node"`
+	Priority               types.Int64                                              `tfsdk:"priority"`
+	VlanID                 types.Int64                                              `tfsdk:"vlan_id"`
+	Cluster                *NetworkInterfaceEmptyModel                              `tfsdk:"cluster"`
+	DhcpClient             *NetworkInterfaceEmptyModel                              `tfsdk:"dhcp_client"`
+	DhcpServer             *NetworkInterfaceEthernetInterfaceDhcpServerModel        `tfsdk:"dhcp_server"`
+	IPV6AutoConfig         *NetworkInterfaceEthernetInterfaceIPV6AutoConfigModel    `tfsdk:"ipv6_auto_config"`
+	IsPrimary              *NetworkInterfaceEmptyModel                              `tfsdk:"is_primary"`
+	Monitor                *NetworkInterfaceEmptyModel                              `tfsdk:"monitor"`
+	MonitorDisabled        *NetworkInterfaceEmptyModel                              `tfsdk:"monitor_disabled"`
+	NoIPV6Address          *NetworkInterfaceEmptyModel                              `tfsdk:"no_ipv6_address"`
+	NotPrimary             *NetworkInterfaceEmptyModel                              `tfsdk:"not_primary"`
+	SiteLocalInsideNetwork *NetworkInterfaceEmptyModel                              `tfsdk:"site_local_inside_network"`
+	SiteLocalNetwork       *NetworkInterfaceEmptyModel                              `tfsdk:"site_local_network"`
+	StaticIP               *NetworkInterfaceEthernetInterfaceStaticIPModel          `tfsdk:"static_ip"`
+	StaticIPV6Address      *NetworkInterfaceEthernetInterfaceStaticIPV6AddressModel `tfsdk:"static_ipv6_address"`
+	StorageNetwork         *NetworkInterfaceEmptyModel                              `tfsdk:"storage_network"`
+	Untagged               *NetworkInterfaceEmptyModel                              `tfsdk:"untagged"`
 }
 
 // NetworkInterfaceEthernetInterfaceDhcpServerModel represents dhcp_server block
 type NetworkInterfaceEthernetInterfaceDhcpServerModel struct {
-	AutomaticFromEnd *NetworkInterfaceEmptyModel `tfsdk:"automatic_from_end"`
-	AutomaticFromStart *NetworkInterfaceEmptyModel `tfsdk:"automatic_from_start"`
-	DhcpNetworks []NetworkInterfaceEthernetInterfaceDhcpServerDhcpNetworksModel `tfsdk:"dhcp_networks"`
-	FixedIPMap *NetworkInterfaceEmptyModel `tfsdk:"fixed_ip_map"`
-	InterfaceIPMap *NetworkInterfaceEthernetInterfaceDhcpServerInterfaceIPMapModel `tfsdk:"interface_ip_map"`
+	AutomaticFromEnd   *NetworkInterfaceEmptyModel                                     `tfsdk:"automatic_from_end"`
+	AutomaticFromStart *NetworkInterfaceEmptyModel                                     `tfsdk:"automatic_from_start"`
+	DhcpNetworks       []NetworkInterfaceEthernetInterfaceDhcpServerDhcpNetworksModel  `tfsdk:"dhcp_networks"`
+	FixedIPMap         *NetworkInterfaceEmptyModel                                     `tfsdk:"fixed_ip_map"`
+	InterfaceIPMap     *NetworkInterfaceEthernetInterfaceDhcpServerInterfaceIPMapModel `tfsdk:"interface_ip_map"`
 }
 
 // NetworkInterfaceEthernetInterfaceDhcpServerDhcpNetworksModel represents dhcp_networks block
 type NetworkInterfaceEthernetInterfaceDhcpServerDhcpNetworksModel struct {
-	DgwAddress types.String `tfsdk:"dgw_address"`
-	DNSAddress types.String `tfsdk:"dns_address"`
-	NetworkPrefix types.String `tfsdk:"network_prefix"`
-	PoolSettings types.String `tfsdk:"pool_settings"`
-	FirstAddress *NetworkInterfaceEmptyModel `tfsdk:"first_address"`
-	LastAddress *NetworkInterfaceEmptyModel `tfsdk:"last_address"`
-	Pools []NetworkInterfaceEthernetInterfaceDhcpServerDhcpNetworksPoolsModel `tfsdk:"pools"`
-	SameAsDgw *NetworkInterfaceEmptyModel `tfsdk:"same_as_dgw"`
+	DgwAddress    types.String                                                        `tfsdk:"dgw_address"`
+	DNSAddress    types.String                                                        `tfsdk:"dns_address"`
+	NetworkPrefix types.String                                                        `tfsdk:"network_prefix"`
+	PoolSettings  types.String                                                        `tfsdk:"pool_settings"`
+	FirstAddress  *NetworkInterfaceEmptyModel                                         `tfsdk:"first_address"`
+	LastAddress   *NetworkInterfaceEmptyModel                                         `tfsdk:"last_address"`
+	Pools         []NetworkInterfaceEthernetInterfaceDhcpServerDhcpNetworksPoolsModel `tfsdk:"pools"`
+	SameAsDgw     *NetworkInterfaceEmptyModel                                         `tfsdk:"same_as_dgw"`
 }
 
 // NetworkInterfaceEthernetInterfaceDhcpServerDhcpNetworksPoolsModel represents pools block
 type NetworkInterfaceEthernetInterfaceDhcpServerDhcpNetworksPoolsModel struct {
-	EndIP types.String `tfsdk:"end_ip"`
+	EndIP   types.String `tfsdk:"end_ip"`
 	StartIP types.String `tfsdk:"start_ip"`
 }
 
@@ -128,21 +128,21 @@ type NetworkInterfaceEthernetInterfaceDhcpServerInterfaceIPMapModel struct {
 
 // NetworkInterfaceEthernetInterfaceIPV6AutoConfigModel represents ipv6_auto_config block
 type NetworkInterfaceEthernetInterfaceIPV6AutoConfigModel struct {
-	Host *NetworkInterfaceEmptyModel `tfsdk:"host"`
+	Host   *NetworkInterfaceEmptyModel                                 `tfsdk:"host"`
 	Router *NetworkInterfaceEthernetInterfaceIPV6AutoConfigRouterModel `tfsdk:"router"`
 }
 
 // NetworkInterfaceEthernetInterfaceIPV6AutoConfigRouterModel represents router block
 type NetworkInterfaceEthernetInterfaceIPV6AutoConfigRouterModel struct {
-	NetworkPrefix types.String `tfsdk:"network_prefix"`
-	DNSConfig *NetworkInterfaceEthernetInterfaceIPV6AutoConfigRouterDNSConfigModel `tfsdk:"dns_config"`
-	Stateful *NetworkInterfaceEthernetInterfaceIPV6AutoConfigRouterStatefulModel `tfsdk:"stateful"`
+	NetworkPrefix types.String                                                         `tfsdk:"network_prefix"`
+	DNSConfig     *NetworkInterfaceEthernetInterfaceIPV6AutoConfigRouterDNSConfigModel `tfsdk:"dns_config"`
+	Stateful      *NetworkInterfaceEthernetInterfaceIPV6AutoConfigRouterStatefulModel  `tfsdk:"stateful"`
 }
 
 // NetworkInterfaceEthernetInterfaceIPV6AutoConfigRouterDNSConfigModel represents dns_config block
 type NetworkInterfaceEthernetInterfaceIPV6AutoConfigRouterDNSConfigModel struct {
 	ConfiguredList *NetworkInterfaceEthernetInterfaceIPV6AutoConfigRouterDNSConfigConfiguredListModel `tfsdk:"configured_list"`
-	LocalDNS *NetworkInterfaceEthernetInterfaceIPV6AutoConfigRouterDNSConfigLocalDNSModel `tfsdk:"local_dns"`
+	LocalDNS       *NetworkInterfaceEthernetInterfaceIPV6AutoConfigRouterDNSConfigLocalDNSModel       `tfsdk:"local_dns"`
 }
 
 // NetworkInterfaceEthernetInterfaceIPV6AutoConfigRouterDNSConfigConfiguredListModel represents configured_list block
@@ -152,30 +152,30 @@ type NetworkInterfaceEthernetInterfaceIPV6AutoConfigRouterDNSConfigConfiguredLis
 
 // NetworkInterfaceEthernetInterfaceIPV6AutoConfigRouterDNSConfigLocalDNSModel represents local_dns block
 type NetworkInterfaceEthernetInterfaceIPV6AutoConfigRouterDNSConfigLocalDNSModel struct {
-	ConfiguredAddress types.String `tfsdk:"configured_address"`
-	FirstAddress *NetworkInterfaceEmptyModel `tfsdk:"first_address"`
-	LastAddress *NetworkInterfaceEmptyModel `tfsdk:"last_address"`
+	ConfiguredAddress types.String                `tfsdk:"configured_address"`
+	FirstAddress      *NetworkInterfaceEmptyModel `tfsdk:"first_address"`
+	LastAddress       *NetworkInterfaceEmptyModel `tfsdk:"last_address"`
 }
 
 // NetworkInterfaceEthernetInterfaceIPV6AutoConfigRouterStatefulModel represents stateful block
 type NetworkInterfaceEthernetInterfaceIPV6AutoConfigRouterStatefulModel struct {
-	AutomaticFromEnd *NetworkInterfaceEmptyModel `tfsdk:"automatic_from_end"`
-	AutomaticFromStart *NetworkInterfaceEmptyModel `tfsdk:"automatic_from_start"`
-	DhcpNetworks []NetworkInterfaceEthernetInterfaceIPV6AutoConfigRouterStatefulDhcpNetworksModel `tfsdk:"dhcp_networks"`
-	FixedIPMap *NetworkInterfaceEmptyModel `tfsdk:"fixed_ip_map"`
-	InterfaceIPMap *NetworkInterfaceEthernetInterfaceIPV6AutoConfigRouterStatefulInterfaceIPMapModel `tfsdk:"interface_ip_map"`
+	AutomaticFromEnd   *NetworkInterfaceEmptyModel                                                       `tfsdk:"automatic_from_end"`
+	AutomaticFromStart *NetworkInterfaceEmptyModel                                                       `tfsdk:"automatic_from_start"`
+	DhcpNetworks       []NetworkInterfaceEthernetInterfaceIPV6AutoConfigRouterStatefulDhcpNetworksModel  `tfsdk:"dhcp_networks"`
+	FixedIPMap         *NetworkInterfaceEmptyModel                                                       `tfsdk:"fixed_ip_map"`
+	InterfaceIPMap     *NetworkInterfaceEthernetInterfaceIPV6AutoConfigRouterStatefulInterfaceIPMapModel `tfsdk:"interface_ip_map"`
 }
 
 // NetworkInterfaceEthernetInterfaceIPV6AutoConfigRouterStatefulDhcpNetworksModel represents dhcp_networks block
 type NetworkInterfaceEthernetInterfaceIPV6AutoConfigRouterStatefulDhcpNetworksModel struct {
-	NetworkPrefix types.String `tfsdk:"network_prefix"`
-	PoolSettings types.String `tfsdk:"pool_settings"`
-	Pools []NetworkInterfaceEthernetInterfaceIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel `tfsdk:"pools"`
+	NetworkPrefix types.String                                                                          `tfsdk:"network_prefix"`
+	PoolSettings  types.String                                                                          `tfsdk:"pool_settings"`
+	Pools         []NetworkInterfaceEthernetInterfaceIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel `tfsdk:"pools"`
 }
 
 // NetworkInterfaceEthernetInterfaceIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel represents pools block
 type NetworkInterfaceEthernetInterfaceIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel struct {
-	EndIP types.String `tfsdk:"end_ip"`
+	EndIP   types.String `tfsdk:"end_ip"`
 	StartIP types.String `tfsdk:"start_ip"`
 }
 
@@ -187,7 +187,7 @@ type NetworkInterfaceEthernetInterfaceIPV6AutoConfigRouterStatefulInterfaceIPMap
 // NetworkInterfaceEthernetInterfaceStaticIPModel represents static_ip block
 type NetworkInterfaceEthernetInterfaceStaticIPModel struct {
 	ClusterStaticIP *NetworkInterfaceEthernetInterfaceStaticIPClusterStaticIPModel `tfsdk:"cluster_static_ip"`
-	NodeStaticIP *NetworkInterfaceEthernetInterfaceStaticIPNodeStaticIPModel `tfsdk:"node_static_ip"`
+	NodeStaticIP    *NetworkInterfaceEthernetInterfaceStaticIPNodeStaticIPModel    `tfsdk:"node_static_ip"`
 }
 
 // NetworkInterfaceEthernetInterfaceStaticIPClusterStaticIPModel represents cluster_static_ip block
@@ -204,7 +204,7 @@ type NetworkInterfaceEthernetInterfaceStaticIPNodeStaticIPModel struct {
 // NetworkInterfaceEthernetInterfaceStaticIPV6AddressModel represents static_ipv6_address block
 type NetworkInterfaceEthernetInterfaceStaticIPV6AddressModel struct {
 	ClusterStaticIP *NetworkInterfaceEthernetInterfaceStaticIPV6AddressClusterStaticIPModel `tfsdk:"cluster_static_ip"`
-	NodeStaticIP *NetworkInterfaceEthernetInterfaceStaticIPV6AddressNodeStaticIPModel `tfsdk:"node_static_ip"`
+	NodeStaticIP    *NetworkInterfaceEthernetInterfaceStaticIPV6AddressNodeStaticIPModel    `tfsdk:"node_static_ip"`
 }
 
 // NetworkInterfaceEthernetInterfaceStaticIPV6AddressClusterStaticIPModel represents cluster_static_ip block
@@ -220,22 +220,22 @@ type NetworkInterfaceEthernetInterfaceStaticIPV6AddressNodeStaticIPModel struct 
 
 // NetworkInterfaceLayer2InterfaceModel represents layer2_interface block
 type NetworkInterfaceLayer2InterfaceModel struct {
-	L2sriovInterface *NetworkInterfaceLayer2InterfaceL2sriovInterfaceModel `tfsdk:"l2sriov_interface"`
-	L2vlanInterface *NetworkInterfaceLayer2InterfaceL2vlanInterfaceModel `tfsdk:"l2vlan_interface"`
+	L2sriovInterface   *NetworkInterfaceLayer2InterfaceL2sriovInterfaceModel   `tfsdk:"l2sriov_interface"`
+	L2vlanInterface    *NetworkInterfaceLayer2InterfaceL2vlanInterfaceModel    `tfsdk:"l2vlan_interface"`
 	L2vlanSLOInterface *NetworkInterfaceLayer2InterfaceL2vlanSLOInterfaceModel `tfsdk:"l2vlan_slo_interface"`
 }
 
 // NetworkInterfaceLayer2InterfaceL2sriovInterfaceModel represents l2sriov_interface block
 type NetworkInterfaceLayer2InterfaceL2sriovInterfaceModel struct {
-	Device types.String `tfsdk:"device"`
-	VlanID types.Int64 `tfsdk:"vlan_id"`
+	Device   types.String                `tfsdk:"device"`
+	VlanID   types.Int64                 `tfsdk:"vlan_id"`
 	Untagged *NetworkInterfaceEmptyModel `tfsdk:"untagged"`
 }
 
 // NetworkInterfaceLayer2InterfaceL2vlanInterfaceModel represents l2vlan_interface block
 type NetworkInterfaceLayer2InterfaceL2vlanInterfaceModel struct {
 	Device types.String `tfsdk:"device"`
-	VlanID types.Int64 `tfsdk:"vlan_id"`
+	VlanID types.Int64  `tfsdk:"vlan_id"`
 }
 
 // NetworkInterfaceLayer2InterfaceL2vlanSLOInterfaceModel represents l2vlan_slo_interface block
@@ -245,19 +245,19 @@ type NetworkInterfaceLayer2InterfaceL2vlanSLOInterfaceModel struct {
 
 // NetworkInterfaceTunnelInterfaceModel represents tunnel_interface block
 type NetworkInterfaceTunnelInterfaceModel struct {
-	Mtu types.Int64 `tfsdk:"mtu"`
-	Node types.String `tfsdk:"node"`
-	Priority types.Int64 `tfsdk:"priority"`
-	SiteLocalInsideNetwork *NetworkInterfaceEmptyModel `tfsdk:"site_local_inside_network"`
-	SiteLocalNetwork *NetworkInterfaceEmptyModel `tfsdk:"site_local_network"`
-	StaticIP *NetworkInterfaceTunnelInterfaceStaticIPModel `tfsdk:"static_ip"`
-	Tunnel *NetworkInterfaceTunnelInterfaceTunnelModel `tfsdk:"tunnel"`
+	Mtu                    types.Int64                                   `tfsdk:"mtu"`
+	Node                   types.String                                  `tfsdk:"node"`
+	Priority               types.Int64                                   `tfsdk:"priority"`
+	SiteLocalInsideNetwork *NetworkInterfaceEmptyModel                   `tfsdk:"site_local_inside_network"`
+	SiteLocalNetwork       *NetworkInterfaceEmptyModel                   `tfsdk:"site_local_network"`
+	StaticIP               *NetworkInterfaceTunnelInterfaceStaticIPModel `tfsdk:"static_ip"`
+	Tunnel                 *NetworkInterfaceTunnelInterfaceTunnelModel   `tfsdk:"tunnel"`
 }
 
 // NetworkInterfaceTunnelInterfaceStaticIPModel represents static_ip block
 type NetworkInterfaceTunnelInterfaceStaticIPModel struct {
 	ClusterStaticIP *NetworkInterfaceTunnelInterfaceStaticIPClusterStaticIPModel `tfsdk:"cluster_static_ip"`
-	NodeStaticIP *NetworkInterfaceTunnelInterfaceStaticIPNodeStaticIPModel `tfsdk:"node_static_ip"`
+	NodeStaticIP    *NetworkInterfaceTunnelInterfaceStaticIPNodeStaticIPModel    `tfsdk:"node_static_ip"`
 }
 
 // NetworkInterfaceTunnelInterfaceStaticIPClusterStaticIPModel represents cluster_static_ip block
@@ -273,25 +273,25 @@ type NetworkInterfaceTunnelInterfaceStaticIPNodeStaticIPModel struct {
 
 // NetworkInterfaceTunnelInterfaceTunnelModel represents tunnel block
 type NetworkInterfaceTunnelInterfaceTunnelModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 type NetworkInterfaceResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	DedicatedInterface *NetworkInterfaceDedicatedInterfaceModel `tfsdk:"dedicated_interface"`
+	Name                         types.String                                       `tfsdk:"name"`
+	Namespace                    types.String                                       `tfsdk:"namespace"`
+	Annotations                  types.Map                                          `tfsdk:"annotations"`
+	Description                  types.String                                       `tfsdk:"description"`
+	Disable                      types.Bool                                         `tfsdk:"disable"`
+	Labels                       types.Map                                          `tfsdk:"labels"`
+	ID                           types.String                                       `tfsdk:"id"`
+	Timeouts                     timeouts.Value                                     `tfsdk:"timeouts"`
+	DedicatedInterface           *NetworkInterfaceDedicatedInterfaceModel           `tfsdk:"dedicated_interface"`
 	DedicatedManagementInterface *NetworkInterfaceDedicatedManagementInterfaceModel `tfsdk:"dedicated_management_interface"`
-	EthernetInterface *NetworkInterfaceEthernetInterfaceModel `tfsdk:"ethernet_interface"`
-	Layer2Interface *NetworkInterfaceLayer2InterfaceModel `tfsdk:"layer2_interface"`
-	TunnelInterface *NetworkInterfaceTunnelInterfaceModel `tfsdk:"tunnel_interface"`
+	EthernetInterface            *NetworkInterfaceEthernetInterfaceModel            `tfsdk:"ethernet_interface"`
+	Layer2Interface              *NetworkInterfaceLayer2InterfaceModel              `tfsdk:"layer2_interface"`
+	TunnelInterface              *NetworkInterfaceTunnelInterfaceModel              `tfsdk:"tunnel_interface"`
 }
 
 func (r *NetworkInterfaceResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -305,7 +305,7 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the NetworkInterface. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -315,7 +315,7 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the NetworkInterface will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -325,25 +325,25 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -361,19 +361,19 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 				Attributes: map[string]schema.Attribute{
 					"device": schema.StringAttribute{
 						MarkdownDescription: "Interface Device. Name of the device for which interface is configured. Use wwan0 for 4G/LTE.",
-						Optional: true,
+						Optional:            true,
 					},
 					"mtu": schema.Int64Attribute{
 						MarkdownDescription: "Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, mtu must be between 512 and 16384",
-						Optional: true,
+						Optional:            true,
 					},
 					"node": schema.StringAttribute{
 						MarkdownDescription: "Specific Node. Configuration will apply to a device on the given node of the site.",
-						Optional: true,
+						Optional:            true,
 					},
 					"priority": schema.Int64Attribute{
 						MarkdownDescription: "Priority. Priority of the network interface when multiple network interfaces are present in outside network Greater the value, higher the priority",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -393,22 +393,21 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 			"dedicated_management_interface": schema.SingleNestedBlock{
 				MarkdownDescription: "Dedicated Management Interface. Dedicated Interface Configuration",
 				Attributes: map[string]schema.Attribute{
 					"device": schema.StringAttribute{
 						MarkdownDescription: "Interface Device. Name of the device for which interface is configured",
-						Optional: true,
+						Optional:            true,
 					},
 					"mtu": schema.Int64Attribute{
 						MarkdownDescription: "Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, mtu must be between 512 and 16384",
-						Optional: true,
+						Optional:            true,
 					},
 					"node": schema.StringAttribute{
 						MarkdownDescription: "Specific Node. Configuration will apply to a device on the given node of the site.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -416,30 +415,29 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 			"ethernet_interface": schema.SingleNestedBlock{
 				MarkdownDescription: "Ethernet Interface. Ethernet Interface Configuration",
 				Attributes: map[string]schema.Attribute{
 					"device": schema.StringAttribute{
 						MarkdownDescription: "Ethernet Device. Interface configuration for the ethernet device",
-						Optional: true,
+						Optional:            true,
 					},
 					"mtu": schema.Int64Attribute{
 						MarkdownDescription: "Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, mtu must be between 512 and 16384",
-						Optional: true,
+						Optional:            true,
 					},
 					"node": schema.StringAttribute{
 						MarkdownDescription: "Specific Node. Configuration will apply to a device on the given node.",
-						Optional: true,
+						Optional:            true,
 					},
 					"priority": schema.Int64Attribute{
 						MarkdownDescription: "Priority. Priority of the network interface when multiple network interfaces are present in outside network Greater the value, higher the priority",
-						Optional: true,
+						Optional:            true,
 					},
 					"vlan_id": schema.Int64Attribute{
 						MarkdownDescription: "VLAN Id. Configure a VLAN tagged ethernet interface",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -451,8 +449,7 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 					},
 					"dhcp_server": schema.SingleNestedBlock{
 						MarkdownDescription: "DHCPServerParametersType.",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"automatic_from_end": schema.SingleNestedBlock{
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -466,19 +463,19 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 									Attributes: map[string]schema.Attribute{
 										"dgw_address": schema.StringAttribute{
 											MarkdownDescription: "Static IPv4 Configuration. Enter a IPv4 address from the network prefix to be used as the default gateway.",
-											Optional: true,
+											Optional:            true,
 										},
 										"dns_address": schema.StringAttribute{
 											MarkdownDescription: "Static IPv4 Configuration. Enter a IPv4 address from the network prefix to be used as the DNS server.",
-											Optional: true,
+											Optional:            true,
 										},
 										"network_prefix": schema.StringAttribute{
 											MarkdownDescription: "Network Prefix. Set the network prefix for the site. ex: 10.1.1.0/24",
-											Optional: true,
+											Optional:            true,
 										},
 										"pool_settings": schema.StringAttribute{
 											MarkdownDescription: "Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation. Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`. Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`.",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -494,11 +491,11 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 												Attributes: map[string]schema.Attribute{
 													"end_ip": schema.StringAttribute{
 														MarkdownDescription: "Ending IP. Ending IP of the pool range. In case of address allocator, offset is derived based on network prefix. 10.1.1.200 with prefix length of 24, end offset is 0.0.0.200",
-														Optional: true,
+														Optional:            true,
 													},
 													"start_ip": schema.StringAttribute{
 														MarkdownDescription: "Starting IP. Starting IP of the pool range. In case of address allocator, offset is derived based on network prefix. 10.1.1.5 with prefix length of 24, start offset is 0.0.0.5",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 											},
@@ -514,8 +511,7 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 							},
 							"interface_ip_map": schema.SingleNestedBlock{
 								MarkdownDescription: "Interface IPv4 Assignments. Specify static IPv4 addresses per node.",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"interface_ip_map": schema.SingleNestedBlock{
 										MarkdownDescription: "Site:Node to IPv4 Address Mapping. Specify static IPv4 addresses per site:node.",
@@ -526,8 +522,7 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 					},
 					"ipv6_auto_config": schema.SingleNestedBlock{
 						MarkdownDescription: "IPV6AutoConfigType.",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"host": schema.SingleNestedBlock{
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -537,22 +532,21 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 								Attributes: map[string]schema.Attribute{
 									"network_prefix": schema.StringAttribute{
 										MarkdownDescription: "Network Prefix. Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 								Blocks: map[string]schema.Block{
 									"dns_config": schema.SingleNestedBlock{
 										MarkdownDescription: "IPV6DnsConfig.",
-										Attributes: map[string]schema.Attribute{
-										},
+										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"configured_list": schema.SingleNestedBlock{
 												MarkdownDescription: "IPV6DnsList.",
 												Attributes: map[string]schema.Attribute{
 													"dns_list": schema.ListAttribute{
 														MarkdownDescription: "Dns List. List of IPV6 Addresses acting as Dns servers",
-														Optional: true,
-														ElementType: types.StringType,
+														Optional:            true,
+														ElementType:         types.StringType,
 													},
 												},
 											},
@@ -561,7 +555,7 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 												Attributes: map[string]schema.Attribute{
 													"configured_address": schema.StringAttribute{
 														MarkdownDescription: "Configured Address. Configured address from the network prefix is chosen as dns server",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 												Blocks: map[string]schema.Block{
@@ -577,8 +571,7 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 									},
 									"stateful": schema.SingleNestedBlock{
 										MarkdownDescription: "DHCPIPV6 Stateful Server.",
-										Attributes: map[string]schema.Attribute{
-										},
+										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"automatic_from_end": schema.SingleNestedBlock{
 												MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -592,11 +585,11 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 													Attributes: map[string]schema.Attribute{
 														"network_prefix": schema.StringAttribute{
 															MarkdownDescription: "Network Prefix. Network Prefix to be used for IPV6 address auto configuration",
-															Optional: true,
+															Optional:            true,
 														},
 														"pool_settings": schema.StringAttribute{
 															MarkdownDescription: "Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation. Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`. Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`.",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 													Blocks: map[string]schema.Block{
@@ -606,11 +599,11 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 																Attributes: map[string]schema.Attribute{
 																	"end_ip": schema.StringAttribute{
 																		MarkdownDescription: "Ending IPV6. Ending IPV6 address of the pool range. In case of address allocator, offset is derived based on network prefix.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"start_ip": schema.StringAttribute{
 																		MarkdownDescription: "Starting IPV6. Starting IPV6 address of the pool range. In case of address allocator, offset is derived based on network prefix. 2001::1 with prefix length of 64, start offset is 5",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 															},
@@ -623,8 +616,7 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 											},
 											"interface_ip_map": schema.SingleNestedBlock{
 												MarkdownDescription: "Interface IPV6 Assignments. Map of Interface IPV6 assignments per node",
-												Attributes: map[string]schema.Attribute{
-												},
+												Attributes:          map[string]schema.Attribute{},
 												Blocks: map[string]schema.Block{
 													"interface_ip_map": schema.SingleNestedBlock{
 														MarkdownDescription: "Site:Node to IPV6 Mapping. Map of Site:Node to IPV6 address.",
@@ -660,13 +652,11 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 					},
 					"static_ip": schema.SingleNestedBlock{
 						MarkdownDescription: "Static IP Parameters. Configure Static IP parameters",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"cluster_static_ip": schema.SingleNestedBlock{
 								MarkdownDescription: "Cluster: Static IP Parameters. Configure Static IP parameters for cluster",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"interface_ip_map": schema.SingleNestedBlock{
 										MarkdownDescription: "Node to IP Mapping. Map of Node to Static ip configuration value, Key:Node, Value:IP Address",
@@ -678,11 +668,11 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 								Attributes: map[string]schema.Attribute{
 									"default_gw": schema.StringAttribute{
 										MarkdownDescription: "Default Gateway. IP address of the default gateway.",
-										Optional: true,
+										Optional:            true,
 									},
 									"ip_address": schema.StringAttribute{
 										MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -690,13 +680,11 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 					},
 					"static_ipv6_address": schema.SingleNestedBlock{
 						MarkdownDescription: "Static IP Parameters. Configure Static IP parameters",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"cluster_static_ip": schema.SingleNestedBlock{
 								MarkdownDescription: "Cluster: Static IP Parameters. Configure Static IP parameters for cluster",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"interface_ip_map": schema.SingleNestedBlock{
 										MarkdownDescription: "Node to IP Mapping. Map of Node to Static ip configuration value, Key:Node, Value:IP Address",
@@ -708,11 +696,11 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 								Attributes: map[string]schema.Attribute{
 									"default_gw": schema.StringAttribute{
 										MarkdownDescription: "Default Gateway. IP address of the default gateway.",
-										Optional: true,
+										Optional:            true,
 									},
 									"ip_address": schema.StringAttribute{
 										MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -725,23 +713,21 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 			"layer2_interface": schema.SingleNestedBlock{
 				MarkdownDescription: "Layer2 Interface. Layer2 Interface Configuration",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"l2sriov_interface": schema.SingleNestedBlock{
 						MarkdownDescription: "Layer2 SR-IOV Interface. Layer2 SR-IOV Interface Configuration",
 						Attributes: map[string]schema.Attribute{
 							"device": schema.StringAttribute{
 								MarkdownDescription: "Ethernet Device. Physical ethernet interface",
-								Optional: true,
+								Optional:            true,
 							},
 							"vlan_id": schema.Int64Attribute{
 								MarkdownDescription: "VLAN Id. Configure a VLAN tagged interface",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -755,11 +741,11 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 						Attributes: map[string]schema.Attribute{
 							"device": schema.StringAttribute{
 								MarkdownDescription: "Ethernet Device. Physical ethernet interface",
-								Optional: true,
+								Optional:            true,
 							},
 							"vlan_id": schema.Int64Attribute{
 								MarkdownDescription: "VLAN Id. VLAN Id",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 					},
@@ -768,27 +754,26 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 						Attributes: map[string]schema.Attribute{
 							"vlan_id": schema.Int64Attribute{
 								MarkdownDescription: "VLAN Id. VLAN Id",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 					},
 				},
-
 			},
 			"tunnel_interface": schema.SingleNestedBlock{
 				MarkdownDescription: "Tunnel Interface. Tunnel Interface Configuration",
 				Attributes: map[string]schema.Attribute{
 					"mtu": schema.Int64Attribute{
 						MarkdownDescription: "Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, mtu must be between 512 and 16384",
-						Optional: true,
+						Optional:            true,
 					},
 					"node": schema.StringAttribute{
 						MarkdownDescription: "Specific Node. Configuration will apply to a given device on the given node.",
-						Optional: true,
+						Optional:            true,
 					},
 					"priority": schema.Int64Attribute{
 						MarkdownDescription: "Priority. Priority of the network interface when multiple network interfaces are present in outside network Greater the value, higher the priority",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -800,13 +785,11 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 					},
 					"static_ip": schema.SingleNestedBlock{
 						MarkdownDescription: "Static IP Parameters. Configure Static IP parameters",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"cluster_static_ip": schema.SingleNestedBlock{
 								MarkdownDescription: "Cluster: Static IP Parameters. Configure Static IP parameters for cluster",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"interface_ip_map": schema.SingleNestedBlock{
 										MarkdownDescription: "Node to IP Mapping. Map of Node to Static ip configuration value, Key:Node, Value:IP Address",
@@ -818,11 +801,11 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 								Attributes: map[string]schema.Attribute{
 									"default_gw": schema.StringAttribute{
 										MarkdownDescription: "Default Gateway. IP address of the default gateway.",
-										Optional: true,
+										Optional:            true,
 									},
 									"ip_address": schema.StringAttribute{
 										MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -833,21 +816,20 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
 								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-								Optional: true,
+								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
 								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-								Optional: true,
+								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-								Optional: true,
-								Computed: true,
+								Optional:            true,
+								Computed:            true,
 							},
 						},
 					},
 				},
-
 			},
 		},
 	}
@@ -1180,7 +1162,6 @@ func (r *NetworkInterfaceResource) Create(ctx context.Context, req resource.Crea
 		createReq.Spec["tunnel_interface"] = tunnel_interfaceMap
 	}
 
-
 	apiResource, err := r.client.CreateNetworkInterface(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create NetworkInterface: %s", err))
@@ -1192,7 +1173,7 @@ func (r *NetworkInterfaceResource) Create(ctx context.Context, req resource.Crea
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if blockData, ok := apiResource.Spec["dedicated_interface"].(map[string]interface{}); ok && (isImport || data.DedicatedInterface != nil) {
 		data.DedicatedInterface = &NetworkInterfaceDedicatedInterfaceModel{
 			Cluster: func() *NetworkInterfaceEmptyModel {
@@ -1354,8 +1335,7 @@ func (r *NetworkInterfaceResource) Create(ctx context.Context, req resource.Crea
 				}
 				// Import case: read from API
 				if _, ok := blockData["dhcp_server"].(map[string]interface{}); ok {
-					return &NetworkInterfaceEthernetInterfaceDhcpServerModel{
-					}
+					return &NetworkInterfaceEthernetInterfaceDhcpServerModel{}
 				}
 				return nil
 			}(),
@@ -1366,8 +1346,7 @@ func (r *NetworkInterfaceResource) Create(ctx context.Context, req resource.Crea
 				}
 				// Import case: read from API
 				if _, ok := blockData["ipv6_auto_config"].(map[string]interface{}); ok {
-					return &NetworkInterfaceEthernetInterfaceIPV6AutoConfigModel{
-					}
+					return &NetworkInterfaceEthernetInterfaceIPV6AutoConfigModel{}
 				}
 				return nil
 			}(),
@@ -1480,8 +1459,7 @@ func (r *NetworkInterfaceResource) Create(ctx context.Context, req resource.Crea
 				}
 				// Import case: read from API
 				if _, ok := blockData["static_ip"].(map[string]interface{}); ok {
-					return &NetworkInterfaceEthernetInterfaceStaticIPModel{
-					}
+					return &NetworkInterfaceEthernetInterfaceStaticIPModel{}
 				}
 				return nil
 			}(),
@@ -1492,8 +1470,7 @@ func (r *NetworkInterfaceResource) Create(ctx context.Context, req resource.Crea
 				}
 				// Import case: read from API
 				if _, ok := blockData["static_ipv6_address"].(map[string]interface{}); ok {
-					return &NetworkInterfaceEthernetInterfaceStaticIPV6AddressModel{
-					}
+					return &NetworkInterfaceEthernetInterfaceStaticIPV6AddressModel{}
 				}
 				return nil
 			}(),
@@ -1585,8 +1562,7 @@ func (r *NetworkInterfaceResource) Create(ctx context.Context, req resource.Crea
 				}
 				// Import case: read from API
 				if _, ok := blockData["static_ip"].(map[string]interface{}); ok {
-					return &NetworkInterfaceTunnelInterfaceStaticIPModel{
-					}
+					return &NetworkInterfaceTunnelInterfaceStaticIPModel{}
 				}
 				return nil
 			}(),
@@ -1622,7 +1598,6 @@ func (r *NetworkInterfaceResource) Create(ctx context.Context, req resource.Crea
 			}(),
 		}
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -1712,9 +1687,9 @@ func (r *NetworkInterfaceResource) Read(ctx context.Context, req resource.ReadRe
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if blockData, ok := apiResource.Spec["dedicated_interface"].(map[string]interface{}); ok && (isImport || data.DedicatedInterface != nil) {
 		data.DedicatedInterface = &NetworkInterfaceDedicatedInterfaceModel{
@@ -1877,8 +1852,7 @@ func (r *NetworkInterfaceResource) Read(ctx context.Context, req resource.ReadRe
 				}
 				// Import case: read from API
 				if _, ok := blockData["dhcp_server"].(map[string]interface{}); ok {
-					return &NetworkInterfaceEthernetInterfaceDhcpServerModel{
-					}
+					return &NetworkInterfaceEthernetInterfaceDhcpServerModel{}
 				}
 				return nil
 			}(),
@@ -1889,8 +1863,7 @@ func (r *NetworkInterfaceResource) Read(ctx context.Context, req resource.ReadRe
 				}
 				// Import case: read from API
 				if _, ok := blockData["ipv6_auto_config"].(map[string]interface{}); ok {
-					return &NetworkInterfaceEthernetInterfaceIPV6AutoConfigModel{
-					}
+					return &NetworkInterfaceEthernetInterfaceIPV6AutoConfigModel{}
 				}
 				return nil
 			}(),
@@ -2003,8 +1976,7 @@ func (r *NetworkInterfaceResource) Read(ctx context.Context, req resource.ReadRe
 				}
 				// Import case: read from API
 				if _, ok := blockData["static_ip"].(map[string]interface{}); ok {
-					return &NetworkInterfaceEthernetInterfaceStaticIPModel{
-					}
+					return &NetworkInterfaceEthernetInterfaceStaticIPModel{}
 				}
 				return nil
 			}(),
@@ -2015,8 +1987,7 @@ func (r *NetworkInterfaceResource) Read(ctx context.Context, req resource.ReadRe
 				}
 				// Import case: read from API
 				if _, ok := blockData["static_ipv6_address"].(map[string]interface{}); ok {
-					return &NetworkInterfaceEthernetInterfaceStaticIPV6AddressModel{
-					}
+					return &NetworkInterfaceEthernetInterfaceStaticIPV6AddressModel{}
 				}
 				return nil
 			}(),
@@ -2108,8 +2079,7 @@ func (r *NetworkInterfaceResource) Read(ctx context.Context, req resource.ReadRe
 				}
 				// Import case: read from API
 				if _, ok := blockData["static_ip"].(map[string]interface{}); ok {
-					return &NetworkInterfaceTunnelInterfaceStaticIPModel{
-					}
+					return &NetworkInterfaceTunnelInterfaceStaticIPModel{}
 				}
 				return nil
 			}(),
@@ -2145,7 +2115,6 @@ func (r *NetworkInterfaceResource) Read(ctx context.Context, req resource.ReadRe
 			}(),
 		}
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -2388,7 +2357,6 @@ func (r *NetworkInterfaceResource) Update(ctx context.Context, req resource.Upda
 		}
 		apiResource.Spec["tunnel_interface"] = tunnel_interfaceMap
 	}
-
 
 	updated, err := r.client.UpdateNetworkInterface(ctx, apiResource)
 	if err != nil {

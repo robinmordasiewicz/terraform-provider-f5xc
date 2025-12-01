@@ -57,19 +57,19 @@ type ProxyActiveForwardProxyPoliciesModel struct {
 
 // ProxyActiveForwardProxyPoliciesForwardProxyPoliciesModel represents forward_proxy_policies block
 type ProxyActiveForwardProxyPoliciesForwardProxyPoliciesModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // ProxyDynamicProxyModel represents dynamic_proxy block
 type ProxyDynamicProxyModel struct {
-	Domains types.List `tfsdk:"domains"`
-	DisableDNSMasquerade *ProxyEmptyModel `tfsdk:"disable_dns_masquerade"`
-	EnableDNSMasquerade *ProxyEmptyModel `tfsdk:"enable_dns_masquerade"`
-	HTTPProxy *ProxyDynamicProxyHTTPProxyModel `tfsdk:"http_proxy"`
-	HTTPSProxy *ProxyDynamicProxyHTTPSProxyModel `tfsdk:"https_proxy"`
-	SniProxy *ProxyDynamicProxySniProxyModel `tfsdk:"sni_proxy"`
+	Domains              types.List                        `tfsdk:"domains"`
+	DisableDNSMasquerade *ProxyEmptyModel                  `tfsdk:"disable_dns_masquerade"`
+	EnableDNSMasquerade  *ProxyEmptyModel                  `tfsdk:"enable_dns_masquerade"`
+	HTTPProxy            *ProxyDynamicProxyHTTPProxyModel  `tfsdk:"http_proxy"`
+	HTTPSProxy           *ProxyDynamicProxyHTTPSProxyModel `tfsdk:"https_proxy"`
+	SniProxy             *ProxyDynamicProxySniProxyModel   `tfsdk:"sni_proxy"`
 }
 
 // ProxyDynamicProxyHTTPProxyModel represents http_proxy block
@@ -79,348 +79,348 @@ type ProxyDynamicProxyHTTPProxyModel struct {
 
 // ProxyDynamicProxyHTTPProxyMoreOptionModel represents more_option block
 type ProxyDynamicProxyHTTPProxyMoreOptionModel struct {
-	DisableDefaultErrorPages types.Bool `tfsdk:"disable_default_error_pages"`
-	IdleTimeout types.Int64 `tfsdk:"idle_timeout"`
-	MaxRequestHeaderSize types.Int64 `tfsdk:"max_request_header_size"`
-	RequestCookiesToRemove types.List `tfsdk:"request_cookies_to_remove"`
-	RequestHeadersToRemove types.List `tfsdk:"request_headers_to_remove"`
-	ResponseCookiesToRemove types.List `tfsdk:"response_cookies_to_remove"`
-	ResponseHeadersToRemove types.List `tfsdk:"response_headers_to_remove"`
-	BufferPolicy *ProxyDynamicProxyHTTPProxyMoreOptionBufferPolicyModel `tfsdk:"buffer_policy"`
-	CompressionParams *ProxyDynamicProxyHTTPProxyMoreOptionCompressionParamsModel `tfsdk:"compression_params"`
-	CustomErrors *ProxyEmptyModel `tfsdk:"custom_errors"`
-	DisablePathNormalize *ProxyEmptyModel `tfsdk:"disable_path_normalize"`
-	EnablePathNormalize *ProxyEmptyModel `tfsdk:"enable_path_normalize"`
-	RequestCookiesToAdd []ProxyDynamicProxyHTTPProxyMoreOptionRequestCookiesToAddModel `tfsdk:"request_cookies_to_add"`
-	RequestHeadersToAdd []ProxyDynamicProxyHTTPProxyMoreOptionRequestHeadersToAddModel `tfsdk:"request_headers_to_add"`
-	ResponseCookiesToAdd []ProxyDynamicProxyHTTPProxyMoreOptionResponseCookiesToAddModel `tfsdk:"response_cookies_to_add"`
-	ResponseHeadersToAdd []ProxyDynamicProxyHTTPProxyMoreOptionResponseHeadersToAddModel `tfsdk:"response_headers_to_add"`
+	DisableDefaultErrorPages types.Bool                                                      `tfsdk:"disable_default_error_pages"`
+	IdleTimeout              types.Int64                                                     `tfsdk:"idle_timeout"`
+	MaxRequestHeaderSize     types.Int64                                                     `tfsdk:"max_request_header_size"`
+	RequestCookiesToRemove   types.List                                                      `tfsdk:"request_cookies_to_remove"`
+	RequestHeadersToRemove   types.List                                                      `tfsdk:"request_headers_to_remove"`
+	ResponseCookiesToRemove  types.List                                                      `tfsdk:"response_cookies_to_remove"`
+	ResponseHeadersToRemove  types.List                                                      `tfsdk:"response_headers_to_remove"`
+	BufferPolicy             *ProxyDynamicProxyHTTPProxyMoreOptionBufferPolicyModel          `tfsdk:"buffer_policy"`
+	CompressionParams        *ProxyDynamicProxyHTTPProxyMoreOptionCompressionParamsModel     `tfsdk:"compression_params"`
+	CustomErrors             *ProxyEmptyModel                                                `tfsdk:"custom_errors"`
+	DisablePathNormalize     *ProxyEmptyModel                                                `tfsdk:"disable_path_normalize"`
+	EnablePathNormalize      *ProxyEmptyModel                                                `tfsdk:"enable_path_normalize"`
+	RequestCookiesToAdd      []ProxyDynamicProxyHTTPProxyMoreOptionRequestCookiesToAddModel  `tfsdk:"request_cookies_to_add"`
+	RequestHeadersToAdd      []ProxyDynamicProxyHTTPProxyMoreOptionRequestHeadersToAddModel  `tfsdk:"request_headers_to_add"`
+	ResponseCookiesToAdd     []ProxyDynamicProxyHTTPProxyMoreOptionResponseCookiesToAddModel `tfsdk:"response_cookies_to_add"`
+	ResponseHeadersToAdd     []ProxyDynamicProxyHTTPProxyMoreOptionResponseHeadersToAddModel `tfsdk:"response_headers_to_add"`
 }
 
 // ProxyDynamicProxyHTTPProxyMoreOptionBufferPolicyModel represents buffer_policy block
 type ProxyDynamicProxyHTTPProxyMoreOptionBufferPolicyModel struct {
-	Disabled types.Bool `tfsdk:"disabled"`
+	Disabled        types.Bool  `tfsdk:"disabled"`
 	MaxRequestBytes types.Int64 `tfsdk:"max_request_bytes"`
 }
 
 // ProxyDynamicProxyHTTPProxyMoreOptionCompressionParamsModel represents compression_params block
 type ProxyDynamicProxyHTTPProxyMoreOptionCompressionParamsModel struct {
-	ContentLength types.Int64 `tfsdk:"content_length"`
-	ContentType types.List `tfsdk:"content_type"`
-	DisableOnEtagHeader types.Bool `tfsdk:"disable_on_etag_header"`
-	RemoveAcceptEncodingHeader types.Bool `tfsdk:"remove_accept_encoding_header"`
+	ContentLength              types.Int64 `tfsdk:"content_length"`
+	ContentType                types.List  `tfsdk:"content_type"`
+	DisableOnEtagHeader        types.Bool  `tfsdk:"disable_on_etag_header"`
+	RemoveAcceptEncodingHeader types.Bool  `tfsdk:"remove_accept_encoding_header"`
 }
 
 // ProxyDynamicProxyHTTPProxyMoreOptionRequestCookiesToAddModel represents request_cookies_to_add block
 type ProxyDynamicProxyHTTPProxyMoreOptionRequestCookiesToAddModel struct {
-	Name types.String `tfsdk:"name"`
-	Overwrite types.Bool `tfsdk:"overwrite"`
-	Value types.String `tfsdk:"value"`
+	Name        types.String                                                             `tfsdk:"name"`
+	Overwrite   types.Bool                                                               `tfsdk:"overwrite"`
+	Value       types.String                                                             `tfsdk:"value"`
 	SecretValue *ProxyDynamicProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueModel `tfsdk:"secret_value"`
 }
 
 // ProxyDynamicProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueModel represents secret_value block
 type ProxyDynamicProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueModel struct {
 	BlindfoldSecretInfo *ProxyDynamicProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *ProxyDynamicProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *ProxyDynamicProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // ProxyDynamicProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
 type ProxyDynamicProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // ProxyDynamicProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueClearSecretInfoModel represents clear_secret_info block
 type ProxyDynamicProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // ProxyDynamicProxyHTTPProxyMoreOptionRequestHeadersToAddModel represents request_headers_to_add block
 type ProxyDynamicProxyHTTPProxyMoreOptionRequestHeadersToAddModel struct {
-	Append types.Bool `tfsdk:"append"`
-	Name types.String `tfsdk:"name"`
-	Value types.String `tfsdk:"value"`
+	Append      types.Bool                                                               `tfsdk:"append"`
+	Name        types.String                                                             `tfsdk:"name"`
+	Value       types.String                                                             `tfsdk:"value"`
 	SecretValue *ProxyDynamicProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueModel `tfsdk:"secret_value"`
 }
 
 // ProxyDynamicProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueModel represents secret_value block
 type ProxyDynamicProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueModel struct {
 	BlindfoldSecretInfo *ProxyDynamicProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *ProxyDynamicProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *ProxyDynamicProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // ProxyDynamicProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
 type ProxyDynamicProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // ProxyDynamicProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueClearSecretInfoModel represents clear_secret_info block
 type ProxyDynamicProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // ProxyDynamicProxyHTTPProxyMoreOptionResponseCookiesToAddModel represents response_cookies_to_add block
 type ProxyDynamicProxyHTTPProxyMoreOptionResponseCookiesToAddModel struct {
-	AddDomain types.String `tfsdk:"add_domain"`
-	AddExpiry types.String `tfsdk:"add_expiry"`
-	AddPath types.String `tfsdk:"add_path"`
-	MaxAgeValue types.Int64 `tfsdk:"max_age_value"`
-	Name types.String `tfsdk:"name"`
-	Overwrite types.Bool `tfsdk:"overwrite"`
-	Value types.String `tfsdk:"value"`
-	AddHttponly *ProxyEmptyModel `tfsdk:"add_httponly"`
-	AddPartitioned *ProxyEmptyModel `tfsdk:"add_partitioned"`
-	AddSecure *ProxyEmptyModel `tfsdk:"add_secure"`
-	IgnoreDomain *ProxyEmptyModel `tfsdk:"ignore_domain"`
-	IgnoreExpiry *ProxyEmptyModel `tfsdk:"ignore_expiry"`
-	IgnoreHttponly *ProxyEmptyModel `tfsdk:"ignore_httponly"`
-	IgnoreMaxAge *ProxyEmptyModel `tfsdk:"ignore_max_age"`
-	IgnorePartitioned *ProxyEmptyModel `tfsdk:"ignore_partitioned"`
-	IgnorePath *ProxyEmptyModel `tfsdk:"ignore_path"`
-	IgnoreSamesite *ProxyEmptyModel `tfsdk:"ignore_samesite"`
-	IgnoreSecure *ProxyEmptyModel `tfsdk:"ignore_secure"`
-	IgnoreValue *ProxyEmptyModel `tfsdk:"ignore_value"`
-	SamesiteLax *ProxyEmptyModel `tfsdk:"samesite_lax"`
-	SamesiteNone *ProxyEmptyModel `tfsdk:"samesite_none"`
-	SamesiteStrict *ProxyEmptyModel `tfsdk:"samesite_strict"`
-	SecretValue *ProxyDynamicProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueModel `tfsdk:"secret_value"`
+	AddDomain         types.String                                                              `tfsdk:"add_domain"`
+	AddExpiry         types.String                                                              `tfsdk:"add_expiry"`
+	AddPath           types.String                                                              `tfsdk:"add_path"`
+	MaxAgeValue       types.Int64                                                               `tfsdk:"max_age_value"`
+	Name              types.String                                                              `tfsdk:"name"`
+	Overwrite         types.Bool                                                                `tfsdk:"overwrite"`
+	Value             types.String                                                              `tfsdk:"value"`
+	AddHttponly       *ProxyEmptyModel                                                          `tfsdk:"add_httponly"`
+	AddPartitioned    *ProxyEmptyModel                                                          `tfsdk:"add_partitioned"`
+	AddSecure         *ProxyEmptyModel                                                          `tfsdk:"add_secure"`
+	IgnoreDomain      *ProxyEmptyModel                                                          `tfsdk:"ignore_domain"`
+	IgnoreExpiry      *ProxyEmptyModel                                                          `tfsdk:"ignore_expiry"`
+	IgnoreHttponly    *ProxyEmptyModel                                                          `tfsdk:"ignore_httponly"`
+	IgnoreMaxAge      *ProxyEmptyModel                                                          `tfsdk:"ignore_max_age"`
+	IgnorePartitioned *ProxyEmptyModel                                                          `tfsdk:"ignore_partitioned"`
+	IgnorePath        *ProxyEmptyModel                                                          `tfsdk:"ignore_path"`
+	IgnoreSamesite    *ProxyEmptyModel                                                          `tfsdk:"ignore_samesite"`
+	IgnoreSecure      *ProxyEmptyModel                                                          `tfsdk:"ignore_secure"`
+	IgnoreValue       *ProxyEmptyModel                                                          `tfsdk:"ignore_value"`
+	SamesiteLax       *ProxyEmptyModel                                                          `tfsdk:"samesite_lax"`
+	SamesiteNone      *ProxyEmptyModel                                                          `tfsdk:"samesite_none"`
+	SamesiteStrict    *ProxyEmptyModel                                                          `tfsdk:"samesite_strict"`
+	SecretValue       *ProxyDynamicProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueModel `tfsdk:"secret_value"`
 }
 
 // ProxyDynamicProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueModel represents secret_value block
 type ProxyDynamicProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueModel struct {
 	BlindfoldSecretInfo *ProxyDynamicProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *ProxyDynamicProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *ProxyDynamicProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // ProxyDynamicProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
 type ProxyDynamicProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // ProxyDynamicProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueClearSecretInfoModel represents clear_secret_info block
 type ProxyDynamicProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // ProxyDynamicProxyHTTPProxyMoreOptionResponseHeadersToAddModel represents response_headers_to_add block
 type ProxyDynamicProxyHTTPProxyMoreOptionResponseHeadersToAddModel struct {
-	Append types.Bool `tfsdk:"append"`
-	Name types.String `tfsdk:"name"`
-	Value types.String `tfsdk:"value"`
+	Append      types.Bool                                                                `tfsdk:"append"`
+	Name        types.String                                                              `tfsdk:"name"`
+	Value       types.String                                                              `tfsdk:"value"`
 	SecretValue *ProxyDynamicProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueModel `tfsdk:"secret_value"`
 }
 
 // ProxyDynamicProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueModel represents secret_value block
 type ProxyDynamicProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueModel struct {
 	BlindfoldSecretInfo *ProxyDynamicProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *ProxyDynamicProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *ProxyDynamicProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // ProxyDynamicProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
 type ProxyDynamicProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // ProxyDynamicProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueClearSecretInfoModel represents clear_secret_info block
 type ProxyDynamicProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // ProxyDynamicProxyHTTPSProxyModel represents https_proxy block
 type ProxyDynamicProxyHTTPSProxyModel struct {
 	MoreOption *ProxyDynamicProxyHTTPSProxyMoreOptionModel `tfsdk:"more_option"`
-	TLSParams *ProxyDynamicProxyHTTPSProxyTLSParamsModel `tfsdk:"tls_params"`
+	TLSParams  *ProxyDynamicProxyHTTPSProxyTLSParamsModel  `tfsdk:"tls_params"`
 }
 
 // ProxyDynamicProxyHTTPSProxyMoreOptionModel represents more_option block
 type ProxyDynamicProxyHTTPSProxyMoreOptionModel struct {
-	DisableDefaultErrorPages types.Bool `tfsdk:"disable_default_error_pages"`
-	IdleTimeout types.Int64 `tfsdk:"idle_timeout"`
-	MaxRequestHeaderSize types.Int64 `tfsdk:"max_request_header_size"`
-	RequestCookiesToRemove types.List `tfsdk:"request_cookies_to_remove"`
-	RequestHeadersToRemove types.List `tfsdk:"request_headers_to_remove"`
-	ResponseCookiesToRemove types.List `tfsdk:"response_cookies_to_remove"`
-	ResponseHeadersToRemove types.List `tfsdk:"response_headers_to_remove"`
-	BufferPolicy *ProxyDynamicProxyHTTPSProxyMoreOptionBufferPolicyModel `tfsdk:"buffer_policy"`
-	CompressionParams *ProxyDynamicProxyHTTPSProxyMoreOptionCompressionParamsModel `tfsdk:"compression_params"`
-	CustomErrors *ProxyEmptyModel `tfsdk:"custom_errors"`
-	DisablePathNormalize *ProxyEmptyModel `tfsdk:"disable_path_normalize"`
-	EnablePathNormalize *ProxyEmptyModel `tfsdk:"enable_path_normalize"`
-	RequestCookiesToAdd []ProxyDynamicProxyHTTPSProxyMoreOptionRequestCookiesToAddModel `tfsdk:"request_cookies_to_add"`
-	RequestHeadersToAdd []ProxyDynamicProxyHTTPSProxyMoreOptionRequestHeadersToAddModel `tfsdk:"request_headers_to_add"`
-	ResponseCookiesToAdd []ProxyDynamicProxyHTTPSProxyMoreOptionResponseCookiesToAddModel `tfsdk:"response_cookies_to_add"`
-	ResponseHeadersToAdd []ProxyDynamicProxyHTTPSProxyMoreOptionResponseHeadersToAddModel `tfsdk:"response_headers_to_add"`
+	DisableDefaultErrorPages types.Bool                                                       `tfsdk:"disable_default_error_pages"`
+	IdleTimeout              types.Int64                                                      `tfsdk:"idle_timeout"`
+	MaxRequestHeaderSize     types.Int64                                                      `tfsdk:"max_request_header_size"`
+	RequestCookiesToRemove   types.List                                                       `tfsdk:"request_cookies_to_remove"`
+	RequestHeadersToRemove   types.List                                                       `tfsdk:"request_headers_to_remove"`
+	ResponseCookiesToRemove  types.List                                                       `tfsdk:"response_cookies_to_remove"`
+	ResponseHeadersToRemove  types.List                                                       `tfsdk:"response_headers_to_remove"`
+	BufferPolicy             *ProxyDynamicProxyHTTPSProxyMoreOptionBufferPolicyModel          `tfsdk:"buffer_policy"`
+	CompressionParams        *ProxyDynamicProxyHTTPSProxyMoreOptionCompressionParamsModel     `tfsdk:"compression_params"`
+	CustomErrors             *ProxyEmptyModel                                                 `tfsdk:"custom_errors"`
+	DisablePathNormalize     *ProxyEmptyModel                                                 `tfsdk:"disable_path_normalize"`
+	EnablePathNormalize      *ProxyEmptyModel                                                 `tfsdk:"enable_path_normalize"`
+	RequestCookiesToAdd      []ProxyDynamicProxyHTTPSProxyMoreOptionRequestCookiesToAddModel  `tfsdk:"request_cookies_to_add"`
+	RequestHeadersToAdd      []ProxyDynamicProxyHTTPSProxyMoreOptionRequestHeadersToAddModel  `tfsdk:"request_headers_to_add"`
+	ResponseCookiesToAdd     []ProxyDynamicProxyHTTPSProxyMoreOptionResponseCookiesToAddModel `tfsdk:"response_cookies_to_add"`
+	ResponseHeadersToAdd     []ProxyDynamicProxyHTTPSProxyMoreOptionResponseHeadersToAddModel `tfsdk:"response_headers_to_add"`
 }
 
 // ProxyDynamicProxyHTTPSProxyMoreOptionBufferPolicyModel represents buffer_policy block
 type ProxyDynamicProxyHTTPSProxyMoreOptionBufferPolicyModel struct {
-	Disabled types.Bool `tfsdk:"disabled"`
+	Disabled        types.Bool  `tfsdk:"disabled"`
 	MaxRequestBytes types.Int64 `tfsdk:"max_request_bytes"`
 }
 
 // ProxyDynamicProxyHTTPSProxyMoreOptionCompressionParamsModel represents compression_params block
 type ProxyDynamicProxyHTTPSProxyMoreOptionCompressionParamsModel struct {
-	ContentLength types.Int64 `tfsdk:"content_length"`
-	ContentType types.List `tfsdk:"content_type"`
-	DisableOnEtagHeader types.Bool `tfsdk:"disable_on_etag_header"`
-	RemoveAcceptEncodingHeader types.Bool `tfsdk:"remove_accept_encoding_header"`
+	ContentLength              types.Int64 `tfsdk:"content_length"`
+	ContentType                types.List  `tfsdk:"content_type"`
+	DisableOnEtagHeader        types.Bool  `tfsdk:"disable_on_etag_header"`
+	RemoveAcceptEncodingHeader types.Bool  `tfsdk:"remove_accept_encoding_header"`
 }
 
 // ProxyDynamicProxyHTTPSProxyMoreOptionRequestCookiesToAddModel represents request_cookies_to_add block
 type ProxyDynamicProxyHTTPSProxyMoreOptionRequestCookiesToAddModel struct {
-	Name types.String `tfsdk:"name"`
-	Overwrite types.Bool `tfsdk:"overwrite"`
-	Value types.String `tfsdk:"value"`
+	Name        types.String                                                              `tfsdk:"name"`
+	Overwrite   types.Bool                                                                `tfsdk:"overwrite"`
+	Value       types.String                                                              `tfsdk:"value"`
 	SecretValue *ProxyDynamicProxyHTTPSProxyMoreOptionRequestCookiesToAddSecretValueModel `tfsdk:"secret_value"`
 }
 
 // ProxyDynamicProxyHTTPSProxyMoreOptionRequestCookiesToAddSecretValueModel represents secret_value block
 type ProxyDynamicProxyHTTPSProxyMoreOptionRequestCookiesToAddSecretValueModel struct {
 	BlindfoldSecretInfo *ProxyDynamicProxyHTTPSProxyMoreOptionRequestCookiesToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *ProxyDynamicProxyHTTPSProxyMoreOptionRequestCookiesToAddSecretValueClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *ProxyDynamicProxyHTTPSProxyMoreOptionRequestCookiesToAddSecretValueClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // ProxyDynamicProxyHTTPSProxyMoreOptionRequestCookiesToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
 type ProxyDynamicProxyHTTPSProxyMoreOptionRequestCookiesToAddSecretValueBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // ProxyDynamicProxyHTTPSProxyMoreOptionRequestCookiesToAddSecretValueClearSecretInfoModel represents clear_secret_info block
 type ProxyDynamicProxyHTTPSProxyMoreOptionRequestCookiesToAddSecretValueClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // ProxyDynamicProxyHTTPSProxyMoreOptionRequestHeadersToAddModel represents request_headers_to_add block
 type ProxyDynamicProxyHTTPSProxyMoreOptionRequestHeadersToAddModel struct {
-	Append types.Bool `tfsdk:"append"`
-	Name types.String `tfsdk:"name"`
-	Value types.String `tfsdk:"value"`
+	Append      types.Bool                                                                `tfsdk:"append"`
+	Name        types.String                                                              `tfsdk:"name"`
+	Value       types.String                                                              `tfsdk:"value"`
 	SecretValue *ProxyDynamicProxyHTTPSProxyMoreOptionRequestHeadersToAddSecretValueModel `tfsdk:"secret_value"`
 }
 
 // ProxyDynamicProxyHTTPSProxyMoreOptionRequestHeadersToAddSecretValueModel represents secret_value block
 type ProxyDynamicProxyHTTPSProxyMoreOptionRequestHeadersToAddSecretValueModel struct {
 	BlindfoldSecretInfo *ProxyDynamicProxyHTTPSProxyMoreOptionRequestHeadersToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *ProxyDynamicProxyHTTPSProxyMoreOptionRequestHeadersToAddSecretValueClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *ProxyDynamicProxyHTTPSProxyMoreOptionRequestHeadersToAddSecretValueClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // ProxyDynamicProxyHTTPSProxyMoreOptionRequestHeadersToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
 type ProxyDynamicProxyHTTPSProxyMoreOptionRequestHeadersToAddSecretValueBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // ProxyDynamicProxyHTTPSProxyMoreOptionRequestHeadersToAddSecretValueClearSecretInfoModel represents clear_secret_info block
 type ProxyDynamicProxyHTTPSProxyMoreOptionRequestHeadersToAddSecretValueClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // ProxyDynamicProxyHTTPSProxyMoreOptionResponseCookiesToAddModel represents response_cookies_to_add block
 type ProxyDynamicProxyHTTPSProxyMoreOptionResponseCookiesToAddModel struct {
-	AddDomain types.String `tfsdk:"add_domain"`
-	AddExpiry types.String `tfsdk:"add_expiry"`
-	AddPath types.String `tfsdk:"add_path"`
-	MaxAgeValue types.Int64 `tfsdk:"max_age_value"`
-	Name types.String `tfsdk:"name"`
-	Overwrite types.Bool `tfsdk:"overwrite"`
-	Value types.String `tfsdk:"value"`
-	AddHttponly *ProxyEmptyModel `tfsdk:"add_httponly"`
-	AddPartitioned *ProxyEmptyModel `tfsdk:"add_partitioned"`
-	AddSecure *ProxyEmptyModel `tfsdk:"add_secure"`
-	IgnoreDomain *ProxyEmptyModel `tfsdk:"ignore_domain"`
-	IgnoreExpiry *ProxyEmptyModel `tfsdk:"ignore_expiry"`
-	IgnoreHttponly *ProxyEmptyModel `tfsdk:"ignore_httponly"`
-	IgnoreMaxAge *ProxyEmptyModel `tfsdk:"ignore_max_age"`
-	IgnorePartitioned *ProxyEmptyModel `tfsdk:"ignore_partitioned"`
-	IgnorePath *ProxyEmptyModel `tfsdk:"ignore_path"`
-	IgnoreSamesite *ProxyEmptyModel `tfsdk:"ignore_samesite"`
-	IgnoreSecure *ProxyEmptyModel `tfsdk:"ignore_secure"`
-	IgnoreValue *ProxyEmptyModel `tfsdk:"ignore_value"`
-	SamesiteLax *ProxyEmptyModel `tfsdk:"samesite_lax"`
-	SamesiteNone *ProxyEmptyModel `tfsdk:"samesite_none"`
-	SamesiteStrict *ProxyEmptyModel `tfsdk:"samesite_strict"`
-	SecretValue *ProxyDynamicProxyHTTPSProxyMoreOptionResponseCookiesToAddSecretValueModel `tfsdk:"secret_value"`
+	AddDomain         types.String                                                               `tfsdk:"add_domain"`
+	AddExpiry         types.String                                                               `tfsdk:"add_expiry"`
+	AddPath           types.String                                                               `tfsdk:"add_path"`
+	MaxAgeValue       types.Int64                                                                `tfsdk:"max_age_value"`
+	Name              types.String                                                               `tfsdk:"name"`
+	Overwrite         types.Bool                                                                 `tfsdk:"overwrite"`
+	Value             types.String                                                               `tfsdk:"value"`
+	AddHttponly       *ProxyEmptyModel                                                           `tfsdk:"add_httponly"`
+	AddPartitioned    *ProxyEmptyModel                                                           `tfsdk:"add_partitioned"`
+	AddSecure         *ProxyEmptyModel                                                           `tfsdk:"add_secure"`
+	IgnoreDomain      *ProxyEmptyModel                                                           `tfsdk:"ignore_domain"`
+	IgnoreExpiry      *ProxyEmptyModel                                                           `tfsdk:"ignore_expiry"`
+	IgnoreHttponly    *ProxyEmptyModel                                                           `tfsdk:"ignore_httponly"`
+	IgnoreMaxAge      *ProxyEmptyModel                                                           `tfsdk:"ignore_max_age"`
+	IgnorePartitioned *ProxyEmptyModel                                                           `tfsdk:"ignore_partitioned"`
+	IgnorePath        *ProxyEmptyModel                                                           `tfsdk:"ignore_path"`
+	IgnoreSamesite    *ProxyEmptyModel                                                           `tfsdk:"ignore_samesite"`
+	IgnoreSecure      *ProxyEmptyModel                                                           `tfsdk:"ignore_secure"`
+	IgnoreValue       *ProxyEmptyModel                                                           `tfsdk:"ignore_value"`
+	SamesiteLax       *ProxyEmptyModel                                                           `tfsdk:"samesite_lax"`
+	SamesiteNone      *ProxyEmptyModel                                                           `tfsdk:"samesite_none"`
+	SamesiteStrict    *ProxyEmptyModel                                                           `tfsdk:"samesite_strict"`
+	SecretValue       *ProxyDynamicProxyHTTPSProxyMoreOptionResponseCookiesToAddSecretValueModel `tfsdk:"secret_value"`
 }
 
 // ProxyDynamicProxyHTTPSProxyMoreOptionResponseCookiesToAddSecretValueModel represents secret_value block
 type ProxyDynamicProxyHTTPSProxyMoreOptionResponseCookiesToAddSecretValueModel struct {
 	BlindfoldSecretInfo *ProxyDynamicProxyHTTPSProxyMoreOptionResponseCookiesToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *ProxyDynamicProxyHTTPSProxyMoreOptionResponseCookiesToAddSecretValueClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *ProxyDynamicProxyHTTPSProxyMoreOptionResponseCookiesToAddSecretValueClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // ProxyDynamicProxyHTTPSProxyMoreOptionResponseCookiesToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
 type ProxyDynamicProxyHTTPSProxyMoreOptionResponseCookiesToAddSecretValueBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // ProxyDynamicProxyHTTPSProxyMoreOptionResponseCookiesToAddSecretValueClearSecretInfoModel represents clear_secret_info block
 type ProxyDynamicProxyHTTPSProxyMoreOptionResponseCookiesToAddSecretValueClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // ProxyDynamicProxyHTTPSProxyMoreOptionResponseHeadersToAddModel represents response_headers_to_add block
 type ProxyDynamicProxyHTTPSProxyMoreOptionResponseHeadersToAddModel struct {
-	Append types.Bool `tfsdk:"append"`
-	Name types.String `tfsdk:"name"`
-	Value types.String `tfsdk:"value"`
+	Append      types.Bool                                                                 `tfsdk:"append"`
+	Name        types.String                                                               `tfsdk:"name"`
+	Value       types.String                                                               `tfsdk:"value"`
 	SecretValue *ProxyDynamicProxyHTTPSProxyMoreOptionResponseHeadersToAddSecretValueModel `tfsdk:"secret_value"`
 }
 
 // ProxyDynamicProxyHTTPSProxyMoreOptionResponseHeadersToAddSecretValueModel represents secret_value block
 type ProxyDynamicProxyHTTPSProxyMoreOptionResponseHeadersToAddSecretValueModel struct {
 	BlindfoldSecretInfo *ProxyDynamicProxyHTTPSProxyMoreOptionResponseHeadersToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *ProxyDynamicProxyHTTPSProxyMoreOptionResponseHeadersToAddSecretValueClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *ProxyDynamicProxyHTTPSProxyMoreOptionResponseHeadersToAddSecretValueClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // ProxyDynamicProxyHTTPSProxyMoreOptionResponseHeadersToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
 type ProxyDynamicProxyHTTPSProxyMoreOptionResponseHeadersToAddSecretValueBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // ProxyDynamicProxyHTTPSProxyMoreOptionResponseHeadersToAddSecretValueClearSecretInfoModel represents clear_secret_info block
 type ProxyDynamicProxyHTTPSProxyMoreOptionResponseHeadersToAddSecretValueClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // ProxyDynamicProxyHTTPSProxyTLSParamsModel represents tls_params block
 type ProxyDynamicProxyHTTPSProxyTLSParamsModel struct {
-	NoMtls *ProxyEmptyModel `tfsdk:"no_mtls"`
+	NoMtls          *ProxyEmptyModel                                           `tfsdk:"no_mtls"`
 	TLSCertificates []ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesModel `tfsdk:"tls_certificates"`
-	TLSConfig *ProxyDynamicProxyHTTPSProxyTLSParamsTLSConfigModel `tfsdk:"tls_config"`
-	UseMtls *ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsModel `tfsdk:"use_mtls"`
+	TLSConfig       *ProxyDynamicProxyHTTPSProxyTLSParamsTLSConfigModel        `tfsdk:"tls_config"`
+	UseMtls         *ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsModel          `tfsdk:"use_mtls"`
 }
 
 // ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesModel represents tls_certificates block
 type ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesModel struct {
-	CertificateURL types.String `tfsdk:"certificate_url"`
-	DescriptionSpec types.String `tfsdk:"description_spec"`
+	CertificateURL       types.String                                                                  `tfsdk:"certificate_url"`
+	DescriptionSpec      types.String                                                                  `tfsdk:"description_spec"`
 	CustomHashAlgorithms *ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
-	DisableOcspStapling *ProxyEmptyModel `tfsdk:"disable_ocsp_stapling"`
-	PrivateKey *ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
-	UseSystemDefaults *ProxyEmptyModel `tfsdk:"use_system_defaults"`
+	DisableOcspStapling  *ProxyEmptyModel                                                              `tfsdk:"disable_ocsp_stapling"`
+	PrivateKey           *ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesPrivateKeyModel           `tfsdk:"private_key"`
+	UseSystemDefaults    *ProxyEmptyModel                                                              `tfsdk:"use_system_defaults"`
 }
 
 // ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
@@ -431,60 +431,60 @@ type ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesCustomHashAlgorithmsMode
 // ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesPrivateKeyModel represents private_key block
 type ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesPrivateKeyModel struct {
 	BlindfoldSecretInfo *ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesPrivateKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesPrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
 type ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesPrivateKeyBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
 type ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesPrivateKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // ProxyDynamicProxyHTTPSProxyTLSParamsTLSConfigModel represents tls_config block
 type ProxyDynamicProxyHTTPSProxyTLSParamsTLSConfigModel struct {
-	CustomSecurity *ProxyDynamicProxyHTTPSProxyTLSParamsTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
-	DefaultSecurity *ProxyEmptyModel `tfsdk:"default_security"`
-	LowSecurity *ProxyEmptyModel `tfsdk:"low_security"`
-	MediumSecurity *ProxyEmptyModel `tfsdk:"medium_security"`
+	CustomSecurity  *ProxyDynamicProxyHTTPSProxyTLSParamsTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
+	DefaultSecurity *ProxyEmptyModel                                                  `tfsdk:"default_security"`
+	LowSecurity     *ProxyEmptyModel                                                  `tfsdk:"low_security"`
+	MediumSecurity  *ProxyEmptyModel                                                  `tfsdk:"medium_security"`
 }
 
 // ProxyDynamicProxyHTTPSProxyTLSParamsTLSConfigCustomSecurityModel represents custom_security block
 type ProxyDynamicProxyHTTPSProxyTLSParamsTLSConfigCustomSecurityModel struct {
-	CipherSuites types.List `tfsdk:"cipher_suites"`
-	MaxVersion types.String `tfsdk:"max_version"`
-	MinVersion types.String `tfsdk:"min_version"`
+	CipherSuites types.List   `tfsdk:"cipher_suites"`
+	MaxVersion   types.String `tfsdk:"max_version"`
+	MinVersion   types.String `tfsdk:"min_version"`
 }
 
 // ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsModel represents use_mtls block
 type ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsModel struct {
-	ClientCertificateOptional types.Bool `tfsdk:"client_certificate_optional"`
-	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
-	CRL *ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsCRLModel `tfsdk:"crl"`
-	NoCRL *ProxyEmptyModel `tfsdk:"no_crl"`
-	TrustedCa *ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsTrustedCaModel `tfsdk:"trusted_ca"`
-	XfccDisabled *ProxyEmptyModel `tfsdk:"xfcc_disabled"`
-	XfccOptions *ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
+	ClientCertificateOptional types.Bool                                                   `tfsdk:"client_certificate_optional"`
+	TrustedCaURL              types.String                                                 `tfsdk:"trusted_ca_url"`
+	CRL                       *ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsCRLModel         `tfsdk:"crl"`
+	NoCRL                     *ProxyEmptyModel                                             `tfsdk:"no_crl"`
+	TrustedCa                 *ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsTrustedCaModel   `tfsdk:"trusted_ca"`
+	XfccDisabled              *ProxyEmptyModel                                             `tfsdk:"xfcc_disabled"`
+	XfccOptions               *ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
 
 // ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsCRLModel represents crl block
 type ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsCRLModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsTrustedCaModel represents trusted_ca block
 type ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsTrustedCaModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsXfccOptionsModel represents xfcc_options block
@@ -499,169 +499,169 @@ type ProxyDynamicProxySniProxyModel struct {
 
 // ProxyHTTPProxyModel represents http_proxy block
 type ProxyHTTPProxyModel struct {
-	EnableHTTP *ProxyEmptyModel `tfsdk:"enable_http"`
+	EnableHTTP *ProxyEmptyModel               `tfsdk:"enable_http"`
 	MoreOption *ProxyHTTPProxyMoreOptionModel `tfsdk:"more_option"`
 }
 
 // ProxyHTTPProxyMoreOptionModel represents more_option block
 type ProxyHTTPProxyMoreOptionModel struct {
-	DisableDefaultErrorPages types.Bool `tfsdk:"disable_default_error_pages"`
-	IdleTimeout types.Int64 `tfsdk:"idle_timeout"`
-	MaxRequestHeaderSize types.Int64 `tfsdk:"max_request_header_size"`
-	RequestCookiesToRemove types.List `tfsdk:"request_cookies_to_remove"`
-	RequestHeadersToRemove types.List `tfsdk:"request_headers_to_remove"`
-	ResponseCookiesToRemove types.List `tfsdk:"response_cookies_to_remove"`
-	ResponseHeadersToRemove types.List `tfsdk:"response_headers_to_remove"`
-	BufferPolicy *ProxyHTTPProxyMoreOptionBufferPolicyModel `tfsdk:"buffer_policy"`
-	CompressionParams *ProxyHTTPProxyMoreOptionCompressionParamsModel `tfsdk:"compression_params"`
-	CustomErrors *ProxyEmptyModel `tfsdk:"custom_errors"`
-	DisablePathNormalize *ProxyEmptyModel `tfsdk:"disable_path_normalize"`
-	EnablePathNormalize *ProxyEmptyModel `tfsdk:"enable_path_normalize"`
-	RequestCookiesToAdd []ProxyHTTPProxyMoreOptionRequestCookiesToAddModel `tfsdk:"request_cookies_to_add"`
-	RequestHeadersToAdd []ProxyHTTPProxyMoreOptionRequestHeadersToAddModel `tfsdk:"request_headers_to_add"`
-	ResponseCookiesToAdd []ProxyHTTPProxyMoreOptionResponseCookiesToAddModel `tfsdk:"response_cookies_to_add"`
-	ResponseHeadersToAdd []ProxyHTTPProxyMoreOptionResponseHeadersToAddModel `tfsdk:"response_headers_to_add"`
+	DisableDefaultErrorPages types.Bool                                          `tfsdk:"disable_default_error_pages"`
+	IdleTimeout              types.Int64                                         `tfsdk:"idle_timeout"`
+	MaxRequestHeaderSize     types.Int64                                         `tfsdk:"max_request_header_size"`
+	RequestCookiesToRemove   types.List                                          `tfsdk:"request_cookies_to_remove"`
+	RequestHeadersToRemove   types.List                                          `tfsdk:"request_headers_to_remove"`
+	ResponseCookiesToRemove  types.List                                          `tfsdk:"response_cookies_to_remove"`
+	ResponseHeadersToRemove  types.List                                          `tfsdk:"response_headers_to_remove"`
+	BufferPolicy             *ProxyHTTPProxyMoreOptionBufferPolicyModel          `tfsdk:"buffer_policy"`
+	CompressionParams        *ProxyHTTPProxyMoreOptionCompressionParamsModel     `tfsdk:"compression_params"`
+	CustomErrors             *ProxyEmptyModel                                    `tfsdk:"custom_errors"`
+	DisablePathNormalize     *ProxyEmptyModel                                    `tfsdk:"disable_path_normalize"`
+	EnablePathNormalize      *ProxyEmptyModel                                    `tfsdk:"enable_path_normalize"`
+	RequestCookiesToAdd      []ProxyHTTPProxyMoreOptionRequestCookiesToAddModel  `tfsdk:"request_cookies_to_add"`
+	RequestHeadersToAdd      []ProxyHTTPProxyMoreOptionRequestHeadersToAddModel  `tfsdk:"request_headers_to_add"`
+	ResponseCookiesToAdd     []ProxyHTTPProxyMoreOptionResponseCookiesToAddModel `tfsdk:"response_cookies_to_add"`
+	ResponseHeadersToAdd     []ProxyHTTPProxyMoreOptionResponseHeadersToAddModel `tfsdk:"response_headers_to_add"`
 }
 
 // ProxyHTTPProxyMoreOptionBufferPolicyModel represents buffer_policy block
 type ProxyHTTPProxyMoreOptionBufferPolicyModel struct {
-	Disabled types.Bool `tfsdk:"disabled"`
+	Disabled        types.Bool  `tfsdk:"disabled"`
 	MaxRequestBytes types.Int64 `tfsdk:"max_request_bytes"`
 }
 
 // ProxyHTTPProxyMoreOptionCompressionParamsModel represents compression_params block
 type ProxyHTTPProxyMoreOptionCompressionParamsModel struct {
-	ContentLength types.Int64 `tfsdk:"content_length"`
-	ContentType types.List `tfsdk:"content_type"`
-	DisableOnEtagHeader types.Bool `tfsdk:"disable_on_etag_header"`
-	RemoveAcceptEncodingHeader types.Bool `tfsdk:"remove_accept_encoding_header"`
+	ContentLength              types.Int64 `tfsdk:"content_length"`
+	ContentType                types.List  `tfsdk:"content_type"`
+	DisableOnEtagHeader        types.Bool  `tfsdk:"disable_on_etag_header"`
+	RemoveAcceptEncodingHeader types.Bool  `tfsdk:"remove_accept_encoding_header"`
 }
 
 // ProxyHTTPProxyMoreOptionRequestCookiesToAddModel represents request_cookies_to_add block
 type ProxyHTTPProxyMoreOptionRequestCookiesToAddModel struct {
-	Name types.String `tfsdk:"name"`
-	Overwrite types.Bool `tfsdk:"overwrite"`
-	Value types.String `tfsdk:"value"`
+	Name        types.String                                                 `tfsdk:"name"`
+	Overwrite   types.Bool                                                   `tfsdk:"overwrite"`
+	Value       types.String                                                 `tfsdk:"value"`
 	SecretValue *ProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueModel `tfsdk:"secret_value"`
 }
 
 // ProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueModel represents secret_value block
 type ProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueModel struct {
 	BlindfoldSecretInfo *ProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *ProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *ProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // ProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
 type ProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // ProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueClearSecretInfoModel represents clear_secret_info block
 type ProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // ProxyHTTPProxyMoreOptionRequestHeadersToAddModel represents request_headers_to_add block
 type ProxyHTTPProxyMoreOptionRequestHeadersToAddModel struct {
-	Append types.Bool `tfsdk:"append"`
-	Name types.String `tfsdk:"name"`
-	Value types.String `tfsdk:"value"`
+	Append      types.Bool                                                   `tfsdk:"append"`
+	Name        types.String                                                 `tfsdk:"name"`
+	Value       types.String                                                 `tfsdk:"value"`
 	SecretValue *ProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueModel `tfsdk:"secret_value"`
 }
 
 // ProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueModel represents secret_value block
 type ProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueModel struct {
 	BlindfoldSecretInfo *ProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *ProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *ProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // ProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
 type ProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // ProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueClearSecretInfoModel represents clear_secret_info block
 type ProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // ProxyHTTPProxyMoreOptionResponseCookiesToAddModel represents response_cookies_to_add block
 type ProxyHTTPProxyMoreOptionResponseCookiesToAddModel struct {
-	AddDomain types.String `tfsdk:"add_domain"`
-	AddExpiry types.String `tfsdk:"add_expiry"`
-	AddPath types.String `tfsdk:"add_path"`
-	MaxAgeValue types.Int64 `tfsdk:"max_age_value"`
-	Name types.String `tfsdk:"name"`
-	Overwrite types.Bool `tfsdk:"overwrite"`
-	Value types.String `tfsdk:"value"`
-	AddHttponly *ProxyEmptyModel `tfsdk:"add_httponly"`
-	AddPartitioned *ProxyEmptyModel `tfsdk:"add_partitioned"`
-	AddSecure *ProxyEmptyModel `tfsdk:"add_secure"`
-	IgnoreDomain *ProxyEmptyModel `tfsdk:"ignore_domain"`
-	IgnoreExpiry *ProxyEmptyModel `tfsdk:"ignore_expiry"`
-	IgnoreHttponly *ProxyEmptyModel `tfsdk:"ignore_httponly"`
-	IgnoreMaxAge *ProxyEmptyModel `tfsdk:"ignore_max_age"`
-	IgnorePartitioned *ProxyEmptyModel `tfsdk:"ignore_partitioned"`
-	IgnorePath *ProxyEmptyModel `tfsdk:"ignore_path"`
-	IgnoreSamesite *ProxyEmptyModel `tfsdk:"ignore_samesite"`
-	IgnoreSecure *ProxyEmptyModel `tfsdk:"ignore_secure"`
-	IgnoreValue *ProxyEmptyModel `tfsdk:"ignore_value"`
-	SamesiteLax *ProxyEmptyModel `tfsdk:"samesite_lax"`
-	SamesiteNone *ProxyEmptyModel `tfsdk:"samesite_none"`
-	SamesiteStrict *ProxyEmptyModel `tfsdk:"samesite_strict"`
-	SecretValue *ProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueModel `tfsdk:"secret_value"`
+	AddDomain         types.String                                                  `tfsdk:"add_domain"`
+	AddExpiry         types.String                                                  `tfsdk:"add_expiry"`
+	AddPath           types.String                                                  `tfsdk:"add_path"`
+	MaxAgeValue       types.Int64                                                   `tfsdk:"max_age_value"`
+	Name              types.String                                                  `tfsdk:"name"`
+	Overwrite         types.Bool                                                    `tfsdk:"overwrite"`
+	Value             types.String                                                  `tfsdk:"value"`
+	AddHttponly       *ProxyEmptyModel                                              `tfsdk:"add_httponly"`
+	AddPartitioned    *ProxyEmptyModel                                              `tfsdk:"add_partitioned"`
+	AddSecure         *ProxyEmptyModel                                              `tfsdk:"add_secure"`
+	IgnoreDomain      *ProxyEmptyModel                                              `tfsdk:"ignore_domain"`
+	IgnoreExpiry      *ProxyEmptyModel                                              `tfsdk:"ignore_expiry"`
+	IgnoreHttponly    *ProxyEmptyModel                                              `tfsdk:"ignore_httponly"`
+	IgnoreMaxAge      *ProxyEmptyModel                                              `tfsdk:"ignore_max_age"`
+	IgnorePartitioned *ProxyEmptyModel                                              `tfsdk:"ignore_partitioned"`
+	IgnorePath        *ProxyEmptyModel                                              `tfsdk:"ignore_path"`
+	IgnoreSamesite    *ProxyEmptyModel                                              `tfsdk:"ignore_samesite"`
+	IgnoreSecure      *ProxyEmptyModel                                              `tfsdk:"ignore_secure"`
+	IgnoreValue       *ProxyEmptyModel                                              `tfsdk:"ignore_value"`
+	SamesiteLax       *ProxyEmptyModel                                              `tfsdk:"samesite_lax"`
+	SamesiteNone      *ProxyEmptyModel                                              `tfsdk:"samesite_none"`
+	SamesiteStrict    *ProxyEmptyModel                                              `tfsdk:"samesite_strict"`
+	SecretValue       *ProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueModel `tfsdk:"secret_value"`
 }
 
 // ProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueModel represents secret_value block
 type ProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueModel struct {
 	BlindfoldSecretInfo *ProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *ProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *ProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // ProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
 type ProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // ProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueClearSecretInfoModel represents clear_secret_info block
 type ProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // ProxyHTTPProxyMoreOptionResponseHeadersToAddModel represents response_headers_to_add block
 type ProxyHTTPProxyMoreOptionResponseHeadersToAddModel struct {
-	Append types.Bool `tfsdk:"append"`
-	Name types.String `tfsdk:"name"`
-	Value types.String `tfsdk:"value"`
+	Append      types.Bool                                                    `tfsdk:"append"`
+	Name        types.String                                                  `tfsdk:"name"`
+	Value       types.String                                                  `tfsdk:"value"`
 	SecretValue *ProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueModel `tfsdk:"secret_value"`
 }
 
 // ProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueModel represents secret_value block
 type ProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueModel struct {
 	BlindfoldSecretInfo *ProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *ProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *ProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // ProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
 type ProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // ProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueClearSecretInfoModel represents clear_secret_info block
 type ProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // ProxySiteVirtualSitesModel represents site_virtual_sites block
@@ -671,57 +671,57 @@ type ProxySiteVirtualSitesModel struct {
 
 // ProxySiteVirtualSitesAdvertiseWhereModel represents advertise_where block
 type ProxySiteVirtualSitesAdvertiseWhereModel struct {
-	Port types.Int64 `tfsdk:"port"`
-	Site *ProxySiteVirtualSitesAdvertiseWhereSiteModel `tfsdk:"site"`
-	UseDefaultPort *ProxyEmptyModel `tfsdk:"use_default_port"`
-	VirtualSite *ProxySiteVirtualSitesAdvertiseWhereVirtualSiteModel `tfsdk:"virtual_site"`
+	Port           types.Int64                                          `tfsdk:"port"`
+	Site           *ProxySiteVirtualSitesAdvertiseWhereSiteModel        `tfsdk:"site"`
+	UseDefaultPort *ProxyEmptyModel                                     `tfsdk:"use_default_port"`
+	VirtualSite    *ProxySiteVirtualSitesAdvertiseWhereVirtualSiteModel `tfsdk:"virtual_site"`
 }
 
 // ProxySiteVirtualSitesAdvertiseWhereSiteModel represents site block
 type ProxySiteVirtualSitesAdvertiseWhereSiteModel struct {
-	IP types.String `tfsdk:"ip"`
-	Network types.String `tfsdk:"network"`
-	Site *ProxySiteVirtualSitesAdvertiseWhereSiteSiteModel `tfsdk:"site"`
+	IP      types.String                                      `tfsdk:"ip"`
+	Network types.String                                      `tfsdk:"network"`
+	Site    *ProxySiteVirtualSitesAdvertiseWhereSiteSiteModel `tfsdk:"site"`
 }
 
 // ProxySiteVirtualSitesAdvertiseWhereSiteSiteModel represents site block
 type ProxySiteVirtualSitesAdvertiseWhereSiteSiteModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // ProxySiteVirtualSitesAdvertiseWhereVirtualSiteModel represents virtual_site block
 type ProxySiteVirtualSitesAdvertiseWhereVirtualSiteModel struct {
-	Network types.String `tfsdk:"network"`
+	Network     types.String                                                    `tfsdk:"network"`
 	VirtualSite *ProxySiteVirtualSitesAdvertiseWhereVirtualSiteVirtualSiteModel `tfsdk:"virtual_site"`
 }
 
 // ProxySiteVirtualSitesAdvertiseWhereVirtualSiteVirtualSiteModel represents virtual_site block
 type ProxySiteVirtualSitesAdvertiseWhereVirtualSiteVirtualSiteModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // ProxyTLSInterceptModel represents tls_intercept block
 type ProxyTLSInterceptModel struct {
-	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
-	CustomCertificate *ProxyTLSInterceptCustomCertificateModel `tfsdk:"custom_certificate"`
-	EnableForAllDomains *ProxyEmptyModel `tfsdk:"enable_for_all_domains"`
-	Policy *ProxyTLSInterceptPolicyModel `tfsdk:"policy"`
-	VolterraCertificate *ProxyEmptyModel `tfsdk:"volterra_certificate"`
-	VolterraTrustedCa *ProxyEmptyModel `tfsdk:"volterra_trusted_ca"`
+	TrustedCaURL        types.String                             `tfsdk:"trusted_ca_url"`
+	CustomCertificate   *ProxyTLSInterceptCustomCertificateModel `tfsdk:"custom_certificate"`
+	EnableForAllDomains *ProxyEmptyModel                         `tfsdk:"enable_for_all_domains"`
+	Policy              *ProxyTLSInterceptPolicyModel            `tfsdk:"policy"`
+	VolterraCertificate *ProxyEmptyModel                         `tfsdk:"volterra_certificate"`
+	VolterraTrustedCa   *ProxyEmptyModel                         `tfsdk:"volterra_trusted_ca"`
 }
 
 // ProxyTLSInterceptCustomCertificateModel represents custom_certificate block
 type ProxyTLSInterceptCustomCertificateModel struct {
-	CertificateURL types.String `tfsdk:"certificate_url"`
-	DescriptionSpec types.String `tfsdk:"description_spec"`
+	CertificateURL       types.String                                                 `tfsdk:"certificate_url"`
+	DescriptionSpec      types.String                                                 `tfsdk:"description_spec"`
 	CustomHashAlgorithms *ProxyTLSInterceptCustomCertificateCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
-	DisableOcspStapling *ProxyEmptyModel `tfsdk:"disable_ocsp_stapling"`
-	PrivateKey *ProxyTLSInterceptCustomCertificatePrivateKeyModel `tfsdk:"private_key"`
-	UseSystemDefaults *ProxyEmptyModel `tfsdk:"use_system_defaults"`
+	DisableOcspStapling  *ProxyEmptyModel                                             `tfsdk:"disable_ocsp_stapling"`
+	PrivateKey           *ProxyTLSInterceptCustomCertificatePrivateKeyModel           `tfsdk:"private_key"`
+	UseSystemDefaults    *ProxyEmptyModel                                             `tfsdk:"use_system_defaults"`
 }
 
 // ProxyTLSInterceptCustomCertificateCustomHashAlgorithmsModel represents custom_hash_algorithms block
@@ -732,20 +732,20 @@ type ProxyTLSInterceptCustomCertificateCustomHashAlgorithmsModel struct {
 // ProxyTLSInterceptCustomCertificatePrivateKeyModel represents private_key block
 type ProxyTLSInterceptCustomCertificatePrivateKeyModel struct {
 	BlindfoldSecretInfo *ProxyTLSInterceptCustomCertificatePrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *ProxyTLSInterceptCustomCertificatePrivateKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *ProxyTLSInterceptCustomCertificatePrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // ProxyTLSInterceptCustomCertificatePrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
 type ProxyTLSInterceptCustomCertificatePrivateKeyBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // ProxyTLSInterceptCustomCertificatePrivateKeyClearSecretInfoModel represents clear_secret_info block
 type ProxyTLSInterceptCustomCertificatePrivateKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // ProxyTLSInterceptPolicyModel represents policy block
@@ -755,38 +755,38 @@ type ProxyTLSInterceptPolicyModel struct {
 
 // ProxyTLSInterceptPolicyInterceptionRulesModel represents interception_rules block
 type ProxyTLSInterceptPolicyInterceptionRulesModel struct {
-	DisableInterception *ProxyEmptyModel `tfsdk:"disable_interception"`
-	DomainMatch *ProxyTLSInterceptPolicyInterceptionRulesDomainMatchModel `tfsdk:"domain_match"`
-	EnableInterception *ProxyEmptyModel `tfsdk:"enable_interception"`
+	DisableInterception *ProxyEmptyModel                                          `tfsdk:"disable_interception"`
+	DomainMatch         *ProxyTLSInterceptPolicyInterceptionRulesDomainMatchModel `tfsdk:"domain_match"`
+	EnableInterception  *ProxyEmptyModel                                          `tfsdk:"enable_interception"`
 }
 
 // ProxyTLSInterceptPolicyInterceptionRulesDomainMatchModel represents domain_match block
 type ProxyTLSInterceptPolicyInterceptionRulesDomainMatchModel struct {
-	ExactValue types.String `tfsdk:"exact_value"`
-	RegexValue types.String `tfsdk:"regex_value"`
+	ExactValue  types.String `tfsdk:"exact_value"`
+	RegexValue  types.String `tfsdk:"regex_value"`
 	SuffixValue types.String `tfsdk:"suffix_value"`
 }
 
 type ProxyResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	ConnectionTimeout types.Int64 `tfsdk:"connection_timeout"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Name                       types.String                          `tfsdk:"name"`
+	Namespace                  types.String                          `tfsdk:"namespace"`
+	Annotations                types.Map                             `tfsdk:"annotations"`
+	Description                types.String                          `tfsdk:"description"`
+	Disable                    types.Bool                            `tfsdk:"disable"`
+	Labels                     types.Map                             `tfsdk:"labels"`
+	ID                         types.String                          `tfsdk:"id"`
+	ConnectionTimeout          types.Int64                           `tfsdk:"connection_timeout"`
+	Timeouts                   timeouts.Value                        `tfsdk:"timeouts"`
 	ActiveForwardProxyPolicies *ProxyActiveForwardProxyPoliciesModel `tfsdk:"active_forward_proxy_policies"`
-	DoNotAdvertise *ProxyEmptyModel `tfsdk:"do_not_advertise"`
-	DynamicProxy *ProxyDynamicProxyModel `tfsdk:"dynamic_proxy"`
-	HTTPProxy *ProxyHTTPProxyModel `tfsdk:"http_proxy"`
-	NoForwardProxyPolicy *ProxyEmptyModel `tfsdk:"no_forward_proxy_policy"`
-	NoInterception *ProxyEmptyModel `tfsdk:"no_interception"`
-	SiteLocalInsideNetwork *ProxyEmptyModel `tfsdk:"site_local_inside_network"`
-	SiteLocalNetwork *ProxyEmptyModel `tfsdk:"site_local_network"`
-	SiteVirtualSites *ProxySiteVirtualSitesModel `tfsdk:"site_virtual_sites"`
-	TLSIntercept *ProxyTLSInterceptModel `tfsdk:"tls_intercept"`
+	DoNotAdvertise             *ProxyEmptyModel                      `tfsdk:"do_not_advertise"`
+	DynamicProxy               *ProxyDynamicProxyModel               `tfsdk:"dynamic_proxy"`
+	HTTPProxy                  *ProxyHTTPProxyModel                  `tfsdk:"http_proxy"`
+	NoForwardProxyPolicy       *ProxyEmptyModel                      `tfsdk:"no_forward_proxy_policy"`
+	NoInterception             *ProxyEmptyModel                      `tfsdk:"no_interception"`
+	SiteLocalInsideNetwork     *ProxyEmptyModel                      `tfsdk:"site_local_inside_network"`
+	SiteLocalNetwork           *ProxyEmptyModel                      `tfsdk:"site_local_network"`
+	SiteVirtualSites           *ProxySiteVirtualSitesModel           `tfsdk:"site_virtual_sites"`
+	TLSIntercept               *ProxyTLSInterceptModel               `tfsdk:"tls_intercept"`
 }
 
 func (r *ProxyResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -800,7 +800,7 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Proxy. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -810,7 +810,7 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the Proxy will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -820,33 +820,33 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"connection_timeout": schema.Int64Attribute{
 				MarkdownDescription: "Connection Timeout. The timeout for new network connections to upstream server. This is specified in milliseconds. The  (2 seconds). Defaults to `2000`.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{
 					int64planmodifier.UseStateForUnknown(),
 				},
@@ -861,8 +861,7 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 			}),
 			"active_forward_proxy_policies": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: active_forward_proxy_policies, no_forward_proxy_policy] Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"forward_proxy_policies": schema.ListNestedBlock{
 						MarkdownDescription: "Forward Proxy Policies. Ordered List of Forward Proxy Policies active",
@@ -870,22 +869,21 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-									Optional: true,
+									Optional:            true,
 								},
 								"namespace": schema.StringAttribute{
 									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-									Optional: true,
+									Optional:            true,
 								},
 								"tenant": schema.StringAttribute{
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-									Optional: true,
-									Computed: true,
+									Optional:            true,
+									Computed:            true,
 								},
 							},
 						},
 					},
 				},
-
 			},
 			"do_not_advertise": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: do_not_advertise, site_virtual_sites] Empty. This can be used for messages where no values are needed",
@@ -895,8 +893,8 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				Attributes: map[string]schema.Attribute{
 					"domains": schema.ListAttribute{
 						MarkdownDescription: "Domains. A list of Domains to be proxied. Wildcard hosts are supported in the suffix or prefix form Supported Domains and search order: 1. Exact Domain names: www.foo.com. 2. Domains starting with a Wildcard: *.foo.com. Not supported Domains: - Just a Wildcard: * - A Wildcard and TLD with no root Domain: *.com. - A Wildcard not matching a whole DNS label. e.g. *.foo.com and *.bar.foo.com are valid Wildcards however *bar.foo.com, *-bar.foo.com, and bar*.foo.com are all invalid. Additional notes: A Wildcard will not match empty string. e.g. *.foo.com will match bar.foo.com and baz-bar.foo.com but not .foo.com. The longest Wildcards match first. Only a single virtual host in the entire route configuration can match on *. Also a Domain must be unique across all virtual hosts within an advertise policy.",
-						Optional: true,
-						ElementType: types.StringType,
+						Optional:            true,
+						ElementType:         types.StringType,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -908,43 +906,42 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 					},
 					"http_proxy": schema.SingleNestedBlock{
 						MarkdownDescription: "Dynamic HTTP Proxy Type. Parameters for dynamic HTTP proxy",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"more_option": schema.SingleNestedBlock{
 								MarkdownDescription: "Advanced Options. This defines various options to define a route",
 								Attributes: map[string]schema.Attribute{
 									"disable_default_error_pages": schema.BoolAttribute{
 										MarkdownDescription: "Disable Default Error Pages. Disable the use of default F5XC error pages.",
-										Optional: true,
+										Optional:            true,
 									},
 									"idle_timeout": schema.Int64Attribute{
 										MarkdownDescription: "Idle Timeout. The amount of time that a stream can exist without upstream or downstream activity, in milliseconds. The stream is terminated with a HTTP 504 (Gateway Timeout) error code if no upstream response header has been received, otherwise the stream is reset.",
-										Optional: true,
+										Optional:            true,
 									},
 									"max_request_header_size": schema.Int64Attribute{
 										MarkdownDescription: "Maximum Request Header Size. The maximum request header size for downstream connections, in KiB. A HTTP 431 (Request Header Fields Too Large) error code is sent for requests that exceed this size. If multiple load balancers share the same advertise_policy, the highest value configured across all such load balancers is used for all the load balancers in question.",
-										Optional: true,
+										Optional:            true,
 									},
 									"request_cookies_to_remove": schema.ListAttribute{
 										MarkdownDescription: "Remove Cookies from Cookie Header. List of keys of Cookies to be removed from the HTTP request being sent towards upstream.",
-										Optional: true,
-										ElementType: types.StringType,
+										Optional:            true,
+										ElementType:         types.StringType,
 									},
 									"request_headers_to_remove": schema.ListAttribute{
 										MarkdownDescription: "Remove Request Headers. List of keys of Headers to be removed from the HTTP request being sent towards upstream.",
-										Optional: true,
-										ElementType: types.StringType,
+										Optional:            true,
+										ElementType:         types.StringType,
 									},
 									"response_cookies_to_remove": schema.ListAttribute{
 										MarkdownDescription: "Remove Cookies from Set-Cookie Headers. List of name of Cookies to be removed from the HTTP response being sent towards downstream. Entire set-cookie header will be removed",
-										Optional: true,
-										ElementType: types.StringType,
+										Optional:            true,
+										ElementType:         types.StringType,
 									},
 									"response_headers_to_remove": schema.ListAttribute{
 										MarkdownDescription: "Remove Response Headers. List of keys of Headers to be removed from the HTTP response being sent towards downstream.",
-										Optional: true,
-										ElementType: types.StringType,
+										Optional:            true,
+										ElementType:         types.StringType,
 									},
 								},
 								Blocks: map[string]schema.Block{
@@ -953,11 +950,11 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 										Attributes: map[string]schema.Attribute{
 											"disabled": schema.BoolAttribute{
 												MarkdownDescription: "Disable. Disable buffering for a particular route. This is useful when virtual-host has buffering, but we need to disable it on a specific route. The value of this field is ignored for virtual-host",
-												Optional: true,
+												Optional:            true,
 											},
 											"max_request_bytes": schema.Int64Attribute{
 												MarkdownDescription: "Max Request Bytes. The maximum request size that the filter will buffer before the connection manager will stop buffering and return a RequestEntityTooLarge (413) response.",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -966,20 +963,20 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 										Attributes: map[string]schema.Attribute{
 											"content_length": schema.Int64Attribute{
 												MarkdownDescription: "Content Length. Minimum response length, in bytes, which will trigger compression. The. Defaults to `30`.",
-												Optional: true,
+												Optional:            true,
 											},
 											"content_type": schema.ListAttribute{
 												MarkdownDescription: "Content Type. Set of strings that allows specifying which mime-types yield compression When this field is not defined, compression will be applied to the following mime-types: 'application/javascript' 'application/json', 'application/xhtml+xml' 'image/svg+xml' 'text/css' 'text/html' 'text/plain' 'text/xml'",
-												Optional: true,
-												ElementType: types.StringType,
+												Optional:            true,
+												ElementType:         types.StringType,
 											},
 											"disable_on_etag_header": schema.BoolAttribute{
 												MarkdownDescription: "Disable On Etag Header. If true, disables compression when the response contains an etag header. When it is false, weak etags will be preserved and the ones that require strong validation will be removed.",
-												Optional: true,
+												Optional:            true,
 											},
 											"remove_accept_encoding_header": schema.BoolAttribute{
 												MarkdownDescription: "Remove Accept-Encoding Header. If true, removes accept-encoding from the request headers before dispatching it to the upstream so that responses do not get compressed before reaching the filter.",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -998,37 +995,36 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
 													MarkdownDescription: "Name. Name of the cookie in Cookie header.",
-													Optional: true,
+													Optional:            true,
 												},
 												"overwrite": schema.BoolAttribute{
 													MarkdownDescription: "Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values.  not overwrite. Defaults to `do`.",
-													Optional: true,
+													Optional:            true,
 												},
 												"value": schema.StringAttribute{
 													MarkdownDescription: "Value. Value of the Cookie header.",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 											Blocks: map[string]schema.Block{
 												"secret_value": schema.SingleNestedBlock{
 													MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-													Attributes: map[string]schema.Attribute{
-													},
+													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"blindfold_secret_info": schema.SingleNestedBlock{
 															MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 															Attributes: map[string]schema.Attribute{
 																"decryption_provider": schema.StringAttribute{
 																	MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"location": schema.StringAttribute{
 																	MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"store_provider": schema.StringAttribute{
 																	MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																	Optional: true,
+																	Optional:            true,
 																},
 															},
 														},
@@ -1037,11 +1033,11 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 															Attributes: map[string]schema.Attribute{
 																"provider_ref": schema.StringAttribute{
 																	MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"url": schema.StringAttribute{
 																	MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-																	Optional: true,
+																	Optional:            true,
 																},
 															},
 														},
@@ -1056,37 +1052,36 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 											Attributes: map[string]schema.Attribute{
 												"append": schema.BoolAttribute{
 													MarkdownDescription: "Append. Should the value be appended? If true, the value is appended to existing values.  not append. Defaults to `do`.",
-													Optional: true,
+													Optional:            true,
 												},
 												"name": schema.StringAttribute{
 													MarkdownDescription: "Name. Name of the HTTP header.",
-													Optional: true,
+													Optional:            true,
 												},
 												"value": schema.StringAttribute{
 													MarkdownDescription: "Value. Value of the HTTP header.",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 											Blocks: map[string]schema.Block{
 												"secret_value": schema.SingleNestedBlock{
 													MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-													Attributes: map[string]schema.Attribute{
-													},
+													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"blindfold_secret_info": schema.SingleNestedBlock{
 															MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 															Attributes: map[string]schema.Attribute{
 																"decryption_provider": schema.StringAttribute{
 																	MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"location": schema.StringAttribute{
 																	MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"store_provider": schema.StringAttribute{
 																	MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																	Optional: true,
+																	Optional:            true,
 																},
 															},
 														},
@@ -1095,11 +1090,11 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 															Attributes: map[string]schema.Attribute{
 																"provider_ref": schema.StringAttribute{
 																	MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"url": schema.StringAttribute{
 																	MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-																	Optional: true,
+																	Optional:            true,
 																},
 															},
 														},
@@ -1114,31 +1109,31 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 											Attributes: map[string]schema.Attribute{
 												"add_domain": schema.StringAttribute{
 													MarkdownDescription: "Add Domain. Add domain attribute",
-													Optional: true,
+													Optional:            true,
 												},
 												"add_expiry": schema.StringAttribute{
 													MarkdownDescription: "Add expiry. Add expiry attribute",
-													Optional: true,
+													Optional:            true,
 												},
 												"add_path": schema.StringAttribute{
 													MarkdownDescription: "Add path. Add path attribute",
-													Optional: true,
+													Optional:            true,
 												},
 												"max_age_value": schema.Int64Attribute{
 													MarkdownDescription: "Add Max Age. Add max age attribute",
-													Optional: true,
+													Optional:            true,
 												},
 												"name": schema.StringAttribute{
 													MarkdownDescription: "Name. Name of the cookie in Cookie header.",
-													Optional: true,
+													Optional:            true,
 												},
 												"overwrite": schema.BoolAttribute{
 													MarkdownDescription: "Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values.  not overwrite. Defaults to `do`.",
-													Optional: true,
+													Optional:            true,
 												},
 												"value": schema.StringAttribute{
 													MarkdownDescription: "Value. Value of the Cookie header.",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -1189,23 +1184,22 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 												},
 												"secret_value": schema.SingleNestedBlock{
 													MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-													Attributes: map[string]schema.Attribute{
-													},
+													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"blindfold_secret_info": schema.SingleNestedBlock{
 															MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 															Attributes: map[string]schema.Attribute{
 																"decryption_provider": schema.StringAttribute{
 																	MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"location": schema.StringAttribute{
 																	MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"store_provider": schema.StringAttribute{
 																	MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																	Optional: true,
+																	Optional:            true,
 																},
 															},
 														},
@@ -1214,11 +1208,11 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 															Attributes: map[string]schema.Attribute{
 																"provider_ref": schema.StringAttribute{
 																	MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"url": schema.StringAttribute{
 																	MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-																	Optional: true,
+																	Optional:            true,
 																},
 															},
 														},
@@ -1233,37 +1227,36 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 											Attributes: map[string]schema.Attribute{
 												"append": schema.BoolAttribute{
 													MarkdownDescription: "Append. Should the value be appended? If true, the value is appended to existing values.  not append. Defaults to `do`.",
-													Optional: true,
+													Optional:            true,
 												},
 												"name": schema.StringAttribute{
 													MarkdownDescription: "Name. Name of the HTTP header.",
-													Optional: true,
+													Optional:            true,
 												},
 												"value": schema.StringAttribute{
 													MarkdownDescription: "Value. Value of the HTTP header.",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 											Blocks: map[string]schema.Block{
 												"secret_value": schema.SingleNestedBlock{
 													MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-													Attributes: map[string]schema.Attribute{
-													},
+													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"blindfold_secret_info": schema.SingleNestedBlock{
 															MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 															Attributes: map[string]schema.Attribute{
 																"decryption_provider": schema.StringAttribute{
 																	MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"location": schema.StringAttribute{
 																	MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"store_provider": schema.StringAttribute{
 																	MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																	Optional: true,
+																	Optional:            true,
 																},
 															},
 														},
@@ -1272,11 +1265,11 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 															Attributes: map[string]schema.Attribute{
 																"provider_ref": schema.StringAttribute{
 																	MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"url": schema.StringAttribute{
 																	MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-																	Optional: true,
+																	Optional:            true,
 																},
 															},
 														},
@@ -1291,43 +1284,42 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 					},
 					"https_proxy": schema.SingleNestedBlock{
 						MarkdownDescription: "Dynamic HTTPS Proxy Type. Parameters for dynamic HTTPS proxy",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"more_option": schema.SingleNestedBlock{
 								MarkdownDescription: "Advanced Options. This defines various options to define a route",
 								Attributes: map[string]schema.Attribute{
 									"disable_default_error_pages": schema.BoolAttribute{
 										MarkdownDescription: "Disable Default Error Pages. Disable the use of default F5XC error pages.",
-										Optional: true,
+										Optional:            true,
 									},
 									"idle_timeout": schema.Int64Attribute{
 										MarkdownDescription: "Idle Timeout. The amount of time that a stream can exist without upstream or downstream activity, in milliseconds. The stream is terminated with a HTTP 504 (Gateway Timeout) error code if no upstream response header has been received, otherwise the stream is reset.",
-										Optional: true,
+										Optional:            true,
 									},
 									"max_request_header_size": schema.Int64Attribute{
 										MarkdownDescription: "Maximum Request Header Size. The maximum request header size for downstream connections, in KiB. A HTTP 431 (Request Header Fields Too Large) error code is sent for requests that exceed this size. If multiple load balancers share the same advertise_policy, the highest value configured across all such load balancers is used for all the load balancers in question.",
-										Optional: true,
+										Optional:            true,
 									},
 									"request_cookies_to_remove": schema.ListAttribute{
 										MarkdownDescription: "Remove Cookies from Cookie Header. List of keys of Cookies to be removed from the HTTP request being sent towards upstream.",
-										Optional: true,
-										ElementType: types.StringType,
+										Optional:            true,
+										ElementType:         types.StringType,
 									},
 									"request_headers_to_remove": schema.ListAttribute{
 										MarkdownDescription: "Remove Request Headers. List of keys of Headers to be removed from the HTTP request being sent towards upstream.",
-										Optional: true,
-										ElementType: types.StringType,
+										Optional:            true,
+										ElementType:         types.StringType,
 									},
 									"response_cookies_to_remove": schema.ListAttribute{
 										MarkdownDescription: "Remove Cookies from Set-Cookie Headers. List of name of Cookies to be removed from the HTTP response being sent towards downstream. Entire set-cookie header will be removed",
-										Optional: true,
-										ElementType: types.StringType,
+										Optional:            true,
+										ElementType:         types.StringType,
 									},
 									"response_headers_to_remove": schema.ListAttribute{
 										MarkdownDescription: "Remove Response Headers. List of keys of Headers to be removed from the HTTP response being sent towards downstream.",
-										Optional: true,
-										ElementType: types.StringType,
+										Optional:            true,
+										ElementType:         types.StringType,
 									},
 								},
 								Blocks: map[string]schema.Block{
@@ -1336,11 +1328,11 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 										Attributes: map[string]schema.Attribute{
 											"disabled": schema.BoolAttribute{
 												MarkdownDescription: "Disable. Disable buffering for a particular route. This is useful when virtual-host has buffering, but we need to disable it on a specific route. The value of this field is ignored for virtual-host",
-												Optional: true,
+												Optional:            true,
 											},
 											"max_request_bytes": schema.Int64Attribute{
 												MarkdownDescription: "Max Request Bytes. The maximum request size that the filter will buffer before the connection manager will stop buffering and return a RequestEntityTooLarge (413) response.",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -1349,20 +1341,20 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 										Attributes: map[string]schema.Attribute{
 											"content_length": schema.Int64Attribute{
 												MarkdownDescription: "Content Length. Minimum response length, in bytes, which will trigger compression. The. Defaults to `30`.",
-												Optional: true,
+												Optional:            true,
 											},
 											"content_type": schema.ListAttribute{
 												MarkdownDescription: "Content Type. Set of strings that allows specifying which mime-types yield compression When this field is not defined, compression will be applied to the following mime-types: 'application/javascript' 'application/json', 'application/xhtml+xml' 'image/svg+xml' 'text/css' 'text/html' 'text/plain' 'text/xml'",
-												Optional: true,
-												ElementType: types.StringType,
+												Optional:            true,
+												ElementType:         types.StringType,
 											},
 											"disable_on_etag_header": schema.BoolAttribute{
 												MarkdownDescription: "Disable On Etag Header. If true, disables compression when the response contains an etag header. When it is false, weak etags will be preserved and the ones that require strong validation will be removed.",
-												Optional: true,
+												Optional:            true,
 											},
 											"remove_accept_encoding_header": schema.BoolAttribute{
 												MarkdownDescription: "Remove Accept-Encoding Header. If true, removes accept-encoding from the request headers before dispatching it to the upstream so that responses do not get compressed before reaching the filter.",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -1381,37 +1373,36 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
 													MarkdownDescription: "Name. Name of the cookie in Cookie header.",
-													Optional: true,
+													Optional:            true,
 												},
 												"overwrite": schema.BoolAttribute{
 													MarkdownDescription: "Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values.  not overwrite. Defaults to `do`.",
-													Optional: true,
+													Optional:            true,
 												},
 												"value": schema.StringAttribute{
 													MarkdownDescription: "Value. Value of the Cookie header.",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 											Blocks: map[string]schema.Block{
 												"secret_value": schema.SingleNestedBlock{
 													MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-													Attributes: map[string]schema.Attribute{
-													},
+													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"blindfold_secret_info": schema.SingleNestedBlock{
 															MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 															Attributes: map[string]schema.Attribute{
 																"decryption_provider": schema.StringAttribute{
 																	MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"location": schema.StringAttribute{
 																	MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"store_provider": schema.StringAttribute{
 																	MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																	Optional: true,
+																	Optional:            true,
 																},
 															},
 														},
@@ -1420,11 +1411,11 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 															Attributes: map[string]schema.Attribute{
 																"provider_ref": schema.StringAttribute{
 																	MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"url": schema.StringAttribute{
 																	MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-																	Optional: true,
+																	Optional:            true,
 																},
 															},
 														},
@@ -1439,37 +1430,36 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 											Attributes: map[string]schema.Attribute{
 												"append": schema.BoolAttribute{
 													MarkdownDescription: "Append. Should the value be appended? If true, the value is appended to existing values.  not append. Defaults to `do`.",
-													Optional: true,
+													Optional:            true,
 												},
 												"name": schema.StringAttribute{
 													MarkdownDescription: "Name. Name of the HTTP header.",
-													Optional: true,
+													Optional:            true,
 												},
 												"value": schema.StringAttribute{
 													MarkdownDescription: "Value. Value of the HTTP header.",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 											Blocks: map[string]schema.Block{
 												"secret_value": schema.SingleNestedBlock{
 													MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-													Attributes: map[string]schema.Attribute{
-													},
+													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"blindfold_secret_info": schema.SingleNestedBlock{
 															MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 															Attributes: map[string]schema.Attribute{
 																"decryption_provider": schema.StringAttribute{
 																	MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"location": schema.StringAttribute{
 																	MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"store_provider": schema.StringAttribute{
 																	MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																	Optional: true,
+																	Optional:            true,
 																},
 															},
 														},
@@ -1478,11 +1468,11 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 															Attributes: map[string]schema.Attribute{
 																"provider_ref": schema.StringAttribute{
 																	MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"url": schema.StringAttribute{
 																	MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-																	Optional: true,
+																	Optional:            true,
 																},
 															},
 														},
@@ -1497,31 +1487,31 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 											Attributes: map[string]schema.Attribute{
 												"add_domain": schema.StringAttribute{
 													MarkdownDescription: "Add Domain. Add domain attribute",
-													Optional: true,
+													Optional:            true,
 												},
 												"add_expiry": schema.StringAttribute{
 													MarkdownDescription: "Add expiry. Add expiry attribute",
-													Optional: true,
+													Optional:            true,
 												},
 												"add_path": schema.StringAttribute{
 													MarkdownDescription: "Add path. Add path attribute",
-													Optional: true,
+													Optional:            true,
 												},
 												"max_age_value": schema.Int64Attribute{
 													MarkdownDescription: "Add Max Age. Add max age attribute",
-													Optional: true,
+													Optional:            true,
 												},
 												"name": schema.StringAttribute{
 													MarkdownDescription: "Name. Name of the cookie in Cookie header.",
-													Optional: true,
+													Optional:            true,
 												},
 												"overwrite": schema.BoolAttribute{
 													MarkdownDescription: "Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values.  not overwrite. Defaults to `do`.",
-													Optional: true,
+													Optional:            true,
 												},
 												"value": schema.StringAttribute{
 													MarkdownDescription: "Value. Value of the Cookie header.",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -1572,23 +1562,22 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 												},
 												"secret_value": schema.SingleNestedBlock{
 													MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-													Attributes: map[string]schema.Attribute{
-													},
+													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"blindfold_secret_info": schema.SingleNestedBlock{
 															MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 															Attributes: map[string]schema.Attribute{
 																"decryption_provider": schema.StringAttribute{
 																	MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"location": schema.StringAttribute{
 																	MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"store_provider": schema.StringAttribute{
 																	MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																	Optional: true,
+																	Optional:            true,
 																},
 															},
 														},
@@ -1597,11 +1586,11 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 															Attributes: map[string]schema.Attribute{
 																"provider_ref": schema.StringAttribute{
 																	MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"url": schema.StringAttribute{
 																	MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-																	Optional: true,
+																	Optional:            true,
 																},
 															},
 														},
@@ -1616,37 +1605,36 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 											Attributes: map[string]schema.Attribute{
 												"append": schema.BoolAttribute{
 													MarkdownDescription: "Append. Should the value be appended? If true, the value is appended to existing values.  not append. Defaults to `do`.",
-													Optional: true,
+													Optional:            true,
 												},
 												"name": schema.StringAttribute{
 													MarkdownDescription: "Name. Name of the HTTP header.",
-													Optional: true,
+													Optional:            true,
 												},
 												"value": schema.StringAttribute{
 													MarkdownDescription: "Value. Value of the HTTP header.",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 											Blocks: map[string]schema.Block{
 												"secret_value": schema.SingleNestedBlock{
 													MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-													Attributes: map[string]schema.Attribute{
-													},
+													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"blindfold_secret_info": schema.SingleNestedBlock{
 															MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 															Attributes: map[string]schema.Attribute{
 																"decryption_provider": schema.StringAttribute{
 																	MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"location": schema.StringAttribute{
 																	MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"store_provider": schema.StringAttribute{
 																	MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																	Optional: true,
+																	Optional:            true,
 																},
 															},
 														},
@@ -1655,11 +1643,11 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 															Attributes: map[string]schema.Attribute{
 																"provider_ref": schema.StringAttribute{
 																	MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"url": schema.StringAttribute{
 																	MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-																	Optional: true,
+																	Optional:            true,
 																},
 															},
 														},
@@ -1672,8 +1660,7 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 							},
 							"tls_params": schema.SingleNestedBlock{
 								MarkdownDescription: "Inline TLS Parameters. Inline TLS parameters",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"no_mtls": schema.SingleNestedBlock{
 										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -1684,11 +1671,11 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 											Attributes: map[string]schema.Attribute{
 												"certificate_url": schema.StringAttribute{
 													MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
-													Optional: true,
+													Optional:            true,
 												},
 												"description_spec": schema.StringAttribute{
 													MarkdownDescription: "Description. Description for the certificate",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -1697,8 +1684,8 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 													Attributes: map[string]schema.Attribute{
 														"hash_algorithms": schema.ListAttribute{
 															MarkdownDescription: "Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM`.",
-															Optional: true,
-															ElementType: types.StringType,
+															Optional:            true,
+															ElementType:         types.StringType,
 														},
 													},
 												},
@@ -1707,23 +1694,22 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 												},
 												"private_key": schema.SingleNestedBlock{
 													MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-													Attributes: map[string]schema.Attribute{
-													},
+													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"blindfold_secret_info": schema.SingleNestedBlock{
 															MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 															Attributes: map[string]schema.Attribute{
 																"decryption_provider": schema.StringAttribute{
 																	MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"location": schema.StringAttribute{
 																	MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"store_provider": schema.StringAttribute{
 																	MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																	Optional: true,
+																	Optional:            true,
 																},
 															},
 														},
@@ -1732,11 +1718,11 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 															Attributes: map[string]schema.Attribute{
 																"provider_ref": schema.StringAttribute{
 																	MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"url": schema.StringAttribute{
 																	MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-																	Optional: true,
+																	Optional:            true,
 																},
 															},
 														},
@@ -1750,24 +1736,23 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									},
 									"tls_config": schema.SingleNestedBlock{
 										MarkdownDescription: "TLS Config. This defines various options to configure TLS configuration parameters",
-										Attributes: map[string]schema.Attribute{
-										},
+										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"custom_security": schema.SingleNestedBlock{
 												MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers",
 												Attributes: map[string]schema.Attribute{
 													"cipher_suites": schema.ListAttribute{
 														MarkdownDescription: "Cipher Suites. The TLS listener will only support the specified cipher list.",
-														Optional: true,
-														ElementType: types.StringType,
+														Optional:            true,
+														ElementType:         types.StringType,
 													},
 													"max_version": schema.StringAttribute{
 														MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
-														Optional: true,
+														Optional:            true,
 													},
 													"min_version": schema.StringAttribute{
 														MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 											},
@@ -1787,11 +1772,11 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 										Attributes: map[string]schema.Attribute{
 											"client_certificate_optional": schema.BoolAttribute{
 												MarkdownDescription: "Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted.",
-												Optional: true,
+												Optional:            true,
 											},
 											"trusted_ca_url": schema.StringAttribute{
 												MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 										Blocks: map[string]schema.Block{
@@ -1800,16 +1785,16 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 												Attributes: map[string]schema.Attribute{
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-														Optional: true,
+														Optional:            true,
 													},
 													"namespace": schema.StringAttribute{
 														MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-														Optional: true,
+														Optional:            true,
 													},
 													"tenant": schema.StringAttribute{
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-														Optional: true,
-														Computed: true,
+														Optional:            true,
+														Computed:            true,
 													},
 												},
 											},
@@ -1821,16 +1806,16 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 												Attributes: map[string]schema.Attribute{
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-														Optional: true,
+														Optional:            true,
 													},
 													"namespace": schema.StringAttribute{
 														MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-														Optional: true,
+														Optional:            true,
 													},
 													"tenant": schema.StringAttribute{
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-														Optional: true,
-														Computed: true,
+														Optional:            true,
+														Computed:            true,
 													},
 												},
 											},
@@ -1842,8 +1827,8 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 												Attributes: map[string]schema.Attribute{
 													"xfcc_header_elements": schema.ListAttribute{
 														MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
-														Optional: true,
-														ElementType: types.StringType,
+														Optional:            true,
+														ElementType:         types.StringType,
 													},
 												},
 											},
@@ -1858,17 +1843,15 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 						Attributes: map[string]schema.Attribute{
 							"idle_timeout": schema.Int64Attribute{
 								MarkdownDescription: "Idle Timeout. The amount of time that a stream can exist without upstream or downstream activity, in milliseconds.",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 					},
 				},
-
 			},
 			"http_proxy": schema.SingleNestedBlock{
 				MarkdownDescription: "Http Connect Proxy. Parameters for Http Connect Proxy",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"enable_http": schema.SingleNestedBlock{
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -1878,35 +1861,35 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 						Attributes: map[string]schema.Attribute{
 							"disable_default_error_pages": schema.BoolAttribute{
 								MarkdownDescription: "Disable Default Error Pages. Disable the use of default F5XC error pages.",
-								Optional: true,
+								Optional:            true,
 							},
 							"idle_timeout": schema.Int64Attribute{
 								MarkdownDescription: "Idle Timeout. The amount of time that a stream can exist without upstream or downstream activity, in milliseconds. The stream is terminated with a HTTP 504 (Gateway Timeout) error code if no upstream response header has been received, otherwise the stream is reset.",
-								Optional: true,
+								Optional:            true,
 							},
 							"max_request_header_size": schema.Int64Attribute{
 								MarkdownDescription: "Maximum Request Header Size. The maximum request header size for downstream connections, in KiB. A HTTP 431 (Request Header Fields Too Large) error code is sent for requests that exceed this size. If multiple load balancers share the same advertise_policy, the highest value configured across all such load balancers is used for all the load balancers in question.",
-								Optional: true,
+								Optional:            true,
 							},
 							"request_cookies_to_remove": schema.ListAttribute{
 								MarkdownDescription: "Remove Cookies from Cookie Header. List of keys of Cookies to be removed from the HTTP request being sent towards upstream.",
-								Optional: true,
-								ElementType: types.StringType,
+								Optional:            true,
+								ElementType:         types.StringType,
 							},
 							"request_headers_to_remove": schema.ListAttribute{
 								MarkdownDescription: "Remove Request Headers. List of keys of Headers to be removed from the HTTP request being sent towards upstream.",
-								Optional: true,
-								ElementType: types.StringType,
+								Optional:            true,
+								ElementType:         types.StringType,
 							},
 							"response_cookies_to_remove": schema.ListAttribute{
 								MarkdownDescription: "Remove Cookies from Set-Cookie Headers. List of name of Cookies to be removed from the HTTP response being sent towards downstream. Entire set-cookie header will be removed",
-								Optional: true,
-								ElementType: types.StringType,
+								Optional:            true,
+								ElementType:         types.StringType,
 							},
 							"response_headers_to_remove": schema.ListAttribute{
 								MarkdownDescription: "Remove Response Headers. List of keys of Headers to be removed from the HTTP response being sent towards downstream.",
-								Optional: true,
-								ElementType: types.StringType,
+								Optional:            true,
+								ElementType:         types.StringType,
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -1915,11 +1898,11 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 								Attributes: map[string]schema.Attribute{
 									"disabled": schema.BoolAttribute{
 										MarkdownDescription: "Disable. Disable buffering for a particular route. This is useful when virtual-host has buffering, but we need to disable it on a specific route. The value of this field is ignored for virtual-host",
-										Optional: true,
+										Optional:            true,
 									},
 									"max_request_bytes": schema.Int64Attribute{
 										MarkdownDescription: "Max Request Bytes. The maximum request size that the filter will buffer before the connection manager will stop buffering and return a RequestEntityTooLarge (413) response.",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -1928,20 +1911,20 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 								Attributes: map[string]schema.Attribute{
 									"content_length": schema.Int64Attribute{
 										MarkdownDescription: "Content Length. Minimum response length, in bytes, which will trigger compression. The. Defaults to `30`.",
-										Optional: true,
+										Optional:            true,
 									},
 									"content_type": schema.ListAttribute{
 										MarkdownDescription: "Content Type. Set of strings that allows specifying which mime-types yield compression When this field is not defined, compression will be applied to the following mime-types: 'application/javascript' 'application/json', 'application/xhtml+xml' 'image/svg+xml' 'text/css' 'text/html' 'text/plain' 'text/xml'",
-										Optional: true,
-										ElementType: types.StringType,
+										Optional:            true,
+										ElementType:         types.StringType,
 									},
 									"disable_on_etag_header": schema.BoolAttribute{
 										MarkdownDescription: "Disable On Etag Header. If true, disables compression when the response contains an etag header. When it is false, weak etags will be preserved and the ones that require strong validation will be removed.",
-										Optional: true,
+										Optional:            true,
 									},
 									"remove_accept_encoding_header": schema.BoolAttribute{
 										MarkdownDescription: "Remove Accept-Encoding Header. If true, removes accept-encoding from the request headers before dispatching it to the upstream so that responses do not get compressed before reaching the filter.",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -1960,37 +1943,36 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. Name of the cookie in Cookie header.",
-											Optional: true,
+											Optional:            true,
 										},
 										"overwrite": schema.BoolAttribute{
 											MarkdownDescription: "Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values.  not overwrite. Defaults to `do`.",
-											Optional: true,
+											Optional:            true,
 										},
 										"value": schema.StringAttribute{
 											MarkdownDescription: "Value. Value of the Cookie header.",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"secret_value": schema.SingleNestedBlock{
 											MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"blindfold_secret_info": schema.SingleNestedBlock{
 													MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 													Attributes: map[string]schema.Attribute{
 														"decryption_provider": schema.StringAttribute{
 															MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-															Optional: true,
+															Optional:            true,
 														},
 														"location": schema.StringAttribute{
 															MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-															Optional: true,
+															Optional:            true,
 														},
 														"store_provider": schema.StringAttribute{
 															MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -1999,11 +1981,11 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 													Attributes: map[string]schema.Attribute{
 														"provider_ref": schema.StringAttribute{
 															MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-															Optional: true,
+															Optional:            true,
 														},
 														"url": schema.StringAttribute{
 															MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -2018,37 +2000,36 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									Attributes: map[string]schema.Attribute{
 										"append": schema.BoolAttribute{
 											MarkdownDescription: "Append. Should the value be appended? If true, the value is appended to existing values.  not append. Defaults to `do`.",
-											Optional: true,
+											Optional:            true,
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. Name of the HTTP header.",
-											Optional: true,
+											Optional:            true,
 										},
 										"value": schema.StringAttribute{
 											MarkdownDescription: "Value. Value of the HTTP header.",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"secret_value": schema.SingleNestedBlock{
 											MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"blindfold_secret_info": schema.SingleNestedBlock{
 													MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 													Attributes: map[string]schema.Attribute{
 														"decryption_provider": schema.StringAttribute{
 															MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-															Optional: true,
+															Optional:            true,
 														},
 														"location": schema.StringAttribute{
 															MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-															Optional: true,
+															Optional:            true,
 														},
 														"store_provider": schema.StringAttribute{
 															MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -2057,11 +2038,11 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 													Attributes: map[string]schema.Attribute{
 														"provider_ref": schema.StringAttribute{
 															MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-															Optional: true,
+															Optional:            true,
 														},
 														"url": schema.StringAttribute{
 															MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -2076,31 +2057,31 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									Attributes: map[string]schema.Attribute{
 										"add_domain": schema.StringAttribute{
 											MarkdownDescription: "Add Domain. Add domain attribute",
-											Optional: true,
+											Optional:            true,
 										},
 										"add_expiry": schema.StringAttribute{
 											MarkdownDescription: "Add expiry. Add expiry attribute",
-											Optional: true,
+											Optional:            true,
 										},
 										"add_path": schema.StringAttribute{
 											MarkdownDescription: "Add path. Add path attribute",
-											Optional: true,
+											Optional:            true,
 										},
 										"max_age_value": schema.Int64Attribute{
 											MarkdownDescription: "Add Max Age. Add max age attribute",
-											Optional: true,
+											Optional:            true,
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. Name of the cookie in Cookie header.",
-											Optional: true,
+											Optional:            true,
 										},
 										"overwrite": schema.BoolAttribute{
 											MarkdownDescription: "Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values.  not overwrite. Defaults to `do`.",
-											Optional: true,
+											Optional:            true,
 										},
 										"value": schema.StringAttribute{
 											MarkdownDescription: "Value. Value of the Cookie header.",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -2151,23 +2132,22 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 										},
 										"secret_value": schema.SingleNestedBlock{
 											MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"blindfold_secret_info": schema.SingleNestedBlock{
 													MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 													Attributes: map[string]schema.Attribute{
 														"decryption_provider": schema.StringAttribute{
 															MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-															Optional: true,
+															Optional:            true,
 														},
 														"location": schema.StringAttribute{
 															MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-															Optional: true,
+															Optional:            true,
 														},
 														"store_provider": schema.StringAttribute{
 															MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -2176,11 +2156,11 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 													Attributes: map[string]schema.Attribute{
 														"provider_ref": schema.StringAttribute{
 															MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-															Optional: true,
+															Optional:            true,
 														},
 														"url": schema.StringAttribute{
 															MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -2195,37 +2175,36 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									Attributes: map[string]schema.Attribute{
 										"append": schema.BoolAttribute{
 											MarkdownDescription: "Append. Should the value be appended? If true, the value is appended to existing values.  not append. Defaults to `do`.",
-											Optional: true,
+											Optional:            true,
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. Name of the HTTP header.",
-											Optional: true,
+											Optional:            true,
 										},
 										"value": schema.StringAttribute{
 											MarkdownDescription: "Value. Value of the HTTP header.",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"secret_value": schema.SingleNestedBlock{
 											MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"blindfold_secret_info": schema.SingleNestedBlock{
 													MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 													Attributes: map[string]schema.Attribute{
 														"decryption_provider": schema.StringAttribute{
 															MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-															Optional: true,
+															Optional:            true,
 														},
 														"location": schema.StringAttribute{
 															MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-															Optional: true,
+															Optional:            true,
 														},
 														"store_provider": schema.StringAttribute{
 															MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -2234,11 +2213,11 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 													Attributes: map[string]schema.Attribute{
 														"provider_ref": schema.StringAttribute{
 															MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-															Optional: true,
+															Optional:            true,
 														},
 														"url": schema.StringAttribute{
 															MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -2250,7 +2229,6 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 						},
 					},
 				},
-
 			},
 			"no_forward_proxy_policy": schema.SingleNestedBlock{
 				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -2266,8 +2244,7 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 			},
 			"site_virtual_sites": schema.SingleNestedBlock{
 				MarkdownDescription: "Advertise Site or Virtual Site. This defines a way to advertise a VIP on specific sites",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"advertise_where": schema.ListNestedBlock{
 						MarkdownDescription: "List of Sites to Advertise. Where should this load balancer be available",
@@ -2275,7 +2252,7 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 							Attributes: map[string]schema.Attribute{
 								"port": schema.Int64Attribute{
 									MarkdownDescription: "TCP Listen Port. TCP port to Listen.",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
@@ -2284,11 +2261,11 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									Attributes: map[string]schema.Attribute{
 										"ip": schema.StringAttribute{
 											MarkdownDescription: "IP Address. Use given IP address as VIP on the site",
-											Optional: true,
+											Optional:            true,
 										},
 										"network": schema.StringAttribute{
 											MarkdownDescription: "Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. vK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network. Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`. Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE`.",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -2297,16 +2274,16 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
 													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-													Optional: true,
+													Optional:            true,
 												},
 												"namespace": schema.StringAttribute{
 													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-													Optional: true,
+													Optional:            true,
 												},
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-													Optional: true,
-													Computed: true,
+													Optional:            true,
+													Computed:            true,
 												},
 											},
 										},
@@ -2320,7 +2297,7 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									Attributes: map[string]schema.Attribute{
 										"network": schema.StringAttribute{
 											MarkdownDescription: "Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. vK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network. Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`. Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE`.",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -2329,16 +2306,16 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
 													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-													Optional: true,
+													Optional:            true,
 												},
 												"namespace": schema.StringAttribute{
 													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-													Optional: true,
+													Optional:            true,
 												},
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-													Optional: true,
-													Computed: true,
+													Optional:            true,
+													Computed:            true,
 												},
 											},
 										},
@@ -2348,14 +2325,13 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 						},
 					},
 				},
-
 			},
 			"tls_intercept": schema.SingleNestedBlock{
 				MarkdownDescription: "Configuration for TLS interception. Configuration to enable TLS interception",
 				Attributes: map[string]schema.Attribute{
 					"trusted_ca_url": schema.StringAttribute{
 						MarkdownDescription: "Custom Root CA Certificate. Custom Root CA Certificate for validating upstream server certificate",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -2364,11 +2340,11 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 						Attributes: map[string]schema.Attribute{
 							"certificate_url": schema.StringAttribute{
 								MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
-								Optional: true,
+								Optional:            true,
 							},
 							"description_spec": schema.StringAttribute{
 								MarkdownDescription: "Description. Description for the certificate",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -2377,8 +2353,8 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 								Attributes: map[string]schema.Attribute{
 									"hash_algorithms": schema.ListAttribute{
 										MarkdownDescription: "Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM`.",
-										Optional: true,
-										ElementType: types.StringType,
+										Optional:            true,
+										ElementType:         types.StringType,
 									},
 								},
 							},
@@ -2387,23 +2363,22 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 							},
 							"private_key": schema.SingleNestedBlock{
 								MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"blindfold_secret_info": schema.SingleNestedBlock{
 										MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 										Attributes: map[string]schema.Attribute{
 											"decryption_provider": schema.StringAttribute{
 												MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-												Optional: true,
+												Optional:            true,
 											},
 											"location": schema.StringAttribute{
 												MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-												Optional: true,
+												Optional:            true,
 											},
 											"store_provider": schema.StringAttribute{
 												MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -2412,11 +2387,11 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 										Attributes: map[string]schema.Attribute{
 											"provider_ref": schema.StringAttribute{
 												MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-												Optional: true,
+												Optional:            true,
 											},
 											"url": schema.StringAttribute{
 												MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -2432,14 +2407,12 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 					},
 					"policy": schema.SingleNestedBlock{
 						MarkdownDescription: "TLS Interception Policy. Policy to enable or disable TLS interception.",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"interception_rules": schema.ListNestedBlock{
 								MarkdownDescription: "TLS Interception Rules. List of ordered rules to enable or disable for TLS interception",
 								NestedObject: schema.NestedBlockObject{
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes: map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"disable_interception": schema.SingleNestedBlock{
 											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -2449,15 +2422,15 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 											Attributes: map[string]schema.Attribute{
 												"exact_value": schema.StringAttribute{
 													MarkdownDescription: "Exact Value. Exact domain name.",
-													Optional: true,
+													Optional:            true,
 												},
 												"regex_value": schema.StringAttribute{
 													MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name",
-													Optional: true,
+													Optional:            true,
 												},
 												"suffix_value": schema.StringAttribute{
 													MarkdownDescription: "Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 										},
@@ -2476,7 +2449,6 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 		},
 	}
@@ -2788,7 +2760,6 @@ func (r *ProxyResource) Create(ctx context.Context, req resource.CreateRequest, 
 		createReq.Spec["connection_timeout"] = data.ConnectionTimeout.ValueInt64()
 	}
 
-
 	apiResource, err := r.client.CreateProxy(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create Proxy: %s", err))
@@ -2800,7 +2771,7 @@ func (r *ProxyResource) Create(ctx context.Context, req resource.CreateRequest, 
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if blockData, ok := apiResource.Spec["active_forward_proxy_policies"].(map[string]interface{}); ok && (isImport || data.ActiveForwardProxyPolicies != nil) {
 		data.ActiveForwardProxyPolicies = &ProxyActiveForwardProxyPoliciesModel{
 			ForwardProxyPolicies: func() []ProxyActiveForwardProxyPoliciesForwardProxyPoliciesModel {
@@ -2887,8 +2858,7 @@ func (r *ProxyResource) Create(ctx context.Context, req resource.CreateRequest, 
 				}
 				// Import case: read from API
 				if _, ok := blockData["http_proxy"].(map[string]interface{}); ok {
-					return &ProxyDynamicProxyHTTPProxyModel{
-					}
+					return &ProxyDynamicProxyHTTPProxyModel{}
 				}
 				return nil
 			}(),
@@ -2899,8 +2869,7 @@ func (r *ProxyResource) Create(ctx context.Context, req resource.CreateRequest, 
 				}
 				// Import case: read from API
 				if _, ok := blockData["https_proxy"].(map[string]interface{}); ok {
-					return &ProxyDynamicProxyHTTPSProxyModel{
-					}
+					return &ProxyDynamicProxyHTTPSProxyModel{}
 				}
 				return nil
 			}(),
@@ -3055,8 +3024,7 @@ func (r *ProxyResource) Create(ctx context.Context, req resource.CreateRequest, 
 				}
 				// Import case: read from API
 				if _, ok := blockData["policy"].(map[string]interface{}); ok {
-					return &ProxyTLSInterceptPolicyModel{
-					}
+					return &ProxyTLSInterceptPolicyModel{}
 				}
 				return nil
 			}(),
@@ -3097,7 +3065,6 @@ func (r *ProxyResource) Create(ctx context.Context, req resource.CreateRequest, 
 	} else {
 		data.ConnectionTimeout = types.Int64Null()
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -3187,9 +3154,9 @@ func (r *ProxyResource) Read(ctx context.Context, req resource.ReadRequest, resp
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if blockData, ok := apiResource.Spec["active_forward_proxy_policies"].(map[string]interface{}); ok && (isImport || data.ActiveForwardProxyPolicies != nil) {
 		data.ActiveForwardProxyPolicies = &ProxyActiveForwardProxyPoliciesModel{
@@ -3277,8 +3244,7 @@ func (r *ProxyResource) Read(ctx context.Context, req resource.ReadRequest, resp
 				}
 				// Import case: read from API
 				if _, ok := blockData["http_proxy"].(map[string]interface{}); ok {
-					return &ProxyDynamicProxyHTTPProxyModel{
-					}
+					return &ProxyDynamicProxyHTTPProxyModel{}
 				}
 				return nil
 			}(),
@@ -3289,8 +3255,7 @@ func (r *ProxyResource) Read(ctx context.Context, req resource.ReadRequest, resp
 				}
 				// Import case: read from API
 				if _, ok := blockData["https_proxy"].(map[string]interface{}); ok {
-					return &ProxyDynamicProxyHTTPSProxyModel{
-					}
+					return &ProxyDynamicProxyHTTPSProxyModel{}
 				}
 				return nil
 			}(),
@@ -3445,8 +3410,7 @@ func (r *ProxyResource) Read(ctx context.Context, req resource.ReadRequest, resp
 				}
 				// Import case: read from API
 				if _, ok := blockData["policy"].(map[string]interface{}); ok {
-					return &ProxyTLSInterceptPolicyModel{
-					}
+					return &ProxyTLSInterceptPolicyModel{}
 				}
 				return nil
 			}(),
@@ -3487,7 +3451,6 @@ func (r *ProxyResource) Read(ctx context.Context, req resource.ReadRequest, resp
 	} else {
 		data.ConnectionTimeout = types.Int64Null()
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -3709,7 +3672,6 @@ func (r *ProxyResource) Update(ctx context.Context, req resource.UpdateRequest, 
 	if !data.ConnectionTimeout.IsNull() && !data.ConnectionTimeout.IsUnknown() {
 		apiResource.Spec["connection_timeout"] = data.ConnectionTimeout.ValueInt64()
 	}
-
 
 	updated, err := r.client.UpdateProxy(ctx, apiResource)
 	if err != nil {

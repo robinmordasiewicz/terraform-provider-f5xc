@@ -51,82 +51,82 @@ type CDNCacheRuleEmptyModel struct {
 
 // CDNCacheRuleCacheRulesModel represents cache_rules block
 type CDNCacheRuleCacheRulesModel struct {
-	RuleName types.String `tfsdk:"rule_name"`
-	CacheBypass *CDNCacheRuleEmptyModel `tfsdk:"cache_bypass"`
-	EligibleForCache *CDNCacheRuleCacheRulesEligibleForCacheModel `tfsdk:"eligible_for_cache"`
+	RuleName           types.String                                    `tfsdk:"rule_name"`
+	CacheBypass        *CDNCacheRuleEmptyModel                         `tfsdk:"cache_bypass"`
+	EligibleForCache   *CDNCacheRuleCacheRulesEligibleForCacheModel    `tfsdk:"eligible_for_cache"`
 	RuleExpressionList []CDNCacheRuleCacheRulesRuleExpressionListModel `tfsdk:"rule_expression_list"`
 }
 
 // CDNCacheRuleCacheRulesEligibleForCacheModel represents eligible_for_cache block
 type CDNCacheRuleCacheRulesEligibleForCacheModel struct {
 	SchemeProxyHostRequestURI *CDNCacheRuleCacheRulesEligibleForCacheSchemeProxyHostRequestURIModel `tfsdk:"scheme_proxy_host_request_uri"`
-	SchemeProxyHostURI *CDNCacheRuleCacheRulesEligibleForCacheSchemeProxyHostURIModel `tfsdk:"scheme_proxy_host_uri"`
+	SchemeProxyHostURI        *CDNCacheRuleCacheRulesEligibleForCacheSchemeProxyHostURIModel        `tfsdk:"scheme_proxy_host_uri"`
 }
 
 // CDNCacheRuleCacheRulesEligibleForCacheSchemeProxyHostRequestURIModel represents scheme_proxy_host_request_uri block
 type CDNCacheRuleCacheRulesEligibleForCacheSchemeProxyHostRequestURIModel struct {
-	CacheOverride types.Bool `tfsdk:"cache_override"`
-	CacheTtl types.String `tfsdk:"cache_ttl"`
-	IgnoreResponseCookie types.Bool `tfsdk:"ignore_response_cookie"`
+	CacheOverride        types.Bool   `tfsdk:"cache_override"`
+	CacheTtl             types.String `tfsdk:"cache_ttl"`
+	IgnoreResponseCookie types.Bool   `tfsdk:"ignore_response_cookie"`
 }
 
 // CDNCacheRuleCacheRulesEligibleForCacheSchemeProxyHostURIModel represents scheme_proxy_host_uri block
 type CDNCacheRuleCacheRulesEligibleForCacheSchemeProxyHostURIModel struct {
-	CacheOverride types.Bool `tfsdk:"cache_override"`
-	CacheTtl types.String `tfsdk:"cache_ttl"`
-	IgnoreResponseCookie types.Bool `tfsdk:"ignore_response_cookie"`
+	CacheOverride        types.Bool   `tfsdk:"cache_override"`
+	CacheTtl             types.String `tfsdk:"cache_ttl"`
+	IgnoreResponseCookie types.Bool   `tfsdk:"ignore_response_cookie"`
 }
 
 // CDNCacheRuleCacheRulesRuleExpressionListModel represents rule_expression_list block
 type CDNCacheRuleCacheRulesRuleExpressionListModel struct {
-	ExpressionName types.String `tfsdk:"expression_name"`
+	ExpressionName      types.String                                                       `tfsdk:"expression_name"`
 	CacheRuleExpression []CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionModel `tfsdk:"cache_rule_expression"`
 }
 
 // CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionModel represents cache_rule_expression block
 type CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionModel struct {
-	CacheHeaders []CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionCacheHeadersModel `tfsdk:"cache_headers"`
-	CookieMatcher []CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionCookieMatcherModel `tfsdk:"cookie_matcher"`
-	PathMatch *CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionPathMatchModel `tfsdk:"path_match"`
+	CacheHeaders    []CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionCacheHeadersModel    `tfsdk:"cache_headers"`
+	CookieMatcher   []CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionCookieMatcherModel   `tfsdk:"cookie_matcher"`
+	PathMatch       *CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionPathMatchModel        `tfsdk:"path_match"`
 	QueryParameters []CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionQueryParametersModel `tfsdk:"query_parameters"`
 }
 
 // CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionCacheHeadersModel represents cache_headers block
 type CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionCacheHeadersModel struct {
-	Name types.String `tfsdk:"name"`
+	Name     types.String                                                                          `tfsdk:"name"`
 	Operator *CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionCacheHeadersOperatorModel `tfsdk:"operator"`
 }
 
 // CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionCacheHeadersOperatorModel represents operator block
 type CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionCacheHeadersOperatorModel struct {
-	Contains types.String `tfsdk:"contains"`
-	Doesnotcontain types.String `tfsdk:"does_not_contain"`
-	Doesnotendwith types.String `tfsdk:"does_not_end_with"`
-	Doesnotequal types.String `tfsdk:"does_not_equal"`
+	Contains         types.String `tfsdk:"contains"`
+	Doesnotcontain   types.String `tfsdk:"does_not_contain"`
+	Doesnotendwith   types.String `tfsdk:"does_not_end_with"`
+	Doesnotequal     types.String `tfsdk:"does_not_equal"`
 	Doesnotstartwith types.String `tfsdk:"does_not_start_with"`
-	Endswith types.String `tfsdk:"endswith"`
-	Equals types.String `tfsdk:"equals"`
-	Matchregex types.String `tfsdk:"match_regex"`
-	Startswith types.String `tfsdk:"startswith"`
+	Endswith         types.String `tfsdk:"endswith"`
+	Equals           types.String `tfsdk:"equals"`
+	Matchregex       types.String `tfsdk:"match_regex"`
+	Startswith       types.String `tfsdk:"startswith"`
 }
 
 // CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionCookieMatcherModel represents cookie_matcher block
 type CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionCookieMatcherModel struct {
-	Name types.String `tfsdk:"name"`
+	Name     types.String                                                                           `tfsdk:"name"`
 	Operator *CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionCookieMatcherOperatorModel `tfsdk:"operator"`
 }
 
 // CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionCookieMatcherOperatorModel represents operator block
 type CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionCookieMatcherOperatorModel struct {
-	Contains types.String `tfsdk:"contains"`
-	Doesnotcontain types.String `tfsdk:"does_not_contain"`
-	Doesnotendwith types.String `tfsdk:"does_not_end_with"`
-	Doesnotequal types.String `tfsdk:"does_not_equal"`
+	Contains         types.String `tfsdk:"contains"`
+	Doesnotcontain   types.String `tfsdk:"does_not_contain"`
+	Doesnotendwith   types.String `tfsdk:"does_not_end_with"`
+	Doesnotequal     types.String `tfsdk:"does_not_equal"`
 	Doesnotstartwith types.String `tfsdk:"does_not_start_with"`
-	Endswith types.String `tfsdk:"endswith"`
-	Equals types.String `tfsdk:"equals"`
-	Matchregex types.String `tfsdk:"match_regex"`
-	Startswith types.String `tfsdk:"startswith"`
+	Endswith         types.String `tfsdk:"endswith"`
+	Equals           types.String `tfsdk:"equals"`
+	Matchregex       types.String `tfsdk:"match_regex"`
+	Startswith       types.String `tfsdk:"startswith"`
 }
 
 // CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionPathMatchModel represents path_match block
@@ -136,46 +136,46 @@ type CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionPathMatchModel s
 
 // CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionPathMatchOperatorModel represents operator block
 type CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionPathMatchOperatorModel struct {
-	Contains types.String `tfsdk:"contains"`
-	Doesnotcontain types.String `tfsdk:"does_not_contain"`
-	Doesnotendwith types.String `tfsdk:"does_not_end_with"`
-	Doesnotequal types.String `tfsdk:"does_not_equal"`
+	Contains         types.String `tfsdk:"contains"`
+	Doesnotcontain   types.String `tfsdk:"does_not_contain"`
+	Doesnotendwith   types.String `tfsdk:"does_not_end_with"`
+	Doesnotequal     types.String `tfsdk:"does_not_equal"`
 	Doesnotstartwith types.String `tfsdk:"does_not_start_with"`
-	Endswith types.String `tfsdk:"endswith"`
-	Equals types.String `tfsdk:"equals"`
-	Matchregex types.String `tfsdk:"match_regex"`
-	Startswith types.String `tfsdk:"startswith"`
+	Endswith         types.String `tfsdk:"endswith"`
+	Equals           types.String `tfsdk:"equals"`
+	Matchregex       types.String `tfsdk:"match_regex"`
+	Startswith       types.String `tfsdk:"startswith"`
 }
 
 // CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionQueryParametersModel represents query_parameters block
 type CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionQueryParametersModel struct {
-	Key types.String `tfsdk:"key"`
+	Key      types.String                                                                             `tfsdk:"key"`
 	Operator *CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionQueryParametersOperatorModel `tfsdk:"operator"`
 }
 
 // CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionQueryParametersOperatorModel represents operator block
 type CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionQueryParametersOperatorModel struct {
-	Contains types.String `tfsdk:"contains"`
-	Doesnotcontain types.String `tfsdk:"does_not_contain"`
-	Doesnotendwith types.String `tfsdk:"does_not_end_with"`
-	Doesnotequal types.String `tfsdk:"does_not_equal"`
+	Contains         types.String `tfsdk:"contains"`
+	Doesnotcontain   types.String `tfsdk:"does_not_contain"`
+	Doesnotendwith   types.String `tfsdk:"does_not_end_with"`
+	Doesnotequal     types.String `tfsdk:"does_not_equal"`
 	Doesnotstartwith types.String `tfsdk:"does_not_start_with"`
-	Endswith types.String `tfsdk:"endswith"`
-	Equals types.String `tfsdk:"equals"`
-	Matchregex types.String `tfsdk:"match_regex"`
-	Startswith types.String `tfsdk:"startswith"`
+	Endswith         types.String `tfsdk:"endswith"`
+	Equals           types.String `tfsdk:"equals"`
+	Matchregex       types.String `tfsdk:"match_regex"`
+	Startswith       types.String `tfsdk:"startswith"`
 }
 
 type CDNCacheRuleResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	CacheRules *CDNCacheRuleCacheRulesModel `tfsdk:"cache_rules"`
+	Name        types.String                 `tfsdk:"name"`
+	Namespace   types.String                 `tfsdk:"namespace"`
+	Annotations types.Map                    `tfsdk:"annotations"`
+	Description types.String                 `tfsdk:"description"`
+	Disable     types.Bool                   `tfsdk:"disable"`
+	Labels      types.Map                    `tfsdk:"labels"`
+	ID          types.String                 `tfsdk:"id"`
+	Timeouts    timeouts.Value               `tfsdk:"timeouts"`
+	CacheRules  *CDNCacheRuleCacheRulesModel `tfsdk:"cache_rules"`
 }
 
 func (r *CDNCacheRuleResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -189,7 +189,7 @@ func (r *CDNCacheRuleResource) Schema(ctx context.Context, req resource.SchemaRe
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the CDNCacheRule. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -199,7 +199,7 @@ func (r *CDNCacheRuleResource) Schema(ctx context.Context, req resource.SchemaRe
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the CDNCacheRule will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -209,25 +209,25 @@ func (r *CDNCacheRuleResource) Schema(ctx context.Context, req resource.SchemaRe
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -245,7 +245,7 @@ func (r *CDNCacheRuleResource) Schema(ctx context.Context, req resource.SchemaRe
 				Attributes: map[string]schema.Attribute{
 					"rule_name": schema.StringAttribute{
 						MarkdownDescription: "Rule Name. Name of the Cache Rule",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -254,23 +254,22 @@ func (r *CDNCacheRuleResource) Schema(ctx context.Context, req resource.SchemaRe
 					},
 					"eligible_for_cache": schema.SingleNestedBlock{
 						MarkdownDescription: "Cache Action Options. List of options for Cache Action",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"scheme_proxy_host_request_uri": schema.SingleNestedBlock{
 								MarkdownDescription: "Cache TTL Enable Props. Cache TTL Enable Values",
 								Attributes: map[string]schema.Attribute{
 									"cache_override": schema.BoolAttribute{
 										MarkdownDescription: "Cache Override. Honour Cache Override",
-										Optional: true,
+										Optional:            true,
 									},
 									"cache_ttl": schema.StringAttribute{
 										MarkdownDescription: "Cache TTL. Cache TTL value is used to cache the resource/content for the specified amount of time Format: [0-9][smhd], where s - seconds, m - minutes, h - hours, d - days",
-										Optional: true,
+										Optional:            true,
 									},
 									"ignore_response_cookie": schema.BoolAttribute{
 										MarkdownDescription: "Ignore-Response-Cookie. By default, response will not be cached if set-cookie header is present. This option will override the behavior and cache response even with set-cookie header present.",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -279,15 +278,15 @@ func (r *CDNCacheRuleResource) Schema(ctx context.Context, req resource.SchemaRe
 								Attributes: map[string]schema.Attribute{
 									"cache_override": schema.BoolAttribute{
 										MarkdownDescription: "Cache Override. Honour Cache Override",
-										Optional: true,
+										Optional:            true,
 									},
 									"cache_ttl": schema.StringAttribute{
 										MarkdownDescription: "Cache TTL. Cache TTL value is used to cache the resource/content for the specified amount of time Format: [0-9][smhd], where s - seconds, m - minutes, h - hours, d - days",
-										Optional: true,
+										Optional:            true,
 									},
 									"ignore_response_cookie": schema.BoolAttribute{
 										MarkdownDescription: "Ignore-Response-Cookie. By default, response will not be cached if set-cookie header is present. This option will override the behavior and cache response even with set-cookie header present.",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -299,15 +298,14 @@ func (r *CDNCacheRuleResource) Schema(ctx context.Context, req resource.SchemaRe
 							Attributes: map[string]schema.Attribute{
 								"expression_name": schema.StringAttribute{
 									MarkdownDescription: "Expression Name. Name of the Expressions items that are ANDed",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
 								"cache_rule_expression": schema.ListNestedBlock{
 									MarkdownDescription: "Terms. The Cache Rule Expression Terms that are ANDed",
 									NestedObject: schema.NestedBlockObject{
-										Attributes: map[string]schema.Attribute{
-										},
+										Attributes: map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"cache_headers": schema.ListNestedBlock{
 												MarkdownDescription: "Cache Headers. Configure cache rule headers to match the criteria",
@@ -315,7 +313,7 @@ func (r *CDNCacheRuleResource) Schema(ctx context.Context, req resource.SchemaRe
 													Attributes: map[string]schema.Attribute{
 														"name": schema.StringAttribute{
 															MarkdownDescription: "Header Options. - PROXY_HOST: Proxy Host Name of the proxied server - REFERER: Referer This is the address of the previous web page from which a link to the currently requested page was followed - SCHEME: Scheme The http scheme used: http or https - USER_AGENT: User Agent The user agent string of the user agent. Possible values are `PROXY_HOST`, `REFERER`, `SCHEME`, `USER_AGENT`. Defaults to `PROXY_HOST`.",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 													Blocks: map[string]schema.Block{
@@ -324,39 +322,39 @@ func (r *CDNCacheRuleResource) Schema(ctx context.Context, req resource.SchemaRe
 															Attributes: map[string]schema.Attribute{
 																"contains": schema.StringAttribute{
 																	MarkdownDescription: "Contains. Field must contain",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"does_not_contain": schema.StringAttribute{
 																	MarkdownDescription: "Does Not Contain. Field must not contain",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"does_not_end_with": schema.StringAttribute{
 																	MarkdownDescription: "Does Not End With. Field must not end with",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"does_not_equal": schema.StringAttribute{
 																	MarkdownDescription: "Does Not Equal. Field must not equal",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"does_not_start_with": schema.StringAttribute{
 																	MarkdownDescription: "Does Not Start With. Field must not start with",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"endswith": schema.StringAttribute{
 																	MarkdownDescription: "Ends With. Field must end with",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"equals": schema.StringAttribute{
 																	MarkdownDescription: "Equals. Field must exactly match",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"match_regex": schema.StringAttribute{
 																	MarkdownDescription: "Matches Regex. Field matches PCRE 1 compliant regular expression",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"startswith": schema.StringAttribute{
 																	MarkdownDescription: "Starts With. Field must start with",
-																	Optional: true,
+																	Optional:            true,
 																},
 															},
 														},
@@ -369,7 +367,7 @@ func (r *CDNCacheRuleResource) Schema(ctx context.Context, req resource.SchemaRe
 													Attributes: map[string]schema.Attribute{
 														"name": schema.StringAttribute{
 															MarkdownDescription: "Cookie Name. A case-sensitive cookie name.",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 													Blocks: map[string]schema.Block{
@@ -378,39 +376,39 @@ func (r *CDNCacheRuleResource) Schema(ctx context.Context, req resource.SchemaRe
 															Attributes: map[string]schema.Attribute{
 																"contains": schema.StringAttribute{
 																	MarkdownDescription: "Contains. Field must contain",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"does_not_contain": schema.StringAttribute{
 																	MarkdownDescription: "Does Not Contain. Field must not contain",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"does_not_end_with": schema.StringAttribute{
 																	MarkdownDescription: "Does Not End With. Field must not end with",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"does_not_equal": schema.StringAttribute{
 																	MarkdownDescription: "Does Not Equal. Field must not equal",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"does_not_start_with": schema.StringAttribute{
 																	MarkdownDescription: "Does Not Start With. Field must not start with",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"endswith": schema.StringAttribute{
 																	MarkdownDescription: "Ends With. Field must end with",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"equals": schema.StringAttribute{
 																	MarkdownDescription: "Equals. Field must exactly match",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"match_regex": schema.StringAttribute{
 																	MarkdownDescription: "Matches Regex. Field matches PCRE 1 compliant regular expression",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"startswith": schema.StringAttribute{
 																	MarkdownDescription: "Starts With. Field must start with",
-																	Optional: true,
+																	Optional:            true,
 																},
 															},
 														},
@@ -419,47 +417,46 @@ func (r *CDNCacheRuleResource) Schema(ctx context.Context, req resource.SchemaRe
 											},
 											"path_match": schema.SingleNestedBlock{
 												MarkdownDescription: "Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match",
-												Attributes: map[string]schema.Attribute{
-												},
+												Attributes:          map[string]schema.Attribute{},
 												Blocks: map[string]schema.Block{
 													"operator": schema.SingleNestedBlock{
 														MarkdownDescription: "Operator.",
 														Attributes: map[string]schema.Attribute{
 															"contains": schema.StringAttribute{
 																MarkdownDescription: "Contains. Field must contain",
-																Optional: true,
+																Optional:            true,
 															},
 															"does_not_contain": schema.StringAttribute{
 																MarkdownDescription: "Does Not Contain. Field must not contain",
-																Optional: true,
+																Optional:            true,
 															},
 															"does_not_end_with": schema.StringAttribute{
 																MarkdownDescription: "Does Not End With. Field must not end with",
-																Optional: true,
+																Optional:            true,
 															},
 															"does_not_equal": schema.StringAttribute{
 																MarkdownDescription: "Does Not Equal. Field must not equal",
-																Optional: true,
+																Optional:            true,
 															},
 															"does_not_start_with": schema.StringAttribute{
 																MarkdownDescription: "Does Not Start With. Field must not start with",
-																Optional: true,
+																Optional:            true,
 															},
 															"endswith": schema.StringAttribute{
 																MarkdownDescription: "Ends With. Field must end with",
-																Optional: true,
+																Optional:            true,
 															},
 															"equals": schema.StringAttribute{
 																MarkdownDescription: "Equals. Field must exactly match",
-																Optional: true,
+																Optional:            true,
 															},
 															"match_regex": schema.StringAttribute{
 																MarkdownDescription: "Matches Regex. Field matches PCRE 1 compliant regular expression",
-																Optional: true,
+																Optional:            true,
 															},
 															"startswith": schema.StringAttribute{
 																MarkdownDescription: "Starts With. Field must start with",
-																Optional: true,
+																Optional:            true,
 															},
 														},
 													},
@@ -471,7 +468,7 @@ func (r *CDNCacheRuleResource) Schema(ctx context.Context, req resource.SchemaRe
 													Attributes: map[string]schema.Attribute{
 														"key": schema.StringAttribute{
 															MarkdownDescription: "Key. Query parameter key In the above example, assignee_username is the key",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 													Blocks: map[string]schema.Block{
@@ -480,39 +477,39 @@ func (r *CDNCacheRuleResource) Schema(ctx context.Context, req resource.SchemaRe
 															Attributes: map[string]schema.Attribute{
 																"contains": schema.StringAttribute{
 																	MarkdownDescription: "Contains. Field must contain",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"does_not_contain": schema.StringAttribute{
 																	MarkdownDescription: "Does Not Contain. Field must not contain",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"does_not_end_with": schema.StringAttribute{
 																	MarkdownDescription: "Does Not End With. Field must not end with",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"does_not_equal": schema.StringAttribute{
 																	MarkdownDescription: "Does Not Equal. Field must not equal",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"does_not_start_with": schema.StringAttribute{
 																	MarkdownDescription: "Does Not Start With. Field must not start with",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"endswith": schema.StringAttribute{
 																	MarkdownDescription: "Ends With. Field must end with",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"equals": schema.StringAttribute{
 																	MarkdownDescription: "Equals. Field must exactly match",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"match_regex": schema.StringAttribute{
 																	MarkdownDescription: "Matches Regex. Field matches PCRE 1 compliant regular expression",
-																	Optional: true,
+																	Optional:            true,
 																},
 																"startswith": schema.StringAttribute{
 																	MarkdownDescription: "Starts With. Field must start with",
-																	Optional: true,
+																	Optional:            true,
 																},
 															},
 														},
@@ -526,7 +523,6 @@ func (r *CDNCacheRuleResource) Schema(ctx context.Context, req resource.SchemaRe
 						},
 					},
 				},
-
 			},
 		},
 	}
@@ -702,7 +698,6 @@ func (r *CDNCacheRuleResource) Create(ctx context.Context, req resource.CreateRe
 		createReq.Spec["cache_rules"] = cache_rulesMap
 	}
 
-
 	apiResource, err := r.client.CreateCDNCacheRule(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create CDNCacheRule: %s", err))
@@ -714,7 +709,7 @@ func (r *CDNCacheRuleResource) Create(ctx context.Context, req resource.CreateRe
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if blockData, ok := apiResource.Spec["cache_rules"].(map[string]interface{}); ok && (isImport || data.CacheRules != nil) {
 		data.CacheRules = &CDNCacheRuleCacheRulesModel{
 			CacheBypass: func() *CDNCacheRuleEmptyModel {
@@ -736,8 +731,7 @@ func (r *CDNCacheRuleResource) Create(ctx context.Context, req resource.CreateRe
 				}
 				// Import case: read from API
 				if _, ok := blockData["eligible_for_cache"].(map[string]interface{}); ok {
-					return &CDNCacheRuleCacheRulesEligibleForCacheModel{
-					}
+					return &CDNCacheRuleCacheRulesEligibleForCacheModel{}
 				}
 				return nil
 			}(),
@@ -768,7 +762,6 @@ func (r *CDNCacheRuleResource) Create(ctx context.Context, req resource.CreateRe
 			}(),
 		}
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -858,9 +851,9 @@ func (r *CDNCacheRuleResource) Read(ctx context.Context, req resource.ReadReques
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if blockData, ok := apiResource.Spec["cache_rules"].(map[string]interface{}); ok && (isImport || data.CacheRules != nil) {
 		data.CacheRules = &CDNCacheRuleCacheRulesModel{
@@ -883,8 +876,7 @@ func (r *CDNCacheRuleResource) Read(ctx context.Context, req resource.ReadReques
 				}
 				// Import case: read from API
 				if _, ok := blockData["eligible_for_cache"].(map[string]interface{}); ok {
-					return &CDNCacheRuleCacheRulesEligibleForCacheModel{
-					}
+					return &CDNCacheRuleCacheRulesEligibleForCacheModel{}
 				}
 				return nil
 			}(),
@@ -915,7 +907,6 @@ func (r *CDNCacheRuleResource) Read(ctx context.Context, req resource.ReadReques
 			}(),
 		}
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -1001,7 +992,6 @@ func (r *CDNCacheRuleResource) Update(ctx context.Context, req resource.UpdateRe
 		}
 		apiResource.Spec["cache_rules"] = cache_rulesMap
 	}
-
 
 	updated, err := r.client.UpdateCDNCacheRule(ctx, apiResource)
 	if err != nil {

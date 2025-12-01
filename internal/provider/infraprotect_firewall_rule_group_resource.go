@@ -46,15 +46,15 @@ type InfraprotectFirewallRuleGroupResource struct {
 }
 
 type InfraprotectFirewallRuleGroupResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	FirewallRuleGroupName types.String `tfsdk:"firewall_rule_group_name"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Name                  types.String   `tfsdk:"name"`
+	Namespace             types.String   `tfsdk:"namespace"`
+	Annotations           types.Map      `tfsdk:"annotations"`
+	Description           types.String   `tfsdk:"description"`
+	Disable               types.Bool     `tfsdk:"disable"`
+	Labels                types.Map      `tfsdk:"labels"`
+	ID                    types.String   `tfsdk:"id"`
+	FirewallRuleGroupName types.String   `tfsdk:"firewall_rule_group_name"`
+	Timeouts              timeouts.Value `tfsdk:"timeouts"`
 }
 
 func (r *InfraprotectFirewallRuleGroupResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -68,7 +68,7 @@ func (r *InfraprotectFirewallRuleGroupResource) Schema(ctx context.Context, req 
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the InfraprotectFirewallRuleGroup. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -78,7 +78,7 @@ func (r *InfraprotectFirewallRuleGroupResource) Schema(ctx context.Context, req 
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the InfraprotectFirewallRuleGroup will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -88,33 +88,33 @@ func (r *InfraprotectFirewallRuleGroupResource) Schema(ctx context.Context, req 
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"firewall_rule_group_name": schema.StringAttribute{
 				MarkdownDescription: "Firewall Rule Group Name. Firewall Rule Group Name",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -279,7 +279,6 @@ func (r *InfraprotectFirewallRuleGroupResource) Create(ctx context.Context, req 
 		createReq.Spec["firewall_rule_group_name"] = data.FirewallRuleGroupName.ValueString()
 	}
 
-
 	apiResource, err := r.client.CreateInfraprotectFirewallRuleGroup(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create InfraprotectFirewallRuleGroup: %s", err))
@@ -291,13 +290,12 @@ func (r *InfraprotectFirewallRuleGroupResource) Create(ctx context.Context, req 
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if v, ok := apiResource.Spec["firewall_rule_group_name"].(string); ok && v != "" {
 		data.FirewallRuleGroupName = types.StringValue(v)
 	} else {
 		data.FirewallRuleGroupName = types.StringNull()
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -387,16 +385,15 @@ func (r *InfraprotectFirewallRuleGroupResource) Read(ctx context.Context, req re
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if v, ok := apiResource.Spec["firewall_rule_group_name"].(string); ok && v != "" {
 		data.FirewallRuleGroupName = types.StringValue(v)
 	} else {
 		data.FirewallRuleGroupName = types.StringNull()
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -460,7 +457,6 @@ func (r *InfraprotectFirewallRuleGroupResource) Update(ctx context.Context, req 
 	if !data.FirewallRuleGroupName.IsNull() && !data.FirewallRuleGroupName.IsUnknown() {
 		apiResource.Spec["firewall_rule_group_name"] = data.FirewallRuleGroupName.ValueString()
 	}
-
 
 	updated, err := r.client.UpdateInfraprotectFirewallRuleGroup(ctx, apiResource)
 	if err != nil {

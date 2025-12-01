@@ -56,62 +56,62 @@ type InfraprotectTunnelBandwidthModel struct {
 
 // InfraprotectTunnelBGPInformationModel represents bgp_information block
 type InfraprotectTunnelBGPInformationModel struct {
-	HolddownTimerSeconds types.Int64 `tfsdk:"holddown_timer_seconds"`
-	Asn *InfraprotectTunnelBGPInformationAsnModel `tfsdk:"asn"`
-	NoSecret *InfraprotectTunnelEmptyModel `tfsdk:"no_secret"`
-	PeerSecretOverride *InfraprotectTunnelBGPInformationPeerSecretOverrideModel `tfsdk:"peer_secret_override"`
-	UseDefaultSecret *InfraprotectTunnelEmptyModel `tfsdk:"use_default_secret"`
+	HolddownTimerSeconds types.Int64                                              `tfsdk:"holddown_timer_seconds"`
+	Asn                  *InfraprotectTunnelBGPInformationAsnModel                `tfsdk:"asn"`
+	NoSecret             *InfraprotectTunnelEmptyModel                            `tfsdk:"no_secret"`
+	PeerSecretOverride   *InfraprotectTunnelBGPInformationPeerSecretOverrideModel `tfsdk:"peer_secret_override"`
+	UseDefaultSecret     *InfraprotectTunnelEmptyModel                            `tfsdk:"use_default_secret"`
 }
 
 // InfraprotectTunnelBGPInformationAsnModel represents asn block
 type InfraprotectTunnelBGPInformationAsnModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // InfraprotectTunnelBGPInformationPeerSecretOverrideModel represents peer_secret_override block
 type InfraprotectTunnelBGPInformationPeerSecretOverrideModel struct {
 	BlindfoldSecretInfo *InfraprotectTunnelBGPInformationPeerSecretOverrideBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *InfraprotectTunnelBGPInformationPeerSecretOverrideClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *InfraprotectTunnelBGPInformationPeerSecretOverrideClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // InfraprotectTunnelBGPInformationPeerSecretOverrideBlindfoldSecretInfoModel represents blindfold_secret_info block
 type InfraprotectTunnelBGPInformationPeerSecretOverrideBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // InfraprotectTunnelBGPInformationPeerSecretOverrideClearSecretInfoModel represents clear_secret_info block
 type InfraprotectTunnelBGPInformationPeerSecretOverrideClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // InfraprotectTunnelFirewallRuleGroupModel represents firewall_rule_group block
 type InfraprotectTunnelFirewallRuleGroupModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // InfraprotectTunnelGreIPV4Model represents gre_ipv4 block
 type InfraprotectTunnelGreIPV4Model struct {
-	CustomerEndpointIPV4 types.String `tfsdk:"customer_endpoint_ipv4"`
-	FragmentationDisabled *InfraprotectTunnelEmptyModel `tfsdk:"fragmentation_disabled"`
-	FragmentationEnabled *InfraprotectTunnelEmptyModel `tfsdk:"fragmentation_enabled"`
+	CustomerEndpointIPV4     types.String                  `tfsdk:"customer_endpoint_ipv4"`
+	FragmentationDisabled    *InfraprotectTunnelEmptyModel `tfsdk:"fragmentation_disabled"`
+	FragmentationEnabled     *InfraprotectTunnelEmptyModel `tfsdk:"fragmentation_enabled"`
 	IPV6InterconnectDisabled *InfraprotectTunnelEmptyModel `tfsdk:"ipv6_interconnect_disabled"`
-	IPV6InterconnectEnabled *InfraprotectTunnelEmptyModel `tfsdk:"ipv6_interconnect_enabled"`
-	KeepaliveDisabled *InfraprotectTunnelEmptyModel `tfsdk:"keepalive_disabled"`
-	KeepaliveEnabled *InfraprotectTunnelEmptyModel `tfsdk:"keepalive_enabled"`
+	IPV6InterconnectEnabled  *InfraprotectTunnelEmptyModel `tfsdk:"ipv6_interconnect_enabled"`
+	KeepaliveDisabled        *InfraprotectTunnelEmptyModel `tfsdk:"keepalive_disabled"`
+	KeepaliveEnabled         *InfraprotectTunnelEmptyModel `tfsdk:"keepalive_enabled"`
 }
 
 // InfraprotectTunnelGreIPV6Model represents gre_ipv6 block
 type InfraprotectTunnelGreIPV6Model struct {
-	CustomerEndpointIPV6 types.String `tfsdk:"customer_endpoint_ipv6"`
+	CustomerEndpointIPV6     types.String                  `tfsdk:"customer_endpoint_ipv6"`
 	IPV4InterconnectDisabled *InfraprotectTunnelEmptyModel `tfsdk:"ipv4_interconnect_disabled"`
-	IPV4InterconnectEnabled *InfraprotectTunnelEmptyModel `tfsdk:"ipv4_interconnect_enabled"`
+	IPV4InterconnectEnabled  *InfraprotectTunnelEmptyModel `tfsdk:"ipv4_interconnect_enabled"`
 }
 
 // InfraprotectTunnelIPInIPModel represents ip_in_ip block
@@ -126,28 +126,28 @@ type InfraprotectTunnelIPV6ToIPV6Model struct {
 
 // InfraprotectTunnelTunnelLocationModel represents tunnel_location block
 type InfraprotectTunnelTunnelLocationModel struct {
-	Name types.String `tfsdk:"name"`
+	Name  types.String                  `tfsdk:"name"`
 	Zone1 *InfraprotectTunnelEmptyModel `tfsdk:"zone1"`
 	Zone2 *InfraprotectTunnelEmptyModel `tfsdk:"zone2"`
 }
 
 type InfraprotectTunnelResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	Bandwidth *InfraprotectTunnelBandwidthModel `tfsdk:"bandwidth"`
-	BGPInformation *InfraprotectTunnelBGPInformationModel `tfsdk:"bgp_information"`
+	Name              types.String                              `tfsdk:"name"`
+	Namespace         types.String                              `tfsdk:"namespace"`
+	Annotations       types.Map                                 `tfsdk:"annotations"`
+	Description       types.String                              `tfsdk:"description"`
+	Disable           types.Bool                                `tfsdk:"disable"`
+	Labels            types.Map                                 `tfsdk:"labels"`
+	ID                types.String                              `tfsdk:"id"`
+	Timeouts          timeouts.Value                            `tfsdk:"timeouts"`
+	Bandwidth         *InfraprotectTunnelBandwidthModel         `tfsdk:"bandwidth"`
+	BGPInformation    *InfraprotectTunnelBGPInformationModel    `tfsdk:"bgp_information"`
 	FirewallRuleGroup *InfraprotectTunnelFirewallRuleGroupModel `tfsdk:"firewall_rule_group"`
-	GreIPV4 *InfraprotectTunnelGreIPV4Model `tfsdk:"gre_ipv4"`
-	GreIPV6 *InfraprotectTunnelGreIPV6Model `tfsdk:"gre_ipv6"`
-	IPInIP *InfraprotectTunnelIPInIPModel `tfsdk:"ip_in_ip"`
-	IPV6ToIPV6 *InfraprotectTunnelIPV6ToIPV6Model `tfsdk:"ipv6_to_ipv6"`
-	TunnelLocation *InfraprotectTunnelTunnelLocationModel `tfsdk:"tunnel_location"`
+	GreIPV4           *InfraprotectTunnelGreIPV4Model           `tfsdk:"gre_ipv4"`
+	GreIPV6           *InfraprotectTunnelGreIPV6Model           `tfsdk:"gre_ipv6"`
+	IPInIP            *InfraprotectTunnelIPInIPModel            `tfsdk:"ip_in_ip"`
+	IPV6ToIPV6        *InfraprotectTunnelIPV6ToIPV6Model        `tfsdk:"ipv6_to_ipv6"`
+	TunnelLocation    *InfraprotectTunnelTunnelLocationModel    `tfsdk:"tunnel_location"`
 }
 
 func (r *InfraprotectTunnelResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -161,7 +161,7 @@ func (r *InfraprotectTunnelResource) Schema(ctx context.Context, req resource.Sc
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the InfraprotectTunnel. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -171,7 +171,7 @@ func (r *InfraprotectTunnelResource) Schema(ctx context.Context, req resource.Sc
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the InfraprotectTunnel will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -181,25 +181,25 @@ func (r *InfraprotectTunnelResource) Schema(ctx context.Context, req resource.Sc
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -217,17 +217,16 @@ func (r *InfraprotectTunnelResource) Schema(ctx context.Context, req resource.Sc
 				Attributes: map[string]schema.Attribute{
 					"bandwidth_max_mb": schema.Int64Attribute{
 						MarkdownDescription: "Bandwidth Max in MB. Bandwidth max allowed",
-						Optional: true,
+						Optional:            true,
 					},
 				},
-
 			},
 			"bgp_information": schema.SingleNestedBlock{
 				MarkdownDescription: "BGP. BGP information associated with a DDoS transit tunnel.",
 				Attributes: map[string]schema.Attribute{
 					"holddown_timer_seconds": schema.Int64Attribute{
 						MarkdownDescription: "Hold down Timer. BGP hold down timer, in seconds",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -236,16 +235,16 @@ func (r *InfraprotectTunnelResource) Schema(ctx context.Context, req resource.Sc
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
 								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-								Optional: true,
+								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
 								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-								Optional: true,
+								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-								Optional: true,
-								Computed: true,
+								Optional:            true,
+								Computed:            true,
 							},
 						},
 					},
@@ -254,23 +253,22 @@ func (r *InfraprotectTunnelResource) Schema(ctx context.Context, req resource.Sc
 					},
 					"peer_secret_override": schema.SingleNestedBlock{
 						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"blindfold_secret_info": schema.SingleNestedBlock{
 								MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 								Attributes: map[string]schema.Attribute{
 									"decryption_provider": schema.StringAttribute{
 										MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-										Optional: true,
+										Optional:            true,
 									},
 									"location": schema.StringAttribute{
 										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-										Optional: true,
+										Optional:            true,
 									},
 									"store_provider": schema.StringAttribute{
 										MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -279,11 +277,11 @@ func (r *InfraprotectTunnelResource) Schema(ctx context.Context, req resource.Sc
 								Attributes: map[string]schema.Attribute{
 									"provider_ref": schema.StringAttribute{
 										MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-										Optional: true,
+										Optional:            true,
 									},
 									"url": schema.StringAttribute{
 										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -293,33 +291,31 @@ func (r *InfraprotectTunnelResource) Schema(ctx context.Context, req resource.Sc
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 			"firewall_rule_group": schema.SingleNestedBlock{
 				MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
 						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-						Optional: true,
+						Optional:            true,
 					},
 					"namespace": schema.StringAttribute{
 						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-						Optional: true,
+						Optional:            true,
 					},
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-						Optional: true,
-						Computed: true,
+						Optional:            true,
+						Computed:            true,
 					},
 				},
-
 			},
 			"gre_ipv4": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: gre_ipv4, gre_ipv6, ip_in_ip, ipv6_to_ipv6] GRE IPv4 Tunnel. IPv4 Tunnel.",
 				Attributes: map[string]schema.Attribute{
 					"customer_endpoint_ipv4": schema.StringAttribute{
 						MarkdownDescription: "Customer Endpoint IP. IPv4 address for the customer endpoint of the tunnel",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -342,14 +338,13 @@ func (r *InfraprotectTunnelResource) Schema(ctx context.Context, req resource.Sc
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 			"gre_ipv6": schema.SingleNestedBlock{
 				MarkdownDescription: "GRE IPv6 Tunnel. IPv6 Tunnel.",
 				Attributes: map[string]schema.Attribute{
 					"customer_endpoint_ipv6": schema.StringAttribute{
 						MarkdownDescription: "Customer Endpoint IP. IPv6 address for the customer endpoint of the tunnel",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -360,34 +355,31 @@ func (r *InfraprotectTunnelResource) Schema(ctx context.Context, req resource.Sc
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 			"ip_in_ip": schema.SingleNestedBlock{
 				MarkdownDescription: "IP in IP Tunnel. IP in IP Tunnel.",
 				Attributes: map[string]schema.Attribute{
 					"customer_endpoint_ipv4": schema.StringAttribute{
 						MarkdownDescription: "Customer Endpoint IP. IPv4 address for the customer endpoint of the tunnel",
-						Optional: true,
+						Optional:            true,
 					},
 				},
-
 			},
 			"ipv6_to_ipv6": schema.SingleNestedBlock{
 				MarkdownDescription: "IPv6 to IPv6 Tunnel. IPv6 to IPv6 Tunnel.",
 				Attributes: map[string]schema.Attribute{
 					"customer_endpoint_ipv6": schema.StringAttribute{
 						MarkdownDescription: "Customer Endpoint IP. IPv6 address for the customer endpoint of the tunnel",
-						Optional: true,
+						Optional:            true,
 					},
 				},
-
 			},
 			"tunnel_location": schema.SingleNestedBlock{
 				MarkdownDescription: "Location. Location of a DDoS transit tunnel.",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
 						MarkdownDescription: "Location Name. Destination tunnel Location.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -398,7 +390,6 @@ func (r *InfraprotectTunnelResource) Schema(ctx context.Context, req resource.Sc
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 		},
 	}
@@ -664,7 +655,6 @@ func (r *InfraprotectTunnelResource) Create(ctx context.Context, req resource.Cr
 		createReq.Spec["tunnel_location"] = tunnel_locationMap
 	}
 
-
 	apiResource, err := r.client.CreateInfraprotectTunnel(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create InfraprotectTunnel: %s", err))
@@ -676,7 +666,7 @@ func (r *InfraprotectTunnelResource) Create(ctx context.Context, req resource.Cr
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if blockData, ok := apiResource.Spec["bandwidth"].(map[string]interface{}); ok && (isImport || data.Bandwidth != nil) {
 		data.Bandwidth = &InfraprotectTunnelBandwidthModel{
 			BandwidthMaxMb: func() types.Int64 {
@@ -744,8 +734,7 @@ func (r *InfraprotectTunnelResource) Create(ctx context.Context, req resource.Cr
 				}
 				// Import case: read from API
 				if _, ok := blockData["peer_secret_override"].(map[string]interface{}); ok {
-					return &InfraprotectTunnelBGPInformationPeerSecretOverrideModel{
-					}
+					return &InfraprotectTunnelBGPInformationPeerSecretOverrideModel{}
 				}
 				return nil
 			}(),
@@ -955,7 +944,6 @@ func (r *InfraprotectTunnelResource) Create(ctx context.Context, req resource.Cr
 			}(),
 		}
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -1045,9 +1033,9 @@ func (r *InfraprotectTunnelResource) Read(ctx context.Context, req resource.Read
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if blockData, ok := apiResource.Spec["bandwidth"].(map[string]interface{}); ok && (isImport || data.Bandwidth != nil) {
 		data.Bandwidth = &InfraprotectTunnelBandwidthModel{
@@ -1116,8 +1104,7 @@ func (r *InfraprotectTunnelResource) Read(ctx context.Context, req resource.Read
 				}
 				// Import case: read from API
 				if _, ok := blockData["peer_secret_override"].(map[string]interface{}); ok {
-					return &InfraprotectTunnelBGPInformationPeerSecretOverrideModel{
-					}
+					return &InfraprotectTunnelBGPInformationPeerSecretOverrideModel{}
 				}
 				return nil
 			}(),
@@ -1327,7 +1314,6 @@ func (r *InfraprotectTunnelResource) Read(ctx context.Context, req resource.Read
 			}(),
 		}
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -1503,7 +1489,6 @@ func (r *InfraprotectTunnelResource) Update(ctx context.Context, req resource.Up
 		}
 		apiResource.Spec["tunnel_location"] = tunnel_locationMap
 	}
-
 
 	updated, err := r.client.UpdateInfraprotectTunnel(ctx, apiResource)
 	if err != nil {

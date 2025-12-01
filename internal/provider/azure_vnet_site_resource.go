@@ -53,27 +53,27 @@ type AzureVNETSiteEmptyModel struct {
 // AzureVNETSiteAdminPasswordModel represents admin_password block
 type AzureVNETSiteAdminPasswordModel struct {
 	BlindfoldSecretInfo *AzureVNETSiteAdminPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *AzureVNETSiteAdminPasswordClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *AzureVNETSiteAdminPasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // AzureVNETSiteAdminPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
 type AzureVNETSiteAdminPasswordBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // AzureVNETSiteAdminPasswordClearSecretInfoModel represents clear_secret_info block
 type AzureVNETSiteAdminPasswordClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // AzureVNETSiteAzureCredModel represents azure_cred block
 type AzureVNETSiteAzureCredModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // AzureVNETSiteBlockedServicesModel represents blocked_services block
@@ -83,55 +83,55 @@ type AzureVNETSiteBlockedServicesModel struct {
 
 // AzureVNETSiteBlockedServicesBlockedSeviceModel represents blocked_sevice block
 type AzureVNETSiteBlockedServicesBlockedSeviceModel struct {
-	NetworkType types.String `tfsdk:"network_type"`
-	DNS *AzureVNETSiteEmptyModel `tfsdk:"dns"`
-	SSH *AzureVNETSiteEmptyModel `tfsdk:"ssh"`
+	NetworkType      types.String             `tfsdk:"network_type"`
+	DNS              *AzureVNETSiteEmptyModel `tfsdk:"dns"`
+	SSH              *AzureVNETSiteEmptyModel `tfsdk:"ssh"`
 	WebUserInterface *AzureVNETSiteEmptyModel `tfsdk:"web_user_interface"`
 }
 
 // AzureVNETSiteCoordinatesModel represents coordinates block
 type AzureVNETSiteCoordinatesModel struct {
-	Latitude types.Int64 `tfsdk:"latitude"`
+	Latitude  types.Int64 `tfsdk:"latitude"`
 	Longitude types.Int64 `tfsdk:"longitude"`
 }
 
 // AzureVNETSiteCustomDNSModel represents custom_dns block
 type AzureVNETSiteCustomDNSModel struct {
-	InsideNameserver types.String `tfsdk:"inside_nameserver"`
+	InsideNameserver  types.String `tfsdk:"inside_nameserver"`
 	OutsideNameserver types.String `tfsdk:"outside_nameserver"`
 }
 
 // AzureVNETSiteIngressEgressGwModel represents ingress_egress_gw block
 type AzureVNETSiteIngressEgressGwModel struct {
-	AzureCertifiedHw types.String `tfsdk:"azure_certified_hw"`
-	AcceleratedNetworking *AzureVNETSiteIngressEgressGwAcceleratedNetworkingModel `tfsdk:"accelerated_networking"`
+	AzureCertifiedHw               types.String                                                     `tfsdk:"azure_certified_hw"`
+	AcceleratedNetworking          *AzureVNETSiteIngressEgressGwAcceleratedNetworkingModel          `tfsdk:"accelerated_networking"`
 	ActiveEnhancedFirewallPolicies *AzureVNETSiteIngressEgressGwActiveEnhancedFirewallPoliciesModel `tfsdk:"active_enhanced_firewall_policies"`
-	ActiveForwardProxyPolicies *AzureVNETSiteIngressEgressGwActiveForwardProxyPoliciesModel `tfsdk:"active_forward_proxy_policies"`
-	ActiveNetworkPolicies *AzureVNETSiteIngressEgressGwActiveNetworkPoliciesModel `tfsdk:"active_network_policies"`
-	AzNodes []AzureVNETSiteIngressEgressGwAzNodesModel `tfsdk:"az_nodes"`
-	DcClusterGroupInsideVn *AzureVNETSiteIngressEgressGwDcClusterGroupInsideVnModel `tfsdk:"dc_cluster_group_inside_vn"`
-	DcClusterGroupOutsideVn *AzureVNETSiteIngressEgressGwDcClusterGroupOutsideVnModel `tfsdk:"dc_cluster_group_outside_vn"`
-	ForwardProxyAllowAll *AzureVNETSiteEmptyModel `tfsdk:"forward_proxy_allow_all"`
-	GlobalNetworkList *AzureVNETSiteIngressEgressGwGlobalNetworkListModel `tfsdk:"global_network_list"`
-	Hub *AzureVNETSiteIngressEgressGwHubModel `tfsdk:"hub"`
-	InsideStaticRoutes *AzureVNETSiteIngressEgressGwInsideStaticRoutesModel `tfsdk:"inside_static_routes"`
-	NoDcClusterGroup *AzureVNETSiteEmptyModel `tfsdk:"no_dc_cluster_group"`
-	NoForwardProxy *AzureVNETSiteEmptyModel `tfsdk:"no_forward_proxy"`
-	NoGlobalNetwork *AzureVNETSiteEmptyModel `tfsdk:"no_global_network"`
-	NoInsideStaticRoutes *AzureVNETSiteEmptyModel `tfsdk:"no_inside_static_routes"`
-	NoNetworkPolicy *AzureVNETSiteEmptyModel `tfsdk:"no_network_policy"`
-	NoOutsideStaticRoutes *AzureVNETSiteEmptyModel `tfsdk:"no_outside_static_routes"`
-	NotHub *AzureVNETSiteEmptyModel `tfsdk:"not_hub"`
-	OutsideStaticRoutes *AzureVNETSiteIngressEgressGwOutsideStaticRoutesModel `tfsdk:"outside_static_routes"`
-	PerformanceEnhancementMode *AzureVNETSiteIngressEgressGwPerformanceEnhancementModeModel `tfsdk:"performance_enhancement_mode"`
-	SmConnectionPublicIP *AzureVNETSiteEmptyModel `tfsdk:"sm_connection_public_ip"`
-	SmConnectionPvtIP *AzureVNETSiteEmptyModel `tfsdk:"sm_connection_pvt_ip"`
+	ActiveForwardProxyPolicies     *AzureVNETSiteIngressEgressGwActiveForwardProxyPoliciesModel     `tfsdk:"active_forward_proxy_policies"`
+	ActiveNetworkPolicies          *AzureVNETSiteIngressEgressGwActiveNetworkPoliciesModel          `tfsdk:"active_network_policies"`
+	AzNodes                        []AzureVNETSiteIngressEgressGwAzNodesModel                       `tfsdk:"az_nodes"`
+	DcClusterGroupInsideVn         *AzureVNETSiteIngressEgressGwDcClusterGroupInsideVnModel         `tfsdk:"dc_cluster_group_inside_vn"`
+	DcClusterGroupOutsideVn        *AzureVNETSiteIngressEgressGwDcClusterGroupOutsideVnModel        `tfsdk:"dc_cluster_group_outside_vn"`
+	ForwardProxyAllowAll           *AzureVNETSiteEmptyModel                                         `tfsdk:"forward_proxy_allow_all"`
+	GlobalNetworkList              *AzureVNETSiteIngressEgressGwGlobalNetworkListModel              `tfsdk:"global_network_list"`
+	Hub                            *AzureVNETSiteIngressEgressGwHubModel                            `tfsdk:"hub"`
+	InsideStaticRoutes             *AzureVNETSiteIngressEgressGwInsideStaticRoutesModel             `tfsdk:"inside_static_routes"`
+	NoDcClusterGroup               *AzureVNETSiteEmptyModel                                         `tfsdk:"no_dc_cluster_group"`
+	NoForwardProxy                 *AzureVNETSiteEmptyModel                                         `tfsdk:"no_forward_proxy"`
+	NoGlobalNetwork                *AzureVNETSiteEmptyModel                                         `tfsdk:"no_global_network"`
+	NoInsideStaticRoutes           *AzureVNETSiteEmptyModel                                         `tfsdk:"no_inside_static_routes"`
+	NoNetworkPolicy                *AzureVNETSiteEmptyModel                                         `tfsdk:"no_network_policy"`
+	NoOutsideStaticRoutes          *AzureVNETSiteEmptyModel                                         `tfsdk:"no_outside_static_routes"`
+	NotHub                         *AzureVNETSiteEmptyModel                                         `tfsdk:"not_hub"`
+	OutsideStaticRoutes            *AzureVNETSiteIngressEgressGwOutsideStaticRoutesModel            `tfsdk:"outside_static_routes"`
+	PerformanceEnhancementMode     *AzureVNETSiteIngressEgressGwPerformanceEnhancementModeModel     `tfsdk:"performance_enhancement_mode"`
+	SmConnectionPublicIP           *AzureVNETSiteEmptyModel                                         `tfsdk:"sm_connection_public_ip"`
+	SmConnectionPvtIP              *AzureVNETSiteEmptyModel                                         `tfsdk:"sm_connection_pvt_ip"`
 }
 
 // AzureVNETSiteIngressEgressGwAcceleratedNetworkingModel represents accelerated_networking block
 type AzureVNETSiteIngressEgressGwAcceleratedNetworkingModel struct {
 	Disable *AzureVNETSiteEmptyModel `tfsdk:"disable"`
-	Enable *AzureVNETSiteEmptyModel `tfsdk:"enable"`
+	Enable  *AzureVNETSiteEmptyModel `tfsdk:"enable"`
 }
 
 // AzureVNETSiteIngressEgressGwActiveEnhancedFirewallPoliciesModel represents active_enhanced_firewall_policies block
@@ -141,9 +141,9 @@ type AzureVNETSiteIngressEgressGwActiveEnhancedFirewallPoliciesModel struct {
 
 // AzureVNETSiteIngressEgressGwActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel represents enhanced_firewall_policies block
 type AzureVNETSiteIngressEgressGwActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // AzureVNETSiteIngressEgressGwActiveForwardProxyPoliciesModel represents active_forward_proxy_policies block
@@ -153,9 +153,9 @@ type AzureVNETSiteIngressEgressGwActiveForwardProxyPoliciesModel struct {
 
 // AzureVNETSiteIngressEgressGwActiveForwardProxyPoliciesForwardProxyPoliciesModel represents forward_proxy_policies block
 type AzureVNETSiteIngressEgressGwActiveForwardProxyPoliciesForwardProxyPoliciesModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // AzureVNETSiteIngressEgressGwActiveNetworkPoliciesModel represents active_network_policies block
@@ -165,28 +165,28 @@ type AzureVNETSiteIngressEgressGwActiveNetworkPoliciesModel struct {
 
 // AzureVNETSiteIngressEgressGwActiveNetworkPoliciesNetworkPoliciesModel represents network_policies block
 type AzureVNETSiteIngressEgressGwActiveNetworkPoliciesNetworkPoliciesModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // AzureVNETSiteIngressEgressGwAzNodesModel represents az_nodes block
 type AzureVNETSiteIngressEgressGwAzNodesModel struct {
-	AzureAz types.String `tfsdk:"azure_az"`
-	InsideSubnet *AzureVNETSiteIngressEgressGwAzNodesInsideSubnetModel `tfsdk:"inside_subnet"`
+	AzureAz       types.String                                           `tfsdk:"azure_az"`
+	InsideSubnet  *AzureVNETSiteIngressEgressGwAzNodesInsideSubnetModel  `tfsdk:"inside_subnet"`
 	OutsideSubnet *AzureVNETSiteIngressEgressGwAzNodesOutsideSubnetModel `tfsdk:"outside_subnet"`
 }
 
 // AzureVNETSiteIngressEgressGwAzNodesInsideSubnetModel represents inside_subnet block
 type AzureVNETSiteIngressEgressGwAzNodesInsideSubnetModel struct {
-	Subnet *AzureVNETSiteIngressEgressGwAzNodesInsideSubnetSubnetModel `tfsdk:"subnet"`
+	Subnet      *AzureVNETSiteIngressEgressGwAzNodesInsideSubnetSubnetModel      `tfsdk:"subnet"`
 	SubnetParam *AzureVNETSiteIngressEgressGwAzNodesInsideSubnetSubnetParamModel `tfsdk:"subnet_param"`
 }
 
 // AzureVNETSiteIngressEgressGwAzNodesInsideSubnetSubnetModel represents subnet block
 type AzureVNETSiteIngressEgressGwAzNodesInsideSubnetSubnetModel struct {
-	SubnetName types.String `tfsdk:"subnet_name"`
-	SubnetResourceGrp types.String `tfsdk:"subnet_resource_grp"`
+	SubnetName        types.String             `tfsdk:"subnet_name"`
+	SubnetResourceGrp types.String             `tfsdk:"subnet_resource_grp"`
 	VNETResourceGroup *AzureVNETSiteEmptyModel `tfsdk:"vnet_resource_group"`
 }
 
@@ -197,14 +197,14 @@ type AzureVNETSiteIngressEgressGwAzNodesInsideSubnetSubnetParamModel struct {
 
 // AzureVNETSiteIngressEgressGwAzNodesOutsideSubnetModel represents outside_subnet block
 type AzureVNETSiteIngressEgressGwAzNodesOutsideSubnetModel struct {
-	Subnet *AzureVNETSiteIngressEgressGwAzNodesOutsideSubnetSubnetModel `tfsdk:"subnet"`
+	Subnet      *AzureVNETSiteIngressEgressGwAzNodesOutsideSubnetSubnetModel      `tfsdk:"subnet"`
 	SubnetParam *AzureVNETSiteIngressEgressGwAzNodesOutsideSubnetSubnetParamModel `tfsdk:"subnet_param"`
 }
 
 // AzureVNETSiteIngressEgressGwAzNodesOutsideSubnetSubnetModel represents subnet block
 type AzureVNETSiteIngressEgressGwAzNodesOutsideSubnetSubnetModel struct {
-	SubnetName types.String `tfsdk:"subnet_name"`
-	SubnetResourceGrp types.String `tfsdk:"subnet_resource_grp"`
+	SubnetName        types.String             `tfsdk:"subnet_name"`
+	SubnetResourceGrp types.String             `tfsdk:"subnet_resource_grp"`
 	VNETResourceGroup *AzureVNETSiteEmptyModel `tfsdk:"vnet_resource_group"`
 }
 
@@ -215,16 +215,16 @@ type AzureVNETSiteIngressEgressGwAzNodesOutsideSubnetSubnetParamModel struct {
 
 // AzureVNETSiteIngressEgressGwDcClusterGroupInsideVnModel represents dc_cluster_group_inside_vn block
 type AzureVNETSiteIngressEgressGwDcClusterGroupInsideVnModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // AzureVNETSiteIngressEgressGwDcClusterGroupOutsideVnModel represents dc_cluster_group_outside_vn block
 type AzureVNETSiteIngressEgressGwDcClusterGroupOutsideVnModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // AzureVNETSiteIngressEgressGwGlobalNetworkListModel represents global_network_list block
@@ -245,9 +245,9 @@ type AzureVNETSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLIToG
 
 // AzureVNETSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrGlobalVnModel represents global_vn block
 type AzureVNETSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrGlobalVnModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // AzureVNETSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrModel represents slo_to_global_dr block
@@ -257,84 +257,84 @@ type AzureVNETSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLOToG
 
 // AzureVNETSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrGlobalVnModel represents global_vn block
 type AzureVNETSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrGlobalVnModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // AzureVNETSiteIngressEgressGwHubModel represents hub block
 type AzureVNETSiteIngressEgressGwHubModel struct {
-	ExpressRouteDisabled *AzureVNETSiteEmptyModel `tfsdk:"express_route_disabled"`
-	ExpressRouteEnabled *AzureVNETSiteIngressEgressGwHubExpressRouteEnabledModel `tfsdk:"express_route_enabled"`
-	SpokeVnets []AzureVNETSiteIngressEgressGwHubSpokeVnetsModel `tfsdk:"spoke_vnets"`
+	ExpressRouteDisabled *AzureVNETSiteEmptyModel                                 `tfsdk:"express_route_disabled"`
+	ExpressRouteEnabled  *AzureVNETSiteIngressEgressGwHubExpressRouteEnabledModel `tfsdk:"express_route_enabled"`
+	SpokeVnets           []AzureVNETSiteIngressEgressGwHubSpokeVnetsModel         `tfsdk:"spoke_vnets"`
 }
 
 // AzureVNETSiteIngressEgressGwHubExpressRouteEnabledModel represents express_route_enabled block
 type AzureVNETSiteIngressEgressGwHubExpressRouteEnabledModel struct {
-	CustomAsn types.Int64 `tfsdk:"custom_asn"`
-	AdvertiseToRouteServer *AzureVNETSiteEmptyModel `tfsdk:"advertise_to_route_server"`
-	AutoAsn *AzureVNETSiteEmptyModel `tfsdk:"auto_asn"`
-	Connections []AzureVNETSiteIngressEgressGwHubExpressRouteEnabledConnectionsModel `tfsdk:"connections"`
-	DoNotAdvertiseToRouteServer *AzureVNETSiteEmptyModel `tfsdk:"do_not_advertise_to_route_server"`
-	GatewaySubnet *AzureVNETSiteIngressEgressGwHubExpressRouteEnabledGatewaySubnetModel `tfsdk:"gateway_subnet"`
-	RouteServerSubnet *AzureVNETSiteIngressEgressGwHubExpressRouteEnabledRouteServerSubnetModel `tfsdk:"route_server_subnet"`
+	CustomAsn                        types.Int64                                                                              `tfsdk:"custom_asn"`
+	AdvertiseToRouteServer           *AzureVNETSiteEmptyModel                                                                 `tfsdk:"advertise_to_route_server"`
+	AutoAsn                          *AzureVNETSiteEmptyModel                                                                 `tfsdk:"auto_asn"`
+	Connections                      []AzureVNETSiteIngressEgressGwHubExpressRouteEnabledConnectionsModel                     `tfsdk:"connections"`
+	DoNotAdvertiseToRouteServer      *AzureVNETSiteEmptyModel                                                                 `tfsdk:"do_not_advertise_to_route_server"`
+	GatewaySubnet                    *AzureVNETSiteIngressEgressGwHubExpressRouteEnabledGatewaySubnetModel                    `tfsdk:"gateway_subnet"`
+	RouteServerSubnet                *AzureVNETSiteIngressEgressGwHubExpressRouteEnabledRouteServerSubnetModel                `tfsdk:"route_server_subnet"`
 	SiteRegistrationOverExpressRoute *AzureVNETSiteIngressEgressGwHubExpressRouteEnabledSiteRegistrationOverExpressRouteModel `tfsdk:"site_registration_over_express_route"`
-	SiteRegistrationOverInternet *AzureVNETSiteEmptyModel `tfsdk:"site_registration_over_internet"`
-	SkuErgw1az *AzureVNETSiteEmptyModel `tfsdk:"sku_ergw1az"`
-	SkuErgw2az *AzureVNETSiteEmptyModel `tfsdk:"sku_ergw2az"`
-	SkuHighPerf *AzureVNETSiteEmptyModel `tfsdk:"sku_high_perf"`
-	SkuStandard *AzureVNETSiteEmptyModel `tfsdk:"sku_standard"`
+	SiteRegistrationOverInternet     *AzureVNETSiteEmptyModel                                                                 `tfsdk:"site_registration_over_internet"`
+	SkuErgw1az                       *AzureVNETSiteEmptyModel                                                                 `tfsdk:"sku_ergw1az"`
+	SkuErgw2az                       *AzureVNETSiteEmptyModel                                                                 `tfsdk:"sku_ergw2az"`
+	SkuHighPerf                      *AzureVNETSiteEmptyModel                                                                 `tfsdk:"sku_high_perf"`
+	SkuStandard                      *AzureVNETSiteEmptyModel                                                                 `tfsdk:"sku_standard"`
 }
 
 // AzureVNETSiteIngressEgressGwHubExpressRouteEnabledConnectionsModel represents connections block
 type AzureVNETSiteIngressEgressGwHubExpressRouteEnabledConnectionsModel struct {
-	CircuitID types.String `tfsdk:"circuit_id"`
-	Weight types.Int64 `tfsdk:"weight"`
-	Metadata *AzureVNETSiteIngressEgressGwHubExpressRouteEnabledConnectionsMetadataModel `tfsdk:"metadata"`
+	CircuitID         types.String                                                                         `tfsdk:"circuit_id"`
+	Weight            types.Int64                                                                          `tfsdk:"weight"`
+	Metadata          *AzureVNETSiteIngressEgressGwHubExpressRouteEnabledConnectionsMetadataModel          `tfsdk:"metadata"`
 	OtherSubscription *AzureVNETSiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionModel `tfsdk:"other_subscription"`
 }
 
 // AzureVNETSiteIngressEgressGwHubExpressRouteEnabledConnectionsMetadataModel represents metadata block
 type AzureVNETSiteIngressEgressGwHubExpressRouteEnabledConnectionsMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
-	Name types.String `tfsdk:"name"`
+	Name            types.String `tfsdk:"name"`
 }
 
 // AzureVNETSiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionModel represents other_subscription block
 type AzureVNETSiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionModel struct {
-	CircuitID types.String `tfsdk:"circuit_id"`
+	CircuitID     types.String                                                                                      `tfsdk:"circuit_id"`
 	AuthorizedKey *AzureVNETSiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyModel `tfsdk:"authorized_key"`
 }
 
 // AzureVNETSiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyModel represents authorized_key block
 type AzureVNETSiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyModel struct {
 	BlindfoldSecretInfo *AzureVNETSiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *AzureVNETSiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *AzureVNETSiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // AzureVNETSiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
 type AzureVNETSiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // AzureVNETSiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyClearSecretInfoModel represents clear_secret_info block
 type AzureVNETSiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // AzureVNETSiteIngressEgressGwHubExpressRouteEnabledGatewaySubnetModel represents gateway_subnet block
 type AzureVNETSiteIngressEgressGwHubExpressRouteEnabledGatewaySubnetModel struct {
-	Auto *AzureVNETSiteEmptyModel `tfsdk:"auto"`
-	Subnet *AzureVNETSiteIngressEgressGwHubExpressRouteEnabledGatewaySubnetSubnetModel `tfsdk:"subnet"`
+	Auto        *AzureVNETSiteEmptyModel                                                         `tfsdk:"auto"`
+	Subnet      *AzureVNETSiteIngressEgressGwHubExpressRouteEnabledGatewaySubnetSubnetModel      `tfsdk:"subnet"`
 	SubnetParam *AzureVNETSiteIngressEgressGwHubExpressRouteEnabledGatewaySubnetSubnetParamModel `tfsdk:"subnet_param"`
 }
 
 // AzureVNETSiteIngressEgressGwHubExpressRouteEnabledGatewaySubnetSubnetModel represents subnet block
 type AzureVNETSiteIngressEgressGwHubExpressRouteEnabledGatewaySubnetSubnetModel struct {
-	SubnetResourceGrp types.String `tfsdk:"subnet_resource_grp"`
+	SubnetResourceGrp types.String             `tfsdk:"subnet_resource_grp"`
 	VNETResourceGroup *AzureVNETSiteEmptyModel `tfsdk:"vnet_resource_group"`
 }
 
@@ -345,14 +345,14 @@ type AzureVNETSiteIngressEgressGwHubExpressRouteEnabledGatewaySubnetSubnetParamM
 
 // AzureVNETSiteIngressEgressGwHubExpressRouteEnabledRouteServerSubnetModel represents route_server_subnet block
 type AzureVNETSiteIngressEgressGwHubExpressRouteEnabledRouteServerSubnetModel struct {
-	Auto *AzureVNETSiteEmptyModel `tfsdk:"auto"`
-	Subnet *AzureVNETSiteIngressEgressGwHubExpressRouteEnabledRouteServerSubnetSubnetModel `tfsdk:"subnet"`
+	Auto        *AzureVNETSiteEmptyModel                                                             `tfsdk:"auto"`
+	Subnet      *AzureVNETSiteIngressEgressGwHubExpressRouteEnabledRouteServerSubnetSubnetModel      `tfsdk:"subnet"`
 	SubnetParam *AzureVNETSiteIngressEgressGwHubExpressRouteEnabledRouteServerSubnetSubnetParamModel `tfsdk:"subnet_param"`
 }
 
 // AzureVNETSiteIngressEgressGwHubExpressRouteEnabledRouteServerSubnetSubnetModel represents subnet block
 type AzureVNETSiteIngressEgressGwHubExpressRouteEnabledRouteServerSubnetSubnetModel struct {
-	SubnetResourceGrp types.String `tfsdk:"subnet_resource_grp"`
+	SubnetResourceGrp types.String             `tfsdk:"subnet_resource_grp"`
 	VNETResourceGroup *AzureVNETSiteEmptyModel `tfsdk:"vnet_resource_group"`
 }
 
@@ -368,18 +368,18 @@ type AzureVNETSiteIngressEgressGwHubExpressRouteEnabledSiteRegistrationOverExpre
 
 // AzureVNETSiteIngressEgressGwHubSpokeVnetsModel represents spoke_vnets block
 type AzureVNETSiteIngressEgressGwHubSpokeVnetsModel struct {
-	Auto *AzureVNETSiteEmptyModel `tfsdk:"auto"`
-	Labels *AzureVNETSiteEmptyModel `tfsdk:"labels"`
-	Manual *AzureVNETSiteEmptyModel `tfsdk:"manual"`
-	VNET *AzureVNETSiteIngressEgressGwHubSpokeVnetsVNETModel `tfsdk:"vnet"`
+	Auto   *AzureVNETSiteEmptyModel                            `tfsdk:"auto"`
+	Labels *AzureVNETSiteEmptyModel                            `tfsdk:"labels"`
+	Manual *AzureVNETSiteEmptyModel                            `tfsdk:"manual"`
+	VNET   *AzureVNETSiteIngressEgressGwHubSpokeVnetsVNETModel `tfsdk:"vnet"`
 }
 
 // AzureVNETSiteIngressEgressGwHubSpokeVnetsVNETModel represents vnet block
 type AzureVNETSiteIngressEgressGwHubSpokeVnetsVNETModel struct {
-	ResourceGroup types.String `tfsdk:"resource_group"`
-	VNETName types.String `tfsdk:"vnet_name"`
+	ResourceGroup         types.String             `tfsdk:"resource_group"`
+	VNETName              types.String             `tfsdk:"vnet_name"`
 	F5OrchestratedRouting *AzureVNETSiteEmptyModel `tfsdk:"f5_orchestrated_routing"`
-	ManualRouting *AzureVNETSiteEmptyModel `tfsdk:"manual_routing"`
+	ManualRouting         *AzureVNETSiteEmptyModel `tfsdk:"manual_routing"`
 }
 
 // AzureVNETSiteIngressEgressGwInsideStaticRoutesModel represents inside_static_routes block
@@ -389,32 +389,32 @@ type AzureVNETSiteIngressEgressGwInsideStaticRoutesModel struct {
 
 // AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListModel represents static_route_list block
 type AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListModel struct {
-	SimpleStaticRoute types.String `tfsdk:"simple_static_route"`
+	SimpleStaticRoute types.String                                                                         `tfsdk:"simple_static_route"`
 	CustomStaticRoute *AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteModel `tfsdk:"custom_static_route"`
 }
 
 // AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteModel represents custom_static_route block
 type AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteModel struct {
-	Attrs types.List `tfsdk:"attrs"`
-	Labels *AzureVNETSiteEmptyModel `tfsdk:"labels"`
-	Nexthop *AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel `tfsdk:"nexthop"`
+	Attrs   types.List                                                                                   `tfsdk:"attrs"`
+	Labels  *AzureVNETSiteEmptyModel                                                                     `tfsdk:"labels"`
+	Nexthop *AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel  `tfsdk:"nexthop"`
 	Subnets []AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel `tfsdk:"subnets"`
 }
 
 // AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel represents nexthop block
 type AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel struct {
-	Type types.String `tfsdk:"type"`
-	Interface []AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel `tfsdk:"interface"`
+	Type           types.String                                                                                              `tfsdk:"type"`
+	Interface      []AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel     `tfsdk:"interface"`
 	NexthopAddress *AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel `tfsdk:"nexthop_address"`
 }
 
 // AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel represents interface block
 type AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel represents nexthop_address block
@@ -441,13 +441,13 @@ type AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRo
 
 // AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model represents ipv4 block
 type AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model struct {
-	Plen types.Int64 `tfsdk:"plen"`
+	Plen   types.Int64  `tfsdk:"plen"`
 	Prefix types.String `tfsdk:"prefix"`
 }
 
 // AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model represents ipv6 block
 type AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model struct {
-	Plen types.Int64 `tfsdk:"plen"`
+	Plen   types.Int64  `tfsdk:"plen"`
 	Prefix types.String `tfsdk:"prefix"`
 }
 
@@ -458,32 +458,32 @@ type AzureVNETSiteIngressEgressGwOutsideStaticRoutesModel struct {
 
 // AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListModel represents static_route_list block
 type AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListModel struct {
-	SimpleStaticRoute types.String `tfsdk:"simple_static_route"`
+	SimpleStaticRoute types.String                                                                          `tfsdk:"simple_static_route"`
 	CustomStaticRoute *AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteModel `tfsdk:"custom_static_route"`
 }
 
 // AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteModel represents custom_static_route block
 type AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteModel struct {
-	Attrs types.List `tfsdk:"attrs"`
-	Labels *AzureVNETSiteEmptyModel `tfsdk:"labels"`
-	Nexthop *AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel `tfsdk:"nexthop"`
+	Attrs   types.List                                                                                    `tfsdk:"attrs"`
+	Labels  *AzureVNETSiteEmptyModel                                                                      `tfsdk:"labels"`
+	Nexthop *AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel  `tfsdk:"nexthop"`
 	Subnets []AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel `tfsdk:"subnets"`
 }
 
 // AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel represents nexthop block
 type AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel struct {
-	Type types.String `tfsdk:"type"`
-	Interface []AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel `tfsdk:"interface"`
+	Type           types.String                                                                                               `tfsdk:"type"`
+	Interface      []AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel     `tfsdk:"interface"`
 	NexthopAddress *AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel `tfsdk:"nexthop_address"`
 }
 
 // AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel represents interface block
 type AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel represents nexthop_address block
@@ -510,59 +510,59 @@ type AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticR
 
 // AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model represents ipv4 block
 type AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model struct {
-	Plen types.Int64 `tfsdk:"plen"`
+	Plen   types.Int64  `tfsdk:"plen"`
 	Prefix types.String `tfsdk:"prefix"`
 }
 
 // AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model represents ipv6 block
 type AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model struct {
-	Plen types.Int64 `tfsdk:"plen"`
+	Plen   types.Int64  `tfsdk:"plen"`
 	Prefix types.String `tfsdk:"prefix"`
 }
 
 // AzureVNETSiteIngressEgressGwPerformanceEnhancementModeModel represents performance_enhancement_mode block
 type AzureVNETSiteIngressEgressGwPerformanceEnhancementModeModel struct {
 	PerfModeL3Enhanced *AzureVNETSiteIngressEgressGwPerformanceEnhancementModePerfModeL3EnhancedModel `tfsdk:"perf_mode_l3_enhanced"`
-	PerfModeL7Enhanced *AzureVNETSiteEmptyModel `tfsdk:"perf_mode_l7_enhanced"`
+	PerfModeL7Enhanced *AzureVNETSiteEmptyModel                                                       `tfsdk:"perf_mode_l7_enhanced"`
 }
 
 // AzureVNETSiteIngressEgressGwPerformanceEnhancementModePerfModeL3EnhancedModel represents perf_mode_l3_enhanced block
 type AzureVNETSiteIngressEgressGwPerformanceEnhancementModePerfModeL3EnhancedModel struct {
-	Jumbo *AzureVNETSiteEmptyModel `tfsdk:"jumbo"`
+	Jumbo   *AzureVNETSiteEmptyModel `tfsdk:"jumbo"`
 	NoJumbo *AzureVNETSiteEmptyModel `tfsdk:"no_jumbo"`
 }
 
 // AzureVNETSiteIngressEgressGwArModel represents ingress_egress_gw_ar block
 type AzureVNETSiteIngressEgressGwArModel struct {
-	AzureCertifiedHw types.String `tfsdk:"azure_certified_hw"`
-	AcceleratedNetworking *AzureVNETSiteIngressEgressGwArAcceleratedNetworkingModel `tfsdk:"accelerated_networking"`
+	AzureCertifiedHw               types.String                                                       `tfsdk:"azure_certified_hw"`
+	AcceleratedNetworking          *AzureVNETSiteIngressEgressGwArAcceleratedNetworkingModel          `tfsdk:"accelerated_networking"`
 	ActiveEnhancedFirewallPolicies *AzureVNETSiteIngressEgressGwArActiveEnhancedFirewallPoliciesModel `tfsdk:"active_enhanced_firewall_policies"`
-	ActiveForwardProxyPolicies *AzureVNETSiteIngressEgressGwArActiveForwardProxyPoliciesModel `tfsdk:"active_forward_proxy_policies"`
-	ActiveNetworkPolicies *AzureVNETSiteIngressEgressGwArActiveNetworkPoliciesModel `tfsdk:"active_network_policies"`
-	DcClusterGroupInsideVn *AzureVNETSiteIngressEgressGwArDcClusterGroupInsideVnModel `tfsdk:"dc_cluster_group_inside_vn"`
-	DcClusterGroupOutsideVn *AzureVNETSiteIngressEgressGwArDcClusterGroupOutsideVnModel `tfsdk:"dc_cluster_group_outside_vn"`
-	ForwardProxyAllowAll *AzureVNETSiteEmptyModel `tfsdk:"forward_proxy_allow_all"`
-	GlobalNetworkList *AzureVNETSiteIngressEgressGwArGlobalNetworkListModel `tfsdk:"global_network_list"`
-	Hub *AzureVNETSiteIngressEgressGwArHubModel `tfsdk:"hub"`
-	InsideStaticRoutes *AzureVNETSiteIngressEgressGwArInsideStaticRoutesModel `tfsdk:"inside_static_routes"`
-	NoDcClusterGroup *AzureVNETSiteEmptyModel `tfsdk:"no_dc_cluster_group"`
-	NoForwardProxy *AzureVNETSiteEmptyModel `tfsdk:"no_forward_proxy"`
-	NoGlobalNetwork *AzureVNETSiteEmptyModel `tfsdk:"no_global_network"`
-	NoInsideStaticRoutes *AzureVNETSiteEmptyModel `tfsdk:"no_inside_static_routes"`
-	NoNetworkPolicy *AzureVNETSiteEmptyModel `tfsdk:"no_network_policy"`
-	NoOutsideStaticRoutes *AzureVNETSiteEmptyModel `tfsdk:"no_outside_static_routes"`
-	Node *AzureVNETSiteIngressEgressGwArNodeModel `tfsdk:"node"`
-	NotHub *AzureVNETSiteEmptyModel `tfsdk:"not_hub"`
-	OutsideStaticRoutes *AzureVNETSiteIngressEgressGwArOutsideStaticRoutesModel `tfsdk:"outside_static_routes"`
-	PerformanceEnhancementMode *AzureVNETSiteIngressEgressGwArPerformanceEnhancementModeModel `tfsdk:"performance_enhancement_mode"`
-	SmConnectionPublicIP *AzureVNETSiteEmptyModel `tfsdk:"sm_connection_public_ip"`
-	SmConnectionPvtIP *AzureVNETSiteEmptyModel `tfsdk:"sm_connection_pvt_ip"`
+	ActiveForwardProxyPolicies     *AzureVNETSiteIngressEgressGwArActiveForwardProxyPoliciesModel     `tfsdk:"active_forward_proxy_policies"`
+	ActiveNetworkPolicies          *AzureVNETSiteIngressEgressGwArActiveNetworkPoliciesModel          `tfsdk:"active_network_policies"`
+	DcClusterGroupInsideVn         *AzureVNETSiteIngressEgressGwArDcClusterGroupInsideVnModel         `tfsdk:"dc_cluster_group_inside_vn"`
+	DcClusterGroupOutsideVn        *AzureVNETSiteIngressEgressGwArDcClusterGroupOutsideVnModel        `tfsdk:"dc_cluster_group_outside_vn"`
+	ForwardProxyAllowAll           *AzureVNETSiteEmptyModel                                           `tfsdk:"forward_proxy_allow_all"`
+	GlobalNetworkList              *AzureVNETSiteIngressEgressGwArGlobalNetworkListModel              `tfsdk:"global_network_list"`
+	Hub                            *AzureVNETSiteIngressEgressGwArHubModel                            `tfsdk:"hub"`
+	InsideStaticRoutes             *AzureVNETSiteIngressEgressGwArInsideStaticRoutesModel             `tfsdk:"inside_static_routes"`
+	NoDcClusterGroup               *AzureVNETSiteEmptyModel                                           `tfsdk:"no_dc_cluster_group"`
+	NoForwardProxy                 *AzureVNETSiteEmptyModel                                           `tfsdk:"no_forward_proxy"`
+	NoGlobalNetwork                *AzureVNETSiteEmptyModel                                           `tfsdk:"no_global_network"`
+	NoInsideStaticRoutes           *AzureVNETSiteEmptyModel                                           `tfsdk:"no_inside_static_routes"`
+	NoNetworkPolicy                *AzureVNETSiteEmptyModel                                           `tfsdk:"no_network_policy"`
+	NoOutsideStaticRoutes          *AzureVNETSiteEmptyModel                                           `tfsdk:"no_outside_static_routes"`
+	Node                           *AzureVNETSiteIngressEgressGwArNodeModel                           `tfsdk:"node"`
+	NotHub                         *AzureVNETSiteEmptyModel                                           `tfsdk:"not_hub"`
+	OutsideStaticRoutes            *AzureVNETSiteIngressEgressGwArOutsideStaticRoutesModel            `tfsdk:"outside_static_routes"`
+	PerformanceEnhancementMode     *AzureVNETSiteIngressEgressGwArPerformanceEnhancementModeModel     `tfsdk:"performance_enhancement_mode"`
+	SmConnectionPublicIP           *AzureVNETSiteEmptyModel                                           `tfsdk:"sm_connection_public_ip"`
+	SmConnectionPvtIP              *AzureVNETSiteEmptyModel                                           `tfsdk:"sm_connection_pvt_ip"`
 }
 
 // AzureVNETSiteIngressEgressGwArAcceleratedNetworkingModel represents accelerated_networking block
 type AzureVNETSiteIngressEgressGwArAcceleratedNetworkingModel struct {
 	Disable *AzureVNETSiteEmptyModel `tfsdk:"disable"`
-	Enable *AzureVNETSiteEmptyModel `tfsdk:"enable"`
+	Enable  *AzureVNETSiteEmptyModel `tfsdk:"enable"`
 }
 
 // AzureVNETSiteIngressEgressGwArActiveEnhancedFirewallPoliciesModel represents active_enhanced_firewall_policies block
@@ -572,9 +572,9 @@ type AzureVNETSiteIngressEgressGwArActiveEnhancedFirewallPoliciesModel struct {
 
 // AzureVNETSiteIngressEgressGwArActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel represents enhanced_firewall_policies block
 type AzureVNETSiteIngressEgressGwArActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // AzureVNETSiteIngressEgressGwArActiveForwardProxyPoliciesModel represents active_forward_proxy_policies block
@@ -584,9 +584,9 @@ type AzureVNETSiteIngressEgressGwArActiveForwardProxyPoliciesModel struct {
 
 // AzureVNETSiteIngressEgressGwArActiveForwardProxyPoliciesForwardProxyPoliciesModel represents forward_proxy_policies block
 type AzureVNETSiteIngressEgressGwArActiveForwardProxyPoliciesForwardProxyPoliciesModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // AzureVNETSiteIngressEgressGwArActiveNetworkPoliciesModel represents active_network_policies block
@@ -596,23 +596,23 @@ type AzureVNETSiteIngressEgressGwArActiveNetworkPoliciesModel struct {
 
 // AzureVNETSiteIngressEgressGwArActiveNetworkPoliciesNetworkPoliciesModel represents network_policies block
 type AzureVNETSiteIngressEgressGwArActiveNetworkPoliciesNetworkPoliciesModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // AzureVNETSiteIngressEgressGwArDcClusterGroupInsideVnModel represents dc_cluster_group_inside_vn block
 type AzureVNETSiteIngressEgressGwArDcClusterGroupInsideVnModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // AzureVNETSiteIngressEgressGwArDcClusterGroupOutsideVnModel represents dc_cluster_group_outside_vn block
 type AzureVNETSiteIngressEgressGwArDcClusterGroupOutsideVnModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // AzureVNETSiteIngressEgressGwArGlobalNetworkListModel represents global_network_list block
@@ -633,9 +633,9 @@ type AzureVNETSiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsSLIT
 
 // AzureVNETSiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrGlobalVnModel represents global_vn block
 type AzureVNETSiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrGlobalVnModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // AzureVNETSiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrModel represents slo_to_global_dr block
@@ -645,84 +645,84 @@ type AzureVNETSiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsSLOT
 
 // AzureVNETSiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrGlobalVnModel represents global_vn block
 type AzureVNETSiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrGlobalVnModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // AzureVNETSiteIngressEgressGwArHubModel represents hub block
 type AzureVNETSiteIngressEgressGwArHubModel struct {
-	ExpressRouteDisabled *AzureVNETSiteEmptyModel `tfsdk:"express_route_disabled"`
-	ExpressRouteEnabled *AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledModel `tfsdk:"express_route_enabled"`
-	SpokeVnets []AzureVNETSiteIngressEgressGwArHubSpokeVnetsModel `tfsdk:"spoke_vnets"`
+	ExpressRouteDisabled *AzureVNETSiteEmptyModel                                   `tfsdk:"express_route_disabled"`
+	ExpressRouteEnabled  *AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledModel `tfsdk:"express_route_enabled"`
+	SpokeVnets           []AzureVNETSiteIngressEgressGwArHubSpokeVnetsModel         `tfsdk:"spoke_vnets"`
 }
 
 // AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledModel represents express_route_enabled block
 type AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledModel struct {
-	CustomAsn types.Int64 `tfsdk:"custom_asn"`
-	AdvertiseToRouteServer *AzureVNETSiteEmptyModel `tfsdk:"advertise_to_route_server"`
-	AutoAsn *AzureVNETSiteEmptyModel `tfsdk:"auto_asn"`
-	Connections []AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledConnectionsModel `tfsdk:"connections"`
-	DoNotAdvertiseToRouteServer *AzureVNETSiteEmptyModel `tfsdk:"do_not_advertise_to_route_server"`
-	GatewaySubnet *AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledGatewaySubnetModel `tfsdk:"gateway_subnet"`
-	RouteServerSubnet *AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledRouteServerSubnetModel `tfsdk:"route_server_subnet"`
+	CustomAsn                        types.Int64                                                                                `tfsdk:"custom_asn"`
+	AdvertiseToRouteServer           *AzureVNETSiteEmptyModel                                                                   `tfsdk:"advertise_to_route_server"`
+	AutoAsn                          *AzureVNETSiteEmptyModel                                                                   `tfsdk:"auto_asn"`
+	Connections                      []AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledConnectionsModel                     `tfsdk:"connections"`
+	DoNotAdvertiseToRouteServer      *AzureVNETSiteEmptyModel                                                                   `tfsdk:"do_not_advertise_to_route_server"`
+	GatewaySubnet                    *AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledGatewaySubnetModel                    `tfsdk:"gateway_subnet"`
+	RouteServerSubnet                *AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledRouteServerSubnetModel                `tfsdk:"route_server_subnet"`
 	SiteRegistrationOverExpressRoute *AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledSiteRegistrationOverExpressRouteModel `tfsdk:"site_registration_over_express_route"`
-	SiteRegistrationOverInternet *AzureVNETSiteEmptyModel `tfsdk:"site_registration_over_internet"`
-	SkuErgw1az *AzureVNETSiteEmptyModel `tfsdk:"sku_ergw1az"`
-	SkuErgw2az *AzureVNETSiteEmptyModel `tfsdk:"sku_ergw2az"`
-	SkuHighPerf *AzureVNETSiteEmptyModel `tfsdk:"sku_high_perf"`
-	SkuStandard *AzureVNETSiteEmptyModel `tfsdk:"sku_standard"`
+	SiteRegistrationOverInternet     *AzureVNETSiteEmptyModel                                                                   `tfsdk:"site_registration_over_internet"`
+	SkuErgw1az                       *AzureVNETSiteEmptyModel                                                                   `tfsdk:"sku_ergw1az"`
+	SkuErgw2az                       *AzureVNETSiteEmptyModel                                                                   `tfsdk:"sku_ergw2az"`
+	SkuHighPerf                      *AzureVNETSiteEmptyModel                                                                   `tfsdk:"sku_high_perf"`
+	SkuStandard                      *AzureVNETSiteEmptyModel                                                                   `tfsdk:"sku_standard"`
 }
 
 // AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledConnectionsModel represents connections block
 type AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledConnectionsModel struct {
-	CircuitID types.String `tfsdk:"circuit_id"`
-	Weight types.Int64 `tfsdk:"weight"`
-	Metadata *AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledConnectionsMetadataModel `tfsdk:"metadata"`
+	CircuitID         types.String                                                                           `tfsdk:"circuit_id"`
+	Weight            types.Int64                                                                            `tfsdk:"weight"`
+	Metadata          *AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledConnectionsMetadataModel          `tfsdk:"metadata"`
 	OtherSubscription *AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionModel `tfsdk:"other_subscription"`
 }
 
 // AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledConnectionsMetadataModel represents metadata block
 type AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledConnectionsMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
-	Name types.String `tfsdk:"name"`
+	Name            types.String `tfsdk:"name"`
 }
 
 // AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionModel represents other_subscription block
 type AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionModel struct {
-	CircuitID types.String `tfsdk:"circuit_id"`
+	CircuitID     types.String                                                                                        `tfsdk:"circuit_id"`
 	AuthorizedKey *AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyModel `tfsdk:"authorized_key"`
 }
 
 // AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyModel represents authorized_key block
 type AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyModel struct {
 	BlindfoldSecretInfo *AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
 type AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyClearSecretInfoModel represents clear_secret_info block
 type AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledGatewaySubnetModel represents gateway_subnet block
 type AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledGatewaySubnetModel struct {
-	Auto *AzureVNETSiteEmptyModel `tfsdk:"auto"`
-	Subnet *AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledGatewaySubnetSubnetModel `tfsdk:"subnet"`
+	Auto        *AzureVNETSiteEmptyModel                                                           `tfsdk:"auto"`
+	Subnet      *AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledGatewaySubnetSubnetModel      `tfsdk:"subnet"`
 	SubnetParam *AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledGatewaySubnetSubnetParamModel `tfsdk:"subnet_param"`
 }
 
 // AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledGatewaySubnetSubnetModel represents subnet block
 type AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledGatewaySubnetSubnetModel struct {
-	SubnetResourceGrp types.String `tfsdk:"subnet_resource_grp"`
+	SubnetResourceGrp types.String             `tfsdk:"subnet_resource_grp"`
 	VNETResourceGroup *AzureVNETSiteEmptyModel `tfsdk:"vnet_resource_group"`
 }
 
@@ -733,14 +733,14 @@ type AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledGatewaySubnetSubnetPara
 
 // AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledRouteServerSubnetModel represents route_server_subnet block
 type AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledRouteServerSubnetModel struct {
-	Auto *AzureVNETSiteEmptyModel `tfsdk:"auto"`
-	Subnet *AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledRouteServerSubnetSubnetModel `tfsdk:"subnet"`
+	Auto        *AzureVNETSiteEmptyModel                                                               `tfsdk:"auto"`
+	Subnet      *AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledRouteServerSubnetSubnetModel      `tfsdk:"subnet"`
 	SubnetParam *AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledRouteServerSubnetSubnetParamModel `tfsdk:"subnet_param"`
 }
 
 // AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledRouteServerSubnetSubnetModel represents subnet block
 type AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledRouteServerSubnetSubnetModel struct {
-	SubnetResourceGrp types.String `tfsdk:"subnet_resource_grp"`
+	SubnetResourceGrp types.String             `tfsdk:"subnet_resource_grp"`
 	VNETResourceGroup *AzureVNETSiteEmptyModel `tfsdk:"vnet_resource_group"`
 }
 
@@ -756,18 +756,18 @@ type AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledSiteRegistrationOverExp
 
 // AzureVNETSiteIngressEgressGwArHubSpokeVnetsModel represents spoke_vnets block
 type AzureVNETSiteIngressEgressGwArHubSpokeVnetsModel struct {
-	Auto *AzureVNETSiteEmptyModel `tfsdk:"auto"`
-	Labels *AzureVNETSiteEmptyModel `tfsdk:"labels"`
-	Manual *AzureVNETSiteEmptyModel `tfsdk:"manual"`
-	VNET *AzureVNETSiteIngressEgressGwArHubSpokeVnetsVNETModel `tfsdk:"vnet"`
+	Auto   *AzureVNETSiteEmptyModel                              `tfsdk:"auto"`
+	Labels *AzureVNETSiteEmptyModel                              `tfsdk:"labels"`
+	Manual *AzureVNETSiteEmptyModel                              `tfsdk:"manual"`
+	VNET   *AzureVNETSiteIngressEgressGwArHubSpokeVnetsVNETModel `tfsdk:"vnet"`
 }
 
 // AzureVNETSiteIngressEgressGwArHubSpokeVnetsVNETModel represents vnet block
 type AzureVNETSiteIngressEgressGwArHubSpokeVnetsVNETModel struct {
-	ResourceGroup types.String `tfsdk:"resource_group"`
-	VNETName types.String `tfsdk:"vnet_name"`
+	ResourceGroup         types.String             `tfsdk:"resource_group"`
+	VNETName              types.String             `tfsdk:"vnet_name"`
 	F5OrchestratedRouting *AzureVNETSiteEmptyModel `tfsdk:"f5_orchestrated_routing"`
-	ManualRouting *AzureVNETSiteEmptyModel `tfsdk:"manual_routing"`
+	ManualRouting         *AzureVNETSiteEmptyModel `tfsdk:"manual_routing"`
 }
 
 // AzureVNETSiteIngressEgressGwArInsideStaticRoutesModel represents inside_static_routes block
@@ -777,32 +777,32 @@ type AzureVNETSiteIngressEgressGwArInsideStaticRoutesModel struct {
 
 // AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListModel represents static_route_list block
 type AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListModel struct {
-	SimpleStaticRoute types.String `tfsdk:"simple_static_route"`
+	SimpleStaticRoute types.String                                                                           `tfsdk:"simple_static_route"`
 	CustomStaticRoute *AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteModel `tfsdk:"custom_static_route"`
 }
 
 // AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteModel represents custom_static_route block
 type AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteModel struct {
-	Attrs types.List `tfsdk:"attrs"`
-	Labels *AzureVNETSiteEmptyModel `tfsdk:"labels"`
-	Nexthop *AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel `tfsdk:"nexthop"`
+	Attrs   types.List                                                                                     `tfsdk:"attrs"`
+	Labels  *AzureVNETSiteEmptyModel                                                                       `tfsdk:"labels"`
+	Nexthop *AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel  `tfsdk:"nexthop"`
 	Subnets []AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel `tfsdk:"subnets"`
 }
 
 // AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel represents nexthop block
 type AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel struct {
-	Type types.String `tfsdk:"type"`
-	Interface []AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel `tfsdk:"interface"`
+	Type           types.String                                                                                                `tfsdk:"type"`
+	Interface      []AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel     `tfsdk:"interface"`
 	NexthopAddress *AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel `tfsdk:"nexthop_address"`
 }
 
 // AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel represents interface block
 type AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel represents nexthop_address block
@@ -829,35 +829,35 @@ type AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStatic
 
 // AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model represents ipv4 block
 type AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model struct {
-	Plen types.Int64 `tfsdk:"plen"`
+	Plen   types.Int64  `tfsdk:"plen"`
 	Prefix types.String `tfsdk:"prefix"`
 }
 
 // AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model represents ipv6 block
 type AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model struct {
-	Plen types.Int64 `tfsdk:"plen"`
+	Plen   types.Int64  `tfsdk:"plen"`
 	Prefix types.String `tfsdk:"prefix"`
 }
 
 // AzureVNETSiteIngressEgressGwArNodeModel represents node block
 type AzureVNETSiteIngressEgressGwArNodeModel struct {
-	FaultDomain types.Int64 `tfsdk:"fault_domain"`
-	NodeNumber types.Int64 `tfsdk:"node_number"`
-	UpdateDomain types.Int64 `tfsdk:"update_domain"`
-	InsideSubnet *AzureVNETSiteIngressEgressGwArNodeInsideSubnetModel `tfsdk:"inside_subnet"`
+	FaultDomain   types.Int64                                           `tfsdk:"fault_domain"`
+	NodeNumber    types.Int64                                           `tfsdk:"node_number"`
+	UpdateDomain  types.Int64                                           `tfsdk:"update_domain"`
+	InsideSubnet  *AzureVNETSiteIngressEgressGwArNodeInsideSubnetModel  `tfsdk:"inside_subnet"`
 	OutsideSubnet *AzureVNETSiteIngressEgressGwArNodeOutsideSubnetModel `tfsdk:"outside_subnet"`
 }
 
 // AzureVNETSiteIngressEgressGwArNodeInsideSubnetModel represents inside_subnet block
 type AzureVNETSiteIngressEgressGwArNodeInsideSubnetModel struct {
-	Subnet *AzureVNETSiteIngressEgressGwArNodeInsideSubnetSubnetModel `tfsdk:"subnet"`
+	Subnet      *AzureVNETSiteIngressEgressGwArNodeInsideSubnetSubnetModel      `tfsdk:"subnet"`
 	SubnetParam *AzureVNETSiteIngressEgressGwArNodeInsideSubnetSubnetParamModel `tfsdk:"subnet_param"`
 }
 
 // AzureVNETSiteIngressEgressGwArNodeInsideSubnetSubnetModel represents subnet block
 type AzureVNETSiteIngressEgressGwArNodeInsideSubnetSubnetModel struct {
-	SubnetName types.String `tfsdk:"subnet_name"`
-	SubnetResourceGrp types.String `tfsdk:"subnet_resource_grp"`
+	SubnetName        types.String             `tfsdk:"subnet_name"`
+	SubnetResourceGrp types.String             `tfsdk:"subnet_resource_grp"`
 	VNETResourceGroup *AzureVNETSiteEmptyModel `tfsdk:"vnet_resource_group"`
 }
 
@@ -868,14 +868,14 @@ type AzureVNETSiteIngressEgressGwArNodeInsideSubnetSubnetParamModel struct {
 
 // AzureVNETSiteIngressEgressGwArNodeOutsideSubnetModel represents outside_subnet block
 type AzureVNETSiteIngressEgressGwArNodeOutsideSubnetModel struct {
-	Subnet *AzureVNETSiteIngressEgressGwArNodeOutsideSubnetSubnetModel `tfsdk:"subnet"`
+	Subnet      *AzureVNETSiteIngressEgressGwArNodeOutsideSubnetSubnetModel      `tfsdk:"subnet"`
 	SubnetParam *AzureVNETSiteIngressEgressGwArNodeOutsideSubnetSubnetParamModel `tfsdk:"subnet_param"`
 }
 
 // AzureVNETSiteIngressEgressGwArNodeOutsideSubnetSubnetModel represents subnet block
 type AzureVNETSiteIngressEgressGwArNodeOutsideSubnetSubnetModel struct {
-	SubnetName types.String `tfsdk:"subnet_name"`
-	SubnetResourceGrp types.String `tfsdk:"subnet_resource_grp"`
+	SubnetName        types.String             `tfsdk:"subnet_name"`
+	SubnetResourceGrp types.String             `tfsdk:"subnet_resource_grp"`
 	VNETResourceGroup *AzureVNETSiteEmptyModel `tfsdk:"vnet_resource_group"`
 }
 
@@ -891,32 +891,32 @@ type AzureVNETSiteIngressEgressGwArOutsideStaticRoutesModel struct {
 
 // AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListModel represents static_route_list block
 type AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListModel struct {
-	SimpleStaticRoute types.String `tfsdk:"simple_static_route"`
+	SimpleStaticRoute types.String                                                                            `tfsdk:"simple_static_route"`
 	CustomStaticRoute *AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteModel `tfsdk:"custom_static_route"`
 }
 
 // AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteModel represents custom_static_route block
 type AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteModel struct {
-	Attrs types.List `tfsdk:"attrs"`
-	Labels *AzureVNETSiteEmptyModel `tfsdk:"labels"`
-	Nexthop *AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel `tfsdk:"nexthop"`
+	Attrs   types.List                                                                                      `tfsdk:"attrs"`
+	Labels  *AzureVNETSiteEmptyModel                                                                        `tfsdk:"labels"`
+	Nexthop *AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel  `tfsdk:"nexthop"`
 	Subnets []AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel `tfsdk:"subnets"`
 }
 
 // AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel represents nexthop block
 type AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel struct {
-	Type types.String `tfsdk:"type"`
-	Interface []AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel `tfsdk:"interface"`
+	Type           types.String                                                                                                 `tfsdk:"type"`
+	Interface      []AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel     `tfsdk:"interface"`
 	NexthopAddress *AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel `tfsdk:"nexthop_address"`
 }
 
 // AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel represents interface block
 type AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel represents nexthop_address block
@@ -943,58 +943,58 @@ type AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStati
 
 // AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model represents ipv4 block
 type AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model struct {
-	Plen types.Int64 `tfsdk:"plen"`
+	Plen   types.Int64  `tfsdk:"plen"`
 	Prefix types.String `tfsdk:"prefix"`
 }
 
 // AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model represents ipv6 block
 type AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model struct {
-	Plen types.Int64 `tfsdk:"plen"`
+	Plen   types.Int64  `tfsdk:"plen"`
 	Prefix types.String `tfsdk:"prefix"`
 }
 
 // AzureVNETSiteIngressEgressGwArPerformanceEnhancementModeModel represents performance_enhancement_mode block
 type AzureVNETSiteIngressEgressGwArPerformanceEnhancementModeModel struct {
 	PerfModeL3Enhanced *AzureVNETSiteIngressEgressGwArPerformanceEnhancementModePerfModeL3EnhancedModel `tfsdk:"perf_mode_l3_enhanced"`
-	PerfModeL7Enhanced *AzureVNETSiteEmptyModel `tfsdk:"perf_mode_l7_enhanced"`
+	PerfModeL7Enhanced *AzureVNETSiteEmptyModel                                                         `tfsdk:"perf_mode_l7_enhanced"`
 }
 
 // AzureVNETSiteIngressEgressGwArPerformanceEnhancementModePerfModeL3EnhancedModel represents perf_mode_l3_enhanced block
 type AzureVNETSiteIngressEgressGwArPerformanceEnhancementModePerfModeL3EnhancedModel struct {
-	Jumbo *AzureVNETSiteEmptyModel `tfsdk:"jumbo"`
+	Jumbo   *AzureVNETSiteEmptyModel `tfsdk:"jumbo"`
 	NoJumbo *AzureVNETSiteEmptyModel `tfsdk:"no_jumbo"`
 }
 
 // AzureVNETSiteIngressGwModel represents ingress_gw block
 type AzureVNETSiteIngressGwModel struct {
-	AzureCertifiedHw types.String `tfsdk:"azure_certified_hw"`
-	AcceleratedNetworking *AzureVNETSiteIngressGwAcceleratedNetworkingModel `tfsdk:"accelerated_networking"`
-	AzNodes []AzureVNETSiteIngressGwAzNodesModel `tfsdk:"az_nodes"`
+	AzureCertifiedHw           types.String                                           `tfsdk:"azure_certified_hw"`
+	AcceleratedNetworking      *AzureVNETSiteIngressGwAcceleratedNetworkingModel      `tfsdk:"accelerated_networking"`
+	AzNodes                    []AzureVNETSiteIngressGwAzNodesModel                   `tfsdk:"az_nodes"`
 	PerformanceEnhancementMode *AzureVNETSiteIngressGwPerformanceEnhancementModeModel `tfsdk:"performance_enhancement_mode"`
 }
 
 // AzureVNETSiteIngressGwAcceleratedNetworkingModel represents accelerated_networking block
 type AzureVNETSiteIngressGwAcceleratedNetworkingModel struct {
 	Disable *AzureVNETSiteEmptyModel `tfsdk:"disable"`
-	Enable *AzureVNETSiteEmptyModel `tfsdk:"enable"`
+	Enable  *AzureVNETSiteEmptyModel `tfsdk:"enable"`
 }
 
 // AzureVNETSiteIngressGwAzNodesModel represents az_nodes block
 type AzureVNETSiteIngressGwAzNodesModel struct {
-	AzureAz types.String `tfsdk:"azure_az"`
+	AzureAz     types.String                                   `tfsdk:"azure_az"`
 	LocalSubnet *AzureVNETSiteIngressGwAzNodesLocalSubnetModel `tfsdk:"local_subnet"`
 }
 
 // AzureVNETSiteIngressGwAzNodesLocalSubnetModel represents local_subnet block
 type AzureVNETSiteIngressGwAzNodesLocalSubnetModel struct {
-	Subnet *AzureVNETSiteIngressGwAzNodesLocalSubnetSubnetModel `tfsdk:"subnet"`
+	Subnet      *AzureVNETSiteIngressGwAzNodesLocalSubnetSubnetModel      `tfsdk:"subnet"`
 	SubnetParam *AzureVNETSiteIngressGwAzNodesLocalSubnetSubnetParamModel `tfsdk:"subnet_param"`
 }
 
 // AzureVNETSiteIngressGwAzNodesLocalSubnetSubnetModel represents subnet block
 type AzureVNETSiteIngressGwAzNodesLocalSubnetSubnetModel struct {
-	SubnetName types.String `tfsdk:"subnet_name"`
-	SubnetResourceGrp types.String `tfsdk:"subnet_resource_grp"`
+	SubnetName        types.String             `tfsdk:"subnet_name"`
+	SubnetResourceGrp types.String             `tfsdk:"subnet_resource_grp"`
 	VNETResourceGroup *AzureVNETSiteEmptyModel `tfsdk:"vnet_resource_group"`
 }
 
@@ -1006,47 +1006,47 @@ type AzureVNETSiteIngressGwAzNodesLocalSubnetSubnetParamModel struct {
 // AzureVNETSiteIngressGwPerformanceEnhancementModeModel represents performance_enhancement_mode block
 type AzureVNETSiteIngressGwPerformanceEnhancementModeModel struct {
 	PerfModeL3Enhanced *AzureVNETSiteIngressGwPerformanceEnhancementModePerfModeL3EnhancedModel `tfsdk:"perf_mode_l3_enhanced"`
-	PerfModeL7Enhanced *AzureVNETSiteEmptyModel `tfsdk:"perf_mode_l7_enhanced"`
+	PerfModeL7Enhanced *AzureVNETSiteEmptyModel                                                 `tfsdk:"perf_mode_l7_enhanced"`
 }
 
 // AzureVNETSiteIngressGwPerformanceEnhancementModePerfModeL3EnhancedModel represents perf_mode_l3_enhanced block
 type AzureVNETSiteIngressGwPerformanceEnhancementModePerfModeL3EnhancedModel struct {
-	Jumbo *AzureVNETSiteEmptyModel `tfsdk:"jumbo"`
+	Jumbo   *AzureVNETSiteEmptyModel `tfsdk:"jumbo"`
 	NoJumbo *AzureVNETSiteEmptyModel `tfsdk:"no_jumbo"`
 }
 
 // AzureVNETSiteIngressGwArModel represents ingress_gw_ar block
 type AzureVNETSiteIngressGwArModel struct {
-	AzureCertifiedHw types.String `tfsdk:"azure_certified_hw"`
-	AcceleratedNetworking *AzureVNETSiteIngressGwArAcceleratedNetworkingModel `tfsdk:"accelerated_networking"`
-	Node *AzureVNETSiteIngressGwArNodeModel `tfsdk:"node"`
+	AzureCertifiedHw           types.String                                             `tfsdk:"azure_certified_hw"`
+	AcceleratedNetworking      *AzureVNETSiteIngressGwArAcceleratedNetworkingModel      `tfsdk:"accelerated_networking"`
+	Node                       *AzureVNETSiteIngressGwArNodeModel                       `tfsdk:"node"`
 	PerformanceEnhancementMode *AzureVNETSiteIngressGwArPerformanceEnhancementModeModel `tfsdk:"performance_enhancement_mode"`
 }
 
 // AzureVNETSiteIngressGwArAcceleratedNetworkingModel represents accelerated_networking block
 type AzureVNETSiteIngressGwArAcceleratedNetworkingModel struct {
 	Disable *AzureVNETSiteEmptyModel `tfsdk:"disable"`
-	Enable *AzureVNETSiteEmptyModel `tfsdk:"enable"`
+	Enable  *AzureVNETSiteEmptyModel `tfsdk:"enable"`
 }
 
 // AzureVNETSiteIngressGwArNodeModel represents node block
 type AzureVNETSiteIngressGwArNodeModel struct {
-	FaultDomain types.Int64 `tfsdk:"fault_domain"`
-	NodeNumber types.Int64 `tfsdk:"node_number"`
-	UpdateDomain types.Int64 `tfsdk:"update_domain"`
-	LocalSubnet *AzureVNETSiteIngressGwArNodeLocalSubnetModel `tfsdk:"local_subnet"`
+	FaultDomain  types.Int64                                   `tfsdk:"fault_domain"`
+	NodeNumber   types.Int64                                   `tfsdk:"node_number"`
+	UpdateDomain types.Int64                                   `tfsdk:"update_domain"`
+	LocalSubnet  *AzureVNETSiteIngressGwArNodeLocalSubnetModel `tfsdk:"local_subnet"`
 }
 
 // AzureVNETSiteIngressGwArNodeLocalSubnetModel represents local_subnet block
 type AzureVNETSiteIngressGwArNodeLocalSubnetModel struct {
-	Subnet *AzureVNETSiteIngressGwArNodeLocalSubnetSubnetModel `tfsdk:"subnet"`
+	Subnet      *AzureVNETSiteIngressGwArNodeLocalSubnetSubnetModel      `tfsdk:"subnet"`
 	SubnetParam *AzureVNETSiteIngressGwArNodeLocalSubnetSubnetParamModel `tfsdk:"subnet_param"`
 }
 
 // AzureVNETSiteIngressGwArNodeLocalSubnetSubnetModel represents subnet block
 type AzureVNETSiteIngressGwArNodeLocalSubnetSubnetModel struct {
-	SubnetName types.String `tfsdk:"subnet_name"`
-	SubnetResourceGrp types.String `tfsdk:"subnet_resource_grp"`
+	SubnetName        types.String             `tfsdk:"subnet_name"`
+	SubnetResourceGrp types.String             `tfsdk:"subnet_resource_grp"`
 	VNETResourceGroup *AzureVNETSiteEmptyModel `tfsdk:"vnet_resource_group"`
 }
 
@@ -1058,104 +1058,104 @@ type AzureVNETSiteIngressGwArNodeLocalSubnetSubnetParamModel struct {
 // AzureVNETSiteIngressGwArPerformanceEnhancementModeModel represents performance_enhancement_mode block
 type AzureVNETSiteIngressGwArPerformanceEnhancementModeModel struct {
 	PerfModeL3Enhanced *AzureVNETSiteIngressGwArPerformanceEnhancementModePerfModeL3EnhancedModel `tfsdk:"perf_mode_l3_enhanced"`
-	PerfModeL7Enhanced *AzureVNETSiteEmptyModel `tfsdk:"perf_mode_l7_enhanced"`
+	PerfModeL7Enhanced *AzureVNETSiteEmptyModel                                                   `tfsdk:"perf_mode_l7_enhanced"`
 }
 
 // AzureVNETSiteIngressGwArPerformanceEnhancementModePerfModeL3EnhancedModel represents perf_mode_l3_enhanced block
 type AzureVNETSiteIngressGwArPerformanceEnhancementModePerfModeL3EnhancedModel struct {
-	Jumbo *AzureVNETSiteEmptyModel `tfsdk:"jumbo"`
+	Jumbo   *AzureVNETSiteEmptyModel `tfsdk:"jumbo"`
 	NoJumbo *AzureVNETSiteEmptyModel `tfsdk:"no_jumbo"`
 }
 
 // AzureVNETSiteKubernetesUpgradeDrainModel represents kubernetes_upgrade_drain block
 type AzureVNETSiteKubernetesUpgradeDrainModel struct {
-	DisableUpgradeDrain *AzureVNETSiteEmptyModel `tfsdk:"disable_upgrade_drain"`
-	EnableUpgradeDrain *AzureVNETSiteKubernetesUpgradeDrainEnableUpgradeDrainModel `tfsdk:"enable_upgrade_drain"`
+	DisableUpgradeDrain *AzureVNETSiteEmptyModel                                    `tfsdk:"disable_upgrade_drain"`
+	EnableUpgradeDrain  *AzureVNETSiteKubernetesUpgradeDrainEnableUpgradeDrainModel `tfsdk:"enable_upgrade_drain"`
 }
 
 // AzureVNETSiteKubernetesUpgradeDrainEnableUpgradeDrainModel represents enable_upgrade_drain block
 type AzureVNETSiteKubernetesUpgradeDrainEnableUpgradeDrainModel struct {
-	DrainMaxUnavailableNodeCount types.Int64 `tfsdk:"drain_max_unavailable_node_count"`
-	DrainNodeTimeout types.Int64 `tfsdk:"drain_node_timeout"`
-	DisableVegaUpgradeMode *AzureVNETSiteEmptyModel `tfsdk:"disable_vega_upgrade_mode"`
-	EnableVegaUpgradeMode *AzureVNETSiteEmptyModel `tfsdk:"enable_vega_upgrade_mode"`
+	DrainMaxUnavailableNodeCount types.Int64              `tfsdk:"drain_max_unavailable_node_count"`
+	DrainNodeTimeout             types.Int64              `tfsdk:"drain_node_timeout"`
+	DisableVegaUpgradeMode       *AzureVNETSiteEmptyModel `tfsdk:"disable_vega_upgrade_mode"`
+	EnableVegaUpgradeMode        *AzureVNETSiteEmptyModel `tfsdk:"enable_vega_upgrade_mode"`
 }
 
 // AzureVNETSiteLogReceiverModel represents log_receiver block
 type AzureVNETSiteLogReceiverModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // AzureVNETSiteOfflineSurvivabilityModeModel represents offline_survivability_mode block
 type AzureVNETSiteOfflineSurvivabilityModeModel struct {
 	EnableOfflineSurvivabilityMode *AzureVNETSiteEmptyModel `tfsdk:"enable_offline_survivability_mode"`
-	NoOfflineSurvivabilityMode *AzureVNETSiteEmptyModel `tfsdk:"no_offline_survivability_mode"`
+	NoOfflineSurvivabilityMode     *AzureVNETSiteEmptyModel `tfsdk:"no_offline_survivability_mode"`
 }
 
 // AzureVNETSiteOsModel represents os block
 type AzureVNETSiteOsModel struct {
-	OperatingSystemVersion types.String `tfsdk:"operating_system_version"`
-	DefaultOsVersion *AzureVNETSiteEmptyModel `tfsdk:"default_os_version"`
+	OperatingSystemVersion types.String             `tfsdk:"operating_system_version"`
+	DefaultOsVersion       *AzureVNETSiteEmptyModel `tfsdk:"default_os_version"`
 }
 
 // AzureVNETSiteSwModel represents sw block
 type AzureVNETSiteSwModel struct {
-	VolterraSoftwareVersion types.String `tfsdk:"volterra_software_version"`
-	DefaultSwVersion *AzureVNETSiteEmptyModel `tfsdk:"default_sw_version"`
+	VolterraSoftwareVersion types.String             `tfsdk:"volterra_software_version"`
+	DefaultSwVersion        *AzureVNETSiteEmptyModel `tfsdk:"default_sw_version"`
 }
 
 // AzureVNETSiteVNETModel represents vnet block
 type AzureVNETSiteVNETModel struct {
 	ExistingVNET *AzureVNETSiteVNETExistingVNETModel `tfsdk:"existing_vnet"`
-	NewVNET *AzureVNETSiteVNETNewVNETModel `tfsdk:"new_vnet"`
+	NewVNET      *AzureVNETSiteVNETNewVNETModel      `tfsdk:"new_vnet"`
 }
 
 // AzureVNETSiteVNETExistingVNETModel represents existing_vnet block
 type AzureVNETSiteVNETExistingVNETModel struct {
-	ResourceGroup types.String `tfsdk:"resource_group"`
-	VNETName types.String `tfsdk:"vnet_name"`
+	ResourceGroup         types.String             `tfsdk:"resource_group"`
+	VNETName              types.String             `tfsdk:"vnet_name"`
 	F5OrchestratedRouting *AzureVNETSiteEmptyModel `tfsdk:"f5_orchestrated_routing"`
-	ManualRouting *AzureVNETSiteEmptyModel `tfsdk:"manual_routing"`
+	ManualRouting         *AzureVNETSiteEmptyModel `tfsdk:"manual_routing"`
 }
 
 // AzureVNETSiteVNETNewVNETModel represents new_vnet block
 type AzureVNETSiteVNETNewVNETModel struct {
-	Name types.String `tfsdk:"name"`
-	PrimaryIPV4 types.String `tfsdk:"primary_ipv4"`
+	Name         types.String             `tfsdk:"name"`
+	PrimaryIPV4  types.String             `tfsdk:"primary_ipv4"`
 	Autogenerate *AzureVNETSiteEmptyModel `tfsdk:"autogenerate"`
 }
 
 // AzureVNETSiteVoltstackClusterModel represents voltstack_cluster block
 type AzureVNETSiteVoltstackClusterModel struct {
-	AzureCertifiedHw types.String `tfsdk:"azure_certified_hw"`
-	AcceleratedNetworking *AzureVNETSiteVoltstackClusterAcceleratedNetworkingModel `tfsdk:"accelerated_networking"`
+	AzureCertifiedHw               types.String                                                      `tfsdk:"azure_certified_hw"`
+	AcceleratedNetworking          *AzureVNETSiteVoltstackClusterAcceleratedNetworkingModel          `tfsdk:"accelerated_networking"`
 	ActiveEnhancedFirewallPolicies *AzureVNETSiteVoltstackClusterActiveEnhancedFirewallPoliciesModel `tfsdk:"active_enhanced_firewall_policies"`
-	ActiveForwardProxyPolicies *AzureVNETSiteVoltstackClusterActiveForwardProxyPoliciesModel `tfsdk:"active_forward_proxy_policies"`
-	ActiveNetworkPolicies *AzureVNETSiteVoltstackClusterActiveNetworkPoliciesModel `tfsdk:"active_network_policies"`
-	AzNodes []AzureVNETSiteVoltstackClusterAzNodesModel `tfsdk:"az_nodes"`
-	DcClusterGroup *AzureVNETSiteVoltstackClusterDcClusterGroupModel `tfsdk:"dc_cluster_group"`
-	DefaultStorage *AzureVNETSiteEmptyModel `tfsdk:"default_storage"`
-	ForwardProxyAllowAll *AzureVNETSiteEmptyModel `tfsdk:"forward_proxy_allow_all"`
-	GlobalNetworkList *AzureVNETSiteVoltstackClusterGlobalNetworkListModel `tfsdk:"global_network_list"`
-	K8SCluster *AzureVNETSiteVoltstackClusterK8SClusterModel `tfsdk:"k8s_cluster"`
-	NoDcClusterGroup *AzureVNETSiteEmptyModel `tfsdk:"no_dc_cluster_group"`
-	NoForwardProxy *AzureVNETSiteEmptyModel `tfsdk:"no_forward_proxy"`
-	NoGlobalNetwork *AzureVNETSiteEmptyModel `tfsdk:"no_global_network"`
-	NoK8SCluster *AzureVNETSiteEmptyModel `tfsdk:"no_k8s_cluster"`
-	NoNetworkPolicy *AzureVNETSiteEmptyModel `tfsdk:"no_network_policy"`
-	NoOutsideStaticRoutes *AzureVNETSiteEmptyModel `tfsdk:"no_outside_static_routes"`
-	OutsideStaticRoutes *AzureVNETSiteVoltstackClusterOutsideStaticRoutesModel `tfsdk:"outside_static_routes"`
-	SmConnectionPublicIP *AzureVNETSiteEmptyModel `tfsdk:"sm_connection_public_ip"`
-	SmConnectionPvtIP *AzureVNETSiteEmptyModel `tfsdk:"sm_connection_pvt_ip"`
-	StorageClassList *AzureVNETSiteVoltstackClusterStorageClassListModel `tfsdk:"storage_class_list"`
+	ActiveForwardProxyPolicies     *AzureVNETSiteVoltstackClusterActiveForwardProxyPoliciesModel     `tfsdk:"active_forward_proxy_policies"`
+	ActiveNetworkPolicies          *AzureVNETSiteVoltstackClusterActiveNetworkPoliciesModel          `tfsdk:"active_network_policies"`
+	AzNodes                        []AzureVNETSiteVoltstackClusterAzNodesModel                       `tfsdk:"az_nodes"`
+	DcClusterGroup                 *AzureVNETSiteVoltstackClusterDcClusterGroupModel                 `tfsdk:"dc_cluster_group"`
+	DefaultStorage                 *AzureVNETSiteEmptyModel                                          `tfsdk:"default_storage"`
+	ForwardProxyAllowAll           *AzureVNETSiteEmptyModel                                          `tfsdk:"forward_proxy_allow_all"`
+	GlobalNetworkList              *AzureVNETSiteVoltstackClusterGlobalNetworkListModel              `tfsdk:"global_network_list"`
+	K8SCluster                     *AzureVNETSiteVoltstackClusterK8SClusterModel                     `tfsdk:"k8s_cluster"`
+	NoDcClusterGroup               *AzureVNETSiteEmptyModel                                          `tfsdk:"no_dc_cluster_group"`
+	NoForwardProxy                 *AzureVNETSiteEmptyModel                                          `tfsdk:"no_forward_proxy"`
+	NoGlobalNetwork                *AzureVNETSiteEmptyModel                                          `tfsdk:"no_global_network"`
+	NoK8SCluster                   *AzureVNETSiteEmptyModel                                          `tfsdk:"no_k8s_cluster"`
+	NoNetworkPolicy                *AzureVNETSiteEmptyModel                                          `tfsdk:"no_network_policy"`
+	NoOutsideStaticRoutes          *AzureVNETSiteEmptyModel                                          `tfsdk:"no_outside_static_routes"`
+	OutsideStaticRoutes            *AzureVNETSiteVoltstackClusterOutsideStaticRoutesModel            `tfsdk:"outside_static_routes"`
+	SmConnectionPublicIP           *AzureVNETSiteEmptyModel                                          `tfsdk:"sm_connection_public_ip"`
+	SmConnectionPvtIP              *AzureVNETSiteEmptyModel                                          `tfsdk:"sm_connection_pvt_ip"`
+	StorageClassList               *AzureVNETSiteVoltstackClusterStorageClassListModel               `tfsdk:"storage_class_list"`
 }
 
 // AzureVNETSiteVoltstackClusterAcceleratedNetworkingModel represents accelerated_networking block
 type AzureVNETSiteVoltstackClusterAcceleratedNetworkingModel struct {
 	Disable *AzureVNETSiteEmptyModel `tfsdk:"disable"`
-	Enable *AzureVNETSiteEmptyModel `tfsdk:"enable"`
+	Enable  *AzureVNETSiteEmptyModel `tfsdk:"enable"`
 }
 
 // AzureVNETSiteVoltstackClusterActiveEnhancedFirewallPoliciesModel represents active_enhanced_firewall_policies block
@@ -1165,9 +1165,9 @@ type AzureVNETSiteVoltstackClusterActiveEnhancedFirewallPoliciesModel struct {
 
 // AzureVNETSiteVoltstackClusterActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel represents enhanced_firewall_policies block
 type AzureVNETSiteVoltstackClusterActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // AzureVNETSiteVoltstackClusterActiveForwardProxyPoliciesModel represents active_forward_proxy_policies block
@@ -1177,9 +1177,9 @@ type AzureVNETSiteVoltstackClusterActiveForwardProxyPoliciesModel struct {
 
 // AzureVNETSiteVoltstackClusterActiveForwardProxyPoliciesForwardProxyPoliciesModel represents forward_proxy_policies block
 type AzureVNETSiteVoltstackClusterActiveForwardProxyPoliciesForwardProxyPoliciesModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // AzureVNETSiteVoltstackClusterActiveNetworkPoliciesModel represents active_network_policies block
@@ -1189,27 +1189,27 @@ type AzureVNETSiteVoltstackClusterActiveNetworkPoliciesModel struct {
 
 // AzureVNETSiteVoltstackClusterActiveNetworkPoliciesNetworkPoliciesModel represents network_policies block
 type AzureVNETSiteVoltstackClusterActiveNetworkPoliciesNetworkPoliciesModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // AzureVNETSiteVoltstackClusterAzNodesModel represents az_nodes block
 type AzureVNETSiteVoltstackClusterAzNodesModel struct {
-	AzureAz types.String `tfsdk:"azure_az"`
+	AzureAz     types.String                                          `tfsdk:"azure_az"`
 	LocalSubnet *AzureVNETSiteVoltstackClusterAzNodesLocalSubnetModel `tfsdk:"local_subnet"`
 }
 
 // AzureVNETSiteVoltstackClusterAzNodesLocalSubnetModel represents local_subnet block
 type AzureVNETSiteVoltstackClusterAzNodesLocalSubnetModel struct {
-	Subnet *AzureVNETSiteVoltstackClusterAzNodesLocalSubnetSubnetModel `tfsdk:"subnet"`
+	Subnet      *AzureVNETSiteVoltstackClusterAzNodesLocalSubnetSubnetModel      `tfsdk:"subnet"`
 	SubnetParam *AzureVNETSiteVoltstackClusterAzNodesLocalSubnetSubnetParamModel `tfsdk:"subnet_param"`
 }
 
 // AzureVNETSiteVoltstackClusterAzNodesLocalSubnetSubnetModel represents subnet block
 type AzureVNETSiteVoltstackClusterAzNodesLocalSubnetSubnetModel struct {
-	SubnetName types.String `tfsdk:"subnet_name"`
-	SubnetResourceGrp types.String `tfsdk:"subnet_resource_grp"`
+	SubnetName        types.String             `tfsdk:"subnet_name"`
+	SubnetResourceGrp types.String             `tfsdk:"subnet_resource_grp"`
 	VNETResourceGroup *AzureVNETSiteEmptyModel `tfsdk:"vnet_resource_group"`
 }
 
@@ -1220,9 +1220,9 @@ type AzureVNETSiteVoltstackClusterAzNodesLocalSubnetSubnetParamModel struct {
 
 // AzureVNETSiteVoltstackClusterDcClusterGroupModel represents dc_cluster_group block
 type AzureVNETSiteVoltstackClusterDcClusterGroupModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // AzureVNETSiteVoltstackClusterGlobalNetworkListModel represents global_network_list block
@@ -1243,9 +1243,9 @@ type AzureVNETSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLITo
 
 // AzureVNETSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrGlobalVnModel represents global_vn block
 type AzureVNETSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrGlobalVnModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // AzureVNETSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrModel represents slo_to_global_dr block
@@ -1255,16 +1255,16 @@ type AzureVNETSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLOTo
 
 // AzureVNETSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrGlobalVnModel represents global_vn block
 type AzureVNETSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrGlobalVnModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // AzureVNETSiteVoltstackClusterK8SClusterModel represents k8s_cluster block
 type AzureVNETSiteVoltstackClusterK8SClusterModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // AzureVNETSiteVoltstackClusterOutsideStaticRoutesModel represents outside_static_routes block
@@ -1274,32 +1274,32 @@ type AzureVNETSiteVoltstackClusterOutsideStaticRoutesModel struct {
 
 // AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListModel represents static_route_list block
 type AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListModel struct {
-	SimpleStaticRoute types.String `tfsdk:"simple_static_route"`
+	SimpleStaticRoute types.String                                                                           `tfsdk:"simple_static_route"`
 	CustomStaticRoute *AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteModel `tfsdk:"custom_static_route"`
 }
 
 // AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteModel represents custom_static_route block
 type AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteModel struct {
-	Attrs types.List `tfsdk:"attrs"`
-	Labels *AzureVNETSiteEmptyModel `tfsdk:"labels"`
-	Nexthop *AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel `tfsdk:"nexthop"`
+	Attrs   types.List                                                                                     `tfsdk:"attrs"`
+	Labels  *AzureVNETSiteEmptyModel                                                                       `tfsdk:"labels"`
+	Nexthop *AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel  `tfsdk:"nexthop"`
 	Subnets []AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel `tfsdk:"subnets"`
 }
 
 // AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel represents nexthop block
 type AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel struct {
-	Type types.String `tfsdk:"type"`
-	Interface []AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel `tfsdk:"interface"`
+	Type           types.String                                                                                                `tfsdk:"type"`
+	Interface      []AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel     `tfsdk:"interface"`
 	NexthopAddress *AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel `tfsdk:"nexthop_address"`
 }
 
 // AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel represents interface block
 type AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel represents nexthop_address block
@@ -1326,13 +1326,13 @@ type AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStatic
 
 // AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model represents ipv4 block
 type AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model struct {
-	Plen types.Int64 `tfsdk:"plen"`
+	Plen   types.Int64  `tfsdk:"plen"`
 	Prefix types.String `tfsdk:"prefix"`
 }
 
 // AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model represents ipv6 block
 type AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model struct {
-	Plen types.Int64 `tfsdk:"plen"`
+	Plen   types.Int64  `tfsdk:"plen"`
 	Prefix types.String `tfsdk:"prefix"`
 }
 
@@ -1343,39 +1343,39 @@ type AzureVNETSiteVoltstackClusterStorageClassListModel struct {
 
 // AzureVNETSiteVoltstackClusterStorageClassListStorageClassesModel represents storage_classes block
 type AzureVNETSiteVoltstackClusterStorageClassListStorageClassesModel struct {
-	DefaultStorageClass types.Bool `tfsdk:"default_storage_class"`
-	StorageClassName types.String `tfsdk:"storage_class_name"`
+	DefaultStorageClass types.Bool   `tfsdk:"default_storage_class"`
+	StorageClassName    types.String `tfsdk:"storage_class_name"`
 }
 
 // AzureVNETSiteVoltstackClusterArModel represents voltstack_cluster_ar block
 type AzureVNETSiteVoltstackClusterArModel struct {
-	AzureCertifiedHw types.String `tfsdk:"azure_certified_hw"`
-	AcceleratedNetworking *AzureVNETSiteVoltstackClusterArAcceleratedNetworkingModel `tfsdk:"accelerated_networking"`
+	AzureCertifiedHw               types.String                                                        `tfsdk:"azure_certified_hw"`
+	AcceleratedNetworking          *AzureVNETSiteVoltstackClusterArAcceleratedNetworkingModel          `tfsdk:"accelerated_networking"`
 	ActiveEnhancedFirewallPolicies *AzureVNETSiteVoltstackClusterArActiveEnhancedFirewallPoliciesModel `tfsdk:"active_enhanced_firewall_policies"`
-	ActiveForwardProxyPolicies *AzureVNETSiteVoltstackClusterArActiveForwardProxyPoliciesModel `tfsdk:"active_forward_proxy_policies"`
-	ActiveNetworkPolicies *AzureVNETSiteVoltstackClusterArActiveNetworkPoliciesModel `tfsdk:"active_network_policies"`
-	DcClusterGroup *AzureVNETSiteVoltstackClusterArDcClusterGroupModel `tfsdk:"dc_cluster_group"`
-	DefaultStorage *AzureVNETSiteEmptyModel `tfsdk:"default_storage"`
-	ForwardProxyAllowAll *AzureVNETSiteEmptyModel `tfsdk:"forward_proxy_allow_all"`
-	GlobalNetworkList *AzureVNETSiteVoltstackClusterArGlobalNetworkListModel `tfsdk:"global_network_list"`
-	K8SCluster *AzureVNETSiteVoltstackClusterArK8SClusterModel `tfsdk:"k8s_cluster"`
-	NoDcClusterGroup *AzureVNETSiteEmptyModel `tfsdk:"no_dc_cluster_group"`
-	NoForwardProxy *AzureVNETSiteEmptyModel `tfsdk:"no_forward_proxy"`
-	NoGlobalNetwork *AzureVNETSiteEmptyModel `tfsdk:"no_global_network"`
-	NoK8SCluster *AzureVNETSiteEmptyModel `tfsdk:"no_k8s_cluster"`
-	NoNetworkPolicy *AzureVNETSiteEmptyModel `tfsdk:"no_network_policy"`
-	NoOutsideStaticRoutes *AzureVNETSiteEmptyModel `tfsdk:"no_outside_static_routes"`
-	Node *AzureVNETSiteVoltstackClusterArNodeModel `tfsdk:"node"`
-	OutsideStaticRoutes *AzureVNETSiteVoltstackClusterArOutsideStaticRoutesModel `tfsdk:"outside_static_routes"`
-	SmConnectionPublicIP *AzureVNETSiteEmptyModel `tfsdk:"sm_connection_public_ip"`
-	SmConnectionPvtIP *AzureVNETSiteEmptyModel `tfsdk:"sm_connection_pvt_ip"`
-	StorageClassList *AzureVNETSiteVoltstackClusterArStorageClassListModel `tfsdk:"storage_class_list"`
+	ActiveForwardProxyPolicies     *AzureVNETSiteVoltstackClusterArActiveForwardProxyPoliciesModel     `tfsdk:"active_forward_proxy_policies"`
+	ActiveNetworkPolicies          *AzureVNETSiteVoltstackClusterArActiveNetworkPoliciesModel          `tfsdk:"active_network_policies"`
+	DcClusterGroup                 *AzureVNETSiteVoltstackClusterArDcClusterGroupModel                 `tfsdk:"dc_cluster_group"`
+	DefaultStorage                 *AzureVNETSiteEmptyModel                                            `tfsdk:"default_storage"`
+	ForwardProxyAllowAll           *AzureVNETSiteEmptyModel                                            `tfsdk:"forward_proxy_allow_all"`
+	GlobalNetworkList              *AzureVNETSiteVoltstackClusterArGlobalNetworkListModel              `tfsdk:"global_network_list"`
+	K8SCluster                     *AzureVNETSiteVoltstackClusterArK8SClusterModel                     `tfsdk:"k8s_cluster"`
+	NoDcClusterGroup               *AzureVNETSiteEmptyModel                                            `tfsdk:"no_dc_cluster_group"`
+	NoForwardProxy                 *AzureVNETSiteEmptyModel                                            `tfsdk:"no_forward_proxy"`
+	NoGlobalNetwork                *AzureVNETSiteEmptyModel                                            `tfsdk:"no_global_network"`
+	NoK8SCluster                   *AzureVNETSiteEmptyModel                                            `tfsdk:"no_k8s_cluster"`
+	NoNetworkPolicy                *AzureVNETSiteEmptyModel                                            `tfsdk:"no_network_policy"`
+	NoOutsideStaticRoutes          *AzureVNETSiteEmptyModel                                            `tfsdk:"no_outside_static_routes"`
+	Node                           *AzureVNETSiteVoltstackClusterArNodeModel                           `tfsdk:"node"`
+	OutsideStaticRoutes            *AzureVNETSiteVoltstackClusterArOutsideStaticRoutesModel            `tfsdk:"outside_static_routes"`
+	SmConnectionPublicIP           *AzureVNETSiteEmptyModel                                            `tfsdk:"sm_connection_public_ip"`
+	SmConnectionPvtIP              *AzureVNETSiteEmptyModel                                            `tfsdk:"sm_connection_pvt_ip"`
+	StorageClassList               *AzureVNETSiteVoltstackClusterArStorageClassListModel               `tfsdk:"storage_class_list"`
 }
 
 // AzureVNETSiteVoltstackClusterArAcceleratedNetworkingModel represents accelerated_networking block
 type AzureVNETSiteVoltstackClusterArAcceleratedNetworkingModel struct {
 	Disable *AzureVNETSiteEmptyModel `tfsdk:"disable"`
-	Enable *AzureVNETSiteEmptyModel `tfsdk:"enable"`
+	Enable  *AzureVNETSiteEmptyModel `tfsdk:"enable"`
 }
 
 // AzureVNETSiteVoltstackClusterArActiveEnhancedFirewallPoliciesModel represents active_enhanced_firewall_policies block
@@ -1385,9 +1385,9 @@ type AzureVNETSiteVoltstackClusterArActiveEnhancedFirewallPoliciesModel struct {
 
 // AzureVNETSiteVoltstackClusterArActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel represents enhanced_firewall_policies block
 type AzureVNETSiteVoltstackClusterArActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // AzureVNETSiteVoltstackClusterArActiveForwardProxyPoliciesModel represents active_forward_proxy_policies block
@@ -1397,9 +1397,9 @@ type AzureVNETSiteVoltstackClusterArActiveForwardProxyPoliciesModel struct {
 
 // AzureVNETSiteVoltstackClusterArActiveForwardProxyPoliciesForwardProxyPoliciesModel represents forward_proxy_policies block
 type AzureVNETSiteVoltstackClusterArActiveForwardProxyPoliciesForwardProxyPoliciesModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // AzureVNETSiteVoltstackClusterArActiveNetworkPoliciesModel represents active_network_policies block
@@ -1409,16 +1409,16 @@ type AzureVNETSiteVoltstackClusterArActiveNetworkPoliciesModel struct {
 
 // AzureVNETSiteVoltstackClusterArActiveNetworkPoliciesNetworkPoliciesModel represents network_policies block
 type AzureVNETSiteVoltstackClusterArActiveNetworkPoliciesNetworkPoliciesModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // AzureVNETSiteVoltstackClusterArDcClusterGroupModel represents dc_cluster_group block
 type AzureVNETSiteVoltstackClusterArDcClusterGroupModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // AzureVNETSiteVoltstackClusterArGlobalNetworkListModel represents global_network_list block
@@ -1439,9 +1439,9 @@ type AzureVNETSiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsSLI
 
 // AzureVNETSiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrGlobalVnModel represents global_vn block
 type AzureVNETSiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrGlobalVnModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // AzureVNETSiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrModel represents slo_to_global_dr block
@@ -1451,36 +1451,36 @@ type AzureVNETSiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsSLO
 
 // AzureVNETSiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrGlobalVnModel represents global_vn block
 type AzureVNETSiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrGlobalVnModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // AzureVNETSiteVoltstackClusterArK8SClusterModel represents k8s_cluster block
 type AzureVNETSiteVoltstackClusterArK8SClusterModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // AzureVNETSiteVoltstackClusterArNodeModel represents node block
 type AzureVNETSiteVoltstackClusterArNodeModel struct {
-	FaultDomain types.Int64 `tfsdk:"fault_domain"`
-	NodeNumber types.Int64 `tfsdk:"node_number"`
-	UpdateDomain types.Int64 `tfsdk:"update_domain"`
-	LocalSubnet *AzureVNETSiteVoltstackClusterArNodeLocalSubnetModel `tfsdk:"local_subnet"`
+	FaultDomain  types.Int64                                          `tfsdk:"fault_domain"`
+	NodeNumber   types.Int64                                          `tfsdk:"node_number"`
+	UpdateDomain types.Int64                                          `tfsdk:"update_domain"`
+	LocalSubnet  *AzureVNETSiteVoltstackClusterArNodeLocalSubnetModel `tfsdk:"local_subnet"`
 }
 
 // AzureVNETSiteVoltstackClusterArNodeLocalSubnetModel represents local_subnet block
 type AzureVNETSiteVoltstackClusterArNodeLocalSubnetModel struct {
-	Subnet *AzureVNETSiteVoltstackClusterArNodeLocalSubnetSubnetModel `tfsdk:"subnet"`
+	Subnet      *AzureVNETSiteVoltstackClusterArNodeLocalSubnetSubnetModel      `tfsdk:"subnet"`
 	SubnetParam *AzureVNETSiteVoltstackClusterArNodeLocalSubnetSubnetParamModel `tfsdk:"subnet_param"`
 }
 
 // AzureVNETSiteVoltstackClusterArNodeLocalSubnetSubnetModel represents subnet block
 type AzureVNETSiteVoltstackClusterArNodeLocalSubnetSubnetModel struct {
-	SubnetName types.String `tfsdk:"subnet_name"`
-	SubnetResourceGrp types.String `tfsdk:"subnet_resource_grp"`
+	SubnetName        types.String             `tfsdk:"subnet_name"`
+	SubnetResourceGrp types.String             `tfsdk:"subnet_resource_grp"`
 	VNETResourceGroup *AzureVNETSiteEmptyModel `tfsdk:"vnet_resource_group"`
 }
 
@@ -1496,32 +1496,32 @@ type AzureVNETSiteVoltstackClusterArOutsideStaticRoutesModel struct {
 
 // AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListModel represents static_route_list block
 type AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListModel struct {
-	SimpleStaticRoute types.String `tfsdk:"simple_static_route"`
+	SimpleStaticRoute types.String                                                                             `tfsdk:"simple_static_route"`
 	CustomStaticRoute *AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteModel `tfsdk:"custom_static_route"`
 }
 
 // AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteModel represents custom_static_route block
 type AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteModel struct {
-	Attrs types.List `tfsdk:"attrs"`
-	Labels *AzureVNETSiteEmptyModel `tfsdk:"labels"`
-	Nexthop *AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel `tfsdk:"nexthop"`
+	Attrs   types.List                                                                                       `tfsdk:"attrs"`
+	Labels  *AzureVNETSiteEmptyModel                                                                         `tfsdk:"labels"`
+	Nexthop *AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel  `tfsdk:"nexthop"`
 	Subnets []AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel `tfsdk:"subnets"`
 }
 
 // AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel represents nexthop block
 type AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel struct {
-	Type types.String `tfsdk:"type"`
-	Interface []AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel `tfsdk:"interface"`
+	Type           types.String                                                                                                  `tfsdk:"type"`
+	Interface      []AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel     `tfsdk:"interface"`
 	NexthopAddress *AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel `tfsdk:"nexthop_address"`
 }
 
 // AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel represents interface block
 type AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel represents nexthop_address block
@@ -1548,13 +1548,13 @@ type AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStat
 
 // AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model represents ipv4 block
 type AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model struct {
-	Plen types.Int64 `tfsdk:"plen"`
+	Plen   types.Int64  `tfsdk:"plen"`
 	Prefix types.String `tfsdk:"prefix"`
 }
 
 // AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model represents ipv6 block
 type AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model struct {
-	Plen types.Int64 `tfsdk:"plen"`
+	Plen   types.Int64  `tfsdk:"plen"`
 	Prefix types.String `tfsdk:"prefix"`
 }
 
@@ -1565,50 +1565,50 @@ type AzureVNETSiteVoltstackClusterArStorageClassListModel struct {
 
 // AzureVNETSiteVoltstackClusterArStorageClassListStorageClassesModel represents storage_classes block
 type AzureVNETSiteVoltstackClusterArStorageClassListStorageClassesModel struct {
-	DefaultStorageClass types.Bool `tfsdk:"default_storage_class"`
-	StorageClassName types.String `tfsdk:"storage_class_name"`
+	DefaultStorageClass types.Bool   `tfsdk:"default_storage_class"`
+	StorageClassName    types.String `tfsdk:"storage_class_name"`
 }
 
 type AzureVNETSiteResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Address types.String `tfsdk:"address"`
-	AlternateRegion types.String `tfsdk:"alternate_region"`
-	AzureRegion types.String `tfsdk:"azure_region"`
-	DiskSize types.Int64 `tfsdk:"disk_size"`
-	MachineType types.String `tfsdk:"machine_type"`
-	NodesPerAz types.Int64 `tfsdk:"nodes_per_az"`
-	ResourceGroup types.String `tfsdk:"resource_group"`
-	SSHKey types.String `tfsdk:"ssh_key"`
-	TotalNodes types.Int64 `tfsdk:"total_nodes"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	AdminPassword *AzureVNETSiteAdminPasswordModel `tfsdk:"admin_password"`
-	AzureCred *AzureVNETSiteAzureCredModel `tfsdk:"azure_cred"`
-	BlockAllServices *AzureVNETSiteEmptyModel `tfsdk:"block_all_services"`
-	BlockedServices *AzureVNETSiteBlockedServicesModel `tfsdk:"blocked_services"`
-	Coordinates *AzureVNETSiteCoordinatesModel `tfsdk:"coordinates"`
-	CustomDNS *AzureVNETSiteCustomDNSModel `tfsdk:"custom_dns"`
-	DefaultBlockedServices *AzureVNETSiteEmptyModel `tfsdk:"default_blocked_services"`
-	IngressEgressGw *AzureVNETSiteIngressEgressGwModel `tfsdk:"ingress_egress_gw"`
-	IngressEgressGwAr *AzureVNETSiteIngressEgressGwArModel `tfsdk:"ingress_egress_gw_ar"`
-	IngressGw *AzureVNETSiteIngressGwModel `tfsdk:"ingress_gw"`
-	IngressGwAr *AzureVNETSiteIngressGwArModel `tfsdk:"ingress_gw_ar"`
-	KubernetesUpgradeDrain *AzureVNETSiteKubernetesUpgradeDrainModel `tfsdk:"kubernetes_upgrade_drain"`
-	LogReceiver *AzureVNETSiteLogReceiverModel `tfsdk:"log_receiver"`
-	LogsStreamingDisabled *AzureVNETSiteEmptyModel `tfsdk:"logs_streaming_disabled"`
-	NoWorkerNodes *AzureVNETSiteEmptyModel `tfsdk:"no_worker_nodes"`
+	Name                     types.String                                `tfsdk:"name"`
+	Namespace                types.String                                `tfsdk:"namespace"`
+	Annotations              types.Map                                   `tfsdk:"annotations"`
+	Description              types.String                                `tfsdk:"description"`
+	Disable                  types.Bool                                  `tfsdk:"disable"`
+	Labels                   types.Map                                   `tfsdk:"labels"`
+	ID                       types.String                                `tfsdk:"id"`
+	Address                  types.String                                `tfsdk:"address"`
+	AlternateRegion          types.String                                `tfsdk:"alternate_region"`
+	AzureRegion              types.String                                `tfsdk:"azure_region"`
+	DiskSize                 types.Int64                                 `tfsdk:"disk_size"`
+	MachineType              types.String                                `tfsdk:"machine_type"`
+	NodesPerAz               types.Int64                                 `tfsdk:"nodes_per_az"`
+	ResourceGroup            types.String                                `tfsdk:"resource_group"`
+	SSHKey                   types.String                                `tfsdk:"ssh_key"`
+	TotalNodes               types.Int64                                 `tfsdk:"total_nodes"`
+	Timeouts                 timeouts.Value                              `tfsdk:"timeouts"`
+	AdminPassword            *AzureVNETSiteAdminPasswordModel            `tfsdk:"admin_password"`
+	AzureCred                *AzureVNETSiteAzureCredModel                `tfsdk:"azure_cred"`
+	BlockAllServices         *AzureVNETSiteEmptyModel                    `tfsdk:"block_all_services"`
+	BlockedServices          *AzureVNETSiteBlockedServicesModel          `tfsdk:"blocked_services"`
+	Coordinates              *AzureVNETSiteCoordinatesModel              `tfsdk:"coordinates"`
+	CustomDNS                *AzureVNETSiteCustomDNSModel                `tfsdk:"custom_dns"`
+	DefaultBlockedServices   *AzureVNETSiteEmptyModel                    `tfsdk:"default_blocked_services"`
+	IngressEgressGw          *AzureVNETSiteIngressEgressGwModel          `tfsdk:"ingress_egress_gw"`
+	IngressEgressGwAr        *AzureVNETSiteIngressEgressGwArModel        `tfsdk:"ingress_egress_gw_ar"`
+	IngressGw                *AzureVNETSiteIngressGwModel                `tfsdk:"ingress_gw"`
+	IngressGwAr              *AzureVNETSiteIngressGwArModel              `tfsdk:"ingress_gw_ar"`
+	KubernetesUpgradeDrain   *AzureVNETSiteKubernetesUpgradeDrainModel   `tfsdk:"kubernetes_upgrade_drain"`
+	LogReceiver              *AzureVNETSiteLogReceiverModel              `tfsdk:"log_receiver"`
+	LogsStreamingDisabled    *AzureVNETSiteEmptyModel                    `tfsdk:"logs_streaming_disabled"`
+	NoWorkerNodes            *AzureVNETSiteEmptyModel                    `tfsdk:"no_worker_nodes"`
 	OfflineSurvivabilityMode *AzureVNETSiteOfflineSurvivabilityModeModel `tfsdk:"offline_survivability_mode"`
-	Os *AzureVNETSiteOsModel `tfsdk:"os"`
-	Sw *AzureVNETSiteSwModel `tfsdk:"sw"`
-	Tags *AzureVNETSiteEmptyModel `tfsdk:"tags"`
-	VNET *AzureVNETSiteVNETModel `tfsdk:"vnet"`
-	VoltstackCluster *AzureVNETSiteVoltstackClusterModel `tfsdk:"voltstack_cluster"`
-	VoltstackClusterAr *AzureVNETSiteVoltstackClusterArModel `tfsdk:"voltstack_cluster_ar"`
+	Os                       *AzureVNETSiteOsModel                       `tfsdk:"os"`
+	Sw                       *AzureVNETSiteSwModel                       `tfsdk:"sw"`
+	Tags                     *AzureVNETSiteEmptyModel                    `tfsdk:"tags"`
+	VNET                     *AzureVNETSiteVNETModel                     `tfsdk:"vnet"`
+	VoltstackCluster         *AzureVNETSiteVoltstackClusterModel         `tfsdk:"voltstack_cluster"`
+	VoltstackClusterAr       *AzureVNETSiteVoltstackClusterArModel       `tfsdk:"voltstack_cluster_ar"`
 }
 
 func (r *AzureVNETSiteResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -1622,7 +1622,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the AzureVNETSite. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -1632,7 +1632,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the AzureVNETSite will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -1642,97 +1642,97 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"address": schema.StringAttribute{
 				MarkdownDescription: "Geographical Address. Site's geographical address that can be used to determine its latitude and longitude.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"alternate_region": schema.StringAttribute{
 				MarkdownDescription: "[OneOf: alternate_region, azure_region] Alternate Azure Region Name. Name of the azure region which does not support availability zones.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"azure_region": schema.StringAttribute{
 				MarkdownDescription: "Recommended Azure Region Name. Name of the azure region which supports availability zones.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"disk_size": schema.Int64Attribute{
 				MarkdownDescription: "Cloud Disk Size. Disk size to be used for this instance in GiB. 80 is 80 GiB",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{
 					int64planmodifier.UseStateForUnknown(),
 				},
 			},
 			"machine_type": schema.StringAttribute{
 				MarkdownDescription: "Azure Machine Type for Node. Select Instance size based on performance needed. The default setting for Accelerated Networking is enabled, thus make sure you select a Virtual Machine that supports accelerated networking or disable the setting under, Select Ingress Gateway or Ingress/Egress Gateway > advanced options.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"nodes_per_az": schema.Int64Attribute{
 				MarkdownDescription: "Desired Worker Nodes Per AZ. Desired Worker Nodes Per AZ. Max limit is up to 21",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{
 					int64planmodifier.UseStateForUnknown(),
 				},
 			},
 			"resource_group": schema.StringAttribute{
 				MarkdownDescription: "Resource Group. Azure resource group for resources that will be created",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"ssh_key": schema.StringAttribute{
 				MarkdownDescription: "Public SSH key. Public SSH key for accessing the site.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"total_nodes": schema.Int64Attribute{
 				MarkdownDescription: "Total Number of Worker Nodes for a Site. Total number of worker nodes to be deployed across all AZ's used in the Site",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{
 					int64planmodifier.UseStateForUnknown(),
 				},
@@ -1747,23 +1747,22 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 			}),
 			"admin_password": schema.SingleNestedBlock{
 				MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"blindfold_secret_info": schema.SingleNestedBlock{
 						MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 						Attributes: map[string]schema.Attribute{
 							"decryption_provider": schema.StringAttribute{
 								MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-								Optional: true,
+								Optional:            true,
 							},
 							"location": schema.StringAttribute{
 								MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-								Optional: true,
+								Optional:            true,
 							},
 							"store_provider": schema.StringAttribute{
 								MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 					},
@@ -1772,43 +1771,40 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						Attributes: map[string]schema.Attribute{
 							"provider_ref": schema.StringAttribute{
 								MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-								Optional: true,
+								Optional:            true,
 							},
 							"url": schema.StringAttribute{
 								MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 					},
 				},
-
 			},
 			"azure_cred": schema.SingleNestedBlock{
 				MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
 						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-						Optional: true,
+						Optional:            true,
 					},
 					"namespace": schema.StringAttribute{
 						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-						Optional: true,
+						Optional:            true,
 					},
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-						Optional: true,
-						Computed: true,
+						Optional:            true,
+						Computed:            true,
 					},
 				},
-
 			},
 			"block_all_services": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: block_all_services, blocked_services, default_blocked_services] Empty. This can be used for messages where no values are needed",
 			},
 			"blocked_services": schema.SingleNestedBlock{
 				MarkdownDescription: "Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site.",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"blocked_sevice": schema.ListNestedBlock{
 						MarkdownDescription: "Disable Node Local Services.",
@@ -1816,7 +1812,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 							Attributes: map[string]schema.Attribute{
 								"network_type": schema.StringAttribute{
 									MarkdownDescription: "Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user. Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`. Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`.",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
@@ -1833,35 +1829,32 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 				},
-
 			},
 			"coordinates": schema.SingleNestedBlock{
 				MarkdownDescription: "Site Coordinates. Coordinates of the site which provides the site physical location",
 				Attributes: map[string]schema.Attribute{
 					"latitude": schema.Int64Attribute{
 						MarkdownDescription: "Latitude. Latitude of the site location",
-						Optional: true,
+						Optional:            true,
 					},
 					"longitude": schema.Int64Attribute{
 						MarkdownDescription: "Longitude. longitude of site location",
-						Optional: true,
+						Optional:            true,
 					},
 				},
-
 			},
 			"custom_dns": schema.SingleNestedBlock{
 				MarkdownDescription: "Custom DNS. Custom DNS is the configured for specify CE site",
 				Attributes: map[string]schema.Attribute{
 					"inside_nameserver": schema.StringAttribute{
 						MarkdownDescription: "DNS Server for Inside Network. Optional DNS server IP to be used for name resolution in inside network",
-						Optional: true,
+						Optional:            true,
 					},
 					"outside_nameserver": schema.StringAttribute{
 						MarkdownDescription: "DNS Server for Outside Network. Optional DNS server IP to be used for name resolution in outside network",
-						Optional: true,
+						Optional:            true,
 					},
 				},
-
 			},
 			"default_blocked_services": schema.SingleNestedBlock{
 				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -1871,14 +1864,13 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				Attributes: map[string]schema.Attribute{
 					"azure_certified_hw": schema.StringAttribute{
 						MarkdownDescription: "Azure Certified Hardware. Name for Azure certified hardware.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"accelerated_networking": schema.SingleNestedBlock{
 						MarkdownDescription: "Accelerated Networking Type. x-required Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"disable": schema.SingleNestedBlock{
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -1890,8 +1882,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 					},
 					"active_enhanced_firewall_policies": schema.SingleNestedBlock{
 						MarkdownDescription: "Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion.",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"enhanced_firewall_policies": schema.ListNestedBlock{
 								MarkdownDescription: "Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active",
@@ -1899,16 +1890,16 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-											Optional: true,
+											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
 											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-											Optional: true,
+											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
@@ -1917,8 +1908,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 					},
 					"active_forward_proxy_policies": schema.SingleNestedBlock{
 						MarkdownDescription: "Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"forward_proxy_policies": schema.ListNestedBlock{
 								MarkdownDescription: "Forward Proxy Policies. Ordered List of Forward Proxy Policies active",
@@ -1926,16 +1916,16 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-											Optional: true,
+											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
 											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-											Optional: true,
+											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
@@ -1944,8 +1934,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 					},
 					"active_network_policies": schema.SingleNestedBlock{
 						MarkdownDescription: "Active Firewall Policies Type. List of firewall policy views.",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"network_policies": schema.ListNestedBlock{
 								MarkdownDescription: "Firewall Policy. Ordered List of Firewall Policies active for this network firewall",
@@ -1953,16 +1942,16 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-											Optional: true,
+											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
 											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-											Optional: true,
+											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
@@ -1975,25 +1964,24 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 							Attributes: map[string]schema.Attribute{
 								"azure_az": schema.StringAttribute{
 									MarkdownDescription: "Azure Availability Zone. A zone depicting a grouping of datacenters within an Azure region. Expecting numeric input",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
 								"inside_subnet": schema.SingleNestedBlock{
 									MarkdownDescription: "Azure Subnet. Parameters for Azure subnet",
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"subnet": schema.SingleNestedBlock{
 											MarkdownDescription: "Azure Subnet. Parameters for Azure subnet",
 											Attributes: map[string]schema.Attribute{
 												"subnet_name": schema.StringAttribute{
 													MarkdownDescription: "Subnet Name. Name of existing subnet.",
-													Optional: true,
+													Optional:            true,
 												},
 												"subnet_resource_grp": schema.StringAttribute{
 													MarkdownDescription: "Resource Group Name. Specify name of Resource Group",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -2007,7 +1995,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											Attributes: map[string]schema.Attribute{
 												"ipv4": schema.StringAttribute{
 													MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 										},
@@ -2015,19 +2003,18 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 								},
 								"outside_subnet": schema.SingleNestedBlock{
 									MarkdownDescription: "Azure Subnet. Parameters for Azure subnet",
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"subnet": schema.SingleNestedBlock{
 											MarkdownDescription: "Azure Subnet. Parameters for Azure subnet",
 											Attributes: map[string]schema.Attribute{
 												"subnet_name": schema.StringAttribute{
 													MarkdownDescription: "Subnet Name. Name of existing subnet.",
-													Optional: true,
+													Optional:            true,
 												},
 												"subnet_resource_grp": schema.StringAttribute{
 													MarkdownDescription: "Resource Group Name. Specify name of Resource Group",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -2041,7 +2028,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											Attributes: map[string]schema.Attribute{
 												"ipv4": schema.StringAttribute{
 													MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 										},
@@ -2055,16 +2042,16 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
 								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-								Optional: true,
+								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
 								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-								Optional: true,
+								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-								Optional: true,
-								Computed: true,
+								Optional:            true,
+								Computed:            true,
 							},
 						},
 					},
@@ -2073,16 +2060,16 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
 								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-								Optional: true,
+								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
 								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-								Optional: true,
+								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-								Optional: true,
-								Computed: true,
+								Optional:            true,
+								Computed:            true,
 							},
 						},
 					},
@@ -2091,35 +2078,32 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 					},
 					"global_network_list": schema.SingleNestedBlock{
 						MarkdownDescription: "Global Network Connection List. List of global network connections",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"global_network_connections": schema.ListNestedBlock{
 								MarkdownDescription: "Global Network Connections. Global network connections",
 								NestedObject: schema.NestedBlockObject{
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes: map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"sli_to_global_dr": schema.SingleNestedBlock{
 											MarkdownDescription: "Global Network. Global network reference for direct connection",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"global_vn": schema.SingleNestedBlock{
 													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 													Attributes: map[string]schema.Attribute{
 														"name": schema.StringAttribute{
 															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-															Optional: true,
+															Optional:            true,
 														},
 														"namespace": schema.StringAttribute{
 															MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-															Optional: true,
+															Optional:            true,
 														},
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-															Optional: true,
-															Computed: true,
+															Optional:            true,
+															Computed:            true,
 														},
 													},
 												},
@@ -2127,24 +2111,23 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										},
 										"slo_to_global_dr": schema.SingleNestedBlock{
 											MarkdownDescription: "Global Network. Global network reference for direct connection",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"global_vn": schema.SingleNestedBlock{
 													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 													Attributes: map[string]schema.Attribute{
 														"name": schema.StringAttribute{
 															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-															Optional: true,
+															Optional:            true,
 														},
 														"namespace": schema.StringAttribute{
 															MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-															Optional: true,
+															Optional:            true,
 														},
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-															Optional: true,
-															Computed: true,
+															Optional:            true,
+															Computed:            true,
 														},
 													},
 												},
@@ -2157,8 +2140,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 					},
 					"hub": schema.SingleNestedBlock{
 						MarkdownDescription: "Hub VNet type. Hub VNet type",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"express_route_disabled": schema.SingleNestedBlock{
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -2168,7 +2150,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 								Attributes: map[string]schema.Attribute{
 									"custom_asn": schema.Int64Attribute{
 										MarkdownDescription: "Custom ASN. Set custom ASN for F5XC Site",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 								Blocks: map[string]schema.Block{
@@ -2184,11 +2166,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											Attributes: map[string]schema.Attribute{
 												"circuit_id": schema.StringAttribute{
 													MarkdownDescription: "Circuit in same subscription. ExpressRoute Circuit is in same subscription as the site",
-													Optional: true,
+													Optional:            true,
 												},
 												"weight": schema.Int64Attribute{
 													MarkdownDescription: "Routing Weight. The weight (or priority) for the routes received from this connection. The. Defaults to `10`.",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -2197,11 +2179,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 													Attributes: map[string]schema.Attribute{
 														"description_spec": schema.StringAttribute{
 															MarkdownDescription: "Description. Human readable description.",
-															Optional: true,
+															Optional:            true,
 														},
 														"name": schema.StringAttribute{
 															MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -2210,29 +2192,28 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 													Attributes: map[string]schema.Attribute{
 														"circuit_id": schema.StringAttribute{
 															MarkdownDescription: "Circuit ID. Circuit ID",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 													Blocks: map[string]schema.Block{
 														"authorized_key": schema.SingleNestedBlock{
 															MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-															Attributes: map[string]schema.Attribute{
-															},
+															Attributes:          map[string]schema.Attribute{},
 															Blocks: map[string]schema.Block{
 																"blindfold_secret_info": schema.SingleNestedBlock{
 																	MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 																	Attributes: map[string]schema.Attribute{
 																		"decryption_provider": schema.StringAttribute{
 																			MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																		"location": schema.StringAttribute{
 																			MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																		"store_provider": schema.StringAttribute{
 																			MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																	},
 																},
@@ -2241,11 +2222,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																	Attributes: map[string]schema.Attribute{
 																		"provider_ref": schema.StringAttribute{
 																			MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																		"url": schema.StringAttribute{
 																			MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																	},
 																},
@@ -2261,8 +2242,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 									},
 									"gateway_subnet": schema.SingleNestedBlock{
 										MarkdownDescription: "Azure Subnet. Parameters for Azure subnet",
-										Attributes: map[string]schema.Attribute{
-										},
+										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"auto": schema.SingleNestedBlock{
 												MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -2272,7 +2252,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												Attributes: map[string]schema.Attribute{
 													"subnet_resource_grp": schema.StringAttribute{
 														MarkdownDescription: "Resource Group Name. Specify name of Resource Group",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 												Blocks: map[string]schema.Block{
@@ -2286,7 +2266,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												Attributes: map[string]schema.Attribute{
 													"ipv4": schema.StringAttribute{
 														MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 											},
@@ -2294,8 +2274,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 									},
 									"route_server_subnet": schema.SingleNestedBlock{
 										MarkdownDescription: "Azure Subnet. Parameters for Azure subnet",
-										Attributes: map[string]schema.Attribute{
-										},
+										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"auto": schema.SingleNestedBlock{
 												MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -2305,7 +2284,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												Attributes: map[string]schema.Attribute{
 													"subnet_resource_grp": schema.StringAttribute{
 														MarkdownDescription: "Resource Group Name. Specify name of Resource Group",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 												Blocks: map[string]schema.Block{
@@ -2319,7 +2298,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												Attributes: map[string]schema.Attribute{
 													"ipv4": schema.StringAttribute{
 														MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 											},
@@ -2330,7 +2309,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										Attributes: map[string]schema.Attribute{
 											"cloudlink_network_name": schema.StringAttribute{
 												MarkdownDescription: "Private ADN Network. Establish private connectivity with the F5 Distributed Cloud Global Network using a Private ADN network. To provision a Private ADN network, please contact F5 Distributed Cloud support.",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -2354,8 +2333,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 							"spoke_vnets": schema.ListNestedBlock{
 								MarkdownDescription: "Spoke VNet Peering (Legacy). Spoke VNet Peering",
 								NestedObject: schema.NestedBlockObject{
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes: map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"auto": schema.SingleNestedBlock{
 											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -2371,11 +2349,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											Attributes: map[string]schema.Attribute{
 												"resource_group": schema.StringAttribute{
 													MarkdownDescription: "Existing Vnet Resource Group. Resource group of existing Vnet",
-													Optional: true,
+													Optional:            true,
 												},
 												"vnet_name": schema.StringAttribute{
 													MarkdownDescription: "Existing Vnet Name. Name of existing Vnet",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -2394,8 +2372,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 					},
 					"inside_static_routes": schema.SingleNestedBlock{
 						MarkdownDescription: "Static Route List Type. List of static routes",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"static_route_list": schema.ListNestedBlock{
 								MarkdownDescription: "List of Static Routes. List of Static routes",
@@ -2403,7 +2380,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 									Attributes: map[string]schema.Attribute{
 										"simple_static_route": schema.StringAttribute{
 											MarkdownDescription: "Simple Static Route. Use simple static route for prefix pointing to single interface in the network",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -2412,8 +2389,8 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											Attributes: map[string]schema.Attribute{
 												"attrs": schema.ListAttribute{
 													MarkdownDescription: "Attributes. List of route attributes associated with the static route. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP`.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -2425,7 +2402,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 													Attributes: map[string]schema.Attribute{
 														"type": schema.StringAttribute{
 															MarkdownDescription: "Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network. Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`. Defaults to `NEXT_HOP_DEFAULT_GATEWAY`.",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 													Blocks: map[string]schema.Block{
@@ -2435,41 +2412,40 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																Attributes: map[string]schema.Attribute{
 																	"kind": schema.StringAttribute{
 																		MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-																		Optional: true,
-																		Computed: true,
+																		Optional:            true,
+																		Computed:            true,
 																	},
 																	"name": schema.StringAttribute{
 																		MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"namespace": schema.StringAttribute{
 																		MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"tenant": schema.StringAttribute{
 																		MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-																		Optional: true,
-																		Computed: true,
+																		Optional:            true,
+																		Computed:            true,
 																	},
 																	"uid": schema.StringAttribute{
 																		MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-																		Optional: true,
-																		Computed: true,
+																		Optional:            true,
+																		Computed:            true,
 																	},
 																},
 															},
 														},
 														"nexthop_address": schema.SingleNestedBlock{
 															MarkdownDescription: "IP Address. IP Address used to specify an IPv4 or IPv6 address",
-															Attributes: map[string]schema.Attribute{
-															},
+															Attributes:          map[string]schema.Attribute{},
 															Blocks: map[string]schema.Block{
 																"ipv4": schema.SingleNestedBlock{
 																	MarkdownDescription: "IPv4 Address. IPv4 Address in dot-decimal notation",
 																	Attributes: map[string]schema.Attribute{
 																		"addr": schema.StringAttribute{
 																			MarkdownDescription: "IPv4 Address. IPv4 Address in string form with dot-decimal notation",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																	},
 																},
@@ -2478,7 +2454,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																	Attributes: map[string]schema.Attribute{
 																		"addr": schema.StringAttribute{
 																			MarkdownDescription: "IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																	},
 																},
@@ -2489,19 +2465,18 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												"subnets": schema.ListNestedBlock{
 													MarkdownDescription: "Subnets. List of route prefixes",
 													NestedObject: schema.NestedBlockObject{
-														Attributes: map[string]schema.Attribute{
-														},
+														Attributes: map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"ipv4": schema.SingleNestedBlock{
 																MarkdownDescription: "IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32",
 																Attributes: map[string]schema.Attribute{
 																	"plen": schema.Int64Attribute{
 																		MarkdownDescription: "Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"prefix": schema.StringAttribute{
 																		MarkdownDescription: "Prefix. Prefix part of the IPv4 subnet in string form with dot-decimal notation",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 															},
@@ -2510,11 +2485,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																Attributes: map[string]schema.Attribute{
 																	"plen": schema.Int64Attribute{
 																		MarkdownDescription: "Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"prefix": schema.StringAttribute{
 																		MarkdownDescription: "Prefix. Prefix part of the IPv6 subnet given in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' e.g. '2001:db8:0:0:0:2:0:0' The address can be compacted by suppressing zeros e.g. '2001:db8::2::'",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 															},
@@ -2551,8 +2526,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 					},
 					"outside_static_routes": schema.SingleNestedBlock{
 						MarkdownDescription: "Static Route List Type. List of static routes",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"static_route_list": schema.ListNestedBlock{
 								MarkdownDescription: "List of Static Routes. List of Static routes",
@@ -2560,7 +2534,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 									Attributes: map[string]schema.Attribute{
 										"simple_static_route": schema.StringAttribute{
 											MarkdownDescription: "Simple Static Route. Use simple static route for prefix pointing to single interface in the network",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -2569,8 +2543,8 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											Attributes: map[string]schema.Attribute{
 												"attrs": schema.ListAttribute{
 													MarkdownDescription: "Attributes. List of route attributes associated with the static route. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP`.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -2582,7 +2556,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 													Attributes: map[string]schema.Attribute{
 														"type": schema.StringAttribute{
 															MarkdownDescription: "Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network. Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`. Defaults to `NEXT_HOP_DEFAULT_GATEWAY`.",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 													Blocks: map[string]schema.Block{
@@ -2592,41 +2566,40 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																Attributes: map[string]schema.Attribute{
 																	"kind": schema.StringAttribute{
 																		MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-																		Optional: true,
-																		Computed: true,
+																		Optional:            true,
+																		Computed:            true,
 																	},
 																	"name": schema.StringAttribute{
 																		MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"namespace": schema.StringAttribute{
 																		MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"tenant": schema.StringAttribute{
 																		MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-																		Optional: true,
-																		Computed: true,
+																		Optional:            true,
+																		Computed:            true,
 																	},
 																	"uid": schema.StringAttribute{
 																		MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-																		Optional: true,
-																		Computed: true,
+																		Optional:            true,
+																		Computed:            true,
 																	},
 																},
 															},
 														},
 														"nexthop_address": schema.SingleNestedBlock{
 															MarkdownDescription: "IP Address. IP Address used to specify an IPv4 or IPv6 address",
-															Attributes: map[string]schema.Attribute{
-															},
+															Attributes:          map[string]schema.Attribute{},
 															Blocks: map[string]schema.Block{
 																"ipv4": schema.SingleNestedBlock{
 																	MarkdownDescription: "IPv4 Address. IPv4 Address in dot-decimal notation",
 																	Attributes: map[string]schema.Attribute{
 																		"addr": schema.StringAttribute{
 																			MarkdownDescription: "IPv4 Address. IPv4 Address in string form with dot-decimal notation",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																	},
 																},
@@ -2635,7 +2608,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																	Attributes: map[string]schema.Attribute{
 																		"addr": schema.StringAttribute{
 																			MarkdownDescription: "IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																	},
 																},
@@ -2646,19 +2619,18 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												"subnets": schema.ListNestedBlock{
 													MarkdownDescription: "Subnets. List of route prefixes",
 													NestedObject: schema.NestedBlockObject{
-														Attributes: map[string]schema.Attribute{
-														},
+														Attributes: map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"ipv4": schema.SingleNestedBlock{
 																MarkdownDescription: "IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32",
 																Attributes: map[string]schema.Attribute{
 																	"plen": schema.Int64Attribute{
 																		MarkdownDescription: "Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"prefix": schema.StringAttribute{
 																		MarkdownDescription: "Prefix. Prefix part of the IPv4 subnet in string form with dot-decimal notation",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 															},
@@ -2667,11 +2639,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																Attributes: map[string]schema.Attribute{
 																	"plen": schema.Int64Attribute{
 																		MarkdownDescription: "Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"prefix": schema.StringAttribute{
 																		MarkdownDescription: "Prefix. Prefix part of the IPv6 subnet given in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' e.g. '2001:db8:0:0:0:2:0:0' The address can be compacted by suppressing zeros e.g. '2001:db8::2::'",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 															},
@@ -2687,13 +2659,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 					},
 					"performance_enhancement_mode": schema.SingleNestedBlock{
 						MarkdownDescription: "Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default.",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"perf_mode_l3_enhanced": schema.SingleNestedBlock{
 								MarkdownDescription: "L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"jumbo": schema.SingleNestedBlock{
 										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -2715,21 +2685,19 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 			"ingress_egress_gw_ar": schema.SingleNestedBlock{
 				MarkdownDescription: "Azure Ingress/Egress Gateway on Alternate Region. Two interface Azure ingress/egress site on Alternate Region with no support for zones",
 				Attributes: map[string]schema.Attribute{
 					"azure_certified_hw": schema.StringAttribute{
 						MarkdownDescription: "Azure Certified Hardware. Name for Azure certified hardware.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"accelerated_networking": schema.SingleNestedBlock{
 						MarkdownDescription: "Accelerated Networking Type. x-required Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"disable": schema.SingleNestedBlock{
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -2741,8 +2709,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 					},
 					"active_enhanced_firewall_policies": schema.SingleNestedBlock{
 						MarkdownDescription: "Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion.",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"enhanced_firewall_policies": schema.ListNestedBlock{
 								MarkdownDescription: "Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active",
@@ -2750,16 +2717,16 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-											Optional: true,
+											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
 											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-											Optional: true,
+											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
@@ -2768,8 +2735,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 					},
 					"active_forward_proxy_policies": schema.SingleNestedBlock{
 						MarkdownDescription: "Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"forward_proxy_policies": schema.ListNestedBlock{
 								MarkdownDescription: "Forward Proxy Policies. Ordered List of Forward Proxy Policies active",
@@ -2777,16 +2743,16 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-											Optional: true,
+											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
 											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-											Optional: true,
+											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
@@ -2795,8 +2761,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 					},
 					"active_network_policies": schema.SingleNestedBlock{
 						MarkdownDescription: "Active Firewall Policies Type. List of firewall policy views.",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"network_policies": schema.ListNestedBlock{
 								MarkdownDescription: "Firewall Policy. Ordered List of Firewall Policies active for this network firewall",
@@ -2804,16 +2769,16 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-											Optional: true,
+											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
 											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-											Optional: true,
+											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
@@ -2825,16 +2790,16 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
 								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-								Optional: true,
+								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
 								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-								Optional: true,
+								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-								Optional: true,
-								Computed: true,
+								Optional:            true,
+								Computed:            true,
 							},
 						},
 					},
@@ -2843,16 +2808,16 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
 								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-								Optional: true,
+								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
 								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-								Optional: true,
+								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-								Optional: true,
-								Computed: true,
+								Optional:            true,
+								Computed:            true,
 							},
 						},
 					},
@@ -2861,35 +2826,32 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 					},
 					"global_network_list": schema.SingleNestedBlock{
 						MarkdownDescription: "Global Network Connection List. List of global network connections",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"global_network_connections": schema.ListNestedBlock{
 								MarkdownDescription: "Global Network Connections. Global network connections",
 								NestedObject: schema.NestedBlockObject{
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes: map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"sli_to_global_dr": schema.SingleNestedBlock{
 											MarkdownDescription: "Global Network. Global network reference for direct connection",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"global_vn": schema.SingleNestedBlock{
 													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 													Attributes: map[string]schema.Attribute{
 														"name": schema.StringAttribute{
 															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-															Optional: true,
+															Optional:            true,
 														},
 														"namespace": schema.StringAttribute{
 															MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-															Optional: true,
+															Optional:            true,
 														},
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-															Optional: true,
-															Computed: true,
+															Optional:            true,
+															Computed:            true,
 														},
 													},
 												},
@@ -2897,24 +2859,23 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										},
 										"slo_to_global_dr": schema.SingleNestedBlock{
 											MarkdownDescription: "Global Network. Global network reference for direct connection",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"global_vn": schema.SingleNestedBlock{
 													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 													Attributes: map[string]schema.Attribute{
 														"name": schema.StringAttribute{
 															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-															Optional: true,
+															Optional:            true,
 														},
 														"namespace": schema.StringAttribute{
 															MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-															Optional: true,
+															Optional:            true,
 														},
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-															Optional: true,
-															Computed: true,
+															Optional:            true,
+															Computed:            true,
 														},
 													},
 												},
@@ -2927,8 +2888,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 					},
 					"hub": schema.SingleNestedBlock{
 						MarkdownDescription: "Hub VNet type. Hub VNet type",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"express_route_disabled": schema.SingleNestedBlock{
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -2938,7 +2898,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 								Attributes: map[string]schema.Attribute{
 									"custom_asn": schema.Int64Attribute{
 										MarkdownDescription: "Custom ASN. Set custom ASN for F5XC Site",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 								Blocks: map[string]schema.Block{
@@ -2954,11 +2914,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											Attributes: map[string]schema.Attribute{
 												"circuit_id": schema.StringAttribute{
 													MarkdownDescription: "Circuit in same subscription. ExpressRoute Circuit is in same subscription as the site",
-													Optional: true,
+													Optional:            true,
 												},
 												"weight": schema.Int64Attribute{
 													MarkdownDescription: "Routing Weight. The weight (or priority) for the routes received from this connection. The. Defaults to `10`.",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -2967,11 +2927,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 													Attributes: map[string]schema.Attribute{
 														"description_spec": schema.StringAttribute{
 															MarkdownDescription: "Description. Human readable description.",
-															Optional: true,
+															Optional:            true,
 														},
 														"name": schema.StringAttribute{
 															MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -2980,29 +2940,28 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 													Attributes: map[string]schema.Attribute{
 														"circuit_id": schema.StringAttribute{
 															MarkdownDescription: "Circuit ID. Circuit ID",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 													Blocks: map[string]schema.Block{
 														"authorized_key": schema.SingleNestedBlock{
 															MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-															Attributes: map[string]schema.Attribute{
-															},
+															Attributes:          map[string]schema.Attribute{},
 															Blocks: map[string]schema.Block{
 																"blindfold_secret_info": schema.SingleNestedBlock{
 																	MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 																	Attributes: map[string]schema.Attribute{
 																		"decryption_provider": schema.StringAttribute{
 																			MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																		"location": schema.StringAttribute{
 																			MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																		"store_provider": schema.StringAttribute{
 																			MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																	},
 																},
@@ -3011,11 +2970,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																	Attributes: map[string]schema.Attribute{
 																		"provider_ref": schema.StringAttribute{
 																			MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																		"url": schema.StringAttribute{
 																			MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																	},
 																},
@@ -3031,8 +2990,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 									},
 									"gateway_subnet": schema.SingleNestedBlock{
 										MarkdownDescription: "Azure Subnet. Parameters for Azure subnet",
-										Attributes: map[string]schema.Attribute{
-										},
+										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"auto": schema.SingleNestedBlock{
 												MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -3042,7 +3000,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												Attributes: map[string]schema.Attribute{
 													"subnet_resource_grp": schema.StringAttribute{
 														MarkdownDescription: "Resource Group Name. Specify name of Resource Group",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 												Blocks: map[string]schema.Block{
@@ -3056,7 +3014,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												Attributes: map[string]schema.Attribute{
 													"ipv4": schema.StringAttribute{
 														MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 											},
@@ -3064,8 +3022,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 									},
 									"route_server_subnet": schema.SingleNestedBlock{
 										MarkdownDescription: "Azure Subnet. Parameters for Azure subnet",
-										Attributes: map[string]schema.Attribute{
-										},
+										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"auto": schema.SingleNestedBlock{
 												MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -3075,7 +3032,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												Attributes: map[string]schema.Attribute{
 													"subnet_resource_grp": schema.StringAttribute{
 														MarkdownDescription: "Resource Group Name. Specify name of Resource Group",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 												Blocks: map[string]schema.Block{
@@ -3089,7 +3046,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												Attributes: map[string]schema.Attribute{
 													"ipv4": schema.StringAttribute{
 														MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 											},
@@ -3100,7 +3057,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										Attributes: map[string]schema.Attribute{
 											"cloudlink_network_name": schema.StringAttribute{
 												MarkdownDescription: "Private ADN Network. Establish private connectivity with the F5 Distributed Cloud Global Network using a Private ADN network. To provision a Private ADN network, please contact F5 Distributed Cloud support.",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -3124,8 +3081,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 							"spoke_vnets": schema.ListNestedBlock{
 								MarkdownDescription: "Spoke VNet Peering (Legacy). Spoke VNet Peering",
 								NestedObject: schema.NestedBlockObject{
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes: map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"auto": schema.SingleNestedBlock{
 											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -3141,11 +3097,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											Attributes: map[string]schema.Attribute{
 												"resource_group": schema.StringAttribute{
 													MarkdownDescription: "Existing Vnet Resource Group. Resource group of existing Vnet",
-													Optional: true,
+													Optional:            true,
 												},
 												"vnet_name": schema.StringAttribute{
 													MarkdownDescription: "Existing Vnet Name. Name of existing Vnet",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -3164,8 +3120,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 					},
 					"inside_static_routes": schema.SingleNestedBlock{
 						MarkdownDescription: "Static Route List Type. List of static routes",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"static_route_list": schema.ListNestedBlock{
 								MarkdownDescription: "List of Static Routes. List of Static routes",
@@ -3173,7 +3128,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 									Attributes: map[string]schema.Attribute{
 										"simple_static_route": schema.StringAttribute{
 											MarkdownDescription: "Simple Static Route. Use simple static route for prefix pointing to single interface in the network",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -3182,8 +3137,8 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											Attributes: map[string]schema.Attribute{
 												"attrs": schema.ListAttribute{
 													MarkdownDescription: "Attributes. List of route attributes associated with the static route. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP`.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -3195,7 +3150,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 													Attributes: map[string]schema.Attribute{
 														"type": schema.StringAttribute{
 															MarkdownDescription: "Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network. Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`. Defaults to `NEXT_HOP_DEFAULT_GATEWAY`.",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 													Blocks: map[string]schema.Block{
@@ -3205,41 +3160,40 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																Attributes: map[string]schema.Attribute{
 																	"kind": schema.StringAttribute{
 																		MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-																		Optional: true,
-																		Computed: true,
+																		Optional:            true,
+																		Computed:            true,
 																	},
 																	"name": schema.StringAttribute{
 																		MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"namespace": schema.StringAttribute{
 																		MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"tenant": schema.StringAttribute{
 																		MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-																		Optional: true,
-																		Computed: true,
+																		Optional:            true,
+																		Computed:            true,
 																	},
 																	"uid": schema.StringAttribute{
 																		MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-																		Optional: true,
-																		Computed: true,
+																		Optional:            true,
+																		Computed:            true,
 																	},
 																},
 															},
 														},
 														"nexthop_address": schema.SingleNestedBlock{
 															MarkdownDescription: "IP Address. IP Address used to specify an IPv4 or IPv6 address",
-															Attributes: map[string]schema.Attribute{
-															},
+															Attributes:          map[string]schema.Attribute{},
 															Blocks: map[string]schema.Block{
 																"ipv4": schema.SingleNestedBlock{
 																	MarkdownDescription: "IPv4 Address. IPv4 Address in dot-decimal notation",
 																	Attributes: map[string]schema.Attribute{
 																		"addr": schema.StringAttribute{
 																			MarkdownDescription: "IPv4 Address. IPv4 Address in string form with dot-decimal notation",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																	},
 																},
@@ -3248,7 +3202,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																	Attributes: map[string]schema.Attribute{
 																		"addr": schema.StringAttribute{
 																			MarkdownDescription: "IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																	},
 																},
@@ -3259,19 +3213,18 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												"subnets": schema.ListNestedBlock{
 													MarkdownDescription: "Subnets. List of route prefixes",
 													NestedObject: schema.NestedBlockObject{
-														Attributes: map[string]schema.Attribute{
-														},
+														Attributes: map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"ipv4": schema.SingleNestedBlock{
 																MarkdownDescription: "IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32",
 																Attributes: map[string]schema.Attribute{
 																	"plen": schema.Int64Attribute{
 																		MarkdownDescription: "Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"prefix": schema.StringAttribute{
 																		MarkdownDescription: "Prefix. Prefix part of the IPv4 subnet in string form with dot-decimal notation",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 															},
@@ -3280,11 +3233,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																Attributes: map[string]schema.Attribute{
 																	"plen": schema.Int64Attribute{
 																		MarkdownDescription: "Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"prefix": schema.StringAttribute{
 																		MarkdownDescription: "Prefix. Prefix part of the IPv6 subnet given in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' e.g. '2001:db8:0:0:0:2:0:0' The address can be compacted by suppressing zeros e.g. '2001:db8::2::'",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 															},
@@ -3321,33 +3274,32 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						Attributes: map[string]schema.Attribute{
 							"fault_domain": schema.Int64Attribute{
 								MarkdownDescription: "Number of fault domains. Namuber of fault domains to be used while creating the availability set",
-								Optional: true,
+								Optional:            true,
 							},
 							"node_number": schema.Int64Attribute{
 								MarkdownDescription: "Number of main nodes. Number of main nodes to create, either 1 or 3.",
-								Optional: true,
+								Optional:            true,
 							},
 							"update_domain": schema.Int64Attribute{
 								MarkdownDescription: "Number of update domains. Namuber of update domains to be used while creating the availability set",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
 							"inside_subnet": schema.SingleNestedBlock{
 								MarkdownDescription: "Azure Subnet. Parameters for Azure subnet",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"subnet": schema.SingleNestedBlock{
 										MarkdownDescription: "Azure Subnet. Parameters for Azure subnet",
 										Attributes: map[string]schema.Attribute{
 											"subnet_name": schema.StringAttribute{
 												MarkdownDescription: "Subnet Name. Name of existing subnet.",
-												Optional: true,
+												Optional:            true,
 											},
 											"subnet_resource_grp": schema.StringAttribute{
 												MarkdownDescription: "Resource Group Name. Specify name of Resource Group",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 										Blocks: map[string]schema.Block{
@@ -3361,7 +3313,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										Attributes: map[string]schema.Attribute{
 											"ipv4": schema.StringAttribute{
 												MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -3369,19 +3321,18 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 							},
 							"outside_subnet": schema.SingleNestedBlock{
 								MarkdownDescription: "Azure Subnet. Parameters for Azure subnet",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"subnet": schema.SingleNestedBlock{
 										MarkdownDescription: "Azure Subnet. Parameters for Azure subnet",
 										Attributes: map[string]schema.Attribute{
 											"subnet_name": schema.StringAttribute{
 												MarkdownDescription: "Subnet Name. Name of existing subnet.",
-												Optional: true,
+												Optional:            true,
 											},
 											"subnet_resource_grp": schema.StringAttribute{
 												MarkdownDescription: "Resource Group Name. Specify name of Resource Group",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 										Blocks: map[string]schema.Block{
@@ -3395,7 +3346,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										Attributes: map[string]schema.Attribute{
 											"ipv4": schema.StringAttribute{
 												MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -3408,8 +3359,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 					},
 					"outside_static_routes": schema.SingleNestedBlock{
 						MarkdownDescription: "Static Route List Type. List of static routes",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"static_route_list": schema.ListNestedBlock{
 								MarkdownDescription: "List of Static Routes. List of Static routes",
@@ -3417,7 +3367,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 									Attributes: map[string]schema.Attribute{
 										"simple_static_route": schema.StringAttribute{
 											MarkdownDescription: "Simple Static Route. Use simple static route for prefix pointing to single interface in the network",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -3426,8 +3376,8 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											Attributes: map[string]schema.Attribute{
 												"attrs": schema.ListAttribute{
 													MarkdownDescription: "Attributes. List of route attributes associated with the static route. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP`.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -3439,7 +3389,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 													Attributes: map[string]schema.Attribute{
 														"type": schema.StringAttribute{
 															MarkdownDescription: "Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network. Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`. Defaults to `NEXT_HOP_DEFAULT_GATEWAY`.",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 													Blocks: map[string]schema.Block{
@@ -3449,41 +3399,40 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																Attributes: map[string]schema.Attribute{
 																	"kind": schema.StringAttribute{
 																		MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-																		Optional: true,
-																		Computed: true,
+																		Optional:            true,
+																		Computed:            true,
 																	},
 																	"name": schema.StringAttribute{
 																		MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"namespace": schema.StringAttribute{
 																		MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"tenant": schema.StringAttribute{
 																		MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-																		Optional: true,
-																		Computed: true,
+																		Optional:            true,
+																		Computed:            true,
 																	},
 																	"uid": schema.StringAttribute{
 																		MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-																		Optional: true,
-																		Computed: true,
+																		Optional:            true,
+																		Computed:            true,
 																	},
 																},
 															},
 														},
 														"nexthop_address": schema.SingleNestedBlock{
 															MarkdownDescription: "IP Address. IP Address used to specify an IPv4 or IPv6 address",
-															Attributes: map[string]schema.Attribute{
-															},
+															Attributes:          map[string]schema.Attribute{},
 															Blocks: map[string]schema.Block{
 																"ipv4": schema.SingleNestedBlock{
 																	MarkdownDescription: "IPv4 Address. IPv4 Address in dot-decimal notation",
 																	Attributes: map[string]schema.Attribute{
 																		"addr": schema.StringAttribute{
 																			MarkdownDescription: "IPv4 Address. IPv4 Address in string form with dot-decimal notation",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																	},
 																},
@@ -3492,7 +3441,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																	Attributes: map[string]schema.Attribute{
 																		"addr": schema.StringAttribute{
 																			MarkdownDescription: "IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																	},
 																},
@@ -3503,19 +3452,18 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												"subnets": schema.ListNestedBlock{
 													MarkdownDescription: "Subnets. List of route prefixes",
 													NestedObject: schema.NestedBlockObject{
-														Attributes: map[string]schema.Attribute{
-														},
+														Attributes: map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"ipv4": schema.SingleNestedBlock{
 																MarkdownDescription: "IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32",
 																Attributes: map[string]schema.Attribute{
 																	"plen": schema.Int64Attribute{
 																		MarkdownDescription: "Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"prefix": schema.StringAttribute{
 																		MarkdownDescription: "Prefix. Prefix part of the IPv4 subnet in string form with dot-decimal notation",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 															},
@@ -3524,11 +3472,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																Attributes: map[string]schema.Attribute{
 																	"plen": schema.Int64Attribute{
 																		MarkdownDescription: "Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"prefix": schema.StringAttribute{
 																		MarkdownDescription: "Prefix. Prefix part of the IPv6 subnet given in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' e.g. '2001:db8:0:0:0:2:0:0' The address can be compacted by suppressing zeros e.g. '2001:db8::2::'",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 															},
@@ -3544,13 +3492,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 					},
 					"performance_enhancement_mode": schema.SingleNestedBlock{
 						MarkdownDescription: "Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default.",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"perf_mode_l3_enhanced": schema.SingleNestedBlock{
 								MarkdownDescription: "L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"jumbo": schema.SingleNestedBlock{
 										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -3572,21 +3518,19 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 			"ingress_gw": schema.SingleNestedBlock{
 				MarkdownDescription: "Azure Ingress Gateway on Recommended Region. Single interface Azure ingress site on on Recommended Region",
 				Attributes: map[string]schema.Attribute{
 					"azure_certified_hw": schema.StringAttribute{
 						MarkdownDescription: "Azure Certified Hardware. Name for Azure certified hardware.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"accelerated_networking": schema.SingleNestedBlock{
 						MarkdownDescription: "Accelerated Networking Type. x-required Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"disable": schema.SingleNestedBlock{
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -3602,25 +3546,24 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 							Attributes: map[string]schema.Attribute{
 								"azure_az": schema.StringAttribute{
 									MarkdownDescription: "Azure Availability Zone. A zone depicting a grouping of datacenters within an Azure region. Expecting numeric input",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
 								"local_subnet": schema.SingleNestedBlock{
 									MarkdownDescription: "Azure Subnet. Parameters for Azure subnet",
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"subnet": schema.SingleNestedBlock{
 											MarkdownDescription: "Azure Subnet. Parameters for Azure subnet",
 											Attributes: map[string]schema.Attribute{
 												"subnet_name": schema.StringAttribute{
 													MarkdownDescription: "Subnet Name. Name of existing subnet.",
-													Optional: true,
+													Optional:            true,
 												},
 												"subnet_resource_grp": schema.StringAttribute{
 													MarkdownDescription: "Resource Group Name. Specify name of Resource Group",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -3634,7 +3577,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											Attributes: map[string]schema.Attribute{
 												"ipv4": schema.StringAttribute{
 													MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 										},
@@ -3645,13 +3588,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 					},
 					"performance_enhancement_mode": schema.SingleNestedBlock{
 						MarkdownDescription: "Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default.",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"perf_mode_l3_enhanced": schema.SingleNestedBlock{
 								MarkdownDescription: "L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"jumbo": schema.SingleNestedBlock{
 										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -3667,21 +3608,19 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 				},
-
 			},
 			"ingress_gw_ar": schema.SingleNestedBlock{
 				MarkdownDescription: "Azure Ingress Gateway on Alternate Region. Single interface Azure ingress site",
 				Attributes: map[string]schema.Attribute{
 					"azure_certified_hw": schema.StringAttribute{
 						MarkdownDescription: "Azure Certified Hardware. Name for Azure certified hardware.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"accelerated_networking": schema.SingleNestedBlock{
 						MarkdownDescription: "Accelerated Networking Type. x-required Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"disable": schema.SingleNestedBlock{
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -3696,33 +3635,32 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						Attributes: map[string]schema.Attribute{
 							"fault_domain": schema.Int64Attribute{
 								MarkdownDescription: "Number of fault domains. Namuber of fault domains to be used while creating the availability set",
-								Optional: true,
+								Optional:            true,
 							},
 							"node_number": schema.Int64Attribute{
 								MarkdownDescription: "Number of main nodes. Number of main nodes to create, either 1 or 3.",
-								Optional: true,
+								Optional:            true,
 							},
 							"update_domain": schema.Int64Attribute{
 								MarkdownDescription: "Number of update domains. Namuber of update domains to be used while creating the availability set",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
 							"local_subnet": schema.SingleNestedBlock{
 								MarkdownDescription: "Azure Subnet. Parameters for Azure subnet",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"subnet": schema.SingleNestedBlock{
 										MarkdownDescription: "Azure Subnet. Parameters for Azure subnet",
 										Attributes: map[string]schema.Attribute{
 											"subnet_name": schema.StringAttribute{
 												MarkdownDescription: "Subnet Name. Name of existing subnet.",
-												Optional: true,
+												Optional:            true,
 											},
 											"subnet_resource_grp": schema.StringAttribute{
 												MarkdownDescription: "Resource Group Name. Specify name of Resource Group",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 										Blocks: map[string]schema.Block{
@@ -3736,7 +3674,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										Attributes: map[string]schema.Attribute{
 											"ipv4": schema.StringAttribute{
 												MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -3746,13 +3684,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 					},
 					"performance_enhancement_mode": schema.SingleNestedBlock{
 						MarkdownDescription: "Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default.",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"perf_mode_l3_enhanced": schema.SingleNestedBlock{
 								MarkdownDescription: "L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"jumbo": schema.SingleNestedBlock{
 										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -3768,12 +3704,10 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 				},
-
 			},
 			"kubernetes_upgrade_drain": schema.SingleNestedBlock{
 				MarkdownDescription: "Node by Node Upgrade. Specify how worker nodes within a site will be upgraded.",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"disable_upgrade_drain": schema.SingleNestedBlock{
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -3783,11 +3717,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						Attributes: map[string]schema.Attribute{
 							"drain_max_unavailable_node_count": schema.Int64Attribute{
 								MarkdownDescription: "Node Batch Size Count.",
-								Optional: true,
+								Optional:            true,
 							},
 							"drain_node_timeout": schema.Int64Attribute{
 								MarkdownDescription: "Upgrade Wait Time. Seconds to wait before initiating upgrade on the next set of nodes. Setting it to 0 will wait indefinitely for all services on nodes to be upgraded gracefully before proceeding to the next set of nodes. (Warning: It may block upgrade if services on a node cannot be gracefully upgraded. It is recommended to use the default value).",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -3800,26 +3734,24 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 				},
-
 			},
 			"log_receiver": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: log_receiver, logs_streaming_disabled] Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
 						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-						Optional: true,
+						Optional:            true,
 					},
 					"namespace": schema.StringAttribute{
 						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-						Optional: true,
+						Optional:            true,
 					},
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-						Optional: true,
-						Computed: true,
+						Optional:            true,
+						Computed:            true,
 					},
 				},
-
 			},
 			"logs_streaming_disabled": schema.SingleNestedBlock{
 				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -3829,8 +3761,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 			},
 			"offline_survivability_mode": schema.SingleNestedBlock{
 				MarkdownDescription: "Offline Survivability Mode. Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7 days, even when the site is offline. The certificates needed to keep the services running on this site are signed using a local CA. Secrets would also be cached locally to handle the connectivity loss. When the mode is toggled, services will restart and traffic disruption will be seen.",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"enable_offline_survivability_mode": schema.SingleNestedBlock{
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -3839,14 +3770,13 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 			"os": schema.SingleNestedBlock{
 				MarkdownDescription: "Operating System Version. Select the F5XC Operating System Version for the site. By default, latest available OS Version will be used. Refer to release notes to find required released OS versions.",
 				Attributes: map[string]schema.Attribute{
 					"operating_system_version": schema.StringAttribute{
 						MarkdownDescription: "Operating System Version. Specify a OS version to be used e.g. 9.2024.6.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -3854,14 +3784,13 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 			"sw": schema.SingleNestedBlock{
 				MarkdownDescription: "F5XC Software Version. Select the F5XC Software Version for the site. By default, latest available F5XC Software Version will be used. Refer to release notes to find required released SW versions.",
 				Attributes: map[string]schema.Attribute{
 					"volterra_software_version": schema.StringAttribute{
 						MarkdownDescription: "F5XC Software Version. Specify a F5XC Software Version to be used e.g. crt-20210329-1002.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -3869,26 +3798,24 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 			"tags": schema.SingleNestedBlock{
 				MarkdownDescription: "Azure Tags. Azure Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in Azure console.",
 			},
 			"vnet": schema.SingleNestedBlock{
 				MarkdownDescription: "Azure Vnet choice. This defines choice about Azure Vnet for a view",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"existing_vnet": schema.SingleNestedBlock{
 						MarkdownDescription: "Azure Existing Vnet Type. Resource group and name of existing Azure Vnet",
 						Attributes: map[string]schema.Attribute{
 							"resource_group": schema.StringAttribute{
 								MarkdownDescription: "Existing Vnet Resource Group. Resource group of existing Vnet",
-								Optional: true,
+								Optional:            true,
 							},
 							"vnet_name": schema.StringAttribute{
 								MarkdownDescription: "Existing Vnet Name. Name of existing Vnet",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -3905,11 +3832,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
 								MarkdownDescription: "Choose Vnet Name. Specify the Vnet Name",
-								Optional: true,
+								Optional:            true,
 							},
 							"primary_ipv4": schema.StringAttribute{
 								MarkdownDescription: "IPv4 CIDR block. IPv4 CIDR block for this Vnet. It has to be private address space.",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -3919,21 +3846,19 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 				},
-
 			},
 			"voltstack_cluster": schema.SingleNestedBlock{
 				MarkdownDescription: "Azure App Stack Cluster on Recommended Region. App Stack Cluster of single interface Azure nodes",
 				Attributes: map[string]schema.Attribute{
 					"azure_certified_hw": schema.StringAttribute{
 						MarkdownDescription: "Azure Certified Hardware. Name for Azure certified hardware.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"accelerated_networking": schema.SingleNestedBlock{
 						MarkdownDescription: "Accelerated Networking Type. x-required Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"disable": schema.SingleNestedBlock{
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -3945,8 +3870,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 					},
 					"active_enhanced_firewall_policies": schema.SingleNestedBlock{
 						MarkdownDescription: "Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion.",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"enhanced_firewall_policies": schema.ListNestedBlock{
 								MarkdownDescription: "Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active",
@@ -3954,16 +3878,16 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-											Optional: true,
+											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
 											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-											Optional: true,
+											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
@@ -3972,8 +3896,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 					},
 					"active_forward_proxy_policies": schema.SingleNestedBlock{
 						MarkdownDescription: "Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"forward_proxy_policies": schema.ListNestedBlock{
 								MarkdownDescription: "Forward Proxy Policies. Ordered List of Forward Proxy Policies active",
@@ -3981,16 +3904,16 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-											Optional: true,
+											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
 											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-											Optional: true,
+											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
@@ -3999,8 +3922,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 					},
 					"active_network_policies": schema.SingleNestedBlock{
 						MarkdownDescription: "Active Firewall Policies Type. List of firewall policy views.",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"network_policies": schema.ListNestedBlock{
 								MarkdownDescription: "Firewall Policy. Ordered List of Firewall Policies active for this network firewall",
@@ -4008,16 +3930,16 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-											Optional: true,
+											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
 											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-											Optional: true,
+											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
@@ -4030,25 +3952,24 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 							Attributes: map[string]schema.Attribute{
 								"azure_az": schema.StringAttribute{
 									MarkdownDescription: "Azure Availability Zone. A zone depicting a grouping of datacenters within an Azure region. Expecting numeric input",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
 								"local_subnet": schema.SingleNestedBlock{
 									MarkdownDescription: "Azure Subnet. Parameters for Azure subnet",
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"subnet": schema.SingleNestedBlock{
 											MarkdownDescription: "Azure Subnet. Parameters for Azure subnet",
 											Attributes: map[string]schema.Attribute{
 												"subnet_name": schema.StringAttribute{
 													MarkdownDescription: "Subnet Name. Name of existing subnet.",
-													Optional: true,
+													Optional:            true,
 												},
 												"subnet_resource_grp": schema.StringAttribute{
 													MarkdownDescription: "Resource Group Name. Specify name of Resource Group",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -4062,7 +3983,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											Attributes: map[string]schema.Attribute{
 												"ipv4": schema.StringAttribute{
 													MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 										},
@@ -4076,16 +3997,16 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
 								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-								Optional: true,
+								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
 								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-								Optional: true,
+								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-								Optional: true,
-								Computed: true,
+								Optional:            true,
+								Computed:            true,
 							},
 						},
 					},
@@ -4097,35 +4018,32 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 					},
 					"global_network_list": schema.SingleNestedBlock{
 						MarkdownDescription: "Global Network Connection List. List of global network connections",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"global_network_connections": schema.ListNestedBlock{
 								MarkdownDescription: "Global Network Connections. Global network connections",
 								NestedObject: schema.NestedBlockObject{
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes: map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"sli_to_global_dr": schema.SingleNestedBlock{
 											MarkdownDescription: "Global Network. Global network reference for direct connection",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"global_vn": schema.SingleNestedBlock{
 													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 													Attributes: map[string]schema.Attribute{
 														"name": schema.StringAttribute{
 															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-															Optional: true,
+															Optional:            true,
 														},
 														"namespace": schema.StringAttribute{
 															MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-															Optional: true,
+															Optional:            true,
 														},
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-															Optional: true,
-															Computed: true,
+															Optional:            true,
+															Computed:            true,
 														},
 													},
 												},
@@ -4133,24 +4051,23 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										},
 										"slo_to_global_dr": schema.SingleNestedBlock{
 											MarkdownDescription: "Global Network. Global network reference for direct connection",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"global_vn": schema.SingleNestedBlock{
 													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 													Attributes: map[string]schema.Attribute{
 														"name": schema.StringAttribute{
 															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-															Optional: true,
+															Optional:            true,
 														},
 														"namespace": schema.StringAttribute{
 															MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-															Optional: true,
+															Optional:            true,
 														},
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-															Optional: true,
-															Computed: true,
+															Optional:            true,
+															Computed:            true,
 														},
 													},
 												},
@@ -4166,16 +4083,16 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
 								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-								Optional: true,
+								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
 								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-								Optional: true,
+								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-								Optional: true,
-								Computed: true,
+								Optional:            true,
+								Computed:            true,
 							},
 						},
 					},
@@ -4199,8 +4116,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 					},
 					"outside_static_routes": schema.SingleNestedBlock{
 						MarkdownDescription: "Static Route List Type. List of static routes",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"static_route_list": schema.ListNestedBlock{
 								MarkdownDescription: "List of Static Routes. List of Static routes",
@@ -4208,7 +4124,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 									Attributes: map[string]schema.Attribute{
 										"simple_static_route": schema.StringAttribute{
 											MarkdownDescription: "Simple Static Route. Use simple static route for prefix pointing to single interface in the network",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -4217,8 +4133,8 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											Attributes: map[string]schema.Attribute{
 												"attrs": schema.ListAttribute{
 													MarkdownDescription: "Attributes. List of route attributes associated with the static route. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP`.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -4230,7 +4146,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 													Attributes: map[string]schema.Attribute{
 														"type": schema.StringAttribute{
 															MarkdownDescription: "Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network. Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`. Defaults to `NEXT_HOP_DEFAULT_GATEWAY`.",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 													Blocks: map[string]schema.Block{
@@ -4240,41 +4156,40 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																Attributes: map[string]schema.Attribute{
 																	"kind": schema.StringAttribute{
 																		MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-																		Optional: true,
-																		Computed: true,
+																		Optional:            true,
+																		Computed:            true,
 																	},
 																	"name": schema.StringAttribute{
 																		MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"namespace": schema.StringAttribute{
 																		MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"tenant": schema.StringAttribute{
 																		MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-																		Optional: true,
-																		Computed: true,
+																		Optional:            true,
+																		Computed:            true,
 																	},
 																	"uid": schema.StringAttribute{
 																		MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-																		Optional: true,
-																		Computed: true,
+																		Optional:            true,
+																		Computed:            true,
 																	},
 																},
 															},
 														},
 														"nexthop_address": schema.SingleNestedBlock{
 															MarkdownDescription: "IP Address. IP Address used to specify an IPv4 or IPv6 address",
-															Attributes: map[string]schema.Attribute{
-															},
+															Attributes:          map[string]schema.Attribute{},
 															Blocks: map[string]schema.Block{
 																"ipv4": schema.SingleNestedBlock{
 																	MarkdownDescription: "IPv4 Address. IPv4 Address in dot-decimal notation",
 																	Attributes: map[string]schema.Attribute{
 																		"addr": schema.StringAttribute{
 																			MarkdownDescription: "IPv4 Address. IPv4 Address in string form with dot-decimal notation",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																	},
 																},
@@ -4283,7 +4198,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																	Attributes: map[string]schema.Attribute{
 																		"addr": schema.StringAttribute{
 																			MarkdownDescription: "IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																	},
 																},
@@ -4294,19 +4209,18 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												"subnets": schema.ListNestedBlock{
 													MarkdownDescription: "Subnets. List of route prefixes",
 													NestedObject: schema.NestedBlockObject{
-														Attributes: map[string]schema.Attribute{
-														},
+														Attributes: map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"ipv4": schema.SingleNestedBlock{
 																MarkdownDescription: "IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32",
 																Attributes: map[string]schema.Attribute{
 																	"plen": schema.Int64Attribute{
 																		MarkdownDescription: "Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"prefix": schema.StringAttribute{
 																		MarkdownDescription: "Prefix. Prefix part of the IPv4 subnet in string form with dot-decimal notation",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 															},
@@ -4315,11 +4229,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																Attributes: map[string]schema.Attribute{
 																	"plen": schema.Int64Attribute{
 																		MarkdownDescription: "Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"prefix": schema.StringAttribute{
 																		MarkdownDescription: "Prefix. Prefix part of the IPv6 subnet given in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' e.g. '2001:db8:0:0:0:2:0:0' The address can be compacted by suppressing zeros e.g. '2001:db8::2::'",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 															},
@@ -4341,8 +4255,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 					},
 					"storage_class_list": schema.SingleNestedBlock{
 						MarkdownDescription: "Custom Storage Class List. Add additional custom storage classes in kubernetes for this site",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"storage_classes": schema.ListNestedBlock{
 								MarkdownDescription: "List of Storage Classes. List of custom storage classes",
@@ -4350,11 +4263,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 									Attributes: map[string]schema.Attribute{
 										"default_storage_class": schema.BoolAttribute{
 											MarkdownDescription: "Default Storage Class. Make this storage class default storage class for the K8s cluster",
-											Optional: true,
+											Optional:            true,
 										},
 										"storage_class_name": schema.StringAttribute{
 											MarkdownDescription: "Storage Class Name. Name of the storage class as it will appear in K8s.",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 								},
@@ -4362,21 +4275,19 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 				},
-
 			},
 			"voltstack_cluster_ar": schema.SingleNestedBlock{
 				MarkdownDescription: "Azure App Stack Cluster on Alternate Region. App Stack Cluster of single interface Azure nodes",
 				Attributes: map[string]schema.Attribute{
 					"azure_certified_hw": schema.StringAttribute{
 						MarkdownDescription: "Azure Certified Hardware. Name for Azure certified hardware.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"accelerated_networking": schema.SingleNestedBlock{
 						MarkdownDescription: "Accelerated Networking Type. x-required Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"disable": schema.SingleNestedBlock{
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -4388,8 +4299,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 					},
 					"active_enhanced_firewall_policies": schema.SingleNestedBlock{
 						MarkdownDescription: "Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion.",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"enhanced_firewall_policies": schema.ListNestedBlock{
 								MarkdownDescription: "Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active",
@@ -4397,16 +4307,16 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-											Optional: true,
+											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
 											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-											Optional: true,
+											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
@@ -4415,8 +4325,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 					},
 					"active_forward_proxy_policies": schema.SingleNestedBlock{
 						MarkdownDescription: "Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"forward_proxy_policies": schema.ListNestedBlock{
 								MarkdownDescription: "Forward Proxy Policies. Ordered List of Forward Proxy Policies active",
@@ -4424,16 +4333,16 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-											Optional: true,
+											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
 											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-											Optional: true,
+											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
@@ -4442,8 +4351,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 					},
 					"active_network_policies": schema.SingleNestedBlock{
 						MarkdownDescription: "Active Firewall Policies Type. List of firewall policy views.",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"network_policies": schema.ListNestedBlock{
 								MarkdownDescription: "Firewall Policy. Ordered List of Firewall Policies active for this network firewall",
@@ -4451,16 +4359,16 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-											Optional: true,
+											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
 											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-											Optional: true,
+											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
@@ -4472,16 +4380,16 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
 								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-								Optional: true,
+								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
 								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-								Optional: true,
+								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-								Optional: true,
-								Computed: true,
+								Optional:            true,
+								Computed:            true,
 							},
 						},
 					},
@@ -4493,35 +4401,32 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 					},
 					"global_network_list": schema.SingleNestedBlock{
 						MarkdownDescription: "Global Network Connection List. List of global network connections",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"global_network_connections": schema.ListNestedBlock{
 								MarkdownDescription: "Global Network Connections. Global network connections",
 								NestedObject: schema.NestedBlockObject{
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes: map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"sli_to_global_dr": schema.SingleNestedBlock{
 											MarkdownDescription: "Global Network. Global network reference for direct connection",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"global_vn": schema.SingleNestedBlock{
 													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 													Attributes: map[string]schema.Attribute{
 														"name": schema.StringAttribute{
 															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-															Optional: true,
+															Optional:            true,
 														},
 														"namespace": schema.StringAttribute{
 															MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-															Optional: true,
+															Optional:            true,
 														},
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-															Optional: true,
-															Computed: true,
+															Optional:            true,
+															Computed:            true,
 														},
 													},
 												},
@@ -4529,24 +4434,23 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										},
 										"slo_to_global_dr": schema.SingleNestedBlock{
 											MarkdownDescription: "Global Network. Global network reference for direct connection",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"global_vn": schema.SingleNestedBlock{
 													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 													Attributes: map[string]schema.Attribute{
 														"name": schema.StringAttribute{
 															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-															Optional: true,
+															Optional:            true,
 														},
 														"namespace": schema.StringAttribute{
 															MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-															Optional: true,
+															Optional:            true,
 														},
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-															Optional: true,
-															Computed: true,
+															Optional:            true,
+															Computed:            true,
 														},
 													},
 												},
@@ -4562,16 +4466,16 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
 								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-								Optional: true,
+								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
 								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-								Optional: true,
+								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-								Optional: true,
-								Computed: true,
+								Optional:            true,
+								Computed:            true,
 							},
 						},
 					},
@@ -4598,33 +4502,32 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						Attributes: map[string]schema.Attribute{
 							"fault_domain": schema.Int64Attribute{
 								MarkdownDescription: "Number of fault domains. Namuber of fault domains to be used while creating the availability set",
-								Optional: true,
+								Optional:            true,
 							},
 							"node_number": schema.Int64Attribute{
 								MarkdownDescription: "Number of main nodes. Number of main nodes to create, either 1 or 3.",
-								Optional: true,
+								Optional:            true,
 							},
 							"update_domain": schema.Int64Attribute{
 								MarkdownDescription: "Number of update domains. Namuber of update domains to be used while creating the availability set",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
 							"local_subnet": schema.SingleNestedBlock{
 								MarkdownDescription: "Azure Subnet. Parameters for Azure subnet",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"subnet": schema.SingleNestedBlock{
 										MarkdownDescription: "Azure Subnet. Parameters for Azure subnet",
 										Attributes: map[string]schema.Attribute{
 											"subnet_name": schema.StringAttribute{
 												MarkdownDescription: "Subnet Name. Name of existing subnet.",
-												Optional: true,
+												Optional:            true,
 											},
 											"subnet_resource_grp": schema.StringAttribute{
 												MarkdownDescription: "Resource Group Name. Specify name of Resource Group",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 										Blocks: map[string]schema.Block{
@@ -4638,7 +4541,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										Attributes: map[string]schema.Attribute{
 											"ipv4": schema.StringAttribute{
 												MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -4648,8 +4551,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 					},
 					"outside_static_routes": schema.SingleNestedBlock{
 						MarkdownDescription: "Static Route List Type. List of static routes",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"static_route_list": schema.ListNestedBlock{
 								MarkdownDescription: "List of Static Routes. List of Static routes",
@@ -4657,7 +4559,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 									Attributes: map[string]schema.Attribute{
 										"simple_static_route": schema.StringAttribute{
 											MarkdownDescription: "Simple Static Route. Use simple static route for prefix pointing to single interface in the network",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -4666,8 +4568,8 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											Attributes: map[string]schema.Attribute{
 												"attrs": schema.ListAttribute{
 													MarkdownDescription: "Attributes. List of route attributes associated with the static route. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP`.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -4679,7 +4581,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 													Attributes: map[string]schema.Attribute{
 														"type": schema.StringAttribute{
 															MarkdownDescription: "Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network. Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`. Defaults to `NEXT_HOP_DEFAULT_GATEWAY`.",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 													Blocks: map[string]schema.Block{
@@ -4689,41 +4591,40 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																Attributes: map[string]schema.Attribute{
 																	"kind": schema.StringAttribute{
 																		MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-																		Optional: true,
-																		Computed: true,
+																		Optional:            true,
+																		Computed:            true,
 																	},
 																	"name": schema.StringAttribute{
 																		MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"namespace": schema.StringAttribute{
 																		MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"tenant": schema.StringAttribute{
 																		MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-																		Optional: true,
-																		Computed: true,
+																		Optional:            true,
+																		Computed:            true,
 																	},
 																	"uid": schema.StringAttribute{
 																		MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-																		Optional: true,
-																		Computed: true,
+																		Optional:            true,
+																		Computed:            true,
 																	},
 																},
 															},
 														},
 														"nexthop_address": schema.SingleNestedBlock{
 															MarkdownDescription: "IP Address. IP Address used to specify an IPv4 or IPv6 address",
-															Attributes: map[string]schema.Attribute{
-															},
+															Attributes:          map[string]schema.Attribute{},
 															Blocks: map[string]schema.Block{
 																"ipv4": schema.SingleNestedBlock{
 																	MarkdownDescription: "IPv4 Address. IPv4 Address in dot-decimal notation",
 																	Attributes: map[string]schema.Attribute{
 																		"addr": schema.StringAttribute{
 																			MarkdownDescription: "IPv4 Address. IPv4 Address in string form with dot-decimal notation",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																	},
 																},
@@ -4732,7 +4633,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																	Attributes: map[string]schema.Attribute{
 																		"addr": schema.StringAttribute{
 																			MarkdownDescription: "IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																	},
 																},
@@ -4743,19 +4644,18 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												"subnets": schema.ListNestedBlock{
 													MarkdownDescription: "Subnets. List of route prefixes",
 													NestedObject: schema.NestedBlockObject{
-														Attributes: map[string]schema.Attribute{
-														},
+														Attributes: map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"ipv4": schema.SingleNestedBlock{
 																MarkdownDescription: "IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32",
 																Attributes: map[string]schema.Attribute{
 																	"plen": schema.Int64Attribute{
 																		MarkdownDescription: "Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"prefix": schema.StringAttribute{
 																		MarkdownDescription: "Prefix. Prefix part of the IPv4 subnet in string form with dot-decimal notation",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 															},
@@ -4764,11 +4664,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																Attributes: map[string]schema.Attribute{
 																	"plen": schema.Int64Attribute{
 																		MarkdownDescription: "Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"prefix": schema.StringAttribute{
 																		MarkdownDescription: "Prefix. Prefix part of the IPv6 subnet given in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' e.g. '2001:db8:0:0:0:2:0:0' The address can be compacted by suppressing zeros e.g. '2001:db8::2::'",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 															},
@@ -4790,8 +4690,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 					},
 					"storage_class_list": schema.SingleNestedBlock{
 						MarkdownDescription: "Custom Storage Class List. Add additional custom storage classes in kubernetes for this site",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"storage_classes": schema.ListNestedBlock{
 								MarkdownDescription: "List of Storage Classes. List of custom storage classes",
@@ -4799,11 +4698,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 									Attributes: map[string]schema.Attribute{
 										"default_storage_class": schema.BoolAttribute{
 											MarkdownDescription: "Default Storage Class. Make this storage class default storage class for the K8s cluster",
-											Optional: true,
+											Optional:            true,
 										},
 										"storage_class_name": schema.StringAttribute{
 											MarkdownDescription: "Storage Class Name. Name of the storage class as it will appear in K8s.",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 								},
@@ -4811,7 +4710,6 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 				},
-
 			},
 		},
 	}
@@ -5675,7 +5573,6 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 		createReq.Spec["total_nodes"] = data.TotalNodes.ValueInt64()
 	}
 
-
 	apiResource, err := r.client.CreateAzureVNETSite(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create AzureVNETSite: %s", err))
@@ -5687,7 +5584,7 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if _, ok := apiResource.Spec["admin_password"].(map[string]interface{}); ok && isImport && data.AdminPassword == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.AdminPassword = &AzureVNETSiteAdminPasswordModel{}
@@ -5807,8 +5704,7 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 				}
 				// Import case: read from API
 				if _, ok := blockData["accelerated_networking"].(map[string]interface{}); ok {
-					return &AzureVNETSiteIngressEgressGwAcceleratedNetworkingModel{
-					}
+					return &AzureVNETSiteIngressEgressGwAcceleratedNetworkingModel{}
 				}
 				return nil
 			}(),
@@ -5819,8 +5715,7 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 				}
 				// Import case: read from API
 				if _, ok := blockData["active_enhanced_firewall_policies"].(map[string]interface{}); ok {
-					return &AzureVNETSiteIngressEgressGwActiveEnhancedFirewallPoliciesModel{
-					}
+					return &AzureVNETSiteIngressEgressGwActiveEnhancedFirewallPoliciesModel{}
 				}
 				return nil
 			}(),
@@ -5831,8 +5726,7 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 				}
 				// Import case: read from API
 				if _, ok := blockData["active_forward_proxy_policies"].(map[string]interface{}); ok {
-					return &AzureVNETSiteIngressEgressGwActiveForwardProxyPoliciesModel{
-					}
+					return &AzureVNETSiteIngressEgressGwActiveForwardProxyPoliciesModel{}
 				}
 				return nil
 			}(),
@@ -5843,8 +5737,7 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 				}
 				// Import case: read from API
 				if _, ok := blockData["active_network_policies"].(map[string]interface{}); ok {
-					return &AzureVNETSiteIngressEgressGwActiveNetworkPoliciesModel{
-					}
+					return &AzureVNETSiteIngressEgressGwActiveNetworkPoliciesModel{}
 				}
 				return nil
 			}(),
@@ -5862,15 +5755,13 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 								}(),
 								InsideSubnet: func() *AzureVNETSiteIngressEgressGwAzNodesInsideSubnetModel {
 									if _, ok := itemMap["inside_subnet"].(map[string]interface{}); ok {
-										return &AzureVNETSiteIngressEgressGwAzNodesInsideSubnetModel{
-										}
+										return &AzureVNETSiteIngressEgressGwAzNodesInsideSubnetModel{}
 									}
 									return nil
 								}(),
 								OutsideSubnet: func() *AzureVNETSiteIngressEgressGwAzNodesOutsideSubnetModel {
 									if _, ok := itemMap["outside_subnet"].(map[string]interface{}); ok {
-										return &AzureVNETSiteIngressEgressGwAzNodesOutsideSubnetModel{
-										}
+										return &AzureVNETSiteIngressEgressGwAzNodesOutsideSubnetModel{}
 									}
 									return nil
 								}(),
@@ -5966,8 +5857,7 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 				}
 				// Import case: read from API
 				if _, ok := blockData["global_network_list"].(map[string]interface{}); ok {
-					return &AzureVNETSiteIngressEgressGwGlobalNetworkListModel{
-					}
+					return &AzureVNETSiteIngressEgressGwGlobalNetworkListModel{}
 				}
 				return nil
 			}(),
@@ -5978,8 +5868,7 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 				}
 				// Import case: read from API
 				if _, ok := blockData["hub"].(map[string]interface{}); ok {
-					return &AzureVNETSiteIngressEgressGwHubModel{
-					}
+					return &AzureVNETSiteIngressEgressGwHubModel{}
 				}
 				return nil
 			}(),
@@ -5990,8 +5879,7 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 				}
 				// Import case: read from API
 				if _, ok := blockData["inside_static_routes"].(map[string]interface{}); ok {
-					return &AzureVNETSiteIngressEgressGwInsideStaticRoutesModel{
-					}
+					return &AzureVNETSiteIngressEgressGwInsideStaticRoutesModel{}
 				}
 				return nil
 			}(),
@@ -6086,8 +5974,7 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 				}
 				// Import case: read from API
 				if _, ok := blockData["outside_static_routes"].(map[string]interface{}); ok {
-					return &AzureVNETSiteIngressEgressGwOutsideStaticRoutesModel{
-					}
+					return &AzureVNETSiteIngressEgressGwOutsideStaticRoutesModel{}
 				}
 				return nil
 			}(),
@@ -6098,8 +5985,7 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 				}
 				// Import case: read from API
 				if _, ok := blockData["performance_enhancement_mode"].(map[string]interface{}); ok {
-					return &AzureVNETSiteIngressEgressGwPerformanceEnhancementModeModel{
-					}
+					return &AzureVNETSiteIngressEgressGwPerformanceEnhancementModeModel{}
 				}
 				return nil
 			}(),
@@ -6138,8 +6024,7 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 				}
 				// Import case: read from API
 				if _, ok := blockData["accelerated_networking"].(map[string]interface{}); ok {
-					return &AzureVNETSiteIngressEgressGwArAcceleratedNetworkingModel{
-					}
+					return &AzureVNETSiteIngressEgressGwArAcceleratedNetworkingModel{}
 				}
 				return nil
 			}(),
@@ -6150,8 +6035,7 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 				}
 				// Import case: read from API
 				if _, ok := blockData["active_enhanced_firewall_policies"].(map[string]interface{}); ok {
-					return &AzureVNETSiteIngressEgressGwArActiveEnhancedFirewallPoliciesModel{
-					}
+					return &AzureVNETSiteIngressEgressGwArActiveEnhancedFirewallPoliciesModel{}
 				}
 				return nil
 			}(),
@@ -6162,8 +6046,7 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 				}
 				// Import case: read from API
 				if _, ok := blockData["active_forward_proxy_policies"].(map[string]interface{}); ok {
-					return &AzureVNETSiteIngressEgressGwArActiveForwardProxyPoliciesModel{
-					}
+					return &AzureVNETSiteIngressEgressGwArActiveForwardProxyPoliciesModel{}
 				}
 				return nil
 			}(),
@@ -6174,8 +6057,7 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 				}
 				// Import case: read from API
 				if _, ok := blockData["active_network_policies"].(map[string]interface{}); ok {
-					return &AzureVNETSiteIngressEgressGwArActiveNetworkPoliciesModel{
-					}
+					return &AzureVNETSiteIngressEgressGwArActiveNetworkPoliciesModel{}
 				}
 				return nil
 			}(),
@@ -6264,8 +6146,7 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 				}
 				// Import case: read from API
 				if _, ok := blockData["global_network_list"].(map[string]interface{}); ok {
-					return &AzureVNETSiteIngressEgressGwArGlobalNetworkListModel{
-					}
+					return &AzureVNETSiteIngressEgressGwArGlobalNetworkListModel{}
 				}
 				return nil
 			}(),
@@ -6276,8 +6157,7 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 				}
 				// Import case: read from API
 				if _, ok := blockData["hub"].(map[string]interface{}); ok {
-					return &AzureVNETSiteIngressEgressGwArHubModel{
-					}
+					return &AzureVNETSiteIngressEgressGwArHubModel{}
 				}
 				return nil
 			}(),
@@ -6288,8 +6168,7 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 				}
 				// Import case: read from API
 				if _, ok := blockData["inside_static_routes"].(map[string]interface{}); ok {
-					return &AzureVNETSiteIngressEgressGwArInsideStaticRoutesModel{
-					}
+					return &AzureVNETSiteIngressEgressGwArInsideStaticRoutesModel{}
 				}
 				return nil
 			}(),
@@ -6414,8 +6293,7 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 				}
 				// Import case: read from API
 				if _, ok := blockData["outside_static_routes"].(map[string]interface{}); ok {
-					return &AzureVNETSiteIngressEgressGwArOutsideStaticRoutesModel{
-					}
+					return &AzureVNETSiteIngressEgressGwArOutsideStaticRoutesModel{}
 				}
 				return nil
 			}(),
@@ -6426,8 +6304,7 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 				}
 				// Import case: read from API
 				if _, ok := blockData["performance_enhancement_mode"].(map[string]interface{}); ok {
-					return &AzureVNETSiteIngressEgressGwArPerformanceEnhancementModeModel{
-					}
+					return &AzureVNETSiteIngressEgressGwArPerformanceEnhancementModeModel{}
 				}
 				return nil
 			}(),
@@ -6466,8 +6343,7 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 				}
 				// Import case: read from API
 				if _, ok := blockData["accelerated_networking"].(map[string]interface{}); ok {
-					return &AzureVNETSiteIngressGwAcceleratedNetworkingModel{
-					}
+					return &AzureVNETSiteIngressGwAcceleratedNetworkingModel{}
 				}
 				return nil
 			}(),
@@ -6485,8 +6361,7 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 								}(),
 								LocalSubnet: func() *AzureVNETSiteIngressGwAzNodesLocalSubnetModel {
 									if _, ok := itemMap["local_subnet"].(map[string]interface{}); ok {
-										return &AzureVNETSiteIngressGwAzNodesLocalSubnetModel{
-										}
+										return &AzureVNETSiteIngressGwAzNodesLocalSubnetModel{}
 									}
 									return nil
 								}(),
@@ -6510,8 +6385,7 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 				}
 				// Import case: read from API
 				if _, ok := blockData["performance_enhancement_mode"].(map[string]interface{}); ok {
-					return &AzureVNETSiteIngressGwPerformanceEnhancementModeModel{
-					}
+					return &AzureVNETSiteIngressGwPerformanceEnhancementModeModel{}
 				}
 				return nil
 			}(),
@@ -6526,8 +6400,7 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 				}
 				// Import case: read from API
 				if _, ok := blockData["accelerated_networking"].(map[string]interface{}); ok {
-					return &AzureVNETSiteIngressGwArAcceleratedNetworkingModel{
-					}
+					return &AzureVNETSiteIngressGwArAcceleratedNetworkingModel{}
 				}
 				return nil
 			}(),
@@ -6574,8 +6447,7 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 				}
 				// Import case: read from API
 				if _, ok := blockData["performance_enhancement_mode"].(map[string]interface{}); ok {
-					return &AzureVNETSiteIngressGwArPerformanceEnhancementModeModel{
-					}
+					return &AzureVNETSiteIngressGwArPerformanceEnhancementModeModel{}
 				}
 				return nil
 			}(),
@@ -6686,8 +6558,7 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 				}
 				// Import case: read from API
 				if _, ok := blockData["accelerated_networking"].(map[string]interface{}); ok {
-					return &AzureVNETSiteVoltstackClusterAcceleratedNetworkingModel{
-					}
+					return &AzureVNETSiteVoltstackClusterAcceleratedNetworkingModel{}
 				}
 				return nil
 			}(),
@@ -6698,8 +6569,7 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 				}
 				// Import case: read from API
 				if _, ok := blockData["active_enhanced_firewall_policies"].(map[string]interface{}); ok {
-					return &AzureVNETSiteVoltstackClusterActiveEnhancedFirewallPoliciesModel{
-					}
+					return &AzureVNETSiteVoltstackClusterActiveEnhancedFirewallPoliciesModel{}
 				}
 				return nil
 			}(),
@@ -6710,8 +6580,7 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 				}
 				// Import case: read from API
 				if _, ok := blockData["active_forward_proxy_policies"].(map[string]interface{}); ok {
-					return &AzureVNETSiteVoltstackClusterActiveForwardProxyPoliciesModel{
-					}
+					return &AzureVNETSiteVoltstackClusterActiveForwardProxyPoliciesModel{}
 				}
 				return nil
 			}(),
@@ -6722,8 +6591,7 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 				}
 				// Import case: read from API
 				if _, ok := blockData["active_network_policies"].(map[string]interface{}); ok {
-					return &AzureVNETSiteVoltstackClusterActiveNetworkPoliciesModel{
-					}
+					return &AzureVNETSiteVoltstackClusterActiveNetworkPoliciesModel{}
 				}
 				return nil
 			}(),
@@ -6741,8 +6609,7 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 								}(),
 								LocalSubnet: func() *AzureVNETSiteVoltstackClusterAzNodesLocalSubnetModel {
 									if _, ok := itemMap["local_subnet"].(map[string]interface{}); ok {
-										return &AzureVNETSiteVoltstackClusterAzNodesLocalSubnetModel{
-										}
+										return &AzureVNETSiteVoltstackClusterAzNodesLocalSubnetModel{}
 									}
 									return nil
 								}(),
@@ -6820,8 +6687,7 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 				}
 				// Import case: read from API
 				if _, ok := blockData["global_network_list"].(map[string]interface{}); ok {
-					return &AzureVNETSiteVoltstackClusterGlobalNetworkListModel{
-					}
+					return &AzureVNETSiteVoltstackClusterGlobalNetworkListModel{}
 				}
 				return nil
 			}(),
@@ -6934,8 +6800,7 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 				}
 				// Import case: read from API
 				if _, ok := blockData["outside_static_routes"].(map[string]interface{}); ok {
-					return &AzureVNETSiteVoltstackClusterOutsideStaticRoutesModel{
-					}
+					return &AzureVNETSiteVoltstackClusterOutsideStaticRoutesModel{}
 				}
 				return nil
 			}(),
@@ -6970,8 +6835,7 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 				}
 				// Import case: read from API
 				if _, ok := blockData["storage_class_list"].(map[string]interface{}); ok {
-					return &AzureVNETSiteVoltstackClusterStorageClassListModel{
-					}
+					return &AzureVNETSiteVoltstackClusterStorageClassListModel{}
 				}
 				return nil
 			}(),
@@ -6986,8 +6850,7 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 				}
 				// Import case: read from API
 				if _, ok := blockData["accelerated_networking"].(map[string]interface{}); ok {
-					return &AzureVNETSiteVoltstackClusterArAcceleratedNetworkingModel{
-					}
+					return &AzureVNETSiteVoltstackClusterArAcceleratedNetworkingModel{}
 				}
 				return nil
 			}(),
@@ -6998,8 +6861,7 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 				}
 				// Import case: read from API
 				if _, ok := blockData["active_enhanced_firewall_policies"].(map[string]interface{}); ok {
-					return &AzureVNETSiteVoltstackClusterArActiveEnhancedFirewallPoliciesModel{
-					}
+					return &AzureVNETSiteVoltstackClusterArActiveEnhancedFirewallPoliciesModel{}
 				}
 				return nil
 			}(),
@@ -7010,8 +6872,7 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 				}
 				// Import case: read from API
 				if _, ok := blockData["active_forward_proxy_policies"].(map[string]interface{}); ok {
-					return &AzureVNETSiteVoltstackClusterArActiveForwardProxyPoliciesModel{
-					}
+					return &AzureVNETSiteVoltstackClusterArActiveForwardProxyPoliciesModel{}
 				}
 				return nil
 			}(),
@@ -7022,8 +6883,7 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 				}
 				// Import case: read from API
 				if _, ok := blockData["active_network_policies"].(map[string]interface{}); ok {
-					return &AzureVNETSiteVoltstackClusterArActiveNetworkPoliciesModel{
-					}
+					return &AzureVNETSiteVoltstackClusterArActiveNetworkPoliciesModel{}
 				}
 				return nil
 			}(),
@@ -7094,8 +6954,7 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 				}
 				// Import case: read from API
 				if _, ok := blockData["global_network_list"].(map[string]interface{}); ok {
-					return &AzureVNETSiteVoltstackClusterArGlobalNetworkListModel{
-					}
+					return &AzureVNETSiteVoltstackClusterArGlobalNetworkListModel{}
 				}
 				return nil
 			}(),
@@ -7238,8 +7097,7 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 				}
 				// Import case: read from API
 				if _, ok := blockData["outside_static_routes"].(map[string]interface{}); ok {
-					return &AzureVNETSiteVoltstackClusterArOutsideStaticRoutesModel{
-					}
+					return &AzureVNETSiteVoltstackClusterArOutsideStaticRoutesModel{}
 				}
 				return nil
 			}(),
@@ -7274,8 +7132,7 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 				}
 				// Import case: read from API
 				if _, ok := blockData["storage_class_list"].(map[string]interface{}); ok {
-					return &AzureVNETSiteVoltstackClusterArStorageClassListModel{
-					}
+					return &AzureVNETSiteVoltstackClusterArStorageClassListModel{}
 				}
 				return nil
 			}(),
@@ -7326,7 +7183,6 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 	} else {
 		data.TotalNodes = types.Int64Null()
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -7416,9 +7272,9 @@ func (r *AzureVNETSiteResource) Read(ctx context.Context, req resource.ReadReque
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if _, ok := apiResource.Spec["admin_password"].(map[string]interface{}); ok && isImport && data.AdminPassword == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -7539,8 +7395,7 @@ func (r *AzureVNETSiteResource) Read(ctx context.Context, req resource.ReadReque
 				}
 				// Import case: read from API
 				if _, ok := blockData["accelerated_networking"].(map[string]interface{}); ok {
-					return &AzureVNETSiteIngressEgressGwAcceleratedNetworkingModel{
-					}
+					return &AzureVNETSiteIngressEgressGwAcceleratedNetworkingModel{}
 				}
 				return nil
 			}(),
@@ -7551,8 +7406,7 @@ func (r *AzureVNETSiteResource) Read(ctx context.Context, req resource.ReadReque
 				}
 				// Import case: read from API
 				if _, ok := blockData["active_enhanced_firewall_policies"].(map[string]interface{}); ok {
-					return &AzureVNETSiteIngressEgressGwActiveEnhancedFirewallPoliciesModel{
-					}
+					return &AzureVNETSiteIngressEgressGwActiveEnhancedFirewallPoliciesModel{}
 				}
 				return nil
 			}(),
@@ -7563,8 +7417,7 @@ func (r *AzureVNETSiteResource) Read(ctx context.Context, req resource.ReadReque
 				}
 				// Import case: read from API
 				if _, ok := blockData["active_forward_proxy_policies"].(map[string]interface{}); ok {
-					return &AzureVNETSiteIngressEgressGwActiveForwardProxyPoliciesModel{
-					}
+					return &AzureVNETSiteIngressEgressGwActiveForwardProxyPoliciesModel{}
 				}
 				return nil
 			}(),
@@ -7575,8 +7428,7 @@ func (r *AzureVNETSiteResource) Read(ctx context.Context, req resource.ReadReque
 				}
 				// Import case: read from API
 				if _, ok := blockData["active_network_policies"].(map[string]interface{}); ok {
-					return &AzureVNETSiteIngressEgressGwActiveNetworkPoliciesModel{
-					}
+					return &AzureVNETSiteIngressEgressGwActiveNetworkPoliciesModel{}
 				}
 				return nil
 			}(),
@@ -7594,15 +7446,13 @@ func (r *AzureVNETSiteResource) Read(ctx context.Context, req resource.ReadReque
 								}(),
 								InsideSubnet: func() *AzureVNETSiteIngressEgressGwAzNodesInsideSubnetModel {
 									if _, ok := itemMap["inside_subnet"].(map[string]interface{}); ok {
-										return &AzureVNETSiteIngressEgressGwAzNodesInsideSubnetModel{
-										}
+										return &AzureVNETSiteIngressEgressGwAzNodesInsideSubnetModel{}
 									}
 									return nil
 								}(),
 								OutsideSubnet: func() *AzureVNETSiteIngressEgressGwAzNodesOutsideSubnetModel {
 									if _, ok := itemMap["outside_subnet"].(map[string]interface{}); ok {
-										return &AzureVNETSiteIngressEgressGwAzNodesOutsideSubnetModel{
-										}
+										return &AzureVNETSiteIngressEgressGwAzNodesOutsideSubnetModel{}
 									}
 									return nil
 								}(),
@@ -7698,8 +7548,7 @@ func (r *AzureVNETSiteResource) Read(ctx context.Context, req resource.ReadReque
 				}
 				// Import case: read from API
 				if _, ok := blockData["global_network_list"].(map[string]interface{}); ok {
-					return &AzureVNETSiteIngressEgressGwGlobalNetworkListModel{
-					}
+					return &AzureVNETSiteIngressEgressGwGlobalNetworkListModel{}
 				}
 				return nil
 			}(),
@@ -7710,8 +7559,7 @@ func (r *AzureVNETSiteResource) Read(ctx context.Context, req resource.ReadReque
 				}
 				// Import case: read from API
 				if _, ok := blockData["hub"].(map[string]interface{}); ok {
-					return &AzureVNETSiteIngressEgressGwHubModel{
-					}
+					return &AzureVNETSiteIngressEgressGwHubModel{}
 				}
 				return nil
 			}(),
@@ -7722,8 +7570,7 @@ func (r *AzureVNETSiteResource) Read(ctx context.Context, req resource.ReadReque
 				}
 				// Import case: read from API
 				if _, ok := blockData["inside_static_routes"].(map[string]interface{}); ok {
-					return &AzureVNETSiteIngressEgressGwInsideStaticRoutesModel{
-					}
+					return &AzureVNETSiteIngressEgressGwInsideStaticRoutesModel{}
 				}
 				return nil
 			}(),
@@ -7818,8 +7665,7 @@ func (r *AzureVNETSiteResource) Read(ctx context.Context, req resource.ReadReque
 				}
 				// Import case: read from API
 				if _, ok := blockData["outside_static_routes"].(map[string]interface{}); ok {
-					return &AzureVNETSiteIngressEgressGwOutsideStaticRoutesModel{
-					}
+					return &AzureVNETSiteIngressEgressGwOutsideStaticRoutesModel{}
 				}
 				return nil
 			}(),
@@ -7830,8 +7676,7 @@ func (r *AzureVNETSiteResource) Read(ctx context.Context, req resource.ReadReque
 				}
 				// Import case: read from API
 				if _, ok := blockData["performance_enhancement_mode"].(map[string]interface{}); ok {
-					return &AzureVNETSiteIngressEgressGwPerformanceEnhancementModeModel{
-					}
+					return &AzureVNETSiteIngressEgressGwPerformanceEnhancementModeModel{}
 				}
 				return nil
 			}(),
@@ -7870,8 +7715,7 @@ func (r *AzureVNETSiteResource) Read(ctx context.Context, req resource.ReadReque
 				}
 				// Import case: read from API
 				if _, ok := blockData["accelerated_networking"].(map[string]interface{}); ok {
-					return &AzureVNETSiteIngressEgressGwArAcceleratedNetworkingModel{
-					}
+					return &AzureVNETSiteIngressEgressGwArAcceleratedNetworkingModel{}
 				}
 				return nil
 			}(),
@@ -7882,8 +7726,7 @@ func (r *AzureVNETSiteResource) Read(ctx context.Context, req resource.ReadReque
 				}
 				// Import case: read from API
 				if _, ok := blockData["active_enhanced_firewall_policies"].(map[string]interface{}); ok {
-					return &AzureVNETSiteIngressEgressGwArActiveEnhancedFirewallPoliciesModel{
-					}
+					return &AzureVNETSiteIngressEgressGwArActiveEnhancedFirewallPoliciesModel{}
 				}
 				return nil
 			}(),
@@ -7894,8 +7737,7 @@ func (r *AzureVNETSiteResource) Read(ctx context.Context, req resource.ReadReque
 				}
 				// Import case: read from API
 				if _, ok := blockData["active_forward_proxy_policies"].(map[string]interface{}); ok {
-					return &AzureVNETSiteIngressEgressGwArActiveForwardProxyPoliciesModel{
-					}
+					return &AzureVNETSiteIngressEgressGwArActiveForwardProxyPoliciesModel{}
 				}
 				return nil
 			}(),
@@ -7906,8 +7748,7 @@ func (r *AzureVNETSiteResource) Read(ctx context.Context, req resource.ReadReque
 				}
 				// Import case: read from API
 				if _, ok := blockData["active_network_policies"].(map[string]interface{}); ok {
-					return &AzureVNETSiteIngressEgressGwArActiveNetworkPoliciesModel{
-					}
+					return &AzureVNETSiteIngressEgressGwArActiveNetworkPoliciesModel{}
 				}
 				return nil
 			}(),
@@ -7996,8 +7837,7 @@ func (r *AzureVNETSiteResource) Read(ctx context.Context, req resource.ReadReque
 				}
 				// Import case: read from API
 				if _, ok := blockData["global_network_list"].(map[string]interface{}); ok {
-					return &AzureVNETSiteIngressEgressGwArGlobalNetworkListModel{
-					}
+					return &AzureVNETSiteIngressEgressGwArGlobalNetworkListModel{}
 				}
 				return nil
 			}(),
@@ -8008,8 +7848,7 @@ func (r *AzureVNETSiteResource) Read(ctx context.Context, req resource.ReadReque
 				}
 				// Import case: read from API
 				if _, ok := blockData["hub"].(map[string]interface{}); ok {
-					return &AzureVNETSiteIngressEgressGwArHubModel{
-					}
+					return &AzureVNETSiteIngressEgressGwArHubModel{}
 				}
 				return nil
 			}(),
@@ -8020,8 +7859,7 @@ func (r *AzureVNETSiteResource) Read(ctx context.Context, req resource.ReadReque
 				}
 				// Import case: read from API
 				if _, ok := blockData["inside_static_routes"].(map[string]interface{}); ok {
-					return &AzureVNETSiteIngressEgressGwArInsideStaticRoutesModel{
-					}
+					return &AzureVNETSiteIngressEgressGwArInsideStaticRoutesModel{}
 				}
 				return nil
 			}(),
@@ -8146,8 +7984,7 @@ func (r *AzureVNETSiteResource) Read(ctx context.Context, req resource.ReadReque
 				}
 				// Import case: read from API
 				if _, ok := blockData["outside_static_routes"].(map[string]interface{}); ok {
-					return &AzureVNETSiteIngressEgressGwArOutsideStaticRoutesModel{
-					}
+					return &AzureVNETSiteIngressEgressGwArOutsideStaticRoutesModel{}
 				}
 				return nil
 			}(),
@@ -8158,8 +7995,7 @@ func (r *AzureVNETSiteResource) Read(ctx context.Context, req resource.ReadReque
 				}
 				// Import case: read from API
 				if _, ok := blockData["performance_enhancement_mode"].(map[string]interface{}); ok {
-					return &AzureVNETSiteIngressEgressGwArPerformanceEnhancementModeModel{
-					}
+					return &AzureVNETSiteIngressEgressGwArPerformanceEnhancementModeModel{}
 				}
 				return nil
 			}(),
@@ -8198,8 +8034,7 @@ func (r *AzureVNETSiteResource) Read(ctx context.Context, req resource.ReadReque
 				}
 				// Import case: read from API
 				if _, ok := blockData["accelerated_networking"].(map[string]interface{}); ok {
-					return &AzureVNETSiteIngressGwAcceleratedNetworkingModel{
-					}
+					return &AzureVNETSiteIngressGwAcceleratedNetworkingModel{}
 				}
 				return nil
 			}(),
@@ -8217,8 +8052,7 @@ func (r *AzureVNETSiteResource) Read(ctx context.Context, req resource.ReadReque
 								}(),
 								LocalSubnet: func() *AzureVNETSiteIngressGwAzNodesLocalSubnetModel {
 									if _, ok := itemMap["local_subnet"].(map[string]interface{}); ok {
-										return &AzureVNETSiteIngressGwAzNodesLocalSubnetModel{
-										}
+										return &AzureVNETSiteIngressGwAzNodesLocalSubnetModel{}
 									}
 									return nil
 								}(),
@@ -8242,8 +8076,7 @@ func (r *AzureVNETSiteResource) Read(ctx context.Context, req resource.ReadReque
 				}
 				// Import case: read from API
 				if _, ok := blockData["performance_enhancement_mode"].(map[string]interface{}); ok {
-					return &AzureVNETSiteIngressGwPerformanceEnhancementModeModel{
-					}
+					return &AzureVNETSiteIngressGwPerformanceEnhancementModeModel{}
 				}
 				return nil
 			}(),
@@ -8258,8 +8091,7 @@ func (r *AzureVNETSiteResource) Read(ctx context.Context, req resource.ReadReque
 				}
 				// Import case: read from API
 				if _, ok := blockData["accelerated_networking"].(map[string]interface{}); ok {
-					return &AzureVNETSiteIngressGwArAcceleratedNetworkingModel{
-					}
+					return &AzureVNETSiteIngressGwArAcceleratedNetworkingModel{}
 				}
 				return nil
 			}(),
@@ -8306,8 +8138,7 @@ func (r *AzureVNETSiteResource) Read(ctx context.Context, req resource.ReadReque
 				}
 				// Import case: read from API
 				if _, ok := blockData["performance_enhancement_mode"].(map[string]interface{}); ok {
-					return &AzureVNETSiteIngressGwArPerformanceEnhancementModeModel{
-					}
+					return &AzureVNETSiteIngressGwArPerformanceEnhancementModeModel{}
 				}
 				return nil
 			}(),
@@ -8418,8 +8249,7 @@ func (r *AzureVNETSiteResource) Read(ctx context.Context, req resource.ReadReque
 				}
 				// Import case: read from API
 				if _, ok := blockData["accelerated_networking"].(map[string]interface{}); ok {
-					return &AzureVNETSiteVoltstackClusterAcceleratedNetworkingModel{
-					}
+					return &AzureVNETSiteVoltstackClusterAcceleratedNetworkingModel{}
 				}
 				return nil
 			}(),
@@ -8430,8 +8260,7 @@ func (r *AzureVNETSiteResource) Read(ctx context.Context, req resource.ReadReque
 				}
 				// Import case: read from API
 				if _, ok := blockData["active_enhanced_firewall_policies"].(map[string]interface{}); ok {
-					return &AzureVNETSiteVoltstackClusterActiveEnhancedFirewallPoliciesModel{
-					}
+					return &AzureVNETSiteVoltstackClusterActiveEnhancedFirewallPoliciesModel{}
 				}
 				return nil
 			}(),
@@ -8442,8 +8271,7 @@ func (r *AzureVNETSiteResource) Read(ctx context.Context, req resource.ReadReque
 				}
 				// Import case: read from API
 				if _, ok := blockData["active_forward_proxy_policies"].(map[string]interface{}); ok {
-					return &AzureVNETSiteVoltstackClusterActiveForwardProxyPoliciesModel{
-					}
+					return &AzureVNETSiteVoltstackClusterActiveForwardProxyPoliciesModel{}
 				}
 				return nil
 			}(),
@@ -8454,8 +8282,7 @@ func (r *AzureVNETSiteResource) Read(ctx context.Context, req resource.ReadReque
 				}
 				// Import case: read from API
 				if _, ok := blockData["active_network_policies"].(map[string]interface{}); ok {
-					return &AzureVNETSiteVoltstackClusterActiveNetworkPoliciesModel{
-					}
+					return &AzureVNETSiteVoltstackClusterActiveNetworkPoliciesModel{}
 				}
 				return nil
 			}(),
@@ -8473,8 +8300,7 @@ func (r *AzureVNETSiteResource) Read(ctx context.Context, req resource.ReadReque
 								}(),
 								LocalSubnet: func() *AzureVNETSiteVoltstackClusterAzNodesLocalSubnetModel {
 									if _, ok := itemMap["local_subnet"].(map[string]interface{}); ok {
-										return &AzureVNETSiteVoltstackClusterAzNodesLocalSubnetModel{
-										}
+										return &AzureVNETSiteVoltstackClusterAzNodesLocalSubnetModel{}
 									}
 									return nil
 								}(),
@@ -8552,8 +8378,7 @@ func (r *AzureVNETSiteResource) Read(ctx context.Context, req resource.ReadReque
 				}
 				// Import case: read from API
 				if _, ok := blockData["global_network_list"].(map[string]interface{}); ok {
-					return &AzureVNETSiteVoltstackClusterGlobalNetworkListModel{
-					}
+					return &AzureVNETSiteVoltstackClusterGlobalNetworkListModel{}
 				}
 				return nil
 			}(),
@@ -8666,8 +8491,7 @@ func (r *AzureVNETSiteResource) Read(ctx context.Context, req resource.ReadReque
 				}
 				// Import case: read from API
 				if _, ok := blockData["outside_static_routes"].(map[string]interface{}); ok {
-					return &AzureVNETSiteVoltstackClusterOutsideStaticRoutesModel{
-					}
+					return &AzureVNETSiteVoltstackClusterOutsideStaticRoutesModel{}
 				}
 				return nil
 			}(),
@@ -8702,8 +8526,7 @@ func (r *AzureVNETSiteResource) Read(ctx context.Context, req resource.ReadReque
 				}
 				// Import case: read from API
 				if _, ok := blockData["storage_class_list"].(map[string]interface{}); ok {
-					return &AzureVNETSiteVoltstackClusterStorageClassListModel{
-					}
+					return &AzureVNETSiteVoltstackClusterStorageClassListModel{}
 				}
 				return nil
 			}(),
@@ -8718,8 +8541,7 @@ func (r *AzureVNETSiteResource) Read(ctx context.Context, req resource.ReadReque
 				}
 				// Import case: read from API
 				if _, ok := blockData["accelerated_networking"].(map[string]interface{}); ok {
-					return &AzureVNETSiteVoltstackClusterArAcceleratedNetworkingModel{
-					}
+					return &AzureVNETSiteVoltstackClusterArAcceleratedNetworkingModel{}
 				}
 				return nil
 			}(),
@@ -8730,8 +8552,7 @@ func (r *AzureVNETSiteResource) Read(ctx context.Context, req resource.ReadReque
 				}
 				// Import case: read from API
 				if _, ok := blockData["active_enhanced_firewall_policies"].(map[string]interface{}); ok {
-					return &AzureVNETSiteVoltstackClusterArActiveEnhancedFirewallPoliciesModel{
-					}
+					return &AzureVNETSiteVoltstackClusterArActiveEnhancedFirewallPoliciesModel{}
 				}
 				return nil
 			}(),
@@ -8742,8 +8563,7 @@ func (r *AzureVNETSiteResource) Read(ctx context.Context, req resource.ReadReque
 				}
 				// Import case: read from API
 				if _, ok := blockData["active_forward_proxy_policies"].(map[string]interface{}); ok {
-					return &AzureVNETSiteVoltstackClusterArActiveForwardProxyPoliciesModel{
-					}
+					return &AzureVNETSiteVoltstackClusterArActiveForwardProxyPoliciesModel{}
 				}
 				return nil
 			}(),
@@ -8754,8 +8574,7 @@ func (r *AzureVNETSiteResource) Read(ctx context.Context, req resource.ReadReque
 				}
 				// Import case: read from API
 				if _, ok := blockData["active_network_policies"].(map[string]interface{}); ok {
-					return &AzureVNETSiteVoltstackClusterArActiveNetworkPoliciesModel{
-					}
+					return &AzureVNETSiteVoltstackClusterArActiveNetworkPoliciesModel{}
 				}
 				return nil
 			}(),
@@ -8826,8 +8645,7 @@ func (r *AzureVNETSiteResource) Read(ctx context.Context, req resource.ReadReque
 				}
 				// Import case: read from API
 				if _, ok := blockData["global_network_list"].(map[string]interface{}); ok {
-					return &AzureVNETSiteVoltstackClusterArGlobalNetworkListModel{
-					}
+					return &AzureVNETSiteVoltstackClusterArGlobalNetworkListModel{}
 				}
 				return nil
 			}(),
@@ -8970,8 +8788,7 @@ func (r *AzureVNETSiteResource) Read(ctx context.Context, req resource.ReadReque
 				}
 				// Import case: read from API
 				if _, ok := blockData["outside_static_routes"].(map[string]interface{}); ok {
-					return &AzureVNETSiteVoltstackClusterArOutsideStaticRoutesModel{
-					}
+					return &AzureVNETSiteVoltstackClusterArOutsideStaticRoutesModel{}
 				}
 				return nil
 			}(),
@@ -9006,8 +8823,7 @@ func (r *AzureVNETSiteResource) Read(ctx context.Context, req resource.ReadReque
 				}
 				// Import case: read from API
 				if _, ok := blockData["storage_class_list"].(map[string]interface{}); ok {
-					return &AzureVNETSiteVoltstackClusterArStorageClassListModel{
-					}
+					return &AzureVNETSiteVoltstackClusterArStorageClassListModel{}
 				}
 				return nil
 			}(),
@@ -9058,7 +8874,6 @@ func (r *AzureVNETSiteResource) Read(ctx context.Context, req resource.ReadReque
 	} else {
 		data.TotalNodes = types.Int64Null()
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -9832,7 +9647,6 @@ func (r *AzureVNETSiteResource) Update(ctx context.Context, req resource.UpdateR
 	if !data.TotalNodes.IsNull() && !data.TotalNodes.IsUnknown() {
 		apiResource.Spec["total_nodes"] = data.TotalNodes.ValueInt64()
 	}
-
 
 	updated, err := r.client.UpdateAzureVNETSite(ctx, apiResource)
 	if err != nil {

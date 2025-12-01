@@ -52,23 +52,23 @@ type TpmAPIKeyEmptyModel struct {
 
 // TpmAPIKeyCategoryRefModel represents category_ref block
 type TpmAPIKeyCategoryRefModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 type TpmAPIKeyResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	NeedMtls types.Bool `tfsdk:"need_mtls"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Name        types.String                `tfsdk:"name"`
+	Namespace   types.String                `tfsdk:"namespace"`
+	Annotations types.Map                   `tfsdk:"annotations"`
+	Description types.String                `tfsdk:"description"`
+	Disable     types.Bool                  `tfsdk:"disable"`
+	Labels      types.Map                   `tfsdk:"labels"`
+	ID          types.String                `tfsdk:"id"`
+	NeedMtls    types.Bool                  `tfsdk:"need_mtls"`
+	Timeouts    timeouts.Value              `tfsdk:"timeouts"`
 	CategoryRef []TpmAPIKeyCategoryRefModel `tfsdk:"category_ref"`
 }
 
@@ -83,7 +83,7 @@ func (r *TpmAPIKeyResource) Schema(ctx context.Context, req resource.SchemaReque
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the TpmAPIKey. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -93,7 +93,7 @@ func (r *TpmAPIKeyResource) Schema(ctx context.Context, req resource.SchemaReque
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the TpmAPIKey will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -103,33 +103,33 @@ func (r *TpmAPIKeyResource) Schema(ctx context.Context, req resource.SchemaReque
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"need_mtls": schema.BoolAttribute{
 				MarkdownDescription: "Need mTLS. is mTLS required when using this APIKey?",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.Bool{
 					boolplanmodifier.UseStateForUnknown(),
 				},
@@ -148,29 +148,28 @@ func (r *TpmAPIKeyResource) Schema(ctx context.Context, req resource.SchemaReque
 					Attributes: map[string]schema.Attribute{
 						"kind": schema.StringAttribute{
 							MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-							Optional: true,
-							Computed: true,
+							Optional:            true,
+							Computed:            true,
 						},
 						"name": schema.StringAttribute{
 							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-							Optional: true,
+							Optional:            true,
 						},
 						"namespace": schema.StringAttribute{
 							MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-							Optional: true,
+							Optional:            true,
 						},
 						"tenant": schema.StringAttribute{
 							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-							Optional: true,
-							Computed: true,
+							Optional:            true,
+							Computed:            true,
 						},
 						"uid": schema.StringAttribute{
 							MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-							Optional: true,
-							Computed: true,
+							Optional:            true,
+							Computed:            true,
 						},
 					},
-
 				},
 			},
 		},
@@ -348,7 +347,6 @@ func (r *TpmAPIKeyResource) Create(ctx context.Context, req resource.CreateReque
 		createReq.Spec["need_mtls"] = data.NeedMtls.ValueBool()
 	}
 
-
 	apiResource, err := r.client.CreateTpmAPIKey(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create TpmAPIKey: %s", err))
@@ -360,7 +358,7 @@ func (r *TpmAPIKeyResource) Create(ctx context.Context, req resource.CreateReque
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["category_ref"].([]interface{}); ok && len(listData) > 0 {
 		var category_refList []TpmAPIKeyCategoryRefModel
 		for listIdx, item := range listData {
@@ -413,7 +411,6 @@ func (r *TpmAPIKeyResource) Create(ctx context.Context, req resource.CreateReque
 			data.NeedMtls = types.BoolNull()
 		}
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -503,9 +500,9 @@ func (r *TpmAPIKeyResource) Read(ctx context.Context, req resource.ReadRequest, 
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if listData, ok := apiResource.Spec["category_ref"].([]interface{}); ok && len(listData) > 0 {
 		var category_refList []TpmAPIKeyCategoryRefModel
@@ -559,7 +556,6 @@ func (r *TpmAPIKeyResource) Read(ctx context.Context, req resource.ReadRequest, 
 			data.NeedMtls = types.BoolNull()
 		}
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -646,7 +642,6 @@ func (r *TpmAPIKeyResource) Update(ctx context.Context, req resource.UpdateReque
 	if !data.NeedMtls.IsNull() && !data.NeedMtls.IsUnknown() {
 		apiResource.Spec["need_mtls"] = data.NeedMtls.ValueBool()
 	}
-
 
 	updated, err := r.client.UpdateTpmAPIKey(ctx, apiResource)
 	if err != nil {

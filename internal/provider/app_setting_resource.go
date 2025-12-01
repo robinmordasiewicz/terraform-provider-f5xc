@@ -51,25 +51,25 @@ type AppSettingEmptyModel struct {
 
 // AppSettingAppTypeSettingsModel represents app_type_settings block
 type AppSettingAppTypeSettingsModel struct {
-	AppTypeRef []AppSettingAppTypeSettingsAppTypeRefModel `tfsdk:"app_type_ref"`
-	BusinessLogicMarkupSetting *AppSettingAppTypeSettingsBusinessLogicMarkupSettingModel `tfsdk:"business_logic_markup_setting"`
-	TimeseriesAnalysesSetting *AppSettingAppTypeSettingsTimeseriesAnalysesSettingModel `tfsdk:"timeseries_analyses_setting"`
+	AppTypeRef                  []AppSettingAppTypeSettingsAppTypeRefModel                 `tfsdk:"app_type_ref"`
+	BusinessLogicMarkupSetting  *AppSettingAppTypeSettingsBusinessLogicMarkupSettingModel  `tfsdk:"business_logic_markup_setting"`
+	TimeseriesAnalysesSetting   *AppSettingAppTypeSettingsTimeseriesAnalysesSettingModel   `tfsdk:"timeseries_analyses_setting"`
 	UserBehaviorAnalysisSetting *AppSettingAppTypeSettingsUserBehaviorAnalysisSettingModel `tfsdk:"user_behavior_analysis_setting"`
 }
 
 // AppSettingAppTypeSettingsAppTypeRefModel represents app_type_ref block
 type AppSettingAppTypeSettingsAppTypeRefModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // AppSettingAppTypeSettingsBusinessLogicMarkupSettingModel represents business_logic_markup_setting block
 type AppSettingAppTypeSettingsBusinessLogicMarkupSettingModel struct {
 	Disable *AppSettingEmptyModel `tfsdk:"disable"`
-	Enable *AppSettingEmptyModel `tfsdk:"enable"`
+	Enable  *AppSettingEmptyModel `tfsdk:"enable"`
 }
 
 // AppSettingAppTypeSettingsTimeseriesAnalysesSettingModel represents timeseries_analyses_setting block
@@ -79,38 +79,38 @@ type AppSettingAppTypeSettingsTimeseriesAnalysesSettingModel struct {
 
 // AppSettingAppTypeSettingsTimeseriesAnalysesSettingMetricSelectorsModel represents metric_selectors block
 type AppSettingAppTypeSettingsTimeseriesAnalysesSettingMetricSelectorsModel struct {
-	Metric types.List `tfsdk:"metric"`
+	Metric        types.List   `tfsdk:"metric"`
 	MetricsSource types.String `tfsdk:"metrics_source"`
 }
 
 // AppSettingAppTypeSettingsUserBehaviorAnalysisSettingModel represents user_behavior_analysis_setting block
 type AppSettingAppTypeSettingsUserBehaviorAnalysisSettingModel struct {
-	DisableDetection *AppSettingEmptyModel `tfsdk:"disable_detection"`
-	DisableLearning *AppSettingEmptyModel `tfsdk:"disable_learning"`
-	EnableDetection *AppSettingAppTypeSettingsUserBehaviorAnalysisSettingEnableDetectionModel `tfsdk:"enable_detection"`
-	EnableLearning *AppSettingEmptyModel `tfsdk:"enable_learning"`
+	DisableDetection *AppSettingEmptyModel                                                     `tfsdk:"disable_detection"`
+	DisableLearning  *AppSettingEmptyModel                                                     `tfsdk:"disable_learning"`
+	EnableDetection  *AppSettingAppTypeSettingsUserBehaviorAnalysisSettingEnableDetectionModel `tfsdk:"enable_detection"`
+	EnableLearning   *AppSettingEmptyModel                                                     `tfsdk:"enable_learning"`
 }
 
 // AppSettingAppTypeSettingsUserBehaviorAnalysisSettingEnableDetectionModel represents enable_detection block
 type AppSettingAppTypeSettingsUserBehaviorAnalysisSettingEnableDetectionModel struct {
-	CoolingOffPeriod types.Int64 `tfsdk:"cooling_off_period"`
-	BolaDetectionAutomatic *AppSettingEmptyModel `tfsdk:"bola_detection_automatic"`
-	ExcludeBolaDetection *AppSettingEmptyModel `tfsdk:"exclude_bola_detection"`
-	ExcludeBotDefenseActivity *AppSettingEmptyModel `tfsdk:"exclude_bot_defense_activity"`
-	ExcludeFailedLoginActivity *AppSettingEmptyModel `tfsdk:"exclude_failed_login_activity"`
-	ExcludeForbiddenActivity *AppSettingEmptyModel `tfsdk:"exclude_forbidden_activity"`
-	ExcludeIPReputation *AppSettingEmptyModel `tfsdk:"exclude_ip_reputation"`
-	ExcludeNonExistentURLActivity *AppSettingEmptyModel `tfsdk:"exclude_non_existent_url_activity"`
-	ExcludeRateLimit *AppSettingEmptyModel `tfsdk:"exclude_rate_limit"`
-	ExcludeWAFActivity *AppSettingEmptyModel `tfsdk:"exclude_waf_activity"`
-	IncludeBotDefenseActivity *AppSettingEmptyModel `tfsdk:"include_bot_defense_activity"`
-	IncludeFailedLoginActivity *AppSettingAppTypeSettingsUserBehaviorAnalysisSettingEnableDetectionIncludeFailedLoginActivityModel `tfsdk:"include_failed_login_activity"`
-	IncludeForbiddenActivity *AppSettingAppTypeSettingsUserBehaviorAnalysisSettingEnableDetectionIncludeForbiddenActivityModel `tfsdk:"include_forbidden_activity"`
-	IncludeIPReputation *AppSettingEmptyModel `tfsdk:"include_ip_reputation"`
+	CoolingOffPeriod                       types.Int64                                                                                                     `tfsdk:"cooling_off_period"`
+	BolaDetectionAutomatic                 *AppSettingEmptyModel                                                                                           `tfsdk:"bola_detection_automatic"`
+	ExcludeBolaDetection                   *AppSettingEmptyModel                                                                                           `tfsdk:"exclude_bola_detection"`
+	ExcludeBotDefenseActivity              *AppSettingEmptyModel                                                                                           `tfsdk:"exclude_bot_defense_activity"`
+	ExcludeFailedLoginActivity             *AppSettingEmptyModel                                                                                           `tfsdk:"exclude_failed_login_activity"`
+	ExcludeForbiddenActivity               *AppSettingEmptyModel                                                                                           `tfsdk:"exclude_forbidden_activity"`
+	ExcludeIPReputation                    *AppSettingEmptyModel                                                                                           `tfsdk:"exclude_ip_reputation"`
+	ExcludeNonExistentURLActivity          *AppSettingEmptyModel                                                                                           `tfsdk:"exclude_non_existent_url_activity"`
+	ExcludeRateLimit                       *AppSettingEmptyModel                                                                                           `tfsdk:"exclude_rate_limit"`
+	ExcludeWAFActivity                     *AppSettingEmptyModel                                                                                           `tfsdk:"exclude_waf_activity"`
+	IncludeBotDefenseActivity              *AppSettingEmptyModel                                                                                           `tfsdk:"include_bot_defense_activity"`
+	IncludeFailedLoginActivity             *AppSettingAppTypeSettingsUserBehaviorAnalysisSettingEnableDetectionIncludeFailedLoginActivityModel             `tfsdk:"include_failed_login_activity"`
+	IncludeForbiddenActivity               *AppSettingAppTypeSettingsUserBehaviorAnalysisSettingEnableDetectionIncludeForbiddenActivityModel               `tfsdk:"include_forbidden_activity"`
+	IncludeIPReputation                    *AppSettingEmptyModel                                                                                           `tfsdk:"include_ip_reputation"`
 	IncludeNonExistentURLActivityAutomatic *AppSettingAppTypeSettingsUserBehaviorAnalysisSettingEnableDetectionIncludeNonExistentURLActivityAutomaticModel `tfsdk:"include_non_existent_url_activity_automatic"`
-	IncludeNonExistentURLActivityCustom *AppSettingAppTypeSettingsUserBehaviorAnalysisSettingEnableDetectionIncludeNonExistentURLActivityCustomModel `tfsdk:"include_non_existent_url_activity_custom"`
-	IncludeRateLimit *AppSettingEmptyModel `tfsdk:"include_rate_limit"`
-	IncludeWAFActivity *AppSettingEmptyModel `tfsdk:"include_waf_activity"`
+	IncludeNonExistentURLActivityCustom    *AppSettingAppTypeSettingsUserBehaviorAnalysisSettingEnableDetectionIncludeNonExistentURLActivityCustomModel    `tfsdk:"include_non_existent_url_activity_custom"`
+	IncludeRateLimit                       *AppSettingEmptyModel                                                                                           `tfsdk:"include_rate_limit"`
+	IncludeWAFActivity                     *AppSettingEmptyModel                                                                                           `tfsdk:"include_waf_activity"`
 }
 
 // AppSettingAppTypeSettingsUserBehaviorAnalysisSettingEnableDetectionIncludeFailedLoginActivityModel represents include_failed_login_activity block
@@ -125,8 +125,8 @@ type AppSettingAppTypeSettingsUserBehaviorAnalysisSettingEnableDetectionIncludeF
 
 // AppSettingAppTypeSettingsUserBehaviorAnalysisSettingEnableDetectionIncludeNonExistentURLActivityAutomaticModel represents include_non_existent_url_activity_automatic block
 type AppSettingAppTypeSettingsUserBehaviorAnalysisSettingEnableDetectionIncludeNonExistentURLActivityAutomaticModel struct {
-	High *AppSettingEmptyModel `tfsdk:"high"`
-	Low *AppSettingEmptyModel `tfsdk:"low"`
+	High   *AppSettingEmptyModel `tfsdk:"high"`
+	Low    *AppSettingEmptyModel `tfsdk:"low"`
 	Medium *AppSettingEmptyModel `tfsdk:"medium"`
 }
 
@@ -136,14 +136,14 @@ type AppSettingAppTypeSettingsUserBehaviorAnalysisSettingEnableDetectionIncludeN
 }
 
 type AppSettingResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Name            types.String                     `tfsdk:"name"`
+	Namespace       types.String                     `tfsdk:"namespace"`
+	Annotations     types.Map                        `tfsdk:"annotations"`
+	Description     types.String                     `tfsdk:"description"`
+	Disable         types.Bool                       `tfsdk:"disable"`
+	Labels          types.Map                        `tfsdk:"labels"`
+	ID              types.String                     `tfsdk:"id"`
+	Timeouts        timeouts.Value                   `tfsdk:"timeouts"`
 	AppTypeSettings []AppSettingAppTypeSettingsModel `tfsdk:"app_type_settings"`
 }
 
@@ -158,7 +158,7 @@ func (r *AppSettingResource) Schema(ctx context.Context, req resource.SchemaRequ
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the AppSetting. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -168,7 +168,7 @@ func (r *AppSettingResource) Schema(ctx context.Context, req resource.SchemaRequ
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the AppSetting will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -178,25 +178,25 @@ func (r *AppSettingResource) Schema(ctx context.Context, req resource.SchemaRequ
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -212,8 +212,7 @@ func (r *AppSettingResource) Schema(ctx context.Context, req resource.SchemaRequ
 			"app_type_settings": schema.ListNestedBlock{
 				MarkdownDescription: "Customize AppType For This Namespace. List of settings to enable for each AppType, given instance of AppType Exist in this Namespace",
 				NestedObject: schema.NestedBlockObject{
-					Attributes: map[string]schema.Attribute{
-					},
+					Attributes: map[string]schema.Attribute{},
 					Blocks: map[string]schema.Block{
 						"app_type_ref": schema.ListNestedBlock{
 							MarkdownDescription: "AppType. The AppType of App instance in current Namespace. Associating an AppType reference, will enable analysis on this instance's generated data",
@@ -221,34 +220,33 @@ func (r *AppSettingResource) Schema(ctx context.Context, req resource.SchemaRequ
 								Attributes: map[string]schema.Attribute{
 									"kind": schema.StringAttribute{
 										MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-										Optional: true,
-										Computed: true,
+										Optional:            true,
+										Computed:            true,
 									},
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-										Optional: true,
+										Optional:            true,
 									},
 									"namespace": schema.StringAttribute{
 										MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-										Optional: true,
+										Optional:            true,
 									},
 									"tenant": schema.StringAttribute{
 										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-										Optional: true,
-										Computed: true,
+										Optional:            true,
+										Computed:            true,
 									},
 									"uid": schema.StringAttribute{
 										MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-										Optional: true,
-										Computed: true,
+										Optional:            true,
+										Computed:            true,
 									},
 								},
 							},
 						},
 						"business_logic_markup_setting": schema.SingleNestedBlock{
 							MarkdownDescription: "API Discovery. Settings specifying how API Discovery will be performed",
-							Attributes: map[string]schema.Attribute{
-							},
+							Attributes:          map[string]schema.Attribute{},
 							Blocks: map[string]schema.Block{
 								"disable": schema.SingleNestedBlock{
 									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -260,8 +258,7 @@ func (r *AppSettingResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 						"timeseries_analyses_setting": schema.SingleNestedBlock{
 							MarkdownDescription: "DDoS Settings. Configuration for DDoS Detection",
-							Attributes: map[string]schema.Attribute{
-							},
+							Attributes:          map[string]schema.Attribute{},
 							Blocks: map[string]schema.Block{
 								"metric_selectors": schema.ListNestedBlock{
 									MarkdownDescription: "Metric Selectors. Define the metric selection criteria, i.e. the metrics source and the actual metrics that should be included in the detection logic",
@@ -269,12 +266,12 @@ func (r *AppSettingResource) Schema(ctx context.Context, req resource.SchemaRequ
 										Attributes: map[string]schema.Attribute{
 											"metric": schema.ListAttribute{
 												MarkdownDescription: "Metrics. Choose one or more metrics to be included in the detection logic. Possible values are `NO_METRICS`, `REQUEST_RATE`, `ERROR_RATE`, `LATENCY`, `THROUGHPUT`. Defaults to `NO_METRICS`.",
-												Optional: true,
-												ElementType: types.StringType,
+												Optional:            true,
+												ElementType:         types.StringType,
 											},
 											"metrics_source": schema.StringAttribute{
 												MarkdownDescription: "Metrics Source. Supported sources from which Metrics can be analyzed All edges in the service mesh graph. Metrics are analyzed separately between all source and destination service combinations. Possible values are `NONE`, `NODES`, `EDGES`, `VIRTUAL_HOSTS`.",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -283,8 +280,7 @@ func (r *AppSettingResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 						"user_behavior_analysis_setting": schema.SingleNestedBlock{
 							MarkdownDescription: "User Behavior Analysis Setting. Configuration for user behavior analysis",
-							Attributes: map[string]schema.Attribute{
-							},
+							Attributes:          map[string]schema.Attribute{},
 							Blocks: map[string]schema.Block{
 								"disable_detection": schema.SingleNestedBlock{
 									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -297,7 +293,7 @@ func (r *AppSettingResource) Schema(ctx context.Context, req resource.SchemaRequ
 									Attributes: map[string]schema.Attribute{
 										"cooling_off_period": schema.Int64Attribute{
 											MarkdownDescription: "Cooling off period. Malicious user detection assigns a threat level to each user based on their activity. Once a threat level is assigned, the system continues tracking activity from this user and if no further malicious activity is seen, it gradually reduces the threat assesment to lower levels. This field specifies the time period, in minutes, used by the system to decay a user's threat level from a high to medium or medium to low or low to none.",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -336,7 +332,7 @@ func (r *AppSettingResource) Schema(ctx context.Context, req resource.SchemaRequ
 											Attributes: map[string]schema.Attribute{
 												"login_failures_threshold": schema.Int64Attribute{
 													MarkdownDescription: "Login Failures Threshold. The number of failed logins beyond which the system will flag this user as malicious",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 										},
@@ -345,7 +341,7 @@ func (r *AppSettingResource) Schema(ctx context.Context, req resource.SchemaRequ
 											Attributes: map[string]schema.Attribute{
 												"forbidden_requests_threshold": schema.Int64Attribute{
 													MarkdownDescription: "Forbidden Requests Threshold. The number of forbidden requests beyond which the system will flag this user as malicious",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 										},
@@ -354,8 +350,7 @@ func (r *AppSettingResource) Schema(ctx context.Context, req resource.SchemaRequ
 										},
 										"include_non_existent_url_activity_automatic": schema.SingleNestedBlock{
 											MarkdownDescription: "Non-existent URL Automatic Activity Settings.",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"high": schema.SingleNestedBlock{
 													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -373,7 +368,7 @@ func (r *AppSettingResource) Schema(ctx context.Context, req resource.SchemaRequ
 											Attributes: map[string]schema.Attribute{
 												"nonexistent_requests_threshold": schema.Int64Attribute{
 													MarkdownDescription: "Non-existent URL Custom Threshold (percentage). The percentage of non-existent requests beyond which the system will flag this user as malicious",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 										},
@@ -391,7 +386,6 @@ func (r *AppSettingResource) Schema(ctx context.Context, req resource.SchemaRequ
 							},
 						},
 					},
-
 				},
 			},
 		},
@@ -658,7 +652,6 @@ func (r *AppSettingResource) Create(ctx context.Context, req resource.CreateRequ
 		createReq.Spec["app_type_settings"] = app_type_settingsList
 	}
 
-
 	apiResource, err := r.client.CreateAppSetting(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create AppSetting: %s", err))
@@ -670,7 +663,7 @@ func (r *AppSettingResource) Create(ctx context.Context, req resource.CreateRequ
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["app_type_settings"].([]interface{}); ok && len(listData) > 0 {
 		var app_type_settingsList []AppSettingAppTypeSettingsModel
 		for listIdx, item := range listData {
@@ -741,8 +734,7 @@ func (r *AppSettingResource) Create(ctx context.Context, req resource.CreateRequ
 					}(),
 					TimeseriesAnalysesSetting: func() *AppSettingAppTypeSettingsTimeseriesAnalysesSettingModel {
 						if _, ok := itemMap["timeseries_analyses_setting"].(map[string]interface{}); ok {
-							return &AppSettingAppTypeSettingsTimeseriesAnalysesSettingModel{
-							}
+							return &AppSettingAppTypeSettingsTimeseriesAnalysesSettingModel{}
 						}
 						return nil
 					}(),
@@ -776,7 +768,6 @@ func (r *AppSettingResource) Create(ctx context.Context, req resource.CreateRequ
 		}
 		data.AppTypeSettings = app_type_settingsList
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -866,9 +857,9 @@ func (r *AppSettingResource) Read(ctx context.Context, req resource.ReadRequest,
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if listData, ok := apiResource.Spec["app_type_settings"].([]interface{}); ok && len(listData) > 0 {
 		var app_type_settingsList []AppSettingAppTypeSettingsModel
@@ -940,8 +931,7 @@ func (r *AppSettingResource) Read(ctx context.Context, req resource.ReadRequest,
 					}(),
 					TimeseriesAnalysesSetting: func() *AppSettingAppTypeSettingsTimeseriesAnalysesSettingModel {
 						if _, ok := itemMap["timeseries_analyses_setting"].(map[string]interface{}); ok {
-							return &AppSettingAppTypeSettingsTimeseriesAnalysesSettingModel{
-							}
+							return &AppSettingAppTypeSettingsTimeseriesAnalysesSettingModel{}
 						}
 						return nil
 					}(),
@@ -975,7 +965,6 @@ func (r *AppSettingResource) Read(ctx context.Context, req resource.ReadRequest,
 		}
 		data.AppTypeSettings = app_type_settingsList
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -1151,7 +1140,6 @@ func (r *AppSettingResource) Update(ctx context.Context, req resource.UpdateRequ
 		}
 		apiResource.Spec["app_type_settings"] = app_type_settingsList
 	}
-
 
 	updated, err := r.client.UpdateAppSetting(ctx, apiResource)
 	if err != nil {

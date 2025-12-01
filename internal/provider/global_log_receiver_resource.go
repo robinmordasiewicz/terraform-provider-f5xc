@@ -51,275 +51,275 @@ type GlobalLogReceiverEmptyModel struct {
 
 // GlobalLogReceiverAWSCloudWatchReceiverModel represents aws_cloud_watch_receiver block
 type GlobalLogReceiverAWSCloudWatchReceiverModel struct {
-	AWSRegion types.String `tfsdk:"aws_region"`
-	GroupName types.String `tfsdk:"group_name"`
-	StreamName types.String `tfsdk:"stream_name"`
-	AWSCred *GlobalLogReceiverAWSCloudWatchReceiverAWSCredModel `tfsdk:"aws_cred"`
-	Batch *GlobalLogReceiverAWSCloudWatchReceiverBatchModel `tfsdk:"batch"`
+	AWSRegion   types.String                                            `tfsdk:"aws_region"`
+	GroupName   types.String                                            `tfsdk:"group_name"`
+	StreamName  types.String                                            `tfsdk:"stream_name"`
+	AWSCred     *GlobalLogReceiverAWSCloudWatchReceiverAWSCredModel     `tfsdk:"aws_cred"`
+	Batch       *GlobalLogReceiverAWSCloudWatchReceiverBatchModel       `tfsdk:"batch"`
 	Compression *GlobalLogReceiverAWSCloudWatchReceiverCompressionModel `tfsdk:"compression"`
 }
 
 // GlobalLogReceiverAWSCloudWatchReceiverAWSCredModel represents aws_cred block
 type GlobalLogReceiverAWSCloudWatchReceiverAWSCredModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // GlobalLogReceiverAWSCloudWatchReceiverBatchModel represents batch block
 type GlobalLogReceiverAWSCloudWatchReceiverBatchModel struct {
-	MaxBytes types.Int64 `tfsdk:"max_bytes"`
-	MaxEvents types.Int64 `tfsdk:"max_events"`
-	TimeoutSeconds types.String `tfsdk:"timeout_seconds"`
-	MaxBytesDisabled *GlobalLogReceiverEmptyModel `tfsdk:"max_bytes_disabled"`
-	MaxEventsDisabled *GlobalLogReceiverEmptyModel `tfsdk:"max_events_disabled"`
+	MaxBytes              types.Int64                  `tfsdk:"max_bytes"`
+	MaxEvents             types.Int64                  `tfsdk:"max_events"`
+	TimeoutSeconds        types.String                 `tfsdk:"timeout_seconds"`
+	MaxBytesDisabled      *GlobalLogReceiverEmptyModel `tfsdk:"max_bytes_disabled"`
+	MaxEventsDisabled     *GlobalLogReceiverEmptyModel `tfsdk:"max_events_disabled"`
 	TimeoutSecondsDefault *GlobalLogReceiverEmptyModel `tfsdk:"timeout_seconds_default"`
 }
 
 // GlobalLogReceiverAWSCloudWatchReceiverCompressionModel represents compression block
 type GlobalLogReceiverAWSCloudWatchReceiverCompressionModel struct {
 	CompressionDefault *GlobalLogReceiverEmptyModel `tfsdk:"compression_default"`
-	CompressionGzip *GlobalLogReceiverEmptyModel `tfsdk:"compression_gzip"`
-	CompressionNone *GlobalLogReceiverEmptyModel `tfsdk:"compression_none"`
+	CompressionGzip    *GlobalLogReceiverEmptyModel `tfsdk:"compression_gzip"`
+	CompressionNone    *GlobalLogReceiverEmptyModel `tfsdk:"compression_none"`
 }
 
 // GlobalLogReceiverAzureEventHubsReceiverModel represents azure_event_hubs_receiver block
 type GlobalLogReceiverAzureEventHubsReceiverModel struct {
-	Instance types.String `tfsdk:"instance"`
-	Namespace types.String `tfsdk:"namespace"`
+	Instance         types.String                                                  `tfsdk:"instance"`
+	Namespace        types.String                                                  `tfsdk:"namespace"`
 	ConnectionString *GlobalLogReceiverAzureEventHubsReceiverConnectionStringModel `tfsdk:"connection_string"`
 }
 
 // GlobalLogReceiverAzureEventHubsReceiverConnectionStringModel represents connection_string block
 type GlobalLogReceiverAzureEventHubsReceiverConnectionStringModel struct {
 	BlindfoldSecretInfo *GlobalLogReceiverAzureEventHubsReceiverConnectionStringBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *GlobalLogReceiverAzureEventHubsReceiverConnectionStringClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *GlobalLogReceiverAzureEventHubsReceiverConnectionStringClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // GlobalLogReceiverAzureEventHubsReceiverConnectionStringBlindfoldSecretInfoModel represents blindfold_secret_info block
 type GlobalLogReceiverAzureEventHubsReceiverConnectionStringBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // GlobalLogReceiverAzureEventHubsReceiverConnectionStringClearSecretInfoModel represents clear_secret_info block
 type GlobalLogReceiverAzureEventHubsReceiverConnectionStringClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // GlobalLogReceiverAzureReceiverModel represents azure_receiver block
 type GlobalLogReceiverAzureReceiverModel struct {
-	ContainerName types.String `tfsdk:"container_name"`
-	Batch *GlobalLogReceiverAzureReceiverBatchModel `tfsdk:"batch"`
-	Compression *GlobalLogReceiverAzureReceiverCompressionModel `tfsdk:"compression"`
+	ContainerName    types.String                                         `tfsdk:"container_name"`
+	Batch            *GlobalLogReceiverAzureReceiverBatchModel            `tfsdk:"batch"`
+	Compression      *GlobalLogReceiverAzureReceiverCompressionModel      `tfsdk:"compression"`
 	ConnectionString *GlobalLogReceiverAzureReceiverConnectionStringModel `tfsdk:"connection_string"`
-	FilenameOptions *GlobalLogReceiverAzureReceiverFilenameOptionsModel `tfsdk:"filename_options"`
+	FilenameOptions  *GlobalLogReceiverAzureReceiverFilenameOptionsModel  `tfsdk:"filename_options"`
 }
 
 // GlobalLogReceiverAzureReceiverBatchModel represents batch block
 type GlobalLogReceiverAzureReceiverBatchModel struct {
-	MaxBytes types.Int64 `tfsdk:"max_bytes"`
-	MaxEvents types.Int64 `tfsdk:"max_events"`
-	TimeoutSeconds types.String `tfsdk:"timeout_seconds"`
-	MaxBytesDisabled *GlobalLogReceiverEmptyModel `tfsdk:"max_bytes_disabled"`
-	MaxEventsDisabled *GlobalLogReceiverEmptyModel `tfsdk:"max_events_disabled"`
+	MaxBytes              types.Int64                  `tfsdk:"max_bytes"`
+	MaxEvents             types.Int64                  `tfsdk:"max_events"`
+	TimeoutSeconds        types.String                 `tfsdk:"timeout_seconds"`
+	MaxBytesDisabled      *GlobalLogReceiverEmptyModel `tfsdk:"max_bytes_disabled"`
+	MaxEventsDisabled     *GlobalLogReceiverEmptyModel `tfsdk:"max_events_disabled"`
 	TimeoutSecondsDefault *GlobalLogReceiverEmptyModel `tfsdk:"timeout_seconds_default"`
 }
 
 // GlobalLogReceiverAzureReceiverCompressionModel represents compression block
 type GlobalLogReceiverAzureReceiverCompressionModel struct {
 	CompressionDefault *GlobalLogReceiverEmptyModel `tfsdk:"compression_default"`
-	CompressionGzip *GlobalLogReceiverEmptyModel `tfsdk:"compression_gzip"`
-	CompressionNone *GlobalLogReceiverEmptyModel `tfsdk:"compression_none"`
+	CompressionGzip    *GlobalLogReceiverEmptyModel `tfsdk:"compression_gzip"`
+	CompressionNone    *GlobalLogReceiverEmptyModel `tfsdk:"compression_none"`
 }
 
 // GlobalLogReceiverAzureReceiverConnectionStringModel represents connection_string block
 type GlobalLogReceiverAzureReceiverConnectionStringModel struct {
 	BlindfoldSecretInfo *GlobalLogReceiverAzureReceiverConnectionStringBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *GlobalLogReceiverAzureReceiverConnectionStringClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *GlobalLogReceiverAzureReceiverConnectionStringClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // GlobalLogReceiverAzureReceiverConnectionStringBlindfoldSecretInfoModel represents blindfold_secret_info block
 type GlobalLogReceiverAzureReceiverConnectionStringBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // GlobalLogReceiverAzureReceiverConnectionStringClearSecretInfoModel represents clear_secret_info block
 type GlobalLogReceiverAzureReceiverConnectionStringClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // GlobalLogReceiverAzureReceiverFilenameOptionsModel represents filename_options block
 type GlobalLogReceiverAzureReceiverFilenameOptionsModel struct {
-	CustomFolder types.String `tfsdk:"custom_folder"`
+	CustomFolder  types.String                 `tfsdk:"custom_folder"`
 	LogTypeFolder *GlobalLogReceiverEmptyModel `tfsdk:"log_type_folder"`
-	NoFolder *GlobalLogReceiverEmptyModel `tfsdk:"no_folder"`
+	NoFolder      *GlobalLogReceiverEmptyModel `tfsdk:"no_folder"`
 }
 
 // GlobalLogReceiverDatadogReceiverModel represents datadog_receiver block
 type GlobalLogReceiverDatadogReceiverModel struct {
-	Endpoint types.String `tfsdk:"endpoint"`
-	Site types.String `tfsdk:"site"`
-	Batch *GlobalLogReceiverDatadogReceiverBatchModel `tfsdk:"batch"`
-	Compression *GlobalLogReceiverDatadogReceiverCompressionModel `tfsdk:"compression"`
+	Endpoint      types.String                                        `tfsdk:"endpoint"`
+	Site          types.String                                        `tfsdk:"site"`
+	Batch         *GlobalLogReceiverDatadogReceiverBatchModel         `tfsdk:"batch"`
+	Compression   *GlobalLogReceiverDatadogReceiverCompressionModel   `tfsdk:"compression"`
 	DatadogAPIKey *GlobalLogReceiverDatadogReceiverDatadogAPIKeyModel `tfsdk:"datadog_api_key"`
-	NoTLS *GlobalLogReceiverEmptyModel `tfsdk:"no_tls"`
-	UseTLS *GlobalLogReceiverDatadogReceiverUseTLSModel `tfsdk:"use_tls"`
+	NoTLS         *GlobalLogReceiverEmptyModel                        `tfsdk:"no_tls"`
+	UseTLS        *GlobalLogReceiverDatadogReceiverUseTLSModel        `tfsdk:"use_tls"`
 }
 
 // GlobalLogReceiverDatadogReceiverBatchModel represents batch block
 type GlobalLogReceiverDatadogReceiverBatchModel struct {
-	MaxBytes types.Int64 `tfsdk:"max_bytes"`
-	MaxEvents types.Int64 `tfsdk:"max_events"`
-	TimeoutSeconds types.String `tfsdk:"timeout_seconds"`
-	MaxBytesDisabled *GlobalLogReceiverEmptyModel `tfsdk:"max_bytes_disabled"`
-	MaxEventsDisabled *GlobalLogReceiverEmptyModel `tfsdk:"max_events_disabled"`
+	MaxBytes              types.Int64                  `tfsdk:"max_bytes"`
+	MaxEvents             types.Int64                  `tfsdk:"max_events"`
+	TimeoutSeconds        types.String                 `tfsdk:"timeout_seconds"`
+	MaxBytesDisabled      *GlobalLogReceiverEmptyModel `tfsdk:"max_bytes_disabled"`
+	MaxEventsDisabled     *GlobalLogReceiverEmptyModel `tfsdk:"max_events_disabled"`
 	TimeoutSecondsDefault *GlobalLogReceiverEmptyModel `tfsdk:"timeout_seconds_default"`
 }
 
 // GlobalLogReceiverDatadogReceiverCompressionModel represents compression block
 type GlobalLogReceiverDatadogReceiverCompressionModel struct {
 	CompressionDefault *GlobalLogReceiverEmptyModel `tfsdk:"compression_default"`
-	CompressionGzip *GlobalLogReceiverEmptyModel `tfsdk:"compression_gzip"`
-	CompressionNone *GlobalLogReceiverEmptyModel `tfsdk:"compression_none"`
+	CompressionGzip    *GlobalLogReceiverEmptyModel `tfsdk:"compression_gzip"`
+	CompressionNone    *GlobalLogReceiverEmptyModel `tfsdk:"compression_none"`
 }
 
 // GlobalLogReceiverDatadogReceiverDatadogAPIKeyModel represents datadog_api_key block
 type GlobalLogReceiverDatadogReceiverDatadogAPIKeyModel struct {
 	BlindfoldSecretInfo *GlobalLogReceiverDatadogReceiverDatadogAPIKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *GlobalLogReceiverDatadogReceiverDatadogAPIKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *GlobalLogReceiverDatadogReceiverDatadogAPIKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // GlobalLogReceiverDatadogReceiverDatadogAPIKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
 type GlobalLogReceiverDatadogReceiverDatadogAPIKeyBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // GlobalLogReceiverDatadogReceiverDatadogAPIKeyClearSecretInfoModel represents clear_secret_info block
 type GlobalLogReceiverDatadogReceiverDatadogAPIKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // GlobalLogReceiverDatadogReceiverUseTLSModel represents use_tls block
 type GlobalLogReceiverDatadogReceiverUseTLSModel struct {
-	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
-	DisableVerifyCertificate *GlobalLogReceiverEmptyModel `tfsdk:"disable_verify_certificate"`
-	DisableVerifyHostname *GlobalLogReceiverEmptyModel `tfsdk:"disable_verify_hostname"`
-	EnableVerifyCertificate *GlobalLogReceiverEmptyModel `tfsdk:"enable_verify_certificate"`
-	EnableVerifyHostname *GlobalLogReceiverEmptyModel `tfsdk:"enable_verify_hostname"`
-	MtlsDisabled *GlobalLogReceiverEmptyModel `tfsdk:"mtls_disabled"`
-	MtlsEnable *GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableModel `tfsdk:"mtls_enable"`
-	NoCa *GlobalLogReceiverEmptyModel `tfsdk:"no_ca"`
+	TrustedCaURL             types.String                                           `tfsdk:"trusted_ca_url"`
+	DisableVerifyCertificate *GlobalLogReceiverEmptyModel                           `tfsdk:"disable_verify_certificate"`
+	DisableVerifyHostname    *GlobalLogReceiverEmptyModel                           `tfsdk:"disable_verify_hostname"`
+	EnableVerifyCertificate  *GlobalLogReceiverEmptyModel                           `tfsdk:"enable_verify_certificate"`
+	EnableVerifyHostname     *GlobalLogReceiverEmptyModel                           `tfsdk:"enable_verify_hostname"`
+	MtlsDisabled             *GlobalLogReceiverEmptyModel                           `tfsdk:"mtls_disabled"`
+	MtlsEnable               *GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableModel `tfsdk:"mtls_enable"`
+	NoCa                     *GlobalLogReceiverEmptyModel                           `tfsdk:"no_ca"`
 }
 
 // GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableModel represents mtls_enable block
 type GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableModel struct {
-	Certificate types.String `tfsdk:"certificate"`
-	KeyURL *GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLModel `tfsdk:"key_url"`
+	Certificate types.String                                                 `tfsdk:"certificate"`
+	KeyURL      *GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLModel `tfsdk:"key_url"`
 }
 
 // GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLModel represents key_url block
 type GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLModel struct {
 	BlindfoldSecretInfo *GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel represents blindfold_secret_info block
 type GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel represents clear_secret_info block
 type GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // GlobalLogReceiverGCPBucketReceiverModel represents gcp_bucket_receiver block
 type GlobalLogReceiverGCPBucketReceiverModel struct {
-	Bucket types.String `tfsdk:"bucket"`
-	Batch *GlobalLogReceiverGCPBucketReceiverBatchModel `tfsdk:"batch"`
-	Compression *GlobalLogReceiverGCPBucketReceiverCompressionModel `tfsdk:"compression"`
+	Bucket          types.String                                            `tfsdk:"bucket"`
+	Batch           *GlobalLogReceiverGCPBucketReceiverBatchModel           `tfsdk:"batch"`
+	Compression     *GlobalLogReceiverGCPBucketReceiverCompressionModel     `tfsdk:"compression"`
 	FilenameOptions *GlobalLogReceiverGCPBucketReceiverFilenameOptionsModel `tfsdk:"filename_options"`
-	GCPCred *GlobalLogReceiverGCPBucketReceiverGCPCredModel `tfsdk:"gcp_cred"`
+	GCPCred         *GlobalLogReceiverGCPBucketReceiverGCPCredModel         `tfsdk:"gcp_cred"`
 }
 
 // GlobalLogReceiverGCPBucketReceiverBatchModel represents batch block
 type GlobalLogReceiverGCPBucketReceiverBatchModel struct {
-	MaxBytes types.Int64 `tfsdk:"max_bytes"`
-	MaxEvents types.Int64 `tfsdk:"max_events"`
-	TimeoutSeconds types.String `tfsdk:"timeout_seconds"`
-	MaxBytesDisabled *GlobalLogReceiverEmptyModel `tfsdk:"max_bytes_disabled"`
-	MaxEventsDisabled *GlobalLogReceiverEmptyModel `tfsdk:"max_events_disabled"`
+	MaxBytes              types.Int64                  `tfsdk:"max_bytes"`
+	MaxEvents             types.Int64                  `tfsdk:"max_events"`
+	TimeoutSeconds        types.String                 `tfsdk:"timeout_seconds"`
+	MaxBytesDisabled      *GlobalLogReceiverEmptyModel `tfsdk:"max_bytes_disabled"`
+	MaxEventsDisabled     *GlobalLogReceiverEmptyModel `tfsdk:"max_events_disabled"`
 	TimeoutSecondsDefault *GlobalLogReceiverEmptyModel `tfsdk:"timeout_seconds_default"`
 }
 
 // GlobalLogReceiverGCPBucketReceiverCompressionModel represents compression block
 type GlobalLogReceiverGCPBucketReceiverCompressionModel struct {
 	CompressionDefault *GlobalLogReceiverEmptyModel `tfsdk:"compression_default"`
-	CompressionGzip *GlobalLogReceiverEmptyModel `tfsdk:"compression_gzip"`
-	CompressionNone *GlobalLogReceiverEmptyModel `tfsdk:"compression_none"`
+	CompressionGzip    *GlobalLogReceiverEmptyModel `tfsdk:"compression_gzip"`
+	CompressionNone    *GlobalLogReceiverEmptyModel `tfsdk:"compression_none"`
 }
 
 // GlobalLogReceiverGCPBucketReceiverFilenameOptionsModel represents filename_options block
 type GlobalLogReceiverGCPBucketReceiverFilenameOptionsModel struct {
-	CustomFolder types.String `tfsdk:"custom_folder"`
+	CustomFolder  types.String                 `tfsdk:"custom_folder"`
 	LogTypeFolder *GlobalLogReceiverEmptyModel `tfsdk:"log_type_folder"`
-	NoFolder *GlobalLogReceiverEmptyModel `tfsdk:"no_folder"`
+	NoFolder      *GlobalLogReceiverEmptyModel `tfsdk:"no_folder"`
 }
 
 // GlobalLogReceiverGCPBucketReceiverGCPCredModel represents gcp_cred block
 type GlobalLogReceiverGCPBucketReceiverGCPCredModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // GlobalLogReceiverHTTPReceiverModel represents http_receiver block
 type GlobalLogReceiverHTTPReceiverModel struct {
-	URI types.String `tfsdk:"uri"`
-	AuthBasic *GlobalLogReceiverHTTPReceiverAuthBasicModel `tfsdk:"auth_basic"`
-	AuthNone *GlobalLogReceiverEmptyModel `tfsdk:"auth_none"`
-	AuthToken *GlobalLogReceiverHTTPReceiverAuthTokenModel `tfsdk:"auth_token"`
-	Batch *GlobalLogReceiverHTTPReceiverBatchModel `tfsdk:"batch"`
+	URI         types.String                                   `tfsdk:"uri"`
+	AuthBasic   *GlobalLogReceiverHTTPReceiverAuthBasicModel   `tfsdk:"auth_basic"`
+	AuthNone    *GlobalLogReceiverEmptyModel                   `tfsdk:"auth_none"`
+	AuthToken   *GlobalLogReceiverHTTPReceiverAuthTokenModel   `tfsdk:"auth_token"`
+	Batch       *GlobalLogReceiverHTTPReceiverBatchModel       `tfsdk:"batch"`
 	Compression *GlobalLogReceiverHTTPReceiverCompressionModel `tfsdk:"compression"`
-	NoTLS *GlobalLogReceiverEmptyModel `tfsdk:"no_tls"`
-	UseTLS *GlobalLogReceiverHTTPReceiverUseTLSModel `tfsdk:"use_tls"`
+	NoTLS       *GlobalLogReceiverEmptyModel                   `tfsdk:"no_tls"`
+	UseTLS      *GlobalLogReceiverHTTPReceiverUseTLSModel      `tfsdk:"use_tls"`
 }
 
 // GlobalLogReceiverHTTPReceiverAuthBasicModel represents auth_basic block
 type GlobalLogReceiverHTTPReceiverAuthBasicModel struct {
-	UserName types.String `tfsdk:"user_name"`
+	UserName types.String                                         `tfsdk:"user_name"`
 	Password *GlobalLogReceiverHTTPReceiverAuthBasicPasswordModel `tfsdk:"password"`
 }
 
 // GlobalLogReceiverHTTPReceiverAuthBasicPasswordModel represents password block
 type GlobalLogReceiverHTTPReceiverAuthBasicPasswordModel struct {
 	BlindfoldSecretInfo *GlobalLogReceiverHTTPReceiverAuthBasicPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *GlobalLogReceiverHTTPReceiverAuthBasicPasswordClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *GlobalLogReceiverHTTPReceiverAuthBasicPasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // GlobalLogReceiverHTTPReceiverAuthBasicPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
 type GlobalLogReceiverHTTPReceiverAuthBasicPasswordBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // GlobalLogReceiverHTTPReceiverAuthBasicPasswordClearSecretInfoModel represents clear_secret_info block
 type GlobalLogReceiverHTTPReceiverAuthBasicPasswordClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // GlobalLogReceiverHTTPReceiverAuthTokenModel represents auth_token block
@@ -330,164 +330,164 @@ type GlobalLogReceiverHTTPReceiverAuthTokenModel struct {
 // GlobalLogReceiverHTTPReceiverAuthTokenTokenModel represents token block
 type GlobalLogReceiverHTTPReceiverAuthTokenTokenModel struct {
 	BlindfoldSecretInfo *GlobalLogReceiverHTTPReceiverAuthTokenTokenBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *GlobalLogReceiverHTTPReceiverAuthTokenTokenClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *GlobalLogReceiverHTTPReceiverAuthTokenTokenClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // GlobalLogReceiverHTTPReceiverAuthTokenTokenBlindfoldSecretInfoModel represents blindfold_secret_info block
 type GlobalLogReceiverHTTPReceiverAuthTokenTokenBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // GlobalLogReceiverHTTPReceiverAuthTokenTokenClearSecretInfoModel represents clear_secret_info block
 type GlobalLogReceiverHTTPReceiverAuthTokenTokenClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // GlobalLogReceiverHTTPReceiverBatchModel represents batch block
 type GlobalLogReceiverHTTPReceiverBatchModel struct {
-	MaxBytes types.Int64 `tfsdk:"max_bytes"`
-	MaxEvents types.Int64 `tfsdk:"max_events"`
-	TimeoutSeconds types.String `tfsdk:"timeout_seconds"`
-	MaxBytesDisabled *GlobalLogReceiverEmptyModel `tfsdk:"max_bytes_disabled"`
-	MaxEventsDisabled *GlobalLogReceiverEmptyModel `tfsdk:"max_events_disabled"`
+	MaxBytes              types.Int64                  `tfsdk:"max_bytes"`
+	MaxEvents             types.Int64                  `tfsdk:"max_events"`
+	TimeoutSeconds        types.String                 `tfsdk:"timeout_seconds"`
+	MaxBytesDisabled      *GlobalLogReceiverEmptyModel `tfsdk:"max_bytes_disabled"`
+	MaxEventsDisabled     *GlobalLogReceiverEmptyModel `tfsdk:"max_events_disabled"`
 	TimeoutSecondsDefault *GlobalLogReceiverEmptyModel `tfsdk:"timeout_seconds_default"`
 }
 
 // GlobalLogReceiverHTTPReceiverCompressionModel represents compression block
 type GlobalLogReceiverHTTPReceiverCompressionModel struct {
 	CompressionDefault *GlobalLogReceiverEmptyModel `tfsdk:"compression_default"`
-	CompressionGzip *GlobalLogReceiverEmptyModel `tfsdk:"compression_gzip"`
-	CompressionNone *GlobalLogReceiverEmptyModel `tfsdk:"compression_none"`
+	CompressionGzip    *GlobalLogReceiverEmptyModel `tfsdk:"compression_gzip"`
+	CompressionNone    *GlobalLogReceiverEmptyModel `tfsdk:"compression_none"`
 }
 
 // GlobalLogReceiverHTTPReceiverUseTLSModel represents use_tls block
 type GlobalLogReceiverHTTPReceiverUseTLSModel struct {
-	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
-	DisableVerifyCertificate *GlobalLogReceiverEmptyModel `tfsdk:"disable_verify_certificate"`
-	DisableVerifyHostname *GlobalLogReceiverEmptyModel `tfsdk:"disable_verify_hostname"`
-	EnableVerifyCertificate *GlobalLogReceiverEmptyModel `tfsdk:"enable_verify_certificate"`
-	EnableVerifyHostname *GlobalLogReceiverEmptyModel `tfsdk:"enable_verify_hostname"`
-	MtlsDisabled *GlobalLogReceiverEmptyModel `tfsdk:"mtls_disabled"`
-	MtlsEnable *GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableModel `tfsdk:"mtls_enable"`
-	NoCa *GlobalLogReceiverEmptyModel `tfsdk:"no_ca"`
+	TrustedCaURL             types.String                                        `tfsdk:"trusted_ca_url"`
+	DisableVerifyCertificate *GlobalLogReceiverEmptyModel                        `tfsdk:"disable_verify_certificate"`
+	DisableVerifyHostname    *GlobalLogReceiverEmptyModel                        `tfsdk:"disable_verify_hostname"`
+	EnableVerifyCertificate  *GlobalLogReceiverEmptyModel                        `tfsdk:"enable_verify_certificate"`
+	EnableVerifyHostname     *GlobalLogReceiverEmptyModel                        `tfsdk:"enable_verify_hostname"`
+	MtlsDisabled             *GlobalLogReceiverEmptyModel                        `tfsdk:"mtls_disabled"`
+	MtlsEnable               *GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableModel `tfsdk:"mtls_enable"`
+	NoCa                     *GlobalLogReceiverEmptyModel                        `tfsdk:"no_ca"`
 }
 
 // GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableModel represents mtls_enable block
 type GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableModel struct {
-	Certificate types.String `tfsdk:"certificate"`
-	KeyURL *GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLModel `tfsdk:"key_url"`
+	Certificate types.String                                              `tfsdk:"certificate"`
+	KeyURL      *GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLModel `tfsdk:"key_url"`
 }
 
 // GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLModel represents key_url block
 type GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLModel struct {
 	BlindfoldSecretInfo *GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel represents blindfold_secret_info block
 type GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel represents clear_secret_info block
 type GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // GlobalLogReceiverKafkaReceiverModel represents kafka_receiver block
 type GlobalLogReceiverKafkaReceiverModel struct {
-	BootstrapServers types.List `tfsdk:"bootstrap_servers"`
-	KafkaTopic types.String `tfsdk:"kafka_topic"`
-	Batch *GlobalLogReceiverKafkaReceiverBatchModel `tfsdk:"batch"`
-	Compression *GlobalLogReceiverKafkaReceiverCompressionModel `tfsdk:"compression"`
-	NoTLS *GlobalLogReceiverEmptyModel `tfsdk:"no_tls"`
-	UseTLS *GlobalLogReceiverKafkaReceiverUseTLSModel `tfsdk:"use_tls"`
+	BootstrapServers types.List                                      `tfsdk:"bootstrap_servers"`
+	KafkaTopic       types.String                                    `tfsdk:"kafka_topic"`
+	Batch            *GlobalLogReceiverKafkaReceiverBatchModel       `tfsdk:"batch"`
+	Compression      *GlobalLogReceiverKafkaReceiverCompressionModel `tfsdk:"compression"`
+	NoTLS            *GlobalLogReceiverEmptyModel                    `tfsdk:"no_tls"`
+	UseTLS           *GlobalLogReceiverKafkaReceiverUseTLSModel      `tfsdk:"use_tls"`
 }
 
 // GlobalLogReceiverKafkaReceiverBatchModel represents batch block
 type GlobalLogReceiverKafkaReceiverBatchModel struct {
-	MaxBytes types.Int64 `tfsdk:"max_bytes"`
-	MaxEvents types.Int64 `tfsdk:"max_events"`
-	TimeoutSeconds types.String `tfsdk:"timeout_seconds"`
-	MaxBytesDisabled *GlobalLogReceiverEmptyModel `tfsdk:"max_bytes_disabled"`
-	MaxEventsDisabled *GlobalLogReceiverEmptyModel `tfsdk:"max_events_disabled"`
+	MaxBytes              types.Int64                  `tfsdk:"max_bytes"`
+	MaxEvents             types.Int64                  `tfsdk:"max_events"`
+	TimeoutSeconds        types.String                 `tfsdk:"timeout_seconds"`
+	MaxBytesDisabled      *GlobalLogReceiverEmptyModel `tfsdk:"max_bytes_disabled"`
+	MaxEventsDisabled     *GlobalLogReceiverEmptyModel `tfsdk:"max_events_disabled"`
 	TimeoutSecondsDefault *GlobalLogReceiverEmptyModel `tfsdk:"timeout_seconds_default"`
 }
 
 // GlobalLogReceiverKafkaReceiverCompressionModel represents compression block
 type GlobalLogReceiverKafkaReceiverCompressionModel struct {
 	CompressionDefault *GlobalLogReceiverEmptyModel `tfsdk:"compression_default"`
-	CompressionGzip *GlobalLogReceiverEmptyModel `tfsdk:"compression_gzip"`
-	CompressionNone *GlobalLogReceiverEmptyModel `tfsdk:"compression_none"`
+	CompressionGzip    *GlobalLogReceiverEmptyModel `tfsdk:"compression_gzip"`
+	CompressionNone    *GlobalLogReceiverEmptyModel `tfsdk:"compression_none"`
 }
 
 // GlobalLogReceiverKafkaReceiverUseTLSModel represents use_tls block
 type GlobalLogReceiverKafkaReceiverUseTLSModel struct {
-	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
-	DisableVerifyCertificate *GlobalLogReceiverEmptyModel `tfsdk:"disable_verify_certificate"`
-	DisableVerifyHostname *GlobalLogReceiverEmptyModel `tfsdk:"disable_verify_hostname"`
-	EnableVerifyCertificate *GlobalLogReceiverEmptyModel `tfsdk:"enable_verify_certificate"`
-	EnableVerifyHostname *GlobalLogReceiverEmptyModel `tfsdk:"enable_verify_hostname"`
-	MtlsDisabled *GlobalLogReceiverEmptyModel `tfsdk:"mtls_disabled"`
-	MtlsEnable *GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableModel `tfsdk:"mtls_enable"`
-	NoCa *GlobalLogReceiverEmptyModel `tfsdk:"no_ca"`
+	TrustedCaURL             types.String                                         `tfsdk:"trusted_ca_url"`
+	DisableVerifyCertificate *GlobalLogReceiverEmptyModel                         `tfsdk:"disable_verify_certificate"`
+	DisableVerifyHostname    *GlobalLogReceiverEmptyModel                         `tfsdk:"disable_verify_hostname"`
+	EnableVerifyCertificate  *GlobalLogReceiverEmptyModel                         `tfsdk:"enable_verify_certificate"`
+	EnableVerifyHostname     *GlobalLogReceiverEmptyModel                         `tfsdk:"enable_verify_hostname"`
+	MtlsDisabled             *GlobalLogReceiverEmptyModel                         `tfsdk:"mtls_disabled"`
+	MtlsEnable               *GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableModel `tfsdk:"mtls_enable"`
+	NoCa                     *GlobalLogReceiverEmptyModel                         `tfsdk:"no_ca"`
 }
 
 // GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableModel represents mtls_enable block
 type GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableModel struct {
-	Certificate types.String `tfsdk:"certificate"`
-	KeyURL *GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLModel `tfsdk:"key_url"`
+	Certificate types.String                                               `tfsdk:"certificate"`
+	KeyURL      *GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLModel `tfsdk:"key_url"`
 }
 
 // GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLModel represents key_url block
 type GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLModel struct {
 	BlindfoldSecretInfo *GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel represents blindfold_secret_info block
 type GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel represents clear_secret_info block
 type GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // GlobalLogReceiverNewRelicReceiverModel represents new_relic_receiver block
 type GlobalLogReceiverNewRelicReceiverModel struct {
 	APIKey *GlobalLogReceiverNewRelicReceiverAPIKeyModel `tfsdk:"api_key"`
-	Eu *GlobalLogReceiverEmptyModel `tfsdk:"eu"`
-	Us *GlobalLogReceiverEmptyModel `tfsdk:"us"`
+	Eu     *GlobalLogReceiverEmptyModel                  `tfsdk:"eu"`
+	Us     *GlobalLogReceiverEmptyModel                  `tfsdk:"us"`
 }
 
 // GlobalLogReceiverNewRelicReceiverAPIKeyModel represents api_key block
 type GlobalLogReceiverNewRelicReceiverAPIKeyModel struct {
 	BlindfoldSecretInfo *GlobalLogReceiverNewRelicReceiverAPIKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *GlobalLogReceiverNewRelicReceiverAPIKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *GlobalLogReceiverNewRelicReceiverAPIKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // GlobalLogReceiverNewRelicReceiverAPIKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
 type GlobalLogReceiverNewRelicReceiverAPIKeyBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // GlobalLogReceiverNewRelicReceiverAPIKeyClearSecretInfoModel represents clear_secret_info block
 type GlobalLogReceiverNewRelicReceiverAPIKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // GlobalLogReceiverNsListModel represents ns_list block
@@ -497,189 +497,189 @@ type GlobalLogReceiverNsListModel struct {
 
 // GlobalLogReceiverQradarReceiverModel represents qradar_receiver block
 type GlobalLogReceiverQradarReceiverModel struct {
-	URI types.String `tfsdk:"uri"`
-	Batch *GlobalLogReceiverQradarReceiverBatchModel `tfsdk:"batch"`
+	URI         types.String                                     `tfsdk:"uri"`
+	Batch       *GlobalLogReceiverQradarReceiverBatchModel       `tfsdk:"batch"`
 	Compression *GlobalLogReceiverQradarReceiverCompressionModel `tfsdk:"compression"`
-	NoTLS *GlobalLogReceiverEmptyModel `tfsdk:"no_tls"`
-	UseTLS *GlobalLogReceiverQradarReceiverUseTLSModel `tfsdk:"use_tls"`
+	NoTLS       *GlobalLogReceiverEmptyModel                     `tfsdk:"no_tls"`
+	UseTLS      *GlobalLogReceiverQradarReceiverUseTLSModel      `tfsdk:"use_tls"`
 }
 
 // GlobalLogReceiverQradarReceiverBatchModel represents batch block
 type GlobalLogReceiverQradarReceiverBatchModel struct {
-	MaxBytes types.Int64 `tfsdk:"max_bytes"`
-	MaxEvents types.Int64 `tfsdk:"max_events"`
-	TimeoutSeconds types.String `tfsdk:"timeout_seconds"`
-	MaxBytesDisabled *GlobalLogReceiverEmptyModel `tfsdk:"max_bytes_disabled"`
-	MaxEventsDisabled *GlobalLogReceiverEmptyModel `tfsdk:"max_events_disabled"`
+	MaxBytes              types.Int64                  `tfsdk:"max_bytes"`
+	MaxEvents             types.Int64                  `tfsdk:"max_events"`
+	TimeoutSeconds        types.String                 `tfsdk:"timeout_seconds"`
+	MaxBytesDisabled      *GlobalLogReceiverEmptyModel `tfsdk:"max_bytes_disabled"`
+	MaxEventsDisabled     *GlobalLogReceiverEmptyModel `tfsdk:"max_events_disabled"`
 	TimeoutSecondsDefault *GlobalLogReceiverEmptyModel `tfsdk:"timeout_seconds_default"`
 }
 
 // GlobalLogReceiverQradarReceiverCompressionModel represents compression block
 type GlobalLogReceiverQradarReceiverCompressionModel struct {
 	CompressionDefault *GlobalLogReceiverEmptyModel `tfsdk:"compression_default"`
-	CompressionGzip *GlobalLogReceiverEmptyModel `tfsdk:"compression_gzip"`
-	CompressionNone *GlobalLogReceiverEmptyModel `tfsdk:"compression_none"`
+	CompressionGzip    *GlobalLogReceiverEmptyModel `tfsdk:"compression_gzip"`
+	CompressionNone    *GlobalLogReceiverEmptyModel `tfsdk:"compression_none"`
 }
 
 // GlobalLogReceiverQradarReceiverUseTLSModel represents use_tls block
 type GlobalLogReceiverQradarReceiverUseTLSModel struct {
-	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
-	DisableVerifyCertificate *GlobalLogReceiverEmptyModel `tfsdk:"disable_verify_certificate"`
-	DisableVerifyHostname *GlobalLogReceiverEmptyModel `tfsdk:"disable_verify_hostname"`
-	EnableVerifyCertificate *GlobalLogReceiverEmptyModel `tfsdk:"enable_verify_certificate"`
-	EnableVerifyHostname *GlobalLogReceiverEmptyModel `tfsdk:"enable_verify_hostname"`
-	MtlsDisabled *GlobalLogReceiverEmptyModel `tfsdk:"mtls_disabled"`
-	MtlsEnable *GlobalLogReceiverQradarReceiverUseTLSMtlsEnableModel `tfsdk:"mtls_enable"`
-	NoCa *GlobalLogReceiverEmptyModel `tfsdk:"no_ca"`
+	TrustedCaURL             types.String                                          `tfsdk:"trusted_ca_url"`
+	DisableVerifyCertificate *GlobalLogReceiverEmptyModel                          `tfsdk:"disable_verify_certificate"`
+	DisableVerifyHostname    *GlobalLogReceiverEmptyModel                          `tfsdk:"disable_verify_hostname"`
+	EnableVerifyCertificate  *GlobalLogReceiverEmptyModel                          `tfsdk:"enable_verify_certificate"`
+	EnableVerifyHostname     *GlobalLogReceiverEmptyModel                          `tfsdk:"enable_verify_hostname"`
+	MtlsDisabled             *GlobalLogReceiverEmptyModel                          `tfsdk:"mtls_disabled"`
+	MtlsEnable               *GlobalLogReceiverQradarReceiverUseTLSMtlsEnableModel `tfsdk:"mtls_enable"`
+	NoCa                     *GlobalLogReceiverEmptyModel                          `tfsdk:"no_ca"`
 }
 
 // GlobalLogReceiverQradarReceiverUseTLSMtlsEnableModel represents mtls_enable block
 type GlobalLogReceiverQradarReceiverUseTLSMtlsEnableModel struct {
-	Certificate types.String `tfsdk:"certificate"`
-	KeyURL *GlobalLogReceiverQradarReceiverUseTLSMtlsEnableKeyURLModel `tfsdk:"key_url"`
+	Certificate types.String                                                `tfsdk:"certificate"`
+	KeyURL      *GlobalLogReceiverQradarReceiverUseTLSMtlsEnableKeyURLModel `tfsdk:"key_url"`
 }
 
 // GlobalLogReceiverQradarReceiverUseTLSMtlsEnableKeyURLModel represents key_url block
 type GlobalLogReceiverQradarReceiverUseTLSMtlsEnableKeyURLModel struct {
 	BlindfoldSecretInfo *GlobalLogReceiverQradarReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *GlobalLogReceiverQradarReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *GlobalLogReceiverQradarReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // GlobalLogReceiverQradarReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel represents blindfold_secret_info block
 type GlobalLogReceiverQradarReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // GlobalLogReceiverQradarReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel represents clear_secret_info block
 type GlobalLogReceiverQradarReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // GlobalLogReceiverS3ReceiverModel represents s3_receiver block
 type GlobalLogReceiverS3ReceiverModel struct {
-	AWSRegion types.String `tfsdk:"aws_region"`
-	Bucket types.String `tfsdk:"bucket"`
-	AWSCred *GlobalLogReceiverS3ReceiverAWSCredModel `tfsdk:"aws_cred"`
-	Batch *GlobalLogReceiverS3ReceiverBatchModel `tfsdk:"batch"`
-	Compression *GlobalLogReceiverS3ReceiverCompressionModel `tfsdk:"compression"`
+	AWSRegion       types.String                                     `tfsdk:"aws_region"`
+	Bucket          types.String                                     `tfsdk:"bucket"`
+	AWSCred         *GlobalLogReceiverS3ReceiverAWSCredModel         `tfsdk:"aws_cred"`
+	Batch           *GlobalLogReceiverS3ReceiverBatchModel           `tfsdk:"batch"`
+	Compression     *GlobalLogReceiverS3ReceiverCompressionModel     `tfsdk:"compression"`
 	FilenameOptions *GlobalLogReceiverS3ReceiverFilenameOptionsModel `tfsdk:"filename_options"`
 }
 
 // GlobalLogReceiverS3ReceiverAWSCredModel represents aws_cred block
 type GlobalLogReceiverS3ReceiverAWSCredModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // GlobalLogReceiverS3ReceiverBatchModel represents batch block
 type GlobalLogReceiverS3ReceiverBatchModel struct {
-	MaxBytes types.Int64 `tfsdk:"max_bytes"`
-	MaxEvents types.Int64 `tfsdk:"max_events"`
-	TimeoutSeconds types.String `tfsdk:"timeout_seconds"`
-	MaxBytesDisabled *GlobalLogReceiverEmptyModel `tfsdk:"max_bytes_disabled"`
-	MaxEventsDisabled *GlobalLogReceiverEmptyModel `tfsdk:"max_events_disabled"`
+	MaxBytes              types.Int64                  `tfsdk:"max_bytes"`
+	MaxEvents             types.Int64                  `tfsdk:"max_events"`
+	TimeoutSeconds        types.String                 `tfsdk:"timeout_seconds"`
+	MaxBytesDisabled      *GlobalLogReceiverEmptyModel `tfsdk:"max_bytes_disabled"`
+	MaxEventsDisabled     *GlobalLogReceiverEmptyModel `tfsdk:"max_events_disabled"`
 	TimeoutSecondsDefault *GlobalLogReceiverEmptyModel `tfsdk:"timeout_seconds_default"`
 }
 
 // GlobalLogReceiverS3ReceiverCompressionModel represents compression block
 type GlobalLogReceiverS3ReceiverCompressionModel struct {
 	CompressionDefault *GlobalLogReceiverEmptyModel `tfsdk:"compression_default"`
-	CompressionGzip *GlobalLogReceiverEmptyModel `tfsdk:"compression_gzip"`
-	CompressionNone *GlobalLogReceiverEmptyModel `tfsdk:"compression_none"`
+	CompressionGzip    *GlobalLogReceiverEmptyModel `tfsdk:"compression_gzip"`
+	CompressionNone    *GlobalLogReceiverEmptyModel `tfsdk:"compression_none"`
 }
 
 // GlobalLogReceiverS3ReceiverFilenameOptionsModel represents filename_options block
 type GlobalLogReceiverS3ReceiverFilenameOptionsModel struct {
-	CustomFolder types.String `tfsdk:"custom_folder"`
+	CustomFolder  types.String                 `tfsdk:"custom_folder"`
 	LogTypeFolder *GlobalLogReceiverEmptyModel `tfsdk:"log_type_folder"`
-	NoFolder *GlobalLogReceiverEmptyModel `tfsdk:"no_folder"`
+	NoFolder      *GlobalLogReceiverEmptyModel `tfsdk:"no_folder"`
 }
 
 // GlobalLogReceiverSplunkReceiverModel represents splunk_receiver block
 type GlobalLogReceiverSplunkReceiverModel struct {
-	Endpoint types.String `tfsdk:"endpoint"`
-	Batch *GlobalLogReceiverSplunkReceiverBatchModel `tfsdk:"batch"`
-	Compression *GlobalLogReceiverSplunkReceiverCompressionModel `tfsdk:"compression"`
-	NoTLS *GlobalLogReceiverEmptyModel `tfsdk:"no_tls"`
+	Endpoint       types.String                                        `tfsdk:"endpoint"`
+	Batch          *GlobalLogReceiverSplunkReceiverBatchModel          `tfsdk:"batch"`
+	Compression    *GlobalLogReceiverSplunkReceiverCompressionModel    `tfsdk:"compression"`
+	NoTLS          *GlobalLogReceiverEmptyModel                        `tfsdk:"no_tls"`
 	SplunkHecToken *GlobalLogReceiverSplunkReceiverSplunkHecTokenModel `tfsdk:"splunk_hec_token"`
-	UseTLS *GlobalLogReceiverSplunkReceiverUseTLSModel `tfsdk:"use_tls"`
+	UseTLS         *GlobalLogReceiverSplunkReceiverUseTLSModel         `tfsdk:"use_tls"`
 }
 
 // GlobalLogReceiverSplunkReceiverBatchModel represents batch block
 type GlobalLogReceiverSplunkReceiverBatchModel struct {
-	MaxBytes types.Int64 `tfsdk:"max_bytes"`
-	MaxEvents types.Int64 `tfsdk:"max_events"`
-	TimeoutSeconds types.String `tfsdk:"timeout_seconds"`
-	MaxBytesDisabled *GlobalLogReceiverEmptyModel `tfsdk:"max_bytes_disabled"`
-	MaxEventsDisabled *GlobalLogReceiverEmptyModel `tfsdk:"max_events_disabled"`
+	MaxBytes              types.Int64                  `tfsdk:"max_bytes"`
+	MaxEvents             types.Int64                  `tfsdk:"max_events"`
+	TimeoutSeconds        types.String                 `tfsdk:"timeout_seconds"`
+	MaxBytesDisabled      *GlobalLogReceiverEmptyModel `tfsdk:"max_bytes_disabled"`
+	MaxEventsDisabled     *GlobalLogReceiverEmptyModel `tfsdk:"max_events_disabled"`
 	TimeoutSecondsDefault *GlobalLogReceiverEmptyModel `tfsdk:"timeout_seconds_default"`
 }
 
 // GlobalLogReceiverSplunkReceiverCompressionModel represents compression block
 type GlobalLogReceiverSplunkReceiverCompressionModel struct {
 	CompressionDefault *GlobalLogReceiverEmptyModel `tfsdk:"compression_default"`
-	CompressionGzip *GlobalLogReceiverEmptyModel `tfsdk:"compression_gzip"`
-	CompressionNone *GlobalLogReceiverEmptyModel `tfsdk:"compression_none"`
+	CompressionGzip    *GlobalLogReceiverEmptyModel `tfsdk:"compression_gzip"`
+	CompressionNone    *GlobalLogReceiverEmptyModel `tfsdk:"compression_none"`
 }
 
 // GlobalLogReceiverSplunkReceiverSplunkHecTokenModel represents splunk_hec_token block
 type GlobalLogReceiverSplunkReceiverSplunkHecTokenModel struct {
 	BlindfoldSecretInfo *GlobalLogReceiverSplunkReceiverSplunkHecTokenBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *GlobalLogReceiverSplunkReceiverSplunkHecTokenClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *GlobalLogReceiverSplunkReceiverSplunkHecTokenClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // GlobalLogReceiverSplunkReceiverSplunkHecTokenBlindfoldSecretInfoModel represents blindfold_secret_info block
 type GlobalLogReceiverSplunkReceiverSplunkHecTokenBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // GlobalLogReceiverSplunkReceiverSplunkHecTokenClearSecretInfoModel represents clear_secret_info block
 type GlobalLogReceiverSplunkReceiverSplunkHecTokenClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // GlobalLogReceiverSplunkReceiverUseTLSModel represents use_tls block
 type GlobalLogReceiverSplunkReceiverUseTLSModel struct {
-	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
-	DisableVerifyCertificate *GlobalLogReceiverEmptyModel `tfsdk:"disable_verify_certificate"`
-	DisableVerifyHostname *GlobalLogReceiverEmptyModel `tfsdk:"disable_verify_hostname"`
-	EnableVerifyCertificate *GlobalLogReceiverEmptyModel `tfsdk:"enable_verify_certificate"`
-	EnableVerifyHostname *GlobalLogReceiverEmptyModel `tfsdk:"enable_verify_hostname"`
-	MtlsDisabled *GlobalLogReceiverEmptyModel `tfsdk:"mtls_disabled"`
-	MtlsEnable *GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableModel `tfsdk:"mtls_enable"`
-	NoCa *GlobalLogReceiverEmptyModel `tfsdk:"no_ca"`
+	TrustedCaURL             types.String                                          `tfsdk:"trusted_ca_url"`
+	DisableVerifyCertificate *GlobalLogReceiverEmptyModel                          `tfsdk:"disable_verify_certificate"`
+	DisableVerifyHostname    *GlobalLogReceiverEmptyModel                          `tfsdk:"disable_verify_hostname"`
+	EnableVerifyCertificate  *GlobalLogReceiverEmptyModel                          `tfsdk:"enable_verify_certificate"`
+	EnableVerifyHostname     *GlobalLogReceiverEmptyModel                          `tfsdk:"enable_verify_hostname"`
+	MtlsDisabled             *GlobalLogReceiverEmptyModel                          `tfsdk:"mtls_disabled"`
+	MtlsEnable               *GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableModel `tfsdk:"mtls_enable"`
+	NoCa                     *GlobalLogReceiverEmptyModel                          `tfsdk:"no_ca"`
 }
 
 // GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableModel represents mtls_enable block
 type GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableModel struct {
-	Certificate types.String `tfsdk:"certificate"`
-	KeyURL *GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLModel `tfsdk:"key_url"`
+	Certificate types.String                                                `tfsdk:"certificate"`
+	KeyURL      *GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLModel `tfsdk:"key_url"`
 }
 
 // GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLModel represents key_url block
 type GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLModel struct {
 	BlindfoldSecretInfo *GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel represents blindfold_secret_info block
 type GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel represents clear_secret_info block
 type GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // GlobalLogReceiverSumoLogicReceiverModel represents sumo_logic_receiver block
@@ -690,50 +690,50 @@ type GlobalLogReceiverSumoLogicReceiverModel struct {
 // GlobalLogReceiverSumoLogicReceiverURLModel represents url block
 type GlobalLogReceiverSumoLogicReceiverURLModel struct {
 	BlindfoldSecretInfo *GlobalLogReceiverSumoLogicReceiverURLBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *GlobalLogReceiverSumoLogicReceiverURLClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *GlobalLogReceiverSumoLogicReceiverURLClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // GlobalLogReceiverSumoLogicReceiverURLBlindfoldSecretInfoModel represents blindfold_secret_info block
 type GlobalLogReceiverSumoLogicReceiverURLBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // GlobalLogReceiverSumoLogicReceiverURLClearSecretInfoModel represents clear_secret_info block
 type GlobalLogReceiverSumoLogicReceiverURLClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 type GlobalLogReceiverResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	AuditLogs *GlobalLogReceiverEmptyModel `tfsdk:"audit_logs"`
-	AWSCloudWatchReceiver *GlobalLogReceiverAWSCloudWatchReceiverModel `tfsdk:"aws_cloud_watch_receiver"`
+	Name                   types.String                                  `tfsdk:"name"`
+	Namespace              types.String                                  `tfsdk:"namespace"`
+	Annotations            types.Map                                     `tfsdk:"annotations"`
+	Description            types.String                                  `tfsdk:"description"`
+	Disable                types.Bool                                    `tfsdk:"disable"`
+	Labels                 types.Map                                     `tfsdk:"labels"`
+	ID                     types.String                                  `tfsdk:"id"`
+	Timeouts               timeouts.Value                                `tfsdk:"timeouts"`
+	AuditLogs              *GlobalLogReceiverEmptyModel                  `tfsdk:"audit_logs"`
+	AWSCloudWatchReceiver  *GlobalLogReceiverAWSCloudWatchReceiverModel  `tfsdk:"aws_cloud_watch_receiver"`
 	AzureEventHubsReceiver *GlobalLogReceiverAzureEventHubsReceiverModel `tfsdk:"azure_event_hubs_receiver"`
-	AzureReceiver *GlobalLogReceiverAzureReceiverModel `tfsdk:"azure_receiver"`
-	DatadogReceiver *GlobalLogReceiverDatadogReceiverModel `tfsdk:"datadog_receiver"`
-	DNSLogs *GlobalLogReceiverEmptyModel `tfsdk:"dns_logs"`
-	GCPBucketReceiver *GlobalLogReceiverGCPBucketReceiverModel `tfsdk:"gcp_bucket_receiver"`
-	HTTPReceiver *GlobalLogReceiverHTTPReceiverModel `tfsdk:"http_receiver"`
-	KafkaReceiver *GlobalLogReceiverKafkaReceiverModel `tfsdk:"kafka_receiver"`
-	NewRelicReceiver *GlobalLogReceiverNewRelicReceiverModel `tfsdk:"new_relic_receiver"`
-	NsAll *GlobalLogReceiverEmptyModel `tfsdk:"ns_all"`
-	NsCurrent *GlobalLogReceiverEmptyModel `tfsdk:"ns_current"`
-	NsList *GlobalLogReceiverNsListModel `tfsdk:"ns_list"`
-	QradarReceiver *GlobalLogReceiverQradarReceiverModel `tfsdk:"qradar_receiver"`
-	RequestLogs *GlobalLogReceiverEmptyModel `tfsdk:"request_logs"`
-	S3Receiver *GlobalLogReceiverS3ReceiverModel `tfsdk:"s3_receiver"`
-	SecurityEvents *GlobalLogReceiverEmptyModel `tfsdk:"security_events"`
-	SplunkReceiver *GlobalLogReceiverSplunkReceiverModel `tfsdk:"splunk_receiver"`
-	SumoLogicReceiver *GlobalLogReceiverSumoLogicReceiverModel `tfsdk:"sumo_logic_receiver"`
+	AzureReceiver          *GlobalLogReceiverAzureReceiverModel          `tfsdk:"azure_receiver"`
+	DatadogReceiver        *GlobalLogReceiverDatadogReceiverModel        `tfsdk:"datadog_receiver"`
+	DNSLogs                *GlobalLogReceiverEmptyModel                  `tfsdk:"dns_logs"`
+	GCPBucketReceiver      *GlobalLogReceiverGCPBucketReceiverModel      `tfsdk:"gcp_bucket_receiver"`
+	HTTPReceiver           *GlobalLogReceiverHTTPReceiverModel           `tfsdk:"http_receiver"`
+	KafkaReceiver          *GlobalLogReceiverKafkaReceiverModel          `tfsdk:"kafka_receiver"`
+	NewRelicReceiver       *GlobalLogReceiverNewRelicReceiverModel       `tfsdk:"new_relic_receiver"`
+	NsAll                  *GlobalLogReceiverEmptyModel                  `tfsdk:"ns_all"`
+	NsCurrent              *GlobalLogReceiverEmptyModel                  `tfsdk:"ns_current"`
+	NsList                 *GlobalLogReceiverNsListModel                 `tfsdk:"ns_list"`
+	QradarReceiver         *GlobalLogReceiverQradarReceiverModel         `tfsdk:"qradar_receiver"`
+	RequestLogs            *GlobalLogReceiverEmptyModel                  `tfsdk:"request_logs"`
+	S3Receiver             *GlobalLogReceiverS3ReceiverModel             `tfsdk:"s3_receiver"`
+	SecurityEvents         *GlobalLogReceiverEmptyModel                  `tfsdk:"security_events"`
+	SplunkReceiver         *GlobalLogReceiverSplunkReceiverModel         `tfsdk:"splunk_receiver"`
+	SumoLogicReceiver      *GlobalLogReceiverSumoLogicReceiverModel      `tfsdk:"sumo_logic_receiver"`
 }
 
 func (r *GlobalLogReceiverResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -747,7 +747,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the GlobalLogReceiver. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -757,7 +757,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the GlobalLogReceiver will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -767,25 +767,25 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -806,15 +806,15 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 				Attributes: map[string]schema.Attribute{
 					"aws_region": schema.StringAttribute{
 						MarkdownDescription: "AWS Region. AWS Region Name",
-						Optional: true,
+						Optional:            true,
 					},
 					"group_name": schema.StringAttribute{
 						MarkdownDescription: "Group Name. The group name of the target Cloudwatch Logs stream",
-						Optional: true,
+						Optional:            true,
 					},
 					"stream_name": schema.StringAttribute{
 						MarkdownDescription: "Stream Name. The stream name of the target Cloudwatch Logs stream. Note that there can only be one writer to a log stream at a time",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -823,16 +823,16 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
 								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-								Optional: true,
+								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
 								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-								Optional: true,
+								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-								Optional: true,
-								Computed: true,
+								Optional:            true,
+								Computed:            true,
 							},
 						},
 					},
@@ -841,15 +841,15 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						Attributes: map[string]schema.Attribute{
 							"max_bytes": schema.Int64Attribute{
 								MarkdownDescription: "Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes",
-								Optional: true,
+								Optional:            true,
 							},
 							"max_events": schema.Int64Attribute{
 								MarkdownDescription: "Max Events. Send batch to endpoint after this many log messages are in the batch",
-								Optional: true,
+								Optional:            true,
 							},
 							"timeout_seconds": schema.StringAttribute{
 								MarkdownDescription: "Timeout Seconds. Send batch to the endpoint after this many seconds",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -866,8 +866,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 					},
 					"compression": schema.SingleNestedBlock{
 						MarkdownDescription: "Compression Type. Compression Type",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"compression_default": schema.SingleNestedBlock{
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -881,40 +880,38 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						},
 					},
 				},
-
 			},
 			"azure_event_hubs_receiver": schema.SingleNestedBlock{
 				MarkdownDescription: "Azure Event Hubs Configuration. Azure Event Hubs Configuration for Global Log Receiver",
 				Attributes: map[string]schema.Attribute{
 					"instance": schema.StringAttribute{
 						MarkdownDescription: "Event Hubs Instance. Event Hubs Instance name into which logs should be stored",
-						Optional: true,
+						Optional:            true,
 					},
 					"namespace": schema.StringAttribute{
 						MarkdownDescription: "Event Hubs Namespace. Event Hubs Namespace is namespace with instance into which logs should be stored",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"connection_string": schema.SingleNestedBlock{
 						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"blindfold_secret_info": schema.SingleNestedBlock{
 								MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 								Attributes: map[string]schema.Attribute{
 									"decryption_provider": schema.StringAttribute{
 										MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-										Optional: true,
+										Optional:            true,
 									},
 									"location": schema.StringAttribute{
 										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-										Optional: true,
+										Optional:            true,
 									},
 									"store_provider": schema.StringAttribute{
 										MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -923,25 +920,24 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 								Attributes: map[string]schema.Attribute{
 									"provider_ref": schema.StringAttribute{
 										MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-										Optional: true,
+										Optional:            true,
 									},
 									"url": schema.StringAttribute{
 										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
 						},
 					},
 				},
-
 			},
 			"azure_receiver": schema.SingleNestedBlock{
 				MarkdownDescription: "Azure Blob Configuration. Azure Blob Configuration for Global Log Receiver",
 				Attributes: map[string]schema.Attribute{
 					"container_name": schema.StringAttribute{
 						MarkdownDescription: "Container Name. Container Name is the name of the container into which logs should be stored",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -950,15 +946,15 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						Attributes: map[string]schema.Attribute{
 							"max_bytes": schema.Int64Attribute{
 								MarkdownDescription: "Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes",
-								Optional: true,
+								Optional:            true,
 							},
 							"max_events": schema.Int64Attribute{
 								MarkdownDescription: "Max Events. Send batch to endpoint after this many log messages are in the batch",
-								Optional: true,
+								Optional:            true,
 							},
 							"timeout_seconds": schema.StringAttribute{
 								MarkdownDescription: "Timeout Seconds. Send batch to the endpoint after this many seconds",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -975,8 +971,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 					},
 					"compression": schema.SingleNestedBlock{
 						MarkdownDescription: "Compression Type. Compression Type",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"compression_default": schema.SingleNestedBlock{
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -991,23 +986,22 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 					},
 					"connection_string": schema.SingleNestedBlock{
 						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"blindfold_secret_info": schema.SingleNestedBlock{
 								MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 								Attributes: map[string]schema.Attribute{
 									"decryption_provider": schema.StringAttribute{
 										MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-										Optional: true,
+										Optional:            true,
 									},
 									"location": schema.StringAttribute{
 										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-										Optional: true,
+										Optional:            true,
 									},
 									"store_provider": schema.StringAttribute{
 										MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -1016,11 +1010,11 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 								Attributes: map[string]schema.Attribute{
 									"provider_ref": schema.StringAttribute{
 										MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-										Optional: true,
+										Optional:            true,
 									},
 									"url": schema.StringAttribute{
 										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -1031,7 +1025,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						Attributes: map[string]schema.Attribute{
 							"custom_folder": schema.StringAttribute{
 								MarkdownDescription: "Custom Folder. Use your own folder name as the name of the folder in the endpoint bucket or file The folder name must match `/^[a-z_][a-z0-9\\-\\._]*$/i`",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -1044,18 +1038,17 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						},
 					},
 				},
-
 			},
 			"datadog_receiver": schema.SingleNestedBlock{
 				MarkdownDescription: "Datadog Configuration. Configuration for Datadog endpoint",
 				Attributes: map[string]schema.Attribute{
 					"endpoint": schema.StringAttribute{
 						MarkdownDescription: "Datadog Endpoint. Datadog Endpoint, example: `example.com:9000`",
-						Optional: true,
+						Optional:            true,
 					},
 					"site": schema.StringAttribute{
 						MarkdownDescription: "Datadog Site. Datadog Site, example: `datadoghq.com`",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -1064,15 +1057,15 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						Attributes: map[string]schema.Attribute{
 							"max_bytes": schema.Int64Attribute{
 								MarkdownDescription: "Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes",
-								Optional: true,
+								Optional:            true,
 							},
 							"max_events": schema.Int64Attribute{
 								MarkdownDescription: "Max Events. Send batch to endpoint after this many log messages are in the batch",
-								Optional: true,
+								Optional:            true,
 							},
 							"timeout_seconds": schema.StringAttribute{
 								MarkdownDescription: "Timeout Seconds. Send batch to the endpoint after this many seconds",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -1089,8 +1082,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 					},
 					"compression": schema.SingleNestedBlock{
 						MarkdownDescription: "Compression Type. Compression Type",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"compression_default": schema.SingleNestedBlock{
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -1105,23 +1097,22 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 					},
 					"datadog_api_key": schema.SingleNestedBlock{
 						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"blindfold_secret_info": schema.SingleNestedBlock{
 								MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 								Attributes: map[string]schema.Attribute{
 									"decryption_provider": schema.StringAttribute{
 										MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-										Optional: true,
+										Optional:            true,
 									},
 									"location": schema.StringAttribute{
 										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-										Optional: true,
+										Optional:            true,
 									},
 									"store_provider": schema.StringAttribute{
 										MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -1130,11 +1121,11 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 								Attributes: map[string]schema.Attribute{
 									"provider_ref": schema.StringAttribute{
 										MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-										Optional: true,
+										Optional:            true,
 									},
 									"url": schema.StringAttribute{
 										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -1148,7 +1139,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						Attributes: map[string]schema.Attribute{
 							"trusted_ca_url": schema.StringAttribute{
 								MarkdownDescription: "Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers.",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -1172,29 +1163,28 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 								Attributes: map[string]schema.Attribute{
 									"certificate": schema.StringAttribute{
 										MarkdownDescription: "Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain.",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 								Blocks: map[string]schema.Block{
 									"key_url": schema.SingleNestedBlock{
 										MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-										Attributes: map[string]schema.Attribute{
-										},
+										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"blindfold_secret_info": schema.SingleNestedBlock{
 												MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 												Attributes: map[string]schema.Attribute{
 													"decryption_provider": schema.StringAttribute{
 														MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-														Optional: true,
+														Optional:            true,
 													},
 													"location": schema.StringAttribute{
 														MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-														Optional: true,
+														Optional:            true,
 													},
 													"store_provider": schema.StringAttribute{
 														MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 											},
@@ -1203,11 +1193,11 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 												Attributes: map[string]schema.Attribute{
 													"provider_ref": schema.StringAttribute{
 														MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-														Optional: true,
+														Optional:            true,
 													},
 													"url": schema.StringAttribute{
 														MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 											},
@@ -1221,7 +1211,6 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						},
 					},
 				},
-
 			},
 			"dns_logs": schema.SingleNestedBlock{
 				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -1231,7 +1220,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 				Attributes: map[string]schema.Attribute{
 					"bucket": schema.StringAttribute{
 						MarkdownDescription: "GCP Bucket Name. GCP Bucket Name",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -1240,15 +1229,15 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						Attributes: map[string]schema.Attribute{
 							"max_bytes": schema.Int64Attribute{
 								MarkdownDescription: "Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes",
-								Optional: true,
+								Optional:            true,
 							},
 							"max_events": schema.Int64Attribute{
 								MarkdownDescription: "Max Events. Send batch to endpoint after this many log messages are in the batch",
-								Optional: true,
+								Optional:            true,
 							},
 							"timeout_seconds": schema.StringAttribute{
 								MarkdownDescription: "Timeout Seconds. Send batch to the endpoint after this many seconds",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -1265,8 +1254,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 					},
 					"compression": schema.SingleNestedBlock{
 						MarkdownDescription: "Compression Type. Compression Type",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"compression_default": schema.SingleNestedBlock{
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -1284,7 +1272,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						Attributes: map[string]schema.Attribute{
 							"custom_folder": schema.StringAttribute{
 								MarkdownDescription: "Custom Folder. Use your own folder name as the name of the folder in the endpoint bucket or file The folder name must match `/^[a-z_][a-z0-9\\-\\._]*$/i`",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -1301,28 +1289,27 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
 								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-								Optional: true,
+								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
 								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-								Optional: true,
+								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-								Optional: true,
-								Computed: true,
+								Optional:            true,
+								Computed:            true,
 							},
 						},
 					},
 				},
-
 			},
 			"http_receiver": schema.SingleNestedBlock{
 				MarkdownDescription: "HTTP Configuration. Configuration for HTTP endpoint",
 				Attributes: map[string]schema.Attribute{
 					"uri": schema.StringAttribute{
 						MarkdownDescription: "HTTP Uri. HTTP Uri is the Uri of the HTTP endpoint to send logs to, example: `http://example.com:9000/logs`",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -1331,29 +1318,28 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						Attributes: map[string]schema.Attribute{
 							"user_name": schema.StringAttribute{
 								MarkdownDescription: "User Name. HTTP Basic Auth User Name",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
 							"password": schema.SingleNestedBlock{
 								MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"blindfold_secret_info": schema.SingleNestedBlock{
 										MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 										Attributes: map[string]schema.Attribute{
 											"decryption_provider": schema.StringAttribute{
 												MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-												Optional: true,
+												Optional:            true,
 											},
 											"location": schema.StringAttribute{
 												MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-												Optional: true,
+												Optional:            true,
 											},
 											"store_provider": schema.StringAttribute{
 												MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -1362,11 +1348,11 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 										Attributes: map[string]schema.Attribute{
 											"provider_ref": schema.StringAttribute{
 												MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-												Optional: true,
+												Optional:            true,
 											},
 											"url": schema.StringAttribute{
 												MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -1379,28 +1365,26 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 					},
 					"auth_token": schema.SingleNestedBlock{
 						MarkdownDescription: "Access Token. Authentication Token for access",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"token": schema.SingleNestedBlock{
 								MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"blindfold_secret_info": schema.SingleNestedBlock{
 										MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 										Attributes: map[string]schema.Attribute{
 											"decryption_provider": schema.StringAttribute{
 												MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-												Optional: true,
+												Optional:            true,
 											},
 											"location": schema.StringAttribute{
 												MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-												Optional: true,
+												Optional:            true,
 											},
 											"store_provider": schema.StringAttribute{
 												MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -1409,11 +1393,11 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 										Attributes: map[string]schema.Attribute{
 											"provider_ref": schema.StringAttribute{
 												MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-												Optional: true,
+												Optional:            true,
 											},
 											"url": schema.StringAttribute{
 												MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -1426,15 +1410,15 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						Attributes: map[string]schema.Attribute{
 							"max_bytes": schema.Int64Attribute{
 								MarkdownDescription: "Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes",
-								Optional: true,
+								Optional:            true,
 							},
 							"max_events": schema.Int64Attribute{
 								MarkdownDescription: "Max Events. Send batch to endpoint after this many log messages are in the batch",
-								Optional: true,
+								Optional:            true,
 							},
 							"timeout_seconds": schema.StringAttribute{
 								MarkdownDescription: "Timeout Seconds. Send batch to the endpoint after this many seconds",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -1451,8 +1435,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 					},
 					"compression": schema.SingleNestedBlock{
 						MarkdownDescription: "Compression Type. Compression Type",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"compression_default": schema.SingleNestedBlock{
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -1473,7 +1456,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						Attributes: map[string]schema.Attribute{
 							"trusted_ca_url": schema.StringAttribute{
 								MarkdownDescription: "Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers.",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -1497,29 +1480,28 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 								Attributes: map[string]schema.Attribute{
 									"certificate": schema.StringAttribute{
 										MarkdownDescription: "Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain.",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 								Blocks: map[string]schema.Block{
 									"key_url": schema.SingleNestedBlock{
 										MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-										Attributes: map[string]schema.Attribute{
-										},
+										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"blindfold_secret_info": schema.SingleNestedBlock{
 												MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 												Attributes: map[string]schema.Attribute{
 													"decryption_provider": schema.StringAttribute{
 														MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-														Optional: true,
+														Optional:            true,
 													},
 													"location": schema.StringAttribute{
 														MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-														Optional: true,
+														Optional:            true,
 													},
 													"store_provider": schema.StringAttribute{
 														MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 											},
@@ -1528,11 +1510,11 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 												Attributes: map[string]schema.Attribute{
 													"provider_ref": schema.StringAttribute{
 														MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-														Optional: true,
+														Optional:            true,
 													},
 													"url": schema.StringAttribute{
 														MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 											},
@@ -1546,19 +1528,18 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						},
 					},
 				},
-
 			},
 			"kafka_receiver": schema.SingleNestedBlock{
 				MarkdownDescription: "Kafka Configuration. Kafka Configuration for Global Log Receiver",
 				Attributes: map[string]schema.Attribute{
 					"bootstrap_servers": schema.ListAttribute{
 						MarkdownDescription: "Kafka Bootstrap Servers List. List of host:port pairs of the Kafka brokers",
-						Optional: true,
-						ElementType: types.StringType,
+						Optional:            true,
+						ElementType:         types.StringType,
 					},
 					"kafka_topic": schema.StringAttribute{
 						MarkdownDescription: "Kafka Topic. The Kafka topic name to write events to",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -1567,15 +1548,15 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						Attributes: map[string]schema.Attribute{
 							"max_bytes": schema.Int64Attribute{
 								MarkdownDescription: "Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes",
-								Optional: true,
+								Optional:            true,
 							},
 							"max_events": schema.Int64Attribute{
 								MarkdownDescription: "Max Events. Send batch to endpoint after this many log messages are in the batch",
-								Optional: true,
+								Optional:            true,
 							},
 							"timeout_seconds": schema.StringAttribute{
 								MarkdownDescription: "Timeout Seconds. Send batch to the endpoint after this many seconds",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -1592,8 +1573,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 					},
 					"compression": schema.SingleNestedBlock{
 						MarkdownDescription: "Compression Type. Compression Type",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"compression_default": schema.SingleNestedBlock{
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -1614,7 +1594,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						Attributes: map[string]schema.Attribute{
 							"trusted_ca_url": schema.StringAttribute{
 								MarkdownDescription: "Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers.",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -1638,29 +1618,28 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 								Attributes: map[string]schema.Attribute{
 									"certificate": schema.StringAttribute{
 										MarkdownDescription: "Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain.",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 								Blocks: map[string]schema.Block{
 									"key_url": schema.SingleNestedBlock{
 										MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-										Attributes: map[string]schema.Attribute{
-										},
+										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"blindfold_secret_info": schema.SingleNestedBlock{
 												MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 												Attributes: map[string]schema.Attribute{
 													"decryption_provider": schema.StringAttribute{
 														MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-														Optional: true,
+														Optional:            true,
 													},
 													"location": schema.StringAttribute{
 														MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-														Optional: true,
+														Optional:            true,
 													},
 													"store_provider": schema.StringAttribute{
 														MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 											},
@@ -1669,11 +1648,11 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 												Attributes: map[string]schema.Attribute{
 													"provider_ref": schema.StringAttribute{
 														MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-														Optional: true,
+														Optional:            true,
 													},
 													"url": schema.StringAttribute{
 														MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 											},
@@ -1687,32 +1666,29 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						},
 					},
 				},
-
 			},
 			"new_relic_receiver": schema.SingleNestedBlock{
 				MarkdownDescription: "NewRelic Configuration. Configuration for NewRelic endpoint",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"api_key": schema.SingleNestedBlock{
 						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"blindfold_secret_info": schema.SingleNestedBlock{
 								MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 								Attributes: map[string]schema.Attribute{
 									"decryption_provider": schema.StringAttribute{
 										MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-										Optional: true,
+										Optional:            true,
 									},
 									"location": schema.StringAttribute{
 										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-										Optional: true,
+										Optional:            true,
 									},
 									"store_provider": schema.StringAttribute{
 										MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -1721,11 +1697,11 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 								Attributes: map[string]schema.Attribute{
 									"provider_ref": schema.StringAttribute{
 										MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-										Optional: true,
+										Optional:            true,
 									},
 									"url": schema.StringAttribute{
 										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -1738,7 +1714,6 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 			"ns_all": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: ns_all, ns_current, ns_list] Empty. This can be used for messages where no values are needed",
@@ -1751,18 +1726,17 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 				Attributes: map[string]schema.Attribute{
 					"namespaces": schema.ListAttribute{
 						MarkdownDescription: "namespaces. List of namespaces to stream logs for",
-						Optional: true,
-						ElementType: types.StringType,
+						Optional:            true,
+						ElementType:         types.StringType,
 					},
 				},
-
 			},
 			"qradar_receiver": schema.SingleNestedBlock{
 				MarkdownDescription: "IBM QRadar Configuration. Configuration for IBM QRadar endpoint",
 				Attributes: map[string]schema.Attribute{
 					"uri": schema.StringAttribute{
 						MarkdownDescription: "Log Source Collector URL. Log Source Collector URL is the URL of the IBM QRadar Log Source Collector to send logs to, example: `http://example.com:9000`",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -1771,15 +1745,15 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						Attributes: map[string]schema.Attribute{
 							"max_bytes": schema.Int64Attribute{
 								MarkdownDescription: "Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes",
-								Optional: true,
+								Optional:            true,
 							},
 							"max_events": schema.Int64Attribute{
 								MarkdownDescription: "Max Events. Send batch to endpoint after this many log messages are in the batch",
-								Optional: true,
+								Optional:            true,
 							},
 							"timeout_seconds": schema.StringAttribute{
 								MarkdownDescription: "Timeout Seconds. Send batch to the endpoint after this many seconds",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -1796,8 +1770,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 					},
 					"compression": schema.SingleNestedBlock{
 						MarkdownDescription: "Compression Type. Compression Type",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"compression_default": schema.SingleNestedBlock{
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -1818,7 +1791,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						Attributes: map[string]schema.Attribute{
 							"trusted_ca_url": schema.StringAttribute{
 								MarkdownDescription: "Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers.",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -1842,29 +1815,28 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 								Attributes: map[string]schema.Attribute{
 									"certificate": schema.StringAttribute{
 										MarkdownDescription: "Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain.",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 								Blocks: map[string]schema.Block{
 									"key_url": schema.SingleNestedBlock{
 										MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-										Attributes: map[string]schema.Attribute{
-										},
+										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"blindfold_secret_info": schema.SingleNestedBlock{
 												MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 												Attributes: map[string]schema.Attribute{
 													"decryption_provider": schema.StringAttribute{
 														MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-														Optional: true,
+														Optional:            true,
 													},
 													"location": schema.StringAttribute{
 														MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-														Optional: true,
+														Optional:            true,
 													},
 													"store_provider": schema.StringAttribute{
 														MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 											},
@@ -1873,11 +1845,11 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 												Attributes: map[string]schema.Attribute{
 													"provider_ref": schema.StringAttribute{
 														MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-														Optional: true,
+														Optional:            true,
 													},
 													"url": schema.StringAttribute{
 														MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 											},
@@ -1891,7 +1863,6 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						},
 					},
 				},
-
 			},
 			"request_logs": schema.SingleNestedBlock{
 				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -1901,11 +1872,11 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 				Attributes: map[string]schema.Attribute{
 					"aws_region": schema.StringAttribute{
 						MarkdownDescription: "AWS Region. AWS Region Name",
-						Optional: true,
+						Optional:            true,
 					},
 					"bucket": schema.StringAttribute{
 						MarkdownDescription: "S3 Bucket Name. S3 Bucket Name",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -1914,16 +1885,16 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
 								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-								Optional: true,
+								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
 								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-								Optional: true,
+								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-								Optional: true,
-								Computed: true,
+								Optional:            true,
+								Computed:            true,
 							},
 						},
 					},
@@ -1932,15 +1903,15 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						Attributes: map[string]schema.Attribute{
 							"max_bytes": schema.Int64Attribute{
 								MarkdownDescription: "Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes",
-								Optional: true,
+								Optional:            true,
 							},
 							"max_events": schema.Int64Attribute{
 								MarkdownDescription: "Max Events. Send batch to endpoint after this many log messages are in the batch",
-								Optional: true,
+								Optional:            true,
 							},
 							"timeout_seconds": schema.StringAttribute{
 								MarkdownDescription: "Timeout Seconds. Send batch to the endpoint after this many seconds",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -1957,8 +1928,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 					},
 					"compression": schema.SingleNestedBlock{
 						MarkdownDescription: "Compression Type. Compression Type",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"compression_default": schema.SingleNestedBlock{
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -1976,7 +1946,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						Attributes: map[string]schema.Attribute{
 							"custom_folder": schema.StringAttribute{
 								MarkdownDescription: "Custom Folder. Use your own folder name as the name of the folder in the endpoint bucket or file The folder name must match `/^[a-z_][a-z0-9\\-\\._]*$/i`",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -1989,7 +1959,6 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						},
 					},
 				},
-
 			},
 			"security_events": schema.SingleNestedBlock{
 				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -1999,7 +1968,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 				Attributes: map[string]schema.Attribute{
 					"endpoint": schema.StringAttribute{
 						MarkdownDescription: "Splunk HEC Logs Endpoint. Splunk HEC Logs Endpoint, example: `https://http-input-hec.splunkcloud.com` (Note: must not contain `/services/collector`)",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -2008,15 +1977,15 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						Attributes: map[string]schema.Attribute{
 							"max_bytes": schema.Int64Attribute{
 								MarkdownDescription: "Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes",
-								Optional: true,
+								Optional:            true,
 							},
 							"max_events": schema.Int64Attribute{
 								MarkdownDescription: "Max Events. Send batch to endpoint after this many log messages are in the batch",
-								Optional: true,
+								Optional:            true,
 							},
 							"timeout_seconds": schema.StringAttribute{
 								MarkdownDescription: "Timeout Seconds. Send batch to the endpoint after this many seconds",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -2033,8 +2002,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 					},
 					"compression": schema.SingleNestedBlock{
 						MarkdownDescription: "Compression Type. Compression Type",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"compression_default": schema.SingleNestedBlock{
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -2052,23 +2020,22 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 					},
 					"splunk_hec_token": schema.SingleNestedBlock{
 						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"blindfold_secret_info": schema.SingleNestedBlock{
 								MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 								Attributes: map[string]schema.Attribute{
 									"decryption_provider": schema.StringAttribute{
 										MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-										Optional: true,
+										Optional:            true,
 									},
 									"location": schema.StringAttribute{
 										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-										Optional: true,
+										Optional:            true,
 									},
 									"store_provider": schema.StringAttribute{
 										MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -2077,11 +2044,11 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 								Attributes: map[string]schema.Attribute{
 									"provider_ref": schema.StringAttribute{
 										MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-										Optional: true,
+										Optional:            true,
 									},
 									"url": schema.StringAttribute{
 										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -2092,7 +2059,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						Attributes: map[string]schema.Attribute{
 							"trusted_ca_url": schema.StringAttribute{
 								MarkdownDescription: "Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers.",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -2116,29 +2083,28 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 								Attributes: map[string]schema.Attribute{
 									"certificate": schema.StringAttribute{
 										MarkdownDescription: "Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain.",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 								Blocks: map[string]schema.Block{
 									"key_url": schema.SingleNestedBlock{
 										MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-										Attributes: map[string]schema.Attribute{
-										},
+										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"blindfold_secret_info": schema.SingleNestedBlock{
 												MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 												Attributes: map[string]schema.Attribute{
 													"decryption_provider": schema.StringAttribute{
 														MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-														Optional: true,
+														Optional:            true,
 													},
 													"location": schema.StringAttribute{
 														MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-														Optional: true,
+														Optional:            true,
 													},
 													"store_provider": schema.StringAttribute{
 														MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 											},
@@ -2147,11 +2113,11 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 												Attributes: map[string]schema.Attribute{
 													"provider_ref": schema.StringAttribute{
 														MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-														Optional: true,
+														Optional:            true,
 													},
 													"url": schema.StringAttribute{
 														MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 											},
@@ -2165,32 +2131,29 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						},
 					},
 				},
-
 			},
 			"sumo_logic_receiver": schema.SingleNestedBlock{
 				MarkdownDescription: "SumoLogic Configuration. Configuration for SumoLogic endpoint",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"url": schema.SingleNestedBlock{
 						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"blindfold_secret_info": schema.SingleNestedBlock{
 								MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 								Attributes: map[string]schema.Attribute{
 									"decryption_provider": schema.StringAttribute{
 										MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-										Optional: true,
+										Optional:            true,
 									},
 									"location": schema.StringAttribute{
 										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-										Optional: true,
+										Optional:            true,
 									},
 									"store_provider": schema.StringAttribute{
 										MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -2199,18 +2162,17 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 								Attributes: map[string]schema.Attribute{
 									"provider_ref": schema.StringAttribute{
 										MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-										Optional: true,
+										Optional:            true,
 									},
 									"url": schema.StringAttribute{
 										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
 						},
 					},
 				},
-
 			},
 		},
 	}
@@ -2803,7 +2765,6 @@ func (r *GlobalLogReceiverResource) Create(ctx context.Context, req resource.Cre
 		createReq.Spec["sumo_logic_receiver"] = sumo_logic_receiverMap
 	}
 
-
 	apiResource, err := r.client.CreateGlobalLogReceiver(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create GlobalLogReceiver: %s", err))
@@ -2815,7 +2776,7 @@ func (r *GlobalLogReceiverResource) Create(ctx context.Context, req resource.Cre
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if _, ok := apiResource.Spec["audit_logs"].(map[string]interface{}); ok && isImport && data.AuditLogs == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.AuditLogs = &GlobalLogReceiverEmptyModel{}
@@ -2896,8 +2857,7 @@ func (r *GlobalLogReceiverResource) Create(ctx context.Context, req resource.Cre
 				}
 				// Import case: read from API
 				if _, ok := blockData["compression"].(map[string]interface{}); ok {
-					return &GlobalLogReceiverAWSCloudWatchReceiverCompressionModel{
-					}
+					return &GlobalLogReceiverAWSCloudWatchReceiverCompressionModel{}
 				}
 				return nil
 			}(),
@@ -2924,8 +2884,7 @@ func (r *GlobalLogReceiverResource) Create(ctx context.Context, req resource.Cre
 				}
 				// Import case: read from API
 				if _, ok := blockData["connection_string"].(map[string]interface{}); ok {
-					return &GlobalLogReceiverAzureEventHubsReceiverConnectionStringModel{
-					}
+					return &GlobalLogReceiverAzureEventHubsReceiverConnectionStringModel{}
 				}
 				return nil
 			}(),
@@ -2982,8 +2941,7 @@ func (r *GlobalLogReceiverResource) Create(ctx context.Context, req resource.Cre
 				}
 				// Import case: read from API
 				if _, ok := blockData["compression"].(map[string]interface{}); ok {
-					return &GlobalLogReceiverAzureReceiverCompressionModel{
-					}
+					return &GlobalLogReceiverAzureReceiverCompressionModel{}
 				}
 				return nil
 			}(),
@@ -2994,8 +2952,7 @@ func (r *GlobalLogReceiverResource) Create(ctx context.Context, req resource.Cre
 				}
 				// Import case: read from API
 				if _, ok := blockData["connection_string"].(map[string]interface{}); ok {
-					return &GlobalLogReceiverAzureReceiverConnectionStringModel{
-					}
+					return &GlobalLogReceiverAzureReceiverConnectionStringModel{}
 				}
 				return nil
 			}(),
@@ -3064,8 +3021,7 @@ func (r *GlobalLogReceiverResource) Create(ctx context.Context, req resource.Cre
 				}
 				// Import case: read from API
 				if _, ok := blockData["compression"].(map[string]interface{}); ok {
-					return &GlobalLogReceiverDatadogReceiverCompressionModel{
-					}
+					return &GlobalLogReceiverDatadogReceiverCompressionModel{}
 				}
 				return nil
 			}(),
@@ -3076,8 +3032,7 @@ func (r *GlobalLogReceiverResource) Create(ctx context.Context, req resource.Cre
 				}
 				// Import case: read from API
 				if _, ok := blockData["datadog_api_key"].(map[string]interface{}); ok {
-					return &GlobalLogReceiverDatadogReceiverDatadogAPIKeyModel{
-					}
+					return &GlobalLogReceiverDatadogReceiverDatadogAPIKeyModel{}
 				}
 				return nil
 			}(),
@@ -3175,8 +3130,7 @@ func (r *GlobalLogReceiverResource) Create(ctx context.Context, req resource.Cre
 				}
 				// Import case: read from API
 				if _, ok := blockData["compression"].(map[string]interface{}); ok {
-					return &GlobalLogReceiverGCPBucketReceiverCompressionModel{
-					}
+					return &GlobalLogReceiverGCPBucketReceiverCompressionModel{}
 				}
 				return nil
 			}(),
@@ -3269,8 +3223,7 @@ func (r *GlobalLogReceiverResource) Create(ctx context.Context, req resource.Cre
 				}
 				// Import case: read from API
 				if _, ok := blockData["auth_token"].(map[string]interface{}); ok {
-					return &GlobalLogReceiverHTTPReceiverAuthTokenModel{
-					}
+					return &GlobalLogReceiverHTTPReceiverAuthTokenModel{}
 				}
 				return nil
 			}(),
@@ -3311,8 +3264,7 @@ func (r *GlobalLogReceiverResource) Create(ctx context.Context, req resource.Cre
 				}
 				// Import case: read from API
 				if _, ok := blockData["compression"].(map[string]interface{}); ok {
-					return &GlobalLogReceiverHTTPReceiverCompressionModel{
-					}
+					return &GlobalLogReceiverHTTPReceiverCompressionModel{}
 				}
 				return nil
 			}(),
@@ -3406,8 +3358,7 @@ func (r *GlobalLogReceiverResource) Create(ctx context.Context, req resource.Cre
 				}
 				// Import case: read from API
 				if _, ok := blockData["compression"].(map[string]interface{}); ok {
-					return &GlobalLogReceiverKafkaReceiverCompressionModel{
-					}
+					return &GlobalLogReceiverKafkaReceiverCompressionModel{}
 				}
 				return nil
 			}(),
@@ -3520,8 +3471,7 @@ func (r *GlobalLogReceiverResource) Create(ctx context.Context, req resource.Cre
 				}
 				// Import case: read from API
 				if _, ok := blockData["compression"].(map[string]interface{}); ok {
-					return &GlobalLogReceiverQradarReceiverCompressionModel{
-					}
+					return &GlobalLogReceiverQradarReceiverCompressionModel{}
 				}
 				return nil
 			}(),
@@ -3649,8 +3599,7 @@ func (r *GlobalLogReceiverResource) Create(ctx context.Context, req resource.Cre
 				}
 				// Import case: read from API
 				if _, ok := blockData["compression"].(map[string]interface{}); ok {
-					return &GlobalLogReceiverS3ReceiverCompressionModel{
-					}
+					return &GlobalLogReceiverS3ReceiverCompressionModel{}
 				}
 				return nil
 			}(),
@@ -3718,8 +3667,7 @@ func (r *GlobalLogReceiverResource) Create(ctx context.Context, req resource.Cre
 				}
 				// Import case: read from API
 				if _, ok := blockData["compression"].(map[string]interface{}); ok {
-					return &GlobalLogReceiverSplunkReceiverCompressionModel{
-					}
+					return &GlobalLogReceiverSplunkReceiverCompressionModel{}
 				}
 				return nil
 			}(),
@@ -3748,8 +3696,7 @@ func (r *GlobalLogReceiverResource) Create(ctx context.Context, req resource.Cre
 				}
 				// Import case: read from API
 				if _, ok := blockData["splunk_hec_token"].(map[string]interface{}); ok {
-					return &GlobalLogReceiverSplunkReceiverSplunkHecTokenModel{
-					}
+					return &GlobalLogReceiverSplunkReceiverSplunkHecTokenModel{}
 				}
 				return nil
 			}(),
@@ -3778,7 +3725,6 @@ func (r *GlobalLogReceiverResource) Create(ctx context.Context, req resource.Cre
 		data.SumoLogicReceiver = &GlobalLogReceiverSumoLogicReceiverModel{}
 	}
 	// Normal Read: preserve existing state value
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -3868,9 +3814,9 @@ func (r *GlobalLogReceiverResource) Read(ctx context.Context, req resource.ReadR
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if _, ok := apiResource.Spec["audit_logs"].(map[string]interface{}); ok && isImport && data.AuditLogs == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -3952,8 +3898,7 @@ func (r *GlobalLogReceiverResource) Read(ctx context.Context, req resource.ReadR
 				}
 				// Import case: read from API
 				if _, ok := blockData["compression"].(map[string]interface{}); ok {
-					return &GlobalLogReceiverAWSCloudWatchReceiverCompressionModel{
-					}
+					return &GlobalLogReceiverAWSCloudWatchReceiverCompressionModel{}
 				}
 				return nil
 			}(),
@@ -3980,8 +3925,7 @@ func (r *GlobalLogReceiverResource) Read(ctx context.Context, req resource.ReadR
 				}
 				// Import case: read from API
 				if _, ok := blockData["connection_string"].(map[string]interface{}); ok {
-					return &GlobalLogReceiverAzureEventHubsReceiverConnectionStringModel{
-					}
+					return &GlobalLogReceiverAzureEventHubsReceiverConnectionStringModel{}
 				}
 				return nil
 			}(),
@@ -4038,8 +3982,7 @@ func (r *GlobalLogReceiverResource) Read(ctx context.Context, req resource.ReadR
 				}
 				// Import case: read from API
 				if _, ok := blockData["compression"].(map[string]interface{}); ok {
-					return &GlobalLogReceiverAzureReceiverCompressionModel{
-					}
+					return &GlobalLogReceiverAzureReceiverCompressionModel{}
 				}
 				return nil
 			}(),
@@ -4050,8 +3993,7 @@ func (r *GlobalLogReceiverResource) Read(ctx context.Context, req resource.ReadR
 				}
 				// Import case: read from API
 				if _, ok := blockData["connection_string"].(map[string]interface{}); ok {
-					return &GlobalLogReceiverAzureReceiverConnectionStringModel{
-					}
+					return &GlobalLogReceiverAzureReceiverConnectionStringModel{}
 				}
 				return nil
 			}(),
@@ -4120,8 +4062,7 @@ func (r *GlobalLogReceiverResource) Read(ctx context.Context, req resource.ReadR
 				}
 				// Import case: read from API
 				if _, ok := blockData["compression"].(map[string]interface{}); ok {
-					return &GlobalLogReceiverDatadogReceiverCompressionModel{
-					}
+					return &GlobalLogReceiverDatadogReceiverCompressionModel{}
 				}
 				return nil
 			}(),
@@ -4132,8 +4073,7 @@ func (r *GlobalLogReceiverResource) Read(ctx context.Context, req resource.ReadR
 				}
 				// Import case: read from API
 				if _, ok := blockData["datadog_api_key"].(map[string]interface{}); ok {
-					return &GlobalLogReceiverDatadogReceiverDatadogAPIKeyModel{
-					}
+					return &GlobalLogReceiverDatadogReceiverDatadogAPIKeyModel{}
 				}
 				return nil
 			}(),
@@ -4231,8 +4171,7 @@ func (r *GlobalLogReceiverResource) Read(ctx context.Context, req resource.ReadR
 				}
 				// Import case: read from API
 				if _, ok := blockData["compression"].(map[string]interface{}); ok {
-					return &GlobalLogReceiverGCPBucketReceiverCompressionModel{
-					}
+					return &GlobalLogReceiverGCPBucketReceiverCompressionModel{}
 				}
 				return nil
 			}(),
@@ -4325,8 +4264,7 @@ func (r *GlobalLogReceiverResource) Read(ctx context.Context, req resource.ReadR
 				}
 				// Import case: read from API
 				if _, ok := blockData["auth_token"].(map[string]interface{}); ok {
-					return &GlobalLogReceiverHTTPReceiverAuthTokenModel{
-					}
+					return &GlobalLogReceiverHTTPReceiverAuthTokenModel{}
 				}
 				return nil
 			}(),
@@ -4367,8 +4305,7 @@ func (r *GlobalLogReceiverResource) Read(ctx context.Context, req resource.ReadR
 				}
 				// Import case: read from API
 				if _, ok := blockData["compression"].(map[string]interface{}); ok {
-					return &GlobalLogReceiverHTTPReceiverCompressionModel{
-					}
+					return &GlobalLogReceiverHTTPReceiverCompressionModel{}
 				}
 				return nil
 			}(),
@@ -4462,8 +4399,7 @@ func (r *GlobalLogReceiverResource) Read(ctx context.Context, req resource.ReadR
 				}
 				// Import case: read from API
 				if _, ok := blockData["compression"].(map[string]interface{}); ok {
-					return &GlobalLogReceiverKafkaReceiverCompressionModel{
-					}
+					return &GlobalLogReceiverKafkaReceiverCompressionModel{}
 				}
 				return nil
 			}(),
@@ -4576,8 +4512,7 @@ func (r *GlobalLogReceiverResource) Read(ctx context.Context, req resource.ReadR
 				}
 				// Import case: read from API
 				if _, ok := blockData["compression"].(map[string]interface{}); ok {
-					return &GlobalLogReceiverQradarReceiverCompressionModel{
-					}
+					return &GlobalLogReceiverQradarReceiverCompressionModel{}
 				}
 				return nil
 			}(),
@@ -4705,8 +4640,7 @@ func (r *GlobalLogReceiverResource) Read(ctx context.Context, req resource.ReadR
 				}
 				// Import case: read from API
 				if _, ok := blockData["compression"].(map[string]interface{}); ok {
-					return &GlobalLogReceiverS3ReceiverCompressionModel{
-					}
+					return &GlobalLogReceiverS3ReceiverCompressionModel{}
 				}
 				return nil
 			}(),
@@ -4774,8 +4708,7 @@ func (r *GlobalLogReceiverResource) Read(ctx context.Context, req resource.ReadR
 				}
 				// Import case: read from API
 				if _, ok := blockData["compression"].(map[string]interface{}); ok {
-					return &GlobalLogReceiverSplunkReceiverCompressionModel{
-					}
+					return &GlobalLogReceiverSplunkReceiverCompressionModel{}
 				}
 				return nil
 			}(),
@@ -4804,8 +4737,7 @@ func (r *GlobalLogReceiverResource) Read(ctx context.Context, req resource.ReadR
 				}
 				// Import case: read from API
 				if _, ok := blockData["splunk_hec_token"].(map[string]interface{}); ok {
-					return &GlobalLogReceiverSplunkReceiverSplunkHecTokenModel{
-					}
+					return &GlobalLogReceiverSplunkReceiverSplunkHecTokenModel{}
 				}
 				return nil
 			}(),
@@ -4834,7 +4766,6 @@ func (r *GlobalLogReceiverResource) Read(ctx context.Context, req resource.ReadR
 		data.SumoLogicReceiver = &GlobalLogReceiverSumoLogicReceiverModel{}
 	}
 	// Normal Read: preserve existing state value
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -5337,7 +5268,6 @@ func (r *GlobalLogReceiverResource) Update(ctx context.Context, req resource.Upd
 		}
 		apiResource.Spec["sumo_logic_receiver"] = sumo_logic_receiverMap
 	}
-
 
 	updated, err := r.client.UpdateGlobalLogReceiver(ctx, apiResource)
 	if err != nil {

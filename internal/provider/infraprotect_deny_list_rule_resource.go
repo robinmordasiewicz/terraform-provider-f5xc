@@ -50,21 +50,21 @@ type InfraprotectDenyListRuleEmptyModel struct {
 }
 
 type InfraprotectDenyListRuleResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	ExpirationTimestamp types.String `tfsdk:"expiration_timestamp"`
-	Prefix types.String `tfsdk:"prefix"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	ExpirationNever *InfraprotectDenyListRuleEmptyModel `tfsdk:"expiration_never"`
-	OneDay *InfraprotectDenyListRuleEmptyModel `tfsdk:"one_day"`
-	OneHour *InfraprotectDenyListRuleEmptyModel `tfsdk:"one_hour"`
-	OneMonth *InfraprotectDenyListRuleEmptyModel `tfsdk:"one_month"`
-	OneYear *InfraprotectDenyListRuleEmptyModel `tfsdk:"one_year"`
+	Name                types.String                        `tfsdk:"name"`
+	Namespace           types.String                        `tfsdk:"namespace"`
+	Annotations         types.Map                           `tfsdk:"annotations"`
+	Description         types.String                        `tfsdk:"description"`
+	Disable             types.Bool                          `tfsdk:"disable"`
+	Labels              types.Map                           `tfsdk:"labels"`
+	ID                  types.String                        `tfsdk:"id"`
+	ExpirationTimestamp types.String                        `tfsdk:"expiration_timestamp"`
+	Prefix              types.String                        `tfsdk:"prefix"`
+	Timeouts            timeouts.Value                      `tfsdk:"timeouts"`
+	ExpirationNever     *InfraprotectDenyListRuleEmptyModel `tfsdk:"expiration_never"`
+	OneDay              *InfraprotectDenyListRuleEmptyModel `tfsdk:"one_day"`
+	OneHour             *InfraprotectDenyListRuleEmptyModel `tfsdk:"one_hour"`
+	OneMonth            *InfraprotectDenyListRuleEmptyModel `tfsdk:"one_month"`
+	OneYear             *InfraprotectDenyListRuleEmptyModel `tfsdk:"one_year"`
 }
 
 func (r *InfraprotectDenyListRuleResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -78,7 +78,7 @@ func (r *InfraprotectDenyListRuleResource) Schema(ctx context.Context, req resou
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the InfraprotectDenyListRule. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -88,7 +88,7 @@ func (r *InfraprotectDenyListRuleResource) Schema(ctx context.Context, req resou
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the InfraprotectDenyListRule will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -98,41 +98,41 @@ func (r *InfraprotectDenyListRuleResource) Schema(ctx context.Context, req resou
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"expiration_timestamp": schema.StringAttribute{
 				MarkdownDescription: "Expiration Time (UTC). This deny list rule will expire at the given timestamp and will be removed from the system afterwards",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"prefix": schema.StringAttribute{
 				MarkdownDescription: "Prefix. Prefix",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -335,7 +335,6 @@ func (r *InfraprotectDenyListRuleResource) Create(ctx context.Context, req resou
 		createReq.Spec["prefix"] = data.Prefix.ValueString()
 	}
 
-
 	apiResource, err := r.client.CreateInfraprotectDenyListRule(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create InfraprotectDenyListRule: %s", err))
@@ -347,7 +346,7 @@ func (r *InfraprotectDenyListRuleResource) Create(ctx context.Context, req resou
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if _, ok := apiResource.Spec["expiration_never"].(map[string]interface{}); ok && isImport && data.ExpirationNever == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.ExpirationNever = &InfraprotectDenyListRuleEmptyModel{}
@@ -383,7 +382,6 @@ func (r *InfraprotectDenyListRuleResource) Create(ctx context.Context, req resou
 	} else {
 		data.Prefix = types.StringNull()
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -473,9 +471,9 @@ func (r *InfraprotectDenyListRuleResource) Read(ctx context.Context, req resourc
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if _, ok := apiResource.Spec["expiration_never"].(map[string]interface{}); ok && isImport && data.ExpirationNever == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -512,7 +510,6 @@ func (r *InfraprotectDenyListRuleResource) Read(ctx context.Context, req resourc
 	} else {
 		data.Prefix = types.StringNull()
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -599,7 +596,6 @@ func (r *InfraprotectDenyListRuleResource) Update(ctx context.Context, req resou
 	if !data.Prefix.IsNull() && !data.Prefix.IsUnknown() {
 		apiResource.Spec["prefix"] = data.Prefix.ValueString()
 	}
-
 
 	updated, err := r.client.UpdateInfraprotectDenyListRule(ctx, apiResource)
 	if err != nil {

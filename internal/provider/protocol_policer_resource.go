@@ -51,25 +51,25 @@ type ProtocolPolicerEmptyModel struct {
 
 // ProtocolPolicerProtocolPolicerModel represents protocol_policer block
 type ProtocolPolicerProtocolPolicerModel struct {
-	Policer []ProtocolPolicerProtocolPolicerPolicerModel `tfsdk:"policer"`
+	Policer  []ProtocolPolicerProtocolPolicerPolicerModel `tfsdk:"policer"`
 	Protocol *ProtocolPolicerProtocolPolicerProtocolModel `tfsdk:"protocol"`
 }
 
 // ProtocolPolicerProtocolPolicerPolicerModel represents policer block
 type ProtocolPolicerProtocolPolicerPolicerModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // ProtocolPolicerProtocolPolicerProtocolModel represents protocol block
 type ProtocolPolicerProtocolPolicerProtocolModel struct {
-	DNS *ProtocolPolicerEmptyModel `tfsdk:"dns"`
+	DNS  *ProtocolPolicerEmptyModel                       `tfsdk:"dns"`
 	Icmp *ProtocolPolicerProtocolPolicerProtocolIcmpModel `tfsdk:"icmp"`
-	TCP *ProtocolPolicerProtocolPolicerProtocolTCPModel `tfsdk:"tcp"`
-	UDP *ProtocolPolicerEmptyModel `tfsdk:"udp"`
+	TCP  *ProtocolPolicerProtocolPolicerProtocolTCPModel  `tfsdk:"tcp"`
+	UDP  *ProtocolPolicerEmptyModel                       `tfsdk:"udp"`
 }
 
 // ProtocolPolicerProtocolPolicerProtocolIcmpModel represents icmp block
@@ -83,14 +83,14 @@ type ProtocolPolicerProtocolPolicerProtocolTCPModel struct {
 }
 
 type ProtocolPolicerResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Name            types.String                          `tfsdk:"name"`
+	Namespace       types.String                          `tfsdk:"namespace"`
+	Annotations     types.Map                             `tfsdk:"annotations"`
+	Description     types.String                          `tfsdk:"description"`
+	Disable         types.Bool                            `tfsdk:"disable"`
+	Labels          types.Map                             `tfsdk:"labels"`
+	ID              types.String                          `tfsdk:"id"`
+	Timeouts        timeouts.Value                        `tfsdk:"timeouts"`
 	ProtocolPolicer []ProtocolPolicerProtocolPolicerModel `tfsdk:"protocol_policer"`
 }
 
@@ -105,7 +105,7 @@ func (r *ProtocolPolicerResource) Schema(ctx context.Context, req resource.Schem
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the ProtocolPolicer. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -115,7 +115,7 @@ func (r *ProtocolPolicerResource) Schema(ctx context.Context, req resource.Schem
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the ProtocolPolicer will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -125,25 +125,25 @@ func (r *ProtocolPolicerResource) Schema(ctx context.Context, req resource.Schem
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -159,8 +159,7 @@ func (r *ProtocolPolicerResource) Schema(ctx context.Context, req resource.Schem
 			"protocol_policer": schema.ListNestedBlock{
 				MarkdownDescription: "Protocol Policer. List of L4 protocol match condition and associated traffic rate limits",
 				NestedObject: schema.NestedBlockObject{
-					Attributes: map[string]schema.Attribute{
-					},
+					Attributes: map[string]schema.Attribute{},
 					Blocks: map[string]schema.Block{
 						"policer": schema.ListNestedBlock{
 							MarkdownDescription: "Policer. Reference to policer object to apply traffic rate limits",
@@ -168,34 +167,33 @@ func (r *ProtocolPolicerResource) Schema(ctx context.Context, req resource.Schem
 								Attributes: map[string]schema.Attribute{
 									"kind": schema.StringAttribute{
 										MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-										Optional: true,
-										Computed: true,
+										Optional:            true,
+										Computed:            true,
 									},
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-										Optional: true,
+										Optional:            true,
 									},
 									"namespace": schema.StringAttribute{
 										MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-										Optional: true,
+										Optional:            true,
 									},
 									"tenant": schema.StringAttribute{
 										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-										Optional: true,
-										Computed: true,
+										Optional:            true,
+										Computed:            true,
 									},
 									"uid": schema.StringAttribute{
 										MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-										Optional: true,
-										Computed: true,
+										Optional:            true,
+										Computed:            true,
 									},
 								},
 							},
 						},
 						"protocol": schema.SingleNestedBlock{
 							MarkdownDescription: "Protocol Type. Protocol and protocol specific flags to be matched in packet",
-							Attributes: map[string]schema.Attribute{
-							},
+							Attributes:          map[string]schema.Attribute{},
 							Blocks: map[string]schema.Block{
 								"dns": schema.SingleNestedBlock{
 									MarkdownDescription: "DNS Packets. Match all DNS packets inclusing UDP and TCP",
@@ -205,8 +203,8 @@ func (r *ProtocolPolicerResource) Schema(ctx context.Context, req resource.Schem
 									Attributes: map[string]schema.Attribute{
 										"type": schema.ListAttribute{
 											MarkdownDescription: "ICMP type. ICMP message type to be matched in packet. Possible values are `ECHO_REPLY`, `ECHO_REQUEST`, `ALL_ICMP_MSG`. Defaults to `ECHO_REPLY`.",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 									},
 								},
@@ -215,8 +213,8 @@ func (r *ProtocolPolicerResource) Schema(ctx context.Context, req resource.Schem
 									Attributes: map[string]schema.Attribute{
 										"flags": schema.ListAttribute{
 											MarkdownDescription: "TCP flags. TCP flag to be matched in a TCP packet. Possible values are `FIN`, `SYN`, `RST`, `PSH`, `ACK`, `URG`, `ALL_TCP_FLAGS`, `KEEPALIVE`. Defaults to `FIN`.",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 									},
 								},
@@ -226,7 +224,6 @@ func (r *ProtocolPolicerResource) Schema(ctx context.Context, req resource.Schem
 							},
 						},
 					},
-
 				},
 			},
 		},
@@ -441,7 +438,6 @@ func (r *ProtocolPolicerResource) Create(ctx context.Context, req resource.Creat
 		createReq.Spec["protocol_policer"] = protocol_policerList
 	}
 
-
 	apiResource, err := r.client.CreateProtocolPolicer(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create ProtocolPolicer: %s", err))
@@ -453,7 +449,7 @@ func (r *ProtocolPolicerResource) Create(ctx context.Context, req resource.Creat
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["protocol_policer"].([]interface{}); ok && len(listData) > 0 {
 		var protocol_policerList []ProtocolPolicerProtocolPolicerModel
 		for listIdx, item := range listData {
@@ -527,7 +523,6 @@ func (r *ProtocolPolicerResource) Create(ctx context.Context, req resource.Creat
 		}
 		data.ProtocolPolicer = protocol_policerList
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -617,9 +612,9 @@ func (r *ProtocolPolicerResource) Read(ctx context.Context, req resource.ReadReq
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if listData, ok := apiResource.Spec["protocol_policer"].([]interface{}); ok && len(listData) > 0 {
 		var protocol_policerList []ProtocolPolicerProtocolPolicerModel
@@ -694,7 +689,6 @@ func (r *ProtocolPolicerResource) Read(ctx context.Context, req resource.ReadReq
 		}
 		data.ProtocolPolicer = protocol_policerList
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -818,7 +812,6 @@ func (r *ProtocolPolicerResource) Update(ctx context.Context, req resource.Updat
 		}
 		apiResource.Spec["protocol_policer"] = protocol_policerList
 	}
-
 
 	updated, err := r.client.UpdateProtocolPolicer(ctx, apiResource)
 	if err != nil {

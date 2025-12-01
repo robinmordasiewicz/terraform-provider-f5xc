@@ -52,18 +52,18 @@ type BGPRoutingPolicyEmptyModel struct {
 // BGPRoutingPolicyRulesModel represents rules block
 type BGPRoutingPolicyRulesModel struct {
 	Action *BGPRoutingPolicyRulesActionModel `tfsdk:"action"`
-	Match *BGPRoutingPolicyRulesMatchModel `tfsdk:"match"`
+	Match  *BGPRoutingPolicyRulesMatchModel  `tfsdk:"match"`
 }
 
 // BGPRoutingPolicyRulesActionModel represents action block
 type BGPRoutingPolicyRulesActionModel struct {
-	AsPath types.String `tfsdk:"as_path"`
-	LocalPreference types.Int64 `tfsdk:"local_preference"`
-	Metric types.Int64 `tfsdk:"metric"`
-	Aggregate *BGPRoutingPolicyEmptyModel `tfsdk:"aggregate"`
-	Allow *BGPRoutingPolicyEmptyModel `tfsdk:"allow"`
-	Community *BGPRoutingPolicyRulesActionCommunityModel `tfsdk:"community"`
-	Deny *BGPRoutingPolicyEmptyModel `tfsdk:"deny"`
+	AsPath          types.String                               `tfsdk:"as_path"`
+	LocalPreference types.Int64                                `tfsdk:"local_preference"`
+	Metric          types.Int64                                `tfsdk:"metric"`
+	Aggregate       *BGPRoutingPolicyEmptyModel                `tfsdk:"aggregate"`
+	Allow           *BGPRoutingPolicyEmptyModel                `tfsdk:"allow"`
+	Community       *BGPRoutingPolicyRulesActionCommunityModel `tfsdk:"community"`
+	Deny            *BGPRoutingPolicyEmptyModel                `tfsdk:"deny"`
 }
 
 // BGPRoutingPolicyRulesActionCommunityModel represents community block
@@ -73,8 +73,8 @@ type BGPRoutingPolicyRulesActionCommunityModel struct {
 
 // BGPRoutingPolicyRulesMatchModel represents match block
 type BGPRoutingPolicyRulesMatchModel struct {
-	AsPath types.String `tfsdk:"as_path"`
-	Community *BGPRoutingPolicyRulesMatchCommunityModel `tfsdk:"community"`
+	AsPath     types.String                               `tfsdk:"as_path"`
+	Community  *BGPRoutingPolicyRulesMatchCommunityModel  `tfsdk:"community"`
 	IPPrefixes *BGPRoutingPolicyRulesMatchIPPrefixesModel `tfsdk:"ip_prefixes"`
 }
 
@@ -90,22 +90,22 @@ type BGPRoutingPolicyRulesMatchIPPrefixesModel struct {
 
 // BGPRoutingPolicyRulesMatchIPPrefixesPrefixesModel represents prefixes block
 type BGPRoutingPolicyRulesMatchIPPrefixesPrefixesModel struct {
-	IPPrefixes types.String `tfsdk:"ip_prefixes"`
+	IPPrefixes        types.String                `tfsdk:"ip_prefixes"`
 	EqualOrLongerThan *BGPRoutingPolicyEmptyModel `tfsdk:"equal_or_longer_than"`
-	ExactMatch *BGPRoutingPolicyEmptyModel `tfsdk:"exact_match"`
-	LongerThan *BGPRoutingPolicyEmptyModel `tfsdk:"longer_than"`
+	ExactMatch        *BGPRoutingPolicyEmptyModel `tfsdk:"exact_match"`
+	LongerThan        *BGPRoutingPolicyEmptyModel `tfsdk:"longer_than"`
 }
 
 type BGPRoutingPolicyResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	Rules []BGPRoutingPolicyRulesModel `tfsdk:"rules"`
+	Name        types.String                 `tfsdk:"name"`
+	Namespace   types.String                 `tfsdk:"namespace"`
+	Annotations types.Map                    `tfsdk:"annotations"`
+	Description types.String                 `tfsdk:"description"`
+	Disable     types.Bool                   `tfsdk:"disable"`
+	Labels      types.Map                    `tfsdk:"labels"`
+	ID          types.String                 `tfsdk:"id"`
+	Timeouts    timeouts.Value               `tfsdk:"timeouts"`
+	Rules       []BGPRoutingPolicyRulesModel `tfsdk:"rules"`
 }
 
 func (r *BGPRoutingPolicyResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -119,7 +119,7 @@ func (r *BGPRoutingPolicyResource) Schema(ctx context.Context, req resource.Sche
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the BGPRoutingPolicy. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -129,7 +129,7 @@ func (r *BGPRoutingPolicyResource) Schema(ctx context.Context, req resource.Sche
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the BGPRoutingPolicy will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -139,25 +139,25 @@ func (r *BGPRoutingPolicyResource) Schema(ctx context.Context, req resource.Sche
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -173,23 +173,22 @@ func (r *BGPRoutingPolicyResource) Schema(ctx context.Context, req resource.Sche
 			"rules": schema.ListNestedBlock{
 				MarkdownDescription: "Rules. A BGP Routing policy is composed of one or more rules. Note that the order of rules is critical as rules are applied top to bottom.",
 				NestedObject: schema.NestedBlockObject{
-					Attributes: map[string]schema.Attribute{
-					},
+					Attributes: map[string]schema.Attribute{},
 					Blocks: map[string]schema.Block{
 						"action": schema.SingleNestedBlock{
 							MarkdownDescription: "BGP Route Action. Action to be enforced if the BGP route matches the rule.",
 							Attributes: map[string]schema.Attribute{
 								"as_path": schema.StringAttribute{
 									MarkdownDescription: "AS-path to prepend. AS-Path Prepending is generally used to influence incoming traffic",
-									Optional: true,
+									Optional:            true,
 								},
 								"local_preference": schema.Int64Attribute{
 									MarkdownDescription: "Local preference. BGP Local Preference is generally used to influence outgoing traffic",
-									Optional: true,
+									Optional:            true,
 								},
 								"metric": schema.Int64Attribute{
 									MarkdownDescription: "MED/Metric. The Multi-Exit Discriminator metric to indicate the preferred path to AS",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
@@ -204,8 +203,8 @@ func (r *BGPRoutingPolicyResource) Schema(ctx context.Context, req resource.Sche
 									Attributes: map[string]schema.Attribute{
 										"community": schema.ListAttribute{
 											MarkdownDescription: "BGP community. An unordered set of RFC 1997 defined 4-byte community, first 16 bits being ASN and lower 16 bits being value",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 									},
 								},
@@ -219,7 +218,7 @@ func (r *BGPRoutingPolicyResource) Schema(ctx context.Context, req resource.Sche
 							Attributes: map[string]schema.Attribute{
 								"as_path": schema.StringAttribute{
 									MarkdownDescription: "AS path to match. AS path can also be a regex, which will be matched against route information",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
@@ -228,15 +227,14 @@ func (r *BGPRoutingPolicyResource) Schema(ctx context.Context, req resource.Sche
 									Attributes: map[string]schema.Attribute{
 										"community": schema.ListAttribute{
 											MarkdownDescription: "BGP community. An unordered set of RFC 1997 defined 4-byte community, first 16 bits being ASN and lower 16 bits being value",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 									},
 								},
 								"ip_prefixes": schema.SingleNestedBlock{
 									MarkdownDescription: "BGP Prefix List. List of IP prefix and prefix length range match condition",
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"prefixes": schema.ListNestedBlock{
 											MarkdownDescription: "Prefix list. List of IP prefix",
@@ -244,7 +242,7 @@ func (r *BGPRoutingPolicyResource) Schema(ctx context.Context, req resource.Sche
 												Attributes: map[string]schema.Attribute{
 													"ip_prefixes": schema.StringAttribute{
 														MarkdownDescription: "IP Prefix. IP prefix to match on BGP route",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 												Blocks: map[string]schema.Block{
@@ -265,7 +263,6 @@ func (r *BGPRoutingPolicyResource) Schema(ctx context.Context, req resource.Sche
 							},
 						},
 					},
-
 				},
 			},
 		},
@@ -480,7 +477,6 @@ func (r *BGPRoutingPolicyResource) Create(ctx context.Context, req resource.Crea
 		createReq.Spec["rules"] = rulesList
 	}
 
-
 	apiResource, err := r.client.CreateBGPRoutingPolicy(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create BGPRoutingPolicy: %s", err))
@@ -492,7 +488,7 @@ func (r *BGPRoutingPolicyResource) Create(ctx context.Context, req resource.Crea
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["rules"].([]interface{}); ok && len(listData) > 0 {
 		var rulesList []BGPRoutingPolicyRulesModel
 		for listIdx, item := range listData {
@@ -560,7 +556,6 @@ func (r *BGPRoutingPolicyResource) Create(ctx context.Context, req resource.Crea
 		}
 		data.Rules = rulesList
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -650,9 +645,9 @@ func (r *BGPRoutingPolicyResource) Read(ctx context.Context, req resource.ReadRe
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if listData, ok := apiResource.Spec["rules"].([]interface{}); ok && len(listData) > 0 {
 		var rulesList []BGPRoutingPolicyRulesModel
@@ -721,7 +716,6 @@ func (r *BGPRoutingPolicyResource) Read(ctx context.Context, req resource.ReadRe
 		}
 		data.Rules = rulesList
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -845,7 +839,6 @@ func (r *BGPRoutingPolicyResource) Update(ctx context.Context, req resource.Upda
 		}
 		apiResource.Spec["rules"] = rulesList
 	}
-
 
 	updated, err := r.client.UpdateBGPRoutingPolicy(ctx, apiResource)
 	if err != nil {

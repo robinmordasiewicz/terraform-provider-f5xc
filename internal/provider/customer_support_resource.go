@@ -52,55 +52,55 @@ type CustomerSupportEmptyModel struct {
 
 // CustomerSupportCommentsModel represents comments block
 type CustomerSupportCommentsModel struct {
-	AttachmentIds types.List `tfsdk:"attachment_ids"`
-	AuthorEmail types.String `tfsdk:"author_email"`
-	AuthorName types.String `tfsdk:"author_name"`
-	CreatedAt types.String `tfsdk:"created_at"`
-	Html types.String `tfsdk:"html"`
-	PlainText types.String `tfsdk:"plain_text"`
+	AttachmentIds   types.List                                    `tfsdk:"attachment_ids"`
+	AuthorEmail     types.String                                  `tfsdk:"author_email"`
+	AuthorName      types.String                                  `tfsdk:"author_name"`
+	CreatedAt       types.String                                  `tfsdk:"created_at"`
+	Html            types.String                                  `tfsdk:"html"`
+	PlainText       types.String                                  `tfsdk:"plain_text"`
 	AttachmentsInfo []CustomerSupportCommentsAttachmentsInfoModel `tfsdk:"attachments_info"`
 }
 
 // CustomerSupportCommentsAttachmentsInfoModel represents attachments_info block
 type CustomerSupportCommentsAttachmentsInfoModel struct {
-	Attachment types.String `tfsdk:"attachment"`
+	Attachment  types.String `tfsdk:"attachment"`
 	ContentType types.String `tfsdk:"content_type"`
-	Filename types.String `tfsdk:"filename"`
-	TpID types.String `tfsdk:"tp_id"`
+	Filename    types.String `tfsdk:"filename"`
+	TpID        types.String `tfsdk:"tp_id"`
 }
 
 // CustomerSupportRelatesToModel represents relates_to block
 type CustomerSupportRelatesToModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 type CustomerSupportResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Category types.String `tfsdk:"category"`
-	DescriptionSpec types.String `tfsdk:"description_spec"`
-	Ongoing types.Bool `tfsdk:"ongoing"`
-	Priority types.String `tfsdk:"priority"`
-	ProductData types.String `tfsdk:"product_data"`
-	Service types.String `tfsdk:"service"`
-	Status types.String `tfsdk:"status"`
-	Subject types.String `tfsdk:"subject"`
-	Timeline types.String `tfsdk:"timeline"`
-	Topic types.String `tfsdk:"topic"`
-	TpID types.String `tfsdk:"tp_id"`
-	Type types.String `tfsdk:"type"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	Comments []CustomerSupportCommentsModel `tfsdk:"comments"`
-	RelatesTo []CustomerSupportRelatesToModel `tfsdk:"relates_to"`
+	Name            types.String                    `tfsdk:"name"`
+	Namespace       types.String                    `tfsdk:"namespace"`
+	Annotations     types.Map                       `tfsdk:"annotations"`
+	Description     types.String                    `tfsdk:"description"`
+	Disable         types.Bool                      `tfsdk:"disable"`
+	Labels          types.Map                       `tfsdk:"labels"`
+	ID              types.String                    `tfsdk:"id"`
+	Category        types.String                    `tfsdk:"category"`
+	DescriptionSpec types.String                    `tfsdk:"description_spec"`
+	Ongoing         types.Bool                      `tfsdk:"ongoing"`
+	Priority        types.String                    `tfsdk:"priority"`
+	ProductData     types.String                    `tfsdk:"product_data"`
+	Service         types.String                    `tfsdk:"service"`
+	Status          types.String                    `tfsdk:"status"`
+	Subject         types.String                    `tfsdk:"subject"`
+	Timeline        types.String                    `tfsdk:"timeline"`
+	Topic           types.String                    `tfsdk:"topic"`
+	TpID            types.String                    `tfsdk:"tp_id"`
+	Type            types.String                    `tfsdk:"type"`
+	Timeouts        timeouts.Value                  `tfsdk:"timeouts"`
+	Comments        []CustomerSupportCommentsModel  `tfsdk:"comments"`
+	RelatesTo       []CustomerSupportRelatesToModel `tfsdk:"relates_to"`
 }
 
 func (r *CustomerSupportResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -114,7 +114,7 @@ func (r *CustomerSupportResource) Schema(ctx context.Context, req resource.Schem
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the CustomerSupport. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -124,7 +124,7 @@ func (r *CustomerSupportResource) Schema(ctx context.Context, req resource.Schem
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the CustomerSupport will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -134,121 +134,121 @@ func (r *CustomerSupportResource) Schema(ctx context.Context, req resource.Schem
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"category": schema.StringAttribute{
 				MarkdownDescription: "Category. ticket area further narrows down the ticket - infrastructure, application, dashboards can be examples.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"description_spec": schema.StringAttribute{
 				MarkdownDescription: "Description. customer's description of the issue (free text)",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"ongoing": schema.BoolAttribute{
 				MarkdownDescription: "Ongoing. Ongoing is a flag that indicates whether the issue is ongoing or not.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.Bool{
 					boolplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"priority": schema.StringAttribute{
 				MarkdownDescription: "Priority. Support ticket priority helps understand importance of the ticket and focus more on more critical issues. Unknown/empty priority Normal priority issue High priority issue Urgent priority issue. Possible values are `PRIORITY_UNKNOWN`, `PRIORITY_NORMAL`, `PRIORITY_HIGH`, `PRIORITY_URGENT`. Defaults to `PRIORITY_UNKNOWN`.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"product_data": schema.StringAttribute{
 				MarkdownDescription: "Product Data. Product data is a free text field that can be used to describe the issue in more detail.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"service": schema.StringAttribute{
 				MarkdownDescription: "Support Service. Indicates the list of support service Unknown Support Service Account Protection Support Service Administration Support Service Application Traffic Insight Support Service Audit Logs & Alerts Support Service Authentication Intelligence Support Service Billing Support Service Client Side Defense Support Service Cloud & Edge Sites Support Service deprecated: use SS_MULTI_CLOUD_NETWORK_CONNECT instead DDOS & Transit Support Service Deprecated: use SS_ROUTED_DDOS instead Distributed Apps Support Service DNS Management Support Service LoadBalancers Support Service deprecated: use SS_MULTI_CLOUD_APP_CONNECT instead Shared Configuration Support Service Web App & API Protection Support Service Other Support Service Bot Defense Support Service Content delivery network Support Service Observability Support Service Delegated Access Support Service Networking & security across clouds, edge and on-premises Connect apps across clouds, edge and on-premises using Load Balancers BIG-IP Access Policy Manager (APM) Data Intelligence Support Service NGINX One Support Service Web App Scanning Support Service Routed DDoS Support Service Mobile App Shield protects mobile apps from reverse engineering, tampering and malware. Possible values are `SS_UNKNOWN`, `SS_ACCOUNT_PROTECTION`, `SS_ADMINISTRATION`, `SS_APPLICATION_TRAFFIC_INSIGHT`, `SS_AUDIT_LOGS_AND_ALERTS`, `SS_AUTHENTICATION_INTELLIGENCE`, `SS_BILLING`, `SS_CLIENT_SIDE_DEFENSE`, `SS_CLOUD_AND_EDGE_SITES`, `SS_DDOS_AND_TRANSIT_SERVICES`, `SS_DISTRIBUTED_APPS`, `SS_DNS_MANAGEMENT`, `SS_LOAD_BALANCERS`, `SS_SHARED_CONFIGURATION`, `SS_WEB_APP_AND_API_PROTECTION`, `SS_OTHER`, `SS_BOT_DEFENSE`, `SS_CDN`, `SS_OBSERVABILITY`, `SS_DELEGATED_ACCESS`, `SS_MULTI_CLOUD_NETWORK_CONNECT`, `SS_MULTI_CLOUD_APP_CONNECT`, `SS_BIG_IP_APM`, `SS_DATA_INTELLIGENCE`, `SS_NGINX_ONE`, `SS_WEB_APP_SCANNING`, `SS_ROUTED_DDOS`, `SS_MOBILE_APP_SHIELD`. Defaults to `SS_UNKNOWN`.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"status": schema.StringAttribute{
 				MarkdownDescription: "Support Ticket Status. State of the ticket so the customers know if the problem is being looked into Unknown or empty support ticket status Indicates a new ticket, waiting to be assigned to an agent Indicates an open issues, actively being looked into Indicates a pending issue, an open issue not actively being looked into Indicates on issue that on-hold, waiting for more information Indicates a solved issue, waiting for customer's confirmation Indicates a closed issue, resolved and customer approved Indicates a failed ticket, a failed ticket didn't make it into Zendesk and a customer should create new one instead. Possible values are `STATUS_UNKNOWN`, `STATUS_NEW`, `STATUS_OPEN`, `STATUS_PENDING`, `STATUS_ONHOLD`, `STATUS_SOLVED`, `STATUS_CLOSED`, `STATUS_FAILED`. Defaults to `STATUS_UNKNOWN`.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"subject": schema.StringAttribute{
 				MarkdownDescription: "Subject. subject of the ticket",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"timeline": schema.StringAttribute{
 				MarkdownDescription: "Timeline. Timeline is a free text field that can be used to describe the issue in more detail.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"topic": schema.StringAttribute{
 				MarkdownDescription: "Support Topic. Support Topic indicates the list of topics for service tickets Unknown/empty priority ACCOUNT_SUPPORT_TOPIC_ACCESS_REQUEST ACCOUNT_SUPPORT_TOPIC_ACCOUNT ACCOUNT_SUPPORT_TOPIC_BILLING ACCOUNT_SUPPORT_TOPIC_BILLING_PLAN_CHANGE ACCOUNT_SUPPORT_TOPIC_PUBLIC_IP ACCOUNT_SUPPORT_TOPIC_QUOTA_INCREASE ACCOUNT_SUPPORT_TOPIC_RMA ACCOUNT_SUPPORT_TOPIC_TAX_EXEMPT_VERIFICATION ACCOUNT_SUPPORT_TOPIC_OTHERS TECHNICAL_SUPPORT_TOPIC_CONFIGURATION_CHANGES TECHNICAL_SUPPORT_TOPIC_ERROR_MESSAGE TECHNICAL_SUPPORT_TOPIC_NEW_CONFIGURATION TECHNICAL_SUPPORT_TOPIC_PRODUCT_QUESTION TECHNICAL_SUPPORT_TOPIC_TROUBLESHOOTING TECHNICAL_SUPPORT_TOPIC_OTHERS INCIDENT_SUPPORT_TOPIC_LATENCY INCIDENT_SUPPORT_TOPIC_PERFORMANCE_DEGRADATION INCIDENT_SUPPORT_TOPIC_PARTIAL_OUTAGE INCIDENT_SUPPORT_TOPIC_COMPLETE_OUTAGE INCIDENT_SUPPORT_TOPIC_OTHERS TASK_TOPIC_PLAN_TRANSITION PROBLEM_TOPIC_SUPPORT_ALERT QUESTION_TOPIC_INFRASTRUCTURE TECHNICAL_SUPPORT_TOPIC_DELEGATED_DOMAIN_MIGRATION. Possible values are `TOPIC_UNKNOWN`, `ACCOUNT_SUPPORT_TOPIC_ACCESS_REQUEST`, `ACCOUNT_SUPPORT_TOPIC_ACCOUNT`, `ACCOUNT_SUPPORT_TOPIC_BILLING`, `ACCOUNT_SUPPORT_TOPIC_BILLING_PLAN_CHANGE`, `ACCOUNT_SUPPORT_TOPIC_PUBLIC_IP`, `ACCOUNT_SUPPORT_TOPIC_QUOTA_INCREASE`, `ACCOUNT_SUPPORT_TOPIC_RMA`, `ACCOUNT_SUPPORT_TOPIC_TAX_EXEMPT_VERIFICATION`, `ACCOUNT_SUPPORT_TOPIC_OTHERS`, `TECHNICAL_SUPPORT_TOPIC_CONFIGURATION_CHANGES`, `TECHNICAL_SUPPORT_TOPIC_ERROR_MESSAGE`, `TECHNICAL_SUPPORT_TOPIC_NEW_CONFIGURATION`, `TECHNICAL_SUPPORT_TOPIC_PRODUCT_QUESTION`, `TECHNICAL_SUPPORT_TOPIC_TROUBLESHOOTING`, `TECHNICAL_SUPPORT_TOPIC_OTHERS`, `INCIDENT_SUPPORT_TOPIC_LATENCY`, `INCIDENT_SUPPORT_TOPIC_PERFORMANCE_DEGRADATION`, `INCIDENT_SUPPORT_TOPIC_PARTIAL_OUTAGE`, `INCIDENT_SUPPORT_TOPIC_COMPLETE_OUTAGE`, `INCIDENT_SUPPORT_TOPIC_OTHERS`, `TASK_TOPIC_PLAN_TRANSITION`, `PROBLEM_TOPIC_SUPPORT_ALERT`, `QUESTION_TOPIC_INFRASTRUCTURE`, `TECHNICAL_SUPPORT_TOPIC_DELEGATED_DOMAIN_MIGRATION`. Defaults to `TOPIC_UNKNOWN`.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"tp_id": schema.StringAttribute{
 				MarkdownDescription: "Third Party ID. ID assigned to this ticket by our support provider.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"type": schema.StringAttribute{
 				MarkdownDescription: "Support Ticket. Several types of issues are supported, such as problems, questions. Unknown or empty ticket type Indicates a problem (e.g. misconfiguration) Indicates a task (a request to do something) Indicates a question (billing, services related) Indicates an incident (something is not working) Indicates a technical support ticket Indicates an account support ticket Indicates an Incident support ticket. Possible values are `TYPE_UNKNOWN`, `TYPE_PROBLEM`, `TYPE_TASK`, `TYPE_QUESTION`, `TYPE_INCIDENT`, `TYPE_TECHNICAL_SUPPORT`, `TYPE_ACCOUNT_SUPPORT`, `TYPE_INCIDENT_SUPPORT`. Defaults to `TYPE_UNKNOWN`.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -267,28 +267,28 @@ func (r *CustomerSupportResource) Schema(ctx context.Context, req resource.Schem
 					Attributes: map[string]schema.Attribute{
 						"attachment_ids": schema.ListAttribute{
 							MarkdownDescription: "Attachment IDs. Third party id of any attachment related to this ticket comment",
-							Optional: true,
-							ElementType: types.StringType,
+							Optional:            true,
+							ElementType:         types.StringType,
 						},
 						"author_email": schema.StringAttribute{
 							MarkdownDescription: "Email. Email of the author of the comment",
-							Optional: true,
+							Optional:            true,
 						},
 						"author_name": schema.StringAttribute{
 							MarkdownDescription: "Author. Author of the comment (as a name)",
-							Optional: true,
+							Optional:            true,
 						},
 						"created_at": schema.StringAttribute{
 							MarkdownDescription: "At. Comment creation time",
-							Optional: true,
+							Optional:            true,
 						},
 						"html": schema.StringAttribute{
 							MarkdownDescription: "Comment. Comment body as HTML",
-							Optional: true,
+							Optional:            true,
 						},
 						"plain_text": schema.StringAttribute{
 							MarkdownDescription: "Comment. Comment body as plain text",
-							Optional: true,
+							Optional:            true,
 						},
 					},
 					Blocks: map[string]schema.Block{
@@ -298,25 +298,24 @@ func (r *CustomerSupportResource) Schema(ctx context.Context, req resource.Schem
 								Attributes: map[string]schema.Attribute{
 									"attachment": schema.StringAttribute{
 										MarkdownDescription: "Attachment data. Any binary attachment (such as screenshots, plain text files, PDFs) encoded as base64 if used over HTTP.",
-										Optional: true,
+										Optional:            true,
 									},
 									"content_type": schema.StringAttribute{
 										MarkdownDescription: "Content type. Mime content type of the attachment. Helps the UI to properly display the data.",
-										Optional: true,
+										Optional:            true,
 									},
 									"filename": schema.StringAttribute{
 										MarkdownDescription: "Filename. Filename of the attachment as provided by the caller.",
-										Optional: true,
+										Optional:            true,
 									},
 									"tp_id": schema.StringAttribute{
 										MarkdownDescription: "3rd party ID. Optional ID as assigned by the 3rd party actually storing the data.",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
 						},
 					},
-
 				},
 			},
 			"relates_to": schema.ListNestedBlock{
@@ -325,29 +324,28 @@ func (r *CustomerSupportResource) Schema(ctx context.Context, req resource.Schem
 					Attributes: map[string]schema.Attribute{
 						"kind": schema.StringAttribute{
 							MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-							Optional: true,
-							Computed: true,
+							Optional:            true,
+							Computed:            true,
 						},
 						"name": schema.StringAttribute{
 							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-							Optional: true,
+							Optional:            true,
 						},
 						"namespace": schema.StringAttribute{
 							MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-							Optional: true,
+							Optional:            true,
 						},
 						"tenant": schema.StringAttribute{
 							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-							Optional: true,
-							Computed: true,
+							Optional:            true,
+							Computed:            true,
 						},
 						"uid": schema.StringAttribute{
 							MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-							Optional: true,
-							Computed: true,
+							Optional:            true,
+							Computed:            true,
 						},
 					},
-
 				},
 			},
 		},
@@ -601,7 +599,6 @@ func (r *CustomerSupportResource) Create(ctx context.Context, req resource.Creat
 		createReq.Spec["type"] = data.Type.ValueString()
 	}
 
-
 	apiResource, err := r.client.CreateCustomerSupport(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create CustomerSupport: %s", err))
@@ -613,7 +610,7 @@ func (r *CustomerSupportResource) Create(ctx context.Context, req resource.Creat
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["comments"].([]interface{}); ok && len(listData) > 0 {
 		var commentsList []CustomerSupportCommentsModel
 		for listIdx, item := range listData {
@@ -812,7 +809,6 @@ func (r *CustomerSupportResource) Create(ctx context.Context, req resource.Creat
 	} else {
 		data.Type = types.StringNull()
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -902,9 +898,9 @@ func (r *CustomerSupportResource) Read(ctx context.Context, req resource.ReadReq
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if listData, ok := apiResource.Spec["comments"].([]interface{}); ok && len(listData) > 0 {
 		var commentsList []CustomerSupportCommentsModel
@@ -1104,7 +1100,6 @@ func (r *CustomerSupportResource) Read(ctx context.Context, req resource.ReadReq
 	} else {
 		data.Type = types.StringNull()
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -1267,7 +1262,6 @@ func (r *CustomerSupportResource) Update(ctx context.Context, req resource.Updat
 	if !data.Type.IsNull() && !data.Type.IsUnknown() {
 		apiResource.Spec["type"] = data.Type.ValueString()
 	}
-
 
 	updated, err := r.client.UpdateCustomerSupport(ctx, apiResource)
 	if err != nil {

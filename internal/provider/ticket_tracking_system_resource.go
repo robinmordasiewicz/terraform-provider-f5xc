@@ -56,21 +56,21 @@ type TicketTrackingSystemJiraConfigModel struct {
 
 // TicketTrackingSystemJiraConfigAdhocRestAPIModel represents adhoc_rest_api block
 type TicketTrackingSystemJiraConfigAdhocRestAPIModel struct {
-	AccountEmail types.String `tfsdk:"account_email"`
-	APIToken types.String `tfsdk:"api_token"`
+	AccountEmail       types.String `tfsdk:"account_email"`
+	APIToken           types.String `tfsdk:"api_token"`
 	OrganizationDomain types.String `tfsdk:"organization_domain"`
 }
 
 type TicketTrackingSystemResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	JiraConfig *TicketTrackingSystemJiraConfigModel `tfsdk:"jira_config"`
+	Name        types.String                         `tfsdk:"name"`
+	Namespace   types.String                         `tfsdk:"namespace"`
+	Annotations types.Map                            `tfsdk:"annotations"`
+	Description types.String                         `tfsdk:"description"`
+	Disable     types.Bool                           `tfsdk:"disable"`
+	Labels      types.Map                            `tfsdk:"labels"`
+	ID          types.String                         `tfsdk:"id"`
+	Timeouts    timeouts.Value                       `tfsdk:"timeouts"`
+	JiraConfig  *TicketTrackingSystemJiraConfigModel `tfsdk:"jira_config"`
 }
 
 func (r *TicketTrackingSystemResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -84,7 +84,7 @@ func (r *TicketTrackingSystemResource) Schema(ctx context.Context, req resource.
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the TicketTrackingSystem. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -94,7 +94,7 @@ func (r *TicketTrackingSystemResource) Schema(ctx context.Context, req resource.
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the TicketTrackingSystem will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -104,25 +104,25 @@ func (r *TicketTrackingSystemResource) Schema(ctx context.Context, req resource.
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -137,28 +137,26 @@ func (r *TicketTrackingSystemResource) Schema(ctx context.Context, req resource.
 			}),
 			"jira_config": schema.SingleNestedBlock{
 				MarkdownDescription: "Jira Configuration Type.",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"adhoc_rest_api": schema.SingleNestedBlock{
 						MarkdownDescription: "JIRA Ad-hoc REST API Configuration Type. v3 API Basic Auth for Ad-hoc API Calls - https://developer.atlassian.com/cloud/jira/platform/rest/v3/ This message represents what is stored in the XC database. To see the API format, refer to the JiraAdhocRestApiConfigurationSpec message",
 						Attributes: map[string]schema.Attribute{
 							"account_email": schema.StringAttribute{
 								MarkdownDescription: "Account Email. Username (email) for the Atlassian account",
-								Optional: true,
+								Optional:            true,
 							},
 							"api_token": schema.StringAttribute{
 								MarkdownDescription: "API Token. API Token (password) specified by the customer in plaintext to be used for Basic Auth. This value is purely used for user input and is not persisted in the database. It will be converted to a blindfolded and encrypted form before saving. For editing/replacing the existing JIRA configuration, and to use the already stored value of the encrypted API Token, this field should be sent as an empty string. Since this field is confidential, the Get/List public APIs will return this value as an empty string.",
-								Optional: true,
+								Optional:            true,
 							},
 							"organization_domain": schema.StringAttribute{
 								MarkdownDescription: "Organization Domain. A valid hostname for the Atlassian organization, as defined by RFC 1034",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 					},
 				},
-
 			},
 		},
 	}
@@ -326,7 +324,6 @@ func (r *TicketTrackingSystemResource) Create(ctx context.Context, req resource.
 		createReq.Spec["jira_config"] = jira_configMap
 	}
 
-
 	apiResource, err := r.client.CreateTicketTrackingSystem(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create TicketTrackingSystem: %s", err))
@@ -338,13 +335,12 @@ func (r *TicketTrackingSystemResource) Create(ctx context.Context, req resource.
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if _, ok := apiResource.Spec["jira_config"].(map[string]interface{}); ok && isImport && data.JiraConfig == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.JiraConfig = &TicketTrackingSystemJiraConfigModel{}
 	}
 	// Normal Read: preserve existing state value
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -434,16 +430,15 @@ func (r *TicketTrackingSystemResource) Read(ctx context.Context, req resource.Re
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if _, ok := apiResource.Spec["jira_config"].(map[string]interface{}); ok && isImport && data.JiraConfig == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.JiraConfig = &TicketTrackingSystemJiraConfigModel{}
 	}
 	// Normal Read: preserve existing state value
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -521,7 +516,6 @@ func (r *TicketTrackingSystemResource) Update(ctx context.Context, req resource.
 		}
 		apiResource.Spec["jira_config"] = jira_configMap
 	}
-
 
 	updated, err := r.client.UpdateTicketTrackingSystem(ctx, apiResource)
 	if err != nil {

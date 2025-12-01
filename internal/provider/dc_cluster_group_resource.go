@@ -52,19 +52,19 @@ type DcClusterGroupEmptyModel struct {
 // DcClusterGroupTypeModel represents type block
 type DcClusterGroupTypeModel struct {
 	ControlAndDataPlaneMesh *DcClusterGroupEmptyModel `tfsdk:"control_and_data_plane_mesh"`
-	DataPlaneMesh *DcClusterGroupEmptyModel `tfsdk:"data_plane_mesh"`
+	DataPlaneMesh           *DcClusterGroupEmptyModel `tfsdk:"data_plane_mesh"`
 }
 
 type DcClusterGroupResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	Type *DcClusterGroupTypeModel `tfsdk:"type"`
+	Name        types.String             `tfsdk:"name"`
+	Namespace   types.String             `tfsdk:"namespace"`
+	Annotations types.Map                `tfsdk:"annotations"`
+	Description types.String             `tfsdk:"description"`
+	Disable     types.Bool               `tfsdk:"disable"`
+	Labels      types.Map                `tfsdk:"labels"`
+	ID          types.String             `tfsdk:"id"`
+	Timeouts    timeouts.Value           `tfsdk:"timeouts"`
+	Type        *DcClusterGroupTypeModel `tfsdk:"type"`
 }
 
 func (r *DcClusterGroupResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -78,7 +78,7 @@ func (r *DcClusterGroupResource) Schema(ctx context.Context, req resource.Schema
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the DcClusterGroup. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -88,7 +88,7 @@ func (r *DcClusterGroupResource) Schema(ctx context.Context, req resource.Schema
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the DcClusterGroup will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -98,25 +98,25 @@ func (r *DcClusterGroupResource) Schema(ctx context.Context, req resource.Schema
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -131,8 +131,7 @@ func (r *DcClusterGroupResource) Schema(ctx context.Context, req resource.Schema
 			}),
 			"type": schema.SingleNestedBlock{
 				MarkdownDescription: "DC Cluster Group Mesh Type. Details of DC Cluster Group Mesh Type",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"control_and_data_plane_mesh": schema.SingleNestedBlock{
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -141,7 +140,6 @@ func (r *DcClusterGroupResource) Schema(ctx context.Context, req resource.Schema
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 		},
 	}
@@ -302,7 +300,6 @@ func (r *DcClusterGroupResource) Create(ctx context.Context, req resource.Create
 		createReq.Spec["type"] = typeMap
 	}
 
-
 	apiResource, err := r.client.CreateDcClusterGroup(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create DcClusterGroup: %s", err))
@@ -314,13 +311,12 @@ func (r *DcClusterGroupResource) Create(ctx context.Context, req resource.Create
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if _, ok := apiResource.Spec["type"].(map[string]interface{}); ok && isImport && data.Type == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.Type = &DcClusterGroupTypeModel{}
 	}
 	// Normal Read: preserve existing state value
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -410,16 +406,15 @@ func (r *DcClusterGroupResource) Read(ctx context.Context, req resource.ReadRequ
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if _, ok := apiResource.Spec["type"].(map[string]interface{}); ok && isImport && data.Type == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.Type = &DcClusterGroupTypeModel{}
 	}
 	// Normal Read: preserve existing state value
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -490,7 +485,6 @@ func (r *DcClusterGroupResource) Update(ctx context.Context, req resource.Update
 		}
 		apiResource.Spec["type"] = typeMap
 	}
-
 
 	updated, err := r.client.UpdateDcClusterGroup(ctx, apiResource)
 	if err != nil {

@@ -56,22 +56,22 @@ type PolicyBasedRoutingForwardProxyPbrModel struct {
 
 // PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesModel represents forward_proxy_pbr_rules block
 type PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesModel struct {
-	AllDestinations *PolicyBasedRoutingEmptyModel `tfsdk:"all_destinations"`
-	AllSources *PolicyBasedRoutingEmptyModel `tfsdk:"all_sources"`
+	AllDestinations     *PolicyBasedRoutingEmptyModel                                                   `tfsdk:"all_destinations"`
+	AllSources          *PolicyBasedRoutingEmptyModel                                                   `tfsdk:"all_sources"`
 	ForwardingClassList []PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesForwardingClassListModel `tfsdk:"forwarding_class_list"`
-	HTTPList *PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesHTTPListModel `tfsdk:"http_list"`
-	IPPrefixSet *PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesIPPrefixSetModel `tfsdk:"ip_prefix_set"`
-	LabelSelector *PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesLabelSelectorModel `tfsdk:"label_selector"`
-	Metadata *PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesMetadataModel `tfsdk:"metadata"`
-	PrefixList *PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesPrefixListModel `tfsdk:"prefix_list"`
-	TLSList *PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesTLSListModel `tfsdk:"tls_list"`
+	HTTPList            *PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesHTTPListModel             `tfsdk:"http_list"`
+	IPPrefixSet         *PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesIPPrefixSetModel          `tfsdk:"ip_prefix_set"`
+	LabelSelector       *PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesLabelSelectorModel        `tfsdk:"label_selector"`
+	Metadata            *PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesMetadataModel             `tfsdk:"metadata"`
+	PrefixList          *PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesPrefixListModel           `tfsdk:"prefix_list"`
+	TLSList             *PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesTLSListModel              `tfsdk:"tls_list"`
 }
 
 // PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesForwardingClassListModel represents forwarding_class_list block
 type PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesForwardingClassListModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesHTTPListModel represents http_list block
@@ -81,20 +81,20 @@ type PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesHTTPListModel struct {
 
 // PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesHTTPListHTTPListModel represents http_list block
 type PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesHTTPListHTTPListModel struct {
-	ExactValue types.String `tfsdk:"exact_value"`
-	PathExactValue types.String `tfsdk:"path_exact_value"`
-	PathPrefixValue types.String `tfsdk:"path_prefix_value"`
-	PathRegexValue types.String `tfsdk:"path_regex_value"`
-	RegexValue types.String `tfsdk:"regex_value"`
-	SuffixValue types.String `tfsdk:"suffix_value"`
-	AnyPath *PolicyBasedRoutingEmptyModel `tfsdk:"any_path"`
+	ExactValue      types.String                  `tfsdk:"exact_value"`
+	PathExactValue  types.String                  `tfsdk:"path_exact_value"`
+	PathPrefixValue types.String                  `tfsdk:"path_prefix_value"`
+	PathRegexValue  types.String                  `tfsdk:"path_regex_value"`
+	RegexValue      types.String                  `tfsdk:"regex_value"`
+	SuffixValue     types.String                  `tfsdk:"suffix_value"`
+	AnyPath         *PolicyBasedRoutingEmptyModel `tfsdk:"any_path"`
 }
 
 // PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesIPPrefixSetModel represents ip_prefix_set block
 type PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesIPPrefixSetModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesLabelSelectorModel represents label_selector block
@@ -105,7 +105,7 @@ type PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesLabelSelectorModel str
 // PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesMetadataModel represents metadata block
 type PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
-	Name types.String `tfsdk:"name"`
+	Name            types.String `tfsdk:"name"`
 }
 
 // PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesPrefixListModel represents prefix_list block
@@ -120,24 +120,24 @@ type PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesTLSListModel struct {
 
 // PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesTLSListTLSListModel represents tls_list block
 type PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesTLSListTLSListModel struct {
-	ExactValue types.String `tfsdk:"exact_value"`
-	RegexValue types.String `tfsdk:"regex_value"`
+	ExactValue  types.String `tfsdk:"exact_value"`
+	RegexValue  types.String `tfsdk:"regex_value"`
 	SuffixValue types.String `tfsdk:"suffix_value"`
 }
 
 // PolicyBasedRoutingForwardingClassListModel represents forwarding_class_list block
 type PolicyBasedRoutingForwardingClassListModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // PolicyBasedRoutingNetworkPbrModel represents network_pbr block
 type PolicyBasedRoutingNetworkPbrModel struct {
-	Any *PolicyBasedRoutingEmptyModel `tfsdk:"any"`
-	LabelSelector *PolicyBasedRoutingNetworkPbrLabelSelectorModel `tfsdk:"label_selector"`
+	Any             *PolicyBasedRoutingEmptyModel                      `tfsdk:"any"`
+	LabelSelector   *PolicyBasedRoutingNetworkPbrLabelSelectorModel    `tfsdk:"label_selector"`
 	NetworkPbrRules []PolicyBasedRoutingNetworkPbrNetworkPbrRulesModel `tfsdk:"network_pbr_rules"`
-	PrefixList *PolicyBasedRoutingNetworkPbrPrefixListModel `tfsdk:"prefix_list"`
+	PrefixList      *PolicyBasedRoutingNetworkPbrPrefixListModel       `tfsdk:"prefix_list"`
 }
 
 // PolicyBasedRoutingNetworkPbrLabelSelectorModel represents label_selector block
@@ -147,17 +147,17 @@ type PolicyBasedRoutingNetworkPbrLabelSelectorModel struct {
 
 // PolicyBasedRoutingNetworkPbrNetworkPbrRulesModel represents network_pbr_rules block
 type PolicyBasedRoutingNetworkPbrNetworkPbrRulesModel struct {
-	DNSName types.String `tfsdk:"dns_name"`
-	AllTCPTraffic *PolicyBasedRoutingEmptyModel `tfsdk:"all_tcp_traffic"`
-	AllTraffic *PolicyBasedRoutingEmptyModel `tfsdk:"all_traffic"`
-	AllUDPTraffic *PolicyBasedRoutingEmptyModel `tfsdk:"all_udp_traffic"`
-	Any *PolicyBasedRoutingEmptyModel `tfsdk:"any"`
-	Applications *PolicyBasedRoutingNetworkPbrNetworkPbrRulesApplicationsModel `tfsdk:"applications"`
+	DNSName             types.String                                                          `tfsdk:"dns_name"`
+	AllTCPTraffic       *PolicyBasedRoutingEmptyModel                                         `tfsdk:"all_tcp_traffic"`
+	AllTraffic          *PolicyBasedRoutingEmptyModel                                         `tfsdk:"all_traffic"`
+	AllUDPTraffic       *PolicyBasedRoutingEmptyModel                                         `tfsdk:"all_udp_traffic"`
+	Any                 *PolicyBasedRoutingEmptyModel                                         `tfsdk:"any"`
+	Applications        *PolicyBasedRoutingNetworkPbrNetworkPbrRulesApplicationsModel         `tfsdk:"applications"`
 	ForwardingClassList []PolicyBasedRoutingNetworkPbrNetworkPbrRulesForwardingClassListModel `tfsdk:"forwarding_class_list"`
-	IPPrefixSet *PolicyBasedRoutingNetworkPbrNetworkPbrRulesIPPrefixSetModel `tfsdk:"ip_prefix_set"`
-	Metadata *PolicyBasedRoutingNetworkPbrNetworkPbrRulesMetadataModel `tfsdk:"metadata"`
-	PrefixList *PolicyBasedRoutingNetworkPbrNetworkPbrRulesPrefixListModel `tfsdk:"prefix_list"`
-	ProtocolPortRange *PolicyBasedRoutingNetworkPbrNetworkPbrRulesProtocolPortRangeModel `tfsdk:"protocol_port_range"`
+	IPPrefixSet         *PolicyBasedRoutingNetworkPbrNetworkPbrRulesIPPrefixSetModel          `tfsdk:"ip_prefix_set"`
+	Metadata            *PolicyBasedRoutingNetworkPbrNetworkPbrRulesMetadataModel             `tfsdk:"metadata"`
+	PrefixList          *PolicyBasedRoutingNetworkPbrNetworkPbrRulesPrefixListModel           `tfsdk:"prefix_list"`
+	ProtocolPortRange   *PolicyBasedRoutingNetworkPbrNetworkPbrRulesProtocolPortRangeModel    `tfsdk:"protocol_port_range"`
 }
 
 // PolicyBasedRoutingNetworkPbrNetworkPbrRulesApplicationsModel represents applications block
@@ -167,9 +167,9 @@ type PolicyBasedRoutingNetworkPbrNetworkPbrRulesApplicationsModel struct {
 
 // PolicyBasedRoutingNetworkPbrNetworkPbrRulesForwardingClassListModel represents forwarding_class_list block
 type PolicyBasedRoutingNetworkPbrNetworkPbrRulesForwardingClassListModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // PolicyBasedRoutingNetworkPbrNetworkPbrRulesIPPrefixSetModel represents ip_prefix_set block
@@ -179,17 +179,17 @@ type PolicyBasedRoutingNetworkPbrNetworkPbrRulesIPPrefixSetModel struct {
 
 // PolicyBasedRoutingNetworkPbrNetworkPbrRulesIPPrefixSetRefModel represents ref block
 type PolicyBasedRoutingNetworkPbrNetworkPbrRulesIPPrefixSetRefModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // PolicyBasedRoutingNetworkPbrNetworkPbrRulesMetadataModel represents metadata block
 type PolicyBasedRoutingNetworkPbrNetworkPbrRulesMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
-	Name types.String `tfsdk:"name"`
+	Name            types.String `tfsdk:"name"`
 }
 
 // PolicyBasedRoutingNetworkPbrNetworkPbrRulesPrefixListModel represents prefix_list block
@@ -199,8 +199,8 @@ type PolicyBasedRoutingNetworkPbrNetworkPbrRulesPrefixListModel struct {
 
 // PolicyBasedRoutingNetworkPbrNetworkPbrRulesProtocolPortRangeModel represents protocol_port_range block
 type PolicyBasedRoutingNetworkPbrNetworkPbrRulesProtocolPortRangeModel struct {
-	PortRanges types.List `tfsdk:"port_ranges"`
-	Protocol types.String `tfsdk:"protocol"`
+	PortRanges types.List   `tfsdk:"port_ranges"`
+	Protocol   types.String `tfsdk:"protocol"`
 }
 
 // PolicyBasedRoutingNetworkPbrPrefixListModel represents prefix_list block
@@ -209,17 +209,17 @@ type PolicyBasedRoutingNetworkPbrPrefixListModel struct {
 }
 
 type PolicyBasedRoutingResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	ForwardProxyPbr *PolicyBasedRoutingForwardProxyPbrModel `tfsdk:"forward_proxy_pbr"`
+	Name                types.String                                 `tfsdk:"name"`
+	Namespace           types.String                                 `tfsdk:"namespace"`
+	Annotations         types.Map                                    `tfsdk:"annotations"`
+	Description         types.String                                 `tfsdk:"description"`
+	Disable             types.Bool                                   `tfsdk:"disable"`
+	Labels              types.Map                                    `tfsdk:"labels"`
+	ID                  types.String                                 `tfsdk:"id"`
+	Timeouts            timeouts.Value                               `tfsdk:"timeouts"`
+	ForwardProxyPbr     *PolicyBasedRoutingForwardProxyPbrModel      `tfsdk:"forward_proxy_pbr"`
 	ForwardingClassList []PolicyBasedRoutingForwardingClassListModel `tfsdk:"forwarding_class_list"`
-	NetworkPbr *PolicyBasedRoutingNetworkPbrModel `tfsdk:"network_pbr"`
+	NetworkPbr          *PolicyBasedRoutingNetworkPbrModel           `tfsdk:"network_pbr"`
 }
 
 func (r *PolicyBasedRoutingResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -233,7 +233,7 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the PolicyBasedRouting. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -243,7 +243,7 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the PolicyBasedRouting will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -253,25 +253,25 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -286,14 +286,12 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 			}),
 			"forward_proxy_pbr": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: forward_proxy_pbr, network_pbr] L3/L4 routing rule. Network(L3/L4) routing policy rule",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"forward_proxy_pbr_rules": schema.ListNestedBlock{
 						MarkdownDescription: "L3/L4 routing rules. Network(L3/L4) routing policy rules.",
 						NestedObject: schema.NestedBlockObject{
-							Attributes: map[string]schema.Attribute{
-							},
+							Attributes: map[string]schema.Attribute{},
 							Blocks: map[string]schema.Block{
 								"all_destinations": schema.SingleNestedBlock{
 									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -307,24 +305,23 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 										Attributes: map[string]schema.Attribute{
 											"name": schema.StringAttribute{
 												MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-												Optional: true,
+												Optional:            true,
 											},
 											"namespace": schema.StringAttribute{
 												MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-												Optional: true,
+												Optional:            true,
 											},
 											"tenant": schema.StringAttribute{
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-												Optional: true,
-												Computed: true,
+												Optional:            true,
+												Computed:            true,
 											},
 										},
 									},
 								},
 								"http_list": schema.SingleNestedBlock{
 									MarkdownDescription: "URLListType.",
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"http_list": schema.ListNestedBlock{
 											MarkdownDescription: "HTTP URLs. URLs for HTTP connections",
@@ -332,27 +329,27 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 												Attributes: map[string]schema.Attribute{
 													"exact_value": schema.StringAttribute{
 														MarkdownDescription: "Exact Values. Exact domain name",
-														Optional: true,
+														Optional:            true,
 													},
 													"path_exact_value": schema.StringAttribute{
 														MarkdownDescription: "Exact Path. Exact Path to match.",
-														Optional: true,
+														Optional:            true,
 													},
 													"path_prefix_value": schema.StringAttribute{
 														MarkdownDescription: "Prefix of Path. Prefix of Path e.g '/abc/xyz' will match '/abc/xyz/.*'",
-														Optional: true,
+														Optional:            true,
 													},
 													"path_regex_value": schema.StringAttribute{
 														MarkdownDescription: "Regex of Path. Regular Expression value for the Path to match",
-														Optional: true,
+														Optional:            true,
 													},
 													"regex_value": schema.StringAttribute{
 														MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name",
-														Optional: true,
+														Optional:            true,
 													},
 													"suffix_value": schema.StringAttribute{
 														MarkdownDescription: "Suffix Values. Suffix of domain names e.g 'xyz.com' will match '*.xyz.com'",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 												Blocks: map[string]schema.Block{
@@ -369,16 +366,16 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-											Optional: true,
+											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
 											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-											Optional: true,
+											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
@@ -387,8 +384,8 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 									Attributes: map[string]schema.Attribute{
 										"expressions": schema.ListAttribute{
 											MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections.",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 									},
 								},
@@ -397,11 +394,11 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 									Attributes: map[string]schema.Attribute{
 										"description_spec": schema.StringAttribute{
 											MarkdownDescription: "Description. Human readable description.",
-											Optional: true,
+											Optional:            true,
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 								},
@@ -410,15 +407,14 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 									Attributes: map[string]schema.Attribute{
 										"prefixes": schema.ListAttribute{
 											MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 									},
 								},
 								"tls_list": schema.SingleNestedBlock{
 									MarkdownDescription: "DomainListType.",
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"tls_list": schema.ListNestedBlock{
 											MarkdownDescription: "TLS Domains. Domains in SNI for TLS connections",
@@ -426,15 +422,15 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 												Attributes: map[string]schema.Attribute{
 													"exact_value": schema.StringAttribute{
 														MarkdownDescription: "Exact Value. Exact domain name.",
-														Optional: true,
+														Optional:            true,
 													},
 													"regex_value": schema.StringAttribute{
 														MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name",
-														Optional: true,
+														Optional:            true,
 													},
 													"suffix_value": schema.StringAttribute{
 														MarkdownDescription: "Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'",
-														Optional: true,
+														Optional:            true,
 													},
 												},
 											},
@@ -445,7 +441,6 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 						},
 					},
 				},
-
 			},
 			"forwarding_class_list": schema.ListNestedBlock{
 				MarkdownDescription: "Default Forwarding Classes. Ordered list of forwarding Class to be used if source application match and no rule match.",
@@ -453,25 +448,23 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 					Attributes: map[string]schema.Attribute{
 						"name": schema.StringAttribute{
 							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-							Optional: true,
+							Optional:            true,
 						},
 						"namespace": schema.StringAttribute{
 							MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-							Optional: true,
+							Optional:            true,
 						},
 						"tenant": schema.StringAttribute{
 							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-							Optional: true,
-							Computed: true,
+							Optional:            true,
+							Computed:            true,
 						},
 					},
-
 				},
 			},
 			"network_pbr": schema.SingleNestedBlock{
 				MarkdownDescription: "Network (L2/L3) routing Policy. Network(L3/L4) routing policy rule",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"any": schema.SingleNestedBlock{
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -481,8 +474,8 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 						Attributes: map[string]schema.Attribute{
 							"expressions": schema.ListAttribute{
 								MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections.",
-								Optional: true,
-								ElementType: types.StringType,
+								Optional:            true,
+								ElementType:         types.StringType,
 							},
 						},
 					},
@@ -492,7 +485,7 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 							Attributes: map[string]schema.Attribute{
 								"dns_name": schema.StringAttribute{
 									MarkdownDescription: "DNS Name to IP. Resolve hostname to get the IP",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
@@ -513,8 +506,8 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 									Attributes: map[string]schema.Attribute{
 										"applications": schema.ListAttribute{
 											MarkdownDescription: "Application Protocols. Application protocols like HTTP, SNMP. Possible values are `APPLICATION_HTTP`, `APPLICATION_HTTPS`, `APPLICATION_SNMP`, `APPLICATION_DNS`. Defaults to `APPLICATION_HTTP`.",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 									},
 								},
@@ -524,24 +517,23 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 										Attributes: map[string]schema.Attribute{
 											"name": schema.StringAttribute{
 												MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-												Optional: true,
+												Optional:            true,
 											},
 											"namespace": schema.StringAttribute{
 												MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-												Optional: true,
+												Optional:            true,
 											},
 											"tenant": schema.StringAttribute{
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-												Optional: true,
-												Computed: true,
+												Optional:            true,
+												Computed:            true,
 											},
 										},
 									},
 								},
 								"ip_prefix_set": schema.SingleNestedBlock{
 									MarkdownDescription: "IP Prefix Set Reference. A list of references to ip_prefix_set objects.",
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"ref": schema.ListNestedBlock{
 											MarkdownDescription: "Reference. A list of references to ip_prefix_set objects.",
@@ -549,26 +541,26 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 												Attributes: map[string]schema.Attribute{
 													"kind": schema.StringAttribute{
 														MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-														Optional: true,
-														Computed: true,
+														Optional:            true,
+														Computed:            true,
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-														Optional: true,
+														Optional:            true,
 													},
 													"namespace": schema.StringAttribute{
 														MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-														Optional: true,
+														Optional:            true,
 													},
 													"tenant": schema.StringAttribute{
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-														Optional: true,
-														Computed: true,
+														Optional:            true,
+														Computed:            true,
 													},
 													"uid": schema.StringAttribute{
 														MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-														Optional: true,
-														Computed: true,
+														Optional:            true,
+														Computed:            true,
 													},
 												},
 											},
@@ -580,11 +572,11 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 									Attributes: map[string]schema.Attribute{
 										"description_spec": schema.StringAttribute{
 											MarkdownDescription: "Description. Human readable description.",
-											Optional: true,
+											Optional:            true,
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 								},
@@ -593,8 +585,8 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 									Attributes: map[string]schema.Attribute{
 										"prefixes": schema.ListAttribute{
 											MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 									},
 								},
@@ -603,12 +595,12 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 									Attributes: map[string]schema.Attribute{
 										"port_ranges": schema.ListAttribute{
 											MarkdownDescription: "List of Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 										"protocol": schema.StringAttribute{
 											MarkdownDescription: "Protocol. Protocol in IP packet to be used as match criteria Values are tcp, udp, and icmp",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 								},
@@ -620,13 +612,12 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 						Attributes: map[string]schema.Attribute{
 							"prefixes": schema.ListAttribute{
 								MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
-								Optional: true,
-								ElementType: types.StringType,
+								Optional:            true,
+								ElementType:         types.StringType,
 							},
 						},
 					},
 				},
-
 			},
 		},
 	}
@@ -918,7 +909,6 @@ func (r *PolicyBasedRoutingResource) Create(ctx context.Context, req resource.Cr
 		createReq.Spec["network_pbr"] = network_pbrMap
 	}
 
-
 	apiResource, err := r.client.CreatePolicyBasedRouting(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create PolicyBasedRouting: %s", err))
@@ -930,7 +920,7 @@ func (r *PolicyBasedRoutingResource) Create(ctx context.Context, req resource.Cr
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if blockData, ok := apiResource.Spec["forward_proxy_pbr"].(map[string]interface{}); ok && (isImport || data.ForwardProxyPbr != nil) {
 		data.ForwardProxyPbr = &PolicyBasedRoutingForwardProxyPbrModel{
 			ForwardProxyPbrRules: func() []PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesModel {
@@ -953,8 +943,7 @@ func (r *PolicyBasedRoutingResource) Create(ctx context.Context, req resource.Cr
 								}(),
 								HTTPList: func() *PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesHTTPListModel {
 									if _, ok := itemMap["http_list"].(map[string]interface{}); ok {
-										return &PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesHTTPListModel{
-										}
+										return &PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesHTTPListModel{}
 									}
 									return nil
 								}(),
@@ -985,8 +974,7 @@ func (r *PolicyBasedRoutingResource) Create(ctx context.Context, req resource.Cr
 								}(),
 								LabelSelector: func() *PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesLabelSelectorModel {
 									if _, ok := itemMap["label_selector"].(map[string]interface{}); ok {
-										return &PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesLabelSelectorModel{
-										}
+										return &PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesLabelSelectorModel{}
 									}
 									return nil
 								}(),
@@ -1011,15 +999,13 @@ func (r *PolicyBasedRoutingResource) Create(ctx context.Context, req resource.Cr
 								}(),
 								PrefixList: func() *PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesPrefixListModel {
 									if _, ok := itemMap["prefix_list"].(map[string]interface{}); ok {
-										return &PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesPrefixListModel{
-										}
+										return &PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesPrefixListModel{}
 									}
 									return nil
 								}(),
 								TLSList: func() *PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesTLSListModel {
 									if _, ok := itemMap["tls_list"].(map[string]interface{}); ok {
-										return &PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesTLSListModel{
-										}
+										return &PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesTLSListModel{}
 									}
 									return nil
 								}(),
@@ -1132,8 +1118,7 @@ func (r *PolicyBasedRoutingResource) Create(ctx context.Context, req resource.Cr
 								}(),
 								Applications: func() *PolicyBasedRoutingNetworkPbrNetworkPbrRulesApplicationsModel {
 									if _, ok := itemMap["applications"].(map[string]interface{}); ok {
-										return &PolicyBasedRoutingNetworkPbrNetworkPbrRulesApplicationsModel{
-										}
+										return &PolicyBasedRoutingNetworkPbrNetworkPbrRulesApplicationsModel{}
 									}
 									return nil
 								}(),
@@ -1145,8 +1130,7 @@ func (r *PolicyBasedRoutingResource) Create(ctx context.Context, req resource.Cr
 								}(),
 								IPPrefixSet: func() *PolicyBasedRoutingNetworkPbrNetworkPbrRulesIPPrefixSetModel {
 									if _, ok := itemMap["ip_prefix_set"].(map[string]interface{}); ok {
-										return &PolicyBasedRoutingNetworkPbrNetworkPbrRulesIPPrefixSetModel{
-										}
+										return &PolicyBasedRoutingNetworkPbrNetworkPbrRulesIPPrefixSetModel{}
 									}
 									return nil
 								}(),
@@ -1171,8 +1155,7 @@ func (r *PolicyBasedRoutingResource) Create(ctx context.Context, req resource.Cr
 								}(),
 								PrefixList: func() *PolicyBasedRoutingNetworkPbrNetworkPbrRulesPrefixListModel {
 									if _, ok := itemMap["prefix_list"].(map[string]interface{}); ok {
-										return &PolicyBasedRoutingNetworkPbrNetworkPbrRulesPrefixListModel{
-										}
+										return &PolicyBasedRoutingNetworkPbrNetworkPbrRulesPrefixListModel{}
 									}
 									return nil
 								}(),
@@ -1223,7 +1206,6 @@ func (r *PolicyBasedRoutingResource) Create(ctx context.Context, req resource.Cr
 			}(),
 		}
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -1313,9 +1295,9 @@ func (r *PolicyBasedRoutingResource) Read(ctx context.Context, req resource.Read
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if blockData, ok := apiResource.Spec["forward_proxy_pbr"].(map[string]interface{}); ok && (isImport || data.ForwardProxyPbr != nil) {
 		data.ForwardProxyPbr = &PolicyBasedRoutingForwardProxyPbrModel{
@@ -1339,8 +1321,7 @@ func (r *PolicyBasedRoutingResource) Read(ctx context.Context, req resource.Read
 								}(),
 								HTTPList: func() *PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesHTTPListModel {
 									if _, ok := itemMap["http_list"].(map[string]interface{}); ok {
-										return &PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesHTTPListModel{
-										}
+										return &PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesHTTPListModel{}
 									}
 									return nil
 								}(),
@@ -1371,8 +1352,7 @@ func (r *PolicyBasedRoutingResource) Read(ctx context.Context, req resource.Read
 								}(),
 								LabelSelector: func() *PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesLabelSelectorModel {
 									if _, ok := itemMap["label_selector"].(map[string]interface{}); ok {
-										return &PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesLabelSelectorModel{
-										}
+										return &PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesLabelSelectorModel{}
 									}
 									return nil
 								}(),
@@ -1397,15 +1377,13 @@ func (r *PolicyBasedRoutingResource) Read(ctx context.Context, req resource.Read
 								}(),
 								PrefixList: func() *PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesPrefixListModel {
 									if _, ok := itemMap["prefix_list"].(map[string]interface{}); ok {
-										return &PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesPrefixListModel{
-										}
+										return &PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesPrefixListModel{}
 									}
 									return nil
 								}(),
 								TLSList: func() *PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesTLSListModel {
 									if _, ok := itemMap["tls_list"].(map[string]interface{}); ok {
-										return &PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesTLSListModel{
-										}
+										return &PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesTLSListModel{}
 									}
 									return nil
 								}(),
@@ -1518,8 +1496,7 @@ func (r *PolicyBasedRoutingResource) Read(ctx context.Context, req resource.Read
 								}(),
 								Applications: func() *PolicyBasedRoutingNetworkPbrNetworkPbrRulesApplicationsModel {
 									if _, ok := itemMap["applications"].(map[string]interface{}); ok {
-										return &PolicyBasedRoutingNetworkPbrNetworkPbrRulesApplicationsModel{
-										}
+										return &PolicyBasedRoutingNetworkPbrNetworkPbrRulesApplicationsModel{}
 									}
 									return nil
 								}(),
@@ -1531,8 +1508,7 @@ func (r *PolicyBasedRoutingResource) Read(ctx context.Context, req resource.Read
 								}(),
 								IPPrefixSet: func() *PolicyBasedRoutingNetworkPbrNetworkPbrRulesIPPrefixSetModel {
 									if _, ok := itemMap["ip_prefix_set"].(map[string]interface{}); ok {
-										return &PolicyBasedRoutingNetworkPbrNetworkPbrRulesIPPrefixSetModel{
-										}
+										return &PolicyBasedRoutingNetworkPbrNetworkPbrRulesIPPrefixSetModel{}
 									}
 									return nil
 								}(),
@@ -1557,8 +1533,7 @@ func (r *PolicyBasedRoutingResource) Read(ctx context.Context, req resource.Read
 								}(),
 								PrefixList: func() *PolicyBasedRoutingNetworkPbrNetworkPbrRulesPrefixListModel {
 									if _, ok := itemMap["prefix_list"].(map[string]interface{}); ok {
-										return &PolicyBasedRoutingNetworkPbrNetworkPbrRulesPrefixListModel{
-										}
+										return &PolicyBasedRoutingNetworkPbrNetworkPbrRulesPrefixListModel{}
 									}
 									return nil
 								}(),
@@ -1609,7 +1584,6 @@ func (r *PolicyBasedRoutingResource) Read(ctx context.Context, req resource.Read
 			}(),
 		}
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -1811,7 +1785,6 @@ func (r *PolicyBasedRoutingResource) Update(ctx context.Context, req resource.Up
 		}
 		apiResource.Spec["network_pbr"] = network_pbrMap
 	}
-
 
 	updated, err := r.client.UpdatePolicyBasedRouting(ctx, apiResource)
 	if err != nil {

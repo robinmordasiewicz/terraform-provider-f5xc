@@ -51,35 +51,35 @@ type ChildTenantManagerEmptyModel struct {
 
 // ChildTenantManagerGroupAssignmentsModel represents group_assignments block
 type ChildTenantManagerGroupAssignmentsModel struct {
-	ChildTenantGroups types.List `tfsdk:"child_tenant_groups"`
-	Group *ChildTenantManagerGroupAssignmentsGroupModel `tfsdk:"group"`
+	ChildTenantGroups types.List                                    `tfsdk:"child_tenant_groups"`
+	Group             *ChildTenantManagerGroupAssignmentsGroupModel `tfsdk:"group"`
 }
 
 // ChildTenantManagerGroupAssignmentsGroupModel represents group block
 type ChildTenantManagerGroupAssignmentsGroupModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // ChildTenantManagerTenantOwnerGroupModel represents tenant_owner_group block
 type ChildTenantManagerTenantOwnerGroupModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 type ChildTenantManagerResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Name             types.String                              `tfsdk:"name"`
+	Namespace        types.String                              `tfsdk:"namespace"`
+	Annotations      types.Map                                 `tfsdk:"annotations"`
+	Description      types.String                              `tfsdk:"description"`
+	Disable          types.Bool                                `tfsdk:"disable"`
+	Labels           types.Map                                 `tfsdk:"labels"`
+	ID               types.String                              `tfsdk:"id"`
+	Timeouts         timeouts.Value                            `tfsdk:"timeouts"`
 	GroupAssignments []ChildTenantManagerGroupAssignmentsModel `tfsdk:"group_assignments"`
-	TenantOwnerGroup *ChildTenantManagerTenantOwnerGroupModel `tfsdk:"tenant_owner_group"`
+	TenantOwnerGroup *ChildTenantManagerTenantOwnerGroupModel  `tfsdk:"tenant_owner_group"`
 }
 
 func (r *ChildTenantManagerResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -93,7 +93,7 @@ func (r *ChildTenantManagerResource) Schema(ctx context.Context, req resource.Sc
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the ChildTenantManager. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -103,7 +103,7 @@ func (r *ChildTenantManagerResource) Schema(ctx context.Context, req resource.Sc
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the ChildTenantManager will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -113,25 +113,25 @@ func (r *ChildTenantManagerResource) Schema(ctx context.Context, req resource.Sc
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -150,8 +150,8 @@ func (r *ChildTenantManagerResource) Schema(ctx context.Context, req resource.Sc
 					Attributes: map[string]schema.Attribute{
 						"child_tenant_groups": schema.ListAttribute{
 							MarkdownDescription: "Child Tenant User Groups. List of group names in child tenant. Note - To establish access, child tenant group names must be a subset of child tenant groups configured in tenant profile. Once it's setup, when user from msp tenant access child tenant, underlying roles from child tenant will be applied to user.",
-							Optional: true,
-							ElementType: types.StringType,
+							Optional:            true,
+							ElementType:         types.StringType,
 						},
 					},
 					Blocks: map[string]schema.Block{
@@ -160,21 +160,20 @@ func (r *ChildTenantManagerResource) Schema(ctx context.Context, req resource.Sc
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-									Optional: true,
+									Optional:            true,
 								},
 								"namespace": schema.StringAttribute{
 									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-									Optional: true,
+									Optional:            true,
 								},
 								"tenant": schema.StringAttribute{
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-									Optional: true,
-									Computed: true,
+									Optional:            true,
+									Computed:            true,
 								},
 							},
 						},
 					},
-
 				},
 			},
 			"tenant_owner_group": schema.SingleNestedBlock{
@@ -182,19 +181,18 @@ func (r *ChildTenantManagerResource) Schema(ctx context.Context, req resource.Sc
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
 						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-						Optional: true,
+						Optional:            true,
 					},
 					"namespace": schema.StringAttribute{
 						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-						Optional: true,
+						Optional:            true,
 					},
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-						Optional: true,
-						Computed: true,
+						Optional:            true,
+						Computed:            true,
 					},
 				},
-
 			},
 		},
 	}
@@ -379,7 +377,6 @@ func (r *ChildTenantManagerResource) Create(ctx context.Context, req resource.Cr
 		createReq.Spec["tenant_owner_group"] = tenant_owner_groupMap
 	}
 
-
 	apiResource, err := r.client.CreateChildTenantManager(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create ChildTenantManager: %s", err))
@@ -391,7 +388,7 @@ func (r *ChildTenantManagerResource) Create(ctx context.Context, req resource.Cr
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["group_assignments"].([]interface{}); ok && len(listData) > 0 {
 		var group_assignmentsList []ChildTenantManagerGroupAssignmentsModel
 		for listIdx, item := range listData {
@@ -463,7 +460,6 @@ func (r *ChildTenantManagerResource) Create(ctx context.Context, req resource.Cr
 			}(),
 		}
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -553,9 +549,9 @@ func (r *ChildTenantManagerResource) Read(ctx context.Context, req resource.Read
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if listData, ok := apiResource.Spec["group_assignments"].([]interface{}); ok && len(listData) > 0 {
 		var group_assignmentsList []ChildTenantManagerGroupAssignmentsModel
@@ -628,7 +624,6 @@ func (r *ChildTenantManagerResource) Read(ctx context.Context, req resource.Read
 			}(),
 		}
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -723,7 +718,6 @@ func (r *ChildTenantManagerResource) Update(ctx context.Context, req resource.Up
 		}
 		apiResource.Spec["tenant_owner_group"] = tenant_owner_groupMap
 	}
-
 
 	updated, err := r.client.UpdateChildTenantManager(ctx, apiResource)
 	if err != nil {

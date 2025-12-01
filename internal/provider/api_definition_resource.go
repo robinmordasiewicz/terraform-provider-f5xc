@@ -52,36 +52,36 @@ type APIDefinitionEmptyModel struct {
 // APIDefinitionAPIInventoryExclusionListModel represents api_inventory_exclusion_list block
 type APIDefinitionAPIInventoryExclusionListModel struct {
 	Method types.String `tfsdk:"method"`
-	Path types.String `tfsdk:"path"`
+	Path   types.String `tfsdk:"path"`
 }
 
 // APIDefinitionAPIInventoryInclusionListModel represents api_inventory_inclusion_list block
 type APIDefinitionAPIInventoryInclusionListModel struct {
 	Method types.String `tfsdk:"method"`
-	Path types.String `tfsdk:"path"`
+	Path   types.String `tfsdk:"path"`
 }
 
 // APIDefinitionNonAPIEndpointsModel represents non_api_endpoints block
 type APIDefinitionNonAPIEndpointsModel struct {
 	Method types.String `tfsdk:"method"`
-	Path types.String `tfsdk:"path"`
+	Path   types.String `tfsdk:"path"`
 }
 
 type APIDefinitionResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	SwaggerSpecs types.List `tfsdk:"swagger_specs"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Name                      types.String                                  `tfsdk:"name"`
+	Namespace                 types.String                                  `tfsdk:"namespace"`
+	Annotations               types.Map                                     `tfsdk:"annotations"`
+	Description               types.String                                  `tfsdk:"description"`
+	Disable                   types.Bool                                    `tfsdk:"disable"`
+	Labels                    types.Map                                     `tfsdk:"labels"`
+	SwaggerSpecs              types.List                                    `tfsdk:"swagger_specs"`
+	ID                        types.String                                  `tfsdk:"id"`
+	Timeouts                  timeouts.Value                                `tfsdk:"timeouts"`
 	APIInventoryExclusionList []APIDefinitionAPIInventoryExclusionListModel `tfsdk:"api_inventory_exclusion_list"`
 	APIInventoryInclusionList []APIDefinitionAPIInventoryInclusionListModel `tfsdk:"api_inventory_inclusion_list"`
-	MixedSchemaOrigin *APIDefinitionEmptyModel `tfsdk:"mixed_schema_origin"`
-	NonAPIEndpoints []APIDefinitionNonAPIEndpointsModel `tfsdk:"non_api_endpoints"`
-	StrictSchemaOrigin *APIDefinitionEmptyModel `tfsdk:"strict_schema_origin"`
+	MixedSchemaOrigin         *APIDefinitionEmptyModel                      `tfsdk:"mixed_schema_origin"`
+	NonAPIEndpoints           []APIDefinitionNonAPIEndpointsModel           `tfsdk:"non_api_endpoints"`
+	StrictSchemaOrigin        *APIDefinitionEmptyModel                      `tfsdk:"strict_schema_origin"`
 }
 
 func (r *APIDefinitionResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -95,7 +95,7 @@ func (r *APIDefinitionResource) Schema(ctx context.Context, req resource.SchemaR
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the APIDefinition. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -105,7 +105,7 @@ func (r *APIDefinitionResource) Schema(ctx context.Context, req resource.SchemaR
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the APIDefinition will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -115,30 +115,30 @@ func (r *APIDefinitionResource) Schema(ctx context.Context, req resource.SchemaR
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"swagger_specs": schema.ListAttribute{
 				MarkdownDescription: "File Path. Define your application API by single or multiple OpenAPI files. 1. Upload your OpenAPI files via Web App & API Protection-> Files-> Swagger Files. 2. Select from the list of uploaded files. Notice file versions. If OpenAPI file is updated, need to select a new version here to redefine the API.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -157,14 +157,13 @@ func (r *APIDefinitionResource) Schema(ctx context.Context, req resource.SchemaR
 					Attributes: map[string]schema.Attribute{
 						"method": schema.StringAttribute{
 							MarkdownDescription: "HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
-							Optional: true,
+							Optional:            true,
 						},
 						"path": schema.StringAttribute{
 							MarkdownDescription: "Path. An endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification",
-							Optional: true,
+							Optional:            true,
 						},
 					},
-
 				},
 			},
 			"api_inventory_inclusion_list": schema.ListNestedBlock{
@@ -173,14 +172,13 @@ func (r *APIDefinitionResource) Schema(ctx context.Context, req resource.SchemaR
 					Attributes: map[string]schema.Attribute{
 						"method": schema.StringAttribute{
 							MarkdownDescription: "HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
-							Optional: true,
+							Optional:            true,
 						},
 						"path": schema.StringAttribute{
 							MarkdownDescription: "Path. An endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification",
-							Optional: true,
+							Optional:            true,
 						},
 					},
-
 				},
 			},
 			"mixed_schema_origin": schema.SingleNestedBlock{
@@ -192,14 +190,13 @@ func (r *APIDefinitionResource) Schema(ctx context.Context, req resource.SchemaR
 					Attributes: map[string]schema.Attribute{
 						"method": schema.StringAttribute{
 							MarkdownDescription: "HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
-							Optional: true,
+							Optional:            true,
 						},
 						"path": schema.StringAttribute{
 							MarkdownDescription: "Path. An endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification",
-							Optional: true,
+							Optional:            true,
 						},
 					},
-
 				},
 			},
 			"strict_schema_origin": schema.SingleNestedBlock{
@@ -411,7 +408,6 @@ func (r *APIDefinitionResource) Create(ctx context.Context, req resource.CreateR
 		}
 	}
 
-
 	apiResource, err := r.client.CreateAPIDefinition(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create APIDefinition: %s", err))
@@ -423,7 +419,7 @@ func (r *APIDefinitionResource) Create(ctx context.Context, req resource.CreateR
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["api_inventory_exclusion_list"].([]interface{}); ok && len(listData) > 0 {
 		var api_inventory_exclusion_listList []APIDefinitionAPIInventoryExclusionListModel
 		for listIdx, item := range listData {
@@ -518,7 +514,6 @@ func (r *APIDefinitionResource) Create(ctx context.Context, req resource.CreateR
 	} else {
 		data.SwaggerSpecs = types.ListNull(types.StringType)
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -608,9 +603,9 @@ func (r *APIDefinitionResource) Read(ctx context.Context, req resource.ReadReque
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if listData, ok := apiResource.Spec["api_inventory_exclusion_list"].([]interface{}); ok && len(listData) > 0 {
 		var api_inventory_exclusion_listList []APIDefinitionAPIInventoryExclusionListModel
@@ -706,7 +701,6 @@ func (r *APIDefinitionResource) Read(ctx context.Context, req resource.ReadReque
 	} else {
 		data.SwaggerSpecs = types.ListNull(types.StringType)
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -824,7 +818,6 @@ func (r *APIDefinitionResource) Update(ctx context.Context, req resource.UpdateR
 			apiResource.Spec["swagger_specs"] = swagger_specsList
 		}
 	}
-
 
 	updated, err := r.client.UpdateAPIDefinition(ctx, apiResource)
 	if err != nil {

@@ -51,32 +51,32 @@ type FastACLEmptyModel struct {
 
 // FastACLProtocolPolicerModel represents protocol_policer block
 type FastACLProtocolPolicerModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // FastACLReACLModel represents re_acl block
 type FastACLReACLModel struct {
-	AllPublicVips *FastACLEmptyModel `tfsdk:"all_public_vips"`
-	DefaultTenantVip *FastACLEmptyModel `tfsdk:"default_tenant_vip"`
-	FastACLRules []FastACLReACLFastACLRulesModel `tfsdk:"fast_acl_rules"`
+	AllPublicVips     *FastACLEmptyModel                  `tfsdk:"all_public_vips"`
+	DefaultTenantVip  *FastACLEmptyModel                  `tfsdk:"default_tenant_vip"`
+	FastACLRules      []FastACLReACLFastACLRulesModel     `tfsdk:"fast_acl_rules"`
 	SelectedTenantVip *FastACLReACLSelectedTenantVipModel `tfsdk:"selected_tenant_vip"`
 }
 
 // FastACLReACLFastACLRulesModel represents fast_acl_rules block
 type FastACLReACLFastACLRulesModel struct {
-	Action *FastACLReACLFastACLRulesActionModel `tfsdk:"action"`
+	Action      *FastACLReACLFastACLRulesActionModel      `tfsdk:"action"`
 	IPPrefixSet *FastACLReACLFastACLRulesIPPrefixSetModel `tfsdk:"ip_prefix_set"`
-	Metadata *FastACLReACLFastACLRulesMetadataModel `tfsdk:"metadata"`
-	Port []FastACLReACLFastACLRulesPortModel `tfsdk:"port"`
-	Prefix *FastACLReACLFastACLRulesPrefixModel `tfsdk:"prefix"`
+	Metadata    *FastACLReACLFastACLRulesMetadataModel    `tfsdk:"metadata"`
+	Port        []FastACLReACLFastACLRulesPortModel       `tfsdk:"port"`
+	Prefix      *FastACLReACLFastACLRulesPrefixModel      `tfsdk:"prefix"`
 }
 
 // FastACLReACLFastACLRulesActionModel represents action block
 type FastACLReACLFastACLRulesActionModel struct {
-	SimpleAction types.String `tfsdk:"simple_action"`
-	PolicerAction *FastACLReACLFastACLRulesActionPolicerActionModel `tfsdk:"policer_action"`
+	SimpleAction          types.String                                              `tfsdk:"simple_action"`
+	PolicerAction         *FastACLReACLFastACLRulesActionPolicerActionModel         `tfsdk:"policer_action"`
 	ProtocolPolicerAction *FastACLReACLFastACLRulesActionProtocolPolicerActionModel `tfsdk:"protocol_policer_action"`
 }
 
@@ -87,11 +87,11 @@ type FastACLReACLFastACLRulesActionPolicerActionModel struct {
 
 // FastACLReACLFastACLRulesActionPolicerActionRefModel represents ref block
 type FastACLReACLFastACLRulesActionPolicerActionRefModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // FastACLReACLFastACLRulesActionProtocolPolicerActionModel represents protocol_policer_action block
@@ -101,11 +101,11 @@ type FastACLReACLFastACLRulesActionProtocolPolicerActionModel struct {
 
 // FastACLReACLFastACLRulesActionProtocolPolicerActionRefModel represents ref block
 type FastACLReACLFastACLRulesActionProtocolPolicerActionRefModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // FastACLReACLFastACLRulesIPPrefixSetModel represents ip_prefix_set block
@@ -115,24 +115,24 @@ type FastACLReACLFastACLRulesIPPrefixSetModel struct {
 
 // FastACLReACLFastACLRulesIPPrefixSetRefModel represents ref block
 type FastACLReACLFastACLRulesIPPrefixSetRefModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // FastACLReACLFastACLRulesMetadataModel represents metadata block
 type FastACLReACLFastACLRulesMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
-	Name types.String `tfsdk:"name"`
+	Name            types.String `tfsdk:"name"`
 }
 
 // FastACLReACLFastACLRulesPortModel represents port block
 type FastACLReACLFastACLRulesPortModel struct {
-	UserDefined types.Int64 `tfsdk:"user_defined"`
-	All *FastACLEmptyModel `tfsdk:"all"`
-	DNS *FastACLEmptyModel `tfsdk:"dns"`
+	UserDefined types.Int64        `tfsdk:"user_defined"`
+	All         *FastACLEmptyModel `tfsdk:"all"`
+	DNS         *FastACLEmptyModel `tfsdk:"dns"`
 }
 
 // FastACLReACLFastACLRulesPrefixModel represents prefix block
@@ -142,40 +142,40 @@ type FastACLReACLFastACLRulesPrefixModel struct {
 
 // FastACLReACLSelectedTenantVipModel represents selected_tenant_vip block
 type FastACLReACLSelectedTenantVipModel struct {
-	DefaultTenantVip types.Bool `tfsdk:"default_tenant_vip"`
-	PublicIPRefs []FastACLReACLSelectedTenantVipPublicIPRefsModel `tfsdk:"public_ip_refs"`
+	DefaultTenantVip types.Bool                                       `tfsdk:"default_tenant_vip"`
+	PublicIPRefs     []FastACLReACLSelectedTenantVipPublicIPRefsModel `tfsdk:"public_ip_refs"`
 }
 
 // FastACLReACLSelectedTenantVipPublicIPRefsModel represents public_ip_refs block
 type FastACLReACLSelectedTenantVipPublicIPRefsModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // FastACLSiteACLModel represents site_acl block
 type FastACLSiteACLModel struct {
-	AllServices *FastACLEmptyModel `tfsdk:"all_services"`
-	FastACLRules []FastACLSiteACLFastACLRulesModel `tfsdk:"fast_acl_rules"`
-	InsideNetwork *FastACLEmptyModel `tfsdk:"inside_network"`
-	InterfaceServices *FastACLEmptyModel `tfsdk:"interface_services"`
-	OutsideNetwork *FastACLEmptyModel `tfsdk:"outside_network"`
-	VipServices *FastACLEmptyModel `tfsdk:"vip_services"`
+	AllServices       *FastACLEmptyModel                `tfsdk:"all_services"`
+	FastACLRules      []FastACLSiteACLFastACLRulesModel `tfsdk:"fast_acl_rules"`
+	InsideNetwork     *FastACLEmptyModel                `tfsdk:"inside_network"`
+	InterfaceServices *FastACLEmptyModel                `tfsdk:"interface_services"`
+	OutsideNetwork    *FastACLEmptyModel                `tfsdk:"outside_network"`
+	VipServices       *FastACLEmptyModel                `tfsdk:"vip_services"`
 }
 
 // FastACLSiteACLFastACLRulesModel represents fast_acl_rules block
 type FastACLSiteACLFastACLRulesModel struct {
-	Action *FastACLSiteACLFastACLRulesActionModel `tfsdk:"action"`
+	Action      *FastACLSiteACLFastACLRulesActionModel      `tfsdk:"action"`
 	IPPrefixSet *FastACLSiteACLFastACLRulesIPPrefixSetModel `tfsdk:"ip_prefix_set"`
-	Metadata *FastACLSiteACLFastACLRulesMetadataModel `tfsdk:"metadata"`
-	Port []FastACLSiteACLFastACLRulesPortModel `tfsdk:"port"`
-	Prefix *FastACLSiteACLFastACLRulesPrefixModel `tfsdk:"prefix"`
+	Metadata    *FastACLSiteACLFastACLRulesMetadataModel    `tfsdk:"metadata"`
+	Port        []FastACLSiteACLFastACLRulesPortModel       `tfsdk:"port"`
+	Prefix      *FastACLSiteACLFastACLRulesPrefixModel      `tfsdk:"prefix"`
 }
 
 // FastACLSiteACLFastACLRulesActionModel represents action block
 type FastACLSiteACLFastACLRulesActionModel struct {
-	SimpleAction types.String `tfsdk:"simple_action"`
-	PolicerAction *FastACLSiteACLFastACLRulesActionPolicerActionModel `tfsdk:"policer_action"`
+	SimpleAction          types.String                                                `tfsdk:"simple_action"`
+	PolicerAction         *FastACLSiteACLFastACLRulesActionPolicerActionModel         `tfsdk:"policer_action"`
 	ProtocolPolicerAction *FastACLSiteACLFastACLRulesActionProtocolPolicerActionModel `tfsdk:"protocol_policer_action"`
 }
 
@@ -186,11 +186,11 @@ type FastACLSiteACLFastACLRulesActionPolicerActionModel struct {
 
 // FastACLSiteACLFastACLRulesActionPolicerActionRefModel represents ref block
 type FastACLSiteACLFastACLRulesActionPolicerActionRefModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // FastACLSiteACLFastACLRulesActionProtocolPolicerActionModel represents protocol_policer_action block
@@ -200,11 +200,11 @@ type FastACLSiteACLFastACLRulesActionProtocolPolicerActionModel struct {
 
 // FastACLSiteACLFastACLRulesActionProtocolPolicerActionRefModel represents ref block
 type FastACLSiteACLFastACLRulesActionProtocolPolicerActionRefModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // FastACLSiteACLFastACLRulesIPPrefixSetModel represents ip_prefix_set block
@@ -214,24 +214,24 @@ type FastACLSiteACLFastACLRulesIPPrefixSetModel struct {
 
 // FastACLSiteACLFastACLRulesIPPrefixSetRefModel represents ref block
 type FastACLSiteACLFastACLRulesIPPrefixSetRefModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // FastACLSiteACLFastACLRulesMetadataModel represents metadata block
 type FastACLSiteACLFastACLRulesMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
-	Name types.String `tfsdk:"name"`
+	Name            types.String `tfsdk:"name"`
 }
 
 // FastACLSiteACLFastACLRulesPortModel represents port block
 type FastACLSiteACLFastACLRulesPortModel struct {
-	UserDefined types.Int64 `tfsdk:"user_defined"`
-	All *FastACLEmptyModel `tfsdk:"all"`
-	DNS *FastACLEmptyModel `tfsdk:"dns"`
+	UserDefined types.Int64        `tfsdk:"user_defined"`
+	All         *FastACLEmptyModel `tfsdk:"all"`
+	DNS         *FastACLEmptyModel `tfsdk:"dns"`
 }
 
 // FastACLSiteACLFastACLRulesPrefixModel represents prefix block
@@ -240,17 +240,17 @@ type FastACLSiteACLFastACLRulesPrefixModel struct {
 }
 
 type FastACLResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Name            types.String                 `tfsdk:"name"`
+	Namespace       types.String                 `tfsdk:"namespace"`
+	Annotations     types.Map                    `tfsdk:"annotations"`
+	Description     types.String                 `tfsdk:"description"`
+	Disable         types.Bool                   `tfsdk:"disable"`
+	Labels          types.Map                    `tfsdk:"labels"`
+	ID              types.String                 `tfsdk:"id"`
+	Timeouts        timeouts.Value               `tfsdk:"timeouts"`
 	ProtocolPolicer *FastACLProtocolPolicerModel `tfsdk:"protocol_policer"`
-	ReACL *FastACLReACLModel `tfsdk:"re_acl"`
-	SiteACL *FastACLSiteACLModel `tfsdk:"site_acl"`
+	ReACL           *FastACLReACLModel           `tfsdk:"re_acl"`
+	SiteACL         *FastACLSiteACLModel         `tfsdk:"site_acl"`
 }
 
 func (r *FastACLResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -264,7 +264,7 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the FastACL. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -274,7 +274,7 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the FastACL will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -284,25 +284,25 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -320,24 +320,22 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
 						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-						Optional: true,
+						Optional:            true,
 					},
 					"namespace": schema.StringAttribute{
 						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-						Optional: true,
+						Optional:            true,
 					},
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-						Optional: true,
-						Computed: true,
+						Optional:            true,
+						Computed:            true,
 					},
 				},
-
 			},
 			"re_acl": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: re_acl, site_acl] Fast ACL for RE. Fast ACL definition for RE",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"all_public_vips": schema.SingleNestedBlock{
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -348,22 +346,20 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 					"fast_acl_rules": schema.ListNestedBlock{
 						MarkdownDescription: "Rules. Fast ACL rules to match",
 						NestedObject: schema.NestedBlockObject{
-							Attributes: map[string]schema.Attribute{
-							},
+							Attributes: map[string]schema.Attribute{},
 							Blocks: map[string]schema.Block{
 								"action": schema.SingleNestedBlock{
 									MarkdownDescription: "Action. FastAclRuleAction specifies possible action to be applied on traffic, possible action include dropping, forwarding or ratelimiting the traffic",
 									Attributes: map[string]schema.Attribute{
 										"simple_action": schema.StringAttribute{
 											MarkdownDescription: "Simple Action. FastAclRuleSimpleAction specifies simple action like PASS or DENY Drop the traffic Forward the traffic. Possible values are `DENY`, `ALLOW`. Defaults to `DENY`.",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"policer_action": schema.SingleNestedBlock{
 											MarkdownDescription: "Policer Reference. Reference to policer object",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"ref": schema.ListNestedBlock{
 													MarkdownDescription: "Reference. A policer direct reference",
@@ -371,26 +367,26 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 														Attributes: map[string]schema.Attribute{
 															"kind": schema.StringAttribute{
 																MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-																Optional: true,
-																Computed: true,
+																Optional:            true,
+																Computed:            true,
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-																Optional: true,
+																Optional:            true,
 															},
 															"namespace": schema.StringAttribute{
 																MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-																Optional: true,
+																Optional:            true,
 															},
 															"tenant": schema.StringAttribute{
 																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-																Optional: true,
-																Computed: true,
+																Optional:            true,
+																Computed:            true,
 															},
 															"uid": schema.StringAttribute{
 																MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-																Optional: true,
-																Computed: true,
+																Optional:            true,
+																Computed:            true,
 															},
 														},
 													},
@@ -399,8 +395,7 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 										},
 										"protocol_policer_action": schema.SingleNestedBlock{
 											MarkdownDescription: "Protocol Policer Reference. Reference to policer object",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"ref": schema.ListNestedBlock{
 													MarkdownDescription: "Protocol policer Reference. Reference to protocol policer object",
@@ -408,26 +403,26 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 														Attributes: map[string]schema.Attribute{
 															"kind": schema.StringAttribute{
 																MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-																Optional: true,
-																Computed: true,
+																Optional:            true,
+																Computed:            true,
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-																Optional: true,
+																Optional:            true,
 															},
 															"namespace": schema.StringAttribute{
 																MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-																Optional: true,
+																Optional:            true,
 															},
 															"tenant": schema.StringAttribute{
 																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-																Optional: true,
-																Computed: true,
+																Optional:            true,
+																Computed:            true,
 															},
 															"uid": schema.StringAttribute{
 																MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-																Optional: true,
-																Computed: true,
+																Optional:            true,
+																Computed:            true,
 															},
 														},
 													},
@@ -438,8 +433,7 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 								},
 								"ip_prefix_set": schema.SingleNestedBlock{
 									MarkdownDescription: "IP Prefix Set Reference. A list of references to ip_prefix_set objects.",
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"ref": schema.ListNestedBlock{
 											MarkdownDescription: "Reference. A list of references to ip_prefix_set objects.",
@@ -447,26 +441,26 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 												Attributes: map[string]schema.Attribute{
 													"kind": schema.StringAttribute{
 														MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-														Optional: true,
-														Computed: true,
+														Optional:            true,
+														Computed:            true,
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-														Optional: true,
+														Optional:            true,
 													},
 													"namespace": schema.StringAttribute{
 														MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-														Optional: true,
+														Optional:            true,
 													},
 													"tenant": schema.StringAttribute{
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-														Optional: true,
-														Computed: true,
+														Optional:            true,
+														Computed:            true,
 													},
 													"uid": schema.StringAttribute{
 														MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-														Optional: true,
-														Computed: true,
+														Optional:            true,
+														Computed:            true,
 													},
 												},
 											},
@@ -478,11 +472,11 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 									Attributes: map[string]schema.Attribute{
 										"description_spec": schema.StringAttribute{
 											MarkdownDescription: "Description. Human readable description.",
-											Optional: true,
+											Optional:            true,
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 								},
@@ -492,7 +486,7 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 										Attributes: map[string]schema.Attribute{
 											"user_defined": schema.Int64Attribute{
 												MarkdownDescription: "User defined port. Matches the user defined port",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 										Blocks: map[string]schema.Block{
@@ -510,8 +504,8 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 									Attributes: map[string]schema.Attribute{
 										"prefix": schema.ListAttribute{
 											MarkdownDescription: "Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 									},
 								},
@@ -523,7 +517,7 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 						Attributes: map[string]schema.Attribute{
 							"default_tenant_vip": schema.BoolAttribute{
 								MarkdownDescription: "Include Tenant VIP. Include tenant vip in list of specific VIP(s)",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -533,16 +527,16 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-											Optional: true,
+											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
 											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-											Optional: true,
+											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
@@ -550,12 +544,10 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 						},
 					},
 				},
-
 			},
 			"site_acl": schema.SingleNestedBlock{
 				MarkdownDescription: "Fast ACL for Site. Fast ACL definition for Site",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"all_services": schema.SingleNestedBlock{
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -563,22 +555,20 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 					"fast_acl_rules": schema.ListNestedBlock{
 						MarkdownDescription: "Rules. Fast ACL rules to match",
 						NestedObject: schema.NestedBlockObject{
-							Attributes: map[string]schema.Attribute{
-							},
+							Attributes: map[string]schema.Attribute{},
 							Blocks: map[string]schema.Block{
 								"action": schema.SingleNestedBlock{
 									MarkdownDescription: "Action. FastAclRuleAction specifies possible action to be applied on traffic, possible action include dropping, forwarding or ratelimiting the traffic",
 									Attributes: map[string]schema.Attribute{
 										"simple_action": schema.StringAttribute{
 											MarkdownDescription: "Simple Action. FastAclRuleSimpleAction specifies simple action like PASS or DENY Drop the traffic Forward the traffic. Possible values are `DENY`, `ALLOW`. Defaults to `DENY`.",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"policer_action": schema.SingleNestedBlock{
 											MarkdownDescription: "Policer Reference. Reference to policer object",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"ref": schema.ListNestedBlock{
 													MarkdownDescription: "Reference. A policer direct reference",
@@ -586,26 +576,26 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 														Attributes: map[string]schema.Attribute{
 															"kind": schema.StringAttribute{
 																MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-																Optional: true,
-																Computed: true,
+																Optional:            true,
+																Computed:            true,
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-																Optional: true,
+																Optional:            true,
 															},
 															"namespace": schema.StringAttribute{
 																MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-																Optional: true,
+																Optional:            true,
 															},
 															"tenant": schema.StringAttribute{
 																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-																Optional: true,
-																Computed: true,
+																Optional:            true,
+																Computed:            true,
 															},
 															"uid": schema.StringAttribute{
 																MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-																Optional: true,
-																Computed: true,
+																Optional:            true,
+																Computed:            true,
 															},
 														},
 													},
@@ -614,8 +604,7 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 										},
 										"protocol_policer_action": schema.SingleNestedBlock{
 											MarkdownDescription: "Protocol Policer Reference. Reference to policer object",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"ref": schema.ListNestedBlock{
 													MarkdownDescription: "Protocol policer Reference. Reference to protocol policer object",
@@ -623,26 +612,26 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 														Attributes: map[string]schema.Attribute{
 															"kind": schema.StringAttribute{
 																MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-																Optional: true,
-																Computed: true,
+																Optional:            true,
+																Computed:            true,
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-																Optional: true,
+																Optional:            true,
 															},
 															"namespace": schema.StringAttribute{
 																MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-																Optional: true,
+																Optional:            true,
 															},
 															"tenant": schema.StringAttribute{
 																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-																Optional: true,
-																Computed: true,
+																Optional:            true,
+																Computed:            true,
 															},
 															"uid": schema.StringAttribute{
 																MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-																Optional: true,
-																Computed: true,
+																Optional:            true,
+																Computed:            true,
 															},
 														},
 													},
@@ -653,8 +642,7 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 								},
 								"ip_prefix_set": schema.SingleNestedBlock{
 									MarkdownDescription: "IP Prefix Set Reference. A list of references to ip_prefix_set objects.",
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"ref": schema.ListNestedBlock{
 											MarkdownDescription: "Reference. A list of references to ip_prefix_set objects.",
@@ -662,26 +650,26 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 												Attributes: map[string]schema.Attribute{
 													"kind": schema.StringAttribute{
 														MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-														Optional: true,
-														Computed: true,
+														Optional:            true,
+														Computed:            true,
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-														Optional: true,
+														Optional:            true,
 													},
 													"namespace": schema.StringAttribute{
 														MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-														Optional: true,
+														Optional:            true,
 													},
 													"tenant": schema.StringAttribute{
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-														Optional: true,
-														Computed: true,
+														Optional:            true,
+														Computed:            true,
 													},
 													"uid": schema.StringAttribute{
 														MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-														Optional: true,
-														Computed: true,
+														Optional:            true,
+														Computed:            true,
 													},
 												},
 											},
@@ -693,11 +681,11 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 									Attributes: map[string]schema.Attribute{
 										"description_spec": schema.StringAttribute{
 											MarkdownDescription: "Description. Human readable description.",
-											Optional: true,
+											Optional:            true,
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 								},
@@ -707,7 +695,7 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 										Attributes: map[string]schema.Attribute{
 											"user_defined": schema.Int64Attribute{
 												MarkdownDescription: "User defined port. Matches the user defined port",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 										Blocks: map[string]schema.Block{
@@ -725,8 +713,8 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 									Attributes: map[string]schema.Attribute{
 										"prefix": schema.ListAttribute{
 											MarkdownDescription: "Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 									},
 								},
@@ -746,7 +734,6 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 		},
 	}
@@ -1012,7 +999,6 @@ func (r *FastACLResource) Create(ctx context.Context, req resource.CreateRequest
 		createReq.Spec["site_acl"] = site_aclMap
 	}
 
-
 	apiResource, err := r.client.CreateFastACL(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create FastACL: %s", err))
@@ -1024,7 +1010,7 @@ func (r *FastACLResource) Create(ctx context.Context, req resource.CreateRequest
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if blockData, ok := apiResource.Spec["protocol_policer"].(map[string]interface{}); ok && (isImport || data.ProtocolPolicer != nil) {
 		data.ProtocolPolicer = &FastACLProtocolPolicerModel{
 			Name: func() types.String {
@@ -1094,8 +1080,7 @@ func (r *FastACLResource) Create(ctx context.Context, req resource.CreateRequest
 								}(),
 								IPPrefixSet: func() *FastACLReACLFastACLRulesIPPrefixSetModel {
 									if _, ok := itemMap["ip_prefix_set"].(map[string]interface{}); ok {
-										return &FastACLReACLFastACLRulesIPPrefixSetModel{
-										}
+										return &FastACLReACLFastACLRulesIPPrefixSetModel{}
 									}
 									return nil
 								}(),
@@ -1120,8 +1105,7 @@ func (r *FastACLResource) Create(ctx context.Context, req resource.CreateRequest
 								}(),
 								Prefix: func() *FastACLReACLFastACLRulesPrefixModel {
 									if _, ok := itemMap["prefix"].(map[string]interface{}); ok {
-										return &FastACLReACLFastACLRulesPrefixModel{
-										}
+										return &FastACLReACLFastACLRulesPrefixModel{}
 									}
 									return nil
 								}(),
@@ -1187,8 +1171,7 @@ func (r *FastACLResource) Create(ctx context.Context, req resource.CreateRequest
 								}(),
 								IPPrefixSet: func() *FastACLSiteACLFastACLRulesIPPrefixSetModel {
 									if _, ok := itemMap["ip_prefix_set"].(map[string]interface{}); ok {
-										return &FastACLSiteACLFastACLRulesIPPrefixSetModel{
-										}
+										return &FastACLSiteACLFastACLRulesIPPrefixSetModel{}
 									}
 									return nil
 								}(),
@@ -1213,8 +1196,7 @@ func (r *FastACLResource) Create(ctx context.Context, req resource.CreateRequest
 								}(),
 								Prefix: func() *FastACLSiteACLFastACLRulesPrefixModel {
 									if _, ok := itemMap["prefix"].(map[string]interface{}); ok {
-										return &FastACLSiteACLFastACLRulesPrefixModel{
-										}
+										return &FastACLSiteACLFastACLRulesPrefixModel{}
 									}
 									return nil
 								}(),
@@ -1275,7 +1257,6 @@ func (r *FastACLResource) Create(ctx context.Context, req resource.CreateRequest
 			}(),
 		}
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -1365,9 +1346,9 @@ func (r *FastACLResource) Read(ctx context.Context, req resource.ReadRequest, re
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if blockData, ok := apiResource.Spec["protocol_policer"].(map[string]interface{}); ok && (isImport || data.ProtocolPolicer != nil) {
 		data.ProtocolPolicer = &FastACLProtocolPolicerModel{
@@ -1438,8 +1419,7 @@ func (r *FastACLResource) Read(ctx context.Context, req resource.ReadRequest, re
 								}(),
 								IPPrefixSet: func() *FastACLReACLFastACLRulesIPPrefixSetModel {
 									if _, ok := itemMap["ip_prefix_set"].(map[string]interface{}); ok {
-										return &FastACLReACLFastACLRulesIPPrefixSetModel{
-										}
+										return &FastACLReACLFastACLRulesIPPrefixSetModel{}
 									}
 									return nil
 								}(),
@@ -1464,8 +1444,7 @@ func (r *FastACLResource) Read(ctx context.Context, req resource.ReadRequest, re
 								}(),
 								Prefix: func() *FastACLReACLFastACLRulesPrefixModel {
 									if _, ok := itemMap["prefix"].(map[string]interface{}); ok {
-										return &FastACLReACLFastACLRulesPrefixModel{
-										}
+										return &FastACLReACLFastACLRulesPrefixModel{}
 									}
 									return nil
 								}(),
@@ -1531,8 +1510,7 @@ func (r *FastACLResource) Read(ctx context.Context, req resource.ReadRequest, re
 								}(),
 								IPPrefixSet: func() *FastACLSiteACLFastACLRulesIPPrefixSetModel {
 									if _, ok := itemMap["ip_prefix_set"].(map[string]interface{}); ok {
-										return &FastACLSiteACLFastACLRulesIPPrefixSetModel{
-										}
+										return &FastACLSiteACLFastACLRulesIPPrefixSetModel{}
 									}
 									return nil
 								}(),
@@ -1557,8 +1535,7 @@ func (r *FastACLResource) Read(ctx context.Context, req resource.ReadRequest, re
 								}(),
 								Prefix: func() *FastACLSiteACLFastACLRulesPrefixModel {
 									if _, ok := itemMap["prefix"].(map[string]interface{}); ok {
-										return &FastACLSiteACLFastACLRulesPrefixModel{
-										}
+										return &FastACLSiteACLFastACLRulesPrefixModel{}
 									}
 									return nil
 								}(),
@@ -1619,7 +1596,6 @@ func (r *FastACLResource) Read(ctx context.Context, req resource.ReadRequest, re
 			}(),
 		}
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -1795,7 +1771,6 @@ func (r *FastACLResource) Update(ctx context.Context, req resource.UpdateRequest
 		}
 		apiResource.Spec["site_acl"] = site_aclMap
 	}
-
 
 	updated, err := r.client.UpdateFastACL(ctx, apiResource)
 	if err != nil {

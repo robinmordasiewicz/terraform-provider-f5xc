@@ -58,27 +58,27 @@ type SecretPolicyRuleListModel struct {
 // SecretPolicyRuleListRulesModel represents rules block
 type SecretPolicyRuleListRulesModel struct {
 	Metadata *SecretPolicyRuleListRulesMetadataModel `tfsdk:"metadata"`
-	Spec *SecretPolicyRuleListRulesSpecModel `tfsdk:"spec"`
+	Spec     *SecretPolicyRuleListRulesSpecModel     `tfsdk:"spec"`
 }
 
 // SecretPolicyRuleListRulesMetadataModel represents metadata block
 type SecretPolicyRuleListRulesMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
-	Name types.String `tfsdk:"name"`
+	Name            types.String `tfsdk:"name"`
 }
 
 // SecretPolicyRuleListRulesSpecModel represents spec block
 type SecretPolicyRuleListRulesSpecModel struct {
-	Action types.String `tfsdk:"action"`
-	ClientName types.String `tfsdk:"client_name"`
+	Action            types.String                                         `tfsdk:"action"`
+	ClientName        types.String                                         `tfsdk:"client_name"`
 	ClientNameMatcher *SecretPolicyRuleListRulesSpecClientNameMatcherModel `tfsdk:"client_name_matcher"`
-	ClientSelector *SecretPolicyRuleListRulesSpecClientSelectorModel `tfsdk:"client_selector"`
+	ClientSelector    *SecretPolicyRuleListRulesSpecClientSelectorModel    `tfsdk:"client_selector"`
 }
 
 // SecretPolicyRuleListRulesSpecClientNameMatcherModel represents client_name_matcher block
 type SecretPolicyRuleListRulesSpecClientNameMatcherModel struct {
-	ExactValues types.List `tfsdk:"exact_values"`
-	RegexValues types.List `tfsdk:"regex_values"`
+	ExactValues  types.List `tfsdk:"exact_values"`
+	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
 }
 
@@ -88,17 +88,17 @@ type SecretPolicyRuleListRulesSpecClientSelectorModel struct {
 }
 
 type SecretPolicyResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	AllowF5xc types.Bool `tfsdk:"allow_f5xc"`
-	DecryptCacheTimeout types.String `tfsdk:"decrypt_cache_timeout"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	RuleList *SecretPolicyRuleListModel `tfsdk:"rule_list"`
+	Name                types.String               `tfsdk:"name"`
+	Namespace           types.String               `tfsdk:"namespace"`
+	Annotations         types.Map                  `tfsdk:"annotations"`
+	Description         types.String               `tfsdk:"description"`
+	Disable             types.Bool                 `tfsdk:"disable"`
+	Labels              types.Map                  `tfsdk:"labels"`
+	ID                  types.String               `tfsdk:"id"`
+	AllowF5xc           types.Bool                 `tfsdk:"allow_f5xc"`
+	DecryptCacheTimeout types.String               `tfsdk:"decrypt_cache_timeout"`
+	Timeouts            timeouts.Value             `tfsdk:"timeouts"`
+	RuleList            *SecretPolicyRuleListModel `tfsdk:"rule_list"`
 }
 
 func (r *SecretPolicyResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -112,7 +112,7 @@ func (r *SecretPolicyResource) Schema(ctx context.Context, req resource.SchemaRe
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the SecretPolicy. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -122,7 +122,7 @@ func (r *SecretPolicyResource) Schema(ctx context.Context, req resource.SchemaRe
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the SecretPolicy will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -132,41 +132,41 @@ func (r *SecretPolicyResource) Schema(ctx context.Context, req resource.SchemaRe
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"allow_f5xc": schema.BoolAttribute{
 				MarkdownDescription: "Allow F5XC. if allow_f5xc is set to true, it allows relevant F5XC infrastructure services to decrypt the secret encrypted using this policy.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.Bool{
 					boolplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"decrypt_cache_timeout": schema.StringAttribute{
 				MarkdownDescription: "Decrypt Cache Timeout. decrypt_cache_timeout contains the amount of time a decrypted secret is cached in wingman. Value for this parameter is a string ending in the suffix 's' (indicating seconds), suffix 'm' (indicating minutes) or suffix 'h' (indicating hours)",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -181,25 +181,23 @@ func (r *SecretPolicyResource) Schema(ctx context.Context, req resource.SchemaRe
 			}),
 			"rule_list": schema.SingleNestedBlock{
 				MarkdownDescription: "Rule List. A list of rules. The order of evaluation of the rules depends on the rule combining algorithm.",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"rules": schema.ListNestedBlock{
 						MarkdownDescription: "Rules. Define the list of rules (with an order) that should be evaluated by this service policy. Rules are evaluated from top to bottom in the list.",
 						NestedObject: schema.NestedBlockObject{
-							Attributes: map[string]schema.Attribute{
-							},
+							Attributes: map[string]schema.Attribute{},
 							Blocks: map[string]schema.Block{
 								"metadata": schema.SingleNestedBlock{
 									MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 									Attributes: map[string]schema.Attribute{
 										"description_spec": schema.StringAttribute{
 											MarkdownDescription: "Description. Human readable description.",
-											Optional: true,
+											Optional:            true,
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 								},
@@ -208,11 +206,11 @@ func (r *SecretPolicyResource) Schema(ctx context.Context, req resource.SchemaRe
 									Attributes: map[string]schema.Attribute{
 										"action": schema.StringAttribute{
 											MarkdownDescription: "Rule Action. The rule action determines the disposition of the input request API. If a policy matches a rule with an ALLOW action, the processing of the request proceeds forward. If it matches a rule with a DENY action, the processing of the request is terminated and an appropriate message/code returned to the originator. If it matches a rule with a NEXT_POLICY_SET action, evaluation of the current policy set terminates and evaluation of the next policy set in the chain begins. - DENY: DENY Deny the request. - ALLOW: ALLOW Allow the request to proceed. - NEXT_POLICY_SET: NEXT_POLICY_SET Terminate evaluation of the current policy set and begin evaluating the next policy set in the chain. Note that the evaluation of any remaining policies in the current policy set is skipped. - NEXT_POLICY: NEXT_POLICY Terminate evaluation of the current policy and begin evaluating the next policy in the policy set. Note that the evaluation of any remaining rules in the current policy is skipped. - LAST_POLICY: LAST_POLICY Terminate evaluation of the current policy and begin evaluating the last policy in the policy set. Note that the evaluation of any remaining rules in the current policy is skipped. - GOTO_POLICY: GOTO_POLICY Terminate evaluation of the current policy and begin evaluating a specific policy in the policy set. The policy is specified using the goto_policy field in the rule and must be after the current policy in the policy set. Possible values are `DENY`, `ALLOW`, `NEXT_POLICY`. Defaults to `DENY`.",
-											Optional: true,
+											Optional:            true,
 										},
 										"client_name": schema.StringAttribute{
 											MarkdownDescription: "Client Name. The name of the client trying to access the secret. Name of the client will be extracted from client TLS certificate. This predicate evaluates to true if client name matches the configured name",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -221,18 +219,18 @@ func (r *SecretPolicyResource) Schema(ctx context.Context, req resource.SchemaRe
 											Attributes: map[string]schema.Attribute{
 												"exact_values": schema.ListAttribute{
 													MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 												"regex_values": schema.ListAttribute{
 													MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 												"transformers": schema.ListAttribute{
 													MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 										},
@@ -241,8 +239,8 @@ func (r *SecretPolicyResource) Schema(ctx context.Context, req resource.SchemaRe
 											Attributes: map[string]schema.Attribute{
 												"expressions": schema.ListAttribute{
 													MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 										},
@@ -252,7 +250,6 @@ func (r *SecretPolicyResource) Schema(ctx context.Context, req resource.SchemaRe
 						},
 					},
 				},
-
 			},
 		},
 	}
@@ -441,7 +438,6 @@ func (r *SecretPolicyResource) Create(ctx context.Context, req resource.CreateRe
 		createReq.Spec["decrypt_cache_timeout"] = data.DecryptCacheTimeout.ValueString()
 	}
 
-
 	apiResource, err := r.client.CreateSecretPolicy(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create SecretPolicy: %s", err))
@@ -453,7 +449,7 @@ func (r *SecretPolicyResource) Create(ctx context.Context, req resource.CreateRe
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if blockData, ok := apiResource.Spec["rule_list"].(map[string]interface{}); ok && (isImport || data.RuleList != nil) {
 		data.RuleList = &SecretPolicyRuleListModel{
 			Rules: func() []SecretPolicyRuleListRulesModel {
@@ -525,7 +521,6 @@ func (r *SecretPolicyResource) Create(ctx context.Context, req resource.CreateRe
 	} else {
 		data.DecryptCacheTimeout = types.StringNull()
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -615,9 +610,9 @@ func (r *SecretPolicyResource) Read(ctx context.Context, req resource.ReadReques
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if blockData, ok := apiResource.Spec["rule_list"].(map[string]interface{}); ok && (isImport || data.RuleList != nil) {
 		data.RuleList = &SecretPolicyRuleListModel{
@@ -690,7 +685,6 @@ func (r *SecretPolicyResource) Read(ctx context.Context, req resource.ReadReques
 	} else {
 		data.DecryptCacheTimeout = types.StringNull()
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -789,7 +783,6 @@ func (r *SecretPolicyResource) Update(ctx context.Context, req resource.UpdateRe
 	if !data.DecryptCacheTimeout.IsNull() && !data.DecryptCacheTimeout.IsUnknown() {
 		apiResource.Spec["decrypt_cache_timeout"] = data.DecryptCacheTimeout.ValueString()
 	}
-
 
 	updated, err := r.client.UpdateSecretPolicy(ctx, apiResource)
 	if err != nil {

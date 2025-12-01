@@ -62,35 +62,35 @@ type K8SClusterRolePolicyRuleListModel struct {
 // K8SClusterRolePolicyRuleListPolicyRuleModel represents policy_rule block
 type K8SClusterRolePolicyRuleListPolicyRuleModel struct {
 	NonResourceURLList *K8SClusterRolePolicyRuleListPolicyRuleNonResourceURLListModel `tfsdk:"non_resource_url_list"`
-	ResourceList *K8SClusterRolePolicyRuleListPolicyRuleResourceListModel `tfsdk:"resource_list"`
+	ResourceList       *K8SClusterRolePolicyRuleListPolicyRuleResourceListModel       `tfsdk:"resource_list"`
 }
 
 // K8SClusterRolePolicyRuleListPolicyRuleNonResourceURLListModel represents non_resource_url_list block
 type K8SClusterRolePolicyRuleListPolicyRuleNonResourceURLListModel struct {
-	Urls types.List `tfsdk:"urls"`
+	Urls  types.List `tfsdk:"urls"`
 	Verbs types.List `tfsdk:"verbs"`
 }
 
 // K8SClusterRolePolicyRuleListPolicyRuleResourceListModel represents resource_list block
 type K8SClusterRolePolicyRuleListPolicyRuleResourceListModel struct {
-	APIGroups types.List `tfsdk:"api_groups"`
+	APIGroups         types.List `tfsdk:"api_groups"`
 	ResourceInstances types.List `tfsdk:"resource_instances"`
-	ResourceTypes types.List `tfsdk:"resource_types"`
-	Verbs types.List `tfsdk:"verbs"`
+	ResourceTypes     types.List `tfsdk:"resource_types"`
+	Verbs             types.List `tfsdk:"verbs"`
 }
 
 type K8SClusterRoleResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Yaml types.String `tfsdk:"yaml"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Name                   types.String                               `tfsdk:"name"`
+	Namespace              types.String                               `tfsdk:"namespace"`
+	Annotations            types.Map                                  `tfsdk:"annotations"`
+	Description            types.String                               `tfsdk:"description"`
+	Disable                types.Bool                                 `tfsdk:"disable"`
+	Labels                 types.Map                                  `tfsdk:"labels"`
+	ID                     types.String                               `tfsdk:"id"`
+	Yaml                   types.String                               `tfsdk:"yaml"`
+	Timeouts               timeouts.Value                             `tfsdk:"timeouts"`
 	K8SClusterRoleSelector *K8SClusterRoleK8SClusterRoleSelectorModel `tfsdk:"k8s_cluster_role_selector"`
-	PolicyRuleList *K8SClusterRolePolicyRuleListModel `tfsdk:"policy_rule_list"`
+	PolicyRuleList         *K8SClusterRolePolicyRuleListModel         `tfsdk:"policy_rule_list"`
 }
 
 func (r *K8SClusterRoleResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -104,7 +104,7 @@ func (r *K8SClusterRoleResource) Schema(ctx context.Context, req resource.Schema
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the K8SClusterRole. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -114,7 +114,7 @@ func (r *K8SClusterRoleResource) Schema(ctx context.Context, req resource.Schema
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the K8SClusterRole will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -124,33 +124,33 @@ func (r *K8SClusterRoleResource) Schema(ctx context.Context, req resource.Schema
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"yaml": schema.StringAttribute{
 				MarkdownDescription: "K8s YAML. K8s YAML for ClusterRole",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -168,35 +168,32 @@ func (r *K8SClusterRoleResource) Schema(ctx context.Context, req resource.Schema
 				Attributes: map[string]schema.Attribute{
 					"expressions": schema.ListAttribute{
 						MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections.",
-						Optional: true,
-						ElementType: types.StringType,
+						Optional:            true,
+						ElementType:         types.StringType,
 					},
 				},
-
 			},
 			"policy_rule_list": schema.SingleNestedBlock{
 				MarkdownDescription: "Policy Rule List. List of rules for role permissions",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"policy_rule": schema.ListNestedBlock{
 						MarkdownDescription: "Policy Rules. List of rules for role permissions",
 						NestedObject: schema.NestedBlockObject{
-							Attributes: map[string]schema.Attribute{
-							},
+							Attributes: map[string]schema.Attribute{},
 							Blocks: map[string]schema.Block{
 								"non_resource_url_list": schema.SingleNestedBlock{
 									MarkdownDescription: "List of Non Resource URL(s). permissions for URL(s) that do not represent K8s resource",
 									Attributes: map[string]schema.Attribute{
 										"urls": schema.ListAttribute{
 											MarkdownDescription: "Non Resource URL(s). allowed URL(s) that do not represent any K8s resource. URL can be suffix or regex.",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 										"verbs": schema.ListAttribute{
 											MarkdownDescription: "Allowed Verbs. Allowed list of verbs(operations) on resources. Use VerbAll for all operations",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 									},
 								},
@@ -205,23 +202,23 @@ func (r *K8SClusterRoleResource) Schema(ctx context.Context, req resource.Schema
 									Attributes: map[string]schema.Attribute{
 										"api_groups": schema.ListAttribute{
 											MarkdownDescription: "API Groups. Allowed list of API group that contains resources, all resources of a given api group",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 										"resource_instances": schema.ListAttribute{
 											MarkdownDescription: "Resource Instances. Allowed list of resource instances within the resource types.",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 										"resource_types": schema.ListAttribute{
 											MarkdownDescription: "Resource Types. Allowed list of resource types within the api groups.",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 										"verbs": schema.ListAttribute{
 											MarkdownDescription: "Allowed Verbs. Allowed list of verbs(operations) on resources. Use * for all operations",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 									},
 								},
@@ -229,7 +226,6 @@ func (r *K8SClusterRoleResource) Schema(ctx context.Context, req resource.Schema
 						},
 					},
 				},
-
 			},
 		},
 	}
@@ -414,7 +410,6 @@ func (r *K8SClusterRoleResource) Create(ctx context.Context, req resource.Create
 		createReq.Spec["yaml"] = data.Yaml.ValueString()
 	}
 
-
 	apiResource, err := r.client.CreateK8SClusterRole(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create K8SClusterRole: %s", err))
@@ -426,7 +421,7 @@ func (r *K8SClusterRoleResource) Create(ctx context.Context, req resource.Create
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if blockData, ok := apiResource.Spec["k8s_cluster_role_selector"].(map[string]interface{}); ok && (isImport || data.K8SClusterRoleSelector != nil) {
 		data.K8SClusterRoleSelector = &K8SClusterRoleK8SClusterRoleSelectorModel{
 			Expressions: func() types.List {
@@ -454,15 +449,13 @@ func (r *K8SClusterRoleResource) Create(ctx context.Context, req resource.Create
 							result = append(result, K8SClusterRolePolicyRuleListPolicyRuleModel{
 								NonResourceURLList: func() *K8SClusterRolePolicyRuleListPolicyRuleNonResourceURLListModel {
 									if _, ok := itemMap["non_resource_url_list"].(map[string]interface{}); ok {
-										return &K8SClusterRolePolicyRuleListPolicyRuleNonResourceURLListModel{
-										}
+										return &K8SClusterRolePolicyRuleListPolicyRuleNonResourceURLListModel{}
 									}
 									return nil
 								}(),
 								ResourceList: func() *K8SClusterRolePolicyRuleListPolicyRuleResourceListModel {
 									if _, ok := itemMap["resource_list"].(map[string]interface{}); ok {
-										return &K8SClusterRolePolicyRuleListPolicyRuleResourceListModel{
-										}
+										return &K8SClusterRolePolicyRuleListPolicyRuleResourceListModel{}
 									}
 									return nil
 								}(),
@@ -480,7 +473,6 @@ func (r *K8SClusterRoleResource) Create(ctx context.Context, req resource.Create
 	} else {
 		data.Yaml = types.StringNull()
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -570,9 +562,9 @@ func (r *K8SClusterRoleResource) Read(ctx context.Context, req resource.ReadRequ
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if blockData, ok := apiResource.Spec["k8s_cluster_role_selector"].(map[string]interface{}); ok && (isImport || data.K8SClusterRoleSelector != nil) {
 		data.K8SClusterRoleSelector = &K8SClusterRoleK8SClusterRoleSelectorModel{
@@ -601,15 +593,13 @@ func (r *K8SClusterRoleResource) Read(ctx context.Context, req resource.ReadRequ
 							result = append(result, K8SClusterRolePolicyRuleListPolicyRuleModel{
 								NonResourceURLList: func() *K8SClusterRolePolicyRuleListPolicyRuleNonResourceURLListModel {
 									if _, ok := itemMap["non_resource_url_list"].(map[string]interface{}); ok {
-										return &K8SClusterRolePolicyRuleListPolicyRuleNonResourceURLListModel{
-										}
+										return &K8SClusterRolePolicyRuleListPolicyRuleNonResourceURLListModel{}
 									}
 									return nil
 								}(),
 								ResourceList: func() *K8SClusterRolePolicyRuleListPolicyRuleResourceListModel {
 									if _, ok := itemMap["resource_list"].(map[string]interface{}); ok {
-										return &K8SClusterRolePolicyRuleListPolicyRuleResourceListModel{
-										}
+										return &K8SClusterRolePolicyRuleListPolicyRuleResourceListModel{}
 									}
 									return nil
 								}(),
@@ -627,7 +617,6 @@ func (r *K8SClusterRoleResource) Read(ctx context.Context, req resource.ReadRequ
 	} else {
 		data.Yaml = types.StringNull()
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -722,7 +711,6 @@ func (r *K8SClusterRoleResource) Update(ctx context.Context, req resource.Update
 	if !data.Yaml.IsNull() && !data.Yaml.IsUnknown() {
 		apiResource.Spec["yaml"] = data.Yaml.ValueString()
 	}
-
 
 	updated, err := r.client.UpdateK8SClusterRole(ctx, apiResource)
 	if err != nil {

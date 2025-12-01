@@ -51,35 +51,35 @@ type ProtocolInspectionEmptyModel struct {
 
 // ProtocolInspectionEnableDisableComplianceChecksModel represents enable_disable_compliance_checks block
 type ProtocolInspectionEnableDisableComplianceChecksModel struct {
-	DisableComplianceChecks *ProtocolInspectionEmptyModel `tfsdk:"disable_compliance_checks"`
-	EnableComplianceChecks *ProtocolInspectionEnableDisableComplianceChecksEnableComplianceChecksModel `tfsdk:"enable_compliance_checks"`
+	DisableComplianceChecks *ProtocolInspectionEmptyModel                                               `tfsdk:"disable_compliance_checks"`
+	EnableComplianceChecks  *ProtocolInspectionEnableDisableComplianceChecksEnableComplianceChecksModel `tfsdk:"enable_compliance_checks"`
 }
 
 // ProtocolInspectionEnableDisableComplianceChecksEnableComplianceChecksModel represents enable_compliance_checks block
 type ProtocolInspectionEnableDisableComplianceChecksEnableComplianceChecksModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // ProtocolInspectionEnableDisableSignaturesModel represents enable_disable_signatures block
 type ProtocolInspectionEnableDisableSignaturesModel struct {
 	DisableSignature *ProtocolInspectionEmptyModel `tfsdk:"disable_signature"`
-	EnableSignature *ProtocolInspectionEmptyModel `tfsdk:"enable_signature"`
+	EnableSignature  *ProtocolInspectionEmptyModel `tfsdk:"enable_signature"`
 }
 
 type ProtocolInspectionResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Action types.String `tfsdk:"action"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Name                          types.String                                          `tfsdk:"name"`
+	Namespace                     types.String                                          `tfsdk:"namespace"`
+	Annotations                   types.Map                                             `tfsdk:"annotations"`
+	Description                   types.String                                          `tfsdk:"description"`
+	Disable                       types.Bool                                            `tfsdk:"disable"`
+	Labels                        types.Map                                             `tfsdk:"labels"`
+	ID                            types.String                                          `tfsdk:"id"`
+	Action                        types.String                                          `tfsdk:"action"`
+	Timeouts                      timeouts.Value                                        `tfsdk:"timeouts"`
 	EnableDisableComplianceChecks *ProtocolInspectionEnableDisableComplianceChecksModel `tfsdk:"enable_disable_compliance_checks"`
-	EnableDisableSignatures *ProtocolInspectionEnableDisableSignaturesModel `tfsdk:"enable_disable_signatures"`
+	EnableDisableSignatures       *ProtocolInspectionEnableDisableSignaturesModel       `tfsdk:"enable_disable_signatures"`
 }
 
 func (r *ProtocolInspectionResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -93,7 +93,7 @@ func (r *ProtocolInspectionResource) Schema(ctx context.Context, req resource.Sc
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the ProtocolInspection. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -103,7 +103,7 @@ func (r *ProtocolInspectionResource) Schema(ctx context.Context, req resource.Sc
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the ProtocolInspection will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -113,33 +113,33 @@ func (r *ProtocolInspectionResource) Schema(ctx context.Context, req resource.Sc
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"action": schema.StringAttribute{
 				MarkdownDescription: "Action. Action after inspection - ALLOW: Allow Allow traffic - DENY: Deny Throw RST error for TCP and ICMP error for UDP - DROP: DROP Silently drop traffic. Possible values are `ALLOW`, `DENY`, `DROP`. Defaults to `ALLOW`.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -154,8 +154,7 @@ func (r *ProtocolInspectionResource) Schema(ctx context.Context, req resource.Sc
 			}),
 			"enable_disable_compliance_checks": schema.SingleNestedBlock{
 				MarkdownDescription: "Enable/Disable Compliance Checks. x-required Enable Disable Compliance Checks Choice",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"disable_compliance_checks": schema.SingleNestedBlock{
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -165,26 +164,24 @@ func (r *ProtocolInspectionResource) Schema(ctx context.Context, req resource.Sc
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
 								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-								Optional: true,
+								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
 								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-								Optional: true,
+								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-								Optional: true,
-								Computed: true,
+								Optional:            true,
+								Computed:            true,
 							},
 						},
 					},
 				},
-
 			},
 			"enable_disable_signatures": schema.SingleNestedBlock{
 				MarkdownDescription: "Enable/Disable Signatures Choice. x-required Enable Disable Signature Choice",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"disable_signature": schema.SingleNestedBlock{
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -193,7 +190,6 @@ func (r *ProtocolInspectionResource) Schema(ctx context.Context, req resource.Sc
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 		},
 	}
@@ -377,7 +373,6 @@ func (r *ProtocolInspectionResource) Create(ctx context.Context, req resource.Cr
 		createReq.Spec["action"] = data.Action.ValueString()
 	}
 
-
 	apiResource, err := r.client.CreateProtocolInspection(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create ProtocolInspection: %s", err))
@@ -389,7 +384,7 @@ func (r *ProtocolInspectionResource) Create(ctx context.Context, req resource.Cr
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if _, ok := apiResource.Spec["enable_disable_compliance_checks"].(map[string]interface{}); ok && isImport && data.EnableDisableComplianceChecks == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.EnableDisableComplianceChecks = &ProtocolInspectionEnableDisableComplianceChecksModel{}
@@ -405,7 +400,6 @@ func (r *ProtocolInspectionResource) Create(ctx context.Context, req resource.Cr
 	} else {
 		data.Action = types.StringNull()
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -495,9 +489,9 @@ func (r *ProtocolInspectionResource) Read(ctx context.Context, req resource.Read
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if _, ok := apiResource.Spec["enable_disable_compliance_checks"].(map[string]interface{}); ok && isImport && data.EnableDisableComplianceChecks == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -514,7 +508,6 @@ func (r *ProtocolInspectionResource) Read(ctx context.Context, req resource.Read
 	} else {
 		data.Action = types.StringNull()
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -608,7 +601,6 @@ func (r *ProtocolInspectionResource) Update(ctx context.Context, req resource.Up
 	if !data.Action.IsNull() && !data.Action.IsUnknown() {
 		apiResource.Spec["action"] = data.Action.ValueString()
 	}
-
 
 	updated, err := r.client.UpdateProtocolInspection(ctx, apiResource)
 	if err != nil {

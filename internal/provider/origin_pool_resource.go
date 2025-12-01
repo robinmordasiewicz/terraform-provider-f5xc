@@ -52,42 +52,42 @@ type OriginPoolEmptyModel struct {
 
 // OriginPoolAdvancedOptionsModel represents advanced_options block
 type OriginPoolAdvancedOptionsModel struct {
-	ConnectionTimeout types.Int64 `tfsdk:"connection_timeout"`
-	HTTPIdleTimeout types.Int64 `tfsdk:"http_idle_timeout"`
-	PanicThreshold types.Int64 `tfsdk:"panic_threshold"`
-	AutoHTTPConfig *OriginPoolEmptyModel `tfsdk:"auto_http_config"`
-	CircuitBreaker *OriginPoolAdvancedOptionsCircuitBreakerModel `tfsdk:"circuit_breaker"`
-	DefaultCircuitBreaker *OriginPoolEmptyModel `tfsdk:"default_circuit_breaker"`
-	DisableCircuitBreaker *OriginPoolEmptyModel `tfsdk:"disable_circuit_breaker"`
-	DisableLbSourceIPPersistance *OriginPoolEmptyModel `tfsdk:"disable_lb_source_ip_persistance"`
-	DisableOutlierDetection *OriginPoolEmptyModel `tfsdk:"disable_outlier_detection"`
-	DisableProxyProtocol *OriginPoolEmptyModel `tfsdk:"disable_proxy_protocol"`
-	DisableSubsets *OriginPoolEmptyModel `tfsdk:"disable_subsets"`
-	EnableLbSourceIPPersistance *OriginPoolEmptyModel `tfsdk:"enable_lb_source_ip_persistance"`
-	EnableSubsets *OriginPoolAdvancedOptionsEnableSubsetsModel `tfsdk:"enable_subsets"`
-	Http1Config *OriginPoolAdvancedOptionsHttp1ConfigModel `tfsdk:"http1_config"`
-	Http2Options *OriginPoolAdvancedOptionsHttp2OptionsModel `tfsdk:"http2_options"`
-	NoPanicThreshold *OriginPoolEmptyModel `tfsdk:"no_panic_threshold"`
-	OutlierDetection *OriginPoolAdvancedOptionsOutlierDetectionModel `tfsdk:"outlier_detection"`
-	ProxyProtocolV1 *OriginPoolEmptyModel `tfsdk:"proxy_protocol_v1"`
-	ProxyProtocolV2 *OriginPoolEmptyModel `tfsdk:"proxy_protocol_v2"`
+	ConnectionTimeout            types.Int64                                     `tfsdk:"connection_timeout"`
+	HTTPIdleTimeout              types.Int64                                     `tfsdk:"http_idle_timeout"`
+	PanicThreshold               types.Int64                                     `tfsdk:"panic_threshold"`
+	AutoHTTPConfig               *OriginPoolEmptyModel                           `tfsdk:"auto_http_config"`
+	CircuitBreaker               *OriginPoolAdvancedOptionsCircuitBreakerModel   `tfsdk:"circuit_breaker"`
+	DefaultCircuitBreaker        *OriginPoolEmptyModel                           `tfsdk:"default_circuit_breaker"`
+	DisableCircuitBreaker        *OriginPoolEmptyModel                           `tfsdk:"disable_circuit_breaker"`
+	DisableLbSourceIPPersistance *OriginPoolEmptyModel                           `tfsdk:"disable_lb_source_ip_persistance"`
+	DisableOutlierDetection      *OriginPoolEmptyModel                           `tfsdk:"disable_outlier_detection"`
+	DisableProxyProtocol         *OriginPoolEmptyModel                           `tfsdk:"disable_proxy_protocol"`
+	DisableSubsets               *OriginPoolEmptyModel                           `tfsdk:"disable_subsets"`
+	EnableLbSourceIPPersistance  *OriginPoolEmptyModel                           `tfsdk:"enable_lb_source_ip_persistance"`
+	EnableSubsets                *OriginPoolAdvancedOptionsEnableSubsetsModel    `tfsdk:"enable_subsets"`
+	Http1Config                  *OriginPoolAdvancedOptionsHttp1ConfigModel      `tfsdk:"http1_config"`
+	Http2Options                 *OriginPoolAdvancedOptionsHttp2OptionsModel     `tfsdk:"http2_options"`
+	NoPanicThreshold             *OriginPoolEmptyModel                           `tfsdk:"no_panic_threshold"`
+	OutlierDetection             *OriginPoolAdvancedOptionsOutlierDetectionModel `tfsdk:"outlier_detection"`
+	ProxyProtocolV1              *OriginPoolEmptyModel                           `tfsdk:"proxy_protocol_v1"`
+	ProxyProtocolV2              *OriginPoolEmptyModel                           `tfsdk:"proxy_protocol_v2"`
 }
 
 // OriginPoolAdvancedOptionsCircuitBreakerModel represents circuit_breaker block
 type OriginPoolAdvancedOptionsCircuitBreakerModel struct {
-	ConnectionLimit types.Int64 `tfsdk:"connection_limit"`
-	MaxRequests types.Int64 `tfsdk:"max_requests"`
-	PendingRequests types.Int64 `tfsdk:"pending_requests"`
-	Priority types.String `tfsdk:"priority"`
-	Retries types.Int64 `tfsdk:"retries"`
+	ConnectionLimit types.Int64  `tfsdk:"connection_limit"`
+	MaxRequests     types.Int64  `tfsdk:"max_requests"`
+	PendingRequests types.Int64  `tfsdk:"pending_requests"`
+	Priority        types.String `tfsdk:"priority"`
+	Retries         types.Int64  `tfsdk:"retries"`
 }
 
 // OriginPoolAdvancedOptionsEnableSubsetsModel represents enable_subsets block
 type OriginPoolAdvancedOptionsEnableSubsetsModel struct {
-	AnyEndpoint *OriginPoolEmptyModel `tfsdk:"any_endpoint"`
-	DefaultSubset *OriginPoolAdvancedOptionsEnableSubsetsDefaultSubsetModel `tfsdk:"default_subset"`
+	AnyEndpoint     *OriginPoolEmptyModel                                        `tfsdk:"any_endpoint"`
+	DefaultSubset   *OriginPoolAdvancedOptionsEnableSubsetsDefaultSubsetModel    `tfsdk:"default_subset"`
 	EndpointSubsets []OriginPoolAdvancedOptionsEnableSubsetsEndpointSubsetsModel `tfsdk:"endpoint_subsets"`
-	FailRequest *OriginPoolEmptyModel `tfsdk:"fail_request"`
+	FailRequest     *OriginPoolEmptyModel                                        `tfsdk:"fail_request"`
 }
 
 // OriginPoolAdvancedOptionsEnableSubsetsDefaultSubsetModel represents default_subset block
@@ -107,10 +107,10 @@ type OriginPoolAdvancedOptionsHttp1ConfigModel struct {
 
 // OriginPoolAdvancedOptionsHttp1ConfigHeaderTransformationModel represents header_transformation block
 type OriginPoolAdvancedOptionsHttp1ConfigHeaderTransformationModel struct {
-	DefaultHeaderTransformation *OriginPoolEmptyModel `tfsdk:"default_header_transformation"`
-	LegacyHeaderTransformation *OriginPoolEmptyModel `tfsdk:"legacy_header_transformation"`
+	DefaultHeaderTransformation      *OriginPoolEmptyModel `tfsdk:"default_header_transformation"`
+	LegacyHeaderTransformation       *OriginPoolEmptyModel `tfsdk:"legacy_header_transformation"`
 	PreserveCaseHeaderTransformation *OriginPoolEmptyModel `tfsdk:"preserve_case_header_transformation"`
-	ProperCaseHeaderTransformation *OriginPoolEmptyModel `tfsdk:"proper_case_header_transformation"`
+	ProperCaseHeaderTransformation   *OriginPoolEmptyModel `tfsdk:"proper_case_header_transformation"`
 }
 
 // OriginPoolAdvancedOptionsHttp2OptionsModel represents http2_options block
@@ -120,33 +120,33 @@ type OriginPoolAdvancedOptionsHttp2OptionsModel struct {
 
 // OriginPoolAdvancedOptionsOutlierDetectionModel represents outlier_detection block
 type OriginPoolAdvancedOptionsOutlierDetectionModel struct {
-	BaseEjectionTime types.Int64 `tfsdk:"base_ejection_time"`
-	Consecutive5xx types.Int64 `tfsdk:"consecutive_5xx"`
+	BaseEjectionTime          types.Int64 `tfsdk:"base_ejection_time"`
+	Consecutive5xx            types.Int64 `tfsdk:"consecutive_5xx"`
 	ConsecutiveGatewayFailure types.Int64 `tfsdk:"consecutive_gateway_failure"`
-	Interval types.Int64 `tfsdk:"interval"`
-	MaxEjectionPercent types.Int64 `tfsdk:"max_ejection_percent"`
+	Interval                  types.Int64 `tfsdk:"interval"`
+	MaxEjectionPercent        types.Int64 `tfsdk:"max_ejection_percent"`
 }
 
 // OriginPoolHealthcheckModel represents healthcheck block
 type OriginPoolHealthcheckModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // OriginPoolOriginServersModel represents origin_servers block
 type OriginPoolOriginServersModel struct {
-	CbipService *OriginPoolOriginServersCbipServiceModel `tfsdk:"cbip_service"`
-	ConsulService *OriginPoolOriginServersConsulServiceModel `tfsdk:"consul_service"`
+	CbipService          *OriginPoolOriginServersCbipServiceModel          `tfsdk:"cbip_service"`
+	ConsulService        *OriginPoolOriginServersConsulServiceModel        `tfsdk:"consul_service"`
 	CustomEndpointObject *OriginPoolOriginServersCustomEndpointObjectModel `tfsdk:"custom_endpoint_object"`
-	K8SService *OriginPoolOriginServersK8SServiceModel `tfsdk:"k8s_service"`
-	Labels *OriginPoolEmptyModel `tfsdk:"labels"`
-	PrivateIP *OriginPoolOriginServersPrivateIPModel `tfsdk:"private_ip"`
-	PrivateName *OriginPoolOriginServersPrivateNameModel `tfsdk:"private_name"`
-	PublicIP *OriginPoolOriginServersPublicIPModel `tfsdk:"public_ip"`
-	PublicName *OriginPoolOriginServersPublicNameModel `tfsdk:"public_name"`
-	VnPrivateIP *OriginPoolOriginServersVnPrivateIPModel `tfsdk:"vn_private_ip"`
-	VnPrivateName *OriginPoolOriginServersVnPrivateNameModel `tfsdk:"vn_private_name"`
+	K8SService           *OriginPoolOriginServersK8SServiceModel           `tfsdk:"k8s_service"`
+	Labels               *OriginPoolEmptyModel                             `tfsdk:"labels"`
+	PrivateIP            *OriginPoolOriginServersPrivateIPModel            `tfsdk:"private_ip"`
+	PrivateName          *OriginPoolOriginServersPrivateNameModel          `tfsdk:"private_name"`
+	PublicIP             *OriginPoolOriginServersPublicIPModel             `tfsdk:"public_ip"`
+	PublicName           *OriginPoolOriginServersPublicNameModel           `tfsdk:"public_name"`
+	VnPrivateIP          *OriginPoolOriginServersVnPrivateIPModel          `tfsdk:"vn_private_ip"`
+	VnPrivateName        *OriginPoolOriginServersVnPrivateNameModel        `tfsdk:"vn_private_name"`
 }
 
 // OriginPoolOriginServersCbipServiceModel represents cbip_service block
@@ -156,37 +156,37 @@ type OriginPoolOriginServersCbipServiceModel struct {
 
 // OriginPoolOriginServersConsulServiceModel represents consul_service block
 type OriginPoolOriginServersConsulServiceModel struct {
-	ServiceName types.String `tfsdk:"service_name"`
-	InsideNetwork *OriginPoolEmptyModel `tfsdk:"inside_network"`
-	OutsideNetwork *OriginPoolEmptyModel `tfsdk:"outside_network"`
-	SiteLocator *OriginPoolOriginServersConsulServiceSiteLocatorModel `tfsdk:"site_locator"`
-	SnatPool *OriginPoolOriginServersConsulServiceSnatPoolModel `tfsdk:"snat_pool"`
+	ServiceName    types.String                                          `tfsdk:"service_name"`
+	InsideNetwork  *OriginPoolEmptyModel                                 `tfsdk:"inside_network"`
+	OutsideNetwork *OriginPoolEmptyModel                                 `tfsdk:"outside_network"`
+	SiteLocator    *OriginPoolOriginServersConsulServiceSiteLocatorModel `tfsdk:"site_locator"`
+	SnatPool       *OriginPoolOriginServersConsulServiceSnatPoolModel    `tfsdk:"snat_pool"`
 }
 
 // OriginPoolOriginServersConsulServiceSiteLocatorModel represents site_locator block
 type OriginPoolOriginServersConsulServiceSiteLocatorModel struct {
-	Site *OriginPoolOriginServersConsulServiceSiteLocatorSiteModel `tfsdk:"site"`
+	Site        *OriginPoolOriginServersConsulServiceSiteLocatorSiteModel        `tfsdk:"site"`
 	VirtualSite *OriginPoolOriginServersConsulServiceSiteLocatorVirtualSiteModel `tfsdk:"virtual_site"`
 }
 
 // OriginPoolOriginServersConsulServiceSiteLocatorSiteModel represents site block
 type OriginPoolOriginServersConsulServiceSiteLocatorSiteModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // OriginPoolOriginServersConsulServiceSiteLocatorVirtualSiteModel represents virtual_site block
 type OriginPoolOriginServersConsulServiceSiteLocatorVirtualSiteModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // OriginPoolOriginServersConsulServiceSnatPoolModel represents snat_pool block
 type OriginPoolOriginServersConsulServiceSnatPoolModel struct {
-	NoSnatPool *OriginPoolEmptyModel `tfsdk:"no_snat_pool"`
-	SnatPool *OriginPoolOriginServersConsulServiceSnatPoolSnatPoolModel `tfsdk:"snat_pool"`
+	NoSnatPool *OriginPoolEmptyModel                                      `tfsdk:"no_snat_pool"`
+	SnatPool   *OriginPoolOriginServersConsulServiceSnatPoolSnatPoolModel `tfsdk:"snat_pool"`
 }
 
 // OriginPoolOriginServersConsulServiceSnatPoolSnatPoolModel represents snat_pool block
@@ -201,46 +201,46 @@ type OriginPoolOriginServersCustomEndpointObjectModel struct {
 
 // OriginPoolOriginServersCustomEndpointObjectEndpointModel represents endpoint block
 type OriginPoolOriginServersCustomEndpointObjectEndpointModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // OriginPoolOriginServersK8SServiceModel represents k8s_service block
 type OriginPoolOriginServersK8SServiceModel struct {
-	Protocol types.String `tfsdk:"protocol"`
-	ServiceName types.String `tfsdk:"service_name"`
-	InsideNetwork *OriginPoolEmptyModel `tfsdk:"inside_network"`
-	OutsideNetwork *OriginPoolEmptyModel `tfsdk:"outside_network"`
-	SiteLocator *OriginPoolOriginServersK8SServiceSiteLocatorModel `tfsdk:"site_locator"`
-	SnatPool *OriginPoolOriginServersK8SServiceSnatPoolModel `tfsdk:"snat_pool"`
-	Vk8sNetworks *OriginPoolEmptyModel `tfsdk:"vk8s_networks"`
+	Protocol       types.String                                       `tfsdk:"protocol"`
+	ServiceName    types.String                                       `tfsdk:"service_name"`
+	InsideNetwork  *OriginPoolEmptyModel                              `tfsdk:"inside_network"`
+	OutsideNetwork *OriginPoolEmptyModel                              `tfsdk:"outside_network"`
+	SiteLocator    *OriginPoolOriginServersK8SServiceSiteLocatorModel `tfsdk:"site_locator"`
+	SnatPool       *OriginPoolOriginServersK8SServiceSnatPoolModel    `tfsdk:"snat_pool"`
+	Vk8sNetworks   *OriginPoolEmptyModel                              `tfsdk:"vk8s_networks"`
 }
 
 // OriginPoolOriginServersK8SServiceSiteLocatorModel represents site_locator block
 type OriginPoolOriginServersK8SServiceSiteLocatorModel struct {
-	Site *OriginPoolOriginServersK8SServiceSiteLocatorSiteModel `tfsdk:"site"`
+	Site        *OriginPoolOriginServersK8SServiceSiteLocatorSiteModel        `tfsdk:"site"`
 	VirtualSite *OriginPoolOriginServersK8SServiceSiteLocatorVirtualSiteModel `tfsdk:"virtual_site"`
 }
 
 // OriginPoolOriginServersK8SServiceSiteLocatorSiteModel represents site block
 type OriginPoolOriginServersK8SServiceSiteLocatorSiteModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // OriginPoolOriginServersK8SServiceSiteLocatorVirtualSiteModel represents virtual_site block
 type OriginPoolOriginServersK8SServiceSiteLocatorVirtualSiteModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // OriginPoolOriginServersK8SServiceSnatPoolModel represents snat_pool block
 type OriginPoolOriginServersK8SServiceSnatPoolModel struct {
-	NoSnatPool *OriginPoolEmptyModel `tfsdk:"no_snat_pool"`
-	SnatPool *OriginPoolOriginServersK8SServiceSnatPoolSnatPoolModel `tfsdk:"snat_pool"`
+	NoSnatPool *OriginPoolEmptyModel                                   `tfsdk:"no_snat_pool"`
+	SnatPool   *OriginPoolOriginServersK8SServiceSnatPoolSnatPoolModel `tfsdk:"snat_pool"`
 }
 
 // OriginPoolOriginServersK8SServiceSnatPoolSnatPoolModel represents snat_pool block
@@ -250,45 +250,45 @@ type OriginPoolOriginServersK8SServiceSnatPoolSnatPoolModel struct {
 
 // OriginPoolOriginServersPrivateIPModel represents private_ip block
 type OriginPoolOriginServersPrivateIPModel struct {
-	IP types.String `tfsdk:"ip"`
-	InsideNetwork *OriginPoolEmptyModel `tfsdk:"inside_network"`
-	OutsideNetwork *OriginPoolEmptyModel `tfsdk:"outside_network"`
-	Segment *OriginPoolOriginServersPrivateIPSegmentModel `tfsdk:"segment"`
-	SiteLocator *OriginPoolOriginServersPrivateIPSiteLocatorModel `tfsdk:"site_locator"`
-	SnatPool *OriginPoolOriginServersPrivateIPSnatPoolModel `tfsdk:"snat_pool"`
+	IP             types.String                                      `tfsdk:"ip"`
+	InsideNetwork  *OriginPoolEmptyModel                             `tfsdk:"inside_network"`
+	OutsideNetwork *OriginPoolEmptyModel                             `tfsdk:"outside_network"`
+	Segment        *OriginPoolOriginServersPrivateIPSegmentModel     `tfsdk:"segment"`
+	SiteLocator    *OriginPoolOriginServersPrivateIPSiteLocatorModel `tfsdk:"site_locator"`
+	SnatPool       *OriginPoolOriginServersPrivateIPSnatPoolModel    `tfsdk:"snat_pool"`
 }
 
 // OriginPoolOriginServersPrivateIPSegmentModel represents segment block
 type OriginPoolOriginServersPrivateIPSegmentModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // OriginPoolOriginServersPrivateIPSiteLocatorModel represents site_locator block
 type OriginPoolOriginServersPrivateIPSiteLocatorModel struct {
-	Site *OriginPoolOriginServersPrivateIPSiteLocatorSiteModel `tfsdk:"site"`
+	Site        *OriginPoolOriginServersPrivateIPSiteLocatorSiteModel        `tfsdk:"site"`
 	VirtualSite *OriginPoolOriginServersPrivateIPSiteLocatorVirtualSiteModel `tfsdk:"virtual_site"`
 }
 
 // OriginPoolOriginServersPrivateIPSiteLocatorSiteModel represents site block
 type OriginPoolOriginServersPrivateIPSiteLocatorSiteModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // OriginPoolOriginServersPrivateIPSiteLocatorVirtualSiteModel represents virtual_site block
 type OriginPoolOriginServersPrivateIPSiteLocatorVirtualSiteModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // OriginPoolOriginServersPrivateIPSnatPoolModel represents snat_pool block
 type OriginPoolOriginServersPrivateIPSnatPoolModel struct {
-	NoSnatPool *OriginPoolEmptyModel `tfsdk:"no_snat_pool"`
-	SnatPool *OriginPoolOriginServersPrivateIPSnatPoolSnatPoolModel `tfsdk:"snat_pool"`
+	NoSnatPool *OriginPoolEmptyModel                                  `tfsdk:"no_snat_pool"`
+	SnatPool   *OriginPoolOriginServersPrivateIPSnatPoolSnatPoolModel `tfsdk:"snat_pool"`
 }
 
 // OriginPoolOriginServersPrivateIPSnatPoolSnatPoolModel represents snat_pool block
@@ -298,46 +298,46 @@ type OriginPoolOriginServersPrivateIPSnatPoolSnatPoolModel struct {
 
 // OriginPoolOriginServersPrivateNameModel represents private_name block
 type OriginPoolOriginServersPrivateNameModel struct {
-	DNSName types.String `tfsdk:"dns_name"`
-	RefreshInterval types.Int64 `tfsdk:"refresh_interval"`
-	InsideNetwork *OriginPoolEmptyModel `tfsdk:"inside_network"`
-	OutsideNetwork *OriginPoolEmptyModel `tfsdk:"outside_network"`
-	Segment *OriginPoolOriginServersPrivateNameSegmentModel `tfsdk:"segment"`
-	SiteLocator *OriginPoolOriginServersPrivateNameSiteLocatorModel `tfsdk:"site_locator"`
-	SnatPool *OriginPoolOriginServersPrivateNameSnatPoolModel `tfsdk:"snat_pool"`
+	DNSName         types.String                                        `tfsdk:"dns_name"`
+	RefreshInterval types.Int64                                         `tfsdk:"refresh_interval"`
+	InsideNetwork   *OriginPoolEmptyModel                               `tfsdk:"inside_network"`
+	OutsideNetwork  *OriginPoolEmptyModel                               `tfsdk:"outside_network"`
+	Segment         *OriginPoolOriginServersPrivateNameSegmentModel     `tfsdk:"segment"`
+	SiteLocator     *OriginPoolOriginServersPrivateNameSiteLocatorModel `tfsdk:"site_locator"`
+	SnatPool        *OriginPoolOriginServersPrivateNameSnatPoolModel    `tfsdk:"snat_pool"`
 }
 
 // OriginPoolOriginServersPrivateNameSegmentModel represents segment block
 type OriginPoolOriginServersPrivateNameSegmentModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // OriginPoolOriginServersPrivateNameSiteLocatorModel represents site_locator block
 type OriginPoolOriginServersPrivateNameSiteLocatorModel struct {
-	Site *OriginPoolOriginServersPrivateNameSiteLocatorSiteModel `tfsdk:"site"`
+	Site        *OriginPoolOriginServersPrivateNameSiteLocatorSiteModel        `tfsdk:"site"`
 	VirtualSite *OriginPoolOriginServersPrivateNameSiteLocatorVirtualSiteModel `tfsdk:"virtual_site"`
 }
 
 // OriginPoolOriginServersPrivateNameSiteLocatorSiteModel represents site block
 type OriginPoolOriginServersPrivateNameSiteLocatorSiteModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // OriginPoolOriginServersPrivateNameSiteLocatorVirtualSiteModel represents virtual_site block
 type OriginPoolOriginServersPrivateNameSiteLocatorVirtualSiteModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // OriginPoolOriginServersPrivateNameSnatPoolModel represents snat_pool block
 type OriginPoolOriginServersPrivateNameSnatPoolModel struct {
-	NoSnatPool *OriginPoolEmptyModel `tfsdk:"no_snat_pool"`
-	SnatPool *OriginPoolOriginServersPrivateNameSnatPoolSnatPoolModel `tfsdk:"snat_pool"`
+	NoSnatPool *OriginPoolEmptyModel                                    `tfsdk:"no_snat_pool"`
+	SnatPool   *OriginPoolOriginServersPrivateNameSnatPoolSnatPoolModel `tfsdk:"snat_pool"`
 }
 
 // OriginPoolOriginServersPrivateNameSnatPoolSnatPoolModel represents snat_pool block
@@ -352,72 +352,72 @@ type OriginPoolOriginServersPublicIPModel struct {
 
 // OriginPoolOriginServersPublicNameModel represents public_name block
 type OriginPoolOriginServersPublicNameModel struct {
-	DNSName types.String `tfsdk:"dns_name"`
-	RefreshInterval types.Int64 `tfsdk:"refresh_interval"`
+	DNSName         types.String `tfsdk:"dns_name"`
+	RefreshInterval types.Int64  `tfsdk:"refresh_interval"`
 }
 
 // OriginPoolOriginServersVnPrivateIPModel represents vn_private_ip block
 type OriginPoolOriginServersVnPrivateIPModel struct {
-	IP types.String `tfsdk:"ip"`
+	IP             types.String                                           `tfsdk:"ip"`
 	VirtualNetwork *OriginPoolOriginServersVnPrivateIPVirtualNetworkModel `tfsdk:"virtual_network"`
 }
 
 // OriginPoolOriginServersVnPrivateIPVirtualNetworkModel represents virtual_network block
 type OriginPoolOriginServersVnPrivateIPVirtualNetworkModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // OriginPoolOriginServersVnPrivateNameModel represents vn_private_name block
 type OriginPoolOriginServersVnPrivateNameModel struct {
-	DNSName types.String `tfsdk:"dns_name"`
+	DNSName        types.String                                             `tfsdk:"dns_name"`
 	PrivateNetwork *OriginPoolOriginServersVnPrivateNamePrivateNetworkModel `tfsdk:"private_network"`
 }
 
 // OriginPoolOriginServersVnPrivateNamePrivateNetworkModel represents private_network block
 type OriginPoolOriginServersVnPrivateNamePrivateNetworkModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // OriginPoolUpstreamConnPoolReuseTypeModel represents upstream_conn_pool_reuse_type block
 type OriginPoolUpstreamConnPoolReuseTypeModel struct {
 	DisableConnPoolReuse *OriginPoolEmptyModel `tfsdk:"disable_conn_pool_reuse"`
-	EnableConnPoolReuse *OriginPoolEmptyModel `tfsdk:"enable_conn_pool_reuse"`
+	EnableConnPoolReuse  *OriginPoolEmptyModel `tfsdk:"enable_conn_pool_reuse"`
 }
 
 // OriginPoolUseTLSModel represents use_tls block
 type OriginPoolUseTLSModel struct {
-	MaxSessionKeys types.Int64 `tfsdk:"max_session_keys"`
-	Sni types.String `tfsdk:"sni"`
-	DefaultSessionKeyCaching *OriginPoolEmptyModel `tfsdk:"default_session_key_caching"`
-	DisableSessionKeyCaching *OriginPoolEmptyModel `tfsdk:"disable_session_key_caching"`
-	DisableSni *OriginPoolEmptyModel `tfsdk:"disable_sni"`
-	NoMtls *OriginPoolEmptyModel `tfsdk:"no_mtls"`
-	SkipServerVerification *OriginPoolEmptyModel `tfsdk:"skip_server_verification"`
-	TLSConfig *OriginPoolUseTLSTLSConfigModel `tfsdk:"tls_config"`
-	UseHostHeaderAsSni *OriginPoolEmptyModel `tfsdk:"use_host_header_as_sni"`
-	UseMtls *OriginPoolUseTLSUseMtlsModel `tfsdk:"use_mtls"`
-	UseMtlsObj *OriginPoolUseTLSUseMtlsObjModel `tfsdk:"use_mtls_obj"`
-	UseServerVerification *OriginPoolUseTLSUseServerVerificationModel `tfsdk:"use_server_verification"`
-	VolterraTrustedCa *OriginPoolEmptyModel `tfsdk:"volterra_trusted_ca"`
+	MaxSessionKeys           types.Int64                                 `tfsdk:"max_session_keys"`
+	Sni                      types.String                                `tfsdk:"sni"`
+	DefaultSessionKeyCaching *OriginPoolEmptyModel                       `tfsdk:"default_session_key_caching"`
+	DisableSessionKeyCaching *OriginPoolEmptyModel                       `tfsdk:"disable_session_key_caching"`
+	DisableSni               *OriginPoolEmptyModel                       `tfsdk:"disable_sni"`
+	NoMtls                   *OriginPoolEmptyModel                       `tfsdk:"no_mtls"`
+	SkipServerVerification   *OriginPoolEmptyModel                       `tfsdk:"skip_server_verification"`
+	TLSConfig                *OriginPoolUseTLSTLSConfigModel             `tfsdk:"tls_config"`
+	UseHostHeaderAsSni       *OriginPoolEmptyModel                       `tfsdk:"use_host_header_as_sni"`
+	UseMtls                  *OriginPoolUseTLSUseMtlsModel               `tfsdk:"use_mtls"`
+	UseMtlsObj               *OriginPoolUseTLSUseMtlsObjModel            `tfsdk:"use_mtls_obj"`
+	UseServerVerification    *OriginPoolUseTLSUseServerVerificationModel `tfsdk:"use_server_verification"`
+	VolterraTrustedCa        *OriginPoolEmptyModel                       `tfsdk:"volterra_trusted_ca"`
 }
 
 // OriginPoolUseTLSTLSConfigModel represents tls_config block
 type OriginPoolUseTLSTLSConfigModel struct {
-	CustomSecurity *OriginPoolUseTLSTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
-	DefaultSecurity *OriginPoolEmptyModel `tfsdk:"default_security"`
-	LowSecurity *OriginPoolEmptyModel `tfsdk:"low_security"`
-	MediumSecurity *OriginPoolEmptyModel `tfsdk:"medium_security"`
+	CustomSecurity  *OriginPoolUseTLSTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
+	DefaultSecurity *OriginPoolEmptyModel                         `tfsdk:"default_security"`
+	LowSecurity     *OriginPoolEmptyModel                         `tfsdk:"low_security"`
+	MediumSecurity  *OriginPoolEmptyModel                         `tfsdk:"medium_security"`
 }
 
 // OriginPoolUseTLSTLSConfigCustomSecurityModel represents custom_security block
 type OriginPoolUseTLSTLSConfigCustomSecurityModel struct {
-	CipherSuites types.List `tfsdk:"cipher_suites"`
-	MaxVersion types.String `tfsdk:"max_version"`
-	MinVersion types.String `tfsdk:"min_version"`
+	CipherSuites types.List   `tfsdk:"cipher_suites"`
+	MaxVersion   types.String `tfsdk:"max_version"`
+	MinVersion   types.String `tfsdk:"min_version"`
 }
 
 // OriginPoolUseTLSUseMtlsModel represents use_mtls block
@@ -427,12 +427,12 @@ type OriginPoolUseTLSUseMtlsModel struct {
 
 // OriginPoolUseTLSUseMtlsTLSCertificatesModel represents tls_certificates block
 type OriginPoolUseTLSUseMtlsTLSCertificatesModel struct {
-	CertificateURL types.String `tfsdk:"certificate_url"`
-	DescriptionSpec types.String `tfsdk:"description_spec"`
+	CertificateURL       types.String                                                     `tfsdk:"certificate_url"`
+	DescriptionSpec      types.String                                                     `tfsdk:"description_spec"`
 	CustomHashAlgorithms *OriginPoolUseTLSUseMtlsTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
-	DisableOcspStapling *OriginPoolEmptyModel `tfsdk:"disable_ocsp_stapling"`
-	PrivateKey *OriginPoolUseTLSUseMtlsTLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
-	UseSystemDefaults *OriginPoolEmptyModel `tfsdk:"use_system_defaults"`
+	DisableOcspStapling  *OriginPoolEmptyModel                                            `tfsdk:"disable_ocsp_stapling"`
+	PrivateKey           *OriginPoolUseTLSUseMtlsTLSCertificatesPrivateKeyModel           `tfsdk:"private_key"`
+	UseSystemDefaults    *OriginPoolEmptyModel                                            `tfsdk:"use_system_defaults"`
 }
 
 // OriginPoolUseTLSUseMtlsTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
@@ -443,64 +443,64 @@ type OriginPoolUseTLSUseMtlsTLSCertificatesCustomHashAlgorithmsModel struct {
 // OriginPoolUseTLSUseMtlsTLSCertificatesPrivateKeyModel represents private_key block
 type OriginPoolUseTLSUseMtlsTLSCertificatesPrivateKeyModel struct {
 	BlindfoldSecretInfo *OriginPoolUseTLSUseMtlsTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *OriginPoolUseTLSUseMtlsTLSCertificatesPrivateKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *OriginPoolUseTLSUseMtlsTLSCertificatesPrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // OriginPoolUseTLSUseMtlsTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
 type OriginPoolUseTLSUseMtlsTLSCertificatesPrivateKeyBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // OriginPoolUseTLSUseMtlsTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
 type OriginPoolUseTLSUseMtlsTLSCertificatesPrivateKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // OriginPoolUseTLSUseMtlsObjModel represents use_mtls_obj block
 type OriginPoolUseTLSUseMtlsObjModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // OriginPoolUseTLSUseServerVerificationModel represents use_server_verification block
 type OriginPoolUseTLSUseServerVerificationModel struct {
-	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
-	TrustedCa *OriginPoolUseTLSUseServerVerificationTrustedCaModel `tfsdk:"trusted_ca"`
+	TrustedCaURL types.String                                         `tfsdk:"trusted_ca_url"`
+	TrustedCa    *OriginPoolUseTLSUseServerVerificationTrustedCaModel `tfsdk:"trusted_ca"`
 }
 
 // OriginPoolUseTLSUseServerVerificationTrustedCaModel represents trusted_ca block
 type OriginPoolUseTLSUseServerVerificationTrustedCaModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 type OriginPoolResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	EndpointSelection types.String `tfsdk:"endpoint_selection"`
-	HealthCheckPort types.Int64 `tfsdk:"health_check_port"`
-	LoadBalancerAlgorithm types.String `tfsdk:"loadbalancer_algorithm"`
-	Port types.Int64 `tfsdk:"port"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	AdvancedOptions *OriginPoolAdvancedOptionsModel `tfsdk:"advanced_options"`
-	AutomaticPort *OriginPoolEmptyModel `tfsdk:"automatic_port"`
-	Healthcheck []OriginPoolHealthcheckModel `tfsdk:"healthcheck"`
-	LbPort *OriginPoolEmptyModel `tfsdk:"lb_port"`
-	NoTLS *OriginPoolEmptyModel `tfsdk:"no_tls"`
-	OriginServers []OriginPoolOriginServersModel `tfsdk:"origin_servers"`
-	SameAsEndpointPort *OriginPoolEmptyModel `tfsdk:"same_as_endpoint_port"`
+	Name                      types.String                              `tfsdk:"name"`
+	Namespace                 types.String                              `tfsdk:"namespace"`
+	Annotations               types.Map                                 `tfsdk:"annotations"`
+	Description               types.String                              `tfsdk:"description"`
+	Disable                   types.Bool                                `tfsdk:"disable"`
+	Labels                    types.Map                                 `tfsdk:"labels"`
+	ID                        types.String                              `tfsdk:"id"`
+	EndpointSelection         types.String                              `tfsdk:"endpoint_selection"`
+	HealthCheckPort           types.Int64                               `tfsdk:"health_check_port"`
+	LoadBalancerAlgorithm     types.String                              `tfsdk:"loadbalancer_algorithm"`
+	Port                      types.Int64                               `tfsdk:"port"`
+	Timeouts                  timeouts.Value                            `tfsdk:"timeouts"`
+	AdvancedOptions           *OriginPoolAdvancedOptionsModel           `tfsdk:"advanced_options"`
+	AutomaticPort             *OriginPoolEmptyModel                     `tfsdk:"automatic_port"`
+	Healthcheck               []OriginPoolHealthcheckModel              `tfsdk:"healthcheck"`
+	LbPort                    *OriginPoolEmptyModel                     `tfsdk:"lb_port"`
+	NoTLS                     *OriginPoolEmptyModel                     `tfsdk:"no_tls"`
+	OriginServers             []OriginPoolOriginServersModel            `tfsdk:"origin_servers"`
+	SameAsEndpointPort        *OriginPoolEmptyModel                     `tfsdk:"same_as_endpoint_port"`
 	UpstreamConnPoolReuseType *OriginPoolUpstreamConnPoolReuseTypeModel `tfsdk:"upstream_conn_pool_reuse_type"`
-	UseTLS *OriginPoolUseTLSModel `tfsdk:"use_tls"`
+	UseTLS                    *OriginPoolUseTLSModel                    `tfsdk:"use_tls"`
 }
 
 func (r *OriginPoolResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -514,7 +514,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the OriginPool. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -524,7 +524,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the OriginPool will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -534,57 +534,57 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"endpoint_selection": schema.StringAttribute{
 				MarkdownDescription: "Endpoint Selection Policy. Policy for selection of endpoints from local site/remote site/both Consider both remote and local endpoints for load balancing LOCAL_ONLY: Consider only local endpoints for load balancing Enable this policy to load balance ONLY among locally discovered endpoints Prefer the local endpoints for load balancing. If local endpoints are not present remote endpoints will be considered. Possible values are `DISTRIBUTED`, `LOCAL_ONLY`, `LOCAL_PREFERRED`. Defaults to `DISTRIBUTED`.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"health_check_port": schema.Int64Attribute{
 				MarkdownDescription: "[OneOf: health_check_port, same_as_endpoint_port] Health check port. Port used for performing health check",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{
 					int64planmodifier.UseStateForUnknown(),
 				},
 			},
 			"loadbalancer_algorithm": schema.StringAttribute{
 				MarkdownDescription: "Load Balancer Algorithm. Different load balancing algorithms supported When a connection to a endpoint in an upstream cluster is required, the load balancer uses loadbalancer_algorithm to determine which host is selected. - ROUND_ROBIN: ROUND_ROBIN Policy in which each healthy/available upstream endpoint is selected in round robin order. - LEAST_REQUEST: LEAST_REQUEST Policy in which loadbalancer picks the upstream endpoint which has the fewest active requests - RING_HASH: RING_HASH Policy implements consistent hashing to upstream endpoints using ring hash of endpoint names Hash of the incoming request is calculated using request hash policy. The ring/modulo hash load balancer implements consistent hashing to upstream hosts. The algorithm is based on mapping all hosts onto a circle such that the addition or removal of a host from the host set changes only affect 1/N requests. This technique is also commonly known as “ketama” hashing. A consistent hashing load balancer is only effective when protocol routing is used that specifies a value to hash on. The minimum ring size governs the replication factor for each host in the ring. For example, if the minimum ring size is 1024 and there are 16 hosts, each host will be replicated 64 times. - RANDOM: RANDOM Policy in which each available upstream endpoint is selected in random order. The random load balancer selects a random healthy host. The random load balancer generally performs better than round robin if no health checking policy is configured. Random selection avoids bias towards the host in the set that comes after a failed host. - LB_OVERRIDE: Load Balancer Override Hash policy is taken from from the load balancer which is using this origin pool. Possible values are `ROUND_ROBIN`, `LEAST_REQUEST`, `RING_HASH`, `RANDOM`, `LB_OVERRIDE`. Defaults to `ROUND_ROBIN`.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"port": schema.Int64Attribute{
 				MarkdownDescription: "Port. Endpoint service is available on this port",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{
 					int64planmodifier.UseStateForUnknown(),
 				},
@@ -602,15 +602,15 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 				Attributes: map[string]schema.Attribute{
 					"connection_timeout": schema.Int64Attribute{
 						MarkdownDescription: "Connection Timeout. The timeout for new network connections to endpoints in the cluster. This is specified in milliseconds. The  seconds. Defaults to `2`.",
-						Optional: true,
+						Optional:            true,
 					},
 					"http_idle_timeout": schema.Int64Attribute{
 						MarkdownDescription: "HTTP Idle Timeout. The idle timeout for upstream connection pool connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The  minutes. Defaults to `5`.",
-						Optional: true,
+						Optional:            true,
 					},
 					"panic_threshold": schema.Int64Attribute{
 						MarkdownDescription: "Panic threshold. x-example:'25' Configure a threshold (percentage of unhealthy endpoints) below which all endpoints will be considered for load balancing ignoring its health status.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -622,23 +622,23 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 						Attributes: map[string]schema.Attribute{
 							"connection_limit": schema.Int64Attribute{
 								MarkdownDescription: "Connection Limit. The maximum number of connections that loadbalancer will establish to all hosts in an upstream cluster. In practice this is only applicable to TCP and HTTP/1.1 clusters since HTTP/2 uses a single connection to each host. Remove endpoint out of load balancing decision, if number of connections reach connection limit.",
-								Optional: true,
+								Optional:            true,
 							},
 							"max_requests": schema.Int64Attribute{
 								MarkdownDescription: "Maximum Request Count. The maximum number of requests that can be outstanding to all hosts in a cluster at any given time. In practice this is applicable to HTTP/2 clusters since HTTP/1.1 clusters are governed by the maximum connections (connection_limit). Remove endpoint out of load balancing decision, if requests exceed this count.",
-								Optional: true,
+								Optional:            true,
 							},
 							"pending_requests": schema.Int64Attribute{
 								MarkdownDescription: "Pending Requests. The maximum number of requests that will be queued while waiting for a ready connection pool connection. Since HTTP/2 requests are sent over a single connection, this circuit breaker only comes into play as the initial connection is created, as requests will be multiplexed immediately afterwards. For HTTP/1.1, requests are added to the list of pending requests whenever there aren’t enough upstream connections available to immediately dispatch the request, so this circuit breaker will remain in play for the lifetime of the process. Remove endpoint out of load balancing decision, if pending request reach pending_request.",
-								Optional: true,
+								Optional:            true,
 							},
 							"priority": schema.StringAttribute{
 								MarkdownDescription: "Routing Priority. Priority routing for each request. Different connection pools are used based on the priority selected for the request. Also, circuit-breaker configuration at destination cluster is chosen based on selected priority. Default routing mechanism High-Priority routing mechanism. Possible values are `DEFAULT`, `HIGH`. Defaults to `DEFAULT`.",
-								Optional: true,
+								Optional:            true,
 							},
 							"retries": schema.Int64Attribute{
 								MarkdownDescription: "Retry Count. The maximum number of retries that can be outstanding to all hosts in a cluster at any given time. Remove endpoint out of load balancing decision, if retries for request exceed this count.",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 					},
@@ -665,16 +665,14 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 					},
 					"enable_subsets": schema.SingleNestedBlock{
 						MarkdownDescription: "Origin Pool Subset Options. Configure subset options for origin pool",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"any_endpoint": schema.SingleNestedBlock{
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 							},
 							"default_subset": schema.SingleNestedBlock{
 								MarkdownDescription: "Origin Pool Default Subset. Default Subset definition",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"default_subset": schema.SingleNestedBlock{
 										MarkdownDescription: "Default Subset for Origin Pool. List of key-value pairs that define default subset. which gets used when route specifies no metadata or no subset matching the metadata exists.",
@@ -687,8 +685,8 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 									Attributes: map[string]schema.Attribute{
 										"keys": schema.ListAttribute{
 											MarkdownDescription: "Keys. List of keys that define a cluster subset class.",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 									},
 								},
@@ -700,13 +698,11 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 					},
 					"http1_config": schema.SingleNestedBlock{
 						MarkdownDescription: "HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for upstream connections",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"header_transformation": schema.SingleNestedBlock{
 								MarkdownDescription: "Header Transformation. Header Transformation options for HTTP/1.1 request/response headers",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"default_header_transformation": schema.SingleNestedBlock{
 										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -729,7 +725,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 						Attributes: map[string]schema.Attribute{
 							"enabled": schema.BoolAttribute{
 								MarkdownDescription: "HTTP2 Enabled. Enable/disable HTTP2 Protocol for upstream connections",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 					},
@@ -741,23 +737,23 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 						Attributes: map[string]schema.Attribute{
 							"base_ejection_time": schema.Int64Attribute{
 								MarkdownDescription: "Base Ejection Time. The base time that a host is ejected for. The real time is equal to the base time multiplied by the number of times the host has been ejected. This causes hosts to get ejected for longer periods if they continue to fail. Specified in milliseconds. Defaults to `30000ms`.",
-								Optional: true,
+								Optional:            true,
 							},
 							"consecutive_5xx": schema.Int64Attribute{
 								MarkdownDescription: "Consecutive 5xx Count. If an upstream endpoint returns some number of consecutive 5xx, it will be ejected. Note that in this case a 5xx means an actual 5xx respond code, or an event that would cause the HTTP router to return one on the upstream’s behalf(reset, connection failure, etc.) consecutive_5xx indicates the number of consecutive 5xx responses required before a consecutive 5xx ejection occurs. Defaults to `5`.",
-								Optional: true,
+								Optional:            true,
 							},
 							"consecutive_gateway_failure": schema.Int64Attribute{
 								MarkdownDescription: "Consecutive Gateway Failure. If an upstream endpoint returns some number of consecutive “gateway errors” (502, 503 or 504 status code), it will be ejected. Note that this includes events that would cause the HTTP router to return one of these status codes on the upstream’s behalf (reset, connection failure, etc.). consecutive_gateway_failure indicates the number of consecutive gateway failures before a consecutive gateway failure ejection occurs. Defaults to `5`.",
-								Optional: true,
+								Optional:            true,
 							},
 							"interval": schema.Int64Attribute{
 								MarkdownDescription: "Interval. The time interval between ejection analysis sweeps. This can result in both new ejections as well as endpoints being returned to service. Specified in milliseconds. Defaults to `10000ms`.",
-								Optional: true,
+								Optional:            true,
 							},
 							"max_ejection_percent": schema.Int64Attribute{
 								MarkdownDescription: "Max Ejection Percentage. The maximum % of an upstream cluster that can be ejected due to outlier detection.  but will eject at least one host regardless of the value. Defaults to `10%`.",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 					},
@@ -768,7 +764,6 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 			"automatic_port": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: automatic_port, lb_port, port] Empty. This can be used for messages where no values are needed",
@@ -779,19 +774,18 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 					Attributes: map[string]schema.Attribute{
 						"name": schema.StringAttribute{
 							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-							Optional: true,
+							Optional:            true,
 						},
 						"namespace": schema.StringAttribute{
 							MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-							Optional: true,
+							Optional:            true,
 						},
 						"tenant": schema.StringAttribute{
 							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-							Optional: true,
-							Computed: true,
+							Optional:            true,
+							Computed:            true,
 						},
 					},
-
 				},
 			},
 			"lb_port": schema.SingleNestedBlock{
@@ -803,15 +797,14 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 			"origin_servers": schema.ListNestedBlock{
 				MarkdownDescription: "Origin Servers. List of origin servers in this pool",
 				NestedObject: schema.NestedBlockObject{
-					Attributes: map[string]schema.Attribute{
-					},
+					Attributes: map[string]schema.Attribute{},
 					Blocks: map[string]schema.Block{
 						"cbip_service": schema.SingleNestedBlock{
 							MarkdownDescription: "Discovered Classic BIG-IP Service Name. Specify origin server with Classic BIG-IP Service (Virtual Server)",
 							Attributes: map[string]schema.Attribute{
 								"service_name": schema.StringAttribute{
 									MarkdownDescription: "Service Name. Name of the discovered Classic BIG-IP virtual server to be used as origin.",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 						},
@@ -820,7 +813,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 							Attributes: map[string]schema.Attribute{
 								"service_name": schema.StringAttribute{
 									MarkdownDescription: "Service Name. Consul service name of this origin server will be listed, including cluster-id. The format is servicename:cluster-id.",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
@@ -832,24 +825,23 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 								},
 								"site_locator": schema.SingleNestedBlock{
 									MarkdownDescription: "Site or Virtual Site. This message defines a reference to a site or virtual site object",
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"site": schema.SingleNestedBlock{
 											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
 													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-													Optional: true,
+													Optional:            true,
 												},
 												"namespace": schema.StringAttribute{
 													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-													Optional: true,
+													Optional:            true,
 												},
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-													Optional: true,
-													Computed: true,
+													Optional:            true,
+													Computed:            true,
 												},
 											},
 										},
@@ -858,16 +850,16 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
 													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-													Optional: true,
+													Optional:            true,
 												},
 												"namespace": schema.StringAttribute{
 													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-													Optional: true,
+													Optional:            true,
 												},
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-													Optional: true,
-													Computed: true,
+													Optional:            true,
+													Computed:            true,
 												},
 											},
 										},
@@ -875,8 +867,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 								},
 								"snat_pool": schema.SingleNestedBlock{
 									MarkdownDescription: "Snat Pool. Snat Pool configuration",
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"no_snat_pool": schema.SingleNestedBlock{
 											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -886,8 +877,8 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 											Attributes: map[string]schema.Attribute{
 												"prefixes": schema.ListAttribute{
 													MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 										},
@@ -897,24 +888,23 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 						"custom_endpoint_object": schema.SingleNestedBlock{
 							MarkdownDescription: "Custom Endpoint Object for Origin Server. Specify origin server with a reference to endpoint object",
-							Attributes: map[string]schema.Attribute{
-							},
+							Attributes:          map[string]schema.Attribute{},
 							Blocks: map[string]schema.Block{
 								"endpoint": schema.SingleNestedBlock{
 									MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-											Optional: true,
+											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
 											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-											Optional: true,
+											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
@@ -925,11 +915,11 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 							Attributes: map[string]schema.Attribute{
 								"protocol": schema.StringAttribute{
 									MarkdownDescription: "Protocol Type. Type of protocol - PROTOCOL_TCP: TCP - PROTOCOL_UDP: UDP. Possible values are `PROTOCOL_TCP`, `PROTOCOL_UDP`. Defaults to `PROTOCOL_TCP`.",
-									Optional: true,
+									Optional:            true,
 								},
 								"service_name": schema.StringAttribute{
 									MarkdownDescription: "Service Name. K8s service name of the origin server will be listed, including the namespace and cluster-id. For vK8s services, you need to enter a string with the format servicename.namespace:cluster-id. If the servicename is 'frontend', namespace is 'speedtest' and cluster-id is 'prod', then you will enter 'frontend.speedtest:prod'. Both namespace and cluster-id are optional.",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
@@ -941,24 +931,23 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 								},
 								"site_locator": schema.SingleNestedBlock{
 									MarkdownDescription: "Site or Virtual Site. This message defines a reference to a site or virtual site object",
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"site": schema.SingleNestedBlock{
 											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
 													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-													Optional: true,
+													Optional:            true,
 												},
 												"namespace": schema.StringAttribute{
 													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-													Optional: true,
+													Optional:            true,
 												},
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-													Optional: true,
-													Computed: true,
+													Optional:            true,
+													Computed:            true,
 												},
 											},
 										},
@@ -967,16 +956,16 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
 													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-													Optional: true,
+													Optional:            true,
 												},
 												"namespace": schema.StringAttribute{
 													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-													Optional: true,
+													Optional:            true,
 												},
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-													Optional: true,
-													Computed: true,
+													Optional:            true,
+													Computed:            true,
 												},
 											},
 										},
@@ -984,8 +973,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 								},
 								"snat_pool": schema.SingleNestedBlock{
 									MarkdownDescription: "Snat Pool. Snat Pool configuration",
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"no_snat_pool": schema.SingleNestedBlock{
 											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -995,8 +983,8 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 											Attributes: map[string]schema.Attribute{
 												"prefixes": schema.ListAttribute{
 													MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 										},
@@ -1015,7 +1003,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 							Attributes: map[string]schema.Attribute{
 								"ip": schema.StringAttribute{
 									MarkdownDescription: "IP. Private IPV4 address",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
@@ -1030,39 +1018,38 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-											Optional: true,
+											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
 											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-											Optional: true,
+											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
 								"site_locator": schema.SingleNestedBlock{
 									MarkdownDescription: "Site or Virtual Site. This message defines a reference to a site or virtual site object",
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"site": schema.SingleNestedBlock{
 											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
 													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-													Optional: true,
+													Optional:            true,
 												},
 												"namespace": schema.StringAttribute{
 													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-													Optional: true,
+													Optional:            true,
 												},
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-													Optional: true,
-													Computed: true,
+													Optional:            true,
+													Computed:            true,
 												},
 											},
 										},
@@ -1071,16 +1058,16 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
 													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-													Optional: true,
+													Optional:            true,
 												},
 												"namespace": schema.StringAttribute{
 													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-													Optional: true,
+													Optional:            true,
 												},
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-													Optional: true,
-													Computed: true,
+													Optional:            true,
+													Computed:            true,
 												},
 											},
 										},
@@ -1088,8 +1075,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 								},
 								"snat_pool": schema.SingleNestedBlock{
 									MarkdownDescription: "Snat Pool. Snat Pool configuration",
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"no_snat_pool": schema.SingleNestedBlock{
 											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -1099,8 +1085,8 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 											Attributes: map[string]schema.Attribute{
 												"prefixes": schema.ListAttribute{
 													MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 										},
@@ -1113,11 +1099,11 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 							Attributes: map[string]schema.Attribute{
 								"dns_name": schema.StringAttribute{
 									MarkdownDescription: "DNS Name. DNS Name",
-									Optional: true,
+									Optional:            true,
 								},
 								"refresh_interval": schema.Int64Attribute{
 									MarkdownDescription: "DNS Refresh Interval. Interval for DNS refresh in seconds. Max value is 7 days as per https://datatracker.ietf.org/doc/html/rfc8767",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
@@ -1132,39 +1118,38 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-											Optional: true,
+											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
 											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-											Optional: true,
+											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
 								"site_locator": schema.SingleNestedBlock{
 									MarkdownDescription: "Site or Virtual Site. This message defines a reference to a site or virtual site object",
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"site": schema.SingleNestedBlock{
 											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
 													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-													Optional: true,
+													Optional:            true,
 												},
 												"namespace": schema.StringAttribute{
 													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-													Optional: true,
+													Optional:            true,
 												},
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-													Optional: true,
-													Computed: true,
+													Optional:            true,
+													Computed:            true,
 												},
 											},
 										},
@@ -1173,16 +1158,16 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
 													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-													Optional: true,
+													Optional:            true,
 												},
 												"namespace": schema.StringAttribute{
 													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-													Optional: true,
+													Optional:            true,
 												},
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-													Optional: true,
-													Computed: true,
+													Optional:            true,
+													Computed:            true,
 												},
 											},
 										},
@@ -1190,8 +1175,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 								},
 								"snat_pool": schema.SingleNestedBlock{
 									MarkdownDescription: "Snat Pool. Snat Pool configuration",
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"no_snat_pool": schema.SingleNestedBlock{
 											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -1201,8 +1185,8 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 											Attributes: map[string]schema.Attribute{
 												"prefixes": schema.ListAttribute{
 													MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 										},
@@ -1215,7 +1199,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 							Attributes: map[string]schema.Attribute{
 								"ip": schema.StringAttribute{
 									MarkdownDescription: "Public IPV4. Public IPV4 address",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 						},
@@ -1224,11 +1208,11 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 							Attributes: map[string]schema.Attribute{
 								"dns_name": schema.StringAttribute{
 									MarkdownDescription: "DNS Name. DNS Name",
-									Optional: true,
+									Optional:            true,
 								},
 								"refresh_interval": schema.Int64Attribute{
 									MarkdownDescription: "DNS Refresh Interval. Interval for DNS refresh in seconds. Max value is 7 days as per https://datatracker.ietf.org/doc/html/rfc8767",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 						},
@@ -1237,7 +1221,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 							Attributes: map[string]schema.Attribute{
 								"ip": schema.StringAttribute{
 									MarkdownDescription: "IPV4. IPV4 address",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
@@ -1246,16 +1230,16 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-											Optional: true,
+											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
 											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-											Optional: true,
+											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
@@ -1266,7 +1250,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 							Attributes: map[string]schema.Attribute{
 								"dns_name": schema.StringAttribute{
 									MarkdownDescription: "DNS Name. DNS Name",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
@@ -1275,23 +1259,22 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-											Optional: true,
+											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
 											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-											Optional: true,
+											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
 							},
 						},
 					},
-
 				},
 			},
 			"same_as_endpoint_port": schema.SingleNestedBlock{
@@ -1299,8 +1282,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 			},
 			"upstream_conn_pool_reuse_type": schema.SingleNestedBlock{
 				MarkdownDescription: "Select upstream connection pool reuse state. Select upstream connection pool reuse state for every downstream connection. This configuration choice is for HTTP(S) LB only.",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"disable_conn_pool_reuse": schema.SingleNestedBlock{
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -1309,18 +1291,17 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 			"use_tls": schema.SingleNestedBlock{
 				MarkdownDescription: "TLS Parameters for Origin Servers. Upstream TLS Parameters",
 				Attributes: map[string]schema.Attribute{
 					"max_session_keys": schema.Int64Attribute{
 						MarkdownDescription: "Max Session Keys Cached. x-example:'25' Number of session keys that are cached.",
-						Optional: true,
+						Optional:            true,
 					},
 					"sni": schema.StringAttribute{
 						MarkdownDescription: "SNI Value. SNI value to be used.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -1341,24 +1322,23 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 					},
 					"tls_config": schema.SingleNestedBlock{
 						MarkdownDescription: "TLS Config. This defines various options to configure TLS configuration parameters",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"custom_security": schema.SingleNestedBlock{
 								MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers",
 								Attributes: map[string]schema.Attribute{
 									"cipher_suites": schema.ListAttribute{
 										MarkdownDescription: "Cipher Suites. The TLS listener will only support the specified cipher list.",
-										Optional: true,
-										ElementType: types.StringType,
+										Optional:            true,
+										ElementType:         types.StringType,
 									},
 									"max_version": schema.StringAttribute{
 										MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
-										Optional: true,
+										Optional:            true,
 									},
 									"min_version": schema.StringAttribute{
 										MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -1378,8 +1358,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 					},
 					"use_mtls": schema.SingleNestedBlock{
 						MarkdownDescription: "mTLS Certificate. mTLS Client Certificate",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"tls_certificates": schema.ListNestedBlock{
 								MarkdownDescription: "mTLS Client Certificate. mTLS Client Certificate",
@@ -1387,11 +1366,11 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 									Attributes: map[string]schema.Attribute{
 										"certificate_url": schema.StringAttribute{
 											MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
-											Optional: true,
+											Optional:            true,
 										},
 										"description_spec": schema.StringAttribute{
 											MarkdownDescription: "Description. Description for the certificate",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -1400,8 +1379,8 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 											Attributes: map[string]schema.Attribute{
 												"hash_algorithms": schema.ListAttribute{
 													MarkdownDescription: "Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM`.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 										},
@@ -1410,23 +1389,22 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 										},
 										"private_key": schema.SingleNestedBlock{
 											MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"blindfold_secret_info": schema.SingleNestedBlock{
 													MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 													Attributes: map[string]schema.Attribute{
 														"decryption_provider": schema.StringAttribute{
 															MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-															Optional: true,
+															Optional:            true,
 														},
 														"location": schema.StringAttribute{
 															MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-															Optional: true,
+															Optional:            true,
 														},
 														"store_provider": schema.StringAttribute{
 															MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -1435,11 +1413,11 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 													Attributes: map[string]schema.Attribute{
 														"provider_ref": schema.StringAttribute{
 															MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-															Optional: true,
+															Optional:            true,
 														},
 														"url": schema.StringAttribute{
 															MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -1458,16 +1436,16 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
 								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-								Optional: true,
+								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
 								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-								Optional: true,
+								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-								Optional: true,
-								Computed: true,
+								Optional:            true,
+								Computed:            true,
 							},
 						},
 					},
@@ -1476,7 +1454,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 						Attributes: map[string]schema.Attribute{
 							"trusted_ca_url": schema.StringAttribute{
 								MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Origin Pool for verification of server's certificate",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -1485,16 +1463,16 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-										Optional: true,
+										Optional:            true,
 									},
 									"namespace": schema.StringAttribute{
 										MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-										Optional: true,
+										Optional:            true,
 									},
 									"tenant": schema.StringAttribute{
 										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-										Optional: true,
-										Computed: true,
+										Optional:            true,
+										Computed:            true,
 									},
 								},
 							},
@@ -1504,7 +1482,6 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 		},
 	}
@@ -2091,7 +2068,6 @@ func (r *OriginPoolResource) Create(ctx context.Context, req resource.CreateRequ
 		createReq.Spec["port"] = data.Port.ValueInt64()
 	}
 
-
 	apiResource, err := r.client.CreateOriginPool(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create OriginPool: %s", err))
@@ -2103,7 +2079,7 @@ func (r *OriginPoolResource) Create(ctx context.Context, req resource.CreateRequ
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if blockData, ok := apiResource.Spec["advanced_options"].(map[string]interface{}); ok && (isImport || data.AdvancedOptions != nil) {
 		data.AdvancedOptions = &OriginPoolAdvancedOptionsModel{
 			AutoHTTPConfig: func() *OriginPoolEmptyModel {
@@ -2257,8 +2233,7 @@ func (r *OriginPoolResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				// Import case: read from API
 				if _, ok := blockData["enable_subsets"].(map[string]interface{}); ok {
-					return &OriginPoolAdvancedOptionsEnableSubsetsModel{
-					}
+					return &OriginPoolAdvancedOptionsEnableSubsetsModel{}
 				}
 				return nil
 			}(),
@@ -2269,8 +2244,7 @@ func (r *OriginPoolResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				// Import case: read from API
 				if _, ok := blockData["http1_config"].(map[string]interface{}); ok {
-					return &OriginPoolAdvancedOptionsHttp1ConfigModel{
-					}
+					return &OriginPoolAdvancedOptionsHttp1ConfigModel{}
 				}
 				return nil
 			}(),
@@ -2474,8 +2448,7 @@ func (r *OriginPoolResource) Create(ctx context.Context, req resource.CreateRequ
 					}(),
 					CustomEndpointObject: func() *OriginPoolOriginServersCustomEndpointObjectModel {
 						if _, ok := itemMap["custom_endpoint_object"].(map[string]interface{}); ok {
-							return &OriginPoolOriginServersCustomEndpointObjectModel{
-							}
+							return &OriginPoolOriginServersCustomEndpointObjectModel{}
 						}
 						return nil
 					}(),
@@ -2732,8 +2705,7 @@ func (r *OriginPoolResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				// Import case: read from API
 				if _, ok := blockData["tls_config"].(map[string]interface{}); ok {
-					return &OriginPoolUseTLSTLSConfigModel{
-					}
+					return &OriginPoolUseTLSTLSConfigModel{}
 				}
 				return nil
 			}(),
@@ -2756,8 +2728,7 @@ func (r *OriginPoolResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				// Import case: read from API
 				if _, ok := blockData["use_mtls"].(map[string]interface{}); ok {
-					return &OriginPoolUseTLSUseMtlsModel{
-					}
+					return &OriginPoolUseTLSUseMtlsModel{}
 				}
 				return nil
 			}(),
@@ -2843,7 +2814,6 @@ func (r *OriginPoolResource) Create(ctx context.Context, req resource.CreateRequ
 	} else {
 		data.Port = types.Int64Null()
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -2933,9 +2903,9 @@ func (r *OriginPoolResource) Read(ctx context.Context, req resource.ReadRequest,
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if blockData, ok := apiResource.Spec["advanced_options"].(map[string]interface{}); ok && (isImport || data.AdvancedOptions != nil) {
 		data.AdvancedOptions = &OriginPoolAdvancedOptionsModel{
@@ -3090,8 +3060,7 @@ func (r *OriginPoolResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				// Import case: read from API
 				if _, ok := blockData["enable_subsets"].(map[string]interface{}); ok {
-					return &OriginPoolAdvancedOptionsEnableSubsetsModel{
-					}
+					return &OriginPoolAdvancedOptionsEnableSubsetsModel{}
 				}
 				return nil
 			}(),
@@ -3102,8 +3071,7 @@ func (r *OriginPoolResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				// Import case: read from API
 				if _, ok := blockData["http1_config"].(map[string]interface{}); ok {
-					return &OriginPoolAdvancedOptionsHttp1ConfigModel{
-					}
+					return &OriginPoolAdvancedOptionsHttp1ConfigModel{}
 				}
 				return nil
 			}(),
@@ -3307,8 +3275,7 @@ func (r *OriginPoolResource) Read(ctx context.Context, req resource.ReadRequest,
 					}(),
 					CustomEndpointObject: func() *OriginPoolOriginServersCustomEndpointObjectModel {
 						if _, ok := itemMap["custom_endpoint_object"].(map[string]interface{}); ok {
-							return &OriginPoolOriginServersCustomEndpointObjectModel{
-							}
+							return &OriginPoolOriginServersCustomEndpointObjectModel{}
 						}
 						return nil
 					}(),
@@ -3565,8 +3532,7 @@ func (r *OriginPoolResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				// Import case: read from API
 				if _, ok := blockData["tls_config"].(map[string]interface{}); ok {
-					return &OriginPoolUseTLSTLSConfigModel{
-					}
+					return &OriginPoolUseTLSTLSConfigModel{}
 				}
 				return nil
 			}(),
@@ -3589,8 +3555,7 @@ func (r *OriginPoolResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				// Import case: read from API
 				if _, ok := blockData["use_mtls"].(map[string]interface{}); ok {
-					return &OriginPoolUseTLSUseMtlsModel{
-					}
+					return &OriginPoolUseTLSUseMtlsModel{}
 				}
 				return nil
 			}(),
@@ -3676,7 +3641,6 @@ func (r *OriginPoolResource) Read(ctx context.Context, req resource.ReadRequest,
 	} else {
 		data.Port = types.Int64Null()
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -4173,7 +4137,6 @@ func (r *OriginPoolResource) Update(ctx context.Context, req resource.UpdateRequ
 	if !data.Port.IsNull() && !data.Port.IsUnknown() {
 		apiResource.Spec["port"] = data.Port.ValueInt64()
 	}
-
 
 	updated, err := r.client.UpdateOriginPool(ctx, apiResource)
 	if err != nil {

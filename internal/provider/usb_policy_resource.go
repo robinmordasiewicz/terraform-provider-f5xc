@@ -51,23 +51,23 @@ type UsbPolicyEmptyModel struct {
 
 // UsbPolicyAllowedDevicesModel represents allowed_devices block
 type UsbPolicyAllowedDevicesModel struct {
-	BDeviceClass types.String `tfsdk:"b_device_class"`
+	BDeviceClass    types.String `tfsdk:"b_device_class"`
 	BDeviceProtocol types.String `tfsdk:"b_device_protocol"`
 	BDeviceSubClass types.String `tfsdk:"b_device_sub_class"`
-	ISerial types.String `tfsdk:"i_serial"`
-	IDProduct types.String `tfsdk:"id_product"`
-	IDVendor types.String `tfsdk:"id_vendor"`
+	ISerial         types.String `tfsdk:"i_serial"`
+	IDProduct       types.String `tfsdk:"id_product"`
+	IDVendor        types.String `tfsdk:"id_vendor"`
 }
 
 type UsbPolicyResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Name           types.String                   `tfsdk:"name"`
+	Namespace      types.String                   `tfsdk:"namespace"`
+	Annotations    types.Map                      `tfsdk:"annotations"`
+	Description    types.String                   `tfsdk:"description"`
+	Disable        types.Bool                     `tfsdk:"disable"`
+	Labels         types.Map                      `tfsdk:"labels"`
+	ID             types.String                   `tfsdk:"id"`
+	Timeouts       timeouts.Value                 `tfsdk:"timeouts"`
 	AllowedDevices []UsbPolicyAllowedDevicesModel `tfsdk:"allowed_devices"`
 }
 
@@ -82,7 +82,7 @@ func (r *UsbPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the UsbPolicy. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -92,7 +92,7 @@ func (r *UsbPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the UsbPolicy will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -102,25 +102,25 @@ func (r *UsbPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -139,30 +139,29 @@ func (r *UsbPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 					Attributes: map[string]schema.Attribute{
 						"b_device_class": schema.StringAttribute{
 							MarkdownDescription: "Class. The class of this device",
-							Optional: true,
+							Optional:            true,
 						},
 						"b_device_protocol": schema.StringAttribute{
 							MarkdownDescription: "Protocol. The protocol (within the sub-class) of this device",
-							Optional: true,
+							Optional:            true,
 						},
 						"b_device_sub_class": schema.StringAttribute{
 							MarkdownDescription: "Subclass. The sub-class (within the class) of this device",
-							Optional: true,
+							Optional:            true,
 						},
 						"i_serial": schema.StringAttribute{
 							MarkdownDescription: "iSerialNumber. Index of Serial Number String Descriptor",
-							Optional: true,
+							Optional:            true,
 						},
 						"id_product": schema.StringAttribute{
 							MarkdownDescription: "Product ID. Product ID (Assigned by Manufacturer) in hex",
-							Optional: true,
+							Optional:            true,
 						},
 						"id_vendor": schema.StringAttribute{
 							MarkdownDescription: "Vendor ID. Vendor ID (Assigned by USB Org) in hex",
-							Optional: true,
+							Optional:            true,
 						},
 					},
-
 				},
 			},
 		},
@@ -340,7 +339,6 @@ func (r *UsbPolicyResource) Create(ctx context.Context, req resource.CreateReque
 		createReq.Spec["allowed_devices"] = allowed_devicesList
 	}
 
-
 	apiResource, err := r.client.CreateUsbPolicy(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create UsbPolicy: %s", err))
@@ -352,7 +350,7 @@ func (r *UsbPolicyResource) Create(ctx context.Context, req resource.CreateReque
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["allowed_devices"].([]interface{}); ok && len(listData) > 0 {
 		var allowed_devicesList []UsbPolicyAllowedDevicesModel
 		for listIdx, item := range listData {
@@ -400,7 +398,6 @@ func (r *UsbPolicyResource) Create(ctx context.Context, req resource.CreateReque
 		}
 		data.AllowedDevices = allowed_devicesList
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -490,9 +487,9 @@ func (r *UsbPolicyResource) Read(ctx context.Context, req resource.ReadRequest, 
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if listData, ok := apiResource.Spec["allowed_devices"].([]interface{}); ok && len(listData) > 0 {
 		var allowed_devicesList []UsbPolicyAllowedDevicesModel
@@ -541,7 +538,6 @@ func (r *UsbPolicyResource) Read(ctx context.Context, req resource.ReadRequest, 
 		}
 		data.AllowedDevices = allowed_devicesList
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -628,7 +624,6 @@ func (r *UsbPolicyResource) Update(ctx context.Context, req resource.UpdateReque
 		}
 		apiResource.Spec["allowed_devices"] = allowed_devicesList
 	}
-
 
 	updated, err := r.client.UpdateUsbPolicy(ctx, apiResource)
 	if err != nil {

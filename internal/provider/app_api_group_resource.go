@@ -56,9 +56,9 @@ type AppAPIGroupBigIPVirtualServerModel struct {
 
 // AppAPIGroupBigIPVirtualServerBigIPVirtualServerModel represents bigip_virtual_server block
 type AppAPIGroupBigIPVirtualServerBigIPVirtualServerModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // AppAPIGroupCDNLoadBalancerModel represents cdn_loadbalancer block
@@ -68,14 +68,14 @@ type AppAPIGroupCDNLoadBalancerModel struct {
 
 // AppAPIGroupCDNLoadBalancerCDNLoadBalancerModel represents cdn_loadbalancer block
 type AppAPIGroupCDNLoadBalancerCDNLoadBalancerModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // AppAPIGroupElementsModel represents elements block
 type AppAPIGroupElementsModel struct {
-	Methods types.List `tfsdk:"methods"`
+	Methods   types.List   `tfsdk:"methods"`
 	PathRegex types.String `tfsdk:"path_regex"`
 }
 
@@ -86,24 +86,24 @@ type AppAPIGroupHTTPLoadBalancerModel struct {
 
 // AppAPIGroupHTTPLoadBalancerHTTPLoadBalancerModel represents http_loadbalancer block
 type AppAPIGroupHTTPLoadBalancerHTTPLoadBalancerModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 type AppAPIGroupResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Name               types.String                        `tfsdk:"name"`
+	Namespace          types.String                        `tfsdk:"namespace"`
+	Annotations        types.Map                           `tfsdk:"annotations"`
+	Description        types.String                        `tfsdk:"description"`
+	Disable            types.Bool                          `tfsdk:"disable"`
+	Labels             types.Map                           `tfsdk:"labels"`
+	ID                 types.String                        `tfsdk:"id"`
+	Timeouts           timeouts.Value                      `tfsdk:"timeouts"`
 	BigIPVirtualServer *AppAPIGroupBigIPVirtualServerModel `tfsdk:"bigip_virtual_server"`
-	CDNLoadBalancer *AppAPIGroupCDNLoadBalancerModel `tfsdk:"cdn_loadbalancer"`
-	Elements []AppAPIGroupElementsModel `tfsdk:"elements"`
-	HTTPLoadBalancer *AppAPIGroupHTTPLoadBalancerModel `tfsdk:"http_loadbalancer"`
+	CDNLoadBalancer    *AppAPIGroupCDNLoadBalancerModel    `tfsdk:"cdn_loadbalancer"`
+	Elements           []AppAPIGroupElementsModel          `tfsdk:"elements"`
+	HTTPLoadBalancer   *AppAPIGroupHTTPLoadBalancerModel   `tfsdk:"http_loadbalancer"`
 }
 
 func (r *AppAPIGroupResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -117,7 +117,7 @@ func (r *AppAPIGroupResource) Schema(ctx context.Context, req resource.SchemaReq
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the AppAPIGroup. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -127,7 +127,7 @@ func (r *AppAPIGroupResource) Schema(ctx context.Context, req resource.SchemaReq
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the AppAPIGroup will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -137,25 +137,25 @@ func (r *AppAPIGroupResource) Schema(ctx context.Context, req resource.SchemaReq
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -170,55 +170,51 @@ func (r *AppAPIGroupResource) Schema(ctx context.Context, req resource.SchemaReq
 			}),
 			"bigip_virtual_server": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: bigip_virtual_server, cdn_loadbalancer, http_loadbalancer] API Group Scope BIGIP Virtual Server. Set the scope of the API Group to a specific BIGIP Virtual Server",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"bigip_virtual_server": schema.SingleNestedBlock{
 						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
 								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-								Optional: true,
+								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
 								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-								Optional: true,
+								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-								Optional: true,
-								Computed: true,
+								Optional:            true,
+								Computed:            true,
 							},
 						},
 					},
 				},
-
 			},
 			"cdn_loadbalancer": schema.SingleNestedBlock{
 				MarkdownDescription: "API Group Scope CDN Loadbalancer. Set the scope of the API Group to a specific CDN Loadbalancer",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"cdn_loadbalancer": schema.SingleNestedBlock{
 						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
 								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-								Optional: true,
+								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
 								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-								Optional: true,
+								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-								Optional: true,
-								Computed: true,
+								Optional:            true,
+								Computed:            true,
 							},
 						},
 					},
 				},
-
 			},
 			"elements": schema.ListNestedBlock{
 				MarkdownDescription: "API Group Elements. List of API group elements with methods and path regex for matching requests.",
@@ -226,42 +222,39 @@ func (r *AppAPIGroupResource) Schema(ctx context.Context, req resource.SchemaReq
 					Attributes: map[string]schema.Attribute{
 						"methods": schema.ListAttribute{
 							MarkdownDescription: "HTTP Methods. List of method values to match the input request API method against. The match is considered to succeed if the input request API method is a member of the list. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
-							Optional: true,
-							ElementType: types.StringType,
+							Optional:            true,
+							ElementType:         types.StringType,
 						},
 						"path_regex": schema.StringAttribute{
 							MarkdownDescription: "Path Regex. Regular expression to match the input request API path against. The match is considered to succeed if the input request API path matches the specified path regex.",
-							Optional: true,
+							Optional:            true,
 						},
 					},
-
 				},
 			},
 			"http_loadbalancer": schema.SingleNestedBlock{
 				MarkdownDescription: "API Group Scope HTTP Loadbalancer. Set the scope of the API Group to a specific HTTP Loadbalancer",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"http_loadbalancer": schema.SingleNestedBlock{
 						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
 								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-								Optional: true,
+								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
 								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-								Optional: true,
+								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-								Optional: true,
-								Computed: true,
+								Optional:            true,
+								Computed:            true,
 							},
 						},
 					},
 				},
-
 			},
 		},
 	}
@@ -474,7 +467,6 @@ func (r *AppAPIGroupResource) Create(ctx context.Context, req resource.CreateReq
 		createReq.Spec["http_loadbalancer"] = http_loadbalancerMap
 	}
 
-
 	apiResource, err := r.client.CreateAppAPIGroup(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create AppAPIGroup: %s", err))
@@ -486,7 +478,7 @@ func (r *AppAPIGroupResource) Create(ctx context.Context, req resource.CreateReq
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if _, ok := apiResource.Spec["bigip_virtual_server"].(map[string]interface{}); ok && isImport && data.BigIPVirtualServer == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.BigIPVirtualServer = &AppAPIGroupBigIPVirtualServerModel{}
@@ -532,7 +524,6 @@ func (r *AppAPIGroupResource) Create(ctx context.Context, req resource.CreateReq
 		data.HTTPLoadBalancer = &AppAPIGroupHTTPLoadBalancerModel{}
 	}
 	// Normal Read: preserve existing state value
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -622,9 +613,9 @@ func (r *AppAPIGroupResource) Read(ctx context.Context, req resource.ReadRequest
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if _, ok := apiResource.Spec["bigip_virtual_server"].(map[string]interface{}); ok && isImport && data.BigIPVirtualServer == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -671,7 +662,6 @@ func (r *AppAPIGroupResource) Read(ctx context.Context, req resource.ReadRequest
 		data.HTTPLoadBalancer = &AppAPIGroupHTTPLoadBalancerModel{}
 	}
 	// Normal Read: preserve existing state value
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -794,7 +784,6 @@ func (r *AppAPIGroupResource) Update(ctx context.Context, req resource.UpdateReq
 		}
 		apiResource.Spec["http_loadbalancer"] = http_loadbalancerMap
 	}
-
 
 	updated, err := r.client.UpdateAppAPIGroup(ctx, apiResource)
 	if err != nil {

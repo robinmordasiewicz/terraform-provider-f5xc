@@ -51,31 +51,31 @@ type WAFExclusionPolicyEmptyModel struct {
 
 // WAFExclusionPolicyWAFExclusionRulesModel represents waf_exclusion_rules block
 type WAFExclusionPolicyWAFExclusionRulesModel struct {
-	ExactValue types.String `tfsdk:"exact_value"`
-	ExpirationTimestamp types.String `tfsdk:"expiration_timestamp"`
-	Methods types.List `tfsdk:"methods"`
-	PathPrefix types.String `tfsdk:"path_prefix"`
-	PathRegex types.String `tfsdk:"path_regex"`
-	SuffixValue types.String `tfsdk:"suffix_value"`
-	AnyDomain *WAFExclusionPolicyEmptyModel `tfsdk:"any_domain"`
-	AnyPath *WAFExclusionPolicyEmptyModel `tfsdk:"any_path"`
+	ExactValue                  types.String                                                         `tfsdk:"exact_value"`
+	ExpirationTimestamp         types.String                                                         `tfsdk:"expiration_timestamp"`
+	Methods                     types.List                                                           `tfsdk:"methods"`
+	PathPrefix                  types.String                                                         `tfsdk:"path_prefix"`
+	PathRegex                   types.String                                                         `tfsdk:"path_regex"`
+	SuffixValue                 types.String                                                         `tfsdk:"suffix_value"`
+	AnyDomain                   *WAFExclusionPolicyEmptyModel                                        `tfsdk:"any_domain"`
+	AnyPath                     *WAFExclusionPolicyEmptyModel                                        `tfsdk:"any_path"`
 	AppFirewallDetectionControl *WAFExclusionPolicyWAFExclusionRulesAppFirewallDetectionControlModel `tfsdk:"app_firewall_detection_control"`
-	Metadata *WAFExclusionPolicyWAFExclusionRulesMetadataModel `tfsdk:"metadata"`
-	WAFSkipProcessing *WAFExclusionPolicyEmptyModel `tfsdk:"waf_skip_processing"`
+	Metadata                    *WAFExclusionPolicyWAFExclusionRulesMetadataModel                    `tfsdk:"metadata"`
+	WAFSkipProcessing           *WAFExclusionPolicyEmptyModel                                        `tfsdk:"waf_skip_processing"`
 }
 
 // WAFExclusionPolicyWAFExclusionRulesAppFirewallDetectionControlModel represents app_firewall_detection_control block
 type WAFExclusionPolicyWAFExclusionRulesAppFirewallDetectionControlModel struct {
 	ExcludeAttackTypeContexts []WAFExclusionPolicyWAFExclusionRulesAppFirewallDetectionControlExcludeAttackTypeContextsModel `tfsdk:"exclude_attack_type_contexts"`
-	ExcludeBotNameContexts []WAFExclusionPolicyWAFExclusionRulesAppFirewallDetectionControlExcludeBotNameContextsModel `tfsdk:"exclude_bot_name_contexts"`
-	ExcludeSignatureContexts []WAFExclusionPolicyWAFExclusionRulesAppFirewallDetectionControlExcludeSignatureContextsModel `tfsdk:"exclude_signature_contexts"`
-	ExcludeViolationContexts []WAFExclusionPolicyWAFExclusionRulesAppFirewallDetectionControlExcludeViolationContextsModel `tfsdk:"exclude_violation_contexts"`
+	ExcludeBotNameContexts    []WAFExclusionPolicyWAFExclusionRulesAppFirewallDetectionControlExcludeBotNameContextsModel    `tfsdk:"exclude_bot_name_contexts"`
+	ExcludeSignatureContexts  []WAFExclusionPolicyWAFExclusionRulesAppFirewallDetectionControlExcludeSignatureContextsModel  `tfsdk:"exclude_signature_contexts"`
+	ExcludeViolationContexts  []WAFExclusionPolicyWAFExclusionRulesAppFirewallDetectionControlExcludeViolationContextsModel  `tfsdk:"exclude_violation_contexts"`
 }
 
 // WAFExclusionPolicyWAFExclusionRulesAppFirewallDetectionControlExcludeAttackTypeContextsModel represents exclude_attack_type_contexts block
 type WAFExclusionPolicyWAFExclusionRulesAppFirewallDetectionControlExcludeAttackTypeContextsModel struct {
-	Context types.String `tfsdk:"context"`
-	ContextName types.String `tfsdk:"context_name"`
+	Context           types.String `tfsdk:"context"`
+	ContextName       types.String `tfsdk:"context_name"`
 	ExcludeAttackType types.String `tfsdk:"exclude_attack_type"`
 }
 
@@ -86,33 +86,33 @@ type WAFExclusionPolicyWAFExclusionRulesAppFirewallDetectionControlExcludeBotNam
 
 // WAFExclusionPolicyWAFExclusionRulesAppFirewallDetectionControlExcludeSignatureContextsModel represents exclude_signature_contexts block
 type WAFExclusionPolicyWAFExclusionRulesAppFirewallDetectionControlExcludeSignatureContextsModel struct {
-	Context types.String `tfsdk:"context"`
+	Context     types.String `tfsdk:"context"`
 	ContextName types.String `tfsdk:"context_name"`
-	SignatureID types.Int64 `tfsdk:"signature_id"`
+	SignatureID types.Int64  `tfsdk:"signature_id"`
 }
 
 // WAFExclusionPolicyWAFExclusionRulesAppFirewallDetectionControlExcludeViolationContextsModel represents exclude_violation_contexts block
 type WAFExclusionPolicyWAFExclusionRulesAppFirewallDetectionControlExcludeViolationContextsModel struct {
-	Context types.String `tfsdk:"context"`
-	ContextName types.String `tfsdk:"context_name"`
+	Context          types.String `tfsdk:"context"`
+	ContextName      types.String `tfsdk:"context_name"`
 	ExcludeViolation types.String `tfsdk:"exclude_violation"`
 }
 
 // WAFExclusionPolicyWAFExclusionRulesMetadataModel represents metadata block
 type WAFExclusionPolicyWAFExclusionRulesMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
-	Name types.String `tfsdk:"name"`
+	Name            types.String `tfsdk:"name"`
 }
 
 type WAFExclusionPolicyResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Name              types.String                               `tfsdk:"name"`
+	Namespace         types.String                               `tfsdk:"namespace"`
+	Annotations       types.Map                                  `tfsdk:"annotations"`
+	Description       types.String                               `tfsdk:"description"`
+	Disable           types.Bool                                 `tfsdk:"disable"`
+	Labels            types.Map                                  `tfsdk:"labels"`
+	ID                types.String                               `tfsdk:"id"`
+	Timeouts          timeouts.Value                             `tfsdk:"timeouts"`
 	WAFExclusionRules []WAFExclusionPolicyWAFExclusionRulesModel `tfsdk:"waf_exclusion_rules"`
 }
 
@@ -127,7 +127,7 @@ func (r *WAFExclusionPolicyResource) Schema(ctx context.Context, req resource.Sc
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the WAFExclusionPolicy. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -137,7 +137,7 @@ func (r *WAFExclusionPolicyResource) Schema(ctx context.Context, req resource.Sc
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the WAFExclusionPolicy will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -147,25 +147,25 @@ func (r *WAFExclusionPolicyResource) Schema(ctx context.Context, req resource.Sc
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -184,28 +184,28 @@ func (r *WAFExclusionPolicyResource) Schema(ctx context.Context, req resource.Sc
 					Attributes: map[string]schema.Attribute{
 						"exact_value": schema.StringAttribute{
 							MarkdownDescription: "Exact Value. Exact domain name",
-							Optional: true,
+							Optional:            true,
 						},
 						"expiration_timestamp": schema.StringAttribute{
 							MarkdownDescription: "Expiration Timestamp. The expiration_timestamp is the RFC 3339 format timestamp at which the containing rule is considered to be logically expired. The rule continues to exist in the configuration but is not applied anymore.",
-							Optional: true,
+							Optional:            true,
 						},
 						"methods": schema.ListAttribute{
 							MarkdownDescription: "Methods. methods to be matched. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
-							Optional: true,
-							ElementType: types.StringType,
+							Optional:            true,
+							ElementType:         types.StringType,
 						},
 						"path_prefix": schema.StringAttribute{
 							MarkdownDescription: "Prefix. Path prefix to match (e.g. the value / will match on all paths)",
-							Optional: true,
+							Optional:            true,
 						},
 						"path_regex": schema.StringAttribute{
 							MarkdownDescription: "Path Regex. Define the regex for the path. For example, the regex ^/.*$ will match on all paths",
-							Optional: true,
+							Optional:            true,
 						},
 						"suffix_value": schema.StringAttribute{
 							MarkdownDescription: "Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'",
-							Optional: true,
+							Optional:            true,
 						},
 					},
 					Blocks: map[string]schema.Block{
@@ -217,8 +217,7 @@ func (r *WAFExclusionPolicyResource) Schema(ctx context.Context, req resource.Sc
 						},
 						"app_firewall_detection_control": schema.SingleNestedBlock{
 							MarkdownDescription: "App Firewall Detection Control. Define the list of Signature IDs, Violations, Attack Types and Bot Names that should be excluded from triggering on the defined match criteria.",
-							Attributes: map[string]schema.Attribute{
-							},
+							Attributes:          map[string]schema.Attribute{},
 							Blocks: map[string]schema.Block{
 								"exclude_attack_type_contexts": schema.ListNestedBlock{
 									MarkdownDescription: "Attack Types. Attack Types to be excluded for the defined match criteria",
@@ -226,15 +225,15 @@ func (r *WAFExclusionPolicyResource) Schema(ctx context.Context, req resource.Sc
 										Attributes: map[string]schema.Attribute{
 											"context": schema.StringAttribute{
 												MarkdownDescription: "WAF Exclusion Context Options. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE: CONTEXT_RESPONSE - CONTEXT_PARAMETER: CONTEXT_PARAMETER Detection will be excluded for the parameters. The parameter name is required in the Context name field. If the field is left empty, the detection will be excluded for all parameters. - CONTEXT_HEADER: CONTEXT_HEADER Detection will be excluded for the headers. The header name is required in the Context name field. If the field is left empty, the detection will be excluded for all headers. - CONTEXT_COOKIE: CONTEXT_COOKIE Detection will be excluded for the cookies. The cookie name is required in the Context name field. If the field is left empty, the detection will be excluded for all cookies. - CONTEXT_URL: CONTEXT_URL Detection will be excluded for the request URL. - CONTEXT_URI: CONTEXT_URI. Possible values are `CONTEXT_ANY`, `CONTEXT_BODY`, `CONTEXT_REQUEST`, `CONTEXT_RESPONSE`, `CONTEXT_PARAMETER`, `CONTEXT_HEADER`, `CONTEXT_COOKIE`, `CONTEXT_URL`, `CONTEXT_URI`. Defaults to `CONTEXT_ANY`.",
-												Optional: true,
+												Optional:            true,
 											},
 											"context_name": schema.StringAttribute{
 												MarkdownDescription: "Context Name. Relevant only for contexts: Header, Cookie and Parameter. Name of the Context that the WAF Exclusion Rules will check. Wildcard matching can be used by prefixing or suffixing the context name with an wildcard asterisk (*).",
-												Optional: true,
+												Optional:            true,
 											},
 											"exclude_attack_type": schema.StringAttribute{
 												MarkdownDescription: "Attack Types. List of all Attack Types ATTACK_TYPE_NONE ATTACK_TYPE_NON_BROWSER_CLIENT ATTACK_TYPE_OTHER_APPLICATION_ATTACKS ATTACK_TYPE_TROJAN_BACKDOOR_SPYWARE ATTACK_TYPE_DETECTION_EVASION ATTACK_TYPE_VULNERABILITY_SCAN ATTACK_TYPE_ABUSE_OF_FUNCTIONALITY ATTACK_TYPE_AUTHENTICATION_AUTHORIZATION_ATTACKS ATTACK_TYPE_BUFFER_OVERFLOW ATTACK_TYPE_PREDICTABLE_RESOURCE_LOCATION ATTACK_TYPE_INFORMATION_LEAKAGE ATTACK_TYPE_DIRECTORY_INDEXING ATTACK_TYPE_PATH_TRAVERSAL ATTACK_TYPE_XPATH_INJECTION ATTACK_TYPE_LDAP_INJECTION ATTACK_TYPE_SERVER_SIDE_CODE_INJECTION ATTACK_TYPE_COMMAND_EXECUTION ATTACK_TYPE_SQL_INJECTION ATTACK_TYPE_CROSS_SITE_SCRIPTING ATTACK_TYPE_DENIAL_OF_SERVICE ATTACK_TYPE_HTTP_PARSER_ATTACK ATTACK_TYPE_SESSION_HIJACKING ATTACK_TYPE_HTTP_RESPONSE_SPLITTING ATTACK_TYPE_FORCEFUL_BROWSING ATTACK_TYPE_REMOTE_FILE_INCLUDE ATTACK_TYPE_MALICIOUS_FILE_UPLOAD ATTACK_TYPE_GRAPHQL_PARSER_ATTACK. Possible values are `ATTACK_TYPE_NONE`, `ATTACK_TYPE_NON_BROWSER_CLIENT`, `ATTACK_TYPE_OTHER_APPLICATION_ATTACKS`, `ATTACK_TYPE_TROJAN_BACKDOOR_SPYWARE`, `ATTACK_TYPE_DETECTION_EVASION`, `ATTACK_TYPE_VULNERABILITY_SCAN`, `ATTACK_TYPE_ABUSE_OF_FUNCTIONALITY`, `ATTACK_TYPE_AUTHENTICATION_AUTHORIZATION_ATTACKS`, `ATTACK_TYPE_BUFFER_OVERFLOW`, `ATTACK_TYPE_PREDICTABLE_RESOURCE_LOCATION`, `ATTACK_TYPE_INFORMATION_LEAKAGE`, `ATTACK_TYPE_DIRECTORY_INDEXING`, `ATTACK_TYPE_PATH_TRAVERSAL`, `ATTACK_TYPE_XPATH_INJECTION`, `ATTACK_TYPE_LDAP_INJECTION`, `ATTACK_TYPE_SERVER_SIDE_CODE_INJECTION`, `ATTACK_TYPE_COMMAND_EXECUTION`, `ATTACK_TYPE_SQL_INJECTION`, `ATTACK_TYPE_CROSS_SITE_SCRIPTING`, `ATTACK_TYPE_DENIAL_OF_SERVICE`, `ATTACK_TYPE_HTTP_PARSER_ATTACK`, `ATTACK_TYPE_SESSION_HIJACKING`, `ATTACK_TYPE_HTTP_RESPONSE_SPLITTING`, `ATTACK_TYPE_FORCEFUL_BROWSING`, `ATTACK_TYPE_REMOTE_FILE_INCLUDE`, `ATTACK_TYPE_MALICIOUS_FILE_UPLOAD`, `ATTACK_TYPE_GRAPHQL_PARSER_ATTACK`. Defaults to `ATTACK_TYPE_NONE`.",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -245,7 +244,7 @@ func (r *WAFExclusionPolicyResource) Schema(ctx context.Context, req resource.Sc
 										Attributes: map[string]schema.Attribute{
 											"bot_name": schema.StringAttribute{
 												MarkdownDescription: "Bot Name.",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -256,15 +255,15 @@ func (r *WAFExclusionPolicyResource) Schema(ctx context.Context, req resource.Sc
 										Attributes: map[string]schema.Attribute{
 											"context": schema.StringAttribute{
 												MarkdownDescription: "WAF Exclusion Context Options. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE: CONTEXT_RESPONSE - CONTEXT_PARAMETER: CONTEXT_PARAMETER Detection will be excluded for the parameters. The parameter name is required in the Context name field. If the field is left empty, the detection will be excluded for all parameters. - CONTEXT_HEADER: CONTEXT_HEADER Detection will be excluded for the headers. The header name is required in the Context name field. If the field is left empty, the detection will be excluded for all headers. - CONTEXT_COOKIE: CONTEXT_COOKIE Detection will be excluded for the cookies. The cookie name is required in the Context name field. If the field is left empty, the detection will be excluded for all cookies. - CONTEXT_URL: CONTEXT_URL Detection will be excluded for the request URL. - CONTEXT_URI: CONTEXT_URI. Possible values are `CONTEXT_ANY`, `CONTEXT_BODY`, `CONTEXT_REQUEST`, `CONTEXT_RESPONSE`, `CONTEXT_PARAMETER`, `CONTEXT_HEADER`, `CONTEXT_COOKIE`, `CONTEXT_URL`, `CONTEXT_URI`. Defaults to `CONTEXT_ANY`.",
-												Optional: true,
+												Optional:            true,
 											},
 											"context_name": schema.StringAttribute{
 												MarkdownDescription: "Context Name. Relevant only for contexts: Header, Cookie and Parameter. Name of the Context that the WAF Exclusion Rules will check. Wildcard matching can be used by prefixing or suffixing the context name with an wildcard asterisk (*).",
-												Optional: true,
+												Optional:            true,
 											},
 											"signature_id": schema.Int64Attribute{
 												MarkdownDescription: "SignatureID. The allowed values for signature id are 0 and in the range of 200000001-299999999. 0 implies that all signatures will be excluded for the specified context.",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -275,15 +274,15 @@ func (r *WAFExclusionPolicyResource) Schema(ctx context.Context, req resource.Sc
 										Attributes: map[string]schema.Attribute{
 											"context": schema.StringAttribute{
 												MarkdownDescription: "WAF Exclusion Context Options. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE: CONTEXT_RESPONSE - CONTEXT_PARAMETER: CONTEXT_PARAMETER Detection will be excluded for the parameters. The parameter name is required in the Context name field. If the field is left empty, the detection will be excluded for all parameters. - CONTEXT_HEADER: CONTEXT_HEADER Detection will be excluded for the headers. The header name is required in the Context name field. If the field is left empty, the detection will be excluded for all headers. - CONTEXT_COOKIE: CONTEXT_COOKIE Detection will be excluded for the cookies. The cookie name is required in the Context name field. If the field is left empty, the detection will be excluded for all cookies. - CONTEXT_URL: CONTEXT_URL Detection will be excluded for the request URL. - CONTEXT_URI: CONTEXT_URI. Possible values are `CONTEXT_ANY`, `CONTEXT_BODY`, `CONTEXT_REQUEST`, `CONTEXT_RESPONSE`, `CONTEXT_PARAMETER`, `CONTEXT_HEADER`, `CONTEXT_COOKIE`, `CONTEXT_URL`, `CONTEXT_URI`. Defaults to `CONTEXT_ANY`.",
-												Optional: true,
+												Optional:            true,
 											},
 											"context_name": schema.StringAttribute{
 												MarkdownDescription: "Context Name. Relevant only for contexts: Header, Cookie and Parameter. Name of the Context that the WAF Exclusion Rules will check. Wildcard matching can be used by prefixing or suffixing the context name with an wildcard asterisk (*).",
-												Optional: true,
+												Optional:            true,
 											},
 											"exclude_violation": schema.StringAttribute{
 												MarkdownDescription: "App Firewall Violation Type. List of all supported Violation Types VIOL_NONE VIOL_FILETYPE VIOL_METHOD VIOL_MANDATORY_HEADER VIOL_HTTP_RESPONSE_STATUS VIOL_REQUEST_MAX_LENGTH VIOL_FILE_UPLOAD VIOL_FILE_UPLOAD_IN_BODY VIOL_XML_MALFORMED VIOL_JSON_MALFORMED VIOL_ASM_COOKIE_MODIFIED VIOL_HTTP_PROTOCOL_MULTIPLE_HOST_HEADERS VIOL_HTTP_PROTOCOL_BAD_HOST_HEADER_VALUE VIOL_HTTP_PROTOCOL_UNPARSABLE_REQUEST_CONTENT VIOL_HTTP_PROTOCOL_NULL_IN_REQUEST VIOL_HTTP_PROTOCOL_BAD_HTTP_VERSION VIOL_HTTP_PROTOCOL_CRLF_CHARACTERS_BEFORE_REQUEST_START VIOL_HTTP_PROTOCOL_NO_HOST_HEADER_IN_HTTP_1_1_REQUEST VIOL_HTTP_PROTOCOL_BAD_MULTIPART_PARAMETERS_PARSING VIOL_HTTP_PROTOCOL_SEVERAL_CONTENT_LENGTH_HEADERS VIOL_HTTP_PROTOCOL_CONTENT_LENGTH_SHOULD_BE_A_POSITIVE_NUMBER VIOL_EVASION_DIRECTORY_TRAVERSALS VIOL_MALFORMED_REQUEST VIOL_EVASION_MULTIPLE_DECODING VIOL_DATA_GUARD VIOL_EVASION_APACHE_WHITESPACE VIOL_COOKIE_MODIFIED VIOL_EVASION_IIS_UNICODE_CODEPOINTS VIOL_EVASION_IIS_BACKSLASHES VIOL_EVASION_PERCENT_U_DECODING VIOL_EVASION_BARE_BYTE_DECODING VIOL_EVASION_BAD_UNESCAPE VIOL_HTTP_PROTOCOL_BAD_MULTIPART_FORMDATA_REQUEST_PARSING VIOL_HTTP_PROTOCOL_BODY_IN_GET_OR_HEAD_REQUEST VIOL_HTTP_PROTOCOL_HIGH_ASCII_CHARACTERS_IN_HEADERS VIOL_ENCODING VIOL_COOKIE_MALFORMED VIOL_GRAPHQL_FORMAT VIOL_GRAPHQL_MALFORMED VIOL_GRAPHQL_INTROSPECTION_QUERY. Possible values are `VIOL_NONE`, `VIOL_FILETYPE`, `VIOL_METHOD`, `VIOL_MANDATORY_HEADER`, `VIOL_HTTP_RESPONSE_STATUS`, `VIOL_REQUEST_MAX_LENGTH`, `VIOL_FILE_UPLOAD`, `VIOL_FILE_UPLOAD_IN_BODY`, `VIOL_XML_MALFORMED`, `VIOL_JSON_MALFORMED`, `VIOL_ASM_COOKIE_MODIFIED`, `VIOL_HTTP_PROTOCOL_MULTIPLE_HOST_HEADERS`, `VIOL_HTTP_PROTOCOL_BAD_HOST_HEADER_VALUE`, `VIOL_HTTP_PROTOCOL_UNPARSABLE_REQUEST_CONTENT`, `VIOL_HTTP_PROTOCOL_NULL_IN_REQUEST`, `VIOL_HTTP_PROTOCOL_BAD_HTTP_VERSION`, `VIOL_HTTP_PROTOCOL_SEVERAL_CONTENT_LENGTH_HEADERS`, `VIOL_EVASION_DIRECTORY_TRAVERSALS`, `VIOL_MALFORMED_REQUEST`, `VIOL_EVASION_MULTIPLE_DECODING`, `VIOL_DATA_GUARD`, `VIOL_EVASION_APACHE_WHITESPACE`, `VIOL_COOKIE_MODIFIED`, `VIOL_EVASION_IIS_UNICODE_CODEPOINTS`, `VIOL_EVASION_IIS_BACKSLASHES`, `VIOL_EVASION_PERCENT_U_DECODING`, `VIOL_EVASION_BARE_BYTE_DECODING`, `VIOL_EVASION_BAD_UNESCAPE`, `VIOL_HTTP_PROTOCOL_BODY_IN_GET_OR_HEAD_REQUEST`, `VIOL_ENCODING`, `VIOL_COOKIE_MALFORMED`, `VIOL_GRAPHQL_FORMAT`, `VIOL_GRAPHQL_MALFORMED`, `VIOL_GRAPHQL_INTROSPECTION_QUERY`. Defaults to `VIOL_NONE`.",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 									},
@@ -295,11 +294,11 @@ func (r *WAFExclusionPolicyResource) Schema(ctx context.Context, req resource.Sc
 							Attributes: map[string]schema.Attribute{
 								"description_spec": schema.StringAttribute{
 									MarkdownDescription: "Description. Human readable description.",
-									Optional: true,
+									Optional:            true,
 								},
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 						},
@@ -307,7 +306,6 @@ func (r *WAFExclusionPolicyResource) Schema(ctx context.Context, req resource.Sc
 							MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 						},
 					},
-
 				},
 			},
 		},
@@ -567,7 +565,6 @@ func (r *WAFExclusionPolicyResource) Create(ctx context.Context, req resource.Cr
 		createReq.Spec["waf_exclusion_rules"] = waf_exclusion_rulesList
 	}
 
-
 	apiResource, err := r.client.CreateWAFExclusionPolicy(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create WAFExclusionPolicy: %s", err))
@@ -579,7 +576,7 @@ func (r *WAFExclusionPolicyResource) Create(ctx context.Context, req resource.Cr
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["waf_exclusion_rules"].([]interface{}); ok && len(listData) > 0 {
 		var waf_exclusion_rulesList []WAFExclusionPolicyWAFExclusionRulesModel
 		for listIdx, item := range listData {
@@ -600,8 +597,7 @@ func (r *WAFExclusionPolicyResource) Create(ctx context.Context, req resource.Cr
 					}(),
 					AppFirewallDetectionControl: func() *WAFExclusionPolicyWAFExclusionRulesAppFirewallDetectionControlModel {
 						if _, ok := itemMap["app_firewall_detection_control"].(map[string]interface{}); ok {
-							return &WAFExclusionPolicyWAFExclusionRulesAppFirewallDetectionControlModel{
-							}
+							return &WAFExclusionPolicyWAFExclusionRulesAppFirewallDetectionControlModel{}
 						}
 						return nil
 					}(),
@@ -678,7 +674,6 @@ func (r *WAFExclusionPolicyResource) Create(ctx context.Context, req resource.Cr
 		}
 		data.WAFExclusionRules = waf_exclusion_rulesList
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -768,9 +763,9 @@ func (r *WAFExclusionPolicyResource) Read(ctx context.Context, req resource.Read
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if listData, ok := apiResource.Spec["waf_exclusion_rules"].([]interface{}); ok && len(listData) > 0 {
 		var waf_exclusion_rulesList []WAFExclusionPolicyWAFExclusionRulesModel
@@ -792,8 +787,7 @@ func (r *WAFExclusionPolicyResource) Read(ctx context.Context, req resource.Read
 					}(),
 					AppFirewallDetectionControl: func() *WAFExclusionPolicyWAFExclusionRulesAppFirewallDetectionControlModel {
 						if _, ok := itemMap["app_firewall_detection_control"].(map[string]interface{}); ok {
-							return &WAFExclusionPolicyWAFExclusionRulesAppFirewallDetectionControlModel{
-							}
+							return &WAFExclusionPolicyWAFExclusionRulesAppFirewallDetectionControlModel{}
 						}
 						return nil
 					}(),
@@ -870,7 +864,6 @@ func (r *WAFExclusionPolicyResource) Read(ctx context.Context, req resource.Read
 		}
 		data.WAFExclusionRules = waf_exclusion_rulesList
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -1039,7 +1032,6 @@ func (r *WAFExclusionPolicyResource) Update(ctx context.Context, req resource.Up
 		}
 		apiResource.Spec["waf_exclusion_rules"] = waf_exclusion_rulesList
 	}
-
 
 	updated, err := r.client.UpdateWAFExclusionPolicy(ctx, apiResource)
 	if err != nil {

@@ -44,7 +44,7 @@ resource "f5xc_dns_domain" "example" {
 
 ### Metadata Argument Reference
 
-<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the DNSDomain. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Domain name for the DNSDomain (e.g., example.com). Must be a valid DNS domain name
 
 <a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the DNSDomain will be created
 

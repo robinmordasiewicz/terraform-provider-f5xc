@@ -52,53 +52,53 @@ type SiteMeshGroupEmptyModel struct {
 // SiteMeshGroupFullMeshModel represents full_mesh block
 type SiteMeshGroupFullMeshModel struct {
 	ControlAndDataPlaneMesh *SiteMeshGroupEmptyModel `tfsdk:"control_and_data_plane_mesh"`
-	DataPlaneMesh *SiteMeshGroupEmptyModel `tfsdk:"data_plane_mesh"`
+	DataPlaneMesh           *SiteMeshGroupEmptyModel `tfsdk:"data_plane_mesh"`
 }
 
 // SiteMeshGroupHubMeshModel represents hub_mesh block
 type SiteMeshGroupHubMeshModel struct {
 	ControlAndDataPlaneMesh *SiteMeshGroupEmptyModel `tfsdk:"control_and_data_plane_mesh"`
-	DataPlaneMesh *SiteMeshGroupEmptyModel `tfsdk:"data_plane_mesh"`
+	DataPlaneMesh           *SiteMeshGroupEmptyModel `tfsdk:"data_plane_mesh"`
 }
 
 // SiteMeshGroupSpokeMeshModel represents spoke_mesh block
 type SiteMeshGroupSpokeMeshModel struct {
-	ControlAndDataPlaneMesh *SiteMeshGroupEmptyModel `tfsdk:"control_and_data_plane_mesh"`
-	DataPlaneMesh *SiteMeshGroupEmptyModel `tfsdk:"data_plane_mesh"`
-	HubMeshGroup *SiteMeshGroupSpokeMeshHubMeshGroupModel `tfsdk:"hub_mesh_group"`
+	ControlAndDataPlaneMesh *SiteMeshGroupEmptyModel                 `tfsdk:"control_and_data_plane_mesh"`
+	DataPlaneMesh           *SiteMeshGroupEmptyModel                 `tfsdk:"data_plane_mesh"`
+	HubMeshGroup            *SiteMeshGroupSpokeMeshHubMeshGroupModel `tfsdk:"hub_mesh_group"`
 }
 
 // SiteMeshGroupSpokeMeshHubMeshGroupModel represents hub_mesh_group block
 type SiteMeshGroupSpokeMeshHubMeshGroupModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // SiteMeshGroupVirtualSiteModel represents virtual_site block
 type SiteMeshGroupVirtualSiteModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 type SiteMeshGroupResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	DisableReFallback *SiteMeshGroupEmptyModel `tfsdk:"disable_re_fallback"`
-	EnableReFallback *SiteMeshGroupEmptyModel `tfsdk:"enable_re_fallback"`
-	FullMesh *SiteMeshGroupFullMeshModel `tfsdk:"full_mesh"`
-	HubMesh *SiteMeshGroupHubMeshModel `tfsdk:"hub_mesh"`
-	SpokeMesh *SiteMeshGroupSpokeMeshModel `tfsdk:"spoke_mesh"`
-	VirtualSite []SiteMeshGroupVirtualSiteModel `tfsdk:"virtual_site"`
+	Name              types.String                    `tfsdk:"name"`
+	Namespace         types.String                    `tfsdk:"namespace"`
+	Annotations       types.Map                       `tfsdk:"annotations"`
+	Description       types.String                    `tfsdk:"description"`
+	Disable           types.Bool                      `tfsdk:"disable"`
+	Labels            types.Map                       `tfsdk:"labels"`
+	ID                types.String                    `tfsdk:"id"`
+	Timeouts          timeouts.Value                  `tfsdk:"timeouts"`
+	DisableReFallback *SiteMeshGroupEmptyModel        `tfsdk:"disable_re_fallback"`
+	EnableReFallback  *SiteMeshGroupEmptyModel        `tfsdk:"enable_re_fallback"`
+	FullMesh          *SiteMeshGroupFullMeshModel     `tfsdk:"full_mesh"`
+	HubMesh           *SiteMeshGroupHubMeshModel      `tfsdk:"hub_mesh"`
+	SpokeMesh         *SiteMeshGroupSpokeMeshModel    `tfsdk:"spoke_mesh"`
+	VirtualSite       []SiteMeshGroupVirtualSiteModel `tfsdk:"virtual_site"`
 }
 
 func (r *SiteMeshGroupResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -112,7 +112,7 @@ func (r *SiteMeshGroupResource) Schema(ctx context.Context, req resource.SchemaR
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the SiteMeshGroup. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -122,7 +122,7 @@ func (r *SiteMeshGroupResource) Schema(ctx context.Context, req resource.SchemaR
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the SiteMeshGroup will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -132,25 +132,25 @@ func (r *SiteMeshGroupResource) Schema(ctx context.Context, req resource.SchemaR
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -171,8 +171,7 @@ func (r *SiteMeshGroupResource) Schema(ctx context.Context, req resource.SchemaR
 			},
 			"full_mesh": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: full_mesh, hub_mesh, spoke_mesh] Full Mesh. Details of Full Mesh Group Type",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"control_and_data_plane_mesh": schema.SingleNestedBlock{
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -181,12 +180,10 @@ func (r *SiteMeshGroupResource) Schema(ctx context.Context, req resource.SchemaR
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 			"hub_mesh": schema.SingleNestedBlock{
 				MarkdownDescription: "Hub Full Mesh. Details of Hub Full Mesh Group Type",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"control_and_data_plane_mesh": schema.SingleNestedBlock{
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -195,12 +192,10 @@ func (r *SiteMeshGroupResource) Schema(ctx context.Context, req resource.SchemaR
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 			"spoke_mesh": schema.SingleNestedBlock{
 				MarkdownDescription: "Spoke. Details of Spoke Mesh Group Type",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"control_and_data_plane_mesh": schema.SingleNestedBlock{
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -213,21 +208,20 @@ func (r *SiteMeshGroupResource) Schema(ctx context.Context, req resource.SchemaR
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
 								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-								Optional: true,
+								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
 								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-								Optional: true,
+								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-								Optional: true,
-								Computed: true,
+								Optional:            true,
+								Computed:            true,
 							},
 						},
 					},
 				},
-
 			},
 			"virtual_site": schema.ListNestedBlock{
 				MarkdownDescription: "Virtual Site (Sites in this group). Set of sites for which this mesh group config is valid. If 'Type' is Spoke, then it gives set of spoke sites. If 'Type' is Hub, then it gives set of hub sites. If 'Type' is Full Mesh, then it gives set of sites that are connected in full mesh.",
@@ -235,29 +229,28 @@ func (r *SiteMeshGroupResource) Schema(ctx context.Context, req resource.SchemaR
 					Attributes: map[string]schema.Attribute{
 						"kind": schema.StringAttribute{
 							MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-							Optional: true,
-							Computed: true,
+							Optional:            true,
+							Computed:            true,
 						},
 						"name": schema.StringAttribute{
 							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-							Optional: true,
+							Optional:            true,
 						},
 						"namespace": schema.StringAttribute{
 							MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-							Optional: true,
+							Optional:            true,
 						},
 						"tenant": schema.StringAttribute{
 							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-							Optional: true,
-							Computed: true,
+							Optional:            true,
+							Computed:            true,
 						},
 						"uid": schema.StringAttribute{
 							MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-							Optional: true,
-							Computed: true,
+							Optional:            true,
+							Computed:            true,
 						},
 					},
-
 				},
 			},
 		},
@@ -483,7 +476,6 @@ func (r *SiteMeshGroupResource) Create(ctx context.Context, req resource.CreateR
 		createReq.Spec["virtual_site"] = virtual_siteList
 	}
 
-
 	apiResource, err := r.client.CreateSiteMeshGroup(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create SiteMeshGroup: %s", err))
@@ -495,7 +487,7 @@ func (r *SiteMeshGroupResource) Create(ctx context.Context, req resource.CreateR
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if _, ok := apiResource.Spec["disable_re_fallback"].(map[string]interface{}); ok && isImport && data.DisableReFallback == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.DisableReFallback = &SiteMeshGroupEmptyModel{}
@@ -562,7 +554,6 @@ func (r *SiteMeshGroupResource) Create(ctx context.Context, req resource.CreateR
 		}
 		data.VirtualSite = virtual_siteList
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -652,9 +643,9 @@ func (r *SiteMeshGroupResource) Read(ctx context.Context, req resource.ReadReque
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if _, ok := apiResource.Spec["disable_re_fallback"].(map[string]interface{}); ok && isImport && data.DisableReFallback == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -722,7 +713,6 @@ func (r *SiteMeshGroupResource) Read(ctx context.Context, req resource.ReadReque
 		}
 		data.VirtualSite = virtual_siteList
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -857,7 +847,6 @@ func (r *SiteMeshGroupResource) Update(ctx context.Context, req resource.UpdateR
 		}
 		apiResource.Spec["virtual_site"] = virtual_siteList
 	}
-
 
 	updated, err := r.client.UpdateSiteMeshGroup(ctx, apiResource)
 	if err != nil {

@@ -51,169 +51,169 @@ type RegistrationEmptyModel struct {
 
 // RegistrationInfraModel represents infra block
 type RegistrationInfraModel struct {
-	AvailabilityZone types.String `tfsdk:"availability_zone"`
-	CertifiedHw types.String `tfsdk:"certified_hw"`
-	Domain types.String `tfsdk:"domain"`
-	Hostname types.String `tfsdk:"hostname"`
-	InstanceID types.String `tfsdk:"instance_id"`
-	MachineID types.String `tfsdk:"machine_id"`
-	Provider types.String `tfsdk:"provider_ref"`
-	Timestamp types.String `tfsdk:"timestamp"`
-	Zone types.String `tfsdk:"zone"`
-	HwInfo *RegistrationInfraHwInfoModel `tfsdk:"hw_info"`
-	Interfaces *RegistrationEmptyModel `tfsdk:"interfaces"`
-	InternetProxy *RegistrationInfraInternetProxyModel `tfsdk:"internet_proxy"`
-	SwInfo *RegistrationInfraSwInfoModel `tfsdk:"sw_info"`
+	AvailabilityZone types.String                         `tfsdk:"availability_zone"`
+	CertifiedHw      types.String                         `tfsdk:"certified_hw"`
+	Domain           types.String                         `tfsdk:"domain"`
+	Hostname         types.String                         `tfsdk:"hostname"`
+	InstanceID       types.String                         `tfsdk:"instance_id"`
+	MachineID        types.String                         `tfsdk:"machine_id"`
+	Provider         types.String                         `tfsdk:"provider_ref"`
+	Timestamp        types.String                         `tfsdk:"timestamp"`
+	Zone             types.String                         `tfsdk:"zone"`
+	HwInfo           *RegistrationInfraHwInfoModel        `tfsdk:"hw_info"`
+	Interfaces       *RegistrationEmptyModel              `tfsdk:"interfaces"`
+	InternetProxy    *RegistrationInfraInternetProxyModel `tfsdk:"internet_proxy"`
+	SwInfo           *RegistrationInfraSwInfoModel        `tfsdk:"sw_info"`
 }
 
 // RegistrationInfraHwInfoModel represents hw_info block
 type RegistrationInfraHwInfoModel struct {
-	NumaNodes types.Int64 `tfsdk:"numa_nodes"`
-	Bios *RegistrationInfraHwInfoBiosModel `tfsdk:"bios"`
-	Board *RegistrationInfraHwInfoBoardModel `tfsdk:"board"`
-	Chassis *RegistrationInfraHwInfoChassisModel `tfsdk:"chassis"`
-	Cpu *RegistrationInfraHwInfoCpuModel `tfsdk:"cpu"`
-	Gpu *RegistrationInfraHwInfoGpuModel `tfsdk:"gpu"`
-	Kernel *RegistrationInfraHwInfoKernelModel `tfsdk:"kernel"`
-	Memory *RegistrationInfraHwInfoMemoryModel `tfsdk:"memory"`
-	Network []RegistrationInfraHwInfoNetworkModel `tfsdk:"network"`
-	Os *RegistrationInfraHwInfoOsModel `tfsdk:"os"`
-	Product *RegistrationInfraHwInfoProductModel `tfsdk:"product"`
-	Storage []RegistrationInfraHwInfoStorageModel `tfsdk:"storage"`
-	Usb []RegistrationInfraHwInfoUsbModel `tfsdk:"usb"`
+	NumaNodes types.Int64                           `tfsdk:"numa_nodes"`
+	Bios      *RegistrationInfraHwInfoBiosModel     `tfsdk:"bios"`
+	Board     *RegistrationInfraHwInfoBoardModel    `tfsdk:"board"`
+	Chassis   *RegistrationInfraHwInfoChassisModel  `tfsdk:"chassis"`
+	Cpu       *RegistrationInfraHwInfoCpuModel      `tfsdk:"cpu"`
+	Gpu       *RegistrationInfraHwInfoGpuModel      `tfsdk:"gpu"`
+	Kernel    *RegistrationInfraHwInfoKernelModel   `tfsdk:"kernel"`
+	Memory    *RegistrationInfraHwInfoMemoryModel   `tfsdk:"memory"`
+	Network   []RegistrationInfraHwInfoNetworkModel `tfsdk:"network"`
+	Os        *RegistrationInfraHwInfoOsModel       `tfsdk:"os"`
+	Product   *RegistrationInfraHwInfoProductModel  `tfsdk:"product"`
+	Storage   []RegistrationInfraHwInfoStorageModel `tfsdk:"storage"`
+	Usb       []RegistrationInfraHwInfoUsbModel     `tfsdk:"usb"`
 }
 
 // RegistrationInfraHwInfoBiosModel represents bios block
 type RegistrationInfraHwInfoBiosModel struct {
-	Date types.String `tfsdk:"date"`
-	Vendor types.String `tfsdk:"vendor"`
+	Date    types.String `tfsdk:"date"`
+	Vendor  types.String `tfsdk:"vendor"`
 	Version types.String `tfsdk:"version"`
 }
 
 // RegistrationInfraHwInfoBoardModel represents board block
 type RegistrationInfraHwInfoBoardModel struct {
 	AssetTag types.String `tfsdk:"asset_tag"`
-	Name types.String `tfsdk:"name"`
-	Serial types.String `tfsdk:"serial"`
-	Vendor types.String `tfsdk:"vendor"`
-	Version types.String `tfsdk:"version"`
+	Name     types.String `tfsdk:"name"`
+	Serial   types.String `tfsdk:"serial"`
+	Vendor   types.String `tfsdk:"vendor"`
+	Version  types.String `tfsdk:"version"`
 }
 
 // RegistrationInfraHwInfoChassisModel represents chassis block
 type RegistrationInfraHwInfoChassisModel struct {
 	AssetTag types.String `tfsdk:"asset_tag"`
-	Serial types.String `tfsdk:"serial"`
-	Type types.Int64 `tfsdk:"type"`
-	Vendor types.String `tfsdk:"vendor"`
-	Version types.String `tfsdk:"version"`
+	Serial   types.String `tfsdk:"serial"`
+	Type     types.Int64  `tfsdk:"type"`
+	Vendor   types.String `tfsdk:"vendor"`
+	Version  types.String `tfsdk:"version"`
 }
 
 // RegistrationInfraHwInfoCpuModel represents cpu block
 type RegistrationInfraHwInfoCpuModel struct {
-	Cache types.Int64 `tfsdk:"cache"`
-	Cores types.Int64 `tfsdk:"cores"`
-	Cpus types.Int64 `tfsdk:"cpus"`
-	Model types.String `tfsdk:"model"`
-	Speed types.Int64 `tfsdk:"speed"`
-	Threads types.Int64 `tfsdk:"threads"`
-	Vendor types.String `tfsdk:"vendor"`
+	Cache   types.Int64  `tfsdk:"cache"`
+	Cores   types.Int64  `tfsdk:"cores"`
+	Cpus    types.Int64  `tfsdk:"cpus"`
+	Model   types.String `tfsdk:"model"`
+	Speed   types.Int64  `tfsdk:"speed"`
+	Threads types.Int64  `tfsdk:"threads"`
+	Vendor  types.String `tfsdk:"vendor"`
 }
 
 // RegistrationInfraHwInfoGpuModel represents gpu block
 type RegistrationInfraHwInfoGpuModel struct {
-	CudaVersion types.String `tfsdk:"cuda_version"`
-	DriverVersion types.String `tfsdk:"driver_version"`
-	GpuDevice []RegistrationInfraHwInfoGpuGpuDeviceModel `tfsdk:"gpu_device"`
+	CudaVersion   types.String                               `tfsdk:"cuda_version"`
+	DriverVersion types.String                               `tfsdk:"driver_version"`
+	GpuDevice     []RegistrationInfraHwInfoGpuGpuDeviceModel `tfsdk:"gpu_device"`
 }
 
 // RegistrationInfraHwInfoGpuGpuDeviceModel represents gpu_device block
 type RegistrationInfraHwInfoGpuGpuDeviceModel struct {
-	ID types.String `tfsdk:"id"`
-	Processes types.String `tfsdk:"processes"`
+	ID          types.String `tfsdk:"id"`
+	Processes   types.String `tfsdk:"processes"`
 	ProductName types.String `tfsdk:"product_name"`
 }
 
 // RegistrationInfraHwInfoKernelModel represents kernel block
 type RegistrationInfraHwInfoKernelModel struct {
 	Architecture types.String `tfsdk:"architecture"`
-	Release types.String `tfsdk:"release"`
-	Version types.String `tfsdk:"version"`
+	Release      types.String `tfsdk:"release"`
+	Version      types.String `tfsdk:"version"`
 }
 
 // RegistrationInfraHwInfoMemoryModel represents memory block
 type RegistrationInfraHwInfoMemoryModel struct {
-	SizeMb types.Int64 `tfsdk:"size_mb"`
-	Speed types.Int64 `tfsdk:"speed"`
-	Type types.String `tfsdk:"type"`
+	SizeMb types.Int64  `tfsdk:"size_mb"`
+	Speed  types.Int64  `tfsdk:"speed"`
+	Type   types.String `tfsdk:"type"`
 }
 
 // RegistrationInfraHwInfoNetworkModel represents network block
 type RegistrationInfraHwInfoNetworkModel struct {
-	Driver types.String `tfsdk:"driver"`
-	IPAddress types.List `tfsdk:"ip_address"`
+	Driver      types.String `tfsdk:"driver"`
+	IPAddress   types.List   `tfsdk:"ip_address"`
 	LinkQuality types.String `tfsdk:"link_quality"`
-	LinkType types.String `tfsdk:"link_type"`
-	MacAddress types.String `tfsdk:"mac_address"`
-	Name types.String `tfsdk:"name"`
-	Port types.String `tfsdk:"port"`
-	Speed types.Int64 `tfsdk:"speed"`
+	LinkType    types.String `tfsdk:"link_type"`
+	MacAddress  types.String `tfsdk:"mac_address"`
+	Name        types.String `tfsdk:"name"`
+	Port        types.String `tfsdk:"port"`
+	Speed       types.Int64  `tfsdk:"speed"`
 }
 
 // RegistrationInfraHwInfoOsModel represents os block
 type RegistrationInfraHwInfoOsModel struct {
 	Architecture types.String `tfsdk:"architecture"`
-	Name types.String `tfsdk:"name"`
-	Release types.String `tfsdk:"release"`
-	Vendor types.String `tfsdk:"vendor"`
-	Version types.String `tfsdk:"version"`
+	Name         types.String `tfsdk:"name"`
+	Release      types.String `tfsdk:"release"`
+	Vendor       types.String `tfsdk:"vendor"`
+	Version      types.String `tfsdk:"version"`
 }
 
 // RegistrationInfraHwInfoProductModel represents product block
 type RegistrationInfraHwInfoProductModel struct {
-	Name types.String `tfsdk:"name"`
-	Serial types.String `tfsdk:"serial"`
-	Vendor types.String `tfsdk:"vendor"`
+	Name    types.String `tfsdk:"name"`
+	Serial  types.String `tfsdk:"serial"`
+	Vendor  types.String `tfsdk:"vendor"`
 	Version types.String `tfsdk:"version"`
 }
 
 // RegistrationInfraHwInfoStorageModel represents storage block
 type RegistrationInfraHwInfoStorageModel struct {
 	Driver types.String `tfsdk:"driver"`
-	Model types.String `tfsdk:"model"`
-	Name types.String `tfsdk:"name"`
+	Model  types.String `tfsdk:"model"`
+	Name   types.String `tfsdk:"name"`
 	Serial types.String `tfsdk:"serial"`
-	SizeGb types.Int64 `tfsdk:"size_gb"`
+	SizeGb types.Int64  `tfsdk:"size_gb"`
 	Vendor types.String `tfsdk:"vendor"`
 }
 
 // RegistrationInfraHwInfoUsbModel represents usb block
 type RegistrationInfraHwInfoUsbModel struct {
-	Address types.Int64 `tfsdk:"address"`
-	BDeviceClass types.String `tfsdk:"b_device_class"`
+	Address         types.Int64  `tfsdk:"address"`
+	BDeviceClass    types.String `tfsdk:"b_device_class"`
 	BDeviceProtocol types.String `tfsdk:"b_device_protocol"`
 	BDeviceSubClass types.String `tfsdk:"b_device_sub_class"`
-	BMaxPacketSize types.Int64 `tfsdk:"b_max_packet_size"`
-	BcdDevice types.String `tfsdk:"bcd_device"`
-	BcdUsb types.String `tfsdk:"bcd_usb"`
-	Bus types.Int64 `tfsdk:"bus"`
+	BMaxPacketSize  types.Int64  `tfsdk:"b_max_packet_size"`
+	BcdDevice       types.String `tfsdk:"bcd_device"`
+	BcdUsb          types.String `tfsdk:"bcd_usb"`
+	Bus             types.Int64  `tfsdk:"bus"`
 	DescriptionSpec types.String `tfsdk:"description_spec"`
-	IManufacturer types.String `tfsdk:"i_manufacturer"`
-	IProduct types.String `tfsdk:"i_product"`
-	ISerial types.String `tfsdk:"i_serial"`
-	IDProduct types.String `tfsdk:"id_product"`
-	IDVendor types.String `tfsdk:"id_vendor"`
-	Port types.Int64 `tfsdk:"port"`
-	ProductName types.String `tfsdk:"product_name"`
-	Speed types.String `tfsdk:"speed"`
-	UsbType types.String `tfsdk:"usb_type"`
-	VendorName types.String `tfsdk:"vendor_name"`
+	IManufacturer   types.String `tfsdk:"i_manufacturer"`
+	IProduct        types.String `tfsdk:"i_product"`
+	ISerial         types.String `tfsdk:"i_serial"`
+	IDProduct       types.String `tfsdk:"id_product"`
+	IDVendor        types.String `tfsdk:"id_vendor"`
+	Port            types.Int64  `tfsdk:"port"`
+	ProductName     types.String `tfsdk:"product_name"`
+	Speed           types.String `tfsdk:"speed"`
+	UsbType         types.String `tfsdk:"usb_type"`
+	VendorName      types.String `tfsdk:"vendor_name"`
 }
 
 // RegistrationInfraInternetProxyModel represents internet_proxy block
 type RegistrationInfraInternetProxyModel struct {
-	HTTPProxy types.String `tfsdk:"http_proxy"`
-	HTTPSProxy types.String `tfsdk:"https_proxy"`
-	NoProxy types.String `tfsdk:"no_proxy"`
+	HTTPProxy      types.String `tfsdk:"http_proxy"`
+	HTTPSProxy     types.String `tfsdk:"https_proxy"`
+	NoProxy        types.String `tfsdk:"no_proxy"`
 	ProxyCacertURL types.String `tfsdk:"proxy_cacert_url"`
 }
 
@@ -224,30 +224,30 @@ type RegistrationInfraSwInfoModel struct {
 
 // RegistrationPassportModel represents passport block
 type RegistrationPassportModel struct {
-	ClusterName types.String `tfsdk:"cluster_name"`
-	ClusterSize types.Int64 `tfsdk:"cluster_size"`
-	ClusterType types.String `tfsdk:"cluster_type"`
-	Latitude types.Int64 `tfsdk:"latitude"`
-	Longitude types.Int64 `tfsdk:"longitude"`
-	OperatingSystemVersion types.String `tfsdk:"operating_system_version"`
-	PrivateNetworkName types.String `tfsdk:"private_network_name"`
-	VolterraSoftwareVersion types.String `tfsdk:"volterra_software_version"`
-	DefaultOsVersion *RegistrationEmptyModel `tfsdk:"default_os_version"`
-	DefaultSwVersion *RegistrationEmptyModel `tfsdk:"default_sw_version"`
+	ClusterName             types.String            `tfsdk:"cluster_name"`
+	ClusterSize             types.Int64             `tfsdk:"cluster_size"`
+	ClusterType             types.String            `tfsdk:"cluster_type"`
+	Latitude                types.Int64             `tfsdk:"latitude"`
+	Longitude               types.Int64             `tfsdk:"longitude"`
+	OperatingSystemVersion  types.String            `tfsdk:"operating_system_version"`
+	PrivateNetworkName      types.String            `tfsdk:"private_network_name"`
+	VolterraSoftwareVersion types.String            `tfsdk:"volterra_software_version"`
+	DefaultOsVersion        *RegistrationEmptyModel `tfsdk:"default_os_version"`
+	DefaultSwVersion        *RegistrationEmptyModel `tfsdk:"default_sw_version"`
 }
 
 type RegistrationResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Token types.String `tfsdk:"token"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	Infra *RegistrationInfraModel `tfsdk:"infra"`
-	Passport *RegistrationPassportModel `tfsdk:"passport"`
+	Name        types.String               `tfsdk:"name"`
+	Namespace   types.String               `tfsdk:"namespace"`
+	Annotations types.Map                  `tfsdk:"annotations"`
+	Description types.String               `tfsdk:"description"`
+	Disable     types.Bool                 `tfsdk:"disable"`
+	Labels      types.Map                  `tfsdk:"labels"`
+	ID          types.String               `tfsdk:"id"`
+	Token       types.String               `tfsdk:"token"`
+	Timeouts    timeouts.Value             `tfsdk:"timeouts"`
+	Infra       *RegistrationInfraModel    `tfsdk:"infra"`
+	Passport    *RegistrationPassportModel `tfsdk:"passport"`
 }
 
 func (r *RegistrationResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -261,7 +261,7 @@ func (r *RegistrationResource) Schema(ctx context.Context, req resource.SchemaRe
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Registration. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -271,7 +271,7 @@ func (r *RegistrationResource) Schema(ctx context.Context, req resource.SchemaRe
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the Registration will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -281,33 +281,33 @@ func (r *RegistrationResource) Schema(ctx context.Context, req resource.SchemaRe
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"token": schema.StringAttribute{
 				MarkdownDescription: "Token. Token is used for machine and tenant identification",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -325,39 +325,39 @@ func (r *RegistrationResource) Schema(ctx context.Context, req resource.SchemaRe
 				Attributes: map[string]schema.Attribute{
 					"availability_zone": schema.StringAttribute{
 						MarkdownDescription: "Availability Zone. An Availability Zone is a high-availability offering that protects your applications and data from datacenter failures.",
-						Optional: true,
+						Optional:            true,
 					},
 					"certified_hw": schema.StringAttribute{
 						MarkdownDescription: "Certified Hardware. certified HW name used to map with F5XC certified_hardware definition",
-						Optional: true,
+						Optional:            true,
 					},
 					"domain": schema.StringAttribute{
 						MarkdownDescription: "Instance Domain. Machine domain. It's used for Kubernetes cloud provider when domain must be different than Volterra",
-						Optional: true,
+						Optional:            true,
 					},
 					"hostname": schema.StringAttribute{
 						MarkdownDescription: "Hostname. Must be unique in entire cluster and same as OS settings. '.' (dots) are not allowed in hostname",
-						Optional: true,
+						Optional:            true,
 					},
 					"instance_id": schema.StringAttribute{
 						MarkdownDescription: "Instance ID. Instance id (assigned by infrastructure provider)",
-						Optional: true,
+						Optional:            true,
 					},
 					"machine_id": schema.StringAttribute{
 						MarkdownDescription: "Machine ID. Machine id - generated by operating system",
-						Optional: true,
+						Optional:            true,
 					},
 					"provider_ref": schema.StringAttribute{
 						MarkdownDescription: "Infrastructure Provider. Infrastructure provider enum for registration. It describes where is instance running. Provider was not detected AWS cloud instance Google cloud instance Azure cloud instance VMWare VM KVM VM Other provider, which was not identified by system. F5XC HW device. IBM Cloud instance. Kubernetes cluster in AWS Kubernetes cluster in GCP Kubernetes cluster in Azure Kubernetes cluster in Vmware Kubernetes cluster in VMware Kubernetes cluster in Other provider Kubernetes cluster in Volterra Kubernetes cluster in IBM Cloud F5OS HW device. RSeries Device OCI Cloud Instance Nutanix instance Openstack Instance Equinix Instance. Possible values are `UNKNOWN`, `AWS`, `GOOGLE`, `AZURE`, `VMWARE`, `KVM`, `OTHER`, `VOLTERRA`, `IBMCLOUD`, `UNKNOWN_K8S`, `AWS_K8S`, `GCP_K8S`, `AZURE_K8S`, `VMWARE_K8S`, `KVM_K8S`, `OTHER_K8S`, `VOLTERRA_K8S`, `IBMCLOUD_K8S`, `F5OS`, `RSERIES`, `OCI`, `NUTANIX`, `OPENSTACK`, `EQUINIX`.",
-						Optional: true,
+						Optional:            true,
 					},
 					"timestamp": schema.StringAttribute{
 						MarkdownDescription: "Current (machine) time. It's used to verify machine have acceptable time difference from server",
-						Optional: true,
+						Optional:            true,
 					},
 					"zone": schema.StringAttribute{
 						MarkdownDescription: "Region. Instance zone (or region), depends on provider",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -366,7 +366,7 @@ func (r *RegistrationResource) Schema(ctx context.Context, req resource.SchemaRe
 						Attributes: map[string]schema.Attribute{
 							"numa_nodes": schema.Int64Attribute{
 								MarkdownDescription: "NUMA nodes count. Non-uniform memory access (NUMA) nodes count",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -375,15 +375,15 @@ func (r *RegistrationResource) Schema(ctx context.Context, req resource.SchemaRe
 								Attributes: map[string]schema.Attribute{
 									"date": schema.StringAttribute{
 										MarkdownDescription: "Date. information from /sys/class/dmi/id/bios_date",
-										Optional: true,
+										Optional:            true,
 									},
 									"vendor": schema.StringAttribute{
 										MarkdownDescription: "Vendor. information from /sys/class/dmi/id/bios_vendor",
-										Optional: true,
+										Optional:            true,
 									},
 									"version": schema.StringAttribute{
 										MarkdownDescription: "Version. information from /sys/class/dmi/id/bios_version",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -392,23 +392,23 @@ func (r *RegistrationResource) Schema(ctx context.Context, req resource.SchemaRe
 								Attributes: map[string]schema.Attribute{
 									"asset_tag": schema.StringAttribute{
 										MarkdownDescription: "Asset Tag. information from /sys/class/dmi/id/board_asset_tag",
-										Optional: true,
+										Optional:            true,
 									},
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Name. information from /sys/class/dmi/id/board_name",
-										Optional: true,
+										Optional:            true,
 									},
 									"serial": schema.StringAttribute{
 										MarkdownDescription: "Serial Number. information from /sys/class/dmi/id/board_serial",
-										Optional: true,
+										Optional:            true,
 									},
 									"vendor": schema.StringAttribute{
 										MarkdownDescription: "Vendor. information from /sys/class/dmi/id/board_vendor",
-										Optional: true,
+										Optional:            true,
 									},
 									"version": schema.StringAttribute{
 										MarkdownDescription: "Version. information from /sys/class/dmi/id/board_version",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -417,23 +417,23 @@ func (r *RegistrationResource) Schema(ctx context.Context, req resource.SchemaRe
 								Attributes: map[string]schema.Attribute{
 									"asset_tag": schema.StringAttribute{
 										MarkdownDescription: "Asset Tag. information from /sys/class/dmi/id/chassis_asset_tag",
-										Optional: true,
+										Optional:            true,
 									},
 									"serial": schema.StringAttribute{
 										MarkdownDescription: "Serial Number. information from /sys/class/dmi/id/chassis_serial",
-										Optional: true,
+										Optional:            true,
 									},
 									"type": schema.Int64Attribute{
 										MarkdownDescription: "Type. information from /sys/class/dmi/id/chassis_type",
-										Optional: true,
+										Optional:            true,
 									},
 									"vendor": schema.StringAttribute{
 										MarkdownDescription: "Vendor. information from /sys/class/dmi/id/chassis_vendor",
-										Optional: true,
+										Optional:            true,
 									},
 									"version": schema.StringAttribute{
 										MarkdownDescription: "Version. information from /sys/class/dmi/id/chassis_version",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -442,31 +442,31 @@ func (r *RegistrationResource) Schema(ctx context.Context, req resource.SchemaRe
 								Attributes: map[string]schema.Attribute{
 									"cache": schema.Int64Attribute{
 										MarkdownDescription: "Cache. CPU cache size in KB",
-										Optional: true,
+										Optional:            true,
 									},
 									"cores": schema.Int64Attribute{
 										MarkdownDescription: "Cores. number of physical CPU cores",
-										Optional: true,
+										Optional:            true,
 									},
 									"cpus": schema.Int64Attribute{
 										MarkdownDescription: "CPUs. number of physical CPUs",
-										Optional: true,
+										Optional:            true,
 									},
 									"model": schema.StringAttribute{
 										MarkdownDescription: "Model. CPU model",
-										Optional: true,
+										Optional:            true,
 									},
 									"speed": schema.Int64Attribute{
 										MarkdownDescription: "Speed. CPU clock rate in MHz",
-										Optional: true,
+										Optional:            true,
 									},
 									"threads": schema.Int64Attribute{
 										MarkdownDescription: "Threads. number of logical (HT) CPU cores",
-										Optional: true,
+										Optional:            true,
 									},
 									"vendor": schema.StringAttribute{
 										MarkdownDescription: "Vendor. CPU vendor",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -475,11 +475,11 @@ func (r *RegistrationResource) Schema(ctx context.Context, req resource.SchemaRe
 								Attributes: map[string]schema.Attribute{
 									"cuda_version": schema.StringAttribute{
 										MarkdownDescription: "Cuda Version. GPU Cuda Version",
-										Optional: true,
+										Optional:            true,
 									},
 									"driver_version": schema.StringAttribute{
 										MarkdownDescription: "Driver Version. GPU Driver Version",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 								Blocks: map[string]schema.Block{
@@ -489,15 +489,15 @@ func (r *RegistrationResource) Schema(ctx context.Context, req resource.SchemaRe
 											Attributes: map[string]schema.Attribute{
 												"id": schema.StringAttribute{
 													MarkdownDescription: "GPU ID. GPU ID",
-													Optional: true,
+													Optional:            true,
 												},
 												"processes": schema.StringAttribute{
 													MarkdownDescription: "Processes. GPU Processes",
-													Optional: true,
+													Optional:            true,
 												},
 												"product_name": schema.StringAttribute{
 													MarkdownDescription: "Product Name. GPU Product Name",
-													Optional: true,
+													Optional:            true,
 												},
 											},
 										},
@@ -509,15 +509,15 @@ func (r *RegistrationResource) Schema(ctx context.Context, req resource.SchemaRe
 								Attributes: map[string]schema.Attribute{
 									"architecture": schema.StringAttribute{
 										MarkdownDescription: "Architecture. kernel architecture",
-										Optional: true,
+										Optional:            true,
 									},
 									"release": schema.StringAttribute{
 										MarkdownDescription: "Release. kernel release",
-										Optional: true,
+										Optional:            true,
 									},
 									"version": schema.StringAttribute{
 										MarkdownDescription: "Version. kernel version",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -526,15 +526,15 @@ func (r *RegistrationResource) Schema(ctx context.Context, req resource.SchemaRe
 								Attributes: map[string]schema.Attribute{
 									"size_mb": schema.Int64Attribute{
 										MarkdownDescription: "RAM. RAM size in MB",
-										Optional: true,
+										Optional:            true,
 									},
 									"speed": schema.Int64Attribute{
 										MarkdownDescription: "Speed. RAM data rate in MT/s",
-										Optional: true,
+										Optional:            true,
 									},
 									"type": schema.StringAttribute{
 										MarkdownDescription: "Type. type of memory, eg. DDR4",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -544,36 +544,36 @@ func (r *RegistrationResource) Schema(ctx context.Context, req resource.SchemaRe
 									Attributes: map[string]schema.Attribute{
 										"driver": schema.StringAttribute{
 											MarkdownDescription: "Driver. driver of device, eg. e1000e",
-											Optional: true,
+											Optional:            true,
 										},
 										"ip_address": schema.ListAttribute{
 											MarkdownDescription: "IP Address. ip address on interface",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 										"link_quality": schema.StringAttribute{
 											MarkdownDescription: "Link quality. Link quality determined by VER using different probes Unknown quality Link quality is good Link quality is poor Quality disabled. Possible values are `QUALITY_UNKNOWN`, `QUALITY_GOOD`, `QUALITY_POOR`, `QUALITY_DISABLED`. Defaults to `QUALITY_UNKNOWN`.",
-											Optional: true,
+											Optional:            true,
 										},
 										"link_type": schema.StringAttribute{
 											MarkdownDescription: "Link type. Link type of interface determined operationally Link type unknown Link type ethernet WiFi link of type 802.11ac WiFi link of type 802.11bgn Link type 4G WiFi link Wan link. Possible values are `LINK_TYPE_UNKNOWN`, `LINK_TYPE_ETHERNET`, `LINK_TYPE_WIFI_802_11AC`, `LINK_TYPE_WIFI_802_11BGN`, `LINK_TYPE_4G`, `LINK_TYPE_WIFI`, `LINK_TYPE_WAN`. Defaults to `LINK_TYPE_UNKNOWN`.",
-											Optional: true,
+											Optional:            true,
 										},
 										"mac_address": schema.StringAttribute{
 											MarkdownDescription: "MAC Address. mac address on interface",
-											Optional: true,
+											Optional:            true,
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. name of device, eg. eth0",
-											Optional: true,
+											Optional:            true,
 										},
 										"port": schema.StringAttribute{
 											MarkdownDescription: "Port. used port, eg. tp",
-											Optional: true,
+											Optional:            true,
 										},
 										"speed": schema.Int64Attribute{
 											MarkdownDescription: "Speed. device max supported speed in Mbps",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 								},
@@ -583,23 +583,23 @@ func (r *RegistrationResource) Schema(ctx context.Context, req resource.SchemaRe
 								Attributes: map[string]schema.Attribute{
 									"architecture": schema.StringAttribute{
 										MarkdownDescription: "Architecture. Architecture of OS",
-										Optional: true,
+										Optional:            true,
 									},
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Name. Name of OS",
-										Optional: true,
+										Optional:            true,
 									},
 									"release": schema.StringAttribute{
 										MarkdownDescription: "Release. Release of the OS",
-										Optional: true,
+										Optional:            true,
 									},
 									"vendor": schema.StringAttribute{
 										MarkdownDescription: "Vendor. Vendor of OS",
-										Optional: true,
+										Optional:            true,
 									},
 									"version": schema.StringAttribute{
 										MarkdownDescription: "Version. Version of OS",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -608,19 +608,19 @@ func (r *RegistrationResource) Schema(ctx context.Context, req resource.SchemaRe
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Name. product name, eg. for aws m5a.xlarge. Info taken from /sys/class/dmi/id/product_name",
-										Optional: true,
+										Optional:            true,
 									},
 									"serial": schema.StringAttribute{
 										MarkdownDescription: "Serial Number. serial number, eg. for aws ec254b6d-9676-1a51-8b10-21370dbdc3e5. Info taken from /sys/class/dmi/id/product_serial",
-										Optional: true,
+										Optional:            true,
 									},
 									"vendor": schema.StringAttribute{
 										MarkdownDescription: "Vendor. vendor name, eg. for aws Amazon EC2. Info taken from /sys/class/dmi/id/product_vendor",
-										Optional: true,
+										Optional:            true,
 									},
 									"version": schema.StringAttribute{
 										MarkdownDescription: "Version. version name. Info taken from /sys/class/dmi/id/product_version",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -630,27 +630,27 @@ func (r *RegistrationResource) Schema(ctx context.Context, req resource.SchemaRe
 									Attributes: map[string]schema.Attribute{
 										"driver": schema.StringAttribute{
 											MarkdownDescription: "Driver. driver of device",
-											Optional: true,
+											Optional:            true,
 										},
 										"model": schema.StringAttribute{
 											MarkdownDescription: "Model. model of device",
-											Optional: true,
+											Optional:            true,
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. name of device, eg. nvme0n1",
-											Optional: true,
+											Optional:            true,
 										},
 										"serial": schema.StringAttribute{
 											MarkdownDescription: "Serial Number. serial of device",
-											Optional: true,
+											Optional:            true,
 										},
 										"size_gb": schema.Int64Attribute{
 											MarkdownDescription: "Size(GB). device size in GB",
-											Optional: true,
+											Optional:            true,
 										},
 										"vendor": schema.StringAttribute{
 											MarkdownDescription: "Vendor. vendor of device",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 								},
@@ -661,79 +661,79 @@ func (r *RegistrationResource) Schema(ctx context.Context, req resource.SchemaRe
 									Attributes: map[string]schema.Attribute{
 										"address": schema.Int64Attribute{
 											MarkdownDescription: "Address. Address of the device on the bus in decimal",
-											Optional: true,
+											Optional:            true,
 										},
 										"b_device_class": schema.StringAttribute{
 											MarkdownDescription: "Class. The class of this device",
-											Optional: true,
+											Optional:            true,
 										},
 										"b_device_protocol": schema.StringAttribute{
 											MarkdownDescription: "Protocol. The protocol (within the sub-class) of this device",
-											Optional: true,
+											Optional:            true,
 										},
 										"b_device_sub_class": schema.StringAttribute{
 											MarkdownDescription: "Subclass. The sub-class (within the class) of this device",
-											Optional: true,
+											Optional:            true,
 										},
 										"b_max_packet_size": schema.Int64Attribute{
 											MarkdownDescription: "Max packet size. Maximum size of the control transfer",
-											Optional: true,
+											Optional:            true,
 										},
 										"bcd_device": schema.StringAttribute{
 											MarkdownDescription: "BCD Device. The device version",
-											Optional: true,
+											Optional:            true,
 										},
 										"bcd_usb": schema.StringAttribute{
 											MarkdownDescription: "BCD Spec. USB Specification Release Number",
-											Optional: true,
+											Optional:            true,
 										},
 										"bus": schema.Int64Attribute{
 											MarkdownDescription: "Bus. The bus on which the device was detected in decimal",
-											Optional: true,
+											Optional:            true,
 										},
 										"description_spec": schema.StringAttribute{
 											MarkdownDescription: "Description. Device description",
-											Optional: true,
+											Optional:            true,
 										},
 										"i_manufacturer": schema.StringAttribute{
 											MarkdownDescription: "Manufacturer. Manufacturer name",
-											Optional: true,
+											Optional:            true,
 										},
 										"i_product": schema.StringAttribute{
 											MarkdownDescription: "Device product. Product name reported by device",
-											Optional: true,
+											Optional:            true,
 										},
 										"i_serial": schema.StringAttribute{
 											MarkdownDescription: "iSerialNumber. Index of Serial Number String Descriptor",
-											Optional: true,
+											Optional:            true,
 										},
 										"id_product": schema.StringAttribute{
 											MarkdownDescription: "Product ID. Product ID (Assigned by Manufacturer) in hex",
-											Optional: true,
+											Optional:            true,
 										},
 										"id_vendor": schema.StringAttribute{
 											MarkdownDescription: "Vendor ID. Vendor ID (Assigned by USB Org) in hex",
-											Optional: true,
+											Optional:            true,
 										},
 										"port": schema.Int64Attribute{
 											MarkdownDescription: "Port. Port on which the device was detected in decimal",
-											Optional: true,
+											Optional:            true,
 										},
 										"product_name": schema.StringAttribute{
 											MarkdownDescription: "Product name. Product ID translated to name (if available)",
-											Optional: true,
+											Optional:            true,
 										},
 										"speed": schema.StringAttribute{
 											MarkdownDescription: "Speed. The negotiated operating speed for the device",
-											Optional: true,
+											Optional:            true,
 										},
 										"usb_type": schema.StringAttribute{
 											MarkdownDescription: "USB Type. Type of USB device Unknown USB device type Internal USB present in Certified HW USB device present during node registration USB device that can be matched by USB rules. Possible values are `UNKNOWN_USB`, `INTERNAL`, `REGISTERED`, `CONFIGURABLE`. Defaults to `UNKNOWN_USB`.",
-											Optional: true,
+											Optional:            true,
 										},
 										"vendor_name": schema.StringAttribute{
 											MarkdownDescription: "Vendor name. Vendor ID translated to name (if available)",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 								},
@@ -748,19 +748,19 @@ func (r *RegistrationResource) Schema(ctx context.Context, req resource.SchemaRe
 						Attributes: map[string]schema.Attribute{
 							"http_proxy": schema.StringAttribute{
 								MarkdownDescription: "HTTP PROXY. It will be used as the proxy URL for HTTP requests and HTTPS requests unless overridden by HTTPSProxy or NoProxy.",
-								Optional: true,
+								Optional:            true,
 							},
 							"https_proxy": schema.StringAttribute{
 								MarkdownDescription: "HTTPS PROXY. It will be used as the proxy URL for HTTPS requests unless overridden by NoProxy.",
-								Optional: true,
+								Optional:            true,
 							},
 							"no_proxy": schema.StringAttribute{
 								MarkdownDescription: "NO PROXY. It specifies a string that contains comma-separated values specifying hosts that should be excluded from proxying. Each value is represented by an IP address prefix (1.2.3.4), an IP address prefix in CIDR notation (1.2.3.4/8), a domain name, or a special DNS label (*). An IP address prefix and domain name can also include a literal port number (1.2.3.4:80). A domain name matches that name and all subdomains. A domain name with a leading '.' matches subdomains only. For example 'foo.com' matches 'foo.com' and 'bar.foo.com'; '.y.com' matches 'x.y.com' but not 'y.com'. A single asterisk (*) indicates that no proxying should be done.",
-								Optional: true,
+								Optional:            true,
 							},
 							"proxy_cacert_url": schema.StringAttribute{
 								MarkdownDescription: "Proxy CA certificate URL. Allow optional different trust-store for proxy in HTTP CONNECT step by picking proxy ca certificate value.",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 					},
@@ -769,47 +769,46 @@ func (r *RegistrationResource) Schema(ctx context.Context, req resource.SchemaRe
 						Attributes: map[string]schema.Attribute{
 							"sw_version": schema.StringAttribute{
 								MarkdownDescription: "SW Version. SW Version in the site",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 					},
 				},
-
 			},
 			"passport": schema.SingleNestedBlock{
 				MarkdownDescription: "Passport. Passport stores information about identification and node configuration provided by CE during registration. It can be manually updated by user during approval.",
 				Attributes: map[string]schema.Attribute{
 					"cluster_name": schema.StringAttribute{
 						MarkdownDescription: "Cluster Name.",
-						Optional: true,
+						Optional:            true,
 					},
 					"cluster_size": schema.Int64Attribute{
 						MarkdownDescription: "Cluster Size. Defines how many master nodes is in the cluster, only 1 or 3 is allowed 1 - cluster have single master, without HA 3 - cluster have 3 masters, with HA, all nodes should be allowed at same time, cluster won't start until ALL nodes are ADMITTED 0 - same as 1 This value can't be changed after installation. It does not interact with auto-scaling as only pool nodes are scaled.",
-						Optional: true,
+						Optional:            true,
 					},
 					"cluster_type": schema.StringAttribute{
 						MarkdownDescription: "Cluster Type.",
-						Optional: true,
+						Optional:            true,
 					},
 					"latitude": schema.Int64Attribute{
 						MarkdownDescription: "Latitude. Geographic location of this site",
-						Optional: true,
+						Optional:            true,
 					},
 					"longitude": schema.Int64Attribute{
 						MarkdownDescription: "Longitude. Geographic location of this site",
-						Optional: true,
+						Optional:            true,
 					},
 					"operating_system_version": schema.StringAttribute{
 						MarkdownDescription: "Operating System Version. Operating System Version is optional parameter, which allows to specify target SW version for particular site e.g. 7.2009.10.",
-						Optional: true,
+						Optional:            true,
 					},
 					"private_network_name": schema.StringAttribute{
 						MarkdownDescription: "Private Network Name. Private Network name for private access connectivity to F5XC ADN. It is used for PrivateLink, CloudLink and L3VPN.",
-						Optional: true,
+						Optional:            true,
 					},
 					"volterra_software_version": schema.StringAttribute{
 						MarkdownDescription: "F5XC Software Version. F5XC Software Version is optional parameter, which allows to specify target SW version for particular site e.g. crt-20210329-1002.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -820,7 +819,6 @@ func (r *RegistrationResource) Schema(ctx context.Context, req resource.SchemaRe
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 		},
 	}
@@ -1072,7 +1070,6 @@ func (r *RegistrationResource) Create(ctx context.Context, req resource.CreateRe
 		createReq.Spec["token"] = data.Token.ValueString()
 	}
 
-
 	apiResource, err := r.client.CreateRegistration(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create Registration: %s", err))
@@ -1084,7 +1081,7 @@ func (r *RegistrationResource) Create(ctx context.Context, req resource.CreateRe
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if blockData, ok := apiResource.Spec["infra"].(map[string]interface{}); ok && (isImport || data.Infra != nil) {
 		data.Infra = &RegistrationInfraModel{
 			AvailabilityZone: func() types.String {
@@ -1308,7 +1305,6 @@ func (r *RegistrationResource) Create(ctx context.Context, req resource.CreateRe
 	} else {
 		data.Token = types.StringNull()
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -1398,9 +1394,9 @@ func (r *RegistrationResource) Read(ctx context.Context, req resource.ReadReques
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if blockData, ok := apiResource.Spec["infra"].(map[string]interface{}); ok && (isImport || data.Infra != nil) {
 		data.Infra = &RegistrationInfraModel{
@@ -1625,7 +1621,6 @@ func (r *RegistrationResource) Read(ctx context.Context, req resource.ReadReques
 	} else {
 		data.Token = types.StringNull()
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -1787,7 +1782,6 @@ func (r *RegistrationResource) Update(ctx context.Context, req resource.UpdateRe
 	if !data.Token.IsNull() && !data.Token.IsUnknown() {
 		apiResource.Spec["token"] = data.Token.ValueString()
 	}
-
 
 	updated, err := r.client.UpdateRegistration(ctx, apiResource)
 	if err != nil {

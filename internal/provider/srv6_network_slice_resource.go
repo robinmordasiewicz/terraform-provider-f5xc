@@ -47,18 +47,18 @@ type Srv6NetworkSliceResource struct {
 }
 
 type Srv6NetworkSliceResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	SidPrefixes types.List `tfsdk:"sid_prefixes"`
-	ID types.String `tfsdk:"id"`
-	ConnectToAccessNetworks types.Bool `tfsdk:"connect_to_access_networks"`
-	ConnectToEnterpriseNetworks types.Bool `tfsdk:"connect_to_enterprise_networks"`
-	ConnectToInternet types.Bool `tfsdk:"connect_to_internet"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Name                        types.String   `tfsdk:"name"`
+	Namespace                   types.String   `tfsdk:"namespace"`
+	Annotations                 types.Map      `tfsdk:"annotations"`
+	Description                 types.String   `tfsdk:"description"`
+	Disable                     types.Bool     `tfsdk:"disable"`
+	Labels                      types.Map      `tfsdk:"labels"`
+	SidPrefixes                 types.List     `tfsdk:"sid_prefixes"`
+	ID                          types.String   `tfsdk:"id"`
+	ConnectToAccessNetworks     types.Bool     `tfsdk:"connect_to_access_networks"`
+	ConnectToEnterpriseNetworks types.Bool     `tfsdk:"connect_to_enterprise_networks"`
+	ConnectToInternet           types.Bool     `tfsdk:"connect_to_internet"`
+	Timeouts                    timeouts.Value `tfsdk:"timeouts"`
 }
 
 func (r *Srv6NetworkSliceResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -72,7 +72,7 @@ func (r *Srv6NetworkSliceResource) Schema(ctx context.Context, req resource.Sche
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Srv6NetworkSlice. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -82,7 +82,7 @@ func (r *Srv6NetworkSliceResource) Schema(ctx context.Context, req resource.Sche
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the Srv6NetworkSlice will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -92,54 +92,54 @@ func (r *Srv6NetworkSliceResource) Schema(ctx context.Context, req resource.Sche
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"sid_prefixes": schema.ListAttribute{
 				MarkdownDescription: "IPv6 Prefix for SID Allocation. A SID Locator from the prefix is allocated automatically for each node in each site.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"connect_to_access_networks": schema.BoolAttribute{
 				MarkdownDescription: "Connect To Access Networks. Connect all SRv6 Virtual Networks in this slice to their corresponding access networks by importing route targets specified in the virtual network.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.Bool{
 					boolplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"connect_to_enterprise_networks": schema.BoolAttribute{
 				MarkdownDescription: "Connect To Enterprise Networks. Connect all SRv6 Virtual Networks in this slice to their corresponding enterprise networks by importing route targets specified in the virtual network.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.Bool{
 					boolplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"connect_to_internet": schema.BoolAttribute{
 				MarkdownDescription: "Connect To Internet. Connect all SRv6 Virtual Networks in this slice to the Internet by importing route targets specified in the virtual network.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.Bool{
 					boolplanmodifier.UseStateForUnknown(),
 				},
@@ -317,7 +317,6 @@ func (r *Srv6NetworkSliceResource) Create(ctx context.Context, req resource.Crea
 		createReq.Spec["connect_to_internet"] = data.ConnectToInternet.ValueBool()
 	}
 
-
 	apiResource, err := r.client.CreateSrv6NetworkSlice(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create Srv6NetworkSlice: %s", err))
@@ -329,7 +328,7 @@ func (r *Srv6NetworkSliceResource) Create(ctx context.Context, req resource.Crea
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if v, ok := apiResource.Spec["sid_prefixes"].([]interface{}); ok && len(v) > 0 {
 		var sid_prefixesList []string
 		for _, item := range v {
@@ -378,7 +377,6 @@ func (r *Srv6NetworkSliceResource) Create(ctx context.Context, req resource.Crea
 			data.ConnectToInternet = types.BoolNull()
 		}
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -468,9 +466,9 @@ func (r *Srv6NetworkSliceResource) Read(ctx context.Context, req resource.ReadRe
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if v, ok := apiResource.Spec["sid_prefixes"].([]interface{}); ok && len(v) > 0 {
 		var sid_prefixesList []string
@@ -520,7 +518,6 @@ func (r *Srv6NetworkSliceResource) Read(ctx context.Context, req resource.ReadRe
 			data.ConnectToInternet = types.BoolNull()
 		}
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -597,7 +594,6 @@ func (r *Srv6NetworkSliceResource) Update(ctx context.Context, req resource.Upda
 	if !data.ConnectToInternet.IsNull() && !data.ConnectToInternet.IsUnknown() {
 		apiResource.Spec["connect_to_internet"] = data.ConnectToInternet.ValueBool()
 	}
-
 
 	updated, err := r.client.UpdateSrv6NetworkSlice(ctx, apiResource)
 	if err != nil {

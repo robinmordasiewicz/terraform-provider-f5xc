@@ -56,18 +56,18 @@ type ReportConfigReportRecipientsModel struct {
 
 // ReportConfigReportRecipientsUserGroupsModel represents user_groups block
 type ReportConfigReportRecipientsUserGroupsModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // ReportConfigWaapModel represents waap block
 type ReportConfigWaapModel struct {
-	CurrentNamespace *ReportConfigEmptyModel `tfsdk:"current_namespace"`
-	Daily *ReportConfigWaapDailyModel `tfsdk:"daily"`
-	Monthly *ReportConfigWaapMonthlyModel `tfsdk:"monthly"`
-	Namespaces *ReportConfigWaapNamespacesModel `tfsdk:"namespaces"`
-	Weekly *ReportConfigWaapWeeklyModel `tfsdk:"weekly"`
+	CurrentNamespace *ReportConfigEmptyModel          `tfsdk:"current_namespace"`
+	Daily            *ReportConfigWaapDailyModel      `tfsdk:"daily"`
+	Monthly          *ReportConfigWaapMonthlyModel    `tfsdk:"monthly"`
+	Namespaces       *ReportConfigWaapNamespacesModel `tfsdk:"namespaces"`
+	Weekly           *ReportConfigWaapWeeklyModel     `tfsdk:"weekly"`
 }
 
 // ReportConfigWaapDailyModel represents daily block
@@ -77,7 +77,7 @@ type ReportConfigWaapDailyModel struct {
 
 // ReportConfigWaapMonthlyModel represents monthly block
 type ReportConfigWaapMonthlyModel struct {
-	Date types.String `tfsdk:"date"`
+	Date                 types.String `tfsdk:"date"`
 	ReportGenerationTime types.String `tfsdk:"report_generation_time"`
 }
 
@@ -88,21 +88,21 @@ type ReportConfigWaapNamespacesModel struct {
 
 // ReportConfigWaapWeeklyModel represents weekly block
 type ReportConfigWaapWeeklyModel struct {
-	Day types.String `tfsdk:"day"`
+	Day                  types.String `tfsdk:"day"`
 	ReportGenerationTime types.String `tfsdk:"report_generation_time"`
 }
 
 type ReportConfigResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Name             types.String                       `tfsdk:"name"`
+	Namespace        types.String                       `tfsdk:"namespace"`
+	Annotations      types.Map                          `tfsdk:"annotations"`
+	Description      types.String                       `tfsdk:"description"`
+	Disable          types.Bool                         `tfsdk:"disable"`
+	Labels           types.Map                          `tfsdk:"labels"`
+	ID               types.String                       `tfsdk:"id"`
+	Timeouts         timeouts.Value                     `tfsdk:"timeouts"`
 	ReportRecipients *ReportConfigReportRecipientsModel `tfsdk:"report_recipients"`
-	Waap *ReportConfigWaapModel `tfsdk:"waap"`
+	Waap             *ReportConfigWaapModel             `tfsdk:"waap"`
 }
 
 func (r *ReportConfigResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -116,7 +116,7 @@ func (r *ReportConfigResource) Schema(ctx context.Context, req resource.SchemaRe
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the ReportConfig. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -126,7 +126,7 @@ func (r *ReportConfigResource) Schema(ctx context.Context, req resource.SchemaRe
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the ReportConfig will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -136,25 +136,25 @@ func (r *ReportConfigResource) Schema(ctx context.Context, req resource.SchemaRe
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -169,8 +169,7 @@ func (r *ReportConfigResource) Schema(ctx context.Context, req resource.SchemaRe
 			}),
 			"report_recipients": schema.SingleNestedBlock{
 				MarkdownDescription: "Report recipients. Report recipients",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"user_groups": schema.ListNestedBlock{
 						MarkdownDescription: "User Groups. Select one or more user groups, to which the report should be sent via email",
@@ -178,27 +177,25 @@ func (r *ReportConfigResource) Schema(ctx context.Context, req resource.SchemaRe
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-									Optional: true,
+									Optional:            true,
 								},
 								"namespace": schema.StringAttribute{
 									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-									Optional: true,
+									Optional:            true,
 								},
 								"tenant": schema.StringAttribute{
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-									Optional: true,
-									Computed: true,
+									Optional:            true,
+									Computed:            true,
 								},
 							},
 						},
 					},
 				},
-
 			},
 			"waap": schema.SingleNestedBlock{
 				MarkdownDescription: "Report Type Waap. Report Type Waap",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"current_namespace": schema.SingleNestedBlock{
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -208,7 +205,7 @@ func (r *ReportConfigResource) Schema(ctx context.Context, req resource.SchemaRe
 						Attributes: map[string]schema.Attribute{
 							"report_generation_time": schema.StringAttribute{
 								MarkdownDescription: "Report Generation Time. Times are in UTC time. Generating reports may be delayed up to 30 minutes from the time set.",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 					},
@@ -217,11 +214,11 @@ func (r *ReportConfigResource) Schema(ctx context.Context, req resource.SchemaRe
 						Attributes: map[string]schema.Attribute{
 							"date": schema.StringAttribute{
 								MarkdownDescription: "Report Generation Date. report generation date Indicates field not being set Create report on Last day of month. Possible values are `DATE_NONE`, `DATE_ONE`, `DATE_TWO`, `DATE_THREE`, `DATE_FOUR`, `DATE_FIVE`, `DATE_SIX`, `DATE_SEVEN`, `DATE_EIGHT`, `DATE_NINE`, `DATE_TEN`, `DATE_ELEVEN`, `DATE_TWELVE`, `DATE_THIRTEEN`, `DATE_FOURTEEN`, `DATE_FIFTEEN`, `DATE_SIXTEEN`, `DATE_SEVENTEEN`, `DATE_EIGHTEEN`, `DATE_NINETEEN`, `DATE_TWENTY`, `DATE_TWENTYONE`, `DATE_TWENTYTWO`, `DATE_TWENTYTHREE`, `DATE_TWENTYFOUR`, `DATE_TWENTYFIVE`, `DATE_TWENTYSIX`, `DATE_TWENTYSEVEN`, `DATE_TWENTYEIGHT`, `DATE_LAST`. Defaults to `DATE_NONE`.",
-								Optional: true,
+								Optional:            true,
 							},
 							"report_generation_time": schema.StringAttribute{
 								MarkdownDescription: "Time Report is Generated. Times are in UTC time. Generating reports may be delayed up to 30 minutes from the time set.",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 					},
@@ -230,8 +227,8 @@ func (r *ReportConfigResource) Schema(ctx context.Context, req resource.SchemaRe
 						Attributes: map[string]schema.Attribute{
 							"namespaces": schema.ListAttribute{
 								MarkdownDescription: "Namespaces. list of namespaces for which user wants to generate report",
-								Optional: true,
-								ElementType: types.StringType,
+								Optional:            true,
+								ElementType:         types.StringType,
 							},
 						},
 					},
@@ -240,16 +237,15 @@ func (r *ReportConfigResource) Schema(ctx context.Context, req resource.SchemaRe
 						Attributes: map[string]schema.Attribute{
 							"day": schema.StringAttribute{
 								MarkdownDescription: "Report Generation Weekday. report generation weekday Indicates field not being set. Possible values are `WEEKDAY_NONE`, `WEEKDAY_MONDAY`, `WEEKDAY_TUESDAY`, `WEEKDAY_WEDNESDAY`, `WEEKDAY_THURSDAY`, `WEEKDAY_FRIDAY`, `WEEKDAY_SATURDAY`, `WEEKDAY_SUNDAY`. Defaults to `WEEKDAY_NONE`.",
-								Optional: true,
+								Optional:            true,
 							},
 							"report_generation_time": schema.StringAttribute{
 								MarkdownDescription: "Report Generation Time. Times are in UTC time. Generating reports may be delayed up to 30 minutes from the time set.",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 					},
 				},
-
 			},
 		},
 	}
@@ -459,7 +455,6 @@ func (r *ReportConfigResource) Create(ctx context.Context, req resource.CreateRe
 		createReq.Spec["waap"] = waapMap
 	}
 
-
 	apiResource, err := r.client.CreateReportConfig(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create ReportConfig: %s", err))
@@ -471,7 +466,7 @@ func (r *ReportConfigResource) Create(ctx context.Context, req resource.CreateRe
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if blockData, ok := apiResource.Spec["report_recipients"].(map[string]interface{}); ok && (isImport || data.ReportRecipients != nil) {
 		data.ReportRecipients = &ReportConfigReportRecipientsModel{
 			UserGroups: func() []ReportConfigReportRecipientsUserGroupsModel {
@@ -512,7 +507,6 @@ func (r *ReportConfigResource) Create(ctx context.Context, req resource.CreateRe
 		data.Waap = &ReportConfigWaapModel{}
 	}
 	// Normal Read: preserve existing state value
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -602,9 +596,9 @@ func (r *ReportConfigResource) Read(ctx context.Context, req resource.ReadReques
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if blockData, ok := apiResource.Spec["report_recipients"].(map[string]interface{}); ok && (isImport || data.ReportRecipients != nil) {
 		data.ReportRecipients = &ReportConfigReportRecipientsModel{
@@ -646,7 +640,6 @@ func (r *ReportConfigResource) Read(ctx context.Context, req resource.ReadReques
 		data.Waap = &ReportConfigWaapModel{}
 	}
 	// Normal Read: preserve existing state value
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -766,7 +759,6 @@ func (r *ReportConfigResource) Update(ctx context.Context, req resource.UpdateRe
 		}
 		apiResource.Spec["waap"] = waapMap
 	}
-
 
 	updated, err := r.client.UpdateReportConfig(ctx, apiResource)
 	if err != nil {

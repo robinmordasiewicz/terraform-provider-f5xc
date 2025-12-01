@@ -52,11 +52,11 @@ type ClusterEmptyModel struct {
 
 // ClusterCircuitBreakerModel represents circuit_breaker block
 type ClusterCircuitBreakerModel struct {
-	ConnectionLimit types.Int64 `tfsdk:"connection_limit"`
-	MaxRequests types.Int64 `tfsdk:"max_requests"`
-	PendingRequests types.Int64 `tfsdk:"pending_requests"`
-	Priority types.String `tfsdk:"priority"`
-	Retries types.Int64 `tfsdk:"retries"`
+	ConnectionLimit types.Int64  `tfsdk:"connection_limit"`
+	MaxRequests     types.Int64  `tfsdk:"max_requests"`
+	PendingRequests types.Int64  `tfsdk:"pending_requests"`
+	Priority        types.String `tfsdk:"priority"`
+	Retries         types.Int64  `tfsdk:"retries"`
 }
 
 // ClusterEndpointSubsetsModel represents endpoint_subsets block
@@ -66,20 +66,20 @@ type ClusterEndpointSubsetsModel struct {
 
 // ClusterEndpointsModel represents endpoints block
 type ClusterEndpointsModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // ClusterHealthChecksModel represents health_checks block
 type ClusterHealthChecksModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // ClusterHttp1ConfigModel represents http1_config block
@@ -89,10 +89,10 @@ type ClusterHttp1ConfigModel struct {
 
 // ClusterHttp1ConfigHeaderTransformationModel represents header_transformation block
 type ClusterHttp1ConfigHeaderTransformationModel struct {
-	DefaultHeaderTransformation *ClusterEmptyModel `tfsdk:"default_header_transformation"`
-	LegacyHeaderTransformation *ClusterEmptyModel `tfsdk:"legacy_header_transformation"`
+	DefaultHeaderTransformation      *ClusterEmptyModel `tfsdk:"default_header_transformation"`
+	LegacyHeaderTransformation       *ClusterEmptyModel `tfsdk:"legacy_header_transformation"`
 	PreserveCaseHeaderTransformation *ClusterEmptyModel `tfsdk:"preserve_case_header_transformation"`
-	ProperCaseHeaderTransformation *ClusterEmptyModel `tfsdk:"proper_case_header_transformation"`
+	ProperCaseHeaderTransformation   *ClusterEmptyModel `tfsdk:"proper_case_header_transformation"`
 }
 
 // ClusterHttp2OptionsModel represents http2_options block
@@ -102,49 +102,49 @@ type ClusterHttp2OptionsModel struct {
 
 // ClusterOutlierDetectionModel represents outlier_detection block
 type ClusterOutlierDetectionModel struct {
-	BaseEjectionTime types.Int64 `tfsdk:"base_ejection_time"`
-	Consecutive5xx types.Int64 `tfsdk:"consecutive_5xx"`
+	BaseEjectionTime          types.Int64 `tfsdk:"base_ejection_time"`
+	Consecutive5xx            types.Int64 `tfsdk:"consecutive_5xx"`
 	ConsecutiveGatewayFailure types.Int64 `tfsdk:"consecutive_gateway_failure"`
-	Interval types.Int64 `tfsdk:"interval"`
-	MaxEjectionPercent types.Int64 `tfsdk:"max_ejection_percent"`
+	Interval                  types.Int64 `tfsdk:"interval"`
+	MaxEjectionPercent        types.Int64 `tfsdk:"max_ejection_percent"`
 }
 
 // ClusterTLSParametersModel represents tls_parameters block
 type ClusterTLSParametersModel struct {
-	MaxSessionKeys types.Int64 `tfsdk:"max_session_keys"`
-	Sni types.String `tfsdk:"sni"`
-	CertParams *ClusterTLSParametersCertParamsModel `tfsdk:"cert_params"`
-	CommonParams *ClusterTLSParametersCommonParamsModel `tfsdk:"common_params"`
-	DefaultSessionKeyCaching *ClusterEmptyModel `tfsdk:"default_session_key_caching"`
-	DisableSessionKeyCaching *ClusterEmptyModel `tfsdk:"disable_session_key_caching"`
-	DisableSni *ClusterEmptyModel `tfsdk:"disable_sni"`
-	UseHostHeaderAsSni *ClusterEmptyModel `tfsdk:"use_host_header_as_sni"`
+	MaxSessionKeys           types.Int64                            `tfsdk:"max_session_keys"`
+	Sni                      types.String                           `tfsdk:"sni"`
+	CertParams               *ClusterTLSParametersCertParamsModel   `tfsdk:"cert_params"`
+	CommonParams             *ClusterTLSParametersCommonParamsModel `tfsdk:"common_params"`
+	DefaultSessionKeyCaching *ClusterEmptyModel                     `tfsdk:"default_session_key_caching"`
+	DisableSessionKeyCaching *ClusterEmptyModel                     `tfsdk:"disable_session_key_caching"`
+	DisableSni               *ClusterEmptyModel                     `tfsdk:"disable_sni"`
+	UseHostHeaderAsSni       *ClusterEmptyModel                     `tfsdk:"use_host_header_as_sni"`
 }
 
 // ClusterTLSParametersCertParamsModel represents cert_params block
 type ClusterTLSParametersCertParamsModel struct {
-	CipherSuites types.List `tfsdk:"cipher_suites"`
-	MaximumProtocolVersion types.String `tfsdk:"maximum_protocol_version"`
-	MinimumProtocolVersion types.String `tfsdk:"minimum_protocol_version"`
-	Certificates []ClusterTLSParametersCertParamsCertificatesModel `tfsdk:"certificates"`
-	ValidationParams *ClusterTLSParametersCertParamsValidationParamsModel `tfsdk:"validation_params"`
+	CipherSuites           types.List                                           `tfsdk:"cipher_suites"`
+	MaximumProtocolVersion types.String                                         `tfsdk:"maximum_protocol_version"`
+	MinimumProtocolVersion types.String                                         `tfsdk:"minimum_protocol_version"`
+	Certificates           []ClusterTLSParametersCertParamsCertificatesModel    `tfsdk:"certificates"`
+	ValidationParams       *ClusterTLSParametersCertParamsValidationParamsModel `tfsdk:"validation_params"`
 }
 
 // ClusterTLSParametersCertParamsCertificatesModel represents certificates block
 type ClusterTLSParametersCertParamsCertificatesModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // ClusterTLSParametersCertParamsValidationParamsModel represents validation_params block
 type ClusterTLSParametersCertParamsValidationParamsModel struct {
-	SkipHostnameVerification types.Bool `tfsdk:"skip_hostname_verification"`
-	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
-	VerifySubjectAltNames types.List `tfsdk:"verify_subject_alt_names"`
-	TrustedCa *ClusterTLSParametersCertParamsValidationParamsTrustedCaModel `tfsdk:"trusted_ca"`
+	SkipHostnameVerification types.Bool                                                    `tfsdk:"skip_hostname_verification"`
+	TrustedCaURL             types.String                                                  `tfsdk:"trusted_ca_url"`
+	VerifySubjectAltNames    types.List                                                    `tfsdk:"verify_subject_alt_names"`
+	TrustedCa                *ClusterTLSParametersCertParamsValidationParamsTrustedCaModel `tfsdk:"trusted_ca"`
 }
 
 // ClusterTLSParametersCertParamsValidationParamsTrustedCaModel represents trusted_ca block
@@ -154,30 +154,30 @@ type ClusterTLSParametersCertParamsValidationParamsTrustedCaModel struct {
 
 // ClusterTLSParametersCertParamsValidationParamsTrustedCaTrustedCaListModel represents trusted_ca_list block
 type ClusterTLSParametersCertParamsValidationParamsTrustedCaTrustedCaListModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // ClusterTLSParametersCommonParamsModel represents common_params block
 type ClusterTLSParametersCommonParamsModel struct {
-	CipherSuites types.List `tfsdk:"cipher_suites"`
-	MaximumProtocolVersion types.String `tfsdk:"maximum_protocol_version"`
-	MinimumProtocolVersion types.String `tfsdk:"minimum_protocol_version"`
-	TLSCertificates []ClusterTLSParametersCommonParamsTLSCertificatesModel `tfsdk:"tls_certificates"`
-	ValidationParams *ClusterTLSParametersCommonParamsValidationParamsModel `tfsdk:"validation_params"`
+	CipherSuites           types.List                                             `tfsdk:"cipher_suites"`
+	MaximumProtocolVersion types.String                                           `tfsdk:"maximum_protocol_version"`
+	MinimumProtocolVersion types.String                                           `tfsdk:"minimum_protocol_version"`
+	TLSCertificates        []ClusterTLSParametersCommonParamsTLSCertificatesModel `tfsdk:"tls_certificates"`
+	ValidationParams       *ClusterTLSParametersCommonParamsValidationParamsModel `tfsdk:"validation_params"`
 }
 
 // ClusterTLSParametersCommonParamsTLSCertificatesModel represents tls_certificates block
 type ClusterTLSParametersCommonParamsTLSCertificatesModel struct {
-	CertificateURL types.String `tfsdk:"certificate_url"`
-	DescriptionSpec types.String `tfsdk:"description_spec"`
+	CertificateURL       types.String                                                              `tfsdk:"certificate_url"`
+	DescriptionSpec      types.String                                                              `tfsdk:"description_spec"`
 	CustomHashAlgorithms *ClusterTLSParametersCommonParamsTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
-	DisableOcspStapling *ClusterEmptyModel `tfsdk:"disable_ocsp_stapling"`
-	PrivateKey *ClusterTLSParametersCommonParamsTLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
-	UseSystemDefaults *ClusterEmptyModel `tfsdk:"use_system_defaults"`
+	DisableOcspStapling  *ClusterEmptyModel                                                        `tfsdk:"disable_ocsp_stapling"`
+	PrivateKey           *ClusterTLSParametersCommonParamsTLSCertificatesPrivateKeyModel           `tfsdk:"private_key"`
+	UseSystemDefaults    *ClusterEmptyModel                                                        `tfsdk:"use_system_defaults"`
 }
 
 // ClusterTLSParametersCommonParamsTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
@@ -188,28 +188,28 @@ type ClusterTLSParametersCommonParamsTLSCertificatesCustomHashAlgorithmsModel st
 // ClusterTLSParametersCommonParamsTLSCertificatesPrivateKeyModel represents private_key block
 type ClusterTLSParametersCommonParamsTLSCertificatesPrivateKeyModel struct {
 	BlindfoldSecretInfo *ClusterTLSParametersCommonParamsTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *ClusterTLSParametersCommonParamsTLSCertificatesPrivateKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *ClusterTLSParametersCommonParamsTLSCertificatesPrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // ClusterTLSParametersCommonParamsTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
 type ClusterTLSParametersCommonParamsTLSCertificatesPrivateKeyBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // ClusterTLSParametersCommonParamsTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
 type ClusterTLSParametersCommonParamsTLSCertificatesPrivateKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // ClusterTLSParametersCommonParamsValidationParamsModel represents validation_params block
 type ClusterTLSParametersCommonParamsValidationParamsModel struct {
-	SkipHostnameVerification types.Bool `tfsdk:"skip_hostname_verification"`
-	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
-	VerifySubjectAltNames types.List `tfsdk:"verify_subject_alt_names"`
-	TrustedCa *ClusterTLSParametersCommonParamsValidationParamsTrustedCaModel `tfsdk:"trusted_ca"`
+	SkipHostnameVerification types.Bool                                                      `tfsdk:"skip_hostname_verification"`
+	TrustedCaURL             types.String                                                    `tfsdk:"trusted_ca_url"`
+	VerifySubjectAltNames    types.List                                                      `tfsdk:"verify_subject_alt_names"`
+	TrustedCa                *ClusterTLSParametersCommonParamsValidationParamsTrustedCaModel `tfsdk:"trusted_ca"`
 }
 
 // ClusterTLSParametersCommonParamsValidationParamsTrustedCaModel represents trusted_ca block
@@ -219,48 +219,48 @@ type ClusterTLSParametersCommonParamsValidationParamsTrustedCaModel struct {
 
 // ClusterTLSParametersCommonParamsValidationParamsTrustedCaTrustedCaListModel represents trusted_ca_list block
 type ClusterTLSParametersCommonParamsValidationParamsTrustedCaTrustedCaListModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // ClusterUpstreamConnPoolReuseTypeModel represents upstream_conn_pool_reuse_type block
 type ClusterUpstreamConnPoolReuseTypeModel struct {
 	DisableConnPoolReuse *ClusterEmptyModel `tfsdk:"disable_conn_pool_reuse"`
-	EnableConnPoolReuse *ClusterEmptyModel `tfsdk:"enable_conn_pool_reuse"`
+	EnableConnPoolReuse  *ClusterEmptyModel `tfsdk:"enable_conn_pool_reuse"`
 }
 
 type ClusterResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	ConnectionTimeout types.Int64 `tfsdk:"connection_timeout"`
-	EndpointSelection types.String `tfsdk:"endpoint_selection"`
-	FallbackPolicy types.String `tfsdk:"fallback_policy"`
-	HTTPIdleTimeout types.Int64 `tfsdk:"http_idle_timeout"`
-	LoadBalancerAlgorithm types.String `tfsdk:"loadbalancer_algorithm"`
-	PanicThreshold types.Int64 `tfsdk:"panic_threshold"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	AutoHTTPConfig *ClusterEmptyModel `tfsdk:"auto_http_config"`
-	CircuitBreaker *ClusterCircuitBreakerModel `tfsdk:"circuit_breaker"`
-	DefaultSubset *ClusterEmptyModel `tfsdk:"default_subset"`
-	DisableProxyProtocol *ClusterEmptyModel `tfsdk:"disable_proxy_protocol"`
-	EndpointSubsets []ClusterEndpointSubsetsModel `tfsdk:"endpoint_subsets"`
-	Endpoints []ClusterEndpointsModel `tfsdk:"endpoints"`
-	HealthChecks []ClusterHealthChecksModel `tfsdk:"health_checks"`
-	Http1Config *ClusterHttp1ConfigModel `tfsdk:"http1_config"`
-	Http2Options *ClusterHttp2OptionsModel `tfsdk:"http2_options"`
-	NoPanicThreshold *ClusterEmptyModel `tfsdk:"no_panic_threshold"`
-	OutlierDetection *ClusterOutlierDetectionModel `tfsdk:"outlier_detection"`
-	ProxyProtocolV1 *ClusterEmptyModel `tfsdk:"proxy_protocol_v1"`
-	ProxyProtocolV2 *ClusterEmptyModel `tfsdk:"proxy_protocol_v2"`
-	TLSParameters *ClusterTLSParametersModel `tfsdk:"tls_parameters"`
+	Name                      types.String                           `tfsdk:"name"`
+	Namespace                 types.String                           `tfsdk:"namespace"`
+	Annotations               types.Map                              `tfsdk:"annotations"`
+	Description               types.String                           `tfsdk:"description"`
+	Disable                   types.Bool                             `tfsdk:"disable"`
+	Labels                    types.Map                              `tfsdk:"labels"`
+	ID                        types.String                           `tfsdk:"id"`
+	ConnectionTimeout         types.Int64                            `tfsdk:"connection_timeout"`
+	EndpointSelection         types.String                           `tfsdk:"endpoint_selection"`
+	FallbackPolicy            types.String                           `tfsdk:"fallback_policy"`
+	HTTPIdleTimeout           types.Int64                            `tfsdk:"http_idle_timeout"`
+	LoadBalancerAlgorithm     types.String                           `tfsdk:"loadbalancer_algorithm"`
+	PanicThreshold            types.Int64                            `tfsdk:"panic_threshold"`
+	Timeouts                  timeouts.Value                         `tfsdk:"timeouts"`
+	AutoHTTPConfig            *ClusterEmptyModel                     `tfsdk:"auto_http_config"`
+	CircuitBreaker            *ClusterCircuitBreakerModel            `tfsdk:"circuit_breaker"`
+	DefaultSubset             *ClusterEmptyModel                     `tfsdk:"default_subset"`
+	DisableProxyProtocol      *ClusterEmptyModel                     `tfsdk:"disable_proxy_protocol"`
+	EndpointSubsets           []ClusterEndpointSubsetsModel          `tfsdk:"endpoint_subsets"`
+	Endpoints                 []ClusterEndpointsModel                `tfsdk:"endpoints"`
+	HealthChecks              []ClusterHealthChecksModel             `tfsdk:"health_checks"`
+	Http1Config               *ClusterHttp1ConfigModel               `tfsdk:"http1_config"`
+	Http2Options              *ClusterHttp2OptionsModel              `tfsdk:"http2_options"`
+	NoPanicThreshold          *ClusterEmptyModel                     `tfsdk:"no_panic_threshold"`
+	OutlierDetection          *ClusterOutlierDetectionModel          `tfsdk:"outlier_detection"`
+	ProxyProtocolV1           *ClusterEmptyModel                     `tfsdk:"proxy_protocol_v1"`
+	ProxyProtocolV2           *ClusterEmptyModel                     `tfsdk:"proxy_protocol_v2"`
+	TLSParameters             *ClusterTLSParametersModel             `tfsdk:"tls_parameters"`
 	UpstreamConnPoolReuseType *ClusterUpstreamConnPoolReuseTypeModel `tfsdk:"upstream_conn_pool_reuse_type"`
 }
 
@@ -275,7 +275,7 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Cluster. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -285,7 +285,7 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the Cluster will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -295,73 +295,73 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"connection_timeout": schema.Int64Attribute{
 				MarkdownDescription: "Connection Timeout. The timeout for new network connections to endpoints in the cluster. This is specified in milliseconds. The  seconds. Defaults to `2`.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{
 					int64planmodifier.UseStateForUnknown(),
 				},
 			},
 			"endpoint_selection": schema.StringAttribute{
 				MarkdownDescription: "Endpoint Selection Policy. Policy for selection of endpoints from local site/remote site/both Consider both remote and local endpoints for load balancing LOCAL_ONLY: Consider only local endpoints for load balancing Enable this policy to load balance ONLY among locally discovered endpoints Prefer the local endpoints for load balancing. If local endpoints are not present remote endpoints will be considered. Possible values are `DISTRIBUTED`, `LOCAL_ONLY`, `LOCAL_PREFERRED`. Defaults to `DISTRIBUTED`.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"fallback_policy": schema.StringAttribute{
 				MarkdownDescription: "Subset Fallback Policy. Enumeration for SubsetFallbackPolicy if subset match is not found. The request fails as if the cluster had no endpoint matching the subset policy Any cluster endpoint may be selected if the cluster had no endpoint matching the subset policy Load balancing is done over endpoints matching default_subset if the cluster had no endpoint matching the subset policy. Possible values are `NO_FALLBACK`, `ANY_ENDPOINT`, `DEFAULT_SUBSET`. Defaults to `NO_FALLBACK`.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"http_idle_timeout": schema.Int64Attribute{
 				MarkdownDescription: "HTTP Idle Timeout. The idle timeout for upstream connection pool connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The  minutes. Defaults to `5`.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{
 					int64planmodifier.UseStateForUnknown(),
 				},
 			},
 			"loadbalancer_algorithm": schema.StringAttribute{
 				MarkdownDescription: "Load Balancer Algorithm. Different load balancing algorithms supported When a connection to a endpoint in an upstream cluster is required, the load balancer uses loadbalancer_algorithm to determine which host is selected. - ROUND_ROBIN: ROUND_ROBIN Policy in which each healthy/available upstream endpoint is selected in round robin order. - LEAST_REQUEST: LEAST_REQUEST Policy in which loadbalancer picks the upstream endpoint which has the fewest active requests - RING_HASH: RING_HASH Policy implements consistent hashing to upstream endpoints using ring hash of endpoint names Hash of the incoming request is calculated using request hash policy. The ring/modulo hash load balancer implements consistent hashing to upstream hosts. The algorithm is based on mapping all hosts onto a circle such that the addition or removal of a host from the host set changes only affect 1/N requests. This technique is also commonly known as “ketama” hashing. A consistent hashing load balancer is only effective when protocol routing is used that specifies a value to hash on. The minimum ring size governs the replication factor for each host in the ring. For example, if the minimum ring size is 1024 and there are 16 hosts, each host will be replicated 64 times. - RANDOM: RANDOM Policy in which each available upstream endpoint is selected in random order. The random load balancer selects a random healthy host. The random load balancer generally performs better than round robin if no health checking policy is configured. Random selection avoids bias towards the host in the set that comes after a failed host. - LB_OVERRIDE: Load Balancer Override Hash policy is taken from from the load balancer which is using this origin pool. Possible values are `ROUND_ROBIN`, `LEAST_REQUEST`, `RING_HASH`, `RANDOM`, `LB_OVERRIDE`. Defaults to `ROUND_ROBIN`.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"panic_threshold": schema.Int64Attribute{
 				MarkdownDescription: "Panic threshold. Configure a threshold (percentage of unhealthy endpoints) below which all endpoints will be considered for loadbalancing ignoring its health status.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{
 					int64planmodifier.UseStateForUnknown(),
 				},
@@ -382,26 +382,25 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 				Attributes: map[string]schema.Attribute{
 					"connection_limit": schema.Int64Attribute{
 						MarkdownDescription: "Connection Limit. The maximum number of connections that loadbalancer will establish to all hosts in an upstream cluster. In practice this is only applicable to TCP and HTTP/1.1 clusters since HTTP/2 uses a single connection to each host. Remove endpoint out of load balancing decision, if number of connections reach connection limit.",
-						Optional: true,
+						Optional:            true,
 					},
 					"max_requests": schema.Int64Attribute{
 						MarkdownDescription: "Maximum Request Count. The maximum number of requests that can be outstanding to all hosts in a cluster at any given time. In practice this is applicable to HTTP/2 clusters since HTTP/1.1 clusters are governed by the maximum connections (connection_limit). Remove endpoint out of load balancing decision, if requests exceed this count.",
-						Optional: true,
+						Optional:            true,
 					},
 					"pending_requests": schema.Int64Attribute{
 						MarkdownDescription: "Pending Requests. The maximum number of requests that will be queued while waiting for a ready connection pool connection. Since HTTP/2 requests are sent over a single connection, this circuit breaker only comes into play as the initial connection is created, as requests will be multiplexed immediately afterwards. For HTTP/1.1, requests are added to the list of pending requests whenever there aren’t enough upstream connections available to immediately dispatch the request, so this circuit breaker will remain in play for the lifetime of the process. Remove endpoint out of load balancing decision, if pending request reach pending_request.",
-						Optional: true,
+						Optional:            true,
 					},
 					"priority": schema.StringAttribute{
 						MarkdownDescription: "Routing Priority. Priority routing for each request. Different connection pools are used based on the priority selected for the request. Also, circuit-breaker configuration at destination cluster is chosen based on selected priority. Default routing mechanism High-Priority routing mechanism. Possible values are `DEFAULT`, `HIGH`. Defaults to `DEFAULT`.",
-						Optional: true,
+						Optional:            true,
 					},
 					"retries": schema.Int64Attribute{
 						MarkdownDescription: "Retry Count. The maximum number of retries that can be outstanding to all hosts in a cluster at any given time. Remove endpoint out of load balancing decision, if retries for request exceed this count.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
-
 			},
 			"default_subset": schema.SingleNestedBlock{
 				MarkdownDescription: "Default Subset. List of key-value pairs that define default subset. This subset can be referred in fallback_policy which gets used when route specifies no metadata or no subset matching the metadata exists.",
@@ -415,11 +414,10 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 					Attributes: map[string]schema.Attribute{
 						"keys": schema.ListAttribute{
 							MarkdownDescription: "Keys. List of keys that define a cluster subset class.",
-							Optional: true,
-							ElementType: types.StringType,
+							Optional:            true,
+							ElementType:         types.StringType,
 						},
 					},
-
 				},
 			},
 			"endpoints": schema.ListNestedBlock{
@@ -428,29 +426,28 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 					Attributes: map[string]schema.Attribute{
 						"kind": schema.StringAttribute{
 							MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-							Optional: true,
-							Computed: true,
+							Optional:            true,
+							Computed:            true,
 						},
 						"name": schema.StringAttribute{
 							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-							Optional: true,
+							Optional:            true,
 						},
 						"namespace": schema.StringAttribute{
 							MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-							Optional: true,
+							Optional:            true,
 						},
 						"tenant": schema.StringAttribute{
 							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-							Optional: true,
-							Computed: true,
+							Optional:            true,
+							Computed:            true,
 						},
 						"uid": schema.StringAttribute{
 							MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-							Optional: true,
-							Computed: true,
+							Optional:            true,
+							Computed:            true,
 						},
 					},
-
 				},
 			},
 			"health_checks": schema.ListNestedBlock{
@@ -459,40 +456,37 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 					Attributes: map[string]schema.Attribute{
 						"kind": schema.StringAttribute{
 							MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-							Optional: true,
-							Computed: true,
+							Optional:            true,
+							Computed:            true,
 						},
 						"name": schema.StringAttribute{
 							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-							Optional: true,
+							Optional:            true,
 						},
 						"namespace": schema.StringAttribute{
 							MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-							Optional: true,
+							Optional:            true,
 						},
 						"tenant": schema.StringAttribute{
 							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-							Optional: true,
-							Computed: true,
+							Optional:            true,
+							Computed:            true,
 						},
 						"uid": schema.StringAttribute{
 							MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-							Optional: true,
-							Computed: true,
+							Optional:            true,
+							Computed:            true,
 						},
 					},
-
 				},
 			},
 			"http1_config": schema.SingleNestedBlock{
 				MarkdownDescription: "HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for upstream connections",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"header_transformation": schema.SingleNestedBlock{
 						MarkdownDescription: "Header Transformation. Header Transformation options for HTTP/1.1 request/response headers",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"default_header_transformation": schema.SingleNestedBlock{
 								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -509,17 +503,15 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 						},
 					},
 				},
-
 			},
 			"http2_options": schema.SingleNestedBlock{
 				MarkdownDescription: "Http2 Protocol Options. Http2 Protocol options for upstream connections",
 				Attributes: map[string]schema.Attribute{
 					"enabled": schema.BoolAttribute{
 						MarkdownDescription: "HTTP2 Enabled. Enable/disable HTTP2 Protocol for upstream connections",
-						Optional: true,
+						Optional:            true,
 					},
 				},
-
 			},
 			"no_panic_threshold": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: no_panic_threshold, panic_threshold] Empty. This can be used for messages where no values are needed",
@@ -529,26 +521,25 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 				Attributes: map[string]schema.Attribute{
 					"base_ejection_time": schema.Int64Attribute{
 						MarkdownDescription: "Base Ejection Time. The base time that a host is ejected for. The real time is equal to the base time multiplied by the number of times the host has been ejected. This causes hosts to get ejected for longer periods if they continue to fail. Specified in milliseconds. Defaults to `30000ms`.",
-						Optional: true,
+						Optional:            true,
 					},
 					"consecutive_5xx": schema.Int64Attribute{
 						MarkdownDescription: "Consecutive 5xx Count. If an upstream endpoint returns some number of consecutive 5xx, it will be ejected. Note that in this case a 5xx means an actual 5xx respond code, or an event that would cause the HTTP router to return one on the upstream’s behalf(reset, connection failure, etc.) consecutive_5xx indicates the number of consecutive 5xx responses required before a consecutive 5xx ejection occurs. Defaults to `5`.",
-						Optional: true,
+						Optional:            true,
 					},
 					"consecutive_gateway_failure": schema.Int64Attribute{
 						MarkdownDescription: "Consecutive Gateway Failure. If an upstream endpoint returns some number of consecutive “gateway errors” (502, 503 or 504 status code), it will be ejected. Note that this includes events that would cause the HTTP router to return one of these status codes on the upstream’s behalf (reset, connection failure, etc.). consecutive_gateway_failure indicates the number of consecutive gateway failures before a consecutive gateway failure ejection occurs. Defaults to `5`.",
-						Optional: true,
+						Optional:            true,
 					},
 					"interval": schema.Int64Attribute{
 						MarkdownDescription: "Interval. The time interval between ejection analysis sweeps. This can result in both new ejections as well as endpoints being returned to service. Specified in milliseconds. Defaults to `10000ms`.",
-						Optional: true,
+						Optional:            true,
 					},
 					"max_ejection_percent": schema.Int64Attribute{
 						MarkdownDescription: "Max Ejection Percentage. The maximum % of an upstream cluster that can be ejected due to outlier detection.  but will eject at least one host regardless of the value. Defaults to `10%`.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
-
 			},
 			"proxy_protocol_v1": schema.SingleNestedBlock{
 				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -561,11 +552,11 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 				Attributes: map[string]schema.Attribute{
 					"max_session_keys": schema.Int64Attribute{
 						MarkdownDescription: "Max Session Keys Cached. x-example:'25' Number of session keys that are cached.",
-						Optional: true,
+						Optional:            true,
 					},
 					"sni": schema.StringAttribute{
 						MarkdownDescription: "SNI Value. SNI value to be used.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -574,16 +565,16 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 						Attributes: map[string]schema.Attribute{
 							"cipher_suites": schema.ListAttribute{
 								MarkdownDescription: "Cipher Suites. The following list specifies the supported cipher suite TLS_AES_128_GCM_SHA256 TLS_AES_256_GCM_SHA384 TLS_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA TLS_RSA_WITH_AES_128_CBC_SHA TLS_RSA_WITH_AES_128_GCM_SHA256 TLS_RSA_WITH_AES_256_CBC_SHA TLS_RSA_WITH_AES_256_GCM_SHA384 If not specified, the default list: TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 will be used.",
-								Optional: true,
-								ElementType: types.StringType,
+								Optional:            true,
+								ElementType:         types.StringType,
 							},
 							"maximum_protocol_version": schema.StringAttribute{
 								MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
-								Optional: true,
+								Optional:            true,
 							},
 							"minimum_protocol_version": schema.StringAttribute{
 								MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -593,26 +584,26 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 									Attributes: map[string]schema.Attribute{
 										"kind": schema.StringAttribute{
 											MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-											Optional: true,
+											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
 											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-											Optional: true,
+											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 										"uid": schema.StringAttribute{
 											MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
@@ -622,23 +613,22 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 								Attributes: map[string]schema.Attribute{
 									"skip_hostname_verification": schema.BoolAttribute{
 										MarkdownDescription: "Skip verification of hostname. When True, skip verification of hostname i.e. CN/Subject Alt Name of certificate is not matched to the connecting hostname",
-										Optional: true,
+										Optional:            true,
 									},
 									"trusted_ca_url": schema.StringAttribute{
 										MarkdownDescription: "Inline Root CA Certificate (legacy). Inline Root CA Certificate",
-										Optional: true,
+										Optional:            true,
 									},
 									"verify_subject_alt_names": schema.ListAttribute{
 										MarkdownDescription: "List of SANs for matching. List of acceptable Subject Alt Names/CN in the peer's certificate. When skip_hostname_verification is false and verify_subject_alt_names is empty, the hostname of the peer will be used for matching against SAN/CN of peer's certificate",
-										Optional: true,
-										ElementType: types.StringType,
+										Optional:            true,
+										ElementType:         types.StringType,
 									},
 								},
 								Blocks: map[string]schema.Block{
 									"trusted_ca": schema.SingleNestedBlock{
 										MarkdownDescription: "Root CA Certificate Reference. Reference to Root CA Certificate",
-										Attributes: map[string]schema.Attribute{
-										},
+										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"trusted_ca_list": schema.ListNestedBlock{
 												MarkdownDescription: "Root CA Certificate Reference. Reference to Root CA Certificate",
@@ -646,26 +636,26 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 													Attributes: map[string]schema.Attribute{
 														"kind": schema.StringAttribute{
 															MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-															Optional: true,
-															Computed: true,
+															Optional:            true,
+															Computed:            true,
 														},
 														"name": schema.StringAttribute{
 															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-															Optional: true,
+															Optional:            true,
 														},
 														"namespace": schema.StringAttribute{
 															MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-															Optional: true,
+															Optional:            true,
 														},
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-															Optional: true,
-															Computed: true,
+															Optional:            true,
+															Computed:            true,
 														},
 														"uid": schema.StringAttribute{
 															MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-															Optional: true,
-															Computed: true,
+															Optional:            true,
+															Computed:            true,
 														},
 													},
 												},
@@ -681,16 +671,16 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 						Attributes: map[string]schema.Attribute{
 							"cipher_suites": schema.ListAttribute{
 								MarkdownDescription: "Cipher Suites. The following list specifies the supported cipher suite TLS_AES_128_GCM_SHA256 TLS_AES_256_GCM_SHA384 TLS_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA TLS_RSA_WITH_AES_128_CBC_SHA TLS_RSA_WITH_AES_128_GCM_SHA256 TLS_RSA_WITH_AES_256_CBC_SHA TLS_RSA_WITH_AES_256_GCM_SHA384 If not specified, the default list: TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 will be used.",
-								Optional: true,
-								ElementType: types.StringType,
+								Optional:            true,
+								ElementType:         types.StringType,
 							},
 							"maximum_protocol_version": schema.StringAttribute{
 								MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
-								Optional: true,
+								Optional:            true,
 							},
 							"minimum_protocol_version": schema.StringAttribute{
 								MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -700,11 +690,11 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 									Attributes: map[string]schema.Attribute{
 										"certificate_url": schema.StringAttribute{
 											MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
-											Optional: true,
+											Optional:            true,
 										},
 										"description_spec": schema.StringAttribute{
 											MarkdownDescription: "Description. Description for the certificate",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -713,8 +703,8 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 											Attributes: map[string]schema.Attribute{
 												"hash_algorithms": schema.ListAttribute{
 													MarkdownDescription: "Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM`.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 										},
@@ -723,23 +713,22 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 										},
 										"private_key": schema.SingleNestedBlock{
 											MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"blindfold_secret_info": schema.SingleNestedBlock{
 													MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 													Attributes: map[string]schema.Attribute{
 														"decryption_provider": schema.StringAttribute{
 															MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-															Optional: true,
+															Optional:            true,
 														},
 														"location": schema.StringAttribute{
 															MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-															Optional: true,
+															Optional:            true,
 														},
 														"store_provider": schema.StringAttribute{
 															MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -748,11 +737,11 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 													Attributes: map[string]schema.Attribute{
 														"provider_ref": schema.StringAttribute{
 															MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-															Optional: true,
+															Optional:            true,
 														},
 														"url": schema.StringAttribute{
 															MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 												},
@@ -769,23 +758,22 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 								Attributes: map[string]schema.Attribute{
 									"skip_hostname_verification": schema.BoolAttribute{
 										MarkdownDescription: "Skip verification of hostname. When True, skip verification of hostname i.e. CN/Subject Alt Name of certificate is not matched to the connecting hostname",
-										Optional: true,
+										Optional:            true,
 									},
 									"trusted_ca_url": schema.StringAttribute{
 										MarkdownDescription: "Inline Root CA Certificate (legacy). Inline Root CA Certificate",
-										Optional: true,
+										Optional:            true,
 									},
 									"verify_subject_alt_names": schema.ListAttribute{
 										MarkdownDescription: "List of SANs for matching. List of acceptable Subject Alt Names/CN in the peer's certificate. When skip_hostname_verification is false and verify_subject_alt_names is empty, the hostname of the peer will be used for matching against SAN/CN of peer's certificate",
-										Optional: true,
-										ElementType: types.StringType,
+										Optional:            true,
+										ElementType:         types.StringType,
 									},
 								},
 								Blocks: map[string]schema.Block{
 									"trusted_ca": schema.SingleNestedBlock{
 										MarkdownDescription: "Root CA Certificate Reference. Reference to Root CA Certificate",
-										Attributes: map[string]schema.Attribute{
-										},
+										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"trusted_ca_list": schema.ListNestedBlock{
 												MarkdownDescription: "Root CA Certificate Reference. Reference to Root CA Certificate",
@@ -793,26 +781,26 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 													Attributes: map[string]schema.Attribute{
 														"kind": schema.StringAttribute{
 															MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-															Optional: true,
-															Computed: true,
+															Optional:            true,
+															Computed:            true,
 														},
 														"name": schema.StringAttribute{
 															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-															Optional: true,
+															Optional:            true,
 														},
 														"namespace": schema.StringAttribute{
 															MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-															Optional: true,
+															Optional:            true,
 														},
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-															Optional: true,
-															Computed: true,
+															Optional:            true,
+															Computed:            true,
 														},
 														"uid": schema.StringAttribute{
 															MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-															Optional: true,
-															Computed: true,
+															Optional:            true,
+															Computed:            true,
 														},
 													},
 												},
@@ -836,12 +824,10 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 			"upstream_conn_pool_reuse_type": schema.SingleNestedBlock{
 				MarkdownDescription: "Select upstream connection pool reuse state. Select upstream connection pool reuse state for every downstream connection. This configuration choice is for HTTP(S) LB only.",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"disable_conn_pool_reuse": schema.SingleNestedBlock{
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -850,7 +836,6 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 		},
 	}
@@ -1202,7 +1187,6 @@ func (r *ClusterResource) Create(ctx context.Context, req resource.CreateRequest
 		createReq.Spec["panic_threshold"] = data.PanicThreshold.ValueInt64()
 	}
 
-
 	apiResource, err := r.client.CreateCluster(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create Cluster: %s", err))
@@ -1214,7 +1198,7 @@ func (r *ClusterResource) Create(ctx context.Context, req resource.CreateRequest
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if _, ok := apiResource.Spec["auto_http_config"].(map[string]interface{}); ok && isImport && data.AutoHTTPConfig == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.AutoHTTPConfig = &ClusterEmptyModel{}
@@ -1612,7 +1596,6 @@ func (r *ClusterResource) Create(ctx context.Context, req resource.CreateRequest
 	} else {
 		data.PanicThreshold = types.Int64Null()
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -1702,9 +1685,9 @@ func (r *ClusterResource) Read(ctx context.Context, req resource.ReadRequest, re
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if _, ok := apiResource.Spec["auto_http_config"].(map[string]interface{}); ok && isImport && data.AutoHTTPConfig == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -2103,7 +2086,6 @@ func (r *ClusterResource) Read(ctx context.Context, req resource.ReadRequest, re
 	} else {
 		data.PanicThreshold = types.Int64Null()
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -2365,7 +2347,6 @@ func (r *ClusterResource) Update(ctx context.Context, req resource.UpdateRequest
 	if !data.PanicThreshold.IsNull() && !data.PanicThreshold.IsUnknown() {
 		apiResource.Spec["panic_threshold"] = data.PanicThreshold.ValueInt64()
 	}
-
 
 	updated, err := r.client.UpdateCluster(ctx, apiResource)
 	if err != nil {

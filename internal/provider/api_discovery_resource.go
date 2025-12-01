@@ -56,14 +56,14 @@ type APIDiscoveryCustomAuthTypesModel struct {
 }
 
 type APIDiscoveryResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Name            types.String                       `tfsdk:"name"`
+	Namespace       types.String                       `tfsdk:"namespace"`
+	Annotations     types.Map                          `tfsdk:"annotations"`
+	Description     types.String                       `tfsdk:"description"`
+	Disable         types.Bool                         `tfsdk:"disable"`
+	Labels          types.Map                          `tfsdk:"labels"`
+	ID              types.String                       `tfsdk:"id"`
+	Timeouts        timeouts.Value                     `tfsdk:"timeouts"`
 	CustomAuthTypes []APIDiscoveryCustomAuthTypesModel `tfsdk:"custom_auth_types"`
 }
 
@@ -78,7 +78,7 @@ func (r *APIDiscoveryResource) Schema(ctx context.Context, req resource.SchemaRe
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the APIDiscovery. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -88,7 +88,7 @@ func (r *APIDiscoveryResource) Schema(ctx context.Context, req resource.SchemaRe
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the APIDiscovery will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -98,25 +98,25 @@ func (r *APIDiscoveryResource) Schema(ctx context.Context, req resource.SchemaRe
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -135,14 +135,13 @@ func (r *APIDiscoveryResource) Schema(ctx context.Context, req resource.SchemaRe
 					Attributes: map[string]schema.Attribute{
 						"parameter_name": schema.StringAttribute{
 							MarkdownDescription: "Parameter Name. The authentication parameter name.",
-							Optional: true,
+							Optional:            true,
 						},
 						"parameter_type": schema.StringAttribute{
 							MarkdownDescription: "Authentication Parameter Type. Enumeration for authentication parameter types. Possible values are `QUERY_PARAMETER`, `HEADER`, `COOKIE`. Defaults to `QUERY_PARAMETER`.",
-							Optional: true,
+							Optional:            true,
 						},
 					},
-
 				},
 			},
 		},
@@ -308,7 +307,6 @@ func (r *APIDiscoveryResource) Create(ctx context.Context, req resource.CreateRe
 		createReq.Spec["custom_auth_types"] = custom_auth_typesList
 	}
 
-
 	apiResource, err := r.client.CreateAPIDiscovery(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create APIDiscovery: %s", err))
@@ -320,7 +318,7 @@ func (r *APIDiscoveryResource) Create(ctx context.Context, req resource.CreateRe
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["custom_auth_types"].([]interface{}); ok && len(listData) > 0 {
 		var custom_auth_typesList []APIDiscoveryCustomAuthTypesModel
 		for listIdx, item := range listData {
@@ -344,7 +342,6 @@ func (r *APIDiscoveryResource) Create(ctx context.Context, req resource.CreateRe
 		}
 		data.CustomAuthTypes = custom_auth_typesList
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -434,9 +431,9 @@ func (r *APIDiscoveryResource) Read(ctx context.Context, req resource.ReadReques
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if listData, ok := apiResource.Spec["custom_auth_types"].([]interface{}); ok && len(listData) > 0 {
 		var custom_auth_typesList []APIDiscoveryCustomAuthTypesModel
@@ -461,7 +458,6 @@ func (r *APIDiscoveryResource) Read(ctx context.Context, req resource.ReadReques
 		}
 		data.CustomAuthTypes = custom_auth_typesList
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -536,7 +532,6 @@ func (r *APIDiscoveryResource) Update(ctx context.Context, req resource.UpdateRe
 		}
 		apiResource.Spec["custom_auth_types"] = custom_auth_typesList
 	}
-
 
 	updated, err := r.client.UpdateAPIDiscovery(ctx, apiResource)
 	if err != nil {

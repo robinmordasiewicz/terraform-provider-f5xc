@@ -53,20 +53,20 @@ type GCPVPCSiteEmptyModel struct {
 // GCPVPCSiteAdminPasswordModel represents admin_password block
 type GCPVPCSiteAdminPasswordModel struct {
 	BlindfoldSecretInfo *GCPVPCSiteAdminPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *GCPVPCSiteAdminPasswordClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *GCPVPCSiteAdminPasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // GCPVPCSiteAdminPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
 type GCPVPCSiteAdminPasswordBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // GCPVPCSiteAdminPasswordClearSecretInfoModel represents clear_secret_info block
 type GCPVPCSiteAdminPasswordClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 // GCPVPCSiteBlockedServicesModel represents blocked_services block
@@ -76,58 +76,58 @@ type GCPVPCSiteBlockedServicesModel struct {
 
 // GCPVPCSiteBlockedServicesBlockedSeviceModel represents blocked_sevice block
 type GCPVPCSiteBlockedServicesBlockedSeviceModel struct {
-	NetworkType types.String `tfsdk:"network_type"`
-	DNS *GCPVPCSiteEmptyModel `tfsdk:"dns"`
-	SSH *GCPVPCSiteEmptyModel `tfsdk:"ssh"`
+	NetworkType      types.String          `tfsdk:"network_type"`
+	DNS              *GCPVPCSiteEmptyModel `tfsdk:"dns"`
+	SSH              *GCPVPCSiteEmptyModel `tfsdk:"ssh"`
 	WebUserInterface *GCPVPCSiteEmptyModel `tfsdk:"web_user_interface"`
 }
 
 // GCPVPCSiteCloudCredentialsModel represents cloud_credentials block
 type GCPVPCSiteCloudCredentialsModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // GCPVPCSiteCoordinatesModel represents coordinates block
 type GCPVPCSiteCoordinatesModel struct {
-	Latitude types.Int64 `tfsdk:"latitude"`
+	Latitude  types.Int64 `tfsdk:"latitude"`
 	Longitude types.Int64 `tfsdk:"longitude"`
 }
 
 // GCPVPCSiteCustomDNSModel represents custom_dns block
 type GCPVPCSiteCustomDNSModel struct {
-	InsideNameserver types.String `tfsdk:"inside_nameserver"`
+	InsideNameserver  types.String `tfsdk:"inside_nameserver"`
 	OutsideNameserver types.String `tfsdk:"outside_nameserver"`
 }
 
 // GCPVPCSiteIngressEgressGwModel represents ingress_egress_gw block
 type GCPVPCSiteIngressEgressGwModel struct {
-	GCPCertifiedHw types.String `tfsdk:"gcp_certified_hw"`
-	GCPZoneNames types.List `tfsdk:"gcp_zone_names"`
-	NodeNumber types.Int64 `tfsdk:"node_number"`
+	GCPCertifiedHw                 types.String                                                  `tfsdk:"gcp_certified_hw"`
+	GCPZoneNames                   types.List                                                    `tfsdk:"gcp_zone_names"`
+	NodeNumber                     types.Int64                                                   `tfsdk:"node_number"`
 	ActiveEnhancedFirewallPolicies *GCPVPCSiteIngressEgressGwActiveEnhancedFirewallPoliciesModel `tfsdk:"active_enhanced_firewall_policies"`
-	ActiveForwardProxyPolicies *GCPVPCSiteIngressEgressGwActiveForwardProxyPoliciesModel `tfsdk:"active_forward_proxy_policies"`
-	ActiveNetworkPolicies *GCPVPCSiteIngressEgressGwActiveNetworkPoliciesModel `tfsdk:"active_network_policies"`
-	DcClusterGroupInsideVn *GCPVPCSiteIngressEgressGwDcClusterGroupInsideVnModel `tfsdk:"dc_cluster_group_inside_vn"`
-	DcClusterGroupOutsideVn *GCPVPCSiteIngressEgressGwDcClusterGroupOutsideVnModel `tfsdk:"dc_cluster_group_outside_vn"`
-	ForwardProxyAllowAll *GCPVPCSiteEmptyModel `tfsdk:"forward_proxy_allow_all"`
-	GlobalNetworkList *GCPVPCSiteIngressEgressGwGlobalNetworkListModel `tfsdk:"global_network_list"`
-	InsideNetwork *GCPVPCSiteIngressEgressGwInsideNetworkModel `tfsdk:"inside_network"`
-	InsideStaticRoutes *GCPVPCSiteIngressEgressGwInsideStaticRoutesModel `tfsdk:"inside_static_routes"`
-	InsideSubnet *GCPVPCSiteIngressEgressGwInsideSubnetModel `tfsdk:"inside_subnet"`
-	NoDcClusterGroup *GCPVPCSiteEmptyModel `tfsdk:"no_dc_cluster_group"`
-	NoForwardProxy *GCPVPCSiteEmptyModel `tfsdk:"no_forward_proxy"`
-	NoGlobalNetwork *GCPVPCSiteEmptyModel `tfsdk:"no_global_network"`
-	NoInsideStaticRoutes *GCPVPCSiteEmptyModel `tfsdk:"no_inside_static_routes"`
-	NoNetworkPolicy *GCPVPCSiteEmptyModel `tfsdk:"no_network_policy"`
-	NoOutsideStaticRoutes *GCPVPCSiteEmptyModel `tfsdk:"no_outside_static_routes"`
-	OutsideNetwork *GCPVPCSiteIngressEgressGwOutsideNetworkModel `tfsdk:"outside_network"`
-	OutsideStaticRoutes *GCPVPCSiteIngressEgressGwOutsideStaticRoutesModel `tfsdk:"outside_static_routes"`
-	OutsideSubnet *GCPVPCSiteIngressEgressGwOutsideSubnetModel `tfsdk:"outside_subnet"`
-	PerformanceEnhancementMode *GCPVPCSiteIngressEgressGwPerformanceEnhancementModeModel `tfsdk:"performance_enhancement_mode"`
-	SmConnectionPublicIP *GCPVPCSiteEmptyModel `tfsdk:"sm_connection_public_ip"`
-	SmConnectionPvtIP *GCPVPCSiteEmptyModel `tfsdk:"sm_connection_pvt_ip"`
+	ActiveForwardProxyPolicies     *GCPVPCSiteIngressEgressGwActiveForwardProxyPoliciesModel     `tfsdk:"active_forward_proxy_policies"`
+	ActiveNetworkPolicies          *GCPVPCSiteIngressEgressGwActiveNetworkPoliciesModel          `tfsdk:"active_network_policies"`
+	DcClusterGroupInsideVn         *GCPVPCSiteIngressEgressGwDcClusterGroupInsideVnModel         `tfsdk:"dc_cluster_group_inside_vn"`
+	DcClusterGroupOutsideVn        *GCPVPCSiteIngressEgressGwDcClusterGroupOutsideVnModel        `tfsdk:"dc_cluster_group_outside_vn"`
+	ForwardProxyAllowAll           *GCPVPCSiteEmptyModel                                         `tfsdk:"forward_proxy_allow_all"`
+	GlobalNetworkList              *GCPVPCSiteIngressEgressGwGlobalNetworkListModel              `tfsdk:"global_network_list"`
+	InsideNetwork                  *GCPVPCSiteIngressEgressGwInsideNetworkModel                  `tfsdk:"inside_network"`
+	InsideStaticRoutes             *GCPVPCSiteIngressEgressGwInsideStaticRoutesModel             `tfsdk:"inside_static_routes"`
+	InsideSubnet                   *GCPVPCSiteIngressEgressGwInsideSubnetModel                   `tfsdk:"inside_subnet"`
+	NoDcClusterGroup               *GCPVPCSiteEmptyModel                                         `tfsdk:"no_dc_cluster_group"`
+	NoForwardProxy                 *GCPVPCSiteEmptyModel                                         `tfsdk:"no_forward_proxy"`
+	NoGlobalNetwork                *GCPVPCSiteEmptyModel                                         `tfsdk:"no_global_network"`
+	NoInsideStaticRoutes           *GCPVPCSiteEmptyModel                                         `tfsdk:"no_inside_static_routes"`
+	NoNetworkPolicy                *GCPVPCSiteEmptyModel                                         `tfsdk:"no_network_policy"`
+	NoOutsideStaticRoutes          *GCPVPCSiteEmptyModel                                         `tfsdk:"no_outside_static_routes"`
+	OutsideNetwork                 *GCPVPCSiteIngressEgressGwOutsideNetworkModel                 `tfsdk:"outside_network"`
+	OutsideStaticRoutes            *GCPVPCSiteIngressEgressGwOutsideStaticRoutesModel            `tfsdk:"outside_static_routes"`
+	OutsideSubnet                  *GCPVPCSiteIngressEgressGwOutsideSubnetModel                  `tfsdk:"outside_subnet"`
+	PerformanceEnhancementMode     *GCPVPCSiteIngressEgressGwPerformanceEnhancementModeModel     `tfsdk:"performance_enhancement_mode"`
+	SmConnectionPublicIP           *GCPVPCSiteEmptyModel                                         `tfsdk:"sm_connection_public_ip"`
+	SmConnectionPvtIP              *GCPVPCSiteEmptyModel                                         `tfsdk:"sm_connection_pvt_ip"`
 }
 
 // GCPVPCSiteIngressEgressGwActiveEnhancedFirewallPoliciesModel represents active_enhanced_firewall_policies block
@@ -137,9 +137,9 @@ type GCPVPCSiteIngressEgressGwActiveEnhancedFirewallPoliciesModel struct {
 
 // GCPVPCSiteIngressEgressGwActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel represents enhanced_firewall_policies block
 type GCPVPCSiteIngressEgressGwActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // GCPVPCSiteIngressEgressGwActiveForwardProxyPoliciesModel represents active_forward_proxy_policies block
@@ -149,9 +149,9 @@ type GCPVPCSiteIngressEgressGwActiveForwardProxyPoliciesModel struct {
 
 // GCPVPCSiteIngressEgressGwActiveForwardProxyPoliciesForwardProxyPoliciesModel represents forward_proxy_policies block
 type GCPVPCSiteIngressEgressGwActiveForwardProxyPoliciesForwardProxyPoliciesModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // GCPVPCSiteIngressEgressGwActiveNetworkPoliciesModel represents active_network_policies block
@@ -161,23 +161,23 @@ type GCPVPCSiteIngressEgressGwActiveNetworkPoliciesModel struct {
 
 // GCPVPCSiteIngressEgressGwActiveNetworkPoliciesNetworkPoliciesModel represents network_policies block
 type GCPVPCSiteIngressEgressGwActiveNetworkPoliciesNetworkPoliciesModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // GCPVPCSiteIngressEgressGwDcClusterGroupInsideVnModel represents dc_cluster_group_inside_vn block
 type GCPVPCSiteIngressEgressGwDcClusterGroupInsideVnModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // GCPVPCSiteIngressEgressGwDcClusterGroupOutsideVnModel represents dc_cluster_group_outside_vn block
 type GCPVPCSiteIngressEgressGwDcClusterGroupOutsideVnModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // GCPVPCSiteIngressEgressGwGlobalNetworkListModel represents global_network_list block
@@ -198,9 +198,9 @@ type GCPVPCSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLIToGlob
 
 // GCPVPCSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrGlobalVnModel represents global_vn block
 type GCPVPCSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrGlobalVnModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // GCPVPCSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrModel represents slo_to_global_dr block
@@ -210,16 +210,16 @@ type GCPVPCSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLOToGlob
 
 // GCPVPCSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrGlobalVnModel represents global_vn block
 type GCPVPCSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrGlobalVnModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // GCPVPCSiteIngressEgressGwInsideNetworkModel represents inside_network block
 type GCPVPCSiteIngressEgressGwInsideNetworkModel struct {
-	ExistingNetwork *GCPVPCSiteIngressEgressGwInsideNetworkExistingNetworkModel `tfsdk:"existing_network"`
-	NewNetwork *GCPVPCSiteIngressEgressGwInsideNetworkNewNetworkModel `tfsdk:"new_network"`
-	NewNetworkAutogenerate *GCPVPCSiteEmptyModel `tfsdk:"new_network_autogenerate"`
+	ExistingNetwork        *GCPVPCSiteIngressEgressGwInsideNetworkExistingNetworkModel `tfsdk:"existing_network"`
+	NewNetwork             *GCPVPCSiteIngressEgressGwInsideNetworkNewNetworkModel      `tfsdk:"new_network"`
+	NewNetworkAutogenerate *GCPVPCSiteEmptyModel                                       `tfsdk:"new_network_autogenerate"`
 }
 
 // GCPVPCSiteIngressEgressGwInsideNetworkExistingNetworkModel represents existing_network block
@@ -239,32 +239,32 @@ type GCPVPCSiteIngressEgressGwInsideStaticRoutesModel struct {
 
 // GCPVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListModel represents static_route_list block
 type GCPVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListModel struct {
-	SimpleStaticRoute types.String `tfsdk:"simple_static_route"`
+	SimpleStaticRoute types.String                                                                      `tfsdk:"simple_static_route"`
 	CustomStaticRoute *GCPVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteModel `tfsdk:"custom_static_route"`
 }
 
 // GCPVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteModel represents custom_static_route block
 type GCPVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteModel struct {
-	Attrs types.List `tfsdk:"attrs"`
-	Labels *GCPVPCSiteEmptyModel `tfsdk:"labels"`
-	Nexthop *GCPVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel `tfsdk:"nexthop"`
+	Attrs   types.List                                                                                `tfsdk:"attrs"`
+	Labels  *GCPVPCSiteEmptyModel                                                                     `tfsdk:"labels"`
+	Nexthop *GCPVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel  `tfsdk:"nexthop"`
 	Subnets []GCPVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel `tfsdk:"subnets"`
 }
 
 // GCPVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel represents nexthop block
 type GCPVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel struct {
-	Type types.String `tfsdk:"type"`
-	Interface []GCPVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel `tfsdk:"interface"`
+	Type           types.String                                                                                           `tfsdk:"type"`
+	Interface      []GCPVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel     `tfsdk:"interface"`
 	NexthopAddress *GCPVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel `tfsdk:"nexthop_address"`
 }
 
 // GCPVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel represents interface block
 type GCPVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // GCPVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel represents nexthop_address block
@@ -291,20 +291,20 @@ type GCPVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRoute
 
 // GCPVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model represents ipv4 block
 type GCPVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model struct {
-	Plen types.Int64 `tfsdk:"plen"`
+	Plen   types.Int64  `tfsdk:"plen"`
 	Prefix types.String `tfsdk:"prefix"`
 }
 
 // GCPVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model represents ipv6 block
 type GCPVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model struct {
-	Plen types.Int64 `tfsdk:"plen"`
+	Plen   types.Int64  `tfsdk:"plen"`
 	Prefix types.String `tfsdk:"prefix"`
 }
 
 // GCPVPCSiteIngressEgressGwInsideSubnetModel represents inside_subnet block
 type GCPVPCSiteIngressEgressGwInsideSubnetModel struct {
 	ExistingSubnet *GCPVPCSiteIngressEgressGwInsideSubnetExistingSubnetModel `tfsdk:"existing_subnet"`
-	NewSubnet *GCPVPCSiteIngressEgressGwInsideSubnetNewSubnetModel `tfsdk:"new_subnet"`
+	NewSubnet      *GCPVPCSiteIngressEgressGwInsideSubnetNewSubnetModel      `tfsdk:"new_subnet"`
 }
 
 // GCPVPCSiteIngressEgressGwInsideSubnetExistingSubnetModel represents existing_subnet block
@@ -315,14 +315,14 @@ type GCPVPCSiteIngressEgressGwInsideSubnetExistingSubnetModel struct {
 // GCPVPCSiteIngressEgressGwInsideSubnetNewSubnetModel represents new_subnet block
 type GCPVPCSiteIngressEgressGwInsideSubnetNewSubnetModel struct {
 	PrimaryIPV4 types.String `tfsdk:"primary_ipv4"`
-	SubnetName types.String `tfsdk:"subnet_name"`
+	SubnetName  types.String `tfsdk:"subnet_name"`
 }
 
 // GCPVPCSiteIngressEgressGwOutsideNetworkModel represents outside_network block
 type GCPVPCSiteIngressEgressGwOutsideNetworkModel struct {
-	ExistingNetwork *GCPVPCSiteIngressEgressGwOutsideNetworkExistingNetworkModel `tfsdk:"existing_network"`
-	NewNetwork *GCPVPCSiteIngressEgressGwOutsideNetworkNewNetworkModel `tfsdk:"new_network"`
-	NewNetworkAutogenerate *GCPVPCSiteEmptyModel `tfsdk:"new_network_autogenerate"`
+	ExistingNetwork        *GCPVPCSiteIngressEgressGwOutsideNetworkExistingNetworkModel `tfsdk:"existing_network"`
+	NewNetwork             *GCPVPCSiteIngressEgressGwOutsideNetworkNewNetworkModel      `tfsdk:"new_network"`
+	NewNetworkAutogenerate *GCPVPCSiteEmptyModel                                        `tfsdk:"new_network_autogenerate"`
 }
 
 // GCPVPCSiteIngressEgressGwOutsideNetworkExistingNetworkModel represents existing_network block
@@ -342,32 +342,32 @@ type GCPVPCSiteIngressEgressGwOutsideStaticRoutesModel struct {
 
 // GCPVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListModel represents static_route_list block
 type GCPVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListModel struct {
-	SimpleStaticRoute types.String `tfsdk:"simple_static_route"`
+	SimpleStaticRoute types.String                                                                       `tfsdk:"simple_static_route"`
 	CustomStaticRoute *GCPVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteModel `tfsdk:"custom_static_route"`
 }
 
 // GCPVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteModel represents custom_static_route block
 type GCPVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteModel struct {
-	Attrs types.List `tfsdk:"attrs"`
-	Labels *GCPVPCSiteEmptyModel `tfsdk:"labels"`
-	Nexthop *GCPVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel `tfsdk:"nexthop"`
+	Attrs   types.List                                                                                 `tfsdk:"attrs"`
+	Labels  *GCPVPCSiteEmptyModel                                                                      `tfsdk:"labels"`
+	Nexthop *GCPVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel  `tfsdk:"nexthop"`
 	Subnets []GCPVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel `tfsdk:"subnets"`
 }
 
 // GCPVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel represents nexthop block
 type GCPVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel struct {
-	Type types.String `tfsdk:"type"`
-	Interface []GCPVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel `tfsdk:"interface"`
+	Type           types.String                                                                                            `tfsdk:"type"`
+	Interface      []GCPVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel     `tfsdk:"interface"`
 	NexthopAddress *GCPVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel `tfsdk:"nexthop_address"`
 }
 
 // GCPVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel represents interface block
 type GCPVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // GCPVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel represents nexthop_address block
@@ -394,20 +394,20 @@ type GCPVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRout
 
 // GCPVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model represents ipv4 block
 type GCPVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model struct {
-	Plen types.Int64 `tfsdk:"plen"`
+	Plen   types.Int64  `tfsdk:"plen"`
 	Prefix types.String `tfsdk:"prefix"`
 }
 
 // GCPVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model represents ipv6 block
 type GCPVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model struct {
-	Plen types.Int64 `tfsdk:"plen"`
+	Plen   types.Int64  `tfsdk:"plen"`
 	Prefix types.String `tfsdk:"prefix"`
 }
 
 // GCPVPCSiteIngressEgressGwOutsideSubnetModel represents outside_subnet block
 type GCPVPCSiteIngressEgressGwOutsideSubnetModel struct {
 	ExistingSubnet *GCPVPCSiteIngressEgressGwOutsideSubnetExistingSubnetModel `tfsdk:"existing_subnet"`
-	NewSubnet *GCPVPCSiteIngressEgressGwOutsideSubnetNewSubnetModel `tfsdk:"new_subnet"`
+	NewSubnet      *GCPVPCSiteIngressEgressGwOutsideSubnetNewSubnetModel      `tfsdk:"new_subnet"`
 }
 
 // GCPVPCSiteIngressEgressGwOutsideSubnetExistingSubnetModel represents existing_subnet block
@@ -418,36 +418,36 @@ type GCPVPCSiteIngressEgressGwOutsideSubnetExistingSubnetModel struct {
 // GCPVPCSiteIngressEgressGwOutsideSubnetNewSubnetModel represents new_subnet block
 type GCPVPCSiteIngressEgressGwOutsideSubnetNewSubnetModel struct {
 	PrimaryIPV4 types.String `tfsdk:"primary_ipv4"`
-	SubnetName types.String `tfsdk:"subnet_name"`
+	SubnetName  types.String `tfsdk:"subnet_name"`
 }
 
 // GCPVPCSiteIngressEgressGwPerformanceEnhancementModeModel represents performance_enhancement_mode block
 type GCPVPCSiteIngressEgressGwPerformanceEnhancementModeModel struct {
 	PerfModeL3Enhanced *GCPVPCSiteIngressEgressGwPerformanceEnhancementModePerfModeL3EnhancedModel `tfsdk:"perf_mode_l3_enhanced"`
-	PerfModeL7Enhanced *GCPVPCSiteEmptyModel `tfsdk:"perf_mode_l7_enhanced"`
+	PerfModeL7Enhanced *GCPVPCSiteEmptyModel                                                       `tfsdk:"perf_mode_l7_enhanced"`
 }
 
 // GCPVPCSiteIngressEgressGwPerformanceEnhancementModePerfModeL3EnhancedModel represents perf_mode_l3_enhanced block
 type GCPVPCSiteIngressEgressGwPerformanceEnhancementModePerfModeL3EnhancedModel struct {
-	Jumbo *GCPVPCSiteEmptyModel `tfsdk:"jumbo"`
+	Jumbo   *GCPVPCSiteEmptyModel `tfsdk:"jumbo"`
 	NoJumbo *GCPVPCSiteEmptyModel `tfsdk:"no_jumbo"`
 }
 
 // GCPVPCSiteIngressGwModel represents ingress_gw block
 type GCPVPCSiteIngressGwModel struct {
-	GCPCertifiedHw types.String `tfsdk:"gcp_certified_hw"`
-	GCPZoneNames types.List `tfsdk:"gcp_zone_names"`
-	NodeNumber types.Int64 `tfsdk:"node_number"`
-	LocalNetwork *GCPVPCSiteIngressGwLocalNetworkModel `tfsdk:"local_network"`
-	LocalSubnet *GCPVPCSiteIngressGwLocalSubnetModel `tfsdk:"local_subnet"`
+	GCPCertifiedHw             types.String                                        `tfsdk:"gcp_certified_hw"`
+	GCPZoneNames               types.List                                          `tfsdk:"gcp_zone_names"`
+	NodeNumber                 types.Int64                                         `tfsdk:"node_number"`
+	LocalNetwork               *GCPVPCSiteIngressGwLocalNetworkModel               `tfsdk:"local_network"`
+	LocalSubnet                *GCPVPCSiteIngressGwLocalSubnetModel                `tfsdk:"local_subnet"`
 	PerformanceEnhancementMode *GCPVPCSiteIngressGwPerformanceEnhancementModeModel `tfsdk:"performance_enhancement_mode"`
 }
 
 // GCPVPCSiteIngressGwLocalNetworkModel represents local_network block
 type GCPVPCSiteIngressGwLocalNetworkModel struct {
-	ExistingNetwork *GCPVPCSiteIngressGwLocalNetworkExistingNetworkModel `tfsdk:"existing_network"`
-	NewNetwork *GCPVPCSiteIngressGwLocalNetworkNewNetworkModel `tfsdk:"new_network"`
-	NewNetworkAutogenerate *GCPVPCSiteEmptyModel `tfsdk:"new_network_autogenerate"`
+	ExistingNetwork        *GCPVPCSiteIngressGwLocalNetworkExistingNetworkModel `tfsdk:"existing_network"`
+	NewNetwork             *GCPVPCSiteIngressGwLocalNetworkNewNetworkModel      `tfsdk:"new_network"`
+	NewNetworkAutogenerate *GCPVPCSiteEmptyModel                                `tfsdk:"new_network_autogenerate"`
 }
 
 // GCPVPCSiteIngressGwLocalNetworkExistingNetworkModel represents existing_network block
@@ -463,7 +463,7 @@ type GCPVPCSiteIngressGwLocalNetworkNewNetworkModel struct {
 // GCPVPCSiteIngressGwLocalSubnetModel represents local_subnet block
 type GCPVPCSiteIngressGwLocalSubnetModel struct {
 	ExistingSubnet *GCPVPCSiteIngressGwLocalSubnetExistingSubnetModel `tfsdk:"existing_subnet"`
-	NewSubnet *GCPVPCSiteIngressGwLocalSubnetNewSubnetModel `tfsdk:"new_subnet"`
+	NewSubnet      *GCPVPCSiteIngressGwLocalSubnetNewSubnetModel      `tfsdk:"new_subnet"`
 }
 
 // GCPVPCSiteIngressGwLocalSubnetExistingSubnetModel represents existing_subnet block
@@ -474,99 +474,99 @@ type GCPVPCSiteIngressGwLocalSubnetExistingSubnetModel struct {
 // GCPVPCSiteIngressGwLocalSubnetNewSubnetModel represents new_subnet block
 type GCPVPCSiteIngressGwLocalSubnetNewSubnetModel struct {
 	PrimaryIPV4 types.String `tfsdk:"primary_ipv4"`
-	SubnetName types.String `tfsdk:"subnet_name"`
+	SubnetName  types.String `tfsdk:"subnet_name"`
 }
 
 // GCPVPCSiteIngressGwPerformanceEnhancementModeModel represents performance_enhancement_mode block
 type GCPVPCSiteIngressGwPerformanceEnhancementModeModel struct {
 	PerfModeL3Enhanced *GCPVPCSiteIngressGwPerformanceEnhancementModePerfModeL3EnhancedModel `tfsdk:"perf_mode_l3_enhanced"`
-	PerfModeL7Enhanced *GCPVPCSiteEmptyModel `tfsdk:"perf_mode_l7_enhanced"`
+	PerfModeL7Enhanced *GCPVPCSiteEmptyModel                                                 `tfsdk:"perf_mode_l7_enhanced"`
 }
 
 // GCPVPCSiteIngressGwPerformanceEnhancementModePerfModeL3EnhancedModel represents perf_mode_l3_enhanced block
 type GCPVPCSiteIngressGwPerformanceEnhancementModePerfModeL3EnhancedModel struct {
-	Jumbo *GCPVPCSiteEmptyModel `tfsdk:"jumbo"`
+	Jumbo   *GCPVPCSiteEmptyModel `tfsdk:"jumbo"`
 	NoJumbo *GCPVPCSiteEmptyModel `tfsdk:"no_jumbo"`
 }
 
 // GCPVPCSiteKubernetesUpgradeDrainModel represents kubernetes_upgrade_drain block
 type GCPVPCSiteKubernetesUpgradeDrainModel struct {
-	DisableUpgradeDrain *GCPVPCSiteEmptyModel `tfsdk:"disable_upgrade_drain"`
-	EnableUpgradeDrain *GCPVPCSiteKubernetesUpgradeDrainEnableUpgradeDrainModel `tfsdk:"enable_upgrade_drain"`
+	DisableUpgradeDrain *GCPVPCSiteEmptyModel                                    `tfsdk:"disable_upgrade_drain"`
+	EnableUpgradeDrain  *GCPVPCSiteKubernetesUpgradeDrainEnableUpgradeDrainModel `tfsdk:"enable_upgrade_drain"`
 }
 
 // GCPVPCSiteKubernetesUpgradeDrainEnableUpgradeDrainModel represents enable_upgrade_drain block
 type GCPVPCSiteKubernetesUpgradeDrainEnableUpgradeDrainModel struct {
-	DrainMaxUnavailableNodeCount types.Int64 `tfsdk:"drain_max_unavailable_node_count"`
-	DrainNodeTimeout types.Int64 `tfsdk:"drain_node_timeout"`
-	DisableVegaUpgradeMode *GCPVPCSiteEmptyModel `tfsdk:"disable_vega_upgrade_mode"`
-	EnableVegaUpgradeMode *GCPVPCSiteEmptyModel `tfsdk:"enable_vega_upgrade_mode"`
+	DrainMaxUnavailableNodeCount types.Int64           `tfsdk:"drain_max_unavailable_node_count"`
+	DrainNodeTimeout             types.Int64           `tfsdk:"drain_node_timeout"`
+	DisableVegaUpgradeMode       *GCPVPCSiteEmptyModel `tfsdk:"disable_vega_upgrade_mode"`
+	EnableVegaUpgradeMode        *GCPVPCSiteEmptyModel `tfsdk:"enable_vega_upgrade_mode"`
 }
 
 // GCPVPCSiteLogReceiverModel represents log_receiver block
 type GCPVPCSiteLogReceiverModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // GCPVPCSiteOfflineSurvivabilityModeModel represents offline_survivability_mode block
 type GCPVPCSiteOfflineSurvivabilityModeModel struct {
 	EnableOfflineSurvivabilityMode *GCPVPCSiteEmptyModel `tfsdk:"enable_offline_survivability_mode"`
-	NoOfflineSurvivabilityMode *GCPVPCSiteEmptyModel `tfsdk:"no_offline_survivability_mode"`
+	NoOfflineSurvivabilityMode     *GCPVPCSiteEmptyModel `tfsdk:"no_offline_survivability_mode"`
 }
 
 // GCPVPCSiteOsModel represents os block
 type GCPVPCSiteOsModel struct {
-	OperatingSystemVersion types.String `tfsdk:"operating_system_version"`
-	DefaultOsVersion *GCPVPCSiteEmptyModel `tfsdk:"default_os_version"`
+	OperatingSystemVersion types.String          `tfsdk:"operating_system_version"`
+	DefaultOsVersion       *GCPVPCSiteEmptyModel `tfsdk:"default_os_version"`
 }
 
 // GCPVPCSitePrivateConnectivityModel represents private_connectivity block
 type GCPVPCSitePrivateConnectivityModel struct {
 	CloudLink *GCPVPCSitePrivateConnectivityCloudLinkModel `tfsdk:"cloud_link"`
-	Inside *GCPVPCSiteEmptyModel `tfsdk:"inside"`
-	Outside *GCPVPCSiteEmptyModel `tfsdk:"outside"`
+	Inside    *GCPVPCSiteEmptyModel                        `tfsdk:"inside"`
+	Outside   *GCPVPCSiteEmptyModel                        `tfsdk:"outside"`
 }
 
 // GCPVPCSitePrivateConnectivityCloudLinkModel represents cloud_link block
 type GCPVPCSitePrivateConnectivityCloudLinkModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // GCPVPCSiteSwModel represents sw block
 type GCPVPCSiteSwModel struct {
-	VolterraSoftwareVersion types.String `tfsdk:"volterra_software_version"`
-	DefaultSwVersion *GCPVPCSiteEmptyModel `tfsdk:"default_sw_version"`
+	VolterraSoftwareVersion types.String          `tfsdk:"volterra_software_version"`
+	DefaultSwVersion        *GCPVPCSiteEmptyModel `tfsdk:"default_sw_version"`
 }
 
 // GCPVPCSiteVoltstackClusterModel represents voltstack_cluster block
 type GCPVPCSiteVoltstackClusterModel struct {
-	GCPCertifiedHw types.String `tfsdk:"gcp_certified_hw"`
-	GCPZoneNames types.List `tfsdk:"gcp_zone_names"`
-	NodeNumber types.Int64 `tfsdk:"node_number"`
+	GCPCertifiedHw                 types.String                                                   `tfsdk:"gcp_certified_hw"`
+	GCPZoneNames                   types.List                                                     `tfsdk:"gcp_zone_names"`
+	NodeNumber                     types.Int64                                                    `tfsdk:"node_number"`
 	ActiveEnhancedFirewallPolicies *GCPVPCSiteVoltstackClusterActiveEnhancedFirewallPoliciesModel `tfsdk:"active_enhanced_firewall_policies"`
-	ActiveForwardProxyPolicies *GCPVPCSiteVoltstackClusterActiveForwardProxyPoliciesModel `tfsdk:"active_forward_proxy_policies"`
-	ActiveNetworkPolicies *GCPVPCSiteVoltstackClusterActiveNetworkPoliciesModel `tfsdk:"active_network_policies"`
-	DcClusterGroup *GCPVPCSiteVoltstackClusterDcClusterGroupModel `tfsdk:"dc_cluster_group"`
-	DefaultStorage *GCPVPCSiteEmptyModel `tfsdk:"default_storage"`
-	ForwardProxyAllowAll *GCPVPCSiteEmptyModel `tfsdk:"forward_proxy_allow_all"`
-	GlobalNetworkList *GCPVPCSiteVoltstackClusterGlobalNetworkListModel `tfsdk:"global_network_list"`
-	K8SCluster *GCPVPCSiteVoltstackClusterK8SClusterModel `tfsdk:"k8s_cluster"`
-	NoDcClusterGroup *GCPVPCSiteEmptyModel `tfsdk:"no_dc_cluster_group"`
-	NoForwardProxy *GCPVPCSiteEmptyModel `tfsdk:"no_forward_proxy"`
-	NoGlobalNetwork *GCPVPCSiteEmptyModel `tfsdk:"no_global_network"`
-	NoK8SCluster *GCPVPCSiteEmptyModel `tfsdk:"no_k8s_cluster"`
-	NoNetworkPolicy *GCPVPCSiteEmptyModel `tfsdk:"no_network_policy"`
-	NoOutsideStaticRoutes *GCPVPCSiteEmptyModel `tfsdk:"no_outside_static_routes"`
-	OutsideStaticRoutes *GCPVPCSiteVoltstackClusterOutsideStaticRoutesModel `tfsdk:"outside_static_routes"`
-	SiteLocalNetwork *GCPVPCSiteVoltstackClusterSiteLocalNetworkModel `tfsdk:"site_local_network"`
-	SiteLocalSubnet *GCPVPCSiteVoltstackClusterSiteLocalSubnetModel `tfsdk:"site_local_subnet"`
-	SmConnectionPublicIP *GCPVPCSiteEmptyModel `tfsdk:"sm_connection_public_ip"`
-	SmConnectionPvtIP *GCPVPCSiteEmptyModel `tfsdk:"sm_connection_pvt_ip"`
-	StorageClassList *GCPVPCSiteVoltstackClusterStorageClassListModel `tfsdk:"storage_class_list"`
+	ActiveForwardProxyPolicies     *GCPVPCSiteVoltstackClusterActiveForwardProxyPoliciesModel     `tfsdk:"active_forward_proxy_policies"`
+	ActiveNetworkPolicies          *GCPVPCSiteVoltstackClusterActiveNetworkPoliciesModel          `tfsdk:"active_network_policies"`
+	DcClusterGroup                 *GCPVPCSiteVoltstackClusterDcClusterGroupModel                 `tfsdk:"dc_cluster_group"`
+	DefaultStorage                 *GCPVPCSiteEmptyModel                                          `tfsdk:"default_storage"`
+	ForwardProxyAllowAll           *GCPVPCSiteEmptyModel                                          `tfsdk:"forward_proxy_allow_all"`
+	GlobalNetworkList              *GCPVPCSiteVoltstackClusterGlobalNetworkListModel              `tfsdk:"global_network_list"`
+	K8SCluster                     *GCPVPCSiteVoltstackClusterK8SClusterModel                     `tfsdk:"k8s_cluster"`
+	NoDcClusterGroup               *GCPVPCSiteEmptyModel                                          `tfsdk:"no_dc_cluster_group"`
+	NoForwardProxy                 *GCPVPCSiteEmptyModel                                          `tfsdk:"no_forward_proxy"`
+	NoGlobalNetwork                *GCPVPCSiteEmptyModel                                          `tfsdk:"no_global_network"`
+	NoK8SCluster                   *GCPVPCSiteEmptyModel                                          `tfsdk:"no_k8s_cluster"`
+	NoNetworkPolicy                *GCPVPCSiteEmptyModel                                          `tfsdk:"no_network_policy"`
+	NoOutsideStaticRoutes          *GCPVPCSiteEmptyModel                                          `tfsdk:"no_outside_static_routes"`
+	OutsideStaticRoutes            *GCPVPCSiteVoltstackClusterOutsideStaticRoutesModel            `tfsdk:"outside_static_routes"`
+	SiteLocalNetwork               *GCPVPCSiteVoltstackClusterSiteLocalNetworkModel               `tfsdk:"site_local_network"`
+	SiteLocalSubnet                *GCPVPCSiteVoltstackClusterSiteLocalSubnetModel                `tfsdk:"site_local_subnet"`
+	SmConnectionPublicIP           *GCPVPCSiteEmptyModel                                          `tfsdk:"sm_connection_public_ip"`
+	SmConnectionPvtIP              *GCPVPCSiteEmptyModel                                          `tfsdk:"sm_connection_pvt_ip"`
+	StorageClassList               *GCPVPCSiteVoltstackClusterStorageClassListModel               `tfsdk:"storage_class_list"`
 }
 
 // GCPVPCSiteVoltstackClusterActiveEnhancedFirewallPoliciesModel represents active_enhanced_firewall_policies block
@@ -576,9 +576,9 @@ type GCPVPCSiteVoltstackClusterActiveEnhancedFirewallPoliciesModel struct {
 
 // GCPVPCSiteVoltstackClusterActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel represents enhanced_firewall_policies block
 type GCPVPCSiteVoltstackClusterActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // GCPVPCSiteVoltstackClusterActiveForwardProxyPoliciesModel represents active_forward_proxy_policies block
@@ -588,9 +588,9 @@ type GCPVPCSiteVoltstackClusterActiveForwardProxyPoliciesModel struct {
 
 // GCPVPCSiteVoltstackClusterActiveForwardProxyPoliciesForwardProxyPoliciesModel represents forward_proxy_policies block
 type GCPVPCSiteVoltstackClusterActiveForwardProxyPoliciesForwardProxyPoliciesModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // GCPVPCSiteVoltstackClusterActiveNetworkPoliciesModel represents active_network_policies block
@@ -600,16 +600,16 @@ type GCPVPCSiteVoltstackClusterActiveNetworkPoliciesModel struct {
 
 // GCPVPCSiteVoltstackClusterActiveNetworkPoliciesNetworkPoliciesModel represents network_policies block
 type GCPVPCSiteVoltstackClusterActiveNetworkPoliciesNetworkPoliciesModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // GCPVPCSiteVoltstackClusterDcClusterGroupModel represents dc_cluster_group block
 type GCPVPCSiteVoltstackClusterDcClusterGroupModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // GCPVPCSiteVoltstackClusterGlobalNetworkListModel represents global_network_list block
@@ -630,9 +630,9 @@ type GCPVPCSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLIToGlo
 
 // GCPVPCSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrGlobalVnModel represents global_vn block
 type GCPVPCSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrGlobalVnModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // GCPVPCSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrModel represents slo_to_global_dr block
@@ -642,16 +642,16 @@ type GCPVPCSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLOToGlo
 
 // GCPVPCSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrGlobalVnModel represents global_vn block
 type GCPVPCSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrGlobalVnModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // GCPVPCSiteVoltstackClusterK8SClusterModel represents k8s_cluster block
 type GCPVPCSiteVoltstackClusterK8SClusterModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // GCPVPCSiteVoltstackClusterOutsideStaticRoutesModel represents outside_static_routes block
@@ -661,32 +661,32 @@ type GCPVPCSiteVoltstackClusterOutsideStaticRoutesModel struct {
 
 // GCPVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListModel represents static_route_list block
 type GCPVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListModel struct {
-	SimpleStaticRoute types.String `tfsdk:"simple_static_route"`
+	SimpleStaticRoute types.String                                                                        `tfsdk:"simple_static_route"`
 	CustomStaticRoute *GCPVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteModel `tfsdk:"custom_static_route"`
 }
 
 // GCPVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteModel represents custom_static_route block
 type GCPVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteModel struct {
-	Attrs types.List `tfsdk:"attrs"`
-	Labels *GCPVPCSiteEmptyModel `tfsdk:"labels"`
-	Nexthop *GCPVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel `tfsdk:"nexthop"`
+	Attrs   types.List                                                                                  `tfsdk:"attrs"`
+	Labels  *GCPVPCSiteEmptyModel                                                                       `tfsdk:"labels"`
+	Nexthop *GCPVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel  `tfsdk:"nexthop"`
 	Subnets []GCPVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel `tfsdk:"subnets"`
 }
 
 // GCPVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel represents nexthop block
 type GCPVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel struct {
-	Type types.String `tfsdk:"type"`
-	Interface []GCPVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel `tfsdk:"interface"`
+	Type           types.String                                                                                             `tfsdk:"type"`
+	Interface      []GCPVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel     `tfsdk:"interface"`
 	NexthopAddress *GCPVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel `tfsdk:"nexthop_address"`
 }
 
 // GCPVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel represents interface block
 type GCPVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // GCPVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel represents nexthop_address block
@@ -713,21 +713,21 @@ type GCPVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRou
 
 // GCPVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model represents ipv4 block
 type GCPVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model struct {
-	Plen types.Int64 `tfsdk:"plen"`
+	Plen   types.Int64  `tfsdk:"plen"`
 	Prefix types.String `tfsdk:"prefix"`
 }
 
 // GCPVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model represents ipv6 block
 type GCPVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model struct {
-	Plen types.Int64 `tfsdk:"plen"`
+	Plen   types.Int64  `tfsdk:"plen"`
 	Prefix types.String `tfsdk:"prefix"`
 }
 
 // GCPVPCSiteVoltstackClusterSiteLocalNetworkModel represents site_local_network block
 type GCPVPCSiteVoltstackClusterSiteLocalNetworkModel struct {
-	ExistingNetwork *GCPVPCSiteVoltstackClusterSiteLocalNetworkExistingNetworkModel `tfsdk:"existing_network"`
-	NewNetwork *GCPVPCSiteVoltstackClusterSiteLocalNetworkNewNetworkModel `tfsdk:"new_network"`
-	NewNetworkAutogenerate *GCPVPCSiteEmptyModel `tfsdk:"new_network_autogenerate"`
+	ExistingNetwork        *GCPVPCSiteVoltstackClusterSiteLocalNetworkExistingNetworkModel `tfsdk:"existing_network"`
+	NewNetwork             *GCPVPCSiteVoltstackClusterSiteLocalNetworkNewNetworkModel      `tfsdk:"new_network"`
+	NewNetworkAutogenerate *GCPVPCSiteEmptyModel                                           `tfsdk:"new_network_autogenerate"`
 }
 
 // GCPVPCSiteVoltstackClusterSiteLocalNetworkExistingNetworkModel represents existing_network block
@@ -743,7 +743,7 @@ type GCPVPCSiteVoltstackClusterSiteLocalNetworkNewNetworkModel struct {
 // GCPVPCSiteVoltstackClusterSiteLocalSubnetModel represents site_local_subnet block
 type GCPVPCSiteVoltstackClusterSiteLocalSubnetModel struct {
 	ExistingSubnet *GCPVPCSiteVoltstackClusterSiteLocalSubnetExistingSubnetModel `tfsdk:"existing_subnet"`
-	NewSubnet *GCPVPCSiteVoltstackClusterSiteLocalSubnetNewSubnetModel `tfsdk:"new_subnet"`
+	NewSubnet      *GCPVPCSiteVoltstackClusterSiteLocalSubnetNewSubnetModel      `tfsdk:"new_subnet"`
 }
 
 // GCPVPCSiteVoltstackClusterSiteLocalSubnetExistingSubnetModel represents existing_subnet block
@@ -754,7 +754,7 @@ type GCPVPCSiteVoltstackClusterSiteLocalSubnetExistingSubnetModel struct {
 // GCPVPCSiteVoltstackClusterSiteLocalSubnetNewSubnetModel represents new_subnet block
 type GCPVPCSiteVoltstackClusterSiteLocalSubnetNewSubnetModel struct {
 	PrimaryIPV4 types.String `tfsdk:"primary_ipv4"`
-	SubnetName types.String `tfsdk:"subnet_name"`
+	SubnetName  types.String `tfsdk:"subnet_name"`
 }
 
 // GCPVPCSiteVoltstackClusterStorageClassListModel represents storage_class_list block
@@ -764,43 +764,43 @@ type GCPVPCSiteVoltstackClusterStorageClassListModel struct {
 
 // GCPVPCSiteVoltstackClusterStorageClassListStorageClassesModel represents storage_classes block
 type GCPVPCSiteVoltstackClusterStorageClassListStorageClassesModel struct {
-	DefaultStorageClass types.Bool `tfsdk:"default_storage_class"`
-	StorageClassName types.String `tfsdk:"storage_class_name"`
+	DefaultStorageClass types.Bool   `tfsdk:"default_storage_class"`
+	StorageClassName    types.String `tfsdk:"storage_class_name"`
 }
 
 type GCPVPCSiteResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Address types.String `tfsdk:"address"`
-	DiskSize types.Int64 `tfsdk:"disk_size"`
-	GCPRegion types.String `tfsdk:"gcp_region"`
-	InstanceType types.String `tfsdk:"instance_type"`
-	SSHKey types.String `tfsdk:"ssh_key"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	AdminPassword *GCPVPCSiteAdminPasswordModel `tfsdk:"admin_password"`
-	BlockAllServices *GCPVPCSiteEmptyModel `tfsdk:"block_all_services"`
-	BlockedServices *GCPVPCSiteBlockedServicesModel `tfsdk:"blocked_services"`
-	CloudCredentials *GCPVPCSiteCloudCredentialsModel `tfsdk:"cloud_credentials"`
-	Coordinates *GCPVPCSiteCoordinatesModel `tfsdk:"coordinates"`
-	CustomDNS *GCPVPCSiteCustomDNSModel `tfsdk:"custom_dns"`
-	DefaultBlockedServices *GCPVPCSiteEmptyModel `tfsdk:"default_blocked_services"`
-	GCPLabels *GCPVPCSiteEmptyModel `tfsdk:"gcp_labels"`
-	IngressEgressGw *GCPVPCSiteIngressEgressGwModel `tfsdk:"ingress_egress_gw"`
-	IngressGw *GCPVPCSiteIngressGwModel `tfsdk:"ingress_gw"`
-	KubernetesUpgradeDrain *GCPVPCSiteKubernetesUpgradeDrainModel `tfsdk:"kubernetes_upgrade_drain"`
-	LogReceiver *GCPVPCSiteLogReceiverModel `tfsdk:"log_receiver"`
-	LogsStreamingDisabled *GCPVPCSiteEmptyModel `tfsdk:"logs_streaming_disabled"`
+	Name                     types.String                             `tfsdk:"name"`
+	Namespace                types.String                             `tfsdk:"namespace"`
+	Annotations              types.Map                                `tfsdk:"annotations"`
+	Description              types.String                             `tfsdk:"description"`
+	Disable                  types.Bool                               `tfsdk:"disable"`
+	Labels                   types.Map                                `tfsdk:"labels"`
+	ID                       types.String                             `tfsdk:"id"`
+	Address                  types.String                             `tfsdk:"address"`
+	DiskSize                 types.Int64                              `tfsdk:"disk_size"`
+	GCPRegion                types.String                             `tfsdk:"gcp_region"`
+	InstanceType             types.String                             `tfsdk:"instance_type"`
+	SSHKey                   types.String                             `tfsdk:"ssh_key"`
+	Timeouts                 timeouts.Value                           `tfsdk:"timeouts"`
+	AdminPassword            *GCPVPCSiteAdminPasswordModel            `tfsdk:"admin_password"`
+	BlockAllServices         *GCPVPCSiteEmptyModel                    `tfsdk:"block_all_services"`
+	BlockedServices          *GCPVPCSiteBlockedServicesModel          `tfsdk:"blocked_services"`
+	CloudCredentials         *GCPVPCSiteCloudCredentialsModel         `tfsdk:"cloud_credentials"`
+	Coordinates              *GCPVPCSiteCoordinatesModel              `tfsdk:"coordinates"`
+	CustomDNS                *GCPVPCSiteCustomDNSModel                `tfsdk:"custom_dns"`
+	DefaultBlockedServices   *GCPVPCSiteEmptyModel                    `tfsdk:"default_blocked_services"`
+	GCPLabels                *GCPVPCSiteEmptyModel                    `tfsdk:"gcp_labels"`
+	IngressEgressGw          *GCPVPCSiteIngressEgressGwModel          `tfsdk:"ingress_egress_gw"`
+	IngressGw                *GCPVPCSiteIngressGwModel                `tfsdk:"ingress_gw"`
+	KubernetesUpgradeDrain   *GCPVPCSiteKubernetesUpgradeDrainModel   `tfsdk:"kubernetes_upgrade_drain"`
+	LogReceiver              *GCPVPCSiteLogReceiverModel              `tfsdk:"log_receiver"`
+	LogsStreamingDisabled    *GCPVPCSiteEmptyModel                    `tfsdk:"logs_streaming_disabled"`
 	OfflineSurvivabilityMode *GCPVPCSiteOfflineSurvivabilityModeModel `tfsdk:"offline_survivability_mode"`
-	Os *GCPVPCSiteOsModel `tfsdk:"os"`
-	PrivateConnectDisabled *GCPVPCSiteEmptyModel `tfsdk:"private_connect_disabled"`
-	PrivateConnectivity *GCPVPCSitePrivateConnectivityModel `tfsdk:"private_connectivity"`
-	Sw *GCPVPCSiteSwModel `tfsdk:"sw"`
-	VoltstackCluster *GCPVPCSiteVoltstackClusterModel `tfsdk:"voltstack_cluster"`
+	Os                       *GCPVPCSiteOsModel                       `tfsdk:"os"`
+	PrivateConnectDisabled   *GCPVPCSiteEmptyModel                    `tfsdk:"private_connect_disabled"`
+	PrivateConnectivity      *GCPVPCSitePrivateConnectivityModel      `tfsdk:"private_connectivity"`
+	Sw                       *GCPVPCSiteSwModel                       `tfsdk:"sw"`
+	VoltstackCluster         *GCPVPCSiteVoltstackClusterModel         `tfsdk:"voltstack_cluster"`
 }
 
 func (r *GCPVPCSiteResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -814,7 +814,7 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the GCPVPCSite. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -824,7 +824,7 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the GCPVPCSite will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -834,65 +834,65 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"address": schema.StringAttribute{
 				MarkdownDescription: "Geographical Address. Site's geographical address that can be used to determine its latitude and longitude.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"disk_size": schema.Int64Attribute{
 				MarkdownDescription: "Cloud Disk Size. Disk size to be used for this instance in GiB. 80 is 80 GiB",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{
 					int64planmodifier.UseStateForUnknown(),
 				},
 			},
 			"gcp_region": schema.StringAttribute{
 				MarkdownDescription: "GCP Region. Name for GCP Region.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"instance_type": schema.StringAttribute{
 				MarkdownDescription: "GCP Instance Type for Node. Select Instance size based on performance needed",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"ssh_key": schema.StringAttribute{
 				MarkdownDescription: "Public SSH key. Public SSH key for accessing the site.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -907,23 +907,22 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 			}),
 			"admin_password": schema.SingleNestedBlock{
 				MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"blindfold_secret_info": schema.SingleNestedBlock{
 						MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 						Attributes: map[string]schema.Attribute{
 							"decryption_provider": schema.StringAttribute{
 								MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-								Optional: true,
+								Optional:            true,
 							},
 							"location": schema.StringAttribute{
 								MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-								Optional: true,
+								Optional:            true,
 							},
 							"store_provider": schema.StringAttribute{
 								MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 					},
@@ -932,24 +931,22 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						Attributes: map[string]schema.Attribute{
 							"provider_ref": schema.StringAttribute{
 								MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-								Optional: true,
+								Optional:            true,
 							},
 							"url": schema.StringAttribute{
 								MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 					},
 				},
-
 			},
 			"block_all_services": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: block_all_services, blocked_services, default_blocked_services] Empty. This can be used for messages where no values are needed",
 			},
 			"blocked_services": schema.SingleNestedBlock{
 				MarkdownDescription: "Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site.",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"blocked_sevice": schema.ListNestedBlock{
 						MarkdownDescription: "Disable Node Local Services.",
@@ -957,7 +954,7 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 							Attributes: map[string]schema.Attribute{
 								"network_type": schema.StringAttribute{
 									MarkdownDescription: "Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user. Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`. Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`.",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
@@ -974,54 +971,50 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 				},
-
 			},
 			"cloud_credentials": schema.SingleNestedBlock{
 				MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
 						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-						Optional: true,
+						Optional:            true,
 					},
 					"namespace": schema.StringAttribute{
 						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-						Optional: true,
+						Optional:            true,
 					},
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-						Optional: true,
-						Computed: true,
+						Optional:            true,
+						Computed:            true,
 					},
 				},
-
 			},
 			"coordinates": schema.SingleNestedBlock{
 				MarkdownDescription: "Site Coordinates. Coordinates of the site which provides the site physical location",
 				Attributes: map[string]schema.Attribute{
 					"latitude": schema.Int64Attribute{
 						MarkdownDescription: "Latitude. Latitude of the site location",
-						Optional: true,
+						Optional:            true,
 					},
 					"longitude": schema.Int64Attribute{
 						MarkdownDescription: "Longitude. longitude of site location",
-						Optional: true,
+						Optional:            true,
 					},
 				},
-
 			},
 			"custom_dns": schema.SingleNestedBlock{
 				MarkdownDescription: "Custom DNS. Custom DNS is the configured for specify CE site",
 				Attributes: map[string]schema.Attribute{
 					"inside_nameserver": schema.StringAttribute{
 						MarkdownDescription: "DNS Server for Inside Network. Optional DNS server IP to be used for name resolution in inside network",
-						Optional: true,
+						Optional:            true,
 					},
 					"outside_nameserver": schema.StringAttribute{
 						MarkdownDescription: "DNS Server for Outside Network. Optional DNS server IP to be used for name resolution in outside network",
-						Optional: true,
+						Optional:            true,
 					},
 				},
-
 			},
 			"default_blocked_services": schema.SingleNestedBlock{
 				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -1034,23 +1027,22 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				Attributes: map[string]schema.Attribute{
 					"gcp_certified_hw": schema.StringAttribute{
 						MarkdownDescription: "GCP Certified Hardware. Name for GCP certified hardware.",
-						Optional: true,
+						Optional:            true,
 					},
 					"gcp_zone_names": schema.ListAttribute{
 						MarkdownDescription: "GCP zone names. x-required List of zones when instances will be created, needs to match with region selected.",
-						Optional: true,
-						ElementType: types.StringType,
+						Optional:            true,
+						ElementType:         types.StringType,
 					},
 					"node_number": schema.Int64Attribute{
 						MarkdownDescription: "Number of main nodes. Number of main nodes to create, either 1 or 3.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"active_enhanced_firewall_policies": schema.SingleNestedBlock{
 						MarkdownDescription: "Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion.",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"enhanced_firewall_policies": schema.ListNestedBlock{
 								MarkdownDescription: "Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active",
@@ -1058,16 +1050,16 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-											Optional: true,
+											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
 											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-											Optional: true,
+											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
@@ -1076,8 +1068,7 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 					},
 					"active_forward_proxy_policies": schema.SingleNestedBlock{
 						MarkdownDescription: "Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"forward_proxy_policies": schema.ListNestedBlock{
 								MarkdownDescription: "Forward Proxy Policies. Ordered List of Forward Proxy Policies active",
@@ -1085,16 +1076,16 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-											Optional: true,
+											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
 											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-											Optional: true,
+											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
@@ -1103,8 +1094,7 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 					},
 					"active_network_policies": schema.SingleNestedBlock{
 						MarkdownDescription: "Active Firewall Policies Type. List of firewall policy views.",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"network_policies": schema.ListNestedBlock{
 								MarkdownDescription: "Firewall Policy. Ordered List of Firewall Policies active for this network firewall",
@@ -1112,16 +1102,16 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-											Optional: true,
+											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
 											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-											Optional: true,
+											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
@@ -1133,16 +1123,16 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
 								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-								Optional: true,
+								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
 								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-								Optional: true,
+								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-								Optional: true,
-								Computed: true,
+								Optional:            true,
+								Computed:            true,
 							},
 						},
 					},
@@ -1151,16 +1141,16 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
 								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-								Optional: true,
+								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
 								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-								Optional: true,
+								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-								Optional: true,
-								Computed: true,
+								Optional:            true,
+								Computed:            true,
 							},
 						},
 					},
@@ -1169,35 +1159,32 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 					},
 					"global_network_list": schema.SingleNestedBlock{
 						MarkdownDescription: "Global Network Connection List. List of global network connections",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"global_network_connections": schema.ListNestedBlock{
 								MarkdownDescription: "Global Network Connections. Global network connections",
 								NestedObject: schema.NestedBlockObject{
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes: map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"sli_to_global_dr": schema.SingleNestedBlock{
 											MarkdownDescription: "Global Network. Global network reference for direct connection",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"global_vn": schema.SingleNestedBlock{
 													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 													Attributes: map[string]schema.Attribute{
 														"name": schema.StringAttribute{
 															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-															Optional: true,
+															Optional:            true,
 														},
 														"namespace": schema.StringAttribute{
 															MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-															Optional: true,
+															Optional:            true,
 														},
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-															Optional: true,
-															Computed: true,
+															Optional:            true,
+															Computed:            true,
 														},
 													},
 												},
@@ -1205,24 +1192,23 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 										},
 										"slo_to_global_dr": schema.SingleNestedBlock{
 											MarkdownDescription: "Global Network. Global network reference for direct connection",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"global_vn": schema.SingleNestedBlock{
 													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 													Attributes: map[string]schema.Attribute{
 														"name": schema.StringAttribute{
 															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-															Optional: true,
+															Optional:            true,
 														},
 														"namespace": schema.StringAttribute{
 															MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-															Optional: true,
+															Optional:            true,
 														},
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-															Optional: true,
-															Computed: true,
+															Optional:            true,
+															Computed:            true,
 														},
 													},
 												},
@@ -1235,15 +1221,14 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 					},
 					"inside_network": schema.SingleNestedBlock{
 						MarkdownDescription: "GCP VPC network choice. This defines choice about GCP VPC network for a view",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"existing_network": schema.SingleNestedBlock{
 								MarkdownDescription: "GCP existing VPC network Type. Name of existing VPC network",
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
 										MarkdownDescription: "GCP VPC Network Name. Name for your GCP VPC Network",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -1252,7 +1237,7 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
 										MarkdownDescription: "GCP VPC Network Name. Name for your GCP VPC Network",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -1263,8 +1248,7 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 					},
 					"inside_static_routes": schema.SingleNestedBlock{
 						MarkdownDescription: "Static Route List Type. List of static routes",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"static_route_list": schema.ListNestedBlock{
 								MarkdownDescription: "List of Static Routes. List of Static routes",
@@ -1272,7 +1256,7 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 									Attributes: map[string]schema.Attribute{
 										"simple_static_route": schema.StringAttribute{
 											MarkdownDescription: "Simple Static Route. Use simple static route for prefix pointing to single interface in the network",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -1281,8 +1265,8 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 											Attributes: map[string]schema.Attribute{
 												"attrs": schema.ListAttribute{
 													MarkdownDescription: "Attributes. List of route attributes associated with the static route. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP`.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -1294,7 +1278,7 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 													Attributes: map[string]schema.Attribute{
 														"type": schema.StringAttribute{
 															MarkdownDescription: "Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network. Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`. Defaults to `NEXT_HOP_DEFAULT_GATEWAY`.",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 													Blocks: map[string]schema.Block{
@@ -1304,41 +1288,40 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 																Attributes: map[string]schema.Attribute{
 																	"kind": schema.StringAttribute{
 																		MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-																		Optional: true,
-																		Computed: true,
+																		Optional:            true,
+																		Computed:            true,
 																	},
 																	"name": schema.StringAttribute{
 																		MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"namespace": schema.StringAttribute{
 																		MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"tenant": schema.StringAttribute{
 																		MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-																		Optional: true,
-																		Computed: true,
+																		Optional:            true,
+																		Computed:            true,
 																	},
 																	"uid": schema.StringAttribute{
 																		MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-																		Optional: true,
-																		Computed: true,
+																		Optional:            true,
+																		Computed:            true,
 																	},
 																},
 															},
 														},
 														"nexthop_address": schema.SingleNestedBlock{
 															MarkdownDescription: "IP Address. IP Address used to specify an IPv4 or IPv6 address",
-															Attributes: map[string]schema.Attribute{
-															},
+															Attributes:          map[string]schema.Attribute{},
 															Blocks: map[string]schema.Block{
 																"ipv4": schema.SingleNestedBlock{
 																	MarkdownDescription: "IPv4 Address. IPv4 Address in dot-decimal notation",
 																	Attributes: map[string]schema.Attribute{
 																		"addr": schema.StringAttribute{
 																			MarkdownDescription: "IPv4 Address. IPv4 Address in string form with dot-decimal notation",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																	},
 																},
@@ -1347,7 +1330,7 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 																	Attributes: map[string]schema.Attribute{
 																		"addr": schema.StringAttribute{
 																			MarkdownDescription: "IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																	},
 																},
@@ -1358,19 +1341,18 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 												"subnets": schema.ListNestedBlock{
 													MarkdownDescription: "Subnets. List of route prefixes",
 													NestedObject: schema.NestedBlockObject{
-														Attributes: map[string]schema.Attribute{
-														},
+														Attributes: map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"ipv4": schema.SingleNestedBlock{
 																MarkdownDescription: "IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32",
 																Attributes: map[string]schema.Attribute{
 																	"plen": schema.Int64Attribute{
 																		MarkdownDescription: "Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"prefix": schema.StringAttribute{
 																		MarkdownDescription: "Prefix. Prefix part of the IPv4 subnet in string form with dot-decimal notation",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 															},
@@ -1379,11 +1361,11 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 																Attributes: map[string]schema.Attribute{
 																	"plen": schema.Int64Attribute{
 																		MarkdownDescription: "Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"prefix": schema.StringAttribute{
 																		MarkdownDescription: "Prefix. Prefix part of the IPv6 subnet given in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' e.g. '2001:db8:0:0:0:2:0:0' The address can be compacted by suppressing zeros e.g. '2001:db8::2::'",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 															},
@@ -1399,15 +1381,14 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 					},
 					"inside_subnet": schema.SingleNestedBlock{
 						MarkdownDescription: "GCP VPC network choice. This defines choice about GCP VPC network for a view",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"existing_subnet": schema.SingleNestedBlock{
 								MarkdownDescription: "GCP existing subnet Type. Name of existing gcp subnet",
 								Attributes: map[string]schema.Attribute{
 									"subnet_name": schema.StringAttribute{
 										MarkdownDescription: "VPC Subnet Name. Name of your subnet in VPC network",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -1416,11 +1397,11 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 								Attributes: map[string]schema.Attribute{
 									"primary_ipv4": schema.StringAttribute{
 										MarkdownDescription: "IPv4 Subnet Prefix. IPv4 prefix for this Subnet. It has to be private address space.",
-										Optional: true,
+										Optional:            true,
 									},
 									"subnet_name": schema.StringAttribute{
 										MarkdownDescription: "VPC Subnet Name. Name of new VPC Subnet, will be autogenerated if empty",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -1446,15 +1427,14 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 					},
 					"outside_network": schema.SingleNestedBlock{
 						MarkdownDescription: "GCP VPC network choice. This defines choice about GCP VPC network for a view",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"existing_network": schema.SingleNestedBlock{
 								MarkdownDescription: "GCP existing VPC network Type. Name of existing VPC network",
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
 										MarkdownDescription: "GCP VPC Network Name. Name for your GCP VPC Network",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -1463,7 +1443,7 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
 										MarkdownDescription: "GCP VPC Network Name. Name for your GCP VPC Network",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -1474,8 +1454,7 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 					},
 					"outside_static_routes": schema.SingleNestedBlock{
 						MarkdownDescription: "Static Route List Type. List of static routes",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"static_route_list": schema.ListNestedBlock{
 								MarkdownDescription: "List of Static Routes. List of Static routes",
@@ -1483,7 +1462,7 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 									Attributes: map[string]schema.Attribute{
 										"simple_static_route": schema.StringAttribute{
 											MarkdownDescription: "Simple Static Route. Use simple static route for prefix pointing to single interface in the network",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -1492,8 +1471,8 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 											Attributes: map[string]schema.Attribute{
 												"attrs": schema.ListAttribute{
 													MarkdownDescription: "Attributes. List of route attributes associated with the static route. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP`.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -1505,7 +1484,7 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 													Attributes: map[string]schema.Attribute{
 														"type": schema.StringAttribute{
 															MarkdownDescription: "Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network. Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`. Defaults to `NEXT_HOP_DEFAULT_GATEWAY`.",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 													Blocks: map[string]schema.Block{
@@ -1515,41 +1494,40 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 																Attributes: map[string]schema.Attribute{
 																	"kind": schema.StringAttribute{
 																		MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-																		Optional: true,
-																		Computed: true,
+																		Optional:            true,
+																		Computed:            true,
 																	},
 																	"name": schema.StringAttribute{
 																		MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"namespace": schema.StringAttribute{
 																		MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"tenant": schema.StringAttribute{
 																		MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-																		Optional: true,
-																		Computed: true,
+																		Optional:            true,
+																		Computed:            true,
 																	},
 																	"uid": schema.StringAttribute{
 																		MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-																		Optional: true,
-																		Computed: true,
+																		Optional:            true,
+																		Computed:            true,
 																	},
 																},
 															},
 														},
 														"nexthop_address": schema.SingleNestedBlock{
 															MarkdownDescription: "IP Address. IP Address used to specify an IPv4 or IPv6 address",
-															Attributes: map[string]schema.Attribute{
-															},
+															Attributes:          map[string]schema.Attribute{},
 															Blocks: map[string]schema.Block{
 																"ipv4": schema.SingleNestedBlock{
 																	MarkdownDescription: "IPv4 Address. IPv4 Address in dot-decimal notation",
 																	Attributes: map[string]schema.Attribute{
 																		"addr": schema.StringAttribute{
 																			MarkdownDescription: "IPv4 Address. IPv4 Address in string form with dot-decimal notation",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																	},
 																},
@@ -1558,7 +1536,7 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 																	Attributes: map[string]schema.Attribute{
 																		"addr": schema.StringAttribute{
 																			MarkdownDescription: "IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																	},
 																},
@@ -1569,19 +1547,18 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 												"subnets": schema.ListNestedBlock{
 													MarkdownDescription: "Subnets. List of route prefixes",
 													NestedObject: schema.NestedBlockObject{
-														Attributes: map[string]schema.Attribute{
-														},
+														Attributes: map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"ipv4": schema.SingleNestedBlock{
 																MarkdownDescription: "IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32",
 																Attributes: map[string]schema.Attribute{
 																	"plen": schema.Int64Attribute{
 																		MarkdownDescription: "Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"prefix": schema.StringAttribute{
 																		MarkdownDescription: "Prefix. Prefix part of the IPv4 subnet in string form with dot-decimal notation",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 															},
@@ -1590,11 +1567,11 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 																Attributes: map[string]schema.Attribute{
 																	"plen": schema.Int64Attribute{
 																		MarkdownDescription: "Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"prefix": schema.StringAttribute{
 																		MarkdownDescription: "Prefix. Prefix part of the IPv6 subnet given in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' e.g. '2001:db8:0:0:0:2:0:0' The address can be compacted by suppressing zeros e.g. '2001:db8::2::'",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 															},
@@ -1610,15 +1587,14 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 					},
 					"outside_subnet": schema.SingleNestedBlock{
 						MarkdownDescription: "GCP VPC network choice. This defines choice about GCP VPC network for a view",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"existing_subnet": schema.SingleNestedBlock{
 								MarkdownDescription: "GCP existing subnet Type. Name of existing gcp subnet",
 								Attributes: map[string]schema.Attribute{
 									"subnet_name": schema.StringAttribute{
 										MarkdownDescription: "VPC Subnet Name. Name of your subnet in VPC network",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -1627,11 +1603,11 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 								Attributes: map[string]schema.Attribute{
 									"primary_ipv4": schema.StringAttribute{
 										MarkdownDescription: "IPv4 Subnet Prefix. IPv4 prefix for this Subnet. It has to be private address space.",
-										Optional: true,
+										Optional:            true,
 									},
 									"subnet_name": schema.StringAttribute{
 										MarkdownDescription: "VPC Subnet Name. Name of new VPC Subnet, will be autogenerated if empty",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -1639,13 +1615,11 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 					},
 					"performance_enhancement_mode": schema.SingleNestedBlock{
 						MarkdownDescription: "Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default.",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"perf_mode_l3_enhanced": schema.SingleNestedBlock{
 								MarkdownDescription: "L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"jumbo": schema.SingleNestedBlock{
 										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -1667,37 +1641,35 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 			"ingress_gw": schema.SingleNestedBlock{
 				MarkdownDescription: "GCP Ingress Gateway. Single interface GCP ingress site",
 				Attributes: map[string]schema.Attribute{
 					"gcp_certified_hw": schema.StringAttribute{
 						MarkdownDescription: "GCP Certified Hardware. Name for GCP certified hardware.",
-						Optional: true,
+						Optional:            true,
 					},
 					"gcp_zone_names": schema.ListAttribute{
 						MarkdownDescription: "GCP zone names. x-required List of zones when instances will be created, needs to match with region selected.",
-						Optional: true,
-						ElementType: types.StringType,
+						Optional:            true,
+						ElementType:         types.StringType,
 					},
 					"node_number": schema.Int64Attribute{
 						MarkdownDescription: "Number of main nodes. Number of main nodes to create, either 1 or 3.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"local_network": schema.SingleNestedBlock{
 						MarkdownDescription: "GCP VPC network choice. This defines choice about GCP VPC network for a view",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"existing_network": schema.SingleNestedBlock{
 								MarkdownDescription: "GCP existing VPC network Type. Name of existing VPC network",
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
 										MarkdownDescription: "GCP VPC Network Name. Name for your GCP VPC Network",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -1706,7 +1678,7 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
 										MarkdownDescription: "GCP VPC Network Name. Name for your GCP VPC Network",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -1717,15 +1689,14 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 					},
 					"local_subnet": schema.SingleNestedBlock{
 						MarkdownDescription: "GCP VPC network choice. This defines choice about GCP VPC network for a view",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"existing_subnet": schema.SingleNestedBlock{
 								MarkdownDescription: "GCP existing subnet Type. Name of existing gcp subnet",
 								Attributes: map[string]schema.Attribute{
 									"subnet_name": schema.StringAttribute{
 										MarkdownDescription: "VPC Subnet Name. Name of your subnet in VPC network",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -1734,11 +1705,11 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 								Attributes: map[string]schema.Attribute{
 									"primary_ipv4": schema.StringAttribute{
 										MarkdownDescription: "IPv4 Subnet Prefix. IPv4 prefix for this Subnet. It has to be private address space.",
-										Optional: true,
+										Optional:            true,
 									},
 									"subnet_name": schema.StringAttribute{
 										MarkdownDescription: "VPC Subnet Name. Name of new VPC Subnet, will be autogenerated if empty",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -1746,13 +1717,11 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 					},
 					"performance_enhancement_mode": schema.SingleNestedBlock{
 						MarkdownDescription: "Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default.",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"perf_mode_l3_enhanced": schema.SingleNestedBlock{
 								MarkdownDescription: "L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options",
-								Attributes: map[string]schema.Attribute{
-								},
+								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"jumbo": schema.SingleNestedBlock{
 										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -1768,12 +1737,10 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 				},
-
 			},
 			"kubernetes_upgrade_drain": schema.SingleNestedBlock{
 				MarkdownDescription: "Node by Node Upgrade. Specify how worker nodes within a site will be upgraded.",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"disable_upgrade_drain": schema.SingleNestedBlock{
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -1783,11 +1750,11 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						Attributes: map[string]schema.Attribute{
 							"drain_max_unavailable_node_count": schema.Int64Attribute{
 								MarkdownDescription: "Node Batch Size Count.",
-								Optional: true,
+								Optional:            true,
 							},
 							"drain_node_timeout": schema.Int64Attribute{
 								MarkdownDescription: "Upgrade Wait Time. Seconds to wait before initiating upgrade on the next set of nodes. Setting it to 0 will wait indefinitely for all services on nodes to be upgraded gracefully before proceeding to the next set of nodes. (Warning: It may block upgrade if services on a node cannot be gracefully upgraded. It is recommended to use the default value).",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -1800,34 +1767,31 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 				},
-
 			},
 			"log_receiver": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: log_receiver, logs_streaming_disabled] Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
 						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-						Optional: true,
+						Optional:            true,
 					},
 					"namespace": schema.StringAttribute{
 						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-						Optional: true,
+						Optional:            true,
 					},
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-						Optional: true,
-						Computed: true,
+						Optional:            true,
+						Computed:            true,
 					},
 				},
-
 			},
 			"logs_streaming_disabled": schema.SingleNestedBlock{
 				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 			},
 			"offline_survivability_mode": schema.SingleNestedBlock{
 				MarkdownDescription: "Offline Survivability Mode. Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7 days, even when the site is offline. The certificates needed to keep the services running on this site are signed using a local CA. Secrets would also be cached locally to handle the connectivity loss. When the mode is toggled, services will restart and traffic disruption will be seen.",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"enable_offline_survivability_mode": schema.SingleNestedBlock{
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -1836,14 +1800,13 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 			"os": schema.SingleNestedBlock{
 				MarkdownDescription: "Operating System Version. Select the F5XC Operating System Version for the site. By default, latest available OS Version will be used. Refer to release notes to find required released OS versions.",
 				Attributes: map[string]schema.Attribute{
 					"operating_system_version": schema.StringAttribute{
 						MarkdownDescription: "Operating System Version. Specify a OS version to be used e.g. 9.2024.6.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -1851,31 +1814,29 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 			"private_connect_disabled": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: private_connect_disabled, private_connectivity] Empty. This can be used for messages where no values are needed",
 			},
 			"private_connectivity": schema.SingleNestedBlock{
 				MarkdownDescription: "Private Connect Configuration. Private Connect Configuration",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"cloud_link": schema.SingleNestedBlock{
 						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
 								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-								Optional: true,
+								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
 								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-								Optional: true,
+								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-								Optional: true,
-								Computed: true,
+								Optional:            true,
+								Computed:            true,
 							},
 						},
 					},
@@ -1886,14 +1847,13 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 			"sw": schema.SingleNestedBlock{
 				MarkdownDescription: "F5XC Software Version. Select the F5XC Software Version for the site. By default, latest available F5XC Software Version will be used. Refer to release notes to find required released SW versions.",
 				Attributes: map[string]schema.Attribute{
 					"volterra_software_version": schema.StringAttribute{
 						MarkdownDescription: "F5XC Software Version. Specify a F5XC Software Version to be used e.g. crt-20210329-1002.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -1901,30 +1861,28 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 					},
 				},
-
 			},
 			"voltstack_cluster": schema.SingleNestedBlock{
 				MarkdownDescription: "GCP App Stack Cluster. App Stack cluster of single interface GCP site",
 				Attributes: map[string]schema.Attribute{
 					"gcp_certified_hw": schema.StringAttribute{
 						MarkdownDescription: "GCP Certified Hardware. Name for GCP certified hardware.",
-						Optional: true,
+						Optional:            true,
 					},
 					"gcp_zone_names": schema.ListAttribute{
 						MarkdownDescription: "GCP zone names. x-required List of zones when instances will be created, needs to match with region selected.",
-						Optional: true,
-						ElementType: types.StringType,
+						Optional:            true,
+						ElementType:         types.StringType,
 					},
 					"node_number": schema.Int64Attribute{
 						MarkdownDescription: "Number of main Nodes. Number of main nodes to create, either 1 or 3.",
-						Optional: true,
+						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"active_enhanced_firewall_policies": schema.SingleNestedBlock{
 						MarkdownDescription: "Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion.",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"enhanced_firewall_policies": schema.ListNestedBlock{
 								MarkdownDescription: "Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active",
@@ -1932,16 +1890,16 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-											Optional: true,
+											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
 											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-											Optional: true,
+											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
@@ -1950,8 +1908,7 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 					},
 					"active_forward_proxy_policies": schema.SingleNestedBlock{
 						MarkdownDescription: "Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"forward_proxy_policies": schema.ListNestedBlock{
 								MarkdownDescription: "Forward Proxy Policies. Ordered List of Forward Proxy Policies active",
@@ -1959,16 +1916,16 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-											Optional: true,
+											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
 											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-											Optional: true,
+											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
@@ -1977,8 +1934,7 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 					},
 					"active_network_policies": schema.SingleNestedBlock{
 						MarkdownDescription: "Active Firewall Policies Type. List of firewall policy views.",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"network_policies": schema.ListNestedBlock{
 								MarkdownDescription: "Firewall Policy. Ordered List of Firewall Policies active for this network firewall",
@@ -1986,16 +1942,16 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-											Optional: true,
+											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
 											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-											Optional: true,
+											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
@@ -2007,16 +1963,16 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
 								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-								Optional: true,
+								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
 								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-								Optional: true,
+								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-								Optional: true,
-								Computed: true,
+								Optional:            true,
+								Computed:            true,
 							},
 						},
 					},
@@ -2028,35 +1984,32 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 					},
 					"global_network_list": schema.SingleNestedBlock{
 						MarkdownDescription: "Global Network Connection List. List of global network connections",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"global_network_connections": schema.ListNestedBlock{
 								MarkdownDescription: "Global Network Connections. Global network connections",
 								NestedObject: schema.NestedBlockObject{
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes: map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"sli_to_global_dr": schema.SingleNestedBlock{
 											MarkdownDescription: "Global Network. Global network reference for direct connection",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"global_vn": schema.SingleNestedBlock{
 													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 													Attributes: map[string]schema.Attribute{
 														"name": schema.StringAttribute{
 															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-															Optional: true,
+															Optional:            true,
 														},
 														"namespace": schema.StringAttribute{
 															MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-															Optional: true,
+															Optional:            true,
 														},
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-															Optional: true,
-															Computed: true,
+															Optional:            true,
+															Computed:            true,
 														},
 													},
 												},
@@ -2064,24 +2017,23 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 										},
 										"slo_to_global_dr": schema.SingleNestedBlock{
 											MarkdownDescription: "Global Network. Global network reference for direct connection",
-											Attributes: map[string]schema.Attribute{
-											},
+											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"global_vn": schema.SingleNestedBlock{
 													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
 													Attributes: map[string]schema.Attribute{
 														"name": schema.StringAttribute{
 															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-															Optional: true,
+															Optional:            true,
 														},
 														"namespace": schema.StringAttribute{
 															MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-															Optional: true,
+															Optional:            true,
 														},
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-															Optional: true,
-															Computed: true,
+															Optional:            true,
+															Computed:            true,
 														},
 													},
 												},
@@ -2097,16 +2049,16 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
 								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-								Optional: true,
+								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
 								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-								Optional: true,
+								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-								Optional: true,
-								Computed: true,
+								Optional:            true,
+								Computed:            true,
 							},
 						},
 					},
@@ -2130,8 +2082,7 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 					},
 					"outside_static_routes": schema.SingleNestedBlock{
 						MarkdownDescription: "Static Route List Type. List of static routes",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"static_route_list": schema.ListNestedBlock{
 								MarkdownDescription: "List of Static Routes. List of Static routes",
@@ -2139,7 +2090,7 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 									Attributes: map[string]schema.Attribute{
 										"simple_static_route": schema.StringAttribute{
 											MarkdownDescription: "Simple Static Route. Use simple static route for prefix pointing to single interface in the network",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -2148,8 +2099,8 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 											Attributes: map[string]schema.Attribute{
 												"attrs": schema.ListAttribute{
 													MarkdownDescription: "Attributes. List of route attributes associated with the static route. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP`.",
-													Optional: true,
-													ElementType: types.StringType,
+													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -2161,7 +2112,7 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 													Attributes: map[string]schema.Attribute{
 														"type": schema.StringAttribute{
 															MarkdownDescription: "Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network. Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`. Defaults to `NEXT_HOP_DEFAULT_GATEWAY`.",
-															Optional: true,
+															Optional:            true,
 														},
 													},
 													Blocks: map[string]schema.Block{
@@ -2171,41 +2122,40 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 																Attributes: map[string]schema.Attribute{
 																	"kind": schema.StringAttribute{
 																		MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-																		Optional: true,
-																		Computed: true,
+																		Optional:            true,
+																		Computed:            true,
 																	},
 																	"name": schema.StringAttribute{
 																		MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"namespace": schema.StringAttribute{
 																		MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"tenant": schema.StringAttribute{
 																		MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-																		Optional: true,
-																		Computed: true,
+																		Optional:            true,
+																		Computed:            true,
 																	},
 																	"uid": schema.StringAttribute{
 																		MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-																		Optional: true,
-																		Computed: true,
+																		Optional:            true,
+																		Computed:            true,
 																	},
 																},
 															},
 														},
 														"nexthop_address": schema.SingleNestedBlock{
 															MarkdownDescription: "IP Address. IP Address used to specify an IPv4 or IPv6 address",
-															Attributes: map[string]schema.Attribute{
-															},
+															Attributes:          map[string]schema.Attribute{},
 															Blocks: map[string]schema.Block{
 																"ipv4": schema.SingleNestedBlock{
 																	MarkdownDescription: "IPv4 Address. IPv4 Address in dot-decimal notation",
 																	Attributes: map[string]schema.Attribute{
 																		"addr": schema.StringAttribute{
 																			MarkdownDescription: "IPv4 Address. IPv4 Address in string form with dot-decimal notation",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																	},
 																},
@@ -2214,7 +2164,7 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 																	Attributes: map[string]schema.Attribute{
 																		"addr": schema.StringAttribute{
 																			MarkdownDescription: "IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'",
-																			Optional: true,
+																			Optional:            true,
 																		},
 																	},
 																},
@@ -2225,19 +2175,18 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 												"subnets": schema.ListNestedBlock{
 													MarkdownDescription: "Subnets. List of route prefixes",
 													NestedObject: schema.NestedBlockObject{
-														Attributes: map[string]schema.Attribute{
-														},
+														Attributes: map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"ipv4": schema.SingleNestedBlock{
 																MarkdownDescription: "IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32",
 																Attributes: map[string]schema.Attribute{
 																	"plen": schema.Int64Attribute{
 																		MarkdownDescription: "Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"prefix": schema.StringAttribute{
 																		MarkdownDescription: "Prefix. Prefix part of the IPv4 subnet in string form with dot-decimal notation",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 															},
@@ -2246,11 +2195,11 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 																Attributes: map[string]schema.Attribute{
 																	"plen": schema.Int64Attribute{
 																		MarkdownDescription: "Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																	"prefix": schema.StringAttribute{
 																		MarkdownDescription: "Prefix. Prefix part of the IPv6 subnet given in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' e.g. '2001:db8:0:0:0:2:0:0' The address can be compacted by suppressing zeros e.g. '2001:db8::2::'",
-																		Optional: true,
+																		Optional:            true,
 																	},
 																},
 															},
@@ -2266,15 +2215,14 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 					},
 					"site_local_network": schema.SingleNestedBlock{
 						MarkdownDescription: "GCP VPC network choice. This defines choice about GCP VPC network for a view",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"existing_network": schema.SingleNestedBlock{
 								MarkdownDescription: "GCP existing VPC network Type. Name of existing VPC network",
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
 										MarkdownDescription: "GCP VPC Network Name. Name for your GCP VPC Network",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -2283,7 +2231,7 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
 										MarkdownDescription: "GCP VPC Network Name. Name for your GCP VPC Network",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -2294,15 +2242,14 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 					},
 					"site_local_subnet": schema.SingleNestedBlock{
 						MarkdownDescription: "GCP VPC network choice. This defines choice about GCP VPC network for a view",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"existing_subnet": schema.SingleNestedBlock{
 								MarkdownDescription: "GCP existing subnet Type. Name of existing gcp subnet",
 								Attributes: map[string]schema.Attribute{
 									"subnet_name": schema.StringAttribute{
 										MarkdownDescription: "VPC Subnet Name. Name of your subnet in VPC network",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -2311,11 +2258,11 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 								Attributes: map[string]schema.Attribute{
 									"primary_ipv4": schema.StringAttribute{
 										MarkdownDescription: "IPv4 Subnet Prefix. IPv4 prefix for this Subnet. It has to be private address space.",
-										Optional: true,
+										Optional:            true,
 									},
 									"subnet_name": schema.StringAttribute{
 										MarkdownDescription: "VPC Subnet Name. Name of new VPC Subnet, will be autogenerated if empty",
-										Optional: true,
+										Optional:            true,
 									},
 								},
 							},
@@ -2329,8 +2276,7 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 					},
 					"storage_class_list": schema.SingleNestedBlock{
 						MarkdownDescription: "Custom Storage Class List. Add additional custom storage classes in kubernetes for this site",
-						Attributes: map[string]schema.Attribute{
-						},
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"storage_classes": schema.ListNestedBlock{
 								MarkdownDescription: "List of Storage Classes. List of custom storage classes",
@@ -2338,11 +2284,11 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 									Attributes: map[string]schema.Attribute{
 										"default_storage_class": schema.BoolAttribute{
 											MarkdownDescription: "Default Storage Class. Make this storage class default storage class for the K8s cluster",
-											Optional: true,
+											Optional:            true,
 										},
 										"storage_class_name": schema.StringAttribute{
 											MarkdownDescription: "Storage Class Name. Name of the storage class as it will appear in K8s.",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 								},
@@ -2350,7 +2296,6 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 				},
-
 			},
 		},
 	}
@@ -2951,7 +2896,6 @@ func (r *GCPVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 		createReq.Spec["ssh_key"] = data.SSHKey.ValueString()
 	}
 
-
 	apiResource, err := r.client.CreateGCPVPCSite(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create GCPVPCSite: %s", err))
@@ -2963,7 +2907,7 @@ func (r *GCPVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if _, ok := apiResource.Spec["admin_password"].(map[string]interface{}); ok && isImport && data.AdminPassword == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.AdminPassword = &GCPVPCSiteAdminPasswordModel{}
@@ -3088,8 +3032,7 @@ func (r *GCPVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				// Import case: read from API
 				if _, ok := blockData["active_enhanced_firewall_policies"].(map[string]interface{}); ok {
-					return &GCPVPCSiteIngressEgressGwActiveEnhancedFirewallPoliciesModel{
-					}
+					return &GCPVPCSiteIngressEgressGwActiveEnhancedFirewallPoliciesModel{}
 				}
 				return nil
 			}(),
@@ -3100,8 +3043,7 @@ func (r *GCPVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				// Import case: read from API
 				if _, ok := blockData["active_forward_proxy_policies"].(map[string]interface{}); ok {
-					return &GCPVPCSiteIngressEgressGwActiveForwardProxyPoliciesModel{
-					}
+					return &GCPVPCSiteIngressEgressGwActiveForwardProxyPoliciesModel{}
 				}
 				return nil
 			}(),
@@ -3112,8 +3054,7 @@ func (r *GCPVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				// Import case: read from API
 				if _, ok := blockData["active_network_policies"].(map[string]interface{}); ok {
-					return &GCPVPCSiteIngressEgressGwActiveNetworkPoliciesModel{
-					}
+					return &GCPVPCSiteIngressEgressGwActiveNetworkPoliciesModel{}
 				}
 				return nil
 			}(),
@@ -3215,8 +3156,7 @@ func (r *GCPVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				// Import case: read from API
 				if _, ok := blockData["global_network_list"].(map[string]interface{}); ok {
-					return &GCPVPCSiteIngressEgressGwGlobalNetworkListModel{
-					}
+					return &GCPVPCSiteIngressEgressGwGlobalNetworkListModel{}
 				}
 				return nil
 			}(),
@@ -3227,8 +3167,7 @@ func (r *GCPVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				// Import case: read from API
 				if _, ok := blockData["inside_network"].(map[string]interface{}); ok {
-					return &GCPVPCSiteIngressEgressGwInsideNetworkModel{
-					}
+					return &GCPVPCSiteIngressEgressGwInsideNetworkModel{}
 				}
 				return nil
 			}(),
@@ -3239,8 +3178,7 @@ func (r *GCPVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				// Import case: read from API
 				if _, ok := blockData["inside_static_routes"].(map[string]interface{}); ok {
-					return &GCPVPCSiteIngressEgressGwInsideStaticRoutesModel{
-					}
+					return &GCPVPCSiteIngressEgressGwInsideStaticRoutesModel{}
 				}
 				return nil
 			}(),
@@ -3251,8 +3189,7 @@ func (r *GCPVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				// Import case: read from API
 				if _, ok := blockData["inside_subnet"].(map[string]interface{}); ok {
-					return &GCPVPCSiteIngressEgressGwInsideSubnetModel{
-					}
+					return &GCPVPCSiteIngressEgressGwInsideSubnetModel{}
 				}
 				return nil
 			}(),
@@ -3341,8 +3278,7 @@ func (r *GCPVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				// Import case: read from API
 				if _, ok := blockData["outside_network"].(map[string]interface{}); ok {
-					return &GCPVPCSiteIngressEgressGwOutsideNetworkModel{
-					}
+					return &GCPVPCSiteIngressEgressGwOutsideNetworkModel{}
 				}
 				return nil
 			}(),
@@ -3353,8 +3289,7 @@ func (r *GCPVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				// Import case: read from API
 				if _, ok := blockData["outside_static_routes"].(map[string]interface{}); ok {
-					return &GCPVPCSiteIngressEgressGwOutsideStaticRoutesModel{
-					}
+					return &GCPVPCSiteIngressEgressGwOutsideStaticRoutesModel{}
 				}
 				return nil
 			}(),
@@ -3365,8 +3300,7 @@ func (r *GCPVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				// Import case: read from API
 				if _, ok := blockData["outside_subnet"].(map[string]interface{}); ok {
-					return &GCPVPCSiteIngressEgressGwOutsideSubnetModel{
-					}
+					return &GCPVPCSiteIngressEgressGwOutsideSubnetModel{}
 				}
 				return nil
 			}(),
@@ -3377,8 +3311,7 @@ func (r *GCPVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				// Import case: read from API
 				if _, ok := blockData["performance_enhancement_mode"].(map[string]interface{}); ok {
-					return &GCPVPCSiteIngressEgressGwPerformanceEnhancementModeModel{
-					}
+					return &GCPVPCSiteIngressEgressGwPerformanceEnhancementModeModel{}
 				}
 				return nil
 			}(),
@@ -3436,8 +3369,7 @@ func (r *GCPVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				// Import case: read from API
 				if _, ok := blockData["local_network"].(map[string]interface{}); ok {
-					return &GCPVPCSiteIngressGwLocalNetworkModel{
-					}
+					return &GCPVPCSiteIngressGwLocalNetworkModel{}
 				}
 				return nil
 			}(),
@@ -3448,8 +3380,7 @@ func (r *GCPVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				// Import case: read from API
 				if _, ok := blockData["local_subnet"].(map[string]interface{}); ok {
-					return &GCPVPCSiteIngressGwLocalSubnetModel{
-					}
+					return &GCPVPCSiteIngressGwLocalSubnetModel{}
 				}
 				return nil
 			}(),
@@ -3466,8 +3397,7 @@ func (r *GCPVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				// Import case: read from API
 				if _, ok := blockData["performance_enhancement_mode"].(map[string]interface{}); ok {
-					return &GCPVPCSiteIngressGwPerformanceEnhancementModeModel{
-					}
+					return &GCPVPCSiteIngressGwPerformanceEnhancementModeModel{}
 				}
 				return nil
 			}(),
@@ -3573,8 +3503,7 @@ func (r *GCPVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				// Import case: read from API
 				if _, ok := blockData["active_enhanced_firewall_policies"].(map[string]interface{}); ok {
-					return &GCPVPCSiteVoltstackClusterActiveEnhancedFirewallPoliciesModel{
-					}
+					return &GCPVPCSiteVoltstackClusterActiveEnhancedFirewallPoliciesModel{}
 				}
 				return nil
 			}(),
@@ -3585,8 +3514,7 @@ func (r *GCPVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				// Import case: read from API
 				if _, ok := blockData["active_forward_proxy_policies"].(map[string]interface{}); ok {
-					return &GCPVPCSiteVoltstackClusterActiveForwardProxyPoliciesModel{
-					}
+					return &GCPVPCSiteVoltstackClusterActiveForwardProxyPoliciesModel{}
 				}
 				return nil
 			}(),
@@ -3597,8 +3525,7 @@ func (r *GCPVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				// Import case: read from API
 				if _, ok := blockData["active_network_policies"].(map[string]interface{}); ok {
-					return &GCPVPCSiteVoltstackClusterActiveNetworkPoliciesModel{
-					}
+					return &GCPVPCSiteVoltstackClusterActiveNetworkPoliciesModel{}
 				}
 				return nil
 			}(),
@@ -3682,8 +3609,7 @@ func (r *GCPVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				// Import case: read from API
 				if _, ok := blockData["global_network_list"].(map[string]interface{}); ok {
-					return &GCPVPCSiteVoltstackClusterGlobalNetworkListModel{
-					}
+					return &GCPVPCSiteVoltstackClusterGlobalNetworkListModel{}
 				}
 				return nil
 			}(),
@@ -3802,8 +3728,7 @@ func (r *GCPVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				// Import case: read from API
 				if _, ok := blockData["outside_static_routes"].(map[string]interface{}); ok {
-					return &GCPVPCSiteVoltstackClusterOutsideStaticRoutesModel{
-					}
+					return &GCPVPCSiteVoltstackClusterOutsideStaticRoutesModel{}
 				}
 				return nil
 			}(),
@@ -3814,8 +3739,7 @@ func (r *GCPVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				// Import case: read from API
 				if _, ok := blockData["site_local_network"].(map[string]interface{}); ok {
-					return &GCPVPCSiteVoltstackClusterSiteLocalNetworkModel{
-					}
+					return &GCPVPCSiteVoltstackClusterSiteLocalNetworkModel{}
 				}
 				return nil
 			}(),
@@ -3826,8 +3750,7 @@ func (r *GCPVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				// Import case: read from API
 				if _, ok := blockData["site_local_subnet"].(map[string]interface{}); ok {
-					return &GCPVPCSiteVoltstackClusterSiteLocalSubnetModel{
-					}
+					return &GCPVPCSiteVoltstackClusterSiteLocalSubnetModel{}
 				}
 				return nil
 			}(),
@@ -3862,8 +3785,7 @@ func (r *GCPVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 				}
 				// Import case: read from API
 				if _, ok := blockData["storage_class_list"].(map[string]interface{}); ok {
-					return &GCPVPCSiteVoltstackClusterStorageClassListModel{
-					}
+					return &GCPVPCSiteVoltstackClusterStorageClassListModel{}
 				}
 				return nil
 			}(),
@@ -3894,7 +3816,6 @@ func (r *GCPVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 	} else {
 		data.SSHKey = types.StringNull()
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -3984,9 +3905,9 @@ func (r *GCPVPCSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if _, ok := apiResource.Spec["admin_password"].(map[string]interface{}); ok && isImport && data.AdminPassword == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -4112,8 +4033,7 @@ func (r *GCPVPCSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				// Import case: read from API
 				if _, ok := blockData["active_enhanced_firewall_policies"].(map[string]interface{}); ok {
-					return &GCPVPCSiteIngressEgressGwActiveEnhancedFirewallPoliciesModel{
-					}
+					return &GCPVPCSiteIngressEgressGwActiveEnhancedFirewallPoliciesModel{}
 				}
 				return nil
 			}(),
@@ -4124,8 +4044,7 @@ func (r *GCPVPCSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				// Import case: read from API
 				if _, ok := blockData["active_forward_proxy_policies"].(map[string]interface{}); ok {
-					return &GCPVPCSiteIngressEgressGwActiveForwardProxyPoliciesModel{
-					}
+					return &GCPVPCSiteIngressEgressGwActiveForwardProxyPoliciesModel{}
 				}
 				return nil
 			}(),
@@ -4136,8 +4055,7 @@ func (r *GCPVPCSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				// Import case: read from API
 				if _, ok := blockData["active_network_policies"].(map[string]interface{}); ok {
-					return &GCPVPCSiteIngressEgressGwActiveNetworkPoliciesModel{
-					}
+					return &GCPVPCSiteIngressEgressGwActiveNetworkPoliciesModel{}
 				}
 				return nil
 			}(),
@@ -4239,8 +4157,7 @@ func (r *GCPVPCSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				// Import case: read from API
 				if _, ok := blockData["global_network_list"].(map[string]interface{}); ok {
-					return &GCPVPCSiteIngressEgressGwGlobalNetworkListModel{
-					}
+					return &GCPVPCSiteIngressEgressGwGlobalNetworkListModel{}
 				}
 				return nil
 			}(),
@@ -4251,8 +4168,7 @@ func (r *GCPVPCSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				// Import case: read from API
 				if _, ok := blockData["inside_network"].(map[string]interface{}); ok {
-					return &GCPVPCSiteIngressEgressGwInsideNetworkModel{
-					}
+					return &GCPVPCSiteIngressEgressGwInsideNetworkModel{}
 				}
 				return nil
 			}(),
@@ -4263,8 +4179,7 @@ func (r *GCPVPCSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				// Import case: read from API
 				if _, ok := blockData["inside_static_routes"].(map[string]interface{}); ok {
-					return &GCPVPCSiteIngressEgressGwInsideStaticRoutesModel{
-					}
+					return &GCPVPCSiteIngressEgressGwInsideStaticRoutesModel{}
 				}
 				return nil
 			}(),
@@ -4275,8 +4190,7 @@ func (r *GCPVPCSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				// Import case: read from API
 				if _, ok := blockData["inside_subnet"].(map[string]interface{}); ok {
-					return &GCPVPCSiteIngressEgressGwInsideSubnetModel{
-					}
+					return &GCPVPCSiteIngressEgressGwInsideSubnetModel{}
 				}
 				return nil
 			}(),
@@ -4365,8 +4279,7 @@ func (r *GCPVPCSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				// Import case: read from API
 				if _, ok := blockData["outside_network"].(map[string]interface{}); ok {
-					return &GCPVPCSiteIngressEgressGwOutsideNetworkModel{
-					}
+					return &GCPVPCSiteIngressEgressGwOutsideNetworkModel{}
 				}
 				return nil
 			}(),
@@ -4377,8 +4290,7 @@ func (r *GCPVPCSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				// Import case: read from API
 				if _, ok := blockData["outside_static_routes"].(map[string]interface{}); ok {
-					return &GCPVPCSiteIngressEgressGwOutsideStaticRoutesModel{
-					}
+					return &GCPVPCSiteIngressEgressGwOutsideStaticRoutesModel{}
 				}
 				return nil
 			}(),
@@ -4389,8 +4301,7 @@ func (r *GCPVPCSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				// Import case: read from API
 				if _, ok := blockData["outside_subnet"].(map[string]interface{}); ok {
-					return &GCPVPCSiteIngressEgressGwOutsideSubnetModel{
-					}
+					return &GCPVPCSiteIngressEgressGwOutsideSubnetModel{}
 				}
 				return nil
 			}(),
@@ -4401,8 +4312,7 @@ func (r *GCPVPCSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				// Import case: read from API
 				if _, ok := blockData["performance_enhancement_mode"].(map[string]interface{}); ok {
-					return &GCPVPCSiteIngressEgressGwPerformanceEnhancementModeModel{
-					}
+					return &GCPVPCSiteIngressEgressGwPerformanceEnhancementModeModel{}
 				}
 				return nil
 			}(),
@@ -4460,8 +4370,7 @@ func (r *GCPVPCSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				// Import case: read from API
 				if _, ok := blockData["local_network"].(map[string]interface{}); ok {
-					return &GCPVPCSiteIngressGwLocalNetworkModel{
-					}
+					return &GCPVPCSiteIngressGwLocalNetworkModel{}
 				}
 				return nil
 			}(),
@@ -4472,8 +4381,7 @@ func (r *GCPVPCSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				// Import case: read from API
 				if _, ok := blockData["local_subnet"].(map[string]interface{}); ok {
-					return &GCPVPCSiteIngressGwLocalSubnetModel{
-					}
+					return &GCPVPCSiteIngressGwLocalSubnetModel{}
 				}
 				return nil
 			}(),
@@ -4490,8 +4398,7 @@ func (r *GCPVPCSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				// Import case: read from API
 				if _, ok := blockData["performance_enhancement_mode"].(map[string]interface{}); ok {
-					return &GCPVPCSiteIngressGwPerformanceEnhancementModeModel{
-					}
+					return &GCPVPCSiteIngressGwPerformanceEnhancementModeModel{}
 				}
 				return nil
 			}(),
@@ -4597,8 +4504,7 @@ func (r *GCPVPCSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				// Import case: read from API
 				if _, ok := blockData["active_enhanced_firewall_policies"].(map[string]interface{}); ok {
-					return &GCPVPCSiteVoltstackClusterActiveEnhancedFirewallPoliciesModel{
-					}
+					return &GCPVPCSiteVoltstackClusterActiveEnhancedFirewallPoliciesModel{}
 				}
 				return nil
 			}(),
@@ -4609,8 +4515,7 @@ func (r *GCPVPCSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				// Import case: read from API
 				if _, ok := blockData["active_forward_proxy_policies"].(map[string]interface{}); ok {
-					return &GCPVPCSiteVoltstackClusterActiveForwardProxyPoliciesModel{
-					}
+					return &GCPVPCSiteVoltstackClusterActiveForwardProxyPoliciesModel{}
 				}
 				return nil
 			}(),
@@ -4621,8 +4526,7 @@ func (r *GCPVPCSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				// Import case: read from API
 				if _, ok := blockData["active_network_policies"].(map[string]interface{}); ok {
-					return &GCPVPCSiteVoltstackClusterActiveNetworkPoliciesModel{
-					}
+					return &GCPVPCSiteVoltstackClusterActiveNetworkPoliciesModel{}
 				}
 				return nil
 			}(),
@@ -4706,8 +4610,7 @@ func (r *GCPVPCSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				// Import case: read from API
 				if _, ok := blockData["global_network_list"].(map[string]interface{}); ok {
-					return &GCPVPCSiteVoltstackClusterGlobalNetworkListModel{
-					}
+					return &GCPVPCSiteVoltstackClusterGlobalNetworkListModel{}
 				}
 				return nil
 			}(),
@@ -4826,8 +4729,7 @@ func (r *GCPVPCSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				// Import case: read from API
 				if _, ok := blockData["outside_static_routes"].(map[string]interface{}); ok {
-					return &GCPVPCSiteVoltstackClusterOutsideStaticRoutesModel{
-					}
+					return &GCPVPCSiteVoltstackClusterOutsideStaticRoutesModel{}
 				}
 				return nil
 			}(),
@@ -4838,8 +4740,7 @@ func (r *GCPVPCSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				// Import case: read from API
 				if _, ok := blockData["site_local_network"].(map[string]interface{}); ok {
-					return &GCPVPCSiteVoltstackClusterSiteLocalNetworkModel{
-					}
+					return &GCPVPCSiteVoltstackClusterSiteLocalNetworkModel{}
 				}
 				return nil
 			}(),
@@ -4850,8 +4751,7 @@ func (r *GCPVPCSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				// Import case: read from API
 				if _, ok := blockData["site_local_subnet"].(map[string]interface{}); ok {
-					return &GCPVPCSiteVoltstackClusterSiteLocalSubnetModel{
-					}
+					return &GCPVPCSiteVoltstackClusterSiteLocalSubnetModel{}
 				}
 				return nil
 			}(),
@@ -4886,8 +4786,7 @@ func (r *GCPVPCSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				// Import case: read from API
 				if _, ok := blockData["storage_class_list"].(map[string]interface{}); ok {
-					return &GCPVPCSiteVoltstackClusterStorageClassListModel{
-					}
+					return &GCPVPCSiteVoltstackClusterStorageClassListModel{}
 				}
 				return nil
 			}(),
@@ -4918,7 +4817,6 @@ func (r *GCPVPCSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 	} else {
 		data.SSHKey = types.StringNull()
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -5429,7 +5327,6 @@ func (r *GCPVPCSiteResource) Update(ctx context.Context, req resource.UpdateRequ
 	if !data.SSHKey.IsNull() && !data.SSHKey.IsUnknown() {
 		apiResource.Spec["ssh_key"] = data.SSHKey.ValueString()
 	}
-
 
 	updated, err := r.client.UpdateGCPVPCSite(ctx, apiResource)
 	if err != nil {

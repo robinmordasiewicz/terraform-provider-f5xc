@@ -57,32 +57,32 @@ type MaliciousUserMitigationMitigationTypeModel struct {
 // MaliciousUserMitigationMitigationTypeRulesModel represents rules block
 type MaliciousUserMitigationMitigationTypeRulesModel struct {
 	MitigationAction *MaliciousUserMitigationMitigationTypeRulesMitigationActionModel `tfsdk:"mitigation_action"`
-	ThreatLevel *MaliciousUserMitigationMitigationTypeRulesThreatLevelModel `tfsdk:"threat_level"`
+	ThreatLevel      *MaliciousUserMitigationMitigationTypeRulesThreatLevelModel      `tfsdk:"threat_level"`
 }
 
 // MaliciousUserMitigationMitigationTypeRulesMitigationActionModel represents mitigation_action block
 type MaliciousUserMitigationMitigationTypeRulesMitigationActionModel struct {
-	BlockTemporarily *MaliciousUserMitigationEmptyModel `tfsdk:"block_temporarily"`
-	CaptchaChallenge *MaliciousUserMitigationEmptyModel `tfsdk:"captcha_challenge"`
+	BlockTemporarily    *MaliciousUserMitigationEmptyModel `tfsdk:"block_temporarily"`
+	CaptchaChallenge    *MaliciousUserMitigationEmptyModel `tfsdk:"captcha_challenge"`
 	JavascriptChallenge *MaliciousUserMitigationEmptyModel `tfsdk:"javascript_challenge"`
 }
 
 // MaliciousUserMitigationMitigationTypeRulesThreatLevelModel represents threat_level block
 type MaliciousUserMitigationMitigationTypeRulesThreatLevelModel struct {
-	High *MaliciousUserMitigationEmptyModel `tfsdk:"high"`
-	Low *MaliciousUserMitigationEmptyModel `tfsdk:"low"`
+	High   *MaliciousUserMitigationEmptyModel `tfsdk:"high"`
+	Low    *MaliciousUserMitigationEmptyModel `tfsdk:"low"`
 	Medium *MaliciousUserMitigationEmptyModel `tfsdk:"medium"`
 }
 
 type MaliciousUserMitigationResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Name           types.String                                `tfsdk:"name"`
+	Namespace      types.String                                `tfsdk:"namespace"`
+	Annotations    types.Map                                   `tfsdk:"annotations"`
+	Description    types.String                                `tfsdk:"description"`
+	Disable        types.Bool                                  `tfsdk:"disable"`
+	Labels         types.Map                                   `tfsdk:"labels"`
+	ID             types.String                                `tfsdk:"id"`
+	Timeouts       timeouts.Value                              `tfsdk:"timeouts"`
 	MitigationType *MaliciousUserMitigationMitigationTypeModel `tfsdk:"mitigation_type"`
 }
 
@@ -97,7 +97,7 @@ func (r *MaliciousUserMitigationResource) Schema(ctx context.Context, req resour
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the MaliciousUserMitigation. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -107,7 +107,7 @@ func (r *MaliciousUserMitigationResource) Schema(ctx context.Context, req resour
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the MaliciousUserMitigation will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -117,25 +117,25 @@ func (r *MaliciousUserMitigationResource) Schema(ctx context.Context, req resour
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -150,19 +150,16 @@ func (r *MaliciousUserMitigationResource) Schema(ctx context.Context, req resour
 			}),
 			"mitigation_type": schema.SingleNestedBlock{
 				MarkdownDescription: "Malicious User Mitigation Settings. Settings that specify the actions to be taken when malicious users are determined to be at different threat levels. User's activity is monitored and continuously analyzed for malicious behavior. From this analysis, a threat-level is assigned to each user. The settings defined in malicious user mitigation specify what mitigation actions to take for user determined to be at different threat levels.",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"rules": schema.ListNestedBlock{
 						MarkdownDescription: "Rules. Define the threat levels and the corresponding mitigation actions to be taken",
 						NestedObject: schema.NestedBlockObject{
-							Attributes: map[string]schema.Attribute{
-							},
+							Attributes: map[string]schema.Attribute{},
 							Blocks: map[string]schema.Block{
 								"mitigation_action": schema.SingleNestedBlock{
 									MarkdownDescription: "Malicious User Mitigation Action. Supported actions that can be taken to mitigate malicious activity from a user",
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"block_temporarily": schema.SingleNestedBlock{
 											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -177,8 +174,7 @@ func (r *MaliciousUserMitigationResource) Schema(ctx context.Context, req resour
 								},
 								"threat_level": schema.SingleNestedBlock{
 									MarkdownDescription: "Malicious User Threat Level. Threat level estimated for each user based on the user's activity and reputation",
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"high": schema.SingleNestedBlock{
 											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -195,7 +191,6 @@ func (r *MaliciousUserMitigationResource) Schema(ctx context.Context, req resour
 						},
 					},
 				},
-
 			},
 		},
 	}
@@ -384,7 +379,6 @@ func (r *MaliciousUserMitigationResource) Create(ctx context.Context, req resour
 		createReq.Spec["mitigation_type"] = mitigation_typeMap
 	}
 
-
 	apiResource, err := r.client.CreateMaliciousUserMitigation(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create MaliciousUserMitigation: %s", err))
@@ -396,7 +390,7 @@ func (r *MaliciousUserMitigationResource) Create(ctx context.Context, req resour
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if blockData, ok := apiResource.Spec["mitigation_type"].(map[string]interface{}); ok && (isImport || data.MitigationType != nil) {
 		data.MitigationType = &MaliciousUserMitigationMitigationTypeModel{
 			Rules: func() []MaliciousUserMitigationMitigationTypeRulesModel {
@@ -464,7 +458,6 @@ func (r *MaliciousUserMitigationResource) Create(ctx context.Context, req resour
 			}(),
 		}
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -554,9 +547,9 @@ func (r *MaliciousUserMitigationResource) Read(ctx context.Context, req resource
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if blockData, ok := apiResource.Spec["mitigation_type"].(map[string]interface{}); ok && (isImport || data.MitigationType != nil) {
 		data.MitigationType = &MaliciousUserMitigationMitigationTypeModel{
@@ -625,7 +618,6 @@ func (r *MaliciousUserMitigationResource) Read(ctx context.Context, req resource
 			}(),
 		}
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -724,7 +716,6 @@ func (r *MaliciousUserMitigationResource) Update(ctx context.Context, req resour
 		}
 		apiResource.Spec["mitigation_type"] = mitigation_typeMap
 	}
-
 
 	updated, err := r.client.UpdateMaliciousUserMitigation(ctx, apiResource)
 	if err != nil {

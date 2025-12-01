@@ -56,19 +56,19 @@ type CRLHTTPAccessModel struct {
 }
 
 type CRLResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	RefreshInterval types.Int64 `tfsdk:"refresh_interval"`
-	ServerAddress types.String `tfsdk:"server_address"`
-	ServerPort types.Int64 `tfsdk:"server_port"`
-	Timeout types.Int64 `tfsdk:"timeout"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	HTTPAccess *CRLHTTPAccessModel `tfsdk:"http_access"`
+	Name            types.String        `tfsdk:"name"`
+	Namespace       types.String        `tfsdk:"namespace"`
+	Annotations     types.Map           `tfsdk:"annotations"`
+	Description     types.String        `tfsdk:"description"`
+	Disable         types.Bool          `tfsdk:"disable"`
+	Labels          types.Map           `tfsdk:"labels"`
+	ID              types.String        `tfsdk:"id"`
+	RefreshInterval types.Int64         `tfsdk:"refresh_interval"`
+	ServerAddress   types.String        `tfsdk:"server_address"`
+	ServerPort      types.Int64         `tfsdk:"server_port"`
+	Timeout         types.Int64         `tfsdk:"timeout"`
+	Timeouts        timeouts.Value      `tfsdk:"timeouts"`
+	HTTPAccess      *CRLHTTPAccessModel `tfsdk:"http_access"`
 }
 
 func (r *CRLResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -82,7 +82,7 @@ func (r *CRLResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the CRL. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -92,7 +92,7 @@ func (r *CRLResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the CRL will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -102,57 +102,57 @@ func (r *CRLResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"refresh_interval": schema.Int64Attribute{
 				MarkdownDescription: "CRL Refresh interval. CRL refresh interval, in hours.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{
 					int64planmodifier.UseStateForUnknown(),
 				},
 			},
 			"server_address": schema.StringAttribute{
 				MarkdownDescription: "CRL Server address. CRL server address or hostname",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"server_port": schema.Int64Attribute{
 				MarkdownDescription: "CRL Server Port. Set CRL Server port number",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{
 					int64planmodifier.UseStateForUnknown(),
 				},
 			},
 			"timeout": schema.Int64Attribute{
 				MarkdownDescription: "CRL download timeout. CRL download wait time, in seconds",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{
 					int64planmodifier.UseStateForUnknown(),
 				},
@@ -170,10 +170,9 @@ func (r *CRLResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 				Attributes: map[string]schema.Attribute{
 					"path": schema.StringAttribute{
 						MarkdownDescription: "CRL File path. CRL file location",
-						Optional: true,
+						Optional:            true,
 					},
 				},
-
 			},
 		},
 	}
@@ -343,7 +342,6 @@ func (r *CRLResource) Create(ctx context.Context, req resource.CreateRequest, re
 		createReq.Spec["timeout"] = data.Timeout.ValueInt64()
 	}
 
-
 	apiResource, err := r.client.CreateCRL(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create CRL: %s", err))
@@ -355,7 +353,7 @@ func (r *CRLResource) Create(ctx context.Context, req resource.CreateRequest, re
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if blockData, ok := apiResource.Spec["http_access"].(map[string]interface{}); ok && (isImport || data.HTTPAccess != nil) {
 		data.HTTPAccess = &CRLHTTPAccessModel{
 			Path: func() types.String {
@@ -386,7 +384,6 @@ func (r *CRLResource) Create(ctx context.Context, req resource.CreateRequest, re
 	} else {
 		data.Timeout = types.Int64Null()
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -476,9 +473,9 @@ func (r *CRLResource) Read(ctx context.Context, req resource.ReadRequest, resp *
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if blockData, ok := apiResource.Spec["http_access"].(map[string]interface{}); ok && (isImport || data.HTTPAccess != nil) {
 		data.HTTPAccess = &CRLHTTPAccessModel{
@@ -510,7 +507,6 @@ func (r *CRLResource) Read(ctx context.Context, req resource.ReadRequest, resp *
 	} else {
 		data.Timeout = types.Int64Null()
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -590,7 +586,6 @@ func (r *CRLResource) Update(ctx context.Context, req resource.UpdateRequest, re
 	if !data.Timeout.IsNull() && !data.Timeout.IsUnknown() {
 		apiResource.Spec["timeout"] = data.Timeout.ValueInt64()
 	}
-
 
 	updated, err := r.client.UpdateCRL(ctx, apiResource)
 	if err != nil {

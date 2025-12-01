@@ -52,32 +52,32 @@ type RateLimiterPolicyEmptyModel struct {
 // RateLimiterPolicyRulesModel represents rules block
 type RateLimiterPolicyRulesModel struct {
 	Metadata *RateLimiterPolicyRulesMetadataModel `tfsdk:"metadata"`
-	Spec *RateLimiterPolicyRulesSpecModel `tfsdk:"spec"`
+	Spec     *RateLimiterPolicyRulesSpecModel     `tfsdk:"spec"`
 }
 
 // RateLimiterPolicyRulesMetadataModel represents metadata block
 type RateLimiterPolicyRulesMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
-	Name types.String `tfsdk:"name"`
+	Name            types.String `tfsdk:"name"`
 }
 
 // RateLimiterPolicyRulesSpecModel represents spec block
 type RateLimiterPolicyRulesSpecModel struct {
-	AnyAsn *RateLimiterPolicyEmptyModel `tfsdk:"any_asn"`
-	AnyCountry *RateLimiterPolicyEmptyModel `tfsdk:"any_country"`
-	AnyIP *RateLimiterPolicyEmptyModel `tfsdk:"any_ip"`
-	ApplyRateLimiter *RateLimiterPolicyEmptyModel `tfsdk:"apply_rate_limiter"`
-	AsnList *RateLimiterPolicyRulesSpecAsnListModel `tfsdk:"asn_list"`
-	AsnMatcher *RateLimiterPolicyRulesSpecAsnMatcherModel `tfsdk:"asn_matcher"`
-	BypassRateLimiter *RateLimiterPolicyEmptyModel `tfsdk:"bypass_rate_limiter"`
-	CountryList *RateLimiterPolicyRulesSpecCountryListModel `tfsdk:"country_list"`
+	AnyAsn            *RateLimiterPolicyEmptyModel                      `tfsdk:"any_asn"`
+	AnyCountry        *RateLimiterPolicyEmptyModel                      `tfsdk:"any_country"`
+	AnyIP             *RateLimiterPolicyEmptyModel                      `tfsdk:"any_ip"`
+	ApplyRateLimiter  *RateLimiterPolicyEmptyModel                      `tfsdk:"apply_rate_limiter"`
+	AsnList           *RateLimiterPolicyRulesSpecAsnListModel           `tfsdk:"asn_list"`
+	AsnMatcher        *RateLimiterPolicyRulesSpecAsnMatcherModel        `tfsdk:"asn_matcher"`
+	BypassRateLimiter *RateLimiterPolicyEmptyModel                      `tfsdk:"bypass_rate_limiter"`
+	CountryList       *RateLimiterPolicyRulesSpecCountryListModel       `tfsdk:"country_list"`
 	CustomRateLimiter *RateLimiterPolicyRulesSpecCustomRateLimiterModel `tfsdk:"custom_rate_limiter"`
-	DomainMatcher *RateLimiterPolicyRulesSpecDomainMatcherModel `tfsdk:"domain_matcher"`
-	Headers []RateLimiterPolicyRulesSpecHeadersModel `tfsdk:"headers"`
-	HTTPMethod *RateLimiterPolicyRulesSpecHTTPMethodModel `tfsdk:"http_method"`
-	IPMatcher *RateLimiterPolicyRulesSpecIPMatcherModel `tfsdk:"ip_matcher"`
-	IPPrefixList *RateLimiterPolicyRulesSpecIPPrefixListModel `tfsdk:"ip_prefix_list"`
-	Path *RateLimiterPolicyRulesSpecPathModel `tfsdk:"path"`
+	DomainMatcher     *RateLimiterPolicyRulesSpecDomainMatcherModel     `tfsdk:"domain_matcher"`
+	Headers           []RateLimiterPolicyRulesSpecHeadersModel          `tfsdk:"headers"`
+	HTTPMethod        *RateLimiterPolicyRulesSpecHTTPMethodModel        `tfsdk:"http_method"`
+	IPMatcher         *RateLimiterPolicyRulesSpecIPMatcherModel         `tfsdk:"ip_matcher"`
+	IPPrefixList      *RateLimiterPolicyRulesSpecIPPrefixListModel      `tfsdk:"ip_prefix_list"`
+	Path              *RateLimiterPolicyRulesSpecPathModel              `tfsdk:"path"`
 }
 
 // RateLimiterPolicyRulesSpecAsnListModel represents asn_list block
@@ -92,24 +92,24 @@ type RateLimiterPolicyRulesSpecAsnMatcherModel struct {
 
 // RateLimiterPolicyRulesSpecAsnMatcherAsnSetsModel represents asn_sets block
 type RateLimiterPolicyRulesSpecAsnMatcherAsnSetsModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // RateLimiterPolicyRulesSpecCountryListModel represents country_list block
 type RateLimiterPolicyRulesSpecCountryListModel struct {
 	CountryCodes types.List `tfsdk:"country_codes"`
-	InvertMatch types.Bool `tfsdk:"invert_match"`
+	InvertMatch  types.Bool `tfsdk:"invert_match"`
 }
 
 // RateLimiterPolicyRulesSpecCustomRateLimiterModel represents custom_rate_limiter block
 type RateLimiterPolicyRulesSpecCustomRateLimiterModel struct {
-	Name types.String `tfsdk:"name"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
 // RateLimiterPolicyRulesSpecDomainMatcherModel represents domain_matcher block
@@ -120,55 +120,55 @@ type RateLimiterPolicyRulesSpecDomainMatcherModel struct {
 
 // RateLimiterPolicyRulesSpecHeadersModel represents headers block
 type RateLimiterPolicyRulesSpecHeadersModel struct {
-	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
-	Name types.String `tfsdk:"name"`
-	CheckNotPresent *RateLimiterPolicyEmptyModel `tfsdk:"check_not_present"`
-	CheckPresent *RateLimiterPolicyEmptyModel `tfsdk:"check_present"`
-	Item *RateLimiterPolicyRulesSpecHeadersItemModel `tfsdk:"item"`
+	InvertMatcher   types.Bool                                  `tfsdk:"invert_matcher"`
+	Name            types.String                                `tfsdk:"name"`
+	CheckNotPresent *RateLimiterPolicyEmptyModel                `tfsdk:"check_not_present"`
+	CheckPresent    *RateLimiterPolicyEmptyModel                `tfsdk:"check_present"`
+	Item            *RateLimiterPolicyRulesSpecHeadersItemModel `tfsdk:"item"`
 }
 
 // RateLimiterPolicyRulesSpecHeadersItemModel represents item block
 type RateLimiterPolicyRulesSpecHeadersItemModel struct {
-	ExactValues types.List `tfsdk:"exact_values"`
-	RegexValues types.List `tfsdk:"regex_values"`
+	ExactValues  types.List `tfsdk:"exact_values"`
+	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
 }
 
 // RateLimiterPolicyRulesSpecHTTPMethodModel represents http_method block
 type RateLimiterPolicyRulesSpecHTTPMethodModel struct {
 	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
-	Methods types.List `tfsdk:"methods"`
+	Methods       types.List `tfsdk:"methods"`
 }
 
 // RateLimiterPolicyRulesSpecIPMatcherModel represents ip_matcher block
 type RateLimiterPolicyRulesSpecIPMatcherModel struct {
-	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
-	PrefixSets []RateLimiterPolicyRulesSpecIPMatcherPrefixSetsModel `tfsdk:"prefix_sets"`
+	InvertMatcher types.Bool                                           `tfsdk:"invert_matcher"`
+	PrefixSets    []RateLimiterPolicyRulesSpecIPMatcherPrefixSetsModel `tfsdk:"prefix_sets"`
 }
 
 // RateLimiterPolicyRulesSpecIPMatcherPrefixSetsModel represents prefix_sets block
 type RateLimiterPolicyRulesSpecIPMatcherPrefixSetsModel struct {
-	Kind types.String `tfsdk:"kind"`
-	Name types.String `tfsdk:"name"`
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant types.String `tfsdk:"tenant"`
-	Uid types.String `tfsdk:"uid"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
 }
 
 // RateLimiterPolicyRulesSpecIPPrefixListModel represents ip_prefix_list block
 type RateLimiterPolicyRulesSpecIPPrefixListModel struct {
 	InvertMatch types.Bool `tfsdk:"invert_match"`
-	IPPrefixes types.List `tfsdk:"ip_prefixes"`
+	IPPrefixes  types.List `tfsdk:"ip_prefixes"`
 }
 
 // RateLimiterPolicyRulesSpecPathModel represents path block
 type RateLimiterPolicyRulesSpecPathModel struct {
-	ExactValues types.List `tfsdk:"exact_values"`
+	ExactValues   types.List `tfsdk:"exact_values"`
 	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
-	PrefixValues types.List `tfsdk:"prefix_values"`
-	RegexValues types.List `tfsdk:"regex_values"`
-	SuffixValues types.List `tfsdk:"suffix_values"`
-	Transformers types.List `tfsdk:"transformers"`
+	PrefixValues  types.List `tfsdk:"prefix_values"`
+	RegexValues   types.List `tfsdk:"regex_values"`
+	SuffixValues  types.List `tfsdk:"suffix_values"`
+	Transformers  types.List `tfsdk:"transformers"`
 }
 
 // RateLimiterPolicyServerNameMatcherModel represents server_name_matcher block
@@ -183,19 +183,19 @@ type RateLimiterPolicyServerSelectorModel struct {
 }
 
 type RateLimiterPolicyResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	ServerName types.String `tfsdk:"server_name"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	AnyServer *RateLimiterPolicyEmptyModel `tfsdk:"any_server"`
-	Rules []RateLimiterPolicyRulesModel `tfsdk:"rules"`
+	Name              types.String                             `tfsdk:"name"`
+	Namespace         types.String                             `tfsdk:"namespace"`
+	Annotations       types.Map                                `tfsdk:"annotations"`
+	Description       types.String                             `tfsdk:"description"`
+	Disable           types.Bool                               `tfsdk:"disable"`
+	Labels            types.Map                                `tfsdk:"labels"`
+	ID                types.String                             `tfsdk:"id"`
+	ServerName        types.String                             `tfsdk:"server_name"`
+	Timeouts          timeouts.Value                           `tfsdk:"timeouts"`
+	AnyServer         *RateLimiterPolicyEmptyModel             `tfsdk:"any_server"`
+	Rules             []RateLimiterPolicyRulesModel            `tfsdk:"rules"`
 	ServerNameMatcher *RateLimiterPolicyServerNameMatcherModel `tfsdk:"server_name_matcher"`
-	ServerSelector *RateLimiterPolicyServerSelectorModel `tfsdk:"server_selector"`
+	ServerSelector    *RateLimiterPolicyServerSelectorModel    `tfsdk:"server_selector"`
 }
 
 func (r *RateLimiterPolicyResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -209,7 +209,7 @@ func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.Sch
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the RateLimiterPolicy. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -219,7 +219,7 @@ func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.Sch
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the RateLimiterPolicy will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -229,33 +229,33 @@ func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.Sch
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"server_name": schema.StringAttribute{
 				MarkdownDescription: "Server Name. The expected name of the server. The actual names for the server are extracted from the HTTP Host header and the name of the virtual_host for the request.",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -274,26 +274,24 @@ func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.Sch
 			"rules": schema.ListNestedBlock{
 				MarkdownDescription: "Rules. A list of RateLimiterRules that are evaluated sequentially till a matching rule is identified.",
 				NestedObject: schema.NestedBlockObject{
-					Attributes: map[string]schema.Attribute{
-					},
+					Attributes: map[string]schema.Attribute{},
 					Blocks: map[string]schema.Block{
 						"metadata": schema.SingleNestedBlock{
 							MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
 							Attributes: map[string]schema.Attribute{
 								"description_spec": schema.StringAttribute{
 									MarkdownDescription: "Description. Human readable description.",
-									Optional: true,
+									Optional:            true,
 								},
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
-									Optional: true,
+									Optional:            true,
 								},
 							},
 						},
 						"spec": schema.SingleNestedBlock{
 							MarkdownDescription: "Rate Limiter Rule Specification. Shape of Rate Limiter Rule",
-							Attributes: map[string]schema.Attribute{
-							},
+							Attributes:          map[string]schema.Attribute{},
 							Blocks: map[string]schema.Block{
 								"any_asn": schema.SingleNestedBlock{
 									MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -312,15 +310,14 @@ func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.Sch
 									Attributes: map[string]schema.Attribute{
 										"as_numbers": schema.ListAttribute{
 											MarkdownDescription: "AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
-											Optional: true,
-											ElementType: types.Int64Type,
+											Optional:            true,
+											ElementType:         types.Int64Type,
 										},
 									},
 								},
 								"asn_matcher": schema.SingleNestedBlock{
 									MarkdownDescription: "ASN Matcher. Match any AS number contained in the list of bgp_asn_sets.",
-									Attributes: map[string]schema.Attribute{
-									},
+									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"asn_sets": schema.ListNestedBlock{
 											MarkdownDescription: "BGP ASN Sets. A list of references to bgp_asn_set objects.",
@@ -328,26 +325,26 @@ func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.Sch
 												Attributes: map[string]schema.Attribute{
 													"kind": schema.StringAttribute{
 														MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-														Optional: true,
-														Computed: true,
+														Optional:            true,
+														Computed:            true,
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-														Optional: true,
+														Optional:            true,
 													},
 													"namespace": schema.StringAttribute{
 														MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-														Optional: true,
+														Optional:            true,
 													},
 													"tenant": schema.StringAttribute{
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-														Optional: true,
-														Computed: true,
+														Optional:            true,
+														Computed:            true,
 													},
 													"uid": schema.StringAttribute{
 														MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-														Optional: true,
-														Computed: true,
+														Optional:            true,
+														Computed:            true,
 													},
 												},
 											},
@@ -362,12 +359,12 @@ func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.Sch
 									Attributes: map[string]schema.Attribute{
 										"country_codes": schema.ListAttribute{
 											MarkdownDescription: "Country Codes List. List of Country Codes. Possible values are `COUNTRY_NONE`, `COUNTRY_AD`, `COUNTRY_AE`, `COUNTRY_AF`, `COUNTRY_AG`, `COUNTRY_AI`, `COUNTRY_AL`, `COUNTRY_AM`, `COUNTRY_AN`, `COUNTRY_AO`, `COUNTRY_AQ`, `COUNTRY_AR`, `COUNTRY_AS`, `COUNTRY_AT`, `COUNTRY_AU`, `COUNTRY_AW`, `COUNTRY_AX`, `COUNTRY_AZ`, `COUNTRY_BA`, `COUNTRY_BB`, `COUNTRY_BD`, `COUNTRY_BE`, `COUNTRY_BF`, `COUNTRY_BG`, `COUNTRY_BH`, `COUNTRY_BI`, `COUNTRY_BJ`, `COUNTRY_BL`, `COUNTRY_BM`, `COUNTRY_BN`, `COUNTRY_BO`, `COUNTRY_BQ`, `COUNTRY_BR`, `COUNTRY_BS`, `COUNTRY_BT`, `COUNTRY_BV`, `COUNTRY_BW`, `COUNTRY_BY`, `COUNTRY_BZ`, `COUNTRY_CA`, `COUNTRY_CC`, `COUNTRY_CD`, `COUNTRY_CF`, `COUNTRY_CG`, `COUNTRY_CH`, `COUNTRY_CI`, `COUNTRY_CK`, `COUNTRY_CL`, `COUNTRY_CM`, `COUNTRY_CN`, `COUNTRY_CO`, `COUNTRY_CR`, `COUNTRY_CS`, `COUNTRY_CU`, `COUNTRY_CV`, `COUNTRY_CW`, `COUNTRY_CX`, `COUNTRY_CY`, `COUNTRY_CZ`, `COUNTRY_DE`, `COUNTRY_DJ`, `COUNTRY_DK`, `COUNTRY_DM`, `COUNTRY_DO`, `COUNTRY_DZ`, `COUNTRY_EC`, `COUNTRY_EE`, `COUNTRY_EG`, `COUNTRY_EH`, `COUNTRY_ER`, `COUNTRY_ES`, `COUNTRY_ET`, `COUNTRY_FI`, `COUNTRY_FJ`, `COUNTRY_FK`, `COUNTRY_FM`, `COUNTRY_FO`, `COUNTRY_FR`, `COUNTRY_GA`, `COUNTRY_GB`, `COUNTRY_GD`, `COUNTRY_GE`, `COUNTRY_GF`, `COUNTRY_GG`, `COUNTRY_GH`, `COUNTRY_GI`, `COUNTRY_GL`, `COUNTRY_GM`, `COUNTRY_GN`, `COUNTRY_GP`, `COUNTRY_GQ`, `COUNTRY_GR`, `COUNTRY_GS`, `COUNTRY_GT`, `COUNTRY_GU`, `COUNTRY_GW`, `COUNTRY_GY`, `COUNTRY_HK`, `COUNTRY_HM`, `COUNTRY_HN`, `COUNTRY_HR`, `COUNTRY_HT`, `COUNTRY_HU`, `COUNTRY_ID`, `COUNTRY_IE`, `COUNTRY_IL`, `COUNTRY_IM`, `COUNTRY_IN`, `COUNTRY_IO`, `COUNTRY_IQ`, `COUNTRY_IR`, `COUNTRY_IS`, `COUNTRY_IT`, `COUNTRY_JE`, `COUNTRY_JM`, `COUNTRY_JO`, `COUNTRY_JP`, `COUNTRY_KE`, `COUNTRY_KG`, `COUNTRY_KH`, `COUNTRY_KI`, `COUNTRY_KM`, `COUNTRY_KN`, `COUNTRY_KP`, `COUNTRY_KR`, `COUNTRY_KW`, `COUNTRY_KY`, `COUNTRY_KZ`, `COUNTRY_LA`, `COUNTRY_LB`, `COUNTRY_LC`, `COUNTRY_LI`, `COUNTRY_LK`, `COUNTRY_LR`, `COUNTRY_LS`, `COUNTRY_LT`, `COUNTRY_LU`, `COUNTRY_LV`, `COUNTRY_LY`, `COUNTRY_MA`, `COUNTRY_MC`, `COUNTRY_MD`, `COUNTRY_ME`, `COUNTRY_MF`, `COUNTRY_MG`, `COUNTRY_MH`, `COUNTRY_MK`, `COUNTRY_ML`, `COUNTRY_MM`, `COUNTRY_MN`, `COUNTRY_MO`, `COUNTRY_MP`, `COUNTRY_MQ`, `COUNTRY_MR`, `COUNTRY_MS`, `COUNTRY_MT`, `COUNTRY_MU`, `COUNTRY_MV`, `COUNTRY_MW`, `COUNTRY_MX`, `COUNTRY_MY`, `COUNTRY_MZ`, `COUNTRY_NA`, `COUNTRY_NC`, `COUNTRY_NE`, `COUNTRY_NF`, `COUNTRY_NG`, `COUNTRY_NI`, `COUNTRY_NL`, `COUNTRY_NO`, `COUNTRY_NP`, `COUNTRY_NR`, `COUNTRY_NU`, `COUNTRY_NZ`, `COUNTRY_OM`, `COUNTRY_PA`, `COUNTRY_PE`, `COUNTRY_PF`, `COUNTRY_PG`, `COUNTRY_PH`, `COUNTRY_PK`, `COUNTRY_PL`, `COUNTRY_PM`, `COUNTRY_PN`, `COUNTRY_PR`, `COUNTRY_PS`, `COUNTRY_PT`, `COUNTRY_PW`, `COUNTRY_PY`, `COUNTRY_QA`, `COUNTRY_RE`, `COUNTRY_RO`, `COUNTRY_RS`, `COUNTRY_RU`, `COUNTRY_RW`, `COUNTRY_SA`, `COUNTRY_SB`, `COUNTRY_SC`, `COUNTRY_SD`, `COUNTRY_SE`, `COUNTRY_SG`, `COUNTRY_SH`, `COUNTRY_SI`, `COUNTRY_SJ`, `COUNTRY_SK`, `COUNTRY_SL`, `COUNTRY_SM`, `COUNTRY_SN`, `COUNTRY_SO`, `COUNTRY_SR`, `COUNTRY_SS`, `COUNTRY_ST`, `COUNTRY_SV`, `COUNTRY_SX`, `COUNTRY_SY`, `COUNTRY_SZ`, `COUNTRY_TC`, `COUNTRY_TD`, `COUNTRY_TF`, `COUNTRY_TG`, `COUNTRY_TH`, `COUNTRY_TJ`, `COUNTRY_TK`, `COUNTRY_TL`, `COUNTRY_TM`, `COUNTRY_TN`, `COUNTRY_TO`, `COUNTRY_TR`, `COUNTRY_TT`, `COUNTRY_TV`, `COUNTRY_TW`, `COUNTRY_TZ`, `COUNTRY_UA`, `COUNTRY_UG`, `COUNTRY_UM`, `COUNTRY_US`, `COUNTRY_UY`, `COUNTRY_UZ`, `COUNTRY_VA`, `COUNTRY_VC`, `COUNTRY_VE`, `COUNTRY_VG`, `COUNTRY_VI`, `COUNTRY_VN`, `COUNTRY_VU`, `COUNTRY_WF`, `COUNTRY_WS`, `COUNTRY_XK`, `COUNTRY_XT`, `COUNTRY_YE`, `COUNTRY_YT`, `COUNTRY_ZA`, `COUNTRY_ZM`, `COUNTRY_ZW`. Defaults to `COUNTRY_NONE`.",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 										"invert_match": schema.BoolAttribute{
 											MarkdownDescription: "Invert Match Result. Invert the match result.",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 								},
@@ -376,16 +373,16 @@ func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.Sch
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-											Optional: true,
+											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
 											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-											Optional: true,
+											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-											Optional: true,
-											Computed: true,
+											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
@@ -394,13 +391,13 @@ func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.Sch
 									Attributes: map[string]schema.Attribute{
 										"exact_values": schema.ListAttribute{
 											MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 										"regex_values": schema.ListAttribute{
 											MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 									},
 								},
@@ -410,11 +407,11 @@ func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.Sch
 										Attributes: map[string]schema.Attribute{
 											"invert_matcher": schema.BoolAttribute{
 												MarkdownDescription: "Invert Header Matcher. Invert the match result.",
-												Optional: true,
+												Optional:            true,
 											},
 											"name": schema.StringAttribute{
 												MarkdownDescription: "Header Name. A case-insensitive HTTP header name.",
-												Optional: true,
+												Optional:            true,
 											},
 										},
 										Blocks: map[string]schema.Block{
@@ -429,18 +426,18 @@ func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.Sch
 												Attributes: map[string]schema.Attribute{
 													"exact_values": schema.ListAttribute{
 														MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
-														Optional: true,
-														ElementType: types.StringType,
+														Optional:            true,
+														ElementType:         types.StringType,
 													},
 													"regex_values": schema.ListAttribute{
 														MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
-														Optional: true,
-														ElementType: types.StringType,
+														Optional:            true,
+														ElementType:         types.StringType,
 													},
 													"transformers": schema.ListAttribute{
 														MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
-														Optional: true,
-														ElementType: types.StringType,
+														Optional:            true,
+														ElementType:         types.StringType,
 													},
 												},
 											},
@@ -452,12 +449,12 @@ func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.Sch
 									Attributes: map[string]schema.Attribute{
 										"invert_matcher": schema.BoolAttribute{
 											MarkdownDescription: "Invert Method Matcher. Invert the match result.",
-											Optional: true,
+											Optional:            true,
 										},
 										"methods": schema.ListAttribute{
 											MarkdownDescription: "Method List. List of methods values to match against. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 									},
 								},
@@ -466,7 +463,7 @@ func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.Sch
 									Attributes: map[string]schema.Attribute{
 										"invert_matcher": schema.BoolAttribute{
 											MarkdownDescription: "Invert IP Matcher. Invert the match result.",
-											Optional: true,
+											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -476,26 +473,26 @@ func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.Sch
 												Attributes: map[string]schema.Attribute{
 													"kind": schema.StringAttribute{
 														MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-														Optional: true,
-														Computed: true,
+														Optional:            true,
+														Computed:            true,
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-														Optional: true,
+														Optional:            true,
 													},
 													"namespace": schema.StringAttribute{
 														MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-														Optional: true,
+														Optional:            true,
 													},
 													"tenant": schema.StringAttribute{
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-														Optional: true,
-														Computed: true,
+														Optional:            true,
+														Computed:            true,
 													},
 													"uid": schema.StringAttribute{
 														MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
-														Optional: true,
-														Computed: true,
+														Optional:            true,
+														Computed:            true,
 													},
 												},
 											},
@@ -507,12 +504,12 @@ func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.Sch
 									Attributes: map[string]schema.Attribute{
 										"invert_match": schema.BoolAttribute{
 											MarkdownDescription: "Invert Match Result. Invert the match result.",
-											Optional: true,
+											Optional:            true,
 										},
 										"ip_prefixes": schema.ListAttribute{
 											MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefix strings.",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 									},
 								},
@@ -521,39 +518,38 @@ func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.Sch
 									Attributes: map[string]schema.Attribute{
 										"exact_values": schema.ListAttribute{
 											MarkdownDescription: "Exact Values. A list of exact path values to match the input HTTP path against.",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 										"invert_matcher": schema.BoolAttribute{
 											MarkdownDescription: "Invert Path Matcher. Invert the match result.",
-											Optional: true,
+											Optional:            true,
 										},
 										"prefix_values": schema.ListAttribute{
 											MarkdownDescription: "Prefix Values. A list of path prefix values to match the input HTTP path against.",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 										"regex_values": schema.ListAttribute{
 											MarkdownDescription: "Regex Values. A list of regular expressions to match the input HTTP path against.",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 										"suffix_values": schema.ListAttribute{
 											MarkdownDescription: "Suffix Values. A list of path suffix values to match the input HTTP path against.",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 										"transformers": schema.ListAttribute{
 											MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
-											Optional: true,
-											ElementType: types.StringType,
+											Optional:            true,
+											ElementType:         types.StringType,
 										},
 									},
 								},
 							},
 						},
 					},
-
 				},
 			},
 			"server_name_matcher": schema.SingleNestedBlock{
@@ -561,27 +557,25 @@ func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.Sch
 				Attributes: map[string]schema.Attribute{
 					"exact_values": schema.ListAttribute{
 						MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
-						Optional: true,
-						ElementType: types.StringType,
+						Optional:            true,
+						ElementType:         types.StringType,
 					},
 					"regex_values": schema.ListAttribute{
 						MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
-						Optional: true,
-						ElementType: types.StringType,
+						Optional:            true,
+						ElementType:         types.StringType,
 					},
 				},
-
 			},
 			"server_selector": schema.SingleNestedBlock{
 				MarkdownDescription: "Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE",
 				Attributes: map[string]schema.Attribute{
 					"expressions": schema.ListAttribute{
 						MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections.",
-						Optional: true,
-						ElementType: types.StringType,
+						Optional:            true,
+						ElementType:         types.StringType,
 					},
 				},
-
 			},
 		},
 	}
@@ -955,7 +949,6 @@ func (r *RateLimiterPolicyResource) Create(ctx context.Context, req resource.Cre
 		createReq.Spec["server_name"] = data.ServerName.ValueString()
 	}
 
-
 	apiResource, err := r.client.CreateRateLimiterPolicy(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create RateLimiterPolicy: %s", err))
@@ -967,7 +960,7 @@ func (r *RateLimiterPolicyResource) Create(ctx context.Context, req resource.Cre
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if _, ok := apiResource.Spec["any_server"].(map[string]interface{}); ok && isImport && data.AnyServer == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.AnyServer = &RateLimiterPolicyEmptyModel{}
@@ -1092,7 +1085,6 @@ func (r *RateLimiterPolicyResource) Create(ctx context.Context, req resource.Cre
 	} else {
 		data.ServerName = types.StringNull()
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -1182,9 +1174,9 @@ func (r *RateLimiterPolicyResource) Read(ctx context.Context, req resource.ReadR
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if _, ok := apiResource.Spec["any_server"].(map[string]interface{}); ok && isImport && data.AnyServer == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -1310,7 +1302,6 @@ func (r *RateLimiterPolicyResource) Read(ctx context.Context, req resource.ReadR
 	} else {
 		data.ServerName = types.StringNull()
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -1594,7 +1585,6 @@ func (r *RateLimiterPolicyResource) Update(ctx context.Context, req resource.Upd
 	if !data.ServerName.IsNull() && !data.ServerName.IsUnknown() {
 		apiResource.Spec["server_name"] = data.ServerName.ValueString()
 	}
-
 
 	updated, err := r.client.UpdateRateLimiterPolicy(ctx, apiResource)
 	if err != nil {

@@ -52,35 +52,35 @@ type ContainerRegistryEmptyModel struct {
 // ContainerRegistryPasswordModel represents password block
 type ContainerRegistryPasswordModel struct {
 	BlindfoldSecretInfo *ContainerRegistryPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo *ContainerRegistryPasswordClearSecretInfoModel `tfsdk:"clear_secret_info"`
+	ClearSecretInfo     *ContainerRegistryPasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
 // ContainerRegistryPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
 type ContainerRegistryPasswordBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location types.String `tfsdk:"location"`
-	StoreProvider types.String `tfsdk:"store_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
 // ContainerRegistryPasswordClearSecretInfoModel represents clear_secret_info block
 type ContainerRegistryPasswordClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
-	URL types.String `tfsdk:"url"`
+	URL      types.String `tfsdk:"url"`
 }
 
 type ContainerRegistryResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Email types.String `tfsdk:"email"`
-	Registry types.String `tfsdk:"registry"`
-	UserName types.String `tfsdk:"user_name"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	Password *ContainerRegistryPasswordModel `tfsdk:"password"`
+	Name        types.String                    `tfsdk:"name"`
+	Namespace   types.String                    `tfsdk:"namespace"`
+	Annotations types.Map                       `tfsdk:"annotations"`
+	Description types.String                    `tfsdk:"description"`
+	Disable     types.Bool                      `tfsdk:"disable"`
+	Labels      types.Map                       `tfsdk:"labels"`
+	ID          types.String                    `tfsdk:"id"`
+	Email       types.String                    `tfsdk:"email"`
+	Registry    types.String                    `tfsdk:"registry"`
+	UserName    types.String                    `tfsdk:"user_name"`
+	Timeouts    timeouts.Value                  `tfsdk:"timeouts"`
+	Password    *ContainerRegistryPasswordModel `tfsdk:"password"`
 }
 
 func (r *ContainerRegistryResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -94,7 +94,7 @@ func (r *ContainerRegistryResource) Schema(ctx context.Context, req resource.Sch
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the ContainerRegistry. Must be unique within the namespace.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -104,7 +104,7 @@ func (r *ContainerRegistryResource) Schema(ctx context.Context, req resource.Sch
 			},
 			"namespace": schema.StringAttribute{
 				MarkdownDescription: "Namespace where the ContainerRegistry will be created.",
-				Required: true,
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -114,49 +114,49 @@ func (r *ContainerRegistryResource) Schema(ctx context.Context, req resource.Sch
 			},
 			"annotations": schema.MapAttribute{
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"disable": schema.BoolAttribute{
 				MarkdownDescription: "A value of true will administratively disable the object.",
-				Optional: true,
+				Optional:            true,
 			},
 			"labels": schema.MapAttribute{
 				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
-				Optional: true,
-				ElementType: types.StringType,
+				Optional:            true,
+				ElementType:         types.StringType,
 			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed: true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"email": schema.StringAttribute{
 				MarkdownDescription: "Email. Email used for the registry",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"registry": schema.StringAttribute{
 				MarkdownDescription: "Server FQDN. Fully qualified name of the registry login server",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"user_name": schema.StringAttribute{
 				MarkdownDescription: "User Name. Username used to access the registry",
-				Optional: true,
-				Computed: true,
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -171,23 +171,22 @@ func (r *ContainerRegistryResource) Schema(ctx context.Context, req resource.Sch
 			}),
 			"password": schema.SingleNestedBlock{
 				MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-				Attributes: map[string]schema.Attribute{
-				},
+				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"blindfold_secret_info": schema.SingleNestedBlock{
 						MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 						Attributes: map[string]schema.Attribute{
 							"decryption_provider": schema.StringAttribute{
 								MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-								Optional: true,
+								Optional:            true,
 							},
 							"location": schema.StringAttribute{
 								MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-								Optional: true,
+								Optional:            true,
 							},
 							"store_provider": schema.StringAttribute{
 								MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 					},
@@ -196,16 +195,15 @@ func (r *ContainerRegistryResource) Schema(ctx context.Context, req resource.Sch
 						Attributes: map[string]schema.Attribute{
 							"provider_ref": schema.StringAttribute{
 								MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-								Optional: true,
+								Optional:            true,
 							},
 							"url": schema.StringAttribute{
 								MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-								Optional: true,
+								Optional:            true,
 							},
 						},
 					},
 				},
-
 			},
 		},
 	}
@@ -392,7 +390,6 @@ func (r *ContainerRegistryResource) Create(ctx context.Context, req resource.Cre
 		createReq.Spec["user_name"] = data.UserName.ValueString()
 	}
 
-
 	apiResource, err := r.client.CreateContainerRegistry(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create ContainerRegistry: %s", err))
@@ -404,7 +401,7 @@ func (r *ContainerRegistryResource) Create(ctx context.Context, req resource.Cre
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
-	_ = isImport // May be unused if resource has no blocks needing import detection
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if _, ok := apiResource.Spec["password"].(map[string]interface{}); ok && isImport && data.Password == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.Password = &ContainerRegistryPasswordModel{}
@@ -425,7 +422,6 @@ func (r *ContainerRegistryResource) Create(ctx context.Context, req resource.Cre
 	} else {
 		data.UserName = types.StringNull()
 	}
-
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -515,9 +511,9 @@ func (r *ContainerRegistryResource) Read(ctx context.Context, req resource.ReadR
 	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
 	_ = isImport // May be unused if resource has no blocks needing import detection
 	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
+		"isImport":   isImport,
+		"psd_is_nil": psd == nil,
+		"managed":    psd.Metadata.Custom["managed"],
 	})
 	if _, ok := apiResource.Spec["password"].(map[string]interface{}); ok && isImport && data.Password == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -539,7 +535,6 @@ func (r *ContainerRegistryResource) Read(ctx context.Context, req resource.ReadR
 	} else {
 		data.UserName = types.StringNull()
 	}
-
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -636,7 +631,6 @@ func (r *ContainerRegistryResource) Update(ctx context.Context, req resource.Upd
 	if !data.UserName.IsNull() && !data.UserName.IsUnknown() {
 		apiResource.Spec["user_name"] = data.UserName.ValueString()
 	}
-
 
 	updated, err := r.client.UpdateContainerRegistry(ctx, apiResource)
 	if err != nil {

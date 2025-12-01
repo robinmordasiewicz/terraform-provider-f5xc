@@ -1776,6 +1776,25 @@ func renderSpecMarshalCode(attrs []TerraformAttribute, indent string) string {
 					sb.WriteString(fmt.Sprintf("%s\tif !data.%s.%s.IsNull() && !data.%s.%s.IsUnknown() {\n", indent, fieldName, nestedFieldName, fieldName, nestedFieldName))
 					sb.WriteString(fmt.Sprintf("%s\t\t%sMap[\"%s\"] = data.%s.%s.ValueBool()\n", indent, tfsdkName, nestedTfsdkName, fieldName, nestedFieldName))
 					sb.WriteString(fmt.Sprintf("%s\t}\n", indent))
+				case "list":
+					// Handle list types (e.g., expressions: types.List) inside single nested blocks
+					if nestedAttr.ElementType == "string" {
+						sb.WriteString(fmt.Sprintf("%s\tif !data.%s.%s.IsNull() && !data.%s.%s.IsUnknown() {\n", indent, fieldName, nestedFieldName, fieldName, nestedFieldName))
+						sb.WriteString(fmt.Sprintf("%s\t\tvar %sItems []string\n", indent, nestedTfsdkName))
+						sb.WriteString(fmt.Sprintf("%s\t\tdiags := data.%s.%s.ElementsAs(ctx, &%sItems, false)\n", indent, fieldName, nestedFieldName, nestedTfsdkName))
+						sb.WriteString(fmt.Sprintf("%s\t\tif !diags.HasError() {\n", indent))
+						sb.WriteString(fmt.Sprintf("%s\t\t\t%sMap[\"%s\"] = %sItems\n", indent, tfsdkName, nestedTfsdkName, nestedTfsdkName))
+						sb.WriteString(fmt.Sprintf("%s\t\t}\n", indent))
+						sb.WriteString(fmt.Sprintf("%s\t}\n", indent))
+					} else if nestedAttr.ElementType == "int64" {
+						sb.WriteString(fmt.Sprintf("%s\tif !data.%s.%s.IsNull() && !data.%s.%s.IsUnknown() {\n", indent, fieldName, nestedFieldName, fieldName, nestedFieldName))
+						sb.WriteString(fmt.Sprintf("%s\t\tvar %sItems []int64\n", indent, nestedTfsdkName))
+						sb.WriteString(fmt.Sprintf("%s\t\tdiags := data.%s.%s.ElementsAs(ctx, &%sItems, false)\n", indent, fieldName, nestedFieldName, nestedTfsdkName))
+						sb.WriteString(fmt.Sprintf("%s\t\tif !diags.HasError() {\n", indent))
+						sb.WriteString(fmt.Sprintf("%s\t\t\t%sMap[\"%s\"] = %sItems\n", indent, tfsdkName, nestedTfsdkName, nestedTfsdkName))
+						sb.WriteString(fmt.Sprintf("%s\t\t}\n", indent))
+						sb.WriteString(fmt.Sprintf("%s\t}\n", indent))
+					}
 				}
 			}
 			sb.WriteString(fmt.Sprintf("%s\tapiResource.Spec[\"%s\"] = %sMap\n", indent, jsonName, tfsdkName))

@@ -24,7 +24,7 @@ import (
 // Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccGeoLocationSetResource_basic(t *testing.T) {
-	t.Skip("Skipping: geo_location_set API endpoint not available in staging environment (returns 404)")
+	// Removed outdated skip - API endpoint is now available in staging
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 

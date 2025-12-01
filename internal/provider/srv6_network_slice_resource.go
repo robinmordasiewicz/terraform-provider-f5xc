@@ -269,7 +269,7 @@ func (r *Srv6NetworkSliceResource) Create(ctx context.Context, req resource.Crea
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.Srv6NetworkSlice{
+	createReq := &client.Srv6NetworkSlice{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -278,7 +278,7 @@ func (r *Srv6NetworkSliceResource) Create(ctx context.Context, req resource.Crea
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -287,7 +287,7 @@ func (r *Srv6NetworkSliceResource) Create(ctx context.Context, req resource.Crea
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -296,7 +296,7 @@ func (r *Srv6NetworkSliceResource) Create(ctx context.Context, req resource.Crea
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -304,55 +304,86 @@ func (r *Srv6NetworkSliceResource) Create(ctx context.Context, req resource.Crea
 		var sid_prefixesList []string
 		resp.Diagnostics.Append(data.SidPrefixes.ElementsAs(ctx, &sid_prefixesList, false)...)
 		if !resp.Diagnostics.HasError() {
-			apiResource.Spec["sid_prefixes"] = sid_prefixesList
+			createReq.Spec["sid_prefixes"] = sid_prefixesList
 		}
 	}
 	if !data.ConnectToAccessNetworks.IsNull() && !data.ConnectToAccessNetworks.IsUnknown() {
-		apiResource.Spec["connect_to_access_networks"] = data.ConnectToAccessNetworks.ValueBool()
+		createReq.Spec["connect_to_access_networks"] = data.ConnectToAccessNetworks.ValueBool()
 	}
 	if !data.ConnectToEnterpriseNetworks.IsNull() && !data.ConnectToEnterpriseNetworks.IsUnknown() {
-		apiResource.Spec["connect_to_enterprise_networks"] = data.ConnectToEnterpriseNetworks.ValueBool()
+		createReq.Spec["connect_to_enterprise_networks"] = data.ConnectToEnterpriseNetworks.ValueBool()
 	}
 	if !data.ConnectToInternet.IsNull() && !data.ConnectToInternet.IsUnknown() {
-		apiResource.Spec["connect_to_internet"] = data.ConnectToInternet.ValueBool()
+		createReq.Spec["connect_to_internet"] = data.ConnectToInternet.ValueBool()
 	}
 
 
-	created, err := r.client.CreateSrv6NetworkSlice(ctx, apiResource)
+	apiResource, err := r.client.CreateSrv6NetworkSlice(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create Srv6NetworkSlice: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
-	if v, ok := created.Spec["connect_to_access_networks"].(bool); ok {
-		data.ConnectToAccessNetworks = types.BoolValue(v)
-	} else if data.ConnectToAccessNetworks.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
-		data.ConnectToAccessNetworks = types.BoolNull()
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if v, ok := apiResource.Spec["sid_prefixes"].([]interface{}); ok && len(v) > 0 {
+		var sid_prefixesList []string
+		for _, item := range v {
+			if s, ok := item.(string); ok {
+				sid_prefixesList = append(sid_prefixesList, s)
+			}
+		}
+		listVal, diags := types.ListValueFrom(ctx, types.StringType, sid_prefixesList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.SidPrefixes = listVal
+		}
+	} else {
+		data.SidPrefixes = types.ListNull(types.StringType)
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["connect_to_enterprise_networks"].(bool); ok {
-		data.ConnectToEnterpriseNetworks = types.BoolValue(v)
-	} else if data.ConnectToEnterpriseNetworks.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
-		data.ConnectToEnterpriseNetworks = types.BoolNull()
+	// Top-level Optional bool: preserve prior state to avoid API default drift
+	if !isImport && !data.ConnectToAccessNetworks.IsNull() && !data.ConnectToAccessNetworks.IsUnknown() {
+		// Normal Read: preserve existing state value (do nothing)
+	} else {
+		// Import case, null state, or unknown (after Create): read from API
+		if v, ok := apiResource.Spec["connect_to_access_networks"].(bool); ok {
+			data.ConnectToAccessNetworks = types.BoolValue(v)
+		} else {
+			data.ConnectToAccessNetworks = types.BoolNull()
+		}
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["connect_to_internet"].(bool); ok {
-		data.ConnectToInternet = types.BoolValue(v)
-	} else if data.ConnectToInternet.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
-		data.ConnectToInternet = types.BoolNull()
+	// Top-level Optional bool: preserve prior state to avoid API default drift
+	if !isImport && !data.ConnectToEnterpriseNetworks.IsNull() && !data.ConnectToEnterpriseNetworks.IsUnknown() {
+		// Normal Read: preserve existing state value (do nothing)
+	} else {
+		// Import case, null state, or unknown (after Create): read from API
+		if v, ok := apiResource.Spec["connect_to_enterprise_networks"].(bool); ok {
+			data.ConnectToEnterpriseNetworks = types.BoolValue(v)
+		} else {
+			data.ConnectToEnterpriseNetworks = types.BoolNull()
+		}
 	}
-	// If plan had a value, preserve it
+	// Top-level Optional bool: preserve prior state to avoid API default drift
+	if !isImport && !data.ConnectToInternet.IsNull() && !data.ConnectToInternet.IsUnknown() {
+		// Normal Read: preserve existing state value (do nothing)
+	} else {
+		// Import case, null state, or unknown (after Create): read from API
+		if v, ok := apiResource.Spec["connect_to_internet"].(bool); ok {
+			data.ConnectToInternet = types.BoolValue(v)
+		} else {
+			data.ConnectToInternet = types.BoolNull()
+		}
+	}
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
@@ -457,10 +488,10 @@ func (r *Srv6NetworkSliceResource) Read(ctx context.Context, req resource.ReadRe
 		data.SidPrefixes = types.ListNull(types.StringType)
 	}
 	// Top-level Optional bool: preserve prior state to avoid API default drift
-	if !isImport && !data.ConnectToAccessNetworks.IsNull() {
+	if !isImport && !data.ConnectToAccessNetworks.IsNull() && !data.ConnectToAccessNetworks.IsUnknown() {
 		// Normal Read: preserve existing state value (do nothing)
 	} else {
-		// Import case or null state: read from API
+		// Import case, null state, or unknown (after Create): read from API
 		if v, ok := apiResource.Spec["connect_to_access_networks"].(bool); ok {
 			data.ConnectToAccessNetworks = types.BoolValue(v)
 		} else {
@@ -468,10 +499,10 @@ func (r *Srv6NetworkSliceResource) Read(ctx context.Context, req resource.ReadRe
 		}
 	}
 	// Top-level Optional bool: preserve prior state to avoid API default drift
-	if !isImport && !data.ConnectToEnterpriseNetworks.IsNull() {
+	if !isImport && !data.ConnectToEnterpriseNetworks.IsNull() && !data.ConnectToEnterpriseNetworks.IsUnknown() {
 		// Normal Read: preserve existing state value (do nothing)
 	} else {
-		// Import case or null state: read from API
+		// Import case, null state, or unknown (after Create): read from API
 		if v, ok := apiResource.Spec["connect_to_enterprise_networks"].(bool); ok {
 			data.ConnectToEnterpriseNetworks = types.BoolValue(v)
 		} else {
@@ -479,10 +510,10 @@ func (r *Srv6NetworkSliceResource) Read(ctx context.Context, req resource.ReadRe
 		}
 	}
 	// Top-level Optional bool: preserve prior state to avoid API default drift
-	if !isImport && !data.ConnectToInternet.IsNull() {
+	if !isImport && !data.ConnectToInternet.IsNull() && !data.ConnectToInternet.IsUnknown() {
 		// Normal Read: preserve existing state value (do nothing)
 	} else {
-		// Import case or null state: read from API
+		// Import case, null state, or unknown (after Create): read from API
 		if v, ok := apiResource.Spec["connect_to_internet"].(bool); ok {
 			data.ConnectToInternet = types.BoolValue(v)
 		} else {

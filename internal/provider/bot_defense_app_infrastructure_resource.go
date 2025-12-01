@@ -401,7 +401,7 @@ func (r *BotDefenseAppInfrastructureResource) Create(ctx context.Context, req re
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.BotDefenseAppInfrastructure{
+	createReq := &client.BotDefenseAppInfrastructure{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -410,7 +410,7 @@ func (r *BotDefenseAppInfrastructureResource) Create(ctx context.Context, req re
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -419,7 +419,7 @@ func (r *BotDefenseAppInfrastructureResource) Create(ctx context.Context, req re
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -428,7 +428,7 @@ func (r *BotDefenseAppInfrastructureResource) Create(ctx context.Context, req re
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -471,7 +471,7 @@ func (r *BotDefenseAppInfrastructureResource) Create(ctx context.Context, req re
 		if !data.CloudHosted.Region.IsNull() && !data.CloudHosted.Region.IsUnknown() {
 			cloud_hostedMap["region"] = data.CloudHosted.Region.ValueString()
 		}
-		apiResource.Spec["cloud_hosted"] = cloud_hostedMap
+		createReq.Spec["cloud_hosted"] = cloud_hostedMap
 	}
 	if data.DataCenterHosted != nil {
 		data_center_hostedMap := make(map[string]interface{})
@@ -512,44 +512,188 @@ func (r *BotDefenseAppInfrastructureResource) Create(ctx context.Context, req re
 		if !data.DataCenterHosted.Region.IsNull() && !data.DataCenterHosted.Region.IsUnknown() {
 			data_center_hostedMap["region"] = data.DataCenterHosted.Region.ValueString()
 		}
-		apiResource.Spec["data_center_hosted"] = data_center_hostedMap
+		createReq.Spec["data_center_hosted"] = data_center_hostedMap
 	}
 	if !data.EnvironmentType.IsNull() && !data.EnvironmentType.IsUnknown() {
-		apiResource.Spec["environment_type"] = data.EnvironmentType.ValueString()
+		createReq.Spec["environment_type"] = data.EnvironmentType.ValueString()
 	}
 	if !data.TrafficType.IsNull() && !data.TrafficType.IsUnknown() {
-		apiResource.Spec["traffic_type"] = data.TrafficType.ValueString()
+		createReq.Spec["traffic_type"] = data.TrafficType.ValueString()
 	}
 
 
-	created, err := r.client.CreateBotDefenseAppInfrastructure(ctx, apiResource)
+	apiResource, err := r.client.CreateBotDefenseAppInfrastructure(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create BotDefenseAppInfrastructure: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
-	if v, ok := created.Spec["environment_type"].(string); ok && v != "" {
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["cloud_hosted"].(map[string]interface{}); ok && (isImport || data.CloudHosted != nil) {
+		data.CloudHosted = &BotDefenseAppInfrastructureCloudHostedModel{
+			Egress: func() []BotDefenseAppInfrastructureCloudHostedEgressModel {
+				if listData, ok := blockData["egress"].([]interface{}); ok && len(listData) > 0 {
+					var result []BotDefenseAppInfrastructureCloudHostedEgressModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, BotDefenseAppInfrastructureCloudHostedEgressModel{
+								IPAddress: func() types.String {
+									if v, ok := itemMap["ip_address"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Location: func() types.String {
+									if v, ok := itemMap["location"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			InfraHostName: func() types.String {
+				if v, ok := blockData["infra_host_name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Ingress: func() []BotDefenseAppInfrastructureCloudHostedIngressModel {
+				if listData, ok := blockData["ingress"].([]interface{}); ok && len(listData) > 0 {
+					var result []BotDefenseAppInfrastructureCloudHostedIngressModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, BotDefenseAppInfrastructureCloudHostedIngressModel{
+								HostName: func() types.String {
+									if v, ok := itemMap["host_name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								IPAddress: func() types.String {
+									if v, ok := itemMap["ip_address"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Location: func() types.String {
+									if v, ok := itemMap["location"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			Region: func() types.String {
+				if v, ok := blockData["region"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["data_center_hosted"].(map[string]interface{}); ok && (isImport || data.DataCenterHosted != nil) {
+		data.DataCenterHosted = &BotDefenseAppInfrastructureDataCenterHostedModel{
+			Egress: func() []BotDefenseAppInfrastructureDataCenterHostedEgressModel {
+				if listData, ok := blockData["egress"].([]interface{}); ok && len(listData) > 0 {
+					var result []BotDefenseAppInfrastructureDataCenterHostedEgressModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, BotDefenseAppInfrastructureDataCenterHostedEgressModel{
+								IPAddress: func() types.String {
+									if v, ok := itemMap["ip_address"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Location: func() types.String {
+									if v, ok := itemMap["location"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			InfraHostName: func() types.String {
+				if v, ok := blockData["infra_host_name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Ingress: func() []BotDefenseAppInfrastructureDataCenterHostedIngressModel {
+				if listData, ok := blockData["ingress"].([]interface{}); ok && len(listData) > 0 {
+					var result []BotDefenseAppInfrastructureDataCenterHostedIngressModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, BotDefenseAppInfrastructureDataCenterHostedIngressModel{
+								HostName: func() types.String {
+									if v, ok := itemMap["host_name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								IPAddress: func() types.String {
+									if v, ok := itemMap["ip_address"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Location: func() types.String {
+									if v, ok := itemMap["location"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			Region: func() types.String {
+				if v, ok := blockData["region"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if v, ok := apiResource.Spec["environment_type"].(string); ok && v != "" {
 		data.EnvironmentType = types.StringValue(v)
-	} else if data.EnvironmentType.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.EnvironmentType = types.StringNull()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["traffic_type"].(string); ok && v != "" {
+	if v, ok := apiResource.Spec["traffic_type"].(string); ok && v != "" {
 		data.TrafficType = types.StringValue(v)
-	} else if data.TrafficType.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.TrafficType = types.StringNull()
 	}
-	// If plan had a value, preserve it
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 

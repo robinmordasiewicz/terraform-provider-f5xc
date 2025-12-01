@@ -420,6 +420,7 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -443,6 +444,7 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 													"tenant": schema.StringAttribute{
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 														Optional: true,
+														Computed: true,
 													},
 												},
 											},
@@ -507,6 +509,7 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 														"kind": schema.StringAttribute{
 															MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 															Optional: true,
+															Computed: true,
 														},
 														"name": schema.StringAttribute{
 															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -519,10 +522,12 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 															Optional: true,
+															Computed: true,
 														},
 														"uid": schema.StringAttribute{
 															MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 															Optional: true,
+															Computed: true,
 														},
 													},
 												},
@@ -566,6 +571,7 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 										"kind": schema.StringAttribute{
 											MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 											Optional: true,
+											Computed: true,
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -578,10 +584,12 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 										"uid": schema.StringAttribute{
 											MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -610,6 +618,7 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 										"kind": schema.StringAttribute{
 											MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 											Optional: true,
+											Computed: true,
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -622,10 +631,12 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 										"uid": schema.StringAttribute{
 											MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -752,7 +763,7 @@ func (r *BGPResource) Create(ctx context.Context, req resource.CreateRequest, re
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.BGP{
+	createReq := &client.BGP{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -761,7 +772,7 @@ func (r *BGPResource) Create(ctx context.Context, req resource.CreateRequest, re
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -770,7 +781,7 @@ func (r *BGPResource) Create(ctx context.Context, req resource.CreateRequest, re
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -779,7 +790,7 @@ func (r *BGPResource) Create(ctx context.Context, req resource.CreateRequest, re
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -797,7 +808,7 @@ func (r *BGPResource) Create(ctx context.Context, req resource.CreateRequest, re
 		if data.BGPParameters.LocalAddress != nil {
 			bgp_parametersMap["local_address"] = map[string]interface{}{}
 		}
-		apiResource.Spec["bgp_parameters"] = bgp_parametersMap
+		createReq.Spec["bgp_parameters"] = bgp_parametersMap
 	}
 	if len(data.Peers) > 0 {
 		var peersList []map[string]interface{}
@@ -833,8 +844,59 @@ func (r *BGPResource) Create(ctx context.Context, req resource.CreateRequest, re
 				if !item.External.Asn.IsNull() && !item.External.Asn.IsUnknown() {
 					externalNestedMap["asn"] = item.External.Asn.ValueInt64()
 				}
+				if item.External.DefaultGateway != nil {
+					externalNestedMap["default_gateway"] = map[string]interface{}{}
+				}
+				if item.External.DefaultGatewayV6 != nil {
+					externalNestedMap["default_gateway_v6"] = map[string]interface{}{}
+				}
+				if item.External.Disable != nil {
+					externalNestedMap["disable"] = map[string]interface{}{}
+				}
+				if item.External.DisableV6 != nil {
+					externalNestedMap["disable_v6"] = map[string]interface{}{}
+				}
+				if item.External.ExternalConnector != nil {
+					externalNestedMap["external_connector"] = map[string]interface{}{}
+				}
+				if item.External.FamilyInet != nil {
+					family_inetDeepMap := make(map[string]interface{})
+					if item.External.FamilyInet.Disable != nil {
+						family_inetDeepMap["disable"] = map[string]interface{}{}
+					}
+					if item.External.FamilyInet.Enable != nil {
+						family_inetDeepMap["enable"] = map[string]interface{}{}
+					}
+					externalNestedMap["family_inet"] = family_inetDeepMap
+				}
+				if item.External.FromSite != nil {
+					externalNestedMap["from_site"] = map[string]interface{}{}
+				}
+				if item.External.FromSiteV6 != nil {
+					externalNestedMap["from_site_v6"] = map[string]interface{}{}
+				}
+				if item.External.Interface != nil {
+					interfaceDeepMap := make(map[string]interface{})
+					if !item.External.Interface.Name.IsNull() && !item.External.Interface.Name.IsUnknown() {
+						interfaceDeepMap["name"] = item.External.Interface.Name.ValueString()
+					}
+					if !item.External.Interface.Namespace.IsNull() && !item.External.Interface.Namespace.IsUnknown() {
+						interfaceDeepMap["namespace"] = item.External.Interface.Namespace.ValueString()
+					}
+					if !item.External.Interface.Tenant.IsNull() && !item.External.Interface.Tenant.IsUnknown() {
+						interfaceDeepMap["tenant"] = item.External.Interface.Tenant.ValueString()
+					}
+					externalNestedMap["interface"] = interfaceDeepMap
+				}
+				if item.External.InterfaceList != nil {
+					interface_listDeepMap := make(map[string]interface{})
+					externalNestedMap["interface_list"] = interface_listDeepMap
+				}
 				if !item.External.Md5AuthKey.IsNull() && !item.External.Md5AuthKey.IsUnknown() {
 					externalNestedMap["md5_auth_key"] = item.External.Md5AuthKey.ValueString()
+				}
+				if item.External.NoAuthentication != nil {
+					externalNestedMap["no_authentication"] = map[string]interface{}{}
 				}
 				if !item.External.Port.IsNull() && !item.External.Port.IsUnknown() {
 					externalNestedMap["port"] = item.External.Port.ValueInt64()
@@ -874,11 +936,28 @@ func (r *BGPResource) Create(ctx context.Context, req resource.CreateRequest, re
 			}
 			if item.RoutingPolicies != nil {
 				routing_policiesNestedMap := make(map[string]interface{})
+				if len(item.RoutingPolicies.RoutePolicy) > 0 {
+					var route_policyDeepList []map[string]interface{}
+					for _, deepListItem := range item.RoutingPolicies.RoutePolicy {
+						deepListItemMap := make(map[string]interface{})
+						if deepListItem.AllNodes != nil {
+							deepListItemMap["all_nodes"] = map[string]interface{}{}
+						}
+						if deepListItem.Inbound != nil {
+							deepListItemMap["inbound"] = map[string]interface{}{}
+						}
+						if deepListItem.Outbound != nil {
+							deepListItemMap["outbound"] = map[string]interface{}{}
+						}
+						route_policyDeepList = append(route_policyDeepList, deepListItemMap)
+					}
+					routing_policiesNestedMap["route_policy"] = route_policyDeepList
+				}
 				itemMap["routing_policies"] = routing_policiesNestedMap
 			}
 			peersList = append(peersList, itemMap)
 		}
-		apiResource.Spec["peers"] = peersList
+		createReq.Spec["peers"] = peersList
 	}
 	if data.Where != nil {
 		whereMap := make(map[string]interface{})
@@ -896,24 +975,274 @@ func (r *BGPResource) Create(ctx context.Context, req resource.CreateRequest, re
 			}
 			whereMap["virtual_site"] = virtual_siteNestedMap
 		}
-		apiResource.Spec["where"] = whereMap
+		createReq.Spec["where"] = whereMap
 	}
 
 
-	created, err := r.client.CreateBGP(ctx, apiResource)
+	apiResource, err := r.client.CreateBGP(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create BGP: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["bgp_parameters"].(map[string]interface{}); ok && (isImport || data.BGPParameters != nil) {
+		data.BGPParameters = &BGPBGPParametersModel{
+			Asn: func() types.Int64 {
+				if v, ok := blockData["asn"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			FromSite: func() *BGPEmptyModel {
+				if !isImport && data.BGPParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.BGPParameters.FromSite
+				}
+				// Import case: read from API
+				if _, ok := blockData["from_site"].(map[string]interface{}); ok {
+					return &BGPEmptyModel{}
+				}
+				return nil
+			}(),
+			IPAddress: func() types.String {
+				if v, ok := blockData["ip_address"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			LocalAddress: func() *BGPEmptyModel {
+				if !isImport && data.BGPParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.BGPParameters.LocalAddress
+				}
+				// Import case: read from API
+				if _, ok := blockData["local_address"].(map[string]interface{}); ok {
+					return &BGPEmptyModel{}
+				}
+				return nil
+			}(),
+		}
+	}
+	if listData, ok := apiResource.Spec["peers"].([]interface{}); ok && len(listData) > 0 {
+		var peersList []BGPPeersModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				peersList = append(peersList, BGPPeersModel{
+					BfdDisabled: func() *BGPEmptyModel {
+						if !isImport && len(data.Peers) > listIdx && data.Peers[listIdx].BfdDisabled != nil {
+							return &BGPEmptyModel{}
+						}
+						return nil
+					}(),
+					BfdEnabled: func() *BGPPeersBfdEnabledModel {
+						if nestedMap, ok := itemMap["bfd_enabled"].(map[string]interface{}); ok {
+							return &BGPPeersBfdEnabledModel{
+								Multiplier: func() types.Int64 {
+									if v, ok := nestedMap["multiplier"].(float64); ok && v != 0 {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								ReceiveIntervalMilliseconds: func() types.Int64 {
+									if v, ok := nestedMap["receive_interval_milliseconds"].(float64); ok && v != 0 {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								TransmitIntervalMilliseconds: func() types.Int64 {
+									if v, ok := nestedMap["transmit_interval_milliseconds"].(float64); ok && v != 0 {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					Disable: func() *BGPEmptyModel {
+						if !isImport && len(data.Peers) > listIdx && data.Peers[listIdx].Disable != nil {
+							return &BGPEmptyModel{}
+						}
+						return nil
+					}(),
+					External: func() *BGPPeersExternalModel {
+						if nestedMap, ok := itemMap["external"].(map[string]interface{}); ok {
+							return &BGPPeersExternalModel{
+								Address: func() types.String {
+									if v, ok := nestedMap["address"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								AddressIPV6: func() types.String {
+									if v, ok := nestedMap["address_ipv6"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Asn: func() types.Int64 {
+									if v, ok := nestedMap["asn"].(float64); ok && v != 0 {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								DefaultGateway: func() *BGPEmptyModel {
+									if !isImport && len(data.Peers) > listIdx && data.Peers[listIdx].External != nil && data.Peers[listIdx].External.DefaultGateway != nil {
+										return &BGPEmptyModel{}
+									}
+									return nil
+								}(),
+								DefaultGatewayV6: func() *BGPEmptyModel {
+									if !isImport && len(data.Peers) > listIdx && data.Peers[listIdx].External != nil && data.Peers[listIdx].External.DefaultGatewayV6 != nil {
+										return &BGPEmptyModel{}
+									}
+									return nil
+								}(),
+								Disable: func() *BGPEmptyModel {
+									if !isImport && len(data.Peers) > listIdx && data.Peers[listIdx].External != nil && data.Peers[listIdx].External.Disable != nil {
+										return &BGPEmptyModel{}
+									}
+									return nil
+								}(),
+								DisableV6: func() *BGPEmptyModel {
+									if !isImport && len(data.Peers) > listIdx && data.Peers[listIdx].External != nil && data.Peers[listIdx].External.DisableV6 != nil {
+										return &BGPEmptyModel{}
+									}
+									return nil
+								}(),
+								ExternalConnector: func() *BGPEmptyModel {
+									if !isImport && len(data.Peers) > listIdx && data.Peers[listIdx].External != nil && data.Peers[listIdx].External.ExternalConnector != nil {
+										return &BGPEmptyModel{}
+									}
+									return nil
+								}(),
+								FromSite: func() *BGPEmptyModel {
+									if !isImport && len(data.Peers) > listIdx && data.Peers[listIdx].External != nil && data.Peers[listIdx].External.FromSite != nil {
+										return &BGPEmptyModel{}
+									}
+									return nil
+								}(),
+								FromSiteV6: func() *BGPEmptyModel {
+									if !isImport && len(data.Peers) > listIdx && data.Peers[listIdx].External != nil && data.Peers[listIdx].External.FromSiteV6 != nil {
+										return &BGPEmptyModel{}
+									}
+									return nil
+								}(),
+								Md5AuthKey: func() types.String {
+									if v, ok := nestedMap["md5_auth_key"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								NoAuthentication: func() *BGPEmptyModel {
+									if !isImport && len(data.Peers) > listIdx && data.Peers[listIdx].External != nil && data.Peers[listIdx].External.NoAuthentication != nil {
+										return &BGPEmptyModel{}
+									}
+									return nil
+								}(),
+								Port: func() types.Int64 {
+									if v, ok := nestedMap["port"].(float64); ok && v != 0 {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								SubnetBeginOffset: func() types.Int64 {
+									if v, ok := nestedMap["subnet_begin_offset"].(float64); ok && v != 0 {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								SubnetBeginOffsetV6: func() types.Int64 {
+									if v, ok := nestedMap["subnet_begin_offset_v6"].(float64); ok && v != 0 {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								SubnetEndOffset: func() types.Int64 {
+									if v, ok := nestedMap["subnet_end_offset"].(float64); ok && v != 0 {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								SubnetEndOffsetV6: func() types.Int64 {
+									if v, ok := nestedMap["subnet_end_offset_v6"].(float64); ok && v != 0 {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					Label: func() types.String {
+						if v, ok := itemMap["label"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Metadata: func() *BGPPeersMetadataModel {
+						if nestedMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
+							return &BGPPeersMetadataModel{
+								DescriptionSpec: func() types.String {
+									if v, ok := nestedMap["description"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Name: func() types.String {
+									if v, ok := nestedMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					PassiveModeDisabled: func() *BGPEmptyModel {
+						if !isImport && len(data.Peers) > listIdx && data.Peers[listIdx].PassiveModeDisabled != nil {
+							return &BGPEmptyModel{}
+						}
+						return nil
+					}(),
+					PassiveModeEnabled: func() *BGPEmptyModel {
+						if !isImport && len(data.Peers) > listIdx && data.Peers[listIdx].PassiveModeEnabled != nil {
+							return &BGPEmptyModel{}
+						}
+						return nil
+					}(),
+					RoutingPolicies: func() *BGPPeersRoutingPoliciesModel {
+						if _, ok := itemMap["routing_policies"].(map[string]interface{}); ok {
+							return &BGPPeersRoutingPoliciesModel{
+							}
+						}
+						return nil
+					}(),
+				})
+			}
+		}
+		data.Peers = peersList
+	}
+	if _, ok := apiResource.Spec["where"].(map[string]interface{}); ok && isImport && data.Where == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Where = &BGPWhereModel{}
+	}
+	// Normal Read: preserve existing state value
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
@@ -1044,11 +1373,12 @@ func (r *BGPResource) Read(ctx context.Context, req resource.ReadRequest, resp *
 	}
 	if listData, ok := apiResource.Spec["peers"].([]interface{}); ok && len(listData) > 0 {
 		var peersList []BGPPeersModel
-		for _, item := range listData {
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				peersList = append(peersList, BGPPeersModel{
 					BfdDisabled: func() *BGPEmptyModel {
-						if _, ok := itemMap["bfd_disabled"].(map[string]interface{}); ok {
+						if !isImport && len(data.Peers) > listIdx && data.Peers[listIdx].BfdDisabled != nil {
 							return &BGPEmptyModel{}
 						}
 						return nil
@@ -1079,7 +1409,7 @@ func (r *BGPResource) Read(ctx context.Context, req resource.ReadRequest, resp *
 						return nil
 					}(),
 					Disable: func() *BGPEmptyModel {
-						if _, ok := itemMap["disable"].(map[string]interface{}); ok {
+						if !isImport && len(data.Peers) > listIdx && data.Peers[listIdx].Disable != nil {
 							return &BGPEmptyModel{}
 						}
 						return nil
@@ -1105,11 +1435,59 @@ func (r *BGPResource) Read(ctx context.Context, req resource.ReadRequest, resp *
 									}
 									return types.Int64Null()
 								}(),
+								DefaultGateway: func() *BGPEmptyModel {
+									if !isImport && len(data.Peers) > listIdx && data.Peers[listIdx].External != nil && data.Peers[listIdx].External.DefaultGateway != nil {
+										return &BGPEmptyModel{}
+									}
+									return nil
+								}(),
+								DefaultGatewayV6: func() *BGPEmptyModel {
+									if !isImport && len(data.Peers) > listIdx && data.Peers[listIdx].External != nil && data.Peers[listIdx].External.DefaultGatewayV6 != nil {
+										return &BGPEmptyModel{}
+									}
+									return nil
+								}(),
+								Disable: func() *BGPEmptyModel {
+									if !isImport && len(data.Peers) > listIdx && data.Peers[listIdx].External != nil && data.Peers[listIdx].External.Disable != nil {
+										return &BGPEmptyModel{}
+									}
+									return nil
+								}(),
+								DisableV6: func() *BGPEmptyModel {
+									if !isImport && len(data.Peers) > listIdx && data.Peers[listIdx].External != nil && data.Peers[listIdx].External.DisableV6 != nil {
+										return &BGPEmptyModel{}
+									}
+									return nil
+								}(),
+								ExternalConnector: func() *BGPEmptyModel {
+									if !isImport && len(data.Peers) > listIdx && data.Peers[listIdx].External != nil && data.Peers[listIdx].External.ExternalConnector != nil {
+										return &BGPEmptyModel{}
+									}
+									return nil
+								}(),
+								FromSite: func() *BGPEmptyModel {
+									if !isImport && len(data.Peers) > listIdx && data.Peers[listIdx].External != nil && data.Peers[listIdx].External.FromSite != nil {
+										return &BGPEmptyModel{}
+									}
+									return nil
+								}(),
+								FromSiteV6: func() *BGPEmptyModel {
+									if !isImport && len(data.Peers) > listIdx && data.Peers[listIdx].External != nil && data.Peers[listIdx].External.FromSiteV6 != nil {
+										return &BGPEmptyModel{}
+									}
+									return nil
+								}(),
 								Md5AuthKey: func() types.String {
 									if v, ok := nestedMap["md5_auth_key"].(string); ok && v != "" {
 										return types.StringValue(v)
 									}
 									return types.StringNull()
+								}(),
+								NoAuthentication: func() *BGPEmptyModel {
+									if !isImport && len(data.Peers) > listIdx && data.Peers[listIdx].External != nil && data.Peers[listIdx].External.NoAuthentication != nil {
+										return &BGPEmptyModel{}
+									}
+									return nil
 								}(),
 								Port: func() types.Int64 {
 									if v, ok := nestedMap["port"].(float64); ok && v != 0 {
@@ -1171,13 +1549,13 @@ func (r *BGPResource) Read(ctx context.Context, req resource.ReadRequest, resp *
 						return nil
 					}(),
 					PassiveModeDisabled: func() *BGPEmptyModel {
-						if _, ok := itemMap["passive_mode_disabled"].(map[string]interface{}); ok {
+						if !isImport && len(data.Peers) > listIdx && data.Peers[listIdx].PassiveModeDisabled != nil {
 							return &BGPEmptyModel{}
 						}
 						return nil
 					}(),
 					PassiveModeEnabled: func() *BGPEmptyModel {
-						if _, ok := itemMap["passive_mode_enabled"].(map[string]interface{}); ok {
+						if !isImport && len(data.Peers) > listIdx && data.Peers[listIdx].PassiveModeEnabled != nil {
 							return &BGPEmptyModel{}
 						}
 						return nil
@@ -1310,8 +1688,59 @@ func (r *BGPResource) Update(ctx context.Context, req resource.UpdateRequest, re
 				if !item.External.Asn.IsNull() && !item.External.Asn.IsUnknown() {
 					externalNestedMap["asn"] = item.External.Asn.ValueInt64()
 				}
+				if item.External.DefaultGateway != nil {
+					externalNestedMap["default_gateway"] = map[string]interface{}{}
+				}
+				if item.External.DefaultGatewayV6 != nil {
+					externalNestedMap["default_gateway_v6"] = map[string]interface{}{}
+				}
+				if item.External.Disable != nil {
+					externalNestedMap["disable"] = map[string]interface{}{}
+				}
+				if item.External.DisableV6 != nil {
+					externalNestedMap["disable_v6"] = map[string]interface{}{}
+				}
+				if item.External.ExternalConnector != nil {
+					externalNestedMap["external_connector"] = map[string]interface{}{}
+				}
+				if item.External.FamilyInet != nil {
+					family_inetDeepMap := make(map[string]interface{})
+					if item.External.FamilyInet.Disable != nil {
+						family_inetDeepMap["disable"] = map[string]interface{}{}
+					}
+					if item.External.FamilyInet.Enable != nil {
+						family_inetDeepMap["enable"] = map[string]interface{}{}
+					}
+					externalNestedMap["family_inet"] = family_inetDeepMap
+				}
+				if item.External.FromSite != nil {
+					externalNestedMap["from_site"] = map[string]interface{}{}
+				}
+				if item.External.FromSiteV6 != nil {
+					externalNestedMap["from_site_v6"] = map[string]interface{}{}
+				}
+				if item.External.Interface != nil {
+					interfaceDeepMap := make(map[string]interface{})
+					if !item.External.Interface.Name.IsNull() && !item.External.Interface.Name.IsUnknown() {
+						interfaceDeepMap["name"] = item.External.Interface.Name.ValueString()
+					}
+					if !item.External.Interface.Namespace.IsNull() && !item.External.Interface.Namespace.IsUnknown() {
+						interfaceDeepMap["namespace"] = item.External.Interface.Namespace.ValueString()
+					}
+					if !item.External.Interface.Tenant.IsNull() && !item.External.Interface.Tenant.IsUnknown() {
+						interfaceDeepMap["tenant"] = item.External.Interface.Tenant.ValueString()
+					}
+					externalNestedMap["interface"] = interfaceDeepMap
+				}
+				if item.External.InterfaceList != nil {
+					interface_listDeepMap := make(map[string]interface{})
+					externalNestedMap["interface_list"] = interface_listDeepMap
+				}
 				if !item.External.Md5AuthKey.IsNull() && !item.External.Md5AuthKey.IsUnknown() {
 					externalNestedMap["md5_auth_key"] = item.External.Md5AuthKey.ValueString()
+				}
+				if item.External.NoAuthentication != nil {
+					externalNestedMap["no_authentication"] = map[string]interface{}{}
 				}
 				if !item.External.Port.IsNull() && !item.External.Port.IsUnknown() {
 					externalNestedMap["port"] = item.External.Port.ValueInt64()
@@ -1351,6 +1780,23 @@ func (r *BGPResource) Update(ctx context.Context, req resource.UpdateRequest, re
 			}
 			if item.RoutingPolicies != nil {
 				routing_policiesNestedMap := make(map[string]interface{})
+				if len(item.RoutingPolicies.RoutePolicy) > 0 {
+					var route_policyDeepList []map[string]interface{}
+					for _, deepListItem := range item.RoutingPolicies.RoutePolicy {
+						deepListItemMap := make(map[string]interface{})
+						if deepListItem.AllNodes != nil {
+							deepListItemMap["all_nodes"] = map[string]interface{}{}
+						}
+						if deepListItem.Inbound != nil {
+							deepListItemMap["inbound"] = map[string]interface{}{}
+						}
+						if deepListItem.Outbound != nil {
+							deepListItemMap["outbound"] = map[string]interface{}{}
+						}
+						route_policyDeepList = append(route_policyDeepList, deepListItemMap)
+					}
+					routing_policiesNestedMap["route_policy"] = route_policyDeepList
+				}
 				itemMap["routing_policies"] = routing_policiesNestedMap
 			}
 			peersList = append(peersList, itemMap)

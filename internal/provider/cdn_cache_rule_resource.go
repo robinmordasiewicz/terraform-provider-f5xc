@@ -645,7 +645,7 @@ func (r *CDNCacheRuleResource) Create(ctx context.Context, req resource.CreateRe
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.CDNCacheRule{
+	createReq := &client.CDNCacheRule{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -654,7 +654,7 @@ func (r *CDNCacheRuleResource) Create(ctx context.Context, req resource.CreateRe
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -663,7 +663,7 @@ func (r *CDNCacheRuleResource) Create(ctx context.Context, req resource.CreateRe
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -672,7 +672,7 @@ func (r *CDNCacheRuleResource) Create(ctx context.Context, req resource.CreateRe
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -699,24 +699,81 @@ func (r *CDNCacheRuleResource) Create(ctx context.Context, req resource.CreateRe
 		if !data.CacheRules.RuleName.IsNull() && !data.CacheRules.RuleName.IsUnknown() {
 			cache_rulesMap["rule_name"] = data.CacheRules.RuleName.ValueString()
 		}
-		apiResource.Spec["cache_rules"] = cache_rulesMap
+		createReq.Spec["cache_rules"] = cache_rulesMap
 	}
 
 
-	created, err := r.client.CreateCDNCacheRule(ctx, apiResource)
+	apiResource, err := r.client.CreateCDNCacheRule(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create CDNCacheRule: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["cache_rules"].(map[string]interface{}); ok && (isImport || data.CacheRules != nil) {
+		data.CacheRules = &CDNCacheRuleCacheRulesModel{
+			CacheBypass: func() *CDNCacheRuleEmptyModel {
+				if !isImport && data.CacheRules != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CacheRules.CacheBypass
+				}
+				// Import case: read from API
+				if _, ok := blockData["cache_bypass"].(map[string]interface{}); ok {
+					return &CDNCacheRuleEmptyModel{}
+				}
+				return nil
+			}(),
+			EligibleForCache: func() *CDNCacheRuleCacheRulesEligibleForCacheModel {
+				if !isImport && data.CacheRules != nil && data.CacheRules.EligibleForCache != nil {
+					// Normal Read: preserve existing state value
+					return data.CacheRules.EligibleForCache
+				}
+				// Import case: read from API
+				if _, ok := blockData["eligible_for_cache"].(map[string]interface{}); ok {
+					return &CDNCacheRuleCacheRulesEligibleForCacheModel{
+					}
+				}
+				return nil
+			}(),
+			RuleExpressionList: func() []CDNCacheRuleCacheRulesRuleExpressionListModel {
+				if listData, ok := blockData["rule_expression_list"].([]interface{}); ok && len(listData) > 0 {
+					var result []CDNCacheRuleCacheRulesRuleExpressionListModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, CDNCacheRuleCacheRulesRuleExpressionListModel{
+								ExpressionName: func() types.String {
+									if v, ok := itemMap["expression_name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			RuleName: func() types.String {
+				if v, ok := blockData["rule_name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 

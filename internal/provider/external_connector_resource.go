@@ -238,6 +238,7 @@ func (r *ExternalConnectorResource) Schema(ctx context.Context, req resource.Sch
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional: true,
+						Computed: true,
 					},
 				},
 
@@ -282,6 +283,7 @@ func (r *ExternalConnectorResource) Schema(ctx context.Context, req resource.Sch
 									"tenant": schema.StringAttribute{
 										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 										Optional: true,
+										Computed: true,
 									},
 								},
 							},
@@ -299,6 +301,7 @@ func (r *ExternalConnectorResource) Schema(ctx context.Context, req resource.Sch
 									"tenant": schema.StringAttribute{
 										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 										Optional: true,
+										Computed: true,
 									},
 								},
 							},
@@ -375,6 +378,7 @@ func (r *ExternalConnectorResource) Schema(ctx context.Context, req resource.Sch
 												"kind": schema.StringAttribute{
 													MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 													Optional: true,
+													Computed: true,
 												},
 												"name": schema.StringAttribute{
 													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -387,10 +391,12 @@ func (r *ExternalConnectorResource) Schema(ctx context.Context, req resource.Sch
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional: true,
+													Computed: true,
 												},
 												"uid": schema.StringAttribute{
 													MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 													Optional: true,
+													Computed: true,
 												},
 											},
 										},
@@ -548,7 +554,7 @@ func (r *ExternalConnectorResource) Create(ctx context.Context, req resource.Cre
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.ExternalConnector{
+	createReq := &client.ExternalConnector{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -557,7 +563,7 @@ func (r *ExternalConnectorResource) Create(ctx context.Context, req resource.Cre
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -566,7 +572,7 @@ func (r *ExternalConnectorResource) Create(ctx context.Context, req resource.Cre
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -575,7 +581,7 @@ func (r *ExternalConnectorResource) Create(ctx context.Context, req resource.Cre
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -590,7 +596,7 @@ func (r *ExternalConnectorResource) Create(ctx context.Context, req resource.Cre
 		if !data.CeSiteReference.Tenant.IsNull() && !data.CeSiteReference.Tenant.IsUnknown() {
 			ce_site_referenceMap["tenant"] = data.CeSiteReference.Tenant.ValueString()
 		}
-		apiResource.Spec["ce_site_reference"] = ce_site_referenceMap
+		createReq.Spec["ce_site_reference"] = ce_site_referenceMap
 	}
 	if data.Ipsec != nil {
 		ipsecMap := make(map[string]interface{})
@@ -611,24 +617,55 @@ func (r *ExternalConnectorResource) Create(ctx context.Context, req resource.Cre
 			}
 			ipsecMap["ipsec_tunnel_parameters"] = ipsec_tunnel_parametersNestedMap
 		}
-		apiResource.Spec["ipsec"] = ipsecMap
+		createReq.Spec["ipsec"] = ipsecMap
 	}
 
 
-	created, err := r.client.CreateExternalConnector(ctx, apiResource)
+	apiResource, err := r.client.CreateExternalConnector(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create ExternalConnector: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["ce_site_reference"].(map[string]interface{}); ok && (isImport || data.CeSiteReference != nil) {
+		data.CeSiteReference = &ExternalConnectorCeSiteReferenceModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["ipsec"].(map[string]interface{}); ok && isImport && data.Ipsec == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Ipsec = &ExternalConnectorIpsecModel{}
+	}
+	// Normal Read: preserve existing state value
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 

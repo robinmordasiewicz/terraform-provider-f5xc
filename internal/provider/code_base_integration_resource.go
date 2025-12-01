@@ -780,7 +780,7 @@ func (r *CodeBaseIntegrationResource) Create(ctx context.Context, req resource.C
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.CodeBaseIntegration{
+	createReq := &client.CodeBaseIntegration{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -789,7 +789,7 @@ func (r *CodeBaseIntegrationResource) Create(ctx context.Context, req resource.C
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -798,7 +798,7 @@ func (r *CodeBaseIntegrationResource) Create(ctx context.Context, req resource.C
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -807,7 +807,7 @@ func (r *CodeBaseIntegrationResource) Create(ctx context.Context, req resource.C
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -868,24 +868,33 @@ func (r *CodeBaseIntegrationResource) Create(ctx context.Context, req resource.C
 			}
 			code_base_integrationMap["gitlab_enterprise"] = gitlab_enterpriseNestedMap
 		}
-		apiResource.Spec["code_base_integration"] = code_base_integrationMap
+		createReq.Spec["code_base_integration"] = code_base_integrationMap
 	}
 
 
-	created, err := r.client.CreateCodeBaseIntegration(ctx, apiResource)
+	apiResource, err := r.client.CreateCodeBaseIntegration(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create CodeBaseIntegration: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if _, ok := apiResource.Spec["code_base_integration"].(map[string]interface{}); ok && isImport && data.CodeBaseIntegration == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.CodeBaseIntegration = &CodeBaseIntegrationCodeBaseIntegrationModel{}
+	}
+	// Normal Read: preserve existing state value
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 

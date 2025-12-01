@@ -507,7 +507,7 @@ func (r *OidcProviderResource) Create(ctx context.Context, req resource.CreateRe
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.OidcProvider{
+	createReq := &client.OidcProvider{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -516,7 +516,7 @@ func (r *OidcProviderResource) Create(ctx context.Context, req resource.CreateRe
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -525,7 +525,7 @@ func (r *OidcProviderResource) Create(ctx context.Context, req resource.CreateRe
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -534,7 +534,7 @@ func (r *OidcProviderResource) Create(ctx context.Context, req resource.CreateRe
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -573,7 +573,7 @@ func (r *OidcProviderResource) Create(ctx context.Context, req resource.CreateRe
 		if !data.AzureOidcSpecType.UserInfoURL.IsNull() && !data.AzureOidcSpecType.UserInfoURL.IsUnknown() {
 			azure_oidc_spec_typeMap["user_info_url"] = data.AzureOidcSpecType.UserInfoURL.ValueString()
 		}
-		apiResource.Spec["azure_oidc_spec_type"] = azure_oidc_spec_typeMap
+		createReq.Spec["azure_oidc_spec_type"] = azure_oidc_spec_typeMap
 	}
 	if data.GoogleOidcSpecType != nil {
 		google_oidc_spec_typeMap := make(map[string]interface{})
@@ -586,7 +586,7 @@ func (r *OidcProviderResource) Create(ctx context.Context, req resource.CreateRe
 		if !data.GoogleOidcSpecType.HostedDomain.IsNull() && !data.GoogleOidcSpecType.HostedDomain.IsUnknown() {
 			google_oidc_spec_typeMap["hosted_domain"] = data.GoogleOidcSpecType.HostedDomain.ValueString()
 		}
-		apiResource.Spec["google_oidc_spec_type"] = google_oidc_spec_typeMap
+		createReq.Spec["google_oidc_spec_type"] = google_oidc_spec_typeMap
 	}
 	if data.OidcV10SpecType != nil {
 		oidc_v10_spec_typeMap := make(map[string]interface{})
@@ -644,7 +644,7 @@ func (r *OidcProviderResource) Create(ctx context.Context, req resource.CreateRe
 		if !data.OidcV10SpecType.ValidateSignatures.IsNull() && !data.OidcV10SpecType.ValidateSignatures.IsUnknown() {
 			oidc_v10_spec_typeMap["validate_signatures"] = data.OidcV10SpecType.ValidateSignatures.ValueBool()
 		}
-		apiResource.Spec["oidc_v10_spec_type"] = oidc_v10_spec_typeMap
+		createReq.Spec["oidc_v10_spec_type"] = oidc_v10_spec_typeMap
 	}
 	if data.OktaOidcSpecType != nil {
 		okta_oidc_spec_typeMap := make(map[string]interface{})
@@ -681,34 +681,345 @@ func (r *OidcProviderResource) Create(ctx context.Context, req resource.CreateRe
 		if !data.OktaOidcSpecType.UserInfoURL.IsNull() && !data.OktaOidcSpecType.UserInfoURL.IsUnknown() {
 			okta_oidc_spec_typeMap["user_info_url"] = data.OktaOidcSpecType.UserInfoURL.ValueString()
 		}
-		apiResource.Spec["okta_oidc_spec_type"] = okta_oidc_spec_typeMap
+		createReq.Spec["okta_oidc_spec_type"] = okta_oidc_spec_typeMap
 	}
 	if !data.ProviderType.IsNull() && !data.ProviderType.IsUnknown() {
-		apiResource.Spec["provider_type"] = data.ProviderType.ValueString()
+		createReq.Spec["provider_type"] = data.ProviderType.ValueString()
 	}
 
 
-	created, err := r.client.CreateOidcProvider(ctx, apiResource)
+	apiResource, err := r.client.CreateOidcProvider(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create OidcProvider: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
-	if v, ok := created.Spec["provider_type"].(string); ok && v != "" {
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["azure_oidc_spec_type"].(map[string]interface{}); ok && (isImport || data.AzureOidcSpecType != nil) {
+		data.AzureOidcSpecType = &OidcProviderAzureOidcSpecTypeModel{
+			AuthorizationURL: func() types.String {
+				if v, ok := blockData["authorization_url"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			BackchannelLogout: func() types.Bool {
+				if !isImport && data.AzureOidcSpecType != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.AzureOidcSpecType.BackchannelLogout
+				}
+				// Import case: read from API
+				if v, ok := blockData["backchannel_logout"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			ClientID: func() types.String {
+				if v, ok := blockData["client_id"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			ClientSecret: func() types.String {
+				if v, ok := blockData["client_secret"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			DefaultScopes: func() types.String {
+				if v, ok := blockData["default_scopes"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Issuer: func() types.String {
+				if v, ok := blockData["issuer"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			JwksURL: func() types.String {
+				if v, ok := blockData["jwks_url"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			LogoutURL: func() types.String {
+				if v, ok := blockData["logout_url"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Prompt: func() types.String {
+				if v, ok := blockData["prompt"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			TokenURL: func() types.String {
+				if v, ok := blockData["token_url"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			UserInfoURL: func() types.String {
+				if v, ok := blockData["user_info_url"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["google_oidc_spec_type"].(map[string]interface{}); ok && (isImport || data.GoogleOidcSpecType != nil) {
+		data.GoogleOidcSpecType = &OidcProviderGoogleOidcSpecTypeModel{
+			ClientID: func() types.String {
+				if v, ok := blockData["client_id"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			ClientSecret: func() types.String {
+				if v, ok := blockData["client_secret"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			HostedDomain: func() types.String {
+				if v, ok := blockData["hosted_domain"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["oidc_v10_spec_type"].(map[string]interface{}); ok && (isImport || data.OidcV10SpecType != nil) {
+		data.OidcV10SpecType = &OidcProviderOidcV10SpecTypeModel{
+			AllowedClockSkew: func() types.String {
+				if v, ok := blockData["allowed_clock_skew"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			AuthorizationURL: func() types.String {
+				if v, ok := blockData["authorization_url"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			BackchannelLogout: func() types.Bool {
+				if !isImport && data.OidcV10SpecType != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.OidcV10SpecType.BackchannelLogout
+				}
+				// Import case: read from API
+				if v, ok := blockData["backchannel_logout"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			ClientID: func() types.String {
+				if v, ok := blockData["client_id"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			ClientSecret: func() types.String {
+				if v, ok := blockData["client_secret"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			DefaultScopes: func() types.String {
+				if v, ok := blockData["default_scopes"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			DisableUserInfo: func() types.Bool {
+				if !isImport && data.OidcV10SpecType != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.OidcV10SpecType.DisableUserInfo
+				}
+				// Import case: read from API
+				if v, ok := blockData["disable_user_info"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			DisplayName: func() types.String {
+				if v, ok := blockData["display_name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			ForwardedQueryParameters: func() types.String {
+				if v, ok := blockData["forwarded_query_parameters"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Issuer: func() types.String {
+				if v, ok := blockData["issuer"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			JwksURL: func() types.String {
+				if v, ok := blockData["jwks_url"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			LogoutURL: func() types.String {
+				if v, ok := blockData["logout_url"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			PassCurrentLocale: func() types.Bool {
+				if !isImport && data.OidcV10SpecType != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.OidcV10SpecType.PassCurrentLocale
+				}
+				// Import case: read from API
+				if v, ok := blockData["pass_current_locale"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			PassLoginHint: func() types.Bool {
+				if !isImport && data.OidcV10SpecType != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.OidcV10SpecType.PassLoginHint
+				}
+				// Import case: read from API
+				if v, ok := blockData["pass_login_hint"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			Prompt: func() types.String {
+				if v, ok := blockData["prompt"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			TokenURL: func() types.String {
+				if v, ok := blockData["token_url"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			UserInfoURL: func() types.String {
+				if v, ok := blockData["user_info_url"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			ValidateSignatures: func() types.Bool {
+				if !isImport && data.OidcV10SpecType != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.OidcV10SpecType.ValidateSignatures
+				}
+				// Import case: read from API
+				if v, ok := blockData["validate_signatures"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["okta_oidc_spec_type"].(map[string]interface{}); ok && (isImport || data.OktaOidcSpecType != nil) {
+		data.OktaOidcSpecType = &OidcProviderOktaOidcSpecTypeModel{
+			AuthorizationURL: func() types.String {
+				if v, ok := blockData["authorization_url"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			BackchannelLogout: func() types.Bool {
+				if !isImport && data.OktaOidcSpecType != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.OktaOidcSpecType.BackchannelLogout
+				}
+				// Import case: read from API
+				if v, ok := blockData["backchannel_logout"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			ClientID: func() types.String {
+				if v, ok := blockData["client_id"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			ClientSecret: func() types.String {
+				if v, ok := blockData["client_secret"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			DefaultScopes: func() types.String {
+				if v, ok := blockData["default_scopes"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Issuer: func() types.String {
+				if v, ok := blockData["issuer"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			JwksURL: func() types.String {
+				if v, ok := blockData["jwks_url"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			LogoutURL: func() types.String {
+				if v, ok := blockData["logout_url"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Prompt: func() types.String {
+				if v, ok := blockData["prompt"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			TokenURL: func() types.String {
+				if v, ok := blockData["token_url"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			UserInfoURL: func() types.String {
+				if v, ok := blockData["user_info_url"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if v, ok := apiResource.Spec["provider_type"].(string); ok && v != "" {
 		data.ProviderType = types.StringValue(v)
-	} else if data.ProviderType.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.ProviderType = types.StringNull()
 	}
-	// If plan had a value, preserve it
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 

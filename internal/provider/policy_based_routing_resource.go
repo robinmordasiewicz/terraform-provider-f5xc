@@ -316,6 +316,7 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 											"tenant": schema.StringAttribute{
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional: true,
+												Computed: true,
 											},
 										},
 									},
@@ -377,6 +378,7 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -460,6 +462,7 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 						"tenant": schema.StringAttribute{
 							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 							Optional: true,
+							Computed: true,
 						},
 					},
 
@@ -530,6 +533,7 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 											"tenant": schema.StringAttribute{
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional: true,
+												Computed: true,
 											},
 										},
 									},
@@ -546,6 +550,7 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 													"kind": schema.StringAttribute{
 														MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 														Optional: true,
+														Computed: true,
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -558,10 +563,12 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 													"tenant": schema.StringAttribute{
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 														Optional: true,
+														Computed: true,
 													},
 													"uid": schema.StringAttribute{
 														MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 														Optional: true,
+														Computed: true,
 													},
 												},
 											},
@@ -738,7 +745,7 @@ func (r *PolicyBasedRoutingResource) Create(ctx context.Context, req resource.Cr
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.PolicyBasedRouting{
+	createReq := &client.PolicyBasedRouting{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -747,7 +754,7 @@ func (r *PolicyBasedRoutingResource) Create(ctx context.Context, req resource.Cr
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -756,7 +763,7 @@ func (r *PolicyBasedRoutingResource) Create(ctx context.Context, req resource.Cr
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -765,7 +772,7 @@ func (r *PolicyBasedRoutingResource) Create(ctx context.Context, req resource.Cr
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -824,7 +831,7 @@ func (r *PolicyBasedRoutingResource) Create(ctx context.Context, req resource.Cr
 			}
 			forward_proxy_pbrMap["forward_proxy_pbr_rules"] = forward_proxy_pbr_rulesList
 		}
-		apiResource.Spec["forward_proxy_pbr"] = forward_proxy_pbrMap
+		createReq.Spec["forward_proxy_pbr"] = forward_proxy_pbrMap
 	}
 	if len(data.ForwardingClassList) > 0 {
 		var forwarding_class_listList []map[string]interface{}
@@ -841,7 +848,7 @@ func (r *PolicyBasedRoutingResource) Create(ctx context.Context, req resource.Cr
 			}
 			forwarding_class_listList = append(forwarding_class_listList, itemMap)
 		}
-		apiResource.Spec["forwarding_class_list"] = forwarding_class_listList
+		createReq.Spec["forwarding_class_list"] = forwarding_class_listList
 	}
 	if data.NetworkPbr != nil {
 		network_pbrMap := make(map[string]interface{})
@@ -908,24 +915,320 @@ func (r *PolicyBasedRoutingResource) Create(ctx context.Context, req resource.Cr
 			prefix_listNestedMap := make(map[string]interface{})
 			network_pbrMap["prefix_list"] = prefix_listNestedMap
 		}
-		apiResource.Spec["network_pbr"] = network_pbrMap
+		createReq.Spec["network_pbr"] = network_pbrMap
 	}
 
 
-	created, err := r.client.CreatePolicyBasedRouting(ctx, apiResource)
+	apiResource, err := r.client.CreatePolicyBasedRouting(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create PolicyBasedRouting: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["forward_proxy_pbr"].(map[string]interface{}); ok && (isImport || data.ForwardProxyPbr != nil) {
+		data.ForwardProxyPbr = &PolicyBasedRoutingForwardProxyPbrModel{
+			ForwardProxyPbrRules: func() []PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesModel {
+				if listData, ok := blockData["forward_proxy_pbr_rules"].([]interface{}); ok && len(listData) > 0 {
+					var result []PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesModel{
+								AllDestinations: func() *PolicyBasedRoutingEmptyModel {
+									if _, ok := itemMap["all_destinations"].(map[string]interface{}); ok {
+										return &PolicyBasedRoutingEmptyModel{}
+									}
+									return nil
+								}(),
+								AllSources: func() *PolicyBasedRoutingEmptyModel {
+									if _, ok := itemMap["all_sources"].(map[string]interface{}); ok {
+										return &PolicyBasedRoutingEmptyModel{}
+									}
+									return nil
+								}(),
+								HTTPList: func() *PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesHTTPListModel {
+									if _, ok := itemMap["http_list"].(map[string]interface{}); ok {
+										return &PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesHTTPListModel{
+										}
+									}
+									return nil
+								}(),
+								IPPrefixSet: func() *PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesIPPrefixSetModel {
+									if deepMap, ok := itemMap["ip_prefix_set"].(map[string]interface{}); ok {
+										return &PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesIPPrefixSetModel{
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Namespace: func() types.String {
+												if v, ok := deepMap["namespace"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Tenant: func() types.String {
+												if v, ok := deepMap["tenant"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								LabelSelector: func() *PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesLabelSelectorModel {
+									if _, ok := itemMap["label_selector"].(map[string]interface{}); ok {
+										return &PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesLabelSelectorModel{
+										}
+									}
+									return nil
+								}(),
+								Metadata: func() *PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesMetadataModel {
+									if deepMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
+										return &PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesMetadataModel{
+											DescriptionSpec: func() types.String {
+												if v, ok := deepMap["description"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								PrefixList: func() *PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesPrefixListModel {
+									if _, ok := itemMap["prefix_list"].(map[string]interface{}); ok {
+										return &PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesPrefixListModel{
+										}
+									}
+									return nil
+								}(),
+								TLSList: func() *PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesTLSListModel {
+									if _, ok := itemMap["tls_list"].(map[string]interface{}); ok {
+										return &PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesTLSListModel{
+										}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if listData, ok := apiResource.Spec["forwarding_class_list"].([]interface{}); ok && len(listData) > 0 {
+		var forwarding_class_listList []PolicyBasedRoutingForwardingClassListModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				forwarding_class_listList = append(forwarding_class_listList, PolicyBasedRoutingForwardingClassListModel{
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Namespace: func() types.String {
+						if v, ok := itemMap["namespace"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Tenant: func() types.String {
+						if v, ok := itemMap["tenant"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.ForwardingClassList = forwarding_class_listList
+	}
+	if blockData, ok := apiResource.Spec["network_pbr"].(map[string]interface{}); ok && (isImport || data.NetworkPbr != nil) {
+		data.NetworkPbr = &PolicyBasedRoutingNetworkPbrModel{
+			Any: func() *PolicyBasedRoutingEmptyModel {
+				if !isImport && data.NetworkPbr != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.NetworkPbr.Any
+				}
+				// Import case: read from API
+				if _, ok := blockData["any"].(map[string]interface{}); ok {
+					return &PolicyBasedRoutingEmptyModel{}
+				}
+				return nil
+			}(),
+			LabelSelector: func() *PolicyBasedRoutingNetworkPbrLabelSelectorModel {
+				if !isImport && data.NetworkPbr != nil && data.NetworkPbr.LabelSelector != nil {
+					// Normal Read: preserve existing state value
+					return data.NetworkPbr.LabelSelector
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["label_selector"].(map[string]interface{}); ok {
+					return &PolicyBasedRoutingNetworkPbrLabelSelectorModel{
+						Expressions: func() types.List {
+							if v, ok := nestedBlockData["expressions"].([]interface{}); ok && len(v) > 0 {
+								var items []string
+								for _, item := range v {
+									if s, ok := item.(string); ok {
+										items = append(items, s)
+									}
+								}
+								listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+								return listVal
+							}
+							return types.ListNull(types.StringType)
+						}(),
+					}
+				}
+				return nil
+			}(),
+			NetworkPbrRules: func() []PolicyBasedRoutingNetworkPbrNetworkPbrRulesModel {
+				if listData, ok := blockData["network_pbr_rules"].([]interface{}); ok && len(listData) > 0 {
+					var result []PolicyBasedRoutingNetworkPbrNetworkPbrRulesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, PolicyBasedRoutingNetworkPbrNetworkPbrRulesModel{
+								AllTCPTraffic: func() *PolicyBasedRoutingEmptyModel {
+									if _, ok := itemMap["all_tcp_traffic"].(map[string]interface{}); ok {
+										return &PolicyBasedRoutingEmptyModel{}
+									}
+									return nil
+								}(),
+								AllTraffic: func() *PolicyBasedRoutingEmptyModel {
+									if _, ok := itemMap["all_traffic"].(map[string]interface{}); ok {
+										return &PolicyBasedRoutingEmptyModel{}
+									}
+									return nil
+								}(),
+								AllUDPTraffic: func() *PolicyBasedRoutingEmptyModel {
+									if _, ok := itemMap["all_udp_traffic"].(map[string]interface{}); ok {
+										return &PolicyBasedRoutingEmptyModel{}
+									}
+									return nil
+								}(),
+								Any: func() *PolicyBasedRoutingEmptyModel {
+									if _, ok := itemMap["any"].(map[string]interface{}); ok {
+										return &PolicyBasedRoutingEmptyModel{}
+									}
+									return nil
+								}(),
+								Applications: func() *PolicyBasedRoutingNetworkPbrNetworkPbrRulesApplicationsModel {
+									if _, ok := itemMap["applications"].(map[string]interface{}); ok {
+										return &PolicyBasedRoutingNetworkPbrNetworkPbrRulesApplicationsModel{
+										}
+									}
+									return nil
+								}(),
+								DNSName: func() types.String {
+									if v, ok := itemMap["dns_name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								IPPrefixSet: func() *PolicyBasedRoutingNetworkPbrNetworkPbrRulesIPPrefixSetModel {
+									if _, ok := itemMap["ip_prefix_set"].(map[string]interface{}); ok {
+										return &PolicyBasedRoutingNetworkPbrNetworkPbrRulesIPPrefixSetModel{
+										}
+									}
+									return nil
+								}(),
+								Metadata: func() *PolicyBasedRoutingNetworkPbrNetworkPbrRulesMetadataModel {
+									if deepMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
+										return &PolicyBasedRoutingNetworkPbrNetworkPbrRulesMetadataModel{
+											DescriptionSpec: func() types.String {
+												if v, ok := deepMap["description"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								PrefixList: func() *PolicyBasedRoutingNetworkPbrNetworkPbrRulesPrefixListModel {
+									if _, ok := itemMap["prefix_list"].(map[string]interface{}); ok {
+										return &PolicyBasedRoutingNetworkPbrNetworkPbrRulesPrefixListModel{
+										}
+									}
+									return nil
+								}(),
+								ProtocolPortRange: func() *PolicyBasedRoutingNetworkPbrNetworkPbrRulesProtocolPortRangeModel {
+									if deepMap, ok := itemMap["protocol_port_range"].(map[string]interface{}); ok {
+										return &PolicyBasedRoutingNetworkPbrNetworkPbrRulesProtocolPortRangeModel{
+											Protocol: func() types.String {
+												if v, ok := deepMap["protocol"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			PrefixList: func() *PolicyBasedRoutingNetworkPbrPrefixListModel {
+				if !isImport && data.NetworkPbr != nil && data.NetworkPbr.PrefixList != nil {
+					// Normal Read: preserve existing state value
+					return data.NetworkPbr.PrefixList
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["prefix_list"].(map[string]interface{}); ok {
+					return &PolicyBasedRoutingNetworkPbrPrefixListModel{
+						Prefixes: func() types.List {
+							if v, ok := nestedBlockData["prefixes"].([]interface{}); ok && len(v) > 0 {
+								var items []string
+								for _, item := range v {
+									if s, ok := item.(string); ok {
+										items = append(items, s)
+									}
+								}
+								listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+								return listVal
+							}
+							return types.ListNull(types.StringType)
+						}(),
+					}
+				}
+				return nil
+			}(),
+		}
+	}
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
@@ -1117,7 +1420,8 @@ func (r *PolicyBasedRoutingResource) Read(ctx context.Context, req resource.Read
 	}
 	if listData, ok := apiResource.Spec["forwarding_class_list"].([]interface{}); ok && len(listData) > 0 {
 		var forwarding_class_listList []PolicyBasedRoutingForwardingClassListModel
-		for _, item := range listData {
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				forwarding_class_listList = append(forwarding_class_listList, PolicyBasedRoutingForwardingClassListModel{
 					Name: func() types.String {

@@ -390,7 +390,7 @@ func (r *CminstanceResource) Create(ctx context.Context, req resource.CreateRequ
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.Cminstance{
+	createReq := &client.Cminstance{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -399,7 +399,7 @@ func (r *CminstanceResource) Create(ctx context.Context, req resource.CreateRequ
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -408,7 +408,7 @@ func (r *CminstanceResource) Create(ctx context.Context, req resource.CreateRequ
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -417,7 +417,7 @@ func (r *CminstanceResource) Create(ctx context.Context, req resource.CreateRequ
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -446,14 +446,14 @@ func (r *CminstanceResource) Create(ctx context.Context, req resource.CreateRequ
 			}
 			api_tokenMap["clear_secret_info"] = clear_secret_infoNestedMap
 		}
-		apiResource.Spec["api_token"] = api_tokenMap
+		createReq.Spec["api_token"] = api_tokenMap
 	}
 	if data.IP != nil {
 		ipMap := make(map[string]interface{})
 		if !data.IP.Addr.IsNull() && !data.IP.Addr.IsUnknown() {
 			ipMap["addr"] = data.IP.Addr.ValueString()
 		}
-		apiResource.Spec["ip"] = ipMap
+		createReq.Spec["ip"] = ipMap
 	}
 	if data.Password != nil {
 		passwordMap := make(map[string]interface{})
@@ -480,44 +480,64 @@ func (r *CminstanceResource) Create(ctx context.Context, req resource.CreateRequ
 			}
 			passwordMap["clear_secret_info"] = clear_secret_infoNestedMap
 		}
-		apiResource.Spec["password"] = passwordMap
+		createReq.Spec["password"] = passwordMap
 	}
 	if !data.Port.IsNull() && !data.Port.IsUnknown() {
-		apiResource.Spec["port"] = data.Port.ValueInt64()
+		createReq.Spec["port"] = data.Port.ValueInt64()
 	}
 	if !data.Username.IsNull() && !data.Username.IsUnknown() {
-		apiResource.Spec["username"] = data.Username.ValueString()
+		createReq.Spec["username"] = data.Username.ValueString()
 	}
 
 
-	created, err := r.client.CreateCminstance(ctx, apiResource)
+	apiResource, err := r.client.CreateCminstance(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create Cminstance: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
-	if v, ok := created.Spec["port"].(float64); ok {
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if _, ok := apiResource.Spec["api_token"].(map[string]interface{}); ok && isImport && data.APIToken == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.APIToken = &CminstanceAPITokenModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["ip"].(map[string]interface{}); ok && (isImport || data.IP != nil) {
+		data.IP = &CminstanceIPModel{
+			Addr: func() types.String {
+				if v, ok := blockData["addr"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["password"].(map[string]interface{}); ok && isImport && data.Password == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Password = &CminstancePasswordModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["port"].(float64); ok {
 		data.Port = types.Int64Value(int64(v))
-	} else if data.Port.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.Port = types.Int64Null()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["username"].(string); ok && v != "" {
+	if v, ok := apiResource.Spec["username"].(string); ok && v != "" {
 		data.Username = types.StringValue(v)
-	} else if data.Username.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.Username = types.StringNull()
 	}
-	// If plan had a value, preserve it
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 

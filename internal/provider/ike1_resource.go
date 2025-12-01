@@ -311,7 +311,7 @@ func (r *Ike1Resource) Create(ctx context.Context, req resource.CreateRequest, r
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.Ike1{
+	createReq := &client.Ike1{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -320,7 +320,7 @@ func (r *Ike1Resource) Create(ctx context.Context, req resource.CreateRequest, r
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -329,7 +329,7 @@ func (r *Ike1Resource) Create(ctx context.Context, req resource.CreateRequest, r
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -338,7 +338,7 @@ func (r *Ike1Resource) Create(ctx context.Context, req resource.CreateRequest, r
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -347,53 +347,107 @@ func (r *Ike1Resource) Create(ctx context.Context, req resource.CreateRequest, r
 		if !data.IKEKeylifetimeHours.Duration.IsNull() && !data.IKEKeylifetimeHours.Duration.IsUnknown() {
 			ike_keylifetime_hoursMap["duration"] = data.IKEKeylifetimeHours.Duration.ValueInt64()
 		}
-		apiResource.Spec["ike_keylifetime_hours"] = ike_keylifetime_hoursMap
+		createReq.Spec["ike_keylifetime_hours"] = ike_keylifetime_hoursMap
 	}
 	if data.IKEKeylifetimeMinutes != nil {
 		ike_keylifetime_minutesMap := make(map[string]interface{})
 		if !data.IKEKeylifetimeMinutes.Duration.IsNull() && !data.IKEKeylifetimeMinutes.Duration.IsUnknown() {
 			ike_keylifetime_minutesMap["duration"] = data.IKEKeylifetimeMinutes.Duration.ValueInt64()
 		}
-		apiResource.Spec["ike_keylifetime_minutes"] = ike_keylifetime_minutesMap
+		createReq.Spec["ike_keylifetime_minutes"] = ike_keylifetime_minutesMap
 	}
 	if data.ReauthDisabled != nil {
 		reauth_disabledMap := make(map[string]interface{})
-		apiResource.Spec["reauth_disabled"] = reauth_disabledMap
+		createReq.Spec["reauth_disabled"] = reauth_disabledMap
 	}
 	if data.ReauthTimeoutDays != nil {
 		reauth_timeout_daysMap := make(map[string]interface{})
 		if !data.ReauthTimeoutDays.Duration.IsNull() && !data.ReauthTimeoutDays.Duration.IsUnknown() {
 			reauth_timeout_daysMap["duration"] = data.ReauthTimeoutDays.Duration.ValueInt64()
 		}
-		apiResource.Spec["reauth_timeout_days"] = reauth_timeout_daysMap
+		createReq.Spec["reauth_timeout_days"] = reauth_timeout_daysMap
 	}
 	if data.ReauthTimeoutHours != nil {
 		reauth_timeout_hoursMap := make(map[string]interface{})
 		if !data.ReauthTimeoutHours.Duration.IsNull() && !data.ReauthTimeoutHours.Duration.IsUnknown() {
 			reauth_timeout_hoursMap["duration"] = data.ReauthTimeoutHours.Duration.ValueInt64()
 		}
-		apiResource.Spec["reauth_timeout_hours"] = reauth_timeout_hoursMap
+		createReq.Spec["reauth_timeout_hours"] = reauth_timeout_hoursMap
 	}
 	if data.UseDefaultKeylifetime != nil {
 		use_default_keylifetimeMap := make(map[string]interface{})
-		apiResource.Spec["use_default_keylifetime"] = use_default_keylifetimeMap
+		createReq.Spec["use_default_keylifetime"] = use_default_keylifetimeMap
 	}
 
 
-	created, err := r.client.CreateIke1(ctx, apiResource)
+	apiResource, err := r.client.CreateIke1(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create Ike1: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["ike_keylifetime_hours"].(map[string]interface{}); ok && (isImport || data.IKEKeylifetimeHours != nil) {
+		data.IKEKeylifetimeHours = &Ike1IKEKeylifetimeHoursModel{
+			Duration: func() types.Int64 {
+				if v, ok := blockData["duration"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["ike_keylifetime_minutes"].(map[string]interface{}); ok && (isImport || data.IKEKeylifetimeMinutes != nil) {
+		data.IKEKeylifetimeMinutes = &Ike1IKEKeylifetimeMinutesModel{
+			Duration: func() types.Int64 {
+				if v, ok := blockData["duration"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["reauth_disabled"].(map[string]interface{}); ok && isImport && data.ReauthDisabled == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ReauthDisabled = &Ike1EmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["reauth_timeout_days"].(map[string]interface{}); ok && (isImport || data.ReauthTimeoutDays != nil) {
+		data.ReauthTimeoutDays = &Ike1ReauthTimeoutDaysModel{
+			Duration: func() types.Int64 {
+				if v, ok := blockData["duration"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["reauth_timeout_hours"].(map[string]interface{}); ok && (isImport || data.ReauthTimeoutHours != nil) {
+		data.ReauthTimeoutHours = &Ike1ReauthTimeoutHoursModel{
+			Duration: func() types.Int64 {
+				if v, ok := blockData["duration"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["use_default_keylifetime"].(map[string]interface{}); ok && isImport && data.UseDefaultKeylifetime == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.UseDefaultKeylifetime = &Ike1EmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 

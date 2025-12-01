@@ -259,6 +259,7 @@ func (r *TenantProfileResource) Schema(ctx context.Context, req resource.SchemaR
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional: true,
+						Computed: true,
 					},
 				},
 
@@ -380,7 +381,7 @@ func (r *TenantProfileResource) Create(ctx context.Context, req resource.CreateR
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.TenantProfile{
+	createReq := &client.TenantProfile{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -389,7 +390,7 @@ func (r *TenantProfileResource) Create(ctx context.Context, req resource.CreateR
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -398,7 +399,7 @@ func (r *TenantProfileResource) Create(ctx context.Context, req resource.CreateR
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -407,7 +408,7 @@ func (r *TenantProfileResource) Create(ctx context.Context, req resource.CreateR
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -418,9 +419,23 @@ func (r *TenantProfileResource) Create(ctx context.Context, req resource.CreateR
 			if !item.Name.IsNull() && !item.Name.IsUnknown() {
 				itemMap["name"] = item.Name.ValueString()
 			}
+			if len(item.NamespaceRoles) > 0 {
+				var namespace_rolesNestedList []map[string]interface{}
+				for _, nestedItem := range item.NamespaceRoles {
+					nestedItemMap := make(map[string]interface{})
+					if !nestedItem.Namespace.IsNull() && !nestedItem.Namespace.IsUnknown() {
+						nestedItemMap["namespace"] = nestedItem.Namespace.ValueString()
+					}
+					if !nestedItem.Role.IsNull() && !nestedItem.Role.IsUnknown() {
+						nestedItemMap["role"] = nestedItem.Role.ValueString()
+					}
+					namespace_rolesNestedList = append(namespace_rolesNestedList, nestedItemMap)
+				}
+				itemMap["namespace_roles"] = namespace_rolesNestedList
+			}
 			ct_groupsList = append(ct_groupsList, itemMap)
 		}
-		apiResource.Spec["ct_groups"] = ct_groupsList
+		createReq.Spec["ct_groups"] = ct_groupsList
 	}
 	if data.Favicon != nil {
 		faviconMap := make(map[string]interface{})
@@ -433,7 +448,7 @@ func (r *TenantProfileResource) Create(ctx context.Context, req resource.CreateR
 		if !data.Favicon.ContentType.IsNull() && !data.Favicon.ContentType.IsUnknown() {
 			faviconMap["content_type"] = data.Favicon.ContentType.ValueString()
 		}
-		apiResource.Spec["favicon"] = faviconMap
+		createReq.Spec["favicon"] = faviconMap
 	}
 	if data.Logo != nil {
 		logoMap := make(map[string]interface{})
@@ -446,7 +461,7 @@ func (r *TenantProfileResource) Create(ctx context.Context, req resource.CreateR
 		if !data.Logo.ContentType.IsNull() && !data.Logo.ContentType.IsUnknown() {
 			logoMap["content_type"] = data.Logo.ContentType.ValueString()
 		}
-		apiResource.Spec["logo"] = logoMap
+		createReq.Spec["logo"] = logoMap
 	}
 	if data.Plan != nil {
 		planMap := make(map[string]interface{})
@@ -459,44 +474,170 @@ func (r *TenantProfileResource) Create(ctx context.Context, req resource.CreateR
 		if !data.Plan.Tenant.IsNull() && !data.Plan.Tenant.IsUnknown() {
 			planMap["tenant"] = data.Plan.Tenant.ValueString()
 		}
-		apiResource.Spec["plan"] = planMap
+		createReq.Spec["plan"] = planMap
 	}
 	if !data.EnableSupportAccess.IsNull() && !data.EnableSupportAccess.IsUnknown() {
-		apiResource.Spec["enable_support_access"] = data.EnableSupportAccess.ValueBool()
+		createReq.Spec["enable_support_access"] = data.EnableSupportAccess.ValueBool()
 	}
 	if !data.SupportEmail.IsNull() && !data.SupportEmail.IsUnknown() {
-		apiResource.Spec["support_email"] = data.SupportEmail.ValueString()
+		createReq.Spec["support_email"] = data.SupportEmail.ValueString()
 	}
 
 
-	created, err := r.client.CreateTenantProfile(ctx, apiResource)
+	apiResource, err := r.client.CreateTenantProfile(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create TenantProfile: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
-	if v, ok := created.Spec["enable_support_access"].(bool); ok {
-		data.EnableSupportAccess = types.BoolValue(v)
-	} else if data.EnableSupportAccess.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
-		data.EnableSupportAccess = types.BoolNull()
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if listData, ok := apiResource.Spec["ct_groups"].([]interface{}); ok && len(listData) > 0 {
+		var ct_groupsList []TenantProfileCtGroupsModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				ct_groupsList = append(ct_groupsList, TenantProfileCtGroupsModel{
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					NamespaceRoles: func() []TenantProfileCtGroupsNamespaceRolesModel {
+						if nestedListData, ok := itemMap["namespace_roles"].([]interface{}); ok && len(nestedListData) > 0 {
+							var result []TenantProfileCtGroupsNamespaceRolesModel
+							for _, nestedItem := range nestedListData {
+								if nestedItemMap, ok := nestedItem.(map[string]interface{}); ok {
+									result = append(result, TenantProfileCtGroupsNamespaceRolesModel{
+										Namespace: func() types.String {
+											if v, ok := nestedItemMap["namespace"].(string); ok && v != "" {
+												return types.StringValue(v)
+											}
+											return types.StringNull()
+										}(),
+										Role: func() types.String {
+											if v, ok := nestedItemMap["role"].(string); ok && v != "" {
+												return types.StringValue(v)
+											}
+											return types.StringNull()
+										}(),
+									})
+								}
+							}
+							return result
+						}
+						return nil
+					}(),
+				})
+			}
+		}
+		data.CtGroups = ct_groupsList
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["support_email"].(string); ok && v != "" {
+	if blockData, ok := apiResource.Spec["favicon"].(map[string]interface{}); ok && (isImport || data.Favicon != nil) {
+		data.Favicon = &TenantProfileFaviconModel{
+			AWSS3: func() *TenantProfileEmptyModel {
+				if !isImport && data.Favicon != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.Favicon.AWSS3
+				}
+				// Import case: read from API
+				if _, ok := blockData["aws_s3"].(map[string]interface{}); ok {
+					return &TenantProfileEmptyModel{}
+				}
+				return nil
+			}(),
+			Content: func() types.String {
+				if v, ok := blockData["content"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			ContentType: func() types.String {
+				if v, ok := blockData["content_type"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["logo"].(map[string]interface{}); ok && (isImport || data.Logo != nil) {
+		data.Logo = &TenantProfileLogoModel{
+			AWSS3: func() *TenantProfileEmptyModel {
+				if !isImport && data.Logo != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.Logo.AWSS3
+				}
+				// Import case: read from API
+				if _, ok := blockData["aws_s3"].(map[string]interface{}); ok {
+					return &TenantProfileEmptyModel{}
+				}
+				return nil
+			}(),
+			Content: func() types.String {
+				if v, ok := blockData["content"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			ContentType: func() types.String {
+				if v, ok := blockData["content_type"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["plan"].(map[string]interface{}); ok && (isImport || data.Plan != nil) {
+		data.Plan = &TenantProfilePlanModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	// Top-level Optional bool: preserve prior state to avoid API default drift
+	if !isImport && !data.EnableSupportAccess.IsNull() && !data.EnableSupportAccess.IsUnknown() {
+		// Normal Read: preserve existing state value (do nothing)
+	} else {
+		// Import case, null state, or unknown (after Create): read from API
+		if v, ok := apiResource.Spec["enable_support_access"].(bool); ok {
+			data.EnableSupportAccess = types.BoolValue(v)
+		} else {
+			data.EnableSupportAccess = types.BoolNull()
+		}
+	}
+	if v, ok := apiResource.Spec["support_email"].(string); ok && v != "" {
 		data.SupportEmail = types.StringValue(v)
-	} else if data.SupportEmail.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.SupportEmail = types.StringNull()
 	}
-	// If plan had a value, preserve it
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
@@ -587,7 +728,8 @@ func (r *TenantProfileResource) Read(ctx context.Context, req resource.ReadReque
 	})
 	if listData, ok := apiResource.Spec["ct_groups"].([]interface{}); ok && len(listData) > 0 {
 		var ct_groupsList []TenantProfileCtGroupsModel
-		for _, item := range listData {
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				ct_groupsList = append(ct_groupsList, TenantProfileCtGroupsModel{
 					Name: func() types.String {
@@ -595,6 +737,31 @@ func (r *TenantProfileResource) Read(ctx context.Context, req resource.ReadReque
 							return types.StringValue(v)
 						}
 						return types.StringNull()
+					}(),
+					NamespaceRoles: func() []TenantProfileCtGroupsNamespaceRolesModel {
+						if nestedListData, ok := itemMap["namespace_roles"].([]interface{}); ok && len(nestedListData) > 0 {
+							var result []TenantProfileCtGroupsNamespaceRolesModel
+							for _, nestedItem := range nestedListData {
+								if nestedItemMap, ok := nestedItem.(map[string]interface{}); ok {
+									result = append(result, TenantProfileCtGroupsNamespaceRolesModel{
+										Namespace: func() types.String {
+											if v, ok := nestedItemMap["namespace"].(string); ok && v != "" {
+												return types.StringValue(v)
+											}
+											return types.StringNull()
+										}(),
+										Role: func() types.String {
+											if v, ok := nestedItemMap["role"].(string); ok && v != "" {
+												return types.StringValue(v)
+											}
+											return types.StringNull()
+										}(),
+									})
+								}
+							}
+							return result
+						}
+						return nil
 					}(),
 				})
 			}
@@ -680,10 +847,10 @@ func (r *TenantProfileResource) Read(ctx context.Context, req resource.ReadReque
 		}
 	}
 	// Top-level Optional bool: preserve prior state to avoid API default drift
-	if !isImport && !data.EnableSupportAccess.IsNull() {
+	if !isImport && !data.EnableSupportAccess.IsNull() && !data.EnableSupportAccess.IsUnknown() {
 		// Normal Read: preserve existing state value (do nothing)
 	} else {
-		// Import case or null state: read from API
+		// Import case, null state, or unknown (after Create): read from API
 		if v, ok := apiResource.Spec["enable_support_access"].(bool); ok {
 			data.EnableSupportAccess = types.BoolValue(v)
 		} else {
@@ -762,6 +929,20 @@ func (r *TenantProfileResource) Update(ctx context.Context, req resource.UpdateR
 			itemMap := make(map[string]interface{})
 			if !item.Name.IsNull() && !item.Name.IsUnknown() {
 				itemMap["name"] = item.Name.ValueString()
+			}
+			if len(item.NamespaceRoles) > 0 {
+				var namespace_rolesNestedList []map[string]interface{}
+				for _, nestedItem := range item.NamespaceRoles {
+					nestedItemMap := make(map[string]interface{})
+					if !nestedItem.Namespace.IsNull() && !nestedItem.Namespace.IsUnknown() {
+						nestedItemMap["namespace"] = nestedItem.Namespace.ValueString()
+					}
+					if !nestedItem.Role.IsNull() && !nestedItem.Role.IsUnknown() {
+						nestedItemMap["role"] = nestedItem.Role.ValueString()
+					}
+					namespace_rolesNestedList = append(namespace_rolesNestedList, nestedItemMap)
+				}
+				itemMap["namespace_roles"] = namespace_rolesNestedList
 			}
 			ct_groupsList = append(ct_groupsList, itemMap)
 		}

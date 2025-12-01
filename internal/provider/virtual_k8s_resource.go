@@ -156,6 +156,7 @@ func (r *VirtualK8SResource) Schema(ctx context.Context, req resource.SchemaRequ
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional: true,
+						Computed: true,
 					},
 				},
 
@@ -173,6 +174,7 @@ func (r *VirtualK8SResource) Schema(ctx context.Context, req resource.SchemaRequ
 						"kind": schema.StringAttribute{
 							MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 							Optional: true,
+							Computed: true,
 						},
 						"name": schema.StringAttribute{
 							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -185,10 +187,12 @@ func (r *VirtualK8SResource) Schema(ctx context.Context, req resource.SchemaRequ
 						"tenant": schema.StringAttribute{
 							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 							Optional: true,
+							Computed: true,
 						},
 						"uid": schema.StringAttribute{
 							MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 							Optional: true,
+							Computed: true,
 						},
 					},
 
@@ -311,7 +315,7 @@ func (r *VirtualK8SResource) Create(ctx context.Context, req resource.CreateRequ
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.VirtualK8S{
+	createReq := &client.VirtualK8S{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -320,7 +324,7 @@ func (r *VirtualK8SResource) Create(ctx context.Context, req resource.CreateRequ
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -329,7 +333,7 @@ func (r *VirtualK8SResource) Create(ctx context.Context, req resource.CreateRequ
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -338,7 +342,7 @@ func (r *VirtualK8SResource) Create(ctx context.Context, req resource.CreateRequ
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -353,15 +357,15 @@ func (r *VirtualK8SResource) Create(ctx context.Context, req resource.CreateRequ
 		if !data.DefaultFlavorRef.Tenant.IsNull() && !data.DefaultFlavorRef.Tenant.IsUnknown() {
 			default_flavor_refMap["tenant"] = data.DefaultFlavorRef.Tenant.ValueString()
 		}
-		apiResource.Spec["default_flavor_ref"] = default_flavor_refMap
+		createReq.Spec["default_flavor_ref"] = default_flavor_refMap
 	}
 	if data.Disabled != nil {
 		disabledMap := make(map[string]interface{})
-		apiResource.Spec["disabled"] = disabledMap
+		createReq.Spec["disabled"] = disabledMap
 	}
 	if data.Isolated != nil {
 		isolatedMap := make(map[string]interface{})
-		apiResource.Spec["isolated"] = isolatedMap
+		createReq.Spec["isolated"] = isolatedMap
 	}
 	if len(data.VsiteRefs) > 0 {
 		var vsite_refsList []map[string]interface{}
@@ -384,24 +388,101 @@ func (r *VirtualK8SResource) Create(ctx context.Context, req resource.CreateRequ
 			}
 			vsite_refsList = append(vsite_refsList, itemMap)
 		}
-		apiResource.Spec["vsite_refs"] = vsite_refsList
+		createReq.Spec["vsite_refs"] = vsite_refsList
 	}
 
 
-	created, err := r.client.CreateVirtualK8S(ctx, apiResource)
+	apiResource, err := r.client.CreateVirtualK8S(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create VirtualK8S: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["default_flavor_ref"].(map[string]interface{}); ok && (isImport || data.DefaultFlavorRef != nil) {
+		data.DefaultFlavorRef = &VirtualK8SDefaultFlavorRefModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["disabled"].(map[string]interface{}); ok && isImport && data.Disabled == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Disabled = &VirtualK8SEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["isolated"].(map[string]interface{}); ok && isImport && data.Isolated == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Isolated = &VirtualK8SEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["vsite_refs"].([]interface{}); ok && len(listData) > 0 {
+		var vsite_refsList []VirtualK8SVsiteRefsModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				vsite_refsList = append(vsite_refsList, VirtualK8SVsiteRefsModel{
+					Kind: func() types.String {
+						if v, ok := itemMap["kind"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Namespace: func() types.String {
+						if v, ok := itemMap["namespace"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Tenant: func() types.String {
+						if v, ok := itemMap["tenant"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Uid: func() types.String {
+						if v, ok := itemMap["uid"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.VsiteRefs = vsite_refsList
+	}
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
@@ -524,7 +605,8 @@ func (r *VirtualK8SResource) Read(ctx context.Context, req resource.ReadRequest,
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["vsite_refs"].([]interface{}); ok && len(listData) > 0 {
 		var vsite_refsList []VirtualK8SVsiteRefsModel
-		for _, item := range listData {
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				vsite_refsList = append(vsite_refsList, VirtualK8SVsiteRefsModel{
 					Kind: func() types.String {

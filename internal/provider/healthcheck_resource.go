@@ -358,7 +358,7 @@ func (r *HealthcheckResource) Create(ctx context.Context, req resource.CreateReq
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.Healthcheck{
+	createReq := &client.Healthcheck{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -367,7 +367,7 @@ func (r *HealthcheckResource) Create(ctx context.Context, req resource.CreateReq
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -376,7 +376,7 @@ func (r *HealthcheckResource) Create(ctx context.Context, req resource.CreateReq
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -385,7 +385,7 @@ func (r *HealthcheckResource) Create(ctx context.Context, req resource.CreateReq
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -420,7 +420,7 @@ func (r *HealthcheckResource) Create(ctx context.Context, req resource.CreateReq
 		if data.HTTPHealthCheck.UseOriginServerName != nil {
 			http_health_checkMap["use_origin_server_name"] = map[string]interface{}{}
 		}
-		apiResource.Spec["http_health_check"] = http_health_checkMap
+		createReq.Spec["http_health_check"] = http_health_checkMap
 	}
 	if data.TCPHealthCheck != nil {
 		tcp_health_checkMap := make(map[string]interface{})
@@ -430,78 +430,170 @@ func (r *HealthcheckResource) Create(ctx context.Context, req resource.CreateReq
 		if !data.TCPHealthCheck.SendPayload.IsNull() && !data.TCPHealthCheck.SendPayload.IsUnknown() {
 			tcp_health_checkMap["send_payload"] = data.TCPHealthCheck.SendPayload.ValueString()
 		}
-		apiResource.Spec["tcp_health_check"] = tcp_health_checkMap
+		createReq.Spec["tcp_health_check"] = tcp_health_checkMap
 	}
 	if data.UDPIcmpHealthCheck != nil {
 		udp_icmp_health_checkMap := make(map[string]interface{})
-		apiResource.Spec["udp_icmp_health_check"] = udp_icmp_health_checkMap
+		createReq.Spec["udp_icmp_health_check"] = udp_icmp_health_checkMap
 	}
 	if !data.HealthyThreshold.IsNull() && !data.HealthyThreshold.IsUnknown() {
-		apiResource.Spec["healthy_threshold"] = data.HealthyThreshold.ValueInt64()
+		createReq.Spec["healthy_threshold"] = data.HealthyThreshold.ValueInt64()
 	}
 	if !data.Interval.IsNull() && !data.Interval.IsUnknown() {
-		apiResource.Spec["interval"] = data.Interval.ValueInt64()
+		createReq.Spec["interval"] = data.Interval.ValueInt64()
 	}
 	if !data.JitterPercent.IsNull() && !data.JitterPercent.IsUnknown() {
-		apiResource.Spec["jitter_percent"] = data.JitterPercent.ValueInt64()
+		createReq.Spec["jitter_percent"] = data.JitterPercent.ValueInt64()
 	}
 	if !data.Timeout.IsNull() && !data.Timeout.IsUnknown() {
-		apiResource.Spec["timeout"] = data.Timeout.ValueInt64()
+		createReq.Spec["timeout"] = data.Timeout.ValueInt64()
 	}
 	if !data.UnhealthyThreshold.IsNull() && !data.UnhealthyThreshold.IsUnknown() {
-		apiResource.Spec["unhealthy_threshold"] = data.UnhealthyThreshold.ValueInt64()
+		createReq.Spec["unhealthy_threshold"] = data.UnhealthyThreshold.ValueInt64()
 	}
 
 
-	created, err := r.client.CreateHealthcheck(ctx, apiResource)
+	apiResource, err := r.client.CreateHealthcheck(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create Healthcheck: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
-	if v, ok := created.Spec["healthy_threshold"].(float64); ok {
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["http_health_check"].(map[string]interface{}); ok && (isImport || data.HTTPHealthCheck != nil) {
+		data.HTTPHealthCheck = &HealthcheckHTTPHealthCheckModel{
+			ExpectedStatusCodes: func() types.List {
+				if v, ok := blockData["expected_status_codes"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+			Headers: func() *HealthcheckEmptyModel {
+				if !isImport && data.HTTPHealthCheck != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.HTTPHealthCheck.Headers
+				}
+				// Import case: read from API
+				if _, ok := blockData["headers"].(map[string]interface{}); ok {
+					return &HealthcheckEmptyModel{}
+				}
+				return nil
+			}(),
+			HostHeader: func() types.String {
+				if v, ok := blockData["host_header"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Path: func() types.String {
+				if v, ok := blockData["path"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			RequestHeadersToRemove: func() types.List {
+				if v, ok := blockData["request_headers_to_remove"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+			UseHttp2: func() types.Bool {
+				if !isImport && data.HTTPHealthCheck != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.HTTPHealthCheck.UseHttp2
+				}
+				// Import case: read from API
+				if v, ok := blockData["use_http2"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			UseOriginServerName: func() *HealthcheckEmptyModel {
+				if !isImport && data.HTTPHealthCheck != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.HTTPHealthCheck.UseOriginServerName
+				}
+				// Import case: read from API
+				if _, ok := blockData["use_origin_server_name"].(map[string]interface{}); ok {
+					return &HealthcheckEmptyModel{}
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["tcp_health_check"].(map[string]interface{}); ok && (isImport || data.TCPHealthCheck != nil) {
+		data.TCPHealthCheck = &HealthcheckTCPHealthCheckModel{
+			ExpectedResponse: func() types.String {
+				if v, ok := blockData["expected_response"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			SendPayload: func() types.String {
+				if v, ok := blockData["send_payload"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["udp_icmp_health_check"].(map[string]interface{}); ok && isImport && data.UDPIcmpHealthCheck == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.UDPIcmpHealthCheck = &HealthcheckEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["healthy_threshold"].(float64); ok {
 		data.HealthyThreshold = types.Int64Value(int64(v))
-	} else if data.HealthyThreshold.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.HealthyThreshold = types.Int64Null()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["interval"].(float64); ok {
+	if v, ok := apiResource.Spec["interval"].(float64); ok {
 		data.Interval = types.Int64Value(int64(v))
-	} else if data.Interval.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.Interval = types.Int64Null()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["jitter_percent"].(float64); ok {
+	if v, ok := apiResource.Spec["jitter_percent"].(float64); ok {
 		data.JitterPercent = types.Int64Value(int64(v))
-	} else if data.JitterPercent.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.JitterPercent = types.Int64Null()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["timeout"].(float64); ok {
+	if v, ok := apiResource.Spec["timeout"].(float64); ok {
 		data.Timeout = types.Int64Value(int64(v))
-	} else if data.Timeout.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.Timeout = types.Int64Null()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["unhealthy_threshold"].(float64); ok {
+	if v, ok := apiResource.Spec["unhealthy_threshold"].(float64); ok {
 		data.UnhealthyThreshold = types.Int64Value(int64(v))
-	} else if data.UnhealthyThreshold.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.UnhealthyThreshold = types.Int64Null()
 	}
-	// If plan had a value, preserve it
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 

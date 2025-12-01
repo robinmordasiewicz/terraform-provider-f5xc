@@ -565,6 +565,7 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 								"tenant": schema.StringAttribute{
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional: true,
+									Computed: true,
 								},
 							},
 						},
@@ -610,6 +611,7 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional: true,
+													Computed: true,
 												},
 											},
 										},
@@ -642,6 +644,7 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional: true,
+													Computed: true,
 												},
 											},
 										},
@@ -683,6 +686,7 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional: true,
+													Computed: true,
 												},
 											},
 										},
@@ -711,6 +715,7 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional: true,
+													Computed: true,
 												},
 											},
 										},
@@ -743,6 +748,7 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional: true,
+													Computed: true,
 												},
 											},
 										},
@@ -767,6 +773,7 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional: true,
+													Computed: true,
 												},
 											},
 										},
@@ -784,6 +791,7 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional: true,
+													Computed: true,
 												},
 											},
 										},
@@ -814,6 +822,7 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
+								Computed: true,
 							},
 						},
 					},
@@ -878,6 +887,7 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 								"tenant": schema.StringAttribute{
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional: true,
+									Computed: true,
 								},
 							},
 						},
@@ -898,6 +908,7 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 								"tenant": schema.StringAttribute{
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional: true,
+									Computed: true,
 								},
 							},
 						},
@@ -942,6 +953,7 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -1010,6 +1022,7 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											"tenant": schema.StringAttribute{
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional: true,
+												Computed: true,
 											},
 										},
 									},
@@ -1030,6 +1043,7 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											"tenant": schema.StringAttribute{
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional: true,
+												Computed: true,
 											},
 										},
 									},
@@ -1189,6 +1203,7 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											"tenant": schema.StringAttribute{
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional: true,
+												Computed: true,
 											},
 										},
 									},
@@ -1209,6 +1224,7 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											"tenant": schema.StringAttribute{
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional: true,
+												Computed: true,
 											},
 										},
 									},
@@ -1301,6 +1317,7 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									"tenant": schema.StringAttribute{
 										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 										Optional: true,
+										Computed: true,
 									},
 								},
 							},
@@ -1321,6 +1338,7 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									"tenant": schema.StringAttribute{
 										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 										Optional: true,
+										Computed: true,
 									},
 								},
 							},
@@ -1459,7 +1477,7 @@ func (r *TCPLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.TCPLoadBalancer{
+	createReq := &client.TCPLoadBalancer{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -1468,7 +1486,7 @@ func (r *TCPLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -1477,7 +1495,7 @@ func (r *TCPLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -1486,7 +1504,7 @@ func (r *TCPLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -1509,7 +1527,7 @@ func (r *TCPLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 			}
 			active_service_policiesMap["policies"] = policiesList
 		}
-		apiResource.Spec["active_service_policies"] = active_service_policiesMap
+		createReq.Spec["active_service_policies"] = active_service_policiesMap
 	}
 	if data.AdvertiseCustom != nil {
 		advertise_customMap := make(map[string]interface{})
@@ -1581,7 +1599,7 @@ func (r *TCPLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 			}
 			advertise_customMap["advertise_where"] = advertise_whereList
 		}
-		apiResource.Spec["advertise_custom"] = advertise_customMap
+		createReq.Spec["advertise_custom"] = advertise_customMap
 	}
 	if data.AdvertiseOnPublic != nil {
 		advertise_on_publicMap := make(map[string]interface{})
@@ -1598,54 +1616,54 @@ func (r *TCPLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 			}
 			advertise_on_publicMap["public_ip"] = public_ipNestedMap
 		}
-		apiResource.Spec["advertise_on_public"] = advertise_on_publicMap
+		createReq.Spec["advertise_on_public"] = advertise_on_publicMap
 	}
 	if data.AdvertiseOnPublicDefaultVip != nil {
 		advertise_on_public_default_vipMap := make(map[string]interface{})
-		apiResource.Spec["advertise_on_public_default_vip"] = advertise_on_public_default_vipMap
+		createReq.Spec["advertise_on_public_default_vip"] = advertise_on_public_default_vipMap
 	}
 	if data.DefaultLbWithSni != nil {
 		default_lb_with_sniMap := make(map[string]interface{})
-		apiResource.Spec["default_lb_with_sni"] = default_lb_with_sniMap
+		createReq.Spec["default_lb_with_sni"] = default_lb_with_sniMap
 	}
 	if data.DoNotAdvertise != nil {
 		do_not_advertiseMap := make(map[string]interface{})
-		apiResource.Spec["do_not_advertise"] = do_not_advertiseMap
+		createReq.Spec["do_not_advertise"] = do_not_advertiseMap
 	}
 	if data.DoNotRetractCluster != nil {
 		do_not_retract_clusterMap := make(map[string]interface{})
-		apiResource.Spec["do_not_retract_cluster"] = do_not_retract_clusterMap
+		createReq.Spec["do_not_retract_cluster"] = do_not_retract_clusterMap
 	}
 	if !data.Domains.IsNull() && !data.Domains.IsUnknown() {
 		var domainsList []string
 		resp.Diagnostics.Append(data.Domains.ElementsAs(ctx, &domainsList, false)...)
 		if !resp.Diagnostics.HasError() {
-			apiResource.Spec["domains"] = domainsList
+			createReq.Spec["domains"] = domainsList
 		}
 	}
 	if data.HashPolicyChoiceLeastActive != nil {
 		hash_policy_choice_least_activeMap := make(map[string]interface{})
-		apiResource.Spec["hash_policy_choice_least_active"] = hash_policy_choice_least_activeMap
+		createReq.Spec["hash_policy_choice_least_active"] = hash_policy_choice_least_activeMap
 	}
 	if data.HashPolicyChoiceRandom != nil {
 		hash_policy_choice_randomMap := make(map[string]interface{})
-		apiResource.Spec["hash_policy_choice_random"] = hash_policy_choice_randomMap
+		createReq.Spec["hash_policy_choice_random"] = hash_policy_choice_randomMap
 	}
 	if data.HashPolicyChoiceRoundRobin != nil {
 		hash_policy_choice_round_robinMap := make(map[string]interface{})
-		apiResource.Spec["hash_policy_choice_round_robin"] = hash_policy_choice_round_robinMap
+		createReq.Spec["hash_policy_choice_round_robin"] = hash_policy_choice_round_robinMap
 	}
 	if data.HashPolicyChoiceSourceIPStickiness != nil {
 		hash_policy_choice_source_ip_stickinessMap := make(map[string]interface{})
-		apiResource.Spec["hash_policy_choice_source_ip_stickiness"] = hash_policy_choice_source_ip_stickinessMap
+		createReq.Spec["hash_policy_choice_source_ip_stickiness"] = hash_policy_choice_source_ip_stickinessMap
 	}
 	if data.NoServicePolicies != nil {
 		no_service_policiesMap := make(map[string]interface{})
-		apiResource.Spec["no_service_policies"] = no_service_policiesMap
+		createReq.Spec["no_service_policies"] = no_service_policiesMap
 	}
 	if data.NoSni != nil {
 		no_sniMap := make(map[string]interface{})
-		apiResource.Spec["no_sni"] = no_sniMap
+		createReq.Spec["no_sni"] = no_sniMap
 	}
 	if len(data.OriginPoolsWeights) > 0 {
 		var origin_pools_weightsList []map[string]interface{}
@@ -1688,23 +1706,23 @@ func (r *TCPLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 			}
 			origin_pools_weightsList = append(origin_pools_weightsList, itemMap)
 		}
-		apiResource.Spec["origin_pools_weights"] = origin_pools_weightsList
+		createReq.Spec["origin_pools_weights"] = origin_pools_weightsList
 	}
 	if data.RetractCluster != nil {
 		retract_clusterMap := make(map[string]interface{})
-		apiResource.Spec["retract_cluster"] = retract_clusterMap
+		createReq.Spec["retract_cluster"] = retract_clusterMap
 	}
 	if data.ServicePoliciesFromNamespace != nil {
 		service_policies_from_namespaceMap := make(map[string]interface{})
-		apiResource.Spec["service_policies_from_namespace"] = service_policies_from_namespaceMap
+		createReq.Spec["service_policies_from_namespace"] = service_policies_from_namespaceMap
 	}
 	if data.Sni != nil {
 		sniMap := make(map[string]interface{})
-		apiResource.Spec["sni"] = sniMap
+		createReq.Spec["sni"] = sniMap
 	}
 	if data.TCP != nil {
 		tcpMap := make(map[string]interface{})
-		apiResource.Spec["tcp"] = tcpMap
+		createReq.Spec["tcp"] = tcpMap
 	}
 	if data.TLSTCP != nil {
 		tls_tcpMap := make(map[string]interface{})
@@ -1716,7 +1734,7 @@ func (r *TCPLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 			tls_parametersNestedMap := make(map[string]interface{})
 			tls_tcpMap["tls_parameters"] = tls_parametersNestedMap
 		}
-		apiResource.Spec["tls_tcp"] = tls_tcpMap
+		createReq.Spec["tls_tcp"] = tls_tcpMap
 	}
 	if data.TLSTCPAutoCert != nil {
 		tls_tcp_auto_certMap := make(map[string]interface{})
@@ -1737,64 +1755,411 @@ func (r *TCPLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 			}
 			tls_tcp_auto_certMap["use_mtls"] = use_mtlsNestedMap
 		}
-		apiResource.Spec["tls_tcp_auto_cert"] = tls_tcp_auto_certMap
+		createReq.Spec["tls_tcp_auto_cert"] = tls_tcp_auto_certMap
 	}
 	if !data.DNSVolterraManaged.IsNull() && !data.DNSVolterraManaged.IsUnknown() {
-		apiResource.Spec["dns_volterra_managed"] = data.DNSVolterraManaged.ValueBool()
+		createReq.Spec["dns_volterra_managed"] = data.DNSVolterraManaged.ValueBool()
 	}
 	if !data.IdleTimeout.IsNull() && !data.IdleTimeout.IsUnknown() {
-		apiResource.Spec["idle_timeout"] = data.IdleTimeout.ValueInt64()
+		createReq.Spec["idle_timeout"] = data.IdleTimeout.ValueInt64()
 	}
 	if !data.ListenPort.IsNull() && !data.ListenPort.IsUnknown() {
-		apiResource.Spec["listen_port"] = data.ListenPort.ValueInt64()
+		createReq.Spec["listen_port"] = data.ListenPort.ValueInt64()
 	}
 	if !data.PortRanges.IsNull() && !data.PortRanges.IsUnknown() {
-		apiResource.Spec["port_ranges"] = data.PortRanges.ValueString()
+		createReq.Spec["port_ranges"] = data.PortRanges.ValueString()
 	}
 
 
-	created, err := r.client.CreateTCPLoadBalancer(ctx, apiResource)
+	apiResource, err := r.client.CreateTCPLoadBalancer(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create TCPLoadBalancer: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
-	if v, ok := created.Spec["dns_volterra_managed"].(bool); ok {
-		data.DNSVolterraManaged = types.BoolValue(v)
-	} else if data.DNSVolterraManaged.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
-		data.DNSVolterraManaged = types.BoolNull()
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["active_service_policies"].(map[string]interface{}); ok && (isImport || data.ActiveServicePolicies != nil) {
+		data.ActiveServicePolicies = &TCPLoadBalancerActiveServicePoliciesModel{
+			Policies: func() []TCPLoadBalancerActiveServicePoliciesPoliciesModel {
+				if listData, ok := blockData["policies"].([]interface{}); ok && len(listData) > 0 {
+					var result []TCPLoadBalancerActiveServicePoliciesPoliciesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, TCPLoadBalancerActiveServicePoliciesPoliciesModel{
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := itemMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := itemMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["idle_timeout"].(float64); ok {
+	if blockData, ok := apiResource.Spec["advertise_custom"].(map[string]interface{}); ok && (isImport || data.AdvertiseCustom != nil) {
+		data.AdvertiseCustom = &TCPLoadBalancerAdvertiseCustomModel{
+			AdvertiseWhere: func() []TCPLoadBalancerAdvertiseCustomAdvertiseWhereModel {
+				if listData, ok := blockData["advertise_where"].([]interface{}); ok && len(listData) > 0 {
+					var result []TCPLoadBalancerAdvertiseCustomAdvertiseWhereModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, TCPLoadBalancerAdvertiseCustomAdvertiseWhereModel{
+								AdvertiseOnPublic: func() *TCPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicModel {
+									if _, ok := itemMap["advertise_on_public"].(map[string]interface{}); ok {
+										return &TCPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicModel{
+										}
+									}
+									return nil
+								}(),
+								Port: func() types.Int64 {
+									if v, ok := itemMap["port"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								PortRanges: func() types.String {
+									if v, ok := itemMap["port_ranges"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Site: func() *TCPLoadBalancerAdvertiseCustomAdvertiseWhereSiteModel {
+									if deepMap, ok := itemMap["site"].(map[string]interface{}); ok {
+										return &TCPLoadBalancerAdvertiseCustomAdvertiseWhereSiteModel{
+											IP: func() types.String {
+												if v, ok := deepMap["ip"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Network: func() types.String {
+												if v, ok := deepMap["network"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								UseDefaultPort: func() *TCPLoadBalancerEmptyModel {
+									if _, ok := itemMap["use_default_port"].(map[string]interface{}); ok {
+										return &TCPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								VirtualNetwork: func() *TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModel {
+									if deepMap, ok := itemMap["virtual_network"].(map[string]interface{}); ok {
+										return &TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModel{
+											DefaultV6Vip: func() *TCPLoadBalancerEmptyModel {
+												if _, ok := deepMap["default_v6_vip"].(map[string]interface{}); ok {
+													return &TCPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+											DefaultVip: func() *TCPLoadBalancerEmptyModel {
+												if _, ok := deepMap["default_vip"].(map[string]interface{}); ok {
+													return &TCPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+											SpecificV6Vip: func() types.String {
+												if v, ok := deepMap["specific_v6_vip"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											SpecificVip: func() types.String {
+												if v, ok := deepMap["specific_vip"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								VirtualSite: func() *TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteModel {
+									if deepMap, ok := itemMap["virtual_site"].(map[string]interface{}); ok {
+										return &TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteModel{
+											Network: func() types.String {
+												if v, ok := deepMap["network"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								VirtualSiteWithVip: func() *TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipModel {
+									if deepMap, ok := itemMap["virtual_site_with_vip"].(map[string]interface{}); ok {
+										return &TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipModel{
+											IP: func() types.String {
+												if v, ok := deepMap["ip"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Network: func() types.String {
+												if v, ok := deepMap["network"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								Vk8sService: func() *TCPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceModel {
+									if _, ok := itemMap["vk8s_service"].(map[string]interface{}); ok {
+										return &TCPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceModel{
+										}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["advertise_on_public"].(map[string]interface{}); ok && isImport && data.AdvertiseOnPublic == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AdvertiseOnPublic = &TCPLoadBalancerAdvertiseOnPublicModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["advertise_on_public_default_vip"].(map[string]interface{}); ok && isImport && data.AdvertiseOnPublicDefaultVip == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AdvertiseOnPublicDefaultVip = &TCPLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["default_lb_with_sni"].(map[string]interface{}); ok && isImport && data.DefaultLbWithSni == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DefaultLbWithSni = &TCPLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["do_not_advertise"].(map[string]interface{}); ok && isImport && data.DoNotAdvertise == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DoNotAdvertise = &TCPLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["do_not_retract_cluster"].(map[string]interface{}); ok && isImport && data.DoNotRetractCluster == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DoNotRetractCluster = &TCPLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["domains"].([]interface{}); ok && len(v) > 0 {
+		var domainsList []string
+		for _, item := range v {
+			if s, ok := item.(string); ok {
+				domainsList = append(domainsList, s)
+			}
+		}
+		listVal, diags := types.ListValueFrom(ctx, types.StringType, domainsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Domains = listVal
+		}
+	} else {
+		data.Domains = types.ListNull(types.StringType)
+	}
+	if _, ok := apiResource.Spec["hash_policy_choice_least_active"].(map[string]interface{}); ok && isImport && data.HashPolicyChoiceLeastActive == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.HashPolicyChoiceLeastActive = &TCPLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["hash_policy_choice_random"].(map[string]interface{}); ok && isImport && data.HashPolicyChoiceRandom == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.HashPolicyChoiceRandom = &TCPLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["hash_policy_choice_round_robin"].(map[string]interface{}); ok && isImport && data.HashPolicyChoiceRoundRobin == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.HashPolicyChoiceRoundRobin = &TCPLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["hash_policy_choice_source_ip_stickiness"].(map[string]interface{}); ok && isImport && data.HashPolicyChoiceSourceIPStickiness == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.HashPolicyChoiceSourceIPStickiness = &TCPLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_service_policies"].(map[string]interface{}); ok && isImport && data.NoServicePolicies == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoServicePolicies = &TCPLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_sni"].(map[string]interface{}); ok && isImport && data.NoSni == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoSni = &TCPLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["origin_pools_weights"].([]interface{}); ok && len(listData) > 0 {
+		var origin_pools_weightsList []TCPLoadBalancerOriginPoolsWeightsModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				origin_pools_weightsList = append(origin_pools_weightsList, TCPLoadBalancerOriginPoolsWeightsModel{
+					Cluster: func() *TCPLoadBalancerOriginPoolsWeightsClusterModel {
+						if nestedMap, ok := itemMap["cluster"].(map[string]interface{}); ok {
+							return &TCPLoadBalancerOriginPoolsWeightsClusterModel{
+								Name: func() types.String {
+									if v, ok := nestedMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := nestedMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := nestedMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					EndpointSubsets: func() *TCPLoadBalancerEmptyModel {
+						if !isImport && len(data.OriginPoolsWeights) > listIdx && data.OriginPoolsWeights[listIdx].EndpointSubsets != nil {
+							return &TCPLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					Pool: func() *TCPLoadBalancerOriginPoolsWeightsPoolModel {
+						if nestedMap, ok := itemMap["pool"].(map[string]interface{}); ok {
+							return &TCPLoadBalancerOriginPoolsWeightsPoolModel{
+								Name: func() types.String {
+									if v, ok := nestedMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := nestedMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := nestedMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					Priority: func() types.Int64 {
+						if v, ok := itemMap["priority"].(float64); ok && v != 0 {
+							return types.Int64Value(int64(v))
+						}
+						return types.Int64Null()
+					}(),
+					Weight: func() types.Int64 {
+						if v, ok := itemMap["weight"].(float64); ok && v != 0 {
+							return types.Int64Value(int64(v))
+						}
+						return types.Int64Null()
+					}(),
+				})
+			}
+		}
+		data.OriginPoolsWeights = origin_pools_weightsList
+	}
+	if _, ok := apiResource.Spec["retract_cluster"].(map[string]interface{}); ok && isImport && data.RetractCluster == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.RetractCluster = &TCPLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["service_policies_from_namespace"].(map[string]interface{}); ok && isImport && data.ServicePoliciesFromNamespace == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ServicePoliciesFromNamespace = &TCPLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["sni"].(map[string]interface{}); ok && isImport && data.Sni == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Sni = &TCPLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["tcp"].(map[string]interface{}); ok && isImport && data.TCP == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.TCP = &TCPLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["tls_tcp"].(map[string]interface{}); ok && isImport && data.TLSTCP == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.TLSTCP = &TCPLoadBalancerTLSTCPModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["tls_tcp_auto_cert"].(map[string]interface{}); ok && isImport && data.TLSTCPAutoCert == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.TLSTCPAutoCert = &TCPLoadBalancerTLSTCPAutoCertModel{}
+	}
+	// Normal Read: preserve existing state value
+	// Top-level Optional bool: preserve prior state to avoid API default drift
+	if !isImport && !data.DNSVolterraManaged.IsNull() && !data.DNSVolterraManaged.IsUnknown() {
+		// Normal Read: preserve existing state value (do nothing)
+	} else {
+		// Import case, null state, or unknown (after Create): read from API
+		if v, ok := apiResource.Spec["dns_volterra_managed"].(bool); ok {
+			data.DNSVolterraManaged = types.BoolValue(v)
+		} else {
+			data.DNSVolterraManaged = types.BoolNull()
+		}
+	}
+	if v, ok := apiResource.Spec["idle_timeout"].(float64); ok {
 		data.IdleTimeout = types.Int64Value(int64(v))
-	} else if data.IdleTimeout.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.IdleTimeout = types.Int64Null()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["listen_port"].(float64); ok {
+	if v, ok := apiResource.Spec["listen_port"].(float64); ok {
 		data.ListenPort = types.Int64Value(int64(v))
-	} else if data.ListenPort.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.ListenPort = types.Int64Null()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["port_ranges"].(string); ok && v != "" {
+	if v, ok := apiResource.Spec["port_ranges"].(string); ok && v != "" {
 		data.PortRanges = types.StringValue(v)
-	} else if data.PortRanges.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.PortRanges = types.StringNull()
 	}
-	// If plan had a value, preserve it
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
@@ -2121,7 +2486,8 @@ func (r *TCPLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["origin_pools_weights"].([]interface{}); ok && len(listData) > 0 {
 		var origin_pools_weightsList []TCPLoadBalancerOriginPoolsWeightsModel
-		for _, item := range listData {
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				origin_pools_weightsList = append(origin_pools_weightsList, TCPLoadBalancerOriginPoolsWeightsModel{
 					Cluster: func() *TCPLoadBalancerOriginPoolsWeightsClusterModel {
@@ -2150,7 +2516,7 @@ func (r *TCPLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 						return nil
 					}(),
 					EndpointSubsets: func() *TCPLoadBalancerEmptyModel {
-						if _, ok := itemMap["endpoint_subsets"].(map[string]interface{}); ok {
+						if !isImport && len(data.OriginPoolsWeights) > listIdx && data.OriginPoolsWeights[listIdx].EndpointSubsets != nil {
 							return &TCPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -2228,10 +2594,10 @@ func (r *TCPLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 	}
 	// Normal Read: preserve existing state value
 	// Top-level Optional bool: preserve prior state to avoid API default drift
-	if !isImport && !data.DNSVolterraManaged.IsNull() {
+	if !isImport && !data.DNSVolterraManaged.IsNull() && !data.DNSVolterraManaged.IsUnknown() {
 		// Normal Read: preserve existing state value (do nothing)
 	} else {
-		// Import case or null state: read from API
+		// Import case, null state, or unknown (after Create): read from API
 		if v, ok := apiResource.Spec["dns_volterra_managed"].(bool); ok {
 			data.DNSVolterraManaged = types.BoolValue(v)
 		} else {

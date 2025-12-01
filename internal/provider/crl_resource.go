@@ -292,7 +292,7 @@ func (r *CRLResource) Create(ctx context.Context, req resource.CreateRequest, re
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.CRL{
+	createReq := &client.CRL{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -301,7 +301,7 @@ func (r *CRLResource) Create(ctx context.Context, req resource.CreateRequest, re
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -310,7 +310,7 @@ func (r *CRLResource) Create(ctx context.Context, req resource.CreateRequest, re
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -319,7 +319,7 @@ func (r *CRLResource) Create(ctx context.Context, req resource.CreateRequest, re
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -328,64 +328,70 @@ func (r *CRLResource) Create(ctx context.Context, req resource.CreateRequest, re
 		if !data.HTTPAccess.Path.IsNull() && !data.HTTPAccess.Path.IsUnknown() {
 			http_accessMap["path"] = data.HTTPAccess.Path.ValueString()
 		}
-		apiResource.Spec["http_access"] = http_accessMap
+		createReq.Spec["http_access"] = http_accessMap
 	}
 	if !data.RefreshInterval.IsNull() && !data.RefreshInterval.IsUnknown() {
-		apiResource.Spec["refresh_interval"] = data.RefreshInterval.ValueInt64()
+		createReq.Spec["refresh_interval"] = data.RefreshInterval.ValueInt64()
 	}
 	if !data.ServerAddress.IsNull() && !data.ServerAddress.IsUnknown() {
-		apiResource.Spec["server_address"] = data.ServerAddress.ValueString()
+		createReq.Spec["server_address"] = data.ServerAddress.ValueString()
 	}
 	if !data.ServerPort.IsNull() && !data.ServerPort.IsUnknown() {
-		apiResource.Spec["server_port"] = data.ServerPort.ValueInt64()
+		createReq.Spec["server_port"] = data.ServerPort.ValueInt64()
 	}
 	if !data.Timeout.IsNull() && !data.Timeout.IsUnknown() {
-		apiResource.Spec["timeout"] = data.Timeout.ValueInt64()
+		createReq.Spec["timeout"] = data.Timeout.ValueInt64()
 	}
 
 
-	created, err := r.client.CreateCRL(ctx, apiResource)
+	apiResource, err := r.client.CreateCRL(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create CRL: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
-	if v, ok := created.Spec["refresh_interval"].(float64); ok {
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["http_access"].(map[string]interface{}); ok && (isImport || data.HTTPAccess != nil) {
+		data.HTTPAccess = &CRLHTTPAccessModel{
+			Path: func() types.String {
+				if v, ok := blockData["path"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if v, ok := apiResource.Spec["refresh_interval"].(float64); ok {
 		data.RefreshInterval = types.Int64Value(int64(v))
-	} else if data.RefreshInterval.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.RefreshInterval = types.Int64Null()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["server_address"].(string); ok && v != "" {
+	if v, ok := apiResource.Spec["server_address"].(string); ok && v != "" {
 		data.ServerAddress = types.StringValue(v)
-	} else if data.ServerAddress.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.ServerAddress = types.StringNull()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["server_port"].(float64); ok {
+	if v, ok := apiResource.Spec["server_port"].(float64); ok {
 		data.ServerPort = types.Int64Value(int64(v))
-	} else if data.ServerPort.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.ServerPort = types.Int64Null()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["timeout"].(float64); ok {
+	if v, ok := apiResource.Spec["timeout"].(float64); ok {
 		data.Timeout = types.Int64Value(int64(v))
-	} else if data.Timeout.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.Timeout = types.Int64Null()
 	}
-	// If plan had a value, preserve it
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 

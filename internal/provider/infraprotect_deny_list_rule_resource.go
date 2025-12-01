@@ -277,7 +277,7 @@ func (r *InfraprotectDenyListRuleResource) Create(ctx context.Context, req resou
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.InfraprotectDenyListRule{
+	createReq := &client.InfraprotectDenyListRule{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -286,7 +286,7 @@ func (r *InfraprotectDenyListRuleResource) Create(ctx context.Context, req resou
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -295,7 +295,7 @@ func (r *InfraprotectDenyListRuleResource) Create(ctx context.Context, req resou
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -304,66 +304,91 @@ func (r *InfraprotectDenyListRuleResource) Create(ctx context.Context, req resou
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
 	if data.ExpirationNever != nil {
 		expiration_neverMap := make(map[string]interface{})
-		apiResource.Spec["expiration_never"] = expiration_neverMap
+		createReq.Spec["expiration_never"] = expiration_neverMap
 	}
 	if data.OneDay != nil {
 		one_dayMap := make(map[string]interface{})
-		apiResource.Spec["one_day"] = one_dayMap
+		createReq.Spec["one_day"] = one_dayMap
 	}
 	if data.OneHour != nil {
 		one_hourMap := make(map[string]interface{})
-		apiResource.Spec["one_hour"] = one_hourMap
+		createReq.Spec["one_hour"] = one_hourMap
 	}
 	if data.OneMonth != nil {
 		one_monthMap := make(map[string]interface{})
-		apiResource.Spec["one_month"] = one_monthMap
+		createReq.Spec["one_month"] = one_monthMap
 	}
 	if data.OneYear != nil {
 		one_yearMap := make(map[string]interface{})
-		apiResource.Spec["one_year"] = one_yearMap
+		createReq.Spec["one_year"] = one_yearMap
 	}
 	if !data.ExpirationTimestamp.IsNull() && !data.ExpirationTimestamp.IsUnknown() {
-		apiResource.Spec["expiration_timestamp"] = data.ExpirationTimestamp.ValueString()
+		createReq.Spec["expiration_timestamp"] = data.ExpirationTimestamp.ValueString()
 	}
 	if !data.Prefix.IsNull() && !data.Prefix.IsUnknown() {
-		apiResource.Spec["prefix"] = data.Prefix.ValueString()
+		createReq.Spec["prefix"] = data.Prefix.ValueString()
 	}
 
 
-	created, err := r.client.CreateInfraprotectDenyListRule(ctx, apiResource)
+	apiResource, err := r.client.CreateInfraprotectDenyListRule(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create InfraprotectDenyListRule: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
-	if v, ok := created.Spec["expiration_timestamp"].(string); ok && v != "" {
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if _, ok := apiResource.Spec["expiration_never"].(map[string]interface{}); ok && isImport && data.ExpirationNever == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ExpirationNever = &InfraprotectDenyListRuleEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["one_day"].(map[string]interface{}); ok && isImport && data.OneDay == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.OneDay = &InfraprotectDenyListRuleEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["one_hour"].(map[string]interface{}); ok && isImport && data.OneHour == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.OneHour = &InfraprotectDenyListRuleEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["one_month"].(map[string]interface{}); ok && isImport && data.OneMonth == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.OneMonth = &InfraprotectDenyListRuleEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["one_year"].(map[string]interface{}); ok && isImport && data.OneYear == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.OneYear = &InfraprotectDenyListRuleEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["expiration_timestamp"].(string); ok && v != "" {
 		data.ExpirationTimestamp = types.StringValue(v)
-	} else if data.ExpirationTimestamp.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.ExpirationTimestamp = types.StringNull()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["prefix"].(string); ok && v != "" {
+	if v, ok := apiResource.Spec["prefix"].(string); ok && v != "" {
 		data.Prefix = types.StringValue(v)
-	} else if data.Prefix.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.Prefix = types.StringNull()
 	}
-	// If plan had a value, preserve it
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 

@@ -251,7 +251,7 @@ func (r *QuotaResource) Create(ctx context.Context, req resource.CreateRequest, 
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.Quota{
+	createReq := &client.Quota{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -260,7 +260,7 @@ func (r *QuotaResource) Create(ctx context.Context, req resource.CreateRequest, 
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -269,7 +269,7 @@ func (r *QuotaResource) Create(ctx context.Context, req resource.CreateRequest, 
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -278,38 +278,57 @@ func (r *QuotaResource) Create(ctx context.Context, req resource.CreateRequest, 
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
 	if data.APILimits != nil {
 		api_limitsMap := make(map[string]interface{})
-		apiResource.Spec["api_limits"] = api_limitsMap
+		createReq.Spec["api_limits"] = api_limitsMap
 	}
 	if data.ObjectLimits != nil {
 		object_limitsMap := make(map[string]interface{})
-		apiResource.Spec["object_limits"] = object_limitsMap
+		createReq.Spec["object_limits"] = object_limitsMap
 	}
 	if data.ResourceLimits != nil {
 		resource_limitsMap := make(map[string]interface{})
-		apiResource.Spec["resource_limits"] = resource_limitsMap
+		createReq.Spec["resource_limits"] = resource_limitsMap
 	}
 
 
-	created, err := r.client.CreateQuota(ctx, apiResource)
+	apiResource, err := r.client.CreateQuota(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create Quota: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if _, ok := apiResource.Spec["api_limits"].(map[string]interface{}); ok && isImport && data.APILimits == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.APILimits = &QuotaEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["object_limits"].(map[string]interface{}); ok && isImport && data.ObjectLimits == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ObjectLimits = &QuotaEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["resource_limits"].(map[string]interface{}); ok && isImport && data.ResourceLimits == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ResourceLimits = &QuotaEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 

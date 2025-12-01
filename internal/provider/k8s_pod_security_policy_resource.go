@@ -599,7 +599,7 @@ func (r *K8SPodSecurityPolicyResource) Create(ctx context.Context, req resource.
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.K8SPodSecurityPolicy{
+	createReq := &client.K8SPodSecurityPolicy{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -608,7 +608,7 @@ func (r *K8SPodSecurityPolicyResource) Create(ctx context.Context, req resource.
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -617,7 +617,7 @@ func (r *K8SPodSecurityPolicyResource) Create(ctx context.Context, req resource.
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -626,7 +626,7 @@ func (r *K8SPodSecurityPolicyResource) Create(ctx context.Context, req resource.
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -779,34 +779,481 @@ func (r *K8SPodSecurityPolicyResource) Create(ctx context.Context, req resource.
 				psp_specMap["volumes"] = volumesItems
 			}
 		}
-		apiResource.Spec["psp_spec"] = psp_specMap
+		createReq.Spec["psp_spec"] = psp_specMap
 	}
 	if !data.Yaml.IsNull() && !data.Yaml.IsUnknown() {
-		apiResource.Spec["yaml"] = data.Yaml.ValueString()
+		createReq.Spec["yaml"] = data.Yaml.ValueString()
 	}
 
 
-	created, err := r.client.CreateK8SPodSecurityPolicy(ctx, apiResource)
+	apiResource, err := r.client.CreateK8SPodSecurityPolicy(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create K8SPodSecurityPolicy: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
-	if v, ok := created.Spec["yaml"].(string); ok && v != "" {
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["psp_spec"].(map[string]interface{}); ok && (isImport || data.PspSpec != nil) {
+		data.PspSpec = &K8SPodSecurityPolicyPspSpecModel{
+			AllowPrivilegeEscalation: func() types.Bool {
+				if !isImport && data.PspSpec != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.PspSpec.AllowPrivilegeEscalation
+				}
+				// Import case: read from API
+				if v, ok := blockData["allow_privilege_escalation"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			AllowedCapabilities: func() *K8SPodSecurityPolicyPspSpecAllowedCapabilitiesModel {
+				if !isImport && data.PspSpec != nil && data.PspSpec.AllowedCapabilities != nil {
+					// Normal Read: preserve existing state value
+					return data.PspSpec.AllowedCapabilities
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["allowed_capabilities"].(map[string]interface{}); ok {
+					return &K8SPodSecurityPolicyPspSpecAllowedCapabilitiesModel{
+						Capabilities: func() types.List {
+							if v, ok := nestedBlockData["capabilities"].([]interface{}); ok && len(v) > 0 {
+								var items []string
+								for _, item := range v {
+									if s, ok := item.(string); ok {
+										items = append(items, s)
+									}
+								}
+								listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+								return listVal
+							}
+							return types.ListNull(types.StringType)
+						}(),
+					}
+				}
+				return nil
+			}(),
+			AllowedCsiDrivers: func() types.List {
+				if v, ok := blockData["allowed_csi_drivers"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+			AllowedFlexVolumes: func() types.List {
+				if v, ok := blockData["allowed_flex_volumes"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+			AllowedHostPaths: func() []K8SPodSecurityPolicyPspSpecAllowedHostPathsModel {
+				if listData, ok := blockData["allowed_host_paths"].([]interface{}); ok && len(listData) > 0 {
+					var result []K8SPodSecurityPolicyPspSpecAllowedHostPathsModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, K8SPodSecurityPolicyPspSpecAllowedHostPathsModel{
+								PathPrefix: func() types.String {
+									if v, ok := itemMap["path_prefix"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								ReadOnly: func() types.Bool {
+									if v, ok := itemMap["read_only"].(bool); ok {
+										return types.BoolValue(v)
+									}
+									return types.BoolNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			AllowedProcMounts: func() types.List {
+				if v, ok := blockData["allowed_proc_mounts"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+			AllowedUnsafeSysctls: func() types.List {
+				if v, ok := blockData["allowed_unsafe_sysctls"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+			DefaultAllowPrivilegeEscalation: func() types.Bool {
+				if !isImport && data.PspSpec != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.PspSpec.DefaultAllowPrivilegeEscalation
+				}
+				// Import case: read from API
+				if v, ok := blockData["default_allow_privilege_escalation"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			DefaultCapabilities: func() *K8SPodSecurityPolicyPspSpecDefaultCapabilitiesModel {
+				if !isImport && data.PspSpec != nil && data.PspSpec.DefaultCapabilities != nil {
+					// Normal Read: preserve existing state value
+					return data.PspSpec.DefaultCapabilities
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["default_capabilities"].(map[string]interface{}); ok {
+					return &K8SPodSecurityPolicyPspSpecDefaultCapabilitiesModel{
+						Capabilities: func() types.List {
+							if v, ok := nestedBlockData["capabilities"].([]interface{}); ok && len(v) > 0 {
+								var items []string
+								for _, item := range v {
+									if s, ok := item.(string); ok {
+										items = append(items, s)
+									}
+								}
+								listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+								return listVal
+							}
+							return types.ListNull(types.StringType)
+						}(),
+					}
+				}
+				return nil
+			}(),
+			DropCapabilities: func() *K8SPodSecurityPolicyPspSpecDropCapabilitiesModel {
+				if !isImport && data.PspSpec != nil && data.PspSpec.DropCapabilities != nil {
+					// Normal Read: preserve existing state value
+					return data.PspSpec.DropCapabilities
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["drop_capabilities"].(map[string]interface{}); ok {
+					return &K8SPodSecurityPolicyPspSpecDropCapabilitiesModel{
+						Capabilities: func() types.List {
+							if v, ok := nestedBlockData["capabilities"].([]interface{}); ok && len(v) > 0 {
+								var items []string
+								for _, item := range v {
+									if s, ok := item.(string); ok {
+										items = append(items, s)
+									}
+								}
+								listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+								return listVal
+							}
+							return types.ListNull(types.StringType)
+						}(),
+					}
+				}
+				return nil
+			}(),
+			ForbiddenSysctls: func() types.List {
+				if v, ok := blockData["forbidden_sysctls"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+			FsGroupStrategyOptions: func() *K8SPodSecurityPolicyPspSpecFsGroupStrategyOptionsModel {
+				if !isImport && data.PspSpec != nil && data.PspSpec.FsGroupStrategyOptions != nil {
+					// Normal Read: preserve existing state value
+					return data.PspSpec.FsGroupStrategyOptions
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["fs_group_strategy_options"].(map[string]interface{}); ok {
+					return &K8SPodSecurityPolicyPspSpecFsGroupStrategyOptionsModel{
+						Rule: func() types.String {
+							if v, ok := nestedBlockData["rule"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			HostIpc: func() types.Bool {
+				if !isImport && data.PspSpec != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.PspSpec.HostIpc
+				}
+				// Import case: read from API
+				if v, ok := blockData["host_ipc"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			HostNetwork: func() types.Bool {
+				if !isImport && data.PspSpec != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.PspSpec.HostNetwork
+				}
+				// Import case: read from API
+				if v, ok := blockData["host_network"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			HostPid: func() types.Bool {
+				if !isImport && data.PspSpec != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.PspSpec.HostPid
+				}
+				// Import case: read from API
+				if v, ok := blockData["host_pid"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			HostPortRanges: func() types.String {
+				if v, ok := blockData["host_port_ranges"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			NoAllowedCapabilities: func() *K8SPodSecurityPolicyEmptyModel {
+				if !isImport && data.PspSpec != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.PspSpec.NoAllowedCapabilities
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_allowed_capabilities"].(map[string]interface{}); ok {
+					return &K8SPodSecurityPolicyEmptyModel{}
+				}
+				return nil
+			}(),
+			NoDefaultCapabilities: func() *K8SPodSecurityPolicyEmptyModel {
+				if !isImport && data.PspSpec != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.PspSpec.NoDefaultCapabilities
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_default_capabilities"].(map[string]interface{}); ok {
+					return &K8SPodSecurityPolicyEmptyModel{}
+				}
+				return nil
+			}(),
+			NoDropCapabilities: func() *K8SPodSecurityPolicyEmptyModel {
+				if !isImport && data.PspSpec != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.PspSpec.NoDropCapabilities
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_drop_capabilities"].(map[string]interface{}); ok {
+					return &K8SPodSecurityPolicyEmptyModel{}
+				}
+				return nil
+			}(),
+			NoFsGroups: func() *K8SPodSecurityPolicyEmptyModel {
+				if !isImport && data.PspSpec != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.PspSpec.NoFsGroups
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_fs_groups"].(map[string]interface{}); ok {
+					return &K8SPodSecurityPolicyEmptyModel{}
+				}
+				return nil
+			}(),
+			NoRunAsGroup: func() *K8SPodSecurityPolicyEmptyModel {
+				if !isImport && data.PspSpec != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.PspSpec.NoRunAsGroup
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_run_as_group"].(map[string]interface{}); ok {
+					return &K8SPodSecurityPolicyEmptyModel{}
+				}
+				return nil
+			}(),
+			NoRunAsUser: func() *K8SPodSecurityPolicyEmptyModel {
+				if !isImport && data.PspSpec != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.PspSpec.NoRunAsUser
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_run_as_user"].(map[string]interface{}); ok {
+					return &K8SPodSecurityPolicyEmptyModel{}
+				}
+				return nil
+			}(),
+			NoRuntimeClass: func() *K8SPodSecurityPolicyEmptyModel {
+				if !isImport && data.PspSpec != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.PspSpec.NoRuntimeClass
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_runtime_class"].(map[string]interface{}); ok {
+					return &K8SPodSecurityPolicyEmptyModel{}
+				}
+				return nil
+			}(),
+			NoSeLinuxOptions: func() *K8SPodSecurityPolicyEmptyModel {
+				if !isImport && data.PspSpec != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.PspSpec.NoSeLinuxOptions
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_se_linux_options"].(map[string]interface{}); ok {
+					return &K8SPodSecurityPolicyEmptyModel{}
+				}
+				return nil
+			}(),
+			NoSupplementalGroups: func() *K8SPodSecurityPolicyEmptyModel {
+				if !isImport && data.PspSpec != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.PspSpec.NoSupplementalGroups
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_supplemental_groups"].(map[string]interface{}); ok {
+					return &K8SPodSecurityPolicyEmptyModel{}
+				}
+				return nil
+			}(),
+			Privileged: func() types.Bool {
+				if !isImport && data.PspSpec != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.PspSpec.Privileged
+				}
+				// Import case: read from API
+				if v, ok := blockData["privileged"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			ReadOnlyRootFilesystem: func() types.Bool {
+				if !isImport && data.PspSpec != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.PspSpec.ReadOnlyRootFilesystem
+				}
+				// Import case: read from API
+				if v, ok := blockData["read_only_root_filesystem"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			RunAsGroup: func() *K8SPodSecurityPolicyPspSpecRunAsGroupModel {
+				if !isImport && data.PspSpec != nil && data.PspSpec.RunAsGroup != nil {
+					// Normal Read: preserve existing state value
+					return data.PspSpec.RunAsGroup
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["run_as_group"].(map[string]interface{}); ok {
+					return &K8SPodSecurityPolicyPspSpecRunAsGroupModel{
+						Rule: func() types.String {
+							if v, ok := nestedBlockData["rule"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			RunAsUser: func() *K8SPodSecurityPolicyPspSpecRunAsUserModel {
+				if !isImport && data.PspSpec != nil && data.PspSpec.RunAsUser != nil {
+					// Normal Read: preserve existing state value
+					return data.PspSpec.RunAsUser
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["run_as_user"].(map[string]interface{}); ok {
+					return &K8SPodSecurityPolicyPspSpecRunAsUserModel{
+						Rule: func() types.String {
+							if v, ok := nestedBlockData["rule"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			SupplementalGroups: func() *K8SPodSecurityPolicyPspSpecSupplementalGroupsModel {
+				if !isImport && data.PspSpec != nil && data.PspSpec.SupplementalGroups != nil {
+					// Normal Read: preserve existing state value
+					return data.PspSpec.SupplementalGroups
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["supplemental_groups"].(map[string]interface{}); ok {
+					return &K8SPodSecurityPolicyPspSpecSupplementalGroupsModel{
+						Rule: func() types.String {
+							if v, ok := nestedBlockData["rule"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			Volumes: func() types.List {
+				if v, ok := blockData["volumes"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
+	}
+	if v, ok := apiResource.Spec["yaml"].(string); ok && v != "" {
 		data.Yaml = types.StringValue(v)
-	} else if data.Yaml.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.Yaml = types.StringNull()
 	}
-	// If plan had a value, preserve it
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 

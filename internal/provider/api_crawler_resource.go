@@ -333,7 +333,7 @@ func (r *APICrawlerResource) Create(ctx context.Context, req resource.CreateRequ
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.APICrawler{
+	createReq := &client.APICrawler{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -342,7 +342,7 @@ func (r *APICrawlerResource) Create(ctx context.Context, req resource.CreateRequ
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -351,7 +351,7 @@ func (r *APICrawlerResource) Create(ctx context.Context, req resource.CreateRequ
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -360,7 +360,7 @@ func (r *APICrawlerResource) Create(ctx context.Context, req resource.CreateRequ
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -373,6 +373,10 @@ func (r *APICrawlerResource) Create(ctx context.Context, req resource.CreateRequ
 			}
 			if item.SimpleLogin != nil {
 				simple_loginNestedMap := make(map[string]interface{})
+				if item.SimpleLogin.Password != nil {
+					passwordDeepMap := make(map[string]interface{})
+					simple_loginNestedMap["password"] = passwordDeepMap
+				}
 				if !item.SimpleLogin.User.IsNull() && !item.SimpleLogin.User.IsUnknown() {
 					simple_loginNestedMap["user"] = item.SimpleLogin.User.ValueString()
 				}
@@ -380,24 +384,58 @@ func (r *APICrawlerResource) Create(ctx context.Context, req resource.CreateRequ
 			}
 			domainsList = append(domainsList, itemMap)
 		}
-		apiResource.Spec["domains"] = domainsList
+		createReq.Spec["domains"] = domainsList
 	}
 
 
-	created, err := r.client.CreateAPICrawler(ctx, apiResource)
+	apiResource, err := r.client.CreateAPICrawler(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create APICrawler: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if listData, ok := apiResource.Spec["domains"].([]interface{}); ok && len(listData) > 0 {
+		var domainsList []APICrawlerDomainsModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				domainsList = append(domainsList, APICrawlerDomainsModel{
+					Domain: func() types.String {
+						if v, ok := itemMap["domain"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					SimpleLogin: func() *APICrawlerDomainsSimpleLoginModel {
+						if nestedMap, ok := itemMap["simple_login"].(map[string]interface{}); ok {
+							return &APICrawlerDomainsSimpleLoginModel{
+								User: func() types.String {
+									if v, ok := nestedMap["user"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+				})
+			}
+		}
+		data.Domains = domainsList
+	}
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
@@ -488,7 +526,8 @@ func (r *APICrawlerResource) Read(ctx context.Context, req resource.ReadRequest,
 	})
 	if listData, ok := apiResource.Spec["domains"].([]interface{}); ok && len(listData) > 0 {
 		var domainsList []APICrawlerDomainsModel
-		for _, item := range listData {
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				domainsList = append(domainsList, APICrawlerDomainsModel{
 					Domain: func() types.String {
@@ -585,6 +624,10 @@ func (r *APICrawlerResource) Update(ctx context.Context, req resource.UpdateRequ
 			}
 			if item.SimpleLogin != nil {
 				simple_loginNestedMap := make(map[string]interface{})
+				if item.SimpleLogin.Password != nil {
+					passwordDeepMap := make(map[string]interface{})
+					simple_loginNestedMap["password"] = passwordDeepMap
+				}
 				if !item.SimpleLogin.User.IsNull() && !item.SimpleLogin.User.IsUnknown() {
 					simple_loginNestedMap["user"] = item.SimpleLogin.User.ValueString()
 				}

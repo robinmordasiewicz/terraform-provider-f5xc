@@ -1007,6 +1007,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional: true,
+						Computed: true,
 					},
 				},
 
@@ -1025,6 +1026,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional: true,
+						Computed: true,
 					},
 				},
 
@@ -1076,6 +1078,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 													"kind": schema.StringAttribute{
 														MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 														Optional: true,
+														Computed: true,
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -1088,10 +1091,12 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 													"tenant": schema.StringAttribute{
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 														Optional: true,
+														Computed: true,
 													},
 													"uid": schema.StringAttribute{
 														MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 														Optional: true,
+														Computed: true,
 													},
 												},
 											},
@@ -1141,6 +1146,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 						"kind": schema.StringAttribute{
 							MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 							Optional: true,
+							Computed: true,
 						},
 						"name": schema.StringAttribute{
 							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -1153,10 +1159,12 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 						"tenant": schema.StringAttribute{
 							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 							Optional: true,
+							Computed: true,
 						},
 						"uid": schema.StringAttribute{
 							MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 							Optional: true,
+							Computed: true,
 						},
 					},
 
@@ -1182,6 +1190,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 								"tenant": schema.StringAttribute{
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional: true,
+									Computed: true,
 								},
 							},
 						},
@@ -1235,6 +1244,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional: true,
+						Computed: true,
 					},
 				},
 
@@ -1249,6 +1259,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 						"kind": schema.StringAttribute{
 							MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 							Optional: true,
+							Computed: true,
 						},
 						"name": schema.StringAttribute{
 							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -1261,10 +1272,12 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 						"tenant": schema.StringAttribute{
 							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 							Optional: true,
+							Computed: true,
 						},
 						"uid": schema.StringAttribute{
 							MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 							Optional: true,
+							Computed: true,
 						},
 					},
 
@@ -1277,6 +1290,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 						"kind": schema.StringAttribute{
 							MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 							Optional: true,
+							Computed: true,
 						},
 						"name": schema.StringAttribute{
 							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -1289,10 +1303,12 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 						"tenant": schema.StringAttribute{
 							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 							Optional: true,
+							Computed: true,
 						},
 						"uid": schema.StringAttribute{
 							MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 							Optional: true,
+							Computed: true,
 						},
 					},
 
@@ -1320,6 +1336,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 						"kind": schema.StringAttribute{
 							MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 							Optional: true,
+							Computed: true,
 						},
 						"name": schema.StringAttribute{
 							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -1332,10 +1349,12 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 						"tenant": schema.StringAttribute{
 							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 							Optional: true,
+							Computed: true,
 						},
 						"uid": schema.StringAttribute{
 							MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 							Optional: true,
+							Computed: true,
 						},
 					},
 
@@ -2549,6 +2568,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 								"tenant": schema.StringAttribute{
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional: true,
+									Computed: true,
 								},
 							},
 						},
@@ -2591,6 +2611,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 													"kind": schema.StringAttribute{
 														MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 														Optional: true,
+														Computed: true,
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -2603,10 +2624,12 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 													"tenant": schema.StringAttribute{
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 														Optional: true,
+														Computed: true,
 													},
 													"uid": schema.StringAttribute{
 														MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 														Optional: true,
+														Computed: true,
 													},
 												},
 											},
@@ -2693,6 +2716,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional: true,
+						Computed: true,
 					},
 				},
 
@@ -2814,7 +2838,7 @@ func (r *FleetResource) Create(ctx context.Context, req resource.CreateRequest, 
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.Fleet{
+	createReq := &client.Fleet{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -2823,7 +2847,7 @@ func (r *FleetResource) Create(ctx context.Context, req resource.CreateRequest, 
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -2832,7 +2856,7 @@ func (r *FleetResource) Create(ctx context.Context, req resource.CreateRequest, 
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -2841,13 +2865,13 @@ func (r *FleetResource) Create(ctx context.Context, req resource.CreateRequest, 
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
 	if data.AllowAllUsb != nil {
 		allow_all_usbMap := make(map[string]interface{})
-		apiResource.Spec["allow_all_usb"] = allow_all_usbMap
+		createReq.Spec["allow_all_usb"] = allow_all_usbMap
 	}
 	if len(data.BlockedServices) > 0 {
 		var blocked_servicesList []map[string]interface{}
@@ -2867,7 +2891,7 @@ func (r *FleetResource) Create(ctx context.Context, req resource.CreateRequest, 
 			}
 			blocked_servicesList = append(blocked_servicesList, itemMap)
 		}
-		apiResource.Spec["blocked_services"] = blocked_servicesList
+		createReq.Spec["blocked_services"] = blocked_servicesList
 	}
 	if data.BondDeviceList != nil {
 		bond_device_listMap := make(map[string]interface{})
@@ -2898,7 +2922,7 @@ func (r *FleetResource) Create(ctx context.Context, req resource.CreateRequest, 
 			}
 			bond_device_listMap["bond_devices"] = bond_devicesList
 		}
-		apiResource.Spec["bond_device_list"] = bond_device_listMap
+		createReq.Spec["bond_device_list"] = bond_device_listMap
 	}
 	if data.DcClusterGroup != nil {
 		dc_cluster_groupMap := make(map[string]interface{})
@@ -2911,7 +2935,7 @@ func (r *FleetResource) Create(ctx context.Context, req resource.CreateRequest, 
 		if !data.DcClusterGroup.Tenant.IsNull() && !data.DcClusterGroup.Tenant.IsUnknown() {
 			dc_cluster_groupMap["tenant"] = data.DcClusterGroup.Tenant.ValueString()
 		}
-		apiResource.Spec["dc_cluster_group"] = dc_cluster_groupMap
+		createReq.Spec["dc_cluster_group"] = dc_cluster_groupMap
 	}
 	if data.DcClusterGroupInside != nil {
 		dc_cluster_group_insideMap := make(map[string]interface{})
@@ -2924,23 +2948,23 @@ func (r *FleetResource) Create(ctx context.Context, req resource.CreateRequest, 
 		if !data.DcClusterGroupInside.Tenant.IsNull() && !data.DcClusterGroupInside.Tenant.IsUnknown() {
 			dc_cluster_group_insideMap["tenant"] = data.DcClusterGroupInside.Tenant.ValueString()
 		}
-		apiResource.Spec["dc_cluster_group_inside"] = dc_cluster_group_insideMap
+		createReq.Spec["dc_cluster_group_inside"] = dc_cluster_group_insideMap
 	}
 	if data.DefaultConfig != nil {
 		default_configMap := make(map[string]interface{})
-		apiResource.Spec["default_config"] = default_configMap
+		createReq.Spec["default_config"] = default_configMap
 	}
 	if data.DefaultSriovInterface != nil {
 		default_sriov_interfaceMap := make(map[string]interface{})
-		apiResource.Spec["default_sriov_interface"] = default_sriov_interfaceMap
+		createReq.Spec["default_sriov_interface"] = default_sriov_interfaceMap
 	}
 	if data.DefaultStorageClass != nil {
 		default_storage_classMap := make(map[string]interface{})
-		apiResource.Spec["default_storage_class"] = default_storage_classMap
+		createReq.Spec["default_storage_class"] = default_storage_classMap
 	}
 	if data.DenyAllUsb != nil {
 		deny_all_usbMap := make(map[string]interface{})
-		apiResource.Spec["deny_all_usb"] = deny_all_usbMap
+		createReq.Spec["deny_all_usb"] = deny_all_usbMap
 	}
 	if data.DeviceList != nil {
 		device_listMap := make(map[string]interface{})
@@ -2965,19 +2989,19 @@ func (r *FleetResource) Create(ctx context.Context, req resource.CreateRequest, 
 			}
 			device_listMap["devices"] = devicesList
 		}
-		apiResource.Spec["device_list"] = device_listMap
+		createReq.Spec["device_list"] = device_listMap
 	}
 	if data.DisableGpu != nil {
 		disable_gpuMap := make(map[string]interface{})
-		apiResource.Spec["disable_gpu"] = disable_gpuMap
+		createReq.Spec["disable_gpu"] = disable_gpuMap
 	}
 	if data.DisableVm != nil {
 		disable_vmMap := make(map[string]interface{})
-		apiResource.Spec["disable_vm"] = disable_vmMap
+		createReq.Spec["disable_vm"] = disable_vmMap
 	}
 	if data.EnableGpu != nil {
 		enable_gpuMap := make(map[string]interface{})
-		apiResource.Spec["enable_gpu"] = enable_gpuMap
+		createReq.Spec["enable_gpu"] = enable_gpuMap
 	}
 	if data.EnableVgpu != nil {
 		enable_vgpuMap := make(map[string]interface{})
@@ -2990,11 +3014,11 @@ func (r *FleetResource) Create(ctx context.Context, req resource.CreateRequest, 
 		if !data.EnableVgpu.ServerPort.IsNull() && !data.EnableVgpu.ServerPort.IsUnknown() {
 			enable_vgpuMap["server_port"] = data.EnableVgpu.ServerPort.ValueInt64()
 		}
-		apiResource.Spec["enable_vgpu"] = enable_vgpuMap
+		createReq.Spec["enable_vgpu"] = enable_vgpuMap
 	}
 	if data.EnableVm != nil {
 		enable_vmMap := make(map[string]interface{})
-		apiResource.Spec["enable_vm"] = enable_vmMap
+		createReq.Spec["enable_vm"] = enable_vmMap
 	}
 	if len(data.InsideVirtualNetwork) > 0 {
 		var inside_virtual_networkList []map[string]interface{}
@@ -3017,7 +3041,7 @@ func (r *FleetResource) Create(ctx context.Context, req resource.CreateRequest, 
 			}
 			inside_virtual_networkList = append(inside_virtual_networkList, itemMap)
 		}
-		apiResource.Spec["inside_virtual_network"] = inside_virtual_networkList
+		createReq.Spec["inside_virtual_network"] = inside_virtual_networkList
 	}
 	if data.InterfaceList != nil {
 		interface_listMap := make(map[string]interface{})
@@ -3038,7 +3062,7 @@ func (r *FleetResource) Create(ctx context.Context, req resource.CreateRequest, 
 			}
 			interface_listMap["interfaces"] = interfacesList
 		}
-		apiResource.Spec["interface_list"] = interface_listMap
+		createReq.Spec["interface_list"] = interface_listMap
 	}
 	if data.KubernetesUpgradeDrain != nil {
 		kubernetes_upgrade_drainMap := make(map[string]interface{})
@@ -3055,7 +3079,7 @@ func (r *FleetResource) Create(ctx context.Context, req resource.CreateRequest, 
 			}
 			kubernetes_upgrade_drainMap["enable_upgrade_drain"] = enable_upgrade_drainNestedMap
 		}
-		apiResource.Spec["kubernetes_upgrade_drain"] = kubernetes_upgrade_drainMap
+		createReq.Spec["kubernetes_upgrade_drain"] = kubernetes_upgrade_drainMap
 	}
 	if data.LogReceiver != nil {
 		log_receiverMap := make(map[string]interface{})
@@ -3068,11 +3092,11 @@ func (r *FleetResource) Create(ctx context.Context, req resource.CreateRequest, 
 		if !data.LogReceiver.Tenant.IsNull() && !data.LogReceiver.Tenant.IsUnknown() {
 			log_receiverMap["tenant"] = data.LogReceiver.Tenant.ValueString()
 		}
-		apiResource.Spec["log_receiver"] = log_receiverMap
+		createReq.Spec["log_receiver"] = log_receiverMap
 	}
 	if data.LogsStreamingDisabled != nil {
 		logs_streaming_disabledMap := make(map[string]interface{})
-		apiResource.Spec["logs_streaming_disabled"] = logs_streaming_disabledMap
+		createReq.Spec["logs_streaming_disabled"] = logs_streaming_disabledMap
 	}
 	if len(data.NetworkConnectors) > 0 {
 		var network_connectorsList []map[string]interface{}
@@ -3095,7 +3119,7 @@ func (r *FleetResource) Create(ctx context.Context, req resource.CreateRequest, 
 			}
 			network_connectorsList = append(network_connectorsList, itemMap)
 		}
-		apiResource.Spec["network_connectors"] = network_connectorsList
+		createReq.Spec["network_connectors"] = network_connectorsList
 	}
 	if len(data.NetworkFirewall) > 0 {
 		var network_firewallList []map[string]interface{}
@@ -3118,27 +3142,27 @@ func (r *FleetResource) Create(ctx context.Context, req resource.CreateRequest, 
 			}
 			network_firewallList = append(network_firewallList, itemMap)
 		}
-		apiResource.Spec["network_firewall"] = network_firewallList
+		createReq.Spec["network_firewall"] = network_firewallList
 	}
 	if data.NoBondDevices != nil {
 		no_bond_devicesMap := make(map[string]interface{})
-		apiResource.Spec["no_bond_devices"] = no_bond_devicesMap
+		createReq.Spec["no_bond_devices"] = no_bond_devicesMap
 	}
 	if data.NoDcClusterGroup != nil {
 		no_dc_cluster_groupMap := make(map[string]interface{})
-		apiResource.Spec["no_dc_cluster_group"] = no_dc_cluster_groupMap
+		createReq.Spec["no_dc_cluster_group"] = no_dc_cluster_groupMap
 	}
 	if data.NoStorageDevice != nil {
 		no_storage_deviceMap := make(map[string]interface{})
-		apiResource.Spec["no_storage_device"] = no_storage_deviceMap
+		createReq.Spec["no_storage_device"] = no_storage_deviceMap
 	}
 	if data.NoStorageInterfaces != nil {
 		no_storage_interfacesMap := make(map[string]interface{})
-		apiResource.Spec["no_storage_interfaces"] = no_storage_interfacesMap
+		createReq.Spec["no_storage_interfaces"] = no_storage_interfacesMap
 	}
 	if data.NoStorageStaticRoutes != nil {
 		no_storage_static_routesMap := make(map[string]interface{})
-		apiResource.Spec["no_storage_static_routes"] = no_storage_static_routesMap
+		createReq.Spec["no_storage_static_routes"] = no_storage_static_routesMap
 	}
 	if len(data.OutsideVirtualNetwork) > 0 {
 		var outside_virtual_networkList []map[string]interface{}
@@ -3161,7 +3185,7 @@ func (r *FleetResource) Create(ctx context.Context, req resource.CreateRequest, 
 			}
 			outside_virtual_networkList = append(outside_virtual_networkList, itemMap)
 		}
-		apiResource.Spec["outside_virtual_network"] = outside_virtual_networkList
+		createReq.Spec["outside_virtual_network"] = outside_virtual_networkList
 	}
 	if data.PerformanceEnhancementMode != nil {
 		performance_enhancement_modeMap := make(map[string]interface{})
@@ -3172,7 +3196,7 @@ func (r *FleetResource) Create(ctx context.Context, req resource.CreateRequest, 
 		if data.PerformanceEnhancementMode.PerfModeL7Enhanced != nil {
 			performance_enhancement_modeMap["perf_mode_l7_enhanced"] = map[string]interface{}{}
 		}
-		apiResource.Spec["performance_enhancement_mode"] = performance_enhancement_modeMap
+		createReq.Spec["performance_enhancement_mode"] = performance_enhancement_modeMap
 	}
 	if data.SriovInterfaces != nil {
 		sriov_interfacesMap := make(map[string]interface{})
@@ -3193,7 +3217,7 @@ func (r *FleetResource) Create(ctx context.Context, req resource.CreateRequest, 
 			}
 			sriov_interfacesMap["sriov_interface"] = sriov_interfaceList
 		}
-		apiResource.Spec["sriov_interfaces"] = sriov_interfacesMap
+		createReq.Spec["sriov_interfaces"] = sriov_interfacesMap
 	}
 	if data.StorageClassList != nil {
 		storage_class_listMap := make(map[string]interface{})
@@ -3308,7 +3332,7 @@ func (r *FleetResource) Create(ctx context.Context, req resource.CreateRequest, 
 			}
 			storage_class_listMap["storage_classes"] = storage_classesList
 		}
-		apiResource.Spec["storage_class_list"] = storage_class_listMap
+		createReq.Spec["storage_class_list"] = storage_class_listMap
 	}
 	if data.StorageDeviceList != nil {
 		storage_device_listMap := make(map[string]interface{})
@@ -3365,7 +3389,7 @@ func (r *FleetResource) Create(ctx context.Context, req resource.CreateRequest, 
 			}
 			storage_device_listMap["storage_devices"] = storage_devicesList
 		}
-		apiResource.Spec["storage_device_list"] = storage_device_listMap
+		createReq.Spec["storage_device_list"] = storage_device_listMap
 	}
 	if data.StorageInterfaceList != nil {
 		storage_interface_listMap := make(map[string]interface{})
@@ -3386,7 +3410,7 @@ func (r *FleetResource) Create(ctx context.Context, req resource.CreateRequest, 
 			}
 			storage_interface_listMap["interfaces"] = interfacesList
 		}
-		apiResource.Spec["storage_interface_list"] = storage_interface_listMap
+		createReq.Spec["storage_interface_list"] = storage_interface_listMap
 	}
 	if data.StorageStaticRoutes != nil {
 		storage_static_routesMap := make(map[string]interface{})
@@ -3408,7 +3432,7 @@ func (r *FleetResource) Create(ctx context.Context, req resource.CreateRequest, 
 			}
 			storage_static_routesMap["storage_routes"] = storage_routesList
 		}
-		apiResource.Spec["storage_static_routes"] = storage_static_routesMap
+		createReq.Spec["storage_static_routes"] = storage_static_routesMap
 	}
 	if data.UsbPolicy != nil {
 		usb_policyMap := make(map[string]interface{})
@@ -3421,152 +3445,34 @@ func (r *FleetResource) Create(ctx context.Context, req resource.CreateRequest, 
 		if !data.UsbPolicy.Tenant.IsNull() && !data.UsbPolicy.Tenant.IsUnknown() {
 			usb_policyMap["tenant"] = data.UsbPolicy.Tenant.ValueString()
 		}
-		apiResource.Spec["usb_policy"] = usb_policyMap
+		createReq.Spec["usb_policy"] = usb_policyMap
 	}
 	if !data.EnableDefaultFleetConfigDownload.IsNull() && !data.EnableDefaultFleetConfigDownload.IsUnknown() {
-		apiResource.Spec["enable_default_fleet_config_download"] = data.EnableDefaultFleetConfigDownload.ValueBool()
+		createReq.Spec["enable_default_fleet_config_download"] = data.EnableDefaultFleetConfigDownload.ValueBool()
 	}
 	if !data.FleetLabel.IsNull() && !data.FleetLabel.IsUnknown() {
-		apiResource.Spec["fleet_label"] = data.FleetLabel.ValueString()
+		createReq.Spec["fleet_label"] = data.FleetLabel.ValueString()
 	}
 	if !data.OperatingSystemVersion.IsNull() && !data.OperatingSystemVersion.IsUnknown() {
-		apiResource.Spec["operating_system_version"] = data.OperatingSystemVersion.ValueString()
+		createReq.Spec["operating_system_version"] = data.OperatingSystemVersion.ValueString()
 	}
 	if !data.VolterraSoftwareVersion.IsNull() && !data.VolterraSoftwareVersion.IsUnknown() {
-		apiResource.Spec["volterra_software_version"] = data.VolterraSoftwareVersion.ValueString()
+		createReq.Spec["volterra_software_version"] = data.VolterraSoftwareVersion.ValueString()
 	}
 
 
-	created, err := r.client.CreateFleet(ctx, apiResource)
+	apiResource, err := r.client.CreateFleet(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create Fleet: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
-
-	// Set computed fields from API response
-	if v, ok := created.Spec["enable_default_fleet_config_download"].(bool); ok {
-		data.EnableDefaultFleetConfigDownload = types.BoolValue(v)
-	} else if data.EnableDefaultFleetConfigDownload.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
-		data.EnableDefaultFleetConfigDownload = types.BoolNull()
-	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["fleet_label"].(string); ok && v != "" {
-		data.FleetLabel = types.StringValue(v)
-	} else if data.FleetLabel.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
-		data.FleetLabel = types.StringNull()
-	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["operating_system_version"].(string); ok && v != "" {
-		data.OperatingSystemVersion = types.StringValue(v)
-	} else if data.OperatingSystemVersion.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
-		data.OperatingSystemVersion = types.StringNull()
-	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["volterra_software_version"].(string); ok && v != "" {
-		data.VolterraSoftwareVersion = types.StringValue(v)
-	} else if data.VolterraSoftwareVersion.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
-		data.VolterraSoftwareVersion = types.StringNull()
-	}
-	// If plan had a value, preserve it
-
-	psd := privatestate.NewPrivateStateData()
-	psd.SetCustom("managed", "true")
-	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
-	})
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
-
-	tflog.Trace(ctx, "created Fleet resource")
-	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
-}
-
-func (r *FleetResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
-	var data FleetResourceModel
-	resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
-	if resp.Diagnostics.HasError() {
-		return
-	}
-
-	readTimeout, diags := data.Timeouts.Read(ctx, inttimeouts.DefaultRead)
-	resp.Diagnostics.Append(diags...)
-	if resp.Diagnostics.HasError() {
-		return
-	}
-
-	ctx, cancel := context.WithTimeout(ctx, readTimeout)
-	defer cancel()
-
-	psd, psDiags := privatestate.LoadFromPrivateState(ctx, &req)
-	resp.Diagnostics.Append(psDiags...)
-
-	apiResource, err := r.client.GetFleet(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-	if err != nil {
-		// Check if the resource was deleted outside Terraform
-		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
-			tflog.Warn(ctx, "Fleet not found, removing from state", map[string]interface{}{
-				"name":      data.Name.ValueString(),
-				"namespace": data.Namespace.ValueString(),
-			})
-			resp.State.RemoveResource(ctx)
-			return
-		}
-		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read Fleet: %s", err))
-		return
-	}
-
-	if psd != nil && psd.Metadata.UID != "" && apiResource.Metadata.UID != psd.Metadata.UID {
-		resp.Diagnostics.AddWarning(
-			"Resource Drift Detected",
-			"The fleet may have been recreated outside of Terraform.",
-		)
-	}
-
 	data.ID = types.StringValue(apiResource.Metadata.Name)
-	data.Name = types.StringValue(apiResource.Metadata.Name)
-	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
-
-	// Read description from metadata
-	if apiResource.Metadata.Description != "" {
-		data.Description = types.StringValue(apiResource.Metadata.Description)
-	} else {
-		data.Description = types.StringNull()
-	}
-
-	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
-		}
-	} else {
-		data.Labels = types.MapNull(types.StringType)
-	}
-
-	if len(apiResource.Metadata.Annotations) > 0 {
-		annotations, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Annotations)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Annotations = annotations
-		}
-	} else {
-		data.Annotations = types.MapNull(types.StringType)
-	}
 
 	// Unmarshal spec fields from API response to Terraform state
-	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
-	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
 	_ = isImport // May be unused if resource has no blocks needing import detection
-	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
-	})
 	if _, ok := apiResource.Spec["allow_all_usb"].(map[string]interface{}); ok && isImport && data.AllowAllUsb == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.AllowAllUsb = &FleetEmptyModel{}
@@ -3574,11 +3480,12 @@ func (r *FleetResource) Read(ctx context.Context, req resource.ReadRequest, resp
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["blocked_services"].([]interface{}); ok && len(listData) > 0 {
 		var blocked_servicesList []FleetBlockedServicesModel
-		for _, item := range listData {
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				blocked_servicesList = append(blocked_servicesList, FleetBlockedServicesModel{
 					DNS: func() *FleetEmptyModel {
-						if _, ok := itemMap["dns"].(map[string]interface{}); ok {
+						if !isImport && len(data.BlockedServices) > listIdx && data.BlockedServices[listIdx].DNS != nil {
 							return &FleetEmptyModel{}
 						}
 						return nil
@@ -3590,13 +3497,13 @@ func (r *FleetResource) Read(ctx context.Context, req resource.ReadRequest, resp
 						return types.StringNull()
 					}(),
 					SSH: func() *FleetEmptyModel {
-						if _, ok := itemMap["ssh"].(map[string]interface{}); ok {
+						if !isImport && len(data.BlockedServices) > listIdx && data.BlockedServices[listIdx].SSH != nil {
 							return &FleetEmptyModel{}
 						}
 						return nil
 					}(),
 					WebUserInterface: func() *FleetEmptyModel {
-						if _, ok := itemMap["web_user_interface"].(map[string]interface{}); ok {
+						if !isImport && len(data.BlockedServices) > listIdx && data.BlockedServices[listIdx].WebUserInterface != nil {
 							return &FleetEmptyModel{}
 						}
 						return nil
@@ -3810,7 +3717,8 @@ func (r *FleetResource) Read(ctx context.Context, req resource.ReadRequest, resp
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["inside_virtual_network"].([]interface{}); ok && len(listData) > 0 {
 		var inside_virtual_networkList []FleetInsideVirtualNetworkModel
-		for _, item := range listData {
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				inside_virtual_networkList = append(inside_virtual_networkList, FleetInsideVirtualNetworkModel{
 					Kind: func() types.String {
@@ -3917,7 +3825,8 @@ func (r *FleetResource) Read(ctx context.Context, req resource.ReadRequest, resp
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["network_connectors"].([]interface{}); ok && len(listData) > 0 {
 		var network_connectorsList []FleetNetworkConnectorsModel
-		for _, item := range listData {
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				network_connectorsList = append(network_connectorsList, FleetNetworkConnectorsModel{
 					Kind: func() types.String {
@@ -3957,7 +3866,8 @@ func (r *FleetResource) Read(ctx context.Context, req resource.ReadRequest, resp
 	}
 	if listData, ok := apiResource.Spec["network_firewall"].([]interface{}); ok && len(listData) > 0 {
 		var network_firewallList []FleetNetworkFirewallModel
-		for _, item := range listData {
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				network_firewallList = append(network_firewallList, FleetNetworkFirewallModel{
 					Kind: func() types.String {
@@ -4022,7 +3932,8 @@ func (r *FleetResource) Read(ctx context.Context, req resource.ReadRequest, resp
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["outside_virtual_network"].([]interface{}); ok && len(listData) > 0 {
 		var outside_virtual_networkList []FleetOutsideVirtualNetworkModel
-		for _, item := range listData {
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				outside_virtual_networkList = append(outside_virtual_networkList, FleetOutsideVirtualNetworkModel{
 					Kind: func() types.String {
@@ -4517,10 +4428,1084 @@ func (r *FleetResource) Read(ctx context.Context, req resource.ReadRequest, resp
 		}
 	}
 	// Top-level Optional bool: preserve prior state to avoid API default drift
-	if !isImport && !data.EnableDefaultFleetConfigDownload.IsNull() {
+	if !isImport && !data.EnableDefaultFleetConfigDownload.IsNull() && !data.EnableDefaultFleetConfigDownload.IsUnknown() {
 		// Normal Read: preserve existing state value (do nothing)
 	} else {
-		// Import case or null state: read from API
+		// Import case, null state, or unknown (after Create): read from API
+		if v, ok := apiResource.Spec["enable_default_fleet_config_download"].(bool); ok {
+			data.EnableDefaultFleetConfigDownload = types.BoolValue(v)
+		} else {
+			data.EnableDefaultFleetConfigDownload = types.BoolNull()
+		}
+	}
+	if v, ok := apiResource.Spec["fleet_label"].(string); ok && v != "" {
+		data.FleetLabel = types.StringValue(v)
+	} else {
+		data.FleetLabel = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["operating_system_version"].(string); ok && v != "" {
+		data.OperatingSystemVersion = types.StringValue(v)
+	} else {
+		data.OperatingSystemVersion = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["volterra_software_version"].(string); ok && v != "" {
+		data.VolterraSoftwareVersion = types.StringValue(v)
+	} else {
+		data.VolterraSoftwareVersion = types.StringNull()
+	}
+
+
+	psd := privatestate.NewPrivateStateData()
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": apiResource.Metadata.Name,
+	})
+	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+
+	tflog.Trace(ctx, "created Fleet resource")
+	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
+}
+
+func (r *FleetResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
+	var data FleetResourceModel
+	resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	readTimeout, diags := data.Timeouts.Read(ctx, inttimeouts.DefaultRead)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	ctx, cancel := context.WithTimeout(ctx, readTimeout)
+	defer cancel()
+
+	psd, psDiags := privatestate.LoadFromPrivateState(ctx, &req)
+	resp.Diagnostics.Append(psDiags...)
+
+	apiResource, err := r.client.GetFleet(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "Fleet not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read Fleet: %s", err))
+		return
+	}
+
+	if psd != nil && psd.Metadata.UID != "" && apiResource.Metadata.UID != psd.Metadata.UID {
+		resp.Diagnostics.AddWarning(
+			"Resource Drift Detected",
+			"The fleet may have been recreated outside of Terraform.",
+		)
+	}
+
+	data.ID = types.StringValue(apiResource.Metadata.Name)
+	data.Name = types.StringValue(apiResource.Metadata.Name)
+	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
+
+	if len(apiResource.Metadata.Labels) > 0 {
+		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Labels = labels
+		}
+	} else {
+		data.Labels = types.MapNull(types.StringType)
+	}
+
+	if len(apiResource.Metadata.Annotations) > 0 {
+		annotations, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Annotations)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Annotations = annotations
+		}
+	} else {
+		data.Annotations = types.MapNull(types.StringType)
+	}
+
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if _, ok := apiResource.Spec["allow_all_usb"].(map[string]interface{}); ok && isImport && data.AllowAllUsb == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AllowAllUsb = &FleetEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["blocked_services"].([]interface{}); ok && len(listData) > 0 {
+		var blocked_servicesList []FleetBlockedServicesModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				blocked_servicesList = append(blocked_servicesList, FleetBlockedServicesModel{
+					DNS: func() *FleetEmptyModel {
+						if !isImport && len(data.BlockedServices) > listIdx && data.BlockedServices[listIdx].DNS != nil {
+							return &FleetEmptyModel{}
+						}
+						return nil
+					}(),
+					NetworkType: func() types.String {
+						if v, ok := itemMap["network_type"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					SSH: func() *FleetEmptyModel {
+						if !isImport && len(data.BlockedServices) > listIdx && data.BlockedServices[listIdx].SSH != nil {
+							return &FleetEmptyModel{}
+						}
+						return nil
+					}(),
+					WebUserInterface: func() *FleetEmptyModel {
+						if !isImport && len(data.BlockedServices) > listIdx && data.BlockedServices[listIdx].WebUserInterface != nil {
+							return &FleetEmptyModel{}
+						}
+						return nil
+					}(),
+				})
+			}
+		}
+		data.BlockedServices = blocked_servicesList
+	}
+	if blockData, ok := apiResource.Spec["bond_device_list"].(map[string]interface{}); ok && (isImport || data.BondDeviceList != nil) {
+		data.BondDeviceList = &FleetBondDeviceListModel{
+			BondDevices: func() []FleetBondDeviceListBondDevicesModel {
+				if listData, ok := blockData["bond_devices"].([]interface{}); ok && len(listData) > 0 {
+					var result []FleetBondDeviceListBondDevicesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, FleetBondDeviceListBondDevicesModel{
+								ActiveBackup: func() *FleetEmptyModel {
+									if _, ok := itemMap["active_backup"].(map[string]interface{}); ok {
+										return &FleetEmptyModel{}
+									}
+									return nil
+								}(),
+								Lacp: func() *FleetBondDeviceListBondDevicesLacpModel {
+									if deepMap, ok := itemMap["lacp"].(map[string]interface{}); ok {
+										return &FleetBondDeviceListBondDevicesLacpModel{
+											Rate: func() types.Int64 {
+												if v, ok := deepMap["rate"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								LinkPollingInterval: func() types.Int64 {
+									if v, ok := itemMap["link_polling_interval"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								LinkUpDelay: func() types.Int64 {
+									if v, ok := itemMap["link_up_delay"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["dc_cluster_group"].(map[string]interface{}); ok && (isImport || data.DcClusterGroup != nil) {
+		data.DcClusterGroup = &FleetDcClusterGroupModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["dc_cluster_group_inside"].(map[string]interface{}); ok && (isImport || data.DcClusterGroupInside != nil) {
+		data.DcClusterGroupInside = &FleetDcClusterGroupInsideModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["default_config"].(map[string]interface{}); ok && isImport && data.DefaultConfig == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DefaultConfig = &FleetEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["default_sriov_interface"].(map[string]interface{}); ok && isImport && data.DefaultSriovInterface == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DefaultSriovInterface = &FleetEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["default_storage_class"].(map[string]interface{}); ok && isImport && data.DefaultStorageClass == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DefaultStorageClass = &FleetEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["deny_all_usb"].(map[string]interface{}); ok && isImport && data.DenyAllUsb == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DenyAllUsb = &FleetEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["device_list"].(map[string]interface{}); ok && (isImport || data.DeviceList != nil) {
+		data.DeviceList = &FleetDeviceListModel{
+			Devices: func() []FleetDeviceListDevicesModel {
+				if listData, ok := blockData["devices"].([]interface{}); ok && len(listData) > 0 {
+					var result []FleetDeviceListDevicesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, FleetDeviceListDevicesModel{
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								NetworkDevice: func() *FleetDeviceListDevicesNetworkDeviceModel {
+									if deepMap, ok := itemMap["network_device"].(map[string]interface{}); ok {
+										return &FleetDeviceListDevicesNetworkDeviceModel{
+											Use: func() types.String {
+												if v, ok := deepMap["use"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								Owner: func() types.String {
+									if v, ok := itemMap["owner"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["disable_gpu"].(map[string]interface{}); ok && isImport && data.DisableGpu == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableGpu = &FleetEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["disable_vm"].(map[string]interface{}); ok && isImport && data.DisableVm == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableVm = &FleetEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["enable_gpu"].(map[string]interface{}); ok && isImport && data.EnableGpu == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.EnableGpu = &FleetEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["enable_vgpu"].(map[string]interface{}); ok && (isImport || data.EnableVgpu != nil) {
+		data.EnableVgpu = &FleetEnableVgpuModel{
+			FeatureType: func() types.String {
+				if v, ok := blockData["feature_type"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			ServerAddress: func() types.String {
+				if v, ok := blockData["server_address"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			ServerPort: func() types.Int64 {
+				if v, ok := blockData["server_port"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["enable_vm"].(map[string]interface{}); ok && isImport && data.EnableVm == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.EnableVm = &FleetEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["inside_virtual_network"].([]interface{}); ok && len(listData) > 0 {
+		var inside_virtual_networkList []FleetInsideVirtualNetworkModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				inside_virtual_networkList = append(inside_virtual_networkList, FleetInsideVirtualNetworkModel{
+					Kind: func() types.String {
+						if v, ok := itemMap["kind"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Namespace: func() types.String {
+						if v, ok := itemMap["namespace"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Tenant: func() types.String {
+						if v, ok := itemMap["tenant"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Uid: func() types.String {
+						if v, ok := itemMap["uid"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.InsideVirtualNetwork = inside_virtual_networkList
+	}
+	if blockData, ok := apiResource.Spec["interface_list"].(map[string]interface{}); ok && (isImport || data.InterfaceList != nil) {
+		data.InterfaceList = &FleetInterfaceListModel{
+			Interfaces: func() []FleetInterfaceListInterfacesModel {
+				if listData, ok := blockData["interfaces"].([]interface{}); ok && len(listData) > 0 {
+					var result []FleetInterfaceListInterfacesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, FleetInterfaceListInterfacesModel{
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := itemMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := itemMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["kubernetes_upgrade_drain"].(map[string]interface{}); ok && isImport && data.KubernetesUpgradeDrain == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.KubernetesUpgradeDrain = &FleetKubernetesUpgradeDrainModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["log_receiver"].(map[string]interface{}); ok && (isImport || data.LogReceiver != nil) {
+		data.LogReceiver = &FleetLogReceiverModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["logs_streaming_disabled"].(map[string]interface{}); ok && isImport && data.LogsStreamingDisabled == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.LogsStreamingDisabled = &FleetEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["network_connectors"].([]interface{}); ok && len(listData) > 0 {
+		var network_connectorsList []FleetNetworkConnectorsModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				network_connectorsList = append(network_connectorsList, FleetNetworkConnectorsModel{
+					Kind: func() types.String {
+						if v, ok := itemMap["kind"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Namespace: func() types.String {
+						if v, ok := itemMap["namespace"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Tenant: func() types.String {
+						if v, ok := itemMap["tenant"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Uid: func() types.String {
+						if v, ok := itemMap["uid"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.NetworkConnectors = network_connectorsList
+	}
+	if listData, ok := apiResource.Spec["network_firewall"].([]interface{}); ok && len(listData) > 0 {
+		var network_firewallList []FleetNetworkFirewallModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				network_firewallList = append(network_firewallList, FleetNetworkFirewallModel{
+					Kind: func() types.String {
+						if v, ok := itemMap["kind"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Namespace: func() types.String {
+						if v, ok := itemMap["namespace"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Tenant: func() types.String {
+						if v, ok := itemMap["tenant"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Uid: func() types.String {
+						if v, ok := itemMap["uid"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.NetworkFirewall = network_firewallList
+	}
+	if _, ok := apiResource.Spec["no_bond_devices"].(map[string]interface{}); ok && isImport && data.NoBondDevices == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoBondDevices = &FleetEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_dc_cluster_group"].(map[string]interface{}); ok && isImport && data.NoDcClusterGroup == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoDcClusterGroup = &FleetEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_storage_device"].(map[string]interface{}); ok && isImport && data.NoStorageDevice == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoStorageDevice = &FleetEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_storage_interfaces"].(map[string]interface{}); ok && isImport && data.NoStorageInterfaces == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoStorageInterfaces = &FleetEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_storage_static_routes"].(map[string]interface{}); ok && isImport && data.NoStorageStaticRoutes == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoStorageStaticRoutes = &FleetEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["outside_virtual_network"].([]interface{}); ok && len(listData) > 0 {
+		var outside_virtual_networkList []FleetOutsideVirtualNetworkModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				outside_virtual_networkList = append(outside_virtual_networkList, FleetOutsideVirtualNetworkModel{
+					Kind: func() types.String {
+						if v, ok := itemMap["kind"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Namespace: func() types.String {
+						if v, ok := itemMap["namespace"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Tenant: func() types.String {
+						if v, ok := itemMap["tenant"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Uid: func() types.String {
+						if v, ok := itemMap["uid"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.OutsideVirtualNetwork = outside_virtual_networkList
+	}
+	if _, ok := apiResource.Spec["performance_enhancement_mode"].(map[string]interface{}); ok && isImport && data.PerformanceEnhancementMode == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.PerformanceEnhancementMode = &FleetPerformanceEnhancementModeModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["sriov_interfaces"].(map[string]interface{}); ok && (isImport || data.SriovInterfaces != nil) {
+		data.SriovInterfaces = &FleetSriovInterfacesModel{
+			SriovInterface: func() []FleetSriovInterfacesSriovInterfaceModel {
+				if listData, ok := blockData["sriov_interface"].([]interface{}); ok && len(listData) > 0 {
+					var result []FleetSriovInterfacesSriovInterfaceModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, FleetSriovInterfacesSriovInterfaceModel{
+								InterfaceName: func() types.String {
+									if v, ok := itemMap["interface_name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								NumberOfVfioVfs: func() types.Int64 {
+									if v, ok := itemMap["number_of_vfio_vfs"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								NumberOfVfs: func() types.Int64 {
+									if v, ok := itemMap["number_of_vfs"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["storage_class_list"].(map[string]interface{}); ok && (isImport || data.StorageClassList != nil) {
+		data.StorageClassList = &FleetStorageClassListModel{
+			StorageClasses: func() []FleetStorageClassListStorageClassesModel {
+				if listData, ok := blockData["storage_classes"].([]interface{}); ok && len(listData) > 0 {
+					var result []FleetStorageClassListStorageClassesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, FleetStorageClassListStorageClassesModel{
+								AdvancedStorageParameters: func() *FleetEmptyModel {
+									if _, ok := itemMap["advanced_storage_parameters"].(map[string]interface{}); ok {
+										return &FleetEmptyModel{}
+									}
+									return nil
+								}(),
+								AllowVolumeExpansion: func() types.Bool {
+									if v, ok := itemMap["allow_volume_expansion"].(bool); ok {
+										return types.BoolValue(v)
+									}
+									return types.BoolNull()
+								}(),
+								CustomStorage: func() *FleetStorageClassListStorageClassesCustomStorageModel {
+									if deepMap, ok := itemMap["custom_storage"].(map[string]interface{}); ok {
+										return &FleetStorageClassListStorageClassesCustomStorageModel{
+											Yaml: func() types.String {
+												if v, ok := deepMap["yaml"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								DefaultStorageClass: func() types.Bool {
+									if v, ok := itemMap["default_storage_class"].(bool); ok {
+										return types.BoolValue(v)
+									}
+									return types.BoolNull()
+								}(),
+								DescriptionSpec: func() types.String {
+									if v, ok := itemMap["description"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								HpeStorage: func() *FleetStorageClassListStorageClassesHpeStorageModel {
+									if deepMap, ok := itemMap["hpe_storage"].(map[string]interface{}); ok {
+										return &FleetStorageClassListStorageClassesHpeStorageModel{
+											AllowMutations: func() types.String {
+												if v, ok := deepMap["allow_mutations"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											AllowOverrides: func() types.String {
+												if v, ok := deepMap["allow_overrides"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											DedupeEnabled: func() types.Bool {
+												if v, ok := deepMap["dedupe_enabled"].(bool); ok {
+													return types.BoolValue(v)
+												}
+												return types.BoolNull()
+											}(),
+											DescriptionSpec: func() types.String {
+												if v, ok := deepMap["description"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											DestroyOnDelete: func() types.Bool {
+												if v, ok := deepMap["destroy_on_delete"].(bool); ok {
+													return types.BoolValue(v)
+												}
+												return types.BoolNull()
+											}(),
+											Encrypted: func() types.Bool {
+												if v, ok := deepMap["encrypted"].(bool); ok {
+													return types.BoolValue(v)
+												}
+												return types.BoolNull()
+											}(),
+											Folder: func() types.String {
+												if v, ok := deepMap["folder"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											LimitIops: func() types.String {
+												if v, ok := deepMap["limit_iops"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											LimitMbps: func() types.String {
+												if v, ok := deepMap["limit_mbps"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											PerformancePolicy: func() types.String {
+												if v, ok := deepMap["performance_policy"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Pool: func() types.String {
+												if v, ok := deepMap["pool"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											ProtectionTemplate: func() types.String {
+												if v, ok := deepMap["protection_template"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											SecretName: func() types.String {
+												if v, ok := deepMap["secret_name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											SecretNamespace: func() types.String {
+												if v, ok := deepMap["secret_namespace"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											SyncOnDetach: func() types.Bool {
+												if v, ok := deepMap["sync_on_detach"].(bool); ok {
+													return types.BoolValue(v)
+												}
+												return types.BoolNull()
+											}(),
+											Thick: func() types.Bool {
+												if v, ok := deepMap["thick"].(bool); ok {
+													return types.BoolValue(v)
+												}
+												return types.BoolNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								NetappTrident: func() *FleetStorageClassListStorageClassesNetappTridentModel {
+									if deepMap, ok := itemMap["netapp_trident"].(map[string]interface{}); ok {
+										return &FleetStorageClassListStorageClassesNetappTridentModel{
+											Selector: func() *FleetEmptyModel {
+												if _, ok := deepMap["selector"].(map[string]interface{}); ok {
+													return &FleetEmptyModel{}
+												}
+												return nil
+											}(),
+											StoragePools: func() types.String {
+												if v, ok := deepMap["storage_pools"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								PureServiceOrchestrator: func() *FleetStorageClassListStorageClassesPureServiceOrchestratorModel {
+									if deepMap, ok := itemMap["pure_service_orchestrator"].(map[string]interface{}); ok {
+										return &FleetStorageClassListStorageClassesPureServiceOrchestratorModel{
+											Backend: func() types.String {
+												if v, ok := deepMap["backend"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											BandwidthLimit: func() types.String {
+												if v, ok := deepMap["bandwidth_limit"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											IopsLimit: func() types.Int64 {
+												if v, ok := deepMap["iops_limit"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								ReclaimPolicy: func() types.String {
+									if v, ok := itemMap["reclaim_policy"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								StorageClassName: func() types.String {
+									if v, ok := itemMap["storage_class_name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								StorageDevice: func() types.String {
+									if v, ok := itemMap["storage_device"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["storage_device_list"].(map[string]interface{}); ok && (isImport || data.StorageDeviceList != nil) {
+		data.StorageDeviceList = &FleetStorageDeviceListModel{
+			StorageDevices: func() []FleetStorageDeviceListStorageDevicesModel {
+				if listData, ok := blockData["storage_devices"].([]interface{}); ok && len(listData) > 0 {
+					var result []FleetStorageDeviceListStorageDevicesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, FleetStorageDeviceListStorageDevicesModel{
+								AdvancedAdvancedParameters: func() *FleetEmptyModel {
+									if _, ok := itemMap["advanced_advanced_parameters"].(map[string]interface{}); ok {
+										return &FleetEmptyModel{}
+									}
+									return nil
+								}(),
+								CustomStorage: func() *FleetEmptyModel {
+									if _, ok := itemMap["custom_storage"].(map[string]interface{}); ok {
+										return &FleetEmptyModel{}
+									}
+									return nil
+								}(),
+								HpeStorage: func() *FleetStorageDeviceListStorageDevicesHpeStorageModel {
+									if deepMap, ok := itemMap["hpe_storage"].(map[string]interface{}); ok {
+										return &FleetStorageDeviceListStorageDevicesHpeStorageModel{
+											APIServerPort: func() types.Int64 {
+												if v, ok := deepMap["api_server_port"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+											IscsiChapUser: func() types.String {
+												if v, ok := deepMap["iscsi_chap_user"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											StorageServerIPAddress: func() types.String {
+												if v, ok := deepMap["storage_server_ip_address"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											StorageServerName: func() types.String {
+												if v, ok := deepMap["storage_server_name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Username: func() types.String {
+												if v, ok := deepMap["username"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								NetappTrident: func() *FleetStorageDeviceListStorageDevicesNetappTridentModel {
+									if _, ok := itemMap["netapp_trident"].(map[string]interface{}); ok {
+										return &FleetStorageDeviceListStorageDevicesNetappTridentModel{
+										}
+									}
+									return nil
+								}(),
+								PureServiceOrchestrator: func() *FleetStorageDeviceListStorageDevicesPureServiceOrchestratorModel {
+									if deepMap, ok := itemMap["pure_service_orchestrator"].(map[string]interface{}); ok {
+										return &FleetStorageDeviceListStorageDevicesPureServiceOrchestratorModel{
+											ClusterID: func() types.String {
+												if v, ok := deepMap["cluster_id"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											EnableStorageTopology: func() types.Bool {
+												if v, ok := deepMap["enable_storage_topology"].(bool); ok {
+													return types.BoolValue(v)
+												}
+												return types.BoolNull()
+											}(),
+											EnableStrictTopology: func() types.Bool {
+												if v, ok := deepMap["enable_strict_topology"].(bool); ok {
+													return types.BoolValue(v)
+												}
+												return types.BoolNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								StorageDevice: func() types.String {
+									if v, ok := itemMap["storage_device"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["storage_interface_list"].(map[string]interface{}); ok && (isImport || data.StorageInterfaceList != nil) {
+		data.StorageInterfaceList = &FleetStorageInterfaceListModel{
+			Interfaces: func() []FleetStorageInterfaceListInterfacesModel {
+				if listData, ok := blockData["interfaces"].([]interface{}); ok && len(listData) > 0 {
+					var result []FleetStorageInterfaceListInterfacesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, FleetStorageInterfaceListInterfacesModel{
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := itemMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := itemMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["storage_static_routes"].(map[string]interface{}); ok && (isImport || data.StorageStaticRoutes != nil) {
+		data.StorageStaticRoutes = &FleetStorageStaticRoutesModel{
+			StorageRoutes: func() []FleetStorageStaticRoutesStorageRoutesModel {
+				if listData, ok := blockData["storage_routes"].([]interface{}); ok && len(listData) > 0 {
+					var result []FleetStorageStaticRoutesStorageRoutesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, FleetStorageStaticRoutesStorageRoutesModel{
+								Labels: func() *FleetEmptyModel {
+									if _, ok := itemMap["labels"].(map[string]interface{}); ok {
+										return &FleetEmptyModel{}
+									}
+									return nil
+								}(),
+								Nexthop: func() *FleetStorageStaticRoutesStorageRoutesNexthopModel {
+									if deepMap, ok := itemMap["nexthop"].(map[string]interface{}); ok {
+										return &FleetStorageStaticRoutesStorageRoutesNexthopModel{
+											Type: func() types.String {
+												if v, ok := deepMap["type"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["usb_policy"].(map[string]interface{}); ok && (isImport || data.UsbPolicy != nil) {
+		data.UsbPolicy = &FleetUsbPolicyModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	// Top-level Optional bool: preserve prior state to avoid API default drift
+	if !isImport && !data.EnableDefaultFleetConfigDownload.IsNull() && !data.EnableDefaultFleetConfigDownload.IsUnknown() {
+		// Normal Read: preserve existing state value (do nothing)
+	} else {
+		// Import case, null state, or unknown (after Create): read from API
 		if v, ok := apiResource.Spec["enable_default_fleet_config_download"].(bool); ok {
 			data.EnableDefaultFleetConfigDownload = types.BoolValue(v)
 		} else {

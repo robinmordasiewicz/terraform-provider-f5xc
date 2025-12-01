@@ -1739,6 +1739,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -1765,6 +1766,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -1791,6 +1793,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -1839,6 +1842,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 															Optional: true,
+															Computed: true,
 														},
 													},
 												},
@@ -1863,6 +1867,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 															Optional: true,
+															Computed: true,
 														},
 													},
 												},
@@ -2332,6 +2337,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 															Optional: true,
+															Computed: true,
 														},
 													},
 												},
@@ -2412,6 +2418,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																				"kind": schema.StringAttribute{
 																					MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																					Optional: true,
+																					Computed: true,
 																				},
 																				"name": schema.StringAttribute{
 																					MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -2424,10 +2431,12 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																				"tenant": schema.StringAttribute{
 																					MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																					Optional: true,
+																					Computed: true,
 																				},
 																				"uid": schema.StringAttribute{
 																					MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																					Optional: true,
+																					Computed: true,
 																				},
 																			},
 																		},
@@ -2492,6 +2501,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																				"kind": schema.StringAttribute{
 																					MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																					Optional: true,
+																					Computed: true,
 																				},
 																				"name": schema.StringAttribute{
 																					MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -2504,10 +2514,12 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																				"tenant": schema.StringAttribute{
 																					MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																					Optional: true,
+																					Computed: true,
 																				},
 																				"uid": schema.StringAttribute{
 																					MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																					Optional: true,
+																					Computed: true,
 																				},
 																			},
 																		},
@@ -2543,6 +2555,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 									"tenant": schema.StringAttribute{
 										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 										Optional: true,
+										Computed: true,
 									},
 								},
 							},
@@ -2608,6 +2621,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																				"kind": schema.StringAttribute{
 																					MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																					Optional: true,
+																					Computed: true,
 																				},
 																				"name": schema.StringAttribute{
 																					MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -2620,10 +2634,12 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																				"tenant": schema.StringAttribute{
 																					MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																					Optional: true,
+																					Computed: true,
 																				},
 																				"uid": schema.StringAttribute{
 																					MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																					Optional: true,
+																					Computed: true,
 																				},
 																			},
 																		},
@@ -2688,6 +2704,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																				"kind": schema.StringAttribute{
 																					MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																					Optional: true,
+																					Computed: true,
 																				},
 																				"name": schema.StringAttribute{
 																					MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -2700,10 +2717,12 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																				"tenant": schema.StringAttribute{
 																					MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																					Optional: true,
+																					Computed: true,
 																				},
 																				"uid": schema.StringAttribute{
 																					MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																					Optional: true,
+																					Computed: true,
 																				},
 																			},
 																		},
@@ -2796,6 +2815,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																		"kind": schema.StringAttribute{
 																			MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																			Optional: true,
+																			Computed: true,
 																		},
 																		"name": schema.StringAttribute{
 																			MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -2808,10 +2828,12 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																		"tenant": schema.StringAttribute{
 																			MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																			Optional: true,
+																			Computed: true,
 																		},
 																		"uid": schema.StringAttribute{
 																			MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																			Optional: true,
+																			Computed: true,
 																		},
 																	},
 																},
@@ -4354,6 +4376,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional: true,
+						Computed: true,
 					},
 				},
 
@@ -4526,6 +4549,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 															Optional: true,
+															Computed: true,
 														},
 													},
 												},
@@ -4549,6 +4573,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																	"tenant": schema.StringAttribute{
 																		MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																		Optional: true,
+																		Computed: true,
 																	},
 																},
 															},
@@ -4613,6 +4638,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																		"kind": schema.StringAttribute{
 																			MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																			Optional: true,
+																			Computed: true,
 																		},
 																		"name": schema.StringAttribute{
 																			MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -4625,10 +4651,12 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																		"tenant": schema.StringAttribute{
 																			MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																			Optional: true,
+																			Computed: true,
 																		},
 																		"uid": schema.StringAttribute{
 																			MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																			Optional: true,
+																			Computed: true,
 																		},
 																	},
 																},
@@ -4669,6 +4697,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional: true,
+						Computed: true,
 					},
 				},
 
@@ -4786,6 +4815,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional: true,
+						Computed: true,
 					},
 				},
 
@@ -4907,7 +4937,7 @@ func (r *VoltstackSiteResource) Create(ctx context.Context, req resource.CreateR
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.VoltstackSite{
+	createReq := &client.VoltstackSite{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -4916,7 +4946,7 @@ func (r *VoltstackSiteResource) Create(ctx context.Context, req resource.CreateR
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -4925,7 +4955,7 @@ func (r *VoltstackSiteResource) Create(ctx context.Context, req resource.CreateR
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -4934,13 +4964,13 @@ func (r *VoltstackSiteResource) Create(ctx context.Context, req resource.CreateR
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
 	if data.AllowAllUsb != nil {
 		allow_all_usbMap := make(map[string]interface{})
-		apiResource.Spec["allow_all_usb"] = allow_all_usbMap
+		createReq.Spec["allow_all_usb"] = allow_all_usbMap
 	}
 	if data.BlockedServices != nil {
 		blocked_servicesMap := make(map[string]interface{})
@@ -4964,7 +4994,7 @@ func (r *VoltstackSiteResource) Create(ctx context.Context, req resource.CreateR
 			}
 			blocked_servicesMap["blocked_sevice"] = blocked_seviceList
 		}
-		apiResource.Spec["blocked_services"] = blocked_servicesMap
+		createReq.Spec["blocked_services"] = blocked_servicesMap
 	}
 	if data.BondDeviceList != nil {
 		bond_device_listMap := make(map[string]interface{})
@@ -4995,7 +5025,7 @@ func (r *VoltstackSiteResource) Create(ctx context.Context, req resource.CreateR
 			}
 			bond_device_listMap["bond_devices"] = bond_devicesList
 		}
-		apiResource.Spec["bond_device_list"] = bond_device_listMap
+		createReq.Spec["bond_device_list"] = bond_device_listMap
 	}
 	if data.Coordinates != nil {
 		coordinatesMap := make(map[string]interface{})
@@ -5005,7 +5035,7 @@ func (r *VoltstackSiteResource) Create(ctx context.Context, req resource.CreateR
 		if !data.Coordinates.Longitude.IsNull() && !data.Coordinates.Longitude.IsUnknown() {
 			coordinatesMap["longitude"] = data.Coordinates.Longitude.ValueInt64()
 		}
-		apiResource.Spec["coordinates"] = coordinatesMap
+		createReq.Spec["coordinates"] = coordinatesMap
 	}
 	if data.CustomDNS != nil {
 		custom_dnsMap := make(map[string]interface{})
@@ -5015,7 +5045,7 @@ func (r *VoltstackSiteResource) Create(ctx context.Context, req resource.CreateR
 		if !data.CustomDNS.OutsideNameserver.IsNull() && !data.CustomDNS.OutsideNameserver.IsUnknown() {
 			custom_dnsMap["outside_nameserver"] = data.CustomDNS.OutsideNameserver.ValueString()
 		}
-		apiResource.Spec["custom_dns"] = custom_dnsMap
+		createReq.Spec["custom_dns"] = custom_dnsMap
 	}
 	if data.CustomNetworkConfig != nil {
 		custom_network_configMap := make(map[string]interface{})
@@ -5095,7 +5125,7 @@ func (r *VoltstackSiteResource) Create(ctx context.Context, req resource.CreateR
 		if !data.CustomNetworkConfig.VipVrrpMode.IsNull() && !data.CustomNetworkConfig.VipVrrpMode.IsUnknown() {
 			custom_network_configMap["vip_vrrp_mode"] = data.CustomNetworkConfig.VipVrrpMode.ValueString()
 		}
-		apiResource.Spec["custom_network_config"] = custom_network_configMap
+		createReq.Spec["custom_network_config"] = custom_network_configMap
 	}
 	if data.CustomStorageConfig != nil {
 		custom_storage_configMap := make(map[string]interface{})
@@ -5127,39 +5157,39 @@ func (r *VoltstackSiteResource) Create(ctx context.Context, req resource.CreateR
 			storage_interface_listNestedMap := make(map[string]interface{})
 			custom_storage_configMap["storage_interface_list"] = storage_interface_listNestedMap
 		}
-		apiResource.Spec["custom_storage_config"] = custom_storage_configMap
+		createReq.Spec["custom_storage_config"] = custom_storage_configMap
 	}
 	if data.DefaultBlockedServices != nil {
 		default_blocked_servicesMap := make(map[string]interface{})
-		apiResource.Spec["default_blocked_services"] = default_blocked_servicesMap
+		createReq.Spec["default_blocked_services"] = default_blocked_servicesMap
 	}
 	if data.DefaultNetworkConfig != nil {
 		default_network_configMap := make(map[string]interface{})
-		apiResource.Spec["default_network_config"] = default_network_configMap
+		createReq.Spec["default_network_config"] = default_network_configMap
 	}
 	if data.DefaultSriovInterface != nil {
 		default_sriov_interfaceMap := make(map[string]interface{})
-		apiResource.Spec["default_sriov_interface"] = default_sriov_interfaceMap
+		createReq.Spec["default_sriov_interface"] = default_sriov_interfaceMap
 	}
 	if data.DefaultStorageConfig != nil {
 		default_storage_configMap := make(map[string]interface{})
-		apiResource.Spec["default_storage_config"] = default_storage_configMap
+		createReq.Spec["default_storage_config"] = default_storage_configMap
 	}
 	if data.DenyAllUsb != nil {
 		deny_all_usbMap := make(map[string]interface{})
-		apiResource.Spec["deny_all_usb"] = deny_all_usbMap
+		createReq.Spec["deny_all_usb"] = deny_all_usbMap
 	}
 	if data.DisableGpu != nil {
 		disable_gpuMap := make(map[string]interface{})
-		apiResource.Spec["disable_gpu"] = disable_gpuMap
+		createReq.Spec["disable_gpu"] = disable_gpuMap
 	}
 	if data.DisableVm != nil {
 		disable_vmMap := make(map[string]interface{})
-		apiResource.Spec["disable_vm"] = disable_vmMap
+		createReq.Spec["disable_vm"] = disable_vmMap
 	}
 	if data.EnableGpu != nil {
 		enable_gpuMap := make(map[string]interface{})
-		apiResource.Spec["enable_gpu"] = enable_gpuMap
+		createReq.Spec["enable_gpu"] = enable_gpuMap
 	}
 	if data.EnableVgpu != nil {
 		enable_vgpuMap := make(map[string]interface{})
@@ -5172,11 +5202,11 @@ func (r *VoltstackSiteResource) Create(ctx context.Context, req resource.CreateR
 		if !data.EnableVgpu.ServerPort.IsNull() && !data.EnableVgpu.ServerPort.IsUnknown() {
 			enable_vgpuMap["server_port"] = data.EnableVgpu.ServerPort.ValueInt64()
 		}
-		apiResource.Spec["enable_vgpu"] = enable_vgpuMap
+		createReq.Spec["enable_vgpu"] = enable_vgpuMap
 	}
 	if data.EnableVm != nil {
 		enable_vmMap := make(map[string]interface{})
-		apiResource.Spec["enable_vm"] = enable_vmMap
+		createReq.Spec["enable_vm"] = enable_vmMap
 	}
 	if data.K8SCluster != nil {
 		k8s_clusterMap := make(map[string]interface{})
@@ -5189,7 +5219,7 @@ func (r *VoltstackSiteResource) Create(ctx context.Context, req resource.CreateR
 		if !data.K8SCluster.Tenant.IsNull() && !data.K8SCluster.Tenant.IsUnknown() {
 			k8s_clusterMap["tenant"] = data.K8SCluster.Tenant.ValueString()
 		}
-		apiResource.Spec["k8s_cluster"] = k8s_clusterMap
+		createReq.Spec["k8s_cluster"] = k8s_clusterMap
 	}
 	if data.KubernetesUpgradeDrain != nil {
 		kubernetes_upgrade_drainMap := make(map[string]interface{})
@@ -5206,7 +5236,7 @@ func (r *VoltstackSiteResource) Create(ctx context.Context, req resource.CreateR
 			}
 			kubernetes_upgrade_drainMap["enable_upgrade_drain"] = enable_upgrade_drainNestedMap
 		}
-		apiResource.Spec["kubernetes_upgrade_drain"] = kubernetes_upgrade_drainMap
+		createReq.Spec["kubernetes_upgrade_drain"] = kubernetes_upgrade_drainMap
 	}
 	if data.LocalControlPlane != nil {
 		local_control_planeMap := make(map[string]interface{})
@@ -5223,7 +5253,7 @@ func (r *VoltstackSiteResource) Create(ctx context.Context, req resource.CreateR
 		if data.LocalControlPlane.OutsideVn != nil {
 			local_control_planeMap["outside_vn"] = map[string]interface{}{}
 		}
-		apiResource.Spec["local_control_plane"] = local_control_planeMap
+		createReq.Spec["local_control_plane"] = local_control_planeMap
 	}
 	if data.LogReceiver != nil {
 		log_receiverMap := make(map[string]interface{})
@@ -5236,11 +5266,11 @@ func (r *VoltstackSiteResource) Create(ctx context.Context, req resource.CreateR
 		if !data.LogReceiver.Tenant.IsNull() && !data.LogReceiver.Tenant.IsUnknown() {
 			log_receiverMap["tenant"] = data.LogReceiver.Tenant.ValueString()
 		}
-		apiResource.Spec["log_receiver"] = log_receiverMap
+		createReq.Spec["log_receiver"] = log_receiverMap
 	}
 	if data.LogsStreamingDisabled != nil {
 		logs_streaming_disabledMap := make(map[string]interface{})
-		apiResource.Spec["logs_streaming_disabled"] = logs_streaming_disabledMap
+		createReq.Spec["logs_streaming_disabled"] = logs_streaming_disabledMap
 	}
 	if len(data.MasterNodeConfiguration) > 0 {
 		var master_node_configurationList []map[string]interface{}
@@ -5254,19 +5284,19 @@ func (r *VoltstackSiteResource) Create(ctx context.Context, req resource.CreateR
 			}
 			master_node_configurationList = append(master_node_configurationList, itemMap)
 		}
-		apiResource.Spec["master_node_configuration"] = master_node_configurationList
+		createReq.Spec["master_node_configuration"] = master_node_configurationList
 	}
 	if data.NoBondDevices != nil {
 		no_bond_devicesMap := make(map[string]interface{})
-		apiResource.Spec["no_bond_devices"] = no_bond_devicesMap
+		createReq.Spec["no_bond_devices"] = no_bond_devicesMap
 	}
 	if data.NoK8SCluster != nil {
 		no_k8s_clusterMap := make(map[string]interface{})
-		apiResource.Spec["no_k8s_cluster"] = no_k8s_clusterMap
+		createReq.Spec["no_k8s_cluster"] = no_k8s_clusterMap
 	}
 	if data.NoLocalControlPlane != nil {
 		no_local_control_planeMap := make(map[string]interface{})
-		apiResource.Spec["no_local_control_plane"] = no_local_control_planeMap
+		createReq.Spec["no_local_control_plane"] = no_local_control_planeMap
 	}
 	if data.OfflineSurvivabilityMode != nil {
 		offline_survivability_modeMap := make(map[string]interface{})
@@ -5276,7 +5306,7 @@ func (r *VoltstackSiteResource) Create(ctx context.Context, req resource.CreateR
 		if data.OfflineSurvivabilityMode.NoOfflineSurvivabilityMode != nil {
 			offline_survivability_modeMap["no_offline_survivability_mode"] = map[string]interface{}{}
 		}
-		apiResource.Spec["offline_survivability_mode"] = offline_survivability_modeMap
+		createReq.Spec["offline_survivability_mode"] = offline_survivability_modeMap
 	}
 	if data.Os != nil {
 		osMap := make(map[string]interface{})
@@ -5286,7 +5316,7 @@ func (r *VoltstackSiteResource) Create(ctx context.Context, req resource.CreateR
 		if !data.Os.OperatingSystemVersion.IsNull() && !data.Os.OperatingSystemVersion.IsUnknown() {
 			osMap["operating_system_version"] = data.Os.OperatingSystemVersion.ValueString()
 		}
-		apiResource.Spec["os"] = osMap
+		createReq.Spec["os"] = osMap
 	}
 	if data.SriovInterfaces != nil {
 		sriov_interfacesMap := make(map[string]interface{})
@@ -5307,7 +5337,7 @@ func (r *VoltstackSiteResource) Create(ctx context.Context, req resource.CreateR
 			}
 			sriov_interfacesMap["sriov_interface"] = sriov_interfaceList
 		}
-		apiResource.Spec["sriov_interfaces"] = sriov_interfacesMap
+		createReq.Spec["sriov_interfaces"] = sriov_interfacesMap
 	}
 	if data.Sw != nil {
 		swMap := make(map[string]interface{})
@@ -5317,7 +5347,7 @@ func (r *VoltstackSiteResource) Create(ctx context.Context, req resource.CreateR
 		if !data.Sw.VolterraSoftwareVersion.IsNull() && !data.Sw.VolterraSoftwareVersion.IsUnknown() {
 			swMap["volterra_software_version"] = data.Sw.VolterraSoftwareVersion.ValueString()
 		}
-		apiResource.Spec["sw"] = swMap
+		createReq.Spec["sw"] = swMap
 	}
 	if data.UsbPolicy != nil {
 		usb_policyMap := make(map[string]interface{})
@@ -5330,51 +5360,711 @@ func (r *VoltstackSiteResource) Create(ctx context.Context, req resource.CreateR
 		if !data.UsbPolicy.Tenant.IsNull() && !data.UsbPolicy.Tenant.IsUnknown() {
 			usb_policyMap["tenant"] = data.UsbPolicy.Tenant.ValueString()
 		}
-		apiResource.Spec["usb_policy"] = usb_policyMap
+		createReq.Spec["usb_policy"] = usb_policyMap
 	}
 	if !data.WorkerNodes.IsNull() && !data.WorkerNodes.IsUnknown() {
 		var worker_nodesList []string
 		resp.Diagnostics.Append(data.WorkerNodes.ElementsAs(ctx, &worker_nodesList, false)...)
 		if !resp.Diagnostics.HasError() {
-			apiResource.Spec["worker_nodes"] = worker_nodesList
+			createReq.Spec["worker_nodes"] = worker_nodesList
 		}
 	}
 	if !data.Address.IsNull() && !data.Address.IsUnknown() {
-		apiResource.Spec["address"] = data.Address.ValueString()
+		createReq.Spec["address"] = data.Address.ValueString()
 	}
 	if !data.VolterraCertifiedHw.IsNull() && !data.VolterraCertifiedHw.IsUnknown() {
-		apiResource.Spec["volterra_certified_hw"] = data.VolterraCertifiedHw.ValueString()
+		createReq.Spec["volterra_certified_hw"] = data.VolterraCertifiedHw.ValueString()
 	}
 
 
-	created, err := r.client.CreateVoltstackSite(ctx, apiResource)
+	apiResource, err := r.client.CreateVoltstackSite(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create VoltstackSite: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
-	if v, ok := created.Spec["address"].(string); ok && v != "" {
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if _, ok := apiResource.Spec["allow_all_usb"].(map[string]interface{}); ok && isImport && data.AllowAllUsb == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AllowAllUsb = &VoltstackSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["blocked_services"].(map[string]interface{}); ok && (isImport || data.BlockedServices != nil) {
+		data.BlockedServices = &VoltstackSiteBlockedServicesModel{
+			BlockedSevice: func() []VoltstackSiteBlockedServicesBlockedSeviceModel {
+				if listData, ok := blockData["blocked_sevice"].([]interface{}); ok && len(listData) > 0 {
+					var result []VoltstackSiteBlockedServicesBlockedSeviceModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, VoltstackSiteBlockedServicesBlockedSeviceModel{
+								DNS: func() *VoltstackSiteEmptyModel {
+									if _, ok := itemMap["dns"].(map[string]interface{}); ok {
+										return &VoltstackSiteEmptyModel{}
+									}
+									return nil
+								}(),
+								NetworkType: func() types.String {
+									if v, ok := itemMap["network_type"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								SSH: func() *VoltstackSiteEmptyModel {
+									if _, ok := itemMap["ssh"].(map[string]interface{}); ok {
+										return &VoltstackSiteEmptyModel{}
+									}
+									return nil
+								}(),
+								WebUserInterface: func() *VoltstackSiteEmptyModel {
+									if _, ok := itemMap["web_user_interface"].(map[string]interface{}); ok {
+										return &VoltstackSiteEmptyModel{}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["bond_device_list"].(map[string]interface{}); ok && (isImport || data.BondDeviceList != nil) {
+		data.BondDeviceList = &VoltstackSiteBondDeviceListModel{
+			BondDevices: func() []VoltstackSiteBondDeviceListBondDevicesModel {
+				if listData, ok := blockData["bond_devices"].([]interface{}); ok && len(listData) > 0 {
+					var result []VoltstackSiteBondDeviceListBondDevicesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, VoltstackSiteBondDeviceListBondDevicesModel{
+								ActiveBackup: func() *VoltstackSiteEmptyModel {
+									if _, ok := itemMap["active_backup"].(map[string]interface{}); ok {
+										return &VoltstackSiteEmptyModel{}
+									}
+									return nil
+								}(),
+								Lacp: func() *VoltstackSiteBondDeviceListBondDevicesLacpModel {
+									if deepMap, ok := itemMap["lacp"].(map[string]interface{}); ok {
+										return &VoltstackSiteBondDeviceListBondDevicesLacpModel{
+											Rate: func() types.Int64 {
+												if v, ok := deepMap["rate"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								LinkPollingInterval: func() types.Int64 {
+									if v, ok := itemMap["link_polling_interval"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								LinkUpDelay: func() types.Int64 {
+									if v, ok := itemMap["link_up_delay"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["coordinates"].(map[string]interface{}); ok && (isImport || data.Coordinates != nil) {
+		data.Coordinates = &VoltstackSiteCoordinatesModel{
+			Latitude: func() types.Int64 {
+				if v, ok := blockData["latitude"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			Longitude: func() types.Int64 {
+				if v, ok := blockData["longitude"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["custom_dns"].(map[string]interface{}); ok && (isImport || data.CustomDNS != nil) {
+		data.CustomDNS = &VoltstackSiteCustomDNSModel{
+			InsideNameserver: func() types.String {
+				if v, ok := blockData["inside_nameserver"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			OutsideNameserver: func() types.String {
+				if v, ok := blockData["outside_nameserver"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["custom_network_config"].(map[string]interface{}); ok && (isImport || data.CustomNetworkConfig != nil) {
+		data.CustomNetworkConfig = &VoltstackSiteCustomNetworkConfigModel{
+			ActiveEnhancedFirewallPolicies: func() *VoltstackSiteCustomNetworkConfigActiveEnhancedFirewallPoliciesModel {
+				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.ActiveEnhancedFirewallPolicies != nil {
+					// Normal Read: preserve existing state value
+					return data.CustomNetworkConfig.ActiveEnhancedFirewallPolicies
+				}
+				// Import case: read from API
+				if _, ok := blockData["active_enhanced_firewall_policies"].(map[string]interface{}); ok {
+					return &VoltstackSiteCustomNetworkConfigActiveEnhancedFirewallPoliciesModel{
+					}
+				}
+				return nil
+			}(),
+			ActiveForwardProxyPolicies: func() *VoltstackSiteCustomNetworkConfigActiveForwardProxyPoliciesModel {
+				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.ActiveForwardProxyPolicies != nil {
+					// Normal Read: preserve existing state value
+					return data.CustomNetworkConfig.ActiveForwardProxyPolicies
+				}
+				// Import case: read from API
+				if _, ok := blockData["active_forward_proxy_policies"].(map[string]interface{}); ok {
+					return &VoltstackSiteCustomNetworkConfigActiveForwardProxyPoliciesModel{
+					}
+				}
+				return nil
+			}(),
+			ActiveNetworkPolicies: func() *VoltstackSiteCustomNetworkConfigActiveNetworkPoliciesModel {
+				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.ActiveNetworkPolicies != nil {
+					// Normal Read: preserve existing state value
+					return data.CustomNetworkConfig.ActiveNetworkPolicies
+				}
+				// Import case: read from API
+				if _, ok := blockData["active_network_policies"].(map[string]interface{}); ok {
+					return &VoltstackSiteCustomNetworkConfigActiveNetworkPoliciesModel{
+					}
+				}
+				return nil
+			}(),
+			BGPPeerAddress: func() types.String {
+				if v, ok := blockData["bgp_peer_address"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			BGPRouterID: func() types.String {
+				if v, ok := blockData["bgp_router_id"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			DefaultConfig: func() *VoltstackSiteEmptyModel {
+				if !isImport && data.CustomNetworkConfig != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CustomNetworkConfig.DefaultConfig
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_config"].(map[string]interface{}); ok {
+					return &VoltstackSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			DefaultInterfaceConfig: func() *VoltstackSiteEmptyModel {
+				if !isImport && data.CustomNetworkConfig != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CustomNetworkConfig.DefaultInterfaceConfig
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_interface_config"].(map[string]interface{}); ok {
+					return &VoltstackSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			DefaultSLIConfig: func() *VoltstackSiteEmptyModel {
+				if !isImport && data.CustomNetworkConfig != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CustomNetworkConfig.DefaultSLIConfig
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_sli_config"].(map[string]interface{}); ok {
+					return &VoltstackSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			ForwardProxyAllowAll: func() *VoltstackSiteEmptyModel {
+				if !isImport && data.CustomNetworkConfig != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CustomNetworkConfig.ForwardProxyAllowAll
+				}
+				// Import case: read from API
+				if _, ok := blockData["forward_proxy_allow_all"].(map[string]interface{}); ok {
+					return &VoltstackSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			GlobalNetworkList: func() *VoltstackSiteCustomNetworkConfigGlobalNetworkListModel {
+				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.GlobalNetworkList != nil {
+					// Normal Read: preserve existing state value
+					return data.CustomNetworkConfig.GlobalNetworkList
+				}
+				// Import case: read from API
+				if _, ok := blockData["global_network_list"].(map[string]interface{}); ok {
+					return &VoltstackSiteCustomNetworkConfigGlobalNetworkListModel{
+					}
+				}
+				return nil
+			}(),
+			InterfaceList: func() *VoltstackSiteCustomNetworkConfigInterfaceListModel {
+				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.InterfaceList != nil {
+					// Normal Read: preserve existing state value
+					return data.CustomNetworkConfig.InterfaceList
+				}
+				// Import case: read from API
+				if _, ok := blockData["interface_list"].(map[string]interface{}); ok {
+					return &VoltstackSiteCustomNetworkConfigInterfaceListModel{
+					}
+				}
+				return nil
+			}(),
+			NoForwardProxy: func() *VoltstackSiteEmptyModel {
+				if !isImport && data.CustomNetworkConfig != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CustomNetworkConfig.NoForwardProxy
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_forward_proxy"].(map[string]interface{}); ok {
+					return &VoltstackSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			NoGlobalNetwork: func() *VoltstackSiteEmptyModel {
+				if !isImport && data.CustomNetworkConfig != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CustomNetworkConfig.NoGlobalNetwork
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_global_network"].(map[string]interface{}); ok {
+					return &VoltstackSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			NoNetworkPolicy: func() *VoltstackSiteEmptyModel {
+				if !isImport && data.CustomNetworkConfig != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CustomNetworkConfig.NoNetworkPolicy
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_network_policy"].(map[string]interface{}); ok {
+					return &VoltstackSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			OutsideNameserver: func() types.String {
+				if v, ok := blockData["outside_nameserver"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			OutsideVip: func() types.String {
+				if v, ok := blockData["outside_vip"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			SiteToSiteTunnelIP: func() types.String {
+				if v, ok := blockData["site_to_site_tunnel_ip"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			SLIConfig: func() *VoltstackSiteCustomNetworkConfigSLIConfigModel {
+				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.SLIConfig != nil {
+					// Normal Read: preserve existing state value
+					return data.CustomNetworkConfig.SLIConfig
+				}
+				// Import case: read from API
+				if _, ok := blockData["sli_config"].(map[string]interface{}); ok {
+					return &VoltstackSiteCustomNetworkConfigSLIConfigModel{
+					}
+				}
+				return nil
+			}(),
+			SLOConfig: func() *VoltstackSiteCustomNetworkConfigSLOConfigModel {
+				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.SLOConfig != nil {
+					// Normal Read: preserve existing state value
+					return data.CustomNetworkConfig.SLOConfig
+				}
+				// Import case: read from API
+				if _, ok := blockData["slo_config"].(map[string]interface{}); ok {
+					return &VoltstackSiteCustomNetworkConfigSLOConfigModel{
+					}
+				}
+				return nil
+			}(),
+			SmConnectionPublicIP: func() *VoltstackSiteEmptyModel {
+				if !isImport && data.CustomNetworkConfig != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CustomNetworkConfig.SmConnectionPublicIP
+				}
+				// Import case: read from API
+				if _, ok := blockData["sm_connection_public_ip"].(map[string]interface{}); ok {
+					return &VoltstackSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			SmConnectionPvtIP: func() *VoltstackSiteEmptyModel {
+				if !isImport && data.CustomNetworkConfig != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CustomNetworkConfig.SmConnectionPvtIP
+				}
+				// Import case: read from API
+				if _, ok := blockData["sm_connection_pvt_ip"].(map[string]interface{}); ok {
+					return &VoltstackSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			TunnelDeadTimeout: func() types.Int64 {
+				if v, ok := blockData["tunnel_dead_timeout"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			VipVrrpMode: func() types.String {
+				if v, ok := blockData["vip_vrrp_mode"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["custom_storage_config"].(map[string]interface{}); ok && isImport && data.CustomStorageConfig == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.CustomStorageConfig = &VoltstackSiteCustomStorageConfigModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["default_blocked_services"].(map[string]interface{}); ok && isImport && data.DefaultBlockedServices == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DefaultBlockedServices = &VoltstackSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["default_network_config"].(map[string]interface{}); ok && isImport && data.DefaultNetworkConfig == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DefaultNetworkConfig = &VoltstackSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["default_sriov_interface"].(map[string]interface{}); ok && isImport && data.DefaultSriovInterface == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DefaultSriovInterface = &VoltstackSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["default_storage_config"].(map[string]interface{}); ok && isImport && data.DefaultStorageConfig == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DefaultStorageConfig = &VoltstackSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["deny_all_usb"].(map[string]interface{}); ok && isImport && data.DenyAllUsb == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DenyAllUsb = &VoltstackSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["disable_gpu"].(map[string]interface{}); ok && isImport && data.DisableGpu == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableGpu = &VoltstackSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["disable_vm"].(map[string]interface{}); ok && isImport && data.DisableVm == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableVm = &VoltstackSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["enable_gpu"].(map[string]interface{}); ok && isImport && data.EnableGpu == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.EnableGpu = &VoltstackSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["enable_vgpu"].(map[string]interface{}); ok && (isImport || data.EnableVgpu != nil) {
+		data.EnableVgpu = &VoltstackSiteEnableVgpuModel{
+			FeatureType: func() types.String {
+				if v, ok := blockData["feature_type"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			ServerAddress: func() types.String {
+				if v, ok := blockData["server_address"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			ServerPort: func() types.Int64 {
+				if v, ok := blockData["server_port"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["enable_vm"].(map[string]interface{}); ok && isImport && data.EnableVm == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.EnableVm = &VoltstackSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["k8s_cluster"].(map[string]interface{}); ok && (isImport || data.K8SCluster != nil) {
+		data.K8SCluster = &VoltstackSiteK8SClusterModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["kubernetes_upgrade_drain"].(map[string]interface{}); ok && isImport && data.KubernetesUpgradeDrain == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.KubernetesUpgradeDrain = &VoltstackSiteKubernetesUpgradeDrainModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["local_control_plane"].(map[string]interface{}); ok && isImport && data.LocalControlPlane == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.LocalControlPlane = &VoltstackSiteLocalControlPlaneModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["log_receiver"].(map[string]interface{}); ok && (isImport || data.LogReceiver != nil) {
+		data.LogReceiver = &VoltstackSiteLogReceiverModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["logs_streaming_disabled"].(map[string]interface{}); ok && isImport && data.LogsStreamingDisabled == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.LogsStreamingDisabled = &VoltstackSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["master_node_configuration"].([]interface{}); ok && len(listData) > 0 {
+		var master_node_configurationList []VoltstackSiteMasterNodeConfigurationModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				master_node_configurationList = append(master_node_configurationList, VoltstackSiteMasterNodeConfigurationModel{
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					PublicIP: func() types.String {
+						if v, ok := itemMap["public_ip"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.MasterNodeConfiguration = master_node_configurationList
+	}
+	if _, ok := apiResource.Spec["no_bond_devices"].(map[string]interface{}); ok && isImport && data.NoBondDevices == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoBondDevices = &VoltstackSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_k8s_cluster"].(map[string]interface{}); ok && isImport && data.NoK8SCluster == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoK8SCluster = &VoltstackSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_local_control_plane"].(map[string]interface{}); ok && isImport && data.NoLocalControlPlane == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoLocalControlPlane = &VoltstackSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["offline_survivability_mode"].(map[string]interface{}); ok && isImport && data.OfflineSurvivabilityMode == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.OfflineSurvivabilityMode = &VoltstackSiteOfflineSurvivabilityModeModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["os"].(map[string]interface{}); ok && (isImport || data.Os != nil) {
+		data.Os = &VoltstackSiteOsModel{
+			DefaultOsVersion: func() *VoltstackSiteEmptyModel {
+				if !isImport && data.Os != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.Os.DefaultOsVersion
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_os_version"].(map[string]interface{}); ok {
+					return &VoltstackSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			OperatingSystemVersion: func() types.String {
+				if v, ok := blockData["operating_system_version"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["sriov_interfaces"].(map[string]interface{}); ok && (isImport || data.SriovInterfaces != nil) {
+		data.SriovInterfaces = &VoltstackSiteSriovInterfacesModel{
+			SriovInterface: func() []VoltstackSiteSriovInterfacesSriovInterfaceModel {
+				if listData, ok := blockData["sriov_interface"].([]interface{}); ok && len(listData) > 0 {
+					var result []VoltstackSiteSriovInterfacesSriovInterfaceModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, VoltstackSiteSriovInterfacesSriovInterfaceModel{
+								InterfaceName: func() types.String {
+									if v, ok := itemMap["interface_name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								NumberOfVfioVfs: func() types.Int64 {
+									if v, ok := itemMap["number_of_vfio_vfs"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								NumberOfVfs: func() types.Int64 {
+									if v, ok := itemMap["number_of_vfs"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["sw"].(map[string]interface{}); ok && (isImport || data.Sw != nil) {
+		data.Sw = &VoltstackSiteSwModel{
+			DefaultSwVersion: func() *VoltstackSiteEmptyModel {
+				if !isImport && data.Sw != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.Sw.DefaultSwVersion
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_sw_version"].(map[string]interface{}); ok {
+					return &VoltstackSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			VolterraSoftwareVersion: func() types.String {
+				if v, ok := blockData["volterra_software_version"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["usb_policy"].(map[string]interface{}); ok && (isImport || data.UsbPolicy != nil) {
+		data.UsbPolicy = &VoltstackSiteUsbPolicyModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if v, ok := apiResource.Spec["worker_nodes"].([]interface{}); ok && len(v) > 0 {
+		var worker_nodesList []string
+		for _, item := range v {
+			if s, ok := item.(string); ok {
+				worker_nodesList = append(worker_nodesList, s)
+			}
+		}
+		listVal, diags := types.ListValueFrom(ctx, types.StringType, worker_nodesList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.WorkerNodes = listVal
+		}
+	} else {
+		data.WorkerNodes = types.ListNull(types.StringType)
+	}
+	if v, ok := apiResource.Spec["address"].(string); ok && v != "" {
 		data.Address = types.StringValue(v)
-	} else if data.Address.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.Address = types.StringNull()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["volterra_certified_hw"].(string); ok && v != "" {
+	if v, ok := apiResource.Spec["volterra_certified_hw"].(string); ok && v != "" {
 		data.VolterraCertifiedHw = types.StringValue(v)
-	} else if data.VolterraCertifiedHw.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.VolterraCertifiedHw = types.StringNull()
 	}
-	// If plan had a value, preserve it
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
@@ -5966,7 +6656,8 @@ func (r *VoltstackSiteResource) Read(ctx context.Context, req resource.ReadReque
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["master_node_configuration"].([]interface{}); ok && len(listData) > 0 {
 		var master_node_configurationList []VoltstackSiteMasterNodeConfigurationModel
-		for _, item := range listData {
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				master_node_configurationList = append(master_node_configurationList, VoltstackSiteMasterNodeConfigurationModel{
 					Name: func() types.String {

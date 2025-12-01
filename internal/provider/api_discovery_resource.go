@@ -262,7 +262,7 @@ func (r *APIDiscoveryResource) Create(ctx context.Context, req resource.CreateRe
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.APIDiscovery{
+	createReq := &client.APIDiscovery{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -271,7 +271,7 @@ func (r *APIDiscoveryResource) Create(ctx context.Context, req resource.CreateRe
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -280,7 +280,7 @@ func (r *APIDiscoveryResource) Create(ctx context.Context, req resource.CreateRe
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -289,7 +289,7 @@ func (r *APIDiscoveryResource) Create(ctx context.Context, req resource.CreateRe
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -305,24 +305,51 @@ func (r *APIDiscoveryResource) Create(ctx context.Context, req resource.CreateRe
 			}
 			custom_auth_typesList = append(custom_auth_typesList, itemMap)
 		}
-		apiResource.Spec["custom_auth_types"] = custom_auth_typesList
+		createReq.Spec["custom_auth_types"] = custom_auth_typesList
 	}
 
 
-	created, err := r.client.CreateAPIDiscovery(ctx, apiResource)
+	apiResource, err := r.client.CreateAPIDiscovery(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create APIDiscovery: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if listData, ok := apiResource.Spec["custom_auth_types"].([]interface{}); ok && len(listData) > 0 {
+		var custom_auth_typesList []APIDiscoveryCustomAuthTypesModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				custom_auth_typesList = append(custom_auth_typesList, APIDiscoveryCustomAuthTypesModel{
+					ParameterName: func() types.String {
+						if v, ok := itemMap["parameter_name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					ParameterType: func() types.String {
+						if v, ok := itemMap["parameter_type"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.CustomAuthTypes = custom_auth_typesList
+	}
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
@@ -413,7 +440,8 @@ func (r *APIDiscoveryResource) Read(ctx context.Context, req resource.ReadReques
 	})
 	if listData, ok := apiResource.Spec["custom_auth_types"].([]interface{}); ok && len(listData) > 0 {
 		var custom_auth_typesList []APIDiscoveryCustomAuthTypesModel
-		for _, item := range listData {
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				custom_auth_typesList = append(custom_auth_typesList, APIDiscoveryCustomAuthTypesModel{
 					ParameterName: func() types.String {

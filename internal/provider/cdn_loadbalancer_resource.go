@@ -2669,6 +2669,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 								"tenant": schema.StringAttribute{
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional: true,
+									Computed: true,
 								},
 							},
 						},
@@ -2745,6 +2746,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 															"kind": schema.StringAttribute{
 																MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																Optional: true,
+																Computed: true,
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -2757,10 +2759,12 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 															"tenant": schema.StringAttribute{
 																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																Optional: true,
+																Computed: true,
 															},
 															"uid": schema.StringAttribute{
 																MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																Optional: true,
+																Computed: true,
 															},
 														},
 													},
@@ -2793,6 +2797,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 															"kind": schema.StringAttribute{
 																MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																Optional: true,
+																Computed: true,
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -2805,10 +2810,12 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 															"tenant": schema.StringAttribute{
 																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																Optional: true,
+																Computed: true,
 															},
 															"uid": schema.StringAttribute{
 																MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																Optional: true,
+																Computed: true,
 															},
 														},
 													},
@@ -2888,6 +2895,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional: true,
+													Computed: true,
 												},
 											},
 										},
@@ -2910,6 +2918,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -3177,6 +3186,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 																	"kind": schema.StringAttribute{
 																		MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																		Optional: true,
+																		Computed: true,
 																	},
 																	"name": schema.StringAttribute{
 																		MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -3189,10 +3199,12 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 																	"tenant": schema.StringAttribute{
 																		MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																		Optional: true,
+																		Computed: true,
 																	},
 																	"uid": schema.StringAttribute{
 																		MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																		Optional: true,
+																		Computed: true,
 																	},
 																},
 															},
@@ -3225,6 +3237,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 																	"kind": schema.StringAttribute{
 																		MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																		Optional: true,
+																		Computed: true,
 																	},
 																	"name": schema.StringAttribute{
 																		MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -3237,10 +3250,12 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 																	"tenant": schema.StringAttribute{
 																		MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																		Optional: true,
+																		Computed: true,
 																	},
 																	"uid": schema.StringAttribute{
 																		MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																		Optional: true,
+																		Computed: true,
 																	},
 																},
 															},
@@ -3497,6 +3512,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -3570,6 +3586,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 															"kind": schema.StringAttribute{
 																MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																Optional: true,
+																Computed: true,
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -3582,10 +3599,12 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 															"tenant": schema.StringAttribute{
 																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																Optional: true,
+																Computed: true,
 															},
 															"uid": schema.StringAttribute{
 																MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																Optional: true,
+																Computed: true,
 															},
 														},
 													},
@@ -3618,6 +3637,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 															"kind": schema.StringAttribute{
 																MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																Optional: true,
+																Computed: true,
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -3630,10 +3650,12 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 															"tenant": schema.StringAttribute{
 																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																Optional: true,
+																Computed: true,
 															},
 															"uid": schema.StringAttribute{
 																MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																Optional: true,
+																Computed: true,
 															},
 														},
 													},
@@ -3713,6 +3735,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional: true,
+													Computed: true,
 												},
 											},
 										},
@@ -3735,6 +3758,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -3942,6 +3966,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
+								Computed: true,
 							},
 						},
 					},
@@ -4340,6 +4365,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional: true,
+						Computed: true,
 					},
 				},
 
@@ -5476,6 +5502,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 								"tenant": schema.StringAttribute{
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional: true,
+									Computed: true,
 								},
 							},
 						},
@@ -5793,6 +5820,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional: true,
+													Computed: true,
 												},
 											},
 										},
@@ -5830,6 +5858,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									"tenant": schema.StringAttribute{
 										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 										Optional: true,
+										Computed: true,
 									},
 								},
 							},
@@ -5914,6 +5943,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
+								Computed: true,
 							},
 						},
 					},
@@ -6062,6 +6092,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional: true,
+													Computed: true,
 												},
 											},
 										},
@@ -6130,6 +6161,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													"tenant": schema.StringAttribute{
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 														Optional: true,
+														Computed: true,
 													},
 												},
 											},
@@ -6150,6 +6182,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													"tenant": schema.StringAttribute{
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 														Optional: true,
+														Computed: true,
 													},
 												},
 											},
@@ -6309,6 +6342,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													"tenant": schema.StringAttribute{
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 														Optional: true,
+														Computed: true,
 													},
 												},
 											},
@@ -6329,6 +6363,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													"tenant": schema.StringAttribute{
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 														Optional: true,
+														Computed: true,
 													},
 												},
 											},
@@ -6773,6 +6808,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									"tenant": schema.StringAttribute{
 										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 										Optional: true,
+										Computed: true,
 									},
 								},
 							},
@@ -6799,6 +6835,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											"tenant": schema.StringAttribute{
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional: true,
+												Computed: true,
 											},
 										},
 									},
@@ -7051,6 +7088,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
+								Computed: true,
 							},
 						},
 					},
@@ -7164,6 +7202,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 																	"kind": schema.StringAttribute{
 																		MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																		Optional: true,
+																		Computed: true,
 																	},
 																	"name": schema.StringAttribute{
 																		MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -7176,10 +7215,12 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 																	"tenant": schema.StringAttribute{
 																		MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																		Optional: true,
+																		Computed: true,
 																	},
 																	"uid": schema.StringAttribute{
 																		MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																		Optional: true,
+																		Computed: true,
 																	},
 																},
 															},
@@ -7356,6 +7397,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 																	"kind": schema.StringAttribute{
 																		MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																		Optional: true,
+																		Computed: true,
 																	},
 																	"name": schema.StringAttribute{
 																		MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -7368,10 +7410,12 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 																	"tenant": schema.StringAttribute{
 																		MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																		Optional: true,
+																		Computed: true,
 																	},
 																	"uid": schema.StringAttribute{
 																		MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																		Optional: true,
+																		Computed: true,
 																	},
 																},
 															},
@@ -7584,6 +7628,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -7626,6 +7671,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -7720,6 +7766,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
+								Computed: true,
 							},
 						},
 					},
@@ -7859,6 +7906,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional: true,
+						Computed: true,
 					},
 				},
 
@@ -8020,6 +8068,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
+								Computed: true,
 							},
 						},
 					},
@@ -8143,7 +8192,7 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.CDNLoadBalancer{
+	createReq := &client.CDNLoadBalancer{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -8152,7 +8201,7 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -8161,7 +8210,7 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -8170,7 +8219,7 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -8193,7 +8242,7 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 			}
 			active_service_policiesMap["policies"] = policiesList
 		}
-		apiResource.Spec["active_service_policies"] = active_service_policiesMap
+		createReq.Spec["active_service_policies"] = active_service_policiesMap
 	}
 	if data.APIRateLimit != nil {
 		api_rate_limitMap := make(map[string]interface{})
@@ -8336,7 +8385,7 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 			}
 			api_rate_limitMap["server_url_rules"] = server_url_rulesList
 		}
-		apiResource.Spec["api_rate_limit"] = api_rate_limitMap
+		createReq.Spec["api_rate_limit"] = api_rate_limitMap
 	}
 	if data.APISpecification != nil {
 		api_specificationMap := make(map[string]interface{})
@@ -8364,7 +8413,7 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 		if data.APISpecification.ValidationDisabled != nil {
 			api_specificationMap["validation_disabled"] = map[string]interface{}{}
 		}
-		apiResource.Spec["api_specification"] = api_specificationMap
+		createReq.Spec["api_specification"] = api_specificationMap
 	}
 	if data.AppFirewall != nil {
 		app_firewallMap := make(map[string]interface{})
@@ -8377,7 +8426,7 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 		if !data.AppFirewall.Tenant.IsNull() && !data.AppFirewall.Tenant.IsUnknown() {
 			app_firewallMap["tenant"] = data.AppFirewall.Tenant.ValueString()
 		}
-		apiResource.Spec["app_firewall"] = app_firewallMap
+		createReq.Spec["app_firewall"] = app_firewallMap
 	}
 	if len(data.BlockedClients) > 0 {
 		var blocked_clientsList []map[string]interface{}
@@ -8394,6 +8443,29 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 			}
 			if item.HTTPHeader != nil {
 				http_headerNestedMap := make(map[string]interface{})
+				if len(item.HTTPHeader.Headers) > 0 {
+					var headersDeepList []map[string]interface{}
+					for _, deepListItem := range item.HTTPHeader.Headers {
+						deepListItemMap := make(map[string]interface{})
+						if !deepListItem.Exact.IsNull() && !deepListItem.Exact.IsUnknown() {
+							deepListItemMap["exact"] = deepListItem.Exact.ValueString()
+						}
+						if !deepListItem.InvertMatch.IsNull() && !deepListItem.InvertMatch.IsUnknown() {
+							deepListItemMap["invert_match"] = deepListItem.InvertMatch.ValueBool()
+						}
+						if !deepListItem.Name.IsNull() && !deepListItem.Name.IsUnknown() {
+							deepListItemMap["name"] = deepListItem.Name.ValueString()
+						}
+						if !deepListItem.Presence.IsNull() && !deepListItem.Presence.IsUnknown() {
+							deepListItemMap["presence"] = deepListItem.Presence.ValueBool()
+						}
+						if !deepListItem.Regex.IsNull() && !deepListItem.Regex.IsUnknown() {
+							deepListItemMap["regex"] = deepListItem.Regex.ValueString()
+						}
+						headersDeepList = append(headersDeepList, deepListItemMap)
+					}
+					http_headerNestedMap["headers"] = headersDeepList
+				}
 				itemMap["http_header"] = http_headerNestedMap
 			}
 			if !item.IPPrefix.IsNull() && !item.IPPrefix.IsUnknown() {
@@ -8423,7 +8495,7 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 			}
 			blocked_clientsList = append(blocked_clientsList, itemMap)
 		}
-		apiResource.Spec["blocked_clients"] = blocked_clientsList
+		createReq.Spec["blocked_clients"] = blocked_clientsList
 	}
 	if data.BotDefense != nil {
 		bot_defenseMap := make(map[string]interface{})
@@ -8449,7 +8521,7 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 		if !data.BotDefense.Timeout.IsNull() && !data.BotDefense.Timeout.IsUnknown() {
 			bot_defenseMap["timeout"] = data.BotDefense.Timeout.ValueInt64()
 		}
-		apiResource.Spec["bot_defense"] = bot_defenseMap
+		createReq.Spec["bot_defense"] = bot_defenseMap
 	}
 	if data.CaptchaChallenge != nil {
 		captcha_challengeMap := make(map[string]interface{})
@@ -8459,7 +8531,7 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 		if !data.CaptchaChallenge.CustomPage.IsNull() && !data.CaptchaChallenge.CustomPage.IsUnknown() {
 			captcha_challengeMap["custom_page"] = data.CaptchaChallenge.CustomPage.ValueString()
 		}
-		apiResource.Spec["captcha_challenge"] = captcha_challengeMap
+		createReq.Spec["captcha_challenge"] = captcha_challengeMap
 	}
 	if data.ClientSideDefense != nil {
 		client_side_defenseMap := make(map[string]interface{})
@@ -8467,7 +8539,7 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 			policyNestedMap := make(map[string]interface{})
 			client_side_defenseMap["policy"] = policyNestedMap
 		}
-		apiResource.Spec["client_side_defense"] = client_side_defenseMap
+		createReq.Spec["client_side_defense"] = client_side_defenseMap
 	}
 	if data.CorsPolicy != nil {
 		cors_policyMap := make(map[string]interface{})
@@ -8503,7 +8575,7 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 		if !data.CorsPolicy.MaximumAge.IsNull() && !data.CorsPolicy.MaximumAge.IsUnknown() {
 			cors_policyMap["maximum_age"] = data.CorsPolicy.MaximumAge.ValueInt64()
 		}
-		apiResource.Spec["cors_policy"] = cors_policyMap
+		createReq.Spec["cors_policy"] = cors_policyMap
 	}
 	if data.CsrfPolicy != nil {
 		csrf_policyMap := make(map[string]interface{})
@@ -8517,7 +8589,7 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 		if data.CsrfPolicy.Disabled != nil {
 			csrf_policyMap["disabled"] = map[string]interface{}{}
 		}
-		apiResource.Spec["csrf_policy"] = csrf_policyMap
+		createReq.Spec["csrf_policy"] = csrf_policyMap
 	}
 	if data.CustomCacheRule != nil {
 		custom_cache_ruleMap := make(map[string]interface{})
@@ -8538,7 +8610,7 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 			}
 			custom_cache_ruleMap["cdn_cache_rules"] = cdn_cache_rulesList
 		}
-		apiResource.Spec["custom_cache_rule"] = custom_cache_ruleMap
+		createReq.Spec["custom_cache_rule"] = custom_cache_ruleMap
 	}
 	if len(data.DataGuardRules) > 0 {
 		var data_guard_rulesList []map[string]interface{}
@@ -8584,7 +8656,7 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 			}
 			data_guard_rulesList = append(data_guard_rulesList, itemMap)
 		}
-		apiResource.Spec["data_guard_rules"] = data_guard_rulesList
+		createReq.Spec["data_guard_rules"] = data_guard_rulesList
 	}
 	if len(data.DdosMitigationRules) > 0 {
 		var ddos_mitigation_rulesList []map[string]interface{}
@@ -8595,12 +8667,52 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 			}
 			if item.DdosClientSource != nil {
 				ddos_client_sourceNestedMap := make(map[string]interface{})
+				if item.DdosClientSource.AsnList != nil {
+					asn_listDeepMap := make(map[string]interface{})
+					ddos_client_sourceNestedMap["asn_list"] = asn_listDeepMap
+				}
 				if !item.DdosClientSource.CountryList.IsNull() && !item.DdosClientSource.CountryList.IsUnknown() {
 					var CountryListItems []string
 					diags := item.DdosClientSource.CountryList.ElementsAs(ctx, &CountryListItems, false)
 					if !diags.HasError() {
 						ddos_client_sourceNestedMap["country_list"] = CountryListItems
 					}
+				}
+				if item.DdosClientSource.Ja4TLSFingerprintMatcher != nil {
+					ja4_tls_fingerprint_matcherDeepMap := make(map[string]interface{})
+					if !item.DdosClientSource.Ja4TLSFingerprintMatcher.ExactValues.IsNull() && !item.DdosClientSource.Ja4TLSFingerprintMatcher.ExactValues.IsUnknown() {
+						var ExactValuesItems []string
+						diags := item.DdosClientSource.Ja4TLSFingerprintMatcher.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
+						if !diags.HasError() {
+							ja4_tls_fingerprint_matcherDeepMap["exact_values"] = ExactValuesItems
+						}
+					}
+					ddos_client_sourceNestedMap["ja4_tls_fingerprint_matcher"] = ja4_tls_fingerprint_matcherDeepMap
+				}
+				if item.DdosClientSource.TLSFingerprintMatcher != nil {
+					tls_fingerprint_matcherDeepMap := make(map[string]interface{})
+					if !item.DdosClientSource.TLSFingerprintMatcher.Classes.IsNull() && !item.DdosClientSource.TLSFingerprintMatcher.Classes.IsUnknown() {
+						var ClassesItems []string
+						diags := item.DdosClientSource.TLSFingerprintMatcher.Classes.ElementsAs(ctx, &ClassesItems, false)
+						if !diags.HasError() {
+							tls_fingerprint_matcherDeepMap["classes"] = ClassesItems
+						}
+					}
+					if !item.DdosClientSource.TLSFingerprintMatcher.ExactValues.IsNull() && !item.DdosClientSource.TLSFingerprintMatcher.ExactValues.IsUnknown() {
+						var ExactValuesItems []string
+						diags := item.DdosClientSource.TLSFingerprintMatcher.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
+						if !diags.HasError() {
+							tls_fingerprint_matcherDeepMap["exact_values"] = ExactValuesItems
+						}
+					}
+					if !item.DdosClientSource.TLSFingerprintMatcher.ExcludedValues.IsNull() && !item.DdosClientSource.TLSFingerprintMatcher.ExcludedValues.IsUnknown() {
+						var ExcludedValuesItems []string
+						diags := item.DdosClientSource.TLSFingerprintMatcher.ExcludedValues.ElementsAs(ctx, &ExcludedValuesItems, false)
+						if !diags.HasError() {
+							tls_fingerprint_matcherDeepMap["excluded_values"] = ExcludedValuesItems
+						}
+					}
+					ddos_client_sourceNestedMap["tls_fingerprint_matcher"] = tls_fingerprint_matcherDeepMap
 				}
 				itemMap["ddos_client_source"] = ddos_client_sourceNestedMap
 			}
@@ -8633,7 +8745,7 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 			}
 			ddos_mitigation_rulesList = append(ddos_mitigation_rulesList, itemMap)
 		}
-		apiResource.Spec["ddos_mitigation_rules"] = ddos_mitigation_rulesList
+		createReq.Spec["ddos_mitigation_rules"] = ddos_mitigation_rulesList
 	}
 	if data.DefaultCacheAction != nil {
 		default_cache_actionMap := make(map[string]interface{})
@@ -8646,49 +8758,49 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 		if !data.DefaultCacheAction.CacheTtlOverride.IsNull() && !data.DefaultCacheAction.CacheTtlOverride.IsUnknown() {
 			default_cache_actionMap["cache_ttl_override"] = data.DefaultCacheAction.CacheTtlOverride.ValueString()
 		}
-		apiResource.Spec["default_cache_action"] = default_cache_actionMap
+		createReq.Spec["default_cache_action"] = default_cache_actionMap
 	}
 	if data.DefaultSensitiveDataPolicy != nil {
 		default_sensitive_data_policyMap := make(map[string]interface{})
-		apiResource.Spec["default_sensitive_data_policy"] = default_sensitive_data_policyMap
+		createReq.Spec["default_sensitive_data_policy"] = default_sensitive_data_policyMap
 	}
 	if data.DisableAPIDefinition != nil {
 		disable_api_definitionMap := make(map[string]interface{})
-		apiResource.Spec["disable_api_definition"] = disable_api_definitionMap
+		createReq.Spec["disable_api_definition"] = disable_api_definitionMap
 	}
 	if data.DisableAPIDiscovery != nil {
 		disable_api_discoveryMap := make(map[string]interface{})
-		apiResource.Spec["disable_api_discovery"] = disable_api_discoveryMap
+		createReq.Spec["disable_api_discovery"] = disable_api_discoveryMap
 	}
 	if data.DisableClientSideDefense != nil {
 		disable_client_side_defenseMap := make(map[string]interface{})
-		apiResource.Spec["disable_client_side_defense"] = disable_client_side_defenseMap
+		createReq.Spec["disable_client_side_defense"] = disable_client_side_defenseMap
 	}
 	if data.DisableIPReputation != nil {
 		disable_ip_reputationMap := make(map[string]interface{})
-		apiResource.Spec["disable_ip_reputation"] = disable_ip_reputationMap
+		createReq.Spec["disable_ip_reputation"] = disable_ip_reputationMap
 	}
 	if data.DisableMaliciousUserDetection != nil {
 		disable_malicious_user_detectionMap := make(map[string]interface{})
-		apiResource.Spec["disable_malicious_user_detection"] = disable_malicious_user_detectionMap
+		createReq.Spec["disable_malicious_user_detection"] = disable_malicious_user_detectionMap
 	}
 	if data.DisableRateLimit != nil {
 		disable_rate_limitMap := make(map[string]interface{})
-		apiResource.Spec["disable_rate_limit"] = disable_rate_limitMap
+		createReq.Spec["disable_rate_limit"] = disable_rate_limitMap
 	}
 	if data.DisableThreatMesh != nil {
 		disable_threat_meshMap := make(map[string]interface{})
-		apiResource.Spec["disable_threat_mesh"] = disable_threat_meshMap
+		createReq.Spec["disable_threat_mesh"] = disable_threat_meshMap
 	}
 	if data.DisableWAF != nil {
 		disable_wafMap := make(map[string]interface{})
-		apiResource.Spec["disable_waf"] = disable_wafMap
+		createReq.Spec["disable_waf"] = disable_wafMap
 	}
 	if !data.Domains.IsNull() && !data.Domains.IsUnknown() {
 		var domainsList []string
 		resp.Diagnostics.Append(data.Domains.ElementsAs(ctx, &domainsList, false)...)
 		if !resp.Diagnostics.HasError() {
-			apiResource.Spec["domains"] = domainsList
+			createReq.Spec["domains"] = domainsList
 		}
 	}
 	if data.EnableAPIDiscovery != nil {
@@ -8721,7 +8833,7 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 		if data.EnableAPIDiscovery.EnableLearnFromRedirectTraffic != nil {
 			enable_api_discoveryMap["enable_learn_from_redirect_traffic"] = map[string]interface{}{}
 		}
-		apiResource.Spec["enable_api_discovery"] = enable_api_discoveryMap
+		createReq.Spec["enable_api_discovery"] = enable_api_discoveryMap
 	}
 	if data.EnableChallenge != nil {
 		enable_challengeMap := make(map[string]interface{})
@@ -8770,7 +8882,7 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 			}
 			enable_challengeMap["malicious_user_mitigation"] = malicious_user_mitigationNestedMap
 		}
-		apiResource.Spec["enable_challenge"] = enable_challengeMap
+		createReq.Spec["enable_challenge"] = enable_challengeMap
 	}
 	if data.EnableIPReputation != nil {
 		enable_ip_reputationMap := make(map[string]interface{})
@@ -8781,15 +8893,15 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 				enable_ip_reputationMap["ip_threat_categories"] = ip_threat_categoriesItems
 			}
 		}
-		apiResource.Spec["enable_ip_reputation"] = enable_ip_reputationMap
+		createReq.Spec["enable_ip_reputation"] = enable_ip_reputationMap
 	}
 	if data.EnableMaliciousUserDetection != nil {
 		enable_malicious_user_detectionMap := make(map[string]interface{})
-		apiResource.Spec["enable_malicious_user_detection"] = enable_malicious_user_detectionMap
+		createReq.Spec["enable_malicious_user_detection"] = enable_malicious_user_detectionMap
 	}
 	if data.EnableThreatMesh != nil {
 		enable_threat_meshMap := make(map[string]interface{})
-		apiResource.Spec["enable_threat_mesh"] = enable_threat_meshMap
+		createReq.Spec["enable_threat_mesh"] = enable_threat_meshMap
 	}
 	if len(data.GraphqlRules) > 0 {
 		var graphql_rulesList []map[string]interface{}
@@ -8806,6 +8918,12 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 			}
 			if item.GraphqlSettings != nil {
 				graphql_settingsNestedMap := make(map[string]interface{})
+				if item.GraphqlSettings.DisableIntrospection != nil {
+					graphql_settingsNestedMap["disable_introspection"] = map[string]interface{}{}
+				}
+				if item.GraphqlSettings.EnableIntrospection != nil {
+					graphql_settingsNestedMap["enable_introspection"] = map[string]interface{}{}
+				}
 				if !item.GraphqlSettings.MaxBatchedQueries.IsNull() && !item.GraphqlSettings.MaxBatchedQueries.IsUnknown() {
 					graphql_settingsNestedMap["max_batched_queries"] = item.GraphqlSettings.MaxBatchedQueries.ValueInt64()
 				}
@@ -8838,7 +8956,7 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 			}
 			graphql_rulesList = append(graphql_rulesList, itemMap)
 		}
-		apiResource.Spec["graphql_rules"] = graphql_rulesList
+		createReq.Spec["graphql_rules"] = graphql_rulesList
 	}
 	if data.HTTP != nil {
 		httpMap := make(map[string]interface{})
@@ -8851,7 +8969,7 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 		if !data.HTTP.PortRanges.IsNull() && !data.HTTP.PortRanges.IsUnknown() {
 			httpMap["port_ranges"] = data.HTTP.PortRanges.ValueString()
 		}
-		apiResource.Spec["http"] = httpMap
+		createReq.Spec["http"] = httpMap
 	}
 	if data.HTTPS != nil {
 		httpsMap := make(map[string]interface{})
@@ -8865,7 +8983,7 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 			tls_cert_optionsNestedMap := make(map[string]interface{})
 			httpsMap["tls_cert_options"] = tls_cert_optionsNestedMap
 		}
-		apiResource.Spec["https"] = httpsMap
+		createReq.Spec["https"] = httpsMap
 	}
 	if data.HTTPSAutoCert != nil {
 		https_auto_certMap := make(map[string]interface{})
@@ -8879,7 +8997,7 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 			tls_configNestedMap := make(map[string]interface{})
 			https_auto_certMap["tls_config"] = tls_configNestedMap
 		}
-		apiResource.Spec["https_auto_cert"] = https_auto_certMap
+		createReq.Spec["https_auto_cert"] = https_auto_certMap
 	}
 	if data.JsChallenge != nil {
 		js_challengeMap := make(map[string]interface{})
@@ -8892,7 +9010,7 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 		if !data.JsChallenge.JsScriptDelay.IsNull() && !data.JsChallenge.JsScriptDelay.IsUnknown() {
 			js_challengeMap["js_script_delay"] = data.JsChallenge.JsScriptDelay.ValueInt64()
 		}
-		apiResource.Spec["js_challenge"] = js_challengeMap
+		createReq.Spec["js_challenge"] = js_challengeMap
 	}
 	if data.JwtValidation != nil {
 		jwt_validationMap := make(map[string]interface{})
@@ -8926,15 +9044,15 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 			token_locationNestedMap := make(map[string]interface{})
 			jwt_validationMap["token_location"] = token_locationNestedMap
 		}
-		apiResource.Spec["jwt_validation"] = jwt_validationMap
+		createReq.Spec["jwt_validation"] = jwt_validationMap
 	}
 	if data.L7DdosActionBlock != nil {
 		l7_ddos_action_blockMap := make(map[string]interface{})
-		apiResource.Spec["l7_ddos_action_block"] = l7_ddos_action_blockMap
+		createReq.Spec["l7_ddos_action_block"] = l7_ddos_action_blockMap
 	}
 	if data.L7DdosActionDefault != nil {
 		l7_ddos_action_defaultMap := make(map[string]interface{})
-		apiResource.Spec["l7_ddos_action_default"] = l7_ddos_action_defaultMap
+		createReq.Spec["l7_ddos_action_default"] = l7_ddos_action_defaultMap
 	}
 	if data.L7DdosActionJsChallenge != nil {
 		l7_ddos_action_js_challengeMap := make(map[string]interface{})
@@ -8947,15 +9065,15 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 		if !data.L7DdosActionJsChallenge.JsScriptDelay.IsNull() && !data.L7DdosActionJsChallenge.JsScriptDelay.IsUnknown() {
 			l7_ddos_action_js_challengeMap["js_script_delay"] = data.L7DdosActionJsChallenge.JsScriptDelay.ValueInt64()
 		}
-		apiResource.Spec["l7_ddos_action_js_challenge"] = l7_ddos_action_js_challengeMap
+		createReq.Spec["l7_ddos_action_js_challenge"] = l7_ddos_action_js_challengeMap
 	}
 	if data.NoChallenge != nil {
 		no_challengeMap := make(map[string]interface{})
-		apiResource.Spec["no_challenge"] = no_challengeMap
+		createReq.Spec["no_challenge"] = no_challengeMap
 	}
 	if data.NoServicePolicies != nil {
 		no_service_policiesMap := make(map[string]interface{})
-		apiResource.Spec["no_service_policies"] = no_service_policiesMap
+		createReq.Spec["no_service_policies"] = no_service_policiesMap
 	}
 	if data.OriginPool != nil {
 		origin_poolMap := make(map[string]interface{})
@@ -9023,7 +9141,7 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 			}
 			origin_poolMap["use_tls"] = use_tlsNestedMap
 		}
-		apiResource.Spec["origin_pool"] = origin_poolMap
+		createReq.Spec["origin_pool"] = origin_poolMap
 	}
 	if data.OtherSettings != nil {
 		other_settingsMap := make(map[string]interface{})
@@ -9038,7 +9156,7 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 			logging_optionsNestedMap := make(map[string]interface{})
 			other_settingsMap["logging_options"] = logging_optionsNestedMap
 		}
-		apiResource.Spec["other_settings"] = other_settingsMap
+		createReq.Spec["other_settings"] = other_settingsMap
 	}
 	if data.PolicyBasedChallenge != nil {
 		policy_based_challengeMap := make(map[string]interface{})
@@ -9110,7 +9228,7 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 			}
 			policy_based_challengeMap["temporary_user_blocking"] = temporary_user_blockingNestedMap
 		}
-		apiResource.Spec["policy_based_challenge"] = policy_based_challengeMap
+		createReq.Spec["policy_based_challenge"] = policy_based_challengeMap
 	}
 	if len(data.ProtectedCookies) > 0 {
 		var protected_cookiesList []map[string]interface{}
@@ -9157,7 +9275,7 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 			}
 			protected_cookiesList = append(protected_cookiesList, itemMap)
 		}
-		apiResource.Spec["protected_cookies"] = protected_cookiesList
+		createReq.Spec["protected_cookies"] = protected_cookiesList
 	}
 	if data.RateLimit != nil {
 		rate_limitMap := make(map[string]interface{})
@@ -9195,7 +9313,7 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 			}
 			rate_limitMap["rate_limiter"] = rate_limiterNestedMap
 		}
-		apiResource.Spec["rate_limit"] = rate_limitMap
+		createReq.Spec["rate_limit"] = rate_limitMap
 	}
 	if data.SensitiveDataPolicy != nil {
 		sensitive_data_policyMap := make(map[string]interface{})
@@ -9212,11 +9330,11 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 			}
 			sensitive_data_policyMap["sensitive_data_policy_ref"] = sensitive_data_policy_refNestedMap
 		}
-		apiResource.Spec["sensitive_data_policy"] = sensitive_data_policyMap
+		createReq.Spec["sensitive_data_policy"] = sensitive_data_policyMap
 	}
 	if data.ServicePoliciesFromNamespace != nil {
 		service_policies_from_namespaceMap := make(map[string]interface{})
-		apiResource.Spec["service_policies_from_namespace"] = service_policies_from_namespaceMap
+		createReq.Spec["service_policies_from_namespace"] = service_policies_from_namespaceMap
 	}
 	if data.SlowDdosMitigation != nil {
 		slow_ddos_mitigationMap := make(map[string]interface{})
@@ -9229,11 +9347,11 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 		if !data.SlowDdosMitigation.RequestTimeout.IsNull() && !data.SlowDdosMitigation.RequestTimeout.IsUnknown() {
 			slow_ddos_mitigationMap["request_timeout"] = data.SlowDdosMitigation.RequestTimeout.ValueInt64()
 		}
-		apiResource.Spec["slow_ddos_mitigation"] = slow_ddos_mitigationMap
+		createReq.Spec["slow_ddos_mitigation"] = slow_ddos_mitigationMap
 	}
 	if data.SystemDefaultTimeouts != nil {
 		system_default_timeoutsMap := make(map[string]interface{})
-		apiResource.Spec["system_default_timeouts"] = system_default_timeoutsMap
+		createReq.Spec["system_default_timeouts"] = system_default_timeoutsMap
 	}
 	if len(data.TrustedClients) > 0 {
 		var trusted_clientsList []map[string]interface{}
@@ -9250,6 +9368,29 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 			}
 			if item.HTTPHeader != nil {
 				http_headerNestedMap := make(map[string]interface{})
+				if len(item.HTTPHeader.Headers) > 0 {
+					var headersDeepList []map[string]interface{}
+					for _, deepListItem := range item.HTTPHeader.Headers {
+						deepListItemMap := make(map[string]interface{})
+						if !deepListItem.Exact.IsNull() && !deepListItem.Exact.IsUnknown() {
+							deepListItemMap["exact"] = deepListItem.Exact.ValueString()
+						}
+						if !deepListItem.InvertMatch.IsNull() && !deepListItem.InvertMatch.IsUnknown() {
+							deepListItemMap["invert_match"] = deepListItem.InvertMatch.ValueBool()
+						}
+						if !deepListItem.Name.IsNull() && !deepListItem.Name.IsUnknown() {
+							deepListItemMap["name"] = deepListItem.Name.ValueString()
+						}
+						if !deepListItem.Presence.IsNull() && !deepListItem.Presence.IsUnknown() {
+							deepListItemMap["presence"] = deepListItem.Presence.ValueBool()
+						}
+						if !deepListItem.Regex.IsNull() && !deepListItem.Regex.IsUnknown() {
+							deepListItemMap["regex"] = deepListItem.Regex.ValueString()
+						}
+						headersDeepList = append(headersDeepList, deepListItemMap)
+					}
+					http_headerNestedMap["headers"] = headersDeepList
+				}
 				itemMap["http_header"] = http_headerNestedMap
 			}
 			if !item.IPPrefix.IsNull() && !item.IPPrefix.IsUnknown() {
@@ -9279,11 +9420,11 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 			}
 			trusted_clientsList = append(trusted_clientsList, itemMap)
 		}
-		apiResource.Spec["trusted_clients"] = trusted_clientsList
+		createReq.Spec["trusted_clients"] = trusted_clientsList
 	}
 	if data.UserIDClientIP != nil {
 		user_id_client_ipMap := make(map[string]interface{})
-		apiResource.Spec["user_id_client_ip"] = user_id_client_ipMap
+		createReq.Spec["user_id_client_ip"] = user_id_client_ipMap
 	}
 	if data.UserIdentification != nil {
 		user_identificationMap := make(map[string]interface{})
@@ -9296,7 +9437,7 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 		if !data.UserIdentification.Tenant.IsNull() && !data.UserIdentification.Tenant.IsUnknown() {
 			user_identificationMap["tenant"] = data.UserIdentification.Tenant.ValueString()
 		}
-		apiResource.Spec["user_identification"] = user_identificationMap
+		createReq.Spec["user_identification"] = user_identificationMap
 	}
 	if data.WAFExclusion != nil {
 		waf_exclusionMap := make(map[string]interface{})
@@ -9317,24 +9458,1742 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 			}
 			waf_exclusionMap["waf_exclusion_policy"] = waf_exclusion_policyNestedMap
 		}
-		apiResource.Spec["waf_exclusion"] = waf_exclusionMap
+		createReq.Spec["waf_exclusion"] = waf_exclusionMap
 	}
 
 
-	created, err := r.client.CreateCDNLoadBalancer(ctx, apiResource)
+	apiResource, err := r.client.CreateCDNLoadBalancer(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create CDNLoadBalancer: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["active_service_policies"].(map[string]interface{}); ok && (isImport || data.ActiveServicePolicies != nil) {
+		data.ActiveServicePolicies = &CDNLoadBalancerActiveServicePoliciesModel{
+			Policies: func() []CDNLoadBalancerActiveServicePoliciesPoliciesModel {
+				if listData, ok := blockData["policies"].([]interface{}); ok && len(listData) > 0 {
+					var result []CDNLoadBalancerActiveServicePoliciesPoliciesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, CDNLoadBalancerActiveServicePoliciesPoliciesModel{
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := itemMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := itemMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["api_rate_limit"].(map[string]interface{}); ok && (isImport || data.APIRateLimit != nil) {
+		data.APIRateLimit = &CDNLoadBalancerAPIRateLimitModel{
+			APIEndpointRules: func() []CDNLoadBalancerAPIRateLimitAPIEndpointRulesModel {
+				if listData, ok := blockData["api_endpoint_rules"].([]interface{}); ok && len(listData) > 0 {
+					var result []CDNLoadBalancerAPIRateLimitAPIEndpointRulesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, CDNLoadBalancerAPIRateLimitAPIEndpointRulesModel{
+								AnyDomain: func() *CDNLoadBalancerEmptyModel {
+									if _, ok := itemMap["any_domain"].(map[string]interface{}); ok {
+										return &CDNLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								APIEndpointMethod: func() *CDNLoadBalancerAPIRateLimitAPIEndpointRulesAPIEndpointMethodModel {
+									if deepMap, ok := itemMap["api_endpoint_method"].(map[string]interface{}); ok {
+										return &CDNLoadBalancerAPIRateLimitAPIEndpointRulesAPIEndpointMethodModel{
+											InvertMatcher: func() types.Bool {
+												if v, ok := deepMap["invert_matcher"].(bool); ok {
+													return types.BoolValue(v)
+												}
+												return types.BoolNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								APIEndpointPath: func() types.String {
+									if v, ok := itemMap["api_endpoint_path"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								ClientMatcher: func() *CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherModel {
+									if deepMap, ok := itemMap["client_matcher"].(map[string]interface{}); ok {
+										return &CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherModel{
+											AnyClient: func() *CDNLoadBalancerEmptyModel {
+												if _, ok := deepMap["any_client"].(map[string]interface{}); ok {
+													return &CDNLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+											AnyIP: func() *CDNLoadBalancerEmptyModel {
+												if _, ok := deepMap["any_ip"].(map[string]interface{}); ok {
+													return &CDNLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+										}
+									}
+									return nil
+								}(),
+								InlineRateLimiter: func() *CDNLoadBalancerAPIRateLimitAPIEndpointRulesInlineRateLimiterModel {
+									if deepMap, ok := itemMap["inline_rate_limiter"].(map[string]interface{}); ok {
+										return &CDNLoadBalancerAPIRateLimitAPIEndpointRulesInlineRateLimiterModel{
+											Threshold: func() types.Int64 {
+												if v, ok := deepMap["threshold"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+											Unit: func() types.String {
+												if v, ok := deepMap["unit"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											UseHTTPLbUserID: func() *CDNLoadBalancerEmptyModel {
+												if _, ok := deepMap["use_http_lb_user_id"].(map[string]interface{}); ok {
+													return &CDNLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+										}
+									}
+									return nil
+								}(),
+								RefRateLimiter: func() *CDNLoadBalancerAPIRateLimitAPIEndpointRulesRefRateLimiterModel {
+									if deepMap, ok := itemMap["ref_rate_limiter"].(map[string]interface{}); ok {
+										return &CDNLoadBalancerAPIRateLimitAPIEndpointRulesRefRateLimiterModel{
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Namespace: func() types.String {
+												if v, ok := deepMap["namespace"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Tenant: func() types.String {
+												if v, ok := deepMap["tenant"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								RequestMatcher: func() *CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherModel {
+									if _, ok := itemMap["request_matcher"].(map[string]interface{}); ok {
+										return &CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherModel{
+										}
+									}
+									return nil
+								}(),
+								SpecificDomain: func() types.String {
+									if v, ok := itemMap["specific_domain"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			BypassRateLimitingRules: func() *CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesModel {
+				if !isImport && data.APIRateLimit != nil && data.APIRateLimit.BypassRateLimitingRules != nil {
+					// Normal Read: preserve existing state value
+					return data.APIRateLimit.BypassRateLimitingRules
+				}
+				// Import case: read from API
+				if _, ok := blockData["bypass_rate_limiting_rules"].(map[string]interface{}); ok {
+					return &CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesModel{
+					}
+				}
+				return nil
+			}(),
+			CustomIPAllowedList: func() *CDNLoadBalancerAPIRateLimitCustomIPAllowedListModel {
+				if !isImport && data.APIRateLimit != nil && data.APIRateLimit.CustomIPAllowedList != nil {
+					// Normal Read: preserve existing state value
+					return data.APIRateLimit.CustomIPAllowedList
+				}
+				// Import case: read from API
+				if _, ok := blockData["custom_ip_allowed_list"].(map[string]interface{}); ok {
+					return &CDNLoadBalancerAPIRateLimitCustomIPAllowedListModel{
+					}
+				}
+				return nil
+			}(),
+			IPAllowedList: func() *CDNLoadBalancerAPIRateLimitIPAllowedListModel {
+				if !isImport && data.APIRateLimit != nil && data.APIRateLimit.IPAllowedList != nil {
+					// Normal Read: preserve existing state value
+					return data.APIRateLimit.IPAllowedList
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["ip_allowed_list"].(map[string]interface{}); ok {
+					return &CDNLoadBalancerAPIRateLimitIPAllowedListModel{
+						Prefixes: func() types.List {
+							if v, ok := nestedBlockData["prefixes"].([]interface{}); ok && len(v) > 0 {
+								var items []string
+								for _, item := range v {
+									if s, ok := item.(string); ok {
+										items = append(items, s)
+									}
+								}
+								listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+								return listVal
+							}
+							return types.ListNull(types.StringType)
+						}(),
+					}
+				}
+				return nil
+			}(),
+			NoIPAllowedList: func() *CDNLoadBalancerEmptyModel {
+				if !isImport && data.APIRateLimit != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.APIRateLimit.NoIPAllowedList
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_ip_allowed_list"].(map[string]interface{}); ok {
+					return &CDNLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			ServerURLRules: func() []CDNLoadBalancerAPIRateLimitServerURLRulesModel {
+				if listData, ok := blockData["server_url_rules"].([]interface{}); ok && len(listData) > 0 {
+					var result []CDNLoadBalancerAPIRateLimitServerURLRulesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, CDNLoadBalancerAPIRateLimitServerURLRulesModel{
+								AnyDomain: func() *CDNLoadBalancerEmptyModel {
+									if _, ok := itemMap["any_domain"].(map[string]interface{}); ok {
+										return &CDNLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								APIGroup: func() types.String {
+									if v, ok := itemMap["api_group"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								BasePath: func() types.String {
+									if v, ok := itemMap["base_path"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								ClientMatcher: func() *CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherModel {
+									if deepMap, ok := itemMap["client_matcher"].(map[string]interface{}); ok {
+										return &CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherModel{
+											AnyClient: func() *CDNLoadBalancerEmptyModel {
+												if _, ok := deepMap["any_client"].(map[string]interface{}); ok {
+													return &CDNLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+											AnyIP: func() *CDNLoadBalancerEmptyModel {
+												if _, ok := deepMap["any_ip"].(map[string]interface{}); ok {
+													return &CDNLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+										}
+									}
+									return nil
+								}(),
+								InlineRateLimiter: func() *CDNLoadBalancerAPIRateLimitServerURLRulesInlineRateLimiterModel {
+									if deepMap, ok := itemMap["inline_rate_limiter"].(map[string]interface{}); ok {
+										return &CDNLoadBalancerAPIRateLimitServerURLRulesInlineRateLimiterModel{
+											Threshold: func() types.Int64 {
+												if v, ok := deepMap["threshold"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+											Unit: func() types.String {
+												if v, ok := deepMap["unit"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											UseHTTPLbUserID: func() *CDNLoadBalancerEmptyModel {
+												if _, ok := deepMap["use_http_lb_user_id"].(map[string]interface{}); ok {
+													return &CDNLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+										}
+									}
+									return nil
+								}(),
+								RefRateLimiter: func() *CDNLoadBalancerAPIRateLimitServerURLRulesRefRateLimiterModel {
+									if deepMap, ok := itemMap["ref_rate_limiter"].(map[string]interface{}); ok {
+										return &CDNLoadBalancerAPIRateLimitServerURLRulesRefRateLimiterModel{
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Namespace: func() types.String {
+												if v, ok := deepMap["namespace"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Tenant: func() types.String {
+												if v, ok := deepMap["tenant"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								RequestMatcher: func() *CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherModel {
+									if _, ok := itemMap["request_matcher"].(map[string]interface{}); ok {
+										return &CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherModel{
+										}
+									}
+									return nil
+								}(),
+								SpecificDomain: func() types.String {
+									if v, ok := itemMap["specific_domain"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["api_specification"].(map[string]interface{}); ok && isImport && data.APISpecification == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.APISpecification = &CDNLoadBalancerAPISpecificationModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["app_firewall"].(map[string]interface{}); ok && (isImport || data.AppFirewall != nil) {
+		data.AppFirewall = &CDNLoadBalancerAppFirewallModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if listData, ok := apiResource.Spec["blocked_clients"].([]interface{}); ok && len(listData) > 0 {
+		var blocked_clientsList []CDNLoadBalancerBlockedClientsModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				blocked_clientsList = append(blocked_clientsList, CDNLoadBalancerBlockedClientsModel{
+					Actions: func() types.List {
+						if v, ok := itemMap["actions"].([]interface{}); ok && len(v) > 0 {
+							var items []string
+							for _, item := range v {
+								if s, ok := item.(string); ok {
+									items = append(items, s)
+								}
+							}
+							listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+							return listVal
+						}
+						return types.ListNull(types.StringType)
+					}(),
+					AsNumber: func() types.Int64 {
+						if v, ok := itemMap["as_number"].(float64); ok && v != 0 {
+							return types.Int64Value(int64(v))
+						}
+						return types.Int64Null()
+					}(),
+					BotSkipProcessing: func() *CDNLoadBalancerEmptyModel {
+						if !isImport && len(data.BlockedClients) > listIdx && data.BlockedClients[listIdx].BotSkipProcessing != nil {
+							return &CDNLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					ExpirationTimestamp: func() types.String {
+						if v, ok := itemMap["expiration_timestamp"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					HTTPHeader: func() *CDNLoadBalancerBlockedClientsHTTPHeaderModel {
+						if _, ok := itemMap["http_header"].(map[string]interface{}); ok {
+							return &CDNLoadBalancerBlockedClientsHTTPHeaderModel{
+							}
+						}
+						return nil
+					}(),
+					IPPrefix: func() types.String {
+						if v, ok := itemMap["ip_prefix"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					IPV6Prefix: func() types.String {
+						if v, ok := itemMap["ipv6_prefix"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Metadata: func() *CDNLoadBalancerBlockedClientsMetadataModel {
+						if nestedMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
+							return &CDNLoadBalancerBlockedClientsMetadataModel{
+								DescriptionSpec: func() types.String {
+									if v, ok := nestedMap["description"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Name: func() types.String {
+									if v, ok := nestedMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					SkipProcessing: func() *CDNLoadBalancerEmptyModel {
+						if !isImport && len(data.BlockedClients) > listIdx && data.BlockedClients[listIdx].SkipProcessing != nil {
+							return &CDNLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					UserIdentifier: func() types.String {
+						if v, ok := itemMap["user_identifier"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					WAFSkipProcessing: func() *CDNLoadBalancerEmptyModel {
+						if !isImport && len(data.BlockedClients) > listIdx && data.BlockedClients[listIdx].WAFSkipProcessing != nil {
+							return &CDNLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+				})
+			}
+		}
+		data.BlockedClients = blocked_clientsList
+	}
+	if blockData, ok := apiResource.Spec["bot_defense"].(map[string]interface{}); ok && (isImport || data.BotDefense != nil) {
+		data.BotDefense = &CDNLoadBalancerBotDefenseModel{
+			DisableCorsSupport: func() *CDNLoadBalancerEmptyModel {
+				if !isImport && data.BotDefense != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.BotDefense.DisableCorsSupport
+				}
+				// Import case: read from API
+				if _, ok := blockData["disable_cors_support"].(map[string]interface{}); ok {
+					return &CDNLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			EnableCorsSupport: func() *CDNLoadBalancerEmptyModel {
+				if !isImport && data.BotDefense != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.BotDefense.EnableCorsSupport
+				}
+				// Import case: read from API
+				if _, ok := blockData["enable_cors_support"].(map[string]interface{}); ok {
+					return &CDNLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			Policy: func() *CDNLoadBalancerBotDefensePolicyModel {
+				if !isImport && data.BotDefense != nil && data.BotDefense.Policy != nil {
+					// Normal Read: preserve existing state value
+					return data.BotDefense.Policy
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["policy"].(map[string]interface{}); ok {
+					return &CDNLoadBalancerBotDefensePolicyModel{
+						JavascriptMode: func() types.String {
+							if v, ok := nestedBlockData["javascript_mode"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						JsDownloadPath: func() types.String {
+							if v, ok := nestedBlockData["js_download_path"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			RegionalEndpoint: func() types.String {
+				if v, ok := blockData["regional_endpoint"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Timeout: func() types.Int64 {
+				if v, ok := blockData["timeout"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["captcha_challenge"].(map[string]interface{}); ok && (isImport || data.CaptchaChallenge != nil) {
+		data.CaptchaChallenge = &CDNLoadBalancerCaptchaChallengeModel{
+			CookieExpiry: func() types.Int64 {
+				if v, ok := blockData["cookie_expiry"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			CustomPage: func() types.String {
+				if v, ok := blockData["custom_page"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["client_side_defense"].(map[string]interface{}); ok && isImport && data.ClientSideDefense == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ClientSideDefense = &CDNLoadBalancerClientSideDefenseModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["cors_policy"].(map[string]interface{}); ok && (isImport || data.CorsPolicy != nil) {
+		data.CorsPolicy = &CDNLoadBalancerCorsPolicyModel{
+			AllowCredentials: func() types.Bool {
+				if !isImport && data.CorsPolicy != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.CorsPolicy.AllowCredentials
+				}
+				// Import case: read from API
+				if v, ok := blockData["allow_credentials"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			AllowHeaders: func() types.String {
+				if v, ok := blockData["allow_headers"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			AllowMethods: func() types.String {
+				if v, ok := blockData["allow_methods"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			AllowOrigin: func() types.List {
+				if v, ok := blockData["allow_origin"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+			AllowOriginRegex: func() types.List {
+				if v, ok := blockData["allow_origin_regex"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+			Disabled: func() types.Bool {
+				if !isImport && data.CorsPolicy != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.CorsPolicy.Disabled
+				}
+				// Import case: read from API
+				if v, ok := blockData["disabled"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			ExposeHeaders: func() types.String {
+				if v, ok := blockData["expose_headers"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			MaximumAge: func() types.Int64 {
+				if v, ok := blockData["maximum_age"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["csrf_policy"].(map[string]interface{}); ok && isImport && data.CsrfPolicy == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.CsrfPolicy = &CDNLoadBalancerCsrfPolicyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["custom_cache_rule"].(map[string]interface{}); ok && (isImport || data.CustomCacheRule != nil) {
+		data.CustomCacheRule = &CDNLoadBalancerCustomCacheRuleModel{
+			CDNCacheRules: func() []CDNLoadBalancerCustomCacheRuleCDNCacheRulesModel {
+				if listData, ok := blockData["cdn_cache_rules"].([]interface{}); ok && len(listData) > 0 {
+					var result []CDNLoadBalancerCustomCacheRuleCDNCacheRulesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, CDNLoadBalancerCustomCacheRuleCDNCacheRulesModel{
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := itemMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := itemMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if listData, ok := apiResource.Spec["data_guard_rules"].([]interface{}); ok && len(listData) > 0 {
+		var data_guard_rulesList []CDNLoadBalancerDataGuardRulesModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				data_guard_rulesList = append(data_guard_rulesList, CDNLoadBalancerDataGuardRulesModel{
+					AnyDomain: func() *CDNLoadBalancerEmptyModel {
+						if !isImport && len(data.DataGuardRules) > listIdx && data.DataGuardRules[listIdx].AnyDomain != nil {
+							return &CDNLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					ApplyDataGuard: func() *CDNLoadBalancerEmptyModel {
+						if !isImport && len(data.DataGuardRules) > listIdx && data.DataGuardRules[listIdx].ApplyDataGuard != nil {
+							return &CDNLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					ExactValue: func() types.String {
+						if v, ok := itemMap["exact_value"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Metadata: func() *CDNLoadBalancerDataGuardRulesMetadataModel {
+						if nestedMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
+							return &CDNLoadBalancerDataGuardRulesMetadataModel{
+								DescriptionSpec: func() types.String {
+									if v, ok := nestedMap["description"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Name: func() types.String {
+									if v, ok := nestedMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					Path: func() *CDNLoadBalancerDataGuardRulesPathModel {
+						if nestedMap, ok := itemMap["path"].(map[string]interface{}); ok {
+							return &CDNLoadBalancerDataGuardRulesPathModel{
+								Path: func() types.String {
+									if v, ok := nestedMap["path"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Prefix: func() types.String {
+									if v, ok := nestedMap["prefix"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Regex: func() types.String {
+									if v, ok := nestedMap["regex"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					SkipDataGuard: func() *CDNLoadBalancerEmptyModel {
+						if !isImport && len(data.DataGuardRules) > listIdx && data.DataGuardRules[listIdx].SkipDataGuard != nil {
+							return &CDNLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					SuffixValue: func() types.String {
+						if v, ok := itemMap["suffix_value"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.DataGuardRules = data_guard_rulesList
+	}
+	if listData, ok := apiResource.Spec["ddos_mitigation_rules"].([]interface{}); ok && len(listData) > 0 {
+		var ddos_mitigation_rulesList []CDNLoadBalancerDdosMitigationRulesModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				ddos_mitigation_rulesList = append(ddos_mitigation_rulesList, CDNLoadBalancerDdosMitigationRulesModel{
+					Block: func() *CDNLoadBalancerEmptyModel {
+						if !isImport && len(data.DdosMitigationRules) > listIdx && data.DdosMitigationRules[listIdx].Block != nil {
+							return &CDNLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					DdosClientSource: func() *CDNLoadBalancerDdosMitigationRulesDdosClientSourceModel {
+						if nestedMap, ok := itemMap["ddos_client_source"].(map[string]interface{}); ok {
+							return &CDNLoadBalancerDdosMitigationRulesDdosClientSourceModel{
+								CountryList: func() types.List {
+									if v, ok := nestedMap["country_list"].([]interface{}); ok && len(v) > 0 {
+										var items []string
+										for _, item := range v {
+											if s, ok := item.(string); ok {
+												items = append(items, s)
+											}
+										}
+										listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+										return listVal
+									}
+									return types.ListNull(types.StringType)
+								}(),
+							}
+						}
+						return nil
+					}(),
+					ExpirationTimestamp: func() types.String {
+						if v, ok := itemMap["expiration_timestamp"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					IPPrefixList: func() *CDNLoadBalancerDdosMitigationRulesIPPrefixListModel {
+						if nestedMap, ok := itemMap["ip_prefix_list"].(map[string]interface{}); ok {
+							return &CDNLoadBalancerDdosMitigationRulesIPPrefixListModel{
+								InvertMatch: func() types.Bool {
+									if v, ok := nestedMap["invert_match"].(bool); ok {
+										return types.BoolValue(v)
+									}
+									return types.BoolNull()
+								}(),
+								IPPrefixes: func() types.List {
+									if v, ok := nestedMap["ip_prefixes"].([]interface{}); ok && len(v) > 0 {
+										var items []string
+										for _, item := range v {
+											if s, ok := item.(string); ok {
+												items = append(items, s)
+											}
+										}
+										listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+										return listVal
+									}
+									return types.ListNull(types.StringType)
+								}(),
+							}
+						}
+						return nil
+					}(),
+					Metadata: func() *CDNLoadBalancerDdosMitigationRulesMetadataModel {
+						if nestedMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
+							return &CDNLoadBalancerDdosMitigationRulesMetadataModel{
+								DescriptionSpec: func() types.String {
+									if v, ok := nestedMap["description"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Name: func() types.String {
+									if v, ok := nestedMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+				})
+			}
+		}
+		data.DdosMitigationRules = ddos_mitigation_rulesList
+	}
+	if blockData, ok := apiResource.Spec["default_cache_action"].(map[string]interface{}); ok && (isImport || data.DefaultCacheAction != nil) {
+		data.DefaultCacheAction = &CDNLoadBalancerDefaultCacheActionModel{
+			CacheDisabled: func() *CDNLoadBalancerEmptyModel {
+				if !isImport && data.DefaultCacheAction != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.DefaultCacheAction.CacheDisabled
+				}
+				// Import case: read from API
+				if _, ok := blockData["cache_disabled"].(map[string]interface{}); ok {
+					return &CDNLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			CacheTtlDefault: func() types.String {
+				if v, ok := blockData["cache_ttl_default"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			CacheTtlOverride: func() types.String {
+				if v, ok := blockData["cache_ttl_override"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["default_sensitive_data_policy"].(map[string]interface{}); ok && isImport && data.DefaultSensitiveDataPolicy == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DefaultSensitiveDataPolicy = &CDNLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["disable_api_definition"].(map[string]interface{}); ok && isImport && data.DisableAPIDefinition == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableAPIDefinition = &CDNLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["disable_api_discovery"].(map[string]interface{}); ok && isImport && data.DisableAPIDiscovery == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableAPIDiscovery = &CDNLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["disable_client_side_defense"].(map[string]interface{}); ok && isImport && data.DisableClientSideDefense == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableClientSideDefense = &CDNLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["disable_ip_reputation"].(map[string]interface{}); ok && isImport && data.DisableIPReputation == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableIPReputation = &CDNLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["disable_malicious_user_detection"].(map[string]interface{}); ok && isImport && data.DisableMaliciousUserDetection == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableMaliciousUserDetection = &CDNLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["disable_rate_limit"].(map[string]interface{}); ok && isImport && data.DisableRateLimit == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableRateLimit = &CDNLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["disable_threat_mesh"].(map[string]interface{}); ok && isImport && data.DisableThreatMesh == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableThreatMesh = &CDNLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["disable_waf"].(map[string]interface{}); ok && isImport && data.DisableWAF == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableWAF = &CDNLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["domains"].([]interface{}); ok && len(v) > 0 {
+		var domainsList []string
+		for _, item := range v {
+			if s, ok := item.(string); ok {
+				domainsList = append(domainsList, s)
+			}
+		}
+		listVal, diags := types.ListValueFrom(ctx, types.StringType, domainsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Domains = listVal
+		}
+	} else {
+		data.Domains = types.ListNull(types.StringType)
+	}
+	if _, ok := apiResource.Spec["enable_api_discovery"].(map[string]interface{}); ok && isImport && data.EnableAPIDiscovery == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.EnableAPIDiscovery = &CDNLoadBalancerEnableAPIDiscoveryModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["enable_challenge"].(map[string]interface{}); ok && isImport && data.EnableChallenge == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.EnableChallenge = &CDNLoadBalancerEnableChallengeModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["enable_ip_reputation"].(map[string]interface{}); ok && (isImport || data.EnableIPReputation != nil) {
+		data.EnableIPReputation = &CDNLoadBalancerEnableIPReputationModel{
+			IPThreatCategories: func() types.List {
+				if v, ok := blockData["ip_threat_categories"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["enable_malicious_user_detection"].(map[string]interface{}); ok && isImport && data.EnableMaliciousUserDetection == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.EnableMaliciousUserDetection = &CDNLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["enable_threat_mesh"].(map[string]interface{}); ok && isImport && data.EnableThreatMesh == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.EnableThreatMesh = &CDNLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["graphql_rules"].([]interface{}); ok && len(listData) > 0 {
+		var graphql_rulesList []CDNLoadBalancerGraphqlRulesModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				graphql_rulesList = append(graphql_rulesList, CDNLoadBalancerGraphqlRulesModel{
+					AnyDomain: func() *CDNLoadBalancerEmptyModel {
+						if !isImport && len(data.GraphqlRules) > listIdx && data.GraphqlRules[listIdx].AnyDomain != nil {
+							return &CDNLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					ExactPath: func() types.String {
+						if v, ok := itemMap["exact_path"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					ExactValue: func() types.String {
+						if v, ok := itemMap["exact_value"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					GraphqlSettings: func() *CDNLoadBalancerGraphqlRulesGraphqlSettingsModel {
+						if nestedMap, ok := itemMap["graphql_settings"].(map[string]interface{}); ok {
+							return &CDNLoadBalancerGraphqlRulesGraphqlSettingsModel{
+								DisableIntrospection: func() *CDNLoadBalancerEmptyModel {
+									if !isImport && len(data.GraphqlRules) > listIdx && data.GraphqlRules[listIdx].GraphqlSettings != nil && data.GraphqlRules[listIdx].GraphqlSettings.DisableIntrospection != nil {
+										return &CDNLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								EnableIntrospection: func() *CDNLoadBalancerEmptyModel {
+									if !isImport && len(data.GraphqlRules) > listIdx && data.GraphqlRules[listIdx].GraphqlSettings != nil && data.GraphqlRules[listIdx].GraphqlSettings.EnableIntrospection != nil {
+										return &CDNLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								MaxBatchedQueries: func() types.Int64 {
+									if v, ok := nestedMap["max_batched_queries"].(float64); ok && v != 0 {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								MaxDepth: func() types.Int64 {
+									if v, ok := nestedMap["max_depth"].(float64); ok && v != 0 {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								MaxTotalLength: func() types.Int64 {
+									if v, ok := nestedMap["max_total_length"].(float64); ok && v != 0 {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					Metadata: func() *CDNLoadBalancerGraphqlRulesMetadataModel {
+						if nestedMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
+							return &CDNLoadBalancerGraphqlRulesMetadataModel{
+								DescriptionSpec: func() types.String {
+									if v, ok := nestedMap["description"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Name: func() types.String {
+									if v, ok := nestedMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					MethodGet: func() *CDNLoadBalancerEmptyModel {
+						if !isImport && len(data.GraphqlRules) > listIdx && data.GraphqlRules[listIdx].MethodGet != nil {
+							return &CDNLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					MethodPost: func() *CDNLoadBalancerEmptyModel {
+						if !isImport && len(data.GraphqlRules) > listIdx && data.GraphqlRules[listIdx].MethodPost != nil {
+							return &CDNLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					SuffixValue: func() types.String {
+						if v, ok := itemMap["suffix_value"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.GraphqlRules = graphql_rulesList
+	}
+	if blockData, ok := apiResource.Spec["http"].(map[string]interface{}); ok && (isImport || data.HTTP != nil) {
+		data.HTTP = &CDNLoadBalancerHTTPModel{
+			DNSVolterraManaged: func() types.Bool {
+				if !isImport && data.HTTP != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.HTTP.DNSVolterraManaged
+				}
+				// Import case: read from API
+				if v, ok := blockData["dns_volterra_managed"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			Port: func() types.Int64 {
+				if v, ok := blockData["port"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			PortRanges: func() types.String {
+				if v, ok := blockData["port_ranges"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["https"].(map[string]interface{}); ok && (isImport || data.HTTPS != nil) {
+		data.HTTPS = &CDNLoadBalancerHTTPSModel{
+			AddHsts: func() types.Bool {
+				if !isImport && data.HTTPS != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.HTTPS.AddHsts
+				}
+				// Import case: read from API
+				if v, ok := blockData["add_hsts"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			HTTPRedirect: func() types.Bool {
+				if !isImport && data.HTTPS != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.HTTPS.HTTPRedirect
+				}
+				// Import case: read from API
+				if v, ok := blockData["http_redirect"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			TLSCertOptions: func() *CDNLoadBalancerHTTPSTLSCertOptionsModel {
+				if !isImport && data.HTTPS != nil && data.HTTPS.TLSCertOptions != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPS.TLSCertOptions
+				}
+				// Import case: read from API
+				if _, ok := blockData["tls_cert_options"].(map[string]interface{}); ok {
+					return &CDNLoadBalancerHTTPSTLSCertOptionsModel{
+					}
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["https_auto_cert"].(map[string]interface{}); ok && (isImport || data.HTTPSAutoCert != nil) {
+		data.HTTPSAutoCert = &CDNLoadBalancerHTTPSAutoCertModel{
+			AddHsts: func() types.Bool {
+				if !isImport && data.HTTPSAutoCert != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.HTTPSAutoCert.AddHsts
+				}
+				// Import case: read from API
+				if v, ok := blockData["add_hsts"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			HTTPRedirect: func() types.Bool {
+				if !isImport && data.HTTPSAutoCert != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.HTTPSAutoCert.HTTPRedirect
+				}
+				// Import case: read from API
+				if v, ok := blockData["http_redirect"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			TLSConfig: func() *CDNLoadBalancerHTTPSAutoCertTLSConfigModel {
+				if !isImport && data.HTTPSAutoCert != nil && data.HTTPSAutoCert.TLSConfig != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPSAutoCert.TLSConfig
+				}
+				// Import case: read from API
+				if _, ok := blockData["tls_config"].(map[string]interface{}); ok {
+					return &CDNLoadBalancerHTTPSAutoCertTLSConfigModel{
+					}
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["js_challenge"].(map[string]interface{}); ok && (isImport || data.JsChallenge != nil) {
+		data.JsChallenge = &CDNLoadBalancerJsChallengeModel{
+			CookieExpiry: func() types.Int64 {
+				if v, ok := blockData["cookie_expiry"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			CustomPage: func() types.String {
+				if v, ok := blockData["custom_page"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			JsScriptDelay: func() types.Int64 {
+				if v, ok := blockData["js_script_delay"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["jwt_validation"].(map[string]interface{}); ok && isImport && data.JwtValidation == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.JwtValidation = &CDNLoadBalancerJwtValidationModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["l7_ddos_action_block"].(map[string]interface{}); ok && isImport && data.L7DdosActionBlock == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.L7DdosActionBlock = &CDNLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["l7_ddos_action_default"].(map[string]interface{}); ok && isImport && data.L7DdosActionDefault == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.L7DdosActionDefault = &CDNLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["l7_ddos_action_js_challenge"].(map[string]interface{}); ok && (isImport || data.L7DdosActionJsChallenge != nil) {
+		data.L7DdosActionJsChallenge = &CDNLoadBalancerL7DdosActionJsChallengeModel{
+			CookieExpiry: func() types.Int64 {
+				if v, ok := blockData["cookie_expiry"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			CustomPage: func() types.String {
+				if v, ok := blockData["custom_page"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			JsScriptDelay: func() types.Int64 {
+				if v, ok := blockData["js_script_delay"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["no_challenge"].(map[string]interface{}); ok && isImport && data.NoChallenge == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoChallenge = &CDNLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_service_policies"].(map[string]interface{}); ok && isImport && data.NoServicePolicies == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoServicePolicies = &CDNLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["origin_pool"].(map[string]interface{}); ok && (isImport || data.OriginPool != nil) {
+		data.OriginPool = &CDNLoadBalancerOriginPoolModel{
+			MoreOriginOptions: func() *CDNLoadBalancerOriginPoolMoreOriginOptionsModel {
+				if !isImport && data.OriginPool != nil && data.OriginPool.MoreOriginOptions != nil {
+					// Normal Read: preserve existing state value
+					return data.OriginPool.MoreOriginOptions
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["more_origin_options"].(map[string]interface{}); ok {
+					return &CDNLoadBalancerOriginPoolMoreOriginOptionsModel{
+						EnableByteRangeRequest: func() types.Bool {
+							if v, ok := nestedBlockData["enable_byte_range_request"].(bool); ok {
+								return types.BoolValue(v)
+							}
+							return types.BoolNull()
+						}(),
+						WebsocketProxy: func() types.Bool {
+							if v, ok := nestedBlockData["websocket_proxy"].(bool); ok {
+								return types.BoolValue(v)
+							}
+							return types.BoolNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			NoTLS: func() *CDNLoadBalancerEmptyModel {
+				if !isImport && data.OriginPool != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.OriginPool.NoTLS
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_tls"].(map[string]interface{}); ok {
+					return &CDNLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			OriginRequestTimeout: func() types.String {
+				if v, ok := blockData["origin_request_timeout"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			OriginServers: func() []CDNLoadBalancerOriginPoolOriginServersModel {
+				if listData, ok := blockData["origin_servers"].([]interface{}); ok && len(listData) > 0 {
+					var result []CDNLoadBalancerOriginPoolOriginServersModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, CDNLoadBalancerOriginPoolOriginServersModel{
+								Port: func() types.Int64 {
+									if v, ok := itemMap["port"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								PublicIP: func() *CDNLoadBalancerOriginPoolOriginServersPublicIPModel {
+									if deepMap, ok := itemMap["public_ip"].(map[string]interface{}); ok {
+										return &CDNLoadBalancerOriginPoolOriginServersPublicIPModel{
+											IP: func() types.String {
+												if v, ok := deepMap["ip"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								PublicName: func() *CDNLoadBalancerOriginPoolOriginServersPublicNameModel {
+									if deepMap, ok := itemMap["public_name"].(map[string]interface{}); ok {
+										return &CDNLoadBalancerOriginPoolOriginServersPublicNameModel{
+											DNSName: func() types.String {
+												if v, ok := deepMap["dns_name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											RefreshInterval: func() types.Int64 {
+												if v, ok := deepMap["refresh_interval"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+										}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			PublicName: func() *CDNLoadBalancerOriginPoolPublicNameModel {
+				if !isImport && data.OriginPool != nil && data.OriginPool.PublicName != nil {
+					// Normal Read: preserve existing state value
+					return data.OriginPool.PublicName
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["public_name"].(map[string]interface{}); ok {
+					return &CDNLoadBalancerOriginPoolPublicNameModel{
+						DNSName: func() types.String {
+							if v, ok := nestedBlockData["dns_name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						RefreshInterval: func() types.Int64 {
+							if v, ok := nestedBlockData["refresh_interval"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			UseTLS: func() *CDNLoadBalancerOriginPoolUseTLSModel {
+				if !isImport && data.OriginPool != nil && data.OriginPool.UseTLS != nil {
+					// Normal Read: preserve existing state value
+					return data.OriginPool.UseTLS
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["use_tls"].(map[string]interface{}); ok {
+					return &CDNLoadBalancerOriginPoolUseTLSModel{
+						MaxSessionKeys: func() types.Int64 {
+							if v, ok := nestedBlockData["max_session_keys"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						Sni: func() types.String {
+							if v, ok := nestedBlockData["sni"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["other_settings"].(map[string]interface{}); ok && (isImport || data.OtherSettings != nil) {
+		data.OtherSettings = &CDNLoadBalancerOtherSettingsModel{
+			AddLocation: func() types.Bool {
+				if !isImport && data.OtherSettings != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.OtherSettings.AddLocation
+				}
+				// Import case: read from API
+				if v, ok := blockData["add_location"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			HeaderOptions: func() *CDNLoadBalancerOtherSettingsHeaderOptionsModel {
+				if !isImport && data.OtherSettings != nil && data.OtherSettings.HeaderOptions != nil {
+					// Normal Read: preserve existing state value
+					return data.OtherSettings.HeaderOptions
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["header_options"].(map[string]interface{}); ok {
+					return &CDNLoadBalancerOtherSettingsHeaderOptionsModel{
+						RequestHeadersToRemove: func() types.List {
+							if v, ok := nestedBlockData["request_headers_to_remove"].([]interface{}); ok && len(v) > 0 {
+								var items []string
+								for _, item := range v {
+									if s, ok := item.(string); ok {
+										items = append(items, s)
+									}
+								}
+								listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+								return listVal
+							}
+							return types.ListNull(types.StringType)
+						}(),
+						ResponseHeadersToRemove: func() types.List {
+							if v, ok := nestedBlockData["response_headers_to_remove"].([]interface{}); ok && len(v) > 0 {
+								var items []string
+								for _, item := range v {
+									if s, ok := item.(string); ok {
+										items = append(items, s)
+									}
+								}
+								listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+								return listVal
+							}
+							return types.ListNull(types.StringType)
+						}(),
+					}
+				}
+				return nil
+			}(),
+			LoggingOptions: func() *CDNLoadBalancerOtherSettingsLoggingOptionsModel {
+				if !isImport && data.OtherSettings != nil && data.OtherSettings.LoggingOptions != nil {
+					// Normal Read: preserve existing state value
+					return data.OtherSettings.LoggingOptions
+				}
+				// Import case: read from API
+				if _, ok := blockData["logging_options"].(map[string]interface{}); ok {
+					return &CDNLoadBalancerOtherSettingsLoggingOptionsModel{
+					}
+				}
+				return nil
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["policy_based_challenge"].(map[string]interface{}); ok && isImport && data.PolicyBasedChallenge == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.PolicyBasedChallenge = &CDNLoadBalancerPolicyBasedChallengeModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["protected_cookies"].([]interface{}); ok && len(listData) > 0 {
+		var protected_cookiesList []CDNLoadBalancerProtectedCookiesModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				protected_cookiesList = append(protected_cookiesList, CDNLoadBalancerProtectedCookiesModel{
+					AddHttponly: func() *CDNLoadBalancerEmptyModel {
+						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].AddHttponly != nil {
+							return &CDNLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					AddSecure: func() *CDNLoadBalancerEmptyModel {
+						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].AddSecure != nil {
+							return &CDNLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					DisableTamperingProtection: func() *CDNLoadBalancerEmptyModel {
+						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].DisableTamperingProtection != nil {
+							return &CDNLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					EnableTamperingProtection: func() *CDNLoadBalancerEmptyModel {
+						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].EnableTamperingProtection != nil {
+							return &CDNLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					IgnoreHttponly: func() *CDNLoadBalancerEmptyModel {
+						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].IgnoreHttponly != nil {
+							return &CDNLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					IgnoreMaxAge: func() *CDNLoadBalancerEmptyModel {
+						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].IgnoreMaxAge != nil {
+							return &CDNLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					IgnoreSamesite: func() *CDNLoadBalancerEmptyModel {
+						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].IgnoreSamesite != nil {
+							return &CDNLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					IgnoreSecure: func() *CDNLoadBalancerEmptyModel {
+						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].IgnoreSecure != nil {
+							return &CDNLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					MaxAgeValue: func() types.Int64 {
+						if v, ok := itemMap["max_age_value"].(float64); ok && v != 0 {
+							return types.Int64Value(int64(v))
+						}
+						return types.Int64Null()
+					}(),
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					SamesiteLax: func() *CDNLoadBalancerEmptyModel {
+						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].SamesiteLax != nil {
+							return &CDNLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					SamesiteNone: func() *CDNLoadBalancerEmptyModel {
+						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].SamesiteNone != nil {
+							return &CDNLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					SamesiteStrict: func() *CDNLoadBalancerEmptyModel {
+						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].SamesiteStrict != nil {
+							return &CDNLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+				})
+			}
+		}
+		data.ProtectedCookies = protected_cookiesList
+	}
+	if _, ok := apiResource.Spec["rate_limit"].(map[string]interface{}); ok && isImport && data.RateLimit == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.RateLimit = &CDNLoadBalancerRateLimitModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["sensitive_data_policy"].(map[string]interface{}); ok && isImport && data.SensitiveDataPolicy == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.SensitiveDataPolicy = &CDNLoadBalancerSensitiveDataPolicyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["service_policies_from_namespace"].(map[string]interface{}); ok && isImport && data.ServicePoliciesFromNamespace == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ServicePoliciesFromNamespace = &CDNLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["slow_ddos_mitigation"].(map[string]interface{}); ok && (isImport || data.SlowDdosMitigation != nil) {
+		data.SlowDdosMitigation = &CDNLoadBalancerSlowDdosMitigationModel{
+			DisableRequestTimeout: func() *CDNLoadBalancerEmptyModel {
+				if !isImport && data.SlowDdosMitigation != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.SlowDdosMitigation.DisableRequestTimeout
+				}
+				// Import case: read from API
+				if _, ok := blockData["disable_request_timeout"].(map[string]interface{}); ok {
+					return &CDNLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			RequestHeadersTimeout: func() types.Int64 {
+				if v, ok := blockData["request_headers_timeout"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			RequestTimeout: func() types.Int64 {
+				if v, ok := blockData["request_timeout"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["system_default_timeouts"].(map[string]interface{}); ok && isImport && data.SystemDefaultTimeouts == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.SystemDefaultTimeouts = &CDNLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["trusted_clients"].([]interface{}); ok && len(listData) > 0 {
+		var trusted_clientsList []CDNLoadBalancerTrustedClientsModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				trusted_clientsList = append(trusted_clientsList, CDNLoadBalancerTrustedClientsModel{
+					Actions: func() types.List {
+						if v, ok := itemMap["actions"].([]interface{}); ok && len(v) > 0 {
+							var items []string
+							for _, item := range v {
+								if s, ok := item.(string); ok {
+									items = append(items, s)
+								}
+							}
+							listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+							return listVal
+						}
+						return types.ListNull(types.StringType)
+					}(),
+					AsNumber: func() types.Int64 {
+						if v, ok := itemMap["as_number"].(float64); ok && v != 0 {
+							return types.Int64Value(int64(v))
+						}
+						return types.Int64Null()
+					}(),
+					BotSkipProcessing: func() *CDNLoadBalancerEmptyModel {
+						if !isImport && len(data.TrustedClients) > listIdx && data.TrustedClients[listIdx].BotSkipProcessing != nil {
+							return &CDNLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					ExpirationTimestamp: func() types.String {
+						if v, ok := itemMap["expiration_timestamp"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					HTTPHeader: func() *CDNLoadBalancerTrustedClientsHTTPHeaderModel {
+						if _, ok := itemMap["http_header"].(map[string]interface{}); ok {
+							return &CDNLoadBalancerTrustedClientsHTTPHeaderModel{
+							}
+						}
+						return nil
+					}(),
+					IPPrefix: func() types.String {
+						if v, ok := itemMap["ip_prefix"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					IPV6Prefix: func() types.String {
+						if v, ok := itemMap["ipv6_prefix"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Metadata: func() *CDNLoadBalancerTrustedClientsMetadataModel {
+						if nestedMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
+							return &CDNLoadBalancerTrustedClientsMetadataModel{
+								DescriptionSpec: func() types.String {
+									if v, ok := nestedMap["description"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Name: func() types.String {
+									if v, ok := nestedMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					SkipProcessing: func() *CDNLoadBalancerEmptyModel {
+						if !isImport && len(data.TrustedClients) > listIdx && data.TrustedClients[listIdx].SkipProcessing != nil {
+							return &CDNLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					UserIdentifier: func() types.String {
+						if v, ok := itemMap["user_identifier"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					WAFSkipProcessing: func() *CDNLoadBalancerEmptyModel {
+						if !isImport && len(data.TrustedClients) > listIdx && data.TrustedClients[listIdx].WAFSkipProcessing != nil {
+							return &CDNLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+				})
+			}
+		}
+		data.TrustedClients = trusted_clientsList
+	}
+	if _, ok := apiResource.Spec["user_id_client_ip"].(map[string]interface{}); ok && isImport && data.UserIDClientIP == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.UserIDClientIP = &CDNLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["user_identification"].(map[string]interface{}); ok && (isImport || data.UserIdentification != nil) {
+		data.UserIdentification = &CDNLoadBalancerUserIdentificationModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["waf_exclusion"].(map[string]interface{}); ok && isImport && data.WAFExclusion == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.WAFExclusion = &CDNLoadBalancerWAFExclusionModel{}
+	}
+	// Normal Read: preserve existing state value
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
@@ -9785,7 +11644,8 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 	}
 	if listData, ok := apiResource.Spec["blocked_clients"].([]interface{}); ok && len(listData) > 0 {
 		var blocked_clientsList []CDNLoadBalancerBlockedClientsModel
-		for _, item := range listData {
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				blocked_clientsList = append(blocked_clientsList, CDNLoadBalancerBlockedClientsModel{
 					Actions: func() types.List {
@@ -9808,7 +11668,7 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 						return types.Int64Null()
 					}(),
 					BotSkipProcessing: func() *CDNLoadBalancerEmptyModel {
-						if _, ok := itemMap["bot_skip_processing"].(map[string]interface{}); ok {
+						if !isImport && len(data.BlockedClients) > listIdx && data.BlockedClients[listIdx].BotSkipProcessing != nil {
 							return &CDNLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -9858,7 +11718,7 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 						return nil
 					}(),
 					SkipProcessing: func() *CDNLoadBalancerEmptyModel {
-						if _, ok := itemMap["skip_processing"].(map[string]interface{}); ok {
+						if !isImport && len(data.BlockedClients) > listIdx && data.BlockedClients[listIdx].SkipProcessing != nil {
 							return &CDNLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -9870,7 +11730,7 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 						return types.StringNull()
 					}(),
 					WAFSkipProcessing: func() *CDNLoadBalancerEmptyModel {
-						if _, ok := itemMap["waf_skip_processing"].(map[string]interface{}); ok {
+						if !isImport && len(data.BlockedClients) > listIdx && data.BlockedClients[listIdx].WAFSkipProcessing != nil {
 							return &CDNLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -10083,17 +11943,18 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 	}
 	if listData, ok := apiResource.Spec["data_guard_rules"].([]interface{}); ok && len(listData) > 0 {
 		var data_guard_rulesList []CDNLoadBalancerDataGuardRulesModel
-		for _, item := range listData {
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				data_guard_rulesList = append(data_guard_rulesList, CDNLoadBalancerDataGuardRulesModel{
 					AnyDomain: func() *CDNLoadBalancerEmptyModel {
-						if _, ok := itemMap["any_domain"].(map[string]interface{}); ok {
+						if !isImport && len(data.DataGuardRules) > listIdx && data.DataGuardRules[listIdx].AnyDomain != nil {
 							return &CDNLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
 					ApplyDataGuard: func() *CDNLoadBalancerEmptyModel {
-						if _, ok := itemMap["apply_data_guard"].(map[string]interface{}); ok {
+						if !isImport && len(data.DataGuardRules) > listIdx && data.DataGuardRules[listIdx].ApplyDataGuard != nil {
 							return &CDNLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -10149,7 +12010,7 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 						return nil
 					}(),
 					SkipDataGuard: func() *CDNLoadBalancerEmptyModel {
-						if _, ok := itemMap["skip_data_guard"].(map[string]interface{}); ok {
+						if !isImport && len(data.DataGuardRules) > listIdx && data.DataGuardRules[listIdx].SkipDataGuard != nil {
 							return &CDNLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -10167,11 +12028,12 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 	}
 	if listData, ok := apiResource.Spec["ddos_mitigation_rules"].([]interface{}); ok && len(listData) > 0 {
 		var ddos_mitigation_rulesList []CDNLoadBalancerDdosMitigationRulesModel
-		for _, item := range listData {
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				ddos_mitigation_rulesList = append(ddos_mitigation_rulesList, CDNLoadBalancerDdosMitigationRulesModel{
 					Block: func() *CDNLoadBalancerEmptyModel {
-						if _, ok := itemMap["block"].(map[string]interface{}); ok {
+						if !isImport && len(data.DdosMitigationRules) > listIdx && data.DdosMitigationRules[listIdx].Block != nil {
 							return &CDNLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -10379,11 +12241,12 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["graphql_rules"].([]interface{}); ok && len(listData) > 0 {
 		var graphql_rulesList []CDNLoadBalancerGraphqlRulesModel
-		for _, item := range listData {
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				graphql_rulesList = append(graphql_rulesList, CDNLoadBalancerGraphqlRulesModel{
 					AnyDomain: func() *CDNLoadBalancerEmptyModel {
-						if _, ok := itemMap["any_domain"].(map[string]interface{}); ok {
+						if !isImport && len(data.GraphqlRules) > listIdx && data.GraphqlRules[listIdx].AnyDomain != nil {
 							return &CDNLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -10403,6 +12266,18 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 					GraphqlSettings: func() *CDNLoadBalancerGraphqlRulesGraphqlSettingsModel {
 						if nestedMap, ok := itemMap["graphql_settings"].(map[string]interface{}); ok {
 							return &CDNLoadBalancerGraphqlRulesGraphqlSettingsModel{
+								DisableIntrospection: func() *CDNLoadBalancerEmptyModel {
+									if !isImport && len(data.GraphqlRules) > listIdx && data.GraphqlRules[listIdx].GraphqlSettings != nil && data.GraphqlRules[listIdx].GraphqlSettings.DisableIntrospection != nil {
+										return &CDNLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								EnableIntrospection: func() *CDNLoadBalancerEmptyModel {
+									if !isImport && len(data.GraphqlRules) > listIdx && data.GraphqlRules[listIdx].GraphqlSettings != nil && data.GraphqlRules[listIdx].GraphqlSettings.EnableIntrospection != nil {
+										return &CDNLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
 								MaxBatchedQueries: func() types.Int64 {
 									if v, ok := nestedMap["max_batched_queries"].(float64); ok && v != 0 {
 										return types.Int64Value(int64(v))
@@ -10445,13 +12320,13 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 						return nil
 					}(),
 					MethodGet: func() *CDNLoadBalancerEmptyModel {
-						if _, ok := itemMap["method_get"].(map[string]interface{}); ok {
+						if !isImport && len(data.GraphqlRules) > listIdx && data.GraphqlRules[listIdx].MethodGet != nil {
 							return &CDNLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
 					MethodPost: func() *CDNLoadBalancerEmptyModel {
-						if _, ok := itemMap["method_post"].(map[string]interface{}); ok {
+						if !isImport && len(data.GraphqlRules) > listIdx && data.GraphqlRules[listIdx].MethodPost != nil {
 							return &CDNLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -10856,53 +12731,54 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["protected_cookies"].([]interface{}); ok && len(listData) > 0 {
 		var protected_cookiesList []CDNLoadBalancerProtectedCookiesModel
-		for _, item := range listData {
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				protected_cookiesList = append(protected_cookiesList, CDNLoadBalancerProtectedCookiesModel{
 					AddHttponly: func() *CDNLoadBalancerEmptyModel {
-						if _, ok := itemMap["add_httponly"].(map[string]interface{}); ok {
+						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].AddHttponly != nil {
 							return &CDNLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
 					AddSecure: func() *CDNLoadBalancerEmptyModel {
-						if _, ok := itemMap["add_secure"].(map[string]interface{}); ok {
+						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].AddSecure != nil {
 							return &CDNLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
 					DisableTamperingProtection: func() *CDNLoadBalancerEmptyModel {
-						if _, ok := itemMap["disable_tampering_protection"].(map[string]interface{}); ok {
+						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].DisableTamperingProtection != nil {
 							return &CDNLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
 					EnableTamperingProtection: func() *CDNLoadBalancerEmptyModel {
-						if _, ok := itemMap["enable_tampering_protection"].(map[string]interface{}); ok {
+						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].EnableTamperingProtection != nil {
 							return &CDNLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
 					IgnoreHttponly: func() *CDNLoadBalancerEmptyModel {
-						if _, ok := itemMap["ignore_httponly"].(map[string]interface{}); ok {
+						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].IgnoreHttponly != nil {
 							return &CDNLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
 					IgnoreMaxAge: func() *CDNLoadBalancerEmptyModel {
-						if _, ok := itemMap["ignore_max_age"].(map[string]interface{}); ok {
+						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].IgnoreMaxAge != nil {
 							return &CDNLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
 					IgnoreSamesite: func() *CDNLoadBalancerEmptyModel {
-						if _, ok := itemMap["ignore_samesite"].(map[string]interface{}); ok {
+						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].IgnoreSamesite != nil {
 							return &CDNLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
 					IgnoreSecure: func() *CDNLoadBalancerEmptyModel {
-						if _, ok := itemMap["ignore_secure"].(map[string]interface{}); ok {
+						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].IgnoreSecure != nil {
 							return &CDNLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -10920,19 +12796,19 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 						return types.StringNull()
 					}(),
 					SamesiteLax: func() *CDNLoadBalancerEmptyModel {
-						if _, ok := itemMap["samesite_lax"].(map[string]interface{}); ok {
+						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].SamesiteLax != nil {
 							return &CDNLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
 					SamesiteNone: func() *CDNLoadBalancerEmptyModel {
-						if _, ok := itemMap["samesite_none"].(map[string]interface{}); ok {
+						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].SamesiteNone != nil {
 							return &CDNLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
 					SamesiteStrict: func() *CDNLoadBalancerEmptyModel {
-						if _, ok := itemMap["samesite_strict"].(map[string]interface{}); ok {
+						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].SamesiteStrict != nil {
 							return &CDNLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -10992,7 +12868,8 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["trusted_clients"].([]interface{}); ok && len(listData) > 0 {
 		var trusted_clientsList []CDNLoadBalancerTrustedClientsModel
-		for _, item := range listData {
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				trusted_clientsList = append(trusted_clientsList, CDNLoadBalancerTrustedClientsModel{
 					Actions: func() types.List {
@@ -11015,7 +12892,7 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 						return types.Int64Null()
 					}(),
 					BotSkipProcessing: func() *CDNLoadBalancerEmptyModel {
-						if _, ok := itemMap["bot_skip_processing"].(map[string]interface{}); ok {
+						if !isImport && len(data.TrustedClients) > listIdx && data.TrustedClients[listIdx].BotSkipProcessing != nil {
 							return &CDNLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -11065,7 +12942,7 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 						return nil
 					}(),
 					SkipProcessing: func() *CDNLoadBalancerEmptyModel {
-						if _, ok := itemMap["skip_processing"].(map[string]interface{}); ok {
+						if !isImport && len(data.TrustedClients) > listIdx && data.TrustedClients[listIdx].SkipProcessing != nil {
 							return &CDNLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -11077,7 +12954,7 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 						return types.StringNull()
 					}(),
 					WAFSkipProcessing: func() *CDNLoadBalancerEmptyModel {
-						if _, ok := itemMap["waf_skip_processing"].(map[string]interface{}); ok {
+						if !isImport && len(data.TrustedClients) > listIdx && data.TrustedClients[listIdx].WAFSkipProcessing != nil {
 							return &CDNLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -11400,6 +13277,29 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 			}
 			if item.HTTPHeader != nil {
 				http_headerNestedMap := make(map[string]interface{})
+				if len(item.HTTPHeader.Headers) > 0 {
+					var headersDeepList []map[string]interface{}
+					for _, deepListItem := range item.HTTPHeader.Headers {
+						deepListItemMap := make(map[string]interface{})
+						if !deepListItem.Exact.IsNull() && !deepListItem.Exact.IsUnknown() {
+							deepListItemMap["exact"] = deepListItem.Exact.ValueString()
+						}
+						if !deepListItem.InvertMatch.IsNull() && !deepListItem.InvertMatch.IsUnknown() {
+							deepListItemMap["invert_match"] = deepListItem.InvertMatch.ValueBool()
+						}
+						if !deepListItem.Name.IsNull() && !deepListItem.Name.IsUnknown() {
+							deepListItemMap["name"] = deepListItem.Name.ValueString()
+						}
+						if !deepListItem.Presence.IsNull() && !deepListItem.Presence.IsUnknown() {
+							deepListItemMap["presence"] = deepListItem.Presence.ValueBool()
+						}
+						if !deepListItem.Regex.IsNull() && !deepListItem.Regex.IsUnknown() {
+							deepListItemMap["regex"] = deepListItem.Regex.ValueString()
+						}
+						headersDeepList = append(headersDeepList, deepListItemMap)
+					}
+					http_headerNestedMap["headers"] = headersDeepList
+				}
 				itemMap["http_header"] = http_headerNestedMap
 			}
 			if !item.IPPrefix.IsNull() && !item.IPPrefix.IsUnknown() {
@@ -11601,12 +13501,52 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 			}
 			if item.DdosClientSource != nil {
 				ddos_client_sourceNestedMap := make(map[string]interface{})
+				if item.DdosClientSource.AsnList != nil {
+					asn_listDeepMap := make(map[string]interface{})
+					ddos_client_sourceNestedMap["asn_list"] = asn_listDeepMap
+				}
 				if !item.DdosClientSource.CountryList.IsNull() && !item.DdosClientSource.CountryList.IsUnknown() {
 					var CountryListItems []string
 					diags := item.DdosClientSource.CountryList.ElementsAs(ctx, &CountryListItems, false)
 					if !diags.HasError() {
 						ddos_client_sourceNestedMap["country_list"] = CountryListItems
 					}
+				}
+				if item.DdosClientSource.Ja4TLSFingerprintMatcher != nil {
+					ja4_tls_fingerprint_matcherDeepMap := make(map[string]interface{})
+					if !item.DdosClientSource.Ja4TLSFingerprintMatcher.ExactValues.IsNull() && !item.DdosClientSource.Ja4TLSFingerprintMatcher.ExactValues.IsUnknown() {
+						var ExactValuesItems []string
+						diags := item.DdosClientSource.Ja4TLSFingerprintMatcher.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
+						if !diags.HasError() {
+							ja4_tls_fingerprint_matcherDeepMap["exact_values"] = ExactValuesItems
+						}
+					}
+					ddos_client_sourceNestedMap["ja4_tls_fingerprint_matcher"] = ja4_tls_fingerprint_matcherDeepMap
+				}
+				if item.DdosClientSource.TLSFingerprintMatcher != nil {
+					tls_fingerprint_matcherDeepMap := make(map[string]interface{})
+					if !item.DdosClientSource.TLSFingerprintMatcher.Classes.IsNull() && !item.DdosClientSource.TLSFingerprintMatcher.Classes.IsUnknown() {
+						var ClassesItems []string
+						diags := item.DdosClientSource.TLSFingerprintMatcher.Classes.ElementsAs(ctx, &ClassesItems, false)
+						if !diags.HasError() {
+							tls_fingerprint_matcherDeepMap["classes"] = ClassesItems
+						}
+					}
+					if !item.DdosClientSource.TLSFingerprintMatcher.ExactValues.IsNull() && !item.DdosClientSource.TLSFingerprintMatcher.ExactValues.IsUnknown() {
+						var ExactValuesItems []string
+						diags := item.DdosClientSource.TLSFingerprintMatcher.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
+						if !diags.HasError() {
+							tls_fingerprint_matcherDeepMap["exact_values"] = ExactValuesItems
+						}
+					}
+					if !item.DdosClientSource.TLSFingerprintMatcher.ExcludedValues.IsNull() && !item.DdosClientSource.TLSFingerprintMatcher.ExcludedValues.IsUnknown() {
+						var ExcludedValuesItems []string
+						diags := item.DdosClientSource.TLSFingerprintMatcher.ExcludedValues.ElementsAs(ctx, &ExcludedValuesItems, false)
+						if !diags.HasError() {
+							tls_fingerprint_matcherDeepMap["excluded_values"] = ExcludedValuesItems
+						}
+					}
+					ddos_client_sourceNestedMap["tls_fingerprint_matcher"] = tls_fingerprint_matcherDeepMap
 				}
 				itemMap["ddos_client_source"] = ddos_client_sourceNestedMap
 			}
@@ -11812,6 +13752,12 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 			}
 			if item.GraphqlSettings != nil {
 				graphql_settingsNestedMap := make(map[string]interface{})
+				if item.GraphqlSettings.DisableIntrospection != nil {
+					graphql_settingsNestedMap["disable_introspection"] = map[string]interface{}{}
+				}
+				if item.GraphqlSettings.EnableIntrospection != nil {
+					graphql_settingsNestedMap["enable_introspection"] = map[string]interface{}{}
+				}
 				if !item.GraphqlSettings.MaxBatchedQueries.IsNull() && !item.GraphqlSettings.MaxBatchedQueries.IsUnknown() {
 					graphql_settingsNestedMap["max_batched_queries"] = item.GraphqlSettings.MaxBatchedQueries.ValueInt64()
 				}
@@ -12256,6 +14202,29 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 			}
 			if item.HTTPHeader != nil {
 				http_headerNestedMap := make(map[string]interface{})
+				if len(item.HTTPHeader.Headers) > 0 {
+					var headersDeepList []map[string]interface{}
+					for _, deepListItem := range item.HTTPHeader.Headers {
+						deepListItemMap := make(map[string]interface{})
+						if !deepListItem.Exact.IsNull() && !deepListItem.Exact.IsUnknown() {
+							deepListItemMap["exact"] = deepListItem.Exact.ValueString()
+						}
+						if !deepListItem.InvertMatch.IsNull() && !deepListItem.InvertMatch.IsUnknown() {
+							deepListItemMap["invert_match"] = deepListItem.InvertMatch.ValueBool()
+						}
+						if !deepListItem.Name.IsNull() && !deepListItem.Name.IsUnknown() {
+							deepListItemMap["name"] = deepListItem.Name.ValueString()
+						}
+						if !deepListItem.Presence.IsNull() && !deepListItem.Presence.IsUnknown() {
+							deepListItemMap["presence"] = deepListItem.Presence.ValueBool()
+						}
+						if !deepListItem.Regex.IsNull() && !deepListItem.Regex.IsUnknown() {
+							deepListItemMap["regex"] = deepListItem.Regex.ValueString()
+						}
+						headersDeepList = append(headersDeepList, deepListItemMap)
+					}
+					http_headerNestedMap["headers"] = headersDeepList
+				}
 				itemMap["http_header"] = http_headerNestedMap
 			}
 			if !item.IPPrefix.IsNull() && !item.IPPrefix.IsUnknown() {

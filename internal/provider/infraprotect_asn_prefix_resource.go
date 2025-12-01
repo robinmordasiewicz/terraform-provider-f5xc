@@ -153,6 +153,7 @@ func (r *InfraprotectAsnPrefixResource) Schema(ctx context.Context, req resource
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional: true,
+						Computed: true,
 					},
 				},
 
@@ -274,7 +275,7 @@ func (r *InfraprotectAsnPrefixResource) Create(ctx context.Context, req resource
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.InfraprotectAsnPrefix{
+	createReq := &client.InfraprotectAsnPrefix{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -283,7 +284,7 @@ func (r *InfraprotectAsnPrefixResource) Create(ctx context.Context, req resource
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -292,7 +293,7 @@ func (r *InfraprotectAsnPrefixResource) Create(ctx context.Context, req resource
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -301,7 +302,7 @@ func (r *InfraprotectAsnPrefixResource) Create(ctx context.Context, req resource
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -316,34 +317,58 @@ func (r *InfraprotectAsnPrefixResource) Create(ctx context.Context, req resource
 		if !data.Asn.Tenant.IsNull() && !data.Asn.Tenant.IsUnknown() {
 			asnMap["tenant"] = data.Asn.Tenant.ValueString()
 		}
-		apiResource.Spec["asn"] = asnMap
+		createReq.Spec["asn"] = asnMap
 	}
 	if !data.Prefix.IsNull() && !data.Prefix.IsUnknown() {
-		apiResource.Spec["prefix"] = data.Prefix.ValueString()
+		createReq.Spec["prefix"] = data.Prefix.ValueString()
 	}
 
 
-	created, err := r.client.CreateInfraprotectAsnPrefix(ctx, apiResource)
+	apiResource, err := r.client.CreateInfraprotectAsnPrefix(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create InfraprotectAsnPrefix: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
-	if v, ok := created.Spec["prefix"].(string); ok && v != "" {
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["asn"].(map[string]interface{}); ok && (isImport || data.Asn != nil) {
+		data.Asn = &InfraprotectAsnPrefixAsnModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if v, ok := apiResource.Spec["prefix"].(string); ok && v != "" {
 		data.Prefix = types.StringValue(v)
-	} else if data.Prefix.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.Prefix = types.StringNull()
 	}
-	// If plan had a value, preserve it
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 

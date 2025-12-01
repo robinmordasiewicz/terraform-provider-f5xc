@@ -257,7 +257,7 @@ func (r *InfraprotectAsnResource) Create(ctx context.Context, req resource.Creat
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.InfraprotectAsn{
+	createReq := &client.InfraprotectAsn{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -266,7 +266,7 @@ func (r *InfraprotectAsnResource) Create(ctx context.Context, req resource.Creat
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -275,7 +275,7 @@ func (r *InfraprotectAsnResource) Create(ctx context.Context, req resource.Creat
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -284,44 +284,56 @@ func (r *InfraprotectAsnResource) Create(ctx context.Context, req resource.Creat
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
 	if data.BGPSessionDisabled != nil {
 		bgp_session_disabledMap := make(map[string]interface{})
-		apiResource.Spec["bgp_session_disabled"] = bgp_session_disabledMap
+		createReq.Spec["bgp_session_disabled"] = bgp_session_disabledMap
 	}
 	if data.BGPSessionEnabled != nil {
 		bgp_session_enabledMap := make(map[string]interface{})
-		apiResource.Spec["bgp_session_enabled"] = bgp_session_enabledMap
+		createReq.Spec["bgp_session_enabled"] = bgp_session_enabledMap
 	}
 	if !data.Asn.IsNull() && !data.Asn.IsUnknown() {
-		apiResource.Spec["asn"] = data.Asn.ValueInt64()
+		createReq.Spec["asn"] = data.Asn.ValueInt64()
 	}
 
 
-	created, err := r.client.CreateInfraprotectAsn(ctx, apiResource)
+	apiResource, err := r.client.CreateInfraprotectAsn(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create InfraprotectAsn: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
-	if v, ok := created.Spec["asn"].(float64); ok {
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if _, ok := apiResource.Spec["bgp_session_disabled"].(map[string]interface{}); ok && isImport && data.BGPSessionDisabled == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.BGPSessionDisabled = &InfraprotectAsnEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["bgp_session_enabled"].(map[string]interface{}); ok && isImport && data.BGPSessionEnabled == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.BGPSessionEnabled = &InfraprotectAsnEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["asn"].(float64); ok {
 		data.Asn = types.Int64Value(int64(v))
-	} else if data.Asn.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.Asn = types.Int64Null()
 	}
-	// If plan had a value, preserve it
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 

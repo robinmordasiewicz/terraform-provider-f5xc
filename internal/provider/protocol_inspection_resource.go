@@ -174,6 +174,7 @@ func (r *ProtocolInspectionResource) Schema(ctx context.Context, req resource.Sc
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
+								Computed: true,
 							},
 						},
 					},
@@ -311,7 +312,7 @@ func (r *ProtocolInspectionResource) Create(ctx context.Context, req resource.Cr
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.ProtocolInspection{
+	createReq := &client.ProtocolInspection{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -320,7 +321,7 @@ func (r *ProtocolInspectionResource) Create(ctx context.Context, req resource.Cr
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -329,7 +330,7 @@ func (r *ProtocolInspectionResource) Create(ctx context.Context, req resource.Cr
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -338,7 +339,7 @@ func (r *ProtocolInspectionResource) Create(ctx context.Context, req resource.Cr
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -360,7 +361,7 @@ func (r *ProtocolInspectionResource) Create(ctx context.Context, req resource.Cr
 			}
 			enable_disable_compliance_checksMap["enable_compliance_checks"] = enable_compliance_checksNestedMap
 		}
-		apiResource.Spec["enable_disable_compliance_checks"] = enable_disable_compliance_checksMap
+		createReq.Spec["enable_disable_compliance_checks"] = enable_disable_compliance_checksMap
 	}
 	if data.EnableDisableSignatures != nil {
 		enable_disable_signaturesMap := make(map[string]interface{})
@@ -370,34 +371,46 @@ func (r *ProtocolInspectionResource) Create(ctx context.Context, req resource.Cr
 		if data.EnableDisableSignatures.EnableSignature != nil {
 			enable_disable_signaturesMap["enable_signature"] = map[string]interface{}{}
 		}
-		apiResource.Spec["enable_disable_signatures"] = enable_disable_signaturesMap
+		createReq.Spec["enable_disable_signatures"] = enable_disable_signaturesMap
 	}
 	if !data.Action.IsNull() && !data.Action.IsUnknown() {
-		apiResource.Spec["action"] = data.Action.ValueString()
+		createReq.Spec["action"] = data.Action.ValueString()
 	}
 
 
-	created, err := r.client.CreateProtocolInspection(ctx, apiResource)
+	apiResource, err := r.client.CreateProtocolInspection(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create ProtocolInspection: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
-	if v, ok := created.Spec["action"].(string); ok && v != "" {
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if _, ok := apiResource.Spec["enable_disable_compliance_checks"].(map[string]interface{}); ok && isImport && data.EnableDisableComplianceChecks == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.EnableDisableComplianceChecks = &ProtocolInspectionEnableDisableComplianceChecksModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["enable_disable_signatures"].(map[string]interface{}); ok && isImport && data.EnableDisableSignatures == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.EnableDisableSignatures = &ProtocolInspectionEnableDisableSignaturesModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["action"].(string); ok && v != "" {
 		data.Action = types.StringValue(v)
-	} else if data.Action.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.Action = types.StringNull()
 	}
-	// If plan had a value, preserve it
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 

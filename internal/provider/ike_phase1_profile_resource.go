@@ -335,7 +335,7 @@ func (r *IKEPhase1ProfileResource) Create(ctx context.Context, req resource.Crea
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.IKEPhase1Profile{
+	createReq := &client.IKEPhase1Profile{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -344,7 +344,7 @@ func (r *IKEPhase1ProfileResource) Create(ctx context.Context, req resource.Crea
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -353,7 +353,7 @@ func (r *IKEPhase1ProfileResource) Create(ctx context.Context, req resource.Crea
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -362,7 +362,7 @@ func (r *IKEPhase1ProfileResource) Create(ctx context.Context, req resource.Crea
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -370,21 +370,21 @@ func (r *IKEPhase1ProfileResource) Create(ctx context.Context, req resource.Crea
 		var authentication_algosList []string
 		resp.Diagnostics.Append(data.AuthenticationAlgos.ElementsAs(ctx, &authentication_algosList, false)...)
 		if !resp.Diagnostics.HasError() {
-			apiResource.Spec["authentication_algos"] = authentication_algosList
+			createReq.Spec["authentication_algos"] = authentication_algosList
 		}
 	}
 	if !data.DhGroup.IsNull() && !data.DhGroup.IsUnknown() {
 		var dh_groupList []string
 		resp.Diagnostics.Append(data.DhGroup.ElementsAs(ctx, &dh_groupList, false)...)
 		if !resp.Diagnostics.HasError() {
-			apiResource.Spec["dh_group"] = dh_groupList
+			createReq.Spec["dh_group"] = dh_groupList
 		}
 	}
 	if !data.EncryptionAlgos.IsNull() && !data.EncryptionAlgos.IsUnknown() {
 		var encryption_algosList []string
 		resp.Diagnostics.Append(data.EncryptionAlgos.ElementsAs(ctx, &encryption_algosList, false)...)
 		if !resp.Diagnostics.HasError() {
-			apiResource.Spec["encryption_algos"] = encryption_algosList
+			createReq.Spec["encryption_algos"] = encryption_algosList
 		}
 	}
 	if data.IKEKeylifetimeHours != nil {
@@ -392,60 +392,174 @@ func (r *IKEPhase1ProfileResource) Create(ctx context.Context, req resource.Crea
 		if !data.IKEKeylifetimeHours.Duration.IsNull() && !data.IKEKeylifetimeHours.Duration.IsUnknown() {
 			ike_keylifetime_hoursMap["duration"] = data.IKEKeylifetimeHours.Duration.ValueInt64()
 		}
-		apiResource.Spec["ike_keylifetime_hours"] = ike_keylifetime_hoursMap
+		createReq.Spec["ike_keylifetime_hours"] = ike_keylifetime_hoursMap
 	}
 	if data.IKEKeylifetimeMinutes != nil {
 		ike_keylifetime_minutesMap := make(map[string]interface{})
 		if !data.IKEKeylifetimeMinutes.Duration.IsNull() && !data.IKEKeylifetimeMinutes.Duration.IsUnknown() {
 			ike_keylifetime_minutesMap["duration"] = data.IKEKeylifetimeMinutes.Duration.ValueInt64()
 		}
-		apiResource.Spec["ike_keylifetime_minutes"] = ike_keylifetime_minutesMap
+		createReq.Spec["ike_keylifetime_minutes"] = ike_keylifetime_minutesMap
 	}
 	if !data.Prf.IsNull() && !data.Prf.IsUnknown() {
 		var prfList []string
 		resp.Diagnostics.Append(data.Prf.ElementsAs(ctx, &prfList, false)...)
 		if !resp.Diagnostics.HasError() {
-			apiResource.Spec["prf"] = prfList
+			createReq.Spec["prf"] = prfList
 		}
 	}
 	if data.ReauthDisabled != nil {
 		reauth_disabledMap := make(map[string]interface{})
-		apiResource.Spec["reauth_disabled"] = reauth_disabledMap
+		createReq.Spec["reauth_disabled"] = reauth_disabledMap
 	}
 	if data.ReauthTimeoutDays != nil {
 		reauth_timeout_daysMap := make(map[string]interface{})
 		if !data.ReauthTimeoutDays.Duration.IsNull() && !data.ReauthTimeoutDays.Duration.IsUnknown() {
 			reauth_timeout_daysMap["duration"] = data.ReauthTimeoutDays.Duration.ValueInt64()
 		}
-		apiResource.Spec["reauth_timeout_days"] = reauth_timeout_daysMap
+		createReq.Spec["reauth_timeout_days"] = reauth_timeout_daysMap
 	}
 	if data.ReauthTimeoutHours != nil {
 		reauth_timeout_hoursMap := make(map[string]interface{})
 		if !data.ReauthTimeoutHours.Duration.IsNull() && !data.ReauthTimeoutHours.Duration.IsUnknown() {
 			reauth_timeout_hoursMap["duration"] = data.ReauthTimeoutHours.Duration.ValueInt64()
 		}
-		apiResource.Spec["reauth_timeout_hours"] = reauth_timeout_hoursMap
+		createReq.Spec["reauth_timeout_hours"] = reauth_timeout_hoursMap
 	}
 	if data.UseDefaultKeylifetime != nil {
 		use_default_keylifetimeMap := make(map[string]interface{})
-		apiResource.Spec["use_default_keylifetime"] = use_default_keylifetimeMap
+		createReq.Spec["use_default_keylifetime"] = use_default_keylifetimeMap
 	}
 
 
-	created, err := r.client.CreateIKEPhase1Profile(ctx, apiResource)
+	apiResource, err := r.client.CreateIKEPhase1Profile(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create IKEPhase1Profile: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if v, ok := apiResource.Spec["authentication_algos"].([]interface{}); ok && len(v) > 0 {
+		var authentication_algosList []string
+		for _, item := range v {
+			if s, ok := item.(string); ok {
+				authentication_algosList = append(authentication_algosList, s)
+			}
+		}
+		listVal, diags := types.ListValueFrom(ctx, types.StringType, authentication_algosList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.AuthenticationAlgos = listVal
+		}
+	} else {
+		data.AuthenticationAlgos = types.ListNull(types.StringType)
+	}
+	if v, ok := apiResource.Spec["dh_group"].([]interface{}); ok && len(v) > 0 {
+		var dh_groupList []string
+		for _, item := range v {
+			if s, ok := item.(string); ok {
+				dh_groupList = append(dh_groupList, s)
+			}
+		}
+		listVal, diags := types.ListValueFrom(ctx, types.StringType, dh_groupList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.DhGroup = listVal
+		}
+	} else {
+		data.DhGroup = types.ListNull(types.StringType)
+	}
+	if v, ok := apiResource.Spec["encryption_algos"].([]interface{}); ok && len(v) > 0 {
+		var encryption_algosList []string
+		for _, item := range v {
+			if s, ok := item.(string); ok {
+				encryption_algosList = append(encryption_algosList, s)
+			}
+		}
+		listVal, diags := types.ListValueFrom(ctx, types.StringType, encryption_algosList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.EncryptionAlgos = listVal
+		}
+	} else {
+		data.EncryptionAlgos = types.ListNull(types.StringType)
+	}
+	if blockData, ok := apiResource.Spec["ike_keylifetime_hours"].(map[string]interface{}); ok && (isImport || data.IKEKeylifetimeHours != nil) {
+		data.IKEKeylifetimeHours = &IKEPhase1ProfileIKEKeylifetimeHoursModel{
+			Duration: func() types.Int64 {
+				if v, ok := blockData["duration"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["ike_keylifetime_minutes"].(map[string]interface{}); ok && (isImport || data.IKEKeylifetimeMinutes != nil) {
+		data.IKEKeylifetimeMinutes = &IKEPhase1ProfileIKEKeylifetimeMinutesModel{
+			Duration: func() types.Int64 {
+				if v, ok := blockData["duration"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if v, ok := apiResource.Spec["prf"].([]interface{}); ok && len(v) > 0 {
+		var prfList []string
+		for _, item := range v {
+			if s, ok := item.(string); ok {
+				prfList = append(prfList, s)
+			}
+		}
+		listVal, diags := types.ListValueFrom(ctx, types.StringType, prfList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Prf = listVal
+		}
+	} else {
+		data.Prf = types.ListNull(types.StringType)
+	}
+	if _, ok := apiResource.Spec["reauth_disabled"].(map[string]interface{}); ok && isImport && data.ReauthDisabled == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ReauthDisabled = &IKEPhase1ProfileEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["reauth_timeout_days"].(map[string]interface{}); ok && (isImport || data.ReauthTimeoutDays != nil) {
+		data.ReauthTimeoutDays = &IKEPhase1ProfileReauthTimeoutDaysModel{
+			Duration: func() types.Int64 {
+				if v, ok := blockData["duration"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["reauth_timeout_hours"].(map[string]interface{}); ok && (isImport || data.ReauthTimeoutHours != nil) {
+		data.ReauthTimeoutHours = &IKEPhase1ProfileReauthTimeoutHoursModel{
+			Duration: func() types.Int64 {
+				if v, ok := blockData["duration"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["use_default_keylifetime"].(map[string]interface{}); ok && isImport && data.UseDefaultKeylifetime == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.UseDefaultKeylifetime = &IKEPhase1ProfileEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 

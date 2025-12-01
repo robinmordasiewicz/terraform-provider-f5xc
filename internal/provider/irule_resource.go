@@ -253,7 +253,7 @@ func (r *IruleResource) Create(ctx context.Context, req resource.CreateRequest, 
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.Irule{
+	createReq := &client.Irule{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -262,7 +262,7 @@ func (r *IruleResource) Create(ctx context.Context, req resource.CreateRequest, 
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -271,7 +271,7 @@ func (r *IruleResource) Create(ctx context.Context, req resource.CreateRequest, 
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -280,46 +280,46 @@ func (r *IruleResource) Create(ctx context.Context, req resource.CreateRequest, 
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
 	if !data.DescriptionSpec.IsNull() && !data.DescriptionSpec.IsUnknown() {
-		apiResource.Spec["description"] = data.DescriptionSpec.ValueString()
+		createReq.Spec["description"] = data.DescriptionSpec.ValueString()
 	}
 	if !data.Irule.IsNull() && !data.Irule.IsUnknown() {
-		apiResource.Spec["irule"] = data.Irule.ValueString()
+		createReq.Spec["irule"] = data.Irule.ValueString()
 	}
 
 
-	created, err := r.client.CreateIrule(ctx, apiResource)
+	apiResource, err := r.client.CreateIrule(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create Irule: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
-	if v, ok := created.Spec["description"].(string); ok && v != "" {
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if v, ok := apiResource.Spec["description"].(string); ok && v != "" {
 		data.DescriptionSpec = types.StringValue(v)
-	} else if data.DescriptionSpec.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.DescriptionSpec = types.StringNull()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["irule"].(string); ok && v != "" {
+	if v, ok := apiResource.Spec["irule"].(string); ok && v != "" {
 		data.Irule = types.StringValue(v)
-	} else if data.Irule.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.Irule = types.StringNull()
 	}
-	// If plan had a value, preserve it
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 

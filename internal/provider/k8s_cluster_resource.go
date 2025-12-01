@@ -401,6 +401,7 @@ func (r *K8SClusterResource) Schema(ctx context.Context, req resource.SchemaRequ
 								"tenant": schema.StringAttribute{
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional: true,
+									Computed: true,
 								},
 							},
 						},
@@ -428,6 +429,7 @@ func (r *K8SClusterResource) Schema(ctx context.Context, req resource.SchemaRequ
 								"tenant": schema.StringAttribute{
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional: true,
+									Computed: true,
 								},
 							},
 						},
@@ -449,6 +451,7 @@ func (r *K8SClusterResource) Schema(ctx context.Context, req resource.SchemaRequ
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional: true,
+						Computed: true,
 					},
 				},
 
@@ -473,6 +476,7 @@ func (r *K8SClusterResource) Schema(ctx context.Context, req resource.SchemaRequ
 								"tenant": schema.StringAttribute{
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional: true,
+									Computed: true,
 								},
 							},
 						},
@@ -615,7 +619,7 @@ func (r *K8SClusterResource) Create(ctx context.Context, req resource.CreateRequ
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.K8SCluster{
+	createReq := &client.K8SCluster{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -624,7 +628,7 @@ func (r *K8SClusterResource) Create(ctx context.Context, req resource.CreateRequ
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -633,7 +637,7 @@ func (r *K8SClusterResource) Create(ctx context.Context, req resource.CreateRequ
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -642,17 +646,17 @@ func (r *K8SClusterResource) Create(ctx context.Context, req resource.CreateRequ
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
 	if data.ClusterScopedAccessDeny != nil {
 		cluster_scoped_access_denyMap := make(map[string]interface{})
-		apiResource.Spec["cluster_scoped_access_deny"] = cluster_scoped_access_denyMap
+		createReq.Spec["cluster_scoped_access_deny"] = cluster_scoped_access_denyMap
 	}
 	if data.ClusterScopedAccessPermit != nil {
 		cluster_scoped_access_permitMap := make(map[string]interface{})
-		apiResource.Spec["cluster_scoped_access_permit"] = cluster_scoped_access_permitMap
+		createReq.Spec["cluster_scoped_access_permit"] = cluster_scoped_access_permitMap
 	}
 	if data.ClusterWideAppList != nil {
 		cluster_wide_app_listMap := make(map[string]interface{})
@@ -677,11 +681,11 @@ func (r *K8SClusterResource) Create(ctx context.Context, req resource.CreateRequ
 			}
 			cluster_wide_app_listMap["cluster_wide_apps"] = cluster_wide_appsList
 		}
-		apiResource.Spec["cluster_wide_app_list"] = cluster_wide_app_listMap
+		createReq.Spec["cluster_wide_app_list"] = cluster_wide_app_listMap
 	}
 	if data.GlobalAccessEnable != nil {
 		global_access_enableMap := make(map[string]interface{})
-		apiResource.Spec["global_access_enable"] = global_access_enableMap
+		createReq.Spec["global_access_enable"] = global_access_enableMap
 	}
 	if data.InsecureRegistryList != nil {
 		insecure_registry_listMap := make(map[string]interface{})
@@ -692,7 +696,7 @@ func (r *K8SClusterResource) Create(ctx context.Context, req resource.CreateRequ
 				insecure_registry_listMap["insecure_registries"] = insecure_registriesItems
 			}
 		}
-		apiResource.Spec["insecure_registry_list"] = insecure_registry_listMap
+		createReq.Spec["insecure_registry_list"] = insecure_registry_listMap
 	}
 	if data.LocalAccessConfig != nil {
 		local_access_configMap := make(map[string]interface{})
@@ -705,23 +709,23 @@ func (r *K8SClusterResource) Create(ctx context.Context, req resource.CreateRequ
 		if !data.LocalAccessConfig.Port.IsNull() && !data.LocalAccessConfig.Port.IsUnknown() {
 			local_access_configMap["port"] = data.LocalAccessConfig.Port.ValueInt64()
 		}
-		apiResource.Spec["local_access_config"] = local_access_configMap
+		createReq.Spec["local_access_config"] = local_access_configMap
 	}
 	if data.NoClusterWideApps != nil {
 		no_cluster_wide_appsMap := make(map[string]interface{})
-		apiResource.Spec["no_cluster_wide_apps"] = no_cluster_wide_appsMap
+		createReq.Spec["no_cluster_wide_apps"] = no_cluster_wide_appsMap
 	}
 	if data.NoGlobalAccess != nil {
 		no_global_accessMap := make(map[string]interface{})
-		apiResource.Spec["no_global_access"] = no_global_accessMap
+		createReq.Spec["no_global_access"] = no_global_accessMap
 	}
 	if data.NoInsecureRegistries != nil {
 		no_insecure_registriesMap := make(map[string]interface{})
-		apiResource.Spec["no_insecure_registries"] = no_insecure_registriesMap
+		createReq.Spec["no_insecure_registries"] = no_insecure_registriesMap
 	}
 	if data.NoLocalAccess != nil {
 		no_local_accessMap := make(map[string]interface{})
-		apiResource.Spec["no_local_access"] = no_local_accessMap
+		createReq.Spec["no_local_access"] = no_local_accessMap
 	}
 	if data.UseCustomClusterRoleBindings != nil {
 		use_custom_cluster_role_bindingsMap := make(map[string]interface{})
@@ -742,7 +746,7 @@ func (r *K8SClusterResource) Create(ctx context.Context, req resource.CreateRequ
 			}
 			use_custom_cluster_role_bindingsMap["cluster_role_bindings"] = cluster_role_bindingsList
 		}
-		apiResource.Spec["use_custom_cluster_role_bindings"] = use_custom_cluster_role_bindingsMap
+		createReq.Spec["use_custom_cluster_role_bindings"] = use_custom_cluster_role_bindingsMap
 	}
 	if data.UseCustomClusterRoleList != nil {
 		use_custom_cluster_role_listMap := make(map[string]interface{})
@@ -763,7 +767,7 @@ func (r *K8SClusterResource) Create(ctx context.Context, req resource.CreateRequ
 			}
 			use_custom_cluster_role_listMap["cluster_roles"] = cluster_rolesList
 		}
-		apiResource.Spec["use_custom_cluster_role_list"] = use_custom_cluster_role_listMap
+		createReq.Spec["use_custom_cluster_role_list"] = use_custom_cluster_role_listMap
 	}
 	if data.UseCustomPodSecurityAdmission != nil {
 		use_custom_pod_security_admissionMap := make(map[string]interface{})
@@ -776,7 +780,7 @@ func (r *K8SClusterResource) Create(ctx context.Context, req resource.CreateRequ
 		if !data.UseCustomPodSecurityAdmission.Tenant.IsNull() && !data.UseCustomPodSecurityAdmission.Tenant.IsUnknown() {
 			use_custom_pod_security_admissionMap["tenant"] = data.UseCustomPodSecurityAdmission.Tenant.ValueString()
 		}
-		apiResource.Spec["use_custom_pod_security_admission"] = use_custom_pod_security_admissionMap
+		createReq.Spec["use_custom_pod_security_admission"] = use_custom_pod_security_admissionMap
 	}
 	if data.UseCustomPspList != nil {
 		use_custom_psp_listMap := make(map[string]interface{})
@@ -797,48 +801,331 @@ func (r *K8SClusterResource) Create(ctx context.Context, req resource.CreateRequ
 			}
 			use_custom_psp_listMap["pod_security_policies"] = pod_security_policiesList
 		}
-		apiResource.Spec["use_custom_psp_list"] = use_custom_psp_listMap
+		createReq.Spec["use_custom_psp_list"] = use_custom_psp_listMap
 	}
 	if data.UseDefaultClusterRoleBindings != nil {
 		use_default_cluster_role_bindingsMap := make(map[string]interface{})
-		apiResource.Spec["use_default_cluster_role_bindings"] = use_default_cluster_role_bindingsMap
+		createReq.Spec["use_default_cluster_role_bindings"] = use_default_cluster_role_bindingsMap
 	}
 	if data.UseDefaultClusterRoles != nil {
 		use_default_cluster_rolesMap := make(map[string]interface{})
-		apiResource.Spec["use_default_cluster_roles"] = use_default_cluster_rolesMap
+		createReq.Spec["use_default_cluster_roles"] = use_default_cluster_rolesMap
 	}
 	if data.UseDefaultPodSecurityAdmission != nil {
 		use_default_pod_security_admissionMap := make(map[string]interface{})
-		apiResource.Spec["use_default_pod_security_admission"] = use_default_pod_security_admissionMap
+		createReq.Spec["use_default_pod_security_admission"] = use_default_pod_security_admissionMap
 	}
 	if data.UseDefaultPsp != nil {
 		use_default_pspMap := make(map[string]interface{})
-		apiResource.Spec["use_default_psp"] = use_default_pspMap
+		createReq.Spec["use_default_psp"] = use_default_pspMap
 	}
 	if data.Vk8sNamespaceAccessDeny != nil {
 		vk8s_namespace_access_denyMap := make(map[string]interface{})
-		apiResource.Spec["vk8s_namespace_access_deny"] = vk8s_namespace_access_denyMap
+		createReq.Spec["vk8s_namespace_access_deny"] = vk8s_namespace_access_denyMap
 	}
 	if data.Vk8sNamespaceAccessPermit != nil {
 		vk8s_namespace_access_permitMap := make(map[string]interface{})
-		apiResource.Spec["vk8s_namespace_access_permit"] = vk8s_namespace_access_permitMap
+		createReq.Spec["vk8s_namespace_access_permit"] = vk8s_namespace_access_permitMap
 	}
 
 
-	created, err := r.client.CreateK8SCluster(ctx, apiResource)
+	apiResource, err := r.client.CreateK8SCluster(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create K8SCluster: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if _, ok := apiResource.Spec["cluster_scoped_access_deny"].(map[string]interface{}); ok && isImport && data.ClusterScopedAccessDeny == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ClusterScopedAccessDeny = &K8SClusterEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["cluster_scoped_access_permit"].(map[string]interface{}); ok && isImport && data.ClusterScopedAccessPermit == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ClusterScopedAccessPermit = &K8SClusterEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["cluster_wide_app_list"].(map[string]interface{}); ok && (isImport || data.ClusterWideAppList != nil) {
+		data.ClusterWideAppList = &K8SClusterClusterWideAppListModel{
+			ClusterWideApps: func() []K8SClusterClusterWideAppListClusterWideAppsModel {
+				if listData, ok := blockData["cluster_wide_apps"].([]interface{}); ok && len(listData) > 0 {
+					var result []K8SClusterClusterWideAppListClusterWideAppsModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, K8SClusterClusterWideAppListClusterWideAppsModel{
+								ArgoCd: func() *K8SClusterClusterWideAppListClusterWideAppsArgoCdModel {
+									if _, ok := itemMap["argo_cd"].(map[string]interface{}); ok {
+										return &K8SClusterClusterWideAppListClusterWideAppsArgoCdModel{
+										}
+									}
+									return nil
+								}(),
+								Dashboard: func() *K8SClusterEmptyModel {
+									if _, ok := itemMap["dashboard"].(map[string]interface{}); ok {
+										return &K8SClusterEmptyModel{}
+									}
+									return nil
+								}(),
+								MetricsServer: func() *K8SClusterEmptyModel {
+									if _, ok := itemMap["metrics_server"].(map[string]interface{}); ok {
+										return &K8SClusterEmptyModel{}
+									}
+									return nil
+								}(),
+								Prometheus: func() *K8SClusterEmptyModel {
+									if _, ok := itemMap["prometheus"].(map[string]interface{}); ok {
+										return &K8SClusterEmptyModel{}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["global_access_enable"].(map[string]interface{}); ok && isImport && data.GlobalAccessEnable == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.GlobalAccessEnable = &K8SClusterEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["insecure_registry_list"].(map[string]interface{}); ok && (isImport || data.InsecureRegistryList != nil) {
+		data.InsecureRegistryList = &K8SClusterInsecureRegistryListModel{
+			InsecureRegistries: func() types.List {
+				if v, ok := blockData["insecure_registries"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["local_access_config"].(map[string]interface{}); ok && (isImport || data.LocalAccessConfig != nil) {
+		data.LocalAccessConfig = &K8SClusterLocalAccessConfigModel{
+			DefaultPort: func() *K8SClusterEmptyModel {
+				if !isImport && data.LocalAccessConfig != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.LocalAccessConfig.DefaultPort
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_port"].(map[string]interface{}); ok {
+					return &K8SClusterEmptyModel{}
+				}
+				return nil
+			}(),
+			LocalDomain: func() types.String {
+				if v, ok := blockData["local_domain"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Port: func() types.Int64 {
+				if v, ok := blockData["port"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["no_cluster_wide_apps"].(map[string]interface{}); ok && isImport && data.NoClusterWideApps == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoClusterWideApps = &K8SClusterEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_global_access"].(map[string]interface{}); ok && isImport && data.NoGlobalAccess == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoGlobalAccess = &K8SClusterEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_insecure_registries"].(map[string]interface{}); ok && isImport && data.NoInsecureRegistries == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoInsecureRegistries = &K8SClusterEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_local_access"].(map[string]interface{}); ok && isImport && data.NoLocalAccess == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoLocalAccess = &K8SClusterEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["use_custom_cluster_role_bindings"].(map[string]interface{}); ok && (isImport || data.UseCustomClusterRoleBindings != nil) {
+		data.UseCustomClusterRoleBindings = &K8SClusterUseCustomClusterRoleBindingsModel{
+			ClusterRoleBindings: func() []K8SClusterUseCustomClusterRoleBindingsClusterRoleBindingsModel {
+				if listData, ok := blockData["cluster_role_bindings"].([]interface{}); ok && len(listData) > 0 {
+					var result []K8SClusterUseCustomClusterRoleBindingsClusterRoleBindingsModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, K8SClusterUseCustomClusterRoleBindingsClusterRoleBindingsModel{
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := itemMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := itemMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["use_custom_cluster_role_list"].(map[string]interface{}); ok && (isImport || data.UseCustomClusterRoleList != nil) {
+		data.UseCustomClusterRoleList = &K8SClusterUseCustomClusterRoleListModel{
+			ClusterRoles: func() []K8SClusterUseCustomClusterRoleListClusterRolesModel {
+				if listData, ok := blockData["cluster_roles"].([]interface{}); ok && len(listData) > 0 {
+					var result []K8SClusterUseCustomClusterRoleListClusterRolesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, K8SClusterUseCustomClusterRoleListClusterRolesModel{
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := itemMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := itemMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["use_custom_pod_security_admission"].(map[string]interface{}); ok && (isImport || data.UseCustomPodSecurityAdmission != nil) {
+		data.UseCustomPodSecurityAdmission = &K8SClusterUseCustomPodSecurityAdmissionModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["use_custom_psp_list"].(map[string]interface{}); ok && (isImport || data.UseCustomPspList != nil) {
+		data.UseCustomPspList = &K8SClusterUseCustomPspListModel{
+			PodSecurityPolicies: func() []K8SClusterUseCustomPspListPodSecurityPoliciesModel {
+				if listData, ok := blockData["pod_security_policies"].([]interface{}); ok && len(listData) > 0 {
+					var result []K8SClusterUseCustomPspListPodSecurityPoliciesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, K8SClusterUseCustomPspListPodSecurityPoliciesModel{
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := itemMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := itemMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["use_default_cluster_role_bindings"].(map[string]interface{}); ok && isImport && data.UseDefaultClusterRoleBindings == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.UseDefaultClusterRoleBindings = &K8SClusterEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["use_default_cluster_roles"].(map[string]interface{}); ok && isImport && data.UseDefaultClusterRoles == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.UseDefaultClusterRoles = &K8SClusterEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["use_default_pod_security_admission"].(map[string]interface{}); ok && isImport && data.UseDefaultPodSecurityAdmission == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.UseDefaultPodSecurityAdmission = &K8SClusterEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["use_default_psp"].(map[string]interface{}); ok && isImport && data.UseDefaultPsp == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.UseDefaultPsp = &K8SClusterEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["vk8s_namespace_access_deny"].(map[string]interface{}); ok && isImport && data.Vk8sNamespaceAccessDeny == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Vk8sNamespaceAccessDeny = &K8SClusterEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["vk8s_namespace_access_permit"].(map[string]interface{}); ok && isImport && data.Vk8sNamespaceAccessPermit == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Vk8sNamespaceAccessPermit = &K8SClusterEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 

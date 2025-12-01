@@ -252,6 +252,7 @@ func (r *CloudLinkResource) Schema(ctx context.Context, req resource.SchemaReque
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
+								Computed: true,
 							},
 						},
 					},
@@ -443,6 +444,7 @@ func (r *CloudLinkResource) Schema(ctx context.Context, req resource.SchemaReque
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
+								Computed: true,
 							},
 						},
 					},
@@ -566,7 +568,7 @@ func (r *CloudLinkResource) Create(ctx context.Context, req resource.CreateReque
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.CloudLink{
+	createReq := &client.CloudLink{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -575,7 +577,7 @@ func (r *CloudLinkResource) Create(ctx context.Context, req resource.CreateReque
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -584,7 +586,7 @@ func (r *CloudLinkResource) Create(ctx context.Context, req resource.CreateReque
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -593,7 +595,7 @@ func (r *CloudLinkResource) Create(ctx context.Context, req resource.CreateReque
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -619,18 +621,18 @@ func (r *CloudLinkResource) Create(ctx context.Context, req resource.CreateReque
 		if !data.AWS.CustomAsn.IsNull() && !data.AWS.CustomAsn.IsUnknown() {
 			awsMap["custom_asn"] = data.AWS.CustomAsn.ValueInt64()
 		}
-		apiResource.Spec["aws"] = awsMap
+		createReq.Spec["aws"] = awsMap
 	}
 	if data.Disabled != nil {
 		disabledMap := make(map[string]interface{})
-		apiResource.Spec["disabled"] = disabledMap
+		createReq.Spec["disabled"] = disabledMap
 	}
 	if data.Enabled != nil {
 		enabledMap := make(map[string]interface{})
 		if !data.Enabled.CloudlinkNetworkName.IsNull() && !data.Enabled.CloudlinkNetworkName.IsUnknown() {
 			enabledMap["cloudlink_network_name"] = data.Enabled.CloudlinkNetworkName.ValueString()
 		}
-		apiResource.Spec["enabled"] = enabledMap
+		createReq.Spec["enabled"] = enabledMap
 	}
 	if data.GCP != nil {
 		gcpMap := make(map[string]interface{})
@@ -651,24 +653,100 @@ func (r *CloudLinkResource) Create(ctx context.Context, req resource.CreateReque
 			}
 			gcpMap["gcp_cred"] = gcp_credNestedMap
 		}
-		apiResource.Spec["gcp"] = gcpMap
+		createReq.Spec["gcp"] = gcpMap
 	}
 
 
-	created, err := r.client.CreateCloudLink(ctx, apiResource)
+	apiResource, err := r.client.CreateCloudLink(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create CloudLink: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["aws"].(map[string]interface{}); ok && (isImport || data.AWS != nil) {
+		data.AWS = &CloudLinkAWSModel{
+			AWSCred: func() *CloudLinkAWSAWSCredModel {
+				if !isImport && data.AWS != nil && data.AWS.AWSCred != nil {
+					// Normal Read: preserve existing state value
+					return data.AWS.AWSCred
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["aws_cred"].(map[string]interface{}); ok {
+					return &CloudLinkAWSAWSCredModel{
+						Name: func() types.String {
+							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Namespace: func() types.String {
+							if v, ok := nestedBlockData["namespace"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Tenant: func() types.String {
+							if v, ok := nestedBlockData["tenant"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			Byoc: func() *CloudLinkAWSByocModel {
+				if !isImport && data.AWS != nil && data.AWS.Byoc != nil {
+					// Normal Read: preserve existing state value
+					return data.AWS.Byoc
+				}
+				// Import case: read from API
+				if _, ok := blockData["byoc"].(map[string]interface{}); ok {
+					return &CloudLinkAWSByocModel{
+					}
+				}
+				return nil
+			}(),
+			CustomAsn: func() types.Int64 {
+				if v, ok := blockData["custom_asn"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["disabled"].(map[string]interface{}); ok && isImport && data.Disabled == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Disabled = &CloudLinkEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["enabled"].(map[string]interface{}); ok && (isImport || data.Enabled != nil) {
+		data.Enabled = &CloudLinkEnabledModel{
+			CloudlinkNetworkName: func() types.String {
+				if v, ok := blockData["cloudlink_network_name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["gcp"].(map[string]interface{}); ok && isImport && data.GCP == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.GCP = &CloudLinkGCPModel{}
+	}
+	// Normal Read: preserve existing state value
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 

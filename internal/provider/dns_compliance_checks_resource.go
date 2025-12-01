@@ -253,7 +253,7 @@ func (r *DNSComplianceChecksResource) Create(ctx context.Context, req resource.C
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.DNSComplianceChecks{
+	createReq := &client.DNSComplianceChecks{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -262,7 +262,7 @@ func (r *DNSComplianceChecksResource) Create(ctx context.Context, req resource.C
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -271,7 +271,7 @@ func (r *DNSComplianceChecksResource) Create(ctx context.Context, req resource.C
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -280,7 +280,7 @@ func (r *DNSComplianceChecksResource) Create(ctx context.Context, req resource.C
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -288,39 +288,88 @@ func (r *DNSComplianceChecksResource) Create(ctx context.Context, req resource.C
 		var disallowed_query_type_listList []string
 		resp.Diagnostics.Append(data.DisallowedQueryTypeList.ElementsAs(ctx, &disallowed_query_type_listList, false)...)
 		if !resp.Diagnostics.HasError() {
-			apiResource.Spec["disallowed_query_type_list"] = disallowed_query_type_listList
+			createReq.Spec["disallowed_query_type_list"] = disallowed_query_type_listList
 		}
 	}
 	if !data.DisallowedResourceRecordTypeList.IsNull() && !data.DisallowedResourceRecordTypeList.IsUnknown() {
 		var disallowed_resource_record_type_listList []string
 		resp.Diagnostics.Append(data.DisallowedResourceRecordTypeList.ElementsAs(ctx, &disallowed_resource_record_type_listList, false)...)
 		if !resp.Diagnostics.HasError() {
-			apiResource.Spec["disallowed_resource_record_type_list"] = disallowed_resource_record_type_listList
+			createReq.Spec["disallowed_resource_record_type_list"] = disallowed_resource_record_type_listList
 		}
 	}
 	if !data.DomainDenylist.IsNull() && !data.DomainDenylist.IsUnknown() {
 		var domain_denylistList []string
 		resp.Diagnostics.Append(data.DomainDenylist.ElementsAs(ctx, &domain_denylistList, false)...)
 		if !resp.Diagnostics.HasError() {
-			apiResource.Spec["domain_denylist"] = domain_denylistList
+			createReq.Spec["domain_denylist"] = domain_denylistList
 		}
 	}
 
 
-	created, err := r.client.CreateDNSComplianceChecks(ctx, apiResource)
+	apiResource, err := r.client.CreateDNSComplianceChecks(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create DNSComplianceChecks: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if v, ok := apiResource.Spec["disallowed_query_type_list"].([]interface{}); ok && len(v) > 0 {
+		var disallowed_query_type_listList []string
+		for _, item := range v {
+			if s, ok := item.(string); ok {
+				disallowed_query_type_listList = append(disallowed_query_type_listList, s)
+			}
+		}
+		listVal, diags := types.ListValueFrom(ctx, types.StringType, disallowed_query_type_listList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.DisallowedQueryTypeList = listVal
+		}
+	} else {
+		data.DisallowedQueryTypeList = types.ListNull(types.StringType)
+	}
+	if v, ok := apiResource.Spec["disallowed_resource_record_type_list"].([]interface{}); ok && len(v) > 0 {
+		var disallowed_resource_record_type_listList []string
+		for _, item := range v {
+			if s, ok := item.(string); ok {
+				disallowed_resource_record_type_listList = append(disallowed_resource_record_type_listList, s)
+			}
+		}
+		listVal, diags := types.ListValueFrom(ctx, types.StringType, disallowed_resource_record_type_listList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.DisallowedResourceRecordTypeList = listVal
+		}
+	} else {
+		data.DisallowedResourceRecordTypeList = types.ListNull(types.StringType)
+	}
+	if v, ok := apiResource.Spec["domain_denylist"].([]interface{}); ok && len(v) > 0 {
+		var domain_denylistList []string
+		for _, item := range v {
+			if s, ok := item.(string); ok {
+				domain_denylistList = append(domain_denylistList, s)
+			}
+		}
+		listVal, diags := types.ListValueFrom(ctx, types.StringType, domain_denylistList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.DomainDenylist = listVal
+		}
+	} else {
+		data.DomainDenylist = types.ListNull(types.StringType)
+	}
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 

@@ -429,6 +429,7 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 						"kind": schema.StringAttribute{
 							MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 							Optional: true,
+							Computed: true,
 						},
 						"name": schema.StringAttribute{
 							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -441,10 +442,12 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 						"tenant": schema.StringAttribute{
 							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 							Optional: true,
+							Computed: true,
 						},
 						"uid": schema.StringAttribute{
 							MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 							Optional: true,
+							Computed: true,
 						},
 					},
 
@@ -457,6 +460,7 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 						"kind": schema.StringAttribute{
 							MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 							Optional: true,
+							Computed: true,
 						},
 						"name": schema.StringAttribute{
 							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -469,10 +473,12 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 						"tenant": schema.StringAttribute{
 							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 							Optional: true,
+							Computed: true,
 						},
 						"uid": schema.StringAttribute{
 							MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 							Optional: true,
+							Computed: true,
 						},
 					},
 
@@ -588,6 +594,7 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 										"kind": schema.StringAttribute{
 											MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 											Optional: true,
+											Computed: true,
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -600,10 +607,12 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 										"uid": schema.StringAttribute{
 											MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -638,6 +647,7 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 														"kind": schema.StringAttribute{
 															MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 															Optional: true,
+															Computed: true,
 														},
 														"name": schema.StringAttribute{
 															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -650,10 +660,12 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 															Optional: true,
+															Computed: true,
 														},
 														"uid": schema.StringAttribute{
 															MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 															Optional: true,
+															Computed: true,
 														},
 													},
 												},
@@ -782,6 +794,7 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 														"kind": schema.StringAttribute{
 															MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 															Optional: true,
+															Computed: true,
 														},
 														"name": schema.StringAttribute{
 															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -794,10 +807,12 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 															Optional: true,
+															Computed: true,
 														},
 														"uid": schema.StringAttribute{
 															MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 															Optional: true,
+															Computed: true,
 														},
 													},
 												},
@@ -954,7 +969,7 @@ func (r *ClusterResource) Create(ctx context.Context, req resource.CreateRequest
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.Cluster{
+	createReq := &client.Cluster{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -963,7 +978,7 @@ func (r *ClusterResource) Create(ctx context.Context, req resource.CreateRequest
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -972,7 +987,7 @@ func (r *ClusterResource) Create(ctx context.Context, req resource.CreateRequest
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -981,13 +996,13 @@ func (r *ClusterResource) Create(ctx context.Context, req resource.CreateRequest
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
 	if data.AutoHTTPConfig != nil {
 		auto_http_configMap := make(map[string]interface{})
-		apiResource.Spec["auto_http_config"] = auto_http_configMap
+		createReq.Spec["auto_http_config"] = auto_http_configMap
 	}
 	if data.CircuitBreaker != nil {
 		circuit_breakerMap := make(map[string]interface{})
@@ -1006,15 +1021,15 @@ func (r *ClusterResource) Create(ctx context.Context, req resource.CreateRequest
 		if !data.CircuitBreaker.Retries.IsNull() && !data.CircuitBreaker.Retries.IsUnknown() {
 			circuit_breakerMap["retries"] = data.CircuitBreaker.Retries.ValueInt64()
 		}
-		apiResource.Spec["circuit_breaker"] = circuit_breakerMap
+		createReq.Spec["circuit_breaker"] = circuit_breakerMap
 	}
 	if data.DefaultSubset != nil {
 		default_subsetMap := make(map[string]interface{})
-		apiResource.Spec["default_subset"] = default_subsetMap
+		createReq.Spec["default_subset"] = default_subsetMap
 	}
 	if data.DisableProxyProtocol != nil {
 		disable_proxy_protocolMap := make(map[string]interface{})
-		apiResource.Spec["disable_proxy_protocol"] = disable_proxy_protocolMap
+		createReq.Spec["disable_proxy_protocol"] = disable_proxy_protocolMap
 	}
 	if len(data.EndpointSubsets) > 0 {
 		var endpoint_subsetsList []map[string]interface{}
@@ -1022,7 +1037,7 @@ func (r *ClusterResource) Create(ctx context.Context, req resource.CreateRequest
 			itemMap := make(map[string]interface{})
 			endpoint_subsetsList = append(endpoint_subsetsList, itemMap)
 		}
-		apiResource.Spec["endpoint_subsets"] = endpoint_subsetsList
+		createReq.Spec["endpoint_subsets"] = endpoint_subsetsList
 	}
 	if len(data.Endpoints) > 0 {
 		var endpointsList []map[string]interface{}
@@ -1045,7 +1060,7 @@ func (r *ClusterResource) Create(ctx context.Context, req resource.CreateRequest
 			}
 			endpointsList = append(endpointsList, itemMap)
 		}
-		apiResource.Spec["endpoints"] = endpointsList
+		createReq.Spec["endpoints"] = endpointsList
 	}
 	if len(data.HealthChecks) > 0 {
 		var health_checksList []map[string]interface{}
@@ -1068,7 +1083,7 @@ func (r *ClusterResource) Create(ctx context.Context, req resource.CreateRequest
 			}
 			health_checksList = append(health_checksList, itemMap)
 		}
-		apiResource.Spec["health_checks"] = health_checksList
+		createReq.Spec["health_checks"] = health_checksList
 	}
 	if data.Http1Config != nil {
 		http1_configMap := make(map[string]interface{})
@@ -1076,18 +1091,18 @@ func (r *ClusterResource) Create(ctx context.Context, req resource.CreateRequest
 			header_transformationNestedMap := make(map[string]interface{})
 			http1_configMap["header_transformation"] = header_transformationNestedMap
 		}
-		apiResource.Spec["http1_config"] = http1_configMap
+		createReq.Spec["http1_config"] = http1_configMap
 	}
 	if data.Http2Options != nil {
 		http2_optionsMap := make(map[string]interface{})
 		if !data.Http2Options.Enabled.IsNull() && !data.Http2Options.Enabled.IsUnknown() {
 			http2_optionsMap["enabled"] = data.Http2Options.Enabled.ValueBool()
 		}
-		apiResource.Spec["http2_options"] = http2_optionsMap
+		createReq.Spec["http2_options"] = http2_optionsMap
 	}
 	if data.NoPanicThreshold != nil {
 		no_panic_thresholdMap := make(map[string]interface{})
-		apiResource.Spec["no_panic_threshold"] = no_panic_thresholdMap
+		createReq.Spec["no_panic_threshold"] = no_panic_thresholdMap
 	}
 	if data.OutlierDetection != nil {
 		outlier_detectionMap := make(map[string]interface{})
@@ -1106,15 +1121,15 @@ func (r *ClusterResource) Create(ctx context.Context, req resource.CreateRequest
 		if !data.OutlierDetection.MaxEjectionPercent.IsNull() && !data.OutlierDetection.MaxEjectionPercent.IsUnknown() {
 			outlier_detectionMap["max_ejection_percent"] = data.OutlierDetection.MaxEjectionPercent.ValueInt64()
 		}
-		apiResource.Spec["outlier_detection"] = outlier_detectionMap
+		createReq.Spec["outlier_detection"] = outlier_detectionMap
 	}
 	if data.ProxyProtocolV1 != nil {
 		proxy_protocol_v1Map := make(map[string]interface{})
-		apiResource.Spec["proxy_protocol_v1"] = proxy_protocol_v1Map
+		createReq.Spec["proxy_protocol_v1"] = proxy_protocol_v1Map
 	}
 	if data.ProxyProtocolV2 != nil {
 		proxy_protocol_v2Map := make(map[string]interface{})
-		apiResource.Spec["proxy_protocol_v2"] = proxy_protocol_v2Map
+		createReq.Spec["proxy_protocol_v2"] = proxy_protocol_v2Map
 	}
 	if data.TLSParameters != nil {
 		tls_parametersMap := make(map[string]interface{})
@@ -1156,7 +1171,7 @@ func (r *ClusterResource) Create(ctx context.Context, req resource.CreateRequest
 		if data.TLSParameters.UseHostHeaderAsSni != nil {
 			tls_parametersMap["use_host_header_as_sni"] = map[string]interface{}{}
 		}
-		apiResource.Spec["tls_parameters"] = tls_parametersMap
+		createReq.Spec["tls_parameters"] = tls_parametersMap
 	}
 	if data.UpstreamConnPoolReuseType != nil {
 		upstream_conn_pool_reuse_typeMap := make(map[string]interface{})
@@ -1166,84 +1181,443 @@ func (r *ClusterResource) Create(ctx context.Context, req resource.CreateRequest
 		if data.UpstreamConnPoolReuseType.EnableConnPoolReuse != nil {
 			upstream_conn_pool_reuse_typeMap["enable_conn_pool_reuse"] = map[string]interface{}{}
 		}
-		apiResource.Spec["upstream_conn_pool_reuse_type"] = upstream_conn_pool_reuse_typeMap
+		createReq.Spec["upstream_conn_pool_reuse_type"] = upstream_conn_pool_reuse_typeMap
 	}
 	if !data.ConnectionTimeout.IsNull() && !data.ConnectionTimeout.IsUnknown() {
-		apiResource.Spec["connection_timeout"] = data.ConnectionTimeout.ValueInt64()
+		createReq.Spec["connection_timeout"] = data.ConnectionTimeout.ValueInt64()
 	}
 	if !data.EndpointSelection.IsNull() && !data.EndpointSelection.IsUnknown() {
-		apiResource.Spec["endpoint_selection"] = data.EndpointSelection.ValueString()
+		createReq.Spec["endpoint_selection"] = data.EndpointSelection.ValueString()
 	}
 	if !data.FallbackPolicy.IsNull() && !data.FallbackPolicy.IsUnknown() {
-		apiResource.Spec["fallback_policy"] = data.FallbackPolicy.ValueString()
+		createReq.Spec["fallback_policy"] = data.FallbackPolicy.ValueString()
 	}
 	if !data.HTTPIdleTimeout.IsNull() && !data.HTTPIdleTimeout.IsUnknown() {
-		apiResource.Spec["http_idle_timeout"] = data.HTTPIdleTimeout.ValueInt64()
+		createReq.Spec["http_idle_timeout"] = data.HTTPIdleTimeout.ValueInt64()
 	}
 	if !data.LoadBalancerAlgorithm.IsNull() && !data.LoadBalancerAlgorithm.IsUnknown() {
-		apiResource.Spec["loadbalancer_algorithm"] = data.LoadBalancerAlgorithm.ValueString()
+		createReq.Spec["loadbalancer_algorithm"] = data.LoadBalancerAlgorithm.ValueString()
 	}
 	if !data.PanicThreshold.IsNull() && !data.PanicThreshold.IsUnknown() {
-		apiResource.Spec["panic_threshold"] = data.PanicThreshold.ValueInt64()
+		createReq.Spec["panic_threshold"] = data.PanicThreshold.ValueInt64()
 	}
 
 
-	created, err := r.client.CreateCluster(ctx, apiResource)
+	apiResource, err := r.client.CreateCluster(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create Cluster: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
-	if v, ok := created.Spec["connection_timeout"].(float64); ok {
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if _, ok := apiResource.Spec["auto_http_config"].(map[string]interface{}); ok && isImport && data.AutoHTTPConfig == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AutoHTTPConfig = &ClusterEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["circuit_breaker"].(map[string]interface{}); ok && (isImport || data.CircuitBreaker != nil) {
+		data.CircuitBreaker = &ClusterCircuitBreakerModel{
+			ConnectionLimit: func() types.Int64 {
+				if v, ok := blockData["connection_limit"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			MaxRequests: func() types.Int64 {
+				if v, ok := blockData["max_requests"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			PendingRequests: func() types.Int64 {
+				if v, ok := blockData["pending_requests"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			Priority: func() types.String {
+				if v, ok := blockData["priority"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Retries: func() types.Int64 {
+				if v, ok := blockData["retries"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["default_subset"].(map[string]interface{}); ok && isImport && data.DefaultSubset == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DefaultSubset = &ClusterEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["disable_proxy_protocol"].(map[string]interface{}); ok && isImport && data.DisableProxyProtocol == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableProxyProtocol = &ClusterEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["endpoint_subsets"].([]interface{}); ok && len(listData) > 0 {
+		var endpoint_subsetsList []ClusterEndpointSubsetsModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				endpoint_subsetsList = append(endpoint_subsetsList, ClusterEndpointSubsetsModel{
+					Keys: func() types.List {
+						if v, ok := itemMap["keys"].([]interface{}); ok && len(v) > 0 {
+							var items []string
+							for _, item := range v {
+								if s, ok := item.(string); ok {
+									items = append(items, s)
+								}
+							}
+							listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+							return listVal
+						}
+						return types.ListNull(types.StringType)
+					}(),
+				})
+			}
+		}
+		data.EndpointSubsets = endpoint_subsetsList
+	}
+	if listData, ok := apiResource.Spec["endpoints"].([]interface{}); ok && len(listData) > 0 {
+		var endpointsList []ClusterEndpointsModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				endpointsList = append(endpointsList, ClusterEndpointsModel{
+					Kind: func() types.String {
+						if v, ok := itemMap["kind"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Namespace: func() types.String {
+						if v, ok := itemMap["namespace"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Tenant: func() types.String {
+						if v, ok := itemMap["tenant"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Uid: func() types.String {
+						if v, ok := itemMap["uid"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.Endpoints = endpointsList
+	}
+	if listData, ok := apiResource.Spec["health_checks"].([]interface{}); ok && len(listData) > 0 {
+		var health_checksList []ClusterHealthChecksModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				health_checksList = append(health_checksList, ClusterHealthChecksModel{
+					Kind: func() types.String {
+						if v, ok := itemMap["kind"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Namespace: func() types.String {
+						if v, ok := itemMap["namespace"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Tenant: func() types.String {
+						if v, ok := itemMap["tenant"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Uid: func() types.String {
+						if v, ok := itemMap["uid"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.HealthChecks = health_checksList
+	}
+	if _, ok := apiResource.Spec["http1_config"].(map[string]interface{}); ok && isImport && data.Http1Config == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Http1Config = &ClusterHttp1ConfigModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["http2_options"].(map[string]interface{}); ok && (isImport || data.Http2Options != nil) {
+		data.Http2Options = &ClusterHttp2OptionsModel{
+			Enabled: func() types.Bool {
+				if !isImport && data.Http2Options != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.Http2Options.Enabled
+				}
+				// Import case: read from API
+				if v, ok := blockData["enabled"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["no_panic_threshold"].(map[string]interface{}); ok && isImport && data.NoPanicThreshold == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoPanicThreshold = &ClusterEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["outlier_detection"].(map[string]interface{}); ok && (isImport || data.OutlierDetection != nil) {
+		data.OutlierDetection = &ClusterOutlierDetectionModel{
+			BaseEjectionTime: func() types.Int64 {
+				if v, ok := blockData["base_ejection_time"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			Consecutive5xx: func() types.Int64 {
+				if v, ok := blockData["consecutive_5xx"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			ConsecutiveGatewayFailure: func() types.Int64 {
+				if v, ok := blockData["consecutive_gateway_failure"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			Interval: func() types.Int64 {
+				if v, ok := blockData["interval"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			MaxEjectionPercent: func() types.Int64 {
+				if v, ok := blockData["max_ejection_percent"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["proxy_protocol_v1"].(map[string]interface{}); ok && isImport && data.ProxyProtocolV1 == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ProxyProtocolV1 = &ClusterEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["proxy_protocol_v2"].(map[string]interface{}); ok && isImport && data.ProxyProtocolV2 == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ProxyProtocolV2 = &ClusterEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["tls_parameters"].(map[string]interface{}); ok && (isImport || data.TLSParameters != nil) {
+		data.TLSParameters = &ClusterTLSParametersModel{
+			CertParams: func() *ClusterTLSParametersCertParamsModel {
+				if !isImport && data.TLSParameters != nil && data.TLSParameters.CertParams != nil {
+					// Normal Read: preserve existing state value
+					return data.TLSParameters.CertParams
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["cert_params"].(map[string]interface{}); ok {
+					return &ClusterTLSParametersCertParamsModel{
+						CipherSuites: func() types.List {
+							if v, ok := nestedBlockData["cipher_suites"].([]interface{}); ok && len(v) > 0 {
+								var items []string
+								for _, item := range v {
+									if s, ok := item.(string); ok {
+										items = append(items, s)
+									}
+								}
+								listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+								return listVal
+							}
+							return types.ListNull(types.StringType)
+						}(),
+						MaximumProtocolVersion: func() types.String {
+							if v, ok := nestedBlockData["maximum_protocol_version"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						MinimumProtocolVersion: func() types.String {
+							if v, ok := nestedBlockData["minimum_protocol_version"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			CommonParams: func() *ClusterTLSParametersCommonParamsModel {
+				if !isImport && data.TLSParameters != nil && data.TLSParameters.CommonParams != nil {
+					// Normal Read: preserve existing state value
+					return data.TLSParameters.CommonParams
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["common_params"].(map[string]interface{}); ok {
+					return &ClusterTLSParametersCommonParamsModel{
+						CipherSuites: func() types.List {
+							if v, ok := nestedBlockData["cipher_suites"].([]interface{}); ok && len(v) > 0 {
+								var items []string
+								for _, item := range v {
+									if s, ok := item.(string); ok {
+										items = append(items, s)
+									}
+								}
+								listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+								return listVal
+							}
+							return types.ListNull(types.StringType)
+						}(),
+						MaximumProtocolVersion: func() types.String {
+							if v, ok := nestedBlockData["maximum_protocol_version"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						MinimumProtocolVersion: func() types.String {
+							if v, ok := nestedBlockData["minimum_protocol_version"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			DefaultSessionKeyCaching: func() *ClusterEmptyModel {
+				if !isImport && data.TLSParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.TLSParameters.DefaultSessionKeyCaching
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_session_key_caching"].(map[string]interface{}); ok {
+					return &ClusterEmptyModel{}
+				}
+				return nil
+			}(),
+			DisableSessionKeyCaching: func() *ClusterEmptyModel {
+				if !isImport && data.TLSParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.TLSParameters.DisableSessionKeyCaching
+				}
+				// Import case: read from API
+				if _, ok := blockData["disable_session_key_caching"].(map[string]interface{}); ok {
+					return &ClusterEmptyModel{}
+				}
+				return nil
+			}(),
+			DisableSni: func() *ClusterEmptyModel {
+				if !isImport && data.TLSParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.TLSParameters.DisableSni
+				}
+				// Import case: read from API
+				if _, ok := blockData["disable_sni"].(map[string]interface{}); ok {
+					return &ClusterEmptyModel{}
+				}
+				return nil
+			}(),
+			MaxSessionKeys: func() types.Int64 {
+				if v, ok := blockData["max_session_keys"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			Sni: func() types.String {
+				if v, ok := blockData["sni"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			UseHostHeaderAsSni: func() *ClusterEmptyModel {
+				if !isImport && data.TLSParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.TLSParameters.UseHostHeaderAsSni
+				}
+				// Import case: read from API
+				if _, ok := blockData["use_host_header_as_sni"].(map[string]interface{}); ok {
+					return &ClusterEmptyModel{}
+				}
+				return nil
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["upstream_conn_pool_reuse_type"].(map[string]interface{}); ok && isImport && data.UpstreamConnPoolReuseType == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.UpstreamConnPoolReuseType = &ClusterUpstreamConnPoolReuseTypeModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["connection_timeout"].(float64); ok {
 		data.ConnectionTimeout = types.Int64Value(int64(v))
-	} else if data.ConnectionTimeout.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.ConnectionTimeout = types.Int64Null()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["endpoint_selection"].(string); ok && v != "" {
+	if v, ok := apiResource.Spec["endpoint_selection"].(string); ok && v != "" {
 		data.EndpointSelection = types.StringValue(v)
-	} else if data.EndpointSelection.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.EndpointSelection = types.StringNull()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["fallback_policy"].(string); ok && v != "" {
+	if v, ok := apiResource.Spec["fallback_policy"].(string); ok && v != "" {
 		data.FallbackPolicy = types.StringValue(v)
-	} else if data.FallbackPolicy.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.FallbackPolicy = types.StringNull()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["http_idle_timeout"].(float64); ok {
+	if v, ok := apiResource.Spec["http_idle_timeout"].(float64); ok {
 		data.HTTPIdleTimeout = types.Int64Value(int64(v))
-	} else if data.HTTPIdleTimeout.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.HTTPIdleTimeout = types.Int64Null()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["loadbalancer_algorithm"].(string); ok && v != "" {
+	if v, ok := apiResource.Spec["loadbalancer_algorithm"].(string); ok && v != "" {
 		data.LoadBalancerAlgorithm = types.StringValue(v)
-	} else if data.LoadBalancerAlgorithm.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.LoadBalancerAlgorithm = types.StringNull()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["panic_threshold"].(float64); ok {
+	if v, ok := apiResource.Spec["panic_threshold"].(float64); ok {
 		data.PanicThreshold = types.Int64Value(int64(v))
-	} else if data.PanicThreshold.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.PanicThreshold = types.Int64Null()
 	}
-	// If plan had a value, preserve it
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
@@ -1383,7 +1757,8 @@ func (r *ClusterResource) Read(ctx context.Context, req resource.ReadRequest, re
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["endpoint_subsets"].([]interface{}); ok && len(listData) > 0 {
 		var endpoint_subsetsList []ClusterEndpointSubsetsModel
-		for _, item := range listData {
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				endpoint_subsetsList = append(endpoint_subsetsList, ClusterEndpointSubsetsModel{
 					Keys: func() types.List {
@@ -1406,7 +1781,8 @@ func (r *ClusterResource) Read(ctx context.Context, req resource.ReadRequest, re
 	}
 	if listData, ok := apiResource.Spec["endpoints"].([]interface{}); ok && len(listData) > 0 {
 		var endpointsList []ClusterEndpointsModel
-		for _, item := range listData {
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				endpointsList = append(endpointsList, ClusterEndpointsModel{
 					Kind: func() types.String {
@@ -1446,7 +1822,8 @@ func (r *ClusterResource) Read(ctx context.Context, req resource.ReadRequest, re
 	}
 	if listData, ok := apiResource.Spec["health_checks"].([]interface{}); ok && len(listData) > 0 {
 		var health_checksList []ClusterHealthChecksModel
-		for _, item := range listData {
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				health_checksList = append(health_checksList, ClusterHealthChecksModel{
 					Kind: func() types.String {

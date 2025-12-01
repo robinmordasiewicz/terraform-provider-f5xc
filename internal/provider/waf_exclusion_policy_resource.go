@@ -427,7 +427,7 @@ func (r *WAFExclusionPolicyResource) Create(ctx context.Context, req resource.Cr
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.WAFExclusionPolicy{
+	createReq := &client.WAFExclusionPolicy{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -436,7 +436,7 @@ func (r *WAFExclusionPolicyResource) Create(ctx context.Context, req resource.Cr
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -445,7 +445,7 @@ func (r *WAFExclusionPolicyResource) Create(ctx context.Context, req resource.Cr
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -454,7 +454,7 @@ func (r *WAFExclusionPolicyResource) Create(ctx context.Context, req resource.Cr
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -470,6 +470,68 @@ func (r *WAFExclusionPolicyResource) Create(ctx context.Context, req resource.Cr
 			}
 			if item.AppFirewallDetectionControl != nil {
 				app_firewall_detection_controlNestedMap := make(map[string]interface{})
+				if len(item.AppFirewallDetectionControl.ExcludeAttackTypeContexts) > 0 {
+					var exclude_attack_type_contextsDeepList []map[string]interface{}
+					for _, deepListItem := range item.AppFirewallDetectionControl.ExcludeAttackTypeContexts {
+						deepListItemMap := make(map[string]interface{})
+						if !deepListItem.Context.IsNull() && !deepListItem.Context.IsUnknown() {
+							deepListItemMap["context"] = deepListItem.Context.ValueString()
+						}
+						if !deepListItem.ContextName.IsNull() && !deepListItem.ContextName.IsUnknown() {
+							deepListItemMap["context_name"] = deepListItem.ContextName.ValueString()
+						}
+						if !deepListItem.ExcludeAttackType.IsNull() && !deepListItem.ExcludeAttackType.IsUnknown() {
+							deepListItemMap["exclude_attack_type"] = deepListItem.ExcludeAttackType.ValueString()
+						}
+						exclude_attack_type_contextsDeepList = append(exclude_attack_type_contextsDeepList, deepListItemMap)
+					}
+					app_firewall_detection_controlNestedMap["exclude_attack_type_contexts"] = exclude_attack_type_contextsDeepList
+				}
+				if len(item.AppFirewallDetectionControl.ExcludeBotNameContexts) > 0 {
+					var exclude_bot_name_contextsDeepList []map[string]interface{}
+					for _, deepListItem := range item.AppFirewallDetectionControl.ExcludeBotNameContexts {
+						deepListItemMap := make(map[string]interface{})
+						if !deepListItem.BotName.IsNull() && !deepListItem.BotName.IsUnknown() {
+							deepListItemMap["bot_name"] = deepListItem.BotName.ValueString()
+						}
+						exclude_bot_name_contextsDeepList = append(exclude_bot_name_contextsDeepList, deepListItemMap)
+					}
+					app_firewall_detection_controlNestedMap["exclude_bot_name_contexts"] = exclude_bot_name_contextsDeepList
+				}
+				if len(item.AppFirewallDetectionControl.ExcludeSignatureContexts) > 0 {
+					var exclude_signature_contextsDeepList []map[string]interface{}
+					for _, deepListItem := range item.AppFirewallDetectionControl.ExcludeSignatureContexts {
+						deepListItemMap := make(map[string]interface{})
+						if !deepListItem.Context.IsNull() && !deepListItem.Context.IsUnknown() {
+							deepListItemMap["context"] = deepListItem.Context.ValueString()
+						}
+						if !deepListItem.ContextName.IsNull() && !deepListItem.ContextName.IsUnknown() {
+							deepListItemMap["context_name"] = deepListItem.ContextName.ValueString()
+						}
+						if !deepListItem.SignatureID.IsNull() && !deepListItem.SignatureID.IsUnknown() {
+							deepListItemMap["signature_id"] = deepListItem.SignatureID.ValueInt64()
+						}
+						exclude_signature_contextsDeepList = append(exclude_signature_contextsDeepList, deepListItemMap)
+					}
+					app_firewall_detection_controlNestedMap["exclude_signature_contexts"] = exclude_signature_contextsDeepList
+				}
+				if len(item.AppFirewallDetectionControl.ExcludeViolationContexts) > 0 {
+					var exclude_violation_contextsDeepList []map[string]interface{}
+					for _, deepListItem := range item.AppFirewallDetectionControl.ExcludeViolationContexts {
+						deepListItemMap := make(map[string]interface{})
+						if !deepListItem.Context.IsNull() && !deepListItem.Context.IsUnknown() {
+							deepListItemMap["context"] = deepListItem.Context.ValueString()
+						}
+						if !deepListItem.ContextName.IsNull() && !deepListItem.ContextName.IsUnknown() {
+							deepListItemMap["context_name"] = deepListItem.ContextName.ValueString()
+						}
+						if !deepListItem.ExcludeViolation.IsNull() && !deepListItem.ExcludeViolation.IsUnknown() {
+							deepListItemMap["exclude_violation"] = deepListItem.ExcludeViolation.ValueString()
+						}
+						exclude_violation_contextsDeepList = append(exclude_violation_contextsDeepList, deepListItemMap)
+					}
+					app_firewall_detection_controlNestedMap["exclude_violation_contexts"] = exclude_violation_contextsDeepList
+				}
 				itemMap["app_firewall_detection_control"] = app_firewall_detection_controlNestedMap
 			}
 			if !item.ExactValue.IsNull() && !item.ExactValue.IsUnknown() {
@@ -502,24 +564,126 @@ func (r *WAFExclusionPolicyResource) Create(ctx context.Context, req resource.Cr
 			}
 			waf_exclusion_rulesList = append(waf_exclusion_rulesList, itemMap)
 		}
-		apiResource.Spec["waf_exclusion_rules"] = waf_exclusion_rulesList
+		createReq.Spec["waf_exclusion_rules"] = waf_exclusion_rulesList
 	}
 
 
-	created, err := r.client.CreateWAFExclusionPolicy(ctx, apiResource)
+	apiResource, err := r.client.CreateWAFExclusionPolicy(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create WAFExclusionPolicy: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if listData, ok := apiResource.Spec["waf_exclusion_rules"].([]interface{}); ok && len(listData) > 0 {
+		var waf_exclusion_rulesList []WAFExclusionPolicyWAFExclusionRulesModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				waf_exclusion_rulesList = append(waf_exclusion_rulesList, WAFExclusionPolicyWAFExclusionRulesModel{
+					AnyDomain: func() *WAFExclusionPolicyEmptyModel {
+						if !isImport && len(data.WAFExclusionRules) > listIdx && data.WAFExclusionRules[listIdx].AnyDomain != nil {
+							return &WAFExclusionPolicyEmptyModel{}
+						}
+						return nil
+					}(),
+					AnyPath: func() *WAFExclusionPolicyEmptyModel {
+						if !isImport && len(data.WAFExclusionRules) > listIdx && data.WAFExclusionRules[listIdx].AnyPath != nil {
+							return &WAFExclusionPolicyEmptyModel{}
+						}
+						return nil
+					}(),
+					AppFirewallDetectionControl: func() *WAFExclusionPolicyWAFExclusionRulesAppFirewallDetectionControlModel {
+						if _, ok := itemMap["app_firewall_detection_control"].(map[string]interface{}); ok {
+							return &WAFExclusionPolicyWAFExclusionRulesAppFirewallDetectionControlModel{
+							}
+						}
+						return nil
+					}(),
+					ExactValue: func() types.String {
+						if v, ok := itemMap["exact_value"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					ExpirationTimestamp: func() types.String {
+						if v, ok := itemMap["expiration_timestamp"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Metadata: func() *WAFExclusionPolicyWAFExclusionRulesMetadataModel {
+						if nestedMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
+							return &WAFExclusionPolicyWAFExclusionRulesMetadataModel{
+								DescriptionSpec: func() types.String {
+									if v, ok := nestedMap["description"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Name: func() types.String {
+									if v, ok := nestedMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					Methods: func() types.List {
+						if v, ok := itemMap["methods"].([]interface{}); ok && len(v) > 0 {
+							var items []string
+							for _, item := range v {
+								if s, ok := item.(string); ok {
+									items = append(items, s)
+								}
+							}
+							listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+							return listVal
+						}
+						return types.ListNull(types.StringType)
+					}(),
+					PathPrefix: func() types.String {
+						if v, ok := itemMap["path_prefix"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					PathRegex: func() types.String {
+						if v, ok := itemMap["path_regex"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					SuffixValue: func() types.String {
+						if v, ok := itemMap["suffix_value"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					WAFSkipProcessing: func() *WAFExclusionPolicyEmptyModel {
+						if !isImport && len(data.WAFExclusionRules) > listIdx && data.WAFExclusionRules[listIdx].WAFSkipProcessing != nil {
+							return &WAFExclusionPolicyEmptyModel{}
+						}
+						return nil
+					}(),
+				})
+			}
+		}
+		data.WAFExclusionRules = waf_exclusion_rulesList
+	}
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
@@ -610,17 +774,18 @@ func (r *WAFExclusionPolicyResource) Read(ctx context.Context, req resource.Read
 	})
 	if listData, ok := apiResource.Spec["waf_exclusion_rules"].([]interface{}); ok && len(listData) > 0 {
 		var waf_exclusion_rulesList []WAFExclusionPolicyWAFExclusionRulesModel
-		for _, item := range listData {
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				waf_exclusion_rulesList = append(waf_exclusion_rulesList, WAFExclusionPolicyWAFExclusionRulesModel{
 					AnyDomain: func() *WAFExclusionPolicyEmptyModel {
-						if _, ok := itemMap["any_domain"].(map[string]interface{}); ok {
+						if !isImport && len(data.WAFExclusionRules) > listIdx && data.WAFExclusionRules[listIdx].AnyDomain != nil {
 							return &WAFExclusionPolicyEmptyModel{}
 						}
 						return nil
 					}(),
 					AnyPath: func() *WAFExclusionPolicyEmptyModel {
-						if _, ok := itemMap["any_path"].(map[string]interface{}); ok {
+						if !isImport && len(data.WAFExclusionRules) > listIdx && data.WAFExclusionRules[listIdx].AnyPath != nil {
 							return &WAFExclusionPolicyEmptyModel{}
 						}
 						return nil
@@ -695,7 +860,7 @@ func (r *WAFExclusionPolicyResource) Read(ctx context.Context, req resource.Read
 						return types.StringNull()
 					}(),
 					WAFSkipProcessing: func() *WAFExclusionPolicyEmptyModel {
-						if _, ok := itemMap["waf_skip_processing"].(map[string]interface{}); ok {
+						if !isImport && len(data.WAFExclusionRules) > listIdx && data.WAFExclusionRules[listIdx].WAFSkipProcessing != nil {
 							return &WAFExclusionPolicyEmptyModel{}
 						}
 						return nil
@@ -778,6 +943,68 @@ func (r *WAFExclusionPolicyResource) Update(ctx context.Context, req resource.Up
 			}
 			if item.AppFirewallDetectionControl != nil {
 				app_firewall_detection_controlNestedMap := make(map[string]interface{})
+				if len(item.AppFirewallDetectionControl.ExcludeAttackTypeContexts) > 0 {
+					var exclude_attack_type_contextsDeepList []map[string]interface{}
+					for _, deepListItem := range item.AppFirewallDetectionControl.ExcludeAttackTypeContexts {
+						deepListItemMap := make(map[string]interface{})
+						if !deepListItem.Context.IsNull() && !deepListItem.Context.IsUnknown() {
+							deepListItemMap["context"] = deepListItem.Context.ValueString()
+						}
+						if !deepListItem.ContextName.IsNull() && !deepListItem.ContextName.IsUnknown() {
+							deepListItemMap["context_name"] = deepListItem.ContextName.ValueString()
+						}
+						if !deepListItem.ExcludeAttackType.IsNull() && !deepListItem.ExcludeAttackType.IsUnknown() {
+							deepListItemMap["exclude_attack_type"] = deepListItem.ExcludeAttackType.ValueString()
+						}
+						exclude_attack_type_contextsDeepList = append(exclude_attack_type_contextsDeepList, deepListItemMap)
+					}
+					app_firewall_detection_controlNestedMap["exclude_attack_type_contexts"] = exclude_attack_type_contextsDeepList
+				}
+				if len(item.AppFirewallDetectionControl.ExcludeBotNameContexts) > 0 {
+					var exclude_bot_name_contextsDeepList []map[string]interface{}
+					for _, deepListItem := range item.AppFirewallDetectionControl.ExcludeBotNameContexts {
+						deepListItemMap := make(map[string]interface{})
+						if !deepListItem.BotName.IsNull() && !deepListItem.BotName.IsUnknown() {
+							deepListItemMap["bot_name"] = deepListItem.BotName.ValueString()
+						}
+						exclude_bot_name_contextsDeepList = append(exclude_bot_name_contextsDeepList, deepListItemMap)
+					}
+					app_firewall_detection_controlNestedMap["exclude_bot_name_contexts"] = exclude_bot_name_contextsDeepList
+				}
+				if len(item.AppFirewallDetectionControl.ExcludeSignatureContexts) > 0 {
+					var exclude_signature_contextsDeepList []map[string]interface{}
+					for _, deepListItem := range item.AppFirewallDetectionControl.ExcludeSignatureContexts {
+						deepListItemMap := make(map[string]interface{})
+						if !deepListItem.Context.IsNull() && !deepListItem.Context.IsUnknown() {
+							deepListItemMap["context"] = deepListItem.Context.ValueString()
+						}
+						if !deepListItem.ContextName.IsNull() && !deepListItem.ContextName.IsUnknown() {
+							deepListItemMap["context_name"] = deepListItem.ContextName.ValueString()
+						}
+						if !deepListItem.SignatureID.IsNull() && !deepListItem.SignatureID.IsUnknown() {
+							deepListItemMap["signature_id"] = deepListItem.SignatureID.ValueInt64()
+						}
+						exclude_signature_contextsDeepList = append(exclude_signature_contextsDeepList, deepListItemMap)
+					}
+					app_firewall_detection_controlNestedMap["exclude_signature_contexts"] = exclude_signature_contextsDeepList
+				}
+				if len(item.AppFirewallDetectionControl.ExcludeViolationContexts) > 0 {
+					var exclude_violation_contextsDeepList []map[string]interface{}
+					for _, deepListItem := range item.AppFirewallDetectionControl.ExcludeViolationContexts {
+						deepListItemMap := make(map[string]interface{})
+						if !deepListItem.Context.IsNull() && !deepListItem.Context.IsUnknown() {
+							deepListItemMap["context"] = deepListItem.Context.ValueString()
+						}
+						if !deepListItem.ContextName.IsNull() && !deepListItem.ContextName.IsUnknown() {
+							deepListItemMap["context_name"] = deepListItem.ContextName.ValueString()
+						}
+						if !deepListItem.ExcludeViolation.IsNull() && !deepListItem.ExcludeViolation.IsUnknown() {
+							deepListItemMap["exclude_violation"] = deepListItem.ExcludeViolation.ValueString()
+						}
+						exclude_violation_contextsDeepList = append(exclude_violation_contextsDeepList, deepListItemMap)
+					}
+					app_firewall_detection_controlNestedMap["exclude_violation_contexts"] = exclude_violation_contextsDeepList
+				}
 				itemMap["app_firewall_detection_control"] = app_firewall_detection_controlNestedMap
 			}
 			if !item.ExactValue.IsNull() && !item.ExactValue.IsUnknown() {

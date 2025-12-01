@@ -443,7 +443,7 @@ func (r *DataTypeResource) Create(ctx context.Context, req resource.CreateReques
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.DataType{
+	createReq := &client.DataType{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -452,7 +452,7 @@ func (r *DataTypeResource) Create(ctx context.Context, req resource.CreateReques
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -461,7 +461,7 @@ func (r *DataTypeResource) Create(ctx context.Context, req resource.CreateReques
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -470,7 +470,7 @@ func (r *DataTypeResource) Create(ctx context.Context, req resource.CreateReques
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -478,7 +478,7 @@ func (r *DataTypeResource) Create(ctx context.Context, req resource.CreateReques
 		var compliancesList []string
 		resp.Diagnostics.Append(data.Compliances.ElementsAs(ctx, &compliancesList, false)...)
 		if !resp.Diagnostics.HasError() {
-			apiResource.Spec["compliances"] = compliancesList
+			createReq.Spec["compliances"] = compliancesList
 		}
 	}
 	if len(data.Rules) > 0 {
@@ -487,6 +487,17 @@ func (r *DataTypeResource) Create(ctx context.Context, req resource.CreateReques
 			itemMap := make(map[string]interface{})
 			if item.KeyPattern != nil {
 				key_patternNestedMap := make(map[string]interface{})
+				if item.KeyPattern.ExactValues != nil {
+					exact_valuesDeepMap := make(map[string]interface{})
+					if !item.KeyPattern.ExactValues.ExactValues.IsNull() && !item.KeyPattern.ExactValues.ExactValues.IsUnknown() {
+						var ExactValuesItems []string
+						diags := item.KeyPattern.ExactValues.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
+						if !diags.HasError() {
+							exact_valuesDeepMap["exact_values"] = ExactValuesItems
+						}
+					}
+					key_patternNestedMap["exact_values"] = exact_valuesDeepMap
+				}
 				if !item.KeyPattern.RegexValue.IsNull() && !item.KeyPattern.RegexValue.IsUnknown() {
 					key_patternNestedMap["regex_value"] = item.KeyPattern.RegexValue.ValueString()
 				}
@@ -497,10 +508,41 @@ func (r *DataTypeResource) Create(ctx context.Context, req resource.CreateReques
 			}
 			if item.KeyValuePattern != nil {
 				key_value_patternNestedMap := make(map[string]interface{})
+				if item.KeyValuePattern.KeyPattern != nil {
+					key_patternDeepMap := make(map[string]interface{})
+					if !item.KeyValuePattern.KeyPattern.RegexValue.IsNull() && !item.KeyValuePattern.KeyPattern.RegexValue.IsUnknown() {
+						key_patternDeepMap["regex_value"] = item.KeyValuePattern.KeyPattern.RegexValue.ValueString()
+					}
+					if !item.KeyValuePattern.KeyPattern.SubstringValue.IsNull() && !item.KeyValuePattern.KeyPattern.SubstringValue.IsUnknown() {
+						key_patternDeepMap["substring_value"] = item.KeyValuePattern.KeyPattern.SubstringValue.ValueString()
+					}
+					key_value_patternNestedMap["key_pattern"] = key_patternDeepMap
+				}
+				if item.KeyValuePattern.ValuePattern != nil {
+					value_patternDeepMap := make(map[string]interface{})
+					if !item.KeyValuePattern.ValuePattern.RegexValue.IsNull() && !item.KeyValuePattern.ValuePattern.RegexValue.IsUnknown() {
+						value_patternDeepMap["regex_value"] = item.KeyValuePattern.ValuePattern.RegexValue.ValueString()
+					}
+					if !item.KeyValuePattern.ValuePattern.SubstringValue.IsNull() && !item.KeyValuePattern.ValuePattern.SubstringValue.IsUnknown() {
+						value_patternDeepMap["substring_value"] = item.KeyValuePattern.ValuePattern.SubstringValue.ValueString()
+					}
+					key_value_patternNestedMap["value_pattern"] = value_patternDeepMap
+				}
 				itemMap["key_value_pattern"] = key_value_patternNestedMap
 			}
 			if item.ValuePattern != nil {
 				value_patternNestedMap := make(map[string]interface{})
+				if item.ValuePattern.ExactValues != nil {
+					exact_valuesDeepMap := make(map[string]interface{})
+					if !item.ValuePattern.ExactValues.ExactValues.IsNull() && !item.ValuePattern.ExactValues.ExactValues.IsUnknown() {
+						var ExactValuesItems []string
+						diags := item.ValuePattern.ExactValues.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
+						if !diags.HasError() {
+							exact_valuesDeepMap["exact_values"] = ExactValuesItems
+						}
+					}
+					value_patternNestedMap["exact_values"] = exact_valuesDeepMap
+				}
 				if !item.ValuePattern.RegexValue.IsNull() && !item.ValuePattern.RegexValue.IsUnknown() {
 					value_patternNestedMap["regex_value"] = item.ValuePattern.RegexValue.ValueString()
 				}
@@ -511,44 +553,127 @@ func (r *DataTypeResource) Create(ctx context.Context, req resource.CreateReques
 			}
 			rulesList = append(rulesList, itemMap)
 		}
-		apiResource.Spec["rules"] = rulesList
+		createReq.Spec["rules"] = rulesList
 	}
 	if !data.IsPii.IsNull() && !data.IsPii.IsUnknown() {
-		apiResource.Spec["is_pii"] = data.IsPii.ValueBool()
+		createReq.Spec["is_pii"] = data.IsPii.ValueBool()
 	}
 	if !data.IsSensitiveData.IsNull() && !data.IsSensitiveData.IsUnknown() {
-		apiResource.Spec["is_sensitive_data"] = data.IsSensitiveData.ValueBool()
+		createReq.Spec["is_sensitive_data"] = data.IsSensitiveData.ValueBool()
 	}
 
 
-	created, err := r.client.CreateDataType(ctx, apiResource)
+	apiResource, err := r.client.CreateDataType(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create DataType: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
-	if v, ok := created.Spec["is_pii"].(bool); ok {
-		data.IsPii = types.BoolValue(v)
-	} else if data.IsPii.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
-		data.IsPii = types.BoolNull()
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if v, ok := apiResource.Spec["compliances"].([]interface{}); ok && len(v) > 0 {
+		var compliancesList []string
+		for _, item := range v {
+			if s, ok := item.(string); ok {
+				compliancesList = append(compliancesList, s)
+			}
+		}
+		listVal, diags := types.ListValueFrom(ctx, types.StringType, compliancesList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Compliances = listVal
+		}
+	} else {
+		data.Compliances = types.ListNull(types.StringType)
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["is_sensitive_data"].(bool); ok {
-		data.IsSensitiveData = types.BoolValue(v)
-	} else if data.IsSensitiveData.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
-		data.IsSensitiveData = types.BoolNull()
+	if listData, ok := apiResource.Spec["rules"].([]interface{}); ok && len(listData) > 0 {
+		var rulesList []DataTypeRulesModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				rulesList = append(rulesList, DataTypeRulesModel{
+					KeyPattern: func() *DataTypeRulesKeyPatternModel {
+						if nestedMap, ok := itemMap["key_pattern"].(map[string]interface{}); ok {
+							return &DataTypeRulesKeyPatternModel{
+								RegexValue: func() types.String {
+									if v, ok := nestedMap["regex_value"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								SubstringValue: func() types.String {
+									if v, ok := nestedMap["substring_value"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					KeyValuePattern: func() *DataTypeRulesKeyValuePatternModel {
+						if _, ok := itemMap["key_value_pattern"].(map[string]interface{}); ok {
+							return &DataTypeRulesKeyValuePatternModel{
+							}
+						}
+						return nil
+					}(),
+					ValuePattern: func() *DataTypeRulesValuePatternModel {
+						if nestedMap, ok := itemMap["value_pattern"].(map[string]interface{}); ok {
+							return &DataTypeRulesValuePatternModel{
+								RegexValue: func() types.String {
+									if v, ok := nestedMap["regex_value"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								SubstringValue: func() types.String {
+									if v, ok := nestedMap["substring_value"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+				})
+			}
+		}
+		data.Rules = rulesList
 	}
-	// If plan had a value, preserve it
+	// Top-level Optional bool: preserve prior state to avoid API default drift
+	if !isImport && !data.IsPii.IsNull() && !data.IsPii.IsUnknown() {
+		// Normal Read: preserve existing state value (do nothing)
+	} else {
+		// Import case, null state, or unknown (after Create): read from API
+		if v, ok := apiResource.Spec["is_pii"].(bool); ok {
+			data.IsPii = types.BoolValue(v)
+		} else {
+			data.IsPii = types.BoolNull()
+		}
+	}
+	// Top-level Optional bool: preserve prior state to avoid API default drift
+	if !isImport && !data.IsSensitiveData.IsNull() && !data.IsSensitiveData.IsUnknown() {
+		// Normal Read: preserve existing state value (do nothing)
+	} else {
+		// Import case, null state, or unknown (after Create): read from API
+		if v, ok := apiResource.Spec["is_sensitive_data"].(bool); ok {
+			data.IsSensitiveData = types.BoolValue(v)
+		} else {
+			data.IsSensitiveData = types.BoolNull()
+		}
+	}
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
@@ -654,7 +779,8 @@ func (r *DataTypeResource) Read(ctx context.Context, req resource.ReadRequest, r
 	}
 	if listData, ok := apiResource.Spec["rules"].([]interface{}); ok && len(listData) > 0 {
 		var rulesList []DataTypeRulesModel
-		for _, item := range listData {
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				rulesList = append(rulesList, DataTypeRulesModel{
 					KeyPattern: func() *DataTypeRulesKeyPatternModel {
@@ -708,10 +834,10 @@ func (r *DataTypeResource) Read(ctx context.Context, req resource.ReadRequest, r
 		data.Rules = rulesList
 	}
 	// Top-level Optional bool: preserve prior state to avoid API default drift
-	if !isImport && !data.IsPii.IsNull() {
+	if !isImport && !data.IsPii.IsNull() && !data.IsPii.IsUnknown() {
 		// Normal Read: preserve existing state value (do nothing)
 	} else {
-		// Import case or null state: read from API
+		// Import case, null state, or unknown (after Create): read from API
 		if v, ok := apiResource.Spec["is_pii"].(bool); ok {
 			data.IsPii = types.BoolValue(v)
 		} else {
@@ -719,10 +845,10 @@ func (r *DataTypeResource) Read(ctx context.Context, req resource.ReadRequest, r
 		}
 	}
 	// Top-level Optional bool: preserve prior state to avoid API default drift
-	if !isImport && !data.IsSensitiveData.IsNull() {
+	if !isImport && !data.IsSensitiveData.IsNull() && !data.IsSensitiveData.IsUnknown() {
 		// Normal Read: preserve existing state value (do nothing)
 	} else {
-		// Import case or null state: read from API
+		// Import case, null state, or unknown (after Create): read from API
 		if v, ok := apiResource.Spec["is_sensitive_data"].(bool); ok {
 			data.IsSensitiveData = types.BoolValue(v)
 		} else {
@@ -803,6 +929,17 @@ func (r *DataTypeResource) Update(ctx context.Context, req resource.UpdateReques
 			itemMap := make(map[string]interface{})
 			if item.KeyPattern != nil {
 				key_patternNestedMap := make(map[string]interface{})
+				if item.KeyPattern.ExactValues != nil {
+					exact_valuesDeepMap := make(map[string]interface{})
+					if !item.KeyPattern.ExactValues.ExactValues.IsNull() && !item.KeyPattern.ExactValues.ExactValues.IsUnknown() {
+						var ExactValuesItems []string
+						diags := item.KeyPattern.ExactValues.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
+						if !diags.HasError() {
+							exact_valuesDeepMap["exact_values"] = ExactValuesItems
+						}
+					}
+					key_patternNestedMap["exact_values"] = exact_valuesDeepMap
+				}
 				if !item.KeyPattern.RegexValue.IsNull() && !item.KeyPattern.RegexValue.IsUnknown() {
 					key_patternNestedMap["regex_value"] = item.KeyPattern.RegexValue.ValueString()
 				}
@@ -813,10 +950,41 @@ func (r *DataTypeResource) Update(ctx context.Context, req resource.UpdateReques
 			}
 			if item.KeyValuePattern != nil {
 				key_value_patternNestedMap := make(map[string]interface{})
+				if item.KeyValuePattern.KeyPattern != nil {
+					key_patternDeepMap := make(map[string]interface{})
+					if !item.KeyValuePattern.KeyPattern.RegexValue.IsNull() && !item.KeyValuePattern.KeyPattern.RegexValue.IsUnknown() {
+						key_patternDeepMap["regex_value"] = item.KeyValuePattern.KeyPattern.RegexValue.ValueString()
+					}
+					if !item.KeyValuePattern.KeyPattern.SubstringValue.IsNull() && !item.KeyValuePattern.KeyPattern.SubstringValue.IsUnknown() {
+						key_patternDeepMap["substring_value"] = item.KeyValuePattern.KeyPattern.SubstringValue.ValueString()
+					}
+					key_value_patternNestedMap["key_pattern"] = key_patternDeepMap
+				}
+				if item.KeyValuePattern.ValuePattern != nil {
+					value_patternDeepMap := make(map[string]interface{})
+					if !item.KeyValuePattern.ValuePattern.RegexValue.IsNull() && !item.KeyValuePattern.ValuePattern.RegexValue.IsUnknown() {
+						value_patternDeepMap["regex_value"] = item.KeyValuePattern.ValuePattern.RegexValue.ValueString()
+					}
+					if !item.KeyValuePattern.ValuePattern.SubstringValue.IsNull() && !item.KeyValuePattern.ValuePattern.SubstringValue.IsUnknown() {
+						value_patternDeepMap["substring_value"] = item.KeyValuePattern.ValuePattern.SubstringValue.ValueString()
+					}
+					key_value_patternNestedMap["value_pattern"] = value_patternDeepMap
+				}
 				itemMap["key_value_pattern"] = key_value_patternNestedMap
 			}
 			if item.ValuePattern != nil {
 				value_patternNestedMap := make(map[string]interface{})
+				if item.ValuePattern.ExactValues != nil {
+					exact_valuesDeepMap := make(map[string]interface{})
+					if !item.ValuePattern.ExactValues.ExactValues.IsNull() && !item.ValuePattern.ExactValues.ExactValues.IsUnknown() {
+						var ExactValuesItems []string
+						diags := item.ValuePattern.ExactValues.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
+						if !diags.HasError() {
+							exact_valuesDeepMap["exact_values"] = ExactValuesItems
+						}
+					}
+					value_patternNestedMap["exact_values"] = exact_valuesDeepMap
+				}
 				if !item.ValuePattern.RegexValue.IsNull() && !item.ValuePattern.RegexValue.IsUnknown() {
 					value_patternNestedMap["regex_value"] = item.ValuePattern.RegexValue.ValueString()
 				}

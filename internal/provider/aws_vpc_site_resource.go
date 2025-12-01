@@ -1032,6 +1032,7 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional: true,
+						Computed: true,
 					},
 				},
 
@@ -1238,6 +1239,7 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -1264,6 +1266,7 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -1290,6 +1293,7 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -1442,6 +1446,7 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
+								Computed: true,
 							},
 						},
 					},
@@ -1459,6 +1464,7 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
+								Computed: true,
 							},
 						},
 					},
@@ -1495,6 +1501,7 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 															Optional: true,
+															Computed: true,
 														},
 													},
 												},
@@ -1519,6 +1526,7 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 															Optional: true,
+															Computed: true,
 														},
 													},
 												},
@@ -1573,6 +1581,7 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 																	"kind": schema.StringAttribute{
 																		MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																		Optional: true,
+																		Computed: true,
 																	},
 																	"name": schema.StringAttribute{
 																		MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -1585,10 +1594,12 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 																	"tenant": schema.StringAttribute{
 																		MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																		Optional: true,
+																		Computed: true,
 																	},
 																	"uid": schema.StringAttribute{
 																		MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																		Optional: true,
+																		Computed: true,
 																	},
 																},
 															},
@@ -1724,6 +1735,7 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 																	"kind": schema.StringAttribute{
 																		MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																		Optional: true,
+																		Computed: true,
 																	},
 																	"name": schema.StringAttribute{
 																		MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -1736,10 +1748,12 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 																	"tenant": schema.StringAttribute{
 																		MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																		Optional: true,
+																		Computed: true,
 																	},
 																	"uid": schema.StringAttribute{
 																		MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																		Optional: true,
+																		Computed: true,
 																	},
 																},
 															},
@@ -1987,6 +2001,7 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional: true,
+						Computed: true,
 					},
 				},
 
@@ -2048,6 +2063,7 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
+								Computed: true,
 							},
 						},
 					},
@@ -2107,6 +2123,7 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -2133,6 +2150,7 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -2159,6 +2177,7 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -2240,6 +2259,7 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
+								Computed: true,
 							},
 						},
 					},
@@ -2279,6 +2299,7 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 															Optional: true,
+															Computed: true,
 														},
 													},
 												},
@@ -2303,6 +2324,7 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 															Optional: true,
+															Computed: true,
 														},
 													},
 												},
@@ -2327,6 +2349,7 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
+								Computed: true,
 							},
 						},
 					},
@@ -2392,6 +2415,7 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 																	"kind": schema.StringAttribute{
 																		MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																		Optional: true,
+																		Computed: true,
 																	},
 																	"name": schema.StringAttribute{
 																		MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -2404,10 +2428,12 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 																	"tenant": schema.StringAttribute{
 																		MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																		Optional: true,
+																		Computed: true,
 																	},
 																	"uid": schema.StringAttribute{
 																		MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																		Optional: true,
+																		Computed: true,
 																	},
 																},
 															},
@@ -2659,7 +2685,7 @@ func (r *AWSVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.AWSVPCSite{
+	createReq := &client.AWSVPCSite{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -2668,7 +2694,7 @@ func (r *AWSVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -2677,7 +2703,7 @@ func (r *AWSVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -2686,7 +2712,7 @@ func (r *AWSVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -2715,7 +2741,7 @@ func (r *AWSVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 			}
 			admin_passwordMap["clear_secret_info"] = clear_secret_infoNestedMap
 		}
-		apiResource.Spec["admin_password"] = admin_passwordMap
+		createReq.Spec["admin_password"] = admin_passwordMap
 	}
 	if data.AWSCred != nil {
 		aws_credMap := make(map[string]interface{})
@@ -2728,11 +2754,11 @@ func (r *AWSVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 		if !data.AWSCred.Tenant.IsNull() && !data.AWSCred.Tenant.IsUnknown() {
 			aws_credMap["tenant"] = data.AWSCred.Tenant.ValueString()
 		}
-		apiResource.Spec["aws_cred"] = aws_credMap
+		createReq.Spec["aws_cred"] = aws_credMap
 	}
 	if data.BlockAllServices != nil {
 		block_all_servicesMap := make(map[string]interface{})
-		apiResource.Spec["block_all_services"] = block_all_servicesMap
+		createReq.Spec["block_all_services"] = block_all_servicesMap
 	}
 	if data.BlockedServices != nil {
 		blocked_servicesMap := make(map[string]interface{})
@@ -2756,7 +2782,7 @@ func (r *AWSVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 			}
 			blocked_servicesMap["blocked_sevice"] = blocked_seviceList
 		}
-		apiResource.Spec["blocked_services"] = blocked_servicesMap
+		createReq.Spec["blocked_services"] = blocked_servicesMap
 	}
 	if data.Coordinates != nil {
 		coordinatesMap := make(map[string]interface{})
@@ -2766,7 +2792,7 @@ func (r *AWSVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 		if !data.Coordinates.Longitude.IsNull() && !data.Coordinates.Longitude.IsUnknown() {
 			coordinatesMap["longitude"] = data.Coordinates.Longitude.ValueInt64()
 		}
-		apiResource.Spec["coordinates"] = coordinatesMap
+		createReq.Spec["coordinates"] = coordinatesMap
 	}
 	if data.CustomDNS != nil {
 		custom_dnsMap := make(map[string]interface{})
@@ -2776,7 +2802,7 @@ func (r *AWSVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 		if !data.CustomDNS.OutsideNameserver.IsNull() && !data.CustomDNS.OutsideNameserver.IsUnknown() {
 			custom_dnsMap["outside_nameserver"] = data.CustomDNS.OutsideNameserver.ValueString()
 		}
-		apiResource.Spec["custom_dns"] = custom_dnsMap
+		createReq.Spec["custom_dns"] = custom_dnsMap
 	}
 	if data.CustomSecurityGroup != nil {
 		custom_security_groupMap := make(map[string]interface{})
@@ -2786,15 +2812,15 @@ func (r *AWSVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 		if !data.CustomSecurityGroup.OutsideSecurityGroupID.IsNull() && !data.CustomSecurityGroup.OutsideSecurityGroupID.IsUnknown() {
 			custom_security_groupMap["outside_security_group_id"] = data.CustomSecurityGroup.OutsideSecurityGroupID.ValueString()
 		}
-		apiResource.Spec["custom_security_group"] = custom_security_groupMap
+		createReq.Spec["custom_security_group"] = custom_security_groupMap
 	}
 	if data.DefaultBlockedServices != nil {
 		default_blocked_servicesMap := make(map[string]interface{})
-		apiResource.Spec["default_blocked_services"] = default_blocked_servicesMap
+		createReq.Spec["default_blocked_services"] = default_blocked_servicesMap
 	}
 	if data.DirectConnectDisabled != nil {
 		direct_connect_disabledMap := make(map[string]interface{})
-		apiResource.Spec["direct_connect_disabled"] = direct_connect_disabledMap
+		createReq.Spec["direct_connect_disabled"] = direct_connect_disabledMap
 	}
 	if data.DirectConnectEnabled != nil {
 		direct_connect_enabledMap := make(map[string]interface{})
@@ -2811,41 +2837,41 @@ func (r *AWSVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 		if data.DirectConnectEnabled.StandardVifs != nil {
 			direct_connect_enabledMap["standard_vifs"] = map[string]interface{}{}
 		}
-		apiResource.Spec["direct_connect_enabled"] = direct_connect_enabledMap
+		createReq.Spec["direct_connect_enabled"] = direct_connect_enabledMap
 	}
 	if data.DisableInternetVip != nil {
 		disable_internet_vipMap := make(map[string]interface{})
-		apiResource.Spec["disable_internet_vip"] = disable_internet_vipMap
+		createReq.Spec["disable_internet_vip"] = disable_internet_vipMap
 	}
 	if data.EgressGatewayDefault != nil {
 		egress_gateway_defaultMap := make(map[string]interface{})
-		apiResource.Spec["egress_gateway_default"] = egress_gateway_defaultMap
+		createReq.Spec["egress_gateway_default"] = egress_gateway_defaultMap
 	}
 	if data.EgressNatGw != nil {
 		egress_nat_gwMap := make(map[string]interface{})
 		if !data.EgressNatGw.NatGwID.IsNull() && !data.EgressNatGw.NatGwID.IsUnknown() {
 			egress_nat_gwMap["nat_gw_id"] = data.EgressNatGw.NatGwID.ValueString()
 		}
-		apiResource.Spec["egress_nat_gw"] = egress_nat_gwMap
+		createReq.Spec["egress_nat_gw"] = egress_nat_gwMap
 	}
 	if data.EgressVirtualPrivateGateway != nil {
 		egress_virtual_private_gatewayMap := make(map[string]interface{})
 		if !data.EgressVirtualPrivateGateway.VgwID.IsNull() && !data.EgressVirtualPrivateGateway.VgwID.IsUnknown() {
 			egress_virtual_private_gatewayMap["vgw_id"] = data.EgressVirtualPrivateGateway.VgwID.ValueString()
 		}
-		apiResource.Spec["egress_virtual_private_gateway"] = egress_virtual_private_gatewayMap
+		createReq.Spec["egress_virtual_private_gateway"] = egress_virtual_private_gatewayMap
 	}
 	if data.EnableInternetVip != nil {
 		enable_internet_vipMap := make(map[string]interface{})
-		apiResource.Spec["enable_internet_vip"] = enable_internet_vipMap
+		createReq.Spec["enable_internet_vip"] = enable_internet_vipMap
 	}
 	if data.F5OrchestratedRouting != nil {
 		f5_orchestrated_routingMap := make(map[string]interface{})
-		apiResource.Spec["f5_orchestrated_routing"] = f5_orchestrated_routingMap
+		createReq.Spec["f5_orchestrated_routing"] = f5_orchestrated_routingMap
 	}
 	if data.F5xcSecurityGroup != nil {
 		f5xc_security_groupMap := make(map[string]interface{})
-		apiResource.Spec["f5xc_security_group"] = f5xc_security_groupMap
+		createReq.Spec["f5xc_security_group"] = f5xc_security_groupMap
 	}
 	if data.IngressEgressGw != nil {
 		ingress_egress_gwMap := make(map[string]interface{})
@@ -2976,7 +3002,7 @@ func (r *AWSVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 		if data.IngressEgressGw.SmConnectionPvtIP != nil {
 			ingress_egress_gwMap["sm_connection_pvt_ip"] = map[string]interface{}{}
 		}
-		apiResource.Spec["ingress_egress_gw"] = ingress_egress_gwMap
+		createReq.Spec["ingress_egress_gw"] = ingress_egress_gwMap
 	}
 	if data.IngressGw != nil {
 		ingress_gwMap := make(map[string]interface{})
@@ -3009,7 +3035,7 @@ func (r *AWSVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 			performance_enhancement_modeNestedMap := make(map[string]interface{})
 			ingress_gwMap["performance_enhancement_mode"] = performance_enhancement_modeNestedMap
 		}
-		apiResource.Spec["ingress_gw"] = ingress_gwMap
+		createReq.Spec["ingress_gw"] = ingress_gwMap
 	}
 	if data.KubernetesUpgradeDrain != nil {
 		kubernetes_upgrade_drainMap := make(map[string]interface{})
@@ -3026,7 +3052,7 @@ func (r *AWSVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 			}
 			kubernetes_upgrade_drainMap["enable_upgrade_drain"] = enable_upgrade_drainNestedMap
 		}
-		apiResource.Spec["kubernetes_upgrade_drain"] = kubernetes_upgrade_drainMap
+		createReq.Spec["kubernetes_upgrade_drain"] = kubernetes_upgrade_drainMap
 	}
 	if data.LogReceiver != nil {
 		log_receiverMap := make(map[string]interface{})
@@ -3039,19 +3065,19 @@ func (r *AWSVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 		if !data.LogReceiver.Tenant.IsNull() && !data.LogReceiver.Tenant.IsUnknown() {
 			log_receiverMap["tenant"] = data.LogReceiver.Tenant.ValueString()
 		}
-		apiResource.Spec["log_receiver"] = log_receiverMap
+		createReq.Spec["log_receiver"] = log_receiverMap
 	}
 	if data.LogsStreamingDisabled != nil {
 		logs_streaming_disabledMap := make(map[string]interface{})
-		apiResource.Spec["logs_streaming_disabled"] = logs_streaming_disabledMap
+		createReq.Spec["logs_streaming_disabled"] = logs_streaming_disabledMap
 	}
 	if data.ManualRouting != nil {
 		manual_routingMap := make(map[string]interface{})
-		apiResource.Spec["manual_routing"] = manual_routingMap
+		createReq.Spec["manual_routing"] = manual_routingMap
 	}
 	if data.NoWorkerNodes != nil {
 		no_worker_nodesMap := make(map[string]interface{})
-		apiResource.Spec["no_worker_nodes"] = no_worker_nodesMap
+		createReq.Spec["no_worker_nodes"] = no_worker_nodesMap
 	}
 	if data.OfflineSurvivabilityMode != nil {
 		offline_survivability_modeMap := make(map[string]interface{})
@@ -3061,7 +3087,7 @@ func (r *AWSVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 		if data.OfflineSurvivabilityMode.NoOfflineSurvivabilityMode != nil {
 			offline_survivability_modeMap["no_offline_survivability_mode"] = map[string]interface{}{}
 		}
-		apiResource.Spec["offline_survivability_mode"] = offline_survivability_modeMap
+		createReq.Spec["offline_survivability_mode"] = offline_survivability_modeMap
 	}
 	if data.Os != nil {
 		osMap := make(map[string]interface{})
@@ -3071,7 +3097,7 @@ func (r *AWSVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 		if !data.Os.OperatingSystemVersion.IsNull() && !data.Os.OperatingSystemVersion.IsUnknown() {
 			osMap["operating_system_version"] = data.Os.OperatingSystemVersion.ValueString()
 		}
-		apiResource.Spec["os"] = osMap
+		createReq.Spec["os"] = osMap
 	}
 	if data.PrivateConnectivity != nil {
 		private_connectivityMap := make(map[string]interface{})
@@ -3094,7 +3120,7 @@ func (r *AWSVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 		if data.PrivateConnectivity.Outside != nil {
 			private_connectivityMap["outside"] = map[string]interface{}{}
 		}
-		apiResource.Spec["private_connectivity"] = private_connectivityMap
+		createReq.Spec["private_connectivity"] = private_connectivityMap
 	}
 	if data.Sw != nil {
 		swMap := make(map[string]interface{})
@@ -3104,11 +3130,11 @@ func (r *AWSVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 		if !data.Sw.VolterraSoftwareVersion.IsNull() && !data.Sw.VolterraSoftwareVersion.IsUnknown() {
 			swMap["volterra_software_version"] = data.Sw.VolterraSoftwareVersion.ValueString()
 		}
-		apiResource.Spec["sw"] = swMap
+		createReq.Spec["sw"] = swMap
 	}
 	if data.Tags != nil {
 		tagsMap := make(map[string]interface{})
-		apiResource.Spec["tags"] = tagsMap
+		createReq.Spec["tags"] = tagsMap
 	}
 	if data.VoltstackCluster != nil {
 		voltstack_clusterMap := make(map[string]interface{})
@@ -3217,7 +3243,7 @@ func (r *AWSVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 			storage_class_listNestedMap := make(map[string]interface{})
 			voltstack_clusterMap["storage_class_list"] = storage_class_listNestedMap
 		}
-		apiResource.Spec["voltstack_cluster"] = voltstack_clusterMap
+		createReq.Spec["voltstack_cluster"] = voltstack_clusterMap
 	}
 	if data.VPC != nil {
 		vpcMap := make(map[string]interface{})
@@ -3234,94 +3260,1163 @@ func (r *AWSVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 		if !data.VPC.VPCID.IsNull() && !data.VPC.VPCID.IsUnknown() {
 			vpcMap["vpc_id"] = data.VPC.VPCID.ValueString()
 		}
-		apiResource.Spec["vpc"] = vpcMap
+		createReq.Spec["vpc"] = vpcMap
 	}
 	if !data.Address.IsNull() && !data.Address.IsUnknown() {
-		apiResource.Spec["address"] = data.Address.ValueString()
+		createReq.Spec["address"] = data.Address.ValueString()
 	}
 	if !data.AWSRegion.IsNull() && !data.AWSRegion.IsUnknown() {
-		apiResource.Spec["aws_region"] = data.AWSRegion.ValueString()
+		createReq.Spec["aws_region"] = data.AWSRegion.ValueString()
 	}
 	if !data.DiskSize.IsNull() && !data.DiskSize.IsUnknown() {
-		apiResource.Spec["disk_size"] = data.DiskSize.ValueInt64()
+		createReq.Spec["disk_size"] = data.DiskSize.ValueInt64()
 	}
 	if !data.InstanceType.IsNull() && !data.InstanceType.IsUnknown() {
-		apiResource.Spec["instance_type"] = data.InstanceType.ValueString()
+		createReq.Spec["instance_type"] = data.InstanceType.ValueString()
 	}
 	if !data.NodesPerAz.IsNull() && !data.NodesPerAz.IsUnknown() {
-		apiResource.Spec["nodes_per_az"] = data.NodesPerAz.ValueInt64()
+		createReq.Spec["nodes_per_az"] = data.NodesPerAz.ValueInt64()
 	}
 	if !data.SSHKey.IsNull() && !data.SSHKey.IsUnknown() {
-		apiResource.Spec["ssh_key"] = data.SSHKey.ValueString()
+		createReq.Spec["ssh_key"] = data.SSHKey.ValueString()
 	}
 	if !data.TotalNodes.IsNull() && !data.TotalNodes.IsUnknown() {
-		apiResource.Spec["total_nodes"] = data.TotalNodes.ValueInt64()
+		createReq.Spec["total_nodes"] = data.TotalNodes.ValueInt64()
 	}
 
 
-	created, err := r.client.CreateAWSVPCSite(ctx, apiResource)
+	apiResource, err := r.client.CreateAWSVPCSite(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create AWSVPCSite: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
-	if v, ok := created.Spec["address"].(string); ok && v != "" {
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if _, ok := apiResource.Spec["admin_password"].(map[string]interface{}); ok && isImport && data.AdminPassword == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AdminPassword = &AWSVPCSiteAdminPasswordModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["aws_cred"].(map[string]interface{}); ok && (isImport || data.AWSCred != nil) {
+		data.AWSCred = &AWSVPCSiteAWSCredModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["block_all_services"].(map[string]interface{}); ok && isImport && data.BlockAllServices == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.BlockAllServices = &AWSVPCSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["blocked_services"].(map[string]interface{}); ok && (isImport || data.BlockedServices != nil) {
+		data.BlockedServices = &AWSVPCSiteBlockedServicesModel{
+			BlockedSevice: func() []AWSVPCSiteBlockedServicesBlockedSeviceModel {
+				if listData, ok := blockData["blocked_sevice"].([]interface{}); ok && len(listData) > 0 {
+					var result []AWSVPCSiteBlockedServicesBlockedSeviceModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, AWSVPCSiteBlockedServicesBlockedSeviceModel{
+								DNS: func() *AWSVPCSiteEmptyModel {
+									if _, ok := itemMap["dns"].(map[string]interface{}); ok {
+										return &AWSVPCSiteEmptyModel{}
+									}
+									return nil
+								}(),
+								NetworkType: func() types.String {
+									if v, ok := itemMap["network_type"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								SSH: func() *AWSVPCSiteEmptyModel {
+									if _, ok := itemMap["ssh"].(map[string]interface{}); ok {
+										return &AWSVPCSiteEmptyModel{}
+									}
+									return nil
+								}(),
+								WebUserInterface: func() *AWSVPCSiteEmptyModel {
+									if _, ok := itemMap["web_user_interface"].(map[string]interface{}); ok {
+										return &AWSVPCSiteEmptyModel{}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["coordinates"].(map[string]interface{}); ok && (isImport || data.Coordinates != nil) {
+		data.Coordinates = &AWSVPCSiteCoordinatesModel{
+			Latitude: func() types.Int64 {
+				if v, ok := blockData["latitude"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			Longitude: func() types.Int64 {
+				if v, ok := blockData["longitude"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["custom_dns"].(map[string]interface{}); ok && (isImport || data.CustomDNS != nil) {
+		data.CustomDNS = &AWSVPCSiteCustomDNSModel{
+			InsideNameserver: func() types.String {
+				if v, ok := blockData["inside_nameserver"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			OutsideNameserver: func() types.String {
+				if v, ok := blockData["outside_nameserver"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["custom_security_group"].(map[string]interface{}); ok && (isImport || data.CustomSecurityGroup != nil) {
+		data.CustomSecurityGroup = &AWSVPCSiteCustomSecurityGroupModel{
+			InsideSecurityGroupID: func() types.String {
+				if v, ok := blockData["inside_security_group_id"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			OutsideSecurityGroupID: func() types.String {
+				if v, ok := blockData["outside_security_group_id"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["default_blocked_services"].(map[string]interface{}); ok && isImport && data.DefaultBlockedServices == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DefaultBlockedServices = &AWSVPCSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["direct_connect_disabled"].(map[string]interface{}); ok && isImport && data.DirectConnectDisabled == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DirectConnectDisabled = &AWSVPCSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["direct_connect_enabled"].(map[string]interface{}); ok && (isImport || data.DirectConnectEnabled != nil) {
+		data.DirectConnectEnabled = &AWSVPCSiteDirectConnectEnabledModel{
+			AutoAsn: func() *AWSVPCSiteEmptyModel {
+				if !isImport && data.DirectConnectEnabled != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.DirectConnectEnabled.AutoAsn
+				}
+				// Import case: read from API
+				if _, ok := blockData["auto_asn"].(map[string]interface{}); ok {
+					return &AWSVPCSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			CustomAsn: func() types.Int64 {
+				if v, ok := blockData["custom_asn"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			HostedVifs: func() *AWSVPCSiteDirectConnectEnabledHostedVifsModel {
+				if !isImport && data.DirectConnectEnabled != nil && data.DirectConnectEnabled.HostedVifs != nil {
+					// Normal Read: preserve existing state value
+					return data.DirectConnectEnabled.HostedVifs
+				}
+				// Import case: read from API
+				if _, ok := blockData["hosted_vifs"].(map[string]interface{}); ok {
+					return &AWSVPCSiteDirectConnectEnabledHostedVifsModel{
+					}
+				}
+				return nil
+			}(),
+			StandardVifs: func() *AWSVPCSiteEmptyModel {
+				if !isImport && data.DirectConnectEnabled != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.DirectConnectEnabled.StandardVifs
+				}
+				// Import case: read from API
+				if _, ok := blockData["standard_vifs"].(map[string]interface{}); ok {
+					return &AWSVPCSiteEmptyModel{}
+				}
+				return nil
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["disable_internet_vip"].(map[string]interface{}); ok && isImport && data.DisableInternetVip == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableInternetVip = &AWSVPCSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["egress_gateway_default"].(map[string]interface{}); ok && isImport && data.EgressGatewayDefault == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.EgressGatewayDefault = &AWSVPCSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["egress_nat_gw"].(map[string]interface{}); ok && (isImport || data.EgressNatGw != nil) {
+		data.EgressNatGw = &AWSVPCSiteEgressNatGwModel{
+			NatGwID: func() types.String {
+				if v, ok := blockData["nat_gw_id"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["egress_virtual_private_gateway"].(map[string]interface{}); ok && (isImport || data.EgressVirtualPrivateGateway != nil) {
+		data.EgressVirtualPrivateGateway = &AWSVPCSiteEgressVirtualPrivateGatewayModel{
+			VgwID: func() types.String {
+				if v, ok := blockData["vgw_id"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["enable_internet_vip"].(map[string]interface{}); ok && isImport && data.EnableInternetVip == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.EnableInternetVip = &AWSVPCSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["f5_orchestrated_routing"].(map[string]interface{}); ok && isImport && data.F5OrchestratedRouting == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.F5OrchestratedRouting = &AWSVPCSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["f5xc_security_group"].(map[string]interface{}); ok && isImport && data.F5xcSecurityGroup == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.F5xcSecurityGroup = &AWSVPCSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["ingress_egress_gw"].(map[string]interface{}); ok && (isImport || data.IngressEgressGw != nil) {
+		data.IngressEgressGw = &AWSVPCSiteIngressEgressGwModel{
+			ActiveEnhancedFirewallPolicies: func() *AWSVPCSiteIngressEgressGwActiveEnhancedFirewallPoliciesModel {
+				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.ActiveEnhancedFirewallPolicies != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressEgressGw.ActiveEnhancedFirewallPolicies
+				}
+				// Import case: read from API
+				if _, ok := blockData["active_enhanced_firewall_policies"].(map[string]interface{}); ok {
+					return &AWSVPCSiteIngressEgressGwActiveEnhancedFirewallPoliciesModel{
+					}
+				}
+				return nil
+			}(),
+			ActiveForwardProxyPolicies: func() *AWSVPCSiteIngressEgressGwActiveForwardProxyPoliciesModel {
+				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.ActiveForwardProxyPolicies != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressEgressGw.ActiveForwardProxyPolicies
+				}
+				// Import case: read from API
+				if _, ok := blockData["active_forward_proxy_policies"].(map[string]interface{}); ok {
+					return &AWSVPCSiteIngressEgressGwActiveForwardProxyPoliciesModel{
+					}
+				}
+				return nil
+			}(),
+			ActiveNetworkPolicies: func() *AWSVPCSiteIngressEgressGwActiveNetworkPoliciesModel {
+				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.ActiveNetworkPolicies != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressEgressGw.ActiveNetworkPolicies
+				}
+				// Import case: read from API
+				if _, ok := blockData["active_network_policies"].(map[string]interface{}); ok {
+					return &AWSVPCSiteIngressEgressGwActiveNetworkPoliciesModel{
+					}
+				}
+				return nil
+			}(),
+			AllowedVipPort: func() *AWSVPCSiteIngressEgressGwAllowedVipPortModel {
+				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.AllowedVipPort != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressEgressGw.AllowedVipPort
+				}
+				// Import case: read from API
+				if _, ok := blockData["allowed_vip_port"].(map[string]interface{}); ok {
+					return &AWSVPCSiteIngressEgressGwAllowedVipPortModel{
+					}
+				}
+				return nil
+			}(),
+			AllowedVipPortSLI: func() *AWSVPCSiteIngressEgressGwAllowedVipPortSLIModel {
+				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.AllowedVipPortSLI != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressEgressGw.AllowedVipPortSLI
+				}
+				// Import case: read from API
+				if _, ok := blockData["allowed_vip_port_sli"].(map[string]interface{}); ok {
+					return &AWSVPCSiteIngressEgressGwAllowedVipPortSLIModel{
+					}
+				}
+				return nil
+			}(),
+			AWSCertifiedHw: func() types.String {
+				if v, ok := blockData["aws_certified_hw"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			AzNodes: func() []AWSVPCSiteIngressEgressGwAzNodesModel {
+				if listData, ok := blockData["az_nodes"].([]interface{}); ok && len(listData) > 0 {
+					var result []AWSVPCSiteIngressEgressGwAzNodesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, AWSVPCSiteIngressEgressGwAzNodesModel{
+								AWSAzName: func() types.String {
+									if v, ok := itemMap["aws_az_name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								InsideSubnet: func() *AWSVPCSiteIngressEgressGwAzNodesInsideSubnetModel {
+									if deepMap, ok := itemMap["inside_subnet"].(map[string]interface{}); ok {
+										return &AWSVPCSiteIngressEgressGwAzNodesInsideSubnetModel{
+											ExistingSubnetID: func() types.String {
+												if v, ok := deepMap["existing_subnet_id"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								OutsideSubnet: func() *AWSVPCSiteIngressEgressGwAzNodesOutsideSubnetModel {
+									if deepMap, ok := itemMap["outside_subnet"].(map[string]interface{}); ok {
+										return &AWSVPCSiteIngressEgressGwAzNodesOutsideSubnetModel{
+											ExistingSubnetID: func() types.String {
+												if v, ok := deepMap["existing_subnet_id"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								ReservedInsideSubnet: func() *AWSVPCSiteEmptyModel {
+									if _, ok := itemMap["reserved_inside_subnet"].(map[string]interface{}); ok {
+										return &AWSVPCSiteEmptyModel{}
+									}
+									return nil
+								}(),
+								WorkloadSubnet: func() *AWSVPCSiteIngressEgressGwAzNodesWorkloadSubnetModel {
+									if deepMap, ok := itemMap["workload_subnet"].(map[string]interface{}); ok {
+										return &AWSVPCSiteIngressEgressGwAzNodesWorkloadSubnetModel{
+											ExistingSubnetID: func() types.String {
+												if v, ok := deepMap["existing_subnet_id"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			DcClusterGroupInsideVn: func() *AWSVPCSiteIngressEgressGwDcClusterGroupInsideVnModel {
+				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.DcClusterGroupInsideVn != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressEgressGw.DcClusterGroupInsideVn
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["dc_cluster_group_inside_vn"].(map[string]interface{}); ok {
+					return &AWSVPCSiteIngressEgressGwDcClusterGroupInsideVnModel{
+						Name: func() types.String {
+							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Namespace: func() types.String {
+							if v, ok := nestedBlockData["namespace"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Tenant: func() types.String {
+							if v, ok := nestedBlockData["tenant"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			DcClusterGroupOutsideVn: func() *AWSVPCSiteIngressEgressGwDcClusterGroupOutsideVnModel {
+				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.DcClusterGroupOutsideVn != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressEgressGw.DcClusterGroupOutsideVn
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["dc_cluster_group_outside_vn"].(map[string]interface{}); ok {
+					return &AWSVPCSiteIngressEgressGwDcClusterGroupOutsideVnModel{
+						Name: func() types.String {
+							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Namespace: func() types.String {
+							if v, ok := nestedBlockData["namespace"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Tenant: func() types.String {
+							if v, ok := nestedBlockData["tenant"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			ForwardProxyAllowAll: func() *AWSVPCSiteEmptyModel {
+				if !isImport && data.IngressEgressGw != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.IngressEgressGw.ForwardProxyAllowAll
+				}
+				// Import case: read from API
+				if _, ok := blockData["forward_proxy_allow_all"].(map[string]interface{}); ok {
+					return &AWSVPCSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			GlobalNetworkList: func() *AWSVPCSiteIngressEgressGwGlobalNetworkListModel {
+				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.GlobalNetworkList != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressEgressGw.GlobalNetworkList
+				}
+				// Import case: read from API
+				if _, ok := blockData["global_network_list"].(map[string]interface{}); ok {
+					return &AWSVPCSiteIngressEgressGwGlobalNetworkListModel{
+					}
+				}
+				return nil
+			}(),
+			InsideStaticRoutes: func() *AWSVPCSiteIngressEgressGwInsideStaticRoutesModel {
+				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.InsideStaticRoutes != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressEgressGw.InsideStaticRoutes
+				}
+				// Import case: read from API
+				if _, ok := blockData["inside_static_routes"].(map[string]interface{}); ok {
+					return &AWSVPCSiteIngressEgressGwInsideStaticRoutesModel{
+					}
+				}
+				return nil
+			}(),
+			NoDcClusterGroup: func() *AWSVPCSiteEmptyModel {
+				if !isImport && data.IngressEgressGw != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.IngressEgressGw.NoDcClusterGroup
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_dc_cluster_group"].(map[string]interface{}); ok {
+					return &AWSVPCSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			NoForwardProxy: func() *AWSVPCSiteEmptyModel {
+				if !isImport && data.IngressEgressGw != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.IngressEgressGw.NoForwardProxy
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_forward_proxy"].(map[string]interface{}); ok {
+					return &AWSVPCSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			NoGlobalNetwork: func() *AWSVPCSiteEmptyModel {
+				if !isImport && data.IngressEgressGw != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.IngressEgressGw.NoGlobalNetwork
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_global_network"].(map[string]interface{}); ok {
+					return &AWSVPCSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			NoInsideStaticRoutes: func() *AWSVPCSiteEmptyModel {
+				if !isImport && data.IngressEgressGw != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.IngressEgressGw.NoInsideStaticRoutes
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_inside_static_routes"].(map[string]interface{}); ok {
+					return &AWSVPCSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			NoNetworkPolicy: func() *AWSVPCSiteEmptyModel {
+				if !isImport && data.IngressEgressGw != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.IngressEgressGw.NoNetworkPolicy
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_network_policy"].(map[string]interface{}); ok {
+					return &AWSVPCSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			NoOutsideStaticRoutes: func() *AWSVPCSiteEmptyModel {
+				if !isImport && data.IngressEgressGw != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.IngressEgressGw.NoOutsideStaticRoutes
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_outside_static_routes"].(map[string]interface{}); ok {
+					return &AWSVPCSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			OutsideStaticRoutes: func() *AWSVPCSiteIngressEgressGwOutsideStaticRoutesModel {
+				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.OutsideStaticRoutes != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressEgressGw.OutsideStaticRoutes
+				}
+				// Import case: read from API
+				if _, ok := blockData["outside_static_routes"].(map[string]interface{}); ok {
+					return &AWSVPCSiteIngressEgressGwOutsideStaticRoutesModel{
+					}
+				}
+				return nil
+			}(),
+			PerformanceEnhancementMode: func() *AWSVPCSiteIngressEgressGwPerformanceEnhancementModeModel {
+				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.PerformanceEnhancementMode != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressEgressGw.PerformanceEnhancementMode
+				}
+				// Import case: read from API
+				if _, ok := blockData["performance_enhancement_mode"].(map[string]interface{}); ok {
+					return &AWSVPCSiteIngressEgressGwPerformanceEnhancementModeModel{
+					}
+				}
+				return nil
+			}(),
+			SmConnectionPublicIP: func() *AWSVPCSiteEmptyModel {
+				if !isImport && data.IngressEgressGw != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.IngressEgressGw.SmConnectionPublicIP
+				}
+				// Import case: read from API
+				if _, ok := blockData["sm_connection_public_ip"].(map[string]interface{}); ok {
+					return &AWSVPCSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			SmConnectionPvtIP: func() *AWSVPCSiteEmptyModel {
+				if !isImport && data.IngressEgressGw != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.IngressEgressGw.SmConnectionPvtIP
+				}
+				// Import case: read from API
+				if _, ok := blockData["sm_connection_pvt_ip"].(map[string]interface{}); ok {
+					return &AWSVPCSiteEmptyModel{}
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["ingress_gw"].(map[string]interface{}); ok && (isImport || data.IngressGw != nil) {
+		data.IngressGw = &AWSVPCSiteIngressGwModel{
+			AllowedVipPort: func() *AWSVPCSiteIngressGwAllowedVipPortModel {
+				if !isImport && data.IngressGw != nil && data.IngressGw.AllowedVipPort != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressGw.AllowedVipPort
+				}
+				// Import case: read from API
+				if _, ok := blockData["allowed_vip_port"].(map[string]interface{}); ok {
+					return &AWSVPCSiteIngressGwAllowedVipPortModel{
+					}
+				}
+				return nil
+			}(),
+			AWSCertifiedHw: func() types.String {
+				if v, ok := blockData["aws_certified_hw"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			AzNodes: func() []AWSVPCSiteIngressGwAzNodesModel {
+				if listData, ok := blockData["az_nodes"].([]interface{}); ok && len(listData) > 0 {
+					var result []AWSVPCSiteIngressGwAzNodesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, AWSVPCSiteIngressGwAzNodesModel{
+								AWSAzName: func() types.String {
+									if v, ok := itemMap["aws_az_name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								LocalSubnet: func() *AWSVPCSiteIngressGwAzNodesLocalSubnetModel {
+									if deepMap, ok := itemMap["local_subnet"].(map[string]interface{}); ok {
+										return &AWSVPCSiteIngressGwAzNodesLocalSubnetModel{
+											ExistingSubnetID: func() types.String {
+												if v, ok := deepMap["existing_subnet_id"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			PerformanceEnhancementMode: func() *AWSVPCSiteIngressGwPerformanceEnhancementModeModel {
+				if !isImport && data.IngressGw != nil && data.IngressGw.PerformanceEnhancementMode != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressGw.PerformanceEnhancementMode
+				}
+				// Import case: read from API
+				if _, ok := blockData["performance_enhancement_mode"].(map[string]interface{}); ok {
+					return &AWSVPCSiteIngressGwPerformanceEnhancementModeModel{
+					}
+				}
+				return nil
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["kubernetes_upgrade_drain"].(map[string]interface{}); ok && isImport && data.KubernetesUpgradeDrain == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.KubernetesUpgradeDrain = &AWSVPCSiteKubernetesUpgradeDrainModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["log_receiver"].(map[string]interface{}); ok && (isImport || data.LogReceiver != nil) {
+		data.LogReceiver = &AWSVPCSiteLogReceiverModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["logs_streaming_disabled"].(map[string]interface{}); ok && isImport && data.LogsStreamingDisabled == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.LogsStreamingDisabled = &AWSVPCSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["manual_routing"].(map[string]interface{}); ok && isImport && data.ManualRouting == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ManualRouting = &AWSVPCSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_worker_nodes"].(map[string]interface{}); ok && isImport && data.NoWorkerNodes == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoWorkerNodes = &AWSVPCSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["offline_survivability_mode"].(map[string]interface{}); ok && isImport && data.OfflineSurvivabilityMode == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.OfflineSurvivabilityMode = &AWSVPCSiteOfflineSurvivabilityModeModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["os"].(map[string]interface{}); ok && (isImport || data.Os != nil) {
+		data.Os = &AWSVPCSiteOsModel{
+			DefaultOsVersion: func() *AWSVPCSiteEmptyModel {
+				if !isImport && data.Os != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.Os.DefaultOsVersion
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_os_version"].(map[string]interface{}); ok {
+					return &AWSVPCSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			OperatingSystemVersion: func() types.String {
+				if v, ok := blockData["operating_system_version"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["private_connectivity"].(map[string]interface{}); ok && isImport && data.PrivateConnectivity == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.PrivateConnectivity = &AWSVPCSitePrivateConnectivityModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["sw"].(map[string]interface{}); ok && (isImport || data.Sw != nil) {
+		data.Sw = &AWSVPCSiteSwModel{
+			DefaultSwVersion: func() *AWSVPCSiteEmptyModel {
+				if !isImport && data.Sw != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.Sw.DefaultSwVersion
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_sw_version"].(map[string]interface{}); ok {
+					return &AWSVPCSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			VolterraSoftwareVersion: func() types.String {
+				if v, ok := blockData["volterra_software_version"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["tags"].(map[string]interface{}); ok && isImport && data.Tags == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Tags = &AWSVPCSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["voltstack_cluster"].(map[string]interface{}); ok && (isImport || data.VoltstackCluster != nil) {
+		data.VoltstackCluster = &AWSVPCSiteVoltstackClusterModel{
+			ActiveEnhancedFirewallPolicies: func() *AWSVPCSiteVoltstackClusterActiveEnhancedFirewallPoliciesModel {
+				if !isImport && data.VoltstackCluster != nil && data.VoltstackCluster.ActiveEnhancedFirewallPolicies != nil {
+					// Normal Read: preserve existing state value
+					return data.VoltstackCluster.ActiveEnhancedFirewallPolicies
+				}
+				// Import case: read from API
+				if _, ok := blockData["active_enhanced_firewall_policies"].(map[string]interface{}); ok {
+					return &AWSVPCSiteVoltstackClusterActiveEnhancedFirewallPoliciesModel{
+					}
+				}
+				return nil
+			}(),
+			ActiveForwardProxyPolicies: func() *AWSVPCSiteVoltstackClusterActiveForwardProxyPoliciesModel {
+				if !isImport && data.VoltstackCluster != nil && data.VoltstackCluster.ActiveForwardProxyPolicies != nil {
+					// Normal Read: preserve existing state value
+					return data.VoltstackCluster.ActiveForwardProxyPolicies
+				}
+				// Import case: read from API
+				if _, ok := blockData["active_forward_proxy_policies"].(map[string]interface{}); ok {
+					return &AWSVPCSiteVoltstackClusterActiveForwardProxyPoliciesModel{
+					}
+				}
+				return nil
+			}(),
+			ActiveNetworkPolicies: func() *AWSVPCSiteVoltstackClusterActiveNetworkPoliciesModel {
+				if !isImport && data.VoltstackCluster != nil && data.VoltstackCluster.ActiveNetworkPolicies != nil {
+					// Normal Read: preserve existing state value
+					return data.VoltstackCluster.ActiveNetworkPolicies
+				}
+				// Import case: read from API
+				if _, ok := blockData["active_network_policies"].(map[string]interface{}); ok {
+					return &AWSVPCSiteVoltstackClusterActiveNetworkPoliciesModel{
+					}
+				}
+				return nil
+			}(),
+			AllowedVipPort: func() *AWSVPCSiteVoltstackClusterAllowedVipPortModel {
+				if !isImport && data.VoltstackCluster != nil && data.VoltstackCluster.AllowedVipPort != nil {
+					// Normal Read: preserve existing state value
+					return data.VoltstackCluster.AllowedVipPort
+				}
+				// Import case: read from API
+				if _, ok := blockData["allowed_vip_port"].(map[string]interface{}); ok {
+					return &AWSVPCSiteVoltstackClusterAllowedVipPortModel{
+					}
+				}
+				return nil
+			}(),
+			AWSCertifiedHw: func() types.String {
+				if v, ok := blockData["aws_certified_hw"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			AzNodes: func() []AWSVPCSiteVoltstackClusterAzNodesModel {
+				if listData, ok := blockData["az_nodes"].([]interface{}); ok && len(listData) > 0 {
+					var result []AWSVPCSiteVoltstackClusterAzNodesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, AWSVPCSiteVoltstackClusterAzNodesModel{
+								AWSAzName: func() types.String {
+									if v, ok := itemMap["aws_az_name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								LocalSubnet: func() *AWSVPCSiteVoltstackClusterAzNodesLocalSubnetModel {
+									if deepMap, ok := itemMap["local_subnet"].(map[string]interface{}); ok {
+										return &AWSVPCSiteVoltstackClusterAzNodesLocalSubnetModel{
+											ExistingSubnetID: func() types.String {
+												if v, ok := deepMap["existing_subnet_id"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			DcClusterGroup: func() *AWSVPCSiteVoltstackClusterDcClusterGroupModel {
+				if !isImport && data.VoltstackCluster != nil && data.VoltstackCluster.DcClusterGroup != nil {
+					// Normal Read: preserve existing state value
+					return data.VoltstackCluster.DcClusterGroup
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["dc_cluster_group"].(map[string]interface{}); ok {
+					return &AWSVPCSiteVoltstackClusterDcClusterGroupModel{
+						Name: func() types.String {
+							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Namespace: func() types.String {
+							if v, ok := nestedBlockData["namespace"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Tenant: func() types.String {
+							if v, ok := nestedBlockData["tenant"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			DefaultStorage: func() *AWSVPCSiteEmptyModel {
+				if !isImport && data.VoltstackCluster != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.VoltstackCluster.DefaultStorage
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_storage"].(map[string]interface{}); ok {
+					return &AWSVPCSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			ForwardProxyAllowAll: func() *AWSVPCSiteEmptyModel {
+				if !isImport && data.VoltstackCluster != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.VoltstackCluster.ForwardProxyAllowAll
+				}
+				// Import case: read from API
+				if _, ok := blockData["forward_proxy_allow_all"].(map[string]interface{}); ok {
+					return &AWSVPCSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			GlobalNetworkList: func() *AWSVPCSiteVoltstackClusterGlobalNetworkListModel {
+				if !isImport && data.VoltstackCluster != nil && data.VoltstackCluster.GlobalNetworkList != nil {
+					// Normal Read: preserve existing state value
+					return data.VoltstackCluster.GlobalNetworkList
+				}
+				// Import case: read from API
+				if _, ok := blockData["global_network_list"].(map[string]interface{}); ok {
+					return &AWSVPCSiteVoltstackClusterGlobalNetworkListModel{
+					}
+				}
+				return nil
+			}(),
+			K8SCluster: func() *AWSVPCSiteVoltstackClusterK8SClusterModel {
+				if !isImport && data.VoltstackCluster != nil && data.VoltstackCluster.K8SCluster != nil {
+					// Normal Read: preserve existing state value
+					return data.VoltstackCluster.K8SCluster
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["k8s_cluster"].(map[string]interface{}); ok {
+					return &AWSVPCSiteVoltstackClusterK8SClusterModel{
+						Name: func() types.String {
+							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Namespace: func() types.String {
+							if v, ok := nestedBlockData["namespace"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Tenant: func() types.String {
+							if v, ok := nestedBlockData["tenant"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			NoDcClusterGroup: func() *AWSVPCSiteEmptyModel {
+				if !isImport && data.VoltstackCluster != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.VoltstackCluster.NoDcClusterGroup
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_dc_cluster_group"].(map[string]interface{}); ok {
+					return &AWSVPCSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			NoForwardProxy: func() *AWSVPCSiteEmptyModel {
+				if !isImport && data.VoltstackCluster != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.VoltstackCluster.NoForwardProxy
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_forward_proxy"].(map[string]interface{}); ok {
+					return &AWSVPCSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			NoGlobalNetwork: func() *AWSVPCSiteEmptyModel {
+				if !isImport && data.VoltstackCluster != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.VoltstackCluster.NoGlobalNetwork
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_global_network"].(map[string]interface{}); ok {
+					return &AWSVPCSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			NoK8SCluster: func() *AWSVPCSiteEmptyModel {
+				if !isImport && data.VoltstackCluster != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.VoltstackCluster.NoK8SCluster
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_k8s_cluster"].(map[string]interface{}); ok {
+					return &AWSVPCSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			NoNetworkPolicy: func() *AWSVPCSiteEmptyModel {
+				if !isImport && data.VoltstackCluster != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.VoltstackCluster.NoNetworkPolicy
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_network_policy"].(map[string]interface{}); ok {
+					return &AWSVPCSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			NoOutsideStaticRoutes: func() *AWSVPCSiteEmptyModel {
+				if !isImport && data.VoltstackCluster != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.VoltstackCluster.NoOutsideStaticRoutes
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_outside_static_routes"].(map[string]interface{}); ok {
+					return &AWSVPCSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			OutsideStaticRoutes: func() *AWSVPCSiteVoltstackClusterOutsideStaticRoutesModel {
+				if !isImport && data.VoltstackCluster != nil && data.VoltstackCluster.OutsideStaticRoutes != nil {
+					// Normal Read: preserve existing state value
+					return data.VoltstackCluster.OutsideStaticRoutes
+				}
+				// Import case: read from API
+				if _, ok := blockData["outside_static_routes"].(map[string]interface{}); ok {
+					return &AWSVPCSiteVoltstackClusterOutsideStaticRoutesModel{
+					}
+				}
+				return nil
+			}(),
+			SmConnectionPublicIP: func() *AWSVPCSiteEmptyModel {
+				if !isImport && data.VoltstackCluster != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.VoltstackCluster.SmConnectionPublicIP
+				}
+				// Import case: read from API
+				if _, ok := blockData["sm_connection_public_ip"].(map[string]interface{}); ok {
+					return &AWSVPCSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			SmConnectionPvtIP: func() *AWSVPCSiteEmptyModel {
+				if !isImport && data.VoltstackCluster != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.VoltstackCluster.SmConnectionPvtIP
+				}
+				// Import case: read from API
+				if _, ok := blockData["sm_connection_pvt_ip"].(map[string]interface{}); ok {
+					return &AWSVPCSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			StorageClassList: func() *AWSVPCSiteVoltstackClusterStorageClassListModel {
+				if !isImport && data.VoltstackCluster != nil && data.VoltstackCluster.StorageClassList != nil {
+					// Normal Read: preserve existing state value
+					return data.VoltstackCluster.StorageClassList
+				}
+				// Import case: read from API
+				if _, ok := blockData["storage_class_list"].(map[string]interface{}); ok {
+					return &AWSVPCSiteVoltstackClusterStorageClassListModel{
+					}
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["vpc"].(map[string]interface{}); ok && (isImport || data.VPC != nil) {
+		data.VPC = &AWSVPCSiteVPCModel{
+			NewVPC: func() *AWSVPCSiteVPCNewVPCModel {
+				if !isImport && data.VPC != nil && data.VPC.NewVPC != nil {
+					// Normal Read: preserve existing state value
+					return data.VPC.NewVPC
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["new_vpc"].(map[string]interface{}); ok {
+					return &AWSVPCSiteVPCNewVPCModel{
+						NameTag: func() types.String {
+							if v, ok := nestedBlockData["name_tag"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						PrimaryIPV4: func() types.String {
+							if v, ok := nestedBlockData["primary_ipv4"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			VPCID: func() types.String {
+				if v, ok := blockData["vpc_id"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if v, ok := apiResource.Spec["address"].(string); ok && v != "" {
 		data.Address = types.StringValue(v)
-	} else if data.Address.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.Address = types.StringNull()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["aws_region"].(string); ok && v != "" {
+	if v, ok := apiResource.Spec["aws_region"].(string); ok && v != "" {
 		data.AWSRegion = types.StringValue(v)
-	} else if data.AWSRegion.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.AWSRegion = types.StringNull()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["disk_size"].(float64); ok {
+	if v, ok := apiResource.Spec["disk_size"].(float64); ok {
 		data.DiskSize = types.Int64Value(int64(v))
-	} else if data.DiskSize.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.DiskSize = types.Int64Null()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["instance_type"].(string); ok && v != "" {
+	if v, ok := apiResource.Spec["instance_type"].(string); ok && v != "" {
 		data.InstanceType = types.StringValue(v)
-	} else if data.InstanceType.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.InstanceType = types.StringNull()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["nodes_per_az"].(float64); ok {
+	if v, ok := apiResource.Spec["nodes_per_az"].(float64); ok {
 		data.NodesPerAz = types.Int64Value(int64(v))
-	} else if data.NodesPerAz.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.NodesPerAz = types.Int64Null()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["ssh_key"].(string); ok && v != "" {
+	if v, ok := apiResource.Spec["ssh_key"].(string); ok && v != "" {
 		data.SSHKey = types.StringValue(v)
-	} else if data.SSHKey.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.SSHKey = types.StringNull()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["total_nodes"].(float64); ok {
+	if v, ok := apiResource.Spec["total_nodes"].(float64); ok {
 		data.TotalNodes = types.Int64Value(int64(v))
-	} else if data.TotalNodes.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.TotalNodes = types.Int64Null()
 	}
-	// If plan had a value, preserve it
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 

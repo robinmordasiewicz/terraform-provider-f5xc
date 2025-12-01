@@ -325,7 +325,7 @@ func (r *ContactResource) Create(ctx context.Context, req resource.CreateRequest
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.Contact{
+	createReq := &client.Contact{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -334,7 +334,7 @@ func (r *ContactResource) Create(ctx context.Context, req resource.CreateRequest
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -343,7 +343,7 @@ func (r *ContactResource) Create(ctx context.Context, req resource.CreateRequest
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -352,126 +352,110 @@ func (r *ContactResource) Create(ctx context.Context, req resource.CreateRequest
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
 	if !data.Address1.IsNull() && !data.Address1.IsUnknown() {
-		apiResource.Spec["address1"] = data.Address1.ValueString()
+		createReq.Spec["address1"] = data.Address1.ValueString()
 	}
 	if !data.Address2.IsNull() && !data.Address2.IsUnknown() {
-		apiResource.Spec["address2"] = data.Address2.ValueString()
+		createReq.Spec["address2"] = data.Address2.ValueString()
 	}
 	if !data.City.IsNull() && !data.City.IsUnknown() {
-		apiResource.Spec["city"] = data.City.ValueString()
+		createReq.Spec["city"] = data.City.ValueString()
 	}
 	if !data.ContactType.IsNull() && !data.ContactType.IsUnknown() {
-		apiResource.Spec["contact_type"] = data.ContactType.ValueString()
+		createReq.Spec["contact_type"] = data.ContactType.ValueString()
 	}
 	if !data.Country.IsNull() && !data.Country.IsUnknown() {
-		apiResource.Spec["country"] = data.Country.ValueString()
+		createReq.Spec["country"] = data.Country.ValueString()
 	}
 	if !data.County.IsNull() && !data.County.IsUnknown() {
-		apiResource.Spec["county"] = data.County.ValueString()
+		createReq.Spec["county"] = data.County.ValueString()
 	}
 	if !data.PhoneNumber.IsNull() && !data.PhoneNumber.IsUnknown() {
-		apiResource.Spec["phone_number"] = data.PhoneNumber.ValueString()
+		createReq.Spec["phone_number"] = data.PhoneNumber.ValueString()
 	}
 	if !data.State.IsNull() && !data.State.IsUnknown() {
-		apiResource.Spec["state"] = data.State.ValueString()
+		createReq.Spec["state"] = data.State.ValueString()
 	}
 	if !data.StateCode.IsNull() && !data.StateCode.IsUnknown() {
-		apiResource.Spec["state_code"] = data.StateCode.ValueString()
+		createReq.Spec["state_code"] = data.StateCode.ValueString()
 	}
 	if !data.ZipCode.IsNull() && !data.ZipCode.IsUnknown() {
-		apiResource.Spec["zip_code"] = data.ZipCode.ValueString()
+		createReq.Spec["zip_code"] = data.ZipCode.ValueString()
 	}
 
 
-	created, err := r.client.CreateContact(ctx, apiResource)
+	apiResource, err := r.client.CreateContact(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create Contact: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
-	if v, ok := created.Spec["address1"].(string); ok && v != "" {
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if v, ok := apiResource.Spec["address1"].(string); ok && v != "" {
 		data.Address1 = types.StringValue(v)
-	} else if data.Address1.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.Address1 = types.StringNull()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["address2"].(string); ok && v != "" {
+	if v, ok := apiResource.Spec["address2"].(string); ok && v != "" {
 		data.Address2 = types.StringValue(v)
-	} else if data.Address2.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.Address2 = types.StringNull()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["city"].(string); ok && v != "" {
+	if v, ok := apiResource.Spec["city"].(string); ok && v != "" {
 		data.City = types.StringValue(v)
-	} else if data.City.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.City = types.StringNull()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["contact_type"].(string); ok && v != "" {
+	if v, ok := apiResource.Spec["contact_type"].(string); ok && v != "" {
 		data.ContactType = types.StringValue(v)
-	} else if data.ContactType.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.ContactType = types.StringNull()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["country"].(string); ok && v != "" {
+	if v, ok := apiResource.Spec["country"].(string); ok && v != "" {
 		data.Country = types.StringValue(v)
-	} else if data.Country.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.Country = types.StringNull()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["county"].(string); ok && v != "" {
+	if v, ok := apiResource.Spec["county"].(string); ok && v != "" {
 		data.County = types.StringValue(v)
-	} else if data.County.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.County = types.StringNull()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["phone_number"].(string); ok && v != "" {
+	if v, ok := apiResource.Spec["phone_number"].(string); ok && v != "" {
 		data.PhoneNumber = types.StringValue(v)
-	} else if data.PhoneNumber.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.PhoneNumber = types.StringNull()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["state"].(string); ok && v != "" {
+	if v, ok := apiResource.Spec["state"].(string); ok && v != "" {
 		data.State = types.StringValue(v)
-	} else if data.State.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.State = types.StringNull()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["state_code"].(string); ok && v != "" {
+	if v, ok := apiResource.Spec["state_code"].(string); ok && v != "" {
 		data.StateCode = types.StringValue(v)
-	} else if data.StateCode.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.StateCode = types.StringNull()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["zip_code"].(string); ok && v != "" {
+	if v, ok := apiResource.Spec["zip_code"].(string); ok && v != "" {
 		data.ZipCode = types.StringValue(v)
-	} else if data.ZipCode.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.ZipCode = types.StringNull()
 	}
-	// If plan had a value, preserve it
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 

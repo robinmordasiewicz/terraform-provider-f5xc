@@ -149,6 +149,7 @@ func (r *TpmAPIKeyResource) Schema(ctx context.Context, req resource.SchemaReque
 						"kind": schema.StringAttribute{
 							MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 							Optional: true,
+							Computed: true,
 						},
 						"name": schema.StringAttribute{
 							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -161,10 +162,12 @@ func (r *TpmAPIKeyResource) Schema(ctx context.Context, req resource.SchemaReque
 						"tenant": schema.StringAttribute{
 							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 							Optional: true,
+							Computed: true,
 						},
 						"uid": schema.StringAttribute{
 							MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 							Optional: true,
+							Computed: true,
 						},
 					},
 
@@ -287,7 +290,7 @@ func (r *TpmAPIKeyResource) Create(ctx context.Context, req resource.CreateReque
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.TpmAPIKey{
+	createReq := &client.TpmAPIKey{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -296,7 +299,7 @@ func (r *TpmAPIKeyResource) Create(ctx context.Context, req resource.CreateReque
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -305,7 +308,7 @@ func (r *TpmAPIKeyResource) Create(ctx context.Context, req resource.CreateReque
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -314,7 +317,7 @@ func (r *TpmAPIKeyResource) Create(ctx context.Context, req resource.CreateReque
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -339,34 +342,83 @@ func (r *TpmAPIKeyResource) Create(ctx context.Context, req resource.CreateReque
 			}
 			category_refList = append(category_refList, itemMap)
 		}
-		apiResource.Spec["category_ref"] = category_refList
+		createReq.Spec["category_ref"] = category_refList
 	}
 	if !data.NeedMtls.IsNull() && !data.NeedMtls.IsUnknown() {
-		apiResource.Spec["need_mtls"] = data.NeedMtls.ValueBool()
+		createReq.Spec["need_mtls"] = data.NeedMtls.ValueBool()
 	}
 
 
-	created, err := r.client.CreateTpmAPIKey(ctx, apiResource)
+	apiResource, err := r.client.CreateTpmAPIKey(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create TpmAPIKey: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
-	if v, ok := created.Spec["need_mtls"].(bool); ok {
-		data.NeedMtls = types.BoolValue(v)
-	} else if data.NeedMtls.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
-		data.NeedMtls = types.BoolNull()
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if listData, ok := apiResource.Spec["category_ref"].([]interface{}); ok && len(listData) > 0 {
+		var category_refList []TpmAPIKeyCategoryRefModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				category_refList = append(category_refList, TpmAPIKeyCategoryRefModel{
+					Kind: func() types.String {
+						if v, ok := itemMap["kind"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Namespace: func() types.String {
+						if v, ok := itemMap["namespace"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Tenant: func() types.String {
+						if v, ok := itemMap["tenant"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Uid: func() types.String {
+						if v, ok := itemMap["uid"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.CategoryRef = category_refList
 	}
-	// If plan had a value, preserve it
+	// Top-level Optional bool: preserve prior state to avoid API default drift
+	if !isImport && !data.NeedMtls.IsNull() && !data.NeedMtls.IsUnknown() {
+		// Normal Read: preserve existing state value (do nothing)
+	} else {
+		// Import case, null state, or unknown (after Create): read from API
+		if v, ok := apiResource.Spec["need_mtls"].(bool); ok {
+			data.NeedMtls = types.BoolValue(v)
+		} else {
+			data.NeedMtls = types.BoolNull()
+		}
+	}
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
@@ -457,7 +509,8 @@ func (r *TpmAPIKeyResource) Read(ctx context.Context, req resource.ReadRequest, 
 	})
 	if listData, ok := apiResource.Spec["category_ref"].([]interface{}); ok && len(listData) > 0 {
 		var category_refList []TpmAPIKeyCategoryRefModel
-		for _, item := range listData {
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				category_refList = append(category_refList, TpmAPIKeyCategoryRefModel{
 					Kind: func() types.String {
@@ -496,10 +549,10 @@ func (r *TpmAPIKeyResource) Read(ctx context.Context, req resource.ReadRequest, 
 		data.CategoryRef = category_refList
 	}
 	// Top-level Optional bool: preserve prior state to avoid API default drift
-	if !isImport && !data.NeedMtls.IsNull() {
+	if !isImport && !data.NeedMtls.IsNull() && !data.NeedMtls.IsUnknown() {
 		// Normal Read: preserve existing state value (do nothing)
 	} else {
-		// Import case or null state: read from API
+		// Import case, null state, or unknown (after Create): read from API
 		if v, ok := apiResource.Spec["need_mtls"].(bool); ok {
 			data.NeedMtls = types.BoolValue(v)
 		} else {

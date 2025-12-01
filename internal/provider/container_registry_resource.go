@@ -324,7 +324,7 @@ func (r *ContainerRegistryResource) Create(ctx context.Context, req resource.Cre
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.ContainerRegistry{
+	createReq := &client.ContainerRegistry{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -333,7 +333,7 @@ func (r *ContainerRegistryResource) Create(ctx context.Context, req resource.Cre
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -342,7 +342,7 @@ func (r *ContainerRegistryResource) Create(ctx context.Context, req resource.Cre
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -351,7 +351,7 @@ func (r *ContainerRegistryResource) Create(ctx context.Context, req resource.Cre
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -380,54 +380,57 @@ func (r *ContainerRegistryResource) Create(ctx context.Context, req resource.Cre
 			}
 			passwordMap["clear_secret_info"] = clear_secret_infoNestedMap
 		}
-		apiResource.Spec["password"] = passwordMap
+		createReq.Spec["password"] = passwordMap
 	}
 	if !data.Email.IsNull() && !data.Email.IsUnknown() {
-		apiResource.Spec["email"] = data.Email.ValueString()
+		createReq.Spec["email"] = data.Email.ValueString()
 	}
 	if !data.Registry.IsNull() && !data.Registry.IsUnknown() {
-		apiResource.Spec["registry"] = data.Registry.ValueString()
+		createReq.Spec["registry"] = data.Registry.ValueString()
 	}
 	if !data.UserName.IsNull() && !data.UserName.IsUnknown() {
-		apiResource.Spec["user_name"] = data.UserName.ValueString()
+		createReq.Spec["user_name"] = data.UserName.ValueString()
 	}
 
 
-	created, err := r.client.CreateContainerRegistry(ctx, apiResource)
+	apiResource, err := r.client.CreateContainerRegistry(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create ContainerRegistry: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
-	if v, ok := created.Spec["email"].(string); ok && v != "" {
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if _, ok := apiResource.Spec["password"].(map[string]interface{}); ok && isImport && data.Password == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Password = &ContainerRegistryPasswordModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["email"].(string); ok && v != "" {
 		data.Email = types.StringValue(v)
-	} else if data.Email.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.Email = types.StringNull()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["registry"].(string); ok && v != "" {
+	if v, ok := apiResource.Spec["registry"].(string); ok && v != "" {
 		data.Registry = types.StringValue(v)
-	} else if data.Registry.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.Registry = types.StringNull()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["user_name"].(string); ok && v != "" {
+	if v, ok := apiResource.Spec["user_name"].(string); ok && v != "" {
 		data.UserName = types.StringValue(v)
-	} else if data.UserName.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.UserName = types.StringNull()
 	}
-	// If plan had a value, preserve it
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 

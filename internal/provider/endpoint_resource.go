@@ -344,6 +344,7 @@ func (r *EndpointResource) Schema(ctx context.Context, req resource.SchemaReques
 										"kind": schema.StringAttribute{
 											MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 											Optional: true,
+											Computed: true,
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -356,10 +357,12 @@ func (r *EndpointResource) Schema(ctx context.Context, req resource.SchemaReques
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 										"uid": schema.StringAttribute{
 											MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -378,6 +381,7 @@ func (r *EndpointResource) Schema(ctx context.Context, req resource.SchemaReques
 										"kind": schema.StringAttribute{
 											MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 											Optional: true,
+											Computed: true,
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -390,10 +394,12 @@ func (r *EndpointResource) Schema(ctx context.Context, req resource.SchemaReques
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 										"uid": schema.StringAttribute{
 											MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -422,6 +428,7 @@ func (r *EndpointResource) Schema(ctx context.Context, req resource.SchemaReques
 										"kind": schema.StringAttribute{
 											MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 											Optional: true,
+											Computed: true,
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -434,10 +441,12 @@ func (r *EndpointResource) Schema(ctx context.Context, req resource.SchemaReques
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 										"uid": schema.StringAttribute{
 											MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -564,7 +573,7 @@ func (r *EndpointResource) Create(ctx context.Context, req resource.CreateReques
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.Endpoint{
+	createReq := &client.Endpoint{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -573,7 +582,7 @@ func (r *EndpointResource) Create(ctx context.Context, req resource.CreateReques
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -582,7 +591,7 @@ func (r *EndpointResource) Create(ctx context.Context, req resource.CreateReques
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -591,7 +600,7 @@ func (r *EndpointResource) Create(ctx context.Context, req resource.CreateReques
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -603,7 +612,7 @@ func (r *EndpointResource) Create(ctx context.Context, req resource.CreateReques
 		if !data.DNSNameAdvanced.RefreshInterval.IsNull() && !data.DNSNameAdvanced.RefreshInterval.IsUnknown() {
 			dns_name_advancedMap["refresh_interval"] = data.DNSNameAdvanced.RefreshInterval.ValueInt64()
 		}
-		apiResource.Spec["dns_name_advanced"] = dns_name_advancedMap
+		createReq.Spec["dns_name_advanced"] = dns_name_advancedMap
 	}
 	if data.ServiceInfo != nil {
 		service_infoMap := make(map[string]interface{})
@@ -617,7 +626,7 @@ func (r *EndpointResource) Create(ctx context.Context, req resource.CreateReques
 			service_selectorNestedMap := make(map[string]interface{})
 			service_infoMap["service_selector"] = service_selectorNestedMap
 		}
-		apiResource.Spec["service_info"] = service_infoMap
+		createReq.Spec["service_info"] = service_infoMap
 	}
 	if data.SnatPool != nil {
 		snat_poolMap := make(map[string]interface{})
@@ -628,7 +637,7 @@ func (r *EndpointResource) Create(ctx context.Context, req resource.CreateReques
 			snat_poolNestedMap := make(map[string]interface{})
 			snat_poolMap["snat_pool"] = snat_poolNestedMap
 		}
-		apiResource.Spec["snat_pool"] = snat_poolMap
+		createReq.Spec["snat_pool"] = snat_poolMap
 	}
 	if data.Where != nil {
 		whereMap := make(map[string]interface{})
@@ -650,74 +659,135 @@ func (r *EndpointResource) Create(ctx context.Context, req resource.CreateReques
 			}
 			whereMap["virtual_site"] = virtual_siteNestedMap
 		}
-		apiResource.Spec["where"] = whereMap
+		createReq.Spec["where"] = whereMap
 	}
 	if !data.DNSName.IsNull() && !data.DNSName.IsUnknown() {
-		apiResource.Spec["dns_name"] = data.DNSName.ValueString()
+		createReq.Spec["dns_name"] = data.DNSName.ValueString()
 	}
 	if !data.HealthCheckPort.IsNull() && !data.HealthCheckPort.IsUnknown() {
-		apiResource.Spec["health_check_port"] = data.HealthCheckPort.ValueInt64()
+		createReq.Spec["health_check_port"] = data.HealthCheckPort.ValueInt64()
 	}
 	if !data.IP.IsNull() && !data.IP.IsUnknown() {
-		apiResource.Spec["ip"] = data.IP.ValueString()
+		createReq.Spec["ip"] = data.IP.ValueString()
 	}
 	if !data.Port.IsNull() && !data.Port.IsUnknown() {
-		apiResource.Spec["port"] = data.Port.ValueInt64()
+		createReq.Spec["port"] = data.Port.ValueInt64()
 	}
 	if !data.Protocol.IsNull() && !data.Protocol.IsUnknown() {
-		apiResource.Spec["protocol"] = data.Protocol.ValueString()
+		createReq.Spec["protocol"] = data.Protocol.ValueString()
 	}
 
 
-	created, err := r.client.CreateEndpoint(ctx, apiResource)
+	apiResource, err := r.client.CreateEndpoint(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create Endpoint: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
-	if v, ok := created.Spec["dns_name"].(string); ok && v != "" {
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["dns_name_advanced"].(map[string]interface{}); ok && (isImport || data.DNSNameAdvanced != nil) {
+		data.DNSNameAdvanced = &EndpointDNSNameAdvancedModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			RefreshInterval: func() types.Int64 {
+				if v, ok := blockData["refresh_interval"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["service_info"].(map[string]interface{}); ok && (isImport || data.ServiceInfo != nil) {
+		data.ServiceInfo = &EndpointServiceInfoModel{
+			DiscoveryType: func() types.String {
+				if v, ok := blockData["discovery_type"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			ServiceName: func() types.String {
+				if v, ok := blockData["service_name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			ServiceSelector: func() *EndpointServiceInfoServiceSelectorModel {
+				if !isImport && data.ServiceInfo != nil && data.ServiceInfo.ServiceSelector != nil {
+					// Normal Read: preserve existing state value
+					return data.ServiceInfo.ServiceSelector
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["service_selector"].(map[string]interface{}); ok {
+					return &EndpointServiceInfoServiceSelectorModel{
+						Expressions: func() types.List {
+							if v, ok := nestedBlockData["expressions"].([]interface{}); ok && len(v) > 0 {
+								var items []string
+								for _, item := range v {
+									if s, ok := item.(string); ok {
+										items = append(items, s)
+									}
+								}
+								listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+								return listVal
+							}
+							return types.ListNull(types.StringType)
+						}(),
+					}
+				}
+				return nil
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["snat_pool"].(map[string]interface{}); ok && isImport && data.SnatPool == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.SnatPool = &EndpointSnatPoolModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["where"].(map[string]interface{}); ok && isImport && data.Where == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Where = &EndpointWhereModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["dns_name"].(string); ok && v != "" {
 		data.DNSName = types.StringValue(v)
-	} else if data.DNSName.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.DNSName = types.StringNull()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["health_check_port"].(float64); ok {
+	if v, ok := apiResource.Spec["health_check_port"].(float64); ok {
 		data.HealthCheckPort = types.Int64Value(int64(v))
-	} else if data.HealthCheckPort.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.HealthCheckPort = types.Int64Null()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["ip"].(string); ok && v != "" {
+	if v, ok := apiResource.Spec["ip"].(string); ok && v != "" {
 		data.IP = types.StringValue(v)
-	} else if data.IP.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.IP = types.StringNull()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["port"].(float64); ok {
+	if v, ok := apiResource.Spec["port"].(float64); ok {
 		data.Port = types.Int64Value(int64(v))
-	} else if data.Port.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.Port = types.Int64Null()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["protocol"].(string); ok && v != "" {
+	if v, ok := apiResource.Spec["protocol"].(string); ok && v != "" {
 		data.Protocol = types.StringValue(v)
-	} else if data.Protocol.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.Protocol = types.StringNull()
 	}
-	// If plan had a value, preserve it
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 

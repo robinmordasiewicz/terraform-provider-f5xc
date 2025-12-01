@@ -182,6 +182,7 @@ func (r *SubnetResource) Schema(ctx context.Context, req resource.SchemaRequest,
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
+								Computed: true,
 							},
 						},
 					},
@@ -217,6 +218,7 @@ func (r *SubnetResource) Schema(ctx context.Context, req resource.SchemaRequest,
 								"tenant": schema.StringAttribute{
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional: true,
+									Computed: true,
 								},
 							},
 						},
@@ -362,7 +364,7 @@ func (r *SubnetResource) Create(ctx context.Context, req resource.CreateRequest,
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.Subnet{
+	createReq := &client.Subnet{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -371,7 +373,7 @@ func (r *SubnetResource) Create(ctx context.Context, req resource.CreateRequest,
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -380,7 +382,7 @@ func (r *SubnetResource) Create(ctx context.Context, req resource.CreateRequest,
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -389,7 +391,7 @@ func (r *SubnetResource) Create(ctx context.Context, req resource.CreateRequest,
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -408,15 +410,15 @@ func (r *SubnetResource) Create(ctx context.Context, req resource.CreateRequest,
 			}
 			connect_to_layer2Map["layer2_intf_ref"] = layer2_intf_refNestedMap
 		}
-		apiResource.Spec["connect_to_layer2"] = connect_to_layer2Map
+		createReq.Spec["connect_to_layer2"] = connect_to_layer2Map
 	}
 	if data.ConnectToSLO != nil {
 		connect_to_sloMap := make(map[string]interface{})
-		apiResource.Spec["connect_to_slo"] = connect_to_sloMap
+		createReq.Spec["connect_to_slo"] = connect_to_sloMap
 	}
 	if data.IsolatedNw != nil {
 		isolated_nwMap := make(map[string]interface{})
-		apiResource.Spec["isolated_nw"] = isolated_nwMap
+		createReq.Spec["isolated_nw"] = isolated_nwMap
 	}
 	if len(data.SiteSubnetParams) > 0 {
 		var site_subnet_paramsList []map[string]interface{}
@@ -443,28 +445,113 @@ func (r *SubnetResource) Create(ctx context.Context, req resource.CreateRequest,
 			}
 			if item.SubnetDhcpServerParams != nil {
 				subnet_dhcp_server_paramsNestedMap := make(map[string]interface{})
+				if len(item.SubnetDhcpServerParams.DhcpNetworks) > 0 {
+					var dhcp_networksDeepList []map[string]interface{}
+					for _, deepListItem := range item.SubnetDhcpServerParams.DhcpNetworks {
+						deepListItemMap := make(map[string]interface{})
+						if !deepListItem.NetworkPrefix.IsNull() && !deepListItem.NetworkPrefix.IsUnknown() {
+							deepListItemMap["network_prefix"] = deepListItem.NetworkPrefix.ValueString()
+						}
+						dhcp_networksDeepList = append(dhcp_networksDeepList, deepListItemMap)
+					}
+					subnet_dhcp_server_paramsNestedMap["dhcp_networks"] = dhcp_networksDeepList
+				}
 				itemMap["subnet_dhcp_server_params"] = subnet_dhcp_server_paramsNestedMap
 			}
 			site_subnet_paramsList = append(site_subnet_paramsList, itemMap)
 		}
-		apiResource.Spec["site_subnet_params"] = site_subnet_paramsList
+		createReq.Spec["site_subnet_params"] = site_subnet_paramsList
 	}
 
 
-	created, err := r.client.CreateSubnet(ctx, apiResource)
+	apiResource, err := r.client.CreateSubnet(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create Subnet: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if _, ok := apiResource.Spec["connect_to_layer2"].(map[string]interface{}); ok && isImport && data.ConnectToLayer2 == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ConnectToLayer2 = &SubnetConnectToLayer2Model{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["connect_to_slo"].(map[string]interface{}); ok && isImport && data.ConnectToSLO == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ConnectToSLO = &SubnetEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["isolated_nw"].(map[string]interface{}); ok && isImport && data.IsolatedNw == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.IsolatedNw = &SubnetEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["site_subnet_params"].([]interface{}); ok && len(listData) > 0 {
+		var site_subnet_paramsList []SubnetSiteSubnetParamsModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				site_subnet_paramsList = append(site_subnet_paramsList, SubnetSiteSubnetParamsModel{
+					Dhcp: func() *SubnetEmptyModel {
+						if !isImport && len(data.SiteSubnetParams) > listIdx && data.SiteSubnetParams[listIdx].Dhcp != nil {
+							return &SubnetEmptyModel{}
+						}
+						return nil
+					}(),
+					Site: func() *SubnetSiteSubnetParamsSiteModel {
+						if nestedMap, ok := itemMap["site"].(map[string]interface{}); ok {
+							return &SubnetSiteSubnetParamsSiteModel{
+								Name: func() types.String {
+									if v, ok := nestedMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := nestedMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := nestedMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					StaticIP: func() *SubnetEmptyModel {
+						if !isImport && len(data.SiteSubnetParams) > listIdx && data.SiteSubnetParams[listIdx].StaticIP != nil {
+							return &SubnetEmptyModel{}
+						}
+						return nil
+					}(),
+					SubnetDhcpServerParams: func() *SubnetSiteSubnetParamsSubnetDhcpServerParamsModel {
+						if _, ok := itemMap["subnet_dhcp_server_params"].(map[string]interface{}); ok {
+							return &SubnetSiteSubnetParamsSubnetDhcpServerParamsModel{
+							}
+						}
+						return nil
+					}(),
+				})
+			}
+		}
+		data.SiteSubnetParams = site_subnet_paramsList
+	}
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
@@ -570,11 +657,12 @@ func (r *SubnetResource) Read(ctx context.Context, req resource.ReadRequest, res
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["site_subnet_params"].([]interface{}); ok && len(listData) > 0 {
 		var site_subnet_paramsList []SubnetSiteSubnetParamsModel
-		for _, item := range listData {
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				site_subnet_paramsList = append(site_subnet_paramsList, SubnetSiteSubnetParamsModel{
 					Dhcp: func() *SubnetEmptyModel {
-						if _, ok := itemMap["dhcp"].(map[string]interface{}); ok {
+						if !isImport && len(data.SiteSubnetParams) > listIdx && data.SiteSubnetParams[listIdx].Dhcp != nil {
 							return &SubnetEmptyModel{}
 						}
 						return nil
@@ -605,7 +693,7 @@ func (r *SubnetResource) Read(ctx context.Context, req resource.ReadRequest, res
 						return nil
 					}(),
 					StaticIP: func() *SubnetEmptyModel {
-						if _, ok := itemMap["static_ip"].(map[string]interface{}); ok {
+						if !isImport && len(data.SiteSubnetParams) > listIdx && data.SiteSubnetParams[listIdx].StaticIP != nil {
 							return &SubnetEmptyModel{}
 						}
 						return nil
@@ -733,6 +821,17 @@ func (r *SubnetResource) Update(ctx context.Context, req resource.UpdateRequest,
 			}
 			if item.SubnetDhcpServerParams != nil {
 				subnet_dhcp_server_paramsNestedMap := make(map[string]interface{})
+				if len(item.SubnetDhcpServerParams.DhcpNetworks) > 0 {
+					var dhcp_networksDeepList []map[string]interface{}
+					for _, deepListItem := range item.SubnetDhcpServerParams.DhcpNetworks {
+						deepListItemMap := make(map[string]interface{})
+						if !deepListItem.NetworkPrefix.IsNull() && !deepListItem.NetworkPrefix.IsUnknown() {
+							deepListItemMap["network_prefix"] = deepListItem.NetworkPrefix.ValueString()
+						}
+						dhcp_networksDeepList = append(dhcp_networksDeepList, deepListItemMap)
+					}
+					subnet_dhcp_server_paramsNestedMap["dhcp_networks"] = dhcp_networksDeepList
+				}
 				itemMap["subnet_dhcp_server_params"] = subnet_dhcp_server_paramsNestedMap
 			}
 			site_subnet_paramsList = append(site_subnet_paramsList, itemMap)

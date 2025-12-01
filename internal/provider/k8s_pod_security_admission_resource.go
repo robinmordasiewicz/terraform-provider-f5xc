@@ -278,7 +278,7 @@ func (r *K8SPodSecurityAdmissionResource) Create(ctx context.Context, req resour
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.K8SPodSecurityAdmission{
+	createReq := &client.K8SPodSecurityAdmission{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -287,7 +287,7 @@ func (r *K8SPodSecurityAdmissionResource) Create(ctx context.Context, req resour
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -296,7 +296,7 @@ func (r *K8SPodSecurityAdmissionResource) Create(ctx context.Context, req resour
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -305,7 +305,7 @@ func (r *K8SPodSecurityAdmissionResource) Create(ctx context.Context, req resour
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -333,24 +333,75 @@ func (r *K8SPodSecurityAdmissionResource) Create(ctx context.Context, req resour
 			}
 			pod_security_admission_specsList = append(pod_security_admission_specsList, itemMap)
 		}
-		apiResource.Spec["pod_security_admission_specs"] = pod_security_admission_specsList
+		createReq.Spec["pod_security_admission_specs"] = pod_security_admission_specsList
 	}
 
 
-	created, err := r.client.CreateK8SPodSecurityAdmission(ctx, apiResource)
+	apiResource, err := r.client.CreateK8SPodSecurityAdmission(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create K8SPodSecurityAdmission: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if listData, ok := apiResource.Spec["pod_security_admission_specs"].([]interface{}); ok && len(listData) > 0 {
+		var pod_security_admission_specsList []K8SPodSecurityAdmissionPodSecurityAdmissionSpecsModel
+		for listIdx := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			{
+				pod_security_admission_specsList = append(pod_security_admission_specsList, K8SPodSecurityAdmissionPodSecurityAdmissionSpecsModel{
+					Audit: func() *K8SPodSecurityAdmissionEmptyModel {
+						if !isImport && len(data.PodSecurityAdmissionSpecs) > listIdx && data.PodSecurityAdmissionSpecs[listIdx].Audit != nil {
+							return &K8SPodSecurityAdmissionEmptyModel{}
+						}
+						return nil
+					}(),
+					Baseline: func() *K8SPodSecurityAdmissionEmptyModel {
+						if !isImport && len(data.PodSecurityAdmissionSpecs) > listIdx && data.PodSecurityAdmissionSpecs[listIdx].Baseline != nil {
+							return &K8SPodSecurityAdmissionEmptyModel{}
+						}
+						return nil
+					}(),
+					Enforce: func() *K8SPodSecurityAdmissionEmptyModel {
+						if !isImport && len(data.PodSecurityAdmissionSpecs) > listIdx && data.PodSecurityAdmissionSpecs[listIdx].Enforce != nil {
+							return &K8SPodSecurityAdmissionEmptyModel{}
+						}
+						return nil
+					}(),
+					Privileged: func() *K8SPodSecurityAdmissionEmptyModel {
+						if !isImport && len(data.PodSecurityAdmissionSpecs) > listIdx && data.PodSecurityAdmissionSpecs[listIdx].Privileged != nil {
+							return &K8SPodSecurityAdmissionEmptyModel{}
+						}
+						return nil
+					}(),
+					Restricted: func() *K8SPodSecurityAdmissionEmptyModel {
+						if !isImport && len(data.PodSecurityAdmissionSpecs) > listIdx && data.PodSecurityAdmissionSpecs[listIdx].Restricted != nil {
+							return &K8SPodSecurityAdmissionEmptyModel{}
+						}
+						return nil
+					}(),
+					Warn: func() *K8SPodSecurityAdmissionEmptyModel {
+						if !isImport && len(data.PodSecurityAdmissionSpecs) > listIdx && data.PodSecurityAdmissionSpecs[listIdx].Warn != nil {
+							return &K8SPodSecurityAdmissionEmptyModel{}
+						}
+						return nil
+					}(),
+				})
+			}
+		}
+		data.PodSecurityAdmissionSpecs = pod_security_admission_specsList
+	}
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
@@ -441,41 +492,42 @@ func (r *K8SPodSecurityAdmissionResource) Read(ctx context.Context, req resource
 	})
 	if listData, ok := apiResource.Spec["pod_security_admission_specs"].([]interface{}); ok && len(listData) > 0 {
 		var pod_security_admission_specsList []K8SPodSecurityAdmissionPodSecurityAdmissionSpecsModel
-		for _, item := range listData {
-			if itemMap, ok := item.(map[string]interface{}); ok {
+		for listIdx := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			{
 				pod_security_admission_specsList = append(pod_security_admission_specsList, K8SPodSecurityAdmissionPodSecurityAdmissionSpecsModel{
 					Audit: func() *K8SPodSecurityAdmissionEmptyModel {
-						if _, ok := itemMap["audit"].(map[string]interface{}); ok {
+						if !isImport && len(data.PodSecurityAdmissionSpecs) > listIdx && data.PodSecurityAdmissionSpecs[listIdx].Audit != nil {
 							return &K8SPodSecurityAdmissionEmptyModel{}
 						}
 						return nil
 					}(),
 					Baseline: func() *K8SPodSecurityAdmissionEmptyModel {
-						if _, ok := itemMap["baseline"].(map[string]interface{}); ok {
+						if !isImport && len(data.PodSecurityAdmissionSpecs) > listIdx && data.PodSecurityAdmissionSpecs[listIdx].Baseline != nil {
 							return &K8SPodSecurityAdmissionEmptyModel{}
 						}
 						return nil
 					}(),
 					Enforce: func() *K8SPodSecurityAdmissionEmptyModel {
-						if _, ok := itemMap["enforce"].(map[string]interface{}); ok {
+						if !isImport && len(data.PodSecurityAdmissionSpecs) > listIdx && data.PodSecurityAdmissionSpecs[listIdx].Enforce != nil {
 							return &K8SPodSecurityAdmissionEmptyModel{}
 						}
 						return nil
 					}(),
 					Privileged: func() *K8SPodSecurityAdmissionEmptyModel {
-						if _, ok := itemMap["privileged"].(map[string]interface{}); ok {
+						if !isImport && len(data.PodSecurityAdmissionSpecs) > listIdx && data.PodSecurityAdmissionSpecs[listIdx].Privileged != nil {
 							return &K8SPodSecurityAdmissionEmptyModel{}
 						}
 						return nil
 					}(),
 					Restricted: func() *K8SPodSecurityAdmissionEmptyModel {
-						if _, ok := itemMap["restricted"].(map[string]interface{}); ok {
+						if !isImport && len(data.PodSecurityAdmissionSpecs) > listIdx && data.PodSecurityAdmissionSpecs[listIdx].Restricted != nil {
 							return &K8SPodSecurityAdmissionEmptyModel{}
 						}
 						return nil
 					}(),
 					Warn: func() *K8SPodSecurityAdmissionEmptyModel {
-						if _, ok := itemMap["warn"].(map[string]interface{}); ok {
+						if !isImport && len(data.PodSecurityAdmissionSpecs) > listIdx && data.PodSecurityAdmissionSpecs[listIdx].Warn != nil {
 							return &K8SPodSecurityAdmissionEmptyModel{}
 						}
 						return nil

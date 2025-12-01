@@ -257,6 +257,7 @@ func (r *TunnelResource) Schema(ctx context.Context, req resource.SchemaRequest,
 										"kind": schema.StringAttribute{
 											MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 											Optional: true,
+											Computed: true,
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -269,10 +270,12 @@ func (r *TunnelResource) Schema(ctx context.Context, req resource.SchemaRequest,
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 										"uid": schema.StringAttribute{
 											MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -545,7 +548,7 @@ func (r *TunnelResource) Create(ctx context.Context, req resource.CreateRequest,
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.Tunnel{
+	createReq := &client.Tunnel{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -554,7 +557,7 @@ func (r *TunnelResource) Create(ctx context.Context, req resource.CreateRequest,
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -563,7 +566,7 @@ func (r *TunnelResource) Create(ctx context.Context, req resource.CreateRequest,
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -572,7 +575,7 @@ func (r *TunnelResource) Create(ctx context.Context, req resource.CreateRequest,
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -586,7 +589,7 @@ func (r *TunnelResource) Create(ctx context.Context, req resource.CreateRequest,
 			ip_addressNestedMap := make(map[string]interface{})
 			local_ipMap["ip_address"] = ip_addressNestedMap
 		}
-		apiResource.Spec["local_ip"] = local_ipMap
+		createReq.Spec["local_ip"] = local_ipMap
 	}
 	if data.Params != nil {
 		paramsMap := make(map[string]interface{})
@@ -594,7 +597,7 @@ func (r *TunnelResource) Create(ctx context.Context, req resource.CreateRequest,
 			ipsecNestedMap := make(map[string]interface{})
 			paramsMap["ipsec"] = ipsecNestedMap
 		}
-		apiResource.Spec["params"] = paramsMap
+		createReq.Spec["params"] = paramsMap
 	}
 	if data.RemoteIP != nil {
 		remote_ipMap := make(map[string]interface{})
@@ -606,34 +609,51 @@ func (r *TunnelResource) Create(ctx context.Context, req resource.CreateRequest,
 			ipNestedMap := make(map[string]interface{})
 			remote_ipMap["ip"] = ipNestedMap
 		}
-		apiResource.Spec["remote_ip"] = remote_ipMap
+		createReq.Spec["remote_ip"] = remote_ipMap
 	}
 	if !data.TunnelType.IsNull() && !data.TunnelType.IsUnknown() {
-		apiResource.Spec["tunnel_type"] = data.TunnelType.ValueString()
+		createReq.Spec["tunnel_type"] = data.TunnelType.ValueString()
 	}
 
 
-	created, err := r.client.CreateTunnel(ctx, apiResource)
+	apiResource, err := r.client.CreateTunnel(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create Tunnel: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
-	if v, ok := created.Spec["tunnel_type"].(string); ok && v != "" {
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if _, ok := apiResource.Spec["local_ip"].(map[string]interface{}); ok && isImport && data.LocalIP == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.LocalIP = &TunnelLocalIPModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["params"].(map[string]interface{}); ok && isImport && data.Params == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Params = &TunnelParamsModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["remote_ip"].(map[string]interface{}); ok && isImport && data.RemoteIP == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.RemoteIP = &TunnelRemoteIPModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["tunnel_type"].(string); ok && v != "" {
 		data.TunnelType = types.StringValue(v)
-	} else if data.TunnelType.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.TunnelType = types.StringNull()
 	}
-	// If plan had a value, preserve it
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 

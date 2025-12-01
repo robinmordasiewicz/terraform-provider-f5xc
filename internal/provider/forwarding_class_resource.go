@@ -205,6 +205,7 @@ func (r *ForwardingClassResource) Schema(ctx context.Context, req resource.Schem
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional: true,
+						Computed: true,
 					},
 				},
 
@@ -326,7 +327,7 @@ func (r *ForwardingClassResource) Create(ctx context.Context, req resource.Creat
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.ForwardingClass{
+	createReq := &client.ForwardingClass{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -335,7 +336,7 @@ func (r *ForwardingClassResource) Create(ctx context.Context, req resource.Creat
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -344,7 +345,7 @@ func (r *ForwardingClassResource) Create(ctx context.Context, req resource.Creat
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -353,7 +354,7 @@ func (r *ForwardingClassResource) Create(ctx context.Context, req resource.Creat
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -365,19 +366,19 @@ func (r *ForwardingClassResource) Create(ctx context.Context, req resource.Creat
 		if !data.Dscp.DscpClass.IsNull() && !data.Dscp.DscpClass.IsUnknown() {
 			dscpMap["dscp_class"] = data.Dscp.DscpClass.ValueString()
 		}
-		apiResource.Spec["dscp"] = dscpMap
+		createReq.Spec["dscp"] = dscpMap
 	}
 	if data.DscpBasedQueue != nil {
 		dscp_based_queueMap := make(map[string]interface{})
-		apiResource.Spec["dscp_based_queue"] = dscp_based_queueMap
+		createReq.Spec["dscp_based_queue"] = dscp_based_queueMap
 	}
 	if data.NoMarking != nil {
 		no_markingMap := make(map[string]interface{})
-		apiResource.Spec["no_marking"] = no_markingMap
+		createReq.Spec["no_marking"] = no_markingMap
 	}
 	if data.NoPolicer != nil {
 		no_policerMap := make(map[string]interface{})
-		apiResource.Spec["no_policer"] = no_policerMap
+		createReq.Spec["no_policer"] = no_policerMap
 	}
 	if data.Policer != nil {
 		policerMap := make(map[string]interface{})
@@ -390,54 +391,105 @@ func (r *ForwardingClassResource) Create(ctx context.Context, req resource.Creat
 		if !data.Policer.Tenant.IsNull() && !data.Policer.Tenant.IsUnknown() {
 			policerMap["tenant"] = data.Policer.Tenant.ValueString()
 		}
-		apiResource.Spec["policer"] = policerMap
+		createReq.Spec["policer"] = policerMap
 	}
 	if !data.InterfaceGroup.IsNull() && !data.InterfaceGroup.IsUnknown() {
-		apiResource.Spec["interface_group"] = data.InterfaceGroup.ValueString()
+		createReq.Spec["interface_group"] = data.InterfaceGroup.ValueString()
 	}
 	if !data.QueueIDToUse.IsNull() && !data.QueueIDToUse.IsUnknown() {
-		apiResource.Spec["queue_id_to_use"] = data.QueueIDToUse.ValueString()
+		createReq.Spec["queue_id_to_use"] = data.QueueIDToUse.ValueString()
 	}
 	if !data.TosValue.IsNull() && !data.TosValue.IsUnknown() {
-		apiResource.Spec["tos_value"] = data.TosValue.ValueInt64()
+		createReq.Spec["tos_value"] = data.TosValue.ValueInt64()
 	}
 
 
-	created, err := r.client.CreateForwardingClass(ctx, apiResource)
+	apiResource, err := r.client.CreateForwardingClass(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create ForwardingClass: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
-	if v, ok := created.Spec["interface_group"].(string); ok && v != "" {
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["dscp"].(map[string]interface{}); ok && (isImport || data.Dscp != nil) {
+		data.Dscp = &ForwardingClassDscpModel{
+			DropPrecedence: func() types.String {
+				if v, ok := blockData["drop_precedence"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			DscpClass: func() types.String {
+				if v, ok := blockData["dscp_class"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["dscp_based_queue"].(map[string]interface{}); ok && isImport && data.DscpBasedQueue == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DscpBasedQueue = &ForwardingClassEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_marking"].(map[string]interface{}); ok && isImport && data.NoMarking == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoMarking = &ForwardingClassEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_policer"].(map[string]interface{}); ok && isImport && data.NoPolicer == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoPolicer = &ForwardingClassEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["policer"].(map[string]interface{}); ok && (isImport || data.Policer != nil) {
+		data.Policer = &ForwardingClassPolicerModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if v, ok := apiResource.Spec["interface_group"].(string); ok && v != "" {
 		data.InterfaceGroup = types.StringValue(v)
-	} else if data.InterfaceGroup.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.InterfaceGroup = types.StringNull()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["queue_id_to_use"].(string); ok && v != "" {
+	if v, ok := apiResource.Spec["queue_id_to_use"].(string); ok && v != "" {
 		data.QueueIDToUse = types.StringValue(v)
-	} else if data.QueueIDToUse.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.QueueIDToUse = types.StringNull()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["tos_value"].(float64); ok {
+	if v, ok := apiResource.Spec["tos_value"].(float64); ok {
 		data.TosValue = types.Int64Value(int64(v))
-	} else if data.TosValue.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.TosValue = types.Int64Null()
 	}
-	// If plan had a value, preserve it
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 

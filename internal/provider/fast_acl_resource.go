@@ -329,6 +329,7 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional: true,
+						Computed: true,
 					},
 				},
 
@@ -371,6 +372,7 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 															"kind": schema.StringAttribute{
 																MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																Optional: true,
+																Computed: true,
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -383,10 +385,12 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 															"tenant": schema.StringAttribute{
 																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																Optional: true,
+																Computed: true,
 															},
 															"uid": schema.StringAttribute{
 																MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																Optional: true,
+																Computed: true,
 															},
 														},
 													},
@@ -405,6 +409,7 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 															"kind": schema.StringAttribute{
 																MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																Optional: true,
+																Computed: true,
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -417,10 +422,12 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 															"tenant": schema.StringAttribute{
 																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																Optional: true,
+																Computed: true,
 															},
 															"uid": schema.StringAttribute{
 																MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																Optional: true,
+																Computed: true,
 															},
 														},
 													},
@@ -441,6 +448,7 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 													"kind": schema.StringAttribute{
 														MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 														Optional: true,
+														Computed: true,
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -453,10 +461,12 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 													"tenant": schema.StringAttribute{
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 														Optional: true,
+														Computed: true,
 													},
 													"uid": schema.StringAttribute{
 														MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 														Optional: true,
+														Computed: true,
 													},
 												},
 											},
@@ -532,6 +542,7 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -576,6 +587,7 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 															"kind": schema.StringAttribute{
 																MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																Optional: true,
+																Computed: true,
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -588,10 +600,12 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 															"tenant": schema.StringAttribute{
 																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																Optional: true,
+																Computed: true,
 															},
 															"uid": schema.StringAttribute{
 																MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																Optional: true,
+																Computed: true,
 															},
 														},
 													},
@@ -610,6 +624,7 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 															"kind": schema.StringAttribute{
 																MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																Optional: true,
+																Computed: true,
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -622,10 +637,12 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 															"tenant": schema.StringAttribute{
 																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																Optional: true,
+																Computed: true,
 															},
 															"uid": schema.StringAttribute{
 																MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																Optional: true,
+																Computed: true,
 															},
 														},
 													},
@@ -646,6 +663,7 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 													"kind": schema.StringAttribute{
 														MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 														Optional: true,
+														Computed: true,
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -658,10 +676,12 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 													"tenant": schema.StringAttribute{
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 														Optional: true,
+														Computed: true,
 													},
 													"uid": schema.StringAttribute{
 														MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 														Optional: true,
+														Computed: true,
 													},
 												},
 											},
@@ -845,7 +865,7 @@ func (r *FastACLResource) Create(ctx context.Context, req resource.CreateRequest
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.FastACL{
+	createReq := &client.FastACL{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -854,7 +874,7 @@ func (r *FastACLResource) Create(ctx context.Context, req resource.CreateRequest
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -863,7 +883,7 @@ func (r *FastACLResource) Create(ctx context.Context, req resource.CreateRequest
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -872,7 +892,7 @@ func (r *FastACLResource) Create(ctx context.Context, req resource.CreateRequest
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -887,7 +907,7 @@ func (r *FastACLResource) Create(ctx context.Context, req resource.CreateRequest
 		if !data.ProtocolPolicer.Tenant.IsNull() && !data.ProtocolPolicer.Tenant.IsUnknown() {
 			protocol_policerMap["tenant"] = data.ProtocolPolicer.Tenant.ValueString()
 		}
-		apiResource.Spec["protocol_policer"] = protocol_policerMap
+		createReq.Spec["protocol_policer"] = protocol_policerMap
 	}
 	if data.ReACL != nil {
 		re_aclMap := make(map[string]interface{})
@@ -937,7 +957,7 @@ func (r *FastACLResource) Create(ctx context.Context, req resource.CreateRequest
 			}
 			re_aclMap["selected_tenant_vip"] = selected_tenant_vipNestedMap
 		}
-		apiResource.Spec["re_acl"] = re_aclMap
+		createReq.Spec["re_acl"] = re_aclMap
 	}
 	if data.SiteACL != nil {
 		site_aclMap := make(map[string]interface{})
@@ -989,24 +1009,278 @@ func (r *FastACLResource) Create(ctx context.Context, req resource.CreateRequest
 		if data.SiteACL.VipServices != nil {
 			site_aclMap["vip_services"] = map[string]interface{}{}
 		}
-		apiResource.Spec["site_acl"] = site_aclMap
+		createReq.Spec["site_acl"] = site_aclMap
 	}
 
 
-	created, err := r.client.CreateFastACL(ctx, apiResource)
+	apiResource, err := r.client.CreateFastACL(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create FastACL: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["protocol_policer"].(map[string]interface{}); ok && (isImport || data.ProtocolPolicer != nil) {
+		data.ProtocolPolicer = &FastACLProtocolPolicerModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["re_acl"].(map[string]interface{}); ok && (isImport || data.ReACL != nil) {
+		data.ReACL = &FastACLReACLModel{
+			AllPublicVips: func() *FastACLEmptyModel {
+				if !isImport && data.ReACL != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.ReACL.AllPublicVips
+				}
+				// Import case: read from API
+				if _, ok := blockData["all_public_vips"].(map[string]interface{}); ok {
+					return &FastACLEmptyModel{}
+				}
+				return nil
+			}(),
+			DefaultTenantVip: func() *FastACLEmptyModel {
+				if !isImport && data.ReACL != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.ReACL.DefaultTenantVip
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_tenant_vip"].(map[string]interface{}); ok {
+					return &FastACLEmptyModel{}
+				}
+				return nil
+			}(),
+			FastACLRules: func() []FastACLReACLFastACLRulesModel {
+				if listData, ok := blockData["fast_acl_rules"].([]interface{}); ok && len(listData) > 0 {
+					var result []FastACLReACLFastACLRulesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, FastACLReACLFastACLRulesModel{
+								Action: func() *FastACLReACLFastACLRulesActionModel {
+									if deepMap, ok := itemMap["action"].(map[string]interface{}); ok {
+										return &FastACLReACLFastACLRulesActionModel{
+											SimpleAction: func() types.String {
+												if v, ok := deepMap["simple_action"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								IPPrefixSet: func() *FastACLReACLFastACLRulesIPPrefixSetModel {
+									if _, ok := itemMap["ip_prefix_set"].(map[string]interface{}); ok {
+										return &FastACLReACLFastACLRulesIPPrefixSetModel{
+										}
+									}
+									return nil
+								}(),
+								Metadata: func() *FastACLReACLFastACLRulesMetadataModel {
+									if deepMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
+										return &FastACLReACLFastACLRulesMetadataModel{
+											DescriptionSpec: func() types.String {
+												if v, ok := deepMap["description"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								Prefix: func() *FastACLReACLFastACLRulesPrefixModel {
+									if _, ok := itemMap["prefix"].(map[string]interface{}); ok {
+										return &FastACLReACLFastACLRulesPrefixModel{
+										}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			SelectedTenantVip: func() *FastACLReACLSelectedTenantVipModel {
+				if !isImport && data.ReACL != nil && data.ReACL.SelectedTenantVip != nil {
+					// Normal Read: preserve existing state value
+					return data.ReACL.SelectedTenantVip
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["selected_tenant_vip"].(map[string]interface{}); ok {
+					return &FastACLReACLSelectedTenantVipModel{
+						DefaultTenantVip: func() types.Bool {
+							if v, ok := nestedBlockData["default_tenant_vip"].(bool); ok {
+								return types.BoolValue(v)
+							}
+							return types.BoolNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["site_acl"].(map[string]interface{}); ok && (isImport || data.SiteACL != nil) {
+		data.SiteACL = &FastACLSiteACLModel{
+			AllServices: func() *FastACLEmptyModel {
+				if !isImport && data.SiteACL != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.SiteACL.AllServices
+				}
+				// Import case: read from API
+				if _, ok := blockData["all_services"].(map[string]interface{}); ok {
+					return &FastACLEmptyModel{}
+				}
+				return nil
+			}(),
+			FastACLRules: func() []FastACLSiteACLFastACLRulesModel {
+				if listData, ok := blockData["fast_acl_rules"].([]interface{}); ok && len(listData) > 0 {
+					var result []FastACLSiteACLFastACLRulesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, FastACLSiteACLFastACLRulesModel{
+								Action: func() *FastACLSiteACLFastACLRulesActionModel {
+									if deepMap, ok := itemMap["action"].(map[string]interface{}); ok {
+										return &FastACLSiteACLFastACLRulesActionModel{
+											SimpleAction: func() types.String {
+												if v, ok := deepMap["simple_action"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								IPPrefixSet: func() *FastACLSiteACLFastACLRulesIPPrefixSetModel {
+									if _, ok := itemMap["ip_prefix_set"].(map[string]interface{}); ok {
+										return &FastACLSiteACLFastACLRulesIPPrefixSetModel{
+										}
+									}
+									return nil
+								}(),
+								Metadata: func() *FastACLSiteACLFastACLRulesMetadataModel {
+									if deepMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
+										return &FastACLSiteACLFastACLRulesMetadataModel{
+											DescriptionSpec: func() types.String {
+												if v, ok := deepMap["description"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								Prefix: func() *FastACLSiteACLFastACLRulesPrefixModel {
+									if _, ok := itemMap["prefix"].(map[string]interface{}); ok {
+										return &FastACLSiteACLFastACLRulesPrefixModel{
+										}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			InsideNetwork: func() *FastACLEmptyModel {
+				if !isImport && data.SiteACL != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.SiteACL.InsideNetwork
+				}
+				// Import case: read from API
+				if _, ok := blockData["inside_network"].(map[string]interface{}); ok {
+					return &FastACLEmptyModel{}
+				}
+				return nil
+			}(),
+			InterfaceServices: func() *FastACLEmptyModel {
+				if !isImport && data.SiteACL != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.SiteACL.InterfaceServices
+				}
+				// Import case: read from API
+				if _, ok := blockData["interface_services"].(map[string]interface{}); ok {
+					return &FastACLEmptyModel{}
+				}
+				return nil
+			}(),
+			OutsideNetwork: func() *FastACLEmptyModel {
+				if !isImport && data.SiteACL != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.SiteACL.OutsideNetwork
+				}
+				// Import case: read from API
+				if _, ok := blockData["outside_network"].(map[string]interface{}); ok {
+					return &FastACLEmptyModel{}
+				}
+				return nil
+			}(),
+			VipServices: func() *FastACLEmptyModel {
+				if !isImport && data.SiteACL != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.SiteACL.VipServices
+				}
+				// Import case: read from API
+				if _, ok := blockData["vip_services"].(map[string]interface{}); ok {
+					return &FastACLEmptyModel{}
+				}
+				return nil
+			}(),
+		}
+	}
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 

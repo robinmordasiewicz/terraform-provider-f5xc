@@ -319,7 +319,7 @@ func (r *UserIdentificationResource) Create(ctx context.Context, req resource.Cr
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.UserIdentification{
+	createReq := &client.UserIdentification{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -328,7 +328,7 @@ func (r *UserIdentificationResource) Create(ctx context.Context, req resource.Cr
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -337,7 +337,7 @@ func (r *UserIdentificationResource) Create(ctx context.Context, req resource.Cr
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -346,7 +346,7 @@ func (r *UserIdentificationResource) Create(ctx context.Context, req resource.Cr
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -401,24 +401,129 @@ func (r *UserIdentificationResource) Create(ctx context.Context, req resource.Cr
 			}
 			rulesList = append(rulesList, itemMap)
 		}
-		apiResource.Spec["rules"] = rulesList
+		createReq.Spec["rules"] = rulesList
 	}
 
 
-	created, err := r.client.CreateUserIdentification(ctx, apiResource)
+	apiResource, err := r.client.CreateUserIdentification(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create UserIdentification: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if listData, ok := apiResource.Spec["rules"].([]interface{}); ok && len(listData) > 0 {
+		var rulesList []UserIdentificationRulesModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				rulesList = append(rulesList, UserIdentificationRulesModel{
+					ClientAsn: func() *UserIdentificationEmptyModel {
+						if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].ClientAsn != nil {
+							return &UserIdentificationEmptyModel{}
+						}
+						return nil
+					}(),
+					ClientCity: func() *UserIdentificationEmptyModel {
+						if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].ClientCity != nil {
+							return &UserIdentificationEmptyModel{}
+						}
+						return nil
+					}(),
+					ClientCountry: func() *UserIdentificationEmptyModel {
+						if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].ClientCountry != nil {
+							return &UserIdentificationEmptyModel{}
+						}
+						return nil
+					}(),
+					ClientIP: func() *UserIdentificationEmptyModel {
+						if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].ClientIP != nil {
+							return &UserIdentificationEmptyModel{}
+						}
+						return nil
+					}(),
+					ClientRegion: func() *UserIdentificationEmptyModel {
+						if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].ClientRegion != nil {
+							return &UserIdentificationEmptyModel{}
+						}
+						return nil
+					}(),
+					CookieName: func() types.String {
+						if v, ok := itemMap["cookie_name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					HTTPHeaderName: func() types.String {
+						if v, ok := itemMap["http_header_name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					IPAndHTTPHeaderName: func() types.String {
+						if v, ok := itemMap["ip_and_http_header_name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					IPAndJa4TLSFingerprint: func() *UserIdentificationEmptyModel {
+						if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].IPAndJa4TLSFingerprint != nil {
+							return &UserIdentificationEmptyModel{}
+						}
+						return nil
+					}(),
+					IPAndTLSFingerprint: func() *UserIdentificationEmptyModel {
+						if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].IPAndTLSFingerprint != nil {
+							return &UserIdentificationEmptyModel{}
+						}
+						return nil
+					}(),
+					Ja4TLSFingerprint: func() *UserIdentificationEmptyModel {
+						if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].Ja4TLSFingerprint != nil {
+							return &UserIdentificationEmptyModel{}
+						}
+						return nil
+					}(),
+					JwtClaimName: func() types.String {
+						if v, ok := itemMap["jwt_claim_name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					None: func() *UserIdentificationEmptyModel {
+						if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].None != nil {
+							return &UserIdentificationEmptyModel{}
+						}
+						return nil
+					}(),
+					QueryParamKey: func() types.String {
+						if v, ok := itemMap["query_param_key"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					TLSFingerprint: func() *UserIdentificationEmptyModel {
+						if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].TLSFingerprint != nil {
+							return &UserIdentificationEmptyModel{}
+						}
+						return nil
+					}(),
+				})
+			}
+		}
+		data.Rules = rulesList
+	}
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
@@ -509,35 +614,36 @@ func (r *UserIdentificationResource) Read(ctx context.Context, req resource.Read
 	})
 	if listData, ok := apiResource.Spec["rules"].([]interface{}); ok && len(listData) > 0 {
 		var rulesList []UserIdentificationRulesModel
-		for _, item := range listData {
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				rulesList = append(rulesList, UserIdentificationRulesModel{
 					ClientAsn: func() *UserIdentificationEmptyModel {
-						if _, ok := itemMap["client_asn"].(map[string]interface{}); ok {
+						if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].ClientAsn != nil {
 							return &UserIdentificationEmptyModel{}
 						}
 						return nil
 					}(),
 					ClientCity: func() *UserIdentificationEmptyModel {
-						if _, ok := itemMap["client_city"].(map[string]interface{}); ok {
+						if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].ClientCity != nil {
 							return &UserIdentificationEmptyModel{}
 						}
 						return nil
 					}(),
 					ClientCountry: func() *UserIdentificationEmptyModel {
-						if _, ok := itemMap["client_country"].(map[string]interface{}); ok {
+						if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].ClientCountry != nil {
 							return &UserIdentificationEmptyModel{}
 						}
 						return nil
 					}(),
 					ClientIP: func() *UserIdentificationEmptyModel {
-						if _, ok := itemMap["client_ip"].(map[string]interface{}); ok {
+						if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].ClientIP != nil {
 							return &UserIdentificationEmptyModel{}
 						}
 						return nil
 					}(),
 					ClientRegion: func() *UserIdentificationEmptyModel {
-						if _, ok := itemMap["client_region"].(map[string]interface{}); ok {
+						if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].ClientRegion != nil {
 							return &UserIdentificationEmptyModel{}
 						}
 						return nil
@@ -561,19 +667,19 @@ func (r *UserIdentificationResource) Read(ctx context.Context, req resource.Read
 						return types.StringNull()
 					}(),
 					IPAndJa4TLSFingerprint: func() *UserIdentificationEmptyModel {
-						if _, ok := itemMap["ip_and_ja4_tls_fingerprint"].(map[string]interface{}); ok {
+						if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].IPAndJa4TLSFingerprint != nil {
 							return &UserIdentificationEmptyModel{}
 						}
 						return nil
 					}(),
 					IPAndTLSFingerprint: func() *UserIdentificationEmptyModel {
-						if _, ok := itemMap["ip_and_tls_fingerprint"].(map[string]interface{}); ok {
+						if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].IPAndTLSFingerprint != nil {
 							return &UserIdentificationEmptyModel{}
 						}
 						return nil
 					}(),
 					Ja4TLSFingerprint: func() *UserIdentificationEmptyModel {
-						if _, ok := itemMap["ja4_tls_fingerprint"].(map[string]interface{}); ok {
+						if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].Ja4TLSFingerprint != nil {
 							return &UserIdentificationEmptyModel{}
 						}
 						return nil
@@ -585,7 +691,7 @@ func (r *UserIdentificationResource) Read(ctx context.Context, req resource.Read
 						return types.StringNull()
 					}(),
 					None: func() *UserIdentificationEmptyModel {
-						if _, ok := itemMap["none"].(map[string]interface{}); ok {
+						if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].None != nil {
 							return &UserIdentificationEmptyModel{}
 						}
 						return nil
@@ -597,7 +703,7 @@ func (r *UserIdentificationResource) Read(ctx context.Context, req resource.Read
 						return types.StringNull()
 					}(),
 					TLSFingerprint: func() *UserIdentificationEmptyModel {
-						if _, ok := itemMap["tls_fingerprint"].(map[string]interface{}); ok {
+						if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].TLSFingerprint != nil {
 							return &UserIdentificationEmptyModel{}
 						}
 						return nil

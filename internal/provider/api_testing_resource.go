@@ -613,7 +613,7 @@ func (r *APITestingResource) Create(ctx context.Context, req resource.CreateRequ
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.APITesting{
+	createReq := &client.APITesting{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -622,7 +622,7 @@ func (r *APITestingResource) Create(ctx context.Context, req resource.CreateRequ
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -631,7 +631,7 @@ func (r *APITestingResource) Create(ctx context.Context, req resource.CreateRequ
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -640,7 +640,7 @@ func (r *APITestingResource) Create(ctx context.Context, req resource.CreateRequ
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -651,51 +651,121 @@ func (r *APITestingResource) Create(ctx context.Context, req resource.CreateRequ
 			if !item.AllowDestructiveMethods.IsNull() && !item.AllowDestructiveMethods.IsUnknown() {
 				itemMap["allow_destructive_methods"] = item.AllowDestructiveMethods.ValueBool()
 			}
+			if len(item.Credentials) > 0 {
+				var credentialsNestedList []map[string]interface{}
+				for _, nestedItem := range item.Credentials {
+					nestedItemMap := make(map[string]interface{})
+					if !nestedItem.CredentialName.IsNull() && !nestedItem.CredentialName.IsUnknown() {
+						nestedItemMap["credential_name"] = nestedItem.CredentialName.ValueString()
+					}
+					credentialsNestedList = append(credentialsNestedList, nestedItemMap)
+				}
+				itemMap["credentials"] = credentialsNestedList
+			}
 			if !item.Domain.IsNull() && !item.Domain.IsUnknown() {
 				itemMap["domain"] = item.Domain.ValueString()
 			}
 			domainsList = append(domainsList, itemMap)
 		}
-		apiResource.Spec["domains"] = domainsList
+		createReq.Spec["domains"] = domainsList
 	}
 	if data.EveryDay != nil {
 		every_dayMap := make(map[string]interface{})
-		apiResource.Spec["every_day"] = every_dayMap
+		createReq.Spec["every_day"] = every_dayMap
 	}
 	if data.EveryMonth != nil {
 		every_monthMap := make(map[string]interface{})
-		apiResource.Spec["every_month"] = every_monthMap
+		createReq.Spec["every_month"] = every_monthMap
 	}
 	if data.EveryWeek != nil {
 		every_weekMap := make(map[string]interface{})
-		apiResource.Spec["every_week"] = every_weekMap
+		createReq.Spec["every_week"] = every_weekMap
 	}
 	if !data.CustomHeaderValue.IsNull() && !data.CustomHeaderValue.IsUnknown() {
-		apiResource.Spec["custom_header_value"] = data.CustomHeaderValue.ValueString()
+		createReq.Spec["custom_header_value"] = data.CustomHeaderValue.ValueString()
 	}
 
 
-	created, err := r.client.CreateAPITesting(ctx, apiResource)
+	apiResource, err := r.client.CreateAPITesting(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create APITesting: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
-	if v, ok := created.Spec["custom_header_value"].(string); ok && v != "" {
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if listData, ok := apiResource.Spec["domains"].([]interface{}); ok && len(listData) > 0 {
+		var domainsList []APITestingDomainsModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				domainsList = append(domainsList, APITestingDomainsModel{
+					AllowDestructiveMethods: func() types.Bool {
+						if v, ok := itemMap["allow_destructive_methods"].(bool); ok {
+							return types.BoolValue(v)
+						}
+						return types.BoolNull()
+					}(),
+					Credentials: func() []APITestingDomainsCredentialsModel {
+						if nestedListData, ok := itemMap["credentials"].([]interface{}); ok && len(nestedListData) > 0 {
+							var result []APITestingDomainsCredentialsModel
+							for _, nestedItem := range nestedListData {
+								if nestedItemMap, ok := nestedItem.(map[string]interface{}); ok {
+									result = append(result, APITestingDomainsCredentialsModel{
+										CredentialName: func() types.String {
+											if v, ok := nestedItemMap["credential_name"].(string); ok && v != "" {
+												return types.StringValue(v)
+											}
+											return types.StringNull()
+										}(),
+									})
+								}
+							}
+							return result
+						}
+						return nil
+					}(),
+					Domain: func() types.String {
+						if v, ok := itemMap["domain"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.Domains = domainsList
+	}
+	if _, ok := apiResource.Spec["every_day"].(map[string]interface{}); ok && isImport && data.EveryDay == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.EveryDay = &APITestingEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["every_month"].(map[string]interface{}); ok && isImport && data.EveryMonth == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.EveryMonth = &APITestingEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["every_week"].(map[string]interface{}); ok && isImport && data.EveryWeek == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.EveryWeek = &APITestingEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["custom_header_value"].(string); ok && v != "" {
 		data.CustomHeaderValue = types.StringValue(v)
-	} else if data.CustomHeaderValue.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.CustomHeaderValue = types.StringNull()
 	}
-	// If plan had a value, preserve it
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
@@ -786,7 +856,8 @@ func (r *APITestingResource) Read(ctx context.Context, req resource.ReadRequest,
 	})
 	if listData, ok := apiResource.Spec["domains"].([]interface{}); ok && len(listData) > 0 {
 		var domainsList []APITestingDomainsModel
-		for _, item := range listData {
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				domainsList = append(domainsList, APITestingDomainsModel{
 					AllowDestructiveMethods: func() types.Bool {
@@ -794,6 +865,25 @@ func (r *APITestingResource) Read(ctx context.Context, req resource.ReadRequest,
 							return types.BoolValue(v)
 						}
 						return types.BoolNull()
+					}(),
+					Credentials: func() []APITestingDomainsCredentialsModel {
+						if nestedListData, ok := itemMap["credentials"].([]interface{}); ok && len(nestedListData) > 0 {
+							var result []APITestingDomainsCredentialsModel
+							for _, nestedItem := range nestedListData {
+								if nestedItemMap, ok := nestedItem.(map[string]interface{}); ok {
+									result = append(result, APITestingDomainsCredentialsModel{
+										CredentialName: func() types.String {
+											if v, ok := nestedItemMap["credential_name"].(string); ok && v != "" {
+												return types.StringValue(v)
+											}
+											return types.StringNull()
+										}(),
+									})
+								}
+							}
+							return result
+						}
+						return nil
 					}(),
 					Domain: func() types.String {
 						if v, ok := itemMap["domain"].(string); ok && v != "" {
@@ -893,6 +983,17 @@ func (r *APITestingResource) Update(ctx context.Context, req resource.UpdateRequ
 			itemMap := make(map[string]interface{})
 			if !item.AllowDestructiveMethods.IsNull() && !item.AllowDestructiveMethods.IsUnknown() {
 				itemMap["allow_destructive_methods"] = item.AllowDestructiveMethods.ValueBool()
+			}
+			if len(item.Credentials) > 0 {
+				var credentialsNestedList []map[string]interface{}
+				for _, nestedItem := range item.Credentials {
+					nestedItemMap := make(map[string]interface{})
+					if !nestedItem.CredentialName.IsNull() && !nestedItem.CredentialName.IsUnknown() {
+						nestedItemMap["credential_name"] = nestedItem.CredentialName.ValueString()
+					}
+					credentialsNestedList = append(credentialsNestedList, nestedItemMap)
+				}
+				itemMap["credentials"] = credentialsNestedList
 			}
 			if !item.Domain.IsNull() && !item.Domain.IsUnknown() {
 				itemMap["domain"] = item.Domain.ValueString()

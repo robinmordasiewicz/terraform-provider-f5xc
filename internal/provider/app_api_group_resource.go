@@ -187,6 +187,7 @@ func (r *AppAPIGroupResource) Schema(ctx context.Context, req resource.SchemaReq
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
+								Computed: true,
 							},
 						},
 					},
@@ -212,6 +213,7 @@ func (r *AppAPIGroupResource) Schema(ctx context.Context, req resource.SchemaReq
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
+								Computed: true,
 							},
 						},
 					},
@@ -254,6 +256,7 @@ func (r *AppAPIGroupResource) Schema(ctx context.Context, req resource.SchemaReq
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
+								Computed: true,
 							},
 						},
 					},
@@ -377,7 +380,7 @@ func (r *AppAPIGroupResource) Create(ctx context.Context, req resource.CreateReq
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.AppAPIGroup{
+	createReq := &client.AppAPIGroup{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -386,7 +389,7 @@ func (r *AppAPIGroupResource) Create(ctx context.Context, req resource.CreateReq
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -395,7 +398,7 @@ func (r *AppAPIGroupResource) Create(ctx context.Context, req resource.CreateReq
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -404,7 +407,7 @@ func (r *AppAPIGroupResource) Create(ctx context.Context, req resource.CreateReq
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -423,7 +426,7 @@ func (r *AppAPIGroupResource) Create(ctx context.Context, req resource.CreateReq
 			}
 			bigip_virtual_serverMap["bigip_virtual_server"] = bigip_virtual_serverNestedMap
 		}
-		apiResource.Spec["bigip_virtual_server"] = bigip_virtual_serverMap
+		createReq.Spec["bigip_virtual_server"] = bigip_virtual_serverMap
 	}
 	if data.CDNLoadBalancer != nil {
 		cdn_loadbalancerMap := make(map[string]interface{})
@@ -440,7 +443,7 @@ func (r *AppAPIGroupResource) Create(ctx context.Context, req resource.CreateReq
 			}
 			cdn_loadbalancerMap["cdn_loadbalancer"] = cdn_loadbalancerNestedMap
 		}
-		apiResource.Spec["cdn_loadbalancer"] = cdn_loadbalancerMap
+		createReq.Spec["cdn_loadbalancer"] = cdn_loadbalancerMap
 	}
 	if len(data.Elements) > 0 {
 		var elementsList []map[string]interface{}
@@ -451,7 +454,7 @@ func (r *AppAPIGroupResource) Create(ctx context.Context, req resource.CreateReq
 			}
 			elementsList = append(elementsList, itemMap)
 		}
-		apiResource.Spec["elements"] = elementsList
+		createReq.Spec["elements"] = elementsList
 	}
 	if data.HTTPLoadBalancer != nil {
 		http_loadbalancerMap := make(map[string]interface{})
@@ -468,24 +471,73 @@ func (r *AppAPIGroupResource) Create(ctx context.Context, req resource.CreateReq
 			}
 			http_loadbalancerMap["http_loadbalancer"] = http_loadbalancerNestedMap
 		}
-		apiResource.Spec["http_loadbalancer"] = http_loadbalancerMap
+		createReq.Spec["http_loadbalancer"] = http_loadbalancerMap
 	}
 
 
-	created, err := r.client.CreateAppAPIGroup(ctx, apiResource)
+	apiResource, err := r.client.CreateAppAPIGroup(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create AppAPIGroup: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if _, ok := apiResource.Spec["bigip_virtual_server"].(map[string]interface{}); ok && isImport && data.BigIPVirtualServer == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.BigIPVirtualServer = &AppAPIGroupBigIPVirtualServerModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["cdn_loadbalancer"].(map[string]interface{}); ok && isImport && data.CDNLoadBalancer == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.CDNLoadBalancer = &AppAPIGroupCDNLoadBalancerModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["elements"].([]interface{}); ok && len(listData) > 0 {
+		var elementsList []AppAPIGroupElementsModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				elementsList = append(elementsList, AppAPIGroupElementsModel{
+					Methods: func() types.List {
+						if v, ok := itemMap["methods"].([]interface{}); ok && len(v) > 0 {
+							var items []string
+							for _, item := range v {
+								if s, ok := item.(string); ok {
+									items = append(items, s)
+								}
+							}
+							listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+							return listVal
+						}
+						return types.ListNull(types.StringType)
+					}(),
+					PathRegex: func() types.String {
+						if v, ok := itemMap["path_regex"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.Elements = elementsList
+	}
+	if _, ok := apiResource.Spec["http_loadbalancer"].(map[string]interface{}); ok && isImport && data.HTTPLoadBalancer == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.HTTPLoadBalancer = &AppAPIGroupHTTPLoadBalancerModel{}
+	}
+	// Normal Read: preserve existing state value
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
@@ -586,7 +638,8 @@ func (r *AppAPIGroupResource) Read(ctx context.Context, req resource.ReadRequest
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["elements"].([]interface{}); ok && len(listData) > 0 {
 		var elementsList []AppAPIGroupElementsModel
-		for _, item := range listData {
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				elementsList = append(elementsList, AppAPIGroupElementsModel{
 					Methods: func() types.List {

@@ -277,7 +277,7 @@ func (r *TicketTrackingSystemResource) Create(ctx context.Context, req resource.
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.TicketTrackingSystem{
+	createReq := &client.TicketTrackingSystem{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -286,7 +286,7 @@ func (r *TicketTrackingSystemResource) Create(ctx context.Context, req resource.
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -295,7 +295,7 @@ func (r *TicketTrackingSystemResource) Create(ctx context.Context, req resource.
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -304,7 +304,7 @@ func (r *TicketTrackingSystemResource) Create(ctx context.Context, req resource.
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -323,24 +323,33 @@ func (r *TicketTrackingSystemResource) Create(ctx context.Context, req resource.
 			}
 			jira_configMap["adhoc_rest_api"] = adhoc_rest_apiNestedMap
 		}
-		apiResource.Spec["jira_config"] = jira_configMap
+		createReq.Spec["jira_config"] = jira_configMap
 	}
 
 
-	created, err := r.client.CreateTicketTrackingSystem(ctx, apiResource)
+	apiResource, err := r.client.CreateTicketTrackingSystem(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create TicketTrackingSystem: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if _, ok := apiResource.Spec["jira_config"].(map[string]interface{}); ok && isImport && data.JiraConfig == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.JiraConfig = &TicketTrackingSystemJiraConfigModel{}
+	}
+	// Normal Read: preserve existing state value
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 

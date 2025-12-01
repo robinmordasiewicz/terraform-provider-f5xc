@@ -269,7 +269,7 @@ func (r *InfraprotectInternetPrefixAdvertisementResource) Create(ctx context.Con
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.InfraprotectInternetPrefixAdvertisement{
+	createReq := &client.InfraprotectInternetPrefixAdvertisement{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -278,7 +278,7 @@ func (r *InfraprotectInternetPrefixAdvertisementResource) Create(ctx context.Con
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -287,7 +287,7 @@ func (r *InfraprotectInternetPrefixAdvertisementResource) Create(ctx context.Con
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -296,58 +296,73 @@ func (r *InfraprotectInternetPrefixAdvertisementResource) Create(ctx context.Con
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
 	if data.ActivationAnnounce != nil {
 		activation_announceMap := make(map[string]interface{})
-		apiResource.Spec["activation_announce"] = activation_announceMap
+		createReq.Spec["activation_announce"] = activation_announceMap
 	}
 	if data.ActivationWithdraw != nil {
 		activation_withdrawMap := make(map[string]interface{})
-		apiResource.Spec["activation_withdraw"] = activation_withdrawMap
+		createReq.Spec["activation_withdraw"] = activation_withdrawMap
 	}
 	if data.ExpirationNever != nil {
 		expiration_neverMap := make(map[string]interface{})
-		apiResource.Spec["expiration_never"] = expiration_neverMap
+		createReq.Spec["expiration_never"] = expiration_neverMap
 	}
 	if !data.ExpirationTimestamp.IsNull() && !data.ExpirationTimestamp.IsUnknown() {
-		apiResource.Spec["expiration_timestamp"] = data.ExpirationTimestamp.ValueString()
+		createReq.Spec["expiration_timestamp"] = data.ExpirationTimestamp.ValueString()
 	}
 	if !data.Prefix.IsNull() && !data.Prefix.IsUnknown() {
-		apiResource.Spec["prefix"] = data.Prefix.ValueString()
+		createReq.Spec["prefix"] = data.Prefix.ValueString()
 	}
 
 
-	created, err := r.client.CreateInfraprotectInternetPrefixAdvertisement(ctx, apiResource)
+	apiResource, err := r.client.CreateInfraprotectInternetPrefixAdvertisement(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create InfraprotectInternetPrefixAdvertisement: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
-	if v, ok := created.Spec["expiration_timestamp"].(string); ok && v != "" {
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if _, ok := apiResource.Spec["activation_announce"].(map[string]interface{}); ok && isImport && data.ActivationAnnounce == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ActivationAnnounce = &InfraprotectInternetPrefixAdvertisementEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["activation_withdraw"].(map[string]interface{}); ok && isImport && data.ActivationWithdraw == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ActivationWithdraw = &InfraprotectInternetPrefixAdvertisementEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["expiration_never"].(map[string]interface{}); ok && isImport && data.ExpirationNever == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ExpirationNever = &InfraprotectInternetPrefixAdvertisementEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["expiration_timestamp"].(string); ok && v != "" {
 		data.ExpirationTimestamp = types.StringValue(v)
-	} else if data.ExpirationTimestamp.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.ExpirationTimestamp = types.StringNull()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["prefix"].(string); ok && v != "" {
+	if v, ok := apiResource.Spec["prefix"].(string); ok && v != "" {
 		data.Prefix = types.StringValue(v)
-	} else if data.Prefix.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.Prefix = types.StringNull()
 	}
-	// If plan had a value, preserve it
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 

@@ -169,6 +169,7 @@ func (r *ProtocolPolicerResource) Schema(ctx context.Context, req resource.Schem
 									"kind": schema.StringAttribute{
 										MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 										Optional: true,
+										Computed: true,
 									},
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -181,10 +182,12 @@ func (r *ProtocolPolicerResource) Schema(ctx context.Context, req resource.Schem
 									"tenant": schema.StringAttribute{
 										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 										Optional: true,
+										Computed: true,
 									},
 									"uid": schema.StringAttribute{
 										MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 										Optional: true,
+										Computed: true,
 									},
 								},
 							},
@@ -343,7 +346,7 @@ func (r *ProtocolPolicerResource) Create(ctx context.Context, req resource.Creat
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.ProtocolPolicer{
+	createReq := &client.ProtocolPolicer{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -352,7 +355,7 @@ func (r *ProtocolPolicerResource) Create(ctx context.Context, req resource.Creat
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -361,7 +364,7 @@ func (r *ProtocolPolicerResource) Create(ctx context.Context, req resource.Creat
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -370,7 +373,7 @@ func (r *ProtocolPolicerResource) Create(ctx context.Context, req resource.Creat
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -378,30 +381,158 @@ func (r *ProtocolPolicerResource) Create(ctx context.Context, req resource.Creat
 		var protocol_policerList []map[string]interface{}
 		for _, item := range data.ProtocolPolicer {
 			itemMap := make(map[string]interface{})
+			if len(item.Policer) > 0 {
+				var policerNestedList []map[string]interface{}
+				for _, nestedItem := range item.Policer {
+					nestedItemMap := make(map[string]interface{})
+					if !nestedItem.Kind.IsNull() && !nestedItem.Kind.IsUnknown() {
+						nestedItemMap["kind"] = nestedItem.Kind.ValueString()
+					}
+					if !nestedItem.Name.IsNull() && !nestedItem.Name.IsUnknown() {
+						nestedItemMap["name"] = nestedItem.Name.ValueString()
+					}
+					if !nestedItem.Namespace.IsNull() && !nestedItem.Namespace.IsUnknown() {
+						nestedItemMap["namespace"] = nestedItem.Namespace.ValueString()
+					}
+					if !nestedItem.Tenant.IsNull() && !nestedItem.Tenant.IsUnknown() {
+						nestedItemMap["tenant"] = nestedItem.Tenant.ValueString()
+					}
+					if !nestedItem.Uid.IsNull() && !nestedItem.Uid.IsUnknown() {
+						nestedItemMap["uid"] = nestedItem.Uid.ValueString()
+					}
+					policerNestedList = append(policerNestedList, nestedItemMap)
+				}
+				itemMap["policer"] = policerNestedList
+			}
 			if item.Protocol != nil {
 				protocolNestedMap := make(map[string]interface{})
+				if item.Protocol.DNS != nil {
+					protocolNestedMap["dns"] = map[string]interface{}{}
+				}
+				if item.Protocol.Icmp != nil {
+					icmpDeepMap := make(map[string]interface{})
+					if !item.Protocol.Icmp.Type.IsNull() && !item.Protocol.Icmp.Type.IsUnknown() {
+						var TypeItems []string
+						diags := item.Protocol.Icmp.Type.ElementsAs(ctx, &TypeItems, false)
+						if !diags.HasError() {
+							icmpDeepMap["type"] = TypeItems
+						}
+					}
+					protocolNestedMap["icmp"] = icmpDeepMap
+				}
+				if item.Protocol.TCP != nil {
+					tcpDeepMap := make(map[string]interface{})
+					if !item.Protocol.TCP.Flags.IsNull() && !item.Protocol.TCP.Flags.IsUnknown() {
+						var FlagsItems []string
+						diags := item.Protocol.TCP.Flags.ElementsAs(ctx, &FlagsItems, false)
+						if !diags.HasError() {
+							tcpDeepMap["flags"] = FlagsItems
+						}
+					}
+					protocolNestedMap["tcp"] = tcpDeepMap
+				}
+				if item.Protocol.UDP != nil {
+					protocolNestedMap["udp"] = map[string]interface{}{}
+				}
 				itemMap["protocol"] = protocolNestedMap
 			}
 			protocol_policerList = append(protocol_policerList, itemMap)
 		}
-		apiResource.Spec["protocol_policer"] = protocol_policerList
+		createReq.Spec["protocol_policer"] = protocol_policerList
 	}
 
 
-	created, err := r.client.CreateProtocolPolicer(ctx, apiResource)
+	apiResource, err := r.client.CreateProtocolPolicer(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create ProtocolPolicer: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if listData, ok := apiResource.Spec["protocol_policer"].([]interface{}); ok && len(listData) > 0 {
+		var protocol_policerList []ProtocolPolicerProtocolPolicerModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				protocol_policerList = append(protocol_policerList, ProtocolPolicerProtocolPolicerModel{
+					Policer: func() []ProtocolPolicerProtocolPolicerPolicerModel {
+						if nestedListData, ok := itemMap["policer"].([]interface{}); ok && len(nestedListData) > 0 {
+							var result []ProtocolPolicerProtocolPolicerPolicerModel
+							for _, nestedItem := range nestedListData {
+								if nestedItemMap, ok := nestedItem.(map[string]interface{}); ok {
+									result = append(result, ProtocolPolicerProtocolPolicerPolicerModel{
+										Kind: func() types.String {
+											if v, ok := nestedItemMap["kind"].(string); ok && v != "" {
+												return types.StringValue(v)
+											}
+											return types.StringNull()
+										}(),
+										Name: func() types.String {
+											if v, ok := nestedItemMap["name"].(string); ok && v != "" {
+												return types.StringValue(v)
+											}
+											return types.StringNull()
+										}(),
+										Namespace: func() types.String {
+											if v, ok := nestedItemMap["namespace"].(string); ok && v != "" {
+												return types.StringValue(v)
+											}
+											return types.StringNull()
+										}(),
+										Tenant: func() types.String {
+											if v, ok := nestedItemMap["tenant"].(string); ok && v != "" {
+												return types.StringValue(v)
+											}
+											return types.StringNull()
+										}(),
+										Uid: func() types.String {
+											if v, ok := nestedItemMap["uid"].(string); ok && v != "" {
+												return types.StringValue(v)
+											}
+											return types.StringNull()
+										}(),
+									})
+								}
+							}
+							return result
+						}
+						return nil
+					}(),
+					Protocol: func() *ProtocolPolicerProtocolPolicerProtocolModel {
+						if _, ok := itemMap["protocol"].(map[string]interface{}); ok {
+							return &ProtocolPolicerProtocolPolicerProtocolModel{
+								DNS: func() *ProtocolPolicerEmptyModel {
+									if !isImport && len(data.ProtocolPolicer) > listIdx && data.ProtocolPolicer[listIdx].Protocol != nil && data.ProtocolPolicer[listIdx].Protocol.DNS != nil {
+										return &ProtocolPolicerEmptyModel{}
+									}
+									return nil
+								}(),
+								UDP: func() *ProtocolPolicerEmptyModel {
+									if !isImport && len(data.ProtocolPolicer) > listIdx && data.ProtocolPolicer[listIdx].Protocol != nil && data.ProtocolPolicer[listIdx].Protocol.UDP != nil {
+										return &ProtocolPolicerEmptyModel{}
+									}
+									return nil
+								}(),
+							}
+						}
+						return nil
+					}(),
+				})
+			}
+		}
+		data.ProtocolPolicer = protocol_policerList
+	}
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
@@ -492,12 +623,68 @@ func (r *ProtocolPolicerResource) Read(ctx context.Context, req resource.ReadReq
 	})
 	if listData, ok := apiResource.Spec["protocol_policer"].([]interface{}); ok && len(listData) > 0 {
 		var protocol_policerList []ProtocolPolicerProtocolPolicerModel
-		for _, item := range listData {
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				protocol_policerList = append(protocol_policerList, ProtocolPolicerProtocolPolicerModel{
+					Policer: func() []ProtocolPolicerProtocolPolicerPolicerModel {
+						if nestedListData, ok := itemMap["policer"].([]interface{}); ok && len(nestedListData) > 0 {
+							var result []ProtocolPolicerProtocolPolicerPolicerModel
+							for _, nestedItem := range nestedListData {
+								if nestedItemMap, ok := nestedItem.(map[string]interface{}); ok {
+									result = append(result, ProtocolPolicerProtocolPolicerPolicerModel{
+										Kind: func() types.String {
+											if v, ok := nestedItemMap["kind"].(string); ok && v != "" {
+												return types.StringValue(v)
+											}
+											return types.StringNull()
+										}(),
+										Name: func() types.String {
+											if v, ok := nestedItemMap["name"].(string); ok && v != "" {
+												return types.StringValue(v)
+											}
+											return types.StringNull()
+										}(),
+										Namespace: func() types.String {
+											if v, ok := nestedItemMap["namespace"].(string); ok && v != "" {
+												return types.StringValue(v)
+											}
+											return types.StringNull()
+										}(),
+										Tenant: func() types.String {
+											if v, ok := nestedItemMap["tenant"].(string); ok && v != "" {
+												return types.StringValue(v)
+											}
+											return types.StringNull()
+										}(),
+										Uid: func() types.String {
+											if v, ok := nestedItemMap["uid"].(string); ok && v != "" {
+												return types.StringValue(v)
+											}
+											return types.StringNull()
+										}(),
+									})
+								}
+							}
+							return result
+						}
+						return nil
+					}(),
 					Protocol: func() *ProtocolPolicerProtocolPolicerProtocolModel {
 						if _, ok := itemMap["protocol"].(map[string]interface{}); ok {
 							return &ProtocolPolicerProtocolPolicerProtocolModel{
+								DNS: func() *ProtocolPolicerEmptyModel {
+									if !isImport && len(data.ProtocolPolicer) > listIdx && data.ProtocolPolicer[listIdx].Protocol != nil && data.ProtocolPolicer[listIdx].Protocol.DNS != nil {
+										return &ProtocolPolicerEmptyModel{}
+									}
+									return nil
+								}(),
+								UDP: func() *ProtocolPolicerEmptyModel {
+									if !isImport && len(data.ProtocolPolicer) > listIdx && data.ProtocolPolicer[listIdx].Protocol != nil && data.ProtocolPolicer[listIdx].Protocol.UDP != nil {
+										return &ProtocolPolicerEmptyModel{}
+									}
+									return nil
+								}(),
 							}
 						}
 						return nil
@@ -572,8 +759,59 @@ func (r *ProtocolPolicerResource) Update(ctx context.Context, req resource.Updat
 		var protocol_policerList []map[string]interface{}
 		for _, item := range data.ProtocolPolicer {
 			itemMap := make(map[string]interface{})
+			if len(item.Policer) > 0 {
+				var policerNestedList []map[string]interface{}
+				for _, nestedItem := range item.Policer {
+					nestedItemMap := make(map[string]interface{})
+					if !nestedItem.Kind.IsNull() && !nestedItem.Kind.IsUnknown() {
+						nestedItemMap["kind"] = nestedItem.Kind.ValueString()
+					}
+					if !nestedItem.Name.IsNull() && !nestedItem.Name.IsUnknown() {
+						nestedItemMap["name"] = nestedItem.Name.ValueString()
+					}
+					if !nestedItem.Namespace.IsNull() && !nestedItem.Namespace.IsUnknown() {
+						nestedItemMap["namespace"] = nestedItem.Namespace.ValueString()
+					}
+					if !nestedItem.Tenant.IsNull() && !nestedItem.Tenant.IsUnknown() {
+						nestedItemMap["tenant"] = nestedItem.Tenant.ValueString()
+					}
+					if !nestedItem.Uid.IsNull() && !nestedItem.Uid.IsUnknown() {
+						nestedItemMap["uid"] = nestedItem.Uid.ValueString()
+					}
+					policerNestedList = append(policerNestedList, nestedItemMap)
+				}
+				itemMap["policer"] = policerNestedList
+			}
 			if item.Protocol != nil {
 				protocolNestedMap := make(map[string]interface{})
+				if item.Protocol.DNS != nil {
+					protocolNestedMap["dns"] = map[string]interface{}{}
+				}
+				if item.Protocol.Icmp != nil {
+					icmpDeepMap := make(map[string]interface{})
+					if !item.Protocol.Icmp.Type.IsNull() && !item.Protocol.Icmp.Type.IsUnknown() {
+						var TypeItems []string
+						diags := item.Protocol.Icmp.Type.ElementsAs(ctx, &TypeItems, false)
+						if !diags.HasError() {
+							icmpDeepMap["type"] = TypeItems
+						}
+					}
+					protocolNestedMap["icmp"] = icmpDeepMap
+				}
+				if item.Protocol.TCP != nil {
+					tcpDeepMap := make(map[string]interface{})
+					if !item.Protocol.TCP.Flags.IsNull() && !item.Protocol.TCP.Flags.IsUnknown() {
+						var FlagsItems []string
+						diags := item.Protocol.TCP.Flags.ElementsAs(ctx, &FlagsItems, false)
+						if !diags.HasError() {
+							tcpDeepMap["flags"] = FlagsItems
+						}
+					}
+					protocolNestedMap["tcp"] = tcpDeepMap
+				}
+				if item.Protocol.UDP != nil {
+					protocolNestedMap["udp"] = map[string]interface{}{}
+				}
 				itemMap["protocol"] = protocolNestedMap
 			}
 			protocol_policerList = append(protocol_policerList, itemMap)

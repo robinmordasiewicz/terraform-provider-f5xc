@@ -788,6 +788,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 						"tenant": schema.StringAttribute{
 							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 							Optional: true,
+							Computed: true,
 						},
 					},
 
@@ -848,6 +849,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional: true,
+													Computed: true,
 												},
 											},
 										},
@@ -865,6 +867,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional: true,
+													Computed: true,
 												},
 											},
 										},
@@ -911,6 +914,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -954,6 +958,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional: true,
+													Computed: true,
 												},
 											},
 										},
@@ -971,6 +976,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional: true,
+													Computed: true,
 												},
 											},
 										},
@@ -1033,6 +1039,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -1055,6 +1062,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional: true,
+													Computed: true,
 												},
 											},
 										},
@@ -1072,6 +1080,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional: true,
+													Computed: true,
 												},
 											},
 										},
@@ -1132,6 +1141,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -1154,6 +1164,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional: true,
+													Computed: true,
 												},
 											},
 										},
@@ -1171,6 +1182,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional: true,
+													Computed: true,
 												},
 											},
 										},
@@ -1243,6 +1255,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -1271,6 +1284,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -1453,6 +1467,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
+								Computed: true,
 							},
 						},
 					},
@@ -1479,6 +1494,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 									"tenant": schema.StringAttribute{
 										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 										Optional: true,
+										Computed: true,
 									},
 								},
 							},
@@ -1607,7 +1623,7 @@ func (r *OriginPoolResource) Create(ctx context.Context, req resource.CreateRequ
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.OriginPool{
+	createReq := &client.OriginPool{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -1616,7 +1632,7 @@ func (r *OriginPoolResource) Create(ctx context.Context, req resource.CreateRequ
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -1625,7 +1641,7 @@ func (r *OriginPoolResource) Create(ctx context.Context, req resource.CreateRequ
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -1634,7 +1650,7 @@ func (r *OriginPoolResource) Create(ctx context.Context, req resource.CreateRequ
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -1735,11 +1751,11 @@ func (r *OriginPoolResource) Create(ctx context.Context, req resource.CreateRequ
 		if data.AdvancedOptions.ProxyProtocolV2 != nil {
 			advanced_optionsMap["proxy_protocol_v2"] = map[string]interface{}{}
 		}
-		apiResource.Spec["advanced_options"] = advanced_optionsMap
+		createReq.Spec["advanced_options"] = advanced_optionsMap
 	}
 	if data.AutomaticPort != nil {
 		automatic_portMap := make(map[string]interface{})
-		apiResource.Spec["automatic_port"] = automatic_portMap
+		createReq.Spec["automatic_port"] = automatic_portMap
 	}
 	if len(data.Healthcheck) > 0 {
 		var healthcheckList []map[string]interface{}
@@ -1756,15 +1772,15 @@ func (r *OriginPoolResource) Create(ctx context.Context, req resource.CreateRequ
 			}
 			healthcheckList = append(healthcheckList, itemMap)
 		}
-		apiResource.Spec["healthcheck"] = healthcheckList
+		createReq.Spec["healthcheck"] = healthcheckList
 	}
 	if data.LbPort != nil {
 		lb_portMap := make(map[string]interface{})
-		apiResource.Spec["lb_port"] = lb_portMap
+		createReq.Spec["lb_port"] = lb_portMap
 	}
 	if data.NoTLS != nil {
 		no_tlsMap := make(map[string]interface{})
-		apiResource.Spec["no_tls"] = no_tlsMap
+		createReq.Spec["no_tls"] = no_tlsMap
 	}
 	if len(data.OriginServers) > 0 {
 		var origin_serversList []map[string]interface{}
@@ -1779,22 +1795,72 @@ func (r *OriginPoolResource) Create(ctx context.Context, req resource.CreateRequ
 			}
 			if item.ConsulService != nil {
 				consul_serviceNestedMap := make(map[string]interface{})
+				if item.ConsulService.InsideNetwork != nil {
+					consul_serviceNestedMap["inside_network"] = map[string]interface{}{}
+				}
+				if item.ConsulService.OutsideNetwork != nil {
+					consul_serviceNestedMap["outside_network"] = map[string]interface{}{}
+				}
 				if !item.ConsulService.ServiceName.IsNull() && !item.ConsulService.ServiceName.IsUnknown() {
 					consul_serviceNestedMap["service_name"] = item.ConsulService.ServiceName.ValueString()
+				}
+				if item.ConsulService.SiteLocator != nil {
+					site_locatorDeepMap := make(map[string]interface{})
+					consul_serviceNestedMap["site_locator"] = site_locatorDeepMap
+				}
+				if item.ConsulService.SnatPool != nil {
+					snat_poolDeepMap := make(map[string]interface{})
+					if item.ConsulService.SnatPool.NoSnatPool != nil {
+						snat_poolDeepMap["no_snat_pool"] = map[string]interface{}{}
+					}
+					consul_serviceNestedMap["snat_pool"] = snat_poolDeepMap
 				}
 				itemMap["consul_service"] = consul_serviceNestedMap
 			}
 			if item.CustomEndpointObject != nil {
 				custom_endpoint_objectNestedMap := make(map[string]interface{})
+				if item.CustomEndpointObject.Endpoint != nil {
+					endpointDeepMap := make(map[string]interface{})
+					if !item.CustomEndpointObject.Endpoint.Name.IsNull() && !item.CustomEndpointObject.Endpoint.Name.IsUnknown() {
+						endpointDeepMap["name"] = item.CustomEndpointObject.Endpoint.Name.ValueString()
+					}
+					if !item.CustomEndpointObject.Endpoint.Namespace.IsNull() && !item.CustomEndpointObject.Endpoint.Namespace.IsUnknown() {
+						endpointDeepMap["namespace"] = item.CustomEndpointObject.Endpoint.Namespace.ValueString()
+					}
+					if !item.CustomEndpointObject.Endpoint.Tenant.IsNull() && !item.CustomEndpointObject.Endpoint.Tenant.IsUnknown() {
+						endpointDeepMap["tenant"] = item.CustomEndpointObject.Endpoint.Tenant.ValueString()
+					}
+					custom_endpoint_objectNestedMap["endpoint"] = endpointDeepMap
+				}
 				itemMap["custom_endpoint_object"] = custom_endpoint_objectNestedMap
 			}
 			if item.K8SService != nil {
 				k8s_serviceNestedMap := make(map[string]interface{})
+				if item.K8SService.InsideNetwork != nil {
+					k8s_serviceNestedMap["inside_network"] = map[string]interface{}{}
+				}
+				if item.K8SService.OutsideNetwork != nil {
+					k8s_serviceNestedMap["outside_network"] = map[string]interface{}{}
+				}
 				if !item.K8SService.Protocol.IsNull() && !item.K8SService.Protocol.IsUnknown() {
 					k8s_serviceNestedMap["protocol"] = item.K8SService.Protocol.ValueString()
 				}
 				if !item.K8SService.ServiceName.IsNull() && !item.K8SService.ServiceName.IsUnknown() {
 					k8s_serviceNestedMap["service_name"] = item.K8SService.ServiceName.ValueString()
+				}
+				if item.K8SService.SiteLocator != nil {
+					site_locatorDeepMap := make(map[string]interface{})
+					k8s_serviceNestedMap["site_locator"] = site_locatorDeepMap
+				}
+				if item.K8SService.SnatPool != nil {
+					snat_poolDeepMap := make(map[string]interface{})
+					if item.K8SService.SnatPool.NoSnatPool != nil {
+						snat_poolDeepMap["no_snat_pool"] = map[string]interface{}{}
+					}
+					k8s_serviceNestedMap["snat_pool"] = snat_poolDeepMap
+				}
+				if item.K8SService.Vk8sNetworks != nil {
+					k8s_serviceNestedMap["vk8s_networks"] = map[string]interface{}{}
 				}
 				itemMap["k8s_service"] = k8s_serviceNestedMap
 			}
@@ -1803,8 +1869,38 @@ func (r *OriginPoolResource) Create(ctx context.Context, req resource.CreateRequ
 			}
 			if item.PrivateIP != nil {
 				private_ipNestedMap := make(map[string]interface{})
+				if item.PrivateIP.InsideNetwork != nil {
+					private_ipNestedMap["inside_network"] = map[string]interface{}{}
+				}
 				if !item.PrivateIP.IP.IsNull() && !item.PrivateIP.IP.IsUnknown() {
 					private_ipNestedMap["ip"] = item.PrivateIP.IP.ValueString()
+				}
+				if item.PrivateIP.OutsideNetwork != nil {
+					private_ipNestedMap["outside_network"] = map[string]interface{}{}
+				}
+				if item.PrivateIP.Segment != nil {
+					segmentDeepMap := make(map[string]interface{})
+					if !item.PrivateIP.Segment.Name.IsNull() && !item.PrivateIP.Segment.Name.IsUnknown() {
+						segmentDeepMap["name"] = item.PrivateIP.Segment.Name.ValueString()
+					}
+					if !item.PrivateIP.Segment.Namespace.IsNull() && !item.PrivateIP.Segment.Namespace.IsUnknown() {
+						segmentDeepMap["namespace"] = item.PrivateIP.Segment.Namespace.ValueString()
+					}
+					if !item.PrivateIP.Segment.Tenant.IsNull() && !item.PrivateIP.Segment.Tenant.IsUnknown() {
+						segmentDeepMap["tenant"] = item.PrivateIP.Segment.Tenant.ValueString()
+					}
+					private_ipNestedMap["segment"] = segmentDeepMap
+				}
+				if item.PrivateIP.SiteLocator != nil {
+					site_locatorDeepMap := make(map[string]interface{})
+					private_ipNestedMap["site_locator"] = site_locatorDeepMap
+				}
+				if item.PrivateIP.SnatPool != nil {
+					snat_poolDeepMap := make(map[string]interface{})
+					if item.PrivateIP.SnatPool.NoSnatPool != nil {
+						snat_poolDeepMap["no_snat_pool"] = map[string]interface{}{}
+					}
+					private_ipNestedMap["snat_pool"] = snat_poolDeepMap
 				}
 				itemMap["private_ip"] = private_ipNestedMap
 			}
@@ -1813,8 +1909,38 @@ func (r *OriginPoolResource) Create(ctx context.Context, req resource.CreateRequ
 				if !item.PrivateName.DNSName.IsNull() && !item.PrivateName.DNSName.IsUnknown() {
 					private_nameNestedMap["dns_name"] = item.PrivateName.DNSName.ValueString()
 				}
+				if item.PrivateName.InsideNetwork != nil {
+					private_nameNestedMap["inside_network"] = map[string]interface{}{}
+				}
+				if item.PrivateName.OutsideNetwork != nil {
+					private_nameNestedMap["outside_network"] = map[string]interface{}{}
+				}
 				if !item.PrivateName.RefreshInterval.IsNull() && !item.PrivateName.RefreshInterval.IsUnknown() {
 					private_nameNestedMap["refresh_interval"] = item.PrivateName.RefreshInterval.ValueInt64()
+				}
+				if item.PrivateName.Segment != nil {
+					segmentDeepMap := make(map[string]interface{})
+					if !item.PrivateName.Segment.Name.IsNull() && !item.PrivateName.Segment.Name.IsUnknown() {
+						segmentDeepMap["name"] = item.PrivateName.Segment.Name.ValueString()
+					}
+					if !item.PrivateName.Segment.Namespace.IsNull() && !item.PrivateName.Segment.Namespace.IsUnknown() {
+						segmentDeepMap["namespace"] = item.PrivateName.Segment.Namespace.ValueString()
+					}
+					if !item.PrivateName.Segment.Tenant.IsNull() && !item.PrivateName.Segment.Tenant.IsUnknown() {
+						segmentDeepMap["tenant"] = item.PrivateName.Segment.Tenant.ValueString()
+					}
+					private_nameNestedMap["segment"] = segmentDeepMap
+				}
+				if item.PrivateName.SiteLocator != nil {
+					site_locatorDeepMap := make(map[string]interface{})
+					private_nameNestedMap["site_locator"] = site_locatorDeepMap
+				}
+				if item.PrivateName.SnatPool != nil {
+					snat_poolDeepMap := make(map[string]interface{})
+					if item.PrivateName.SnatPool.NoSnatPool != nil {
+						snat_poolDeepMap["no_snat_pool"] = map[string]interface{}{}
+					}
+					private_nameNestedMap["snat_pool"] = snat_poolDeepMap
 				}
 				itemMap["private_name"] = private_nameNestedMap
 			}
@@ -1840,6 +1966,19 @@ func (r *OriginPoolResource) Create(ctx context.Context, req resource.CreateRequ
 				if !item.VnPrivateIP.IP.IsNull() && !item.VnPrivateIP.IP.IsUnknown() {
 					vn_private_ipNestedMap["ip"] = item.VnPrivateIP.IP.ValueString()
 				}
+				if item.VnPrivateIP.VirtualNetwork != nil {
+					virtual_networkDeepMap := make(map[string]interface{})
+					if !item.VnPrivateIP.VirtualNetwork.Name.IsNull() && !item.VnPrivateIP.VirtualNetwork.Name.IsUnknown() {
+						virtual_networkDeepMap["name"] = item.VnPrivateIP.VirtualNetwork.Name.ValueString()
+					}
+					if !item.VnPrivateIP.VirtualNetwork.Namespace.IsNull() && !item.VnPrivateIP.VirtualNetwork.Namespace.IsUnknown() {
+						virtual_networkDeepMap["namespace"] = item.VnPrivateIP.VirtualNetwork.Namespace.ValueString()
+					}
+					if !item.VnPrivateIP.VirtualNetwork.Tenant.IsNull() && !item.VnPrivateIP.VirtualNetwork.Tenant.IsUnknown() {
+						virtual_networkDeepMap["tenant"] = item.VnPrivateIP.VirtualNetwork.Tenant.ValueString()
+					}
+					vn_private_ipNestedMap["virtual_network"] = virtual_networkDeepMap
+				}
 				itemMap["vn_private_ip"] = vn_private_ipNestedMap
 			}
 			if item.VnPrivateName != nil {
@@ -1847,15 +1986,28 @@ func (r *OriginPoolResource) Create(ctx context.Context, req resource.CreateRequ
 				if !item.VnPrivateName.DNSName.IsNull() && !item.VnPrivateName.DNSName.IsUnknown() {
 					vn_private_nameNestedMap["dns_name"] = item.VnPrivateName.DNSName.ValueString()
 				}
+				if item.VnPrivateName.PrivateNetwork != nil {
+					private_networkDeepMap := make(map[string]interface{})
+					if !item.VnPrivateName.PrivateNetwork.Name.IsNull() && !item.VnPrivateName.PrivateNetwork.Name.IsUnknown() {
+						private_networkDeepMap["name"] = item.VnPrivateName.PrivateNetwork.Name.ValueString()
+					}
+					if !item.VnPrivateName.PrivateNetwork.Namespace.IsNull() && !item.VnPrivateName.PrivateNetwork.Namespace.IsUnknown() {
+						private_networkDeepMap["namespace"] = item.VnPrivateName.PrivateNetwork.Namespace.ValueString()
+					}
+					if !item.VnPrivateName.PrivateNetwork.Tenant.IsNull() && !item.VnPrivateName.PrivateNetwork.Tenant.IsUnknown() {
+						private_networkDeepMap["tenant"] = item.VnPrivateName.PrivateNetwork.Tenant.ValueString()
+					}
+					vn_private_nameNestedMap["private_network"] = private_networkDeepMap
+				}
 				itemMap["vn_private_name"] = vn_private_nameNestedMap
 			}
 			origin_serversList = append(origin_serversList, itemMap)
 		}
-		apiResource.Spec["origin_servers"] = origin_serversList
+		createReq.Spec["origin_servers"] = origin_serversList
 	}
 	if data.SameAsEndpointPort != nil {
 		same_as_endpoint_portMap := make(map[string]interface{})
-		apiResource.Spec["same_as_endpoint_port"] = same_as_endpoint_portMap
+		createReq.Spec["same_as_endpoint_port"] = same_as_endpoint_portMap
 	}
 	if data.UpstreamConnPoolReuseType != nil {
 		upstream_conn_pool_reuse_typeMap := make(map[string]interface{})
@@ -1865,7 +2017,7 @@ func (r *OriginPoolResource) Create(ctx context.Context, req resource.CreateRequ
 		if data.UpstreamConnPoolReuseType.EnableConnPoolReuse != nil {
 			upstream_conn_pool_reuse_typeMap["enable_conn_pool_reuse"] = map[string]interface{}{}
 		}
-		apiResource.Spec["upstream_conn_pool_reuse_type"] = upstream_conn_pool_reuse_typeMap
+		createReq.Spec["upstream_conn_pool_reuse_type"] = upstream_conn_pool_reuse_typeMap
 	}
 	if data.UseTLS != nil {
 		use_tlsMap := make(map[string]interface{})
@@ -1924,64 +2076,779 @@ func (r *OriginPoolResource) Create(ctx context.Context, req resource.CreateRequ
 		if data.UseTLS.VolterraTrustedCa != nil {
 			use_tlsMap["volterra_trusted_ca"] = map[string]interface{}{}
 		}
-		apiResource.Spec["use_tls"] = use_tlsMap
+		createReq.Spec["use_tls"] = use_tlsMap
 	}
 	if !data.EndpointSelection.IsNull() && !data.EndpointSelection.IsUnknown() {
-		apiResource.Spec["endpoint_selection"] = data.EndpointSelection.ValueString()
+		createReq.Spec["endpoint_selection"] = data.EndpointSelection.ValueString()
 	}
 	if !data.HealthCheckPort.IsNull() && !data.HealthCheckPort.IsUnknown() {
-		apiResource.Spec["health_check_port"] = data.HealthCheckPort.ValueInt64()
+		createReq.Spec["health_check_port"] = data.HealthCheckPort.ValueInt64()
 	}
 	if !data.LoadBalancerAlgorithm.IsNull() && !data.LoadBalancerAlgorithm.IsUnknown() {
-		apiResource.Spec["loadbalancer_algorithm"] = data.LoadBalancerAlgorithm.ValueString()
+		createReq.Spec["loadbalancer_algorithm"] = data.LoadBalancerAlgorithm.ValueString()
 	}
 	if !data.Port.IsNull() && !data.Port.IsUnknown() {
-		apiResource.Spec["port"] = data.Port.ValueInt64()
+		createReq.Spec["port"] = data.Port.ValueInt64()
 	}
 
 
-	created, err := r.client.CreateOriginPool(ctx, apiResource)
+	apiResource, err := r.client.CreateOriginPool(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create OriginPool: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
-	if v, ok := created.Spec["endpoint_selection"].(string); ok && v != "" {
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["advanced_options"].(map[string]interface{}); ok && (isImport || data.AdvancedOptions != nil) {
+		data.AdvancedOptions = &OriginPoolAdvancedOptionsModel{
+			AutoHTTPConfig: func() *OriginPoolEmptyModel {
+				if !isImport && data.AdvancedOptions != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AdvancedOptions.AutoHTTPConfig
+				}
+				// Import case: read from API
+				if _, ok := blockData["auto_http_config"].(map[string]interface{}); ok {
+					return &OriginPoolEmptyModel{}
+				}
+				return nil
+			}(),
+			CircuitBreaker: func() *OriginPoolAdvancedOptionsCircuitBreakerModel {
+				if !isImport && data.AdvancedOptions != nil && data.AdvancedOptions.CircuitBreaker != nil {
+					// Normal Read: preserve existing state value
+					return data.AdvancedOptions.CircuitBreaker
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["circuit_breaker"].(map[string]interface{}); ok {
+					return &OriginPoolAdvancedOptionsCircuitBreakerModel{
+						ConnectionLimit: func() types.Int64 {
+							if v, ok := nestedBlockData["connection_limit"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						MaxRequests: func() types.Int64 {
+							if v, ok := nestedBlockData["max_requests"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						PendingRequests: func() types.Int64 {
+							if v, ok := nestedBlockData["pending_requests"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						Priority: func() types.String {
+							if v, ok := nestedBlockData["priority"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Retries: func() types.Int64 {
+							if v, ok := nestedBlockData["retries"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			ConnectionTimeout: func() types.Int64 {
+				if v, ok := blockData["connection_timeout"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			DefaultCircuitBreaker: func() *OriginPoolEmptyModel {
+				if !isImport && data.AdvancedOptions != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AdvancedOptions.DefaultCircuitBreaker
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_circuit_breaker"].(map[string]interface{}); ok {
+					return &OriginPoolEmptyModel{}
+				}
+				return nil
+			}(),
+			DisableCircuitBreaker: func() *OriginPoolEmptyModel {
+				if !isImport && data.AdvancedOptions != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AdvancedOptions.DisableCircuitBreaker
+				}
+				// Import case: read from API
+				if _, ok := blockData["disable_circuit_breaker"].(map[string]interface{}); ok {
+					return &OriginPoolEmptyModel{}
+				}
+				return nil
+			}(),
+			DisableLbSourceIPPersistance: func() *OriginPoolEmptyModel {
+				if !isImport && data.AdvancedOptions != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AdvancedOptions.DisableLbSourceIPPersistance
+				}
+				// Import case: read from API
+				if _, ok := blockData["disable_lb_source_ip_persistance"].(map[string]interface{}); ok {
+					return &OriginPoolEmptyModel{}
+				}
+				return nil
+			}(),
+			DisableOutlierDetection: func() *OriginPoolEmptyModel {
+				if !isImport && data.AdvancedOptions != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AdvancedOptions.DisableOutlierDetection
+				}
+				// Import case: read from API
+				if _, ok := blockData["disable_outlier_detection"].(map[string]interface{}); ok {
+					return &OriginPoolEmptyModel{}
+				}
+				return nil
+			}(),
+			DisableProxyProtocol: func() *OriginPoolEmptyModel {
+				if !isImport && data.AdvancedOptions != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AdvancedOptions.DisableProxyProtocol
+				}
+				// Import case: read from API
+				if _, ok := blockData["disable_proxy_protocol"].(map[string]interface{}); ok {
+					return &OriginPoolEmptyModel{}
+				}
+				return nil
+			}(),
+			DisableSubsets: func() *OriginPoolEmptyModel {
+				if !isImport && data.AdvancedOptions != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AdvancedOptions.DisableSubsets
+				}
+				// Import case: read from API
+				if _, ok := blockData["disable_subsets"].(map[string]interface{}); ok {
+					return &OriginPoolEmptyModel{}
+				}
+				return nil
+			}(),
+			EnableLbSourceIPPersistance: func() *OriginPoolEmptyModel {
+				if !isImport && data.AdvancedOptions != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AdvancedOptions.EnableLbSourceIPPersistance
+				}
+				// Import case: read from API
+				if _, ok := blockData["enable_lb_source_ip_persistance"].(map[string]interface{}); ok {
+					return &OriginPoolEmptyModel{}
+				}
+				return nil
+			}(),
+			EnableSubsets: func() *OriginPoolAdvancedOptionsEnableSubsetsModel {
+				if !isImport && data.AdvancedOptions != nil && data.AdvancedOptions.EnableSubsets != nil {
+					// Normal Read: preserve existing state value
+					return data.AdvancedOptions.EnableSubsets
+				}
+				// Import case: read from API
+				if _, ok := blockData["enable_subsets"].(map[string]interface{}); ok {
+					return &OriginPoolAdvancedOptionsEnableSubsetsModel{
+					}
+				}
+				return nil
+			}(),
+			Http1Config: func() *OriginPoolAdvancedOptionsHttp1ConfigModel {
+				if !isImport && data.AdvancedOptions != nil && data.AdvancedOptions.Http1Config != nil {
+					// Normal Read: preserve existing state value
+					return data.AdvancedOptions.Http1Config
+				}
+				// Import case: read from API
+				if _, ok := blockData["http1_config"].(map[string]interface{}); ok {
+					return &OriginPoolAdvancedOptionsHttp1ConfigModel{
+					}
+				}
+				return nil
+			}(),
+			Http2Options: func() *OriginPoolAdvancedOptionsHttp2OptionsModel {
+				if !isImport && data.AdvancedOptions != nil && data.AdvancedOptions.Http2Options != nil {
+					// Normal Read: preserve existing state value
+					return data.AdvancedOptions.Http2Options
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["http2_options"].(map[string]interface{}); ok {
+					return &OriginPoolAdvancedOptionsHttp2OptionsModel{
+						Enabled: func() types.Bool {
+							if v, ok := nestedBlockData["enabled"].(bool); ok {
+								return types.BoolValue(v)
+							}
+							return types.BoolNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			HTTPIdleTimeout: func() types.Int64 {
+				if v, ok := blockData["http_idle_timeout"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			NoPanicThreshold: func() *OriginPoolEmptyModel {
+				if !isImport && data.AdvancedOptions != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AdvancedOptions.NoPanicThreshold
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_panic_threshold"].(map[string]interface{}); ok {
+					return &OriginPoolEmptyModel{}
+				}
+				return nil
+			}(),
+			OutlierDetection: func() *OriginPoolAdvancedOptionsOutlierDetectionModel {
+				if !isImport && data.AdvancedOptions != nil && data.AdvancedOptions.OutlierDetection != nil {
+					// Normal Read: preserve existing state value
+					return data.AdvancedOptions.OutlierDetection
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["outlier_detection"].(map[string]interface{}); ok {
+					return &OriginPoolAdvancedOptionsOutlierDetectionModel{
+						BaseEjectionTime: func() types.Int64 {
+							if v, ok := nestedBlockData["base_ejection_time"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						Consecutive5xx: func() types.Int64 {
+							if v, ok := nestedBlockData["consecutive_5xx"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						ConsecutiveGatewayFailure: func() types.Int64 {
+							if v, ok := nestedBlockData["consecutive_gateway_failure"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						Interval: func() types.Int64 {
+							if v, ok := nestedBlockData["interval"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						MaxEjectionPercent: func() types.Int64 {
+							if v, ok := nestedBlockData["max_ejection_percent"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			PanicThreshold: func() types.Int64 {
+				if v, ok := blockData["panic_threshold"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			ProxyProtocolV1: func() *OriginPoolEmptyModel {
+				if !isImport && data.AdvancedOptions != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AdvancedOptions.ProxyProtocolV1
+				}
+				// Import case: read from API
+				if _, ok := blockData["proxy_protocol_v1"].(map[string]interface{}); ok {
+					return &OriginPoolEmptyModel{}
+				}
+				return nil
+			}(),
+			ProxyProtocolV2: func() *OriginPoolEmptyModel {
+				if !isImport && data.AdvancedOptions != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AdvancedOptions.ProxyProtocolV2
+				}
+				// Import case: read from API
+				if _, ok := blockData["proxy_protocol_v2"].(map[string]interface{}); ok {
+					return &OriginPoolEmptyModel{}
+				}
+				return nil
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["automatic_port"].(map[string]interface{}); ok && isImport && data.AutomaticPort == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AutomaticPort = &OriginPoolEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["healthcheck"].([]interface{}); ok && len(listData) > 0 {
+		var healthcheckList []OriginPoolHealthcheckModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				healthcheckList = append(healthcheckList, OriginPoolHealthcheckModel{
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Namespace: func() types.String {
+						if v, ok := itemMap["namespace"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Tenant: func() types.String {
+						if v, ok := itemMap["tenant"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.Healthcheck = healthcheckList
+	}
+	if _, ok := apiResource.Spec["lb_port"].(map[string]interface{}); ok && isImport && data.LbPort == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.LbPort = &OriginPoolEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_tls"].(map[string]interface{}); ok && isImport && data.NoTLS == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoTLS = &OriginPoolEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["origin_servers"].([]interface{}); ok && len(listData) > 0 {
+		var origin_serversList []OriginPoolOriginServersModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				origin_serversList = append(origin_serversList, OriginPoolOriginServersModel{
+					CbipService: func() *OriginPoolOriginServersCbipServiceModel {
+						if nestedMap, ok := itemMap["cbip_service"].(map[string]interface{}); ok {
+							return &OriginPoolOriginServersCbipServiceModel{
+								ServiceName: func() types.String {
+									if v, ok := nestedMap["service_name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					ConsulService: func() *OriginPoolOriginServersConsulServiceModel {
+						if nestedMap, ok := itemMap["consul_service"].(map[string]interface{}); ok {
+							return &OriginPoolOriginServersConsulServiceModel{
+								InsideNetwork: func() *OriginPoolEmptyModel {
+									if !isImport && len(data.OriginServers) > listIdx && data.OriginServers[listIdx].ConsulService != nil && data.OriginServers[listIdx].ConsulService.InsideNetwork != nil {
+										return &OriginPoolEmptyModel{}
+									}
+									return nil
+								}(),
+								OutsideNetwork: func() *OriginPoolEmptyModel {
+									if !isImport && len(data.OriginServers) > listIdx && data.OriginServers[listIdx].ConsulService != nil && data.OriginServers[listIdx].ConsulService.OutsideNetwork != nil {
+										return &OriginPoolEmptyModel{}
+									}
+									return nil
+								}(),
+								ServiceName: func() types.String {
+									if v, ok := nestedMap["service_name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					CustomEndpointObject: func() *OriginPoolOriginServersCustomEndpointObjectModel {
+						if _, ok := itemMap["custom_endpoint_object"].(map[string]interface{}); ok {
+							return &OriginPoolOriginServersCustomEndpointObjectModel{
+							}
+						}
+						return nil
+					}(),
+					K8SService: func() *OriginPoolOriginServersK8SServiceModel {
+						if nestedMap, ok := itemMap["k8s_service"].(map[string]interface{}); ok {
+							return &OriginPoolOriginServersK8SServiceModel{
+								InsideNetwork: func() *OriginPoolEmptyModel {
+									if !isImport && len(data.OriginServers) > listIdx && data.OriginServers[listIdx].K8SService != nil && data.OriginServers[listIdx].K8SService.InsideNetwork != nil {
+										return &OriginPoolEmptyModel{}
+									}
+									return nil
+								}(),
+								OutsideNetwork: func() *OriginPoolEmptyModel {
+									if !isImport && len(data.OriginServers) > listIdx && data.OriginServers[listIdx].K8SService != nil && data.OriginServers[listIdx].K8SService.OutsideNetwork != nil {
+										return &OriginPoolEmptyModel{}
+									}
+									return nil
+								}(),
+								Protocol: func() types.String {
+									if v, ok := nestedMap["protocol"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								ServiceName: func() types.String {
+									if v, ok := nestedMap["service_name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Vk8sNetworks: func() *OriginPoolEmptyModel {
+									if !isImport && len(data.OriginServers) > listIdx && data.OriginServers[listIdx].K8SService != nil && data.OriginServers[listIdx].K8SService.Vk8sNetworks != nil {
+										return &OriginPoolEmptyModel{}
+									}
+									return nil
+								}(),
+							}
+						}
+						return nil
+					}(),
+					Labels: func() *OriginPoolEmptyModel {
+						if !isImport && len(data.OriginServers) > listIdx && data.OriginServers[listIdx].Labels != nil {
+							return &OriginPoolEmptyModel{}
+						}
+						return nil
+					}(),
+					PrivateIP: func() *OriginPoolOriginServersPrivateIPModel {
+						if nestedMap, ok := itemMap["private_ip"].(map[string]interface{}); ok {
+							return &OriginPoolOriginServersPrivateIPModel{
+								InsideNetwork: func() *OriginPoolEmptyModel {
+									if !isImport && len(data.OriginServers) > listIdx && data.OriginServers[listIdx].PrivateIP != nil && data.OriginServers[listIdx].PrivateIP.InsideNetwork != nil {
+										return &OriginPoolEmptyModel{}
+									}
+									return nil
+								}(),
+								IP: func() types.String {
+									if v, ok := nestedMap["ip"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								OutsideNetwork: func() *OriginPoolEmptyModel {
+									if !isImport && len(data.OriginServers) > listIdx && data.OriginServers[listIdx].PrivateIP != nil && data.OriginServers[listIdx].PrivateIP.OutsideNetwork != nil {
+										return &OriginPoolEmptyModel{}
+									}
+									return nil
+								}(),
+							}
+						}
+						return nil
+					}(),
+					PrivateName: func() *OriginPoolOriginServersPrivateNameModel {
+						if nestedMap, ok := itemMap["private_name"].(map[string]interface{}); ok {
+							return &OriginPoolOriginServersPrivateNameModel{
+								DNSName: func() types.String {
+									if v, ok := nestedMap["dns_name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								InsideNetwork: func() *OriginPoolEmptyModel {
+									if !isImport && len(data.OriginServers) > listIdx && data.OriginServers[listIdx].PrivateName != nil && data.OriginServers[listIdx].PrivateName.InsideNetwork != nil {
+										return &OriginPoolEmptyModel{}
+									}
+									return nil
+								}(),
+								OutsideNetwork: func() *OriginPoolEmptyModel {
+									if !isImport && len(data.OriginServers) > listIdx && data.OriginServers[listIdx].PrivateName != nil && data.OriginServers[listIdx].PrivateName.OutsideNetwork != nil {
+										return &OriginPoolEmptyModel{}
+									}
+									return nil
+								}(),
+								RefreshInterval: func() types.Int64 {
+									if v, ok := nestedMap["refresh_interval"].(float64); ok && v != 0 {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					PublicIP: func() *OriginPoolOriginServersPublicIPModel {
+						if nestedMap, ok := itemMap["public_ip"].(map[string]interface{}); ok {
+							return &OriginPoolOriginServersPublicIPModel{
+								IP: func() types.String {
+									if v, ok := nestedMap["ip"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					PublicName: func() *OriginPoolOriginServersPublicNameModel {
+						if nestedMap, ok := itemMap["public_name"].(map[string]interface{}); ok {
+							return &OriginPoolOriginServersPublicNameModel{
+								DNSName: func() types.String {
+									if v, ok := nestedMap["dns_name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								RefreshInterval: func() types.Int64 {
+									if v, ok := nestedMap["refresh_interval"].(float64); ok && v != 0 {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					VnPrivateIP: func() *OriginPoolOriginServersVnPrivateIPModel {
+						if nestedMap, ok := itemMap["vn_private_ip"].(map[string]interface{}); ok {
+							return &OriginPoolOriginServersVnPrivateIPModel{
+								IP: func() types.String {
+									if v, ok := nestedMap["ip"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					VnPrivateName: func() *OriginPoolOriginServersVnPrivateNameModel {
+						if nestedMap, ok := itemMap["vn_private_name"].(map[string]interface{}); ok {
+							return &OriginPoolOriginServersVnPrivateNameModel{
+								DNSName: func() types.String {
+									if v, ok := nestedMap["dns_name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+				})
+			}
+		}
+		data.OriginServers = origin_serversList
+	}
+	if _, ok := apiResource.Spec["same_as_endpoint_port"].(map[string]interface{}); ok && isImport && data.SameAsEndpointPort == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.SameAsEndpointPort = &OriginPoolEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["upstream_conn_pool_reuse_type"].(map[string]interface{}); ok && isImport && data.UpstreamConnPoolReuseType == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.UpstreamConnPoolReuseType = &OriginPoolUpstreamConnPoolReuseTypeModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["use_tls"].(map[string]interface{}); ok && (isImport || data.UseTLS != nil) {
+		data.UseTLS = &OriginPoolUseTLSModel{
+			DefaultSessionKeyCaching: func() *OriginPoolEmptyModel {
+				if !isImport && data.UseTLS != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.UseTLS.DefaultSessionKeyCaching
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_session_key_caching"].(map[string]interface{}); ok {
+					return &OriginPoolEmptyModel{}
+				}
+				return nil
+			}(),
+			DisableSessionKeyCaching: func() *OriginPoolEmptyModel {
+				if !isImport && data.UseTLS != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.UseTLS.DisableSessionKeyCaching
+				}
+				// Import case: read from API
+				if _, ok := blockData["disable_session_key_caching"].(map[string]interface{}); ok {
+					return &OriginPoolEmptyModel{}
+				}
+				return nil
+			}(),
+			DisableSni: func() *OriginPoolEmptyModel {
+				if !isImport && data.UseTLS != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.UseTLS.DisableSni
+				}
+				// Import case: read from API
+				if _, ok := blockData["disable_sni"].(map[string]interface{}); ok {
+					return &OriginPoolEmptyModel{}
+				}
+				return nil
+			}(),
+			MaxSessionKeys: func() types.Int64 {
+				if v, ok := blockData["max_session_keys"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			NoMtls: func() *OriginPoolEmptyModel {
+				if !isImport && data.UseTLS != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.UseTLS.NoMtls
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_mtls"].(map[string]interface{}); ok {
+					return &OriginPoolEmptyModel{}
+				}
+				return nil
+			}(),
+			SkipServerVerification: func() *OriginPoolEmptyModel {
+				if !isImport && data.UseTLS != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.UseTLS.SkipServerVerification
+				}
+				// Import case: read from API
+				if _, ok := blockData["skip_server_verification"].(map[string]interface{}); ok {
+					return &OriginPoolEmptyModel{}
+				}
+				return nil
+			}(),
+			Sni: func() types.String {
+				if v, ok := blockData["sni"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			TLSConfig: func() *OriginPoolUseTLSTLSConfigModel {
+				if !isImport && data.UseTLS != nil && data.UseTLS.TLSConfig != nil {
+					// Normal Read: preserve existing state value
+					return data.UseTLS.TLSConfig
+				}
+				// Import case: read from API
+				if _, ok := blockData["tls_config"].(map[string]interface{}); ok {
+					return &OriginPoolUseTLSTLSConfigModel{
+					}
+				}
+				return nil
+			}(),
+			UseHostHeaderAsSni: func() *OriginPoolEmptyModel {
+				if !isImport && data.UseTLS != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.UseTLS.UseHostHeaderAsSni
+				}
+				// Import case: read from API
+				if _, ok := blockData["use_host_header_as_sni"].(map[string]interface{}); ok {
+					return &OriginPoolEmptyModel{}
+				}
+				return nil
+			}(),
+			UseMtls: func() *OriginPoolUseTLSUseMtlsModel {
+				if !isImport && data.UseTLS != nil && data.UseTLS.UseMtls != nil {
+					// Normal Read: preserve existing state value
+					return data.UseTLS.UseMtls
+				}
+				// Import case: read from API
+				if _, ok := blockData["use_mtls"].(map[string]interface{}); ok {
+					return &OriginPoolUseTLSUseMtlsModel{
+					}
+				}
+				return nil
+			}(),
+			UseMtlsObj: func() *OriginPoolUseTLSUseMtlsObjModel {
+				if !isImport && data.UseTLS != nil && data.UseTLS.UseMtlsObj != nil {
+					// Normal Read: preserve existing state value
+					return data.UseTLS.UseMtlsObj
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["use_mtls_obj"].(map[string]interface{}); ok {
+					return &OriginPoolUseTLSUseMtlsObjModel{
+						Name: func() types.String {
+							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Namespace: func() types.String {
+							if v, ok := nestedBlockData["namespace"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Tenant: func() types.String {
+							if v, ok := nestedBlockData["tenant"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			UseServerVerification: func() *OriginPoolUseTLSUseServerVerificationModel {
+				if !isImport && data.UseTLS != nil && data.UseTLS.UseServerVerification != nil {
+					// Normal Read: preserve existing state value
+					return data.UseTLS.UseServerVerification
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["use_server_verification"].(map[string]interface{}); ok {
+					return &OriginPoolUseTLSUseServerVerificationModel{
+						TrustedCaURL: func() types.String {
+							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			VolterraTrustedCa: func() *OriginPoolEmptyModel {
+				if !isImport && data.UseTLS != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.UseTLS.VolterraTrustedCa
+				}
+				// Import case: read from API
+				if _, ok := blockData["volterra_trusted_ca"].(map[string]interface{}); ok {
+					return &OriginPoolEmptyModel{}
+				}
+				return nil
+			}(),
+		}
+	}
+	if v, ok := apiResource.Spec["endpoint_selection"].(string); ok && v != "" {
 		data.EndpointSelection = types.StringValue(v)
-	} else if data.EndpointSelection.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.EndpointSelection = types.StringNull()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["health_check_port"].(float64); ok {
+	if v, ok := apiResource.Spec["health_check_port"].(float64); ok {
 		data.HealthCheckPort = types.Int64Value(int64(v))
-	} else if data.HealthCheckPort.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.HealthCheckPort = types.Int64Null()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["loadbalancer_algorithm"].(string); ok && v != "" {
+	if v, ok := apiResource.Spec["loadbalancer_algorithm"].(string); ok && v != "" {
 		data.LoadBalancerAlgorithm = types.StringValue(v)
-	} else if data.LoadBalancerAlgorithm.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.LoadBalancerAlgorithm = types.StringNull()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["port"].(float64); ok {
+	if v, ok := apiResource.Spec["port"].(float64); ok {
 		data.Port = types.Int64Value(int64(v))
-	} else if data.Port.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.Port = types.Int64Null()
 	}
-	// If plan had a value, preserve it
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
@@ -2357,7 +3224,8 @@ func (r *OriginPoolResource) Read(ctx context.Context, req resource.ReadRequest,
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["healthcheck"].([]interface{}); ok && len(listData) > 0 {
 		var healthcheckList []OriginPoolHealthcheckModel
-		for _, item := range listData {
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				healthcheckList = append(healthcheckList, OriginPoolHealthcheckModel{
 					Name: func() types.String {
@@ -2395,7 +3263,8 @@ func (r *OriginPoolResource) Read(ctx context.Context, req resource.ReadRequest,
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["origin_servers"].([]interface{}); ok && len(listData) > 0 {
 		var origin_serversList []OriginPoolOriginServersModel
-		for _, item := range listData {
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				origin_serversList = append(origin_serversList, OriginPoolOriginServersModel{
 					CbipService: func() *OriginPoolOriginServersCbipServiceModel {
@@ -2414,6 +3283,18 @@ func (r *OriginPoolResource) Read(ctx context.Context, req resource.ReadRequest,
 					ConsulService: func() *OriginPoolOriginServersConsulServiceModel {
 						if nestedMap, ok := itemMap["consul_service"].(map[string]interface{}); ok {
 							return &OriginPoolOriginServersConsulServiceModel{
+								InsideNetwork: func() *OriginPoolEmptyModel {
+									if !isImport && len(data.OriginServers) > listIdx && data.OriginServers[listIdx].ConsulService != nil && data.OriginServers[listIdx].ConsulService.InsideNetwork != nil {
+										return &OriginPoolEmptyModel{}
+									}
+									return nil
+								}(),
+								OutsideNetwork: func() *OriginPoolEmptyModel {
+									if !isImport && len(data.OriginServers) > listIdx && data.OriginServers[listIdx].ConsulService != nil && data.OriginServers[listIdx].ConsulService.OutsideNetwork != nil {
+										return &OriginPoolEmptyModel{}
+									}
+									return nil
+								}(),
 								ServiceName: func() types.String {
 									if v, ok := nestedMap["service_name"].(string); ok && v != "" {
 										return types.StringValue(v)
@@ -2434,6 +3315,18 @@ func (r *OriginPoolResource) Read(ctx context.Context, req resource.ReadRequest,
 					K8SService: func() *OriginPoolOriginServersK8SServiceModel {
 						if nestedMap, ok := itemMap["k8s_service"].(map[string]interface{}); ok {
 							return &OriginPoolOriginServersK8SServiceModel{
+								InsideNetwork: func() *OriginPoolEmptyModel {
+									if !isImport && len(data.OriginServers) > listIdx && data.OriginServers[listIdx].K8SService != nil && data.OriginServers[listIdx].K8SService.InsideNetwork != nil {
+										return &OriginPoolEmptyModel{}
+									}
+									return nil
+								}(),
+								OutsideNetwork: func() *OriginPoolEmptyModel {
+									if !isImport && len(data.OriginServers) > listIdx && data.OriginServers[listIdx].K8SService != nil && data.OriginServers[listIdx].K8SService.OutsideNetwork != nil {
+										return &OriginPoolEmptyModel{}
+									}
+									return nil
+								}(),
 								Protocol: func() types.String {
 									if v, ok := nestedMap["protocol"].(string); ok && v != "" {
 										return types.StringValue(v)
@@ -2446,12 +3339,18 @@ func (r *OriginPoolResource) Read(ctx context.Context, req resource.ReadRequest,
 									}
 									return types.StringNull()
 								}(),
+								Vk8sNetworks: func() *OriginPoolEmptyModel {
+									if !isImport && len(data.OriginServers) > listIdx && data.OriginServers[listIdx].K8SService != nil && data.OriginServers[listIdx].K8SService.Vk8sNetworks != nil {
+										return &OriginPoolEmptyModel{}
+									}
+									return nil
+								}(),
 							}
 						}
 						return nil
 					}(),
 					Labels: func() *OriginPoolEmptyModel {
-						if _, ok := itemMap["labels"].(map[string]interface{}); ok {
+						if !isImport && len(data.OriginServers) > listIdx && data.OriginServers[listIdx].Labels != nil {
 							return &OriginPoolEmptyModel{}
 						}
 						return nil
@@ -2459,11 +3358,23 @@ func (r *OriginPoolResource) Read(ctx context.Context, req resource.ReadRequest,
 					PrivateIP: func() *OriginPoolOriginServersPrivateIPModel {
 						if nestedMap, ok := itemMap["private_ip"].(map[string]interface{}); ok {
 							return &OriginPoolOriginServersPrivateIPModel{
+								InsideNetwork: func() *OriginPoolEmptyModel {
+									if !isImport && len(data.OriginServers) > listIdx && data.OriginServers[listIdx].PrivateIP != nil && data.OriginServers[listIdx].PrivateIP.InsideNetwork != nil {
+										return &OriginPoolEmptyModel{}
+									}
+									return nil
+								}(),
 								IP: func() types.String {
 									if v, ok := nestedMap["ip"].(string); ok && v != "" {
 										return types.StringValue(v)
 									}
 									return types.StringNull()
+								}(),
+								OutsideNetwork: func() *OriginPoolEmptyModel {
+									if !isImport && len(data.OriginServers) > listIdx && data.OriginServers[listIdx].PrivateIP != nil && data.OriginServers[listIdx].PrivateIP.OutsideNetwork != nil {
+										return &OriginPoolEmptyModel{}
+									}
+									return nil
 								}(),
 							}
 						}
@@ -2477,6 +3388,18 @@ func (r *OriginPoolResource) Read(ctx context.Context, req resource.ReadRequest,
 										return types.StringValue(v)
 									}
 									return types.StringNull()
+								}(),
+								InsideNetwork: func() *OriginPoolEmptyModel {
+									if !isImport && len(data.OriginServers) > listIdx && data.OriginServers[listIdx].PrivateName != nil && data.OriginServers[listIdx].PrivateName.InsideNetwork != nil {
+										return &OriginPoolEmptyModel{}
+									}
+									return nil
+								}(),
+								OutsideNetwork: func() *OriginPoolEmptyModel {
+									if !isImport && len(data.OriginServers) > listIdx && data.OriginServers[listIdx].PrivateName != nil && data.OriginServers[listIdx].PrivateName.OutsideNetwork != nil {
+										return &OriginPoolEmptyModel{}
+									}
+									return nil
 								}(),
 								RefreshInterval: func() types.Int64 {
 									if v, ok := nestedMap["refresh_interval"].(float64); ok && v != 0 {
@@ -2955,22 +3878,72 @@ func (r *OriginPoolResource) Update(ctx context.Context, req resource.UpdateRequ
 			}
 			if item.ConsulService != nil {
 				consul_serviceNestedMap := make(map[string]interface{})
+				if item.ConsulService.InsideNetwork != nil {
+					consul_serviceNestedMap["inside_network"] = map[string]interface{}{}
+				}
+				if item.ConsulService.OutsideNetwork != nil {
+					consul_serviceNestedMap["outside_network"] = map[string]interface{}{}
+				}
 				if !item.ConsulService.ServiceName.IsNull() && !item.ConsulService.ServiceName.IsUnknown() {
 					consul_serviceNestedMap["service_name"] = item.ConsulService.ServiceName.ValueString()
+				}
+				if item.ConsulService.SiteLocator != nil {
+					site_locatorDeepMap := make(map[string]interface{})
+					consul_serviceNestedMap["site_locator"] = site_locatorDeepMap
+				}
+				if item.ConsulService.SnatPool != nil {
+					snat_poolDeepMap := make(map[string]interface{})
+					if item.ConsulService.SnatPool.NoSnatPool != nil {
+						snat_poolDeepMap["no_snat_pool"] = map[string]interface{}{}
+					}
+					consul_serviceNestedMap["snat_pool"] = snat_poolDeepMap
 				}
 				itemMap["consul_service"] = consul_serviceNestedMap
 			}
 			if item.CustomEndpointObject != nil {
 				custom_endpoint_objectNestedMap := make(map[string]interface{})
+				if item.CustomEndpointObject.Endpoint != nil {
+					endpointDeepMap := make(map[string]interface{})
+					if !item.CustomEndpointObject.Endpoint.Name.IsNull() && !item.CustomEndpointObject.Endpoint.Name.IsUnknown() {
+						endpointDeepMap["name"] = item.CustomEndpointObject.Endpoint.Name.ValueString()
+					}
+					if !item.CustomEndpointObject.Endpoint.Namespace.IsNull() && !item.CustomEndpointObject.Endpoint.Namespace.IsUnknown() {
+						endpointDeepMap["namespace"] = item.CustomEndpointObject.Endpoint.Namespace.ValueString()
+					}
+					if !item.CustomEndpointObject.Endpoint.Tenant.IsNull() && !item.CustomEndpointObject.Endpoint.Tenant.IsUnknown() {
+						endpointDeepMap["tenant"] = item.CustomEndpointObject.Endpoint.Tenant.ValueString()
+					}
+					custom_endpoint_objectNestedMap["endpoint"] = endpointDeepMap
+				}
 				itemMap["custom_endpoint_object"] = custom_endpoint_objectNestedMap
 			}
 			if item.K8SService != nil {
 				k8s_serviceNestedMap := make(map[string]interface{})
+				if item.K8SService.InsideNetwork != nil {
+					k8s_serviceNestedMap["inside_network"] = map[string]interface{}{}
+				}
+				if item.K8SService.OutsideNetwork != nil {
+					k8s_serviceNestedMap["outside_network"] = map[string]interface{}{}
+				}
 				if !item.K8SService.Protocol.IsNull() && !item.K8SService.Protocol.IsUnknown() {
 					k8s_serviceNestedMap["protocol"] = item.K8SService.Protocol.ValueString()
 				}
 				if !item.K8SService.ServiceName.IsNull() && !item.K8SService.ServiceName.IsUnknown() {
 					k8s_serviceNestedMap["service_name"] = item.K8SService.ServiceName.ValueString()
+				}
+				if item.K8SService.SiteLocator != nil {
+					site_locatorDeepMap := make(map[string]interface{})
+					k8s_serviceNestedMap["site_locator"] = site_locatorDeepMap
+				}
+				if item.K8SService.SnatPool != nil {
+					snat_poolDeepMap := make(map[string]interface{})
+					if item.K8SService.SnatPool.NoSnatPool != nil {
+						snat_poolDeepMap["no_snat_pool"] = map[string]interface{}{}
+					}
+					k8s_serviceNestedMap["snat_pool"] = snat_poolDeepMap
+				}
+				if item.K8SService.Vk8sNetworks != nil {
+					k8s_serviceNestedMap["vk8s_networks"] = map[string]interface{}{}
 				}
 				itemMap["k8s_service"] = k8s_serviceNestedMap
 			}
@@ -2979,8 +3952,38 @@ func (r *OriginPoolResource) Update(ctx context.Context, req resource.UpdateRequ
 			}
 			if item.PrivateIP != nil {
 				private_ipNestedMap := make(map[string]interface{})
+				if item.PrivateIP.InsideNetwork != nil {
+					private_ipNestedMap["inside_network"] = map[string]interface{}{}
+				}
 				if !item.PrivateIP.IP.IsNull() && !item.PrivateIP.IP.IsUnknown() {
 					private_ipNestedMap["ip"] = item.PrivateIP.IP.ValueString()
+				}
+				if item.PrivateIP.OutsideNetwork != nil {
+					private_ipNestedMap["outside_network"] = map[string]interface{}{}
+				}
+				if item.PrivateIP.Segment != nil {
+					segmentDeepMap := make(map[string]interface{})
+					if !item.PrivateIP.Segment.Name.IsNull() && !item.PrivateIP.Segment.Name.IsUnknown() {
+						segmentDeepMap["name"] = item.PrivateIP.Segment.Name.ValueString()
+					}
+					if !item.PrivateIP.Segment.Namespace.IsNull() && !item.PrivateIP.Segment.Namespace.IsUnknown() {
+						segmentDeepMap["namespace"] = item.PrivateIP.Segment.Namespace.ValueString()
+					}
+					if !item.PrivateIP.Segment.Tenant.IsNull() && !item.PrivateIP.Segment.Tenant.IsUnknown() {
+						segmentDeepMap["tenant"] = item.PrivateIP.Segment.Tenant.ValueString()
+					}
+					private_ipNestedMap["segment"] = segmentDeepMap
+				}
+				if item.PrivateIP.SiteLocator != nil {
+					site_locatorDeepMap := make(map[string]interface{})
+					private_ipNestedMap["site_locator"] = site_locatorDeepMap
+				}
+				if item.PrivateIP.SnatPool != nil {
+					snat_poolDeepMap := make(map[string]interface{})
+					if item.PrivateIP.SnatPool.NoSnatPool != nil {
+						snat_poolDeepMap["no_snat_pool"] = map[string]interface{}{}
+					}
+					private_ipNestedMap["snat_pool"] = snat_poolDeepMap
 				}
 				itemMap["private_ip"] = private_ipNestedMap
 			}
@@ -2989,8 +3992,38 @@ func (r *OriginPoolResource) Update(ctx context.Context, req resource.UpdateRequ
 				if !item.PrivateName.DNSName.IsNull() && !item.PrivateName.DNSName.IsUnknown() {
 					private_nameNestedMap["dns_name"] = item.PrivateName.DNSName.ValueString()
 				}
+				if item.PrivateName.InsideNetwork != nil {
+					private_nameNestedMap["inside_network"] = map[string]interface{}{}
+				}
+				if item.PrivateName.OutsideNetwork != nil {
+					private_nameNestedMap["outside_network"] = map[string]interface{}{}
+				}
 				if !item.PrivateName.RefreshInterval.IsNull() && !item.PrivateName.RefreshInterval.IsUnknown() {
 					private_nameNestedMap["refresh_interval"] = item.PrivateName.RefreshInterval.ValueInt64()
+				}
+				if item.PrivateName.Segment != nil {
+					segmentDeepMap := make(map[string]interface{})
+					if !item.PrivateName.Segment.Name.IsNull() && !item.PrivateName.Segment.Name.IsUnknown() {
+						segmentDeepMap["name"] = item.PrivateName.Segment.Name.ValueString()
+					}
+					if !item.PrivateName.Segment.Namespace.IsNull() && !item.PrivateName.Segment.Namespace.IsUnknown() {
+						segmentDeepMap["namespace"] = item.PrivateName.Segment.Namespace.ValueString()
+					}
+					if !item.PrivateName.Segment.Tenant.IsNull() && !item.PrivateName.Segment.Tenant.IsUnknown() {
+						segmentDeepMap["tenant"] = item.PrivateName.Segment.Tenant.ValueString()
+					}
+					private_nameNestedMap["segment"] = segmentDeepMap
+				}
+				if item.PrivateName.SiteLocator != nil {
+					site_locatorDeepMap := make(map[string]interface{})
+					private_nameNestedMap["site_locator"] = site_locatorDeepMap
+				}
+				if item.PrivateName.SnatPool != nil {
+					snat_poolDeepMap := make(map[string]interface{})
+					if item.PrivateName.SnatPool.NoSnatPool != nil {
+						snat_poolDeepMap["no_snat_pool"] = map[string]interface{}{}
+					}
+					private_nameNestedMap["snat_pool"] = snat_poolDeepMap
 				}
 				itemMap["private_name"] = private_nameNestedMap
 			}
@@ -3016,12 +4049,38 @@ func (r *OriginPoolResource) Update(ctx context.Context, req resource.UpdateRequ
 				if !item.VnPrivateIP.IP.IsNull() && !item.VnPrivateIP.IP.IsUnknown() {
 					vn_private_ipNestedMap["ip"] = item.VnPrivateIP.IP.ValueString()
 				}
+				if item.VnPrivateIP.VirtualNetwork != nil {
+					virtual_networkDeepMap := make(map[string]interface{})
+					if !item.VnPrivateIP.VirtualNetwork.Name.IsNull() && !item.VnPrivateIP.VirtualNetwork.Name.IsUnknown() {
+						virtual_networkDeepMap["name"] = item.VnPrivateIP.VirtualNetwork.Name.ValueString()
+					}
+					if !item.VnPrivateIP.VirtualNetwork.Namespace.IsNull() && !item.VnPrivateIP.VirtualNetwork.Namespace.IsUnknown() {
+						virtual_networkDeepMap["namespace"] = item.VnPrivateIP.VirtualNetwork.Namespace.ValueString()
+					}
+					if !item.VnPrivateIP.VirtualNetwork.Tenant.IsNull() && !item.VnPrivateIP.VirtualNetwork.Tenant.IsUnknown() {
+						virtual_networkDeepMap["tenant"] = item.VnPrivateIP.VirtualNetwork.Tenant.ValueString()
+					}
+					vn_private_ipNestedMap["virtual_network"] = virtual_networkDeepMap
+				}
 				itemMap["vn_private_ip"] = vn_private_ipNestedMap
 			}
 			if item.VnPrivateName != nil {
 				vn_private_nameNestedMap := make(map[string]interface{})
 				if !item.VnPrivateName.DNSName.IsNull() && !item.VnPrivateName.DNSName.IsUnknown() {
 					vn_private_nameNestedMap["dns_name"] = item.VnPrivateName.DNSName.ValueString()
+				}
+				if item.VnPrivateName.PrivateNetwork != nil {
+					private_networkDeepMap := make(map[string]interface{})
+					if !item.VnPrivateName.PrivateNetwork.Name.IsNull() && !item.VnPrivateName.PrivateNetwork.Name.IsUnknown() {
+						private_networkDeepMap["name"] = item.VnPrivateName.PrivateNetwork.Name.ValueString()
+					}
+					if !item.VnPrivateName.PrivateNetwork.Namespace.IsNull() && !item.VnPrivateName.PrivateNetwork.Namespace.IsUnknown() {
+						private_networkDeepMap["namespace"] = item.VnPrivateName.PrivateNetwork.Namespace.ValueString()
+					}
+					if !item.VnPrivateName.PrivateNetwork.Tenant.IsNull() && !item.VnPrivateName.PrivateNetwork.Tenant.IsUnknown() {
+						private_networkDeepMap["tenant"] = item.VnPrivateName.PrivateNetwork.Tenant.ValueString()
+					}
+					vn_private_nameNestedMap["private_network"] = private_networkDeepMap
 				}
 				itemMap["vn_private_name"] = vn_private_nameNestedMap
 			}

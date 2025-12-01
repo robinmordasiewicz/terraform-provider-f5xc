@@ -272,7 +272,7 @@ func (r *APICredentialResource) Create(ctx context.Context, req resource.CreateR
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.APICredential{
+	createReq := &client.APICredential{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -281,7 +281,7 @@ func (r *APICredentialResource) Create(ctx context.Context, req resource.CreateR
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -290,7 +290,7 @@ func (r *APICredentialResource) Create(ctx context.Context, req resource.CreateR
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -299,68 +299,64 @@ func (r *APICredentialResource) Create(ctx context.Context, req resource.CreateR
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
 	if !data.Password.IsNull() && !data.Password.IsUnknown() {
-		apiResource.Spec["password"] = data.Password.ValueString()
+		createReq.Spec["password"] = data.Password.ValueString()
 	}
 	if !data.Type.IsNull() && !data.Type.IsUnknown() {
-		apiResource.Spec["type"] = data.Type.ValueString()
+		createReq.Spec["type"] = data.Type.ValueString()
 	}
 	if !data.VirtualK8SName.IsNull() && !data.VirtualK8SName.IsUnknown() {
-		apiResource.Spec["virtual_k8s_name"] = data.VirtualK8SName.ValueString()
+		createReq.Spec["virtual_k8s_name"] = data.VirtualK8SName.ValueString()
 	}
 	if !data.VirtualK8SNamespace.IsNull() && !data.VirtualK8SNamespace.IsUnknown() {
-		apiResource.Spec["virtual_k8s_namespace"] = data.VirtualK8SNamespace.ValueString()
+		createReq.Spec["virtual_k8s_namespace"] = data.VirtualK8SNamespace.ValueString()
 	}
 
 
-	created, err := r.client.CreateAPICredential(ctx, apiResource)
+	apiResource, err := r.client.CreateAPICredential(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create APICredential: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 	// For resources without namespace in API path, namespace is computed from API response
-	data.Namespace = types.StringValue(created.Metadata.Namespace)
+	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
 
-	// Set computed fields from API response
-	if v, ok := created.Spec["password"].(string); ok && v != "" {
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if v, ok := apiResource.Spec["password"].(string); ok && v != "" {
 		data.Password = types.StringValue(v)
-	} else if data.Password.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.Password = types.StringNull()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["type"].(string); ok && v != "" {
+	if v, ok := apiResource.Spec["type"].(string); ok && v != "" {
 		data.Type = types.StringValue(v)
-	} else if data.Type.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.Type = types.StringNull()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["virtual_k8s_name"].(string); ok && v != "" {
+	if v, ok := apiResource.Spec["virtual_k8s_name"].(string); ok && v != "" {
 		data.VirtualK8SName = types.StringValue(v)
-	} else if data.VirtualK8SName.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.VirtualK8SName = types.StringNull()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["virtual_k8s_namespace"].(string); ok && v != "" {
+	if v, ok := apiResource.Spec["virtual_k8s_namespace"].(string); ok && v != "" {
 		data.VirtualK8SNamespace = types.StringValue(v)
-	} else if data.VirtualK8SNamespace.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.VirtualK8SNamespace = types.StringNull()
 	}
-	// If plan had a value, preserve it
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 

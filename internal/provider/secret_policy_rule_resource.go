@@ -297,7 +297,7 @@ func (r *SecretPolicyRuleResource) Create(ctx context.Context, req resource.Crea
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.SecretPolicyRule{
+	createReq := &client.SecretPolicyRule{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -306,7 +306,7 @@ func (r *SecretPolicyRuleResource) Create(ctx context.Context, req resource.Crea
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -315,7 +315,7 @@ func (r *SecretPolicyRuleResource) Create(ctx context.Context, req resource.Crea
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -324,7 +324,7 @@ func (r *SecretPolicyRuleResource) Create(ctx context.Context, req resource.Crea
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -344,7 +344,7 @@ func (r *SecretPolicyRuleResource) Create(ctx context.Context, req resource.Crea
 				client_name_matcherMap["regex_values"] = regex_valuesItems
 			}
 		}
-		apiResource.Spec["client_name_matcher"] = client_name_matcherMap
+		createReq.Spec["client_name_matcher"] = client_name_matcherMap
 	}
 	if data.ClientSelector != nil {
 		client_selectorMap := make(map[string]interface{})
@@ -355,44 +355,91 @@ func (r *SecretPolicyRuleResource) Create(ctx context.Context, req resource.Crea
 				client_selectorMap["expressions"] = expressionsItems
 			}
 		}
-		apiResource.Spec["client_selector"] = client_selectorMap
+		createReq.Spec["client_selector"] = client_selectorMap
 	}
 	if !data.Action.IsNull() && !data.Action.IsUnknown() {
-		apiResource.Spec["action"] = data.Action.ValueString()
+		createReq.Spec["action"] = data.Action.ValueString()
 	}
 	if !data.ClientName.IsNull() && !data.ClientName.IsUnknown() {
-		apiResource.Spec["client_name"] = data.ClientName.ValueString()
+		createReq.Spec["client_name"] = data.ClientName.ValueString()
 	}
 
 
-	created, err := r.client.CreateSecretPolicyRule(ctx, apiResource)
+	apiResource, err := r.client.CreateSecretPolicyRule(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create SecretPolicyRule: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
-	if v, ok := created.Spec["action"].(string); ok && v != "" {
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["client_name_matcher"].(map[string]interface{}); ok && (isImport || data.ClientNameMatcher != nil) {
+		data.ClientNameMatcher = &SecretPolicyRuleClientNameMatcherModel{
+			ExactValues: func() types.List {
+				if v, ok := blockData["exact_values"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+			RegexValues: func() types.List {
+				if v, ok := blockData["regex_values"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["client_selector"].(map[string]interface{}); ok && (isImport || data.ClientSelector != nil) {
+		data.ClientSelector = &SecretPolicyRuleClientSelectorModel{
+			Expressions: func() types.List {
+				if v, ok := blockData["expressions"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
+	}
+	if v, ok := apiResource.Spec["action"].(string); ok && v != "" {
 		data.Action = types.StringValue(v)
-	} else if data.Action.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.Action = types.StringNull()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["client_name"].(string); ok && v != "" {
+	if v, ok := apiResource.Spec["client_name"].(string); ok && v != "" {
 		data.ClientName = types.StringValue(v)
-	} else if data.ClientName.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.ClientName = types.StringNull()
 	}
-	// If plan had a value, preserve it
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 

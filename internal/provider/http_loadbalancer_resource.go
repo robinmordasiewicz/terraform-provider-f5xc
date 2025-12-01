@@ -4833,6 +4833,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								"tenant": schema.StringAttribute{
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional: true,
+									Computed: true,
 								},
 							},
 						},
@@ -4878,6 +4879,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional: true,
+													Computed: true,
 												},
 											},
 										},
@@ -4910,6 +4912,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional: true,
+													Computed: true,
 												},
 											},
 										},
@@ -4951,6 +4954,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional: true,
+													Computed: true,
 												},
 											},
 										},
@@ -4979,6 +4983,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional: true,
+													Computed: true,
 												},
 											},
 										},
@@ -5011,6 +5016,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional: true,
+													Computed: true,
 												},
 											},
 										},
@@ -5035,6 +5041,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional: true,
+													Computed: true,
 												},
 											},
 										},
@@ -5052,6 +5059,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional: true,
+													Computed: true,
 												},
 											},
 										},
@@ -5082,6 +5090,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
+								Computed: true,
 							},
 						},
 					},
@@ -5173,6 +5182,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 															"kind": schema.StringAttribute{
 																MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																Optional: true,
+																Computed: true,
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -5185,10 +5195,12 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 															"tenant": schema.StringAttribute{
 																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																Optional: true,
+																Computed: true,
 															},
 															"uid": schema.StringAttribute{
 																MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																Optional: true,
+																Computed: true,
 															},
 														},
 													},
@@ -5221,6 +5233,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 															"kind": schema.StringAttribute{
 																MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																Optional: true,
+																Computed: true,
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -5233,10 +5246,12 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 															"tenant": schema.StringAttribute{
 																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																Optional: true,
+																Computed: true,
 															},
 															"uid": schema.StringAttribute{
 																MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																Optional: true,
+																Computed: true,
 															},
 														},
 													},
@@ -5551,6 +5566,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 															"kind": schema.StringAttribute{
 																MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																Optional: true,
+																Computed: true,
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -5563,10 +5579,12 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 															"tenant": schema.StringAttribute{
 																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																Optional: true,
+																Computed: true,
 															},
 															"uid": schema.StringAttribute{
 																MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																Optional: true,
+																Computed: true,
 															},
 														},
 													},
@@ -5599,6 +5617,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 															"kind": schema.StringAttribute{
 																MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																Optional: true,
+																Computed: true,
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -5611,10 +5630,12 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 															"tenant": schema.StringAttribute{
 																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																Optional: true,
+																Computed: true,
 															},
 															"uid": schema.StringAttribute{
 																MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																Optional: true,
+																Computed: true,
 															},
 														},
 													},
@@ -5934,6 +5955,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 															"kind": schema.StringAttribute{
 																MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																Optional: true,
+																Computed: true,
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -5946,10 +5968,12 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 															"tenant": schema.StringAttribute{
 																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																Optional: true,
+																Computed: true,
 															},
 															"uid": schema.StringAttribute{
 																MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																Optional: true,
+																Computed: true,
 															},
 														},
 													},
@@ -5982,6 +6006,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 															"kind": schema.StringAttribute{
 																MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																Optional: true,
+																Computed: true,
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -5994,10 +6019,12 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 															"tenant": schema.StringAttribute{
 																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																Optional: true,
+																Computed: true,
 															},
 															"uid": schema.StringAttribute{
 																MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																Optional: true,
+																Computed: true,
 															},
 														},
 													},
@@ -6077,6 +6104,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional: true,
+													Computed: true,
 												},
 											},
 										},
@@ -6099,6 +6127,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -6366,6 +6395,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 																	"kind": schema.StringAttribute{
 																		MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																		Optional: true,
+																		Computed: true,
 																	},
 																	"name": schema.StringAttribute{
 																		MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -6378,10 +6408,12 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 																	"tenant": schema.StringAttribute{
 																		MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																		Optional: true,
+																		Computed: true,
 																	},
 																	"uid": schema.StringAttribute{
 																		MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																		Optional: true,
+																		Computed: true,
 																	},
 																},
 															},
@@ -6414,6 +6446,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 																	"kind": schema.StringAttribute{
 																		MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																		Optional: true,
+																		Computed: true,
 																	},
 																	"name": schema.StringAttribute{
 																		MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -6426,10 +6459,12 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 																	"tenant": schema.StringAttribute{
 																		MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																		Optional: true,
+																		Computed: true,
 																	},
 																	"uid": schema.StringAttribute{
 																		MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																		Optional: true,
+																		Computed: true,
 																	},
 																},
 															},
@@ -6686,6 +6721,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -6759,6 +6795,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 															"kind": schema.StringAttribute{
 																MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																Optional: true,
+																Computed: true,
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -6771,10 +6808,12 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 															"tenant": schema.StringAttribute{
 																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																Optional: true,
+																Computed: true,
 															},
 															"uid": schema.StringAttribute{
 																MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																Optional: true,
+																Computed: true,
 															},
 														},
 													},
@@ -6807,6 +6846,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 															"kind": schema.StringAttribute{
 																MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																Optional: true,
+																Computed: true,
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -6819,10 +6859,12 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 															"tenant": schema.StringAttribute{
 																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																Optional: true,
+																Computed: true,
 															},
 															"uid": schema.StringAttribute{
 																MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																Optional: true,
+																Computed: true,
 															},
 														},
 													},
@@ -6902,6 +6944,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional: true,
+													Computed: true,
 												},
 											},
 										},
@@ -6924,6 +6967,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -7131,6 +7175,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
+								Computed: true,
 							},
 						},
 					},
@@ -7782,6 +7827,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional: true,
+						Computed: true,
 					},
 				},
 
@@ -8841,6 +8887,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
+								Computed: true,
 							},
 						},
 					},
@@ -8911,6 +8958,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
+								Computed: true,
 							},
 						},
 					},
@@ -8942,6 +8990,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -9667,6 +9716,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								"tenant": schema.StringAttribute{
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional: true,
+									Computed: true,
 								},
 							},
 						},
@@ -9726,6 +9776,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 															Optional: true,
+															Computed: true,
 														},
 													},
 												},
@@ -9743,6 +9794,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 															Optional: true,
+															Computed: true,
 														},
 													},
 												},
@@ -9789,6 +9841,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional: true,
+													Computed: true,
 												},
 											},
 										},
@@ -9832,6 +9885,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 															Optional: true,
+															Computed: true,
 														},
 													},
 												},
@@ -9849,6 +9903,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 															Optional: true,
+															Computed: true,
 														},
 													},
 												},
@@ -9911,6 +9966,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional: true,
+													Computed: true,
 												},
 											},
 										},
@@ -9933,6 +9989,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 															Optional: true,
+															Computed: true,
 														},
 													},
 												},
@@ -9950,6 +10007,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 															Optional: true,
+															Computed: true,
 														},
 													},
 												},
@@ -10010,6 +10068,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional: true,
+													Computed: true,
 												},
 											},
 										},
@@ -10032,6 +10091,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 															Optional: true,
+															Computed: true,
 														},
 													},
 												},
@@ -10049,6 +10109,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 															Optional: true,
+															Computed: true,
 														},
 													},
 												},
@@ -10121,6 +10182,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional: true,
+													Computed: true,
 												},
 											},
 										},
@@ -10149,6 +10211,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional: true,
+													Computed: true,
 												},
 											},
 										},
@@ -10329,6 +10392,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									"tenant": schema.StringAttribute{
 										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 										Optional: true,
+										Computed: true,
 									},
 								},
 							},
@@ -10355,6 +10419,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 											"tenant": schema.StringAttribute{
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional: true,
+												Computed: true,
 											},
 										},
 									},
@@ -10379,6 +10444,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
+								Computed: true,
 							},
 						},
 					},
@@ -10418,6 +10484,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -10438,6 +10505,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -10475,6 +10543,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								"tenant": schema.StringAttribute{
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional: true,
+									Computed: true,
 								},
 							},
 						},
@@ -10495,6 +10564,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								"tenant": schema.StringAttribute{
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional: true,
+									Computed: true,
 								},
 							},
 						},
@@ -10658,6 +10728,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional: true,
+													Computed: true,
 												},
 											},
 										},
@@ -10695,6 +10766,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									"tenant": schema.StringAttribute{
 										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 										Optional: true,
+										Computed: true,
 									},
 								},
 							},
@@ -10779,6 +10851,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
+								Computed: true,
 							},
 						},
 					},
@@ -11023,6 +11096,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -11091,6 +11165,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 											"tenant": schema.StringAttribute{
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional: true,
+												Computed: true,
 											},
 										},
 									},
@@ -11111,6 +11186,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 											"tenant": schema.StringAttribute{
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional: true,
+												Computed: true,
 											},
 										},
 									},
@@ -11270,6 +11346,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 											"tenant": schema.StringAttribute{
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional: true,
+												Computed: true,
 											},
 										},
 									},
@@ -11290,6 +11367,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 											"tenant": schema.StringAttribute{
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional: true,
+												Computed: true,
 											},
 										},
 									},
@@ -11480,6 +11558,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									"tenant": schema.StringAttribute{
 										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 										Optional: true,
+										Computed: true,
 									},
 								},
 							},
@@ -11500,6 +11579,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									"tenant": schema.StringAttribute{
 										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 										Optional: true,
+										Computed: true,
 									},
 								},
 							},
@@ -11732,6 +11812,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
+								Computed: true,
 							},
 						},
 					},
@@ -12307,6 +12388,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 													"kind": schema.StringAttribute{
 														MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 														Optional: true,
+														Computed: true,
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -12319,10 +12401,12 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 													"tenant": schema.StringAttribute{
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 														Optional: true,
+														Computed: true,
 													},
 													"uid": schema.StringAttribute{
 														MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 														Optional: true,
+														Computed: true,
 													},
 												},
 											},
@@ -12355,6 +12439,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 													"kind": schema.StringAttribute{
 														MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 														Optional: true,
+														Computed: true,
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -12367,10 +12452,12 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 													"tenant": schema.StringAttribute{
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 														Optional: true,
+														Computed: true,
 													},
 													"uid": schema.StringAttribute{
 														MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 														Optional: true,
+														Computed: true,
 													},
 												},
 											},
@@ -12483,6 +12570,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
+								Computed: true,
 							},
 						},
 					},
@@ -12596,6 +12684,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 																	"kind": schema.StringAttribute{
 																		MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																		Optional: true,
+																		Computed: true,
 																	},
 																	"name": schema.StringAttribute{
 																		MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -12608,10 +12697,12 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 																	"tenant": schema.StringAttribute{
 																		MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																		Optional: true,
+																		Computed: true,
 																	},
 																	"uid": schema.StringAttribute{
 																		MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																		Optional: true,
+																		Computed: true,
 																	},
 																},
 															},
@@ -12788,6 +12879,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 																	"kind": schema.StringAttribute{
 																		MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																		Optional: true,
+																		Computed: true,
 																	},
 																	"name": schema.StringAttribute{
 																		MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -12800,10 +12892,12 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 																	"tenant": schema.StringAttribute{
 																		MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																		Optional: true,
+																		Computed: true,
 																	},
 																	"uid": schema.StringAttribute{
 																		MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																		Optional: true,
+																		Computed: true,
 																	},
 																},
 															},
@@ -13019,6 +13113,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -13061,6 +13156,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -13236,6 +13332,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -13505,6 +13602,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional: true,
+													Computed: true,
 												},
 											},
 										},
@@ -13683,6 +13781,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 															Optional: true,
+															Computed: true,
 														},
 													},
 												},
@@ -14136,6 +14235,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional: true,
+													Computed: true,
 												},
 											},
 										},
@@ -14229,6 +14329,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 													"tenant": schema.StringAttribute{
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 														Optional: true,
+														Computed: true,
 													},
 												},
 											},
@@ -14249,6 +14350,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 													"tenant": schema.StringAttribute{
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 														Optional: true,
+														Computed: true,
 													},
 												},
 											},
@@ -14361,6 +14463,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
+								Computed: true,
 							},
 						},
 					},
@@ -14492,6 +14595,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 															Optional: true,
+															Computed: true,
 														},
 													},
 												},
@@ -14529,6 +14633,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 											"tenant": schema.StringAttribute{
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional: true,
+												Computed: true,
 											},
 										},
 									},
@@ -14693,6 +14798,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional: true,
+						Computed: true,
 					},
 				},
 
@@ -14854,6 +14960,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
+								Computed: true,
 							},
 						},
 					},
@@ -14977,7 +15084,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.HTTPLoadBalancer{
+	createReq := &client.HTTPLoadBalancer{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -14986,7 +15093,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -14995,7 +15102,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -15004,7 +15111,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -15027,7 +15134,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}
 			active_service_policiesMap["policies"] = policiesList
 		}
-		apiResource.Spec["active_service_policies"] = active_service_policiesMap
+		createReq.Spec["active_service_policies"] = active_service_policiesMap
 	}
 	if data.AdvertiseCustom != nil {
 		advertise_customMap := make(map[string]interface{})
@@ -15099,7 +15206,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}
 			advertise_customMap["advertise_where"] = advertise_whereList
 		}
-		apiResource.Spec["advertise_custom"] = advertise_customMap
+		createReq.Spec["advertise_custom"] = advertise_customMap
 	}
 	if data.AdvertiseOnPublic != nil {
 		advertise_on_publicMap := make(map[string]interface{})
@@ -15116,11 +15223,11 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}
 			advertise_on_publicMap["public_ip"] = public_ipNestedMap
 		}
-		apiResource.Spec["advertise_on_public"] = advertise_on_publicMap
+		createReq.Spec["advertise_on_public"] = advertise_on_publicMap
 	}
 	if data.AdvertiseOnPublicDefaultVip != nil {
 		advertise_on_public_default_vipMap := make(map[string]interface{})
-		apiResource.Spec["advertise_on_public_default_vip"] = advertise_on_public_default_vipMap
+		createReq.Spec["advertise_on_public_default_vip"] = advertise_on_public_default_vipMap
 	}
 	if data.APIProtectionRules != nil {
 		api_protection_rulesMap := make(map[string]interface{})
@@ -15236,7 +15343,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}
 			api_protection_rulesMap["api_groups_rules"] = api_groups_rulesList
 		}
-		apiResource.Spec["api_protection_rules"] = api_protection_rulesMap
+		createReq.Spec["api_protection_rules"] = api_protection_rulesMap
 	}
 	if data.APIRateLimit != nil {
 		api_rate_limitMap := make(map[string]interface{})
@@ -15379,7 +15486,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}
 			api_rate_limitMap["server_url_rules"] = server_url_rulesList
 		}
-		apiResource.Spec["api_rate_limit"] = api_rate_limitMap
+		createReq.Spec["api_rate_limit"] = api_rate_limitMap
 	}
 	if data.APISpecification != nil {
 		api_specificationMap := make(map[string]interface{})
@@ -15407,7 +15514,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 		if data.APISpecification.ValidationDisabled != nil {
 			api_specificationMap["validation_disabled"] = map[string]interface{}{}
 		}
-		apiResource.Spec["api_specification"] = api_specificationMap
+		createReq.Spec["api_specification"] = api_specificationMap
 	}
 	if data.APITesting != nil {
 		api_testingMap := make(map[string]interface{})
@@ -15437,7 +15544,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 		if data.APITesting.EveryWeek != nil {
 			api_testingMap["every_week"] = map[string]interface{}{}
 		}
-		apiResource.Spec["api_testing"] = api_testingMap
+		createReq.Spec["api_testing"] = api_testingMap
 	}
 	if data.AppFirewall != nil {
 		app_firewallMap := make(map[string]interface{})
@@ -15450,7 +15557,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 		if !data.AppFirewall.Tenant.IsNull() && !data.AppFirewall.Tenant.IsUnknown() {
 			app_firewallMap["tenant"] = data.AppFirewall.Tenant.ValueString()
 		}
-		apiResource.Spec["app_firewall"] = app_firewallMap
+		createReq.Spec["app_firewall"] = app_firewallMap
 	}
 	if len(data.BlockedClients) > 0 {
 		var blocked_clientsList []map[string]interface{}
@@ -15467,6 +15574,29 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}
 			if item.HTTPHeader != nil {
 				http_headerNestedMap := make(map[string]interface{})
+				if len(item.HTTPHeader.Headers) > 0 {
+					var headersDeepList []map[string]interface{}
+					for _, deepListItem := range item.HTTPHeader.Headers {
+						deepListItemMap := make(map[string]interface{})
+						if !deepListItem.Exact.IsNull() && !deepListItem.Exact.IsUnknown() {
+							deepListItemMap["exact"] = deepListItem.Exact.ValueString()
+						}
+						if !deepListItem.InvertMatch.IsNull() && !deepListItem.InvertMatch.IsUnknown() {
+							deepListItemMap["invert_match"] = deepListItem.InvertMatch.ValueBool()
+						}
+						if !deepListItem.Name.IsNull() && !deepListItem.Name.IsUnknown() {
+							deepListItemMap["name"] = deepListItem.Name.ValueString()
+						}
+						if !deepListItem.Presence.IsNull() && !deepListItem.Presence.IsUnknown() {
+							deepListItemMap["presence"] = deepListItem.Presence.ValueBool()
+						}
+						if !deepListItem.Regex.IsNull() && !deepListItem.Regex.IsUnknown() {
+							deepListItemMap["regex"] = deepListItem.Regex.ValueString()
+						}
+						headersDeepList = append(headersDeepList, deepListItemMap)
+					}
+					http_headerNestedMap["headers"] = headersDeepList
+				}
 				itemMap["http_header"] = http_headerNestedMap
 			}
 			if !item.IPPrefix.IsNull() && !item.IPPrefix.IsUnknown() {
@@ -15496,7 +15626,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}
 			blocked_clientsList = append(blocked_clientsList, itemMap)
 		}
-		apiResource.Spec["blocked_clients"] = blocked_clientsList
+		createReq.Spec["blocked_clients"] = blocked_clientsList
 	}
 	if data.BotDefense != nil {
 		bot_defenseMap := make(map[string]interface{})
@@ -15522,7 +15652,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 		if !data.BotDefense.Timeout.IsNull() && !data.BotDefense.Timeout.IsUnknown() {
 			bot_defenseMap["timeout"] = data.BotDefense.Timeout.ValueInt64()
 		}
-		apiResource.Spec["bot_defense"] = bot_defenseMap
+		createReq.Spec["bot_defense"] = bot_defenseMap
 	}
 	if data.BotDefenseAdvanced != nil {
 		bot_defense_advancedMap := make(map[string]interface{})
@@ -15580,7 +15710,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}
 			bot_defense_advancedMap["web"] = webNestedMap
 		}
-		apiResource.Spec["bot_defense_advanced"] = bot_defense_advancedMap
+		createReq.Spec["bot_defense_advanced"] = bot_defense_advancedMap
 	}
 	if data.CachingPolicy != nil {
 		caching_policyMap := make(map[string]interface{})
@@ -15598,7 +15728,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}
 			caching_policyMap["default_cache_action"] = default_cache_actionNestedMap
 		}
-		apiResource.Spec["caching_policy"] = caching_policyMap
+		createReq.Spec["caching_policy"] = caching_policyMap
 	}
 	if data.CaptchaChallenge != nil {
 		captcha_challengeMap := make(map[string]interface{})
@@ -15608,7 +15738,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 		if !data.CaptchaChallenge.CustomPage.IsNull() && !data.CaptchaChallenge.CustomPage.IsUnknown() {
 			captcha_challengeMap["custom_page"] = data.CaptchaChallenge.CustomPage.ValueString()
 		}
-		apiResource.Spec["captcha_challenge"] = captcha_challengeMap
+		createReq.Spec["captcha_challenge"] = captcha_challengeMap
 	}
 	if data.ClientSideDefense != nil {
 		client_side_defenseMap := make(map[string]interface{})
@@ -15616,7 +15746,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			policyNestedMap := make(map[string]interface{})
 			client_side_defenseMap["policy"] = policyNestedMap
 		}
-		apiResource.Spec["client_side_defense"] = client_side_defenseMap
+		createReq.Spec["client_side_defense"] = client_side_defenseMap
 	}
 	if data.CookieStickiness != nil {
 		cookie_stickinessMap := make(map[string]interface{})
@@ -15653,7 +15783,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 		if !data.CookieStickiness.Ttl.IsNull() && !data.CookieStickiness.Ttl.IsUnknown() {
 			cookie_stickinessMap["ttl"] = data.CookieStickiness.Ttl.ValueInt64()
 		}
-		apiResource.Spec["cookie_stickiness"] = cookie_stickinessMap
+		createReq.Spec["cookie_stickiness"] = cookie_stickinessMap
 	}
 	if data.CorsPolicy != nil {
 		cors_policyMap := make(map[string]interface{})
@@ -15689,7 +15819,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 		if !data.CorsPolicy.MaximumAge.IsNull() && !data.CorsPolicy.MaximumAge.IsUnknown() {
 			cors_policyMap["maximum_age"] = data.CorsPolicy.MaximumAge.ValueInt64()
 		}
-		apiResource.Spec["cors_policy"] = cors_policyMap
+		createReq.Spec["cors_policy"] = cors_policyMap
 	}
 	if data.CsrfPolicy != nil {
 		csrf_policyMap := make(map[string]interface{})
@@ -15703,7 +15833,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 		if data.CsrfPolicy.Disabled != nil {
 			csrf_policyMap["disabled"] = map[string]interface{}{}
 		}
-		apiResource.Spec["csrf_policy"] = csrf_policyMap
+		createReq.Spec["csrf_policy"] = csrf_policyMap
 	}
 	if len(data.DataGuardRules) > 0 {
 		var data_guard_rulesList []map[string]interface{}
@@ -15749,7 +15879,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}
 			data_guard_rulesList = append(data_guard_rulesList, itemMap)
 		}
-		apiResource.Spec["data_guard_rules"] = data_guard_rulesList
+		createReq.Spec["data_guard_rules"] = data_guard_rulesList
 	}
 	if len(data.DdosMitigationRules) > 0 {
 		var ddos_mitigation_rulesList []map[string]interface{}
@@ -15760,12 +15890,52 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}
 			if item.DdosClientSource != nil {
 				ddos_client_sourceNestedMap := make(map[string]interface{})
+				if item.DdosClientSource.AsnList != nil {
+					asn_listDeepMap := make(map[string]interface{})
+					ddos_client_sourceNestedMap["asn_list"] = asn_listDeepMap
+				}
 				if !item.DdosClientSource.CountryList.IsNull() && !item.DdosClientSource.CountryList.IsUnknown() {
 					var CountryListItems []string
 					diags := item.DdosClientSource.CountryList.ElementsAs(ctx, &CountryListItems, false)
 					if !diags.HasError() {
 						ddos_client_sourceNestedMap["country_list"] = CountryListItems
 					}
+				}
+				if item.DdosClientSource.Ja4TLSFingerprintMatcher != nil {
+					ja4_tls_fingerprint_matcherDeepMap := make(map[string]interface{})
+					if !item.DdosClientSource.Ja4TLSFingerprintMatcher.ExactValues.IsNull() && !item.DdosClientSource.Ja4TLSFingerprintMatcher.ExactValues.IsUnknown() {
+						var ExactValuesItems []string
+						diags := item.DdosClientSource.Ja4TLSFingerprintMatcher.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
+						if !diags.HasError() {
+							ja4_tls_fingerprint_matcherDeepMap["exact_values"] = ExactValuesItems
+						}
+					}
+					ddos_client_sourceNestedMap["ja4_tls_fingerprint_matcher"] = ja4_tls_fingerprint_matcherDeepMap
+				}
+				if item.DdosClientSource.TLSFingerprintMatcher != nil {
+					tls_fingerprint_matcherDeepMap := make(map[string]interface{})
+					if !item.DdosClientSource.TLSFingerprintMatcher.Classes.IsNull() && !item.DdosClientSource.TLSFingerprintMatcher.Classes.IsUnknown() {
+						var ClassesItems []string
+						diags := item.DdosClientSource.TLSFingerprintMatcher.Classes.ElementsAs(ctx, &ClassesItems, false)
+						if !diags.HasError() {
+							tls_fingerprint_matcherDeepMap["classes"] = ClassesItems
+						}
+					}
+					if !item.DdosClientSource.TLSFingerprintMatcher.ExactValues.IsNull() && !item.DdosClientSource.TLSFingerprintMatcher.ExactValues.IsUnknown() {
+						var ExactValuesItems []string
+						diags := item.DdosClientSource.TLSFingerprintMatcher.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
+						if !diags.HasError() {
+							tls_fingerprint_matcherDeepMap["exact_values"] = ExactValuesItems
+						}
+					}
+					if !item.DdosClientSource.TLSFingerprintMatcher.ExcludedValues.IsNull() && !item.DdosClientSource.TLSFingerprintMatcher.ExcludedValues.IsUnknown() {
+						var ExcludedValuesItems []string
+						diags := item.DdosClientSource.TLSFingerprintMatcher.ExcludedValues.ElementsAs(ctx, &ExcludedValuesItems, false)
+						if !diags.HasError() {
+							tls_fingerprint_matcherDeepMap["excluded_values"] = ExcludedValuesItems
+						}
+					}
+					ddos_client_sourceNestedMap["tls_fingerprint_matcher"] = tls_fingerprint_matcherDeepMap
 				}
 				itemMap["ddos_client_source"] = ddos_client_sourceNestedMap
 			}
@@ -15798,7 +15968,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}
 			ddos_mitigation_rulesList = append(ddos_mitigation_rulesList, itemMap)
 		}
-		apiResource.Spec["ddos_mitigation_rules"] = ddos_mitigation_rulesList
+		createReq.Spec["ddos_mitigation_rules"] = ddos_mitigation_rulesList
 	}
 	if data.DefaultPool != nil {
 		default_poolMap := make(map[string]interface{})
@@ -15997,7 +16167,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}
 			default_poolMap["view_internal"] = view_internalNestedMap
 		}
-		apiResource.Spec["default_pool"] = default_poolMap
+		createReq.Spec["default_pool"] = default_poolMap
 	}
 	if data.DefaultPoolList != nil {
 		default_pool_listMap := make(map[string]interface{})
@@ -16044,7 +16214,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}
 			default_pool_listMap["pools"] = poolsList
 		}
-		apiResource.Spec["default_pool_list"] = default_pool_listMap
+		createReq.Spec["default_pool_list"] = default_pool_listMap
 	}
 	if len(data.DefaultRoutePools) > 0 {
 		var default_route_poolsList []map[string]interface{}
@@ -16087,73 +16257,73 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}
 			default_route_poolsList = append(default_route_poolsList, itemMap)
 		}
-		apiResource.Spec["default_route_pools"] = default_route_poolsList
+		createReq.Spec["default_route_pools"] = default_route_poolsList
 	}
 	if data.DefaultSensitiveDataPolicy != nil {
 		default_sensitive_data_policyMap := make(map[string]interface{})
-		apiResource.Spec["default_sensitive_data_policy"] = default_sensitive_data_policyMap
+		createReq.Spec["default_sensitive_data_policy"] = default_sensitive_data_policyMap
 	}
 	if data.DisableAPIDefinition != nil {
 		disable_api_definitionMap := make(map[string]interface{})
-		apiResource.Spec["disable_api_definition"] = disable_api_definitionMap
+		createReq.Spec["disable_api_definition"] = disable_api_definitionMap
 	}
 	if data.DisableAPIDiscovery != nil {
 		disable_api_discoveryMap := make(map[string]interface{})
-		apiResource.Spec["disable_api_discovery"] = disable_api_discoveryMap
+		createReq.Spec["disable_api_discovery"] = disable_api_discoveryMap
 	}
 	if data.DisableAPITesting != nil {
 		disable_api_testingMap := make(map[string]interface{})
-		apiResource.Spec["disable_api_testing"] = disable_api_testingMap
+		createReq.Spec["disable_api_testing"] = disable_api_testingMap
 	}
 	if data.DisableBotDefense != nil {
 		disable_bot_defenseMap := make(map[string]interface{})
-		apiResource.Spec["disable_bot_defense"] = disable_bot_defenseMap
+		createReq.Spec["disable_bot_defense"] = disable_bot_defenseMap
 	}
 	if data.DisableCaching != nil {
 		disable_cachingMap := make(map[string]interface{})
-		apiResource.Spec["disable_caching"] = disable_cachingMap
+		createReq.Spec["disable_caching"] = disable_cachingMap
 	}
 	if data.DisableClientSideDefense != nil {
 		disable_client_side_defenseMap := make(map[string]interface{})
-		apiResource.Spec["disable_client_side_defense"] = disable_client_side_defenseMap
+		createReq.Spec["disable_client_side_defense"] = disable_client_side_defenseMap
 	}
 	if data.DisableIPReputation != nil {
 		disable_ip_reputationMap := make(map[string]interface{})
-		apiResource.Spec["disable_ip_reputation"] = disable_ip_reputationMap
+		createReq.Spec["disable_ip_reputation"] = disable_ip_reputationMap
 	}
 	if data.DisableMaliciousUserDetection != nil {
 		disable_malicious_user_detectionMap := make(map[string]interface{})
-		apiResource.Spec["disable_malicious_user_detection"] = disable_malicious_user_detectionMap
+		createReq.Spec["disable_malicious_user_detection"] = disable_malicious_user_detectionMap
 	}
 	if data.DisableMalwareProtection != nil {
 		disable_malware_protectionMap := make(map[string]interface{})
-		apiResource.Spec["disable_malware_protection"] = disable_malware_protectionMap
+		createReq.Spec["disable_malware_protection"] = disable_malware_protectionMap
 	}
 	if data.DisableRateLimit != nil {
 		disable_rate_limitMap := make(map[string]interface{})
-		apiResource.Spec["disable_rate_limit"] = disable_rate_limitMap
+		createReq.Spec["disable_rate_limit"] = disable_rate_limitMap
 	}
 	if data.DisableThreatMesh != nil {
 		disable_threat_meshMap := make(map[string]interface{})
-		apiResource.Spec["disable_threat_mesh"] = disable_threat_meshMap
+		createReq.Spec["disable_threat_mesh"] = disable_threat_meshMap
 	}
 	if data.DisableTrustClientIPHeaders != nil {
 		disable_trust_client_ip_headersMap := make(map[string]interface{})
-		apiResource.Spec["disable_trust_client_ip_headers"] = disable_trust_client_ip_headersMap
+		createReq.Spec["disable_trust_client_ip_headers"] = disable_trust_client_ip_headersMap
 	}
 	if data.DisableWAF != nil {
 		disable_wafMap := make(map[string]interface{})
-		apiResource.Spec["disable_waf"] = disable_wafMap
+		createReq.Spec["disable_waf"] = disable_wafMap
 	}
 	if data.DoNotAdvertise != nil {
 		do_not_advertiseMap := make(map[string]interface{})
-		apiResource.Spec["do_not_advertise"] = do_not_advertiseMap
+		createReq.Spec["do_not_advertise"] = do_not_advertiseMap
 	}
 	if !data.Domains.IsNull() && !data.Domains.IsUnknown() {
 		var domainsList []string
 		resp.Diagnostics.Append(data.Domains.ElementsAs(ctx, &domainsList, false)...)
 		if !resp.Diagnostics.HasError() {
-			apiResource.Spec["domains"] = domainsList
+			createReq.Spec["domains"] = domainsList
 		}
 	}
 	if data.EnableAPIDiscovery != nil {
@@ -16186,7 +16356,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 		if data.EnableAPIDiscovery.EnableLearnFromRedirectTraffic != nil {
 			enable_api_discoveryMap["enable_learn_from_redirect_traffic"] = map[string]interface{}{}
 		}
-		apiResource.Spec["enable_api_discovery"] = enable_api_discoveryMap
+		createReq.Spec["enable_api_discovery"] = enable_api_discoveryMap
 	}
 	if data.EnableChallenge != nil {
 		enable_challengeMap := make(map[string]interface{})
@@ -16235,7 +16405,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}
 			enable_challengeMap["malicious_user_mitigation"] = malicious_user_mitigationNestedMap
 		}
-		apiResource.Spec["enable_challenge"] = enable_challengeMap
+		createReq.Spec["enable_challenge"] = enable_challengeMap
 	}
 	if data.EnableIPReputation != nil {
 		enable_ip_reputationMap := make(map[string]interface{})
@@ -16246,15 +16416,15 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 				enable_ip_reputationMap["ip_threat_categories"] = ip_threat_categoriesItems
 			}
 		}
-		apiResource.Spec["enable_ip_reputation"] = enable_ip_reputationMap
+		createReq.Spec["enable_ip_reputation"] = enable_ip_reputationMap
 	}
 	if data.EnableMaliciousUserDetection != nil {
 		enable_malicious_user_detectionMap := make(map[string]interface{})
-		apiResource.Spec["enable_malicious_user_detection"] = enable_malicious_user_detectionMap
+		createReq.Spec["enable_malicious_user_detection"] = enable_malicious_user_detectionMap
 	}
 	if data.EnableThreatMesh != nil {
 		enable_threat_meshMap := make(map[string]interface{})
-		apiResource.Spec["enable_threat_mesh"] = enable_threat_meshMap
+		createReq.Spec["enable_threat_mesh"] = enable_threat_meshMap
 	}
 	if data.EnableTrustClientIPHeaders != nil {
 		enable_trust_client_ip_headersMap := make(map[string]interface{})
@@ -16265,7 +16435,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 				enable_trust_client_ip_headersMap["client_ip_headers"] = client_ip_headersItems
 			}
 		}
-		apiResource.Spec["enable_trust_client_ip_headers"] = enable_trust_client_ip_headersMap
+		createReq.Spec["enable_trust_client_ip_headers"] = enable_trust_client_ip_headersMap
 	}
 	if len(data.GraphqlRules) > 0 {
 		var graphql_rulesList []map[string]interface{}
@@ -16282,6 +16452,12 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}
 			if item.GraphqlSettings != nil {
 				graphql_settingsNestedMap := make(map[string]interface{})
+				if item.GraphqlSettings.DisableIntrospection != nil {
+					graphql_settingsNestedMap["disable_introspection"] = map[string]interface{}{}
+				}
+				if item.GraphqlSettings.EnableIntrospection != nil {
+					graphql_settingsNestedMap["enable_introspection"] = map[string]interface{}{}
+				}
 				if !item.GraphqlSettings.MaxBatchedQueries.IsNull() && !item.GraphqlSettings.MaxBatchedQueries.IsUnknown() {
 					graphql_settingsNestedMap["max_batched_queries"] = item.GraphqlSettings.MaxBatchedQueries.ValueInt64()
 				}
@@ -16314,7 +16490,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}
 			graphql_rulesList = append(graphql_rulesList, itemMap)
 		}
-		apiResource.Spec["graphql_rules"] = graphql_rulesList
+		createReq.Spec["graphql_rules"] = graphql_rulesList
 	}
 	if data.HTTP != nil {
 		httpMap := make(map[string]interface{})
@@ -16327,7 +16503,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 		if !data.HTTP.PortRanges.IsNull() && !data.HTTP.PortRanges.IsUnknown() {
 			httpMap["port_ranges"] = data.HTTP.PortRanges.ValueString()
 		}
-		apiResource.Spec["http"] = httpMap
+		createReq.Spec["http"] = httpMap
 	}
 	if data.HTTPS != nil {
 		httpsMap := make(map[string]interface{})
@@ -16386,7 +16562,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			tls_parametersNestedMap := make(map[string]interface{})
 			httpsMap["tls_parameters"] = tls_parametersNestedMap
 		}
-		apiResource.Spec["https"] = httpsMap
+		createReq.Spec["https"] = httpsMap
 	}
 	if data.HTTPSAutoCert != nil {
 		https_auto_certMap := make(map[string]interface{})
@@ -16454,7 +16630,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}
 			https_auto_certMap["use_mtls"] = use_mtlsNestedMap
 		}
-		apiResource.Spec["https_auto_cert"] = https_auto_certMap
+		createReq.Spec["https_auto_cert"] = https_auto_certMap
 	}
 	if data.JsChallenge != nil {
 		js_challengeMap := make(map[string]interface{})
@@ -16467,7 +16643,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 		if !data.JsChallenge.JsScriptDelay.IsNull() && !data.JsChallenge.JsScriptDelay.IsUnknown() {
 			js_challengeMap["js_script_delay"] = data.JsChallenge.JsScriptDelay.ValueInt64()
 		}
-		apiResource.Spec["js_challenge"] = js_challengeMap
+		createReq.Spec["js_challenge"] = js_challengeMap
 	}
 	if data.JwtValidation != nil {
 		jwt_validationMap := make(map[string]interface{})
@@ -16501,15 +16677,15 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			token_locationNestedMap := make(map[string]interface{})
 			jwt_validationMap["token_location"] = token_locationNestedMap
 		}
-		apiResource.Spec["jwt_validation"] = jwt_validationMap
+		createReq.Spec["jwt_validation"] = jwt_validationMap
 	}
 	if data.L7DdosActionBlock != nil {
 		l7_ddos_action_blockMap := make(map[string]interface{})
-		apiResource.Spec["l7_ddos_action_block"] = l7_ddos_action_blockMap
+		createReq.Spec["l7_ddos_action_block"] = l7_ddos_action_blockMap
 	}
 	if data.L7DdosActionDefault != nil {
 		l7_ddos_action_defaultMap := make(map[string]interface{})
-		apiResource.Spec["l7_ddos_action_default"] = l7_ddos_action_defaultMap
+		createReq.Spec["l7_ddos_action_default"] = l7_ddos_action_defaultMap
 	}
 	if data.L7DdosActionJsChallenge != nil {
 		l7_ddos_action_js_challengeMap := make(map[string]interface{})
@@ -16522,7 +16698,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 		if !data.L7DdosActionJsChallenge.JsScriptDelay.IsNull() && !data.L7DdosActionJsChallenge.JsScriptDelay.IsUnknown() {
 			l7_ddos_action_js_challengeMap["js_script_delay"] = data.L7DdosActionJsChallenge.JsScriptDelay.ValueInt64()
 		}
-		apiResource.Spec["l7_ddos_action_js_challenge"] = l7_ddos_action_js_challengeMap
+		createReq.Spec["l7_ddos_action_js_challenge"] = l7_ddos_action_js_challengeMap
 	}
 	if data.L7DdosProtection != nil {
 		l7_ddos_protectionMap := make(map[string]interface{})
@@ -16600,11 +16776,11 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 		if !data.L7DdosProtection.RpsThreshold.IsNull() && !data.L7DdosProtection.RpsThreshold.IsUnknown() {
 			l7_ddos_protectionMap["rps_threshold"] = data.L7DdosProtection.RpsThreshold.ValueInt64()
 		}
-		apiResource.Spec["l7_ddos_protection"] = l7_ddos_protectionMap
+		createReq.Spec["l7_ddos_protection"] = l7_ddos_protectionMap
 	}
 	if data.LeastActive != nil {
 		least_activeMap := make(map[string]interface{})
-		apiResource.Spec["least_active"] = least_activeMap
+		createReq.Spec["least_active"] = least_activeMap
 	}
 	if data.MalwareProtectionSettings != nil {
 		malware_protection_settingsMap := make(map[string]interface{})
@@ -16656,7 +16832,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}
 			malware_protection_settingsMap["malware_protection_rules"] = malware_protection_rulesList
 		}
-		apiResource.Spec["malware_protection_settings"] = malware_protection_settingsMap
+		createReq.Spec["malware_protection_settings"] = malware_protection_settingsMap
 	}
 	if data.MoreOption != nil {
 		more_optionMap := make(map[string]interface{})
@@ -16870,19 +17046,19 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 				more_optionMap["response_headers_to_remove"] = response_headers_to_removeItems
 			}
 		}
-		apiResource.Spec["more_option"] = more_optionMap
+		createReq.Spec["more_option"] = more_optionMap
 	}
 	if data.MultiLbApp != nil {
 		multi_lb_appMap := make(map[string]interface{})
-		apiResource.Spec["multi_lb_app"] = multi_lb_appMap
+		createReq.Spec["multi_lb_app"] = multi_lb_appMap
 	}
 	if data.NoChallenge != nil {
 		no_challengeMap := make(map[string]interface{})
-		apiResource.Spec["no_challenge"] = no_challengeMap
+		createReq.Spec["no_challenge"] = no_challengeMap
 	}
 	if data.NoServicePolicies != nil {
 		no_service_policiesMap := make(map[string]interface{})
-		apiResource.Spec["no_service_policies"] = no_service_policiesMap
+		createReq.Spec["no_service_policies"] = no_service_policiesMap
 	}
 	if data.OriginServerSubsetRuleList != nil {
 		origin_server_subset_rule_listMap := make(map[string]interface{})
@@ -16942,7 +17118,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}
 			origin_server_subset_rule_listMap["origin_server_subset_rules"] = origin_server_subset_rulesList
 		}
-		apiResource.Spec["origin_server_subset_rule_list"] = origin_server_subset_rule_listMap
+		createReq.Spec["origin_server_subset_rule_list"] = origin_server_subset_rule_listMap
 	}
 	if data.PolicyBasedChallenge != nil {
 		policy_based_challengeMap := make(map[string]interface{})
@@ -17014,7 +17190,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}
 			policy_based_challengeMap["temporary_user_blocking"] = temporary_user_blockingNestedMap
 		}
-		apiResource.Spec["policy_based_challenge"] = policy_based_challengeMap
+		createReq.Spec["policy_based_challenge"] = policy_based_challengeMap
 	}
 	if len(data.ProtectedCookies) > 0 {
 		var protected_cookiesList []map[string]interface{}
@@ -17061,11 +17237,11 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}
 			protected_cookiesList = append(protected_cookiesList, itemMap)
 		}
-		apiResource.Spec["protected_cookies"] = protected_cookiesList
+		createReq.Spec["protected_cookies"] = protected_cookiesList
 	}
 	if data.Random != nil {
 		randomMap := make(map[string]interface{})
-		apiResource.Spec["random"] = randomMap
+		createReq.Spec["random"] = randomMap
 	}
 	if data.RateLimit != nil {
 		rate_limitMap := make(map[string]interface{})
@@ -17103,7 +17279,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}
 			rate_limitMap["rate_limiter"] = rate_limiterNestedMap
 		}
-		apiResource.Spec["rate_limit"] = rate_limitMap
+		createReq.Spec["rate_limit"] = rate_limitMap
 	}
 	if data.RingHash != nil {
 		ring_hashMap := make(map[string]interface{})
@@ -17161,11 +17337,11 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}
 			ring_hashMap["hash_policy"] = hash_policyList
 		}
-		apiResource.Spec["ring_hash"] = ring_hashMap
+		createReq.Spec["ring_hash"] = ring_hashMap
 	}
 	if data.RoundRobin != nil {
 		round_robinMap := make(map[string]interface{})
-		apiResource.Spec["round_robin"] = round_robinMap
+		createReq.Spec["round_robin"] = round_robinMap
 	}
 	if len(data.Routes) > 0 {
 		var routesList []map[string]interface{}
@@ -17173,35 +17349,361 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			itemMap := make(map[string]interface{})
 			if item.CustomRouteObject != nil {
 				custom_route_objectNestedMap := make(map[string]interface{})
+				if item.CustomRouteObject.RouteRef != nil {
+					route_refDeepMap := make(map[string]interface{})
+					if !item.CustomRouteObject.RouteRef.Name.IsNull() && !item.CustomRouteObject.RouteRef.Name.IsUnknown() {
+						route_refDeepMap["name"] = item.CustomRouteObject.RouteRef.Name.ValueString()
+					}
+					if !item.CustomRouteObject.RouteRef.Namespace.IsNull() && !item.CustomRouteObject.RouteRef.Namespace.IsUnknown() {
+						route_refDeepMap["namespace"] = item.CustomRouteObject.RouteRef.Namespace.ValueString()
+					}
+					if !item.CustomRouteObject.RouteRef.Tenant.IsNull() && !item.CustomRouteObject.RouteRef.Tenant.IsUnknown() {
+						route_refDeepMap["tenant"] = item.CustomRouteObject.RouteRef.Tenant.ValueString()
+					}
+					custom_route_objectNestedMap["route_ref"] = route_refDeepMap
+				}
 				itemMap["custom_route_object"] = custom_route_objectNestedMap
 			}
 			if item.DirectResponseRoute != nil {
 				direct_response_routeNestedMap := make(map[string]interface{})
+				if len(item.DirectResponseRoute.Headers) > 0 {
+					var headersDeepList []map[string]interface{}
+					for _, deepListItem := range item.DirectResponseRoute.Headers {
+						deepListItemMap := make(map[string]interface{})
+						if !deepListItem.Exact.IsNull() && !deepListItem.Exact.IsUnknown() {
+							deepListItemMap["exact"] = deepListItem.Exact.ValueString()
+						}
+						if !deepListItem.InvertMatch.IsNull() && !deepListItem.InvertMatch.IsUnknown() {
+							deepListItemMap["invert_match"] = deepListItem.InvertMatch.ValueBool()
+						}
+						if !deepListItem.Name.IsNull() && !deepListItem.Name.IsUnknown() {
+							deepListItemMap["name"] = deepListItem.Name.ValueString()
+						}
+						if !deepListItem.Presence.IsNull() && !deepListItem.Presence.IsUnknown() {
+							deepListItemMap["presence"] = deepListItem.Presence.ValueBool()
+						}
+						if !deepListItem.Regex.IsNull() && !deepListItem.Regex.IsUnknown() {
+							deepListItemMap["regex"] = deepListItem.Regex.ValueString()
+						}
+						headersDeepList = append(headersDeepList, deepListItemMap)
+					}
+					direct_response_routeNestedMap["headers"] = headersDeepList
+				}
 				if !item.DirectResponseRoute.HTTPMethod.IsNull() && !item.DirectResponseRoute.HTTPMethod.IsUnknown() {
 					direct_response_routeNestedMap["http_method"] = item.DirectResponseRoute.HTTPMethod.ValueString()
+				}
+				if item.DirectResponseRoute.IncomingPort != nil {
+					incoming_portDeepMap := make(map[string]interface{})
+					if item.DirectResponseRoute.IncomingPort.NoPortMatch != nil {
+						incoming_portDeepMap["no_port_match"] = map[string]interface{}{}
+					}
+					if !item.DirectResponseRoute.IncomingPort.Port.IsNull() && !item.DirectResponseRoute.IncomingPort.Port.IsUnknown() {
+						incoming_portDeepMap["port"] = item.DirectResponseRoute.IncomingPort.Port.ValueInt64()
+					}
+					if !item.DirectResponseRoute.IncomingPort.PortRanges.IsNull() && !item.DirectResponseRoute.IncomingPort.PortRanges.IsUnknown() {
+						incoming_portDeepMap["port_ranges"] = item.DirectResponseRoute.IncomingPort.PortRanges.ValueString()
+					}
+					direct_response_routeNestedMap["incoming_port"] = incoming_portDeepMap
+				}
+				if item.DirectResponseRoute.Path != nil {
+					pathDeepMap := make(map[string]interface{})
+					if !item.DirectResponseRoute.Path.Path.IsNull() && !item.DirectResponseRoute.Path.Path.IsUnknown() {
+						pathDeepMap["path"] = item.DirectResponseRoute.Path.Path.ValueString()
+					}
+					if !item.DirectResponseRoute.Path.Prefix.IsNull() && !item.DirectResponseRoute.Path.Prefix.IsUnknown() {
+						pathDeepMap["prefix"] = item.DirectResponseRoute.Path.Prefix.ValueString()
+					}
+					if !item.DirectResponseRoute.Path.Regex.IsNull() && !item.DirectResponseRoute.Path.Regex.IsUnknown() {
+						pathDeepMap["regex"] = item.DirectResponseRoute.Path.Regex.ValueString()
+					}
+					direct_response_routeNestedMap["path"] = pathDeepMap
+				}
+				if item.DirectResponseRoute.RouteDirectResponse != nil {
+					route_direct_responseDeepMap := make(map[string]interface{})
+					if !item.DirectResponseRoute.RouteDirectResponse.ResponseBodyEncoded.IsNull() && !item.DirectResponseRoute.RouteDirectResponse.ResponseBodyEncoded.IsUnknown() {
+						route_direct_responseDeepMap["response_body_encoded"] = item.DirectResponseRoute.RouteDirectResponse.ResponseBodyEncoded.ValueString()
+					}
+					if !item.DirectResponseRoute.RouteDirectResponse.ResponseCode.IsNull() && !item.DirectResponseRoute.RouteDirectResponse.ResponseCode.IsUnknown() {
+						route_direct_responseDeepMap["response_code"] = item.DirectResponseRoute.RouteDirectResponse.ResponseCode.ValueInt64()
+					}
+					direct_response_routeNestedMap["route_direct_response"] = route_direct_responseDeepMap
 				}
 				itemMap["direct_response_route"] = direct_response_routeNestedMap
 			}
 			if item.RedirectRoute != nil {
 				redirect_routeNestedMap := make(map[string]interface{})
+				if len(item.RedirectRoute.Headers) > 0 {
+					var headersDeepList []map[string]interface{}
+					for _, deepListItem := range item.RedirectRoute.Headers {
+						deepListItemMap := make(map[string]interface{})
+						if !deepListItem.Exact.IsNull() && !deepListItem.Exact.IsUnknown() {
+							deepListItemMap["exact"] = deepListItem.Exact.ValueString()
+						}
+						if !deepListItem.InvertMatch.IsNull() && !deepListItem.InvertMatch.IsUnknown() {
+							deepListItemMap["invert_match"] = deepListItem.InvertMatch.ValueBool()
+						}
+						if !deepListItem.Name.IsNull() && !deepListItem.Name.IsUnknown() {
+							deepListItemMap["name"] = deepListItem.Name.ValueString()
+						}
+						if !deepListItem.Presence.IsNull() && !deepListItem.Presence.IsUnknown() {
+							deepListItemMap["presence"] = deepListItem.Presence.ValueBool()
+						}
+						if !deepListItem.Regex.IsNull() && !deepListItem.Regex.IsUnknown() {
+							deepListItemMap["regex"] = deepListItem.Regex.ValueString()
+						}
+						headersDeepList = append(headersDeepList, deepListItemMap)
+					}
+					redirect_routeNestedMap["headers"] = headersDeepList
+				}
 				if !item.RedirectRoute.HTTPMethod.IsNull() && !item.RedirectRoute.HTTPMethod.IsUnknown() {
 					redirect_routeNestedMap["http_method"] = item.RedirectRoute.HTTPMethod.ValueString()
+				}
+				if item.RedirectRoute.IncomingPort != nil {
+					incoming_portDeepMap := make(map[string]interface{})
+					if item.RedirectRoute.IncomingPort.NoPortMatch != nil {
+						incoming_portDeepMap["no_port_match"] = map[string]interface{}{}
+					}
+					if !item.RedirectRoute.IncomingPort.Port.IsNull() && !item.RedirectRoute.IncomingPort.Port.IsUnknown() {
+						incoming_portDeepMap["port"] = item.RedirectRoute.IncomingPort.Port.ValueInt64()
+					}
+					if !item.RedirectRoute.IncomingPort.PortRanges.IsNull() && !item.RedirectRoute.IncomingPort.PortRanges.IsUnknown() {
+						incoming_portDeepMap["port_ranges"] = item.RedirectRoute.IncomingPort.PortRanges.ValueString()
+					}
+					redirect_routeNestedMap["incoming_port"] = incoming_portDeepMap
+				}
+				if item.RedirectRoute.Path != nil {
+					pathDeepMap := make(map[string]interface{})
+					if !item.RedirectRoute.Path.Path.IsNull() && !item.RedirectRoute.Path.Path.IsUnknown() {
+						pathDeepMap["path"] = item.RedirectRoute.Path.Path.ValueString()
+					}
+					if !item.RedirectRoute.Path.Prefix.IsNull() && !item.RedirectRoute.Path.Prefix.IsUnknown() {
+						pathDeepMap["prefix"] = item.RedirectRoute.Path.Prefix.ValueString()
+					}
+					if !item.RedirectRoute.Path.Regex.IsNull() && !item.RedirectRoute.Path.Regex.IsUnknown() {
+						pathDeepMap["regex"] = item.RedirectRoute.Path.Regex.ValueString()
+					}
+					redirect_routeNestedMap["path"] = pathDeepMap
+				}
+				if item.RedirectRoute.RouteRedirect != nil {
+					route_redirectDeepMap := make(map[string]interface{})
+					if !item.RedirectRoute.RouteRedirect.HostRedirect.IsNull() && !item.RedirectRoute.RouteRedirect.HostRedirect.IsUnknown() {
+						route_redirectDeepMap["host_redirect"] = item.RedirectRoute.RouteRedirect.HostRedirect.ValueString()
+					}
+					if !item.RedirectRoute.RouteRedirect.PathRedirect.IsNull() && !item.RedirectRoute.RouteRedirect.PathRedirect.IsUnknown() {
+						route_redirectDeepMap["path_redirect"] = item.RedirectRoute.RouteRedirect.PathRedirect.ValueString()
+					}
+					if !item.RedirectRoute.RouteRedirect.PrefixRewrite.IsNull() && !item.RedirectRoute.RouteRedirect.PrefixRewrite.IsUnknown() {
+						route_redirectDeepMap["prefix_rewrite"] = item.RedirectRoute.RouteRedirect.PrefixRewrite.ValueString()
+					}
+					if !item.RedirectRoute.RouteRedirect.ProtoRedirect.IsNull() && !item.RedirectRoute.RouteRedirect.ProtoRedirect.IsUnknown() {
+						route_redirectDeepMap["proto_redirect"] = item.RedirectRoute.RouteRedirect.ProtoRedirect.ValueString()
+					}
+					if item.RedirectRoute.RouteRedirect.RemoveAllParams != nil {
+						route_redirectDeepMap["remove_all_params"] = map[string]interface{}{}
+					}
+					if !item.RedirectRoute.RouteRedirect.ReplaceParams.IsNull() && !item.RedirectRoute.RouteRedirect.ReplaceParams.IsUnknown() {
+						route_redirectDeepMap["replace_params"] = item.RedirectRoute.RouteRedirect.ReplaceParams.ValueString()
+					}
+					if !item.RedirectRoute.RouteRedirect.ResponseCode.IsNull() && !item.RedirectRoute.RouteRedirect.ResponseCode.IsUnknown() {
+						route_redirectDeepMap["response_code"] = item.RedirectRoute.RouteRedirect.ResponseCode.ValueInt64()
+					}
+					if item.RedirectRoute.RouteRedirect.RetainAllParams != nil {
+						route_redirectDeepMap["retain_all_params"] = map[string]interface{}{}
+					}
+					redirect_routeNestedMap["route_redirect"] = route_redirectDeepMap
 				}
 				itemMap["redirect_route"] = redirect_routeNestedMap
 			}
 			if item.SimpleRoute != nil {
 				simple_routeNestedMap := make(map[string]interface{})
+				if item.SimpleRoute.AdvancedOptions != nil {
+					advanced_optionsDeepMap := make(map[string]interface{})
+					if item.SimpleRoute.AdvancedOptions.CommonBuffering != nil {
+						advanced_optionsDeepMap["common_buffering"] = map[string]interface{}{}
+					}
+					if item.SimpleRoute.AdvancedOptions.CommonHashPolicy != nil {
+						advanced_optionsDeepMap["common_hash_policy"] = map[string]interface{}{}
+					}
+					if item.SimpleRoute.AdvancedOptions.DefaultRetryPolicy != nil {
+						advanced_optionsDeepMap["default_retry_policy"] = map[string]interface{}{}
+					}
+					if !item.SimpleRoute.AdvancedOptions.DisableLocationAdd.IsNull() && !item.SimpleRoute.AdvancedOptions.DisableLocationAdd.IsUnknown() {
+						advanced_optionsDeepMap["disable_location_add"] = item.SimpleRoute.AdvancedOptions.DisableLocationAdd.ValueBool()
+					}
+					if item.SimpleRoute.AdvancedOptions.DisableMirroring != nil {
+						advanced_optionsDeepMap["disable_mirroring"] = map[string]interface{}{}
+					}
+					if item.SimpleRoute.AdvancedOptions.DisablePrefixRewrite != nil {
+						advanced_optionsDeepMap["disable_prefix_rewrite"] = map[string]interface{}{}
+					}
+					if item.SimpleRoute.AdvancedOptions.DisableSpdy != nil {
+						advanced_optionsDeepMap["disable_spdy"] = map[string]interface{}{}
+					}
+					if item.SimpleRoute.AdvancedOptions.DisableWAF != nil {
+						advanced_optionsDeepMap["disable_waf"] = map[string]interface{}{}
+					}
+					if item.SimpleRoute.AdvancedOptions.DisableWebSocketConfig != nil {
+						advanced_optionsDeepMap["disable_web_socket_config"] = map[string]interface{}{}
+					}
+					if item.SimpleRoute.AdvancedOptions.DoNotRetractCluster != nil {
+						advanced_optionsDeepMap["do_not_retract_cluster"] = map[string]interface{}{}
+					}
+					if item.SimpleRoute.AdvancedOptions.EnableSpdy != nil {
+						advanced_optionsDeepMap["enable_spdy"] = map[string]interface{}{}
+					}
+					if item.SimpleRoute.AdvancedOptions.EndpointSubsets != nil {
+						advanced_optionsDeepMap["endpoint_subsets"] = map[string]interface{}{}
+					}
+					if item.SimpleRoute.AdvancedOptions.InheritedBotDefenseJavascriptInjection != nil {
+						advanced_optionsDeepMap["inherited_bot_defense_javascript_injection"] = map[string]interface{}{}
+					}
+					if item.SimpleRoute.AdvancedOptions.InheritedWAF != nil {
+						advanced_optionsDeepMap["inherited_waf"] = map[string]interface{}{}
+					}
+					if item.SimpleRoute.AdvancedOptions.InheritedWAFExclusion != nil {
+						advanced_optionsDeepMap["inherited_waf_exclusion"] = map[string]interface{}{}
+					}
+					if item.SimpleRoute.AdvancedOptions.NoRetryPolicy != nil {
+						advanced_optionsDeepMap["no_retry_policy"] = map[string]interface{}{}
+					}
+					if !item.SimpleRoute.AdvancedOptions.PrefixRewrite.IsNull() && !item.SimpleRoute.AdvancedOptions.PrefixRewrite.IsUnknown() {
+						advanced_optionsDeepMap["prefix_rewrite"] = item.SimpleRoute.AdvancedOptions.PrefixRewrite.ValueString()
+					}
+					if !item.SimpleRoute.AdvancedOptions.Priority.IsNull() && !item.SimpleRoute.AdvancedOptions.Priority.IsUnknown() {
+						advanced_optionsDeepMap["priority"] = item.SimpleRoute.AdvancedOptions.Priority.ValueString()
+					}
+					if !item.SimpleRoute.AdvancedOptions.RequestCookiesToRemove.IsNull() && !item.SimpleRoute.AdvancedOptions.RequestCookiesToRemove.IsUnknown() {
+						var RequestCookiesToRemoveItems []string
+						diags := item.SimpleRoute.AdvancedOptions.RequestCookiesToRemove.ElementsAs(ctx, &RequestCookiesToRemoveItems, false)
+						if !diags.HasError() {
+							advanced_optionsDeepMap["request_cookies_to_remove"] = RequestCookiesToRemoveItems
+						}
+					}
+					if !item.SimpleRoute.AdvancedOptions.RequestHeadersToRemove.IsNull() && !item.SimpleRoute.AdvancedOptions.RequestHeadersToRemove.IsUnknown() {
+						var RequestHeadersToRemoveItems []string
+						diags := item.SimpleRoute.AdvancedOptions.RequestHeadersToRemove.ElementsAs(ctx, &RequestHeadersToRemoveItems, false)
+						if !diags.HasError() {
+							advanced_optionsDeepMap["request_headers_to_remove"] = RequestHeadersToRemoveItems
+						}
+					}
+					if !item.SimpleRoute.AdvancedOptions.ResponseCookiesToRemove.IsNull() && !item.SimpleRoute.AdvancedOptions.ResponseCookiesToRemove.IsUnknown() {
+						var ResponseCookiesToRemoveItems []string
+						diags := item.SimpleRoute.AdvancedOptions.ResponseCookiesToRemove.ElementsAs(ctx, &ResponseCookiesToRemoveItems, false)
+						if !diags.HasError() {
+							advanced_optionsDeepMap["response_cookies_to_remove"] = ResponseCookiesToRemoveItems
+						}
+					}
+					if !item.SimpleRoute.AdvancedOptions.ResponseHeadersToRemove.IsNull() && !item.SimpleRoute.AdvancedOptions.ResponseHeadersToRemove.IsUnknown() {
+						var ResponseHeadersToRemoveItems []string
+						diags := item.SimpleRoute.AdvancedOptions.ResponseHeadersToRemove.ElementsAs(ctx, &ResponseHeadersToRemoveItems, false)
+						if !diags.HasError() {
+							advanced_optionsDeepMap["response_headers_to_remove"] = ResponseHeadersToRemoveItems
+						}
+					}
+					if item.SimpleRoute.AdvancedOptions.RetractCluster != nil {
+						advanced_optionsDeepMap["retract_cluster"] = map[string]interface{}{}
+					}
+					if !item.SimpleRoute.AdvancedOptions.Timeout.IsNull() && !item.SimpleRoute.AdvancedOptions.Timeout.IsUnknown() {
+						advanced_optionsDeepMap["timeout"] = item.SimpleRoute.AdvancedOptions.Timeout.ValueInt64()
+					}
+					simple_routeNestedMap["advanced_options"] = advanced_optionsDeepMap
+				}
+				if item.SimpleRoute.AutoHostRewrite != nil {
+					simple_routeNestedMap["auto_host_rewrite"] = map[string]interface{}{}
+				}
+				if item.SimpleRoute.DisableHostRewrite != nil {
+					simple_routeNestedMap["disable_host_rewrite"] = map[string]interface{}{}
+				}
+				if len(item.SimpleRoute.Headers) > 0 {
+					var headersDeepList []map[string]interface{}
+					for _, deepListItem := range item.SimpleRoute.Headers {
+						deepListItemMap := make(map[string]interface{})
+						if !deepListItem.Exact.IsNull() && !deepListItem.Exact.IsUnknown() {
+							deepListItemMap["exact"] = deepListItem.Exact.ValueString()
+						}
+						if !deepListItem.InvertMatch.IsNull() && !deepListItem.InvertMatch.IsUnknown() {
+							deepListItemMap["invert_match"] = deepListItem.InvertMatch.ValueBool()
+						}
+						if !deepListItem.Name.IsNull() && !deepListItem.Name.IsUnknown() {
+							deepListItemMap["name"] = deepListItem.Name.ValueString()
+						}
+						if !deepListItem.Presence.IsNull() && !deepListItem.Presence.IsUnknown() {
+							deepListItemMap["presence"] = deepListItem.Presence.ValueBool()
+						}
+						if !deepListItem.Regex.IsNull() && !deepListItem.Regex.IsUnknown() {
+							deepListItemMap["regex"] = deepListItem.Regex.ValueString()
+						}
+						headersDeepList = append(headersDeepList, deepListItemMap)
+					}
+					simple_routeNestedMap["headers"] = headersDeepList
+				}
 				if !item.SimpleRoute.HostRewrite.IsNull() && !item.SimpleRoute.HostRewrite.IsUnknown() {
 					simple_routeNestedMap["host_rewrite"] = item.SimpleRoute.HostRewrite.ValueString()
 				}
 				if !item.SimpleRoute.HTTPMethod.IsNull() && !item.SimpleRoute.HTTPMethod.IsUnknown() {
 					simple_routeNestedMap["http_method"] = item.SimpleRoute.HTTPMethod.ValueString()
 				}
+				if item.SimpleRoute.IncomingPort != nil {
+					incoming_portDeepMap := make(map[string]interface{})
+					if item.SimpleRoute.IncomingPort.NoPortMatch != nil {
+						incoming_portDeepMap["no_port_match"] = map[string]interface{}{}
+					}
+					if !item.SimpleRoute.IncomingPort.Port.IsNull() && !item.SimpleRoute.IncomingPort.Port.IsUnknown() {
+						incoming_portDeepMap["port"] = item.SimpleRoute.IncomingPort.Port.ValueInt64()
+					}
+					if !item.SimpleRoute.IncomingPort.PortRanges.IsNull() && !item.SimpleRoute.IncomingPort.PortRanges.IsUnknown() {
+						incoming_portDeepMap["port_ranges"] = item.SimpleRoute.IncomingPort.PortRanges.ValueString()
+					}
+					simple_routeNestedMap["incoming_port"] = incoming_portDeepMap
+				}
+				if len(item.SimpleRoute.OriginPools) > 0 {
+					var origin_poolsDeepList []map[string]interface{}
+					for _, deepListItem := range item.SimpleRoute.OriginPools {
+						deepListItemMap := make(map[string]interface{})
+						if deepListItem.EndpointSubsets != nil {
+							deepListItemMap["endpoint_subsets"] = map[string]interface{}{}
+						}
+						if !deepListItem.Priority.IsNull() && !deepListItem.Priority.IsUnknown() {
+							deepListItemMap["priority"] = deepListItem.Priority.ValueInt64()
+						}
+						if !deepListItem.Weight.IsNull() && !deepListItem.Weight.IsUnknown() {
+							deepListItemMap["weight"] = deepListItem.Weight.ValueInt64()
+						}
+						origin_poolsDeepList = append(origin_poolsDeepList, deepListItemMap)
+					}
+					simple_routeNestedMap["origin_pools"] = origin_poolsDeepList
+				}
+				if item.SimpleRoute.Path != nil {
+					pathDeepMap := make(map[string]interface{})
+					if !item.SimpleRoute.Path.Path.IsNull() && !item.SimpleRoute.Path.Path.IsUnknown() {
+						pathDeepMap["path"] = item.SimpleRoute.Path.Path.ValueString()
+					}
+					if !item.SimpleRoute.Path.Prefix.IsNull() && !item.SimpleRoute.Path.Prefix.IsUnknown() {
+						pathDeepMap["prefix"] = item.SimpleRoute.Path.Prefix.ValueString()
+					}
+					if !item.SimpleRoute.Path.Regex.IsNull() && !item.SimpleRoute.Path.Regex.IsUnknown() {
+						pathDeepMap["regex"] = item.SimpleRoute.Path.Regex.ValueString()
+					}
+					simple_routeNestedMap["path"] = pathDeepMap
+				}
+				if item.SimpleRoute.QueryParams != nil {
+					query_paramsDeepMap := make(map[string]interface{})
+					if item.SimpleRoute.QueryParams.RemoveAllParams != nil {
+						query_paramsDeepMap["remove_all_params"] = map[string]interface{}{}
+					}
+					if !item.SimpleRoute.QueryParams.ReplaceParams.IsNull() && !item.SimpleRoute.QueryParams.ReplaceParams.IsUnknown() {
+						query_paramsDeepMap["replace_params"] = item.SimpleRoute.QueryParams.ReplaceParams.ValueString()
+					}
+					if item.SimpleRoute.QueryParams.RetainAllParams != nil {
+						query_paramsDeepMap["retain_all_params"] = map[string]interface{}{}
+					}
+					simple_routeNestedMap["query_params"] = query_paramsDeepMap
+				}
 				itemMap["simple_route"] = simple_routeNestedMap
 			}
 			routesList = append(routesList, itemMap)
 		}
-		apiResource.Spec["routes"] = routesList
+		createReq.Spec["routes"] = routesList
 	}
 	if data.SensitiveDataDisclosureRules != nil {
 		sensitive_data_disclosure_rulesMap := make(map[string]interface{})
@@ -17230,7 +17732,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}
 			sensitive_data_disclosure_rulesMap["sensitive_data_types_in_response"] = sensitive_data_types_in_responseList
 		}
-		apiResource.Spec["sensitive_data_disclosure_rules"] = sensitive_data_disclosure_rulesMap
+		createReq.Spec["sensitive_data_disclosure_rules"] = sensitive_data_disclosure_rulesMap
 	}
 	if data.SensitiveDataPolicy != nil {
 		sensitive_data_policyMap := make(map[string]interface{})
@@ -17247,11 +17749,11 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}
 			sensitive_data_policyMap["sensitive_data_policy_ref"] = sensitive_data_policy_refNestedMap
 		}
-		apiResource.Spec["sensitive_data_policy"] = sensitive_data_policyMap
+		createReq.Spec["sensitive_data_policy"] = sensitive_data_policyMap
 	}
 	if data.ServicePoliciesFromNamespace != nil {
 		service_policies_from_namespaceMap := make(map[string]interface{})
-		apiResource.Spec["service_policies_from_namespace"] = service_policies_from_namespaceMap
+		createReq.Spec["service_policies_from_namespace"] = service_policies_from_namespaceMap
 	}
 	if data.SingleLbApp != nil {
 		single_lb_appMap := make(map[string]interface{})
@@ -17268,7 +17770,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 		if data.SingleLbApp.EnableMaliciousUserDetection != nil {
 			single_lb_appMap["enable_malicious_user_detection"] = map[string]interface{}{}
 		}
-		apiResource.Spec["single_lb_app"] = single_lb_appMap
+		createReq.Spec["single_lb_app"] = single_lb_appMap
 	}
 	if data.SlowDdosMitigation != nil {
 		slow_ddos_mitigationMap := make(map[string]interface{})
@@ -17281,15 +17783,15 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 		if !data.SlowDdosMitigation.RequestTimeout.IsNull() && !data.SlowDdosMitigation.RequestTimeout.IsUnknown() {
 			slow_ddos_mitigationMap["request_timeout"] = data.SlowDdosMitigation.RequestTimeout.ValueInt64()
 		}
-		apiResource.Spec["slow_ddos_mitigation"] = slow_ddos_mitigationMap
+		createReq.Spec["slow_ddos_mitigation"] = slow_ddos_mitigationMap
 	}
 	if data.SourceIPStickiness != nil {
 		source_ip_stickinessMap := make(map[string]interface{})
-		apiResource.Spec["source_ip_stickiness"] = source_ip_stickinessMap
+		createReq.Spec["source_ip_stickiness"] = source_ip_stickinessMap
 	}
 	if data.SystemDefaultTimeouts != nil {
 		system_default_timeoutsMap := make(map[string]interface{})
-		apiResource.Spec["system_default_timeouts"] = system_default_timeoutsMap
+		createReq.Spec["system_default_timeouts"] = system_default_timeoutsMap
 	}
 	if len(data.TrustedClients) > 0 {
 		var trusted_clientsList []map[string]interface{}
@@ -17306,6 +17808,29 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}
 			if item.HTTPHeader != nil {
 				http_headerNestedMap := make(map[string]interface{})
+				if len(item.HTTPHeader.Headers) > 0 {
+					var headersDeepList []map[string]interface{}
+					for _, deepListItem := range item.HTTPHeader.Headers {
+						deepListItemMap := make(map[string]interface{})
+						if !deepListItem.Exact.IsNull() && !deepListItem.Exact.IsUnknown() {
+							deepListItemMap["exact"] = deepListItem.Exact.ValueString()
+						}
+						if !deepListItem.InvertMatch.IsNull() && !deepListItem.InvertMatch.IsUnknown() {
+							deepListItemMap["invert_match"] = deepListItem.InvertMatch.ValueBool()
+						}
+						if !deepListItem.Name.IsNull() && !deepListItem.Name.IsUnknown() {
+							deepListItemMap["name"] = deepListItem.Name.ValueString()
+						}
+						if !deepListItem.Presence.IsNull() && !deepListItem.Presence.IsUnknown() {
+							deepListItemMap["presence"] = deepListItem.Presence.ValueBool()
+						}
+						if !deepListItem.Regex.IsNull() && !deepListItem.Regex.IsUnknown() {
+							deepListItemMap["regex"] = deepListItem.Regex.ValueString()
+						}
+						headersDeepList = append(headersDeepList, deepListItemMap)
+					}
+					http_headerNestedMap["headers"] = headersDeepList
+				}
 				itemMap["http_header"] = http_headerNestedMap
 			}
 			if !item.IPPrefix.IsNull() && !item.IPPrefix.IsUnknown() {
@@ -17335,11 +17860,11 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}
 			trusted_clientsList = append(trusted_clientsList, itemMap)
 		}
-		apiResource.Spec["trusted_clients"] = trusted_clientsList
+		createReq.Spec["trusted_clients"] = trusted_clientsList
 	}
 	if data.UserIDClientIP != nil {
 		user_id_client_ipMap := make(map[string]interface{})
-		apiResource.Spec["user_id_client_ip"] = user_id_client_ipMap
+		createReq.Spec["user_id_client_ip"] = user_id_client_ipMap
 	}
 	if data.UserIdentification != nil {
 		user_identificationMap := make(map[string]interface{})
@@ -17352,7 +17877,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 		if !data.UserIdentification.Tenant.IsNull() && !data.UserIdentification.Tenant.IsUnknown() {
 			user_identificationMap["tenant"] = data.UserIdentification.Tenant.ValueString()
 		}
-		apiResource.Spec["user_identification"] = user_identificationMap
+		createReq.Spec["user_identification"] = user_identificationMap
 	}
 	if data.WAFExclusion != nil {
 		waf_exclusionMap := make(map[string]interface{})
@@ -17373,122 +17898,25 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}
 			waf_exclusionMap["waf_exclusion_policy"] = waf_exclusion_policyNestedMap
 		}
-		apiResource.Spec["waf_exclusion"] = waf_exclusionMap
+		createReq.Spec["waf_exclusion"] = waf_exclusionMap
 	}
 	if !data.AddLocation.IsNull() && !data.AddLocation.IsUnknown() {
-		apiResource.Spec["add_location"] = data.AddLocation.ValueBool()
+		createReq.Spec["add_location"] = data.AddLocation.ValueBool()
 	}
 
 
-	created, err := r.client.CreateHTTPLoadBalancer(ctx, apiResource)
+	apiResource, err := r.client.CreateHTTPLoadBalancer(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create HTTPLoadBalancer: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
-
-	// Set computed fields from API response
-	if v, ok := created.Spec["add_location"].(bool); ok {
-		data.AddLocation = types.BoolValue(v)
-	} else if data.AddLocation.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
-		data.AddLocation = types.BoolNull()
-	}
-	// If plan had a value, preserve it
-
-	psd := privatestate.NewPrivateStateData()
-	psd.SetCustom("managed", "true")
-	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
-	})
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
-
-	tflog.Trace(ctx, "created HTTPLoadBalancer resource")
-	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
-}
-
-func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
-	var data HTTPLoadBalancerResourceModel
-	resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
-	if resp.Diagnostics.HasError() {
-		return
-	}
-
-	readTimeout, diags := data.Timeouts.Read(ctx, inttimeouts.DefaultRead)
-	resp.Diagnostics.Append(diags...)
-	if resp.Diagnostics.HasError() {
-		return
-	}
-
-	ctx, cancel := context.WithTimeout(ctx, readTimeout)
-	defer cancel()
-
-	psd, psDiags := privatestate.LoadFromPrivateState(ctx, &req)
-	resp.Diagnostics.Append(psDiags...)
-
-	apiResource, err := r.client.GetHTTPLoadBalancer(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-	if err != nil {
-		// Check if the resource was deleted outside Terraform
-		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
-			tflog.Warn(ctx, "HTTPLoadBalancer not found, removing from state", map[string]interface{}{
-				"name":      data.Name.ValueString(),
-				"namespace": data.Namespace.ValueString(),
-			})
-			resp.State.RemoveResource(ctx)
-			return
-		}
-		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read HTTPLoadBalancer: %s", err))
-		return
-	}
-
-	if psd != nil && psd.Metadata.UID != "" && apiResource.Metadata.UID != psd.Metadata.UID {
-		resp.Diagnostics.AddWarning(
-			"Resource Drift Detected",
-			"The http_loadbalancer may have been recreated outside of Terraform.",
-		)
-	}
-
 	data.ID = types.StringValue(apiResource.Metadata.Name)
-	data.Name = types.StringValue(apiResource.Metadata.Name)
-	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
-
-	// Read description from metadata
-	if apiResource.Metadata.Description != "" {
-		data.Description = types.StringValue(apiResource.Metadata.Description)
-	} else {
-		data.Description = types.StringNull()
-	}
-
-	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
-		}
-	} else {
-		data.Labels = types.MapNull(types.StringType)
-	}
-
-	if len(apiResource.Metadata.Annotations) > 0 {
-		annotations, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Annotations)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Annotations = annotations
-		}
-	} else {
-		data.Annotations = types.MapNull(types.StringType)
-	}
 
 	// Unmarshal spec fields from API response to Terraform state
-	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
-	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
 	_ = isImport // May be unused if resource has no blocks needing import detection
-	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
-	})
 	if blockData, ok := apiResource.Spec["active_service_policies"].(map[string]interface{}); ok && (isImport || data.ActiveServicePolicies != nil) {
 		data.ActiveServicePolicies = &HTTPLoadBalancerActiveServicePoliciesModel{
 			Policies: func() []HTTPLoadBalancerActiveServicePoliciesPoliciesModel {
@@ -18276,7 +18704,8 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 	}
 	if listData, ok := apiResource.Spec["blocked_clients"].([]interface{}); ok && len(listData) > 0 {
 		var blocked_clientsList []HTTPLoadBalancerBlockedClientsModel
-		for _, item := range listData {
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				blocked_clientsList = append(blocked_clientsList, HTTPLoadBalancerBlockedClientsModel{
 					Actions: func() types.List {
@@ -18299,7 +18728,7 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 						return types.Int64Null()
 					}(),
 					BotSkipProcessing: func() *HTTPLoadBalancerEmptyModel {
-						if _, ok := itemMap["bot_skip_processing"].(map[string]interface{}); ok {
+						if !isImport && len(data.BlockedClients) > listIdx && data.BlockedClients[listIdx].BotSkipProcessing != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -18349,7 +18778,7 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 						return nil
 					}(),
 					SkipProcessing: func() *HTTPLoadBalancerEmptyModel {
-						if _, ok := itemMap["skip_processing"].(map[string]interface{}); ok {
+						if !isImport && len(data.BlockedClients) > listIdx && data.BlockedClients[listIdx].SkipProcessing != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -18361,7 +18790,7 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 						return types.StringNull()
 					}(),
 					WAFSkipProcessing: func() *HTTPLoadBalancerEmptyModel {
-						if _, ok := itemMap["waf_skip_processing"].(map[string]interface{}); ok {
+						if !isImport && len(data.BlockedClients) > listIdx && data.BlockedClients[listIdx].WAFSkipProcessing != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -18667,17 +19096,18 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["data_guard_rules"].([]interface{}); ok && len(listData) > 0 {
 		var data_guard_rulesList []HTTPLoadBalancerDataGuardRulesModel
-		for _, item := range listData {
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				data_guard_rulesList = append(data_guard_rulesList, HTTPLoadBalancerDataGuardRulesModel{
 					AnyDomain: func() *HTTPLoadBalancerEmptyModel {
-						if _, ok := itemMap["any_domain"].(map[string]interface{}); ok {
+						if !isImport && len(data.DataGuardRules) > listIdx && data.DataGuardRules[listIdx].AnyDomain != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
 					ApplyDataGuard: func() *HTTPLoadBalancerEmptyModel {
-						if _, ok := itemMap["apply_data_guard"].(map[string]interface{}); ok {
+						if !isImport && len(data.DataGuardRules) > listIdx && data.DataGuardRules[listIdx].ApplyDataGuard != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -18733,7 +19163,7 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 						return nil
 					}(),
 					SkipDataGuard: func() *HTTPLoadBalancerEmptyModel {
-						if _, ok := itemMap["skip_data_guard"].(map[string]interface{}); ok {
+						if !isImport && len(data.DataGuardRules) > listIdx && data.DataGuardRules[listIdx].SkipDataGuard != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -18751,11 +19181,12 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 	}
 	if listData, ok := apiResource.Spec["ddos_mitigation_rules"].([]interface{}); ok && len(listData) > 0 {
 		var ddos_mitigation_rulesList []HTTPLoadBalancerDdosMitigationRulesModel
-		for _, item := range listData {
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				ddos_mitigation_rulesList = append(ddos_mitigation_rulesList, HTTPLoadBalancerDdosMitigationRulesModel{
 					Block: func() *HTTPLoadBalancerEmptyModel {
-						if _, ok := itemMap["block"].(map[string]interface{}); ok {
+						if !isImport && len(data.DdosMitigationRules) > listIdx && data.DdosMitigationRules[listIdx].Block != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -19341,7 +19772,8 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 	}
 	if listData, ok := apiResource.Spec["default_route_pools"].([]interface{}); ok && len(listData) > 0 {
 		var default_route_poolsList []HTTPLoadBalancerDefaultRoutePoolsModel
-		for _, item := range listData {
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				default_route_poolsList = append(default_route_poolsList, HTTPLoadBalancerDefaultRoutePoolsModel{
 					Cluster: func() *HTTPLoadBalancerDefaultRoutePoolsClusterModel {
@@ -19370,7 +19802,7 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 						return nil
 					}(),
 					EndpointSubsets: func() *HTTPLoadBalancerEmptyModel {
-						if _, ok := itemMap["endpoint_subsets"].(map[string]interface{}); ok {
+						if !isImport && len(data.DefaultRoutePools) > listIdx && data.DefaultRoutePools[listIdx].EndpointSubsets != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -19563,11 +19995,12 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 	}
 	if listData, ok := apiResource.Spec["graphql_rules"].([]interface{}); ok && len(listData) > 0 {
 		var graphql_rulesList []HTTPLoadBalancerGraphqlRulesModel
-		for _, item := range listData {
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				graphql_rulesList = append(graphql_rulesList, HTTPLoadBalancerGraphqlRulesModel{
 					AnyDomain: func() *HTTPLoadBalancerEmptyModel {
-						if _, ok := itemMap["any_domain"].(map[string]interface{}); ok {
+						if !isImport && len(data.GraphqlRules) > listIdx && data.GraphqlRules[listIdx].AnyDomain != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -19587,6 +20020,18 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 					GraphqlSettings: func() *HTTPLoadBalancerGraphqlRulesGraphqlSettingsModel {
 						if nestedMap, ok := itemMap["graphql_settings"].(map[string]interface{}); ok {
 							return &HTTPLoadBalancerGraphqlRulesGraphqlSettingsModel{
+								DisableIntrospection: func() *HTTPLoadBalancerEmptyModel {
+									if !isImport && len(data.GraphqlRules) > listIdx && data.GraphqlRules[listIdx].GraphqlSettings != nil && data.GraphqlRules[listIdx].GraphqlSettings.DisableIntrospection != nil {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								EnableIntrospection: func() *HTTPLoadBalancerEmptyModel {
+									if !isImport && len(data.GraphqlRules) > listIdx && data.GraphqlRules[listIdx].GraphqlSettings != nil && data.GraphqlRules[listIdx].GraphqlSettings.EnableIntrospection != nil {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
 								MaxBatchedQueries: func() types.Int64 {
 									if v, ok := nestedMap["max_batched_queries"].(float64); ok && v != 0 {
 										return types.Int64Value(int64(v))
@@ -19629,13 +20074,13 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 						return nil
 					}(),
 					MethodGet: func() *HTTPLoadBalancerEmptyModel {
-						if _, ok := itemMap["method_get"].(map[string]interface{}); ok {
+						if !isImport && len(data.GraphqlRules) > listIdx && data.GraphqlRules[listIdx].MethodGet != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
 					MethodPost: func() *HTTPLoadBalancerEmptyModel {
-						if _, ok := itemMap["method_post"].(map[string]interface{}); ok {
+						if !isImport && len(data.GraphqlRules) > listIdx && data.GraphqlRules[listIdx].MethodPost != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -20984,53 +21429,54 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["protected_cookies"].([]interface{}); ok && len(listData) > 0 {
 		var protected_cookiesList []HTTPLoadBalancerProtectedCookiesModel
-		for _, item := range listData {
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				protected_cookiesList = append(protected_cookiesList, HTTPLoadBalancerProtectedCookiesModel{
 					AddHttponly: func() *HTTPLoadBalancerEmptyModel {
-						if _, ok := itemMap["add_httponly"].(map[string]interface{}); ok {
+						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].AddHttponly != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
 					AddSecure: func() *HTTPLoadBalancerEmptyModel {
-						if _, ok := itemMap["add_secure"].(map[string]interface{}); ok {
+						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].AddSecure != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
 					DisableTamperingProtection: func() *HTTPLoadBalancerEmptyModel {
-						if _, ok := itemMap["disable_tampering_protection"].(map[string]interface{}); ok {
+						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].DisableTamperingProtection != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
 					EnableTamperingProtection: func() *HTTPLoadBalancerEmptyModel {
-						if _, ok := itemMap["enable_tampering_protection"].(map[string]interface{}); ok {
+						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].EnableTamperingProtection != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
 					IgnoreHttponly: func() *HTTPLoadBalancerEmptyModel {
-						if _, ok := itemMap["ignore_httponly"].(map[string]interface{}); ok {
+						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].IgnoreHttponly != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
 					IgnoreMaxAge: func() *HTTPLoadBalancerEmptyModel {
-						if _, ok := itemMap["ignore_max_age"].(map[string]interface{}); ok {
+						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].IgnoreMaxAge != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
 					IgnoreSamesite: func() *HTTPLoadBalancerEmptyModel {
-						if _, ok := itemMap["ignore_samesite"].(map[string]interface{}); ok {
+						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].IgnoreSamesite != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
 					IgnoreSecure: func() *HTTPLoadBalancerEmptyModel {
-						if _, ok := itemMap["ignore_secure"].(map[string]interface{}); ok {
+						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].IgnoreSecure != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -21048,19 +21494,19 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 						return types.StringNull()
 					}(),
 					SamesiteLax: func() *HTTPLoadBalancerEmptyModel {
-						if _, ok := itemMap["samesite_lax"].(map[string]interface{}); ok {
+						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].SamesiteLax != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
 					SamesiteNone: func() *HTTPLoadBalancerEmptyModel {
-						if _, ok := itemMap["samesite_none"].(map[string]interface{}); ok {
+						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].SamesiteNone != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
 					SamesiteStrict: func() *HTTPLoadBalancerEmptyModel {
-						if _, ok := itemMap["samesite_strict"].(map[string]interface{}); ok {
+						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].SamesiteStrict != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -21195,7 +21641,8 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["routes"].([]interface{}); ok && len(listData) > 0 {
 		var routesList []HTTPLoadBalancerRoutesModel
-		for _, item := range listData {
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				routesList = append(routesList, HTTPLoadBalancerRoutesModel{
 					CustomRouteObject: func() *HTTPLoadBalancerRoutesCustomRouteObjectModel {
@@ -21234,6 +21681,18 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 					SimpleRoute: func() *HTTPLoadBalancerRoutesSimpleRouteModel {
 						if nestedMap, ok := itemMap["simple_route"].(map[string]interface{}); ok {
 							return &HTTPLoadBalancerRoutesSimpleRouteModel{
+								AutoHostRewrite: func() *HTTPLoadBalancerEmptyModel {
+									if !isImport && len(data.Routes) > listIdx && data.Routes[listIdx].SimpleRoute != nil && data.Routes[listIdx].SimpleRoute.AutoHostRewrite != nil {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								DisableHostRewrite: func() *HTTPLoadBalancerEmptyModel {
+									if !isImport && len(data.Routes) > listIdx && data.Routes[listIdx].SimpleRoute != nil && data.Routes[listIdx].SimpleRoute.DisableHostRewrite != nil {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
 								HostRewrite: func() types.String {
 									if v, ok := nestedMap["host_rewrite"].(string); ok && v != "" {
 										return types.StringValue(v)
@@ -21359,7 +21818,8 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["trusted_clients"].([]interface{}); ok && len(listData) > 0 {
 		var trusted_clientsList []HTTPLoadBalancerTrustedClientsModel
-		for _, item := range listData {
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				trusted_clientsList = append(trusted_clientsList, HTTPLoadBalancerTrustedClientsModel{
 					Actions: func() types.List {
@@ -21382,7 +21842,7 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 						return types.Int64Null()
 					}(),
 					BotSkipProcessing: func() *HTTPLoadBalancerEmptyModel {
-						if _, ok := itemMap["bot_skip_processing"].(map[string]interface{}); ok {
+						if !isImport && len(data.TrustedClients) > listIdx && data.TrustedClients[listIdx].BotSkipProcessing != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -21432,7 +21892,7 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 						return nil
 					}(),
 					SkipProcessing: func() *HTTPLoadBalancerEmptyModel {
-						if _, ok := itemMap["skip_processing"].(map[string]interface{}); ok {
+						if !isImport && len(data.TrustedClients) > listIdx && data.TrustedClients[listIdx].SkipProcessing != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -21444,7 +21904,7 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 						return types.StringNull()
 					}(),
 					WAFSkipProcessing: func() *HTTPLoadBalancerEmptyModel {
-						if _, ok := itemMap["waf_skip_processing"].(map[string]interface{}); ok {
+						if !isImport && len(data.TrustedClients) > listIdx && data.TrustedClients[listIdx].WAFSkipProcessing != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -21487,10 +21947,4144 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 	}
 	// Normal Read: preserve existing state value
 	// Top-level Optional bool: preserve prior state to avoid API default drift
-	if !isImport && !data.AddLocation.IsNull() {
+	if !isImport && !data.AddLocation.IsNull() && !data.AddLocation.IsUnknown() {
 		// Normal Read: preserve existing state value (do nothing)
 	} else {
-		// Import case or null state: read from API
+		// Import case, null state, or unknown (after Create): read from API
+		if v, ok := apiResource.Spec["add_location"].(bool); ok {
+			data.AddLocation = types.BoolValue(v)
+		} else {
+			data.AddLocation = types.BoolNull()
+		}
+	}
+
+
+	psd := privatestate.NewPrivateStateData()
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": apiResource.Metadata.Name,
+	})
+	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+
+	tflog.Trace(ctx, "created HTTPLoadBalancer resource")
+	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
+}
+
+func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
+	var data HTTPLoadBalancerResourceModel
+	resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	readTimeout, diags := data.Timeouts.Read(ctx, inttimeouts.DefaultRead)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	ctx, cancel := context.WithTimeout(ctx, readTimeout)
+	defer cancel()
+
+	psd, psDiags := privatestate.LoadFromPrivateState(ctx, &req)
+	resp.Diagnostics.Append(psDiags...)
+
+	apiResource, err := r.client.GetHTTPLoadBalancer(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "HTTPLoadBalancer not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read HTTPLoadBalancer: %s", err))
+		return
+	}
+
+	if psd != nil && psd.Metadata.UID != "" && apiResource.Metadata.UID != psd.Metadata.UID {
+		resp.Diagnostics.AddWarning(
+			"Resource Drift Detected",
+			"The http_loadbalancer may have been recreated outside of Terraform.",
+		)
+	}
+
+	data.ID = types.StringValue(apiResource.Metadata.Name)
+	data.Name = types.StringValue(apiResource.Metadata.Name)
+	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
+
+	if len(apiResource.Metadata.Labels) > 0 {
+		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Labels = labels
+		}
+	} else {
+		data.Labels = types.MapNull(types.StringType)
+	}
+
+	if len(apiResource.Metadata.Annotations) > 0 {
+		annotations, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Annotations)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Annotations = annotations
+		}
+	} else {
+		data.Annotations = types.MapNull(types.StringType)
+	}
+
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if blockData, ok := apiResource.Spec["active_service_policies"].(map[string]interface{}); ok && (isImport || data.ActiveServicePolicies != nil) {
+		data.ActiveServicePolicies = &HTTPLoadBalancerActiveServicePoliciesModel{
+			Policies: func() []HTTPLoadBalancerActiveServicePoliciesPoliciesModel {
+				if listData, ok := blockData["policies"].([]interface{}); ok && len(listData) > 0 {
+					var result []HTTPLoadBalancerActiveServicePoliciesPoliciesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, HTTPLoadBalancerActiveServicePoliciesPoliciesModel{
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := itemMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := itemMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["advertise_custom"].(map[string]interface{}); ok && (isImport || data.AdvertiseCustom != nil) {
+		data.AdvertiseCustom = &HTTPLoadBalancerAdvertiseCustomModel{
+			AdvertiseWhere: func() []HTTPLoadBalancerAdvertiseCustomAdvertiseWhereModel {
+				if listData, ok := blockData["advertise_where"].([]interface{}); ok && len(listData) > 0 {
+					var result []HTTPLoadBalancerAdvertiseCustomAdvertiseWhereModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, HTTPLoadBalancerAdvertiseCustomAdvertiseWhereModel{
+								AdvertiseOnPublic: func() *HTTPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicModel {
+									if _, ok := itemMap["advertise_on_public"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicModel{
+										}
+									}
+									return nil
+								}(),
+								Port: func() types.Int64 {
+									if v, ok := itemMap["port"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								PortRanges: func() types.String {
+									if v, ok := itemMap["port_ranges"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Site: func() *HTTPLoadBalancerAdvertiseCustomAdvertiseWhereSiteModel {
+									if deepMap, ok := itemMap["site"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerAdvertiseCustomAdvertiseWhereSiteModel{
+											IP: func() types.String {
+												if v, ok := deepMap["ip"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Network: func() types.String {
+												if v, ok := deepMap["network"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								UseDefaultPort: func() *HTTPLoadBalancerEmptyModel {
+									if _, ok := itemMap["use_default_port"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								VirtualNetwork: func() *HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModel {
+									if deepMap, ok := itemMap["virtual_network"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModel{
+											DefaultV6Vip: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["default_v6_vip"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+											DefaultVip: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["default_vip"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+											SpecificV6Vip: func() types.String {
+												if v, ok := deepMap["specific_v6_vip"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											SpecificVip: func() types.String {
+												if v, ok := deepMap["specific_vip"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								VirtualSite: func() *HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteModel {
+									if deepMap, ok := itemMap["virtual_site"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteModel{
+											Network: func() types.String {
+												if v, ok := deepMap["network"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								VirtualSiteWithVip: func() *HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipModel {
+									if deepMap, ok := itemMap["virtual_site_with_vip"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipModel{
+											IP: func() types.String {
+												if v, ok := deepMap["ip"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Network: func() types.String {
+												if v, ok := deepMap["network"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								Vk8sService: func() *HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceModel {
+									if _, ok := itemMap["vk8s_service"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceModel{
+										}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["advertise_on_public"].(map[string]interface{}); ok && isImport && data.AdvertiseOnPublic == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AdvertiseOnPublic = &HTTPLoadBalancerAdvertiseOnPublicModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["advertise_on_public_default_vip"].(map[string]interface{}); ok && isImport && data.AdvertiseOnPublicDefaultVip == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AdvertiseOnPublicDefaultVip = &HTTPLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["api_protection_rules"].(map[string]interface{}); ok && (isImport || data.APIProtectionRules != nil) {
+		data.APIProtectionRules = &HTTPLoadBalancerAPIProtectionRulesModel{
+			APIEndpointRules: func() []HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesModel {
+				if listData, ok := blockData["api_endpoint_rules"].([]interface{}); ok && len(listData) > 0 {
+					var result []HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesModel{
+								Action: func() *HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesActionModel {
+									if deepMap, ok := itemMap["action"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesActionModel{
+											Allow: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["allow"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+											Deny: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["deny"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+										}
+									}
+									return nil
+								}(),
+								AnyDomain: func() *HTTPLoadBalancerEmptyModel {
+									if _, ok := itemMap["any_domain"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								APIEndpointMethod: func() *HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesAPIEndpointMethodModel {
+									if deepMap, ok := itemMap["api_endpoint_method"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesAPIEndpointMethodModel{
+											InvertMatcher: func() types.Bool {
+												if v, ok := deepMap["invert_matcher"].(bool); ok {
+													return types.BoolValue(v)
+												}
+												return types.BoolNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								APIEndpointPath: func() types.String {
+									if v, ok := itemMap["api_endpoint_path"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								ClientMatcher: func() *HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherModel {
+									if deepMap, ok := itemMap["client_matcher"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherModel{
+											AnyClient: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["any_client"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+											AnyIP: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["any_ip"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+										}
+									}
+									return nil
+								}(),
+								Metadata: func() *HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesMetadataModel {
+									if deepMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesMetadataModel{
+											DescriptionSpec: func() types.String {
+												if v, ok := deepMap["description"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								RequestMatcher: func() *HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherModel {
+									if _, ok := itemMap["request_matcher"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherModel{
+										}
+									}
+									return nil
+								}(),
+								SpecificDomain: func() types.String {
+									if v, ok := itemMap["specific_domain"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			APIGroupsRules: func() []HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesModel {
+				if listData, ok := blockData["api_groups_rules"].([]interface{}); ok && len(listData) > 0 {
+					var result []HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesModel{
+								Action: func() *HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesActionModel {
+									if deepMap, ok := itemMap["action"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesActionModel{
+											Allow: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["allow"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+											Deny: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["deny"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+										}
+									}
+									return nil
+								}(),
+								AnyDomain: func() *HTTPLoadBalancerEmptyModel {
+									if _, ok := itemMap["any_domain"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								APIGroup: func() types.String {
+									if v, ok := itemMap["api_group"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								BasePath: func() types.String {
+									if v, ok := itemMap["base_path"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								ClientMatcher: func() *HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherModel {
+									if deepMap, ok := itemMap["client_matcher"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherModel{
+											AnyClient: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["any_client"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+											AnyIP: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["any_ip"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+										}
+									}
+									return nil
+								}(),
+								Metadata: func() *HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesMetadataModel {
+									if deepMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesMetadataModel{
+											DescriptionSpec: func() types.String {
+												if v, ok := deepMap["description"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								RequestMatcher: func() *HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherModel {
+									if _, ok := itemMap["request_matcher"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherModel{
+										}
+									}
+									return nil
+								}(),
+								SpecificDomain: func() types.String {
+									if v, ok := itemMap["specific_domain"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["api_rate_limit"].(map[string]interface{}); ok && (isImport || data.APIRateLimit != nil) {
+		data.APIRateLimit = &HTTPLoadBalancerAPIRateLimitModel{
+			APIEndpointRules: func() []HTTPLoadBalancerAPIRateLimitAPIEndpointRulesModel {
+				if listData, ok := blockData["api_endpoint_rules"].([]interface{}); ok && len(listData) > 0 {
+					var result []HTTPLoadBalancerAPIRateLimitAPIEndpointRulesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, HTTPLoadBalancerAPIRateLimitAPIEndpointRulesModel{
+								AnyDomain: func() *HTTPLoadBalancerEmptyModel {
+									if _, ok := itemMap["any_domain"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								APIEndpointMethod: func() *HTTPLoadBalancerAPIRateLimitAPIEndpointRulesAPIEndpointMethodModel {
+									if deepMap, ok := itemMap["api_endpoint_method"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerAPIRateLimitAPIEndpointRulesAPIEndpointMethodModel{
+											InvertMatcher: func() types.Bool {
+												if v, ok := deepMap["invert_matcher"].(bool); ok {
+													return types.BoolValue(v)
+												}
+												return types.BoolNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								APIEndpointPath: func() types.String {
+									if v, ok := itemMap["api_endpoint_path"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								ClientMatcher: func() *HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherModel {
+									if deepMap, ok := itemMap["client_matcher"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherModel{
+											AnyClient: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["any_client"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+											AnyIP: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["any_ip"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+										}
+									}
+									return nil
+								}(),
+								InlineRateLimiter: func() *HTTPLoadBalancerAPIRateLimitAPIEndpointRulesInlineRateLimiterModel {
+									if deepMap, ok := itemMap["inline_rate_limiter"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerAPIRateLimitAPIEndpointRulesInlineRateLimiterModel{
+											Threshold: func() types.Int64 {
+												if v, ok := deepMap["threshold"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+											Unit: func() types.String {
+												if v, ok := deepMap["unit"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											UseHTTPLbUserID: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["use_http_lb_user_id"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+										}
+									}
+									return nil
+								}(),
+								RefRateLimiter: func() *HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRefRateLimiterModel {
+									if deepMap, ok := itemMap["ref_rate_limiter"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRefRateLimiterModel{
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Namespace: func() types.String {
+												if v, ok := deepMap["namespace"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Tenant: func() types.String {
+												if v, ok := deepMap["tenant"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								RequestMatcher: func() *HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherModel {
+									if _, ok := itemMap["request_matcher"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherModel{
+										}
+									}
+									return nil
+								}(),
+								SpecificDomain: func() types.String {
+									if v, ok := itemMap["specific_domain"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			BypassRateLimitingRules: func() *HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesModel {
+				if !isImport && data.APIRateLimit != nil && data.APIRateLimit.BypassRateLimitingRules != nil {
+					// Normal Read: preserve existing state value
+					return data.APIRateLimit.BypassRateLimitingRules
+				}
+				// Import case: read from API
+				if _, ok := blockData["bypass_rate_limiting_rules"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesModel{
+					}
+				}
+				return nil
+			}(),
+			CustomIPAllowedList: func() *HTTPLoadBalancerAPIRateLimitCustomIPAllowedListModel {
+				if !isImport && data.APIRateLimit != nil && data.APIRateLimit.CustomIPAllowedList != nil {
+					// Normal Read: preserve existing state value
+					return data.APIRateLimit.CustomIPAllowedList
+				}
+				// Import case: read from API
+				if _, ok := blockData["custom_ip_allowed_list"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerAPIRateLimitCustomIPAllowedListModel{
+					}
+				}
+				return nil
+			}(),
+			IPAllowedList: func() *HTTPLoadBalancerAPIRateLimitIPAllowedListModel {
+				if !isImport && data.APIRateLimit != nil && data.APIRateLimit.IPAllowedList != nil {
+					// Normal Read: preserve existing state value
+					return data.APIRateLimit.IPAllowedList
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["ip_allowed_list"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerAPIRateLimitIPAllowedListModel{
+						Prefixes: func() types.List {
+							if v, ok := nestedBlockData["prefixes"].([]interface{}); ok && len(v) > 0 {
+								var items []string
+								for _, item := range v {
+									if s, ok := item.(string); ok {
+										items = append(items, s)
+									}
+								}
+								listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+								return listVal
+							}
+							return types.ListNull(types.StringType)
+						}(),
+					}
+				}
+				return nil
+			}(),
+			NoIPAllowedList: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.APIRateLimit != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.APIRateLimit.NoIPAllowedList
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_ip_allowed_list"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			ServerURLRules: func() []HTTPLoadBalancerAPIRateLimitServerURLRulesModel {
+				if listData, ok := blockData["server_url_rules"].([]interface{}); ok && len(listData) > 0 {
+					var result []HTTPLoadBalancerAPIRateLimitServerURLRulesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, HTTPLoadBalancerAPIRateLimitServerURLRulesModel{
+								AnyDomain: func() *HTTPLoadBalancerEmptyModel {
+									if _, ok := itemMap["any_domain"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								APIGroup: func() types.String {
+									if v, ok := itemMap["api_group"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								BasePath: func() types.String {
+									if v, ok := itemMap["base_path"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								ClientMatcher: func() *HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherModel {
+									if deepMap, ok := itemMap["client_matcher"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherModel{
+											AnyClient: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["any_client"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+											AnyIP: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["any_ip"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+										}
+									}
+									return nil
+								}(),
+								InlineRateLimiter: func() *HTTPLoadBalancerAPIRateLimitServerURLRulesInlineRateLimiterModel {
+									if deepMap, ok := itemMap["inline_rate_limiter"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerAPIRateLimitServerURLRulesInlineRateLimiterModel{
+											Threshold: func() types.Int64 {
+												if v, ok := deepMap["threshold"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+											Unit: func() types.String {
+												if v, ok := deepMap["unit"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											UseHTTPLbUserID: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["use_http_lb_user_id"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+										}
+									}
+									return nil
+								}(),
+								RefRateLimiter: func() *HTTPLoadBalancerAPIRateLimitServerURLRulesRefRateLimiterModel {
+									if deepMap, ok := itemMap["ref_rate_limiter"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerAPIRateLimitServerURLRulesRefRateLimiterModel{
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Namespace: func() types.String {
+												if v, ok := deepMap["namespace"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Tenant: func() types.String {
+												if v, ok := deepMap["tenant"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								RequestMatcher: func() *HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherModel {
+									if _, ok := itemMap["request_matcher"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherModel{
+										}
+									}
+									return nil
+								}(),
+								SpecificDomain: func() types.String {
+									if v, ok := itemMap["specific_domain"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["api_specification"].(map[string]interface{}); ok && isImport && data.APISpecification == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.APISpecification = &HTTPLoadBalancerAPISpecificationModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["api_testing"].(map[string]interface{}); ok && (isImport || data.APITesting != nil) {
+		data.APITesting = &HTTPLoadBalancerAPITestingModel{
+			CustomHeaderValue: func() types.String {
+				if v, ok := blockData["custom_header_value"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Domains: func() []HTTPLoadBalancerAPITestingDomainsModel {
+				if listData, ok := blockData["domains"].([]interface{}); ok && len(listData) > 0 {
+					var result []HTTPLoadBalancerAPITestingDomainsModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, HTTPLoadBalancerAPITestingDomainsModel{
+								AllowDestructiveMethods: func() types.Bool {
+									if v, ok := itemMap["allow_destructive_methods"].(bool); ok {
+										return types.BoolValue(v)
+									}
+									return types.BoolNull()
+								}(),
+								Domain: func() types.String {
+									if v, ok := itemMap["domain"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			EveryDay: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.APITesting != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.APITesting.EveryDay
+				}
+				// Import case: read from API
+				if _, ok := blockData["every_day"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			EveryMonth: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.APITesting != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.APITesting.EveryMonth
+				}
+				// Import case: read from API
+				if _, ok := blockData["every_month"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			EveryWeek: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.APITesting != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.APITesting.EveryWeek
+				}
+				// Import case: read from API
+				if _, ok := blockData["every_week"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["app_firewall"].(map[string]interface{}); ok && (isImport || data.AppFirewall != nil) {
+		data.AppFirewall = &HTTPLoadBalancerAppFirewallModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if listData, ok := apiResource.Spec["blocked_clients"].([]interface{}); ok && len(listData) > 0 {
+		var blocked_clientsList []HTTPLoadBalancerBlockedClientsModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				blocked_clientsList = append(blocked_clientsList, HTTPLoadBalancerBlockedClientsModel{
+					Actions: func() types.List {
+						if v, ok := itemMap["actions"].([]interface{}); ok && len(v) > 0 {
+							var items []string
+							for _, item := range v {
+								if s, ok := item.(string); ok {
+									items = append(items, s)
+								}
+							}
+							listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+							return listVal
+						}
+						return types.ListNull(types.StringType)
+					}(),
+					AsNumber: func() types.Int64 {
+						if v, ok := itemMap["as_number"].(float64); ok && v != 0 {
+							return types.Int64Value(int64(v))
+						}
+						return types.Int64Null()
+					}(),
+					BotSkipProcessing: func() *HTTPLoadBalancerEmptyModel {
+						if !isImport && len(data.BlockedClients) > listIdx && data.BlockedClients[listIdx].BotSkipProcessing != nil {
+							return &HTTPLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					ExpirationTimestamp: func() types.String {
+						if v, ok := itemMap["expiration_timestamp"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					HTTPHeader: func() *HTTPLoadBalancerBlockedClientsHTTPHeaderModel {
+						if _, ok := itemMap["http_header"].(map[string]interface{}); ok {
+							return &HTTPLoadBalancerBlockedClientsHTTPHeaderModel{
+							}
+						}
+						return nil
+					}(),
+					IPPrefix: func() types.String {
+						if v, ok := itemMap["ip_prefix"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					IPV6Prefix: func() types.String {
+						if v, ok := itemMap["ipv6_prefix"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Metadata: func() *HTTPLoadBalancerBlockedClientsMetadataModel {
+						if nestedMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
+							return &HTTPLoadBalancerBlockedClientsMetadataModel{
+								DescriptionSpec: func() types.String {
+									if v, ok := nestedMap["description"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Name: func() types.String {
+									if v, ok := nestedMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					SkipProcessing: func() *HTTPLoadBalancerEmptyModel {
+						if !isImport && len(data.BlockedClients) > listIdx && data.BlockedClients[listIdx].SkipProcessing != nil {
+							return &HTTPLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					UserIdentifier: func() types.String {
+						if v, ok := itemMap["user_identifier"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					WAFSkipProcessing: func() *HTTPLoadBalancerEmptyModel {
+						if !isImport && len(data.BlockedClients) > listIdx && data.BlockedClients[listIdx].WAFSkipProcessing != nil {
+							return &HTTPLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+				})
+			}
+		}
+		data.BlockedClients = blocked_clientsList
+	}
+	if blockData, ok := apiResource.Spec["bot_defense"].(map[string]interface{}); ok && (isImport || data.BotDefense != nil) {
+		data.BotDefense = &HTTPLoadBalancerBotDefenseModel{
+			DisableCorsSupport: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.BotDefense != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.BotDefense.DisableCorsSupport
+				}
+				// Import case: read from API
+				if _, ok := blockData["disable_cors_support"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			EnableCorsSupport: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.BotDefense != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.BotDefense.EnableCorsSupport
+				}
+				// Import case: read from API
+				if _, ok := blockData["enable_cors_support"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			Policy: func() *HTTPLoadBalancerBotDefensePolicyModel {
+				if !isImport && data.BotDefense != nil && data.BotDefense.Policy != nil {
+					// Normal Read: preserve existing state value
+					return data.BotDefense.Policy
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["policy"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerBotDefensePolicyModel{
+						JavascriptMode: func() types.String {
+							if v, ok := nestedBlockData["javascript_mode"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						JsDownloadPath: func() types.String {
+							if v, ok := nestedBlockData["js_download_path"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			RegionalEndpoint: func() types.String {
+				if v, ok := blockData["regional_endpoint"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Timeout: func() types.Int64 {
+				if v, ok := blockData["timeout"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["bot_defense_advanced"].(map[string]interface{}); ok && isImport && data.BotDefenseAdvanced == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.BotDefenseAdvanced = &HTTPLoadBalancerBotDefenseAdvancedModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["caching_policy"].(map[string]interface{}); ok && isImport && data.CachingPolicy == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.CachingPolicy = &HTTPLoadBalancerCachingPolicyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["captcha_challenge"].(map[string]interface{}); ok && (isImport || data.CaptchaChallenge != nil) {
+		data.CaptchaChallenge = &HTTPLoadBalancerCaptchaChallengeModel{
+			CookieExpiry: func() types.Int64 {
+				if v, ok := blockData["cookie_expiry"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			CustomPage: func() types.String {
+				if v, ok := blockData["custom_page"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["client_side_defense"].(map[string]interface{}); ok && isImport && data.ClientSideDefense == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ClientSideDefense = &HTTPLoadBalancerClientSideDefenseModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["cookie_stickiness"].(map[string]interface{}); ok && (isImport || data.CookieStickiness != nil) {
+		data.CookieStickiness = &HTTPLoadBalancerCookieStickinessModel{
+			AddHttponly: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.CookieStickiness != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CookieStickiness.AddHttponly
+				}
+				// Import case: read from API
+				if _, ok := blockData["add_httponly"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			AddSecure: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.CookieStickiness != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CookieStickiness.AddSecure
+				}
+				// Import case: read from API
+				if _, ok := blockData["add_secure"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			IgnoreHttponly: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.CookieStickiness != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CookieStickiness.IgnoreHttponly
+				}
+				// Import case: read from API
+				if _, ok := blockData["ignore_httponly"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			IgnoreSamesite: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.CookieStickiness != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CookieStickiness.IgnoreSamesite
+				}
+				// Import case: read from API
+				if _, ok := blockData["ignore_samesite"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			IgnoreSecure: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.CookieStickiness != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CookieStickiness.IgnoreSecure
+				}
+				// Import case: read from API
+				if _, ok := blockData["ignore_secure"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Path: func() types.String {
+				if v, ok := blockData["path"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			SamesiteLax: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.CookieStickiness != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CookieStickiness.SamesiteLax
+				}
+				// Import case: read from API
+				if _, ok := blockData["samesite_lax"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			SamesiteNone: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.CookieStickiness != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CookieStickiness.SamesiteNone
+				}
+				// Import case: read from API
+				if _, ok := blockData["samesite_none"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			SamesiteStrict: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.CookieStickiness != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CookieStickiness.SamesiteStrict
+				}
+				// Import case: read from API
+				if _, ok := blockData["samesite_strict"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			Ttl: func() types.Int64 {
+				if v, ok := blockData["ttl"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["cors_policy"].(map[string]interface{}); ok && (isImport || data.CorsPolicy != nil) {
+		data.CorsPolicy = &HTTPLoadBalancerCorsPolicyModel{
+			AllowCredentials: func() types.Bool {
+				if !isImport && data.CorsPolicy != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.CorsPolicy.AllowCredentials
+				}
+				// Import case: read from API
+				if v, ok := blockData["allow_credentials"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			AllowHeaders: func() types.String {
+				if v, ok := blockData["allow_headers"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			AllowMethods: func() types.String {
+				if v, ok := blockData["allow_methods"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			AllowOrigin: func() types.List {
+				if v, ok := blockData["allow_origin"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+			AllowOriginRegex: func() types.List {
+				if v, ok := blockData["allow_origin_regex"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+			Disabled: func() types.Bool {
+				if !isImport && data.CorsPolicy != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.CorsPolicy.Disabled
+				}
+				// Import case: read from API
+				if v, ok := blockData["disabled"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			ExposeHeaders: func() types.String {
+				if v, ok := blockData["expose_headers"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			MaximumAge: func() types.Int64 {
+				if v, ok := blockData["maximum_age"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["csrf_policy"].(map[string]interface{}); ok && isImport && data.CsrfPolicy == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.CsrfPolicy = &HTTPLoadBalancerCsrfPolicyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["data_guard_rules"].([]interface{}); ok && len(listData) > 0 {
+		var data_guard_rulesList []HTTPLoadBalancerDataGuardRulesModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				data_guard_rulesList = append(data_guard_rulesList, HTTPLoadBalancerDataGuardRulesModel{
+					AnyDomain: func() *HTTPLoadBalancerEmptyModel {
+						if !isImport && len(data.DataGuardRules) > listIdx && data.DataGuardRules[listIdx].AnyDomain != nil {
+							return &HTTPLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					ApplyDataGuard: func() *HTTPLoadBalancerEmptyModel {
+						if !isImport && len(data.DataGuardRules) > listIdx && data.DataGuardRules[listIdx].ApplyDataGuard != nil {
+							return &HTTPLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					ExactValue: func() types.String {
+						if v, ok := itemMap["exact_value"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Metadata: func() *HTTPLoadBalancerDataGuardRulesMetadataModel {
+						if nestedMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
+							return &HTTPLoadBalancerDataGuardRulesMetadataModel{
+								DescriptionSpec: func() types.String {
+									if v, ok := nestedMap["description"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Name: func() types.String {
+									if v, ok := nestedMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					Path: func() *HTTPLoadBalancerDataGuardRulesPathModel {
+						if nestedMap, ok := itemMap["path"].(map[string]interface{}); ok {
+							return &HTTPLoadBalancerDataGuardRulesPathModel{
+								Path: func() types.String {
+									if v, ok := nestedMap["path"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Prefix: func() types.String {
+									if v, ok := nestedMap["prefix"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Regex: func() types.String {
+									if v, ok := nestedMap["regex"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					SkipDataGuard: func() *HTTPLoadBalancerEmptyModel {
+						if !isImport && len(data.DataGuardRules) > listIdx && data.DataGuardRules[listIdx].SkipDataGuard != nil {
+							return &HTTPLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					SuffixValue: func() types.String {
+						if v, ok := itemMap["suffix_value"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.DataGuardRules = data_guard_rulesList
+	}
+	if listData, ok := apiResource.Spec["ddos_mitigation_rules"].([]interface{}); ok && len(listData) > 0 {
+		var ddos_mitigation_rulesList []HTTPLoadBalancerDdosMitigationRulesModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				ddos_mitigation_rulesList = append(ddos_mitigation_rulesList, HTTPLoadBalancerDdosMitigationRulesModel{
+					Block: func() *HTTPLoadBalancerEmptyModel {
+						if !isImport && len(data.DdosMitigationRules) > listIdx && data.DdosMitigationRules[listIdx].Block != nil {
+							return &HTTPLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					DdosClientSource: func() *HTTPLoadBalancerDdosMitigationRulesDdosClientSourceModel {
+						if nestedMap, ok := itemMap["ddos_client_source"].(map[string]interface{}); ok {
+							return &HTTPLoadBalancerDdosMitigationRulesDdosClientSourceModel{
+								CountryList: func() types.List {
+									if v, ok := nestedMap["country_list"].([]interface{}); ok && len(v) > 0 {
+										var items []string
+										for _, item := range v {
+											if s, ok := item.(string); ok {
+												items = append(items, s)
+											}
+										}
+										listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+										return listVal
+									}
+									return types.ListNull(types.StringType)
+								}(),
+							}
+						}
+						return nil
+					}(),
+					ExpirationTimestamp: func() types.String {
+						if v, ok := itemMap["expiration_timestamp"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					IPPrefixList: func() *HTTPLoadBalancerDdosMitigationRulesIPPrefixListModel {
+						if nestedMap, ok := itemMap["ip_prefix_list"].(map[string]interface{}); ok {
+							return &HTTPLoadBalancerDdosMitigationRulesIPPrefixListModel{
+								InvertMatch: func() types.Bool {
+									if v, ok := nestedMap["invert_match"].(bool); ok {
+										return types.BoolValue(v)
+									}
+									return types.BoolNull()
+								}(),
+								IPPrefixes: func() types.List {
+									if v, ok := nestedMap["ip_prefixes"].([]interface{}); ok && len(v) > 0 {
+										var items []string
+										for _, item := range v {
+											if s, ok := item.(string); ok {
+												items = append(items, s)
+											}
+										}
+										listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+										return listVal
+									}
+									return types.ListNull(types.StringType)
+								}(),
+							}
+						}
+						return nil
+					}(),
+					Metadata: func() *HTTPLoadBalancerDdosMitigationRulesMetadataModel {
+						if nestedMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
+							return &HTTPLoadBalancerDdosMitigationRulesMetadataModel{
+								DescriptionSpec: func() types.String {
+									if v, ok := nestedMap["description"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Name: func() types.String {
+									if v, ok := nestedMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+				})
+			}
+		}
+		data.DdosMitigationRules = ddos_mitigation_rulesList
+	}
+	if blockData, ok := apiResource.Spec["default_pool"].(map[string]interface{}); ok && (isImport || data.DefaultPool != nil) {
+		data.DefaultPool = &HTTPLoadBalancerDefaultPoolModel{
+			AdvancedOptions: func() *HTTPLoadBalancerDefaultPoolAdvancedOptionsModel {
+				if !isImport && data.DefaultPool != nil && data.DefaultPool.AdvancedOptions != nil {
+					// Normal Read: preserve existing state value
+					return data.DefaultPool.AdvancedOptions
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["advanced_options"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerDefaultPoolAdvancedOptionsModel{
+						ConnectionTimeout: func() types.Int64 {
+							if v, ok := nestedBlockData["connection_timeout"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						HTTPIdleTimeout: func() types.Int64 {
+							if v, ok := nestedBlockData["http_idle_timeout"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						PanicThreshold: func() types.Int64 {
+							if v, ok := nestedBlockData["panic_threshold"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			AutomaticPort: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.DefaultPool != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.DefaultPool.AutomaticPort
+				}
+				// Import case: read from API
+				if _, ok := blockData["automatic_port"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			EndpointSelection: func() types.String {
+				if v, ok := blockData["endpoint_selection"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			HealthCheckPort: func() types.Int64 {
+				if v, ok := blockData["health_check_port"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			Healthcheck: func() []HTTPLoadBalancerDefaultPoolHealthcheckModel {
+				if listData, ok := blockData["healthcheck"].([]interface{}); ok && len(listData) > 0 {
+					var result []HTTPLoadBalancerDefaultPoolHealthcheckModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, HTTPLoadBalancerDefaultPoolHealthcheckModel{
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := itemMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := itemMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			LbPort: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.DefaultPool != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.DefaultPool.LbPort
+				}
+				// Import case: read from API
+				if _, ok := blockData["lb_port"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			LoadBalancerAlgorithm: func() types.String {
+				if v, ok := blockData["loadbalancer_algorithm"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			NoTLS: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.DefaultPool != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.DefaultPool.NoTLS
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_tls"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			OriginServers: func() []HTTPLoadBalancerDefaultPoolOriginServersModel {
+				if listData, ok := blockData["origin_servers"].([]interface{}); ok && len(listData) > 0 {
+					var result []HTTPLoadBalancerDefaultPoolOriginServersModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, HTTPLoadBalancerDefaultPoolOriginServersModel{
+								CbipService: func() *HTTPLoadBalancerDefaultPoolOriginServersCbipServiceModel {
+									if deepMap, ok := itemMap["cbip_service"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerDefaultPoolOriginServersCbipServiceModel{
+											ServiceName: func() types.String {
+												if v, ok := deepMap["service_name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								ConsulService: func() *HTTPLoadBalancerDefaultPoolOriginServersConsulServiceModel {
+									if deepMap, ok := itemMap["consul_service"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerDefaultPoolOriginServersConsulServiceModel{
+											InsideNetwork: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["inside_network"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+											OutsideNetwork: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["outside_network"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+											ServiceName: func() types.String {
+												if v, ok := deepMap["service_name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								CustomEndpointObject: func() *HTTPLoadBalancerDefaultPoolOriginServersCustomEndpointObjectModel {
+									if _, ok := itemMap["custom_endpoint_object"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerDefaultPoolOriginServersCustomEndpointObjectModel{
+										}
+									}
+									return nil
+								}(),
+								K8SService: func() *HTTPLoadBalancerDefaultPoolOriginServersK8SServiceModel {
+									if deepMap, ok := itemMap["k8s_service"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerDefaultPoolOriginServersK8SServiceModel{
+											InsideNetwork: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["inside_network"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+											OutsideNetwork: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["outside_network"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+											Protocol: func() types.String {
+												if v, ok := deepMap["protocol"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											ServiceName: func() types.String {
+												if v, ok := deepMap["service_name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Vk8sNetworks: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["vk8s_networks"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+										}
+									}
+									return nil
+								}(),
+								Labels: func() *HTTPLoadBalancerEmptyModel {
+									if _, ok := itemMap["labels"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								PrivateIP: func() *HTTPLoadBalancerDefaultPoolOriginServersPrivateIPModel {
+									if deepMap, ok := itemMap["private_ip"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerDefaultPoolOriginServersPrivateIPModel{
+											InsideNetwork: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["inside_network"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+											IP: func() types.String {
+												if v, ok := deepMap["ip"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											OutsideNetwork: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["outside_network"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+										}
+									}
+									return nil
+								}(),
+								PrivateName: func() *HTTPLoadBalancerDefaultPoolOriginServersPrivateNameModel {
+									if deepMap, ok := itemMap["private_name"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerDefaultPoolOriginServersPrivateNameModel{
+											DNSName: func() types.String {
+												if v, ok := deepMap["dns_name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											InsideNetwork: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["inside_network"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+											OutsideNetwork: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["outside_network"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+											RefreshInterval: func() types.Int64 {
+												if v, ok := deepMap["refresh_interval"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								PublicIP: func() *HTTPLoadBalancerDefaultPoolOriginServersPublicIPModel {
+									if deepMap, ok := itemMap["public_ip"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerDefaultPoolOriginServersPublicIPModel{
+											IP: func() types.String {
+												if v, ok := deepMap["ip"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								PublicName: func() *HTTPLoadBalancerDefaultPoolOriginServersPublicNameModel {
+									if deepMap, ok := itemMap["public_name"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerDefaultPoolOriginServersPublicNameModel{
+											DNSName: func() types.String {
+												if v, ok := deepMap["dns_name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											RefreshInterval: func() types.Int64 {
+												if v, ok := deepMap["refresh_interval"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								VnPrivateIP: func() *HTTPLoadBalancerDefaultPoolOriginServersVnPrivateIPModel {
+									if deepMap, ok := itemMap["vn_private_ip"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerDefaultPoolOriginServersVnPrivateIPModel{
+											IP: func() types.String {
+												if v, ok := deepMap["ip"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								VnPrivateName: func() *HTTPLoadBalancerDefaultPoolOriginServersVnPrivateNameModel {
+									if deepMap, ok := itemMap["vn_private_name"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerDefaultPoolOriginServersVnPrivateNameModel{
+											DNSName: func() types.String {
+												if v, ok := deepMap["dns_name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			Port: func() types.Int64 {
+				if v, ok := blockData["port"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			SameAsEndpointPort: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.DefaultPool != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.DefaultPool.SameAsEndpointPort
+				}
+				// Import case: read from API
+				if _, ok := blockData["same_as_endpoint_port"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			UpstreamConnPoolReuseType: func() *HTTPLoadBalancerDefaultPoolUpstreamConnPoolReuseTypeModel {
+				if !isImport && data.DefaultPool != nil && data.DefaultPool.UpstreamConnPoolReuseType != nil {
+					// Normal Read: preserve existing state value
+					return data.DefaultPool.UpstreamConnPoolReuseType
+				}
+				// Import case: read from API
+				if _, ok := blockData["upstream_conn_pool_reuse_type"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerDefaultPoolUpstreamConnPoolReuseTypeModel{
+					}
+				}
+				return nil
+			}(),
+			UseTLS: func() *HTTPLoadBalancerDefaultPoolUseTLSModel {
+				if !isImport && data.DefaultPool != nil && data.DefaultPool.UseTLS != nil {
+					// Normal Read: preserve existing state value
+					return data.DefaultPool.UseTLS
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["use_tls"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerDefaultPoolUseTLSModel{
+						MaxSessionKeys: func() types.Int64 {
+							if v, ok := nestedBlockData["max_session_keys"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						Sni: func() types.String {
+							if v, ok := nestedBlockData["sni"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			ViewInternal: func() *HTTPLoadBalancerDefaultPoolViewInternalModel {
+				if !isImport && data.DefaultPool != nil && data.DefaultPool.ViewInternal != nil {
+					// Normal Read: preserve existing state value
+					return data.DefaultPool.ViewInternal
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["view_internal"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerDefaultPoolViewInternalModel{
+						Name: func() types.String {
+							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Namespace: func() types.String {
+							if v, ok := nestedBlockData["namespace"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Tenant: func() types.String {
+							if v, ok := nestedBlockData["tenant"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["default_pool_list"].(map[string]interface{}); ok && (isImport || data.DefaultPoolList != nil) {
+		data.DefaultPoolList = &HTTPLoadBalancerDefaultPoolListModel{
+			Pools: func() []HTTPLoadBalancerDefaultPoolListPoolsModel {
+				if listData, ok := blockData["pools"].([]interface{}); ok && len(listData) > 0 {
+					var result []HTTPLoadBalancerDefaultPoolListPoolsModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, HTTPLoadBalancerDefaultPoolListPoolsModel{
+								Cluster: func() *HTTPLoadBalancerDefaultPoolListPoolsClusterModel {
+									if deepMap, ok := itemMap["cluster"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerDefaultPoolListPoolsClusterModel{
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Namespace: func() types.String {
+												if v, ok := deepMap["namespace"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Tenant: func() types.String {
+												if v, ok := deepMap["tenant"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								EndpointSubsets: func() *HTTPLoadBalancerEmptyModel {
+									if _, ok := itemMap["endpoint_subsets"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								Pool: func() *HTTPLoadBalancerDefaultPoolListPoolsPoolModel {
+									if deepMap, ok := itemMap["pool"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerDefaultPoolListPoolsPoolModel{
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Namespace: func() types.String {
+												if v, ok := deepMap["namespace"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Tenant: func() types.String {
+												if v, ok := deepMap["tenant"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								Priority: func() types.Int64 {
+									if v, ok := itemMap["priority"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								Weight: func() types.Int64 {
+									if v, ok := itemMap["weight"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if listData, ok := apiResource.Spec["default_route_pools"].([]interface{}); ok && len(listData) > 0 {
+		var default_route_poolsList []HTTPLoadBalancerDefaultRoutePoolsModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				default_route_poolsList = append(default_route_poolsList, HTTPLoadBalancerDefaultRoutePoolsModel{
+					Cluster: func() *HTTPLoadBalancerDefaultRoutePoolsClusterModel {
+						if nestedMap, ok := itemMap["cluster"].(map[string]interface{}); ok {
+							return &HTTPLoadBalancerDefaultRoutePoolsClusterModel{
+								Name: func() types.String {
+									if v, ok := nestedMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := nestedMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := nestedMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					EndpointSubsets: func() *HTTPLoadBalancerEmptyModel {
+						if !isImport && len(data.DefaultRoutePools) > listIdx && data.DefaultRoutePools[listIdx].EndpointSubsets != nil {
+							return &HTTPLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					Pool: func() *HTTPLoadBalancerDefaultRoutePoolsPoolModel {
+						if nestedMap, ok := itemMap["pool"].(map[string]interface{}); ok {
+							return &HTTPLoadBalancerDefaultRoutePoolsPoolModel{
+								Name: func() types.String {
+									if v, ok := nestedMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := nestedMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := nestedMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					Priority: func() types.Int64 {
+						if v, ok := itemMap["priority"].(float64); ok && v != 0 {
+							return types.Int64Value(int64(v))
+						}
+						return types.Int64Null()
+					}(),
+					Weight: func() types.Int64 {
+						if v, ok := itemMap["weight"].(float64); ok && v != 0 {
+							return types.Int64Value(int64(v))
+						}
+						return types.Int64Null()
+					}(),
+				})
+			}
+		}
+		data.DefaultRoutePools = default_route_poolsList
+	}
+	if _, ok := apiResource.Spec["default_sensitive_data_policy"].(map[string]interface{}); ok && isImport && data.DefaultSensitiveDataPolicy == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DefaultSensitiveDataPolicy = &HTTPLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["disable_api_definition"].(map[string]interface{}); ok && isImport && data.DisableAPIDefinition == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableAPIDefinition = &HTTPLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["disable_api_discovery"].(map[string]interface{}); ok && isImport && data.DisableAPIDiscovery == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableAPIDiscovery = &HTTPLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["disable_api_testing"].(map[string]interface{}); ok && isImport && data.DisableAPITesting == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableAPITesting = &HTTPLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["disable_bot_defense"].(map[string]interface{}); ok && isImport && data.DisableBotDefense == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableBotDefense = &HTTPLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["disable_caching"].(map[string]interface{}); ok && isImport && data.DisableCaching == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableCaching = &HTTPLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["disable_client_side_defense"].(map[string]interface{}); ok && isImport && data.DisableClientSideDefense == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableClientSideDefense = &HTTPLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["disable_ip_reputation"].(map[string]interface{}); ok && isImport && data.DisableIPReputation == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableIPReputation = &HTTPLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["disable_malicious_user_detection"].(map[string]interface{}); ok && isImport && data.DisableMaliciousUserDetection == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableMaliciousUserDetection = &HTTPLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["disable_malware_protection"].(map[string]interface{}); ok && isImport && data.DisableMalwareProtection == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableMalwareProtection = &HTTPLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["disable_rate_limit"].(map[string]interface{}); ok && isImport && data.DisableRateLimit == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableRateLimit = &HTTPLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["disable_threat_mesh"].(map[string]interface{}); ok && isImport && data.DisableThreatMesh == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableThreatMesh = &HTTPLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["disable_trust_client_ip_headers"].(map[string]interface{}); ok && isImport && data.DisableTrustClientIPHeaders == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableTrustClientIPHeaders = &HTTPLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["disable_waf"].(map[string]interface{}); ok && isImport && data.DisableWAF == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableWAF = &HTTPLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["do_not_advertise"].(map[string]interface{}); ok && isImport && data.DoNotAdvertise == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DoNotAdvertise = &HTTPLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["domains"].([]interface{}); ok && len(v) > 0 {
+		var domainsList []string
+		for _, item := range v {
+			if s, ok := item.(string); ok {
+				domainsList = append(domainsList, s)
+			}
+		}
+		listVal, diags := types.ListValueFrom(ctx, types.StringType, domainsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Domains = listVal
+		}
+	} else {
+		data.Domains = types.ListNull(types.StringType)
+	}
+	if _, ok := apiResource.Spec["enable_api_discovery"].(map[string]interface{}); ok && isImport && data.EnableAPIDiscovery == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.EnableAPIDiscovery = &HTTPLoadBalancerEnableAPIDiscoveryModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["enable_challenge"].(map[string]interface{}); ok && isImport && data.EnableChallenge == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.EnableChallenge = &HTTPLoadBalancerEnableChallengeModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["enable_ip_reputation"].(map[string]interface{}); ok && (isImport || data.EnableIPReputation != nil) {
+		data.EnableIPReputation = &HTTPLoadBalancerEnableIPReputationModel{
+			IPThreatCategories: func() types.List {
+				if v, ok := blockData["ip_threat_categories"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["enable_malicious_user_detection"].(map[string]interface{}); ok && isImport && data.EnableMaliciousUserDetection == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.EnableMaliciousUserDetection = &HTTPLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["enable_threat_mesh"].(map[string]interface{}); ok && isImport && data.EnableThreatMesh == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.EnableThreatMesh = &HTTPLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["enable_trust_client_ip_headers"].(map[string]interface{}); ok && (isImport || data.EnableTrustClientIPHeaders != nil) {
+		data.EnableTrustClientIPHeaders = &HTTPLoadBalancerEnableTrustClientIPHeadersModel{
+			ClientIPHeaders: func() types.List {
+				if v, ok := blockData["client_ip_headers"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
+	}
+	if listData, ok := apiResource.Spec["graphql_rules"].([]interface{}); ok && len(listData) > 0 {
+		var graphql_rulesList []HTTPLoadBalancerGraphqlRulesModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				graphql_rulesList = append(graphql_rulesList, HTTPLoadBalancerGraphqlRulesModel{
+					AnyDomain: func() *HTTPLoadBalancerEmptyModel {
+						if !isImport && len(data.GraphqlRules) > listIdx && data.GraphqlRules[listIdx].AnyDomain != nil {
+							return &HTTPLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					ExactPath: func() types.String {
+						if v, ok := itemMap["exact_path"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					ExactValue: func() types.String {
+						if v, ok := itemMap["exact_value"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					GraphqlSettings: func() *HTTPLoadBalancerGraphqlRulesGraphqlSettingsModel {
+						if nestedMap, ok := itemMap["graphql_settings"].(map[string]interface{}); ok {
+							return &HTTPLoadBalancerGraphqlRulesGraphqlSettingsModel{
+								DisableIntrospection: func() *HTTPLoadBalancerEmptyModel {
+									if !isImport && len(data.GraphqlRules) > listIdx && data.GraphqlRules[listIdx].GraphqlSettings != nil && data.GraphqlRules[listIdx].GraphqlSettings.DisableIntrospection != nil {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								EnableIntrospection: func() *HTTPLoadBalancerEmptyModel {
+									if !isImport && len(data.GraphqlRules) > listIdx && data.GraphqlRules[listIdx].GraphqlSettings != nil && data.GraphqlRules[listIdx].GraphqlSettings.EnableIntrospection != nil {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								MaxBatchedQueries: func() types.Int64 {
+									if v, ok := nestedMap["max_batched_queries"].(float64); ok && v != 0 {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								MaxDepth: func() types.Int64 {
+									if v, ok := nestedMap["max_depth"].(float64); ok && v != 0 {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								MaxTotalLength: func() types.Int64 {
+									if v, ok := nestedMap["max_total_length"].(float64); ok && v != 0 {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					Metadata: func() *HTTPLoadBalancerGraphqlRulesMetadataModel {
+						if nestedMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
+							return &HTTPLoadBalancerGraphqlRulesMetadataModel{
+								DescriptionSpec: func() types.String {
+									if v, ok := nestedMap["description"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Name: func() types.String {
+									if v, ok := nestedMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					MethodGet: func() *HTTPLoadBalancerEmptyModel {
+						if !isImport && len(data.GraphqlRules) > listIdx && data.GraphqlRules[listIdx].MethodGet != nil {
+							return &HTTPLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					MethodPost: func() *HTTPLoadBalancerEmptyModel {
+						if !isImport && len(data.GraphqlRules) > listIdx && data.GraphqlRules[listIdx].MethodPost != nil {
+							return &HTTPLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					SuffixValue: func() types.String {
+						if v, ok := itemMap["suffix_value"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.GraphqlRules = graphql_rulesList
+	}
+	if blockData, ok := apiResource.Spec["http"].(map[string]interface{}); ok && (isImport || data.HTTP != nil) {
+		data.HTTP = &HTTPLoadBalancerHTTPModel{
+			DNSVolterraManaged: func() types.Bool {
+				if !isImport && data.HTTP != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.HTTP.DNSVolterraManaged
+				}
+				// Import case: read from API
+				if v, ok := blockData["dns_volterra_managed"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			Port: func() types.Int64 {
+				if v, ok := blockData["port"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			PortRanges: func() types.String {
+				if v, ok := blockData["port_ranges"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["https"].(map[string]interface{}); ok && (isImport || data.HTTPS != nil) {
+		data.HTTPS = &HTTPLoadBalancerHTTPSModel{
+			AddHsts: func() types.Bool {
+				if !isImport && data.HTTPS != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.HTTPS.AddHsts
+				}
+				// Import case: read from API
+				if v, ok := blockData["add_hsts"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			AppendServerName: func() types.String {
+				if v, ok := blockData["append_server_name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			CoalescingOptions: func() *HTTPLoadBalancerHTTPSCoalescingOptionsModel {
+				if !isImport && data.HTTPS != nil && data.HTTPS.CoalescingOptions != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPS.CoalescingOptions
+				}
+				// Import case: read from API
+				if _, ok := blockData["coalescing_options"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerHTTPSCoalescingOptionsModel{
+					}
+				}
+				return nil
+			}(),
+			ConnectionIdleTimeout: func() types.Int64 {
+				if v, ok := blockData["connection_idle_timeout"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			DefaultHeader: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.HTTPS != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.HTTPS.DefaultHeader
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_header"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			DefaultLoadBalancer: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.HTTPS != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.HTTPS.DefaultLoadBalancer
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_loadbalancer"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			DisablePathNormalize: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.HTTPS != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.HTTPS.DisablePathNormalize
+				}
+				// Import case: read from API
+				if _, ok := blockData["disable_path_normalize"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			EnablePathNormalize: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.HTTPS != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.HTTPS.EnablePathNormalize
+				}
+				// Import case: read from API
+				if _, ok := blockData["enable_path_normalize"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			HTTPProtocolOptions: func() *HTTPLoadBalancerHTTPSHTTPProtocolOptionsModel {
+				if !isImport && data.HTTPS != nil && data.HTTPS.HTTPProtocolOptions != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPS.HTTPProtocolOptions
+				}
+				// Import case: read from API
+				if _, ok := blockData["http_protocol_options"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerHTTPSHTTPProtocolOptionsModel{
+					}
+				}
+				return nil
+			}(),
+			HTTPRedirect: func() types.Bool {
+				if !isImport && data.HTTPS != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.HTTPS.HTTPRedirect
+				}
+				// Import case: read from API
+				if v, ok := blockData["http_redirect"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			NonDefaultLoadBalancer: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.HTTPS != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.HTTPS.NonDefaultLoadBalancer
+				}
+				// Import case: read from API
+				if _, ok := blockData["non_default_loadbalancer"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			PassThrough: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.HTTPS != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.HTTPS.PassThrough
+				}
+				// Import case: read from API
+				if _, ok := blockData["pass_through"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			Port: func() types.Int64 {
+				if v, ok := blockData["port"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			PortRanges: func() types.String {
+				if v, ok := blockData["port_ranges"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			ServerName: func() types.String {
+				if v, ok := blockData["server_name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			TLSCertParams: func() *HTTPLoadBalancerHTTPSTLSCertParamsModel {
+				if !isImport && data.HTTPS != nil && data.HTTPS.TLSCertParams != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPS.TLSCertParams
+				}
+				// Import case: read from API
+				if _, ok := blockData["tls_cert_params"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerHTTPSTLSCertParamsModel{
+					}
+				}
+				return nil
+			}(),
+			TLSParameters: func() *HTTPLoadBalancerHTTPSTLSParametersModel {
+				if !isImport && data.HTTPS != nil && data.HTTPS.TLSParameters != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPS.TLSParameters
+				}
+				// Import case: read from API
+				if _, ok := blockData["tls_parameters"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerHTTPSTLSParametersModel{
+					}
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["https_auto_cert"].(map[string]interface{}); ok && (isImport || data.HTTPSAutoCert != nil) {
+		data.HTTPSAutoCert = &HTTPLoadBalancerHTTPSAutoCertModel{
+			AddHsts: func() types.Bool {
+				if !isImport && data.HTTPSAutoCert != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.HTTPSAutoCert.AddHsts
+				}
+				// Import case: read from API
+				if v, ok := blockData["add_hsts"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			AppendServerName: func() types.String {
+				if v, ok := blockData["append_server_name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			CoalescingOptions: func() *HTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModel {
+				if !isImport && data.HTTPSAutoCert != nil && data.HTTPSAutoCert.CoalescingOptions != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPSAutoCert.CoalescingOptions
+				}
+				// Import case: read from API
+				if _, ok := blockData["coalescing_options"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModel{
+					}
+				}
+				return nil
+			}(),
+			ConnectionIdleTimeout: func() types.Int64 {
+				if v, ok := blockData["connection_idle_timeout"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			DefaultHeader: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.HTTPSAutoCert != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.HTTPSAutoCert.DefaultHeader
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_header"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			DefaultLoadBalancer: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.HTTPSAutoCert != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.HTTPSAutoCert.DefaultLoadBalancer
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_loadbalancer"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			DisablePathNormalize: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.HTTPSAutoCert != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.HTTPSAutoCert.DisablePathNormalize
+				}
+				// Import case: read from API
+				if _, ok := blockData["disable_path_normalize"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			EnablePathNormalize: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.HTTPSAutoCert != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.HTTPSAutoCert.EnablePathNormalize
+				}
+				// Import case: read from API
+				if _, ok := blockData["enable_path_normalize"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			HTTPProtocolOptions: func() *HTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModel {
+				if !isImport && data.HTTPSAutoCert != nil && data.HTTPSAutoCert.HTTPProtocolOptions != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPSAutoCert.HTTPProtocolOptions
+				}
+				// Import case: read from API
+				if _, ok := blockData["http_protocol_options"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModel{
+					}
+				}
+				return nil
+			}(),
+			HTTPRedirect: func() types.Bool {
+				if !isImport && data.HTTPSAutoCert != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.HTTPSAutoCert.HTTPRedirect
+				}
+				// Import case: read from API
+				if v, ok := blockData["http_redirect"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			NoMtls: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.HTTPSAutoCert != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.HTTPSAutoCert.NoMtls
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_mtls"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			NonDefaultLoadBalancer: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.HTTPSAutoCert != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.HTTPSAutoCert.NonDefaultLoadBalancer
+				}
+				// Import case: read from API
+				if _, ok := blockData["non_default_loadbalancer"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			PassThrough: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.HTTPSAutoCert != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.HTTPSAutoCert.PassThrough
+				}
+				// Import case: read from API
+				if _, ok := blockData["pass_through"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			Port: func() types.Int64 {
+				if v, ok := blockData["port"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			PortRanges: func() types.String {
+				if v, ok := blockData["port_ranges"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			ServerName: func() types.String {
+				if v, ok := blockData["server_name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			TLSConfig: func() *HTTPLoadBalancerHTTPSAutoCertTLSConfigModel {
+				if !isImport && data.HTTPSAutoCert != nil && data.HTTPSAutoCert.TLSConfig != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPSAutoCert.TLSConfig
+				}
+				// Import case: read from API
+				if _, ok := blockData["tls_config"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerHTTPSAutoCertTLSConfigModel{
+					}
+				}
+				return nil
+			}(),
+			UseMtls: func() *HTTPLoadBalancerHTTPSAutoCertUseMtlsModel {
+				if !isImport && data.HTTPSAutoCert != nil && data.HTTPSAutoCert.UseMtls != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPSAutoCert.UseMtls
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["use_mtls"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerHTTPSAutoCertUseMtlsModel{
+						ClientCertificateOptional: func() types.Bool {
+							if v, ok := nestedBlockData["client_certificate_optional"].(bool); ok {
+								return types.BoolValue(v)
+							}
+							return types.BoolNull()
+						}(),
+						TrustedCaURL: func() types.String {
+							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["js_challenge"].(map[string]interface{}); ok && (isImport || data.JsChallenge != nil) {
+		data.JsChallenge = &HTTPLoadBalancerJsChallengeModel{
+			CookieExpiry: func() types.Int64 {
+				if v, ok := blockData["cookie_expiry"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			CustomPage: func() types.String {
+				if v, ok := blockData["custom_page"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			JsScriptDelay: func() types.Int64 {
+				if v, ok := blockData["js_script_delay"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["jwt_validation"].(map[string]interface{}); ok && isImport && data.JwtValidation == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.JwtValidation = &HTTPLoadBalancerJwtValidationModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["l7_ddos_action_block"].(map[string]interface{}); ok && isImport && data.L7DdosActionBlock == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.L7DdosActionBlock = &HTTPLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["l7_ddos_action_default"].(map[string]interface{}); ok && isImport && data.L7DdosActionDefault == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.L7DdosActionDefault = &HTTPLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["l7_ddos_action_js_challenge"].(map[string]interface{}); ok && (isImport || data.L7DdosActionJsChallenge != nil) {
+		data.L7DdosActionJsChallenge = &HTTPLoadBalancerL7DdosActionJsChallengeModel{
+			CookieExpiry: func() types.Int64 {
+				if v, ok := blockData["cookie_expiry"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			CustomPage: func() types.String {
+				if v, ok := blockData["custom_page"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			JsScriptDelay: func() types.Int64 {
+				if v, ok := blockData["js_script_delay"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["l7_ddos_protection"].(map[string]interface{}); ok && (isImport || data.L7DdosProtection != nil) {
+		data.L7DdosProtection = &HTTPLoadBalancerL7DdosProtectionModel{
+			ClientsideActionCaptchaChallenge: func() *HTTPLoadBalancerL7DdosProtectionClientsideActionCaptchaChallengeModel {
+				if !isImport && data.L7DdosProtection != nil && data.L7DdosProtection.ClientsideActionCaptchaChallenge != nil {
+					// Normal Read: preserve existing state value
+					return data.L7DdosProtection.ClientsideActionCaptchaChallenge
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["clientside_action_captcha_challenge"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerL7DdosProtectionClientsideActionCaptchaChallengeModel{
+						CookieExpiry: func() types.Int64 {
+							if v, ok := nestedBlockData["cookie_expiry"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						CustomPage: func() types.String {
+							if v, ok := nestedBlockData["custom_page"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			ClientsideActionJsChallenge: func() *HTTPLoadBalancerL7DdosProtectionClientsideActionJsChallengeModel {
+				if !isImport && data.L7DdosProtection != nil && data.L7DdosProtection.ClientsideActionJsChallenge != nil {
+					// Normal Read: preserve existing state value
+					return data.L7DdosProtection.ClientsideActionJsChallenge
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["clientside_action_js_challenge"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerL7DdosProtectionClientsideActionJsChallengeModel{
+						CookieExpiry: func() types.Int64 {
+							if v, ok := nestedBlockData["cookie_expiry"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						CustomPage: func() types.String {
+							if v, ok := nestedBlockData["custom_page"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						JsScriptDelay: func() types.Int64 {
+							if v, ok := nestedBlockData["js_script_delay"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			ClientsideActionNone: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.L7DdosProtection != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.L7DdosProtection.ClientsideActionNone
+				}
+				// Import case: read from API
+				if _, ok := blockData["clientside_action_none"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			DdosPolicyCustom: func() *HTTPLoadBalancerL7DdosProtectionDdosPolicyCustomModel {
+				if !isImport && data.L7DdosProtection != nil && data.L7DdosProtection.DdosPolicyCustom != nil {
+					// Normal Read: preserve existing state value
+					return data.L7DdosProtection.DdosPolicyCustom
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["ddos_policy_custom"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerL7DdosProtectionDdosPolicyCustomModel{
+						Name: func() types.String {
+							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Namespace: func() types.String {
+							if v, ok := nestedBlockData["namespace"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Tenant: func() types.String {
+							if v, ok := nestedBlockData["tenant"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			DdosPolicyNone: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.L7DdosProtection != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.L7DdosProtection.DdosPolicyNone
+				}
+				// Import case: read from API
+				if _, ok := blockData["ddos_policy_none"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			DefaultRpsThreshold: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.L7DdosProtection != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.L7DdosProtection.DefaultRpsThreshold
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_rps_threshold"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			MitigationBlock: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.L7DdosProtection != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.L7DdosProtection.MitigationBlock
+				}
+				// Import case: read from API
+				if _, ok := blockData["mitigation_block"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			MitigationCaptchaChallenge: func() *HTTPLoadBalancerL7DdosProtectionMitigationCaptchaChallengeModel {
+				if !isImport && data.L7DdosProtection != nil && data.L7DdosProtection.MitigationCaptchaChallenge != nil {
+					// Normal Read: preserve existing state value
+					return data.L7DdosProtection.MitigationCaptchaChallenge
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["mitigation_captcha_challenge"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerL7DdosProtectionMitigationCaptchaChallengeModel{
+						CookieExpiry: func() types.Int64 {
+							if v, ok := nestedBlockData["cookie_expiry"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						CustomPage: func() types.String {
+							if v, ok := nestedBlockData["custom_page"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			MitigationJsChallenge: func() *HTTPLoadBalancerL7DdosProtectionMitigationJsChallengeModel {
+				if !isImport && data.L7DdosProtection != nil && data.L7DdosProtection.MitigationJsChallenge != nil {
+					// Normal Read: preserve existing state value
+					return data.L7DdosProtection.MitigationJsChallenge
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["mitigation_js_challenge"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerL7DdosProtectionMitigationJsChallengeModel{
+						CookieExpiry: func() types.Int64 {
+							if v, ok := nestedBlockData["cookie_expiry"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						CustomPage: func() types.String {
+							if v, ok := nestedBlockData["custom_page"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						JsScriptDelay: func() types.Int64 {
+							if v, ok := nestedBlockData["js_script_delay"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			RpsThreshold: func() types.Int64 {
+				if v, ok := blockData["rps_threshold"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["least_active"].(map[string]interface{}); ok && isImport && data.LeastActive == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.LeastActive = &HTTPLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["malware_protection_settings"].(map[string]interface{}); ok && (isImport || data.MalwareProtectionSettings != nil) {
+		data.MalwareProtectionSettings = &HTTPLoadBalancerMalwareProtectionSettingsModel{
+			MalwareProtectionRules: func() []HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesModel {
+				if listData, ok := blockData["malware_protection_rules"].([]interface{}); ok && len(listData) > 0 {
+					var result []HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesModel{
+								Action: func() *HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesActionModel {
+									if deepMap, ok := itemMap["action"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesActionModel{
+											Block: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["block"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+											Report: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["report"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+										}
+									}
+									return nil
+								}(),
+								Domain: func() *HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesDomainModel {
+									if deepMap, ok := itemMap["domain"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesDomainModel{
+											AnyDomain: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["any_domain"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+										}
+									}
+									return nil
+								}(),
+								Metadata: func() *HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesMetadataModel {
+									if deepMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesMetadataModel{
+											DescriptionSpec: func() types.String {
+												if v, ok := deepMap["description"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								Path: func() *HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesPathModel {
+									if deepMap, ok := itemMap["path"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesPathModel{
+											Path: func() types.String {
+												if v, ok := deepMap["path"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Prefix: func() types.String {
+												if v, ok := deepMap["prefix"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Regex: func() types.String {
+												if v, ok := deepMap["regex"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["more_option"].(map[string]interface{}); ok && (isImport || data.MoreOption != nil) {
+		data.MoreOption = &HTTPLoadBalancerMoreOptionModel{
+			BufferPolicy: func() *HTTPLoadBalancerMoreOptionBufferPolicyModel {
+				if !isImport && data.MoreOption != nil && data.MoreOption.BufferPolicy != nil {
+					// Normal Read: preserve existing state value
+					return data.MoreOption.BufferPolicy
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["buffer_policy"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerMoreOptionBufferPolicyModel{
+						Disabled: func() types.Bool {
+							if v, ok := nestedBlockData["disabled"].(bool); ok {
+								return types.BoolValue(v)
+							}
+							return types.BoolNull()
+						}(),
+						MaxRequestBytes: func() types.Int64 {
+							if v, ok := nestedBlockData["max_request_bytes"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			CompressionParams: func() *HTTPLoadBalancerMoreOptionCompressionParamsModel {
+				if !isImport && data.MoreOption != nil && data.MoreOption.CompressionParams != nil {
+					// Normal Read: preserve existing state value
+					return data.MoreOption.CompressionParams
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["compression_params"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerMoreOptionCompressionParamsModel{
+						ContentLength: func() types.Int64 {
+							if v, ok := nestedBlockData["content_length"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						ContentType: func() types.List {
+							if v, ok := nestedBlockData["content_type"].([]interface{}); ok && len(v) > 0 {
+								var items []string
+								for _, item := range v {
+									if s, ok := item.(string); ok {
+										items = append(items, s)
+									}
+								}
+								listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+								return listVal
+							}
+							return types.ListNull(types.StringType)
+						}(),
+						DisableOnEtagHeader: func() types.Bool {
+							if v, ok := nestedBlockData["disable_on_etag_header"].(bool); ok {
+								return types.BoolValue(v)
+							}
+							return types.BoolNull()
+						}(),
+						RemoveAcceptEncodingHeader: func() types.Bool {
+							if v, ok := nestedBlockData["remove_accept_encoding_header"].(bool); ok {
+								return types.BoolValue(v)
+							}
+							return types.BoolNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			CustomErrors: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.MoreOption != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.MoreOption.CustomErrors
+				}
+				// Import case: read from API
+				if _, ok := blockData["custom_errors"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			DisableDefaultErrorPages: func() types.Bool {
+				if !isImport && data.MoreOption != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.MoreOption.DisableDefaultErrorPages
+				}
+				// Import case: read from API
+				if v, ok := blockData["disable_default_error_pages"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			DisablePathNormalize: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.MoreOption != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.MoreOption.DisablePathNormalize
+				}
+				// Import case: read from API
+				if _, ok := blockData["disable_path_normalize"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			EnablePathNormalize: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.MoreOption != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.MoreOption.EnablePathNormalize
+				}
+				// Import case: read from API
+				if _, ok := blockData["enable_path_normalize"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			IdleTimeout: func() types.Int64 {
+				if v, ok := blockData["idle_timeout"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			MaxRequestHeaderSize: func() types.Int64 {
+				if v, ok := blockData["max_request_header_size"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			RequestCookiesToAdd: func() []HTTPLoadBalancerMoreOptionRequestCookiesToAddModel {
+				if listData, ok := blockData["request_cookies_to_add"].([]interface{}); ok && len(listData) > 0 {
+					var result []HTTPLoadBalancerMoreOptionRequestCookiesToAddModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, HTTPLoadBalancerMoreOptionRequestCookiesToAddModel{
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Overwrite: func() types.Bool {
+									if v, ok := itemMap["overwrite"].(bool); ok {
+										return types.BoolValue(v)
+									}
+									return types.BoolNull()
+								}(),
+								SecretValue: func() *HTTPLoadBalancerMoreOptionRequestCookiesToAddSecretValueModel {
+									if _, ok := itemMap["secret_value"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerMoreOptionRequestCookiesToAddSecretValueModel{
+										}
+									}
+									return nil
+								}(),
+								Value: func() types.String {
+									if v, ok := itemMap["value"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			RequestCookiesToRemove: func() types.List {
+				if v, ok := blockData["request_cookies_to_remove"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+			RequestHeadersToAdd: func() []HTTPLoadBalancerMoreOptionRequestHeadersToAddModel {
+				if listData, ok := blockData["request_headers_to_add"].([]interface{}); ok && len(listData) > 0 {
+					var result []HTTPLoadBalancerMoreOptionRequestHeadersToAddModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, HTTPLoadBalancerMoreOptionRequestHeadersToAddModel{
+								Append: func() types.Bool {
+									if v, ok := itemMap["append"].(bool); ok {
+										return types.BoolValue(v)
+									}
+									return types.BoolNull()
+								}(),
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								SecretValue: func() *HTTPLoadBalancerMoreOptionRequestHeadersToAddSecretValueModel {
+									if _, ok := itemMap["secret_value"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerMoreOptionRequestHeadersToAddSecretValueModel{
+										}
+									}
+									return nil
+								}(),
+								Value: func() types.String {
+									if v, ok := itemMap["value"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			RequestHeadersToRemove: func() types.List {
+				if v, ok := blockData["request_headers_to_remove"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+			ResponseCookiesToAdd: func() []HTTPLoadBalancerMoreOptionResponseCookiesToAddModel {
+				if listData, ok := blockData["response_cookies_to_add"].([]interface{}); ok && len(listData) > 0 {
+					var result []HTTPLoadBalancerMoreOptionResponseCookiesToAddModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, HTTPLoadBalancerMoreOptionResponseCookiesToAddModel{
+								AddDomain: func() types.String {
+									if v, ok := itemMap["add_domain"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								AddExpiry: func() types.String {
+									if v, ok := itemMap["add_expiry"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								AddHttponly: func() *HTTPLoadBalancerEmptyModel {
+									if _, ok := itemMap["add_httponly"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								AddPartitioned: func() *HTTPLoadBalancerEmptyModel {
+									if _, ok := itemMap["add_partitioned"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								AddPath: func() types.String {
+									if v, ok := itemMap["add_path"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								AddSecure: func() *HTTPLoadBalancerEmptyModel {
+									if _, ok := itemMap["add_secure"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								IgnoreDomain: func() *HTTPLoadBalancerEmptyModel {
+									if _, ok := itemMap["ignore_domain"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								IgnoreExpiry: func() *HTTPLoadBalancerEmptyModel {
+									if _, ok := itemMap["ignore_expiry"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								IgnoreHttponly: func() *HTTPLoadBalancerEmptyModel {
+									if _, ok := itemMap["ignore_httponly"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								IgnoreMaxAge: func() *HTTPLoadBalancerEmptyModel {
+									if _, ok := itemMap["ignore_max_age"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								IgnorePartitioned: func() *HTTPLoadBalancerEmptyModel {
+									if _, ok := itemMap["ignore_partitioned"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								IgnorePath: func() *HTTPLoadBalancerEmptyModel {
+									if _, ok := itemMap["ignore_path"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								IgnoreSamesite: func() *HTTPLoadBalancerEmptyModel {
+									if _, ok := itemMap["ignore_samesite"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								IgnoreSecure: func() *HTTPLoadBalancerEmptyModel {
+									if _, ok := itemMap["ignore_secure"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								IgnoreValue: func() *HTTPLoadBalancerEmptyModel {
+									if _, ok := itemMap["ignore_value"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								MaxAgeValue: func() types.Int64 {
+									if v, ok := itemMap["max_age_value"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Overwrite: func() types.Bool {
+									if v, ok := itemMap["overwrite"].(bool); ok {
+										return types.BoolValue(v)
+									}
+									return types.BoolNull()
+								}(),
+								SamesiteLax: func() *HTTPLoadBalancerEmptyModel {
+									if _, ok := itemMap["samesite_lax"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								SamesiteNone: func() *HTTPLoadBalancerEmptyModel {
+									if _, ok := itemMap["samesite_none"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								SamesiteStrict: func() *HTTPLoadBalancerEmptyModel {
+									if _, ok := itemMap["samesite_strict"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								SecretValue: func() *HTTPLoadBalancerMoreOptionResponseCookiesToAddSecretValueModel {
+									if _, ok := itemMap["secret_value"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerMoreOptionResponseCookiesToAddSecretValueModel{
+										}
+									}
+									return nil
+								}(),
+								Value: func() types.String {
+									if v, ok := itemMap["value"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			ResponseCookiesToRemove: func() types.List {
+				if v, ok := blockData["response_cookies_to_remove"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+			ResponseHeadersToAdd: func() []HTTPLoadBalancerMoreOptionResponseHeadersToAddModel {
+				if listData, ok := blockData["response_headers_to_add"].([]interface{}); ok && len(listData) > 0 {
+					var result []HTTPLoadBalancerMoreOptionResponseHeadersToAddModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, HTTPLoadBalancerMoreOptionResponseHeadersToAddModel{
+								Append: func() types.Bool {
+									if v, ok := itemMap["append"].(bool); ok {
+										return types.BoolValue(v)
+									}
+									return types.BoolNull()
+								}(),
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								SecretValue: func() *HTTPLoadBalancerMoreOptionResponseHeadersToAddSecretValueModel {
+									if _, ok := itemMap["secret_value"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerMoreOptionResponseHeadersToAddSecretValueModel{
+										}
+									}
+									return nil
+								}(),
+								Value: func() types.String {
+									if v, ok := itemMap["value"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			ResponseHeadersToRemove: func() types.List {
+				if v, ok := blockData["response_headers_to_remove"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["multi_lb_app"].(map[string]interface{}); ok && isImport && data.MultiLbApp == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.MultiLbApp = &HTTPLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_challenge"].(map[string]interface{}); ok && isImport && data.NoChallenge == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoChallenge = &HTTPLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_service_policies"].(map[string]interface{}); ok && isImport && data.NoServicePolicies == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoServicePolicies = &HTTPLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["origin_server_subset_rule_list"].(map[string]interface{}); ok && (isImport || data.OriginServerSubsetRuleList != nil) {
+		data.OriginServerSubsetRuleList = &HTTPLoadBalancerOriginServerSubsetRuleListModel{
+			OriginServerSubsetRules: func() []HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesModel {
+				if listData, ok := blockData["origin_server_subset_rules"].([]interface{}); ok && len(listData) > 0 {
+					var result []HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesModel{
+								AnyAsn: func() *HTTPLoadBalancerEmptyModel {
+									if _, ok := itemMap["any_asn"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								AnyIP: func() *HTTPLoadBalancerEmptyModel {
+									if _, ok := itemMap["any_ip"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								AsnList: func() *HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesAsnListModel {
+									if _, ok := itemMap["asn_list"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesAsnListModel{
+										}
+									}
+									return nil
+								}(),
+								AsnMatcher: func() *HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesAsnMatcherModel {
+									if _, ok := itemMap["asn_matcher"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesAsnMatcherModel{
+										}
+									}
+									return nil
+								}(),
+								ClientSelector: func() *HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesClientSelectorModel {
+									if _, ok := itemMap["client_selector"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesClientSelectorModel{
+										}
+									}
+									return nil
+								}(),
+								IPMatcher: func() *HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesIPMatcherModel {
+									if deepMap, ok := itemMap["ip_matcher"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesIPMatcherModel{
+											InvertMatcher: func() types.Bool {
+												if v, ok := deepMap["invert_matcher"].(bool); ok {
+													return types.BoolValue(v)
+												}
+												return types.BoolNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								IPPrefixList: func() *HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesIPPrefixListModel {
+									if deepMap, ok := itemMap["ip_prefix_list"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesIPPrefixListModel{
+											InvertMatch: func() types.Bool {
+												if v, ok := deepMap["invert_match"].(bool); ok {
+													return types.BoolValue(v)
+												}
+												return types.BoolNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								Metadata: func() *HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesMetadataModel {
+									if deepMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesMetadataModel{
+											DescriptionSpec: func() types.String {
+												if v, ok := deepMap["description"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								None: func() *HTTPLoadBalancerEmptyModel {
+									if _, ok := itemMap["none"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								OriginServerSubsetsAction: func() *HTTPLoadBalancerEmptyModel {
+									if _, ok := itemMap["origin_server_subsets_action"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["policy_based_challenge"].(map[string]interface{}); ok && isImport && data.PolicyBasedChallenge == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.PolicyBasedChallenge = &HTTPLoadBalancerPolicyBasedChallengeModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["protected_cookies"].([]interface{}); ok && len(listData) > 0 {
+		var protected_cookiesList []HTTPLoadBalancerProtectedCookiesModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				protected_cookiesList = append(protected_cookiesList, HTTPLoadBalancerProtectedCookiesModel{
+					AddHttponly: func() *HTTPLoadBalancerEmptyModel {
+						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].AddHttponly != nil {
+							return &HTTPLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					AddSecure: func() *HTTPLoadBalancerEmptyModel {
+						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].AddSecure != nil {
+							return &HTTPLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					DisableTamperingProtection: func() *HTTPLoadBalancerEmptyModel {
+						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].DisableTamperingProtection != nil {
+							return &HTTPLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					EnableTamperingProtection: func() *HTTPLoadBalancerEmptyModel {
+						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].EnableTamperingProtection != nil {
+							return &HTTPLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					IgnoreHttponly: func() *HTTPLoadBalancerEmptyModel {
+						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].IgnoreHttponly != nil {
+							return &HTTPLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					IgnoreMaxAge: func() *HTTPLoadBalancerEmptyModel {
+						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].IgnoreMaxAge != nil {
+							return &HTTPLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					IgnoreSamesite: func() *HTTPLoadBalancerEmptyModel {
+						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].IgnoreSamesite != nil {
+							return &HTTPLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					IgnoreSecure: func() *HTTPLoadBalancerEmptyModel {
+						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].IgnoreSecure != nil {
+							return &HTTPLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					MaxAgeValue: func() types.Int64 {
+						if v, ok := itemMap["max_age_value"].(float64); ok && v != 0 {
+							return types.Int64Value(int64(v))
+						}
+						return types.Int64Null()
+					}(),
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					SamesiteLax: func() *HTTPLoadBalancerEmptyModel {
+						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].SamesiteLax != nil {
+							return &HTTPLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					SamesiteNone: func() *HTTPLoadBalancerEmptyModel {
+						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].SamesiteNone != nil {
+							return &HTTPLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					SamesiteStrict: func() *HTTPLoadBalancerEmptyModel {
+						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].SamesiteStrict != nil {
+							return &HTTPLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+				})
+			}
+		}
+		data.ProtectedCookies = protected_cookiesList
+	}
+	if _, ok := apiResource.Spec["random"].(map[string]interface{}); ok && isImport && data.Random == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Random = &HTTPLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["rate_limit"].(map[string]interface{}); ok && isImport && data.RateLimit == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.RateLimit = &HTTPLoadBalancerRateLimitModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["ring_hash"].(map[string]interface{}); ok && (isImport || data.RingHash != nil) {
+		data.RingHash = &HTTPLoadBalancerRingHashModel{
+			HashPolicy: func() []HTTPLoadBalancerRingHashHashPolicyModel {
+				if listData, ok := blockData["hash_policy"].([]interface{}); ok && len(listData) > 0 {
+					var result []HTTPLoadBalancerRingHashHashPolicyModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, HTTPLoadBalancerRingHashHashPolicyModel{
+								Cookie: func() *HTTPLoadBalancerRingHashHashPolicyCookieModel {
+									if deepMap, ok := itemMap["cookie"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerRingHashHashPolicyCookieModel{
+											AddHttponly: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["add_httponly"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+											AddSecure: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["add_secure"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+											IgnoreHttponly: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["ignore_httponly"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+											IgnoreSamesite: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["ignore_samesite"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+											IgnoreSecure: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["ignore_secure"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Path: func() types.String {
+												if v, ok := deepMap["path"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											SamesiteLax: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["samesite_lax"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+											SamesiteNone: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["samesite_none"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+											SamesiteStrict: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["samesite_strict"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+											Ttl: func() types.Int64 {
+												if v, ok := deepMap["ttl"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								HeaderName: func() types.String {
+									if v, ok := itemMap["header_name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								SourceIP: func() types.Bool {
+									if v, ok := itemMap["source_ip"].(bool); ok {
+										return types.BoolValue(v)
+									}
+									return types.BoolNull()
+								}(),
+								Terminal: func() types.Bool {
+									if v, ok := itemMap["terminal"].(bool); ok {
+										return types.BoolValue(v)
+									}
+									return types.BoolNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["round_robin"].(map[string]interface{}); ok && isImport && data.RoundRobin == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.RoundRobin = &HTTPLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["routes"].([]interface{}); ok && len(listData) > 0 {
+		var routesList []HTTPLoadBalancerRoutesModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				routesList = append(routesList, HTTPLoadBalancerRoutesModel{
+					CustomRouteObject: func() *HTTPLoadBalancerRoutesCustomRouteObjectModel {
+						if _, ok := itemMap["custom_route_object"].(map[string]interface{}); ok {
+							return &HTTPLoadBalancerRoutesCustomRouteObjectModel{
+							}
+						}
+						return nil
+					}(),
+					DirectResponseRoute: func() *HTTPLoadBalancerRoutesDirectResponseRouteModel {
+						if nestedMap, ok := itemMap["direct_response_route"].(map[string]interface{}); ok {
+							return &HTTPLoadBalancerRoutesDirectResponseRouteModel{
+								HTTPMethod: func() types.String {
+									if v, ok := nestedMap["http_method"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					RedirectRoute: func() *HTTPLoadBalancerRoutesRedirectRouteModel {
+						if nestedMap, ok := itemMap["redirect_route"].(map[string]interface{}); ok {
+							return &HTTPLoadBalancerRoutesRedirectRouteModel{
+								HTTPMethod: func() types.String {
+									if v, ok := nestedMap["http_method"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					SimpleRoute: func() *HTTPLoadBalancerRoutesSimpleRouteModel {
+						if nestedMap, ok := itemMap["simple_route"].(map[string]interface{}); ok {
+							return &HTTPLoadBalancerRoutesSimpleRouteModel{
+								AutoHostRewrite: func() *HTTPLoadBalancerEmptyModel {
+									if !isImport && len(data.Routes) > listIdx && data.Routes[listIdx].SimpleRoute != nil && data.Routes[listIdx].SimpleRoute.AutoHostRewrite != nil {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								DisableHostRewrite: func() *HTTPLoadBalancerEmptyModel {
+									if !isImport && len(data.Routes) > listIdx && data.Routes[listIdx].SimpleRoute != nil && data.Routes[listIdx].SimpleRoute.DisableHostRewrite != nil {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								HostRewrite: func() types.String {
+									if v, ok := nestedMap["host_rewrite"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								HTTPMethod: func() types.String {
+									if v, ok := nestedMap["http_method"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+				})
+			}
+		}
+		data.Routes = routesList
+	}
+	if blockData, ok := apiResource.Spec["sensitive_data_disclosure_rules"].(map[string]interface{}); ok && (isImport || data.SensitiveDataDisclosureRules != nil) {
+		data.SensitiveDataDisclosureRules = &HTTPLoadBalancerSensitiveDataDisclosureRulesModel{
+			SensitiveDataTypesInResponse: func() []HTTPLoadBalancerSensitiveDataDisclosureRulesSensitiveDataTypesInResponseModel {
+				if listData, ok := blockData["sensitive_data_types_in_response"].([]interface{}); ok && len(listData) > 0 {
+					var result []HTTPLoadBalancerSensitiveDataDisclosureRulesSensitiveDataTypesInResponseModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, HTTPLoadBalancerSensitiveDataDisclosureRulesSensitiveDataTypesInResponseModel{
+								APIEndpoint: func() *HTTPLoadBalancerSensitiveDataDisclosureRulesSensitiveDataTypesInResponseAPIEndpointModel {
+									if deepMap, ok := itemMap["api_endpoint"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerSensitiveDataDisclosureRulesSensitiveDataTypesInResponseAPIEndpointModel{
+											Path: func() types.String {
+												if v, ok := deepMap["path"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								Body: func() *HTTPLoadBalancerSensitiveDataDisclosureRulesSensitiveDataTypesInResponseBodyModel {
+									if _, ok := itemMap["body"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerSensitiveDataDisclosureRulesSensitiveDataTypesInResponseBodyModel{
+										}
+									}
+									return nil
+								}(),
+								Mask: func() *HTTPLoadBalancerEmptyModel {
+									if _, ok := itemMap["mask"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								Report: func() *HTTPLoadBalancerEmptyModel {
+									if _, ok := itemMap["report"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["sensitive_data_policy"].(map[string]interface{}); ok && isImport && data.SensitiveDataPolicy == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.SensitiveDataPolicy = &HTTPLoadBalancerSensitiveDataPolicyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["service_policies_from_namespace"].(map[string]interface{}); ok && isImport && data.ServicePoliciesFromNamespace == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ServicePoliciesFromNamespace = &HTTPLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["single_lb_app"].(map[string]interface{}); ok && isImport && data.SingleLbApp == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.SingleLbApp = &HTTPLoadBalancerSingleLbAppModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["slow_ddos_mitigation"].(map[string]interface{}); ok && (isImport || data.SlowDdosMitigation != nil) {
+		data.SlowDdosMitigation = &HTTPLoadBalancerSlowDdosMitigationModel{
+			DisableRequestTimeout: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.SlowDdosMitigation != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.SlowDdosMitigation.DisableRequestTimeout
+				}
+				// Import case: read from API
+				if _, ok := blockData["disable_request_timeout"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			RequestHeadersTimeout: func() types.Int64 {
+				if v, ok := blockData["request_headers_timeout"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			RequestTimeout: func() types.Int64 {
+				if v, ok := blockData["request_timeout"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["source_ip_stickiness"].(map[string]interface{}); ok && isImport && data.SourceIPStickiness == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.SourceIPStickiness = &HTTPLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["system_default_timeouts"].(map[string]interface{}); ok && isImport && data.SystemDefaultTimeouts == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.SystemDefaultTimeouts = &HTTPLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["trusted_clients"].([]interface{}); ok && len(listData) > 0 {
+		var trusted_clientsList []HTTPLoadBalancerTrustedClientsModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				trusted_clientsList = append(trusted_clientsList, HTTPLoadBalancerTrustedClientsModel{
+					Actions: func() types.List {
+						if v, ok := itemMap["actions"].([]interface{}); ok && len(v) > 0 {
+							var items []string
+							for _, item := range v {
+								if s, ok := item.(string); ok {
+									items = append(items, s)
+								}
+							}
+							listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+							return listVal
+						}
+						return types.ListNull(types.StringType)
+					}(),
+					AsNumber: func() types.Int64 {
+						if v, ok := itemMap["as_number"].(float64); ok && v != 0 {
+							return types.Int64Value(int64(v))
+						}
+						return types.Int64Null()
+					}(),
+					BotSkipProcessing: func() *HTTPLoadBalancerEmptyModel {
+						if !isImport && len(data.TrustedClients) > listIdx && data.TrustedClients[listIdx].BotSkipProcessing != nil {
+							return &HTTPLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					ExpirationTimestamp: func() types.String {
+						if v, ok := itemMap["expiration_timestamp"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					HTTPHeader: func() *HTTPLoadBalancerTrustedClientsHTTPHeaderModel {
+						if _, ok := itemMap["http_header"].(map[string]interface{}); ok {
+							return &HTTPLoadBalancerTrustedClientsHTTPHeaderModel{
+							}
+						}
+						return nil
+					}(),
+					IPPrefix: func() types.String {
+						if v, ok := itemMap["ip_prefix"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					IPV6Prefix: func() types.String {
+						if v, ok := itemMap["ipv6_prefix"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Metadata: func() *HTTPLoadBalancerTrustedClientsMetadataModel {
+						if nestedMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
+							return &HTTPLoadBalancerTrustedClientsMetadataModel{
+								DescriptionSpec: func() types.String {
+									if v, ok := nestedMap["description"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Name: func() types.String {
+									if v, ok := nestedMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					SkipProcessing: func() *HTTPLoadBalancerEmptyModel {
+						if !isImport && len(data.TrustedClients) > listIdx && data.TrustedClients[listIdx].SkipProcessing != nil {
+							return &HTTPLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+					UserIdentifier: func() types.String {
+						if v, ok := itemMap["user_identifier"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					WAFSkipProcessing: func() *HTTPLoadBalancerEmptyModel {
+						if !isImport && len(data.TrustedClients) > listIdx && data.TrustedClients[listIdx].WAFSkipProcessing != nil {
+							return &HTTPLoadBalancerEmptyModel{}
+						}
+						return nil
+					}(),
+				})
+			}
+		}
+		data.TrustedClients = trusted_clientsList
+	}
+	if _, ok := apiResource.Spec["user_id_client_ip"].(map[string]interface{}); ok && isImport && data.UserIDClientIP == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.UserIDClientIP = &HTTPLoadBalancerEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["user_identification"].(map[string]interface{}); ok && (isImport || data.UserIdentification != nil) {
+		data.UserIdentification = &HTTPLoadBalancerUserIdentificationModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["waf_exclusion"].(map[string]interface{}); ok && isImport && data.WAFExclusion == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.WAFExclusion = &HTTPLoadBalancerWAFExclusionModel{}
+	}
+	// Normal Read: preserve existing state value
+	// Top-level Optional bool: preserve prior state to avoid API default drift
+	if !isImport && !data.AddLocation.IsNull() && !data.AddLocation.IsUnknown() {
+		// Normal Read: preserve existing state value (do nothing)
+	} else {
+		// Import case, null state, or unknown (after Create): read from API
 		if v, ok := apiResource.Spec["add_location"].(bool); ok {
 			data.AddLocation = types.BoolValue(v)
 		} else {
@@ -22017,6 +26611,29 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 			}
 			if item.HTTPHeader != nil {
 				http_headerNestedMap := make(map[string]interface{})
+				if len(item.HTTPHeader.Headers) > 0 {
+					var headersDeepList []map[string]interface{}
+					for _, deepListItem := range item.HTTPHeader.Headers {
+						deepListItemMap := make(map[string]interface{})
+						if !deepListItem.Exact.IsNull() && !deepListItem.Exact.IsUnknown() {
+							deepListItemMap["exact"] = deepListItem.Exact.ValueString()
+						}
+						if !deepListItem.InvertMatch.IsNull() && !deepListItem.InvertMatch.IsUnknown() {
+							deepListItemMap["invert_match"] = deepListItem.InvertMatch.ValueBool()
+						}
+						if !deepListItem.Name.IsNull() && !deepListItem.Name.IsUnknown() {
+							deepListItemMap["name"] = deepListItem.Name.ValueString()
+						}
+						if !deepListItem.Presence.IsNull() && !deepListItem.Presence.IsUnknown() {
+							deepListItemMap["presence"] = deepListItem.Presence.ValueBool()
+						}
+						if !deepListItem.Regex.IsNull() && !deepListItem.Regex.IsUnknown() {
+							deepListItemMap["regex"] = deepListItem.Regex.ValueString()
+						}
+						headersDeepList = append(headersDeepList, deepListItemMap)
+					}
+					http_headerNestedMap["headers"] = headersDeepList
+				}
 				itemMap["http_header"] = http_headerNestedMap
 			}
 			if !item.IPPrefix.IsNull() && !item.IPPrefix.IsUnknown() {
@@ -22310,12 +26927,52 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 			}
 			if item.DdosClientSource != nil {
 				ddos_client_sourceNestedMap := make(map[string]interface{})
+				if item.DdosClientSource.AsnList != nil {
+					asn_listDeepMap := make(map[string]interface{})
+					ddos_client_sourceNestedMap["asn_list"] = asn_listDeepMap
+				}
 				if !item.DdosClientSource.CountryList.IsNull() && !item.DdosClientSource.CountryList.IsUnknown() {
 					var CountryListItems []string
 					diags := item.DdosClientSource.CountryList.ElementsAs(ctx, &CountryListItems, false)
 					if !diags.HasError() {
 						ddos_client_sourceNestedMap["country_list"] = CountryListItems
 					}
+				}
+				if item.DdosClientSource.Ja4TLSFingerprintMatcher != nil {
+					ja4_tls_fingerprint_matcherDeepMap := make(map[string]interface{})
+					if !item.DdosClientSource.Ja4TLSFingerprintMatcher.ExactValues.IsNull() && !item.DdosClientSource.Ja4TLSFingerprintMatcher.ExactValues.IsUnknown() {
+						var ExactValuesItems []string
+						diags := item.DdosClientSource.Ja4TLSFingerprintMatcher.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
+						if !diags.HasError() {
+							ja4_tls_fingerprint_matcherDeepMap["exact_values"] = ExactValuesItems
+						}
+					}
+					ddos_client_sourceNestedMap["ja4_tls_fingerprint_matcher"] = ja4_tls_fingerprint_matcherDeepMap
+				}
+				if item.DdosClientSource.TLSFingerprintMatcher != nil {
+					tls_fingerprint_matcherDeepMap := make(map[string]interface{})
+					if !item.DdosClientSource.TLSFingerprintMatcher.Classes.IsNull() && !item.DdosClientSource.TLSFingerprintMatcher.Classes.IsUnknown() {
+						var ClassesItems []string
+						diags := item.DdosClientSource.TLSFingerprintMatcher.Classes.ElementsAs(ctx, &ClassesItems, false)
+						if !diags.HasError() {
+							tls_fingerprint_matcherDeepMap["classes"] = ClassesItems
+						}
+					}
+					if !item.DdosClientSource.TLSFingerprintMatcher.ExactValues.IsNull() && !item.DdosClientSource.TLSFingerprintMatcher.ExactValues.IsUnknown() {
+						var ExactValuesItems []string
+						diags := item.DdosClientSource.TLSFingerprintMatcher.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
+						if !diags.HasError() {
+							tls_fingerprint_matcherDeepMap["exact_values"] = ExactValuesItems
+						}
+					}
+					if !item.DdosClientSource.TLSFingerprintMatcher.ExcludedValues.IsNull() && !item.DdosClientSource.TLSFingerprintMatcher.ExcludedValues.IsUnknown() {
+						var ExcludedValuesItems []string
+						diags := item.DdosClientSource.TLSFingerprintMatcher.ExcludedValues.ElementsAs(ctx, &ExcludedValuesItems, false)
+						if !diags.HasError() {
+							tls_fingerprint_matcherDeepMap["excluded_values"] = ExcludedValuesItems
+						}
+					}
+					ddos_client_sourceNestedMap["tls_fingerprint_matcher"] = tls_fingerprint_matcherDeepMap
 				}
 				itemMap["ddos_client_source"] = ddos_client_sourceNestedMap
 			}
@@ -22832,6 +27489,12 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 			}
 			if item.GraphqlSettings != nil {
 				graphql_settingsNestedMap := make(map[string]interface{})
+				if item.GraphqlSettings.DisableIntrospection != nil {
+					graphql_settingsNestedMap["disable_introspection"] = map[string]interface{}{}
+				}
+				if item.GraphqlSettings.EnableIntrospection != nil {
+					graphql_settingsNestedMap["enable_introspection"] = map[string]interface{}{}
+				}
 				if !item.GraphqlSettings.MaxBatchedQueries.IsNull() && !item.GraphqlSettings.MaxBatchedQueries.IsUnknown() {
 					graphql_settingsNestedMap["max_batched_queries"] = item.GraphqlSettings.MaxBatchedQueries.ValueInt64()
 				}
@@ -23723,29 +28386,355 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 			itemMap := make(map[string]interface{})
 			if item.CustomRouteObject != nil {
 				custom_route_objectNestedMap := make(map[string]interface{})
+				if item.CustomRouteObject.RouteRef != nil {
+					route_refDeepMap := make(map[string]interface{})
+					if !item.CustomRouteObject.RouteRef.Name.IsNull() && !item.CustomRouteObject.RouteRef.Name.IsUnknown() {
+						route_refDeepMap["name"] = item.CustomRouteObject.RouteRef.Name.ValueString()
+					}
+					if !item.CustomRouteObject.RouteRef.Namespace.IsNull() && !item.CustomRouteObject.RouteRef.Namespace.IsUnknown() {
+						route_refDeepMap["namespace"] = item.CustomRouteObject.RouteRef.Namespace.ValueString()
+					}
+					if !item.CustomRouteObject.RouteRef.Tenant.IsNull() && !item.CustomRouteObject.RouteRef.Tenant.IsUnknown() {
+						route_refDeepMap["tenant"] = item.CustomRouteObject.RouteRef.Tenant.ValueString()
+					}
+					custom_route_objectNestedMap["route_ref"] = route_refDeepMap
+				}
 				itemMap["custom_route_object"] = custom_route_objectNestedMap
 			}
 			if item.DirectResponseRoute != nil {
 				direct_response_routeNestedMap := make(map[string]interface{})
+				if len(item.DirectResponseRoute.Headers) > 0 {
+					var headersDeepList []map[string]interface{}
+					for _, deepListItem := range item.DirectResponseRoute.Headers {
+						deepListItemMap := make(map[string]interface{})
+						if !deepListItem.Exact.IsNull() && !deepListItem.Exact.IsUnknown() {
+							deepListItemMap["exact"] = deepListItem.Exact.ValueString()
+						}
+						if !deepListItem.InvertMatch.IsNull() && !deepListItem.InvertMatch.IsUnknown() {
+							deepListItemMap["invert_match"] = deepListItem.InvertMatch.ValueBool()
+						}
+						if !deepListItem.Name.IsNull() && !deepListItem.Name.IsUnknown() {
+							deepListItemMap["name"] = deepListItem.Name.ValueString()
+						}
+						if !deepListItem.Presence.IsNull() && !deepListItem.Presence.IsUnknown() {
+							deepListItemMap["presence"] = deepListItem.Presence.ValueBool()
+						}
+						if !deepListItem.Regex.IsNull() && !deepListItem.Regex.IsUnknown() {
+							deepListItemMap["regex"] = deepListItem.Regex.ValueString()
+						}
+						headersDeepList = append(headersDeepList, deepListItemMap)
+					}
+					direct_response_routeNestedMap["headers"] = headersDeepList
+				}
 				if !item.DirectResponseRoute.HTTPMethod.IsNull() && !item.DirectResponseRoute.HTTPMethod.IsUnknown() {
 					direct_response_routeNestedMap["http_method"] = item.DirectResponseRoute.HTTPMethod.ValueString()
+				}
+				if item.DirectResponseRoute.IncomingPort != nil {
+					incoming_portDeepMap := make(map[string]interface{})
+					if item.DirectResponseRoute.IncomingPort.NoPortMatch != nil {
+						incoming_portDeepMap["no_port_match"] = map[string]interface{}{}
+					}
+					if !item.DirectResponseRoute.IncomingPort.Port.IsNull() && !item.DirectResponseRoute.IncomingPort.Port.IsUnknown() {
+						incoming_portDeepMap["port"] = item.DirectResponseRoute.IncomingPort.Port.ValueInt64()
+					}
+					if !item.DirectResponseRoute.IncomingPort.PortRanges.IsNull() && !item.DirectResponseRoute.IncomingPort.PortRanges.IsUnknown() {
+						incoming_portDeepMap["port_ranges"] = item.DirectResponseRoute.IncomingPort.PortRanges.ValueString()
+					}
+					direct_response_routeNestedMap["incoming_port"] = incoming_portDeepMap
+				}
+				if item.DirectResponseRoute.Path != nil {
+					pathDeepMap := make(map[string]interface{})
+					if !item.DirectResponseRoute.Path.Path.IsNull() && !item.DirectResponseRoute.Path.Path.IsUnknown() {
+						pathDeepMap["path"] = item.DirectResponseRoute.Path.Path.ValueString()
+					}
+					if !item.DirectResponseRoute.Path.Prefix.IsNull() && !item.DirectResponseRoute.Path.Prefix.IsUnknown() {
+						pathDeepMap["prefix"] = item.DirectResponseRoute.Path.Prefix.ValueString()
+					}
+					if !item.DirectResponseRoute.Path.Regex.IsNull() && !item.DirectResponseRoute.Path.Regex.IsUnknown() {
+						pathDeepMap["regex"] = item.DirectResponseRoute.Path.Regex.ValueString()
+					}
+					direct_response_routeNestedMap["path"] = pathDeepMap
+				}
+				if item.DirectResponseRoute.RouteDirectResponse != nil {
+					route_direct_responseDeepMap := make(map[string]interface{})
+					if !item.DirectResponseRoute.RouteDirectResponse.ResponseBodyEncoded.IsNull() && !item.DirectResponseRoute.RouteDirectResponse.ResponseBodyEncoded.IsUnknown() {
+						route_direct_responseDeepMap["response_body_encoded"] = item.DirectResponseRoute.RouteDirectResponse.ResponseBodyEncoded.ValueString()
+					}
+					if !item.DirectResponseRoute.RouteDirectResponse.ResponseCode.IsNull() && !item.DirectResponseRoute.RouteDirectResponse.ResponseCode.IsUnknown() {
+						route_direct_responseDeepMap["response_code"] = item.DirectResponseRoute.RouteDirectResponse.ResponseCode.ValueInt64()
+					}
+					direct_response_routeNestedMap["route_direct_response"] = route_direct_responseDeepMap
 				}
 				itemMap["direct_response_route"] = direct_response_routeNestedMap
 			}
 			if item.RedirectRoute != nil {
 				redirect_routeNestedMap := make(map[string]interface{})
+				if len(item.RedirectRoute.Headers) > 0 {
+					var headersDeepList []map[string]interface{}
+					for _, deepListItem := range item.RedirectRoute.Headers {
+						deepListItemMap := make(map[string]interface{})
+						if !deepListItem.Exact.IsNull() && !deepListItem.Exact.IsUnknown() {
+							deepListItemMap["exact"] = deepListItem.Exact.ValueString()
+						}
+						if !deepListItem.InvertMatch.IsNull() && !deepListItem.InvertMatch.IsUnknown() {
+							deepListItemMap["invert_match"] = deepListItem.InvertMatch.ValueBool()
+						}
+						if !deepListItem.Name.IsNull() && !deepListItem.Name.IsUnknown() {
+							deepListItemMap["name"] = deepListItem.Name.ValueString()
+						}
+						if !deepListItem.Presence.IsNull() && !deepListItem.Presence.IsUnknown() {
+							deepListItemMap["presence"] = deepListItem.Presence.ValueBool()
+						}
+						if !deepListItem.Regex.IsNull() && !deepListItem.Regex.IsUnknown() {
+							deepListItemMap["regex"] = deepListItem.Regex.ValueString()
+						}
+						headersDeepList = append(headersDeepList, deepListItemMap)
+					}
+					redirect_routeNestedMap["headers"] = headersDeepList
+				}
 				if !item.RedirectRoute.HTTPMethod.IsNull() && !item.RedirectRoute.HTTPMethod.IsUnknown() {
 					redirect_routeNestedMap["http_method"] = item.RedirectRoute.HTTPMethod.ValueString()
+				}
+				if item.RedirectRoute.IncomingPort != nil {
+					incoming_portDeepMap := make(map[string]interface{})
+					if item.RedirectRoute.IncomingPort.NoPortMatch != nil {
+						incoming_portDeepMap["no_port_match"] = map[string]interface{}{}
+					}
+					if !item.RedirectRoute.IncomingPort.Port.IsNull() && !item.RedirectRoute.IncomingPort.Port.IsUnknown() {
+						incoming_portDeepMap["port"] = item.RedirectRoute.IncomingPort.Port.ValueInt64()
+					}
+					if !item.RedirectRoute.IncomingPort.PortRanges.IsNull() && !item.RedirectRoute.IncomingPort.PortRanges.IsUnknown() {
+						incoming_portDeepMap["port_ranges"] = item.RedirectRoute.IncomingPort.PortRanges.ValueString()
+					}
+					redirect_routeNestedMap["incoming_port"] = incoming_portDeepMap
+				}
+				if item.RedirectRoute.Path != nil {
+					pathDeepMap := make(map[string]interface{})
+					if !item.RedirectRoute.Path.Path.IsNull() && !item.RedirectRoute.Path.Path.IsUnknown() {
+						pathDeepMap["path"] = item.RedirectRoute.Path.Path.ValueString()
+					}
+					if !item.RedirectRoute.Path.Prefix.IsNull() && !item.RedirectRoute.Path.Prefix.IsUnknown() {
+						pathDeepMap["prefix"] = item.RedirectRoute.Path.Prefix.ValueString()
+					}
+					if !item.RedirectRoute.Path.Regex.IsNull() && !item.RedirectRoute.Path.Regex.IsUnknown() {
+						pathDeepMap["regex"] = item.RedirectRoute.Path.Regex.ValueString()
+					}
+					redirect_routeNestedMap["path"] = pathDeepMap
+				}
+				if item.RedirectRoute.RouteRedirect != nil {
+					route_redirectDeepMap := make(map[string]interface{})
+					if !item.RedirectRoute.RouteRedirect.HostRedirect.IsNull() && !item.RedirectRoute.RouteRedirect.HostRedirect.IsUnknown() {
+						route_redirectDeepMap["host_redirect"] = item.RedirectRoute.RouteRedirect.HostRedirect.ValueString()
+					}
+					if !item.RedirectRoute.RouteRedirect.PathRedirect.IsNull() && !item.RedirectRoute.RouteRedirect.PathRedirect.IsUnknown() {
+						route_redirectDeepMap["path_redirect"] = item.RedirectRoute.RouteRedirect.PathRedirect.ValueString()
+					}
+					if !item.RedirectRoute.RouteRedirect.PrefixRewrite.IsNull() && !item.RedirectRoute.RouteRedirect.PrefixRewrite.IsUnknown() {
+						route_redirectDeepMap["prefix_rewrite"] = item.RedirectRoute.RouteRedirect.PrefixRewrite.ValueString()
+					}
+					if !item.RedirectRoute.RouteRedirect.ProtoRedirect.IsNull() && !item.RedirectRoute.RouteRedirect.ProtoRedirect.IsUnknown() {
+						route_redirectDeepMap["proto_redirect"] = item.RedirectRoute.RouteRedirect.ProtoRedirect.ValueString()
+					}
+					if item.RedirectRoute.RouteRedirect.RemoveAllParams != nil {
+						route_redirectDeepMap["remove_all_params"] = map[string]interface{}{}
+					}
+					if !item.RedirectRoute.RouteRedirect.ReplaceParams.IsNull() && !item.RedirectRoute.RouteRedirect.ReplaceParams.IsUnknown() {
+						route_redirectDeepMap["replace_params"] = item.RedirectRoute.RouteRedirect.ReplaceParams.ValueString()
+					}
+					if !item.RedirectRoute.RouteRedirect.ResponseCode.IsNull() && !item.RedirectRoute.RouteRedirect.ResponseCode.IsUnknown() {
+						route_redirectDeepMap["response_code"] = item.RedirectRoute.RouteRedirect.ResponseCode.ValueInt64()
+					}
+					if item.RedirectRoute.RouteRedirect.RetainAllParams != nil {
+						route_redirectDeepMap["retain_all_params"] = map[string]interface{}{}
+					}
+					redirect_routeNestedMap["route_redirect"] = route_redirectDeepMap
 				}
 				itemMap["redirect_route"] = redirect_routeNestedMap
 			}
 			if item.SimpleRoute != nil {
 				simple_routeNestedMap := make(map[string]interface{})
+				if item.SimpleRoute.AdvancedOptions != nil {
+					advanced_optionsDeepMap := make(map[string]interface{})
+					if item.SimpleRoute.AdvancedOptions.CommonBuffering != nil {
+						advanced_optionsDeepMap["common_buffering"] = map[string]interface{}{}
+					}
+					if item.SimpleRoute.AdvancedOptions.CommonHashPolicy != nil {
+						advanced_optionsDeepMap["common_hash_policy"] = map[string]interface{}{}
+					}
+					if item.SimpleRoute.AdvancedOptions.DefaultRetryPolicy != nil {
+						advanced_optionsDeepMap["default_retry_policy"] = map[string]interface{}{}
+					}
+					if !item.SimpleRoute.AdvancedOptions.DisableLocationAdd.IsNull() && !item.SimpleRoute.AdvancedOptions.DisableLocationAdd.IsUnknown() {
+						advanced_optionsDeepMap["disable_location_add"] = item.SimpleRoute.AdvancedOptions.DisableLocationAdd.ValueBool()
+					}
+					if item.SimpleRoute.AdvancedOptions.DisableMirroring != nil {
+						advanced_optionsDeepMap["disable_mirroring"] = map[string]interface{}{}
+					}
+					if item.SimpleRoute.AdvancedOptions.DisablePrefixRewrite != nil {
+						advanced_optionsDeepMap["disable_prefix_rewrite"] = map[string]interface{}{}
+					}
+					if item.SimpleRoute.AdvancedOptions.DisableSpdy != nil {
+						advanced_optionsDeepMap["disable_spdy"] = map[string]interface{}{}
+					}
+					if item.SimpleRoute.AdvancedOptions.DisableWAF != nil {
+						advanced_optionsDeepMap["disable_waf"] = map[string]interface{}{}
+					}
+					if item.SimpleRoute.AdvancedOptions.DisableWebSocketConfig != nil {
+						advanced_optionsDeepMap["disable_web_socket_config"] = map[string]interface{}{}
+					}
+					if item.SimpleRoute.AdvancedOptions.DoNotRetractCluster != nil {
+						advanced_optionsDeepMap["do_not_retract_cluster"] = map[string]interface{}{}
+					}
+					if item.SimpleRoute.AdvancedOptions.EnableSpdy != nil {
+						advanced_optionsDeepMap["enable_spdy"] = map[string]interface{}{}
+					}
+					if item.SimpleRoute.AdvancedOptions.EndpointSubsets != nil {
+						advanced_optionsDeepMap["endpoint_subsets"] = map[string]interface{}{}
+					}
+					if item.SimpleRoute.AdvancedOptions.InheritedBotDefenseJavascriptInjection != nil {
+						advanced_optionsDeepMap["inherited_bot_defense_javascript_injection"] = map[string]interface{}{}
+					}
+					if item.SimpleRoute.AdvancedOptions.InheritedWAF != nil {
+						advanced_optionsDeepMap["inherited_waf"] = map[string]interface{}{}
+					}
+					if item.SimpleRoute.AdvancedOptions.InheritedWAFExclusion != nil {
+						advanced_optionsDeepMap["inherited_waf_exclusion"] = map[string]interface{}{}
+					}
+					if item.SimpleRoute.AdvancedOptions.NoRetryPolicy != nil {
+						advanced_optionsDeepMap["no_retry_policy"] = map[string]interface{}{}
+					}
+					if !item.SimpleRoute.AdvancedOptions.PrefixRewrite.IsNull() && !item.SimpleRoute.AdvancedOptions.PrefixRewrite.IsUnknown() {
+						advanced_optionsDeepMap["prefix_rewrite"] = item.SimpleRoute.AdvancedOptions.PrefixRewrite.ValueString()
+					}
+					if !item.SimpleRoute.AdvancedOptions.Priority.IsNull() && !item.SimpleRoute.AdvancedOptions.Priority.IsUnknown() {
+						advanced_optionsDeepMap["priority"] = item.SimpleRoute.AdvancedOptions.Priority.ValueString()
+					}
+					if !item.SimpleRoute.AdvancedOptions.RequestCookiesToRemove.IsNull() && !item.SimpleRoute.AdvancedOptions.RequestCookiesToRemove.IsUnknown() {
+						var RequestCookiesToRemoveItems []string
+						diags := item.SimpleRoute.AdvancedOptions.RequestCookiesToRemove.ElementsAs(ctx, &RequestCookiesToRemoveItems, false)
+						if !diags.HasError() {
+							advanced_optionsDeepMap["request_cookies_to_remove"] = RequestCookiesToRemoveItems
+						}
+					}
+					if !item.SimpleRoute.AdvancedOptions.RequestHeadersToRemove.IsNull() && !item.SimpleRoute.AdvancedOptions.RequestHeadersToRemove.IsUnknown() {
+						var RequestHeadersToRemoveItems []string
+						diags := item.SimpleRoute.AdvancedOptions.RequestHeadersToRemove.ElementsAs(ctx, &RequestHeadersToRemoveItems, false)
+						if !diags.HasError() {
+							advanced_optionsDeepMap["request_headers_to_remove"] = RequestHeadersToRemoveItems
+						}
+					}
+					if !item.SimpleRoute.AdvancedOptions.ResponseCookiesToRemove.IsNull() && !item.SimpleRoute.AdvancedOptions.ResponseCookiesToRemove.IsUnknown() {
+						var ResponseCookiesToRemoveItems []string
+						diags := item.SimpleRoute.AdvancedOptions.ResponseCookiesToRemove.ElementsAs(ctx, &ResponseCookiesToRemoveItems, false)
+						if !diags.HasError() {
+							advanced_optionsDeepMap["response_cookies_to_remove"] = ResponseCookiesToRemoveItems
+						}
+					}
+					if !item.SimpleRoute.AdvancedOptions.ResponseHeadersToRemove.IsNull() && !item.SimpleRoute.AdvancedOptions.ResponseHeadersToRemove.IsUnknown() {
+						var ResponseHeadersToRemoveItems []string
+						diags := item.SimpleRoute.AdvancedOptions.ResponseHeadersToRemove.ElementsAs(ctx, &ResponseHeadersToRemoveItems, false)
+						if !diags.HasError() {
+							advanced_optionsDeepMap["response_headers_to_remove"] = ResponseHeadersToRemoveItems
+						}
+					}
+					if item.SimpleRoute.AdvancedOptions.RetractCluster != nil {
+						advanced_optionsDeepMap["retract_cluster"] = map[string]interface{}{}
+					}
+					if !item.SimpleRoute.AdvancedOptions.Timeout.IsNull() && !item.SimpleRoute.AdvancedOptions.Timeout.IsUnknown() {
+						advanced_optionsDeepMap["timeout"] = item.SimpleRoute.AdvancedOptions.Timeout.ValueInt64()
+					}
+					simple_routeNestedMap["advanced_options"] = advanced_optionsDeepMap
+				}
+				if item.SimpleRoute.AutoHostRewrite != nil {
+					simple_routeNestedMap["auto_host_rewrite"] = map[string]interface{}{}
+				}
+				if item.SimpleRoute.DisableHostRewrite != nil {
+					simple_routeNestedMap["disable_host_rewrite"] = map[string]interface{}{}
+				}
+				if len(item.SimpleRoute.Headers) > 0 {
+					var headersDeepList []map[string]interface{}
+					for _, deepListItem := range item.SimpleRoute.Headers {
+						deepListItemMap := make(map[string]interface{})
+						if !deepListItem.Exact.IsNull() && !deepListItem.Exact.IsUnknown() {
+							deepListItemMap["exact"] = deepListItem.Exact.ValueString()
+						}
+						if !deepListItem.InvertMatch.IsNull() && !deepListItem.InvertMatch.IsUnknown() {
+							deepListItemMap["invert_match"] = deepListItem.InvertMatch.ValueBool()
+						}
+						if !deepListItem.Name.IsNull() && !deepListItem.Name.IsUnknown() {
+							deepListItemMap["name"] = deepListItem.Name.ValueString()
+						}
+						if !deepListItem.Presence.IsNull() && !deepListItem.Presence.IsUnknown() {
+							deepListItemMap["presence"] = deepListItem.Presence.ValueBool()
+						}
+						if !deepListItem.Regex.IsNull() && !deepListItem.Regex.IsUnknown() {
+							deepListItemMap["regex"] = deepListItem.Regex.ValueString()
+						}
+						headersDeepList = append(headersDeepList, deepListItemMap)
+					}
+					simple_routeNestedMap["headers"] = headersDeepList
+				}
 				if !item.SimpleRoute.HostRewrite.IsNull() && !item.SimpleRoute.HostRewrite.IsUnknown() {
 					simple_routeNestedMap["host_rewrite"] = item.SimpleRoute.HostRewrite.ValueString()
 				}
 				if !item.SimpleRoute.HTTPMethod.IsNull() && !item.SimpleRoute.HTTPMethod.IsUnknown() {
 					simple_routeNestedMap["http_method"] = item.SimpleRoute.HTTPMethod.ValueString()
+				}
+				if item.SimpleRoute.IncomingPort != nil {
+					incoming_portDeepMap := make(map[string]interface{})
+					if item.SimpleRoute.IncomingPort.NoPortMatch != nil {
+						incoming_portDeepMap["no_port_match"] = map[string]interface{}{}
+					}
+					if !item.SimpleRoute.IncomingPort.Port.IsNull() && !item.SimpleRoute.IncomingPort.Port.IsUnknown() {
+						incoming_portDeepMap["port"] = item.SimpleRoute.IncomingPort.Port.ValueInt64()
+					}
+					if !item.SimpleRoute.IncomingPort.PortRanges.IsNull() && !item.SimpleRoute.IncomingPort.PortRanges.IsUnknown() {
+						incoming_portDeepMap["port_ranges"] = item.SimpleRoute.IncomingPort.PortRanges.ValueString()
+					}
+					simple_routeNestedMap["incoming_port"] = incoming_portDeepMap
+				}
+				if len(item.SimpleRoute.OriginPools) > 0 {
+					var origin_poolsDeepList []map[string]interface{}
+					for _, deepListItem := range item.SimpleRoute.OriginPools {
+						deepListItemMap := make(map[string]interface{})
+						if deepListItem.EndpointSubsets != nil {
+							deepListItemMap["endpoint_subsets"] = map[string]interface{}{}
+						}
+						if !deepListItem.Priority.IsNull() && !deepListItem.Priority.IsUnknown() {
+							deepListItemMap["priority"] = deepListItem.Priority.ValueInt64()
+						}
+						if !deepListItem.Weight.IsNull() && !deepListItem.Weight.IsUnknown() {
+							deepListItemMap["weight"] = deepListItem.Weight.ValueInt64()
+						}
+						origin_poolsDeepList = append(origin_poolsDeepList, deepListItemMap)
+					}
+					simple_routeNestedMap["origin_pools"] = origin_poolsDeepList
+				}
+				if item.SimpleRoute.Path != nil {
+					pathDeepMap := make(map[string]interface{})
+					if !item.SimpleRoute.Path.Path.IsNull() && !item.SimpleRoute.Path.Path.IsUnknown() {
+						pathDeepMap["path"] = item.SimpleRoute.Path.Path.ValueString()
+					}
+					if !item.SimpleRoute.Path.Prefix.IsNull() && !item.SimpleRoute.Path.Prefix.IsUnknown() {
+						pathDeepMap["prefix"] = item.SimpleRoute.Path.Prefix.ValueString()
+					}
+					if !item.SimpleRoute.Path.Regex.IsNull() && !item.SimpleRoute.Path.Regex.IsUnknown() {
+						pathDeepMap["regex"] = item.SimpleRoute.Path.Regex.ValueString()
+					}
+					simple_routeNestedMap["path"] = pathDeepMap
+				}
+				if item.SimpleRoute.QueryParams != nil {
+					query_paramsDeepMap := make(map[string]interface{})
+					if item.SimpleRoute.QueryParams.RemoveAllParams != nil {
+						query_paramsDeepMap["remove_all_params"] = map[string]interface{}{}
+					}
+					if !item.SimpleRoute.QueryParams.ReplaceParams.IsNull() && !item.SimpleRoute.QueryParams.ReplaceParams.IsUnknown() {
+						query_paramsDeepMap["replace_params"] = item.SimpleRoute.QueryParams.ReplaceParams.ValueString()
+					}
+					if item.SimpleRoute.QueryParams.RetainAllParams != nil {
+						query_paramsDeepMap["retain_all_params"] = map[string]interface{}{}
+					}
+					simple_routeNestedMap["query_params"] = query_paramsDeepMap
 				}
 				itemMap["simple_route"] = simple_routeNestedMap
 			}
@@ -23856,6 +28845,29 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 			}
 			if item.HTTPHeader != nil {
 				http_headerNestedMap := make(map[string]interface{})
+				if len(item.HTTPHeader.Headers) > 0 {
+					var headersDeepList []map[string]interface{}
+					for _, deepListItem := range item.HTTPHeader.Headers {
+						deepListItemMap := make(map[string]interface{})
+						if !deepListItem.Exact.IsNull() && !deepListItem.Exact.IsUnknown() {
+							deepListItemMap["exact"] = deepListItem.Exact.ValueString()
+						}
+						if !deepListItem.InvertMatch.IsNull() && !deepListItem.InvertMatch.IsUnknown() {
+							deepListItemMap["invert_match"] = deepListItem.InvertMatch.ValueBool()
+						}
+						if !deepListItem.Name.IsNull() && !deepListItem.Name.IsUnknown() {
+							deepListItemMap["name"] = deepListItem.Name.ValueString()
+						}
+						if !deepListItem.Presence.IsNull() && !deepListItem.Presence.IsUnknown() {
+							deepListItemMap["presence"] = deepListItem.Presence.ValueBool()
+						}
+						if !deepListItem.Regex.IsNull() && !deepListItem.Regex.IsUnknown() {
+							deepListItemMap["regex"] = deepListItem.Regex.ValueString()
+						}
+						headersDeepList = append(headersDeepList, deepListItemMap)
+					}
+					http_headerNestedMap["headers"] = headersDeepList
+				}
 				itemMap["http_header"] = http_headerNestedMap
 			}
 			if !item.IPPrefix.IsNull() && !item.IPPrefix.IsUnknown() {

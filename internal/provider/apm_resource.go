@@ -780,6 +780,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 											"tenant": schema.StringAttribute{
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional: true,
+												Computed: true,
 											},
 										},
 									},
@@ -984,6 +985,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 									"tenant": schema.StringAttribute{
 										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 										Optional: true,
+										Computed: true,
 									},
 								},
 							},
@@ -1092,6 +1094,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 															Optional: true,
+															Computed: true,
 														},
 													},
 												},
@@ -1124,6 +1127,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 															Optional: true,
+															Computed: true,
 														},
 													},
 												},
@@ -1169,6 +1173,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 									"tenant": schema.StringAttribute{
 										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 										Optional: true,
+										Computed: true,
 									},
 								},
 							},
@@ -1316,6 +1321,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 											"tenant": schema.StringAttribute{
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional: true,
+												Computed: true,
 											},
 										},
 									},
@@ -1336,6 +1342,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 											"tenant": schema.StringAttribute{
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional: true,
+												Computed: true,
 											},
 										},
 									},
@@ -1495,6 +1502,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 											"tenant": schema.StringAttribute{
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional: true,
+												Computed: true,
 											},
 										},
 									},
@@ -1515,6 +1523,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 											"tenant": schema.StringAttribute{
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional: true,
+												Computed: true,
 											},
 										},
 									},
@@ -1674,6 +1683,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 											"tenant": schema.StringAttribute{
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional: true,
+												Computed: true,
 											},
 										},
 									},
@@ -1694,6 +1704,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 											"tenant": schema.StringAttribute{
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional: true,
+												Computed: true,
 											},
 										},
 									},
@@ -1853,6 +1864,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 											"tenant": schema.StringAttribute{
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional: true,
+												Computed: true,
 											},
 										},
 									},
@@ -1873,6 +1885,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 											"tenant": schema.StringAttribute{
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional: true,
+												Computed: true,
 											},
 										},
 									},
@@ -2016,7 +2029,7 @@ func (r *APMResource) Create(ctx context.Context, req resource.CreateRequest, re
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.APM{
+	createReq := &client.APM{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -2025,7 +2038,7 @@ func (r *APMResource) Create(ctx context.Context, req resource.CreateRequest, re
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -2034,7 +2047,7 @@ func (r *APMResource) Create(ctx context.Context, req resource.CreateRequest, re
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -2043,7 +2056,7 @@ func (r *APMResource) Create(ctx context.Context, req resource.CreateRequest, re
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -2063,7 +2076,7 @@ func (r *APMResource) Create(ctx context.Context, req resource.CreateRequest, re
 			market_place_imageNestedMap := make(map[string]interface{})
 			aws_site_type_choiceMap["market_place_image"] = market_place_imageNestedMap
 		}
-		apiResource.Spec["aws_site_type_choice"] = aws_site_type_choiceMap
+		createReq.Spec["aws_site_type_choice"] = aws_site_type_choiceMap
 	}
 	if data.BaremetalSiteTypeChoice != nil {
 		baremetal_site_type_choiceMap := make(map[string]interface{})
@@ -2080,7 +2093,7 @@ func (r *APMResource) Create(ctx context.Context, req resource.CreateRequest, re
 			}
 			baremetal_site_type_choiceMap["f5_bare_metal_site"] = f5_bare_metal_siteNestedMap
 		}
-		apiResource.Spec["baremetal_site_type_choice"] = baremetal_site_type_choiceMap
+		createReq.Spec["baremetal_site_type_choice"] = baremetal_site_type_choiceMap
 	}
 	if data.HTTPSManagement != nil {
 		https_managementMap := make(map[string]interface{})
@@ -2116,24 +2129,138 @@ func (r *APMResource) Create(ctx context.Context, req resource.CreateRequest, re
 		if !data.HTTPSManagement.HTTPSPort.IsNull() && !data.HTTPSManagement.HTTPSPort.IsUnknown() {
 			https_managementMap["https_port"] = data.HTTPSManagement.HTTPSPort.ValueInt64()
 		}
-		apiResource.Spec["https_management"] = https_managementMap
+		createReq.Spec["https_management"] = https_managementMap
 	}
 
 
-	created, err := r.client.CreateAPM(ctx, apiResource)
+	apiResource, err := r.client.CreateAPM(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create APM: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if _, ok := apiResource.Spec["aws_site_type_choice"].(map[string]interface{}); ok && isImport && data.AWSSiteTypeChoice == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AWSSiteTypeChoice = &APMAWSSiteTypeChoiceModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["baremetal_site_type_choice"].(map[string]interface{}); ok && isImport && data.BaremetalSiteTypeChoice == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.BaremetalSiteTypeChoice = &APMBaremetalSiteTypeChoiceModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["https_management"].(map[string]interface{}); ok && (isImport || data.HTTPSManagement != nil) {
+		data.HTTPSManagement = &APMHTTPSManagementModel{
+			AdvertiseOnInternet: func() *APMHTTPSManagementAdvertiseOnInternetModel {
+				if !isImport && data.HTTPSManagement != nil && data.HTTPSManagement.AdvertiseOnInternet != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPSManagement.AdvertiseOnInternet
+				}
+				// Import case: read from API
+				if _, ok := blockData["advertise_on_internet"].(map[string]interface{}); ok {
+					return &APMHTTPSManagementAdvertiseOnInternetModel{
+					}
+				}
+				return nil
+			}(),
+			AdvertiseOnInternetDefaultVip: func() *APMEmptyModel {
+				if !isImport && data.HTTPSManagement != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.HTTPSManagement.AdvertiseOnInternetDefaultVip
+				}
+				// Import case: read from API
+				if _, ok := blockData["advertise_on_internet_default_vip"].(map[string]interface{}); ok {
+					return &APMEmptyModel{}
+				}
+				return nil
+			}(),
+			AdvertiseOnSLIVip: func() *APMHTTPSManagementAdvertiseOnSLIVipModel {
+				if !isImport && data.HTTPSManagement != nil && data.HTTPSManagement.AdvertiseOnSLIVip != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPSManagement.AdvertiseOnSLIVip
+				}
+				// Import case: read from API
+				if _, ok := blockData["advertise_on_sli_vip"].(map[string]interface{}); ok {
+					return &APMHTTPSManagementAdvertiseOnSLIVipModel{
+					}
+				}
+				return nil
+			}(),
+			AdvertiseOnSLOInternetVip: func() *APMHTTPSManagementAdvertiseOnSLOInternetVipModel {
+				if !isImport && data.HTTPSManagement != nil && data.HTTPSManagement.AdvertiseOnSLOInternetVip != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPSManagement.AdvertiseOnSLOInternetVip
+				}
+				// Import case: read from API
+				if _, ok := blockData["advertise_on_slo_internet_vip"].(map[string]interface{}); ok {
+					return &APMHTTPSManagementAdvertiseOnSLOInternetVipModel{
+					}
+				}
+				return nil
+			}(),
+			AdvertiseOnSLOSLI: func() *APMHTTPSManagementAdvertiseOnSLOSLIModel {
+				if !isImport && data.HTTPSManagement != nil && data.HTTPSManagement.AdvertiseOnSLOSLI != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPSManagement.AdvertiseOnSLOSLI
+				}
+				// Import case: read from API
+				if _, ok := blockData["advertise_on_slo_sli"].(map[string]interface{}); ok {
+					return &APMHTTPSManagementAdvertiseOnSLOSLIModel{
+					}
+				}
+				return nil
+			}(),
+			AdvertiseOnSLOVip: func() *APMHTTPSManagementAdvertiseOnSLOVipModel {
+				if !isImport && data.HTTPSManagement != nil && data.HTTPSManagement.AdvertiseOnSLOVip != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPSManagement.AdvertiseOnSLOVip
+				}
+				// Import case: read from API
+				if _, ok := blockData["advertise_on_slo_vip"].(map[string]interface{}); ok {
+					return &APMHTTPSManagementAdvertiseOnSLOVipModel{
+					}
+				}
+				return nil
+			}(),
+			DefaultHTTPSPort: func() *APMEmptyModel {
+				if !isImport && data.HTTPSManagement != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.HTTPSManagement.DefaultHTTPSPort
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_https_port"].(map[string]interface{}); ok {
+					return &APMEmptyModel{}
+				}
+				return nil
+			}(),
+			DomainSuffix: func() types.String {
+				if v, ok := blockData["domain_suffix"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			HTTPSPort: func() types.Int64 {
+				if v, ok := blockData["https_port"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 

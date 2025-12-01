@@ -259,6 +259,7 @@ func (r *CloudConnectResource) Schema(ctx context.Context, req resource.SchemaRe
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
+								Computed: true,
 							},
 						},
 					},
@@ -276,6 +277,7 @@ func (r *CloudConnectResource) Schema(ctx context.Context, req resource.SchemaRe
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
+								Computed: true,
 							},
 						},
 					},
@@ -370,6 +372,7 @@ func (r *CloudConnectResource) Schema(ctx context.Context, req resource.SchemaRe
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
+								Computed: true,
 							},
 						},
 					},
@@ -463,6 +466,7 @@ func (r *CloudConnectResource) Schema(ctx context.Context, req resource.SchemaRe
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional: true,
+						Computed: true,
 					},
 				},
 
@@ -584,7 +588,7 @@ func (r *CloudConnectResource) Create(ctx context.Context, req resource.CreateRe
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.CloudConnect{
+	createReq := &client.CloudConnect{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -593,7 +597,7 @@ func (r *CloudConnectResource) Create(ctx context.Context, req resource.CreateRe
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -602,7 +606,7 @@ func (r *CloudConnectResource) Create(ctx context.Context, req resource.CreateRe
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -611,7 +615,7 @@ func (r *CloudConnectResource) Create(ctx context.Context, req resource.CreateRe
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -647,7 +651,7 @@ func (r *CloudConnectResource) Create(ctx context.Context, req resource.CreateRe
 			vpc_attachmentsNestedMap := make(map[string]interface{})
 			aws_tgw_siteMap["vpc_attachments"] = vpc_attachmentsNestedMap
 		}
-		apiResource.Spec["aws_tgw_site"] = aws_tgw_siteMap
+		createReq.Spec["aws_tgw_site"] = aws_tgw_siteMap
 	}
 	if data.AzureVNETSite != nil {
 		azure_vnet_siteMap := make(map[string]interface{})
@@ -668,7 +672,7 @@ func (r *CloudConnectResource) Create(ctx context.Context, req resource.CreateRe
 			vnet_attachmentsNestedMap := make(map[string]interface{})
 			azure_vnet_siteMap["vnet_attachments"] = vnet_attachmentsNestedMap
 		}
-		apiResource.Spec["azure_vnet_site"] = azure_vnet_siteMap
+		createReq.Spec["azure_vnet_site"] = azure_vnet_siteMap
 	}
 	if data.Segment != nil {
 		segmentMap := make(map[string]interface{})
@@ -681,24 +685,60 @@ func (r *CloudConnectResource) Create(ctx context.Context, req resource.CreateRe
 		if !data.Segment.Tenant.IsNull() && !data.Segment.Tenant.IsUnknown() {
 			segmentMap["tenant"] = data.Segment.Tenant.ValueString()
 		}
-		apiResource.Spec["segment"] = segmentMap
+		createReq.Spec["segment"] = segmentMap
 	}
 
 
-	created, err := r.client.CreateCloudConnect(ctx, apiResource)
+	apiResource, err := r.client.CreateCloudConnect(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create CloudConnect: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if _, ok := apiResource.Spec["aws_tgw_site"].(map[string]interface{}); ok && isImport && data.AWSTGWSite == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AWSTGWSite = &CloudConnectAWSTGWSiteModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["azure_vnet_site"].(map[string]interface{}); ok && isImport && data.AzureVNETSite == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AzureVNETSite = &CloudConnectAzureVNETSiteModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["segment"].(map[string]interface{}); ok && (isImport || data.Segment != nil) {
+		data.Segment = &CloudConnectSegmentModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 

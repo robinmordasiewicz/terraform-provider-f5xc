@@ -158,6 +158,7 @@ func (r *K8SClusterRoleBindingResource) Schema(ctx context.Context, req resource
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional: true,
+						Computed: true,
 					},
 				},
 
@@ -310,7 +311,7 @@ func (r *K8SClusterRoleBindingResource) Create(ctx context.Context, req resource
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.K8SClusterRoleBinding{
+	createReq := &client.K8SClusterRoleBinding{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -319,7 +320,7 @@ func (r *K8SClusterRoleBindingResource) Create(ctx context.Context, req resource
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -328,7 +329,7 @@ func (r *K8SClusterRoleBindingResource) Create(ctx context.Context, req resource
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -337,7 +338,7 @@ func (r *K8SClusterRoleBindingResource) Create(ctx context.Context, req resource
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -352,7 +353,7 @@ func (r *K8SClusterRoleBindingResource) Create(ctx context.Context, req resource
 		if !data.K8SClusterRole.Tenant.IsNull() && !data.K8SClusterRole.Tenant.IsUnknown() {
 			k8s_cluster_roleMap["tenant"] = data.K8SClusterRole.Tenant.ValueString()
 		}
-		apiResource.Spec["k8s_cluster_role"] = k8s_cluster_roleMap
+		createReq.Spec["k8s_cluster_role"] = k8s_cluster_roleMap
 	}
 	if len(data.Subjects) > 0 {
 		var subjectsList []map[string]interface{}
@@ -376,24 +377,92 @@ func (r *K8SClusterRoleBindingResource) Create(ctx context.Context, req resource
 			}
 			subjectsList = append(subjectsList, itemMap)
 		}
-		apiResource.Spec["subjects"] = subjectsList
+		createReq.Spec["subjects"] = subjectsList
 	}
 
 
-	created, err := r.client.CreateK8SClusterRoleBinding(ctx, apiResource)
+	apiResource, err := r.client.CreateK8SClusterRoleBinding(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create K8SClusterRoleBinding: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["k8s_cluster_role"].(map[string]interface{}); ok && (isImport || data.K8SClusterRole != nil) {
+		data.K8SClusterRole = &K8SClusterRoleBindingK8SClusterRoleModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if listData, ok := apiResource.Spec["subjects"].([]interface{}); ok && len(listData) > 0 {
+		var subjectsList []K8SClusterRoleBindingSubjectsModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				subjectsList = append(subjectsList, K8SClusterRoleBindingSubjectsModel{
+					Group: func() types.String {
+						if v, ok := itemMap["group"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					ServiceAccount: func() *K8SClusterRoleBindingSubjectsServiceAccountModel {
+						if nestedMap, ok := itemMap["service_account"].(map[string]interface{}); ok {
+							return &K8SClusterRoleBindingSubjectsServiceAccountModel{
+								Name: func() types.String {
+									if v, ok := nestedMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := nestedMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					User: func() types.String {
+						if v, ok := itemMap["user"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.Subjects = subjectsList
+	}
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
@@ -506,7 +575,8 @@ func (r *K8SClusterRoleBindingResource) Read(ctx context.Context, req resource.R
 	}
 	if listData, ok := apiResource.Spec["subjects"].([]interface{}); ok && len(listData) > 0 {
 		var subjectsList []K8SClusterRoleBindingSubjectsModel
-		for _, item := range listData {
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				subjectsList = append(subjectsList, K8SClusterRoleBindingSubjectsModel{
 					Group: func() types.String {

@@ -280,7 +280,7 @@ func (r *AddressAllocatorResource) Create(ctx context.Context, req resource.Crea
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.AddressAllocator{
+	createReq := &client.AddressAllocator{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -289,7 +289,7 @@ func (r *AddressAllocatorResource) Create(ctx context.Context, req resource.Crea
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -298,7 +298,7 @@ func (r *AddressAllocatorResource) Create(ctx context.Context, req resource.Crea
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -307,7 +307,7 @@ func (r *AddressAllocatorResource) Create(ctx context.Context, req resource.Crea
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -322,41 +322,80 @@ func (r *AddressAllocatorResource) Create(ctx context.Context, req resource.Crea
 		if !data.AddressAllocationScheme.LocalInterfaceAddressType.IsNull() && !data.AddressAllocationScheme.LocalInterfaceAddressType.IsUnknown() {
 			address_allocation_schemeMap["local_interface_address_type"] = data.AddressAllocationScheme.LocalInterfaceAddressType.ValueString()
 		}
-		apiResource.Spec["address_allocation_scheme"] = address_allocation_schemeMap
+		createReq.Spec["address_allocation_scheme"] = address_allocation_schemeMap
 	}
 	if !data.AddressPool.IsNull() && !data.AddressPool.IsUnknown() {
 		var address_poolList []string
 		resp.Diagnostics.Append(data.AddressPool.ElementsAs(ctx, &address_poolList, false)...)
 		if !resp.Diagnostics.HasError() {
-			apiResource.Spec["address_pool"] = address_poolList
+			createReq.Spec["address_pool"] = address_poolList
 		}
 	}
 	if !data.Mode.IsNull() && !data.Mode.IsUnknown() {
-		apiResource.Spec["mode"] = data.Mode.ValueString()
+		createReq.Spec["mode"] = data.Mode.ValueString()
 	}
 
 
-	created, err := r.client.CreateAddressAllocator(ctx, apiResource)
+	apiResource, err := r.client.CreateAddressAllocator(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create AddressAllocator: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
-	if v, ok := created.Spec["mode"].(string); ok && v != "" {
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["address_allocation_scheme"].(map[string]interface{}); ok && (isImport || data.AddressAllocationScheme != nil) {
+		data.AddressAllocationScheme = &AddressAllocatorAddressAllocationSchemeModel{
+			AllocationUnit: func() types.Int64 {
+				if v, ok := blockData["allocation_unit"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			LocalInterfaceAddressOffset: func() types.Int64 {
+				if v, ok := blockData["local_interface_address_offset"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			LocalInterfaceAddressType: func() types.String {
+				if v, ok := blockData["local_interface_address_type"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if v, ok := apiResource.Spec["address_pool"].([]interface{}); ok && len(v) > 0 {
+		var address_poolList []string
+		for _, item := range v {
+			if s, ok := item.(string); ok {
+				address_poolList = append(address_poolList, s)
+			}
+		}
+		listVal, diags := types.ListValueFrom(ctx, types.StringType, address_poolList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.AddressPool = listVal
+		}
+	} else {
+		data.AddressPool = types.ListNull(types.StringType)
+	}
+	if v, ok := apiResource.Spec["mode"].(string); ok && v != "" {
 		data.Mode = types.StringValue(v)
-	} else if data.Mode.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.Mode = types.StringNull()
 	}
-	// If plan had a value, preserve it
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 

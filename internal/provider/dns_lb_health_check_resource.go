@@ -398,7 +398,7 @@ func (r *DNSLbHealthCheckResource) Create(ctx context.Context, req resource.Crea
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.DNSLbHealthCheck{
+	createReq := &client.DNSLbHealthCheck{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -407,7 +407,7 @@ func (r *DNSLbHealthCheckResource) Create(ctx context.Context, req resource.Crea
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -416,7 +416,7 @@ func (r *DNSLbHealthCheckResource) Create(ctx context.Context, req resource.Crea
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -425,7 +425,7 @@ func (r *DNSLbHealthCheckResource) Create(ctx context.Context, req resource.Crea
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -443,7 +443,7 @@ func (r *DNSLbHealthCheckResource) Create(ctx context.Context, req resource.Crea
 		if !data.HTTPHealthCheck.Send.IsNull() && !data.HTTPHealthCheck.Send.IsUnknown() {
 			http_health_checkMap["send"] = data.HTTPHealthCheck.Send.ValueString()
 		}
-		apiResource.Spec["http_health_check"] = http_health_checkMap
+		createReq.Spec["http_health_check"] = http_health_checkMap
 	}
 	if data.HTTPSHealthCheck != nil {
 		https_health_checkMap := make(map[string]interface{})
@@ -459,11 +459,11 @@ func (r *DNSLbHealthCheckResource) Create(ctx context.Context, req resource.Crea
 		if !data.HTTPSHealthCheck.Send.IsNull() && !data.HTTPSHealthCheck.Send.IsUnknown() {
 			https_health_checkMap["send"] = data.HTTPSHealthCheck.Send.ValueString()
 		}
-		apiResource.Spec["https_health_check"] = https_health_checkMap
+		createReq.Spec["https_health_check"] = https_health_checkMap
 	}
 	if data.IcmpHealthCheck != nil {
 		icmp_health_checkMap := make(map[string]interface{})
-		apiResource.Spec["icmp_health_check"] = icmp_health_checkMap
+		createReq.Spec["icmp_health_check"] = icmp_health_checkMap
 	}
 	if data.TCPHealthCheck != nil {
 		tcp_health_checkMap := make(map[string]interface{})
@@ -479,7 +479,7 @@ func (r *DNSLbHealthCheckResource) Create(ctx context.Context, req resource.Crea
 		if !data.TCPHealthCheck.Send.IsNull() && !data.TCPHealthCheck.Send.IsUnknown() {
 			tcp_health_checkMap["send"] = data.TCPHealthCheck.Send.ValueString()
 		}
-		apiResource.Spec["tcp_health_check"] = tcp_health_checkMap
+		createReq.Spec["tcp_health_check"] = tcp_health_checkMap
 	}
 	if data.TCPHexHealthCheck != nil {
 		tcp_hex_health_checkMap := make(map[string]interface{})
@@ -495,7 +495,7 @@ func (r *DNSLbHealthCheckResource) Create(ctx context.Context, req resource.Crea
 		if !data.TCPHexHealthCheck.Send.IsNull() && !data.TCPHexHealthCheck.Send.IsUnknown() {
 			tcp_hex_health_checkMap["send"] = data.TCPHexHealthCheck.Send.ValueString()
 		}
-		apiResource.Spec["tcp_hex_health_check"] = tcp_hex_health_checkMap
+		createReq.Spec["tcp_hex_health_check"] = tcp_hex_health_checkMap
 	}
 	if data.UDPHealthCheck != nil {
 		udp_health_checkMap := make(map[string]interface{})
@@ -511,24 +511,173 @@ func (r *DNSLbHealthCheckResource) Create(ctx context.Context, req resource.Crea
 		if !data.UDPHealthCheck.Send.IsNull() && !data.UDPHealthCheck.Send.IsUnknown() {
 			udp_health_checkMap["send"] = data.UDPHealthCheck.Send.ValueString()
 		}
-		apiResource.Spec["udp_health_check"] = udp_health_checkMap
+		createReq.Spec["udp_health_check"] = udp_health_checkMap
 	}
 
 
-	created, err := r.client.CreateDNSLbHealthCheck(ctx, apiResource)
+	apiResource, err := r.client.CreateDNSLbHealthCheck(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create DNSLbHealthCheck: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["http_health_check"].(map[string]interface{}); ok && (isImport || data.HTTPHealthCheck != nil) {
+		data.HTTPHealthCheck = &DNSLbHealthCheckHTTPHealthCheckModel{
+			HealthCheckPort: func() types.Int64 {
+				if v, ok := blockData["health_check_port"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			HealthCheckSecondaryPort: func() types.Int64 {
+				if v, ok := blockData["health_check_secondary_port"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			Receive: func() types.String {
+				if v, ok := blockData["receive"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Send: func() types.String {
+				if v, ok := blockData["send"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["https_health_check"].(map[string]interface{}); ok && (isImport || data.HTTPSHealthCheck != nil) {
+		data.HTTPSHealthCheck = &DNSLbHealthCheckHTTPSHealthCheckModel{
+			HealthCheckPort: func() types.Int64 {
+				if v, ok := blockData["health_check_port"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			HealthCheckSecondaryPort: func() types.Int64 {
+				if v, ok := blockData["health_check_secondary_port"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			Receive: func() types.String {
+				if v, ok := blockData["receive"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Send: func() types.String {
+				if v, ok := blockData["send"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["icmp_health_check"].(map[string]interface{}); ok && isImport && data.IcmpHealthCheck == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.IcmpHealthCheck = &DNSLbHealthCheckEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["tcp_health_check"].(map[string]interface{}); ok && (isImport || data.TCPHealthCheck != nil) {
+		data.TCPHealthCheck = &DNSLbHealthCheckTCPHealthCheckModel{
+			HealthCheckPort: func() types.Int64 {
+				if v, ok := blockData["health_check_port"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			HealthCheckSecondaryPort: func() types.Int64 {
+				if v, ok := blockData["health_check_secondary_port"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			Receive: func() types.String {
+				if v, ok := blockData["receive"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Send: func() types.String {
+				if v, ok := blockData["send"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["tcp_hex_health_check"].(map[string]interface{}); ok && (isImport || data.TCPHexHealthCheck != nil) {
+		data.TCPHexHealthCheck = &DNSLbHealthCheckTCPHexHealthCheckModel{
+			HealthCheckPort: func() types.Int64 {
+				if v, ok := blockData["health_check_port"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			HealthCheckSecondaryPort: func() types.Int64 {
+				if v, ok := blockData["health_check_secondary_port"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			Receive: func() types.String {
+				if v, ok := blockData["receive"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Send: func() types.String {
+				if v, ok := blockData["send"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["udp_health_check"].(map[string]interface{}); ok && (isImport || data.UDPHealthCheck != nil) {
+		data.UDPHealthCheck = &DNSLbHealthCheckUDPHealthCheckModel{
+			HealthCheckPort: func() types.Int64 {
+				if v, ok := blockData["health_check_port"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			HealthCheckSecondaryPort: func() types.Int64 {
+				if v, ok := blockData["health_check_secondary_port"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			Receive: func() types.String {
+				if v, ok := blockData["receive"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Send: func() types.String {
+				if v, ok := blockData["send"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 

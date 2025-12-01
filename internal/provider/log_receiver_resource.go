@@ -418,7 +418,7 @@ func (r *LogReceiverResource) Create(ctx context.Context, req resource.CreateReq
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.LogReceiver{
+	createReq := &client.LogReceiver{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -427,7 +427,7 @@ func (r *LogReceiverResource) Create(ctx context.Context, req resource.CreateReq
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -436,7 +436,7 @@ func (r *LogReceiverResource) Create(ctx context.Context, req resource.CreateReq
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -445,13 +445,13 @@ func (r *LogReceiverResource) Create(ctx context.Context, req resource.CreateReq
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
 	if data.SiteLocal != nil {
 		site_localMap := make(map[string]interface{})
-		apiResource.Spec["site_local"] = site_localMap
+		createReq.Spec["site_local"] = site_localMap
 	}
 	if data.Syslog != nil {
 		syslogMap := make(map[string]interface{})
@@ -491,24 +491,121 @@ func (r *LogReceiverResource) Create(ctx context.Context, req resource.CreateReq
 			}
 			syslogMap["udp_server"] = udp_serverNestedMap
 		}
-		apiResource.Spec["syslog"] = syslogMap
+		createReq.Spec["syslog"] = syslogMap
 	}
 
 
-	created, err := r.client.CreateLogReceiver(ctx, apiResource)
+	apiResource, err := r.client.CreateLogReceiver(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create LogReceiver: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if _, ok := apiResource.Spec["site_local"].(map[string]interface{}); ok && isImport && data.SiteLocal == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.SiteLocal = &LogReceiverEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["syslog"].(map[string]interface{}); ok && (isImport || data.Syslog != nil) {
+		data.Syslog = &LogReceiverSyslogModel{
+			SyslogRfc5424: func() types.Int64 {
+				if v, ok := blockData["syslog_rfc5424"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			TCPServer: func() *LogReceiverSyslogTCPServerModel {
+				if !isImport && data.Syslog != nil && data.Syslog.TCPServer != nil {
+					// Normal Read: preserve existing state value
+					return data.Syslog.TCPServer
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["tcp_server"].(map[string]interface{}); ok {
+					return &LogReceiverSyslogTCPServerModel{
+						Port: func() types.Int64 {
+							if v, ok := nestedBlockData["port"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						ServerName: func() types.String {
+							if v, ok := nestedBlockData["server_name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			TLSServer: func() *LogReceiverSyslogTLSServerModel {
+				if !isImport && data.Syslog != nil && data.Syslog.TLSServer != nil {
+					// Normal Read: preserve existing state value
+					return data.Syslog.TLSServer
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["tls_server"].(map[string]interface{}); ok {
+					return &LogReceiverSyslogTLSServerModel{
+						Port: func() types.Int64 {
+							if v, ok := nestedBlockData["port"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						ServerName: func() types.String {
+							if v, ok := nestedBlockData["server_name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						TrustedCaURL: func() types.String {
+							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			UDPServer: func() *LogReceiverSyslogUDPServerModel {
+				if !isImport && data.Syslog != nil && data.Syslog.UDPServer != nil {
+					// Normal Read: preserve existing state value
+					return data.Syslog.UDPServer
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["udp_server"].(map[string]interface{}); ok {
+					return &LogReceiverSyslogUDPServerModel{
+						Port: func() types.Int64 {
+							if v, ok := nestedBlockData["port"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						ServerName: func() types.String {
+							if v, ok := nestedBlockData["server_name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+		}
+	}
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 

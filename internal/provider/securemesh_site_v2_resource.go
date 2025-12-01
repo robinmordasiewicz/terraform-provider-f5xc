@@ -2138,6 +2138,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 								"tenant": schema.StringAttribute{
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional: true,
+									Computed: true,
 								},
 							},
 						},
@@ -2165,6 +2166,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 								"tenant": schema.StringAttribute{
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional: true,
+									Computed: true,
 								},
 							},
 						},
@@ -3290,6 +3292,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional: true,
+						Computed: true,
 					},
 				},
 
@@ -3308,6 +3311,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional: true,
+						Computed: true,
 					},
 				},
 
@@ -4402,6 +4406,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																				"kind": schema.StringAttribute{
 																					MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																					Optional: true,
+																					Computed: true,
 																				},
 																				"name": schema.StringAttribute{
 																					MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -4414,10 +4419,12 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																				"tenant": schema.StringAttribute{
 																					MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																					Optional: true,
+																					Computed: true,
 																				},
 																				"uid": schema.StringAttribute{
 																					MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																					Optional: true,
+																					Computed: true,
 																				},
 																			},
 																		},
@@ -4482,6 +4489,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																				"kind": schema.StringAttribute{
 																					MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																					Optional: true,
+																					Computed: true,
 																				},
 																				"name": schema.StringAttribute{
 																					MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -4494,10 +4502,12 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																				"tenant": schema.StringAttribute{
 																					MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																					Optional: true,
+																					Computed: true,
 																				},
 																				"uid": schema.StringAttribute{
 																					MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																					Optional: true,
+																					Computed: true,
 																				},
 																			},
 																		},
@@ -4586,6 +4596,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																				"kind": schema.StringAttribute{
 																					MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																					Optional: true,
+																					Computed: true,
 																				},
 																				"name": schema.StringAttribute{
 																					MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -4598,10 +4609,12 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																				"tenant": schema.StringAttribute{
 																					MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																					Optional: true,
+																					Computed: true,
 																				},
 																				"uid": schema.StringAttribute{
 																					MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																					Optional: true,
+																					Computed: true,
 																				},
 																			},
 																		},
@@ -4666,6 +4679,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																				"kind": schema.StringAttribute{
 																					MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																					Optional: true,
+																					Computed: true,
 																				},
 																				"name": schema.StringAttribute{
 																					MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -4678,10 +4692,12 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																				"tenant": schema.StringAttribute{
 																					MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																					Optional: true,
+																					Computed: true,
 																				},
 																				"uid": schema.StringAttribute{
 																					MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																					Optional: true,
+																					Computed: true,
 																				},
 																			},
 																		},
@@ -4715,6 +4731,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional: true,
+						Computed: true,
 					},
 				},
 
@@ -5765,6 +5782,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
+								Computed: true,
 							},
 						},
 					},
@@ -6285,7 +6303,7 @@ func (r *SecuremeshSiteV2Resource) Create(ctx context.Context, req resource.Crea
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.SecuremeshSiteV2{
+	createReq := &client.SecuremeshSiteV2{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -6294,7 +6312,7 @@ func (r *SecuremeshSiteV2Resource) Create(ctx context.Context, req resource.Crea
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -6303,7 +6321,7 @@ func (r *SecuremeshSiteV2Resource) Create(ctx context.Context, req resource.Crea
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -6312,7 +6330,7 @@ func (r *SecuremeshSiteV2Resource) Create(ctx context.Context, req resource.Crea
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -6335,7 +6353,7 @@ func (r *SecuremeshSiteV2Resource) Create(ctx context.Context, req resource.Crea
 			}
 			active_enhanced_firewall_policiesMap["enhanced_firewall_policies"] = enhanced_firewall_policiesList
 		}
-		apiResource.Spec["active_enhanced_firewall_policies"] = active_enhanced_firewall_policiesMap
+		createReq.Spec["active_enhanced_firewall_policies"] = active_enhanced_firewall_policiesMap
 	}
 	if data.ActiveForwardProxyPolicies != nil {
 		active_forward_proxy_policiesMap := make(map[string]interface{})
@@ -6356,7 +6374,7 @@ func (r *SecuremeshSiteV2Resource) Create(ctx context.Context, req resource.Crea
 			}
 			active_forward_proxy_policiesMap["forward_proxy_policies"] = forward_proxy_policiesList
 		}
-		apiResource.Spec["active_forward_proxy_policies"] = active_forward_proxy_policiesMap
+		createReq.Spec["active_forward_proxy_policies"] = active_forward_proxy_policiesMap
 	}
 	if data.AdminUserCredentials != nil {
 		admin_user_credentialsMap := make(map[string]interface{})
@@ -6367,7 +6385,7 @@ func (r *SecuremeshSiteV2Resource) Create(ctx context.Context, req resource.Crea
 		if !data.AdminUserCredentials.SSHKey.IsNull() && !data.AdminUserCredentials.SSHKey.IsUnknown() {
 			admin_user_credentialsMap["ssh_key"] = data.AdminUserCredentials.SSHKey.ValueString()
 		}
-		apiResource.Spec["admin_user_credentials"] = admin_user_credentialsMap
+		createReq.Spec["admin_user_credentials"] = admin_user_credentialsMap
 	}
 	if data.AWS != nil {
 		awsMap := make(map[string]interface{})
@@ -6375,7 +6393,7 @@ func (r *SecuremeshSiteV2Resource) Create(ctx context.Context, req resource.Crea
 			not_managedNestedMap := make(map[string]interface{})
 			awsMap["not_managed"] = not_managedNestedMap
 		}
-		apiResource.Spec["aws"] = awsMap
+		createReq.Spec["aws"] = awsMap
 	}
 	if data.Azure != nil {
 		azureMap := make(map[string]interface{})
@@ -6383,7 +6401,7 @@ func (r *SecuremeshSiteV2Resource) Create(ctx context.Context, req resource.Crea
 			not_managedNestedMap := make(map[string]interface{})
 			azureMap["not_managed"] = not_managedNestedMap
 		}
-		apiResource.Spec["azure"] = azureMap
+		createReq.Spec["azure"] = azureMap
 	}
 	if data.Baremetal != nil {
 		baremetalMap := make(map[string]interface{})
@@ -6391,11 +6409,11 @@ func (r *SecuremeshSiteV2Resource) Create(ctx context.Context, req resource.Crea
 			not_managedNestedMap := make(map[string]interface{})
 			baremetalMap["not_managed"] = not_managedNestedMap
 		}
-		apiResource.Spec["baremetal"] = baremetalMap
+		createReq.Spec["baremetal"] = baremetalMap
 	}
 	if data.BlockAllServices != nil {
 		block_all_servicesMap := make(map[string]interface{})
-		apiResource.Spec["block_all_services"] = block_all_servicesMap
+		createReq.Spec["block_all_services"] = block_all_servicesMap
 	}
 	if data.BlockedServices != nil {
 		blocked_servicesMap := make(map[string]interface{})
@@ -6419,7 +6437,7 @@ func (r *SecuremeshSiteV2Resource) Create(ctx context.Context, req resource.Crea
 			}
 			blocked_servicesMap["blocked_sevice"] = blocked_seviceList
 		}
-		apiResource.Spec["blocked_services"] = blocked_servicesMap
+		createReq.Spec["blocked_services"] = blocked_servicesMap
 	}
 	if data.CustomProxy != nil {
 		custom_proxyMap := make(map[string]interface{})
@@ -6442,7 +6460,7 @@ func (r *SecuremeshSiteV2Resource) Create(ctx context.Context, req resource.Crea
 		if !data.CustomProxy.Username.IsNull() && !data.CustomProxy.Username.IsUnknown() {
 			custom_proxyMap["username"] = data.CustomProxy.Username.ValueString()
 		}
-		apiResource.Spec["custom_proxy"] = custom_proxyMap
+		createReq.Spec["custom_proxy"] = custom_proxyMap
 	}
 	if data.CustomProxyBypass != nil {
 		custom_proxy_bypassMap := make(map[string]interface{})
@@ -6453,7 +6471,7 @@ func (r *SecuremeshSiteV2Resource) Create(ctx context.Context, req resource.Crea
 				custom_proxy_bypassMap["proxy_bypass"] = proxy_bypassItems
 			}
 		}
-		apiResource.Spec["custom_proxy_bypass"] = custom_proxy_bypassMap
+		createReq.Spec["custom_proxy_bypass"] = custom_proxy_bypassMap
 	}
 	if data.DcClusterGroupSLI != nil {
 		dc_cluster_group_sliMap := make(map[string]interface{})
@@ -6466,7 +6484,7 @@ func (r *SecuremeshSiteV2Resource) Create(ctx context.Context, req resource.Crea
 		if !data.DcClusterGroupSLI.Tenant.IsNull() && !data.DcClusterGroupSLI.Tenant.IsUnknown() {
 			dc_cluster_group_sliMap["tenant"] = data.DcClusterGroupSLI.Tenant.ValueString()
 		}
-		apiResource.Spec["dc_cluster_group_sli"] = dc_cluster_group_sliMap
+		createReq.Spec["dc_cluster_group_sli"] = dc_cluster_group_sliMap
 	}
 	if data.DcClusterGroupSLO != nil {
 		dc_cluster_group_sloMap := make(map[string]interface{})
@@ -6479,15 +6497,15 @@ func (r *SecuremeshSiteV2Resource) Create(ctx context.Context, req resource.Crea
 		if !data.DcClusterGroupSLO.Tenant.IsNull() && !data.DcClusterGroupSLO.Tenant.IsUnknown() {
 			dc_cluster_group_sloMap["tenant"] = data.DcClusterGroupSLO.Tenant.ValueString()
 		}
-		apiResource.Spec["dc_cluster_group_slo"] = dc_cluster_group_sloMap
+		createReq.Spec["dc_cluster_group_slo"] = dc_cluster_group_sloMap
 	}
 	if data.DisableHA != nil {
 		disable_haMap := make(map[string]interface{})
-		apiResource.Spec["disable_ha"] = disable_haMap
+		createReq.Spec["disable_ha"] = disable_haMap
 	}
 	if data.DisableURLCategorization != nil {
 		disable_url_categorizationMap := make(map[string]interface{})
-		apiResource.Spec["disable_url_categorization"] = disable_url_categorizationMap
+		createReq.Spec["disable_url_categorization"] = disable_url_categorizationMap
 	}
 	if data.DNSNTPConfig != nil {
 		dns_ntp_configMap := make(map[string]interface{})
@@ -6505,15 +6523,15 @@ func (r *SecuremeshSiteV2Resource) Create(ctx context.Context, req resource.Crea
 		if data.DNSNTPConfig.F5NTPDefault != nil {
 			dns_ntp_configMap["f5_ntp_default"] = map[string]interface{}{}
 		}
-		apiResource.Spec["dns_ntp_config"] = dns_ntp_configMap
+		createReq.Spec["dns_ntp_config"] = dns_ntp_configMap
 	}
 	if data.EnableHA != nil {
 		enable_haMap := make(map[string]interface{})
-		apiResource.Spec["enable_ha"] = enable_haMap
+		createReq.Spec["enable_ha"] = enable_haMap
 	}
 	if data.EnableURLCategorization != nil {
 		enable_url_categorizationMap := make(map[string]interface{})
-		apiResource.Spec["enable_url_categorization"] = enable_url_categorizationMap
+		createReq.Spec["enable_url_categorization"] = enable_url_categorizationMap
 	}
 	if data.Equinix != nil {
 		equinixMap := make(map[string]interface{})
@@ -6521,11 +6539,11 @@ func (r *SecuremeshSiteV2Resource) Create(ctx context.Context, req resource.Crea
 			not_managedNestedMap := make(map[string]interface{})
 			equinixMap["not_managed"] = not_managedNestedMap
 		}
-		apiResource.Spec["equinix"] = equinixMap
+		createReq.Spec["equinix"] = equinixMap
 	}
 	if data.F5Proxy != nil {
 		f5_proxyMap := make(map[string]interface{})
-		apiResource.Spec["f5_proxy"] = f5_proxyMap
+		createReq.Spec["f5_proxy"] = f5_proxyMap
 	}
 	if data.GCP != nil {
 		gcpMap := make(map[string]interface{})
@@ -6533,7 +6551,7 @@ func (r *SecuremeshSiteV2Resource) Create(ctx context.Context, req resource.Crea
 			not_managedNestedMap := make(map[string]interface{})
 			gcpMap["not_managed"] = not_managedNestedMap
 		}
-		apiResource.Spec["gcp"] = gcpMap
+		createReq.Spec["gcp"] = gcpMap
 	}
 	if data.KVM != nil {
 		kvmMap := make(map[string]interface{})
@@ -6541,14 +6559,14 @@ func (r *SecuremeshSiteV2Resource) Create(ctx context.Context, req resource.Crea
 			not_managedNestedMap := make(map[string]interface{})
 			kvmMap["not_managed"] = not_managedNestedMap
 		}
-		apiResource.Spec["kvm"] = kvmMap
+		createReq.Spec["kvm"] = kvmMap
 	}
 	if data.LoadBalancing != nil {
 		load_balancingMap := make(map[string]interface{})
 		if !data.LoadBalancing.VipVrrpMode.IsNull() && !data.LoadBalancing.VipVrrpMode.IsUnknown() {
 			load_balancingMap["vip_vrrp_mode"] = data.LoadBalancing.VipVrrpMode.ValueString()
 		}
-		apiResource.Spec["load_balancing"] = load_balancingMap
+		createReq.Spec["load_balancing"] = load_balancingMap
 	}
 	if data.LocalVrf != nil {
 		local_vrfMap := make(map[string]interface{})
@@ -6578,7 +6596,7 @@ func (r *SecuremeshSiteV2Resource) Create(ctx context.Context, req resource.Crea
 			}
 			local_vrfMap["slo_config"] = slo_configNestedMap
 		}
-		apiResource.Spec["local_vrf"] = local_vrfMap
+		createReq.Spec["local_vrf"] = local_vrfMap
 	}
 	if data.LogReceiver != nil {
 		log_receiverMap := make(map[string]interface{})
@@ -6591,31 +6609,31 @@ func (r *SecuremeshSiteV2Resource) Create(ctx context.Context, req resource.Crea
 		if !data.LogReceiver.Tenant.IsNull() && !data.LogReceiver.Tenant.IsUnknown() {
 			log_receiverMap["tenant"] = data.LogReceiver.Tenant.ValueString()
 		}
-		apiResource.Spec["log_receiver"] = log_receiverMap
+		createReq.Spec["log_receiver"] = log_receiverMap
 	}
 	if data.LogsStreamingDisabled != nil {
 		logs_streaming_disabledMap := make(map[string]interface{})
-		apiResource.Spec["logs_streaming_disabled"] = logs_streaming_disabledMap
+		createReq.Spec["logs_streaming_disabled"] = logs_streaming_disabledMap
 	}
 	if data.NoForwardProxy != nil {
 		no_forward_proxyMap := make(map[string]interface{})
-		apiResource.Spec["no_forward_proxy"] = no_forward_proxyMap
+		createReq.Spec["no_forward_proxy"] = no_forward_proxyMap
 	}
 	if data.NoNetworkPolicy != nil {
 		no_network_policyMap := make(map[string]interface{})
-		apiResource.Spec["no_network_policy"] = no_network_policyMap
+		createReq.Spec["no_network_policy"] = no_network_policyMap
 	}
 	if data.NoProxyBypass != nil {
 		no_proxy_bypassMap := make(map[string]interface{})
-		apiResource.Spec["no_proxy_bypass"] = no_proxy_bypassMap
+		createReq.Spec["no_proxy_bypass"] = no_proxy_bypassMap
 	}
 	if data.NoS2SConnectivitySLI != nil {
 		no_s2s_connectivity_sliMap := make(map[string]interface{})
-		apiResource.Spec["no_s2s_connectivity_sli"] = no_s2s_connectivity_sliMap
+		createReq.Spec["no_s2s_connectivity_sli"] = no_s2s_connectivity_sliMap
 	}
 	if data.NoS2SConnectivitySLO != nil {
 		no_s2s_connectivity_sloMap := make(map[string]interface{})
-		apiResource.Spec["no_s2s_connectivity_slo"] = no_s2s_connectivity_sloMap
+		createReq.Spec["no_s2s_connectivity_slo"] = no_s2s_connectivity_sloMap
 	}
 	if data.Nutanix != nil {
 		nutanixMap := make(map[string]interface{})
@@ -6623,7 +6641,7 @@ func (r *SecuremeshSiteV2Resource) Create(ctx context.Context, req resource.Crea
 			not_managedNestedMap := make(map[string]interface{})
 			nutanixMap["not_managed"] = not_managedNestedMap
 		}
-		apiResource.Spec["nutanix"] = nutanixMap
+		createReq.Spec["nutanix"] = nutanixMap
 	}
 	if data.OCI != nil {
 		ociMap := make(map[string]interface{})
@@ -6631,7 +6649,7 @@ func (r *SecuremeshSiteV2Resource) Create(ctx context.Context, req resource.Crea
 			not_managedNestedMap := make(map[string]interface{})
 			ociMap["not_managed"] = not_managedNestedMap
 		}
-		apiResource.Spec["oci"] = ociMap
+		createReq.Spec["oci"] = ociMap
 	}
 	if data.OfflineSurvivabilityMode != nil {
 		offline_survivability_modeMap := make(map[string]interface{})
@@ -6641,7 +6659,7 @@ func (r *SecuremeshSiteV2Resource) Create(ctx context.Context, req resource.Crea
 		if data.OfflineSurvivabilityMode.NoOfflineSurvivabilityMode != nil {
 			offline_survivability_modeMap["no_offline_survivability_mode"] = map[string]interface{}{}
 		}
-		apiResource.Spec["offline_survivability_mode"] = offline_survivability_modeMap
+		createReq.Spec["offline_survivability_mode"] = offline_survivability_modeMap
 	}
 	if data.Openstack != nil {
 		openstackMap := make(map[string]interface{})
@@ -6649,7 +6667,7 @@ func (r *SecuremeshSiteV2Resource) Create(ctx context.Context, req resource.Crea
 			not_managedNestedMap := make(map[string]interface{})
 			openstackMap["not_managed"] = not_managedNestedMap
 		}
-		apiResource.Spec["openstack"] = openstackMap
+		createReq.Spec["openstack"] = openstackMap
 	}
 	if data.PerformanceEnhancementMode != nil {
 		performance_enhancement_modeMap := make(map[string]interface{})
@@ -6660,7 +6678,7 @@ func (r *SecuremeshSiteV2Resource) Create(ctx context.Context, req resource.Crea
 		if data.PerformanceEnhancementMode.PerfModeL7Enhanced != nil {
 			performance_enhancement_modeMap["perf_mode_l7_enhanced"] = map[string]interface{}{}
 		}
-		apiResource.Spec["performance_enhancement_mode"] = performance_enhancement_modeMap
+		createReq.Spec["performance_enhancement_mode"] = performance_enhancement_modeMap
 	}
 	if data.ReSelect != nil {
 		re_selectMap := make(map[string]interface{})
@@ -6674,7 +6692,7 @@ func (r *SecuremeshSiteV2Resource) Create(ctx context.Context, req resource.Crea
 			}
 			re_selectMap["specific_re"] = specific_reNestedMap
 		}
-		apiResource.Spec["re_select"] = re_selectMap
+		createReq.Spec["re_select"] = re_selectMap
 	}
 	if data.SiteMeshGroupOnSLO != nil {
 		site_mesh_group_on_sloMap := make(map[string]interface{})
@@ -6700,7 +6718,7 @@ func (r *SecuremeshSiteV2Resource) Create(ctx context.Context, req resource.Crea
 		if data.SiteMeshGroupOnSLO.SmConnectionPvtIP != nil {
 			site_mesh_group_on_sloMap["sm_connection_pvt_ip"] = map[string]interface{}{}
 		}
-		apiResource.Spec["site_mesh_group_on_slo"] = site_mesh_group_on_sloMap
+		createReq.Spec["site_mesh_group_on_slo"] = site_mesh_group_on_sloMap
 	}
 	if data.SoftwareSettings != nil {
 		software_settingsMap := make(map[string]interface{})
@@ -6718,7 +6736,7 @@ func (r *SecuremeshSiteV2Resource) Create(ctx context.Context, req resource.Crea
 			}
 			software_settingsMap["sw"] = swNestedMap
 		}
-		apiResource.Spec["software_settings"] = software_settingsMap
+		createReq.Spec["software_settings"] = software_settingsMap
 	}
 	if data.UpgradeSettings != nil {
 		upgrade_settingsMap := make(map[string]interface{})
@@ -6726,7 +6744,7 @@ func (r *SecuremeshSiteV2Resource) Create(ctx context.Context, req resource.Crea
 			kubernetes_upgrade_drainNestedMap := make(map[string]interface{})
 			upgrade_settingsMap["kubernetes_upgrade_drain"] = kubernetes_upgrade_drainNestedMap
 		}
-		apiResource.Spec["upgrade_settings"] = upgrade_settingsMap
+		createReq.Spec["upgrade_settings"] = upgrade_settingsMap
 	}
 	if data.Vmware != nil {
 		vmwareMap := make(map[string]interface{})
@@ -6734,44 +6752,478 @@ func (r *SecuremeshSiteV2Resource) Create(ctx context.Context, req resource.Crea
 			not_managedNestedMap := make(map[string]interface{})
 			vmwareMap["not_managed"] = not_managedNestedMap
 		}
-		apiResource.Spec["vmware"] = vmwareMap
+		createReq.Spec["vmware"] = vmwareMap
 	}
 	if !data.TunnelDeadTimeout.IsNull() && !data.TunnelDeadTimeout.IsUnknown() {
-		apiResource.Spec["tunnel_dead_timeout"] = data.TunnelDeadTimeout.ValueInt64()
+		createReq.Spec["tunnel_dead_timeout"] = data.TunnelDeadTimeout.ValueInt64()
 	}
 	if !data.TunnelType.IsNull() && !data.TunnelType.IsUnknown() {
-		apiResource.Spec["tunnel_type"] = data.TunnelType.ValueString()
+		createReq.Spec["tunnel_type"] = data.TunnelType.ValueString()
 	}
 
 
-	created, err := r.client.CreateSecuremeshSiteV2(ctx, apiResource)
+	apiResource, err := r.client.CreateSecuremeshSiteV2(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create SecuremeshSiteV2: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
-	if v, ok := created.Spec["tunnel_dead_timeout"].(float64); ok {
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["active_enhanced_firewall_policies"].(map[string]interface{}); ok && (isImport || data.ActiveEnhancedFirewallPolicies != nil) {
+		data.ActiveEnhancedFirewallPolicies = &SecuremeshSiteV2ActiveEnhancedFirewallPoliciesModel{
+			EnhancedFirewallPolicies: func() []SecuremeshSiteV2ActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel {
+				if listData, ok := blockData["enhanced_firewall_policies"].([]interface{}); ok && len(listData) > 0 {
+					var result []SecuremeshSiteV2ActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, SecuremeshSiteV2ActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel{
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := itemMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := itemMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["active_forward_proxy_policies"].(map[string]interface{}); ok && (isImport || data.ActiveForwardProxyPolicies != nil) {
+		data.ActiveForwardProxyPolicies = &SecuremeshSiteV2ActiveForwardProxyPoliciesModel{
+			ForwardProxyPolicies: func() []SecuremeshSiteV2ActiveForwardProxyPoliciesForwardProxyPoliciesModel {
+				if listData, ok := blockData["forward_proxy_policies"].([]interface{}); ok && len(listData) > 0 {
+					var result []SecuremeshSiteV2ActiveForwardProxyPoliciesForwardProxyPoliciesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, SecuremeshSiteV2ActiveForwardProxyPoliciesForwardProxyPoliciesModel{
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := itemMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := itemMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["admin_user_credentials"].(map[string]interface{}); ok && (isImport || data.AdminUserCredentials != nil) {
+		data.AdminUserCredentials = &SecuremeshSiteV2AdminUserCredentialsModel{
+			AdminPassword: func() *SecuremeshSiteV2AdminUserCredentialsAdminPasswordModel {
+				if !isImport && data.AdminUserCredentials != nil && data.AdminUserCredentials.AdminPassword != nil {
+					// Normal Read: preserve existing state value
+					return data.AdminUserCredentials.AdminPassword
+				}
+				// Import case: read from API
+				if _, ok := blockData["admin_password"].(map[string]interface{}); ok {
+					return &SecuremeshSiteV2AdminUserCredentialsAdminPasswordModel{
+					}
+				}
+				return nil
+			}(),
+			SSHKey: func() types.String {
+				if v, ok := blockData["ssh_key"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["aws"].(map[string]interface{}); ok && isImport && data.AWS == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AWS = &SecuremeshSiteV2AWSModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["azure"].(map[string]interface{}); ok && isImport && data.Azure == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Azure = &SecuremeshSiteV2AzureModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["baremetal"].(map[string]interface{}); ok && isImport && data.Baremetal == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Baremetal = &SecuremeshSiteV2BaremetalModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["block_all_services"].(map[string]interface{}); ok && isImport && data.BlockAllServices == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.BlockAllServices = &SecuremeshSiteV2EmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["blocked_services"].(map[string]interface{}); ok && (isImport || data.BlockedServices != nil) {
+		data.BlockedServices = &SecuremeshSiteV2BlockedServicesModel{
+			BlockedSevice: func() []SecuremeshSiteV2BlockedServicesBlockedSeviceModel {
+				if listData, ok := blockData["blocked_sevice"].([]interface{}); ok && len(listData) > 0 {
+					var result []SecuremeshSiteV2BlockedServicesBlockedSeviceModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, SecuremeshSiteV2BlockedServicesBlockedSeviceModel{
+								DNS: func() *SecuremeshSiteV2EmptyModel {
+									if _, ok := itemMap["dns"].(map[string]interface{}); ok {
+										return &SecuremeshSiteV2EmptyModel{}
+									}
+									return nil
+								}(),
+								NetworkType: func() types.String {
+									if v, ok := itemMap["network_type"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								SSH: func() *SecuremeshSiteV2EmptyModel {
+									if _, ok := itemMap["ssh"].(map[string]interface{}); ok {
+										return &SecuremeshSiteV2EmptyModel{}
+									}
+									return nil
+								}(),
+								WebUserInterface: func() *SecuremeshSiteV2EmptyModel {
+									if _, ok := itemMap["web_user_interface"].(map[string]interface{}); ok {
+										return &SecuremeshSiteV2EmptyModel{}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["custom_proxy"].(map[string]interface{}); ok && (isImport || data.CustomProxy != nil) {
+		data.CustomProxy = &SecuremeshSiteV2CustomProxyModel{
+			DisableReTunnel: func() *SecuremeshSiteV2EmptyModel {
+				if !isImport && data.CustomProxy != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CustomProxy.DisableReTunnel
+				}
+				// Import case: read from API
+				if _, ok := blockData["disable_re_tunnel"].(map[string]interface{}); ok {
+					return &SecuremeshSiteV2EmptyModel{}
+				}
+				return nil
+			}(),
+			EnableReTunnel: func() *SecuremeshSiteV2EmptyModel {
+				if !isImport && data.CustomProxy != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CustomProxy.EnableReTunnel
+				}
+				// Import case: read from API
+				if _, ok := blockData["enable_re_tunnel"].(map[string]interface{}); ok {
+					return &SecuremeshSiteV2EmptyModel{}
+				}
+				return nil
+			}(),
+			Password: func() *SecuremeshSiteV2CustomProxyPasswordModel {
+				if !isImport && data.CustomProxy != nil && data.CustomProxy.Password != nil {
+					// Normal Read: preserve existing state value
+					return data.CustomProxy.Password
+				}
+				// Import case: read from API
+				if _, ok := blockData["password"].(map[string]interface{}); ok {
+					return &SecuremeshSiteV2CustomProxyPasswordModel{
+					}
+				}
+				return nil
+			}(),
+			ProxyIPAddress: func() types.String {
+				if v, ok := blockData["proxy_ip_address"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			ProxyPort: func() types.Int64 {
+				if v, ok := blockData["proxy_port"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			Username: func() types.String {
+				if v, ok := blockData["username"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["custom_proxy_bypass"].(map[string]interface{}); ok && (isImport || data.CustomProxyBypass != nil) {
+		data.CustomProxyBypass = &SecuremeshSiteV2CustomProxyBypassModel{
+			ProxyBypass: func() types.List {
+				if v, ok := blockData["proxy_bypass"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["dc_cluster_group_sli"].(map[string]interface{}); ok && (isImport || data.DcClusterGroupSLI != nil) {
+		data.DcClusterGroupSLI = &SecuremeshSiteV2DcClusterGroupSLIModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["dc_cluster_group_slo"].(map[string]interface{}); ok && (isImport || data.DcClusterGroupSLO != nil) {
+		data.DcClusterGroupSLO = &SecuremeshSiteV2DcClusterGroupSLOModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["disable_ha"].(map[string]interface{}); ok && isImport && data.DisableHA == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableHA = &SecuremeshSiteV2EmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["disable_url_categorization"].(map[string]interface{}); ok && isImport && data.DisableURLCategorization == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableURLCategorization = &SecuremeshSiteV2EmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["dns_ntp_config"].(map[string]interface{}); ok && isImport && data.DNSNTPConfig == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DNSNTPConfig = &SecuremeshSiteV2DNSNTPConfigModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["enable_ha"].(map[string]interface{}); ok && isImport && data.EnableHA == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.EnableHA = &SecuremeshSiteV2EmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["enable_url_categorization"].(map[string]interface{}); ok && isImport && data.EnableURLCategorization == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.EnableURLCategorization = &SecuremeshSiteV2EmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["equinix"].(map[string]interface{}); ok && isImport && data.Equinix == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Equinix = &SecuremeshSiteV2EquinixModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["f5_proxy"].(map[string]interface{}); ok && isImport && data.F5Proxy == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.F5Proxy = &SecuremeshSiteV2EmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["gcp"].(map[string]interface{}); ok && isImport && data.GCP == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.GCP = &SecuremeshSiteV2GCPModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["kvm"].(map[string]interface{}); ok && isImport && data.KVM == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.KVM = &SecuremeshSiteV2KVMModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["load_balancing"].(map[string]interface{}); ok && (isImport || data.LoadBalancing != nil) {
+		data.LoadBalancing = &SecuremeshSiteV2LoadBalancingModel{
+			VipVrrpMode: func() types.String {
+				if v, ok := blockData["vip_vrrp_mode"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["local_vrf"].(map[string]interface{}); ok && isImport && data.LocalVrf == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.LocalVrf = &SecuremeshSiteV2LocalVrfModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["log_receiver"].(map[string]interface{}); ok && (isImport || data.LogReceiver != nil) {
+		data.LogReceiver = &SecuremeshSiteV2LogReceiverModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["logs_streaming_disabled"].(map[string]interface{}); ok && isImport && data.LogsStreamingDisabled == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.LogsStreamingDisabled = &SecuremeshSiteV2EmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_forward_proxy"].(map[string]interface{}); ok && isImport && data.NoForwardProxy == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoForwardProxy = &SecuremeshSiteV2EmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_network_policy"].(map[string]interface{}); ok && isImport && data.NoNetworkPolicy == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoNetworkPolicy = &SecuremeshSiteV2EmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_proxy_bypass"].(map[string]interface{}); ok && isImport && data.NoProxyBypass == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoProxyBypass = &SecuremeshSiteV2EmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_s2s_connectivity_sli"].(map[string]interface{}); ok && isImport && data.NoS2SConnectivitySLI == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoS2SConnectivitySLI = &SecuremeshSiteV2EmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_s2s_connectivity_slo"].(map[string]interface{}); ok && isImport && data.NoS2SConnectivitySLO == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoS2SConnectivitySLO = &SecuremeshSiteV2EmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["nutanix"].(map[string]interface{}); ok && isImport && data.Nutanix == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Nutanix = &SecuremeshSiteV2NutanixModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["oci"].(map[string]interface{}); ok && isImport && data.OCI == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.OCI = &SecuremeshSiteV2OCIModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["offline_survivability_mode"].(map[string]interface{}); ok && isImport && data.OfflineSurvivabilityMode == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.OfflineSurvivabilityMode = &SecuremeshSiteV2OfflineSurvivabilityModeModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["openstack"].(map[string]interface{}); ok && isImport && data.Openstack == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Openstack = &SecuremeshSiteV2OpenstackModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["performance_enhancement_mode"].(map[string]interface{}); ok && isImport && data.PerformanceEnhancementMode == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.PerformanceEnhancementMode = &SecuremeshSiteV2PerformanceEnhancementModeModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["re_select"].(map[string]interface{}); ok && isImport && data.ReSelect == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ReSelect = &SecuremeshSiteV2ReSelectModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["site_mesh_group_on_slo"].(map[string]interface{}); ok && isImport && data.SiteMeshGroupOnSLO == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.SiteMeshGroupOnSLO = &SecuremeshSiteV2SiteMeshGroupOnSLOModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["software_settings"].(map[string]interface{}); ok && isImport && data.SoftwareSettings == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.SoftwareSettings = &SecuremeshSiteV2SoftwareSettingsModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["upgrade_settings"].(map[string]interface{}); ok && isImport && data.UpgradeSettings == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.UpgradeSettings = &SecuremeshSiteV2UpgradeSettingsModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["vmware"].(map[string]interface{}); ok && isImport && data.Vmware == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Vmware = &SecuremeshSiteV2VmwareModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["tunnel_dead_timeout"].(float64); ok {
 		data.TunnelDeadTimeout = types.Int64Value(int64(v))
-	} else if data.TunnelDeadTimeout.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.TunnelDeadTimeout = types.Int64Null()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["tunnel_type"].(string); ok && v != "" {
+	if v, ok := apiResource.Spec["tunnel_type"].(string); ok && v != "" {
 		data.TunnelType = types.StringValue(v)
-	} else if data.TunnelType.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.TunnelType = types.StringNull()
 	}
-	// If plan had a value, preserve it
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 

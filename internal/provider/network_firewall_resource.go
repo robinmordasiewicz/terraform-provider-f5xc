@@ -197,6 +197,7 @@ func (r *NetworkFirewallResource) Schema(ctx context.Context, req resource.Schem
 								"tenant": schema.StringAttribute{
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional: true,
+									Computed: true,
 								},
 							},
 						},
@@ -224,6 +225,7 @@ func (r *NetworkFirewallResource) Schema(ctx context.Context, req resource.Schem
 								"tenant": schema.StringAttribute{
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional: true,
+									Computed: true,
 								},
 							},
 						},
@@ -251,6 +253,7 @@ func (r *NetworkFirewallResource) Schema(ctx context.Context, req resource.Schem
 								"tenant": schema.StringAttribute{
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional: true,
+									Computed: true,
 								},
 							},
 						},
@@ -278,6 +281,7 @@ func (r *NetworkFirewallResource) Schema(ctx context.Context, req resource.Schem
 								"tenant": schema.StringAttribute{
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional: true,
+									Computed: true,
 								},
 							},
 						},
@@ -411,7 +415,7 @@ func (r *NetworkFirewallResource) Create(ctx context.Context, req resource.Creat
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.NetworkFirewall{
+	createReq := &client.NetworkFirewall{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -420,7 +424,7 @@ func (r *NetworkFirewallResource) Create(ctx context.Context, req resource.Creat
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -429,7 +433,7 @@ func (r *NetworkFirewallResource) Create(ctx context.Context, req resource.Creat
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -438,7 +442,7 @@ func (r *NetworkFirewallResource) Create(ctx context.Context, req resource.Creat
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -461,7 +465,7 @@ func (r *NetworkFirewallResource) Create(ctx context.Context, req resource.Creat
 			}
 			active_enhanced_firewall_policiesMap["enhanced_firewall_policies"] = enhanced_firewall_policiesList
 		}
-		apiResource.Spec["active_enhanced_firewall_policies"] = active_enhanced_firewall_policiesMap
+		createReq.Spec["active_enhanced_firewall_policies"] = active_enhanced_firewall_policiesMap
 	}
 	if data.ActiveFastAcls != nil {
 		active_fast_aclsMap := make(map[string]interface{})
@@ -482,7 +486,7 @@ func (r *NetworkFirewallResource) Create(ctx context.Context, req resource.Creat
 			}
 			active_fast_aclsMap["fast_acls"] = fast_aclsList
 		}
-		apiResource.Spec["active_fast_acls"] = active_fast_aclsMap
+		createReq.Spec["active_fast_acls"] = active_fast_aclsMap
 	}
 	if data.ActiveForwardProxyPolicies != nil {
 		active_forward_proxy_policiesMap := make(map[string]interface{})
@@ -503,7 +507,7 @@ func (r *NetworkFirewallResource) Create(ctx context.Context, req resource.Creat
 			}
 			active_forward_proxy_policiesMap["forward_proxy_policies"] = forward_proxy_policiesList
 		}
-		apiResource.Spec["active_forward_proxy_policies"] = active_forward_proxy_policiesMap
+		createReq.Spec["active_forward_proxy_policies"] = active_forward_proxy_policiesMap
 	}
 	if data.ActiveNetworkPolicies != nil {
 		active_network_policiesMap := make(map[string]interface{})
@@ -524,36 +528,195 @@ func (r *NetworkFirewallResource) Create(ctx context.Context, req resource.Creat
 			}
 			active_network_policiesMap["network_policies"] = network_policiesList
 		}
-		apiResource.Spec["active_network_policies"] = active_network_policiesMap
+		createReq.Spec["active_network_policies"] = active_network_policiesMap
 	}
 	if data.DisableFastACL != nil {
 		disable_fast_aclMap := make(map[string]interface{})
-		apiResource.Spec["disable_fast_acl"] = disable_fast_aclMap
+		createReq.Spec["disable_fast_acl"] = disable_fast_aclMap
 	}
 	if data.DisableForwardProxyPolicy != nil {
 		disable_forward_proxy_policyMap := make(map[string]interface{})
-		apiResource.Spec["disable_forward_proxy_policy"] = disable_forward_proxy_policyMap
+		createReq.Spec["disable_forward_proxy_policy"] = disable_forward_proxy_policyMap
 	}
 	if data.DisableNetworkPolicy != nil {
 		disable_network_policyMap := make(map[string]interface{})
-		apiResource.Spec["disable_network_policy"] = disable_network_policyMap
+		createReq.Spec["disable_network_policy"] = disable_network_policyMap
 	}
 
 
-	created, err := r.client.CreateNetworkFirewall(ctx, apiResource)
+	apiResource, err := r.client.CreateNetworkFirewall(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create NetworkFirewall: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["active_enhanced_firewall_policies"].(map[string]interface{}); ok && (isImport || data.ActiveEnhancedFirewallPolicies != nil) {
+		data.ActiveEnhancedFirewallPolicies = &NetworkFirewallActiveEnhancedFirewallPoliciesModel{
+			EnhancedFirewallPolicies: func() []NetworkFirewallActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel {
+				if listData, ok := blockData["enhanced_firewall_policies"].([]interface{}); ok && len(listData) > 0 {
+					var result []NetworkFirewallActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, NetworkFirewallActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel{
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := itemMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := itemMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["active_fast_acls"].(map[string]interface{}); ok && (isImport || data.ActiveFastAcls != nil) {
+		data.ActiveFastAcls = &NetworkFirewallActiveFastAclsModel{
+			FastAcls: func() []NetworkFirewallActiveFastAclsFastAclsModel {
+				if listData, ok := blockData["fast_acls"].([]interface{}); ok && len(listData) > 0 {
+					var result []NetworkFirewallActiveFastAclsFastAclsModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, NetworkFirewallActiveFastAclsFastAclsModel{
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := itemMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := itemMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["active_forward_proxy_policies"].(map[string]interface{}); ok && (isImport || data.ActiveForwardProxyPolicies != nil) {
+		data.ActiveForwardProxyPolicies = &NetworkFirewallActiveForwardProxyPoliciesModel{
+			ForwardProxyPolicies: func() []NetworkFirewallActiveForwardProxyPoliciesForwardProxyPoliciesModel {
+				if listData, ok := blockData["forward_proxy_policies"].([]interface{}); ok && len(listData) > 0 {
+					var result []NetworkFirewallActiveForwardProxyPoliciesForwardProxyPoliciesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, NetworkFirewallActiveForwardProxyPoliciesForwardProxyPoliciesModel{
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := itemMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := itemMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["active_network_policies"].(map[string]interface{}); ok && (isImport || data.ActiveNetworkPolicies != nil) {
+		data.ActiveNetworkPolicies = &NetworkFirewallActiveNetworkPoliciesModel{
+			NetworkPolicies: func() []NetworkFirewallActiveNetworkPoliciesNetworkPoliciesModel {
+				if listData, ok := blockData["network_policies"].([]interface{}); ok && len(listData) > 0 {
+					var result []NetworkFirewallActiveNetworkPoliciesNetworkPoliciesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, NetworkFirewallActiveNetworkPoliciesNetworkPoliciesModel{
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := itemMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := itemMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["disable_fast_acl"].(map[string]interface{}); ok && isImport && data.DisableFastACL == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableFastACL = &NetworkFirewallEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["disable_forward_proxy_policy"].(map[string]interface{}); ok && isImport && data.DisableForwardProxyPolicy == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableForwardProxyPolicy = &NetworkFirewallEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["disable_network_policy"].(map[string]interface{}); ok && isImport && data.DisableNetworkPolicy == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableNetworkPolicy = &NetworkFirewallEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 

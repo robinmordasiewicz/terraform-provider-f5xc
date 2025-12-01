@@ -832,6 +832,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
+								Computed: true,
 							},
 						},
 					},
@@ -1309,6 +1310,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
+								Computed: true,
 							},
 						},
 					},
@@ -1921,6 +1923,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
+								Computed: true,
 							},
 						},
 					},
@@ -2326,7 +2329,7 @@ func (r *GlobalLogReceiverResource) Create(ctx context.Context, req resource.Cre
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.GlobalLogReceiver{
+	createReq := &client.GlobalLogReceiver{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -2335,7 +2338,7 @@ func (r *GlobalLogReceiverResource) Create(ctx context.Context, req resource.Cre
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -2344,7 +2347,7 @@ func (r *GlobalLogReceiverResource) Create(ctx context.Context, req resource.Cre
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -2353,13 +2356,13 @@ func (r *GlobalLogReceiverResource) Create(ctx context.Context, req resource.Cre
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
 	if data.AuditLogs != nil {
 		audit_logsMap := make(map[string]interface{})
-		apiResource.Spec["audit_logs"] = audit_logsMap
+		createReq.Spec["audit_logs"] = audit_logsMap
 	}
 	if data.AWSCloudWatchReceiver != nil {
 		aws_cloud_watch_receiverMap := make(map[string]interface{})
@@ -2402,7 +2405,7 @@ func (r *GlobalLogReceiverResource) Create(ctx context.Context, req resource.Cre
 		if !data.AWSCloudWatchReceiver.StreamName.IsNull() && !data.AWSCloudWatchReceiver.StreamName.IsUnknown() {
 			aws_cloud_watch_receiverMap["stream_name"] = data.AWSCloudWatchReceiver.StreamName.ValueString()
 		}
-		apiResource.Spec["aws_cloud_watch_receiver"] = aws_cloud_watch_receiverMap
+		createReq.Spec["aws_cloud_watch_receiver"] = aws_cloud_watch_receiverMap
 	}
 	if data.AzureEventHubsReceiver != nil {
 		azure_event_hubs_receiverMap := make(map[string]interface{})
@@ -2416,7 +2419,7 @@ func (r *GlobalLogReceiverResource) Create(ctx context.Context, req resource.Cre
 		if !data.AzureEventHubsReceiver.Namespace.IsNull() && !data.AzureEventHubsReceiver.Namespace.IsUnknown() {
 			azure_event_hubs_receiverMap["namespace"] = data.AzureEventHubsReceiver.Namespace.ValueString()
 		}
-		apiResource.Spec["azure_event_hubs_receiver"] = azure_event_hubs_receiverMap
+		createReq.Spec["azure_event_hubs_receiver"] = azure_event_hubs_receiverMap
 	}
 	if data.AzureReceiver != nil {
 		azure_receiverMap := make(map[string]interface{})
@@ -2451,7 +2454,7 @@ func (r *GlobalLogReceiverResource) Create(ctx context.Context, req resource.Cre
 			}
 			azure_receiverMap["filename_options"] = filename_optionsNestedMap
 		}
-		apiResource.Spec["azure_receiver"] = azure_receiverMap
+		createReq.Spec["azure_receiver"] = azure_receiverMap
 	}
 	if data.DatadogReceiver != nil {
 		datadog_receiverMap := make(map[string]interface{})
@@ -2492,11 +2495,11 @@ func (r *GlobalLogReceiverResource) Create(ctx context.Context, req resource.Cre
 			}
 			datadog_receiverMap["use_tls"] = use_tlsNestedMap
 		}
-		apiResource.Spec["datadog_receiver"] = datadog_receiverMap
+		createReq.Spec["datadog_receiver"] = datadog_receiverMap
 	}
 	if data.DNSLogs != nil {
 		dns_logsMap := make(map[string]interface{})
-		apiResource.Spec["dns_logs"] = dns_logsMap
+		createReq.Spec["dns_logs"] = dns_logsMap
 	}
 	if data.GCPBucketReceiver != nil {
 		gcp_bucket_receiverMap := make(map[string]interface{})
@@ -2540,7 +2543,7 @@ func (r *GlobalLogReceiverResource) Create(ctx context.Context, req resource.Cre
 			}
 			gcp_bucket_receiverMap["gcp_cred"] = gcp_credNestedMap
 		}
-		apiResource.Spec["gcp_bucket_receiver"] = gcp_bucket_receiverMap
+		createReq.Spec["gcp_bucket_receiver"] = gcp_bucket_receiverMap
 	}
 	if data.HTTPReceiver != nil {
 		http_receiverMap := make(map[string]interface{})
@@ -2588,7 +2591,7 @@ func (r *GlobalLogReceiverResource) Create(ctx context.Context, req resource.Cre
 			}
 			http_receiverMap["use_tls"] = use_tlsNestedMap
 		}
-		apiResource.Spec["http_receiver"] = http_receiverMap
+		createReq.Spec["http_receiver"] = http_receiverMap
 	}
 	if data.KafkaReceiver != nil {
 		kafka_receiverMap := make(map[string]interface{})
@@ -2629,7 +2632,7 @@ func (r *GlobalLogReceiverResource) Create(ctx context.Context, req resource.Cre
 			}
 			kafka_receiverMap["use_tls"] = use_tlsNestedMap
 		}
-		apiResource.Spec["kafka_receiver"] = kafka_receiverMap
+		createReq.Spec["kafka_receiver"] = kafka_receiverMap
 	}
 	if data.NewRelicReceiver != nil {
 		new_relic_receiverMap := make(map[string]interface{})
@@ -2643,15 +2646,15 @@ func (r *GlobalLogReceiverResource) Create(ctx context.Context, req resource.Cre
 		if data.NewRelicReceiver.Us != nil {
 			new_relic_receiverMap["us"] = map[string]interface{}{}
 		}
-		apiResource.Spec["new_relic_receiver"] = new_relic_receiverMap
+		createReq.Spec["new_relic_receiver"] = new_relic_receiverMap
 	}
 	if data.NsAll != nil {
 		ns_allMap := make(map[string]interface{})
-		apiResource.Spec["ns_all"] = ns_allMap
+		createReq.Spec["ns_all"] = ns_allMap
 	}
 	if data.NsCurrent != nil {
 		ns_currentMap := make(map[string]interface{})
-		apiResource.Spec["ns_current"] = ns_currentMap
+		createReq.Spec["ns_current"] = ns_currentMap
 	}
 	if data.NsList != nil {
 		ns_listMap := make(map[string]interface{})
@@ -2662,7 +2665,7 @@ func (r *GlobalLogReceiverResource) Create(ctx context.Context, req resource.Cre
 				ns_listMap["namespaces"] = namespacesItems
 			}
 		}
-		apiResource.Spec["ns_list"] = ns_listMap
+		createReq.Spec["ns_list"] = ns_listMap
 	}
 	if data.QradarReceiver != nil {
 		qradar_receiverMap := make(map[string]interface{})
@@ -2696,11 +2699,11 @@ func (r *GlobalLogReceiverResource) Create(ctx context.Context, req resource.Cre
 			}
 			qradar_receiverMap["use_tls"] = use_tlsNestedMap
 		}
-		apiResource.Spec["qradar_receiver"] = qradar_receiverMap
+		createReq.Spec["qradar_receiver"] = qradar_receiverMap
 	}
 	if data.RequestLogs != nil {
 		request_logsMap := make(map[string]interface{})
-		apiResource.Spec["request_logs"] = request_logsMap
+		createReq.Spec["request_logs"] = request_logsMap
 	}
 	if data.S3Receiver != nil {
 		s3_receiverMap := make(map[string]interface{})
@@ -2747,11 +2750,11 @@ func (r *GlobalLogReceiverResource) Create(ctx context.Context, req resource.Cre
 			}
 			s3_receiverMap["filename_options"] = filename_optionsNestedMap
 		}
-		apiResource.Spec["s3_receiver"] = s3_receiverMap
+		createReq.Spec["s3_receiver"] = s3_receiverMap
 	}
 	if data.SecurityEvents != nil {
 		security_eventsMap := make(map[string]interface{})
-		apiResource.Spec["security_events"] = security_eventsMap
+		createReq.Spec["security_events"] = security_eventsMap
 	}
 	if data.SplunkReceiver != nil {
 		splunk_receiverMap := make(map[string]interface{})
@@ -2789,7 +2792,7 @@ func (r *GlobalLogReceiverResource) Create(ctx context.Context, req resource.Cre
 			}
 			splunk_receiverMap["use_tls"] = use_tlsNestedMap
 		}
-		apiResource.Spec["splunk_receiver"] = splunk_receiverMap
+		createReq.Spec["splunk_receiver"] = splunk_receiverMap
 	}
 	if data.SumoLogicReceiver != nil {
 		sumo_logic_receiverMap := make(map[string]interface{})
@@ -2797,24 +2800,990 @@ func (r *GlobalLogReceiverResource) Create(ctx context.Context, req resource.Cre
 			urlNestedMap := make(map[string]interface{})
 			sumo_logic_receiverMap["url"] = urlNestedMap
 		}
-		apiResource.Spec["sumo_logic_receiver"] = sumo_logic_receiverMap
+		createReq.Spec["sumo_logic_receiver"] = sumo_logic_receiverMap
 	}
 
 
-	created, err := r.client.CreateGlobalLogReceiver(ctx, apiResource)
+	apiResource, err := r.client.CreateGlobalLogReceiver(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create GlobalLogReceiver: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if _, ok := apiResource.Spec["audit_logs"].(map[string]interface{}); ok && isImport && data.AuditLogs == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AuditLogs = &GlobalLogReceiverEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["aws_cloud_watch_receiver"].(map[string]interface{}); ok && (isImport || data.AWSCloudWatchReceiver != nil) {
+		data.AWSCloudWatchReceiver = &GlobalLogReceiverAWSCloudWatchReceiverModel{
+			AWSCred: func() *GlobalLogReceiverAWSCloudWatchReceiverAWSCredModel {
+				if !isImport && data.AWSCloudWatchReceiver != nil && data.AWSCloudWatchReceiver.AWSCred != nil {
+					// Normal Read: preserve existing state value
+					return data.AWSCloudWatchReceiver.AWSCred
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["aws_cred"].(map[string]interface{}); ok {
+					return &GlobalLogReceiverAWSCloudWatchReceiverAWSCredModel{
+						Name: func() types.String {
+							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Namespace: func() types.String {
+							if v, ok := nestedBlockData["namespace"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Tenant: func() types.String {
+							if v, ok := nestedBlockData["tenant"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			AWSRegion: func() types.String {
+				if v, ok := blockData["aws_region"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Batch: func() *GlobalLogReceiverAWSCloudWatchReceiverBatchModel {
+				if !isImport && data.AWSCloudWatchReceiver != nil && data.AWSCloudWatchReceiver.Batch != nil {
+					// Normal Read: preserve existing state value
+					return data.AWSCloudWatchReceiver.Batch
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["batch"].(map[string]interface{}); ok {
+					return &GlobalLogReceiverAWSCloudWatchReceiverBatchModel{
+						MaxBytes: func() types.Int64 {
+							if v, ok := nestedBlockData["max_bytes"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						MaxEvents: func() types.Int64 {
+							if v, ok := nestedBlockData["max_events"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						TimeoutSeconds: func() types.String {
+							if v, ok := nestedBlockData["timeout_seconds"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			Compression: func() *GlobalLogReceiverAWSCloudWatchReceiverCompressionModel {
+				if !isImport && data.AWSCloudWatchReceiver != nil && data.AWSCloudWatchReceiver.Compression != nil {
+					// Normal Read: preserve existing state value
+					return data.AWSCloudWatchReceiver.Compression
+				}
+				// Import case: read from API
+				if _, ok := blockData["compression"].(map[string]interface{}); ok {
+					return &GlobalLogReceiverAWSCloudWatchReceiverCompressionModel{
+					}
+				}
+				return nil
+			}(),
+			GroupName: func() types.String {
+				if v, ok := blockData["group_name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			StreamName: func() types.String {
+				if v, ok := blockData["stream_name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["azure_event_hubs_receiver"].(map[string]interface{}); ok && (isImport || data.AzureEventHubsReceiver != nil) {
+		data.AzureEventHubsReceiver = &GlobalLogReceiverAzureEventHubsReceiverModel{
+			ConnectionString: func() *GlobalLogReceiverAzureEventHubsReceiverConnectionStringModel {
+				if !isImport && data.AzureEventHubsReceiver != nil && data.AzureEventHubsReceiver.ConnectionString != nil {
+					// Normal Read: preserve existing state value
+					return data.AzureEventHubsReceiver.ConnectionString
+				}
+				// Import case: read from API
+				if _, ok := blockData["connection_string"].(map[string]interface{}); ok {
+					return &GlobalLogReceiverAzureEventHubsReceiverConnectionStringModel{
+					}
+				}
+				return nil
+			}(),
+			Instance: func() types.String {
+				if v, ok := blockData["instance"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["azure_receiver"].(map[string]interface{}); ok && (isImport || data.AzureReceiver != nil) {
+		data.AzureReceiver = &GlobalLogReceiverAzureReceiverModel{
+			Batch: func() *GlobalLogReceiverAzureReceiverBatchModel {
+				if !isImport && data.AzureReceiver != nil && data.AzureReceiver.Batch != nil {
+					// Normal Read: preserve existing state value
+					return data.AzureReceiver.Batch
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["batch"].(map[string]interface{}); ok {
+					return &GlobalLogReceiverAzureReceiverBatchModel{
+						MaxBytes: func() types.Int64 {
+							if v, ok := nestedBlockData["max_bytes"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						MaxEvents: func() types.Int64 {
+							if v, ok := nestedBlockData["max_events"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						TimeoutSeconds: func() types.String {
+							if v, ok := nestedBlockData["timeout_seconds"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			Compression: func() *GlobalLogReceiverAzureReceiverCompressionModel {
+				if !isImport && data.AzureReceiver != nil && data.AzureReceiver.Compression != nil {
+					// Normal Read: preserve existing state value
+					return data.AzureReceiver.Compression
+				}
+				// Import case: read from API
+				if _, ok := blockData["compression"].(map[string]interface{}); ok {
+					return &GlobalLogReceiverAzureReceiverCompressionModel{
+					}
+				}
+				return nil
+			}(),
+			ConnectionString: func() *GlobalLogReceiverAzureReceiverConnectionStringModel {
+				if !isImport && data.AzureReceiver != nil && data.AzureReceiver.ConnectionString != nil {
+					// Normal Read: preserve existing state value
+					return data.AzureReceiver.ConnectionString
+				}
+				// Import case: read from API
+				if _, ok := blockData["connection_string"].(map[string]interface{}); ok {
+					return &GlobalLogReceiverAzureReceiverConnectionStringModel{
+					}
+				}
+				return nil
+			}(),
+			ContainerName: func() types.String {
+				if v, ok := blockData["container_name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			FilenameOptions: func() *GlobalLogReceiverAzureReceiverFilenameOptionsModel {
+				if !isImport && data.AzureReceiver != nil && data.AzureReceiver.FilenameOptions != nil {
+					// Normal Read: preserve existing state value
+					return data.AzureReceiver.FilenameOptions
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["filename_options"].(map[string]interface{}); ok {
+					return &GlobalLogReceiverAzureReceiverFilenameOptionsModel{
+						CustomFolder: func() types.String {
+							if v, ok := nestedBlockData["custom_folder"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["datadog_receiver"].(map[string]interface{}); ok && (isImport || data.DatadogReceiver != nil) {
+		data.DatadogReceiver = &GlobalLogReceiverDatadogReceiverModel{
+			Batch: func() *GlobalLogReceiverDatadogReceiverBatchModel {
+				if !isImport && data.DatadogReceiver != nil && data.DatadogReceiver.Batch != nil {
+					// Normal Read: preserve existing state value
+					return data.DatadogReceiver.Batch
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["batch"].(map[string]interface{}); ok {
+					return &GlobalLogReceiverDatadogReceiverBatchModel{
+						MaxBytes: func() types.Int64 {
+							if v, ok := nestedBlockData["max_bytes"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						MaxEvents: func() types.Int64 {
+							if v, ok := nestedBlockData["max_events"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						TimeoutSeconds: func() types.String {
+							if v, ok := nestedBlockData["timeout_seconds"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			Compression: func() *GlobalLogReceiverDatadogReceiverCompressionModel {
+				if !isImport && data.DatadogReceiver != nil && data.DatadogReceiver.Compression != nil {
+					// Normal Read: preserve existing state value
+					return data.DatadogReceiver.Compression
+				}
+				// Import case: read from API
+				if _, ok := blockData["compression"].(map[string]interface{}); ok {
+					return &GlobalLogReceiverDatadogReceiverCompressionModel{
+					}
+				}
+				return nil
+			}(),
+			DatadogAPIKey: func() *GlobalLogReceiverDatadogReceiverDatadogAPIKeyModel {
+				if !isImport && data.DatadogReceiver != nil && data.DatadogReceiver.DatadogAPIKey != nil {
+					// Normal Read: preserve existing state value
+					return data.DatadogReceiver.DatadogAPIKey
+				}
+				// Import case: read from API
+				if _, ok := blockData["datadog_api_key"].(map[string]interface{}); ok {
+					return &GlobalLogReceiverDatadogReceiverDatadogAPIKeyModel{
+					}
+				}
+				return nil
+			}(),
+			Endpoint: func() types.String {
+				if v, ok := blockData["endpoint"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			NoTLS: func() *GlobalLogReceiverEmptyModel {
+				if !isImport && data.DatadogReceiver != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.DatadogReceiver.NoTLS
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_tls"].(map[string]interface{}); ok {
+					return &GlobalLogReceiverEmptyModel{}
+				}
+				return nil
+			}(),
+			Site: func() types.String {
+				if v, ok := blockData["site"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			UseTLS: func() *GlobalLogReceiverDatadogReceiverUseTLSModel {
+				if !isImport && data.DatadogReceiver != nil && data.DatadogReceiver.UseTLS != nil {
+					// Normal Read: preserve existing state value
+					return data.DatadogReceiver.UseTLS
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["use_tls"].(map[string]interface{}); ok {
+					return &GlobalLogReceiverDatadogReceiverUseTLSModel{
+						TrustedCaURL: func() types.String {
+							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["dns_logs"].(map[string]interface{}); ok && isImport && data.DNSLogs == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DNSLogs = &GlobalLogReceiverEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["gcp_bucket_receiver"].(map[string]interface{}); ok && (isImport || data.GCPBucketReceiver != nil) {
+		data.GCPBucketReceiver = &GlobalLogReceiverGCPBucketReceiverModel{
+			Batch: func() *GlobalLogReceiverGCPBucketReceiverBatchModel {
+				if !isImport && data.GCPBucketReceiver != nil && data.GCPBucketReceiver.Batch != nil {
+					// Normal Read: preserve existing state value
+					return data.GCPBucketReceiver.Batch
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["batch"].(map[string]interface{}); ok {
+					return &GlobalLogReceiverGCPBucketReceiverBatchModel{
+						MaxBytes: func() types.Int64 {
+							if v, ok := nestedBlockData["max_bytes"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						MaxEvents: func() types.Int64 {
+							if v, ok := nestedBlockData["max_events"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						TimeoutSeconds: func() types.String {
+							if v, ok := nestedBlockData["timeout_seconds"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			Bucket: func() types.String {
+				if v, ok := blockData["bucket"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Compression: func() *GlobalLogReceiverGCPBucketReceiverCompressionModel {
+				if !isImport && data.GCPBucketReceiver != nil && data.GCPBucketReceiver.Compression != nil {
+					// Normal Read: preserve existing state value
+					return data.GCPBucketReceiver.Compression
+				}
+				// Import case: read from API
+				if _, ok := blockData["compression"].(map[string]interface{}); ok {
+					return &GlobalLogReceiverGCPBucketReceiverCompressionModel{
+					}
+				}
+				return nil
+			}(),
+			FilenameOptions: func() *GlobalLogReceiverGCPBucketReceiverFilenameOptionsModel {
+				if !isImport && data.GCPBucketReceiver != nil && data.GCPBucketReceiver.FilenameOptions != nil {
+					// Normal Read: preserve existing state value
+					return data.GCPBucketReceiver.FilenameOptions
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["filename_options"].(map[string]interface{}); ok {
+					return &GlobalLogReceiverGCPBucketReceiverFilenameOptionsModel{
+						CustomFolder: func() types.String {
+							if v, ok := nestedBlockData["custom_folder"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			GCPCred: func() *GlobalLogReceiverGCPBucketReceiverGCPCredModel {
+				if !isImport && data.GCPBucketReceiver != nil && data.GCPBucketReceiver.GCPCred != nil {
+					// Normal Read: preserve existing state value
+					return data.GCPBucketReceiver.GCPCred
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["gcp_cred"].(map[string]interface{}); ok {
+					return &GlobalLogReceiverGCPBucketReceiverGCPCredModel{
+						Name: func() types.String {
+							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Namespace: func() types.String {
+							if v, ok := nestedBlockData["namespace"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Tenant: func() types.String {
+							if v, ok := nestedBlockData["tenant"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["http_receiver"].(map[string]interface{}); ok && (isImport || data.HTTPReceiver != nil) {
+		data.HTTPReceiver = &GlobalLogReceiverHTTPReceiverModel{
+			AuthBasic: func() *GlobalLogReceiverHTTPReceiverAuthBasicModel {
+				if !isImport && data.HTTPReceiver != nil && data.HTTPReceiver.AuthBasic != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPReceiver.AuthBasic
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["auth_basic"].(map[string]interface{}); ok {
+					return &GlobalLogReceiverHTTPReceiverAuthBasicModel{
+						UserName: func() types.String {
+							if v, ok := nestedBlockData["user_name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			AuthNone: func() *GlobalLogReceiverEmptyModel {
+				if !isImport && data.HTTPReceiver != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.HTTPReceiver.AuthNone
+				}
+				// Import case: read from API
+				if _, ok := blockData["auth_none"].(map[string]interface{}); ok {
+					return &GlobalLogReceiverEmptyModel{}
+				}
+				return nil
+			}(),
+			AuthToken: func() *GlobalLogReceiverHTTPReceiverAuthTokenModel {
+				if !isImport && data.HTTPReceiver != nil && data.HTTPReceiver.AuthToken != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPReceiver.AuthToken
+				}
+				// Import case: read from API
+				if _, ok := blockData["auth_token"].(map[string]interface{}); ok {
+					return &GlobalLogReceiverHTTPReceiverAuthTokenModel{
+					}
+				}
+				return nil
+			}(),
+			Batch: func() *GlobalLogReceiverHTTPReceiverBatchModel {
+				if !isImport && data.HTTPReceiver != nil && data.HTTPReceiver.Batch != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPReceiver.Batch
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["batch"].(map[string]interface{}); ok {
+					return &GlobalLogReceiverHTTPReceiverBatchModel{
+						MaxBytes: func() types.Int64 {
+							if v, ok := nestedBlockData["max_bytes"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						MaxEvents: func() types.Int64 {
+							if v, ok := nestedBlockData["max_events"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						TimeoutSeconds: func() types.String {
+							if v, ok := nestedBlockData["timeout_seconds"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			Compression: func() *GlobalLogReceiverHTTPReceiverCompressionModel {
+				if !isImport && data.HTTPReceiver != nil && data.HTTPReceiver.Compression != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPReceiver.Compression
+				}
+				// Import case: read from API
+				if _, ok := blockData["compression"].(map[string]interface{}); ok {
+					return &GlobalLogReceiverHTTPReceiverCompressionModel{
+					}
+				}
+				return nil
+			}(),
+			NoTLS: func() *GlobalLogReceiverEmptyModel {
+				if !isImport && data.HTTPReceiver != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.HTTPReceiver.NoTLS
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_tls"].(map[string]interface{}); ok {
+					return &GlobalLogReceiverEmptyModel{}
+				}
+				return nil
+			}(),
+			URI: func() types.String {
+				if v, ok := blockData["uri"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			UseTLS: func() *GlobalLogReceiverHTTPReceiverUseTLSModel {
+				if !isImport && data.HTTPReceiver != nil && data.HTTPReceiver.UseTLS != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPReceiver.UseTLS
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["use_tls"].(map[string]interface{}); ok {
+					return &GlobalLogReceiverHTTPReceiverUseTLSModel{
+						TrustedCaURL: func() types.String {
+							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["kafka_receiver"].(map[string]interface{}); ok && (isImport || data.KafkaReceiver != nil) {
+		data.KafkaReceiver = &GlobalLogReceiverKafkaReceiverModel{
+			Batch: func() *GlobalLogReceiverKafkaReceiverBatchModel {
+				if !isImport && data.KafkaReceiver != nil && data.KafkaReceiver.Batch != nil {
+					// Normal Read: preserve existing state value
+					return data.KafkaReceiver.Batch
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["batch"].(map[string]interface{}); ok {
+					return &GlobalLogReceiverKafkaReceiverBatchModel{
+						MaxBytes: func() types.Int64 {
+							if v, ok := nestedBlockData["max_bytes"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						MaxEvents: func() types.Int64 {
+							if v, ok := nestedBlockData["max_events"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						TimeoutSeconds: func() types.String {
+							if v, ok := nestedBlockData["timeout_seconds"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			BootstrapServers: func() types.List {
+				if v, ok := blockData["bootstrap_servers"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+			Compression: func() *GlobalLogReceiverKafkaReceiverCompressionModel {
+				if !isImport && data.KafkaReceiver != nil && data.KafkaReceiver.Compression != nil {
+					// Normal Read: preserve existing state value
+					return data.KafkaReceiver.Compression
+				}
+				// Import case: read from API
+				if _, ok := blockData["compression"].(map[string]interface{}); ok {
+					return &GlobalLogReceiverKafkaReceiverCompressionModel{
+					}
+				}
+				return nil
+			}(),
+			KafkaTopic: func() types.String {
+				if v, ok := blockData["kafka_topic"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			NoTLS: func() *GlobalLogReceiverEmptyModel {
+				if !isImport && data.KafkaReceiver != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.KafkaReceiver.NoTLS
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_tls"].(map[string]interface{}); ok {
+					return &GlobalLogReceiverEmptyModel{}
+				}
+				return nil
+			}(),
+			UseTLS: func() *GlobalLogReceiverKafkaReceiverUseTLSModel {
+				if !isImport && data.KafkaReceiver != nil && data.KafkaReceiver.UseTLS != nil {
+					// Normal Read: preserve existing state value
+					return data.KafkaReceiver.UseTLS
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["use_tls"].(map[string]interface{}); ok {
+					return &GlobalLogReceiverKafkaReceiverUseTLSModel{
+						TrustedCaURL: func() types.String {
+							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["new_relic_receiver"].(map[string]interface{}); ok && isImport && data.NewRelicReceiver == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NewRelicReceiver = &GlobalLogReceiverNewRelicReceiverModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["ns_all"].(map[string]interface{}); ok && isImport && data.NsAll == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NsAll = &GlobalLogReceiverEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["ns_current"].(map[string]interface{}); ok && isImport && data.NsCurrent == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NsCurrent = &GlobalLogReceiverEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["ns_list"].(map[string]interface{}); ok && (isImport || data.NsList != nil) {
+		data.NsList = &GlobalLogReceiverNsListModel{
+			Namespaces: func() types.List {
+				if v, ok := blockData["namespaces"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["qradar_receiver"].(map[string]interface{}); ok && (isImport || data.QradarReceiver != nil) {
+		data.QradarReceiver = &GlobalLogReceiverQradarReceiverModel{
+			Batch: func() *GlobalLogReceiverQradarReceiverBatchModel {
+				if !isImport && data.QradarReceiver != nil && data.QradarReceiver.Batch != nil {
+					// Normal Read: preserve existing state value
+					return data.QradarReceiver.Batch
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["batch"].(map[string]interface{}); ok {
+					return &GlobalLogReceiverQradarReceiverBatchModel{
+						MaxBytes: func() types.Int64 {
+							if v, ok := nestedBlockData["max_bytes"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						MaxEvents: func() types.Int64 {
+							if v, ok := nestedBlockData["max_events"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						TimeoutSeconds: func() types.String {
+							if v, ok := nestedBlockData["timeout_seconds"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			Compression: func() *GlobalLogReceiverQradarReceiverCompressionModel {
+				if !isImport && data.QradarReceiver != nil && data.QradarReceiver.Compression != nil {
+					// Normal Read: preserve existing state value
+					return data.QradarReceiver.Compression
+				}
+				// Import case: read from API
+				if _, ok := blockData["compression"].(map[string]interface{}); ok {
+					return &GlobalLogReceiverQradarReceiverCompressionModel{
+					}
+				}
+				return nil
+			}(),
+			NoTLS: func() *GlobalLogReceiverEmptyModel {
+				if !isImport && data.QradarReceiver != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.QradarReceiver.NoTLS
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_tls"].(map[string]interface{}); ok {
+					return &GlobalLogReceiverEmptyModel{}
+				}
+				return nil
+			}(),
+			URI: func() types.String {
+				if v, ok := blockData["uri"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			UseTLS: func() *GlobalLogReceiverQradarReceiverUseTLSModel {
+				if !isImport && data.QradarReceiver != nil && data.QradarReceiver.UseTLS != nil {
+					// Normal Read: preserve existing state value
+					return data.QradarReceiver.UseTLS
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["use_tls"].(map[string]interface{}); ok {
+					return &GlobalLogReceiverQradarReceiverUseTLSModel{
+						TrustedCaURL: func() types.String {
+							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["request_logs"].(map[string]interface{}); ok && isImport && data.RequestLogs == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.RequestLogs = &GlobalLogReceiverEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["s3_receiver"].(map[string]interface{}); ok && (isImport || data.S3Receiver != nil) {
+		data.S3Receiver = &GlobalLogReceiverS3ReceiverModel{
+			AWSCred: func() *GlobalLogReceiverS3ReceiverAWSCredModel {
+				if !isImport && data.S3Receiver != nil && data.S3Receiver.AWSCred != nil {
+					// Normal Read: preserve existing state value
+					return data.S3Receiver.AWSCred
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["aws_cred"].(map[string]interface{}); ok {
+					return &GlobalLogReceiverS3ReceiverAWSCredModel{
+						Name: func() types.String {
+							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Namespace: func() types.String {
+							if v, ok := nestedBlockData["namespace"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Tenant: func() types.String {
+							if v, ok := nestedBlockData["tenant"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			AWSRegion: func() types.String {
+				if v, ok := blockData["aws_region"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Batch: func() *GlobalLogReceiverS3ReceiverBatchModel {
+				if !isImport && data.S3Receiver != nil && data.S3Receiver.Batch != nil {
+					// Normal Read: preserve existing state value
+					return data.S3Receiver.Batch
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["batch"].(map[string]interface{}); ok {
+					return &GlobalLogReceiverS3ReceiverBatchModel{
+						MaxBytes: func() types.Int64 {
+							if v, ok := nestedBlockData["max_bytes"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						MaxEvents: func() types.Int64 {
+							if v, ok := nestedBlockData["max_events"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						TimeoutSeconds: func() types.String {
+							if v, ok := nestedBlockData["timeout_seconds"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			Bucket: func() types.String {
+				if v, ok := blockData["bucket"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Compression: func() *GlobalLogReceiverS3ReceiverCompressionModel {
+				if !isImport && data.S3Receiver != nil && data.S3Receiver.Compression != nil {
+					// Normal Read: preserve existing state value
+					return data.S3Receiver.Compression
+				}
+				// Import case: read from API
+				if _, ok := blockData["compression"].(map[string]interface{}); ok {
+					return &GlobalLogReceiverS3ReceiverCompressionModel{
+					}
+				}
+				return nil
+			}(),
+			FilenameOptions: func() *GlobalLogReceiverS3ReceiverFilenameOptionsModel {
+				if !isImport && data.S3Receiver != nil && data.S3Receiver.FilenameOptions != nil {
+					// Normal Read: preserve existing state value
+					return data.S3Receiver.FilenameOptions
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["filename_options"].(map[string]interface{}); ok {
+					return &GlobalLogReceiverS3ReceiverFilenameOptionsModel{
+						CustomFolder: func() types.String {
+							if v, ok := nestedBlockData["custom_folder"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["security_events"].(map[string]interface{}); ok && isImport && data.SecurityEvents == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.SecurityEvents = &GlobalLogReceiverEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["splunk_receiver"].(map[string]interface{}); ok && (isImport || data.SplunkReceiver != nil) {
+		data.SplunkReceiver = &GlobalLogReceiverSplunkReceiverModel{
+			Batch: func() *GlobalLogReceiverSplunkReceiverBatchModel {
+				if !isImport && data.SplunkReceiver != nil && data.SplunkReceiver.Batch != nil {
+					// Normal Read: preserve existing state value
+					return data.SplunkReceiver.Batch
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["batch"].(map[string]interface{}); ok {
+					return &GlobalLogReceiverSplunkReceiverBatchModel{
+						MaxBytes: func() types.Int64 {
+							if v, ok := nestedBlockData["max_bytes"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						MaxEvents: func() types.Int64 {
+							if v, ok := nestedBlockData["max_events"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						TimeoutSeconds: func() types.String {
+							if v, ok := nestedBlockData["timeout_seconds"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			Compression: func() *GlobalLogReceiverSplunkReceiverCompressionModel {
+				if !isImport && data.SplunkReceiver != nil && data.SplunkReceiver.Compression != nil {
+					// Normal Read: preserve existing state value
+					return data.SplunkReceiver.Compression
+				}
+				// Import case: read from API
+				if _, ok := blockData["compression"].(map[string]interface{}); ok {
+					return &GlobalLogReceiverSplunkReceiverCompressionModel{
+					}
+				}
+				return nil
+			}(),
+			Endpoint: func() types.String {
+				if v, ok := blockData["endpoint"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			NoTLS: func() *GlobalLogReceiverEmptyModel {
+				if !isImport && data.SplunkReceiver != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.SplunkReceiver.NoTLS
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_tls"].(map[string]interface{}); ok {
+					return &GlobalLogReceiverEmptyModel{}
+				}
+				return nil
+			}(),
+			SplunkHecToken: func() *GlobalLogReceiverSplunkReceiverSplunkHecTokenModel {
+				if !isImport && data.SplunkReceiver != nil && data.SplunkReceiver.SplunkHecToken != nil {
+					// Normal Read: preserve existing state value
+					return data.SplunkReceiver.SplunkHecToken
+				}
+				// Import case: read from API
+				if _, ok := blockData["splunk_hec_token"].(map[string]interface{}); ok {
+					return &GlobalLogReceiverSplunkReceiverSplunkHecTokenModel{
+					}
+				}
+				return nil
+			}(),
+			UseTLS: func() *GlobalLogReceiverSplunkReceiverUseTLSModel {
+				if !isImport && data.SplunkReceiver != nil && data.SplunkReceiver.UseTLS != nil {
+					// Normal Read: preserve existing state value
+					return data.SplunkReceiver.UseTLS
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["use_tls"].(map[string]interface{}); ok {
+					return &GlobalLogReceiverSplunkReceiverUseTLSModel{
+						TrustedCaURL: func() types.String {
+							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["sumo_logic_receiver"].(map[string]interface{}); ok && isImport && data.SumoLogicReceiver == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.SumoLogicReceiver = &GlobalLogReceiverSumoLogicReceiverModel{}
+	}
+	// Normal Read: preserve existing state value
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 

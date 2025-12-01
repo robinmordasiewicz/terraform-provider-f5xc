@@ -604,7 +604,7 @@ func (r *CloudCredentialsResource) Create(ctx context.Context, req resource.Crea
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.CloudCredentials{
+	createReq := &client.CloudCredentials{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -613,7 +613,7 @@ func (r *CloudCredentialsResource) Create(ctx context.Context, req resource.Crea
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -622,7 +622,7 @@ func (r *CloudCredentialsResource) Create(ctx context.Context, req resource.Crea
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -631,7 +631,7 @@ func (r *CloudCredentialsResource) Create(ctx context.Context, req resource.Crea
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -658,7 +658,7 @@ func (r *CloudCredentialsResource) Create(ctx context.Context, req resource.Crea
 		if data.AWSAssumeRole.SessionTags != nil {
 			aws_assume_roleMap["session_tags"] = map[string]interface{}{}
 		}
-		apiResource.Spec["aws_assume_role"] = aws_assume_roleMap
+		createReq.Spec["aws_assume_role"] = aws_assume_roleMap
 	}
 	if data.AWSSecretKey != nil {
 		aws_secret_keyMap := make(map[string]interface{})
@@ -669,7 +669,7 @@ func (r *CloudCredentialsResource) Create(ctx context.Context, req resource.Crea
 			secret_keyNestedMap := make(map[string]interface{})
 			aws_secret_keyMap["secret_key"] = secret_keyNestedMap
 		}
-		apiResource.Spec["aws_secret_key"] = aws_secret_keyMap
+		createReq.Spec["aws_secret_key"] = aws_secret_keyMap
 	}
 	if data.AzureClientSecret != nil {
 		azure_client_secretMap := make(map[string]interface{})
@@ -686,7 +686,7 @@ func (r *CloudCredentialsResource) Create(ctx context.Context, req resource.Crea
 		if !data.AzureClientSecret.TenantID.IsNull() && !data.AzureClientSecret.TenantID.IsUnknown() {
 			azure_client_secretMap["tenant_id"] = data.AzureClientSecret.TenantID.ValueString()
 		}
-		apiResource.Spec["azure_client_secret"] = azure_client_secretMap
+		createReq.Spec["azure_client_secret"] = azure_client_secretMap
 	}
 	if data.AzurePfxCertificate != nil {
 		azure_pfx_certificateMap := make(map[string]interface{})
@@ -706,7 +706,7 @@ func (r *CloudCredentialsResource) Create(ctx context.Context, req resource.Crea
 		if !data.AzurePfxCertificate.TenantID.IsNull() && !data.AzurePfxCertificate.TenantID.IsUnknown() {
 			azure_pfx_certificateMap["tenant_id"] = data.AzurePfxCertificate.TenantID.ValueString()
 		}
-		apiResource.Spec["azure_pfx_certificate"] = azure_pfx_certificateMap
+		createReq.Spec["azure_pfx_certificate"] = azure_pfx_certificateMap
 	}
 	if data.GCPCredFile != nil {
 		gcp_cred_fileMap := make(map[string]interface{})
@@ -714,24 +714,193 @@ func (r *CloudCredentialsResource) Create(ctx context.Context, req resource.Crea
 			credential_fileNestedMap := make(map[string]interface{})
 			gcp_cred_fileMap["credential_file"] = credential_fileNestedMap
 		}
-		apiResource.Spec["gcp_cred_file"] = gcp_cred_fileMap
+		createReq.Spec["gcp_cred_file"] = gcp_cred_fileMap
 	}
 
 
-	created, err := r.client.CreateCloudCredentials(ctx, apiResource)
+	apiResource, err := r.client.CreateCloudCredentials(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create CloudCredentials: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["aws_assume_role"].(map[string]interface{}); ok && (isImport || data.AWSAssumeRole != nil) {
+		data.AWSAssumeRole = &CloudCredentialsAWSAssumeRoleModel{
+			CustomExternalID: func() types.String {
+				if v, ok := blockData["custom_external_id"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			DurationSeconds: func() types.Int64 {
+				if v, ok := blockData["duration_seconds"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			ExternalIDIsOptional: func() *CloudCredentialsEmptyModel {
+				if !isImport && data.AWSAssumeRole != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AWSAssumeRole.ExternalIDIsOptional
+				}
+				// Import case: read from API
+				if _, ok := blockData["external_id_is_optional"].(map[string]interface{}); ok {
+					return &CloudCredentialsEmptyModel{}
+				}
+				return nil
+			}(),
+			ExternalIDIsTenantID: func() *CloudCredentialsEmptyModel {
+				if !isImport && data.AWSAssumeRole != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AWSAssumeRole.ExternalIDIsTenantID
+				}
+				// Import case: read from API
+				if _, ok := blockData["external_id_is_tenant_id"].(map[string]interface{}); ok {
+					return &CloudCredentialsEmptyModel{}
+				}
+				return nil
+			}(),
+			RoleArn: func() types.String {
+				if v, ok := blockData["role_arn"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			SessionName: func() types.String {
+				if v, ok := blockData["session_name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			SessionTags: func() *CloudCredentialsEmptyModel {
+				if !isImport && data.AWSAssumeRole != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AWSAssumeRole.SessionTags
+				}
+				// Import case: read from API
+				if _, ok := blockData["session_tags"].(map[string]interface{}); ok {
+					return &CloudCredentialsEmptyModel{}
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["aws_secret_key"].(map[string]interface{}); ok && (isImport || data.AWSSecretKey != nil) {
+		data.AWSSecretKey = &CloudCredentialsAWSSecretKeyModel{
+			AccessKey: func() types.String {
+				if v, ok := blockData["access_key"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			SecretKey: func() *CloudCredentialsAWSSecretKeySecretKeyModel {
+				if !isImport && data.AWSSecretKey != nil && data.AWSSecretKey.SecretKey != nil {
+					// Normal Read: preserve existing state value
+					return data.AWSSecretKey.SecretKey
+				}
+				// Import case: read from API
+				if _, ok := blockData["secret_key"].(map[string]interface{}); ok {
+					return &CloudCredentialsAWSSecretKeySecretKeyModel{
+					}
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["azure_client_secret"].(map[string]interface{}); ok && (isImport || data.AzureClientSecret != nil) {
+		data.AzureClientSecret = &CloudCredentialsAzureClientSecretModel{
+			ClientID: func() types.String {
+				if v, ok := blockData["client_id"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			ClientSecret: func() *CloudCredentialsAzureClientSecretClientSecretModel {
+				if !isImport && data.AzureClientSecret != nil && data.AzureClientSecret.ClientSecret != nil {
+					// Normal Read: preserve existing state value
+					return data.AzureClientSecret.ClientSecret
+				}
+				// Import case: read from API
+				if _, ok := blockData["client_secret"].(map[string]interface{}); ok {
+					return &CloudCredentialsAzureClientSecretClientSecretModel{
+					}
+				}
+				return nil
+			}(),
+			SubscriptionID: func() types.String {
+				if v, ok := blockData["subscription_id"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			TenantID: func() types.String {
+				if v, ok := blockData["tenant_id"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["azure_pfx_certificate"].(map[string]interface{}); ok && (isImport || data.AzurePfxCertificate != nil) {
+		data.AzurePfxCertificate = &CloudCredentialsAzurePfxCertificateModel{
+			CertificateURL: func() types.String {
+				if v, ok := blockData["certificate_url"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			ClientID: func() types.String {
+				if v, ok := blockData["client_id"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Password: func() *CloudCredentialsAzurePfxCertificatePasswordModel {
+				if !isImport && data.AzurePfxCertificate != nil && data.AzurePfxCertificate.Password != nil {
+					// Normal Read: preserve existing state value
+					return data.AzurePfxCertificate.Password
+				}
+				// Import case: read from API
+				if _, ok := blockData["password"].(map[string]interface{}); ok {
+					return &CloudCredentialsAzurePfxCertificatePasswordModel{
+					}
+				}
+				return nil
+			}(),
+			SubscriptionID: func() types.String {
+				if v, ok := blockData["subscription_id"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			TenantID: func() types.String {
+				if v, ok := blockData["tenant_id"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["gcp_cred_file"].(map[string]interface{}); ok && isImport && data.GCPCredFile == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.GCPCredFile = &CloudCredentialsGCPCredFileModel{}
+	}
+	// Normal Read: preserve existing state value
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 

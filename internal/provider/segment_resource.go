@@ -242,7 +242,7 @@ func (r *SegmentResource) Create(ctx context.Context, req resource.CreateRequest
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.Segment{
+	createReq := &client.Segment{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -251,7 +251,7 @@ func (r *SegmentResource) Create(ctx context.Context, req resource.CreateRequest
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -260,7 +260,7 @@ func (r *SegmentResource) Create(ctx context.Context, req resource.CreateRequest
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -269,34 +269,48 @@ func (r *SegmentResource) Create(ctx context.Context, req resource.CreateRequest
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
 	if data.Disable != nil {
 		disableMap := make(map[string]interface{})
-		apiResource.Spec["disable"] = disableMap
+		createReq.Spec["disable"] = disableMap
 	}
 	if data.Enable != nil {
 		enableMap := make(map[string]interface{})
-		apiResource.Spec["enable"] = enableMap
+		createReq.Spec["enable"] = enableMap
 	}
 
 
-	created, err := r.client.CreateSegment(ctx, apiResource)
+	apiResource, err := r.client.CreateSegment(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create Segment: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if _, ok := apiResource.Spec["disable"].(map[string]interface{}); ok && isImport && data.Disable == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Disable = &SegmentEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["enable"].(map[string]interface{}); ok && isImport && data.Enable == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Enable = &SegmentEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 

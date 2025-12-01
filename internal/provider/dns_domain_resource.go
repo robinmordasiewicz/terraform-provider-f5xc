@@ -72,13 +72,13 @@ func (r *DNSDomainResource) Schema(ctx context.Context, req resource.SchemaReque
 		MarkdownDescription: "Manages DNS Domain in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the DNSDomain. Must be unique within the namespace.",
+				MarkdownDescription: "Domain name for the DNSDomain (e.g., example.com). Must be a valid DNS domain name.",
 				Required: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
 				Validators: []validator.String{
-					validators.NameValidator(),
+					validators.DomainValidator(),
 				},
 			},
 			"namespace": schema.StringAttribute{
@@ -252,7 +252,7 @@ func (r *DNSDomainResource) Create(ctx context.Context, req resource.CreateReque
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.DNSDomain{
+	createReq := &client.DNSDomain{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -261,7 +261,7 @@ func (r *DNSDomainResource) Create(ctx context.Context, req resource.CreateReque
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -270,7 +270,7 @@ func (r *DNSDomainResource) Create(ctx context.Context, req resource.CreateReque
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -279,40 +279,47 @@ func (r *DNSDomainResource) Create(ctx context.Context, req resource.CreateReque
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
 	if data.VolterraManaged != nil {
 		volterra_managedMap := make(map[string]interface{})
-		apiResource.Spec["volterra_managed"] = volterra_managedMap
+		createReq.Spec["volterra_managed"] = volterra_managedMap
 	}
 	if !data.DnssecMode.IsNull() && !data.DnssecMode.IsUnknown() {
-		apiResource.Spec["dnssec_mode"] = data.DnssecMode.ValueString()
+		createReq.Spec["dnssec_mode"] = data.DnssecMode.ValueString()
 	}
 
 
-	created, err := r.client.CreateDNSDomain(ctx, apiResource)
+	apiResource, err := r.client.CreateDNSDomain(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create DNSDomain: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
-	if v, ok := created.Spec["dnssec_mode"].(string); ok && v != "" {
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if _, ok := apiResource.Spec["volterra_managed"].(map[string]interface{}); ok && isImport && data.VolterraManaged == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.VolterraManaged = &DNSDomainEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["dnssec_mode"].(string); ok && v != "" {
 		data.DnssecMode = types.StringValue(v)
-	} else if data.DnssecMode.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.DnssecMode = types.StringNull()
 	}
-	// If plan had a value, preserve it
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 

@@ -322,7 +322,7 @@ func (r *TenantConfigurationResource) Create(ctx context.Context, req resource.C
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.TenantConfiguration{
+	createReq := &client.TenantConfiguration{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -331,7 +331,7 @@ func (r *TenantConfigurationResource) Create(ctx context.Context, req resource.C
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -340,7 +340,7 @@ func (r *TenantConfigurationResource) Create(ctx context.Context, req resource.C
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -349,7 +349,7 @@ func (r *TenantConfigurationResource) Create(ctx context.Context, req resource.C
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -358,14 +358,14 @@ func (r *TenantConfigurationResource) Create(ctx context.Context, req resource.C
 		if !data.BasicConfiguration.DisplayName.IsNull() && !data.BasicConfiguration.DisplayName.IsUnknown() {
 			basic_configurationMap["display_name"] = data.BasicConfiguration.DisplayName.ValueString()
 		}
-		apiResource.Spec["basic_configuration"] = basic_configurationMap
+		createReq.Spec["basic_configuration"] = basic_configurationMap
 	}
 	if data.BruteForceDetectionSettings != nil {
 		brute_force_detection_settingsMap := make(map[string]interface{})
 		if !data.BruteForceDetectionSettings.MaxLoginFailures.IsNull() && !data.BruteForceDetectionSettings.MaxLoginFailures.IsUnknown() {
 			brute_force_detection_settingsMap["max_login_failures"] = data.BruteForceDetectionSettings.MaxLoginFailures.ValueInt64()
 		}
-		apiResource.Spec["brute_force_detection_settings"] = brute_force_detection_settingsMap
+		createReq.Spec["brute_force_detection_settings"] = brute_force_detection_settingsMap
 	}
 	if data.PasswordPolicy != nil {
 		password_policyMap := make(map[string]interface{})
@@ -393,24 +393,105 @@ func (r *TenantConfigurationResource) Create(ctx context.Context, req resource.C
 		if !data.PasswordPolicy.UppercaseCharacters.IsNull() && !data.PasswordPolicy.UppercaseCharacters.IsUnknown() {
 			password_policyMap["uppercase_characters"] = data.PasswordPolicy.UppercaseCharacters.ValueInt64()
 		}
-		apiResource.Spec["password_policy"] = password_policyMap
+		createReq.Spec["password_policy"] = password_policyMap
 	}
 
 
-	created, err := r.client.CreateTenantConfiguration(ctx, apiResource)
+	apiResource, err := r.client.CreateTenantConfiguration(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create TenantConfiguration: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["basic_configuration"].(map[string]interface{}); ok && (isImport || data.BasicConfiguration != nil) {
+		data.BasicConfiguration = &TenantConfigurationBasicConfigurationModel{
+			DisplayName: func() types.String {
+				if v, ok := blockData["display_name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["brute_force_detection_settings"].(map[string]interface{}); ok && (isImport || data.BruteForceDetectionSettings != nil) {
+		data.BruteForceDetectionSettings = &TenantConfigurationBruteForceDetectionSettingsModel{
+			MaxLoginFailures: func() types.Int64 {
+				if v, ok := blockData["max_login_failures"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["password_policy"].(map[string]interface{}); ok && (isImport || data.PasswordPolicy != nil) {
+		data.PasswordPolicy = &TenantConfigurationPasswordPolicyModel{
+			Digits: func() types.Int64 {
+				if v, ok := blockData["digits"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			ExpirePassword: func() types.Int64 {
+				if v, ok := blockData["expire_password"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			LowercaseCharacters: func() types.Int64 {
+				if v, ok := blockData["lowercase_characters"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			MinimumLength: func() types.Int64 {
+				if v, ok := blockData["minimum_length"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			NotRecentlyUsed: func() types.Int64 {
+				if v, ok := blockData["not_recently_used"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			NotUsername: func() types.Bool {
+				if !isImport && data.PasswordPolicy != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.PasswordPolicy.NotUsername
+				}
+				// Import case: read from API
+				if v, ok := blockData["not_username"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			SpecialCharacters: func() types.Int64 {
+				if v, ok := blockData["special_characters"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			UppercaseCharacters: func() types.Int64 {
+				if v, ok := blockData["uppercase_characters"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 

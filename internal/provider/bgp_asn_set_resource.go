@@ -241,7 +241,7 @@ func (r *BGPAsnSetResource) Create(ctx context.Context, req resource.CreateReque
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.BGPAsnSet{
+	createReq := &client.BGPAsnSet{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -250,7 +250,7 @@ func (r *BGPAsnSetResource) Create(ctx context.Context, req resource.CreateReque
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -259,7 +259,7 @@ func (r *BGPAsnSetResource) Create(ctx context.Context, req resource.CreateReque
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -268,7 +268,7 @@ func (r *BGPAsnSetResource) Create(ctx context.Context, req resource.CreateReque
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -276,25 +276,44 @@ func (r *BGPAsnSetResource) Create(ctx context.Context, req resource.CreateReque
 		var as_numbersList []int64
 		resp.Diagnostics.Append(data.AsNumbers.ElementsAs(ctx, &as_numbersList, false)...)
 		if !resp.Diagnostics.HasError() {
-			apiResource.Spec["as_numbers"] = as_numbersList
+			createReq.Spec["as_numbers"] = as_numbersList
 		}
 	}
 
 
-	created, err := r.client.CreateBGPAsnSet(ctx, apiResource)
+	apiResource, err := r.client.CreateBGPAsnSet(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create BGPAsnSet: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if v, ok := apiResource.Spec["as_numbers"].([]interface{}); ok && len(v) > 0 {
+		var as_numbersList []int64
+		for _, item := range v {
+			if n, ok := item.(float64); ok {
+				as_numbersList = append(as_numbersList, int64(n))
+			}
+		}
+		listVal, diags := types.ListValueFrom(ctx, types.Int64Type, as_numbersList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.AsNumbers = listVal
+		}
+	} else {
+		data.AsNumbers = types.ListNull(types.Int64Type)
+	}
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 

@@ -408,6 +408,7 @@ func (r *NetworkConnectorResource) Schema(ctx context.Context, req resource.Sche
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
+								Computed: true,
 							},
 						},
 					},
@@ -447,6 +448,7 @@ func (r *NetworkConnectorResource) Schema(ctx context.Context, req resource.Sche
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
+								Computed: true,
 							},
 						},
 					},
@@ -570,7 +572,7 @@ func (r *NetworkConnectorResource) Create(ctx context.Context, req resource.Crea
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.NetworkConnector{
+	createReq := &client.NetworkConnector{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -579,7 +581,7 @@ func (r *NetworkConnectorResource) Create(ctx context.Context, req resource.Crea
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -588,7 +590,7 @@ func (r *NetworkConnectorResource) Create(ctx context.Context, req resource.Crea
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -597,13 +599,13 @@ func (r *NetworkConnectorResource) Create(ctx context.Context, req resource.Crea
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
 	if data.DisableForwardProxy != nil {
 		disable_forward_proxyMap := make(map[string]interface{})
-		apiResource.Spec["disable_forward_proxy"] = disable_forward_proxyMap
+		createReq.Spec["disable_forward_proxy"] = disable_forward_proxyMap
 	}
 	if data.EnableForwardProxy != nil {
 		enable_forward_proxyMap := make(map[string]interface{})
@@ -637,7 +639,7 @@ func (r *NetworkConnectorResource) Create(ctx context.Context, req resource.Crea
 				enable_forward_proxyMap["white_listed_prefixes"] = white_listed_prefixesItems
 			}
 		}
-		apiResource.Spec["enable_forward_proxy"] = enable_forward_proxyMap
+		createReq.Spec["enable_forward_proxy"] = enable_forward_proxyMap
 	}
 	if data.SLIToGlobalDr != nil {
 		sli_to_global_drMap := make(map[string]interface{})
@@ -654,7 +656,7 @@ func (r *NetworkConnectorResource) Create(ctx context.Context, req resource.Crea
 			}
 			sli_to_global_drMap["global_vn"] = global_vnNestedMap
 		}
-		apiResource.Spec["sli_to_global_dr"] = sli_to_global_drMap
+		createReq.Spec["sli_to_global_dr"] = sli_to_global_drMap
 	}
 	if data.SLIToSLOSnat != nil {
 		sli_to_slo_snatMap := make(map[string]interface{})
@@ -664,7 +666,7 @@ func (r *NetworkConnectorResource) Create(ctx context.Context, req resource.Crea
 		if data.SLIToSLOSnat.InterfaceIP != nil {
 			sli_to_slo_snatMap["interface_ip"] = map[string]interface{}{}
 		}
-		apiResource.Spec["sli_to_slo_snat"] = sli_to_slo_snatMap
+		createReq.Spec["sli_to_slo_snat"] = sli_to_slo_snatMap
 	}
 	if data.SLOToGlobalDr != nil {
 		slo_to_global_drMap := make(map[string]interface{})
@@ -681,24 +683,120 @@ func (r *NetworkConnectorResource) Create(ctx context.Context, req resource.Crea
 			}
 			slo_to_global_drMap["global_vn"] = global_vnNestedMap
 		}
-		apiResource.Spec["slo_to_global_dr"] = slo_to_global_drMap
+		createReq.Spec["slo_to_global_dr"] = slo_to_global_drMap
 	}
 
 
-	created, err := r.client.CreateNetworkConnector(ctx, apiResource)
+	apiResource, err := r.client.CreateNetworkConnector(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create NetworkConnector: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if _, ok := apiResource.Spec["disable_forward_proxy"].(map[string]interface{}); ok && isImport && data.DisableForwardProxy == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableForwardProxy = &NetworkConnectorEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["enable_forward_proxy"].(map[string]interface{}); ok && (isImport || data.EnableForwardProxy != nil) {
+		data.EnableForwardProxy = &NetworkConnectorEnableForwardProxyModel{
+			ConnectionTimeout: func() types.Int64 {
+				if v, ok := blockData["connection_timeout"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			MaxConnectAttempts: func() types.Int64 {
+				if v, ok := blockData["max_connect_attempts"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			NoInterception: func() *NetworkConnectorEmptyModel {
+				if !isImport && data.EnableForwardProxy != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.EnableForwardProxy.NoInterception
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_interception"].(map[string]interface{}); ok {
+					return &NetworkConnectorEmptyModel{}
+				}
+				return nil
+			}(),
+			TLSIntercept: func() *NetworkConnectorEnableForwardProxyTLSInterceptModel {
+				if !isImport && data.EnableForwardProxy != nil && data.EnableForwardProxy.TLSIntercept != nil {
+					// Normal Read: preserve existing state value
+					return data.EnableForwardProxy.TLSIntercept
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["tls_intercept"].(map[string]interface{}); ok {
+					return &NetworkConnectorEnableForwardProxyTLSInterceptModel{
+						TrustedCaURL: func() types.String {
+							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			WhiteListedPorts: func() types.List {
+				if v, ok := blockData["white_listed_ports"].([]interface{}); ok && len(v) > 0 {
+					var items []int64
+					for _, item := range v {
+						if n, ok := item.(float64); ok {
+							items = append(items, int64(n))
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.Int64Type, items)
+					return listVal
+				}
+				return types.ListNull(types.Int64Type)
+			}(),
+			WhiteListedPrefixes: func() types.List {
+				if v, ok := blockData["white_listed_prefixes"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["sli_to_global_dr"].(map[string]interface{}); ok && isImport && data.SLIToGlobalDr == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.SLIToGlobalDr = &NetworkConnectorSLIToGlobalDrModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["sli_to_slo_snat"].(map[string]interface{}); ok && isImport && data.SLIToSLOSnat == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.SLIToSLOSnat = &NetworkConnectorSLIToSLOSnatModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["slo_to_global_dr"].(map[string]interface{}); ok && isImport && data.SLOToGlobalDr == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.SLOToGlobalDr = &NetworkConnectorSLOToGlobalDrModel{}
+	}
+	// Normal Read: preserve existing state value
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 

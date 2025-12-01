@@ -314,7 +314,7 @@ func (r *MaliciousUserMitigationResource) Create(ctx context.Context, req resour
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.MaliciousUserMitigation{
+	createReq := &client.MaliciousUserMitigation{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -323,7 +323,7 @@ func (r *MaliciousUserMitigationResource) Create(ctx context.Context, req resour
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -332,7 +332,7 @@ func (r *MaliciousUserMitigationResource) Create(ctx context.Context, req resour
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -341,7 +341,7 @@ func (r *MaliciousUserMitigationResource) Create(ctx context.Context, req resour
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -381,24 +381,95 @@ func (r *MaliciousUserMitigationResource) Create(ctx context.Context, req resour
 			}
 			mitigation_typeMap["rules"] = rulesList
 		}
-		apiResource.Spec["mitigation_type"] = mitigation_typeMap
+		createReq.Spec["mitigation_type"] = mitigation_typeMap
 	}
 
 
-	created, err := r.client.CreateMaliciousUserMitigation(ctx, apiResource)
+	apiResource, err := r.client.CreateMaliciousUserMitigation(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create MaliciousUserMitigation: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["mitigation_type"].(map[string]interface{}); ok && (isImport || data.MitigationType != nil) {
+		data.MitigationType = &MaliciousUserMitigationMitigationTypeModel{
+			Rules: func() []MaliciousUserMitigationMitigationTypeRulesModel {
+				if listData, ok := blockData["rules"].([]interface{}); ok && len(listData) > 0 {
+					var result []MaliciousUserMitigationMitigationTypeRulesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, MaliciousUserMitigationMitigationTypeRulesModel{
+								MitigationAction: func() *MaliciousUserMitigationMitigationTypeRulesMitigationActionModel {
+									if deepMap, ok := itemMap["mitigation_action"].(map[string]interface{}); ok {
+										return &MaliciousUserMitigationMitigationTypeRulesMitigationActionModel{
+											BlockTemporarily: func() *MaliciousUserMitigationEmptyModel {
+												if _, ok := deepMap["block_temporarily"].(map[string]interface{}); ok {
+													return &MaliciousUserMitigationEmptyModel{}
+												}
+												return nil
+											}(),
+											CaptchaChallenge: func() *MaliciousUserMitigationEmptyModel {
+												if _, ok := deepMap["captcha_challenge"].(map[string]interface{}); ok {
+													return &MaliciousUserMitigationEmptyModel{}
+												}
+												return nil
+											}(),
+											JavascriptChallenge: func() *MaliciousUserMitigationEmptyModel {
+												if _, ok := deepMap["javascript_challenge"].(map[string]interface{}); ok {
+													return &MaliciousUserMitigationEmptyModel{}
+												}
+												return nil
+											}(),
+										}
+									}
+									return nil
+								}(),
+								ThreatLevel: func() *MaliciousUserMitigationMitigationTypeRulesThreatLevelModel {
+									if deepMap, ok := itemMap["threat_level"].(map[string]interface{}); ok {
+										return &MaliciousUserMitigationMitigationTypeRulesThreatLevelModel{
+											High: func() *MaliciousUserMitigationEmptyModel {
+												if _, ok := deepMap["high"].(map[string]interface{}); ok {
+													return &MaliciousUserMitigationEmptyModel{}
+												}
+												return nil
+											}(),
+											Low: func() *MaliciousUserMitigationEmptyModel {
+												if _, ok := deepMap["low"].(map[string]interface{}); ok {
+													return &MaliciousUserMitigationEmptyModel{}
+												}
+												return nil
+											}(),
+											Medium: func() *MaliciousUserMitigationEmptyModel {
+												if _, ok := deepMap["medium"].(map[string]interface{}); ok {
+													return &MaliciousUserMitigationEmptyModel{}
+												}
+												return nil
+											}(),
+										}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 

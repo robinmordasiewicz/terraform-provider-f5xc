@@ -181,6 +181,7 @@ func (r *CertificateResource) Schema(ctx context.Context, req resource.SchemaReq
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional: true,
+						Computed: true,
 					},
 				},
 
@@ -357,7 +358,7 @@ func (r *CertificateResource) Create(ctx context.Context, req resource.CreateReq
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.Certificate{
+	createReq := &client.Certificate{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -366,7 +367,7 @@ func (r *CertificateResource) Create(ctx context.Context, req resource.CreateReq
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -375,7 +376,7 @@ func (r *CertificateResource) Create(ctx context.Context, req resource.CreateReq
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -384,7 +385,7 @@ func (r *CertificateResource) Create(ctx context.Context, req resource.CreateReq
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -399,7 +400,7 @@ func (r *CertificateResource) Create(ctx context.Context, req resource.CreateReq
 		if !data.CertificateChain.Tenant.IsNull() && !data.CertificateChain.Tenant.IsUnknown() {
 			certificate_chainMap["tenant"] = data.CertificateChain.Tenant.ValueString()
 		}
-		apiResource.Spec["certificate_chain"] = certificate_chainMap
+		createReq.Spec["certificate_chain"] = certificate_chainMap
 	}
 	if data.CustomHashAlgorithms != nil {
 		custom_hash_algorithmsMap := make(map[string]interface{})
@@ -410,11 +411,11 @@ func (r *CertificateResource) Create(ctx context.Context, req resource.CreateReq
 				custom_hash_algorithmsMap["hash_algorithms"] = hash_algorithmsItems
 			}
 		}
-		apiResource.Spec["custom_hash_algorithms"] = custom_hash_algorithmsMap
+		createReq.Spec["custom_hash_algorithms"] = custom_hash_algorithmsMap
 	}
 	if data.DisableOcspStapling != nil {
 		disable_ocsp_staplingMap := make(map[string]interface{})
-		apiResource.Spec["disable_ocsp_stapling"] = disable_ocsp_staplingMap
+		createReq.Spec["disable_ocsp_stapling"] = disable_ocsp_staplingMap
 	}
 	if data.PrivateKey != nil {
 		private_keyMap := make(map[string]interface{})
@@ -441,38 +442,94 @@ func (r *CertificateResource) Create(ctx context.Context, req resource.CreateReq
 			}
 			private_keyMap["clear_secret_info"] = clear_secret_infoNestedMap
 		}
-		apiResource.Spec["private_key"] = private_keyMap
+		createReq.Spec["private_key"] = private_keyMap
 	}
 	if data.UseSystemDefaults != nil {
 		use_system_defaultsMap := make(map[string]interface{})
-		apiResource.Spec["use_system_defaults"] = use_system_defaultsMap
+		createReq.Spec["use_system_defaults"] = use_system_defaultsMap
 	}
 	if !data.CertificateURL.IsNull() && !data.CertificateURL.IsUnknown() {
-		apiResource.Spec["certificate_url"] = data.CertificateURL.ValueString()
+		createReq.Spec["certificate_url"] = data.CertificateURL.ValueString()
 	}
 
 
-	created, err := r.client.CreateCertificate(ctx, apiResource)
+	apiResource, err := r.client.CreateCertificate(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create Certificate: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
-	if v, ok := created.Spec["certificate_url"].(string); ok && v != "" {
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["certificate_chain"].(map[string]interface{}); ok && (isImport || data.CertificateChain != nil) {
+		data.CertificateChain = &CertificateCertificateChainModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["custom_hash_algorithms"].(map[string]interface{}); ok && (isImport || data.CustomHashAlgorithms != nil) {
+		data.CustomHashAlgorithms = &CertificateCustomHashAlgorithmsModel{
+			HashAlgorithms: func() types.List {
+				if v, ok := blockData["hash_algorithms"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["disable_ocsp_stapling"].(map[string]interface{}); ok && isImport && data.DisableOcspStapling == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableOcspStapling = &CertificateEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["private_key"].(map[string]interface{}); ok && isImport && data.PrivateKey == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.PrivateKey = &CertificatePrivateKeyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["use_system_defaults"].(map[string]interface{}); ok && isImport && data.UseSystemDefaults == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.UseSystemDefaults = &CertificateEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["certificate_url"].(string); ok && v != "" {
 		data.CertificateURL = types.StringValue(v)
-	} else if data.CertificateURL.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.CertificateURL = types.StringNull()
 	}
-	// If plan had a value, preserve it
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 

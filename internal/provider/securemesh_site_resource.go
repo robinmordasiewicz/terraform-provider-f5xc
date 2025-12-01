@@ -834,6 +834,7 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -860,6 +861,7 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -886,6 +888,7 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -934,6 +937,7 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 															Optional: true,
+															Computed: true,
 														},
 													},
 												},
@@ -958,6 +962,7 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 															Optional: true,
+															Computed: true,
 														},
 													},
 												},
@@ -1401,6 +1406,7 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 									"tenant": schema.StringAttribute{
 										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 										Optional: true,
+										Computed: true,
 									},
 								},
 							},
@@ -1466,6 +1472,7 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 																				"kind": schema.StringAttribute{
 																					MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																					Optional: true,
+																					Computed: true,
 																				},
 																				"name": schema.StringAttribute{
 																					MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -1478,10 +1485,12 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 																				"tenant": schema.StringAttribute{
 																					MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																					Optional: true,
+																					Computed: true,
 																				},
 																				"uid": schema.StringAttribute{
 																					MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																					Optional: true,
+																					Computed: true,
 																				},
 																			},
 																		},
@@ -1546,6 +1555,7 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 																				"kind": schema.StringAttribute{
 																					MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																					Optional: true,
+																					Computed: true,
 																				},
 																				"name": schema.StringAttribute{
 																					MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -1558,10 +1568,12 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 																				"tenant": schema.StringAttribute{
 																					MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																					Optional: true,
+																					Computed: true,
 																				},
 																				"uid": schema.StringAttribute{
 																					MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																					Optional: true,
+																					Computed: true,
 																				},
 																			},
 																		},
@@ -1605,6 +1617,7 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 									"tenant": schema.StringAttribute{
 										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 										Optional: true,
+										Computed: true,
 									},
 								},
 							},
@@ -1670,6 +1683,7 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 																				"kind": schema.StringAttribute{
 																					MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																					Optional: true,
+																					Computed: true,
 																				},
 																				"name": schema.StringAttribute{
 																					MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -1682,10 +1696,12 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 																				"tenant": schema.StringAttribute{
 																					MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																					Optional: true,
+																					Computed: true,
 																				},
 																				"uid": schema.StringAttribute{
 																					MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																					Optional: true,
+																					Computed: true,
 																				},
 																			},
 																		},
@@ -1750,6 +1766,7 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 																				"kind": schema.StringAttribute{
 																					MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																					Optional: true,
+																					Computed: true,
 																				},
 																				"name": schema.StringAttribute{
 																					MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -1762,10 +1779,12 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 																				"tenant": schema.StringAttribute{
 																					MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																					Optional: true,
+																					Computed: true,
 																				},
 																				"uid": schema.StringAttribute{
 																					MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																					Optional: true,
+																					Computed: true,
 																				},
 																			},
 																		},
@@ -1843,6 +1862,7 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional: true,
+						Computed: true,
 					},
 				},
 
@@ -2054,7 +2074,7 @@ func (r *SecuremeshSiteResource) Create(ctx context.Context, req resource.Create
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.SecuremeshSite{
+	createReq := &client.SecuremeshSite{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -2063,7 +2083,7 @@ func (r *SecuremeshSiteResource) Create(ctx context.Context, req resource.Create
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -2072,7 +2092,7 @@ func (r *SecuremeshSiteResource) Create(ctx context.Context, req resource.Create
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -2081,7 +2101,7 @@ func (r *SecuremeshSiteResource) Create(ctx context.Context, req resource.Create
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -2107,7 +2127,7 @@ func (r *SecuremeshSiteResource) Create(ctx context.Context, req resource.Create
 			}
 			blocked_servicesMap["blocked_sevice"] = blocked_seviceList
 		}
-		apiResource.Spec["blocked_services"] = blocked_servicesMap
+		createReq.Spec["blocked_services"] = blocked_servicesMap
 	}
 	if data.BondDeviceList != nil {
 		bond_device_listMap := make(map[string]interface{})
@@ -2138,7 +2158,7 @@ func (r *SecuremeshSiteResource) Create(ctx context.Context, req resource.Create
 			}
 			bond_device_listMap["bond_devices"] = bond_devicesList
 		}
-		apiResource.Spec["bond_device_list"] = bond_device_listMap
+		createReq.Spec["bond_device_list"] = bond_device_listMap
 	}
 	if data.Coordinates != nil {
 		coordinatesMap := make(map[string]interface{})
@@ -2148,7 +2168,7 @@ func (r *SecuremeshSiteResource) Create(ctx context.Context, req resource.Create
 		if !data.Coordinates.Longitude.IsNull() && !data.Coordinates.Longitude.IsUnknown() {
 			coordinatesMap["longitude"] = data.Coordinates.Longitude.ValueInt64()
 		}
-		apiResource.Spec["coordinates"] = coordinatesMap
+		createReq.Spec["coordinates"] = coordinatesMap
 	}
 	if data.CustomNetworkConfig != nil {
 		custom_network_configMap := make(map[string]interface{})
@@ -2225,15 +2245,15 @@ func (r *SecuremeshSiteResource) Create(ctx context.Context, req resource.Create
 		if !data.CustomNetworkConfig.VipVrrpMode.IsNull() && !data.CustomNetworkConfig.VipVrrpMode.IsUnknown() {
 			custom_network_configMap["vip_vrrp_mode"] = data.CustomNetworkConfig.VipVrrpMode.ValueString()
 		}
-		apiResource.Spec["custom_network_config"] = custom_network_configMap
+		createReq.Spec["custom_network_config"] = custom_network_configMap
 	}
 	if data.DefaultBlockedServices != nil {
 		default_blocked_servicesMap := make(map[string]interface{})
-		apiResource.Spec["default_blocked_services"] = default_blocked_servicesMap
+		createReq.Spec["default_blocked_services"] = default_blocked_servicesMap
 	}
 	if data.DefaultNetworkConfig != nil {
 		default_network_configMap := make(map[string]interface{})
-		apiResource.Spec["default_network_config"] = default_network_configMap
+		createReq.Spec["default_network_config"] = default_network_configMap
 	}
 	if data.KubernetesUpgradeDrain != nil {
 		kubernetes_upgrade_drainMap := make(map[string]interface{})
@@ -2250,7 +2270,7 @@ func (r *SecuremeshSiteResource) Create(ctx context.Context, req resource.Create
 			}
 			kubernetes_upgrade_drainMap["enable_upgrade_drain"] = enable_upgrade_drainNestedMap
 		}
-		apiResource.Spec["kubernetes_upgrade_drain"] = kubernetes_upgrade_drainMap
+		createReq.Spec["kubernetes_upgrade_drain"] = kubernetes_upgrade_drainMap
 	}
 	if data.LogReceiver != nil {
 		log_receiverMap := make(map[string]interface{})
@@ -2263,11 +2283,11 @@ func (r *SecuremeshSiteResource) Create(ctx context.Context, req resource.Create
 		if !data.LogReceiver.Tenant.IsNull() && !data.LogReceiver.Tenant.IsUnknown() {
 			log_receiverMap["tenant"] = data.LogReceiver.Tenant.ValueString()
 		}
-		apiResource.Spec["log_receiver"] = log_receiverMap
+		createReq.Spec["log_receiver"] = log_receiverMap
 	}
 	if data.LogsStreamingDisabled != nil {
 		logs_streaming_disabledMap := make(map[string]interface{})
-		apiResource.Spec["logs_streaming_disabled"] = logs_streaming_disabledMap
+		createReq.Spec["logs_streaming_disabled"] = logs_streaming_disabledMap
 	}
 	if len(data.MasterNodeConfiguration) > 0 {
 		var master_node_configurationList []map[string]interface{}
@@ -2281,11 +2301,11 @@ func (r *SecuremeshSiteResource) Create(ctx context.Context, req resource.Create
 			}
 			master_node_configurationList = append(master_node_configurationList, itemMap)
 		}
-		apiResource.Spec["master_node_configuration"] = master_node_configurationList
+		createReq.Spec["master_node_configuration"] = master_node_configurationList
 	}
 	if data.NoBondDevices != nil {
 		no_bond_devicesMap := make(map[string]interface{})
-		apiResource.Spec["no_bond_devices"] = no_bond_devicesMap
+		createReq.Spec["no_bond_devices"] = no_bond_devicesMap
 	}
 	if data.OfflineSurvivabilityMode != nil {
 		offline_survivability_modeMap := make(map[string]interface{})
@@ -2295,7 +2315,7 @@ func (r *SecuremeshSiteResource) Create(ctx context.Context, req resource.Create
 		if data.OfflineSurvivabilityMode.NoOfflineSurvivabilityMode != nil {
 			offline_survivability_modeMap["no_offline_survivability_mode"] = map[string]interface{}{}
 		}
-		apiResource.Spec["offline_survivability_mode"] = offline_survivability_modeMap
+		createReq.Spec["offline_survivability_mode"] = offline_survivability_modeMap
 	}
 	if data.Os != nil {
 		osMap := make(map[string]interface{})
@@ -2305,7 +2325,7 @@ func (r *SecuremeshSiteResource) Create(ctx context.Context, req resource.Create
 		if !data.Os.OperatingSystemVersion.IsNull() && !data.Os.OperatingSystemVersion.IsUnknown() {
 			osMap["operating_system_version"] = data.Os.OperatingSystemVersion.ValueString()
 		}
-		apiResource.Spec["os"] = osMap
+		createReq.Spec["os"] = osMap
 	}
 	if data.PerformanceEnhancementMode != nil {
 		performance_enhancement_modeMap := make(map[string]interface{})
@@ -2316,7 +2336,7 @@ func (r *SecuremeshSiteResource) Create(ctx context.Context, req resource.Create
 		if data.PerformanceEnhancementMode.PerfModeL7Enhanced != nil {
 			performance_enhancement_modeMap["perf_mode_l7_enhanced"] = map[string]interface{}{}
 		}
-		apiResource.Spec["performance_enhancement_mode"] = performance_enhancement_modeMap
+		createReq.Spec["performance_enhancement_mode"] = performance_enhancement_modeMap
 	}
 	if data.Sw != nil {
 		swMap := make(map[string]interface{})
@@ -2326,51 +2346,533 @@ func (r *SecuremeshSiteResource) Create(ctx context.Context, req resource.Create
 		if !data.Sw.VolterraSoftwareVersion.IsNull() && !data.Sw.VolterraSoftwareVersion.IsUnknown() {
 			swMap["volterra_software_version"] = data.Sw.VolterraSoftwareVersion.ValueString()
 		}
-		apiResource.Spec["sw"] = swMap
+		createReq.Spec["sw"] = swMap
 	}
 	if !data.WorkerNodes.IsNull() && !data.WorkerNodes.IsUnknown() {
 		var worker_nodesList []string
 		resp.Diagnostics.Append(data.WorkerNodes.ElementsAs(ctx, &worker_nodesList, false)...)
 		if !resp.Diagnostics.HasError() {
-			apiResource.Spec["worker_nodes"] = worker_nodesList
+			createReq.Spec["worker_nodes"] = worker_nodesList
 		}
 	}
 	if !data.Address.IsNull() && !data.Address.IsUnknown() {
-		apiResource.Spec["address"] = data.Address.ValueString()
+		createReq.Spec["address"] = data.Address.ValueString()
 	}
 	if !data.VolterraCertifiedHw.IsNull() && !data.VolterraCertifiedHw.IsUnknown() {
-		apiResource.Spec["volterra_certified_hw"] = data.VolterraCertifiedHw.ValueString()
+		createReq.Spec["volterra_certified_hw"] = data.VolterraCertifiedHw.ValueString()
 	}
 
 
-	created, err := r.client.CreateSecuremeshSite(ctx, apiResource)
+	apiResource, err := r.client.CreateSecuremeshSite(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create SecuremeshSite: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
-	if v, ok := created.Spec["address"].(string); ok && v != "" {
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["blocked_services"].(map[string]interface{}); ok && (isImport || data.BlockedServices != nil) {
+		data.BlockedServices = &SecuremeshSiteBlockedServicesModel{
+			BlockedSevice: func() []SecuremeshSiteBlockedServicesBlockedSeviceModel {
+				if listData, ok := blockData["blocked_sevice"].([]interface{}); ok && len(listData) > 0 {
+					var result []SecuremeshSiteBlockedServicesBlockedSeviceModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, SecuremeshSiteBlockedServicesBlockedSeviceModel{
+								DNS: func() *SecuremeshSiteEmptyModel {
+									if _, ok := itemMap["dns"].(map[string]interface{}); ok {
+										return &SecuremeshSiteEmptyModel{}
+									}
+									return nil
+								}(),
+								NetworkType: func() types.String {
+									if v, ok := itemMap["network_type"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								SSH: func() *SecuremeshSiteEmptyModel {
+									if _, ok := itemMap["ssh"].(map[string]interface{}); ok {
+										return &SecuremeshSiteEmptyModel{}
+									}
+									return nil
+								}(),
+								WebUserInterface: func() *SecuremeshSiteEmptyModel {
+									if _, ok := itemMap["web_user_interface"].(map[string]interface{}); ok {
+										return &SecuremeshSiteEmptyModel{}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["bond_device_list"].(map[string]interface{}); ok && (isImport || data.BondDeviceList != nil) {
+		data.BondDeviceList = &SecuremeshSiteBondDeviceListModel{
+			BondDevices: func() []SecuremeshSiteBondDeviceListBondDevicesModel {
+				if listData, ok := blockData["bond_devices"].([]interface{}); ok && len(listData) > 0 {
+					var result []SecuremeshSiteBondDeviceListBondDevicesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, SecuremeshSiteBondDeviceListBondDevicesModel{
+								ActiveBackup: func() *SecuremeshSiteEmptyModel {
+									if _, ok := itemMap["active_backup"].(map[string]interface{}); ok {
+										return &SecuremeshSiteEmptyModel{}
+									}
+									return nil
+								}(),
+								Lacp: func() *SecuremeshSiteBondDeviceListBondDevicesLacpModel {
+									if deepMap, ok := itemMap["lacp"].(map[string]interface{}); ok {
+										return &SecuremeshSiteBondDeviceListBondDevicesLacpModel{
+											Rate: func() types.Int64 {
+												if v, ok := deepMap["rate"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								LinkPollingInterval: func() types.Int64 {
+									if v, ok := itemMap["link_polling_interval"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								LinkUpDelay: func() types.Int64 {
+									if v, ok := itemMap["link_up_delay"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["coordinates"].(map[string]interface{}); ok && (isImport || data.Coordinates != nil) {
+		data.Coordinates = &SecuremeshSiteCoordinatesModel{
+			Latitude: func() types.Int64 {
+				if v, ok := blockData["latitude"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			Longitude: func() types.Int64 {
+				if v, ok := blockData["longitude"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["custom_network_config"].(map[string]interface{}); ok && (isImport || data.CustomNetworkConfig != nil) {
+		data.CustomNetworkConfig = &SecuremeshSiteCustomNetworkConfigModel{
+			ActiveEnhancedFirewallPolicies: func() *SecuremeshSiteCustomNetworkConfigActiveEnhancedFirewallPoliciesModel {
+				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.ActiveEnhancedFirewallPolicies != nil {
+					// Normal Read: preserve existing state value
+					return data.CustomNetworkConfig.ActiveEnhancedFirewallPolicies
+				}
+				// Import case: read from API
+				if _, ok := blockData["active_enhanced_firewall_policies"].(map[string]interface{}); ok {
+					return &SecuremeshSiteCustomNetworkConfigActiveEnhancedFirewallPoliciesModel{
+					}
+				}
+				return nil
+			}(),
+			ActiveForwardProxyPolicies: func() *SecuremeshSiteCustomNetworkConfigActiveForwardProxyPoliciesModel {
+				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.ActiveForwardProxyPolicies != nil {
+					// Normal Read: preserve existing state value
+					return data.CustomNetworkConfig.ActiveForwardProxyPolicies
+				}
+				// Import case: read from API
+				if _, ok := blockData["active_forward_proxy_policies"].(map[string]interface{}); ok {
+					return &SecuremeshSiteCustomNetworkConfigActiveForwardProxyPoliciesModel{
+					}
+				}
+				return nil
+			}(),
+			ActiveNetworkPolicies: func() *SecuremeshSiteCustomNetworkConfigActiveNetworkPoliciesModel {
+				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.ActiveNetworkPolicies != nil {
+					// Normal Read: preserve existing state value
+					return data.CustomNetworkConfig.ActiveNetworkPolicies
+				}
+				// Import case: read from API
+				if _, ok := blockData["active_network_policies"].(map[string]interface{}); ok {
+					return &SecuremeshSiteCustomNetworkConfigActiveNetworkPoliciesModel{
+					}
+				}
+				return nil
+			}(),
+			DefaultConfig: func() *SecuremeshSiteEmptyModel {
+				if !isImport && data.CustomNetworkConfig != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CustomNetworkConfig.DefaultConfig
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_config"].(map[string]interface{}); ok {
+					return &SecuremeshSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			DefaultInterfaceConfig: func() *SecuremeshSiteEmptyModel {
+				if !isImport && data.CustomNetworkConfig != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CustomNetworkConfig.DefaultInterfaceConfig
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_interface_config"].(map[string]interface{}); ok {
+					return &SecuremeshSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			DefaultSLIConfig: func() *SecuremeshSiteEmptyModel {
+				if !isImport && data.CustomNetworkConfig != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CustomNetworkConfig.DefaultSLIConfig
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_sli_config"].(map[string]interface{}); ok {
+					return &SecuremeshSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			ForwardProxyAllowAll: func() *SecuremeshSiteEmptyModel {
+				if !isImport && data.CustomNetworkConfig != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CustomNetworkConfig.ForwardProxyAllowAll
+				}
+				// Import case: read from API
+				if _, ok := blockData["forward_proxy_allow_all"].(map[string]interface{}); ok {
+					return &SecuremeshSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			GlobalNetworkList: func() *SecuremeshSiteCustomNetworkConfigGlobalNetworkListModel {
+				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.GlobalNetworkList != nil {
+					// Normal Read: preserve existing state value
+					return data.CustomNetworkConfig.GlobalNetworkList
+				}
+				// Import case: read from API
+				if _, ok := blockData["global_network_list"].(map[string]interface{}); ok {
+					return &SecuremeshSiteCustomNetworkConfigGlobalNetworkListModel{
+					}
+				}
+				return nil
+			}(),
+			InterfaceList: func() *SecuremeshSiteCustomNetworkConfigInterfaceListModel {
+				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.InterfaceList != nil {
+					// Normal Read: preserve existing state value
+					return data.CustomNetworkConfig.InterfaceList
+				}
+				// Import case: read from API
+				if _, ok := blockData["interface_list"].(map[string]interface{}); ok {
+					return &SecuremeshSiteCustomNetworkConfigInterfaceListModel{
+					}
+				}
+				return nil
+			}(),
+			NoForwardProxy: func() *SecuremeshSiteEmptyModel {
+				if !isImport && data.CustomNetworkConfig != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CustomNetworkConfig.NoForwardProxy
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_forward_proxy"].(map[string]interface{}); ok {
+					return &SecuremeshSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			NoGlobalNetwork: func() *SecuremeshSiteEmptyModel {
+				if !isImport && data.CustomNetworkConfig != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CustomNetworkConfig.NoGlobalNetwork
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_global_network"].(map[string]interface{}); ok {
+					return &SecuremeshSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			NoNetworkPolicy: func() *SecuremeshSiteEmptyModel {
+				if !isImport && data.CustomNetworkConfig != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CustomNetworkConfig.NoNetworkPolicy
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_network_policy"].(map[string]interface{}); ok {
+					return &SecuremeshSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			SLIConfig: func() *SecuremeshSiteCustomNetworkConfigSLIConfigModel {
+				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.SLIConfig != nil {
+					// Normal Read: preserve existing state value
+					return data.CustomNetworkConfig.SLIConfig
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["sli_config"].(map[string]interface{}); ok {
+					return &SecuremeshSiteCustomNetworkConfigSLIConfigModel{
+						Nameserver: func() types.String {
+							if v, ok := nestedBlockData["nameserver"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Vip: func() types.String {
+							if v, ok := nestedBlockData["vip"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			SLOConfig: func() *SecuremeshSiteCustomNetworkConfigSLOConfigModel {
+				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.SLOConfig != nil {
+					// Normal Read: preserve existing state value
+					return data.CustomNetworkConfig.SLOConfig
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["slo_config"].(map[string]interface{}); ok {
+					return &SecuremeshSiteCustomNetworkConfigSLOConfigModel{
+						Nameserver: func() types.String {
+							if v, ok := nestedBlockData["nameserver"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Vip: func() types.String {
+							if v, ok := nestedBlockData["vip"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			SmConnectionPublicIP: func() *SecuremeshSiteEmptyModel {
+				if !isImport && data.CustomNetworkConfig != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CustomNetworkConfig.SmConnectionPublicIP
+				}
+				// Import case: read from API
+				if _, ok := blockData["sm_connection_public_ip"].(map[string]interface{}); ok {
+					return &SecuremeshSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			SmConnectionPvtIP: func() *SecuremeshSiteEmptyModel {
+				if !isImport && data.CustomNetworkConfig != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CustomNetworkConfig.SmConnectionPvtIP
+				}
+				// Import case: read from API
+				if _, ok := blockData["sm_connection_pvt_ip"].(map[string]interface{}); ok {
+					return &SecuremeshSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			TunnelDeadTimeout: func() types.Int64 {
+				if v, ok := blockData["tunnel_dead_timeout"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			VipVrrpMode: func() types.String {
+				if v, ok := blockData["vip_vrrp_mode"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["default_blocked_services"].(map[string]interface{}); ok && isImport && data.DefaultBlockedServices == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DefaultBlockedServices = &SecuremeshSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["default_network_config"].(map[string]interface{}); ok && isImport && data.DefaultNetworkConfig == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DefaultNetworkConfig = &SecuremeshSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["kubernetes_upgrade_drain"].(map[string]interface{}); ok && isImport && data.KubernetesUpgradeDrain == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.KubernetesUpgradeDrain = &SecuremeshSiteKubernetesUpgradeDrainModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["log_receiver"].(map[string]interface{}); ok && (isImport || data.LogReceiver != nil) {
+		data.LogReceiver = &SecuremeshSiteLogReceiverModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["logs_streaming_disabled"].(map[string]interface{}); ok && isImport && data.LogsStreamingDisabled == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.LogsStreamingDisabled = &SecuremeshSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["master_node_configuration"].([]interface{}); ok && len(listData) > 0 {
+		var master_node_configurationList []SecuremeshSiteMasterNodeConfigurationModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				master_node_configurationList = append(master_node_configurationList, SecuremeshSiteMasterNodeConfigurationModel{
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					PublicIP: func() types.String {
+						if v, ok := itemMap["public_ip"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.MasterNodeConfiguration = master_node_configurationList
+	}
+	if _, ok := apiResource.Spec["no_bond_devices"].(map[string]interface{}); ok && isImport && data.NoBondDevices == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoBondDevices = &SecuremeshSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["offline_survivability_mode"].(map[string]interface{}); ok && isImport && data.OfflineSurvivabilityMode == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.OfflineSurvivabilityMode = &SecuremeshSiteOfflineSurvivabilityModeModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["os"].(map[string]interface{}); ok && (isImport || data.Os != nil) {
+		data.Os = &SecuremeshSiteOsModel{
+			DefaultOsVersion: func() *SecuremeshSiteEmptyModel {
+				if !isImport && data.Os != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.Os.DefaultOsVersion
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_os_version"].(map[string]interface{}); ok {
+					return &SecuremeshSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			OperatingSystemVersion: func() types.String {
+				if v, ok := blockData["operating_system_version"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["performance_enhancement_mode"].(map[string]interface{}); ok && isImport && data.PerformanceEnhancementMode == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.PerformanceEnhancementMode = &SecuremeshSitePerformanceEnhancementModeModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["sw"].(map[string]interface{}); ok && (isImport || data.Sw != nil) {
+		data.Sw = &SecuremeshSiteSwModel{
+			DefaultSwVersion: func() *SecuremeshSiteEmptyModel {
+				if !isImport && data.Sw != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.Sw.DefaultSwVersion
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_sw_version"].(map[string]interface{}); ok {
+					return &SecuremeshSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			VolterraSoftwareVersion: func() types.String {
+				if v, ok := blockData["volterra_software_version"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if v, ok := apiResource.Spec["worker_nodes"].([]interface{}); ok && len(v) > 0 {
+		var worker_nodesList []string
+		for _, item := range v {
+			if s, ok := item.(string); ok {
+				worker_nodesList = append(worker_nodesList, s)
+			}
+		}
+		listVal, diags := types.ListValueFrom(ctx, types.StringType, worker_nodesList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.WorkerNodes = listVal
+		}
+	} else {
+		data.WorkerNodes = types.ListNull(types.StringType)
+	}
+	if v, ok := apiResource.Spec["address"].(string); ok && v != "" {
 		data.Address = types.StringValue(v)
-	} else if data.Address.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.Address = types.StringNull()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["volterra_certified_hw"].(string); ok && v != "" {
+	if v, ok := apiResource.Spec["volterra_certified_hw"].(string); ok && v != "" {
 		data.VolterraCertifiedHw = types.StringValue(v)
-	} else if data.VolterraCertifiedHw.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.VolterraCertifiedHw = types.StringNull()
 	}
-	// If plan had a value, preserve it
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
@@ -2846,7 +3348,8 @@ func (r *SecuremeshSiteResource) Read(ctx context.Context, req resource.ReadRequ
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["master_node_configuration"].([]interface{}); ok && len(listData) > 0 {
 		var master_node_configurationList []SecuremeshSiteMasterNodeConfigurationModel
-		for _, item := range listData {
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				master_node_configurationList = append(master_node_configurationList, SecuremeshSiteMasterNodeConfigurationModel{
 					Name: func() types.String {

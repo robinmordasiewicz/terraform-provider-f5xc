@@ -222,6 +222,7 @@ func (r *AppSettingResource) Schema(ctx context.Context, req resource.SchemaRequ
 									"kind": schema.StringAttribute{
 										MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 										Optional: true,
+										Computed: true,
 									},
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -234,10 +235,12 @@ func (r *AppSettingResource) Schema(ctx context.Context, req resource.SchemaRequ
 									"tenant": schema.StringAttribute{
 										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 										Optional: true,
+										Computed: true,
 									},
 									"uid": schema.StringAttribute{
 										MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 										Optional: true,
+										Computed: true,
 									},
 								},
 							},
@@ -508,7 +511,7 @@ func (r *AppSettingResource) Create(ctx context.Context, req resource.CreateRequ
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.AppSetting{
+	createReq := &client.AppSetting{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -517,7 +520,7 @@ func (r *AppSettingResource) Create(ctx context.Context, req resource.CreateRequ
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -526,7 +529,7 @@ func (r *AppSettingResource) Create(ctx context.Context, req resource.CreateRequ
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -535,7 +538,7 @@ func (r *AppSettingResource) Create(ctx context.Context, req resource.CreateRequ
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -543,38 +546,242 @@ func (r *AppSettingResource) Create(ctx context.Context, req resource.CreateRequ
 		var app_type_settingsList []map[string]interface{}
 		for _, item := range data.AppTypeSettings {
 			itemMap := make(map[string]interface{})
+			if len(item.AppTypeRef) > 0 {
+				var app_type_refNestedList []map[string]interface{}
+				for _, nestedItem := range item.AppTypeRef {
+					nestedItemMap := make(map[string]interface{})
+					if !nestedItem.Kind.IsNull() && !nestedItem.Kind.IsUnknown() {
+						nestedItemMap["kind"] = nestedItem.Kind.ValueString()
+					}
+					if !nestedItem.Name.IsNull() && !nestedItem.Name.IsUnknown() {
+						nestedItemMap["name"] = nestedItem.Name.ValueString()
+					}
+					if !nestedItem.Namespace.IsNull() && !nestedItem.Namespace.IsUnknown() {
+						nestedItemMap["namespace"] = nestedItem.Namespace.ValueString()
+					}
+					if !nestedItem.Tenant.IsNull() && !nestedItem.Tenant.IsUnknown() {
+						nestedItemMap["tenant"] = nestedItem.Tenant.ValueString()
+					}
+					if !nestedItem.Uid.IsNull() && !nestedItem.Uid.IsUnknown() {
+						nestedItemMap["uid"] = nestedItem.Uid.ValueString()
+					}
+					app_type_refNestedList = append(app_type_refNestedList, nestedItemMap)
+				}
+				itemMap["app_type_ref"] = app_type_refNestedList
+			}
 			if item.BusinessLogicMarkupSetting != nil {
 				business_logic_markup_settingNestedMap := make(map[string]interface{})
+				if item.BusinessLogicMarkupSetting.Disable != nil {
+					business_logic_markup_settingNestedMap["disable"] = map[string]interface{}{}
+				}
+				if item.BusinessLogicMarkupSetting.Enable != nil {
+					business_logic_markup_settingNestedMap["enable"] = map[string]interface{}{}
+				}
 				itemMap["business_logic_markup_setting"] = business_logic_markup_settingNestedMap
 			}
 			if item.TimeseriesAnalysesSetting != nil {
 				timeseries_analyses_settingNestedMap := make(map[string]interface{})
+				if len(item.TimeseriesAnalysesSetting.MetricSelectors) > 0 {
+					var metric_selectorsDeepList []map[string]interface{}
+					for _, deepListItem := range item.TimeseriesAnalysesSetting.MetricSelectors {
+						deepListItemMap := make(map[string]interface{})
+						if !deepListItem.MetricsSource.IsNull() && !deepListItem.MetricsSource.IsUnknown() {
+							deepListItemMap["metrics_source"] = deepListItem.MetricsSource.ValueString()
+						}
+						metric_selectorsDeepList = append(metric_selectorsDeepList, deepListItemMap)
+					}
+					timeseries_analyses_settingNestedMap["metric_selectors"] = metric_selectorsDeepList
+				}
 				itemMap["timeseries_analyses_setting"] = timeseries_analyses_settingNestedMap
 			}
 			if item.UserBehaviorAnalysisSetting != nil {
 				user_behavior_analysis_settingNestedMap := make(map[string]interface{})
+				if item.UserBehaviorAnalysisSetting.DisableDetection != nil {
+					user_behavior_analysis_settingNestedMap["disable_detection"] = map[string]interface{}{}
+				}
+				if item.UserBehaviorAnalysisSetting.DisableLearning != nil {
+					user_behavior_analysis_settingNestedMap["disable_learning"] = map[string]interface{}{}
+				}
+				if item.UserBehaviorAnalysisSetting.EnableDetection != nil {
+					enable_detectionDeepMap := make(map[string]interface{})
+					if item.UserBehaviorAnalysisSetting.EnableDetection.BolaDetectionAutomatic != nil {
+						enable_detectionDeepMap["bola_detection_automatic"] = map[string]interface{}{}
+					}
+					if !item.UserBehaviorAnalysisSetting.EnableDetection.CoolingOffPeriod.IsNull() && !item.UserBehaviorAnalysisSetting.EnableDetection.CoolingOffPeriod.IsUnknown() {
+						enable_detectionDeepMap["cooling_off_period"] = item.UserBehaviorAnalysisSetting.EnableDetection.CoolingOffPeriod.ValueInt64()
+					}
+					if item.UserBehaviorAnalysisSetting.EnableDetection.ExcludeBolaDetection != nil {
+						enable_detectionDeepMap["exclude_bola_detection"] = map[string]interface{}{}
+					}
+					if item.UserBehaviorAnalysisSetting.EnableDetection.ExcludeBotDefenseActivity != nil {
+						enable_detectionDeepMap["exclude_bot_defense_activity"] = map[string]interface{}{}
+					}
+					if item.UserBehaviorAnalysisSetting.EnableDetection.ExcludeFailedLoginActivity != nil {
+						enable_detectionDeepMap["exclude_failed_login_activity"] = map[string]interface{}{}
+					}
+					if item.UserBehaviorAnalysisSetting.EnableDetection.ExcludeForbiddenActivity != nil {
+						enable_detectionDeepMap["exclude_forbidden_activity"] = map[string]interface{}{}
+					}
+					if item.UserBehaviorAnalysisSetting.EnableDetection.ExcludeIPReputation != nil {
+						enable_detectionDeepMap["exclude_ip_reputation"] = map[string]interface{}{}
+					}
+					if item.UserBehaviorAnalysisSetting.EnableDetection.ExcludeNonExistentURLActivity != nil {
+						enable_detectionDeepMap["exclude_non_existent_url_activity"] = map[string]interface{}{}
+					}
+					if item.UserBehaviorAnalysisSetting.EnableDetection.ExcludeRateLimit != nil {
+						enable_detectionDeepMap["exclude_rate_limit"] = map[string]interface{}{}
+					}
+					if item.UserBehaviorAnalysisSetting.EnableDetection.ExcludeWAFActivity != nil {
+						enable_detectionDeepMap["exclude_waf_activity"] = map[string]interface{}{}
+					}
+					if item.UserBehaviorAnalysisSetting.EnableDetection.IncludeBotDefenseActivity != nil {
+						enable_detectionDeepMap["include_bot_defense_activity"] = map[string]interface{}{}
+					}
+					if item.UserBehaviorAnalysisSetting.EnableDetection.IncludeIPReputation != nil {
+						enable_detectionDeepMap["include_ip_reputation"] = map[string]interface{}{}
+					}
+					if item.UserBehaviorAnalysisSetting.EnableDetection.IncludeRateLimit != nil {
+						enable_detectionDeepMap["include_rate_limit"] = map[string]interface{}{}
+					}
+					if item.UserBehaviorAnalysisSetting.EnableDetection.IncludeWAFActivity != nil {
+						enable_detectionDeepMap["include_waf_activity"] = map[string]interface{}{}
+					}
+					user_behavior_analysis_settingNestedMap["enable_detection"] = enable_detectionDeepMap
+				}
+				if item.UserBehaviorAnalysisSetting.EnableLearning != nil {
+					user_behavior_analysis_settingNestedMap["enable_learning"] = map[string]interface{}{}
+				}
 				itemMap["user_behavior_analysis_setting"] = user_behavior_analysis_settingNestedMap
 			}
 			app_type_settingsList = append(app_type_settingsList, itemMap)
 		}
-		apiResource.Spec["app_type_settings"] = app_type_settingsList
+		createReq.Spec["app_type_settings"] = app_type_settingsList
 	}
 
 
-	created, err := r.client.CreateAppSetting(ctx, apiResource)
+	apiResource, err := r.client.CreateAppSetting(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create AppSetting: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if listData, ok := apiResource.Spec["app_type_settings"].([]interface{}); ok && len(listData) > 0 {
+		var app_type_settingsList []AppSettingAppTypeSettingsModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				app_type_settingsList = append(app_type_settingsList, AppSettingAppTypeSettingsModel{
+					AppTypeRef: func() []AppSettingAppTypeSettingsAppTypeRefModel {
+						if nestedListData, ok := itemMap["app_type_ref"].([]interface{}); ok && len(nestedListData) > 0 {
+							var result []AppSettingAppTypeSettingsAppTypeRefModel
+							for _, nestedItem := range nestedListData {
+								if nestedItemMap, ok := nestedItem.(map[string]interface{}); ok {
+									result = append(result, AppSettingAppTypeSettingsAppTypeRefModel{
+										Kind: func() types.String {
+											if v, ok := nestedItemMap["kind"].(string); ok && v != "" {
+												return types.StringValue(v)
+											}
+											return types.StringNull()
+										}(),
+										Name: func() types.String {
+											if v, ok := nestedItemMap["name"].(string); ok && v != "" {
+												return types.StringValue(v)
+											}
+											return types.StringNull()
+										}(),
+										Namespace: func() types.String {
+											if v, ok := nestedItemMap["namespace"].(string); ok && v != "" {
+												return types.StringValue(v)
+											}
+											return types.StringNull()
+										}(),
+										Tenant: func() types.String {
+											if v, ok := nestedItemMap["tenant"].(string); ok && v != "" {
+												return types.StringValue(v)
+											}
+											return types.StringNull()
+										}(),
+										Uid: func() types.String {
+											if v, ok := nestedItemMap["uid"].(string); ok && v != "" {
+												return types.StringValue(v)
+											}
+											return types.StringNull()
+										}(),
+									})
+								}
+							}
+							return result
+						}
+						return nil
+					}(),
+					BusinessLogicMarkupSetting: func() *AppSettingAppTypeSettingsBusinessLogicMarkupSettingModel {
+						if _, ok := itemMap["business_logic_markup_setting"].(map[string]interface{}); ok {
+							return &AppSettingAppTypeSettingsBusinessLogicMarkupSettingModel{
+								Disable: func() *AppSettingEmptyModel {
+									if !isImport && len(data.AppTypeSettings) > listIdx && data.AppTypeSettings[listIdx].BusinessLogicMarkupSetting != nil && data.AppTypeSettings[listIdx].BusinessLogicMarkupSetting.Disable != nil {
+										return &AppSettingEmptyModel{}
+									}
+									return nil
+								}(),
+								Enable: func() *AppSettingEmptyModel {
+									if !isImport && len(data.AppTypeSettings) > listIdx && data.AppTypeSettings[listIdx].BusinessLogicMarkupSetting != nil && data.AppTypeSettings[listIdx].BusinessLogicMarkupSetting.Enable != nil {
+										return &AppSettingEmptyModel{}
+									}
+									return nil
+								}(),
+							}
+						}
+						return nil
+					}(),
+					TimeseriesAnalysesSetting: func() *AppSettingAppTypeSettingsTimeseriesAnalysesSettingModel {
+						if _, ok := itemMap["timeseries_analyses_setting"].(map[string]interface{}); ok {
+							return &AppSettingAppTypeSettingsTimeseriesAnalysesSettingModel{
+							}
+						}
+						return nil
+					}(),
+					UserBehaviorAnalysisSetting: func() *AppSettingAppTypeSettingsUserBehaviorAnalysisSettingModel {
+						if _, ok := itemMap["user_behavior_analysis_setting"].(map[string]interface{}); ok {
+							return &AppSettingAppTypeSettingsUserBehaviorAnalysisSettingModel{
+								DisableDetection: func() *AppSettingEmptyModel {
+									if !isImport && len(data.AppTypeSettings) > listIdx && data.AppTypeSettings[listIdx].UserBehaviorAnalysisSetting != nil && data.AppTypeSettings[listIdx].UserBehaviorAnalysisSetting.DisableDetection != nil {
+										return &AppSettingEmptyModel{}
+									}
+									return nil
+								}(),
+								DisableLearning: func() *AppSettingEmptyModel {
+									if !isImport && len(data.AppTypeSettings) > listIdx && data.AppTypeSettings[listIdx].UserBehaviorAnalysisSetting != nil && data.AppTypeSettings[listIdx].UserBehaviorAnalysisSetting.DisableLearning != nil {
+										return &AppSettingEmptyModel{}
+									}
+									return nil
+								}(),
+								EnableLearning: func() *AppSettingEmptyModel {
+									if !isImport && len(data.AppTypeSettings) > listIdx && data.AppTypeSettings[listIdx].UserBehaviorAnalysisSetting != nil && data.AppTypeSettings[listIdx].UserBehaviorAnalysisSetting.EnableLearning != nil {
+										return &AppSettingEmptyModel{}
+									}
+									return nil
+								}(),
+							}
+						}
+						return nil
+					}(),
+				})
+			}
+		}
+		data.AppTypeSettings = app_type_settingsList
+	}
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
@@ -665,12 +872,68 @@ func (r *AppSettingResource) Read(ctx context.Context, req resource.ReadRequest,
 	})
 	if listData, ok := apiResource.Spec["app_type_settings"].([]interface{}); ok && len(listData) > 0 {
 		var app_type_settingsList []AppSettingAppTypeSettingsModel
-		for _, item := range listData {
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				app_type_settingsList = append(app_type_settingsList, AppSettingAppTypeSettingsModel{
+					AppTypeRef: func() []AppSettingAppTypeSettingsAppTypeRefModel {
+						if nestedListData, ok := itemMap["app_type_ref"].([]interface{}); ok && len(nestedListData) > 0 {
+							var result []AppSettingAppTypeSettingsAppTypeRefModel
+							for _, nestedItem := range nestedListData {
+								if nestedItemMap, ok := nestedItem.(map[string]interface{}); ok {
+									result = append(result, AppSettingAppTypeSettingsAppTypeRefModel{
+										Kind: func() types.String {
+											if v, ok := nestedItemMap["kind"].(string); ok && v != "" {
+												return types.StringValue(v)
+											}
+											return types.StringNull()
+										}(),
+										Name: func() types.String {
+											if v, ok := nestedItemMap["name"].(string); ok && v != "" {
+												return types.StringValue(v)
+											}
+											return types.StringNull()
+										}(),
+										Namespace: func() types.String {
+											if v, ok := nestedItemMap["namespace"].(string); ok && v != "" {
+												return types.StringValue(v)
+											}
+											return types.StringNull()
+										}(),
+										Tenant: func() types.String {
+											if v, ok := nestedItemMap["tenant"].(string); ok && v != "" {
+												return types.StringValue(v)
+											}
+											return types.StringNull()
+										}(),
+										Uid: func() types.String {
+											if v, ok := nestedItemMap["uid"].(string); ok && v != "" {
+												return types.StringValue(v)
+											}
+											return types.StringNull()
+										}(),
+									})
+								}
+							}
+							return result
+						}
+						return nil
+					}(),
 					BusinessLogicMarkupSetting: func() *AppSettingAppTypeSettingsBusinessLogicMarkupSettingModel {
 						if _, ok := itemMap["business_logic_markup_setting"].(map[string]interface{}); ok {
 							return &AppSettingAppTypeSettingsBusinessLogicMarkupSettingModel{
+								Disable: func() *AppSettingEmptyModel {
+									if !isImport && len(data.AppTypeSettings) > listIdx && data.AppTypeSettings[listIdx].BusinessLogicMarkupSetting != nil && data.AppTypeSettings[listIdx].BusinessLogicMarkupSetting.Disable != nil {
+										return &AppSettingEmptyModel{}
+									}
+									return nil
+								}(),
+								Enable: func() *AppSettingEmptyModel {
+									if !isImport && len(data.AppTypeSettings) > listIdx && data.AppTypeSettings[listIdx].BusinessLogicMarkupSetting != nil && data.AppTypeSettings[listIdx].BusinessLogicMarkupSetting.Enable != nil {
+										return &AppSettingEmptyModel{}
+									}
+									return nil
+								}(),
 							}
 						}
 						return nil
@@ -685,6 +948,24 @@ func (r *AppSettingResource) Read(ctx context.Context, req resource.ReadRequest,
 					UserBehaviorAnalysisSetting: func() *AppSettingAppTypeSettingsUserBehaviorAnalysisSettingModel {
 						if _, ok := itemMap["user_behavior_analysis_setting"].(map[string]interface{}); ok {
 							return &AppSettingAppTypeSettingsUserBehaviorAnalysisSettingModel{
+								DisableDetection: func() *AppSettingEmptyModel {
+									if !isImport && len(data.AppTypeSettings) > listIdx && data.AppTypeSettings[listIdx].UserBehaviorAnalysisSetting != nil && data.AppTypeSettings[listIdx].UserBehaviorAnalysisSetting.DisableDetection != nil {
+										return &AppSettingEmptyModel{}
+									}
+									return nil
+								}(),
+								DisableLearning: func() *AppSettingEmptyModel {
+									if !isImport && len(data.AppTypeSettings) > listIdx && data.AppTypeSettings[listIdx].UserBehaviorAnalysisSetting != nil && data.AppTypeSettings[listIdx].UserBehaviorAnalysisSetting.DisableLearning != nil {
+										return &AppSettingEmptyModel{}
+									}
+									return nil
+								}(),
+								EnableLearning: func() *AppSettingEmptyModel {
+									if !isImport && len(data.AppTypeSettings) > listIdx && data.AppTypeSettings[listIdx].UserBehaviorAnalysisSetting != nil && data.AppTypeSettings[listIdx].UserBehaviorAnalysisSetting.EnableLearning != nil {
+										return &AppSettingEmptyModel{}
+									}
+									return nil
+								}(),
 							}
 						}
 						return nil
@@ -759,16 +1040,111 @@ func (r *AppSettingResource) Update(ctx context.Context, req resource.UpdateRequ
 		var app_type_settingsList []map[string]interface{}
 		for _, item := range data.AppTypeSettings {
 			itemMap := make(map[string]interface{})
+			if len(item.AppTypeRef) > 0 {
+				var app_type_refNestedList []map[string]interface{}
+				for _, nestedItem := range item.AppTypeRef {
+					nestedItemMap := make(map[string]interface{})
+					if !nestedItem.Kind.IsNull() && !nestedItem.Kind.IsUnknown() {
+						nestedItemMap["kind"] = nestedItem.Kind.ValueString()
+					}
+					if !nestedItem.Name.IsNull() && !nestedItem.Name.IsUnknown() {
+						nestedItemMap["name"] = nestedItem.Name.ValueString()
+					}
+					if !nestedItem.Namespace.IsNull() && !nestedItem.Namespace.IsUnknown() {
+						nestedItemMap["namespace"] = nestedItem.Namespace.ValueString()
+					}
+					if !nestedItem.Tenant.IsNull() && !nestedItem.Tenant.IsUnknown() {
+						nestedItemMap["tenant"] = nestedItem.Tenant.ValueString()
+					}
+					if !nestedItem.Uid.IsNull() && !nestedItem.Uid.IsUnknown() {
+						nestedItemMap["uid"] = nestedItem.Uid.ValueString()
+					}
+					app_type_refNestedList = append(app_type_refNestedList, nestedItemMap)
+				}
+				itemMap["app_type_ref"] = app_type_refNestedList
+			}
 			if item.BusinessLogicMarkupSetting != nil {
 				business_logic_markup_settingNestedMap := make(map[string]interface{})
+				if item.BusinessLogicMarkupSetting.Disable != nil {
+					business_logic_markup_settingNestedMap["disable"] = map[string]interface{}{}
+				}
+				if item.BusinessLogicMarkupSetting.Enable != nil {
+					business_logic_markup_settingNestedMap["enable"] = map[string]interface{}{}
+				}
 				itemMap["business_logic_markup_setting"] = business_logic_markup_settingNestedMap
 			}
 			if item.TimeseriesAnalysesSetting != nil {
 				timeseries_analyses_settingNestedMap := make(map[string]interface{})
+				if len(item.TimeseriesAnalysesSetting.MetricSelectors) > 0 {
+					var metric_selectorsDeepList []map[string]interface{}
+					for _, deepListItem := range item.TimeseriesAnalysesSetting.MetricSelectors {
+						deepListItemMap := make(map[string]interface{})
+						if !deepListItem.MetricsSource.IsNull() && !deepListItem.MetricsSource.IsUnknown() {
+							deepListItemMap["metrics_source"] = deepListItem.MetricsSource.ValueString()
+						}
+						metric_selectorsDeepList = append(metric_selectorsDeepList, deepListItemMap)
+					}
+					timeseries_analyses_settingNestedMap["metric_selectors"] = metric_selectorsDeepList
+				}
 				itemMap["timeseries_analyses_setting"] = timeseries_analyses_settingNestedMap
 			}
 			if item.UserBehaviorAnalysisSetting != nil {
 				user_behavior_analysis_settingNestedMap := make(map[string]interface{})
+				if item.UserBehaviorAnalysisSetting.DisableDetection != nil {
+					user_behavior_analysis_settingNestedMap["disable_detection"] = map[string]interface{}{}
+				}
+				if item.UserBehaviorAnalysisSetting.DisableLearning != nil {
+					user_behavior_analysis_settingNestedMap["disable_learning"] = map[string]interface{}{}
+				}
+				if item.UserBehaviorAnalysisSetting.EnableDetection != nil {
+					enable_detectionDeepMap := make(map[string]interface{})
+					if item.UserBehaviorAnalysisSetting.EnableDetection.BolaDetectionAutomatic != nil {
+						enable_detectionDeepMap["bola_detection_automatic"] = map[string]interface{}{}
+					}
+					if !item.UserBehaviorAnalysisSetting.EnableDetection.CoolingOffPeriod.IsNull() && !item.UserBehaviorAnalysisSetting.EnableDetection.CoolingOffPeriod.IsUnknown() {
+						enable_detectionDeepMap["cooling_off_period"] = item.UserBehaviorAnalysisSetting.EnableDetection.CoolingOffPeriod.ValueInt64()
+					}
+					if item.UserBehaviorAnalysisSetting.EnableDetection.ExcludeBolaDetection != nil {
+						enable_detectionDeepMap["exclude_bola_detection"] = map[string]interface{}{}
+					}
+					if item.UserBehaviorAnalysisSetting.EnableDetection.ExcludeBotDefenseActivity != nil {
+						enable_detectionDeepMap["exclude_bot_defense_activity"] = map[string]interface{}{}
+					}
+					if item.UserBehaviorAnalysisSetting.EnableDetection.ExcludeFailedLoginActivity != nil {
+						enable_detectionDeepMap["exclude_failed_login_activity"] = map[string]interface{}{}
+					}
+					if item.UserBehaviorAnalysisSetting.EnableDetection.ExcludeForbiddenActivity != nil {
+						enable_detectionDeepMap["exclude_forbidden_activity"] = map[string]interface{}{}
+					}
+					if item.UserBehaviorAnalysisSetting.EnableDetection.ExcludeIPReputation != nil {
+						enable_detectionDeepMap["exclude_ip_reputation"] = map[string]interface{}{}
+					}
+					if item.UserBehaviorAnalysisSetting.EnableDetection.ExcludeNonExistentURLActivity != nil {
+						enable_detectionDeepMap["exclude_non_existent_url_activity"] = map[string]interface{}{}
+					}
+					if item.UserBehaviorAnalysisSetting.EnableDetection.ExcludeRateLimit != nil {
+						enable_detectionDeepMap["exclude_rate_limit"] = map[string]interface{}{}
+					}
+					if item.UserBehaviorAnalysisSetting.EnableDetection.ExcludeWAFActivity != nil {
+						enable_detectionDeepMap["exclude_waf_activity"] = map[string]interface{}{}
+					}
+					if item.UserBehaviorAnalysisSetting.EnableDetection.IncludeBotDefenseActivity != nil {
+						enable_detectionDeepMap["include_bot_defense_activity"] = map[string]interface{}{}
+					}
+					if item.UserBehaviorAnalysisSetting.EnableDetection.IncludeIPReputation != nil {
+						enable_detectionDeepMap["include_ip_reputation"] = map[string]interface{}{}
+					}
+					if item.UserBehaviorAnalysisSetting.EnableDetection.IncludeRateLimit != nil {
+						enable_detectionDeepMap["include_rate_limit"] = map[string]interface{}{}
+					}
+					if item.UserBehaviorAnalysisSetting.EnableDetection.IncludeWAFActivity != nil {
+						enable_detectionDeepMap["include_waf_activity"] = map[string]interface{}{}
+					}
+					user_behavior_analysis_settingNestedMap["enable_detection"] = enable_detectionDeepMap
+				}
+				if item.UserBehaviorAnalysisSetting.EnableLearning != nil {
+					user_behavior_analysis_settingNestedMap["enable_learning"] = map[string]interface{}{}
+				}
 				itemMap["user_behavior_analysis_setting"] = user_behavior_analysis_settingNestedMap
 			}
 			app_type_settingsList = append(app_type_settingsList, itemMap)

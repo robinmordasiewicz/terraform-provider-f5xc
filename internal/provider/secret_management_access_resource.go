@@ -532,6 +532,7 @@ func (r *SecretManagementAccessResource) Schema(ctx context.Context, req resourc
 												"kind": schema.StringAttribute{
 													MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 													Optional: true,
+													Computed: true,
 												},
 												"name": schema.StringAttribute{
 													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -544,10 +545,12 @@ func (r *SecretManagementAccessResource) Schema(ctx context.Context, req resourc
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional: true,
+													Computed: true,
 												},
 												"uid": schema.StringAttribute{
 													MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 													Optional: true,
+													Computed: true,
 												},
 											},
 										},
@@ -582,6 +585,7 @@ func (r *SecretManagementAccessResource) Schema(ctx context.Context, req resourc
 																"kind": schema.StringAttribute{
 																	MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																	Optional: true,
+																	Computed: true,
 																},
 																"name": schema.StringAttribute{
 																	MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -594,10 +598,12 @@ func (r *SecretManagementAccessResource) Schema(ctx context.Context, req resourc
 																"tenant": schema.StringAttribute{
 																	MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																	Optional: true,
+																	Computed: true,
 																},
 																"uid": schema.StringAttribute{
 																	MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																	Optional: true,
+																	Computed: true,
 																},
 															},
 														},
@@ -726,6 +732,7 @@ func (r *SecretManagementAccessResource) Schema(ctx context.Context, req resourc
 																"kind": schema.StringAttribute{
 																	MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																	Optional: true,
+																	Computed: true,
 																},
 																"name": schema.StringAttribute{
 																	MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -738,10 +745,12 @@ func (r *SecretManagementAccessResource) Schema(ctx context.Context, req resourc
 																"tenant": schema.StringAttribute{
 																	MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																	Optional: true,
+																	Computed: true,
 																},
 																"uid": schema.StringAttribute{
 																	MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																	Optional: true,
+																	Computed: true,
 																},
 															},
 														},
@@ -888,6 +897,7 @@ func (r *SecretManagementAccessResource) Schema(ctx context.Context, req resourc
 										"kind": schema.StringAttribute{
 											MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 											Optional: true,
+											Computed: true,
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -900,10 +910,12 @@ func (r *SecretManagementAccessResource) Schema(ctx context.Context, req resourc
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 										"uid": schema.StringAttribute{
 											MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -922,6 +934,7 @@ func (r *SecretManagementAccessResource) Schema(ctx context.Context, req resourc
 										"kind": schema.StringAttribute{
 											MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 											Optional: true,
+											Computed: true,
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -934,10 +947,12 @@ func (r *SecretManagementAccessResource) Schema(ctx context.Context, req resourc
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 										"uid": schema.StringAttribute{
 											MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -966,6 +981,7 @@ func (r *SecretManagementAccessResource) Schema(ctx context.Context, req resourc
 										"kind": schema.StringAttribute{
 											MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 											Optional: true,
+											Computed: true,
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -978,10 +994,12 @@ func (r *SecretManagementAccessResource) Schema(ctx context.Context, req resourc
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 										"uid": schema.StringAttribute{
 											MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -1108,7 +1126,7 @@ func (r *SecretManagementAccessResource) Create(ctx context.Context, req resourc
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.SecretManagementAccess{
+	createReq := &client.SecretManagementAccess{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -1117,7 +1135,7 @@ func (r *SecretManagementAccessResource) Create(ctx context.Context, req resourc
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -1126,7 +1144,7 @@ func (r *SecretManagementAccessResource) Create(ctx context.Context, req resourc
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -1135,7 +1153,7 @@ func (r *SecretManagementAccessResource) Create(ctx context.Context, req resourc
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -1165,7 +1183,7 @@ func (r *SecretManagementAccessResource) Create(ctx context.Context, req resourc
 			vault_auth_infoNestedMap := make(map[string]interface{})
 			access_infoMap["vault_auth_info"] = vault_auth_infoNestedMap
 		}
-		apiResource.Spec["access_info"] = access_infoMap
+		createReq.Spec["access_info"] = access_infoMap
 	}
 	if data.Where != nil {
 		whereMap := make(map[string]interface{})
@@ -1187,34 +1205,105 @@ func (r *SecretManagementAccessResource) Create(ctx context.Context, req resourc
 			}
 			whereMap["virtual_site"] = virtual_siteNestedMap
 		}
-		apiResource.Spec["where"] = whereMap
+		createReq.Spec["where"] = whereMap
 	}
 	if !data.ProviderName.IsNull() && !data.ProviderName.IsUnknown() {
-		apiResource.Spec["provider_name"] = data.ProviderName.ValueString()
+		createReq.Spec["provider_name"] = data.ProviderName.ValueString()
 	}
 
 
-	created, err := r.client.CreateSecretManagementAccess(ctx, apiResource)
+	apiResource, err := r.client.CreateSecretManagementAccess(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create SecretManagementAccess: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
-	if v, ok := created.Spec["provider_name"].(string); ok && v != "" {
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["access_info"].(map[string]interface{}); ok && (isImport || data.AccessInfo != nil) {
+		data.AccessInfo = &SecretManagementAccessAccessInfoModel{
+			RestAuthInfo: func() *SecretManagementAccessAccessInfoRestAuthInfoModel {
+				if !isImport && data.AccessInfo != nil && data.AccessInfo.RestAuthInfo != nil {
+					// Normal Read: preserve existing state value
+					return data.AccessInfo.RestAuthInfo
+				}
+				// Import case: read from API
+				if _, ok := blockData["rest_auth_info"].(map[string]interface{}); ok {
+					return &SecretManagementAccessAccessInfoRestAuthInfoModel{
+					}
+				}
+				return nil
+			}(),
+			Scheme: func() types.String {
+				if v, ok := blockData["scheme"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			ServerEndpoint: func() types.String {
+				if v, ok := blockData["server_endpoint"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			TLSConfig: func() *SecretManagementAccessAccessInfoTLSConfigModel {
+				if !isImport && data.AccessInfo != nil && data.AccessInfo.TLSConfig != nil {
+					// Normal Read: preserve existing state value
+					return data.AccessInfo.TLSConfig
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["tls_config"].(map[string]interface{}); ok {
+					return &SecretManagementAccessAccessInfoTLSConfigModel{
+						MaxSessionKeys: func() types.Int64 {
+							if v, ok := nestedBlockData["max_session_keys"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						Sni: func() types.String {
+							if v, ok := nestedBlockData["sni"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			VaultAuthInfo: func() *SecretManagementAccessAccessInfoVaultAuthInfoModel {
+				if !isImport && data.AccessInfo != nil && data.AccessInfo.VaultAuthInfo != nil {
+					// Normal Read: preserve existing state value
+					return data.AccessInfo.VaultAuthInfo
+				}
+				// Import case: read from API
+				if _, ok := blockData["vault_auth_info"].(map[string]interface{}); ok {
+					return &SecretManagementAccessAccessInfoVaultAuthInfoModel{
+					}
+				}
+				return nil
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["where"].(map[string]interface{}); ok && isImport && data.Where == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Where = &SecretManagementAccessWhereModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["provider_name"].(string); ok && v != "" {
 		data.ProviderName = types.StringValue(v)
-	} else if data.ProviderName.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.ProviderName = types.StringNull()
 	}
-	// If plan had a value, preserve it
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 

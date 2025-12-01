@@ -512,7 +512,7 @@ func (r *AuthenticationResource) Create(ctx context.Context, req resource.Create
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.Authentication{
+	createReq := &client.Authentication{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -521,7 +521,7 @@ func (r *AuthenticationResource) Create(ctx context.Context, req resource.Create
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -530,7 +530,7 @@ func (r *AuthenticationResource) Create(ctx context.Context, req resource.Create
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -539,7 +539,7 @@ func (r *AuthenticationResource) Create(ctx context.Context, req resource.Create
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -567,7 +567,7 @@ func (r *AuthenticationResource) Create(ctx context.Context, req resource.Create
 		if !data.CookieParams.SessionExpiry.IsNull() && !data.CookieParams.SessionExpiry.IsUnknown() {
 			cookie_paramsMap["session_expiry"] = data.CookieParams.SessionExpiry.ValueInt64()
 		}
-		apiResource.Spec["cookie_params"] = cookie_paramsMap
+		createReq.Spec["cookie_params"] = cookie_paramsMap
 	}
 	if data.OidcAuth != nil {
 		oidc_authMap := make(map[string]interface{})
@@ -594,24 +594,144 @@ func (r *AuthenticationResource) Create(ctx context.Context, req resource.Create
 		if !data.OidcAuth.OidcWellKnownConfigURL.IsNull() && !data.OidcAuth.OidcWellKnownConfigURL.IsUnknown() {
 			oidc_authMap["oidc_well_known_config_url"] = data.OidcAuth.OidcWellKnownConfigURL.ValueString()
 		}
-		apiResource.Spec["oidc_auth"] = oidc_authMap
+		createReq.Spec["oidc_auth"] = oidc_authMap
 	}
 
 
-	created, err := r.client.CreateAuthentication(ctx, apiResource)
+	apiResource, err := r.client.CreateAuthentication(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create Authentication: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["cookie_params"].(map[string]interface{}); ok && (isImport || data.CookieParams != nil) {
+		data.CookieParams = &AuthenticationCookieParamsModel{
+			AuthHmac: func() *AuthenticationCookieParamsAuthHmacModel {
+				if !isImport && data.CookieParams != nil && data.CookieParams.AuthHmac != nil {
+					// Normal Read: preserve existing state value
+					return data.CookieParams.AuthHmac
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["auth_hmac"].(map[string]interface{}); ok {
+					return &AuthenticationCookieParamsAuthHmacModel{
+						PrimKeyExpiry: func() types.String {
+							if v, ok := nestedBlockData["prim_key_expiry"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						SecKeyExpiry: func() types.String {
+							if v, ok := nestedBlockData["sec_key_expiry"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			CookieExpiry: func() types.Int64 {
+				if v, ok := blockData["cookie_expiry"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			CookieRefreshInterval: func() types.Int64 {
+				if v, ok := blockData["cookie_refresh_interval"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			KmsKeyHmac: func() *AuthenticationEmptyModel {
+				if !isImport && data.CookieParams != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CookieParams.KmsKeyHmac
+				}
+				// Import case: read from API
+				if _, ok := blockData["kms_key_hmac"].(map[string]interface{}); ok {
+					return &AuthenticationEmptyModel{}
+				}
+				return nil
+			}(),
+			SessionExpiry: func() types.Int64 {
+				if v, ok := blockData["session_expiry"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["oidc_auth"].(map[string]interface{}); ok && (isImport || data.OidcAuth != nil) {
+		data.OidcAuth = &AuthenticationOidcAuthModel{
+			ClientSecret: func() *AuthenticationOidcAuthClientSecretModel {
+				if !isImport && data.OidcAuth != nil && data.OidcAuth.ClientSecret != nil {
+					// Normal Read: preserve existing state value
+					return data.OidcAuth.ClientSecret
+				}
+				// Import case: read from API
+				if _, ok := blockData["client_secret"].(map[string]interface{}); ok {
+					return &AuthenticationOidcAuthClientSecretModel{
+					}
+				}
+				return nil
+			}(),
+			OidcAuthParams: func() *AuthenticationOidcAuthOidcAuthParamsModel {
+				if !isImport && data.OidcAuth != nil && data.OidcAuth.OidcAuthParams != nil {
+					// Normal Read: preserve existing state value
+					return data.OidcAuth.OidcAuthParams
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["oidc_auth_params"].(map[string]interface{}); ok {
+					return &AuthenticationOidcAuthOidcAuthParamsModel{
+						AuthEndpointURL: func() types.String {
+							if v, ok := nestedBlockData["auth_endpoint_url"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						EndSessionEndpointURL: func() types.String {
+							if v, ok := nestedBlockData["end_session_endpoint_url"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						TokenEndpointURL: func() types.String {
+							if v, ok := nestedBlockData["token_endpoint_url"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			OidcClientID: func() types.String {
+				if v, ok := blockData["oidc_client_id"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			OidcWellKnownConfigURL: func() types.String {
+				if v, ok := blockData["oidc_well_known_config_url"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 

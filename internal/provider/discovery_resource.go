@@ -722,6 +722,7 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 										"kind": schema.StringAttribute{
 											MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 											Optional: true,
+											Computed: true,
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -734,10 +735,12 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 										"uid": schema.StringAttribute{
 											MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -756,6 +759,7 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 										"kind": schema.StringAttribute{
 											MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 											Optional: true,
+											Computed: true,
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -768,10 +772,12 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 										"uid": schema.StringAttribute{
 											MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -800,6 +806,7 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 										"kind": schema.StringAttribute{
 											MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 											Optional: true,
+											Computed: true,
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -812,10 +819,12 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 										"uid": schema.StringAttribute{
 											MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -942,7 +951,7 @@ func (r *DiscoveryResource) Create(ctx context.Context, req resource.CreateReque
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.Discovery{
+	createReq := &client.Discovery{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -951,7 +960,7 @@ func (r *DiscoveryResource) Create(ctx context.Context, req resource.CreateReque
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -960,7 +969,7 @@ func (r *DiscoveryResource) Create(ctx context.Context, req resource.CreateReque
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -969,7 +978,7 @@ func (r *DiscoveryResource) Create(ctx context.Context, req resource.CreateReque
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -983,7 +992,7 @@ func (r *DiscoveryResource) Create(ctx context.Context, req resource.CreateReque
 			publish_infoNestedMap := make(map[string]interface{})
 			discovery_consulMap["publish_info"] = publish_infoNestedMap
 		}
-		apiResource.Spec["discovery_consul"] = discovery_consulMap
+		createReq.Spec["discovery_consul"] = discovery_consulMap
 	}
 	if data.DiscoveryK8S != nil {
 		discovery_k8sMap := make(map[string]interface{})
@@ -1002,11 +1011,11 @@ func (r *DiscoveryResource) Create(ctx context.Context, req resource.CreateReque
 			publish_infoNestedMap := make(map[string]interface{})
 			discovery_k8sMap["publish_info"] = publish_infoNestedMap
 		}
-		apiResource.Spec["discovery_k8s"] = discovery_k8sMap
+		createReq.Spec["discovery_k8s"] = discovery_k8sMap
 	}
 	if data.NoClusterID != nil {
 		no_cluster_idMap := make(map[string]interface{})
-		apiResource.Spec["no_cluster_id"] = no_cluster_idMap
+		createReq.Spec["no_cluster_id"] = no_cluster_idMap
 	}
 	if data.Where != nil {
 		whereMap := make(map[string]interface{})
@@ -1028,34 +1037,56 @@ func (r *DiscoveryResource) Create(ctx context.Context, req resource.CreateReque
 			}
 			whereMap["virtual_site"] = virtual_siteNestedMap
 		}
-		apiResource.Spec["where"] = whereMap
+		createReq.Spec["where"] = whereMap
 	}
 	if !data.ClusterID.IsNull() && !data.ClusterID.IsUnknown() {
-		apiResource.Spec["cluster_id"] = data.ClusterID.ValueString()
+		createReq.Spec["cluster_id"] = data.ClusterID.ValueString()
 	}
 
 
-	created, err := r.client.CreateDiscovery(ctx, apiResource)
+	apiResource, err := r.client.CreateDiscovery(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create Discovery: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
-	if v, ok := created.Spec["cluster_id"].(string); ok && v != "" {
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if _, ok := apiResource.Spec["discovery_consul"].(map[string]interface{}); ok && isImport && data.DiscoveryConsul == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DiscoveryConsul = &DiscoveryDiscoveryConsulModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["discovery_k8s"].(map[string]interface{}); ok && isImport && data.DiscoveryK8S == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DiscoveryK8S = &DiscoveryDiscoveryK8SModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_cluster_id"].(map[string]interface{}); ok && isImport && data.NoClusterID == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoClusterID = &DiscoveryEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["where"].(map[string]interface{}); ok && isImport && data.Where == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Where = &DiscoveryWhereModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["cluster_id"].(string); ok && v != "" {
 		data.ClusterID = types.StringValue(v)
-	} else if data.ClusterID.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.ClusterID = types.StringNull()
 	}
-	// If plan had a value, preserve it
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 

@@ -296,7 +296,7 @@ func (r *Ike2Resource) Create(ctx context.Context, req resource.CreateRequest, r
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.Ike2{
+	createReq := &client.Ike2{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -305,7 +305,7 @@ func (r *Ike2Resource) Create(ctx context.Context, req resource.CreateRequest, r
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -314,7 +314,7 @@ func (r *Ike2Resource) Create(ctx context.Context, req resource.CreateRequest, r
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -323,7 +323,7 @@ func (r *Ike2Resource) Create(ctx context.Context, req resource.CreateRequest, r
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -336,46 +336,97 @@ func (r *Ike2Resource) Create(ctx context.Context, req resource.CreateRequest, r
 				dh_group_setMap["dh_groups"] = dh_groupsItems
 			}
 		}
-		apiResource.Spec["dh_group_set"] = dh_group_setMap
+		createReq.Spec["dh_group_set"] = dh_group_setMap
 	}
 	if data.DisablePfs != nil {
 		disable_pfsMap := make(map[string]interface{})
-		apiResource.Spec["disable_pfs"] = disable_pfsMap
+		createReq.Spec["disable_pfs"] = disable_pfsMap
 	}
 	if data.IKEKeylifetimeHours != nil {
 		ike_keylifetime_hoursMap := make(map[string]interface{})
 		if !data.IKEKeylifetimeHours.Duration.IsNull() && !data.IKEKeylifetimeHours.Duration.IsUnknown() {
 			ike_keylifetime_hoursMap["duration"] = data.IKEKeylifetimeHours.Duration.ValueInt64()
 		}
-		apiResource.Spec["ike_keylifetime_hours"] = ike_keylifetime_hoursMap
+		createReq.Spec["ike_keylifetime_hours"] = ike_keylifetime_hoursMap
 	}
 	if data.IKEKeylifetimeMinutes != nil {
 		ike_keylifetime_minutesMap := make(map[string]interface{})
 		if !data.IKEKeylifetimeMinutes.Duration.IsNull() && !data.IKEKeylifetimeMinutes.Duration.IsUnknown() {
 			ike_keylifetime_minutesMap["duration"] = data.IKEKeylifetimeMinutes.Duration.ValueInt64()
 		}
-		apiResource.Spec["ike_keylifetime_minutes"] = ike_keylifetime_minutesMap
+		createReq.Spec["ike_keylifetime_minutes"] = ike_keylifetime_minutesMap
 	}
 	if data.UseDefaultKeylifetime != nil {
 		use_default_keylifetimeMap := make(map[string]interface{})
-		apiResource.Spec["use_default_keylifetime"] = use_default_keylifetimeMap
+		createReq.Spec["use_default_keylifetime"] = use_default_keylifetimeMap
 	}
 
 
-	created, err := r.client.CreateIke2(ctx, apiResource)
+	apiResource, err := r.client.CreateIke2(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create Ike2: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["dh_group_set"].(map[string]interface{}); ok && (isImport || data.DhGroupSet != nil) {
+		data.DhGroupSet = &Ike2DhGroupSetModel{
+			DhGroups: func() types.List {
+				if v, ok := blockData["dh_groups"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["disable_pfs"].(map[string]interface{}); ok && isImport && data.DisablePfs == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisablePfs = &Ike2EmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["ike_keylifetime_hours"].(map[string]interface{}); ok && (isImport || data.IKEKeylifetimeHours != nil) {
+		data.IKEKeylifetimeHours = &Ike2IKEKeylifetimeHoursModel{
+			Duration: func() types.Int64 {
+				if v, ok := blockData["duration"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["ike_keylifetime_minutes"].(map[string]interface{}); ok && (isImport || data.IKEKeylifetimeMinutes != nil) {
+		data.IKEKeylifetimeMinutes = &Ike2IKEKeylifetimeMinutesModel{
+			Duration: func() types.Int64 {
+				if v, ok := blockData["duration"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["use_default_keylifetime"].(map[string]interface{}); ok && isImport && data.UseDefaultKeylifetime == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.UseDefaultKeylifetime = &Ike2EmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 

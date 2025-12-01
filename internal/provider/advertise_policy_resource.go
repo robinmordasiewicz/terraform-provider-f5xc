@@ -317,6 +317,7 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 						"kind": schema.StringAttribute{
 							MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 							Optional: true,
+							Computed: true,
 						},
 						"name": schema.StringAttribute{
 							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -329,10 +330,12 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 						"tenant": schema.StringAttribute{
 							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 							Optional: true,
+							Computed: true,
 						},
 						"uid": schema.StringAttribute{
 							MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 							Optional: true,
+							Computed: true,
 						},
 					},
 
@@ -472,6 +475,7 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 														"kind": schema.StringAttribute{
 															MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 															Optional: true,
+															Computed: true,
 														},
 														"name": schema.StringAttribute{
 															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -484,10 +488,12 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 															Optional: true,
+															Computed: true,
 														},
 														"uid": schema.StringAttribute{
 															MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 															Optional: true,
+															Computed: true,
 														},
 													},
 												},
@@ -531,6 +537,7 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 										"kind": schema.StringAttribute{
 											MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 											Optional: true,
+											Computed: true,
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -543,10 +550,12 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 										"uid": schema.StringAttribute{
 											MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -565,6 +574,7 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 										"kind": schema.StringAttribute{
 											MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 											Optional: true,
+											Computed: true,
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -577,10 +587,12 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 										"uid": schema.StringAttribute{
 											MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -609,6 +621,7 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 										"kind": schema.StringAttribute{
 											MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 											Optional: true,
+											Computed: true,
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -621,10 +634,12 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 										"uid": schema.StringAttribute{
 											MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -751,7 +766,7 @@ func (r *AdvertisePolicyResource) Create(ctx context.Context, req resource.Creat
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.AdvertisePolicy{
+	createReq := &client.AdvertisePolicy{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -760,7 +775,7 @@ func (r *AdvertisePolicyResource) Create(ctx context.Context, req resource.Creat
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -769,7 +784,7 @@ func (r *AdvertisePolicyResource) Create(ctx context.Context, req resource.Creat
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -778,7 +793,7 @@ func (r *AdvertisePolicyResource) Create(ctx context.Context, req resource.Creat
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -803,7 +818,7 @@ func (r *AdvertisePolicyResource) Create(ctx context.Context, req resource.Creat
 			}
 			public_ipList = append(public_ipList, itemMap)
 		}
-		apiResource.Spec["public_ip"] = public_ipList
+		createReq.Spec["public_ip"] = public_ipList
 	}
 	if data.TLSParameters != nil {
 		tls_parametersMap := make(map[string]interface{})
@@ -833,7 +848,7 @@ func (r *AdvertisePolicyResource) Create(ctx context.Context, req resource.Creat
 				tls_parametersMap["xfcc_header_elements"] = xfcc_header_elementsItems
 			}
 		}
-		apiResource.Spec["tls_parameters"] = tls_parametersMap
+		createReq.Spec["tls_parameters"] = tls_parametersMap
 	}
 	if data.Where != nil {
 		whereMap := make(map[string]interface{})
@@ -855,165 +870,41 @@ func (r *AdvertisePolicyResource) Create(ctx context.Context, req resource.Creat
 			}
 			whereMap["virtual_site"] = virtual_siteNestedMap
 		}
-		apiResource.Spec["where"] = whereMap
+		createReq.Spec["where"] = whereMap
 	}
 	if !data.Address.IsNull() && !data.Address.IsUnknown() {
-		apiResource.Spec["address"] = data.Address.ValueString()
+		createReq.Spec["address"] = data.Address.ValueString()
 	}
 	if !data.Port.IsNull() && !data.Port.IsUnknown() {
-		apiResource.Spec["port"] = data.Port.ValueInt64()
+		createReq.Spec["port"] = data.Port.ValueInt64()
 	}
 	if !data.PortRanges.IsNull() && !data.PortRanges.IsUnknown() {
-		apiResource.Spec["port_ranges"] = data.PortRanges.ValueString()
+		createReq.Spec["port_ranges"] = data.PortRanges.ValueString()
 	}
 	if !data.Protocol.IsNull() && !data.Protocol.IsUnknown() {
-		apiResource.Spec["protocol"] = data.Protocol.ValueString()
+		createReq.Spec["protocol"] = data.Protocol.ValueString()
 	}
 	if !data.SkipXffAppend.IsNull() && !data.SkipXffAppend.IsUnknown() {
-		apiResource.Spec["skip_xff_append"] = data.SkipXffAppend.ValueBool()
+		createReq.Spec["skip_xff_append"] = data.SkipXffAppend.ValueBool()
 	}
 
 
-	created, err := r.client.CreateAdvertisePolicy(ctx, apiResource)
+	apiResource, err := r.client.CreateAdvertisePolicy(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create AdvertisePolicy: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
-
-	// Set computed fields from API response
-	if v, ok := created.Spec["address"].(string); ok && v != "" {
-		data.Address = types.StringValue(v)
-	} else if data.Address.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
-		data.Address = types.StringNull()
-	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["port"].(float64); ok {
-		data.Port = types.Int64Value(int64(v))
-	} else if data.Port.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
-		data.Port = types.Int64Null()
-	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["port_ranges"].(string); ok && v != "" {
-		data.PortRanges = types.StringValue(v)
-	} else if data.PortRanges.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
-		data.PortRanges = types.StringNull()
-	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["protocol"].(string); ok && v != "" {
-		data.Protocol = types.StringValue(v)
-	} else if data.Protocol.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
-		data.Protocol = types.StringNull()
-	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["skip_xff_append"].(bool); ok {
-		data.SkipXffAppend = types.BoolValue(v)
-	} else if data.SkipXffAppend.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
-		data.SkipXffAppend = types.BoolNull()
-	}
-	// If plan had a value, preserve it
-
-	psd := privatestate.NewPrivateStateData()
-	psd.SetCustom("managed", "true")
-	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
-	})
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
-
-	tflog.Trace(ctx, "created AdvertisePolicy resource")
-	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
-}
-
-func (r *AdvertisePolicyResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
-	var data AdvertisePolicyResourceModel
-	resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
-	if resp.Diagnostics.HasError() {
-		return
-	}
-
-	readTimeout, diags := data.Timeouts.Read(ctx, inttimeouts.DefaultRead)
-	resp.Diagnostics.Append(diags...)
-	if resp.Diagnostics.HasError() {
-		return
-	}
-
-	ctx, cancel := context.WithTimeout(ctx, readTimeout)
-	defer cancel()
-
-	psd, psDiags := privatestate.LoadFromPrivateState(ctx, &req)
-	resp.Diagnostics.Append(psDiags...)
-
-	apiResource, err := r.client.GetAdvertisePolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-	if err != nil {
-		// Check if the resource was deleted outside Terraform
-		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
-			tflog.Warn(ctx, "AdvertisePolicy not found, removing from state", map[string]interface{}{
-				"name":      data.Name.ValueString(),
-				"namespace": data.Namespace.ValueString(),
-			})
-			resp.State.RemoveResource(ctx)
-			return
-		}
-		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read AdvertisePolicy: %s", err))
-		return
-	}
-
-	if psd != nil && psd.Metadata.UID != "" && apiResource.Metadata.UID != psd.Metadata.UID {
-		resp.Diagnostics.AddWarning(
-			"Resource Drift Detected",
-			"The advertise_policy may have been recreated outside of Terraform.",
-		)
-	}
-
 	data.ID = types.StringValue(apiResource.Metadata.Name)
-	data.Name = types.StringValue(apiResource.Metadata.Name)
-	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
-
-	// Read description from metadata
-	if apiResource.Metadata.Description != "" {
-		data.Description = types.StringValue(apiResource.Metadata.Description)
-	} else {
-		data.Description = types.StringNull()
-	}
-
-	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
-		}
-	} else {
-		data.Labels = types.MapNull(types.StringType)
-	}
-
-	if len(apiResource.Metadata.Annotations) > 0 {
-		annotations, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Annotations)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Annotations = annotations
-		}
-	} else {
-		data.Annotations = types.MapNull(types.StringType)
-	}
 
 	// Unmarshal spec fields from API response to Terraform state
-	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
-	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
 	_ = isImport // May be unused if resource has no blocks needing import detection
-	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":     isImport,
-		"psd_is_nil":   psd == nil,
-		"managed":      psd.Metadata.Custom["managed"],
-	})
 	if listData, ok := apiResource.Spec["public_ip"].([]interface{}); ok && len(listData) > 0 {
 		var public_ipList []AdvertisePolicyPublicIPModel
-		for _, item := range listData {
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				public_ipList = append(public_ipList, AdvertisePolicyPublicIPModel{
 					Kind: func() types.String {
@@ -1167,10 +1058,271 @@ func (r *AdvertisePolicyResource) Read(ctx context.Context, req resource.ReadReq
 		data.Protocol = types.StringNull()
 	}
 	// Top-level Optional bool: preserve prior state to avoid API default drift
-	if !isImport && !data.SkipXffAppend.IsNull() {
+	if !isImport && !data.SkipXffAppend.IsNull() && !data.SkipXffAppend.IsUnknown() {
 		// Normal Read: preserve existing state value (do nothing)
 	} else {
-		// Import case or null state: read from API
+		// Import case, null state, or unknown (after Create): read from API
+		if v, ok := apiResource.Spec["skip_xff_append"].(bool); ok {
+			data.SkipXffAppend = types.BoolValue(v)
+		} else {
+			data.SkipXffAppend = types.BoolNull()
+		}
+	}
+
+
+	psd := privatestate.NewPrivateStateData()
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": apiResource.Metadata.Name,
+	})
+	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+
+	tflog.Trace(ctx, "created AdvertisePolicy resource")
+	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
+}
+
+func (r *AdvertisePolicyResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
+	var data AdvertisePolicyResourceModel
+	resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	readTimeout, diags := data.Timeouts.Read(ctx, inttimeouts.DefaultRead)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	ctx, cancel := context.WithTimeout(ctx, readTimeout)
+	defer cancel()
+
+	psd, psDiags := privatestate.LoadFromPrivateState(ctx, &req)
+	resp.Diagnostics.Append(psDiags...)
+
+	apiResource, err := r.client.GetAdvertisePolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "AdvertisePolicy not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read AdvertisePolicy: %s", err))
+		return
+	}
+
+	if psd != nil && psd.Metadata.UID != "" && apiResource.Metadata.UID != psd.Metadata.UID {
+		resp.Diagnostics.AddWarning(
+			"Resource Drift Detected",
+			"The advertise_policy may have been recreated outside of Terraform.",
+		)
+	}
+
+	data.ID = types.StringValue(apiResource.Metadata.Name)
+	data.Name = types.StringValue(apiResource.Metadata.Name)
+	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
+
+	if len(apiResource.Metadata.Labels) > 0 {
+		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Labels = labels
+		}
+	} else {
+		data.Labels = types.MapNull(types.StringType)
+	}
+
+	if len(apiResource.Metadata.Annotations) > 0 {
+		annotations, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Annotations)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Annotations = annotations
+		}
+	} else {
+		data.Annotations = types.MapNull(types.StringType)
+	}
+
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+	if listData, ok := apiResource.Spec["public_ip"].([]interface{}); ok && len(listData) > 0 {
+		var public_ipList []AdvertisePolicyPublicIPModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				public_ipList = append(public_ipList, AdvertisePolicyPublicIPModel{
+					Kind: func() types.String {
+						if v, ok := itemMap["kind"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Namespace: func() types.String {
+						if v, ok := itemMap["namespace"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Tenant: func() types.String {
+						if v, ok := itemMap["tenant"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Uid: func() types.String {
+						if v, ok := itemMap["uid"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.PublicIP = public_ipList
+	}
+	if blockData, ok := apiResource.Spec["tls_parameters"].(map[string]interface{}); ok && (isImport || data.TLSParameters != nil) {
+		data.TLSParameters = &AdvertisePolicyTLSParametersModel{
+			ClientCertificateOptional: func() *AdvertisePolicyEmptyModel {
+				if !isImport && data.TLSParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.TLSParameters.ClientCertificateOptional
+				}
+				// Import case: read from API
+				if _, ok := blockData["client_certificate_optional"].(map[string]interface{}); ok {
+					return &AdvertisePolicyEmptyModel{}
+				}
+				return nil
+			}(),
+			ClientCertificateRequired: func() *AdvertisePolicyEmptyModel {
+				if !isImport && data.TLSParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.TLSParameters.ClientCertificateRequired
+				}
+				// Import case: read from API
+				if _, ok := blockData["client_certificate_required"].(map[string]interface{}); ok {
+					return &AdvertisePolicyEmptyModel{}
+				}
+				return nil
+			}(),
+			CommonParams: func() *AdvertisePolicyTLSParametersCommonParamsModel {
+				if !isImport && data.TLSParameters != nil && data.TLSParameters.CommonParams != nil {
+					// Normal Read: preserve existing state value
+					return data.TLSParameters.CommonParams
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["common_params"].(map[string]interface{}); ok {
+					return &AdvertisePolicyTLSParametersCommonParamsModel{
+						CipherSuites: func() types.List {
+							if v, ok := nestedBlockData["cipher_suites"].([]interface{}); ok && len(v) > 0 {
+								var items []string
+								for _, item := range v {
+									if s, ok := item.(string); ok {
+										items = append(items, s)
+									}
+								}
+								listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+								return listVal
+							}
+							return types.ListNull(types.StringType)
+						}(),
+						MaximumProtocolVersion: func() types.String {
+							if v, ok := nestedBlockData["maximum_protocol_version"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						MinimumProtocolVersion: func() types.String {
+							if v, ok := nestedBlockData["minimum_protocol_version"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			NoClientCertificate: func() *AdvertisePolicyEmptyModel {
+				if !isImport && data.TLSParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.TLSParameters.NoClientCertificate
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_client_certificate"].(map[string]interface{}); ok {
+					return &AdvertisePolicyEmptyModel{}
+				}
+				return nil
+			}(),
+			XfccHeaderElements: func() types.List {
+				if v, ok := blockData["xfcc_header_elements"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["where"].(map[string]interface{}); ok && isImport && data.Where == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Where = &AdvertisePolicyWhereModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["address"].(string); ok && v != "" {
+		data.Address = types.StringValue(v)
+	} else {
+		data.Address = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["port"].(float64); ok {
+		data.Port = types.Int64Value(int64(v))
+	} else {
+		data.Port = types.Int64Null()
+	}
+	if v, ok := apiResource.Spec["port_ranges"].(string); ok && v != "" {
+		data.PortRanges = types.StringValue(v)
+	} else {
+		data.PortRanges = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["protocol"].(string); ok && v != "" {
+		data.Protocol = types.StringValue(v)
+	} else {
+		data.Protocol = types.StringNull()
+	}
+	// Top-level Optional bool: preserve prior state to avoid API default drift
+	if !isImport && !data.SkipXffAppend.IsNull() && !data.SkipXffAppend.IsUnknown() {
+		// Normal Read: preserve existing state value (do nothing)
+	} else {
+		// Import case, null state, or unknown (after Create): read from API
 		if v, ok := apiResource.Spec["skip_xff_append"].(bool); ok {
 			data.SkipXffAppend = types.BoolValue(v)
 		} else {

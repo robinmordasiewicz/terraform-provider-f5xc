@@ -266,6 +266,7 @@ func (r *VoltshareAdminPolicyResource) Schema(ctx context.Context, req resource.
 						"tenant": schema.StringAttribute{
 							MarkdownDescription: "Team/Tenant. Team/Tenant for which this rule is valid.",
 							Optional: true,
+							Computed: true,
 						},
 					},
 					Blocks: map[string]schema.Block{
@@ -453,7 +454,7 @@ func (r *VoltshareAdminPolicyResource) Create(ctx context.Context, req resource.
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.VoltshareAdminPolicy{
+	createReq := &client.VoltshareAdminPolicy{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -462,7 +463,7 @@ func (r *VoltshareAdminPolicyResource) Create(ctx context.Context, req resource.
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -471,7 +472,7 @@ func (r *VoltshareAdminPolicyResource) Create(ctx context.Context, req resource.
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -480,7 +481,7 @@ func (r *VoltshareAdminPolicyResource) Create(ctx context.Context, req resource.
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -500,7 +501,7 @@ func (r *VoltshareAdminPolicyResource) Create(ctx context.Context, req resource.
 			deny_listNestedMap := make(map[string]interface{})
 			author_restrictionsMap["deny_list"] = deny_listNestedMap
 		}
-		apiResource.Spec["author_restrictions"] = author_restrictionsMap
+		createReq.Spec["author_restrictions"] = author_restrictionsMap
 	}
 	if len(data.UserRestrictions) > 0 {
 		var user_restrictionsList []map[string]interface{}
@@ -517,38 +518,107 @@ func (r *VoltshareAdminPolicyResource) Create(ctx context.Context, req resource.
 			}
 			if item.UserRestrictions != nil {
 				user_restrictionsNestedMap := make(map[string]interface{})
+				if item.UserRestrictions.AllowAll != nil {
+					user_restrictionsNestedMap["allow_all"] = map[string]interface{}{}
+				}
+				if item.UserRestrictions.AllowList != nil {
+					allow_listDeepMap := make(map[string]interface{})
+					user_restrictionsNestedMap["allow_list"] = allow_listDeepMap
+				}
+				if item.UserRestrictions.DenyAll != nil {
+					user_restrictionsNestedMap["deny_all"] = map[string]interface{}{}
+				}
+				if item.UserRestrictions.DenyList != nil {
+					deny_listDeepMap := make(map[string]interface{})
+					user_restrictionsNestedMap["deny_list"] = deny_listDeepMap
+				}
 				itemMap["user_restrictions"] = user_restrictionsNestedMap
 			}
 			user_restrictionsList = append(user_restrictionsList, itemMap)
 		}
-		apiResource.Spec["user_restrictions"] = user_restrictionsList
+		createReq.Spec["user_restrictions"] = user_restrictionsList
 	}
 	if !data.MaxValidityDuration.IsNull() && !data.MaxValidityDuration.IsUnknown() {
-		apiResource.Spec["max_validity_duration"] = data.MaxValidityDuration.ValueString()
+		createReq.Spec["max_validity_duration"] = data.MaxValidityDuration.ValueString()
 	}
 
 
-	created, err := r.client.CreateVoltshareAdminPolicy(ctx, apiResource)
+	apiResource, err := r.client.CreateVoltshareAdminPolicy(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create VoltshareAdminPolicy: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
-	if v, ok := created.Spec["max_validity_duration"].(string); ok && v != "" {
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if _, ok := apiResource.Spec["author_restrictions"].(map[string]interface{}); ok && isImport && data.AuthorRestrictions == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AuthorRestrictions = &VoltshareAdminPolicyAuthorRestrictionsModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["user_restrictions"].([]interface{}); ok && len(listData) > 0 {
+		var user_restrictionsList []VoltshareAdminPolicyUserRestrictionsModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				user_restrictionsList = append(user_restrictionsList, VoltshareAdminPolicyUserRestrictionsModel{
+					AllTenants: func() *VoltshareAdminPolicyEmptyModel {
+						if !isImport && len(data.UserRestrictions) > listIdx && data.UserRestrictions[listIdx].AllTenants != nil {
+							return &VoltshareAdminPolicyEmptyModel{}
+						}
+						return nil
+					}(),
+					IndividualUsers: func() *VoltshareAdminPolicyEmptyModel {
+						if !isImport && len(data.UserRestrictions) > listIdx && data.UserRestrictions[listIdx].IndividualUsers != nil {
+							return &VoltshareAdminPolicyEmptyModel{}
+						}
+						return nil
+					}(),
+					Tenant: func() types.String {
+						if v, ok := itemMap["tenant"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					UserRestrictions: func() *VoltshareAdminPolicyUserRestrictionsUserRestrictionsModel {
+						if _, ok := itemMap["user_restrictions"].(map[string]interface{}); ok {
+							return &VoltshareAdminPolicyUserRestrictionsUserRestrictionsModel{
+								AllowAll: func() *VoltshareAdminPolicyEmptyModel {
+									if !isImport && len(data.UserRestrictions) > listIdx && data.UserRestrictions[listIdx].UserRestrictions != nil && data.UserRestrictions[listIdx].UserRestrictions.AllowAll != nil {
+										return &VoltshareAdminPolicyEmptyModel{}
+									}
+									return nil
+								}(),
+								DenyAll: func() *VoltshareAdminPolicyEmptyModel {
+									if !isImport && len(data.UserRestrictions) > listIdx && data.UserRestrictions[listIdx].UserRestrictions != nil && data.UserRestrictions[listIdx].UserRestrictions.DenyAll != nil {
+										return &VoltshareAdminPolicyEmptyModel{}
+									}
+									return nil
+								}(),
+							}
+						}
+						return nil
+					}(),
+				})
+			}
+		}
+		data.UserRestrictions = user_restrictionsList
+	}
+	if v, ok := apiResource.Spec["max_validity_duration"].(string); ok && v != "" {
 		data.MaxValidityDuration = types.StringValue(v)
-	} else if data.MaxValidityDuration.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.MaxValidityDuration = types.StringNull()
 	}
-	// If plan had a value, preserve it
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
@@ -644,17 +714,18 @@ func (r *VoltshareAdminPolicyResource) Read(ctx context.Context, req resource.Re
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["user_restrictions"].([]interface{}); ok && len(listData) > 0 {
 		var user_restrictionsList []VoltshareAdminPolicyUserRestrictionsModel
-		for _, item := range listData {
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				user_restrictionsList = append(user_restrictionsList, VoltshareAdminPolicyUserRestrictionsModel{
 					AllTenants: func() *VoltshareAdminPolicyEmptyModel {
-						if _, ok := itemMap["all_tenants"].(map[string]interface{}); ok {
+						if !isImport && len(data.UserRestrictions) > listIdx && data.UserRestrictions[listIdx].AllTenants != nil {
 							return &VoltshareAdminPolicyEmptyModel{}
 						}
 						return nil
 					}(),
 					IndividualUsers: func() *VoltshareAdminPolicyEmptyModel {
-						if _, ok := itemMap["individual_users"].(map[string]interface{}); ok {
+						if !isImport && len(data.UserRestrictions) > listIdx && data.UserRestrictions[listIdx].IndividualUsers != nil {
 							return &VoltshareAdminPolicyEmptyModel{}
 						}
 						return nil
@@ -668,6 +739,18 @@ func (r *VoltshareAdminPolicyResource) Read(ctx context.Context, req resource.Re
 					UserRestrictions: func() *VoltshareAdminPolicyUserRestrictionsUserRestrictionsModel {
 						if _, ok := itemMap["user_restrictions"].(map[string]interface{}); ok {
 							return &VoltshareAdminPolicyUserRestrictionsUserRestrictionsModel{
+								AllowAll: func() *VoltshareAdminPolicyEmptyModel {
+									if !isImport && len(data.UserRestrictions) > listIdx && data.UserRestrictions[listIdx].UserRestrictions != nil && data.UserRestrictions[listIdx].UserRestrictions.AllowAll != nil {
+										return &VoltshareAdminPolicyEmptyModel{}
+									}
+									return nil
+								}(),
+								DenyAll: func() *VoltshareAdminPolicyEmptyModel {
+									if !isImport && len(data.UserRestrictions) > listIdx && data.UserRestrictions[listIdx].UserRestrictions != nil && data.UserRestrictions[listIdx].UserRestrictions.DenyAll != nil {
+										return &VoltshareAdminPolicyEmptyModel{}
+									}
+									return nil
+								}(),
 							}
 						}
 						return nil
@@ -776,6 +859,20 @@ func (r *VoltshareAdminPolicyResource) Update(ctx context.Context, req resource.
 			}
 			if item.UserRestrictions != nil {
 				user_restrictionsNestedMap := make(map[string]interface{})
+				if item.UserRestrictions.AllowAll != nil {
+					user_restrictionsNestedMap["allow_all"] = map[string]interface{}{}
+				}
+				if item.UserRestrictions.AllowList != nil {
+					allow_listDeepMap := make(map[string]interface{})
+					user_restrictionsNestedMap["allow_list"] = allow_listDeepMap
+				}
+				if item.UserRestrictions.DenyAll != nil {
+					user_restrictionsNestedMap["deny_all"] = map[string]interface{}{}
+				}
+				if item.UserRestrictions.DenyList != nil {
+					deny_listDeepMap := make(map[string]interface{})
+					user_restrictionsNestedMap["deny_list"] = deny_listDeepMap
+				}
 				itemMap["user_restrictions"] = user_restrictionsNestedMap
 			}
 			user_restrictionsList = append(user_restrictionsList, itemMap)

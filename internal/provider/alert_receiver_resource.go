@@ -631,6 +631,7 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 												"kind": schema.StringAttribute{
 													MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 													Optional: true,
+													Computed: true,
 												},
 												"name": schema.StringAttribute{
 													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -643,10 +644,12 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 												"tenant": schema.StringAttribute{
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional: true,
+													Computed: true,
 												},
 												"uid": schema.StringAttribute{
 													MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 													Optional: true,
+													Computed: true,
 												},
 											},
 										},
@@ -696,6 +699,7 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 																"kind": schema.StringAttribute{
 																	MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																	Optional: true,
+																	Computed: true,
 																},
 																"name": schema.StringAttribute{
 																	MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -708,10 +712,12 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 																"tenant": schema.StringAttribute{
 																	MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																	Optional: true,
+																	Computed: true,
 																},
 																"uid": schema.StringAttribute{
 																	MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																	Optional: true,
+																	Computed: true,
 																},
 															},
 														},
@@ -884,7 +890,7 @@ func (r *AlertReceiverResource) Create(ctx context.Context, req resource.CreateR
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.AlertReceiver{
+	createReq := &client.AlertReceiver{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -893,7 +899,7 @@ func (r *AlertReceiverResource) Create(ctx context.Context, req resource.CreateR
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -902,7 +908,7 @@ func (r *AlertReceiverResource) Create(ctx context.Context, req resource.CreateR
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -911,7 +917,7 @@ func (r *AlertReceiverResource) Create(ctx context.Context, req resource.CreateR
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -920,7 +926,7 @@ func (r *AlertReceiverResource) Create(ctx context.Context, req resource.CreateR
 		if !data.Email.Email.IsNull() && !data.Email.Email.IsUnknown() {
 			emailMap["email"] = data.Email.Email.ValueString()
 		}
-		apiResource.Spec["email"] = emailMap
+		createReq.Spec["email"] = emailMap
 	}
 	if data.Opsgenie != nil {
 		opsgenieMap := make(map[string]interface{})
@@ -931,7 +937,7 @@ func (r *AlertReceiverResource) Create(ctx context.Context, req resource.CreateR
 		if !data.Opsgenie.URL.IsNull() && !data.Opsgenie.URL.IsUnknown() {
 			opsgenieMap["url"] = data.Opsgenie.URL.ValueString()
 		}
-		apiResource.Spec["opsgenie"] = opsgenieMap
+		createReq.Spec["opsgenie"] = opsgenieMap
 	}
 	if data.Pagerduty != nil {
 		pagerdutyMap := make(map[string]interface{})
@@ -942,7 +948,7 @@ func (r *AlertReceiverResource) Create(ctx context.Context, req resource.CreateR
 		if !data.Pagerduty.URL.IsNull() && !data.Pagerduty.URL.IsUnknown() {
 			pagerdutyMap["url"] = data.Pagerduty.URL.ValueString()
 		}
-		apiResource.Spec["pagerduty"] = pagerdutyMap
+		createReq.Spec["pagerduty"] = pagerdutyMap
 	}
 	if data.Slack != nil {
 		slackMap := make(map[string]interface{})
@@ -953,14 +959,14 @@ func (r *AlertReceiverResource) Create(ctx context.Context, req resource.CreateR
 			urlNestedMap := make(map[string]interface{})
 			slackMap["url"] = urlNestedMap
 		}
-		apiResource.Spec["slack"] = slackMap
+		createReq.Spec["slack"] = slackMap
 	}
 	if data.Sms != nil {
 		smsMap := make(map[string]interface{})
 		if !data.Sms.ContactNumber.IsNull() && !data.Sms.ContactNumber.IsUnknown() {
 			smsMap["contact_number"] = data.Sms.ContactNumber.ValueString()
 		}
-		apiResource.Spec["sms"] = smsMap
+		createReq.Spec["sms"] = smsMap
 	}
 	if data.Webhook != nil {
 		webhookMap := make(map[string]interface{})
@@ -978,24 +984,119 @@ func (r *AlertReceiverResource) Create(ctx context.Context, req resource.CreateR
 			urlNestedMap := make(map[string]interface{})
 			webhookMap["url"] = urlNestedMap
 		}
-		apiResource.Spec["webhook"] = webhookMap
+		createReq.Spec["webhook"] = webhookMap
 	}
 
 
-	created, err := r.client.CreateAlertReceiver(ctx, apiResource)
+	apiResource, err := r.client.CreateAlertReceiver(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create AlertReceiver: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["email"].(map[string]interface{}); ok && (isImport || data.Email != nil) {
+		data.Email = &AlertReceiverEmailModel{
+			Email: func() types.String {
+				if v, ok := blockData["email"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["opsgenie"].(map[string]interface{}); ok && (isImport || data.Opsgenie != nil) {
+		data.Opsgenie = &AlertReceiverOpsgenieModel{
+			APIKey: func() *AlertReceiverOpsgenieAPIKeyModel {
+				if !isImport && data.Opsgenie != nil && data.Opsgenie.APIKey != nil {
+					// Normal Read: preserve existing state value
+					return data.Opsgenie.APIKey
+				}
+				// Import case: read from API
+				if _, ok := blockData["api_key"].(map[string]interface{}); ok {
+					return &AlertReceiverOpsgenieAPIKeyModel{
+					}
+				}
+				return nil
+			}(),
+			URL: func() types.String {
+				if v, ok := blockData["url"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["pagerduty"].(map[string]interface{}); ok && (isImport || data.Pagerduty != nil) {
+		data.Pagerduty = &AlertReceiverPagerdutyModel{
+			RoutingKey: func() *AlertReceiverPagerdutyRoutingKeyModel {
+				if !isImport && data.Pagerduty != nil && data.Pagerduty.RoutingKey != nil {
+					// Normal Read: preserve existing state value
+					return data.Pagerduty.RoutingKey
+				}
+				// Import case: read from API
+				if _, ok := blockData["routing_key"].(map[string]interface{}); ok {
+					return &AlertReceiverPagerdutyRoutingKeyModel{
+					}
+				}
+				return nil
+			}(),
+			URL: func() types.String {
+				if v, ok := blockData["url"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["slack"].(map[string]interface{}); ok && (isImport || data.Slack != nil) {
+		data.Slack = &AlertReceiverSlackModel{
+			Channel: func() types.String {
+				if v, ok := blockData["channel"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			URL: func() *AlertReceiverSlackURLModel {
+				if !isImport && data.Slack != nil && data.Slack.URL != nil {
+					// Normal Read: preserve existing state value
+					return data.Slack.URL
+				}
+				// Import case: read from API
+				if _, ok := blockData["url"].(map[string]interface{}); ok {
+					return &AlertReceiverSlackURLModel{
+					}
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["sms"].(map[string]interface{}); ok && (isImport || data.Sms != nil) {
+		data.Sms = &AlertReceiverSmsModel{
+			ContactNumber: func() types.String {
+				if v, ok := blockData["contact_number"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["webhook"].(map[string]interface{}); ok && isImport && data.Webhook == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Webhook = &AlertReceiverWebhookModel{}
+	}
+	// Normal Read: preserve existing state value
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 

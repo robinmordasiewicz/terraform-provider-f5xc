@@ -326,6 +326,7 @@ func (r *CustomerSupportResource) Schema(ctx context.Context, req resource.Schem
 						"kind": schema.StringAttribute{
 							MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 							Optional: true,
+							Computed: true,
 						},
 						"name": schema.StringAttribute{
 							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -338,10 +339,12 @@ func (r *CustomerSupportResource) Schema(ctx context.Context, req resource.Schem
 						"tenant": schema.StringAttribute{
 							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 							Optional: true,
+							Computed: true,
 						},
 						"uid": schema.StringAttribute{
 							MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 							Optional: true,
+							Computed: true,
 						},
 					},
 
@@ -464,7 +467,7 @@ func (r *CustomerSupportResource) Create(ctx context.Context, req resource.Creat
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.CustomerSupport{
+	createReq := &client.CustomerSupport{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -473,7 +476,7 @@ func (r *CustomerSupportResource) Create(ctx context.Context, req resource.Creat
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -482,7 +485,7 @@ func (r *CustomerSupportResource) Create(ctx context.Context, req resource.Creat
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -491,7 +494,7 @@ func (r *CustomerSupportResource) Create(ctx context.Context, req resource.Creat
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -499,6 +502,26 @@ func (r *CustomerSupportResource) Create(ctx context.Context, req resource.Creat
 		var commentsList []map[string]interface{}
 		for _, item := range data.Comments {
 			itemMap := make(map[string]interface{})
+			if len(item.AttachmentsInfo) > 0 {
+				var attachments_infoNestedList []map[string]interface{}
+				for _, nestedItem := range item.AttachmentsInfo {
+					nestedItemMap := make(map[string]interface{})
+					if !nestedItem.Attachment.IsNull() && !nestedItem.Attachment.IsUnknown() {
+						nestedItemMap["attachment"] = nestedItem.Attachment.ValueString()
+					}
+					if !nestedItem.ContentType.IsNull() && !nestedItem.ContentType.IsUnknown() {
+						nestedItemMap["content_type"] = nestedItem.ContentType.ValueString()
+					}
+					if !nestedItem.Filename.IsNull() && !nestedItem.Filename.IsUnknown() {
+						nestedItemMap["filename"] = nestedItem.Filename.ValueString()
+					}
+					if !nestedItem.TpID.IsNull() && !nestedItem.TpID.IsUnknown() {
+						nestedItemMap["tp_id"] = nestedItem.TpID.ValueString()
+					}
+					attachments_infoNestedList = append(attachments_infoNestedList, nestedItemMap)
+				}
+				itemMap["attachments_info"] = attachments_infoNestedList
+			}
 			if !item.AuthorEmail.IsNull() && !item.AuthorEmail.IsUnknown() {
 				itemMap["author_email"] = item.AuthorEmail.ValueString()
 			}
@@ -516,7 +539,7 @@ func (r *CustomerSupportResource) Create(ctx context.Context, req resource.Creat
 			}
 			commentsList = append(commentsList, itemMap)
 		}
-		apiResource.Spec["comments"] = commentsList
+		createReq.Spec["comments"] = commentsList
 	}
 	if len(data.RelatesTo) > 0 {
 		var relates_toList []map[string]interface{}
@@ -539,144 +562,262 @@ func (r *CustomerSupportResource) Create(ctx context.Context, req resource.Creat
 			}
 			relates_toList = append(relates_toList, itemMap)
 		}
-		apiResource.Spec["relates_to"] = relates_toList
+		createReq.Spec["relates_to"] = relates_toList
 	}
 	if !data.Category.IsNull() && !data.Category.IsUnknown() {
-		apiResource.Spec["category"] = data.Category.ValueString()
+		createReq.Spec["category"] = data.Category.ValueString()
 	}
 	if !data.DescriptionSpec.IsNull() && !data.DescriptionSpec.IsUnknown() {
-		apiResource.Spec["description"] = data.DescriptionSpec.ValueString()
+		createReq.Spec["description"] = data.DescriptionSpec.ValueString()
 	}
 	if !data.Ongoing.IsNull() && !data.Ongoing.IsUnknown() {
-		apiResource.Spec["ongoing"] = data.Ongoing.ValueBool()
+		createReq.Spec["ongoing"] = data.Ongoing.ValueBool()
 	}
 	if !data.Priority.IsNull() && !data.Priority.IsUnknown() {
-		apiResource.Spec["priority"] = data.Priority.ValueString()
+		createReq.Spec["priority"] = data.Priority.ValueString()
 	}
 	if !data.ProductData.IsNull() && !data.ProductData.IsUnknown() {
-		apiResource.Spec["product_data"] = data.ProductData.ValueString()
+		createReq.Spec["product_data"] = data.ProductData.ValueString()
 	}
 	if !data.Service.IsNull() && !data.Service.IsUnknown() {
-		apiResource.Spec["service"] = data.Service.ValueString()
+		createReq.Spec["service"] = data.Service.ValueString()
 	}
 	if !data.Status.IsNull() && !data.Status.IsUnknown() {
-		apiResource.Spec["status"] = data.Status.ValueString()
+		createReq.Spec["status"] = data.Status.ValueString()
 	}
 	if !data.Subject.IsNull() && !data.Subject.IsUnknown() {
-		apiResource.Spec["subject"] = data.Subject.ValueString()
+		createReq.Spec["subject"] = data.Subject.ValueString()
 	}
 	if !data.Timeline.IsNull() && !data.Timeline.IsUnknown() {
-		apiResource.Spec["timeline"] = data.Timeline.ValueString()
+		createReq.Spec["timeline"] = data.Timeline.ValueString()
 	}
 	if !data.Topic.IsNull() && !data.Topic.IsUnknown() {
-		apiResource.Spec["topic"] = data.Topic.ValueString()
+		createReq.Spec["topic"] = data.Topic.ValueString()
 	}
 	if !data.TpID.IsNull() && !data.TpID.IsUnknown() {
-		apiResource.Spec["tp_id"] = data.TpID.ValueString()
+		createReq.Spec["tp_id"] = data.TpID.ValueString()
 	}
 	if !data.Type.IsNull() && !data.Type.IsUnknown() {
-		apiResource.Spec["type"] = data.Type.ValueString()
+		createReq.Spec["type"] = data.Type.ValueString()
 	}
 
 
-	created, err := r.client.CreateCustomerSupport(ctx, apiResource)
+	apiResource, err := r.client.CreateCustomerSupport(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create CustomerSupport: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
-	if v, ok := created.Spec["category"].(string); ok && v != "" {
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if listData, ok := apiResource.Spec["comments"].([]interface{}); ok && len(listData) > 0 {
+		var commentsList []CustomerSupportCommentsModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				commentsList = append(commentsList, CustomerSupportCommentsModel{
+					AttachmentIds: func() types.List {
+						if v, ok := itemMap["attachment_ids"].([]interface{}); ok && len(v) > 0 {
+							var items []string
+							for _, item := range v {
+								if s, ok := item.(string); ok {
+									items = append(items, s)
+								}
+							}
+							listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+							return listVal
+						}
+						return types.ListNull(types.StringType)
+					}(),
+					AttachmentsInfo: func() []CustomerSupportCommentsAttachmentsInfoModel {
+						if nestedListData, ok := itemMap["attachments_info"].([]interface{}); ok && len(nestedListData) > 0 {
+							var result []CustomerSupportCommentsAttachmentsInfoModel
+							for _, nestedItem := range nestedListData {
+								if nestedItemMap, ok := nestedItem.(map[string]interface{}); ok {
+									result = append(result, CustomerSupportCommentsAttachmentsInfoModel{
+										Attachment: func() types.String {
+											if v, ok := nestedItemMap["attachment"].(string); ok && v != "" {
+												return types.StringValue(v)
+											}
+											return types.StringNull()
+										}(),
+										ContentType: func() types.String {
+											if v, ok := nestedItemMap["content_type"].(string); ok && v != "" {
+												return types.StringValue(v)
+											}
+											return types.StringNull()
+										}(),
+										Filename: func() types.String {
+											if v, ok := nestedItemMap["filename"].(string); ok && v != "" {
+												return types.StringValue(v)
+											}
+											return types.StringNull()
+										}(),
+										TpID: func() types.String {
+											if v, ok := nestedItemMap["tp_id"].(string); ok && v != "" {
+												return types.StringValue(v)
+											}
+											return types.StringNull()
+										}(),
+									})
+								}
+							}
+							return result
+						}
+						return nil
+					}(),
+					AuthorEmail: func() types.String {
+						if v, ok := itemMap["author_email"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					AuthorName: func() types.String {
+						if v, ok := itemMap["author_name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					CreatedAt: func() types.String {
+						if v, ok := itemMap["created_at"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Html: func() types.String {
+						if v, ok := itemMap["html"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					PlainText: func() types.String {
+						if v, ok := itemMap["plain_text"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.Comments = commentsList
+	}
+	if listData, ok := apiResource.Spec["relates_to"].([]interface{}); ok && len(listData) > 0 {
+		var relates_toList []CustomerSupportRelatesToModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				relates_toList = append(relates_toList, CustomerSupportRelatesToModel{
+					Kind: func() types.String {
+						if v, ok := itemMap["kind"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Namespace: func() types.String {
+						if v, ok := itemMap["namespace"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Tenant: func() types.String {
+						if v, ok := itemMap["tenant"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Uid: func() types.String {
+						if v, ok := itemMap["uid"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.RelatesTo = relates_toList
+	}
+	if v, ok := apiResource.Spec["category"].(string); ok && v != "" {
 		data.Category = types.StringValue(v)
-	} else if data.Category.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.Category = types.StringNull()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["description"].(string); ok && v != "" {
+	if v, ok := apiResource.Spec["description"].(string); ok && v != "" {
 		data.DescriptionSpec = types.StringValue(v)
-	} else if data.DescriptionSpec.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.DescriptionSpec = types.StringNull()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["ongoing"].(bool); ok {
-		data.Ongoing = types.BoolValue(v)
-	} else if data.Ongoing.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
-		data.Ongoing = types.BoolNull()
+	// Top-level Optional bool: preserve prior state to avoid API default drift
+	if !isImport && !data.Ongoing.IsNull() && !data.Ongoing.IsUnknown() {
+		// Normal Read: preserve existing state value (do nothing)
+	} else {
+		// Import case, null state, or unknown (after Create): read from API
+		if v, ok := apiResource.Spec["ongoing"].(bool); ok {
+			data.Ongoing = types.BoolValue(v)
+		} else {
+			data.Ongoing = types.BoolNull()
+		}
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["priority"].(string); ok && v != "" {
+	if v, ok := apiResource.Spec["priority"].(string); ok && v != "" {
 		data.Priority = types.StringValue(v)
-	} else if data.Priority.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.Priority = types.StringNull()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["product_data"].(string); ok && v != "" {
+	if v, ok := apiResource.Spec["product_data"].(string); ok && v != "" {
 		data.ProductData = types.StringValue(v)
-	} else if data.ProductData.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.ProductData = types.StringNull()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["service"].(string); ok && v != "" {
+	if v, ok := apiResource.Spec["service"].(string); ok && v != "" {
 		data.Service = types.StringValue(v)
-	} else if data.Service.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.Service = types.StringNull()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["status"].(string); ok && v != "" {
+	if v, ok := apiResource.Spec["status"].(string); ok && v != "" {
 		data.Status = types.StringValue(v)
-	} else if data.Status.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.Status = types.StringNull()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["subject"].(string); ok && v != "" {
+	if v, ok := apiResource.Spec["subject"].(string); ok && v != "" {
 		data.Subject = types.StringValue(v)
-	} else if data.Subject.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.Subject = types.StringNull()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["timeline"].(string); ok && v != "" {
+	if v, ok := apiResource.Spec["timeline"].(string); ok && v != "" {
 		data.Timeline = types.StringValue(v)
-	} else if data.Timeline.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.Timeline = types.StringNull()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["topic"].(string); ok && v != "" {
+	if v, ok := apiResource.Spec["topic"].(string); ok && v != "" {
 		data.Topic = types.StringValue(v)
-	} else if data.Topic.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.Topic = types.StringNull()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["tp_id"].(string); ok && v != "" {
+	if v, ok := apiResource.Spec["tp_id"].(string); ok && v != "" {
 		data.TpID = types.StringValue(v)
-	} else if data.TpID.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.TpID = types.StringNull()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["type"].(string); ok && v != "" {
+	if v, ok := apiResource.Spec["type"].(string); ok && v != "" {
 		data.Type = types.StringValue(v)
-	} else if data.Type.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.Type = types.StringNull()
 	}
-	// If plan had a value, preserve it
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
@@ -767,7 +908,8 @@ func (r *CustomerSupportResource) Read(ctx context.Context, req resource.ReadReq
 	})
 	if listData, ok := apiResource.Spec["comments"].([]interface{}); ok && len(listData) > 0 {
 		var commentsList []CustomerSupportCommentsModel
-		for _, item := range listData {
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				commentsList = append(commentsList, CustomerSupportCommentsModel{
 					AttachmentIds: func() types.List {
@@ -782,6 +924,43 @@ func (r *CustomerSupportResource) Read(ctx context.Context, req resource.ReadReq
 							return listVal
 						}
 						return types.ListNull(types.StringType)
+					}(),
+					AttachmentsInfo: func() []CustomerSupportCommentsAttachmentsInfoModel {
+						if nestedListData, ok := itemMap["attachments_info"].([]interface{}); ok && len(nestedListData) > 0 {
+							var result []CustomerSupportCommentsAttachmentsInfoModel
+							for _, nestedItem := range nestedListData {
+								if nestedItemMap, ok := nestedItem.(map[string]interface{}); ok {
+									result = append(result, CustomerSupportCommentsAttachmentsInfoModel{
+										Attachment: func() types.String {
+											if v, ok := nestedItemMap["attachment"].(string); ok && v != "" {
+												return types.StringValue(v)
+											}
+											return types.StringNull()
+										}(),
+										ContentType: func() types.String {
+											if v, ok := nestedItemMap["content_type"].(string); ok && v != "" {
+												return types.StringValue(v)
+											}
+											return types.StringNull()
+										}(),
+										Filename: func() types.String {
+											if v, ok := nestedItemMap["filename"].(string); ok && v != "" {
+												return types.StringValue(v)
+											}
+											return types.StringNull()
+										}(),
+										TpID: func() types.String {
+											if v, ok := nestedItemMap["tp_id"].(string); ok && v != "" {
+												return types.StringValue(v)
+											}
+											return types.StringNull()
+										}(),
+									})
+								}
+							}
+							return result
+						}
+						return nil
 					}(),
 					AuthorEmail: func() types.String {
 						if v, ok := itemMap["author_email"].(string); ok && v != "" {
@@ -820,7 +999,8 @@ func (r *CustomerSupportResource) Read(ctx context.Context, req resource.ReadReq
 	}
 	if listData, ok := apiResource.Spec["relates_to"].([]interface{}); ok && len(listData) > 0 {
 		var relates_toList []CustomerSupportRelatesToModel
-		for _, item := range listData {
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				relates_toList = append(relates_toList, CustomerSupportRelatesToModel{
 					Kind: func() types.String {
@@ -869,10 +1049,10 @@ func (r *CustomerSupportResource) Read(ctx context.Context, req resource.ReadReq
 		data.DescriptionSpec = types.StringNull()
 	}
 	// Top-level Optional bool: preserve prior state to avoid API default drift
-	if !isImport && !data.Ongoing.IsNull() {
+	if !isImport && !data.Ongoing.IsNull() && !data.Ongoing.IsUnknown() {
 		// Normal Read: preserve existing state value (do nothing)
 	} else {
-		// Import case or null state: read from API
+		// Import case, null state, or unknown (after Create): read from API
 		if v, ok := apiResource.Spec["ongoing"].(bool); ok {
 			data.Ongoing = types.BoolValue(v)
 		} else {
@@ -989,6 +1169,26 @@ func (r *CustomerSupportResource) Update(ctx context.Context, req resource.Updat
 		var commentsList []map[string]interface{}
 		for _, item := range data.Comments {
 			itemMap := make(map[string]interface{})
+			if len(item.AttachmentsInfo) > 0 {
+				var attachments_infoNestedList []map[string]interface{}
+				for _, nestedItem := range item.AttachmentsInfo {
+					nestedItemMap := make(map[string]interface{})
+					if !nestedItem.Attachment.IsNull() && !nestedItem.Attachment.IsUnknown() {
+						nestedItemMap["attachment"] = nestedItem.Attachment.ValueString()
+					}
+					if !nestedItem.ContentType.IsNull() && !nestedItem.ContentType.IsUnknown() {
+						nestedItemMap["content_type"] = nestedItem.ContentType.ValueString()
+					}
+					if !nestedItem.Filename.IsNull() && !nestedItem.Filename.IsUnknown() {
+						nestedItemMap["filename"] = nestedItem.Filename.ValueString()
+					}
+					if !nestedItem.TpID.IsNull() && !nestedItem.TpID.IsUnknown() {
+						nestedItemMap["tp_id"] = nestedItem.TpID.ValueString()
+					}
+					attachments_infoNestedList = append(attachments_infoNestedList, nestedItemMap)
+				}
+				itemMap["attachments_info"] = attachments_infoNestedList
+			}
 			if !item.AuthorEmail.IsNull() && !item.AuthorEmail.IsUnknown() {
 				itemMap["author_email"] = item.AuthorEmail.ValueString()
 			}

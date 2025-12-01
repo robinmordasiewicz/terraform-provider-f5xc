@@ -245,6 +245,7 @@ func (r *DNSLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional: true,
+						Computed: true,
 					},
 				},
 
@@ -317,6 +318,7 @@ func (r *DNSLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													"kind": schema.StringAttribute{
 														MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 														Optional: true,
+														Computed: true,
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -329,10 +331,12 @@ func (r *DNSLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													"tenant": schema.StringAttribute{
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 														Optional: true,
+														Computed: true,
 													},
 													"uid": schema.StringAttribute{
 														MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 														Optional: true,
+														Computed: true,
 													},
 												},
 											},
@@ -363,6 +367,7 @@ func (r *DNSLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -396,6 +401,7 @@ func (r *DNSLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													"kind": schema.StringAttribute{
 														MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 														Optional: true,
+														Computed: true,
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -408,10 +414,12 @@ func (r *DNSLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													"tenant": schema.StringAttribute{
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 														Optional: true,
+														Computed: true,
 													},
 													"uid": schema.StringAttribute{
 														MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 														Optional: true,
+														Computed: true,
 													},
 												},
 											},
@@ -432,6 +440,7 @@ func (r *DNSLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -558,7 +567,7 @@ func (r *DNSLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.DNSLoadBalancer{
+	createReq := &client.DNSLoadBalancer{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -567,7 +576,7 @@ func (r *DNSLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -576,7 +585,7 @@ func (r *DNSLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -585,7 +594,7 @@ func (r *DNSLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -600,7 +609,7 @@ func (r *DNSLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 		if !data.FallbackPool.Tenant.IsNull() && !data.FallbackPool.Tenant.IsUnknown() {
 			fallback_poolMap["tenant"] = data.FallbackPool.Tenant.ValueString()
 		}
-		apiResource.Spec["fallback_pool"] = fallback_poolMap
+		createReq.Spec["fallback_pool"] = fallback_poolMap
 	}
 	if data.ResponseCache != nil {
 		response_cacheMap := make(map[string]interface{})
@@ -623,7 +632,7 @@ func (r *DNSLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 			}
 			response_cacheMap["response_cache_parameters"] = response_cache_parametersNestedMap
 		}
-		apiResource.Spec["response_cache"] = response_cacheMap
+		createReq.Spec["response_cache"] = response_cacheMap
 	}
 	if data.RuleList != nil {
 		rule_listMap := make(map[string]interface{})
@@ -690,34 +699,183 @@ func (r *DNSLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 			}
 			rule_listMap["rules"] = rulesList
 		}
-		apiResource.Spec["rule_list"] = rule_listMap
+		createReq.Spec["rule_list"] = rule_listMap
 	}
 	if !data.RecordType.IsNull() && !data.RecordType.IsUnknown() {
-		apiResource.Spec["record_type"] = data.RecordType.ValueString()
+		createReq.Spec["record_type"] = data.RecordType.ValueString()
 	}
 
 
-	created, err := r.client.CreateDNSLoadBalancer(ctx, apiResource)
+	apiResource, err := r.client.CreateDNSLoadBalancer(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create DNSLoadBalancer: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
-	if v, ok := created.Spec["record_type"].(string); ok && v != "" {
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["fallback_pool"].(map[string]interface{}); ok && (isImport || data.FallbackPool != nil) {
+		data.FallbackPool = &DNSLoadBalancerFallbackPoolModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["response_cache"].(map[string]interface{}); ok && isImport && data.ResponseCache == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ResponseCache = &DNSLoadBalancerResponseCacheModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["rule_list"].(map[string]interface{}); ok && (isImport || data.RuleList != nil) {
+		data.RuleList = &DNSLoadBalancerRuleListModel{
+			Rules: func() []DNSLoadBalancerRuleListRulesModel {
+				if listData, ok := blockData["rules"].([]interface{}); ok && len(listData) > 0 {
+					var result []DNSLoadBalancerRuleListRulesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, DNSLoadBalancerRuleListRulesModel{
+								AsnList: func() *DNSLoadBalancerRuleListRulesAsnListModel {
+									if _, ok := itemMap["asn_list"].(map[string]interface{}); ok {
+										return &DNSLoadBalancerRuleListRulesAsnListModel{
+										}
+									}
+									return nil
+								}(),
+								AsnMatcher: func() *DNSLoadBalancerRuleListRulesAsnMatcherModel {
+									if _, ok := itemMap["asn_matcher"].(map[string]interface{}); ok {
+										return &DNSLoadBalancerRuleListRulesAsnMatcherModel{
+										}
+									}
+									return nil
+								}(),
+								GeoLocationLabelSelector: func() *DNSLoadBalancerRuleListRulesGeoLocationLabelSelectorModel {
+									if _, ok := itemMap["geo_location_label_selector"].(map[string]interface{}); ok {
+										return &DNSLoadBalancerRuleListRulesGeoLocationLabelSelectorModel{
+										}
+									}
+									return nil
+								}(),
+								GeoLocationSet: func() *DNSLoadBalancerRuleListRulesGeoLocationSetModel {
+									if deepMap, ok := itemMap["geo_location_set"].(map[string]interface{}); ok {
+										return &DNSLoadBalancerRuleListRulesGeoLocationSetModel{
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Namespace: func() types.String {
+												if v, ok := deepMap["namespace"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Tenant: func() types.String {
+												if v, ok := deepMap["tenant"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								IPPrefixList: func() *DNSLoadBalancerRuleListRulesIPPrefixListModel {
+									if deepMap, ok := itemMap["ip_prefix_list"].(map[string]interface{}); ok {
+										return &DNSLoadBalancerRuleListRulesIPPrefixListModel{
+											InvertMatch: func() types.Bool {
+												if v, ok := deepMap["invert_match"].(bool); ok {
+													return types.BoolValue(v)
+												}
+												return types.BoolNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								IPPrefixSet: func() *DNSLoadBalancerRuleListRulesIPPrefixSetModel {
+									if deepMap, ok := itemMap["ip_prefix_set"].(map[string]interface{}); ok {
+										return &DNSLoadBalancerRuleListRulesIPPrefixSetModel{
+											InvertMatcher: func() types.Bool {
+												if v, ok := deepMap["invert_matcher"].(bool); ok {
+													return types.BoolValue(v)
+												}
+												return types.BoolNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								Pool: func() *DNSLoadBalancerRuleListRulesPoolModel {
+									if deepMap, ok := itemMap["pool"].(map[string]interface{}); ok {
+										return &DNSLoadBalancerRuleListRulesPoolModel{
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Namespace: func() types.String {
+												if v, ok := deepMap["namespace"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Tenant: func() types.String {
+												if v, ok := deepMap["tenant"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								Score: func() types.Int64 {
+									if v, ok := itemMap["score"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if v, ok := apiResource.Spec["record_type"].(string); ok && v != "" {
 		data.RecordType = types.StringValue(v)
-	} else if data.RecordType.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.RecordType = types.StringNull()
 	}
-	// If plan had a value, preserve it
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 

@@ -272,7 +272,7 @@ func (r *PolicerResource) Create(ctx context.Context, req resource.CreateRequest
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.Policer{
+	createReq := &client.Policer{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -281,7 +281,7 @@ func (r *PolicerResource) Create(ctx context.Context, req resource.CreateRequest
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -290,7 +290,7 @@ func (r *PolicerResource) Create(ctx context.Context, req resource.CreateRequest
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -299,66 +299,62 @@ func (r *PolicerResource) Create(ctx context.Context, req resource.CreateRequest
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
 	if !data.BurstSize.IsNull() && !data.BurstSize.IsUnknown() {
-		apiResource.Spec["burst_size"] = data.BurstSize.ValueInt64()
+		createReq.Spec["burst_size"] = data.BurstSize.ValueInt64()
 	}
 	if !data.CommittedInformationRate.IsNull() && !data.CommittedInformationRate.IsUnknown() {
-		apiResource.Spec["committed_information_rate"] = data.CommittedInformationRate.ValueInt64()
+		createReq.Spec["committed_information_rate"] = data.CommittedInformationRate.ValueInt64()
 	}
 	if !data.PolicerMode.IsNull() && !data.PolicerMode.IsUnknown() {
-		apiResource.Spec["policer_mode"] = data.PolicerMode.ValueString()
+		createReq.Spec["policer_mode"] = data.PolicerMode.ValueString()
 	}
 	if !data.PolicerType.IsNull() && !data.PolicerType.IsUnknown() {
-		apiResource.Spec["policer_type"] = data.PolicerType.ValueString()
+		createReq.Spec["policer_type"] = data.PolicerType.ValueString()
 	}
 
 
-	created, err := r.client.CreatePolicer(ctx, apiResource)
+	apiResource, err := r.client.CreatePolicer(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create Policer: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
-	if v, ok := created.Spec["burst_size"].(float64); ok {
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if v, ok := apiResource.Spec["burst_size"].(float64); ok {
 		data.BurstSize = types.Int64Value(int64(v))
-	} else if data.BurstSize.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.BurstSize = types.Int64Null()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["committed_information_rate"].(float64); ok {
+	if v, ok := apiResource.Spec["committed_information_rate"].(float64); ok {
 		data.CommittedInformationRate = types.Int64Value(int64(v))
-	} else if data.CommittedInformationRate.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.CommittedInformationRate = types.Int64Null()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["policer_mode"].(string); ok && v != "" {
+	if v, ok := apiResource.Spec["policer_mode"].(string); ok && v != "" {
 		data.PolicerMode = types.StringValue(v)
-	} else if data.PolicerMode.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.PolicerMode = types.StringNull()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["policer_type"].(string); ok && v != "" {
+	if v, ok := apiResource.Spec["policer_type"].(string); ok && v != "" {
 		data.PolicerType = types.StringValue(v)
-	} else if data.PolicerType.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.PolicerType = types.StringNull()
 	}
-	// If plan had a value, preserve it
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 

@@ -167,6 +167,7 @@ func (r *SensitiveDataPolicyResource) Schema(ctx context.Context, req resource.S
 								"tenant": schema.StringAttribute{
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional: true,
+									Computed: true,
 								},
 							},
 						},
@@ -291,7 +292,7 @@ func (r *SensitiveDataPolicyResource) Create(ctx context.Context, req resource.C
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.SensitiveDataPolicy{
+	createReq := &client.SensitiveDataPolicy{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -300,7 +301,7 @@ func (r *SensitiveDataPolicyResource) Create(ctx context.Context, req resource.C
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -309,7 +310,7 @@ func (r *SensitiveDataPolicyResource) Create(ctx context.Context, req resource.C
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -318,7 +319,7 @@ func (r *SensitiveDataPolicyResource) Create(ctx context.Context, req resource.C
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -326,7 +327,7 @@ func (r *SensitiveDataPolicyResource) Create(ctx context.Context, req resource.C
 		var compliancesList []string
 		resp.Diagnostics.Append(data.Compliances.ElementsAs(ctx, &compliancesList, false)...)
 		if !resp.Diagnostics.HasError() {
-			apiResource.Spec["compliances"] = compliancesList
+			createReq.Spec["compliances"] = compliancesList
 		}
 	}
 	if len(data.CustomDataTypes) > 0 {
@@ -348,31 +349,101 @@ func (r *SensitiveDataPolicyResource) Create(ctx context.Context, req resource.C
 			}
 			custom_data_typesList = append(custom_data_typesList, itemMap)
 		}
-		apiResource.Spec["custom_data_types"] = custom_data_typesList
+		createReq.Spec["custom_data_types"] = custom_data_typesList
 	}
 	if !data.DisabledPredefinedDataTypes.IsNull() && !data.DisabledPredefinedDataTypes.IsUnknown() {
 		var disabled_predefined_data_typesList []string
 		resp.Diagnostics.Append(data.DisabledPredefinedDataTypes.ElementsAs(ctx, &disabled_predefined_data_typesList, false)...)
 		if !resp.Diagnostics.HasError() {
-			apiResource.Spec["disabled_predefined_data_types"] = disabled_predefined_data_typesList
+			createReq.Spec["disabled_predefined_data_types"] = disabled_predefined_data_typesList
 		}
 	}
 
 
-	created, err := r.client.CreateSensitiveDataPolicy(ctx, apiResource)
+	apiResource, err := r.client.CreateSensitiveDataPolicy(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create SensitiveDataPolicy: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if v, ok := apiResource.Spec["compliances"].([]interface{}); ok && len(v) > 0 {
+		var compliancesList []string
+		for _, item := range v {
+			if s, ok := item.(string); ok {
+				compliancesList = append(compliancesList, s)
+			}
+		}
+		listVal, diags := types.ListValueFrom(ctx, types.StringType, compliancesList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Compliances = listVal
+		}
+	} else {
+		data.Compliances = types.ListNull(types.StringType)
+	}
+	if listData, ok := apiResource.Spec["custom_data_types"].([]interface{}); ok && len(listData) > 0 {
+		var custom_data_typesList []SensitiveDataPolicyCustomDataTypesModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				custom_data_typesList = append(custom_data_typesList, SensitiveDataPolicyCustomDataTypesModel{
+					CustomDataTypeRef: func() *SensitiveDataPolicyCustomDataTypesCustomDataTypeRefModel {
+						if nestedMap, ok := itemMap["custom_data_type_ref"].(map[string]interface{}); ok {
+							return &SensitiveDataPolicyCustomDataTypesCustomDataTypeRefModel{
+								Name: func() types.String {
+									if v, ok := nestedMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := nestedMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := nestedMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+				})
+			}
+		}
+		data.CustomDataTypes = custom_data_typesList
+	}
+	if v, ok := apiResource.Spec["disabled_predefined_data_types"].([]interface{}); ok && len(v) > 0 {
+		var disabled_predefined_data_typesList []string
+		for _, item := range v {
+			if s, ok := item.(string); ok {
+				disabled_predefined_data_typesList = append(disabled_predefined_data_typesList, s)
+			}
+		}
+		listVal, diags := types.ListValueFrom(ctx, types.StringType, disabled_predefined_data_typesList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.DisabledPredefinedDataTypes = listVal
+		}
+	} else {
+		data.DisabledPredefinedDataTypes = types.ListNull(types.StringType)
+	}
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
@@ -478,7 +549,8 @@ func (r *SensitiveDataPolicyResource) Read(ctx context.Context, req resource.Rea
 	}
 	if listData, ok := apiResource.Spec["custom_data_types"].([]interface{}); ok && len(listData) > 0 {
 		var custom_data_typesList []SensitiveDataPolicyCustomDataTypesModel
-		for _, item := range listData {
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				custom_data_typesList = append(custom_data_typesList, SensitiveDataPolicyCustomDataTypesModel{
 					CustomDataTypeRef: func() *SensitiveDataPolicyCustomDataTypesCustomDataTypeRefModel {

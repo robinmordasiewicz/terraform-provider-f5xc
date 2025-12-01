@@ -1797,6 +1797,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional: true,
+						Computed: true,
 					},
 				},
 
@@ -1907,6 +1908,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -1933,6 +1935,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -1959,6 +1962,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -2060,6 +2064,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
+								Computed: true,
 							},
 						},
 					},
@@ -2077,6 +2082,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
+								Computed: true,
 							},
 						},
 					},
@@ -2113,6 +2119,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 															Optional: true,
+															Computed: true,
 														},
 													},
 												},
@@ -2137,6 +2144,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 															Optional: true,
+															Computed: true,
 														},
 													},
 												},
@@ -2428,6 +2436,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																	"kind": schema.StringAttribute{
 																		MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																		Optional: true,
+																		Computed: true,
 																	},
 																	"name": schema.StringAttribute{
 																		MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -2440,10 +2449,12 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																	"tenant": schema.StringAttribute{
 																		MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																		Optional: true,
+																		Computed: true,
 																	},
 																	"uid": schema.StringAttribute{
 																		MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																		Optional: true,
+																		Computed: true,
 																	},
 																},
 															},
@@ -2582,6 +2593,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																	"kind": schema.StringAttribute{
 																		MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																		Optional: true,
+																		Computed: true,
 																	},
 																	"name": schema.StringAttribute{
 																		MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -2594,10 +2606,12 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																	"tenant": schema.StringAttribute{
 																		MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																		Optional: true,
+																		Computed: true,
 																	},
 																	"uid": schema.StringAttribute{
 																		MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																		Optional: true,
+																		Computed: true,
 																	},
 																},
 															},
@@ -2745,6 +2759,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -2771,6 +2786,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -2797,6 +2813,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -2817,6 +2834,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
+								Computed: true,
 							},
 						},
 					},
@@ -2834,6 +2852,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
+								Computed: true,
 							},
 						},
 					},
@@ -2870,6 +2889,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 															Optional: true,
+															Computed: true,
 														},
 													},
 												},
@@ -2894,6 +2914,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 															Optional: true,
+															Computed: true,
 														},
 													},
 												},
@@ -3185,6 +3206,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																	"kind": schema.StringAttribute{
 																		MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																		Optional: true,
+																		Computed: true,
 																	},
 																	"name": schema.StringAttribute{
 																		MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -3197,10 +3219,12 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																	"tenant": schema.StringAttribute{
 																		MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																		Optional: true,
+																		Computed: true,
 																	},
 																	"uid": schema.StringAttribute{
 																		MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																		Optional: true,
+																		Computed: true,
 																	},
 																},
 															},
@@ -3426,6 +3450,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																	"kind": schema.StringAttribute{
 																		MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																		Optional: true,
+																		Computed: true,
 																	},
 																	"name": schema.StringAttribute{
 																		MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -3438,10 +3463,12 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																	"tenant": schema.StringAttribute{
 																		MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																		Optional: true,
+																		Computed: true,
 																	},
 																	"uid": schema.StringAttribute{
 																		MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																		Optional: true,
+																		Computed: true,
 																	},
 																},
 															},
@@ -3789,6 +3816,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 					"tenant": schema.StringAttribute{
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional: true,
+						Computed: true,
 					},
 				},
 
@@ -3935,6 +3963,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -3961,6 +3990,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -3987,6 +4017,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -4054,6 +4085,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
+								Computed: true,
 							},
 						},
 					},
@@ -4093,6 +4125,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 															Optional: true,
+															Computed: true,
 														},
 													},
 												},
@@ -4117,6 +4150,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 															Optional: true,
+															Computed: true,
 														},
 													},
 												},
@@ -4141,6 +4175,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
+								Computed: true,
 							},
 						},
 					},
@@ -4206,6 +4241,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																	"kind": schema.StringAttribute{
 																		MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																		Optional: true,
+																		Computed: true,
 																	},
 																	"name": schema.StringAttribute{
 																		MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -4218,10 +4254,12 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																	"tenant": schema.StringAttribute{
 																		MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																		Optional: true,
+																		Computed: true,
 																	},
 																	"uid": schema.StringAttribute{
 																		MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																		Optional: true,
+																		Computed: true,
 																	},
 																},
 															},
@@ -4368,6 +4406,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -4394,6 +4433,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -4420,6 +4460,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										"tenant": schema.StringAttribute{
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional: true,
+											Computed: true,
 										},
 									},
 								},
@@ -4440,6 +4481,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
+								Computed: true,
 							},
 						},
 					},
@@ -4479,6 +4521,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 															Optional: true,
+															Computed: true,
 														},
 													},
 												},
@@ -4503,6 +4546,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 														"tenant": schema.StringAttribute{
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 															Optional: true,
+															Computed: true,
 														},
 													},
 												},
@@ -4527,6 +4571,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 							"tenant": schema.StringAttribute{
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional: true,
+								Computed: true,
 							},
 						},
 					},
@@ -4645,6 +4690,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																	"kind": schema.StringAttribute{
 																		MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																		Optional: true,
+																		Computed: true,
 																	},
 																	"name": schema.StringAttribute{
 																		MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -4657,10 +4703,12 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																	"tenant": schema.StringAttribute{
 																		MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																		Optional: true,
+																		Computed: true,
 																	},
 																	"uid": schema.StringAttribute{
 																		MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																		Optional: true,
+																		Computed: true,
 																	},
 																},
 															},
@@ -4882,7 +4930,7 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.AzureVNETSite{
+	createReq := &client.AzureVNETSite{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -4891,7 +4939,7 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -4900,7 +4948,7 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -4909,7 +4957,7 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -4938,7 +4986,7 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 			}
 			admin_passwordMap["clear_secret_info"] = clear_secret_infoNestedMap
 		}
-		apiResource.Spec["admin_password"] = admin_passwordMap
+		createReq.Spec["admin_password"] = admin_passwordMap
 	}
 	if data.AzureCred != nil {
 		azure_credMap := make(map[string]interface{})
@@ -4951,11 +4999,11 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 		if !data.AzureCred.Tenant.IsNull() && !data.AzureCred.Tenant.IsUnknown() {
 			azure_credMap["tenant"] = data.AzureCred.Tenant.ValueString()
 		}
-		apiResource.Spec["azure_cred"] = azure_credMap
+		createReq.Spec["azure_cred"] = azure_credMap
 	}
 	if data.BlockAllServices != nil {
 		block_all_servicesMap := make(map[string]interface{})
-		apiResource.Spec["block_all_services"] = block_all_servicesMap
+		createReq.Spec["block_all_services"] = block_all_servicesMap
 	}
 	if data.BlockedServices != nil {
 		blocked_servicesMap := make(map[string]interface{})
@@ -4979,7 +5027,7 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 			}
 			blocked_servicesMap["blocked_sevice"] = blocked_seviceList
 		}
-		apiResource.Spec["blocked_services"] = blocked_servicesMap
+		createReq.Spec["blocked_services"] = blocked_servicesMap
 	}
 	if data.Coordinates != nil {
 		coordinatesMap := make(map[string]interface{})
@@ -4989,7 +5037,7 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 		if !data.Coordinates.Longitude.IsNull() && !data.Coordinates.Longitude.IsUnknown() {
 			coordinatesMap["longitude"] = data.Coordinates.Longitude.ValueInt64()
 		}
-		apiResource.Spec["coordinates"] = coordinatesMap
+		createReq.Spec["coordinates"] = coordinatesMap
 	}
 	if data.CustomDNS != nil {
 		custom_dnsMap := make(map[string]interface{})
@@ -4999,11 +5047,11 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 		if !data.CustomDNS.OutsideNameserver.IsNull() && !data.CustomDNS.OutsideNameserver.IsUnknown() {
 			custom_dnsMap["outside_nameserver"] = data.CustomDNS.OutsideNameserver.ValueString()
 		}
-		apiResource.Spec["custom_dns"] = custom_dnsMap
+		createReq.Spec["custom_dns"] = custom_dnsMap
 	}
 	if data.DefaultBlockedServices != nil {
 		default_blocked_servicesMap := make(map[string]interface{})
-		apiResource.Spec["default_blocked_services"] = default_blocked_servicesMap
+		createReq.Spec["default_blocked_services"] = default_blocked_servicesMap
 	}
 	if data.IngressEgressGw != nil {
 		ingress_egress_gwMap := make(map[string]interface{})
@@ -5121,7 +5169,7 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 		if data.IngressEgressGw.SmConnectionPvtIP != nil {
 			ingress_egress_gwMap["sm_connection_pvt_ip"] = map[string]interface{}{}
 		}
-		apiResource.Spec["ingress_egress_gw"] = ingress_egress_gwMap
+		createReq.Spec["ingress_egress_gw"] = ingress_egress_gwMap
 	}
 	if data.IngressEgressGwAr != nil {
 		ingress_egress_gw_arMap := make(map[string]interface{})
@@ -5233,7 +5281,7 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 		if data.IngressEgressGwAr.SmConnectionPvtIP != nil {
 			ingress_egress_gw_arMap["sm_connection_pvt_ip"] = map[string]interface{}{}
 		}
-		apiResource.Spec["ingress_egress_gw_ar"] = ingress_egress_gw_arMap
+		createReq.Spec["ingress_egress_gw_ar"] = ingress_egress_gw_arMap
 	}
 	if data.IngressGw != nil {
 		ingress_gwMap := make(map[string]interface{})
@@ -5263,7 +5311,7 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 			performance_enhancement_modeNestedMap := make(map[string]interface{})
 			ingress_gwMap["performance_enhancement_mode"] = performance_enhancement_modeNestedMap
 		}
-		apiResource.Spec["ingress_gw"] = ingress_gwMap
+		createReq.Spec["ingress_gw"] = ingress_gwMap
 	}
 	if data.IngressGwAr != nil {
 		ingress_gw_arMap := make(map[string]interface{})
@@ -5291,7 +5339,7 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 			performance_enhancement_modeNestedMap := make(map[string]interface{})
 			ingress_gw_arMap["performance_enhancement_mode"] = performance_enhancement_modeNestedMap
 		}
-		apiResource.Spec["ingress_gw_ar"] = ingress_gw_arMap
+		createReq.Spec["ingress_gw_ar"] = ingress_gw_arMap
 	}
 	if data.KubernetesUpgradeDrain != nil {
 		kubernetes_upgrade_drainMap := make(map[string]interface{})
@@ -5308,7 +5356,7 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 			}
 			kubernetes_upgrade_drainMap["enable_upgrade_drain"] = enable_upgrade_drainNestedMap
 		}
-		apiResource.Spec["kubernetes_upgrade_drain"] = kubernetes_upgrade_drainMap
+		createReq.Spec["kubernetes_upgrade_drain"] = kubernetes_upgrade_drainMap
 	}
 	if data.LogReceiver != nil {
 		log_receiverMap := make(map[string]interface{})
@@ -5321,15 +5369,15 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 		if !data.LogReceiver.Tenant.IsNull() && !data.LogReceiver.Tenant.IsUnknown() {
 			log_receiverMap["tenant"] = data.LogReceiver.Tenant.ValueString()
 		}
-		apiResource.Spec["log_receiver"] = log_receiverMap
+		createReq.Spec["log_receiver"] = log_receiverMap
 	}
 	if data.LogsStreamingDisabled != nil {
 		logs_streaming_disabledMap := make(map[string]interface{})
-		apiResource.Spec["logs_streaming_disabled"] = logs_streaming_disabledMap
+		createReq.Spec["logs_streaming_disabled"] = logs_streaming_disabledMap
 	}
 	if data.NoWorkerNodes != nil {
 		no_worker_nodesMap := make(map[string]interface{})
-		apiResource.Spec["no_worker_nodes"] = no_worker_nodesMap
+		createReq.Spec["no_worker_nodes"] = no_worker_nodesMap
 	}
 	if data.OfflineSurvivabilityMode != nil {
 		offline_survivability_modeMap := make(map[string]interface{})
@@ -5339,7 +5387,7 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 		if data.OfflineSurvivabilityMode.NoOfflineSurvivabilityMode != nil {
 			offline_survivability_modeMap["no_offline_survivability_mode"] = map[string]interface{}{}
 		}
-		apiResource.Spec["offline_survivability_mode"] = offline_survivability_modeMap
+		createReq.Spec["offline_survivability_mode"] = offline_survivability_modeMap
 	}
 	if data.Os != nil {
 		osMap := make(map[string]interface{})
@@ -5349,7 +5397,7 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 		if !data.Os.OperatingSystemVersion.IsNull() && !data.Os.OperatingSystemVersion.IsUnknown() {
 			osMap["operating_system_version"] = data.Os.OperatingSystemVersion.ValueString()
 		}
-		apiResource.Spec["os"] = osMap
+		createReq.Spec["os"] = osMap
 	}
 	if data.Sw != nil {
 		swMap := make(map[string]interface{})
@@ -5359,11 +5407,11 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 		if !data.Sw.VolterraSoftwareVersion.IsNull() && !data.Sw.VolterraSoftwareVersion.IsUnknown() {
 			swMap["volterra_software_version"] = data.Sw.VolterraSoftwareVersion.ValueString()
 		}
-		apiResource.Spec["sw"] = swMap
+		createReq.Spec["sw"] = swMap
 	}
 	if data.Tags != nil {
 		tagsMap := make(map[string]interface{})
-		apiResource.Spec["tags"] = tagsMap
+		createReq.Spec["tags"] = tagsMap
 	}
 	if data.VNET != nil {
 		vnetMap := make(map[string]interface{})
@@ -5387,7 +5435,7 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 			}
 			vnetMap["new_vnet"] = new_vnetNestedMap
 		}
-		apiResource.Spec["vnet"] = vnetMap
+		createReq.Spec["vnet"] = vnetMap
 	}
 	if data.VoltstackCluster != nil {
 		voltstack_clusterMap := make(map[string]interface{})
@@ -5493,7 +5541,7 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 			storage_class_listNestedMap := make(map[string]interface{})
 			voltstack_clusterMap["storage_class_list"] = storage_class_listNestedMap
 		}
-		apiResource.Spec["voltstack_cluster"] = voltstack_clusterMap
+		createReq.Spec["voltstack_cluster"] = voltstack_clusterMap
 	}
 	if data.VoltstackClusterAr != nil {
 		voltstack_cluster_arMap := make(map[string]interface{})
@@ -5597,114 +5645,1693 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 			storage_class_listNestedMap := make(map[string]interface{})
 			voltstack_cluster_arMap["storage_class_list"] = storage_class_listNestedMap
 		}
-		apiResource.Spec["voltstack_cluster_ar"] = voltstack_cluster_arMap
+		createReq.Spec["voltstack_cluster_ar"] = voltstack_cluster_arMap
 	}
 	if !data.Address.IsNull() && !data.Address.IsUnknown() {
-		apiResource.Spec["address"] = data.Address.ValueString()
+		createReq.Spec["address"] = data.Address.ValueString()
 	}
 	if !data.AlternateRegion.IsNull() && !data.AlternateRegion.IsUnknown() {
-		apiResource.Spec["alternate_region"] = data.AlternateRegion.ValueString()
+		createReq.Spec["alternate_region"] = data.AlternateRegion.ValueString()
 	}
 	if !data.AzureRegion.IsNull() && !data.AzureRegion.IsUnknown() {
-		apiResource.Spec["azure_region"] = data.AzureRegion.ValueString()
+		createReq.Spec["azure_region"] = data.AzureRegion.ValueString()
 	}
 	if !data.DiskSize.IsNull() && !data.DiskSize.IsUnknown() {
-		apiResource.Spec["disk_size"] = data.DiskSize.ValueInt64()
+		createReq.Spec["disk_size"] = data.DiskSize.ValueInt64()
 	}
 	if !data.MachineType.IsNull() && !data.MachineType.IsUnknown() {
-		apiResource.Spec["machine_type"] = data.MachineType.ValueString()
+		createReq.Spec["machine_type"] = data.MachineType.ValueString()
 	}
 	if !data.NodesPerAz.IsNull() && !data.NodesPerAz.IsUnknown() {
-		apiResource.Spec["nodes_per_az"] = data.NodesPerAz.ValueInt64()
+		createReq.Spec["nodes_per_az"] = data.NodesPerAz.ValueInt64()
 	}
 	if !data.ResourceGroup.IsNull() && !data.ResourceGroup.IsUnknown() {
-		apiResource.Spec["resource_group"] = data.ResourceGroup.ValueString()
+		createReq.Spec["resource_group"] = data.ResourceGroup.ValueString()
 	}
 	if !data.SSHKey.IsNull() && !data.SSHKey.IsUnknown() {
-		apiResource.Spec["ssh_key"] = data.SSHKey.ValueString()
+		createReq.Spec["ssh_key"] = data.SSHKey.ValueString()
 	}
 	if !data.TotalNodes.IsNull() && !data.TotalNodes.IsUnknown() {
-		apiResource.Spec["total_nodes"] = data.TotalNodes.ValueInt64()
+		createReq.Spec["total_nodes"] = data.TotalNodes.ValueInt64()
 	}
 
 
-	created, err := r.client.CreateAzureVNETSite(ctx, apiResource)
+	apiResource, err := r.client.CreateAzureVNETSite(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create AzureVNETSite: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
-	if v, ok := created.Spec["address"].(string); ok && v != "" {
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if _, ok := apiResource.Spec["admin_password"].(map[string]interface{}); ok && isImport && data.AdminPassword == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AdminPassword = &AzureVNETSiteAdminPasswordModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["azure_cred"].(map[string]interface{}); ok && (isImport || data.AzureCred != nil) {
+		data.AzureCred = &AzureVNETSiteAzureCredModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["block_all_services"].(map[string]interface{}); ok && isImport && data.BlockAllServices == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.BlockAllServices = &AzureVNETSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["blocked_services"].(map[string]interface{}); ok && (isImport || data.BlockedServices != nil) {
+		data.BlockedServices = &AzureVNETSiteBlockedServicesModel{
+			BlockedSevice: func() []AzureVNETSiteBlockedServicesBlockedSeviceModel {
+				if listData, ok := blockData["blocked_sevice"].([]interface{}); ok && len(listData) > 0 {
+					var result []AzureVNETSiteBlockedServicesBlockedSeviceModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, AzureVNETSiteBlockedServicesBlockedSeviceModel{
+								DNS: func() *AzureVNETSiteEmptyModel {
+									if _, ok := itemMap["dns"].(map[string]interface{}); ok {
+										return &AzureVNETSiteEmptyModel{}
+									}
+									return nil
+								}(),
+								NetworkType: func() types.String {
+									if v, ok := itemMap["network_type"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								SSH: func() *AzureVNETSiteEmptyModel {
+									if _, ok := itemMap["ssh"].(map[string]interface{}); ok {
+										return &AzureVNETSiteEmptyModel{}
+									}
+									return nil
+								}(),
+								WebUserInterface: func() *AzureVNETSiteEmptyModel {
+									if _, ok := itemMap["web_user_interface"].(map[string]interface{}); ok {
+										return &AzureVNETSiteEmptyModel{}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["coordinates"].(map[string]interface{}); ok && (isImport || data.Coordinates != nil) {
+		data.Coordinates = &AzureVNETSiteCoordinatesModel{
+			Latitude: func() types.Int64 {
+				if v, ok := blockData["latitude"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			Longitude: func() types.Int64 {
+				if v, ok := blockData["longitude"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["custom_dns"].(map[string]interface{}); ok && (isImport || data.CustomDNS != nil) {
+		data.CustomDNS = &AzureVNETSiteCustomDNSModel{
+			InsideNameserver: func() types.String {
+				if v, ok := blockData["inside_nameserver"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			OutsideNameserver: func() types.String {
+				if v, ok := blockData["outside_nameserver"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["default_blocked_services"].(map[string]interface{}); ok && isImport && data.DefaultBlockedServices == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DefaultBlockedServices = &AzureVNETSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["ingress_egress_gw"].(map[string]interface{}); ok && (isImport || data.IngressEgressGw != nil) {
+		data.IngressEgressGw = &AzureVNETSiteIngressEgressGwModel{
+			AcceleratedNetworking: func() *AzureVNETSiteIngressEgressGwAcceleratedNetworkingModel {
+				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.AcceleratedNetworking != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressEgressGw.AcceleratedNetworking
+				}
+				// Import case: read from API
+				if _, ok := blockData["accelerated_networking"].(map[string]interface{}); ok {
+					return &AzureVNETSiteIngressEgressGwAcceleratedNetworkingModel{
+					}
+				}
+				return nil
+			}(),
+			ActiveEnhancedFirewallPolicies: func() *AzureVNETSiteIngressEgressGwActiveEnhancedFirewallPoliciesModel {
+				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.ActiveEnhancedFirewallPolicies != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressEgressGw.ActiveEnhancedFirewallPolicies
+				}
+				// Import case: read from API
+				if _, ok := blockData["active_enhanced_firewall_policies"].(map[string]interface{}); ok {
+					return &AzureVNETSiteIngressEgressGwActiveEnhancedFirewallPoliciesModel{
+					}
+				}
+				return nil
+			}(),
+			ActiveForwardProxyPolicies: func() *AzureVNETSiteIngressEgressGwActiveForwardProxyPoliciesModel {
+				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.ActiveForwardProxyPolicies != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressEgressGw.ActiveForwardProxyPolicies
+				}
+				// Import case: read from API
+				if _, ok := blockData["active_forward_proxy_policies"].(map[string]interface{}); ok {
+					return &AzureVNETSiteIngressEgressGwActiveForwardProxyPoliciesModel{
+					}
+				}
+				return nil
+			}(),
+			ActiveNetworkPolicies: func() *AzureVNETSiteIngressEgressGwActiveNetworkPoliciesModel {
+				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.ActiveNetworkPolicies != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressEgressGw.ActiveNetworkPolicies
+				}
+				// Import case: read from API
+				if _, ok := blockData["active_network_policies"].(map[string]interface{}); ok {
+					return &AzureVNETSiteIngressEgressGwActiveNetworkPoliciesModel{
+					}
+				}
+				return nil
+			}(),
+			AzNodes: func() []AzureVNETSiteIngressEgressGwAzNodesModel {
+				if listData, ok := blockData["az_nodes"].([]interface{}); ok && len(listData) > 0 {
+					var result []AzureVNETSiteIngressEgressGwAzNodesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, AzureVNETSiteIngressEgressGwAzNodesModel{
+								AzureAz: func() types.String {
+									if v, ok := itemMap["azure_az"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								InsideSubnet: func() *AzureVNETSiteIngressEgressGwAzNodesInsideSubnetModel {
+									if _, ok := itemMap["inside_subnet"].(map[string]interface{}); ok {
+										return &AzureVNETSiteIngressEgressGwAzNodesInsideSubnetModel{
+										}
+									}
+									return nil
+								}(),
+								OutsideSubnet: func() *AzureVNETSiteIngressEgressGwAzNodesOutsideSubnetModel {
+									if _, ok := itemMap["outside_subnet"].(map[string]interface{}); ok {
+										return &AzureVNETSiteIngressEgressGwAzNodesOutsideSubnetModel{
+										}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			AzureCertifiedHw: func() types.String {
+				if v, ok := blockData["azure_certified_hw"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			DcClusterGroupInsideVn: func() *AzureVNETSiteIngressEgressGwDcClusterGroupInsideVnModel {
+				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.DcClusterGroupInsideVn != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressEgressGw.DcClusterGroupInsideVn
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["dc_cluster_group_inside_vn"].(map[string]interface{}); ok {
+					return &AzureVNETSiteIngressEgressGwDcClusterGroupInsideVnModel{
+						Name: func() types.String {
+							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Namespace: func() types.String {
+							if v, ok := nestedBlockData["namespace"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Tenant: func() types.String {
+							if v, ok := nestedBlockData["tenant"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			DcClusterGroupOutsideVn: func() *AzureVNETSiteIngressEgressGwDcClusterGroupOutsideVnModel {
+				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.DcClusterGroupOutsideVn != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressEgressGw.DcClusterGroupOutsideVn
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["dc_cluster_group_outside_vn"].(map[string]interface{}); ok {
+					return &AzureVNETSiteIngressEgressGwDcClusterGroupOutsideVnModel{
+						Name: func() types.String {
+							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Namespace: func() types.String {
+							if v, ok := nestedBlockData["namespace"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Tenant: func() types.String {
+							if v, ok := nestedBlockData["tenant"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			ForwardProxyAllowAll: func() *AzureVNETSiteEmptyModel {
+				if !isImport && data.IngressEgressGw != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.IngressEgressGw.ForwardProxyAllowAll
+				}
+				// Import case: read from API
+				if _, ok := blockData["forward_proxy_allow_all"].(map[string]interface{}); ok {
+					return &AzureVNETSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			GlobalNetworkList: func() *AzureVNETSiteIngressEgressGwGlobalNetworkListModel {
+				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.GlobalNetworkList != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressEgressGw.GlobalNetworkList
+				}
+				// Import case: read from API
+				if _, ok := blockData["global_network_list"].(map[string]interface{}); ok {
+					return &AzureVNETSiteIngressEgressGwGlobalNetworkListModel{
+					}
+				}
+				return nil
+			}(),
+			Hub: func() *AzureVNETSiteIngressEgressGwHubModel {
+				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.Hub != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressEgressGw.Hub
+				}
+				// Import case: read from API
+				if _, ok := blockData["hub"].(map[string]interface{}); ok {
+					return &AzureVNETSiteIngressEgressGwHubModel{
+					}
+				}
+				return nil
+			}(),
+			InsideStaticRoutes: func() *AzureVNETSiteIngressEgressGwInsideStaticRoutesModel {
+				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.InsideStaticRoutes != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressEgressGw.InsideStaticRoutes
+				}
+				// Import case: read from API
+				if _, ok := blockData["inside_static_routes"].(map[string]interface{}); ok {
+					return &AzureVNETSiteIngressEgressGwInsideStaticRoutesModel{
+					}
+				}
+				return nil
+			}(),
+			NoDcClusterGroup: func() *AzureVNETSiteEmptyModel {
+				if !isImport && data.IngressEgressGw != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.IngressEgressGw.NoDcClusterGroup
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_dc_cluster_group"].(map[string]interface{}); ok {
+					return &AzureVNETSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			NoForwardProxy: func() *AzureVNETSiteEmptyModel {
+				if !isImport && data.IngressEgressGw != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.IngressEgressGw.NoForwardProxy
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_forward_proxy"].(map[string]interface{}); ok {
+					return &AzureVNETSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			NoGlobalNetwork: func() *AzureVNETSiteEmptyModel {
+				if !isImport && data.IngressEgressGw != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.IngressEgressGw.NoGlobalNetwork
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_global_network"].(map[string]interface{}); ok {
+					return &AzureVNETSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			NoInsideStaticRoutes: func() *AzureVNETSiteEmptyModel {
+				if !isImport && data.IngressEgressGw != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.IngressEgressGw.NoInsideStaticRoutes
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_inside_static_routes"].(map[string]interface{}); ok {
+					return &AzureVNETSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			NoNetworkPolicy: func() *AzureVNETSiteEmptyModel {
+				if !isImport && data.IngressEgressGw != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.IngressEgressGw.NoNetworkPolicy
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_network_policy"].(map[string]interface{}); ok {
+					return &AzureVNETSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			NoOutsideStaticRoutes: func() *AzureVNETSiteEmptyModel {
+				if !isImport && data.IngressEgressGw != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.IngressEgressGw.NoOutsideStaticRoutes
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_outside_static_routes"].(map[string]interface{}); ok {
+					return &AzureVNETSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			NotHub: func() *AzureVNETSiteEmptyModel {
+				if !isImport && data.IngressEgressGw != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.IngressEgressGw.NotHub
+				}
+				// Import case: read from API
+				if _, ok := blockData["not_hub"].(map[string]interface{}); ok {
+					return &AzureVNETSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			OutsideStaticRoutes: func() *AzureVNETSiteIngressEgressGwOutsideStaticRoutesModel {
+				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.OutsideStaticRoutes != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressEgressGw.OutsideStaticRoutes
+				}
+				// Import case: read from API
+				if _, ok := blockData["outside_static_routes"].(map[string]interface{}); ok {
+					return &AzureVNETSiteIngressEgressGwOutsideStaticRoutesModel{
+					}
+				}
+				return nil
+			}(),
+			PerformanceEnhancementMode: func() *AzureVNETSiteIngressEgressGwPerformanceEnhancementModeModel {
+				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.PerformanceEnhancementMode != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressEgressGw.PerformanceEnhancementMode
+				}
+				// Import case: read from API
+				if _, ok := blockData["performance_enhancement_mode"].(map[string]interface{}); ok {
+					return &AzureVNETSiteIngressEgressGwPerformanceEnhancementModeModel{
+					}
+				}
+				return nil
+			}(),
+			SmConnectionPublicIP: func() *AzureVNETSiteEmptyModel {
+				if !isImport && data.IngressEgressGw != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.IngressEgressGw.SmConnectionPublicIP
+				}
+				// Import case: read from API
+				if _, ok := blockData["sm_connection_public_ip"].(map[string]interface{}); ok {
+					return &AzureVNETSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			SmConnectionPvtIP: func() *AzureVNETSiteEmptyModel {
+				if !isImport && data.IngressEgressGw != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.IngressEgressGw.SmConnectionPvtIP
+				}
+				// Import case: read from API
+				if _, ok := blockData["sm_connection_pvt_ip"].(map[string]interface{}); ok {
+					return &AzureVNETSiteEmptyModel{}
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["ingress_egress_gw_ar"].(map[string]interface{}); ok && (isImport || data.IngressEgressGwAr != nil) {
+		data.IngressEgressGwAr = &AzureVNETSiteIngressEgressGwArModel{
+			AcceleratedNetworking: func() *AzureVNETSiteIngressEgressGwArAcceleratedNetworkingModel {
+				if !isImport && data.IngressEgressGwAr != nil && data.IngressEgressGwAr.AcceleratedNetworking != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressEgressGwAr.AcceleratedNetworking
+				}
+				// Import case: read from API
+				if _, ok := blockData["accelerated_networking"].(map[string]interface{}); ok {
+					return &AzureVNETSiteIngressEgressGwArAcceleratedNetworkingModel{
+					}
+				}
+				return nil
+			}(),
+			ActiveEnhancedFirewallPolicies: func() *AzureVNETSiteIngressEgressGwArActiveEnhancedFirewallPoliciesModel {
+				if !isImport && data.IngressEgressGwAr != nil && data.IngressEgressGwAr.ActiveEnhancedFirewallPolicies != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressEgressGwAr.ActiveEnhancedFirewallPolicies
+				}
+				// Import case: read from API
+				if _, ok := blockData["active_enhanced_firewall_policies"].(map[string]interface{}); ok {
+					return &AzureVNETSiteIngressEgressGwArActiveEnhancedFirewallPoliciesModel{
+					}
+				}
+				return nil
+			}(),
+			ActiveForwardProxyPolicies: func() *AzureVNETSiteIngressEgressGwArActiveForwardProxyPoliciesModel {
+				if !isImport && data.IngressEgressGwAr != nil && data.IngressEgressGwAr.ActiveForwardProxyPolicies != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressEgressGwAr.ActiveForwardProxyPolicies
+				}
+				// Import case: read from API
+				if _, ok := blockData["active_forward_proxy_policies"].(map[string]interface{}); ok {
+					return &AzureVNETSiteIngressEgressGwArActiveForwardProxyPoliciesModel{
+					}
+				}
+				return nil
+			}(),
+			ActiveNetworkPolicies: func() *AzureVNETSiteIngressEgressGwArActiveNetworkPoliciesModel {
+				if !isImport && data.IngressEgressGwAr != nil && data.IngressEgressGwAr.ActiveNetworkPolicies != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressEgressGwAr.ActiveNetworkPolicies
+				}
+				// Import case: read from API
+				if _, ok := blockData["active_network_policies"].(map[string]interface{}); ok {
+					return &AzureVNETSiteIngressEgressGwArActiveNetworkPoliciesModel{
+					}
+				}
+				return nil
+			}(),
+			AzureCertifiedHw: func() types.String {
+				if v, ok := blockData["azure_certified_hw"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			DcClusterGroupInsideVn: func() *AzureVNETSiteIngressEgressGwArDcClusterGroupInsideVnModel {
+				if !isImport && data.IngressEgressGwAr != nil && data.IngressEgressGwAr.DcClusterGroupInsideVn != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressEgressGwAr.DcClusterGroupInsideVn
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["dc_cluster_group_inside_vn"].(map[string]interface{}); ok {
+					return &AzureVNETSiteIngressEgressGwArDcClusterGroupInsideVnModel{
+						Name: func() types.String {
+							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Namespace: func() types.String {
+							if v, ok := nestedBlockData["namespace"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Tenant: func() types.String {
+							if v, ok := nestedBlockData["tenant"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			DcClusterGroupOutsideVn: func() *AzureVNETSiteIngressEgressGwArDcClusterGroupOutsideVnModel {
+				if !isImport && data.IngressEgressGwAr != nil && data.IngressEgressGwAr.DcClusterGroupOutsideVn != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressEgressGwAr.DcClusterGroupOutsideVn
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["dc_cluster_group_outside_vn"].(map[string]interface{}); ok {
+					return &AzureVNETSiteIngressEgressGwArDcClusterGroupOutsideVnModel{
+						Name: func() types.String {
+							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Namespace: func() types.String {
+							if v, ok := nestedBlockData["namespace"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Tenant: func() types.String {
+							if v, ok := nestedBlockData["tenant"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			ForwardProxyAllowAll: func() *AzureVNETSiteEmptyModel {
+				if !isImport && data.IngressEgressGwAr != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.IngressEgressGwAr.ForwardProxyAllowAll
+				}
+				// Import case: read from API
+				if _, ok := blockData["forward_proxy_allow_all"].(map[string]interface{}); ok {
+					return &AzureVNETSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			GlobalNetworkList: func() *AzureVNETSiteIngressEgressGwArGlobalNetworkListModel {
+				if !isImport && data.IngressEgressGwAr != nil && data.IngressEgressGwAr.GlobalNetworkList != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressEgressGwAr.GlobalNetworkList
+				}
+				// Import case: read from API
+				if _, ok := blockData["global_network_list"].(map[string]interface{}); ok {
+					return &AzureVNETSiteIngressEgressGwArGlobalNetworkListModel{
+					}
+				}
+				return nil
+			}(),
+			Hub: func() *AzureVNETSiteIngressEgressGwArHubModel {
+				if !isImport && data.IngressEgressGwAr != nil && data.IngressEgressGwAr.Hub != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressEgressGwAr.Hub
+				}
+				// Import case: read from API
+				if _, ok := blockData["hub"].(map[string]interface{}); ok {
+					return &AzureVNETSiteIngressEgressGwArHubModel{
+					}
+				}
+				return nil
+			}(),
+			InsideStaticRoutes: func() *AzureVNETSiteIngressEgressGwArInsideStaticRoutesModel {
+				if !isImport && data.IngressEgressGwAr != nil && data.IngressEgressGwAr.InsideStaticRoutes != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressEgressGwAr.InsideStaticRoutes
+				}
+				// Import case: read from API
+				if _, ok := blockData["inside_static_routes"].(map[string]interface{}); ok {
+					return &AzureVNETSiteIngressEgressGwArInsideStaticRoutesModel{
+					}
+				}
+				return nil
+			}(),
+			NoDcClusterGroup: func() *AzureVNETSiteEmptyModel {
+				if !isImport && data.IngressEgressGwAr != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.IngressEgressGwAr.NoDcClusterGroup
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_dc_cluster_group"].(map[string]interface{}); ok {
+					return &AzureVNETSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			NoForwardProxy: func() *AzureVNETSiteEmptyModel {
+				if !isImport && data.IngressEgressGwAr != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.IngressEgressGwAr.NoForwardProxy
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_forward_proxy"].(map[string]interface{}); ok {
+					return &AzureVNETSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			NoGlobalNetwork: func() *AzureVNETSiteEmptyModel {
+				if !isImport && data.IngressEgressGwAr != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.IngressEgressGwAr.NoGlobalNetwork
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_global_network"].(map[string]interface{}); ok {
+					return &AzureVNETSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			NoInsideStaticRoutes: func() *AzureVNETSiteEmptyModel {
+				if !isImport && data.IngressEgressGwAr != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.IngressEgressGwAr.NoInsideStaticRoutes
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_inside_static_routes"].(map[string]interface{}); ok {
+					return &AzureVNETSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			NoNetworkPolicy: func() *AzureVNETSiteEmptyModel {
+				if !isImport && data.IngressEgressGwAr != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.IngressEgressGwAr.NoNetworkPolicy
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_network_policy"].(map[string]interface{}); ok {
+					return &AzureVNETSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			NoOutsideStaticRoutes: func() *AzureVNETSiteEmptyModel {
+				if !isImport && data.IngressEgressGwAr != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.IngressEgressGwAr.NoOutsideStaticRoutes
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_outside_static_routes"].(map[string]interface{}); ok {
+					return &AzureVNETSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			Node: func() *AzureVNETSiteIngressEgressGwArNodeModel {
+				if !isImport && data.IngressEgressGwAr != nil && data.IngressEgressGwAr.Node != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressEgressGwAr.Node
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["node"].(map[string]interface{}); ok {
+					return &AzureVNETSiteIngressEgressGwArNodeModel{
+						FaultDomain: func() types.Int64 {
+							if v, ok := nestedBlockData["fault_domain"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						NodeNumber: func() types.Int64 {
+							if v, ok := nestedBlockData["node_number"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						UpdateDomain: func() types.Int64 {
+							if v, ok := nestedBlockData["update_domain"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			NotHub: func() *AzureVNETSiteEmptyModel {
+				if !isImport && data.IngressEgressGwAr != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.IngressEgressGwAr.NotHub
+				}
+				// Import case: read from API
+				if _, ok := blockData["not_hub"].(map[string]interface{}); ok {
+					return &AzureVNETSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			OutsideStaticRoutes: func() *AzureVNETSiteIngressEgressGwArOutsideStaticRoutesModel {
+				if !isImport && data.IngressEgressGwAr != nil && data.IngressEgressGwAr.OutsideStaticRoutes != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressEgressGwAr.OutsideStaticRoutes
+				}
+				// Import case: read from API
+				if _, ok := blockData["outside_static_routes"].(map[string]interface{}); ok {
+					return &AzureVNETSiteIngressEgressGwArOutsideStaticRoutesModel{
+					}
+				}
+				return nil
+			}(),
+			PerformanceEnhancementMode: func() *AzureVNETSiteIngressEgressGwArPerformanceEnhancementModeModel {
+				if !isImport && data.IngressEgressGwAr != nil && data.IngressEgressGwAr.PerformanceEnhancementMode != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressEgressGwAr.PerformanceEnhancementMode
+				}
+				// Import case: read from API
+				if _, ok := blockData["performance_enhancement_mode"].(map[string]interface{}); ok {
+					return &AzureVNETSiteIngressEgressGwArPerformanceEnhancementModeModel{
+					}
+				}
+				return nil
+			}(),
+			SmConnectionPublicIP: func() *AzureVNETSiteEmptyModel {
+				if !isImport && data.IngressEgressGwAr != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.IngressEgressGwAr.SmConnectionPublicIP
+				}
+				// Import case: read from API
+				if _, ok := blockData["sm_connection_public_ip"].(map[string]interface{}); ok {
+					return &AzureVNETSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			SmConnectionPvtIP: func() *AzureVNETSiteEmptyModel {
+				if !isImport && data.IngressEgressGwAr != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.IngressEgressGwAr.SmConnectionPvtIP
+				}
+				// Import case: read from API
+				if _, ok := blockData["sm_connection_pvt_ip"].(map[string]interface{}); ok {
+					return &AzureVNETSiteEmptyModel{}
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["ingress_gw"].(map[string]interface{}); ok && (isImport || data.IngressGw != nil) {
+		data.IngressGw = &AzureVNETSiteIngressGwModel{
+			AcceleratedNetworking: func() *AzureVNETSiteIngressGwAcceleratedNetworkingModel {
+				if !isImport && data.IngressGw != nil && data.IngressGw.AcceleratedNetworking != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressGw.AcceleratedNetworking
+				}
+				// Import case: read from API
+				if _, ok := blockData["accelerated_networking"].(map[string]interface{}); ok {
+					return &AzureVNETSiteIngressGwAcceleratedNetworkingModel{
+					}
+				}
+				return nil
+			}(),
+			AzNodes: func() []AzureVNETSiteIngressGwAzNodesModel {
+				if listData, ok := blockData["az_nodes"].([]interface{}); ok && len(listData) > 0 {
+					var result []AzureVNETSiteIngressGwAzNodesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, AzureVNETSiteIngressGwAzNodesModel{
+								AzureAz: func() types.String {
+									if v, ok := itemMap["azure_az"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								LocalSubnet: func() *AzureVNETSiteIngressGwAzNodesLocalSubnetModel {
+									if _, ok := itemMap["local_subnet"].(map[string]interface{}); ok {
+										return &AzureVNETSiteIngressGwAzNodesLocalSubnetModel{
+										}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			AzureCertifiedHw: func() types.String {
+				if v, ok := blockData["azure_certified_hw"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			PerformanceEnhancementMode: func() *AzureVNETSiteIngressGwPerformanceEnhancementModeModel {
+				if !isImport && data.IngressGw != nil && data.IngressGw.PerformanceEnhancementMode != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressGw.PerformanceEnhancementMode
+				}
+				// Import case: read from API
+				if _, ok := blockData["performance_enhancement_mode"].(map[string]interface{}); ok {
+					return &AzureVNETSiteIngressGwPerformanceEnhancementModeModel{
+					}
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["ingress_gw_ar"].(map[string]interface{}); ok && (isImport || data.IngressGwAr != nil) {
+		data.IngressGwAr = &AzureVNETSiteIngressGwArModel{
+			AcceleratedNetworking: func() *AzureVNETSiteIngressGwArAcceleratedNetworkingModel {
+				if !isImport && data.IngressGwAr != nil && data.IngressGwAr.AcceleratedNetworking != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressGwAr.AcceleratedNetworking
+				}
+				// Import case: read from API
+				if _, ok := blockData["accelerated_networking"].(map[string]interface{}); ok {
+					return &AzureVNETSiteIngressGwArAcceleratedNetworkingModel{
+					}
+				}
+				return nil
+			}(),
+			AzureCertifiedHw: func() types.String {
+				if v, ok := blockData["azure_certified_hw"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Node: func() *AzureVNETSiteIngressGwArNodeModel {
+				if !isImport && data.IngressGwAr != nil && data.IngressGwAr.Node != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressGwAr.Node
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["node"].(map[string]interface{}); ok {
+					return &AzureVNETSiteIngressGwArNodeModel{
+						FaultDomain: func() types.Int64 {
+							if v, ok := nestedBlockData["fault_domain"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						NodeNumber: func() types.Int64 {
+							if v, ok := nestedBlockData["node_number"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						UpdateDomain: func() types.Int64 {
+							if v, ok := nestedBlockData["update_domain"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			PerformanceEnhancementMode: func() *AzureVNETSiteIngressGwArPerformanceEnhancementModeModel {
+				if !isImport && data.IngressGwAr != nil && data.IngressGwAr.PerformanceEnhancementMode != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressGwAr.PerformanceEnhancementMode
+				}
+				// Import case: read from API
+				if _, ok := blockData["performance_enhancement_mode"].(map[string]interface{}); ok {
+					return &AzureVNETSiteIngressGwArPerformanceEnhancementModeModel{
+					}
+				}
+				return nil
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["kubernetes_upgrade_drain"].(map[string]interface{}); ok && isImport && data.KubernetesUpgradeDrain == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.KubernetesUpgradeDrain = &AzureVNETSiteKubernetesUpgradeDrainModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["log_receiver"].(map[string]interface{}); ok && (isImport || data.LogReceiver != nil) {
+		data.LogReceiver = &AzureVNETSiteLogReceiverModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["logs_streaming_disabled"].(map[string]interface{}); ok && isImport && data.LogsStreamingDisabled == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.LogsStreamingDisabled = &AzureVNETSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_worker_nodes"].(map[string]interface{}); ok && isImport && data.NoWorkerNodes == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoWorkerNodes = &AzureVNETSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["offline_survivability_mode"].(map[string]interface{}); ok && isImport && data.OfflineSurvivabilityMode == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.OfflineSurvivabilityMode = &AzureVNETSiteOfflineSurvivabilityModeModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["os"].(map[string]interface{}); ok && (isImport || data.Os != nil) {
+		data.Os = &AzureVNETSiteOsModel{
+			DefaultOsVersion: func() *AzureVNETSiteEmptyModel {
+				if !isImport && data.Os != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.Os.DefaultOsVersion
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_os_version"].(map[string]interface{}); ok {
+					return &AzureVNETSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			OperatingSystemVersion: func() types.String {
+				if v, ok := blockData["operating_system_version"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["sw"].(map[string]interface{}); ok && (isImport || data.Sw != nil) {
+		data.Sw = &AzureVNETSiteSwModel{
+			DefaultSwVersion: func() *AzureVNETSiteEmptyModel {
+				if !isImport && data.Sw != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.Sw.DefaultSwVersion
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_sw_version"].(map[string]interface{}); ok {
+					return &AzureVNETSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			VolterraSoftwareVersion: func() types.String {
+				if v, ok := blockData["volterra_software_version"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["tags"].(map[string]interface{}); ok && isImport && data.Tags == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Tags = &AzureVNETSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["vnet"].(map[string]interface{}); ok && isImport && data.VNET == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.VNET = &AzureVNETSiteVNETModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["voltstack_cluster"].(map[string]interface{}); ok && (isImport || data.VoltstackCluster != nil) {
+		data.VoltstackCluster = &AzureVNETSiteVoltstackClusterModel{
+			AcceleratedNetworking: func() *AzureVNETSiteVoltstackClusterAcceleratedNetworkingModel {
+				if !isImport && data.VoltstackCluster != nil && data.VoltstackCluster.AcceleratedNetworking != nil {
+					// Normal Read: preserve existing state value
+					return data.VoltstackCluster.AcceleratedNetworking
+				}
+				// Import case: read from API
+				if _, ok := blockData["accelerated_networking"].(map[string]interface{}); ok {
+					return &AzureVNETSiteVoltstackClusterAcceleratedNetworkingModel{
+					}
+				}
+				return nil
+			}(),
+			ActiveEnhancedFirewallPolicies: func() *AzureVNETSiteVoltstackClusterActiveEnhancedFirewallPoliciesModel {
+				if !isImport && data.VoltstackCluster != nil && data.VoltstackCluster.ActiveEnhancedFirewallPolicies != nil {
+					// Normal Read: preserve existing state value
+					return data.VoltstackCluster.ActiveEnhancedFirewallPolicies
+				}
+				// Import case: read from API
+				if _, ok := blockData["active_enhanced_firewall_policies"].(map[string]interface{}); ok {
+					return &AzureVNETSiteVoltstackClusterActiveEnhancedFirewallPoliciesModel{
+					}
+				}
+				return nil
+			}(),
+			ActiveForwardProxyPolicies: func() *AzureVNETSiteVoltstackClusterActiveForwardProxyPoliciesModel {
+				if !isImport && data.VoltstackCluster != nil && data.VoltstackCluster.ActiveForwardProxyPolicies != nil {
+					// Normal Read: preserve existing state value
+					return data.VoltstackCluster.ActiveForwardProxyPolicies
+				}
+				// Import case: read from API
+				if _, ok := blockData["active_forward_proxy_policies"].(map[string]interface{}); ok {
+					return &AzureVNETSiteVoltstackClusterActiveForwardProxyPoliciesModel{
+					}
+				}
+				return nil
+			}(),
+			ActiveNetworkPolicies: func() *AzureVNETSiteVoltstackClusterActiveNetworkPoliciesModel {
+				if !isImport && data.VoltstackCluster != nil && data.VoltstackCluster.ActiveNetworkPolicies != nil {
+					// Normal Read: preserve existing state value
+					return data.VoltstackCluster.ActiveNetworkPolicies
+				}
+				// Import case: read from API
+				if _, ok := blockData["active_network_policies"].(map[string]interface{}); ok {
+					return &AzureVNETSiteVoltstackClusterActiveNetworkPoliciesModel{
+					}
+				}
+				return nil
+			}(),
+			AzNodes: func() []AzureVNETSiteVoltstackClusterAzNodesModel {
+				if listData, ok := blockData["az_nodes"].([]interface{}); ok && len(listData) > 0 {
+					var result []AzureVNETSiteVoltstackClusterAzNodesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, AzureVNETSiteVoltstackClusterAzNodesModel{
+								AzureAz: func() types.String {
+									if v, ok := itemMap["azure_az"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								LocalSubnet: func() *AzureVNETSiteVoltstackClusterAzNodesLocalSubnetModel {
+									if _, ok := itemMap["local_subnet"].(map[string]interface{}); ok {
+										return &AzureVNETSiteVoltstackClusterAzNodesLocalSubnetModel{
+										}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			AzureCertifiedHw: func() types.String {
+				if v, ok := blockData["azure_certified_hw"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			DcClusterGroup: func() *AzureVNETSiteVoltstackClusterDcClusterGroupModel {
+				if !isImport && data.VoltstackCluster != nil && data.VoltstackCluster.DcClusterGroup != nil {
+					// Normal Read: preserve existing state value
+					return data.VoltstackCluster.DcClusterGroup
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["dc_cluster_group"].(map[string]interface{}); ok {
+					return &AzureVNETSiteVoltstackClusterDcClusterGroupModel{
+						Name: func() types.String {
+							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Namespace: func() types.String {
+							if v, ok := nestedBlockData["namespace"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Tenant: func() types.String {
+							if v, ok := nestedBlockData["tenant"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			DefaultStorage: func() *AzureVNETSiteEmptyModel {
+				if !isImport && data.VoltstackCluster != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.VoltstackCluster.DefaultStorage
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_storage"].(map[string]interface{}); ok {
+					return &AzureVNETSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			ForwardProxyAllowAll: func() *AzureVNETSiteEmptyModel {
+				if !isImport && data.VoltstackCluster != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.VoltstackCluster.ForwardProxyAllowAll
+				}
+				// Import case: read from API
+				if _, ok := blockData["forward_proxy_allow_all"].(map[string]interface{}); ok {
+					return &AzureVNETSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			GlobalNetworkList: func() *AzureVNETSiteVoltstackClusterGlobalNetworkListModel {
+				if !isImport && data.VoltstackCluster != nil && data.VoltstackCluster.GlobalNetworkList != nil {
+					// Normal Read: preserve existing state value
+					return data.VoltstackCluster.GlobalNetworkList
+				}
+				// Import case: read from API
+				if _, ok := blockData["global_network_list"].(map[string]interface{}); ok {
+					return &AzureVNETSiteVoltstackClusterGlobalNetworkListModel{
+					}
+				}
+				return nil
+			}(),
+			K8SCluster: func() *AzureVNETSiteVoltstackClusterK8SClusterModel {
+				if !isImport && data.VoltstackCluster != nil && data.VoltstackCluster.K8SCluster != nil {
+					// Normal Read: preserve existing state value
+					return data.VoltstackCluster.K8SCluster
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["k8s_cluster"].(map[string]interface{}); ok {
+					return &AzureVNETSiteVoltstackClusterK8SClusterModel{
+						Name: func() types.String {
+							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Namespace: func() types.String {
+							if v, ok := nestedBlockData["namespace"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Tenant: func() types.String {
+							if v, ok := nestedBlockData["tenant"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			NoDcClusterGroup: func() *AzureVNETSiteEmptyModel {
+				if !isImport && data.VoltstackCluster != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.VoltstackCluster.NoDcClusterGroup
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_dc_cluster_group"].(map[string]interface{}); ok {
+					return &AzureVNETSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			NoForwardProxy: func() *AzureVNETSiteEmptyModel {
+				if !isImport && data.VoltstackCluster != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.VoltstackCluster.NoForwardProxy
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_forward_proxy"].(map[string]interface{}); ok {
+					return &AzureVNETSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			NoGlobalNetwork: func() *AzureVNETSiteEmptyModel {
+				if !isImport && data.VoltstackCluster != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.VoltstackCluster.NoGlobalNetwork
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_global_network"].(map[string]interface{}); ok {
+					return &AzureVNETSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			NoK8SCluster: func() *AzureVNETSiteEmptyModel {
+				if !isImport && data.VoltstackCluster != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.VoltstackCluster.NoK8SCluster
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_k8s_cluster"].(map[string]interface{}); ok {
+					return &AzureVNETSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			NoNetworkPolicy: func() *AzureVNETSiteEmptyModel {
+				if !isImport && data.VoltstackCluster != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.VoltstackCluster.NoNetworkPolicy
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_network_policy"].(map[string]interface{}); ok {
+					return &AzureVNETSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			NoOutsideStaticRoutes: func() *AzureVNETSiteEmptyModel {
+				if !isImport && data.VoltstackCluster != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.VoltstackCluster.NoOutsideStaticRoutes
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_outside_static_routes"].(map[string]interface{}); ok {
+					return &AzureVNETSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			OutsideStaticRoutes: func() *AzureVNETSiteVoltstackClusterOutsideStaticRoutesModel {
+				if !isImport && data.VoltstackCluster != nil && data.VoltstackCluster.OutsideStaticRoutes != nil {
+					// Normal Read: preserve existing state value
+					return data.VoltstackCluster.OutsideStaticRoutes
+				}
+				// Import case: read from API
+				if _, ok := blockData["outside_static_routes"].(map[string]interface{}); ok {
+					return &AzureVNETSiteVoltstackClusterOutsideStaticRoutesModel{
+					}
+				}
+				return nil
+			}(),
+			SmConnectionPublicIP: func() *AzureVNETSiteEmptyModel {
+				if !isImport && data.VoltstackCluster != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.VoltstackCluster.SmConnectionPublicIP
+				}
+				// Import case: read from API
+				if _, ok := blockData["sm_connection_public_ip"].(map[string]interface{}); ok {
+					return &AzureVNETSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			SmConnectionPvtIP: func() *AzureVNETSiteEmptyModel {
+				if !isImport && data.VoltstackCluster != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.VoltstackCluster.SmConnectionPvtIP
+				}
+				// Import case: read from API
+				if _, ok := blockData["sm_connection_pvt_ip"].(map[string]interface{}); ok {
+					return &AzureVNETSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			StorageClassList: func() *AzureVNETSiteVoltstackClusterStorageClassListModel {
+				if !isImport && data.VoltstackCluster != nil && data.VoltstackCluster.StorageClassList != nil {
+					// Normal Read: preserve existing state value
+					return data.VoltstackCluster.StorageClassList
+				}
+				// Import case: read from API
+				if _, ok := blockData["storage_class_list"].(map[string]interface{}); ok {
+					return &AzureVNETSiteVoltstackClusterStorageClassListModel{
+					}
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["voltstack_cluster_ar"].(map[string]interface{}); ok && (isImport || data.VoltstackClusterAr != nil) {
+		data.VoltstackClusterAr = &AzureVNETSiteVoltstackClusterArModel{
+			AcceleratedNetworking: func() *AzureVNETSiteVoltstackClusterArAcceleratedNetworkingModel {
+				if !isImport && data.VoltstackClusterAr != nil && data.VoltstackClusterAr.AcceleratedNetworking != nil {
+					// Normal Read: preserve existing state value
+					return data.VoltstackClusterAr.AcceleratedNetworking
+				}
+				// Import case: read from API
+				if _, ok := blockData["accelerated_networking"].(map[string]interface{}); ok {
+					return &AzureVNETSiteVoltstackClusterArAcceleratedNetworkingModel{
+					}
+				}
+				return nil
+			}(),
+			ActiveEnhancedFirewallPolicies: func() *AzureVNETSiteVoltstackClusterArActiveEnhancedFirewallPoliciesModel {
+				if !isImport && data.VoltstackClusterAr != nil && data.VoltstackClusterAr.ActiveEnhancedFirewallPolicies != nil {
+					// Normal Read: preserve existing state value
+					return data.VoltstackClusterAr.ActiveEnhancedFirewallPolicies
+				}
+				// Import case: read from API
+				if _, ok := blockData["active_enhanced_firewall_policies"].(map[string]interface{}); ok {
+					return &AzureVNETSiteVoltstackClusterArActiveEnhancedFirewallPoliciesModel{
+					}
+				}
+				return nil
+			}(),
+			ActiveForwardProxyPolicies: func() *AzureVNETSiteVoltstackClusterArActiveForwardProxyPoliciesModel {
+				if !isImport && data.VoltstackClusterAr != nil && data.VoltstackClusterAr.ActiveForwardProxyPolicies != nil {
+					// Normal Read: preserve existing state value
+					return data.VoltstackClusterAr.ActiveForwardProxyPolicies
+				}
+				// Import case: read from API
+				if _, ok := blockData["active_forward_proxy_policies"].(map[string]interface{}); ok {
+					return &AzureVNETSiteVoltstackClusterArActiveForwardProxyPoliciesModel{
+					}
+				}
+				return nil
+			}(),
+			ActiveNetworkPolicies: func() *AzureVNETSiteVoltstackClusterArActiveNetworkPoliciesModel {
+				if !isImport && data.VoltstackClusterAr != nil && data.VoltstackClusterAr.ActiveNetworkPolicies != nil {
+					// Normal Read: preserve existing state value
+					return data.VoltstackClusterAr.ActiveNetworkPolicies
+				}
+				// Import case: read from API
+				if _, ok := blockData["active_network_policies"].(map[string]interface{}); ok {
+					return &AzureVNETSiteVoltstackClusterArActiveNetworkPoliciesModel{
+					}
+				}
+				return nil
+			}(),
+			AzureCertifiedHw: func() types.String {
+				if v, ok := blockData["azure_certified_hw"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			DcClusterGroup: func() *AzureVNETSiteVoltstackClusterArDcClusterGroupModel {
+				if !isImport && data.VoltstackClusterAr != nil && data.VoltstackClusterAr.DcClusterGroup != nil {
+					// Normal Read: preserve existing state value
+					return data.VoltstackClusterAr.DcClusterGroup
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["dc_cluster_group"].(map[string]interface{}); ok {
+					return &AzureVNETSiteVoltstackClusterArDcClusterGroupModel{
+						Name: func() types.String {
+							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Namespace: func() types.String {
+							if v, ok := nestedBlockData["namespace"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Tenant: func() types.String {
+							if v, ok := nestedBlockData["tenant"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			DefaultStorage: func() *AzureVNETSiteEmptyModel {
+				if !isImport && data.VoltstackClusterAr != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.VoltstackClusterAr.DefaultStorage
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_storage"].(map[string]interface{}); ok {
+					return &AzureVNETSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			ForwardProxyAllowAll: func() *AzureVNETSiteEmptyModel {
+				if !isImport && data.VoltstackClusterAr != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.VoltstackClusterAr.ForwardProxyAllowAll
+				}
+				// Import case: read from API
+				if _, ok := blockData["forward_proxy_allow_all"].(map[string]interface{}); ok {
+					return &AzureVNETSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			GlobalNetworkList: func() *AzureVNETSiteVoltstackClusterArGlobalNetworkListModel {
+				if !isImport && data.VoltstackClusterAr != nil && data.VoltstackClusterAr.GlobalNetworkList != nil {
+					// Normal Read: preserve existing state value
+					return data.VoltstackClusterAr.GlobalNetworkList
+				}
+				// Import case: read from API
+				if _, ok := blockData["global_network_list"].(map[string]interface{}); ok {
+					return &AzureVNETSiteVoltstackClusterArGlobalNetworkListModel{
+					}
+				}
+				return nil
+			}(),
+			K8SCluster: func() *AzureVNETSiteVoltstackClusterArK8SClusterModel {
+				if !isImport && data.VoltstackClusterAr != nil && data.VoltstackClusterAr.K8SCluster != nil {
+					// Normal Read: preserve existing state value
+					return data.VoltstackClusterAr.K8SCluster
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["k8s_cluster"].(map[string]interface{}); ok {
+					return &AzureVNETSiteVoltstackClusterArK8SClusterModel{
+						Name: func() types.String {
+							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Namespace: func() types.String {
+							if v, ok := nestedBlockData["namespace"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Tenant: func() types.String {
+							if v, ok := nestedBlockData["tenant"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			NoDcClusterGroup: func() *AzureVNETSiteEmptyModel {
+				if !isImport && data.VoltstackClusterAr != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.VoltstackClusterAr.NoDcClusterGroup
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_dc_cluster_group"].(map[string]interface{}); ok {
+					return &AzureVNETSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			NoForwardProxy: func() *AzureVNETSiteEmptyModel {
+				if !isImport && data.VoltstackClusterAr != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.VoltstackClusterAr.NoForwardProxy
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_forward_proxy"].(map[string]interface{}); ok {
+					return &AzureVNETSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			NoGlobalNetwork: func() *AzureVNETSiteEmptyModel {
+				if !isImport && data.VoltstackClusterAr != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.VoltstackClusterAr.NoGlobalNetwork
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_global_network"].(map[string]interface{}); ok {
+					return &AzureVNETSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			NoK8SCluster: func() *AzureVNETSiteEmptyModel {
+				if !isImport && data.VoltstackClusterAr != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.VoltstackClusterAr.NoK8SCluster
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_k8s_cluster"].(map[string]interface{}); ok {
+					return &AzureVNETSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			NoNetworkPolicy: func() *AzureVNETSiteEmptyModel {
+				if !isImport && data.VoltstackClusterAr != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.VoltstackClusterAr.NoNetworkPolicy
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_network_policy"].(map[string]interface{}); ok {
+					return &AzureVNETSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			NoOutsideStaticRoutes: func() *AzureVNETSiteEmptyModel {
+				if !isImport && data.VoltstackClusterAr != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.VoltstackClusterAr.NoOutsideStaticRoutes
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_outside_static_routes"].(map[string]interface{}); ok {
+					return &AzureVNETSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			Node: func() *AzureVNETSiteVoltstackClusterArNodeModel {
+				if !isImport && data.VoltstackClusterAr != nil && data.VoltstackClusterAr.Node != nil {
+					// Normal Read: preserve existing state value
+					return data.VoltstackClusterAr.Node
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["node"].(map[string]interface{}); ok {
+					return &AzureVNETSiteVoltstackClusterArNodeModel{
+						FaultDomain: func() types.Int64 {
+							if v, ok := nestedBlockData["fault_domain"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						NodeNumber: func() types.Int64 {
+							if v, ok := nestedBlockData["node_number"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						UpdateDomain: func() types.Int64 {
+							if v, ok := nestedBlockData["update_domain"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			OutsideStaticRoutes: func() *AzureVNETSiteVoltstackClusterArOutsideStaticRoutesModel {
+				if !isImport && data.VoltstackClusterAr != nil && data.VoltstackClusterAr.OutsideStaticRoutes != nil {
+					// Normal Read: preserve existing state value
+					return data.VoltstackClusterAr.OutsideStaticRoutes
+				}
+				// Import case: read from API
+				if _, ok := blockData["outside_static_routes"].(map[string]interface{}); ok {
+					return &AzureVNETSiteVoltstackClusterArOutsideStaticRoutesModel{
+					}
+				}
+				return nil
+			}(),
+			SmConnectionPublicIP: func() *AzureVNETSiteEmptyModel {
+				if !isImport && data.VoltstackClusterAr != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.VoltstackClusterAr.SmConnectionPublicIP
+				}
+				// Import case: read from API
+				if _, ok := blockData["sm_connection_public_ip"].(map[string]interface{}); ok {
+					return &AzureVNETSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			SmConnectionPvtIP: func() *AzureVNETSiteEmptyModel {
+				if !isImport && data.VoltstackClusterAr != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.VoltstackClusterAr.SmConnectionPvtIP
+				}
+				// Import case: read from API
+				if _, ok := blockData["sm_connection_pvt_ip"].(map[string]interface{}); ok {
+					return &AzureVNETSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			StorageClassList: func() *AzureVNETSiteVoltstackClusterArStorageClassListModel {
+				if !isImport && data.VoltstackClusterAr != nil && data.VoltstackClusterAr.StorageClassList != nil {
+					// Normal Read: preserve existing state value
+					return data.VoltstackClusterAr.StorageClassList
+				}
+				// Import case: read from API
+				if _, ok := blockData["storage_class_list"].(map[string]interface{}); ok {
+					return &AzureVNETSiteVoltstackClusterArStorageClassListModel{
+					}
+				}
+				return nil
+			}(),
+		}
+	}
+	if v, ok := apiResource.Spec["address"].(string); ok && v != "" {
 		data.Address = types.StringValue(v)
-	} else if data.Address.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.Address = types.StringNull()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["alternate_region"].(string); ok && v != "" {
+	if v, ok := apiResource.Spec["alternate_region"].(string); ok && v != "" {
 		data.AlternateRegion = types.StringValue(v)
-	} else if data.AlternateRegion.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.AlternateRegion = types.StringNull()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["azure_region"].(string); ok && v != "" {
+	if v, ok := apiResource.Spec["azure_region"].(string); ok && v != "" {
 		data.AzureRegion = types.StringValue(v)
-	} else if data.AzureRegion.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.AzureRegion = types.StringNull()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["disk_size"].(float64); ok {
+	if v, ok := apiResource.Spec["disk_size"].(float64); ok {
 		data.DiskSize = types.Int64Value(int64(v))
-	} else if data.DiskSize.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.DiskSize = types.Int64Null()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["machine_type"].(string); ok && v != "" {
+	if v, ok := apiResource.Spec["machine_type"].(string); ok && v != "" {
 		data.MachineType = types.StringValue(v)
-	} else if data.MachineType.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.MachineType = types.StringNull()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["nodes_per_az"].(float64); ok {
+	if v, ok := apiResource.Spec["nodes_per_az"].(float64); ok {
 		data.NodesPerAz = types.Int64Value(int64(v))
-	} else if data.NodesPerAz.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.NodesPerAz = types.Int64Null()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["resource_group"].(string); ok && v != "" {
+	if v, ok := apiResource.Spec["resource_group"].(string); ok && v != "" {
 		data.ResourceGroup = types.StringValue(v)
-	} else if data.ResourceGroup.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.ResourceGroup = types.StringNull()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["ssh_key"].(string); ok && v != "" {
+	if v, ok := apiResource.Spec["ssh_key"].(string); ok && v != "" {
 		data.SSHKey = types.StringValue(v)
-	} else if data.SSHKey.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.SSHKey = types.StringNull()
 	}
-	// If plan had a value, preserve it
-	if v, ok := created.Spec["total_nodes"].(float64); ok {
+	if v, ok := apiResource.Spec["total_nodes"].(float64); ok {
 		data.TotalNodes = types.Int64Value(int64(v))
-	} else if data.TotalNodes.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
+	} else {
 		data.TotalNodes = types.Int64Null()
 	}
-	// If plan had a value, preserve it
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 

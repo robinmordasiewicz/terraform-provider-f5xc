@@ -282,7 +282,7 @@ func (r *UsbPolicyResource) Create(ctx context.Context, req resource.CreateReque
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	apiResource := &client.UsbPolicy{
+	createReq := &client.UsbPolicy{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -291,7 +291,7 @@ func (r *UsbPolicyResource) Create(ctx context.Context, req resource.CreateReque
 	}
 
 	if !data.Description.IsNull() {
-		apiResource.Metadata.Description = data.Description.ValueString()
+		createReq.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -300,7 +300,7 @@ func (r *UsbPolicyResource) Create(ctx context.Context, req resource.CreateReque
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Labels = labels
+		createReq.Metadata.Labels = labels
 	}
 
 	if !data.Annotations.IsNull() {
@@ -309,7 +309,7 @@ func (r *UsbPolicyResource) Create(ctx context.Context, req resource.CreateReque
 		if resp.Diagnostics.HasError() {
 			return
 		}
-		apiResource.Metadata.Annotations = annotations
+		createReq.Metadata.Annotations = annotations
 	}
 
 	// Marshal spec fields from Terraform state to API struct
@@ -337,24 +337,75 @@ func (r *UsbPolicyResource) Create(ctx context.Context, req resource.CreateReque
 			}
 			allowed_devicesList = append(allowed_devicesList, itemMap)
 		}
-		apiResource.Spec["allowed_devices"] = allowed_devicesList
+		createReq.Spec["allowed_devices"] = allowed_devicesList
 	}
 
 
-	created, err := r.client.CreateUsbPolicy(ctx, apiResource)
+	apiResource, err := r.client.CreateUsbPolicy(ctx, createReq)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create UsbPolicy: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(created.Metadata.Name)
+	data.ID = types.StringValue(apiResource.Metadata.Name)
 
-	// Set computed fields from API response
+	// Unmarshal spec fields from API response to Terraform state
+	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
+	isImport := false // Create is never an import
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	if listData, ok := apiResource.Spec["allowed_devices"].([]interface{}); ok && len(listData) > 0 {
+		var allowed_devicesList []UsbPolicyAllowedDevicesModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				allowed_devicesList = append(allowed_devicesList, UsbPolicyAllowedDevicesModel{
+					BDeviceClass: func() types.String {
+						if v, ok := itemMap["b_device_class"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					BDeviceProtocol: func() types.String {
+						if v, ok := itemMap["b_device_protocol"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					BDeviceSubClass: func() types.String {
+						if v, ok := itemMap["b_device_sub_class"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					ISerial: func() types.String {
+						if v, ok := itemMap["i_serial"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					IDProduct: func() types.String {
+						if v, ok := itemMap["id_product"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					IDVendor: func() types.String {
+						if v, ok := itemMap["id_vendor"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.AllowedDevices = allowed_devicesList
+	}
+
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
 	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": created.Metadata.Name,
+		"name": apiResource.Metadata.Name,
 	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
@@ -445,7 +496,8 @@ func (r *UsbPolicyResource) Read(ctx context.Context, req resource.ReadRequest, 
 	})
 	if listData, ok := apiResource.Spec["allowed_devices"].([]interface{}); ok && len(listData) > 0 {
 		var allowed_devicesList []UsbPolicyAllowedDevicesModel
-		for _, item := range listData {
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				allowed_devicesList = append(allowed_devicesList, UsbPolicyAllowedDevicesModel{
 					BDeviceClass: func() types.String {

@@ -1849,6 +1849,13 @@ func (r *ServicePolicyResource) Create(ctx context.Context, req resource.CreateR
 			}
 			allow_listMap["asn_set"] = asn_setList
 		}
+		if !data.AllowList.CountryList.IsNull() && !data.AllowList.CountryList.IsUnknown() {
+			var country_listItems []string
+			diags := data.AllowList.CountryList.ElementsAs(ctx, &country_listItems, false)
+			if !diags.HasError() {
+				allow_listMap["country_list"] = country_listItems
+			}
+		}
 		if data.AllowList.DefaultActionAllow != nil {
 			allow_listMap["default_action_allow"] = map[string]interface{}{}
 		}
@@ -1878,6 +1885,20 @@ func (r *ServicePolicyResource) Create(ctx context.Context, req resource.CreateR
 		if data.AllowList.PrefixList != nil {
 			prefix_listNestedMap := make(map[string]interface{})
 			allow_listMap["prefix_list"] = prefix_listNestedMap
+		}
+		if !data.AllowList.TLSFingerprintClasses.IsNull() && !data.AllowList.TLSFingerprintClasses.IsUnknown() {
+			var tls_fingerprint_classesItems []string
+			diags := data.AllowList.TLSFingerprintClasses.ElementsAs(ctx, &tls_fingerprint_classesItems, false)
+			if !diags.HasError() {
+				allow_listMap["tls_fingerprint_classes"] = tls_fingerprint_classesItems
+			}
+		}
+		if !data.AllowList.TLSFingerprintValues.IsNull() && !data.AllowList.TLSFingerprintValues.IsUnknown() {
+			var tls_fingerprint_valuesItems []string
+			diags := data.AllowList.TLSFingerprintValues.ElementsAs(ctx, &tls_fingerprint_valuesItems, false)
+			if !diags.HasError() {
+				allow_listMap["tls_fingerprint_values"] = tls_fingerprint_valuesItems
+			}
 		}
 		apiResource.Spec["allow_list"] = allow_listMap
 	}
@@ -1912,6 +1933,13 @@ func (r *ServicePolicyResource) Create(ctx context.Context, req resource.CreateR
 			}
 			deny_listMap["asn_set"] = asn_setList
 		}
+		if !data.DenyList.CountryList.IsNull() && !data.DenyList.CountryList.IsUnknown() {
+			var country_listItems []string
+			diags := data.DenyList.CountryList.ElementsAs(ctx, &country_listItems, false)
+			if !diags.HasError() {
+				deny_listMap["country_list"] = country_listItems
+			}
+		}
 		if data.DenyList.DefaultActionAllow != nil {
 			deny_listMap["default_action_allow"] = map[string]interface{}{}
 		}
@@ -1941,6 +1969,20 @@ func (r *ServicePolicyResource) Create(ctx context.Context, req resource.CreateR
 		if data.DenyList.PrefixList != nil {
 			prefix_listNestedMap := make(map[string]interface{})
 			deny_listMap["prefix_list"] = prefix_listNestedMap
+		}
+		if !data.DenyList.TLSFingerprintClasses.IsNull() && !data.DenyList.TLSFingerprintClasses.IsUnknown() {
+			var tls_fingerprint_classesItems []string
+			diags := data.DenyList.TLSFingerprintClasses.ElementsAs(ctx, &tls_fingerprint_classesItems, false)
+			if !diags.HasError() {
+				deny_listMap["tls_fingerprint_classes"] = tls_fingerprint_classesItems
+			}
+		}
+		if !data.DenyList.TLSFingerprintValues.IsNull() && !data.DenyList.TLSFingerprintValues.IsUnknown() {
+			var tls_fingerprint_valuesItems []string
+			diags := data.DenyList.TLSFingerprintValues.ElementsAs(ctx, &tls_fingerprint_valuesItems, false)
+			if !diags.HasError() {
+				deny_listMap["tls_fingerprint_values"] = tls_fingerprint_valuesItems
+			}
 		}
 		apiResource.Spec["deny_list"] = deny_listMap
 	}
@@ -1990,10 +2032,31 @@ func (r *ServicePolicyResource) Create(ctx context.Context, req resource.CreateR
 	}
 	if data.ServerNameMatcher != nil {
 		server_name_matcherMap := make(map[string]interface{})
+		if !data.ServerNameMatcher.ExactValues.IsNull() && !data.ServerNameMatcher.ExactValues.IsUnknown() {
+			var exact_valuesItems []string
+			diags := data.ServerNameMatcher.ExactValues.ElementsAs(ctx, &exact_valuesItems, false)
+			if !diags.HasError() {
+				server_name_matcherMap["exact_values"] = exact_valuesItems
+			}
+		}
+		if !data.ServerNameMatcher.RegexValues.IsNull() && !data.ServerNameMatcher.RegexValues.IsUnknown() {
+			var regex_valuesItems []string
+			diags := data.ServerNameMatcher.RegexValues.ElementsAs(ctx, &regex_valuesItems, false)
+			if !diags.HasError() {
+				server_name_matcherMap["regex_values"] = regex_valuesItems
+			}
+		}
 		apiResource.Spec["server_name_matcher"] = server_name_matcherMap
 	}
 	if data.ServerSelector != nil {
 		server_selectorMap := make(map[string]interface{})
+		if !data.ServerSelector.Expressions.IsNull() && !data.ServerSelector.Expressions.IsUnknown() {
+			var expressionsItems []string
+			diags := data.ServerSelector.Expressions.ElementsAs(ctx, &expressionsItems, false)
+			if !diags.HasError() {
+				server_selectorMap["expressions"] = expressionsItems
+			}
+		}
 		apiResource.Spec["server_selector"] = server_selectorMap
 	}
 	if !data.ServerName.IsNull() && !data.ServerName.IsUnknown() {
@@ -2726,6 +2789,13 @@ func (r *ServicePolicyResource) Update(ctx context.Context, req resource.UpdateR
 			}
 			allow_listMap["asn_set"] = asn_setList
 		}
+		if !data.AllowList.CountryList.IsNull() && !data.AllowList.CountryList.IsUnknown() {
+			var country_listItems []string
+			diags := data.AllowList.CountryList.ElementsAs(ctx, &country_listItems, false)
+			if !diags.HasError() {
+				allow_listMap["country_list"] = country_listItems
+			}
+		}
 		if data.AllowList.DefaultActionAllow != nil {
 			allow_listMap["default_action_allow"] = map[string]interface{}{}
 		}
@@ -2755,6 +2825,20 @@ func (r *ServicePolicyResource) Update(ctx context.Context, req resource.UpdateR
 		if data.AllowList.PrefixList != nil {
 			prefix_listNestedMap := make(map[string]interface{})
 			allow_listMap["prefix_list"] = prefix_listNestedMap
+		}
+		if !data.AllowList.TLSFingerprintClasses.IsNull() && !data.AllowList.TLSFingerprintClasses.IsUnknown() {
+			var tls_fingerprint_classesItems []string
+			diags := data.AllowList.TLSFingerprintClasses.ElementsAs(ctx, &tls_fingerprint_classesItems, false)
+			if !diags.HasError() {
+				allow_listMap["tls_fingerprint_classes"] = tls_fingerprint_classesItems
+			}
+		}
+		if !data.AllowList.TLSFingerprintValues.IsNull() && !data.AllowList.TLSFingerprintValues.IsUnknown() {
+			var tls_fingerprint_valuesItems []string
+			diags := data.AllowList.TLSFingerprintValues.ElementsAs(ctx, &tls_fingerprint_valuesItems, false)
+			if !diags.HasError() {
+				allow_listMap["tls_fingerprint_values"] = tls_fingerprint_valuesItems
+			}
 		}
 		apiResource.Spec["allow_list"] = allow_listMap
 	}
@@ -2789,6 +2873,13 @@ func (r *ServicePolicyResource) Update(ctx context.Context, req resource.UpdateR
 			}
 			deny_listMap["asn_set"] = asn_setList
 		}
+		if !data.DenyList.CountryList.IsNull() && !data.DenyList.CountryList.IsUnknown() {
+			var country_listItems []string
+			diags := data.DenyList.CountryList.ElementsAs(ctx, &country_listItems, false)
+			if !diags.HasError() {
+				deny_listMap["country_list"] = country_listItems
+			}
+		}
 		if data.DenyList.DefaultActionAllow != nil {
 			deny_listMap["default_action_allow"] = map[string]interface{}{}
 		}
@@ -2818,6 +2909,20 @@ func (r *ServicePolicyResource) Update(ctx context.Context, req resource.UpdateR
 		if data.DenyList.PrefixList != nil {
 			prefix_listNestedMap := make(map[string]interface{})
 			deny_listMap["prefix_list"] = prefix_listNestedMap
+		}
+		if !data.DenyList.TLSFingerprintClasses.IsNull() && !data.DenyList.TLSFingerprintClasses.IsUnknown() {
+			var tls_fingerprint_classesItems []string
+			diags := data.DenyList.TLSFingerprintClasses.ElementsAs(ctx, &tls_fingerprint_classesItems, false)
+			if !diags.HasError() {
+				deny_listMap["tls_fingerprint_classes"] = tls_fingerprint_classesItems
+			}
+		}
+		if !data.DenyList.TLSFingerprintValues.IsNull() && !data.DenyList.TLSFingerprintValues.IsUnknown() {
+			var tls_fingerprint_valuesItems []string
+			diags := data.DenyList.TLSFingerprintValues.ElementsAs(ctx, &tls_fingerprint_valuesItems, false)
+			if !diags.HasError() {
+				deny_listMap["tls_fingerprint_values"] = tls_fingerprint_valuesItems
+			}
 		}
 		apiResource.Spec["deny_list"] = deny_listMap
 	}
@@ -2867,10 +2972,31 @@ func (r *ServicePolicyResource) Update(ctx context.Context, req resource.UpdateR
 	}
 	if data.ServerNameMatcher != nil {
 		server_name_matcherMap := make(map[string]interface{})
+		if !data.ServerNameMatcher.ExactValues.IsNull() && !data.ServerNameMatcher.ExactValues.IsUnknown() {
+			var exact_valuesItems []string
+			diags := data.ServerNameMatcher.ExactValues.ElementsAs(ctx, &exact_valuesItems, false)
+			if !diags.HasError() {
+				server_name_matcherMap["exact_values"] = exact_valuesItems
+			}
+		}
+		if !data.ServerNameMatcher.RegexValues.IsNull() && !data.ServerNameMatcher.RegexValues.IsUnknown() {
+			var regex_valuesItems []string
+			diags := data.ServerNameMatcher.RegexValues.ElementsAs(ctx, &regex_valuesItems, false)
+			if !diags.HasError() {
+				server_name_matcherMap["regex_values"] = regex_valuesItems
+			}
+		}
 		apiResource.Spec["server_name_matcher"] = server_name_matcherMap
 	}
 	if data.ServerSelector != nil {
 		server_selectorMap := make(map[string]interface{})
+		if !data.ServerSelector.Expressions.IsNull() && !data.ServerSelector.Expressions.IsUnknown() {
+			var expressionsItems []string
+			diags := data.ServerSelector.Expressions.ElementsAs(ctx, &expressionsItems, false)
+			if !diags.HasError() {
+				server_selectorMap["expressions"] = expressionsItems
+			}
+		}
 		apiResource.Spec["server_selector"] = server_selectorMap
 	}
 	if !data.ServerName.IsNull() && !data.ServerName.IsUnknown() {

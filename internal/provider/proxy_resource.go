@@ -2651,6 +2651,13 @@ func (r *ProxyResource) Create(ctx context.Context, req resource.CreateRequest, 
 		if data.DynamicProxy.DisableDNSMasquerade != nil {
 			dynamic_proxyMap["disable_dns_masquerade"] = map[string]interface{}{}
 		}
+		if !data.DynamicProxy.Domains.IsNull() && !data.DynamicProxy.Domains.IsUnknown() {
+			var domainsItems []string
+			diags := data.DynamicProxy.Domains.ElementsAs(ctx, &domainsItems, false)
+			if !diags.HasError() {
+				dynamic_proxyMap["domains"] = domainsItems
+			}
+		}
 		if data.DynamicProxy.EnableDNSMasquerade != nil {
 			dynamic_proxyMap["enable_dns_masquerade"] = map[string]interface{}{}
 		}
@@ -3272,6 +3279,13 @@ func (r *ProxyResource) Update(ctx context.Context, req resource.UpdateRequest, 
 		dynamic_proxyMap := make(map[string]interface{})
 		if data.DynamicProxy.DisableDNSMasquerade != nil {
 			dynamic_proxyMap["disable_dns_masquerade"] = map[string]interface{}{}
+		}
+		if !data.DynamicProxy.Domains.IsNull() && !data.DynamicProxy.Domains.IsUnknown() {
+			var domainsItems []string
+			diags := data.DynamicProxy.Domains.ElementsAs(ctx, &domainsItems, false)
+			if !diags.HasError() {
+				dynamic_proxyMap["domains"] = domainsItems
+			}
 		}
 		if data.DynamicProxy.EnableDNSMasquerade != nil {
 			dynamic_proxyMap["enable_dns_masquerade"] = map[string]interface{}{}

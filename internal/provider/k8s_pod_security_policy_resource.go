@@ -639,6 +639,20 @@ func (r *K8SPodSecurityPolicyResource) Create(ctx context.Context, req resource.
 			allowed_capabilitiesNestedMap := make(map[string]interface{})
 			psp_specMap["allowed_capabilities"] = allowed_capabilitiesNestedMap
 		}
+		if !data.PspSpec.AllowedCsiDrivers.IsNull() && !data.PspSpec.AllowedCsiDrivers.IsUnknown() {
+			var allowed_csi_driversItems []string
+			diags := data.PspSpec.AllowedCsiDrivers.ElementsAs(ctx, &allowed_csi_driversItems, false)
+			if !diags.HasError() {
+				psp_specMap["allowed_csi_drivers"] = allowed_csi_driversItems
+			}
+		}
+		if !data.PspSpec.AllowedFlexVolumes.IsNull() && !data.PspSpec.AllowedFlexVolumes.IsUnknown() {
+			var allowed_flex_volumesItems []string
+			diags := data.PspSpec.AllowedFlexVolumes.ElementsAs(ctx, &allowed_flex_volumesItems, false)
+			if !diags.HasError() {
+				psp_specMap["allowed_flex_volumes"] = allowed_flex_volumesItems
+			}
+		}
 		if len(data.PspSpec.AllowedHostPaths) > 0 {
 			var allowed_host_pathsList []map[string]interface{}
 			for _, listItem := range data.PspSpec.AllowedHostPaths {
@@ -653,6 +667,20 @@ func (r *K8SPodSecurityPolicyResource) Create(ctx context.Context, req resource.
 			}
 			psp_specMap["allowed_host_paths"] = allowed_host_pathsList
 		}
+		if !data.PspSpec.AllowedProcMounts.IsNull() && !data.PspSpec.AllowedProcMounts.IsUnknown() {
+			var allowed_proc_mountsItems []string
+			diags := data.PspSpec.AllowedProcMounts.ElementsAs(ctx, &allowed_proc_mountsItems, false)
+			if !diags.HasError() {
+				psp_specMap["allowed_proc_mounts"] = allowed_proc_mountsItems
+			}
+		}
+		if !data.PspSpec.AllowedUnsafeSysctls.IsNull() && !data.PspSpec.AllowedUnsafeSysctls.IsUnknown() {
+			var allowed_unsafe_sysctlsItems []string
+			diags := data.PspSpec.AllowedUnsafeSysctls.ElementsAs(ctx, &allowed_unsafe_sysctlsItems, false)
+			if !diags.HasError() {
+				psp_specMap["allowed_unsafe_sysctls"] = allowed_unsafe_sysctlsItems
+			}
+		}
 		if !data.PspSpec.DefaultAllowPrivilegeEscalation.IsNull() && !data.PspSpec.DefaultAllowPrivilegeEscalation.IsUnknown() {
 			psp_specMap["default_allow_privilege_escalation"] = data.PspSpec.DefaultAllowPrivilegeEscalation.ValueBool()
 		}
@@ -663,6 +691,13 @@ func (r *K8SPodSecurityPolicyResource) Create(ctx context.Context, req resource.
 		if data.PspSpec.DropCapabilities != nil {
 			drop_capabilitiesNestedMap := make(map[string]interface{})
 			psp_specMap["drop_capabilities"] = drop_capabilitiesNestedMap
+		}
+		if !data.PspSpec.ForbiddenSysctls.IsNull() && !data.PspSpec.ForbiddenSysctls.IsUnknown() {
+			var forbidden_sysctlsItems []string
+			diags := data.PspSpec.ForbiddenSysctls.ElementsAs(ctx, &forbidden_sysctlsItems, false)
+			if !diags.HasError() {
+				psp_specMap["forbidden_sysctls"] = forbidden_sysctlsItems
+			}
 		}
 		if data.PspSpec.FsGroupStrategyOptions != nil {
 			fs_group_strategy_optionsNestedMap := make(map[string]interface{})
@@ -736,6 +771,13 @@ func (r *K8SPodSecurityPolicyResource) Create(ctx context.Context, req resource.
 				supplemental_groupsNestedMap["rule"] = data.PspSpec.SupplementalGroups.Rule.ValueString()
 			}
 			psp_specMap["supplemental_groups"] = supplemental_groupsNestedMap
+		}
+		if !data.PspSpec.Volumes.IsNull() && !data.PspSpec.Volumes.IsUnknown() {
+			var volumesItems []string
+			diags := data.PspSpec.Volumes.ElementsAs(ctx, &volumesItems, false)
+			if !diags.HasError() {
+				psp_specMap["volumes"] = volumesItems
+			}
 		}
 		apiResource.Spec["psp_spec"] = psp_specMap
 	}
@@ -1373,6 +1415,20 @@ func (r *K8SPodSecurityPolicyResource) Update(ctx context.Context, req resource.
 			allowed_capabilitiesNestedMap := make(map[string]interface{})
 			psp_specMap["allowed_capabilities"] = allowed_capabilitiesNestedMap
 		}
+		if !data.PspSpec.AllowedCsiDrivers.IsNull() && !data.PspSpec.AllowedCsiDrivers.IsUnknown() {
+			var allowed_csi_driversItems []string
+			diags := data.PspSpec.AllowedCsiDrivers.ElementsAs(ctx, &allowed_csi_driversItems, false)
+			if !diags.HasError() {
+				psp_specMap["allowed_csi_drivers"] = allowed_csi_driversItems
+			}
+		}
+		if !data.PspSpec.AllowedFlexVolumes.IsNull() && !data.PspSpec.AllowedFlexVolumes.IsUnknown() {
+			var allowed_flex_volumesItems []string
+			diags := data.PspSpec.AllowedFlexVolumes.ElementsAs(ctx, &allowed_flex_volumesItems, false)
+			if !diags.HasError() {
+				psp_specMap["allowed_flex_volumes"] = allowed_flex_volumesItems
+			}
+		}
 		if len(data.PspSpec.AllowedHostPaths) > 0 {
 			var allowed_host_pathsList []map[string]interface{}
 			for _, listItem := range data.PspSpec.AllowedHostPaths {
@@ -1387,6 +1443,20 @@ func (r *K8SPodSecurityPolicyResource) Update(ctx context.Context, req resource.
 			}
 			psp_specMap["allowed_host_paths"] = allowed_host_pathsList
 		}
+		if !data.PspSpec.AllowedProcMounts.IsNull() && !data.PspSpec.AllowedProcMounts.IsUnknown() {
+			var allowed_proc_mountsItems []string
+			diags := data.PspSpec.AllowedProcMounts.ElementsAs(ctx, &allowed_proc_mountsItems, false)
+			if !diags.HasError() {
+				psp_specMap["allowed_proc_mounts"] = allowed_proc_mountsItems
+			}
+		}
+		if !data.PspSpec.AllowedUnsafeSysctls.IsNull() && !data.PspSpec.AllowedUnsafeSysctls.IsUnknown() {
+			var allowed_unsafe_sysctlsItems []string
+			diags := data.PspSpec.AllowedUnsafeSysctls.ElementsAs(ctx, &allowed_unsafe_sysctlsItems, false)
+			if !diags.HasError() {
+				psp_specMap["allowed_unsafe_sysctls"] = allowed_unsafe_sysctlsItems
+			}
+		}
 		if !data.PspSpec.DefaultAllowPrivilegeEscalation.IsNull() && !data.PspSpec.DefaultAllowPrivilegeEscalation.IsUnknown() {
 			psp_specMap["default_allow_privilege_escalation"] = data.PspSpec.DefaultAllowPrivilegeEscalation.ValueBool()
 		}
@@ -1397,6 +1467,13 @@ func (r *K8SPodSecurityPolicyResource) Update(ctx context.Context, req resource.
 		if data.PspSpec.DropCapabilities != nil {
 			drop_capabilitiesNestedMap := make(map[string]interface{})
 			psp_specMap["drop_capabilities"] = drop_capabilitiesNestedMap
+		}
+		if !data.PspSpec.ForbiddenSysctls.IsNull() && !data.PspSpec.ForbiddenSysctls.IsUnknown() {
+			var forbidden_sysctlsItems []string
+			diags := data.PspSpec.ForbiddenSysctls.ElementsAs(ctx, &forbidden_sysctlsItems, false)
+			if !diags.HasError() {
+				psp_specMap["forbidden_sysctls"] = forbidden_sysctlsItems
+			}
 		}
 		if data.PspSpec.FsGroupStrategyOptions != nil {
 			fs_group_strategy_optionsNestedMap := make(map[string]interface{})
@@ -1470,6 +1547,13 @@ func (r *K8SPodSecurityPolicyResource) Update(ctx context.Context, req resource.
 				supplemental_groupsNestedMap["rule"] = data.PspSpec.SupplementalGroups.Rule.ValueString()
 			}
 			psp_specMap["supplemental_groups"] = supplemental_groupsNestedMap
+		}
+		if !data.PspSpec.Volumes.IsNull() && !data.PspSpec.Volumes.IsUnknown() {
+			var volumesItems []string
+			diags := data.PspSpec.Volumes.ElementsAs(ctx, &volumesItems, false)
+			if !diags.HasError() {
+				psp_specMap["volumes"] = volumesItems
+			}
 		}
 		apiResource.Spec["psp_spec"] = psp_specMap
 	}

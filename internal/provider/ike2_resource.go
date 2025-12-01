@@ -329,6 +329,13 @@ func (r *Ike2Resource) Create(ctx context.Context, req resource.CreateRequest, r
 	// Marshal spec fields from Terraform state to API struct
 	if data.DhGroupSet != nil {
 		dh_group_setMap := make(map[string]interface{})
+		if !data.DhGroupSet.DhGroups.IsNull() && !data.DhGroupSet.DhGroups.IsUnknown() {
+			var dh_groupsItems []string
+			diags := data.DhGroupSet.DhGroups.ElementsAs(ctx, &dh_groupsItems, false)
+			if !diags.HasError() {
+				dh_group_setMap["dh_groups"] = dh_groupsItems
+			}
+		}
 		apiResource.Spec["dh_group_set"] = dh_group_setMap
 	}
 	if data.DisablePfs != nil {
@@ -567,6 +574,13 @@ func (r *Ike2Resource) Update(ctx context.Context, req resource.UpdateRequest, r
 	// Marshal spec fields from Terraform state to API struct
 	if data.DhGroupSet != nil {
 		dh_group_setMap := make(map[string]interface{})
+		if !data.DhGroupSet.DhGroups.IsNull() && !data.DhGroupSet.DhGroups.IsUnknown() {
+			var dh_groupsItems []string
+			diags := data.DhGroupSet.DhGroups.ElementsAs(ctx, &dh_groupsItems, false)
+			if !diags.HasError() {
+				dh_group_setMap["dh_groups"] = dh_groupsItems
+			}
+		}
 		apiResource.Spec["dh_group_set"] = dh_group_setMap
 	}
 	if data.DisablePfs != nil {

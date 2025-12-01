@@ -2265,6 +2265,13 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 		if !data.CompressionParams.ContentLength.IsNull() && !data.CompressionParams.ContentLength.IsUnknown() {
 			compression_paramsMap["content_length"] = data.CompressionParams.ContentLength.ValueInt64()
 		}
+		if !data.CompressionParams.ContentType.IsNull() && !data.CompressionParams.ContentType.IsUnknown() {
+			var content_typeItems []string
+			diags := data.CompressionParams.ContentType.ElementsAs(ctx, &content_typeItems, false)
+			if !diags.HasError() {
+				compression_paramsMap["content_type"] = content_typeItems
+			}
+		}
 		if !data.CompressionParams.DisableOnEtagHeader.IsNull() && !data.CompressionParams.DisableOnEtagHeader.IsUnknown() {
 			compression_paramsMap["disable_on_etag_header"] = data.CompressionParams.DisableOnEtagHeader.ValueBool()
 		}
@@ -2283,6 +2290,20 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 		}
 		if !data.CorsPolicy.AllowMethods.IsNull() && !data.CorsPolicy.AllowMethods.IsUnknown() {
 			cors_policyMap["allow_methods"] = data.CorsPolicy.AllowMethods.ValueString()
+		}
+		if !data.CorsPolicy.AllowOrigin.IsNull() && !data.CorsPolicy.AllowOrigin.IsUnknown() {
+			var allow_originItems []string
+			diags := data.CorsPolicy.AllowOrigin.ElementsAs(ctx, &allow_originItems, false)
+			if !diags.HasError() {
+				cors_policyMap["allow_origin"] = allow_originItems
+			}
+		}
+		if !data.CorsPolicy.AllowOriginRegex.IsNull() && !data.CorsPolicy.AllowOriginRegex.IsUnknown() {
+			var allow_origin_regexItems []string
+			diags := data.CorsPolicy.AllowOriginRegex.ElementsAs(ctx, &allow_origin_regexItems, false)
+			if !diags.HasError() {
+				cors_policyMap["allow_origin_regex"] = allow_origin_regexItems
+			}
 		}
 		if !data.CorsPolicy.Disabled.IsNull() && !data.CorsPolicy.Disabled.IsUnknown() {
 			cors_policyMap["disabled"] = data.CorsPolicy.Disabled.ValueBool()
@@ -2625,6 +2646,20 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 		if !data.RetryPolicy.PerTryTimeout.IsNull() && !data.RetryPolicy.PerTryTimeout.IsUnknown() {
 			retry_policyMap["per_try_timeout"] = data.RetryPolicy.PerTryTimeout.ValueInt64()
 		}
+		if !data.RetryPolicy.RetriableStatusCodes.IsNull() && !data.RetryPolicy.RetriableStatusCodes.IsUnknown() {
+			var retriable_status_codesItems []int64
+			diags := data.RetryPolicy.RetriableStatusCodes.ElementsAs(ctx, &retriable_status_codesItems, false)
+			if !diags.HasError() {
+				retry_policyMap["retriable_status_codes"] = retriable_status_codesItems
+			}
+		}
+		if !data.RetryPolicy.RetryCondition.IsNull() && !data.RetryPolicy.RetryCondition.IsUnknown() {
+			var retry_conditionItems []string
+			diags := data.RetryPolicy.RetryCondition.ElementsAs(ctx, &retry_conditionItems, false)
+			if !diags.HasError() {
+				retry_policyMap["retry_condition"] = retry_conditionItems
+			}
+		}
 		apiResource.Spec["retry_policy"] = retry_policyMap
 	}
 	if len(data.Routes) > 0 {
@@ -2711,6 +2746,13 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 			}
 			tls_cert_paramsMap["certificates"] = certificatesList
 		}
+		if !data.TLSCertParams.CipherSuites.IsNull() && !data.TLSCertParams.CipherSuites.IsUnknown() {
+			var cipher_suitesItems []string
+			diags := data.TLSCertParams.CipherSuites.ElementsAs(ctx, &cipher_suitesItems, false)
+			if !diags.HasError() {
+				tls_cert_paramsMap["cipher_suites"] = cipher_suitesItems
+			}
+		}
 		if data.TLSCertParams.ClientCertificateOptional != nil {
 			tls_cert_paramsMap["client_certificate_optional"] = map[string]interface{}{}
 		}
@@ -2736,6 +2778,13 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 			}
 			tls_cert_paramsMap["validation_params"] = validation_paramsNestedMap
 		}
+		if !data.TLSCertParams.XfccHeaderElements.IsNull() && !data.TLSCertParams.XfccHeaderElements.IsUnknown() {
+			var xfcc_header_elementsItems []string
+			diags := data.TLSCertParams.XfccHeaderElements.ElementsAs(ctx, &xfcc_header_elementsItems, false)
+			if !diags.HasError() {
+				tls_cert_paramsMap["xfcc_header_elements"] = xfcc_header_elementsItems
+			}
+		}
 		apiResource.Spec["tls_cert_params"] = tls_cert_paramsMap
 	}
 	if data.TLSParameters != nil {
@@ -2758,6 +2807,13 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 		}
 		if data.TLSParameters.NoClientCertificate != nil {
 			tls_parametersMap["no_client_certificate"] = map[string]interface{}{}
+		}
+		if !data.TLSParameters.XfccHeaderElements.IsNull() && !data.TLSParameters.XfccHeaderElements.IsUnknown() {
+			var xfcc_header_elementsItems []string
+			diags := data.TLSParameters.XfccHeaderElements.ElementsAs(ctx, &xfcc_header_elementsItems, false)
+			if !diags.HasError() {
+				tls_parametersMap["xfcc_header_elements"] = xfcc_header_elementsItems
+			}
 		}
 		apiResource.Spec["tls_parameters"] = tls_parametersMap
 	}
@@ -4516,6 +4572,13 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 		if !data.CompressionParams.ContentLength.IsNull() && !data.CompressionParams.ContentLength.IsUnknown() {
 			compression_paramsMap["content_length"] = data.CompressionParams.ContentLength.ValueInt64()
 		}
+		if !data.CompressionParams.ContentType.IsNull() && !data.CompressionParams.ContentType.IsUnknown() {
+			var content_typeItems []string
+			diags := data.CompressionParams.ContentType.ElementsAs(ctx, &content_typeItems, false)
+			if !diags.HasError() {
+				compression_paramsMap["content_type"] = content_typeItems
+			}
+		}
 		if !data.CompressionParams.DisableOnEtagHeader.IsNull() && !data.CompressionParams.DisableOnEtagHeader.IsUnknown() {
 			compression_paramsMap["disable_on_etag_header"] = data.CompressionParams.DisableOnEtagHeader.ValueBool()
 		}
@@ -4534,6 +4597,20 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 		}
 		if !data.CorsPolicy.AllowMethods.IsNull() && !data.CorsPolicy.AllowMethods.IsUnknown() {
 			cors_policyMap["allow_methods"] = data.CorsPolicy.AllowMethods.ValueString()
+		}
+		if !data.CorsPolicy.AllowOrigin.IsNull() && !data.CorsPolicy.AllowOrigin.IsUnknown() {
+			var allow_originItems []string
+			diags := data.CorsPolicy.AllowOrigin.ElementsAs(ctx, &allow_originItems, false)
+			if !diags.HasError() {
+				cors_policyMap["allow_origin"] = allow_originItems
+			}
+		}
+		if !data.CorsPolicy.AllowOriginRegex.IsNull() && !data.CorsPolicy.AllowOriginRegex.IsUnknown() {
+			var allow_origin_regexItems []string
+			diags := data.CorsPolicy.AllowOriginRegex.ElementsAs(ctx, &allow_origin_regexItems, false)
+			if !diags.HasError() {
+				cors_policyMap["allow_origin_regex"] = allow_origin_regexItems
+			}
 		}
 		if !data.CorsPolicy.Disabled.IsNull() && !data.CorsPolicy.Disabled.IsUnknown() {
 			cors_policyMap["disabled"] = data.CorsPolicy.Disabled.ValueBool()
@@ -4876,6 +4953,20 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 		if !data.RetryPolicy.PerTryTimeout.IsNull() && !data.RetryPolicy.PerTryTimeout.IsUnknown() {
 			retry_policyMap["per_try_timeout"] = data.RetryPolicy.PerTryTimeout.ValueInt64()
 		}
+		if !data.RetryPolicy.RetriableStatusCodes.IsNull() && !data.RetryPolicy.RetriableStatusCodes.IsUnknown() {
+			var retriable_status_codesItems []int64
+			diags := data.RetryPolicy.RetriableStatusCodes.ElementsAs(ctx, &retriable_status_codesItems, false)
+			if !diags.HasError() {
+				retry_policyMap["retriable_status_codes"] = retriable_status_codesItems
+			}
+		}
+		if !data.RetryPolicy.RetryCondition.IsNull() && !data.RetryPolicy.RetryCondition.IsUnknown() {
+			var retry_conditionItems []string
+			diags := data.RetryPolicy.RetryCondition.ElementsAs(ctx, &retry_conditionItems, false)
+			if !diags.HasError() {
+				retry_policyMap["retry_condition"] = retry_conditionItems
+			}
+		}
 		apiResource.Spec["retry_policy"] = retry_policyMap
 	}
 	if len(data.Routes) > 0 {
@@ -4962,6 +5053,13 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 			}
 			tls_cert_paramsMap["certificates"] = certificatesList
 		}
+		if !data.TLSCertParams.CipherSuites.IsNull() && !data.TLSCertParams.CipherSuites.IsUnknown() {
+			var cipher_suitesItems []string
+			diags := data.TLSCertParams.CipherSuites.ElementsAs(ctx, &cipher_suitesItems, false)
+			if !diags.HasError() {
+				tls_cert_paramsMap["cipher_suites"] = cipher_suitesItems
+			}
+		}
 		if data.TLSCertParams.ClientCertificateOptional != nil {
 			tls_cert_paramsMap["client_certificate_optional"] = map[string]interface{}{}
 		}
@@ -4987,6 +5085,13 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 			}
 			tls_cert_paramsMap["validation_params"] = validation_paramsNestedMap
 		}
+		if !data.TLSCertParams.XfccHeaderElements.IsNull() && !data.TLSCertParams.XfccHeaderElements.IsUnknown() {
+			var xfcc_header_elementsItems []string
+			diags := data.TLSCertParams.XfccHeaderElements.ElementsAs(ctx, &xfcc_header_elementsItems, false)
+			if !diags.HasError() {
+				tls_cert_paramsMap["xfcc_header_elements"] = xfcc_header_elementsItems
+			}
+		}
 		apiResource.Spec["tls_cert_params"] = tls_cert_paramsMap
 	}
 	if data.TLSParameters != nil {
@@ -5009,6 +5114,13 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 		}
 		if data.TLSParameters.NoClientCertificate != nil {
 			tls_parametersMap["no_client_certificate"] = map[string]interface{}{}
+		}
+		if !data.TLSParameters.XfccHeaderElements.IsNull() && !data.TLSParameters.XfccHeaderElements.IsUnknown() {
+			var xfcc_header_elementsItems []string
+			diags := data.TLSParameters.XfccHeaderElements.ElementsAs(ctx, &xfcc_header_elementsItems, false)
+			if !diags.HasError() {
+				tls_parametersMap["xfcc_header_elements"] = xfcc_header_elementsItems
+			}
 		}
 		apiResource.Spec["tls_parameters"] = tls_parametersMap
 	}

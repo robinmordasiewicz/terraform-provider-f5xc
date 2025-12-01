@@ -752,10 +752,31 @@ func (r *RateLimiterPolicyResource) Create(ctx context.Context, req resource.Cre
 	}
 	if data.ServerNameMatcher != nil {
 		server_name_matcherMap := make(map[string]interface{})
+		if !data.ServerNameMatcher.ExactValues.IsNull() && !data.ServerNameMatcher.ExactValues.IsUnknown() {
+			var exact_valuesItems []string
+			diags := data.ServerNameMatcher.ExactValues.ElementsAs(ctx, &exact_valuesItems, false)
+			if !diags.HasError() {
+				server_name_matcherMap["exact_values"] = exact_valuesItems
+			}
+		}
+		if !data.ServerNameMatcher.RegexValues.IsNull() && !data.ServerNameMatcher.RegexValues.IsUnknown() {
+			var regex_valuesItems []string
+			diags := data.ServerNameMatcher.RegexValues.ElementsAs(ctx, &regex_valuesItems, false)
+			if !diags.HasError() {
+				server_name_matcherMap["regex_values"] = regex_valuesItems
+			}
+		}
 		apiResource.Spec["server_name_matcher"] = server_name_matcherMap
 	}
 	if data.ServerSelector != nil {
 		server_selectorMap := make(map[string]interface{})
+		if !data.ServerSelector.Expressions.IsNull() && !data.ServerSelector.Expressions.IsUnknown() {
+			var expressionsItems []string
+			diags := data.ServerSelector.Expressions.ElementsAs(ctx, &expressionsItems, false)
+			if !diags.HasError() {
+				server_selectorMap["expressions"] = expressionsItems
+			}
+		}
 		apiResource.Spec["server_selector"] = server_selectorMap
 	}
 	if !data.ServerName.IsNull() && !data.ServerName.IsUnknown() {
@@ -1054,10 +1075,31 @@ func (r *RateLimiterPolicyResource) Update(ctx context.Context, req resource.Upd
 	}
 	if data.ServerNameMatcher != nil {
 		server_name_matcherMap := make(map[string]interface{})
+		if !data.ServerNameMatcher.ExactValues.IsNull() && !data.ServerNameMatcher.ExactValues.IsUnknown() {
+			var exact_valuesItems []string
+			diags := data.ServerNameMatcher.ExactValues.ElementsAs(ctx, &exact_valuesItems, false)
+			if !diags.HasError() {
+				server_name_matcherMap["exact_values"] = exact_valuesItems
+			}
+		}
+		if !data.ServerNameMatcher.RegexValues.IsNull() && !data.ServerNameMatcher.RegexValues.IsUnknown() {
+			var regex_valuesItems []string
+			diags := data.ServerNameMatcher.RegexValues.ElementsAs(ctx, &regex_valuesItems, false)
+			if !diags.HasError() {
+				server_name_matcherMap["regex_values"] = regex_valuesItems
+			}
+		}
 		apiResource.Spec["server_name_matcher"] = server_name_matcherMap
 	}
 	if data.ServerSelector != nil {
 		server_selectorMap := make(map[string]interface{})
+		if !data.ServerSelector.Expressions.IsNull() && !data.ServerSelector.Expressions.IsUnknown() {
+			var expressionsItems []string
+			diags := data.ServerSelector.Expressions.ElementsAs(ctx, &expressionsItems, false)
+			if !diags.HasError() {
+				server_selectorMap["expressions"] = expressionsItems
+			}
+		}
 		apiResource.Spec["server_selector"] = server_selectorMap
 	}
 	if !data.ServerName.IsNull() && !data.ServerName.IsUnknown() {

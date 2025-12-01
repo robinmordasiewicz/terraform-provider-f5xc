@@ -381,6 +381,13 @@ func (r *K8SClusterRoleResource) Create(ctx context.Context, req resource.Create
 	// Marshal spec fields from Terraform state to API struct
 	if data.K8SClusterRoleSelector != nil {
 		k8s_cluster_role_selectorMap := make(map[string]interface{})
+		if !data.K8SClusterRoleSelector.Expressions.IsNull() && !data.K8SClusterRoleSelector.Expressions.IsUnknown() {
+			var expressionsItems []string
+			diags := data.K8SClusterRoleSelector.Expressions.ElementsAs(ctx, &expressionsItems, false)
+			if !diags.HasError() {
+				k8s_cluster_role_selectorMap["expressions"] = expressionsItems
+			}
+		}
 		apiResource.Spec["k8s_cluster_role_selector"] = k8s_cluster_role_selectorMap
 	}
 	if data.PolicyRuleList != nil {
@@ -633,6 +640,13 @@ func (r *K8SClusterRoleResource) Update(ctx context.Context, req resource.Update
 	// Marshal spec fields from Terraform state to API struct
 	if data.K8SClusterRoleSelector != nil {
 		k8s_cluster_role_selectorMap := make(map[string]interface{})
+		if !data.K8SClusterRoleSelector.Expressions.IsNull() && !data.K8SClusterRoleSelector.Expressions.IsUnknown() {
+			var expressionsItems []string
+			diags := data.K8SClusterRoleSelector.Expressions.ElementsAs(ctx, &expressionsItems, false)
+			if !diags.HasError() {
+				k8s_cluster_role_selectorMap["expressions"] = expressionsItems
+			}
+		}
 		apiResource.Spec["k8s_cluster_role_selector"] = k8s_cluster_role_selectorMap
 	}
 	if data.PolicyRuleList != nil {

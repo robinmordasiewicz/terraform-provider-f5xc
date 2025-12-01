@@ -750,18 +750,46 @@ func (r *EnhancedFirewallPolicyResource) Create(ctx context.Context, req resourc
 	}
 	if data.AllowedDestinations != nil {
 		allowed_destinationsMap := make(map[string]interface{})
+		if !data.AllowedDestinations.Prefix.IsNull() && !data.AllowedDestinations.Prefix.IsUnknown() {
+			var prefixItems []string
+			diags := data.AllowedDestinations.Prefix.ElementsAs(ctx, &prefixItems, false)
+			if !diags.HasError() {
+				allowed_destinationsMap["prefix"] = prefixItems
+			}
+		}
 		apiResource.Spec["allowed_destinations"] = allowed_destinationsMap
 	}
 	if data.AllowedSources != nil {
 		allowed_sourcesMap := make(map[string]interface{})
+		if !data.AllowedSources.Prefix.IsNull() && !data.AllowedSources.Prefix.IsUnknown() {
+			var prefixItems []string
+			diags := data.AllowedSources.Prefix.ElementsAs(ctx, &prefixItems, false)
+			if !diags.HasError() {
+				allowed_sourcesMap["prefix"] = prefixItems
+			}
+		}
 		apiResource.Spec["allowed_sources"] = allowed_sourcesMap
 	}
 	if data.DeniedDestinations != nil {
 		denied_destinationsMap := make(map[string]interface{})
+		if !data.DeniedDestinations.Prefix.IsNull() && !data.DeniedDestinations.Prefix.IsUnknown() {
+			var prefixItems []string
+			diags := data.DeniedDestinations.Prefix.ElementsAs(ctx, &prefixItems, false)
+			if !diags.HasError() {
+				denied_destinationsMap["prefix"] = prefixItems
+			}
+		}
 		apiResource.Spec["denied_destinations"] = denied_destinationsMap
 	}
 	if data.DeniedSources != nil {
 		denied_sourcesMap := make(map[string]interface{})
+		if !data.DeniedSources.Prefix.IsNull() && !data.DeniedSources.Prefix.IsUnknown() {
+			var prefixItems []string
+			diags := data.DeniedSources.Prefix.ElementsAs(ctx, &prefixItems, false)
+			if !diags.HasError() {
+				denied_sourcesMap["prefix"] = prefixItems
+			}
+		}
 		apiResource.Spec["denied_sources"] = denied_sourcesMap
 	}
 	if data.DenyAll != nil {
@@ -1353,18 +1381,46 @@ func (r *EnhancedFirewallPolicyResource) Update(ctx context.Context, req resourc
 	}
 	if data.AllowedDestinations != nil {
 		allowed_destinationsMap := make(map[string]interface{})
+		if !data.AllowedDestinations.Prefix.IsNull() && !data.AllowedDestinations.Prefix.IsUnknown() {
+			var prefixItems []string
+			diags := data.AllowedDestinations.Prefix.ElementsAs(ctx, &prefixItems, false)
+			if !diags.HasError() {
+				allowed_destinationsMap["prefix"] = prefixItems
+			}
+		}
 		apiResource.Spec["allowed_destinations"] = allowed_destinationsMap
 	}
 	if data.AllowedSources != nil {
 		allowed_sourcesMap := make(map[string]interface{})
+		if !data.AllowedSources.Prefix.IsNull() && !data.AllowedSources.Prefix.IsUnknown() {
+			var prefixItems []string
+			diags := data.AllowedSources.Prefix.ElementsAs(ctx, &prefixItems, false)
+			if !diags.HasError() {
+				allowed_sourcesMap["prefix"] = prefixItems
+			}
+		}
 		apiResource.Spec["allowed_sources"] = allowed_sourcesMap
 	}
 	if data.DeniedDestinations != nil {
 		denied_destinationsMap := make(map[string]interface{})
+		if !data.DeniedDestinations.Prefix.IsNull() && !data.DeniedDestinations.Prefix.IsUnknown() {
+			var prefixItems []string
+			diags := data.DeniedDestinations.Prefix.ElementsAs(ctx, &prefixItems, false)
+			if !diags.HasError() {
+				denied_destinationsMap["prefix"] = prefixItems
+			}
+		}
 		apiResource.Spec["denied_destinations"] = denied_destinationsMap
 	}
 	if data.DeniedSources != nil {
 		denied_sourcesMap := make(map[string]interface{})
+		if !data.DeniedSources.Prefix.IsNull() && !data.DeniedSources.Prefix.IsUnknown() {
+			var prefixItems []string
+			diags := data.DeniedSources.Prefix.ElementsAs(ctx, &prefixItems, false)
+			if !diags.HasError() {
+				denied_sourcesMap["prefix"] = prefixItems
+			}
+		}
 		apiResource.Spec["denied_sources"] = denied_sourcesMap
 	}
 	if data.DenyAll != nil {

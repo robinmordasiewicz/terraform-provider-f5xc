@@ -293,6 +293,13 @@ func (r *GeoLocationSetResource) Create(ctx context.Context, req resource.Create
 	// Marshal spec fields from Terraform state to API struct
 	if data.CustomGeoLocationSelector != nil {
 		custom_geo_location_selectorMap := make(map[string]interface{})
+		if !data.CustomGeoLocationSelector.Expressions.IsNull() && !data.CustomGeoLocationSelector.Expressions.IsUnknown() {
+			var expressionsItems []string
+			diags := data.CustomGeoLocationSelector.Expressions.ElementsAs(ctx, &expressionsItems, false)
+			if !diags.HasError() {
+				custom_geo_location_selectorMap["expressions"] = expressionsItems
+			}
+		}
 		apiResource.Spec["custom_geo_location_selector"] = custom_geo_location_selectorMap
 	}
 	if data.Global != nil {
@@ -488,6 +495,13 @@ func (r *GeoLocationSetResource) Update(ctx context.Context, req resource.Update
 	// Marshal spec fields from Terraform state to API struct
 	if data.CustomGeoLocationSelector != nil {
 		custom_geo_location_selectorMap := make(map[string]interface{})
+		if !data.CustomGeoLocationSelector.Expressions.IsNull() && !data.CustomGeoLocationSelector.Expressions.IsUnknown() {
+			var expressionsItems []string
+			diags := data.CustomGeoLocationSelector.Expressions.ElementsAs(ctx, &expressionsItems, false)
+			if !diags.HasError() {
+				custom_geo_location_selectorMap["expressions"] = expressionsItems
+			}
+		}
 		apiResource.Spec["custom_geo_location_selector"] = custom_geo_location_selectorMap
 	}
 	if data.Global != nil {

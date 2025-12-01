@@ -2605,6 +2605,13 @@ func (r *GlobalLogReceiverResource) Create(ctx context.Context, req resource.Cre
 			}
 			kafka_receiverMap["batch"] = batchNestedMap
 		}
+		if !data.KafkaReceiver.BootstrapServers.IsNull() && !data.KafkaReceiver.BootstrapServers.IsUnknown() {
+			var bootstrap_serversItems []string
+			diags := data.KafkaReceiver.BootstrapServers.ElementsAs(ctx, &bootstrap_serversItems, false)
+			if !diags.HasError() {
+				kafka_receiverMap["bootstrap_servers"] = bootstrap_serversItems
+			}
+		}
 		if data.KafkaReceiver.Compression != nil {
 			compressionNestedMap := make(map[string]interface{})
 			kafka_receiverMap["compression"] = compressionNestedMap
@@ -2648,6 +2655,13 @@ func (r *GlobalLogReceiverResource) Create(ctx context.Context, req resource.Cre
 	}
 	if data.NsList != nil {
 		ns_listMap := make(map[string]interface{})
+		if !data.NsList.Namespaces.IsNull() && !data.NsList.Namespaces.IsUnknown() {
+			var namespacesItems []string
+			diags := data.NsList.Namespaces.ElementsAs(ctx, &namespacesItems, false)
+			if !diags.HasError() {
+				ns_listMap["namespaces"] = namespacesItems
+			}
+		}
 		apiResource.Spec["ns_list"] = ns_listMap
 	}
 	if data.QradarReceiver != nil {
@@ -4160,6 +4174,13 @@ func (r *GlobalLogReceiverResource) Update(ctx context.Context, req resource.Upd
 			}
 			kafka_receiverMap["batch"] = batchNestedMap
 		}
+		if !data.KafkaReceiver.BootstrapServers.IsNull() && !data.KafkaReceiver.BootstrapServers.IsUnknown() {
+			var bootstrap_serversItems []string
+			diags := data.KafkaReceiver.BootstrapServers.ElementsAs(ctx, &bootstrap_serversItems, false)
+			if !diags.HasError() {
+				kafka_receiverMap["bootstrap_servers"] = bootstrap_serversItems
+			}
+		}
 		if data.KafkaReceiver.Compression != nil {
 			compressionNestedMap := make(map[string]interface{})
 			kafka_receiverMap["compression"] = compressionNestedMap
@@ -4203,6 +4224,13 @@ func (r *GlobalLogReceiverResource) Update(ctx context.Context, req resource.Upd
 	}
 	if data.NsList != nil {
 		ns_listMap := make(map[string]interface{})
+		if !data.NsList.Namespaces.IsNull() && !data.NsList.Namespaces.IsUnknown() {
+			var namespacesItems []string
+			diags := data.NsList.Namespaces.ElementsAs(ctx, &namespacesItems, false)
+			if !diags.HasError() {
+				ns_listMap["namespaces"] = namespacesItems
+			}
+		}
 		apiResource.Spec["ns_list"] = ns_listMap
 	}
 	if data.QradarReceiver != nil {

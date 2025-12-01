@@ -1465,6 +1465,13 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 		if !data.APIGroupMatcher.InvertMatcher.IsNull() && !data.APIGroupMatcher.InvertMatcher.IsUnknown() {
 			api_group_matcherMap["invert_matcher"] = data.APIGroupMatcher.InvertMatcher.ValueBool()
 		}
+		if !data.APIGroupMatcher.Match.IsNull() && !data.APIGroupMatcher.Match.IsUnknown() {
+			var matchItems []string
+			diags := data.APIGroupMatcher.Match.ElementsAs(ctx, &matchItems, false)
+			if !diags.HasError() {
+				api_group_matcherMap["match"] = matchItems
+			}
+		}
 		apiResource.Spec["api_group_matcher"] = api_group_matcherMap
 	}
 	if len(data.ArgMatchers) > 0 {
@@ -1514,6 +1521,13 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 	}
 	if data.AsnList != nil {
 		asn_listMap := make(map[string]interface{})
+		if !data.AsnList.AsNumbers.IsNull() && !data.AsnList.AsNumbers.IsUnknown() {
+			var as_numbersItems []int64
+			diags := data.AsnList.AsNumbers.ElementsAs(ctx, &as_numbersItems, false)
+			if !diags.HasError() {
+				asn_listMap["as_numbers"] = as_numbersItems
+			}
+		}
 		apiResource.Spec["asn_list"] = asn_listMap
 	}
 	if data.AsnMatcher != nil {
@@ -1545,6 +1559,27 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 	}
 	if data.BodyMatcher != nil {
 		body_matcherMap := make(map[string]interface{})
+		if !data.BodyMatcher.ExactValues.IsNull() && !data.BodyMatcher.ExactValues.IsUnknown() {
+			var exact_valuesItems []string
+			diags := data.BodyMatcher.ExactValues.ElementsAs(ctx, &exact_valuesItems, false)
+			if !diags.HasError() {
+				body_matcherMap["exact_values"] = exact_valuesItems
+			}
+		}
+		if !data.BodyMatcher.RegexValues.IsNull() && !data.BodyMatcher.RegexValues.IsUnknown() {
+			var regex_valuesItems []string
+			diags := data.BodyMatcher.RegexValues.ElementsAs(ctx, &regex_valuesItems, false)
+			if !diags.HasError() {
+				body_matcherMap["regex_values"] = regex_valuesItems
+			}
+		}
+		if !data.BodyMatcher.Transformers.IsNull() && !data.BodyMatcher.Transformers.IsUnknown() {
+			var transformersItems []string
+			diags := data.BodyMatcher.Transformers.ElementsAs(ctx, &transformersItems, false)
+			if !diags.HasError() {
+				body_matcherMap["transformers"] = transformersItems
+			}
+		}
 		apiResource.Spec["body_matcher"] = body_matcherMap
 	}
 	if data.BotAction != nil {
@@ -1559,10 +1594,31 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 	}
 	if data.ClientNameMatcher != nil {
 		client_name_matcherMap := make(map[string]interface{})
+		if !data.ClientNameMatcher.ExactValues.IsNull() && !data.ClientNameMatcher.ExactValues.IsUnknown() {
+			var exact_valuesItems []string
+			diags := data.ClientNameMatcher.ExactValues.ElementsAs(ctx, &exact_valuesItems, false)
+			if !diags.HasError() {
+				client_name_matcherMap["exact_values"] = exact_valuesItems
+			}
+		}
+		if !data.ClientNameMatcher.RegexValues.IsNull() && !data.ClientNameMatcher.RegexValues.IsUnknown() {
+			var regex_valuesItems []string
+			diags := data.ClientNameMatcher.RegexValues.ElementsAs(ctx, &regex_valuesItems, false)
+			if !diags.HasError() {
+				client_name_matcherMap["regex_values"] = regex_valuesItems
+			}
+		}
 		apiResource.Spec["client_name_matcher"] = client_name_matcherMap
 	}
 	if data.ClientSelector != nil {
 		client_selectorMap := make(map[string]interface{})
+		if !data.ClientSelector.Expressions.IsNull() && !data.ClientSelector.Expressions.IsUnknown() {
+			var expressionsItems []string
+			diags := data.ClientSelector.Expressions.ElementsAs(ctx, &expressionsItems, false)
+			if !diags.HasError() {
+				client_selectorMap["expressions"] = expressionsItems
+			}
+		}
 		apiResource.Spec["client_selector"] = client_selectorMap
 	}
 	if len(data.CookieMatchers) > 0 {
@@ -1612,6 +1668,20 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 	}
 	if data.DomainMatcher != nil {
 		domain_matcherMap := make(map[string]interface{})
+		if !data.DomainMatcher.ExactValues.IsNull() && !data.DomainMatcher.ExactValues.IsUnknown() {
+			var exact_valuesItems []string
+			diags := data.DomainMatcher.ExactValues.ElementsAs(ctx, &exact_valuesItems, false)
+			if !diags.HasError() {
+				domain_matcherMap["exact_values"] = exact_valuesItems
+			}
+		}
+		if !data.DomainMatcher.RegexValues.IsNull() && !data.DomainMatcher.RegexValues.IsUnknown() {
+			var regex_valuesItems []string
+			diags := data.DomainMatcher.RegexValues.ElementsAs(ctx, &regex_valuesItems, false)
+			if !diags.HasError() {
+				domain_matcherMap["regex_values"] = regex_valuesItems
+			}
+		}
 		apiResource.Spec["domain_matcher"] = domain_matcherMap
 	}
 	if len(data.Headers) > 0 {
@@ -1664,6 +1734,13 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 		if !data.HTTPMethod.InvertMatcher.IsNull() && !data.HTTPMethod.InvertMatcher.IsUnknown() {
 			http_methodMap["invert_matcher"] = data.HTTPMethod.InvertMatcher.ValueBool()
 		}
+		if !data.HTTPMethod.Methods.IsNull() && !data.HTTPMethod.Methods.IsUnknown() {
+			var methodsItems []string
+			diags := data.HTTPMethod.Methods.ElementsAs(ctx, &methodsItems, false)
+			if !diags.HasError() {
+				http_methodMap["methods"] = methodsItems
+			}
+		}
 		apiResource.Spec["http_method"] = http_methodMap
 	}
 	if data.IPMatcher != nil {
@@ -1701,14 +1778,35 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 		if !data.IPPrefixList.InvertMatch.IsNull() && !data.IPPrefixList.InvertMatch.IsUnknown() {
 			ip_prefix_listMap["invert_match"] = data.IPPrefixList.InvertMatch.ValueBool()
 		}
+		if !data.IPPrefixList.IPPrefixes.IsNull() && !data.IPPrefixList.IPPrefixes.IsUnknown() {
+			var ip_prefixesItems []string
+			diags := data.IPPrefixList.IPPrefixes.ElementsAs(ctx, &ip_prefixesItems, false)
+			if !diags.HasError() {
+				ip_prefix_listMap["ip_prefixes"] = ip_prefixesItems
+			}
+		}
 		apiResource.Spec["ip_prefix_list"] = ip_prefix_listMap
 	}
 	if data.IPThreatCategoryList != nil {
 		ip_threat_category_listMap := make(map[string]interface{})
+		if !data.IPThreatCategoryList.IPThreatCategories.IsNull() && !data.IPThreatCategoryList.IPThreatCategories.IsUnknown() {
+			var ip_threat_categoriesItems []string
+			diags := data.IPThreatCategoryList.IPThreatCategories.ElementsAs(ctx, &ip_threat_categoriesItems, false)
+			if !diags.HasError() {
+				ip_threat_category_listMap["ip_threat_categories"] = ip_threat_categoriesItems
+			}
+		}
 		apiResource.Spec["ip_threat_category_list"] = ip_threat_category_listMap
 	}
 	if data.Ja4TLSFingerprint != nil {
 		ja4_tls_fingerprintMap := make(map[string]interface{})
+		if !data.Ja4TLSFingerprint.ExactValues.IsNull() && !data.Ja4TLSFingerprint.ExactValues.IsUnknown() {
+			var exact_valuesItems []string
+			diags := data.Ja4TLSFingerprint.ExactValues.ElementsAs(ctx, &exact_valuesItems, false)
+			if !diags.HasError() {
+				ja4_tls_fingerprintMap["exact_values"] = exact_valuesItems
+			}
+		}
 		apiResource.Spec["ja4_tls_fingerprint"] = ja4_tls_fingerprintMap
 	}
 	if len(data.JwtClaims) > 0 {
@@ -1758,6 +1856,13 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 	}
 	if data.LabelMatcher != nil {
 		label_matcherMap := make(map[string]interface{})
+		if !data.LabelMatcher.Keys.IsNull() && !data.LabelMatcher.Keys.IsUnknown() {
+			var keysItems []string
+			diags := data.LabelMatcher.Keys.ElementsAs(ctx, &keysItems, false)
+			if !diags.HasError() {
+				label_matcherMap["keys"] = keysItems
+			}
+		}
 		apiResource.Spec["label_matcher"] = label_matcherMap
 	}
 	if data.MumAction != nil {
@@ -1772,8 +1877,43 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 	}
 	if data.Path != nil {
 		pathMap := make(map[string]interface{})
+		if !data.Path.ExactValues.IsNull() && !data.Path.ExactValues.IsUnknown() {
+			var exact_valuesItems []string
+			diags := data.Path.ExactValues.ElementsAs(ctx, &exact_valuesItems, false)
+			if !diags.HasError() {
+				pathMap["exact_values"] = exact_valuesItems
+			}
+		}
 		if !data.Path.InvertMatcher.IsNull() && !data.Path.InvertMatcher.IsUnknown() {
 			pathMap["invert_matcher"] = data.Path.InvertMatcher.ValueBool()
+		}
+		if !data.Path.PrefixValues.IsNull() && !data.Path.PrefixValues.IsUnknown() {
+			var prefix_valuesItems []string
+			diags := data.Path.PrefixValues.ElementsAs(ctx, &prefix_valuesItems, false)
+			if !diags.HasError() {
+				pathMap["prefix_values"] = prefix_valuesItems
+			}
+		}
+		if !data.Path.RegexValues.IsNull() && !data.Path.RegexValues.IsUnknown() {
+			var regex_valuesItems []string
+			diags := data.Path.RegexValues.ElementsAs(ctx, &regex_valuesItems, false)
+			if !diags.HasError() {
+				pathMap["regex_values"] = regex_valuesItems
+			}
+		}
+		if !data.Path.SuffixValues.IsNull() && !data.Path.SuffixValues.IsUnknown() {
+			var suffix_valuesItems []string
+			diags := data.Path.SuffixValues.ElementsAs(ctx, &suffix_valuesItems, false)
+			if !diags.HasError() {
+				pathMap["suffix_values"] = suffix_valuesItems
+			}
+		}
+		if !data.Path.Transformers.IsNull() && !data.Path.Transformers.IsUnknown() {
+			var transformersItems []string
+			diags := data.Path.Transformers.ElementsAs(ctx, &transformersItems, false)
+			if !diags.HasError() {
+				pathMap["transformers"] = transformersItems
+			}
 		}
 		apiResource.Spec["path"] = pathMap
 	}
@@ -1781,6 +1921,13 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 		port_matcherMap := make(map[string]interface{})
 		if !data.PortMatcher.InvertMatcher.IsNull() && !data.PortMatcher.InvertMatcher.IsUnknown() {
 			port_matcherMap["invert_matcher"] = data.PortMatcher.InvertMatcher.ValueBool()
+		}
+		if !data.PortMatcher.Ports.IsNull() && !data.PortMatcher.Ports.IsUnknown() {
+			var portsItems []string
+			diags := data.PortMatcher.Ports.ElementsAs(ctx, &portsItems, false)
+			if !diags.HasError() {
+				port_matcherMap["ports"] = portsItems
+			}
 		}
 		apiResource.Spec["port_matcher"] = port_matcherMap
 	}
@@ -1934,6 +2081,27 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 	}
 	if data.TLSFingerprintMatcher != nil {
 		tls_fingerprint_matcherMap := make(map[string]interface{})
+		if !data.TLSFingerprintMatcher.Classes.IsNull() && !data.TLSFingerprintMatcher.Classes.IsUnknown() {
+			var classesItems []string
+			diags := data.TLSFingerprintMatcher.Classes.ElementsAs(ctx, &classesItems, false)
+			if !diags.HasError() {
+				tls_fingerprint_matcherMap["classes"] = classesItems
+			}
+		}
+		if !data.TLSFingerprintMatcher.ExactValues.IsNull() && !data.TLSFingerprintMatcher.ExactValues.IsUnknown() {
+			var exact_valuesItems []string
+			diags := data.TLSFingerprintMatcher.ExactValues.ElementsAs(ctx, &exact_valuesItems, false)
+			if !diags.HasError() {
+				tls_fingerprint_matcherMap["exact_values"] = exact_valuesItems
+			}
+		}
+		if !data.TLSFingerprintMatcher.ExcludedValues.IsNull() && !data.TLSFingerprintMatcher.ExcludedValues.IsUnknown() {
+			var excluded_valuesItems []string
+			diags := data.TLSFingerprintMatcher.ExcludedValues.ElementsAs(ctx, &excluded_valuesItems, false)
+			if !diags.HasError() {
+				tls_fingerprint_matcherMap["excluded_values"] = excluded_valuesItems
+			}
+		}
 		apiResource.Spec["tls_fingerprint_matcher"] = tls_fingerprint_matcherMap
 	}
 	if data.WAFAction != nil {
@@ -3378,6 +3546,13 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 		if !data.APIGroupMatcher.InvertMatcher.IsNull() && !data.APIGroupMatcher.InvertMatcher.IsUnknown() {
 			api_group_matcherMap["invert_matcher"] = data.APIGroupMatcher.InvertMatcher.ValueBool()
 		}
+		if !data.APIGroupMatcher.Match.IsNull() && !data.APIGroupMatcher.Match.IsUnknown() {
+			var matchItems []string
+			diags := data.APIGroupMatcher.Match.ElementsAs(ctx, &matchItems, false)
+			if !diags.HasError() {
+				api_group_matcherMap["match"] = matchItems
+			}
+		}
 		apiResource.Spec["api_group_matcher"] = api_group_matcherMap
 	}
 	if len(data.ArgMatchers) > 0 {
@@ -3427,6 +3602,13 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 	}
 	if data.AsnList != nil {
 		asn_listMap := make(map[string]interface{})
+		if !data.AsnList.AsNumbers.IsNull() && !data.AsnList.AsNumbers.IsUnknown() {
+			var as_numbersItems []int64
+			diags := data.AsnList.AsNumbers.ElementsAs(ctx, &as_numbersItems, false)
+			if !diags.HasError() {
+				asn_listMap["as_numbers"] = as_numbersItems
+			}
+		}
 		apiResource.Spec["asn_list"] = asn_listMap
 	}
 	if data.AsnMatcher != nil {
@@ -3458,6 +3640,27 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 	}
 	if data.BodyMatcher != nil {
 		body_matcherMap := make(map[string]interface{})
+		if !data.BodyMatcher.ExactValues.IsNull() && !data.BodyMatcher.ExactValues.IsUnknown() {
+			var exact_valuesItems []string
+			diags := data.BodyMatcher.ExactValues.ElementsAs(ctx, &exact_valuesItems, false)
+			if !diags.HasError() {
+				body_matcherMap["exact_values"] = exact_valuesItems
+			}
+		}
+		if !data.BodyMatcher.RegexValues.IsNull() && !data.BodyMatcher.RegexValues.IsUnknown() {
+			var regex_valuesItems []string
+			diags := data.BodyMatcher.RegexValues.ElementsAs(ctx, &regex_valuesItems, false)
+			if !diags.HasError() {
+				body_matcherMap["regex_values"] = regex_valuesItems
+			}
+		}
+		if !data.BodyMatcher.Transformers.IsNull() && !data.BodyMatcher.Transformers.IsUnknown() {
+			var transformersItems []string
+			diags := data.BodyMatcher.Transformers.ElementsAs(ctx, &transformersItems, false)
+			if !diags.HasError() {
+				body_matcherMap["transformers"] = transformersItems
+			}
+		}
 		apiResource.Spec["body_matcher"] = body_matcherMap
 	}
 	if data.BotAction != nil {
@@ -3472,10 +3675,31 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 	}
 	if data.ClientNameMatcher != nil {
 		client_name_matcherMap := make(map[string]interface{})
+		if !data.ClientNameMatcher.ExactValues.IsNull() && !data.ClientNameMatcher.ExactValues.IsUnknown() {
+			var exact_valuesItems []string
+			diags := data.ClientNameMatcher.ExactValues.ElementsAs(ctx, &exact_valuesItems, false)
+			if !diags.HasError() {
+				client_name_matcherMap["exact_values"] = exact_valuesItems
+			}
+		}
+		if !data.ClientNameMatcher.RegexValues.IsNull() && !data.ClientNameMatcher.RegexValues.IsUnknown() {
+			var regex_valuesItems []string
+			diags := data.ClientNameMatcher.RegexValues.ElementsAs(ctx, &regex_valuesItems, false)
+			if !diags.HasError() {
+				client_name_matcherMap["regex_values"] = regex_valuesItems
+			}
+		}
 		apiResource.Spec["client_name_matcher"] = client_name_matcherMap
 	}
 	if data.ClientSelector != nil {
 		client_selectorMap := make(map[string]interface{})
+		if !data.ClientSelector.Expressions.IsNull() && !data.ClientSelector.Expressions.IsUnknown() {
+			var expressionsItems []string
+			diags := data.ClientSelector.Expressions.ElementsAs(ctx, &expressionsItems, false)
+			if !diags.HasError() {
+				client_selectorMap["expressions"] = expressionsItems
+			}
+		}
 		apiResource.Spec["client_selector"] = client_selectorMap
 	}
 	if len(data.CookieMatchers) > 0 {
@@ -3525,6 +3749,20 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 	}
 	if data.DomainMatcher != nil {
 		domain_matcherMap := make(map[string]interface{})
+		if !data.DomainMatcher.ExactValues.IsNull() && !data.DomainMatcher.ExactValues.IsUnknown() {
+			var exact_valuesItems []string
+			diags := data.DomainMatcher.ExactValues.ElementsAs(ctx, &exact_valuesItems, false)
+			if !diags.HasError() {
+				domain_matcherMap["exact_values"] = exact_valuesItems
+			}
+		}
+		if !data.DomainMatcher.RegexValues.IsNull() && !data.DomainMatcher.RegexValues.IsUnknown() {
+			var regex_valuesItems []string
+			diags := data.DomainMatcher.RegexValues.ElementsAs(ctx, &regex_valuesItems, false)
+			if !diags.HasError() {
+				domain_matcherMap["regex_values"] = regex_valuesItems
+			}
+		}
 		apiResource.Spec["domain_matcher"] = domain_matcherMap
 	}
 	if len(data.Headers) > 0 {
@@ -3577,6 +3815,13 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 		if !data.HTTPMethod.InvertMatcher.IsNull() && !data.HTTPMethod.InvertMatcher.IsUnknown() {
 			http_methodMap["invert_matcher"] = data.HTTPMethod.InvertMatcher.ValueBool()
 		}
+		if !data.HTTPMethod.Methods.IsNull() && !data.HTTPMethod.Methods.IsUnknown() {
+			var methodsItems []string
+			diags := data.HTTPMethod.Methods.ElementsAs(ctx, &methodsItems, false)
+			if !diags.HasError() {
+				http_methodMap["methods"] = methodsItems
+			}
+		}
 		apiResource.Spec["http_method"] = http_methodMap
 	}
 	if data.IPMatcher != nil {
@@ -3614,14 +3859,35 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 		if !data.IPPrefixList.InvertMatch.IsNull() && !data.IPPrefixList.InvertMatch.IsUnknown() {
 			ip_prefix_listMap["invert_match"] = data.IPPrefixList.InvertMatch.ValueBool()
 		}
+		if !data.IPPrefixList.IPPrefixes.IsNull() && !data.IPPrefixList.IPPrefixes.IsUnknown() {
+			var ip_prefixesItems []string
+			diags := data.IPPrefixList.IPPrefixes.ElementsAs(ctx, &ip_prefixesItems, false)
+			if !diags.HasError() {
+				ip_prefix_listMap["ip_prefixes"] = ip_prefixesItems
+			}
+		}
 		apiResource.Spec["ip_prefix_list"] = ip_prefix_listMap
 	}
 	if data.IPThreatCategoryList != nil {
 		ip_threat_category_listMap := make(map[string]interface{})
+		if !data.IPThreatCategoryList.IPThreatCategories.IsNull() && !data.IPThreatCategoryList.IPThreatCategories.IsUnknown() {
+			var ip_threat_categoriesItems []string
+			diags := data.IPThreatCategoryList.IPThreatCategories.ElementsAs(ctx, &ip_threat_categoriesItems, false)
+			if !diags.HasError() {
+				ip_threat_category_listMap["ip_threat_categories"] = ip_threat_categoriesItems
+			}
+		}
 		apiResource.Spec["ip_threat_category_list"] = ip_threat_category_listMap
 	}
 	if data.Ja4TLSFingerprint != nil {
 		ja4_tls_fingerprintMap := make(map[string]interface{})
+		if !data.Ja4TLSFingerprint.ExactValues.IsNull() && !data.Ja4TLSFingerprint.ExactValues.IsUnknown() {
+			var exact_valuesItems []string
+			diags := data.Ja4TLSFingerprint.ExactValues.ElementsAs(ctx, &exact_valuesItems, false)
+			if !diags.HasError() {
+				ja4_tls_fingerprintMap["exact_values"] = exact_valuesItems
+			}
+		}
 		apiResource.Spec["ja4_tls_fingerprint"] = ja4_tls_fingerprintMap
 	}
 	if len(data.JwtClaims) > 0 {
@@ -3671,6 +3937,13 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 	}
 	if data.LabelMatcher != nil {
 		label_matcherMap := make(map[string]interface{})
+		if !data.LabelMatcher.Keys.IsNull() && !data.LabelMatcher.Keys.IsUnknown() {
+			var keysItems []string
+			diags := data.LabelMatcher.Keys.ElementsAs(ctx, &keysItems, false)
+			if !diags.HasError() {
+				label_matcherMap["keys"] = keysItems
+			}
+		}
 		apiResource.Spec["label_matcher"] = label_matcherMap
 	}
 	if data.MumAction != nil {
@@ -3685,8 +3958,43 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 	}
 	if data.Path != nil {
 		pathMap := make(map[string]interface{})
+		if !data.Path.ExactValues.IsNull() && !data.Path.ExactValues.IsUnknown() {
+			var exact_valuesItems []string
+			diags := data.Path.ExactValues.ElementsAs(ctx, &exact_valuesItems, false)
+			if !diags.HasError() {
+				pathMap["exact_values"] = exact_valuesItems
+			}
+		}
 		if !data.Path.InvertMatcher.IsNull() && !data.Path.InvertMatcher.IsUnknown() {
 			pathMap["invert_matcher"] = data.Path.InvertMatcher.ValueBool()
+		}
+		if !data.Path.PrefixValues.IsNull() && !data.Path.PrefixValues.IsUnknown() {
+			var prefix_valuesItems []string
+			diags := data.Path.PrefixValues.ElementsAs(ctx, &prefix_valuesItems, false)
+			if !diags.HasError() {
+				pathMap["prefix_values"] = prefix_valuesItems
+			}
+		}
+		if !data.Path.RegexValues.IsNull() && !data.Path.RegexValues.IsUnknown() {
+			var regex_valuesItems []string
+			diags := data.Path.RegexValues.ElementsAs(ctx, &regex_valuesItems, false)
+			if !diags.HasError() {
+				pathMap["regex_values"] = regex_valuesItems
+			}
+		}
+		if !data.Path.SuffixValues.IsNull() && !data.Path.SuffixValues.IsUnknown() {
+			var suffix_valuesItems []string
+			diags := data.Path.SuffixValues.ElementsAs(ctx, &suffix_valuesItems, false)
+			if !diags.HasError() {
+				pathMap["suffix_values"] = suffix_valuesItems
+			}
+		}
+		if !data.Path.Transformers.IsNull() && !data.Path.Transformers.IsUnknown() {
+			var transformersItems []string
+			diags := data.Path.Transformers.ElementsAs(ctx, &transformersItems, false)
+			if !diags.HasError() {
+				pathMap["transformers"] = transformersItems
+			}
 		}
 		apiResource.Spec["path"] = pathMap
 	}
@@ -3694,6 +4002,13 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 		port_matcherMap := make(map[string]interface{})
 		if !data.PortMatcher.InvertMatcher.IsNull() && !data.PortMatcher.InvertMatcher.IsUnknown() {
 			port_matcherMap["invert_matcher"] = data.PortMatcher.InvertMatcher.ValueBool()
+		}
+		if !data.PortMatcher.Ports.IsNull() && !data.PortMatcher.Ports.IsUnknown() {
+			var portsItems []string
+			diags := data.PortMatcher.Ports.ElementsAs(ctx, &portsItems, false)
+			if !diags.HasError() {
+				port_matcherMap["ports"] = portsItems
+			}
 		}
 		apiResource.Spec["port_matcher"] = port_matcherMap
 	}
@@ -3847,6 +4162,27 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 	}
 	if data.TLSFingerprintMatcher != nil {
 		tls_fingerprint_matcherMap := make(map[string]interface{})
+		if !data.TLSFingerprintMatcher.Classes.IsNull() && !data.TLSFingerprintMatcher.Classes.IsUnknown() {
+			var classesItems []string
+			diags := data.TLSFingerprintMatcher.Classes.ElementsAs(ctx, &classesItems, false)
+			if !diags.HasError() {
+				tls_fingerprint_matcherMap["classes"] = classesItems
+			}
+		}
+		if !data.TLSFingerprintMatcher.ExactValues.IsNull() && !data.TLSFingerprintMatcher.ExactValues.IsUnknown() {
+			var exact_valuesItems []string
+			diags := data.TLSFingerprintMatcher.ExactValues.ElementsAs(ctx, &exact_valuesItems, false)
+			if !diags.HasError() {
+				tls_fingerprint_matcherMap["exact_values"] = exact_valuesItems
+			}
+		}
+		if !data.TLSFingerprintMatcher.ExcludedValues.IsNull() && !data.TLSFingerprintMatcher.ExcludedValues.IsUnknown() {
+			var excluded_valuesItems []string
+			diags := data.TLSFingerprintMatcher.ExcludedValues.ElementsAs(ctx, &excluded_valuesItems, false)
+			if !diags.HasError() {
+				tls_fingerprint_matcherMap["excluded_values"] = excluded_valuesItems
+			}
+		}
 		apiResource.Spec["tls_fingerprint_matcher"] = tls_fingerprint_matcherMap
 	}
 	if data.WAFAction != nil {

@@ -639,6 +639,13 @@ func (r *AppFirewallResource) Create(ctx context.Context, req resource.CreateReq
 	}
 	if data.AllowedResponseCodes != nil {
 		allowed_response_codesMap := make(map[string]interface{})
+		if !data.AllowedResponseCodes.ResponseCode.IsNull() && !data.AllowedResponseCodes.ResponseCode.IsUnknown() {
+			var response_codeItems []int64
+			diags := data.AllowedResponseCodes.ResponseCode.ElementsAs(ctx, &response_codeItems, false)
+			if !diags.HasError() {
+				allowed_response_codesMap["response_code"] = response_codeItems
+			}
+		}
 		apiResource.Spec["allowed_response_codes"] = allowed_response_codesMap
 	}
 	if data.Blocking != nil {
@@ -1147,6 +1154,13 @@ func (r *AppFirewallResource) Update(ctx context.Context, req resource.UpdateReq
 	}
 	if data.AllowedResponseCodes != nil {
 		allowed_response_codesMap := make(map[string]interface{})
+		if !data.AllowedResponseCodes.ResponseCode.IsNull() && !data.AllowedResponseCodes.ResponseCode.IsUnknown() {
+			var response_codeItems []int64
+			diags := data.AllowedResponseCodes.ResponseCode.ElementsAs(ctx, &response_codeItems, false)
+			if !diags.HasError() {
+				allowed_response_codesMap["response_code"] = response_codeItems
+			}
+		}
 		apiResource.Spec["allowed_response_codes"] = allowed_response_codesMap
 	}
 	if data.Blocking != nil {

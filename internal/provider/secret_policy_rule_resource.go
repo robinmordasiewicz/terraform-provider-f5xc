@@ -330,10 +330,31 @@ func (r *SecretPolicyRuleResource) Create(ctx context.Context, req resource.Crea
 	// Marshal spec fields from Terraform state to API struct
 	if data.ClientNameMatcher != nil {
 		client_name_matcherMap := make(map[string]interface{})
+		if !data.ClientNameMatcher.ExactValues.IsNull() && !data.ClientNameMatcher.ExactValues.IsUnknown() {
+			var exact_valuesItems []string
+			diags := data.ClientNameMatcher.ExactValues.ElementsAs(ctx, &exact_valuesItems, false)
+			if !diags.HasError() {
+				client_name_matcherMap["exact_values"] = exact_valuesItems
+			}
+		}
+		if !data.ClientNameMatcher.RegexValues.IsNull() && !data.ClientNameMatcher.RegexValues.IsUnknown() {
+			var regex_valuesItems []string
+			diags := data.ClientNameMatcher.RegexValues.ElementsAs(ctx, &regex_valuesItems, false)
+			if !diags.HasError() {
+				client_name_matcherMap["regex_values"] = regex_valuesItems
+			}
+		}
 		apiResource.Spec["client_name_matcher"] = client_name_matcherMap
 	}
 	if data.ClientSelector != nil {
 		client_selectorMap := make(map[string]interface{})
+		if !data.ClientSelector.Expressions.IsNull() && !data.ClientSelector.Expressions.IsUnknown() {
+			var expressionsItems []string
+			diags := data.ClientSelector.Expressions.ElementsAs(ctx, &expressionsItems, false)
+			if !diags.HasError() {
+				client_selectorMap["expressions"] = expressionsItems
+			}
+		}
 		apiResource.Spec["client_selector"] = client_selectorMap
 	}
 	if !data.Action.IsNull() && !data.Action.IsUnknown() {
@@ -580,10 +601,31 @@ func (r *SecretPolicyRuleResource) Update(ctx context.Context, req resource.Upda
 	// Marshal spec fields from Terraform state to API struct
 	if data.ClientNameMatcher != nil {
 		client_name_matcherMap := make(map[string]interface{})
+		if !data.ClientNameMatcher.ExactValues.IsNull() && !data.ClientNameMatcher.ExactValues.IsUnknown() {
+			var exact_valuesItems []string
+			diags := data.ClientNameMatcher.ExactValues.ElementsAs(ctx, &exact_valuesItems, false)
+			if !diags.HasError() {
+				client_name_matcherMap["exact_values"] = exact_valuesItems
+			}
+		}
+		if !data.ClientNameMatcher.RegexValues.IsNull() && !data.ClientNameMatcher.RegexValues.IsUnknown() {
+			var regex_valuesItems []string
+			diags := data.ClientNameMatcher.RegexValues.ElementsAs(ctx, &regex_valuesItems, false)
+			if !diags.HasError() {
+				client_name_matcherMap["regex_values"] = regex_valuesItems
+			}
+		}
 		apiResource.Spec["client_name_matcher"] = client_name_matcherMap
 	}
 	if data.ClientSelector != nil {
 		client_selectorMap := make(map[string]interface{})
+		if !data.ClientSelector.Expressions.IsNull() && !data.ClientSelector.Expressions.IsUnknown() {
+			var expressionsItems []string
+			diags := data.ClientSelector.Expressions.ElementsAs(ctx, &expressionsItems, false)
+			if !diags.HasError() {
+				client_selectorMap["expressions"] = expressionsItems
+			}
+		}
 		apiResource.Spec["client_selector"] = client_selectorMap
 	}
 	if !data.Action.IsNull() && !data.Action.IsUnknown() {

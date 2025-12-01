@@ -2616,6 +2616,13 @@ func (r *GCPVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 		if !data.IngressEgressGw.GCPCertifiedHw.IsNull() && !data.IngressEgressGw.GCPCertifiedHw.IsUnknown() {
 			ingress_egress_gwMap["gcp_certified_hw"] = data.IngressEgressGw.GCPCertifiedHw.ValueString()
 		}
+		if !data.IngressEgressGw.GCPZoneNames.IsNull() && !data.IngressEgressGw.GCPZoneNames.IsUnknown() {
+			var gcp_zone_namesItems []string
+			diags := data.IngressEgressGw.GCPZoneNames.ElementsAs(ctx, &gcp_zone_namesItems, false)
+			if !diags.HasError() {
+				ingress_egress_gwMap["gcp_zone_names"] = gcp_zone_namesItems
+			}
+		}
 		if data.IngressEgressGw.GlobalNetworkList != nil {
 			global_network_listNestedMap := make(map[string]interface{})
 			ingress_egress_gwMap["global_network_list"] = global_network_listNestedMap
@@ -2681,6 +2688,13 @@ func (r *GCPVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 		ingress_gwMap := make(map[string]interface{})
 		if !data.IngressGw.GCPCertifiedHw.IsNull() && !data.IngressGw.GCPCertifiedHw.IsUnknown() {
 			ingress_gwMap["gcp_certified_hw"] = data.IngressGw.GCPCertifiedHw.ValueString()
+		}
+		if !data.IngressGw.GCPZoneNames.IsNull() && !data.IngressGw.GCPZoneNames.IsUnknown() {
+			var gcp_zone_namesItems []string
+			diags := data.IngressGw.GCPZoneNames.ElementsAs(ctx, &gcp_zone_namesItems, false)
+			if !diags.HasError() {
+				ingress_gwMap["gcp_zone_names"] = gcp_zone_namesItems
+			}
 		}
 		if data.IngressGw.LocalNetwork != nil {
 			local_networkNestedMap := make(map[string]interface{})
@@ -2825,6 +2839,13 @@ func (r *GCPVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 		}
 		if !data.VoltstackCluster.GCPCertifiedHw.IsNull() && !data.VoltstackCluster.GCPCertifiedHw.IsUnknown() {
 			voltstack_clusterMap["gcp_certified_hw"] = data.VoltstackCluster.GCPCertifiedHw.ValueString()
+		}
+		if !data.VoltstackCluster.GCPZoneNames.IsNull() && !data.VoltstackCluster.GCPZoneNames.IsUnknown() {
+			var gcp_zone_namesItems []string
+			diags := data.VoltstackCluster.GCPZoneNames.ElementsAs(ctx, &gcp_zone_namesItems, false)
+			if !diags.HasError() {
+				voltstack_clusterMap["gcp_zone_names"] = gcp_zone_namesItems
+			}
 		}
 		if data.VoltstackCluster.GlobalNetworkList != nil {
 			global_network_listNestedMap := make(map[string]interface{})
@@ -4175,6 +4196,13 @@ func (r *GCPVPCSiteResource) Update(ctx context.Context, req resource.UpdateRequ
 		if !data.IngressEgressGw.GCPCertifiedHw.IsNull() && !data.IngressEgressGw.GCPCertifiedHw.IsUnknown() {
 			ingress_egress_gwMap["gcp_certified_hw"] = data.IngressEgressGw.GCPCertifiedHw.ValueString()
 		}
+		if !data.IngressEgressGw.GCPZoneNames.IsNull() && !data.IngressEgressGw.GCPZoneNames.IsUnknown() {
+			var gcp_zone_namesItems []string
+			diags := data.IngressEgressGw.GCPZoneNames.ElementsAs(ctx, &gcp_zone_namesItems, false)
+			if !diags.HasError() {
+				ingress_egress_gwMap["gcp_zone_names"] = gcp_zone_namesItems
+			}
+		}
 		if data.IngressEgressGw.GlobalNetworkList != nil {
 			global_network_listNestedMap := make(map[string]interface{})
 			ingress_egress_gwMap["global_network_list"] = global_network_listNestedMap
@@ -4240,6 +4268,13 @@ func (r *GCPVPCSiteResource) Update(ctx context.Context, req resource.UpdateRequ
 		ingress_gwMap := make(map[string]interface{})
 		if !data.IngressGw.GCPCertifiedHw.IsNull() && !data.IngressGw.GCPCertifiedHw.IsUnknown() {
 			ingress_gwMap["gcp_certified_hw"] = data.IngressGw.GCPCertifiedHw.ValueString()
+		}
+		if !data.IngressGw.GCPZoneNames.IsNull() && !data.IngressGw.GCPZoneNames.IsUnknown() {
+			var gcp_zone_namesItems []string
+			diags := data.IngressGw.GCPZoneNames.ElementsAs(ctx, &gcp_zone_namesItems, false)
+			if !diags.HasError() {
+				ingress_gwMap["gcp_zone_names"] = gcp_zone_namesItems
+			}
 		}
 		if data.IngressGw.LocalNetwork != nil {
 			local_networkNestedMap := make(map[string]interface{})
@@ -4384,6 +4419,13 @@ func (r *GCPVPCSiteResource) Update(ctx context.Context, req resource.UpdateRequ
 		}
 		if !data.VoltstackCluster.GCPCertifiedHw.IsNull() && !data.VoltstackCluster.GCPCertifiedHw.IsUnknown() {
 			voltstack_clusterMap["gcp_certified_hw"] = data.VoltstackCluster.GCPCertifiedHw.ValueString()
+		}
+		if !data.VoltstackCluster.GCPZoneNames.IsNull() && !data.VoltstackCluster.GCPZoneNames.IsUnknown() {
+			var gcp_zone_namesItems []string
+			diags := data.VoltstackCluster.GCPZoneNames.ElementsAs(ctx, &gcp_zone_namesItems, false)
+			if !diags.HasError() {
+				voltstack_clusterMap["gcp_zone_names"] = gcp_zone_namesItems
+			}
 		}
 		if data.VoltstackCluster.GlobalNetworkList != nil {
 			global_network_listNestedMap := make(map[string]interface{})

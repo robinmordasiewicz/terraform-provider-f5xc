@@ -21,12 +21,12 @@ type OpenAPISpec struct {
 
 // ResourceInfo holds information about a resource to generate
 type ResourceInfo struct {
-	Name          string   // e.g., "http_loadbalancer"
-	TitleCase     string   // e.g., "HTTPLoadBalancer"
-	CamelCase     string   // e.g., "HttpLoadbalancer"
-	APIPath       string   // e.g., "/api/config/namespaces/{namespace}/http_loadbalancers"
-	Attributes    []string // List of attribute names
-	SpecFile      string   // OpenAPI spec file name
+	Name       string   // e.g., "http_loadbalancer"
+	TitleCase  string   // e.g., "HTTPLoadBalancer"
+	CamelCase  string   // e.g., "HttpLoadbalancer"
+	APIPath    string   // e.g., "/api/config/namespaces/{namespace}/http_loadbalancers"
+	Attributes []string // List of attribute names
+	SpecFile   string   // OpenAPI spec file name
 }
 
 const resourceTemplate = `package provider
@@ -379,9 +379,9 @@ func extractResourceInfo(specFile string) *ResourceInfo {
 	var apiPath string
 	for path := range spec.Paths {
 		if strings.Contains(path, "/api/config/namespaces/") &&
-		   strings.Contains(path, resourceName) &&
-		   !strings.Contains(path, "{name}") &&
-		   !strings.Contains(path, "{metadata.name}") {
+			strings.Contains(path, resourceName) &&
+			!strings.Contains(path, "{name}") &&
+			!strings.Contains(path, "{metadata.name}") {
 			apiPath = path
 			break
 		}

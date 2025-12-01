@@ -18,9 +18,11 @@
 package main
 
 import (
+	"bytes"
 	"encoding/json"
 	"flag"
 	"fmt"
+	"go/format"
 	"os"
 	"path/filepath"
 	"regexp"
@@ -31,11 +33,11 @@ import (
 
 // Configuration
 var (
-	specDir    string
-	dryRun     bool
-	outputDir  string
-	clientDir  string
-	verbose    bool
+	specDir   string
+	dryRun    bool
+	outputDir string
+	clientDir string
+	verbose   bool
 )
 
 // OpenAPI3Spec represents an OpenAPI 3.x specification
@@ -391,8 +393,8 @@ func extractAPIPath(spec *OpenAPI3Spec, resourceName string) (basePath string, i
 
 	// Fallback to default pattern if no path found
 	return fmt.Sprintf("/api/config/namespaces/%%s/%s", resourcePlural),
-		   fmt.Sprintf("/api/config/namespaces/%%s/%s/%%s", resourcePlural),
-		   true
+		fmt.Sprintf("/api/config/namespaces/%%s/%s/%%s", resourcePlural),
+		true
 }
 
 func extractResourceSchema(spec *OpenAPI3Spec, resourceName string) (*ResourceTemplate, error) {
@@ -490,7 +492,7 @@ func extractResourceSchema(spec *OpenAPI3Spec, resourceName string) (*ResourceTe
 	idComponentAttrs := []TerraformAttribute{
 		{Name: "name", GoName: "Name", TfsdkTag: "name", Type: "string",
 			Description: nameDescription,
-			Required: true, PlanModifier: "RequiresReplace", UseDomainValidator: useDomainValidator},
+			Required:    true, PlanModifier: "RequiresReplace", UseDomainValidator: useDomainValidator},
 	}
 
 	// For resources without namespace in API path (like namespace itself), namespace is optional
@@ -498,12 +500,12 @@ func extractResourceSchema(spec *OpenAPI3Spec, resourceName string) (*ResourceTe
 		idComponentAttrs = append(idComponentAttrs, TerraformAttribute{
 			Name: "namespace", GoName: "Namespace", TfsdkTag: "namespace", Type: "string",
 			Description: fmt.Sprintf("Namespace where the %s will be created.", toTitleCase(resourceName)),
-			Required: true, PlanModifier: "RequiresReplace"})
+			Required:    true, PlanModifier: "RequiresReplace"})
 	} else {
 		idComponentAttrs = append(idComponentAttrs, TerraformAttribute{
 			Name: "namespace", GoName: "Namespace", TfsdkTag: "namespace", Type: "string",
 			Description: fmt.Sprintf("Namespace for the %s. For this resource type, namespace should be empty or omitted.", toTitleCase(resourceName)),
-			Optional: true, Computed: true, PlanModifier: "UseStateForUnknown"})
+			Optional:    true, Computed: true, PlanModifier: "UseStateForUnknown"})
 	}
 
 	// Optional standard attrs will be sorted with other optionals
@@ -713,8 +715,8 @@ func convertToTerraformAttributeWithDepth(name string, schema SchemaDefinition, 
 		Optional:    !required,
 		OneOfGroup:  oneOfGroup,
 		MaxDepth:    depth,
-		IsSpecField: true,  // Attributes from OpenAPI spec are spec fields
-		JsonName:    name,  // Original OpenAPI property name for JSON marshaling
+		IsSpecField: true, // Attributes from OpenAPI spec are spec fields
+		JsonName:    name, // Original OpenAPI property name for JSON marshaling
 	}
 
 	// Build description
@@ -1015,11 +1017,11 @@ func formatDefaultDescription(desc string, defaultValue interface{}) string {
 	// Skip invalid/placeholder defaults using EXACT match only
 	// These are sentinel values that indicate "no value" rather than actual defaults
 	invalidDefaults := map[string]bool{
-		"INVALID":      true,
-		"NONE":         true,
-		"UNKNOWN":      true,
-		"UNSPECIFIED":  true,
-		"0":            true, // Integer zero is often just the zero value
+		"INVALID":     true,
+		"NONE":        true,
+		"UNKNOWN":     true,
+		"UNSPECIFIED": true,
+		"0":           true, // Integer zero is often just the zero value
 	}
 
 	// Check if default is EXACTLY an invalid/placeholder value
@@ -1166,22 +1168,22 @@ func generateCapabilityDescription(resourceName, titleCase, rawDesc string) stri
 		"route":             "defining traffic routing rules for load balancers",
 
 		// Security
-		"app_firewall":              "web application firewall (WAF) protection",
-		"service_policy":            "defining service-level access control and security policies",
-		"network_firewall":          "network-level firewall rules and security controls",
-		"rate_limiter":              "protecting services from traffic spikes and DDoS attacks",
+		"app_firewall":                   "web application firewall (WAF) protection",
+		"service_policy":                 "defining service-level access control and security policies",
+		"network_firewall":               "network-level firewall rules and security controls",
+		"rate_limiter":                   "protecting services from traffic spikes and DDoS attacks",
 		"bot_defense_app_infrastructure": "bot detection and mitigation capabilities",
-		"malicious_user_mitigation": "identifying and blocking malicious user behavior",
-		"waf_exclusion_policy":      "excluding specific requests from WAF inspection",
+		"malicious_user_mitigation":      "identifying and blocking malicious user behavior",
+		"waf_exclusion_policy":           "excluding specific requests from WAF inspection",
 
 		// Networking
-		"network_connector":  "connecting networks across sites and cloud providers",
-		"virtual_network":    "creating isolated virtual network segments",
-		"cloud_connect":      "establishing connectivity to cloud provider networks",
-		"cloud_link":         "linking F5 sites to cloud provider infrastructure",
-		"bgp":                "BGP routing configuration for network connectivity",
-		"ip_prefix_set":      "defining IP address prefix lists for network policies",
-		"network_interface":  "configuring network interfaces on sites",
+		"network_connector": "connecting networks across sites and cloud providers",
+		"virtual_network":   "creating isolated virtual network segments",
+		"cloud_connect":     "establishing connectivity to cloud provider networks",
+		"cloud_link":        "linking F5 sites to cloud provider infrastructure",
+		"bgp":               "BGP routing configuration for network connectivity",
+		"ip_prefix_set":     "defining IP address prefix lists for network policies",
+		"network_interface": "configuring network interfaces on sites",
 
 		// DNS
 		"dns_zone":              "DNS zone management and configuration",
@@ -1191,19 +1193,19 @@ func generateCapabilityDescription(resourceName, titleCase, rawDesc string) stri
 		"dns_compliance_checks": "DNS security and compliance verification",
 
 		// Kubernetes
-		"k8s_cluster":             "Kubernetes cluster integration and management",
-		"virtual_k8s":             "virtual Kubernetes cluster deployment",
-		"k8s_cluster_role":        "Kubernetes RBAC cluster role definitions",
+		"k8s_cluster":              "Kubernetes cluster integration and management",
+		"virtual_k8s":              "virtual Kubernetes cluster deployment",
+		"k8s_cluster_role":         "Kubernetes RBAC cluster role definitions",
 		"k8s_cluster_role_binding": "Kubernetes RBAC cluster role bindings",
-		"k8s_pod_security_policy": "Kubernetes pod security policy enforcement",
-		"container_registry":      "container image registry configuration",
+		"k8s_pod_security_policy":  "Kubernetes pod security policy enforcement",
+		"container_registry":       "container image registry configuration",
 
 		// Authentication & Secrets
-		"authentication":   "authentication methods and identity provider integration",
+		"authentication":    "authentication methods and identity provider integration",
 		"cloud_credentials": "cloud provider credential management for site deployment",
-		"api_credential":   "API credential management for service authentication",
-		"token":            "API token generation and management",
-		"secret_policy":    "secret access policies and controls",
+		"api_credential":    "API credential management for service authentication",
+		"token":             "API token generation and management",
+		"secret_policy":     "secret access policies and controls",
 
 		// Certificates
 		"certificate":       "TLS/SSL certificate management",
@@ -2826,17 +2828,17 @@ func generateResourceFile(resource *ResourceTemplate) error {
 
 	// Create template with custom functions
 	funcMap := template.FuncMap{
-		"renderNestedAttrs":               renderNestedAttributes,
-		"renderNestedBlocks":              renderNestedBlocks,
-		"renderNestedModelTypes":          renderNestedModelTypes,
-		"renderBlockFields":               renderBlockFields,
-		"renderSpecStructFields":          renderSpecStructFields,
-		"renderSpecMarshalCode":           renderSpecMarshalCode,
-		"renderSpecMarshalCodeForCreate":  renderSpecMarshalCodeForCreate,
-		"renderSpecUnmarshalCode":         renderSpecUnmarshalCode,
-		"renderCreateComputedFieldsCode":  renderCreateComputedFieldsCode,
-		"renderUpdateComputedFieldsCode":  renderUpdateComputedFieldsCode,
-		"filterSpecFields":                filterSpecFields,
+		"renderNestedAttrs":              renderNestedAttributes,
+		"renderNestedBlocks":             renderNestedBlocks,
+		"renderNestedModelTypes":         renderNestedModelTypes,
+		"renderBlockFields":              renderBlockFields,
+		"renderSpecStructFields":         renderSpecStructFields,
+		"renderSpecMarshalCode":          renderSpecMarshalCode,
+		"renderSpecMarshalCodeForCreate": renderSpecMarshalCodeForCreate,
+		"renderSpecUnmarshalCode":        renderSpecUnmarshalCode,
+		"renderCreateComputedFieldsCode": renderCreateComputedFieldsCode,
+		"renderUpdateComputedFieldsCode": renderUpdateComputedFieldsCode,
+		"filterSpecFields":               filterSpecFields,
 	}
 
 	tmpl, err := template.New("resource").Funcs(funcMap).Parse(resourceTemplate)
@@ -2844,13 +2846,21 @@ func generateResourceFile(resource *ResourceTemplate) error {
 		return fmt.Errorf("template parse error: %w", err)
 	}
 
-	f, err := os.Create(outputPath)
-	if err != nil {
-		return fmt.Errorf("create file error: %w", err)
+	// Execute template to buffer first
+	var buf bytes.Buffer
+	if err := tmpl.Execute(&buf, resource); err != nil {
+		return fmt.Errorf("template execute error: %w", err)
 	}
-	defer f.Close()
 
-	return tmpl.Execute(f, resource)
+	// Format the generated code with gofmt
+	formatted, err := format.Source(buf.Bytes())
+	if err != nil {
+		// If formatting fails, write unformatted code with warning
+		fmt.Printf("⚠️  gofmt failed for %s: %v (writing unformatted)\n", outputPath, err)
+		formatted = buf.Bytes()
+	}
+
+	return os.WriteFile(outputPath, formatted, 0644)
 }
 
 // renderNestedAttributes generates the Attributes map for nested blocks
@@ -3187,13 +3197,21 @@ func generateClientTypes(resource *ResourceTemplate) error {
 		return fmt.Errorf("template parse error: %w", err)
 	}
 
-	f, err := os.Create(outputPath)
-	if err != nil {
-		return fmt.Errorf("create file error: %w", err)
+	// Execute template to buffer first
+	var buf bytes.Buffer
+	if err := tmpl.Execute(&buf, resource); err != nil {
+		return fmt.Errorf("template execute error: %w", err)
 	}
-	defer f.Close()
 
-	return tmpl.Execute(f, resource)
+	// Format the generated code with gofmt
+	formatted, err := format.Source(buf.Bytes())
+	if err != nil {
+		// If formatting fails, write unformatted code with warning
+		fmt.Printf("⚠️  gofmt failed for %s: %v (writing unformatted)\n", outputPath, err)
+		formatted = buf.Bytes()
+	}
+
+	return os.WriteFile(outputPath, formatted, 0644)
 }
 
 func generateDataSource(resource *ResourceTemplate) error {
@@ -3204,13 +3222,21 @@ func generateDataSource(resource *ResourceTemplate) error {
 		return fmt.Errorf("template parse error: %w", err)
 	}
 
-	f, err := os.Create(outputPath)
-	if err != nil {
-		return fmt.Errorf("create file error: %w", err)
+	// Execute template to buffer first
+	var buf bytes.Buffer
+	if err := tmpl.Execute(&buf, resource); err != nil {
+		return fmt.Errorf("template execute error: %w", err)
 	}
-	defer f.Close()
 
-	return tmpl.Execute(f, resource)
+	// Format the generated code with gofmt
+	formatted, err := format.Source(buf.Bytes())
+	if err != nil {
+		// If formatting fails, write unformatted code with warning
+		fmt.Printf("⚠️  gofmt failed for %s: %v (writing unformatted)\n", outputPath, err)
+		formatted = buf.Bytes()
+	}
+
+	return os.WriteFile(outputPath, formatted, 0644)
 }
 
 func generateCombinedClientTypes(results []GenerationResult) {
@@ -3466,7 +3492,15 @@ func New(version string) func() provider.Provider {
 }
 `, strings.Join(resources, "\n"), strings.Join(dataSources, "\n"))
 
-	if err := os.WriteFile(providerPath, []byte(providerContent), 0644); err != nil {
+	// Format the generated code with gofmt
+	formatted, err := format.Source([]byte(providerContent))
+	if err != nil {
+		// If formatting fails, write unformatted code with warning
+		fmt.Printf("⚠️  gofmt failed for %s: %v (writing unformatted)\n", providerPath, err)
+		formatted = []byte(providerContent)
+	}
+
+	if err := os.WriteFile(providerPath, formatted, 0644); err != nil {
 		fmt.Printf("❌ Error writing provider.go: %v\n", err)
 		return
 	}

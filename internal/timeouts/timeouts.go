@@ -161,15 +161,15 @@ func DeleteContext(ctx context.Context, t timeouts.Value) (context.Context, cont
 
 // LongRunningResourceTypes returns the list of resource types that need longer timeouts
 var LongRunningResourceTypes = map[string]bool{
-	"aws_vpc_site":     true,
-	"azure_vnet_site":  true,
-	"gcp_vpc_site":     true,
-	"aws_tgw_site":     true,
-	"voltstack_site":   true,
-	"securemesh_site":  true,
+	"aws_vpc_site":       true,
+	"azure_vnet_site":    true,
+	"gcp_vpc_site":       true,
+	"aws_tgw_site":       true,
+	"voltstack_site":     true,
+	"securemesh_site":    true,
 	"securemesh_site_v2": true,
-	"k8s_cluster":      true,
-	"virtual_k8s":      true,
+	"k8s_cluster":        true,
+	"virtual_k8s":        true,
 }
 
 // IsLongRunning returns true if the resource type typically has long operations

@@ -9,10 +9,10 @@ import (
 
 func TestNormalizeAPIURL(t *testing.T) {
 	tests := []struct {
-		name           string
-		input          string
-		expectedURL    string
-		expectedNorm   bool
+		name         string
+		input        string
+		expectedURL  string
+		expectedNorm bool
 	}{
 		{
 			name:         "clean URL - no changes",

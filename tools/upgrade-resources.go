@@ -35,15 +35,15 @@ type ResourceInfo struct {
 
 // LongRunningResources that require extended timeouts
 var longRunningResources = map[string]bool{
-	"aws_vpc_site":        true,
-	"azure_vnet_site":     true,
-	"gcp_vpc_site":        true,
-	"aws_tgw_site":        true,
-	"voltstack_site":      true,
-	"securemesh_site":     true,
-	"securemesh_site_v2":  true,
-	"k8s_cluster":         true,
-	"virtual_k8s":         true,
+	"aws_vpc_site":       true,
+	"azure_vnet_site":    true,
+	"gcp_vpc_site":       true,
+	"aws_tgw_site":       true,
+	"voltstack_site":     true,
+	"securemesh_site":    true,
+	"securemesh_site_v2": true,
+	"k8s_cluster":        true,
+	"virtual_k8s":        true,
 }
 
 func main() {

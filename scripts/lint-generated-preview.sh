@@ -335,7 +335,8 @@ if [ "$LINT_GO" = true ]; then
     echo "🔍 Running golangci-lint on generated Go files..."
     echo ""
 
-    if ! GO_LINT_OUTPUT=$(golangci-lint run --timeout=5m ./internal/provider/... 2>&1); then
+    # Lint same paths as CI: ./internal/... .
+    if ! GO_LINT_OUTPUT=$(golangci-lint run --timeout=5m ./internal/... . 2>&1); then
         GO_LINT_SUCCESS=false
     fi
 

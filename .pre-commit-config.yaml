@@ -54,12 +54,14 @@ repos:
 
   # =============================================================================
   # Go language checks - golangci-lint v2.x (validation only, no --fix)
+  # Runs on SAME paths as CI to ensure consistency: ./internal/... .
   # =============================================================================
   - repo: https://github.com/golangci/golangci-lint
     rev: v2.6.2
     hooks:
       - id: golangci-lint
-        args: [--timeout=5m]
+        args: [--timeout=5m, ./internal/..., .]
+        pass_filenames: false
 
   # =============================================================================
   # Terraform example files validation

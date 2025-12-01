@@ -826,6 +826,13 @@ func (r *AdvertisePolicyResource) Create(ctx context.Context, req resource.Creat
 		if data.TLSParameters.NoClientCertificate != nil {
 			tls_parametersMap["no_client_certificate"] = map[string]interface{}{}
 		}
+		if !data.TLSParameters.XfccHeaderElements.IsNull() && !data.TLSParameters.XfccHeaderElements.IsUnknown() {
+			var xfcc_header_elementsItems []string
+			diags := data.TLSParameters.XfccHeaderElements.ElementsAs(ctx, &xfcc_header_elementsItems, false)
+			if !diags.HasError() {
+				tls_parametersMap["xfcc_header_elements"] = xfcc_header_elementsItems
+			}
+		}
 		apiResource.Spec["tls_parameters"] = tls_parametersMap
 	}
 	if data.Where != nil {
@@ -1274,6 +1281,13 @@ func (r *AdvertisePolicyResource) Update(ctx context.Context, req resource.Updat
 		}
 		if data.TLSParameters.NoClientCertificate != nil {
 			tls_parametersMap["no_client_certificate"] = map[string]interface{}{}
+		}
+		if !data.TLSParameters.XfccHeaderElements.IsNull() && !data.TLSParameters.XfccHeaderElements.IsUnknown() {
+			var xfcc_header_elementsItems []string
+			diags := data.TLSParameters.XfccHeaderElements.ElementsAs(ctx, &xfcc_header_elementsItems, false)
+			if !diags.HasError() {
+				tls_parametersMap["xfcc_header_elements"] = xfcc_header_elementsItems
+			}
 		}
 		apiResource.Spec["tls_parameters"] = tls_parametersMap
 	}

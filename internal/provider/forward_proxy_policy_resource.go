@@ -1105,6 +1105,13 @@ func (r *ForwardProxyPolicyResource) Create(ctx context.Context, req resource.Cr
 	}
 	if data.ProxyLabelSelector != nil {
 		proxy_label_selectorMap := make(map[string]interface{})
+		if !data.ProxyLabelSelector.Expressions.IsNull() && !data.ProxyLabelSelector.Expressions.IsUnknown() {
+			var expressionsItems []string
+			diags := data.ProxyLabelSelector.Expressions.ElementsAs(ctx, &expressionsItems, false)
+			if !diags.HasError() {
+				proxy_label_selectorMap["expressions"] = expressionsItems
+			}
+		}
 		apiResource.Spec["proxy_label_selector"] = proxy_label_selectorMap
 	}
 	if data.RuleList != nil {
@@ -2099,6 +2106,13 @@ func (r *ForwardProxyPolicyResource) Update(ctx context.Context, req resource.Up
 	}
 	if data.ProxyLabelSelector != nil {
 		proxy_label_selectorMap := make(map[string]interface{})
+		if !data.ProxyLabelSelector.Expressions.IsNull() && !data.ProxyLabelSelector.Expressions.IsUnknown() {
+			var expressionsItems []string
+			diags := data.ProxyLabelSelector.Expressions.ElementsAs(ctx, &expressionsItems, false)
+			if !diags.HasError() {
+				proxy_label_selectorMap["expressions"] = expressionsItems
+			}
+		}
 		apiResource.Spec["proxy_label_selector"] = proxy_label_selectorMap
 	}
 	if data.RuleList != nil {

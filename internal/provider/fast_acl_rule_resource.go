@@ -542,6 +542,13 @@ func (r *FastACLRuleResource) Create(ctx context.Context, req resource.CreateReq
 	}
 	if data.Prefix != nil {
 		prefixMap := make(map[string]interface{})
+		if !data.Prefix.Prefix.IsNull() && !data.Prefix.Prefix.IsUnknown() {
+			var prefixItems []string
+			diags := data.Prefix.Prefix.ElementsAs(ctx, &prefixItems, false)
+			if !diags.HasError() {
+				prefixMap["prefix"] = prefixItems
+			}
+		}
 		apiResource.Spec["prefix"] = prefixMap
 	}
 
@@ -896,6 +903,13 @@ func (r *FastACLRuleResource) Update(ctx context.Context, req resource.UpdateReq
 	}
 	if data.Prefix != nil {
 		prefixMap := make(map[string]interface{})
+		if !data.Prefix.Prefix.IsNull() && !data.Prefix.Prefix.IsUnknown() {
+			var prefixItems []string
+			diags := data.Prefix.Prefix.ElementsAs(ctx, &prefixItems, false)
+			if !diags.HasError() {
+				prefixMap["prefix"] = prefixItems
+			}
+		}
 		apiResource.Spec["prefix"] = prefixMap
 	}
 

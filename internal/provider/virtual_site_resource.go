@@ -298,6 +298,13 @@ func (r *VirtualSiteResource) Create(ctx context.Context, req resource.CreateReq
 	// Marshal spec fields from Terraform state to API struct
 	if data.SiteSelector != nil {
 		site_selectorMap := make(map[string]interface{})
+		if !data.SiteSelector.Expressions.IsNull() && !data.SiteSelector.Expressions.IsUnknown() {
+			var expressionsItems []string
+			diags := data.SiteSelector.Expressions.ElementsAs(ctx, &expressionsItems, false)
+			if !diags.HasError() {
+				site_selectorMap["expressions"] = expressionsItems
+			}
+		}
 		apiResource.Spec["site_selector"] = site_selectorMap
 	}
 	if !data.SiteType.IsNull() && !data.SiteType.IsUnknown() {
@@ -499,6 +506,13 @@ func (r *VirtualSiteResource) Update(ctx context.Context, req resource.UpdateReq
 	// Marshal spec fields from Terraform state to API struct
 	if data.SiteSelector != nil {
 		site_selectorMap := make(map[string]interface{})
+		if !data.SiteSelector.Expressions.IsNull() && !data.SiteSelector.Expressions.IsUnknown() {
+			var expressionsItems []string
+			diags := data.SiteSelector.Expressions.ElementsAs(ctx, &expressionsItems, false)
+			if !diags.HasError() {
+				site_selectorMap["expressions"] = expressionsItems
+			}
+		}
 		apiResource.Spec["site_selector"] = site_selectorMap
 	}
 	if !data.SiteType.IsNull() && !data.SiteType.IsUnknown() {

@@ -15666,6 +15666,20 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 		if !data.CorsPolicy.AllowMethods.IsNull() && !data.CorsPolicy.AllowMethods.IsUnknown() {
 			cors_policyMap["allow_methods"] = data.CorsPolicy.AllowMethods.ValueString()
 		}
+		if !data.CorsPolicy.AllowOrigin.IsNull() && !data.CorsPolicy.AllowOrigin.IsUnknown() {
+			var allow_originItems []string
+			diags := data.CorsPolicy.AllowOrigin.ElementsAs(ctx, &allow_originItems, false)
+			if !diags.HasError() {
+				cors_policyMap["allow_origin"] = allow_originItems
+			}
+		}
+		if !data.CorsPolicy.AllowOriginRegex.IsNull() && !data.CorsPolicy.AllowOriginRegex.IsUnknown() {
+			var allow_origin_regexItems []string
+			diags := data.CorsPolicy.AllowOriginRegex.ElementsAs(ctx, &allow_origin_regexItems, false)
+			if !diags.HasError() {
+				cors_policyMap["allow_origin_regex"] = allow_origin_regexItems
+			}
+		}
 		if !data.CorsPolicy.Disabled.IsNull() && !data.CorsPolicy.Disabled.IsUnknown() {
 			cors_policyMap["disabled"] = data.CorsPolicy.Disabled.ValueBool()
 		}
@@ -16225,6 +16239,13 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 	}
 	if data.EnableIPReputation != nil {
 		enable_ip_reputationMap := make(map[string]interface{})
+		if !data.EnableIPReputation.IPThreatCategories.IsNull() && !data.EnableIPReputation.IPThreatCategories.IsUnknown() {
+			var ip_threat_categoriesItems []string
+			diags := data.EnableIPReputation.IPThreatCategories.ElementsAs(ctx, &ip_threat_categoriesItems, false)
+			if !diags.HasError() {
+				enable_ip_reputationMap["ip_threat_categories"] = ip_threat_categoriesItems
+			}
+		}
 		apiResource.Spec["enable_ip_reputation"] = enable_ip_reputationMap
 	}
 	if data.EnableMaliciousUserDetection != nil {
@@ -16237,6 +16258,13 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 	}
 	if data.EnableTrustClientIPHeaders != nil {
 		enable_trust_client_ip_headersMap := make(map[string]interface{})
+		if !data.EnableTrustClientIPHeaders.ClientIPHeaders.IsNull() && !data.EnableTrustClientIPHeaders.ClientIPHeaders.IsUnknown() {
+			var client_ip_headersItems []string
+			diags := data.EnableTrustClientIPHeaders.ClientIPHeaders.ElementsAs(ctx, &client_ip_headersItems, false)
+			if !diags.HasError() {
+				enable_trust_client_ip_headersMap["client_ip_headers"] = client_ip_headersItems
+			}
+		}
 		apiResource.Spec["enable_trust_client_ip_headers"] = enable_trust_client_ip_headersMap
 	}
 	if len(data.GraphqlRules) > 0 {
@@ -16694,6 +16722,13 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}
 			more_optionMap["request_cookies_to_add"] = request_cookies_to_addList
 		}
+		if !data.MoreOption.RequestCookiesToRemove.IsNull() && !data.MoreOption.RequestCookiesToRemove.IsUnknown() {
+			var request_cookies_to_removeItems []string
+			diags := data.MoreOption.RequestCookiesToRemove.ElementsAs(ctx, &request_cookies_to_removeItems, false)
+			if !diags.HasError() {
+				more_optionMap["request_cookies_to_remove"] = request_cookies_to_removeItems
+			}
+		}
 		if len(data.MoreOption.RequestHeadersToAdd) > 0 {
 			var request_headers_to_addList []map[string]interface{}
 			for _, listItem := range data.MoreOption.RequestHeadersToAdd {
@@ -16714,6 +16749,13 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 				request_headers_to_addList = append(request_headers_to_addList, listItemMap)
 			}
 			more_optionMap["request_headers_to_add"] = request_headers_to_addList
+		}
+		if !data.MoreOption.RequestHeadersToRemove.IsNull() && !data.MoreOption.RequestHeadersToRemove.IsUnknown() {
+			var request_headers_to_removeItems []string
+			diags := data.MoreOption.RequestHeadersToRemove.ElementsAs(ctx, &request_headers_to_removeItems, false)
+			if !diags.HasError() {
+				more_optionMap["request_headers_to_remove"] = request_headers_to_removeItems
+			}
 		}
 		if len(data.MoreOption.ResponseCookiesToAdd) > 0 {
 			var response_cookies_to_addList []map[string]interface{}
@@ -16793,6 +16835,13 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}
 			more_optionMap["response_cookies_to_add"] = response_cookies_to_addList
 		}
+		if !data.MoreOption.ResponseCookiesToRemove.IsNull() && !data.MoreOption.ResponseCookiesToRemove.IsUnknown() {
+			var response_cookies_to_removeItems []string
+			diags := data.MoreOption.ResponseCookiesToRemove.ElementsAs(ctx, &response_cookies_to_removeItems, false)
+			if !diags.HasError() {
+				more_optionMap["response_cookies_to_remove"] = response_cookies_to_removeItems
+			}
+		}
 		if len(data.MoreOption.ResponseHeadersToAdd) > 0 {
 			var response_headers_to_addList []map[string]interface{}
 			for _, listItem := range data.MoreOption.ResponseHeadersToAdd {
@@ -16813,6 +16862,13 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 				response_headers_to_addList = append(response_headers_to_addList, listItemMap)
 			}
 			more_optionMap["response_headers_to_add"] = response_headers_to_addList
+		}
+		if !data.MoreOption.ResponseHeadersToRemove.IsNull() && !data.MoreOption.ResponseHeadersToRemove.IsUnknown() {
+			var response_headers_to_removeItems []string
+			diags := data.MoreOption.ResponseHeadersToRemove.ElementsAs(ctx, &response_headers_to_removeItems, false)
+			if !diags.HasError() {
+				more_optionMap["response_headers_to_remove"] = response_headers_to_removeItems
+			}
 		}
 		apiResource.Spec["more_option"] = more_optionMap
 	}
@@ -22160,6 +22216,20 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 		if !data.CorsPolicy.AllowMethods.IsNull() && !data.CorsPolicy.AllowMethods.IsUnknown() {
 			cors_policyMap["allow_methods"] = data.CorsPolicy.AllowMethods.ValueString()
 		}
+		if !data.CorsPolicy.AllowOrigin.IsNull() && !data.CorsPolicy.AllowOrigin.IsUnknown() {
+			var allow_originItems []string
+			diags := data.CorsPolicy.AllowOrigin.ElementsAs(ctx, &allow_originItems, false)
+			if !diags.HasError() {
+				cors_policyMap["allow_origin"] = allow_originItems
+			}
+		}
+		if !data.CorsPolicy.AllowOriginRegex.IsNull() && !data.CorsPolicy.AllowOriginRegex.IsUnknown() {
+			var allow_origin_regexItems []string
+			diags := data.CorsPolicy.AllowOriginRegex.ElementsAs(ctx, &allow_origin_regexItems, false)
+			if !diags.HasError() {
+				cors_policyMap["allow_origin_regex"] = allow_origin_regexItems
+			}
+		}
 		if !data.CorsPolicy.Disabled.IsNull() && !data.CorsPolicy.Disabled.IsUnknown() {
 			cors_policyMap["disabled"] = data.CorsPolicy.Disabled.ValueBool()
 		}
@@ -22719,6 +22789,13 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 	}
 	if data.EnableIPReputation != nil {
 		enable_ip_reputationMap := make(map[string]interface{})
+		if !data.EnableIPReputation.IPThreatCategories.IsNull() && !data.EnableIPReputation.IPThreatCategories.IsUnknown() {
+			var ip_threat_categoriesItems []string
+			diags := data.EnableIPReputation.IPThreatCategories.ElementsAs(ctx, &ip_threat_categoriesItems, false)
+			if !diags.HasError() {
+				enable_ip_reputationMap["ip_threat_categories"] = ip_threat_categoriesItems
+			}
+		}
 		apiResource.Spec["enable_ip_reputation"] = enable_ip_reputationMap
 	}
 	if data.EnableMaliciousUserDetection != nil {
@@ -22731,6 +22808,13 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 	}
 	if data.EnableTrustClientIPHeaders != nil {
 		enable_trust_client_ip_headersMap := make(map[string]interface{})
+		if !data.EnableTrustClientIPHeaders.ClientIPHeaders.IsNull() && !data.EnableTrustClientIPHeaders.ClientIPHeaders.IsUnknown() {
+			var client_ip_headersItems []string
+			diags := data.EnableTrustClientIPHeaders.ClientIPHeaders.ElementsAs(ctx, &client_ip_headersItems, false)
+			if !diags.HasError() {
+				enable_trust_client_ip_headersMap["client_ip_headers"] = client_ip_headersItems
+			}
+		}
 		apiResource.Spec["enable_trust_client_ip_headers"] = enable_trust_client_ip_headersMap
 	}
 	if len(data.GraphqlRules) > 0 {
@@ -23188,6 +23272,13 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 			}
 			more_optionMap["request_cookies_to_add"] = request_cookies_to_addList
 		}
+		if !data.MoreOption.RequestCookiesToRemove.IsNull() && !data.MoreOption.RequestCookiesToRemove.IsUnknown() {
+			var request_cookies_to_removeItems []string
+			diags := data.MoreOption.RequestCookiesToRemove.ElementsAs(ctx, &request_cookies_to_removeItems, false)
+			if !diags.HasError() {
+				more_optionMap["request_cookies_to_remove"] = request_cookies_to_removeItems
+			}
+		}
 		if len(data.MoreOption.RequestHeadersToAdd) > 0 {
 			var request_headers_to_addList []map[string]interface{}
 			for _, listItem := range data.MoreOption.RequestHeadersToAdd {
@@ -23208,6 +23299,13 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 				request_headers_to_addList = append(request_headers_to_addList, listItemMap)
 			}
 			more_optionMap["request_headers_to_add"] = request_headers_to_addList
+		}
+		if !data.MoreOption.RequestHeadersToRemove.IsNull() && !data.MoreOption.RequestHeadersToRemove.IsUnknown() {
+			var request_headers_to_removeItems []string
+			diags := data.MoreOption.RequestHeadersToRemove.ElementsAs(ctx, &request_headers_to_removeItems, false)
+			if !diags.HasError() {
+				more_optionMap["request_headers_to_remove"] = request_headers_to_removeItems
+			}
 		}
 		if len(data.MoreOption.ResponseCookiesToAdd) > 0 {
 			var response_cookies_to_addList []map[string]interface{}
@@ -23287,6 +23385,13 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 			}
 			more_optionMap["response_cookies_to_add"] = response_cookies_to_addList
 		}
+		if !data.MoreOption.ResponseCookiesToRemove.IsNull() && !data.MoreOption.ResponseCookiesToRemove.IsUnknown() {
+			var response_cookies_to_removeItems []string
+			diags := data.MoreOption.ResponseCookiesToRemove.ElementsAs(ctx, &response_cookies_to_removeItems, false)
+			if !diags.HasError() {
+				more_optionMap["response_cookies_to_remove"] = response_cookies_to_removeItems
+			}
+		}
 		if len(data.MoreOption.ResponseHeadersToAdd) > 0 {
 			var response_headers_to_addList []map[string]interface{}
 			for _, listItem := range data.MoreOption.ResponseHeadersToAdd {
@@ -23307,6 +23412,13 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 				response_headers_to_addList = append(response_headers_to_addList, listItemMap)
 			}
 			more_optionMap["response_headers_to_add"] = response_headers_to_addList
+		}
+		if !data.MoreOption.ResponseHeadersToRemove.IsNull() && !data.MoreOption.ResponseHeadersToRemove.IsUnknown() {
+			var response_headers_to_removeItems []string
+			diags := data.MoreOption.ResponseHeadersToRemove.ElementsAs(ctx, &response_headers_to_removeItems, false)
+			if !diags.HasError() {
+				more_optionMap["response_headers_to_remove"] = response_headers_to_removeItems
+			}
 		}
 		apiResource.Spec["more_option"] = more_optionMap
 	}

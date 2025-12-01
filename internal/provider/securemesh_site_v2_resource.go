@@ -6446,6 +6446,13 @@ func (r *SecuremeshSiteV2Resource) Create(ctx context.Context, req resource.Crea
 	}
 	if data.CustomProxyBypass != nil {
 		custom_proxy_bypassMap := make(map[string]interface{})
+		if !data.CustomProxyBypass.ProxyBypass.IsNull() && !data.CustomProxyBypass.ProxyBypass.IsUnknown() {
+			var proxy_bypassItems []string
+			diags := data.CustomProxyBypass.ProxyBypass.ElementsAs(ctx, &proxy_bypassItems, false)
+			if !diags.HasError() {
+				custom_proxy_bypassMap["proxy_bypass"] = proxy_bypassItems
+			}
+		}
 		apiResource.Spec["custom_proxy_bypass"] = custom_proxy_bypassMap
 	}
 	if data.DcClusterGroupSLI != nil {
@@ -7488,6 +7495,13 @@ func (r *SecuremeshSiteV2Resource) Update(ctx context.Context, req resource.Upda
 	}
 	if data.CustomProxyBypass != nil {
 		custom_proxy_bypassMap := make(map[string]interface{})
+		if !data.CustomProxyBypass.ProxyBypass.IsNull() && !data.CustomProxyBypass.ProxyBypass.IsUnknown() {
+			var proxy_bypassItems []string
+			diags := data.CustomProxyBypass.ProxyBypass.ElementsAs(ctx, &proxy_bypassItems, false)
+			if !diags.HasError() {
+				custom_proxy_bypassMap["proxy_bypass"] = proxy_bypassItems
+			}
+		}
 		apiResource.Spec["custom_proxy_bypass"] = custom_proxy_bypassMap
 	}
 	if data.DcClusterGroupSLI != nil {

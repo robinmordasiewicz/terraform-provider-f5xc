@@ -403,6 +403,13 @@ func (r *CertificateResource) Create(ctx context.Context, req resource.CreateReq
 	}
 	if data.CustomHashAlgorithms != nil {
 		custom_hash_algorithmsMap := make(map[string]interface{})
+		if !data.CustomHashAlgorithms.HashAlgorithms.IsNull() && !data.CustomHashAlgorithms.HashAlgorithms.IsUnknown() {
+			var hash_algorithmsItems []string
+			diags := data.CustomHashAlgorithms.HashAlgorithms.ElementsAs(ctx, &hash_algorithmsItems, false)
+			if !diags.HasError() {
+				custom_hash_algorithmsMap["hash_algorithms"] = hash_algorithmsItems
+			}
+		}
 		apiResource.Spec["custom_hash_algorithms"] = custom_hash_algorithmsMap
 	}
 	if data.DisableOcspStapling != nil {
@@ -689,6 +696,13 @@ func (r *CertificateResource) Update(ctx context.Context, req resource.UpdateReq
 	}
 	if data.CustomHashAlgorithms != nil {
 		custom_hash_algorithmsMap := make(map[string]interface{})
+		if !data.CustomHashAlgorithms.HashAlgorithms.IsNull() && !data.CustomHashAlgorithms.HashAlgorithms.IsUnknown() {
+			var hash_algorithmsItems []string
+			diags := data.CustomHashAlgorithms.HashAlgorithms.ElementsAs(ctx, &hash_algorithmsItems, false)
+			if !diags.HasError() {
+				custom_hash_algorithmsMap["hash_algorithms"] = hash_algorithmsItems
+			}
+		}
 		apiResource.Spec["custom_hash_algorithms"] = custom_hash_algorithmsMap
 	}
 	if data.DisableOcspStapling != nil {

@@ -447,6 +447,13 @@ func (r *NetworkPolicyRuleResource) Create(ctx context.Context, req resource.Cre
 	}
 	if data.LabelMatcher != nil {
 		label_matcherMap := make(map[string]interface{})
+		if !data.LabelMatcher.Keys.IsNull() && !data.LabelMatcher.Keys.IsUnknown() {
+			var keysItems []string
+			diags := data.LabelMatcher.Keys.ElementsAs(ctx, &keysItems, false)
+			if !diags.HasError() {
+				label_matcherMap["keys"] = keysItems
+			}
+		}
 		apiResource.Spec["label_matcher"] = label_matcherMap
 	}
 	if !data.Ports.IsNull() && !data.Ports.IsUnknown() {
@@ -458,10 +465,24 @@ func (r *NetworkPolicyRuleResource) Create(ctx context.Context, req resource.Cre
 	}
 	if data.Prefix != nil {
 		prefixMap := make(map[string]interface{})
+		if !data.Prefix.Prefix.IsNull() && !data.Prefix.Prefix.IsUnknown() {
+			var prefixItems []string
+			diags := data.Prefix.Prefix.ElementsAs(ctx, &prefixItems, false)
+			if !diags.HasError() {
+				prefixMap["prefix"] = prefixItems
+			}
+		}
 		apiResource.Spec["prefix"] = prefixMap
 	}
 	if data.PrefixSelector != nil {
 		prefix_selectorMap := make(map[string]interface{})
+		if !data.PrefixSelector.Expressions.IsNull() && !data.PrefixSelector.Expressions.IsUnknown() {
+			var expressionsItems []string
+			diags := data.PrefixSelector.Expressions.ElementsAs(ctx, &expressionsItems, false)
+			if !diags.HasError() {
+				prefix_selectorMap["expressions"] = expressionsItems
+			}
+		}
 		apiResource.Spec["prefix_selector"] = prefix_selectorMap
 	}
 	if !data.Action.IsNull() && !data.Action.IsUnknown() {
@@ -818,6 +839,13 @@ func (r *NetworkPolicyRuleResource) Update(ctx context.Context, req resource.Upd
 	}
 	if data.LabelMatcher != nil {
 		label_matcherMap := make(map[string]interface{})
+		if !data.LabelMatcher.Keys.IsNull() && !data.LabelMatcher.Keys.IsUnknown() {
+			var keysItems []string
+			diags := data.LabelMatcher.Keys.ElementsAs(ctx, &keysItems, false)
+			if !diags.HasError() {
+				label_matcherMap["keys"] = keysItems
+			}
+		}
 		apiResource.Spec["label_matcher"] = label_matcherMap
 	}
 	if !data.Ports.IsNull() && !data.Ports.IsUnknown() {
@@ -829,10 +857,24 @@ func (r *NetworkPolicyRuleResource) Update(ctx context.Context, req resource.Upd
 	}
 	if data.Prefix != nil {
 		prefixMap := make(map[string]interface{})
+		if !data.Prefix.Prefix.IsNull() && !data.Prefix.Prefix.IsUnknown() {
+			var prefixItems []string
+			diags := data.Prefix.Prefix.ElementsAs(ctx, &prefixItems, false)
+			if !diags.HasError() {
+				prefixMap["prefix"] = prefixItems
+			}
+		}
 		apiResource.Spec["prefix"] = prefixMap
 	}
 	if data.PrefixSelector != nil {
 		prefix_selectorMap := make(map[string]interface{})
+		if !data.PrefixSelector.Expressions.IsNull() && !data.PrefixSelector.Expressions.IsUnknown() {
+			var expressionsItems []string
+			diags := data.PrefixSelector.Expressions.ElementsAs(ctx, &expressionsItems, false)
+			if !diags.HasError() {
+				prefix_selectorMap["expressions"] = expressionsItems
+			}
+		}
 		apiResource.Spec["prefix_selector"] = prefix_selectorMap
 	}
 	if !data.Action.IsNull() && !data.Action.IsUnknown() {

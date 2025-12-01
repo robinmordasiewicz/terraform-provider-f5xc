@@ -623,6 +623,20 @@ func (r *NetworkConnectorResource) Create(ctx context.Context, req resource.Crea
 			}
 			enable_forward_proxyMap["tls_intercept"] = tls_interceptNestedMap
 		}
+		if !data.EnableForwardProxy.WhiteListedPorts.IsNull() && !data.EnableForwardProxy.WhiteListedPorts.IsUnknown() {
+			var white_listed_portsItems []int64
+			diags := data.EnableForwardProxy.WhiteListedPorts.ElementsAs(ctx, &white_listed_portsItems, false)
+			if !diags.HasError() {
+				enable_forward_proxyMap["white_listed_ports"] = white_listed_portsItems
+			}
+		}
+		if !data.EnableForwardProxy.WhiteListedPrefixes.IsNull() && !data.EnableForwardProxy.WhiteListedPrefixes.IsUnknown() {
+			var white_listed_prefixesItems []string
+			diags := data.EnableForwardProxy.WhiteListedPrefixes.ElementsAs(ctx, &white_listed_prefixesItems, false)
+			if !diags.HasError() {
+				enable_forward_proxyMap["white_listed_prefixes"] = white_listed_prefixesItems
+			}
+		}
 		apiResource.Spec["enable_forward_proxy"] = enable_forward_proxyMap
 	}
 	if data.SLIToGlobalDr != nil {
@@ -947,6 +961,20 @@ func (r *NetworkConnectorResource) Update(ctx context.Context, req resource.Upda
 				tls_interceptNestedMap["trusted_ca_url"] = data.EnableForwardProxy.TLSIntercept.TrustedCaURL.ValueString()
 			}
 			enable_forward_proxyMap["tls_intercept"] = tls_interceptNestedMap
+		}
+		if !data.EnableForwardProxy.WhiteListedPorts.IsNull() && !data.EnableForwardProxy.WhiteListedPorts.IsUnknown() {
+			var white_listed_portsItems []int64
+			diags := data.EnableForwardProxy.WhiteListedPorts.ElementsAs(ctx, &white_listed_portsItems, false)
+			if !diags.HasError() {
+				enable_forward_proxyMap["white_listed_ports"] = white_listed_portsItems
+			}
+		}
+		if !data.EnableForwardProxy.WhiteListedPrefixes.IsNull() && !data.EnableForwardProxy.WhiteListedPrefixes.IsUnknown() {
+			var white_listed_prefixesItems []string
+			diags := data.EnableForwardProxy.WhiteListedPrefixes.ElementsAs(ctx, &white_listed_prefixesItems, false)
+			if !diags.HasError() {
+				enable_forward_proxyMap["white_listed_prefixes"] = white_listed_prefixesItems
+			}
 		}
 		apiResource.Spec["enable_forward_proxy"] = enable_forward_proxyMap
 	}

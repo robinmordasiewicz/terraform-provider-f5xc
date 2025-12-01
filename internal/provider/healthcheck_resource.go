@@ -391,6 +391,13 @@ func (r *HealthcheckResource) Create(ctx context.Context, req resource.CreateReq
 	// Marshal spec fields from Terraform state to API struct
 	if data.HTTPHealthCheck != nil {
 		http_health_checkMap := make(map[string]interface{})
+		if !data.HTTPHealthCheck.ExpectedStatusCodes.IsNull() && !data.HTTPHealthCheck.ExpectedStatusCodes.IsUnknown() {
+			var expected_status_codesItems []string
+			diags := data.HTTPHealthCheck.ExpectedStatusCodes.ElementsAs(ctx, &expected_status_codesItems, false)
+			if !diags.HasError() {
+				http_health_checkMap["expected_status_codes"] = expected_status_codesItems
+			}
+		}
 		if data.HTTPHealthCheck.Headers != nil {
 			http_health_checkMap["headers"] = map[string]interface{}{}
 		}
@@ -399,6 +406,13 @@ func (r *HealthcheckResource) Create(ctx context.Context, req resource.CreateReq
 		}
 		if !data.HTTPHealthCheck.Path.IsNull() && !data.HTTPHealthCheck.Path.IsUnknown() {
 			http_health_checkMap["path"] = data.HTTPHealthCheck.Path.ValueString()
+		}
+		if !data.HTTPHealthCheck.RequestHeadersToRemove.IsNull() && !data.HTTPHealthCheck.RequestHeadersToRemove.IsUnknown() {
+			var request_headers_to_removeItems []string
+			diags := data.HTTPHealthCheck.RequestHeadersToRemove.ElementsAs(ctx, &request_headers_to_removeItems, false)
+			if !diags.HasError() {
+				http_health_checkMap["request_headers_to_remove"] = request_headers_to_removeItems
+			}
 		}
 		if !data.HTTPHealthCheck.UseHttp2.IsNull() && !data.HTTPHealthCheck.UseHttp2.IsUnknown() {
 			http_health_checkMap["use_http2"] = data.HTTPHealthCheck.UseHttp2.ValueBool()
@@ -762,6 +776,13 @@ func (r *HealthcheckResource) Update(ctx context.Context, req resource.UpdateReq
 	// Marshal spec fields from Terraform state to API struct
 	if data.HTTPHealthCheck != nil {
 		http_health_checkMap := make(map[string]interface{})
+		if !data.HTTPHealthCheck.ExpectedStatusCodes.IsNull() && !data.HTTPHealthCheck.ExpectedStatusCodes.IsUnknown() {
+			var expected_status_codesItems []string
+			diags := data.HTTPHealthCheck.ExpectedStatusCodes.ElementsAs(ctx, &expected_status_codesItems, false)
+			if !diags.HasError() {
+				http_health_checkMap["expected_status_codes"] = expected_status_codesItems
+			}
+		}
 		if data.HTTPHealthCheck.Headers != nil {
 			http_health_checkMap["headers"] = map[string]interface{}{}
 		}
@@ -770,6 +791,13 @@ func (r *HealthcheckResource) Update(ctx context.Context, req resource.UpdateReq
 		}
 		if !data.HTTPHealthCheck.Path.IsNull() && !data.HTTPHealthCheck.Path.IsUnknown() {
 			http_health_checkMap["path"] = data.HTTPHealthCheck.Path.ValueString()
+		}
+		if !data.HTTPHealthCheck.RequestHeadersToRemove.IsNull() && !data.HTTPHealthCheck.RequestHeadersToRemove.IsUnknown() {
+			var request_headers_to_removeItems []string
+			diags := data.HTTPHealthCheck.RequestHeadersToRemove.ElementsAs(ctx, &request_headers_to_removeItems, false)
+			if !diags.HasError() {
+				http_health_checkMap["request_headers_to_remove"] = request_headers_to_removeItems
+			}
 		}
 		if !data.HTTPHealthCheck.UseHttp2.IsNull() && !data.HTTPHealthCheck.UseHttp2.IsUnknown() {
 			http_health_checkMap["use_http2"] = data.HTTPHealthCheck.UseHttp2.ValueBool()

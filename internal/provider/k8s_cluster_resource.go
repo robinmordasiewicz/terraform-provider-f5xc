@@ -685,6 +685,13 @@ func (r *K8SClusterResource) Create(ctx context.Context, req resource.CreateRequ
 	}
 	if data.InsecureRegistryList != nil {
 		insecure_registry_listMap := make(map[string]interface{})
+		if !data.InsecureRegistryList.InsecureRegistries.IsNull() && !data.InsecureRegistryList.InsecureRegistries.IsUnknown() {
+			var insecure_registriesItems []string
+			diags := data.InsecureRegistryList.InsecureRegistries.ElementsAs(ctx, &insecure_registriesItems, false)
+			if !diags.HasError() {
+				insecure_registry_listMap["insecure_registries"] = insecure_registriesItems
+			}
+		}
 		apiResource.Spec["insecure_registry_list"] = insecure_registry_listMap
 	}
 	if data.LocalAccessConfig != nil {
@@ -1299,6 +1306,13 @@ func (r *K8SClusterResource) Update(ctx context.Context, req resource.UpdateRequ
 	}
 	if data.InsecureRegistryList != nil {
 		insecure_registry_listMap := make(map[string]interface{})
+		if !data.InsecureRegistryList.InsecureRegistries.IsNull() && !data.InsecureRegistryList.InsecureRegistries.IsUnknown() {
+			var insecure_registriesItems []string
+			diags := data.InsecureRegistryList.InsecureRegistries.ElementsAs(ctx, &insecure_registriesItems, false)
+			if !diags.HasError() {
+				insecure_registry_listMap["insecure_registries"] = insecure_registriesItems
+			}
+		}
 		apiResource.Spec["insecure_registry_list"] = insecure_registry_listMap
 	}
 	if data.LocalAccessConfig != nil {

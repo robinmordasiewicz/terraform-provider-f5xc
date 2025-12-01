@@ -8480,6 +8480,20 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 		if !data.CorsPolicy.AllowMethods.IsNull() && !data.CorsPolicy.AllowMethods.IsUnknown() {
 			cors_policyMap["allow_methods"] = data.CorsPolicy.AllowMethods.ValueString()
 		}
+		if !data.CorsPolicy.AllowOrigin.IsNull() && !data.CorsPolicy.AllowOrigin.IsUnknown() {
+			var allow_originItems []string
+			diags := data.CorsPolicy.AllowOrigin.ElementsAs(ctx, &allow_originItems, false)
+			if !diags.HasError() {
+				cors_policyMap["allow_origin"] = allow_originItems
+			}
+		}
+		if !data.CorsPolicy.AllowOriginRegex.IsNull() && !data.CorsPolicy.AllowOriginRegex.IsUnknown() {
+			var allow_origin_regexItems []string
+			diags := data.CorsPolicy.AllowOriginRegex.ElementsAs(ctx, &allow_origin_regexItems, false)
+			if !diags.HasError() {
+				cors_policyMap["allow_origin_regex"] = allow_origin_regexItems
+			}
+		}
 		if !data.CorsPolicy.Disabled.IsNull() && !data.CorsPolicy.Disabled.IsUnknown() {
 			cors_policyMap["disabled"] = data.CorsPolicy.Disabled.ValueBool()
 		}
@@ -8760,6 +8774,13 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 	}
 	if data.EnableIPReputation != nil {
 		enable_ip_reputationMap := make(map[string]interface{})
+		if !data.EnableIPReputation.IPThreatCategories.IsNull() && !data.EnableIPReputation.IPThreatCategories.IsUnknown() {
+			var ip_threat_categoriesItems []string
+			diags := data.EnableIPReputation.IPThreatCategories.ElementsAs(ctx, &ip_threat_categoriesItems, false)
+			if !diags.HasError() {
+				enable_ip_reputationMap["ip_threat_categories"] = ip_threat_categoriesItems
+			}
+		}
 		apiResource.Spec["enable_ip_reputation"] = enable_ip_reputationMap
 	}
 	if data.EnableMaliciousUserDetection != nil {
@@ -11465,6 +11486,20 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 		if !data.CorsPolicy.AllowMethods.IsNull() && !data.CorsPolicy.AllowMethods.IsUnknown() {
 			cors_policyMap["allow_methods"] = data.CorsPolicy.AllowMethods.ValueString()
 		}
+		if !data.CorsPolicy.AllowOrigin.IsNull() && !data.CorsPolicy.AllowOrigin.IsUnknown() {
+			var allow_originItems []string
+			diags := data.CorsPolicy.AllowOrigin.ElementsAs(ctx, &allow_originItems, false)
+			if !diags.HasError() {
+				cors_policyMap["allow_origin"] = allow_originItems
+			}
+		}
+		if !data.CorsPolicy.AllowOriginRegex.IsNull() && !data.CorsPolicy.AllowOriginRegex.IsUnknown() {
+			var allow_origin_regexItems []string
+			diags := data.CorsPolicy.AllowOriginRegex.ElementsAs(ctx, &allow_origin_regexItems, false)
+			if !diags.HasError() {
+				cors_policyMap["allow_origin_regex"] = allow_origin_regexItems
+			}
+		}
 		if !data.CorsPolicy.Disabled.IsNull() && !data.CorsPolicy.Disabled.IsUnknown() {
 			cors_policyMap["disabled"] = data.CorsPolicy.Disabled.ValueBool()
 		}
@@ -11745,6 +11780,13 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 	}
 	if data.EnableIPReputation != nil {
 		enable_ip_reputationMap := make(map[string]interface{})
+		if !data.EnableIPReputation.IPThreatCategories.IsNull() && !data.EnableIPReputation.IPThreatCategories.IsUnknown() {
+			var ip_threat_categoriesItems []string
+			diags := data.EnableIPReputation.IPThreatCategories.ElementsAs(ctx, &ip_threat_categoriesItems, false)
+			if !diags.HasError() {
+				enable_ip_reputationMap["ip_threat_categories"] = ip_threat_categoriesItems
+			}
+		}
 		apiResource.Spec["enable_ip_reputation"] = enable_ip_reputationMap
 	}
 	if data.EnableMaliciousUserDetection != nil {

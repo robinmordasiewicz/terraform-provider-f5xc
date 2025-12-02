@@ -2,12 +2,12 @@
 page_title: "f5xc\_dns\_zone Data Source - terraform-provider-f5xc"
 subcategory: "DNS"
 description: |-
-  Manages a DNSZone resource in F5 Distributed Cloud.
+  Manages DNS Zone in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
 ---
 
 # f5xc\_dns\_zone (Data Source)
 
-Manages a DNSZone resource in F5 Distributed Cloud.
+Manages DNS Zone in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [DNS Zone API docs](https://docs.cloud.f5.com/docs-v2/api/dns-zone) to learn more.
 

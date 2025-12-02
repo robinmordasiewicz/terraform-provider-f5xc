@@ -1550,6 +1550,10 @@ func transformDoc(filePath string) error {
 	// Enhance Timeouts section with default values (Azure RM gold standard)
 	result = enhanceTimeoutsSection(result, resourceName)
 
+	// Escape asterisks and underscores that could be misinterpreted as emphasis markers (MD037/MD049)
+	// Also wrap email addresses in backticks (MD034 compliance)
+	result = escapeEmphasisMarkersInContent(result)
+
 	// Final pass: fix any remaining bare URLs not in backticks (MD034 compliance)
 	result = fixBareURLs(result)
 
@@ -1630,17 +1634,20 @@ func escapeHTMLTagsInContent(content string) string {
 // misinterpreted as markdown emphasis markers, causing MD037/MD049 lint errors.
 //
 // MD037 (no-space-in-emphasis): Triggered by patterns like " * " or ": * "
-// MD049 (emphasis-style): Triggered by underscores in patterns like "[_]"
+// MD049 (emphasis-style): Triggered by underscores in patterns like "[_]" or "_text_"
+// MD034 (no-bare-urls): Triggered by email addresses like "user@domain.com"
 //
 // This function escapes:
 //   - Space-asterisk-space patterns: " * " → " \* " (bullet points in descriptions)
 //   - Punctuation-space-asterisk: ": * ", ". * " → ": \* ", ". \* "
 //   - Bracket-underscore patterns: "[_]" → "[\\_]"
+//   - Underscore emphasis patterns: _text_ → \_text\_
+//   - Email addresses: user@domain.com → `user@domain.com`
 //
 // Does NOT escape:
 //   - Already escaped markers: \* or \_
 //   - Markers inside code spans: `*` or `_`
-//   - Intentional emphasis: *text* or _text_
+//   - Email addresses already in backticks: `user@domain.com`
 func escapeEmphasisMarkersInContent(content string) string {
 	// MD037 triggers when there are spaces inside emphasis markers like " * text" or "text * "
 	// We need to escape asterisks that appear with adjacent spaces in description text
@@ -1667,6 +1674,23 @@ func escapeEmphasisMarkersInContent(content string) string {
 	// MD049 triggers when underscores look like emphasis markers
 	bracketUnderscore := regexp.MustCompile(`\[_\]`)
 	content = bracketUnderscore.ReplaceAllString(content, "[\\_]")
+
+	// Pattern 6: Underscore emphasis like _text_ that's not in backticks
+	// MD049 requires consistent emphasis style (asterisks preferred)
+	// Match _word_ patterns that look like emphasis but aren't code
+	// Escape underscores to prevent them being interpreted as emphasis
+	underscoreEmphasis := regexp.MustCompile(`([^` + "`" + `\\])_([a-zA-Z][a-zA-Z0-9_]*[a-zA-Z0-9])_([^` + "`" + `])`)
+	content = underscoreEmphasis.ReplaceAllString(content, "$1\\_$2\\_$3")
+
+	// Pattern 7: Email addresses - wrap in backticks for MD034 compliance
+	// Match email patterns like user@domain.com that are not already in backticks
+	// The negative lookbehind/ahead for backticks prevents double-wrapping
+	emailRegex := regexp.MustCompile(`([^` + "`" + `])([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})([^` + "`" + `])`)
+	content = emailRegex.ReplaceAllString(content, "$1`$2`$3")
+
+	// Also handle emails at the start of a word boundary (after space)
+	emailAtStartRegex := regexp.MustCompile(`(\s)([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})(\s|$|[.,;:!?])`)
+	content = emailAtStartRegex.ReplaceAllString(content, "$1`$2`$3")
 
 	return content
 }

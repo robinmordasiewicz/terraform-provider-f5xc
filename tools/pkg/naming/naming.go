@@ -135,17 +135,21 @@ func StartsWithVowel(s string) bool {
 }
 
 // ToResourceTypeName converts a snake_case resource name to a Go type name.
-// Example: "http_loadbalancer" -> "HTTPLoadbalancer"
+// Example: "http_loadbalancer" -> "HTTPLoadBalancer"
 func ToResourceTypeName(resourceName string) string {
 	parts := strings.Split(resourceName, "_")
 	var result strings.Builder
 
 	for _, part := range parts {
+		lower := strings.ToLower(part)
 		upper := strings.ToUpper(part)
+
 		if UppercaseAcronyms[upper] {
 			result.WriteString(upper)
+		} else if compound, ok := CompoundWords[lower]; ok {
+			result.WriteString(compound)
 		} else {
-			result.WriteString(strings.Title(part)) //nolint:staticcheck
+			result.WriteString(strings.Title(lower)) //nolint:staticcheck
 		}
 	}
 

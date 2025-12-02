@@ -49,6 +49,16 @@ var MixedCaseAcronyms = map[string]string{
 	"nosql":     "NoSQL",
 }
 
+// CompoundWords defines compound words that should have specific PascalCase formatting
+// when converting resource names to Go type names.
+// Example: "loadbalancer" -> "LoadBalancer" (not "Loadbalancer")
+var CompoundWords = map[string]string{
+	"loadbalancer": "LoadBalancer",
+	"bigip":        "BigIP",
+	"websocket":    "WebSocket",
+	"fastcgi":      "FastCGI",
+}
+
 // IsUppercaseAcronym returns true if the given string (in any case) is a known uppercase acronym.
 func IsUppercaseAcronym(s string) bool {
 	return UppercaseAcronyms[ToUpper(s)]

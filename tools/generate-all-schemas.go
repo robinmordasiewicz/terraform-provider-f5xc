@@ -29,6 +29,9 @@ import (
 	"sort"
 	"strings"
 	"text/template"
+
+	"github.com/f5xc/terraform-provider-f5xc/tools/pkg/naming"
+	"github.com/f5xc/terraform-provider-f5xc/tools/pkg/namespace"
 )
 
 // Configuration
@@ -626,10 +629,13 @@ func scanPlanModifierUsage(attributes []TerraformAttribute) (usesBool, usesInt64
 
 // generateExampleUsage creates a sample HCL configuration for the resource
 func generateExampleUsage(resourceName string, attributes []TerraformAttribute) string {
+	// Get the correct namespace for this resource (fixes bug: was hardcoded to "system")
+	_, ns := namespace.ForResource(resourceName)
+
 	var sb strings.Builder
 	sb.WriteString(fmt.Sprintf("resource \"f5xc_%s\" \"example\" {\n", resourceName))
 	sb.WriteString("  name      = \"example\"\n")
-	sb.WriteString("  namespace = \"system\"\n")
+	sb.WriteString(fmt.Sprintf("  namespace = %q\n", ns))
 	sb.WriteString("\n")
 	sb.WriteString("  labels = {\n")
 	sb.WriteString("    \"env\" = \"production\"\n")
@@ -1376,35 +1382,11 @@ func addOneOfConstraint(desc string, oneOfFields []string) string {
 	return constraint + " " + desc
 }
 
+// toTitleCase wraps naming.ToResourceTypeName for backward compatibility.
+// Converts a snake_case resource name to a PascalCase Go type name.
+// Example: "http_loadbalancer" -> "HTTPLoadBalancer"
 func toTitleCase(s string) string {
-	acronyms := map[string]bool{
-		"http": true, "https": true, "api": true, "dns": true, "waf": true,
-		"tls": true, "tcp": true, "udp": true, "ssl": true, "aws": true,
-		"gcp": true, "vpc": true, "vnet": true, "tgw": true, "ike": true,
-		"vpn": true, "ip": true, "id": true, "url": true, "uri": true,
-		"ntp": true, "ssh": true, "ha": true, "s2s": true, "sli": true,
-		"slo": true, "oci": true, "kvm": true, "nfv": true, "bgp": true,
-		"cdn": true, "crl": true, "apm": true, "ipv6": true, "ipv4": true,
-		"k8s": true, "acl": true,
-	}
-
-	compounds := map[string]string{
-		"loadbalancer": "LoadBalancer",
-		"bigip":        "BigIP",
-	}
-
-	parts := strings.Split(s, "_")
-	for i, part := range parts {
-		lower := strings.ToLower(part)
-		if acronyms[lower] {
-			parts[i] = strings.ToUpper(part)
-		} else if replacement, ok := compounds[lower]; ok {
-			parts[i] = replacement
-		} else {
-			parts[i] = strings.Title(lower)
-		}
-	}
-	return strings.Join(parts, "")
+	return naming.ToResourceTypeName(s)
 }
 
 // toSnakeCase converts a string to lowercase snake_case for Terraform attribute names

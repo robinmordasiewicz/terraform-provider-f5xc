@@ -10,6 +10,8 @@ import (
 	"path/filepath"
 	"regexp"
 	"strings"
+
+	"github.com/f5xc/terraform-provider-f5xc/tools/pkg/naming"
 )
 
 func main() {
@@ -159,13 +161,7 @@ func (c *Client) Delete%s(ctx context.Context, namespace, name string) error {
 	fmt.Printf("📝 Updated: %s\n", clientFile)
 }
 
+// toSnakeCase wraps naming.ToSnakeCase for backward compatibility.
 func toSnakeCase(s string) string {
-	var result strings.Builder
-	for i, r := range s {
-		if i > 0 && r >= 'A' && r <= 'Z' {
-			result.WriteRune('_')
-		}
-		result.WriteRune(r)
-	}
-	return strings.ToLower(result.String())
+	return naming.ToSnakeCase(s)
 }

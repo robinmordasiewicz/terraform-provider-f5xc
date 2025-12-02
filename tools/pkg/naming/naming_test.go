@@ -175,7 +175,7 @@ func TestToResourceTypeName(t *testing.T) {
 		input    string
 		expected string
 	}{
-		{"http_loadbalancer", "HTTPLoadbalancer"},
+		{"http_loadbalancer", "HTTPLoadBalancer"}, // compound word: loadbalancer -> LoadBalancer
 		{"dns_zone", "DNSZone"},
 		{"aws_vpc_site", "AWSVPCSite"},
 		{"origin_pool", "OriginPool"},

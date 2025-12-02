@@ -19,6 +19,8 @@ import (
 	"sort"
 	"strings"
 	"text/template"
+
+	"github.com/f5xc/terraform-provider-f5xc/tools/pkg/naming"
 )
 
 // OpenAPI3Spec represents an OpenAPI 3.x specification
@@ -538,41 +540,9 @@ func generateClientTypes(resource *ResourceTemplate) error {
 	return nil
 }
 
+// toTitleCase wraps naming.ToResourceTypeName for backward compatibility.
 func toTitleCase(s string) string {
-	acronyms := map[string]bool{
-		"http": true, "https": true, "dns": true, "tcp": true, "udp": true,
-		"tls": true, "ssl": true, "api": true, "url": true, "uri": true,
-		"ip": true, "bgp": true, "jwt": true, "acl": true, "waf": true,
-		"cdn": true, "aws": true, "gcp": true, "vpc": true, "tgw": true,
-		"vnet": true, "ce": true, "re": true, "lb": true, "vip": true,
-		"sni": true, "cors": true, "xss": true, "csrf": true, "oidc": true,
-		"saml": true, "ssh": true, "nfs": true, "ntp": true, "pem": true,
-		"rsa": true, "ecdsa": true, "id": true, "apm": true, "irule": true,
-		"tpm": true, "ike": true, "vpn": true, "ha": true, "s2s": true,
-		"sli": true, "slo": true, "oci": true, "kvm": true, "nfv": true,
-		"crl": true, "ipv6": true, "ipv4": true, "mtls": true, "graphql": true,
-	}
-
-	compounds := map[string]string{
-		"loadbalancer": "LoadBalancer",
-		"bigip":        "BigIP",
-		"firewall":     "Firewall",
-		"websocket":    "WebSocket",
-		"fastcgi":      "FastCGI",
-	}
-
-	parts := strings.Split(s, "_")
-	for i, part := range parts {
-		lower := strings.ToLower(part)
-		if acronyms[lower] {
-			parts[i] = strings.ToUpper(part)
-		} else if replacement, ok := compounds[lower]; ok {
-			parts[i] = replacement
-		} else {
-			parts[i] = strings.Title(lower)
-		}
-	}
-	return strings.Join(parts, "")
+	return naming.ToResourceTypeName(s)
 }
 
 // Resource file template - generates comprehensive Terraform resource

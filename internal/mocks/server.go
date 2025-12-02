@@ -512,6 +512,7 @@ func (s *Server) buildResponse(requestBody map[string]interface{}, namespace str
 // applyResourceDefaults adds computed default values based on resource type
 // These mimic the real F5 XC API behavior of adding default values to responses
 func (s *Server) applyResourceDefaults(spec map[string]interface{}, resourceType string) {
+	// First, apply manually-maintained defaults for specific resource types
 	switch resourceType {
 	case "secret_policy_rules", "service_policy_rules":
 		// Policy rules have a default action of DENY
@@ -524,6 +525,10 @@ func (s *Server) applyResourceDefaults(spec map[string]interface{}, resourceType
 			spec["action"] = "DENY"
 		}
 	}
+
+	// Then, apply API-discovered defaults from generated code
+	// This ensures mock responses match real F5 XC API behavior
+	ApplyDiscoveredDefaults(spec, resourceType)
 }
 
 // validateResourceName validates the resource name based on resource type

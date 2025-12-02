@@ -102,8 +102,9 @@ func TestAccWAFExclusionPolicyResource_allAttributes(t *testing.T) {
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckResourceExists(resourceName),
 					// Verify all attributes in Terraform state
+					// WAF Exclusion Policy can ONLY be created in "system" namespace
 					resource.TestCheckResourceAttr(resourceName, "name", name),
-					resource.TestCheckResourceAttr(resourceName, "namespace", nsName),
+					resource.TestCheckResourceAttr(resourceName, "namespace", "system"),
 					resource.TestCheckResourceAttr(resourceName, "description", description),
 					resource.TestCheckResourceAttr(resourceName, "labels.environment", "test"),
 					resource.TestCheckResourceAttr(resourceName, "labels.managed_by", "terraform-acceptance-test"),
@@ -149,7 +150,8 @@ func TestAccWAFExclusionPolicyResource_withExclusionRules(t *testing.T) {
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckResourceExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", name),
-					resource.TestCheckResourceAttr(resourceName, "namespace", nsName),
+					// WAF Exclusion Policy can ONLY be created in "system" namespace
+					resource.TestCheckResourceAttr(resourceName, "namespace", "system"),
 					// Verify waf_exclusion_rules blocks
 					resource.TestCheckResourceAttr(resourceName, "waf_exclusion_rules.#", "2"),
 					resource.TestCheckResourceAttr(resourceName, "waf_exclusion_rules.0.path_prefix", "/api"),

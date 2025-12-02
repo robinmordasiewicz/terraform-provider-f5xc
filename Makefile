@@ -18,7 +18,7 @@ GO=go
 GOFMT=gofmt
 GOLINT=golangci-lint
 
-.PHONY: all build test lint fmt clean clean-generated regenerate generate docs install help sweep sweep-dry-run testacc
+.PHONY: all build test lint fmt clean clean-generated regenerate generate docs install help sweep sweep-dry-run testacc testacc-mock testacc-real testacc-all test-report
 
 # Default target
 all: generate build lint test docs
@@ -31,13 +31,24 @@ help:
 	@echo "  make              - Generate, build, lint, test, and generate docs"
 	@echo "  make build        - Build the provider binary"
 	@echo "  make test         - Run tests"
-	@echo "  make testacc      - Run acceptance tests (requires F5XC credentials)"
 	@echo "  make lint         - Run linters"
 	@echo "  make fmt          - Format Go code"
 	@echo "  make generate     - Generate resources from OpenAPI specs"
 	@echo "  make docs         - Generate Terraform documentation"
 	@echo "  make clean        - Remove build artifacts"
 	@echo "  make install      - Install provider locally"
+	@echo ""
+	@echo "Acceptance Testing (Categorized):"
+	@echo "  make testacc      - Run all acceptance tests (requires F5XC credentials)"
+	@echo "  make testacc-real - Run REAL API tests only (TestAcc* prefix)"
+	@echo "  make testacc-mock - Run MOCK API tests only (TestMock* prefix)"
+	@echo "  make testacc-all  - Run both real and mock tests with report"
+	@echo "  make test-report  - Generate test report from last test run"
+	@echo ""
+	@echo "Test Categories:"
+	@echo "  REAL_API (TestAcc*) - Tests against real F5 XC API endpoints"
+	@echo "  MOCK_API (TestMock*) - Tests against local mock server"
+	@echo "  UNIT (Test*) - Unit tests without external dependencies"
 	@echo ""
 	@echo "Test Resource Cleanup:"
 	@echo "  make sweep        - Clean up ALL orphaned test resources (prefix-based)"
@@ -49,10 +60,12 @@ help:
 	@echo "    defer acctest.CleanupTracked()  // Only deletes resources THIS test created"
 	@echo ""
 	@echo "Environment Variables:"
-	@echo "  SPEC_DIR          - Directory containing OpenAPI specs (default: /tmp)"
-	@echo "  F5XC_SPEC_DIR     - Alternative env var for spec directory"
+	@echo "  TF_ACC=1           - Enable real acceptance tests"
+	@echo "  F5XC_MOCK_MODE=1   - Enable mock server tests"
+	@echo "  SPEC_DIR           - Directory containing OpenAPI specs (default: /tmp)"
+	@echo "  F5XC_SPEC_DIR      - Alternative env var for spec directory"
 	@echo ""
-	@echo "For acceptance tests and sweepers, set one of:"
+	@echo "For real acceptance tests, set one of:"
 	@echo "  F5XC_API_URL + F5XC_API_P12_FILE + F5XC_P12_PASSWORD (P12 auth)"
 	@echo "  F5XC_API_URL + F5XC_API_CERT + F5XC_API_KEY (PEM auth)"
 	@echo "  F5XC_API_URL + F5XC_API_TOKEN (Token auth)"
@@ -204,3 +217,74 @@ verify-generate: generate
 		exit 1; \
 	fi
 	@echo "All generated files are up to date"
+
+# =============================================================================
+# Categorized Acceptance Tests
+# =============================================================================
+
+# Run REAL API tests only (TestAcc* prefix)
+# These tests require F5XC credentials and run against the real API
+testacc-real:
+	@echo "Running REAL API acceptance tests (TestAcc*)..."
+	@echo "Category: REAL_API - Tests against real F5 XC API endpoints"
+	@echo ""
+	TF_ACC=1 $(GO) test -v -timeout 120m ./internal/provider/... -run "^TestAcc" 2>&1 | tee .test-output-real.txt
+	@echo ""
+	@echo "Test output saved to .test-output-real.txt"
+
+# Run MOCK API tests only (TestMock* prefix)
+# These tests use the mock server and don't require real credentials
+testacc-mock:
+	@echo "Running MOCK API acceptance tests (TestMock*)..."
+	@echo "Category: MOCK_API - Tests against local mock server"
+	@echo ""
+	F5XC_MOCK_MODE=1 $(GO) test -v -timeout 30m ./internal/provider/... -run "^TestMock" 2>&1 | tee .test-output-mock.txt
+	@echo ""
+	@echo "Test output saved to .test-output-mock.txt"
+
+# Run both real and mock tests with JSON output and generate report
+testacc-all:
+	@echo "Running ALL acceptance tests (Real + Mock) with categorized report..."
+	@echo ""
+	@echo "========================================================================"
+	@echo "PHASE 1: MOCK API TESTS (no credentials required)"
+	@echo "========================================================================"
+	F5XC_MOCK_MODE=1 $(GO) test -json -timeout 30m ./internal/provider/... -run "^TestMock" 2>&1 | tee .test-json-mock.txt | $(GO) run $(TOOLS_DIR)/test-report/main.go || true
+	@echo ""
+	@echo "========================================================================"
+	@echo "PHASE 2: REAL API TESTS (requires credentials)"
+	@echo "========================================================================"
+	@if [ -n "$$F5XC_API_URL" ]; then \
+		TF_ACC=1 $(GO) test -json -timeout 120m ./internal/provider/... -run "^TestAcc" 2>&1 | tee .test-json-real.txt | $(GO) run $(TOOLS_DIR)/test-report/main.go || true; \
+	else \
+		echo "⚠️  Skipping real API tests: F5XC_API_URL not set"; \
+	fi
+	@echo ""
+	@echo "========================================================================"
+	@echo "COMBINED REPORT"
+	@echo "========================================================================"
+	@cat .test-json-mock.txt .test-json-real.txt 2>/dev/null | $(GO) run $(TOOLS_DIR)/test-report/main.go || echo "No test data to report"
+
+# Generate a test report from JSON test output
+# Usage: go test -json ./... > test-output.json && make test-report
+test-report:
+	@echo "Generating test report..."
+	@if [ -f ".test-json-mock.txt" ] || [ -f ".test-json-real.txt" ]; then \
+		cat .test-json-mock.txt .test-json-real.txt 2>/dev/null | $(GO) run $(TOOLS_DIR)/test-report/main.go; \
+	else \
+		echo "No test output files found. Run tests with:"; \
+		echo "  make testacc-all"; \
+		echo "Or manually:"; \
+		echo "  go test -json ./internal/provider/... | go run tools/test-report/main.go"; \
+	fi
+
+# Generate markdown test report
+test-report-md:
+	@echo "Generating markdown test report..."
+	@cat .test-json-mock.txt .test-json-real.txt 2>/dev/null | $(GO) run $(TOOLS_DIR)/test-report/main.go -format=markdown -output=test-report.md
+	@echo "Report saved to test-report.md"
+
+# Clean test output files
+clean-test-output:
+	@echo "Cleaning test output files..."
+	rm -f .test-output-*.txt .test-json-*.txt test-report.md test-report.json

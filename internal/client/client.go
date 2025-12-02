@@ -77,6 +77,13 @@ func WithRetryWait(min, max time.Duration) ClientOption {
 	}
 }
 
+// WithHTTPClient sets a custom HTTP client (useful for testing with mock servers)
+func WithHTTPClient(httpClient *http.Client) ClientOption {
+	return func(c *Client) {
+		c.HTTPClient = httpClient
+	}
+}
+
 // WithTLSConfig sets a custom TLS configuration on the HTTP client
 func WithTLSConfig(tlsConfig *tls.Config) ClientOption {
 	return func(c *Client) {

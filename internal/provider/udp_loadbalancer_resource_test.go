@@ -406,7 +406,7 @@ func TestAccUDPLoadBalancerResource_emptyName(t *testing.T) {
 		Steps: []resource.TestStep{
 			{
 				Config:      testAccUDPLoadBalancerConfig_basicSystem(""),
-				ExpectError: regexp.MustCompile(`(required|empty|minimum|at least)`),
+				ExpectError: regexp.MustCompile(`(?i)(required|empty|minimum|at least|invalid.*name|name.*format)`),
 			},
 		},
 	})

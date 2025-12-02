@@ -201,7 +201,7 @@ A [`custom_network_config`](#custom-network-config) block supports the following
 
 <a id="custom-network-config-no-network-policy"></a>&#x2022; [`no_network_policy`](#custom-network-config-no-network-policy) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="custom-network-config-sli-config"></a>&#x2022; [`sli_config`](#custom-network-config-sli-config) - Optional Block<br>Site Local Network Configuration. Site local network configuration<br>See [Sli Config](#custom-network-config-sli-config) below.
+<a id="custom-network-config-sli-config"></a>&#x2022; [`sli_config`](#custom-network-config-sli-config) - Optional Block<br>Site Local Network Configuration. Site local network configuration<br>See [SLI Config](#custom-network-config-sli-config) below.
 
 <a id="custom-network-config-slo-config"></a>&#x2022; [`slo_config`](#custom-network-config-slo-config) - Optional Block<br>Site Local Network Configuration. Site local network configuration<br>See [Slo Config](#custom-network-config-slo-config) below.
 
@@ -271,17 +271,17 @@ A [`global_network_list`](#custom-network-config-global-network-list) block (wit
 
 A [`global_network_connections`](#custom-network-config-global-network-list-global-network-connections) block (within [`custom_network_config.global_network_list`](#custom-network-config-global-network-list)) supports the following:
 
-<a id="custom-network-config-global-network-list-global-network-connections-sli-to-global-dr"></a>&#x2022; [`sli_to_global_dr`](#custom-network-config-global-network-list-global-network-connections-sli-to-global-dr) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [Sli To Global DR](#custom-network-config-global-network-list-global-network-connections-sli-to-global-dr) below.
+<a id="custom-network-config-global-network-list-global-network-connections-sli-to-global-dr"></a>&#x2022; [`sli_to_global_dr`](#custom-network-config-global-network-list-global-network-connections-sli-to-global-dr) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [SLI To Global DR](#custom-network-config-global-network-list-global-network-connections-sli-to-global-dr) below.
 
 <a id="custom-network-config-global-network-list-global-network-connections-slo-to-global-dr"></a>&#x2022; [`slo_to_global_dr`](#custom-network-config-global-network-list-global-network-connections-slo-to-global-dr) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [Slo To Global DR](#custom-network-config-global-network-list-global-network-connections-slo-to-global-dr) below.
 
-#### Custom Network Config Global Network List Global Network Connections Sli To Global DR
+#### Custom Network Config Global Network List Global Network Connections SLI To Global DR
 
 A [`sli_to_global_dr`](#custom-network-config-global-network-list-global-network-connections-sli-to-global-dr) block (within [`custom_network_config.global_network_list.global_network_connections`](#custom-network-config-global-network-list-global-network-connections)) supports the following:
 
 <a id="custom-network-config-global-network-list-global-network-connections-sli-to-global-dr-global-vn"></a>&#x2022; [`global_vn`](#custom-network-config-global-network-list-global-network-connections-sli-to-global-dr-global-vn) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Global Vn](#custom-network-config-global-network-list-global-network-connections-sli-to-global-dr-global-vn) below.
 
-#### Custom Network Config Global Network List Global Network Connections Sli To Global DR Global Vn
+#### Custom Network Config Global Network List Global Network Connections SLI To Global DR Global Vn
 
 A [`global_vn`](#custom-network-config-global-network-list-global-network-connections-sli-to-global-dr-global-vn) block (within [`custom_network_config.global_network_list.global_network_connections.sli_to_global_dr`](#custom-network-config-global-network-list-global-network-connections-sli-to-global-dr)) supports the following:
 
@@ -407,7 +407,7 @@ An [`ethernet_interface`](#custom-network-config-interface-list-interfaces-ether
 
 <a id="custom-network-config-interface-list-interfaces-ethernet-interface-untagged"></a>&#x2022; [`untagged`](#custom-network-config-interface-list-interfaces-ethernet-interface-untagged) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="custom-network-config-interface-list-interfaces-ethernet-interface-vlan-id"></a>&#x2022; [`vlan_id`](#custom-network-config-interface-list-interfaces-ethernet-interface-vlan-id) - Optional Number<br>VLAN Id. Configure a VLAN tagged ethernet interface
+<a id="custom-network-config-interface-list-interfaces-ethernet-interface-vlan-id"></a>&#x2022; [`vlan_id`](#custom-network-config-interface-list-interfaces-ethernet-interface-vlan-id) - Optional Number<br>VLAN ID. Configure a VLAN tagged ethernet interface
 
 #### Custom Network Config Interface List Interfaces Ethernet Interface DHCP Server
 
@@ -581,7 +581,7 @@ A [`node_static_ip`](#custom-network-config-interface-list-interfaces-ethernet-i
 
 <a id="custom-network-config-interface-list-interfaces-ethernet-interface-static-ipv6-address-node-static-ip-ip-address"></a>&#x2022; [`ip_address`](#custom-network-config-interface-list-interfaces-ethernet-interface-static-ipv6-address-node-static-ip-ip-address) - Optional String<br>IP address/Prefix Length. IP address of the interface and prefix length
 
-#### Custom Network Config Sli Config
+#### Custom Network Config SLI Config
 
 A [`sli_config`](#custom-network-config-sli-config) block (within [`custom_network_config`](#custom-network-config)) supports the following:
 
@@ -603,7 +603,7 @@ A [`sli_config`](#custom-network-config-sli-config) block (within [`custom_netwo
 
 <a id="custom-network-config-sli-config-vip"></a>&#x2022; [`vip`](#custom-network-config-sli-config-vip) - Optional String<br>Common V4 VIP. Optional common virtual V4 IP across all nodes to be used as automatic VIP
 
-#### Custom Network Config Sli Config Dc Cluster Group
+#### Custom Network Config SLI Config Dc Cluster Group
 
 A [`dc_cluster_group`](#custom-network-config-sli-config-dc-cluster-group) block (within [`custom_network_config.sli_config`](#custom-network-config-sli-config)) supports the following:
 
@@ -613,13 +613,13 @@ A [`dc_cluster_group`](#custom-network-config-sli-config-dc-cluster-group) block
 
 <a id="custom-network-config-sli-config-dc-cluster-group-tenant"></a>&#x2022; [`tenant`](#custom-network-config-sli-config-dc-cluster-group-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-#### Custom Network Config Sli Config Static Routes
+#### Custom Network Config SLI Config Static Routes
 
 A [`static_routes`](#custom-network-config-sli-config-static-routes) block (within [`custom_network_config.sli_config`](#custom-network-config-sli-config)) supports the following:
 
 <a id="custom-network-config-sli-config-static-routes-static-routes"></a>&#x2022; [`static_routes`](#custom-network-config-sli-config-static-routes-static-routes) - Optional Block<br>Static Routes. List of static routes<br>See [Static Routes](#custom-network-config-sli-config-static-routes-static-routes) below.
 
-#### Custom Network Config Sli Config Static Routes Static Routes
+#### Custom Network Config SLI Config Static Routes Static Routes
 
 A [`static_routes`](#custom-network-config-sli-config-static-routes-static-routes) block (within [`custom_network_config.sli_config.static_routes`](#custom-network-config-sli-config-static-routes)) supports the following:
 
@@ -633,13 +633,13 @@ A [`static_routes`](#custom-network-config-sli-config-static-routes-static-route
 
 <a id="custom-network-config-sli-config-static-routes-static-routes-node-interface"></a>&#x2022; [`node_interface`](#custom-network-config-sli-config-static-routes-static-routes-node-interface) - Optional Block<br>NodeInterfaceType. On multinode site, this type holds the information about per node interfaces<br>See [Node Interface](#custom-network-config-sli-config-static-routes-static-routes-node-interface) below.
 
-#### Custom Network Config Sli Config Static Routes Static Routes Node Interface
+#### Custom Network Config SLI Config Static Routes Static Routes Node Interface
 
 A [`node_interface`](#custom-network-config-sli-config-static-routes-static-routes-node-interface) block (within [`custom_network_config.sli_config.static_routes.static_routes`](#custom-network-config-sli-config-static-routes-static-routes)) supports the following:
 
 <a id="custom-network-config-sli-config-static-routes-static-routes-node-interface-list"></a>&#x2022; [`list`](#custom-network-config-sli-config-static-routes-static-routes-node-interface-list) - Optional Block<br>Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface<br>See [List](#custom-network-config-sli-config-static-routes-static-routes-node-interface-list) below.
 
-#### Custom Network Config Sli Config Static Routes Static Routes Node Interface List
+#### Custom Network Config SLI Config Static Routes Static Routes Node Interface List
 
 A [`list`](#custom-network-config-sli-config-static-routes-static-routes-node-interface-list) block (within [`custom_network_config.sli_config.static_routes.static_routes.node_interface`](#custom-network-config-sli-config-static-routes-static-routes-node-interface)) supports the following:
 
@@ -647,7 +647,7 @@ A [`list`](#custom-network-config-sli-config-static-routes-static-routes-node-in
 
 <a id="custom-network-config-sli-config-static-routes-static-routes-node-interface-list-node"></a>&#x2022; [`node`](#custom-network-config-sli-config-static-routes-static-routes-node-interface-list-node) - Optional String<br>Node. Node name on this site
 
-#### Custom Network Config Sli Config Static Routes Static Routes Node Interface List Interface
+#### Custom Network Config SLI Config Static Routes Static Routes Node Interface List Interface
 
 An [`interface`](#custom-network-config-sli-config-static-routes-static-routes-node-interface-list-interface) block (within [`custom_network_config.sli_config.static_routes.static_routes.node_interface.list`](#custom-network-config-sli-config-static-routes-static-routes-node-interface-list)) supports the following:
 
@@ -661,13 +661,13 @@ An [`interface`](#custom-network-config-sli-config-static-routes-static-routes-n
 
 <a id="custom-network-config-sli-config-static-routes-static-routes-node-interface-list-interface-uid"></a>&#x2022; [`uid`](#custom-network-config-sli-config-static-routes-static-routes-node-interface-list-interface-uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-#### Custom Network Config Sli Config Static V6 Routes
+#### Custom Network Config SLI Config Static V6 Routes
 
 A [`static_v6_routes`](#custom-network-config-sli-config-static-v6-routes) block (within [`custom_network_config.sli_config`](#custom-network-config-sli-config)) supports the following:
 
 <a id="custom-network-config-sli-config-static-v6-routes-static-routes"></a>&#x2022; [`static_routes`](#custom-network-config-sli-config-static-v6-routes-static-routes) - Optional Block<br>Static IPv6 Routes. List of IPv6 static routes<br>See [Static Routes](#custom-network-config-sli-config-static-v6-routes-static-routes) below.
 
-#### Custom Network Config Sli Config Static V6 Routes Static Routes
+#### Custom Network Config SLI Config Static V6 Routes Static Routes
 
 A [`static_routes`](#custom-network-config-sli-config-static-v6-routes-static-routes) block (within [`custom_network_config.sli_config.static_v6_routes`](#custom-network-config-sli-config-static-v6-routes)) supports the following:
 
@@ -681,13 +681,13 @@ A [`static_routes`](#custom-network-config-sli-config-static-v6-routes-static-ro
 
 <a id="custom-network-config-sli-config-static-v6-routes-static-routes-node-interface"></a>&#x2022; [`node_interface`](#custom-network-config-sli-config-static-v6-routes-static-routes-node-interface) - Optional Block<br>NodeInterfaceType. On multinode site, this type holds the information about per node interfaces<br>See [Node Interface](#custom-network-config-sli-config-static-v6-routes-static-routes-node-interface) below.
 
-#### Custom Network Config Sli Config Static V6 Routes Static Routes Node Interface
+#### Custom Network Config SLI Config Static V6 Routes Static Routes Node Interface
 
 A [`node_interface`](#custom-network-config-sli-config-static-v6-routes-static-routes-node-interface) block (within [`custom_network_config.sli_config.static_v6_routes.static_routes`](#custom-network-config-sli-config-static-v6-routes-static-routes)) supports the following:
 
 <a id="custom-network-config-sli-config-static-v6-routes-static-routes-node-interface-list"></a>&#x2022; [`list`](#custom-network-config-sli-config-static-v6-routes-static-routes-node-interface-list) - Optional Block<br>Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface<br>See [List](#custom-network-config-sli-config-static-v6-routes-static-routes-node-interface-list) below.
 
-#### Custom Network Config Sli Config Static V6 Routes Static Routes Node Interface List
+#### Custom Network Config SLI Config Static V6 Routes Static Routes Node Interface List
 
 A [`list`](#custom-network-config-sli-config-static-v6-routes-static-routes-node-interface-list) block (within [`custom_network_config.sli_config.static_v6_routes.static_routes.node_interface`](#custom-network-config-sli-config-static-v6-routes-static-routes-node-interface)) supports the following:
 
@@ -695,7 +695,7 @@ A [`list`](#custom-network-config-sli-config-static-v6-routes-static-routes-node
 
 <a id="custom-network-config-sli-config-static-v6-routes-static-routes-node-interface-list-node"></a>&#x2022; [`node`](#custom-network-config-sli-config-static-v6-routes-static-routes-node-interface-list-node) - Optional String<br>Node. Node name on this site
 
-#### Custom Network Config Sli Config Static V6 Routes Static Routes Node Interface List Interface
+#### Custom Network Config SLI Config Static V6 Routes Static Routes Node Interface List Interface
 
 An [`interface`](#custom-network-config-sli-config-static-v6-routes-static-routes-node-interface-list-interface) block (within [`custom_network_config.sli_config.static_v6_routes.static_routes.node_interface.list`](#custom-network-config-sli-config-static-v6-routes-static-routes-node-interface-list)) supports the following:
 

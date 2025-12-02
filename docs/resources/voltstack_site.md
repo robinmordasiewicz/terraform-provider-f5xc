@@ -226,7 +226,7 @@ A [`custom_network_config`](#custom-network-config) block supports the following
 
 <a id="custom-network-config-bgp-peer-address"></a>&#x2022; [`bgp_peer_address`](#custom-network-config-bgp-peer-address) - Optional String<br>BGP Peer Address. Optional BGP peer address that can be used as parameter for BGP configuration when BGP is configured to fetch BGP peer address from site Object. This can be used to change peer address per site in fleet
 
-<a id="custom-network-config-bgp-router-id"></a>&#x2022; [`bgp_router_id`](#custom-network-config-bgp-router-id) - Optional String<br>BGP Router ID. Optional BGP router id that can be used as parameter for BGP configuration when BGP is configured to fetch BGP router ID from site object
+<a id="custom-network-config-bgp-router-id"></a>&#x2022; [`bgp_router_id`](#custom-network-config-bgp-router-id) - Optional String<br>BGP Router ID. Optional BGP router ID that can be used as parameter for BGP configuration when BGP is configured to fetch BGP router ID from site object
 
 <a id="custom-network-config-default-config"></a>&#x2022; [`default_config`](#custom-network-config-default-config) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -252,7 +252,7 @@ A [`custom_network_config`](#custom-network-config) block supports the following
 
 <a id="custom-network-config-site-to-site-tunnel-ip"></a>&#x2022; [`site_to_site_tunnel_ip`](#custom-network-config-site-to-site-tunnel-ip) - Optional String<br>Site Mesh Group Connection Via Virtual IP. Site Mesh Group Connection Via Virtual IP. This option will use the Virtual IP provided for creating ipsec between two sites which are part of the site mesh group
 
-<a id="custom-network-config-sli-config"></a>&#x2022; [`sli_config`](#custom-network-config-sli-config) - Optional Block<br>Site Local Inside Network Configuration. Site local inside network configuration<br>See [Sli Config](#custom-network-config-sli-config) below.
+<a id="custom-network-config-sli-config"></a>&#x2022; [`sli_config`](#custom-network-config-sli-config) - Optional Block<br>Site Local Inside Network Configuration. Site local inside network configuration<br>See [SLI Config](#custom-network-config-sli-config) below.
 
 <a id="custom-network-config-slo-config"></a>&#x2022; [`slo_config`](#custom-network-config-slo-config) - Optional Block<br>Site Local Network Configuration. Site local network configuration<br>See [Slo Config](#custom-network-config-slo-config) below.
 
@@ -322,17 +322,17 @@ A [`global_network_list`](#custom-network-config-global-network-list) block (wit
 
 A [`global_network_connections`](#custom-network-config-global-network-list-global-network-connections) block (within [`custom_network_config.global_network_list`](#custom-network-config-global-network-list)) supports the following:
 
-<a id="custom-network-config-global-network-list-global-network-connections-sli-to-global-dr"></a>&#x2022; [`sli_to_global_dr`](#custom-network-config-global-network-list-global-network-connections-sli-to-global-dr) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [Sli To Global DR](#custom-network-config-global-network-list-global-network-connections-sli-to-global-dr) below.
+<a id="custom-network-config-global-network-list-global-network-connections-sli-to-global-dr"></a>&#x2022; [`sli_to_global_dr`](#custom-network-config-global-network-list-global-network-connections-sli-to-global-dr) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [SLI To Global DR](#custom-network-config-global-network-list-global-network-connections-sli-to-global-dr) below.
 
 <a id="custom-network-config-global-network-list-global-network-connections-slo-to-global-dr"></a>&#x2022; [`slo_to_global_dr`](#custom-network-config-global-network-list-global-network-connections-slo-to-global-dr) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [Slo To Global DR](#custom-network-config-global-network-list-global-network-connections-slo-to-global-dr) below.
 
-#### Custom Network Config Global Network List Global Network Connections Sli To Global DR
+#### Custom Network Config Global Network List Global Network Connections SLI To Global DR
 
 A [`sli_to_global_dr`](#custom-network-config-global-network-list-global-network-connections-sli-to-global-dr) block (within [`custom_network_config.global_network_list.global_network_connections`](#custom-network-config-global-network-list-global-network-connections)) supports the following:
 
 <a id="custom-network-config-global-network-list-global-network-connections-sli-to-global-dr-global-vn"></a>&#x2022; [`global_vn`](#custom-network-config-global-network-list-global-network-connections-sli-to-global-dr-global-vn) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Global Vn](#custom-network-config-global-network-list-global-network-connections-sli-to-global-dr-global-vn) below.
 
-#### Custom Network Config Global Network List Global Network Connections Sli To Global DR Global Vn
+#### Custom Network Config Global Network List Global Network Connections SLI To Global DR Global Vn
 
 A [`global_vn`](#custom-network-config-global-network-list-global-network-connections-sli-to-global-dr-global-vn) block (within [`custom_network_config.global_network_list.global_network_connections.sli_to_global_dr`](#custom-network-config-global-network-list-global-network-connections-sli-to-global-dr)) supports the following:
 
@@ -460,7 +460,7 @@ An [`ethernet_interface`](#custom-network-config-interface-list-interfaces-ether
 
 <a id="custom-network-config-interface-list-interfaces-ethernet-interface-untagged"></a>&#x2022; [`untagged`](#custom-network-config-interface-list-interfaces-ethernet-interface-untagged) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="custom-network-config-interface-list-interfaces-ethernet-interface-vlan-id"></a>&#x2022; [`vlan_id`](#custom-network-config-interface-list-interfaces-ethernet-interface-vlan-id) - Optional Number<br>VLAN Id. Configure a VLAN tagged ethernet interface
+<a id="custom-network-config-interface-list-interfaces-ethernet-interface-vlan-id"></a>&#x2022; [`vlan_id`](#custom-network-config-interface-list-interfaces-ethernet-interface-vlan-id) - Optional Number<br>VLAN ID. Configure a VLAN tagged ethernet interface
 
 #### Custom Network Config Interface List Interfaces Ethernet Interface DHCP Server
 
@@ -684,7 +684,7 @@ A [`tunnel`](#custom-network-config-interface-list-interfaces-tunnel-interface-t
 
 <a id="custom-network-config-interface-list-interfaces-tunnel-interface-tunnel-tenant"></a>&#x2022; [`tenant`](#custom-network-config-interface-list-interfaces-tunnel-interface-tunnel-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-#### Custom Network Config Sli Config
+#### Custom Network Config SLI Config
 
 A [`sli_config`](#custom-network-config-sli-config) block (within [`custom_network_config`](#custom-network-config)) supports the following:
 
@@ -696,13 +696,13 @@ A [`sli_config`](#custom-network-config-sli-config) block (within [`custom_netwo
 
 <a id="custom-network-config-sli-config-static-v6-routes"></a>&#x2022; [`static_v6_routes`](#custom-network-config-sli-config-static-v6-routes) - Optional Block<br>Static IPv6 Routes List. List of IPv6 static routes<br>See [Static V6 Routes](#custom-network-config-sli-config-static-v6-routes) below.
 
-#### Custom Network Config Sli Config Static Routes
+#### Custom Network Config SLI Config Static Routes
 
 A [`static_routes`](#custom-network-config-sli-config-static-routes) block (within [`custom_network_config.sli_config`](#custom-network-config-sli-config)) supports the following:
 
 <a id="custom-network-config-sli-config-static-routes-static-routes"></a>&#x2022; [`static_routes`](#custom-network-config-sli-config-static-routes-static-routes) - Optional Block<br>Static Routes. List of static routes<br>See [Static Routes](#custom-network-config-sli-config-static-routes-static-routes) below.
 
-#### Custom Network Config Sli Config Static Routes Static Routes
+#### Custom Network Config SLI Config Static Routes Static Routes
 
 A [`static_routes`](#custom-network-config-sli-config-static-routes-static-routes) block (within [`custom_network_config.sli_config.static_routes`](#custom-network-config-sli-config-static-routes)) supports the following:
 
@@ -716,13 +716,13 @@ A [`static_routes`](#custom-network-config-sli-config-static-routes-static-route
 
 <a id="custom-network-config-sli-config-static-routes-static-routes-node-interface"></a>&#x2022; [`node_interface`](#custom-network-config-sli-config-static-routes-static-routes-node-interface) - Optional Block<br>NodeInterfaceType. On multinode site, this type holds the information about per node interfaces<br>See [Node Interface](#custom-network-config-sli-config-static-routes-static-routes-node-interface) below.
 
-#### Custom Network Config Sli Config Static Routes Static Routes Node Interface
+#### Custom Network Config SLI Config Static Routes Static Routes Node Interface
 
 A [`node_interface`](#custom-network-config-sli-config-static-routes-static-routes-node-interface) block (within [`custom_network_config.sli_config.static_routes.static_routes`](#custom-network-config-sli-config-static-routes-static-routes)) supports the following:
 
 <a id="custom-network-config-sli-config-static-routes-static-routes-node-interface-list"></a>&#x2022; [`list`](#custom-network-config-sli-config-static-routes-static-routes-node-interface-list) - Optional Block<br>Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface<br>See [List](#custom-network-config-sli-config-static-routes-static-routes-node-interface-list) below.
 
-#### Custom Network Config Sli Config Static Routes Static Routes Node Interface List
+#### Custom Network Config SLI Config Static Routes Static Routes Node Interface List
 
 A [`list`](#custom-network-config-sli-config-static-routes-static-routes-node-interface-list) block (within [`custom_network_config.sli_config.static_routes.static_routes.node_interface`](#custom-network-config-sli-config-static-routes-static-routes-node-interface)) supports the following:
 
@@ -730,7 +730,7 @@ A [`list`](#custom-network-config-sli-config-static-routes-static-routes-node-in
 
 <a id="custom-network-config-sli-config-static-routes-static-routes-node-interface-list-node"></a>&#x2022; [`node`](#custom-network-config-sli-config-static-routes-static-routes-node-interface-list-node) - Optional String<br>Node. Node name on this site
 
-#### Custom Network Config Sli Config Static Routes Static Routes Node Interface List Interface
+#### Custom Network Config SLI Config Static Routes Static Routes Node Interface List Interface
 
 An [`interface`](#custom-network-config-sli-config-static-routes-static-routes-node-interface-list-interface) block (within [`custom_network_config.sli_config.static_routes.static_routes.node_interface.list`](#custom-network-config-sli-config-static-routes-static-routes-node-interface-list)) supports the following:
 
@@ -744,13 +744,13 @@ An [`interface`](#custom-network-config-sli-config-static-routes-static-routes-n
 
 <a id="custom-network-config-sli-config-static-routes-static-routes-node-interface-list-interface-uid"></a>&#x2022; [`uid`](#custom-network-config-sli-config-static-routes-static-routes-node-interface-list-interface-uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-#### Custom Network Config Sli Config Static V6 Routes
+#### Custom Network Config SLI Config Static V6 Routes
 
 A [`static_v6_routes`](#custom-network-config-sli-config-static-v6-routes) block (within [`custom_network_config.sli_config`](#custom-network-config-sli-config)) supports the following:
 
 <a id="custom-network-config-sli-config-static-v6-routes-static-routes"></a>&#x2022; [`static_routes`](#custom-network-config-sli-config-static-v6-routes-static-routes) - Optional Block<br>Static IPv6 Routes. List of IPv6 static routes<br>See [Static Routes](#custom-network-config-sli-config-static-v6-routes-static-routes) below.
 
-#### Custom Network Config Sli Config Static V6 Routes Static Routes
+#### Custom Network Config SLI Config Static V6 Routes Static Routes
 
 A [`static_routes`](#custom-network-config-sli-config-static-v6-routes-static-routes) block (within [`custom_network_config.sli_config.static_v6_routes`](#custom-network-config-sli-config-static-v6-routes)) supports the following:
 
@@ -764,13 +764,13 @@ A [`static_routes`](#custom-network-config-sli-config-static-v6-routes-static-ro
 
 <a id="custom-network-config-sli-config-static-v6-routes-static-routes-node-interface"></a>&#x2022; [`node_interface`](#custom-network-config-sli-config-static-v6-routes-static-routes-node-interface) - Optional Block<br>NodeInterfaceType. On multinode site, this type holds the information about per node interfaces<br>See [Node Interface](#custom-network-config-sli-config-static-v6-routes-static-routes-node-interface) below.
 
-#### Custom Network Config Sli Config Static V6 Routes Static Routes Node Interface
+#### Custom Network Config SLI Config Static V6 Routes Static Routes Node Interface
 
 A [`node_interface`](#custom-network-config-sli-config-static-v6-routes-static-routes-node-interface) block (within [`custom_network_config.sli_config.static_v6_routes.static_routes`](#custom-network-config-sli-config-static-v6-routes-static-routes)) supports the following:
 
 <a id="custom-network-config-sli-config-static-v6-routes-static-routes-node-interface-list"></a>&#x2022; [`list`](#custom-network-config-sli-config-static-v6-routes-static-routes-node-interface-list) - Optional Block<br>Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface<br>See [List](#custom-network-config-sli-config-static-v6-routes-static-routes-node-interface-list) below.
 
-#### Custom Network Config Sli Config Static V6 Routes Static Routes Node Interface List
+#### Custom Network Config SLI Config Static V6 Routes Static Routes Node Interface List
 
 A [`list`](#custom-network-config-sli-config-static-v6-routes-static-routes-node-interface-list) block (within [`custom_network_config.sli_config.static_v6_routes.static_routes.node_interface`](#custom-network-config-sli-config-static-v6-routes-static-routes-node-interface)) supports the following:
 
@@ -778,7 +778,7 @@ A [`list`](#custom-network-config-sli-config-static-v6-routes-static-routes-node
 
 <a id="custom-network-config-sli-config-static-v6-routes-static-routes-node-interface-list-node"></a>&#x2022; [`node`](#custom-network-config-sli-config-static-v6-routes-static-routes-node-interface-list-node) - Optional String<br>Node. Node name on this site
 
-#### Custom Network Config Sli Config Static V6 Routes Static Routes Node Interface List Interface
+#### Custom Network Config SLI Config Static V6 Routes Static Routes Node Interface List Interface
 
 An [`interface`](#custom-network-config-sli-config-static-v6-routes-static-routes-node-interface-list-interface) block (within [`custom_network_config.sli_config.static_v6_routes.static_routes.node_interface.list`](#custom-network-config-sli-config-static-v6-routes-static-routes-node-interface-list)) supports the following:
 
@@ -1000,7 +1000,7 @@ A [`storage_classes`](#custom-storage-config-storage-class-list-storage-classes)
 
 <a id="custom-storage-config-storage-class-list-storage-classes-custom-storage"></a>&#x2022; [`custom_storage`](#custom-storage-config-storage-class-list-storage-classes-custom-storage) - Optional Block<br>Custom StorageClass. Custom Storage Class allows to insert Kubernetes storageclass definition which will be applied into given site<br>See [Custom Storage](#custom-storage-config-storage-class-list-storage-classes-custom-storage) below.
 
-<a id="custom-storage-config-storage-class-list-storage-classes-default-storage-class"></a>&#x2022; [`default_storage_class`](#custom-storage-config-storage-class-list-storage-classes-default-storage-class) - Optional Bool<br>Default Storage Class. Make this storage class default storage class for the K8s cluster
+<a id="custom-storage-config-storage-class-list-storage-classes-default-storage-class"></a>&#x2022; [`default_storage_class`](#custom-storage-config-storage-class-list-storage-classes-default-storage-class) - Optional Bool<br>Default Storage Class. Make this storage class default storage class for the K8S cluster
 
 <a id="custom-storage-config-storage-class-list-storage-classes-description-spec"></a>&#x2022; [`description_spec`](#custom-storage-config-storage-class-list-storage-classes-description-spec) - Optional String<br>Storage Class Description. Description for this storage class
 
@@ -1012,7 +1012,7 @@ A [`storage_classes`](#custom-storage-config-storage-class-list-storage-classes)
 
 <a id="custom-storage-config-storage-class-list-storage-classes-reclaim-policy"></a>&#x2022; [`reclaim_policy`](#custom-storage-config-storage-class-list-storage-classes-reclaim-policy) - Optional String<br>Reclaim Policy. Reclaim Policy
 
-<a id="custom-storage-config-storage-class-list-storage-classes-storage-class-name"></a>&#x2022; [`storage_class_name`](#custom-storage-config-storage-class-list-storage-classes-storage-class-name) - Optional String<br>Storage Class Name. Name of the storage class as it will appear in K8s
+<a id="custom-storage-config-storage-class-list-storage-classes-storage-class-name"></a>&#x2022; [`storage_class_name`](#custom-storage-config-storage-class-list-storage-classes-storage-class-name) - Optional String<br>Storage Class Name. Name of the storage class as it will appear in K8S
 
 <a id="custom-storage-config-storage-class-list-storage-classes-storage-device"></a>&#x2022; [`storage_device`](#custom-storage-config-storage-class-list-storage-classes-storage-device) - Optional String<br>Storage Device. Storage device that this class will use. The Device name defined at previous step
 
@@ -1020,7 +1020,7 @@ A [`storage_classes`](#custom-storage-config-storage-class-list-storage-classes)
 
 A [`custom_storage`](#custom-storage-config-storage-class-list-storage-classes-custom-storage) block (within [`custom_storage_config.storage_class_list.storage_classes`](#custom-storage-config-storage-class-list-storage-classes)) supports the following:
 
-<a id="custom-storage-config-storage-class-list-storage-classes-custom-storage-yaml"></a>&#x2022; [`yaml`](#custom-storage-config-storage-class-list-storage-classes-custom-storage-yaml) - Optional String<br>Storage Class YAML. K8s YAML for StorageClass
+<a id="custom-storage-config-storage-class-list-storage-classes-custom-storage-yaml"></a>&#x2022; [`yaml`](#custom-storage-config-storage-class-list-storage-classes-custom-storage-yaml) - Optional String<br>Storage Class YAML. K8S YAML for StorageClass
 
 #### Custom Storage Config Storage Class List Storage Classes Hpe Storage
 
@@ -1590,7 +1590,7 @@ A [`pure_service_orchestrator`](#custom-storage-config-storage-device-list-stora
 
 <a id="custom-storage-config-storage-device-list-storage-devices-pure-service-orchestrator-arrays"></a>&#x2022; [`arrays`](#custom-storage-config-storage-device-list-storage-devices-pure-service-orchestrator-arrays) - Optional Block<br>Arrays Configuration. Device configuration for PSO Arrays<br>See [Arrays](#custom-storage-config-storage-device-list-storage-devices-pure-service-orchestrator-arrays) below.
 
-<a id="custom-storage-config-storage-device-list-storage-devices-pure-service-orchestrator-cluster-id"></a>&#x2022; [`cluster_id`](#custom-storage-config-storage-device-list-storage-devices-pure-service-orchestrator-cluster-id) - Optional String<br>Cluster ID. clusterID is added as a prefix for all volumes created by this PSO installation. clusterID is also used to identify the volumes used by the datastore, pso-db. clusterID MUST BE UNIQUE for multiple K8s clusters running on top of the same storage arrays. characters allowed: alphanumeric and underscores
+<a id="custom-storage-config-storage-device-list-storage-devices-pure-service-orchestrator-cluster-id"></a>&#x2022; [`cluster_id`](#custom-storage-config-storage-device-list-storage-devices-pure-service-orchestrator-cluster-id) - Optional String<br>Cluster ID. clusterID is added as a prefix for all volumes created by this PSO installation. clusterID is also used to identify the volumes used by the datastore, pso-db. clusterID MUST BE UNIQUE for multiple K8S clusters running on top of the same storage arrays. characters allowed: alphanumeric and underscores
 
 <a id="custom-storage-config-storage-device-list-storage-devices-pure-service-orchestrator-enable-storage-topology"></a>&#x2022; [`enable_storage_topology`](#custom-storage-config-storage-device-list-storage-devices-pure-service-orchestrator-enable-storage-topology) - Optional Bool<br>Enable Storage Topology. This option is to enable/disable the csi topology feature for pso-csi
 
@@ -1770,7 +1770,7 @@ A [`storage_interface`](#custom-storage-config-storage-interface-list-storage-in
 
 <a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-untagged"></a>&#x2022; [`untagged`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-untagged) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-vlan-id"></a>&#x2022; [`vlan_id`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-vlan-id) - Optional Number<br>VLAN Id. Configure a VLAN tagged ethernet interface
+<a id="custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-vlan-id"></a>&#x2022; [`vlan_id`](#custom-storage-config-storage-interface-list-storage-interfaces-storage-interface-vlan-id) - Optional Number<br>VLAN ID. Configure a VLAN tagged ethernet interface
 
 #### Custom Storage Config Storage Interface List Storage Interfaces Storage Interface DHCP Server
 
@@ -1954,7 +1954,7 @@ An [`enable_vgpu`](#enable-vgpu) block supports the following:
 
 <a id="enable-vgpu-server-port"></a>&#x2022; [`server_port`](#enable-vgpu-server-port) - Optional Number<br>License Server Port Number. Set License Server port number
 
-#### K8s Cluster
+#### K8S Cluster
 
 A [`k8s_cluster`](#k8s-cluster) block supports the following:
 

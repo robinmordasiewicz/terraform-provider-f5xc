@@ -9,7 +9,7 @@ description: |-
 
 Manages bgp_asn_set creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
-~> **Note** Please refer to [BGP Asn Set API docs](https://docs.cloud.f5.com/docs-v2/api/bgp-asn-set) to learn more.
+~> **Note** Please refer to [BGP ASN Set API docs](https://docs.cloud.f5.com/docs-v2/api/bgp-asn-set) to learn more.
 
 ## Example Usage
 

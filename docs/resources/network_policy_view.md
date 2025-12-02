@@ -20,7 +20,7 @@ Manages a NetworkPolicyView resource in F5 Distributed Cloud for network policy 
 # Basic Network Policy View configuration
 resource "f5xc_network_policy_view" "example" {
   name      = "example-network-policy-view"
-  namespace = "staging"
+  namespace = "system"
 
   labels = {
     environment = "production"

@@ -20,7 +20,7 @@ Manages new token. token object is used to manage site admission. User must gene
 # Basic Token configuration
 resource "f5xc_token" "example" {
   name      = "example-token"
-  namespace = "staging"
+  namespace = "system"
 
   labels = {
     environment = "production"

@@ -67,8 +67,8 @@ resource "f5xc_ike1" "example" {
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; <a id="ike-keylifetime-hours"></a>[`ike_keylifetime_hours`](#ike-keylifetime-hours) - Optional Block<br>Hours. Input Hours<br>See [Ike Keylifetime Hours](#ike-keylifetime-hours) below for details.
-<br><br>&#x2022; <a id="ike-keylifetime-minutes"></a>[`ike_keylifetime_minutes`](#ike-keylifetime-minutes) - Optional Block<br>Minutes. Set IKE Key Lifetime in minutes<br>See [Ike Keylifetime Minutes](#ike-keylifetime-minutes) below for details.
+&#x2022; <a id="ike-keylifetime-hours"></a>[`ike_keylifetime_hours`](#ike-keylifetime-hours) - Optional Block<br>Hours. Input Hours<br>See [IKE Keylifetime Hours](#ike-keylifetime-hours) below for details.
+<br><br>&#x2022; <a id="ike-keylifetime-minutes"></a>[`ike_keylifetime_minutes`](#ike-keylifetime-minutes) - Optional Block<br>Minutes. Set IKE Key Lifetime in minutes<br>See [IKE Keylifetime Minutes](#ike-keylifetime-minutes) below for details.
 <br><br>&#x2022; <a id="use-default-keylifetime"></a>[`use_default_keylifetime`](#use-default-keylifetime) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
@@ -86,13 +86,13 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-#### Ike Keylifetime Hours
+#### IKE Keylifetime Hours
 
 An [`ike_keylifetime_hours`](#ike-keylifetime-hours) block supports the following:
 
 <a id="ike-keylifetime-hours-duration"></a>&#x2022; [`duration`](#ike-keylifetime-hours-duration) - Optional Number<br>Duration
 
-#### Ike Keylifetime Minutes
+#### IKE Keylifetime Minutes
 
 An [`ike_keylifetime_minutes`](#ike-keylifetime-minutes) block supports the following:
 

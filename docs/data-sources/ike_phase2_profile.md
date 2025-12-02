@@ -9,7 +9,7 @@ description: |-
 
 Manages a IKEPhase2Profile resource in F5 Distributed Cloud for ike phase2 profile configuration.
 
-~> **Note** Please refer to [Ike Phase2 Profile API docs](https://docs.cloud.f5.com/docs-v2/api/views-ike-phase2-profile) to learn more.
+~> **Note** Please refer to [IKE Phase2 Profile API docs](https://docs.cloud.f5.com/docs-v2/api/views-ike-phase2-profile) to learn more.
 
 ## Example Usage
 

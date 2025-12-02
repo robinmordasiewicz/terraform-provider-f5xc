@@ -949,7 +949,7 @@ A [`custom_proxy_bypass`](#custom-proxy-bypass) block supports the following:
 
 <a id="custom-proxy-bypass-proxy-bypass"></a>&#x2022; [`proxy_bypass`](#custom-proxy-bypass-proxy-bypass) - Optional List<br>Proxy Bypass. List of domains to bypass the proxy
 
-#### Dc Cluster Group Sli
+#### Dc Cluster Group SLI
 
 A [`dc_cluster_group_sli`](#dc-cluster-group-sli) block supports the following:
 
@@ -1673,11 +1673,11 @@ A [`local_vrf`](#local-vrf) block supports the following:
 
 <a id="local-vrf-default-sli-config"></a>&#x2022; [`default_sli_config`](#local-vrf-default-sli-config) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="local-vrf-sli-config"></a>&#x2022; [`sli_config`](#local-vrf-sli-config) - Optional Block<br>Site Local Network Configuration. Site local network configuration<br>See [Sli Config](#local-vrf-sli-config) below.
+<a id="local-vrf-sli-config"></a>&#x2022; [`sli_config`](#local-vrf-sli-config) - Optional Block<br>Site Local Network Configuration. Site local network configuration<br>See [SLI Config](#local-vrf-sli-config) below.
 
 <a id="local-vrf-slo-config"></a>&#x2022; [`slo_config`](#local-vrf-slo-config) - Optional Block<br>Site Local Network Configuration. Site local network configuration<br>See [Slo Config](#local-vrf-slo-config) below.
 
-#### Local Vrf Sli Config
+#### Local Vrf SLI Config
 
 A [`sli_config`](#local-vrf-sli-config) block (within [`local_vrf`](#local-vrf)) supports the following:
 
@@ -1695,13 +1695,13 @@ A [`sli_config`](#local-vrf-sli-config) block (within [`local_vrf`](#local-vrf))
 
 <a id="local-vrf-sli-config-vip"></a>&#x2022; [`vip`](#local-vrf-sli-config-vip) - Optional String<br>Common V4 VIP. Optional common virtual V4 IP across all nodes to be used as automatic VIP
 
-#### Local Vrf Sli Config Static Routes
+#### Local Vrf SLI Config Static Routes
 
 A [`static_routes`](#local-vrf-sli-config-static-routes) block (within [`local_vrf.sli_config`](#local-vrf-sli-config)) supports the following:
 
 <a id="local-vrf-sli-config-static-routes-static-routes"></a>&#x2022; [`static_routes`](#local-vrf-sli-config-static-routes-static-routes) - Optional Block<br>Static Routes<br>See [Static Routes](#local-vrf-sli-config-static-routes-static-routes) below.
 
-#### Local Vrf Sli Config Static Routes Static Routes
+#### Local Vrf SLI Config Static Routes Static Routes
 
 A [`static_routes`](#local-vrf-sli-config-static-routes-static-routes) block (within [`local_vrf.sli_config.static_routes`](#local-vrf-sli-config-static-routes)) supports the following:
 
@@ -1715,13 +1715,13 @@ A [`static_routes`](#local-vrf-sli-config-static-routes-static-routes) block (wi
 
 <a id="local-vrf-sli-config-static-routes-static-routes-node-interface"></a>&#x2022; [`node_interface`](#local-vrf-sli-config-static-routes-static-routes-node-interface) - Optional Block<br>NodeInterfaceType. On multinode site, this type holds the information about per node interfaces<br>See [Node Interface](#local-vrf-sli-config-static-routes-static-routes-node-interface) below.
 
-#### Local Vrf Sli Config Static Routes Static Routes Node Interface
+#### Local Vrf SLI Config Static Routes Static Routes Node Interface
 
 A [`node_interface`](#local-vrf-sli-config-static-routes-static-routes-node-interface) block (within [`local_vrf.sli_config.static_routes.static_routes`](#local-vrf-sli-config-static-routes-static-routes)) supports the following:
 
 <a id="local-vrf-sli-config-static-routes-static-routes-node-interface-list"></a>&#x2022; [`list`](#local-vrf-sli-config-static-routes-static-routes-node-interface-list) - Optional Block<br>Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface<br>See [List](#local-vrf-sli-config-static-routes-static-routes-node-interface-list) below.
 
-#### Local Vrf Sli Config Static Routes Static Routes Node Interface List
+#### Local Vrf SLI Config Static Routes Static Routes Node Interface List
 
 A [`list`](#local-vrf-sli-config-static-routes-static-routes-node-interface-list) block (within [`local_vrf.sli_config.static_routes.static_routes.node_interface`](#local-vrf-sli-config-static-routes-static-routes-node-interface)) supports the following:
 
@@ -1729,7 +1729,7 @@ A [`list`](#local-vrf-sli-config-static-routes-static-routes-node-interface-list
 
 <a id="local-vrf-sli-config-static-routes-static-routes-node-interface-list-node"></a>&#x2022; [`node`](#local-vrf-sli-config-static-routes-static-routes-node-interface-list-node) - Optional String<br>Node. Node name on this site
 
-#### Local Vrf Sli Config Static Routes Static Routes Node Interface List Interface
+#### Local Vrf SLI Config Static Routes Static Routes Node Interface List Interface
 
 An [`interface`](#local-vrf-sli-config-static-routes-static-routes-node-interface-list-interface) block (within [`local_vrf.sli_config.static_routes.static_routes.node_interface.list`](#local-vrf-sli-config-static-routes-static-routes-node-interface-list)) supports the following:
 
@@ -1743,13 +1743,13 @@ An [`interface`](#local-vrf-sli-config-static-routes-static-routes-node-interfac
 
 <a id="local-vrf-sli-config-static-routes-static-routes-node-interface-list-interface-uid"></a>&#x2022; [`uid`](#local-vrf-sli-config-static-routes-static-routes-node-interface-list-interface-uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-#### Local Vrf Sli Config Static V6 Routes
+#### Local Vrf SLI Config Static V6 Routes
 
 A [`static_v6_routes`](#local-vrf-sli-config-static-v6-routes) block (within [`local_vrf.sli_config`](#local-vrf-sli-config)) supports the following:
 
 <a id="local-vrf-sli-config-static-v6-routes-static-routes"></a>&#x2022; [`static_routes`](#local-vrf-sli-config-static-v6-routes-static-routes) - Optional Block<br>Static IPv6 Routes. List of IPv6 static routes<br>See [Static Routes](#local-vrf-sli-config-static-v6-routes-static-routes) below.
 
-#### Local Vrf Sli Config Static V6 Routes Static Routes
+#### Local Vrf SLI Config Static V6 Routes Static Routes
 
 A [`static_routes`](#local-vrf-sli-config-static-v6-routes-static-routes) block (within [`local_vrf.sli_config.static_v6_routes`](#local-vrf-sli-config-static-v6-routes)) supports the following:
 
@@ -1763,13 +1763,13 @@ A [`static_routes`](#local-vrf-sli-config-static-v6-routes-static-routes) block 
 
 <a id="local-vrf-sli-config-static-v6-routes-static-routes-node-interface"></a>&#x2022; [`node_interface`](#local-vrf-sli-config-static-v6-routes-static-routes-node-interface) - Optional Block<br>NodeInterfaceType. On multinode site, this type holds the information about per node interfaces<br>See [Node Interface](#local-vrf-sli-config-static-v6-routes-static-routes-node-interface) below.
 
-#### Local Vrf Sli Config Static V6 Routes Static Routes Node Interface
+#### Local Vrf SLI Config Static V6 Routes Static Routes Node Interface
 
 A [`node_interface`](#local-vrf-sli-config-static-v6-routes-static-routes-node-interface) block (within [`local_vrf.sli_config.static_v6_routes.static_routes`](#local-vrf-sli-config-static-v6-routes-static-routes)) supports the following:
 
 <a id="local-vrf-sli-config-static-v6-routes-static-routes-node-interface-list"></a>&#x2022; [`list`](#local-vrf-sli-config-static-v6-routes-static-routes-node-interface-list) - Optional Block<br>Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface<br>See [List](#local-vrf-sli-config-static-v6-routes-static-routes-node-interface-list) below.
 
-#### Local Vrf Sli Config Static V6 Routes Static Routes Node Interface List
+#### Local Vrf SLI Config Static V6 Routes Static Routes Node Interface List
 
 A [`list`](#local-vrf-sli-config-static-v6-routes-static-routes-node-interface-list) block (within [`local_vrf.sli_config.static_v6_routes.static_routes.node_interface`](#local-vrf-sli-config-static-v6-routes-static-routes-node-interface)) supports the following:
 
@@ -1777,7 +1777,7 @@ A [`list`](#local-vrf-sli-config-static-v6-routes-static-routes-node-interface-l
 
 <a id="local-vrf-sli-config-static-v6-routes-static-routes-node-interface-list-node"></a>&#x2022; [`node`](#local-vrf-sli-config-static-v6-routes-static-routes-node-interface-list-node) - Optional String<br>Node. Node name on this site
 
-#### Local Vrf Sli Config Static V6 Routes Static Routes Node Interface List Interface
+#### Local Vrf SLI Config Static V6 Routes Static Routes Node Interface List Interface
 
 An [`interface`](#local-vrf-sli-config-static-v6-routes-static-routes-node-interface-list-interface) block (within [`local_vrf.sli_config.static_v6_routes.static_routes.node_interface.list`](#local-vrf-sli-config-static-v6-routes-static-routes-node-interface-list)) supports the following:
 

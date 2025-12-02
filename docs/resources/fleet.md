@@ -411,7 +411,7 @@ A [`storage_classes`](#storage-class-list-storage-classes) block (within [`stora
 
 <a id="storage-class-list-storage-classes-custom-storage"></a>&#x2022; [`custom_storage`](#storage-class-list-storage-classes-custom-storage) - Optional Block<br>Custom StorageClass. Custom Storage Class allows to insert Kubernetes storageclass definition which will be applied into given site<br>See [Custom Storage](#storage-class-list-storage-classes-custom-storage) below.
 
-<a id="storage-class-list-storage-classes-default-storage-class"></a>&#x2022; [`default_storage_class`](#storage-class-list-storage-classes-default-storage-class) - Optional Bool<br>Default Storage Class. Make this storage class default storage class for the K8s cluster
+<a id="storage-class-list-storage-classes-default-storage-class"></a>&#x2022; [`default_storage_class`](#storage-class-list-storage-classes-default-storage-class) - Optional Bool<br>Default Storage Class. Make this storage class default storage class for the K8S cluster
 
 <a id="storage-class-list-storage-classes-description-spec"></a>&#x2022; [`description_spec`](#storage-class-list-storage-classes-description-spec) - Optional String<br>Storage Class Description. Description for this storage class
 
@@ -423,7 +423,7 @@ A [`storage_classes`](#storage-class-list-storage-classes) block (within [`stora
 
 <a id="storage-class-list-storage-classes-reclaim-policy"></a>&#x2022; [`reclaim_policy`](#storage-class-list-storage-classes-reclaim-policy) - Optional String<br>Reclaim Policy. Reclaim Policy
 
-<a id="storage-class-list-storage-classes-storage-class-name"></a>&#x2022; [`storage_class_name`](#storage-class-list-storage-classes-storage-class-name) - Optional String<br>Storage Class Name. Name of the storage class as it will appear in K8s
+<a id="storage-class-list-storage-classes-storage-class-name"></a>&#x2022; [`storage_class_name`](#storage-class-list-storage-classes-storage-class-name) - Optional String<br>Storage Class Name. Name of the storage class as it will appear in K8S
 
 <a id="storage-class-list-storage-classes-storage-device"></a>&#x2022; [`storage_device`](#storage-class-list-storage-classes-storage-device) - Optional String<br>Storage Device. Storage device that this class will use. The Device name defined at previous step
 
@@ -431,7 +431,7 @@ A [`storage_classes`](#storage-class-list-storage-classes) block (within [`stora
 
 A [`custom_storage`](#storage-class-list-storage-classes-custom-storage) block (within [`storage_class_list.storage_classes`](#storage-class-list-storage-classes)) supports the following:
 
-<a id="storage-class-list-storage-classes-custom-storage-yaml"></a>&#x2022; [`yaml`](#storage-class-list-storage-classes-custom-storage-yaml) - Optional String<br>Storage Class YAML. K8s YAML for StorageClass
+<a id="storage-class-list-storage-classes-custom-storage-yaml"></a>&#x2022; [`yaml`](#storage-class-list-storage-classes-custom-storage-yaml) - Optional String<br>Storage Class YAML. K8S YAML for StorageClass
 
 #### Storage Class List Storage Classes Hpe Storage
 
@@ -1001,7 +1001,7 @@ A [`pure_service_orchestrator`](#storage-device-list-storage-devices-pure-servic
 
 <a id="storage-device-list-storage-devices-pure-service-orchestrator-arrays"></a>&#x2022; [`arrays`](#storage-device-list-storage-devices-pure-service-orchestrator-arrays) - Optional Block<br>Arrays Configuration. Device configuration for PSO Arrays<br>See [Arrays](#storage-device-list-storage-devices-pure-service-orchestrator-arrays) below.
 
-<a id="storage-device-list-storage-devices-pure-service-orchestrator-cluster-id"></a>&#x2022; [`cluster_id`](#storage-device-list-storage-devices-pure-service-orchestrator-cluster-id) - Optional String<br>Cluster ID. clusterID is added as a prefix for all volumes created by this PSO installation. clusterID is also used to identify the volumes used by the datastore, pso-db. clusterID MUST BE UNIQUE for multiple K8s clusters running on top of the same storage arrays. characters allowed: alphanumeric and underscores
+<a id="storage-device-list-storage-devices-pure-service-orchestrator-cluster-id"></a>&#x2022; [`cluster_id`](#storage-device-list-storage-devices-pure-service-orchestrator-cluster-id) - Optional String<br>Cluster ID. clusterID is added as a prefix for all volumes created by this PSO installation. clusterID is also used to identify the volumes used by the datastore, pso-db. clusterID MUST BE UNIQUE for multiple K8S clusters running on top of the same storage arrays. characters allowed: alphanumeric and underscores
 
 <a id="storage-device-list-storage-devices-pure-service-orchestrator-enable-storage-topology"></a>&#x2022; [`enable_storage_topology`](#storage-device-list-storage-devices-pure-service-orchestrator-enable-storage-topology) - Optional Bool<br>Enable Storage Topology. This option is to enable/disable the csi topology feature for pso-csi
 

@@ -94,11 +94,11 @@ A [`ce_site_reference`](#ce-site-reference) block supports the following:
 
 An [`ipsec`](#ipsec) block supports the following:
 
-<a id="ipsec-ike-parameters"></a>&#x2022; [`ike_parameters`](#ipsec-ike-parameters) - Optional Block<br>IKE Parameters. IKE configuration parameters required for IPSec Connection type<br>See [Ike Parameters](#ipsec-ike-parameters) below.
+<a id="ipsec-ike-parameters"></a>&#x2022; [`ike_parameters`](#ipsec-ike-parameters) - Optional Block<br>IKE Parameters. IKE configuration parameters required for IPSec Connection type<br>See [IKE Parameters](#ipsec-ike-parameters) below.
 
 <a id="ipsec-ipsec-tunnel-parameters"></a>&#x2022; [`ipsec_tunnel_parameters`](#ipsec-ipsec-tunnel-parameters) - Optional Block<br>Configure IPSec Tunnel Parameters. In this section, we will configure the tunnel parameters, source, destination, IP addresses, and segment<br>See [Ipsec Tunnel Parameters](#ipsec-ipsec-tunnel-parameters) below.
 
-#### Ipsec Ike Parameters
+#### Ipsec IKE Parameters
 
 An [`ike_parameters`](#ipsec-ike-parameters) block (within [`ipsec`](#ipsec)) supports the following:
 
@@ -106,9 +106,9 @@ An [`ike_parameters`](#ipsec-ike-parameters) block (within [`ipsec`](#ipsec)) su
 
 <a id="ipsec-ike-parameters-dpd-keep-alive-timer"></a>&#x2022; [`dpd_keep_alive_timer`](#ipsec-ike-parameters-dpd-keep-alive-timer) - Optional Block<br>Keepalive Timer<br>See [Dpd Keep Alive Timer](#ipsec-ike-parameters-dpd-keep-alive-timer) below.
 
-<a id="ipsec-ike-parameters-ike-phase1-profile"></a>&#x2022; [`ike_phase1_profile`](#ipsec-ike-parameters-ike-phase1-profile) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Ike Phase1 Profile](#ipsec-ike-parameters-ike-phase1-profile) below.
+<a id="ipsec-ike-parameters-ike-phase1-profile"></a>&#x2022; [`ike_phase1_profile`](#ipsec-ike-parameters-ike-phase1-profile) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [IKE Phase1 Profile](#ipsec-ike-parameters-ike-phase1-profile) below.
 
-<a id="ipsec-ike-parameters-ike-phase2-profile"></a>&#x2022; [`ike_phase2_profile`](#ipsec-ike-parameters-ike-phase2-profile) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Ike Phase2 Profile](#ipsec-ike-parameters-ike-phase2-profile) below.
+<a id="ipsec-ike-parameters-ike-phase2-profile"></a>&#x2022; [`ike_phase2_profile`](#ipsec-ike-parameters-ike-phase2-profile) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [IKE Phase2 Profile](#ipsec-ike-parameters-ike-phase2-profile) below.
 
 <a id="ipsec-ike-parameters-initiator"></a>&#x2022; [`initiator`](#ipsec-ike-parameters-initiator) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -122,13 +122,13 @@ An [`ike_parameters`](#ipsec-ike-parameters) block (within [`ipsec`](#ipsec)) su
 
 <a id="ipsec-ike-parameters-use-default-remote-ike-id"></a>&#x2022; [`use_default_remote_ike_id`](#ipsec-ike-parameters-use-default-remote-ike-id) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### Ipsec Ike Parameters Dpd Keep Alive Timer
+#### Ipsec IKE Parameters Dpd Keep Alive Timer
 
 A [`dpd_keep_alive_timer`](#ipsec-ike-parameters-dpd-keep-alive-timer) block (within [`ipsec.ike_parameters`](#ipsec-ike-parameters)) supports the following:
 
 <a id="ipsec-ike-parameters-dpd-keep-alive-timer-timeout"></a>&#x2022; [`timeout`](#ipsec-ike-parameters-dpd-keep-alive-timer-timeout) - Optional Number<br>Keepalive Timer
 
-#### Ipsec Ike Parameters Ike Phase1 Profile
+#### Ipsec IKE Parameters IKE Phase1 Profile
 
 An [`ike_phase1_profile`](#ipsec-ike-parameters-ike-phase1-profile) block (within [`ipsec.ike_parameters`](#ipsec-ike-parameters)) supports the following:
 
@@ -138,7 +138,7 @@ An [`ike_phase1_profile`](#ipsec-ike-parameters-ike-phase1-profile) block (withi
 
 <a id="ipsec-ike-parameters-ike-phase1-profile-tenant"></a>&#x2022; [`tenant`](#ipsec-ike-parameters-ike-phase1-profile-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-#### Ipsec Ike Parameters Ike Phase2 Profile
+#### Ipsec IKE Parameters IKE Phase2 Profile
 
 An [`ike_phase2_profile`](#ipsec-ike-parameters-ike-phase2-profile) block (within [`ipsec.ike_parameters`](#ipsec-ike-parameters)) supports the following:
 
@@ -148,7 +148,7 @@ An [`ike_phase2_profile`](#ipsec-ike-parameters-ike-phase2-profile) block (withi
 
 <a id="ipsec-ike-parameters-ike-phase2-profile-tenant"></a>&#x2022; [`tenant`](#ipsec-ike-parameters-ike-phase2-profile-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-#### Ipsec Ike Parameters Rm IP Address
+#### Ipsec IKE Parameters Rm IP Address
 
 A [`rm_ip_address`](#ipsec-ike-parameters-rm-ip-address) block (within [`ipsec.ike_parameters`](#ipsec-ike-parameters)) supports the following:
 
@@ -156,13 +156,13 @@ A [`rm_ip_address`](#ipsec-ike-parameters-rm-ip-address) block (within [`ipsec.i
 
 <a id="ipsec-ike-parameters-rm-ip-address-ipv6"></a>&#x2022; [`ipv6`](#ipsec-ike-parameters-rm-ip-address-ipv6) - Optional Block<br>IPv6 Address. IPv6 Address specified as hexadecimal numbers separated by ':'<br>See [IPv6](#ipsec-ike-parameters-rm-ip-address-ipv6) below.
 
-#### Ipsec Ike Parameters Rm IP Address IPv4
+#### Ipsec IKE Parameters Rm IP Address IPv4
 
 An [`ipv4`](#ipsec-ike-parameters-rm-ip-address-ipv4) block (within [`ipsec.ike_parameters.rm_ip_address`](#ipsec-ike-parameters-rm-ip-address)) supports the following:
 
 <a id="ipsec-ike-parameters-rm-ip-address-ipv4-addr"></a>&#x2022; [`addr`](#ipsec-ike-parameters-rm-ip-address-ipv4-addr) - Optional String<br>IPv4 Address. IPv4 Address in string form with dot-decimal notation
 
-#### Ipsec Ike Parameters Rm IP Address IPv6
+#### Ipsec IKE Parameters Rm IP Address IPv6
 
 An [`ipv6`](#ipsec-ike-parameters-rm-ip-address-ipv6) block (within [`ipsec.ike_parameters.rm_ip_address`](#ipsec-ike-parameters-rm-ip-address)) supports the following:
 

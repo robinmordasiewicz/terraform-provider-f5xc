@@ -14,10 +14,10 @@ Manages a CRL resource in F5 Distributed Cloud for api to create crl configurati
 ## Example Usage
 
 ```terraform
-# Crl Resource Example
+# CRL Resource Example
 # Manages a CRL resource in F5 Distributed Cloud for api to create crl configuration.
 
-# Basic Crl configuration
+# Basic CRL configuration
 resource "f5xc_crl" "example" {
   name      = "example-crl"
   namespace = "shared"

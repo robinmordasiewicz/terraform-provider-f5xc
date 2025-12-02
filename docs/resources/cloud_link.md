@@ -118,7 +118,7 @@ A [`connections`](#aws-byoc-connections) block (within [`aws.byoc`](#aws-byoc)) 
 
 <a id="aws-byoc-connections-bgp-asn"></a>&#x2022; [`bgp_asn`](#aws-byoc-connections-bgp-asn) - Optional Number<br>BGP ASN. The Border Gateway Protocol (BGP) Autonomous System Number (ASN) of your on-premises router for the new virtual interface to be configured on AWS
 
-<a id="aws-byoc-connections-connection-id"></a>&#x2022; [`connection_id`](#aws-byoc-connections-connection-id) - Optional String<br>Direct Connect Connection Id. Id of the existing AWS Direct Connect Connection
+<a id="aws-byoc-connections-connection-id"></a>&#x2022; [`connection_id`](#aws-byoc-connections-connection-id) - Optional String<br>Direct Connect Connection ID. ID of the existing AWS Direct Connect Connection
 
 <a id="aws-byoc-connections-ipv4"></a>&#x2022; [`ipv4`](#aws-byoc-connections-ipv4) - Optional Block<br>IPv4 Peering. Configure BGP IPv4 peering for endpoints<br>See [IPv4](#aws-byoc-connections-ipv4) below.
 

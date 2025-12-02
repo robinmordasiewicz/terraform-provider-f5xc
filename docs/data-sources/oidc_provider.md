@@ -9,7 +9,7 @@ description: |-
 
 Manages a OidcProvider resource in F5 Distributed Cloud for customcreatespectype is the spec to create oidc provider configuration.
 
-~> **Note** Please refer to [Oidc Provider API docs](https://docs.cloud.f5.com/docs-v2/api/oidc-provider) to learn more.
+~> **Note** Please refer to [OIDC Provider API docs](https://docs.cloud.f5.com/docs-v2/api/oidc-provider) to learn more.
 
 ## Example Usage
 

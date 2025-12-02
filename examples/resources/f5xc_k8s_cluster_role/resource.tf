@@ -1,7 +1,7 @@
-# K8s Cluster Role Resource Example
+# K8S Cluster Role Resource Example
 # Manages k8s_cluster_role will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 
-# Basic K8s Cluster Role configuration
+# Basic K8S Cluster Role configuration
 resource "f5xc_k8s_cluster_role" "example" {
   name      = "example-k8s-cluster-role"
   namespace = "system"

@@ -9,15 +9,15 @@ description: |-
 
 Manages k8s_pod_security_policy will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 
-~> **Note** Please refer to [K8s Pod Security Policy API docs](https://docs.cloud.f5.com/docs-v2/api/k8s-pod-security-policy) to learn more.
+~> **Note** Please refer to [K8S Pod Security Policy API docs](https://docs.cloud.f5.com/docs-v2/api/k8s-pod-security-policy) to learn more.
 
 ## Example Usage
 
 ```terraform
-# K8s Pod Security Policy Resource Example
+# K8S Pod Security Policy Resource Example
 # Manages k8s_pod_security_policy will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 
-# Basic K8s Pod Security Policy configuration
+# Basic K8S Pod Security Policy configuration
 resource "f5xc_k8s_pod_security_policy" "example" {
   name      = "example-k8s-pod-security-policy"
   namespace = "staging"
@@ -68,7 +68,7 @@ resource "f5xc_k8s_pod_security_policy" "example" {
 
 -> **One of the following:**
 &#x2022; <a id="psp-spec"></a>[`psp_spec`](#psp-spec) - Optional Block<br>Pod Security Policy Specification. Form based pod security specification<br>See [Psp Spec](#psp-spec) below for details.
-<br><br>&#x2022; <a id="yaml"></a>[`yaml`](#yaml) - Optional String<br>K8s YAML. K8s YAML for Pod Security Policy
+<br><br>&#x2022; <a id="yaml"></a>[`yaml`](#yaml) - Optional String<br>K8S YAML. K8S YAML for Pod Security Policy
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
@@ -176,11 +176,11 @@ A [`drop_capabilities`](#psp-spec-drop-capabilities) block (within [`psp_spec`](
 
 A [`fs_group_strategy_options`](#psp-spec-fs-group-strategy-options) block (within [`psp_spec`](#psp-spec)) supports the following:
 
-<a id="psp-spec-fs-group-strategy-options-id-ranges"></a>&#x2022; [`id_ranges`](#psp-spec-fs-group-strategy-options-id-ranges) - Optional Block<br>ID Ranges. List of range of ID(s)<br>See [Id Ranges](#psp-spec-fs-group-strategy-options-id-ranges) below.
+<a id="psp-spec-fs-group-strategy-options-id-ranges"></a>&#x2022; [`id_ranges`](#psp-spec-fs-group-strategy-options-id-ranges) - Optional Block<br>ID Ranges. List of range of ID(s)<br>See [ID Ranges](#psp-spec-fs-group-strategy-options-id-ranges) below.
 
 <a id="psp-spec-fs-group-strategy-options-rule"></a>&#x2022; [`rule`](#psp-spec-fs-group-strategy-options-rule) - Optional String<br>Rule. Rule indicated how the FS group ID range is used
 
-#### Psp Spec Fs Group Strategy Options Id Ranges
+#### Psp Spec Fs Group Strategy Options ID Ranges
 
 An [`id_ranges`](#psp-spec-fs-group-strategy-options-id-ranges) block (within [`psp_spec.fs_group_strategy_options`](#psp-spec-fs-group-strategy-options)) supports the following:
 
@@ -192,11 +192,11 @@ An [`id_ranges`](#psp-spec-fs-group-strategy-options-id-ranges) block (within [`
 
 A [`run_as_group`](#psp-spec-run-as-group) block (within [`psp_spec`](#psp-spec)) supports the following:
 
-<a id="psp-spec-run-as-group-id-ranges"></a>&#x2022; [`id_ranges`](#psp-spec-run-as-group-id-ranges) - Optional Block<br>ID Ranges. List of range of ID(s)<br>See [Id Ranges](#psp-spec-run-as-group-id-ranges) below.
+<a id="psp-spec-run-as-group-id-ranges"></a>&#x2022; [`id_ranges`](#psp-spec-run-as-group-id-ranges) - Optional Block<br>ID Ranges. List of range of ID(s)<br>See [ID Ranges](#psp-spec-run-as-group-id-ranges) below.
 
 <a id="psp-spec-run-as-group-rule"></a>&#x2022; [`rule`](#psp-spec-run-as-group-rule) - Optional String<br>Rule. Rule indicated how the FS group ID range is used
 
-#### Psp Spec Run As Group Id Ranges
+#### Psp Spec Run As Group ID Ranges
 
 An [`id_ranges`](#psp-spec-run-as-group-id-ranges) block (within [`psp_spec.run_as_group`](#psp-spec-run-as-group)) supports the following:
 
@@ -208,11 +208,11 @@ An [`id_ranges`](#psp-spec-run-as-group-id-ranges) block (within [`psp_spec.run_
 
 A [`run_as_user`](#psp-spec-run-as-user) block (within [`psp_spec`](#psp-spec)) supports the following:
 
-<a id="psp-spec-run-as-user-id-ranges"></a>&#x2022; [`id_ranges`](#psp-spec-run-as-user-id-ranges) - Optional Block<br>ID Ranges. List of range of ID(s)<br>See [Id Ranges](#psp-spec-run-as-user-id-ranges) below.
+<a id="psp-spec-run-as-user-id-ranges"></a>&#x2022; [`id_ranges`](#psp-spec-run-as-user-id-ranges) - Optional Block<br>ID Ranges. List of range of ID(s)<br>See [ID Ranges](#psp-spec-run-as-user-id-ranges) below.
 
 <a id="psp-spec-run-as-user-rule"></a>&#x2022; [`rule`](#psp-spec-run-as-user-rule) - Optional String<br>Rule. Rule indicated how the FS group ID range is used
 
-#### Psp Spec Run As User Id Ranges
+#### Psp Spec Run As User ID Ranges
 
 An [`id_ranges`](#psp-spec-run-as-user-id-ranges) block (within [`psp_spec.run_as_user`](#psp-spec-run-as-user)) supports the following:
 
@@ -224,11 +224,11 @@ An [`id_ranges`](#psp-spec-run-as-user-id-ranges) block (within [`psp_spec.run_a
 
 A [`supplemental_groups`](#psp-spec-supplemental-groups) block (within [`psp_spec`](#psp-spec)) supports the following:
 
-<a id="psp-spec-supplemental-groups-id-ranges"></a>&#x2022; [`id_ranges`](#psp-spec-supplemental-groups-id-ranges) - Optional Block<br>ID Ranges. List of range of ID(s)<br>See [Id Ranges](#psp-spec-supplemental-groups-id-ranges) below.
+<a id="psp-spec-supplemental-groups-id-ranges"></a>&#x2022; [`id_ranges`](#psp-spec-supplemental-groups-id-ranges) - Optional Block<br>ID Ranges. List of range of ID(s)<br>See [ID Ranges](#psp-spec-supplemental-groups-id-ranges) below.
 
 <a id="psp-spec-supplemental-groups-rule"></a>&#x2022; [`rule`](#psp-spec-supplemental-groups-rule) - Optional String<br>Rule. Rule indicated how the FS group ID range is used
 
-#### Psp Spec Supplemental Groups Id Ranges
+#### Psp Spec Supplemental Groups ID Ranges
 
 An [`id_ranges`](#psp-spec-supplemental-groups-id-ranges) block (within [`psp_spec.supplemental_groups`](#psp-spec-supplemental-groups)) supports the following:
 

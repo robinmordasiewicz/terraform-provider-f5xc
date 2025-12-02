@@ -9,7 +9,7 @@ description: |-
 
 Manages k8s_cluster will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 
-~> **Note** Please refer to [K8s Cluster API docs](https://docs.cloud.f5.com/docs-v2/api/k8s-cluster) to learn more.
+~> **Note** Please refer to [K8S Cluster API docs](https://docs.cloud.f5.com/docs-v2/api/k8s-cluster) to learn more.
 
 ## Example Usage
 

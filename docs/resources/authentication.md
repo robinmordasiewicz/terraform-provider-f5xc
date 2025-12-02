@@ -68,7 +68,7 @@ resource "f5xc_authentication" "example" {
 
 <a id="cookie-params"></a>&#x2022; [`cookie_params`](#cookie-params) - Optional Block<br>Cookie Parameters. Specifies different cookie related config parameters for authentication<br>See [Cookie Params](#cookie-params) below for details.
 
-<a id="oidc-auth"></a>&#x2022; [`oidc_auth`](#oidc-auth) - Optional Block<br>OIDCAuthType<br>See [Oidc Auth](#oidc-auth) below for details.
+<a id="oidc-auth"></a>&#x2022; [`oidc_auth`](#oidc-auth) - Optional Block<br>OIDCAuthType<br>See [OIDC Auth](#oidc-auth) below for details.
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
@@ -158,19 +158,19 @@ A [`clear_secret_info`](#cookie-params-auth-hmac-sec-key-clear-secret-info) bloc
 
 <a id="cookie-params-auth-hmac-sec-key-clear-secret-info-url"></a>&#x2022; [`url`](#cookie-params-auth-hmac-sec-key-clear-secret-info-url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
-#### Oidc Auth
+#### OIDC Auth
 
 An [`oidc_auth`](#oidc-auth) block supports the following:
 
 <a id="oidc-auth-client-secret"></a>&#x2022; [`client_secret`](#oidc-auth-client-secret) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Client Secret](#oidc-auth-client-secret) below.
 
-<a id="oidc-auth-oidc-auth-params"></a>&#x2022; [`oidc_auth_params`](#oidc-auth-oidc-auth-params) - Optional Block<br>OIDCAuthParams<br>See [Oidc Auth Params](#oidc-auth-oidc-auth-params) below.
+<a id="oidc-auth-oidc-auth-params"></a>&#x2022; [`oidc_auth_params`](#oidc-auth-oidc-auth-params) - Optional Block<br>OIDCAuthParams<br>See [OIDC Auth Params](#oidc-auth-oidc-auth-params) below.
 
 <a id="oidc-auth-oidc-client-id"></a>&#x2022; [`oidc_client_id`](#oidc-auth-oidc-client-id) - Optional String<br>OIDC Client ID. Client ID used while sending the Authorization Request to OIDC server
 
 <a id="oidc-auth-oidc-well-known-config-url"></a>&#x2022; [`oidc_well_known_config_url`](#oidc-auth-oidc-well-known-config-url) - Optional String<br>Well-known Configuration URL. An OIDC well-known configuration URL that will be used to fetch authentication related endpoints
 
-#### Oidc Auth Client Secret
+#### OIDC Auth Client Secret
 
 A [`client_secret`](#oidc-auth-client-secret) block (within [`oidc_auth`](#oidc-auth)) supports the following:
 
@@ -178,7 +178,7 @@ A [`client_secret`](#oidc-auth-client-secret) block (within [`oidc_auth`](#oidc-
 
 <a id="oidc-auth-client-secret-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#oidc-auth-client-secret-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#oidc-auth-client-secret-clear-secret-info) below.
 
-#### Oidc Auth Client Secret Blindfold Secret Info
+#### OIDC Auth Client Secret Blindfold Secret Info
 
 A [`blindfold_secret_info`](#oidc-auth-client-secret-blindfold-secret-info) block (within [`oidc_auth.client_secret`](#oidc-auth-client-secret)) supports the following:
 
@@ -188,7 +188,7 @@ A [`blindfold_secret_info`](#oidc-auth-client-secret-blindfold-secret-info) bloc
 
 <a id="oidc-auth-client-secret-blindfold-secret-info-store-provider"></a>&#x2022; [`store_provider`](#oidc-auth-client-secret-blindfold-secret-info-store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-#### Oidc Auth Client Secret Clear Secret Info
+#### OIDC Auth Client Secret Clear Secret Info
 
 A [`clear_secret_info`](#oidc-auth-client-secret-clear-secret-info) block (within [`oidc_auth.client_secret`](#oidc-auth-client-secret)) supports the following:
 
@@ -196,7 +196,7 @@ A [`clear_secret_info`](#oidc-auth-client-secret-clear-secret-info) block (withi
 
 <a id="oidc-auth-client-secret-clear-secret-info-url"></a>&#x2022; [`url`](#oidc-auth-client-secret-clear-secret-info-url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
-#### Oidc Auth Oidc Auth Params
+#### OIDC Auth OIDC Auth Params
 
 An [`oidc_auth_params`](#oidc-auth-oidc-auth-params) block (within [`oidc_auth`](#oidc-auth)) supports the following:
 

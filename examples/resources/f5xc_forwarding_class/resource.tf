@@ -4,7 +4,7 @@
 # Basic Forwarding Class configuration
 resource "f5xc_forwarding_class" "example" {
   name      = "example-forwarding-class"
-  namespace = "staging"
+  namespace = "shared"
 
   labels = {
     environment = "production"

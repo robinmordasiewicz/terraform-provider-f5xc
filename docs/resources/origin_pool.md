@@ -294,7 +294,7 @@ An [`origin_servers`](#origin-servers) block supports the following:
 
 <a id="origin-servers-custom-endpoint-object"></a>&#x2022; [`custom_endpoint_object`](#origin-servers-custom-endpoint-object) - Optional Block<br>Custom Endpoint Object for Origin Server. Specify origin server with a reference to endpoint object<br>See [Custom Endpoint Object](#origin-servers-custom-endpoint-object) below.
 
-<a id="origin-servers-k8s-service"></a>&#x2022; [`k8s_service`](#origin-servers-k8s-service) - Optional Block<br>K8s Service Name on given Sites. Specify origin server with K8s service name and site information<br>See [K8s Service](#origin-servers-k8s-service) below.
+<a id="origin-servers-k8s-service"></a>&#x2022; [`k8s_service`](#origin-servers-k8s-service) - Optional Block<br>K8S Service Name on given Sites. Specify origin server with K8S service name and site information<br>See [K8S Service](#origin-servers-k8s-service) below.
 
 <a id="origin-servers-labels"></a>&#x2022; [`labels`](#origin-servers-labels) - Optional Block<br>Origin Server Labels. Add Labels for this origin server, these labels can be used to form subset
 
@@ -324,7 +324,7 @@ A [`consul_service`](#origin-servers-consul-service) block (within [`origin_serv
 
 <a id="origin-servers-consul-service-outside-network"></a>&#x2022; [`outside_network`](#origin-servers-consul-service-outside-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="origin-servers-consul-service-service-name"></a>&#x2022; [`service_name`](#origin-servers-consul-service-service-name) - Optional String<br>Service Name. Consul service name of this origin server will be listed, including cluster-id. The format is servicename:cluster-id
+<a id="origin-servers-consul-service-service-name"></a>&#x2022; [`service_name`](#origin-servers-consul-service-service-name) - Optional String<br>Service Name. Consul service name of this origin server will be listed, including cluster-ID. The format is servicename:cluster-ID
 
 <a id="origin-servers-consul-service-site-locator"></a>&#x2022; [`site_locator`](#origin-servers-consul-service-site-locator) - Optional Block<br>Site or Virtual Site. This message defines a reference to a site or virtual site object<br>See [Site Locator](#origin-servers-consul-service-site-locator) below.
 
@@ -388,7 +388,7 @@ An [`endpoint`](#origin-servers-custom-endpoint-object-endpoint) block (within [
 
 <a id="origin-servers-custom-endpoint-object-endpoint-tenant"></a>&#x2022; [`tenant`](#origin-servers-custom-endpoint-object-endpoint-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-#### Origin Servers K8s Service
+#### Origin Servers K8S Service
 
 A [`k8s_service`](#origin-servers-k8s-service) block (within [`origin_servers`](#origin-servers)) supports the following:
 
@@ -398,7 +398,7 @@ A [`k8s_service`](#origin-servers-k8s-service) block (within [`origin_servers`](
 
 <a id="origin-servers-k8s-service-protocol"></a>&#x2022; [`protocol`](#origin-servers-k8s-service-protocol) - Optional String  Defaults to `PROTOCOL_TCP`<br>Possible values are `PROTOCOL_TCP`, `PROTOCOL_UDP`<br>Protocol Type. Type of protocol - PROTOCOL_TCP: TCP - PROTOCOL_UDP: UDP
 
-<a id="origin-servers-k8s-service-service-name"></a>&#x2022; [`service_name`](#origin-servers-k8s-service-service-name) - Optional String<br>Service Name. K8s service name of the origin server will be listed, including the namespace and cluster-id. For vK8s services, you need to enter a string with the format servicename.namespace:cluster-id. If the servicename is 'frontend', namespace is 'speedtest' and cluster-id is 'prod', then you will enter 'frontend.speedtest:prod'. Both namespace and cluster-id are optional
+<a id="origin-servers-k8s-service-service-name"></a>&#x2022; [`service_name`](#origin-servers-k8s-service-service-name) - Optional String<br>Service Name. K8S service name of the origin server will be listed, including the namespace and cluster-ID. For vK8s services, you need to enter a string with the format servicename.namespace:cluster-ID. If the servicename is 'frontend', namespace is 'speedtest' and cluster-ID is 'prod', then you will enter 'frontend.speedtest:prod'. Both namespace and cluster-ID are optional
 
 <a id="origin-servers-k8s-service-site-locator"></a>&#x2022; [`site_locator`](#origin-servers-k8s-service-site-locator) - Optional Block<br>Site or Virtual Site. This message defines a reference to a site or virtual site object<br>See [Site Locator](#origin-servers-k8s-service-site-locator) below.
 
@@ -406,7 +406,7 @@ A [`k8s_service`](#origin-servers-k8s-service) block (within [`origin_servers`](
 
 <a id="origin-servers-k8s-service-vk8s-networks"></a>&#x2022; [`vk8s_networks`](#origin-servers-k8s-service-vk8s-networks) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### Origin Servers K8s Service Site Locator
+#### Origin Servers K8S Service Site Locator
 
 A [`site_locator`](#origin-servers-k8s-service-site-locator) block (within [`origin_servers.k8s_service`](#origin-servers-k8s-service)) supports the following:
 
@@ -414,7 +414,7 @@ A [`site_locator`](#origin-servers-k8s-service-site-locator) block (within [`ori
 
 <a id="origin-servers-k8s-service-site-locator-virtual-site"></a>&#x2022; [`virtual_site`](#origin-servers-k8s-service-site-locator-virtual-site) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Virtual Site](#origin-servers-k8s-service-site-locator-virtual-site) below.
 
-#### Origin Servers K8s Service Site Locator Site
+#### Origin Servers K8S Service Site Locator Site
 
 A [`site`](#origin-servers-k8s-service-site-locator-site) block (within [`origin_servers.k8s_service.site_locator`](#origin-servers-k8s-service-site-locator)) supports the following:
 
@@ -424,7 +424,7 @@ A [`site`](#origin-servers-k8s-service-site-locator-site) block (within [`origin
 
 <a id="origin-servers-k8s-service-site-locator-site-tenant"></a>&#x2022; [`tenant`](#origin-servers-k8s-service-site-locator-site-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-#### Origin Servers K8s Service Site Locator Virtual Site
+#### Origin Servers K8S Service Site Locator Virtual Site
 
 A [`virtual_site`](#origin-servers-k8s-service-site-locator-virtual-site) block (within [`origin_servers.k8s_service.site_locator`](#origin-servers-k8s-service-site-locator)) supports the following:
 
@@ -434,7 +434,7 @@ A [`virtual_site`](#origin-servers-k8s-service-site-locator-virtual-site) block 
 
 <a id="origin-servers-k8s-service-site-locator-virtual-site-tenant"></a>&#x2022; [`tenant`](#origin-servers-k8s-service-site-locator-virtual-site-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-#### Origin Servers K8s Service Snat Pool
+#### Origin Servers K8S Service Snat Pool
 
 A [`snat_pool`](#origin-servers-k8s-service-snat-pool) block (within [`origin_servers.k8s_service`](#origin-servers-k8s-service)) supports the following:
 
@@ -442,7 +442,7 @@ A [`snat_pool`](#origin-servers-k8s-service-snat-pool) block (within [`origin_se
 
 <a id="origin-servers-k8s-service-snat-pool-snat-pool"></a>&#x2022; [`snat_pool`](#origin-servers-k8s-service-snat-pool-snat-pool) - Optional Block<br>IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint<br>See [Snat Pool](#origin-servers-k8s-service-snat-pool-snat-pool) below.
 
-#### Origin Servers K8s Service Snat Pool Snat Pool
+#### Origin Servers K8S Service Snat Pool Snat Pool
 
 A [`snat_pool`](#origin-servers-k8s-service-snat-pool-snat-pool) block (within [`origin_servers.k8s_service.snat_pool`](#origin-servers-k8s-service-snat-pool)) supports the following:
 

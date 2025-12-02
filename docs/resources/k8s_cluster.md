@@ -9,15 +9,15 @@ description: |-
 
 Manages k8s_cluster will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 
-~> **Note** Please refer to [K8s Cluster API docs](https://docs.cloud.f5.com/docs-v2/api/k8s-cluster) to learn more.
+~> **Note** Please refer to [K8S Cluster API docs](https://docs.cloud.f5.com/docs-v2/api/k8s-cluster) to learn more.
 
 ## Example Usage
 
 ```terraform
-# K8s Cluster Resource Example
+# K8S Cluster Resource Example
 # Manages k8s_cluster will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 
-# Basic K8s Cluster configuration
+# Basic K8S Cluster configuration
 resource "f5xc_k8s_cluster" "example" {
   name      = "example-k8s-cluster"
   namespace = "system"
@@ -98,11 +98,11 @@ resource "f5xc_k8s_cluster" "example" {
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 -> **One of the following:**
-&#x2022; <a id="use-custom-cluster-role-bindings"></a>[`use_custom_cluster_role_bindings`](#use-custom-cluster-role-bindings) - Optional Block<br>Cluster Role Binding List. List of active cluster role binding list for a K8s cluster<br>See [Use Custom Cluster Role Bindings](#use-custom-cluster-role-bindings) below for details.
+&#x2022; <a id="use-custom-cluster-role-bindings"></a>[`use_custom_cluster_role_bindings`](#use-custom-cluster-role-bindings) - Optional Block<br>Cluster Role Binding List. List of active cluster role binding list for a K8S cluster<br>See [Use Custom Cluster Role Bindings](#use-custom-cluster-role-bindings) below for details.
 <br><br>&#x2022; <a id="use-default-cluster-role-bindings"></a>[`use_default_cluster_role_bindings`](#use-default-cluster-role-bindings) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
-&#x2022; <a id="use-custom-cluster-role-list"></a>[`use_custom_cluster_role_list`](#use-custom-cluster-role-list) - Optional Block<br>Cluster Role List. List of active cluster role list for a K8s cluster<br>See [Use Custom Cluster Role List](#use-custom-cluster-role-list) below for details.
+&#x2022; <a id="use-custom-cluster-role-list"></a>[`use_custom_cluster_role_list`](#use-custom-cluster-role-list) - Optional Block<br>Cluster Role List. List of active cluster role list for a K8S cluster<br>See [Use Custom Cluster Role List](#use-custom-cluster-role-list) below for details.
 <br><br>&#x2022; <a id="use-default-cluster-roles"></a>[`use_default_cluster_roles`](#use-default-cluster-roles) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
@@ -110,7 +110,7 @@ resource "f5xc_k8s_cluster" "example" {
 <br><br>&#x2022; <a id="use-default-pod-security-admission"></a>[`use_default_pod_security_admission`](#use-default-pod-security-admission) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
-&#x2022; <a id="use-custom-psp-list"></a>[`use_custom_psp_list`](#use-custom-psp-list) - Optional Block<br>Pod Security Policy List. List of active Pod security policies for a K8s cluster<br>See [Use Custom Psp List](#use-custom-psp-list) below for details.
+&#x2022; <a id="use-custom-psp-list"></a>[`use_custom_psp_list`](#use-custom-psp-list) - Optional Block<br>Pod Security Policy List. List of active Pod security policies for a K8S cluster<br>See [Use Custom Psp List](#use-custom-psp-list) below for details.
 <br><br>&#x2022; <a id="use-default-psp"></a>[`use_default_psp`](#use-default-psp) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
@@ -137,9 +137,9 @@ A [`cluster_wide_apps`](#cluster-wide-app-list-cluster-wide-apps) block (within 
 
 <a id="cluster-wide-app-list-cluster-wide-apps-argo-cd"></a>&#x2022; [`argo_cd`](#cluster-wide-app-list-cluster-wide-apps-argo-cd) - Optional Block<br>Argo CD configuration. description Parameters for Argo Continuous Deployment(CD) application<br>See [Argo Cd](#cluster-wide-app-list-cluster-wide-apps-argo-cd) below.
 
-<a id="cluster-wide-app-list-cluster-wide-apps-dashboard"></a>&#x2022; [`dashboard`](#cluster-wide-app-list-cluster-wide-apps-dashboard) - Optional Block<br>K8s Dashboard configuration. description Parameters for K8s dashboard
+<a id="cluster-wide-app-list-cluster-wide-apps-dashboard"></a>&#x2022; [`dashboard`](#cluster-wide-app-list-cluster-wide-apps-dashboard) - Optional Block<br>K8S Dashboard configuration. description Parameters for K8S dashboard
 
-<a id="cluster-wide-app-list-cluster-wide-apps-metrics-server"></a>&#x2022; [`metrics_server`](#cluster-wide-app-list-cluster-wide-apps-metrics-server) - Optional Block<br>K8s Metrics Server configuration. description Parameters for Kubernetes Metrics Server application
+<a id="cluster-wide-app-list-cluster-wide-apps-metrics-server"></a>&#x2022; [`metrics_server`](#cluster-wide-app-list-cluster-wide-apps-metrics-server) - Optional Block<br>K8S Metrics Server configuration. description Parameters for Kubernetes Metrics Server application
 
 <a id="cluster-wide-app-list-cluster-wide-apps-prometheus"></a>&#x2022; [`prometheus`](#cluster-wide-app-list-cluster-wide-apps-prometheus) - Optional Block<br>Prometheus access configuration. description Parameters for Prometheus server access
 
@@ -199,9 +199,9 @@ A [`local_access_config`](#local-access-config) block supports the following:
 
 <a id="local-access-config-default-port"></a>&#x2022; [`default_port`](#local-access-config-default-port) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="local-access-config-local-domain"></a>&#x2022; [`local_domain`](#local-access-config-local-domain) - Optional String<br>Local Domain. Local K8s API server will be accessible at `<site name>`.`<local domain>`
+<a id="local-access-config-local-domain"></a>&#x2022; [`local_domain`](#local-access-config-local-domain) - Optional String<br>Local Domain. Local K8S API server will be accessible at `<site name>`.`<local domain>`
 
-<a id="local-access-config-port"></a>&#x2022; [`port`](#local-access-config-port) - Optional Number<br>Custom k8s Port. Use custom K8s port for API server. Available port range is less than 65000 except reserved ports
+<a id="local-access-config-port"></a>&#x2022; [`port`](#local-access-config-port) - Optional Number<br>Custom K8S Port. Use custom K8S port for API server. Available port range is less than 65000 except reserved ports
 
 #### Timeouts
 
@@ -219,7 +219,7 @@ A [`timeouts`](#timeouts) block supports the following:
 
 An [`use_custom_cluster_role_bindings`](#use-custom-cluster-role-bindings) block supports the following:
 
-<a id="use-custom-cluster-role-bindings-cluster-role-bindings"></a>&#x2022; [`cluster_role_bindings`](#use-custom-cluster-role-bindings-cluster-role-bindings) - Optional Block<br>Cluster Role Binding List. List of active cluster role binding list for a K8s cluster<br>See [Cluster Role Bindings](#use-custom-cluster-role-bindings-cluster-role-bindings) below.
+<a id="use-custom-cluster-role-bindings-cluster-role-bindings"></a>&#x2022; [`cluster_role_bindings`](#use-custom-cluster-role-bindings-cluster-role-bindings) - Optional Block<br>Cluster Role Binding List. List of active cluster role binding list for a K8S cluster<br>See [Cluster Role Bindings](#use-custom-cluster-role-bindings-cluster-role-bindings) below.
 
 #### Use Custom Cluster Role Bindings Cluster Role Bindings
 
@@ -235,7 +235,7 @@ A [`cluster_role_bindings`](#use-custom-cluster-role-bindings-cluster-role-bindi
 
 An [`use_custom_cluster_role_list`](#use-custom-cluster-role-list) block supports the following:
 
-<a id="use-custom-cluster-role-list-cluster-roles"></a>&#x2022; [`cluster_roles`](#use-custom-cluster-role-list-cluster-roles) - Optional Block<br>Cluster Role List. List of active cluster role list for a K8s cluster<br>See [Cluster Roles](#use-custom-cluster-role-list-cluster-roles) below.
+<a id="use-custom-cluster-role-list-cluster-roles"></a>&#x2022; [`cluster_roles`](#use-custom-cluster-role-list-cluster-roles) - Optional Block<br>Cluster Role List. List of active cluster role list for a K8S cluster<br>See [Cluster Roles](#use-custom-cluster-role-list-cluster-roles) below.
 
 #### Use Custom Cluster Role List Cluster Roles
 
@@ -261,7 +261,7 @@ An [`use_custom_pod_security_admission`](#use-custom-pod-security-admission) blo
 
 An [`use_custom_psp_list`](#use-custom-psp-list) block supports the following:
 
-<a id="use-custom-psp-list-pod-security-policies"></a>&#x2022; [`pod_security_policies`](#use-custom-psp-list-pod-security-policies) - Optional Block<br>Pod Security Policy List. List of active Pod security policies for a K8s cluster<br>See [Pod Security Policies](#use-custom-psp-list-pod-security-policies) below.
+<a id="use-custom-psp-list-pod-security-policies"></a>&#x2022; [`pod_security_policies`](#use-custom-psp-list-pod-security-policies) - Optional Block<br>Pod Security Policy List. List of active Pod security policies for a K8S cluster<br>See [Pod Security Policies](#use-custom-psp-list-pod-security-policies) below.
 
 #### Use Custom Psp List Pod Security Policies
 

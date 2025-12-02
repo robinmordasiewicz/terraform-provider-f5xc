@@ -1,7 +1,7 @@
-# Trusted Ca List Resource Example
+# Trusted CA List Resource Example
 # Manages a TrustedCaList resource in F5 Distributed Cloud for trusted certificate authority list management.
 
-# Basic Trusted Ca List configuration
+# Basic Trusted CA List configuration
 resource "f5xc_trusted_ca_list" "example" {
   name      = "example-trusted-ca-list"
   namespace = "shared"

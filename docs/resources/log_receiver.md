@@ -20,7 +20,7 @@ Manages a LogReceiver resource in F5 Distributed Cloud for log collection and fo
 # Basic Log Receiver configuration
 resource "f5xc_log_receiver" "example" {
   name      = "example-log-receiver"
-  namespace = "staging"
+  namespace = "shared"
 
   labels = {
     environment = "production"

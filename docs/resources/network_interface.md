@@ -159,7 +159,7 @@ An [`ethernet_interface`](#ethernet-interface) block supports the following:
 
 <a id="ethernet-interface-untagged"></a>&#x2022; [`untagged`](#ethernet-interface-untagged) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="ethernet-interface-vlan-id"></a>&#x2022; [`vlan_id`](#ethernet-interface-vlan-id) - Optional Number<br>VLAN Id. Configure a VLAN tagged ethernet interface
+<a id="ethernet-interface-vlan-id"></a>&#x2022; [`vlan_id`](#ethernet-interface-vlan-id) - Optional Number<br>VLAN ID. Configure a VLAN tagged ethernet interface
 
 #### Ethernet Interface DHCP Server
 
@@ -351,7 +351,7 @@ A [`l2sriov_interface`](#layer2-interface-l2sriov-interface) block (within [`lay
 
 <a id="layer2-interface-l2sriov-interface-untagged"></a>&#x2022; [`untagged`](#layer2-interface-l2sriov-interface-untagged) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="layer2-interface-l2sriov-interface-vlan-id"></a>&#x2022; [`vlan_id`](#layer2-interface-l2sriov-interface-vlan-id) - Optional Number<br>VLAN Id. Configure a VLAN tagged interface
+<a id="layer2-interface-l2sriov-interface-vlan-id"></a>&#x2022; [`vlan_id`](#layer2-interface-l2sriov-interface-vlan-id) - Optional Number<br>VLAN ID. Configure a VLAN tagged interface
 
 #### Layer2 Interface L2vlan Interface
 
@@ -359,13 +359,13 @@ A [`l2vlan_interface`](#layer2-interface-l2vlan-interface) block (within [`layer
 
 <a id="layer2-interface-l2vlan-interface-device"></a>&#x2022; [`device`](#layer2-interface-l2vlan-interface-device) - Optional String<br>Ethernet Device. Physical ethernet interface
 
-<a id="layer2-interface-l2vlan-interface-vlan-id"></a>&#x2022; [`vlan_id`](#layer2-interface-l2vlan-interface-vlan-id) - Optional Number<br>VLAN Id. VLAN Id
+<a id="layer2-interface-l2vlan-interface-vlan-id"></a>&#x2022; [`vlan_id`](#layer2-interface-l2vlan-interface-vlan-id) - Optional Number<br>VLAN ID. VLAN ID
 
 #### Layer2 Interface L2vlan Slo Interface
 
 A [`l2vlan_slo_interface`](#layer2-interface-l2vlan-slo-interface) block (within [`layer2_interface`](#layer2-interface)) supports the following:
 
-<a id="layer2-interface-l2vlan-slo-interface-vlan-id"></a>&#x2022; [`vlan_id`](#layer2-interface-l2vlan-slo-interface-vlan-id) - Optional Number<br>VLAN Id. VLAN Id
+<a id="layer2-interface-l2vlan-slo-interface-vlan-id"></a>&#x2022; [`vlan_id`](#layer2-interface-l2vlan-slo-interface-vlan-id) - Optional Number<br>VLAN ID. VLAN ID
 
 #### Timeouts
 

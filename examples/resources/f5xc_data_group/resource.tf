@@ -4,7 +4,7 @@
 # Basic Data Group configuration
 resource "f5xc_data_group" "example" {
   name      = "example-data-group"
-  namespace = "staging"
+  namespace = "shared"
 
   labels = {
     environment = "production"

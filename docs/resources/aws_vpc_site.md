@@ -9,7 +9,7 @@ description: |-
 
 Manages a AWSVPCSite resource in F5 Distributed Cloud for deploying F5 sites within AWS VPC environments.
 
-~> **Note** Please refer to [AWS Vpc Site API docs](https://docs.cloud.f5.com/docs-v2/api/views-aws-vpc-site) to learn more.
+~> **Note** Please refer to [AWS VPC Site API docs](https://docs.cloud.f5.com/docs-v2/api/views-aws-vpc-site) to learn more.
 
 ## Example Usage
 
@@ -111,7 +111,7 @@ resource "f5xc_aws_vpc_site" "example" {
 <a id="custom-dns"></a>&#x2022; [`custom_dns`](#custom-dns) - Optional Block<br>Custom DNS. Custom DNS is the configured for specify CE site<br>See [Custom DNS](#custom-dns) below for details.
 
 -> **One of the following:**
-&#x2022; <a id="custom-security-group"></a>[`custom_security_group`](#custom-security-group) - Optional Block<br>Security Group IDS. Enter pre created security groups for slo(Site Local Outside) and sli(Site Local Inside) interface. Supported only for sites deployed on existing VPC<br>See [Custom Security Group](#custom-security-group) below for details.
+&#x2022; <a id="custom-security-group"></a>[`custom_security_group`](#custom-security-group) - Optional Block<br>Security Group IDS. Enter pre created security groups for slo(Site Local Outside) and SLI(Site Local Inside) interface. Supported only for sites deployed on existing VPC<br>See [Custom Security Group](#custom-security-group) below for details.
 <br><br>&#x2022; <a id="f5xc-security-group"></a>[`f5xc_security_group`](#f5xc-security-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
@@ -314,7 +314,7 @@ An [`ingress_egress_gw`](#ingress-egress-gw) block supports the following:
 
 <a id="ingress-egress-gw-allowed-vip-port"></a>&#x2022; [`allowed_vip_port`](#ingress-egress-gw-allowed-vip-port) - Optional Block<br>Allowed VIP Ports. This defines the TCP port(s) which will be opened on the cloud loadbalancer. Such that the client can use the cloud VIP IP and port combination to reach TCP/HTTP LB configured on the F5XC Site<br>See [Allowed VIP Port](#ingress-egress-gw-allowed-vip-port) below.
 
-<a id="ingress-egress-gw-allowed-vip-port-sli"></a>&#x2022; [`allowed_vip_port_sli`](#ingress-egress-gw-allowed-vip-port-sli) - Optional Block<br>Allowed VIP Ports. This defines the TCP port(s) which will be opened on the cloud loadbalancer. Such that the client can use the cloud VIP IP and port combination to reach TCP/HTTP LB configured on the F5XC Site<br>See [Allowed VIP Port Sli](#ingress-egress-gw-allowed-vip-port-sli) below.
+<a id="ingress-egress-gw-allowed-vip-port-sli"></a>&#x2022; [`allowed_vip_port_sli`](#ingress-egress-gw-allowed-vip-port-sli) - Optional Block<br>Allowed VIP Ports. This defines the TCP port(s) which will be opened on the cloud loadbalancer. Such that the client can use the cloud VIP IP and port combination to reach TCP/HTTP LB configured on the F5XC Site<br>See [Allowed VIP Port SLI](#ingress-egress-gw-allowed-vip-port-sli) below.
 
 <a id="ingress-egress-gw-aws-certified-hw"></a>&#x2022; [`aws_certified_hw`](#ingress-egress-gw-aws-certified-hw) - Optional String<br>AWS Certified Hardware. Name for AWS certified hardware
 
@@ -418,7 +418,7 @@ A [`custom_ports`](#ingress-egress-gw-allowed-vip-port-custom-ports) block (with
 
 <a id="ingress-egress-gw-allowed-vip-port-custom-ports-port-ranges"></a>&#x2022; [`port_ranges`](#ingress-egress-gw-allowed-vip-port-custom-ports-port-ranges) - Optional String<br>Port Ranges. Port Ranges
 
-#### Ingress Egress Gw Allowed VIP Port Sli
+#### Ingress Egress Gw Allowed VIP Port SLI
 
 An [`allowed_vip_port_sli`](#ingress-egress-gw-allowed-vip-port-sli) block (within [`ingress_egress_gw`](#ingress-egress-gw)) supports the following:
 
@@ -432,7 +432,7 @@ An [`allowed_vip_port_sli`](#ingress-egress-gw-allowed-vip-port-sli) block (with
 
 <a id="ingress-egress-gw-allowed-vip-port-sli-use-https-port"></a>&#x2022; [`use_https_port`](#ingress-egress-gw-allowed-vip-port-sli-use-https-port) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### Ingress Egress Gw Allowed VIP Port Sli Custom Ports
+#### Ingress Egress Gw Allowed VIP Port SLI Custom Ports
 
 A [`custom_ports`](#ingress-egress-gw-allowed-vip-port-sli-custom-ports) block (within [`ingress_egress_gw.allowed_vip_port_sli`](#ingress-egress-gw-allowed-vip-port-sli)) supports the following:
 
@@ -524,17 +524,17 @@ A [`global_network_list`](#ingress-egress-gw-global-network-list) block (within 
 
 A [`global_network_connections`](#ingress-egress-gw-global-network-list-global-network-connections) block (within [`ingress_egress_gw.global_network_list`](#ingress-egress-gw-global-network-list)) supports the following:
 
-<a id="ingress-egress-gw-global-network-list-global-network-connections-sli-to-global-dr"></a>&#x2022; [`sli_to_global_dr`](#ingress-egress-gw-global-network-list-global-network-connections-sli-to-global-dr) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [Sli To Global DR](#ingress-egress-gw-global-network-list-global-network-connections-sli-to-global-dr) below.
+<a id="ingress-egress-gw-global-network-list-global-network-connections-sli-to-global-dr"></a>&#x2022; [`sli_to_global_dr`](#ingress-egress-gw-global-network-list-global-network-connections-sli-to-global-dr) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [SLI To Global DR](#ingress-egress-gw-global-network-list-global-network-connections-sli-to-global-dr) below.
 
 <a id="ingress-egress-gw-global-network-list-global-network-connections-slo-to-global-dr"></a>&#x2022; [`slo_to_global_dr`](#ingress-egress-gw-global-network-list-global-network-connections-slo-to-global-dr) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [Slo To Global DR](#ingress-egress-gw-global-network-list-global-network-connections-slo-to-global-dr) below.
 
-#### Ingress Egress Gw Global Network List Global Network Connections Sli To Global DR
+#### Ingress Egress Gw Global Network List Global Network Connections SLI To Global DR
 
 A [`sli_to_global_dr`](#ingress-egress-gw-global-network-list-global-network-connections-sli-to-global-dr) block (within [`ingress_egress_gw.global_network_list.global_network_connections`](#ingress-egress-gw-global-network-list-global-network-connections)) supports the following:
 
 <a id="ingress-egress-gw-global-network-list-global-network-connections-sli-to-global-dr-global-vn"></a>&#x2022; [`global_vn`](#ingress-egress-gw-global-network-list-global-network-connections-sli-to-global-dr-global-vn) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Global Vn](#ingress-egress-gw-global-network-list-global-network-connections-sli-to-global-dr-global-vn) below.
 
-#### Ingress Egress Gw Global Network List Global Network Connections Sli To Global DR Global Vn
+#### Ingress Egress Gw Global Network List Global Network Connections SLI To Global DR Global Vn
 
 A [`global_vn`](#ingress-egress-gw-global-network-list-global-network-connections-sli-to-global-dr-global-vn) block (within [`ingress_egress_gw.global_network_list.global_network_connections.sli_to_global_dr`](#ingress-egress-gw-global-network-list-global-network-connections-sli-to-global-dr)) supports the following:
 
@@ -944,7 +944,7 @@ A [`voltstack_cluster`](#voltstack-cluster) block supports the following:
 
 <a id="voltstack-cluster-global-network-list"></a>&#x2022; [`global_network_list`](#voltstack-cluster-global-network-list) - Optional Block<br>Global Network Connection List. List of global network connections<br>See [Global Network List](#voltstack-cluster-global-network-list) below.
 
-<a id="voltstack-cluster-k8s-cluster"></a>&#x2022; [`k8s_cluster`](#voltstack-cluster-k8s-cluster) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [K8s Cluster](#voltstack-cluster-k8s-cluster) below.
+<a id="voltstack-cluster-k8s-cluster"></a>&#x2022; [`k8s_cluster`](#voltstack-cluster-k8s-cluster) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [K8S Cluster](#voltstack-cluster-k8s-cluster) below.
 
 <a id="voltstack-cluster-no-dc-cluster-group"></a>&#x2022; [`no_dc_cluster_group`](#voltstack-cluster-no-dc-cluster-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1076,17 +1076,17 @@ A [`global_network_list`](#voltstack-cluster-global-network-list) block (within 
 
 A [`global_network_connections`](#voltstack-cluster-global-network-list-global-network-connections) block (within [`voltstack_cluster.global_network_list`](#voltstack-cluster-global-network-list)) supports the following:
 
-<a id="voltstack-cluster-global-network-list-global-network-connections-sli-to-global-dr"></a>&#x2022; [`sli_to_global_dr`](#voltstack-cluster-global-network-list-global-network-connections-sli-to-global-dr) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [Sli To Global DR](#voltstack-cluster-global-network-list-global-network-connections-sli-to-global-dr) below.
+<a id="voltstack-cluster-global-network-list-global-network-connections-sli-to-global-dr"></a>&#x2022; [`sli_to_global_dr`](#voltstack-cluster-global-network-list-global-network-connections-sli-to-global-dr) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [SLI To Global DR](#voltstack-cluster-global-network-list-global-network-connections-sli-to-global-dr) below.
 
 <a id="voltstack-cluster-global-network-list-global-network-connections-slo-to-global-dr"></a>&#x2022; [`slo_to_global_dr`](#voltstack-cluster-global-network-list-global-network-connections-slo-to-global-dr) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [Slo To Global DR](#voltstack-cluster-global-network-list-global-network-connections-slo-to-global-dr) below.
 
-#### Voltstack Cluster Global Network List Global Network Connections Sli To Global DR
+#### Voltstack Cluster Global Network List Global Network Connections SLI To Global DR
 
 A [`sli_to_global_dr`](#voltstack-cluster-global-network-list-global-network-connections-sli-to-global-dr) block (within [`voltstack_cluster.global_network_list.global_network_connections`](#voltstack-cluster-global-network-list-global-network-connections)) supports the following:
 
 <a id="voltstack-cluster-global-network-list-global-network-connections-sli-to-global-dr-global-vn"></a>&#x2022; [`global_vn`](#voltstack-cluster-global-network-list-global-network-connections-sli-to-global-dr-global-vn) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Global Vn](#voltstack-cluster-global-network-list-global-network-connections-sli-to-global-dr-global-vn) below.
 
-#### Voltstack Cluster Global Network List Global Network Connections Sli To Global DR Global Vn
+#### Voltstack Cluster Global Network List Global Network Connections SLI To Global DR Global Vn
 
 A [`global_vn`](#voltstack-cluster-global-network-list-global-network-connections-sli-to-global-dr-global-vn) block (within [`voltstack_cluster.global_network_list.global_network_connections.sli_to_global_dr`](#voltstack-cluster-global-network-list-global-network-connections-sli-to-global-dr)) supports the following:
 
@@ -1112,7 +1112,7 @@ A [`global_vn`](#voltstack-cluster-global-network-list-global-network-connection
 
 <a id="voltstack-cluster-global-network-list-global-network-connections-slo-to-global-dr-global-vn-tenant"></a>&#x2022; [`tenant`](#voltstack-cluster-global-network-list-global-network-connections-slo-to-global-dr-global-vn-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-#### Voltstack Cluster K8s Cluster
+#### Voltstack Cluster K8S Cluster
 
 A [`k8s_cluster`](#voltstack-cluster-k8s-cluster) block (within [`voltstack_cluster`](#voltstack-cluster)) supports the following:
 
@@ -1226,19 +1226,19 @@ A [`storage_class_list`](#voltstack-cluster-storage-class-list) block (within [`
 
 A [`storage_classes`](#voltstack-cluster-storage-class-list-storage-classes) block (within [`voltstack_cluster.storage_class_list`](#voltstack-cluster-storage-class-list)) supports the following:
 
-<a id="voltstack-cluster-storage-class-list-storage-classes-default-storage-class"></a>&#x2022; [`default_storage_class`](#voltstack-cluster-storage-class-list-storage-classes-default-storage-class) - Optional Bool<br>Default Storage Class. Make this storage class default storage class for the K8s cluster
+<a id="voltstack-cluster-storage-class-list-storage-classes-default-storage-class"></a>&#x2022; [`default_storage_class`](#voltstack-cluster-storage-class-list-storage-classes-default-storage-class) - Optional Bool<br>Default Storage Class. Make this storage class default storage class for the K8S cluster
 
-<a id="voltstack-cluster-storage-class-list-storage-classes-storage-class-name"></a>&#x2022; [`storage_class_name`](#voltstack-cluster-storage-class-list-storage-classes-storage-class-name) - Optional String<br>Storage Class Name. Name of the storage class as it will appear in K8s
+<a id="voltstack-cluster-storage-class-list-storage-classes-storage-class-name"></a>&#x2022; [`storage_class_name`](#voltstack-cluster-storage-class-list-storage-classes-storage-class-name) - Optional String<br>Storage Class Name. Name of the storage class as it will appear in K8S
 
-#### Vpc
+#### VPC
 
 A [`vpc`](#vpc) block supports the following:
 
-<a id="vpc-new-vpc"></a>&#x2022; [`new_vpc`](#vpc-new-vpc) - Optional Block<br>AWS VPC Parameters. Parameters to create new AWS VPC<br>See [New Vpc](#vpc-new-vpc) below.
+<a id="vpc-new-vpc"></a>&#x2022; [`new_vpc`](#vpc-new-vpc) - Optional Block<br>AWS VPC Parameters. Parameters to create new AWS VPC<br>See [New VPC](#vpc-new-vpc) below.
 
 <a id="vpc-vpc-id"></a>&#x2022; [`vpc_id`](#vpc-vpc-id) - Optional String<br>Existing VPC ID. Information about existing VPC ID
 
-#### Vpc New Vpc
+#### VPC New VPC
 
 A [`new_vpc`](#vpc-new-vpc) block (within [`vpc`](#vpc)) supports the following:
 

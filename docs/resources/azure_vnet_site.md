@@ -9,7 +9,7 @@ description: |-
 
 Manages a AzureVNETSite resource in F5 Distributed Cloud for deploying F5 sites within Azure Virtual Network environments.
 
-~> **Note** Please refer to [Azure Vnet Site API docs](https://docs.cloud.f5.com/docs-v2/api/views-azure-vnet-site) to learn more.
+~> **Note** Please refer to [Azure VNET Site API docs](https://docs.cloud.f5.com/docs-v2/api/views-azure-vnet-site) to learn more.
 
 ## Example Usage
 
@@ -152,7 +152,7 @@ resource "f5xc_azure_vnet_site" "example" {
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block
 
-<a id="vnet"></a>&#x2022; [`vnet`](#vnet) - Optional Block<br>Azure Vnet choice. This defines choice about Azure Vnet for a view
+<a id="vnet"></a>&#x2022; [`vnet`](#vnet) - Optional Block<br>Azure VNET choice. This defines choice about Azure VNET for a view
 
 ### Attributes Reference
 
@@ -256,7 +256,7 @@ An [`ingress_egress_gw`](#ingress-egress-gw) block supports the following:
 
 <a id="ingress-egress-gw-global-network-list"></a>&#x2022; [`global_network_list`](#ingress-egress-gw-global-network-list) - Optional Block<br>Global Network Connection List. List of global network connections<br>See [Global Network List](#ingress-egress-gw-global-network-list) below.
 
-<a id="ingress-egress-gw-hub"></a>&#x2022; [`hub`](#ingress-egress-gw-hub) - Optional Block<br>Hub VNet type. Hub VNet type<br>See [Hub](#ingress-egress-gw-hub) below.
+<a id="ingress-egress-gw-hub"></a>&#x2022; [`hub`](#ingress-egress-gw-hub) - Optional Block<br>Hub VNET type. Hub VNET type<br>See [Hub](#ingress-egress-gw-hub) below.
 
 <a id="ingress-egress-gw-inside-static-routes"></a>&#x2022; [`inside_static_routes`](#ingress-egress-gw-inside-static-routes) - Optional Block<br>Static Route List Type. List of static routes<br>See [Inside Static Routes](#ingress-egress-gw-inside-static-routes) below.
 
@@ -426,17 +426,17 @@ A [`global_network_list`](#ingress-egress-gw-global-network-list) block (within 
 
 A [`global_network_connections`](#ingress-egress-gw-global-network-list-global-network-connections) block (within [`ingress_egress_gw.global_network_list`](#ingress-egress-gw-global-network-list)) supports the following:
 
-<a id="ingress-egress-gw-global-network-list-global-network-connections-sli-to-global-dr"></a>&#x2022; [`sli_to_global_dr`](#ingress-egress-gw-global-network-list-global-network-connections-sli-to-global-dr) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [Sli To Global DR](#ingress-egress-gw-global-network-list-global-network-connections-sli-to-global-dr) below.
+<a id="ingress-egress-gw-global-network-list-global-network-connections-sli-to-global-dr"></a>&#x2022; [`sli_to_global_dr`](#ingress-egress-gw-global-network-list-global-network-connections-sli-to-global-dr) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [SLI To Global DR](#ingress-egress-gw-global-network-list-global-network-connections-sli-to-global-dr) below.
 
 <a id="ingress-egress-gw-global-network-list-global-network-connections-slo-to-global-dr"></a>&#x2022; [`slo_to_global_dr`](#ingress-egress-gw-global-network-list-global-network-connections-slo-to-global-dr) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [Slo To Global DR](#ingress-egress-gw-global-network-list-global-network-connections-slo-to-global-dr) below.
 
-#### Ingress Egress Gw Global Network List Global Network Connections Sli To Global DR
+#### Ingress Egress Gw Global Network List Global Network Connections SLI To Global DR
 
 A [`sli_to_global_dr`](#ingress-egress-gw-global-network-list-global-network-connections-sli-to-global-dr) block (within [`ingress_egress_gw.global_network_list.global_network_connections`](#ingress-egress-gw-global-network-list-global-network-connections)) supports the following:
 
 <a id="ingress-egress-gw-global-network-list-global-network-connections-sli-to-global-dr-global-vn"></a>&#x2022; [`global_vn`](#ingress-egress-gw-global-network-list-global-network-connections-sli-to-global-dr-global-vn) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Global Vn](#ingress-egress-gw-global-network-list-global-network-connections-sli-to-global-dr-global-vn) below.
 
-#### Ingress Egress Gw Global Network List Global Network Connections Sli To Global DR Global Vn
+#### Ingress Egress Gw Global Network List Global Network Connections SLI To Global DR Global Vn
 
 A [`global_vn`](#ingress-egress-gw-global-network-list-global-network-connections-sli-to-global-dr-global-vn) block (within [`ingress_egress_gw.global_network_list.global_network_connections.sli_to_global_dr`](#ingress-egress-gw-global-network-list-global-network-connections-sli-to-global-dr)) supports the following:
 
@@ -470,7 +470,7 @@ A [`hub`](#ingress-egress-gw-hub) block (within [`ingress_egress_gw`](#ingress-e
 
 <a id="ingress-egress-gw-hub-express-route-enabled"></a>&#x2022; [`express_route_enabled`](#ingress-egress-gw-hub-express-route-enabled) - Optional Block<br>Express Route Configuration. Express Route Configuration<br>See [Express Route Enabled](#ingress-egress-gw-hub-express-route-enabled) below.
 
-<a id="ingress-egress-gw-hub-spoke-vnets"></a>&#x2022; [`spoke_vnets`](#ingress-egress-gw-hub-spoke-vnets) - Optional Block<br>Spoke VNet Peering (Legacy). Spoke VNet Peering<br>See [Spoke Vnets](#ingress-egress-gw-hub-spoke-vnets) below.
+<a id="ingress-egress-gw-hub-spoke-vnets"></a>&#x2022; [`spoke_vnets`](#ingress-egress-gw-hub-spoke-vnets) - Optional Block<br>Spoke VNET Peering (Legacy). Spoke VNET Peering<br>See [Spoke Vnets](#ingress-egress-gw-hub-spoke-vnets) below.
 
 #### Ingress Egress Gw Hub Express Route Enabled
 
@@ -616,13 +616,13 @@ A [`spoke_vnets`](#ingress-egress-gw-hub-spoke-vnets) block (within [`ingress_eg
 
 <a id="ingress-egress-gw-hub-spoke-vnets-auto"></a>&#x2022; [`auto`](#ingress-egress-gw-hub-spoke-vnets-auto) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="ingress-egress-gw-hub-spoke-vnets-labels"></a>&#x2022; [`labels`](#ingress-egress-gw-hub-spoke-vnets-labels) - Optional Block<br>Labels For VNets Peering. Add Labels for each of the VNets peered with transit VNet, these labels can be used in firewall policy These labels used must be from known key and label defined in shared namespace
+<a id="ingress-egress-gw-hub-spoke-vnets-labels"></a>&#x2022; [`labels`](#ingress-egress-gw-hub-spoke-vnets-labels) - Optional Block<br>Labels For VNets Peering. Add Labels for each of the VNets peered with transit VNET, these labels can be used in firewall policy These labels used must be from known key and label defined in shared namespace
 
 <a id="ingress-egress-gw-hub-spoke-vnets-manual"></a>&#x2022; [`manual`](#ingress-egress-gw-hub-spoke-vnets-manual) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="ingress-egress-gw-hub-spoke-vnets-vnet"></a>&#x2022; [`vnet`](#ingress-egress-gw-hub-spoke-vnets-vnet) - Optional Block<br>Azure Existing Vnet Type. Resource group and name of existing Azure Vnet<br>See [Vnet](#ingress-egress-gw-hub-spoke-vnets-vnet) below.
+<a id="ingress-egress-gw-hub-spoke-vnets-vnet"></a>&#x2022; [`vnet`](#ingress-egress-gw-hub-spoke-vnets-vnet) - Optional Block<br>Azure Existing VNET Type. Resource group and name of existing Azure VNET<br>See [VNET](#ingress-egress-gw-hub-spoke-vnets-vnet) below.
 
-#### Ingress Egress Gw Hub Spoke Vnets Vnet
+#### Ingress Egress Gw Hub Spoke Vnets VNET
 
 A [`vnet`](#ingress-egress-gw-hub-spoke-vnets-vnet) block (within [`ingress_egress_gw.hub.spoke_vnets`](#ingress-egress-gw-hub-spoke-vnets)) supports the following:
 
@@ -630,9 +630,9 @@ A [`vnet`](#ingress-egress-gw-hub-spoke-vnets-vnet) block (within [`ingress_egre
 
 <a id="ingress-egress-gw-hub-spoke-vnets-vnet-manual-routing"></a>&#x2022; [`manual_routing`](#ingress-egress-gw-hub-spoke-vnets-vnet-manual-routing) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="ingress-egress-gw-hub-spoke-vnets-vnet-resource-group"></a>&#x2022; [`resource_group`](#ingress-egress-gw-hub-spoke-vnets-vnet-resource-group) - Optional String<br>Existing Vnet Resource Group. Resource group of existing Vnet
+<a id="ingress-egress-gw-hub-spoke-vnets-vnet-resource-group"></a>&#x2022; [`resource_group`](#ingress-egress-gw-hub-spoke-vnets-vnet-resource-group) - Optional String<br>Existing VNET Resource Group. Resource group of existing VNET
 
-<a id="ingress-egress-gw-hub-spoke-vnets-vnet-vnet-name"></a>&#x2022; [`vnet_name`](#ingress-egress-gw-hub-spoke-vnets-vnet-vnet-name) - Optional String<br>Existing Vnet Name. Name of existing Vnet
+<a id="ingress-egress-gw-hub-spoke-vnets-vnet-vnet-name"></a>&#x2022; [`vnet_name`](#ingress-egress-gw-hub-spoke-vnets-vnet-vnet-name) - Optional String<br>Existing VNET Name. Name of existing VNET
 
 #### Ingress Egress Gw Inside Static Routes
 
@@ -860,7 +860,7 @@ An [`ingress_egress_gw_ar`](#ingress-egress-gw-ar) block supports the following:
 
 <a id="ingress-egress-gw-ar-global-network-list"></a>&#x2022; [`global_network_list`](#ingress-egress-gw-ar-global-network-list) - Optional Block<br>Global Network Connection List. List of global network connections<br>See [Global Network List](#ingress-egress-gw-ar-global-network-list) below.
 
-<a id="ingress-egress-gw-ar-hub"></a>&#x2022; [`hub`](#ingress-egress-gw-ar-hub) - Optional Block<br>Hub VNet type. Hub VNet type<br>See [Hub](#ingress-egress-gw-ar-hub) below.
+<a id="ingress-egress-gw-ar-hub"></a>&#x2022; [`hub`](#ingress-egress-gw-ar-hub) - Optional Block<br>Hub VNET type. Hub VNET type<br>See [Hub](#ingress-egress-gw-ar-hub) below.
 
 <a id="ingress-egress-gw-ar-inside-static-routes"></a>&#x2022; [`inside_static_routes`](#ingress-egress-gw-ar-inside-static-routes) - Optional Block<br>Static Route List Type. List of static routes<br>See [Inside Static Routes](#ingress-egress-gw-ar-inside-static-routes) below.
 
@@ -974,17 +974,17 @@ A [`global_network_list`](#ingress-egress-gw-ar-global-network-list) block (with
 
 A [`global_network_connections`](#ingress-egress-gw-ar-global-network-list-global-network-connections) block (within [`ingress_egress_gw_ar.global_network_list`](#ingress-egress-gw-ar-global-network-list)) supports the following:
 
-<a id="ingress-egress-gw-ar-global-network-list-global-network-connections-sli-to-global-dr"></a>&#x2022; [`sli_to_global_dr`](#ingress-egress-gw-ar-global-network-list-global-network-connections-sli-to-global-dr) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [Sli To Global DR](#ingress-egress-gw-ar-global-network-list-global-network-connections-sli-to-global-dr) below.
+<a id="ingress-egress-gw-ar-global-network-list-global-network-connections-sli-to-global-dr"></a>&#x2022; [`sli_to_global_dr`](#ingress-egress-gw-ar-global-network-list-global-network-connections-sli-to-global-dr) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [SLI To Global DR](#ingress-egress-gw-ar-global-network-list-global-network-connections-sli-to-global-dr) below.
 
 <a id="ingress-egress-gw-ar-global-network-list-global-network-connections-slo-to-global-dr"></a>&#x2022; [`slo_to_global_dr`](#ingress-egress-gw-ar-global-network-list-global-network-connections-slo-to-global-dr) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [Slo To Global DR](#ingress-egress-gw-ar-global-network-list-global-network-connections-slo-to-global-dr) below.
 
-#### Ingress Egress Gw Ar Global Network List Global Network Connections Sli To Global DR
+#### Ingress Egress Gw Ar Global Network List Global Network Connections SLI To Global DR
 
 A [`sli_to_global_dr`](#ingress-egress-gw-ar-global-network-list-global-network-connections-sli-to-global-dr) block (within [`ingress_egress_gw_ar.global_network_list.global_network_connections`](#ingress-egress-gw-ar-global-network-list-global-network-connections)) supports the following:
 
 <a id="ingress-egress-gw-ar-global-network-list-global-network-connections-sli-to-global-dr-global-vn"></a>&#x2022; [`global_vn`](#ingress-egress-gw-ar-global-network-list-global-network-connections-sli-to-global-dr-global-vn) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Global Vn](#ingress-egress-gw-ar-global-network-list-global-network-connections-sli-to-global-dr-global-vn) below.
 
-#### Ingress Egress Gw Ar Global Network List Global Network Connections Sli To Global DR Global Vn
+#### Ingress Egress Gw Ar Global Network List Global Network Connections SLI To Global DR Global Vn
 
 A [`global_vn`](#ingress-egress-gw-ar-global-network-list-global-network-connections-sli-to-global-dr-global-vn) block (within [`ingress_egress_gw_ar.global_network_list.global_network_connections.sli_to_global_dr`](#ingress-egress-gw-ar-global-network-list-global-network-connections-sli-to-global-dr)) supports the following:
 
@@ -1018,7 +1018,7 @@ A [`hub`](#ingress-egress-gw-ar-hub) block (within [`ingress_egress_gw_ar`](#ing
 
 <a id="ingress-egress-gw-ar-hub-express-route-enabled"></a>&#x2022; [`express_route_enabled`](#ingress-egress-gw-ar-hub-express-route-enabled) - Optional Block<br>Express Route Configuration. Express Route Configuration<br>See [Express Route Enabled](#ingress-egress-gw-ar-hub-express-route-enabled) below.
 
-<a id="ingress-egress-gw-ar-hub-spoke-vnets"></a>&#x2022; [`spoke_vnets`](#ingress-egress-gw-ar-hub-spoke-vnets) - Optional Block<br>Spoke VNet Peering (Legacy). Spoke VNet Peering<br>See [Spoke Vnets](#ingress-egress-gw-ar-hub-spoke-vnets) below.
+<a id="ingress-egress-gw-ar-hub-spoke-vnets"></a>&#x2022; [`spoke_vnets`](#ingress-egress-gw-ar-hub-spoke-vnets) - Optional Block<br>Spoke VNET Peering (Legacy). Spoke VNET Peering<br>See [Spoke Vnets](#ingress-egress-gw-ar-hub-spoke-vnets) below.
 
 #### Ingress Egress Gw Ar Hub Express Route Enabled
 
@@ -1164,13 +1164,13 @@ A [`spoke_vnets`](#ingress-egress-gw-ar-hub-spoke-vnets) block (within [`ingress
 
 <a id="ingress-egress-gw-ar-hub-spoke-vnets-auto"></a>&#x2022; [`auto`](#ingress-egress-gw-ar-hub-spoke-vnets-auto) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="ingress-egress-gw-ar-hub-spoke-vnets-labels"></a>&#x2022; [`labels`](#ingress-egress-gw-ar-hub-spoke-vnets-labels) - Optional Block<br>Labels For VNets Peering. Add Labels for each of the VNets peered with transit VNet, these labels can be used in firewall policy These labels used must be from known key and label defined in shared namespace
+<a id="ingress-egress-gw-ar-hub-spoke-vnets-labels"></a>&#x2022; [`labels`](#ingress-egress-gw-ar-hub-spoke-vnets-labels) - Optional Block<br>Labels For VNets Peering. Add Labels for each of the VNets peered with transit VNET, these labels can be used in firewall policy These labels used must be from known key and label defined in shared namespace
 
 <a id="ingress-egress-gw-ar-hub-spoke-vnets-manual"></a>&#x2022; [`manual`](#ingress-egress-gw-ar-hub-spoke-vnets-manual) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="ingress-egress-gw-ar-hub-spoke-vnets-vnet"></a>&#x2022; [`vnet`](#ingress-egress-gw-ar-hub-spoke-vnets-vnet) - Optional Block<br>Azure Existing Vnet Type. Resource group and name of existing Azure Vnet<br>See [Vnet](#ingress-egress-gw-ar-hub-spoke-vnets-vnet) below.
+<a id="ingress-egress-gw-ar-hub-spoke-vnets-vnet"></a>&#x2022; [`vnet`](#ingress-egress-gw-ar-hub-spoke-vnets-vnet) - Optional Block<br>Azure Existing VNET Type. Resource group and name of existing Azure VNET<br>See [VNET](#ingress-egress-gw-ar-hub-spoke-vnets-vnet) below.
 
-#### Ingress Egress Gw Ar Hub Spoke Vnets Vnet
+#### Ingress Egress Gw Ar Hub Spoke Vnets VNET
 
 A [`vnet`](#ingress-egress-gw-ar-hub-spoke-vnets-vnet) block (within [`ingress_egress_gw_ar.hub.spoke_vnets`](#ingress-egress-gw-ar-hub-spoke-vnets)) supports the following:
 
@@ -1178,9 +1178,9 @@ A [`vnet`](#ingress-egress-gw-ar-hub-spoke-vnets-vnet) block (within [`ingress_e
 
 <a id="ingress-egress-gw-ar-hub-spoke-vnets-vnet-manual-routing"></a>&#x2022; [`manual_routing`](#ingress-egress-gw-ar-hub-spoke-vnets-vnet-manual-routing) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="ingress-egress-gw-ar-hub-spoke-vnets-vnet-resource-group"></a>&#x2022; [`resource_group`](#ingress-egress-gw-ar-hub-spoke-vnets-vnet-resource-group) - Optional String<br>Existing Vnet Resource Group. Resource group of existing Vnet
+<a id="ingress-egress-gw-ar-hub-spoke-vnets-vnet-resource-group"></a>&#x2022; [`resource_group`](#ingress-egress-gw-ar-hub-spoke-vnets-vnet-resource-group) - Optional String<br>Existing VNET Resource Group. Resource group of existing VNET
 
-<a id="ingress-egress-gw-ar-hub-spoke-vnets-vnet-vnet-name"></a>&#x2022; [`vnet_name`](#ingress-egress-gw-ar-hub-spoke-vnets-vnet-vnet-name) - Optional String<br>Existing Vnet Name. Name of existing Vnet
+<a id="ingress-egress-gw-ar-hub-spoke-vnets-vnet-vnet-name"></a>&#x2022; [`vnet_name`](#ingress-egress-gw-ar-hub-spoke-vnets-vnet-vnet-name) - Optional String<br>Existing VNET Name. Name of existing VNET
 
 #### Ingress Egress Gw Ar Inside Static Routes
 
@@ -1654,15 +1654,15 @@ A [`timeouts`](#timeouts) block supports the following:
 
 <a id="timeouts-update"></a>&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `30 minutes`)<br>Used when updating the resource
 
-#### Vnet
+#### VNET
 
 A [`vnet`](#vnet) block supports the following:
 
-<a id="vnet-existing-vnet"></a>&#x2022; [`existing_vnet`](#vnet-existing-vnet) - Optional Block<br>Azure Existing Vnet Type. Resource group and name of existing Azure Vnet<br>See [Existing Vnet](#vnet-existing-vnet) below.
+<a id="vnet-existing-vnet"></a>&#x2022; [`existing_vnet`](#vnet-existing-vnet) - Optional Block<br>Azure Existing VNET Type. Resource group and name of existing Azure VNET<br>See [Existing VNET](#vnet-existing-vnet) below.
 
-<a id="vnet-new-vnet"></a>&#x2022; [`new_vnet`](#vnet-new-vnet) - Optional Block<br>Azure Vnet Parameters. Parameters to create a new Azure Vnet<br>See [New Vnet](#vnet-new-vnet) below.
+<a id="vnet-new-vnet"></a>&#x2022; [`new_vnet`](#vnet-new-vnet) - Optional Block<br>Azure VNET Parameters. Parameters to create a new Azure VNET<br>See [New VNET](#vnet-new-vnet) below.
 
-#### Vnet Existing Vnet
+#### VNET Existing VNET
 
 An [`existing_vnet`](#vnet-existing-vnet) block (within [`vnet`](#vnet)) supports the following:
 
@@ -1670,19 +1670,19 @@ An [`existing_vnet`](#vnet-existing-vnet) block (within [`vnet`](#vnet)) support
 
 <a id="vnet-existing-vnet-manual-routing"></a>&#x2022; [`manual_routing`](#vnet-existing-vnet-manual-routing) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="vnet-existing-vnet-resource-group"></a>&#x2022; [`resource_group`](#vnet-existing-vnet-resource-group) - Optional String<br>Existing Vnet Resource Group. Resource group of existing Vnet
+<a id="vnet-existing-vnet-resource-group"></a>&#x2022; [`resource_group`](#vnet-existing-vnet-resource-group) - Optional String<br>Existing VNET Resource Group. Resource group of existing VNET
 
-<a id="vnet-existing-vnet-vnet-name"></a>&#x2022; [`vnet_name`](#vnet-existing-vnet-vnet-name) - Optional String<br>Existing Vnet Name. Name of existing Vnet
+<a id="vnet-existing-vnet-vnet-name"></a>&#x2022; [`vnet_name`](#vnet-existing-vnet-vnet-name) - Optional String<br>Existing VNET Name. Name of existing VNET
 
-#### Vnet New Vnet
+#### VNET New VNET
 
 A [`new_vnet`](#vnet-new-vnet) block (within [`vnet`](#vnet)) supports the following:
 
 <a id="vnet-new-vnet-autogenerate"></a>&#x2022; [`autogenerate`](#vnet-new-vnet-autogenerate) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="vnet-new-vnet-name"></a>&#x2022; [`name`](#vnet-new-vnet-name) - Optional String<br>Choose Vnet Name. Specify the Vnet Name
+<a id="vnet-new-vnet-name"></a>&#x2022; [`name`](#vnet-new-vnet-name) - Optional String<br>Choose VNET Name. Specify the VNET Name
 
-<a id="vnet-new-vnet-primary-ipv4"></a>&#x2022; [`primary_ipv4`](#vnet-new-vnet-primary-ipv4) - Optional String<br>IPv4 CIDR block. IPv4 CIDR block for this Vnet. It has to be private address space
+<a id="vnet-new-vnet-primary-ipv4"></a>&#x2022; [`primary_ipv4`](#vnet-new-vnet-primary-ipv4) - Optional String<br>IPv4 CIDR block. IPv4 CIDR block for this VNET. It has to be private address space
 
 #### Voltstack Cluster
 
@@ -1708,7 +1708,7 @@ A [`voltstack_cluster`](#voltstack-cluster) block supports the following:
 
 <a id="voltstack-cluster-global-network-list"></a>&#x2022; [`global_network_list`](#voltstack-cluster-global-network-list) - Optional Block<br>Global Network Connection List. List of global network connections<br>See [Global Network List](#voltstack-cluster-global-network-list) below.
 
-<a id="voltstack-cluster-k8s-cluster"></a>&#x2022; [`k8s_cluster`](#voltstack-cluster-k8s-cluster) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [K8s Cluster](#voltstack-cluster-k8s-cluster) below.
+<a id="voltstack-cluster-k8s-cluster"></a>&#x2022; [`k8s_cluster`](#voltstack-cluster-k8s-cluster) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [K8S Cluster](#voltstack-cluster-k8s-cluster) below.
 
 <a id="voltstack-cluster-no-dc-cluster-group"></a>&#x2022; [`no_dc_cluster_group`](#voltstack-cluster-no-dc-cluster-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1838,17 +1838,17 @@ A [`global_network_list`](#voltstack-cluster-global-network-list) block (within 
 
 A [`global_network_connections`](#voltstack-cluster-global-network-list-global-network-connections) block (within [`voltstack_cluster.global_network_list`](#voltstack-cluster-global-network-list)) supports the following:
 
-<a id="voltstack-cluster-global-network-list-global-network-connections-sli-to-global-dr"></a>&#x2022; [`sli_to_global_dr`](#voltstack-cluster-global-network-list-global-network-connections-sli-to-global-dr) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [Sli To Global DR](#voltstack-cluster-global-network-list-global-network-connections-sli-to-global-dr) below.
+<a id="voltstack-cluster-global-network-list-global-network-connections-sli-to-global-dr"></a>&#x2022; [`sli_to_global_dr`](#voltstack-cluster-global-network-list-global-network-connections-sli-to-global-dr) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [SLI To Global DR](#voltstack-cluster-global-network-list-global-network-connections-sli-to-global-dr) below.
 
 <a id="voltstack-cluster-global-network-list-global-network-connections-slo-to-global-dr"></a>&#x2022; [`slo_to_global_dr`](#voltstack-cluster-global-network-list-global-network-connections-slo-to-global-dr) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [Slo To Global DR](#voltstack-cluster-global-network-list-global-network-connections-slo-to-global-dr) below.
 
-#### Voltstack Cluster Global Network List Global Network Connections Sli To Global DR
+#### Voltstack Cluster Global Network List Global Network Connections SLI To Global DR
 
 A [`sli_to_global_dr`](#voltstack-cluster-global-network-list-global-network-connections-sli-to-global-dr) block (within [`voltstack_cluster.global_network_list.global_network_connections`](#voltstack-cluster-global-network-list-global-network-connections)) supports the following:
 
 <a id="voltstack-cluster-global-network-list-global-network-connections-sli-to-global-dr-global-vn"></a>&#x2022; [`global_vn`](#voltstack-cluster-global-network-list-global-network-connections-sli-to-global-dr-global-vn) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Global Vn](#voltstack-cluster-global-network-list-global-network-connections-sli-to-global-dr-global-vn) below.
 
-#### Voltstack Cluster Global Network List Global Network Connections Sli To Global DR Global Vn
+#### Voltstack Cluster Global Network List Global Network Connections SLI To Global DR Global Vn
 
 A [`global_vn`](#voltstack-cluster-global-network-list-global-network-connections-sli-to-global-dr-global-vn) block (within [`voltstack_cluster.global_network_list.global_network_connections.sli_to_global_dr`](#voltstack-cluster-global-network-list-global-network-connections-sli-to-global-dr)) supports the following:
 
@@ -1874,7 +1874,7 @@ A [`global_vn`](#voltstack-cluster-global-network-list-global-network-connection
 
 <a id="voltstack-cluster-global-network-list-global-network-connections-slo-to-global-dr-global-vn-tenant"></a>&#x2022; [`tenant`](#voltstack-cluster-global-network-list-global-network-connections-slo-to-global-dr-global-vn-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-#### Voltstack Cluster K8s Cluster
+#### Voltstack Cluster K8S Cluster
 
 A [`k8s_cluster`](#voltstack-cluster-k8s-cluster) block (within [`voltstack_cluster`](#voltstack-cluster)) supports the following:
 
@@ -1988,9 +1988,9 @@ A [`storage_class_list`](#voltstack-cluster-storage-class-list) block (within [`
 
 A [`storage_classes`](#voltstack-cluster-storage-class-list-storage-classes) block (within [`voltstack_cluster.storage_class_list`](#voltstack-cluster-storage-class-list)) supports the following:
 
-<a id="voltstack-cluster-storage-class-list-storage-classes-default-storage-class"></a>&#x2022; [`default_storage_class`](#voltstack-cluster-storage-class-list-storage-classes-default-storage-class) - Optional Bool<br>Default Storage Class. Make this storage class default storage class for the K8s cluster
+<a id="voltstack-cluster-storage-class-list-storage-classes-default-storage-class"></a>&#x2022; [`default_storage_class`](#voltstack-cluster-storage-class-list-storage-classes-default-storage-class) - Optional Bool<br>Default Storage Class. Make this storage class default storage class for the K8S cluster
 
-<a id="voltstack-cluster-storage-class-list-storage-classes-storage-class-name"></a>&#x2022; [`storage_class_name`](#voltstack-cluster-storage-class-list-storage-classes-storage-class-name) - Optional String<br>Storage Class Name. Name of the storage class as it will appear in K8s
+<a id="voltstack-cluster-storage-class-list-storage-classes-storage-class-name"></a>&#x2022; [`storage_class_name`](#voltstack-cluster-storage-class-list-storage-classes-storage-class-name) - Optional String<br>Storage Class Name. Name of the storage class as it will appear in K8S
 
 #### Voltstack Cluster Ar
 
@@ -2014,7 +2014,7 @@ A [`voltstack_cluster_ar`](#voltstack-cluster-ar) block supports the following:
 
 <a id="voltstack-cluster-ar-global-network-list"></a>&#x2022; [`global_network_list`](#voltstack-cluster-ar-global-network-list) - Optional Block<br>Global Network Connection List. List of global network connections<br>See [Global Network List](#voltstack-cluster-ar-global-network-list) below.
 
-<a id="voltstack-cluster-ar-k8s-cluster"></a>&#x2022; [`k8s_cluster`](#voltstack-cluster-ar-k8s-cluster) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [K8s Cluster](#voltstack-cluster-ar-k8s-cluster) below.
+<a id="voltstack-cluster-ar-k8s-cluster"></a>&#x2022; [`k8s_cluster`](#voltstack-cluster-ar-k8s-cluster) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [K8S Cluster](#voltstack-cluster-ar-k8s-cluster) below.
 
 <a id="voltstack-cluster-ar-no-dc-cluster-group"></a>&#x2022; [`no_dc_cluster_group`](#voltstack-cluster-ar-no-dc-cluster-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2114,17 +2114,17 @@ A [`global_network_list`](#voltstack-cluster-ar-global-network-list) block (with
 
 A [`global_network_connections`](#voltstack-cluster-ar-global-network-list-global-network-connections) block (within [`voltstack_cluster_ar.global_network_list`](#voltstack-cluster-ar-global-network-list)) supports the following:
 
-<a id="voltstack-cluster-ar-global-network-list-global-network-connections-sli-to-global-dr"></a>&#x2022; [`sli_to_global_dr`](#voltstack-cluster-ar-global-network-list-global-network-connections-sli-to-global-dr) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [Sli To Global DR](#voltstack-cluster-ar-global-network-list-global-network-connections-sli-to-global-dr) below.
+<a id="voltstack-cluster-ar-global-network-list-global-network-connections-sli-to-global-dr"></a>&#x2022; [`sli_to_global_dr`](#voltstack-cluster-ar-global-network-list-global-network-connections-sli-to-global-dr) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [SLI To Global DR](#voltstack-cluster-ar-global-network-list-global-network-connections-sli-to-global-dr) below.
 
 <a id="voltstack-cluster-ar-global-network-list-global-network-connections-slo-to-global-dr"></a>&#x2022; [`slo_to_global_dr`](#voltstack-cluster-ar-global-network-list-global-network-connections-slo-to-global-dr) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [Slo To Global DR](#voltstack-cluster-ar-global-network-list-global-network-connections-slo-to-global-dr) below.
 
-#### Voltstack Cluster Ar Global Network List Global Network Connections Sli To Global DR
+#### Voltstack Cluster Ar Global Network List Global Network Connections SLI To Global DR
 
 A [`sli_to_global_dr`](#voltstack-cluster-ar-global-network-list-global-network-connections-sli-to-global-dr) block (within [`voltstack_cluster_ar.global_network_list.global_network_connections`](#voltstack-cluster-ar-global-network-list-global-network-connections)) supports the following:
 
 <a id="voltstack-cluster-ar-global-network-list-global-network-connections-sli-to-global-dr-global-vn"></a>&#x2022; [`global_vn`](#voltstack-cluster-ar-global-network-list-global-network-connections-sli-to-global-dr-global-vn) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Global Vn](#voltstack-cluster-ar-global-network-list-global-network-connections-sli-to-global-dr-global-vn) below.
 
-#### Voltstack Cluster Ar Global Network List Global Network Connections Sli To Global DR Global Vn
+#### Voltstack Cluster Ar Global Network List Global Network Connections SLI To Global DR Global Vn
 
 A [`global_vn`](#voltstack-cluster-ar-global-network-list-global-network-connections-sli-to-global-dr-global-vn) block (within [`voltstack_cluster_ar.global_network_list.global_network_connections.sli_to_global_dr`](#voltstack-cluster-ar-global-network-list-global-network-connections-sli-to-global-dr)) supports the following:
 
@@ -2150,7 +2150,7 @@ A [`global_vn`](#voltstack-cluster-ar-global-network-list-global-network-connect
 
 <a id="voltstack-cluster-ar-global-network-list-global-network-connections-slo-to-global-dr-global-vn-tenant"></a>&#x2022; [`tenant`](#voltstack-cluster-ar-global-network-list-global-network-connections-slo-to-global-dr-global-vn-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-#### Voltstack Cluster Ar K8s Cluster
+#### Voltstack Cluster Ar K8S Cluster
 
 A [`k8s_cluster`](#voltstack-cluster-ar-k8s-cluster) block (within [`voltstack_cluster_ar`](#voltstack-cluster-ar)) supports the following:
 
@@ -2300,9 +2300,9 @@ A [`storage_class_list`](#voltstack-cluster-ar-storage-class-list) block (within
 
 A [`storage_classes`](#voltstack-cluster-ar-storage-class-list-storage-classes) block (within [`voltstack_cluster_ar.storage_class_list`](#voltstack-cluster-ar-storage-class-list)) supports the following:
 
-<a id="voltstack-cluster-ar-storage-class-list-storage-classes-default-storage-class"></a>&#x2022; [`default_storage_class`](#voltstack-cluster-ar-storage-class-list-storage-classes-default-storage-class) - Optional Bool<br>Default Storage Class. Make this storage class default storage class for the K8s cluster
+<a id="voltstack-cluster-ar-storage-class-list-storage-classes-default-storage-class"></a>&#x2022; [`default_storage_class`](#voltstack-cluster-ar-storage-class-list-storage-classes-default-storage-class) - Optional Bool<br>Default Storage Class. Make this storage class default storage class for the K8S cluster
 
-<a id="voltstack-cluster-ar-storage-class-list-storage-classes-storage-class-name"></a>&#x2022; [`storage_class_name`](#voltstack-cluster-ar-storage-class-list-storage-classes-storage-class-name) - Optional String<br>Storage Class Name. Name of the storage class as it will appear in K8s
+<a id="voltstack-cluster-ar-storage-class-list-storage-classes-storage-class-name"></a>&#x2022; [`storage_class_name`](#voltstack-cluster-ar-storage-class-list-storage-classes-storage-class-name) - Optional String<br>Storage Class Name. Name of the storage class as it will appear in K8S
 
 ## Import
 

@@ -9,7 +9,7 @@ description: |-
 
 Manages k8s_cluster_role_binding will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 
-~> **Note** Please refer to [K8s Cluster Role Binding API docs](https://docs.cloud.f5.com/docs-v2/api/k8s-cluster-role-binding) to learn more.
+~> **Note** Please refer to [K8S Cluster Role Binding API docs](https://docs.cloud.f5.com/docs-v2/api/k8s-cluster-role-binding) to learn more.
 
 ## Example Usage
 

@@ -20,7 +20,7 @@ Manages data group in a given namespace. If one already exists it will give an e
 # Basic Data Group configuration
 resource "f5xc_data_group" "example" {
   name      = "example-data-group"
-  namespace = "staging"
+  namespace = "shared"
 
   labels = {
     environment = "production"

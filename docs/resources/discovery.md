@@ -84,7 +84,7 @@ resource "f5xc_discovery" "example" {
 
 -> **One of the following:**
 &#x2022; <a id="discovery-consul"></a>[`discovery_consul`](#discovery-consul) - Optional Block<br>Consul Discovery Configuration. Discovery configuration for Hashicorp Consul<br>See [Discovery Consul](#discovery-consul) below for details.
-<br><br>&#x2022; <a id="discovery-k8s"></a>[`discovery_k8s`](#discovery-k8s) - Optional Block<br>K8S Discovery Configuration. Discovery configuration for K8s<br>See [Discovery K8s](#discovery-k8s) below for details.
+<br><br>&#x2022; <a id="discovery-k8s"></a>[`discovery_k8s`](#discovery-k8s) - Optional Block<br>K8S Discovery Configuration. Discovery configuration for K8S<br>See [Discovery K8S](#discovery-k8s) below for details.
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
@@ -202,19 +202,19 @@ A [`publish_info`](#discovery-consul-publish-info) block (within [`discovery_con
 
 <a id="discovery-consul-publish-info-publish"></a>&#x2022; [`publish`](#discovery-consul-publish-info-publish) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### Discovery K8s
+#### Discovery K8S
 
 A [`discovery_k8s`](#discovery-k8s) block supports the following:
 
-<a id="discovery-k8s-access-info"></a>&#x2022; [`access_info`](#discovery-k8s-access-info) - Optional Block<br>K8s API Server. K8S API server access<br>See [Access Info](#discovery-k8s-access-info) below.
+<a id="discovery-k8s-access-info"></a>&#x2022; [`access_info`](#discovery-k8s-access-info) - Optional Block<br>K8S API Server. K8S API server access<br>See [Access Info](#discovery-k8s-access-info) below.
 
 <a id="discovery-k8s-default-all"></a>&#x2022; [`default_all`](#discovery-k8s-default-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="discovery-k8s-namespace-mapping"></a>&#x2022; [`namespace_mapping`](#discovery-k8s-namespace-mapping) - Optional Block<br>K8S Namespace Mapping. Select the mapping between K8s namespaces from which services will be discovered and App Namespace to which the discovered services will be shared<br>See [Namespace Mapping](#discovery-k8s-namespace-mapping) below.
+<a id="discovery-k8s-namespace-mapping"></a>&#x2022; [`namespace_mapping`](#discovery-k8s-namespace-mapping) - Optional Block<br>K8S Namespace Mapping. Select the mapping between K8S namespaces from which services will be discovered and App Namespace to which the discovered services will be shared<br>See [Namespace Mapping](#discovery-k8s-namespace-mapping) below.
 
 <a id="discovery-k8s-publish-info"></a>&#x2022; [`publish_info`](#discovery-k8s-publish-info) - Optional Block<br>VIP Publish Configurations. K8S Configuration to publish VIPs<br>See [Publish Info](#discovery-k8s-publish-info) below.
 
-#### Discovery K8s Access Info
+#### Discovery K8S Access Info
 
 An [`access_info`](#discovery-k8s-access-info) block (within [`discovery_k8s`](#discovery-k8s)) supports the following:
 
@@ -226,7 +226,7 @@ An [`access_info`](#discovery-k8s-access-info) block (within [`discovery_k8s`](#
 
 <a id="discovery-k8s-access-info-reachable"></a>&#x2022; [`reachable`](#discovery-k8s-access-info-reachable) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### Discovery K8s Access Info Connection Info
+#### Discovery K8S Access Info Connection Info
 
 A [`connection_info`](#discovery-k8s-access-info-connection-info) block (within [`discovery_k8s.access_info`](#discovery-k8s-access-info)) supports the following:
 
@@ -234,7 +234,7 @@ A [`connection_info`](#discovery-k8s-access-info-connection-info) block (within 
 
 <a id="discovery-k8s-access-info-connection-info-tls-info"></a>&#x2022; [`tls_info`](#discovery-k8s-access-info-connection-info-tls-info) - Optional Block<br>Client TLS Config. TLS config for client of discovery service<br>See [TLS Info](#discovery-k8s-access-info-connection-info-tls-info) below.
 
-#### Discovery K8s Access Info Connection Info TLS Info
+#### Discovery K8S Access Info Connection Info TLS Info
 
 A [`tls_info`](#discovery-k8s-access-info-connection-info-tls-info) block (within [`discovery_k8s.access_info.connection_info`](#discovery-k8s-access-info-connection-info)) supports the following:
 
@@ -246,7 +246,7 @@ A [`tls_info`](#discovery-k8s-access-info-connection-info-tls-info) block (withi
 
 <a id="discovery-k8s-access-info-connection-info-tls-info-trusted-ca-url"></a>&#x2022; [`trusted_ca_url`](#discovery-k8s-access-info-connection-info-tls-info-trusted-ca-url) - Optional String<br>Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers
 
-#### Discovery K8s Access Info Connection Info TLS Info Key URL
+#### Discovery K8S Access Info Connection Info TLS Info Key URL
 
 A [`key_url`](#discovery-k8s-access-info-connection-info-tls-info-key-url) block (within [`discovery_k8s.access_info.connection_info.tls_info`](#discovery-k8s-access-info-connection-info-tls-info)) supports the following:
 
@@ -254,7 +254,7 @@ A [`key_url`](#discovery-k8s-access-info-connection-info-tls-info-key-url) block
 
 <a id="discovery-k8s-access-info-connection-info-tls-info-key-url-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#discovery-k8s-access-info-connection-info-tls-info-key-url-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#discovery-k8s-access-info-connection-info-tls-info-key-url-clear-secret-info) below.
 
-#### Discovery K8s Access Info Connection Info TLS Info Key URL Blindfold Secret Info
+#### Discovery K8S Access Info Connection Info TLS Info Key URL Blindfold Secret Info
 
 A [`blindfold_secret_info`](#discovery-k8s-access-info-connection-info-tls-info-key-url-blindfold-secret-info) block (within [`discovery_k8s.access_info.connection_info.tls_info.key_url`](#discovery-k8s-access-info-connection-info-tls-info-key-url)) supports the following:
 
@@ -264,7 +264,7 @@ A [`blindfold_secret_info`](#discovery-k8s-access-info-connection-info-tls-info-
 
 <a id="discovery-k8s-access-info-connection-info-tls-info-key-url-blindfold-secret-info-store-provider"></a>&#x2022; [`store_provider`](#discovery-k8s-access-info-connection-info-tls-info-key-url-blindfold-secret-info-store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-#### Discovery K8s Access Info Connection Info TLS Info Key URL Clear Secret Info
+#### Discovery K8S Access Info Connection Info TLS Info Key URL Clear Secret Info
 
 A [`clear_secret_info`](#discovery-k8s-access-info-connection-info-tls-info-key-url-clear-secret-info) block (within [`discovery_k8s.access_info.connection_info.tls_info.key_url`](#discovery-k8s-access-info-connection-info-tls-info-key-url)) supports the following:
 
@@ -272,7 +272,7 @@ A [`clear_secret_info`](#discovery-k8s-access-info-connection-info-tls-info-key-
 
 <a id="discovery-k8s-access-info-connection-info-tls-info-key-url-clear-secret-info-url"></a>&#x2022; [`url`](#discovery-k8s-access-info-connection-info-tls-info-key-url-clear-secret-info-url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
-#### Discovery K8s Access Info Kubeconfig URL
+#### Discovery K8S Access Info Kubeconfig URL
 
 A [`kubeconfig_url`](#discovery-k8s-access-info-kubeconfig-url) block (within [`discovery_k8s.access_info`](#discovery-k8s-access-info)) supports the following:
 
@@ -280,7 +280,7 @@ A [`kubeconfig_url`](#discovery-k8s-access-info-kubeconfig-url) block (within [`
 
 <a id="discovery-k8s-access-info-kubeconfig-url-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#discovery-k8s-access-info-kubeconfig-url-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#discovery-k8s-access-info-kubeconfig-url-clear-secret-info) below.
 
-#### Discovery K8s Access Info Kubeconfig URL Blindfold Secret Info
+#### Discovery K8S Access Info Kubeconfig URL Blindfold Secret Info
 
 A [`blindfold_secret_info`](#discovery-k8s-access-info-kubeconfig-url-blindfold-secret-info) block (within [`discovery_k8s.access_info.kubeconfig_url`](#discovery-k8s-access-info-kubeconfig-url)) supports the following:
 
@@ -290,7 +290,7 @@ A [`blindfold_secret_info`](#discovery-k8s-access-info-kubeconfig-url-blindfold-
 
 <a id="discovery-k8s-access-info-kubeconfig-url-blindfold-secret-info-store-provider"></a>&#x2022; [`store_provider`](#discovery-k8s-access-info-kubeconfig-url-blindfold-secret-info-store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-#### Discovery K8s Access Info Kubeconfig URL Clear Secret Info
+#### Discovery K8S Access Info Kubeconfig URL Clear Secret Info
 
 A [`clear_secret_info`](#discovery-k8s-access-info-kubeconfig-url-clear-secret-info) block (within [`discovery_k8s.access_info.kubeconfig_url`](#discovery-k8s-access-info-kubeconfig-url)) supports the following:
 
@@ -298,21 +298,21 @@ A [`clear_secret_info`](#discovery-k8s-access-info-kubeconfig-url-clear-secret-i
 
 <a id="discovery-k8s-access-info-kubeconfig-url-clear-secret-info-url"></a>&#x2022; [`url`](#discovery-k8s-access-info-kubeconfig-url-clear-secret-info-url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
-#### Discovery K8s Namespace Mapping
+#### Discovery K8S Namespace Mapping
 
 A [`namespace_mapping`](#discovery-k8s-namespace-mapping) block (within [`discovery_k8s`](#discovery-k8s)) supports the following:
 
-<a id="discovery-k8s-namespace-mapping-items"></a>&#x2022; [`items`](#discovery-k8s-namespace-mapping-items) - Optional Block<br>Regex Matching. Map K8s namespace(s) to App Namespaces. In Shared Configuration, Discovered Services can only be mapped to a single App Namespace, which is determined by the first matched regex<br>See [Items](#discovery-k8s-namespace-mapping-items) below.
+<a id="discovery-k8s-namespace-mapping-items"></a>&#x2022; [`items`](#discovery-k8s-namespace-mapping-items) - Optional Block<br>Regex Matching. Map K8S namespace(s) to App Namespaces. In Shared Configuration, Discovered Services can only be mapped to a single App Namespace, which is determined by the first matched regex<br>See [Items](#discovery-k8s-namespace-mapping-items) below.
 
-#### Discovery K8s Namespace Mapping Items
+#### Discovery K8S Namespace Mapping Items
 
 An [`items`](#discovery-k8s-namespace-mapping-items) block (within [`discovery_k8s.namespace_mapping`](#discovery-k8s-namespace-mapping)) supports the following:
 
 <a id="discovery-k8s-namespace-mapping-items-namespace"></a>&#x2022; [`namespace`](#discovery-k8s-namespace-mapping-items-namespace) - Optional String<br>F5XC Application Namespaces. Select a namespace
 
-<a id="discovery-k8s-namespace-mapping-items-namespace-regex"></a>&#x2022; [`namespace_regex`](#discovery-k8s-namespace-mapping-items-namespace-regex) - Optional String<br>K8S Namespaces. The regex here will be used to match K8s namespace(s)
+<a id="discovery-k8s-namespace-mapping-items-namespace-regex"></a>&#x2022; [`namespace_regex`](#discovery-k8s-namespace-mapping-items-namespace-regex) - Optional String<br>K8S Namespaces. The regex here will be used to match K8S namespace(s)
 
-#### Discovery K8s Publish Info
+#### Discovery K8S Publish Info
 
 A [`publish_info`](#discovery-k8s-publish-info) block (within [`discovery_k8s`](#discovery-k8s)) supports the following:
 
@@ -324,15 +324,15 @@ A [`publish_info`](#discovery-k8s-publish-info) block (within [`discovery_k8s`](
 
 <a id="discovery-k8s-publish-info-publish-fqdns"></a>&#x2022; [`publish_fqdns`](#discovery-k8s-publish-info-publish-fqdns) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### Discovery K8s Publish Info DNS Delegation
+#### Discovery K8S Publish Info DNS Delegation
 
 A [`dns_delegation`](#discovery-k8s-publish-info-dns-delegation) block (within [`discovery_k8s.publish_info`](#discovery-k8s-publish-info)) supports the following:
 
-<a id="discovery-k8s-publish-info-dns-delegation-dns-mode"></a>&#x2022; [`dns_mode`](#discovery-k8s-publish-info-dns-delegation-dns-mode) - Optional String  Defaults to `CORE_DNS`<br>Possible values are `CORE_DNS`, `KUBE_DNS`<br>DNS Mode. Two modes are possible CoreDNS: Whether external K8s cluster is running core-DNS KubeDNS: External K8s cluster is running kube-DNS
+<a id="discovery-k8s-publish-info-dns-delegation-dns-mode"></a>&#x2022; [`dns_mode`](#discovery-k8s-publish-info-dns-delegation-dns-mode) - Optional String  Defaults to `CORE_DNS`<br>Possible values are `CORE_DNS`, `KUBE_DNS`<br>DNS Mode. Two modes are possible CoreDNS: Whether external K8S cluster is running core-DNS KubeDNS: External K8S cluster is running kube-DNS
 
 <a id="discovery-k8s-publish-info-dns-delegation-subdomain"></a>&#x2022; [`subdomain`](#discovery-k8s-publish-info-dns-delegation-subdomain) - Optional String<br>Subdomain. The DNS subdomain for which F5XC will respond to DNS queries
 
-#### Discovery K8s Publish Info Publish
+#### Discovery K8S Publish Info Publish
 
 A [`publish`](#discovery-k8s-publish-info-publish) block (within [`discovery_k8s.publish_info`](#discovery-k8s-publish-info)) supports the following:
 

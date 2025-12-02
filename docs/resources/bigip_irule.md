@@ -14,10 +14,10 @@ Manages a BigIPIrule resource in F5 Distributed Cloud for desired state for big-
 ## Example Usage
 
 ```terraform
-# BigIP IRULE Resource Example
+# Bigip Irule Resource Example
 # Manages a BigIPIrule resource in F5 Distributed Cloud for desired state for big-ip irule service configuration.
 
-# Basic BigIP IRULE configuration
+# Basic Bigip Irule configuration
 resource "f5xc_bigip_irule" "example" {
   name      = "example-bigip-irule"
   namespace = "staging"

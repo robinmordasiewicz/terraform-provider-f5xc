@@ -9,7 +9,7 @@ description: |-
 
 Manages new APM as a service with configured parameters in F5 Distributed Cloud.
 
-~> **Note** Please refer to [Apm API docs](https://docs.cloud.f5.com/docs-v2/api/bigip-apm) to learn more.
+~> **Note** Please refer to [APM API docs](https://docs.cloud.f5.com/docs-v2/api/bigip-apm) to learn more.
 
 ## Example Usage
 

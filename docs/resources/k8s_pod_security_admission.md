@@ -9,15 +9,15 @@ description: |-
 
 Manages k8s_pod_security_admission will create the object in the storage backend in F5 Distributed Cloud.
 
-~> **Note** Please refer to [K8s Pod Security Admission API docs](https://docs.cloud.f5.com/docs-v2/api/k8s-pod-security-admission) to learn more.
+~> **Note** Please refer to [K8S Pod Security Admission API docs](https://docs.cloud.f5.com/docs-v2/api/k8s-pod-security-admission) to learn more.
 
 ## Example Usage
 
 ```terraform
-# K8s Pod Security Admission Resource Example
+# K8S Pod Security Admission Resource Example
 # Manages k8s_pod_security_admission will create the object in the storage backend in F5 Distributed Cloud.
 
-# Basic K8s Pod Security Admission configuration
+# Basic K8S Pod Security Admission configuration
 resource "f5xc_k8s_pod_security_admission" "example" {
   name      = "example-k8s-pod-security-admission"
   namespace = "staging"
@@ -66,7 +66,7 @@ resource "f5xc_k8s_pod_security_admission" "example" {
 
 ### Spec Argument Reference
 
-<a id="pod-security-admission-specs"></a>&#x2022; [`pod_security_admission_specs`](#pod-security-admission-specs) - Optional Block<br>K8s Pod Security Admission<br>See [Pod Security Admission Specs](#pod-security-admission-specs) below for details.
+<a id="pod-security-admission-specs"></a>&#x2022; [`pod_security_admission_specs`](#pod-security-admission-specs) - Optional Block<br>K8S Pod Security Admission<br>See [Pod Security Admission Specs](#pod-security-admission-specs) below for details.
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 

@@ -80,7 +80,7 @@ In addition to all arguments above, the following attributes are exported:
 
 An [`email`](#email) block supports the following:
 
-<a id="email-email"></a>&#x2022; [`email`](#email-email) - Optional String<br>Email. Email id of the user
+<a id="email-email"></a>&#x2022; [`email`](#email-email) - Optional String<br>Email. Email ID of the user
 
 #### Opsgenie
 

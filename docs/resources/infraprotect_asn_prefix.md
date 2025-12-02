@@ -9,15 +9,15 @@ description: |-
 
 Manages DDoS transit Prefix in F5 Distributed Cloud.
 
-~> **Note** Please refer to [Infraprotect Asn Prefix API docs](https://docs.cloud.f5.com/docs-v2/api/infraprotect-asn-prefix) to learn more.
+~> **Note** Please refer to [Infraprotect ASN Prefix API docs](https://docs.cloud.f5.com/docs-v2/api/infraprotect-asn-prefix) to learn more.
 
 ## Example Usage
 
 ```terraform
-# Infraprotect Asn Prefix Resource Example
+# Infraprotect ASN Prefix Resource Example
 # Manages DDoS transit Prefix in F5 Distributed Cloud.
 
-# Basic Infraprotect Asn Prefix configuration
+# Basic Infraprotect ASN Prefix configuration
 resource "f5xc_infraprotect_asn_prefix" "example" {
   name      = "example-infraprotect-asn-prefix"
   namespace = "staging"
@@ -58,7 +58,7 @@ resource "f5xc_infraprotect_asn_prefix" "example" {
 
 ### Spec Argument Reference
 
-<a id="asn"></a>&#x2022; [`asn`](#asn) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Asn](#asn) below for details.
+<a id="asn"></a>&#x2022; [`asn`](#asn) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [ASN](#asn) below for details.
 
 <a id="prefix"></a>&#x2022; [`prefix`](#prefix) - Optional String<br>Prefix. Prefix
 
@@ -72,7 +72,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-#### Asn
+#### ASN
 
 An [`asn`](#asn) block supports the following:
 

@@ -9,15 +9,15 @@ description: |-
 
 Manages k8s_cluster_role_binding will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 
-~> **Note** Please refer to [K8s Cluster Role Binding API docs](https://docs.cloud.f5.com/docs-v2/api/k8s-cluster-role-binding) to learn more.
+~> **Note** Please refer to [K8S Cluster Role Binding API docs](https://docs.cloud.f5.com/docs-v2/api/k8s-cluster-role-binding) to learn more.
 
 ## Example Usage
 
 ```terraform
-# K8s Cluster Role Binding Resource Example
+# K8S Cluster Role Binding Resource Example
 # Manages k8s_cluster_role_binding will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 
-# Basic K8s Cluster Role Binding configuration
+# Basic K8S Cluster Role Binding configuration
 resource "f5xc_k8s_cluster_role_binding" "example" {
   name      = "example-k8s-cluster-role-binding"
   namespace = "system"
@@ -66,7 +66,7 @@ resource "f5xc_k8s_cluster_role_binding" "example" {
 
 ### Spec Argument Reference
 
-<a id="k8s-cluster-role"></a>&#x2022; [`k8s_cluster_role`](#k8s-cluster-role) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [K8s Cluster Role](#k8s-cluster-role) below for details.
+<a id="k8s-cluster-role"></a>&#x2022; [`k8s_cluster_role`](#k8s-cluster-role) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [K8S Cluster Role](#k8s-cluster-role) below for details.
 
 <a id="subjects"></a>&#x2022; [`subjects`](#subjects) - Optional Block<br>Subjects. List of subjects (user, group or service account) to which this role is bound<br>See [Subjects](#subjects) below for details.
 
@@ -80,7 +80,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-#### K8s Cluster Role
+#### K8S Cluster Role
 
 A [`k8s_cluster_role`](#k8s-cluster-role) block supports the following:
 
@@ -94,11 +94,11 @@ A [`k8s_cluster_role`](#k8s-cluster-role) block supports the following:
 
 A [`subjects`](#subjects) block supports the following:
 
-<a id="subjects-group"></a>&#x2022; [`group`](#subjects-group) - Optional String<br>Group. Group id of the user group
+<a id="subjects-group"></a>&#x2022; [`group`](#subjects-group) - Optional String<br>Group. Group ID of the user group
 
 <a id="subjects-service-account"></a>&#x2022; [`service_account`](#subjects-service-account) - Optional Block<br>ServiceAccountType<br>See [Service Account](#subjects-service-account) below.
 
-<a id="subjects-user"></a>&#x2022; [`user`](#subjects-user) - Optional String<br>User. User id of the user
+<a id="subjects-user"></a>&#x2022; [`user`](#subjects-user) - Optional String<br>User. User ID of the user
 
 #### Subjects Service Account
 

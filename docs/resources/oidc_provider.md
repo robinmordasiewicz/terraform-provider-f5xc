@@ -9,7 +9,7 @@ description: |-
 
 Manages a OidcProvider resource in F5 Distributed Cloud for customcreatespectype is the spec to create oidc provider configuration.
 
-~> **Note** Please refer to [Oidc Provider API docs](https://docs.cloud.f5.com/docs-v2/api/oidc-provider) to learn more.
+~> **Note** Please refer to [OIDC Provider API docs](https://docs.cloud.f5.com/docs-v2/api/oidc-provider) to learn more.
 
 ## Example Usage
 
@@ -67,10 +67,10 @@ resource "f5xc_oidc_provider" "example" {
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; <a id="azure-oidc-spec-type"></a>[`azure_oidc_spec_type`](#azure-oidc-spec-type) - Optional Block<br>Azure OIDC Spec Type. AzureOIDCSpecType specifies the attributes required to configure Azure provider<br>See [Azure Oidc Spec Type](#azure-oidc-spec-type) below for details.
-<br><br>&#x2022; <a id="google-oidc-spec-type"></a>[`google_oidc_spec_type`](#google-oidc-spec-type) - Optional Block<br>Google OIDC Spec Type. GoogleOIDCSpecType specifies the attributes required to configure google provider<br>See [Google Oidc Spec Type](#google-oidc-spec-type) below for details.
-<br><br>&#x2022; <a id="oidc-v10-spec-type"></a>[`oidc_v10_spec_type`](#oidc-v10-spec-type) - Optional Block<br>OpenID Connect v1.0 Spec Type. OIDCV10SpecType specifies the attributes required to configure OIDC provider<br>See [Oidc V10 Spec Type](#oidc-v10-spec-type) below for details.
-<br><br>&#x2022; <a id="okta-oidc-spec-type"></a>[`okta_oidc_spec_type`](#okta-oidc-spec-type) - Optional Block<br>Okta OpenID Connect Spec Type. OKTAOIDCSpecType specifies the attributes required to configure okta OIDC provider<br>See [Okta Oidc Spec Type](#okta-oidc-spec-type) below for details.
+&#x2022; <a id="azure-oidc-spec-type"></a>[`azure_oidc_spec_type`](#azure-oidc-spec-type) - Optional Block<br>Azure OIDC Spec Type. AzureOIDCSpecType specifies the attributes required to configure Azure provider<br>See [Azure OIDC Spec Type](#azure-oidc-spec-type) below for details.
+<br><br>&#x2022; <a id="google-oidc-spec-type"></a>[`google_oidc_spec_type`](#google-oidc-spec-type) - Optional Block<br>Google OIDC Spec Type. GoogleOIDCSpecType specifies the attributes required to configure google provider<br>See [Google OIDC Spec Type](#google-oidc-spec-type) below for details.
+<br><br>&#x2022; <a id="oidc-v10-spec-type"></a>[`oidc_v10_spec_type`](#oidc-v10-spec-type) - Optional Block<br>OpenID Connect v1.0 Spec Type. OIDCV10SpecType specifies the attributes required to configure OIDC provider<br>See [OIDC V10 Spec Type](#oidc-v10-spec-type) below for details.
+<br><br>&#x2022; <a id="okta-oidc-spec-type"></a>[`okta_oidc_spec_type`](#okta-oidc-spec-type) - Optional Block<br>Okta OpenID Connect Spec Type. OKTAOIDCSpecType specifies the attributes required to configure okta OIDC provider<br>See [Okta OIDC Spec Type](#okta-oidc-spec-type) below for details.
 
 <a id="provider-type"></a>&#x2022; [`provider_type`](#provider-type) - Optional String  Defaults to `DEFAULT`<br>Possible values are `DEFAULT`, `GOOGLE`, `AZURE`, `OKTA`<br>Provider Type. Types of OIDC providers Default provider. use this for standard OpenIDConnect v1.0 Authenticate with Google OIDC Authenticate with Azure OIDC Authenticate with Okta OIDC
 
@@ -84,7 +84,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-#### Azure Oidc Spec Type
+#### Azure OIDC Spec Type
 
 An [`azure_oidc_spec_type`](#azure-oidc-spec-type) block supports the following:
 
@@ -110,7 +110,7 @@ An [`azure_oidc_spec_type`](#azure-oidc-spec-type) block supports the following:
 
 <a id="azure-oidc-spec-type-user-info-url"></a>&#x2022; [`user_info_url`](#azure-oidc-spec-type-user-info-url) - Optional String<br>User Info URL. The User Info URL specified in your OIDC application
 
-#### Google Oidc Spec Type
+#### Google OIDC Spec Type
 
 A [`google_oidc_spec_type`](#google-oidc-spec-type) block supports the following:
 
@@ -120,7 +120,7 @@ A [`google_oidc_spec_type`](#google-oidc-spec-type) block supports the following
 
 <a id="google-oidc-spec-type-hosted-domain"></a>&#x2022; [`hosted_domain`](#google-oidc-spec-type-hosted-domain) - Optional String<br>Hosted Domain. set hosted domain to restrict user input on login form to use email address from this email domain. for example, setting value company.com will enforce user email input to have only username@company.com leave empty if no restriction is required for email address. ie for example allow user@company1.com and user@company2.com
 
-#### Oidc V10 Spec Type
+#### OIDC V10 Spec Type
 
 An [`oidc_v10_spec_type`](#oidc-v10-spec-type) block supports the following:
 
@@ -160,7 +160,7 @@ An [`oidc_v10_spec_type`](#oidc-v10-spec-type) block supports the following:
 
 <a id="oidc-v10-spec-type-validate-signatures"></a>&#x2022; [`validate_signatures`](#oidc-v10-spec-type-validate-signatures) - Optional Bool<br>Validate Signatures. Enable/disable signature validation of external IDP signatures
 
-#### Okta Oidc Spec Type
+#### Okta OIDC Spec Type
 
 An [`okta_oidc_spec_type`](#okta-oidc-spec-type) block supports the following:
 

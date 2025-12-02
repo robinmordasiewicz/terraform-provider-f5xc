@@ -1,7 +1,7 @@
-# K8s Cluster Resource Example
+# K8S Cluster Resource Example
 # Manages k8s_cluster will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 
-# Basic K8s Cluster configuration
+# Basic K8S Cluster configuration
 resource "f5xc_k8s_cluster" "example" {
   name      = "example-k8s-cluster"
   namespace = "system"

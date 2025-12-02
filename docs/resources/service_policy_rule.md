@@ -70,8 +70,8 @@ resource "f5xc_service_policy_rule" "example" {
 
 -> **One of the following:**
 &#x2022; <a id="any-asn"></a>[`any_asn`](#any-asn) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; <a id="asn-list"></a>[`asn_list`](#asn-list) - Optional Block<br>ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer<br>See [Asn List](#asn-list) below for details.
-<br><br>&#x2022; <a id="asn-matcher"></a>[`asn_matcher`](#asn-matcher) - Optional Block<br>ASN Matcher. Match any AS number contained in the list of bgp_asn_sets<br>See [Asn Matcher](#asn-matcher) below for details.
+<br><br>&#x2022; <a id="asn-list"></a>[`asn_list`](#asn-list) - Optional Block<br>ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer<br>See [ASN List](#asn-list) below for details.
+<br><br>&#x2022; <a id="asn-matcher"></a>[`asn_matcher`](#asn-matcher) - Optional Block<br>ASN Matcher. Match any AS number contained in the list of bgp_asn_sets<br>See [ASN Matcher](#asn-matcher) below for details.
 
 -> **One of the following:**
 &#x2022; <a id="any-client"></a>[`any_client`](#any-client) - Optional Block<br>Empty. This can be used for messages where no values are needed
@@ -167,19 +167,19 @@ An [`item`](#arg-matchers-item) block (within [`arg_matchers`](#arg-matchers)) s
 
 <a id="arg-matchers-item-transformers"></a>&#x2022; [`transformers`](#arg-matchers-item-transformers) - Optional List  Defaults to `TRANSFORMER_NONE`<br>Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`<br>Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
 
-#### Asn List
+#### ASN List
 
 An [`asn_list`](#asn-list) block supports the following:
 
 <a id="asn-list-as-numbers"></a>&#x2022; [`as_numbers`](#asn-list-as-numbers) - Optional List<br>AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer
 
-#### Asn Matcher
+#### ASN Matcher
 
 An [`asn_matcher`](#asn-matcher) block supports the following:
 
-<a id="asn-matcher-asn-sets"></a>&#x2022; [`asn_sets`](#asn-matcher-asn-sets) - Optional Block<br>BGP ASN Sets. A list of references to bgp_asn_set objects<br>See [Asn Sets](#asn-matcher-asn-sets) below.
+<a id="asn-matcher-asn-sets"></a>&#x2022; [`asn_sets`](#asn-matcher-asn-sets) - Optional Block<br>BGP ASN Sets. A list of references to bgp_asn_set objects<br>See [ASN Sets](#asn-matcher-asn-sets) below.
 
-#### Asn Matcher Asn Sets
+#### ASN Matcher ASN Sets
 
 An [`asn_sets`](#asn-matcher-asn-sets) block (within [`asn_matcher`](#asn-matcher)) supports the following:
 
@@ -587,7 +587,7 @@ An [`exclude_signature_contexts`](#waf-action-app-firewall-detection-control-exc
 
 <a id="waf-action-app-firewall-detection-control-exclude-signature-contexts-context-name"></a>&#x2022; [`context_name`](#waf-action-app-firewall-detection-control-exclude-signature-contexts-context-name) - Optional String<br>Context Name. Relevant only for contexts: Header, Cookie and Parameter. Name of the Context that the WAF Exclusion Rules will check. Wildcard matching can be used by prefixing or suffixing the context name with an wildcard asterisk (*)
 
-<a id="waf-action-app-firewall-detection-control-exclude-signature-contexts-signature-id"></a>&#x2022; [`signature_id`](#waf-action-app-firewall-detection-control-exclude-signature-contexts-signature-id) - Optional Number<br>SignatureID. The allowed values for signature id are 0 and in the range of 200000001-299999999. 0 implies that all signatures will be excluded for the specified context
+<a id="waf-action-app-firewall-detection-control-exclude-signature-contexts-signature-id"></a>&#x2022; [`signature_id`](#waf-action-app-firewall-detection-control-exclude-signature-contexts-signature-id) - Optional Number<br>SignatureID. The allowed values for signature ID are 0 and in the range of 200000001-299999999. 0 implies that all signatures will be excluded for the specified context
 
 #### WAF Action App Firewall Detection Control Exclude Violation Contexts
 

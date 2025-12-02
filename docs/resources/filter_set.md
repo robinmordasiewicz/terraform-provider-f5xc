@@ -20,7 +20,7 @@ Manages a FilterSet resource in F5 Distributed Cloud for create configuration.
 # Basic Filter Set configuration
 resource "f5xc_filter_set" "example" {
   name      = "example-filter-set"
-  namespace = "staging"
+  namespace = "shared"
 
   labels = {
     environment = "production"

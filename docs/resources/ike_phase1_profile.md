@@ -9,15 +9,15 @@ description: |-
 
 Manages a IKEPhase1Profile resource in F5 Distributed Cloud for ike phase1 profile configuration.
 
-~> **Note** Please refer to [Ike Phase1 Profile API docs](https://docs.cloud.f5.com/docs-v2/api/views-ike-phase1-profile) to learn more.
+~> **Note** Please refer to [IKE Phase1 Profile API docs](https://docs.cloud.f5.com/docs-v2/api/views-ike-phase1-profile) to learn more.
 
 ## Example Usage
 
 ```terraform
-# Ike Phase1 Profile Resource Example
+# IKE Phase1 Profile Resource Example
 # Manages a IKEPhase1Profile resource in F5 Distributed Cloud for ike phase1 profile configuration.
 
-# Basic Ike Phase1 Profile configuration
+# Basic IKE Phase1 Profile configuration
 resource "f5xc_ike_phase1_profile" "example" {
   name      = "example-ike-phase1-profile"
   namespace = "staging"
@@ -73,8 +73,8 @@ resource "f5xc_ike_phase1_profile" "example" {
 <a id="encryption-algos"></a>&#x2022; [`encryption_algos`](#encryption-algos) - Optional List  Defaults to `ENC_ALG_DEFAULT`<br>Possible values are `ENC_ALG_DEFAULT`, `AES128_CBC`, `AES192_CBC`, `AES256_CBC`, `TRIPLE_DES_CBC`, `AES128_GCM`, `AES192_GCM`, `AES256_GCM`<br>Configure Encryption Algorithms. Choose one or more encryption algorithms
 
 -> **One of the following:**
-&#x2022; <a id="ike-keylifetime-hours"></a>[`ike_keylifetime_hours`](#ike-keylifetime-hours) - Optional Block<br>Hours. Input Hours<br>See [Ike Keylifetime Hours](#ike-keylifetime-hours) below for details.
-<br><br>&#x2022; <a id="ike-keylifetime-minutes"></a>[`ike_keylifetime_minutes`](#ike-keylifetime-minutes) - Optional Block<br>Minutes. Set IKE Key Lifetime in minutes<br>See [Ike Keylifetime Minutes](#ike-keylifetime-minutes) below for details.
+&#x2022; <a id="ike-keylifetime-hours"></a>[`ike_keylifetime_hours`](#ike-keylifetime-hours) - Optional Block<br>Hours. Input Hours<br>See [IKE Keylifetime Hours](#ike-keylifetime-hours) below for details.
+<br><br>&#x2022; <a id="ike-keylifetime-minutes"></a>[`ike_keylifetime_minutes`](#ike-keylifetime-minutes) - Optional Block<br>Minutes. Set IKE Key Lifetime in minutes<br>See [IKE Keylifetime Minutes](#ike-keylifetime-minutes) below for details.
 <br><br>&#x2022; <a id="use-default-keylifetime"></a>[`use_default_keylifetime`](#use-default-keylifetime) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="prf"></a>&#x2022; [`prf`](#prf) - Optional List  Defaults to `PRF_DEFAULT`<br>Possible values are `PRF_DEFAULT`, `PRFSHA256`, `PRFSHA384`, `PRFSHA512`<br>PseudoRandomFunction. Select PseudoRandomFunction for IKE SA
@@ -94,13 +94,13 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-#### Ike Keylifetime Hours
+#### IKE Keylifetime Hours
 
 An [`ike_keylifetime_hours`](#ike-keylifetime-hours) block supports the following:
 
 <a id="ike-keylifetime-hours-duration"></a>&#x2022; [`duration`](#ike-keylifetime-hours-duration) - Optional Number<br>Duration
 
-#### Ike Keylifetime Minutes
+#### IKE Keylifetime Minutes
 
 An [`ike_keylifetime_minutes`](#ike-keylifetime-minutes) block supports the following:
 

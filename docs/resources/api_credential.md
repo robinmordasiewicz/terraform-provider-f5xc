@@ -20,7 +20,7 @@ Manages request specification. in F5 Distributed Cloud.
 # Basic API Credential configuration
 resource "f5xc_api_credential" "example" {
   name      = "example-api-credential"
-  namespace = "staging"
+  namespace = "system"
 
   labels = {
     environment = "production"
@@ -67,9 +67,9 @@ resource "f5xc_api_credential" "example" {
 
 <a id="type"></a>&#x2022; [`type`](#type) - Optional String  Defaults to `API_CERTIFICATE`<br>Possible values are `API_CERTIFICATE`, `KUBE_CONFIG`, `API_TOKEN`, `SERVICE_API_TOKEN`, `SERVICE_API_CERTIFICATE`, `SERVICE_KUBE_CONFIG`, `SITE_GLOBAL_KUBE_CONFIG`, `SCIM_API_TOKEN`, `SERVICE_SITE_GLOBAL_KUBE_CONFIG`<br>Credential Type. Types of API credential given when requesting credentials from volterra F5XC user certificate to access F5XC public API using mTLS using self credential (my credential) Kubernetes config file to access Virtual Kubernetes API in Volterra using self credential (my credential) API token to access F5XC public API using self credential (my credential) API token for service credentials using service user credential (service credential) API certificate for service credentials using service user credential (service credential) Service Credential kubeconfig using service user credential (service credential) Kubeconfig for accessing Site via Global Controller using self credential (my credential) Token for the SCIM public APIs used to sync users and groups with the F5XC platform. External identity provider's SCIM client can use this token as Bearer token with Authorization header Service Credential Kubeconfig for accessing Site via Global Controller using service user credential (service credential)
 
-<a id="virtual-k8s-name"></a>&#x2022; [`virtual_k8s_name`](#virtual-k8s-name) - Optional String<br>vK8s Cluster. Name of virtual K8s cluster. Applicable for KUBE_CONFIG
+<a id="virtual-k8s-name"></a>&#x2022; [`virtual_k8s_name`](#virtual-k8s-name) - Optional String<br>vK8s Cluster. Name of virtual K8S cluster. Applicable for KUBE_CONFIG
 
-<a id="virtual-k8s-namespace"></a>&#x2022; [`virtual_k8s_namespace`](#virtual-k8s-namespace) - Optional String<br>vK8s Namespace. Namespace of virtual K8s cluster. Applicable for KUBE_CONFIG
+<a id="virtual-k8s-namespace"></a>&#x2022; [`virtual_k8s_namespace`](#virtual-k8s-namespace) - Optional String<br>vK8s Namespace. Namespace of virtual K8S cluster. Applicable for KUBE_CONFIG
 
 ### Attributes Reference
 

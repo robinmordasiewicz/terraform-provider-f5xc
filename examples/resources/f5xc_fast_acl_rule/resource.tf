@@ -4,7 +4,7 @@
 # Basic Fast ACL Rule configuration
 resource "f5xc_fast_acl_rule" "example" {
   name      = "example-fast-acl-rule"
-  namespace = "staging"
+  namespace = "system"
 
   labels = {
     environment = "production"

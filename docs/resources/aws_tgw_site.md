@@ -9,7 +9,7 @@ description: |-
 
 Manages a AWSTGWSite resource in F5 Distributed Cloud for deploying F5 sites connected via AWS Transit Gateway.
 
-~> **Note** Please refer to [AWS Tgw Site API docs](https://docs.cloud.f5.com/docs-v2/api/views-aws-tgw-site) to learn more.
+~> **Note** Please refer to [AWS TGW Site API docs](https://docs.cloud.f5.com/docs-v2/api/views-aws-tgw-site) to learn more.
 
 ## Example Usage
 
@@ -161,11 +161,11 @@ An [`aws_parameters`](#aws-parameters) block supports the following:
 
 <a id="aws-parameters-aws-cred"></a>&#x2022; [`aws_cred`](#aws-parameters-aws-cred) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [AWS Cred](#aws-parameters-aws-cred) below.
 
-<a id="aws-parameters-aws-region"></a>&#x2022; [`aws_region`](#aws-parameters-aws-region) - Optional String<br>AWS Region. AWS Region of your services vpc, where F5XC site will be deployed
+<a id="aws-parameters-aws-region"></a>&#x2022; [`aws_region`](#aws-parameters-aws-region) - Optional String<br>AWS Region. AWS Region of your services VPC, where F5XC site will be deployed
 
 <a id="aws-parameters-az-nodes"></a>&#x2022; [`az_nodes`](#aws-parameters-az-nodes) - Optional Block<br>Ingress/Egress Gateway (two Interface) Nodes in AZ. Only Single AZ or Three AZ(s) nodes are supported currently<br>See [Az Nodes](#aws-parameters-az-nodes) below.
 
-<a id="aws-parameters-custom-security-group"></a>&#x2022; [`custom_security_group`](#aws-parameters-custom-security-group) - Optional Block<br>Security Group IDS. Enter pre created security groups for slo(Site Local Outside) and sli(Site Local Inside) interface. Supported only for sites deployed on existing VPC<br>See [Custom Security Group](#aws-parameters-custom-security-group) below.
+<a id="aws-parameters-custom-security-group"></a>&#x2022; [`custom_security_group`](#aws-parameters-custom-security-group) - Optional Block<br>Security Group IDS. Enter pre created security groups for slo(Site Local Outside) and SLI(Site Local Inside) interface. Supported only for sites deployed on existing VPC<br>See [Custom Security Group](#aws-parameters-custom-security-group) below.
 
 <a id="aws-parameters-disable-internet-vip"></a>&#x2022; [`disable_internet_vip`](#aws-parameters-disable-internet-vip) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -173,15 +173,15 @@ An [`aws_parameters`](#aws-parameters) block supports the following:
 
 <a id="aws-parameters-enable-internet-vip"></a>&#x2022; [`enable_internet_vip`](#aws-parameters-enable-internet-vip) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="aws-parameters-existing-tgw"></a>&#x2022; [`existing_tgw`](#aws-parameters-existing-tgw) - Optional Block<br>Existing TGW Type. Information needed for existing TGW<br>See [Existing Tgw](#aws-parameters-existing-tgw) below.
+<a id="aws-parameters-existing-tgw"></a>&#x2022; [`existing_tgw`](#aws-parameters-existing-tgw) - Optional Block<br>Existing TGW Type. Information needed for existing TGW<br>See [Existing TGW](#aws-parameters-existing-tgw) below.
 
 <a id="aws-parameters-f5xc-security-group"></a>&#x2022; [`f5xc_security_group`](#aws-parameters-f5xc-security-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="aws-parameters-instance-type"></a>&#x2022; [`instance_type`](#aws-parameters-instance-type) - Optional String<br>AWS Instance Type for Node. Instance size based on the performance
 
-<a id="aws-parameters-new-tgw"></a>&#x2022; [`new_tgw`](#aws-parameters-new-tgw) - Optional Block<br>TGWParamsType<br>See [New Tgw](#aws-parameters-new-tgw) below.
+<a id="aws-parameters-new-tgw"></a>&#x2022; [`new_tgw`](#aws-parameters-new-tgw) - Optional Block<br>TGWParamsType<br>See [New TGW](#aws-parameters-new-tgw) below.
 
-<a id="aws-parameters-new-vpc"></a>&#x2022; [`new_vpc`](#aws-parameters-new-vpc) - Optional Block<br>AWS VPC Parameters. Parameters to create new AWS VPC<br>See [New Vpc](#aws-parameters-new-vpc) below.
+<a id="aws-parameters-new-vpc"></a>&#x2022; [`new_vpc`](#aws-parameters-new-vpc) - Optional Block<br>AWS VPC Parameters. Parameters to create new AWS VPC<br>See [New VPC](#aws-parameters-new-vpc) below.
 
 <a id="aws-parameters-no-worker-nodes"></a>&#x2022; [`no_worker_nodes`](#aws-parameters-no-worker-nodes) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -191,7 +191,7 @@ An [`aws_parameters`](#aws-parameters) block supports the following:
 
 <a id="aws-parameters-ssh-key"></a>&#x2022; [`ssh_key`](#aws-parameters-ssh-key) - Optional String<br>Public SSH key. Public SSH key for accessing nodes of the site
 
-<a id="aws-parameters-tgw-cidr"></a>&#x2022; [`tgw_cidr`](#aws-parameters-tgw-cidr) - Optional Block<br>New Cloud Subnet Parameters. Parameters for creating a new cloud subnet<br>See [Tgw CIDR](#aws-parameters-tgw-cidr) below.
+<a id="aws-parameters-tgw-cidr"></a>&#x2022; [`tgw_cidr`](#aws-parameters-tgw-cidr) - Optional Block<br>New Cloud Subnet Parameters. Parameters for creating a new cloud subnet<br>See [TGW CIDR](#aws-parameters-tgw-cidr) below.
 
 <a id="aws-parameters-total-nodes"></a>&#x2022; [`total_nodes`](#aws-parameters-total-nodes) - Optional Number<br>Total Number of Worker Nodes for a Site. Total number of worker nodes to be deployed across all AZ's used in the Site
 
@@ -297,7 +297,7 @@ A [`custom_security_group`](#aws-parameters-custom-security-group) block (within
 
 <a id="aws-parameters-custom-security-group-outside-security-group-id"></a>&#x2022; [`outside_security_group_id`](#aws-parameters-custom-security-group-outside-security-group-id) - Optional String<br>Outside Security Group ID. Security Group ID to be attached to SLO(Site Local Outside) Interface
 
-#### AWS Parameters Existing Tgw
+#### AWS Parameters Existing TGW
 
 An [`existing_tgw`](#aws-parameters-existing-tgw) block (within [`aws_parameters`](#aws-parameters)) supports the following:
 
@@ -307,7 +307,7 @@ An [`existing_tgw`](#aws-parameters-existing-tgw) block (within [`aws_parameters
 
 <a id="aws-parameters-existing-tgw-volterra-site-asn"></a>&#x2022; [`volterra_site_asn`](#aws-parameters-existing-tgw-volterra-site-asn) - Optional Number<br>Enter F5XC Site ASN. F5XC Site ASN
 
-#### AWS Parameters New Tgw
+#### AWS Parameters New TGW
 
 A [`new_tgw`](#aws-parameters-new-tgw) block (within [`aws_parameters`](#aws-parameters)) supports the following:
 
@@ -315,7 +315,7 @@ A [`new_tgw`](#aws-parameters-new-tgw) block (within [`aws_parameters`](#aws-par
 
 <a id="aws-parameters-new-tgw-user-assigned"></a>&#x2022; [`user_assigned`](#aws-parameters-new-tgw-user-assigned) - Optional Block<br>TGW Assigned ASN Type. Information needed when ASNs are assigned by the user<br>See [User Assigned](#aws-parameters-new-tgw-user-assigned) below.
 
-#### AWS Parameters New Tgw User Assigned
+#### AWS Parameters New TGW User Assigned
 
 An [`user_assigned`](#aws-parameters-new-tgw-user-assigned) block (within [`aws_parameters.new_tgw`](#aws-parameters-new-tgw)) supports the following:
 
@@ -323,7 +323,7 @@ An [`user_assigned`](#aws-parameters-new-tgw-user-assigned) block (within [`aws_
 
 <a id="aws-parameters-new-tgw-user-assigned-volterra-site-asn"></a>&#x2022; [`volterra_site_asn`](#aws-parameters-new-tgw-user-assigned-volterra-site-asn) - Optional Number<br>Enter F5XC Site ASN. F5XC Site ASN
 
-#### AWS Parameters New Vpc
+#### AWS Parameters New VPC
 
 A [`new_vpc`](#aws-parameters-new-vpc) block (within [`aws_parameters`](#aws-parameters)) supports the following:
 
@@ -333,7 +333,7 @@ A [`new_vpc`](#aws-parameters-new-vpc) block (within [`aws_parameters`](#aws-par
 
 <a id="aws-parameters-new-vpc-primary-ipv4"></a>&#x2022; [`primary_ipv4`](#aws-parameters-new-vpc-primary-ipv4) - Optional String<br>Primary IPv4 CIDR block. IPv4 CIDR block for this VPC. It has to be private address space. The Primary IPv4 block cannot be modified. All subnets prefixes in this VPC must be part of this CIDR block
 
-#### AWS Parameters Tgw CIDR
+#### AWS Parameters TGW CIDR
 
 A [`tgw_cidr`](#aws-parameters-tgw-cidr) block (within [`aws_parameters`](#aws-parameters)) supports the following:
 
@@ -501,7 +501,7 @@ A [`sw`](#sw) block supports the following:
 
 <a id="sw-volterra-software-version"></a>&#x2022; [`volterra_software_version`](#sw-volterra-software-version) - Optional String<br>F5XC Software Version. Specify a F5XC Software Version to be used e.g. crt-20210329-1002
 
-#### Tgw Security
+#### TGW Security
 
 A [`tgw_security`](#tgw-security) block supports the following:
 
@@ -523,13 +523,13 @@ A [`tgw_security`](#tgw-security) block supports the following:
 
 <a id="tgw-security-no-network-policy"></a>&#x2022; [`no_network_policy`](#tgw-security-no-network-policy) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### Tgw Security Active East West Service Policies
+#### TGW Security Active East West Service Policies
 
 An [`active_east_west_service_policies`](#tgw-security-active-east-west-service-policies) block (within [`tgw_security`](#tgw-security)) supports the following:
 
 <a id="tgw-security-active-east-west-service-policies-service-policies"></a>&#x2022; [`service_policies`](#tgw-security-active-east-west-service-policies-service-policies) - Optional Block<br>Service Policies. A list of references to service_policy objects<br>See [Service Policies](#tgw-security-active-east-west-service-policies-service-policies) below.
 
-#### Tgw Security Active East West Service Policies Service Policies
+#### TGW Security Active East West Service Policies Service Policies
 
 A [`service_policies`](#tgw-security-active-east-west-service-policies-service-policies) block (within [`tgw_security.active_east_west_service_policies`](#tgw-security-active-east-west-service-policies)) supports the following:
 
@@ -539,13 +539,13 @@ A [`service_policies`](#tgw-security-active-east-west-service-policies-service-p
 
 <a id="tgw-security-active-east-west-service-policies-service-policies-tenant"></a>&#x2022; [`tenant`](#tgw-security-active-east-west-service-policies-service-policies-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-#### Tgw Security Active Enhanced Firewall Policies
+#### TGW Security Active Enhanced Firewall Policies
 
 An [`active_enhanced_firewall_policies`](#tgw-security-active-enhanced-firewall-policies) block (within [`tgw_security`](#tgw-security)) supports the following:
 
 <a id="tgw-security-active-enhanced-firewall-policies-enhanced-firewall-policies"></a>&#x2022; [`enhanced_firewall_policies`](#tgw-security-active-enhanced-firewall-policies-enhanced-firewall-policies) - Optional Block<br>Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active<br>See [Enhanced Firewall Policies](#tgw-security-active-enhanced-firewall-policies-enhanced-firewall-policies) below.
 
-#### Tgw Security Active Enhanced Firewall Policies Enhanced Firewall Policies
+#### TGW Security Active Enhanced Firewall Policies Enhanced Firewall Policies
 
 An [`enhanced_firewall_policies`](#tgw-security-active-enhanced-firewall-policies-enhanced-firewall-policies) block (within [`tgw_security.active_enhanced_firewall_policies`](#tgw-security-active-enhanced-firewall-policies)) supports the following:
 
@@ -555,13 +555,13 @@ An [`enhanced_firewall_policies`](#tgw-security-active-enhanced-firewall-policie
 
 <a id="tgw-security-active-enhanced-firewall-policies-enhanced-firewall-policies-tenant"></a>&#x2022; [`tenant`](#tgw-security-active-enhanced-firewall-policies-enhanced-firewall-policies-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-#### Tgw Security Active Forward Proxy Policies
+#### TGW Security Active Forward Proxy Policies
 
 An [`active_forward_proxy_policies`](#tgw-security-active-forward-proxy-policies) block (within [`tgw_security`](#tgw-security)) supports the following:
 
 <a id="tgw-security-active-forward-proxy-policies-forward-proxy-policies"></a>&#x2022; [`forward_proxy_policies`](#tgw-security-active-forward-proxy-policies-forward-proxy-policies) - Optional Block<br>Forward Proxy Policies. Ordered List of Forward Proxy Policies active<br>See [Forward Proxy Policies](#tgw-security-active-forward-proxy-policies-forward-proxy-policies) below.
 
-#### Tgw Security Active Forward Proxy Policies Forward Proxy Policies
+#### TGW Security Active Forward Proxy Policies Forward Proxy Policies
 
 A [`forward_proxy_policies`](#tgw-security-active-forward-proxy-policies-forward-proxy-policies) block (within [`tgw_security.active_forward_proxy_policies`](#tgw-security-active-forward-proxy-policies)) supports the following:
 
@@ -571,13 +571,13 @@ A [`forward_proxy_policies`](#tgw-security-active-forward-proxy-policies-forward
 
 <a id="tgw-security-active-forward-proxy-policies-forward-proxy-policies-tenant"></a>&#x2022; [`tenant`](#tgw-security-active-forward-proxy-policies-forward-proxy-policies-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-#### Tgw Security Active Network Policies
+#### TGW Security Active Network Policies
 
 An [`active_network_policies`](#tgw-security-active-network-policies) block (within [`tgw_security`](#tgw-security)) supports the following:
 
 <a id="tgw-security-active-network-policies-network-policies"></a>&#x2022; [`network_policies`](#tgw-security-active-network-policies-network-policies) - Optional Block<br>Firewall Policy. Ordered List of Firewall Policies active for this network firewall<br>See [Network Policies](#tgw-security-active-network-policies-network-policies) below.
 
-#### Tgw Security Active Network Policies Network Policies
+#### TGW Security Active Network Policies Network Policies
 
 A [`network_policies`](#tgw-security-active-network-policies-network-policies) block (within [`tgw_security.active_network_policies`](#tgw-security-active-network-policies)) supports the following:
 
@@ -605,7 +605,7 @@ A [`vn_config`](#vn-config) block supports the following:
 
 <a id="vn-config-allowed-vip-port"></a>&#x2022; [`allowed_vip_port`](#vn-config-allowed-vip-port) - Optional Block<br>Allowed VIP Ports. This defines the TCP port(s) which will be opened on the cloud loadbalancer. Such that the client can use the cloud VIP IP and port combination to reach TCP/HTTP LB configured on the F5XC Site<br>See [Allowed VIP Port](#vn-config-allowed-vip-port) below.
 
-<a id="vn-config-allowed-vip-port-sli"></a>&#x2022; [`allowed_vip_port_sli`](#vn-config-allowed-vip-port-sli) - Optional Block<br>Allowed VIP Ports. This defines the TCP port(s) which will be opened on the cloud loadbalancer. Such that the client can use the cloud VIP IP and port combination to reach TCP/HTTP LB configured on the F5XC Site<br>See [Allowed VIP Port Sli](#vn-config-allowed-vip-port-sli) below.
+<a id="vn-config-allowed-vip-port-sli"></a>&#x2022; [`allowed_vip_port_sli`](#vn-config-allowed-vip-port-sli) - Optional Block<br>Allowed VIP Ports. This defines the TCP port(s) which will be opened on the cloud loadbalancer. Such that the client can use the cloud VIP IP and port combination to reach TCP/HTTP LB configured on the F5XC Site<br>See [Allowed VIP Port SLI](#vn-config-allowed-vip-port-sli) below.
 
 <a id="vn-config-dc-cluster-group-inside-vn"></a>&#x2022; [`dc_cluster_group_inside_vn`](#vn-config-dc-cluster-group-inside-vn) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Dc Cluster Group Inside Vn](#vn-config-dc-cluster-group-inside-vn) below.
 
@@ -649,7 +649,7 @@ A [`custom_ports`](#vn-config-allowed-vip-port-custom-ports) block (within [`vn_
 
 <a id="vn-config-allowed-vip-port-custom-ports-port-ranges"></a>&#x2022; [`port_ranges`](#vn-config-allowed-vip-port-custom-ports-port-ranges) - Optional String<br>Port Ranges. Port Ranges
 
-#### Vn Config Allowed VIP Port Sli
+#### Vn Config Allowed VIP Port SLI
 
 An [`allowed_vip_port_sli`](#vn-config-allowed-vip-port-sli) block (within [`vn_config`](#vn-config)) supports the following:
 
@@ -663,7 +663,7 @@ An [`allowed_vip_port_sli`](#vn-config-allowed-vip-port-sli) block (within [`vn_
 
 <a id="vn-config-allowed-vip-port-sli-use-https-port"></a>&#x2022; [`use_https_port`](#vn-config-allowed-vip-port-sli-use-https-port) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### Vn Config Allowed VIP Port Sli Custom Ports
+#### Vn Config Allowed VIP Port SLI Custom Ports
 
 A [`custom_ports`](#vn-config-allowed-vip-port-sli-custom-ports) block (within [`vn_config.allowed_vip_port_sli`](#vn-config-allowed-vip-port-sli)) supports the following:
 
@@ -699,17 +699,17 @@ A [`global_network_list`](#vn-config-global-network-list) block (within [`vn_con
 
 A [`global_network_connections`](#vn-config-global-network-list-global-network-connections) block (within [`vn_config.global_network_list`](#vn-config-global-network-list)) supports the following:
 
-<a id="vn-config-global-network-list-global-network-connections-sli-to-global-dr"></a>&#x2022; [`sli_to_global_dr`](#vn-config-global-network-list-global-network-connections-sli-to-global-dr) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [Sli To Global DR](#vn-config-global-network-list-global-network-connections-sli-to-global-dr) below.
+<a id="vn-config-global-network-list-global-network-connections-sli-to-global-dr"></a>&#x2022; [`sli_to_global_dr`](#vn-config-global-network-list-global-network-connections-sli-to-global-dr) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [SLI To Global DR](#vn-config-global-network-list-global-network-connections-sli-to-global-dr) below.
 
 <a id="vn-config-global-network-list-global-network-connections-slo-to-global-dr"></a>&#x2022; [`slo_to_global_dr`](#vn-config-global-network-list-global-network-connections-slo-to-global-dr) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [Slo To Global DR](#vn-config-global-network-list-global-network-connections-slo-to-global-dr) below.
 
-#### Vn Config Global Network List Global Network Connections Sli To Global DR
+#### Vn Config Global Network List Global Network Connections SLI To Global DR
 
 A [`sli_to_global_dr`](#vn-config-global-network-list-global-network-connections-sli-to-global-dr) block (within [`vn_config.global_network_list.global_network_connections`](#vn-config-global-network-list-global-network-connections)) supports the following:
 
 <a id="vn-config-global-network-list-global-network-connections-sli-to-global-dr-global-vn"></a>&#x2022; [`global_vn`](#vn-config-global-network-list-global-network-connections-sli-to-global-dr-global-vn) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Global Vn](#vn-config-global-network-list-global-network-connections-sli-to-global-dr-global-vn) below.
 
-#### Vn Config Global Network List Global Network Connections Sli To Global DR Global Vn
+#### Vn Config Global Network List Global Network Connections SLI To Global DR Global Vn
 
 A [`global_vn`](#vn-config-global-network-list-global-network-connections-sli-to-global-dr-global-vn) block (within [`vn_config.global_network_list.global_network_connections.sli_to_global_dr`](#vn-config-global-network-list-global-network-connections-sli-to-global-dr)) supports the following:
 
@@ -923,13 +923,13 @@ An [`ipv6`](#vn-config-outside-static-routes-static-route-list-custom-static-rou
 
 <a id="vn-config-outside-static-routes-static-route-list-custom-static-route-subnets-ipv6-prefix"></a>&#x2022; [`prefix`](#vn-config-outside-static-routes-static-route-list-custom-static-route-subnets-ipv6-prefix) - Optional String<br>Prefix. Prefix part of the IPv6 subnet given in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' e.g. '2001:db8:0:0:0:2:0:0' The address can be compacted by suppressing zeros e.g. '2001:db8::2::'
 
-#### Vpc Attachments
+#### VPC Attachments
 
 A [`vpc_attachments`](#vpc-attachments) block supports the following:
 
-<a id="vpc-attachments-vpc-list"></a>&#x2022; [`vpc_list`](#vpc-attachments-vpc-list) - Optional Block<br>VPC List. List of VPC attachments to transit gateway<br>See [Vpc List](#vpc-attachments-vpc-list) below.
+<a id="vpc-attachments-vpc-list"></a>&#x2022; [`vpc_list`](#vpc-attachments-vpc-list) - Optional Block<br>VPC List. List of VPC attachments to transit gateway<br>See [VPC List](#vpc-attachments-vpc-list) below.
 
-#### Vpc Attachments Vpc List
+#### VPC Attachments VPC List
 
 A [`vpc_list`](#vpc-attachments-vpc-list) block (within [`vpc_attachments`](#vpc-attachments)) supports the following:
 

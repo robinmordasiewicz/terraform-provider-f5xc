@@ -152,7 +152,7 @@ An [`exclude_signature_contexts`](#waf-exclusion-rules-app-firewall-detection-co
 
 <a id="waf-exclusion-rules-app-firewall-detection-control-exclude-signature-contexts-context-name"></a>&#x2022; [`context_name`](#waf-exclusion-rules-app-firewall-detection-control-exclude-signature-contexts-context-name) - Optional String<br>Context Name. Relevant only for contexts: Header, Cookie and Parameter. Name of the Context that the WAF Exclusion Rules will check. Wildcard matching can be used by prefixing or suffixing the context name with an wildcard asterisk (*)
 
-<a id="waf-exclusion-rules-app-firewall-detection-control-exclude-signature-contexts-signature-id"></a>&#x2022; [`signature_id`](#waf-exclusion-rules-app-firewall-detection-control-exclude-signature-contexts-signature-id) - Optional Number<br>SignatureID. The allowed values for signature id are 0 and in the range of 200000001-299999999. 0 implies that all signatures will be excluded for the specified context
+<a id="waf-exclusion-rules-app-firewall-detection-control-exclude-signature-contexts-signature-id"></a>&#x2022; [`signature_id`](#waf-exclusion-rules-app-firewall-detection-control-exclude-signature-contexts-signature-id) - Optional Number<br>SignatureID. The allowed values for signature ID are 0 and in the range of 200000001-299999999. 0 implies that all signatures will be excluded for the specified context
 
 #### WAF Exclusion Rules App Firewall Detection Control Exclude Violation Contexts
 

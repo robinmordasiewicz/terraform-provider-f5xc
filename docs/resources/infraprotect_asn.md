@@ -9,15 +9,15 @@ description: |-
 
 Manages DDoS transit ASN in F5 Distributed Cloud.
 
-~> **Note** Please refer to [Infraprotect Asn API docs](https://docs.cloud.f5.com/docs-v2/api/infraprotect-asn) to learn more.
+~> **Note** Please refer to [Infraprotect ASN API docs](https://docs.cloud.f5.com/docs-v2/api/infraprotect-asn) to learn more.
 
 ## Example Usage
 
 ```terraform
-# Infraprotect Asn Resource Example
+# Infraprotect ASN Resource Example
 # Manages DDoS transit ASN in F5 Distributed Cloud.
 
-# Basic Infraprotect Asn configuration
+# Basic Infraprotect ASN configuration
 resource "f5xc_infraprotect_asn" "example" {
   name      = "example-infraprotect-asn"
   namespace = "staging"

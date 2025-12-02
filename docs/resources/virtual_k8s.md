@@ -9,15 +9,15 @@ description: |-
 
 Manages virtual_k8s will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 
-~> **Note** Please refer to [Virtual K8s API docs](https://docs.cloud.f5.com/docs-v2/api/virtual-k8s) to learn more.
+~> **Note** Please refer to [Virtual K8S API docs](https://docs.cloud.f5.com/docs-v2/api/virtual-k8s) to learn more.
 
 ## Example Usage
 
 ```terraform
-# Virtual K8s Resource Example
+# Virtual K8S Resource Example
 # Manages virtual_k8s will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 
-# Basic Virtual K8s configuration
+# Basic Virtual K8S configuration
 resource "f5xc_virtual_k8s" "example" {
   name      = "example-virtual-k8s"
   namespace = "staging"
@@ -76,7 +76,7 @@ resource "f5xc_virtual_k8s" "example" {
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
-<a id="vsite-refs"></a>&#x2022; [`vsite_refs`](#vsite-refs) - Optional Block<br>Virtual Sites. Reference to virtual-sites Default virtual-site of the Virtual K8s object. If no virtual-site is specified in the Kubernetes API resource object annotations via ves.io/virtual-sites, then this virtual-site is used select sites on which to instantiate the Kubernetes API resource object<br>See [Vsite Refs](#vsite-refs) below for details.
+<a id="vsite-refs"></a>&#x2022; [`vsite_refs`](#vsite-refs) - Optional Block<br>Virtual Sites. Reference to virtual-sites Default virtual-site of the Virtual K8S object. If no virtual-site is specified in the Kubernetes API resource object annotations via ves.io/virtual-sites, then this virtual-site is used select sites on which to instantiate the Kubernetes API resource object<br>See [Vsite Refs](#vsite-refs) below for details.
 
 ### Attributes Reference
 

@@ -1,7 +1,7 @@
-# K8s Pod Security Admission Resource Example
+# K8S Pod Security Admission Resource Example
 # Manages k8s_pod_security_admission will create the object in the storage backend in F5 Distributed Cloud.
 
-# Basic K8s Pod Security Admission configuration
+# Basic K8S Pod Security Admission configuration
 resource "f5xc_k8s_pod_security_admission" "example" {
   name      = "example-k8s-pod-security-admission"
   namespace = "staging"

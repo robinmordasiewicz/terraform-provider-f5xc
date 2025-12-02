@@ -69,8 +69,8 @@ resource "f5xc_network_connector" "example" {
 <br><br>&#x2022; <a id="enable-forward-proxy"></a>[`enable_forward_proxy`](#enable-forward-proxy) - Optional Block<br>Forward Proxy Configuration. Fine tune forward proxy behavior Few configurations allowed are White listed ports and IP prefixes: Forward proxy does application protocol detection and server name(SNI) detection by peeking into the traffic on the incoming downstream connection. Few protocols doesn't have client sending the first data. In such cases, protocol and SNI detection fails. This configuration allows, skipping protocol and SNI detection for whitelisted IP-prefix-list and ports connection_timeout: The timeout for new network connections to upstream server. max_connect_attempts: Maximum number of attempts made to make new network connection to upstream server<br>See [Enable Forward Proxy](#enable-forward-proxy) below for details.
 
 -> **One of the following:**
-&#x2022; <a id="sli-to-global-dr"></a>[`sli_to_global_dr`](#sli-to-global-dr) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [Sli To Global DR](#sli-to-global-dr) below for details.
-<br><br>&#x2022; <a id="sli-to-slo-snat"></a>[`sli_to_slo_snat`](#sli-to-slo-snat) - Optional Block<br>SNAT Configuration. x-example: '' description<br>See [Sli To Slo Snat](#sli-to-slo-snat) below for details.
+&#x2022; <a id="sli-to-global-dr"></a>[`sli_to_global_dr`](#sli-to-global-dr) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [SLI To Global DR](#sli-to-global-dr) below for details.
+<br><br>&#x2022; <a id="sli-to-slo-snat"></a>[`sli_to_slo_snat`](#sli-to-slo-snat) - Optional Block<br>SNAT Configuration. x-example: '' description<br>See [SLI To Slo Snat](#sli-to-slo-snat) below for details.
 <br><br>&#x2022; <a id="slo-to-global-dr"></a>[`slo_to_global_dr`](#slo-to-global-dr) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [Slo To Global DR](#slo-to-global-dr) below for details.
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
@@ -189,13 +189,13 @@ A [`domain_match`](#enable-forward-proxy-tls-intercept-policy-interception-rules
 
 <a id="enable-forward-proxy-tls-intercept-policy-interception-rules-domain-match-suffix-value"></a>&#x2022; [`suffix_value`](#enable-forward-proxy-tls-intercept-policy-interception-rules-domain-match-suffix-value) - Optional String<br>Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'
 
-#### Sli To Global DR
+#### SLI To Global DR
 
 A [`sli_to_global_dr`](#sli-to-global-dr) block supports the following:
 
 <a id="sli-to-global-dr-global-vn"></a>&#x2022; [`global_vn`](#sli-to-global-dr-global-vn) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Global Vn](#sli-to-global-dr-global-vn) below.
 
-#### Sli To Global DR Global Vn
+#### SLI To Global DR Global Vn
 
 A [`global_vn`](#sli-to-global-dr-global-vn) block (within [`sli_to_global_dr`](#sli-to-global-dr)) supports the following:
 
@@ -205,7 +205,7 @@ A [`global_vn`](#sli-to-global-dr-global-vn) block (within [`sli_to_global_dr`](
 
 <a id="sli-to-global-dr-global-vn-tenant"></a>&#x2022; [`tenant`](#sli-to-global-dr-global-vn-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-#### Sli To Slo Snat
+#### SLI To Slo Snat
 
 A [`sli_to_slo_snat`](#sli-to-slo-snat) block supports the following:
 

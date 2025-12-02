@@ -147,7 +147,7 @@ A [`rules`](#rule-list-rules) block (within [`rule_list`](#rule-list)) supports 
 
 <a id="rule-list-rules-deny"></a>&#x2022; [`deny`](#rule-list-rules-deny) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="rule-list-rules-destination-aws-vpc-ids"></a>&#x2022; [`destination_aws_vpc_ids`](#rule-list-rules-destination-aws-vpc-ids) - Optional Block<br>AWS VPC List. List of VPC Identifiers in AWS<br>See [Destination AWS Vpc Ids](#rule-list-rules-destination-aws-vpc-ids) below.
+<a id="rule-list-rules-destination-aws-vpc-ids"></a>&#x2022; [`destination_aws_vpc_ids`](#rule-list-rules-destination-aws-vpc-ids) - Optional Block<br>AWS VPC List. List of VPC Identifiers in AWS<br>See [Destination AWS VPC Ids](#rule-list-rules-destination-aws-vpc-ids) below.
 
 <a id="rule-list-rules-destination-ip-prefix-set"></a>&#x2022; [`destination_ip_prefix_set`](#rule-list-rules-destination-ip-prefix-set) - Optional Block<br>IP Prefix Set Reference. A list of references to ip_prefix_set objects<br>See [Destination IP Prefix Set](#rule-list-rules-destination-ip-prefix-set) below.
 
@@ -171,7 +171,7 @@ A [`rules`](#rule-list-rules) block (within [`rule_list`](#rule-list)) supports 
 
 <a id="rule-list-rules-protocol-port-range"></a>&#x2022; [`protocol_port_range`](#rule-list-rules-protocol-port-range) - Optional Block<br>Protocol and Port. Protocol and Port ranges<br>See [Protocol Port Range](#rule-list-rules-protocol-port-range) below.
 
-<a id="rule-list-rules-source-aws-vpc-ids"></a>&#x2022; [`source_aws_vpc_ids`](#rule-list-rules-source-aws-vpc-ids) - Optional Block<br>AWS VPC List. List of VPC Identifiers in AWS<br>See [Source AWS Vpc Ids](#rule-list-rules-source-aws-vpc-ids) below.
+<a id="rule-list-rules-source-aws-vpc-ids"></a>&#x2022; [`source_aws_vpc_ids`](#rule-list-rules-source-aws-vpc-ids) - Optional Block<br>AWS VPC List. List of VPC Identifiers in AWS<br>See [Source AWS VPC Ids](#rule-list-rules-source-aws-vpc-ids) below.
 
 <a id="rule-list-rules-source-ip-prefix-set"></a>&#x2022; [`source_ip_prefix_set`](#rule-list-rules-source-ip-prefix-set) - Optional Block<br>IP Prefix Set Reference. A list of references to ip_prefix_set objects<br>See [Source IP Prefix Set](#rule-list-rules-source-ip-prefix-set) below.
 
@@ -191,7 +191,7 @@ An [`applications`](#rule-list-rules-applications) block (within [`rule_list.rul
 
 <a id="rule-list-rules-applications-applications"></a>&#x2022; [`applications`](#rule-list-rules-applications-applications) - Optional List  Defaults to `APPLICATION_HTTP`<br>Possible values are `APPLICATION_HTTP`, `APPLICATION_HTTPS`, `APPLICATION_SNMP`, `APPLICATION_DNS`<br>Application Protocols. Application protocols like HTTP, SNMP
 
-#### Rule List Rules Destination AWS Vpc Ids
+#### Rule List Rules Destination AWS VPC Ids
 
 A [`destination_aws_vpc_ids`](#rule-list-rules-destination-aws-vpc-ids) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
@@ -267,7 +267,7 @@ A [`protocol_port_range`](#rule-list-rules-protocol-port-range) block (within [`
 
 <a id="rule-list-rules-protocol-port-range-protocol"></a>&#x2022; [`protocol`](#rule-list-rules-protocol-port-range-protocol) - Optional String<br>Protocol. Protocol in IP packet to be used as match criteria Values are TCP, UDP, and ICMP
 
-#### Rule List Rules Source AWS Vpc Ids
+#### Rule List Rules Source AWS VPC Ids
 
 A [`source_aws_vpc_ids`](#rule-list-rules-source-aws-vpc-ids) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 

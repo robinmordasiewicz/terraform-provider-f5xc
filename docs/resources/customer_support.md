@@ -108,7 +108,7 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`comments`](#comments) block supports the following:
 
-<a id="comments-attachment-ids"></a>&#x2022; [`attachment_ids`](#comments-attachment-ids) - Optional List<br>Attachment IDs. Third party id of any attachment related to this ticket comment
+<a id="comments-attachment-ids"></a>&#x2022; [`attachment_ids`](#comments-attachment-ids) - Optional List<br>Attachment IDs. Third party ID of any attachment related to this ticket comment
 
 <a id="comments-attachments-info"></a>&#x2022; [`attachments_info`](#comments-attachments-info) - Optional Block<br>Attachments details. Information about any attachments (such as screenshots, plain text files) the comment can have<br>See [Attachments Info](#comments-attachments-info) below.
 

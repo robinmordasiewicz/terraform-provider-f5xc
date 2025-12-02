@@ -23,49 +23,44 @@ import (
 // 1. Basic Lifecycle Test - Create, Read, Update, Delete with API verification
 // 2. Import Test - Verify import produces identical state
 //
-// Token resources require a namespace to exist first. All tests create
-// a dedicated namespace and use time_sleep to ensure namespace is ready
-// before creating the token.
+// IMPORTANT: Tokens can ONLY be created in the "system" namespace.
+// Attempting to create tokens in custom namespaces will result in BAD_REQUEST.
+// All test configurations use namespace = "system".
 //
 // Run with:
-//   TF_ACC=1 F5XC_API_URL="..." F5XC_API_P12_FILE="..." F5XC_P12_PASSWORD="..." \
-//   go test -v ./internal/provider/ -run TestAccTokenResource -timeout 30m
+//
+//	TF_ACC=1 F5XC_API_URL="..." F5XC_API_P12_FILE="..." F5XC_P12_PASSWORD="..." \
+//	go test -v ./internal/provider/ -run TestAccTokenResource -timeout 30m
+//
 // =============================================================================
 
 // -----------------------------------------------------------------------------
 // Test 1: Basic Lifecycle Test
 // Verifies: Create, Read, Update, Delete operations with API verification
-// Pattern: Basic lifecycle test with custom namespace
+// Pattern: Basic lifecycle test using system namespace
 // -----------------------------------------------------------------------------
 
 func TestAccTokenResource_basic(t *testing.T) {
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
-	// Skip: Token creation returns BAD_REQUEST - may require special tenant permissions
-	// or specific namespace configuration for site registration tokens
-	t.Skip("Skipping: token resource requires investigation - API returns BAD_REQUEST")
-
-	nsName := acctest.RandomName("tf-acc-test-ns")
+	// Tokens can ONLY be created in the "system" namespace
 	tokenName := acctest.RandomName("tf-acc-test-token")
 	resourceName := "f5xc_token.test"
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {Source: "hashicorp/time"},
-		},
 		Steps: []resource.TestStep{
-			// Step 1: Create token with minimal configuration
+			// Step 1: Create token with minimal configuration in system namespace
 			{
-				Config: testAccTokenResourceConfig_basic(nsName, tokenName),
+				Config: testAccTokenResourceConfig_basic(tokenName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					// Verify resource exists in Terraform state
 					acctest.CheckResourceExists(resourceName),
 					// Verify state attributes
 					resource.TestCheckResourceAttr(resourceName, "name", tokenName),
-					resource.TestCheckResourceAttr(resourceName, "namespace", nsName),
+					resource.TestCheckResourceAttr(resourceName, "namespace", "system"),
 					resource.TestCheckResourceAttrSet(resourceName, "id"),
 				),
 			},
@@ -91,7 +86,7 @@ func TestAccTokenResource_allAttributes(t *testing.T) {
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
-	nsName := acctest.RandomName("tf-acc-test-ns")
+	// Tokens can ONLY be created in the "system" namespace
 	tokenName := acctest.RandomName("tf-acc-test-token")
 	resourceName := "f5xc_token.test"
 	description := "Comprehensive acceptance test token"
@@ -99,17 +94,14 @@ func TestAccTokenResource_allAttributes(t *testing.T) {
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {Source: "hashicorp/time"},
-		},
 		Steps: []resource.TestStep{
 			{
-				Config: testAccTokenResourceConfig_allAttributes(nsName, tokenName, description),
+				Config: testAccTokenResourceConfig_allAttributes(tokenName, description),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckResourceExists(resourceName),
 					// Verify all attributes in Terraform state
 					resource.TestCheckResourceAttr(resourceName, "name", tokenName),
-					resource.TestCheckResourceAttr(resourceName, "namespace", nsName),
+					resource.TestCheckResourceAttr(resourceName, "namespace", "system"),
 					resource.TestCheckResourceAttr(resourceName, "description", description),
 					resource.TestCheckResourceAttr(resourceName, "labels.environment", "test"),
 					resource.TestCheckResourceAttr(resourceName, "labels.managed_by", "terraform-acceptance-test"),
@@ -139,20 +131,17 @@ func TestAccTokenResource_updateLabels(t *testing.T) {
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
-	nsName := acctest.RandomName("tf-acc-test-ns")
+	// Tokens can ONLY be created in the "system" namespace
 	tokenName := acctest.RandomName("tf-acc-test-token")
 	resourceName := "f5xc_token.test"
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {Source: "hashicorp/time"},
-		},
 		Steps: []resource.TestStep{
 			// Step 1: Create with initial labels
 			{
-				Config: testAccTokenResourceConfig_withLabels(nsName, tokenName, "test", "terraform"),
+				Config: testAccTokenResourceConfig_withLabels(tokenName, "test", "terraform"),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckResourceExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "labels.environment", "test"),
@@ -161,7 +150,7 @@ func TestAccTokenResource_updateLabels(t *testing.T) {
 			},
 			// Step 2: Update labels
 			{
-				Config: testAccTokenResourceConfig_withLabels(nsName, tokenName, "staging", "terraform-updated"),
+				Config: testAccTokenResourceConfig_withLabels(tokenName, "staging", "terraform-updated"),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckResourceExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "labels.environment", "staging"),
@@ -170,7 +159,7 @@ func TestAccTokenResource_updateLabels(t *testing.T) {
 			},
 			// Step 3: Remove all labels
 			{
-				Config: testAccTokenResourceConfig_basic(nsName, tokenName),
+				Config: testAccTokenResourceConfig_basic(tokenName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckResourceExists(resourceName),
 					resource.TestCheckNoResourceAttr(resourceName, "labels.environment"),
@@ -191,20 +180,17 @@ func TestAccTokenResource_updateDescription(t *testing.T) {
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
-	nsName := acctest.RandomName("tf-acc-test-ns")
+	// Tokens can ONLY be created in the "system" namespace
 	tokenName := acctest.RandomName("tf-acc-test-token")
 	resourceName := "f5xc_token.test"
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {Source: "hashicorp/time"},
-		},
 		Steps: []resource.TestStep{
 			// Step 1: Create without description
 			{
-				Config: testAccTokenResourceConfig_basic(nsName, tokenName),
+				Config: testAccTokenResourceConfig_basic(tokenName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckResourceExists(resourceName),
 					resource.TestCheckNoResourceAttr(resourceName, "description"),
@@ -212,7 +198,7 @@ func TestAccTokenResource_updateDescription(t *testing.T) {
 			},
 			// Step 2: Add description
 			{
-				Config: testAccTokenResourceConfig_withDescription(nsName, tokenName, "Initial description"),
+				Config: testAccTokenResourceConfig_withDescription(tokenName, "Initial description"),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckResourceExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "description", "Initial description"),
@@ -220,7 +206,7 @@ func TestAccTokenResource_updateDescription(t *testing.T) {
 			},
 			// Step 3: Update description
 			{
-				Config: testAccTokenResourceConfig_withDescription(nsName, tokenName, "Updated description"),
+				Config: testAccTokenResourceConfig_withDescription(tokenName, "Updated description"),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckResourceExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "description", "Updated description"),
@@ -228,7 +214,7 @@ func TestAccTokenResource_updateDescription(t *testing.T) {
 			},
 			// Step 4: Remove description
 			{
-				Config: testAccTokenResourceConfig_basic(nsName, tokenName),
+				Config: testAccTokenResourceConfig_basic(tokenName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckResourceExists(resourceName),
 				),
@@ -247,20 +233,17 @@ func TestAccTokenResource_updateAnnotations(t *testing.T) {
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
-	nsName := acctest.RandomName("tf-acc-test-ns")
+	// Tokens can ONLY be created in the "system" namespace
 	tokenName := acctest.RandomName("tf-acc-test-token")
 	resourceName := "f5xc_token.test"
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {Source: "hashicorp/time"},
-		},
 		Steps: []resource.TestStep{
 			// Step 1: Create with annotations
 			{
-				Config: testAccTokenResourceConfig_withAnnotations(nsName, tokenName, "value1", "value2"),
+				Config: testAccTokenResourceConfig_withAnnotations(tokenName, "value1", "value2"),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckResourceExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "annotations.key1", "value1"),
@@ -269,7 +252,7 @@ func TestAccTokenResource_updateAnnotations(t *testing.T) {
 			},
 			// Step 2: Update annotations
 			{
-				Config: testAccTokenResourceConfig_withAnnotations(nsName, tokenName, "updated1", "updated2"),
+				Config: testAccTokenResourceConfig_withAnnotations(tokenName, "updated1", "updated2"),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckResourceExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "annotations.key1", "updated1"),
@@ -278,7 +261,7 @@ func TestAccTokenResource_updateAnnotations(t *testing.T) {
 			},
 			// Step 3: Remove annotations
 			{
-				Config: testAccTokenResourceConfig_basic(nsName, tokenName),
+				Config: testAccTokenResourceConfig_basic(tokenName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckResourceExists(resourceName),
 				),
@@ -304,47 +287,28 @@ func testAccTokenResourceImportStateIdFunc(resourceName string) resource.ImportS
 
 // =============================================================================
 // Test Configuration Functions
+// All configurations use namespace = "system" as tokens can only be created there
 // =============================================================================
 
-func testAccTokenResourceConfig_basic(nsName, tokenName string) string {
+func testAccTokenResourceConfig_basic(tokenName string) string {
 	return acctest.ConfigCompose(
 		acctest.ProviderConfig(),
 		fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
-resource "time_sleep" "wait_for_namespace" {
-  depends_on      = [f5xc_namespace.test]
-  create_duration = "5s"
-}
-
 resource "f5xc_token" "test" {
-  depends_on = [time_sleep.wait_for_namespace]
-  name       = %[2]q
-  namespace  = f5xc_namespace.test.name
+  name      = %[1]q
+  namespace = "system"
 }
-`, nsName, tokenName))
+`, tokenName))
 }
 
-func testAccTokenResourceConfig_allAttributes(nsName, tokenName, description string) string {
+func testAccTokenResourceConfig_allAttributes(tokenName, description string) string {
 	return acctest.ConfigCompose(
 		acctest.ProviderConfig(),
 		fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
-resource "time_sleep" "wait_for_namespace" {
-  depends_on      = [f5xc_namespace.test]
-  create_duration = "5s"
-}
-
 resource "f5xc_token" "test" {
-  depends_on  = [time_sleep.wait_for_namespace]
-  name        = %[2]q
-  namespace   = f5xc_namespace.test.name
-  description = %[3]q
+  name        = %[1]q
+  namespace   = "system"
+  description = %[2]q
 
   labels = {
     environment = "test"
@@ -356,79 +320,49 @@ resource "f5xc_token" "test" {
     owner   = "ci-cd"
   }
 }
-`, nsName, tokenName, description))
+`, tokenName, description))
 }
 
-func testAccTokenResourceConfig_withLabels(nsName, tokenName, environment, managedBy string) string {
+func testAccTokenResourceConfig_withLabels(tokenName, environment, managedBy string) string {
 	return acctest.ConfigCompose(
 		acctest.ProviderConfig(),
 		fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
-resource "time_sleep" "wait_for_namespace" {
-  depends_on      = [f5xc_namespace.test]
-  create_duration = "5s"
-}
-
 resource "f5xc_token" "test" {
-  depends_on = [time_sleep.wait_for_namespace]
-  name       = %[2]q
-  namespace  = f5xc_namespace.test.name
+  name      = %[1]q
+  namespace = "system"
 
   labels = {
-    environment = %[3]q
-    managed_by  = %[4]q
+    environment = %[2]q
+    managed_by  = %[3]q
   }
 }
-`, nsName, tokenName, environment, managedBy))
+`, tokenName, environment, managedBy))
 }
 
-func testAccTokenResourceConfig_withDescription(nsName, tokenName, description string) string {
+func testAccTokenResourceConfig_withDescription(tokenName, description string) string {
 	return acctest.ConfigCompose(
 		acctest.ProviderConfig(),
 		fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
-resource "time_sleep" "wait_for_namespace" {
-  depends_on      = [f5xc_namespace.test]
-  create_duration = "5s"
-}
-
 resource "f5xc_token" "test" {
-  depends_on  = [time_sleep.wait_for_namespace]
-  name        = %[2]q
-  namespace   = f5xc_namespace.test.name
-  description = %[3]q
+  name        = %[1]q
+  namespace   = "system"
+  description = %[2]q
 }
-`, nsName, tokenName, description))
+`, tokenName, description))
 }
 
-func testAccTokenResourceConfig_withAnnotations(nsName, tokenName, value1, value2 string) string {
+func testAccTokenResourceConfig_withAnnotations(tokenName, value1, value2 string) string {
 	return acctest.ConfigCompose(
 		acctest.ProviderConfig(),
 		fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
-resource "time_sleep" "wait_for_namespace" {
-  depends_on      = [f5xc_namespace.test]
-  create_duration = "5s"
-}
-
 resource "f5xc_token" "test" {
-  depends_on = [time_sleep.wait_for_namespace]
-  name       = %[2]q
-  namespace  = f5xc_namespace.test.name
+  name      = %[1]q
+  namespace = "system"
 
   annotations = {
-    key1 = %[3]q
-    key2 = %[4]q
+    key1 = %[2]q
+    key2 = %[3]q
   }
 }
-`, nsName, tokenName, value1, value2))
+`, tokenName, value1, value2))
 }

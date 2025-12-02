@@ -105,9 +105,26 @@ func DetectAuthMethod() AuthMethod {
 	return AuthMethodNone
 }
 
-// PreCheck validates that required environment variables are set before running tests
+// PreCheck validates that required environment variables are set before running tests.
+// It also logs the test category as REAL_API for reporting purposes.
+// When F5XC_MOCK_MODE is set, it automatically configures the environment to use
+// the global mock server instead of requiring real credentials.
 func PreCheck(t *testing.T) {
 	t.Helper()
+
+	// If mock mode is enabled, configure environment to use mock server
+	// This must happen before any credential checks
+	EnsureMockModeConfigured()
+
+	// Log test category for reporting
+	if IsMockMode() {
+		LogTestCategory(t, TestCategoryMock)
+		t.Logf("Using mock server mode (F5XC_MOCK_MODE=1)")
+		return // Skip credential validation for mock mode
+	}
+
+	// Log test category for reporting - this is a real API test
+	LogTestCategory(t, TestCategoryReal)
 
 	// API URL is always required
 	if os.Getenv(EnvF5XCURL) == "" {
@@ -136,9 +153,15 @@ func PreCheck(t *testing.T) {
 	}
 }
 
-// SkipIfNotAccTest skips the test if TF_ACC is not set
+// SkipIfNotAccTest skips the test if TF_ACC is not set and mock mode is not enabled.
+// When F5XC_MOCK_MODE is set, tests run without requiring TF_ACC.
 func SkipIfNotAccTest(t *testing.T) {
 	t.Helper()
+
+	// Mock mode doesn't require TF_ACC
+	if IsMockMode() {
+		return
+	}
 
 	if os.Getenv(EnvTFAccTest) == "" {
 		t.Skip("Acceptance tests skipped unless TF_ACC is set")

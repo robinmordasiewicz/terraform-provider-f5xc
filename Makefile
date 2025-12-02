@@ -59,6 +59,13 @@ help:
 	@echo "  For SAFE multi-user cleanup, use CleanupTracked() in your test code:"
 	@echo "    defer acctest.CleanupTracked()  // Only deletes resources THIS test created"
 	@echo ""
+	@echo "API Default Discovery (Issue #327):"
+	@echo "  make discover-defaults  - Discover API defaults for all resources"
+	@echo "  make discover-defaults-resource RESOURCE=xxx - Discover for specific resource"
+	@echo "  make validate-defaults  - Validate stored defaults against current API"
+	@echo "  make generate-mock-fixtures - Generate mock fixtures from defaults"
+	@echo "  make discover-all       - Full pipeline: discover → generate → test"
+	@echo ""
 	@echo "Environment Variables:"
 	@echo "  TF_ACC=1           - Enable real acceptance tests"
 	@echo "  F5XC_MOCK_MODE=1   - Enable mock server tests"
@@ -288,3 +295,81 @@ test-report-md:
 clean-test-output:
 	@echo "Cleaning test output files..."
 	rm -f .test-output-*.txt .test-json-*.txt test-report.md test-report.json
+
+# =============================================================================
+# API Default Discovery (Issue #327)
+# =============================================================================
+# These targets help discover and maintain API default values for resources.
+# The discovery process requires VPN access to the F5 XC staging environment.
+#
+# Local Development:
+#   1. Connect to VPN
+#   2. Set environment variables (F5XC_API_URL, F5XC_API_P12_FILE, F5XC_P12_PASSWORD)
+#   3. Run: make discover-defaults
+#
+# CI/CD Note:
+#   The discover-defaults.yml workflow uses self-hosted runners with VPN access.
+#   Public GitHub runners cannot access the staging environment.
+
+.PHONY: discover-defaults discover-defaults-resource validate-defaults generate-mock-fixtures
+
+# Discover API defaults for all resources
+# Requires: VPN access + F5XC_API_URL + F5XC_API_P12_FILE + F5XC_P12_PASSWORD
+discover-defaults:
+	@echo "Discovering API defaults for all resources..."
+	@echo "This requires VPN access to the F5 XC staging environment."
+	@echo ""
+	@if [ -z "$$F5XC_API_URL" ]; then \
+		echo "Error: F5XC_API_URL not set"; \
+		echo "Set F5XC_API_URL, F5XC_API_P12_FILE, and F5XC_P12_PASSWORD"; \
+		exit 1; \
+	fi
+	$(GO) run $(TOOLS_DIR)/discover-defaults.go -all
+	@echo ""
+	@echo "Defaults saved to $(TOOLS_DIR)/api-defaults.json"
+	@echo "Run 'make generate-mock-fixtures' to update mock fixtures"
+
+# Discover API defaults for a specific resource
+# Usage: make discover-defaults-resource RESOURCE=namespace
+discover-defaults-resource:
+	@if [ -z "$(RESOURCE)" ]; then \
+		echo "Error: RESOURCE variable not set"; \
+		echo "Usage: make discover-defaults-resource RESOURCE=namespace"; \
+		exit 1; \
+	fi
+	@if [ -z "$$F5XC_API_URL" ]; then \
+		echo "Error: F5XC_API_URL not set"; \
+		exit 1; \
+	fi
+	$(GO) run $(TOOLS_DIR)/discover-defaults.go -resource=$(RESOURCE)
+
+# Validate stored defaults against current API
+# Compares tools/api-defaults.json against live API responses
+validate-defaults:
+	@echo "Validating stored API defaults..."
+	@if [ -z "$$F5XC_API_URL" ]; then \
+		echo "Error: F5XC_API_URL not set"; \
+		exit 1; \
+	fi
+	$(GO) run $(TOOLS_DIR)/discover-defaults.go -validate
+	@echo "Validation complete"
+
+# Generate mock fixtures from discovered defaults
+# This updates internal/mocks/generated_defaults.go
+generate-mock-fixtures:
+	@echo "Generating mock fixtures from API defaults..."
+	@if [ ! -f "$(TOOLS_DIR)/api-defaults.json" ]; then \
+		echo "Error: $(TOOLS_DIR)/api-defaults.json not found"; \
+		echo "Run 'make discover-defaults' first"; \
+		exit 1; \
+	fi
+	$(GO) run $(TOOLS_DIR)/generate-mock-fixtures.go
+	$(GOFMT) -s -w internal/mocks/generated_defaults.go
+	@echo ""
+	@echo "Mock fixtures updated. Run 'make test' to verify."
+
+# Full discovery pipeline: discover → generate fixtures → test
+discover-all: discover-defaults generate-mock-fixtures test
+	@echo ""
+	@echo "Full discovery pipeline complete"
+	@echo "Review changes and commit if satisfactory"

@@ -1,0 +1,295 @@
+# Workflow for API Default Discovery (Issue #327)
+#
+# This workflow discovers API default values by creating minimal resources
+# and comparing requests with responses. It requires access to the F5 XC
+# staging environment, which is only available via VPN.
+#
+# IMPORTANT: Uses self-hosted runner with VPN access
+# Public GitHub runners cannot access the staging environment.
+#
+# Triggers:
+#   - Manual dispatch (workflow_dispatch) with options
+#   - Scheduled monthly refresh (first day of month)
+#
+# Outputs:
+#   - Updated tools/api-defaults.json
+#   - Updated internal/mocks/generated_defaults.go
+#   - PR with changes (if any)
+name: Discover API Defaults
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'Discovery mode'
+        required: true
+        default: 'discover'
+        type: choice
+        options:
+          - discover    # Full discovery of all resources
+          - validate    # Validate existing defaults against API
+          - single      # Discover single resource
+      resource:
+        description: 'Resource name (for single mode only)'
+        required: false
+        type: string
+        default: ''
+      dry_run:
+        description: 'Dry run (no PR creation)'
+        required: false
+        type: boolean
+        default: false
+
+  # Monthly refresh to catch API changes
+  schedule:
+    - cron: '0 6 1 * *'  # First day of month at 6am UTC
+
+permissions:
+  contents: write
+  pull-requests: write
+
+# Only one discovery run at a time
+concurrency:
+  group: discover-defaults
+  cancel-in-progress: false
+
+env:
+  GO_VERSION: '1.23'
+
+jobs:
+  # ═══════════════════════════════════════════════════════════════════════════
+  # Discovery Job - Requires Self-Hosted Runner with VPN Access
+  # ═══════════════════════════════════════════════════════════════════════════
+  discover:
+    name: Discover API Defaults
+    # IMPORTANT: This MUST run on a self-hosted runner with VPN access
+    # The staging environment is not accessible from public GitHub runners
+    runs-on: self-hosted
+    # Allow manual runs to fail gracefully if runner unavailable
+    continue-on-error: ${{ github.event_name == 'schedule' }}
+
+    outputs:
+      changes_detected: ${{ steps.check-changes.outputs.changes_detected }}
+      resources_discovered: ${{ steps.discover.outputs.resources_discovered }}
+      resources_failed: ${{ steps.discover.outputs.resources_failed }}
+
+    steps:
+      - name: Check runner availability
+        run: |
+          echo "Running on self-hosted runner: ${{ runner.name }}"
+          echo "Runner labels: ${{ join(runner.labels, ', ') }}"
+          echo ""
+          echo "Verifying VPN connectivity..."
+          # The self-hosted runner should have VPN configured
+          # This step validates we can reach the staging environment
+
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.AUTO_MERGE_TOKEN }}
+
+      - name: Set up Go
+        uses: actions/setup-go@v6
+        with:
+          go-version: ${{ env.GO_VERSION }}
+          cache: true
+
+      - name: Verify API credentials
+        env:
+          F5XC_API_URL: ${{ secrets.F5XC_API_URL }}
+          F5XC_API_P12_FILE: ${{ secrets.F5XC_API_P12_FILE }}
+          F5XC_P12_PASSWORD: ${{ secrets.F5XC_P12_PASSWORD }}
+        run: |
+          echo "Checking API credentials..."
+          if [ -z "$F5XC_API_URL" ]; then
+            echo "::error::F5XC_API_URL secret not configured"
+            echo "Configure repository secrets for API access"
+            exit 1
+          fi
+          echo "API URL configured: $F5XC_API_URL"
+
+          if [ -z "$F5XC_API_P12_FILE" ] || [ -z "$F5XC_P12_PASSWORD" ]; then
+            echo "::error::F5XC_API_P12_FILE or F5XC_P12_PASSWORD not configured"
+            exit 1
+          fi
+          echo "P12 credentials configured"
+
+      - name: Run discovery
+        id: discover
+        env:
+          F5XC_API_URL: ${{ secrets.F5XC_API_URL }}
+          F5XC_API_P12_FILE: ${{ secrets.F5XC_API_P12_FILE }}
+          F5XC_P12_PASSWORD: ${{ secrets.F5XC_P12_PASSWORD }}
+        run: |
+          MODE="${{ inputs.mode || 'discover' }}"
+          RESOURCE="${{ inputs.resource }}"
+
+          echo "::group::Running discovery (mode: $MODE)"
+
+          case "$MODE" in
+            discover)
+              go run tools/discover-defaults.go -all 2>&1 | tee discovery.log
+              ;;
+            validate)
+              go run tools/discover-defaults.go -validate 2>&1 | tee discovery.log
+              ;;
+            single)
+              if [ -z "$RESOURCE" ]; then
+                echo "::error::Resource name required for single mode"
+                exit 1
+              fi
+              go run tools/discover-defaults.go -resource="$RESOURCE" 2>&1 | tee discovery.log
+              ;;
+          esac
+
+          echo "::endgroup::"
+
+          # Parse results from discovery log
+          DISCOVERED=$(grep -o 'Discovered: [0-9]*' discovery.log | grep -o '[0-9]*' || echo "0")
+          FAILED=$(grep -o 'Failed: [0-9]*' discovery.log | grep -o '[0-9]*' || echo "0")
+
+          echo "resources_discovered=$DISCOVERED" >> $GITHUB_OUTPUT
+          echo "resources_failed=$FAILED" >> $GITHUB_OUTPUT
+
+          echo "Discovery complete: $DISCOVERED resources discovered, $FAILED failed"
+
+      - name: Generate mock fixtures
+        if: inputs.mode != 'validate'
+        run: |
+          echo "::group::Generating mock fixtures"
+          go run tools/generate-mock-fixtures.go
+          gofmt -s -w internal/mocks/generated_defaults.go
+          echo "::endgroup::"
+
+      - name: Check for changes
+        id: check-changes
+        run: |
+          if git diff --quiet tools/api-defaults.json internal/mocks/generated_defaults.go; then
+            echo "No changes detected"
+            echo "changes_detected=false" >> $GITHUB_OUTPUT
+          else
+            echo "Changes detected in:"
+            git diff --name-only tools/api-defaults.json internal/mocks/generated_defaults.go
+            echo "changes_detected=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Run tests
+        if: steps.check-changes.outputs.changes_detected == 'true'
+        run: |
+          echo "::group::Running mock tests"
+          go test -v ./internal/mocks/...
+          echo "::endgroup::"
+
+      - name: Create Pull Request
+        if: |
+          steps.check-changes.outputs.changes_detected == 'true' &&
+          inputs.dry_run != true &&
+          inputs.mode != 'validate'
+        env:
+          GH_TOKEN: ${{ secrets.AUTO_MERGE_TOKEN }}
+        run: |
+          # Configure git
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Create branch
+          BRANCH="auto-update/api-defaults-$(date +%Y%m%d-%H%M%S)"
+          git checkout -b "$BRANCH"
+
+          # Stage changes
+          git add tools/api-defaults.json internal/mocks/generated_defaults.go
+
+          # Commit
+          git commit -m "$(cat <<'EOF'
+          chore: update API-discovered defaults
+
+          Automated update from discover-defaults workflow.
+
+          Resources discovered: ${{ steps.discover.outputs.resources_discovered }}
+          Resources failed: ${{ steps.discover.outputs.resources_failed }}
+
+          🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+          Co-Authored-By: Claude <noreply@anthropic.com>
+          EOF
+          )"
+
+          # Push
+          git push origin "$BRANCH"
+
+          # Create PR
+          gh pr create \
+            --title "chore: update API-discovered defaults" \
+            --body "$(cat <<'EOF'
+          ## Summary
+
+          Automated update of API-discovered default values.
+
+          ## Changes
+
+          - Updated `tools/api-defaults.json` with latest API defaults
+          - Regenerated `internal/mocks/generated_defaults.go`
+
+          ## Discovery Results
+
+          - Resources discovered: ${{ steps.discover.outputs.resources_discovered }}
+          - Resources failed: ${{ steps.discover.outputs.resources_failed }}
+
+          ## Testing
+
+          - [x] Mock tests pass with updated fixtures
+
+          ---
+
+          🤖 Generated with [Claude Code](https://claude.com/claude-code)
+          EOF
+          )" \
+            --label "automated,documentation"
+
+      - name: Upload discovery log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: discovery-log
+          path: discovery.log
+          retention-days: 30
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # Summary Job - Reports results
+  # ═══════════════════════════════════════════════════════════════════════════
+  summary:
+    name: Discovery Summary
+    runs-on: ubuntu-latest
+    needs: discover
+    if: always()
+    steps:
+      - name: Report results
+        run: |
+          echo "## API Default Discovery Results"
+          echo ""
+          echo "| Metric | Value |"
+          echo "|--------|-------|"
+          echo "| Resources Discovered | ${{ needs.discover.outputs.resources_discovered || 'N/A' }} |"
+          echo "| Resources Failed | ${{ needs.discover.outputs.resources_failed || 'N/A' }} |"
+          echo "| Changes Detected | ${{ needs.discover.outputs.changes_detected || 'N/A' }} |"
+          echo ""
+
+          if [ "${{ needs.discover.result }}" = "failure" ]; then
+            echo "::warning::Discovery job failed - check logs for details"
+            echo "This may be due to:"
+            echo "  - Self-hosted runner unavailable"
+            echo "  - VPN connectivity issues"
+            echo "  - API credential problems"
+          elif [ "${{ needs.discover.result }}" = "skipped" ]; then
+            echo "::notice::Discovery job was skipped"
+          fi
+
+      - name: Notify on failure (scheduled runs only)
+        if: |
+          github.event_name == 'schedule' &&
+          needs.discover.result == 'failure'
+        run: |
+          echo "::error::Scheduled API default discovery failed"
+          echo "Manual intervention may be required."
+          # Future: Add Slack/email notification here

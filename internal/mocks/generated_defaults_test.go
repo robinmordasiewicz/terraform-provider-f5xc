@@ -18,7 +18,7 @@ func TestApplyDiscoveredDefaults(t *testing.T) {
 			name:         "policer defaults",
 			resourceType: "policer",
 			inputSpec: map[string]interface{}{
-				"burst_size":                10000,
+				"burst_size":                 10000,
 				"committed_information_rate": 10000,
 			},
 			checkFunc: func(t *testing.T, spec map[string]interface{}) {

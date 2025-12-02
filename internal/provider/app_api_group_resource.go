@@ -785,7 +785,7 @@ func (r *AppAPIGroupResource) Update(ctx context.Context, req resource.UpdateReq
 		apiResource.Spec["http_loadbalancer"] = http_loadbalancerMap
 	}
 
-	updated, err := r.client.UpdateAppAPIGroup(ctx, apiResource)
+	_, err := r.client.UpdateAppAPIGroup(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update AppAPIGroup: %s", err))
 		return
@@ -794,18 +794,69 @@ func (r *AppAPIGroupResource) Update(ctx context.Context, req resource.UpdateReq
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetAppAPIGroup(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read AppAPIGroup after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetAppAPIGroup(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
-		}
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if _, ok := apiResource.Spec["bigip_virtual_server"].(map[string]interface{}); ok && isImport && data.BigIPVirtualServer == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.BigIPVirtualServer = &AppAPIGroupBigIPVirtualServerModel{}
 	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["cdn_loadbalancer"].(map[string]interface{}); ok && isImport && data.CDNLoadBalancer == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.CDNLoadBalancer = &AppAPIGroupCDNLoadBalancerModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["elements"].([]interface{}); ok && len(listData) > 0 {
+		var elementsList []AppAPIGroupElementsModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				elementsList = append(elementsList, AppAPIGroupElementsModel{
+					Methods: func() types.List {
+						if v, ok := itemMap["methods"].([]interface{}); ok && len(v) > 0 {
+							var items []string
+							for _, item := range v {
+								if s, ok := item.(string); ok {
+									items = append(items, s)
+								}
+							}
+							listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+							return listVal
+						}
+						return types.ListNull(types.StringType)
+					}(),
+					PathRegex: func() types.String {
+						if v, ok := itemMap["path_regex"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.Elements = elementsList
+	}
+	if _, ok := apiResource.Spec["http_loadbalancer"].(map[string]interface{}); ok && isImport && data.HTTPLoadBalancer == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.HTTPLoadBalancer = &AppAPIGroupHTTPLoadBalancerModel{}
+	}
+	// Normal Read: preserve existing state value
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

@@ -1013,7 +1013,7 @@ func (r *CloudLinkResource) Update(ctx context.Context, req resource.UpdateReque
 		apiResource.Spec["gcp"] = gcpMap
 	}
 
-	updated, err := r.client.UpdateCloudLink(ctx, apiResource)
+	_, err := r.client.UpdateCloudLink(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update CloudLink: %s", err))
 		return
@@ -1022,18 +1022,95 @@ func (r *CloudLinkResource) Update(ctx context.Context, req resource.UpdateReque
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetCloudLink(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read CloudLink after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetCloudLink(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["aws"].(map[string]interface{}); ok && (isImport || data.AWS != nil) {
+		data.AWS = &CloudLinkAWSModel{
+			AWSCred: func() *CloudLinkAWSAWSCredModel {
+				if !isImport && data.AWS != nil && data.AWS.AWSCred != nil {
+					// Normal Read: preserve existing state value
+					return data.AWS.AWSCred
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["aws_cred"].(map[string]interface{}); ok {
+					return &CloudLinkAWSAWSCredModel{
+						Name: func() types.String {
+							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Namespace: func() types.String {
+							if v, ok := nestedBlockData["namespace"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Tenant: func() types.String {
+							if v, ok := nestedBlockData["tenant"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			Byoc: func() *CloudLinkAWSByocModel {
+				if !isImport && data.AWS != nil && data.AWS.Byoc != nil {
+					// Normal Read: preserve existing state value
+					return data.AWS.Byoc
+				}
+				// Import case: read from API
+				if _, ok := blockData["byoc"].(map[string]interface{}); ok {
+					return &CloudLinkAWSByocModel{}
+				}
+				return nil
+			}(),
+			CustomAsn: func() types.Int64 {
+				if v, ok := blockData["custom_asn"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
 		}
 	}
+	if _, ok := apiResource.Spec["disabled"].(map[string]interface{}); ok && isImport && data.Disabled == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Disabled = &CloudLinkEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["enabled"].(map[string]interface{}); ok && (isImport || data.Enabled != nil) {
+		data.Enabled = &CloudLinkEnabledModel{
+			CloudlinkNetworkName: func() types.String {
+				if v, ok := blockData["cloudlink_network_name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["gcp"].(map[string]interface{}); ok && isImport && data.GCP == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.GCP = &CloudLinkGCPModel{}
+	}
+	// Normal Read: preserve existing state value
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

@@ -483,7 +483,7 @@ func (r *IruleResource) Update(ctx context.Context, req resource.UpdateRequest, 
 		apiResource.Spec["irule"] = data.Irule.ValueString()
 	}
 
-	updated, err := r.client.UpdateIrule(ctx, apiResource)
+	_, err := r.client.UpdateIrule(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update Irule: %s", err))
 		return
@@ -492,15 +492,23 @@ func (r *IruleResource) Update(ctx context.Context, req resource.UpdateRequest, 
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetIrule(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read Irule after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
-	if v, ok := updated.Spec["description"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["description"].(string); ok && v != "" {
 		data.DescriptionSpec = types.StringValue(v)
 	} else if data.DescriptionSpec.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.DescriptionSpec = types.StringNull()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["irule"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["irule"].(string); ok && v != "" {
 		data.Irule = types.StringValue(v)
 	} else if data.Irule.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
@@ -508,16 +516,24 @@ func (r *IruleResource) Update(ctx context.Context, req resource.UpdateRequest, 
 	}
 	// If plan had a value, preserve it
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetIrule(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
-		}
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if v, ok := apiResource.Spec["description"].(string); ok && v != "" {
+		data.DescriptionSpec = types.StringValue(v)
+	} else {
+		data.DescriptionSpec = types.StringNull()
 	}
+	if v, ok := apiResource.Spec["irule"].(string); ok && v != "" {
+		data.Irule = types.StringValue(v)
+	} else {
+		data.Irule = types.StringNull()
+	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

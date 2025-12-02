@@ -751,7 +751,7 @@ func (r *IKEPhase2ProfileResource) Update(ctx context.Context, req resource.Upda
 		apiResource.Spec["use_default_keylifetime"] = use_default_keylifetimeMap
 	}
 
-	updated, err := r.client.UpdateIKEPhase2Profile(ctx, apiResource)
+	_, err := r.client.UpdateIKEPhase2Profile(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update IKEPhase2Profile: %s", err))
 		return
@@ -760,18 +760,101 @@ func (r *IKEPhase2ProfileResource) Update(ctx context.Context, req resource.Upda
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetIKEPhase2Profile(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read IKEPhase2Profile after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetIKEPhase2Profile(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if v, ok := apiResource.Spec["authentication_algos"].([]interface{}); ok && len(v) > 0 {
+		var authentication_algosList []string
+		for _, item := range v {
+			if s, ok := item.(string); ok {
+				authentication_algosList = append(authentication_algosList, s)
+			}
+		}
+		listVal, diags := types.ListValueFrom(ctx, types.StringType, authentication_algosList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.AuthenticationAlgos = listVal
+		}
+	} else {
+		data.AuthenticationAlgos = types.ListNull(types.StringType)
+	}
+	if blockData, ok := apiResource.Spec["dh_group_set"].(map[string]interface{}); ok && (isImport || data.DhGroupSet != nil) {
+		data.DhGroupSet = &IKEPhase2ProfileDhGroupSetModel{
+			DhGroups: func() types.List {
+				if v, ok := blockData["dh_groups"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
 		}
 	}
+	if _, ok := apiResource.Spec["disable_pfs"].(map[string]interface{}); ok && isImport && data.DisablePfs == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisablePfs = &IKEPhase2ProfileEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["encryption_algos"].([]interface{}); ok && len(v) > 0 {
+		var encryption_algosList []string
+		for _, item := range v {
+			if s, ok := item.(string); ok {
+				encryption_algosList = append(encryption_algosList, s)
+			}
+		}
+		listVal, diags := types.ListValueFrom(ctx, types.StringType, encryption_algosList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.EncryptionAlgos = listVal
+		}
+	} else {
+		data.EncryptionAlgos = types.ListNull(types.StringType)
+	}
+	if blockData, ok := apiResource.Spec["ike_keylifetime_hours"].(map[string]interface{}); ok && (isImport || data.IKEKeylifetimeHours != nil) {
+		data.IKEKeylifetimeHours = &IKEPhase2ProfileIKEKeylifetimeHoursModel{
+			Duration: func() types.Int64 {
+				if v, ok := blockData["duration"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["ike_keylifetime_minutes"].(map[string]interface{}); ok && (isImport || data.IKEKeylifetimeMinutes != nil) {
+		data.IKEKeylifetimeMinutes = &IKEPhase2ProfileIKEKeylifetimeMinutesModel{
+			Duration: func() types.Int64 {
+				if v, ok := blockData["duration"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["use_default_keylifetime"].(map[string]interface{}); ok && isImport && data.UseDefaultKeylifetime == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.UseDefaultKeylifetime = &IKEPhase2ProfileEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

@@ -507,7 +507,7 @@ func (r *InfraprotectAsnResource) Update(ctx context.Context, req resource.Updat
 		apiResource.Spec["asn"] = data.Asn.ValueInt64()
 	}
 
-	updated, err := r.client.UpdateInfraprotectAsn(ctx, apiResource)
+	_, err := r.client.UpdateInfraprotectAsn(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update InfraprotectAsn: %s", err))
 		return
@@ -516,8 +516,16 @@ func (r *InfraprotectAsnResource) Update(ctx context.Context, req resource.Updat
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetInfraprotectAsn(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read InfraprotectAsn after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
-	if v, ok := updated.Spec["asn"].(float64); ok {
+	if v, ok := fetched.Spec["asn"].(float64); ok {
 		data.Asn = types.Int64Value(int64(v))
 	} else if data.Asn.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
@@ -525,16 +533,29 @@ func (r *InfraprotectAsnResource) Update(ctx context.Context, req resource.Updat
 	}
 	// If plan had a value, preserve it
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetInfraprotectAsn(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
-		}
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if _, ok := apiResource.Spec["bgp_session_disabled"].(map[string]interface{}); ok && isImport && data.BGPSessionDisabled == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.BGPSessionDisabled = &InfraprotectAsnEmptyModel{}
 	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["bgp_session_enabled"].(map[string]interface{}); ok && isImport && data.BGPSessionEnabled == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.BGPSessionEnabled = &InfraprotectAsnEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["asn"].(float64); ok {
+		data.Asn = types.Int64Value(int64(v))
+	} else {
+		data.Asn = types.Int64Null()
+	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

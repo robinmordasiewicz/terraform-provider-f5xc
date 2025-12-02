@@ -520,8 +520,6 @@ func (r *ChildTenantResource) Create(ctx context.Context, req resource.CreateReq
 	}
 
 	data.ID = types.StringValue(apiResource.Metadata.Name)
-	// For resources without namespace in API path, namespace is computed from API response
-	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
 
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
@@ -1055,7 +1053,7 @@ func (r *ChildTenantResource) Update(ctx context.Context, req resource.UpdateReq
 		apiResource.Spec["domain"] = data.Domain.ValueString()
 	}
 
-	updated, err := r.client.UpdateChildTenant(ctx, apiResource)
+	_, err := r.client.UpdateChildTenant(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update ChildTenant: %s", err))
 		return
@@ -1064,15 +1062,23 @@ func (r *ChildTenantResource) Update(ctx context.Context, req resource.UpdateReq
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetChildTenant(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read ChildTenant after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
-	if v, ok := updated.Spec["company_name"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["company_name"].(string); ok && v != "" {
 		data.CompanyName = types.StringValue(v)
 	} else if data.CompanyName.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.CompanyName = types.StringNull()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["domain"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["domain"].(string); ok && v != "" {
 		data.Domain = types.StringValue(v)
 	} else if data.Domain.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
@@ -1080,16 +1086,160 @@ func (r *ChildTenantResource) Update(ctx context.Context, req resource.UpdateReq
 	}
 	// If plan had a value, preserve it
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetChildTenant(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["child_tenant_manager"].(map[string]interface{}); ok && (isImport || data.ChildTenantManager != nil) {
+		data.ChildTenantManager = &ChildTenantChildTenantManagerModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
 		}
 	}
+	if blockData, ok := apiResource.Spec["contact_detail"].(map[string]interface{}); ok && (isImport || data.ContactDetail != nil) {
+		data.ContactDetail = &ChildTenantContactDetailModel{
+			Address1: func() types.String {
+				if v, ok := blockData["address1"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Address2: func() types.String {
+				if v, ok := blockData["address2"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			City: func() types.String {
+				if v, ok := blockData["city"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			ContactType: func() types.String {
+				if v, ok := blockData["contact_type"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Country: func() types.String {
+				if v, ok := blockData["country"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			County: func() types.String {
+				if v, ok := blockData["county"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			PhoneNumber: func() types.String {
+				if v, ok := blockData["phone_number"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			State: func() types.String {
+				if v, ok := blockData["state"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			StateCode: func() types.String {
+				if v, ok := blockData["state_code"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			ZipCode: func() types.String {
+				if v, ok := blockData["zip_code"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["customer_info"].(map[string]interface{}); ok && (isImport || data.CustomerInfo != nil) {
+		data.CustomerInfo = &ChildTenantCustomerInfoModel{
+			AdditionalInfo: func() types.String {
+				if v, ok := blockData["additional_info"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Email: func() types.String {
+				if v, ok := blockData["email"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			FirstName: func() types.String {
+				if v, ok := blockData["first_name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			LastName: func() types.String {
+				if v, ok := blockData["last_name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["tenant_profile"].(map[string]interface{}); ok && (isImport || data.TenantProfile != nil) {
+		data.TenantProfile = &ChildTenantTenantProfileModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if v, ok := apiResource.Spec["company_name"].(string); ok && v != "" {
+		data.CompanyName = types.StringValue(v)
+	} else {
+		data.CompanyName = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["domain"].(string); ok && v != "" {
+		data.Domain = types.StringValue(v)
+	} else {
+		data.Domain = types.StringNull()
+	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
@@ -1137,17 +1287,19 @@ func (r *ChildTenantResource) Delete(ctx context.Context, req resource.DeleteReq
 }
 
 func (r *ChildTenantResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	// Import ID format: name (no namespace for this resource type)
-	name := req.ID
-	if name == "" {
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
 		resp.Diagnostics.AddError(
 			"Invalid Import ID",
-			"Expected import ID to be the resource name, got empty string",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
 		)
 		return
 	}
+	namespace := parts[0]
+	name := parts[1]
 
-	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), "")...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
 	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
 	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

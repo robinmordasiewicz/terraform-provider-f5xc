@@ -483,7 +483,7 @@ func (r *BGPAsnSetResource) Update(ctx context.Context, req resource.UpdateReque
 		}
 	}
 
-	updated, err := r.client.UpdateBGPAsnSet(ctx, apiResource)
+	_, err := r.client.UpdateBGPAsnSet(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update BGPAsnSet: %s", err))
 		return
@@ -492,18 +492,39 @@ func (r *BGPAsnSetResource) Update(ctx context.Context, req resource.UpdateReque
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetBGPAsnSet(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read BGPAsnSet after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetBGPAsnSet(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if v, ok := apiResource.Spec["as_numbers"].([]interface{}); ok && len(v) > 0 {
+		var as_numbersList []int64
+		for _, item := range v {
+			if n, ok := item.(float64); ok {
+				as_numbersList = append(as_numbersList, int64(n))
+			}
 		}
+		listVal, diags := types.ListValueFrom(ctx, types.Int64Type, as_numbersList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.AsNumbers = listVal
+		}
+	} else {
+		data.AsNumbers = types.ListNull(types.Int64Type)
 	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

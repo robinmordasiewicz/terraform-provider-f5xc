@@ -1092,7 +1092,7 @@ func (r *EndpointResource) Update(ctx context.Context, req resource.UpdateReques
 		apiResource.Spec["protocol"] = data.Protocol.ValueString()
 	}
 
-	updated, err := r.client.UpdateEndpoint(ctx, apiResource)
+	_, err := r.client.UpdateEndpoint(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update Endpoint: %s", err))
 		return
@@ -1101,36 +1101,44 @@ func (r *EndpointResource) Update(ctx context.Context, req resource.UpdateReques
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetEndpoint(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read Endpoint after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
-	if v, ok := updated.Spec["dns_name"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["dns_name"].(string); ok && v != "" {
 		data.DNSName = types.StringValue(v)
 	} else if data.DNSName.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.DNSName = types.StringNull()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["health_check_port"].(float64); ok {
+	if v, ok := fetched.Spec["health_check_port"].(float64); ok {
 		data.HealthCheckPort = types.Int64Value(int64(v))
 	} else if data.HealthCheckPort.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.HealthCheckPort = types.Int64Null()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["ip"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["ip"].(string); ok && v != "" {
 		data.IP = types.StringValue(v)
 	} else if data.IP.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.IP = types.StringNull()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["port"].(float64); ok {
+	if v, ok := fetched.Spec["port"].(float64); ok {
 		data.Port = types.Int64Value(int64(v))
 	} else if data.Port.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.Port = types.Int64Null()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["protocol"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["protocol"].(string); ok && v != "" {
 		data.Protocol = types.StringValue(v)
 	} else if data.Protocol.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
@@ -1138,16 +1146,106 @@ func (r *EndpointResource) Update(ctx context.Context, req resource.UpdateReques
 	}
 	// If plan had a value, preserve it
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetEndpoint(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["dns_name_advanced"].(map[string]interface{}); ok && (isImport || data.DNSNameAdvanced != nil) {
+		data.DNSNameAdvanced = &EndpointDNSNameAdvancedModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			RefreshInterval: func() types.Int64 {
+				if v, ok := blockData["refresh_interval"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
 		}
 	}
+	if blockData, ok := apiResource.Spec["service_info"].(map[string]interface{}); ok && (isImport || data.ServiceInfo != nil) {
+		data.ServiceInfo = &EndpointServiceInfoModel{
+			DiscoveryType: func() types.String {
+				if v, ok := blockData["discovery_type"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			ServiceName: func() types.String {
+				if v, ok := blockData["service_name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			ServiceSelector: func() *EndpointServiceInfoServiceSelectorModel {
+				if !isImport && data.ServiceInfo != nil && data.ServiceInfo.ServiceSelector != nil {
+					// Normal Read: preserve existing state value
+					return data.ServiceInfo.ServiceSelector
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["service_selector"].(map[string]interface{}); ok {
+					return &EndpointServiceInfoServiceSelectorModel{
+						Expressions: func() types.List {
+							if v, ok := nestedBlockData["expressions"].([]interface{}); ok && len(v) > 0 {
+								var items []string
+								for _, item := range v {
+									if s, ok := item.(string); ok {
+										items = append(items, s)
+									}
+								}
+								listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+								return listVal
+							}
+							return types.ListNull(types.StringType)
+						}(),
+					}
+				}
+				return nil
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["snat_pool"].(map[string]interface{}); ok && isImport && data.SnatPool == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.SnatPool = &EndpointSnatPoolModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["where"].(map[string]interface{}); ok && isImport && data.Where == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Where = &EndpointWhereModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["dns_name"].(string); ok && v != "" {
+		data.DNSName = types.StringValue(v)
+	} else {
+		data.DNSName = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["health_check_port"].(float64); ok {
+		data.HealthCheckPort = types.Int64Value(int64(v))
+	} else {
+		data.HealthCheckPort = types.Int64Null()
+	}
+	if v, ok := apiResource.Spec["ip"].(string); ok && v != "" {
+		data.IP = types.StringValue(v)
+	} else {
+		data.IP = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["port"].(float64); ok {
+		data.Port = types.Int64Value(int64(v))
+	} else {
+		data.Port = types.Int64Null()
+	}
+	if v, ok := apiResource.Spec["protocol"].(string); ok && v != "" {
+		data.Protocol = types.StringValue(v)
+	} else {
+		data.Protocol = types.StringNull()
+	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

@@ -801,7 +801,7 @@ func (r *VirtualNetworkResource) Update(ctx context.Context, req resource.Update
 		apiResource.Spec["legacy_type"] = data.LegacyType.ValueString()
 	}
 
-	updated, err := r.client.UpdateVirtualNetwork(ctx, apiResource)
+	_, err := r.client.UpdateVirtualNetwork(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update VirtualNetwork: %s", err))
 		return
@@ -810,8 +810,16 @@ func (r *VirtualNetworkResource) Update(ctx context.Context, req resource.Update
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetVirtualNetwork(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read VirtualNetwork after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
-	if v, ok := updated.Spec["legacy_type"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["legacy_type"].(string); ok && v != "" {
 		data.LegacyType = types.StringValue(v)
 	} else if data.LegacyType.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
@@ -819,16 +827,89 @@ func (r *VirtualNetworkResource) Update(ctx context.Context, req resource.Update
 	}
 	// If plan had a value, preserve it
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetVirtualNetwork(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
-		}
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if _, ok := apiResource.Spec["global_network"].(map[string]interface{}); ok && isImport && data.GlobalNetwork == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.GlobalNetwork = &VirtualNetworkEmptyModel{}
 	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["site_local_inside_network"].(map[string]interface{}); ok && isImport && data.SiteLocalInsideNetwork == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.SiteLocalInsideNetwork = &VirtualNetworkEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["site_local_network"].(map[string]interface{}); ok && isImport && data.SiteLocalNetwork == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.SiteLocalNetwork = &VirtualNetworkEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["static_routes"].([]interface{}); ok && len(listData) > 0 {
+		var static_routesList []VirtualNetworkStaticRoutesModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				static_routesList = append(static_routesList, VirtualNetworkStaticRoutesModel{
+					Attrs: func() types.List {
+						if v, ok := itemMap["attrs"].([]interface{}); ok && len(v) > 0 {
+							var items []string
+							for _, item := range v {
+								if s, ok := item.(string); ok {
+									items = append(items, s)
+								}
+							}
+							listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+							return listVal
+						}
+						return types.ListNull(types.StringType)
+					}(),
+					DefaultGateway: func() *VirtualNetworkEmptyModel {
+						if !isImport && len(data.StaticRoutes) > listIdx && data.StaticRoutes[listIdx].DefaultGateway != nil {
+							return &VirtualNetworkEmptyModel{}
+						}
+						return nil
+					}(),
+					IPAddress: func() types.String {
+						if v, ok := itemMap["ip_address"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					IPPrefixes: func() types.List {
+						if v, ok := itemMap["ip_prefixes"].([]interface{}); ok && len(v) > 0 {
+							var items []string
+							for _, item := range v {
+								if s, ok := item.(string); ok {
+									items = append(items, s)
+								}
+							}
+							listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+							return listVal
+						}
+						return types.ListNull(types.StringType)
+					}(),
+					NodeInterface: func() *VirtualNetworkStaticRoutesNodeInterfaceModel {
+						if _, ok := itemMap["node_interface"].(map[string]interface{}); ok {
+							return &VirtualNetworkStaticRoutesNodeInterfaceModel{}
+						}
+						return nil
+					}(),
+				})
+			}
+		}
+		data.StaticRoutes = static_routesList
+	}
+	if v, ok := apiResource.Spec["legacy_type"].(string); ok && v != "" {
+		data.LegacyType = types.StringValue(v)
+	} else {
+		data.LegacyType = types.StringNull()
+	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

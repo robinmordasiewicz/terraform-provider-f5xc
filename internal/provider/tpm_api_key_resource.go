@@ -643,7 +643,7 @@ func (r *TpmAPIKeyResource) Update(ctx context.Context, req resource.UpdateReque
 		apiResource.Spec["need_mtls"] = data.NeedMtls.ValueBool()
 	}
 
-	updated, err := r.client.UpdateTpmAPIKey(ctx, apiResource)
+	_, err := r.client.UpdateTpmAPIKey(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update TpmAPIKey: %s", err))
 		return
@@ -652,8 +652,16 @@ func (r *TpmAPIKeyResource) Update(ctx context.Context, req resource.UpdateReque
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetTpmAPIKey(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read TpmAPIKey after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
-	if v, ok := updated.Spec["need_mtls"].(bool); ok {
+	if v, ok := fetched.Spec["need_mtls"].(bool); ok {
 		data.NeedMtls = types.BoolValue(v)
 	} else if data.NeedMtls.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
@@ -661,16 +669,66 @@ func (r *TpmAPIKeyResource) Update(ctx context.Context, req resource.UpdateReque
 	}
 	// If plan had a value, preserve it
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetTpmAPIKey(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if listData, ok := apiResource.Spec["category_ref"].([]interface{}); ok && len(listData) > 0 {
+		var category_refList []TpmAPIKeyCategoryRefModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				category_refList = append(category_refList, TpmAPIKeyCategoryRefModel{
+					Kind: func() types.String {
+						if v, ok := itemMap["kind"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Namespace: func() types.String {
+						if v, ok := itemMap["namespace"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Tenant: func() types.String {
+						if v, ok := itemMap["tenant"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Uid: func() types.String {
+						if v, ok := itemMap["uid"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.CategoryRef = category_refList
+	}
+	// Top-level Optional bool: preserve prior state to avoid API default drift
+	if !isImport && !data.NeedMtls.IsNull() && !data.NeedMtls.IsUnknown() {
+		// Normal Read: preserve existing state value (do nothing)
+	} else {
+		// Import case, null state, or unknown (after Create): read from API
+		if v, ok := apiResource.Spec["need_mtls"].(bool); ok {
+			data.NeedMtls = types.BoolValue(v)
+		} else {
+			data.NeedMtls = types.BoolNull()
 		}
 	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

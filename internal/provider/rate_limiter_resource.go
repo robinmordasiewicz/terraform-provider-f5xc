@@ -933,7 +933,7 @@ func (r *RateLimiterResource) Update(ctx context.Context, req resource.UpdateReq
 		apiResource.Spec["user_identification"] = user_identificationList
 	}
 
-	updated, err := r.client.UpdateRateLimiter(ctx, apiResource)
+	_, err := r.client.UpdateRateLimiter(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update RateLimiter: %s", err))
 		return
@@ -942,18 +942,124 @@ func (r *RateLimiterResource) Update(ctx context.Context, req resource.UpdateReq
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetRateLimiter(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read RateLimiter after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetRateLimiter(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if listData, ok := apiResource.Spec["limits"].([]interface{}); ok && len(listData) > 0 {
+		var limitsList []RateLimiterLimitsModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				limitsList = append(limitsList, RateLimiterLimitsModel{
+					ActionBlock: func() *RateLimiterLimitsActionBlockModel {
+						if _, ok := itemMap["action_block"].(map[string]interface{}); ok {
+							return &RateLimiterLimitsActionBlockModel{}
+						}
+						return nil
+					}(),
+					BurstMultiplier: func() types.Int64 {
+						if v, ok := itemMap["burst_multiplier"].(float64); ok && v != 0 {
+							return types.Int64Value(int64(v))
+						}
+						return types.Int64Null()
+					}(),
+					Disabled: func() *RateLimiterEmptyModel {
+						if !isImport && len(data.Limits) > listIdx && data.Limits[listIdx].Disabled != nil {
+							return &RateLimiterEmptyModel{}
+						}
+						return nil
+					}(),
+					LeakyBucket: func() *RateLimiterEmptyModel {
+						if !isImport && len(data.Limits) > listIdx && data.Limits[listIdx].LeakyBucket != nil {
+							return &RateLimiterEmptyModel{}
+						}
+						return nil
+					}(),
+					PeriodMultiplier: func() types.Int64 {
+						if v, ok := itemMap["period_multiplier"].(float64); ok && v != 0 {
+							return types.Int64Value(int64(v))
+						}
+						return types.Int64Null()
+					}(),
+					TokenBucket: func() *RateLimiterEmptyModel {
+						if !isImport && len(data.Limits) > listIdx && data.Limits[listIdx].TokenBucket != nil {
+							return &RateLimiterEmptyModel{}
+						}
+						return nil
+					}(),
+					TotalNumber: func() types.Int64 {
+						if v, ok := itemMap["total_number"].(float64); ok && v != 0 {
+							return types.Int64Value(int64(v))
+						}
+						return types.Int64Null()
+					}(),
+					Unit: func() types.String {
+						if v, ok := itemMap["unit"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
 		}
+		data.Limits = limitsList
 	}
+	if listData, ok := apiResource.Spec["user_identification"].([]interface{}); ok && len(listData) > 0 {
+		var user_identificationList []RateLimiterUserIdentificationModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				user_identificationList = append(user_identificationList, RateLimiterUserIdentificationModel{
+					Kind: func() types.String {
+						if v, ok := itemMap["kind"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Namespace: func() types.String {
+						if v, ok := itemMap["namespace"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Tenant: func() types.String {
+						if v, ok := itemMap["tenant"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Uid: func() types.String {
+						if v, ok := itemMap["uid"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.UserIdentification = user_identificationList
+	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

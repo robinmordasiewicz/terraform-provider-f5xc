@@ -824,7 +824,7 @@ func (r *UserIdentificationResource) Update(ctx context.Context, req resource.Up
 		apiResource.Spec["rules"] = rulesList
 	}
 
-	updated, err := r.client.UpdateUserIdentification(ctx, apiResource)
+	_, err := r.client.UpdateUserIdentification(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update UserIdentification: %s", err))
 		return
@@ -833,18 +833,125 @@ func (r *UserIdentificationResource) Update(ctx context.Context, req resource.Up
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetUserIdentification(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read UserIdentification after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetUserIdentification(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if listData, ok := apiResource.Spec["rules"].([]interface{}); ok && len(listData) > 0 {
+		var rulesList []UserIdentificationRulesModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				rulesList = append(rulesList, UserIdentificationRulesModel{
+					ClientAsn: func() *UserIdentificationEmptyModel {
+						if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].ClientAsn != nil {
+							return &UserIdentificationEmptyModel{}
+						}
+						return nil
+					}(),
+					ClientCity: func() *UserIdentificationEmptyModel {
+						if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].ClientCity != nil {
+							return &UserIdentificationEmptyModel{}
+						}
+						return nil
+					}(),
+					ClientCountry: func() *UserIdentificationEmptyModel {
+						if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].ClientCountry != nil {
+							return &UserIdentificationEmptyModel{}
+						}
+						return nil
+					}(),
+					ClientIP: func() *UserIdentificationEmptyModel {
+						if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].ClientIP != nil {
+							return &UserIdentificationEmptyModel{}
+						}
+						return nil
+					}(),
+					ClientRegion: func() *UserIdentificationEmptyModel {
+						if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].ClientRegion != nil {
+							return &UserIdentificationEmptyModel{}
+						}
+						return nil
+					}(),
+					CookieName: func() types.String {
+						if v, ok := itemMap["cookie_name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					HTTPHeaderName: func() types.String {
+						if v, ok := itemMap["http_header_name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					IPAndHTTPHeaderName: func() types.String {
+						if v, ok := itemMap["ip_and_http_header_name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					IPAndJa4TLSFingerprint: func() *UserIdentificationEmptyModel {
+						if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].IPAndJa4TLSFingerprint != nil {
+							return &UserIdentificationEmptyModel{}
+						}
+						return nil
+					}(),
+					IPAndTLSFingerprint: func() *UserIdentificationEmptyModel {
+						if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].IPAndTLSFingerprint != nil {
+							return &UserIdentificationEmptyModel{}
+						}
+						return nil
+					}(),
+					Ja4TLSFingerprint: func() *UserIdentificationEmptyModel {
+						if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].Ja4TLSFingerprint != nil {
+							return &UserIdentificationEmptyModel{}
+						}
+						return nil
+					}(),
+					JwtClaimName: func() types.String {
+						if v, ok := itemMap["jwt_claim_name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					None: func() *UserIdentificationEmptyModel {
+						if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].None != nil {
+							return &UserIdentificationEmptyModel{}
+						}
+						return nil
+					}(),
+					QueryParamKey: func() types.String {
+						if v, ok := itemMap["query_param_key"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					TLSFingerprint: func() *UserIdentificationEmptyModel {
+						if !isImport && len(data.Rules) > listIdx && data.Rules[listIdx].TLSFingerprint != nil {
+							return &UserIdentificationEmptyModel{}
+						}
+						return nil
+					}(),
+				})
+			}
 		}
+		data.Rules = rulesList
 	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

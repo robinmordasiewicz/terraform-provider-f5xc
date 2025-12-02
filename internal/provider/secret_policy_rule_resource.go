@@ -677,7 +677,7 @@ func (r *SecretPolicyRuleResource) Update(ctx context.Context, req resource.Upda
 		apiResource.Spec["client_name"] = data.ClientName.ValueString()
 	}
 
-	updated, err := r.client.UpdateSecretPolicyRule(ctx, apiResource)
+	_, err := r.client.UpdateSecretPolicyRule(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update SecretPolicyRule: %s", err))
 		return
@@ -686,15 +686,23 @@ func (r *SecretPolicyRuleResource) Update(ctx context.Context, req resource.Upda
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetSecretPolicyRule(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read SecretPolicyRule after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
-	if v, ok := updated.Spec["action"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["action"].(string); ok && v != "" {
 		data.Action = types.StringValue(v)
 	} else if data.Action.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.Action = types.StringNull()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["client_name"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["client_name"].(string); ok && v != "" {
 		data.ClientName = types.StringValue(v)
 	} else if data.ClientName.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
@@ -702,16 +710,71 @@ func (r *SecretPolicyRuleResource) Update(ctx context.Context, req resource.Upda
 	}
 	// If plan had a value, preserve it
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetSecretPolicyRule(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["client_name_matcher"].(map[string]interface{}); ok && (isImport || data.ClientNameMatcher != nil) {
+		data.ClientNameMatcher = &SecretPolicyRuleClientNameMatcherModel{
+			ExactValues: func() types.List {
+				if v, ok := blockData["exact_values"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+			RegexValues: func() types.List {
+				if v, ok := blockData["regex_values"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
 		}
 	}
+	if blockData, ok := apiResource.Spec["client_selector"].(map[string]interface{}); ok && (isImport || data.ClientSelector != nil) {
+		data.ClientSelector = &SecretPolicyRuleClientSelectorModel{
+			Expressions: func() types.List {
+				if v, ok := blockData["expressions"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
+	}
+	if v, ok := apiResource.Spec["action"].(string); ok && v != "" {
+		data.Action = types.StringValue(v)
+	} else {
+		data.Action = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["client_name"].(string); ok && v != "" {
+		data.ClientName = types.StringValue(v)
+	} else {
+		data.ClientName = types.StringNull()
+	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

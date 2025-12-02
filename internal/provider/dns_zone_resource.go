@@ -3853,7 +3853,7 @@ func (r *DNSZoneResource) Update(ctx context.Context, req resource.UpdateRequest
 		apiResource.Spec["secondary"] = secondaryMap
 	}
 
-	updated, err := r.client.UpdateDNSZone(ctx, apiResource)
+	_, err := r.client.UpdateDNSZone(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update DNSZone: %s", err))
 		return
@@ -3862,18 +3862,492 @@ func (r *DNSZoneResource) Update(ctx context.Context, req resource.UpdateRequest
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetDNSZone(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read DNSZone after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetDNSZone(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["primary"].(map[string]interface{}); ok && (isImport || data.Primary != nil) {
+		data.Primary = &DNSZonePrimaryModel{
+			AllowHTTPLbManagedRecords: func() types.Bool {
+				if !isImport && data.Primary != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.Primary.AllowHTTPLbManagedRecords
+				}
+				// Import case: read from API
+				if v, ok := blockData["allow_http_lb_managed_records"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+			DefaultRrSetGroup: func() []DNSZonePrimaryDefaultRrSetGroupModel {
+				if listData, ok := blockData["default_rr_set_group"].([]interface{}); ok && len(listData) > 0 {
+					var result []DNSZonePrimaryDefaultRrSetGroupModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, DNSZonePrimaryDefaultRrSetGroupModel{
+								ARecord: func() *DNSZonePrimaryDefaultRrSetGroupARecordModel {
+									if deepMap, ok := itemMap["a_record"].(map[string]interface{}); ok {
+										return &DNSZonePrimaryDefaultRrSetGroupARecordModel{
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								AaaaRecord: func() *DNSZonePrimaryDefaultRrSetGroupAaaaRecordModel {
+									if deepMap, ok := itemMap["aaaa_record"].(map[string]interface{}); ok {
+										return &DNSZonePrimaryDefaultRrSetGroupAaaaRecordModel{
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								AfsdbRecord: func() *DNSZonePrimaryDefaultRrSetGroupAfsdbRecordModel {
+									if deepMap, ok := itemMap["afsdb_record"].(map[string]interface{}); ok {
+										return &DNSZonePrimaryDefaultRrSetGroupAfsdbRecordModel{
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								AliasRecord: func() *DNSZonePrimaryDefaultRrSetGroupAliasRecordModel {
+									if deepMap, ok := itemMap["alias_record"].(map[string]interface{}); ok {
+										return &DNSZonePrimaryDefaultRrSetGroupAliasRecordModel{
+											Value: func() types.String {
+												if v, ok := deepMap["value"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								CaaRecord: func() *DNSZonePrimaryDefaultRrSetGroupCaaRecordModel {
+									if deepMap, ok := itemMap["caa_record"].(map[string]interface{}); ok {
+										return &DNSZonePrimaryDefaultRrSetGroupCaaRecordModel{
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								CdsRecord: func() *DNSZonePrimaryDefaultRrSetGroupCdsRecordModel {
+									if deepMap, ok := itemMap["cds_record"].(map[string]interface{}); ok {
+										return &DNSZonePrimaryDefaultRrSetGroupCdsRecordModel{
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								CertRecord: func() *DNSZonePrimaryDefaultRrSetGroupCertRecordModel {
+									if deepMap, ok := itemMap["cert_record"].(map[string]interface{}); ok {
+										return &DNSZonePrimaryDefaultRrSetGroupCertRecordModel{
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								CnameRecord: func() *DNSZonePrimaryDefaultRrSetGroupCnameRecordModel {
+									if deepMap, ok := itemMap["cname_record"].(map[string]interface{}); ok {
+										return &DNSZonePrimaryDefaultRrSetGroupCnameRecordModel{
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Value: func() types.String {
+												if v, ok := deepMap["value"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								DescriptionSpec: func() types.String {
+									if v, ok := itemMap["description"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								DsRecord: func() *DNSZonePrimaryDefaultRrSetGroupDsRecordModel {
+									if deepMap, ok := itemMap["ds_record"].(map[string]interface{}); ok {
+										return &DNSZonePrimaryDefaultRrSetGroupDsRecordModel{
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								Eui48Record: func() *DNSZonePrimaryDefaultRrSetGroupEui48RecordModel {
+									if deepMap, ok := itemMap["eui48_record"].(map[string]interface{}); ok {
+										return &DNSZonePrimaryDefaultRrSetGroupEui48RecordModel{
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Value: func() types.String {
+												if v, ok := deepMap["value"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								Eui64Record: func() *DNSZonePrimaryDefaultRrSetGroupEui64RecordModel {
+									if deepMap, ok := itemMap["eui64_record"].(map[string]interface{}); ok {
+										return &DNSZonePrimaryDefaultRrSetGroupEui64RecordModel{
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Value: func() types.String {
+												if v, ok := deepMap["value"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								LbRecord: func() *DNSZonePrimaryDefaultRrSetGroupLbRecordModel {
+									if deepMap, ok := itemMap["lb_record"].(map[string]interface{}); ok {
+										return &DNSZonePrimaryDefaultRrSetGroupLbRecordModel{
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								LocRecord: func() *DNSZonePrimaryDefaultRrSetGroupLocRecordModel {
+									if deepMap, ok := itemMap["loc_record"].(map[string]interface{}); ok {
+										return &DNSZonePrimaryDefaultRrSetGroupLocRecordModel{
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								MxRecord: func() *DNSZonePrimaryDefaultRrSetGroupMxRecordModel {
+									if deepMap, ok := itemMap["mx_record"].(map[string]interface{}); ok {
+										return &DNSZonePrimaryDefaultRrSetGroupMxRecordModel{
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								NaptrRecord: func() *DNSZonePrimaryDefaultRrSetGroupNaptrRecordModel {
+									if deepMap, ok := itemMap["naptr_record"].(map[string]interface{}); ok {
+										return &DNSZonePrimaryDefaultRrSetGroupNaptrRecordModel{
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								NsRecord: func() *DNSZonePrimaryDefaultRrSetGroupNsRecordModel {
+									if deepMap, ok := itemMap["ns_record"].(map[string]interface{}); ok {
+										return &DNSZonePrimaryDefaultRrSetGroupNsRecordModel{
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								PtrRecord: func() *DNSZonePrimaryDefaultRrSetGroupPtrRecordModel {
+									if deepMap, ok := itemMap["ptr_record"].(map[string]interface{}); ok {
+										return &DNSZonePrimaryDefaultRrSetGroupPtrRecordModel{
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								SrvRecord: func() *DNSZonePrimaryDefaultRrSetGroupSrvRecordModel {
+									if deepMap, ok := itemMap["srv_record"].(map[string]interface{}); ok {
+										return &DNSZonePrimaryDefaultRrSetGroupSrvRecordModel{
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								SshfpRecord: func() *DNSZonePrimaryDefaultRrSetGroupSshfpRecordModel {
+									if deepMap, ok := itemMap["sshfp_record"].(map[string]interface{}); ok {
+										return &DNSZonePrimaryDefaultRrSetGroupSshfpRecordModel{
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								TlsaRecord: func() *DNSZonePrimaryDefaultRrSetGroupTlsaRecordModel {
+									if deepMap, ok := itemMap["tlsa_record"].(map[string]interface{}); ok {
+										return &DNSZonePrimaryDefaultRrSetGroupTlsaRecordModel{
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								Ttl: func() types.Int64 {
+									if v, ok := itemMap["ttl"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								TxtRecord: func() *DNSZonePrimaryDefaultRrSetGroupTxtRecordModel {
+									if deepMap, ok := itemMap["txt_record"].(map[string]interface{}); ok {
+										return &DNSZonePrimaryDefaultRrSetGroupTxtRecordModel{
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			DefaultSoaParameters: func() *DNSZoneEmptyModel {
+				if !isImport && data.Primary != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.Primary.DefaultSoaParameters
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_soa_parameters"].(map[string]interface{}); ok {
+					return &DNSZoneEmptyModel{}
+				}
+				return nil
+			}(),
+			DnssecMode: func() *DNSZonePrimaryDnssecModeModel {
+				if !isImport && data.Primary != nil && data.Primary.DnssecMode != nil {
+					// Normal Read: preserve existing state value
+					return data.Primary.DnssecMode
+				}
+				// Import case: read from API
+				if _, ok := blockData["dnssec_mode"].(map[string]interface{}); ok {
+					return &DNSZonePrimaryDnssecModeModel{}
+				}
+				return nil
+			}(),
+			RrSetGroup: func() []DNSZonePrimaryRrSetGroupModel {
+				if listData, ok := blockData["rr_set_group"].([]interface{}); ok && len(listData) > 0 {
+					var result []DNSZonePrimaryRrSetGroupModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, DNSZonePrimaryRrSetGroupModel{
+								Metadata: func() *DNSZonePrimaryRrSetGroupMetadataModel {
+									if deepMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
+										return &DNSZonePrimaryRrSetGroupMetadataModel{
+											DescriptionSpec: func() types.String {
+												if v, ok := deepMap["description"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			SoaParameters: func() *DNSZonePrimarySoaParametersModel {
+				if !isImport && data.Primary != nil && data.Primary.SoaParameters != nil {
+					// Normal Read: preserve existing state value
+					return data.Primary.SoaParameters
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["soa_parameters"].(map[string]interface{}); ok {
+					return &DNSZonePrimarySoaParametersModel{
+						Expire: func() types.Int64 {
+							if v, ok := nestedBlockData["expire"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						NegativeTtl: func() types.Int64 {
+							if v, ok := nestedBlockData["negative_ttl"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						Refresh: func() types.Int64 {
+							if v, ok := nestedBlockData["refresh"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						Retry: func() types.Int64 {
+							if v, ok := nestedBlockData["retry"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						Ttl: func() types.Int64 {
+							if v, ok := nestedBlockData["ttl"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+					}
+				}
+				return nil
+			}(),
 		}
 	}
+	if blockData, ok := apiResource.Spec["secondary"].(map[string]interface{}); ok && (isImport || data.Secondary != nil) {
+		data.Secondary = &DNSZoneSecondaryModel{
+			PrimaryServers: func() types.List {
+				if v, ok := blockData["primary_servers"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+			TsigKeyAlgorithm: func() types.String {
+				if v, ok := blockData["tsig_key_algorithm"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			TsigKeyName: func() types.String {
+				if v, ok := blockData["tsig_key_name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			TsigKeyValue: func() *DNSZoneSecondaryTsigKeyValueModel {
+				if !isImport && data.Secondary != nil && data.Secondary.TsigKeyValue != nil {
+					// Normal Read: preserve existing state value
+					return data.Secondary.TsigKeyValue
+				}
+				// Import case: read from API
+				if _, ok := blockData["tsig_key_value"].(map[string]interface{}); ok {
+					return &DNSZoneSecondaryTsigKeyValueModel{}
+				}
+				return nil
+			}(),
+		}
+	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

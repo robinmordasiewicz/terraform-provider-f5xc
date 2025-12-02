@@ -595,7 +595,7 @@ func (r *Srv6NetworkSliceResource) Update(ctx context.Context, req resource.Upda
 		apiResource.Spec["connect_to_internet"] = data.ConnectToInternet.ValueBool()
 	}
 
-	updated, err := r.client.UpdateSrv6NetworkSlice(ctx, apiResource)
+	_, err := r.client.UpdateSrv6NetworkSlice(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update Srv6NetworkSlice: %s", err))
 		return
@@ -604,22 +604,30 @@ func (r *Srv6NetworkSliceResource) Update(ctx context.Context, req resource.Upda
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetSrv6NetworkSlice(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read Srv6NetworkSlice after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
-	if v, ok := updated.Spec["connect_to_access_networks"].(bool); ok {
+	if v, ok := fetched.Spec["connect_to_access_networks"].(bool); ok {
 		data.ConnectToAccessNetworks = types.BoolValue(v)
 	} else if data.ConnectToAccessNetworks.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.ConnectToAccessNetworks = types.BoolNull()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["connect_to_enterprise_networks"].(bool); ok {
+	if v, ok := fetched.Spec["connect_to_enterprise_networks"].(bool); ok {
 		data.ConnectToEnterpriseNetworks = types.BoolValue(v)
 	} else if data.ConnectToEnterpriseNetworks.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.ConnectToEnterpriseNetworks = types.BoolNull()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["connect_to_internet"].(bool); ok {
+	if v, ok := fetched.Spec["connect_to_internet"].(bool); ok {
 		data.ConnectToInternet = types.BoolValue(v)
 	} else if data.ConnectToInternet.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
@@ -627,16 +635,62 @@ func (r *Srv6NetworkSliceResource) Update(ctx context.Context, req resource.Upda
 	}
 	// If plan had a value, preserve it
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetSrv6NetworkSlice(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if v, ok := apiResource.Spec["sid_prefixes"].([]interface{}); ok && len(v) > 0 {
+		var sid_prefixesList []string
+		for _, item := range v {
+			if s, ok := item.(string); ok {
+				sid_prefixesList = append(sid_prefixesList, s)
+			}
+		}
+		listVal, diags := types.ListValueFrom(ctx, types.StringType, sid_prefixesList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.SidPrefixes = listVal
+		}
+	} else {
+		data.SidPrefixes = types.ListNull(types.StringType)
+	}
+	// Top-level Optional bool: preserve prior state to avoid API default drift
+	if !isImport && !data.ConnectToAccessNetworks.IsNull() && !data.ConnectToAccessNetworks.IsUnknown() {
+		// Normal Read: preserve existing state value (do nothing)
+	} else {
+		// Import case, null state, or unknown (after Create): read from API
+		if v, ok := apiResource.Spec["connect_to_access_networks"].(bool); ok {
+			data.ConnectToAccessNetworks = types.BoolValue(v)
+		} else {
+			data.ConnectToAccessNetworks = types.BoolNull()
 		}
 	}
+	// Top-level Optional bool: preserve prior state to avoid API default drift
+	if !isImport && !data.ConnectToEnterpriseNetworks.IsNull() && !data.ConnectToEnterpriseNetworks.IsUnknown() {
+		// Normal Read: preserve existing state value (do nothing)
+	} else {
+		// Import case, null state, or unknown (after Create): read from API
+		if v, ok := apiResource.Spec["connect_to_enterprise_networks"].(bool); ok {
+			data.ConnectToEnterpriseNetworks = types.BoolValue(v)
+		} else {
+			data.ConnectToEnterpriseNetworks = types.BoolNull()
+		}
+	}
+	// Top-level Optional bool: preserve prior state to avoid API default drift
+	if !isImport && !data.ConnectToInternet.IsNull() && !data.ConnectToInternet.IsUnknown() {
+		// Normal Read: preserve existing state value (do nothing)
+	} else {
+		// Import case, null state, or unknown (after Create): read from API
+		if v, ok := apiResource.Spec["connect_to_internet"].(bool); ok {
+			data.ConnectToInternet = types.BoolValue(v)
+		} else {
+			data.ConnectToInternet = types.BoolNull()
+		}
+	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

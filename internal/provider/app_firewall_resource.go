@@ -1477,7 +1477,7 @@ func (r *AppFirewallResource) Update(ctx context.Context, req resource.UpdateReq
 		apiResource.Spec["use_default_blocking_page"] = use_default_blocking_pageMap
 	}
 
-	updated, err := r.client.UpdateAppFirewall(ctx, apiResource)
+	_, err := r.client.UpdateAppFirewall(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update AppFirewall: %s", err))
 		return
@@ -1486,18 +1486,202 @@ func (r *AppFirewallResource) Update(ctx context.Context, req resource.UpdateReq
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetAppFirewall(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read AppFirewall after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetAppFirewall(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["ai_risk_based_blocking"].(map[string]interface{}); ok && (isImport || data.AiRiskBasedBlocking != nil) {
+		data.AiRiskBasedBlocking = &AppFirewallAiRiskBasedBlockingModel{
+			HighRiskAction: func() types.String {
+				if v, ok := blockData["high_risk_action"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			LowRiskAction: func() types.String {
+				if v, ok := blockData["low_risk_action"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			MediumRiskAction: func() types.String {
+				if v, ok := blockData["medium_risk_action"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
 		}
 	}
+	if _, ok := apiResource.Spec["allow_all_response_codes"].(map[string]interface{}); ok && isImport && data.AllowAllResponseCodes == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AllowAllResponseCodes = &AppFirewallEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["allowed_response_codes"].(map[string]interface{}); ok && (isImport || data.AllowedResponseCodes != nil) {
+		data.AllowedResponseCodes = &AppFirewallAllowedResponseCodesModel{
+			ResponseCode: func() types.List {
+				if v, ok := blockData["response_code"].([]interface{}); ok && len(v) > 0 {
+					var items []int64
+					for _, item := range v {
+						if n, ok := item.(float64); ok {
+							items = append(items, int64(n))
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.Int64Type, items)
+					return listVal
+				}
+				return types.ListNull(types.Int64Type)
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["blocking"].(map[string]interface{}); ok && isImport && data.Blocking == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Blocking = &AppFirewallEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["blocking_page"].(map[string]interface{}); ok && (isImport || data.BlockingPage != nil) {
+		data.BlockingPage = &AppFirewallBlockingPageModel{
+			BlockingPage: func() types.String {
+				if v, ok := blockData["blocking_page"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			ResponseCode: func() types.String {
+				if v, ok := blockData["response_code"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["bot_protection_setting"].(map[string]interface{}); ok && (isImport || data.BotProtectionSetting != nil) {
+		data.BotProtectionSetting = &AppFirewallBotProtectionSettingModel{
+			GoodBotAction: func() types.String {
+				if v, ok := blockData["good_bot_action"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			MaliciousBotAction: func() types.String {
+				if v, ok := blockData["malicious_bot_action"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			SuspiciousBotAction: func() types.String {
+				if v, ok := blockData["suspicious_bot_action"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["custom_anonymization"].(map[string]interface{}); ok && (isImport || data.CustomAnonymization != nil) {
+		data.CustomAnonymization = &AppFirewallCustomAnonymizationModel{
+			AnonymizationConfig: func() []AppFirewallCustomAnonymizationAnonymizationConfigModel {
+				if listData, ok := blockData["anonymization_config"].([]interface{}); ok && len(listData) > 0 {
+					var result []AppFirewallCustomAnonymizationAnonymizationConfigModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, AppFirewallCustomAnonymizationAnonymizationConfigModel{
+								Cookie: func() *AppFirewallCustomAnonymizationAnonymizationConfigCookieModel {
+									if deepMap, ok := itemMap["cookie"].(map[string]interface{}); ok {
+										return &AppFirewallCustomAnonymizationAnonymizationConfigCookieModel{
+											CookieName: func() types.String {
+												if v, ok := deepMap["cookie_name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								HTTPHeader: func() *AppFirewallCustomAnonymizationAnonymizationConfigHTTPHeaderModel {
+									if deepMap, ok := itemMap["http_header"].(map[string]interface{}); ok {
+										return &AppFirewallCustomAnonymizationAnonymizationConfigHTTPHeaderModel{
+											HeaderName: func() types.String {
+												if v, ok := deepMap["header_name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								QueryParameter: func() *AppFirewallCustomAnonymizationAnonymizationConfigQueryParameterModel {
+									if deepMap, ok := itemMap["query_parameter"].(map[string]interface{}); ok {
+										return &AppFirewallCustomAnonymizationAnonymizationConfigQueryParameterModel{
+											QueryParamName: func() types.String {
+												if v, ok := deepMap["query_param_name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["default_anonymization"].(map[string]interface{}); ok && isImport && data.DefaultAnonymization == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DefaultAnonymization = &AppFirewallEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["default_bot_setting"].(map[string]interface{}); ok && isImport && data.DefaultBotSetting == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DefaultBotSetting = &AppFirewallEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["default_detection_settings"].(map[string]interface{}); ok && isImport && data.DefaultDetectionSettings == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DefaultDetectionSettings = &AppFirewallEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["detection_settings"].(map[string]interface{}); ok && isImport && data.DetectionSettings == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DetectionSettings = &AppFirewallDetectionSettingsModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["disable_anonymization"].(map[string]interface{}); ok && isImport && data.DisableAnonymization == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableAnonymization = &AppFirewallEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["monitoring"].(map[string]interface{}); ok && isImport && data.Monitoring == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Monitoring = &AppFirewallEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["use_default_blocking_page"].(map[string]interface{}); ok && isImport && data.UseDefaultBlockingPage == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.UseDefaultBlockingPage = &AppFirewallEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

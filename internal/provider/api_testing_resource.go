@@ -1009,7 +1009,7 @@ func (r *APITestingResource) Update(ctx context.Context, req resource.UpdateRequ
 		apiResource.Spec["custom_header_value"] = data.CustomHeaderValue.ValueString()
 	}
 
-	updated, err := r.client.UpdateAPITesting(ctx, apiResource)
+	_, err := r.client.UpdateAPITesting(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update APITesting: %s", err))
 		return
@@ -1018,8 +1018,16 @@ func (r *APITestingResource) Update(ctx context.Context, req resource.UpdateRequ
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetAPITesting(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read APITesting after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
-	if v, ok := updated.Spec["custom_header_value"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["custom_header_value"].(string); ok && v != "" {
 		data.CustomHeaderValue = types.StringValue(v)
 	} else if data.CustomHeaderValue.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
@@ -1027,16 +1035,76 @@ func (r *APITestingResource) Update(ctx context.Context, req resource.UpdateRequ
 	}
 	// If plan had a value, preserve it
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetAPITesting(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if listData, ok := apiResource.Spec["domains"].([]interface{}); ok && len(listData) > 0 {
+		var domainsList []APITestingDomainsModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				domainsList = append(domainsList, APITestingDomainsModel{
+					AllowDestructiveMethods: func() types.Bool {
+						if v, ok := itemMap["allow_destructive_methods"].(bool); ok {
+							return types.BoolValue(v)
+						}
+						return types.BoolNull()
+					}(),
+					Credentials: func() []APITestingDomainsCredentialsModel {
+						if nestedListData, ok := itemMap["credentials"].([]interface{}); ok && len(nestedListData) > 0 {
+							var result []APITestingDomainsCredentialsModel
+							for _, nestedItem := range nestedListData {
+								if nestedItemMap, ok := nestedItem.(map[string]interface{}); ok {
+									result = append(result, APITestingDomainsCredentialsModel{
+										CredentialName: func() types.String {
+											if v, ok := nestedItemMap["credential_name"].(string); ok && v != "" {
+												return types.StringValue(v)
+											}
+											return types.StringNull()
+										}(),
+									})
+								}
+							}
+							return result
+						}
+						return nil
+					}(),
+					Domain: func() types.String {
+						if v, ok := itemMap["domain"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
 		}
+		data.Domains = domainsList
 	}
+	if _, ok := apiResource.Spec["every_day"].(map[string]interface{}); ok && isImport && data.EveryDay == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.EveryDay = &APITestingEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["every_month"].(map[string]interface{}); ok && isImport && data.EveryMonth == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.EveryMonth = &APITestingEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["every_week"].(map[string]interface{}); ok && isImport && data.EveryWeek == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.EveryWeek = &APITestingEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["custom_header_value"].(string); ok && v != "" {
+		data.CustomHeaderValue = types.StringValue(v)
+	} else {
+		data.CustomHeaderValue = types.StringNull()
+	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

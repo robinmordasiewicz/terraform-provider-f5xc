@@ -1732,7 +1732,7 @@ func (r *DNSLbPoolResource) Update(ctx context.Context, req resource.UpdateReque
 		apiResource.Spec["ttl"] = data.Ttl.ValueInt64()
 	}
 
-	updated, err := r.client.UpdateDNSLbPool(ctx, apiResource)
+	_, err := r.client.UpdateDNSLbPool(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update DNSLbPool: %s", err))
 		return
@@ -1741,15 +1741,23 @@ func (r *DNSLbPoolResource) Update(ctx context.Context, req resource.UpdateReque
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetDNSLbPool(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read DNSLbPool after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
-	if v, ok := updated.Spec["load_balancing_mode"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["load_balancing_mode"].(string); ok && v != "" {
 		data.LoadBalancingMode = types.StringValue(v)
 	} else if data.LoadBalancingMode.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.LoadBalancingMode = types.StringNull()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["ttl"].(float64); ok {
+	if v, ok := fetched.Spec["ttl"].(float64); ok {
 		data.Ttl = types.Int64Value(int64(v))
 	} else if data.Ttl.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
@@ -1757,16 +1765,330 @@ func (r *DNSLbPoolResource) Update(ctx context.Context, req resource.UpdateReque
 	}
 	// If plan had a value, preserve it
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetDNSLbPool(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["a_pool"].(map[string]interface{}); ok && (isImport || data.APool != nil) {
+		data.APool = &DNSLbPoolAPoolModel{
+			DisableHealthCheck: func() *DNSLbPoolEmptyModel {
+				if !isImport && data.APool != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.APool.DisableHealthCheck
+				}
+				// Import case: read from API
+				if _, ok := blockData["disable_health_check"].(map[string]interface{}); ok {
+					return &DNSLbPoolEmptyModel{}
+				}
+				return nil
+			}(),
+			HealthCheck: func() *DNSLbPoolAPoolHealthCheckModel {
+				if !isImport && data.APool != nil && data.APool.HealthCheck != nil {
+					// Normal Read: preserve existing state value
+					return data.APool.HealthCheck
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["health_check"].(map[string]interface{}); ok {
+					return &DNSLbPoolAPoolHealthCheckModel{
+						Name: func() types.String {
+							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Namespace: func() types.String {
+							if v, ok := nestedBlockData["namespace"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Tenant: func() types.String {
+							if v, ok := nestedBlockData["tenant"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			MaxAnswers: func() types.Int64 {
+				if v, ok := blockData["max_answers"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			Members: func() []DNSLbPoolAPoolMembersModel {
+				if listData, ok := blockData["members"].([]interface{}); ok && len(listData) > 0 {
+					var result []DNSLbPoolAPoolMembersModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, DNSLbPoolAPoolMembersModel{
+								Disable: func() types.Bool {
+									if v, ok := itemMap["disable"].(bool); ok {
+										return types.BoolValue(v)
+									}
+									return types.BoolNull()
+								}(),
+								IPEndpoint: func() types.String {
+									if v, ok := itemMap["ip_endpoint"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Priority: func() types.Int64 {
+									if v, ok := itemMap["priority"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								Ratio: func() types.Int64 {
+									if v, ok := itemMap["ratio"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
 		}
 	}
+	if blockData, ok := apiResource.Spec["aaaa_pool"].(map[string]interface{}); ok && (isImport || data.AaaaPool != nil) {
+		data.AaaaPool = &DNSLbPoolAaaaPoolModel{
+			MaxAnswers: func() types.Int64 {
+				if v, ok := blockData["max_answers"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			Members: func() []DNSLbPoolAaaaPoolMembersModel {
+				if listData, ok := blockData["members"].([]interface{}); ok && len(listData) > 0 {
+					var result []DNSLbPoolAaaaPoolMembersModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, DNSLbPoolAaaaPoolMembersModel{
+								Disable: func() types.Bool {
+									if v, ok := itemMap["disable"].(bool); ok {
+										return types.BoolValue(v)
+									}
+									return types.BoolNull()
+								}(),
+								IPEndpoint: func() types.String {
+									if v, ok := itemMap["ip_endpoint"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Priority: func() types.Int64 {
+									if v, ok := itemMap["priority"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								Ratio: func() types.Int64 {
+									if v, ok := itemMap["ratio"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["cname_pool"].(map[string]interface{}); ok && (isImport || data.CnamePool != nil) {
+		data.CnamePool = &DNSLbPoolCnamePoolModel{
+			Members: func() []DNSLbPoolCnamePoolMembersModel {
+				if listData, ok := blockData["members"].([]interface{}); ok && len(listData) > 0 {
+					var result []DNSLbPoolCnamePoolMembersModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, DNSLbPoolCnamePoolMembersModel{
+								Domain: func() types.String {
+									if v, ok := itemMap["domain"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								FinalTranslation: func() types.Bool {
+									if v, ok := itemMap["final_translation"].(bool); ok {
+										return types.BoolValue(v)
+									}
+									return types.BoolNull()
+								}(),
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Ratio: func() types.Int64 {
+									if v, ok := itemMap["ratio"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["mx_pool"].(map[string]interface{}); ok && (isImport || data.MxPool != nil) {
+		data.MxPool = &DNSLbPoolMxPoolModel{
+			MaxAnswers: func() types.Int64 {
+				if v, ok := blockData["max_answers"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			Members: func() []DNSLbPoolMxPoolMembersModel {
+				if listData, ok := blockData["members"].([]interface{}); ok && len(listData) > 0 {
+					var result []DNSLbPoolMxPoolMembersModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, DNSLbPoolMxPoolMembersModel{
+								Domain: func() types.String {
+									if v, ok := itemMap["domain"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Priority: func() types.Int64 {
+									if v, ok := itemMap["priority"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								Ratio: func() types.Int64 {
+									if v, ok := itemMap["ratio"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["srv_pool"].(map[string]interface{}); ok && (isImport || data.SrvPool != nil) {
+		data.SrvPool = &DNSLbPoolSrvPoolModel{
+			MaxAnswers: func() types.Int64 {
+				if v, ok := blockData["max_answers"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			Members: func() []DNSLbPoolSrvPoolMembersModel {
+				if listData, ok := blockData["members"].([]interface{}); ok && len(listData) > 0 {
+					var result []DNSLbPoolSrvPoolMembersModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, DNSLbPoolSrvPoolMembersModel{
+								FinalTranslation: func() types.Bool {
+									if v, ok := itemMap["final_translation"].(bool); ok {
+										return types.BoolValue(v)
+									}
+									return types.BoolNull()
+								}(),
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Port: func() types.Int64 {
+									if v, ok := itemMap["port"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								Priority: func() types.Int64 {
+									if v, ok := itemMap["priority"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								Ratio: func() types.Int64 {
+									if v, ok := itemMap["ratio"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								Target: func() types.String {
+									if v, ok := itemMap["target"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Weight: func() types.Int64 {
+									if v, ok := itemMap["weight"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["use_rrset_ttl"].(map[string]interface{}); ok && isImport && data.UseRrsetTtl == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.UseRrsetTtl = &DNSLbPoolEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["load_balancing_mode"].(string); ok && v != "" {
+		data.LoadBalancingMode = types.StringValue(v)
+	} else {
+		data.LoadBalancingMode = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["ttl"].(float64); ok {
+		data.Ttl = types.Int64Value(int64(v))
+	} else {
+		data.Ttl = types.Int64Null()
+	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

@@ -2556,7 +2556,7 @@ func (r *APMResource) Update(ctx context.Context, req resource.UpdateRequest, re
 		apiResource.Spec["https_management"] = https_managementMap
 	}
 
-	updated, err := r.client.UpdateAPM(ctx, apiResource)
+	_, err := r.client.UpdateAPM(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update APM: %s", err))
 		return
@@ -2565,18 +2565,129 @@ func (r *APMResource) Update(ctx context.Context, req resource.UpdateRequest, re
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetAPM(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read APM after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetAPM(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if _, ok := apiResource.Spec["aws_site_type_choice"].(map[string]interface{}); ok && isImport && data.AWSSiteTypeChoice == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AWSSiteTypeChoice = &APMAWSSiteTypeChoiceModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["baremetal_site_type_choice"].(map[string]interface{}); ok && isImport && data.BaremetalSiteTypeChoice == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.BaremetalSiteTypeChoice = &APMBaremetalSiteTypeChoiceModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["https_management"].(map[string]interface{}); ok && (isImport || data.HTTPSManagement != nil) {
+		data.HTTPSManagement = &APMHTTPSManagementModel{
+			AdvertiseOnInternet: func() *APMHTTPSManagementAdvertiseOnInternetModel {
+				if !isImport && data.HTTPSManagement != nil && data.HTTPSManagement.AdvertiseOnInternet != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPSManagement.AdvertiseOnInternet
+				}
+				// Import case: read from API
+				if _, ok := blockData["advertise_on_internet"].(map[string]interface{}); ok {
+					return &APMHTTPSManagementAdvertiseOnInternetModel{}
+				}
+				return nil
+			}(),
+			AdvertiseOnInternetDefaultVip: func() *APMEmptyModel {
+				if !isImport && data.HTTPSManagement != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.HTTPSManagement.AdvertiseOnInternetDefaultVip
+				}
+				// Import case: read from API
+				if _, ok := blockData["advertise_on_internet_default_vip"].(map[string]interface{}); ok {
+					return &APMEmptyModel{}
+				}
+				return nil
+			}(),
+			AdvertiseOnSLIVip: func() *APMHTTPSManagementAdvertiseOnSLIVipModel {
+				if !isImport && data.HTTPSManagement != nil && data.HTTPSManagement.AdvertiseOnSLIVip != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPSManagement.AdvertiseOnSLIVip
+				}
+				// Import case: read from API
+				if _, ok := blockData["advertise_on_sli_vip"].(map[string]interface{}); ok {
+					return &APMHTTPSManagementAdvertiseOnSLIVipModel{}
+				}
+				return nil
+			}(),
+			AdvertiseOnSLOInternetVip: func() *APMHTTPSManagementAdvertiseOnSLOInternetVipModel {
+				if !isImport && data.HTTPSManagement != nil && data.HTTPSManagement.AdvertiseOnSLOInternetVip != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPSManagement.AdvertiseOnSLOInternetVip
+				}
+				// Import case: read from API
+				if _, ok := blockData["advertise_on_slo_internet_vip"].(map[string]interface{}); ok {
+					return &APMHTTPSManagementAdvertiseOnSLOInternetVipModel{}
+				}
+				return nil
+			}(),
+			AdvertiseOnSLOSLI: func() *APMHTTPSManagementAdvertiseOnSLOSLIModel {
+				if !isImport && data.HTTPSManagement != nil && data.HTTPSManagement.AdvertiseOnSLOSLI != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPSManagement.AdvertiseOnSLOSLI
+				}
+				// Import case: read from API
+				if _, ok := blockData["advertise_on_slo_sli"].(map[string]interface{}); ok {
+					return &APMHTTPSManagementAdvertiseOnSLOSLIModel{}
+				}
+				return nil
+			}(),
+			AdvertiseOnSLOVip: func() *APMHTTPSManagementAdvertiseOnSLOVipModel {
+				if !isImport && data.HTTPSManagement != nil && data.HTTPSManagement.AdvertiseOnSLOVip != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPSManagement.AdvertiseOnSLOVip
+				}
+				// Import case: read from API
+				if _, ok := blockData["advertise_on_slo_vip"].(map[string]interface{}); ok {
+					return &APMHTTPSManagementAdvertiseOnSLOVipModel{}
+				}
+				return nil
+			}(),
+			DefaultHTTPSPort: func() *APMEmptyModel {
+				if !isImport && data.HTTPSManagement != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.HTTPSManagement.DefaultHTTPSPort
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_https_port"].(map[string]interface{}); ok {
+					return &APMEmptyModel{}
+				}
+				return nil
+			}(),
+			DomainSuffix: func() types.String {
+				if v, ok := blockData["domain_suffix"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			HTTPSPort: func() types.Int64 {
+				if v, ok := blockData["https_port"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
 		}
 	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

@@ -534,7 +534,7 @@ func (r *PolicerResource) Update(ctx context.Context, req resource.UpdateRequest
 		apiResource.Spec["policer_type"] = data.PolicerType.ValueString()
 	}
 
-	updated, err := r.client.UpdatePolicer(ctx, apiResource)
+	_, err := r.client.UpdatePolicer(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update Policer: %s", err))
 		return
@@ -543,29 +543,37 @@ func (r *PolicerResource) Update(ctx context.Context, req resource.UpdateRequest
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetPolicer(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read Policer after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
-	if v, ok := updated.Spec["burst_size"].(float64); ok {
+	if v, ok := fetched.Spec["burst_size"].(float64); ok {
 		data.BurstSize = types.Int64Value(int64(v))
 	} else if data.BurstSize.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.BurstSize = types.Int64Null()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["committed_information_rate"].(float64); ok {
+	if v, ok := fetched.Spec["committed_information_rate"].(float64); ok {
 		data.CommittedInformationRate = types.Int64Value(int64(v))
 	} else if data.CommittedInformationRate.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.CommittedInformationRate = types.Int64Null()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["policer_mode"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["policer_mode"].(string); ok && v != "" {
 		data.PolicerMode = types.StringValue(v)
 	} else if data.PolicerMode.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.PolicerMode = types.StringNull()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["policer_type"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["policer_type"].(string); ok && v != "" {
 		data.PolicerType = types.StringValue(v)
 	} else if data.PolicerType.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
@@ -573,16 +581,34 @@ func (r *PolicerResource) Update(ctx context.Context, req resource.UpdateRequest
 	}
 	// If plan had a value, preserve it
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetPolicer(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
-		}
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if v, ok := apiResource.Spec["burst_size"].(float64); ok {
+		data.BurstSize = types.Int64Value(int64(v))
+	} else {
+		data.BurstSize = types.Int64Null()
 	}
+	if v, ok := apiResource.Spec["committed_information_rate"].(float64); ok {
+		data.CommittedInformationRate = types.Int64Value(int64(v))
+	} else {
+		data.CommittedInformationRate = types.Int64Null()
+	}
+	if v, ok := apiResource.Spec["policer_mode"].(string); ok && v != "" {
+		data.PolicerMode = types.StringValue(v)
+	} else {
+		data.PolicerMode = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["policer_type"].(string); ok && v != "" {
+		data.PolicerType = types.StringValue(v)
+	} else {
+		data.PolicerType = types.StringNull()
+	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

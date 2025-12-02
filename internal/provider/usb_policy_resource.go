@@ -625,7 +625,7 @@ func (r *UsbPolicyResource) Update(ctx context.Context, req resource.UpdateReque
 		apiResource.Spec["allowed_devices"] = allowed_devicesList
 	}
 
-	updated, err := r.client.UpdateUsbPolicy(ctx, apiResource)
+	_, err := r.client.UpdateUsbPolicy(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update UsbPolicy: %s", err))
 		return
@@ -634,18 +634,71 @@ func (r *UsbPolicyResource) Update(ctx context.Context, req resource.UpdateReque
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetUsbPolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read UsbPolicy after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetUsbPolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if listData, ok := apiResource.Spec["allowed_devices"].([]interface{}); ok && len(listData) > 0 {
+		var allowed_devicesList []UsbPolicyAllowedDevicesModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				allowed_devicesList = append(allowed_devicesList, UsbPolicyAllowedDevicesModel{
+					BDeviceClass: func() types.String {
+						if v, ok := itemMap["b_device_class"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					BDeviceProtocol: func() types.String {
+						if v, ok := itemMap["b_device_protocol"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					BDeviceSubClass: func() types.String {
+						if v, ok := itemMap["b_device_sub_class"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					ISerial: func() types.String {
+						if v, ok := itemMap["i_serial"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					IDProduct: func() types.String {
+						if v, ok := itemMap["id_product"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					IDVendor: func() types.String {
+						if v, ok := itemMap["id_vendor"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
 		}
+		data.AllowedDevices = allowed_devicesList
 	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

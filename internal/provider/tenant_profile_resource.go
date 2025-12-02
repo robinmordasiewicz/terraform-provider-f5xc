@@ -987,7 +987,7 @@ func (r *TenantProfileResource) Update(ctx context.Context, req resource.UpdateR
 		apiResource.Spec["support_email"] = data.SupportEmail.ValueString()
 	}
 
-	updated, err := r.client.UpdateTenantProfile(ctx, apiResource)
+	_, err := r.client.UpdateTenantProfile(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update TenantProfile: %s", err))
 		return
@@ -996,15 +996,23 @@ func (r *TenantProfileResource) Update(ctx context.Context, req resource.UpdateR
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetTenantProfile(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read TenantProfile after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
-	if v, ok := updated.Spec["enable_support_access"].(bool); ok {
+	if v, ok := fetched.Spec["enable_support_access"].(bool); ok {
 		data.EnableSupportAccess = types.BoolValue(v)
 	} else if data.EnableSupportAccess.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.EnableSupportAccess = types.BoolNull()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["support_email"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["support_email"].(string); ok && v != "" {
 		data.SupportEmail = types.StringValue(v)
 	} else if data.SupportEmail.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
@@ -1012,16 +1020,150 @@ func (r *TenantProfileResource) Update(ctx context.Context, req resource.UpdateR
 	}
 	// If plan had a value, preserve it
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetTenantProfile(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if listData, ok := apiResource.Spec["ct_groups"].([]interface{}); ok && len(listData) > 0 {
+		var ct_groupsList []TenantProfileCtGroupsModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				ct_groupsList = append(ct_groupsList, TenantProfileCtGroupsModel{
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					NamespaceRoles: func() []TenantProfileCtGroupsNamespaceRolesModel {
+						if nestedListData, ok := itemMap["namespace_roles"].([]interface{}); ok && len(nestedListData) > 0 {
+							var result []TenantProfileCtGroupsNamespaceRolesModel
+							for _, nestedItem := range nestedListData {
+								if nestedItemMap, ok := nestedItem.(map[string]interface{}); ok {
+									result = append(result, TenantProfileCtGroupsNamespaceRolesModel{
+										Namespace: func() types.String {
+											if v, ok := nestedItemMap["namespace"].(string); ok && v != "" {
+												return types.StringValue(v)
+											}
+											return types.StringNull()
+										}(),
+										Role: func() types.String {
+											if v, ok := nestedItemMap["role"].(string); ok && v != "" {
+												return types.StringValue(v)
+											}
+											return types.StringNull()
+										}(),
+									})
+								}
+							}
+							return result
+						}
+						return nil
+					}(),
+				})
+			}
+		}
+		data.CtGroups = ct_groupsList
+	}
+	if blockData, ok := apiResource.Spec["favicon"].(map[string]interface{}); ok && (isImport || data.Favicon != nil) {
+		data.Favicon = &TenantProfileFaviconModel{
+			AWSS3: func() *TenantProfileEmptyModel {
+				if !isImport && data.Favicon != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.Favicon.AWSS3
+				}
+				// Import case: read from API
+				if _, ok := blockData["aws_s3"].(map[string]interface{}); ok {
+					return &TenantProfileEmptyModel{}
+				}
+				return nil
+			}(),
+			Content: func() types.String {
+				if v, ok := blockData["content"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			ContentType: func() types.String {
+				if v, ok := blockData["content_type"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
 		}
 	}
+	if blockData, ok := apiResource.Spec["logo"].(map[string]interface{}); ok && (isImport || data.Logo != nil) {
+		data.Logo = &TenantProfileLogoModel{
+			AWSS3: func() *TenantProfileEmptyModel {
+				if !isImport && data.Logo != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.Logo.AWSS3
+				}
+				// Import case: read from API
+				if _, ok := blockData["aws_s3"].(map[string]interface{}); ok {
+					return &TenantProfileEmptyModel{}
+				}
+				return nil
+			}(),
+			Content: func() types.String {
+				if v, ok := blockData["content"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			ContentType: func() types.String {
+				if v, ok := blockData["content_type"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["plan"].(map[string]interface{}); ok && (isImport || data.Plan != nil) {
+		data.Plan = &TenantProfilePlanModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	// Top-level Optional bool: preserve prior state to avoid API default drift
+	if !isImport && !data.EnableSupportAccess.IsNull() && !data.EnableSupportAccess.IsUnknown() {
+		// Normal Read: preserve existing state value (do nothing)
+	} else {
+		// Import case, null state, or unknown (after Create): read from API
+		if v, ok := apiResource.Spec["enable_support_access"].(bool); ok {
+			data.EnableSupportAccess = types.BoolValue(v)
+		} else {
+			data.EnableSupportAccess = types.BoolNull()
+		}
+	}
+	if v, ok := apiResource.Spec["support_email"].(string); ok && v != "" {
+		data.SupportEmail = types.StringValue(v)
+	} else {
+		data.SupportEmail = types.StringNull()
+	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

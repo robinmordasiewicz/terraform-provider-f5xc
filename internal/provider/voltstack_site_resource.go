@@ -7190,7 +7190,7 @@ func (r *VoltstackSiteResource) Update(ctx context.Context, req resource.UpdateR
 		apiResource.Spec["volterra_certified_hw"] = data.VolterraCertifiedHw.ValueString()
 	}
 
-	updated, err := r.client.UpdateVoltstackSite(ctx, apiResource)
+	_, err := r.client.UpdateVoltstackSite(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update VoltstackSite: %s", err))
 		return
@@ -7199,15 +7199,23 @@ func (r *VoltstackSiteResource) Update(ctx context.Context, req resource.UpdateR
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetVoltstackSite(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read VoltstackSite after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
-	if v, ok := updated.Spec["address"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["address"].(string); ok && v != "" {
 		data.Address = types.StringValue(v)
 	} else if data.Address.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.Address = types.StringNull()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["volterra_certified_hw"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["volterra_certified_hw"].(string); ok && v != "" {
 		data.VolterraCertifiedHw = types.StringValue(v)
 	} else if data.VolterraCertifiedHw.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
@@ -7215,16 +7223,677 @@ func (r *VoltstackSiteResource) Update(ctx context.Context, req resource.UpdateR
 	}
 	// If plan had a value, preserve it
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetVoltstackSite(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if _, ok := apiResource.Spec["allow_all_usb"].(map[string]interface{}); ok && isImport && data.AllowAllUsb == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AllowAllUsb = &VoltstackSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["blocked_services"].(map[string]interface{}); ok && (isImport || data.BlockedServices != nil) {
+		data.BlockedServices = &VoltstackSiteBlockedServicesModel{
+			BlockedSevice: func() []VoltstackSiteBlockedServicesBlockedSeviceModel {
+				if listData, ok := blockData["blocked_sevice"].([]interface{}); ok && len(listData) > 0 {
+					var result []VoltstackSiteBlockedServicesBlockedSeviceModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, VoltstackSiteBlockedServicesBlockedSeviceModel{
+								DNS: func() *VoltstackSiteEmptyModel {
+									if _, ok := itemMap["dns"].(map[string]interface{}); ok {
+										return &VoltstackSiteEmptyModel{}
+									}
+									return nil
+								}(),
+								NetworkType: func() types.String {
+									if v, ok := itemMap["network_type"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								SSH: func() *VoltstackSiteEmptyModel {
+									if _, ok := itemMap["ssh"].(map[string]interface{}); ok {
+										return &VoltstackSiteEmptyModel{}
+									}
+									return nil
+								}(),
+								WebUserInterface: func() *VoltstackSiteEmptyModel {
+									if _, ok := itemMap["web_user_interface"].(map[string]interface{}); ok {
+										return &VoltstackSiteEmptyModel{}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
 		}
 	}
+	if blockData, ok := apiResource.Spec["bond_device_list"].(map[string]interface{}); ok && (isImport || data.BondDeviceList != nil) {
+		data.BondDeviceList = &VoltstackSiteBondDeviceListModel{
+			BondDevices: func() []VoltstackSiteBondDeviceListBondDevicesModel {
+				if listData, ok := blockData["bond_devices"].([]interface{}); ok && len(listData) > 0 {
+					var result []VoltstackSiteBondDeviceListBondDevicesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, VoltstackSiteBondDeviceListBondDevicesModel{
+								ActiveBackup: func() *VoltstackSiteEmptyModel {
+									if _, ok := itemMap["active_backup"].(map[string]interface{}); ok {
+										return &VoltstackSiteEmptyModel{}
+									}
+									return nil
+								}(),
+								Lacp: func() *VoltstackSiteBondDeviceListBondDevicesLacpModel {
+									if deepMap, ok := itemMap["lacp"].(map[string]interface{}); ok {
+										return &VoltstackSiteBondDeviceListBondDevicesLacpModel{
+											Rate: func() types.Int64 {
+												if v, ok := deepMap["rate"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								LinkPollingInterval: func() types.Int64 {
+									if v, ok := itemMap["link_polling_interval"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								LinkUpDelay: func() types.Int64 {
+									if v, ok := itemMap["link_up_delay"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["coordinates"].(map[string]interface{}); ok && (isImport || data.Coordinates != nil) {
+		data.Coordinates = &VoltstackSiteCoordinatesModel{
+			Latitude: func() types.Int64 {
+				if v, ok := blockData["latitude"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			Longitude: func() types.Int64 {
+				if v, ok := blockData["longitude"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["custom_dns"].(map[string]interface{}); ok && (isImport || data.CustomDNS != nil) {
+		data.CustomDNS = &VoltstackSiteCustomDNSModel{
+			InsideNameserver: func() types.String {
+				if v, ok := blockData["inside_nameserver"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			OutsideNameserver: func() types.String {
+				if v, ok := blockData["outside_nameserver"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["custom_network_config"].(map[string]interface{}); ok && (isImport || data.CustomNetworkConfig != nil) {
+		data.CustomNetworkConfig = &VoltstackSiteCustomNetworkConfigModel{
+			ActiveEnhancedFirewallPolicies: func() *VoltstackSiteCustomNetworkConfigActiveEnhancedFirewallPoliciesModel {
+				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.ActiveEnhancedFirewallPolicies != nil {
+					// Normal Read: preserve existing state value
+					return data.CustomNetworkConfig.ActiveEnhancedFirewallPolicies
+				}
+				// Import case: read from API
+				if _, ok := blockData["active_enhanced_firewall_policies"].(map[string]interface{}); ok {
+					return &VoltstackSiteCustomNetworkConfigActiveEnhancedFirewallPoliciesModel{}
+				}
+				return nil
+			}(),
+			ActiveForwardProxyPolicies: func() *VoltstackSiteCustomNetworkConfigActiveForwardProxyPoliciesModel {
+				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.ActiveForwardProxyPolicies != nil {
+					// Normal Read: preserve existing state value
+					return data.CustomNetworkConfig.ActiveForwardProxyPolicies
+				}
+				// Import case: read from API
+				if _, ok := blockData["active_forward_proxy_policies"].(map[string]interface{}); ok {
+					return &VoltstackSiteCustomNetworkConfigActiveForwardProxyPoliciesModel{}
+				}
+				return nil
+			}(),
+			ActiveNetworkPolicies: func() *VoltstackSiteCustomNetworkConfigActiveNetworkPoliciesModel {
+				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.ActiveNetworkPolicies != nil {
+					// Normal Read: preserve existing state value
+					return data.CustomNetworkConfig.ActiveNetworkPolicies
+				}
+				// Import case: read from API
+				if _, ok := blockData["active_network_policies"].(map[string]interface{}); ok {
+					return &VoltstackSiteCustomNetworkConfigActiveNetworkPoliciesModel{}
+				}
+				return nil
+			}(),
+			BGPPeerAddress: func() types.String {
+				if v, ok := blockData["bgp_peer_address"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			BGPRouterID: func() types.String {
+				if v, ok := blockData["bgp_router_id"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			DefaultConfig: func() *VoltstackSiteEmptyModel {
+				if !isImport && data.CustomNetworkConfig != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CustomNetworkConfig.DefaultConfig
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_config"].(map[string]interface{}); ok {
+					return &VoltstackSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			DefaultInterfaceConfig: func() *VoltstackSiteEmptyModel {
+				if !isImport && data.CustomNetworkConfig != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CustomNetworkConfig.DefaultInterfaceConfig
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_interface_config"].(map[string]interface{}); ok {
+					return &VoltstackSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			DefaultSLIConfig: func() *VoltstackSiteEmptyModel {
+				if !isImport && data.CustomNetworkConfig != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CustomNetworkConfig.DefaultSLIConfig
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_sli_config"].(map[string]interface{}); ok {
+					return &VoltstackSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			ForwardProxyAllowAll: func() *VoltstackSiteEmptyModel {
+				if !isImport && data.CustomNetworkConfig != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CustomNetworkConfig.ForwardProxyAllowAll
+				}
+				// Import case: read from API
+				if _, ok := blockData["forward_proxy_allow_all"].(map[string]interface{}); ok {
+					return &VoltstackSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			GlobalNetworkList: func() *VoltstackSiteCustomNetworkConfigGlobalNetworkListModel {
+				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.GlobalNetworkList != nil {
+					// Normal Read: preserve existing state value
+					return data.CustomNetworkConfig.GlobalNetworkList
+				}
+				// Import case: read from API
+				if _, ok := blockData["global_network_list"].(map[string]interface{}); ok {
+					return &VoltstackSiteCustomNetworkConfigGlobalNetworkListModel{}
+				}
+				return nil
+			}(),
+			InterfaceList: func() *VoltstackSiteCustomNetworkConfigInterfaceListModel {
+				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.InterfaceList != nil {
+					// Normal Read: preserve existing state value
+					return data.CustomNetworkConfig.InterfaceList
+				}
+				// Import case: read from API
+				if _, ok := blockData["interface_list"].(map[string]interface{}); ok {
+					return &VoltstackSiteCustomNetworkConfigInterfaceListModel{}
+				}
+				return nil
+			}(),
+			NoForwardProxy: func() *VoltstackSiteEmptyModel {
+				if !isImport && data.CustomNetworkConfig != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CustomNetworkConfig.NoForwardProxy
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_forward_proxy"].(map[string]interface{}); ok {
+					return &VoltstackSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			NoGlobalNetwork: func() *VoltstackSiteEmptyModel {
+				if !isImport && data.CustomNetworkConfig != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CustomNetworkConfig.NoGlobalNetwork
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_global_network"].(map[string]interface{}); ok {
+					return &VoltstackSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			NoNetworkPolicy: func() *VoltstackSiteEmptyModel {
+				if !isImport && data.CustomNetworkConfig != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CustomNetworkConfig.NoNetworkPolicy
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_network_policy"].(map[string]interface{}); ok {
+					return &VoltstackSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			OutsideNameserver: func() types.String {
+				if v, ok := blockData["outside_nameserver"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			OutsideVip: func() types.String {
+				if v, ok := blockData["outside_vip"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			SiteToSiteTunnelIP: func() types.String {
+				if v, ok := blockData["site_to_site_tunnel_ip"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			SLIConfig: func() *VoltstackSiteCustomNetworkConfigSLIConfigModel {
+				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.SLIConfig != nil {
+					// Normal Read: preserve existing state value
+					return data.CustomNetworkConfig.SLIConfig
+				}
+				// Import case: read from API
+				if _, ok := blockData["sli_config"].(map[string]interface{}); ok {
+					return &VoltstackSiteCustomNetworkConfigSLIConfigModel{}
+				}
+				return nil
+			}(),
+			SLOConfig: func() *VoltstackSiteCustomNetworkConfigSLOConfigModel {
+				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.SLOConfig != nil {
+					// Normal Read: preserve existing state value
+					return data.CustomNetworkConfig.SLOConfig
+				}
+				// Import case: read from API
+				if _, ok := blockData["slo_config"].(map[string]interface{}); ok {
+					return &VoltstackSiteCustomNetworkConfigSLOConfigModel{}
+				}
+				return nil
+			}(),
+			SmConnectionPublicIP: func() *VoltstackSiteEmptyModel {
+				if !isImport && data.CustomNetworkConfig != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CustomNetworkConfig.SmConnectionPublicIP
+				}
+				// Import case: read from API
+				if _, ok := blockData["sm_connection_public_ip"].(map[string]interface{}); ok {
+					return &VoltstackSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			SmConnectionPvtIP: func() *VoltstackSiteEmptyModel {
+				if !isImport && data.CustomNetworkConfig != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CustomNetworkConfig.SmConnectionPvtIP
+				}
+				// Import case: read from API
+				if _, ok := blockData["sm_connection_pvt_ip"].(map[string]interface{}); ok {
+					return &VoltstackSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			TunnelDeadTimeout: func() types.Int64 {
+				if v, ok := blockData["tunnel_dead_timeout"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			VipVrrpMode: func() types.String {
+				if v, ok := blockData["vip_vrrp_mode"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["custom_storage_config"].(map[string]interface{}); ok && isImport && data.CustomStorageConfig == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.CustomStorageConfig = &VoltstackSiteCustomStorageConfigModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["default_blocked_services"].(map[string]interface{}); ok && isImport && data.DefaultBlockedServices == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DefaultBlockedServices = &VoltstackSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["default_network_config"].(map[string]interface{}); ok && isImport && data.DefaultNetworkConfig == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DefaultNetworkConfig = &VoltstackSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["default_sriov_interface"].(map[string]interface{}); ok && isImport && data.DefaultSriovInterface == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DefaultSriovInterface = &VoltstackSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["default_storage_config"].(map[string]interface{}); ok && isImport && data.DefaultStorageConfig == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DefaultStorageConfig = &VoltstackSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["deny_all_usb"].(map[string]interface{}); ok && isImport && data.DenyAllUsb == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DenyAllUsb = &VoltstackSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["disable_gpu"].(map[string]interface{}); ok && isImport && data.DisableGpu == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableGpu = &VoltstackSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["disable_vm"].(map[string]interface{}); ok && isImport && data.DisableVm == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableVm = &VoltstackSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["enable_gpu"].(map[string]interface{}); ok && isImport && data.EnableGpu == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.EnableGpu = &VoltstackSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["enable_vgpu"].(map[string]interface{}); ok && (isImport || data.EnableVgpu != nil) {
+		data.EnableVgpu = &VoltstackSiteEnableVgpuModel{
+			FeatureType: func() types.String {
+				if v, ok := blockData["feature_type"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			ServerAddress: func() types.String {
+				if v, ok := blockData["server_address"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			ServerPort: func() types.Int64 {
+				if v, ok := blockData["server_port"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["enable_vm"].(map[string]interface{}); ok && isImport && data.EnableVm == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.EnableVm = &VoltstackSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["k8s_cluster"].(map[string]interface{}); ok && (isImport || data.K8SCluster != nil) {
+		data.K8SCluster = &VoltstackSiteK8SClusterModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["kubernetes_upgrade_drain"].(map[string]interface{}); ok && isImport && data.KubernetesUpgradeDrain == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.KubernetesUpgradeDrain = &VoltstackSiteKubernetesUpgradeDrainModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["local_control_plane"].(map[string]interface{}); ok && isImport && data.LocalControlPlane == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.LocalControlPlane = &VoltstackSiteLocalControlPlaneModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["log_receiver"].(map[string]interface{}); ok && (isImport || data.LogReceiver != nil) {
+		data.LogReceiver = &VoltstackSiteLogReceiverModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["logs_streaming_disabled"].(map[string]interface{}); ok && isImport && data.LogsStreamingDisabled == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.LogsStreamingDisabled = &VoltstackSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["master_node_configuration"].([]interface{}); ok && len(listData) > 0 {
+		var master_node_configurationList []VoltstackSiteMasterNodeConfigurationModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				master_node_configurationList = append(master_node_configurationList, VoltstackSiteMasterNodeConfigurationModel{
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					PublicIP: func() types.String {
+						if v, ok := itemMap["public_ip"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.MasterNodeConfiguration = master_node_configurationList
+	}
+	if _, ok := apiResource.Spec["no_bond_devices"].(map[string]interface{}); ok && isImport && data.NoBondDevices == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoBondDevices = &VoltstackSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_k8s_cluster"].(map[string]interface{}); ok && isImport && data.NoK8SCluster == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoK8SCluster = &VoltstackSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_local_control_plane"].(map[string]interface{}); ok && isImport && data.NoLocalControlPlane == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoLocalControlPlane = &VoltstackSiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["offline_survivability_mode"].(map[string]interface{}); ok && isImport && data.OfflineSurvivabilityMode == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.OfflineSurvivabilityMode = &VoltstackSiteOfflineSurvivabilityModeModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["os"].(map[string]interface{}); ok && (isImport || data.Os != nil) {
+		data.Os = &VoltstackSiteOsModel{
+			DefaultOsVersion: func() *VoltstackSiteEmptyModel {
+				if !isImport && data.Os != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.Os.DefaultOsVersion
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_os_version"].(map[string]interface{}); ok {
+					return &VoltstackSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			OperatingSystemVersion: func() types.String {
+				if v, ok := blockData["operating_system_version"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["sriov_interfaces"].(map[string]interface{}); ok && (isImport || data.SriovInterfaces != nil) {
+		data.SriovInterfaces = &VoltstackSiteSriovInterfacesModel{
+			SriovInterface: func() []VoltstackSiteSriovInterfacesSriovInterfaceModel {
+				if listData, ok := blockData["sriov_interface"].([]interface{}); ok && len(listData) > 0 {
+					var result []VoltstackSiteSriovInterfacesSriovInterfaceModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, VoltstackSiteSriovInterfacesSriovInterfaceModel{
+								InterfaceName: func() types.String {
+									if v, ok := itemMap["interface_name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								NumberOfVfioVfs: func() types.Int64 {
+									if v, ok := itemMap["number_of_vfio_vfs"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								NumberOfVfs: func() types.Int64 {
+									if v, ok := itemMap["number_of_vfs"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["sw"].(map[string]interface{}); ok && (isImport || data.Sw != nil) {
+		data.Sw = &VoltstackSiteSwModel{
+			DefaultSwVersion: func() *VoltstackSiteEmptyModel {
+				if !isImport && data.Sw != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.Sw.DefaultSwVersion
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_sw_version"].(map[string]interface{}); ok {
+					return &VoltstackSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			VolterraSoftwareVersion: func() types.String {
+				if v, ok := blockData["volterra_software_version"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["usb_policy"].(map[string]interface{}); ok && (isImport || data.UsbPolicy != nil) {
+		data.UsbPolicy = &VoltstackSiteUsbPolicyModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if v, ok := apiResource.Spec["worker_nodes"].([]interface{}); ok && len(v) > 0 {
+		var worker_nodesList []string
+		for _, item := range v {
+			if s, ok := item.(string); ok {
+				worker_nodesList = append(worker_nodesList, s)
+			}
+		}
+		listVal, diags := types.ListValueFrom(ctx, types.StringType, worker_nodesList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.WorkerNodes = listVal
+		}
+	} else {
+		data.WorkerNodes = types.ListNull(types.StringType)
+	}
+	if v, ok := apiResource.Spec["address"].(string); ok && v != "" {
+		data.Address = types.StringValue(v)
+	} else {
+		data.Address = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["volterra_certified_hw"].(string); ok && v != "" {
+		data.VolterraCertifiedHw = types.StringValue(v)
+	} else {
+		data.VolterraCertifiedHw = types.StringNull()
+	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

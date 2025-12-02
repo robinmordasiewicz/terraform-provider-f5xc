@@ -996,7 +996,7 @@ func (r *DataTypeResource) Update(ctx context.Context, req resource.UpdateReques
 		apiResource.Spec["is_sensitive_data"] = data.IsSensitiveData.ValueBool()
 	}
 
-	updated, err := r.client.UpdateDataType(ctx, apiResource)
+	_, err := r.client.UpdateDataType(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update DataType: %s", err))
 		return
@@ -1005,15 +1005,23 @@ func (r *DataTypeResource) Update(ctx context.Context, req resource.UpdateReques
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetDataType(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read DataType after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
-	if v, ok := updated.Spec["is_pii"].(bool); ok {
+	if v, ok := fetched.Spec["is_pii"].(bool); ok {
 		data.IsPii = types.BoolValue(v)
 	} else if data.IsPii.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.IsPii = types.BoolNull()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["is_sensitive_data"].(bool); ok {
+	if v, ok := fetched.Spec["is_sensitive_data"].(bool); ok {
 		data.IsSensitiveData = types.BoolValue(v)
 	} else if data.IsSensitiveData.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
@@ -1021,16 +1029,106 @@ func (r *DataTypeResource) Update(ctx context.Context, req resource.UpdateReques
 	}
 	// If plan had a value, preserve it
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetDataType(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if v, ok := apiResource.Spec["compliances"].([]interface{}); ok && len(v) > 0 {
+		var compliancesList []string
+		for _, item := range v {
+			if s, ok := item.(string); ok {
+				compliancesList = append(compliancesList, s)
+			}
+		}
+		listVal, diags := types.ListValueFrom(ctx, types.StringType, compliancesList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Compliances = listVal
+		}
+	} else {
+		data.Compliances = types.ListNull(types.StringType)
+	}
+	if listData, ok := apiResource.Spec["rules"].([]interface{}); ok && len(listData) > 0 {
+		var rulesList []DataTypeRulesModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				rulesList = append(rulesList, DataTypeRulesModel{
+					KeyPattern: func() *DataTypeRulesKeyPatternModel {
+						if nestedMap, ok := itemMap["key_pattern"].(map[string]interface{}); ok {
+							return &DataTypeRulesKeyPatternModel{
+								RegexValue: func() types.String {
+									if v, ok := nestedMap["regex_value"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								SubstringValue: func() types.String {
+									if v, ok := nestedMap["substring_value"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					KeyValuePattern: func() *DataTypeRulesKeyValuePatternModel {
+						if _, ok := itemMap["key_value_pattern"].(map[string]interface{}); ok {
+							return &DataTypeRulesKeyValuePatternModel{}
+						}
+						return nil
+					}(),
+					ValuePattern: func() *DataTypeRulesValuePatternModel {
+						if nestedMap, ok := itemMap["value_pattern"].(map[string]interface{}); ok {
+							return &DataTypeRulesValuePatternModel{
+								RegexValue: func() types.String {
+									if v, ok := nestedMap["regex_value"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								SubstringValue: func() types.String {
+									if v, ok := nestedMap["substring_value"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+				})
+			}
+		}
+		data.Rules = rulesList
+	}
+	// Top-level Optional bool: preserve prior state to avoid API default drift
+	if !isImport && !data.IsPii.IsNull() && !data.IsPii.IsUnknown() {
+		// Normal Read: preserve existing state value (do nothing)
+	} else {
+		// Import case, null state, or unknown (after Create): read from API
+		if v, ok := apiResource.Spec["is_pii"].(bool); ok {
+			data.IsPii = types.BoolValue(v)
+		} else {
+			data.IsPii = types.BoolNull()
 		}
 	}
+	// Top-level Optional bool: preserve prior state to avoid API default drift
+	if !isImport && !data.IsSensitiveData.IsNull() && !data.IsSensitiveData.IsUnknown() {
+		// Normal Read: preserve existing state value (do nothing)
+	} else {
+		// Import case, null state, or unknown (after Create): read from API
+		if v, ok := apiResource.Spec["is_sensitive_data"].(bool); ok {
+			data.IsSensitiveData = types.BoolValue(v)
+		} else {
+			data.IsSensitiveData = types.BoolNull()
+		}
+	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

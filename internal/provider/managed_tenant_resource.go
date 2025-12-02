@@ -95,10 +95,11 @@ func (r *ManagedTenantResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the ManagedTenant will be created.",
-				Required:            true,
+				MarkdownDescription: "Namespace for the ManagedTenant. For this resource type, namespace should be empty or omitted.",
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.RequiresReplace(),
+					stringplanmodifier.UseStateForUnknown(),
 				},
 				Validators: []validator.String{
 					validators.NamespaceValidator(),
@@ -357,6 +358,8 @@ func (r *ManagedTenantResource) Create(ctx context.Context, req resource.CreateR
 	}
 
 	data.ID = types.StringValue(apiResource.Metadata.Name)
+	// For resources without namespace in API path, namespace is computed from API response
+	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
 
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
@@ -648,7 +651,7 @@ func (r *ManagedTenantResource) Update(ctx context.Context, req resource.UpdateR
 		apiResource.Spec["tenant_id"] = data.TenantID.ValueString()
 	}
 
-	updated, err := r.client.UpdateManagedTenant(ctx, apiResource)
+	_, err := r.client.UpdateManagedTenant(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update ManagedTenant: %s", err))
 		return
@@ -657,8 +660,16 @@ func (r *ManagedTenantResource) Update(ctx context.Context, req resource.UpdateR
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetManagedTenant(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read ManagedTenant after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
-	if v, ok := updated.Spec["tenant_id"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["tenant_id"].(string); ok && v != "" {
 		data.TenantID = types.StringValue(v)
 	} else if data.TenantID.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
@@ -666,16 +677,68 @@ func (r *ManagedTenantResource) Update(ctx context.Context, req resource.UpdateR
 	}
 	// If plan had a value, preserve it
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetManagedTenant(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if listData, ok := apiResource.Spec["groups"].([]interface{}); ok && len(listData) > 0 {
+		var groupsList []ManagedTenantGroupsModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				groupsList = append(groupsList, ManagedTenantGroupsModel{
+					Group: func() *ManagedTenantGroupsGroupModel {
+						if nestedMap, ok := itemMap["group"].(map[string]interface{}); ok {
+							return &ManagedTenantGroupsGroupModel{
+								Name: func() types.String {
+									if v, ok := nestedMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := nestedMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := nestedMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					ManagedTenantGroups: func() types.List {
+						if v, ok := itemMap["managed_tenant_groups"].([]interface{}); ok && len(v) > 0 {
+							var items []string
+							for _, item := range v {
+								if s, ok := item.(string); ok {
+									items = append(items, s)
+								}
+							}
+							listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+							return listVal
+						}
+						return types.ListNull(types.StringType)
+					}(),
+				})
+			}
 		}
+		data.Groups = groupsList
 	}
+	if v, ok := apiResource.Spec["tenant_id"].(string); ok && v != "" {
+		data.TenantID = types.StringValue(v)
+	} else {
+		data.TenantID = types.StringNull()
+	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
@@ -723,19 +786,17 @@ func (r *ManagedTenantResource) Delete(ctx context.Context, req resource.DeleteR
 }
 
 func (r *ManagedTenantResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	// Import ID format: namespace/name
-	parts := strings.Split(req.ID, "/")
-	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+	// Import ID format: name (no namespace for this resource type)
+	name := req.ID
+	if name == "" {
 		resp.Diagnostics.AddError(
 			"Invalid Import ID",
-			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+			"Expected import ID to be the resource name, got empty string",
 		)
 		return
 	}
-	namespace := parts[0]
-	name := parts[1]
 
-	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), "")...)
 	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
 	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

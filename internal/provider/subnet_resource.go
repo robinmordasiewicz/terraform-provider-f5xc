@@ -829,7 +829,7 @@ func (r *SubnetResource) Update(ctx context.Context, req resource.UpdateRequest,
 		apiResource.Spec["site_subnet_params"] = site_subnet_paramsList
 	}
 
-	updated, err := r.client.UpdateSubnet(ctx, apiResource)
+	_, err := r.client.UpdateSubnet(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update Subnet: %s", err))
 		return
@@ -838,18 +838,93 @@ func (r *SubnetResource) Update(ctx context.Context, req resource.UpdateRequest,
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetSubnet(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read Subnet after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetSubnet(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
-		}
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if _, ok := apiResource.Spec["connect_to_layer2"].(map[string]interface{}); ok && isImport && data.ConnectToLayer2 == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ConnectToLayer2 = &SubnetConnectToLayer2Model{}
 	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["connect_to_slo"].(map[string]interface{}); ok && isImport && data.ConnectToSLO == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ConnectToSLO = &SubnetEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["isolated_nw"].(map[string]interface{}); ok && isImport && data.IsolatedNw == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.IsolatedNw = &SubnetEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["site_subnet_params"].([]interface{}); ok && len(listData) > 0 {
+		var site_subnet_paramsList []SubnetSiteSubnetParamsModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				site_subnet_paramsList = append(site_subnet_paramsList, SubnetSiteSubnetParamsModel{
+					Dhcp: func() *SubnetEmptyModel {
+						if !isImport && len(data.SiteSubnetParams) > listIdx && data.SiteSubnetParams[listIdx].Dhcp != nil {
+							return &SubnetEmptyModel{}
+						}
+						return nil
+					}(),
+					Site: func() *SubnetSiteSubnetParamsSiteModel {
+						if nestedMap, ok := itemMap["site"].(map[string]interface{}); ok {
+							return &SubnetSiteSubnetParamsSiteModel{
+								Name: func() types.String {
+									if v, ok := nestedMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := nestedMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := nestedMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							}
+						}
+						return nil
+					}(),
+					StaticIP: func() *SubnetEmptyModel {
+						if !isImport && len(data.SiteSubnetParams) > listIdx && data.SiteSubnetParams[listIdx].StaticIP != nil {
+							return &SubnetEmptyModel{}
+						}
+						return nil
+					}(),
+					SubnetDhcpServerParams: func() *SubnetSiteSubnetParamsSubnetDhcpServerParamsModel {
+						if _, ok := itemMap["subnet_dhcp_server_params"].(map[string]interface{}); ok {
+							return &SubnetSiteSubnetParamsSubnetDhcpServerParamsModel{}
+						}
+						return nil
+					}(),
+				})
+			}
+		}
+		data.SiteSubnetParams = site_subnet_paramsList
+	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

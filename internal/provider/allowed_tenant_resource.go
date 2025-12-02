@@ -582,7 +582,7 @@ func (r *AllowedTenantResource) Update(ctx context.Context, req resource.UpdateR
 		apiResource.Spec["tenant_id"] = data.TenantID.ValueString()
 	}
 
-	updated, err := r.client.UpdateAllowedTenant(ctx, apiResource)
+	_, err := r.client.UpdateAllowedTenant(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update AllowedTenant: %s", err))
 		return
@@ -591,8 +591,16 @@ func (r *AllowedTenantResource) Update(ctx context.Context, req resource.UpdateR
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetAllowedTenant(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read AllowedTenant after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
-	if v, ok := updated.Spec["tenant_id"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["tenant_id"].(string); ok && v != "" {
 		data.TenantID = types.StringValue(v)
 	} else if data.TenantID.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
@@ -600,16 +608,48 @@ func (r *AllowedTenantResource) Update(ctx context.Context, req resource.UpdateR
 	}
 	// If plan had a value, preserve it
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetAllowedTenant(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if listData, ok := apiResource.Spec["allowed_groups"].([]interface{}); ok && len(listData) > 0 {
+		var allowed_groupsList []AllowedTenantAllowedGroupsModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				allowed_groupsList = append(allowed_groupsList, AllowedTenantAllowedGroupsModel{
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Namespace: func() types.String {
+						if v, ok := itemMap["namespace"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Tenant: func() types.String {
+						if v, ok := itemMap["tenant"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
 		}
+		data.AllowedGroups = allowed_groupsList
 	}
+	if v, ok := apiResource.Spec["tenant_id"].(string); ok && v != "" {
+		data.TenantID = types.StringValue(v)
+	} else {
+		data.TenantID = types.StringNull()
+	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

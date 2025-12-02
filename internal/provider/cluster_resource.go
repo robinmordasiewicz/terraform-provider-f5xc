@@ -2348,7 +2348,7 @@ func (r *ClusterResource) Update(ctx context.Context, req resource.UpdateRequest
 		apiResource.Spec["panic_threshold"] = data.PanicThreshold.ValueInt64()
 	}
 
-	updated, err := r.client.UpdateCluster(ctx, apiResource)
+	_, err := r.client.UpdateCluster(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update Cluster: %s", err))
 		return
@@ -2357,43 +2357,51 @@ func (r *ClusterResource) Update(ctx context.Context, req resource.UpdateRequest
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetCluster(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read Cluster after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
-	if v, ok := updated.Spec["connection_timeout"].(float64); ok {
+	if v, ok := fetched.Spec["connection_timeout"].(float64); ok {
 		data.ConnectionTimeout = types.Int64Value(int64(v))
 	} else if data.ConnectionTimeout.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.ConnectionTimeout = types.Int64Null()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["endpoint_selection"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["endpoint_selection"].(string); ok && v != "" {
 		data.EndpointSelection = types.StringValue(v)
 	} else if data.EndpointSelection.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.EndpointSelection = types.StringNull()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["fallback_policy"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["fallback_policy"].(string); ok && v != "" {
 		data.FallbackPolicy = types.StringValue(v)
 	} else if data.FallbackPolicy.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.FallbackPolicy = types.StringNull()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["http_idle_timeout"].(float64); ok {
+	if v, ok := fetched.Spec["http_idle_timeout"].(float64); ok {
 		data.HTTPIdleTimeout = types.Int64Value(int64(v))
 	} else if data.HTTPIdleTimeout.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.HTTPIdleTimeout = types.Int64Null()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["loadbalancer_algorithm"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["loadbalancer_algorithm"].(string); ok && v != "" {
 		data.LoadBalancerAlgorithm = types.StringValue(v)
 	} else if data.LoadBalancerAlgorithm.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.LoadBalancerAlgorithm = types.StringNull()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["panic_threshold"].(float64); ok {
+	if v, ok := fetched.Spec["panic_threshold"].(float64); ok {
 		data.PanicThreshold = types.Int64Value(int64(v))
 	} else if data.PanicThreshold.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
@@ -2401,16 +2409,411 @@ func (r *ClusterResource) Update(ctx context.Context, req resource.UpdateRequest
 	}
 	// If plan had a value, preserve it
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetCluster(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if _, ok := apiResource.Spec["auto_http_config"].(map[string]interface{}); ok && isImport && data.AutoHTTPConfig == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AutoHTTPConfig = &ClusterEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["circuit_breaker"].(map[string]interface{}); ok && (isImport || data.CircuitBreaker != nil) {
+		data.CircuitBreaker = &ClusterCircuitBreakerModel{
+			ConnectionLimit: func() types.Int64 {
+				if v, ok := blockData["connection_limit"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			MaxRequests: func() types.Int64 {
+				if v, ok := blockData["max_requests"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			PendingRequests: func() types.Int64 {
+				if v, ok := blockData["pending_requests"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			Priority: func() types.String {
+				if v, ok := blockData["priority"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Retries: func() types.Int64 {
+				if v, ok := blockData["retries"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
 		}
 	}
+	if _, ok := apiResource.Spec["default_subset"].(map[string]interface{}); ok && isImport && data.DefaultSubset == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DefaultSubset = &ClusterEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["disable_proxy_protocol"].(map[string]interface{}); ok && isImport && data.DisableProxyProtocol == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableProxyProtocol = &ClusterEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if listData, ok := apiResource.Spec["endpoint_subsets"].([]interface{}); ok && len(listData) > 0 {
+		var endpoint_subsetsList []ClusterEndpointSubsetsModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				endpoint_subsetsList = append(endpoint_subsetsList, ClusterEndpointSubsetsModel{
+					Keys: func() types.List {
+						if v, ok := itemMap["keys"].([]interface{}); ok && len(v) > 0 {
+							var items []string
+							for _, item := range v {
+								if s, ok := item.(string); ok {
+									items = append(items, s)
+								}
+							}
+							listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+							return listVal
+						}
+						return types.ListNull(types.StringType)
+					}(),
+				})
+			}
+		}
+		data.EndpointSubsets = endpoint_subsetsList
+	}
+	if listData, ok := apiResource.Spec["endpoints"].([]interface{}); ok && len(listData) > 0 {
+		var endpointsList []ClusterEndpointsModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				endpointsList = append(endpointsList, ClusterEndpointsModel{
+					Kind: func() types.String {
+						if v, ok := itemMap["kind"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Namespace: func() types.String {
+						if v, ok := itemMap["namespace"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Tenant: func() types.String {
+						if v, ok := itemMap["tenant"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Uid: func() types.String {
+						if v, ok := itemMap["uid"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.Endpoints = endpointsList
+	}
+	if listData, ok := apiResource.Spec["health_checks"].([]interface{}); ok && len(listData) > 0 {
+		var health_checksList []ClusterHealthChecksModel
+		for listIdx, item := range listData {
+			_ = listIdx // May be unused if no empty marker blocks in list item
+			if itemMap, ok := item.(map[string]interface{}); ok {
+				health_checksList = append(health_checksList, ClusterHealthChecksModel{
+					Kind: func() types.String {
+						if v, ok := itemMap["kind"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Name: func() types.String {
+						if v, ok := itemMap["name"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Namespace: func() types.String {
+						if v, ok := itemMap["namespace"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Tenant: func() types.String {
+						if v, ok := itemMap["tenant"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+					Uid: func() types.String {
+						if v, ok := itemMap["uid"].(string); ok && v != "" {
+							return types.StringValue(v)
+						}
+						return types.StringNull()
+					}(),
+				})
+			}
+		}
+		data.HealthChecks = health_checksList
+	}
+	if _, ok := apiResource.Spec["http1_config"].(map[string]interface{}); ok && isImport && data.Http1Config == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Http1Config = &ClusterHttp1ConfigModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["http2_options"].(map[string]interface{}); ok && (isImport || data.Http2Options != nil) {
+		data.Http2Options = &ClusterHttp2OptionsModel{
+			Enabled: func() types.Bool {
+				if !isImport && data.Http2Options != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.Http2Options.Enabled
+				}
+				// Import case: read from API
+				if v, ok := blockData["enabled"].(bool); ok {
+					return types.BoolValue(v)
+				}
+				return types.BoolNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["no_panic_threshold"].(map[string]interface{}); ok && isImport && data.NoPanicThreshold == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoPanicThreshold = &ClusterEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["outlier_detection"].(map[string]interface{}); ok && (isImport || data.OutlierDetection != nil) {
+		data.OutlierDetection = &ClusterOutlierDetectionModel{
+			BaseEjectionTime: func() types.Int64 {
+				if v, ok := blockData["base_ejection_time"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			Consecutive5xx: func() types.Int64 {
+				if v, ok := blockData["consecutive_5xx"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			ConsecutiveGatewayFailure: func() types.Int64 {
+				if v, ok := blockData["consecutive_gateway_failure"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			Interval: func() types.Int64 {
+				if v, ok := blockData["interval"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			MaxEjectionPercent: func() types.Int64 {
+				if v, ok := blockData["max_ejection_percent"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["proxy_protocol_v1"].(map[string]interface{}); ok && isImport && data.ProxyProtocolV1 == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ProxyProtocolV1 = &ClusterEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["proxy_protocol_v2"].(map[string]interface{}); ok && isImport && data.ProxyProtocolV2 == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ProxyProtocolV2 = &ClusterEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["tls_parameters"].(map[string]interface{}); ok && (isImport || data.TLSParameters != nil) {
+		data.TLSParameters = &ClusterTLSParametersModel{
+			CertParams: func() *ClusterTLSParametersCertParamsModel {
+				if !isImport && data.TLSParameters != nil && data.TLSParameters.CertParams != nil {
+					// Normal Read: preserve existing state value
+					return data.TLSParameters.CertParams
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["cert_params"].(map[string]interface{}); ok {
+					return &ClusterTLSParametersCertParamsModel{
+						CipherSuites: func() types.List {
+							if v, ok := nestedBlockData["cipher_suites"].([]interface{}); ok && len(v) > 0 {
+								var items []string
+								for _, item := range v {
+									if s, ok := item.(string); ok {
+										items = append(items, s)
+									}
+								}
+								listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+								return listVal
+							}
+							return types.ListNull(types.StringType)
+						}(),
+						MaximumProtocolVersion: func() types.String {
+							if v, ok := nestedBlockData["maximum_protocol_version"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						MinimumProtocolVersion: func() types.String {
+							if v, ok := nestedBlockData["minimum_protocol_version"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			CommonParams: func() *ClusterTLSParametersCommonParamsModel {
+				if !isImport && data.TLSParameters != nil && data.TLSParameters.CommonParams != nil {
+					// Normal Read: preserve existing state value
+					return data.TLSParameters.CommonParams
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["common_params"].(map[string]interface{}); ok {
+					return &ClusterTLSParametersCommonParamsModel{
+						CipherSuites: func() types.List {
+							if v, ok := nestedBlockData["cipher_suites"].([]interface{}); ok && len(v) > 0 {
+								var items []string
+								for _, item := range v {
+									if s, ok := item.(string); ok {
+										items = append(items, s)
+									}
+								}
+								listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+								return listVal
+							}
+							return types.ListNull(types.StringType)
+						}(),
+						MaximumProtocolVersion: func() types.String {
+							if v, ok := nestedBlockData["maximum_protocol_version"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						MinimumProtocolVersion: func() types.String {
+							if v, ok := nestedBlockData["minimum_protocol_version"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			DefaultSessionKeyCaching: func() *ClusterEmptyModel {
+				if !isImport && data.TLSParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.TLSParameters.DefaultSessionKeyCaching
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_session_key_caching"].(map[string]interface{}); ok {
+					return &ClusterEmptyModel{}
+				}
+				return nil
+			}(),
+			DisableSessionKeyCaching: func() *ClusterEmptyModel {
+				if !isImport && data.TLSParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.TLSParameters.DisableSessionKeyCaching
+				}
+				// Import case: read from API
+				if _, ok := blockData["disable_session_key_caching"].(map[string]interface{}); ok {
+					return &ClusterEmptyModel{}
+				}
+				return nil
+			}(),
+			DisableSni: func() *ClusterEmptyModel {
+				if !isImport && data.TLSParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.TLSParameters.DisableSni
+				}
+				// Import case: read from API
+				if _, ok := blockData["disable_sni"].(map[string]interface{}); ok {
+					return &ClusterEmptyModel{}
+				}
+				return nil
+			}(),
+			MaxSessionKeys: func() types.Int64 {
+				if v, ok := blockData["max_session_keys"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			Sni: func() types.String {
+				if v, ok := blockData["sni"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			UseHostHeaderAsSni: func() *ClusterEmptyModel {
+				if !isImport && data.TLSParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.TLSParameters.UseHostHeaderAsSni
+				}
+				// Import case: read from API
+				if _, ok := blockData["use_host_header_as_sni"].(map[string]interface{}); ok {
+					return &ClusterEmptyModel{}
+				}
+				return nil
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["upstream_conn_pool_reuse_type"].(map[string]interface{}); ok && isImport && data.UpstreamConnPoolReuseType == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.UpstreamConnPoolReuseType = &ClusterUpstreamConnPoolReuseTypeModel{}
+	}
+	// Normal Read: preserve existing state value
+	if v, ok := apiResource.Spec["connection_timeout"].(float64); ok {
+		data.ConnectionTimeout = types.Int64Value(int64(v))
+	} else {
+		data.ConnectionTimeout = types.Int64Null()
+	}
+	if v, ok := apiResource.Spec["endpoint_selection"].(string); ok && v != "" {
+		data.EndpointSelection = types.StringValue(v)
+	} else {
+		data.EndpointSelection = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["fallback_policy"].(string); ok && v != "" {
+		data.FallbackPolicy = types.StringValue(v)
+	} else {
+		data.FallbackPolicy = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["http_idle_timeout"].(float64); ok {
+		data.HTTPIdleTimeout = types.Int64Value(int64(v))
+	} else {
+		data.HTTPIdleTimeout = types.Int64Null()
+	}
+	if v, ok := apiResource.Spec["loadbalancer_algorithm"].(string); ok && v != "" {
+		data.LoadBalancerAlgorithm = types.StringValue(v)
+	} else {
+		data.LoadBalancerAlgorithm = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["panic_threshold"].(float64); ok {
+		data.PanicThreshold = types.Int64Value(int64(v))
+	} else {
+		data.PanicThreshold = types.Int64Null()
+	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

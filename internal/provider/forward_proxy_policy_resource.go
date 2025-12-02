@@ -2755,7 +2755,7 @@ func (r *ForwardProxyPolicyResource) Update(ctx context.Context, req resource.Up
 		apiResource.Spec["rule_list"] = rule_listMap
 	}
 
-	updated, err := r.client.UpdateForwardProxyPolicy(ctx, apiResource)
+	_, err := r.client.UpdateForwardProxyPolicy(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update ForwardProxyPolicy: %s", err))
 		return
@@ -2764,18 +2764,564 @@ func (r *ForwardProxyPolicyResource) Update(ctx context.Context, req resource.Up
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetForwardProxyPolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read ForwardProxyPolicy after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetForwardProxyPolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if _, ok := apiResource.Spec["allow_all"].(map[string]interface{}); ok && isImport && data.AllowAll == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AllowAll = &ForwardProxyPolicyEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["allow_list"].(map[string]interface{}); ok && (isImport || data.AllowList != nil) {
+		data.AllowList = &ForwardProxyPolicyAllowListModel{
+			DefaultActionAllow: func() *ForwardProxyPolicyEmptyModel {
+				if !isImport && data.AllowList != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AllowList.DefaultActionAllow
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_action_allow"].(map[string]interface{}); ok {
+					return &ForwardProxyPolicyEmptyModel{}
+				}
+				return nil
+			}(),
+			DefaultActionDeny: func() *ForwardProxyPolicyEmptyModel {
+				if !isImport && data.AllowList != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AllowList.DefaultActionDeny
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_action_deny"].(map[string]interface{}); ok {
+					return &ForwardProxyPolicyEmptyModel{}
+				}
+				return nil
+			}(),
+			DefaultActionNextPolicy: func() *ForwardProxyPolicyEmptyModel {
+				if !isImport && data.AllowList != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AllowList.DefaultActionNextPolicy
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_action_next_policy"].(map[string]interface{}); ok {
+					return &ForwardProxyPolicyEmptyModel{}
+				}
+				return nil
+			}(),
+			DestList: func() []ForwardProxyPolicyAllowListDestListModel {
+				if listData, ok := blockData["dest_list"].([]interface{}); ok && len(listData) > 0 {
+					var result []ForwardProxyPolicyAllowListDestListModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, ForwardProxyPolicyAllowListDestListModel{
+								PortRanges: func() types.String {
+									if v, ok := itemMap["port_ranges"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			HTTPList: func() []ForwardProxyPolicyAllowListHTTPListModel {
+				if listData, ok := blockData["http_list"].([]interface{}); ok && len(listData) > 0 {
+					var result []ForwardProxyPolicyAllowListHTTPListModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, ForwardProxyPolicyAllowListHTTPListModel{
+								AnyPath: func() *ForwardProxyPolicyEmptyModel {
+									if _, ok := itemMap["any_path"].(map[string]interface{}); ok {
+										return &ForwardProxyPolicyEmptyModel{}
+									}
+									return nil
+								}(),
+								ExactValue: func() types.String {
+									if v, ok := itemMap["exact_value"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								PathExactValue: func() types.String {
+									if v, ok := itemMap["path_exact_value"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								PathPrefixValue: func() types.String {
+									if v, ok := itemMap["path_prefix_value"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								PathRegexValue: func() types.String {
+									if v, ok := itemMap["path_regex_value"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								RegexValue: func() types.String {
+									if v, ok := itemMap["regex_value"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								SuffixValue: func() types.String {
+									if v, ok := itemMap["suffix_value"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			TLSList: func() []ForwardProxyPolicyAllowListTLSListModel {
+				if listData, ok := blockData["tls_list"].([]interface{}); ok && len(listData) > 0 {
+					var result []ForwardProxyPolicyAllowListTLSListModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, ForwardProxyPolicyAllowListTLSListModel{
+								ExactValue: func() types.String {
+									if v, ok := itemMap["exact_value"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								RegexValue: func() types.String {
+									if v, ok := itemMap["regex_value"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								SuffixValue: func() types.String {
+									if v, ok := itemMap["suffix_value"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
 		}
 	}
+	if _, ok := apiResource.Spec["any_proxy"].(map[string]interface{}); ok && isImport && data.AnyProxy == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.AnyProxy = &ForwardProxyPolicyEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["deny_list"].(map[string]interface{}); ok && (isImport || data.DenyList != nil) {
+		data.DenyList = &ForwardProxyPolicyDenyListModel{
+			DefaultActionAllow: func() *ForwardProxyPolicyEmptyModel {
+				if !isImport && data.DenyList != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.DenyList.DefaultActionAllow
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_action_allow"].(map[string]interface{}); ok {
+					return &ForwardProxyPolicyEmptyModel{}
+				}
+				return nil
+			}(),
+			DefaultActionDeny: func() *ForwardProxyPolicyEmptyModel {
+				if !isImport && data.DenyList != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.DenyList.DefaultActionDeny
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_action_deny"].(map[string]interface{}); ok {
+					return &ForwardProxyPolicyEmptyModel{}
+				}
+				return nil
+			}(),
+			DefaultActionNextPolicy: func() *ForwardProxyPolicyEmptyModel {
+				if !isImport && data.DenyList != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.DenyList.DefaultActionNextPolicy
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_action_next_policy"].(map[string]interface{}); ok {
+					return &ForwardProxyPolicyEmptyModel{}
+				}
+				return nil
+			}(),
+			DestList: func() []ForwardProxyPolicyDenyListDestListModel {
+				if listData, ok := blockData["dest_list"].([]interface{}); ok && len(listData) > 0 {
+					var result []ForwardProxyPolicyDenyListDestListModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, ForwardProxyPolicyDenyListDestListModel{
+								PortRanges: func() types.String {
+									if v, ok := itemMap["port_ranges"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			HTTPList: func() []ForwardProxyPolicyDenyListHTTPListModel {
+				if listData, ok := blockData["http_list"].([]interface{}); ok && len(listData) > 0 {
+					var result []ForwardProxyPolicyDenyListHTTPListModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, ForwardProxyPolicyDenyListHTTPListModel{
+								AnyPath: func() *ForwardProxyPolicyEmptyModel {
+									if _, ok := itemMap["any_path"].(map[string]interface{}); ok {
+										return &ForwardProxyPolicyEmptyModel{}
+									}
+									return nil
+								}(),
+								ExactValue: func() types.String {
+									if v, ok := itemMap["exact_value"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								PathExactValue: func() types.String {
+									if v, ok := itemMap["path_exact_value"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								PathPrefixValue: func() types.String {
+									if v, ok := itemMap["path_prefix_value"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								PathRegexValue: func() types.String {
+									if v, ok := itemMap["path_regex_value"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								RegexValue: func() types.String {
+									if v, ok := itemMap["regex_value"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								SuffixValue: func() types.String {
+									if v, ok := itemMap["suffix_value"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			TLSList: func() []ForwardProxyPolicyDenyListTLSListModel {
+				if listData, ok := blockData["tls_list"].([]interface{}); ok && len(listData) > 0 {
+					var result []ForwardProxyPolicyDenyListTLSListModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, ForwardProxyPolicyDenyListTLSListModel{
+								ExactValue: func() types.String {
+									if v, ok := itemMap["exact_value"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								RegexValue: func() types.String {
+									if v, ok := itemMap["regex_value"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								SuffixValue: func() types.String {
+									if v, ok := itemMap["suffix_value"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["drp_http_connect"].(map[string]interface{}); ok && isImport && data.DrpHTTPConnect == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DrpHTTPConnect = &ForwardProxyPolicyEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["network_connector"].(map[string]interface{}); ok && (isImport || data.NetworkConnector != nil) {
+		data.NetworkConnector = &ForwardProxyPolicyNetworkConnectorModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["proxy_label_selector"].(map[string]interface{}); ok && (isImport || data.ProxyLabelSelector != nil) {
+		data.ProxyLabelSelector = &ForwardProxyPolicyProxyLabelSelectorModel{
+			Expressions: func() types.List {
+				if v, ok := blockData["expressions"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["rule_list"].(map[string]interface{}); ok && (isImport || data.RuleList != nil) {
+		data.RuleList = &ForwardProxyPolicyRuleListModel{
+			Rules: func() []ForwardProxyPolicyRuleListRulesModel {
+				if listData, ok := blockData["rules"].([]interface{}); ok && len(listData) > 0 {
+					var result []ForwardProxyPolicyRuleListRulesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, ForwardProxyPolicyRuleListRulesModel{
+								Action: func() types.String {
+									if v, ok := itemMap["action"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								AllDestinations: func() *ForwardProxyPolicyEmptyModel {
+									if _, ok := itemMap["all_destinations"].(map[string]interface{}); ok {
+										return &ForwardProxyPolicyEmptyModel{}
+									}
+									return nil
+								}(),
+								AllSources: func() *ForwardProxyPolicyEmptyModel {
+									if _, ok := itemMap["all_sources"].(map[string]interface{}); ok {
+										return &ForwardProxyPolicyEmptyModel{}
+									}
+									return nil
+								}(),
+								DstAsnList: func() *ForwardProxyPolicyRuleListRulesDstAsnListModel {
+									if _, ok := itemMap["dst_asn_list"].(map[string]interface{}); ok {
+										return &ForwardProxyPolicyRuleListRulesDstAsnListModel{}
+									}
+									return nil
+								}(),
+								DstAsnSet: func() *ForwardProxyPolicyRuleListRulesDstAsnSetModel {
+									if deepMap, ok := itemMap["dst_asn_set"].(map[string]interface{}); ok {
+										return &ForwardProxyPolicyRuleListRulesDstAsnSetModel{
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Namespace: func() types.String {
+												if v, ok := deepMap["namespace"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Tenant: func() types.String {
+												if v, ok := deepMap["tenant"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								DstIPPrefixSet: func() *ForwardProxyPolicyRuleListRulesDstIPPrefixSetModel {
+									if deepMap, ok := itemMap["dst_ip_prefix_set"].(map[string]interface{}); ok {
+										return &ForwardProxyPolicyRuleListRulesDstIPPrefixSetModel{
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Namespace: func() types.String {
+												if v, ok := deepMap["namespace"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Tenant: func() types.String {
+												if v, ok := deepMap["tenant"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								DstLabelSelector: func() *ForwardProxyPolicyRuleListRulesDstLabelSelectorModel {
+									if _, ok := itemMap["dst_label_selector"].(map[string]interface{}); ok {
+										return &ForwardProxyPolicyRuleListRulesDstLabelSelectorModel{}
+									}
+									return nil
+								}(),
+								DstPrefixList: func() *ForwardProxyPolicyRuleListRulesDstPrefixListModel {
+									if _, ok := itemMap["dst_prefix_list"].(map[string]interface{}); ok {
+										return &ForwardProxyPolicyRuleListRulesDstPrefixListModel{}
+									}
+									return nil
+								}(),
+								HTTPList: func() *ForwardProxyPolicyRuleListRulesHTTPListModel {
+									if _, ok := itemMap["http_list"].(map[string]interface{}); ok {
+										return &ForwardProxyPolicyRuleListRulesHTTPListModel{}
+									}
+									return nil
+								}(),
+								IPPrefixSet: func() *ForwardProxyPolicyRuleListRulesIPPrefixSetModel {
+									if deepMap, ok := itemMap["ip_prefix_set"].(map[string]interface{}); ok {
+										return &ForwardProxyPolicyRuleListRulesIPPrefixSetModel{
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Namespace: func() types.String {
+												if v, ok := deepMap["namespace"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Tenant: func() types.String {
+												if v, ok := deepMap["tenant"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								LabelSelector: func() *ForwardProxyPolicyRuleListRulesLabelSelectorModel {
+									if _, ok := itemMap["label_selector"].(map[string]interface{}); ok {
+										return &ForwardProxyPolicyRuleListRulesLabelSelectorModel{}
+									}
+									return nil
+								}(),
+								Metadata: func() *ForwardProxyPolicyRuleListRulesMetadataModel {
+									if deepMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
+										return &ForwardProxyPolicyRuleListRulesMetadataModel{
+											DescriptionSpec: func() types.String {
+												if v, ok := deepMap["description"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								NoHTTPConnectPort: func() *ForwardProxyPolicyEmptyModel {
+									if _, ok := itemMap["no_http_connect_port"].(map[string]interface{}); ok {
+										return &ForwardProxyPolicyEmptyModel{}
+									}
+									return nil
+								}(),
+								PortMatcher: func() *ForwardProxyPolicyRuleListRulesPortMatcherModel {
+									if deepMap, ok := itemMap["port_matcher"].(map[string]interface{}); ok {
+										return &ForwardProxyPolicyRuleListRulesPortMatcherModel{
+											InvertMatcher: func() types.Bool {
+												if v, ok := deepMap["invert_matcher"].(bool); ok {
+													return types.BoolValue(v)
+												}
+												return types.BoolNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								PrefixList: func() *ForwardProxyPolicyRuleListRulesPrefixListModel {
+									if _, ok := itemMap["prefix_list"].(map[string]interface{}); ok {
+										return &ForwardProxyPolicyRuleListRulesPrefixListModel{}
+									}
+									return nil
+								}(),
+								TLSList: func() *ForwardProxyPolicyRuleListRulesTLSListModel {
+									if _, ok := itemMap["tls_list"].(map[string]interface{}); ok {
+										return &ForwardProxyPolicyRuleListRulesTLSListModel{}
+									}
+									return nil
+								}(),
+								URLCategoryList: func() *ForwardProxyPolicyRuleListRulesURLCategoryListModel {
+									if _, ok := itemMap["url_category_list"].(map[string]interface{}); ok {
+										return &ForwardProxyPolicyRuleListRulesURLCategoryListModel{}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

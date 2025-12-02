@@ -1269,7 +1269,7 @@ func (r *DNSLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 		apiResource.Spec["record_type"] = data.RecordType.ValueString()
 	}
 
-	updated, err := r.client.UpdateDNSLoadBalancer(ctx, apiResource)
+	_, err := r.client.UpdateDNSLoadBalancer(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update DNSLoadBalancer: %s", err))
 		return
@@ -1278,8 +1278,16 @@ func (r *DNSLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetDNSLoadBalancer(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read DNSLoadBalancer after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
-	if v, ok := updated.Spec["record_type"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["record_type"].(string); ok && v != "" {
 		data.RecordType = types.StringValue(v)
 	} else if data.RecordType.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
@@ -1287,16 +1295,163 @@ func (r *DNSLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 	}
 	// If plan had a value, preserve it
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetDNSLoadBalancer(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["fallback_pool"].(map[string]interface{}); ok && (isImport || data.FallbackPool != nil) {
+		data.FallbackPool = &DNSLoadBalancerFallbackPoolModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
 		}
 	}
+	if _, ok := apiResource.Spec["response_cache"].(map[string]interface{}); ok && isImport && data.ResponseCache == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.ResponseCache = &DNSLoadBalancerResponseCacheModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["rule_list"].(map[string]interface{}); ok && (isImport || data.RuleList != nil) {
+		data.RuleList = &DNSLoadBalancerRuleListModel{
+			Rules: func() []DNSLoadBalancerRuleListRulesModel {
+				if listData, ok := blockData["rules"].([]interface{}); ok && len(listData) > 0 {
+					var result []DNSLoadBalancerRuleListRulesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, DNSLoadBalancerRuleListRulesModel{
+								AsnList: func() *DNSLoadBalancerRuleListRulesAsnListModel {
+									if _, ok := itemMap["asn_list"].(map[string]interface{}); ok {
+										return &DNSLoadBalancerRuleListRulesAsnListModel{}
+									}
+									return nil
+								}(),
+								AsnMatcher: func() *DNSLoadBalancerRuleListRulesAsnMatcherModel {
+									if _, ok := itemMap["asn_matcher"].(map[string]interface{}); ok {
+										return &DNSLoadBalancerRuleListRulesAsnMatcherModel{}
+									}
+									return nil
+								}(),
+								GeoLocationLabelSelector: func() *DNSLoadBalancerRuleListRulesGeoLocationLabelSelectorModel {
+									if _, ok := itemMap["geo_location_label_selector"].(map[string]interface{}); ok {
+										return &DNSLoadBalancerRuleListRulesGeoLocationLabelSelectorModel{}
+									}
+									return nil
+								}(),
+								GeoLocationSet: func() *DNSLoadBalancerRuleListRulesGeoLocationSetModel {
+									if deepMap, ok := itemMap["geo_location_set"].(map[string]interface{}); ok {
+										return &DNSLoadBalancerRuleListRulesGeoLocationSetModel{
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Namespace: func() types.String {
+												if v, ok := deepMap["namespace"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Tenant: func() types.String {
+												if v, ok := deepMap["tenant"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								IPPrefixList: func() *DNSLoadBalancerRuleListRulesIPPrefixListModel {
+									if deepMap, ok := itemMap["ip_prefix_list"].(map[string]interface{}); ok {
+										return &DNSLoadBalancerRuleListRulesIPPrefixListModel{
+											InvertMatch: func() types.Bool {
+												if v, ok := deepMap["invert_match"].(bool); ok {
+													return types.BoolValue(v)
+												}
+												return types.BoolNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								IPPrefixSet: func() *DNSLoadBalancerRuleListRulesIPPrefixSetModel {
+									if deepMap, ok := itemMap["ip_prefix_set"].(map[string]interface{}); ok {
+										return &DNSLoadBalancerRuleListRulesIPPrefixSetModel{
+											InvertMatcher: func() types.Bool {
+												if v, ok := deepMap["invert_matcher"].(bool); ok {
+													return types.BoolValue(v)
+												}
+												return types.BoolNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								Pool: func() *DNSLoadBalancerRuleListRulesPoolModel {
+									if deepMap, ok := itemMap["pool"].(map[string]interface{}); ok {
+										return &DNSLoadBalancerRuleListRulesPoolModel{
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Namespace: func() types.String {
+												if v, ok := deepMap["namespace"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Tenant: func() types.String {
+												if v, ok := deepMap["tenant"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								Score: func() types.Int64 {
+									if v, ok := itemMap["score"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
+	}
+	if v, ok := apiResource.Spec["record_type"].(string); ok && v != "" {
+		data.RecordType = types.StringValue(v)
+	} else {
+		data.RecordType = types.StringNull()
+	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)

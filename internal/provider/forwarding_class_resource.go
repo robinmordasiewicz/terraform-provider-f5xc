@@ -747,7 +747,7 @@ func (r *ForwardingClassResource) Update(ctx context.Context, req resource.Updat
 		apiResource.Spec["tos_value"] = data.TosValue.ValueInt64()
 	}
 
-	updated, err := r.client.UpdateForwardingClass(ctx, apiResource)
+	_, err := r.client.UpdateForwardingClass(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update ForwardingClass: %s", err))
 		return
@@ -756,22 +756,30 @@ func (r *ForwardingClassResource) Update(ctx context.Context, req resource.Updat
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+	// Fetch the resource to get complete state including computed fields
+	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
+	fetched, fetchErr := r.client.GetForwardingClass(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	if fetchErr != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read ForwardingClass after update: %s", fetchErr))
+		return
+	}
+
 	// Set computed fields from API response
-	if v, ok := updated.Spec["interface_group"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["interface_group"].(string); ok && v != "" {
 		data.InterfaceGroup = types.StringValue(v)
 	} else if data.InterfaceGroup.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.InterfaceGroup = types.StringNull()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["queue_id_to_use"].(string); ok && v != "" {
+	if v, ok := fetched.Spec["queue_id_to_use"].(string); ok && v != "" {
 		data.QueueIDToUse = types.StringValue(v)
 	} else if data.QueueIDToUse.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.QueueIDToUse = types.StringNull()
 	}
 	// If plan had a value, preserve it
-	if v, ok := updated.Spec["tos_value"].(float64); ok {
+	if v, ok := fetched.Spec["tos_value"].(float64); ok {
 		data.TosValue = types.Int64Value(int64(v))
 	} else if data.TosValue.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
@@ -779,16 +787,82 @@ func (r *ForwardingClassResource) Update(ctx context.Context, req resource.Updat
 	}
 	// If plan had a value, preserve it
 
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise preserve from plan
-	uid := updated.Metadata.UID
-	if uid == "" {
-		// If API doesn't return UID, we need to fetch it
-		fetched, fetchErr := r.client.GetForwardingClass(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-		if fetchErr == nil {
-			uid = fetched.Metadata.UID
+	// Unmarshal spec fields from fetched resource to Terraform state
+	apiResource = fetched // Use GET response which includes all computed fields
+	isImport := false     // Update is never an import
+	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["dscp"].(map[string]interface{}); ok && (isImport || data.Dscp != nil) {
+		data.Dscp = &ForwardingClassDscpModel{
+			DropPrecedence: func() types.String {
+				if v, ok := blockData["drop_precedence"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			DscpClass: func() types.String {
+				if v, ok := blockData["dscp_class"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
 		}
 	}
+	if _, ok := apiResource.Spec["dscp_based_queue"].(map[string]interface{}); ok && isImport && data.DscpBasedQueue == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DscpBasedQueue = &ForwardingClassEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_marking"].(map[string]interface{}); ok && isImport && data.NoMarking == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoMarking = &ForwardingClassEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["no_policer"].(map[string]interface{}); ok && isImport && data.NoPolicer == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NoPolicer = &ForwardingClassEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["policer"].(map[string]interface{}); ok && (isImport || data.Policer != nil) {
+		data.Policer = &ForwardingClassPolicerModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if v, ok := apiResource.Spec["interface_group"].(string); ok && v != "" {
+		data.InterfaceGroup = types.StringValue(v)
+	} else {
+		data.InterfaceGroup = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["queue_id_to_use"].(string); ok && v != "" {
+		data.QueueIDToUse = types.StringValue(v)
+	} else {
+		data.QueueIDToUse = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["tos_value"].(float64); ok {
+		data.TosValue = types.Int64Value(int64(v))
+	} else {
+		data.TosValue = types.Int64Null()
+	}
+
+	psd := privatestate.NewPrivateStateData()
+	// Use UID from fetched resource
+	uid := fetched.Metadata.UID
 	psd.SetUID(uid)
 	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
